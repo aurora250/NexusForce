@@ -9,7 +9,7 @@ var search_8hpp =
     [ "count", "group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40", null ],
     [ "count_if", "group___counting_algorithms.html#ga5d0fab1508e6f8692b5efafed6bd722c", null ],
     [ "count_if", "group___counting_algorithms.html#ga1b902ac9fed79516a0188338ec0b5c8a", null ],
-    [ "find", "group___finding_algorithms.html#gaf00ba933b64f438e9c32ebf9cb1d7c8d", null ],
+    [ "find", "group___finding_algorithms.html#gadf82c3a47d7ebd54e4be179fe380c1cb", null ],
     [ "find_end", "group___pattern_matching_algorithms.html#ga9997e6a5ac3609fc198d306e328229f4", null ],
     [ "find_first_of", "group___pattern_matching_algorithms.html#ga6f541ef8f79986ada39f65ec055de358", null ],
     [ "find_first_of", "group___pattern_matching_algorithms.html#ga1753228dbceb869e6fd58b39f1b2853d", null ],

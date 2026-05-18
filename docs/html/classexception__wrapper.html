@@ -107,10 +107,10 @@ $(function(){initNavTree('classexception__wrapper.html','','classexception__wrap
 Public 成员函数</h2></td></tr>
 <tr class="memitem:a5f9d0a2b14862b3248e64ed70c64c702" id="r_a5f9d0a2b14862b3248e64ed70c64c702"><td class="memItemLeft">virtual NEFORCE_NORETURN void&#160;</td><td class="memItemRight"><a class="el" href="#a5f9d0a2b14862b3248e64ed70c64c702">rethrow</a> () const =0</td></tr>
 <tr class="memdesc:a5f9d0a2b14862b3248e64ed70c64c702"><td class="mdescLeft">&#160;</td><td class="mdescRight">重新抛出异常  <br /></td></tr>
-<tr class="memitem:a75b4031b3bf86ed08319dfa30e34ca0d" id="r_a75b4031b3bf86ed08319dfa30e34ca0d"><td class="memItemLeft">virtual NEFORCE_NODISCARD const std::type_info &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a75b4031b3bf86ed08319dfa30e34ca0d">type</a> () const noexcept=0</td></tr>
-<tr class="memdesc:a75b4031b3bf86ed08319dfa30e34ca0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取异常类型信息  <br /></td></tr>
-<tr class="memitem:a43f65f2af0ee2f34a9c3b9fb57346b6c" id="r_a43f65f2af0ee2f34a9c3b9fb57346b6c"><td class="memItemLeft">virtual NEFORCE_NODISCARD <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classexception__wrapper.html">exception_wrapper</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a43f65f2af0ee2f34a9c3b9fb57346b6c">clone</a> () const =0</td></tr>
-<tr class="memdesc:a43f65f2af0ee2f34a9c3b9fb57346b6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">克隆异常包装器  <br /></td></tr>
+<tr class="memitem:ab04df73bc21daeb1491fba55397a896c" id="r_ab04df73bc21daeb1491fba55397a896c"><td class="memItemLeft">virtual const std::type_info &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab04df73bc21daeb1491fba55397a896c">type</a> () const noexcept=0</td></tr>
+<tr class="memdesc:ab04df73bc21daeb1491fba55397a896c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取异常类型信息  <br /></td></tr>
+<tr class="memitem:a40fd000355a09acab15cfc64c9ec7f8f" id="r_a40fd000355a09acab15cfc64c9ec7f8f"><td class="memItemLeft">virtual <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classexception__wrapper.html">exception_wrapper</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a40fd000355a09acab15cfc64c9ec7f8f">clone</a> () const =0</td></tr>
+<tr class="memdesc:a40fd000355a09acab15cfc64c9ec7f8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">克隆异常包装器  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>异常包装器基类 </p>
@@ -118,8 +118,8 @@ Public 成员函数</h2></td></tr>
 
 <p class="definition">在文件 <a class="el" href="exception__ptr_8hpp_source.html">exception_ptr.hpp</a> 第 <a class="el" href="exception__ptr_8hpp_source.html#l00029">29</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="a43f65f2af0ee2f34a9c3b9fb57346b6c" name="a43f65f2af0ee2f34a9c3b9fb57346b6c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a43f65f2af0ee2f34a9c3b9fb57346b6c">&#9670;&#160;</a></span>clone()</h2>
+<a id="a40fd000355a09acab15cfc64c9ec7f8f" name="a40fd000355a09acab15cfc64c9ec7f8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40fd000355a09acab15cfc64c9ec7f8f">&#9670;&#160;</a></span>clone()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -128,7 +128,7 @@ Public 成员函数</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual NEFORCE_NODISCARD <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classexception__wrapper.html">exception_wrapper</a> &gt; exception_wrapper::clone </td>
+          <td class="memname">virtual <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classexception__wrapper.html">exception_wrapper</a> &gt; exception_wrapper::clone </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -136,7 +136,7 @@ Public 成员函数</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -145,11 +145,11 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>异常包装器的唯一指针</dd></dl>
 <p>创建当前异常包装器的深拷贝。 </p>
 
-<p>在 <a class="el" href="classtyped__exception__wrapper.html#af2d0cd1b48ec5146aec4f2996029d328">typed_exception_wrapper&lt; Ex &gt;</a> 内被实现.</p>
+<p>在 <a class="el" href="classtyped__exception__wrapper.html#a2b21449cb5663967e084ac47d06adb3f">typed_exception_wrapper&lt; Ex &gt;</a> 内被实现.</p>
 
-<p class="reference">引用了 <a class="el" href="#a43f65f2af0ee2f34a9c3b9fb57346b6c">clone()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a40fd000355a09acab15cfc64c9ec7f8f">clone()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="#a43f65f2af0ee2f34a9c3b9fb57346b6c">clone()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#a40fd000355a09acab15cfc64c9ec7f8f">clone()</a>.</p>
 
 </div>
 </div>
@@ -179,12 +179,12 @@ Public 成员函数</h2></td></tr>
 <p>重新抛出异常 </p>
 <p>重新抛出被包装的异常。 </p>
 
-<p>在 <a class="el" href="classtyped__exception__wrapper.html#aec9696310f011cfedde6077b4bca67cd">typed_exception_wrapper&lt; Ex &gt;</a> 内被实现.</p>
+<p>在 <a class="el" href="classtyped__exception__wrapper.html#a338557ad2cf02658680e91466a4dc340">typed_exception_wrapper&lt; Ex &gt;</a> 内被实现.</p>
 
 </div>
 </div>
-<a id="a75b4031b3bf86ed08319dfa30e34ca0d" name="a75b4031b3bf86ed08319dfa30e34ca0d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75b4031b3bf86ed08319dfa30e34ca0d">&#9670;&#160;</a></span>type()</h2>
+<a id="ab04df73bc21daeb1491fba55397a896c" name="ab04df73bc21daeb1491fba55397a896c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab04df73bc21daeb1491fba55397a896c">&#9670;&#160;</a></span>type()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -193,7 +193,7 @@ Public 成员函数</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual NEFORCE_NODISCARD const std::type_info &amp; exception_wrapper::type </td>
+          <td class="memname">virtual const std::type_info &amp; exception_wrapper::type </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -201,7 +201,7 @@ Public 成员函数</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -209,7 +209,7 @@ Public 成员函数</h2></td></tr>
 <p>获取异常类型信息 </p>
 <dl class="section return"><dt>返回</dt><dd>异常的类型信息 </dd></dl>
 
-<p>在 <a class="el" href="classtyped__exception__wrapper.html#a0cb3ffe51548e47e30362ee4e04d9b3c">typed_exception_wrapper&lt; Ex &gt;</a> 内被实现.</p>
+<p>在 <a class="el" href="classtyped__exception__wrapper.html#a2fcaff5b1f7e200da7276cfad8c921e6">typed_exception_wrapper&lt; Ex &gt;</a> 内被实现.</p>
 
 </div>
 </div>

@@ -13,8 +13,8 @@
         <argsstring>(const db_config &amp;config)=0</argsstring>
         <name>connect</name>
         <qualifiedname>idb_connect::connect</qualifiedname>
-        <reimplementedby refid="structmysql__connect_1ab5c25136bff3882cf88792623d8b3c8b">connect</reimplementedby>
-        <reimplementedby refid="classpgsql__connect_1a4ff17a8d36b989b9aed3f94df49d99cd">connect</reimplementedby>
+        <reimplementedby refid="structmysql__connect_1a75fef13b46de26b2281a8cd49193c7f0">connect</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a6e159619a209400aecb328533cb71254">connect</reimplementedby>
         <reimplementedby refid="structredis__connect_1a04bac35a84d75727c336ad0ae97cd7b9">connect</reimplementedby>
         <reimplementedby refid="structsqlite__connect_1a9b8173a41fcdbe55b7af9fd0bd3223e2">connect</reimplementedby>
         <param>
@@ -36,10 +36,10 @@
         <argsstring>(const db_config &amp;config)=0</argsstring>
         <name>reconnect</name>
         <qualifiedname>idb_connect::reconnect</qualifiedname>
-        <reimplementedby refid="structmysql__connect_1a0d4be02834cd55ae35f5cd9d29aa69f7">reconnect</reimplementedby>
+        <reimplementedby refid="structmysql__connect_1a54af01671a2bb8c280dd00e4504adfc0">reconnect</reimplementedby>
         <reimplementedby refid="classpgsql__connect_1a9215a5add6d0650189fce2d0d3b4b8a7">reconnect</reimplementedby>
         <reimplementedby refid="structredis__connect_1a381bd4d837595e8cf4cbddc878145bce">reconnect</reimplementedby>
-        <reimplementedby refid="structsqlite__connect_1ab81c7556101e6bf9fab9b53c0ccb43ab">reconnect</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1a567e3e472c3d9886150ee4040c982c20">reconnect</reimplementedby>
         <param>
           <type>const <ref refid="structdb__config" kindref="compound">db_config</ref> &amp;</type>
           <declname>config</declname>
@@ -79,15 +79,15 @@
     </sectiondef>
     <sectiondef kind="user-defined">
       <header>字符集设置</header>
-      <memberdef kind="function" id="structidb__connect_1a3b5de8434d4f29793ecd5442549cef25" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>virtual NEFORCE_NODISCARD bool idb_connect::set_character_set</definition>
+      <memberdef kind="function" id="structidb__connect_1a9f0b407a683b19bee646271a19356aad" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool idb_connect::set_character_set</definition>
         <argsstring>(const string &amp;encoding) const =0</argsstring>
         <name>set_character_set</name>
         <qualifiedname>idb_connect::set_character_set</qualifiedname>
-        <reimplementedby refid="structmysql__connect_1a11ac571c00e92f2f95c95d542b65701a">set_character_set</reimplementedby>
+        <reimplementedby refid="structmysql__connect_1a2e13b2d91f7de2c0dcfd683641249030">set_character_set</reimplementedby>
         <reimplementedby refid="classpgsql__connect_1a4903abe371af79d3193ae88a3a2f56aa">set_character_set</reimplementedby>
-        <reimplementedby refid="structsqlite__connect_1add6f71f73c477e298ab3690c7fa2cb05">set_character_set</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1a58dd0462e320b686b56efccafac5b767">set_character_set</reimplementedby>
         <param>
           <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
           <declname>encoding</declname>
@@ -99,18 +99,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="213" column="36"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="213" column="19"/>
         <referencedby refid="structredis__connect_1aa66bf3a032d2b0be45f87bacd5e78e47" compoundref="redis__connect_8hpp" startline="90" endline="91">redis_connect::NEFORCE_DEPRECATED_FOR</referencedby>
       </memberdef>
-      <memberdef kind="function" id="structidb__connect_1a9663188aaae0acb8b65c2de0d5cbe75f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
-        <definition>virtual NEFORCE_NODISCARD string_view idb_connect::get_character_set</definition>
+      <memberdef kind="function" id="structidb__connect_1a81f310b0ea3085407106a63fa1ba0767" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>virtual string_view idb_connect::get_character_set</definition>
         <argsstring>() const =0</argsstring>
         <name>get_character_set</name>
         <qualifiedname>idb_connect::get_character_set</qualifiedname>
-        <reimplementedby refid="structmysql__connect_1a89fd3f85739f0ebf6ee71e539dea8bc5">get_character_set</reimplementedby>
-        <reimplementedby refid="classpgsql__connect_1a56044bf2f47f8a4150597cc183e83ede">get_character_set</reimplementedby>
-        <reimplementedby refid="structsqlite__connect_1a7e90df9d163fcbf9bb7a95603c5b3f83">get_character_set</reimplementedby>
+        <reimplementedby refid="structmysql__connect_1a7ce7bcd2cf4c4d3b027354cb7ada315a">get_character_set</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a52e24fd98bb9999f56da7067bd7d8ac1">get_character_set</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1a525f4b9ac7de9d1222c98f357c12ab7f">get_character_set</reimplementedby>
         <briefdescription>
 <para>获取字符集 </para>
         </briefdescription>
@@ -118,22 +118,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="214" column="43"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="214" column="26"/>
         <referencedby refid="structredis__connect_1aa9c3e1b7af3100595a9b9e3988b6c4d1" compoundref="redis__connect_8hpp" startline="97" endline="98">redis_connect::NEFORCE_DEPRECATED_FOR</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="user-defined">
       <header>错误处理</header>
-      <memberdef kind="function" id="structidb__connect_1acd973bd3ff55ac0e46f084bd2f0376c3" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
-        <definition>virtual NEFORCE_NODISCARD string_view idb_connect::get_error</definition>
+      <memberdef kind="function" id="structidb__connect_1a128b6a7646a28e85e231beb150439c01" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>virtual string_view idb_connect::get_error</definition>
         <argsstring>() const =0</argsstring>
         <name>get_error</name>
         <qualifiedname>idb_connect::get_error</qualifiedname>
-        <reimplementedby refid="structmysql__connect_1aee6d307c20e88682483b098d4b30d611">get_error</reimplementedby>
-        <reimplementedby refid="classpgsql__connect_1a9f3dca64f4be6c93db3302b269b3b61c">get_error</reimplementedby>
+        <reimplementedby refid="structmysql__connect_1a5a63558e63f2ee49c7c4675f4b8eeaa2">get_error</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a634957fd53245d67bcf55678e10c6e23">get_error</reimplementedby>
         <reimplementedby refid="structredis__connect_1af5c327e104b050e226fa3de67f1e3bea">get_error</reimplementedby>
-        <reimplementedby refid="structsqlite__connect_1a2a07957e0fda099afdc678b46390e16b">get_error</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1a8731bf8800a15151e22de0c9ff7aecaf">get_error</reimplementedby>
         <briefdescription>
 <para>获取错误信息 </para>
         </briefdescription>
@@ -141,18 +141,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="221" column="43"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="221" column="26"/>
       </memberdef>
-      <memberdef kind="function" id="structidb__connect_1acd5571b7e44f69a5b235fef61954bbd0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
-        <definition>virtual NEFORCE_NODISCARD uint32_t idb_connect::get_errno</definition>
+      <memberdef kind="function" id="structidb__connect_1a150e2a5aac988b6abb97f9444042d06e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>virtual uint32_t idb_connect::get_errno</definition>
         <argsstring>() const =0</argsstring>
         <name>get_errno</name>
         <qualifiedname>idb_connect::get_errno</qualifiedname>
-        <reimplementedby refid="structmysql__connect_1a0835bd7e91557c25fb9b5c43af2a759a">get_errno</reimplementedby>
-        <reimplementedby refid="classpgsql__connect_1a1960703117d7a933044bbdf7ef32563f">get_errno</reimplementedby>
+        <reimplementedby refid="structmysql__connect_1ab967ed3e669dd3cfd6c34f84c1681668">get_errno</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a16279b4958b1085da6a7b5ec38ae5d92">get_errno</reimplementedby>
         <reimplementedby refid="structredis__connect_1a5e7c796199dc65854b6a6dd0008daae3">get_errno</reimplementedby>
-        <reimplementedby refid="structsqlite__connect_1aaf26361fd2b411697712bed65d022e57">get_errno</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1adadea5227a4c0c4eb9d1cc641ba72600">get_errno</reimplementedby>
         <briefdescription>
 <para>获取错误码 </para>
         </briefdescription>
@@ -160,21 +160,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="222" column="40"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="222" column="23"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="user-defined">
       <header>连接状态检测</header>
-      <memberdef kind="function" id="structidb__connect_1a0b654dc4116a9ddb698966f4a5ddcdca" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>virtual NEFORCE_NODISCARD bool idb_connect::connected</definition>
+      <memberdef kind="function" id="structidb__connect_1a05b7b473cdd13c18f5b44c83e09c082d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool idb_connect::connected</definition>
         <argsstring>() const =0</argsstring>
         <name>connected</name>
         <qualifiedname>idb_connect::connected</qualifiedname>
-        <reimplementedby refid="structmysql__connect_1ad550711135630dba12370bc7f45dc0a1">connected</reimplementedby>
-        <reimplementedby refid="classpgsql__connect_1a8480c07a5da1bae59f4b2b5d395ace01">connected</reimplementedby>
+        <reimplementedby refid="structmysql__connect_1aac85cab9c2d68515f69bdb47c96122de">connected</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a48e680210a492ca888cfa16a478eb625">connected</reimplementedby>
         <reimplementedby refid="structredis__connect_1abf1840d0ce8ba66dcf167c41cfc162f1">connected</reimplementedby>
-        <reimplementedby refid="structsqlite__connect_1abd4969015d139892338dd620b834eccd">connected</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1a6047e916f38e785f15834af405ae3844">connected</reimplementedby>
         <briefdescription>
 <para>检查连接状态 </para>
         </briefdescription>
@@ -182,19 +182,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="236" column="36"/>
-        <referencedby refid="classpgsql__connect_1a1cc19870e2ae09d63e25f9b9fadf5ef9" compoundref="pgsql__connect_8hpp" startline="144" endline="144">pgsql_connect::is_valid</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="236" column="19"/>
+        <referencedby refid="classpgsql__connect_1a77185f49142507d39d9852ecbcf614dc" compoundref="pgsql__connect_8hpp" startline="144" endline="144">pgsql_connect::is_valid</referencedby>
       </memberdef>
-      <memberdef kind="function" id="structidb__connect_1aa98cb68e4e03d89b68e3f85367119b25" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>virtual NEFORCE_NODISCARD bool idb_connect::is_valid</definition>
+      <memberdef kind="function" id="structidb__connect_1a7b5c48c5ecdb1cdd54463da84cbc92a0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool idb_connect::is_valid</definition>
         <argsstring>() const =0</argsstring>
         <name>is_valid</name>
         <qualifiedname>idb_connect::is_valid</qualifiedname>
-        <reimplementedby refid="structmysql__connect_1a9ed7e3f772ebd094431c7a7a20c2a022">is_valid</reimplementedby>
-        <reimplementedby refid="classpgsql__connect_1a1cc19870e2ae09d63e25f9b9fadf5ef9">is_valid</reimplementedby>
+        <reimplementedby refid="structmysql__connect_1a98b19778e12fb79ac9fcc4acf88faeef">is_valid</reimplementedby>
+        <reimplementedby refid="classpgsql__connect_1a77185f49142507d39d9852ecbcf614dc">is_valid</reimplementedby>
         <reimplementedby refid="structredis__connect_1a1e01a0f142f0ebad62d1d0ff4518067d">is_valid</reimplementedby>
-        <reimplementedby refid="structsqlite__connect_1ac60f61740228e60f09580cea8e47ae78">is_valid</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1a08e38af5299253b4bbe518a01b4d8260">is_valid</reimplementedby>
         <briefdescription>
 <para>检查连接有效性 </para>
         </briefdescription>
@@ -202,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="237" column="36"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="237" column="19"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -255,16 +255,16 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="198" column="13"/>
       </memberdef>
-      <memberdef kind="function" id="structidb__connect_1a347d4f0ebd95d784c304f2c9e983b614" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>virtual NEFORCE_NODISCARD bool idb_connect::update</definition>
+      <memberdef kind="function" id="structidb__connect_1aedacf58e2ea956b26f4862e49506c3c2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool idb_connect::update</definition>
         <argsstring>(const string &amp;sql) const =0</argsstring>
         <name>update</name>
         <qualifiedname>idb_connect::update</qualifiedname>
-        <reimplementedby refid="structmysql__connect_1a775c5bcf3e396a32a59f7a867749fb20">update</reimplementedby>
+        <reimplementedby refid="structmysql__connect_1a5ed187123d0770a91a9245fe1d8c373e">update</reimplementedby>
         <reimplementedby refid="classpgsql__connect_1a035e9c7ee0abe108fe689c8a3a12abb0">update</reimplementedby>
         <reimplementedby refid="structredis__connect_1ae1eeac414607310e4c1ce4ba0c01affb">update</reimplementedby>
-        <reimplementedby refid="structsqlite__connect_1a6658a0711918f65ddd98d8291881a7a2">update</reimplementedby>
+        <reimplementedby refid="structsqlite__connect_1a1493548378279ac5916f09fd757d80b1">update</reimplementedby>
         <param>
           <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
           <declname>sql</declname>
@@ -288,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="230" column="36"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="230" column="19"/>
       </memberdef>
       <memberdef kind="function" id="structidb__connect_1a23d22fba9ce82c798a1363f0f816f593" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -308,9 +308,9 @@
         <references refid="structsteady__clock_1a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now</references>
         <references refid="group___duration_1gafaba32c48d91da85098ecb115cea65ed" compoundref="duration_8hpp" startline="144" endline="152">time_cast</references>
       </memberdef>
-      <memberdef kind="function" id="structidb__connect_1affedca161dc65836d2ecd3ae76e9158d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="structidb__connect_1ab9be909e9ecc1db9cbcc28186de35c95" kindref="member">clock_type</ref></type>
-        <definition>NEFORCE_NODISCARD clock_type idb_connect::get_alive</definition>
+      <memberdef kind="function" id="structidb__connect_1a5fe328d4bdf863d226d7065daf2cc56b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structidb__connect_1ab9be909e9ecc1db9cbcc28186de35c95" kindref="member">clock_type</ref></type>
+        <definition>clock_type idb_connect::get_alive</definition>
         <argsstring>() const noexcept</argsstring>
         <name>get_alive</name>
         <qualifiedname>idb_connect::get_alive</qualifiedname>
@@ -324,7 +324,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="251" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="251" bodyend="253"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="251" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="251" bodyend="253"/>
         <references refid="structsteady__clock_1a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now</references>
         <references refid="group___duration_1gafaba32c48d91da85098ecb115cea65ed" compoundref="duration_8hpp" startline="144" endline="152">time_cast</references>
       </memberdef>
@@ -383,16 +383,16 @@
       <member refid="structidb__connect_1ab9be909e9ecc1db9cbcc28186de35c95" prot="public" virt="non-virtual"><scope>idb_connect</scope><name>clock_type</name></member>
       <member refid="structidb__connect_1a689ce6c9a44cdc602e6006615e949e19" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>close</name></member>
       <member refid="structidb__connect_1a7ae3001e8ef72724b952fac4ea66cde7" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>connect</name></member>
-      <member refid="structidb__connect_1a0b654dc4116a9ddb698966f4a5ddcdca" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>connected</name></member>
-      <member refid="structidb__connect_1affedca161dc65836d2ecd3ae76e9158d" prot="public" virt="non-virtual"><scope>idb_connect</scope><name>get_alive</name></member>
-      <member refid="structidb__connect_1a9663188aaae0acb8b65c2de0d5cbe75f" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>get_character_set</name></member>
-      <member refid="structidb__connect_1acd5571b7e44f69a5b235fef61954bbd0" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>get_errno</name></member>
-      <member refid="structidb__connect_1acd973bd3ff55ac0e46f084bd2f0376c3" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>get_error</name></member>
-      <member refid="structidb__connect_1aa98cb68e4e03d89b68e3f85367119b25" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>is_valid</name></member>
+      <member refid="structidb__connect_1a05b7b473cdd13c18f5b44c83e09c082d" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>connected</name></member>
+      <member refid="structidb__connect_1a5fe328d4bdf863d226d7065daf2cc56b" prot="public" virt="non-virtual"><scope>idb_connect</scope><name>get_alive</name></member>
+      <member refid="structidb__connect_1a81f310b0ea3085407106a63fa1ba0767" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>get_character_set</name></member>
+      <member refid="structidb__connect_1a150e2a5aac988b6abb97f9444042d06e" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>get_errno</name></member>
+      <member refid="structidb__connect_1a128b6a7646a28e85e231beb150439c01" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>get_error</name></member>
+      <member refid="structidb__connect_1a7b5c48c5ecdb1cdd54463da84cbc92a0" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>is_valid</name></member>
       <member refid="structidb__connect_1a5faaad097bbdc6d8e530eb9f3ec7af94" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>reconnect</name></member>
       <member refid="structidb__connect_1a23d22fba9ce82c798a1363f0f816f593" prot="public" virt="non-virtual"><scope>idb_connect</scope><name>refresh_alive</name></member>
-      <member refid="structidb__connect_1a3b5de8434d4f29793ecd5442549cef25" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>set_character_set</name></member>
-      <member refid="structidb__connect_1a347d4f0ebd95d784c304f2c9e983b614" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>update</name></member>
+      <member refid="structidb__connect_1a9f0b407a683b19bee646271a19356aad" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>set_character_set</name></member>
+      <member refid="structidb__connect_1aedacf58e2ea956b26f4862e49506c3c2" prot="public" virt="pure-virtual"><scope>idb_connect</scope><name>update</name></member>
       <member refid="structidb__connect_1a5d49022ee34e758b7ad6725549ba9e2e" prot="public" virt="virtual"><scope>idb_connect</scope><name>~idb_connect</name></member>
     </listofallmembers>
   </compounddef>

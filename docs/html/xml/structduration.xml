@@ -24,13 +24,13 @@
             <type><ref refid="group___platform_dependent_types_1ga2d169617d94b849e6cb63f2671cd693f" kindref="member">intmax_t</ref></type>
             <declname>Gcd1</declname>
             <defname>Gcd1</defname>
-            <defval>1 <ref refid="group___math_functions_1gab7cc7a2171e920109e6180b2360a78dd" kindref="member">gcd</ref>(R1::num, R2::num)</defval>
+            <defval>_NEFORCE <ref refid="group___math_functions_1ga7129f0b3cf184e0836aea549d9ce89ca" kindref="member">gcd</ref>(R1::num, R2::num)</defval>
           </param>
           <param>
             <type><ref refid="group___platform_dependent_types_1ga2d169617d94b849e6cb63f2671cd693f" kindref="member">intmax_t</ref></type>
             <declname>Gcd2</declname>
             <defname>Gcd2</defname>
-            <defval>1 <ref refid="group___math_functions_1gab7cc7a2171e920109e6180b2360a78dd" kindref="member">gcd</ref>(R1::den, R2::den)</defval>
+            <defval>_NEFORCE <ref refid="group___math_functions_1ga7129f0b3cf184e0836aea549d9ce89ca" kindref="member">gcd</ref>(R1::den, R2::den)</defval>
           </param>
         </templateparamlist>
         <type><ref refid="structratio" kindref="compound">ratio</ref>&lt;(R1::num/Gcd1) *(R2::den/Gcd2),(R1::den/Gcd2) *(R2::num/Gcd1)&gt;</type>
@@ -151,7 +151,7 @@
         <argsstring></argsstring>
         <name>rep_</name>
         <qualifiedname>duration::rep_</qualifiedname>
-        <initializer>= 1 <ref refid="group___type_initialize_function_1gafff7aa9d7280a07a58464ccdf4a8931a" kindref="member">initialize</ref>&lt;<ref refid="structduration_1a88523610f754c2a3a8421dd169b2760f" kindref="member">rep</ref>&gt;()</initializer>
+        <initializer>= _NEFORCE <ref refid="group___type_initialize_function_1ga1278f68876e9220819c733bc1b3a93c1" kindref="member">initialize</ref>&lt;<ref refid="structduration_1a88523610f754c2a3a8421dd169b2760f" kindref="member">rep</ref>&gt;()</initializer>
         <briefdescription>
 <para>内部存储的数值 </para>
         </briefdescription>
@@ -227,7 +227,7 @@
           </param>
           <param>
             <type>typename</type>
-            <defval><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;<ref refid="group___convertible_checks_1gae3b2b7a2bd17bf6a7cdca076103e0787" kindref="member">is_convertible_v</ref>&lt;const Rep2&amp;, <ref refid="structduration_1a88523610f754c2a3a8421dd169b2760f" kindref="member">rep</ref>&gt;&gt;</defval>
+            <defval><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;<ref refid="group___convertible_checks_1gadf5e75c4b12aa7982c5a97a14510ab35" kindref="member">is_convertible_v</ref>&lt;const Rep2&amp;, <ref refid="structduration_1a88523610f754c2a3a8421dd169b2760f" kindref="member">rep</ref>&gt;&gt;</defval>
           </param>
         </templateparamlist>
         <type>constexpr</type>
@@ -277,7 +277,7 @@
           </param>
           <param>
             <type>typename Dummy</type>
-            <defval><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;<ref refid="group___convertible_checks_1gae3b2b7a2bd17bf6a7cdca076103e0787" kindref="member">is_convertible_v</ref>&lt;const Rep2&amp;, <ref refid="structduration_1a88523610f754c2a3a8421dd169b2760f" kindref="member">rep</ref>&gt; &amp;&amp;                                           (<ref refid="group___base_type_properties_1ga1233851ade7c3f53dc6b9b0ae01cf978" kindref="member">is_floating_point_v</ref>&lt;<ref refid="structduration_1a88523610f754c2a3a8421dd169b2760f" kindref="member">rep</ref>&gt; ||                                            (is_harmonic&lt;Period2&gt;::value &amp;&amp; !<ref refid="group___base_type_properties_1ga1233851ade7c3f53dc6b9b0ae01cf978" kindref="member">is_floating_point_v</ref>&lt;Rep2&gt;) )&gt;</defval>
+            <defval><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;<ref refid="group___convertible_checks_1gadf5e75c4b12aa7982c5a97a14510ab35" kindref="member">is_convertible_v</ref>&lt;const Rep2&amp;, <ref refid="structduration_1a88523610f754c2a3a8421dd169b2760f" kindref="member">rep</ref>&gt; &amp;&amp;                                           (<ref refid="group___base_type_properties_1ga8a70da46bf8635132fd3757deb2fff94" kindref="member">is_floating_point_v</ref>&lt;<ref refid="structduration_1a88523610f754c2a3a8421dd169b2760f" kindref="member">rep</ref>&gt; ||                                            (is_harmonic&lt;Period2&gt;::value &amp;&amp; !<ref refid="group___base_type_properties_1ga8a70da46bf8635132fd3757deb2fff94" kindref="member">is_floating_point_v</ref>&lt;Rep2&gt;) )&gt;</defval>
           </param>
         </templateparamlist>
         <type>constexpr</type>
@@ -334,9 +334,9 @@
         <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="247" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="247" bodyend="248"/>
       </memberdef>
       <member refid="group___time_point_1gaeb19717e2329f809d58d4b20c372e6be" kind="function"><name>duration</name></member>
-      <memberdef kind="function" id="structduration_1aa560d1665731d7c0397991fa5ec4f211" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD constexpr <ref refid="structduration_1a88523610f754c2a3a8421dd169b2760f" kindref="member">rep</ref></type>
-        <definition>NEFORCE_NODISCARD constexpr rep duration&lt; Rep, Period &gt;::count</definition>
+      <memberdef kind="function" id="structduration_1a79d16de289fadf4ffd36a989cb985a98" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structduration_1a88523610f754c2a3a8421dd169b2760f" kindref="member">rep</ref></type>
+        <definition>rep duration&lt; Rep, Period &gt;::count</definition>
         <argsstring>() const noexcept</argsstring>
         <name>count</name>
         <qualifiedname>duration::count</qualifiedname>
@@ -350,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="266" column="37" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="266" bodyend="266"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="266" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="266" bodyend="266"/>
         <referencedby refid="structduration_1a39fc31ba3a074c1c3f71a672ad2382e8" compoundref="duration_8hpp" startline="373" endline="376">duration&lt; common_type_t&lt; Rep &gt;, typename Period::type &gt;::operator%=</referencedby>
         <referencedby refid="structduration_1a08f3ff8807243bcf90333d3b1576513d" compoundref="duration_8hpp" startline="319" endline="322">duration&lt; common_type_t&lt; Rep &gt;, typename Period::type &gt;::operator+=</referencedby>
         <referencedby refid="structduration_1a73cb8de5bdd48f9289efa56c22542f3c" compoundref="duration_8hpp" startline="329" endline="332">duration&lt; common_type_t&lt; Rep &gt;, typename Period::type &gt;::operator-=</referencedby>
@@ -601,7 +601,7 @@
             <defval><ref refid="structduration_1a88523610f754c2a3a8421dd169b2760f" kindref="member">rep</ref></defval>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___base_type_properties_1ga1233851ade7c3f53dc6b9b0ae01cf978" kindref="member">is_floating_point_v</ref>&lt; U &gt;, int &gt;</type>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___base_type_properties_1ga8a70da46bf8635132fd3757deb2fff94" kindref="member">is_floating_point_v</ref>&lt; U &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
@@ -651,7 +651,7 @@
             <defval><ref refid="structduration_1a88523610f754c2a3a8421dd169b2760f" kindref="member">rep</ref></defval>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___base_type_properties_1ga1233851ade7c3f53dc6b9b0ae01cf978" kindref="member">is_floating_point_v</ref>&lt; U &gt;, int &gt;</type>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___base_type_properties_1ga8a70da46bf8635132fd3757deb2fff94" kindref="member">is_floating_point_v</ref>&lt; U &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
@@ -694,9 +694,9 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="373" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="373" bodyend="376"/>
       </memberdef>
-      <memberdef kind="function" id="structduration_1a48c50b83a050b9968869cebba16b9b70" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="group___s_i_units_1gaa90b1c7a52dd4ce7e4d434a248da61fc" kindref="member">nano</ref> &gt;</type>
-        <definition>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration&lt; Rep, nano &gt; duration&lt; Rep, Period &gt;::to_nano</definition>
+      <memberdef kind="function" id="structduration_1a3a35edcfd0bf4953bdb3092792190c76" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="group___s_i_units_1gaa90b1c7a52dd4ce7e4d434a248da61fc" kindref="member">nano</ref> &gt;</type>
+        <definition>duration&lt; Rep, nano &gt; duration&lt; Rep, Period &gt;::to_nano</definition>
         <argsstring>() const</argsstring>
         <name>to_nano</name>
         <qualifiedname>duration::to_nano</qualifiedname>
@@ -706,11 +706,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="397" column="64" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="397" bodyend="399"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="397" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="397" bodyend="399"/>
       </memberdef>
-      <memberdef kind="function" id="structduration_1aa3b255cd7026e11294ae5993be2a04df" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="group___s_i_units_1ga19d116a46fc802cce0d0bfd466d959d8" kindref="member">micro</ref> &gt;</type>
-        <definition>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration&lt; Rep, micro &gt; duration&lt; Rep, Period &gt;::to_micro</definition>
+      <memberdef kind="function" id="structduration_1aceaebc204cae2e1163fdae07fd542af5" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="group___s_i_units_1ga19d116a46fc802cce0d0bfd466d959d8" kindref="member">micro</ref> &gt;</type>
+        <definition>duration&lt; Rep, micro &gt; duration&lt; Rep, Period &gt;::to_micro</definition>
         <argsstring>() const</argsstring>
         <name>to_micro</name>
         <qualifiedname>duration::to_micro</qualifiedname>
@@ -720,11 +720,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="400" column="64" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="400" bodyend="402"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="400" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="400" bodyend="402"/>
       </memberdef>
-      <memberdef kind="function" id="structduration_1af10dad261f29a8bac748cac6c3a83a89" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="group___s_i_units_1ga0a928b82578dba2851a4f3b34c0928b9" kindref="member">milli</ref> &gt;</type>
-        <definition>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration&lt; Rep, milli &gt; duration&lt; Rep, Period &gt;::to_milli</definition>
+      <memberdef kind="function" id="structduration_1a5d597aa4703f76e6de982b852e16a0af" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="group___s_i_units_1ga0a928b82578dba2851a4f3b34c0928b9" kindref="member">milli</ref> &gt;</type>
+        <definition>duration&lt; Rep, milli &gt; duration&lt; Rep, Period &gt;::to_milli</definition>
         <argsstring>() const</argsstring>
         <name>to_milli</name>
         <qualifiedname>duration::to_milli</qualifiedname>
@@ -734,11 +734,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="403" column="64" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="403" bodyend="405"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="403" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="403" bodyend="405"/>
       </memberdef>
-      <memberdef kind="function" id="structduration_1aebcbded4b8f784b7ae6198ff7b6d41fa" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep &gt;</type>
-        <definition>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration&lt; Rep &gt; duration&lt; Rep, Period &gt;::to_sec</definition>
+      <memberdef kind="function" id="structduration_1a44a57ebb0f9cfb6f2e42f545f0b610b8" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structduration" kindref="compound">duration</ref>&lt; Rep &gt;</type>
+        <definition>duration&lt; Rep &gt; duration&lt; Rep, Period &gt;::to_sec</definition>
         <argsstring>() const</argsstring>
         <name>to_sec</name>
         <qualifiedname>duration::to_sec</qualifiedname>
@@ -748,11 +748,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="406" column="64" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="406" bodyend="408"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="406" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="406" bodyend="408"/>
       </memberdef>
-      <memberdef kind="function" id="structduration_1aea71aa619ce36cd852a74047d80ff65d" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="structratio" kindref="compound">ratio</ref>&lt; 60 &gt; &gt;</type>
-        <definition>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration&lt; Rep, ratio&lt; 60 &gt; &gt; duration&lt; Rep, Period &gt;::to_minu</definition>
+      <memberdef kind="function" id="structduration_1ad05a255a22866558c08ef58d983084d0" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="structratio" kindref="compound">ratio</ref>&lt; 60 &gt; &gt;</type>
+        <definition>duration&lt; Rep, ratio&lt; 60 &gt; &gt; duration&lt; Rep, Period &gt;::to_minu</definition>
         <argsstring>() const</argsstring>
         <name>to_minu</name>
         <qualifiedname>duration::to_minu</qualifiedname>
@@ -762,11 +762,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="409" column="64" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="409" bodyend="411"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="409" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="409" bodyend="411"/>
       </memberdef>
-      <memberdef kind="function" id="structduration_1add2b9a682bd7863bcfc62c19c511621e" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="structratio" kindref="compound">ratio</ref>&lt; 3600 &gt; &gt;</type>
-        <definition>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration&lt; Rep, ratio&lt; 3600 &gt; &gt; duration&lt; Rep, Period &gt;::to_hour</definition>
+      <memberdef kind="function" id="structduration_1a35551a67246488d68f6af634b6a4105f" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="structratio" kindref="compound">ratio</ref>&lt; 3600 &gt; &gt;</type>
+        <definition>duration&lt; Rep, ratio&lt; 3600 &gt; &gt; duration&lt; Rep, Period &gt;::to_hour</definition>
         <argsstring>() const</argsstring>
         <name>to_hour</name>
         <qualifiedname>duration::to_hour</qualifiedname>
@@ -776,11 +776,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="412" column="64" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="412" bodyend="414"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="412" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="412" bodyend="414"/>
       </memberdef>
-      <memberdef kind="function" id="structduration_1a39cf87fff92d373f550dba06c1822cdd" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="structratio" kindref="compound">ratio</ref>&lt; 86400 &gt; &gt;</type>
-        <definition>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration&lt; Rep, ratio&lt; 86400 &gt; &gt; duration&lt; Rep, Period &gt;::to_day</definition>
+      <memberdef kind="function" id="structduration_1ad8286a5bc5afbe3bf29ad65e96bd6db5" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="structratio" kindref="compound">ratio</ref>&lt; 86400 &gt; &gt;</type>
+        <definition>duration&lt; Rep, ratio&lt; 86400 &gt; &gt; duration&lt; Rep, Period &gt;::to_day</definition>
         <argsstring>() const</argsstring>
         <name>to_day</name>
         <qualifiedname>duration::to_day</qualifiedname>
@@ -790,11 +790,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="415" column="64" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="415" bodyend="417"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="415" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="415" bodyend="417"/>
       </memberdef>
-      <memberdef kind="function" id="structduration_1a85264ce51ee598b030b16b08e63e1af7" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="structratio" kindref="compound">ratio</ref>&lt; 604800 &gt; &gt;</type>
-        <definition>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration&lt; Rep, ratio&lt; 604800 &gt; &gt; duration&lt; Rep, Period &gt;::to_week</definition>
+      <memberdef kind="function" id="structduration_1a9f49ca69c56e23fff80d18ac109ac59c" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="structratio" kindref="compound">ratio</ref>&lt; 604800 &gt; &gt;</type>
+        <definition>duration&lt; Rep, ratio&lt; 604800 &gt; &gt; duration&lt; Rep, Period &gt;::to_week</definition>
         <argsstring>() const</argsstring>
         <name>to_week</name>
         <qualifiedname>duration::to_week</qualifiedname>
@@ -804,11 +804,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="418" column="64" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="418" bodyend="420"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="418" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="418" bodyend="420"/>
       </memberdef>
-      <memberdef kind="function" id="structduration_1a540ec95ca9dfb689a1c0917e2b1e6471" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="structratio" kindref="compound">ratio</ref>&lt; 31556952 &gt; &gt;</type>
-        <definition>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration&lt; Rep, ratio&lt; 31556952 &gt; &gt; duration&lt; Rep, Period &gt;::to_year</definition>
+      <memberdef kind="function" id="structduration_1a4bfb897606b6826114c48abb4bfc7b75" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="structratio" kindref="compound">ratio</ref>&lt; 31556952 &gt; &gt;</type>
+        <definition>duration&lt; Rep, ratio&lt; 31556952 &gt; &gt; duration&lt; Rep, Period &gt;::to_year</definition>
         <argsstring>() const</argsstring>
         <name>to_year</name>
         <qualifiedname>duration::to_year</qualifiedname>
@@ -818,11 +818,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="421" column="64" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="421" bodyend="423"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="421" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="421" bodyend="423"/>
       </memberdef>
-      <memberdef kind="function" id="structduration_1ad748d07ce72785895bc92cbb419e1ee8" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr <ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="structratio" kindref="compound">ratio</ref>&lt; 2629746 &gt; &gt;</type>
-        <definition>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE constexpr duration&lt; Rep, ratio&lt; 2629746 &gt; &gt; duration&lt; Rep, Period &gt;::to_month</definition>
+      <memberdef kind="function" id="structduration_1a3831c5deca6495d605e16745c456ba0a" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structduration" kindref="compound">duration</ref>&lt; Rep, <ref refid="structratio" kindref="compound">ratio</ref>&lt; 2629746 &gt; &gt;</type>
+        <definition>duration&lt; Rep, ratio&lt; 2629746 &gt; &gt; duration&lt; Rep, Period &gt;::to_month</definition>
         <argsstring>() const</argsstring>
         <name>to_month</name>
         <qualifiedname>duration::to_month</qualifiedname>
@@ -832,7 +832,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="424" column="64" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="424" bodyend="426"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="424" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="424" bodyend="426"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -916,7 +916,7 @@
     </detaileddescription>
     <location file="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" line="168" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/duration.hpp" bodystart="176" bodyend="427"/>
     <listofallmembers>
-      <member refid="structduration_1aa560d1665731d7c0397991fa5ec4f211" prot="public" virt="non-virtual"><scope>duration</scope><name>count</name></member>
+      <member refid="structduration_1a79d16de289fadf4ffd36a989cb985a98" prot="public" virt="non-virtual"><scope>duration</scope><name>count</name></member>
       <member refid="structduration_1a773b700af8cbf427ae9ec7f0022d23d2" prot="private" virt="non-virtual"><scope>duration</scope><name>divide</name></member>
       <member refid="structduration_1a21a0b1f199c8d9c2f7e43fc93bac66be" prot="public" virt="non-virtual"><scope>duration</scope><name>duration</name></member>
       <member refid="structduration_1a539bfde0092656b12b6b37102cf3845b" prot="public" virt="non-virtual"><scope>duration</scope><name>duration</name></member>
@@ -942,16 +942,16 @@
       <member refid="structduration_1a68dc2125c5638618cc8235fd1aa3e74b" prot="public" virt="non-virtual"><scope>duration</scope><name>period</name></member>
       <member refid="structduration_1a88523610f754c2a3a8421dd169b2760f" prot="public" virt="non-virtual"><scope>duration</scope><name>rep</name></member>
       <member refid="structduration_1ab0419b7d95e8880a564f4b1374c987ab" prot="private" virt="non-virtual"><scope>duration</scope><name>rep_</name></member>
-      <member refid="structduration_1a39cf87fff92d373f550dba06c1822cdd" prot="public" virt="non-virtual"><scope>duration</scope><name>to_day</name></member>
-      <member refid="structduration_1add2b9a682bd7863bcfc62c19c511621e" prot="public" virt="non-virtual"><scope>duration</scope><name>to_hour</name></member>
-      <member refid="structduration_1aa3b255cd7026e11294ae5993be2a04df" prot="public" virt="non-virtual"><scope>duration</scope><name>to_micro</name></member>
-      <member refid="structduration_1af10dad261f29a8bac748cac6c3a83a89" prot="public" virt="non-virtual"><scope>duration</scope><name>to_milli</name></member>
-      <member refid="structduration_1aea71aa619ce36cd852a74047d80ff65d" prot="public" virt="non-virtual"><scope>duration</scope><name>to_minu</name></member>
-      <member refid="structduration_1ad748d07ce72785895bc92cbb419e1ee8" prot="public" virt="non-virtual"><scope>duration</scope><name>to_month</name></member>
-      <member refid="structduration_1a48c50b83a050b9968869cebba16b9b70" prot="public" virt="non-virtual"><scope>duration</scope><name>to_nano</name></member>
-      <member refid="structduration_1aebcbded4b8f784b7ae6198ff7b6d41fa" prot="public" virt="non-virtual"><scope>duration</scope><name>to_sec</name></member>
-      <member refid="structduration_1a85264ce51ee598b030b16b08e63e1af7" prot="public" virt="non-virtual"><scope>duration</scope><name>to_week</name></member>
-      <member refid="structduration_1a540ec95ca9dfb689a1c0917e2b1e6471" prot="public" virt="non-virtual"><scope>duration</scope><name>to_year</name></member>
+      <member refid="structduration_1ad8286a5bc5afbe3bf29ad65e96bd6db5" prot="public" virt="non-virtual"><scope>duration</scope><name>to_day</name></member>
+      <member refid="structduration_1a35551a67246488d68f6af634b6a4105f" prot="public" virt="non-virtual"><scope>duration</scope><name>to_hour</name></member>
+      <member refid="structduration_1aceaebc204cae2e1163fdae07fd542af5" prot="public" virt="non-virtual"><scope>duration</scope><name>to_micro</name></member>
+      <member refid="structduration_1a5d597aa4703f76e6de982b852e16a0af" prot="public" virt="non-virtual"><scope>duration</scope><name>to_milli</name></member>
+      <member refid="structduration_1ad05a255a22866558c08ef58d983084d0" prot="public" virt="non-virtual"><scope>duration</scope><name>to_minu</name></member>
+      <member refid="structduration_1a3831c5deca6495d605e16745c456ba0a" prot="public" virt="non-virtual"><scope>duration</scope><name>to_month</name></member>
+      <member refid="structduration_1a3a35edcfd0bf4953bdb3092792190c76" prot="public" virt="non-virtual"><scope>duration</scope><name>to_nano</name></member>
+      <member refid="structduration_1a44a57ebb0f9cfb6f2e42f545f0b610b8" prot="public" virt="non-virtual"><scope>duration</scope><name>to_sec</name></member>
+      <member refid="structduration_1a9f49ca69c56e23fff80d18ac109ac59c" prot="public" virt="non-virtual"><scope>duration</scope><name>to_week</name></member>
+      <member refid="structduration_1a4bfb897606b6826114c48abb4bfc7b75" prot="public" virt="non-virtual"><scope>duration</scope><name>to_year</name></member>
       <member refid="structduration_1addac7f644268d8a3cc561218ebb72734" prot="public" virt="non-virtual"><scope>duration</scope><name>zero</name></member>
     </listofallmembers>
   </compounddef>

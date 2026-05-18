@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::http::http_filter类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1http_1_1http__filter.html','','classneforce_1_1http_1_1http__filter-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::http::http_filter类 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___h_t_t_p.html">HTTP</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>HTTP过滤器基类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 neforce::http::http_filter 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classneforce_1_1http_1_1http__filter__inherit__graph.svg" width="367" height="320"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a354b28748f728effc3a651e7c9fa96a6" id="r_a354b28748f728effc3a651e7c9fa96a6"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a354b28748f728effc3a651e7c9fa96a6">do_filter</a> (<a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a> &amp;response)=0</td></tr>
+<tr class="memdesc:a354b28748f728effc3a651e7c9fa96a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">核心过滤方法  <br /></td></tr>
+<tr class="memitem:a66c5af31a812075314a85ef38b9d55eb" id="r_a66c5af31a812075314a85ef38b9d55eb"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="#a66c5af31a812075314a85ef38b9d55eb">pre_filter</a> (<a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a> &amp;response)</td></tr>
+<tr class="memdesc:a66c5af31a812075314a85ef38b9d55eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">预处理方法  <br /></td></tr>
+<tr class="memitem:a14ac82a85eee7e20c9d912f97b50535f" id="r_a14ac82a85eee7e20c9d912f97b50535f"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a14ac82a85eee7e20c9d912f97b50535f">post_filter</a> (<a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a> &amp;response)</td></tr>
+<tr class="memdesc:a14ac82a85eee7e20c9d912f97b50535f"><td class="mdescLeft">&#160;</td><td class="mdescRight">后处理方法  <br /></td></tr>
+<tr class="memitem:a16dc9ccb76e7dccf41f4ae732ea01afe" id="r_a16dc9ccb76e7dccf41f4ae732ea01afe"><td class="memItemLeft">virtual <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#a16dc9ccb76e7dccf41f4ae732ea01afe">name</a> () const</td></tr>
+<tr class="memdesc:a16dc9ccb76e7dccf41f4ae732ea01afe"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取过滤器名称  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>HTTP过滤器基类 </p>
+<p>所有HTTP过滤器的抽象基类，定义了过滤器的生命周期方法。</p>
+<p>过滤器生命周期：</p><ol type="1">
+<li>pre_filter：请求处理前调用</li>
+<li>do_filter：实际处理</li>
+<li>post_filter：响应发送前调用 </li>
+</ol>
+
+<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00049">49</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a354b28748f728effc3a651e7c9fa96a6" name="a354b28748f728effc3a651e7c9fa96a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a354b28748f728effc3a651e7c9fa96a6">&#9670;&#160;</a></span>do_filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void neforce::http::http_filter::do_filter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>核心过滤方法 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>HTTP请求 </td></tr>
+    <tr><td class="paramname">response</td><td>HTTP响应</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>执行实际的过滤逻辑。通常由具体处理器实现， 中间件过滤器可能不实现此方法。 </p>
+
+<p>在 <a class="el" href="classneforce_1_1http_1_1authentication__filter.html#af6a12fc2b8cf6c3df8849ea5707f8ef4">neforce::http::authentication_filter</a>, <a class="el" href="classneforce_1_1http_1_1cors__filter.html#af7d390ddae3e85bb40c9f67de563de60">neforce::http::cors_filter</a>, <a class="el" href="classneforce_1_1http_1_1logging__filter.html#a90efe632926a72e39716647618c963a4">neforce::http::logging_filter</a>, <a class="el" href="classneforce_1_1http_1_1rate__limit__filter.html#aa7a0c82da19701a56d66a1f61e460ccd">neforce::http::rate_limit_filter</a> , 以及 <a class="el" href="classneforce_1_1http_1_1static__file__filter.html#afc9790e0ed0eaedecf236a6bf0809dd1">neforce::http::static_file_filter</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a16dc9ccb76e7dccf41f4ae732ea01afe" name="a16dc9ccb76e7dccf41f4ae732ea01afe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16dc9ccb76e7dccf41f4ae732ea01afe">&#9670;&#160;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> neforce::http::http_filter::name </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取过滤器名称 </p>
+<dl class="section return"><dt>返回</dt><dd>过滤器名称 </dd></dl>
+
+<p>被 <a class="el" href="classneforce_1_1http_1_1authentication__filter.html#a8e723b63ec07b1f13d5579e71ed6c340">neforce::http::authentication_filter</a>, <a class="el" href="classneforce_1_1http_1_1cors__filter.html#a0c871b4f441b888f659e145183bcbf5c">neforce::http::cors_filter</a>, <a class="el" href="classneforce_1_1http_1_1logging__filter.html#a0cc7bee4ac1df8842f8b2933a330e959">neforce::http::logging_filter</a>, <a class="el" href="classneforce_1_1http_1_1rate__limit__filter.html#add58d4ce85c88134e295ffdd3d85e27a">neforce::http::rate_limit_filter</a> , 以及 <a class="el" href="classneforce_1_1http_1_1static__file__filter.html#a6e9d5af41a460c6f8cfaeeef08ca7b6b">neforce::http::static_file_filter</a> 重载.</p>
+
+<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00086">86</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a14ac82a85eee7e20c9d912f97b50535f" name="a14ac82a85eee7e20c9d912f97b50535f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14ac82a85eee7e20c9d912f97b50535f">&#9670;&#160;</a></span>post_filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void neforce::http::http_filter::post_filter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>后处理方法 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>HTTP请求 </td></tr>
+    <tr><td class="paramname">response</td><td>HTTP响应</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>在响应发送前调用，可以修改响应头或正文。 </p>
+
+<p>被 <a class="el" href="classneforce_1_1http_1_1logging__filter.html#a383c0fc538d42202d69c283bc473dab4">neforce::http::logging_filter</a> 重载.</p>
+
+<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00080">80</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a66c5af31a812075314a85ef38b9d55eb" name="a66c5af31a812075314a85ef38b9d55eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66c5af31a812075314a85ef38b9d55eb">&#9670;&#160;</a></span>pre_filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool neforce::http::http_filter::pre_filter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#gaf5206366b9367d7f118365ad62b26ff5">http_request</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#ga7430ee17f3275c4a16eec508c2bf7ff3">http_response</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>预处理方法 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>HTTP请求 </td></tr>
+    <tr><td class="paramname">response</td><td>HTTP响应 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回false表示中断后续处理</dd></dl>
+<p>在请求处理前调用，可以检查请求、修改请求或提前返回响应。 </p>
+
+<p>被 <a class="el" href="classneforce_1_1http_1_1authentication__filter.html#ac6e521ad936699a60e3b5333e16aedc5">neforce::http::authentication_filter</a>, <a class="el" href="classneforce_1_1http_1_1cors__filter.html#a83c89f73b4c43bb77d71d06b372ff798">neforce::http::cors_filter</a>, <a class="el" href="classneforce_1_1http_1_1logging__filter.html#a745d565188d3103a21fe69a3a7f14521">neforce::http::logging_filter</a>, <a class="el" href="classneforce_1_1http_1_1rate__limit__filter.html#a95a35fd44d80216c94f73e60add0d820">neforce::http::rate_limit_filter</a> , 以及 <a class="el" href="classneforce_1_1http_1_1static__file__filter.html#a2adcaac9d4b26d8799c34dc87e25ae74">neforce::http::static_file_filter</a> 重载.</p>
+
+<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00071">71</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><b>http</b></li><li class="navelem"><a href="classneforce_1_1http_1_1http__filter.html">http_filter</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

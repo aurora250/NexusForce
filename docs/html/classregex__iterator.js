@@ -7,12 +7,12 @@ var classregex__iterator =
     [ "value_type", "classregex__iterator.html#a008141f536edbdd9cdb6483d231e909f", null ],
     [ "regex_iterator", "classregex__iterator.html#a56d42abfdfd967f92f214c3c25592dc1", null ],
     [ "regex_iterator", "classregex__iterator.html#a97363562cbf275b0a41bf156f6404f1f", null ],
-    [ "operator!=", "classregex__iterator.html#ab6919a48754b802589a4acd7387b8f5e", null ],
-    [ "operator*", "classregex__iterator.html#a19aa797d2b2fbf0b6dce9f9b75dec162", null ],
+    [ "operator!=", "classregex__iterator.html#acf449d1f41d3b9fab4eccb70bd47c17e", null ],
+    [ "operator*", "classregex__iterator.html#a3ae086f8f8aa86829db14a1336ee4e78", null ],
     [ "operator++", "classregex__iterator.html#aed5b19b5be776eb0ac8087be4bd8bad4", null ],
     [ "operator++", "classregex__iterator.html#a0de0979dd96aa54ef5e5a6269980245f", null ],
     [ "operator--", "classregex__iterator.html#abb1bb425c46e2457306ed6f4ad35fea4", null ],
     [ "operator--", "classregex__iterator.html#a70f7da1a7023158550ebe8a259607881", null ],
-    [ "operator->", "classregex__iterator.html#a0b0fc6cd60f5094154897adccb4c0dea", null ],
-    [ "operator==", "classregex__iterator.html#a5faa8585584a4958609edc84f4987fc8", null ]
+    [ "operator->", "classregex__iterator.html#addf1e7b28d780e0ed6c21b46bc43148c", null ],
+    [ "operator==", "classregex__iterator.html#a545dbc9a39afa9d2110fd8f9b46fd3c7", null ]
 ];

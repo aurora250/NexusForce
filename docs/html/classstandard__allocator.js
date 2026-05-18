@@ -4,8 +4,8 @@ var classstandard__allocator =
     [ "pointer", "classstandard__allocator.html#afc904b1c0247278fb86c21525f66b7ae", null ],
     [ "size_type", "classstandard__allocator.html#a77bee0971a57c64b5f5d2c28f618b03c", null ],
     [ "value_type", "classstandard__allocator.html#acc6f596422997bf646cc9341539c7d70", null ],
-    [ "standard_allocator", "classstandard__allocator.html#ac032cee9b5aff2467021bf48a44a7bc8", null ],
-    [ "standard_allocator", "classstandard__allocator.html#ae0d810a64fd10961f500375897e71bad", null ],
-    [ "~standard_allocator", "classstandard__allocator.html#adc63fb9ea8ab40f078b92642f931f207", null ],
-    [ "operator=", "classstandard__allocator.html#ab4a442f5a8d84d0410e81f254a9c90aa", null ]
+    [ "standard_allocator", "classstandard__allocator.html#ae06725532d7a45c17727f10d47afdfa1", null ],
+    [ "standard_allocator", "classstandard__allocator.html#a4ba5b3811dc23e7ceab06740bffd943c", null ],
+    [ "~standard_allocator", "classstandard__allocator.html#a739bad0ae87388c0a5b78066b4ae0ca3", null ],
+    [ "operator=", "classstandard__allocator.html#a305ab7eb16945ffdb6c1eb74971dbce0", null ]
 ];

@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1submit__result" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::submit_result</compoundname>
+    <includes refid="thread__pool_8hpp" local="no">thread_pool.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1submit__result_1a4399f2b6f3253e9de7197f5a05413ab6" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1future" kindref="compound">neforce::future</ref>&lt; T &gt;</type>
+        <definition>neforce:: future&lt;T&gt; neforce::submit_result&lt; T &gt;::future</definition>
+        <argsstring></argsstring>
+        <name>future</name>
+        <qualifiedname>neforce::submit_result::future</qualifiedname>
+        <briefdescription>
+<para>任务的future </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="287" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="287" bodyend="-1"/>
+        <referencedby refid="structneforce_1_1submit__result_1a29ef143e2d49648895759b47a2553a50" compoundref="thread__pool_8hpp" startline="294" endline="294">neforce::submit_result&lt; T &gt;::operator bool</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1submit__result_1a11f9f51a420d48edf4cdfbebf4b2b2a0" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="structneforce_1_1task__info" kindref="compound">neforce::task_info</ref> &gt;</type>
+        <definition>shared_ptr&lt;neforce:: task_info&gt; neforce::submit_result&lt; T &gt;::task_info</definition>
+        <argsstring></argsstring>
+        <name>task_info</name>
+        <qualifiedname>neforce::submit_result::task_info</qualifiedname>
+        <briefdescription>
+<para>任务信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="288" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="288" bodyend="-1"/>
+        <referencedby refid="structneforce_1_1submit__result_1a29ef143e2d49648895759b47a2553a50" compoundref="thread__pool_8hpp" startline="294" endline="294">neforce::submit_result&lt; T &gt;::operator bool</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1submit__result_1a29ef143e2d49648895759b47a2553a50" prot="public" static="no" nodiscard="yes" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::submit_result&lt; T &gt;::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>neforce::submit_result::operator bool</qualifiedname>
+        <briefdescription>
+<para>检查提交是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>有效返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="294" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="294" bodyend="294"/>
+        <references refid="structneforce_1_1submit__result_1a4399f2b6f3253e9de7197f5a05413ab6" compoundref="thread__pool_8hpp" startline="287">neforce::submit_result&lt; T &gt;::future</references>
+        <references refid="structneforce_1_1submit__result_1a11f9f51a420d48edf4cdfbebf4b2b2a0" compoundref="thread__pool_8hpp" startline="288">neforce::submit_result&lt; T &gt;::task_info</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>任务提交结果 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务返回值类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+包含任务的future和任务信息，用于跟踪任务执行状态。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::future&lt; T &gt;</label>
+        <link refid="classneforce_1_1future"/>
+      </node>
+      <node id="3">
+        <label>neforce::shared_ptr&lt; neforce::task_info &gt;</label>
+        <link refid="classneforce_1_1shared__ptr"/>
+      </node>
+      <node id="1">
+        <label>neforce::submit_result&lt; T &gt;</label>
+        <link refid="structneforce_1_1submit__result"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>future</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>task_info</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="286" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="286" bodyend="295"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1submit__result_1a4399f2b6f3253e9de7197f5a05413ab6" prot="public" virt="non-virtual"><scope>neforce::submit_result</scope><name>future</name></member>
+      <member refid="structneforce_1_1submit__result_1a29ef143e2d49648895759b47a2553a50" prot="public" virt="non-virtual"><scope>neforce::submit_result</scope><name>operator bool</name></member>
+      <member refid="structneforce_1_1submit__result_1a11f9f51a420d48edf4cdfbebf4b2b2a0" prot="public" virt="non-virtual"><scope>neforce::submit_result</scope><name>task_info</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -69,7 +69,7 @@ jobs:
             --show-leak-kinds=definite,indirect \
             --errors-for-leak-kinds=definite,indirect \
             --error-exitcode=1 \
-            ./tests/unit/NexusForceUnitTests 2>&1 | tee valgrind_output.txt
+            ./bin/NexusForceUnitTests 2>&1 | tee valgrind_output.txt
 
       - name: Check Leak Summary
         if: always()

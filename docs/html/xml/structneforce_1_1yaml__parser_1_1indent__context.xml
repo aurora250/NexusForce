@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1yaml__parser_1_1indent__context" kind="struct" language="C++" prot="private">
+    <compoundname>neforce::yaml_parser::indent_context</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1yaml__parser_1_1indent__context_1a7e330c2728ce8b8cb912d1bd795aacfc" prot="public" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::yaml_parser::indent_context::level</definition>
+        <argsstring></argsstring>
+        <name>level</name>
+        <qualifiedname>neforce::yaml_parser::indent_context::level</qualifiedname>
+        <briefdescription>
+<para>当前缩进级别（空格数） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="125" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1yaml__parser_1_1indent__context_1a7ecb9eaec356073fa56fdf7121ea8211" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1yaml__mapping" kindref="compound">yaml_mapping</ref> *</type>
+        <definition>yaml_mapping* neforce::yaml_parser::indent_context::mapping</definition>
+        <argsstring></argsstring>
+        <name>mapping</name>
+        <qualifiedname>neforce::yaml_parser::indent_context::mapping</qualifiedname>
+        <briefdescription>
+<para>当前映射指针（在映射上下文中） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="126" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1yaml__parser_1_1indent__context_1a0626fff667ea0da0aff3e02ed1c4e771" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1yaml__sequence" kindref="compound">yaml_sequence</ref> *</type>
+        <definition>yaml_sequence* neforce::yaml_parser::indent_context::sequence</definition>
+        <argsstring></argsstring>
+        <name>sequence</name>
+        <qualifiedname>neforce::yaml_parser::indent_context::sequence</qualifiedname>
+        <briefdescription>
+<para>当前序列指针（在序列上下文中） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="127" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1yaml__parser_1_1indent__context_1a722b6f8e37cb03a6d4ed4e2e84acca7b" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::yaml_parser::indent_context::key</definition>
+        <argsstring></argsstring>
+        <name>key</name>
+        <qualifiedname>neforce::yaml_parser::indent_context::key</qualifiedname>
+        <briefdescription>
+<para>当前键名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="128" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1yaml__parser_1_1indent__context_1a6beb682814c662dacd5c86d7bd03d054" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::yaml_parser::indent_context::is_sequence</definition>
+        <argsstring></argsstring>
+        <name>is_sequence</name>
+        <qualifiedname>neforce::yaml_parser::indent_context::is_sequence</qualifiedname>
+        <briefdescription>
+<para>是否为序列上下文 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="129" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="129" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>缩进上下文结构 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>记录当前嵌套层级的状态信息，用于处理YAML的缩进敏感语法。 当缩进增大时压入新上下文，缩进减小时弹出上下文。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="5">
+        <label>neforce::basic_string&lt; char &gt;</label>
+        <link refid="classneforce_1_1basic__string"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>neforce::icommon&lt; T &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="8">
+        <label>neforce::ihashable&lt; T &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="4">
+        <label>neforce::istringify&lt; yaml_value &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+      <node id="2">
+        <label>neforce::yaml_mapping</label>
+        <link refid="classneforce_1_1yaml__mapping"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::yaml_parser::indent_context</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>mapping</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>sequence</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>key</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>neforce::yaml_sequence</label>
+        <link refid="classneforce_1_1yaml__sequence"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::yaml_value</label>
+        <link refid="classneforce_1_1yaml__value"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>anchor</edgelabel>
+          <edgelabel>tag</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" line="124" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/yaml/yaml_parser.hpp" bodystart="124" bodyend="130"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1yaml__parser_1_1indent__context_1a6beb682814c662dacd5c86d7bd03d054" prot="public" virt="non-virtual"><scope>neforce::yaml_parser::indent_context</scope><name>is_sequence</name></member>
+      <member refid="structneforce_1_1yaml__parser_1_1indent__context_1a722b6f8e37cb03a6d4ed4e2e84acca7b" prot="public" virt="non-virtual"><scope>neforce::yaml_parser::indent_context</scope><name>key</name></member>
+      <member refid="structneforce_1_1yaml__parser_1_1indent__context_1a7e330c2728ce8b8cb912d1bd795aacfc" prot="public" virt="non-virtual"><scope>neforce::yaml_parser::indent_context</scope><name>level</name></member>
+      <member refid="structneforce_1_1yaml__parser_1_1indent__context_1a7ecb9eaec356073fa56fdf7121ea8211" prot="public" virt="non-virtual"><scope>neforce::yaml_parser::indent_context</scope><name>mapping</name></member>
+      <member refid="structneforce_1_1yaml__parser_1_1indent__context_1a0626fff667ea0da0aff3e02ed1c4e771" prot="public" virt="non-virtual"><scope>neforce::yaml_parser::indent_context</scope><name>sequence</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

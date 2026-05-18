@@ -74,9 +74,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___logging_1ga4e290e586cd5cab60821bf2bf31556bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>NEFORCE_CONSTEXPR20 <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>NEFORCE_CONSTEXPR20 string to_string</definition>
+      <memberdef kind="function" id="group___logging_1ga22184590803524bd20e45d3d4887e82d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string to_string</definition>
         <argsstring>(const log_level level)</argsstring>
         <name>to_string</name>
         <param>
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="43" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="43" bodyend="60"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="43" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="43" bodyend="60"/>
       </memberdef>
       <memberdef kind="function" id="group___logging_1ga7ba3f1921075bd3adc62d2915630fce7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
@@ -192,7 +192,7 @@
         <name>NEFORCE_LOGF_TRACE</name>
         <param><defname>msg</defname></param>
         <param><defname>...</defname></param>
-        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().trace(_NEFORCE <ref refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().trace(_NEFORCE <ref refid="group___format_1gac0f4499364ec899fcdfaae1f7acbda76" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
         <briefdescription>
 <para>格式化TRACE级别日志 </para>
         </briefdescription>
@@ -206,7 +206,7 @@
         <name>NEFORCE_LOGF_DEBUG</name>
         <param><defname>msg</defname></param>
         <param><defname>...</defname></param>
-        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().debug(_NEFORCE <ref refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().debug(_NEFORCE <ref refid="group___format_1gac0f4499364ec899fcdfaae1f7acbda76" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
         <briefdescription>
 <para>格式化DEBUG级别日志 </para>
         </briefdescription>
@@ -220,7 +220,7 @@
         <name>NEFORCE_LOGF_INFO</name>
         <param><defname>msg</defname></param>
         <param><defname>...</defname></param>
-        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().info(_NEFORCE <ref refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().info(_NEFORCE <ref refid="group___format_1gac0f4499364ec899fcdfaae1f7acbda76" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
         <briefdescription>
 <para>格式化INFO级别日志 </para>
         </briefdescription>
@@ -234,7 +234,7 @@
         <name>NEFORCE_LOGF_WARN</name>
         <param><defname>msg</defname></param>
         <param><defname>...</defname></param>
-        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().warn(_NEFORCE <ref refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().warn(_NEFORCE <ref refid="group___format_1gac0f4499364ec899fcdfaae1f7acbda76" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
         <briefdescription>
 <para>格式化WARN级别日志 </para>
         </briefdescription>
@@ -248,7 +248,7 @@
         <name>NEFORCE_LOGF_ERROR</name>
         <param><defname>msg</defname></param>
         <param><defname>...</defname></param>
-        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().error(_NEFORCE <ref refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().error(_NEFORCE <ref refid="group___format_1gac0f4499364ec899fcdfaae1f7acbda76" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
         <briefdescription>
 <para>格式化ERROR级别日志 </para>
         </briefdescription>
@@ -262,7 +262,7 @@
         <name>NEFORCE_LOGF_FATAL</name>
         <param><defname>msg</defname></param>
         <param><defname>...</defname></param>
-        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().fatal(_NEFORCE <ref refid="group___format_1ga2f48d1b0493594ccd0e5571cfc7f3ecf" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
+        <initializer>_NEFORCE <ref refid="classlogger_1a7e29f44b7511600dd3e1b27fc61d20d2" kindref="member">logger::instance</ref>().fatal(_NEFORCE <ref refid="group___format_1gac0f4499364ec899fcdfaae1f7acbda76" kindref="member">format</ref>(msg, __VA_ARGS__), __FILE__, __func__, __LINE__)</initializer>
         <briefdescription>
 <para>格式化FATAL级别日志 </para>
         </briefdescription>

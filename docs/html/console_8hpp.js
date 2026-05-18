@@ -13,5 +13,5 @@ var console_8hpp =
     [ "printf", "group___console_i_o.html#gaa9133c8d4e2b1ea9cc0b8c6e4b915a06", null ],
     [ "printfln", "group___console_i_o.html#ga448be22c9c28101c7e56b54a6432827c", null ],
     [ "println", "group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0", null ],
-    [ "console", "group___console_i_o.html#gafd42d3f9d74cf979729823fefc824c81", null ]
+    [ "console", "group___console_i_o.html#gab80c18dffdb3640ae4a389dd9fb4929e", null ]
 ];

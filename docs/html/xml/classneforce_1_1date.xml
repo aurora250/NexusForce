@@ -1,0 +1,1142 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1date" kind="class" language="C++" prot="public">
+    <compoundname>neforce::date</compoundname>
+    <basecompoundref refid="structneforce_1_1iobject" prot="public" virt="non-virtual">neforce::iobject&lt; date &gt;</basecompoundref>
+    <basecompoundref refid="structneforce_1_1icommon" prot="public" virt="non-virtual">neforce::icommon&lt; date &gt;</basecompoundref>
+    <includes refid="datetime_8hpp" local="no">datetime.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" prot="public" static="no">
+        <type><ref refid="group___core_types_1gaa0af497ed9ed410d4c911b409653515a" kindref="member">int32_t</ref></type>
+        <definition>using neforce::date::date_type = int32_t</definition>
+        <argsstring></argsstring>
+        <name>date_type</name>
+        <qualifiedname>neforce::date::date_type</qualifiedname>
+        <briefdescription>
+<para>日期分量类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="93" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1date_1af49b99dde56f7107dbe0084e90b92d18" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+        <definition>date_type neforce::date::year_</definition>
+        <argsstring></argsstring>
+        <name>year_</name>
+        <qualifiedname>neforce::date::year_</qualifiedname>
+        <initializer>= 1970</initializer>
+        <briefdescription>
+<para>年份 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="96" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1date_1a7e9fd1fa70c46df8994e340acad30012" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+        <definition>date_type neforce::date::month_</definition>
+        <argsstring></argsstring>
+        <name>month_</name>
+        <qualifiedname>neforce::date::month_</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+<para>月份（1-12） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="97" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1date_1ad1d23fa10e21f79d983977bbbf827eb4" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+        <definition>date_type neforce::date::day_</definition>
+        <argsstring></argsstring>
+        <name>day_</name>
+        <qualifiedname>neforce::date::day_</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+<para>日期（1-31） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="98" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classneforce_1_1date_1adc9c55f3f00d310b6ed588a1cd6bd3c9" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1gaa0af497ed9ed410d4c911b409653515a" kindref="member">int32_t</ref></type>
+        <definition>int32_t neforce::date::month_days[12]</definition>
+        <argsstring>[12]</argsstring>
+        <name>month_days</name>
+        <qualifiedname>neforce::date::month_days</qualifiedname>
+        <initializer>= {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}</initializer>
+        <briefdescription>
+<para>每月天数表（非闰年） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="104" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="104" bodyend="104"/>
+        <referencedby refid="classneforce_1_1date_1af92c7601be30731233b7de9a62c7e457" compoundref="datetime_8hpp" startline="212" endline="218">days_of_month</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::date::date</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>date</name>
+        <qualifiedname>neforce::date::date</qualifiedname>
+        <briefdescription>
+<para>默认构造函数，创建1970-01-01 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="110" column="15"/>
+        <references refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3">date</references>
+        <referencedby refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3">date</referencedby>
+        <referencedby refid="classneforce_1_1date_1a5470e70f2b411ee583c16ebe1e9a266c" compoundref="datetime_8hpp" startline="122" endline="128">date</referencedby>
+        <referencedby refid="classneforce_1_1date_1ae60eec5f4f5b2d85386e2d00083793cc" compoundref="datetime_8hpp" startline="180" endline="180">epoch</referencedby>
+        <referencedby refid="classneforce_1_1date_1ac02fcd88aaba4152cef3d81be88437e4" compoundref="datetime_8hpp" startline="275" endline="277">equal_to</referencedby>
+        <referencedby refid="classneforce_1_1date_1ae867f63da66effb7183ed48bf06128f1" compoundref="datetime_8hpp" startline="248" endline="261">from_julian_day</referencedby>
+        <referencedby refid="classneforce_1_1date_1aac4221ea9abbeba0accbff4159342429" compoundref="datetime_8hpp" startline="282" endline="293">less_than</referencedby>
+        <referencedby refid="classneforce_1_1date_1af030dcd4d950f191670e818b616303be" compoundref="datetime_8hpp" startline="360" endline="364">operator+</referencedby>
+        <referencedby refid="classneforce_1_1date_1abe97ee81968db716b64160e67a74cc5b" compoundref="datetime_8hpp" startline="380" endline="383">operator++</referencedby>
+        <referencedby refid="classneforce_1_1date_1a76663c905a65ad44b5f127261509067d" compoundref="datetime_8hpp" startline="388" endline="392">operator++</referencedby>
+        <referencedby refid="classneforce_1_1date_1a0bf230d4c039ea78d5a041f76e2638b7" compoundref="datetime_8hpp" startline="300" endline="332">operator+=</referencedby>
+        <referencedby refid="classneforce_1_1date_1a0df8d75bd3c23f4cdbdab3ecf8094000" compoundref="datetime_8hpp" startline="399" endline="401">operator-</referencedby>
+        <referencedby refid="classneforce_1_1date_1acc685114357fb033caa5ad1941c3e6b5" compoundref="datetime_8hpp" startline="371" endline="375">operator-</referencedby>
+        <referencedby refid="classneforce_1_1date_1ab0700ec866dd2952ec06a1881e92ad0d" compoundref="datetime_8hpp" startline="339" endline="353">operator-=</referencedby>
+        <referencedby refid="classneforce_1_1date_1a6ef3498fbe31f937f30fdd0dd1da23d5" compoundref="datetime_8hpp" startline="426" endline="434">parse</referencedby>
+        <referencedby refid="classneforce_1_1date_1a990cb2591f0c9a520ad06ea1cbc739da" compoundref="datetime_8hpp" startline="440" endline="444">swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1aa6a0ba4adda32419ced5c25014a5bada" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::date::~date</definition>
+        <argsstring>()=default</argsstring>
+        <name>~date</name>
+        <qualifiedname>neforce::date::~date</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="112" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1a5470e70f2b411ee583c16ebe1e9a266c" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::date::date</definition>
+        <argsstring>(date_type year, const date_type month, const date_type day) noexcept</argsstring>
+        <name>date</name>
+        <qualifiedname>neforce::date::date</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+          <declname>year</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+          <declname>month</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+          <declname>day</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>year</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>年份 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>month</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>月份 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>day</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日期</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+如果日期无效，将保持默认值1970-01-01。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="122" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="122" bodyend="128"/>
+        <references refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3">date</references>
+        <references refid="classneforce_1_1date_1a187bf1e8653897dc07c8c3928a5c4625" compoundref="datetime_8hpp" startline="151" endline="151">day</references>
+        <references refid="classneforce_1_1date_1a5a6148003ea66340760da5d1528e1eec" compoundref="datetime_8hpp" startline="160" endline="168">is_valid</references>
+        <references refid="classneforce_1_1date_1a451af9a42b84f5589cac01a83ed4f619" compoundref="datetime_8hpp" startline="145" endline="145">month</references>
+        <references refid="classneforce_1_1date_1af7a9cb48a1c469f365cade607c2a9925" compoundref="datetime_8hpp" startline="139" endline="139">year</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1aa697d308043f8eb903845b3b2a2109b3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::date::date</definition>
+        <argsstring>(const date &amp;) noexcept=default</argsstring>
+        <name>date</name>
+        <qualifiedname>neforce::date::date</qualifiedname>
+        <param>
+          <type>const date &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="130" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1a5b8daaf0e326c5980e434dd41b4308b3" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref> &amp;</type>
+        <definition>date &amp; neforce::date::operator=</definition>
+        <argsstring>(const date &amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::date::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="131" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1a80aa666b32995664a341e6451b6b6743" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::date::date</definition>
+        <argsstring>(date &amp;&amp;) noexcept=default</argsstring>
+        <name>date</name>
+        <qualifiedname>neforce::date::date</qualifiedname>
+        <param>
+          <type>date &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="132" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1ae1ff2d5fd015450ee2d4b49b205164ab" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref> &amp;</type>
+        <definition>date &amp; neforce::date::operator=</definition>
+        <argsstring>(date &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::date::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="133" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1af7a9cb48a1c469f365cade607c2a9925" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+        <definition>date_type neforce::date::year</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>year</name>
+        <qualifiedname>neforce::date::year</qualifiedname>
+        <briefdescription>
+<para>获取年份 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>年份 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="139" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="139" bodyend="139"/>
+        <references refid="classneforce_1_1date_1af7a9cb48a1c469f365cade607c2a9925" compoundref="datetime_8hpp" startline="139" endline="139">year</references>
+        <referencedby refid="classneforce_1_1date_1a5470e70f2b411ee583c16ebe1e9a266c" compoundref="datetime_8hpp" startline="122" endline="128">date</referencedby>
+        <referencedby refid="classneforce_1_1date_1af92c7601be30731233b7de9a62c7e457" compoundref="datetime_8hpp" startline="212" endline="218">days_of_month</referencedby>
+        <referencedby refid="classneforce_1_1date_1ae867f63da66effb7183ed48bf06128f1" compoundref="datetime_8hpp" startline="248" endline="261">from_julian_day</referencedby>
+        <referencedby refid="classneforce_1_1date_1afdb5fae655b692439684926ee51327e1" compoundref="datetime_8hpp" startline="187" endline="189">is_leap_year</referencedby>
+        <referencedby refid="classneforce_1_1date_1a5a6148003ea66340760da5d1528e1eec" compoundref="datetime_8hpp" startline="160" endline="168">is_valid</referencedby>
+        <referencedby refid="classneforce_1_1date_1a6ef3498fbe31f937f30fdd0dd1da23d5" compoundref="datetime_8hpp" startline="426" endline="434">parse</referencedby>
+        <referencedby refid="classneforce_1_1date_1a4f156a42b72f8cac7b106533826f05cf" compoundref="datetime_8hpp" startline="407" endline="410">to_hash</referencedby>
+        <referencedby refid="classneforce_1_1date_1accd859e2b9ad4545c4589906c8a295b8" compoundref="datetime_8hpp" startline="236" endline="241">to_julian_day</referencedby>
+        <referencedby refid="classneforce_1_1date_1a3d5a506ee6dba414ece56bd1b7f809f7" compoundref="datetime_8hpp" startline="416" endline="418">to_string</referencedby>
+        <referencedby refid="classneforce_1_1date_1af7a9cb48a1c469f365cade607c2a9925" compoundref="datetime_8hpp" startline="139" endline="139">year</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1a451af9a42b84f5589cac01a83ed4f619" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+        <definition>date_type neforce::date::month</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>month</name>
+        <qualifiedname>neforce::date::month</qualifiedname>
+        <briefdescription>
+<para>获取月份 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>月份 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="145" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="145" bodyend="145"/>
+        <referencedby refid="classneforce_1_1date_1a5470e70f2b411ee583c16ebe1e9a266c" compoundref="datetime_8hpp" startline="122" endline="128">date</referencedby>
+        <referencedby refid="classneforce_1_1date_1af92c7601be30731233b7de9a62c7e457" compoundref="datetime_8hpp" startline="212" endline="218">days_of_month</referencedby>
+        <referencedby refid="classneforce_1_1date_1ae867f63da66effb7183ed48bf06128f1" compoundref="datetime_8hpp" startline="248" endline="261">from_julian_day</referencedby>
+        <referencedby refid="classneforce_1_1date_1a5a6148003ea66340760da5d1528e1eec" compoundref="datetime_8hpp" startline="160" endline="168">is_valid</referencedby>
+        <referencedby refid="classneforce_1_1date_1a6ef3498fbe31f937f30fdd0dd1da23d5" compoundref="datetime_8hpp" startline="426" endline="434">parse</referencedby>
+        <referencedby refid="classneforce_1_1date_1a4f156a42b72f8cac7b106533826f05cf" compoundref="datetime_8hpp" startline="407" endline="410">to_hash</referencedby>
+        <referencedby refid="classneforce_1_1date_1accd859e2b9ad4545c4589906c8a295b8" compoundref="datetime_8hpp" startline="236" endline="241">to_julian_day</referencedby>
+        <referencedby refid="classneforce_1_1date_1a3d5a506ee6dba414ece56bd1b7f809f7" compoundref="datetime_8hpp" startline="416" endline="418">to_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1a187bf1e8653897dc07c8c3928a5c4625" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+        <definition>date_type neforce::date::day</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>day</name>
+        <qualifiedname>neforce::date::day</qualifiedname>
+        <briefdescription>
+<para>获取日期 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>日期 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="151" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="151" bodyend="151"/>
+        <referencedby refid="classneforce_1_1date_1a5470e70f2b411ee583c16ebe1e9a266c" compoundref="datetime_8hpp" startline="122" endline="128">date</referencedby>
+        <referencedby refid="classneforce_1_1date_1af92c7601be30731233b7de9a62c7e457" compoundref="datetime_8hpp" startline="212" endline="218">days_of_month</referencedby>
+        <referencedby refid="classneforce_1_1date_1ae867f63da66effb7183ed48bf06128f1" compoundref="datetime_8hpp" startline="248" endline="261">from_julian_day</referencedby>
+        <referencedby refid="classneforce_1_1date_1a5a6148003ea66340760da5d1528e1eec" compoundref="datetime_8hpp" startline="160" endline="168">is_valid</referencedby>
+        <referencedby refid="classneforce_1_1date_1af030dcd4d950f191670e818b616303be" compoundref="datetime_8hpp" startline="360" endline="364">operator+</referencedby>
+        <referencedby refid="classneforce_1_1date_1a0bf230d4c039ea78d5a041f76e2638b7" compoundref="datetime_8hpp" startline="300" endline="332">operator+=</referencedby>
+        <referencedby refid="classneforce_1_1date_1acc685114357fb033caa5ad1941c3e6b5" compoundref="datetime_8hpp" startline="371" endline="375">operator-</referencedby>
+        <referencedby refid="classneforce_1_1date_1ab0700ec866dd2952ec06a1881e92ad0d" compoundref="datetime_8hpp" startline="339" endline="353">operator-=</referencedby>
+        <referencedby refid="classneforce_1_1date_1a6ef3498fbe31f937f30fdd0dd1da23d5" compoundref="datetime_8hpp" startline="426" endline="434">parse</referencedby>
+        <referencedby refid="classneforce_1_1date_1a4f156a42b72f8cac7b106533826f05cf" compoundref="datetime_8hpp" startline="407" endline="410">to_hash</referencedby>
+        <referencedby refid="classneforce_1_1date_1a3d5a506ee6dba414ece56bd1b7f809f7" compoundref="datetime_8hpp" startline="416" endline="418">to_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1ac0cbfc2dbd8d8dde32eeb0b24c18f60d" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::date::is_valid</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_valid</name>
+        <qualifiedname>neforce::date::is_valid</qualifiedname>
+        <briefdescription>
+<para>检查日期是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否有效 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="174" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="174" bodyend="174"/>
+        <references refid="classneforce_1_1date_1ac0cbfc2dbd8d8dde32eeb0b24c18f60d" compoundref="datetime_8hpp" startline="174" endline="174">is_valid</references>
+        <referencedby refid="classneforce_1_1date_1ac0cbfc2dbd8d8dde32eeb0b24c18f60d" compoundref="datetime_8hpp" startline="174" endline="174">is_valid</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1ac0dc03a3955691f2292d2c075f0fbe29" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+        <definition>date_type neforce::date::days_of_week</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>days_of_week</name>
+        <qualifiedname>neforce::date::days_of_week</qualifiedname>
+        <briefdescription>
+<para>获取星期几 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>0=周日，1=周一，...，6=周六 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="195" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="195" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1a14361637d08a3e15da3fbfe990c52eb4" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+        <definition>date_type neforce::date::days_of_year</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>days_of_year</name>
+        <qualifiedname>neforce::date::days_of_year</qualifiedname>
+        <briefdescription>
+<para>获取一年中的第几天 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>天数（1-366） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="224" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="224" bodyend="230"/>
+        <references refid="classneforce_1_1date_1af92c7601be30731233b7de9a62c7e457" compoundref="datetime_8hpp" startline="212" endline="218">days_of_month</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1accd859e2b9ad4545c4589906c8a295b8" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+        <definition>int64_t neforce::date::to_julian_day</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_julian_day</name>
+        <qualifiedname>neforce::date::to_julian_day</qualifiedname>
+        <briefdescription>
+<para>转换为儒略日 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>儒略日数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="236" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="236" bodyend="241"/>
+        <references refid="classneforce_1_1date_1a451af9a42b84f5589cac01a83ed4f619" compoundref="datetime_8hpp" startline="145" endline="145">month</references>
+        <references refid="classneforce_1_1date_1af7a9cb48a1c469f365cade607c2a9925" compoundref="datetime_8hpp" startline="139" endline="139">year</references>
+        <referencedby refid="classneforce_1_1date_1a0bf230d4c039ea78d5a041f76e2638b7" compoundref="datetime_8hpp" startline="300" endline="332">operator+=</referencedby>
+        <referencedby refid="classneforce_1_1date_1a0df8d75bd3c23f4cdbdab3ecf8094000" compoundref="datetime_8hpp" startline="399" endline="401">operator-</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1a5c25daee766f76f3e28d859b672d6831" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::date::clear</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::date::clear</qualifiedname>
+        <briefdescription>
+<para>重置为纪元起始日期 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="266" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="266" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1ac02fcd88aaba4152cef3d81be88437e4" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::date::equal_to</definition>
+        <argsstring>(const date &amp;rhs) const noexcept</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>neforce::date::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="275" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="275" bodyend="277"/>
+        <references refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3">date</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1aac4221ea9abbeba0accbff4159342429" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::date::less_than</definition>
+        <argsstring>(const date &amp;rhs) const noexcept</argsstring>
+        <name>less_than</name>
+        <qualifiedname>neforce::date::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="282" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="282" bodyend="293"/>
+        <references refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3">date</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1a0bf230d4c039ea78d5a041f76e2638b7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref> &amp;</type>
+        <definition>date &amp; neforce::date::operator+=</definition>
+        <argsstring>(const date_type day) noexcept</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>neforce::date::operator+=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+          <declname>day</declname>
+        </param>
+        <briefdescription>
+<para>日期加天数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>day</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要加的天数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="300" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="300" bodyend="332"/>
+        <references refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3">date</references>
+        <references refid="classneforce_1_1date_1a187bf1e8653897dc07c8c3928a5c4625" compoundref="datetime_8hpp" startline="151" endline="151">day</references>
+        <references refid="classneforce_1_1date_1af92c7601be30731233b7de9a62c7e457" compoundref="datetime_8hpp" startline="212" endline="218">days_of_month</references>
+        <references refid="classneforce_1_1date_1ae867f63da66effb7183ed48bf06128f1" compoundref="datetime_8hpp" startline="248" endline="261">from_julian_day</references>
+        <references refid="classneforce_1_1date_1accd859e2b9ad4545c4589906c8a295b8" compoundref="datetime_8hpp" startline="236" endline="241">to_julian_day</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1ab0700ec866dd2952ec06a1881e92ad0d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref> &amp;</type>
+        <definition>date &amp; neforce::date::operator-=</definition>
+        <argsstring>(const date_type day) noexcept</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>neforce::date::operator-=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+          <declname>day</declname>
+        </param>
+        <briefdescription>
+<para>日期减天数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>day</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要减的天数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="339" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="339" bodyend="353"/>
+        <references refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3">date</references>
+        <references refid="classneforce_1_1date_1a187bf1e8653897dc07c8c3928a5c4625" compoundref="datetime_8hpp" startline="151" endline="151">day</references>
+        <references refid="classneforce_1_1date_1af92c7601be30731233b7de9a62c7e457" compoundref="datetime_8hpp" startline="212" endline="218">days_of_month</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1af030dcd4d950f191670e818b616303be" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref></type>
+        <definition>date neforce::date::operator+</definition>
+        <argsstring>(const date_type day) const noexcept</argsstring>
+        <name>operator+</name>
+        <qualifiedname>neforce::date::operator+</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+          <declname>day</declname>
+        </param>
+        <briefdescription>
+<para>日期加天数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>day</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>天数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新日期 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="360" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="360" bodyend="364"/>
+        <references refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3">date</references>
+        <references refid="classneforce_1_1date_1a187bf1e8653897dc07c8c3928a5c4625" compoundref="datetime_8hpp" startline="151" endline="151">day</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1acc685114357fb033caa5ad1941c3e6b5" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref></type>
+        <definition>date neforce::date::operator-</definition>
+        <argsstring>(const date_type day) const noexcept</argsstring>
+        <name>operator-</name>
+        <qualifiedname>neforce::date::operator-</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+          <declname>day</declname>
+        </param>
+        <briefdescription>
+<para>日期减天数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>day</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>天数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新日期 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="371" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="371" bodyend="375"/>
+        <references refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3">date</references>
+        <references refid="classneforce_1_1date_1a187bf1e8653897dc07c8c3928a5c4625" compoundref="datetime_8hpp" startline="151" endline="151">day</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1abe97ee81968db716b64160e67a74cc5b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref> &amp;</type>
+        <definition>date &amp; neforce::date::operator++</definition>
+        <argsstring>()</argsstring>
+        <name>operator++</name>
+        <qualifiedname>neforce::date::operator++</qualifiedname>
+        <briefdescription>
+<para>前置递增（加1天） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="380" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="380" bodyend="383"/>
+        <references refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3">date</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1a76663c905a65ad44b5f127261509067d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref></type>
+        <definition>date neforce::date::operator++</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator++</name>
+        <qualifiedname>neforce::date::operator++</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+<para>后置递增（加1天） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="388" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="388" bodyend="392"/>
+        <references refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3">date</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1a0df8d75bd3c23f4cdbdab3ecf8094000" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+        <definition>date_type neforce::date::operator-</definition>
+        <argsstring>(const date &amp;other) const noexcept</argsstring>
+        <name>operator-</name>
+        <qualifiedname>neforce::date::operator-</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>日期差（天数） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个日期 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>相差的天数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="399" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="399" bodyend="401"/>
+        <references refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3">date</references>
+        <references refid="classneforce_1_1date_1accd859e2b9ad4545c4589906c8a295b8" compoundref="datetime_8hpp" startline="236" endline="241">to_julian_day</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1a4f156a42b72f8cac7b106533826f05cf" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::date::to_hash</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_hash</name>
+        <qualifiedname>neforce::date::to_hash</qualifiedname>
+        <briefdescription>
+<para>计算哈希值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>哈希值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="407" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="407" bodyend="410"/>
+        <references refid="classneforce_1_1date_1a187bf1e8653897dc07c8c3928a5c4625" compoundref="datetime_8hpp" startline="151" endline="151">day</references>
+        <references refid="classneforce_1_1date_1a451af9a42b84f5589cac01a83ed4f619" compoundref="datetime_8hpp" startline="145" endline="145">month</references>
+        <references refid="classneforce_1_1date_1af7a9cb48a1c469f365cade607c2a9925" compoundref="datetime_8hpp" startline="139" endline="139">year</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1a3d5a506ee6dba414ece56bd1b7f809f7" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::date::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>neforce::date::to_string</qualifiedname>
+        <briefdescription>
+<para>转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>格式为 YYYY-MM-DD 的字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="416" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="416" bodyend="418"/>
+        <references refid="classneforce_1_1date_1a187bf1e8653897dc07c8c3928a5c4625" compoundref="datetime_8hpp" startline="151" endline="151">day</references>
+        <references refid="group___format_1ga0f7c7c59376bf75f938eb88185d5fa5e" compoundref="format_8hpp" startline="695" endline="701">neforce::format</references>
+        <references refid="classneforce_1_1date_1a451af9a42b84f5589cac01a83ed4f619" compoundref="datetime_8hpp" startline="145" endline="145">month</references>
+        <references refid="classneforce_1_1date_1af7a9cb48a1c469f365cade607c2a9925" compoundref="datetime_8hpp" startline="139" endline="139">year</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1a990cb2591f0c9a520ad06ea1cbc739da" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::date::swap</definition>
+        <argsstring>(date &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::date::swap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个日期 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个日期 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="440" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="440" bodyend="444"/>
+        <references refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3">date</references>
+        <references refid="group___swap_utility_1ga71b9da583fb3cb5d5f79ff8cfc663540">neforce::swap</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1date_1a5a6148003ea66340760da5d1528e1eec" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static constexpr bool neforce::date::is_valid</definition>
+        <argsstring>(date_type year, date_type month, date_type day) noexcept</argsstring>
+        <name>is_valid</name>
+        <qualifiedname>neforce::date::is_valid</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+          <declname>year</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+          <declname>month</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+          <declname>day</declname>
+        </param>
+        <briefdescription>
+<para>检查日期是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>year</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>年份 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>month</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>月份 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>day</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日期 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否有效 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="160" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="160" bodyend="168"/>
+        <references refid="classneforce_1_1date_1a187bf1e8653897dc07c8c3928a5c4625" compoundref="datetime_8hpp" startline="151" endline="151">day</references>
+        <references refid="classneforce_1_1date_1af92c7601be30731233b7de9a62c7e457" compoundref="datetime_8hpp" startline="212" endline="218">days_of_month</references>
+        <references refid="classneforce_1_1date_1a451af9a42b84f5589cac01a83ed4f619" compoundref="datetime_8hpp" startline="145" endline="145">month</references>
+        <references refid="classneforce_1_1date_1af7a9cb48a1c469f365cade607c2a9925" compoundref="datetime_8hpp" startline="139" endline="139">year</references>
+        <referencedby refid="classneforce_1_1date_1a5470e70f2b411ee583c16ebe1e9a266c" compoundref="datetime_8hpp" startline="122" endline="128">date</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1ae60eec5f4f5b2d85386e2d00083793cc" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref></type>
+        <definition>static constexpr date neforce::date::epoch</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>epoch</name>
+        <qualifiedname>neforce::date::epoch</qualifiedname>
+        <briefdescription>
+<para>获取纪元起始日期（1970-01-01） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>纪元起始日期 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="180" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="180" bodyend="180"/>
+        <references refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3">date</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1afdb5fae655b692439684926ee51327e1" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static constexpr bool neforce::date::is_leap_year</definition>
+        <argsstring>(const date_type year) noexcept</argsstring>
+        <name>is_leap_year</name>
+        <qualifiedname>neforce::date::is_leap_year</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+          <declname>year</declname>
+        </param>
+        <briefdescription>
+<para>检查是否为闰年 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>year</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>年份 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否为闰年 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="187" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="187" bodyend="189"/>
+        <references refid="classneforce_1_1date_1af7a9cb48a1c469f365cade607c2a9925" compoundref="datetime_8hpp" startline="139" endline="139">year</references>
+        <referencedby refid="classneforce_1_1date_1af92c7601be30731233b7de9a62c7e457" compoundref="datetime_8hpp" startline="212" endline="218">days_of_month</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1af92c7601be30731233b7de9a62c7e457" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+        <definition>static constexpr date_type neforce::date::days_of_month</definition>
+        <argsstring>(const date_type year, const date_type month) noexcept</argsstring>
+        <name>days_of_month</name>
+        <qualifiedname>neforce::date::days_of_month</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+          <declname>year</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">date_type</ref></type>
+          <declname>month</declname>
+        </param>
+        <briefdescription>
+<para>获取指定年月的天数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>year</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>年份 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>month</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>月份 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>天数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="212" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="212" bodyend="218"/>
+        <references refid="classneforce_1_1date_1a187bf1e8653897dc07c8c3928a5c4625" compoundref="datetime_8hpp" startline="151" endline="151">day</references>
+        <references refid="classneforce_1_1date_1afdb5fae655b692439684926ee51327e1" compoundref="datetime_8hpp" startline="187" endline="189">is_leap_year</references>
+        <references refid="classneforce_1_1date_1a451af9a42b84f5589cac01a83ed4f619" compoundref="datetime_8hpp" startline="145" endline="145">month</references>
+        <references refid="classneforce_1_1date_1adc9c55f3f00d310b6ed588a1cd6bd3c9" compoundref="datetime_8hpp" startline="104" endline="104">month_days</references>
+        <references refid="classneforce_1_1date_1af7a9cb48a1c469f365cade607c2a9925" compoundref="datetime_8hpp" startline="139" endline="139">year</references>
+        <referencedby refid="classneforce_1_1date_1a14361637d08a3e15da3fbfe990c52eb4" compoundref="datetime_8hpp" startline="224" endline="230">days_of_year</referencedby>
+        <referencedby refid="classneforce_1_1date_1a5a6148003ea66340760da5d1528e1eec" compoundref="datetime_8hpp" startline="160" endline="168">is_valid</referencedby>
+        <referencedby refid="classneforce_1_1date_1a0bf230d4c039ea78d5a041f76e2638b7" compoundref="datetime_8hpp" startline="300" endline="332">operator+=</referencedby>
+        <referencedby refid="classneforce_1_1date_1ab0700ec866dd2952ec06a1881e92ad0d" compoundref="datetime_8hpp" startline="339" endline="353">operator-=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1ae867f63da66effb7183ed48bf06128f1" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref></type>
+        <definition>static constexpr date neforce::date::from_julian_day</definition>
+        <argsstring>(const int64_t julian_day) noexcept</argsstring>
+        <name>from_julian_day</name>
+        <qualifiedname>neforce::date::from_julian_day</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+          <declname>julian_day</declname>
+        </param>
+        <briefdescription>
+<para>从儒略日转换 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>julian_day</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>儒略日数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应的日期 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="248" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="248" bodyend="261"/>
+        <references refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3">date</references>
+        <references refid="classneforce_1_1date_1a187bf1e8653897dc07c8c3928a5c4625" compoundref="datetime_8hpp" startline="151" endline="151">day</references>
+        <references refid="classneforce_1_1date_1a451af9a42b84f5589cac01a83ed4f619" compoundref="datetime_8hpp" startline="145" endline="145">month</references>
+        <references refid="classneforce_1_1date_1af7a9cb48a1c469f365cade607c2a9925" compoundref="datetime_8hpp" startline="139" endline="139">year</references>
+        <referencedby refid="classneforce_1_1date_1a0bf230d4c039ea78d5a041f76e2638b7" compoundref="datetime_8hpp" startline="300" endline="332">operator+=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1date_1a6ef3498fbe31f937f30fdd0dd1da23d5" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" kindref="member">date</ref></type>
+        <definition>static constexpr date neforce::date::parse</definition>
+        <argsstring>(const string_view view)</argsstring>
+        <name>parse</name>
+        <qualifiedname>neforce::date::parse</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>view</declname>
+        </param>
+        <briefdescription>
+<para>从字符串解析 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>view</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式为 YYYY-MM-DD 的字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析得到的日期 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式错误时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="426" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="426" bodyend="434"/>
+        <references refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3">date</references>
+        <references refid="classneforce_1_1date_1a187bf1e8653897dc07c8c3928a5c4625" compoundref="datetime_8hpp" startline="151" endline="151">day</references>
+        <references refid="classneforce_1_1date_1a451af9a42b84f5589cac01a83ed4f619" compoundref="datetime_8hpp" startline="145" endline="145">month</references>
+        <references refid="classneforce_1_1basic__string__view_1a5c3cc7bb70d1ce39a7e41c31d66cf1b3" compoundref="basic__string__view_8hpp" startline="303" endline="303">neforce::basic_string_view&lt; CharT, Traits &gt;::size</references>
+        <references refid="classneforce_1_1basic__string__view_1ab638e982a36599b447fcb8943c8d3512" compoundref="basic__string__view_8hpp" startline="414" endline="418">neforce::basic_string_view&lt; CharT, Traits &gt;::substr</references>
+        <references refid="classneforce_1_1date_1af7a9cb48a1c469f365cade607c2a9925" compoundref="datetime_8hpp" startline="139" endline="139">year</references>
+        <referencedby refid="classneforce_1_1datetime_1a2cfee7769cbd30a851a1170e80ac1f8b" compoundref="datetime_8hpp" startline="1426" endline="1433">neforce::datetime::parse</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a434fbd8432315ce87b797d644460fa9a" compoundref="datetime_8hpp" startline="1384" endline="1395">neforce::datetime::parse_ISO8601</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a26c6c2faf41d8e2cadb2bfb2d7007a7b" compoundref="datetime_8hpp" startline="1233" endline="1274">neforce::datetime::parse_RFC3339</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>日期类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示公历日期，支持日期间隔计算、儒略日转换、日期验证等功能。 年份范围：1900-9999 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::date</label>
+        <link refid="classneforce_1_1date"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::icommon&lt; date &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::icomparable&lt; date &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="6">
+        <label>neforce::ihashable&lt; date &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="2">
+        <label>neforce::iobject&lt; date &gt;</label>
+        <link refid="structneforce_1_1iobject"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::istringify&lt; date &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::date</label>
+        <link refid="classneforce_1_1date"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::icommon&lt; date &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::icomparable&lt; date &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="6">
+        <label>neforce::ihashable&lt; date &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="2">
+        <label>neforce::iobject&lt; date &gt;</label>
+        <link refid="structneforce_1_1iobject"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::istringify&lt; date &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="91" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="91" bodyend="445"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1date_1a5c25daee766f76f3e28d859b672d6831" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>clear</name></member>
+      <member refid="classneforce_1_1date_1a26407ec7e06f4f47fb02e816e0ff0ea3" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>date</name></member>
+      <member refid="classneforce_1_1date_1a5470e70f2b411ee583c16ebe1e9a266c" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>date</name></member>
+      <member refid="classneforce_1_1date_1aa697d308043f8eb903845b3b2a2109b3" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>date</name></member>
+      <member refid="classneforce_1_1date_1a80aa666b32995664a341e6451b6b6743" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>date</name></member>
+      <member refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>date_type</name></member>
+      <member refid="classneforce_1_1date_1a187bf1e8653897dc07c8c3928a5c4625" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>day</name></member>
+      <member refid="classneforce_1_1date_1ad1d23fa10e21f79d983977bbbf827eb4" prot="private" virt="non-virtual"><scope>neforce::date</scope><name>day_</name></member>
+      <member refid="classneforce_1_1date_1af92c7601be30731233b7de9a62c7e457" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>days_of_month</name></member>
+      <member refid="classneforce_1_1date_1ac0dc03a3955691f2292d2c075f0fbe29" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>days_of_week</name></member>
+      <member refid="classneforce_1_1date_1a14361637d08a3e15da3fbfe990c52eb4" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>days_of_year</name></member>
+      <member refid="classneforce_1_1date_1ae60eec5f4f5b2d85386e2d00083793cc" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>epoch</name></member>
+      <member refid="classneforce_1_1date_1ac02fcd88aaba4152cef3d81be88437e4" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>equal_to</name></member>
+      <member refid="classneforce_1_1date_1ae867f63da66effb7183ed48bf06128f1" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>from_julian_day</name></member>
+      <member refid="classneforce_1_1date_1afdb5fae655b692439684926ee51327e1" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>is_leap_year</name></member>
+      <member refid="classneforce_1_1date_1a5a6148003ea66340760da5d1528e1eec" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>is_valid</name></member>
+      <member refid="classneforce_1_1date_1ac0cbfc2dbd8d8dde32eeb0b24c18f60d" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>is_valid</name></member>
+      <member refid="classneforce_1_1date_1aac4221ea9abbeba0accbff4159342429" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>less_than</name></member>
+      <member refid="classneforce_1_1date_1a451af9a42b84f5589cac01a83ed4f619" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>month</name></member>
+      <member refid="classneforce_1_1date_1a7e9fd1fa70c46df8994e340acad30012" prot="private" virt="non-virtual"><scope>neforce::date</scope><name>month_</name></member>
+      <member refid="classneforce_1_1date_1adc9c55f3f00d310b6ed588a1cd6bd3c9" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>month_days</name></member>
+      <member refid="structneforce_1_1icomparable_1aa385e40eb8ac8bdae736966ad0cf568f" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>operator!=</name></member>
+      <member refid="classneforce_1_1date_1af030dcd4d950f191670e818b616303be" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>operator+</name></member>
+      <member refid="classneforce_1_1date_1abe97ee81968db716b64160e67a74cc5b" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>operator++</name></member>
+      <member refid="classneforce_1_1date_1a76663c905a65ad44b5f127261509067d" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>operator++</name></member>
+      <member refid="classneforce_1_1date_1a0bf230d4c039ea78d5a041f76e2638b7" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>operator+=</name></member>
+      <member refid="classneforce_1_1date_1acc685114357fb033caa5ad1941c3e6b5" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>operator-</name></member>
+      <member refid="classneforce_1_1date_1a0df8d75bd3c23f4cdbdab3ecf8094000" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>operator-</name></member>
+      <member refid="classneforce_1_1date_1ab0700ec866dd2952ec06a1881e92ad0d" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>operator-=</name></member>
+      <member refid="structneforce_1_1icomparable_1a0641b58de65d6a0d5b87c2bcb47496a4" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>operator&lt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a313fba4bce20aced1ff0e6173ad6aab2" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>operator&lt;=</name></member>
+      <member refid="classneforce_1_1date_1a5b8daaf0e326c5980e434dd41b4308b3" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1date_1ae1ff2d5fd015450ee2d4b49b205164ab" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1icomparable_1ab9b06f7293eb15299f8c7d5341bfbc83" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>operator==</name></member>
+      <member refid="structneforce_1_1icomparable_1ab8de930acec5c0261656b787f576f08d" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>operator&gt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a644c6002f703eb487427daadfec8fb16" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>operator&gt;=</name></member>
+      <member refid="classneforce_1_1date_1a6ef3498fbe31f937f30fdd0dd1da23d5" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>parse</name></member>
+      <member refid="classneforce_1_1date_1a990cb2591f0c9a520ad06ea1cbc739da" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>swap</name></member>
+      <member refid="classneforce_1_1date_1a4f156a42b72f8cac7b106533826f05cf" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>to_hash</name></member>
+      <member refid="structneforce_1_1ihashable_1a3bedfaa42740465ea8b6e58309c1f67e" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>to_ihash</name></member>
+      <member refid="classneforce_1_1date_1accd859e2b9ad4545c4589906c8a295b8" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>to_julian_day</name></member>
+      <member refid="classneforce_1_1date_1a3d5a506ee6dba414ece56bd1b7f809f7" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>to_string</name></member>
+      <member refid="structneforce_1_1iobject_1ae8235cec74a7cfe8188d40827d5293d4" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>try_parse</name></member>
+      <member refid="classneforce_1_1date_1af7a9cb48a1c469f365cade607c2a9925" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>year</name></member>
+      <member refid="classneforce_1_1date_1af49b99dde56f7107dbe0084e90b92d18" prot="private" virt="non-virtual"><scope>neforce::date</scope><name>year_</name></member>
+      <member refid="classneforce_1_1date_1aa6a0ba4adda32419ced5c25014a5bada" prot="public" virt="non-virtual"><scope>neforce::date</scope><name>~date</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

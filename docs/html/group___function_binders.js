@@ -2,20 +2,20 @@ var group___function_binders =
 [
     [ "binder&lt; Sign &gt;", "classbinder.html", null ],
     [ "binder&lt; Func(BoundArgs...)&gt;", "classbinder_3_01_func_07_bound_args_8_8_8_08_4.html", [
-      [ "binder", "classbinder_3_01_func_07_bound_args_8_8_8_08_4.html#a53f02d4eebc749aa7d1399681fbf68f5", null ],
+      [ "binder", "classbinder_3_01_func_07_bound_args_8_8_8_08_4.html#a5d5e0e04c691bc56b95d9e7705ba9189", null ],
       [ "binder", "classbinder_3_01_func_07_bound_args_8_8_8_08_4.html#ab2beb6d02f0dfb44c226ff3f0c83e12e", null ],
       [ "binder", "classbinder_3_01_func_07_bound_args_8_8_8_08_4.html#af4553a79833cf454a9d30dafd98335d9", null ],
-      [ "operator()", "classbinder_3_01_func_07_bound_args_8_8_8_08_4.html#a4b93585b1bd2955bab445c5b9a4c0aa0", null ],
-      [ "operator()", "classbinder_3_01_func_07_bound_args_8_8_8_08_4.html#a8923e33c1ccf96324d98f9491c14d99b", null ]
+      [ "operator()", "classbinder_3_01_func_07_bound_args_8_8_8_08_4.html#a23a5ee9d90c6199210c5761d90ad315f", null ],
+      [ "operator()", "classbinder_3_01_func_07_bound_args_8_8_8_08_4.html#afafff168919cd070c83c170e2b7f7202", null ]
     ] ],
     [ "bindrer&lt; Res, Sign &gt;", "classbindrer.html", null ],
     [ "bindrer&lt; Res, Func(BoundArgs...)&gt;", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html", [
       [ "result_type", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#a3224136943f76f1417f3be4108c07965", null ],
-      [ "bindrer", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#ad669acab046288975f19c63c0d9f455b", null ],
+      [ "bindrer", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#ac6e3eb6e103560c591f60c0bef2f1d8d", null ],
       [ "bindrer", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#a76d766d50c3731014425e7a93a1e3c50", null ],
       [ "bindrer", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#a7184a66838077130cf8045e1d99b878d", null ],
-      [ "operator()", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#acebad430f663cac8783998b36ebfb46c", null ],
-      [ "operator()", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#af8b0dc48cde65c786950abb3b8e001e8", null ]
+      [ "operator()", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#a58b4207fbd4562c99ccbea1ef49cfc85", null ],
+      [ "operator()", "classbindrer_3_01_res_00_01_func_07_bound_args_8_8_8_08_4.html#ac75a60a5d35a7c24455519e9137a6b41", null ]
     ] ],
     [ "bind_helper&lt; IntLike, Func, BoundArgs &gt;", "structbind__helper.html", [
       [ "func_type", "structbind__helper.html#ad694d535b2d8a646b893890612aaa007", null ],
@@ -37,7 +37,7 @@ var group___function_binders =
     [ "bind_helper_t", "group___function_binders.html#gaaf0fa7c3eafa3f876acbc6be2279a9f9", null ],
     [ "binder_front_type", "group___function_binders.html#gaa8edf673d24f0a45eb8ce43d4071e8a8", null ],
     [ "bindr_helper_t", "group___function_binders.html#gaa5a92e90a3ca473839441b27e57ca6ac", null ],
-    [ "bind_front", "group___function_binders.html#gae7e8b424e5e9e6f6d873383b66e23c60", null ],
-    [ "NEFORCE_DEPRECATED_FOR", "group___function_binders.html#gac88a3a275337035d2202a893204c9909", null ],
-    [ "NEFORCE_DEPRECATED_FOR", "group___function_binders.html#ga5b24c8c877b5a64a99ff339d33f27032", null ]
+    [ "bind_front", "group___function_binders.html#ga66bfcbcd5b6bb9cb6df055b38d1a5f17", null ],
+    [ "NEFORCE_DEPRECATED_FOR", "group___function_binders.html#ga735d7a66a48afa25064e760a02effb9d", null ],
+    [ "NEFORCE_DEPRECATED_FOR", "group___function_binders.html#ga2bd8c60e21f8f039828d61ee454822a9", null ]
 ];

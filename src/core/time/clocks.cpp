@@ -101,22 +101,28 @@ steady_clock::time_point steady_clock::now() noexcept {
 
 milliseconds relative_time(const int64_t sec, const int64_t nsec, const bool is_monotonic) noexcept {
     const nanoseconds abs_ns = seconds(sec) + nanoseconds(nsec);
-
     nanoseconds diff_ns;
+
     if (is_monotonic) {
-        diff_ns = abs_ns - steady_clock::now().since_epoch();
+        const auto now_ns = steady_clock::now().since_epoch();
+        diff_ns = abs_ns - now_ns;
     } else {
         const auto abs_time = system_clock::time_point(abs_ns);
         diff_ns = abs_time - system_clock::now();
     }
+
     if (diff_ns <= 0_ns) {
         return 0_ms;
     }
 
     const milliseconds diff_ms = diff_ns.to_milli();
-    constexpr int64_t max_uint32 = numeric_traits<uint32_t>::max();
-    if (diff_ms.count() > max_uint32 - 1) {
-        return milliseconds(max_uint32 - 1);
+    if (diff_ms.count() == 0) {
+        return milliseconds(1);
+    }
+
+    constexpr int64_t max_timeout = numeric_traits<::DWORD>::max() - 1;
+    if (diff_ms.count() > max_timeout) {
+        return milliseconds(max_timeout);
     }
     return diff_ms;
 }

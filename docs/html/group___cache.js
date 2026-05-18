@@ -8,16 +8,16 @@ var group___cache =
       [ "time_point", "classlru__cache.html#adeb130b554929a695109f792972e2422", null ],
       [ "value_type", "classlru__cache.html#a61044e4d2a9410f5292b950fce2970e0", null ],
       [ "lru_cache", "classlru__cache.html#aa82df920dfc5477ffa7f24c890710f5f", null ],
-      [ "capacity", "classlru__cache.html#ad429db08175b2e435cb5f4ff5cbd20b0", null ],
+      [ "capacity", "classlru__cache.html#a59243f8062e6420f9e191f0ccfaf2b0d", null ],
       [ "clear", "classlru__cache.html#ab590b9fac875677e4d419e0896eaf3c0", null ],
-      [ "contains", "classlru__cache.html#ac2df6da252a87415559a9d73d5ffca77", null ],
+      [ "contains", "classlru__cache.html#ad54bc292a64298d71799e7d68f841d4f", null ],
       [ "erase", "classlru__cache.html#ad51a6a89091afd89fd41bd9e40e8be09", null ],
-      [ "get", "classlru__cache.html#aa92267d21c4dfd557110cf8a4f62098b", null ],
-      [ "peek", "classlru__cache.html#afedb8af9733008df427dba7e42b13a80", null ],
+      [ "get", "classlru__cache.html#abdd771c5ae3b25f6feba98a4175e25e6", null ],
+      [ "peek", "classlru__cache.html#a700e08c93465a073060fdebe08fa2aa6", null ],
       [ "put", "classlru__cache.html#a4a71e61754ae48fad15dc287f60c9f5c", null ],
       [ "remove_expired", "classlru__cache.html#a82764435595a401f7bcfb8cb3cbe5938", null ],
       [ "remove_if", "classlru__cache.html#aaa0b895d5dab968d375ad526d265a7ae", null ],
-      [ "size", "classlru__cache.html#afcd36edda0227ed552d370cd67872421", null ]
+      [ "size", "classlru__cache.html#af67d0f60941965128051962854e581c0", null ]
     ] ],
     [ "ttl_cache&lt; Key, Value &gt;", "classttl__cache.html", [
       [ "clock", "classttl__cache.html#a889f01b5343ab704593312acfa6ce7a5", null ],
@@ -31,17 +31,17 @@ var group___cache =
       ] ],
       [ "ttl_cache", "classttl__cache.html#afd3bb71b760cd402dbe4e789d7eb997a", null ],
       [ "~ttl_cache", "classttl__cache.html#a5fe3c567f6eb5008f9cf90e9a6927414", null ],
-      [ "capacity", "classttl__cache.html#aba7c51f6c589f3a185e52da1c1279527", null ],
+      [ "capacity", "classttl__cache.html#a19bada7def24ef6e9bbe795462091ff4", null ],
       [ "cleanup", "classttl__cache.html#a28c11bd9546c0dd4d5c9940f3004cf06", null ],
       [ "clear", "classttl__cache.html#a88d04a5412e4a952f2024d2f394a8a9c", null ],
-      [ "contains", "classttl__cache.html#af79af10a945a03c93929640c2ea1a3d1", null ],
+      [ "contains", "classttl__cache.html#ac7356a533fba2418a1c03ee873df0361", null ],
       [ "disable_cleanup", "classttl__cache.html#af3f4a1979207756e29404fd7a33dea06", null ],
       [ "enable_cleanup", "classttl__cache.html#a87ea66b78a7feaf76c164f302a253108", null ],
       [ "erase", "classttl__cache.html#af6a7bf7a5a0fb14a5c10073f485c2859", null ],
-      [ "get", "classttl__cache.html#a2c3334d939dc453dc2c246f074be7c4f", null ],
+      [ "get", "classttl__cache.html#ab500f02fa13fcc31e3e4a4af955d9b0f", null ],
       [ "put", "classttl__cache.html#ad3cea11cd1c41ac8cd92ccaaa5e571d2", null ],
       [ "put", "classttl__cache.html#af132dfb27832c5ddc329d050d8220677", null ],
       [ "set_refresh_policy", "classttl__cache.html#aed97efbb6d01c5f2b42860a36a75799f", null ],
-      [ "size", "classttl__cache.html#a0577798291c247135875ca01925dda8b", null ]
+      [ "size", "classttl__cache.html#a45b1e58ca954638bedcc1aaabcdb63e2", null ]
     ] ]
 ];

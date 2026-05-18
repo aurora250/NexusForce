@@ -1,0 +1,3072 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1sql__builder" kind="class" language="C++" prot="public">
+    <compoundname>neforce::sql_builder</compoundname>
+    <includes refid="sql__builder_8hpp" local="no">sql_builder.hpp</includes>
+    <innerclass refid="structneforce_1_1sql__builder_1_1select__data" prot="public">neforce::sql_builder::select_data</innerclass>
+    <innerclass refid="structneforce_1_1sql__builder_1_1insert__data" prot="public">neforce::sql_builder::insert_data</innerclass>
+    <innerclass refid="structneforce_1_1sql__builder_1_1update__data" prot="public">neforce::sql_builder::update_data</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1sql__builder_1ae8db2f7bcdb158f790abd135cf3d9f1a" prot="private" static="no" mutable="no">
+        <type><ref refid="group___s_q_l_1gac92e76c60dd8cdf4047f063ebcba156e" kindref="member">sql_operate</ref></type>
+        <definition>sql_operate neforce::sql_builder::sql_type_</definition>
+        <argsstring></argsstring>
+        <name>sql_type_</name>
+        <qualifiedname>neforce::sql_builder::sql_type_</qualifiedname>
+        <initializer>= <ref refid="group___s_q_l_1ggac92e76c60dd8cdf4047f063ebcba156ea63225f19fccb18e7c709f1fa11bc738e" kindref="member">sql_operate::SELECT</ref></initializer>
+        <briefdescription>
+<para>当前SQL操作类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="130" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sql__builder_1a93e035d55d6c008a15f58f1d412384e7" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::sql_builder::table_</definition>
+        <argsstring></argsstring>
+        <name>table_</name>
+        <qualifiedname>neforce::sql_builder::table_</qualifiedname>
+        <briefdescription>
+<para>主表名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="131" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sql__builder_1ad055d0a2c2406435caa8a17a7a6cb4f5" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::sql_builder::table_alias_</definition>
+        <argsstring></argsstring>
+        <name>table_alias_</name>
+        <qualifiedname>neforce::sql_builder::table_alias_</qualifiedname>
+        <briefdescription>
+<para>主表别名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="132" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sql__builder_1ad23856edf6148f160dd486245350f132" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+        <definition>vector&lt;string&gt; neforce::sql_builder::where_conditions_</definition>
+        <argsstring></argsstring>
+        <name>where_conditions_</name>
+        <qualifiedname>neforce::sql_builder::where_conditions_</qualifiedname>
+        <briefdescription>
+<para>WHERE条件列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="133" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sql__builder_1abad5cdbdeaf5864c072c34ceaec1b5ae" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structneforce_1_1sql__builder_1_1select__data" kindref="compound">select_data</ref> &gt;</type>
+        <definition>unique_ptr&lt;select_data&gt; neforce::sql_builder::select_data_</definition>
+        <argsstring></argsstring>
+        <name>select_data_</name>
+        <qualifiedname>neforce::sql_builder::select_data_</qualifiedname>
+        <briefdescription>
+<para>SELECT专用数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="135" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sql__builder_1a01c6c33a2e2d7da716079647c5ce8a0f" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structneforce_1_1sql__builder_1_1insert__data" kindref="compound">insert_data</ref> &gt;</type>
+        <definition>unique_ptr&lt;insert_data&gt; neforce::sql_builder::insert_data_</definition>
+        <argsstring></argsstring>
+        <name>insert_data_</name>
+        <qualifiedname>neforce::sql_builder::insert_data_</qualifiedname>
+        <briefdescription>
+<para>INSERT专用数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="136" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1sql__builder_1a0090eb6177b9041569f8e65a230a733e" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structneforce_1_1sql__builder_1_1update__data" kindref="compound">update_data</ref> &gt;</type>
+        <definition>unique_ptr&lt;update_data&gt; neforce::sql_builder::update_data_</definition>
+        <argsstring></argsstring>
+        <name>update_data_</name>
+        <qualifiedname>neforce::sql_builder::update_data_</qualifiedname>
+        <briefdescription>
+<para>UPDATE专用数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="137" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="137" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a1dcd86b1250ca2e48dae847e0edd3f52" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1sql__builder_1_1select__data" kindref="compound">select_data</ref> *</type>
+        <definition>select_data * neforce::sql_builder::ensure_select_data</definition>
+        <argsstring>()</argsstring>
+        <name>ensure_select_data</name>
+        <qualifiedname>neforce::sql_builder::ensure_select_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="140" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1af7e64cc08f5dd4ebc357880c81f9a138" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1sql__builder_1_1insert__data" kindref="compound">insert_data</ref> *</type>
+        <definition>insert_data * neforce::sql_builder::ensure_insert_data</definition>
+        <argsstring>()</argsstring>
+        <name>ensure_insert_data</name>
+        <qualifiedname>neforce::sql_builder::ensure_insert_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="141" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1af1a5aaac9827a92a4fd34692301ac2c1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1sql__builder_1_1update__data" kindref="compound">update_data</ref> *</type>
+        <definition>update_data * neforce::sql_builder::ensure_update_data</definition>
+        <argsstring>()</argsstring>
+        <name>ensure_update_data</name>
+        <qualifiedname>neforce::sql_builder::ensure_update_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="142" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1af992b2ae9898ae99a81a3b44f497ca44" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::sql_builder::clear_data</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear_data</name>
+        <qualifiedname>neforce::sql_builder::clear_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="144" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sql_builder::sql_builder</definition>
+        <argsstring>()=default</argsstring>
+        <name>sql_builder</name>
+        <qualifiedname>neforce::sql_builder::sql_builder</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="150" column="5"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a39337cf84203f75af1786b94bedd891b">columns</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ace22e1de2bf8e3f967cb2c335be32a7b">delete_from</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a020dceb98423e91c8f550adc8f166dbd">distinct</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a0718737b88d5b899750f0b7058f26fc9">from</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aca5aa00c371f739ce9e8f584e326567c">from</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aaccd308e17eb2392f75b110524fc16bc">from_subquery</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1acddeaa90ee349d273fe1338e883e42d0">full_join</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a54539bc3881860ddbc7e7f96f9fbfc72">group_by</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a7e8f6fb7ea2f59868e7f43d191df5e62">group_by</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1abec47959b9eb41572abca8adcc9516a7">having</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ae267a041bb47c804dfd2cdd381302969">inner_join</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1adf78d24e80408e815ba00d0f6af80160">insert_into</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ad745c8a8297e33abe082a9d193690c66">insert_into</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aec5ad2875055beac2cd8b0f23041c5af">join</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aa79ed08fee9ab1a5f3d84bcf243d0e9f">join</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aa8a9518fc28abddcc6ac49bfa41287c4">left_join</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ae69d7b4985f8cefd50864e4ddb7539d5">limit</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aa0b318c43bb90a80c41cab2cc48ed929">offset</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a77b876554c9e0aa0ef53b8be42fa2d63">operator=</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ab37893d9ab045d4816d140898ad1d5d0">or_where</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a8e6dc1568b5b6c76b4c7f77d2b48564a">order_by</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a202f15a26121de6967f568468eb677e9">order_by_asc</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a3033a0130a25ed3405a125953502d4ce">order_by_desc</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a3ff35e70de1a1f1743135062a6741c02">page</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a9793517d80a9533e5475a15f3fd19bfc">remove</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a29d221c7736bc72ee556c09562f4d80a">reset</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a09fd915ca49e3e48888e0926c8297824">right_join</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a36625fed23583ba6db81f433b1dc1ec3">select</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ac69a650165add7b45f90caee4a5c4996">select</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ab418d44cdddaef9874640123b2a35914">select</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aa761ee49efaaa3a3b2317af9dd7f6722">select_all</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1accdba64bb7e4b46abe2e64c38db69039">select_avg</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aaec10cac28fa8e3965945dbe8b84129c">select_avg</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aa94073589771572cc2a23e46aa76d4d4">select_count</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a472106c714196442520e427e5d5e9bf9">select_count</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a37be3dbcbdf9bfeddf7719b901a428f8">select_count</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a904c4d2c2dd304fee2a97871e174385c">select_distinct</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a2f4a6d0812010e563fc21a99b5063de8">select_max</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a33b06eac54eb183d1975fde6406490f1">select_max</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a86f40453ba8c32650ff06b47d7217133">select_min</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aa2a5a8fcffc357f6c60b43d7f6d3ccd2">select_min</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a4bb5c31365515dac4534cdc221443e4e">select_subquery</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a982887358f5190b42482d3abadcfcbad">select_subquery</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a154dd3d5999b39b255b3b74c2aa7fa90">select_sum</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aa8a4efdfbff24cfb85ea64861695ed05">select_sum</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ae6a9336ba052d0e71fc598b6444dd922">set</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a163450f1eed4f2ddf8e7f49c87771984">set</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aa0aac8a38582b265c64357b3ea632b96">set_decrement</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a9a6ea542bbe277dfc6b101e74ff68947">set_increment</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1abe1600d8a2eb774ec722e0a78cbb6e45">sql_builder</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1abbd11419a3ae75adfc9b676bb0e0af61">update</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a9bfa2029c2163486517bf0f4c35c94b8">values</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a9e5096a8155300e9de266524df2f802e">where</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ac35f392e8977ca10a6570533901e7b5c">where_between</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a03f6ecb3f1a0ca37993a3e3778264075">where_eq</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a7c3c303bf39ca391ee3ca5705b6bea97">where_exists</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a36601852bc91dbbe14cd131cdd5411e9">where_ge</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a251915e0eefcad6e0243ce3301155464">where_gt</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a4d76746b7afc0ac50ac265e59e918340">where_in</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a7d1528767562c1589dff216be905c4aa">where_is_not_null</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a83f413081864fb63ab6de53b3a0a53f8">where_is_null</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a1d0c41f0fd155f162005c233d96ed716">where_le</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a67b9bd82625db3f2b0845779d27315f4">where_like</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a0ef361a58a9602cf8a3c32a7e285fe21">where_lt</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1af19acd4fe38b35fcbdaeda8a866e1466">where_ne</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ae37b2d68b84bfb8edaa98c1eea1ebec8">where_not_between</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a680f28a7b0298d3b9184fe7e3303499e">where_not_exists</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ae772454b8f2c5111c5b27cbfde19189e">where_not_in</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a947598b572d1a0f37286a664b32cdd28">where_not_like</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a1a2248d0e773b872632fc8cd96167940">~sql_builder</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a1a2248d0e773b872632fc8cd96167940" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sql_builder::~sql_builder</definition>
+        <argsstring>()=default</argsstring>
+        <name>~sql_builder</name>
+        <qualifiedname>neforce::sql_builder::~sql_builder</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="155" column="5"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1abe1600d8a2eb774ec722e0a78cbb6e45" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sql_builder::sql_builder</definition>
+        <argsstring>(const sql_builder &amp;other)</argsstring>
+        <name>sql_builder</name>
+        <qualifiedname>neforce::sql_builder::sql_builder</qualifiedname>
+        <param>
+          <type>const sql_builder &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="161" column="5"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a77b876554c9e0aa0ef53b8be42fa2d63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::operator=</definition>
+        <argsstring>(const sql_builder &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::sql_builder::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="168" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1afbe18431b4f4848de1c81803b99b007a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::sql_builder::sql_builder</definition>
+        <argsstring>(sql_builder &amp;&amp;) noexcept=default</argsstring>
+        <name>sql_builder</name>
+        <qualifiedname>neforce::sql_builder::sql_builder</qualifiedname>
+        <param>
+          <type>sql_builder &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="170" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1ac3bc75870ce78234a6194d653d1e8fdc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::operator=</definition>
+        <argsstring>(sql_builder &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::sql_builder::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="171" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1ab418d44cdddaef9874640123b2a35914" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select</definition>
+        <argsstring>(vector&lt; string &gt; fields)</argsstring>
+        <name>select</name>
+        <qualifiedname>neforce::sql_builder::select</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+          <declname>fields</declname>
+        </param>
+        <briefdescription>
+<para>列表设置SELECT字段 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fields</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="178" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1ab418d44cdddaef9874640123b2a35914">select</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a36625fed23583ba6db81f433b1dc1ec3">select</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ac69a650165add7b45f90caee4a5c4996">select</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ab418d44cdddaef9874640123b2a35914">select</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a36625fed23583ba6db81f433b1dc1ec3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select</definition>
+        <argsstring>(std::initializer_list&lt; string &gt; fields)</argsstring>
+        <name>select</name>
+        <qualifiedname>neforce::sql_builder::select</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+          <declname>fields</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表设置SELECT字段 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fields</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="185" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1ab418d44cdddaef9874640123b2a35914">select</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1ac69a650165add7b45f90caee4a5c4996" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select</definition>
+        <argsstring>(string field)</argsstring>
+        <name>select</name>
+        <qualifiedname>neforce::sql_builder::select</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <briefdescription>
+<para>添加SELECT字段 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="192" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1ab418d44cdddaef9874640123b2a35914">select</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1aa761ee49efaaa3a3b2317af9dd7f6722" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select_all</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>select_all</name>
+        <qualifiedname>neforce::sql_builder::select_all</qualifiedname>
+        <briefdescription>
+<para>选择所有字段（SELECT *） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="198" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1aa761ee49efaaa3a3b2317af9dd7f6722">select_all</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1aa761ee49efaaa3a3b2317af9dd7f6722">select_all</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a020dceb98423e91c8f550adc8f166dbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::distinct</definition>
+        <argsstring>()</argsstring>
+        <name>distinct</name>
+        <qualifiedname>neforce::sql_builder::distinct</qualifiedname>
+        <briefdescription>
+<para>添加DISTINCT关键字 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="204" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a020dceb98423e91c8f550adc8f166dbd">distinct</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a020dceb98423e91c8f550adc8f166dbd">distinct</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a0718737b88d5b899750f0b7058f26fc9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::from</definition>
+        <argsstring>(string table) noexcept</argsstring>
+        <name>from</name>
+        <qualifiedname>neforce::sql_builder::from</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+<para>设置主表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="211" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a0718737b88d5b899750f0b7058f26fc9">from</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a2b531b33d0acf8ffd5389b4371f22e16" compoundref="sql__builder_8hpp" startline="619" endline="619">table</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a0718737b88d5b899750f0b7058f26fc9">from</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aca5aa00c371f739ce9e8f584e326567c">from</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1aca5aa00c371f739ce9e8f584e326567c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::from</definition>
+        <argsstring>(string table, string alias) noexcept</argsstring>
+        <name>from</name>
+        <qualifiedname>neforce::sql_builder::from</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>alias</declname>
+        </param>
+        <briefdescription>
+<para>设置主表并指定别名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>alias</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表别名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="219" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a0718737b88d5b899750f0b7058f26fc9">from</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a2b531b33d0acf8ffd5389b4371f22e16" compoundref="sql__builder_8hpp" startline="619" endline="619">table</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1aec5ad2875055beac2cd8b0f23041c5af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::join</definition>
+        <argsstring>(sql_join type, string table, string on_condition)</argsstring>
+        <name>join</name>
+        <qualifiedname>neforce::sql_builder::join</qualifiedname>
+        <param>
+          <type><ref refid="group___s_q_l_1ga924dddbaa5f4681a8f5de4a1ebaa18fa" kindref="member">sql_join</ref></type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>on_condition</declname>
+        </param>
+        <briefdescription>
+<para>添加JOIN子句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>JOIN类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接表名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>on_condition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ON条件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="228" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1aec5ad2875055beac2cd8b0f23041c5af">join</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a2b531b33d0acf8ffd5389b4371f22e16" compoundref="sql__builder_8hpp" startline="619" endline="619">table</references>
+        <references refid="classneforce_1_1sql__builder_1a8e815d1d71667ae4bdb249c5364889a1" compoundref="sql__builder_8hpp" startline="613" endline="613">type</references>
+        <referencedby refid="classneforce_1_1sql__builder_1aec5ad2875055beac2cd8b0f23041c5af">join</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aa79ed08fee9ab1a5f3d84bcf243d0e9f">join</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1aa79ed08fee9ab1a5f3d84bcf243d0e9f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::join</definition>
+        <argsstring>(string table, string on_condition)</argsstring>
+        <name>join</name>
+        <qualifiedname>neforce::sql_builder::join</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>on_condition</declname>
+        </param>
+        <briefdescription>
+<para>添加INNER JOIN子句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接表名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>on_condition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ON条件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="236" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1aec5ad2875055beac2cd8b0f23041c5af">join</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a2b531b33d0acf8ffd5389b4371f22e16" compoundref="sql__builder_8hpp" startline="619" endline="619">table</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1aa8a9518fc28abddcc6ac49bfa41287c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::left_join</definition>
+        <argsstring>(string table, string on_condition)</argsstring>
+        <name>left_join</name>
+        <qualifiedname>neforce::sql_builder::left_join</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>on_condition</declname>
+        </param>
+        <briefdescription>
+<para>添加LEFT JOIN子句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接表名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>on_condition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ON条件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="244" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1aa8a9518fc28abddcc6ac49bfa41287c4">left_join</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a2b531b33d0acf8ffd5389b4371f22e16" compoundref="sql__builder_8hpp" startline="619" endline="619">table</references>
+        <referencedby refid="classneforce_1_1sql__builder_1aa8a9518fc28abddcc6ac49bfa41287c4">left_join</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a09fd915ca49e3e48888e0926c8297824" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::right_join</definition>
+        <argsstring>(string table, string on_condition)</argsstring>
+        <name>right_join</name>
+        <qualifiedname>neforce::sql_builder::right_join</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>on_condition</declname>
+        </param>
+        <briefdescription>
+<para>添加RIGHT JOIN子句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接表名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>on_condition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ON条件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="252" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a09fd915ca49e3e48888e0926c8297824">right_join</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a2b531b33d0acf8ffd5389b4371f22e16" compoundref="sql__builder_8hpp" startline="619" endline="619">table</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a09fd915ca49e3e48888e0926c8297824">right_join</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1ae267a041bb47c804dfd2cdd381302969" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::inner_join</definition>
+        <argsstring>(string table, string on_condition)</argsstring>
+        <name>inner_join</name>
+        <qualifiedname>neforce::sql_builder::inner_join</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>on_condition</declname>
+        </param>
+        <briefdescription>
+<para>添加INNER JOIN子句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接表名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>on_condition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ON条件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="260" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1ae267a041bb47c804dfd2cdd381302969">inner_join</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a2b531b33d0acf8ffd5389b4371f22e16" compoundref="sql__builder_8hpp" startline="619" endline="619">table</references>
+        <referencedby refid="classneforce_1_1sql__builder_1ae267a041bb47c804dfd2cdd381302969">inner_join</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1acddeaa90ee349d273fe1338e883e42d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::full_join</definition>
+        <argsstring>(string table, string on_condition)</argsstring>
+        <name>full_join</name>
+        <qualifiedname>neforce::sql_builder::full_join</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>on_condition</declname>
+        </param>
+        <briefdescription>
+<para>添加FULL JOIN子句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接表名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>on_condition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ON条件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="268" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1acddeaa90ee349d273fe1338e883e42d0">full_join</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a2b531b33d0acf8ffd5389b4371f22e16" compoundref="sql__builder_8hpp" startline="619" endline="619">table</references>
+        <referencedby refid="classneforce_1_1sql__builder_1acddeaa90ee349d273fe1338e883e42d0">full_join</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a9e5096a8155300e9de266524df2f802e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where</definition>
+        <argsstring>(string condition)</argsstring>
+        <name>where</name>
+        <qualifiedname>neforce::sql_builder::where</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>condition</declname>
+        </param>
+        <briefdescription>
+<para>添加WHERE条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>condition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>条件表达式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="275" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a9e5096a8155300e9de266524df2f802e">where</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a9e5096a8155300e9de266524df2f802e">where</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a03f6ecb3f1a0ca37993a3e3778264075" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where_eq</definition>
+        <argsstring>(string field, string value)</argsstring>
+        <name>where_eq</name>
+        <qualifiedname>neforce::sql_builder::where_eq</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>添加相等条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="283" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a03f6ecb3f1a0ca37993a3e3778264075">where_eq</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a03f6ecb3f1a0ca37993a3e3778264075">where_eq</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1af19acd4fe38b35fcbdaeda8a866e1466" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where_ne</definition>
+        <argsstring>(string field, string value)</argsstring>
+        <name>where_ne</name>
+        <qualifiedname>neforce::sql_builder::where_ne</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>添加不等条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="291" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1af19acd4fe38b35fcbdaeda8a866e1466">where_ne</references>
+        <referencedby refid="classneforce_1_1sql__builder_1af19acd4fe38b35fcbdaeda8a866e1466">where_ne</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a251915e0eefcad6e0243ce3301155464" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where_gt</definition>
+        <argsstring>(string field, string value)</argsstring>
+        <name>where_gt</name>
+        <qualifiedname>neforce::sql_builder::where_gt</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>添加大于条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="299" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a251915e0eefcad6e0243ce3301155464">where_gt</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a251915e0eefcad6e0243ce3301155464">where_gt</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a36601852bc91dbbe14cd131cdd5411e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where_ge</definition>
+        <argsstring>(string field, string value)</argsstring>
+        <name>where_ge</name>
+        <qualifiedname>neforce::sql_builder::where_ge</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>添加大于等于条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="307" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a36601852bc91dbbe14cd131cdd5411e9">where_ge</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a36601852bc91dbbe14cd131cdd5411e9">where_ge</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a0ef361a58a9602cf8a3c32a7e285fe21" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where_lt</definition>
+        <argsstring>(string field, string value)</argsstring>
+        <name>where_lt</name>
+        <qualifiedname>neforce::sql_builder::where_lt</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>添加小于条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="315" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a0ef361a58a9602cf8a3c32a7e285fe21">where_lt</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a0ef361a58a9602cf8a3c32a7e285fe21">where_lt</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a1d0c41f0fd155f162005c233d96ed716" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where_le</definition>
+        <argsstring>(string field, string value)</argsstring>
+        <name>where_le</name>
+        <qualifiedname>neforce::sql_builder::where_le</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>添加小于等于条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="323" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a1d0c41f0fd155f162005c233d96ed716">where_le</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a1d0c41f0fd155f162005c233d96ed716">where_le</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a67b9bd82625db3f2b0845779d27315f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where_like</definition>
+        <argsstring>(string field, string pattern)</argsstring>
+        <name>where_like</name>
+        <qualifiedname>neforce::sql_builder::where_like</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>pattern</declname>
+        </param>
+        <briefdescription>
+<para>添加LIKE条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pattern</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>模式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="331" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a67b9bd82625db3f2b0845779d27315f4">where_like</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a67b9bd82625db3f2b0845779d27315f4">where_like</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a947598b572d1a0f37286a664b32cdd28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where_not_like</definition>
+        <argsstring>(string field, string pattern)</argsstring>
+        <name>where_not_like</name>
+        <qualifiedname>neforce::sql_builder::where_not_like</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>pattern</declname>
+        </param>
+        <briefdescription>
+<para>添加NOT LIKE条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pattern</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>模式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="339" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a947598b572d1a0f37286a664b32cdd28">where_not_like</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a947598b572d1a0f37286a664b32cdd28">where_not_like</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a4d76746b7afc0ac50ac265e59e918340" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where_in</definition>
+        <argsstring>(string field, vector&lt; string &gt; values)</argsstring>
+        <name>where_in</name>
+        <qualifiedname>neforce::sql_builder::where_in</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+          <declname>values</declname>
+        </param>
+        <briefdescription>
+<para>添加IN条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="347" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a9bfa2029c2163486517bf0f4c35c94b8">values</references>
+        <references refid="classneforce_1_1sql__builder_1a4d76746b7afc0ac50ac265e59e918340">where_in</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a4d76746b7afc0ac50ac265e59e918340">where_in</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1ae772454b8f2c5111c5b27cbfde19189e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where_not_in</definition>
+        <argsstring>(string field, vector&lt; string &gt; values)</argsstring>
+        <name>where_not_in</name>
+        <qualifiedname>neforce::sql_builder::where_not_in</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+          <declname>values</declname>
+        </param>
+        <briefdescription>
+<para>添加NOT IN条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="355" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a9bfa2029c2163486517bf0f4c35c94b8">values</references>
+        <references refid="classneforce_1_1sql__builder_1ae772454b8f2c5111c5b27cbfde19189e">where_not_in</references>
+        <referencedby refid="classneforce_1_1sql__builder_1ae772454b8f2c5111c5b27cbfde19189e">where_not_in</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1ac35f392e8977ca10a6570533901e7b5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where_between</definition>
+        <argsstring>(string field, string start, string end)</argsstring>
+        <name>where_between</name>
+        <qualifiedname>neforce::sql_builder::where_between</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>end</declname>
+        </param>
+        <briefdescription>
+<para>添加BETWEEN条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>end</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="364" column="17"/>
+        <references refid="group___type_erasure_functions_1ga187dbbbb84cf830366ba6b173bdccd62" compoundref="type__erase_8hpp" startline="41" endline="43">neforce::end</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1ac35f392e8977ca10a6570533901e7b5c">where_between</references>
+        <referencedby refid="classneforce_1_1sql__builder_1ac35f392e8977ca10a6570533901e7b5c">where_between</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1ae37b2d68b84bfb8edaa98c1eea1ebec8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where_not_between</definition>
+        <argsstring>(string field, string start, string end)</argsstring>
+        <name>where_not_between</name>
+        <qualifiedname>neforce::sql_builder::where_not_between</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>start</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>end</declname>
+        </param>
+        <briefdescription>
+<para>添加NOT BETWEEN条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>end</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="373" column="17"/>
+        <references refid="group___type_erasure_functions_1ga187dbbbb84cf830366ba6b173bdccd62" compoundref="type__erase_8hpp" startline="41" endline="43">neforce::end</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1ae37b2d68b84bfb8edaa98c1eea1ebec8">where_not_between</references>
+        <referencedby refid="classneforce_1_1sql__builder_1ae37b2d68b84bfb8edaa98c1eea1ebec8">where_not_between</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a83f413081864fb63ab6de53b3a0a53f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where_is_null</definition>
+        <argsstring>(string field)</argsstring>
+        <name>where_is_null</name>
+        <qualifiedname>neforce::sql_builder::where_is_null</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <briefdescription>
+<para>添加IS NULL条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="380" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a83f413081864fb63ab6de53b3a0a53f8">where_is_null</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a83f413081864fb63ab6de53b3a0a53f8">where_is_null</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a7d1528767562c1589dff216be905c4aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where_is_not_null</definition>
+        <argsstring>(string field)</argsstring>
+        <name>where_is_not_null</name>
+        <qualifiedname>neforce::sql_builder::where_is_not_null</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <briefdescription>
+<para>添加IS NOT NULL条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="387" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a7d1528767562c1589dff216be905c4aa">where_is_not_null</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a7d1528767562c1589dff216be905c4aa">where_is_not_null</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a7c3c303bf39ca391ee3ca5705b6bea97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where_exists</definition>
+        <argsstring>(string subquery)</argsstring>
+        <name>where_exists</name>
+        <qualifiedname>neforce::sql_builder::where_exists</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>subquery</declname>
+        </param>
+        <briefdescription>
+<para>添加EXISTS条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>subquery</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子查询 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="394" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a7c3c303bf39ca391ee3ca5705b6bea97">where_exists</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a7c3c303bf39ca391ee3ca5705b6bea97">where_exists</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a680f28a7b0298d3b9184fe7e3303499e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::where_not_exists</definition>
+        <argsstring>(string subquery)</argsstring>
+        <name>where_not_exists</name>
+        <qualifiedname>neforce::sql_builder::where_not_exists</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>subquery</declname>
+        </param>
+        <briefdescription>
+<para>添加NOT EXISTS条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>subquery</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子查询 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="401" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a680f28a7b0298d3b9184fe7e3303499e">where_not_exists</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a680f28a7b0298d3b9184fe7e3303499e">where_not_exists</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1ab37893d9ab045d4816d140898ad1d5d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::or_where</definition>
+        <argsstring>(string condition)</argsstring>
+        <name>or_where</name>
+        <qualifiedname>neforce::sql_builder::or_where</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>condition</declname>
+        </param>
+        <briefdescription>
+<para>添加OR条件（与上一个条件组合） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>condition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>条件表达式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用</para>
+</simplesect>
+将当前条件与上一个条件用OR连接。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="410" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1ab37893d9ab045d4816d140898ad1d5d0">or_where</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1ab37893d9ab045d4816d140898ad1d5d0">or_where</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a7e8f6fb7ea2f59868e7f43d191df5e62" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::group_by</definition>
+        <argsstring>(string field)</argsstring>
+        <name>group_by</name>
+        <qualifiedname>neforce::sql_builder::group_by</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <briefdescription>
+<para>添加GROUP BY字段 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="417" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a7e8f6fb7ea2f59868e7f43d191df5e62">group_by</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a54539bc3881860ddbc7e7f96f9fbfc72">group_by</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a7e8f6fb7ea2f59868e7f43d191df5e62">group_by</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a54539bc3881860ddbc7e7f96f9fbfc72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::group_by</definition>
+        <argsstring>(const vector&lt; string &gt; &amp;fields)</argsstring>
+        <name>group_by</name>
+        <qualifiedname>neforce::sql_builder::group_by</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>fields</declname>
+        </param>
+        <briefdescription>
+<para>添加GROUP BY字段列表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fields</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="424" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a7e8f6fb7ea2f59868e7f43d191df5e62">group_by</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1abec47959b9eb41572abca8adcc9516a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::having</definition>
+        <argsstring>(string condition)</argsstring>
+        <name>having</name>
+        <qualifiedname>neforce::sql_builder::having</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>condition</declname>
+        </param>
+        <briefdescription>
+<para>添加HAVING条件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>condition</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>条件表达式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="431" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1abec47959b9eb41572abca8adcc9516a7">having</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1abec47959b9eb41572abca8adcc9516a7">having</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a8e6dc1568b5b6c76b4c7f77d2b48564a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::order_by</definition>
+        <argsstring>(string field, sql_order order=sql_order::ASC)</argsstring>
+        <name>order_by</name>
+        <qualifiedname>neforce::sql_builder::order_by</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___s_q_l_1ga050b50172238242ae63e4a4f673960e3" kindref="member">sql_order</ref></type>
+          <declname>order</declname>
+          <defval><ref refid="group___s_q_l_1gga050b50172238242ae63e4a4f673960e3ac6e421eaad140c1bc1a39980502df80c" kindref="member">sql_order::ASC</ref></defval>
+        </param>
+        <briefdescription>
+<para>添加ORDER BY子句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>order</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>排序方向 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="439" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a8e6dc1568b5b6c76b4c7f77d2b48564a">order_by</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a8e6dc1568b5b6c76b4c7f77d2b48564a">order_by</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a202f15a26121de6967f568468eb677e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::order_by_asc</definition>
+        <argsstring>(string field)</argsstring>
+        <name>order_by_asc</name>
+        <qualifiedname>neforce::sql_builder::order_by_asc</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <briefdescription>
+<para>添加升序排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="446" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a202f15a26121de6967f568468eb677e9">order_by_asc</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a202f15a26121de6967f568468eb677e9">order_by_asc</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a3033a0130a25ed3405a125953502d4ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::order_by_desc</definition>
+        <argsstring>(string field)</argsstring>
+        <name>order_by_desc</name>
+        <qualifiedname>neforce::sql_builder::order_by_desc</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <briefdescription>
+<para>添加降序排序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="453" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3033a0130a25ed3405a125953502d4ce">order_by_desc</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a3033a0130a25ed3405a125953502d4ce">order_by_desc</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1ae69d7b4985f8cefd50864e4ddb7539d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::limit</definition>
+        <argsstring>(int count)</argsstring>
+        <name>limit</name>
+        <qualifiedname>neforce::sql_builder::limit</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>添加LIMIT限制 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>返回行数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="460" column="17"/>
+        <references refid="group___counting_algorithms_1ga74557c5cb91a609183df695efc54ba60" compoundref="search_8hpp" startline="391" endline="393">neforce::count</references>
+        <references refid="classneforce_1_1sql__builder_1ae69d7b4985f8cefd50864e4ddb7539d5">limit</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1ae69d7b4985f8cefd50864e4ddb7539d5">limit</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1aa0b318c43bb90a80c41cab2cc48ed929" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::offset</definition>
+        <argsstring>(int count)</argsstring>
+        <name>offset</name>
+        <qualifiedname>neforce::sql_builder::offset</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>添加OFFSET偏移 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>偏移行数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="467" column="17"/>
+        <references refid="group___counting_algorithms_1ga74557c5cb91a609183df695efc54ba60" compoundref="search_8hpp" startline="391" endline="393">neforce::count</references>
+        <references refid="classneforce_1_1sql__builder_1aa0b318c43bb90a80c41cab2cc48ed929">offset</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1aa0b318c43bb90a80c41cab2cc48ed929">offset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a3ff35e70de1a1f1743135062a6741c02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::page</definition>
+        <argsstring>(int page_num, int page_size)</argsstring>
+        <name>page</name>
+        <qualifiedname>neforce::sql_builder::page</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>page_num</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>page_size</declname>
+        </param>
+        <briefdescription>
+<para>添加分页 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>page_num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>页码（从1开始） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>page_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>每页大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="475" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3ff35e70de1a1f1743135062a6741c02">page</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a3ff35e70de1a1f1743135062a6741c02">page</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1ad745c8a8297e33abe082a9d193690c66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::insert_into</definition>
+        <argsstring>(string table, vector&lt; string &gt; fields)</argsstring>
+        <name>insert_into</name>
+        <qualifiedname>neforce::sql_builder::insert_into</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+          <declname>fields</declname>
+        </param>
+        <briefdescription>
+<para>设置INSERT INTO表名和字段 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fields</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="483" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1ad745c8a8297e33abe082a9d193690c66">insert_into</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a2b531b33d0acf8ffd5389b4371f22e16" compoundref="sql__builder_8hpp" startline="619" endline="619">table</references>
+        <referencedby refid="classneforce_1_1sql__builder_1adf78d24e80408e815ba00d0f6af80160">insert_into</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ad745c8a8297e33abe082a9d193690c66">insert_into</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1adf78d24e80408e815ba00d0f6af80160" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::insert_into</definition>
+        <argsstring>(string table)</argsstring>
+        <name>insert_into</name>
+        <qualifiedname>neforce::sql_builder::insert_into</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+<para>设置INSERT INTO表名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="490" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1ad745c8a8297e33abe082a9d193690c66">insert_into</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a2b531b33d0acf8ffd5389b4371f22e16" compoundref="sql__builder_8hpp" startline="619" endline="619">table</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a9bfa2029c2163486517bf0f4c35c94b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::values</definition>
+        <argsstring>(vector&lt; string &gt; values)</argsstring>
+        <name>values</name>
+        <qualifiedname>neforce::sql_builder::values</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+          <declname>values</declname>
+        </param>
+        <briefdescription>
+<para>设置VALUES占位符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值占位符列表（如&quot;?&quot;或实际值） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="497" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a9bfa2029c2163486517bf0f4c35c94b8">values</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a9bfa2029c2163486517bf0f4c35c94b8">values</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a4d76746b7afc0ac50ac265e59e918340">where_in</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ae772454b8f2c5111c5b27cbfde19189e">where_not_in</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a39337cf84203f75af1786b94bedd891b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::columns</definition>
+        <argsstring>(vector&lt; string &gt; fields)</argsstring>
+        <name>columns</name>
+        <qualifiedname>neforce::sql_builder::columns</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+          <declname>fields</declname>
+        </param>
+        <briefdescription>
+<para>设置INSERT字段列表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fields</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="504" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a39337cf84203f75af1786b94bedd891b">columns</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a39337cf84203f75af1786b94bedd891b">columns</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1abbd11419a3ae75adfc9b676bb0e0af61" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::update</definition>
+        <argsstring>(string table)</argsstring>
+        <name>update</name>
+        <qualifiedname>neforce::sql_builder::update</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+<para>设置UPDATE表名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="511" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a2b531b33d0acf8ffd5389b4371f22e16" compoundref="sql__builder_8hpp" startline="619" endline="619">table</references>
+        <references refid="classneforce_1_1sql__builder_1abbd11419a3ae75adfc9b676bb0e0af61">update</references>
+        <referencedby refid="classneforce_1_1sql__builder_1abbd11419a3ae75adfc9b676bb0e0af61">update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1ae6a9336ba052d0e71fc598b6444dd922" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::set</definition>
+        <argsstring>(string assignment)</argsstring>
+        <name>set</name>
+        <qualifiedname>neforce::sql_builder::set</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>assignment</declname>
+        </param>
+        <briefdescription>
+<para>添加SET赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>assignment</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>赋值表达式（如&quot;field = value&quot;） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="518" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1ae6a9336ba052d0e71fc598b6444dd922">set</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1ae6a9336ba052d0e71fc598b6444dd922">set</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a163450f1eed4f2ddf8e7f49c87771984">set</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a163450f1eed4f2ddf8e7f49c87771984" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::set</definition>
+        <argsstring>(string field, string value)</argsstring>
+        <name>set</name>
+        <qualifiedname>neforce::sql_builder::set</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>添加SET赋值（字段=值形式） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="526" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1ae6a9336ba052d0e71fc598b6444dd922">set</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a9a6ea542bbe277dfc6b101e74ff68947" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::set_increment</definition>
+        <argsstring>(string field, int value=1)</argsstring>
+        <name>set_increment</name>
+        <qualifiedname>neforce::sql_builder::set_increment</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>value</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>添加自增赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>增加量，默认为1 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="534" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a9a6ea542bbe277dfc6b101e74ff68947">set_increment</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a9a6ea542bbe277dfc6b101e74ff68947">set_increment</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1aa0aac8a38582b265c64357b3ea632b96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::set_decrement</definition>
+        <argsstring>(string field, int value=1)</argsstring>
+        <name>set_decrement</name>
+        <qualifiedname>neforce::sql_builder::set_decrement</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>value</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+<para>添加自减赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>减少量，默认为1 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="542" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1aa0aac8a38582b265c64357b3ea632b96">set_decrement</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1aa0aac8a38582b265c64357b3ea632b96">set_decrement</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a9793517d80a9533e5475a15f3fd19bfc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::remove</definition>
+        <argsstring>()</argsstring>
+        <name>remove</name>
+        <qualifiedname>neforce::sql_builder::remove</qualifiedname>
+        <briefdescription>
+<para>设置DELETE操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="548" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a9793517d80a9533e5475a15f3fd19bfc">remove</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a9793517d80a9533e5475a15f3fd19bfc">remove</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1ace22e1de2bf8e3f967cb2c335be32a7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::delete_from</definition>
+        <argsstring>(string table)</argsstring>
+        <name>delete_from</name>
+        <qualifiedname>neforce::sql_builder::delete_from</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+<para>设置DELETE FROM表名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>table</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="555" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1ace22e1de2bf8e3f967cb2c335be32a7b">delete_from</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <references refid="classneforce_1_1sql__builder_1a2b531b33d0acf8ffd5389b4371f22e16" compoundref="sql__builder_8hpp" startline="619" endline="619">table</references>
+        <referencedby refid="classneforce_1_1sql__builder_1ace22e1de2bf8e3f967cb2c335be32a7b">delete_from</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a37be3dbcbdf9bfeddf7719b901a428f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select_count</definition>
+        <argsstring>(string field, string alias)</argsstring>
+        <name>select_count</name>
+        <qualifiedname>neforce::sql_builder::select_count</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>alias</declname>
+        </param>
+        <briefdescription>
+<para>COUNT聚合 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="557" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a37be3dbcbdf9bfeddf7719b901a428f8">select_count</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1aa94073589771572cc2a23e46aa76d4d4">select_count</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a472106c714196442520e427e5d5e9bf9">select_count</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a37be3dbcbdf9bfeddf7719b901a428f8">select_count</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a472106c714196442520e427e5d5e9bf9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select_count</definition>
+        <argsstring>(string field)</argsstring>
+        <name>select_count</name>
+        <qualifiedname>neforce::sql_builder::select_count</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <briefdescription>
+<para>COUNT聚合（无别名） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="558" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a37be3dbcbdf9bfeddf7719b901a428f8">select_count</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1aa94073589771572cc2a23e46aa76d4d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select_count</definition>
+        <argsstring>()</argsstring>
+        <name>select_count</name>
+        <qualifiedname>neforce::sql_builder::select_count</qualifiedname>
+        <briefdescription>
+<para>COUNT(*) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="559" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a37be3dbcbdf9bfeddf7719b901a428f8">select_count</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1aa8a4efdfbff24cfb85ea64861695ed05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select_sum</definition>
+        <argsstring>(string field, string alias)</argsstring>
+        <name>select_sum</name>
+        <qualifiedname>neforce::sql_builder::select_sum</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>alias</declname>
+        </param>
+        <briefdescription>
+<para>SUM聚合 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="561" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1aa8a4efdfbff24cfb85ea64861695ed05">select_sum</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a154dd3d5999b39b255b3b74c2aa7fa90">select_sum</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aa8a4efdfbff24cfb85ea64861695ed05">select_sum</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a154dd3d5999b39b255b3b74c2aa7fa90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select_sum</definition>
+        <argsstring>(string field)</argsstring>
+        <name>select_sum</name>
+        <qualifiedname>neforce::sql_builder::select_sum</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <briefdescription>
+<para>SUM聚合（无别名） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="562" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1aa8a4efdfbff24cfb85ea64861695ed05">select_sum</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1aaec10cac28fa8e3965945dbe8b84129c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select_avg</definition>
+        <argsstring>(string field, string alias)</argsstring>
+        <name>select_avg</name>
+        <qualifiedname>neforce::sql_builder::select_avg</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>alias</declname>
+        </param>
+        <briefdescription>
+<para>AVG聚合 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="564" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1aaec10cac28fa8e3965945dbe8b84129c">select_avg</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1accdba64bb7e4b46abe2e64c38db69039">select_avg</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aaec10cac28fa8e3965945dbe8b84129c">select_avg</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1accdba64bb7e4b46abe2e64c38db69039" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select_avg</definition>
+        <argsstring>(string field)</argsstring>
+        <name>select_avg</name>
+        <qualifiedname>neforce::sql_builder::select_avg</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <briefdescription>
+<para>AVG聚合（无别名） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="565" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1aaec10cac28fa8e3965945dbe8b84129c">select_avg</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a33b06eac54eb183d1975fde6406490f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select_max</definition>
+        <argsstring>(string field, string alias)</argsstring>
+        <name>select_max</name>
+        <qualifiedname>neforce::sql_builder::select_max</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>alias</declname>
+        </param>
+        <briefdescription>
+<para>MAX聚合 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="567" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a33b06eac54eb183d1975fde6406490f1">select_max</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a2f4a6d0812010e563fc21a99b5063de8">select_max</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a33b06eac54eb183d1975fde6406490f1">select_max</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a2f4a6d0812010e563fc21a99b5063de8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select_max</definition>
+        <argsstring>(string field)</argsstring>
+        <name>select_max</name>
+        <qualifiedname>neforce::sql_builder::select_max</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <briefdescription>
+<para>MAX聚合（无别名） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="568" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a33b06eac54eb183d1975fde6406490f1">select_max</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1aa2a5a8fcffc357f6c60b43d7f6d3ccd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select_min</definition>
+        <argsstring>(string field, string alias)</argsstring>
+        <name>select_min</name>
+        <qualifiedname>neforce::sql_builder::select_min</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>alias</declname>
+        </param>
+        <briefdescription>
+<para>MIN聚合 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="570" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1aa2a5a8fcffc357f6c60b43d7f6d3ccd2">select_min</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a86f40453ba8c32650ff06b47d7217133">select_min</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aa2a5a8fcffc357f6c60b43d7f6d3ccd2">select_min</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a86f40453ba8c32650ff06b47d7217133" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select_min</definition>
+        <argsstring>(string field)</argsstring>
+        <name>select_min</name>
+        <qualifiedname>neforce::sql_builder::select_min</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <briefdescription>
+<para>MIN聚合（无别名） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="571" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1aa2a5a8fcffc357f6c60b43d7f6d3ccd2">select_min</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a904c4d2c2dd304fee2a97871e174385c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select_distinct</definition>
+        <argsstring>(string field)</argsstring>
+        <name>select_distinct</name>
+        <qualifiedname>neforce::sql_builder::select_distinct</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>field</declname>
+        </param>
+        <briefdescription>
+<para>添加DISTINCT字段 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字段名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="578" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a904c4d2c2dd304fee2a97871e174385c">select_distinct</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a904c4d2c2dd304fee2a97871e174385c">select_distinct</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a982887358f5190b42482d3abadcfcbad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select_subquery</definition>
+        <argsstring>(string subquery, string alias)</argsstring>
+        <name>select_subquery</name>
+        <qualifiedname>neforce::sql_builder::select_subquery</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>subquery</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>alias</declname>
+        </param>
+        <briefdescription>
+<para>添加子查询作为SELECT字段 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>subquery</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子查询SQL </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>alias</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>别名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="586" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a982887358f5190b42482d3abadcfcbad">select_subquery</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a4bb5c31365515dac4534cdc221443e4e">select_subquery</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a982887358f5190b42482d3abadcfcbad">select_subquery</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a4bb5c31365515dac4534cdc221443e4e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::select_subquery</definition>
+        <argsstring>(string subquery)</argsstring>
+        <name>select_subquery</name>
+        <qualifiedname>neforce::sql_builder::select_subquery</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>subquery</declname>
+        </param>
+        <briefdescription>
+<para>添加子查询作为SELECT字段（无别名） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>subquery</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子查询SQL </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="593" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a982887358f5190b42482d3abadcfcbad">select_subquery</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1aaccd308e17eb2392f75b110524fc16bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::from_subquery</definition>
+        <argsstring>(string subquery, string alias)</argsstring>
+        <name>from_subquery</name>
+        <qualifiedname>neforce::sql_builder::from_subquery</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>subquery</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>alias</declname>
+        </param>
+        <briefdescription>
+<para>使用子查询作为FROM表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>subquery</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子查询SQL </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>alias</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>别名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="601" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1aaccd308e17eb2392f75b110524fc16bc">from_subquery</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1aaccd308e17eb2392f75b110524fc16bc">from_subquery</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a29d221c7736bc72ee556c09562f4d80a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" kindref="member">sql_builder</ref> &amp;</type>
+        <definition>sql_builder &amp; neforce::sql_builder::reset</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>neforce::sql_builder::reset</qualifiedname>
+        <briefdescription>
+<para>重置构建器状态 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="607" column="17"/>
+        <references refid="classneforce_1_1sql__builder_1a29d221c7736bc72ee556c09562f4d80a">reset</references>
+        <references refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2">sql_builder</references>
+        <referencedby refid="classneforce_1_1sql__builder_1a29d221c7736bc72ee556c09562f4d80a">reset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a8e815d1d71667ae4bdb249c5364889a1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___s_q_l_1gac92e76c60dd8cdf4047f063ebcba156e" kindref="member">sql_operate</ref></type>
+        <definition>sql_operate neforce::sql_builder::type</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>type</name>
+        <qualifiedname>neforce::sql_builder::type</qualifiedname>
+        <briefdescription>
+<para>获取当前SQL操作类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>操作类型 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="613" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="613" bodyend="613"/>
+        <references refid="classneforce_1_1sql__builder_1a8e815d1d71667ae4bdb249c5364889a1" compoundref="sql__builder_8hpp" startline="613" endline="613">type</references>
+        <referencedby refid="classneforce_1_1sql__builder_1aec5ad2875055beac2cd8b0f23041c5af">join</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a8e815d1d71667ae4bdb249c5364889a1" compoundref="sql__builder_8hpp" startline="613" endline="613">type</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a2b531b33d0acf8ffd5389b4371f22e16" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+        <definition>string_view neforce::sql_builder::table</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>table</name>
+        <qualifiedname>neforce::sql_builder::table</qualifiedname>
+        <briefdescription>
+<para>获取当前表名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>表名视图 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="619" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="619" bodyend="619"/>
+        <references refid="classneforce_1_1basic__string__view_1ad205f7743694338ba96590ee420cf19a" compoundref="basic__string__view_8hpp" startline="440" endline="442">neforce::basic_string_view&lt; CharT, Traits &gt;::view</references>
+        <referencedby refid="classneforce_1_1sql__builder_1ace22e1de2bf8e3f967cb2c335be32a7b">delete_from</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a0718737b88d5b899750f0b7058f26fc9">from</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aca5aa00c371f739ce9e8f584e326567c">from</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1acddeaa90ee349d273fe1338e883e42d0">full_join</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ae267a041bb47c804dfd2cdd381302969">inner_join</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1adf78d24e80408e815ba00d0f6af80160">insert_into</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1ad745c8a8297e33abe082a9d193690c66">insert_into</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aec5ad2875055beac2cd8b0f23041c5af">join</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aa79ed08fee9ab1a5f3d84bcf243d0e9f">join</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1aa8a9518fc28abddcc6ac49bfa41287c4">left_join</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1a09fd915ca49e3e48888e0926c8297824">right_join</referencedby>
+        <referencedby refid="classneforce_1_1sql__builder_1abbd11419a3ae75adfc9b676bb0e0af61">update</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1a0e11f5a8ead3a6e939470d5c2c129c6e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::sql_builder::is_empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_empty</name>
+        <qualifiedname>neforce::sql_builder::is_empty</qualifiedname>
+        <briefdescription>
+<para>检查构建器是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>未设置表名返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="625" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="625" bodyend="625"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1sql__builder_1aa21cb083ed93bd777b7e0ca3e57ce983" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::sql_builder::build</definition>
+        <argsstring>() const</argsstring>
+        <name>build</name>
+        <qualifiedname>neforce::sql_builder::build</qualifiedname>
+        <briefdescription>
+<para>构建最终的SQL语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>完整的SQL字符串 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当SQL结构不完整时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+根据当前构建的状态生成完整的SQL语句。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="634" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>SQL语句构建器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供流式API构建SQL语句：<itemizedlist>
+<listitem><para>支持SELECT、INSERT、UPDATE、DELETE操作</para>
+</listitem><listitem><para>支持JOIN、WHERE、GROUP BY、ORDER BY、LIMIT等子句</para>
+</listitem><listitem><para>支持聚合函数（COUNT、SUM、AVG、MAX、MIN）</para>
+</listitem><listitem><para>支持子查询</para>
+</listitem><listitem><para>自动处理SQL语法 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="95" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="95" bodyend="635"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1sql__builder_1aa21cb083ed93bd777b7e0ca3e57ce983" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>build</name></member>
+      <member refid="classneforce_1_1sql__builder_1af992b2ae9898ae99a81a3b44f497ca44" prot="private" virt="non-virtual"><scope>neforce::sql_builder</scope><name>clear_data</name></member>
+      <member refid="classneforce_1_1sql__builder_1a39337cf84203f75af1786b94bedd891b" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>columns</name></member>
+      <member refid="classneforce_1_1sql__builder_1ace22e1de2bf8e3f967cb2c335be32a7b" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>delete_from</name></member>
+      <member refid="classneforce_1_1sql__builder_1a020dceb98423e91c8f550adc8f166dbd" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>distinct</name></member>
+      <member refid="classneforce_1_1sql__builder_1af7e64cc08f5dd4ebc357880c81f9a138" prot="private" virt="non-virtual"><scope>neforce::sql_builder</scope><name>ensure_insert_data</name></member>
+      <member refid="classneforce_1_1sql__builder_1a1dcd86b1250ca2e48dae847e0edd3f52" prot="private" virt="non-virtual"><scope>neforce::sql_builder</scope><name>ensure_select_data</name></member>
+      <member refid="classneforce_1_1sql__builder_1af1a5aaac9827a92a4fd34692301ac2c1" prot="private" virt="non-virtual"><scope>neforce::sql_builder</scope><name>ensure_update_data</name></member>
+      <member refid="classneforce_1_1sql__builder_1a0718737b88d5b899750f0b7058f26fc9" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>from</name></member>
+      <member refid="classneforce_1_1sql__builder_1aca5aa00c371f739ce9e8f584e326567c" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>from</name></member>
+      <member refid="classneforce_1_1sql__builder_1aaccd308e17eb2392f75b110524fc16bc" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>from_subquery</name></member>
+      <member refid="classneforce_1_1sql__builder_1acddeaa90ee349d273fe1338e883e42d0" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>full_join</name></member>
+      <member refid="classneforce_1_1sql__builder_1a7e8f6fb7ea2f59868e7f43d191df5e62" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>group_by</name></member>
+      <member refid="classneforce_1_1sql__builder_1a54539bc3881860ddbc7e7f96f9fbfc72" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>group_by</name></member>
+      <member refid="classneforce_1_1sql__builder_1abec47959b9eb41572abca8adcc9516a7" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>having</name></member>
+      <member refid="classneforce_1_1sql__builder_1ae267a041bb47c804dfd2cdd381302969" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>inner_join</name></member>
+      <member refid="classneforce_1_1sql__builder_1a01c6c33a2e2d7da716079647c5ce8a0f" prot="private" virt="non-virtual"><scope>neforce::sql_builder</scope><name>insert_data_</name></member>
+      <member refid="classneforce_1_1sql__builder_1ad745c8a8297e33abe082a9d193690c66" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>insert_into</name></member>
+      <member refid="classneforce_1_1sql__builder_1adf78d24e80408e815ba00d0f6af80160" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>insert_into</name></member>
+      <member refid="classneforce_1_1sql__builder_1a0e11f5a8ead3a6e939470d5c2c129c6e" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>is_empty</name></member>
+      <member refid="classneforce_1_1sql__builder_1aec5ad2875055beac2cd8b0f23041c5af" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>join</name></member>
+      <member refid="classneforce_1_1sql__builder_1aa79ed08fee9ab1a5f3d84bcf243d0e9f" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>join</name></member>
+      <member refid="classneforce_1_1sql__builder_1aa8a9518fc28abddcc6ac49bfa41287c4" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>left_join</name></member>
+      <member refid="classneforce_1_1sql__builder_1ae69d7b4985f8cefd50864e4ddb7539d5" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>limit</name></member>
+      <member refid="classneforce_1_1sql__builder_1aa0b318c43bb90a80c41cab2cc48ed929" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>offset</name></member>
+      <member refid="classneforce_1_1sql__builder_1a77b876554c9e0aa0ef53b8be42fa2d63" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1sql__builder_1ac3bc75870ce78234a6194d653d1e8fdc" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1sql__builder_1ab37893d9ab045d4816d140898ad1d5d0" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>or_where</name></member>
+      <member refid="classneforce_1_1sql__builder_1a8e6dc1568b5b6c76b4c7f77d2b48564a" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>order_by</name></member>
+      <member refid="classneforce_1_1sql__builder_1a202f15a26121de6967f568468eb677e9" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>order_by_asc</name></member>
+      <member refid="classneforce_1_1sql__builder_1a3033a0130a25ed3405a125953502d4ce" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>order_by_desc</name></member>
+      <member refid="classneforce_1_1sql__builder_1a3ff35e70de1a1f1743135062a6741c02" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>page</name></member>
+      <member refid="classneforce_1_1sql__builder_1a9793517d80a9533e5475a15f3fd19bfc" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>remove</name></member>
+      <member refid="classneforce_1_1sql__builder_1a29d221c7736bc72ee556c09562f4d80a" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>reset</name></member>
+      <member refid="classneforce_1_1sql__builder_1a09fd915ca49e3e48888e0926c8297824" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>right_join</name></member>
+      <member refid="classneforce_1_1sql__builder_1ab418d44cdddaef9874640123b2a35914" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select</name></member>
+      <member refid="classneforce_1_1sql__builder_1a36625fed23583ba6db81f433b1dc1ec3" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select</name></member>
+      <member refid="classneforce_1_1sql__builder_1ac69a650165add7b45f90caee4a5c4996" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select</name></member>
+      <member refid="classneforce_1_1sql__builder_1aa761ee49efaaa3a3b2317af9dd7f6722" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select_all</name></member>
+      <member refid="classneforce_1_1sql__builder_1aaec10cac28fa8e3965945dbe8b84129c" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select_avg</name></member>
+      <member refid="classneforce_1_1sql__builder_1accdba64bb7e4b46abe2e64c38db69039" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select_avg</name></member>
+      <member refid="classneforce_1_1sql__builder_1a37be3dbcbdf9bfeddf7719b901a428f8" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select_count</name></member>
+      <member refid="classneforce_1_1sql__builder_1a472106c714196442520e427e5d5e9bf9" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select_count</name></member>
+      <member refid="classneforce_1_1sql__builder_1aa94073589771572cc2a23e46aa76d4d4" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select_count</name></member>
+      <member refid="classneforce_1_1sql__builder_1abad5cdbdeaf5864c072c34ceaec1b5ae" prot="private" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select_data_</name></member>
+      <member refid="classneforce_1_1sql__builder_1a904c4d2c2dd304fee2a97871e174385c" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select_distinct</name></member>
+      <member refid="classneforce_1_1sql__builder_1a33b06eac54eb183d1975fde6406490f1" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select_max</name></member>
+      <member refid="classneforce_1_1sql__builder_1a2f4a6d0812010e563fc21a99b5063de8" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select_max</name></member>
+      <member refid="classneforce_1_1sql__builder_1aa2a5a8fcffc357f6c60b43d7f6d3ccd2" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select_min</name></member>
+      <member refid="classneforce_1_1sql__builder_1a86f40453ba8c32650ff06b47d7217133" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select_min</name></member>
+      <member refid="classneforce_1_1sql__builder_1a982887358f5190b42482d3abadcfcbad" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select_subquery</name></member>
+      <member refid="classneforce_1_1sql__builder_1a4bb5c31365515dac4534cdc221443e4e" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select_subquery</name></member>
+      <member refid="classneforce_1_1sql__builder_1aa8a4efdfbff24cfb85ea64861695ed05" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select_sum</name></member>
+      <member refid="classneforce_1_1sql__builder_1a154dd3d5999b39b255b3b74c2aa7fa90" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>select_sum</name></member>
+      <member refid="classneforce_1_1sql__builder_1ae6a9336ba052d0e71fc598b6444dd922" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>set</name></member>
+      <member refid="classneforce_1_1sql__builder_1a163450f1eed4f2ddf8e7f49c87771984" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>set</name></member>
+      <member refid="classneforce_1_1sql__builder_1aa0aac8a38582b265c64357b3ea632b96" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>set_decrement</name></member>
+      <member refid="classneforce_1_1sql__builder_1a9a6ea542bbe277dfc6b101e74ff68947" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>set_increment</name></member>
+      <member refid="classneforce_1_1sql__builder_1a3a0e44d7d32b556213b361204fe940b2" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>sql_builder</name></member>
+      <member refid="classneforce_1_1sql__builder_1abe1600d8a2eb774ec722e0a78cbb6e45" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>sql_builder</name></member>
+      <member refid="classneforce_1_1sql__builder_1afbe18431b4f4848de1c81803b99b007a" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>sql_builder</name></member>
+      <member refid="classneforce_1_1sql__builder_1ae8db2f7bcdb158f790abd135cf3d9f1a" prot="private" virt="non-virtual"><scope>neforce::sql_builder</scope><name>sql_type_</name></member>
+      <member refid="classneforce_1_1sql__builder_1a2b531b33d0acf8ffd5389b4371f22e16" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>table</name></member>
+      <member refid="classneforce_1_1sql__builder_1a93e035d55d6c008a15f58f1d412384e7" prot="private" virt="non-virtual"><scope>neforce::sql_builder</scope><name>table_</name></member>
+      <member refid="classneforce_1_1sql__builder_1ad055d0a2c2406435caa8a17a7a6cb4f5" prot="private" virt="non-virtual"><scope>neforce::sql_builder</scope><name>table_alias_</name></member>
+      <member refid="classneforce_1_1sql__builder_1a8e815d1d71667ae4bdb249c5364889a1" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>type</name></member>
+      <member refid="classneforce_1_1sql__builder_1abbd11419a3ae75adfc9b676bb0e0af61" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>update</name></member>
+      <member refid="classneforce_1_1sql__builder_1a0090eb6177b9041569f8e65a230a733e" prot="private" virt="non-virtual"><scope>neforce::sql_builder</scope><name>update_data_</name></member>
+      <member refid="classneforce_1_1sql__builder_1a9bfa2029c2163486517bf0f4c35c94b8" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>values</name></member>
+      <member refid="classneforce_1_1sql__builder_1a9e5096a8155300e9de266524df2f802e" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where</name></member>
+      <member refid="classneforce_1_1sql__builder_1ac35f392e8977ca10a6570533901e7b5c" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_between</name></member>
+      <member refid="classneforce_1_1sql__builder_1ad23856edf6148f160dd486245350f132" prot="private" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_conditions_</name></member>
+      <member refid="classneforce_1_1sql__builder_1a03f6ecb3f1a0ca37993a3e3778264075" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_eq</name></member>
+      <member refid="classneforce_1_1sql__builder_1a7c3c303bf39ca391ee3ca5705b6bea97" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_exists</name></member>
+      <member refid="classneforce_1_1sql__builder_1a36601852bc91dbbe14cd131cdd5411e9" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_ge</name></member>
+      <member refid="classneforce_1_1sql__builder_1a251915e0eefcad6e0243ce3301155464" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_gt</name></member>
+      <member refid="classneforce_1_1sql__builder_1a4d76746b7afc0ac50ac265e59e918340" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_in</name></member>
+      <member refid="classneforce_1_1sql__builder_1a7d1528767562c1589dff216be905c4aa" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_is_not_null</name></member>
+      <member refid="classneforce_1_1sql__builder_1a83f413081864fb63ab6de53b3a0a53f8" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_is_null</name></member>
+      <member refid="classneforce_1_1sql__builder_1a1d0c41f0fd155f162005c233d96ed716" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_le</name></member>
+      <member refid="classneforce_1_1sql__builder_1a67b9bd82625db3f2b0845779d27315f4" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_like</name></member>
+      <member refid="classneforce_1_1sql__builder_1a0ef361a58a9602cf8a3c32a7e285fe21" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_lt</name></member>
+      <member refid="classneforce_1_1sql__builder_1af19acd4fe38b35fcbdaeda8a866e1466" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_ne</name></member>
+      <member refid="classneforce_1_1sql__builder_1ae37b2d68b84bfb8edaa98c1eea1ebec8" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_not_between</name></member>
+      <member refid="classneforce_1_1sql__builder_1a680f28a7b0298d3b9184fe7e3303499e" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_not_exists</name></member>
+      <member refid="classneforce_1_1sql__builder_1ae772454b8f2c5111c5b27cbfde19189e" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_not_in</name></member>
+      <member refid="classneforce_1_1sql__builder_1a947598b572d1a0f37286a664b32cdd28" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>where_not_like</name></member>
+      <member refid="classneforce_1_1sql__builder_1a1a2248d0e773b872632fc8cd96167940" prot="public" virt="non-virtual"><scope>neforce::sql_builder</scope><name>~sql_builder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

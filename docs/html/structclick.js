@@ -1,8 +1,8 @@
 var structclick =
 [
     [ "time_point", "structclick.html#a898892c0a9d6bccaa9476683f1830f05", null ],
-    [ "during", "structclick.html#aa66479d8dcff98abf34e8d0c74e0b956", null ],
-    [ "during_s", "structclick.html#ad10cbe239c1cf24b4de14c78d7745ee9", null ],
+    [ "during", "structclick.html#a21a9b640963dbf73211bcbe56e23360d", null ],
+    [ "during_s", "structclick.html#aeebcc51061c5c9b56df22f5761b8aa79", null ],
     [ "reset", "structclick.html#acd46b1dc82b74166b5a9c55a2633a323", null ],
     [ "start", "structclick.html#a6acf0c124695fa5f0cc3a7584c0687b6", null ],
     [ "stop", "structclick.html#a478f23b91102313a96c4e2e9b9bbfca4", null ],

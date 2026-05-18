@@ -12,6 +12,6 @@ var searchData=
   ['log_5fheaders_9',['log_headers',['../classlogging__filter.html#a0cdb93b150c118f9024d52df2c5ccf2f',1,'logging_filter']]],
   ['logical_5fprocessors_10',['logical_processors',['../structsysinfo_1_1_c_p_u__info.html#af1ecda498492da2dd5ad938d5096a530',1,'sysinfo::CPU_info']]],
   ['long_5fname_11',['long_name',['../structcmdline_1_1option.html#aa2268c75f8b3c5ae85a6a596c343591e',1,'cmdline::option']]],
-  ['loose_5ftolerance_12',['LOOSE_TOLERANCE',['../group___math_constants.html#ga2036acdefc1770536397367e313b3f8e',1,'math.hpp']]],
+  ['loose_5ftolerance_12',['LOOSE_TOLERANCE',['../group___math_constants.html#ga0d0621f7c05efa7d863b3975a077808e',1,'math.hpp']]],
   ['low_13',['low',['../structmurmur__hash.html#ac68d97d442636f69b0fdd1a976fb166b',1,'murmur_hash']]]
 ];

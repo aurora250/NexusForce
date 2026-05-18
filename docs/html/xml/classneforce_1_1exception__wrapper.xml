@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1exception__wrapper" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>neforce::exception_wrapper</compoundname>
+    <derivedcompoundref refid="classneforce_1_1typed__exception__wrapper" prot="public" virt="non-virtual">neforce::typed_exception_wrapper&lt; Ex &gt;</derivedcompoundref>
+    <includes refid="exception__ptr_8hpp" local="no">exception_ptr.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1exception__wrapper_1a1f7cf7ad52dbf310ff97951028e2e9c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual neforce::exception_wrapper::~exception_wrapper</definition>
+        <argsstring>()=default</argsstring>
+        <name>~exception_wrapper</name>
+        <qualifiedname>neforce::exception_wrapper::~exception_wrapper</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="31" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1exception__wrapper_1acf2d0425afbe6b2a2d368ecbac90587f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void neforce::exception_wrapper::rethrow</definition>
+        <argsstring>() const =0</argsstring>
+        <name>rethrow</name>
+        <qualifiedname>neforce::exception_wrapper::rethrow</qualifiedname>
+        <reimplementedby refid="classneforce_1_1typed__exception__wrapper_1a976d1ce2a945035db7e8ccb7b5f01a47">rethrow</reimplementedby>
+        <briefdescription>
+<para>重新抛出异常 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>重新抛出被包装的异常。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="38" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1exception__wrapper_1a1ee98ca8e7da75a780a081f31f6e2ed2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type>const std::type_info &amp;</type>
+        <definition>virtual const std::type_info &amp; neforce::exception_wrapper::type</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>type</name>
+        <qualifiedname>neforce::exception_wrapper::type</qualifiedname>
+        <reimplementedby refid="classneforce_1_1typed__exception__wrapper_1a9101bb379c9dfa1741357fcc7d9bd233">type</reimplementedby>
+        <briefdescription>
+<para>获取异常类型信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>异常的类型信息 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="44" column="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1exception__wrapper_1adf26b9e3c855c2e198930db20fa270d4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1exception__wrapper" kindref="compound">exception_wrapper</ref> &gt;</type>
+        <definition>virtual unique_ptr&lt; exception_wrapper &gt; neforce::exception_wrapper::clone</definition>
+        <argsstring>() const =0</argsstring>
+        <name>clone</name>
+        <qualifiedname>neforce::exception_wrapper::clone</qualifiedname>
+        <reimplementedby refid="classneforce_1_1typed__exception__wrapper_1aaaf35c4331d5b2eb1e6e13938b07fd99">clone</reimplementedby>
+        <briefdescription>
+<para>克隆异常包装器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>异常包装器的唯一指针</para>
+</simplesect>
+创建当前异常包装器的深拷贝。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="52" column="25"/>
+        <references refid="classneforce_1_1exception__wrapper_1adf26b9e3c855c2e198930db20fa270d4">clone</references>
+        <referencedby refid="classneforce_1_1exception__wrapper_1adf26b9e3c855c2e198930db20fa270d4">clone</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>异常包装器基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>用于实现异常的类型擦除，允许以统一的方式处理不同类型的异常。 提供异常重新抛出、类型查询和克隆功能。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::exception_wrapper</label>
+        <link refid="classneforce_1_1exception__wrapper"/>
+      </node>
+      <node id="2">
+        <label>neforce::typed_exception_wrapper&lt; Ex &gt;</label>
+        <link refid="classneforce_1_1typed__exception__wrapper"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="29" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="29" bodyend="53"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1exception__wrapper_1adf26b9e3c855c2e198930db20fa270d4" prot="public" virt="pure-virtual"><scope>neforce::exception_wrapper</scope><name>clone</name></member>
+      <member refid="classneforce_1_1exception__wrapper_1acf2d0425afbe6b2a2d368ecbac90587f" prot="public" virt="pure-virtual"><scope>neforce::exception_wrapper</scope><name>rethrow</name></member>
+      <member refid="classneforce_1_1exception__wrapper_1a1ee98ca8e7da75a780a081f31f6e2ed2" prot="public" virt="pure-virtual"><scope>neforce::exception_wrapper</scope><name>type</name></member>
+      <member refid="classneforce_1_1exception__wrapper_1a1f7cf7ad52dbf310ff97951028e2e9c6" prot="public" virt="virtual"><scope>neforce::exception_wrapper</scope><name>~exception_wrapper</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

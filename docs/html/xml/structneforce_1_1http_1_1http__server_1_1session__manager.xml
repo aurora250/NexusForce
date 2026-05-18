@@ -1,0 +1,427 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1http_1_1http__server_1_1session__manager" kind="struct" language="C++" prot="private">
+    <compoundname>neforce::http::http_server::session_manager</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1http_1_1http__server_1_1session__manager_1a70178892e575617f339b08e0e3569c36" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="structneforce_1_1http_1_1http__session" kindref="compound">http_session</ref> &gt;</type>
+        <definition>unordered_map&lt;string, http_session&gt; neforce::http::http_server::session_manager::sessions_</definition>
+        <argsstring></argsstring>
+        <name>sessions_</name>
+        <qualifiedname>neforce::http::http_server::session_manager::sessions_</qualifiedname>
+        <briefdescription>
+<para>会话存储 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="80" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1http__server_1_1session__manager_1a3cf48125e1b8eef995160a8bc3c15dc0" prot="public" static="no" mutable="yes">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::http::http_server::session_manager::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>neforce::http::http_server::session_manager::mutex_</qualifiedname>
+        <briefdescription>
+<para>会话互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="81" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1http__server_1_1session__manager_1af91270f044c827d373b5793568b50ac7" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::http::http_server::session_manager::cleanup_running_</definition>
+        <argsstring></argsstring>
+        <name>cleanup_running_</name>
+        <qualifiedname>neforce::http::http_server::session_manager::cleanup_running_</qualifiedname>
+        <briefdescription>
+<para>清理线程运行标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="82" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1http__server_1_1session__manager_1ae97d216581262908a51b35884d5a6063" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1thread" kindref="compound">thread</ref></type>
+        <definition>thread neforce::http::http_server::session_manager::cleanup_thread_</definition>
+        <argsstring></argsstring>
+        <name>cleanup_thread_</name>
+        <qualifiedname>neforce::http::http_server::session_manager::cleanup_thread_</qualifiedname>
+        <briefdescription>
+<para>清理线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="83" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1http__server_1_1session__manager_1a80f427910a25782f94b2764a536b0543" prot="public" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1random__mt" kindref="compound">random_mt</ref></type>
+        <definition>random_mt neforce::http::http_server::session_manager::rand_</definition>
+        <argsstring></argsstring>
+        <name>rand_</name>
+        <qualifiedname>neforce::http::http_server::session_manager::rand_</qualifiedname>
+        <briefdescription>
+<para>随机数生成器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="84" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1http__server_1_1session__manager_1ada92643fe88b1b527e72d5d9f0f0785c" prot="public" static="no" mutable="no">
+        <type><ref refid="group___duration_1ga8254730759b00eba24c4a01b0c8e10c3" kindref="member">seconds</ref></type>
+        <definition>seconds neforce::http::http_server::session_manager::cleanup_interval_</definition>
+        <argsstring></argsstring>
+        <name>cleanup_interval_</name>
+        <qualifiedname>neforce::http::http_server::session_manager::cleanup_interval_</qualifiedname>
+        <initializer>{300}</initializer>
+        <briefdescription>
+<para>清理间隔 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="85" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1http_1_1http__server_1_1session__manager_1a06ad8975a3583154634435b9f6b94455" prot="public" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::http::http_server::session_manager::max_sessions_</definition>
+        <argsstring></argsstring>
+        <name>max_sessions_</name>
+        <qualifiedname>neforce::http::http_server::session_manager::max_sessions_</qualifiedname>
+        <initializer>{10000}</initializer>
+        <briefdescription>
+<para>最大会话数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="86" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="86" bodyend="86"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1http_1_1http__server_1_1session__manager_1a74fc3efce3196256f318fbb6a6d1f45b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::http::http_server::session_manager::generate_session_id</definition>
+        <argsstring>()</argsstring>
+        <name>generate_session_id</name>
+        <qualifiedname>neforce::http::http_server::session_manager::generate_session_id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="88" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1http__server_1_1session__manager_1aead082326d8a04161a803a6cef36f464" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::http_server::session_manager::session_manager</definition>
+        <argsstring>()</argsstring>
+        <name>session_manager</name>
+        <qualifiedname>neforce::http::http_server::session_manager::session_manager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="90" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1http__server_1_1session__manager_1a37fdb591ade7d0071536182f2fba5c48" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::http_server::session_manager::~session_manager</definition>
+        <argsstring>()</argsstring>
+        <name>~session_manager</name>
+        <qualifiedname>neforce::http::http_server::session_manager::~session_manager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="91" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1http__server_1_1session__manager_1a93619e1c1f24da0dbd838b8561c36fe4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::http_server::session_manager::session_manager</definition>
+        <argsstring>(const session_manager &amp;)=delete</argsstring>
+        <name>session_manager</name>
+        <qualifiedname>neforce::http::http_server::session_manager::session_manager</qualifiedname>
+        <param>
+          <type>const session_manager &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="93" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1http__server_1_1session__manager_1a67ed76cfd03ac22bb1f3db0900d1cf53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>session_manager &amp;</type>
+        <definition>session_manager &amp; neforce::http::http_server::session_manager::operator=</definition>
+        <argsstring>(const session_manager &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::http::http_server::session_manager::operator=</qualifiedname>
+        <param>
+          <type>const session_manager &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="94" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1http__server_1_1session__manager_1ad9e92ceea52ab83a00077b3d690e7f03" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::http_server::session_manager::session_manager</definition>
+        <argsstring>(session_manager &amp;&amp;) noexcept=delete</argsstring>
+        <name>session_manager</name>
+        <qualifiedname>neforce::http::http_server::session_manager::session_manager</qualifiedname>
+        <param>
+          <type>session_manager &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="96" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1http__server_1_1session__manager_1adcccee94459c9f5b67186555ab78e7ed" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>session_manager &amp;</type>
+        <definition>session_manager &amp; neforce::http::http_server::session_manager::operator=</definition>
+        <argsstring>(session_manager &amp;&amp;) noexcept=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::http::http_server::session_manager::operator=</qualifiedname>
+        <param>
+          <type>session_manager &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="97" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1http__server_1_1session__manager_1a3e61465ebaa9d2638135a5174a3eabd3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1http_1_1http__session" kindref="compound">http_session</ref> *</type>
+        <definition>http_session * neforce::http::http_server::session_manager::get_session</definition>
+        <argsstring>(const string &amp;session_id, bool create=true)</argsstring>
+        <name>get_session</name>
+        <qualifiedname>neforce::http::http_server::session_manager::get_session</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>session_id</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>create</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="99" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1http__server_1_1session__manager_1a5cad1e5e50f11f8d9bb7ca7f140ca47b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_server::session_manager::remove_session</definition>
+        <argsstring>(const string &amp;session_id) noexcept</argsstring>
+        <name>remove_session</name>
+        <qualifiedname>neforce::http::http_server::session_manager::remove_session</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>session_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="100" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1http__server_1_1session__manager_1a6138a0df84d00e086b78799f2b325739" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_server::session_manager::cleanup_expired_sessions</definition>
+        <argsstring>()</argsstring>
+        <name>cleanup_expired_sessions</name>
+        <qualifiedname>neforce::http::http_server::session_manager::cleanup_expired_sessions</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="101" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1http__server_1_1session__manager_1a9432d644b1ac3edcc52f4c29ef310225" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::http_server::session_manager::session_exists</definition>
+        <argsstring>(const string &amp;session_id) const noexcept</argsstring>
+        <name>session_exists</name>
+        <qualifiedname>neforce::http::http_server::session_manager::session_exists</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>session_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="102" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1http__server_1_1session__manager_1a37c566103eb23787e26b7d403a129c9b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::http::http_server::session_manager::session_count</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>session_count</name>
+        <qualifiedname>neforce::http::http_server::session_manager::session_count</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="104" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1http__server_1_1session__manager_1aca366c05ff9d333351a3ac58dbaeb527" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_server::session_manager::set_cleanup_interval</definition>
+        <argsstring>(seconds interval) noexcept</argsstring>
+        <name>set_cleanup_interval</name>
+        <qualifiedname>neforce::http::http_server::session_manager::set_cleanup_interval</qualifiedname>
+        <param>
+          <type><ref refid="group___duration_1ga8254730759b00eba24c4a01b0c8e10c3" kindref="member">seconds</ref></type>
+          <declname>interval</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="105" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1http_1_1http__server_1_1session__manager_1a42df9aab76887e2e07250a3a6a59b122" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_server::session_manager::set_max_sessions</definition>
+        <argsstring>(size_t max) noexcept</argsstring>
+        <name>set_max_sessions</name>
+        <qualifiedname>neforce::http::http_server::session_manager::set_max_sessions</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="106" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>会话管理器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理所有HTTP会话，包括创建、查找、删除和过期清理。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="4">
+        <label>neforce::atomic&lt; bool &gt;</label>
+        <link refid="structneforce_1_1atomic_3_01bool_01_4"/>
+      </node>
+      <node id="7">
+        <label>neforce::duration&lt; int64_t &gt;</label>
+        <link refid="structneforce_1_1duration"/>
+      </node>
+      <node id="1">
+        <label>neforce::http::http_server::session_manager</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>sessions_</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>mutex_</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>cleanup_running_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>cleanup_thread_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>rand_</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>cleanup_interval_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::mutex</label>
+        <link refid="classneforce_1_1mutex"/>
+      </node>
+      <node id="6">
+        <label>neforce::random_mt</label>
+        <link refid="classneforce_1_1random__mt"/>
+      </node>
+      <node id="5">
+        <label>neforce::thread</label>
+        <link refid="classneforce_1_1thread"/>
+      </node>
+      <node id="2">
+        <label>neforce::unordered_map&lt; neforce::basic_string&lt; char &gt;, neforce::http::http_session &gt;</label>
+        <link refid="classneforce_1_1unordered__map"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="79" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="79" bodyend="107"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1a6138a0df84d00e086b78799f2b325739" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>cleanup_expired_sessions</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1ada92643fe88b1b527e72d5d9f0f0785c" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>cleanup_interval_</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1af91270f044c827d373b5793568b50ac7" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>cleanup_running_</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1ae97d216581262908a51b35884d5a6063" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>cleanup_thread_</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1a74fc3efce3196256f318fbb6a6d1f45b" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>generate_session_id</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1a3e61465ebaa9d2638135a5174a3eabd3" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>get_session</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1a06ad8975a3583154634435b9f6b94455" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>max_sessions_</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1a3cf48125e1b8eef995160a8bc3c15dc0" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>mutex_</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1a67ed76cfd03ac22bb1f3db0900d1cf53" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1adcccee94459c9f5b67186555ab78e7ed" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1a80f427910a25782f94b2764a536b0543" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>rand_</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1a5cad1e5e50f11f8d9bb7ca7f140ca47b" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>remove_session</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1a37c566103eb23787e26b7d403a129c9b" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>session_count</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1a9432d644b1ac3edcc52f4c29ef310225" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>session_exists</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1aead082326d8a04161a803a6cef36f464" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>session_manager</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1a93619e1c1f24da0dbd838b8561c36fe4" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>session_manager</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1ad9e92ceea52ab83a00077b3d690e7f03" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>session_manager</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1a70178892e575617f339b08e0e3569c36" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>sessions_</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1aca366c05ff9d333351a3ac58dbaeb527" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>set_cleanup_interval</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1a42df9aab76887e2e07250a3a6a59b122" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>set_max_sessions</name></member>
+      <member refid="structneforce_1_1http_1_1http__server_1_1session__manager_1a37fdb591ade7d0071536182f2fba5c48" prot="public" virt="non-virtual"><scope>neforce::http::http_server::session_manager</scope><name>~session_manager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

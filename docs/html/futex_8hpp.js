@@ -21,10 +21,10 @@ var futex_8hpp =
       [ "wake_bitset_private", "group___futex.html#ggab7057283120da679629ce8fb1238219ba4744eac77e3eaa5a8c7d4d9cd30f2c49", null ],
       [ "bitset_match_any", "group___futex.html#ggab7057283120da679629ce8fb1238219ba28fb4c528a4d49af012e73bc2807c4a8", null ]
     ] ],
-    [ "futex_notify", "group___futex.html#ga05f2a678e4c7a16ecc3ba93dba798e19", null ],
-    [ "futex_requeue", "group___futex.html#gab69b11c4c6a89ae5908e07b57d892833", null ],
-    [ "futex_wait", "group___futex.html#ga26f36b601d9ad2d293b3345e1eaf5306", null ],
-    [ "futex_wait_requeue_pi", "group___futex.html#ga563dcc9c60dd5a3e7006e4227b0221ab", null ],
-    [ "futex_wait_until", "group___futex.html#ga48d2abd213cbed922449fad6f05638ed", null ],
-    [ "futex_wake_op", "group___futex.html#ga7122cfebb7d17bf73cee0472ae48ddec", null ]
+    [ "futex_notify", "group___futex.html#ga84832c8b1f52bd90a456091e015122ef", null ],
+    [ "futex_requeue", "group___futex.html#ga0770f7dec16536eaaac354bafae908e7", null ],
+    [ "futex_wait", "group___futex.html#ga3425390f7804270ade276e1a91ae99b1", null ],
+    [ "futex_wait_requeue_pi", "group___futex.html#ga51c85c94855ccbbe8742e1a4ada491df", null ],
+    [ "futex_wait_until", "group___futex.html#gaff4bc449a315d263ca628c8e203ed771", null ],
+    [ "futex_wake_op", "group___futex.html#ga448fbb4e4417647ae03bac363ea99c83", null ]
 ];

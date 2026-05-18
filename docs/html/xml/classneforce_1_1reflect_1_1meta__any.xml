@@ -1,0 +1,510 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1reflect_1_1meta__any" kind="class" language="C++" prot="public">
+    <compoundname>neforce::reflect::meta_any</compoundname>
+    <includes refid="reflect_2any_8hpp" local="no">any.hpp</includes>
+    <innerclass refid="structneforce_1_1reflect_1_1meta__any_1_1concepts" prot="private">neforce::reflect::meta_any::concepts</innerclass>
+    <innerclass refid="structneforce_1_1reflect_1_1meta__any_1_1model" prot="private">neforce::reflect::meta_any::model</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1reflect_1_1meta__any_1ab8f2d67a6c41a300fbd6ae15b1c0cac9" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; concepts &gt;</type>
+        <definition>unique_ptr&lt;concepts&gt; neforce::reflect::meta_any::storage_</definition>
+        <argsstring></argsstring>
+        <name>storage_</name>
+        <qualifiedname>neforce::reflect::meta_any::storage_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+<para>存储容器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="82" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="82" bodyend="82"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1meta__any_1ad4c4cc1db4477b149edfe3e1994697d6" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::reflect::meta_any::meta_any</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>meta_any</name>
+        <qualifiedname>neforce::reflect::meta_any::meta_any</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="88" column="5"/>
+        <references refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" compoundref="type__traits_8hpp" startline="188">neforce::is_same_v</references>
+        <references refid="classneforce_1_1reflect_1_1meta__any_1ad4c4cc1db4477b149edfe3e1994697d6">meta_any</references>
+        <referencedby refid="classneforce_1_1reflect_1_1meta__any_1ad4c4cc1db4477b149edfe3e1994697d6">meta_any</referencedby>
+        <referencedby refid="classneforce_1_1reflect_1_1meta__any_1aba96b1417d7e3a175ae34e11f8ec2920" compoundref="reflect_2any_8hpp" startline="106" endline="110">meta_any</referencedby>
+        <referencedby refid="classneforce_1_1reflect_1_1meta__any_1a4b6c81a59a3a7e8af3ee065f39499892" compoundref="reflect_2any_8hpp" startline="96" endline="97">meta_any</referencedby>
+        <referencedby refid="classneforce_1_1reflect_1_1meta__any_1aa79923df1e31935a2f967027f3f786cd" compoundref="reflect_2any_8hpp" startline="117" endline="129">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1meta__any_1a4b6c81a59a3a7e8af3ee065f39499892" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt;<ref refid="group___type_attribute_operations_1ga63500a8dd0f79ce1c721aebb8023ce89" kindref="member">decay_t</ref>&lt;T&gt;, <ref refid="classneforce_1_1reflect_1_1meta__any_1ad4c4cc1db4477b149edfe3e1994697d6" kindref="member">meta_any</ref>&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::reflect::meta_any::meta_any</definition>
+        <argsstring>(T &amp;&amp;value)</argsstring>
+        <name>meta_any</name>
+        <qualifiedname>neforce::reflect::meta_any::meta_any</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从任意值构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要存储的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="96" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="96" bodyend="97"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3019" endline="3021">neforce::forward</references>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <references refid="classneforce_1_1reflect_1_1meta__any_1ad4c4cc1db4477b149edfe3e1994697d6">meta_any</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1meta__any_1acff50206e75e2a6567bf2962cf6f2c54" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::reflect::meta_any::meta_any</definition>
+        <argsstring>(meta_any &amp;&amp;) noexcept=default</argsstring>
+        <name>meta_any</name>
+        <qualifiedname>neforce::reflect::meta_any::meta_any</qualifiedname>
+        <param>
+          <type>meta_any &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="99" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1meta__any_1a178f37012f7503f83106dfe07cb402fb" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1reflect_1_1meta__any_1ad4c4cc1db4477b149edfe3e1994697d6" kindref="member">meta_any</ref> &amp;</type>
+        <definition>meta_any &amp; neforce::reflect::meta_any::operator=</definition>
+        <argsstring>(meta_any &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::reflect::meta_any::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1reflect_1_1meta__any_1ad4c4cc1db4477b149edfe3e1994697d6" kindref="member">meta_any</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="100" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1meta__any_1aba96b1417d7e3a175ae34e11f8ec2920" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::reflect::meta_any::meta_any</definition>
+        <argsstring>(const meta_any &amp;other)</argsstring>
+        <name>meta_any</name>
+        <qualifiedname>neforce::reflect::meta_any::meta_any</qualifiedname>
+        <param>
+          <type>const meta_any &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="106" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="106" bodyend="110"/>
+        <references refid="classneforce_1_1reflect_1_1meta__any_1ad4c4cc1db4477b149edfe3e1994697d6">meta_any</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1meta__any_1aa79923df1e31935a2f967027f3f786cd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1reflect_1_1meta__any_1ad4c4cc1db4477b149edfe3e1994697d6" kindref="member">meta_any</ref> &amp;</type>
+        <definition>meta_any &amp; neforce::reflect::meta_any::operator=</definition>
+        <argsstring>(const meta_any &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::reflect::meta_any::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1reflect_1_1meta__any_1ad4c4cc1db4477b149edfe3e1994697d6" kindref="member">meta_any</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="117" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="117" bodyend="129"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3075" endline="3077">neforce::addressof</references>
+        <references refid="classneforce_1_1reflect_1_1meta__any_1ad4c4cc1db4477b149edfe3e1994697d6">meta_any</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1meta__any_1ace17a95fde20361155905131ca2ec1f3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___reflection_1ga3680b21ef08e8497fc7255d54c682211" kindref="member">reflect::type_id</ref></type>
+        <definition>reflect::type_id neforce::reflect::meta_any::type_id</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>type_id</name>
+        <qualifiedname>neforce::reflect::meta_any::type_id</qualifiedname>
+        <briefdescription>
+<para>获取存储值的类型ID </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>类型ID，空对象返回0 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="135" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="135" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1meta__any_1a3bc4024d6752a86dd84211e4f8db945d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::reflect::meta_any::has_value</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>has_value</name>
+        <qualifiedname>neforce::reflect::meta_any::has_value</qualifiedname>
+        <briefdescription>
+<para>检查是否包含值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>包含值返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="141" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="141" bodyend="141"/>
+        <referencedby refid="classneforce_1_1reflect_1_1meta__any_1aab7f9a46dd9b1ac4d842b7dcd39aad2e" compoundref="reflect_2any_8hpp" startline="147" endline="147">operator bool</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1meta__any_1aab7f9a46dd9b1ac4d842b7dcd39aad2e" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::reflect::meta_any::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>neforce::reflect::meta_any::operator bool</qualifiedname>
+        <briefdescription>
+<para>布尔转换运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>包含值返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="147" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="147" bodyend="147"/>
+        <references refid="classneforce_1_1reflect_1_1meta__any_1a3bc4024d6752a86dd84211e4f8db945d" compoundref="reflect_2any_8hpp" startline="141" endline="141">has_value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1meta__any_1a6ba700a090ddb6c8b30f8f7f75739315" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T *</type>
+        <definition>T * neforce::reflect::meta_any::cast</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>cast</name>
+        <qualifiedname>neforce::reflect::meta_any::cast</qualifiedname>
+        <briefdescription>
+<para>尝试转换为指定类型的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>类型匹配返回指针，否则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="155" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="155" bodyend="164"/>
+        <references refid="group___reflection_1gae991e87ac7172215b587ed3916f9e394" compoundref="reflect_2any_8hpp" startline="43">neforce::reflect::type_name_v</references>
+        <referencedby refid="classneforce_1_1reflect_1_1meta__any_1a5f65afc24ee8c2ad00c9304b791a68bc" compoundref="reflect_2any_8hpp" startline="219" endline="221">can_cast</referencedby>
+        <referencedby refid="classneforce_1_1reflect_1_1meta__any_1aa4062e7f900f2b2271794c9b0cd89a6f" compoundref="reflect_2any_8hpp" startline="232" endline="238">convert</referencedby>
+        <referencedby refid="classneforce_1_1reflect_1_1meta__any_1a55cbd10c9b9c03297a4fa3de2e9adbcb" compoundref="reflect_2any_8hpp" startline="190" endline="196">get</referencedby>
+        <referencedby refid="classneforce_1_1reflect_1_1meta__any_1ae79d9c55315e58cb813a1708455be279" compoundref="reflect_2any_8hpp" startline="205" endline="211">get</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1meta__any_1a1b2947e8668a802ab3119dd00e37f7cf" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>const T *</type>
+        <definition>const T * neforce::reflect::meta_any::cast</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cast</name>
+        <qualifiedname>neforce::reflect::meta_any::cast</qualifiedname>
+        <briefdescription>
+<para>尝试转换为指定类型的常量指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>类型匹配返回指针，否则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="172" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="172" bodyend="181"/>
+        <references refid="group___reflection_1gae991e87ac7172215b587ed3916f9e394" compoundref="reflect_2any_8hpp" startline="43">neforce::reflect::type_name_v</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1meta__any_1a55cbd10c9b9c03297a4fa3de2e9adbcb" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T &amp;</type>
+        <definition>T &amp; neforce::reflect::meta_any::get</definition>
+        <argsstring>()</argsstring>
+        <name>get</name>
+        <qualifiedname>neforce::reflect::meta_any::get</qualifiedname>
+        <briefdescription>
+<para>获取存储值的引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>存储值的引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1typecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="190" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="190" bodyend="196"/>
+        <references refid="classneforce_1_1reflect_1_1meta__any_1a6ba700a090ddb6c8b30f8f7f75739315" compoundref="reflect_2any_8hpp" startline="155" endline="164">cast</references>
+        <references refid="group___debug_breakpoints_and_assertions_1ga739de248bba5b8d6441d763113b59d19" compoundref="breakpoint_8hpp" startline="68" endline="74">neforce::unreachable</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1meta__any_1ae79d9c55315e58cb813a1708455be279" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>const T &amp;</type>
+        <definition>const T &amp; neforce::reflect::meta_any::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <qualifiedname>neforce::reflect::meta_any::get</qualifiedname>
+        <briefdescription>
+<para>获取存储值的常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>存储值的常量引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1typecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="205" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="205" bodyend="211"/>
+        <references refid="classneforce_1_1reflect_1_1meta__any_1a6ba700a090ddb6c8b30f8f7f75739315" compoundref="reflect_2any_8hpp" startline="155" endline="164">cast</references>
+        <references refid="group___debug_breakpoints_and_assertions_1ga739de248bba5b8d6441d763113b59d19" compoundref="breakpoint_8hpp" startline="68" endline="74">neforce::unreachable</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1meta__any_1a5f65afc24ee8c2ad00c9304b791a68bc" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::reflect::meta_any::can_cast</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>can_cast</name>
+        <qualifiedname>neforce::reflect::meta_any::can_cast</qualifiedname>
+        <briefdescription>
+<para>检查是否可以转换为指定类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>可以转换返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="219" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="219" bodyend="221"/>
+        <references refid="classneforce_1_1reflect_1_1meta__any_1a6ba700a090ddb6c8b30f8f7f75739315" compoundref="reflect_2any_8hpp" startline="155" endline="164">cast</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1reflect_1_1meta__any_1aa4062e7f900f2b2271794c9b0cd89a6f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>T neforce::reflect::meta_any::convert</definition>
+        <argsstring>() const</argsstring>
+        <name>convert</name>
+        <qualifiedname>neforce::reflect::meta_any::convert</qualifiedname>
+        <briefdescription>
+<para>转换为指定类型的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>转换后的值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1typecast__exception" kindref="compound">typecast_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>类型不匹配时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+返回存储值的副本，而非引用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="232" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="232" bodyend="238"/>
+        <references refid="classneforce_1_1reflect_1_1meta__any_1a6ba700a090ddb6c8b30f8f7f75739315" compoundref="reflect_2any_8hpp" startline="155" endline="164">cast</references>
+        <references refid="group___debug_breakpoints_and_assertions_1ga739de248bba5b8d6441d763113b59d19" compoundref="breakpoint_8hpp" startline="68" endline="74">neforce::unreachable</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>类型擦除容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>可以存储任意类型的值，并提供类型安全的存取接口。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="62" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="62" bodyend="239"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1a5f65afc24ee8c2ad00c9304b791a68bc" prot="public" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>can_cast</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1a6ba700a090ddb6c8b30f8f7f75739315" prot="public" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>cast</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1a1b2947e8668a802ab3119dd00e37f7cf" prot="public" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>cast</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1aa4062e7f900f2b2271794c9b0cd89a6f" prot="public" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>convert</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1a55cbd10c9b9c03297a4fa3de2e9adbcb" prot="public" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>get</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1ae79d9c55315e58cb813a1708455be279" prot="public" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>get</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1a3bc4024d6752a86dd84211e4f8db945d" prot="public" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>has_value</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1ad4c4cc1db4477b149edfe3e1994697d6" prot="public" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>meta_any</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1a4b6c81a59a3a7e8af3ee065f39499892" prot="public" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>meta_any</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1acff50206e75e2a6567bf2962cf6f2c54" prot="public" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>meta_any</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1aba96b1417d7e3a175ae34e11f8ec2920" prot="public" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>meta_any</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1aab7f9a46dd9b1ac4d842b7dcd39aad2e" prot="public" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>operator bool</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1a178f37012f7503f83106dfe07cb402fb" prot="public" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1aa79923df1e31935a2f967027f3f786cd" prot="public" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1ab8f2d67a6c41a300fbd6ae15b1c0cac9" prot="private" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>storage_</name></member>
+      <member refid="classneforce_1_1reflect_1_1meta__any_1ace17a95fde20361155905131ca2ec1f3" prot="public" virt="non-virtual"><scope>neforce::reflect::meta_any</scope><name>type_id</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

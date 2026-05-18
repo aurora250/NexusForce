@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1lock__free__queue_1_1node" kind="struct" language="C++" prot="private">
+    <compoundname>neforce::lock_free_queue::node</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1lock__free__queue_1_1node_1aa0359937a5b50eb582c067bfc54237ab" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; T * &gt;</type>
+        <definition>atomic&lt;T*&gt; neforce::lock_free_queue&lt; T &gt;::node::data</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>neforce::lock_free_queue::node::data</qualifiedname>
+        <briefdescription>
+<para>数据指针原子变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="77" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1lock__free__queue_1_1node_1ae6d06701804c071645991ee9f093d91e" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; node_counter &gt;</type>
+        <definition>atomic&lt;node_counter&gt; neforce::lock_free_queue&lt; T &gt;::node::count</definition>
+        <argsstring></argsstring>
+        <name>count</name>
+        <qualifiedname>neforce::lock_free_queue::node::count</qualifiedname>
+        <briefdescription>
+<para>节点计数器原子变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="78" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1lock__free__queue_1_1node_1a30c339672c50ba50ce16867ba8734d16" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; counted_node_ptr &gt;</type>
+        <definition>atomic&lt;counted_node_ptr&gt; neforce::lock_free_queue&lt; T &gt;::node::next</definition>
+        <argsstring></argsstring>
+        <name>next</name>
+        <qualifiedname>neforce::lock_free_queue::node::next</qualifiedname>
+        <briefdescription>
+<para>下一个节点原子变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="79" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1lock__free__queue_1_1node_1a2051911314c89220df4eb78ee16499c1" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::lock_free_queue&lt; T &gt;::node::node</definition>
+        <argsstring>(int external_count=2)</argsstring>
+        <name>node</name>
+        <qualifiedname>neforce::lock_free_queue::node::node</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>external_count</declname>
+          <defval>2</defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>external_count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始外部计数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="85" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="85" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1lock__free__queue_1_1node_1a9bce7d25410b4d1c160d6af102bc77d5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::lock_free_queue&lt; T &gt;::node::release_ref</definition>
+        <argsstring>()</argsstring>
+        <name>release_ref</name>
+        <qualifiedname>neforce::lock_free_queue::node::release_ref</qualifiedname>
+        <briefdescription>
+<para>释放内部引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>减少内部引用计数，如果引用计数归零且无外部引用，则删除节点。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="103" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="103" bodyend="115"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>队列节点结构 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>存储数据和维护引用计数，通过原子操作保证线程安全。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::atomic&lt; T * &gt;</label>
+        <link refid="structneforce_1_1atomic_3_01_t_01_5_01_4"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::atomic&lt; counted_node_ptr &gt;</label>
+        <link refid="structneforce_1_1atomic"/>
+      </node>
+      <node id="4">
+        <label>neforce::atomic&lt; node_counter &gt;</label>
+        <link refid="structneforce_1_1atomic"/>
+      </node>
+      <node id="3">
+        <label>neforce::atomic_base&lt; T * &gt;</label>
+        <link refid="structneforce_1_1atomic__base_3_01_t_01_5_01_4"/>
+      </node>
+      <node id="1">
+        <label>neforce::lock_free_queue&lt; T &gt;::node</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>data</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>count</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="76" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="76" bodyend="116"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1lock__free__queue_1_1node_1ae6d06701804c071645991ee9f093d91e" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue::node</scope><name>count</name></member>
+      <member refid="structneforce_1_1lock__free__queue_1_1node_1aa0359937a5b50eb582c067bfc54237ab" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue::node</scope><name>data</name></member>
+      <member refid="structneforce_1_1lock__free__queue_1_1node_1a30c339672c50ba50ce16867ba8734d16" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue::node</scope><name>next</name></member>
+      <member refid="structneforce_1_1lock__free__queue_1_1node_1a2051911314c89220df4eb78ee16499c1" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue::node</scope><name>node</name></member>
+      <member refid="structneforce_1_1lock__free__queue_1_1node_1a9bce7d25410b4d1c160d6af102bc77d5" prot="public" virt="non-virtual"><scope>neforce::lock_free_queue::node</scope><name>release_ref</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

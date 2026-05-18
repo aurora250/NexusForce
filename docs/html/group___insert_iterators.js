@@ -7,8 +7,8 @@ var group___insert_iterators =
       [ "reference", "classback__insert__iterator.html#a85196bc846c8fa2796596a896d9071c6", null ],
       [ "value_type", "classback__insert__iterator.html#acd6f2cff30db234a76ad73f5df08e4ff", null ],
       [ "back_insert_iterator", "classback__insert__iterator.html#ae484d91da808bfe16852543100c7d648", null ],
-      [ "~back_insert_iterator", "classback__insert__iterator.html#ad420e647277c00dcc00146ef4b5e55ec", null ],
-      [ "operator*", "classback__insert__iterator.html#ad19393c9b2436af640a7e3392d0bc6ef", null ],
+      [ "~back_insert_iterator", "classback__insert__iterator.html#a38655641280ebe55686a97ecc2f670d2", null ],
+      [ "operator*", "classback__insert__iterator.html#afb1981a33a065e54c56932ce8b836012", null ],
       [ "operator=", "classback__insert__iterator.html#a0d7ab8d506c6543bf2aae98e75bcc4c7", null ],
       [ "operator=", "classback__insert__iterator.html#a8f48cefb3eab86ebb5117e3eaa80f96a", null ]
     ] ],
@@ -19,8 +19,8 @@ var group___insert_iterators =
       [ "reference", "classfront__insert__iterator.html#aece34bdafce08024a65eea3483eea36c", null ],
       [ "value_type", "classfront__insert__iterator.html#a078dfb5a3585b87ec59f12a0640508f0", null ],
       [ "front_insert_iterator", "classfront__insert__iterator.html#a5ec0f6fb3fea4163ea7bb72f3cbd62b1", null ],
-      [ "~front_insert_iterator", "classfront__insert__iterator.html#a683cb8fa843f181b187107ae544bd94f", null ],
-      [ "operator*", "classfront__insert__iterator.html#a5fb60ef3dd95955b98f13c5838cfc750", null ],
+      [ "~front_insert_iterator", "classfront__insert__iterator.html#a7411585699df1072e288e439cb05e9fd", null ],
+      [ "operator*", "classfront__insert__iterator.html#a0949b715a62c0a68ccf0198c83680da8", null ],
       [ "operator=", "classfront__insert__iterator.html#a934a8c5c3edc03960c94e7174e635e78", null ],
       [ "operator=", "classfront__insert__iterator.html#adb2346168749793792e6648dfa3cbb1b", null ]
     ] ],
@@ -31,12 +31,12 @@ var group___insert_iterators =
       [ "reference", "classinsert__iterator.html#a43b9cd7914b6610c2ad74cf9e494a4e9", null ],
       [ "value_type", "classinsert__iterator.html#aab449edda27fad0a591b99377734fbff", null ],
       [ "insert_iterator", "classinsert__iterator.html#a1bdd337d8d62fc767e320c734a6ab23e", null ],
-      [ "~insert_iterator", "classinsert__iterator.html#a20c66f6d25c6d984a9f18877af2af093", null ],
-      [ "operator*", "classinsert__iterator.html#a3d2b3eccfe52a91b364999dcbadf52dd", null ],
+      [ "~insert_iterator", "classinsert__iterator.html#aa24bb59c670f33527d97cdebbe1636d6", null ],
+      [ "operator*", "classinsert__iterator.html#a4f5cf90dd85368d181b7c8060184f5f2", null ],
       [ "operator=", "classinsert__iterator.html#a11f95f2947d9824c0c8910697996cacf", null ],
       [ "operator=", "classinsert__iterator.html#ab79f303a11e9b6e08eb7c7fb96cae944", null ]
     ] ],
-    [ "make_back_inserter", "group___insert_iterators.html#ga8c8756a9a8367a3d7cdfdf2b6051d824", null ],
-    [ "make_front_inserter", "group___insert_iterators.html#gac83e7b658dcaebba57f70221a1e7cff1", null ],
-    [ "make_inserter", "group___insert_iterators.html#ga8a7f93aba64786512d1679e6812a62bb", null ]
+    [ "make_back_inserter", "group___insert_iterators.html#ga1e7fa8109047aa53259c909f1f66d748", null ],
+    [ "make_front_inserter", "group___insert_iterators.html#ga9b0b198c86e314ff822fb9c062f73214", null ],
+    [ "make_inserter", "group___insert_iterators.html#ga4ab2f0dc34dfc1125c55a25aa9ec7163", null ]
 ];

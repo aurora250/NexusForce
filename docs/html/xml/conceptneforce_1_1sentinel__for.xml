@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="conceptneforce_1_1sentinel__for" kind="concept">
+    <compoundname>neforce::sentinel_for</compoundname>
+    <includes refid="concepts_8hpp" local="no">concepts.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Sentinel</type>
+      </param>
+      <param>
+        <type>typename Iterator</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename Sentinel, typename Iterator&gt;
+concept <ref refid="conceptneforce_1_1sentinel__for" kindref="compound">neforce::sentinel_for</ref> = 
+        input_iterator&lt;Iterator&gt; &amp;&amp; semiregular&lt;Sentinel&gt; &amp;&amp; requires(const Iterator&amp; i, const Sentinel&amp; s) {
+            { i == s } -&gt; convertible_to&lt;bool&gt;;
+            { i != s } -&gt; convertible_to&lt;bool&gt;;
+        }</initializer>
+    <conceptparts>
+      <codepart line="392">    <programlisting>
+<codeline><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Sentinel,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Iterator&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal">sentinel_for<sp/>=</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>input_iterator&lt;Iterator&gt;<sp/>&amp;&amp;<sp/>semiregular&lt;Sentinel&gt;<sp/>&amp;&amp;<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal">(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Iterator&amp;<sp/>i,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Sentinel&amp;<sp/>s)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>i<sp/>==<sp/>s<sp/>}<sp/>-&gt;<sp/>convertible_to&lt;bool&gt;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>i<sp/>!=<sp/>s<sp/>}<sp/>-&gt;<sp/>convertible_to&lt;bool&gt;;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+    </programlisting>
+</codepart>
+    </conceptparts>
+    <briefdescription>
+<para>检查类型是否为迭代器的哨兵 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Sentinel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>哨兵类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+哨兵用于标记迭代器范围的结束位置。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="392" column="1"/>
+  </compounddef>
+</doxygen>

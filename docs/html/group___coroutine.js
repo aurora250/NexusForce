@@ -5,7 +5,7 @@ var group___coroutine =
     [ "suspend_never", "structsuspend__never.html", null ],
     [ "cancellation_token", "classcancellation__token.html", [
       [ "check_awaiter", "structcancellation__token_1_1check__awaiter.html", [
-        [ "await_ready", "structcancellation__token_1_1check__awaiter.html#abede9dab199259de830093219935a4b1", null ],
+        [ "await_ready", "structcancellation__token_1_1check__awaiter.html#a37b0c4e38de746e7ca7dca8354aed798", null ],
         [ "await_resume", "structcancellation__token_1_1check__awaiter.html#ab9f45a67e46515646ca6b302a64b7b5d", null ],
         [ "await_suspend", "structcancellation__token_1_1check__awaiter.html#af127c8ef34d7e722eac42f8633cedcab", null ],
         [ "token", "structcancellation__token_1_1check__awaiter.html#a6b7a548a0164dca499a1aa75cccba7d2", null ]
@@ -14,8 +14,8 @@ var group___coroutine =
       [ "cancellation_token", "classcancellation__token.html#af58b901c45f45ac616d47ebd3dc56ea7", null ],
       [ "~cancellation_token", "classcancellation__token.html#a8e560556afc7e861711e374069764bfc", null ],
       [ "cancel", "classcancellation__token.html#a1c816b81662bc8177659073b145a9616", null ],
-      [ "check", "classcancellation__token.html#a1a9953892c6e2eeaf7eecc61b9d44f56", null ],
-      [ "is_cancelled", "classcancellation__token.html#a8669eb1d30807fd64dbc3da8ecc518ba", null ],
+      [ "check", "classcancellation__token.html#a52c484072d073e4d76ab6c8c3bf6cff5", null ],
+      [ "is_cancelled", "classcancellation__token.html#ab7f18cffb62c36a8579967ed1763371d", null ],
       [ "operator=", "classcancellation__token.html#a957e3f2937364b799e2a242cc5905ba9", null ]
     ] ],
     [ "generator&lt; T &gt;", "classgenerator.html", [
@@ -65,7 +65,7 @@ var group___coroutine =
         [ "final_suspend", "structtask_1_1promise__type.html#a6cd0f261bbc603cb79641a1437352a18", null ],
         [ "get_return_object", "structtask_1_1promise__type.html#aad034494a4dbaa044bcaf37154e08aaa", null ],
         [ "initial_suspend", "structtask_1_1promise__type.html#ade322af155aa4cbedfa55e785c5de167", null ],
-        [ "is_cancelled", "structtask_1_1promise__type.html#ae7c74020b783602469377c01aa4640e5", null ],
+        [ "is_cancelled", "structtask_1_1promise__type.html#add4f907d33863244ecf95b06eaacbdf7", null ],
         [ "return_value", "structtask_1_1promise__type.html#a4b2240e1afadcea4b4f98414914cc002", null ],
         [ "set_cancellation_token", "structtask_1_1promise__type.html#a5339e9a8325537229a77e5263fd4a15c", null ],
         [ "unhandled_exception", "structtask_1_1promise__type.html#a367a255980a9849de883c314ffd5f644", null ],
@@ -75,7 +75,7 @@ var group___coroutine =
         [ "token", "structtask_1_1promise__type.html#a9e4d9fe9831164c452a700ce6010335f", null ]
       ] ],
       [ "awaiter", "structtask_1_1awaiter.html", [
-        [ "await_ready", "structtask_1_1awaiter.html#ac637bb26e0ba09fb261c41b198b1b183", null ],
+        [ "await_ready", "structtask_1_1awaiter.html#a851717827edd19b476f3f9339730a0db", null ],
         [ "await_resume", "structtask_1_1awaiter.html#a9dd1df2703e550a5dd2759dd453eac51", null ],
         [ "await_suspend", "structtask_1_1awaiter.html#acb1099aa7940b78bc6f08516dfe4190e", null ],
         [ "handle", "structtask_1_1awaiter.html#a3b7c9f9896ec3150586e5dcd54dfec05", null ]
@@ -83,9 +83,9 @@ var group___coroutine =
       [ "task", "classtask.html#ae229bb88041fade9c572408e8dcbedfd", null ],
       [ "task", "classtask.html#a5e94b9581b7921975806fdc1483f78f4", null ],
       [ "~task", "classtask.html#abcf9c660515466997e2ba3e6d5166dd1", null ],
-      [ "done", "classtask.html#a130ab0e77a4fc039cb0a6bd04d17960c", null ],
+      [ "done", "classtask.html#ab631774bfa12bb16808de715b5844278", null ],
       [ "get", "classtask.html#a58502672d9bef3a69f89611e79483c31", null ],
-      [ "is_cancelled", "classtask.html#aef076be7ad451137332b01423a73745a", null ],
+      [ "is_cancelled", "classtask.html#ac359179551baf1c15f49de6ec5653b0a", null ],
       [ "operator co_await", "classtask.html#a3650489fb1edb0a9ab612b126b94c112", null ],
       [ "operator=", "classtask.html#a20d669386e15b25103aee3212ae684ad", null ],
       [ "resume", "classtask.html#a4eb3a6735d6e5bf52b2d7534ba0769d4", null ],

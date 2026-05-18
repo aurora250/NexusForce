@@ -121,7 +121,7 @@
 </sect1>
 <sect1 id="group___bloom_filter_1double_hashing">
 <title>双哈希技术</title><para>本实现采用 Kirsch &amp; Mitzenmacher (2006) 提出的双哈希技术：</para>
-<para>**原理**： 仅计算两个独立的哈希值 h₁(x) 和 h₂(x)，通过线性组合生成 k 个哈希值： <programlisting><codeline><highlight class="normal">g_i(x)<sp/>=<sp/>(h₁(x)<sp/>+<sp/>i<sp/>×<sp/>h₂(x))<sp/><ref refid="group___math_functions_1ga584831cb7db02edb5d37b30a050b5736" kindref="member">mod</ref><sp/>m<sp/><sp/>(i<sp/>=<sp/>0,<sp/>1,<sp/>...,<sp/>k-1)</highlight></codeline>
+<para>**原理**： 仅计算两个独立的哈希值 h₁(x) 和 h₂(x)，通过线性组合生成 k 个哈希值： <programlisting><codeline><highlight class="normal">g_i(x)<sp/>=<sp/>(h₁(x)<sp/>+<sp/>i<sp/>×<sp/>h₂(x))<sp/><ref refid="group___math_functions_1ga1af3558471e357423df0f8171dec0491" kindref="member">mod</ref><sp/>m<sp/><sp/>(i<sp/>=<sp/>0,<sp/>1,<sp/>...,<sp/>k-1)</highlight></codeline>
 </programlisting></para>
 <para>**优点**：<itemizedlist>
 <listitem><para>减少哈希计算开销</para>

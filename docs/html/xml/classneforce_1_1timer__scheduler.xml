@@ -1,0 +1,559 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1timer__scheduler" kind="class" language="C++" prot="public">
+    <compoundname>neforce::timer_scheduler</compoundname>
+    <includes refid="timer_8hpp" local="no">timer.hpp</includes>
+    <innerclass refid="structneforce_1_1timer__scheduler_1_1node" prot="private">neforce::timer_scheduler::node</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename Clock</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1timer__scheduler_1a1d9a4730d260662044deb61dc9f7e06b" prot="public" static="no">
+        <type>Clock</type>
+        <definition>using neforce::timer_scheduler&lt; Clock &gt;::clock_type = Clock</definition>
+        <argsstring></argsstring>
+        <name>clock_type</name>
+        <qualifiedname>neforce::timer_scheduler::clock_type</qualifiedname>
+        <briefdescription>
+<para>时钟类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="45" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1timer__scheduler_1ad750513d39f30c1903ddb134f2ab37af" prot="public" static="no">
+        <type>typename clock_type::time_point</type>
+        <definition>using neforce::timer_scheduler&lt; Clock &gt;::time_point = typename clock_type::time_point</definition>
+        <argsstring></argsstring>
+        <name>time_point</name>
+        <qualifiedname>neforce::timer_scheduler::time_point</qualifiedname>
+        <briefdescription>
+<para>时间点类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="46" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1timer__scheduler_1a3bb0d53e65a973440b4a5f36fa980b9f" prot="public" static="no">
+        <type>typename clock_type::duration</type>
+        <definition>using neforce::timer_scheduler&lt; Clock &gt;::duration = typename clock_type::duration</definition>
+        <argsstring></argsstring>
+        <name>duration</name>
+        <qualifiedname>neforce::timer_scheduler::duration</qualifiedname>
+        <briefdescription>
+<para>时长类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="47" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1timer__scheduler_1a97335334060b83bc3c6aa015983d14ae" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>using neforce::timer_scheduler&lt; Clock &gt;::token = size_t</definition>
+        <argsstring></argsstring>
+        <name>token</name>
+        <qualifiedname>neforce::timer_scheduler::token</qualifiedname>
+        <briefdescription>
+<para>任务标识符类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="48" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1timer__scheduler_1abc7ce1bdaf883c5c894041fb42e714c6" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void()&gt;</type>
+        <definition>using neforce::timer_scheduler&lt; Clock &gt;::handler_type = function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>handler_type</name>
+        <qualifiedname>neforce::timer_scheduler::handler_type</qualifiedname>
+        <briefdescription>
+<para>回调函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="49" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1timer__scheduler_1a9326eb854216ea36e72c02c0386f84f9" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1set" kindref="compound">set</ref>&lt; node &gt;</type>
+        <definition>set&lt;node&gt; neforce::timer_scheduler&lt; Clock &gt;::nodes_</definition>
+        <argsstring></argsstring>
+        <name>nodes_</name>
+        <qualifiedname>neforce::timer_scheduler::nodes_</qualifiedname>
+        <briefdescription>
+<para>按时间排序的任务集合 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="89" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1timer__scheduler_1aa24c921ff469815a1a48cb87911fb8b4" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1map" kindref="compound">map</ref>&lt; <ref refid="classneforce_1_1timer__scheduler_1a97335334060b83bc3c6aa015983d14ae" kindref="member">token</ref>, typename <ref refid="classneforce_1_1set" kindref="compound">set</ref>&lt; node &gt;::iterator &gt;</type>
+        <definition>map&lt;token, typename set&lt;node&gt;::iterator&gt; neforce::timer_scheduler&lt; Clock &gt;::node_map_</definition>
+        <argsstring></argsstring>
+        <name>node_map_</name>
+        <qualifiedname>neforce::timer_scheduler::node_map_</qualifiedname>
+        <briefdescription>
+<para>ID到迭代器的映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="90" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1timer__scheduler_1ab0874976c573ba10e729d57489b218ec" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1map" kindref="compound">map</ref>&lt; <ref refid="classneforce_1_1timer__scheduler_1a97335334060b83bc3c6aa015983d14ae" kindref="member">token</ref>, <ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt; &gt; &gt;</type>
+        <definition>map&lt;token, shared_ptr&lt;atomic&lt;bool&gt; &gt; &gt; neforce::timer_scheduler&lt; Clock &gt;::cancel_flags_</definition>
+        <argsstring></argsstring>
+        <name>cancel_flags_</name>
+        <qualifiedname>neforce::timer_scheduler::cancel_flags_</qualifiedname>
+        <briefdescription>
+<para>ID到取消标志的映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="91" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1timer__scheduler_1a32b149a3e5734af280d0150bbecc41ac" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1map" kindref="compound">map</ref>&lt; <ref refid="classneforce_1_1timer__scheduler_1a97335334060b83bc3c6aa015983d14ae" kindref="member">token</ref>, <ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1promise" kindref="compound">promise</ref>&lt; void &gt; &gt; &gt;</type>
+        <definition>map&lt;token, shared_ptr&lt;promise&lt;void&gt; &gt; &gt; neforce::timer_scheduler&lt; Clock &gt;::promises_</definition>
+        <argsstring></argsstring>
+        <name>promises_</name>
+        <qualifiedname>neforce::timer_scheduler::promises_</qualifiedname>
+        <briefdescription>
+<para>ID到promise的映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="92" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1timer__scheduler_1aaf5a7265a21148fe6489fc8d6bfb35e7" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1thread" kindref="compound">thread</ref></type>
+        <definition>thread neforce::timer_scheduler&lt; Clock &gt;::thread_</definition>
+        <argsstring></argsstring>
+        <name>thread_</name>
+        <qualifiedname>neforce::timer_scheduler::thread_</qualifiedname>
+        <briefdescription>
+<para>调度线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="94" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1timer__scheduler_1a44c4f89d4b3e125f2739d4bf831c12df" prot="private" static="no" mutable="yes">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::timer_scheduler&lt; Clock &gt;::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>neforce::timer_scheduler::mutex_</qualifiedname>
+        <briefdescription>
+<para>互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="95" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1timer__scheduler_1a0a349dbdbfd4bbc4ec8b332f295f41af" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1condition__variable" kindref="compound">condition_variable</ref></type>
+        <definition>condition_variable neforce::timer_scheduler&lt; Clock &gt;::cv_</definition>
+        <argsstring></argsstring>
+        <name>cv_</name>
+        <qualifiedname>neforce::timer_scheduler::cv_</qualifiedname>
+        <briefdescription>
+<para>条件变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="96" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1timer__scheduler_1a68233181b330e3d89d71a72c05660b87" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1timer__scheduler_1a97335334060b83bc3c6aa015983d14ae" kindref="member">token</ref></type>
+        <definition>token neforce::timer_scheduler&lt; Clock &gt;::next_id_</definition>
+        <argsstring></argsstring>
+        <name>next_id_</name>
+        <qualifiedname>neforce::timer_scheduler::next_id_</qualifiedname>
+        <initializer>{1}</initializer>
+        <briefdescription>
+<para>下一个可用的任务ID </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="97" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="97" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1timer__scheduler_1a8c0b8c2c2a7839f491b0bea8ec38487f" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::timer_scheduler&lt; Clock &gt;::stopped_</definition>
+        <argsstring></argsstring>
+        <name>stopped_</name>
+        <qualifiedname>neforce::timer_scheduler::stopped_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>停止标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="98" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="98" bodyend="98"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classneforce_1_1timer__scheduler_1a63d668995109028bdc9cdbb726de4807" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class thread_pool</definition>
+        <argsstring></argsstring>
+        <name>thread_pool</name>
+        <qualifiedname>neforce::timer_scheduler::thread_pool</qualifiedname>
+        <param>
+          <type>thread_pool</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="100" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1timer__scheduler_1a53f5aad4612d854efb6110d7342f118f" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::timer_scheduler&lt; Clock &gt;::run</definition>
+        <argsstring>()</argsstring>
+        <name>run</name>
+        <qualifiedname>neforce::timer_scheduler::run</qualifiedname>
+        <briefdescription>
+<para>调度线程的主循环 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>循环执行：<orderedlist>
+<listitem><para>等待直到有任务到达或停止信号</para>
+</listitem><listitem><para>执行所有到期的任务</para>
+</listitem><listitem><para>等待下一个任务的到期时间 </para>
+</listitem></orderedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="111" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="111" bodyend="148"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1timer__scheduler_1a9966ebf479c11c4d4c4e8606fe0d841f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::timer_scheduler&lt; Clock &gt;::timer_scheduler</definition>
+        <argsstring>()</argsstring>
+        <name>timer_scheduler</name>
+        <qualifiedname>neforce::timer_scheduler::timer_scheduler</qualifiedname>
+        <briefdescription>
+<para>构造函数，启动调度线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="154" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="154" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1timer__scheduler_1a61d890b902bef85c1dd7ec121b5f0aa3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::timer_scheduler&lt; Clock &gt;::~timer_scheduler</definition>
+        <argsstring>()</argsstring>
+        <name>~timer_scheduler</name>
+        <qualifiedname>neforce::timer_scheduler::~timer_scheduler</qualifiedname>
+        <briefdescription>
+<para>析构函数，停止调度线程并等待其结束 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="159" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="159" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1timer__scheduler_1a79006ce5426643a368e8e3ffcc69b35e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::timer_scheduler&lt; Clock &gt;::timer_scheduler</definition>
+        <argsstring>(const timer_scheduler &amp;)=delete</argsstring>
+        <name>timer_scheduler</name>
+        <qualifiedname>neforce::timer_scheduler::timer_scheduler</qualifiedname>
+        <param>
+          <type>const timer_scheduler &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="167" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1timer__scheduler_1a9a25db607b577cd74b4337b37da19088" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1timer__scheduler_1a9966ebf479c11c4d4c4e8606fe0d841f" kindref="member">timer_scheduler</ref> &amp;</type>
+        <definition>timer_scheduler &amp; neforce::timer_scheduler&lt; Clock &gt;::operator=</definition>
+        <argsstring>(const timer_scheduler &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::timer_scheduler::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1timer__scheduler_1a9966ebf479c11c4d4c4e8606fe0d841f" kindref="member">timer_scheduler</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="168" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1timer__scheduler_1a74acff96d77dc28a2c8a549ad056ac22" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::timer_scheduler&lt; Clock &gt;::timer_scheduler</definition>
+        <argsstring>(timer_scheduler &amp;&amp;)=delete</argsstring>
+        <name>timer_scheduler</name>
+        <qualifiedname>neforce::timer_scheduler::timer_scheduler</qualifiedname>
+        <param>
+          <type>timer_scheduler &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="169" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1timer__scheduler_1af4c3a2736e124f99765df939d920a971" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1timer__scheduler_1a9966ebf479c11c4d4c4e8606fe0d841f" kindref="member">timer_scheduler</ref> &amp;</type>
+        <definition>timer_scheduler &amp; neforce::timer_scheduler&lt; Clock &gt;::operator=</definition>
+        <argsstring>(timer_scheduler &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::timer_scheduler::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1timer__scheduler_1a9966ebf479c11c4d4c4e8606fe0d841f" kindref="member">timer_scheduler</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="170" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1timer__scheduler_1a3694eeedc09a5de9fadbbdb4249bd9eb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1timer__scheduler_1a97335334060b83bc3c6aa015983d14ae" kindref="member">token</ref></type>
+        <definition>token neforce::timer_scheduler&lt; Clock &gt;::add_task</definition>
+        <argsstring>(time_point expire, handler_type &amp;&amp;handler)</argsstring>
+        <name>add_task</name>
+        <qualifiedname>neforce::timer_scheduler::add_task</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1timer__scheduler_1ad750513d39f30c1903ddb134f2ab37af" kindref="member">time_point</ref></type>
+          <declname>expire</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1timer__scheduler_1abc7ce1bdaf883c5c894041fb42e714c6" kindref="member">handler_type</ref> &amp;&amp;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>添加定时任务 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expire</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务到期时间点 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务回调函数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>任务标识符，可用于取消任务</para>
+</simplesect>
+如果新任务的到期时间早于当前最早的任务，会唤醒调度线程。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="180" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="180" bodyend="206"/>
+        <references refid="group___shared_pointer_1gacdaa04ead5936b6c9e0f024297dcf54f" compoundref="shared__ptr_8hpp" startline="835" endline="863">neforce::make_shared</references>
+        <references refid="group___memory_order_1ga6367df7d3e137e9b30e17740435d1816" compoundref="memory__order_8hpp" startline="177">neforce::memory_order_acquire</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1promise_1a4b043d776f0251cf2b9ec02507946836" compoundref="promise_8hpp" startline="127" endline="127">neforce::promise&lt; Res &gt;::set_value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1timer__scheduler_1ad423b4129b0c27e750bd7148a1f04176" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::timer_scheduler&lt; Clock &gt;::cancel</definition>
+        <argsstring>(token id)</argsstring>
+        <name>cancel</name>
+        <qualifiedname>neforce::timer_scheduler::cancel</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1timer__scheduler_1a97335334060b83bc3c6aa015983d14ae" kindref="member">token</ref></type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>取消定时任务 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务标识符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否成功取消</para>
+</simplesect>
+如果取消的是当前最早的任务，会唤醒调度线程重新计算等待时间。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="215" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="215" bodyend="253"/>
+        <references refid="group___memory_order_1ga0ecbdbbd5ddbe9eda2820b9cea4826fc" compoundref="memory__order_8hpp" startline="179">neforce::memory_order_release</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1timer__scheduler_1a25c551949474b0ab40af1796c145a34a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::timer_scheduler&lt; Clock &gt;::cancel_all</definition>
+        <argsstring>()</argsstring>
+        <name>cancel_all</name>
+        <qualifiedname>neforce::timer_scheduler::cancel_all</qualifiedname>
+        <briefdescription>
+<para>取消所有定时任务 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="258" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="258" bodyend="268"/>
+        <references refid="group___memory_order_1ga0ecbdbbd5ddbe9eda2820b9cea4826fc" compoundref="memory__order_8hpp" startline="179">neforce::memory_order_release</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1timer__scheduler_1a550cb22c81cfd0cfd4f880d75f460530" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::timer_scheduler&lt; Clock &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::timer_scheduler::size</qualifiedname>
+        <briefdescription>
+<para>获取当前待处理的任务数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>任务数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="274" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="274" bodyend="277"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1timer__scheduler_1ab3a42eed857700873a209c044c7db66f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::timer_scheduler&lt; Clock &gt;::is_pending</definition>
+        <argsstring>(token id) const</argsstring>
+        <name>is_pending</name>
+        <qualifiedname>neforce::timer_scheduler::is_pending</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1timer__scheduler_1a97335334060b83bc3c6aa015983d14ae" kindref="member">token</ref></type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>检查任务是否仍在等待或执行中 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>任务标识符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>任务是否未完成 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="284" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="284" bodyend="287"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>定时任务调度器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Clock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时钟类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+管理所有定时任务的调度和执行。使用独立的线程运行调度循环， 基于时间点对任务进行排序，并在任务到期时执行回调函数。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" line="43" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/timer.hpp" bodystart="43" bodyend="288"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1timer__scheduler_1a3694eeedc09a5de9fadbbdb4249bd9eb" prot="public" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>add_task</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1ad423b4129b0c27e750bd7148a1f04176" prot="public" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>cancel</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a25c551949474b0ab40af1796c145a34a" prot="public" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>cancel_all</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1ab0874976c573ba10e729d57489b218ec" prot="private" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>cancel_flags_</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a1d9a4730d260662044deb61dc9f7e06b" prot="public" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>clock_type</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a0a349dbdbfd4bbc4ec8b332f295f41af" prot="private" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>cv_</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a3bb0d53e65a973440b4a5f36fa980b9f" prot="public" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>duration</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1abc7ce1bdaf883c5c894041fb42e714c6" prot="public" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>handler_type</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1ab3a42eed857700873a209c044c7db66f" prot="public" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>is_pending</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a44c4f89d4b3e125f2739d4bf831c12df" prot="private" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>mutex_</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a68233181b330e3d89d71a72c05660b87" prot="private" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>next_id_</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1aa24c921ff469815a1a48cb87911fb8b4" prot="private" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>node_map_</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a9326eb854216ea36e72c02c0386f84f9" prot="private" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>nodes_</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a9a25db607b577cd74b4337b37da19088" prot="public" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1af4c3a2736e124f99765df939d920a971" prot="public" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a32b149a3e5734af280d0150bbecc41ac" prot="private" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>promises_</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a53f5aad4612d854efb6110d7342f118f" prot="private" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>run</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a550cb22c81cfd0cfd4f880d75f460530" prot="public" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>size</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a8c0b8c2c2a7839f491b0bea8ec38487f" prot="private" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>stopped_</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1aaf5a7265a21148fe6489fc8d6bfb35e7" prot="private" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>thread_</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1ad750513d39f30c1903ddb134f2ab37af" prot="public" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>time_point</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a9966ebf479c11c4d4c4e8606fe0d841f" prot="public" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>timer_scheduler</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a79006ce5426643a368e8e3ffcc69b35e" prot="public" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>timer_scheduler</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a74acff96d77dc28a2c8a549ad056ac22" prot="public" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>timer_scheduler</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a97335334060b83bc3c6aa015983d14ae" prot="public" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>token</name></member>
+      <member refid="classneforce_1_1timer__scheduler_1a61d890b902bef85c1dd7ec121b5f0aa3" prot="public" virt="non-virtual"><scope>neforce::timer_scheduler</scope><name>~timer_scheduler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

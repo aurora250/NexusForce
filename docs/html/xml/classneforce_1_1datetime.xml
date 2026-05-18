@@ -1,0 +1,2121 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1datetime" kind="class" language="C++" prot="public">
+    <compoundname>neforce::datetime</compoundname>
+    <basecompoundref refid="structneforce_1_1iobject" prot="public" virt="non-virtual">neforce::iobject&lt; datetime &gt;</basecompoundref>
+    <basecompoundref refid="structneforce_1_1icommon" prot="public" virt="non-virtual">neforce::icommon&lt; datetime &gt;</basecompoundref>
+    <includes refid="datetime_8hpp" local="no">datetime.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1datetime_1ab427722c47e89b80fe3528be2f9aa5f2" prot="public" static="no">
+        <type><ref refid="classneforce_1_1date_1a73c033951dbf0146f50cc01e0c8a8b9a" kindref="member">neforce::date::date_type</ref></type>
+        <definition>using neforce::datetime::date_type = neforce:: date::date_type</definition>
+        <argsstring></argsstring>
+        <name>date_type</name>
+        <qualifiedname>neforce::datetime::date_type</qualifiedname>
+        <briefdescription>
+<para>日期分量类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="736" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="736" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1datetime_1ac1d797bba9bb782b4aaac274330d497a" prot="public" static="no">
+        <type><ref refid="classneforce_1_1time_1ac0331b7736a2796686e36bb0f26833cc" kindref="member">neforce::time::time_type</ref></type>
+        <definition>using neforce::datetime::time_type = neforce:: time::time_type</definition>
+        <argsstring></argsstring>
+        <name>time_type</name>
+        <qualifiedname>neforce::datetime::time_type</qualifiedname>
+        <briefdescription>
+<para>时间分量类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="737" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="737" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1datetime_1a2bd11500d29c07803a9854b2be42b9ca" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1date" kindref="compound">neforce::date</ref></type>
+        <definition>neforce::date neforce::datetime::date_</definition>
+        <argsstring></argsstring>
+        <name>date_</name>
+        <qualifiedname>neforce::datetime::date_</qualifiedname>
+        <briefdescription>
+<para>日期部分 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="740" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="740" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1datetime_1a05c49974d387aac935b14fcc6262ceb6" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1time" kindref="compound">neforce::time</ref></type>
+        <definition>neforce::time neforce::datetime::time_</definition>
+        <argsstring></argsstring>
+        <name>time_</name>
+        <qualifiedname>neforce::datetime::time_</qualifiedname>
+        <briefdescription>
+<para>时间部分 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="741" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="741" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1datetime_1a17b3a31e94d19b800736dc4f95a5ee18" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+        <definition>int64_t neforce::datetime::offset_seconds_</definition>
+        <argsstring></argsstring>
+        <name>offset_seconds_</name>
+        <qualifiedname>neforce::datetime::offset_seconds_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>时区偏移 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="742" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="742" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1datetime_1a50ca5f95226e5ce5ae01e7d50587a4af" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::datetime::has_timezone_</definition>
+        <argsstring></argsstring>
+        <name>has_timezone_</name>
+        <qualifiedname>neforce::datetime::has_timezone_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否有时区信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="743" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="743" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classneforce_1_1datetime_1a8744f10cd7538d569a3258c22515be43" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>static constexpr int neforce::datetime::months_to_int</definition>
+        <argsstring>(const string_view view)</argsstring>
+        <name>months_to_int</name>
+        <qualifiedname>neforce::datetime::months_to_int</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>view</declname>
+        </param>
+        <briefdescription>
+<para>将月份名称转换为月份数字 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>view</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>月份名称（如&quot;Jan&quot;） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>月份数字（1-12），失败返回0 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="751" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="751" bodyend="760"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1datetime_1aabd39159272d702e48f1e54e2c5479ad" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::datetime::datetime</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>datetime</name>
+        <qualifiedname>neforce::datetime::datetime</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="763" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a5296690b79d48adca22d32c541c216ab" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::datetime::~datetime</definition>
+        <argsstring>()=default</argsstring>
+        <name>~datetime</name>
+        <qualifiedname>neforce::datetime::~datetime</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="765" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a00f480107cc5d45d62f404da8a60ec13" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::datetime::datetime</definition>
+        <argsstring>(const datetime &amp;) noexcept=default</argsstring>
+        <name>datetime</name>
+        <qualifiedname>neforce::datetime::datetime</qualifiedname>
+        <param>
+          <type>const datetime &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="767" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a6739fd0e2a4b00f568f4d435995ff2b0" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>datetime &amp;</type>
+        <definition>datetime &amp; neforce::datetime::operator=</definition>
+        <argsstring>(const datetime &amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::datetime::operator=</qualifiedname>
+        <param>
+          <type>const datetime &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="768" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a4df2ddf1f1dbc1f9a569e648225578cb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::datetime::datetime</definition>
+        <argsstring>(datetime &amp;&amp;) noexcept=default</argsstring>
+        <name>datetime</name>
+        <qualifiedname>neforce::datetime::datetime</qualifiedname>
+        <param>
+          <type>datetime &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="769" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a9043e66c12952919b49fff8eb4797591" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>datetime &amp;</type>
+        <definition>datetime &amp; neforce::datetime::operator=</definition>
+        <argsstring>(datetime &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::datetime::operator=</qualifiedname>
+        <param>
+          <type>datetime &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="770" column="24"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a4197b02b7a1fdb8a94e96f2426719910" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::datetime::datetime</definition>
+        <argsstring>(const date_type year, const date_type month, const date_type day, const time_type hour, const time_type minute, const time_type second) noexcept</argsstring>
+        <name>datetime</name>
+        <qualifiedname>neforce::datetime::datetime</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1datetime_1ab427722c47e89b80fe3528be2f9aa5f2" kindref="member">date_type</ref></type>
+          <declname>year</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1datetime_1ab427722c47e89b80fe3528be2f9aa5f2" kindref="member">date_type</ref></type>
+          <declname>month</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1datetime_1ab427722c47e89b80fe3528be2f9aa5f2" kindref="member">date_type</ref></type>
+          <declname>day</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1datetime_1ac1d797bba9bb782b4aaac274330d497a" kindref="member">time_type</ref></type>
+          <declname>hour</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1datetime_1ac1d797bba9bb782b4aaac274330d497a" kindref="member">time_type</ref></type>
+          <declname>minute</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1datetime_1ac1d797bba9bb782b4aaac274330d497a" kindref="member">time_type</ref></type>
+          <declname>second</declname>
+        </param>
+        <briefdescription>
+<para>从日期和时间构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>year</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>年份 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>month</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>月份 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>day</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日期 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hour</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>小时 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>minute</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分钟 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>second</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>秒 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="781" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="781" bodyend="784"/>
+        <references refid="classneforce_1_1datetime_1ad0e4020b9bf87b7c5b3bbf6343410ca3" compoundref="datetime_8hpp" startline="977" endline="977">day</references>
+        <references refid="classneforce_1_1datetime_1aa2aef3bdd159572e2f56d9c795101307" compoundref="datetime_8hpp" startline="971" endline="971">month</references>
+        <references refid="classneforce_1_1datetime_1a0d337e12bebec6eed5a150188f2a021e" compoundref="datetime_8hpp" startline="965" endline="965">year</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a0b79b527a82ce3147f365dbc9eb6f567" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::datetime::datetime</definition>
+        <argsstring>(const date_type year, const date_type month, const date_type day, const time_type hour, const time_type minute, const time_type second, const int64_t offset) noexcept</argsstring>
+        <name>datetime</name>
+        <qualifiedname>neforce::datetime::datetime</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1datetime_1ab427722c47e89b80fe3528be2f9aa5f2" kindref="member">date_type</ref></type>
+          <declname>year</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1datetime_1ab427722c47e89b80fe3528be2f9aa5f2" kindref="member">date_type</ref></type>
+          <declname>month</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1datetime_1ab427722c47e89b80fe3528be2f9aa5f2" kindref="member">date_type</ref></type>
+          <declname>day</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1datetime_1ac1d797bba9bb782b4aaac274330d497a" kindref="member">time_type</ref></type>
+          <declname>hour</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1datetime_1ac1d797bba9bb782b4aaac274330d497a" kindref="member">time_type</ref></type>
+          <declname>minute</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1datetime_1ac1d797bba9bb782b4aaac274330d497a" kindref="member">time_type</ref></type>
+          <declname>second</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+<para>从日期、时间和时区构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>year</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>年份 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>month</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>月份 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>day</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日期 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hour</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>小时 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>minute</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分钟 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>second</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>秒 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时区偏移（秒） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="796" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="796" bodyend="801"/>
+        <references refid="classneforce_1_1datetime_1ad0e4020b9bf87b7c5b3bbf6343410ca3" compoundref="datetime_8hpp" startline="977" endline="977">day</references>
+        <references refid="classneforce_1_1datetime_1aa2aef3bdd159572e2f56d9c795101307" compoundref="datetime_8hpp" startline="971" endline="971">month</references>
+        <references refid="classneforce_1_1datetime_1a0d337e12bebec6eed5a150188f2a021e" compoundref="datetime_8hpp" startline="965" endline="965">year</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1af66be17efa3770e4bac8da5cfb33dcae" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::datetime::datetime</definition>
+        <argsstring>(const neforce::date &amp;date, const neforce::time &amp;time) noexcept</argsstring>
+        <name>datetime</name>
+        <qualifiedname>neforce::datetime::datetime</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1date" kindref="compound">neforce::date</ref> &amp;</type>
+          <declname>date</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1time" kindref="compound">neforce::time</ref> &amp;</type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+<para>从日期和时间对象构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>date</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日期对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时间对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="808" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="808" bodyend="810"/>
+        <references refid="classneforce_1_1datetime_1a8eb98d5610d8976b6c43556f77cff322" compoundref="datetime_8hpp" startline="935" endline="935">date</references>
+        <references refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" compoundref="datetime_8hpp" startline="941" endline="941">time</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a4cd87e675ae0eb806a36786c00d4cbab" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::datetime::datetime</definition>
+        <argsstring>(const neforce::date &amp;date, const neforce::time &amp;time, const int64_t offset) noexcept</argsstring>
+        <name>datetime</name>
+        <qualifiedname>neforce::datetime::datetime</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1date" kindref="compound">neforce::date</ref> &amp;</type>
+          <declname>date</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1time" kindref="compound">neforce::time</ref> &amp;</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+<para>从日期、时间对象和时区构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>date</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日期对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时间对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时区偏移（秒） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="818" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="818" bodyend="822"/>
+        <references refid="classneforce_1_1datetime_1a8eb98d5610d8976b6c43556f77cff322" compoundref="datetime_8hpp" startline="935" endline="935">date</references>
+        <references refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" compoundref="datetime_8hpp" startline="941" endline="941">time</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1ac1e652847b682ba05f34267f91acb050" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::datetime::datetime</definition>
+        <argsstring>(const neforce::date &amp;date) noexcept</argsstring>
+        <name>datetime</name>
+        <qualifiedname>neforce::datetime::datetime</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1date" kindref="compound">neforce::date</ref> &amp;</type>
+          <declname>date</declname>
+        </param>
+        <briefdescription>
+<para>从日期构造（时间部分为00:00:00） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>date</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日期对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="828" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="828" bodyend="829"/>
+        <references refid="classneforce_1_1datetime_1a8eb98d5610d8976b6c43556f77cff322" compoundref="datetime_8hpp" startline="935" endline="935">date</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1ad0db76997ed831bcef4f8ef030e9a14d" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::datetime::datetime</definition>
+        <argsstring>(const neforce::time &amp;time) noexcept</argsstring>
+        <name>datetime</name>
+        <qualifiedname>neforce::datetime::datetime</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1time" kindref="compound">neforce::time</ref> &amp;</type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+<para>从时间构造（日期部分为1970-01-01） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时间对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="835" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="835" bodyend="836"/>
+        <references refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" compoundref="datetime_8hpp" startline="941" endline="941">time</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1af790f88b47d471fd4f8ceb1e947205b1" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::datetime::datetime</definition>
+        <argsstring>(neforce::date &amp;&amp;date) noexcept</argsstring>
+        <name>datetime</name>
+        <qualifiedname>neforce::datetime::datetime</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1date" kindref="compound">neforce::date</ref> &amp;&amp;</type>
+          <declname>date</declname>
+        </param>
+        <briefdescription>
+<para>从日期构造（时间部分为00:00:00） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>date</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日期对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="842" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="842" bodyend="845"/>
+        <references refid="classneforce_1_1datetime_1a8eb98d5610d8976b6c43556f77cff322" compoundref="datetime_8hpp" startline="935" endline="935">date</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a4ba2a55898d9c8ca437c3c9d295bf8f4" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::datetime::datetime</definition>
+        <argsstring>(neforce::time &amp;&amp;time) noexcept</argsstring>
+        <name>datetime</name>
+        <qualifiedname>neforce::datetime::datetime</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1time" kindref="compound">neforce::time</ref> &amp;&amp;</type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+<para>从时间构造（日期部分为1970-01-01） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时间对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="851" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="851" bodyend="854"/>
+        <references refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" compoundref="datetime_8hpp" startline="941" endline="941">time</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1ae89039222f0785043d8401ce245287e6" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::datetime::datetime</definition>
+        <argsstring>(neforce::date &amp;&amp;date, neforce::time &amp;&amp;time) noexcept</argsstring>
+        <name>datetime</name>
+        <qualifiedname>neforce::datetime::datetime</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1date" kindref="compound">neforce::date</ref> &amp;&amp;</type>
+          <declname>date</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1time" kindref="compound">neforce::time</ref> &amp;&amp;</type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+<para>从日期和时间对象移动构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>date</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日期对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时间对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="861" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="861" bodyend="866"/>
+        <references refid="classneforce_1_1datetime_1a8eb98d5610d8976b6c43556f77cff322" compoundref="datetime_8hpp" startline="935" endline="935">date</references>
+        <references refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" compoundref="datetime_8hpp" startline="941" endline="941">time</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1ad2e379a37a2c748594f631ffdf481ab2" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::datetime::datetime</definition>
+        <argsstring>(neforce::date &amp;&amp;date, neforce::time &amp;&amp;time, const int64_t offset) noexcept</argsstring>
+        <name>datetime</name>
+        <qualifiedname>neforce::datetime::datetime</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1date" kindref="compound">neforce::date</ref> &amp;&amp;</type>
+          <declname>date</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1time" kindref="compound">neforce::time</ref> &amp;&amp;</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+<para>从日期、时间对象和时区移动构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>date</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日期对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时间对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时区偏移（秒） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="874" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="874" bodyend="881"/>
+        <references refid="classneforce_1_1datetime_1a8eb98d5610d8976b6c43556f77cff322" compoundref="datetime_8hpp" startline="935" endline="935">date</references>
+        <references refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" compoundref="datetime_8hpp" startline="941" endline="941">time</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a1b4d2b909a89a3567eb5c70e0ac5d106" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::datetime::is_valid</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_valid</name>
+        <qualifiedname>neforce::datetime::is_valid</qualifiedname>
+        <briefdescription>
+<para>检查时间是否有效 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否有效 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="887" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="887" bodyend="887"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a8a05d09d76d3b03b1f3359bcd900670a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>datetime &amp;</type>
+        <definition>datetime &amp; neforce::datetime::operator=</definition>
+        <argsstring>(const neforce::date &amp;date) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::datetime::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1date" kindref="compound">neforce::date</ref> &amp;</type>
+          <declname>date</declname>
+        </param>
+        <briefdescription>
+<para>从日期赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>date</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日期对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="894" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="894" bodyend="897"/>
+        <references refid="classneforce_1_1datetime_1a8eb98d5610d8976b6c43556f77cff322" compoundref="datetime_8hpp" startline="935" endline="935">date</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1ae9fc9eec0acc7b1be8d38b657f45fa38" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>datetime &amp;</type>
+        <definition>datetime &amp; neforce::datetime::operator=</definition>
+        <argsstring>(neforce::date &amp;&amp;date) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::datetime::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1date" kindref="compound">neforce::date</ref> &amp;&amp;</type>
+          <declname>date</declname>
+        </param>
+        <briefdescription>
+<para>从日期移动赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>date</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日期对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="904" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="904" bodyend="908"/>
+        <references refid="classneforce_1_1datetime_1a8eb98d5610d8976b6c43556f77cff322" compoundref="datetime_8hpp" startline="935" endline="935">date</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a92c699e0266338aa10a949ad93ccdab2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>datetime &amp;</type>
+        <definition>datetime &amp; neforce::datetime::operator=</definition>
+        <argsstring>(const neforce::time &amp;time) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::datetime::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1time" kindref="compound">neforce::time</ref> &amp;</type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+<para>从时间赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时间对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="915" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="915" bodyend="918"/>
+        <references refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" compoundref="datetime_8hpp" startline="941" endline="941">time</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1ab0114230cb7ad989e0648d7911c38270" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>datetime &amp;</type>
+        <definition>datetime &amp; neforce::datetime::operator=</definition>
+        <argsstring>(neforce::time &amp;&amp;time) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::datetime::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1time" kindref="compound">neforce::time</ref> &amp;&amp;</type>
+          <declname>time</declname>
+        </param>
+        <briefdescription>
+<para>从时间移动赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时间对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="925" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="925" bodyend="929"/>
+        <references refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" compoundref="datetime_8hpp" startline="941" endline="941">time</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a8eb98d5610d8976b6c43556f77cff322" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classneforce_1_1date" kindref="compound">neforce::date</ref> &amp;</type>
+        <definition>const neforce::date &amp; neforce::datetime::date</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>date</name>
+        <qualifiedname>neforce::datetime::date</qualifiedname>
+        <briefdescription>
+<para>获取日期部分 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>日期对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="935" column="37" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="935" bodyend="935"/>
+        <references refid="classneforce_1_1datetime_1a8eb98d5610d8976b6c43556f77cff322" compoundref="datetime_8hpp" startline="935" endline="935">date</references>
+        <referencedby refid="classneforce_1_1datetime_1a8eb98d5610d8976b6c43556f77cff322" compoundref="datetime_8hpp" startline="935" endline="935">date</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1ac1e652847b682ba05f34267f91acb050" compoundref="datetime_8hpp" startline="828" endline="829">datetime</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1af66be17efa3770e4bac8da5cfb33dcae" compoundref="datetime_8hpp" startline="808" endline="810">datetime</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a4cd87e675ae0eb806a36786c00d4cbab" compoundref="datetime_8hpp" startline="818" endline="822">datetime</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1af790f88b47d471fd4f8ceb1e947205b1" compoundref="datetime_8hpp" startline="842" endline="845">datetime</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1ae89039222f0785043d8401ce245287e6" compoundref="datetime_8hpp" startline="861" endline="866">datetime</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1ad2e379a37a2c748594f631ffdf481ab2" compoundref="datetime_8hpp" startline="874" endline="881">datetime</referencedby>
+        <referencedby refid="structneforce_1_1sqlite__prepared__result_1aad5ba77e12acca80bcb58544bc18b729" compoundref="sqlite__prepared__result_8hpp" startline="193" endline="193">neforce::sqlite_prepared_result::get_date</referencedby>
+        <referencedby refid="structneforce_1_1sqlite__result_1ac49f571063d6affe0b4951f187898455" compoundref="sqlite__result_8hpp" startline="191" endline="191">neforce::sqlite_result::get_date</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a8a05d09d76d3b03b1f3359bcd900670a" compoundref="datetime_8hpp" startline="894" endline="897">operator=</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1ae9fc9eec0acc7b1be8d38b657f45fa38" compoundref="datetime_8hpp" startline="904" endline="908">operator=</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a2cfee7769cbd30a851a1170e80ac1f8b" compoundref="datetime_8hpp" startline="1426" endline="1433">parse</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a434fbd8432315ce87b797d644460fa9a" compoundref="datetime_8hpp" startline="1384" endline="1395">parse_ISO8601</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a26c6c2faf41d8e2cadb2bfb2d7007a7b" compoundref="datetime_8hpp" startline="1233" endline="1274">parse_RFC3339</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a87894065f2e963c47acc978577ac3ebf" compoundref="datetime_8hpp" startline="1295" endline="1316">to_RFC1123</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classneforce_1_1time" kindref="compound">neforce::time</ref> &amp;</type>
+        <definition>const neforce::time &amp; neforce::datetime::time</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>time</name>
+        <qualifiedname>neforce::datetime::time</qualifiedname>
+        <briefdescription>
+<para>获取时间部分 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>时间对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="941" column="37" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="941" bodyend="941"/>
+        <references refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" compoundref="datetime_8hpp" startline="941" endline="941">time</references>
+        <referencedby refid="classneforce_1_1datetime_1af66be17efa3770e4bac8da5cfb33dcae" compoundref="datetime_8hpp" startline="808" endline="810">datetime</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a4cd87e675ae0eb806a36786c00d4cbab" compoundref="datetime_8hpp" startline="818" endline="822">datetime</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1ad0db76997ed831bcef4f8ef030e9a14d" compoundref="datetime_8hpp" startline="835" endline="836">datetime</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1ae89039222f0785043d8401ce245287e6" compoundref="datetime_8hpp" startline="861" endline="866">datetime</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1ad2e379a37a2c748594f631ffdf481ab2" compoundref="datetime_8hpp" startline="874" endline="881">datetime</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a4ba2a55898d9c8ca437c3c9d295bf8f4" compoundref="datetime_8hpp" startline="851" endline="854">datetime</referencedby>
+        <referencedby refid="structneforce_1_1sqlite__prepared__result_1aee61aa3d580a555a6b4cc73cdc15a634" compoundref="sqlite__prepared__result_8hpp" startline="200" endline="200">neforce::sqlite_prepared_result::get_time</referencedby>
+        <referencedby refid="structneforce_1_1sqlite__result_1a423520d48f146a738855fa4276628c93" compoundref="sqlite__result_8hpp" startline="198" endline="198">neforce::sqlite_result::get_time</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a0bd506cf564abd126a50635eb3d04f07" compoundref="datetime_8hpp" startline="1044" endline="1067">operator+=</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1ad2aa75679a40213120e8a525d1e799db" compoundref="datetime_8hpp" startline="1074" endline="1096">operator-=</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a92c699e0266338aa10a949ad93ccdab2" compoundref="datetime_8hpp" startline="915" endline="918">operator=</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1ab0114230cb7ad989e0648d7911c38270" compoundref="datetime_8hpp" startline="925" endline="929">operator=</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a2cfee7769cbd30a851a1170e80ac1f8b" compoundref="datetime_8hpp" startline="1426" endline="1433">parse</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a434fbd8432315ce87b797d644460fa9a" compoundref="datetime_8hpp" startline="1384" endline="1395">parse_ISO8601</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a26c6c2faf41d8e2cadb2bfb2d7007a7b" compoundref="datetime_8hpp" startline="1233" endline="1274">parse_RFC3339</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" compoundref="datetime_8hpp" startline="941" endline="941">time</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a87894065f2e963c47acc978577ac3ebf" compoundref="datetime_8hpp" startline="1295" endline="1316">to_RFC1123</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1ab803eec6ed75cb704ebc5e5a7f10fdbf" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1datetime_1ac1d797bba9bb782b4aaac274330d497a" kindref="member">time_type</ref></type>
+        <definition>time_type neforce::datetime::hours</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>hours</name>
+        <qualifiedname>neforce::datetime::hours</qualifiedname>
+        <briefdescription>
+<para>获取小时 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>小时 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="947" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="947" bodyend="947"/>
+        <referencedby refid="classneforce_1_1datetime_1a26c6c2faf41d8e2cadb2bfb2d7007a7b" compoundref="datetime_8hpp" startline="1233" endline="1274">parse_RFC3339</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a9d008257223b6375dd936c9c288aac51" compoundref="datetime_8hpp" startline="1167" endline="1180">to_offset_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a4e1f1b35868a63deec1da0f724b32fc3" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1datetime_1ac1d797bba9bb782b4aaac274330d497a" kindref="member">time_type</ref></type>
+        <definition>time_type neforce::datetime::minutes</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>minutes</name>
+        <qualifiedname>neforce::datetime::minutes</qualifiedname>
+        <briefdescription>
+<para>获取分钟 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>分钟 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="953" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="953" bodyend="953"/>
+        <referencedby refid="classneforce_1_1datetime_1a26c6c2faf41d8e2cadb2bfb2d7007a7b" compoundref="datetime_8hpp" startline="1233" endline="1274">parse_RFC3339</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a9d008257223b6375dd936c9c288aac51" compoundref="datetime_8hpp" startline="1167" endline="1180">to_offset_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a4711022186e2e595762d10f5ce792681" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1datetime_1ac1d797bba9bb782b4aaac274330d497a" kindref="member">time_type</ref></type>
+        <definition>time_type neforce::datetime::seconds</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>seconds</name>
+        <qualifiedname>neforce::datetime::seconds</qualifiedname>
+        <briefdescription>
+<para>获取秒 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>秒 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="959" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="959" bodyend="959"/>
+        <referencedby refid="classneforce_1_1datetime_1a2c4626d2b63cfcc3f8d4023d4fcee930" compoundref="datetime_8hpp" startline="1103" endline="1107">operator+</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a0bd506cf564abd126a50635eb3d04f07" compoundref="datetime_8hpp" startline="1044" endline="1067">operator+=</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a869feb67e87f7fffd496ab040e2f3d1f" compoundref="datetime_8hpp" startline="1114" endline="1118">operator-</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1ad2aa75679a40213120e8a525d1e799db" compoundref="datetime_8hpp" startline="1074" endline="1096">operator-=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a0d337e12bebec6eed5a150188f2a021e" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1datetime_1ab427722c47e89b80fe3528be2f9aa5f2" kindref="member">date_type</ref></type>
+        <definition>date_type neforce::datetime::year</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>year</name>
+        <qualifiedname>neforce::datetime::year</qualifiedname>
+        <briefdescription>
+<para>获取年份 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>年份 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="965" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="965" bodyend="965"/>
+        <referencedby refid="classneforce_1_1datetime_1a4197b02b7a1fdb8a94e96f2426719910" compoundref="datetime_8hpp" startline="781" endline="784">datetime</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a0b79b527a82ce3147f365dbc9eb6f567" compoundref="datetime_8hpp" startline="796" endline="801">datetime</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1ac1dce640bb25422c0c0bdf934e3ecfaa" compoundref="datetime_8hpp" startline="1324" endline="1353">parse_RFC1123</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1aa2aef3bdd159572e2f56d9c795101307" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1datetime_1ab427722c47e89b80fe3528be2f9aa5f2" kindref="member">date_type</ref></type>
+        <definition>date_type neforce::datetime::month</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>month</name>
+        <qualifiedname>neforce::datetime::month</qualifiedname>
+        <briefdescription>
+<para>获取月份 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>月份 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="971" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="971" bodyend="971"/>
+        <referencedby refid="classneforce_1_1datetime_1a4197b02b7a1fdb8a94e96f2426719910" compoundref="datetime_8hpp" startline="781" endline="784">datetime</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a0b79b527a82ce3147f365dbc9eb6f567" compoundref="datetime_8hpp" startline="796" endline="801">datetime</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1ad0e4020b9bf87b7c5b3bbf6343410ca3" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1datetime_1ab427722c47e89b80fe3528be2f9aa5f2" kindref="member">date_type</ref></type>
+        <definition>date_type neforce::datetime::day</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>day</name>
+        <qualifiedname>neforce::datetime::day</qualifiedname>
+        <briefdescription>
+<para>获取日期 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>日期 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="977" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="977" bodyend="977"/>
+        <referencedby refid="classneforce_1_1datetime_1a4197b02b7a1fdb8a94e96f2426719910" compoundref="datetime_8hpp" startline="781" endline="784">datetime</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a0b79b527a82ce3147f365dbc9eb6f567" compoundref="datetime_8hpp" startline="796" endline="801">datetime</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1ac1dce640bb25422c0c0bdf934e3ecfaa" compoundref="datetime_8hpp" startline="1324" endline="1353">parse_RFC1123</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a2c6a54d1f8c1031d327a003b14b5fe99" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::datetime::has_timezone</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>has_timezone</name>
+        <qualifiedname>neforce::datetime::has_timezone</qualifiedname>
+        <briefdescription>
+<para>检查是否有时区信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否有时区 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="983" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="983" bodyend="983"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a3436b5fff23b36aba91e269c7f7e1246" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+        <definition>int64_t neforce::datetime::offset_seconds</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>offset_seconds</name>
+        <qualifiedname>neforce::datetime::offset_seconds</qualifiedname>
+        <briefdescription>
+<para>获取时区偏移 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>时区偏移（秒） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="989" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="989" bodyend="989"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1aac849679f87ac4906eac917498cad3fa" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::datetime::clear</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::datetime::clear</qualifiedname>
+        <briefdescription>
+<para>重置为纪元起始时间 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1006" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1006" bodyend="1011"/>
+        <references refid="classneforce_1_1datetime_1aac849679f87ac4906eac917498cad3fa" compoundref="datetime_8hpp" startline="1006" endline="1011">clear</references>
+        <referencedby refid="classneforce_1_1datetime_1aac849679f87ac4906eac917498cad3fa" compoundref="datetime_8hpp" startline="1006" endline="1011">clear</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1af15c8fefde7f3e446ea4a2f5eb920dbc" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::datetime::equal_to</definition>
+        <argsstring>(const datetime &amp;other) const noexcept</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>neforce::datetime::equal_to</qualifiedname>
+        <param>
+          <type>const datetime &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>相等比较 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1016" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1016" bodyend="1019"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1aacb62d39635b28be814be204d9e631a5" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::datetime::less_than</definition>
+        <argsstring>(const datetime &amp;other) const noexcept</argsstring>
+        <name>less_than</name>
+        <qualifiedname>neforce::datetime::less_than</qualifiedname>
+        <param>
+          <type>const datetime &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>小于比较 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1024" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1024" bodyend="1037"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a0bd506cf564abd126a50635eb3d04f07" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>datetime &amp;</type>
+        <definition>datetime &amp; neforce::datetime::operator+=</definition>
+        <argsstring>(const int64_t seconds)</argsstring>
+        <name>operator+=</name>
+        <qualifiedname>neforce::datetime::operator+=</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+          <declname>seconds</declname>
+        </param>
+        <briefdescription>
+<para>加秒数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>seconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>秒数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1044" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1044" bodyend="1067"/>
+        <references refid="classneforce_1_1datetime_1a4711022186e2e595762d10f5ce792681" compoundref="datetime_8hpp" startline="959" endline="959">seconds</references>
+        <references refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" compoundref="datetime_8hpp" startline="941" endline="941">time</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1ad2aa75679a40213120e8a525d1e799db" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>datetime &amp;</type>
+        <definition>datetime &amp; neforce::datetime::operator-=</definition>
+        <argsstring>(const int64_t seconds) noexcept</argsstring>
+        <name>operator-=</name>
+        <qualifiedname>neforce::datetime::operator-=</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+          <declname>seconds</declname>
+        </param>
+        <briefdescription>
+<para>减秒数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>seconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>秒数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1074" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1074" bodyend="1096"/>
+        <references refid="classneforce_1_1datetime_1a4711022186e2e595762d10f5ce792681" compoundref="datetime_8hpp" startline="959" endline="959">seconds</references>
+        <references refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" compoundref="datetime_8hpp" startline="941" endline="941">time</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a2c4626d2b63cfcc3f8d4023d4fcee930" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>datetime</type>
+        <definition>datetime neforce::datetime::operator+</definition>
+        <argsstring>(const int64_t seconds) const noexcept</argsstring>
+        <name>operator+</name>
+        <qualifiedname>neforce::datetime::operator+</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+          <declname>seconds</declname>
+        </param>
+        <briefdescription>
+<para>加秒数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>seconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>秒数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新时间 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1103" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1103" bodyend="1107"/>
+        <references refid="classneforce_1_1datetime_1a4711022186e2e595762d10f5ce792681" compoundref="datetime_8hpp" startline="959" endline="959">seconds</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a869feb67e87f7fffd496ab040e2f3d1f" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>datetime</type>
+        <definition>datetime neforce::datetime::operator-</definition>
+        <argsstring>(const int64_t seconds) const noexcept</argsstring>
+        <name>operator-</name>
+        <qualifiedname>neforce::datetime::operator-</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+          <declname>seconds</declname>
+        </param>
+        <briefdescription>
+<para>减秒数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>seconds</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>秒数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>新时间 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1114" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1114" bodyend="1118"/>
+        <references refid="classneforce_1_1datetime_1a4711022186e2e595762d10f5ce792681" compoundref="datetime_8hpp" startline="959" endline="959">seconds</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1aa83257adaf0689a57248ea55dd3f53b6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>datetime &amp;</type>
+        <definition>datetime &amp; neforce::datetime::operator++</definition>
+        <argsstring>()</argsstring>
+        <name>operator++</name>
+        <qualifiedname>neforce::datetime::operator++</qualifiedname>
+        <briefdescription>
+<para>前置递增（加1秒） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1123" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1123" bodyend="1123"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a753b9fdfb9b9b5411bf48ef1fa483a8d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>datetime</type>
+        <definition>datetime neforce::datetime::operator++</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator++</name>
+        <qualifiedname>neforce::datetime::operator++</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+<para>后置递增（加1秒） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1128" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1128" bodyend="1132"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1acf4a289e236a0fccca387f9db985508c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>datetime &amp;</type>
+        <definition>datetime &amp; neforce::datetime::operator--</definition>
+        <argsstring>()</argsstring>
+        <name>operator--</name>
+        <qualifiedname>neforce::datetime::operator--</qualifiedname>
+        <briefdescription>
+<para>前置递减（减1秒） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1137" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1137" bodyend="1137"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a196784e5437b24b138d36729d88633fd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>datetime</type>
+        <definition>datetime neforce::datetime::operator--</definition>
+        <argsstring>(int)</argsstring>
+        <name>operator--</name>
+        <qualifiedname>neforce::datetime::operator--</qualifiedname>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+<para>后置递减（减1秒） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1142" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1142" bodyend="1146"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a51988f4da6768a5e691dd2c6660c5b9a" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1datetime_1ac1d797bba9bb782b4aaac274330d497a" kindref="member">time_type</ref></type>
+        <definition>time_type neforce::datetime::operator-</definition>
+        <argsstring>(const datetime &amp;other) const noexcept</argsstring>
+        <name>operator-</name>
+        <qualifiedname>neforce::datetime::operator-</qualifiedname>
+        <param>
+          <type>const datetime &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>时间差（秒数） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>相差的秒数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1153" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1153" bodyend="1161"/>
+        <references refid="classneforce_1_1datetime_1a8edd4afecf14925f7fc48b5c9df13944" compoundref="datetime_8hpp" startline="1203" endline="1212">to_UTC</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a9d008257223b6375dd936c9c288aac51" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::datetime::to_offset_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_offset_string</name>
+        <qualifiedname>neforce::datetime::to_offset_string</qualifiedname>
+        <briefdescription>
+<para>转换为时区偏移字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>格式为 ±HH:MM 或 &quot;Z&quot; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1167" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1167" bodyend="1180"/>
+        <references refid="group___format_1ga0f7c7c59376bf75f938eb88185d5fa5e" compoundref="format_8hpp" startline="695" endline="701">neforce::format</references>
+        <references refid="classneforce_1_1datetime_1ab803eec6ed75cb704ebc5e5a7f10fdbf" compoundref="datetime_8hpp" startline="947" endline="947">hours</references>
+        <references refid="classneforce_1_1datetime_1a4e1f1b35868a63deec1da0f724b32fc3" compoundref="datetime_8hpp" startline="953" endline="953">minutes</references>
+        <references refid="group___math_functions_1gafbeebd881301d8e263f30b2b21f6ce11" compoundref="math_8hpp" startline="306" endline="316">neforce::sign</references>
+        <referencedby refid="classneforce_1_1datetime_1a292edeee8c9faf463c436e8f2fce019b" compoundref="datetime_8hpp" startline="1219" endline="1225">to_RFC3339</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a8edd4afecf14925f7fc48b5c9df13944" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>datetime</type>
+        <definition>datetime neforce::datetime::to_UTC</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_UTC</name>
+        <qualifiedname>neforce::datetime::to_UTC</qualifiedname>
+        <briefdescription>
+<para>转换为UTC时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>UTC时间 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1203" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1203" bodyend="1212"/>
+        <referencedby refid="classneforce_1_1datetime_1ae77818cbadbb81d71d2e599a43f5066e" compoundref="datetime_8hpp" startline="1188" endline="1197">from_UTC</referencedby>
+        <referencedby refid="classneforce_1_1datetime_1a51988f4da6768a5e691dd2c6660c5b9a" compoundref="datetime_8hpp" startline="1153" endline="1161">operator-</referencedby>
+        <referencedby refid="classneforce_1_1timestamp_1a145014dceca169a47fdfc559acc1bc7a" compoundref="datetime_8hpp" startline="1501" endline="1504">neforce::timestamp::timestamp</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a292edeee8c9faf463c436e8f2fce019b" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::datetime::to_RFC3339</definition>
+        <argsstring>() const</argsstring>
+        <name>to_RFC3339</name>
+        <qualifiedname>neforce::datetime::to_RFC3339</qualifiedname>
+        <briefdescription>
+<para>转换为 RFC 3339 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>格式为 YYYY-MM-DDTHH:MM:SSZ 或 YYYY-MM-DDTHH:MM:SS±HH:MM </para>
+</simplesect>
+<simplesect kind="note"><para>RFC 3339 要求必须包含时区信息 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1219" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1219" bodyend="1225"/>
+        <references refid="classneforce_1_1datetime_1a9d008257223b6375dd936c9c288aac51" compoundref="datetime_8hpp" startline="1167" endline="1180">to_offset_string</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1aa7a5b0028943b8b82d1ead1beb7b6f3c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::datetime::try_parse_RFC3339</definition>
+        <argsstring>(const string_view view) noexcept</argsstring>
+        <name>try_parse_RFC3339</name>
+        <qualifiedname>neforce::datetime::try_parse_RFC3339</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>view</declname>
+        </param>
+        <briefdescription>
+<para>尝试解析 RFC 3339 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>view</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RFC 3339 格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否解析成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1281" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1281" bodyend="1289"/>
+        <references refid="classneforce_1_1datetime_1a26c6c2faf41d8e2cadb2bfb2d7007a7b" compoundref="datetime_8hpp" startline="1233" endline="1274">parse_RFC3339</references>
+        <references refid="group___swap_utility_1ga71b9da583fb3cb5d5f79ff8cfc663540">neforce::swap</references>
+        <referencedby refid="classneforce_1_1toml__datetime_1ac904e42b60556c31c47be5878ab7193f" compoundref="toml__value_8hpp" startline="505" endline="536">neforce::toml_datetime::toml_datetime</referencedby>
+        <referencedby refid="classneforce_1_1yaml__timestamp_1a57ecd29ccb9a4d1be006a7496f81ef0a" compoundref="yaml__value_8hpp" startline="537" endline="544">neforce::yaml_timestamp::yaml_timestamp</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a87894065f2e963c47acc978577ac3ebf" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::datetime::to_RFC1123</definition>
+        <argsstring>() const</argsstring>
+        <name>to_RFC1123</name>
+        <qualifiedname>neforce::datetime::to_RFC1123</qualifiedname>
+        <briefdescription>
+<para>转换为 RFC 1123 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>格式为 &quot;Wed, 21 Dec 2022 10:00:00 GMT&quot; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1295" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1295" bodyend="1316"/>
+        <references refid="classneforce_1_1datetime_1a8eb98d5610d8976b6c43556f77cff322" compoundref="datetime_8hpp" startline="935" endline="935">date</references>
+        <references refid="group___format_1ga0f7c7c59376bf75f938eb88185d5fa5e" compoundref="format_8hpp" startline="695" endline="701">neforce::format</references>
+        <references refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" compoundref="datetime_8hpp" startline="941" endline="941">time</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a4aa5808c1717a46e58c821a9901219ad" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::datetime::try_parse_RFC1123</definition>
+        <argsstring>(const string_view view) noexcept</argsstring>
+        <name>try_parse_RFC1123</name>
+        <qualifiedname>neforce::datetime::try_parse_RFC1123</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>view</declname>
+        </param>
+        <briefdescription>
+<para>尝试解析 RFC 1123 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>view</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RFC 1123 格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否解析成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1360" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1360" bodyend="1368"/>
+        <references refid="classneforce_1_1datetime_1ac1dce640bb25422c0c0bdf934e3ecfaa" compoundref="datetime_8hpp" startline="1324" endline="1353">parse_RFC1123</references>
+        <references refid="group___swap_utility_1ga71b9da583fb3cb5d5f79ff8cfc663540">neforce::swap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a1091dc811afaa09e0ff213b41efb9686" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::datetime::to_ISO8601</definition>
+        <argsstring>() const</argsstring>
+        <name>to_ISO8601</name>
+        <qualifiedname>neforce::datetime::to_ISO8601</qualifiedname>
+        <briefdescription>
+<para>转换为 ISO 8601 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>格式为 YYYY-MM-DDTHH:MM:SS </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1374" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1374" bodyend="1376"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a1d416c8ca2e8661eda83972d66e25411" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::datetime::try_parse_ISO8601</definition>
+        <argsstring>(const string_view view) noexcept</argsstring>
+        <name>try_parse_ISO8601</name>
+        <qualifiedname>neforce::datetime::try_parse_ISO8601</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>view</declname>
+        </param>
+        <briefdescription>
+<para>尝试解析 ISO 8601 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>view</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ISO 8601 格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否解析成功 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1402" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1402" bodyend="1410"/>
+        <references refid="classneforce_1_1datetime_1a434fbd8432315ce87b797d644460fa9a" compoundref="datetime_8hpp" startline="1384" endline="1395">parse_ISO8601</references>
+        <references refid="group___swap_utility_1ga71b9da583fb3cb5d5f79ff8cfc663540">neforce::swap</references>
+        <referencedby refid="classneforce_1_1toml__datetime_1ac904e42b60556c31c47be5878ab7193f" compoundref="toml__value_8hpp" startline="505" endline="536">neforce::toml_datetime::toml_datetime</referencedby>
+        <referencedby refid="classneforce_1_1yaml__timestamp_1a57ecd29ccb9a4d1be006a7496f81ef0a" compoundref="yaml__value_8hpp" startline="537" endline="544">neforce::yaml_timestamp::yaml_timestamp</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a47db90fe53c0a03aa4a0bea865fc5728" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::datetime::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>neforce::datetime::to_string</qualifiedname>
+        <briefdescription>
+<para>转换为简单格式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>格式为 YYYY-MM-DD HH:MM:SS </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1416" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1416" bodyend="1418"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a319248790928ae18075f65e9213c69e9" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::datetime::to_hash</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>to_hash</name>
+        <qualifiedname>neforce::datetime::to_hash</qualifiedname>
+        <briefdescription>
+<para>计算哈希值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>哈希值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1439" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1439" bodyend="1441"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a787493e6fc0ff3e71a9fe92f520db5fb" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::datetime::swap</definition>
+        <argsstring>(datetime &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::datetime::swap</qualifiedname>
+        <param>
+          <type>datetime &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个日期时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个日期时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1447" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1447" bodyend="1452"/>
+        <references refid="group___swap_utility_1ga71b9da583fb3cb5d5f79ff8cfc663540">neforce::swap</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1datetime_1a9e114e77d0ed29cedcb7389d8228dacd" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>datetime</type>
+        <definition>static constexpr datetime neforce::datetime::epoch</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>epoch</name>
+        <qualifiedname>neforce::datetime::epoch</qualifiedname>
+        <briefdescription>
+<para>获取纪元起始时间（1970-01-01 00:00:00 UTC） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>纪元起始时间 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="995" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="995" bodyend="995"/>
+        <referencedby refid="classneforce_1_1timestamp_1a145014dceca169a47fdfc559acc1bc7a" compoundref="datetime_8hpp" startline="1501" endline="1504">neforce::timestamp::timestamp</referencedby>
+        <referencedby refid="classneforce_1_1timestamp_1a8d7aa9e11428e740d69a7643c61cb845" compoundref="datetime_8hpp" startline="1516" endline="1516">neforce::timestamp::to_datetime</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1accdbfaebbe11e2bbe26fa9cf78b964e4" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>datetime</type>
+        <definition>static datetime neforce::datetime::now</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>now</name>
+        <qualifiedname>neforce::datetime::now</qualifiedname>
+        <briefdescription>
+<para>获取当前本地时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前本地时间 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1001" column="22"/>
+        <referencedby refid="structneforce_1_1http_1_1http__session_1a2daf94e76f37734647d8be95080aa7e0" compoundref="http__session_8hpp" startline="250" endline="250">neforce::http::http_session::age</referencedby>
+        <referencedby refid="structneforce_1_1http_1_1http__session_1abe7983dd27838fa45165ca985baf4c71" compoundref="http__session_8hpp" startline="256" endline="256">neforce::http::http_session::idle_time</referencedby>
+        <referencedby refid="classneforce_1_1timestamp_1ad85cc1e3d02a50caabc4d5d430ff465c" compoundref="datetime_8hpp" startline="1510" endline="1510">neforce::timestamp::now</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1ae77818cbadbb81d71d2e599a43f5066e" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>datetime</type>
+        <definition>static constexpr datetime neforce::datetime::from_UTC</definition>
+        <argsstring>(const datetime &amp;utc, const int32_t offset=0) noexcept</argsstring>
+        <name>from_UTC</name>
+        <qualifiedname>neforce::datetime::from_UTC</qualifiedname>
+        <param>
+          <type>const datetime &amp;</type>
+          <declname>utc</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1gaa0af497ed9ed410d4c911b409653515a" kindref="member">int32_t</ref></type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>从UTC时间转换为本地时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>utc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>UTC时间 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>本地时区偏移（秒） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>本地时间 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1188" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1188" bodyend="1197"/>
+        <references refid="classneforce_1_1datetime_1a8edd4afecf14925f7fc48b5c9df13944" compoundref="datetime_8hpp" startline="1203" endline="1212">to_UTC</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a26c6c2faf41d8e2cadb2bfb2d7007a7b" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>datetime</type>
+        <definition>static constexpr datetime neforce::datetime::parse_RFC3339</definition>
+        <argsstring>(const string_view view)</argsstring>
+        <name>parse_RFC3339</name>
+        <qualifiedname>neforce::datetime::parse_RFC3339</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>view</declname>
+        </param>
+        <briefdescription>
+<para>解析 RFC 3339 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>view</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RFC 3339 格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析得到的日期时间 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式错误或缺少时区信息时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1233" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1233" bodyend="1274"/>
+        <references refid="classneforce_1_1datetime_1a8eb98d5610d8976b6c43556f77cff322" compoundref="datetime_8hpp" startline="935" endline="935">date</references>
+        <references refid="classneforce_1_1datetime_1ab803eec6ed75cb704ebc5e5a7f10fdbf" compoundref="datetime_8hpp" startline="947" endline="947">hours</references>
+        <references refid="classneforce_1_1datetime_1a4e1f1b35868a63deec1da0f724b32fc3" compoundref="datetime_8hpp" startline="953" endline="953">minutes</references>
+        <references refid="classneforce_1_1date_1a6ef3498fbe31f937f30fdd0dd1da23d5" compoundref="datetime_8hpp" startline="426" endline="434">neforce::date::parse</references>
+        <references refid="classneforce_1_1time_1a474882f75d5e12c051124207667b9674" compoundref="datetime_8hpp" startline="701" endline="709">neforce::time::parse</references>
+        <references refid="group___math_functions_1gafbeebd881301d8e263f30b2b21f6ce11" compoundref="math_8hpp" startline="306" endline="316">neforce::sign</references>
+        <references refid="classneforce_1_1basic__string__view_1a5c3cc7bb70d1ce39a7e41c31d66cf1b3" compoundref="basic__string__view_8hpp" startline="303" endline="303">neforce::basic_string_view&lt; CharT, Traits &gt;::size</references>
+        <references refid="classneforce_1_1basic__string__view_1ab638e982a36599b447fcb8943c8d3512" compoundref="basic__string__view_8hpp" startline="414" endline="418">neforce::basic_string_view&lt; CharT, Traits &gt;::substr</references>
+        <references refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" compoundref="datetime_8hpp" startline="941" endline="941">time</references>
+        <referencedby refid="classneforce_1_1datetime_1aa7a5b0028943b8b82d1ead1beb7b6f3c" compoundref="datetime_8hpp" startline="1281" endline="1289">try_parse_RFC3339</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1ac1dce640bb25422c0c0bdf934e3ecfaa" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>datetime</type>
+        <definition>static constexpr datetime neforce::datetime::parse_RFC1123</definition>
+        <argsstring>(string_view view)</argsstring>
+        <name>parse_RFC1123</name>
+        <qualifiedname>neforce::datetime::parse_RFC1123</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>view</declname>
+        </param>
+        <briefdescription>
+<para>解析 RFC 1123 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>view</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>RFC 1123 格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析得到的日期时间 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式错误时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1324" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1324" bodyend="1353"/>
+        <references refid="classneforce_1_1datetime_1ad0e4020b9bf87b7c5b3bbf6343410ca3" compoundref="datetime_8hpp" startline="977" endline="977">day</references>
+        <references refid="classneforce_1_1basic__string__view_1aae15cc330ef6c575ef4a6f890f90fe3a" compoundref="basic__string__view_8hpp" startline="425" endline="425">neforce::basic_string_view&lt; CharT, Traits &gt;::head</references>
+        <references refid="classneforce_1_1basic__string__view_1abf3f17403b1eee7e9b7818bc6683cbad" compoundref="basic__string__view_8hpp" startline="377" endline="381">neforce::basic_string_view&lt; CharT, Traits &gt;::remove_prefix</references>
+        <references refid="classneforce_1_1basic__string__view_1a5c3cc7bb70d1ce39a7e41c31d66cf1b3" compoundref="basic__string__view_8hpp" startline="303" endline="303">neforce::basic_string_view&lt; CharT, Traits &gt;::size</references>
+        <references refid="classneforce_1_1basic__string__view_1ab638e982a36599b447fcb8943c8d3512" compoundref="basic__string__view_8hpp" startline="414" endline="418">neforce::basic_string_view&lt; CharT, Traits &gt;::substr</references>
+        <references refid="classneforce_1_1datetime_1a0d337e12bebec6eed5a150188f2a021e" compoundref="datetime_8hpp" startline="965" endline="965">year</references>
+        <referencedby refid="classneforce_1_1datetime_1a4aa5808c1717a46e58c821a9901219ad" compoundref="datetime_8hpp" startline="1360" endline="1368">try_parse_RFC1123</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a434fbd8432315ce87b797d644460fa9a" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>datetime</type>
+        <definition>static constexpr datetime neforce::datetime::parse_ISO8601</definition>
+        <argsstring>(const string_view view)</argsstring>
+        <name>parse_ISO8601</name>
+        <qualifiedname>neforce::datetime::parse_ISO8601</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>view</declname>
+        </param>
+        <briefdescription>
+<para>解析 ISO 8601 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>view</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ISO 8601 格式字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析得到的日期时间 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式错误时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1384" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1384" bodyend="1395"/>
+        <references refid="classneforce_1_1datetime_1a8eb98d5610d8976b6c43556f77cff322" compoundref="datetime_8hpp" startline="935" endline="935">date</references>
+        <references refid="classneforce_1_1date_1a6ef3498fbe31f937f30fdd0dd1da23d5" compoundref="datetime_8hpp" startline="426" endline="434">neforce::date::parse</references>
+        <references refid="classneforce_1_1time_1a474882f75d5e12c051124207667b9674" compoundref="datetime_8hpp" startline="701" endline="709">neforce::time::parse</references>
+        <references refid="classneforce_1_1basic__string__view_1a5c3cc7bb70d1ce39a7e41c31d66cf1b3" compoundref="basic__string__view_8hpp" startline="303" endline="303">neforce::basic_string_view&lt; CharT, Traits &gt;::size</references>
+        <references refid="classneforce_1_1basic__string__view_1ab638e982a36599b447fcb8943c8d3512" compoundref="basic__string__view_8hpp" startline="414" endline="418">neforce::basic_string_view&lt; CharT, Traits &gt;::substr</references>
+        <references refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" compoundref="datetime_8hpp" startline="941" endline="941">time</references>
+        <referencedby refid="classneforce_1_1datetime_1a1d416c8ca2e8661eda83972d66e25411" compoundref="datetime_8hpp" startline="1402" endline="1410">try_parse_ISO8601</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1datetime_1a2cfee7769cbd30a851a1170e80ac1f8b" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>datetime</type>
+        <definition>static constexpr datetime neforce::datetime::parse</definition>
+        <argsstring>(const string_view view)</argsstring>
+        <name>parse</name>
+        <qualifiedname>neforce::datetime::parse</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>view</declname>
+        </param>
+        <briefdescription>
+<para>解析简单格式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>view</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式为 YYYY-MM-DD HH:MM:SS 的字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析得到的日期时间 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式错误时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="1426" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="1426" bodyend="1433"/>
+        <references refid="classneforce_1_1datetime_1a8eb98d5610d8976b6c43556f77cff322" compoundref="datetime_8hpp" startline="935" endline="935">date</references>
+        <references refid="classneforce_1_1date_1a6ef3498fbe31f937f30fdd0dd1da23d5" compoundref="datetime_8hpp" startline="426" endline="434">neforce::date::parse</references>
+        <references refid="classneforce_1_1time_1a474882f75d5e12c051124207667b9674" compoundref="datetime_8hpp" startline="701" endline="709">neforce::time::parse</references>
+        <references refid="classneforce_1_1basic__string__view_1a5c3cc7bb70d1ce39a7e41c31d66cf1b3" compoundref="basic__string__view_8hpp" startline="303" endline="303">neforce::basic_string_view&lt; CharT, Traits &gt;::size</references>
+        <references refid="classneforce_1_1basic__string__view_1ab638e982a36599b447fcb8943c8d3512" compoundref="basic__string__view_8hpp" startline="414" endline="418">neforce::basic_string_view&lt; CharT, Traits &gt;::substr</references>
+        <references refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" compoundref="datetime_8hpp" startline="941" endline="941">time</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>日期时间类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>组合日期和时间，支持时区处理。 提供多种格式的解析和格式化：<itemizedlist>
+<listitem><para>ISO格式（YYYY-MM-DDTHH:MM:SS）</para>
+</listitem><listitem><para>ISO带时区（YYYY-MM-DDTHH:MM:SS±HH:MM 或 Z）</para>
+</listitem><listitem><para>GMT格式（RFC 1123）</para>
+</listitem><listitem><para>简单格式（YYYY-MM-DD HH:MM:SS） </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::datetime</label>
+        <link refid="classneforce_1_1datetime"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::icommon&lt; datetime &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::icomparable&lt; datetime &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="6">
+        <label>neforce::ihashable&lt; datetime &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="2">
+        <label>neforce::iobject&lt; datetime &gt;</label>
+        <link refid="structneforce_1_1iobject"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::istringify&lt; datetime &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::datetime</label>
+        <link refid="classneforce_1_1datetime"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::icommon&lt; datetime &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::icomparable&lt; datetime &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="6">
+        <label>neforce::ihashable&lt; datetime &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="2">
+        <label>neforce::iobject&lt; datetime &gt;</label>
+        <link refid="structneforce_1_1iobject"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::istringify&lt; datetime &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" line="734" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/time/datetime.hpp" bodystart="734" bodyend="1453"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1datetime_1aac849679f87ac4906eac917498cad3fa" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>clear</name></member>
+      <member refid="classneforce_1_1datetime_1a8eb98d5610d8976b6c43556f77cff322" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>date</name></member>
+      <member refid="classneforce_1_1datetime_1a2bd11500d29c07803a9854b2be42b9ca" prot="private" virt="non-virtual"><scope>neforce::datetime</scope><name>date_</name></member>
+      <member refid="classneforce_1_1datetime_1ab427722c47e89b80fe3528be2f9aa5f2" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>date_type</name></member>
+      <member refid="classneforce_1_1datetime_1aabd39159272d702e48f1e54e2c5479ad" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>datetime</name></member>
+      <member refid="classneforce_1_1datetime_1a00f480107cc5d45d62f404da8a60ec13" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>datetime</name></member>
+      <member refid="classneforce_1_1datetime_1a4df2ddf1f1dbc1f9a569e648225578cb" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>datetime</name></member>
+      <member refid="classneforce_1_1datetime_1a4197b02b7a1fdb8a94e96f2426719910" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>datetime</name></member>
+      <member refid="classneforce_1_1datetime_1a0b79b527a82ce3147f365dbc9eb6f567" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>datetime</name></member>
+      <member refid="classneforce_1_1datetime_1af66be17efa3770e4bac8da5cfb33dcae" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>datetime</name></member>
+      <member refid="classneforce_1_1datetime_1a4cd87e675ae0eb806a36786c00d4cbab" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>datetime</name></member>
+      <member refid="classneforce_1_1datetime_1ac1e652847b682ba05f34267f91acb050" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>datetime</name></member>
+      <member refid="classneforce_1_1datetime_1ad0db76997ed831bcef4f8ef030e9a14d" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>datetime</name></member>
+      <member refid="classneforce_1_1datetime_1af790f88b47d471fd4f8ceb1e947205b1" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>datetime</name></member>
+      <member refid="classneforce_1_1datetime_1a4ba2a55898d9c8ca437c3c9d295bf8f4" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>datetime</name></member>
+      <member refid="classneforce_1_1datetime_1ae89039222f0785043d8401ce245287e6" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>datetime</name></member>
+      <member refid="classneforce_1_1datetime_1ad2e379a37a2c748594f631ffdf481ab2" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>datetime</name></member>
+      <member refid="classneforce_1_1datetime_1ad0e4020b9bf87b7c5b3bbf6343410ca3" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>day</name></member>
+      <member refid="classneforce_1_1datetime_1a9e114e77d0ed29cedcb7389d8228dacd" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>epoch</name></member>
+      <member refid="classneforce_1_1datetime_1af15c8fefde7f3e446ea4a2f5eb920dbc" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>equal_to</name></member>
+      <member refid="classneforce_1_1datetime_1ae77818cbadbb81d71d2e599a43f5066e" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>from_UTC</name></member>
+      <member refid="classneforce_1_1datetime_1a2c6a54d1f8c1031d327a003b14b5fe99" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>has_timezone</name></member>
+      <member refid="classneforce_1_1datetime_1a50ca5f95226e5ce5ae01e7d50587a4af" prot="private" virt="non-virtual"><scope>neforce::datetime</scope><name>has_timezone_</name></member>
+      <member refid="classneforce_1_1datetime_1ab803eec6ed75cb704ebc5e5a7f10fdbf" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>hours</name></member>
+      <member refid="classneforce_1_1datetime_1a1b4d2b909a89a3567eb5c70e0ac5d106" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>is_valid</name></member>
+      <member refid="classneforce_1_1datetime_1aacb62d39635b28be814be204d9e631a5" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>less_than</name></member>
+      <member refid="classneforce_1_1datetime_1a4e1f1b35868a63deec1da0f724b32fc3" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>minutes</name></member>
+      <member refid="classneforce_1_1datetime_1aa2aef3bdd159572e2f56d9c795101307" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>month</name></member>
+      <member refid="classneforce_1_1datetime_1a8744f10cd7538d569a3258c22515be43" prot="private" virt="non-virtual"><scope>neforce::datetime</scope><name>months_to_int</name></member>
+      <member refid="classneforce_1_1datetime_1accdbfaebbe11e2bbe26fa9cf78b964e4" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>now</name></member>
+      <member refid="classneforce_1_1datetime_1a3436b5fff23b36aba91e269c7f7e1246" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>offset_seconds</name></member>
+      <member refid="classneforce_1_1datetime_1a17b3a31e94d19b800736dc4f95a5ee18" prot="private" virt="non-virtual"><scope>neforce::datetime</scope><name>offset_seconds_</name></member>
+      <member refid="structneforce_1_1icomparable_1aa385e40eb8ac8bdae736966ad0cf568f" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator!=</name></member>
+      <member refid="classneforce_1_1datetime_1a2c4626d2b63cfcc3f8d4023d4fcee930" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator+</name></member>
+      <member refid="classneforce_1_1datetime_1aa83257adaf0689a57248ea55dd3f53b6" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator++</name></member>
+      <member refid="classneforce_1_1datetime_1a753b9fdfb9b9b5411bf48ef1fa483a8d" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator++</name></member>
+      <member refid="classneforce_1_1datetime_1a0bd506cf564abd126a50635eb3d04f07" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator+=</name></member>
+      <member refid="classneforce_1_1datetime_1a869feb67e87f7fffd496ab040e2f3d1f" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator-</name></member>
+      <member refid="classneforce_1_1datetime_1a51988f4da6768a5e691dd2c6660c5b9a" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator-</name></member>
+      <member refid="classneforce_1_1datetime_1acf4a289e236a0fccca387f9db985508c" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator--</name></member>
+      <member refid="classneforce_1_1datetime_1a196784e5437b24b138d36729d88633fd" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator--</name></member>
+      <member refid="classneforce_1_1datetime_1ad2aa75679a40213120e8a525d1e799db" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator-=</name></member>
+      <member refid="structneforce_1_1icomparable_1a0641b58de65d6a0d5b87c2bcb47496a4" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator&lt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a313fba4bce20aced1ff0e6173ad6aab2" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator&lt;=</name></member>
+      <member refid="classneforce_1_1datetime_1a6739fd0e2a4b00f568f4d435995ff2b0" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1datetime_1a9043e66c12952919b49fff8eb4797591" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1datetime_1a8a05d09d76d3b03b1f3359bcd900670a" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1datetime_1ae9fc9eec0acc7b1be8d38b657f45fa38" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1datetime_1a92c699e0266338aa10a949ad93ccdab2" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1datetime_1ab0114230cb7ad989e0648d7911c38270" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1icomparable_1ab9b06f7293eb15299f8c7d5341bfbc83" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator==</name></member>
+      <member refid="structneforce_1_1icomparable_1ab8de930acec5c0261656b787f576f08d" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator&gt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a644c6002f703eb487427daadfec8fb16" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>operator&gt;=</name></member>
+      <member refid="classneforce_1_1datetime_1a2cfee7769cbd30a851a1170e80ac1f8b" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>parse</name></member>
+      <member refid="classneforce_1_1datetime_1a434fbd8432315ce87b797d644460fa9a" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>parse_ISO8601</name></member>
+      <member refid="classneforce_1_1datetime_1ac1dce640bb25422c0c0bdf934e3ecfaa" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>parse_RFC1123</name></member>
+      <member refid="classneforce_1_1datetime_1a26c6c2faf41d8e2cadb2bfb2d7007a7b" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>parse_RFC3339</name></member>
+      <member refid="classneforce_1_1datetime_1a4711022186e2e595762d10f5ce792681" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>seconds</name></member>
+      <member refid="classneforce_1_1datetime_1a787493e6fc0ff3e71a9fe92f520db5fb" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>swap</name></member>
+      <member refid="classneforce_1_1datetime_1a5c86569fd40a812252b6106646905016" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>time</name></member>
+      <member refid="classneforce_1_1datetime_1a05c49974d387aac935b14fcc6262ceb6" prot="private" virt="non-virtual"><scope>neforce::datetime</scope><name>time_</name></member>
+      <member refid="classneforce_1_1datetime_1ac1d797bba9bb782b4aaac274330d497a" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>time_type</name></member>
+      <member refid="classneforce_1_1datetime_1a319248790928ae18075f65e9213c69e9" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>to_hash</name></member>
+      <member refid="structneforce_1_1ihashable_1a3bedfaa42740465ea8b6e58309c1f67e" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>to_ihash</name></member>
+      <member refid="classneforce_1_1datetime_1a1091dc811afaa09e0ff213b41efb9686" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>to_ISO8601</name></member>
+      <member refid="classneforce_1_1datetime_1a9d008257223b6375dd936c9c288aac51" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>to_offset_string</name></member>
+      <member refid="classneforce_1_1datetime_1a87894065f2e963c47acc978577ac3ebf" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>to_RFC1123</name></member>
+      <member refid="classneforce_1_1datetime_1a292edeee8c9faf463c436e8f2fce019b" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>to_RFC3339</name></member>
+      <member refid="classneforce_1_1datetime_1a47db90fe53c0a03aa4a0bea865fc5728" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>to_string</name></member>
+      <member refid="classneforce_1_1datetime_1a8edd4afecf14925f7fc48b5c9df13944" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>to_UTC</name></member>
+      <member refid="structneforce_1_1iobject_1ae8235cec74a7cfe8188d40827d5293d4" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>try_parse</name></member>
+      <member refid="classneforce_1_1datetime_1a1d416c8ca2e8661eda83972d66e25411" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>try_parse_ISO8601</name></member>
+      <member refid="classneforce_1_1datetime_1a4aa5808c1717a46e58c821a9901219ad" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>try_parse_RFC1123</name></member>
+      <member refid="classneforce_1_1datetime_1aa7a5b0028943b8b82d1ead1beb7b6f3c" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>try_parse_RFC3339</name></member>
+      <member refid="classneforce_1_1datetime_1a0d337e12bebec6eed5a150188f2a021e" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>year</name></member>
+      <member refid="classneforce_1_1datetime_1a5296690b79d48adca22d32c541c216ab" prot="public" virt="non-virtual"><scope>neforce::datetime</scope><name>~datetime</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

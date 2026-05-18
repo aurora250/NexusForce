@@ -44,7 +44,7 @@ var group___d_n_s =
       [ "type", "structdns__record.html#ad71d9704e49d96e8bfac0996454c9bf3", null ]
     ] ],
     [ "dns_query_result", "structdns__query__result.html", [
-      [ "is_success", "structdns__query__result.html#ae39bf03cc263fb122efa0a4dca000f40", null ],
+      [ "is_success", "structdns__query__result.html#aac4fafad6e1d0ee8b49baba47ae30217", null ],
       [ "additional", "structdns__query__result.html#a9beeefa6c0e7822b9a1916b7bd82c18b", null ],
       [ "answers", "structdns__query__result.html#ace6a20317ab90fc47fec30886b654701", null ],
       [ "authorities", "structdns__query__result.html#a48baecffcfa14836de44df9058039fc4", null ],

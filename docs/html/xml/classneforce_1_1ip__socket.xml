@@ -1,0 +1,449 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1ip__socket" kind="class" language="C++" prot="public">
+    <compoundname>neforce::ip_socket</compoundname>
+    <basecompoundref refid="classneforce_1_1socket__base" prot="public" virt="non-virtual">neforce::socket_base</basecompoundref>
+    <derivedcompoundref refid="classneforce_1_1ftp__protocol" prot="public" virt="non-virtual">neforce::ftp_protocol</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1smtp__socket" prot="public" virt="non-virtual">neforce::smtp_socket</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1tcp__acceptor" prot="public" virt="non-virtual">neforce::tcp_acceptor</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1tcp__socket" prot="public" virt="non-virtual">neforce::tcp_socket</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1udp__socket" prot="public" virt="non-virtual">neforce::udp_socket</derivedcompoundref>
+    <includes refid="ip__socket_8hpp" local="no">ip_socket.hpp</includes>
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classneforce_1_1ip__socket_1ad6f6fa083f5eeb3ecc1a4a6cad9bd820" prot="protected" static="no" mutable="no">
+        <type>int</type>
+        <definition>int neforce::ip_socket::family_</definition>
+        <argsstring></argsstring>
+        <name>family_</name>
+        <qualifiedname>neforce::ip_socket::family_</qualifiedname>
+        <initializer>= AF_UNSPEC</initializer>
+        <briefdescription>
+<para>地址族 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="73" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="73" bodyend="-1"/>
+        <referencedby refid="classneforce_1_1ip__socket_1a3dc51f0c9c51af3035631cd7324abead" compoundref="ip__socket_8hpp" startline="105" endline="105">address_family</referencedby>
+        <referencedby refid="classneforce_1_1ip__socket_1ac28c4d988187869d423dd9c881b6c1ad" compoundref="ip__socket_8hpp" startline="136" endline="139">close</referencedby>
+        <referencedby refid="classneforce_1_1ip__socket_1a4931794a3b297db3646a6c8b85e9dec2" compoundref="ip__socket_8hpp" startline="111" endline="111">is_ipv4</referencedby>
+        <referencedby refid="classneforce_1_1ip__socket_1ac145bfaba7d2e8640b40ea30e4b64e0c" compoundref="ip__socket_8hpp" startline="117" endline="117">is_ipv6</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classneforce_1_1ip__socket_1a418623573c0b33fee1d6f4fff67e1dd2" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::ip_socket::open_ip</definition>
+        <argsstring>(int family, int type, int protocol)</argsstring>
+        <name>open_ip</name>
+        <qualifiedname>neforce::ip_socket::open_ip</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>family</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>protocol</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="75" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1ip__socket_1a98a70d9b139d26347dce1ec4fac71dd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ip_socket::ip_socket</definition>
+        <argsstring>()=default</argsstring>
+        <name>ip_socket</name>
+        <qualifiedname>neforce::ip_socket::ip_socket</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="81" column="5"/>
+        <referencedby refid="classneforce_1_1smtp__socket_1aa730a8666b5bec8f8d2d8e24bb8c145a" compoundref="smtp__socket_8hpp" startline="197" endline="198">neforce::smtp_socket::smtp_socket</referencedby>
+        <referencedby refid="classneforce_1_1tcp__socket_1ac2fc8bafbeae9a0ff0a031656ba371f0" compoundref="tcp__socket_8hpp" startline="83" endline="84">neforce::tcp_socket::tcp_socket</referencedby>
+        <referencedby refid="classneforce_1_1ip__socket_1a40b908afe34460e2d5d890a36913fac1">~ip_socket</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ip__socket_1ab903e29e3d12614715fc900e1ea82c8d" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ip_socket::ip_socket</definition>
+        <argsstring>(const native_handle_type fd) noexcept</argsstring>
+        <name>ip_socket</name>
+        <qualifiedname>neforce::ip_socket::ip_socket</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1socket__base_1adcffd7b995ddcc49a6ab844e75fb7dde" kindref="member">native_handle_type</ref></type>
+          <declname>fd</declname>
+        </param>
+        <briefdescription>
+<para>从原生句柄构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原生socket句柄 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="87" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="87" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ip__socket_1ac105a1ad0969027342aa7fde2522532b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ip_socket::ip_socket</definition>
+        <argsstring>(ip_socket &amp;&amp;) noexcept=default</argsstring>
+        <name>ip_socket</name>
+        <qualifiedname>neforce::ip_socket::ip_socket</qualifiedname>
+        <param>
+          <type>ip_socket &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="90" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ip__socket_1aaf616a56b6b0e00194633d59a93e79ae" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ip__socket_1a98a70d9b139d26347dce1ec4fac71dd5" kindref="member">ip_socket</ref> &amp;</type>
+        <definition>ip_socket &amp; neforce::ip_socket::operator=</definition>
+        <argsstring>(ip_socket &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::ip_socket::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1ip__socket_1a98a70d9b139d26347dce1ec4fac71dd5" kindref="member">ip_socket</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="91" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ip__socket_1ab00c04d8df1df46dda74dc8d1a43df94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ip_socket::ip_socket</definition>
+        <argsstring>(const ip_socket &amp;)=delete</argsstring>
+        <name>ip_socket</name>
+        <qualifiedname>neforce::ip_socket::ip_socket</qualifiedname>
+        <param>
+          <type>const ip_socket &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="93" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ip__socket_1acd978787ab0a7d3b0123917f8c6b8a96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1ip__socket_1a98a70d9b139d26347dce1ec4fac71dd5" kindref="member">ip_socket</ref> &amp;</type>
+        <definition>ip_socket &amp; neforce::ip_socket::operator=</definition>
+        <argsstring>(const ip_socket &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::ip_socket::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1ip__socket_1a98a70d9b139d26347dce1ec4fac71dd5" kindref="member">ip_socket</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="94" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ip__socket_1a40b908afe34460e2d5d890a36913fac1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::ip_socket::~ip_socket</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~ip_socket</name>
+        <qualifiedname>neforce::ip_socket::~ip_socket</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="99" column="5"/>
+        <references refid="classneforce_1_1ip__socket_1a98a70d9b139d26347dce1ec4fac71dd5">ip_socket</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ip__socket_1a3dc51f0c9c51af3035631cd7324abead" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int neforce::ip_socket::address_family</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>address_family</name>
+        <qualifiedname>neforce::ip_socket::address_family</qualifiedname>
+        <briefdescription>
+<para>获取地址族 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>AF_INET、AF_INET6或AF_UNSPEC </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="105" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="105" bodyend="105"/>
+        <references refid="classneforce_1_1ip__socket_1a3dc51f0c9c51af3035631cd7324abead" compoundref="ip__socket_8hpp" startline="105" endline="105">address_family</references>
+        <references refid="classneforce_1_1ip__socket_1ad6f6fa083f5eeb3ecc1a4a6cad9bd820" compoundref="ip__socket_8hpp" startline="73">family_</references>
+        <referencedby refid="classneforce_1_1ip__socket_1a3dc51f0c9c51af3035631cd7324abead" compoundref="ip__socket_8hpp" startline="105" endline="105">address_family</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ip__socket_1a4931794a3b297db3646a6c8b85e9dec2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::ip_socket::is_ipv4</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_ipv4</name>
+        <qualifiedname>neforce::ip_socket::is_ipv4</qualifiedname>
+        <briefdescription>
+<para>检查是否为IPv4 socket </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>IPv4返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="111" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="111" bodyend="111"/>
+        <references refid="classneforce_1_1ip__socket_1ad6f6fa083f5eeb3ecc1a4a6cad9bd820" compoundref="ip__socket_8hpp" startline="73">family_</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ip__socket_1ac145bfaba7d2e8640b40ea30e4b64e0c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::ip_socket::is_ipv6</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_ipv6</name>
+        <qualifiedname>neforce::ip_socket::is_ipv6</qualifiedname>
+        <briefdescription>
+<para>检查是否为IPv6 socket </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>IPv6返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="117" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="117" bodyend="117"/>
+        <references refid="classneforce_1_1ip__socket_1ad6f6fa083f5eeb3ecc1a4a6cad9bd820" compoundref="ip__socket_8hpp" startline="73">family_</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ip__socket_1a4cdbfc7ec62fb1980c9b432567c544b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void neforce::ip_socket::connect</definition>
+        <argsstring>(const ip_address &amp;endpoint)</argsstring>
+        <name>connect</name>
+        <qualifiedname>neforce::ip_socket::connect</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>endpoint</declname>
+        </param>
+        <briefdescription>
+<para>连接到远程端点（TCP客户端） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>endpoint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>远程IP地址和端口 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1socket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>连接失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>socket未打开或端点无效时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+发起TCP连接到指定的远程服务器。 对于非阻塞socket，连接可能不会立即完成。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="128" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ip__socket_1ac28c4d988187869d423dd9c881b6c1ad" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::ip_socket::close</definition>
+        <argsstring>() noexcept override</argsstring>
+        <name>close</name>
+        <qualifiedname>neforce::ip_socket::close</qualifiedname>
+        <reimplements refid="classneforce_1_1socket__base_1a8de8f78559fccaf6b9ed6da6b89f27c3">close</reimplements>
+        <briefdescription>
+<para>关闭socket </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>关闭成功返回true</para>
+</simplesect>
+重置地址族为AF_UNSPEC，然后关闭socket。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="136" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="136" bodyend="139"/>
+        <references refid="classneforce_1_1socket__base_1a8de8f78559fccaf6b9ed6da6b89f27c3">neforce::socket_base::close</references>
+        <references refid="classneforce_1_1ip__socket_1ad6f6fa083f5eeb3ecc1a4a6cad9bd820" compoundref="ip__socket_8hpp" startline="73">family_</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>IP协议族Socket基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>继承自socket_base，专门用于IP协议族（IPv4/IPv6）的Socket操作。 增加了地址族约束、连接功能和地址族查询。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>地址族约束</para>
+</listitem><listitem><para>IPv4/IPv6地址族检测</para>
+</listitem><listitem><para>连接操作</para>
+</listitem><listitem><para>IP头结构定义</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>此类是抽象基类，具体使用TCP或UDP时应使用tcp_socket或udp_socket。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::ip_socket</label>
+        <link refid="classneforce_1_1ip__socket"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::smtp_socket</label>
+        <link refid="classneforce_1_1smtp__socket"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::socket_base</label>
+        <link refid="classneforce_1_1socket__base"/>
+      </node>
+      <node id="5">
+        <label>neforce::ssl_acceptor</label>
+        <link refid="classneforce_1_1ssl__acceptor"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>neforce::ssl_socket</label>
+        <link refid="classneforce_1_1ssl__socket"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::tcp_acceptor</label>
+        <link refid="classneforce_1_1tcp__acceptor"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>neforce::tcp_socket</label>
+        <link refid="classneforce_1_1tcp__socket"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>neforce::udp_socket</label>
+        <link refid="classneforce_1_1udp__socket"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::ip_socket</label>
+        <link refid="classneforce_1_1ip__socket"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::socket_base</label>
+        <link refid="classneforce_1_1socket__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="71" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="71" bodyend="140"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1ip__socket_1a3dc51f0c9c51af3035631cd7324abead" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>address_family</name></member>
+      <member refid="classneforce_1_1socket__base_1ae7a4566c2df82eb0ba3fff8b5fc7df46" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>bind</name></member>
+      <member refid="classneforce_1_1ip__socket_1ac28c4d988187869d423dd9c881b6c1ad" prot="public" virt="virtual"><scope>neforce::ip_socket</scope><name>close</name></member>
+      <member refid="classneforce_1_1ip__socket_1a4cdbfc7ec62fb1980c9b432567c544b8" prot="public" virt="virtual"><scope>neforce::ip_socket</scope><name>connect</name></member>
+      <member refid="classneforce_1_1ip__socket_1ad6f6fa083f5eeb3ecc1a4a6cad9bd820" prot="protected" virt="non-virtual"><scope>neforce::ip_socket</scope><name>family_</name></member>
+      <member refid="classneforce_1_1socket__base_1a0d91356affbee30bd1e6f7cc483e508d" prot="protected" virt="non-virtual"><scope>neforce::ip_socket</scope><name>fd_</name></member>
+      <member refid="classneforce_1_1socket__base_1a17ec17b8a17e3bee456b0048596320a8" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>get_option</name></member>
+      <member refid="classneforce_1_1socket__base_1af49691de702dac3413c30d84bb64f734" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>invalid_handle</name></member>
+      <member refid="classneforce_1_1ip__socket_1a98a70d9b139d26347dce1ec4fac71dd5" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>ip_socket</name></member>
+      <member refid="classneforce_1_1ip__socket_1ab903e29e3d12614715fc900e1ea82c8d" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>ip_socket</name></member>
+      <member refid="classneforce_1_1ip__socket_1ac105a1ad0969027342aa7fde2522532b" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>ip_socket</name></member>
+      <member refid="classneforce_1_1ip__socket_1ab00c04d8df1df46dda74dc8d1a43df94" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>ip_socket</name></member>
+      <member refid="classneforce_1_1ip__socket_1a4931794a3b297db3646a6c8b85e9dec2" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>is_ipv4</name></member>
+      <member refid="classneforce_1_1ip__socket_1ac145bfaba7d2e8640b40ea30e4b64e0c" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>is_ipv6</name></member>
+      <member refid="classneforce_1_1socket__base_1a688c59e456551b33a230cb139dbd685a" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>is_open</name></member>
+      <member refid="classneforce_1_1socket__base_1aada611fdaa46fb9f055ef566be7fbd05" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>listen</name></member>
+      <member refid="classneforce_1_1socket__base_1abaa18d7f634b115ad1989ec023c0bf32" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>local_endpoint</name></member>
+      <member refid="classneforce_1_1socket__base_1a55e7e77823236aaf022990256793783d" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>native_handle</name></member>
+      <member refid="classneforce_1_1socket__base_1adcffd7b995ddcc49a6ab844e75fb7dde" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>native_handle_type</name></member>
+      <member refid="classneforce_1_1socket__base_1acbaee07b3d802e67ad82a99614d43b49" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>open</name></member>
+      <member refid="classneforce_1_1ip__socket_1a418623573c0b33fee1d6f4fff67e1dd2" prot="protected" virt="non-virtual"><scope>neforce::ip_socket</scope><name>open_ip</name></member>
+      <member refid="classneforce_1_1socket__base_1ac4c5240cbfd92f1b31e3f8dc7093987a" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>operator bool</name></member>
+      <member refid="classneforce_1_1ip__socket_1aaf616a56b6b0e00194633d59a93e79ae" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1ip__socket_1acd978787ab0a7d3b0123917f8c6b8a96" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1socket__base_1ab20b8caa25bbb8071e4c908691251667" prot="public" virt="non-virtual" ambiguityscope="neforce::socket_base::"><scope>neforce::ip_socket</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1socket__base_1a9e86d2bd403dbba7ba100a163ea130d0" prot="public" virt="non-virtual" ambiguityscope="neforce::socket_base::"><scope>neforce::ip_socket</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1socket__base_1a32f1e147a349925c32839fa1ce3b8fdc" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>release</name></member>
+      <member refid="classneforce_1_1socket__base_1ae1a4b45ff284ba83fac92aa5dc4a9adb" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>remote_endpoint</name></member>
+      <member refid="classneforce_1_1socket__base_1ab55494ddb7435ace44483bf2a13d1b19" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>set_keep_alive</name></member>
+      <member refid="classneforce_1_1socket__base_1a9b75e2f51a01febdd29f2fd6941fd2ab" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>set_nonblocking</name></member>
+      <member refid="classneforce_1_1socket__base_1aebf9cdaaa399bcbdff7e7a47345d039a" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>set_option</name></member>
+      <member refid="classneforce_1_1socket__base_1a2b3e9bc783b3e3469bb213604220deed" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>set_receive_buffer_size</name></member>
+      <member refid="classneforce_1_1socket__base_1a3e028a27cad5bca645c4d8f645751dfa" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>set_receive_timeout</name></member>
+      <member refid="classneforce_1_1socket__base_1af311eb5e4b8693da9b1d1e16d0b10d13" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>set_reuse_address</name></member>
+      <member refid="classneforce_1_1socket__base_1ad2cd6c991e1b7689ecffadc57ec44df5" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>set_reuse_port</name></member>
+      <member refid="classneforce_1_1socket__base_1a5b90babf7b270d141fdeeab138550374" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>set_send_buffer_size</name></member>
+      <member refid="classneforce_1_1socket__base_1a21e4ba35840c0cc904beaaf005a846b1" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>set_send_timeout</name></member>
+      <member refid="classneforce_1_1socket__base_1a82ea11bfa98bbbd2ad2d9feeffd44782" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>set_tcp_nodelay</name></member>
+      <member refid="classneforce_1_1socket__base_1a53d78f352e1c34a1d54f475d6eaf7922" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>shutdown_both</name></member>
+      <member refid="classneforce_1_1socket__base_1a852458c313e65acc1e74bc16130e0502" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>shutdown_receive</name></member>
+      <member refid="classneforce_1_1socket__base_1ac0d78cde8681391cedca79f28e89119e" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>shutdown_send</name></member>
+      <member refid="classneforce_1_1socket__base_1a9b8731a4cb059cf60c43ca97aa688162" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1accb5b278a3bc2792f893357f1e7e9812" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1afa79ec1d00e839df5aaf63de31028566" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1a08db6bdff24ac7930d2010da313fe5f8" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1aa4888bb12d134a9eb33e832022b5c46d" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>try_open</name></member>
+      <member refid="classneforce_1_1ip__socket_1a40b908afe34460e2d5d890a36913fac1" prot="public" virt="non-virtual"><scope>neforce::ip_socket</scope><name>~ip_socket</name></member>
+      <member refid="classneforce_1_1socket__base_1aef05deba68ee95bf9f5a5e3c408851a3" prot="public" virt="virtual"><scope>neforce::ip_socket</scope><name>~socket_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

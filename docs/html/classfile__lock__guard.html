@@ -110,8 +110,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a110d10bc9f6c3037945d63c5c97fb21d"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，立即获取锁  <br /></td></tr>
 <tr class="memitem:af502f63935fa4e7b59c485716aa2af3a" id="r_af502f63935fa4e7b59c485716aa2af3a"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af502f63935fa4e7b59c485716aa2af3a">~file_lock_guard</a> ()</td></tr>
 <tr class="memdesc:af502f63935fa4e7b59c485716aa2af3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数，自动释放锁  <br /></td></tr>
-<tr class="memitem:a1aa1e94b3c835c67eda130d636c3a348" id="r_a1aa1e94b3c835c67eda130d636c3a348"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a1aa1e94b3c835c67eda130d636c3a348">is_locked</a> () const noexcept</td></tr>
-<tr class="memdesc:a1aa1e94b3c835c67eda130d636c3a348"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否持有锁  <br /></td></tr>
+<tr class="memitem:a8008438f08d4a4defe2096bc4981c1b1" id="r_a8008438f08d4a4defe2096bc4981c1b1"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a8008438f08d4a4defe2096bc4981c1b1">is_locked</a> () const noexcept</td></tr>
+<tr class="memdesc:a8008438f08d4a4defe2096bc4981c1b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否持有锁  <br /></td></tr>
 <tr class="memitem:a3cafdf0ebd5af925ea17ba6f2f5ea2e0" id="r_a3cafdf0ebd5af925ea17ba6f2f5ea2e0"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a3cafdf0ebd5af925ea17ba6f2f5ea2e0">unlock</a> () noexcept</td></tr>
 <tr class="memdesc:a3cafdf0ebd5af925ea17ba6f2f5ea2e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">手动释放锁  <br /></td></tr>
 </table>
@@ -189,8 +189,8 @@ Public 成员函数</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="a1aa1e94b3c835c67eda130d636c3a348" name="a1aa1e94b3c835c67eda130d636c3a348"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1aa1e94b3c835c67eda130d636c3a348">&#9670;&#160;</a></span>is_locked()</h2>
+<a id="a8008438f08d4a4defe2096bc4981c1b1" name="a8008438f08d4a4defe2096bc4981c1b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8008438f08d4a4defe2096bc4981c1b1">&#9670;&#160;</a></span>is_locked()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -199,7 +199,7 @@ Public 成员函数</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_NODISCARD bool file_lock_guard::is_locked </td>
+          <td class="memname">bool file_lock_guard::is_locked </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -207,7 +207,7 @@ Public 成员函数</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

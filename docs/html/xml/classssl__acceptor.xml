@@ -75,9 +75,9 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" line="100" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classssl__acceptor_1aa70f758579060382935f09a1f84dd672" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classssl__context" kindref="compound">ssl_context</ref> &amp;</type>
-        <definition>NEFORCE_NODISCARD ssl_context &amp; ssl_acceptor::context</definition>
+      <memberdef kind="function" id="classssl__acceptor_1a53d9c6410185f9c8247a00d25241a56f" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classssl__context" kindref="compound">ssl_context</ref> &amp;</type>
+        <definition>ssl_context &amp; ssl_acceptor::context</definition>
         <argsstring>() noexcept</argsstring>
         <name>context</name>
         <qualifiedname>ssl_acceptor::context</qualifiedname>
@@ -91,11 +91,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" line="106" column="35" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" bodystart="106" bodyend="106"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" line="106" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" bodystart="106" bodyend="106"/>
       </memberdef>
-      <memberdef kind="function" id="classssl__acceptor_1a45f9df7877e1461231a545a9cf3d1c79" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD const <ref refid="classssl__context" kindref="compound">ssl_context</ref> &amp;</type>
-        <definition>NEFORCE_NODISCARD const ssl_context &amp; ssl_acceptor::context</definition>
+      <memberdef kind="function" id="classssl__acceptor_1ab3b3814b4288fd8c8c99e6d5ebe9d56f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classssl__context" kindref="compound">ssl_context</ref> &amp;</type>
+        <definition>const ssl_context &amp; ssl_acceptor::context</definition>
         <argsstring>() const noexcept</argsstring>
         <name>context</name>
         <qualifiedname>ssl_acceptor::context</qualifiedname>
@@ -109,11 +109,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" line="112" column="41" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" bodystart="112" bodyend="112"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" line="112" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" bodystart="112" bodyend="112"/>
       </memberdef>
-      <memberdef kind="function" id="classssl__acceptor_1a1ff931d086904393ce22cf28c1f14272" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classssl__socket" kindref="compound">ssl_socket</ref></type>
-        <definition>NEFORCE_NODISCARD ssl_socket ssl_acceptor::accept_ssl</definition>
+      <memberdef kind="function" id="classssl__acceptor_1a839b43648acf22c7fc584dd90963cd04" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classssl__socket" kindref="compound">ssl_socket</ref></type>
+        <definition>ssl_socket ssl_acceptor::accept_ssl</definition>
         <argsstring>()</argsstring>
         <name>accept_ssl</name>
         <qualifiedname>ssl_acceptor::accept_ssl</qualifiedname>
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" line="121" column="34"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" line="121" column="17"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -171,7 +171,7 @@
 <codeline><highlight class="normal">acceptor.<ref refid="classssl__acceptor_1a4bc3e8b4220ad110f3a073cd49df9375" kindref="member">set_ssl_context</ref>(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(ctx));</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>绑定并监听端口</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>endpoint<sp/>=<sp/><ref refid="classip__address_1a180ec03fa7dd1c0cca46fcbc2e1ded1c" kindref="member">ip_address::any</ref>(ports::https);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>endpoint<sp/>=<sp/><ref refid="classip__address_1a845df218a59fa6cc3101db811e0d2ae6" kindref="member">ip_address::any</ref>(ports::https);</highlight></codeline>
 <codeline><highlight class="normal">acceptor.<ref refid="classtcp__acceptor_1a01f29ebfd1e0f953d9f1f5ca7ec9896a" kindref="member">open</ref>(endpoint,<sp/>128);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;TLS<sp/>Server<sp/>listening<sp/>on<sp/>&quot;</highlight><highlight class="normal">,<sp/>endpoint);</highlight></codeline>
@@ -179,10 +179,10 @@
 <codeline><highlight class="normal"></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>接受TLS客户端连接</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>client<sp/>=<sp/>acceptor.<ref refid="classssl__acceptor_1a1ff931d086904393ce22cf28c1f14272" kindref="member">accept_ssl</ref>();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>client<sp/>=<sp/>acceptor.<ref refid="classssl__acceptor_1a839b43648acf22c7fc584dd90963cd04" kindref="member">accept_ssl</ref>();</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>获取客户端地址</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>client_addr<sp/>=<sp/>client.<ref refid="classsocket__base_1a3af835aab3dbb6e477c9833184437b62" kindref="member">remote_endpoint</ref>();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>client_addr<sp/>=<sp/>client.<ref refid="classsocket__base_1a3a861847a9b28069c28a4ae626f8a4b9" kindref="member">remote_endpoint</ref>();</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(client_addr)<sp/>{</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;New<sp/>TLS<sp/>connection<sp/>from<sp/>&quot;</highlight><highlight class="normal">,<sp/>client_addr);</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -200,7 +200,7 @@
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>client.send_all({</highlight><highlight class="stringliteral">&quot;Hello<sp/>from<sp/>TLS<sp/>server!&quot;</highlight><highlight class="normal">});</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>exception&amp;<sp/>e)<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;Error:<sp/>&quot;</highlight><highlight class="normal">,<sp/>e.<ref refid="structexception_1ac635798f4eb88397f79b995966b26683" kindref="member">what</ref>());</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;Error:<sp/>&quot;</highlight><highlight class="normal">,<sp/>e.<ref refid="structexception_1a5d2925886b0a3350d7b29d4a8bbdf87e" kindref="member">what</ref>());</highlight></codeline>
 <codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline><highlight class="normal">}</highlight></codeline>
 </programlisting></para>
@@ -258,15 +258,15 @@
     </collaborationgraph>
     <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" line="82" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" bodystart="82" bodyend="122"/>
     <listofallmembers>
-      <member refid="classtcp__acceptor_1a61ceb34c57bc0b322be30c33ecfa9eef" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>accept</name></member>
-      <member refid="classtcp__acceptor_1a6300cbb9eec6e11bb1df9870f7ac8675" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>accept_nonblock</name></member>
-      <member refid="classssl__acceptor_1a1ff931d086904393ce22cf28c1f14272" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>accept_ssl</name></member>
-      <member refid="classip__socket_1a981aa1544d7794182f65c1764fc83443" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>address_family</name></member>
+      <member refid="classtcp__acceptor_1a4981086af1b46cb09f58784469d16f13" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>accept</name></member>
+      <member refid="classtcp__acceptor_1a677e1317fe230cd82993671b39e0fec9" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>accept_nonblock</name></member>
+      <member refid="classssl__acceptor_1a839b43648acf22c7fc584dd90963cd04" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>accept_ssl</name></member>
+      <member refid="classip__socket_1a415f4ab8b75623a4474eabaa211c1323" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>address_family</name></member>
       <member refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>bind</name></member>
       <member refid="classip__socket_1a242bf63bfaf65fdb748d02ac8193dfb1" prot="public" virt="virtual"><scope>ssl_acceptor</scope><name>close</name></member>
       <member refid="classip__socket_1a50186a110e9b4e5c67aac5a23e021ace" prot="public" virt="virtual"><scope>ssl_acceptor</scope><name>connect</name></member>
-      <member refid="classssl__acceptor_1aa70f758579060382935f09a1f84dd672" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>context</name></member>
-      <member refid="classssl__acceptor_1a45f9df7877e1461231a545a9cf3d1c79" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>context</name></member>
+      <member refid="classssl__acceptor_1a53d9c6410185f9c8247a00d25241a56f" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>context</name></member>
+      <member refid="classssl__acceptor_1ab3b3814b4288fd8c8c99e6d5ebe9d56f" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>context</name></member>
       <member refid="classssl__acceptor_1a978a7ed0e533b39f84e490e13e136906" prot="private" virt="non-virtual"><scope>ssl_acceptor</scope><name>ctx_</name></member>
       <member refid="classip__socket_1a5bef8064a2f2e096f28993a0f6542c87" prot="protected" virt="non-virtual"><scope>ssl_acceptor</scope><name>family_</name></member>
       <member refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" prot="protected" virt="non-virtual"><scope>ssl_acceptor</scope><name>fd_</name></member>
@@ -276,12 +276,12 @@
       <member refid="classip__socket_1a8a478205847df7ca0529f15ca8ce50b8" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>ip_socket</name></member>
       <member refid="classip__socket_1a00d8e53e5b1c1d7dc6de2fe45e50ffc4" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>ip_socket</name></member>
       <member refid="classip__socket_1aae6b6a8b9b8bea4d66dba690c8222980" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>ip_socket</name></member>
-      <member refid="classip__socket_1a84a515031395f20e2365e46cfabd9fdb" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>is_ipv4</name></member>
-      <member refid="classip__socket_1a33e8a286462c74c4c4eb4df045dac507" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>is_ipv6</name></member>
-      <member refid="classsocket__base_1a6187ffba6859cc29fcf0c0b08916dcca" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>is_open</name></member>
+      <member refid="classip__socket_1a085fd937f8c8e4f6c0f0d27f91249bd9" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>is_ipv4</name></member>
+      <member refid="classip__socket_1a2022ec8175200f4d69e925e3375f81b2" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>is_ipv6</name></member>
+      <member refid="classsocket__base_1ae075f18d5fe704a278f8021d251905a0" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>is_open</name></member>
       <member refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>listen</name></member>
-      <member refid="classsocket__base_1a698bf7147749c5f0bbfd0a906875eb5e" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>local_endpoint</name></member>
-      <member refid="classsocket__base_1a7a733151fa76e8e33ebd6d637c06e0fd" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>native_handle</name></member>
+      <member refid="classsocket__base_1a1d9ff8b37d502077065ad505098f1c10" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>local_endpoint</name></member>
+      <member refid="classsocket__base_1ad99d1582b07a547df0c6e25d7d057262" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>native_handle</name></member>
       <member refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>native_handle_type</name></member>
       <member refid="classtcp__acceptor_1a01f29ebfd1e0f953d9f1f5ca7ec9896a" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>open</name></member>
       <member refid="classsocket__base_1ac45ca9c8151fc981e49861f5e85b0434" prot="public" virt="non-virtual" ambiguityscope="ip_socket::"><scope>ssl_acceptor</scope><name>open</name></member>
@@ -291,8 +291,8 @@
       <member refid="classip__socket_1a73fbebcb7a962895a5943597b9d3d6d8" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>operator=</name></member>
       <member refid="classsocket__base_1af825fb2543e89b098bc9c1da47f09647" prot="public" virt="non-virtual" ambiguityscope="socket_base::"><scope>ssl_acceptor</scope><name>operator=</name></member>
       <member refid="classsocket__base_1ae6442c91cf368fa6c9781f3603a31e8c" prot="public" virt="non-virtual" ambiguityscope="socket_base::"><scope>ssl_acceptor</scope><name>operator=</name></member>
-      <member refid="classsocket__base_1ada299429136c0d648e5f8bb59635e9db" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>release</name></member>
-      <member refid="classsocket__base_1a3af835aab3dbb6e477c9833184437b62" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>remote_endpoint</name></member>
+      <member refid="classsocket__base_1a940df24ee538694021cc7350ba790524" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>release</name></member>
+      <member refid="classsocket__base_1a3a861847a9b28069c28a4ae626f8a4b9" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>remote_endpoint</name></member>
       <member refid="classsocket__base_1a6059faa2b63d09c36188a5aee9b64b83" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>set_keep_alive</name></member>
       <member refid="classsocket__base_1a7189d507bfa09539dd7fd3abc4d85a34" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>set_nonblocking</name></member>
       <member refid="classsocket__base_1a243eecfa633156956f8eef37d642af6b" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>set_option</name></member>

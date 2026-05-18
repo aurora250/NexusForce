@@ -8,7 +8,7 @@
  * 此文件提供了单次调用的实现，确保某个函数在多个线程中只被执行一次。
  */
 
-#include "NeForce/core/async/atomic.hpp"
+#include "NeForce/core/async/atomic_futex.hpp"
 #include "NeForce/core/functional/invoke.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -37,7 +37,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class once_flag {
 private:
-    atomic<uint32_t> state_{0};
+    atomic_futex<> state_{0};
 
     template <typename Callable, typename... Args>
     friend void call_once(once_flag& flag, Callable&& func, Args&&... args);
@@ -71,8 +71,6 @@ void call_once(once_flag& flag, Callable&& func, Args&&... args) {
         return;
     }
 
-    uint32_t spin_count = 0;
-
     while (true) {
         const uint32_t state = flag.state_.load(memory_order_acquire);
         if (state == 2) {
@@ -85,29 +83,19 @@ void call_once(once_flag& flag, Callable&& func, Args&&... args) {
                 try {
                     _NEFORCE invoke<Callable, Args...>(_NEFORCE forward<Callable>(func),
                                                        _NEFORCE forward<Args>(args)...);
-                    flag.state_.store(2, memory_order_release);
+                    flag.state_.store_notify_all(2, memory_order_release);
                     return;
                 } catch (...) {
-                    flag.state_.store(0, memory_order_release);
+                    flag.state_.store_notify_all(0, memory_order_release);
                     throw;
                 }
             }
-            spin_count = 0;
             continue;
         }
 
-        if (spin_count < 64) {
-            this_thread::relax();
-        } else if (spin_count < 1024) {
-            this_thread::yield();
-        } else if (spin_count < 2048) {
-            this_thread::sleep_for_ms(0);
-        } else if (spin_count < 4096) {
-            this_thread::sleep_for_ms(1);
-        } else {
-            this_thread::sleep_for_ms(10);
+        if (flag.state_.load_when_not_equal(1, memory_order_acquire) == 2) {
+            return;
         }
-        ++spin_count;
     }
 }
 

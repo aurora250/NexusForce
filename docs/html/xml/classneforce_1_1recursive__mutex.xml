@@ -1,0 +1,217 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1recursive__mutex" kind="class" language="C++" prot="public">
+    <compoundname>neforce::recursive_mutex</compoundname>
+    <includes refid="mutex_8hpp" local="no">mutex.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1recursive__mutex_1ad6f67c04a355e0623efe1057d182d4f8" prot="public" static="no">
+        <type>::CRITICAL_SECTION</type>
+        <definition>using neforce::recursive_mutex::native_handle_type = 
+
+::CRITICAL_SECTION</definition>
+        <argsstring></argsstring>
+        <name>native_handle_type</name>
+        <qualifiedname>neforce::recursive_mutex::native_handle_type</qualifiedname>
+        <briefdescription>
+<para>递归互斥锁的系统句柄类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="120" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1recursive__mutex_1aae352d36441bb62d53498ffdf598f1a2" prot="private" static="no" mutable="yes">
+        <type><ref refid="classneforce_1_1recursive__mutex_1ad6f67c04a355e0623efe1057d182d4f8" kindref="member">native_handle_type</ref></type>
+        <definition>native_handle_type neforce::recursive_mutex::recursive_mutex_</definition>
+        <argsstring></argsstring>
+        <name>recursive_mutex_</name>
+        <qualifiedname>neforce::recursive_mutex::recursive_mutex_</qualifiedname>
+        <briefdescription>
+<para>互斥锁句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="128" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1recursive__mutex_1aa5c299f9f54475058c03e969f746ee26" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::recursive_mutex::recursive_mutex</definition>
+        <argsstring>()</argsstring>
+        <name>recursive_mutex</name>
+        <qualifiedname>neforce::recursive_mutex::recursive_mutex</qualifiedname>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="134" column="5"/>
+        <referencedby refid="classneforce_1_1recursive__mutex_1a5c49e65cf372595c74afa3de3facd363">~recursive_mutex</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1recursive__mutex_1a5c49e65cf372595c74afa3de3facd363" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::recursive_mutex::~recursive_mutex</definition>
+        <argsstring>()</argsstring>
+        <name>~recursive_mutex</name>
+        <qualifiedname>neforce::recursive_mutex::~recursive_mutex</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="139" column="5"/>
+        <references refid="classneforce_1_1recursive__mutex_1aa5c299f9f54475058c03e969f746ee26">recursive_mutex</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1recursive__mutex_1a574fb5ade0b92d7e7cd0c80f1fbab1fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::recursive_mutex::recursive_mutex</definition>
+        <argsstring>(const recursive_mutex &amp;)=delete</argsstring>
+        <name>recursive_mutex</name>
+        <qualifiedname>neforce::recursive_mutex::recursive_mutex</qualifiedname>
+        <param>
+          <type>const recursive_mutex &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="141" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1recursive__mutex_1a94d30d1a32610ebc2e06d7d5b5b8ef4a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1recursive__mutex_1aa5c299f9f54475058c03e969f746ee26" kindref="member">recursive_mutex</ref> &amp;</type>
+        <definition>recursive_mutex &amp; neforce::recursive_mutex::operator=</definition>
+        <argsstring>(const recursive_mutex &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::recursive_mutex::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1recursive__mutex_1aa5c299f9f54475058c03e969f746ee26" kindref="member">recursive_mutex</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="142" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1recursive__mutex_1aff06228d1b09e726943d0000d8087734" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1recursive__mutex_1ad6f67c04a355e0623efe1057d182d4f8" kindref="member">native_handle_type</ref> *</type>
+        <definition>native_handle_type * neforce::recursive_mutex::native_handle</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>native_handle</name>
+        <qualifiedname>neforce::recursive_mutex::native_handle</qualifiedname>
+        <briefdescription>
+<para>获取原生句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向递归互斥锁原生句柄的指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="148" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="148" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1recursive__mutex_1acfdf04549d94820b83626f8fe15e45f5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classneforce_1_1recursive__mutex_1ad6f67c04a355e0623efe1057d182d4f8" kindref="member">native_handle_type</ref> *</type>
+        <definition>const native_handle_type * neforce::recursive_mutex::native_handle</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>native_handle</name>
+        <qualifiedname>neforce::recursive_mutex::native_handle</qualifiedname>
+        <briefdescription>
+<para>获取常量原生句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向递归互斥锁原生句柄的常量指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="154" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="154" bodyend="154"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1recursive__mutex_1af5d62daebc929c9189fb8f8e47de2104" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::recursive_mutex::lock</definition>
+        <argsstring>()</argsstring>
+        <name>lock</name>
+        <qualifiedname>neforce::recursive_mutex::lock</qualifiedname>
+        <briefdescription>
+<para>锁定递归互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>阻塞当前线程，直到获得递归互斥锁的所有权。 同一线程可以多次锁定，但需要相同次数的解锁。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="162" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1recursive__mutex_1a8750acc23fff4cb0e3f57c464c5d5328" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::recursive_mutex::unlock</definition>
+        <argsstring>()</argsstring>
+        <name>unlock</name>
+        <qualifiedname>neforce::recursive_mutex::unlock</qualifiedname>
+        <briefdescription>
+<para>解锁递归互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>减少锁定计数，当计数为零时解锁。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="169" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1recursive__mutex_1a5b1180d75aa1de358430dae3088219a6" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::recursive_mutex::try_lock</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>try_lock</name>
+        <qualifiedname>neforce::recursive_mutex::try_lock</qualifiedname>
+        <briefdescription>
+<para>尝试锁定递归互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果成功获得锁则返回true，否则返回false</para>
+</simplesect>
+非阻塞地尝试获取递归互斥锁的所有权。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="177" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>递归互斥锁 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>允许同一线程多次锁定同一互斥锁，需要相同次数的解锁。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="115" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="115" bodyend="178"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1recursive__mutex_1af5d62daebc929c9189fb8f8e47de2104" prot="public" virt="non-virtual"><scope>neforce::recursive_mutex</scope><name>lock</name></member>
+      <member refid="classneforce_1_1recursive__mutex_1aff06228d1b09e726943d0000d8087734" prot="public" virt="non-virtual"><scope>neforce::recursive_mutex</scope><name>native_handle</name></member>
+      <member refid="classneforce_1_1recursive__mutex_1acfdf04549d94820b83626f8fe15e45f5" prot="public" virt="non-virtual"><scope>neforce::recursive_mutex</scope><name>native_handle</name></member>
+      <member refid="classneforce_1_1recursive__mutex_1ad6f67c04a355e0623efe1057d182d4f8" prot="public" virt="non-virtual"><scope>neforce::recursive_mutex</scope><name>native_handle_type</name></member>
+      <member refid="classneforce_1_1recursive__mutex_1a94d30d1a32610ebc2e06d7d5b5b8ef4a" prot="public" virt="non-virtual"><scope>neforce::recursive_mutex</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1recursive__mutex_1aa5c299f9f54475058c03e969f746ee26" prot="public" virt="non-virtual"><scope>neforce::recursive_mutex</scope><name>recursive_mutex</name></member>
+      <member refid="classneforce_1_1recursive__mutex_1a574fb5ade0b92d7e7cd0c80f1fbab1fd" prot="public" virt="non-virtual"><scope>neforce::recursive_mutex</scope><name>recursive_mutex</name></member>
+      <member refid="classneforce_1_1recursive__mutex_1aae352d36441bb62d53498ffdf598f1a2" prot="private" virt="non-virtual"><scope>neforce::recursive_mutex</scope><name>recursive_mutex_</name></member>
+      <member refid="classneforce_1_1recursive__mutex_1a5b1180d75aa1de358430dae3088219a6" prot="public" virt="non-virtual"><scope>neforce::recursive_mutex</scope><name>try_lock</name></member>
+      <member refid="classneforce_1_1recursive__mutex_1a8750acc23fff4cb0e3f57c464c5d5328" prot="public" virt="non-virtual"><scope>neforce::recursive_mutex</scope><name>unlock</name></member>
+      <member refid="classneforce_1_1recursive__mutex_1a5c49e65cf372595c74afa3de3facd363" prot="public" virt="non-virtual"><scope>neforce::recursive_mutex</scope><name>~recursive_mutex</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

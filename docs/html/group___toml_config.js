@@ -48,41 +48,41 @@ var group___toml_config =
         [ "Table", "classtoml__value.html#a4b6fe229629c77a296512ebfd5278150a069296f0d8d4e02f51a3fe2a60fcc86f", null ]
       ] ],
       [ "~toml_value", "classtoml__value.html#a3cc5cd2f0d3e9b6c7590237ff3647739", null ],
-      [ "as_array", "classtoml__value.html#aef0687ebb8ab2c65ea5cacdcf934e7af", null ],
-      [ "as_boolean", "classtoml__value.html#a71542832a50c7fed77d955ece35364bf", null ],
-      [ "as_datetime", "classtoml__value.html#aab442f17b924351f0a493885c0f85720", null ],
-      [ "as_float", "classtoml__value.html#a9c55e1f5c9171bc18d7e116ae464a239", null ],
-      [ "as_integer", "classtoml__value.html#ae9798f9d1287e6f641c73c7d2a2f74c9", null ],
-      [ "as_string", "classtoml__value.html#ab5c87cc2e69333eaceadbf22c87c1a2f", null ],
-      [ "as_table", "classtoml__value.html#a30111893cd36422ed1958f4d73df87bb", null ],
-      [ "is_array", "classtoml__value.html#a4e53fdd6eaa43c6157036b7db69724c1", null ],
-      [ "is_boolean", "classtoml__value.html#a91c5d7a62935890f834695b762881d17", null ],
-      [ "is_datetime", "classtoml__value.html#a0cc2d6d858a452ffc01a00ec47dad6e5", null ],
-      [ "is_float", "classtoml__value.html#a10ad37816812d19aa2e0dc7187f96f94", null ],
-      [ "is_integer", "classtoml__value.html#a17680300e827a8b928380bd3124afb34", null ],
-      [ "is_string", "classtoml__value.html#acfdd706261d58f8ed78539591694213e", null ],
-      [ "is_table", "classtoml__value.html#afb8721c1ec571f356373669515b1ad72", null ],
-      [ "to_document", "classtoml__value.html#a65273258447afd3f04b24e8645f4786e", null ],
-      [ "to_string", "classtoml__value.html#ac355f4d55e3df1ccf6be354ad2f6f663", null ],
-      [ "type", "classtoml__value.html#a2a95645e1f52b6c6a92b014caf1a9f7a", null ]
+      [ "as_array", "classtoml__value.html#a6454f7c087b7fd3be52b35e752e30fbf", null ],
+      [ "as_boolean", "classtoml__value.html#a834ff8c9cfb5b674e20d5e7e405ef772", null ],
+      [ "as_datetime", "classtoml__value.html#a4c11fa8e4fa0b843401a5dcfbb047664", null ],
+      [ "as_float", "classtoml__value.html#a77734be3374a92a42eb1915686b1ce06", null ],
+      [ "as_integer", "classtoml__value.html#a97d9f3cbf67826c8cd2918f72dc9515d", null ],
+      [ "as_string", "classtoml__value.html#ac7ee0926f0fb33623ca46c7ae3ae7ca4", null ],
+      [ "as_table", "classtoml__value.html#aa58bf3b4087241fef7d41958fb08a6c8", null ],
+      [ "is_array", "classtoml__value.html#a9c13e613fdc8a9c556864acd3bdcd5e2", null ],
+      [ "is_boolean", "classtoml__value.html#a973144af1d7362d93d7a19e10947b1cc", null ],
+      [ "is_datetime", "classtoml__value.html#a839e73de96dd19b432604c33144a7d55", null ],
+      [ "is_float", "classtoml__value.html#a3fcb05f2b56519fd3417ab5b14bc2294", null ],
+      [ "is_integer", "classtoml__value.html#a95a04d29fd3c229f4b61bce12d4f0eed", null ],
+      [ "is_string", "classtoml__value.html#a2dc36522189e714efcfff319b6f454af", null ],
+      [ "is_table", "classtoml__value.html#af9a5fb02318d47c44f3b9325690836a2", null ],
+      [ "to_document", "classtoml__value.html#abbd424a4bb89e8dfdad8a39766864a8e", null ],
+      [ "to_string", "classtoml__value.html#a08351d15ece3bc5910075bbab9a59c97", null ],
+      [ "type", "classtoml__value.html#af72abdd50c50d5a790a5122d8445c3bb", null ]
     ] ],
     [ "toml_boolean", "classtoml__boolean.html", [
       [ "toml_boolean", "classtoml__boolean.html#adbafaf135545fd77d39db8fa2490e74d", null ],
-      [ "as_boolean", "classtoml__boolean.html#a8ccdbf0899dda5f88d55c62b71891959", null ],
-      [ "get_value", "classtoml__boolean.html#ad16825dd748a8577fbabfab5f3be7361", null ],
-      [ "type", "classtoml__boolean.html#a250c851029318768635b94c5ccffcd76", null ]
+      [ "as_boolean", "classtoml__boolean.html#adde5557be51926abef0a817f78a5ce90", null ],
+      [ "get_value", "classtoml__boolean.html#a8d22b39c43726ac7e7f2552b5012e3df", null ],
+      [ "type", "classtoml__boolean.html#a919bce52570387879c7ce1a820761bbe", null ]
     ] ],
     [ "toml_integer", "classtoml__integer.html", [
       [ "toml_integer", "classtoml__integer.html#ae142a74d6e0bac94ea67bf1f2586c27f", null ],
-      [ "as_integer", "classtoml__integer.html#ae1ab49bc05190346e3c96252cfb37fec", null ],
-      [ "get_value", "classtoml__integer.html#a476385cf5aaefc522050bf2b13054387", null ],
-      [ "type", "classtoml__integer.html#a207a59666877318e4c09d7e7e08c0399", null ]
+      [ "as_integer", "classtoml__integer.html#aa16de758e24f549a0237114a0bd7549c", null ],
+      [ "get_value", "classtoml__integer.html#a0726b2d078f82dbb983a10a91d06a7c5", null ],
+      [ "type", "classtoml__integer.html#a1abcfc6cf72315d7d0e98790f6090d48", null ]
     ] ],
     [ "toml_float", "classtoml__float.html", [
       [ "toml_float", "classtoml__float.html#af7e367c8fa051b6f64556228bfaf0862", null ],
-      [ "as_float", "classtoml__float.html#ad7cbc499318cb019ec1a2e48198cbf94", null ],
-      [ "get_value", "classtoml__float.html#a238c45d212a2adeb675d810d564fc0f3", null ],
-      [ "type", "classtoml__float.html#adccf2a235f2a8f14fd08580f412fabcd", null ]
+      [ "as_float", "classtoml__float.html#a28e522b9121b5bc4fe96f77a1a9da0c2", null ],
+      [ "get_value", "classtoml__float.html#a9c6beadf943641dfed354b843adb7d48", null ],
+      [ "type", "classtoml__float.html#a67867f378198cc1d457abba699e880c5", null ]
     ] ],
     [ "toml_string", "classtoml__string.html", [
       [ "string_type", "classtoml__string.html#abbe190295df8b66da998a01531a4e431", [
@@ -92,10 +92,10 @@ var group___toml_config =
         [ "MultiLiteral", "classtoml__string.html#abbe190295df8b66da998a01531a4e431a5b6abbd2238092530e8481d249e629b0", null ]
       ] ],
       [ "toml_string", "classtoml__string.html#a52d56a3040c00d399195187394fa0548", null ],
-      [ "as_string", "classtoml__string.html#a0ac9818d29f7bcd84ac2966a7d370079", null ],
-      [ "get_string_type", "classtoml__string.html#a947543b1c785ed7b32d6924288080554", null ],
-      [ "get_value", "classtoml__string.html#ab1310eae079f16419eb4e285500f291f", null ],
-      [ "type", "classtoml__string.html#ae285f0bf26d75270939dc0908d966ad2", null ]
+      [ "as_string", "classtoml__string.html#a3c485ef6a8b118b3a457326ad9b392ef", null ],
+      [ "get_string_type", "classtoml__string.html#a43bc0a86a29c671d064327440602df90", null ],
+      [ "get_value", "classtoml__string.html#abb0077c6ffbdd262fc3dab081aabd5f3", null ],
+      [ "type", "classtoml__string.html#a7d5c26bbf7eb992c11836a8b3cc6eff9", null ]
     ] ],
     [ "toml_datetime", "classtoml__datetime.html", [
       [ "datetime_type", "classtoml__datetime.html#af54bbeae9035e016f518bf7c0030d581", [
@@ -105,36 +105,36 @@ var group___toml_config =
         [ "LocalTime", "classtoml__datetime.html#af54bbeae9035e016f518bf7c0030d581a00a622a95d771bc362e8950916a73bfd", null ]
       ] ],
       [ "toml_datetime", "classtoml__datetime.html#a9c1e295cd66f1ede89cc620aeb223319", null ],
-      [ "as_datetime", "classtoml__datetime.html#a6e944a54527ded2f8d1df3fa39eb52f2", null ],
-      [ "get_datetime_type", "classtoml__datetime.html#aa3243c1b52bf17e3580c0302e8d0cf85", null ],
-      [ "get_string_value", "classtoml__datetime.html#afc6b5c7b7d1d6da5cee30c714a344adf", null ],
-      [ "get_value", "classtoml__datetime.html#a7bb008e03ba7f382d4c836fb7cfb83d3", null ],
-      [ "type", "classtoml__datetime.html#a35b33230d37bcf570d1112f01bd729d4", null ]
+      [ "as_datetime", "classtoml__datetime.html#a170762b8642e9b76d58e63abf9097962", null ],
+      [ "get_datetime_type", "classtoml__datetime.html#a8cad019a4a47ded87049bc270b290ded", null ],
+      [ "get_string_value", "classtoml__datetime.html#ae14c75eb2e94b5f58a6de2b20b7428c8", null ],
+      [ "get_value", "classtoml__datetime.html#a5385c92783e208561c91a2904ab70890", null ],
+      [ "type", "classtoml__datetime.html#ae1dce7c281446d089c1044c2815b76c8", null ]
     ] ],
     [ "toml_array", "classtoml__array.html", [
       [ "toml_array", "classtoml__array.html#a4d42ccf8fe9074a00c3f572418e70444", null ],
       [ "toml_array", "classtoml__array.html#a6f641507e117fd5727700a3c373c2016", null ],
       [ "add_element", "classtoml__array.html#a63fcefb59e7274ae83876dc38f658a1c", null ],
-      [ "as_array", "classtoml__array.html#a3bf11fe329bbc7a54bec80cafb960e82", null ],
-      [ "get_element", "classtoml__array.html#ab296b52729e02722f2ff223810e4568a", null ],
-      [ "get_elements", "classtoml__array.html#a5109586f9118fb76b0d55447b3305d59", null ],
+      [ "as_array", "classtoml__array.html#a7bcaffecc674a1af32b19e2d3eba0d06", null ],
+      [ "get_element", "classtoml__array.html#af4e7ade97ede69d3b59dcb96b0a6777f", null ],
+      [ "get_elements", "classtoml__array.html#acf21795fd3662ac2a834785254031a02", null ],
       [ "operator=", "classtoml__array.html#a6b6b2ba8ce93a4972594a48b6df92b09", null ],
-      [ "size", "classtoml__array.html#a1891162c0559db6f51e2f3a7cf520a3d", null ],
-      [ "type", "classtoml__array.html#a7eaa2ddd3464d0895d208654a7d74b1a", null ]
+      [ "size", "classtoml__array.html#a0c681ca5693d9c528293160895b76202", null ],
+      [ "type", "classtoml__array.html#aca834a72ac4f46348759fc984bc91c8a", null ]
     ] ],
     [ "toml_table", "classtoml__table.html", [
       [ "toml_table", "classtoml__table.html#a4a75bc4bd2eec44769f9b5f9a85ff62a", null ],
       [ "toml_table", "classtoml__table.html#ac09a9a0471970c93d4f6bbe589c3866e", null ],
       [ "toml_table", "classtoml__table.html#ae49e2b272b46d0792857c3ad263945a3", null ],
       [ "add_member", "classtoml__table.html#ad4b4af48f6a7c484381ef1a674930810", null ],
-      [ "as_table", "classtoml__table.html#a8882c6cb59c5d473729767b0ae7a5568", null ],
-      [ "get_member", "classtoml__table.html#afe40566f5613c59b2247d3c0b5e9b6a9", null ],
-      [ "get_member", "classtoml__table.html#a6c2d91ec320eb69cfd5c0fcabcf4de65", null ],
-      [ "get_members", "classtoml__table.html#ab07525b99b2fbb9d91b654022c64a705", null ],
-      [ "has_member", "classtoml__table.html#a266b805f71845892dafd9035dfde0119", null ],
-      [ "is_inline", "classtoml__table.html#a8229fa4d7de2052011b18d7dab79d7bb", null ],
+      [ "as_table", "classtoml__table.html#ac951000977dab8861797746b8e8fbf64", null ],
+      [ "get_member", "classtoml__table.html#a5adb095aec934e5c4218486bac20cbe1", null ],
+      [ "get_member", "classtoml__table.html#aa6cab43b3ff2a62535658d1dc9d6210f", null ],
+      [ "get_members", "classtoml__table.html#a76973d96825addb5939cd3638894b373", null ],
+      [ "has_member", "classtoml__table.html#ac42a619dfa1e2d127f2b3645dfde5f53", null ],
+      [ "is_inline", "classtoml__table.html#ab6df912e7ba0f60eef38172845c7abd0", null ],
       [ "operator=", "classtoml__table.html#a0c62bbc9a4af98649c0be44ab6903ace", null ],
       [ "set_inline", "classtoml__table.html#a29d4412cc34b5d72995b5cc3d4d43463", null ],
-      [ "type", "classtoml__table.html#ab0c114cd2cc33dd0f66339870c64d628", null ]
+      [ "type", "classtoml__table.html#ae96beab716489e09bcac66ba14d20b4d", null ]
     ] ]
 ];

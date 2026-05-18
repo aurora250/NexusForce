@@ -3,6 +3,7 @@ var NAVTREEINDEX19 =
 "classzlib__compressor_1_1stream__decompressor.html#ad079279d28696f435e764e2dd9dea6c5":[2,0,1,1,8],
 "classzlib__compressor_1_1stream__decompressor.html#ad33909522e889d1c832e14073bb40044":[2,0,1,1,9],
 "classzlib__compressor_1_1stream__decompressor.html#ae3a4bbc66c50a5a6b9c6de03684da888":[2,0,1,1,1],
+"classzlib__compressor_1_1stream__decompressor.html#ae4e4d4858d5954ac287bcdcb43dccdc4":[2,0,1,1,6],
 "click_8hpp.html":[6,0,0,0,1,16,0],
 "click_8hpp_source.html":[6,0,0,0,1,16,0],
 "clocks_8hpp.html":[6,0,0,0,1,16,1],
@@ -56,7 +57,7 @@ var NAVTREEINDEX19 =
 "console_8hpp.html":[6,0,0,0,1,15,1],
 "console_8hpp_source.html":[6,0,0,0,1,15,1],
 "construct_8hpp.html":[6,0,0,0,1,10,4],
-"construct_8hpp.html#ga8ab7c381b09253b3c5ead4e0af63ce5b":[6,0,0,0,1,10,4,1],
+"construct_8hpp.html#gaf6d29acd514e82a97c7809f66079f300":[6,0,0,0,1,10,4,1],
 "construct_8hpp_source.html":[6,0,0,0,1,10,4],
 "container_2set_8hpp.html":[6,0,0,0,1,3,14],
 "container_2set_8hpp_source.html":[6,0,0,0,1,3,14],
@@ -248,6 +249,5 @@ var NAVTREEINDEX19 =
 "functions_u.html":[5,3,0,20],
 "functions_v.html":[5,3,0,21],
 "functions_vars.html":[5,3,2],
-"functions_vars.html":[5,3,2,0],
-"functions_vars_b.html":[5,3,2,1]
+"functions_vars.html":[5,3,2,0]
 };

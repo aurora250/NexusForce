@@ -1,0 +1,176 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1ranges_1_1counted__view" kind="class" language="C++" prot="public">
+    <compoundname>neforce::ranges::counted_view</compoundname>
+    <basecompoundref refid="structneforce_1_1ranges_1_1view__base" prot="public" virt="non-virtual">neforce::ranges::view_base&lt; counted_view&lt; Iter &gt; &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename Iter</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1counted__view_1acbbfa4562bd3a762934ccea7cd2c4727" prot="public" static="no">
+        <type>counted_iterator&lt; Iter &gt;</type>
+        <definition>using neforce::ranges::counted_view&lt; Iter &gt;::iterator = counted_iterator&lt;Iter&gt;</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>neforce::ranges::counted_view::iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1541" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1541" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1counted__view_1a8e3ff2eb5de5c301b06a2f8d07b80520" prot="public" static="no">
+        <type><ref refid="group___iterator_traits_1ga739b740baa4f6bb946b91b875c5c345b" kindref="member">iter_difference_t</ref>&lt; Iter &gt;</type>
+        <definition>using neforce::ranges::counted_view&lt; Iter &gt;::difference_type = iter_difference_t&lt;Iter&gt;</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::ranges::counted_view::difference_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1542" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1542" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1ranges_1_1counted__view_1af7dd01b3b6390e28769639a953635be9" prot="private" static="no" mutable="no">
+        <type>Iter</type>
+        <definition>Iter neforce::ranges::counted_view&lt; Iter &gt;::iter_</definition>
+        <argsstring></argsstring>
+        <name>iter_</name>
+        <qualifiedname>neforce::ranges::counted_view::iter_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1553" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1553" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ranges_1_1counted__view_1adca533ba6a9ec2132cb0aa12489eb949" prot="private" static="no" mutable="no">
+        <type>difference_type</type>
+        <definition>difference_type neforce::ranges::counted_view&lt; Iter &gt;::count_</definition>
+        <argsstring></argsstring>
+        <name>count_</name>
+        <qualifiedname>neforce::ranges::counted_view::count_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1554" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1554" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1counted__view_1a08c43ccb082dadb23567136cf93f31de" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::ranges::counted_view&lt; Iter &gt;::counted_view</definition>
+        <argsstring>()=default</argsstring>
+        <name>counted_view</name>
+        <qualifiedname>neforce::ranges::counted_view::counted_view</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1544" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1counted__view_1a762f8c0af5704c00662f4d4ac3429a2c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::ranges::counted_view&lt; Iter &gt;::counted_view</definition>
+        <argsstring>(Iter iter, difference_type count)</argsstring>
+        <name>counted_view</name>
+        <qualifiedname>neforce::ranges::counted_view::counted_view</qualifiedname>
+        <param>
+          <type>Iter</type>
+          <declname>iter</declname>
+        </param>
+        <param>
+          <type>difference_type</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1545" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1545" bodyend="1547"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1counted__view_1af9cf7adbc138fe8502d29688160f04f5" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>iterator neforce::ranges::counted_view&lt; Iter &gt;::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::ranges::counted_view::begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1549" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1549" bodyend="1549"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1counted__view_1af836588920f8a18eb97da189add10895" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>iterator neforce::ranges::counted_view&lt; Iter &gt;::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::ranges::counted_view::end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1550" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1550" bodyend="1550"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::ranges::counted_view&lt; Iter &gt;</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::ranges::view_base&lt; counted_view&lt; Iter &gt; &gt;</label>
+        <link refid="structneforce_1_1ranges_1_1view__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::ranges::counted_view&lt; Iter &gt;</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::ranges::view_base&lt; counted_view&lt; Iter &gt; &gt;</label>
+        <link refid="structneforce_1_1ranges_1_1view__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1539" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1539" bodyend="1555"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1ranges_1_1counted__view_1af9cf7adbc138fe8502d29688160f04f5" prot="public" virt="non-virtual"><scope>neforce::ranges::counted_view</scope><name>begin</name></member>
+      <member refid="classneforce_1_1ranges_1_1counted__view_1adca533ba6a9ec2132cb0aa12489eb949" prot="private" virt="non-virtual"><scope>neforce::ranges::counted_view</scope><name>count_</name></member>
+      <member refid="classneforce_1_1ranges_1_1counted__view_1a08c43ccb082dadb23567136cf93f31de" prot="public" virt="non-virtual"><scope>neforce::ranges::counted_view</scope><name>counted_view</name></member>
+      <member refid="classneforce_1_1ranges_1_1counted__view_1a762f8c0af5704c00662f4d4ac3429a2c" prot="public" virt="non-virtual"><scope>neforce::ranges::counted_view</scope><name>counted_view</name></member>
+      <member refid="classneforce_1_1ranges_1_1counted__view_1a8e3ff2eb5de5c301b06a2f8d07b80520" prot="public" virt="non-virtual"><scope>neforce::ranges::counted_view</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1ranges_1_1counted__view_1af836588920f8a18eb97da189add10895" prot="public" virt="non-virtual"><scope>neforce::ranges::counted_view</scope><name>end</name></member>
+      <member refid="classneforce_1_1ranges_1_1counted__view_1af7dd01b3b6390e28769639a953635be9" prot="private" virt="non-virtual"><scope>neforce::ranges::counted_view</scope><name>iter_</name></member>
+      <member refid="classneforce_1_1ranges_1_1counted__view_1acbbfa4562bd3a762934ccea7cd2c4727" prot="public" virt="non-virtual"><scope>neforce::ranges::counted_view</scope><name>iterator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

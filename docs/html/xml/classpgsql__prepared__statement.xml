@@ -74,7 +74,7 @@
         <argsstring></argsstring>
         <name>data_</name>
         <qualifiedname>pgsql_prepared_statement::data_</qualifiedname>
-        <initializer>= <ref refid="group___unique_pointer_1ga1392a16f6940e75495ba167745eff5b7" kindref="member">make_unique</ref>&lt;pstmt_data&gt;()</initializer>
+        <initializer>= <ref refid="group___unique_pointer_1ga20caa9b68a94ba614667d6ec6585c044" kindref="member">make_unique</ref>&lt;pstmt_data&gt;()</initializer>
         <briefdescription>
 <para>执行数据 </para>
         </briefdescription>
@@ -214,13 +214,13 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="80" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="classpgsql__prepared__statement_1a92b434c6a3ca0ae10f440d71249c9ee0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
-        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
-        <definition>NEFORCE_NODISCARD uint32_t pgsql_prepared_statement::param_count</definition>
+      <memberdef kind="function" id="classpgsql__prepared__statement_1abac49e30b43317bd7293f1c9fb653627" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t pgsql_prepared_statement::param_count</definition>
         <argsstring>() const noexcept override</argsstring>
         <name>param_count</name>
         <qualifiedname>pgsql_prepared_statement::param_count</qualifiedname>
-        <reimplements refid="structidb__prepared__statement_1aacfb4917901060a69b7864afc956808b">param_count</reimplements>
+        <reimplements refid="structidb__prepared__statement_1a67ab1c9f04a375b478a034db711b3675">param_count</reimplements>
         <briefdescription>
 <para>获取参数数量 </para>
         </briefdescription>
@@ -231,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="86" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="86" bodyend="86"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="86" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="86" bodyend="86"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__prepared__statement_1a8d7e322cb3830e6d02ec6845c0e6e918" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -564,9 +564,9 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="152" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classpgsql__prepared__statement_1a38616e604329c1b75a1a8cdcc9460a71" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__prepared__result" kindref="compound">idb_prepared_result</ref> &gt;</type>
-        <definition>NEFORCE_NODISCARD unique_ptr&lt; idb_prepared_result &gt; pgsql_prepared_statement::execute_query</definition>
+      <memberdef kind="function" id="classpgsql__prepared__statement_1a49d169a0457f178f08e7aef6b14f7977" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__prepared__result" kindref="compound">idb_prepared_result</ref> &gt;</type>
+        <definition>unique_ptr&lt; idb_prepared_result &gt; pgsql_prepared_statement::execute_query</definition>
         <argsstring>() override</argsstring>
         <name>execute_query</name>
         <qualifiedname>pgsql_prepared_statement::execute_query</qualifiedname>
@@ -581,15 +581,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="160" column="34"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="160" column="17"/>
       </memberdef>
-      <memberdef kind="function" id="classpgsql__prepared__statement_1aab90cd565b147686a6faf5ea482ec55e" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
-        <type>NEFORCE_NODISCARD <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
-        <definition>NEFORCE_NODISCARD string_view pgsql_prepared_statement::get_error</definition>
+      <memberdef kind="function" id="classpgsql__prepared__statement_1a2fe0f607ab726bce954ab0cf18e532b6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>string_view pgsql_prepared_statement::get_error</definition>
         <argsstring>() const noexcept override</argsstring>
         <name>get_error</name>
         <qualifiedname>pgsql_prepared_statement::get_error</qualifiedname>
-        <reimplements refid="structidb__prepared__statement_1a87b1922a59d1fd066dee64c11f2390d2">get_error</reimplements>
+        <reimplements refid="structidb__prepared__statement_1a67f600d24fe96ea4b26508953e1ac2ed">get_error</reimplements>
         <briefdescription>
 <para>获取错误信息 </para>
         </briefdescription>
@@ -600,16 +600,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="166" column="35" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="166" bodyend="166"/>
-        <references refid="classbasic__string__view_1a859a0a299a008f84cd9647cecce3a865" compoundref="basic__string__view_8hpp" startline="440" endline="442">basic_string_view&lt; CharT, Traits &gt;::view</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="166" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="166" bodyend="166"/>
+        <references refid="classbasic__string__view_1a0f326706d8c59c24d7012ae254368775" compoundref="basic__string__view_8hpp" startline="440" endline="442">basic_string_view&lt; CharT, Traits &gt;::view</references>
       </memberdef>
-      <memberdef kind="function" id="classpgsql__prepared__statement_1a96ed8c714d711dda975172617c346a55" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
-        <type>NEFORCE_NODISCARD <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
-        <definition>NEFORCE_NODISCARD uint32_t pgsql_prepared_statement::get_errno</definition>
+      <memberdef kind="function" id="classpgsql__prepared__statement_1a4f9deb46a2aa67cab9620729a4b85cf4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t pgsql_prepared_statement::get_errno</definition>
         <argsstring>() const noexcept override</argsstring>
         <name>get_errno</name>
         <qualifiedname>pgsql_prepared_statement::get_errno</qualifiedname>
-        <reimplements refid="structidb__prepared__statement_1af359273fa35fe15d564d7187c423c8ea">get_errno</reimplements>
+        <reimplements refid="structidb__prepared__statement_1ac2d8c780282f37e5033aa64025cd0435">get_errno</reimplements>
         <briefdescription>
 <para>获取错误码 </para>
         </briefdescription>
@@ -620,7 +620,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="172" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="172" bodyend="172"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="172" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="172" bodyend="172"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -677,13 +677,13 @@
       <member refid="classpgsql__prepared__statement_1a7ecd7c96ed2d73ea0b4a7bbd60a207cd" prot="private" virt="non-virtual"><scope>pgsql_prepared_statement</scope><name>conn_</name></member>
       <member refid="classpgsql__prepared__statement_1afea3a55d628490be81672028bed29b8b" prot="private" virt="non-virtual"><scope>pgsql_prepared_statement</scope><name>data_</name></member>
       <member refid="classpgsql__prepared__statement_1a4dec6eebfb652d049b6af57f78c9537d" prot="public" virt="virtual"><scope>pgsql_prepared_statement</scope><name>execute</name></member>
-      <member refid="classpgsql__prepared__statement_1a38616e604329c1b75a1a8cdcc9460a71" prot="public" virt="virtual"><scope>pgsql_prepared_statement</scope><name>execute_query</name></member>
-      <member refid="classpgsql__prepared__statement_1a96ed8c714d711dda975172617c346a55" prot="public" virt="virtual"><scope>pgsql_prepared_statement</scope><name>get_errno</name></member>
-      <member refid="classpgsql__prepared__statement_1aab90cd565b147686a6faf5ea482ec55e" prot="public" virt="virtual"><scope>pgsql_prepared_statement</scope><name>get_error</name></member>
+      <member refid="classpgsql__prepared__statement_1a49d169a0457f178f08e7aef6b14f7977" prot="public" virt="virtual"><scope>pgsql_prepared_statement</scope><name>execute_query</name></member>
+      <member refid="classpgsql__prepared__statement_1a4f9deb46a2aa67cab9620729a4b85cf4" prot="public" virt="virtual"><scope>pgsql_prepared_statement</scope><name>get_errno</name></member>
+      <member refid="classpgsql__prepared__statement_1a2fe0f607ab726bce954ab0cf18e532b6" prot="public" virt="virtual"><scope>pgsql_prepared_statement</scope><name>get_error</name></member>
       <member refid="classpgsql__prepared__statement_1a7098b8e80fed4bd43cf0166c12a78635" prot="private" virt="non-virtual"><scope>pgsql_prepared_statement</scope><name>last_errno_</name></member>
       <member refid="classpgsql__prepared__statement_1a95a5a3cd3bbe62e14329ee8ebfdbb85f" prot="private" virt="non-virtual"><scope>pgsql_prepared_statement</scope><name>last_error_</name></member>
       <member refid="classpgsql__prepared__statement_1a5ca5617afdad08c0f5f8170a474a10dc" prot="private" virt="non-virtual"><scope>pgsql_prepared_statement</scope><name>param_buffers_</name></member>
-      <member refid="classpgsql__prepared__statement_1a92b434c6a3ca0ae10f440d71249c9ee0" prot="public" virt="virtual"><scope>pgsql_prepared_statement</scope><name>param_count</name></member>
+      <member refid="classpgsql__prepared__statement_1abac49e30b43317bd7293f1c9fb653627" prot="public" virt="virtual"><scope>pgsql_prepared_statement</scope><name>param_count</name></member>
       <member refid="classpgsql__prepared__statement_1adffe9723d94b6b30ed353fa9ef608e62" prot="private" virt="non-virtual"><scope>pgsql_prepared_statement</scope><name>param_count_</name></member>
       <member refid="classpgsql__prepared__statement_1a65bd79bcda5170d5087f444776b0e852" prot="public" virt="non-virtual"><scope>pgsql_prepared_statement</scope><name>pgsql_prepared_statement</name></member>
       <member refid="classpgsql__prepared__statement_1a088c4b6ae4dd2b9599473cd14f37601a" prot="private" virt="non-virtual"><scope>pgsql_prepared_statement</scope><name>set_error</name></member>

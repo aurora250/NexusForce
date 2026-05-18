@@ -14,11 +14,11 @@ var group___thread_pool =
         [ "adaptive", "classlocal__queue.html#aae2f178f553c35b160ea3f5c6a8f1f16a8cb043b2dace9afc0680e6bae5cd316f", null ]
       ] ],
       [ "be_stolen_by", "classlocal__queue.html#aa2f9e7f7671a4d2d80459a83a58133a7", null ],
-      [ "capacity", "classlocal__queue.html#a4ea666df5cf1168666dba318973be5fe", null ],
-      [ "empty", "classlocal__queue.html#a9d2eb136a42294cfa0451dce7d500ee0", null ],
+      [ "capacity", "classlocal__queue.html#a4df6f1ab41c40e53dd4aa8136847a76e", null ],
+      [ "empty", "classlocal__queue.html#a3a06828564123022ace1687f4eed8c06", null ],
       [ "push_back", "classlocal__queue.html#a70e2ab3d3d65f423ffe571788f3ca816", null ],
-      [ "remain_size", "classlocal__queue.html#af84b6ab5fed4a7fac3b1ae7ead50bcf6", null ],
-      [ "size", "classlocal__queue.html#a479ae3faa9c13754d8af5121e659e854", null ],
+      [ "remain_size", "classlocal__queue.html#a0a53b77c9e6e290d1151b232f29b2c17", null ],
+      [ "size", "classlocal__queue.html#a3abaec7e3996eed545704cc39027f144", null ],
       [ "try_pop", "classlocal__queue.html#a4a7dfd98b0eceb8f752a61a2573c8881", null ]
     ] ],
     [ "worker_context", "structworker__context.html", [
@@ -36,8 +36,8 @@ var group___thread_pool =
         [ "failed", "structtask__info.html#a82e511d7d330d103ad92f8acf75682eca26934eb377001f66e37289a5c93fe284", null ]
       ] ],
       [ "task_info", "structtask__info.html#a6d78f8c019063bc70f0677d80c8bdbee", null ],
-      [ "exec_time", "structtask__info.html#aa8a3170428752bd2191733b36f28ee4f", null ],
-      [ "is_finished", "structtask__info.html#a41b52cd02dff638ccf5ee23320a17e65", null ],
+      [ "exec_time", "structtask__info.html#a9eb14f400940b6805f0ec0924e515ee6", null ],
+      [ "is_finished", "structtask__info.html#a4d1e48e097798c415288802e62d1fee2", null ],
       [ "error", "structtask__info.html#aa98f5703a28f26d31912381175a3fc3d", null ],
       [ "finish_time", "structtask__info.html#ac00a351c9a460bf7500883f98541ba82", null ],
       [ "id", "structtask__info.html#a5dd1257311cea5dfb0f7ec96347cbdbd", null ],
@@ -48,16 +48,16 @@ var group___thread_pool =
       [ "worker_thread_id", "structtask__info.html#ab1a355b154149595c310c3592e7ce9b6", null ]
     ] ],
     [ "submit_result&lt; T &gt;", "structsubmit__result.html", [
-      [ "operator bool", "structsubmit__result.html#a1e7d1255b5e726d50bc742e63cdd4769", null ],
-      [ "future", "structsubmit__result.html#a802be06dd5f31e5337cafb5a9726d894", null ],
-      [ "task_info", "structsubmit__result.html#a7e0f5dc0f83a9dc77684bc8583fb028d", null ]
+      [ "operator bool", "structsubmit__result.html#a292d3f6d8dda2c225701f925233df75e", null ],
+      [ "future", "structsubmit__result.html#a2aec5dabd1e7c8f5aa51c4aa01faaf09", null ],
+      [ "task_info", "structsubmit__result.html#a936d7685d45adfd0eb8b2b820766047b", null ]
     ] ],
     [ "thread_pool", "classthread__pool.html", [
       [ "periodic_task_state", "structthread__pool_1_1periodic__task__state.html", [
         [ "cancelled", "structthread__pool_1_1periodic__task__state.html#abd5456c25461360f12c5cadb54c8d3cd", null ]
       ] ],
       [ "pool_statistics", "structthread__pool_1_1pool__statistics.html", [
-        [ "to_string", "structthread__pool_1_1pool__statistics.html#a0e6c16f6569d8ab4029225048138c4d5", null ],
+        [ "to_string", "structthread__pool_1_1pool__statistics.html#a972ad223eaea6377342f33300be66c4e", null ],
         [ "busy_threads", "structthread__pool_1_1pool__statistics.html#a22d0f279b8e8f1e13cc6c687f6614129", null ],
         [ "idle_threads", "structthread__pool_1_1pool__statistics.html#a516305a224c339966b894f6167437555", null ],
         [ "queue_size", "structthread__pool_1_1pool__statistics.html#a710ffce55e6a08a2e01063c25a1cdce8", null ],
@@ -76,14 +76,14 @@ var group___thread_pool =
       ] ],
       [ "thread_pool", "classthread__pool.html#a78324a6b46c41401389ef61d5f7d21a4", null ],
       [ "~thread_pool", "classthread__pool.html#ac9d8f108fa2419441aba432f8ca98eae", null ],
-      [ "mode", "classthread__pool.html#a3b141f1ae010547460c9f9c0f5a7dfbf", null ],
-      [ "running", "classthread__pool.html#a528ed99848dc5301853c4ab581c9d07d", null ],
+      [ "mode", "classthread__pool.html#acb1a9d4a3b9a7f0c88c67569da53800d", null ],
+      [ "running", "classthread__pool.html#aa2e62d0f0e1ed4a485a872302c28cca7", null ],
       [ "set_mode", "classthread__pool.html#ad2570e71325f8fc0056e2b7db00c1369", null ],
       [ "set_steal_mode", "classthread__pool.html#af7af30cde703cd7de4e3484f16b29fe5", null ],
       [ "set_task_threshhold", "classthread__pool.html#a9cf841376ecf2272f396bc2a42b89200", null ],
       [ "set_thread_threshhold", "classthread__pool.html#a0f8735976acc53cc7b02517efe8ae23b", null ],
       [ "start", "classthread__pool.html#ae4af3da255dd5f55a7314e804cd91571", null ],
-      [ "statistics", "classthread__pool.html#a3a7e731e56996f60b6a2a857f89c3eab", null ],
+      [ "statistics", "classthread__pool.html#a3d38e011531338d796f267758f111e1b", null ],
       [ "stop", "classthread__pool.html#a3679e32679c97ea0055a38f2df4560ec", null ],
       [ "submit_after", "classthread__pool.html#a3b33992c58dbd64f6c397fbc7092406c", null ],
       [ "submit_after", "classthread__pool.html#ae3bf04c2adddd193bba36f6c338c9b9e", null ],
@@ -92,6 +92,6 @@ var group___thread_pool =
       [ "submit_task", "classthread__pool.html#a1a93d040b178d96b993dffc135a52fb2", null ],
       [ "submit_task", "classthread__pool.html#a4269d4f0985eeb9e6f38bb9aeae9e67a", null ]
     ] ],
-    [ "get_current_task_group", "group___thread_pool.html#ga00d1068c932ecf58f7f1887c2e27844f", null ],
-    [ "get_worker_context", "group___thread_pool.html#gabcf2301dd14a385109c6ba1514357ddd", null ]
+    [ "get_current_task_group", "group___thread_pool.html#gab0dfe2ffce57ef2437c2bc1060febc71", null ],
+    [ "get_worker_context", "group___thread_pool.html#gaa4ff4ed8124d662595c374cb03d44d0d", null ]
 ];

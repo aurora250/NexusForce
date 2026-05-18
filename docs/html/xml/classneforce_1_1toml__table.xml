@@ -1,0 +1,516 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1toml__table" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>neforce::toml_table</compoundname>
+    <basecompoundref refid="classneforce_1_1toml__value" prot="public" virt="non-virtual">neforce::toml_value</basecompoundref>
+    <includes refid="toml__value_8hpp" local="no">toml_value.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1toml__table_1a27beca55c59fe2653b3ab1c4a05fec5c" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1toml__value" kindref="compound">toml_value</ref> &gt; &gt;</type>
+        <definition>unordered_map&lt;string, unique_ptr&lt;toml_value&gt; &gt; neforce::toml_table::members_</definition>
+        <argsstring></argsstring>
+        <name>members_</name>
+        <qualifiedname>neforce::toml_table::members_</qualifiedname>
+        <briefdescription>
+<para>成员映射表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="672" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="672" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1toml__table_1a124f439e7c309f0bb8fe1fe0eec19821" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::toml_table::is_inline_</definition>
+        <argsstring></argsstring>
+        <name>is_inline_</name>
+        <qualifiedname>neforce::toml_table::is_inline_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否为内联表格 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="673" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="673" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1toml__table_1ae492523e292447e5ab9178223a80ecd7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::toml_table::toml_table</definition>
+        <argsstring>()=default</argsstring>
+        <name>toml_table</name>
+        <qualifiedname>neforce::toml_table::toml_table</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="679" column="5"/>
+        <referencedby refid="classneforce_1_1toml__table_1a28b949461163729951fcb9124e2cd6ec" compoundref="toml__value_8hpp" startline="714" endline="714">as_table</referencedby>
+        <referencedby refid="classneforce_1_1toml__table_1a2141892488581c9b555021d39cdcc66d">operator=</referencedby>
+        <referencedby refid="classneforce_1_1toml__table_1ab8ca5f9604b84621a99e9e7edeffb0bc">toml_table</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__table_1ad99def448e99dc7d1554a4d06b21fb1f" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::toml_table::toml_table</definition>
+        <argsstring>(const bool is_inline)</argsstring>
+        <name>toml_table</name>
+        <qualifiedname>neforce::toml_table::toml_table</qualifiedname>
+        <param>
+          <type>const bool</type>
+          <declname>is_inline</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>is_inline</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否为内联表格 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="685" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="685" bodyend="686"/>
+        <references refid="classneforce_1_1toml__table_1acd4ee21dcdbd4af25e4ba326b21a89d1" compoundref="toml__value_8hpp" startline="768" endline="768">is_inline</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__table_1a3f6fdabd165cefd3cb9109c1c4a1326f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::toml_table::toml_table</definition>
+        <argsstring>(const toml_table &amp;)=delete</argsstring>
+        <name>toml_table</name>
+        <qualifiedname>neforce::toml_table::toml_table</qualifiedname>
+        <param>
+          <type>const toml_table &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="688" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__table_1ad6de7ca57ac21352074ca23dc1fe611f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__table_1ae492523e292447e5ab9178223a80ecd7" kindref="member">toml_table</ref> &amp;</type>
+        <definition>toml_table &amp; neforce::toml_table::operator=</definition>
+        <argsstring>(const toml_table &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::toml_table::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1toml__table_1ae492523e292447e5ab9178223a80ecd7" kindref="member">toml_table</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="689" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__table_1ab8ca5f9604b84621a99e9e7edeffb0bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::toml_table::toml_table</definition>
+        <argsstring>(toml_table &amp;&amp;other)=default</argsstring>
+        <name>toml_table</name>
+        <qualifiedname>neforce::toml_table::toml_table</qualifiedname>
+        <param>
+          <type>toml_table &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源表格 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="695" column="5"/>
+        <references refid="classneforce_1_1toml__table_1ae492523e292447e5ab9178223a80ecd7">toml_table</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__table_1a2141892488581c9b555021d39cdcc66d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__table_1ae492523e292447e5ab9178223a80ecd7" kindref="member">toml_table</ref> &amp;</type>
+        <definition>toml_table &amp; neforce::toml_table::operator=</definition>
+        <argsstring>(toml_table &amp;&amp;other)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::toml_table::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1toml__table_1ae492523e292447e5ab9178223a80ecd7" kindref="member">toml_table</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源表格 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="702" column="16"/>
+        <references refid="classneforce_1_1toml__table_1ae492523e292447e5ab9178223a80ecd7">toml_table</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__table_1a8a8218e77e2284deddbf6f8005b226ab" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="classneforce_1_1toml__value_1a40da5711c9712d439693065c25d50141" kindref="member">types</ref></type>
+        <definition>types neforce::toml_table::type</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>type</name>
+        <qualifiedname>neforce::toml_table::type</qualifiedname>
+        <reimplements refid="classneforce_1_1toml__value_1a5c2603d3bdadd4c161a28a0485daadf0">type</reimplements>
+        <briefdescription>
+<para>获取类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>返回Table类型 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="708" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="708" bodyend="708"/>
+        <references refid="classneforce_1_1toml__value_1a40da5711c9712d439693065c25d50141a65463afd4ef6f734abbb1a0d7b60372c" compoundref="toml__value_8hpp" startline="185">neforce::toml_value::Table</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__table_1a28b949461163729951fcb9124e2cd6ec" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>const <ref refid="classneforce_1_1toml__table_1ae492523e292447e5ab9178223a80ecd7" kindref="member">toml_table</ref> *</type>
+        <definition>const toml_table * neforce::toml_table::as_table</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>as_table</name>
+        <qualifiedname>neforce::toml_table::as_table</qualifiedname>
+        <reimplements refid="classneforce_1_1toml__value_1af142d4679301be642a262d2f76245a43">as_table</reimplements>
+        <briefdescription>
+<para>转换为表格指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>返回自身指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="714" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="714" bodyend="714"/>
+        <references refid="classneforce_1_1toml__table_1ae492523e292447e5ab9178223a80ecd7">toml_table</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__table_1ad12ac56d732630cd2680d4ef87bc0642" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::toml_table::add_member</definition>
+        <argsstring>(const string &amp;key, unique_ptr&lt; toml_value &gt; value)</argsstring>
+        <name>add_member</name>
+        <qualifiedname>neforce::toml_table::add_member</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1toml__value" kindref="compound">toml_value</ref> &gt;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>添加成员 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>成员键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>成员值指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="721" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="721" bodyend="721"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__table_1ad84bb8ca5361d5d29c640ab67633d35e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classneforce_1_1toml__value" kindref="compound">toml_value</ref> *</type>
+        <definition>const toml_value * neforce::toml_table::get_member</definition>
+        <argsstring>(const string &amp;key) const</argsstring>
+        <name>get_member</name>
+        <qualifiedname>neforce::toml_table::get_member</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取常量成员指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>成员键名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>成员的常量指针，不存在返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="728" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="728" bodyend="734"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__table_1ad56927e6a75b4ea27db31e22aab485b1" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__value" kindref="compound">toml_value</ref> *</type>
+        <definition>toml_value * neforce::toml_table::get_member</definition>
+        <argsstring>(const string &amp;key)</argsstring>
+        <name>get_member</name>
+        <qualifiedname>neforce::toml_table::get_member</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取成员指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>成员键名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>成员的指针，不存在返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="741" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="741" bodyend="747"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__table_1a486530de04c11b5cbf228cf5aa472dc0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::toml_table::has_member</definition>
+        <argsstring>(const string &amp;key) const</argsstring>
+        <name>has_member</name>
+        <qualifiedname>neforce::toml_table::has_member</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>检查成员是否存在 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>成员键名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否存在 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="754" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="754" bodyend="754"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__table_1a8810589d0f31c4213270c1a09960ee5e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1toml__value" kindref="compound">toml_value</ref> &gt; &gt; &amp;</type>
+        <definition>const unordered_map&lt; string, unique_ptr&lt; toml_value &gt; &gt; &amp; neforce::toml_table::get_members</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_members</name>
+        <qualifiedname>neforce::toml_table::get_members</qualifiedname>
+        <briefdescription>
+<para>获取所有成员的常量引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成员映射表的常量引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="760" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="760" bodyend="762"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__table_1acd4ee21dcdbd4af25e4ba326b21a89d1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::toml_table::is_inline</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_inline</name>
+        <qualifiedname>neforce::toml_table::is_inline</qualifiedname>
+        <briefdescription>
+<para>判断是否为内联表格 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为内联表格 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="768" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="768" bodyend="768"/>
+        <referencedby refid="classneforce_1_1toml__table_1aa10349b3b5183aa1aec557a3338f190a" compoundref="toml__value_8hpp" startline="774" endline="774">set_inline</referencedby>
+        <referencedby refid="classneforce_1_1toml__table_1ad99def448e99dc7d1554a4d06b21fb1f" compoundref="toml__value_8hpp" startline="685" endline="686">toml_table</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__table_1aa10349b3b5183aa1aec557a3338f190a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::toml_table::set_inline</definition>
+        <argsstring>(const bool is_inline) noexcept</argsstring>
+        <name>set_inline</name>
+        <qualifiedname>neforce::toml_table::set_inline</qualifiedname>
+        <param>
+          <type>const bool</type>
+          <declname>is_inline</declname>
+        </param>
+        <briefdescription>
+<para>设置内联表格标记 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>is_inline</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否为内联表格 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="774" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="774" bodyend="774"/>
+        <references refid="classneforce_1_1toml__table_1acd4ee21dcdbd4af25e4ba326b21a89d1" compoundref="toml__value_8hpp" startline="768" endline="768">is_inline</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>TOML表格类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示TOML中的表格类型，包含多个键值对成员。 支持标准表格和内联表格两种形式。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>neforce::istringify&lt; toml_value &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+      <node id="1">
+        <label>neforce::toml_table</label>
+        <link refid="classneforce_1_1toml__table"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::toml_value</label>
+        <link refid="classneforce_1_1toml__value"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>neforce::istringify&lt; toml_value &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+      <node id="1">
+        <label>neforce::toml_table</label>
+        <link refid="classneforce_1_1toml__table"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::toml_value</label>
+        <link refid="classneforce_1_1toml__value"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" line="670" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_value.hpp" bodystart="670" bodyend="775"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1toml__table_1ad12ac56d732630cd2680d4ef87bc0642" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>add_member</name></member>
+      <member refid="classneforce_1_1toml__value_1a40da5711c9712d439693065c25d50141a960fe7e4eb2cc58101854890deba9762" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>Array</name></member>
+      <member refid="classneforce_1_1toml__value_1a233697b0cef890db253aeecee5b8c636" prot="public" virt="virtual"><scope>neforce::toml_table</scope><name>as_array</name></member>
+      <member refid="classneforce_1_1toml__value_1a3fc2945ad4348f7e7841bb3217307cbe" prot="public" virt="virtual"><scope>neforce::toml_table</scope><name>as_boolean</name></member>
+      <member refid="classneforce_1_1toml__value_1ab46d7f4bf5c3439d5d3427eeea6f1aee" prot="public" virt="virtual"><scope>neforce::toml_table</scope><name>as_datetime</name></member>
+      <member refid="classneforce_1_1toml__value_1a43e6237aaf29ef9ffa7cc60f7d33fa67" prot="public" virt="virtual"><scope>neforce::toml_table</scope><name>as_float</name></member>
+      <member refid="classneforce_1_1toml__value_1a306fc19aa447e8b8b574176719bc2c55" prot="public" virt="virtual"><scope>neforce::toml_table</scope><name>as_integer</name></member>
+      <member refid="classneforce_1_1toml__value_1a98ee39ca2cb9e61ac8977d0fcda6a9ab" prot="public" virt="virtual"><scope>neforce::toml_table</scope><name>as_string</name></member>
+      <member refid="classneforce_1_1toml__table_1a28b949461163729951fcb9124e2cd6ec" prot="public" virt="virtual"><scope>neforce::toml_table</scope><name>as_table</name></member>
+      <member refid="classneforce_1_1toml__value_1a40da5711c9712d439693065c25d50141ab09ad7bc9bef55aa793352dc1753227b" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>Boolean</name></member>
+      <member refid="classneforce_1_1toml__value_1a40da5711c9712d439693065c25d50141aa104a89543d10429040dde00aa15e4db" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>DateTime</name></member>
+      <member refid="classneforce_1_1toml__value_1a40da5711c9712d439693065c25d50141ae9df1f7ee6b8290849f63ef6caf36b67" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>Float</name></member>
+      <member refid="classneforce_1_1toml__table_1ad84bb8ca5361d5d29c640ab67633d35e" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>get_member</name></member>
+      <member refid="classneforce_1_1toml__table_1ad56927e6a75b4ea27db31e22aab485b1" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>get_member</name></member>
+      <member refid="classneforce_1_1toml__table_1a8810589d0f31c4213270c1a09960ee5e" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>get_members</name></member>
+      <member refid="classneforce_1_1toml__table_1a486530de04c11b5cbf228cf5aa472dc0" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>has_member</name></member>
+      <member refid="classneforce_1_1toml__value_1a40da5711c9712d439693065c25d50141a0125029d2d7bfbaca0ca579f9613cdac" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>Integer</name></member>
+      <member refid="classneforce_1_1toml__value_1a9cd0296977d38ed2d8a34c7d7bf01d6e" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>is_array</name></member>
+      <member refid="classneforce_1_1toml__value_1a43a1dd4d68051bbd9b326921313c688a" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>is_boolean</name></member>
+      <member refid="classneforce_1_1toml__value_1a65e72f1557749b86f4f318f2e5655a92" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>is_datetime</name></member>
+      <member refid="classneforce_1_1toml__value_1a5cc31d13edccfb49f526efe67c65a856" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>is_float</name></member>
+      <member refid="classneforce_1_1toml__table_1acd4ee21dcdbd4af25e4ba326b21a89d1" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>is_inline</name></member>
+      <member refid="classneforce_1_1toml__table_1a124f439e7c309f0bb8fe1fe0eec19821" prot="private" virt="non-virtual"><scope>neforce::toml_table</scope><name>is_inline_</name></member>
+      <member refid="classneforce_1_1toml__value_1a830b66f4cdc082c6306d4754d82cc694" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>is_integer</name></member>
+      <member refid="classneforce_1_1toml__value_1aac073a7064ea24ffb4ac4fd7de53514c" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>is_string</name></member>
+      <member refid="classneforce_1_1toml__value_1a7ee903aae38bb30478e487d2a536c7a5" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>is_table</name></member>
+      <member refid="classneforce_1_1toml__table_1a27beca55c59fe2653b3ab1c4a05fec5c" prot="private" virt="non-virtual"><scope>neforce::toml_table</scope><name>members_</name></member>
+      <member refid="classneforce_1_1toml__table_1ad6de7ca57ac21352074ca23dc1fe611f" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1toml__table_1a2141892488581c9b555021d39cdcc66d" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1toml__table_1aa10349b3b5183aa1aec557a3338f190a" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>set_inline</name></member>
+      <member refid="classneforce_1_1toml__value_1a40da5711c9712d439693065c25d50141a1dc724b53883acfcbd4d0b795259a45d" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>String</name></member>
+      <member refid="classneforce_1_1toml__value_1a40da5711c9712d439693065c25d50141a65463afd4ef6f734abbb1a0d7b60372c" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>Table</name></member>
+      <member refid="classneforce_1_1toml__value_1ae1696936f9b698441fee2af0bde527cd" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>to_document</name></member>
+      <member refid="classneforce_1_1toml__value_1abbdba852273ff12df96eb26f27785f7d" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>to_string</name></member>
+      <member refid="classneforce_1_1toml__table_1ae492523e292447e5ab9178223a80ecd7" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>toml_table</name></member>
+      <member refid="classneforce_1_1toml__table_1ad99def448e99dc7d1554a4d06b21fb1f" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>toml_table</name></member>
+      <member refid="classneforce_1_1toml__table_1a3f6fdabd165cefd3cb9109c1c4a1326f" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>toml_table</name></member>
+      <member refid="classneforce_1_1toml__table_1ab8ca5f9604b84621a99e9e7edeffb0bc" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>toml_table</name></member>
+      <member refid="classneforce_1_1toml__table_1a8a8218e77e2284deddbf6f8005b226ab" prot="public" virt="virtual"><scope>neforce::toml_table</scope><name>type</name></member>
+      <member refid="classneforce_1_1toml__value_1a40da5711c9712d439693065c25d50141" prot="public" virt="non-virtual"><scope>neforce::toml_table</scope><name>types</name></member>
+      <member refid="classneforce_1_1toml__value_1ab0a012347a95ae7fa7717006dff9665a" prot="public" virt="virtual"><scope>neforce::toml_table</scope><name>~toml_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

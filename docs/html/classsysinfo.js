@@ -15,11 +15,11 @@ var classsysinfo =
       [ "LOONGARCH64", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a444899381b9d044c3d148a9e99a3ec9f", null ],
       [ "LOONGARCH32", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a3a91efc2ac870d790cd3e6fc9b7c7f9a", null ]
     ] ],
-    [ "get_architecture", "classsysinfo.html#a2969c1689b21d9bc883071ccb353bbfd", null ],
-    [ "get_CPU_info", "classsysinfo.html#a3bd522897d213009f59aae487346d179", null ],
-    [ "get_memory_info", "classsysinfo.html#a2f66e2dc6fe96e9419e1920d6cdf0760", null ],
-    [ "get_os_version_info", "classsysinfo.html#ad81387f467fedd67a87a8cc5c927ff44", null ],
-    [ "get_system_info", "classsysinfo.html#ac5e05b4839bb2b63b4b2b7f51bb9e5c5", null ],
-    [ "is_initialized", "classsysinfo.html#ab9331206875e9553e338c5a34d601498", null ],
+    [ "get_architecture", "classsysinfo.html#a263fc148efdf13bbca1b9923aba436a9", null ],
+    [ "get_CPU_info", "classsysinfo.html#a12cd20c6d4ac8029b5c12430d8508ed5", null ],
+    [ "get_memory_info", "classsysinfo.html#a6f58a437df985dfc5817a76dbfe967e6", null ],
+    [ "get_os_version_info", "classsysinfo.html#a38b1558f84e3d0dec584ba243ee27d6f", null ],
+    [ "get_system_info", "classsysinfo.html#a683ee1cdfdb503e7e36a3348bfa81602", null ],
+    [ "is_initialized", "classsysinfo.html#ae4bc26b756f0201340e586d61ec1321f", null ],
     [ "refresh", "classsysinfo.html#aa59d27a7571c3ccfa6fff2c833f6efeb", null ]
 ];

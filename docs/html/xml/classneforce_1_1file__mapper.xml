@@ -1,0 +1,659 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1file__mapper" kind="class" language="C++" prot="public">
+    <compoundname>neforce::file_mapper</compoundname>
+    <includes refid="file__mapper_8hpp" local="no">file_mapper.hpp</includes>
+    <innerclass refid="structneforce_1_1file__mapper_1_1map__info" prot="public">neforce::file_mapper::map_info</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1file__mapper_1a0be1f02324599c25be068742c80fd7c0" prot="public" static="no">
+        <type>::DWORD</type>
+        <definition>using neforce::file_mapper::size_type = ::DWORD</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>neforce::file_mapper::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="48" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1file__mapper_1ad46f13bb78c3ad0448b34669404ad7d5" prot="public" static="no">
+        <type><ref refid="group___core_types_1gaae6b483f5dbd1f5318336f6349ff6a6a" kindref="member">neforce::native_handle_type</ref></type>
+        <definition>using neforce::file_mapper::native_handle_type = neforce:: native_handle_type</definition>
+        <argsstring></argsstring>
+        <name>native_handle_type</name>
+        <qualifiedname>neforce::file_mapper::native_handle_type</qualifiedname>
+        <briefdescription>
+<para>原生文件句柄类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="53" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1file__mapper_1a5a4ddcd25f1181cf14601c1a408538f7" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1file__mapper_1ad46f13bb78c3ad0448b34669404ad7d5" kindref="member">native_handle_type</ref></type>
+        <definition>native_handle_type neforce::file_mapper::file_handle_</definition>
+        <argsstring></argsstring>
+        <name>file_handle_</name>
+        <qualifiedname>neforce::file_mapper::file_handle_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="70" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1file__mapper_1ae807998b420069ad05299dfcb533f179" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* neforce::file_mapper::ptr_</definition>
+        <argsstring></argsstring>
+        <name>ptr_</name>
+        <qualifiedname>neforce::file_mapper::ptr_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="71" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1file__mapper_1a68d14867c856cb9389a6ae64ad9866fb" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1file__mapper_1a0be1f02324599c25be068742c80fd7c0" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::file_mapper::size_</definition>
+        <argsstring></argsstring>
+        <name>size_</name>
+        <qualifiedname>neforce::file_mapper::size_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="72" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1file__mapper_1add818a976c76d1bdfbb8669c832c2b8b" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1file__mapper_1a0be1f02324599c25be068742c80fd7c0" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::file_mapper::offset_</definition>
+        <argsstring></argsstring>
+        <name>offset_</name>
+        <qualifiedname>neforce::file_mapper::offset_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="73" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1file__mapper_1a82b74d43c468c7d5d21b820d71076c20" prot="private" static="no" mutable="no">
+        <type><ref refid="group___file_1gaf69b29599e7335c104e563f1e2c7057f" kindref="member">file_access</ref></type>
+        <definition>file_access neforce::file_mapper::access_</definition>
+        <argsstring></argsstring>
+        <name>access_</name>
+        <qualifiedname>neforce::file_mapper::access_</qualifiedname>
+        <initializer>= <ref refid="group___file_1ggaf69b29599e7335c104e563f1e2c7057fa3466fab4975481651940ed328aa990e4" kindref="member">file_access::READ</ref></initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="74" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1file__mapper_1a3420878c5b89f02e2d2a70030bc1944e" prot="private" static="no" mutable="yes">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::file_mapper::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>neforce::file_mapper::mutex_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="75" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1file__mapper_1a8ade00c1bafb90726e82a3e057e1977b" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1file__mapper_1ad46f13bb78c3ad0448b34669404ad7d5" kindref="member">native_handle_type</ref></type>
+        <definition>native_handle_type neforce::file_mapper::mapping_handle_</definition>
+        <argsstring></argsstring>
+        <name>mapping_handle_</name>
+        <qualifiedname>neforce::file_mapper::mapping_handle_</qualifiedname>
+        <initializer>= INVALID_HANDLE_VALUE</initializer>
+        <briefdescription>
+<para>映射句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="78" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1a03ae3986546ade3ce21c9ab5f6488f64" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::file_mapper::file_mapper</definition>
+        <argsstring>(native_handle_type file_handle)</argsstring>
+        <name>file_mapper</name>
+        <qualifiedname>neforce::file_mapper::file_mapper</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1file__mapper_1ad46f13bb78c3ad0448b34669404ad7d5" kindref="member">native_handle_type</ref></type>
+          <declname>file_handle</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>file_handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已打开的文件句柄</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建内存映射管理器，关联指定的文件句柄。 初始状态为未映射。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="89" column="14"/>
+        <referencedby refid="classneforce_1_1file__mapper_1a58de08db8828d70258bef898e5b25826">file_mapper</referencedby>
+        <referencedby refid="classneforce_1_1file__mapper_1afc6b9e0c3d5397116650c79f3f741911">operator=</referencedby>
+        <referencedby refid="classneforce_1_1file__mapper_1ae773c76c0a97fa0fcb4c2b3b8eff5104">~file_mapper</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1ae773c76c0a97fa0fcb4c2b3b8eff5104" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::file_mapper::~file_mapper</definition>
+        <argsstring>()</argsstring>
+        <name>~file_mapper</name>
+        <qualifiedname>neforce::file_mapper::~file_mapper</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>自动解除映射并释放相关资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="96" column="5"/>
+        <references refid="classneforce_1_1file__mapper_1a03ae3986546ade3ce21c9ab5f6488f64">file_mapper</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1af8e30c41bc23a5fd64a380a5d6620896" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::file_mapper::file_mapper</definition>
+        <argsstring>(const file_mapper &amp;)=delete</argsstring>
+        <name>file_mapper</name>
+        <qualifiedname>neforce::file_mapper::file_mapper</qualifiedname>
+        <param>
+          <type>const file_mapper &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="98" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1a85dcf2930d07eedc385e47d6ab6d59f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1file__mapper_1a03ae3986546ade3ce21c9ab5f6488f64" kindref="member">file_mapper</ref> &amp;</type>
+        <definition>file_mapper &amp; neforce::file_mapper::operator=</definition>
+        <argsstring>(const file_mapper &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::file_mapper::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1file__mapper_1a03ae3986546ade3ce21c9ab5f6488f64" kindref="member">file_mapper</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="99" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1a58de08db8828d70258bef898e5b25826" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::file_mapper::file_mapper</definition>
+        <argsstring>(file_mapper &amp;&amp;other) noexcept</argsstring>
+        <name>file_mapper</name>
+        <qualifiedname>neforce::file_mapper::file_mapper</qualifiedname>
+        <param>
+          <type>file_mapper &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="105" column="5"/>
+        <references refid="classneforce_1_1file__mapper_1a03ae3986546ade3ce21c9ab5f6488f64">file_mapper</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1afc6b9e0c3d5397116650c79f3f741911" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1file__mapper_1a03ae3986546ade3ce21c9ab5f6488f64" kindref="member">file_mapper</ref> &amp;</type>
+        <definition>file_mapper &amp; neforce::file_mapper::operator=</definition>
+        <argsstring>(file_mapper &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::file_mapper::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1file__mapper_1a03ae3986546ade3ce21c9ab5f6488f64" kindref="member">file_mapper</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="112" column="17"/>
+        <references refid="classneforce_1_1file__mapper_1a03ae3986546ade3ce21c9ab5f6488f64">file_mapper</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1aca470eec36db5c36b4ba0a183fd5fabd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::file_mapper::map</definition>
+        <argsstring>(size_type offset=0, size_type size=0, file_access access=file_access::READ, file_map_hint hint=file_map_hint::SEQUENTIAL)</argsstring>
+        <name>map</name>
+        <qualifiedname>neforce::file_mapper::map</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1file__mapper_1a0be1f02324599c25be068742c80fd7c0" kindref="member">size_type</ref></type>
+          <declname>offset</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__mapper_1a0be1f02324599c25be068742c80fd7c0" kindref="member">size_type</ref></type>
+          <declname>size</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type><ref refid="group___file_1gaf69b29599e7335c104e563f1e2c7057f" kindref="member">file_access</ref></type>
+          <declname>access</declname>
+          <defval><ref refid="group___file_1ggaf69b29599e7335c104e563f1e2c7057fa3466fab4975481651940ed328aa990e4" kindref="member">file_access::READ</ref></defval>
+        </param>
+        <param>
+          <type><ref refid="group___file_1ga99194a9bdc017af4c8530be2975b4693" kindref="member">file_map_hint</ref></type>
+          <declname>hint</declname>
+          <defval><ref refid="group___file_1gga99194a9bdc017af4c8530be2975b4693a39403cd282d944abcd4f14996cb71bcb" kindref="member">file_map_hint::SEQUENTIAL</ref></defval>
+        </param>
+        <briefdescription>
+<para>映射文件到内存 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>映射起始偏移（字节） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>映射长度（字节），0表示映射到文件末尾 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>access</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问模式 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hint</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问模式提示，用于优化页面预取 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>映射成功返回true，失败返回false</para>
+</simplesect>
+将文件的指定区域映射到进程地址空间。 如果offset不是系统页面大小的整数倍，会自动对齐。 size为0时映射从offset到文件末尾的所有内容。</para>
+<para><simplesect kind="note"><para>映射后可以通过data()指针直接访问文件内容。 </para>
+</simplesect>
+<simplesect kind="note"><para>写操作可能需要权限。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="129" column="10"/>
+        <references refid="classneforce_1_1file__mapper_1a49e83861dd83df4881398a46f075c4e2" compoundref="file__mapper_8hpp" startline="191" endline="191">access</references>
+        <references refid="classneforce_1_1file__mapper_1a5d302a5461c5776f3f5174692f16d6a0" compoundref="file__mapper_8hpp" startline="186" endline="186">offset</references>
+        <references refid="group___file_1ggaf69b29599e7335c104e563f1e2c7057fa3466fab4975481651940ed328aa990e4" compoundref="file__constants_8hpp" startline="57">READ</references>
+        <references refid="group___file_1gga99194a9bdc017af4c8530be2975b4693a39403cd282d944abcd4f14996cb71bcb" compoundref="file__constants_8hpp" startline="263">SEQUENTIAL</references>
+        <references refid="classneforce_1_1file__mapper_1adf4a65d81b7410d341656a23a7e893d6" compoundref="file__mapper_8hpp" startline="181" endline="181">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1aa05938b8db00bcc2ff84f33bcd70f65b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::file_mapper::unmap</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>unmap</name>
+        <qualifiedname>neforce::file_mapper::unmap</qualifiedname>
+        <briefdescription>
+<para>解除映射 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>解除当前映射，释放映射内存。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="137" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1accb15b1990c3c4d7c8b21a7d16a21c68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::file_mapper::remap</definition>
+        <argsstring>(size_type new_offset, size_type new_size)</argsstring>
+        <name>remap</name>
+        <qualifiedname>neforce::file_mapper::remap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1file__mapper_1a0be1f02324599c25be068742c80fd7c0" kindref="member">size_type</ref></type>
+          <declname>new_offset</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__mapper_1a0be1f02324599c25be068742c80fd7c0" kindref="member">size_type</ref></type>
+          <declname>new_size</declname>
+        </param>
+        <briefdescription>
+<para>重新映射到新区域 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>new_offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的起始偏移 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>new_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的映射大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>重新映射成功返回true</para>
+</simplesect>
+解除当前映射，然后创建新的映射。 保持相同的访问权限。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="148" column="10"/>
+        <references refid="classneforce_1_1file__mapper_1accb15b1990c3c4d7c8b21a7d16a21c68">remap</references>
+        <referencedby refid="classneforce_1_1file__mapper_1accb15b1990c3c4d7c8b21a7d16a21c68">remap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1aec636fb0486d7b064e3740a799c6c2dd" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::file_mapper::flush</definition>
+        <argsstring>(bool async=false) noexcept</argsstring>
+        <name>flush</name>
+        <qualifiedname>neforce::file_mapper::flush</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>async</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>刷新映射区域到磁盘 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>async</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否异步刷新 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>刷新成功返回true</para>
+</simplesect>
+将映射内存中修改的内容写回磁盘文件。 异步刷新可提高性能但可能丢失数据。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="158" column="10"/>
+        <references refid="group___async_1ga3b100cc284ba1351140d99912b389764" compoundref="async_8hpp" startline="43" endline="56">neforce::async</references>
+        <references refid="classneforce_1_1file__mapper_1aec636fb0486d7b064e3740a799c6c2dd">flush</references>
+        <referencedby refid="classneforce_1_1file__mapper_1aec636fb0486d7b064e3740a799c6c2dd">flush</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1a3f64abc9527fc4f64281cacf4dc0eb2f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::file_mapper::lock_pages</definition>
+        <argsstring>(bool lock_in_memory) const noexcept</argsstring>
+        <name>lock_pages</name>
+        <qualifiedname>neforce::file_mapper::lock_pages</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>lock_in_memory</declname>
+        </param>
+        <briefdescription>
+<para>锁定/解锁映射页到物理内存 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lock_in_memory</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true锁定，false解锁 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>操作成功返回true</para>
+</simplesect>
+锁定映射页到物理内存，防止被换出到交换空间。 适用于对延迟敏感的应用场景。</para>
+<para><simplesect kind="note"><para>解锁时只释放锁定，不会解除映射。 </para>
+</simplesect>
+<simplesect kind="note"><para>可能需要权限。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="171" column="10"/>
+        <references refid="classneforce_1_1file__mapper_1a3f64abc9527fc4f64281cacf4dc0eb2f">lock_pages</references>
+        <referencedby refid="classneforce_1_1file__mapper_1a3f64abc9527fc4f64281cacf4dc0eb2f">lock_pages</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1a5c6de48829293f032de17f2bd0a7edb3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * neforce::file_mapper::data</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>data</name>
+        <qualifiedname>neforce::file_mapper::data</qualifiedname>
+        <briefdescription>
+<para>获取映射起始地址指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="176" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" bodystart="176" bodyend="176"/>
+        <references refid="classneforce_1_1file__mapper_1a5c6de48829293f032de17f2bd0a7edb3" compoundref="file__mapper_8hpp" startline="176" endline="176">data</references>
+        <referencedby refid="classneforce_1_1file__mapper_1a5c6de48829293f032de17f2bd0a7edb3" compoundref="file__mapper_8hpp" startline="176" endline="176">data</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1adf4a65d81b7410d341656a23a7e893d6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1file__mapper_1a0be1f02324599c25be068742c80fd7c0" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::file_mapper::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::file_mapper::size</qualifiedname>
+        <briefdescription>
+<para>获取映射字节大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="181" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" bodystart="181" bodyend="181"/>
+        <referencedby refid="classneforce_1_1file__mapper_1aca470eec36db5c36b4ba0a183fd5fabd">map</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1a5d302a5461c5776f3f5174692f16d6a0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1file__mapper_1a0be1f02324599c25be068742c80fd7c0" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::file_mapper::offset</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>offset</name>
+        <qualifiedname>neforce::file_mapper::offset</qualifiedname>
+        <briefdescription>
+<para>获取映射偏移 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="186" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" bodystart="186" bodyend="186"/>
+        <referencedby refid="classneforce_1_1file__mapper_1aca470eec36db5c36b4ba0a183fd5fabd">map</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1a49e83861dd83df4881398a46f075c4e2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___file_1gaf69b29599e7335c104e563f1e2c7057f" kindref="member">file_access</ref></type>
+        <definition>file_access neforce::file_mapper::access</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>access</name>
+        <qualifiedname>neforce::file_mapper::access</qualifiedname>
+        <briefdescription>
+<para>获取访问权限 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="191" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" bodystart="191" bodyend="191"/>
+        <referencedby refid="classneforce_1_1file__mapper_1aca470eec36db5c36b4ba0a183fd5fabd">map</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1a9ce718714ec729afc612e75b1b04fa89" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::file_mapper::is_mapped</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_mapped</name>
+        <qualifiedname>neforce::file_mapper::is_mapped</qualifiedname>
+        <briefdescription>
+<para>检查是否已映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="196" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" bodystart="196" bodyend="196"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__mapper_1ab8c474de3376c5aa22f9113af746b188" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1file__mapper_1_1map__info" kindref="compound">map_info</ref></type>
+        <definition>map_info neforce::file_mapper::info</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>info</name>
+        <qualifiedname>neforce::file_mapper::info</qualifiedname>
+        <briefdescription>
+<para>获取映射状态快照 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="201" column="15"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>内存映射文件工具类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理单个文件的内存映射生命周期，支持映射、解映射、重映射及刷新。 提供对文件内容的直接内存访问，适用于需要频繁随机访问的场景。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>映射文件到内存</para>
+</listitem><listitem><para>解除映射</para>
+</listitem><listitem><para>重新映射到不同区域</para>
+</listitem><listitem><para>刷新映射内容到磁盘</para>
+</listitem><listitem><para>锁定/解锁映射页到物理内存</para>
+</listitem></itemizedlist>
+</para>
+<para>性能优势：<itemizedlist>
+<listitem><para>避免系统调用开销</para>
+</listitem><listitem><para>操作系统自动管理页面缓存</para>
+</listitem><listitem><para>支持大文件的高效访问</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>映射的文件内容可能与其他进程不同步，需要适当使用flush()同步。 </para>
+</simplesect>
+<simplesect kind="note"><para>多个线程同时操作同一映射区域需要外部同步。 </para>
+</simplesect>
+<simplesect kind="note"><para>不持有文件句柄所有权，句柄生命周期由调用方保证。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" line="45" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_mapper.hpp" bodystart="45" bodyend="202"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1file__mapper_1a49e83861dd83df4881398a46f075c4e2" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>access</name></member>
+      <member refid="classneforce_1_1file__mapper_1a82b74d43c468c7d5d21b820d71076c20" prot="private" virt="non-virtual"><scope>neforce::file_mapper</scope><name>access_</name></member>
+      <member refid="classneforce_1_1file__mapper_1a5c6de48829293f032de17f2bd0a7edb3" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>data</name></member>
+      <member refid="classneforce_1_1file__mapper_1a5a4ddcd25f1181cf14601c1a408538f7" prot="private" virt="non-virtual"><scope>neforce::file_mapper</scope><name>file_handle_</name></member>
+      <member refid="classneforce_1_1file__mapper_1a03ae3986546ade3ce21c9ab5f6488f64" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>file_mapper</name></member>
+      <member refid="classneforce_1_1file__mapper_1af8e30c41bc23a5fd64a380a5d6620896" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>file_mapper</name></member>
+      <member refid="classneforce_1_1file__mapper_1a58de08db8828d70258bef898e5b25826" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>file_mapper</name></member>
+      <member refid="classneforce_1_1file__mapper_1aec636fb0486d7b064e3740a799c6c2dd" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>flush</name></member>
+      <member refid="classneforce_1_1file__mapper_1ab8c474de3376c5aa22f9113af746b188" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>info</name></member>
+      <member refid="classneforce_1_1file__mapper_1a9ce718714ec729afc612e75b1b04fa89" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>is_mapped</name></member>
+      <member refid="classneforce_1_1file__mapper_1a3f64abc9527fc4f64281cacf4dc0eb2f" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>lock_pages</name></member>
+      <member refid="classneforce_1_1file__mapper_1aca470eec36db5c36b4ba0a183fd5fabd" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>map</name></member>
+      <member refid="classneforce_1_1file__mapper_1a8ade00c1bafb90726e82a3e057e1977b" prot="private" virt="non-virtual"><scope>neforce::file_mapper</scope><name>mapping_handle_</name></member>
+      <member refid="classneforce_1_1file__mapper_1a3420878c5b89f02e2d2a70030bc1944e" prot="private" virt="non-virtual"><scope>neforce::file_mapper</scope><name>mutex_</name></member>
+      <member refid="classneforce_1_1file__mapper_1ad46f13bb78c3ad0448b34669404ad7d5" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>native_handle_type</name></member>
+      <member refid="classneforce_1_1file__mapper_1a5d302a5461c5776f3f5174692f16d6a0" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>offset</name></member>
+      <member refid="classneforce_1_1file__mapper_1add818a976c76d1bdfbb8669c832c2b8b" prot="private" virt="non-virtual"><scope>neforce::file_mapper</scope><name>offset_</name></member>
+      <member refid="classneforce_1_1file__mapper_1a85dcf2930d07eedc385e47d6ab6d59f3" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1file__mapper_1afc6b9e0c3d5397116650c79f3f741911" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1file__mapper_1ae807998b420069ad05299dfcb533f179" prot="private" virt="non-virtual"><scope>neforce::file_mapper</scope><name>ptr_</name></member>
+      <member refid="classneforce_1_1file__mapper_1accb15b1990c3c4d7c8b21a7d16a21c68" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>remap</name></member>
+      <member refid="classneforce_1_1file__mapper_1adf4a65d81b7410d341656a23a7e893d6" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>size</name></member>
+      <member refid="classneforce_1_1file__mapper_1a68d14867c856cb9389a6ae64ad9866fb" prot="private" virt="non-virtual"><scope>neforce::file_mapper</scope><name>size_</name></member>
+      <member refid="classneforce_1_1file__mapper_1a0be1f02324599c25be068742c80fd7c0" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>size_type</name></member>
+      <member refid="classneforce_1_1file__mapper_1aa05938b8db00bcc2ff84f33bcd70f65b" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>unmap</name></member>
+      <member refid="classneforce_1_1file__mapper_1ae773c76c0a97fa0fcb4c2b3b8eff5104" prot="public" virt="non-virtual"><scope>neforce::file_mapper</scope><name>~file_mapper</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -5,7 +5,7 @@
     <title>内存就地操作函数</title>
     <innerclass refid="structtemporary__guard" prot="public">temporary_guard</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___inplace_memory_function_1ga68b412b707b9885fe512b8acf2c2fb87" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, Args... &gt;" virt="non-virtual">
+      <memberdef kind="function" id="group___inplace_memory_function_1ga9e6a0c6da451f33867d11cbea1d0cf12" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; T, Args... &gt;" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -16,8 +16,8 @@
             <defname>Args</defname>
           </param>
         </templateparamlist>
-        <type>NEFORCE_CONSTEXPR20 T *</type>
-        <definition>NEFORCE_CONSTEXPR20 T * construct</definition>
+        <type>T *</type>
+        <definition>T * construct</definition>
         <argsstring>(T *ptr, Args &amp;&amp;... args)</argsstring>
         <name>construct</name>
         <param>
@@ -72,24 +72,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/construct.hpp" line="33" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/construct.hpp" bodystart="33" bodyend="36"/>
-        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
-        <references refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" compoundref="type__traits_8hpp" startline="2365">is_constructible_v</references>
-        <references refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" compoundref="type__traits_8hpp" startline="2798">is_nothrow_constructible_v</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/construct.hpp" line="33" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/construct.hpp" bodystart="33" bodyend="36"/>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
+        <references refid="group___type_special_member_function_checks_1ga123009e89543c37bab698abc5f4221a0" compoundref="type__traits_8hpp" startline="2365">is_constructible_v</references>
+        <references refid="group___type_special_member_function_checks_1gac00c953e4e3f962b130f431bc25d6101" compoundref="type__traits_8hpp" startline="2798">is_nothrow_constructible_v</references>
         <referencedby refid="group___shared_pointer_1gac6d23654fe34f82cb9ce90e5402945c2" compoundref="shared__ptr_8hpp" startline="899" endline="939">allocate_shared</referencedby>
-        <referencedby refid="classoptional_1ab0a09753080dd8b7077eb877929417fc" compoundref="optional_8hpp" startline="462" endline="467">optional&lt; T &gt;::emplace</referencedby>
-        <referencedby refid="classoptional_1a7588aac7e19170413ac887d4dd97127d" compoundref="optional_8hpp" startline="446" endline="450">optional&lt; T &gt;::emplace</referencedby>
-        <referencedby refid="classvector_1ac2d72346ddff3cf4b6e9b98003c6d0f2" compoundref="vector_8hpp" startline="829" endline="866">vector&lt; byte_t &gt;::emplace</referencedby>
+        <referencedby refid="classoptional_1a87440308a8edf4b48f750fe86f034c61" compoundref="optional_8hpp" startline="462" endline="467">optional&lt; T &gt;::emplace</referencedby>
+        <referencedby refid="classoptional_1a3d7c520ac6f2cd19c691da6da6e018c7" compoundref="optional_8hpp" startline="446" endline="450">optional&lt; T &gt;::emplace</referencedby>
+        <referencedby refid="classvector_1ab47efdba81e2bd130018669ab777d1a6" compoundref="vector_8hpp" startline="829" endline="866">vector&lt; byte_t &gt;::emplace</referencedby>
         <referencedby refid="classdeque_1a5100707179dde9adc98257e8124a89ae" compoundref="deque_8hpp" startline="1099" endline="1108">deque&lt; T, Alloc, BufSize &gt;::emplace_back</referencedby>
-        <referencedby refid="classvector_1ac9b2196b578d67665350cfb6e6ebf568" compoundref="vector_8hpp" startline="874" endline="881">vector&lt; byte_t &gt;::emplace_back</referencedby>
+        <referencedby refid="classvector_1afdfb7eeb08d6479be6125db1ce2b0060" compoundref="vector_8hpp" startline="874" endline="881">vector&lt; byte_t &gt;::emplace_back</referencedby>
         <referencedby refid="classdeque_1adf16fcef6659022e90368edfa08c5309" compoundref="deque_8hpp" startline="1116" endline="1125">deque&lt; T, Alloc, BufSize &gt;::emplace_front</referencedby>
         <referencedby refid="group___shared_pointer_1gab47fa86d2917e14f57f68dfa9e83495e" compoundref="shared__ptr_8hpp" startline="835" endline="863">make_shared</referencedby>
         <referencedby refid="classoptional_1a93a78e86c5412d5a4b217f2424645b22" compoundref="optional_8hpp" startline="264" endline="279">optional&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classoptional_1a4a0641e07c3aa0e337ae55c134f7f09f" compoundref="optional_8hpp" startline="393" endline="405">optional&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classoptional_1aa33d8b2169dbe7436b87ed0b5da69034" compoundref="optional_8hpp" startline="233" endline="246">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1ab83cc3f234e1fad4e090c64827ce7fb0" compoundref="optional_8hpp" startline="393" endline="405">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1aa0297f03002f8172034e1c2b0398e004" compoundref="optional_8hpp" startline="233" endline="246">optional&lt; T &gt;::operator=</referencedby>
         <referencedby refid="classoptional_1a7bdb21471e17d42870e0e9b49677940e" compoundref="optional_8hpp" startline="353" endline="371">optional&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classoptional_1a9337a4681c7ea5fe34015263ec1a332f" compoundref="optional_8hpp" startline="321" endline="334">optional&lt; T &gt;::operator=</referencedby>
-        <referencedby refid="classoptional_1ae6b4f027dfec1fdb05b7fa8e0296573a" compoundref="optional_8hpp" startline="179" endline="189">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1aaea0bd8e4d596b65bf2d0015d2fa4262" compoundref="optional_8hpp" startline="321" endline="334">optional&lt; T &gt;::operator=</referencedby>
+        <referencedby refid="classoptional_1aedc3f10e666cfb8019f9e21bde8c8345" compoundref="optional_8hpp" startline="179" endline="189">optional&lt; T &gt;::operator=</referencedby>
         <referencedby refid="classoptional_1a6b785fab5d4be1678797729c200a3c7f" compoundref="optional_8hpp" startline="252" endline="257">optional&lt; T &gt;::optional</referencedby>
         <referencedby refid="classoptional_1a5149a2b0e04fded77b8cef05b4a149b7" compoundref="optional_8hpp" startline="379" endline="384">optional&lt; T &gt;::optional</referencedby>
         <referencedby refid="classoptional_1a7ede04530718c1fa004354e4f26a7eb5" compoundref="optional_8hpp" startline="199" endline="204">optional&lt; T &gt;::optional</referencedby>
@@ -100,16 +100,16 @@
         <referencedby refid="classoptional_1a7335825238f1b9b85700f6a36af8c7d0" compoundref="optional_8hpp" startline="289" endline="294">optional&lt; T &gt;::optional</referencedby>
         <referencedby refid="classoptional_1acbf62cc039f245a4492081f72527d0d2" compoundref="optional_8hpp" startline="164" endline="167">optional&lt; T &gt;::optional</referencedby>
         <referencedby refid="classoptional_1a561bd099e03ae8fe48321b49613c7eba" compoundref="optional_8hpp" startline="133" endline="136">optional&lt; T &gt;::optional</referencedby>
-        <referencedby refid="classvector_1af245e8c5e477f9f869322181df9d9d6e" compoundref="vector_8hpp" startline="428" endline="442">vector&lt; byte_t &gt;::vector</referencedby>
+        <referencedby refid="classvector_1abde6dcc88dcb319bcbcab23f98219974" compoundref="vector_8hpp" startline="428" endline="442">vector&lt; byte_t &gt;::vector</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___inplace_memory_function_1ga944697ea9e7569e2eab45433e8109032" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; T &gt;" virt="non-virtual">
+      <memberdef kind="function" id="group___inplace_memory_function_1ga0d7b6e1476664ca8b85b124f487ae342" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; T &gt;" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_CONSTEXPR20 void</type>
-        <definition>NEFORCE_CONSTEXPR20 void destroy</definition>
+        <type>void</type>
+        <definition>void destroy</definition>
         <argsstring>(T *pointer)</argsstring>
         <name>destroy</name>
         <param>
@@ -142,35 +142,35 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/construct.hpp" line="46" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/construct.hpp" bodystart="46" bodyend="48"/>
-        <references refid="group___type_special_member_function_checks_1ga826320e89a7a8ec2f75d2c960df7011d" compoundref="type__traits_8hpp" startline="2978">is_nothrow_destructible_v</references>
-        <referencedby refid="classvector_1aa76db4c30b9208cd181ec0072df57927" compoundref="vector_8hpp" startline="921" endline="947">vector&lt; byte_t &gt;::assign</referencedby>
-        <referencedby refid="classvector_1a0b7c62594c6fe761ac682dc99118aa8e" compoundref="vector_8hpp" startline="1142" endline="1149">vector&lt; byte_t &gt;::clear</referencedby>
-        <referencedby refid="group___inplace_memory_function_1ga8ab7c381b09253b3c5ead4e0af63ce5b" compoundref="construct_8hpp" startline="61" endline="66">destroy</referencedby>
-        <referencedby refid="classvector_1ac2d72346ddff3cf4b6e9b98003c6d0f2" compoundref="vector_8hpp" startline="829" endline="866">vector&lt; byte_t &gt;::emplace</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/construct.hpp" line="46" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/construct.hpp" bodystart="46" bodyend="48"/>
+        <references refid="group___type_special_member_function_checks_1gadf6b378d80292ae38acd1f467e10dd49" compoundref="type__traits_8hpp" startline="2978">is_nothrow_destructible_v</references>
+        <referencedby refid="classvector_1a9cc368b8111cf70e9a91367d2cefcbd8" compoundref="vector_8hpp" startline="921" endline="947">vector&lt; byte_t &gt;::assign</referencedby>
+        <referencedby refid="classvector_1a0db5bb054ae7bdc71ffe888e3d400db7" compoundref="vector_8hpp" startline="1142" endline="1149">vector&lt; byte_t &gt;::clear</referencedby>
+        <referencedby refid="group___inplace_memory_function_1gaf6d29acd514e82a97c7809f66079f300" compoundref="construct_8hpp" startline="61" endline="66">destroy</referencedby>
+        <referencedby refid="classvector_1ab47efdba81e2bd130018669ab777d1a6" compoundref="vector_8hpp" startline="829" endline="866">vector&lt; byte_t &gt;::emplace</referencedby>
         <referencedby refid="classdeque_1a94792822506120513940582f2ac1ec10" compoundref="deque_8hpp" startline="1314" endline="1334">deque&lt; T, Alloc, BufSize &gt;::erase</referencedby>
-        <referencedby refid="classvector_1a83ad8d11141abdf80ea09847f1925dfe" compoundref="vector_8hpp" startline="1071" endline="1085">vector&lt; byte_t &gt;::erase</referencedby>
-        <referencedby refid="classvector_1a62008239a97d10f04d73ea720c72c7a7" compoundref="vector_8hpp" startline="1092" endline="1100">vector&lt; byte_t &gt;::erase</referencedby>
-        <referencedby refid="classvector_1a2d2774255d5dfb2e579494c7888b6348" compoundref="vector_8hpp" startline="1026" endline="1063">vector&lt; byte_t &gt;::insert</referencedby>
-        <referencedby refid="classvector_1a8398c5493767d15226937f8322d7369d" compoundref="vector_8hpp" startline="557" endline="574">vector&lt; byte_t &gt;::operator=</referencedby>
+        <referencedby refid="classvector_1abd1eca2676ab66bf64b847568469519f" compoundref="vector_8hpp" startline="1071" endline="1085">vector&lt; byte_t &gt;::erase</referencedby>
+        <referencedby refid="classvector_1a2eec75d082180b8f03cd29577cff7dde" compoundref="vector_8hpp" startline="1092" endline="1100">vector&lt; byte_t &gt;::erase</referencedby>
+        <referencedby refid="classvector_1a2b66ef497dacca36effd4c6763d1a77e" compoundref="vector_8hpp" startline="1026" endline="1063">vector&lt; byte_t &gt;::insert</referencedby>
+        <referencedby refid="classvector_1aa881433e352995ffb44260d42d6bbe84" compoundref="vector_8hpp" startline="557" endline="574">vector&lt; byte_t &gt;::operator=</referencedby>
         <referencedby refid="classdeque_1a43206d200267af194dc0c6836740c996" compoundref="deque_8hpp" startline="1154" endline="1167">deque&lt; T, Alloc, BufSize &gt;::pop_back</referencedby>
-        <referencedby refid="classvector_1a39c188c203186dd8c6156ed88149fff0" compoundref="vector_8hpp" startline="898" endline="902">vector&lt; byte_t &gt;::pop_back</referencedby>
-        <referencedby refid="classvector_1ac39457c2185d74c729b2487d528473f8" compoundref="vector_8hpp" startline="908" endline="914">vector&lt; byte_t &gt;::pop_back_v</referencedby>
+        <referencedby refid="classvector_1a44ccb57e731d3559ec4031b7f6e31368" compoundref="vector_8hpp" startline="898" endline="902">vector&lt; byte_t &gt;::pop_back</referencedby>
+        <referencedby refid="classvector_1a56fd936875689108cbedda4b0d1fa357" compoundref="vector_8hpp" startline="908" endline="914">vector&lt; byte_t &gt;::pop_back_v</referencedby>
         <referencedby refid="classdeque_1acd9396712c8f5d8a1fce913a0be67052" compoundref="deque_8hpp" startline="1172" endline="1185">deque&lt; T, Alloc, BufSize &gt;::pop_front</referencedby>
-        <referencedby refid="classvector_1a88d7c0d46bf9436689cf8acff2138f7d" compoundref="vector_8hpp" startline="775" endline="798">vector&lt; byte_t &gt;::reserve</referencedby>
-        <referencedby refid="classoptional_1a62b32e9cfe1af6b96c5b892dad1eab4e" compoundref="optional_8hpp" startline="472" endline="477">optional&lt; T &gt;::reset</referencedby>
-        <referencedby refid="classvector_1a1e42c66ae2f2a970940975f85a239575" compoundref="vector_8hpp" startline="1107" endline="1135">vector&lt; byte_t &gt;::shrink_to_fit</referencedby>
-        <referencedby refid="classvector_1af245e8c5e477f9f869322181df9d9d6e" compoundref="vector_8hpp" startline="428" endline="442">vector&lt; byte_t &gt;::vector</referencedby>
-        <referencedby refid="structtemporary__buffer_1a9fc9a7223f3bbe260b40dc9e0f8756dc" compoundref="temporary__buffer_8hpp" startline="135" endline="140">temporary_buffer&lt; Iterator &gt;::~temporary_buffer</referencedby>
+        <referencedby refid="classvector_1a0066a7fca1a744cdb62d5fb96b51a88f" compoundref="vector_8hpp" startline="775" endline="798">vector&lt; byte_t &gt;::reserve</referencedby>
+        <referencedby refid="classoptional_1a7ae576b1859557158d160941c2b55bf7" compoundref="optional_8hpp" startline="472" endline="477">optional&lt; T &gt;::reset</referencedby>
+        <referencedby refid="classvector_1a8a76aacfe632435f1977dc3297c73cfc" compoundref="vector_8hpp" startline="1107" endline="1135">vector&lt; byte_t &gt;::shrink_to_fit</referencedby>
+        <referencedby refid="classvector_1abde6dcc88dcb319bcbcab23f98219974" compoundref="vector_8hpp" startline="428" endline="442">vector&lt; byte_t &gt;::vector</referencedby>
+        <referencedby refid="structtemporary__buffer_1a74fbea06adc23bd97b1c09ee0ef8eea6" compoundref="temporary__buffer_8hpp" startline="135" endline="140">temporary_buffer&lt; Iterator &gt;::~temporary_buffer</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___inplace_memory_function_1ga8ab7c381b09253b3c5ead4e0af63ce5b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; iter_value_t&lt; Iterator &gt; &gt;" virt="non-virtual">
+      <memberdef kind="function" id="group___inplace_memory_function_1gaf6d29acd514e82a97c7809f66079f300" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_destructible_v&lt; iter_value_t&lt; Iterator &gt; &gt;" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_CONSTEXPR20 <ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga5e725088b59bdd828910a9652983553a" kindref="member">is_iter_v</ref>&lt; Iterator &gt; &amp;&amp;!<ref refid="group___type_special_member_function_checks_1ga727249a4591032de7a3f90565c1c156e" kindref="member">is_trivially_destructible_v</ref>&lt; <ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt; Iterator &gt; &gt; &gt;</type>
-        <definition>NEFORCE_CONSTEXPR20 enable_if_t&lt; is_iter_v&lt; Iterator &gt; &amp;&amp;!is_trivially_destructible_v&lt; iter_value_t&lt; Iterator &gt; &gt; &gt; destroy</definition>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga82451b532c89a512421a6d0d783bbb20" kindref="member">is_iter_v</ref>&lt; Iterator &gt; &amp;&amp;!<ref refid="group___type_special_member_function_checks_1ga63c5a91c590beb77cbc056cb9327956f" kindref="member">is_trivially_destructible_v</ref>&lt; <ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt; Iterator &gt; &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_iter_v&lt; Iterator &gt; &amp;&amp;!is_trivially_destructible_v&lt; iter_value_t&lt; Iterator &gt; &gt; &gt; destroy</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>destroy</name>
         <param>
@@ -216,8 +216,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/construct.hpp" line="61" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/construct.hpp" bodystart="61" bodyend="66"/>
-        <references refid="group___inplace_memory_function_1ga944697ea9e7569e2eab45433e8109032" compoundref="construct_8hpp" startline="46" endline="48">destroy</references>
-        <references refid="group___type_special_member_function_checks_1ga826320e89a7a8ec2f75d2c960df7011d" compoundref="type__traits_8hpp" startline="2978">is_nothrow_destructible_v</references>
+        <references refid="group___inplace_memory_function_1ga0d7b6e1476664ca8b85b124f487ae342" compoundref="construct_8hpp" startline="46" endline="48">destroy</references>
+        <references refid="group___type_special_member_function_checks_1gadf6b378d80292ae38acd1f467e10dd49" compoundref="type__traits_8hpp" startline="2978">is_nothrow_destructible_v</references>
       </memberdef>
       <memberdef kind="function" id="group___inplace_memory_function_1gaffee9f0631bd0b9d8f081ed19a4df46f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_constructible_v&lt; NT, Arg &gt;" virt="non-virtual">
         <templateparamlist>
@@ -231,7 +231,7 @@
             <type>typename Arg</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga23fadd6947897ddb684f368e1cab7118" kindref="member">is_nothrow_constructible_v</ref>&lt; NT, Arg &gt; &gt;</type>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gac00c953e4e3f962b130f431bc25d6101" kindref="member">is_nothrow_constructible_v</ref>&lt; NT, Arg &gt; &gt;</type>
         <definition>enable_if_t&lt; is_nothrow_constructible_v&lt; NT, Arg &gt; &gt; reinitialize</definition>
         <argsstring>(NT *new_val, OT *old_val, Arg &amp;&amp;arg)</argsstring>
         <name>reinitialize</name>

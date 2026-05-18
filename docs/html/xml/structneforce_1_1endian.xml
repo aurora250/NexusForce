@@ -1,0 +1,1147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1endian" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::endian</compoundname>
+    <includes refid="endian_8hpp" local="no">endian.hpp</includes>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structneforce_1_1endian_1a47e82ea6a6fa11978938c173634fe850" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::endian::is_little_endian</definition>
+        <argsstring></argsstring>
+        <name>is_little_endian</name>
+        <qualifiedname>neforce::endian::is_little_endian</qualifiedname>
+        <initializer>                               =
+
+true</initializer>
+        <briefdescription>
+<para>编译时检测是否为小端序 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="38" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1endian_1a3473600849d06e5516bccf08cf5ba86d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::endian::is_big_endian</definition>
+        <argsstring></argsstring>
+        <name>is_big_endian</name>
+        <qualifiedname>neforce::endian::is_big_endian</qualifiedname>
+        <initializer>= !<ref refid="structneforce_1_1endian_1a47e82ea6a6fa11978938c173634fe850" kindref="member">is_little_endian</ref></initializer>
+        <briefdescription>
+<para>编译时检测是否为大端序 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="53" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structneforce_1_1endian_1ae1f67d026419f1b0f8586a49f5371546" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_CONST_FUNCTION NEFORCE_ALWAYS_INLINE bool</type>
+        <definition>static NEFORCE_CONST_FUNCTION NEFORCE_ALWAYS_INLINE bool neforce::endian::is_little_endian_runtime</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>is_little_endian_runtime</name>
+        <qualifiedname>neforce::endian::is_little_endian_runtime</qualifiedname>
+        <briefdescription>
+<para>运行时检测是否为小端序 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="58" column="63" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="58" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1aa06c7caee763e45919e7748aaba71e16" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+        <definition>static constexpr uint16_t neforce::endian::byteswap16</definition>
+        <argsstring>(uint16_t value) noexcept</argsstring>
+        <name>byteswap16</name>
+        <qualifiedname>neforce::endian::byteswap16</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>16位整数字节序反转 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字节序反转后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="68" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1a73de8fd3283367e97addf39691170173" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>static constexpr uint32_t neforce::endian::byteswap32</definition>
+        <argsstring>(uint32_t value) noexcept</argsstring>
+        <name>byteswap32</name>
+        <qualifiedname>neforce::endian::byteswap32</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>32位整数字节序反转 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字节序反转后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="75" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="75" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1ab57b7ec1668751df45bcce0707cc6554" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga33de6a1cba865b86a4bc63036a465c0f" kindref="member">uint64_t</ref></type>
+        <definition>static constexpr uint64_t neforce::endian::byteswap64</definition>
+        <argsstring>(uint64_t value) noexcept</argsstring>
+        <name>byteswap64</name>
+        <qualifiedname>neforce::endian::byteswap64</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga33de6a1cba865b86a4bc63036a465c0f" kindref="member">uint64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>64位整数字节序反转 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字节序反转后的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="85" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="85" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1ad3048b1a7482f9935460122227f2ce45" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>static constexpr T neforce::endian::host_to_network</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>host_to_network</name>
+        <qualifiedname>neforce::endian::host_to_network</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>主机序转网络序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数类型（支持2、4、8字节） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主机序的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>网络序的值</para>
+</simplesect>
+网络字节序为大端序。 大端序系统直接返回，小端序系统执行字节序反转。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="146" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="146" bodyend="149"/>
+        <references refid="group___base_type_properties_1gae89b1cceebf060e6fc2c22b76bc69869" compoundref="type__traits_8hpp" startline="889">neforce::is_integral_v</references>
+        <referencedby refid="structneforce_1_1endian_1af43bc06a213655d4f211f72af418d442" compoundref="endian_8hpp" startline="160" endline="163">network_to_host</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1af43bc06a213655d4f211f72af418d442" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>static constexpr T neforce::endian::network_to_host</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>network_to_host</name>
+        <qualifiedname>neforce::endian::network_to_host</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>网络序转主机序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>网络序的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>主机序的值</para>
+</simplesect>
+网络序转主机序与主机序转网络序相同（对称操作）。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="160" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="160" bodyend="163"/>
+        <references refid="structneforce_1_1endian_1ad3048b1a7482f9935460122227f2ce45" compoundref="endian_8hpp" startline="146" endline="149">host_to_network</references>
+        <references refid="group___base_type_properties_1gae89b1cceebf060e6fc2c22b76bc69869" compoundref="type__traits_8hpp" startline="889">neforce::is_integral_v</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1aba9d8fda87a2bb833a802c6ab3c3bf46" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>static constexpr T neforce::endian::host_to_le</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>host_to_le</name>
+        <qualifiedname>neforce::endian::host_to_le</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>主机序转小端序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主机序的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>小端序的值</para>
+</simplesect>
+小端序系统直接返回，大端序系统执行字节序反转。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="174" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="174" bodyend="177"/>
+        <references refid="group___base_type_properties_1gae89b1cceebf060e6fc2c22b76bc69869" compoundref="type__traits_8hpp" startline="889">neforce::is_integral_v</references>
+        <referencedby refid="structneforce_1_1endian_1a6c652d6ae23a659d2f9be866c94d6a2a" compoundref="endian_8hpp" startline="188" endline="191">le_to_host</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1a6c652d6ae23a659d2f9be866c94d6a2a" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>static constexpr T neforce::endian::le_to_host</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>le_to_host</name>
+        <qualifiedname>neforce::endian::le_to_host</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>小端序转主机序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>小端序的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>主机序的值</para>
+</simplesect>
+小端序转主机序与主机序转小端序相同（对称操作）。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="188" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="188" bodyend="191"/>
+        <references refid="structneforce_1_1endian_1aba9d8fda87a2bb833a802c6ab3c3bf46" compoundref="endian_8hpp" startline="174" endline="177">host_to_le</references>
+        <references refid="group___base_type_properties_1gae89b1cceebf060e6fc2c22b76bc69869" compoundref="type__traits_8hpp" startline="889">neforce::is_integral_v</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1a9d4d222a595b1973ad2ebd04f28b1124" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>static constexpr T neforce::endian::host_to_be</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>host_to_be</name>
+        <qualifiedname>neforce::endian::host_to_be</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>主机序转大端序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>主机序的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>大端序的值</para>
+</simplesect>
+大端序系统直接返回，小端序系统执行字节序反转。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="202" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="202" bodyend="205"/>
+        <references refid="group___base_type_properties_1gae89b1cceebf060e6fc2c22b76bc69869" compoundref="type__traits_8hpp" startline="889">neforce::is_integral_v</references>
+        <referencedby refid="structneforce_1_1endian_1ab6475f24751a7143aa1873729806cf61" compoundref="endian_8hpp" startline="216" endline="219">be_to_host</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1ab6475f24751a7143aa1873729806cf61" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>static constexpr T neforce::endian::be_to_host</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>be_to_host</name>
+        <qualifiedname>neforce::endian::be_to_host</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>大端序转主机序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>大端序的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>主机序的值</para>
+</simplesect>
+大端序转主机序与主机序转大端序相同（对称操作）。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="216" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="216" bodyend="219"/>
+        <references refid="structneforce_1_1endian_1a9d4d222a595b1973ad2ebd04f28b1124" compoundref="endian_8hpp" startline="202" endline="205">host_to_be</references>
+        <references refid="group___base_type_properties_1gae89b1cceebf060e6fc2c22b76bc69869" compoundref="type__traits_8hpp" startline="889">neforce::is_integral_v</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1a0f02ae6b160f14cca9a8cfd6969ce00a" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>T</type>
+        <definition>static constexpr T neforce::endian::swap_endian</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>swap_endian</name>
+        <qualifiedname>neforce::endian::swap_endian</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>字节序反转（不区分端序） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输入值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>字节序反转后的值</para>
+</simplesect>
+强制反转字节序，不关心当前平台字节序。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="230" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="230" bodyend="233"/>
+        <references refid="group___base_type_properties_1gae89b1cceebf060e6fc2c22b76bc69869" compoundref="type__traits_8hpp" startline="889">neforce::is_integral_v</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1a469c2a8cd0b0daa5046a91ee0b0aeb5f" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+        <definition>static constexpr uint16_t neforce::endian::read_le16</definition>
+        <argsstring>(const byte_t *data) noexcept</argsstring>
+        <name>read_le16</name>
+        <qualifiedname>neforce::endian::read_le16</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>读取16位小端整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字节数组指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>读取的16位整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="240" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="240" bodyend="242"/>
+        <references refid="group___type_erasure_functions_1ga3b4836c7ce514573ca8d622d4a71af1f" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1a6f47f08acca23efd32c3d6c454f80b27" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>static constexpr uint32_t neforce::endian::read_le32</definition>
+        <argsstring>(const byte_t *data) noexcept</argsstring>
+        <name>read_le32</name>
+        <qualifiedname>neforce::endian::read_le32</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>读取32位小端整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字节数组指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>读取的32位整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="249" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="249" bodyend="252"/>
+        <references refid="group___type_erasure_functions_1ga3b4836c7ce514573ca8d622d4a71af1f" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1ad1a2570c272b9276d906f5a349dc4638" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga33de6a1cba865b86a4bc63036a465c0f" kindref="member">uint64_t</ref></type>
+        <definition>static constexpr uint64_t neforce::endian::read_le64</definition>
+        <argsstring>(const byte_t *data) noexcept</argsstring>
+        <name>read_le64</name>
+        <qualifiedname>neforce::endian::read_le64</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>读取64位小端整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字节数组指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>读取的64位整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="259" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="259" bodyend="264"/>
+        <references refid="group___type_erasure_functions_1ga3b4836c7ce514573ca8d622d4a71af1f" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1a7c6a7b7e57e55d88b7dfa697f5111289" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+        <definition>static constexpr uint16_t neforce::endian::read_be16</definition>
+        <argsstring>(const byte_t *data) noexcept</argsstring>
+        <name>read_be16</name>
+        <qualifiedname>neforce::endian::read_be16</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>读取16位大端整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字节数组指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>读取的16位整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="271" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="271" bodyend="273"/>
+        <references refid="group___type_erasure_functions_1ga3b4836c7ce514573ca8d622d4a71af1f" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1a9218d99f4e101d01892659f129decfce" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>static constexpr uint32_t neforce::endian::read_be32</definition>
+        <argsstring>(const byte_t *data) noexcept</argsstring>
+        <name>read_be32</name>
+        <qualifiedname>neforce::endian::read_be32</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>读取32位大端整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字节数组指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>读取的32位整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="280" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="280" bodyend="283"/>
+        <references refid="group___type_erasure_functions_1ga3b4836c7ce514573ca8d622d4a71af1f" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1a28100ddbbe57ff8a554707b2bba3a047" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga33de6a1cba865b86a4bc63036a465c0f" kindref="member">uint64_t</ref></type>
+        <definition>static constexpr uint64_t neforce::endian::read_be64</definition>
+        <argsstring>(const byte_t *data) noexcept</argsstring>
+        <name>read_be64</name>
+        <qualifiedname>neforce::endian::read_be64</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>读取64位大端整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字节数组指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>读取的64位整数 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="290" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="290" bodyend="295"/>
+        <references refid="group___type_erasure_functions_1ga3b4836c7ce514573ca8d622d4a71af1f" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1adcb3339e378c8b1480ea0e0277e9073b" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static constexpr void neforce::endian::write_le16</definition>
+        <argsstring>(byte_t *dest, uint16_t value) noexcept</argsstring>
+        <name>write_le16</name>
+        <qualifiedname>neforce::endian::write_le16</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>写入16位小端整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标字节数组指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要写入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="302" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="302" bodyend="305"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1a038835348d80e905e5c69d7829cf36d8" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static constexpr void neforce::endian::write_le32</definition>
+        <argsstring>(byte_t *dest, uint32_t value) noexcept</argsstring>
+        <name>write_le32</name>
+        <qualifiedname>neforce::endian::write_le32</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>写入32位小端整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标字节数组指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要写入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="312" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="312" bodyend="316"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1aa756bcb2b3313ca826e174ff4509701f" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static constexpr void neforce::endian::write_le64</definition>
+        <argsstring>(byte_t *dest, uint64_t value) noexcept</argsstring>
+        <name>write_le64</name>
+        <qualifiedname>neforce::endian::write_le64</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga33de6a1cba865b86a4bc63036a465c0f" kindref="member">uint64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>写入64位小端整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标字节数组指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要写入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="323" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="323" bodyend="327"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1aa7a46057b7ebdba0b7b73a04c51fd89f" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static constexpr void neforce::endian::write_be16</definition>
+        <argsstring>(byte_t *dest, uint16_t value) noexcept</argsstring>
+        <name>write_be16</name>
+        <qualifiedname>neforce::endian::write_be16</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>写入16位大端整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标字节数组指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要写入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="334" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="334" bodyend="337"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1aa0db47338beb50dfa09fed4050902c57" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static constexpr void neforce::endian::write_be32</definition>
+        <argsstring>(byte_t *dest, uint32_t value) noexcept</argsstring>
+        <name>write_be32</name>
+        <qualifiedname>neforce::endian::write_be32</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>写入32位大端整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标字节数组指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要写入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="344" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="344" bodyend="348"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1a400e7457a0a48479e0055cd42ca985d9" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static constexpr void neforce::endian::write_be64</definition>
+        <argsstring>(byte_t *dest, uint64_t value) noexcept</argsstring>
+        <name>write_be64</name>
+        <qualifiedname>neforce::endian::write_be64</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> *</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga33de6a1cba865b86a4bc63036a465c0f" kindref="member">uint64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>写入64位大端整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标字节数组指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要写入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="355" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="355" bodyend="359"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="structneforce_1_1endian_1ac137de52412e34d01daae773b1550180" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="structneforce_1_1endian_1a3473600849d06e5516bccf08cf5ba86d" kindref="member">is_big_endian</ref>, T &gt;</type>
+        <definition>static constexpr enable_if_t&lt; is_big_endian, T &gt; neforce::endian::host_to_network_impl1</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>host_to_network_impl1</name>
+        <qualifiedname>neforce::endian::host_to_network_impl1</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="94" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="94" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1a80fc531617a7218ce01cdefd12c99e1f" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; sizeof(T)==2, T &gt;</type>
+        <definition>static constexpr enable_if_t&lt; sizeof(T)==2, T &gt; neforce::endian::host_to_network_impl2</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>host_to_network_impl2</name>
+        <qualifiedname>neforce::endian::host_to_network_impl2</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="99" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="99" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1adca9ed2ffc332df7fc003cfa6a244582" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; sizeof(T)==4, T &gt;</type>
+        <definition>static constexpr enable_if_t&lt; sizeof(T)==4, T &gt; neforce::endian::host_to_network_impl2</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>host_to_network_impl2</name>
+        <qualifiedname>neforce::endian::host_to_network_impl2</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="104" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="104" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1a3ec16ca14f5f9b3ac0122390c4dc39a9" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; sizeof(T)==8, T &gt;</type>
+        <definition>static constexpr enable_if_t&lt; sizeof(T)==8, T &gt; neforce::endian::host_to_network_impl2</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>host_to_network_impl2</name>
+        <qualifiedname>neforce::endian::host_to_network_impl2</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="109" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="109" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1a6b281f62c72cb7268080af69347911ea" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; sizeof(T) !=2 &amp;&amp;sizeof(T) !=4 &amp;&amp;sizeof(T) !=8, T &gt;</type>
+        <definition>static constexpr enable_if_t&lt; sizeof(T) !=2 &amp;&amp;sizeof(T) !=4 &amp;&amp;sizeof(T) !=8, T &gt; neforce::endian::host_to_network_impl2</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>host_to_network_impl2</name>
+        <qualifiedname>neforce::endian::host_to_network_impl2</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="115" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="115" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1affa512ca9d2cce97d5ddc529545dad2b" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="structneforce_1_1endian_1a3473600849d06e5516bccf08cf5ba86d" kindref="member">is_big_endian</ref>, T &gt;</type>
+        <definition>static constexpr enable_if_t&lt;!is_big_endian, T &gt; neforce::endian::host_to_network_impl1</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>host_to_network_impl1</name>
+        <qualifiedname>neforce::endian::host_to_network_impl1</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="121" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="121" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1abfee8f1f15aaefd8fd472166ab08c9f6" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="structneforce_1_1endian_1a47e82ea6a6fa11978938c173634fe850" kindref="member">is_little_endian</ref>, T &gt;</type>
+        <definition>static constexpr enable_if_t&lt; is_little_endian, T &gt; neforce::endian::host_to_network_impl3</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>host_to_network_impl3</name>
+        <qualifiedname>neforce::endian::host_to_network_impl3</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="126" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="126" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1endian_1ae857b7c68c1920088879ffbe8d287958" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="structneforce_1_1endian_1a47e82ea6a6fa11978938c173634fe850" kindref="member">is_little_endian</ref>, T &gt;</type>
+        <definition>static constexpr enable_if_t&lt;!is_little_endian, T &gt; neforce::endian::host_to_network_impl3</definition>
+        <argsstring>(T value) noexcept</argsstring>
+        <name>host_to_network_impl3</name>
+        <qualifiedname>neforce::endian::host_to_network_impl3</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="131" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="131" bodyend="133"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>端序转换工具结构体 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供编译时和运行时的端序检测，以及各种端序转换函数。 支持整型类型的字节序转换和原始字节数组的读写操作。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="33" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="33" bodyend="360"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1endian_1ab6475f24751a7143aa1873729806cf61" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>be_to_host</name></member>
+      <member refid="structneforce_1_1endian_1aa06c7caee763e45919e7748aaba71e16" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>byteswap16</name></member>
+      <member refid="structneforce_1_1endian_1a73de8fd3283367e97addf39691170173" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>byteswap32</name></member>
+      <member refid="structneforce_1_1endian_1ab57b7ec1668751df45bcce0707cc6554" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>byteswap64</name></member>
+      <member refid="structneforce_1_1endian_1a9d4d222a595b1973ad2ebd04f28b1124" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>host_to_be</name></member>
+      <member refid="structneforce_1_1endian_1aba9d8fda87a2bb833a802c6ab3c3bf46" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>host_to_le</name></member>
+      <member refid="structneforce_1_1endian_1ad3048b1a7482f9935460122227f2ce45" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>host_to_network</name></member>
+      <member refid="structneforce_1_1endian_1ac137de52412e34d01daae773b1550180" prot="private" virt="non-virtual"><scope>neforce::endian</scope><name>host_to_network_impl1</name></member>
+      <member refid="structneforce_1_1endian_1affa512ca9d2cce97d5ddc529545dad2b" prot="private" virt="non-virtual"><scope>neforce::endian</scope><name>host_to_network_impl1</name></member>
+      <member refid="structneforce_1_1endian_1a80fc531617a7218ce01cdefd12c99e1f" prot="private" virt="non-virtual"><scope>neforce::endian</scope><name>host_to_network_impl2</name></member>
+      <member refid="structneforce_1_1endian_1adca9ed2ffc332df7fc003cfa6a244582" prot="private" virt="non-virtual"><scope>neforce::endian</scope><name>host_to_network_impl2</name></member>
+      <member refid="structneforce_1_1endian_1a3ec16ca14f5f9b3ac0122390c4dc39a9" prot="private" virt="non-virtual"><scope>neforce::endian</scope><name>host_to_network_impl2</name></member>
+      <member refid="structneforce_1_1endian_1a6b281f62c72cb7268080af69347911ea" prot="private" virt="non-virtual"><scope>neforce::endian</scope><name>host_to_network_impl2</name></member>
+      <member refid="structneforce_1_1endian_1abfee8f1f15aaefd8fd472166ab08c9f6" prot="private" virt="non-virtual"><scope>neforce::endian</scope><name>host_to_network_impl3</name></member>
+      <member refid="structneforce_1_1endian_1ae857b7c68c1920088879ffbe8d287958" prot="private" virt="non-virtual"><scope>neforce::endian</scope><name>host_to_network_impl3</name></member>
+      <member refid="structneforce_1_1endian_1a3473600849d06e5516bccf08cf5ba86d" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>is_big_endian</name></member>
+      <member refid="structneforce_1_1endian_1a47e82ea6a6fa11978938c173634fe850" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>is_little_endian</name></member>
+      <member refid="structneforce_1_1endian_1ae1f67d026419f1b0f8586a49f5371546" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>is_little_endian_runtime</name></member>
+      <member refid="structneforce_1_1endian_1a6c652d6ae23a659d2f9be866c94d6a2a" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>le_to_host</name></member>
+      <member refid="structneforce_1_1endian_1af43bc06a213655d4f211f72af418d442" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>network_to_host</name></member>
+      <member refid="structneforce_1_1endian_1a7c6a7b7e57e55d88b7dfa697f5111289" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>read_be16</name></member>
+      <member refid="structneforce_1_1endian_1a9218d99f4e101d01892659f129decfce" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>read_be32</name></member>
+      <member refid="structneforce_1_1endian_1a28100ddbbe57ff8a554707b2bba3a047" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>read_be64</name></member>
+      <member refid="structneforce_1_1endian_1a469c2a8cd0b0daa5046a91ee0b0aeb5f" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>read_le16</name></member>
+      <member refid="structneforce_1_1endian_1a6f47f08acca23efd32c3d6c454f80b27" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>read_le32</name></member>
+      <member refid="structneforce_1_1endian_1ad1a2570c272b9276d906f5a349dc4638" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>read_le64</name></member>
+      <member refid="structneforce_1_1endian_1a0f02ae6b160f14cca9a8cfd6969ce00a" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>swap_endian</name></member>
+      <member refid="structneforce_1_1endian_1aa7a46057b7ebdba0b7b73a04c51fd89f" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>write_be16</name></member>
+      <member refid="structneforce_1_1endian_1aa0db47338beb50dfa09fed4050902c57" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>write_be32</name></member>
+      <member refid="structneforce_1_1endian_1a400e7457a0a48479e0055cd42ca985d9" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>write_be64</name></member>
+      <member refid="structneforce_1_1endian_1adcb3339e378c8b1480ea0e0277e9073b" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>write_le16</name></member>
+      <member refid="structneforce_1_1endian_1a038835348d80e905e5c69d7829cf36d8" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>write_le32</name></member>
+      <member refid="structneforce_1_1endian_1aa756bcb2b3313ca826e174ff4509701f" prot="public" virt="non-virtual"><scope>neforce::endian</scope><name>write_le64</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

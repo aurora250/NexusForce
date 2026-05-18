@@ -45,7 +45,7 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1gaff2094428071e9bd480d66885ad85043" kindref="member">is_pointer_v</ref>&lt; T &gt;, <ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref>, <ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt; &gt;</type>
+        <type><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1ga60d8a43ca3d5d473f1651ef5114c2628" kindref="member">is_pointer_v</ref>&lt; T &gt;, <ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref>, <ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt; &gt;</type>
         <definition>using atomic_diff_t = conditional_t&lt;is_pointer_v&lt;T&gt;, ptrdiff_t, remove_volatile_t&lt;T&gt;&gt;</definition>
         <argsstring></argsstring>
         <name>atomic_diff_t</name>
@@ -70,9 +70,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___atomic_operations_1gad09904472351069bf4052ca1aa2cef7b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_ALWAYS_INLINE_INLINE void</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE void atomic_thread_fence</definition>
+      <memberdef kind="function" id="group___atomic_operations_1ga983217e8435a6bd85a2f9fa21910d358" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void atomic_thread_fence</definition>
         <argsstring>(const memory_order mo) noexcept</argsstring>
         <name>atomic_thread_fence</name>
         <param>
@@ -96,15 +96,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="40" column="35" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="40" bodyend="64"/>
-        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
-        <references refid="group___memory_order_1ga5f22a1191ac5d936f9fc1c7b3b72eddd" compoundref="memory__order_8hpp" startline="175">memory_order_consume</references>
-        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
-        <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="40" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="40" bodyend="64"/>
+        <references refid="group___memory_order_1ga52729ffe1460a0069a1736f2e4e61d2e" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+        <references refid="group___memory_order_1ga5d85cc03b2570d50c7da5a08961f4eb7" compoundref="memory__order_8hpp" startline="175">memory_order_consume</references>
+        <references refid="group___memory_order_1ga4c8b2df710dbe4b801447898624fa3ca" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+        <references refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1ga68dc6572818e290f920ee64fad9f0d62" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_ALWAYS_INLINE_INLINE void</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE void atomic_signal_fence</definition>
+      <memberdef kind="function" id="group___atomic_operations_1ga9dd12e898a2e56aa49f0257f904d4a8d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void atomic_signal_fence</definition>
         <argsstring>(const memory_order mo) noexcept</argsstring>
         <name>atomic_signal_fence</name>
         <param>
@@ -128,17 +128,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="72" column="35" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="72" bodyend="80"/>
-        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="72" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="72" bodyend="80"/>
+        <references refid="group___memory_order_1ga4c8b2df710dbe4b801447898624fa3ca" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1gaaa5c14a3bfaac1bdcf93e2292ba1608f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1gad653d72ae99e1e5262569ac9028d923d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE void</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE void atomic_store</definition>
+        <type>void</type>
+        <definition>void atomic_store</definition>
         <argsstring>(volatile T *ptr, remove_volatile_t&lt; T &gt; value, const memory_order mo) noexcept</argsstring>
         <name>atomic_store</name>
         <param>
@@ -197,24 +197,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="458" column="35" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="458" bodyend="469"/>
-        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
-        <references refid="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" compoundref="memory__order_8hpp" startline="179">memory_order_release</references>
-        <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
-        <referencedby refid="structatomic__flag_1a482380fc8a9add7bbdc779a601b63444" compoundref="atomic__base_8hpp" startline="1372" endline="1389">atomic_flag::clear</referencedby>
-        <referencedby refid="structatomic__flag_1a9bad570d55fe97eb579d9f73ec6e78c9" compoundref="atomic__base_8hpp" startline="1394" endline="1411">atomic_flag::clear</referencedby>
-        <referencedby refid="structatomic__base_1a4c12cae12a0f6bf002f8fcedce9cdbb5" compoundref="atomic__base_8hpp" startline="1622" endline="1634">atomic_base&lt; char &gt;::store</referencedby>
-        <referencedby refid="structatomic__base_1a9cd7bc0d2ccf4dfd26c8ee64b5a8ee26" compoundref="atomic__base_8hpp" startline="1639" endline="1651">atomic_base&lt; char &gt;::store</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="458" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="458" bodyend="469"/>
+        <references refid="group___base_type_properties_1ga396e4b8c756441b942c1619de108e56a" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+        <references refid="group___memory_order_1ga1872f4bd7e5e4170b898e1dcab55bbec" compoundref="memory__order_8hpp" startline="179">memory_order_release</references>
+        <references refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
+        <referencedby refid="structatomic__flag_1af174de70590672c9e8b98192f67d116e" compoundref="atomic__base_8hpp" startline="1372" endline="1389">atomic_flag::clear</referencedby>
+        <referencedby refid="structatomic__flag_1ac6ccafdbd547123a5a683b66b915d735" compoundref="atomic__base_8hpp" startline="1394" endline="1411">atomic_flag::clear</referencedby>
+        <referencedby refid="structatomic__base_1aaaaa7ae4724637d44018401a15a12a38" compoundref="atomic__base_8hpp" startline="1622" endline="1634">atomic_base&lt; char &gt;::store</referencedby>
+        <referencedby refid="structatomic__base_1acec2755070cf5415ca0684160b2900f1" compoundref="atomic__base_8hpp" startline="1639" endline="1651">atomic_base&lt; char &gt;::store</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a91339a67a8560b0761d8c01a4dd2dc82" compoundref="atomic__base_8hpp" startline="2836" endline="2838">atomic_ref_base&lt; T, true, false &gt;::store</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1gae881b9b04d18e6f5dd4f5d7311bb48c9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1gac97fbbd35fc0bf2a6051feefa461a711" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t&lt; T &gt; atomic_load</definition>
+        <type><ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
+        <definition>remove_volatile_t&lt; T &gt; atomic_load</definition>
         <argsstring>(const volatile T *ptr, const memory_order mo) noexcept</argsstring>
         <name>atomic_load</name>
         <param>
@@ -263,23 +263,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="480" column="48" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="480" bodyend="491"/>
-        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
-        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
-        <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
-        <referencedby refid="structatomic__base_1af024d40b0357b05a72df587152b2f4a5" compoundref="atomic__base_8hpp" startline="1658" endline="1668">atomic_base&lt; char &gt;::load</referencedby>
-        <referencedby refid="structatomic__base_1a364965b7b7d5d8c1ad0a1a523b48cde9" compoundref="atomic__base_8hpp" startline="1673" endline="1683">atomic_base&lt; char &gt;::load</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="480" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="480" bodyend="491"/>
+        <references refid="group___base_type_properties_1ga396e4b8c756441b942c1619de108e56a" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+        <references refid="group___memory_order_1ga52729ffe1460a0069a1736f2e4e61d2e" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+        <references refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
+        <referencedby refid="structatomic__base_1a1049bf43c66cc21f33f8a356a8f3c5d9" compoundref="atomic__base_8hpp" startline="1658" endline="1668">atomic_base&lt; char &gt;::load</referencedby>
+        <referencedby refid="structatomic__base_1a02f4a2ccaef6345e2ea8406206ea4940" compoundref="atomic__base_8hpp" startline="1673" endline="1683">atomic_base&lt; char &gt;::load</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1ac559392b872ff974b5acffcb4802ba2c" compoundref="atomic__base_8hpp" startline="2845" endline="2845">atomic_ref_base&lt; T, true, false &gt;::load</referencedby>
-        <referencedby refid="classlatch_1a2206028685d6c7164ab09b8a4796eb11" compoundref="latch_8hpp" startline="83" endline="85">latch::try_wait</referencedby>
+        <referencedby refid="classlatch_1a4ca399a140ec6ad75d2711ec7843bdfc" compoundref="latch_8hpp" startline="83" endline="85">latch::try_wait</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1ga580e126483f4df7a80c529027735df8c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1gac2c6ce30140f303d56d8ba2fd436973b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t&lt; T &gt; atomic_exchange</definition>
+        <type><ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
+        <definition>remove_volatile_t&lt; T &gt; atomic_exchange</definition>
         <argsstring>(volatile T *ptr, remove_volatile_t&lt; T &gt; value, const memory_order mo) noexcept</argsstring>
         <name>atomic_exchange</name>
         <param>
@@ -340,21 +340,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="503" column="48" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="503" bodyend="515"/>
-        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
-        <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
-        <referencedby refid="structatomic__base_1abd661841a0ab304f74cfa73b0e6f4f2a" compoundref="atomic__base_8hpp" startline="1691" endline="1693">atomic_base&lt; char &gt;::exchange</referencedby>
-        <referencedby refid="structatomic__base_1abcb256b7451192e4ebc4ecfd18bca5d5" compoundref="atomic__base_8hpp" startline="1698" endline="1701">atomic_base&lt; char &gt;::exchange</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="503" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="503" bodyend="515"/>
+        <references refid="group___base_type_properties_1ga396e4b8c756441b942c1619de108e56a" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+        <references refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
+        <referencedby refid="structatomic__base_1a26addc09c62515fdef94e7d9ca3fab62" compoundref="atomic__base_8hpp" startline="1691" endline="1693">atomic_base&lt; char &gt;::exchange</referencedby>
+        <referencedby refid="structatomic__base_1aa39c773620bf26cf49c7b43acce7828e" compoundref="atomic__base_8hpp" startline="1698" endline="1701">atomic_base&lt; char &gt;::exchange</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a644f31f7d25877a6c5fe646130a8b405" compoundref="atomic__base_8hpp" startline="2853" endline="2855">atomic_ref_base&lt; T, true, false &gt;::exchange</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1gac0e1e634abfd1bb68c905b25576eb5d4" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1gaf8d716de35ef450ae5ad2a36daeaa395" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE bool</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE bool atomic_cmpexch_weak</definition>
+        <type>bool</type>
+        <definition>bool atomic_cmpexch_weak</definition>
         <argsstring>(volatile T *ptr, remove_volatile_t&lt; T &gt; *expected, remove_volatile_t&lt; T &gt; desired, const memory_order success, const memory_order failure) noexcept</argsstring>
         <name>atomic_cmpexch_weak</name>
         <param>
@@ -441,26 +441,26 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="530" column="35" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="530" bodyend="656"/>
-        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="530" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="530" bodyend="656"/>
+        <references refid="group___base_type_properties_1ga396e4b8c756441b942c1619de108e56a" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
         <references refid="group___memory_order_1ga0ebbd1fbd5cee109f313d7ef89dd257f" compoundref="memory__order_8hpp" startline="296" endline="303">is_valid_cmpexch_failure_order</references>
-        <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
+        <references refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
         <references refid="group___debug_breakpoints_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" compoundref="breakpoint_8hpp" startline="47" endline="52">NEFORCE_CONSTEXPR_ASSERT</references>
         <references refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a260ca9dd8a4577fc00b7bd5810298076" compoundref="condition__variable_8hpp" startline="34">success</references>
-        <referencedby refid="group___atomic_operations_1ga53e71ce4980e49652fa2787d1b3a7375" compoundref="atomic__base_8hpp" startline="671" endline="694">atomic_cmpexch_strong</referencedby>
+        <referencedby refid="group___atomic_operations_1ga256cb2ebf0dd27696aaacdaa7222dd22" compoundref="atomic__base_8hpp" startline="671" endline="694">atomic_cmpexch_strong</referencedby>
         <referencedby refid="structatomic__float__base_1af9f9c93088d40b86e249d5fb49898440" compoundref="atomic__base_8hpp" startline="2501" endline="2503">atomic_float_base&lt; Float &gt;::compare_exchange_weak</referencedby>
         <referencedby refid="structatomic__float__base_1ad8e18ff8750432a7f4a78211fbcc20d2" compoundref="atomic__base_8hpp" startline="2508" endline="2511">atomic_float_base&lt; Float &gt;::compare_exchange_weak</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a3e4027d7518e305c234397aa90622092" compoundref="atomic__base_8hpp" startline="2889" endline="2891">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_weak</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a0f38b1c4047b02eb0b0b89e1235af7a7" compoundref="atomic__base_8hpp" startline="2865" endline="2867">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_weak</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1ga53e71ce4980e49652fa2787d1b3a7375" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1ga256cb2ebf0dd27696aaacdaa7222dd22" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE bool</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE bool atomic_cmpexch_strong</definition>
+        <type>bool</type>
+        <definition>bool atomic_cmpexch_strong</definition>
         <argsstring>(volatile T *ptr, remove_volatile_t&lt; T &gt; *expected, remove_volatile_t&lt; T &gt; desired, const memory_order success, const memory_order failure) noexcept</argsstring>
         <name>atomic_cmpexch_strong</name>
         <param>
@@ -547,9 +547,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="671" column="35" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="671" bodyend="694"/>
-        <references refid="group___atomic_operations_1gac0e1e634abfd1bb68c905b25576eb5d4" compoundref="atomic__base_8hpp" startline="530" endline="656">atomic_cmpexch_weak</references>
-        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="671" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="671" bodyend="694"/>
+        <references refid="group___atomic_operations_1gaf8d716de35ef450ae5ad2a36daeaa395" compoundref="atomic__base_8hpp" startline="530" endline="656">atomic_cmpexch_weak</references>
+        <references refid="group___base_type_properties_1ga396e4b8c756441b942c1619de108e56a" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
         <references refid="group___memory_order_1ga0ebbd1fbd5cee109f313d7ef89dd257f" compoundref="memory__order_8hpp" startline="296" endline="303">is_valid_cmpexch_failure_order</references>
         <references refid="group___debug_breakpoints_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" compoundref="breakpoint_8hpp" startline="47" endline="52">NEFORCE_CONSTEXPR_ASSERT</references>
         <references refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a260ca9dd8a4577fc00b7bd5810298076" compoundref="condition__variable_8hpp" startline="34">success</references>
@@ -558,14 +558,14 @@
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1afed11c1ee7b8f9d123ae6cd8b6684c11" compoundref="atomic__base_8hpp" startline="2900" endline="2902">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_strong</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1aa32ead036e00db5ecf99814cda6dec31" compoundref="atomic__base_8hpp" startline="2877" endline="2880">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_strong</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1ga2c2c8cbfcae01cfa2bf198fd831c62b2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1gafd379e44f03b964183af9b92423f5c96" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t&lt; T &gt; atomic_fetch_add</definition>
+        <type><ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
+        <definition>remove_volatile_t&lt; T &gt; atomic_fetch_add</definition>
         <argsstring>(volatile T *ptr, atomic_diff_t&lt; T &gt; value, const memory_order mo) noexcept</argsstring>
         <name>atomic_fetch_add</name>
         <param>
@@ -626,24 +626,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="706" column="48" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="706" bodyend="718"/>
-        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
-        <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
-        <referencedby refid="group___atomic_operations_1ga5b4755daf3f0c2c98dae41084f5bad65" compoundref="atomic__base_8hpp" startline="822" endline="830">atomic_add_fetch</referencedby>
-        <referencedby refid="group___atomic_operations_1ga021ba5336034625fe4ca4af59bc779da" compoundref="atomic__base_8hpp" startline="730" endline="738">atomic_fetch_sub</referencedby>
-        <referencedby refid="structatomic__base_1a037a6cb21e04aae4c4118501c75e9209" compoundref="atomic__base_8hpp" startline="1813" endline="1816">atomic_base&lt; char &gt;::fetch_add</referencedby>
-        <referencedby refid="structatomic__base_1a0c6ef22b446684de7cb4ac985123c90d" compoundref="atomic__base_8hpp" startline="1821" endline="1824">atomic_base&lt; char &gt;::fetch_add</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="706" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="706" bodyend="718"/>
+        <references refid="group___base_type_properties_1ga396e4b8c756441b942c1619de108e56a" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+        <references refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
+        <referencedby refid="group___atomic_operations_1ga997283224060aabe3abb93501aa18d42" compoundref="atomic__base_8hpp" startline="822" endline="830">atomic_add_fetch</referencedby>
+        <referencedby refid="group___atomic_operations_1gac61d9fd541d5b9aef14a1067e3538924" compoundref="atomic__base_8hpp" startline="730" endline="738">atomic_fetch_sub</referencedby>
+        <referencedby refid="structatomic__base_1a52f6f99cf02a3362e28701004fbc46fc" compoundref="atomic__base_8hpp" startline="1813" endline="1816">atomic_base&lt; char &gt;::fetch_add</referencedby>
+        <referencedby refid="structatomic__base_1ae27bcd527016858bc161a37a12603545" compoundref="atomic__base_8hpp" startline="1821" endline="1824">atomic_base&lt; char &gt;::fetch_add</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a76f71f1cafde30c6558171e0d4f7e505" compoundref="atomic__base_8hpp" startline="2929" endline="2931">atomic_ref_base&lt; T, true, false &gt;::fetch_add</referencedby>
         <referencedby refid="classatomic__semaphore_1a8716205f263f66c4d7d4e23a4ac8170d" compoundref="semaphore_8hpp" startline="99" endline="104">atomic_semaphore&lt; 1 &gt;::release</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1ga021ba5336034625fe4ca4af59bc779da" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1gac61d9fd541d5b9aef14a1067e3538924" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t&lt; T &gt; atomic_fetch_sub</definition>
+        <type><ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
+        <definition>remove_volatile_t&lt; T &gt; atomic_fetch_sub</definition>
         <argsstring>(volatile T *ptr, atomic_diff_t&lt; T &gt; value, const memory_order mo) noexcept</argsstring>
         <name>atomic_fetch_sub</name>
         <param>
@@ -704,23 +704,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="730" column="48" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="730" bodyend="738"/>
-        <references refid="group___atomic_operations_1ga2c2c8cbfcae01cfa2bf198fd831c62b2" compoundref="atomic__base_8hpp" startline="706" endline="718">atomic_fetch_add</references>
-        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
-        <referencedby refid="group___atomic_operations_1ga88203498c566079de5b0d3497abfb2ec" compoundref="atomic__base_8hpp" startline="842" endline="850">atomic_sub_fetch</referencedby>
-        <referencedby refid="classlatch_1af97b3e7f872dacf234135f65508ff964" compoundref="latch_8hpp" startline="70" endline="75">latch::count_down</referencedby>
-        <referencedby refid="structatomic__base_1aeec5242a6376e0fb2684e88ca98c5fe5" compoundref="atomic__base_8hpp" startline="1832" endline="1835">atomic_base&lt; char &gt;::fetch_sub</referencedby>
-        <referencedby refid="structatomic__base_1a2aafd96d7cb3b4c2b5ad0138246d2c8a" compoundref="atomic__base_8hpp" startline="1840" endline="1843">atomic_base&lt; char &gt;::fetch_sub</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="730" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="730" bodyend="738"/>
+        <references refid="group___atomic_operations_1gafd379e44f03b964183af9b92423f5c96" compoundref="atomic__base_8hpp" startline="706" endline="718">atomic_fetch_add</references>
+        <references refid="group___base_type_properties_1ga396e4b8c756441b942c1619de108e56a" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+        <referencedby refid="group___atomic_operations_1ga1a2061210bbb322408eea7178a25f454" compoundref="atomic__base_8hpp" startline="842" endline="850">atomic_sub_fetch</referencedby>
+        <referencedby refid="classlatch_1a5d0363a4c163fe58fb84fd4e8ee45e15" compoundref="latch_8hpp" startline="70" endline="75">latch::count_down</referencedby>
+        <referencedby refid="structatomic__base_1aba5602f1b30a3f59acc15a515e4099f1" compoundref="atomic__base_8hpp" startline="1832" endline="1835">atomic_base&lt; char &gt;::fetch_sub</referencedby>
+        <referencedby refid="structatomic__base_1a82dd3dc0fd9993878b6a873a5b6e23b3" compoundref="atomic__base_8hpp" startline="1840" endline="1843">atomic_base&lt; char &gt;::fetch_sub</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1ab23344df478740ad2a8d1e707f421f2d" compoundref="atomic__base_8hpp" startline="2939" endline="2941">atomic_ref_base&lt; T, true, false &gt;::fetch_sub</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1gad486ba655d266410a9282d207b75f097" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1gad91d94c131515208781b255ec5a2d2ab" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t&lt; T &gt; atomic_fetch_and</definition>
+        <type><ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
+        <definition>remove_volatile_t&lt; T &gt; atomic_fetch_and</definition>
         <argsstring>(volatile T *ptr, remove_volatile_t&lt; T &gt; value, const memory_order mo) noexcept</argsstring>
         <name>atomic_fetch_and</name>
         <param>
@@ -781,22 +781,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="750" column="48" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="750" bodyend="762"/>
-        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
-        <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
-        <referencedby refid="group___atomic_operations_1gaf978cddf75785ac79968e54064f629fd" compoundref="atomic__base_8hpp" startline="862" endline="870">atomic_and_fetch</referencedby>
-        <referencedby refid="structatomic__base_1a32e791fa7d1611859e8db698a7ee88c3" compoundref="atomic__base_8hpp" startline="1851" endline="1854">atomic_base&lt; char &gt;::fetch_and</referencedby>
-        <referencedby refid="structatomic__base_1aae8366d26051d947d6625dd9cf85c97d" compoundref="atomic__base_8hpp" startline="1859" endline="1862">atomic_base&lt; char &gt;::fetch_and</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="750" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="750" bodyend="762"/>
+        <references refid="group___base_type_properties_1ga396e4b8c756441b942c1619de108e56a" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+        <references refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
+        <referencedby refid="group___atomic_operations_1gab9b13da068b8edd78f4cf66566c49a95" compoundref="atomic__base_8hpp" startline="862" endline="870">atomic_and_fetch</referencedby>
+        <referencedby refid="structatomic__base_1a46f6a92d4879c6a57531c845bca162b7" compoundref="atomic__base_8hpp" startline="1851" endline="1854">atomic_base&lt; char &gt;::fetch_and</referencedby>
+        <referencedby refid="structatomic__base_1a99dcf3c1ae2a0d12d77408a0aa5b620c" compoundref="atomic__base_8hpp" startline="1859" endline="1862">atomic_base&lt; char &gt;::fetch_and</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a4de19daeb658ff3fc49161bd15cab367" compoundref="atomic__base_8hpp" startline="2949" endline="2951">atomic_ref_base&lt; T, true, false &gt;::fetch_and</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1ga9fb54274efe6570a0a2014b6a47cc5ff" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1ga182cc4ec32727b206b6bf0404f7d23d0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t&lt; T &gt; atomic_fetch_or</definition>
+        <type><ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
+        <definition>remove_volatile_t&lt; T &gt; atomic_fetch_or</definition>
         <argsstring>(volatile T *ptr, remove_volatile_t&lt; T &gt; value, const memory_order mo) noexcept</argsstring>
         <name>atomic_fetch_or</name>
         <param>
@@ -857,22 +857,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="774" column="48" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="774" bodyend="786"/>
-        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
-        <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
-        <referencedby refid="group___atomic_operations_1gae43f163ab729da3abeac1aae2100d14c" compoundref="atomic__base_8hpp" startline="882" endline="890">atomic_or_fetch</referencedby>
-        <referencedby refid="structatomic__base_1ad8dadd88a6d0b99071f9df7c49ae885e" compoundref="atomic__base_8hpp" startline="1870" endline="1872">atomic_base&lt; char &gt;::fetch_or</referencedby>
-        <referencedby refid="structatomic__base_1af209a4d88c96ac938122167f644bb8f7" compoundref="atomic__base_8hpp" startline="1877" endline="1880">atomic_base&lt; char &gt;::fetch_or</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="774" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="774" bodyend="786"/>
+        <references refid="group___base_type_properties_1ga396e4b8c756441b942c1619de108e56a" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+        <references refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
+        <referencedby refid="group___atomic_operations_1gac7b60e55335293cbc400c9e8c481489c" compoundref="atomic__base_8hpp" startline="882" endline="890">atomic_or_fetch</referencedby>
+        <referencedby refid="structatomic__base_1aa9ab3c6cd841a5b063350640dd2f4ec5" compoundref="atomic__base_8hpp" startline="1870" endline="1872">atomic_base&lt; char &gt;::fetch_or</referencedby>
+        <referencedby refid="structatomic__base_1ae5eb0281419beca7ed666a2d9ba28859" compoundref="atomic__base_8hpp" startline="1877" endline="1880">atomic_base&lt; char &gt;::fetch_or</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1ad01ba25dbc69dc0d0affae7d0d409563" compoundref="atomic__base_8hpp" startline="2959" endline="2961">atomic_ref_base&lt; T, true, false &gt;::fetch_or</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1ga6738b7ff1fe873ce293f75bd96fdd3bc" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1gab370fe73a369d618c7810547f71b61c4" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t&lt; T &gt; atomic_fetch_xor</definition>
+        <type><ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
+        <definition>remove_volatile_t&lt; T &gt; atomic_fetch_xor</definition>
         <argsstring>(volatile T *ptr, remove_volatile_t&lt; T &gt; value, const memory_order mo) noexcept</argsstring>
         <name>atomic_fetch_xor</name>
         <param>
@@ -933,22 +933,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="798" column="48" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="798" bodyend="810"/>
-        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
-        <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
-        <referencedby refid="group___atomic_operations_1ga7b991ea245c0d1d223ef0ea22b5d9c5c" compoundref="atomic__base_8hpp" startline="902" endline="910">atomic_xor_fetch</referencedby>
-        <referencedby refid="structatomic__base_1a949e0b9639cec434570a5945530dea9e" compoundref="atomic__base_8hpp" startline="1888" endline="1891">atomic_base&lt; char &gt;::fetch_xor</referencedby>
-        <referencedby refid="structatomic__base_1ae02db7144af4c5926f43259550fc1d3c" compoundref="atomic__base_8hpp" startline="1896" endline="1899">atomic_base&lt; char &gt;::fetch_xor</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="798" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="798" bodyend="810"/>
+        <references refid="group___base_type_properties_1ga396e4b8c756441b942c1619de108e56a" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+        <references refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
+        <referencedby refid="group___atomic_operations_1ga6c07918d29c54f70597709966d651b49" compoundref="atomic__base_8hpp" startline="902" endline="910">atomic_xor_fetch</referencedby>
+        <referencedby refid="structatomic__base_1af0d9e791686cd242341f3d0cf105a23c" compoundref="atomic__base_8hpp" startline="1888" endline="1891">atomic_base&lt; char &gt;::fetch_xor</referencedby>
+        <referencedby refid="structatomic__base_1a4b5d01b0112c4ea6f8e9c1fd10932509" compoundref="atomic__base_8hpp" startline="1896" endline="1899">atomic_base&lt; char &gt;::fetch_xor</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a0fd54b7a21a85ca87bb53cd56851b94f" compoundref="atomic__base_8hpp" startline="2969" endline="2971">atomic_ref_base&lt; T, true, false &gt;::fetch_xor</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1ga5b4755daf3f0c2c98dae41084f5bad65" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1ga997283224060aabe3abb93501aa18d42" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t&lt; T &gt; atomic_add_fetch</definition>
+        <type><ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
+        <definition>remove_volatile_t&lt; T &gt; atomic_add_fetch</definition>
         <argsstring>(volatile T *ptr, atomic_diff_t&lt; T &gt; value, memory_order mo) noexcept</argsstring>
         <name>atomic_add_fetch</name>
         <param>
@@ -1009,9 +1009,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="822" column="48" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="822" bodyend="830"/>
-        <references refid="group___atomic_operations_1ga2c2c8cbfcae01cfa2bf198fd831c62b2" compoundref="atomic__base_8hpp" startline="706" endline="718">atomic_fetch_add</references>
-        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="822" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="822" bodyend="830"/>
+        <references refid="group___atomic_operations_1gafd379e44f03b964183af9b92423f5c96" compoundref="atomic__base_8hpp" startline="706" endline="718">atomic_fetch_add</references>
+        <references refid="group___base_type_properties_1ga396e4b8c756441b942c1619de108e56a" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
         <referencedby refid="structatomic__base_1ab840d0663013df0bafabdb21d6df83e9" compoundref="atomic__base_8hpp" startline="1504" endline="1504">atomic_base&lt; char &gt;::operator++</referencedby>
         <referencedby refid="structatomic__base_1ad9e0a8a245e365f6b4e34b762b48b6c8" compoundref="atomic__base_8hpp" startline="1509" endline="1509">atomic_base&lt; char &gt;::operator++</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a44dd7c4417e4563c95cb78d7325f9937" compoundref="atomic__base_8hpp" startline="2989" endline="2989">atomic_ref_base&lt; T, true, false &gt;::operator++</referencedby>
@@ -1019,14 +1019,14 @@
         <referencedby refid="structatomic__base_1abc5e076164a556f6753cb12f31447a5b" compoundref="atomic__base_8hpp" startline="1534" endline="1536">atomic_base&lt; char &gt;::operator+=</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1ad5711e6dc032cf6577c99dd869af452d" compoundref="atomic__base_8hpp" startline="3002" endline="3002">atomic_ref_base&lt; T, true, false &gt;::operator+=</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1ga88203498c566079de5b0d3497abfb2ec" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1ga1a2061210bbb322408eea7178a25f454" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t&lt; T &gt; atomic_sub_fetch</definition>
+        <type><ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
+        <definition>remove_volatile_t&lt; T &gt; atomic_sub_fetch</definition>
         <argsstring>(volatile T *ptr, atomic_diff_t&lt; T &gt; value, memory_order mo) noexcept</argsstring>
         <name>atomic_sub_fetch</name>
         <param>
@@ -1087,9 +1087,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="842" column="48" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="842" bodyend="850"/>
-        <references refid="group___atomic_operations_1ga021ba5336034625fe4ca4af59bc779da" compoundref="atomic__base_8hpp" startline="730" endline="738">atomic_fetch_sub</references>
-        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="842" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="842" bodyend="850"/>
+        <references refid="group___atomic_operations_1gac61d9fd541d5b9aef14a1067e3538924" compoundref="atomic__base_8hpp" startline="730" endline="738">atomic_fetch_sub</references>
+        <references refid="group___base_type_properties_1ga396e4b8c756441b942c1619de108e56a" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
         <referencedby refid="structatomic__base_1a446d13ba6fc92732a473c880858b5c48" compoundref="atomic__base_8hpp" startline="1515" endline="1515">atomic_base&lt; char &gt;::operator--</referencedby>
         <referencedby refid="structatomic__base_1a699b49ea43cbc1a285a9e920b387a669" compoundref="atomic__base_8hpp" startline="1520" endline="1520">atomic_base&lt; char &gt;::operator--</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1ae51fcfaf25681f42a4384e4a3893a14b" compoundref="atomic__base_8hpp" startline="2995" endline="2995">atomic_ref_base&lt; T, true, false &gt;::operator--</referencedby>
@@ -1097,14 +1097,14 @@
         <referencedby refid="structatomic__base_1a70c65e39dfb5c8a5629583d86b9c51cb" compoundref="atomic__base_8hpp" startline="1550" endline="1552">atomic_base&lt; char &gt;::operator-=</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1acee415c7d8c197f05e712949c5935a37" compoundref="atomic__base_8hpp" startline="3009" endline="3009">atomic_ref_base&lt; T, true, false &gt;::operator-=</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1gaf978cddf75785ac79968e54064f629fd" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1gab9b13da068b8edd78f4cf66566c49a95" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t&lt; T &gt; atomic_and_fetch</definition>
+        <type><ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
+        <definition>remove_volatile_t&lt; T &gt; atomic_and_fetch</definition>
         <argsstring>(volatile T *ptr, remove_volatile_t&lt; T &gt; value, memory_order mo) noexcept</argsstring>
         <name>atomic_and_fetch</name>
         <param>
@@ -1165,21 +1165,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="862" column="48" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="862" bodyend="870"/>
-        <references refid="group___atomic_operations_1gad486ba655d266410a9282d207b75f097" compoundref="atomic__base_8hpp" startline="750" endline="762">atomic_fetch_and</references>
-        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="862" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="862" bodyend="870"/>
+        <references refid="group___atomic_operations_1gad91d94c131515208781b255ec5a2d2ab" compoundref="atomic__base_8hpp" startline="750" endline="762">atomic_fetch_and</references>
+        <references refid="group___base_type_properties_1ga396e4b8c756441b942c1619de108e56a" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
         <referencedby refid="structatomic__base_1ae41d2f732c768cde2a57e1c38db270d0" compoundref="atomic__base_8hpp" startline="1559" endline="1561">atomic_base&lt; char &gt;::operator&amp;=</referencedby>
         <referencedby refid="structatomic__base_1ae97de88deb06b177b35cab72df769185" compoundref="atomic__base_8hpp" startline="1566" endline="1568">atomic_base&lt; char &gt;::operator&amp;=</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1ab990e52d169103ae7885c663f475167f" compoundref="atomic__base_8hpp" startline="3016" endline="3016">atomic_ref_base&lt; T, true, false &gt;::operator&amp;=</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1gae43f163ab729da3abeac1aae2100d14c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1gac7b60e55335293cbc400c9e8c481489c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t&lt; T &gt; atomic_or_fetch</definition>
+        <type><ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
+        <definition>remove_volatile_t&lt; T &gt; atomic_or_fetch</definition>
         <argsstring>(volatile T *ptr, remove_volatile_t&lt; T &gt; value, memory_order mo) noexcept</argsstring>
         <name>atomic_or_fetch</name>
         <param>
@@ -1240,21 +1240,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="882" column="48" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="882" bodyend="890"/>
-        <references refid="group___atomic_operations_1ga9fb54274efe6570a0a2014b6a47cc5ff" compoundref="atomic__base_8hpp" startline="774" endline="786">atomic_fetch_or</references>
-        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="882" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="882" bodyend="890"/>
+        <references refid="group___atomic_operations_1ga182cc4ec32727b206b6bf0404f7d23d0" compoundref="atomic__base_8hpp" startline="774" endline="786">atomic_fetch_or</references>
+        <references refid="group___base_type_properties_1ga396e4b8c756441b942c1619de108e56a" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
         <referencedby refid="structatomic__base_1acee86a43dd988ca37d0c1a319903eaeb" compoundref="atomic__base_8hpp" startline="1575" endline="1577">atomic_base&lt; char &gt;::operator|=</referencedby>
         <referencedby refid="structatomic__base_1a30243fff2ecac9462b49a3c2aec513e8" compoundref="atomic__base_8hpp" startline="1582" endline="1584">atomic_base&lt; char &gt;::operator|=</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1ae2a1ae3bb31f28fdd2c17ecaa0c0c353" compoundref="atomic__base_8hpp" startline="3023" endline="3023">atomic_ref_base&lt; T, true, false &gt;::operator|=</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1ga7b991ea245c0d1d223ef0ea22b5d9c5c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1ga6c07918d29c54f70597709966d651b49" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t&lt; T &gt; atomic_xor_fetch</definition>
+        <type><ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
+        <definition>remove_volatile_t&lt; T &gt; atomic_xor_fetch</definition>
         <argsstring>(volatile T *ptr, remove_volatile_t&lt; T &gt; value, memory_order mo) noexcept</argsstring>
         <name>atomic_xor_fetch</name>
         <param>
@@ -1315,21 +1315,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="902" column="48" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="902" bodyend="910"/>
-        <references refid="group___atomic_operations_1ga6738b7ff1fe873ce293f75bd96fdd3bc" compoundref="atomic__base_8hpp" startline="798" endline="810">atomic_fetch_xor</references>
-        <references refid="group___base_type_properties_1ga7ad20d600db4f8084cb853d37a10fa8b" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="902" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="902" bodyend="910"/>
+        <references refid="group___atomic_operations_1gab370fe73a369d618c7810547f71b61c4" compoundref="atomic__base_8hpp" startline="798" endline="810">atomic_fetch_xor</references>
+        <references refid="group___base_type_properties_1ga396e4b8c756441b942c1619de108e56a" compoundref="type__traits_8hpp" startline="889">is_integral_v</references>
         <referencedby refid="structatomic__base_1a7c87e16ad9de16b216977ef1f35a40ca" compoundref="atomic__base_8hpp" startline="1591" endline="1593">atomic_base&lt; char &gt;::operator^=</referencedby>
         <referencedby refid="structatomic__base_1ace28285ad3c8593de6acc02794ac2106" compoundref="atomic__base_8hpp" startline="1598" endline="1600">atomic_base&lt; char &gt;::operator^=</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a6d9ea2041ecef258255a9c06a56de896" compoundref="atomic__base_8hpp" startline="3030" endline="3030">atomic_ref_base&lt; T, true, false &gt;::operator^=</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1ga8a40c04917b816c033a3d5a5ccdad443" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1ga3231cd0fb8a205b5b1a52f34b88e48ba" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE bool</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE bool atomic_cmpexch_weak_any</definition>
+        <type>bool</type>
+        <definition>bool atomic_cmpexch_weak_any</definition>
         <argsstring>(volatile T *ptr, remove_volatile_t&lt; T &gt; *expected, remove_volatile_t&lt; T &gt; *desired, const memory_order success, const memory_order failure) noexcept</argsstring>
         <name>atomic_cmpexch_weak_any</name>
         <param>
@@ -1414,24 +1414,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="925" column="35" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="925" bodyend="1032"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="925" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="925" bodyend="1032"/>
         <references refid="group___memory_order_1ga0ebbd1fbd5cee109f313d7ef89dd257f" compoundref="memory__order_8hpp" startline="296" endline="303">is_valid_cmpexch_failure_order</references>
-        <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
+        <references refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
         <references refid="group___debug_breakpoints_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" compoundref="breakpoint_8hpp" startline="47" endline="52">NEFORCE_CONSTEXPR_ASSERT</references>
         <references refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a260ca9dd8a4577fc00b7bd5810298076" compoundref="condition__variable_8hpp" startline="34">success</references>
         <referencedby refid="group___atomic_operations_1ga43ed57e1ebca17af575e229a1d6e333e" compoundref="atomic__base_8hpp" startline="1190" endline="1197">atomic_add_fetch_any</referencedby>
-        <referencedby refid="group___atomic_operations_1gafc070ab9d97fede6cb57cfd8074219e1" compoundref="atomic__base_8hpp" startline="1046" endline="1072">atomic_cmpexch_strong_any</referencedby>
-        <referencedby refid="group___atomic_operations_1gaf15a5ea63f7851db21ec52e31b494700" compoundref="atomic__base_8hpp" startline="1129" endline="1143">atomic_exchange_any</referencedby>
+        <referencedby refid="group___atomic_operations_1ga02cda74ae7b485daa38aa961566b51f1" compoundref="atomic__base_8hpp" startline="1046" endline="1072">atomic_cmpexch_strong_any</referencedby>
+        <referencedby refid="group___atomic_operations_1gaea1e05c65bad52b40dcc6228a40e82c2" compoundref="atomic__base_8hpp" startline="1129" endline="1143">atomic_exchange_any</referencedby>
         <referencedby refid="group___atomic_operations_1ga16d757b1decbe603c6648b7f7853cc4f" compoundref="atomic__base_8hpp" startline="1154" endline="1161">atomic_fetch_add_any</referencedby>
         <referencedby refid="group___atomic_operations_1ga4361b2cbe5710b778f5600a57d667850" compoundref="atomic__base_8hpp" startline="1172" endline="1179">atomic_fetch_sub_any</referencedby>
-        <referencedby refid="group___atomic_operations_1ga235411e03936c4aa90f209ab38cab492" compoundref="atomic__base_8hpp" startline="1083" endline="1092">atomic_store_any</referencedby>
+        <referencedby refid="group___atomic_operations_1gabdedaf26f8ae6909368e611cf3786b3f" compoundref="atomic__base_8hpp" startline="1083" endline="1092">atomic_store_any</referencedby>
         <referencedby refid="group___atomic_operations_1ga5f06a2fdc01cfa5e7180cdd87b8444d2" compoundref="atomic__base_8hpp" startline="1208" endline="1215">atomic_sub_fetch_any</referencedby>
         <referencedby refid="structatomic_1aae3c3ec7b287a0fc7d98db21be55f066" compoundref="atomic_8hpp" startline="170" endline="174">atomic&lt; T &gt;::compare_exchange_weak</referencedby>
         <referencedby refid="structatomic_1a8c37e4a198018c0a0d174d7775f467a7" compoundref="atomic_8hpp" startline="179" endline="183">atomic&lt; T &gt;::compare_exchange_weak</referencedby>
-        <referencedby refid="structatomic__base_1a79f6831532cdcaff928d64271a2243cf" compoundref="atomic__base_8hpp" startline="1711" endline="1714">atomic_base&lt; char &gt;::compare_exchange_weak</referencedby>
-        <referencedby refid="structatomic__base_1a752626465e41c5d9d8afb5d597fa35d4" compoundref="atomic__base_8hpp" startline="1719" endline="1723">atomic_base&lt; char &gt;::compare_exchange_weak</referencedby>
-        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a50c59c5bfcc109952946968caf0d1002" compoundref="atomic__base_8hpp" startline="2196" endline="2201">atomic_base&lt; T * &gt;::compare_exchange_weak</referencedby>
-        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1add6adc9a5802894b30bee42d2952a7d9" compoundref="atomic__base_8hpp" startline="2206" endline="2212">atomic_base&lt; T * &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_1abf99414038583fe01151a66569c127c5" compoundref="atomic__base_8hpp" startline="1711" endline="1714">atomic_base&lt; char &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_1ad83031a23e158fd004da9b5fa590be0c" compoundref="atomic__base_8hpp" startline="1719" endline="1723">atomic_base&lt; char &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1abca5cb97aeb28bf478ebd365dabac3a6" compoundref="atomic__base_8hpp" startline="2196" endline="2201">atomic_base&lt; T * &gt;::compare_exchange_weak</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a1aec4928e0f58a4de95ca3134cc864d7" compoundref="atomic__base_8hpp" startline="2206" endline="2212">atomic_base&lt; T * &gt;::compare_exchange_weak</referencedby>
         <referencedby refid="structatomic__float__base_1ae269b5f3c4547a71407ee30681435ea6" compoundref="atomic__base_8hpp" startline="2469" endline="2472">atomic_float_base&lt; Float &gt;::compare_exchange_weak</referencedby>
         <referencedby refid="structatomic__float__base_1a1bc6df4f51590ab31a24f4ce7e8ecc93" compoundref="atomic__base_8hpp" startline="2477" endline="2480">atomic_float_base&lt; Float &gt;::compare_exchange_weak</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1ad76ade2a7e14851707b5016ff77cd7c1" compoundref="atomic__base_8hpp" startline="3149" endline="3151">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_weak</referencedby>
@@ -1439,14 +1439,14 @@
         <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a7a3b62ca9907f922a07d75fe3badcc41" compoundref="atomic__base_8hpp" startline="2741" endline="2743">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_weak</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a0b352e98444b8d5ea964f0eaad5a00b9" compoundref="atomic__base_8hpp" startline="2717" endline="2719">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_weak</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1gafc070ab9d97fede6cb57cfd8074219e1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1ga02cda74ae7b485daa38aa961566b51f1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE bool</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE bool atomic_cmpexch_strong_any</definition>
+        <type>bool</type>
+        <definition>bool atomic_cmpexch_strong_any</definition>
         <argsstring>(volatile T *ptr, remove_volatile_t&lt; T &gt; *expected, remove_volatile_t&lt; T &gt; *desired, const memory_order success, const memory_order failure) noexcept</argsstring>
         <name>atomic_cmpexch_strong_any</name>
         <param>
@@ -1531,19 +1531,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1046" column="35" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1046" bodyend="1072"/>
-        <references refid="group___atomic_operations_1ga8a40c04917b816c033a3d5a5ccdad443" compoundref="atomic__base_8hpp" startline="925" endline="1032">atomic_cmpexch_weak_any</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1046" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1046" bodyend="1072"/>
+        <references refid="group___atomic_operations_1ga3231cd0fb8a205b5b1a52f34b88e48ba" compoundref="atomic__base_8hpp" startline="925" endline="1032">atomic_cmpexch_weak_any</references>
         <references refid="group___memory_order_1ga0ebbd1fbd5cee109f313d7ef89dd257f" compoundref="memory__order_8hpp" startline="296" endline="303">is_valid_cmpexch_failure_order</references>
-        <references refid="group___memory_functions_1ga16eceb015a4eb9f200a698ce02c5f291" compoundref="memory_8hpp" startline="125" endline="144">memory_compare</references>
-        <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
+        <references refid="group___memory_functions_1ga17a7b0542a31c04bbf7a1750d5273f78" compoundref="memory_8hpp" startline="125" endline="144">memory_compare</references>
+        <references refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
         <references refid="group___debug_breakpoints_and_assertions_1gaeb5cd7dd15c349020f35d669e0e7dd73" compoundref="breakpoint_8hpp" startline="47" endline="52">NEFORCE_CONSTEXPR_ASSERT</references>
         <references refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a260ca9dd8a4577fc00b7bd5810298076" compoundref="condition__variable_8hpp" startline="34">success</references>
         <referencedby refid="structatomic_1a1464cb79d660c630d2fe3a44a7b8adba" compoundref="atomic_8hpp" startline="211" endline="216">atomic&lt; T &gt;::compare_exchange_strong</referencedby>
         <referencedby refid="structatomic_1a986a7b48409d105ffb9c70ff3942db1c" compoundref="atomic_8hpp" startline="221" endline="226">atomic&lt; T &gt;::compare_exchange_strong</referencedby>
-        <referencedby refid="structatomic__base_1a62845a6eac658971b8b2b18b215c46de" compoundref="atomic__base_8hpp" startline="1753" endline="1757">atomic_base&lt; char &gt;::compare_exchange_strong</referencedby>
-        <referencedby refid="structatomic__base_1a85789ed59be6f6259a289c3c33844cbe" compoundref="atomic__base_8hpp" startline="1762" endline="1766">atomic_base&lt; char &gt;::compare_exchange_strong</referencedby>
-        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1afa68bbb346cae3e468cbb225d9a5da40" compoundref="atomic__base_8hpp" startline="2242" endline="2248">atomic_base&lt; T * &gt;::compare_exchange_strong</referencedby>
-        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1ad646d547e215185837af3cfa8bdfe4ee" compoundref="atomic__base_8hpp" startline="2253" endline="2259">atomic_base&lt; T * &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_1a7be09abe684fda1f9bdb4d46944942c1" compoundref="atomic__base_8hpp" startline="1753" endline="1757">atomic_base&lt; char &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_1ad5db996aa3e89b6b1461d084f12e5774" compoundref="atomic__base_8hpp" startline="1762" endline="1766">atomic_base&lt; char &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1abac2b390227f2ae6e7559b81cf159775" compoundref="atomic__base_8hpp" startline="2242" endline="2248">atomic_base&lt; T * &gt;::compare_exchange_strong</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a42529fdaf52c48f8188c0fd22a53e951" compoundref="atomic__base_8hpp" startline="2253" endline="2259">atomic_base&lt; T * &gt;::compare_exchange_strong</referencedby>
         <referencedby refid="structatomic__float__base_1ae7eced7cc0e504339233e9d8a7d833ae" compoundref="atomic__base_8hpp" startline="2485" endline="2488">atomic_float_base&lt; Float &gt;::compare_exchange_strong</referencedby>
         <referencedby refid="structatomic__float__base_1a89a894741cef0e7dddfe31d061819920" compoundref="atomic__base_8hpp" startline="2493" endline="2496">atomic_float_base&lt; Float &gt;::compare_exchange_strong</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1aba18c20d49a4cefd49ca7b767b298c27" compoundref="atomic__base_8hpp" startline="3160" endline="3162">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_strong</referencedby>
@@ -1551,14 +1551,14 @@
         <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a222193895c6947fe1f5746f559053580" compoundref="atomic__base_8hpp" startline="2752" endline="2754">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_strong</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a2844c986a93927e3f8b8a31a0ed6abe3" compoundref="atomic__base_8hpp" startline="2729" endline="2732">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_strong</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1ga235411e03936c4aa90f209ab38cab492" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1gabdedaf26f8ae6909368e611cf3786b3f" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE void</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE void atomic_store_any</definition>
+        <type>void</type>
+        <definition>void atomic_store_any</definition>
         <argsstring>(T *ptr, remove_volatile_t&lt; T &gt; value, const memory_order mo) noexcept</argsstring>
         <name>atomic_store_any</name>
         <param>
@@ -1617,10 +1617,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1083" column="35" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1083" bodyend="1092"/>
-        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3075" endline="3077">addressof</references>
-        <references refid="group___atomic_operations_1ga8a40c04917b816c033a3d5a5ccdad443" compoundref="atomic__base_8hpp" startline="925" endline="1032">atomic_cmpexch_weak_any</references>
-        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1083" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1083" bodyend="1092"/>
+        <references refid="group___args_forward_functions_1gaf77625b543da90c4cf80a7bb167b3426" compoundref="type__traits_8hpp" startline="3075" endline="3077">addressof</references>
+        <references refid="group___atomic_operations_1ga3231cd0fb8a205b5b1a52f34b88e48ba" compoundref="atomic__base_8hpp" startline="925" endline="1032">atomic_cmpexch_weak_any</references>
+        <references refid="group___memory_order_1ga4c8b2df710dbe4b801447898624fa3ca" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
         <referencedby refid="structatomic_1a3e1268f8d4abb49382c713740a13234a" compoundref="atomic_8hpp" startline="118" endline="120">atomic&lt; T &gt;::store</referencedby>
         <referencedby refid="structatomic_1a18eba15397edb4001c242550849dab9c" compoundref="atomic_8hpp" startline="125" endline="127">atomic&lt; T &gt;::store</referencedby>
         <referencedby refid="structatomic__float__base_1ad2b5a33f24780146bb9f19778ad73ef8" compoundref="atomic__base_8hpp" startline="2417" endline="2419">atomic_float_base&lt; Float &gt;::store</referencedby>
@@ -1628,14 +1628,14 @@
         <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a1cfbc9ed4cee59c6aafcf3bd75b78617" compoundref="atomic__base_8hpp" startline="3093" endline="3095">atomic_ref_base&lt; Float, false, true &gt;::store</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a8328eb11898c8b08ef22bc8453f9fe5b" compoundref="atomic__base_8hpp" startline="2688" endline="2690">atomic_ref_base&lt; T, false, false &gt;::store</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1ga4066975858c891b3012f41c4f33073b3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1ga772ceef8a06ba3e08118d11382fc6c9d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t&lt; T &gt; atomic_load_any</definition>
+        <type><ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
+        <definition>remove_volatile_t&lt; T &gt; atomic_load_any</definition>
         <argsstring>(const T *ptr, memory_order mo) noexcept</argsstring>
         <name>atomic_load_any</name>
         <param>
@@ -1684,12 +1684,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1103" column="48" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1103" bodyend="1117"/>
-        <references refid="group___memory_functions_1ga0dc544b7cbf5891bce974e1b1b396a48" compoundref="memory_8hpp" startline="29" endline="48">memory_copy</references>
-        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
-        <references refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1103" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1103" bodyend="1117"/>
+        <references refid="group___memory_functions_1ga916bc1850129b8df023250fe45a2ef42" compoundref="memory_8hpp" startline="29" endline="48">memory_copy</references>
+        <references refid="group___memory_order_1ga52729ffe1460a0069a1736f2e4e61d2e" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+        <references refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" compoundref="memory__order_8hpp" startline="183">memory_order_seq_cst</references>
         <referencedby refid="group___atomic_operations_1ga43ed57e1ebca17af575e229a1d6e333e" compoundref="atomic__base_8hpp" startline="1190" endline="1197">atomic_add_fetch_any</referencedby>
-        <referencedby refid="group___atomic_operations_1gaf15a5ea63f7851db21ec52e31b494700" compoundref="atomic__base_8hpp" startline="1129" endline="1143">atomic_exchange_any</referencedby>
+        <referencedby refid="group___atomic_operations_1gaea1e05c65bad52b40dcc6228a40e82c2" compoundref="atomic__base_8hpp" startline="1129" endline="1143">atomic_exchange_any</referencedby>
         <referencedby refid="group___atomic_operations_1ga16d757b1decbe603c6648b7f7853cc4f" compoundref="atomic__base_8hpp" startline="1154" endline="1161">atomic_fetch_add_any</referencedby>
         <referencedby refid="group___atomic_operations_1ga4361b2cbe5710b778f5600a57d667850" compoundref="atomic__base_8hpp" startline="1172" endline="1179">atomic_fetch_sub_any</referencedby>
         <referencedby refid="group___atomic_operations_1ga5f06a2fdc01cfa5e7180cdd87b8444d2" compoundref="atomic__base_8hpp" startline="1208" endline="1215">atomic_sub_fetch_any</referencedby>
@@ -1700,14 +1700,14 @@
         <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a20649a71b96b780d8567e7a7657994ed" compoundref="atomic__base_8hpp" startline="3102" endline="3104">atomic_ref_base&lt; Float, false, true &gt;::load</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a3ee7a02a97f4eefeb616b14b5b9cbc25" compoundref="atomic__base_8hpp" startline="2697" endline="2697">atomic_ref_base&lt; T, false, false &gt;::load</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1gaf15a5ea63f7851db21ec52e31b494700" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1gaea1e05c65bad52b40dcc6228a40e82c2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE_INLINE <ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
-        <definition>NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t&lt; T &gt; atomic_exchange_any</definition>
+        <type><ref refid="group___remove_qualifiers_1ga52b035d7a0227468261ee211d61d7abf" kindref="member">remove_volatile_t</ref>&lt; T &gt;</type>
+        <definition>remove_volatile_t&lt; T &gt; atomic_exchange_any</definition>
         <argsstring>(T *ptr, remove_volatile_t&lt; T &gt; desired, memory_order mo) noexcept</argsstring>
         <name>atomic_exchange_any</name>
         <param>
@@ -1768,11 +1768,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1129" column="48" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1129" bodyend="1143"/>
-        <references refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" compoundref="type__traits_8hpp" startline="3075" endline="3077">addressof</references>
-        <references refid="group___atomic_operations_1ga8a40c04917b816c033a3d5a5ccdad443" compoundref="atomic__base_8hpp" startline="925" endline="1032">atomic_cmpexch_weak_any</references>
-        <references refid="group___atomic_operations_1ga4066975858c891b3012f41c4f33073b3" compoundref="atomic__base_8hpp" startline="1103" endline="1117">atomic_load_any</references>
-        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1129" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1129" bodyend="1143"/>
+        <references refid="group___args_forward_functions_1gaf77625b543da90c4cf80a7bb167b3426" compoundref="type__traits_8hpp" startline="3075" endline="3077">addressof</references>
+        <references refid="group___atomic_operations_1ga3231cd0fb8a205b5b1a52f34b88e48ba" compoundref="atomic__base_8hpp" startline="925" endline="1032">atomic_cmpexch_weak_any</references>
+        <references refid="group___atomic_operations_1ga772ceef8a06ba3e08118d11382fc6c9d" compoundref="atomic__base_8hpp" startline="1103" endline="1117">atomic_load_any</references>
+        <references refid="group___memory_order_1ga4c8b2df710dbe4b801447898624fa3ca" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
         <referencedby refid="structatomic_1a5e1fce92f531d784690897010e446d8d" compoundref="atomic_8hpp" startline="151" endline="153">atomic&lt; T &gt;::exchange</referencedby>
         <referencedby refid="structatomic_1a948ef15c05d5a3e24a6aba173b4ee7e8" compoundref="atomic_8hpp" startline="158" endline="160">atomic&lt; T &gt;::exchange</referencedby>
         <referencedby refid="structatomic__float__base_1aab85e64411670551b86ccac41700989d" compoundref="atomic__base_8hpp" startline="2455" endline="2457">atomic_float_base&lt; Float &gt;::exchange</referencedby>
@@ -1847,11 +1847,11 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1154" column="3" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1154" bodyend="1161"/>
-        <references refid="group___atomic_operations_1ga8a40c04917b816c033a3d5a5ccdad443" compoundref="atomic__base_8hpp" startline="925" endline="1032">atomic_cmpexch_weak_any</references>
-        <references refid="group___atomic_operations_1ga4066975858c891b3012f41c4f33073b3" compoundref="atomic__base_8hpp" startline="1103" endline="1117">atomic_load_any</references>
-        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
-        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a79f6c71df297317114e0948c53b44bbc" compoundref="atomic__base_8hpp" startline="2306" endline="2312">atomic_base&lt; T * &gt;::fetch_add</referencedby>
-        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a0aaefe0adc6c5815cd01bf8c0e7f6a65" compoundref="atomic__base_8hpp" startline="2317" endline="2323">atomic_base&lt; T * &gt;::fetch_add</referencedby>
+        <references refid="group___atomic_operations_1ga3231cd0fb8a205b5b1a52f34b88e48ba" compoundref="atomic__base_8hpp" startline="925" endline="1032">atomic_cmpexch_weak_any</references>
+        <references refid="group___atomic_operations_1ga772ceef8a06ba3e08118d11382fc6c9d" compoundref="atomic__base_8hpp" startline="1103" endline="1117">atomic_load_any</references>
+        <references refid="group___memory_order_1ga4c8b2df710dbe4b801447898624fa3ca" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a51aed22afe4708363858c67073a7b7d0" compoundref="atomic__base_8hpp" startline="2306" endline="2312">atomic_base&lt; T * &gt;::fetch_add</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a558aa1fa21cfd8354d051116ec655e2e" compoundref="atomic__base_8hpp" startline="2317" endline="2323">atomic_base&lt; T * &gt;::fetch_add</referencedby>
         <referencedby refid="structatomic__float__base_1a00883969339dafc807382196142d99d2" compoundref="atomic__base_8hpp" startline="2553" endline="2555">atomic_float_base&lt; Float &gt;::fetch_add</referencedby>
         <referencedby refid="structatomic__float__base_1aa2bce04ca3567dd2c7e87b42a76d6987" compoundref="atomic__base_8hpp" startline="2560" endline="2562">atomic_float_base&lt; Float &gt;::fetch_add</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a8065485c88d98d95f67ed562517212eb" compoundref="atomic__base_8hpp" startline="3189" endline="3191">atomic_ref_base&lt; Float, false, true &gt;::fetch_add</referencedby>
@@ -1923,11 +1923,11 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1172" column="3" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1172" bodyend="1179"/>
-        <references refid="group___atomic_operations_1ga8a40c04917b816c033a3d5a5ccdad443" compoundref="atomic__base_8hpp" startline="925" endline="1032">atomic_cmpexch_weak_any</references>
-        <references refid="group___atomic_operations_1ga4066975858c891b3012f41c4f33073b3" compoundref="atomic__base_8hpp" startline="1103" endline="1117">atomic_load_any</references>
-        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
-        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1aed7f4507bc1d0652f6e387c4ba9cfceb" compoundref="atomic__base_8hpp" startline="2331" endline="2337">atomic_base&lt; T * &gt;::fetch_sub</referencedby>
-        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1ad8d5eb0586e5ee1030019955086563a3" compoundref="atomic__base_8hpp" startline="2342" endline="2348">atomic_base&lt; T * &gt;::fetch_sub</referencedby>
+        <references refid="group___atomic_operations_1ga3231cd0fb8a205b5b1a52f34b88e48ba" compoundref="atomic__base_8hpp" startline="925" endline="1032">atomic_cmpexch_weak_any</references>
+        <references refid="group___atomic_operations_1ga772ceef8a06ba3e08118d11382fc6c9d" compoundref="atomic__base_8hpp" startline="1103" endline="1117">atomic_load_any</references>
+        <references refid="group___memory_order_1ga4c8b2df710dbe4b801447898624fa3ca" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a5b0a3c729342e895cf94c5c5902d4a61" compoundref="atomic__base_8hpp" startline="2331" endline="2337">atomic_base&lt; T * &gt;::fetch_sub</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a4e312ceffe21d8c344af4d243706e7e4" compoundref="atomic__base_8hpp" startline="2342" endline="2348">atomic_base&lt; T * &gt;::fetch_sub</referencedby>
         <referencedby refid="structatomic__float__base_1a112fcfb6ef70dc2534ae60fbdc7a8305" compoundref="atomic__base_8hpp" startline="2570" endline="2572">atomic_float_base&lt; Float &gt;::fetch_sub</referencedby>
         <referencedby refid="structatomic__float__base_1a77a0872204ea3809970be5c7f24b0b5e" compoundref="atomic__base_8hpp" startline="2577" endline="2579">atomic_float_base&lt; Float &gt;::fetch_sub</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1adb450547460e550bac73301a28e89e1a" compoundref="atomic__base_8hpp" startline="3199" endline="3201">atomic_ref_base&lt; Float, false, true &gt;::fetch_sub</referencedby>
@@ -1999,9 +1999,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1190" column="3" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1190" bodyend="1197"/>
-        <references refid="group___atomic_operations_1ga8a40c04917b816c033a3d5a5ccdad443" compoundref="atomic__base_8hpp" startline="925" endline="1032">atomic_cmpexch_weak_any</references>
-        <references refid="group___atomic_operations_1ga4066975858c891b3012f41c4f33073b3" compoundref="atomic__base_8hpp" startline="1103" endline="1117">atomic_load_any</references>
-        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+        <references refid="group___atomic_operations_1ga3231cd0fb8a205b5b1a52f34b88e48ba" compoundref="atomic__base_8hpp" startline="925" endline="1032">atomic_cmpexch_weak_any</references>
+        <references refid="group___atomic_operations_1ga772ceef8a06ba3e08118d11382fc6c9d" compoundref="atomic__base_8hpp" startline="1103" endline="1117">atomic_load_any</references>
+        <references refid="group___memory_order_1ga4c8b2df710dbe4b801447898624fa3ca" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
         <referencedby refid="structatomic__float__base_1adc25a99309d0c060ac7a8e1b29aa1561" compoundref="atomic__base_8hpp" startline="2586" endline="2588">atomic_float_base&lt; Float &gt;::operator+=</referencedby>
         <referencedby refid="structatomic__float__base_1a51da39f7f525d22b1e2816efc99b2766" compoundref="atomic__base_8hpp" startline="2593" endline="2595">atomic_float_base&lt; Float &gt;::operator+=</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a65d9db4cf47968ce6d8662c6a4e96330" compoundref="atomic__base_8hpp" startline="3208" endline="3210">atomic_ref_base&lt; Float, false, true &gt;::operator+=</referencedby>
@@ -2073,14 +2073,14 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1208" column="3" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1208" bodyend="1215"/>
-        <references refid="group___atomic_operations_1ga8a40c04917b816c033a3d5a5ccdad443" compoundref="atomic__base_8hpp" startline="925" endline="1032">atomic_cmpexch_weak_any</references>
-        <references refid="group___atomic_operations_1ga4066975858c891b3012f41c4f33073b3" compoundref="atomic__base_8hpp" startline="1103" endline="1117">atomic_load_any</references>
-        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+        <references refid="group___atomic_operations_1ga3231cd0fb8a205b5b1a52f34b88e48ba" compoundref="atomic__base_8hpp" startline="925" endline="1032">atomic_cmpexch_weak_any</references>
+        <references refid="group___atomic_operations_1ga772ceef8a06ba3e08118d11382fc6c9d" compoundref="atomic__base_8hpp" startline="1103" endline="1117">atomic_load_any</references>
+        <references refid="group___memory_order_1ga4c8b2df710dbe4b801447898624fa3ca" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
         <referencedby refid="structatomic__float__base_1ab7f780a7ebad10829a44c764f0208b43" compoundref="atomic__base_8hpp" startline="2602" endline="2604">atomic_float_base&lt; Float &gt;::operator-=</referencedby>
         <referencedby refid="structatomic__float__base_1a20cff0645f8f9d85e22aa658bc4cddac" compoundref="atomic__base_8hpp" startline="2609" endline="2611">atomic_float_base&lt; Float &gt;::operator-=</referencedby>
         <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a6ddc1843039d1e2e195c96cc52384edd" compoundref="atomic__base_8hpp" startline="3217" endline="3219">atomic_ref_base&lt; Float, false, true &gt;::operator-=</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___atomic_operations_1ga3a0d5268ae71df1d0d5872747ebf7c66" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___atomic_operations_1ga4588c81b98fa2b7eacf87c0479094826" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
@@ -2093,8 +2093,8 @@
             <defname>Align</defname>
           </param>
         </templateparamlist>
-        <type>NEFORCE_CONSTEXPR17 bool</type>
-        <definition>NEFORCE_CONSTEXPR17 bool is_always_lock_free</definition>
+        <type>bool</type>
+        <definition>bool is_always_lock_free</definition>
         <argsstring>() noexcept</argsstring>
         <name>is_always_lock_free</name>
         <briefdescription>
@@ -2124,18 +2124,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1225" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1225" bodyend="1231"/>
-        <referencedby refid="structatomic_1a2b986bf2eb670e7d4f2d3a468e3de6e0" compoundref="atomic_8hpp" startline="102" endline="104">atomic&lt; T &gt;::is_lock_free</referencedby>
-        <referencedby refid="structatomic_1a7a3e68d78081778078fdedb7174d5d6b" compoundref="atomic_8hpp" startline="109" endline="111">atomic&lt; T &gt;::is_lock_free</referencedby>
-        <referencedby refid="structatomic__base_1a51408088b15fbb9ee1c86b3b359d96ea" compoundref="atomic__base_8hpp" startline="1606" endline="1608">atomic_base&lt; char &gt;::is_lock_free</referencedby>
-        <referencedby refid="structatomic__base_1ad262dc56107ba89613ceab7269401887" compoundref="atomic__base_8hpp" startline="1613" endline="1615">atomic_base&lt; char &gt;::is_lock_free</referencedby>
-        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a9ab38b42a50e16973390e33075c869aa" compoundref="atomic__base_8hpp" startline="2037" endline="2039">atomic_base&lt; T * &gt;::is_lock_free</referencedby>
-        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a89fccca39672c73b09c1fc915a6b2fb9" compoundref="atomic__base_8hpp" startline="2044" endline="2046">atomic_base&lt; T * &gt;::is_lock_free</referencedby>
-        <referencedby refid="structatomic__float__base_1a4b9355877aeae9766f4fdf90eac89fb4" compoundref="atomic__base_8hpp" startline="2403" endline="2405">atomic_float_base&lt; Float &gt;::is_lock_free</referencedby>
-        <referencedby refid="structatomic__float__base_1ae1757d7cd0f4fa2ef7e0ccf645904002" compoundref="atomic__base_8hpp" startline="2410" endline="2412">atomic_float_base&lt; Float &gt;::is_lock_free</referencedby>
-        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1ad00a5f9076ef7ea3fbe698eaf41b0502" compoundref="atomic__base_8hpp" startline="3084" endline="3086">atomic_ref_base&lt; Float, false, true &gt;::is_lock_free</referencedby>
-        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1ad85461387ffc95249b47cb80652b9038" compoundref="atomic__base_8hpp" startline="2679" endline="2681">atomic_ref_base&lt; T, false, false &gt;::is_lock_free</referencedby>
-        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a6bde6162c3af59088f98f66850ad1c39" compoundref="atomic__base_8hpp" startline="2827" endline="2829">atomic_ref_base&lt; T, true, false &gt;::is_lock_free</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" line="1225" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_base.hpp" bodystart="1225" bodyend="1231"/>
+        <referencedby refid="structatomic_1a101b3036a9bf63cf912f9a4f151eebe0" compoundref="atomic_8hpp" startline="102" endline="104">atomic&lt; T &gt;::is_lock_free</referencedby>
+        <referencedby refid="structatomic_1aabb691312fa3f81736c19d6f4212e2a3" compoundref="atomic_8hpp" startline="109" endline="111">atomic&lt; T &gt;::is_lock_free</referencedby>
+        <referencedby refid="structatomic__base_1a3580f25b993589f4ac5eac23f99945ee" compoundref="atomic__base_8hpp" startline="1606" endline="1608">atomic_base&lt; char &gt;::is_lock_free</referencedby>
+        <referencedby refid="structatomic__base_1a5840451193da6657f8209b2a90e2e078" compoundref="atomic__base_8hpp" startline="1613" endline="1615">atomic_base&lt; char &gt;::is_lock_free</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1aa4e732e560ef0af010a92aaa1ea586a5" compoundref="atomic__base_8hpp" startline="2037" endline="2039">atomic_base&lt; T * &gt;::is_lock_free</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a651496a336ffaae1f7ee630d3a140787" compoundref="atomic__base_8hpp" startline="2044" endline="2046">atomic_base&lt; T * &gt;::is_lock_free</referencedby>
+        <referencedby refid="structatomic__float__base_1a147a54a0d9a8e4f5bbbcb1b12ca6ecfb" compoundref="atomic__base_8hpp" startline="2403" endline="2405">atomic_float_base&lt; Float &gt;::is_lock_free</referencedby>
+        <referencedby refid="structatomic__float__base_1a7736c3a4bb5a1622d5f9211a51f54fb7" compoundref="atomic__base_8hpp" startline="2410" endline="2412">atomic_float_base&lt; Float &gt;::is_lock_free</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a66bd5fda4b71a5291d0193c0f9c49a63" compoundref="atomic__base_8hpp" startline="3084" endline="3086">atomic_ref_base&lt; Float, false, true &gt;::is_lock_free</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a6c1d9a392799bfb1cc1a900162ed1b7d" compoundref="atomic__base_8hpp" startline="2679" endline="2681">atomic_ref_base&lt; T, false, false &gt;::is_lock_free</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a23e3cdab8397becfb5437fa0e81c75c2" compoundref="atomic__base_8hpp" startline="2827" endline="2829">atomic_ref_base&lt; T, true, false &gt;::is_lock_free</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___atomic_operations_1ga4ea9991a1e00b98f7bfbb4717f63d5ec" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -2902,14 +2902,14 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_wait.hpp" line="418" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_wait.hpp" bodystart="418" bodyend="421"/>
-        <referencedby refid="structatomic__base_1a84fa55635b031bc4416e05ec142991b5" compoundref="atomic__base_8hpp" startline="1793" endline="1795">atomic_base&lt; char &gt;::wait</referencedby>
-        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1af7379fe6e4ea83d93fab90faed67c15a" compoundref="atomic__base_8hpp" startline="2286" endline="2288">atomic_base&lt; T * &gt;::wait</referencedby>
-        <referencedby refid="structatomic__flag_1ac76b1f66f833c41195886ce1fd8860c1" compoundref="atomic__base_8hpp" startline="1342" endline="1346">atomic_flag::wait</referencedby>
-        <referencedby refid="structatomic__flag_1a2e813aa5941477fd297d8320f6d5960b" compoundref="atomic__base_8hpp" startline="1351" endline="1356">atomic_flag::wait</referencedby>
-        <referencedby refid="structatomic__float__base_1a66cdf2efe9764bb6ebee8356b15b780d" compoundref="atomic__base_8hpp" startline="2533" endline="2535">atomic_float_base&lt; Float &gt;::wait</referencedby>
-        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1aafa9406edb191fe58fdf629ec03606c2" compoundref="atomic__base_8hpp" startline="3169" endline="3171">atomic_ref_base&lt; Float, false, true &gt;::wait</referencedby>
-        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a4d2db5ae6c534d2fc0ba144899eaf6a3" compoundref="atomic__base_8hpp" startline="2761" endline="2763">atomic_ref_base&lt; T, false, false &gt;::wait</referencedby>
-        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1acc2044a07bd295da4530442b62c179a0" compoundref="atomic__base_8hpp" startline="2909" endline="2911">atomic_ref_base&lt; T, true, false &gt;::wait</referencedby>
+        <referencedby refid="structatomic__base_1a1f69db67fa04bfeb856c331f7d0347f2" compoundref="atomic__base_8hpp" startline="1793" endline="1795">atomic_base&lt; char &gt;::wait</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a21e31b94b81292ee2330bfd552fe5828" compoundref="atomic__base_8hpp" startline="2286" endline="2288">atomic_base&lt; T * &gt;::wait</referencedby>
+        <referencedby refid="structatomic__flag_1abf5d4781fed057918ec560f75ce846f6" compoundref="atomic__base_8hpp" startline="1342" endline="1346">atomic_flag::wait</referencedby>
+        <referencedby refid="structatomic__flag_1a53540605cbe598c141d7ec268c1b0e93" compoundref="atomic__base_8hpp" startline="1351" endline="1356">atomic_flag::wait</referencedby>
+        <referencedby refid="structatomic__float__base_1a2a3fac8c95a386a12d61f97c32909e3a" compoundref="atomic__base_8hpp" startline="2533" endline="2535">atomic_float_base&lt; Float &gt;::wait</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a229b566632dce6e14e80d3387711acc4" compoundref="atomic__base_8hpp" startline="3169" endline="3171">atomic_ref_base&lt; Float, false, true &gt;::wait</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1ab1afe575626049c917e2ab840d665cd5" compoundref="atomic__base_8hpp" startline="2761" endline="2763">atomic_ref_base&lt; T, false, false &gt;::wait</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a8ec2d57e8c358d29644cd24837a6d1ff" compoundref="atomic__base_8hpp" startline="2909" endline="2911">atomic_ref_base&lt; T, true, false &gt;::wait</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___atomic_operations_1ga04b378083d850b094555357ea10e17ef" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -2976,7 +2976,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_wait.hpp" line="433" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_wait.hpp" bodystart="433" bodyend="436"/>
         <referencedby refid="classatomic__semaphore_1a73f427158e7bf8f27648012b342d4043" compoundref="semaphore_8hpp" startline="111" endline="114">atomic_semaphore&lt; 1 &gt;::acquire</referencedby>
-        <referencedby refid="classlatch_1a08842ebccf3f250756b4807998f5fdff" compoundref="latch_8hpp" startline="94" endline="97">latch::wait</referencedby>
+        <referencedby refid="classlatch_1afedb29909d54b1c8c6bf136c2f900da3" compoundref="latch_8hpp" startline="94" endline="97">latch::wait</referencedby>
         <referencedby refid="classtree__barrier_1a0cabbf16a0b5532fd54ed41be40babc2" compoundref="barrier_8hpp" startline="176" endline="180">tree_barrier&lt; CmplFunc &gt;::wait</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___atomic_operations_1ga5c5949e5e1c0b7d9c13b91322f47f79d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -3032,21 +3032,21 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_wait.hpp" line="448" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_wait.hpp" bodystart="448" bodyend="451"/>
-        <referencedby refid="classlatch_1af97b3e7f872dacf234135f65508ff964" compoundref="latch_8hpp" startline="70" endline="75">latch::count_down</referencedby>
-        <referencedby refid="structatomic__base_1aea0a27511e2399daecbbf7eae27d3b3e" compoundref="atomic__base_8hpp" startline="1805" endline="1805">atomic_base&lt; char &gt;::notify_all</referencedby>
-        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1ad4e6a7455220f9fc07027786c98a08f5" compoundref="atomic__base_8hpp" startline="2298" endline="2298">atomic_base&lt; T * &gt;::notify_all</referencedby>
-        <referencedby refid="structatomic__flag_1af5dadd2b04cc195a9f7e838a76137485" compoundref="atomic__base_8hpp" startline="1366" endline="1366">atomic_flag::notify_all</referencedby>
-        <referencedby refid="structatomic__float__base_1a2384d636f50b3b9dd8d1415a9e0ee2c2" compoundref="atomic__base_8hpp" startline="2545" endline="2545">atomic_float_base&lt; Float &gt;::notify_all</referencedby>
-        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a28e149d06ed20a3492ea643533b2dbd6" compoundref="atomic__base_8hpp" startline="3181" endline="3181">atomic_ref_base&lt; Float, false, true &gt;::notify_all</referencedby>
-        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1ad6ac88ec6c445638a928d1ee68a27b46" compoundref="atomic__base_8hpp" startline="2773" endline="2773">atomic_ref_base&lt; T, false, false &gt;::notify_all</referencedby>
-        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a204e73fff5b85b7e5b85c36d51cd21c4" compoundref="atomic__base_8hpp" startline="2921" endline="2921">atomic_ref_base&lt; T, true, false &gt;::notify_all</referencedby>
-        <referencedby refid="structatomic__base_1aa8f11bc3d395244181ca1959851f8a71" compoundref="atomic__base_8hpp" startline="1800" endline="1800">atomic_base&lt; char &gt;::notify_one</referencedby>
-        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a0c6d416653c211c2521876b9bce8f03d" compoundref="atomic__base_8hpp" startline="2293" endline="2293">atomic_base&lt; T * &gt;::notify_one</referencedby>
-        <referencedby refid="structatomic__flag_1a0f0d985e04ef3329db201d028ecf3f33" compoundref="atomic__base_8hpp" startline="1361" endline="1361">atomic_flag::notify_one</referencedby>
-        <referencedby refid="structatomic__float__base_1ae2b41b8d4924da0f9ddde463ee268e91" compoundref="atomic__base_8hpp" startline="2540" endline="2540">atomic_float_base&lt; Float &gt;::notify_one</referencedby>
-        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a89b127ce19c5c41b7e8c1ae39eb7c415" compoundref="atomic__base_8hpp" startline="3176" endline="3176">atomic_ref_base&lt; Float, false, true &gt;::notify_one</referencedby>
-        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1afe2e906f7730b3788dac0da95435bd46" compoundref="atomic__base_8hpp" startline="2768" endline="2768">atomic_ref_base&lt; T, false, false &gt;::notify_one</referencedby>
-        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a803f33d2e8ae65e4c1b0eb5d3a8896a0" compoundref="atomic__base_8hpp" startline="2916" endline="2916">atomic_ref_base&lt; T, true, false &gt;::notify_one</referencedby>
+        <referencedby refid="classlatch_1a5d0363a4c163fe58fb84fd4e8ee45e15" compoundref="latch_8hpp" startline="70" endline="75">latch::count_down</referencedby>
+        <referencedby refid="structatomic__base_1a508c2a4d9c9005f572e6a692a9b0ce3d" compoundref="atomic__base_8hpp" startline="1805" endline="1805">atomic_base&lt; char &gt;::notify_all</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1af76cd49359222eb3b61a64c5316f5b64" compoundref="atomic__base_8hpp" startline="2298" endline="2298">atomic_base&lt; T * &gt;::notify_all</referencedby>
+        <referencedby refid="structatomic__flag_1af55412e5b36f5bebdecd08d8a9626e4f" compoundref="atomic__base_8hpp" startline="1366" endline="1366">atomic_flag::notify_all</referencedby>
+        <referencedby refid="structatomic__float__base_1a82c3558541247e7c7b8f8c1213e28690" compoundref="atomic__base_8hpp" startline="2545" endline="2545">atomic_float_base&lt; Float &gt;::notify_all</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1a561ffa7416ba472c42f18a172656e900" compoundref="atomic__base_8hpp" startline="3181" endline="3181">atomic_ref_base&lt; Float, false, true &gt;::notify_all</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1a575c2c0fb630c6e91759f78a3ac1bd11" compoundref="atomic__base_8hpp" startline="2773" endline="2773">atomic_ref_base&lt; T, false, false &gt;::notify_all</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1ae42ab2b21f5f6ba7bfb67befe4aaad85" compoundref="atomic__base_8hpp" startline="2921" endline="2921">atomic_ref_base&lt; T, true, false &gt;::notify_all</referencedby>
+        <referencedby refid="structatomic__base_1a2d89ad878e955305056cdda809cd45ce" compoundref="atomic__base_8hpp" startline="1800" endline="1800">atomic_base&lt; char &gt;::notify_one</referencedby>
+        <referencedby refid="structatomic__base_3_01_t_01_5_01_4_1a769ba65d99b8a84a29574aeb935e2cd6" compoundref="atomic__base_8hpp" startline="2293" endline="2293">atomic_base&lt; T * &gt;::notify_one</referencedby>
+        <referencedby refid="structatomic__flag_1a4fcaf0f0b3b7b604ed0737807bdceec5" compoundref="atomic__base_8hpp" startline="1361" endline="1361">atomic_flag::notify_one</referencedby>
+        <referencedby refid="structatomic__float__base_1ae45c4ea5abca19092825a7430db2c216" compoundref="atomic__base_8hpp" startline="2540" endline="2540">atomic_float_base&lt; Float &gt;::notify_one</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_float_00_01false_00_01true_01_4_1afac9b7bd898e1455962cf3eb9aa3208c" compoundref="atomic__base_8hpp" startline="3176" endline="3176">atomic_ref_base&lt; Float, false, true &gt;::notify_one</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01false_00_01false_01_4_1ad422c352ff2ed6c95fe88cd787fd086f" compoundref="atomic__base_8hpp" startline="2768" endline="2768">atomic_ref_base&lt; T, false, false &gt;::notify_one</referencedby>
+        <referencedby refid="structatomic__ref__base_3_01_t_00_01true_00_01false_01_4_1a3158fd66bda179345db672ab624ab900" compoundref="atomic__base_8hpp" startline="2916" endline="2916">atomic_ref_base&lt; T, true, false &gt;::notify_one</referencedby>
         <referencedby refid="classatomic__semaphore_1a8716205f263f66c4d7d4e23a4ac8170d" compoundref="semaphore_8hpp" startline="99" endline="104">atomic_semaphore&lt; 1 &gt;::release</referencedby>
       </memberdef>
     </sectiondef>

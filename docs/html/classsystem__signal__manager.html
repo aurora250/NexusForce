@@ -153,8 +153,8 @@ void&#160;</td><td class="memItemRight"><b>stop_monitoring</b> () noexcept</td><
 <tr class="memdesc:ab5edcf264e39e14234d6f1d3a4206d4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">停止信号监控 <br /></td></tr>
 <tr class="memitem:ac01b5f7de2fa61d633b14d09d0ed0f44" id="r_ac01b5f7de2fa61d633b14d09d0ed0f44"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac01b5f7de2fa61d633b14d09d0ed0f44">reset_force</a> ()</td></tr>
 <tr class="memdesc:ac01b5f7de2fa61d633b14d09d0ed0f44"><td class="mdescLeft">&#160;</td><td class="mdescRight">强制重置信号管理器状态  <br /></td></tr>
-<tr class="memitem:a84099c3f7f5034925d3b6e01cc0c7d4b" id="r_a84099c3f7f5034925d3b6e01cc0c7d4b"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a84099c3f7f5034925d3b6e01cc0c7d4b">is_running</a> () const</td></tr>
-<tr class="memdesc:a84099c3f7f5034925d3b6e01cc0c7d4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否正在运行  <br /></td></tr>
+<tr class="memitem:a6e6fffc5a25521df157728188cea5959" id="r_a6e6fffc5a25521df157728188cea5959"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6e6fffc5a25521df157728188cea5959">is_running</a> () const</td></tr>
+<tr class="memdesc:a6e6fffc5a25521df157728188cea5959"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否正在运行  <br /></td></tr>
 <tr class="memitem:a3af6e2356781fec0f0a9384eeccf0dd7" id="r_a3af6e2356781fec0f0a9384eeccf0dd7"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a3af6e2356781fec0f0a9384eeccf0dd7">block_signals</a> (const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="#a442e5d505e7801160e93504232ce2616">event</a> &gt; &amp;signals_to_block) const</td></tr>
 <tr class="memdesc:a3af6e2356781fec0f0a9384eeccf0dd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">阻塞指定信号（仅Linux）  <br /></td></tr>
 <tr class="memitem:abd9ec9c46beb3eec8ed1eac1090a4e11" id="r_abd9ec9c46beb3eec8ed1eac1090a4e11"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#abd9ec9c46beb3eec8ed1eac1090a4e11">unblock_signals</a> (const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="#a442e5d505e7801160e93504232ce2616">event</a> &gt; &amp;signals_to_unblock) const</td></tr>
@@ -164,8 +164,8 @@ void&#160;</td><td class="memItemRight"><b>stop_monitoring</b> () noexcept</td><
 静态 Public 成员函数</h2></td></tr>
 <tr class="memitem:ad3e12c1c30e2e92d4f858859e68affa5" id="r_ad3e12c1c30e2e92d4f858859e68affa5"><td class="memItemLeft">static <a class="el" href="classsystem__signal__manager.html">system_signal_manager</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad3e12c1c30e2e92d4f858859e68affa5">instance</a> ()</td></tr>
 <tr class="memdesc:ad3e12c1c30e2e92d4f858859e68affa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取单例实例  <br /></td></tr>
-<tr class="memitem:a58bfe44234b37e238b482a267b4e5817" id="r_a58bfe44234b37e238b482a267b4e5817"><td class="memItemLeft">static NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a58bfe44234b37e238b482a267b4e5817">is_platform_signal</a> (<a class="el" href="#a442e5d505e7801160e93504232ce2616">event</a> <a class="el" href="#a442e5d505e7801160e93504232ce2616">event</a>)</td></tr>
-<tr class="memdesc:a58bfe44234b37e238b482a267b4e5817"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断事件是否为平台原生信号  <br /></td></tr>
+<tr class="memitem:abd07e7eba4bcbb2af87138dce5dc0ace" id="r_abd07e7eba4bcbb2af87138dce5dc0ace"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#abd07e7eba4bcbb2af87138dce5dc0ace">is_platform_signal</a> (<a class="el" href="#a442e5d505e7801160e93504232ce2616">event</a> <a class="el" href="#a442e5d505e7801160e93504232ce2616">event</a>)</td></tr>
+<tr class="memdesc:abd07e7eba4bcbb2af87138dce5dc0ace"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断事件是否为平台原生信号  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>信号管理器 </p>
@@ -340,8 +340,8 @@ void&#160;</td><td class="memItemRight"><b>stop_monitoring</b> () noexcept</td><
 
 </div>
 </div>
-<a id="a58bfe44234b37e238b482a267b4e5817" name="a58bfe44234b37e238b482a267b4e5817"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58bfe44234b37e238b482a267b4e5817">&#9670;&#160;</a></span>is_platform_signal()</h2>
+<a id="abd07e7eba4bcbb2af87138dce5dc0ace" name="abd07e7eba4bcbb2af87138dce5dc0ace"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd07e7eba4bcbb2af87138dce5dc0ace">&#9670;&#160;</a></span>is_platform_signal()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -350,7 +350,7 @@ void&#160;</td><td class="memItemRight"><b>stop_monitoring</b> () noexcept</td><
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_NODISCARD bool system_signal_manager::is_platform_signal </td>
+          <td class="memname">bool system_signal_manager::is_platform_signal </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a442e5d505e7801160e93504232ce2616">event</a></td>          <td class="paramname"><span class="paramname"><em>event</em></span></td><td>)</td>
           <td></td>
@@ -358,7 +358,7 @@ void&#160;</td><td class="memItemRight"><b>stop_monitoring</b> () noexcept</td><
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -380,27 +380,35 @@ void&#160;</td><td class="memItemRight"><b>stop_monitoring</b> () noexcept</td><
 
 </div>
 </div>
-<a id="a84099c3f7f5034925d3b6e01cc0c7d4b" name="a84099c3f7f5034925d3b6e01cc0c7d4b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a84099c3f7f5034925d3b6e01cc0c7d4b">&#9670;&#160;</a></span>is_running()</h2>
+<a id="a6e6fffc5a25521df157728188cea5959" name="a6e6fffc5a25521df157728188cea5959"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e6fffc5a25521df157728188cea5959">&#9670;&#160;</a></span>is_running()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_NODISCARD bool system_signal_manager::is_running </td>
+          <td class="memname">bool system_signal_manager::is_running </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>检查是否正在运行 </p>
 <dl class="section return"><dt>返回</dt><dd>正在运行返回true </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="#a84099c3f7f5034925d3b6e01cc0c7d4b">is_running()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a6e6fffc5a25521df157728188cea5959">is_running()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="#a84099c3f7f5034925d3b6e01cc0c7d4b">is_running()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#a6e6fffc5a25521df157728188cea5959">is_running()</a>.</p>
 
 </div>
 </div>

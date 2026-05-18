@@ -1,8 +1,8 @@
 var structurl =
 [
     [ "url", "structurl.html#ab48a666ee96b8c6375e699cdf090efe3", null ],
-    [ "is_valid", "structurl.html#a01947768a66022a2fd9604dd1bf5bcf4", null ],
-    [ "to_string", "structurl.html#abde4c78bb02a4338885cb5323a7f1ea4", null ],
+    [ "is_valid", "structurl.html#ab29771e1dac4e20a0e81e0b67aae821c", null ],
+    [ "to_string", "structurl.html#a7d0167790008795054e2dc1bbbfe3931", null ],
     [ "fragment", "structurl.html#a89602c93ef7655cbcb4969d2f7af7a1b", null ],
     [ "host", "structurl.html#a32706de92e065e4dad5e0f9944211cc6", null ],
     [ "path", "structurl.html#a8ea57220960dca945a1b8083920f9950", null ],

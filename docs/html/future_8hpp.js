@@ -17,8 +17,8 @@ var future_8hpp =
       [ "async", "group___async.html#gga9b3224d19f20667b3b24145a7b395a33a0df93e34273b367bb63bad28c94c78d5", null ],
       [ "deferred", "group___async.html#gga9b3224d19f20667b3b24145a7b395a33a43fff3df3fc0b3417c86dc3040fb2d86", null ]
     ] ],
-    [ "async", "group___async.html#gaf02db8c05cbd8fd9ea17355adcc164f0", null ],
-    [ "async", "group___async.html#gacb2c2756930195cd969cc14a06c437bf", null ],
+    [ "async", "group___async.html#gadb2e4929c373d071c43f75182fda1239", null ],
+    [ "async", "group___async.html#ga4bbf8cf030239a4806813af4dcafec6f", null ],
     [ "get", "future_8hpp.html#gac14e5033806977e33886d78a20feffaa", null ],
     [ "get", "group___async.html#gac14e5033806977e33886d78a20feffaa", null ]
 ];

@@ -1,0 +1,4 @@
+var structneforce_1_1formatter_3_01_t_00_01enable__if__t_3_01is__standard__integral__v_3_01_t_01_4_0299a6efb86ae9aa57292ce8a71263a4f =
+[
+    [ "operator()", "structneforce_1_1formatter_3_01_t_00_01enable__if__t_3_01is__standard__integral__v_3_01_t_01_4_0299a6efb86ae9aa57292ce8a71263a4f.html#ad92a9473e2a611e42e40f81108c472ca", null ]
+];

@@ -139,7 +139,7 @@ public:
      * @brief 构造函数
      * @param data 初始数据值
      */
-    explicit atomic_futex(const uint32_t data) :
+    explicit constexpr atomic_futex(const uint32_t data) :
     data_(data) {}
 
     /**
@@ -149,7 +149,7 @@ public:
      *
      * @note 清除等待者标志位，只返回实际数据
      */
-    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE uint32_t load(const memory_order mo) const {
+    NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE uint32_t load(const memory_order mo) const noexcept {
         return data_.load(mo) & ~WaiterBit;
     }
 
@@ -261,6 +261,21 @@ public:
         }
         old = this->load_and_test_until_impl(old, value, true, mo, atime);
         return (old & ~WaiterBit) == value;
+    }
+
+    /**
+     * @brief 原子比较并交换
+     * @param expected 期望值（必须包含 WaiterBit 的可能状态）
+     * @param desired 新值
+     * @param success 成功时的内存顺序
+     * @param failure 失败时的内存顺序
+     * @return 是否交换成功
+     * @note 直接操作内部原子变量，调用者需自行处理 WaiterBit 的语义
+     */
+    NEFORCE_ALWAYS_INLINE bool compare_exchange_strong(uint32_t& expected, const uint32_t desired,
+                                                       const memory_order success,
+                                                       const memory_order failure) noexcept {
+        return data_.compare_exchange_strong(expected, desired, success, failure);
     }
 
     /**

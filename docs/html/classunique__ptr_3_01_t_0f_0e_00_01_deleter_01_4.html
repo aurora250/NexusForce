@@ -112,15 +112,15 @@ using&#160;</td><td class="memItemRight"><b>deleter_type</b> = Deleter</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:a337628ce74bdaf0e4246f1deea147071" id="r_a337628ce74bdaf0e4246f1deea147071"><td class="memTemplParams" colspan="2">template&lt;typename U, typename Del = Deleter, typename = DeleterConstraint&lt;Del&gt;, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; safe_conversion_raw&lt; U &gt;::value, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:a337628ce74bdaf0e4246f1deea147071 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20&#160;</td><td class="memItemRight"><a class="el" href="#a337628ce74bdaf0e4246f1deea147071">unique_ptr</a> (U ptr) noexcept</td></tr>
-<tr class="memdesc:a337628ce74bdaf0e4246f1deea147071"><td class="mdescLeft">&#160;</td><td class="mdescRight">从指针构造  <br /></td></tr>
-<tr class="memitem:a8e4e3f9349fad379cd3c58b8cf0c53dc" id="r_a8e4e3f9349fad379cd3c58b8cf0c53dc"><td class="memTemplParams" colspan="2">template&lt;typename U, typename Del = deleter_type, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; safe_conversion_raw&lt; U &gt;, <a class="el" href="structis__copy__constructible.html">is_copy_constructible</a>&lt; Del &gt; &gt;::value, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:a8e4e3f9349fad379cd3c58b8cf0c53dc template"><td class="memItemLeft">NEFORCE_CONSTEXPR20&#160;</td><td class="memItemRight"><a class="el" href="#a8e4e3f9349fad379cd3c58b8cf0c53dc">unique_ptr</a> (U ptr, const <a class="el" href="#a9504d2b7f5461b852f2eaf56350b74b1">deleter_type</a> &amp;deleter) noexcept</td></tr>
-<tr class="memdesc:a8e4e3f9349fad379cd3c58b8cf0c53dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">从指针和复制删除器构造  <br /></td></tr>
-<tr class="memitem:a007644845a7ac5df7d978b2d490b86b4" id="r_a007644845a7ac5df7d978b2d490b86b4"><td class="memTemplParams" colspan="2">template&lt;typename U, typename Del = deleter_type, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; safe_conversion_raw&lt; U &gt;, <a class="el" href="structis__move__constructible.html">is_move_constructible</a>&lt; Del &gt; &gt;::value, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:a007644845a7ac5df7d978b2d490b86b4 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20&#160;</td><td class="memItemRight"><a class="el" href="#a007644845a7ac5df7d978b2d490b86b4">unique_ptr</a> (U ptr, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="structis__lvalue__reference.html">is_lvalue_reference</a>&lt; Del &gt;::value, Del &amp;&amp; &gt; deleter) noexcept</td></tr>
-<tr class="memdesc:a007644845a7ac5df7d978b2d490b86b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">从指针和移动删除器构造  <br /></td></tr>
+<tr class="memitem:a6c19679e3b9251cf767d668501ac0580" id="r_a6c19679e3b9251cf767d668501ac0580"><td class="memTemplParams" colspan="2">template&lt;typename U, typename Del = Deleter, typename = DeleterConstraint&lt;Del&gt;, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; safe_conversion_raw&lt; U &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a6c19679e3b9251cf767d668501ac0580 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a6c19679e3b9251cf767d668501ac0580">unique_ptr</a> (U ptr) noexcept</td></tr>
+<tr class="memdesc:a6c19679e3b9251cf767d668501ac0580"><td class="mdescLeft">&#160;</td><td class="mdescRight">从指针构造  <br /></td></tr>
+<tr class="memitem:a75f743d402fe6c9838e1bea599ff9983" id="r_a75f743d402fe6c9838e1bea599ff9983"><td class="memTemplParams" colspan="2">template&lt;typename U, typename Del = deleter_type, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; safe_conversion_raw&lt; U &gt;, <a class="el" href="structis__copy__constructible.html">is_copy_constructible</a>&lt; Del &gt; &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a75f743d402fe6c9838e1bea599ff9983 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a75f743d402fe6c9838e1bea599ff9983">unique_ptr</a> (U ptr, const <a class="el" href="#a9504d2b7f5461b852f2eaf56350b74b1">deleter_type</a> &amp;deleter) noexcept</td></tr>
+<tr class="memdesc:a75f743d402fe6c9838e1bea599ff9983"><td class="mdescLeft">&#160;</td><td class="mdescRight">从指针和复制删除器构造  <br /></td></tr>
+<tr class="memitem:a3dc90e8ea05c965f330203dfa1610d2a" id="r_a3dc90e8ea05c965f330203dfa1610d2a"><td class="memTemplParams" colspan="2">template&lt;typename U, typename Del = deleter_type, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; safe_conversion_raw&lt; U &gt;, <a class="el" href="structis__move__constructible.html">is_move_constructible</a>&lt; Del &gt; &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a3dc90e8ea05c965f330203dfa1610d2a template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a3dc90e8ea05c965f330203dfa1610d2a">unique_ptr</a> (U ptr, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;!<a class="el" href="structis__lvalue__reference.html">is_lvalue_reference</a>&lt; Del &gt;::value, Del &amp;&amp; &gt; deleter) noexcept</td></tr>
+<tr class="memdesc:a3dc90e8ea05c965f330203dfa1610d2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">从指针和移动删除器构造  <br /></td></tr>
 <tr class="memitem:a2ee129da9363b6b3475290f1509a26da" id="r_a2ee129da9363b6b3475290f1509a26da"><td class="memTemplParams" colspan="2"><a id="a2ee129da9363b6b3475290f1509a26da" name="a2ee129da9363b6b3475290f1509a26da"></a>
 template&lt;typename U, typename Del = deleter_type, typename DelMoveRef = remove_reference_t&lt;Del&gt;, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; safe_conversion_raw&lt; U &gt;::value, int &gt; = 0&gt; </td></tr>
 <tr class="memitem:a2ee129da9363b6b3475290f1509a26da template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><b>unique_ptr</b> (U, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__lvalue__reference.html">is_lvalue_reference</a>&lt; Del &gt;::value, DelMoveRef &amp;&amp; &gt;)=delete</td></tr>
@@ -131,54 +131,54 @@ template&lt;typename U, typename Del = deleter_type, typename DelMoveRef = remov
 <tr class="memitem:a730f845540bdebd23e29dbc5af946581" id="r_a730f845540bdebd23e29dbc5af946581"><td class="memTemplParams" colspan="2">template&lt;typename Del = Deleter, typename = DeleterConstraint&lt;Del&gt;&gt; </td></tr>
 <tr class="memitem:a730f845540bdebd23e29dbc5af946581 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a730f845540bdebd23e29dbc5af946581">unique_ptr</a> (<a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>=nullptr) noexcept</td></tr>
 <tr class="memdesc:a730f845540bdebd23e29dbc5af946581"><td class="mdescLeft">&#160;</td><td class="mdescRight">空指针构造  <br /></td></tr>
-<tr class="memitem:a73848629a27adffebcc5c8a47a330e6e" id="r_a73848629a27adffebcc5c8a47a330e6e"><td class="memTemplParams" colspan="2">template&lt;typename U, typename E, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; safe_conversion&lt; U, E &gt;, <a class="el" href="group___type_traits_utilities.html#ga8e4e19e025d27abb3cd4cb306262f568">conditional_t</a>&lt; <a class="el" href="structis__reference.html">is_reference</a>&lt; Deleter &gt;::value, <a class="el" href="structis__same.html">is_same</a>&lt; E, Deleter &gt;, <a class="el" href="structis__convertible.html">is_convertible</a>&lt; E, Deleter &gt; &gt; &gt;::value, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:a73848629a27adffebcc5c8a47a330e6e template"><td class="memItemLeft">NEFORCE_CONSTEXPR20&#160;</td><td class="memItemRight"><a class="el" href="#a73848629a27adffebcc5c8a47a330e6e">unique_ptr</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;&amp;other) noexcept</td></tr>
-<tr class="memdesc:a73848629a27adffebcc5c8a47a330e6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">从其他unique_ptr转换构造  <br /></td></tr>
-<tr class="memitem:a90cd8a46e18a6842ed8ed1d30c0d9e0a" id="r_a90cd8a46e18a6842ed8ed1d30c0d9e0a"><td class="memItemLeft"><a id="a90cd8a46e18a6842ed8ed1d30c0d9e0a" name="a90cd8a46e18a6842ed8ed1d30c0d9e0a"></a>
-NEFORCE_CONSTEXPR20&#160;</td><td class="memItemRight"><b>~unique_ptr</b> ()</td></tr>
-<tr class="memdesc:a90cd8a46e18a6842ed8ed1d30c0d9e0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:ac27cdb468b4614ef836c3df41469a24e" id="r_ac27cdb468b4614ef836c3df41469a24e"><td class="memTemplParams" colspan="2">template&lt;typename U, typename E, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; safe_conversion&lt; U, E &gt;, <a class="el" href="group___type_traits_utilities.html#ga8e4e19e025d27abb3cd4cb306262f568">conditional_t</a>&lt; <a class="el" href="structis__reference.html">is_reference</a>&lt; Deleter &gt;::value, <a class="el" href="structis__same.html">is_same</a>&lt; E, Deleter &gt;, <a class="el" href="structis__convertible.html">is_convertible</a>&lt; E, Deleter &gt; &gt; &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ac27cdb468b4614ef836c3df41469a24e template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ac27cdb468b4614ef836c3df41469a24e">unique_ptr</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:ac27cdb468b4614ef836c3df41469a24e"><td class="mdescLeft">&#160;</td><td class="mdescRight">从其他unique_ptr转换构造  <br /></td></tr>
+<tr class="memitem:ae3a2dc6e043cd7ad7ef91f6d75af2e2d" id="r_ae3a2dc6e043cd7ad7ef91f6d75af2e2d"><td class="memItemLeft"><a id="ae3a2dc6e043cd7ad7ef91f6d75af2e2d" name="ae3a2dc6e043cd7ad7ef91f6d75af2e2d"></a>
+constexpr&#160;</td><td class="memItemRight"><b>~unique_ptr</b> ()</td></tr>
+<tr class="memdesc:ae3a2dc6e043cd7ad7ef91f6d75af2e2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
 <tr class="memitem:a2d549d3e328c2c71b7e13aa054887e49" id="r_a2d549d3e328c2c71b7e13aa054887e49"><td class="memItemLeft"><a id="a2d549d3e328c2c71b7e13aa054887e49" name="a2d549d3e328c2c71b7e13aa054887e49"></a>
 <a class="el" href="classunique__ptr.html">unique_ptr</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (<a class="el" href="classunique__ptr.html">unique_ptr</a> &amp;&amp;)=default</td></tr>
 <tr class="memdesc:a2d549d3e328c2c71b7e13aa054887e49"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符 <br /></td></tr>
-<tr class="memitem:ad1f11fdde703e70ac712dfea679c0fc8" id="r_ad1f11fdde703e70ac712dfea679c0fc8"><td class="memTemplParams" colspan="2">template&lt;typename U, typename E, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gaf49fb9070ceeed735b3dddc7da0392d7">conjunction_v</a>&lt; safe_conversion&lt; U, E &gt;, <a class="el" href="structis__assignable.html">is_assignable</a>&lt; <a class="el" href="#a9504d2b7f5461b852f2eaf56350b74b1">deleter_type</a> &amp;, E &amp;&amp; &gt; &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ad1f11fdde703e70ac712dfea679c0fc8 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad1f11fdde703e70ac712dfea679c0fc8">operator=</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;&amp;other) noexcept</td></tr>
-<tr class="memdesc:ad1f11fdde703e70ac712dfea679c0fc8"><td class="mdescLeft">&#160;</td><td class="mdescRight">从其他unique_ptr移动赋值  <br /></td></tr>
-<tr class="memitem:accad32a5dda96be9d8c9522ec1dc5dc3" id="r_accad32a5dda96be9d8c9522ec1dc5dc3"><td class="memItemLeft">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#accad32a5dda96be9d8c9522ec1dc5dc3">operator=</a> (<a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>) noexcept</td></tr>
-<tr class="memdesc:accad32a5dda96be9d8c9522ec1dc5dc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">nullptr赋值运算符  <br /></td></tr>
-<tr class="memitem:a419a6712835ceb63c2332d96fae3327e" id="r_a419a6712835ceb63c2332d96fae3327e"><td class="memItemLeft">NEFORCE_CONSTEXPR20 <a class="el" href="group___add_qualifiers.html#gac084a21f7a057df50ed3f436567e993f">add_lvalue_reference_t</a>&lt; <a class="el" href="#a8ace3789d9c673b8141ac033485fca51">element_type</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a419a6712835ceb63c2332d96fae3327e">operator[]</a> (<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> idx) const</td></tr>
-<tr class="memdesc:a419a6712835ceb63c2332d96fae3327e"><td class="mdescLeft">&#160;</td><td class="mdescRight">数组下标运算符  <br /></td></tr>
-<tr class="memitem:a94f46cbb8e45deafbf4458282d9e3809" id="r_a94f46cbb8e45deafbf4458282d9e3809"><td class="memItemLeft"><a id="a94f46cbb8e45deafbf4458282d9e3809" name="a94f46cbb8e45deafbf4458282d9e3809"></a>
-NEFORCE_CONSTEXPR20 <a class="el" href="#a19cef8dabae40630596ba78bb5587d7c">pointer</a>&#160;</td><td class="memItemRight"><b>get</b> () const noexcept</td></tr>
-<tr class="memdesc:a94f46cbb8e45deafbf4458282d9e3809"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取原始指针 <br /></td></tr>
-<tr class="memitem:a555e3e95e5899d41276d58bf27d11462" id="r_a555e3e95e5899d41276d58bf27d11462"><td class="memItemLeft"><a id="a555e3e95e5899d41276d58bf27d11462" name="a555e3e95e5899d41276d58bf27d11462"></a>
-NEFORCE_CONSTEXPR20 <a class="el" href="#a9504d2b7f5461b852f2eaf56350b74b1">deleter_type</a> &amp;&#160;</td><td class="memItemRight"><b>get_deleter</b> () noexcept</td></tr>
-<tr class="memdesc:a555e3e95e5899d41276d58bf27d11462"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取删除器引用 <br /></td></tr>
-<tr class="memitem:a0397d22ea05cd43bc444504cd2a69597" id="r_a0397d22ea05cd43bc444504cd2a69597"><td class="memItemLeft"><a id="a0397d22ea05cd43bc444504cd2a69597" name="a0397d22ea05cd43bc444504cd2a69597"></a>
-NEFORCE_CONSTEXPR20 const <a class="el" href="#a9504d2b7f5461b852f2eaf56350b74b1">deleter_type</a> &amp;&#160;</td><td class="memItemRight"><b>get_deleter</b> () const noexcept</td></tr>
-<tr class="memdesc:a0397d22ea05cd43bc444504cd2a69597"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取删除器常量引用 <br /></td></tr>
-<tr class="memitem:ab8c3eb74c61eed55b2ad0d82307e9b7e" id="r_ab8c3eb74c61eed55b2ad0d82307e9b7e"><td class="memItemLeft">NEFORCE_CONSTEXPR20&#160;</td><td class="memItemRight"><a class="el" href="#ab8c3eb74c61eed55b2ad0d82307e9b7e">operator bool</a> () const noexcept</td></tr>
-<tr class="memdesc:ab8c3eb74c61eed55b2ad0d82307e9b7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">bool转换运算符  <br /></td></tr>
-<tr class="memitem:afeb39ccd70dade8f8fb67c87701b490d" id="r_afeb39ccd70dade8f8fb67c87701b490d"><td class="memItemLeft"><a id="afeb39ccd70dade8f8fb67c87701b490d" name="afeb39ccd70dade8f8fb67c87701b490d"></a>
-NEFORCE_CONSTEXPR20 <a class="el" href="#a19cef8dabae40630596ba78bb5587d7c">pointer</a>&#160;</td><td class="memItemRight"><b>release</b> () noexcept</td></tr>
-<tr class="memdesc:afeb39ccd70dade8f8fb67c87701b490d"><td class="mdescLeft">&#160;</td><td class="mdescRight">释放所有权 <br /></td></tr>
-<tr class="memitem:a9e16512f0f1ee0f05ccebe9fd4199d15" id="r_a9e16512f0f1ee0f05ccebe9fd4199d15"><td class="memTemplParams" colspan="2">template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; <a class="el" href="structdisjunction.html">disjunction</a>&lt; <a class="el" href="structis__same.html">is_same</a>&lt; U, <a class="el" href="#a19cef8dabae40630596ba78bb5587d7c">pointer</a> &gt;, <a class="el" href="structconjunction.html">conjunction</a>&lt; <a class="el" href="structis__same.html">is_same</a>&lt; <a class="el" href="#a19cef8dabae40630596ba78bb5587d7c">pointer</a>, <a class="el" href="#a8ace3789d9c673b8141ac033485fca51">element_type</a> * &gt;, <a class="el" href="structis__pointer.html">is_pointer</a>&lt; U &gt;, <a class="el" href="structis__convertible.html">is_convertible</a>&lt; <a class="el" href="group___remove_qualifiers.html#ga81cba9b583535ccfde0e7eb172bbec71">remove_pointer_t</a>&lt; U &gt;(*)[], <a class="el" href="#a8ace3789d9c673b8141ac033485fca51">element_type</a>(*)[]&gt; &gt; &gt; &gt;::value, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:a9e16512f0f1ee0f05ccebe9fd4199d15 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#a9e16512f0f1ee0f05ccebe9fd4199d15">reset</a> (U ptr) noexcept</td></tr>
-<tr class="memdesc:a9e16512f0f1ee0f05ccebe9fd4199d15"><td class="mdescLeft">&#160;</td><td class="mdescRight">重置管理的指针  <br /></td></tr>
-<tr class="memitem:a3b9e3e5a15f0865eb7d104f9498d052c" id="r_a3b9e3e5a15f0865eb7d104f9498d052c"><td class="memItemLeft"><a id="a3b9e3e5a15f0865eb7d104f9498d052c" name="a3b9e3e5a15f0865eb7d104f9498d052c"></a>
-NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><b>reset</b> (<a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>=nullptr) noexcept</td></tr>
-<tr class="memdesc:a3b9e3e5a15f0865eb7d104f9498d052c"><td class="mdescLeft">&#160;</td><td class="mdescRight">重置为空指针 <br /></td></tr>
-<tr class="memitem:a8a09e0389ccad830e6eb29f8b5333b57" id="r_a8a09e0389ccad830e6eb29f8b5333b57"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#a8a09e0389ccad830e6eb29f8b5333b57">swap</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a> &amp;other) noexcept</td></tr>
-<tr class="memdesc:a8a09e0389ccad830e6eb29f8b5333b57"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个unique_ptr  <br /></td></tr>
+<tr class="memitem:a874b7a5affdbb64a296e9691a30d52b9" id="r_a874b7a5affdbb64a296e9691a30d52b9"><td class="memTemplParams" colspan="2">template&lt;typename U, typename E, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#ga5672914b2f1f9c1c4c50ded53a8db2e3">conjunction_v</a>&lt; safe_conversion&lt; U, E &gt;, <a class="el" href="structis__assignable.html">is_assignable</a>&lt; <a class="el" href="#a9504d2b7f5461b852f2eaf56350b74b1">deleter_type</a> &amp;, E &amp;&amp; &gt; &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a874b7a5affdbb64a296e9691a30d52b9 template"><td class="memItemLeft">constexpr <a class="el" href="classunique__ptr.html">unique_ptr</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a874b7a5affdbb64a296e9691a30d52b9">operator=</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a874b7a5affdbb64a296e9691a30d52b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">从其他unique_ptr移动赋值  <br /></td></tr>
+<tr class="memitem:aae5ade1d83f5f2272dcbe813eebeff8a" id="r_aae5ade1d83f5f2272dcbe813eebeff8a"><td class="memItemLeft">constexpr <a class="el" href="classunique__ptr.html">unique_ptr</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aae5ade1d83f5f2272dcbe813eebeff8a">operator=</a> (<a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>) noexcept</td></tr>
+<tr class="memdesc:aae5ade1d83f5f2272dcbe813eebeff8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">nullptr赋值运算符  <br /></td></tr>
+<tr class="memitem:afed2254c56a0415df65930e5e7d0f91d" id="r_afed2254c56a0415df65930e5e7d0f91d"><td class="memItemLeft">constexpr <a class="el" href="group___add_qualifiers.html#gac084a21f7a057df50ed3f436567e993f">add_lvalue_reference_t</a>&lt; <a class="el" href="#a8ace3789d9c673b8141ac033485fca51">element_type</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#afed2254c56a0415df65930e5e7d0f91d">operator[]</a> (<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> idx) const</td></tr>
+<tr class="memdesc:afed2254c56a0415df65930e5e7d0f91d"><td class="mdescLeft">&#160;</td><td class="mdescRight">数组下标运算符  <br /></td></tr>
+<tr class="memitem:a0e600a5702b512d9837be90f1771c8c7" id="r_a0e600a5702b512d9837be90f1771c8c7"><td class="memItemLeft"><a id="a0e600a5702b512d9837be90f1771c8c7" name="a0e600a5702b512d9837be90f1771c8c7"></a>
+constexpr <a class="el" href="#a19cef8dabae40630596ba78bb5587d7c">pointer</a>&#160;</td><td class="memItemRight"><b>get</b> () const noexcept</td></tr>
+<tr class="memdesc:a0e600a5702b512d9837be90f1771c8c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取原始指针 <br /></td></tr>
+<tr class="memitem:a575819c1fbe78787c2aead99d31ba942" id="r_a575819c1fbe78787c2aead99d31ba942"><td class="memItemLeft"><a id="a575819c1fbe78787c2aead99d31ba942" name="a575819c1fbe78787c2aead99d31ba942"></a>
+constexpr <a class="el" href="#a9504d2b7f5461b852f2eaf56350b74b1">deleter_type</a> &amp;&#160;</td><td class="memItemRight"><b>get_deleter</b> () noexcept</td></tr>
+<tr class="memdesc:a575819c1fbe78787c2aead99d31ba942"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取删除器引用 <br /></td></tr>
+<tr class="memitem:a5619d32530bf67a2e0bf37a662f65a98" id="r_a5619d32530bf67a2e0bf37a662f65a98"><td class="memItemLeft"><a id="a5619d32530bf67a2e0bf37a662f65a98" name="a5619d32530bf67a2e0bf37a662f65a98"></a>
+constexpr const <a class="el" href="#a9504d2b7f5461b852f2eaf56350b74b1">deleter_type</a> &amp;&#160;</td><td class="memItemRight"><b>get_deleter</b> () const noexcept</td></tr>
+<tr class="memdesc:a5619d32530bf67a2e0bf37a662f65a98"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取删除器常量引用 <br /></td></tr>
+<tr class="memitem:a24fdc0b9412ce7ba3f2b58e142f05710" id="r_a24fdc0b9412ce7ba3f2b58e142f05710"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a24fdc0b9412ce7ba3f2b58e142f05710">operator bool</a> () const noexcept</td></tr>
+<tr class="memdesc:a24fdc0b9412ce7ba3f2b58e142f05710"><td class="mdescLeft">&#160;</td><td class="mdescRight">bool转换运算符  <br /></td></tr>
+<tr class="memitem:a46c8bd78e23d9772de4e8be44eafaf54" id="r_a46c8bd78e23d9772de4e8be44eafaf54"><td class="memItemLeft"><a id="a46c8bd78e23d9772de4e8be44eafaf54" name="a46c8bd78e23d9772de4e8be44eafaf54"></a>
+constexpr <a class="el" href="#a19cef8dabae40630596ba78bb5587d7c">pointer</a>&#160;</td><td class="memItemRight"><b>release</b> () noexcept</td></tr>
+<tr class="memdesc:a46c8bd78e23d9772de4e8be44eafaf54"><td class="mdescLeft">&#160;</td><td class="mdescRight">释放所有权 <br /></td></tr>
+<tr class="memitem:a45440fa5c5dc5ecd15f3a46ebdbc6c69" id="r_a45440fa5c5dc5ecd15f3a46ebdbc6c69"><td class="memTemplParams" colspan="2">template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structconjunction.html">conjunction</a>&lt; <a class="el" href="structdisjunction.html">disjunction</a>&lt; <a class="el" href="structis__same.html">is_same</a>&lt; U, <a class="el" href="#a19cef8dabae40630596ba78bb5587d7c">pointer</a> &gt;, <a class="el" href="structconjunction.html">conjunction</a>&lt; <a class="el" href="structis__same.html">is_same</a>&lt; <a class="el" href="#a19cef8dabae40630596ba78bb5587d7c">pointer</a>, <a class="el" href="#a8ace3789d9c673b8141ac033485fca51">element_type</a> * &gt;, <a class="el" href="structis__pointer.html">is_pointer</a>&lt; U &gt;, <a class="el" href="structis__convertible.html">is_convertible</a>&lt; <a class="el" href="group___remove_qualifiers.html#ga81cba9b583535ccfde0e7eb172bbec71">remove_pointer_t</a>&lt; U &gt;(*)[], <a class="el" href="#a8ace3789d9c673b8141ac033485fca51">element_type</a>(*)[]&gt; &gt; &gt; &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:a45440fa5c5dc5ecd15f3a46ebdbc6c69 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a45440fa5c5dc5ecd15f3a46ebdbc6c69">reset</a> (U ptr) noexcept</td></tr>
+<tr class="memdesc:a45440fa5c5dc5ecd15f3a46ebdbc6c69"><td class="mdescLeft">&#160;</td><td class="mdescRight">重置管理的指针  <br /></td></tr>
+<tr class="memitem:a3749a71a53673b013711c2d7e0d99a04" id="r_a3749a71a53673b013711c2d7e0d99a04"><td class="memItemLeft"><a id="a3749a71a53673b013711c2d7e0d99a04" name="a3749a71a53673b013711c2d7e0d99a04"></a>
+constexpr void&#160;</td><td class="memItemRight"><b>reset</b> (<a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a>=nullptr) noexcept</td></tr>
+<tr class="memdesc:a3749a71a53673b013711c2d7e0d99a04"><td class="mdescLeft">&#160;</td><td class="mdescRight">重置为空指针 <br /></td></tr>
+<tr class="memitem:ac8a67a1e2afda9a9a1b58b01ef5f8176" id="r_ac8a67a1e2afda9a9a1b58b01ef5f8176"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ac8a67a1e2afda9a9a1b58b01ef5f8176">swap</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a> &amp;other) noexcept</td></tr>
+<tr class="memdesc:ac8a67a1e2afda9a9a1b58b01ef5f8176"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个unique_ptr  <br /></td></tr>
 <tr class="memitem:af7b8378e519200606d28105970b6a595" id="r_af7b8378e519200606d28105970b6a595"><td class="memItemLeft"><a id="af7b8378e519200606d28105970b6a595" name="af7b8378e519200606d28105970b6a595"></a>
 &#160;</td><td class="memItemRight"><b>unique_ptr</b> (const <a class="el" href="classunique__ptr.html">unique_ptr</a> &amp;)=delete</td></tr>
 <tr class="memdesc:af7b8378e519200606d28105970b6a595"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止复制构造 <br /></td></tr>
 <tr class="memitem:a811910b5dc18f52dd96f853c80f3f37a" id="r_a811910b5dc18f52dd96f853c80f3f37a"><td class="memItemLeft"><a id="a811910b5dc18f52dd96f853c80f3f37a" name="a811910b5dc18f52dd96f853c80f3f37a"></a>
 <a class="el" href="classunique__ptr.html">unique_ptr</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (const <a class="el" href="classunique__ptr.html">unique_ptr</a> &amp;)=delete</td></tr>
 <tr class="memdesc:a811910b5dc18f52dd96f853c80f3f37a"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止复制赋值 <br /></td></tr>
-<tr class="memitem:a4a3689138ac59016d3209a1021c45eed" id="r_a4a3689138ac59016d3209a1021c45eed"><td class="memItemLeft">NEFORCE_CONSTEXPR20 <a class="el" href="group___add_qualifiers.html#gac084a21f7a057df50ed3f436567e993f">add_lvalue_reference_t</a>&lt; <a class="el" href="#a8ace3789d9c673b8141ac033485fca51">element_type</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="classunique__ptr.html#a4a3689138ac59016d3209a1021c45eed">operator*</a> () const noexcept(noexcept(*1 <a class="el" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt; <a class="el" href="#a19cef8dabae40630596ba78bb5587d7c">pointer</a> &gt;()))</td></tr>
-<tr class="memdesc:a4a3689138ac59016d3209a1021c45eed"><td class="mdescLeft">&#160;</td><td class="mdescRight">解引用运算符  <br /></td></tr>
-<tr class="memitem:adad9506f6921b78de331b68fccb8b1d2" id="r_adad9506f6921b78de331b68fccb8b1d2"><td class="memItemLeft">NEFORCE_CONSTEXPR20 <a class="el" href="#a19cef8dabae40630596ba78bb5587d7c">pointer</a>&#160;</td><td class="memItemRight"><a class="el" href="classunique__ptr.html#adad9506f6921b78de331b68fccb8b1d2">operator-&gt;</a> () const noexcept</td></tr>
-<tr class="memdesc:adad9506f6921b78de331b68fccb8b1d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">成员访问运算符  <br /></td></tr>
+<tr class="memitem:af5cc3d7575378e88f6391d805562f3c7" id="r_af5cc3d7575378e88f6391d805562f3c7"><td class="memItemLeft">constexpr <a class="el" href="group___add_qualifiers.html#gac084a21f7a057df50ed3f436567e993f">add_lvalue_reference_t</a>&lt; <a class="el" href="#a8ace3789d9c673b8141ac033485fca51">element_type</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="classunique__ptr.html#af5cc3d7575378e88f6391d805562f3c7">operator*</a> () const noexcept(noexcept(*_NEFORCE <a class="el" href="group___declval_tools.html#ga7c6502597045c02b014ec72343367f5c">declval</a>&lt; <a class="el" href="#a19cef8dabae40630596ba78bb5587d7c">pointer</a> &gt;()))</td></tr>
+<tr class="memdesc:af5cc3d7575378e88f6391d805562f3c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">解引用运算符  <br /></td></tr>
+<tr class="memitem:a28c28197efa119510c218faee72b8d2b" id="r_a28c28197efa119510c218faee72b8d2b"><td class="memItemLeft">constexpr <a class="el" href="#a19cef8dabae40630596ba78bb5587d7c">pointer</a>&#160;</td><td class="memItemRight"><a class="el" href="classunique__ptr.html#a28c28197efa119510c218faee72b8d2b">operator-&gt;</a> () const noexcept</td></tr>
+<tr class="memdesc:a28c28197efa119510c218faee72b8d2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">成员访问运算符  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename Deleter&gt;<br />
@@ -193,8 +193,8 @@ class unique_ptr&lt; T[], Deleter &gt;</div><p>数组特化的unique_ptr </p>
 
 <p class="definition">在文件 <a class="el" href="unique__ptr_8hpp_source.html">unique_ptr.hpp</a> 第 <a class="el" href="unique__ptr_8hpp_source.html#l00381">381</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
-<a id="a337628ce74bdaf0e4246f1deea147071" name="a337628ce74bdaf0e4246f1deea147071"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a337628ce74bdaf0e4246f1deea147071">&#9670;&#160;</a></span>unique_ptr() <span class="overload">[1/5]</span></h2>
+<a id="a6c19679e3b9251cf767d668501ac0580" name="a6c19679e3b9251cf767d668501ac0580"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c19679e3b9251cf767d668501ac0580">&#9670;&#160;</a></span>unique_ptr() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -207,7 +207,7 @@ template&lt;typename U, typename Del = Deleter, typename = DeleterConstraint&lt;
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::unique_ptr </td>
+          <td class="memname"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::unique_ptr </td>
           <td>(</td>
           <td class="paramtype">U</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
           <td></td>
@@ -215,7 +215,7 @@ template&lt;typename U, typename Del = Deleter, typename = DeleterConstraint&lt;
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -241,8 +241,8 @@ template&lt;typename U, typename Del = Deleter, typename = DeleterConstraint&lt;
 
 </div>
 </div>
-<a id="a8e4e3f9349fad379cd3c58b8cf0c53dc" name="a8e4e3f9349fad379cd3c58b8cf0c53dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e4e3f9349fad379cd3c58b8cf0c53dc">&#9670;&#160;</a></span>unique_ptr() <span class="overload">[2/5]</span></h2>
+<a id="a75f743d402fe6c9838e1bea599ff9983" name="a75f743d402fe6c9838e1bea599ff9983"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75f743d402fe6c9838e1bea599ff9983">&#9670;&#160;</a></span>unique_ptr() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -255,7 +255,7 @@ template&lt;typename U, typename Del = deleter_type, <a class="el" href="group__
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::unique_ptr </td>
+          <td class="memname"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::unique_ptr </td>
           <td>(</td>
           <td class="paramtype">U</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -267,7 +267,7 @@ template&lt;typename U, typename Del = deleter_type, <a class="el" href="group__
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -292,8 +292,8 @@ template&lt;typename U, typename Del = deleter_type, <a class="el" href="group__
 
 </div>
 </div>
-<a id="a007644845a7ac5df7d978b2d490b86b4" name="a007644845a7ac5df7d978b2d490b86b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a007644845a7ac5df7d978b2d490b86b4">&#9670;&#160;</a></span>unique_ptr() <span class="overload">[3/5]</span></h2>
+<a id="a3dc90e8ea05c965f330203dfa1610d2a" name="a3dc90e8ea05c965f330203dfa1610d2a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dc90e8ea05c965f330203dfa1610d2a">&#9670;&#160;</a></span>unique_ptr() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -306,7 +306,7 @@ template&lt;typename U, typename Del = deleter_type, <a class="el" href="group__
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::unique_ptr </td>
+          <td class="memname"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::unique_ptr </td>
           <td>(</td>
           <td class="paramtype">U</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -318,7 +318,7 @@ template&lt;typename U, typename Del = deleter_type, <a class="el" href="group__
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -384,8 +384,8 @@ template&lt;typename Del = Deleter, typename = DeleterConstraint&lt;Del&gt;&gt; 
 
 </div>
 </div>
-<a id="a73848629a27adffebcc5c8a47a330e6e" name="a73848629a27adffebcc5c8a47a330e6e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a73848629a27adffebcc5c8a47a330e6e">&#9670;&#160;</a></span>unique_ptr() <span class="overload">[5/5]</span></h2>
+<a id="ac27cdb468b4614ef836c3df41469a24e" name="ac27cdb468b4614ef836c3df41469a24e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac27cdb468b4614ef836c3df41469a24e">&#9670;&#160;</a></span>unique_ptr() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -398,7 +398,7 @@ template&lt;typename U, typename E, <a class="el" href="group___type_traits_util
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::unique_ptr </td>
+          <td class="memname"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::unique_ptr </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td></td>
@@ -406,7 +406,7 @@ template&lt;typename U, typename E, <a class="el" href="group___type_traits_util
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -433,8 +433,8 @@ template&lt;typename U, typename E, <a class="el" href="group___type_traits_util
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="ab8c3eb74c61eed55b2ad0d82307e9b7e" name="ab8c3eb74c61eed55b2ad0d82307e9b7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8c3eb74c61eed55b2ad0d82307e9b7e">&#9670;&#160;</a></span>operator bool()</h2>
+<a id="a24fdc0b9412ce7ba3f2b58e142f05710" name="a24fdc0b9412ce7ba3f2b58e142f05710"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24fdc0b9412ce7ba3f2b58e142f05710">&#9670;&#160;</a></span>operator bool()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -445,7 +445,7 @@ template&lt;typename T, typename Deleter&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::operator bool </td>
+          <td class="memname"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::operator bool </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -453,7 +453,7 @@ template&lt;typename T, typename Deleter&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -467,8 +467,8 @@ template&lt;typename T, typename Deleter&gt; </div>
 
 </div>
 </div>
-<a id="a4a3689138ac59016d3209a1021c45eed" name="a4a3689138ac59016d3209a1021c45eed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4a3689138ac59016d3209a1021c45eed">&#9670;&#160;</a></span>operator*()</h2>
+<a id="af5cc3d7575378e88f6391d805562f3c7" name="af5cc3d7575378e88f6391d805562f3c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5cc3d7575378e88f6391d805562f3c7">&#9670;&#160;</a></span>operator*()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -477,7 +477,7 @@ template&lt;typename T, typename Deleter&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="group___add_qualifiers.html#gac084a21f7a057df50ed3f436567e993f">add_lvalue_reference_t</a>&lt; <a class="el" href="#a8ace3789d9c673b8141ac033485fca51">element_type</a> &gt; <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, Deleter &gt;::operator* </td>
+          <td class="memname"><a class="el" href="group___add_qualifiers.html#gac084a21f7a057df50ed3f436567e993f">add_lvalue_reference_t</a>&lt; <a class="el" href="#a8ace3789d9c673b8141ac033485fca51">element_type</a> &gt; <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, Deleter &gt;::operator* </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -485,7 +485,7 @@ template&lt;typename T, typename Deleter&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -497,8 +497,8 @@ template&lt;typename T, typename Deleter&gt; </div>
 
 </div>
 </div>
-<a id="adad9506f6921b78de331b68fccb8b1d2" name="adad9506f6921b78de331b68fccb8b1d2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adad9506f6921b78de331b68fccb8b1d2">&#9670;&#160;</a></span>operator-&gt;()</h2>
+<a id="a28c28197efa119510c218faee72b8d2b" name="a28c28197efa119510c218faee72b8d2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28c28197efa119510c218faee72b8d2b">&#9670;&#160;</a></span>operator-&gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -507,7 +507,7 @@ template&lt;typename T, typename Deleter&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="#a19cef8dabae40630596ba78bb5587d7c">pointer</a> <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, Deleter &gt;::operator-&gt; </td>
+          <td class="memname"><a class="el" href="#a19cef8dabae40630596ba78bb5587d7c">pointer</a> <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T, Deleter &gt;::operator-&gt; </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -515,7 +515,7 @@ template&lt;typename T, typename Deleter&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -527,8 +527,8 @@ template&lt;typename T, typename Deleter&gt; </div>
 
 </div>
 </div>
-<a id="accad32a5dda96be9d8c9522ec1dc5dc3" name="accad32a5dda96be9d8c9522ec1dc5dc3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#accad32a5dda96be9d8c9522ec1dc5dc3">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="aae5ade1d83f5f2272dcbe813eebeff8a" name="aae5ade1d83f5f2272dcbe813eebeff8a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae5ade1d83f5f2272dcbe813eebeff8a">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -539,7 +539,7 @@ template&lt;typename T, typename Deleter&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a> &amp; <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::operator= </td>
+          <td class="memname"><a class="el" href="classunique__ptr.html">unique_ptr</a> &amp; <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::operator= </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a></td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -547,7 +547,7 @@ template&lt;typename T, typename Deleter&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -561,21 +561,21 @@ template&lt;typename T, typename Deleter&gt; </div>
 
 </div>
 </div>
-<a id="ad1f11fdde703e70ac712dfea679c0fc8" name="ad1f11fdde703e70ac712dfea679c0fc8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad1f11fdde703e70ac712dfea679c0fc8">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a874b7a5affdbb64a296e9691a30d52b9" name="a874b7a5affdbb64a296e9691a30d52b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a874b7a5affdbb64a296e9691a30d52b9">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename T, typename Deleter&gt; </div>
 <div class="memtemplate">
-template&lt;typename U, typename E, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#gaf49fb9070ceeed735b3dddc7da0392d7">conjunction_v</a>&lt; safe_conversion&lt; U, E &gt;, <a class="el" href="structis__assignable.html">is_assignable</a>&lt; <a class="el" href="#a9504d2b7f5461b852f2eaf56350b74b1">deleter_type</a> &amp;, E &amp;&amp; &gt; &gt;, int &gt; = 0&gt; </div>
+template&lt;typename U, typename E, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___type_traits_utilities.html#ga5672914b2f1f9c1c4c50ded53a8db2e3">conjunction_v</a>&lt; safe_conversion&lt; U, E &gt;, <a class="el" href="structis__assignable.html">is_assignable</a>&lt; <a class="el" href="#a9504d2b7f5461b852f2eaf56350b74b1">deleter_type</a> &amp;, E &amp;&amp; &gt; &gt;, int &gt; = 0&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="classunique__ptr.html">unique_ptr</a> &amp; <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::operator= </td>
+          <td class="memname"><a class="el" href="classunique__ptr.html">unique_ptr</a> &amp; <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::operator= </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; U, E &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td></td>
@@ -583,7 +583,7 @@ template&lt;typename U, typename E, <a class="el" href="group___type_traits_util
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -610,8 +610,8 @@ template&lt;typename U, typename E, <a class="el" href="group___type_traits_util
 
 </div>
 </div>
-<a id="a419a6712835ceb63c2332d96fae3327e" name="a419a6712835ceb63c2332d96fae3327e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a419a6712835ceb63c2332d96fae3327e">&#9670;&#160;</a></span>operator[]()</h2>
+<a id="afed2254c56a0415df65930e5e7d0f91d" name="afed2254c56a0415df65930e5e7d0f91d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afed2254c56a0415df65930e5e7d0f91d">&#9670;&#160;</a></span>operator[]()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -622,7 +622,7 @@ template&lt;typename T, typename Deleter&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="group___add_qualifiers.html#gac084a21f7a057df50ed3f436567e993f">add_lvalue_reference_t</a>&lt; <a class="el" href="#a8ace3789d9c673b8141ac033485fca51">element_type</a> &gt; <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::operator[] </td>
+          <td class="memname"><a class="el" href="group___add_qualifiers.html#gac084a21f7a057df50ed3f436567e993f">add_lvalue_reference_t</a>&lt; <a class="el" href="#a8ace3789d9c673b8141ac033485fca51">element_type</a> &gt; <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::operator[] </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>idx</em></span></td><td>)</td>
           <td> const</td>
@@ -630,7 +630,7 @@ template&lt;typename T, typename Deleter&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -650,8 +650,8 @@ template&lt;typename T, typename Deleter&gt; </div>
 
 </div>
 </div>
-<a id="a9e16512f0f1ee0f05ccebe9fd4199d15" name="a9e16512f0f1ee0f05ccebe9fd4199d15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9e16512f0f1ee0f05ccebe9fd4199d15">&#9670;&#160;</a></span>reset()</h2>
+<a id="a45440fa5c5dc5ecd15f3a46ebdbc6c69" name="a45440fa5c5dc5ecd15f3a46ebdbc6c69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45440fa5c5dc5ecd15f3a46ebdbc6c69">&#9670;&#160;</a></span>reset()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -664,7 +664,7 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 void <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::reset </td>
+          <td class="memname">void <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::reset </td>
           <td>(</td>
           <td class="paramtype">U</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
           <td></td>
@@ -672,7 +672,7 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -697,8 +697,8 @@ template&lt;typename U, <a class="el" href="group___type_traits_utilities.html#g
 
 </div>
 </div>
-<a id="a8a09e0389ccad830e6eb29f8b5333b57" name="a8a09e0389ccad830e6eb29f8b5333b57"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a09e0389ccad830e6eb29f8b5333b57">&#9670;&#160;</a></span>swap()</h2>
+<a id="ac8a67a1e2afda9a9a1b58b01ef5f8176" name="ac8a67a1e2afda9a9a1b58b01ef5f8176"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8a67a1e2afda9a9a1b58b01ef5f8176">&#9670;&#160;</a></span>swap()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -709,7 +709,7 @@ template&lt;typename T, typename Deleter&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 void <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::swap </td>
+          <td class="memname">void <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt;::swap </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T[], Deleter &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td></td>
@@ -717,7 +717,7 @@ template&lt;typename T, typename Deleter&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

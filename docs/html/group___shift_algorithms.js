@@ -10,7 +10,7 @@ var group___shift_algorithms =
     [ "for_each_n", "group___shift_algorithms.html#ga300a18e436a38ca8585e2d174ce30a8b", null ],
     [ "generate", "group___shift_algorithms.html#gad0b532388a6235965ae2562b1f8d66d8", null ],
     [ "generate_n", "group___shift_algorithms.html#ga901149b24c5b7875f92f94964cc66327", null ],
-    [ "iter_swap", "group___shift_algorithms.html#ga309693af10e7b124bdab41ac99f7edc3", null ],
+    [ "iter_swap", "group___shift_algorithms.html#gaf24b9918e7d6e917eb59c4c5f9cd613d", null ],
     [ "move", "group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac", null ],
     [ "move_backward", "group___shift_algorithms.html#gaa743a8f01eb9828a1fe0ad25f8026c46", null ],
     [ "replace", "group___shift_algorithms.html#ga28ebd75930fa85d6fbf02dbf7d4abd9a", null ],

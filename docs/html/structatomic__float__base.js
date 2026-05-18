@@ -17,12 +17,12 @@ var structatomic__float__base =
     [ "fetch_add", "structatomic__float__base.html#aa2bce04ca3567dd2c7e87b42a76d6987", null ],
     [ "fetch_sub", "structatomic__float__base.html#a112fcfb6ef70dc2534ae60fbdc7a8305", null ],
     [ "fetch_sub", "structatomic__float__base.html#a77a0872204ea3809970be5c7f24b0b5e", null ],
-    [ "is_lock_free", "structatomic__float__base.html#a4b9355877aeae9766f4fdf90eac89fb4", null ],
-    [ "is_lock_free", "structatomic__float__base.html#ae1757d7cd0f4fa2ef7e0ccf645904002", null ],
+    [ "is_lock_free", "structatomic__float__base.html#a147a54a0d9a8e4f5bbbcb1b12ca6ecfb", null ],
+    [ "is_lock_free", "structatomic__float__base.html#a7736c3a4bb5a1622d5f9211a51f54fb7", null ],
     [ "load", "structatomic__float__base.html#a29b2baabe03baf61591b9678f3bce0b5", null ],
     [ "load", "structatomic__float__base.html#af3f2740586f78d8519bbc2d50c94b368", null ],
-    [ "notify_all", "structatomic__float__base.html#a2384d636f50b3b9dd8d1415a9e0ee2c2", null ],
-    [ "notify_one", "structatomic__float__base.html#ae2b41b8d4924da0f9ddde463ee268e91", null ],
+    [ "notify_all", "structatomic__float__base.html#a82c3558541247e7c7b8f8c1213e28690", null ],
+    [ "notify_one", "structatomic__float__base.html#ae45c4ea5abca19092825a7430db2c216", null ],
     [ "operator Float", "structatomic__float__base.html#a68121834fafd480f478b9f5f76dd3b66", null ],
     [ "operator Float", "structatomic__float__base.html#a5b70370c39d3aa92f895e03dd759565d", null ],
     [ "operator+=", "structatomic__float__base.html#adc25a99309d0c060ac7a8e1b29aa1561", null ],
@@ -33,5 +33,5 @@ var structatomic__float__base =
     [ "operator=", "structatomic__float__base.html#a7b15eed5ad948247ec7af43b2d96a92d", null ],
     [ "store", "structatomic__float__base.html#ad2b5a33f24780146bb9f19778ad73ef8", null ],
     [ "store", "structatomic__float__base.html#a6308fb3482a27cce1f042199cd411c96", null ],
-    [ "wait", "structatomic__float__base.html#a66cdf2efe9764bb6ebee8356b15b780d", null ]
+    [ "wait", "structatomic__float__base.html#a2a3fac8c95a386a12d61f97c32909e3a", null ]
 ];

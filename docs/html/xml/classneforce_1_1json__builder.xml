@@ -1,0 +1,1061 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1json__builder" kind="class" language="C++" prot="public">
+    <compoundname>neforce::json_builder</compoundname>
+    <includes refid="json__builder_8hpp" local="no">json_builder.hpp</includes>
+    <innerclass refid="structneforce_1_1json__builder_1_1frame" prot="private">neforce::json_builder::frame</innerclass>
+    <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classneforce_1_1json__builder_1acaa3e12b5eb5c7acf4be9aa635b68238" prot="private" static="no" strong="no">
+        <type></type>
+        <name>range_type</name>
+        <qualifiedname>neforce::json_builder::range_type</qualifiedname>
+        <enumvalue id="classneforce_1_1json__builder_1acaa3e12b5eb5c7acf4be9aa635b68238ab7e233b7380808d47c13186ff4ce4baa" prot="private">
+          <name>object</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1json__builder_1acaa3e12b5eb5c7acf4be9aa635b68238abcf0c8f1ac1d62838fa5f8ef066b42fa" prot="private">
+          <name>array</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>上下文类型枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="44" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="44" bodyend="47"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1json__builder_1a72d5c366489c3674d8e5bf587fe3e97e" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1stack" kindref="compound">stack</ref>&lt; frame &gt;</type>
+        <definition>stack&lt;frame&gt; neforce::json_builder::contexts_</definition>
+        <argsstring></argsstring>
+        <name>contexts_</name>
+        <qualifiedname>neforce::json_builder::contexts_</qualifiedname>
+        <briefdescription>
+<para>上下文栈 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="77" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1json__builder_1af7ab2e69290018aaee73711da9ffb5c2" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1json__value" kindref="compound">json_value</ref> &gt;</type>
+        <definition>unique_ptr&lt;json_value&gt; neforce::json_builder::root_</definition>
+        <argsstring></argsstring>
+        <name>root_</name>
+        <qualifiedname>neforce::json_builder::root_</qualifiedname>
+        <briefdescription>
+<para>根节点 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="78" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1json__builder_1a8b89d67b4be896a9d52748c5d151de6f" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::json_builder::current_key_</definition>
+        <argsstring></argsstring>
+        <name>current_key_</name>
+        <qualifiedname>neforce::json_builder::current_key_</qualifiedname>
+        <briefdescription>
+<para>当前对象的键名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="79" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1json__builder_1af56d2ee97ab5700898eb0e68ca48e8c5" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::value_impl</definition>
+        <argsstring>(unique_ptr&lt; T &gt; value)</argsstring>
+        <name>value_impl</name>
+        <qualifiedname>neforce::json_builder::value_impl</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; T &gt;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>值设置的通用实现 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>JSON值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要设置的值指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1json__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效或键名缺失时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+根据当前上下文决定值的放置位置：<itemizedlist>
+<listitem><para>顶层：设置为根节点</para>
+</listitem><listitem><para>数组中：作为新元素添加</para>
+</listitem><listitem><para>对象中：与当前键名配对添加 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="95" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="95" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1ac41bdd9b73b00f0fe6f283e7e09476a3" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterable</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_action_check_1ga868b703506f6bb0ed800378058e2df7c" kindref="member">is_iterable_v</ref>&lt; Iterable &gt;, json_builder &amp; &gt;</type>
+        <definition>enable_if_t&lt; is_iterable_v&lt; Iterable &gt;, json_builder &amp; &gt; neforce::json_builder::value_iterable_dispatch</definition>
+        <argsstring>(const Iterable &amp;iterable)</argsstring>
+        <name>value_iterable_dispatch</name>
+        <qualifiedname>neforce::json_builder::value_iterable_dispatch</qualifiedname>
+        <param>
+          <type>const Iterable &amp;</type>
+          <declname>iterable</declname>
+        </param>
+        <briefdescription>
+<para>可迭代类型的分派函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可迭代类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>iterable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可迭代对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="123" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="123" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a50faa97365da1837a011db466e4cc30c" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Map</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_action_check_1ga80b2d444543224db10bcb49f6d87761d" kindref="member">is_maplike_v</ref>&lt; Map &gt;, json_builder &amp; &gt;</type>
+        <definition>enable_if_t&lt; is_maplike_v&lt; Map &gt;, json_builder &amp; &gt; neforce::json_builder::value_iterable_impl</definition>
+        <argsstring>(const Map &amp;maplike)</argsstring>
+        <name>value_iterable_impl</name>
+        <qualifiedname>neforce::json_builder::value_iterable_impl</qualifiedname>
+        <param>
+          <type>const Map &amp;</type>
+          <declname>maplike</declname>
+        </param>
+        <briefdescription>
+<para>映射表类型的实现（转换为JSON对象） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Map</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>映射表类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>maplike</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>映射表对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="134" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="134" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a95de118caf8bfd802b80deb087afa488" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterable</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_action_check_1ga80b2d444543224db10bcb49f6d87761d" kindref="member">is_maplike_v</ref>&lt; Iterable &gt;, json_builder &amp; &gt;</type>
+        <definition>enable_if_t&lt;!is_maplike_v&lt; Iterable &gt;, json_builder &amp; &gt; neforce::json_builder::value_iterable_impl</definition>
+        <argsstring>(const Iterable &amp;iterable)</argsstring>
+        <name>value_iterable_impl</name>
+        <qualifiedname>neforce::json_builder::value_iterable_impl</qualifiedname>
+        <param>
+          <type>const Iterable &amp;</type>
+          <declname>iterable</declname>
+        </param>
+        <briefdescription>
+<para>一般可迭代类型的实现（转换为JSON数组） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可迭代类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>iterable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可迭代对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="150" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="150" bodyend="157"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a3577aa0c3ffbf872859aff28a1835f25" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::json_builder::json_builder</definition>
+        <argsstring>()=default</argsstring>
+        <name>json_builder</name>
+        <qualifiedname>neforce::json_builder::json_builder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="160" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1ab2cd58488b7a410cf45c112a7bf8c0d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::json_builder::~json_builder</definition>
+        <argsstring>()=default</argsstring>
+        <name>~json_builder</name>
+        <qualifiedname>neforce::json_builder::~json_builder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="161" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1ac6b5f3a35f7bc88572327bd18cd196e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::json_builder::json_builder</definition>
+        <argsstring>(const json_builder &amp;)=delete</argsstring>
+        <name>json_builder</name>
+        <qualifiedname>neforce::json_builder::json_builder</qualifiedname>
+        <param>
+          <type>const json_builder &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="163" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a96db7d338df3e236b67db008b992024f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::operator=</definition>
+        <argsstring>(const json_builder &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::json_builder::operator=</qualifiedname>
+        <param>
+          <type>const json_builder &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="164" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a7a6db1c46e28e7ae9b453451dc61e310" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::json_builder::json_builder</definition>
+        <argsstring>(json_builder &amp;&amp;other) noexcept=default</argsstring>
+        <name>json_builder</name>
+        <qualifiedname>neforce::json_builder::json_builder</qualifiedname>
+        <param>
+          <type>json_builder &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="166" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1ad7b37bde60cd672c983ce58f3326be55" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::operator=</definition>
+        <argsstring>(json_builder &amp;&amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::json_builder::operator=</qualifiedname>
+        <param>
+          <type>json_builder &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="167" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a51b7534d23034dab1fd4753ef4f6bb7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::begin_object</definition>
+        <argsstring>()</argsstring>
+        <name>begin_object</name>
+        <qualifiedname>neforce::json_builder::begin_object</qualifiedname>
+        <briefdescription>
+<para>开始一个JSON对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1json__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当根节点已存在或键名缺失时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建一个新的JSON对象，并压入上下文栈。 如果当前在顶层，该对象将成为根节点； 否则作为当前上下文的值添加。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="178" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1af8c014ab395dfd4d026d13d360be24d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::begin_array</definition>
+        <argsstring>()</argsstring>
+        <name>begin_array</name>
+        <qualifiedname>neforce::json_builder::begin_array</qualifiedname>
+        <briefdescription>
+<para>开始一个JSON数组 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1json__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当根节点已存在或键名缺失时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建一个新的JSON数组，并压入上下文栈。 如果当前在顶层，该数组将成为根节点； 否则作为当前上下文的值添加。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="189" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1aa51361e5ca43d9a2ef1fac4891c2f435" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::end_object</definition>
+        <argsstring>()</argsstring>
+        <name>end_object</name>
+        <qualifiedname>neforce::json_builder::end_object</qualifiedname>
+        <briefdescription>
+<para>结束当前JSON对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1json__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当没有对象可关闭或存在未完成的键值对时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+弹出上下文栈顶的对象，返回上一层。 必须与 begin_object 配对使用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="199" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a55e9e14aa09c64c1644b38696e3c772f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::end_array</definition>
+        <argsstring>()</argsstring>
+        <name>end_array</name>
+        <qualifiedname>neforce::json_builder::end_array</qualifiedname>
+        <briefdescription>
+<para>结束当前JSON数组 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1json__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当没有数组可关闭时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+弹出上下文栈顶的数组，返回上一层。 必须与 begin_array 配对使用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="209" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a73288e2e05b6d830b73352b3cb153e55" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::key</definition>
+        <argsstring>(const string &amp;key)</argsstring>
+        <name>key</name>
+        <qualifiedname>neforce::json_builder::key</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>设置当前对象的键名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1json__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当不在对象上下文中或键名已设置时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+为后续的值设置键名，仅在对象上下文中有效。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="219" column="18"/>
+        <references refid="classneforce_1_1json__builder_1a73288e2e05b6d830b73352b3cb153e55">key</references>
+        <referencedby refid="classneforce_1_1json__builder_1a73288e2e05b6d830b73352b3cb153e55">key</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a89dce33ffe841f5d1390caca83041a65" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::value</definition>
+        <argsstring>(nullptr_t np)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::json_builder::value</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gacb98a47b9e384b2934a9c2dbd3c2d598" kindref="member">nullptr_t</ref></type>
+          <declname>np</declname>
+        </param>
+        <briefdescription>
+<para>设置null值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>np</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空指针标记 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1json__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效或键名缺失时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="227" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="227" bodyend="227"/>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <referencedby refid="classneforce_1_1json__builder_1ae54b6e579ab0983ad177fcaae7d9ac03" compoundref="json__builder_8hpp" startline="275" endline="275">value</referencedby>
+        <referencedby refid="classneforce_1_1json__builder_1a221f679ce7655e6256d6e0667d73c7c8" compoundref="json__builder_8hpp" startline="243" endline="243">value</referencedby>
+        <referencedby refid="classneforce_1_1json__builder_1ae176d651cb1675fa8f268c3806113868" compoundref="json__builder_8hpp" startline="259" endline="259">value</referencedby>
+        <referencedby refid="classneforce_1_1json__builder_1a3e11fc0476cec91cc7a9e5d1ab654915" compoundref="json__builder_8hpp" startline="267" endline="267">value</referencedby>
+        <referencedby refid="classneforce_1_1json__builder_1a10cc96d957ff643351b5ee0e8c9b5207" compoundref="json__builder_8hpp" startline="235" endline="235">value</referencedby>
+        <referencedby refid="classneforce_1_1json__builder_1a5459abea50e80fab1585653f8654bb51" compoundref="json__builder_8hpp" startline="251" endline="251">value</referencedby>
+        <referencedby refid="classneforce_1_1json__builder_1a10648264ce0db8410ba139e2168ec3c5" compoundref="json__builder_8hpp" startline="283" endline="283">value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a10cc96d957ff643351b5ee0e8c9b5207" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::value</definition>
+        <argsstring>(const string &amp;value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::json_builder::value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置字符串值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1json__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效或键名缺失时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="235" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="235" bodyend="235"/>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <references refid="classneforce_1_1json__builder_1a89dce33ffe841f5d1390caca83041a65" compoundref="json__builder_8hpp" startline="227" endline="227">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a221f679ce7655e6256d6e0667d73c7c8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::value</definition>
+        <argsstring>(const char *value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::json_builder::value</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置C字符串值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>C字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1json__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效或键名缺失时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="243" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="243" bodyend="243"/>
+        <references refid="classneforce_1_1json__builder_1a221f679ce7655e6256d6e0667d73c7c8" compoundref="json__builder_8hpp" startline="243" endline="243">value</references>
+        <references refid="classneforce_1_1json__builder_1a89dce33ffe841f5d1390caca83041a65" compoundref="json__builder_8hpp" startline="227" endline="227">value</references>
+        <referencedby refid="classneforce_1_1json__builder_1a221f679ce7655e6256d6e0667d73c7c8" compoundref="json__builder_8hpp" startline="243" endline="243">value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a5459abea50e80fab1585653f8654bb51" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::value</definition>
+        <argsstring>(const string_view value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::json_builder::value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置字符串视图值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1json__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效或键名缺失时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="251" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="251" bodyend="251"/>
+        <references refid="classneforce_1_1json__builder_1a5459abea50e80fab1585653f8654bb51" compoundref="json__builder_8hpp" startline="251" endline="251">value</references>
+        <references refid="classneforce_1_1json__builder_1a89dce33ffe841f5d1390caca83041a65" compoundref="json__builder_8hpp" startline="227" endline="227">value</references>
+        <referencedby refid="classneforce_1_1json__builder_1a5459abea50e80fab1585653f8654bb51" compoundref="json__builder_8hpp" startline="251" endline="251">value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1ae176d651cb1675fa8f268c3806113868" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::value</definition>
+        <argsstring>(const double value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::json_builder::value</qualifiedname>
+        <param>
+          <type>const double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置双精度浮点数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>双精度浮点数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1json__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效或键名缺失时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="259" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="259" bodyend="259"/>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <references refid="classneforce_1_1json__builder_1a89dce33ffe841f5d1390caca83041a65" compoundref="json__builder_8hpp" startline="227" endline="227">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a3e11fc0476cec91cc7a9e5d1ab654915" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::value</definition>
+        <argsstring>(const int value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::json_builder::value</qualifiedname>
+        <param>
+          <type>const int</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1json__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效或键名缺失时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="267" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="267" bodyend="267"/>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <references refid="classneforce_1_1json__builder_1a89dce33ffe841f5d1390caca83041a65" compoundref="json__builder_8hpp" startline="227" endline="227">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1ae54b6e579ab0983ad177fcaae7d9ac03" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::value</definition>
+        <argsstring>(const bool value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::json_builder::value</qualifiedname>
+        <param>
+          <type>const bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>布尔值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1json__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效或键名缺失时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="275" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="275" bodyend="275"/>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <references refid="classneforce_1_1json__builder_1a89dce33ffe841f5d1390caca83041a65" compoundref="json__builder_8hpp" startline="227" endline="227">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a10648264ce0db8410ba139e2168ec3c5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::value</definition>
+        <argsstring>(unique_ptr&lt; json_value &gt; &amp;&amp;value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::json_builder::value</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1json__value" kindref="compound">json_value</ref> &gt; &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置已构建的JSON值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>JSON值指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1json__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效或键名缺失时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="283" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="283" bodyend="283"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1json__builder_1a89dce33ffe841f5d1390caca83041a65" compoundref="json__builder_8hpp" startline="227" endline="227">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a9450279a0e4834eaeb75cfacc3a34340" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterable</type>
+          </param>
+        </templateparamlist>
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::value</definition>
+        <argsstring>(const Iterable &amp;iterable)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::json_builder::value</qualifiedname>
+        <param>
+          <type>const Iterable &amp;</type>
+          <declname>iterable</declname>
+        </param>
+        <briefdescription>
+<para>设置可迭代对象的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可迭代类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>iterable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可迭代对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用</para>
+</simplesect>
+根据类型自动转换为JSON对象或数组：<itemizedlist>
+<listitem><para>映射表类型转换为对象</para>
+</listitem><listitem><para>其他可迭代类型转换为数组 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="296" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="296" bodyend="298"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a16db90471ec6f881f25062e9a3d508cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::value_object</definition>
+        <argsstring>(const function&lt; void(json_builder &amp;)&gt; &amp;build_func)</argsstring>
+        <name>value_object</name>
+        <qualifiedname>neforce::json_builder::value_object</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(json_builder &amp;)&gt; &amp;</type>
+          <declname>build_func</declname>
+        </param>
+        <briefdescription>
+<para>使用函数式方式构建对象值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>build_func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构建函数，接收json_builder引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用</para>
+</simplesect>
+在独立的作用域内构建一个对象，构建完成后自动闭合。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="307" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1ae5ee55c3b0588c466291260903293cbc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>json_builder &amp;</type>
+        <definition>json_builder &amp; neforce::json_builder::value_array</definition>
+        <argsstring>(const function&lt; void(json_builder &amp;)&gt; &amp;build_func)</argsstring>
+        <name>value_array</name>
+        <qualifiedname>neforce::json_builder::value_array</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(json_builder &amp;)&gt; &amp;</type>
+          <declname>build_func</declname>
+        </param>
+        <briefdescription>
+<para>使用函数式方式构建数组值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>build_func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构建函数，接收json_builder引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用</para>
+</simplesect>
+在独立的作用域内构建一个数组，构建完成后自动闭合。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="316" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1json__builder_1a122a8a70af96abbbc2da4a7dd6178232" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1json__value" kindref="compound">json_value</ref> &gt;</type>
+        <definition>unique_ptr&lt; json_value &gt; neforce::json_builder::build</definition>
+        <argsstring>()</argsstring>
+        <name>build</name>
+        <qualifiedname>neforce::json_builder::build</qualifiedname>
+        <briefdescription>
+<para>构建JSON文档 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>构建完成的JSON值根节点 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1json__exception" kindref="compound">json_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当存在未闭合的结构或未完成的键值对时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+完成构建过程，返回构建好的JSON值。 调用前必须确保所有对象/数组都已闭合，且没有未完成的键值对。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="326" column="16"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>JSON配置构建器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供流式接口构建JSON配置格式，支持以下特性：<itemizedlist>
+<listitem><para>链式调用构建对象和数组</para>
+</listitem><listitem><para>自动类型转换（整数、浮点数、布尔值、字符串）</para>
+</listitem><listitem><para>函数式构建嵌套结构</para>
+</listitem><listitem><para>集合类型自动转换（可迭代对象、映射表）</para>
+</listitem><listitem><para>上下文管理（自动维护当前对象/数组状态） </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" line="38" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/json/json_builder.hpp" bodystart="38" bodyend="327"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1json__builder_1acaa3e12b5eb5c7acf4be9aa635b68238abcf0c8f1ac1d62838fa5f8ef066b42fa" prot="private" virt="non-virtual"><scope>neforce::json_builder</scope><name>array</name></member>
+      <member refid="classneforce_1_1json__builder_1af8c014ab395dfd4d026d13d360be24d2" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>begin_array</name></member>
+      <member refid="classneforce_1_1json__builder_1a51b7534d23034dab1fd4753ef4f6bb7f" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>begin_object</name></member>
+      <member refid="classneforce_1_1json__builder_1a122a8a70af96abbbc2da4a7dd6178232" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>build</name></member>
+      <member refid="classneforce_1_1json__builder_1a72d5c366489c3674d8e5bf587fe3e97e" prot="private" virt="non-virtual"><scope>neforce::json_builder</scope><name>contexts_</name></member>
+      <member refid="classneforce_1_1json__builder_1a8b89d67b4be896a9d52748c5d151de6f" prot="private" virt="non-virtual"><scope>neforce::json_builder</scope><name>current_key_</name></member>
+      <member refid="classneforce_1_1json__builder_1a55e9e14aa09c64c1644b38696e3c772f" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>end_array</name></member>
+      <member refid="classneforce_1_1json__builder_1aa51361e5ca43d9a2ef1fac4891c2f435" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>end_object</name></member>
+      <member refid="classneforce_1_1json__builder_1a3577aa0c3ffbf872859aff28a1835f25" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>json_builder</name></member>
+      <member refid="classneforce_1_1json__builder_1ac6b5f3a35f7bc88572327bd18cd196e4" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>json_builder</name></member>
+      <member refid="classneforce_1_1json__builder_1a7a6db1c46e28e7ae9b453451dc61e310" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>json_builder</name></member>
+      <member refid="classneforce_1_1json__builder_1a73288e2e05b6d830b73352b3cb153e55" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>key</name></member>
+      <member refid="classneforce_1_1json__builder_1acaa3e12b5eb5c7acf4be9aa635b68238ab7e233b7380808d47c13186ff4ce4baa" prot="private" virt="non-virtual"><scope>neforce::json_builder</scope><name>object</name></member>
+      <member refid="classneforce_1_1json__builder_1a96db7d338df3e236b67db008b992024f" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1json__builder_1ad7b37bde60cd672c983ce58f3326be55" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1json__builder_1acaa3e12b5eb5c7acf4be9aa635b68238" prot="private" virt="non-virtual"><scope>neforce::json_builder</scope><name>range_type</name></member>
+      <member refid="classneforce_1_1json__builder_1af7ab2e69290018aaee73711da9ffb5c2" prot="private" virt="non-virtual"><scope>neforce::json_builder</scope><name>root_</name></member>
+      <member refid="classneforce_1_1json__builder_1a89dce33ffe841f5d1390caca83041a65" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1json__builder_1a10cc96d957ff643351b5ee0e8c9b5207" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1json__builder_1a221f679ce7655e6256d6e0667d73c7c8" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1json__builder_1a5459abea50e80fab1585653f8654bb51" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1json__builder_1ae176d651cb1675fa8f268c3806113868" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1json__builder_1a3e11fc0476cec91cc7a9e5d1ab654915" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1json__builder_1ae54b6e579ab0983ad177fcaae7d9ac03" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1json__builder_1a10648264ce0db8410ba139e2168ec3c5" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1json__builder_1a9450279a0e4834eaeb75cfacc3a34340" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1json__builder_1ae5ee55c3b0588c466291260903293cbc" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>value_array</name></member>
+      <member refid="classneforce_1_1json__builder_1af56d2ee97ab5700898eb0e68ca48e8c5" prot="private" virt="non-virtual"><scope>neforce::json_builder</scope><name>value_impl</name></member>
+      <member refid="classneforce_1_1json__builder_1ac41bdd9b73b00f0fe6f283e7e09476a3" prot="private" virt="non-virtual"><scope>neforce::json_builder</scope><name>value_iterable_dispatch</name></member>
+      <member refid="classneforce_1_1json__builder_1a50faa97365da1837a011db466e4cc30c" prot="private" virt="non-virtual"><scope>neforce::json_builder</scope><name>value_iterable_impl</name></member>
+      <member refid="classneforce_1_1json__builder_1a95de118caf8bfd802b80deb087afa488" prot="private" virt="non-virtual"><scope>neforce::json_builder</scope><name>value_iterable_impl</name></member>
+      <member refid="classneforce_1_1json__builder_1a16db90471ec6f881f25062e9a3d508cb" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>value_object</name></member>
+      <member refid="classneforce_1_1json__builder_1ab2cd58488b7a410cf45c112a7bf8c0d1" prot="public" virt="non-virtual"><scope>neforce::json_builder</scope><name>~json_builder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

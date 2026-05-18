@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1base64" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::base64</compoundname>
+    <includes refid="base64_8hpp" local="no">base64.hpp</includes>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structneforce_1_1base64_1a81f193d68001a7a5edfc841524a7fbc3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>static string neforce::base64::encode</definition>
+        <argsstring>(cbyte_view data)</argsstring>
+        <name>encode</name>
+        <qualifiedname>neforce::base64::encode</qualifiedname>
+        <param>
+          <type><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Base64编码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要编码的二进制数据 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>编码后的Base64字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/base64.hpp" line="83" column="19"/>
+        <references refid="group___type_erasure_functions_1ga3b4836c7ce514573ca8d622d4a71af1f" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <referencedby refid="group___base64_1ga6225221c4cf0ba2cce8872763d8b2cac" compoundref="base64_8hpp" startline="128" endline="133">neforce::base64_encode</referencedby>
+        <referencedby refid="group___base64_1ga4c334ceeb5001bb6f4e7cb9046247637" compoundref="base64_8hpp" startline="116" endline="121">neforce::base64_encode</referencedby>
+        <referencedby refid="group___base64_1gaffde0bb9c67d8ab358ffc6b94edda024" compoundref="base64_8hpp" startline="140" endline="145">neforce::base64_encode</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1base64_1a45484312ed37472fa5a9448f540102d5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector neforce::base64::decode</definition>
+        <argsstring>(string_view data)</argsstring>
+        <name>decode</name>
+        <qualifiedname>neforce::base64::decode</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>Base64解码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Base64编码的字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解码后的二进制数据 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当输入包含非法字符时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/base64.hpp" line="91" column="24"/>
+        <references refid="group___type_erasure_functions_1ga3b4836c7ce514573ca8d622d4a71af1f" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <referencedby refid="group___base64_1ga4f4573c979341aed8596c36c30f29b9f" compoundref="base64_8hpp" startline="166" endline="172">neforce::base64_decode</referencedby>
+        <referencedby refid="group___base64_1ga0a89e2fe607273c59f9890175cc5dcb9" compoundref="base64_8hpp" startline="153" endline="159">neforce::base64_decode</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1base64_1afd89e2dc3081618072ad8816b1713bfc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>static string neforce::base64::encode_url</definition>
+        <argsstring>(cbyte_view data, bool padding=false)</argsstring>
+        <name>encode_url</name>
+        <qualifiedname>neforce::base64::encode_url</qualifiedname>
+        <param>
+          <type><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>padding</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>URL安全的Base64编码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要编码的二进制数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>padding</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否添加填充符&apos;=&apos;（默认不填充） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>URL安全的Base64字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/base64.hpp" line="99" column="19"/>
+        <references refid="group___type_erasure_functions_1ga3b4836c7ce514573ca8d622d4a71af1f" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1base64_1a74702843033666ddf0847610111ae281" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga334b1ea628395ee46f944d7eacc50543" kindref="member">byte_vector</ref></type>
+        <definition>static byte_vector neforce::base64::decode_url</definition>
+        <argsstring>(string_view data)</argsstring>
+        <name>decode_url</name>
+        <qualifiedname>neforce::base64::decode_url</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>URL安全的Base64解码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>URL安全的Base64字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解码后的二进制数据 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当输入包含非法字符时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/base64.hpp" line="107" column="24"/>
+        <references refid="group___type_erasure_functions_1ga3b4836c7ce514573ca8d622d4a71af1f" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Base64编解码结构体 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供静态方法进行Base64编码和解码操作。 编码将二进制数据转换为文本格式，解码执行逆操作。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/encrypt/base64.hpp" line="77" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/encrypt/base64.hpp" bodystart="77" bodyend="108"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1base64_1a45484312ed37472fa5a9448f540102d5" prot="public" virt="non-virtual"><scope>neforce::base64</scope><name>decode</name></member>
+      <member refid="structneforce_1_1base64_1a74702843033666ddf0847610111ae281" prot="public" virt="non-virtual"><scope>neforce::base64</scope><name>decode_url</name></member>
+      <member refid="structneforce_1_1base64_1a81f193d68001a7a5edfc841524a7fbc3" prot="public" virt="non-virtual"><scope>neforce::base64</scope><name>encode</name></member>
+      <member refid="structneforce_1_1base64_1afd89e2dc3081618072ad8816b1713bfc" prot="public" virt="non-virtual"><scope>neforce::base64</scope><name>encode_url</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

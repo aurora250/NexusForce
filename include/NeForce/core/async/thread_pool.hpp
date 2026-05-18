@@ -10,7 +10,6 @@
  */
 
 #include "NeForce/core/async/lazy_thread.hpp"
-#include "NeForce/core/async/packaged_task.hpp"
 #include "NeForce/core/async/timer.hpp"
 #include "NeForce/core/container/priority_queue.hpp"
 #include "NeForce/core/container/unordered_map.hpp"

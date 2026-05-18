@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1aligned__buffer" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::aligned_buffer</compoundname>
+    <basecompoundref refid="structneforce_1_1aligned__storage" prot="public" virt="non-virtual">neforce::aligned_storage&lt; sizeof(T), alignof(T)&gt;</basecompoundref>
+    <includes refid="aligned__buffer_8hpp" local="no">aligned_buffer.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1aligned__buffer_1a87c6572923796fec1874480d5c6f26f5" prot="public" static="no" mutable="no">
+        <type><ref refid="group___alignment_1gaab9e3d84babf7e40da3ee0d071a80135" kindref="member">aligned_storage_t</ref>&lt; sizeof(T), alignof(T)&gt;</type>
+        <definition>aligned_storage_t&lt;sizeof(T), alignof(T)&gt; neforce::aligned_buffer&lt; T &gt;::storage</definition>
+        <argsstring></argsstring>
+        <name>storage</name>
+        <qualifiedname>neforce::aligned_buffer::storage</qualifiedname>
+        <briefdescription>
+<para>实际的存储缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>使用aligned_storage_t确保内存具有正确的对齐方式。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp" line="35" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp" bodystart="35" bodyend="-1"/>
+        <referencedby refid="structneforce_1_1aligned__buffer_1abf77c22459c66b3ede227baacef61e49" compoundref="aligned__buffer_8hpp" startline="62" endline="62">neforce::aligned_buffer&lt; T &gt;::addr</referencedby>
+        <referencedby refid="structneforce_1_1aligned__buffer_1aab6a243f929ebd1b6669042d526b9b6c" compoundref="aligned__buffer_8hpp" startline="56" endline="56">neforce::aligned_buffer&lt; T &gt;::addr</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1aligned__buffer_1a93dcbcff85c268e67bb8ca07c90edb51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::aligned_buffer&lt; T &gt;::aligned_buffer</definition>
+        <argsstring>()=default</argsstring>
+        <name>aligned_buffer</name>
+        <qualifiedname>neforce::aligned_buffer::aligned_buffer</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建一个未初始化的对齐缓冲区。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp" line="42" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1aligned__buffer_1a9f5e0e76fe0967265db83eeb7e7b045b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::aligned_buffer&lt; T &gt;::aligned_buffer</definition>
+        <argsstring>(nullptr_t null)</argsstring>
+        <name>aligned_buffer</name>
+        <qualifiedname>neforce::aligned_buffer::aligned_buffer</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gacb98a47b9e384b2934a9c2dbd3c2d598" kindref="member">nullptr_t</ref></type>
+          <declname>null</declname>
+        </param>
+        <briefdescription>
+<para>nullptr_t构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>null</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>nullptr_t参数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+允许从nullptr构造对齐缓冲区，创建一个未初始化的缓冲区。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp" line="50" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1aligned__buffer_1aab6a243f929ebd1b6669042d526b9b6c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * neforce::aligned_buffer&lt; T &gt;::addr</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>addr</name>
+        <qualifiedname>neforce::aligned_buffer::addr</qualifiedname>
+        <briefdescription>
+<para>获取缓冲区的原始地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向缓冲区内存的void指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp" line="56" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp" bodystart="56" bodyend="56"/>
+        <references refid="structneforce_1_1aligned__buffer_1a87c6572923796fec1874480d5c6f26f5" compoundref="aligned__buffer_8hpp" startline="35">neforce::aligned_buffer&lt; T &gt;::storage</references>
+        <referencedby refid="structneforce_1_1aligned__buffer_1a11e70887db52b376241ec3eead926530" compoundref="aligned__buffer_8hpp" startline="76" endline="76">neforce::aligned_buffer&lt; T &gt;::ptr</referencedby>
+        <referencedby refid="structneforce_1_1aligned__buffer_1abfcfbeef113c38eb01e498b1e6c34929" compoundref="aligned__buffer_8hpp" startline="70" endline="70">neforce::aligned_buffer&lt; T &gt;::ptr</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1aligned__buffer_1abf77c22459c66b3ede227baacef61e49" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const void *</type>
+        <definition>const void * neforce::aligned_buffer&lt; T &gt;::addr</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>addr</name>
+        <qualifiedname>neforce::aligned_buffer::addr</qualifiedname>
+        <briefdescription>
+<para>获取缓冲区的原始常量地址 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向缓冲区内存的const void指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp" line="62" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp" bodystart="62" bodyend="62"/>
+        <references refid="structneforce_1_1aligned__buffer_1a87c6572923796fec1874480d5c6f26f5" compoundref="aligned__buffer_8hpp" startline="35">neforce::aligned_buffer&lt; T &gt;::storage</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1aligned__buffer_1abfcfbeef113c38eb01e498b1e6c34929" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>T *</type>
+        <definition>T * neforce::aligned_buffer&lt; T &gt;::ptr</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>ptr</name>
+        <qualifiedname>neforce::aligned_buffer::ptr</qualifiedname>
+        <briefdescription>
+<para>获取缓冲区的类型化指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向缓冲区内存的T类型指针</para>
+</simplesect>
+将原始内存解释为类型T的指针，但不构造对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp" line="70" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp" bodystart="70" bodyend="70"/>
+        <references refid="structneforce_1_1aligned__buffer_1aab6a243f929ebd1b6669042d526b9b6c" compoundref="aligned__buffer_8hpp" startline="56" endline="56">neforce::aligned_buffer&lt; T &gt;::addr</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1aligned__buffer_1a11e70887db52b376241ec3eead926530" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T *</type>
+        <definition>const T * neforce::aligned_buffer&lt; T &gt;::ptr</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>ptr</name>
+        <qualifiedname>neforce::aligned_buffer::ptr</qualifiedname>
+        <briefdescription>
+<para>获取缓冲区的类型化常量指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向缓冲区内存的const T类型指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp" line="76" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp" bodystart="76" bodyend="76"/>
+        <references refid="structneforce_1_1aligned__buffer_1aab6a243f929ebd1b6669042d526b9b6c" compoundref="aligned__buffer_8hpp" startline="56" endline="56">neforce::aligned_buffer&lt; T &gt;::addr</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>对齐缓冲区模板类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要存储的类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+提供类型安全的对齐内存缓冲区，确保内存的对齐方式与类型T一致。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::aligned_buffer&lt; T &gt;</label>
+        <link refid="structneforce_1_1aligned__buffer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::aligned_storage&lt; sizeof(T), alignof(T)&gt;</label>
+        <link refid="structneforce_1_1aligned__storage"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::aligned_buffer&lt; T &gt;</label>
+        <link refid="structneforce_1_1aligned__buffer"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::aligned_storage&lt; sizeof(T), alignof(T)&gt;</label>
+        <link refid="structneforce_1_1aligned__storage"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp" line="29" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/aligned_buffer.hpp" bodystart="29" bodyend="77"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1aligned__buffer_1aab6a243f929ebd1b6669042d526b9b6c" prot="public" virt="non-virtual"><scope>neforce::aligned_buffer</scope><name>addr</name></member>
+      <member refid="structneforce_1_1aligned__buffer_1abf77c22459c66b3ede227baacef61e49" prot="public" virt="non-virtual"><scope>neforce::aligned_buffer</scope><name>addr</name></member>
+      <member refid="structneforce_1_1aligned__buffer_1a93dcbcff85c268e67bb8ca07c90edb51" prot="public" virt="non-virtual"><scope>neforce::aligned_buffer</scope><name>aligned_buffer</name></member>
+      <member refid="structneforce_1_1aligned__buffer_1a9f5e0e76fe0967265db83eeb7e7b045b" prot="public" virt="non-virtual"><scope>neforce::aligned_buffer</scope><name>aligned_buffer</name></member>
+      <member refid="structneforce_1_1aligned__buffer_1abfcfbeef113c38eb01e498b1e6c34929" prot="public" virt="non-virtual"><scope>neforce::aligned_buffer</scope><name>ptr</name></member>
+      <member refid="structneforce_1_1aligned__buffer_1a11e70887db52b376241ec3eead926530" prot="public" virt="non-virtual"><scope>neforce::aligned_buffer</scope><name>ptr</name></member>
+      <member refid="structneforce_1_1aligned__buffer_1a87c6572923796fec1874480d5c6f26f5" prot="public" virt="non-virtual"><scope>neforce::aligned_buffer</scope><name>storage</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

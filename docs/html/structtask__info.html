@@ -111,10 +111,10 @@ Public 类型</h2></td></tr>
 Public 成员函数</h2></td></tr>
 <tr class="memitem:a6d78f8c019063bc70f0677d80c8bdbee" id="r_a6d78f8c019063bc70f0677d80c8bdbee"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6d78f8c019063bc70f0677d80c8bdbee">task_info</a> (const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> task_id, const priority_type <a class="el" href="#abe9f70aa38bf6661803112370efc8a7e">priority</a>)</td></tr>
 <tr class="memdesc:a6d78f8c019063bc70f0677d80c8bdbee"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
-<tr class="memitem:a41b52cd02dff638ccf5ee23320a17e65" id="r_a41b52cd02dff638ccf5ee23320a17e65"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a41b52cd02dff638ccf5ee23320a17e65">is_finished</a> () const noexcept</td></tr>
-<tr class="memdesc:a41b52cd02dff638ccf5ee23320a17e65"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查任务是否已完成  <br /></td></tr>
-<tr class="memitem:aa8a3170428752bd2191733b36f28ee4f" id="r_aa8a3170428752bd2191733b36f28ee4f"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa8a3170428752bd2191733b36f28ee4f">exec_time</a> () const noexcept</td></tr>
-<tr class="memdesc:aa8a3170428752bd2191733b36f28ee4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取任务执行时间  <br /></td></tr>
+<tr class="memitem:a4d1e48e097798c415288802e62d1fee2" id="r_a4d1e48e097798c415288802e62d1fee2"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a4d1e48e097798c415288802e62d1fee2">is_finished</a> () const noexcept</td></tr>
+<tr class="memdesc:a4d1e48e097798c415288802e62d1fee2"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查任务是否已完成  <br /></td></tr>
+<tr class="memitem:a9eb14f400940b6805f0ec0924e515ee6" id="r_a9eb14f400940b6805f0ec0924e515ee6"><td class="memItemLeft"><a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9eb14f400940b6805f0ec0924e515ee6">exec_time</a> () const noexcept</td></tr>
+<tr class="memdesc:a9eb14f400940b6805f0ec0924e515ee6"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取任务执行时间  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public 属性</h2></td></tr>
@@ -125,7 +125,7 @@ const <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3
 <a class="el" href="structatomic.html">atomic</a>&lt; <a class="el" href="#a82e511d7d330d103ad92f8acf75682ec">status</a> &gt;&#160;</td><td class="memItemRight"><b>status</b> {<a class="el" href="#a82e511d7d330d103ad92f8acf75682eca7c6c2e5d48ab37a007cbf70d3ea25fa4">status::pending</a>}</td></tr>
 <tr class="memdesc:a326631a3e74e507ba2cbe9118cb9e06f"><td class="mdescLeft">&#160;</td><td class="mdescRight">任务状态 <br /></td></tr>
 <tr class="memitem:a14d284999110a0f2049de841fc52b3fd" id="r_a14d284999110a0f2049de841fc52b3fd"><td class="memItemLeft"><a id="a14d284999110a0f2049de841fc52b3fd" name="a14d284999110a0f2049de841fc52b3fd"></a>
-<a class="el" href="classtimestamp.html">timestamp</a>&#160;</td><td class="memItemRight"><b>submit_time</b> {<a class="el" href="classtimestamp.html#a102f79167f112250437683da038d86df">timestamp::now</a>()}</td></tr>
+<a class="el" href="classtimestamp.html">timestamp</a>&#160;</td><td class="memItemRight"><b>submit_time</b> {<a class="el" href="classtimestamp.html#a0ee50a1d67c49633c43c769bba87a0bb">timestamp::now</a>()}</td></tr>
 <tr class="memdesc:a14d284999110a0f2049de841fc52b3fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">提交时间 <br /></td></tr>
 <tr class="memitem:a16acfc5751d1fd71ef6bf34ae7658fe9" id="r_a16acfc5751d1fd71ef6bf34ae7658fe9"><td class="memItemLeft"><a id="a16acfc5751d1fd71ef6bf34ae7658fe9" name="a16acfc5751d1fd71ef6bf34ae7658fe9"></a>
 <a class="el" href="classtimestamp.html">timestamp</a>&#160;</td><td class="memItemRight"><b>start_time</b> {0}</td></tr>
@@ -147,7 +147,7 @@ priority_type&#160;</td><td class="memItemRight"><b>priority</b></td></tr>
 <div class="textblock"><p>任务信息 </p>
 <p>存储任务的元数据，包括状态、时间戳、错误信息等。 </p>
 
-<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00224">224</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00223">223</a> 行定义.</p>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
 <a id="a82e511d7d330d103ad92f8acf75682ec" name="a82e511d7d330d103ad92f8acf75682ec"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a82e511d7d330d103ad92f8acf75682ec">&#9670;&#160;</a></span>status</h2>
@@ -181,7 +181,7 @@ priority_type&#160;</td><td class="memItemRight"><b>priority</b></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00229">229</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00228">228</a> 行定义.</p>
 
 </div>
 </div>
@@ -222,15 +222,15 @@ priority_type&#160;</td><td class="memItemRight"><b>priority</b></td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00253">253</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00252">252</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="thread__pool_8hpp_source.html#l00239">id</a> , 以及 <a class="el" href="thread__pool_8hpp_source.html#l00246">priority</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread__pool_8hpp_source.html#l00238">id</a> , 以及 <a class="el" href="thread__pool_8hpp_source.html#l00245">priority</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="aa8a3170428752bd2191733b36f28ee4f" name="aa8a3170428752bd2191733b36f28ee4f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa8a3170428752bd2191733b36f28ee4f">&#9670;&#160;</a></span>exec_time()</h2>
+<a id="a9eb14f400940b6805f0ec0924e515ee6" name="a9eb14f400940b6805f0ec0924e515ee6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9eb14f400940b6805f0ec0924e515ee6">&#9670;&#160;</a></span>exec_time()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -239,7 +239,7 @@ priority_type&#160;</td><td class="memItemRight"><b>priority</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_NODISCARD <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> task_info::exec_time </td>
+          <td class="memname"><a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> task_info::exec_time </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -247,7 +247,7 @@ priority_type&#160;</td><td class="memItemRight"><b>priority</b></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -255,14 +255,14 @@ priority_type&#160;</td><td class="memItemRight"><b>priority</b></td></tr>
 <p>获取任务执行时间 </p>
 <dl class="section return"><dt>返回</dt><dd>执行时间（微秒），未开始或未完成返回-1 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00270">270</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00269">269</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="thread__pool_8hpp_source.html#l00243">finish_time</a> , 以及 <a class="el" href="thread__pool_8hpp_source.html#l00242">start_time</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread__pool_8hpp_source.html#l00242">finish_time</a> , 以及 <a class="el" href="thread__pool_8hpp_source.html#l00241">start_time</a>.</p>
 
 </div>
 </div>
-<a id="a41b52cd02dff638ccf5ee23320a17e65" name="a41b52cd02dff638ccf5ee23320a17e65"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41b52cd02dff638ccf5ee23320a17e65">&#9670;&#160;</a></span>is_finished()</h2>
+<a id="a4d1e48e097798c415288802e62d1fee2" name="a4d1e48e097798c415288802e62d1fee2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4d1e48e097798c415288802e62d1fee2">&#9670;&#160;</a></span>is_finished()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -271,7 +271,7 @@ priority_type&#160;</td><td class="memItemRight"><b>priority</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_NODISCARD bool task_info::is_finished </td>
+          <td class="memname">bool task_info::is_finished </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -279,7 +279,7 @@ priority_type&#160;</td><td class="memItemRight"><b>priority</b></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -287,9 +287,9 @@ priority_type&#160;</td><td class="memItemRight"><b>priority</b></td></tr>
 <p>检查任务是否已完成 </p>
 <dl class="section return"><dt>返回</dt><dd>任务已完成返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00261">261</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00260">260</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="thread__pool_8hpp_source.html#l00232">completed</a>, <a class="el" href="thread__pool_8hpp_source.html#l00233">failed</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread__pool_8hpp_source.html#l00231">completed</a>, <a class="el" href="thread__pool_8hpp_source.html#l00232">failed</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
 
 </div>
 </div>

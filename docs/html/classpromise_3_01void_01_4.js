@@ -7,7 +7,7 @@ var classpromise_3_01void_01_4 =
     [ "promise", "classpromise_3_01void_01_4.html#a1bc7fd6a05bb8861144d8645c361a95b", null ],
     [ "promise", "classpromise_3_01void_01_4.html#a79894a850aab5199527197290e90e65d", null ],
     [ "~promise", "classpromise_3_01void_01_4.html#aeeeb02e8e3d6fdcd36d8b2f16a10e113", null ],
-    [ "get_future", "classpromise_3_01void_01_4.html#a3da9c44b95b28660bbb46ee5abf2f669", null ],
+    [ "get_future", "classpromise_3_01void_01_4.html#ab6d2478a2da868e4f153efc6d8076708", null ],
     [ "operator=", "classpromise_3_01void_01_4.html#a050e0ae955ddd82ff8c6748723aaea4c", null ],
     [ "operator=", "classpromise_3_01void_01_4.html#a0543dd01a3e38815590bbfeb7f4a33b1", null ],
     [ "set_exception", "classpromise_3_01void_01_4.html#ad247f65ad7a9524faf3309c3d468e377", null ],

@@ -1,0 +1,227 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1ranges_1_1repeat__view" kind="class" language="C++" prot="public">
+    <compoundname>neforce::ranges::repeat_view</compoundname>
+    <basecompoundref refid="structneforce_1_1ranges_1_1view__base" prot="public" virt="non-virtual">neforce::ranges::view_base&lt; repeat_view&lt; T &gt; &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1repeat__view_1adcc73897cb6d9360359f041153471ba4" prot="public" static="no">
+        <type>repeat_iterator&lt; T &gt;</type>
+        <definition>using neforce::ranges::repeat_view&lt; T &gt;::iterator = repeat_iterator&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>neforce::ranges::repeat_view::iterator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1220" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1220" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1repeat__view_1a9d00d665571d3dd35b03723baca6c40f" prot="public" static="no">
+        <type>repeat_sentinel&lt; T &gt;</type>
+        <definition>using neforce::ranges::repeat_view&lt; T &gt;::sentinel = repeat_sentinel&lt;T&gt;</definition>
+        <argsstring></argsstring>
+        <name>sentinel</name>
+        <qualifiedname>neforce::ranges::repeat_view::sentinel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1221" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1221" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1ranges_1_1repeat__view_1a827fd34e69d22f8cf0516695ff48b9b1" prot="public" static="no">
+        <type><ref refid="group___platform_dependent_types_1gab2c4bc5144496796ce8a7feed7b8ad58" kindref="member">ptrdiff_t</ref></type>
+        <definition>using neforce::ranges::repeat_view&lt; T &gt;::difference_type = ptrdiff_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::ranges::repeat_view::difference_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1222" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1222" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1ranges_1_1repeat__view_1afd27eb640f5c106b4dacd3903aba3574" prot="private" static="no" mutable="no">
+        <type>T</type>
+        <definition>T neforce::ranges::repeat_view&lt; T &gt;::value_</definition>
+        <argsstring></argsstring>
+        <name>value_</name>
+        <qualifiedname>neforce::ranges::repeat_view::value_</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1238" column="7" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1238" bodyend="1238"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ranges_1_1repeat__view_1a91516d6dc0fa452aa4bcca17e5a4e2a6" prot="private" static="no" mutable="no">
+        <type>difference_type</type>
+        <definition>difference_type neforce::ranges::repeat_view&lt; T &gt;::count_</definition>
+        <argsstring></argsstring>
+        <name>count_</name>
+        <qualifiedname>neforce::ranges::repeat_view::count_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1239" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1239" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1ranges_1_1repeat__view_1a180260d6a493d2229db4502dec88557f" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::ranges::repeat_view&lt; T &gt;::has_bound_</definition>
+        <argsstring></argsstring>
+        <name>has_bound_</name>
+        <qualifiedname>neforce::ranges::repeat_view::has_bound_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1240" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1240" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1repeat__view_1a900827e00218e9d9205a59883a5b9e2e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::ranges::repeat_view&lt; T &gt;::repeat_view</definition>
+        <argsstring>()=default</argsstring>
+        <name>repeat_view</name>
+        <qualifiedname>neforce::ranges::repeat_view::repeat_view</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1224" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1repeat__view_1aadb46cd004c38b743caa0b389fe460c8" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::ranges::repeat_view&lt; T &gt;::repeat_view</definition>
+        <argsstring>(T value)</argsstring>
+        <name>repeat_view</name>
+        <qualifiedname>neforce::ranges::repeat_view::repeat_view</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1226" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1226" bodyend="1227"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1repeat__view_1a7982f9f7dac29967e3f0f81e83a8c34d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::ranges::repeat_view&lt; T &gt;::repeat_view</definition>
+        <argsstring>(T value, const difference_type count)</argsstring>
+        <name>repeat_view</name>
+        <qualifiedname>neforce::ranges::repeat_view::repeat_view</qualifiedname>
+        <param>
+          <type>T</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const difference_type</type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1229" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1229" bodyend="1232"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1repeat__view_1a5561cb6dbe093c8d3ec51d31cb1cb119" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>iterator</type>
+        <definition>iterator neforce::ranges::repeat_view&lt; T &gt;::begin</definition>
+        <argsstring>() const</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::ranges::repeat_view::begin</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1234" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1234" bodyend="1234"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1ranges_1_1repeat__view_1aae7303debed54ea9461e26d6f8f3e1df" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>sentinel</type>
+        <definition>sentinel neforce::ranges::repeat_view&lt; T &gt;::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::ranges::repeat_view::end</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1235" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1235" bodyend="1235"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::ranges::repeat_view&lt; T &gt;</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::ranges::view_base&lt; repeat_view&lt; T &gt; &gt;</label>
+        <link refid="structneforce_1_1ranges_1_1view__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::ranges::repeat_view&lt; T &gt;</label>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::ranges::view_base&lt; repeat_view&lt; T &gt; &gt;</label>
+        <link refid="structneforce_1_1ranges_1_1view__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1218" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1218" bodyend="1241"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1ranges_1_1repeat__view_1a5561cb6dbe093c8d3ec51d31cb1cb119" prot="public" virt="non-virtual"><scope>neforce::ranges::repeat_view</scope><name>begin</name></member>
+      <member refid="classneforce_1_1ranges_1_1repeat__view_1a91516d6dc0fa452aa4bcca17e5a4e2a6" prot="private" virt="non-virtual"><scope>neforce::ranges::repeat_view</scope><name>count_</name></member>
+      <member refid="classneforce_1_1ranges_1_1repeat__view_1a827fd34e69d22f8cf0516695ff48b9b1" prot="public" virt="non-virtual"><scope>neforce::ranges::repeat_view</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1ranges_1_1repeat__view_1aae7303debed54ea9461e26d6f8f3e1df" prot="public" virt="non-virtual"><scope>neforce::ranges::repeat_view</scope><name>end</name></member>
+      <member refid="classneforce_1_1ranges_1_1repeat__view_1a180260d6a493d2229db4502dec88557f" prot="private" virt="non-virtual"><scope>neforce::ranges::repeat_view</scope><name>has_bound_</name></member>
+      <member refid="classneforce_1_1ranges_1_1repeat__view_1adcc73897cb6d9360359f041153471ba4" prot="public" virt="non-virtual"><scope>neforce::ranges::repeat_view</scope><name>iterator</name></member>
+      <member refid="classneforce_1_1ranges_1_1repeat__view_1a900827e00218e9d9205a59883a5b9e2e" prot="public" virt="non-virtual"><scope>neforce::ranges::repeat_view</scope><name>repeat_view</name></member>
+      <member refid="classneforce_1_1ranges_1_1repeat__view_1aadb46cd004c38b743caa0b389fe460c8" prot="public" virt="non-virtual"><scope>neforce::ranges::repeat_view</scope><name>repeat_view</name></member>
+      <member refid="classneforce_1_1ranges_1_1repeat__view_1a7982f9f7dac29967e3f0f81e83a8c34d" prot="public" virt="non-virtual"><scope>neforce::ranges::repeat_view</scope><name>repeat_view</name></member>
+      <member refid="classneforce_1_1ranges_1_1repeat__view_1a9d00d665571d3dd35b03723baca6c40f" prot="public" virt="non-virtual"><scope>neforce::ranges::repeat_view</scope><name>sentinel</name></member>
+      <member refid="classneforce_1_1ranges_1_1repeat__view_1afd27eb640f5c106b4dacd3903aba3574" prot="private" virt="non-virtual"><scope>neforce::ranges::repeat_view</scope><name>value_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -68,7 +68,7 @@
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gac3058b8518087cdea482055e5af4577a" kindref="member">is_nothrow_move_constructible_v</ref>&lt; T &gt; &amp;&amp;sizeof(T)&lt;=sizeof(storage_internal) &amp;&amp; alignof(T)&lt;=alignof(storage_internal), internal_manage&lt; T &gt;, external_manage&lt; T &gt; &gt;</type>
+        <type><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga34e3584e54b63fd9e6a35fffd41080bd" kindref="member">is_nothrow_move_constructible_v</ref>&lt; T &gt; &amp;&amp;sizeof(T)&lt;=sizeof(storage_internal) &amp;&amp; alignof(T)&lt;=alignof(storage_internal), internal_manage&lt; T &gt;, external_manage&lt; T &gt; &gt;</type>
         <definition>using any::manage_t = conditional_t&lt;is_nothrow_move_constructible_v&lt;T&gt; &amp;&amp; sizeof(T) &lt;= sizeof(storage_internal) &amp;&amp;
                                           alignof(T) &lt;= alignof(storage_internal),
                                   internal_manage&lt;T&gt;, external_manage&lt;T&gt;&gt;</definition>
@@ -495,7 +495,7 @@
             <defval>manage_t&lt;VT&gt;</defval>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga27b6602d2b9da1cb2daf37f7c15f9bf2" kindref="member">is_copy_constructible_v</ref>&lt; VT &gt; &amp;&amp;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; <ref refid="structinplace__construct__tag" kindref="compound">inplace_construct_tag</ref>, VT &gt; &amp;&amp;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; VT, <ref refid="classany" kindref="compound">any</ref> &gt;, int &gt;</type>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga03f5da2852be4424089f4235ef44dec2" kindref="member">is_copy_constructible_v</ref>&lt; VT &gt; &amp;&amp;!<ref refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" kindref="member">is_same_v</ref>&lt; <ref refid="structinplace__construct__tag" kindref="compound">inplace_construct_tag</ref>, VT &gt; &amp;&amp;!<ref refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" kindref="member">is_same_v</ref>&lt; VT, <ref refid="classany" kindref="compound">any</ref> &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
@@ -535,7 +535,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="288" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="288" bodyend="291"/>
-        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
       </memberdef>
       <memberdef kind="function" id="classany_1ad804fa85a2aa3246403e58906a8c0e63" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -547,7 +547,7 @@
             <defval><ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt;T&gt;</defval>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt; VT, <ref refid="classany" kindref="compound">any</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga27b6602d2b9da1cb2daf37f7c15f9bf2" kindref="member">is_copy_constructible_v</ref>&lt; VT &gt;, int &gt;</type>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" kindref="member">is_same_v</ref>&lt; VT, <ref refid="classany" kindref="compound">any</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga03f5da2852be4424089f4235ef44dec2" kindref="member">is_copy_constructible_v</ref>&lt; VT &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
@@ -590,7 +590,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="301" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="301" bodyend="304"/>
         <references refid="classany_1a718d15823be6e8590a24d12d981ab6fe">any</references>
-        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
       </memberdef>
       <memberdef kind="function" id="classany_1af419c43ef848b665f2a381cdfa41e93a" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -611,7 +611,7 @@
             <defval>manage_t&lt;VT&gt;</defval>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1gaf49fb9070ceeed735b3dddc7da0392d7" kindref="member">conjunction_v</ref>&lt; <ref refid="structis__copy__constructible" kindref="compound">is_copy_constructible</ref>&lt; VT &gt;, <ref refid="structis__constructible" kindref="compound">is_constructible</ref>&lt; VT, Args &amp;&amp;... &gt; &gt;, int &gt;</type>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1ga5672914b2f1f9c1c4c50ded53a8db2e3" kindref="member">conjunction_v</ref>&lt; <ref refid="structis__copy__constructible" kindref="compound">is_copy_constructible</ref>&lt; VT &gt;, <ref refid="structis__constructible" kindref="compound">is_constructible</ref>&lt; VT, Args &amp;&amp;... &gt; &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
@@ -662,7 +662,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="314" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="314" bodyend="317"/>
-        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
       </memberdef>
       <memberdef kind="function" id="classany_1aa8a6d941251c79f47757f504febd5b99" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -686,7 +686,7 @@
             <defval>manage_t&lt;VT&gt;</defval>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1gaf49fb9070ceeed735b3dddc7da0392d7" kindref="member">conjunction_v</ref>&lt; <ref refid="structis__copy__constructible" kindref="compound">is_copy_constructible</ref>&lt; VT &gt;, <ref refid="structis__constructible" kindref="compound">is_constructible</ref>&lt; VT, std::initializer_list&lt; U &gt; &amp;, Args &amp;&amp;... &gt; &gt;, int &gt;</type>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1ga5672914b2f1f9c1c4c50ded53a8db2e3" kindref="member">conjunction_v</ref>&lt; <ref refid="structis__copy__constructible" kindref="compound">is_copy_constructible</ref>&lt; VT &gt;, <ref refid="structis__constructible" kindref="compound">is_constructible</ref>&lt; VT, std::initializer_list&lt; U &gt; &amp;, Args &amp;&amp;... &gt; &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
@@ -745,7 +745,7 @@
             <defval><ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt;T&gt;</defval>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1gaf49fb9070ceeed735b3dddc7da0392d7" kindref="member">conjunction_v</ref>&lt; <ref refid="structis__copy__constructible" kindref="compound">is_copy_constructible</ref>&lt; DT &gt;, <ref refid="structis__constructible" kindref="compound">is_constructible</ref>&lt; DT, Args &amp;&amp;... &gt; &gt;, int &gt;</type>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1ga5672914b2f1f9c1c4c50ded53a8db2e3" kindref="member">conjunction_v</ref>&lt; <ref refid="structis__copy__constructible" kindref="compound">is_copy_constructible</ref>&lt; DT &gt;, <ref refid="structis__constructible" kindref="compound">is_constructible</ref>&lt; DT, Args &amp;&amp;... &gt; &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
@@ -795,7 +795,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="342" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="342" bodyend="345"/>
-        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
       </memberdef>
       <memberdef kind="function" id="classany_1aea9b89f1c3bc553cfd72245f42b9cf39" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -815,7 +815,7 @@
             <defval><ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt;T&gt;</defval>
           </param>
           <param>
-            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1gaf49fb9070ceeed735b3dddc7da0392d7" kindref="member">conjunction_v</ref>&lt; <ref refid="structis__copy__constructible" kindref="compound">is_copy_constructible</ref>&lt; DT &gt;, <ref refid="structis__constructible" kindref="compound">is_constructible</ref>&lt; DT, std::initializer_list&lt; U &gt; &amp;, Args &amp;&amp;... &gt; &gt;, int &gt;</type>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1ga5672914b2f1f9c1c4c50ded53a8db2e3" kindref="member">conjunction_v</ref>&lt; <ref refid="structis__copy__constructible" kindref="compound">is_copy_constructible</ref>&lt; DT &gt;, <ref refid="structis__constructible" kindref="compound">is_constructible</ref>&lt; DT, std::initializer_list&lt; U &gt; &amp;, Args &amp;&amp;... &gt; &gt;, int &gt;</type>
             <defval>0</defval>
           </param>
         </templateparamlist>
@@ -885,7 +885,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="360" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="360" bodyend="363"/>
-        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
       </memberdef>
       <memberdef kind="function" id="classany_1a6c4a11253f803d135685e115cf7054d8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -901,12 +901,12 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="368" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="368" bodyend="373"/>
-        <references refid="classany_1a182b9eedee844050fd9c718448b16257" compoundref="utility_2any_8hpp" startline="379" endline="379">has_value</references>
+        <references refid="classany_1aee1aabbbe7c8e3197605c0f8055e5e5a" compoundref="utility_2any_8hpp" startline="379" endline="379">has_value</references>
         <referencedby refid="classany_1a2984bd733b273daa0a9ad72df9af4b21" compoundref="utility_2any_8hpp" startline="331" endline="331">~any</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classany_1a182b9eedee844050fd9c718448b16257" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>NEFORCE_NODISCARD bool any::has_value</definition>
+      <memberdef kind="function" id="classany_1aee1aabbbe7c8e3197605c0f8055e5e5a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool any::has_value</definition>
         <argsstring>() const noexcept</argsstring>
         <name>has_value</name>
         <qualifiedname>any::has_value</qualifiedname>
@@ -920,12 +920,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="379" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="379" bodyend="379"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="379" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="379" bodyend="379"/>
         <referencedby refid="classany_1a6c4a11253f803d135685e115cf7054d8" compoundref="utility_2any_8hpp" startline="368" endline="373">reset</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classany_1a4b28d501dc036bc9a08b5e316e17144d" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD const std::type_info &amp;</type>
-        <definition>NEFORCE_NODISCARD const std::type_info &amp; any::type</definition>
+      <memberdef kind="function" id="classany_1aa2ae58660b9ac895e1dfff84b0c417ea" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const std::type_info &amp;</type>
+        <definition>const std::type_info &amp; any::type</definition>
         <argsstring>() const noexcept</argsstring>
         <name>type</name>
         <qualifiedname>any::type</qualifiedname>
@@ -939,7 +939,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="385" column="44"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="385" column="27"/>
       </memberdef>
       <memberdef kind="function" id="classany_1a7b22cb0a30ac185ccc24bdc819497088" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -970,7 +970,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="391" column="10"/>
         <references refid="classany_1a718d15823be6e8590a24d12d981ab6fe">any</references>
-        <references refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" compoundref="type__traits_8hpp" startline="2365">is_constructible_v</references>
+        <references refid="group___type_special_member_function_checks_1ga123009e89543c37bab698abc5f4221a0" compoundref="type__traits_8hpp" startline="2365">is_constructible_v</references>
         <references refid="classany_1a7b22cb0a30ac185ccc24bdc819497088">swap</references>
         <referencedby refid="classany_1a7b22cb0a30ac185ccc24bdc819497088">swap</referencedby>
       </memberdef>
@@ -996,7 +996,7 @@
       <member refid="classany_1a18e5610d000fc424d1a3f83dd2bd619c" prot="public" virt="non-virtual"><scope>any</scope><name>emplace</name></member>
       <member refid="classany_1aea9b89f1c3bc553cfd72245f42b9cf39" prot="public" virt="non-virtual"><scope>any</scope><name>emplace</name></member>
       <member refid="classany_1a493b34888cf4b31cc996fc524f2431c7afbe72e011e617b6b72b39b1ddb38233c" prot="private" virt="non-virtual"><scope>any</scope><name>GET_TYPE_INFO</name></member>
-      <member refid="classany_1a182b9eedee844050fd9c718448b16257" prot="public" virt="non-virtual"><scope>any</scope><name>has_value</name></member>
+      <member refid="classany_1aee1aabbbe7c8e3197605c0f8055e5e5a" prot="public" virt="non-virtual"><scope>any</scope><name>has_value</name></member>
       <member refid="classany_1a5160bc98a81e05d5cc0de4b952ff2889" prot="private" virt="non-virtual"><scope>any</scope><name>inner::__any_cast_aux_dispatch_impl</name></member>
       <member refid="classany_1afe89ff961a64a59f0b74583e8318513e" prot="private" virt="non-virtual"><scope>any</scope><name>manage_</name></member>
       <member refid="classany_1af89ae0de9d717eb7f649e24e9207151a" prot="private" virt="non-virtual"><scope>any</scope><name>manage_func</name></member>
@@ -1010,7 +1010,7 @@
       <member refid="classany_1a7b22cb0a30ac185ccc24bdc819497088" prot="public" virt="non-virtual"><scope>any</scope><name>swap</name></member>
       <member refid="classany_1a5e66f81b01e034196cde3de50efc83ef" prot="private" virt="non-virtual"><scope>any</scope><name>try_emplace</name></member>
       <member refid="classany_1a9557cabbba4ca2069448283770c3406f" prot="private" virt="non-virtual"><scope>any</scope><name>try_emplace</name></member>
-      <member refid="classany_1a4b28d501dc036bc9a08b5e316e17144d" prot="public" virt="non-virtual"><scope>any</scope><name>type</name></member>
+      <member refid="classany_1aa2ae58660b9ac895e1dfff84b0c417ea" prot="public" virt="non-virtual"><scope>any</scope><name>type</name></member>
       <member refid="classany_1a2984bd733b273daa0a9ad72df9af4b21" prot="public" virt="non-virtual"><scope>any</scope><name>~any</name></member>
     </listofallmembers>
   </compounddef>

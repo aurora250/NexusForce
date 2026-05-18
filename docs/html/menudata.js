@@ -27,7 +27,10 @@ var menudata={children:[
 {text:"相关页面",url:"pages.html"},
 {text:"专题",url:"topics.html"},
 {text:"命名空间",url:"namespaces.html",children:[
-{text:"命名空间列表",url:"namespaces.html"}]},
+{text:"命名空间列表",url:"namespaces.html"},
+{text:"命名空间成员",url:"namespacemembers.html",children:[
+{text:"全部",url:"namespacemembers.html"},
+{text:"变量",url:"namespacemembers_vars.html"}]}]},
 {text:"概念",url:"concepts.html"},
 {text:"类",url:"annotated.html",children:[
 {text:"类列表",url:"annotated.html"},

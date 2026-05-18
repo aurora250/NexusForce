@@ -4,9 +4,9 @@
     <compoundname>file_locker</compoundname>
     <includes refid="file__locker_8hpp" local="no">file_locker.hpp</includes>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classfile__locker_1abebd309f9dbde157606ad089e816bb2e" prot="public" static="no">
-        <type>1 <ref refid="classfile__locker_1abebd309f9dbde157606ad089e816bb2e" kindref="member">native_handle_type</ref></type>
-        <definition>using file_locker::native_handle_type = 1 native_handle_type</definition>
+      <memberdef kind="typedef" id="classfile__locker_1a06afcfbd59de71b7718b421ec9f617e9" prot="public" static="no">
+        <type>_NEFORCE <ref refid="classfile__locker_1a06afcfbd59de71b7718b421ec9f617e9" kindref="member">native_handle_type</ref></type>
+        <definition>using file_locker::native_handle_type = _NEFORCE native_handle_type</definition>
         <argsstring></argsstring>
         <name>native_handle_type</name>
         <qualifiedname>file_locker::native_handle_type</qualifiedname>
@@ -37,7 +37,7 @@
     </sectiondef>
     <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classfile__locker_1a9dd0175f6241c9627e0f8d5a0b17123c" prot="private" static="no" mutable="no">
-        <type><ref refid="classfile__locker_1abebd309f9dbde157606ad089e816bb2e" kindref="member">native_handle_type</ref></type>
+        <type><ref refid="classfile__locker_1a06afcfbd59de71b7718b421ec9f617e9" kindref="member">native_handle_type</ref></type>
         <definition>native_handle_type file_locker::handle_</definition>
         <argsstring></argsstring>
         <name>handle_</name>
@@ -60,7 +60,7 @@
         <name>file_locker</name>
         <qualifiedname>file_locker::file_locker</qualifiedname>
         <param>
-          <type><ref refid="classfile__locker_1abebd309f9dbde157606ad089e816bb2e" kindref="member">native_handle_type</ref></type>
+          <type><ref refid="classfile__locker_1a06afcfbd59de71b7718b421ec9f617e9" kindref="member">native_handle_type</ref></type>
           <declname>handle</declname>
         </param>
         <briefdescription>
@@ -82,7 +82,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="56" column="14"/>
         <references refid="classfile__locker_1a299b55e3366398a88544208942baaea2">file_locker</references>
-        <references refid="group___thread_1ga9c11108611d4c65deb691d1b88f0dc07" compoundref="thread_8hpp" startline="461" endline="467">handle</references>
+        <references refid="group___thread_1ga3b4d8e35a1675a3e99ed89c2ffe7d4f2" compoundref="thread_8hpp" startline="461" endline="467">handle</references>
         <referencedby refid="classfile__locker_1a299b55e3366398a88544208942baaea2">file_locker</referencedby>
       </memberdef>
       <memberdef kind="function" id="classfile__locker_1a226ed72a88b17c3609be90fca2870910" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -119,9 +119,9 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="59" column="17"/>
       </memberdef>
-      <memberdef kind="function" id="classfile__locker_1a6295a056f3b03adf23cdbca27c7a6b4f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>NEFORCE_NODISCARD bool file_locker::lock</definition>
+      <memberdef kind="function" id="classfile__locker_1ab93c29e79c1ab206eed9212986bd5efd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool file_locker::lock</definition>
         <argsstring>(difference_type offset, difference_type length, file_lock mode=file_lock::EXCLUSIVE) const noexcept</argsstring>
         <name>lock</name>
         <qualifiedname>file_locker::lock</qualifiedname>
@@ -173,12 +173,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="71" column="28"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="71" column="11"/>
         <references refid="group___file_1gga7ff0ce5ce53760cad46eb6509f978ecfaf45c3a0bb3687ed8e221253b3fd4a2ce" compoundref="file__constants_8hpp" startline="217">EXCLUSIVE</references>
       </memberdef>
-      <memberdef kind="function" id="classfile__locker_1aa6566b874ec5fc7480ae030b3b01cf82" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>NEFORCE_NODISCARD bool file_locker::unlock</definition>
+      <memberdef kind="function" id="classfile__locker_1a21192de3f975839312f4d3ac88e65e78" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool file_locker::unlock</definition>
         <argsstring>(difference_type offset, difference_type length) const noexcept</argsstring>
         <name>unlock</name>
         <qualifiedname>file_locker::unlock</qualifiedname>
@@ -217,11 +217,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="82" column="28"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="82" column="11"/>
       </memberdef>
-      <memberdef kind="function" id="classfile__locker_1a0199fe6291afd4c1329476c32627de8e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>NEFORCE_NODISCARD bool file_locker::try_lock</definition>
+      <memberdef kind="function" id="classfile__locker_1a669e9558cc977620adfc0d34f34cb3ab" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool file_locker::try_lock</definition>
         <argsstring>(difference_type offset, difference_type length, file_lock mode) const noexcept</argsstring>
         <name>try_lock</name>
         <qualifiedname>file_locker::try_lock</qualifiedname>
@@ -272,11 +272,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="93" column="28"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="93" column="11"/>
       </memberdef>
-      <memberdef kind="function" id="classfile__locker_1afcb0844e7a9ef723ef0a7fd419019b21" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>NEFORCE_NODISCARD bool file_locker::is_locked</definition>
+      <memberdef kind="function" id="classfile__locker_1aa403399aa34eff40552fcfbd6963dda9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool file_locker::is_locked</definition>
         <argsstring>(difference_type offset, difference_type length, file_lock *lock_out=nullptr) const noexcept</argsstring>
         <name>is_locked</name>
         <qualifiedname>file_locker::is_locked</qualifiedname>
@@ -331,11 +331,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="106" column="28"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="106" column="11"/>
       </memberdef>
-      <memberdef kind="function" id="classfile__locker_1a590e038cd2bbc2be9192a1a2e5a8b7f2" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>NEFORCE_NODISCARD bool file_locker::lock_whole</definition>
+      <memberdef kind="function" id="classfile__locker_1a656e70c2c4c94ea19f570dd3a7c952a3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool file_locker::lock_whole</definition>
         <argsstring>(file_lock mode=file_lock::EXCLUSIVE) const noexcept</argsstring>
         <name>lock_whole</name>
         <qualifiedname>file_locker::lock_whole</qualifiedname>
@@ -363,13 +363,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="116" column="28"/>
-        <references refid="classfile__locker_1a590e038cd2bbc2be9192a1a2e5a8b7f2">lock_whole</references>
-        <referencedby refid="classfile__locker_1a590e038cd2bbc2be9192a1a2e5a8b7f2">lock_whole</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="116" column="11"/>
+        <references refid="classfile__locker_1a656e70c2c4c94ea19f570dd3a7c952a3">lock_whole</references>
+        <referencedby refid="classfile__locker_1a656e70c2c4c94ea19f570dd3a7c952a3">lock_whole</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classfile__locker_1a6fa51a1483394bf3d1bb81b720a00af5" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>NEFORCE_NODISCARD bool file_locker::unlock_whole</definition>
+      <memberdef kind="function" id="classfile__locker_1a874529f6f087a7c6ce1417dfee404341" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool file_locker::unlock_whole</definition>
         <argsstring>() const noexcept</argsstring>
         <name>unlock_whole</name>
         <qualifiedname>file_locker::unlock_whole</qualifiedname>
@@ -383,9 +383,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="124" column="28"/>
-        <references refid="classfile__locker_1a6fa51a1483394bf3d1bb81b720a00af5">unlock_whole</references>
-        <referencedby refid="classfile__locker_1a6fa51a1483394bf3d1bb81b720a00af5">unlock_whole</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_locker.hpp" line="124" column="11"/>
+        <references refid="classfile__locker_1a874529f6f087a7c6ce1417dfee404341">unlock_whole</references>
+        <referencedby refid="classfile__locker_1a874529f6f087a7c6ce1417dfee404341">unlock_whole</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -410,14 +410,14 @@
       <member refid="classfile__locker_1a299b55e3366398a88544208942baaea2" prot="public" virt="non-virtual"><scope>file_locker</scope><name>file_locker</name></member>
       <member refid="classfile__locker_1a226ed72a88b17c3609be90fca2870910" prot="public" virt="non-virtual"><scope>file_locker</scope><name>file_locker</name></member>
       <member refid="classfile__locker_1a9dd0175f6241c9627e0f8d5a0b17123c" prot="private" virt="non-virtual"><scope>file_locker</scope><name>handle_</name></member>
-      <member refid="classfile__locker_1afcb0844e7a9ef723ef0a7fd419019b21" prot="public" virt="non-virtual"><scope>file_locker</scope><name>is_locked</name></member>
-      <member refid="classfile__locker_1a6295a056f3b03adf23cdbca27c7a6b4f" prot="public" virt="non-virtual"><scope>file_locker</scope><name>lock</name></member>
-      <member refid="classfile__locker_1a590e038cd2bbc2be9192a1a2e5a8b7f2" prot="public" virt="non-virtual"><scope>file_locker</scope><name>lock_whole</name></member>
-      <member refid="classfile__locker_1abebd309f9dbde157606ad089e816bb2e" prot="public" virt="non-virtual"><scope>file_locker</scope><name>native_handle_type</name></member>
+      <member refid="classfile__locker_1aa403399aa34eff40552fcfbd6963dda9" prot="public" virt="non-virtual"><scope>file_locker</scope><name>is_locked</name></member>
+      <member refid="classfile__locker_1ab93c29e79c1ab206eed9212986bd5efd" prot="public" virt="non-virtual"><scope>file_locker</scope><name>lock</name></member>
+      <member refid="classfile__locker_1a656e70c2c4c94ea19f570dd3a7c952a3" prot="public" virt="non-virtual"><scope>file_locker</scope><name>lock_whole</name></member>
+      <member refid="classfile__locker_1a06afcfbd59de71b7718b421ec9f617e9" prot="public" virt="non-virtual"><scope>file_locker</scope><name>native_handle_type</name></member>
       <member refid="classfile__locker_1a04a81c62f5ae5ceb52cbfba201534255" prot="public" virt="non-virtual"><scope>file_locker</scope><name>operator=</name></member>
-      <member refid="classfile__locker_1a0199fe6291afd4c1329476c32627de8e" prot="public" virt="non-virtual"><scope>file_locker</scope><name>try_lock</name></member>
-      <member refid="classfile__locker_1aa6566b874ec5fc7480ae030b3b01cf82" prot="public" virt="non-virtual"><scope>file_locker</scope><name>unlock</name></member>
-      <member refid="classfile__locker_1a6fa51a1483394bf3d1bb81b720a00af5" prot="public" virt="non-virtual"><scope>file_locker</scope><name>unlock_whole</name></member>
+      <member refid="classfile__locker_1a669e9558cc977620adfc0d34f34cb3ab" prot="public" virt="non-virtual"><scope>file_locker</scope><name>try_lock</name></member>
+      <member refid="classfile__locker_1a21192de3f975839312f4d3ac88e65e78" prot="public" virt="non-virtual"><scope>file_locker</scope><name>unlock</name></member>
+      <member refid="classfile__locker_1a874529f6f087a7c6ce1417dfee404341" prot="public" virt="non-virtual"><scope>file_locker</scope><name>unlock_whole</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

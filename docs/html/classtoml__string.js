@@ -7,8 +7,8 @@ var classtoml__string =
       [ "MultiLiteral", "classtoml__string.html#abbe190295df8b66da998a01531a4e431a5b6abbd2238092530e8481d249e629b0", null ]
     ] ],
     [ "toml_string", "classtoml__string.html#a52d56a3040c00d399195187394fa0548", null ],
-    [ "as_string", "classtoml__string.html#a0ac9818d29f7bcd84ac2966a7d370079", null ],
-    [ "get_string_type", "classtoml__string.html#a947543b1c785ed7b32d6924288080554", null ],
-    [ "get_value", "classtoml__string.html#ab1310eae079f16419eb4e285500f291f", null ],
-    [ "type", "classtoml__string.html#ae285f0bf26d75270939dc0908d966ad2", null ]
+    [ "as_string", "classtoml__string.html#a3c485ef6a8b118b3a457326ad9b392ef", null ],
+    [ "get_string_type", "classtoml__string.html#a43bc0a86a29c671d064327440602df90", null ],
+    [ "get_value", "classtoml__string.html#abb0077c6ffbdd262fc3dab081aabd5f3", null ],
+    [ "type", "classtoml__string.html#a7d5c26bbf7eb992c11836a8b3cc6eff9", null ]
 ];

@@ -171,9 +171,9 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic.hpp" line="78" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic.hpp" bodystart="78" bodyend="78"/>
       </memberdef>
-      <memberdef kind="function" id="structatomic_1a2b986bf2eb670e7d4f2d3a468e3de6e0" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>NEFORCE_NODISCARD bool atomic&lt; double &gt;::is_lock_free</definition>
+      <memberdef kind="function" id="structatomic_1a101b3036a9bf63cf912f9a4f151eebe0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool atomic&lt; double &gt;::is_lock_free</definition>
         <argsstring>() const noexcept</argsstring>
         <name>is_lock_free</name>
         <qualifiedname>atomic&lt; double &gt;::is_lock_free</qualifiedname>
@@ -187,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic.hpp" line="102" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic.hpp" bodystart="102" bodyend="104"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic.hpp" line="102" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic.hpp" bodystart="102" bodyend="104"/>
       </memberdef>
       <memberdef kind="function" id="structatomic_1a3e1268f8d4abb49382c713740a13234a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -202,7 +202,7 @@
         <param>
           <type>const <ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref></type>
           <declname>mo</declname>
-          <defval><ref refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" kindref="member">memory_order_seq_cst</ref></defval>
+          <defval><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref></defval>
         </param>
         <briefdescription>
 <para>原子存储操作 </para>
@@ -240,7 +240,7 @@
         <param>
           <type>const <ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref></type>
           <declname>mo</declname>
-          <defval><ref refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" kindref="member">memory_order_seq_cst</ref></defval>
+          <defval><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref></defval>
         </param>
         <briefdescription>
 <para>原子加载操作 </para>
@@ -276,7 +276,7 @@
         <param>
           <type>const <ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref></type>
           <declname>mo</declname>
-          <defval><ref refid="group___memory_order_1ga9e670570506f24d28d99c8e004906bb3" kindref="member">memory_order_seq_cst</ref></defval>
+          <defval><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref></defval>
         </param>
         <briefdescription>
 <para>原子交换操作 </para>
@@ -549,11 +549,11 @@
       <member refid="structatomic_1a5e1fce92f531d784690897010e446d8d" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>exchange</name></member>
       <member refid="structatomic__float__base_1a00883969339dafc807382196142d99d2" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>fetch_add</name></member>
       <member refid="structatomic__float__base_1a112fcfb6ef70dc2534ae60fbdc7a8305" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>fetch_sub</name></member>
-      <member refid="structatomic_1a2b986bf2eb670e7d4f2d3a468e3de6e0" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>is_lock_free</name></member>
+      <member refid="structatomic_1a101b3036a9bf63cf912f9a4f151eebe0" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>is_lock_free</name></member>
       <member refid="structatomic_1a08238b88fc524dbab833b1f2efbca3ec" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>load</name></member>
       <member refid="structatomic_1a796503ee43d29582df9d17e96971b5f7" prot="private" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>min_align</name></member>
-      <member refid="structatomic__float__base_1a2384d636f50b3b9dd8d1415a9e0ee2c2" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>notify_all</name></member>
-      <member refid="structatomic__float__base_1ae2b41b8d4924da0f9ddde463ee268e91" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>notify_one</name></member>
+      <member refid="structatomic__float__base_1a82c3558541247e7c7b8f8c1213e28690" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>notify_all</name></member>
+      <member refid="structatomic__float__base_1ae45c4ea5abca19092825a7430db2c216" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>notify_one</name></member>
       <member refid="structatomic_1aebc58046cb114024522dba369e66859c" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>operator double</name></member>
       <member refid="structatomic_1aaadf92532bf753a9ce4ae08f975a78db" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>operator double</name></member>
       <member refid="structatomic__float__base_1adc25a99309d0c060ac7a8e1b29aa1561" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>operator+=</name></member>
@@ -565,7 +565,7 @@
       <member refid="structatomic_1a3e1268f8d4abb49382c713740a13234a" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>store</name></member>
       <member refid="structatomic_1a80698dc39711363ae9b04500f4d56d2a" prot="private" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>value_</name></member>
       <member refid="structatomic_1a5789c7bdfec0dc3df322440a2dbcd6f4" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>value_type</name></member>
-      <member refid="structatomic__float__base_1a66cdf2efe9764bb6ebee8356b15b780d" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>wait</name></member>
+      <member refid="structatomic__float__base_1a2a3fac8c95a386a12d61f97c32909e3a" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>wait</name></member>
       <member refid="structatomic_3_01double_01_4_1ac69996a4643a507b2b4639ffc42ded12" prot="public" virt="non-virtual"><scope>atomic&lt; double &gt;</scope><name>~atomic</name></member>
     </listofallmembers>
   </compounddef>

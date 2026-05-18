@@ -1,8 +1,8 @@
 var vsprintf_8hpp =
 [
-    [ "scprintf", "group___buffer_format.html#gad4597f4e0031597c36c928dbf5fa391e", null ],
-    [ "snprintf", "group___buffer_format.html#gaa3dfd38220c9967f8d90345d2bcb8054", null ],
-    [ "sprintf", "group___buffer_format.html#ga956f5ada91bb688c39b4ac7ec4582a3b", null ],
-    [ "vsnprintf", "group___buffer_format.html#ga53abab34a25e74d4186f3d04083b6533", null ],
-    [ "vsprintf", "group___buffer_format.html#ga6b753f9609726ddeb67461bc1213a1fb", null ]
+    [ "scprintf", "group___buffer_format.html#ga372a5c03c825ff2bdec76da87b6fb905", null ],
+    [ "snprintf", "group___buffer_format.html#gac22e2f7e8989bfa8e363db57a208bc19", null ],
+    [ "sprintf", "group___buffer_format.html#ga7b7242261123103fbfb106a2fd8226ab", null ],
+    [ "vsnprintf", "group___buffer_format.html#gad6a3e7178ae37bda9e6556d2d3d28776", null ],
+    [ "vsprintf", "group___buffer_format.html#ga3ec7ac4151bff0f8dbe8fb827edee41c", null ]
 ];

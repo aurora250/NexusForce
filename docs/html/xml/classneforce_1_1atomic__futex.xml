@@ -1,0 +1,1037 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1atomic__futex" kind="class" language="C++" prot="public">
+    <compoundname>neforce::atomic_futex</compoundname>
+    <includes refid="atomic__futex_8hpp" local="no">atomic_futex.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <declname>WaiterBit</declname>
+        <defname>WaiterBit</defname>
+        <defval>0x80000000</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1atomic__futex_1a89e59416d869b36e746770e228763c29" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref> &gt;</type>
+        <definition>atomic&lt;uint32_t&gt; neforce::atomic_futex&lt; WaiterBit &gt;::data_</definition>
+        <argsstring></argsstring>
+        <name>data_</name>
+        <qualifiedname>neforce::atomic_futex::data_</qualifiedname>
+        <briefdescription>
+<para>原子数据存储 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="38" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1atomic__futex_1a20f878999a6ae7b88c2e2812231d756c" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::atomic_futex&lt; WaiterBit &gt;::load_and_test_until</definition>
+        <argsstring>(uint32_t assumed, const uint32_t operand, const bool equal, const memory_order mo, const bool has_timeout, const int64_t sec, const int64_t ns)</argsstring>
+        <name>load_and_test_until</name>
+        <qualifiedname>neforce::atomic_futex::load_and_test_until</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>assumed</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>operand</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>equal</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>has_timeout</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+          <declname>sec</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+          <declname>ns</declname>
+        </param>
+        <briefdescription>
+<para>加载并测试直到超时（系统时钟） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>assumed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>假设的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>operand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>操作数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>equal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否等待相等 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>has_timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否有超时 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>秒数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ns</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>纳秒数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加载的值 </para>
+</simplesect>
+<simplesect kind="note"><para>使用系统时钟进行超时控制 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="52" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="52" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__futex_1a92be19c449848df5aa970567bcb090e4" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::atomic_futex&lt; WaiterBit &gt;::load_and_test_until_steady</definition>
+        <argsstring>(uint32_t assumed, const uint32_t operand, const bool equal, const memory_order mo, const bool has_timeout, const int64_t sec, const int64_t ns)</argsstring>
+        <name>load_and_test_until_steady</name>
+        <qualifiedname>neforce::atomic_futex::load_and_test_until_steady</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>assumed</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>operand</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>equal</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>has_timeout</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+          <declname>sec</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+          <declname>ns</declname>
+        </param>
+        <briefdescription>
+<para>加载并测试直到超时（单调时钟） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>assumed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>假设的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>operand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>操作数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>equal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否等待相等 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>has_timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否有超时 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>秒数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ns</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>纳秒数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加载的值 </para>
+</simplesect>
+<simplesect kind="note"><para>使用单调时钟进行超时控制，不受系统时间调整影响 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="76" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="76" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__futex_1aaeeae7b0bddbb5f611f280fafff0eb5e" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::atomic_futex&lt; WaiterBit &gt;::load_and_test</definition>
+        <argsstring>(const uint32_t assumed, const uint32_t operand, const bool equal, const memory_order mo)</argsstring>
+        <name>load_and_test</name>
+        <qualifiedname>neforce::atomic_futex::load_and_test</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>assumed</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>operand</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>equal</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <briefdescription>
+<para>加载并测试 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>assumed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>假设的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>operand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>操作数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>equal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否等待相等 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加载的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="97" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="97" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__futex_1a05b4a86be02500c3d4b153c45b3963bd" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Dur</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::atomic_futex&lt; WaiterBit &gt;::load_and_test_until_impl</definition>
+        <argsstring>(uint32_t assumed, uint32_t operand, bool equal, memory_order mo, const time_point&lt; system_clock, Dur &gt; &amp;atime)</argsstring>
+        <name>load_and_test_until_impl</name>
+        <qualifiedname>neforce::atomic_futex::load_and_test_until_impl</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>assumed</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>operand</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>equal</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structneforce_1_1time__point" kindref="compound">time_point</ref>&lt; <ref refid="structneforce_1_1system__clock" kindref="compound">system_clock</ref>, Dur &gt; &amp;</type>
+          <declname>atime</declname>
+        </param>
+        <briefdescription>
+<para>加载并测试直到超时（系统时钟） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Dur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>持续时间类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>assumed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>假设的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>operand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>操作数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>equal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否等待相等 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>atime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绝对超时时间点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加载的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="112" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="112" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__futex_1a3d6fa6fd7d824c4a90ffb8dd9b6e1e01" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Dur</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::atomic_futex&lt; WaiterBit &gt;::load_and_test_until_impl</definition>
+        <argsstring>(uint32_t assumed, uint32_t operand, bool equal, memory_order mo, const time_point&lt; steady_clock, Dur &gt; &amp;atime)</argsstring>
+        <name>load_and_test_until_impl</name>
+        <qualifiedname>neforce::atomic_futex::load_and_test_until_impl</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>assumed</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>operand</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>equal</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structneforce_1_1time__point" kindref="compound">time_point</ref>&lt; <ref refid="structneforce_1_1steady__clock" kindref="compound">steady_clock</ref>, Dur &gt; &amp;</type>
+          <declname>atime</declname>
+        </param>
+        <briefdescription>
+<para>加载并测试直到超时（单调时钟） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Dur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>持续时间类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>assumed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>假设的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>operand</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>操作数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>equal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否等待相等 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>atime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绝对超时时间点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加载的值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="130" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="130" bodyend="135"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1atomic__futex_1a03b54fa5e9c24a2a7e0ddd28b2666c4d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::atomic_futex&lt; WaiterBit &gt;::atomic_futex</definition>
+        <argsstring>(const uint32_t data)</argsstring>
+        <name>atomic_futex</name>
+        <qualifiedname>neforce::atomic_futex::atomic_futex</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始数据值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="142" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="142" bodyend="143"/>
+        <references refid="group___type_erasure_functions_1ga3b4836c7ce514573ca8d622d4a71af1f" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__futex_1a59bcaea3d955d1e4583b70fe680593f9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>NEFORCE_ALWAYS_INLINE uint32_t neforce::atomic_futex&lt; WaiterBit &gt;::load</definition>
+        <argsstring>(const memory_order mo) const</argsstring>
+        <name>load</name>
+        <qualifiedname>neforce::atomic_futex::load</qualifiedname>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <briefdescription>
+<para>原子加载数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>加载的数据值（清除等待者标志位）</para>
+</simplesect>
+<simplesect kind="note"><para>清除等待者标志位，只返回实际数据 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="152" column="37" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="152" bodyend="154"/>
+        <referencedby refid="classneforce_1_1atomic__futex_1a2d74137a6a2a27d2d0203f170427a19f" compoundref="atomic__futex_8hpp" startline="179" endline="185">neforce::atomic_futex&lt; WaiterBit &gt;::load_when_equal</referencedby>
+        <referencedby refid="classneforce_1_1atomic__futex_1a7d5730ed81cc296f8e2aee5dcc544223" compoundref="atomic__futex_8hpp" startline="256" endline="264">neforce::atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</referencedby>
+        <referencedby refid="classneforce_1_1atomic__futex_1abbef94aa0e3dfc3f1a88620cf7a4d0fc" compoundref="atomic__futex_8hpp" startline="237" endline="245">neforce::atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</referencedby>
+        <referencedby refid="classneforce_1_1atomic__futex_1a346df38a999fad77d50f4d6032d1fffa" compoundref="atomic__futex_8hpp" startline="164" endline="170">neforce::atomic_futex&lt; WaiterBit &gt;::load_when_not_equal</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__futex_1a346df38a999fad77d50f4d6032d1fffa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>NEFORCE_ALWAYS_INLINE uint32_t neforce::atomic_futex&lt; WaiterBit &gt;::load_when_not_equal</definition>
+        <argsstring>(const uint32_t value, const memory_order mo)</argsstring>
+        <name>load_when_not_equal</name>
+        <qualifiedname>neforce::atomic_futex::load_when_not_equal</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <briefdescription>
+<para>等待直到值不等于指定值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望不相等的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前值（当不等于指定值时）</para>
+</simplesect>
+阻塞当前线程，直到数据值不等于指定的值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="164" column="36" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="164" bodyend="170"/>
+        <references refid="classneforce_1_1atomic__futex_1a59bcaea3d955d1e4583b70fe680593f9" compoundref="atomic__futex_8hpp" startline="152" endline="154">neforce::atomic_futex&lt; WaiterBit &gt;::load</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__futex_1a2d74137a6a2a27d2d0203f170427a19f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE void</type>
+        <definition>NEFORCE_ALWAYS_INLINE void neforce::atomic_futex&lt; WaiterBit &gt;::load_when_equal</definition>
+        <argsstring>(const uint32_t value, const memory_order mo)</argsstring>
+        <name>load_when_equal</name>
+        <qualifiedname>neforce::atomic_futex::load_when_equal</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <briefdescription>
+<para>等待直到值等于指定值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望相等的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+阻塞当前线程，直到数据值等于指定的值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="179" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="179" bodyend="185"/>
+        <references refid="classneforce_1_1atomic__futex_1a59bcaea3d955d1e4583b70fe680593f9" compoundref="atomic__futex_8hpp" startline="152" endline="154">neforce::atomic_futex&lt; WaiterBit &gt;::load</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__futex_1a421ba1b238a067f16e47f557804075fd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Rep</type>
+          </param>
+          <param>
+            <type>typename Period</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_ALWAYS_INLINE bool</type>
+        <definition>NEFORCE_ALWAYS_INLINE bool neforce::atomic_futex&lt; WaiterBit &gt;::load_when_equal_for</definition>
+        <argsstring>(const uint32_t value, const memory_order mo, const duration&lt; Rep, Period &gt; &amp;rtime)</argsstring>
+        <name>load_when_equal_for</name>
+        <qualifiedname>neforce::atomic_futex::load_when_equal_for</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structneforce_1_1duration" kindref="compound">duration</ref>&lt; Rep, Period &gt; &amp;</type>
+          <declname>rtime</declname>
+        </param>
+        <briefdescription>
+<para>在指定时间内等待值等于指定值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Rep</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时间表示类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Period</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时间单位比例 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望相等的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rtime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>相对超时时间 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否在超时前等到相等 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="197" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="197" bodyend="201"/>
+        <references refid="group___math_functions_1gafbf42e4400694a2b2ffea5f9eaed78c4" compoundref="math_8hpp" startline="632" endline="656">neforce::ceil</references>
+        <references refid="classneforce_1_1atomic__futex_1a64a17ec9eb4931b988dfc8a7f9058e2e" compoundref="atomic__futex_8hpp" startline="215" endline="226">neforce::atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</references>
+        <references refid="structneforce_1_1steady__clock_1a21d376e7630c7c35cde610180e214a1d">neforce::steady_clock::now</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__futex_1a64a17ec9eb4931b988dfc8a7f9058e2e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Clock</type>
+          </param>
+          <param>
+            <type>typename Dur</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_ALWAYS_INLINE bool</type>
+        <definition>NEFORCE_ALWAYS_INLINE bool neforce::atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</definition>
+        <argsstring>(const uint32_t value, const memory_order mo, const time_point&lt; Clock, Dur &gt; &amp;atime)</argsstring>
+        <name>load_when_equal_until</name>
+        <qualifiedname>neforce::atomic_futex::load_when_equal_until</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structneforce_1_1time__point" kindref="compound">time_point</ref>&lt; Clock, Dur &gt; &amp;</type>
+          <declname>atime</declname>
+        </param>
+        <briefdescription>
+<para>在指定时间点前等待值等于指定值（通用时钟） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Clock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>时钟类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Dur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>持续时间类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望相等的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>atime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绝对超时时间点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否在超时前等到相等</para>
+</simplesect>
+<simplesect kind="note"><para>将其他时钟转换为单调时钟进行处理 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="215" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="215" bodyend="226"/>
+        <references refid="group___math_functions_1gafbf42e4400694a2b2ffea5f9eaed78c4" compoundref="math_8hpp" startline="632" endline="656">neforce::ceil</references>
+        <references refid="classneforce_1_1atomic__futex_1a64a17ec9eb4931b988dfc8a7f9058e2e" compoundref="atomic__futex_8hpp" startline="215" endline="226">neforce::atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</references>
+        <references refid="structneforce_1_1steady__clock_1a21d376e7630c7c35cde610180e214a1d">neforce::steady_clock::now</references>
+        <referencedby refid="classneforce_1_1atomic__futex_1a421ba1b238a067f16e47f557804075fd" compoundref="atomic__futex_8hpp" startline="197" endline="201">neforce::atomic_futex&lt; WaiterBit &gt;::load_when_equal_for</referencedby>
+        <referencedby refid="classneforce_1_1atomic__futex_1a64a17ec9eb4931b988dfc8a7f9058e2e" compoundref="atomic__futex_8hpp" startline="215" endline="226">neforce::atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__futex_1abbef94aa0e3dfc3f1a88620cf7a4d0fc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Dur</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_ALWAYS_INLINE bool</type>
+        <definition>NEFORCE_ALWAYS_INLINE bool neforce::atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</definition>
+        <argsstring>(const uint32_t value, const memory_order mo, const time_point&lt; system_clock, Dur &gt; &amp;atime)</argsstring>
+        <name>load_when_equal_until</name>
+        <qualifiedname>neforce::atomic_futex::load_when_equal_until</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structneforce_1_1time__point" kindref="compound">time_point</ref>&lt; <ref refid="structneforce_1_1system__clock" kindref="compound">system_clock</ref>, Dur &gt; &amp;</type>
+          <declname>atime</declname>
+        </param>
+        <briefdescription>
+<para>在指定时间点前等待值等于指定值（系统时钟） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Dur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>持续时间类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望相等的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>atime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绝对超时时间点 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否在超时前等到相等 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="237" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="237" bodyend="245"/>
+        <references refid="classneforce_1_1atomic__futex_1a59bcaea3d955d1e4583b70fe680593f9" compoundref="atomic__futex_8hpp" startline="152" endline="154">neforce::atomic_futex&lt; WaiterBit &gt;::load</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__futex_1a7d5730ed81cc296f8e2aee5dcc544223" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Dur</type>
+          </param>
+        </templateparamlist>
+        <type>NEFORCE_ALWAYS_INLINE bool</type>
+        <definition>NEFORCE_ALWAYS_INLINE bool neforce::atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</definition>
+        <argsstring>(const uint32_t value, const memory_order mo, const time_point&lt; steady_clock, Dur &gt; &amp;atime)</argsstring>
+        <name>load_when_equal_until</name>
+        <qualifiedname>neforce::atomic_futex::load_when_equal_until</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structneforce_1_1time__point" kindref="compound">time_point</ref>&lt; <ref refid="structneforce_1_1steady__clock" kindref="compound">steady_clock</ref>, Dur &gt; &amp;</type>
+          <declname>atime</declname>
+        </param>
+        <briefdescription>
+<para>在指定时间点前等待值等于指定值（单调时钟） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Dur</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>持续时间类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望相等的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>atime</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>绝对超时时间点（单调时钟） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否在超时前等到相等 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="256" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="256" bodyend="264"/>
+        <references refid="classneforce_1_1atomic__futex_1a59bcaea3d955d1e4583b70fe680593f9" compoundref="atomic__futex_8hpp" startline="152" endline="154">neforce::atomic_futex&lt; WaiterBit &gt;::load</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1atomic__futex_1a2f7992eb91527504d705012bd4391086" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_ALWAYS_INLINE void</type>
+        <definition>NEFORCE_ALWAYS_INLINE void neforce::atomic_futex&lt; WaiterBit &gt;::store_notify_all</definition>
+        <argsstring>(const uint32_t value, const memory_order mo) noexcept</argsstring>
+        <name>store_notify_all</name>
+        <qualifiedname>neforce::atomic_futex::store_notify_all</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1ga6c8ae7c1b2f51ad0fc22ca0044bab9f7" kindref="member">memory_order</ref></type>
+          <declname>mo</declname>
+        </param>
+        <briefdescription>
+<para>存储新值并通知所有等待线程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要存储的值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>mo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>内存顺序</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+原子地存储新值，如果有等待线程，则唤醒所有等待线程。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="273" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="273" bodyend="278"/>
+        <references refid="group___futex_1ga9bc3835a9d345864eefbf8e600eb06c5">neforce::futex_notify</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>原子快速用户态互斥锁类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>WaiterBit</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>等待者标志位，默认为0x80000000</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+基于FUTEX实现的用户态互斥锁， 提供高效的线程同步机制，减少不必要的上下文切换。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="37" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="37" bodyend="279"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1atomic__futex_1a03b54fa5e9c24a2a7e0ddd28b2666c4d" prot="public" virt="non-virtual"><scope>neforce::atomic_futex</scope><name>atomic_futex</name></member>
+      <member refid="classneforce_1_1atomic__futex_1a89e59416d869b36e746770e228763c29" prot="private" virt="non-virtual"><scope>neforce::atomic_futex</scope><name>data_</name></member>
+      <member refid="classneforce_1_1atomic__futex_1a59bcaea3d955d1e4583b70fe680593f9" prot="public" virt="non-virtual"><scope>neforce::atomic_futex</scope><name>load</name></member>
+      <member refid="classneforce_1_1atomic__futex_1aaeeae7b0bddbb5f611f280fafff0eb5e" prot="private" virt="non-virtual"><scope>neforce::atomic_futex</scope><name>load_and_test</name></member>
+      <member refid="classneforce_1_1atomic__futex_1a20f878999a6ae7b88c2e2812231d756c" prot="private" virt="non-virtual"><scope>neforce::atomic_futex</scope><name>load_and_test_until</name></member>
+      <member refid="classneforce_1_1atomic__futex_1a05b4a86be02500c3d4b153c45b3963bd" prot="private" virt="non-virtual"><scope>neforce::atomic_futex</scope><name>load_and_test_until_impl</name></member>
+      <member refid="classneforce_1_1atomic__futex_1a3d6fa6fd7d824c4a90ffb8dd9b6e1e01" prot="private" virt="non-virtual"><scope>neforce::atomic_futex</scope><name>load_and_test_until_impl</name></member>
+      <member refid="classneforce_1_1atomic__futex_1a92be19c449848df5aa970567bcb090e4" prot="private" virt="non-virtual"><scope>neforce::atomic_futex</scope><name>load_and_test_until_steady</name></member>
+      <member refid="classneforce_1_1atomic__futex_1a2d74137a6a2a27d2d0203f170427a19f" prot="public" virt="non-virtual"><scope>neforce::atomic_futex</scope><name>load_when_equal</name></member>
+      <member refid="classneforce_1_1atomic__futex_1a421ba1b238a067f16e47f557804075fd" prot="public" virt="non-virtual"><scope>neforce::atomic_futex</scope><name>load_when_equal_for</name></member>
+      <member refid="classneforce_1_1atomic__futex_1a64a17ec9eb4931b988dfc8a7f9058e2e" prot="public" virt="non-virtual"><scope>neforce::atomic_futex</scope><name>load_when_equal_until</name></member>
+      <member refid="classneforce_1_1atomic__futex_1abbef94aa0e3dfc3f1a88620cf7a4d0fc" prot="public" virt="non-virtual"><scope>neforce::atomic_futex</scope><name>load_when_equal_until</name></member>
+      <member refid="classneforce_1_1atomic__futex_1a7d5730ed81cc296f8e2aee5dcc544223" prot="public" virt="non-virtual"><scope>neforce::atomic_futex</scope><name>load_when_equal_until</name></member>
+      <member refid="classneforce_1_1atomic__futex_1a346df38a999fad77d50f4d6032d1fffa" prot="public" virt="non-virtual"><scope>neforce::atomic_futex</scope><name>load_when_not_equal</name></member>
+      <member refid="classneforce_1_1atomic__futex_1a2f7992eb91527504d705012bd4391086" prot="public" virt="non-virtual"><scope>neforce::atomic_futex</scope><name>store_notify_all</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

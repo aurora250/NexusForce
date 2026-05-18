@@ -1,0 +1,697 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1pgsql__prepared__statement" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>neforce::pgsql_prepared_statement</compoundname>
+    <basecompoundref refid="structneforce_1_1idb__prepared__statement" prot="public" virt="non-virtual">neforce::idb_prepared_statement</basecompoundref>
+    <includes refid="pgsql__prepared__statement_8hpp" local="no">pgsql_prepared_statement.hpp</includes>
+    <innerclass refid="structneforce_1_1pgsql__prepared__statement_1_1pstmt__data" prot="private">neforce::pgsql_prepared_statement::pstmt_data</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1pgsql__prepared__statement_1af77ce96d651229ba1988e558babca5eb" prot="private" static="no" mutable="no">
+        <type>::PGconn *</type>
+        <definition>::PGconn* neforce::pgsql_prepared_statement::conn_</definition>
+        <argsstring></argsstring>
+        <name>conn_</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::conn_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>PostgreSQL连接句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="53" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1pgsql__prepared__statement_1ad63d8d3f728ba1fef094ac971d154dc0" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::pgsql_prepared_statement::stmt_name_</definition>
+        <argsstring></argsstring>
+        <name>stmt_name_</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::stmt_name_</qualifiedname>
+        <briefdescription>
+<para>预处理语句名称 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="54" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1pgsql__prepared__statement_1ae5c519e078499710f78a5c621675c68d" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::pgsql_prepared_statement::sql_</definition>
+        <argsstring></argsstring>
+        <name>sql_</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::sql_</qualifiedname>
+        <briefdescription>
+<para>原始SQL语句 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="55" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1pgsql__prepared__statement_1a44b338a44d05185960544c5910d77ea2" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::pgsql_prepared_statement::param_count_</definition>
+        <argsstring></argsstring>
+        <name>param_count_</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::param_count_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>参数数量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="56" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1pgsql__prepared__statement_1a095f05382aa21c83a89091a3eda082bb" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; pstmt_data &gt;</type>
+        <definition>unique_ptr&lt;pstmt_data&gt; neforce::pgsql_prepared_statement::data_</definition>
+        <argsstring></argsstring>
+        <name>data_</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::data_</qualifiedname>
+        <initializer>= <ref refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" kindref="member">make_unique</ref>&lt;pstmt_data&gt;()</initializer>
+        <briefdescription>
+<para>执行数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="57" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1pgsql__prepared__statement_1a453b51328503bad45297c88758b7a216" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; char &gt; &gt;</type>
+        <definition>vector&lt;vector&lt;char&gt; &gt; neforce::pgsql_prepared_statement::param_buffers_</definition>
+        <argsstring></argsstring>
+        <name>param_buffers_</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::param_buffers_</qualifiedname>
+        <briefdescription>
+<para>二进制参数缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="58" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1pgsql__prepared__statement_1ac1140b07ac6215c6396c6694cc939884" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::pgsql_prepared_statement::last_error_</definition>
+        <argsstring></argsstring>
+        <name>last_error_</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::last_error_</qualifiedname>
+        <briefdescription>
+<para>最后错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="59" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1pgsql__prepared__statement_1a7feb681adb4f8d4b56251d85747f5cda" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::pgsql_prepared_statement::last_errno_</definition>
+        <argsstring></argsstring>
+        <name>last_errno_</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::last_errno_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>最后错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="60" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1pgsql__prepared__statement_1a4cea93835b3c686e6914ab64dc7371ac" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::pgsql_prepared_statement::set_error</definition>
+        <argsstring>(string error, uint32_t errno_val=0) noexcept</argsstring>
+        <name>set_error</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::set_error</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>error</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>errno_val</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="62" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1pgsql__prepared__statement_1a21d2e9e20054a2ce51c83a15ee69b397" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::pgsql_prepared_statement::pgsql_prepared_statement</definition>
+        <argsstring>(PGconn *conn, string sql)</argsstring>
+        <name>pgsql_prepared_statement</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::pgsql_prepared_statement</qualifiedname>
+        <param>
+          <type>PGconn *</type>
+          <declname>conn</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>conn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>PostgreSQL连接句柄 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SQL语句</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+解析SQL语句获取参数数量，创建服务器端预处理语句。 自动生成唯一的语句名称。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="73" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1pgsql__prepared__statement_1a3f2a0d1e5d5e9d52eaea5289e74b7495" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::pgsql_prepared_statement::~pgsql_prepared_statement</definition>
+        <argsstring>() override</argsstring>
+        <name>~pgsql_prepared_statement</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::~pgsql_prepared_statement</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>执行DEALLOCATE释放服务器端预处理语句资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="80" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1pgsql__prepared__statement_1a0d0c8ba19bd6e4446063752fd82b043b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::pgsql_prepared_statement::param_count</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>param_count</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::param_count</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1ae3c779c7dd0e64b4b3f04d3abfbf004d">param_count</reimplements>
+        <briefdescription>
+<para>获取参数数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>SQL语句中的占位符数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="86" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="86" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1pgsql__prepared__statement_1a612e480cd6afc4f02f86bb93df08c91d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::pgsql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, const string &amp;value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a83d5df06b54af73d6a24adfd91e35809">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定字符串参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="94" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="94" bodyend="94"/>
+        <references refid="classneforce_1_1pgsql__prepared__statement_1a612e480cd6afc4f02f86bb93df08c91d" compoundref="pgsql__prepared__statement_8hpp" startline="94" endline="94">bind_param</references>
+        <references refid="classneforce_1_1basic__string_1a0049fbf44e36f4c7f57ebc85a2b0a376" compoundref="basic__string_8hpp" startline="2132" endline="2132">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::view</references>
+        <referencedby refid="classneforce_1_1pgsql__prepared__statement_1a612e480cd6afc4f02f86bb93df08c91d" compoundref="pgsql__prepared__statement_8hpp" startline="94" endline="94">bind_param</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1pgsql__prepared__statement_1ac0932fc52f7f3b6e9d25f348be38ac2a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::pgsql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, string_view value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a9219ec073f4fe401624fbda187c6a478">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定字符串视图参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="102" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1pgsql__prepared__statement_1ad4b8c928f1b78d8aca06fde4c70dd6d8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::pgsql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, const char *value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a57a416197042b24f097827c4c2083fa4">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定C字符串参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>C字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="110" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="110" bodyend="110"/>
+        <references refid="classneforce_1_1pgsql__prepared__statement_1ad4b8c928f1b78d8aca06fde4c70dd6d8" compoundref="pgsql__prepared__statement_8hpp" startline="110" endline="110">bind_param</references>
+        <referencedby refid="classneforce_1_1pgsql__prepared__statement_1ad4b8c928f1b78d8aca06fde4c70dd6d8" compoundref="pgsql__prepared__statement_8hpp" startline="110" endline="110">bind_param</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1pgsql__prepared__statement_1aa73bb8d9f3fb70bfe4764363fa86c5dc" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::pgsql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, int32_t value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1ad10f3350cf59857aa941288fae75df21">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gaa0af497ed9ed410d4c911b409653515a" kindref="member">int32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定32位整数参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="118" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1pgsql__prepared__statement_1a700bc652a781a6334674609e85842a2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::pgsql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, int64_t value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a1d225748e5d1447d3dbb1a28ef97072e">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定64位整数参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="126" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1pgsql__prepared__statement_1af332a948784078f1662444b1636fbeeb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::pgsql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, float64_t value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a8ebc3a7a62d00aaf5b4e19cde9581b54">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gaaa239a2e1903add7d22b684a72e71c9a" kindref="member">float64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定浮点数参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="134" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1pgsql__prepared__statement_1a03f70542f44dce8f1eb81dc934cb7ee4" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::pgsql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, cbyte_view value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1ad874d16b23d0ab9bd5d4641c10b109ee">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定二进制数据参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字节视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true</para>
+</simplesect>
+二进制参数使用格式1（二进制）传输，适用于BYTEA类型。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="144" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1pgsql__prepared__statement_1a794d85cbc197775683c18743adb48004" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::pgsql_prepared_statement::execute</definition>
+        <argsstring>() override</argsstring>
+        <name>execute</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::execute</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a32eebdb2af37ff60943d591aeb7eb619">execute</reimplements>
+        <briefdescription>
+<para>执行非查询语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>执行成功返回true</para>
+</simplesect>
+执行已绑定参数的预处理语句，不返回结果集。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="152" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1pgsql__prepared__statement_1ac3d32d7ac6f067cfa83d1458f897396c" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structneforce_1_1idb__prepared__result" kindref="compound">idb_prepared_result</ref> &gt;</type>
+        <definition>unique_ptr&lt; idb_prepared_result &gt; neforce::pgsql_prepared_statement::execute_query</definition>
+        <argsstring>() override</argsstring>
+        <name>execute_query</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::execute_query</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a731b0ddb9f05b63b08d11f9393bff0e8">execute_query</reimplements>
+        <briefdescription>
+<para>执行查询语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>查询结果集，失败返回空指针</para>
+</simplesect>
+执行查询并返回结果集对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="160" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1pgsql__prepared__statement_1a38981fbbe74afae367295210c3eebe0f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+        <definition>string_view neforce::pgsql_prepared_statement::get_error</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>get_error</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::get_error</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1ae2fb693e9c62f6733d8a09701427963f">get_error</reimplements>
+        <briefdescription>
+<para>获取错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>错误描述字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="166" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="166" bodyend="166"/>
+        <references refid="classneforce_1_1basic__string__view_1ad205f7743694338ba96590ee420cf19a" compoundref="basic__string__view_8hpp" startline="440" endline="442">neforce::basic_string_view&lt; CharT, Traits &gt;::view</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1pgsql__prepared__statement_1afcb274ad27cfb4fadbf60b59915ece42" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::pgsql_prepared_statement::get_errno</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>get_errno</name>
+        <qualifiedname>neforce::pgsql_prepared_statement::get_errno</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1ae4c29021b23c7291739378437e7994c6">get_errno</reimplements>
+        <briefdescription>
+<para>获取错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>PostgreSQL错误码 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="172" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="172" bodyend="172"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>PostgreSQL预处理语句类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现idb_prepared_statement接口，支持参数绑定、语句执行和结果集获取。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>SQL语句预处理（自动解析$1, $2等占位符）</para>
+</listitem><listitem><para>参数绑定</para>
+</listitem><listitem><para>语句执行</para>
+</listitem><listitem><para>查询执行</para>
+</listitem><listitem><para>自动生成预处理语句名称</para>
+</listitem><listitem><para>语句生命周期管理</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>PostgreSQL使用 $index 作为参数占位符，参数索引从1开始。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::idb_prepared_statement</label>
+        <link refid="structneforce_1_1idb__prepared__statement"/>
+      </node>
+      <node id="1">
+        <label>neforce::pgsql_prepared_statement</label>
+        <link refid="classneforce_1_1pgsql__prepared__statement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::idb_prepared_statement</label>
+        <link refid="structneforce_1_1idb__prepared__statement"/>
+      </node>
+      <node id="1">
+        <label>neforce::pgsql_prepared_statement</label>
+        <link refid="classneforce_1_1pgsql__prepared__statement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" line="44" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_prepared_statement.hpp" bodystart="44" bodyend="173"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1a612e480cd6afc4f02f86bb93df08c91d" prot="public" virt="virtual"><scope>neforce::pgsql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1ac0932fc52f7f3b6e9d25f348be38ac2a" prot="public" virt="virtual"><scope>neforce::pgsql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1ad4b8c928f1b78d8aca06fde4c70dd6d8" prot="public" virt="virtual"><scope>neforce::pgsql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1aa73bb8d9f3fb70bfe4764363fa86c5dc" prot="public" virt="virtual"><scope>neforce::pgsql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1a700bc652a781a6334674609e85842a2b" prot="public" virt="virtual"><scope>neforce::pgsql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1af332a948784078f1662444b1636fbeeb" prot="public" virt="virtual"><scope>neforce::pgsql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1a03f70542f44dce8f1eb81dc934cb7ee4" prot="public" virt="virtual"><scope>neforce::pgsql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1af77ce96d651229ba1988e558babca5eb" prot="private" virt="non-virtual"><scope>neforce::pgsql_prepared_statement</scope><name>conn_</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1a095f05382aa21c83a89091a3eda082bb" prot="private" virt="non-virtual"><scope>neforce::pgsql_prepared_statement</scope><name>data_</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1a794d85cbc197775683c18743adb48004" prot="public" virt="virtual"><scope>neforce::pgsql_prepared_statement</scope><name>execute</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1ac3d32d7ac6f067cfa83d1458f897396c" prot="public" virt="virtual"><scope>neforce::pgsql_prepared_statement</scope><name>execute_query</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1afcb274ad27cfb4fadbf60b59915ece42" prot="public" virt="virtual"><scope>neforce::pgsql_prepared_statement</scope><name>get_errno</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1a38981fbbe74afae367295210c3eebe0f" prot="public" virt="virtual"><scope>neforce::pgsql_prepared_statement</scope><name>get_error</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1a7feb681adb4f8d4b56251d85747f5cda" prot="private" virt="non-virtual"><scope>neforce::pgsql_prepared_statement</scope><name>last_errno_</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1ac1140b07ac6215c6396c6694cc939884" prot="private" virt="non-virtual"><scope>neforce::pgsql_prepared_statement</scope><name>last_error_</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1a453b51328503bad45297c88758b7a216" prot="private" virt="non-virtual"><scope>neforce::pgsql_prepared_statement</scope><name>param_buffers_</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1a0d0c8ba19bd6e4446063752fd82b043b" prot="public" virt="virtual"><scope>neforce::pgsql_prepared_statement</scope><name>param_count</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1a44b338a44d05185960544c5910d77ea2" prot="private" virt="non-virtual"><scope>neforce::pgsql_prepared_statement</scope><name>param_count_</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1a21d2e9e20054a2ce51c83a15ee69b397" prot="public" virt="non-virtual"><scope>neforce::pgsql_prepared_statement</scope><name>pgsql_prepared_statement</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1a4cea93835b3c686e6914ab64dc7371ac" prot="private" virt="non-virtual"><scope>neforce::pgsql_prepared_statement</scope><name>set_error</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1ae5c519e078499710f78a5c621675c68d" prot="private" virt="non-virtual"><scope>neforce::pgsql_prepared_statement</scope><name>sql_</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1ad63d8d3f728ba1fef094ac971d154dc0" prot="private" virt="non-virtual"><scope>neforce::pgsql_prepared_statement</scope><name>stmt_name_</name></member>
+      <member refid="structneforce_1_1idb__prepared__statement_1a05ad762ff2dbd5fd42c1c57550cb77fd" prot="public" virt="virtual"><scope>neforce::pgsql_prepared_statement</scope><name>~idb_prepared_statement</name></member>
+      <member refid="classneforce_1_1pgsql__prepared__statement_1a3f2a0d1e5d5e9d52eaea5289e74b7495" prot="public" virt="non-virtual"><scope>neforce::pgsql_prepared_statement</scope><name>~pgsql_prepared_statement</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

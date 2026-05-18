@@ -4,9 +4,9 @@
     <compoundname>once_flag</compoundname>
     <includes refid="call__once_8hpp" local="no">call_once.hpp</includes>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classonce__flag_1a010570124a8aff4a4b8aa20a62eaffe2" prot="private" static="no" mutable="no">
-        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> &gt;</type>
-        <definition>atomic&lt;uint32_t&gt; once_flag::state_</definition>
+      <memberdef kind="variable" id="classonce__flag_1a82d33340ed434ddddefe00f960731b4f" prot="private" static="no" mutable="no">
+        <type><ref refid="classatomic__futex" kindref="compound">atomic_futex</ref></type>
+        <definition>atomic_futex once_flag::state_</definition>
         <argsstring></argsstring>
         <name>state_</name>
         <qualifiedname>once_flag::state_</qualifiedname>
@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="40" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" bodystart="40" bodyend="40"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="40" column="6" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" bodystart="40" bodyend="40"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -104,15 +104,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="43" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" bodystart="69" bodyend="112"/>
-        <references refid="structatomic_1a1464cb79d660c630d2fe3a44a7b8adba" compoundref="atomic_8hpp" startline="211" endline="216">atomic&lt; T &gt;::compare_exchange_strong</references>
-        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
-        <references refid="group___invoke_function_1ga529f4a5476de9eb8ed295cb17c719c96" compoundref="invoke_8hpp" startline="538" endline="543">invoke</references>
-        <references refid="structatomic_1a08238b88fc524dbab833b1f2efbca3ec" compoundref="atomic_8hpp" startline="134" endline="136">atomic&lt; T &gt;::load</references>
-        <references refid="group___memory_order_1gac472f4b38d5bc0ba23a6113984118c24" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
-        <references refid="group___memory_order_1gab7d3a13cfab1d0d9d1e747ac3d774d61" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
-        <references refid="group___memory_order_1ga80883e2cd37a8e670dc016e91059d936" compoundref="memory__order_8hpp" startline="179">memory_order_release</references>
-        <references refid="structatomic_1a3e1268f8d4abb49382c713740a13234a" compoundref="atomic_8hpp" startline="118" endline="120">atomic&lt; T &gt;::store</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" line="43" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/call_once.hpp" bodystart="69" bodyend="100"/>
+        <references refid="classatomic__futex_1ae9df7c7321943c5f241114ddfd363000" compoundref="atomic__futex_8hpp" startline="275" endline="279">atomic_futex&lt; WaiterBit &gt;::compare_exchange_strong</references>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
+        <references refid="group___invoke_function_1ga4c75921ddce62eae2409105dc92d6da5" compoundref="invoke_8hpp" startline="538" endline="543">invoke</references>
+        <references refid="classatomic__futex_1a079f25b232c776363dda8f7889d498dd" compoundref="atomic__futex_8hpp" startline="152" endline="154">atomic_futex&lt; WaiterBit &gt;::load</references>
+        <references refid="classatomic__futex_1a9e4ba2f93e5aca965a78596ae2cec20f" compoundref="atomic__futex_8hpp" startline="164" endline="170">atomic_futex&lt; WaiterBit &gt;::load_when_not_equal</references>
+        <references refid="group___memory_order_1ga52729ffe1460a0069a1736f2e4e61d2e" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
+        <references refid="group___memory_order_1ga4c8b2df710dbe4b801447898624fa3ca" compoundref="memory__order_8hpp" startline="173">memory_order_relaxed</references>
+        <references refid="group___memory_order_1ga1872f4bd7e5e4170b898e1dcab55bbec" compoundref="memory__order_8hpp" startline="179">memory_order_release</references>
+        <references refid="classatomic__futex_1a6eeeb0d8e8305a6e55da92ac8dfa76f7" compoundref="atomic__futex_8hpp" startline="288" endline="293">atomic_futex&lt; WaiterBit &gt;::store_notify_all</references>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -217,7 +218,7 @@
       <member refid="classonce__flag_1a3ac545abb60a28c70f1b9f54c17bdbf8" prot="public" virt="non-virtual"><scope>once_flag</scope><name>once_flag</name></member>
       <member refid="classonce__flag_1a3692694e788d49771bd07dc9121ad5db" prot="public" virt="non-virtual"><scope>once_flag</scope><name>operator=</name></member>
       <member refid="classonce__flag_1ad9e1a06385391398efed492a045c9434" prot="public" virt="non-virtual"><scope>once_flag</scope><name>operator=</name></member>
-      <member refid="classonce__flag_1a010570124a8aff4a4b8aa20a62eaffe2" prot="private" virt="non-virtual"><scope>once_flag</scope><name>state_</name></member>
+      <member refid="classonce__flag_1a82d33340ed434ddddefe00f960731b4f" prot="private" virt="non-virtual"><scope>once_flag</scope><name>state_</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

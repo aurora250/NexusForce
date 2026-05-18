@@ -11,8 +11,8 @@ var group___async_timer =
       [ "add_task", "classtimer__scheduler.html#ad7e2861340ab12370ceaec61a82c9129", null ],
       [ "cancel", "classtimer__scheduler.html#aa25522eaa375942415f6ab940174a49b", null ],
       [ "cancel_all", "classtimer__scheduler.html#ac050f83f8dbeee5c8f590c5be3e7a6d2", null ],
-      [ "is_pending", "classtimer__scheduler.html#a70a910ad934bad4c0c9335f2215924f6", null ],
-      [ "size", "classtimer__scheduler.html#a83bf57ec21b16c6ebc7e0f08bfce0573", null ]
+      [ "is_pending", "classtimer__scheduler.html#a2e336543bee81770a128f011c5f73c69", null ],
+      [ "size", "classtimer__scheduler.html#aa7d0cbe3d1396062e710b5fa202017f3", null ]
     ] ],
     [ "basic_timer&lt; Clock &gt;", "classbasic__timer.html", [
       [ "clock_type", "classbasic__timer.html#a7e207030e1c38d14b3db768051754597", null ],
@@ -27,8 +27,8 @@ var group___async_timer =
       [ "expires_after", "classbasic__timer.html#a41d9db90a76e0709c03def4e5f10d73b", null ],
       [ "expires_at", "classbasic__timer.html#a4fa890be95fc2674acba94b3e11b70e0", null ],
       [ "expires_from_now", "classbasic__timer.html#a123f1272f66d05cb56a5f12fe76b3af2", null ],
-      [ "expiry", "classbasic__timer.html#a1493cbad9302b5c55cc794bb4f4d8833", null ],
-      [ "is_active", "classbasic__timer.html#a53ee820d4168dd06780380cc1c3ffca5", null ],
+      [ "expiry", "classbasic__timer.html#ae48121fdca2e692f812631d29b985e27", null ],
+      [ "is_active", "classbasic__timer.html#aede5aaa3d82e41b6c275282eb14ae3f8", null ],
       [ "operator=", "classbasic__timer.html#a795e2f0ee98918bdef6fd545a3ce7df9", null ]
     ] ],
     [ "steady_timer", "group___async_timer.html#gaf9d29e0fc3082a1789eafb7a8736a00b", null ],

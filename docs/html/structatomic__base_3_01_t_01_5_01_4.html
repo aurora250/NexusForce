@@ -156,76 +156,76 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:a9a9e823b19a7419b53f5c32998b3d090" id="r_a9a9e823b19a7419b53f5c32998b3d090"><td class="memItemLeft"><a id="a9a9e823b19a7419b53f5c32998b3d090" name="a9a9e823b19a7419b53f5c32998b3d090"></a>
 <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><b>operator-=</b> (const <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a> dest) volatile noexcept</td></tr>
 <tr class="memdesc:a9a9e823b19a7419b53f5c32998b3d090"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的指针减法赋值运算符 <br /></td></tr>
-<tr class="memitem:a9ab38b42a50e16973390e33075c869aa" id="r_a9ab38b42a50e16973390e33075c869aa"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a9ab38b42a50e16973390e33075c869aa">is_lock_free</a> () const noexcept</td></tr>
-<tr class="memdesc:a9ab38b42a50e16973390e33075c869aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否支持无锁操作  <br /></td></tr>
-<tr class="memitem:a89fccca39672c73b09c1fc915a6b2fb9" id="r_a89fccca39672c73b09c1fc915a6b2fb9"><td class="memItemLeft"><a id="a89fccca39672c73b09c1fc915a6b2fb9" name="a89fccca39672c73b09c1fc915a6b2fb9"></a>
-NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><b>is_lock_free</b> () const volatile noexcept</td></tr>
-<tr class="memdesc:a89fccca39672c73b09c1fc915a6b2fb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的检查是否支持无锁操作 <br /></td></tr>
-<tr class="memitem:af64a00bcd805e76ccd7a07211cacc104" id="r_af64a00bcd805e76ccd7a07211cacc104"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#af64a00bcd805e76ccd7a07211cacc104">store</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> ptr, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
-<tr class="memdesc:af64a00bcd805e76ccd7a07211cacc104"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子存储指针操作  <br /></td></tr>
-<tr class="memitem:a95b43b5cc705af7badc6d18dfc8b2431" id="r_a95b43b5cc705af7badc6d18dfc8b2431"><td class="memItemLeft"><a id="a95b43b5cc705af7badc6d18dfc8b2431" name="a95b43b5cc705af7badc6d18dfc8b2431"></a>
-NEFORCE_ALWAYS_INLINE_INLINE void&#160;</td><td class="memItemRight"><b>store</b> (const <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> ptr, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) volatile noexcept</td></tr>
-<tr class="memdesc:a95b43b5cc705af7badc6d18dfc8b2431"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的原子存储指针操作 <br /></td></tr>
-<tr class="memitem:aa119b562899473202f03f0ee12d334f7" id="r_aa119b562899473202f03f0ee12d334f7"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa119b562899473202f03f0ee12d334f7">load</a> (const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) const noexcept</td></tr>
-<tr class="memdesc:aa119b562899473202f03f0ee12d334f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子加载指针操作  <br /></td></tr>
-<tr class="memitem:a658b7958e9e1ded49d703c6b20d54a7c" id="r_a658b7958e9e1ded49d703c6b20d54a7c"><td class="memItemLeft"><a id="a658b7958e9e1ded49d703c6b20d54a7c" name="a658b7958e9e1ded49d703c6b20d54a7c"></a>
-NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><b>load</b> (const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) const volatile noexcept</td></tr>
-<tr class="memdesc:a658b7958e9e1ded49d703c6b20d54a7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的原子加载指针操作 <br /></td></tr>
-<tr class="memitem:a625b63d444dd4cde20e92fbb22eadf71" id="r_a625b63d444dd4cde20e92fbb22eadf71"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a625b63d444dd4cde20e92fbb22eadf71">exchange</a> (const <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> ptr, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
-<tr class="memdesc:a625b63d444dd4cde20e92fbb22eadf71"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子交换指针操作  <br /></td></tr>
-<tr class="memitem:ac3487ed2892b49df0a2691d07117c03e" id="r_ac3487ed2892b49df0a2691d07117c03e"><td class="memItemLeft"><a id="ac3487ed2892b49df0a2691d07117c03e" name="ac3487ed2892b49df0a2691d07117c03e"></a>
-NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><b>exchange</b> (const <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> ptr, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) volatile noexcept</td></tr>
-<tr class="memdesc:ac3487ed2892b49df0a2691d07117c03e"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的原子交换指针操作 <br /></td></tr>
-<tr class="memitem:a50c59c5bfcc109952946968caf0d1002" id="r_a50c59c5bfcc109952946968caf0d1002"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="#a50c59c5bfcc109952946968caf0d1002">compare_exchange_weak</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;expected, <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) noexcept</td></tr>
-<tr class="memdesc:a50c59c5bfcc109952946968caf0d1002"><td class="mdescLeft">&#160;</td><td class="mdescRight">弱比较交换指针操作  <br /></td></tr>
-<tr class="memitem:add6adc9a5802894b30bee42d2952a7d9" id="r_add6adc9a5802894b30bee42d2952a7d9"><td class="memItemLeft"><a id="add6adc9a5802894b30bee42d2952a7d9" name="add6adc9a5802894b30bee42d2952a7d9"></a>
-NEFORCE_ALWAYS_INLINE_INLINE bool&#160;</td><td class="memItemRight"><b>compare_exchange_weak</b> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;expected, <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) volatile noexcept</td></tr>
-<tr class="memdesc:add6adc9a5802894b30bee42d2952a7d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的弱比较交换指针操作 <br /></td></tr>
-<tr class="memitem:a9b6c962dcded8b4c747e1d696a5c8bc9" id="r_a9b6c962dcded8b4c747e1d696a5c8bc9"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="#a9b6c962dcded8b4c747e1d696a5c8bc9">compare_exchange_weak</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;expected, <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
-<tr class="memdesc:a9b6c962dcded8b4c747e1d696a5c8bc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">简化版弱比较交换指针操作  <br /></td></tr>
-<tr class="memitem:a268b098e6f9eb8676313f293742f4ff2" id="r_a268b098e6f9eb8676313f293742f4ff2"><td class="memItemLeft"><a id="a268b098e6f9eb8676313f293742f4ff2" name="a268b098e6f9eb8676313f293742f4ff2"></a>
-NEFORCE_ALWAYS_INLINE bool&#160;</td><td class="memItemRight"><b>compare_exchange_weak</b> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;expected, <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) volatile noexcept</td></tr>
-<tr class="memdesc:a268b098e6f9eb8676313f293742f4ff2"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的简化版弱比较交换指针操作 <br /></td></tr>
-<tr class="memitem:afa68bbb346cae3e468cbb225d9a5da40" id="r_afa68bbb346cae3e468cbb225d9a5da40"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="#afa68bbb346cae3e468cbb225d9a5da40">compare_exchange_strong</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;expected, <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) noexcept</td></tr>
-<tr class="memdesc:afa68bbb346cae3e468cbb225d9a5da40"><td class="mdescLeft">&#160;</td><td class="mdescRight">强比较交换指针操作  <br /></td></tr>
-<tr class="memitem:ad646d547e215185837af3cfa8bdfe4ee" id="r_ad646d547e215185837af3cfa8bdfe4ee"><td class="memItemLeft"><a id="ad646d547e215185837af3cfa8bdfe4ee" name="ad646d547e215185837af3cfa8bdfe4ee"></a>
-NEFORCE_ALWAYS_INLINE_INLINE bool&#160;</td><td class="memItemRight"><b>compare_exchange_strong</b> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;expected, <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) volatile noexcept</td></tr>
-<tr class="memdesc:ad646d547e215185837af3cfa8bdfe4ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的强比较交换指针操作 <br /></td></tr>
-<tr class="memitem:aa89f6a67049327e2a73e817f49e1d563" id="r_aa89f6a67049327e2a73e817f49e1d563"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="#aa89f6a67049327e2a73e817f49e1d563">compare_exchange_strong</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;expected, <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
-<tr class="memdesc:aa89f6a67049327e2a73e817f49e1d563"><td class="mdescLeft">&#160;</td><td class="mdescRight">简化版强比较交换指针操作  <br /></td></tr>
-<tr class="memitem:a3d319536f3f30ad9d1cd8ab83f8b25e5" id="r_a3d319536f3f30ad9d1cd8ab83f8b25e5"><td class="memItemLeft"><a id="a3d319536f3f30ad9d1cd8ab83f8b25e5" name="a3d319536f3f30ad9d1cd8ab83f8b25e5"></a>
-NEFORCE_ALWAYS_INLINE bool&#160;</td><td class="memItemRight"><b>compare_exchange_strong</b> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;expected, <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) volatile noexcept</td></tr>
-<tr class="memdesc:a3d319536f3f30ad9d1cd8ab83f8b25e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的简化版强比较交换指针操作 <br /></td></tr>
-<tr class="memitem:af7379fe6e4ea83d93fab90faed67c15a" id="r_af7379fe6e4ea83d93fab90faed67c15a"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#af7379fe6e4ea83d93fab90faed67c15a">wait</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> old, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) const noexcept</td></tr>
-<tr class="memdesc:af7379fe6e4ea83d93fab90faed67c15a"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待指针改变  <br /></td></tr>
-<tr class="memitem:a0c6d416653c211c2521876b9bce8f03d" id="r_a0c6d416653c211c2521876b9bce8f03d"><td class="memItemLeft"><a id="a0c6d416653c211c2521876b9bce8f03d" name="a0c6d416653c211c2521876b9bce8f03d"></a>
-NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><b>notify_one</b> () noexcept</td></tr>
-<tr class="memdesc:a0c6d416653c211c2521876b9bce8f03d"><td class="mdescLeft">&#160;</td><td class="mdescRight">通知一个等待线程 <br /></td></tr>
-<tr class="memitem:ad4e6a7455220f9fc07027786c98a08f5" id="r_ad4e6a7455220f9fc07027786c98a08f5"><td class="memItemLeft"><a id="ad4e6a7455220f9fc07027786c98a08f5" name="ad4e6a7455220f9fc07027786c98a08f5"></a>
-NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><b>notify_all</b> () noexcept</td></tr>
-<tr class="memdesc:ad4e6a7455220f9fc07027786c98a08f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">通知所有等待线程 <br /></td></tr>
-<tr class="memitem:a79f6c71df297317114e0948c53b44bbc" id="r_a79f6c71df297317114e0948c53b44bbc"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a79f6c71df297317114e0948c53b44bbc">fetch_add</a> (const <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a> dest, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
-<tr class="memdesc:a79f6c71df297317114e0948c53b44bbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并添加指针偏移  <br /></td></tr>
-<tr class="memitem:a0aaefe0adc6c5815cd01bf8c0e7f6a65" id="r_a0aaefe0adc6c5815cd01bf8c0e7f6a65"><td class="memItemLeft"><a id="a0aaefe0adc6c5815cd01bf8c0e7f6a65" name="a0aaefe0adc6c5815cd01bf8c0e7f6a65"></a>
-NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><b>fetch_add</b> (const <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a> dest, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) volatile noexcept</td></tr>
-<tr class="memdesc:a0aaefe0adc6c5815cd01bf8c0e7f6a65"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的原子获取并添加指针偏移 <br /></td></tr>
-<tr class="memitem:aed7f4507bc1d0652f6e387c4ba9cfceb" id="r_aed7f4507bc1d0652f6e387c4ba9cfceb"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#aed7f4507bc1d0652f6e387c4ba9cfceb">fetch_sub</a> (const <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a> dest, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
-<tr class="memdesc:aed7f4507bc1d0652f6e387c4ba9cfceb"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并减去指针偏移  <br /></td></tr>
-<tr class="memitem:ad8d5eb0586e5ee1030019955086563a3" id="r_ad8d5eb0586e5ee1030019955086563a3"><td class="memItemLeft"><a id="ad8d5eb0586e5ee1030019955086563a3" name="ad8d5eb0586e5ee1030019955086563a3"></a>
-NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><b>fetch_sub</b> (const <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a> dest, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) volatile noexcept</td></tr>
-<tr class="memdesc:ad8d5eb0586e5ee1030019955086563a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的原子获取并减去指针偏移 <br /></td></tr>
+<tr class="memitem:aa4e732e560ef0af010a92aaa1ea586a5" id="r_aa4e732e560ef0af010a92aaa1ea586a5"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa4e732e560ef0af010a92aaa1ea586a5">is_lock_free</a> () const noexcept</td></tr>
+<tr class="memdesc:aa4e732e560ef0af010a92aaa1ea586a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否支持无锁操作  <br /></td></tr>
+<tr class="memitem:a651496a336ffaae1f7ee630d3a140787" id="r_a651496a336ffaae1f7ee630d3a140787"><td class="memItemLeft"><a id="a651496a336ffaae1f7ee630d3a140787" name="a651496a336ffaae1f7ee630d3a140787"></a>
+bool&#160;</td><td class="memItemRight"><b>is_lock_free</b> () const volatile noexcept</td></tr>
+<tr class="memdesc:a651496a336ffaae1f7ee630d3a140787"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的检查是否支持无锁操作 <br /></td></tr>
+<tr class="memitem:a1241a64bb589812e49b3a3b1691a4130" id="r_a1241a64bb589812e49b3a3b1691a4130"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1241a64bb589812e49b3a3b1691a4130">store</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> ptr, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) noexcept</td></tr>
+<tr class="memdesc:a1241a64bb589812e49b3a3b1691a4130"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子存储指针操作  <br /></td></tr>
+<tr class="memitem:ab1e57c38716aecb838d9a105b5ef5405" id="r_ab1e57c38716aecb838d9a105b5ef5405"><td class="memItemLeft"><a id="ab1e57c38716aecb838d9a105b5ef5405" name="ab1e57c38716aecb838d9a105b5ef5405"></a>
+void&#160;</td><td class="memItemRight"><b>store</b> (const <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> ptr, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) volatile noexcept</td></tr>
+<tr class="memdesc:ab1e57c38716aecb838d9a105b5ef5405"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的原子存储指针操作 <br /></td></tr>
+<tr class="memitem:a14ac5a8f37a0d24f6720bdd7751cbd82" id="r_a14ac5a8f37a0d24f6720bdd7751cbd82"><td class="memItemLeft"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a14ac5a8f37a0d24f6720bdd7751cbd82">load</a> (const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) const noexcept</td></tr>
+<tr class="memdesc:a14ac5a8f37a0d24f6720bdd7751cbd82"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子加载指针操作  <br /></td></tr>
+<tr class="memitem:a175049ef4e4d28606a56666721d125eb" id="r_a175049ef4e4d28606a56666721d125eb"><td class="memItemLeft"><a id="a175049ef4e4d28606a56666721d125eb" name="a175049ef4e4d28606a56666721d125eb"></a>
+<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><b>load</b> (const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) const volatile noexcept</td></tr>
+<tr class="memdesc:a175049ef4e4d28606a56666721d125eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的原子加载指针操作 <br /></td></tr>
+<tr class="memitem:a49c9658c3c11e64edfdfdfc59b4e97d9" id="r_a49c9658c3c11e64edfdfdfc59b4e97d9"><td class="memItemLeft"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a49c9658c3c11e64edfdfdfc59b4e97d9">exchange</a> (const <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> ptr, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) noexcept</td></tr>
+<tr class="memdesc:a49c9658c3c11e64edfdfdfc59b4e97d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子交换指针操作  <br /></td></tr>
+<tr class="memitem:a5c671177ef2d2f949775d8cda75f58cb" id="r_a5c671177ef2d2f949775d8cda75f58cb"><td class="memItemLeft"><a id="a5c671177ef2d2f949775d8cda75f58cb" name="a5c671177ef2d2f949775d8cda75f58cb"></a>
+<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><b>exchange</b> (const <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> ptr, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) volatile noexcept</td></tr>
+<tr class="memdesc:a5c671177ef2d2f949775d8cda75f58cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的原子交换指针操作 <br /></td></tr>
+<tr class="memitem:abca5cb97aeb28bf478ebd365dabac3a6" id="r_abca5cb97aeb28bf478ebd365dabac3a6"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#abca5cb97aeb28bf478ebd365dabac3a6">compare_exchange_weak</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;expected, <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) noexcept</td></tr>
+<tr class="memdesc:abca5cb97aeb28bf478ebd365dabac3a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">弱比较交换指针操作  <br /></td></tr>
+<tr class="memitem:a1aec4928e0f58a4de95ca3134cc864d7" id="r_a1aec4928e0f58a4de95ca3134cc864d7"><td class="memItemLeft"><a id="a1aec4928e0f58a4de95ca3134cc864d7" name="a1aec4928e0f58a4de95ca3134cc864d7"></a>
+bool&#160;</td><td class="memItemRight"><b>compare_exchange_weak</b> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;expected, <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) volatile noexcept</td></tr>
+<tr class="memdesc:a1aec4928e0f58a4de95ca3134cc864d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的弱比较交换指针操作 <br /></td></tr>
+<tr class="memitem:a2e620013eb1c1cc0ed78531d743e71d0" id="r_a2e620013eb1c1cc0ed78531d743e71d0"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a2e620013eb1c1cc0ed78531d743e71d0">compare_exchange_weak</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;expected, <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) noexcept</td></tr>
+<tr class="memdesc:a2e620013eb1c1cc0ed78531d743e71d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">简化版弱比较交换指针操作  <br /></td></tr>
+<tr class="memitem:ac28671884a6dc498658e697624582814" id="r_ac28671884a6dc498658e697624582814"><td class="memItemLeft"><a id="ac28671884a6dc498658e697624582814" name="ac28671884a6dc498658e697624582814"></a>
+bool&#160;</td><td class="memItemRight"><b>compare_exchange_weak</b> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;expected, <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) volatile noexcept</td></tr>
+<tr class="memdesc:ac28671884a6dc498658e697624582814"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的简化版弱比较交换指针操作 <br /></td></tr>
+<tr class="memitem:abac2b390227f2ae6e7559b81cf159775" id="r_abac2b390227f2ae6e7559b81cf159775"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#abac2b390227f2ae6e7559b81cf159775">compare_exchange_strong</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;expected, <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) noexcept</td></tr>
+<tr class="memdesc:abac2b390227f2ae6e7559b81cf159775"><td class="mdescLeft">&#160;</td><td class="mdescRight">强比较交换指针操作  <br /></td></tr>
+<tr class="memitem:a42529fdaf52c48f8188c0fd22a53e951" id="r_a42529fdaf52c48f8188c0fd22a53e951"><td class="memItemLeft"><a id="a42529fdaf52c48f8188c0fd22a53e951" name="a42529fdaf52c48f8188c0fd22a53e951"></a>
+bool&#160;</td><td class="memItemRight"><b>compare_exchange_strong</b> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;expected, <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) volatile noexcept</td></tr>
+<tr class="memdesc:a42529fdaf52c48f8188c0fd22a53e951"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的强比较交换指针操作 <br /></td></tr>
+<tr class="memitem:ae3e2cd7f0e6fe10888408c90f965b9e0" id="r_ae3e2cd7f0e6fe10888408c90f965b9e0"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ae3e2cd7f0e6fe10888408c90f965b9e0">compare_exchange_strong</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;expected, <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) noexcept</td></tr>
+<tr class="memdesc:ae3e2cd7f0e6fe10888408c90f965b9e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">简化版强比较交换指针操作  <br /></td></tr>
+<tr class="memitem:a0602a52f1af5377880c6eb81424a4ae6" id="r_a0602a52f1af5377880c6eb81424a4ae6"><td class="memItemLeft"><a id="a0602a52f1af5377880c6eb81424a4ae6" name="a0602a52f1af5377880c6eb81424a4ae6"></a>
+bool&#160;</td><td class="memItemRight"><b>compare_exchange_strong</b> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;expected, <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) volatile noexcept</td></tr>
+<tr class="memdesc:a0602a52f1af5377880c6eb81424a4ae6"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的简化版强比较交换指针操作 <br /></td></tr>
+<tr class="memitem:a21e31b94b81292ee2330bfd552fe5828" id="r_a21e31b94b81292ee2330bfd552fe5828"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a21e31b94b81292ee2330bfd552fe5828">wait</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> old, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) const noexcept</td></tr>
+<tr class="memdesc:a21e31b94b81292ee2330bfd552fe5828"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待指针改变  <br /></td></tr>
+<tr class="memitem:a769ba65d99b8a84a29574aeb935e2cd6" id="r_a769ba65d99b8a84a29574aeb935e2cd6"><td class="memItemLeft"><a id="a769ba65d99b8a84a29574aeb935e2cd6" name="a769ba65d99b8a84a29574aeb935e2cd6"></a>
+void&#160;</td><td class="memItemRight"><b>notify_one</b> () noexcept</td></tr>
+<tr class="memdesc:a769ba65d99b8a84a29574aeb935e2cd6"><td class="mdescLeft">&#160;</td><td class="mdescRight">通知一个等待线程 <br /></td></tr>
+<tr class="memitem:af76cd49359222eb3b61a64c5316f5b64" id="r_af76cd49359222eb3b61a64c5316f5b64"><td class="memItemLeft"><a id="af76cd49359222eb3b61a64c5316f5b64" name="af76cd49359222eb3b61a64c5316f5b64"></a>
+void&#160;</td><td class="memItemRight"><b>notify_all</b> () noexcept</td></tr>
+<tr class="memdesc:af76cd49359222eb3b61a64c5316f5b64"><td class="mdescLeft">&#160;</td><td class="mdescRight">通知所有等待线程 <br /></td></tr>
+<tr class="memitem:a51aed22afe4708363858c67073a7b7d0" id="r_a51aed22afe4708363858c67073a7b7d0"><td class="memItemLeft"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a51aed22afe4708363858c67073a7b7d0">fetch_add</a> (const <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a> dest, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) noexcept</td></tr>
+<tr class="memdesc:a51aed22afe4708363858c67073a7b7d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并添加指针偏移  <br /></td></tr>
+<tr class="memitem:a558aa1fa21cfd8354d051116ec655e2e" id="r_a558aa1fa21cfd8354d051116ec655e2e"><td class="memItemLeft"><a id="a558aa1fa21cfd8354d051116ec655e2e" name="a558aa1fa21cfd8354d051116ec655e2e"></a>
+<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><b>fetch_add</b> (const <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a> dest, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) volatile noexcept</td></tr>
+<tr class="memdesc:a558aa1fa21cfd8354d051116ec655e2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的原子获取并添加指针偏移 <br /></td></tr>
+<tr class="memitem:a5b0a3c729342e895cf94c5c5902d4a61" id="r_a5b0a3c729342e895cf94c5c5902d4a61"><td class="memItemLeft"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5b0a3c729342e895cf94c5c5902d4a61">fetch_sub</a> (const <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a> dest, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) noexcept</td></tr>
+<tr class="memdesc:a5b0a3c729342e895cf94c5c5902d4a61"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并减去指针偏移  <br /></td></tr>
+<tr class="memitem:a4e312ceffe21d8c344af4d243706e7e4" id="r_a4e312ceffe21d8c344af4d243706e7e4"><td class="memItemLeft"><a id="a4e312ceffe21d8c344af4d243706e7e4" name="a4e312ceffe21d8c344af4d243706e7e4"></a>
+<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><b>fetch_sub</b> (const <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a> dest, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) volatile noexcept</td></tr>
+<tr class="memdesc:a4e312ceffe21d8c344af4d243706e7e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的原子获取并减去指针偏移 <br /></td></tr>
 <tr class="memitem:ae41d2f732c768cde2a57e1c38db270d0" id="r_ae41d2f732c768cde2a57e1c38db270d0"><td class="memItemLeft"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="structatomic__base.html#ae41d2f732c768cde2a57e1c38db270d0">operator&amp;=</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> value) noexcept</td></tr>
 <tr class="memdesc:ae41d2f732c768cde2a57e1c38db270d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">位与赋值运算符  <br /></td></tr>
 <tr class="memitem:acee86a43dd988ca37d0c1a319903eaeb" id="r_acee86a43dd988ca37d0c1a319903eaeb"><td class="memItemLeft"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="structatomic__base.html#acee86a43dd988ca37d0c1a319903eaeb">operator|=</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> value) noexcept</td></tr>
 <tr class="memdesc:acee86a43dd988ca37d0c1a319903eaeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">位或赋值运算符  <br /></td></tr>
 <tr class="memitem:a7c87e16ad9de16b216977ef1f35a40ca" id="r_a7c87e16ad9de16b216977ef1f35a40ca"><td class="memItemLeft"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="structatomic__base.html#a7c87e16ad9de16b216977ef1f35a40ca">operator^=</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> value) noexcept</td></tr>
 <tr class="memdesc:a7c87e16ad9de16b216977ef1f35a40ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">位异或赋值运算符  <br /></td></tr>
-<tr class="memitem:a32e791fa7d1611859e8db698a7ee88c3" id="r_a32e791fa7d1611859e8db698a7ee88c3"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="structatomic__base.html#a32e791fa7d1611859e8db698a7ee88c3">fetch_and</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
-<tr class="memdesc:a32e791fa7d1611859e8db698a7ee88c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并与操作  <br /></td></tr>
-<tr class="memitem:ad8dadd88a6d0b99071f9df7c49ae885e" id="r_ad8dadd88a6d0b99071f9df7c49ae885e"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="structatomic__base.html#ad8dadd88a6d0b99071f9df7c49ae885e">fetch_or</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
-<tr class="memdesc:ad8dadd88a6d0b99071f9df7c49ae885e"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并或操作  <br /></td></tr>
-<tr class="memitem:a949e0b9639cec434570a5945530dea9e" id="r_a949e0b9639cec434570a5945530dea9e"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="structatomic__base.html#a949e0b9639cec434570a5945530dea9e">fetch_xor</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
-<tr class="memdesc:a949e0b9639cec434570a5945530dea9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并异或操作  <br /></td></tr>
+<tr class="memitem:a46f6a92d4879c6a57531c845bca162b7" id="r_a46f6a92d4879c6a57531c845bca162b7"><td class="memItemLeft"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="structatomic__base.html#a46f6a92d4879c6a57531c845bca162b7">fetch_and</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) noexcept</td></tr>
+<tr class="memdesc:a46f6a92d4879c6a57531c845bca162b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并与操作  <br /></td></tr>
+<tr class="memitem:aa9ab3c6cd841a5b063350640dd2f4ec5" id="r_aa9ab3c6cd841a5b063350640dd2f4ec5"><td class="memItemLeft"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="structatomic__base.html#aa9ab3c6cd841a5b063350640dd2f4ec5">fetch_or</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) noexcept</td></tr>
+<tr class="memdesc:aa9ab3c6cd841a5b063350640dd2f4ec5"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并或操作  <br /></td></tr>
+<tr class="memitem:af0d9e791686cd242341f3d0cf105a23c" id="r_af0d9e791686cd242341f3d0cf105a23c"><td class="memItemLeft"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="structatomic__base.html#af0d9e791686cd242341f3d0cf105a23c">fetch_xor</a> (<a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) noexcept</td></tr>
+<tr class="memdesc:af0d9e791686cd242341f3d0cf105a23c"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并异或操作  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
@@ -278,8 +278,8 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="aa89f6a67049327e2a73e817f49e1d563" name="aa89f6a67049327e2a73e817f49e1d563"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa89f6a67049327e2a73e817f49e1d563">&#9670;&#160;</a></span>compare_exchange_strong() <span class="overload">[1/2]</span></h2>
+<a id="ae3e2cd7f0e6fe10888408c90f965b9e0" name="ae3e2cd7f0e6fe10888408c90f965b9e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3e2cd7f0e6fe10888408c90f965b9e0">&#9670;&#160;</a></span>compare_exchange_strong() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -290,7 +290,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE bool <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::compare_exchange_strong </td>
+          <td class="memname">bool <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::compare_exchange_strong </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>expected</em></span>, </td>
         </tr>
@@ -302,7 +302,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -329,8 +329,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="afa68bbb346cae3e468cbb225d9a5da40" name="afa68bbb346cae3e468cbb225d9a5da40"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afa68bbb346cae3e468cbb225d9a5da40">&#9670;&#160;</a></span>compare_exchange_strong() <span class="overload">[2/2]</span></h2>
+<a id="abac2b390227f2ae6e7559b81cf159775" name="abac2b390227f2ae6e7559b81cf159775"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abac2b390227f2ae6e7559b81cf159775">&#9670;&#160;</a></span>compare_exchange_strong() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -341,7 +341,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE bool <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::compare_exchange_strong </td>
+          <td class="memname">bool <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::compare_exchange_strong </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>expected</em></span>, </td>
         </tr>
@@ -386,8 +386,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="a9b6c962dcded8b4c747e1d696a5c8bc9" name="a9b6c962dcded8b4c747e1d696a5c8bc9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9b6c962dcded8b4c747e1d696a5c8bc9">&#9670;&#160;</a></span>compare_exchange_weak() <span class="overload">[1/2]</span></h2>
+<a id="a2e620013eb1c1cc0ed78531d743e71d0" name="a2e620013eb1c1cc0ed78531d743e71d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e620013eb1c1cc0ed78531d743e71d0">&#9670;&#160;</a></span>compare_exchange_weak() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -398,7 +398,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE bool <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::compare_exchange_weak </td>
+          <td class="memname">bool <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::compare_exchange_weak </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>expected</em></span>, </td>
         </tr>
@@ -410,7 +410,7 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -437,8 +437,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="a50c59c5bfcc109952946968caf0d1002" name="a50c59c5bfcc109952946968caf0d1002"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a50c59c5bfcc109952946968caf0d1002">&#9670;&#160;</a></span>compare_exchange_weak() <span class="overload">[2/2]</span></h2>
+<a id="abca5cb97aeb28bf478ebd365dabac3a6" name="abca5cb97aeb28bf478ebd365dabac3a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abca5cb97aeb28bf478ebd365dabac3a6">&#9670;&#160;</a></span>compare_exchange_weak() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -449,7 +449,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE bool <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::compare_exchange_weak </td>
+          <td class="memname">bool <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::compare_exchange_weak </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>expected</em></span>, </td>
         </tr>
@@ -494,8 +494,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="a625b63d444dd4cde20e92fbb22eadf71" name="a625b63d444dd4cde20e92fbb22eadf71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a625b63d444dd4cde20e92fbb22eadf71">&#9670;&#160;</a></span>exchange()</h2>
+<a id="a49c9658c3c11e64edfdfdfc59b4e97d9" name="a49c9658c3c11e64edfdfdfc59b4e97d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49c9658c3c11e64edfdfdfc59b4e97d9">&#9670;&#160;</a></span>exchange()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -506,14 +506,14 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::exchange </td>
+          <td class="memname"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::exchange </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a></td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -539,8 +539,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="a79f6c71df297317114e0948c53b44bbc" name="a79f6c71df297317114e0948c53b44bbc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a79f6c71df297317114e0948c53b44bbc">&#9670;&#160;</a></span>fetch_add()</h2>
+<a id="a51aed22afe4708363858c67073a7b7d0" name="a51aed22afe4708363858c67073a7b7d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51aed22afe4708363858c67073a7b7d0">&#9670;&#160;</a></span>fetch_add()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -551,14 +551,14 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::fetch_add </td>
+          <td class="memname"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::fetch_add </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a></td>          <td class="paramname"><span class="paramname"><em>dest</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -584,8 +584,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="a32e791fa7d1611859e8db698a7ee88c3" name="a32e791fa7d1611859e8db698a7ee88c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a32e791fa7d1611859e8db698a7ee88c3">&#9670;&#160;</a></span>fetch_and()</h2>
+<a id="a46f6a92d4879c6a57531c845bca162b7" name="a46f6a92d4879c6a57531c845bca162b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46f6a92d4879c6a57531c845bca162b7">&#9670;&#160;</a></span>fetch_and()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -594,14 +594,14 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T &gt;::fetch_and </td>
+          <td class="memname"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T &gt;::fetch_and </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -625,8 +625,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="ad8dadd88a6d0b99071f9df7c49ae885e" name="ad8dadd88a6d0b99071f9df7c49ae885e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8dadd88a6d0b99071f9df7c49ae885e">&#9670;&#160;</a></span>fetch_or()</h2>
+<a id="aa9ab3c6cd841a5b063350640dd2f4ec5" name="aa9ab3c6cd841a5b063350640dd2f4ec5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9ab3c6cd841a5b063350640dd2f4ec5">&#9670;&#160;</a></span>fetch_or()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -635,14 +635,14 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T &gt;::fetch_or </td>
+          <td class="memname"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T &gt;::fetch_or </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -666,8 +666,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="aed7f4507bc1d0652f6e387c4ba9cfceb" name="aed7f4507bc1d0652f6e387c4ba9cfceb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aed7f4507bc1d0652f6e387c4ba9cfceb">&#9670;&#160;</a></span>fetch_sub()</h2>
+<a id="a5b0a3c729342e895cf94c5c5902d4a61" name="a5b0a3c729342e895cf94c5c5902d4a61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b0a3c729342e895cf94c5c5902d4a61">&#9670;&#160;</a></span>fetch_sub()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -678,14 +678,14 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::fetch_sub </td>
+          <td class="memname"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::fetch_sub </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a></td>          <td class="paramname"><span class="paramname"><em>dest</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -711,8 +711,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="a949e0b9639cec434570a5945530dea9e" name="a949e0b9639cec434570a5945530dea9e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a949e0b9639cec434570a5945530dea9e">&#9670;&#160;</a></span>fetch_xor()</h2>
+<a id="af0d9e791686cd242341f3d0cf105a23c" name="af0d9e791686cd242341f3d0cf105a23c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0d9e791686cd242341f3d0cf105a23c">&#9670;&#160;</a></span>fetch_xor()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -721,14 +721,14 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T &gt;::fetch_xor </td>
+          <td class="memname"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T &gt;::fetch_xor </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -752,8 +752,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="a9ab38b42a50e16973390e33075c869aa" name="a9ab38b42a50e16973390e33075c869aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ab38b42a50e16973390e33075c869aa">&#9670;&#160;</a></span>is_lock_free()</h2>
+<a id="aa4e732e560ef0af010a92aaa1ea586a5" name="aa4e732e560ef0af010a92aaa1ea586a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4e732e560ef0af010a92aaa1ea586a5">&#9670;&#160;</a></span>is_lock_free()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -764,7 +764,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_NODISCARD bool <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::is_lock_free </td>
+          <td class="memname">bool <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::is_lock_free </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -772,7 +772,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -786,8 +786,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="aa119b562899473202f03f0ee12d334f7" name="aa119b562899473202f03f0ee12d334f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa119b562899473202f03f0ee12d334f7">&#9670;&#160;</a></span>load()</h2>
+<a id="a14ac5a8f37a0d24f6720bdd7751cbd82" name="a14ac5a8f37a0d24f6720bdd7751cbd82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14ac5a8f37a0d24f6720bdd7751cbd82">&#9670;&#160;</a></span>load()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -798,9 +798,9 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE <a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::load </td>
+          <td class="memname"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a> <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::load </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a></span></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -1224,8 +1224,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="af64a00bcd805e76ccd7a07211cacc104" name="af64a00bcd805e76ccd7a07211cacc104"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af64a00bcd805e76ccd7a07211cacc104">&#9670;&#160;</a></span>store()</h2>
+<a id="a1241a64bb589812e49b3a3b1691a4130" name="a1241a64bb589812e49b3a3b1691a4130"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1241a64bb589812e49b3a3b1691a4130">&#9670;&#160;</a></span>store()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1236,14 +1236,14 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE void <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::store </td>
+          <td class="memname">void <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::store </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a></td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1268,8 +1268,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="af7379fe6e4ea83d93fab90faed67c15a" name="af7379fe6e4ea83d93fab90faed67c15a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7379fe6e4ea83d93fab90faed67c15a">&#9670;&#160;</a></span>wait()</h2>
+<a id="a21e31b94b81292ee2330bfd552fe5828" name="a21e31b94b81292ee2330bfd552fe5828"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21e31b94b81292ee2330bfd552fe5828">&#9670;&#160;</a></span>wait()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1280,14 +1280,14 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE void <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::wait </td>
+          <td class="memname">void <a class="el" href="structatomic__base.html">atomic_base</a>&lt; T * &gt;::wait </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="#a3df64c375c8ae24e670efd8f714c3410">value_type</a></td>          <td class="paramname"><span class="paramname"><em>old</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a></span>&#160;) const</td>
+          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a></span>&#160;) const</td>
         </tr>
       </table>
   </td>

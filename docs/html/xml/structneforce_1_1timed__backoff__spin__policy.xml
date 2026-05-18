@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1timed__backoff__spin__policy" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::timed_backoff_spin_policy</compoundname>
+    <includes refid="atomic__timed__wait_8hpp" local="no">atomic_timed_wait.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1timed__backoff__spin__policy_1aa9695012e6f02536a3c00881523e790d" prot="public" static="no" mutable="no">
+        <type>inner::wait_clock_t::time_point</type>
+        <definition>inner::wait_clock_t::time_point neforce::timed_backoff_spin_policy::deadline</definition>
+        <argsstring></argsstring>
+        <name>deadline</name>
+        <qualifiedname>neforce::timed_backoff_spin_policy::deadline</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_timed_wait.hpp" line="151" column="37" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_timed_wait.hpp" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1timed__backoff__spin__policy_1ad03076a114e2fc32ff56ea8ae77896ab" prot="public" static="no" mutable="no">
+        <type>inner::wait_clock_t::time_point</type>
+        <definition>inner::wait_clock_t::time_point neforce::timed_backoff_spin_policy::start_time</definition>
+        <argsstring></argsstring>
+        <name>start_time</name>
+        <qualifiedname>neforce::timed_backoff_spin_policy::start_time</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_timed_wait.hpp" line="152" column="37" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_timed_wait.hpp" bodystart="152" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1timed__backoff__spin__policy_1abc771eeddbfe0801e1d1f47ae845f53c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Clock</type>
+          </param>
+          <param>
+            <type>typename Dur</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::timed_backoff_spin_policy::timed_backoff_spin_policy</definition>
+        <argsstring>(time_point&lt; Clock, Dur &gt; deadline_time=Clock::time_point::max(), time_point&lt; Clock, Dur &gt; start_time_point=Clock::now()) noexcept</argsstring>
+        <name>timed_backoff_spin_policy</name>
+        <qualifiedname>neforce::timed_backoff_spin_policy::timed_backoff_spin_policy</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1time__point" kindref="compound">time_point</ref>&lt; Clock, Dur &gt;</type>
+          <declname>deadline_time</declname>
+          <defval>Clock::time_point::max()</defval>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1time__point" kindref="compound">time_point</ref>&lt; Clock, Dur &gt;</type>
+          <declname>start_time_point</declname>
+          <defval>Clock::now()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_timed_wait.hpp" line="155" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_timed_wait.hpp" bodystart="155" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1timed__backoff__spin__policy_1a1eb70fe0b6bfdb7922c147ffdbb24f15" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::timed_backoff_spin_policy::operator()</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator()</name>
+        <qualifiedname>neforce::timed_backoff_spin_policy::operator()</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_timed_wait.hpp" line="160" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_timed_wait.hpp" bodystart="160" bodyend="177"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>带退避策略的定时自旋策略 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>根据已等待的时间动态调整自旋策略：<itemizedlist>
+<listitem><para>短时间等待：快速自旋</para>
+</listitem><listitem><para>中等时间等待：让出CPU</para>
+</listitem><listitem><para>长时间等待：睡眠等待 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_timed_wait.hpp" line="150" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_timed_wait.hpp" bodystart="150" bodyend="178"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1timed__backoff__spin__policy_1aa9695012e6f02536a3c00881523e790d" prot="public" virt="non-virtual"><scope>neforce::timed_backoff_spin_policy</scope><name>deadline</name></member>
+      <member refid="structneforce_1_1timed__backoff__spin__policy_1a1eb70fe0b6bfdb7922c147ffdbb24f15" prot="public" virt="non-virtual"><scope>neforce::timed_backoff_spin_policy</scope><name>operator()</name></member>
+      <member refid="structneforce_1_1timed__backoff__spin__policy_1ad03076a114e2fc32ff56ea8ae77896ab" prot="public" virt="non-virtual"><scope>neforce::timed_backoff_spin_policy</scope><name>start_time</name></member>
+      <member refid="structneforce_1_1timed__backoff__spin__policy_1abc771eeddbfe0801e1d1f47ae845f53c" prot="public" virt="non-virtual"><scope>neforce::timed_backoff_spin_policy</scope><name>timed_backoff_spin_policy</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

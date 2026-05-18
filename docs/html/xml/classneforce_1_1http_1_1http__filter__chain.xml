@@ -1,0 +1,420 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1http__filter__chain" kind="class" language="C++" prot="public">
+    <compoundname>neforce::http::http_filter_chain</compoundname>
+    <includes refid="http__filter_8hpp" local="no">http_filter.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http__filter__chain_1a594d8f8da27ef85608485aae56ed9159" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1http_1_1http__filter" kindref="compound">http_filter</ref> &gt; &gt;</type>
+        <definition>vector&lt;unique_ptr&lt;http_filter&gt; &gt; neforce::http::http_filter_chain::filters_</definition>
+        <argsstring></argsstring>
+        <name>filters_</name>
+        <qualifiedname>neforce::http::http_filter_chain::filters_</qualifiedname>
+        <briefdescription>
+<para>过滤器列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="97" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1http__filter__chain_1a8b1f4ac571b97c2b6576d8f8a7065396" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::http_filter_chain::owns_filters_</definition>
+        <argsstring></argsstring>
+        <name>owns_filters_</name>
+        <qualifiedname>neforce::http::http_filter_chain::owns_filters_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>是否拥有过滤器所有权 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="98" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter__chain_1af54717629af7da834b873326e123771d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::http_filter_chain::http_filter_chain</definition>
+        <argsstring>()=default</argsstring>
+        <name>http_filter_chain</name>
+        <qualifiedname>neforce::http::http_filter_chain::http_filter_chain</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="101" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter__chain_1aa072975eef7e53c308c647e8b5df8c95" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::http_filter_chain::http_filter_chain</definition>
+        <argsstring>(const bool owns_filters)</argsstring>
+        <name>http_filter_chain</name>
+        <qualifiedname>neforce::http::http_filter_chain::http_filter_chain</qualifiedname>
+        <param>
+          <type>const bool</type>
+          <declname>owns_filters</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>owns_filters</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否拥有过滤器所有权 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="107" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="107" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter__chain_1a86a970a492e3a660fb53e5d71eda10f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::http_filter_chain::http_filter_chain</definition>
+        <argsstring>(const http_filter_chain &amp;)=delete</argsstring>
+        <name>http_filter_chain</name>
+        <qualifiedname>neforce::http::http_filter_chain::http_filter_chain</qualifiedname>
+        <param>
+          <type>const http_filter_chain &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="110" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter__chain_1ace5627d6066ab962fec9a579a0698c5c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>http_filter_chain &amp;</type>
+        <definition>http_filter_chain &amp; neforce::http::http_filter_chain::operator=</definition>
+        <argsstring>(const http_filter_chain &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::http::http_filter_chain::operator=</qualifiedname>
+        <param>
+          <type>const http_filter_chain &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="111" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter__chain_1a84a489b83345635d6e6481c07c03d9b8" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::http_filter_chain::http_filter_chain</definition>
+        <argsstring>(http_filter_chain &amp;&amp;) noexcept=default</argsstring>
+        <name>http_filter_chain</name>
+        <qualifiedname>neforce::http::http_filter_chain::http_filter_chain</qualifiedname>
+        <param>
+          <type>http_filter_chain &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="113" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter__chain_1abb359c57f7d4274aab1c9a4cf8a85f5b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>http_filter_chain &amp;</type>
+        <definition>http_filter_chain &amp; neforce::http::http_filter_chain::operator=</definition>
+        <argsstring>(http_filter_chain &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::http::http_filter_chain::operator=</qualifiedname>
+        <param>
+          <type>http_filter_chain &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="114" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter__chain_1a85e8c15107114dd44351e93f90bd68f1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_filter_chain::add_filter</definition>
+        <argsstring>(unique_ptr&lt; http_filter &gt; filter)</argsstring>
+        <name>add_filter</name>
+        <qualifiedname>neforce::http::http_filter_chain::add_filter</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1http_1_1http__filter" kindref="compound">http_filter</ref> &gt;</type>
+          <declname>filter</declname>
+        </param>
+        <briefdescription>
+<para>添加过滤器（转移所有权） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>过滤器智能指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="120" column="10"/>
+        <references refid="classneforce_1_1http_1_1http__filter__chain_1a85e8c15107114dd44351e93f90bd68f1">add_filter</references>
+        <referencedby refid="classneforce_1_1http_1_1http__filter__chain_1a85e8c15107114dd44351e93f90bd68f1">add_filter</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter__chain_1aa6485537009da74770a61882d35a8235" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_filter_chain::add_filter_ref</definition>
+        <argsstring>(http_filter *filter)</argsstring>
+        <name>add_filter_ref</name>
+        <qualifiedname>neforce::http::http_filter_chain::add_filter_ref</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1http__filter" kindref="compound">http_filter</ref> *</type>
+          <declname>filter</declname>
+        </param>
+        <briefdescription>
+<para>添加过滤器（不转移所有权） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>过滤器原始指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="126" column="10"/>
+        <references refid="classneforce_1_1http_1_1http__filter__chain_1aa6485537009da74770a61882d35a8235">add_filter_ref</references>
+        <referencedby refid="classneforce_1_1http_1_1http__filter__chain_1aa6485537009da74770a61882d35a8235">add_filter_ref</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter__chain_1ab7dd5d7a533a25f4e1cfc5b888a8b289" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_filter_chain::clear</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::http::http_filter_chain::clear</qualifiedname>
+        <briefdescription>
+<para>清空所有过滤器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="131" column="10"/>
+        <references refid="classneforce_1_1http_1_1http__filter__chain_1ab7dd5d7a533a25f4e1cfc5b888a8b289">clear</references>
+        <referencedby refid="classneforce_1_1http_1_1http__filter__chain_1ab7dd5d7a533a25f4e1cfc5b888a8b289">clear</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter__chain_1a81186de91effea46d43aefbdacb861fb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::http::http_filter_chain::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::http::http_filter_chain::size</qualifiedname>
+        <briefdescription>
+<para>获取过滤器数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>过滤器数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="137" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="137" bodyend="137"/>
+        <references refid="classneforce_1_1http_1_1http__filter__chain_1a81186de91effea46d43aefbdacb861fb" compoundref="http__filter_8hpp" startline="137" endline="137">size</references>
+        <referencedby refid="classneforce_1_1http_1_1http__filter__chain_1a81186de91effea46d43aefbdacb861fb" compoundref="http__filter_8hpp" startline="137" endline="137">size</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter__chain_1aafef3c429ceb1976cdcff16e611e0671" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::http_filter_chain::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::http::http_filter_chain::empty</qualifiedname>
+        <briefdescription>
+<para>检查过滤器链是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>为空返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="143" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="143" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter__chain_1a0c25fb799949ecf14418500a33b71c73" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::http_filter_chain::execute_pre_filters</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response)</argsstring>
+        <name>execute_pre_filters</name>
+        <qualifiedname>neforce::http::http_filter_chain::execute_pre_filters</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>执行所有预过滤器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>所有预过滤器都通过返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="151" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter__chain_1aeea0ff5acba01fa807f7f9f3847c45c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_filter_chain::execute_post_filters</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response)</argsstring>
+        <name>execute_post_filters</name>
+        <qualifiedname>neforce::http::http_filter_chain::execute_post_filters</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>执行所有后过滤器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="158" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1http__filter__chain_1a6160b1ea925d2dfb88954ff9a1d393fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::http_filter_chain::execute_filters</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response)</argsstring>
+        <name>execute_filters</name>
+        <qualifiedname>neforce::http::http_filter_chain::execute_filters</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>执行所有核心过滤器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="165" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP过滤器链 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理多个过滤器的有序执行，支持预过滤、后过滤和核心过滤。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="95" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="95" bodyend="166"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1http__filter__chain_1a85e8c15107114dd44351e93f90bd68f1" prot="public" virt="non-virtual"><scope>neforce::http::http_filter_chain</scope><name>add_filter</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter__chain_1aa6485537009da74770a61882d35a8235" prot="public" virt="non-virtual"><scope>neforce::http::http_filter_chain</scope><name>add_filter_ref</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter__chain_1ab7dd5d7a533a25f4e1cfc5b888a8b289" prot="public" virt="non-virtual"><scope>neforce::http::http_filter_chain</scope><name>clear</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter__chain_1aafef3c429ceb1976cdcff16e611e0671" prot="public" virt="non-virtual"><scope>neforce::http::http_filter_chain</scope><name>empty</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter__chain_1a6160b1ea925d2dfb88954ff9a1d393fe" prot="public" virt="non-virtual"><scope>neforce::http::http_filter_chain</scope><name>execute_filters</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter__chain_1aeea0ff5acba01fa807f7f9f3847c45c8" prot="public" virt="non-virtual"><scope>neforce::http::http_filter_chain</scope><name>execute_post_filters</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter__chain_1a0c25fb799949ecf14418500a33b71c73" prot="public" virt="non-virtual"><scope>neforce::http::http_filter_chain</scope><name>execute_pre_filters</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter__chain_1a594d8f8da27ef85608485aae56ed9159" prot="private" virt="non-virtual"><scope>neforce::http::http_filter_chain</scope><name>filters_</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter__chain_1af54717629af7da834b873326e123771d" prot="public" virt="non-virtual"><scope>neforce::http::http_filter_chain</scope><name>http_filter_chain</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter__chain_1aa072975eef7e53c308c647e8b5df8c95" prot="public" virt="non-virtual"><scope>neforce::http::http_filter_chain</scope><name>http_filter_chain</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter__chain_1a86a970a492e3a660fb53e5d71eda10f7" prot="public" virt="non-virtual"><scope>neforce::http::http_filter_chain</scope><name>http_filter_chain</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter__chain_1a84a489b83345635d6e6481c07c03d9b8" prot="public" virt="non-virtual"><scope>neforce::http::http_filter_chain</scope><name>http_filter_chain</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter__chain_1ace5627d6066ab962fec9a579a0698c5c" prot="public" virt="non-virtual"><scope>neforce::http::http_filter_chain</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter__chain_1abb359c57f7d4274aab1c9a4cf8a85f5b" prot="public" virt="non-virtual"><scope>neforce::http::http_filter_chain</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter__chain_1a8b1f4ac571b97c2b6576d8f8a7065396" prot="private" virt="non-virtual"><scope>neforce::http::http_filter_chain</scope><name>owns_filters_</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter__chain_1a81186de91effea46d43aefbdacb861fb" prot="public" virt="non-virtual"><scope>neforce::http::http_filter_chain</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

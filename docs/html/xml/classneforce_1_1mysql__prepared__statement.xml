@@ -1,0 +1,734 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1mysql__prepared__statement" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>neforce::mysql_prepared_statement</compoundname>
+    <basecompoundref refid="structneforce_1_1idb__prepared__statement" prot="public" virt="non-virtual">neforce::idb_prepared_statement</basecompoundref>
+    <includes refid="mysql__prepared__statement_8hpp" local="no">mysql_prepared_statement.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1mysql__prepared__statement_1ab0de60d281fa1649179d42b57d9e43e5" prot="private" static="no" mutable="no">
+        <type>::MYSQL_STMT *</type>
+        <definition>::MYSQL_STMT* neforce::mysql_prepared_statement::stmt_</definition>
+        <argsstring></argsstring>
+        <name>stmt_</name>
+        <qualifiedname>neforce::mysql_prepared_statement::stmt_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>MySQL预处理语句句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="45" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1mysql__prepared__statement_1a3fc259b1351bd3d9621288d09f1fa3b6" prot="private" static="no" mutable="no">
+        <type>::MYSQL *</type>
+        <definition>::MYSQL* neforce::mysql_prepared_statement::conn_</definition>
+        <argsstring></argsstring>
+        <name>conn_</name>
+        <qualifiedname>neforce::mysql_prepared_statement::conn_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>MySQL连接句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="46" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1mysql__prepared__statement_1a035c0cf026d09e09e4f2ea6a8a42f6bd" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::mysql_prepared_statement::param_count_</definition>
+        <argsstring></argsstring>
+        <name>param_count_</name>
+        <qualifiedname>neforce::mysql_prepared_statement::param_count_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>参数数量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="47" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1mysql__prepared__statement_1a64edd05e618b683911190e9a75a195d2" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt;::MYSQL_BIND &gt;</type>
+        <definition>vector&lt;::MYSQL_BIND&gt; neforce::mysql_prepared_statement::bind_params_</definition>
+        <argsstring></argsstring>
+        <name>bind_params_</name>
+        <qualifiedname>neforce::mysql_prepared_statement::bind_params_</qualifiedname>
+        <briefdescription>
+<para>参数绑定数组 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="49" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1mysql__prepared__statement_1af7c31e9b90750bb222c340dbfcaaffa4" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; char &gt; &gt;</type>
+        <definition>vector&lt;vector&lt;char&gt; &gt; neforce::mysql_prepared_statement::param_buffers_</definition>
+        <argsstring></argsstring>
+        <name>param_buffers_</name>
+        <qualifiedname>neforce::mysql_prepared_statement::param_buffers_</qualifiedname>
+        <briefdescription>
+<para>参数数据缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="50" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1abdb17d628769afb9c8e71cf58cfbd954" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::mysql_prepared_statement::mysql_prepared_statement</definition>
+        <argsstring>(::MYSQL *conn, string_view sql)</argsstring>
+        <name>mysql_prepared_statement</name>
+        <qualifiedname>neforce::mysql_prepared_statement::mysql_prepared_statement</qualifiedname>
+        <param>
+          <type>::MYSQL *</type>
+          <declname>conn</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>sql</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>conn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MySQL连接句柄 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sql</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SQL语句 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1database__stmt__exception" kindref="compound">database_stmt_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>预处理失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+初始化预处理语句，获取参数数量。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="61" column="5"/>
+        <referencedby refid="classneforce_1_1mysql__prepared__statement_1aaa670423d85ba345c8cae6c7d4e87364">mysql_prepared_statement</referencedby>
+        <referencedby refid="classneforce_1_1mysql__prepared__statement_1aaa40b5cb1031d1d7d1f0a9505bbf113f">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1aaa670423d85ba345c8cae6c7d4e87364" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::mysql_prepared_statement::mysql_prepared_statement</definition>
+        <argsstring>(mysql_prepared_statement &amp;&amp;other) noexcept</argsstring>
+        <name>mysql_prepared_statement</name>
+        <qualifiedname>neforce::mysql_prepared_statement::mysql_prepared_statement</qualifiedname>
+        <param>
+          <type>mysql_prepared_statement &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="67" column="5"/>
+        <references refid="classneforce_1_1mysql__prepared__statement_1abdb17d628769afb9c8e71cf58cfbd954">mysql_prepared_statement</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1aaa40b5cb1031d1d7d1f0a9505bbf113f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1mysql__prepared__statement_1abdb17d628769afb9c8e71cf58cfbd954" kindref="member">mysql_prepared_statement</ref> &amp;</type>
+        <definition>mysql_prepared_statement &amp; neforce::mysql_prepared_statement::operator=</definition>
+        <argsstring>(mysql_prepared_statement &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::mysql_prepared_statement::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1mysql__prepared__statement_1abdb17d628769afb9c8e71cf58cfbd954" kindref="member">mysql_prepared_statement</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="74" column="30"/>
+        <references refid="classneforce_1_1mysql__prepared__statement_1abdb17d628769afb9c8e71cf58cfbd954">mysql_prepared_statement</references>
+        <references refid="classneforce_1_1mysql__prepared__statement_1aaa40b5cb1031d1d7d1f0a9505bbf113f">operator=</references>
+        <referencedby refid="classneforce_1_1mysql__prepared__statement_1aaa40b5cb1031d1d7d1f0a9505bbf113f">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1a8f6603aa09270dc7023468210f339640" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::mysql_prepared_statement::mysql_prepared_statement</definition>
+        <argsstring>(const mysql_prepared_statement &amp;)=delete</argsstring>
+        <name>mysql_prepared_statement</name>
+        <qualifiedname>neforce::mysql_prepared_statement::mysql_prepared_statement</qualifiedname>
+        <param>
+          <type>const mysql_prepared_statement &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="76" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1af09dcca7ae471ae4c870ac3250013083" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1mysql__prepared__statement_1abdb17d628769afb9c8e71cf58cfbd954" kindref="member">mysql_prepared_statement</ref> &amp;</type>
+        <definition>mysql_prepared_statement &amp; neforce::mysql_prepared_statement::operator=</definition>
+        <argsstring>(const mysql_prepared_statement &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::mysql_prepared_statement::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1mysql__prepared__statement_1abdb17d628769afb9c8e71cf58cfbd954" kindref="member">mysql_prepared_statement</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="77" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1ab0a9db410c2d00f2ea35028b63065062" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::mysql_prepared_statement::~mysql_prepared_statement</definition>
+        <argsstring>() override</argsstring>
+        <name>~mysql_prepared_statement</name>
+        <qualifiedname>neforce::mysql_prepared_statement::~mysql_prepared_statement</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>关闭预处理语句，释放资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="84" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1a8a5a0c24b4f2b936e09c8c5da59052c7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::mysql_prepared_statement::param_count</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>param_count</name>
+        <qualifiedname>neforce::mysql_prepared_statement::param_count</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1ae3c779c7dd0e64b4b3f04d3abfbf004d">param_count</reimplements>
+        <briefdescription>
+<para>获取参数数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>SQL语句中的?占位符数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="90" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1ae2765b1bc26bfe84a7431df7eb8a1371" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::mysql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, const string &amp;value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::mysql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a83d5df06b54af73d6a24adfd91e35809">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定字符串参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引（从0开始） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="98" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="98" bodyend="98"/>
+        <references refid="classneforce_1_1mysql__prepared__statement_1ae2765b1bc26bfe84a7431df7eb8a1371" compoundref="mysql__prepared__statement_8hpp" startline="98" endline="98">bind_param</references>
+        <references refid="classneforce_1_1basic__string_1a0049fbf44e36f4c7f57ebc85a2b0a376" compoundref="basic__string_8hpp" startline="2132" endline="2132">neforce::basic_string&lt; CharT, Traits, Alloc &gt;::view</references>
+        <referencedby refid="classneforce_1_1mysql__prepared__statement_1ae2765b1bc26bfe84a7431df7eb8a1371" compoundref="mysql__prepared__statement_8hpp" startline="98" endline="98">bind_param</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1ad5b8d3c39de3f8ed2fbf1dc168a67f12" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::mysql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, string_view value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::mysql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a9219ec073f4fe401624fbda187c6a478">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定字符串视图参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="106" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1a1404aaf40e6972e99387b41206f17310" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::mysql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, const char *value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::mysql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a57a416197042b24f097827c4c2083fa4">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定C字符串参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>C字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="114" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="114" bodyend="114"/>
+        <references refid="classneforce_1_1mysql__prepared__statement_1a1404aaf40e6972e99387b41206f17310" compoundref="mysql__prepared__statement_8hpp" startline="114" endline="114">bind_param</references>
+        <referencedby refid="classneforce_1_1mysql__prepared__statement_1a1404aaf40e6972e99387b41206f17310" compoundref="mysql__prepared__statement_8hpp" startline="114" endline="114">bind_param</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1a1d33319e4848936cfaa114f30d1fc96f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::mysql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, int32_t value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::mysql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1ad10f3350cf59857aa941288fae75df21">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gaa0af497ed9ed410d4c911b409653515a" kindref="member">int32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定32位整数参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="122" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1afe17bd730c7ca1a3dd54e4b6123b79df" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::mysql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, int64_t value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::mysql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a1d225748e5d1447d3dbb1a28ef97072e">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定64位整数参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="130" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1a8bac9b73982a148e4f881262467442aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::mysql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, float64_t value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::mysql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a8ebc3a7a62d00aaf5b4e19cde9581b54">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gaaa239a2e1903add7d22b684a72e71c9a" kindref="member">float64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定浮点数参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>浮点值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="138" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1a97799d1181cab98135ab0673b6bea59d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::mysql_prepared_statement::bind_param</definition>
+        <argsstring>(uint32_t index, cbyte_view value) override</argsstring>
+        <name>bind_param</name>
+        <qualifiedname>neforce::mysql_prepared_statement::bind_param</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1ad874d16b23d0ab9bd5d4641c10b109ee">bind_param</reimplements>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type><ref refid="group___memory_view_1ga533a464153c7fc34d3fa5d92854c8613" kindref="member">cbyte_view</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>绑定二进制数据参数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数索引 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字节视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>绑定成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="146" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1a45caed2e5189494c6de00d670fa891cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::mysql_prepared_statement::execute</definition>
+        <argsstring>() override</argsstring>
+        <name>execute</name>
+        <qualifiedname>neforce::mysql_prepared_statement::execute</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a32eebdb2af37ff60943d591aeb7eb619">execute</reimplements>
+        <briefdescription>
+<para>执行非查询语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>执行成功返回true</para>
+</simplesect>
+执行已绑定参数的预处理语句，不返回结果集。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="154" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1a0250fa9f156b3ae5b56707b3b40bb472" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structneforce_1_1idb__prepared__result" kindref="compound">idb_prepared_result</ref> &gt;</type>
+        <definition>unique_ptr&lt; idb_prepared_result &gt; neforce::mysql_prepared_statement::execute_query</definition>
+        <argsstring>() override</argsstring>
+        <name>execute_query</name>
+        <qualifiedname>neforce::mysql_prepared_statement::execute_query</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1a731b0ddb9f05b63b08d11f9393bff0e8">execute_query</reimplements>
+        <briefdescription>
+<para>执行查询语句 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>查询结果集，失败返回空指针</para>
+</simplesect>
+执行查询并返回结果集对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="162" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1a5212ed8b112bcf171491eff02e22ffd0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+        <definition>string_view neforce::mysql_prepared_statement::get_error</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>get_error</name>
+        <qualifiedname>neforce::mysql_prepared_statement::get_error</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1ae2fb693e9c62f6733d8a09701427963f">get_error</reimplements>
+        <briefdescription>
+<para>获取错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>错误描述字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="168" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1mysql__prepared__statement_1a7483b395c841b5c1d09451a0fd30d9ff" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::mysql_prepared_statement::get_errno</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>get_errno</name>
+        <qualifiedname>neforce::mysql_prepared_statement::get_errno</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__prepared__statement_1ae4c29021b23c7291739378437e7994c6">get_errno</reimplements>
+        <briefdescription>
+<para>获取错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>MySQL错误码 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="174" column="15"/>
+        <references refid="classneforce_1_1mysql__prepared__statement_1a7483b395c841b5c1d09451a0fd30d9ff">get_errno</references>
+        <referencedby refid="classneforce_1_1mysql__prepared__statement_1a7483b395c841b5c1d09451a0fd30d9ff">get_errno</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>MySQL预处理语句类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现idb_prepared_statement接口，支持参数绑定、语句执行和结果集获取。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>SQL语句预处理</para>
+</listitem><listitem><para>参数绑定</para>
+</listitem><listitem><para>语句执行</para>
+</listitem><listitem><para>查询执行</para>
+</listitem><listitem><para>错误信息获取</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>MySQL使用?作为参数占位符，参数索引从0开始。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::idb_prepared_statement</label>
+        <link refid="structneforce_1_1idb__prepared__statement"/>
+      </node>
+      <node id="1">
+        <label>neforce::mysql_prepared_statement</label>
+        <link refid="classneforce_1_1mysql__prepared__statement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::idb_prepared_statement</label>
+        <link refid="structneforce_1_1idb__prepared__statement"/>
+      </node>
+      <node id="1">
+        <label>neforce::mysql_prepared_statement</label>
+        <link refid="classneforce_1_1mysql__prepared__statement"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" line="43" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_statement.hpp" bodystart="43" bodyend="175"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1mysql__prepared__statement_1ae2765b1bc26bfe84a7431df7eb8a1371" prot="public" virt="virtual"><scope>neforce::mysql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1ad5b8d3c39de3f8ed2fbf1dc168a67f12" prot="public" virt="virtual"><scope>neforce::mysql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1a1404aaf40e6972e99387b41206f17310" prot="public" virt="virtual"><scope>neforce::mysql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1a1d33319e4848936cfaa114f30d1fc96f" prot="public" virt="virtual"><scope>neforce::mysql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1afe17bd730c7ca1a3dd54e4b6123b79df" prot="public" virt="virtual"><scope>neforce::mysql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1a8bac9b73982a148e4f881262467442aa" prot="public" virt="virtual"><scope>neforce::mysql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1a97799d1181cab98135ab0673b6bea59d" prot="public" virt="virtual"><scope>neforce::mysql_prepared_statement</scope><name>bind_param</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1a64edd05e618b683911190e9a75a195d2" prot="private" virt="non-virtual"><scope>neforce::mysql_prepared_statement</scope><name>bind_params_</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1a3fc259b1351bd3d9621288d09f1fa3b6" prot="private" virt="non-virtual"><scope>neforce::mysql_prepared_statement</scope><name>conn_</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1a45caed2e5189494c6de00d670fa891cb" prot="public" virt="virtual"><scope>neforce::mysql_prepared_statement</scope><name>execute</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1a0250fa9f156b3ae5b56707b3b40bb472" prot="public" virt="virtual"><scope>neforce::mysql_prepared_statement</scope><name>execute_query</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1a7483b395c841b5c1d09451a0fd30d9ff" prot="public" virt="virtual"><scope>neforce::mysql_prepared_statement</scope><name>get_errno</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1a5212ed8b112bcf171491eff02e22ffd0" prot="public" virt="virtual"><scope>neforce::mysql_prepared_statement</scope><name>get_error</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1abdb17d628769afb9c8e71cf58cfbd954" prot="public" virt="non-virtual"><scope>neforce::mysql_prepared_statement</scope><name>mysql_prepared_statement</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1aaa670423d85ba345c8cae6c7d4e87364" prot="public" virt="non-virtual"><scope>neforce::mysql_prepared_statement</scope><name>mysql_prepared_statement</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1a8f6603aa09270dc7023468210f339640" prot="public" virt="non-virtual"><scope>neforce::mysql_prepared_statement</scope><name>mysql_prepared_statement</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1aaa40b5cb1031d1d7d1f0a9505bbf113f" prot="public" virt="non-virtual"><scope>neforce::mysql_prepared_statement</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1af09dcca7ae471ae4c870ac3250013083" prot="public" virt="non-virtual"><scope>neforce::mysql_prepared_statement</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1af7c31e9b90750bb222c340dbfcaaffa4" prot="private" virt="non-virtual"><scope>neforce::mysql_prepared_statement</scope><name>param_buffers_</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1a8a5a0c24b4f2b936e09c8c5da59052c7" prot="public" virt="virtual"><scope>neforce::mysql_prepared_statement</scope><name>param_count</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1a035c0cf026d09e09e4f2ea6a8a42f6bd" prot="private" virt="non-virtual"><scope>neforce::mysql_prepared_statement</scope><name>param_count_</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1ab0de60d281fa1649179d42b57d9e43e5" prot="private" virt="non-virtual"><scope>neforce::mysql_prepared_statement</scope><name>stmt_</name></member>
+      <member refid="structneforce_1_1idb__prepared__statement_1a05ad762ff2dbd5fd42c1c57550cb77fd" prot="public" virt="virtual"><scope>neforce::mysql_prepared_statement</scope><name>~idb_prepared_statement</name></member>
+      <member refid="classneforce_1_1mysql__prepared__statement_1ab0a9db410c2d00f2ea35028b63065062" prot="public" virt="non-virtual"><scope>neforce::mysql_prepared_statement</scope><name>~mysql_prepared_statement</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

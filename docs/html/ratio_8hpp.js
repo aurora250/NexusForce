@@ -20,11 +20,11 @@ var ratio_8hpp =
     [ "ratio_multiply", "group___ratio_class.html#ga191e42eb9dcda5b5f126a5c3463bef2f", null ],
     [ "ratio_subtract", "group___ratio_class.html#ga7463b6530129e8162e0172bcc0e3fd57", null ],
     [ "tera", "group___s_i_units.html#ga529391aedcbc601988d415a27b104c39", null ],
-    [ "is_ratio_v", "group___ratio_class.html#ga0285780f2c97d032b3681e06ca239f07", null ],
-    [ "ratio_equal_v", "group___ratio_class.html#ga4628dda045d8ebf5f590ebe8e6d5b22f", null ],
-    [ "ratio_greater_equal_v", "group___ratio_class.html#ga5c1ab7f8a5ef3f0f0920ddf70ddc0b5b", null ],
-    [ "ratio_greater_v", "group___ratio_class.html#ga50c2889a628a0713fd3c7ecd757190f0", null ],
-    [ "ratio_less_equal_v", "group___ratio_class.html#ga164698029f4d892fb390aed85603a425", null ],
-    [ "ratio_less_v", "group___ratio_class.html#ga0ea690094088e41e92b3fd80df70607e", null ],
-    [ "ratio_not_equal_v", "group___ratio_class.html#ga7b4cbbb1e4db4606ad301d7ff70f7900", null ]
+    [ "is_ratio_v", "group___ratio_class.html#ga874a990b5a6b63653ee1e0bba847c75c", null ],
+    [ "ratio_equal_v", "group___ratio_class.html#gafef0136b7783d5cbf8a2ab6129bc3351", null ],
+    [ "ratio_greater_equal_v", "group___ratio_class.html#ga7d403b050d9362ca6382cae014e1a3be", null ],
+    [ "ratio_greater_v", "group___ratio_class.html#gad13c7dc384ea307cfe91df7962930245", null ],
+    [ "ratio_less_equal_v", "group___ratio_class.html#ga99eac87936526440c95e617b0e50ce24", null ],
+    [ "ratio_less_v", "group___ratio_class.html#ga3a5454788945776aa1ad4dffd76424c4", null ],
+    [ "ratio_not_equal_v", "group___ratio_class.html#ga87b36293d12b31aee914984591aa28e3", null ]
 ];

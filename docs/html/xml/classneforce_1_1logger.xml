@@ -1,0 +1,1276 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1logger" kind="class" language="C++" prot="public">
+    <compoundname>neforce::logger</compoundname>
+    <includes refid="logger_8hpp" local="no">logger.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1logger_1a6033fd7f7b4073c1eb7f8308212bd150" prot="private" static="no" mutable="no">
+        <type><ref refid="group___logging_1gaa0be5f70fcdb7c2f3dd3e121511f9fd0" kindref="member">log_level</ref></type>
+        <definition>log_level neforce::logger::level_</definition>
+        <argsstring></argsstring>
+        <name>level_</name>
+        <qualifiedname>neforce::logger::level_</qualifiedname>
+        <briefdescription>
+<para>当前日志级别 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="39" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1logger_1a03cd8a32a46dd51c88d6f4f02b621e4d" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::logger::async_</definition>
+        <argsstring></argsstring>
+        <name>async_</name>
+        <qualifiedname>neforce::logger::async_</qualifiedname>
+        <briefdescription>
+<para>是否异步模式 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="40" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1logger_1a2ede1a3391a23a2bb627805b9e73bbf2" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1log__sink" kindref="compound">log_sink</ref> &gt; &gt;</type>
+        <definition>vector&lt;shared_ptr&lt;log_sink&gt; &gt; neforce::logger::sinks_</definition>
+        <argsstring></argsstring>
+        <name>sinks_</name>
+        <qualifiedname>neforce::logger::sinks_</qualifiedname>
+        <briefdescription>
+<para>输出目标列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="42" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1logger_1a55b22e5ed7444f137134354a9b6bf14f" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::logger::sinks_mutex_</definition>
+        <argsstring></argsstring>
+        <name>sinks_mutex_</name>
+        <qualifiedname>neforce::logger::sinks_mutex_</qualifiedname>
+        <briefdescription>
+<para>输出目标互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="43" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1logger_1adb865732563fbc30f37641c854e35e1c" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1queue" kindref="compound">queue</ref>&lt; <ref refid="structneforce_1_1log__event" kindref="compound">log_event</ref> &gt;</type>
+        <definition>queue&lt;log_event&gt; neforce::logger::queue_</definition>
+        <argsstring></argsstring>
+        <name>queue_</name>
+        <qualifiedname>neforce::logger::queue_</qualifiedname>
+        <briefdescription>
+<para>异步日志队列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="45" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1logger_1a04756972521a2da2118f5b966ee5f4bd" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::logger::queue_mutex_</definition>
+        <argsstring></argsstring>
+        <name>queue_mutex_</name>
+        <qualifiedname>neforce::logger::queue_mutex_</qualifiedname>
+        <briefdescription>
+<para>队列互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="46" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1logger_1a130ae7bda70516dc5838a8cca7335115" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1condition__variable" kindref="compound">condition_variable</ref></type>
+        <definition>condition_variable neforce::logger::cv_</definition>
+        <argsstring></argsstring>
+        <name>cv_</name>
+        <qualifiedname>neforce::logger::cv_</qualifiedname>
+        <briefdescription>
+<para>条件变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="47" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1logger_1a2027d9ff632832b293177011801b3040" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1thread" kindref="compound">thread</ref></type>
+        <definition>thread neforce::logger::worker_</definition>
+        <argsstring></argsstring>
+        <name>worker_</name>
+        <qualifiedname>neforce::logger::worker_</qualifiedname>
+        <briefdescription>
+<para>异步工作线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="49" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1logger_1a8b50e1a3e48ccfda59cf9469e21512bf" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::logger::running_</definition>
+        <argsstring></argsstring>
+        <name>running_</name>
+        <qualifiedname>neforce::logger::running_</qualifiedname>
+        <briefdescription>
+<para>工作线程运行标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="50" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1logger_1abf6419ec2a413511f825615dbb7db4a1" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::logger::flush_requested_</definition>
+        <argsstring></argsstring>
+        <name>flush_requested_</name>
+        <qualifiedname>neforce::logger::flush_requested_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>刷新请求标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="52" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1logger_1affe1d780ad9f49bb734f104075c4f5fd" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::logger::flush_mutex_</definition>
+        <argsstring></argsstring>
+        <name>flush_mutex_</name>
+        <qualifiedname>neforce::logger::flush_mutex_</qualifiedname>
+        <briefdescription>
+<para>刷新互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="53" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1logger_1a5e91cde0d86836a53d17481c82b955cc" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1condition__variable" kindref="compound">condition_variable</ref></type>
+        <definition>condition_variable neforce::logger::flush_cv_</definition>
+        <argsstring></argsstring>
+        <name>flush_cv_</name>
+        <qualifiedname>neforce::logger::flush_cv_</qualifiedname>
+        <briefdescription>
+<para>刷新条件变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="54" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1logger_1adec30e72ceb7b00ff84d29c4f463502a" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; bool(const <ref refid="structneforce_1_1log__event" kindref="compound">log_event</ref> &amp;)&gt;</type>
+        <definition>function&lt;bool(const log_event&amp;)&gt; neforce::logger::filter_</definition>
+        <argsstring></argsstring>
+        <name>filter_</name>
+        <qualifiedname>neforce::logger::filter_</qualifiedname>
+        <briefdescription>
+<para>日志过滤器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="56" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1logger_1a2756540e879106ce299bf078bacf4b17" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::logger::filter_mutex_</definition>
+        <argsstring></argsstring>
+        <name>filter_mutex_</name>
+        <qualifiedname>neforce::logger::filter_mutex_</qualifiedname>
+        <briefdescription>
+<para>过滤器互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="57" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1logger_1ae7693da61be3e0d0880866a60b98e92f" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+        <definition>unordered_map&lt;string, string&gt; neforce::logger::context_</definition>
+        <argsstring></argsstring>
+        <name>context_</name>
+        <qualifiedname>neforce::logger::context_</qualifiedname>
+        <briefdescription>
+<para>全局上下文信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="59" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1logger_1ae0979930816b12a6170f7dd70c6e51e2" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::logger::context_mutex_</definition>
+        <argsstring></argsstring>
+        <name>context_mutex_</name>
+        <qualifiedname>neforce::logger::context_mutex_</qualifiedname>
+        <briefdescription>
+<para>上下文互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="60" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1logger_1ae096237530ac77902b514a19f0ee040e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::enqueue</definition>
+        <argsstring>(log_event &amp;&amp;event)</argsstring>
+        <name>enqueue</name>
+        <qualifiedname>neforce::logger::enqueue</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1log__event" kindref="compound">log_event</ref> &amp;&amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>将日志事件加入异步队列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日志事件（右值引用） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="66" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1ae9ee10e90896e4c807a2d22e31cac650" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::enqueue</definition>
+        <argsstring>(const log_event &amp;event)</argsstring>
+        <name>enqueue</name>
+        <qualifiedname>neforce::logger::enqueue</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1log__event" kindref="compound">log_event</ref> &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>将日志事件加入异步队列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日志事件（左值引用） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="72" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1a728d11ec06a040f4a95dbc9d0e7dd426" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::start_worker</definition>
+        <argsstring>()</argsstring>
+        <name>start_worker</name>
+        <qualifiedname>neforce::logger::start_worker</qualifiedname>
+        <briefdescription>
+<para>启动异步工作线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="77" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1ad89f6242010df2c74cb69ca2e648e67c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::stop_worker</definition>
+        <argsstring>()</argsstring>
+        <name>stop_worker</name>
+        <qualifiedname>neforce::logger::stop_worker</qualifiedname>
+        <briefdescription>
+<para>停止异步工作线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="82" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1a7f5a300be2a77df8bbf26a478ea87bc8" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::worker_loop</definition>
+        <argsstring>()</argsstring>
+        <name>worker_loop</name>
+        <qualifiedname>neforce::logger::worker_loop</qualifiedname>
+        <briefdescription>
+<para>异步工作线程主循环 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>从队列中取出日志事件并分发给各个输出目标。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="89" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1a1e57d2c33f5c5dcd72f46f8fd8748ffa" prot="private" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::logger::logger</definition>
+        <argsstring>(log_level level=log_level::INFO, bool async=false)</argsstring>
+        <name>logger</name>
+        <qualifiedname>neforce::logger::logger</qualifiedname>
+        <param>
+          <type><ref refid="group___logging_1gaa0be5f70fcdb7c2f3dd3e121511f9fd0" kindref="member">log_level</ref></type>
+          <declname>level</declname>
+          <defval><ref refid="group___logging_1ggaa0be5f70fcdb7c2f3dd3e121511f9fd0a551b723eafd6a31d444fcb2f5920fbd3" kindref="member">log_level::INFO</ref></defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>async</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>私有构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始日志级别 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>async</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否异步模式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="96" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1logger_1a1afa29f463cacd193d62c9eff9915642" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>logger &amp;</type>
+        <definition>static logger &amp; neforce::logger::instance</definition>
+        <argsstring>()</argsstring>
+        <name>instance</name>
+        <qualifiedname>neforce::logger::instance</qualifiedname>
+        <briefdescription>
+<para>获取单例实例 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>日志记录器实例引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="103" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="103" bodyend="106"/>
+        <references refid="classneforce_1_1logger_1a733b394a9689aff3eb501d5ba4744744">log</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1logger_1a98e286ed2e19aa1f120b37df55bec16e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::logger::logger</definition>
+        <argsstring>(const logger &amp;)=delete</argsstring>
+        <name>logger</name>
+        <qualifiedname>neforce::logger::logger</qualifiedname>
+        <param>
+          <type>const logger &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="108" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1a54acd2b7930e45c73adde4537b69b71a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>logger &amp;</type>
+        <definition>logger &amp; neforce::logger::operator=</definition>
+        <argsstring>(const logger &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::logger::operator=</qualifiedname>
+        <param>
+          <type>const logger &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="109" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1a7e1a87e66e5dd76e41baed1c675719f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::logger::logger</definition>
+        <argsstring>(logger &amp;&amp;)=delete</argsstring>
+        <name>logger</name>
+        <qualifiedname>neforce::logger::logger</qualifiedname>
+        <param>
+          <type>logger &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="110" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1ac1616beff290db97bf1e99469ef0d577" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>logger &amp;</type>
+        <definition>logger &amp; neforce::logger::operator=</definition>
+        <argsstring>(logger &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::logger::operator=</qualifiedname>
+        <param>
+          <type>logger &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="111" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1aab19ed324ffb27b487897f4bf505403b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::logger::~logger</definition>
+        <argsstring>()</argsstring>
+        <name>~logger</name>
+        <qualifiedname>neforce::logger::~logger</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>等待所有日志处理完成，清理资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="118" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1a3726e6c50e6906b68feb179928d99603" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::add_sink</definition>
+        <argsstring>(shared_ptr&lt; log_sink &gt; sink)</argsstring>
+        <name>add_sink</name>
+        <qualifiedname>neforce::logger::add_sink</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1log__sink" kindref="compound">log_sink</ref> &gt;</type>
+          <declname>sink</declname>
+        </param>
+        <briefdescription>
+<para>添加输出目标 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sink</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出目标的共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="124" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1aa5380e8af1d871a8565de99daeacdb2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::set_level</definition>
+        <argsstring>(log_level level)</argsstring>
+        <name>set_level</name>
+        <qualifiedname>neforce::logger::set_level</qualifiedname>
+        <param>
+          <type><ref refid="group___logging_1gaa0be5f70fcdb7c2f3dd3e121511f9fd0" kindref="member">log_level</ref></type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+<para>设置日志级别 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的日志级别</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+低于此级别的日志将被忽略。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="132" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1aa204e73cf6f06d37cc2f3aded61c57ae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::set_filter</definition>
+        <argsstring>(function&lt; bool(const log_event &amp;)&gt; filter)</argsstring>
+        <name>set_filter</name>
+        <qualifiedname>neforce::logger::set_filter</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; bool(const <ref refid="structneforce_1_1log__event" kindref="compound">log_event</ref> &amp;)&gt;</type>
+          <declname>filter</declname>
+        </param>
+        <briefdescription>
+<para>设置日志过滤器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>filter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>过滤器函数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+过滤器返回true表示接受该日志，false表示拒绝。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="140" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1a2ba314aaaed3064fa5c57820b8fd5d5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::add_context</definition>
+        <argsstring>(const string &amp;key, string value)</argsstring>
+        <name>add_context</name>
+        <qualifiedname>neforce::logger::add_context</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>添加上下文信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+上下文信息会附加到每条日志中。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="149" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1a6d8a67952352c8140a6ac2a7632bb9de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::remove_context</definition>
+        <argsstring>(const string &amp;key)</argsstring>
+        <name>remove_context</name>
+        <qualifiedname>neforce::logger::remove_context</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>移除上下文信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移除的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="155" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1ab2ae094e0bd82f4b2879b82dd8aa03b5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::clear_context</definition>
+        <argsstring>()</argsstring>
+        <name>clear_context</name>
+        <qualifiedname>neforce::logger::clear_context</qualifiedname>
+        <briefdescription>
+<para>清除所有上下文信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="160" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1ab70437d295e5df8ebc7f9c5cbe36e7cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::enable_async</definition>
+        <argsstring>(bool async)</argsstring>
+        <name>enable_async</name>
+        <qualifiedname>neforce::logger::enable_async</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>async</declname>
+        </param>
+        <briefdescription>
+<para>启用或禁用异步模式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>async</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true为异步，false为同步</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+异步模式下日志写入不会阻塞调用线程。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="168" column="10"/>
+        <references refid="group___async_1ga3b100cc284ba1351140d99912b389764" compoundref="async_8hpp" startline="43" endline="56">neforce::async</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1a733b394a9689aff3eb501d5ba4744744" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::log</definition>
+        <argsstring>(log_level level, string msg, string file, string func, int line)</argsstring>
+        <name>log</name>
+        <qualifiedname>neforce::logger::log</qualifiedname>
+        <param>
+          <type><ref refid="group___logging_1gaa0be5f70fcdb7c2f3dd3e121511f9fd0" kindref="member">log_level</ref></type>
+          <declname>level</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>记录日志 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>level</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日志级别 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日志消息 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源文件名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>行号 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="178" column="10"/>
+        <referencedby refid="classneforce_1_1logger_1a87adeb564dbd62c67a9930f96001c887" compoundref="logger_8hpp" startline="198" endline="200">debug</referencedby>
+        <referencedby refid="classneforce_1_1logger_1aeb2e00d2b9f5e33d0da22643a291aa23" compoundref="logger_8hpp" startline="231" endline="233">error</referencedby>
+        <referencedby refid="classneforce_1_1logger_1a2646ff870831ad055c043ac9a530c480" compoundref="logger_8hpp" startline="242" endline="244">fatal</referencedby>
+        <referencedby refid="classneforce_1_1logger_1abb3bd130d8d298726f1b91e1f43e0b56" compoundref="logger_8hpp" startline="209" endline="211">info</referencedby>
+        <referencedby refid="classneforce_1_1logger_1a1afa29f463cacd193d62c9eff9915642" compoundref="logger_8hpp" startline="103" endline="106">instance</referencedby>
+        <referencedby refid="classneforce_1_1logger_1aaf5a619abda049f0c77d0dad67aec6db" compoundref="logger_8hpp" startline="187" endline="189">trace</referencedby>
+        <referencedby refid="classneforce_1_1logger_1a06b9caf8e699256f1d320fa7c54015eb" compoundref="logger_8hpp" startline="220" endline="222">warn</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1aaf5a619abda049f0c77d0dad67aec6db" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::trace</definition>
+        <argsstring>(string msg, string file, string func, int line)</argsstring>
+        <name>trace</name>
+        <qualifiedname>neforce::logger::trace</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>记录TRACE级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日志消息 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源文件名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>行号 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="187" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="187" bodyend="189"/>
+        <references refid="classneforce_1_1logger_1a733b394a9689aff3eb501d5ba4744744">log</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___logging_1ggaa0be5f70fcdb7c2f3dd3e121511f9fd0a2d3e4144aa384b18849ab9a8abad74d6" compoundref="log__event_8hpp" startline="34">TRACE</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1a87adeb564dbd62c67a9930f96001c887" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::debug</definition>
+        <argsstring>(string msg, string file, string func, int line)</argsstring>
+        <name>debug</name>
+        <qualifiedname>neforce::logger::debug</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>记录DEBUG级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日志消息 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源文件名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>行号 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="198" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="198" bodyend="200"/>
+        <references refid="group___logging_1ggaa0be5f70fcdb7c2f3dd3e121511f9fd0adc30ec20708ef7b0f641ef78b7880a15" compoundref="log__event_8hpp" startline="35">DEBUG</references>
+        <references refid="classneforce_1_1logger_1a733b394a9689aff3eb501d5ba4744744">log</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1abb3bd130d8d298726f1b91e1f43e0b56" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::info</definition>
+        <argsstring>(string msg, string file, string func, int line)</argsstring>
+        <name>info</name>
+        <qualifiedname>neforce::logger::info</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>记录INFO级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日志消息 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源文件名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>行号 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="209" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="209" bodyend="211"/>
+        <references refid="group___logging_1ggaa0be5f70fcdb7c2f3dd3e121511f9fd0a551b723eafd6a31d444fcb2f5920fbd3" compoundref="log__event_8hpp" startline="36">INFO</references>
+        <references refid="classneforce_1_1logger_1a733b394a9689aff3eb501d5ba4744744">log</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1a06b9caf8e699256f1d320fa7c54015eb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::warn</definition>
+        <argsstring>(string msg, string file, string func, int line)</argsstring>
+        <name>warn</name>
+        <qualifiedname>neforce::logger::warn</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>记录WARN级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日志消息 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源文件名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>行号 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="220" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="220" bodyend="222"/>
+        <references refid="classneforce_1_1logger_1a733b394a9689aff3eb501d5ba4744744">log</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="group___logging_1ggaa0be5f70fcdb7c2f3dd3e121511f9fd0a32bd8a1db2275458673903bdb84cb277" compoundref="log__event_8hpp" startline="37">WARN</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1aeb2e00d2b9f5e33d0da22643a291aa23" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::error</definition>
+        <argsstring>(string msg, string file, string func, int line)</argsstring>
+        <name>error</name>
+        <qualifiedname>neforce::logger::error</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>记录ERROR级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日志消息 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源文件名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>行号 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="231" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="231" bodyend="233"/>
+        <references refid="group___logging_1ggaa0be5f70fcdb7c2f3dd3e121511f9fd0abb1ca97ec761fc37101737ba0aa2e7c5" compoundref="log__event_8hpp" startline="38">ERROR</references>
+        <references refid="classneforce_1_1logger_1a733b394a9689aff3eb501d5ba4744744">log</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1a2646ff870831ad055c043ac9a530c480" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::fatal</definition>
+        <argsstring>(string msg, string file, string func, int line)</argsstring>
+        <name>fatal</name>
+        <qualifiedname>neforce::logger::fatal</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>file</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>line</declname>
+        </param>
+        <briefdescription>
+<para>记录FATAL级别日志 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日志消息 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源文件名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>行号 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="242" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="242" bodyend="244"/>
+        <references refid="group___logging_1ggaa0be5f70fcdb7c2f3dd3e121511f9fd0a19da7170bea36556dde582519795f3fc" compoundref="log__event_8hpp" startline="39">FATAL</references>
+        <references refid="classneforce_1_1logger_1a733b394a9689aff3eb501d5ba4744744">log</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1logger_1a7d51fb9856a7c99a68e22240e7e3df86" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::logger::flush</definition>
+        <argsstring>()</argsstring>
+        <name>flush</name>
+        <qualifiedname>neforce::logger::flush</qualifiedname>
+        <briefdescription>
+<para>刷新所有输出目标 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>确保所有日志都被实际输出。 异步模式下会等待工作线程处理完所有日志。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="252" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>日志记录器单例类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供全局日志记录功能，支持：<itemizedlist>
+<listitem><para>多级别日志</para>
+</listitem><listitem><para>同步/异步模式</para>
+</listitem><listitem><para>多输出目标</para>
+</listitem><listitem><para>日志过滤</para>
+</listitem><listitem><para>全局上下文信息</para>
+</listitem><listitem><para>线程安全 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="37" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="37" bodyend="253"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1logger_1a2ba314aaaed3064fa5c57820b8fd5d5f" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>add_context</name></member>
+      <member refid="classneforce_1_1logger_1a3726e6c50e6906b68feb179928d99603" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>add_sink</name></member>
+      <member refid="classneforce_1_1logger_1a03cd8a32a46dd51c88d6f4f02b621e4d" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>async_</name></member>
+      <member refid="classneforce_1_1logger_1ab2ae094e0bd82f4b2879b82dd8aa03b5" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>clear_context</name></member>
+      <member refid="classneforce_1_1logger_1ae7693da61be3e0d0880866a60b98e92f" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>context_</name></member>
+      <member refid="classneforce_1_1logger_1ae0979930816b12a6170f7dd70c6e51e2" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>context_mutex_</name></member>
+      <member refid="classneforce_1_1logger_1a130ae7bda70516dc5838a8cca7335115" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>cv_</name></member>
+      <member refid="classneforce_1_1logger_1a87adeb564dbd62c67a9930f96001c887" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>debug</name></member>
+      <member refid="classneforce_1_1logger_1ab70437d295e5df8ebc7f9c5cbe36e7cb" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>enable_async</name></member>
+      <member refid="classneforce_1_1logger_1ae096237530ac77902b514a19f0ee040e" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>enqueue</name></member>
+      <member refid="classneforce_1_1logger_1ae9ee10e90896e4c807a2d22e31cac650" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>enqueue</name></member>
+      <member refid="classneforce_1_1logger_1aeb2e00d2b9f5e33d0da22643a291aa23" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>error</name></member>
+      <member refid="classneforce_1_1logger_1a2646ff870831ad055c043ac9a530c480" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>fatal</name></member>
+      <member refid="classneforce_1_1logger_1adec30e72ceb7b00ff84d29c4f463502a" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>filter_</name></member>
+      <member refid="classneforce_1_1logger_1a2756540e879106ce299bf078bacf4b17" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>filter_mutex_</name></member>
+      <member refid="classneforce_1_1logger_1a7d51fb9856a7c99a68e22240e7e3df86" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>flush</name></member>
+      <member refid="classneforce_1_1logger_1a5e91cde0d86836a53d17481c82b955cc" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>flush_cv_</name></member>
+      <member refid="classneforce_1_1logger_1affe1d780ad9f49bb734f104075c4f5fd" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>flush_mutex_</name></member>
+      <member refid="classneforce_1_1logger_1abf6419ec2a413511f825615dbb7db4a1" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>flush_requested_</name></member>
+      <member refid="classneforce_1_1logger_1abb3bd130d8d298726f1b91e1f43e0b56" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>info</name></member>
+      <member refid="classneforce_1_1logger_1a1afa29f463cacd193d62c9eff9915642" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>instance</name></member>
+      <member refid="classneforce_1_1logger_1a6033fd7f7b4073c1eb7f8308212bd150" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>level_</name></member>
+      <member refid="classneforce_1_1logger_1a733b394a9689aff3eb501d5ba4744744" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>log</name></member>
+      <member refid="classneforce_1_1logger_1a1e57d2c33f5c5dcd72f46f8fd8748ffa" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>logger</name></member>
+      <member refid="classneforce_1_1logger_1a98e286ed2e19aa1f120b37df55bec16e" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>logger</name></member>
+      <member refid="classneforce_1_1logger_1a7e1a87e66e5dd76e41baed1c675719f9" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>logger</name></member>
+      <member refid="classneforce_1_1logger_1a54acd2b7930e45c73adde4537b69b71a" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1logger_1ac1616beff290db97bf1e99469ef0d577" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1logger_1adb865732563fbc30f37641c854e35e1c" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>queue_</name></member>
+      <member refid="classneforce_1_1logger_1a04756972521a2da2118f5b966ee5f4bd" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>queue_mutex_</name></member>
+      <member refid="classneforce_1_1logger_1a6d8a67952352c8140a6ac2a7632bb9de" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>remove_context</name></member>
+      <member refid="classneforce_1_1logger_1a8b50e1a3e48ccfda59cf9469e21512bf" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>running_</name></member>
+      <member refid="classneforce_1_1logger_1aa204e73cf6f06d37cc2f3aded61c57ae" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>set_filter</name></member>
+      <member refid="classneforce_1_1logger_1aa5380e8af1d871a8565de99daeacdb2f" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>set_level</name></member>
+      <member refid="classneforce_1_1logger_1a2ede1a3391a23a2bb627805b9e73bbf2" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>sinks_</name></member>
+      <member refid="classneforce_1_1logger_1a55b22e5ed7444f137134354a9b6bf14f" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>sinks_mutex_</name></member>
+      <member refid="classneforce_1_1logger_1a728d11ec06a040f4a95dbc9d0e7dd426" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>start_worker</name></member>
+      <member refid="classneforce_1_1logger_1ad89f6242010df2c74cb69ca2e648e67c" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>stop_worker</name></member>
+      <member refid="classneforce_1_1logger_1aaf5a619abda049f0c77d0dad67aec6db" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>trace</name></member>
+      <member refid="classneforce_1_1logger_1a06b9caf8e699256f1d320fa7c54015eb" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>warn</name></member>
+      <member refid="classneforce_1_1logger_1a2027d9ff632832b293177011801b3040" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>worker_</name></member>
+      <member refid="classneforce_1_1logger_1a7f5a300be2a77df8bbf26a478ea87bc8" prot="private" virt="non-virtual"><scope>neforce::logger</scope><name>worker_loop</name></member>
+      <member refid="classneforce_1_1logger_1aab19ed324ffb27b487897f4bf505403b" prot="public" virt="non-virtual"><scope>neforce::logger</scope><name>~logger</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

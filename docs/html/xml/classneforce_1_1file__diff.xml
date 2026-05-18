@@ -1,0 +1,313 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1file__diff" kind="class" language="C++" prot="public">
+    <compoundname>neforce::file_diff</compoundname>
+    <includes refid="file__diff_8hpp" local="no">file_diff.hpp</includes>
+    <innerclass refid="structneforce_1_1file__diff_1_1binary__diff__entry" prot="public">neforce::file_diff::binary_diff_entry</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1file__diff_1a5c93da0f456ca548667710e7ee60d19c" prot="public" static="no">
+        <type>unsigned long</type>
+        <definition>using neforce::file_diff::size_type = 
+
+unsigned long</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>neforce::file_diff::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_diff.hpp" line="37" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_diff.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1file__diff_1a27fd908d062a00d6fc456dd4386def66" prot="public" static="no">
+        <type><ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+        <definition>using neforce::file_diff::difference_type = int64_t</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::file_diff::difference_type</qualifiedname>
+        <briefdescription>
+<para>差异偏移量类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_diff.hpp" line="44" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_diff.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1file__diff_1a37b8123ba69097e45113c4fc58329d82" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::file_diff::file_diff</definition>
+        <argsstring>()=delete</argsstring>
+        <name>file_diff</name>
+        <qualifiedname>neforce::file_diff::file_diff</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_diff.hpp" line="35" column="5"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1file__diff_1a63f095111bd8c68538dc696237508d28" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::file_diff::compare</definition>
+        <argsstring>(const path &amp;file1, const path &amp;file2, bool binary=true)</argsstring>
+        <name>compare</name>
+        <qualifiedname>neforce::file_diff::compare</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>file1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>file2</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>binary</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>比较两个文件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>file1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>file2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>binary</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否使用二进制比较，默认为true </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>文件内容相同返回true，否则返回false</para>
+</simplesect>
+根据binary参数选择二进制比较或文本比较。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_diff.hpp" line="69" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__diff_1a99fed0f1ebff7918374fc3cde4f11833" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::file_diff::compare_binary</definition>
+        <argsstring>(const path &amp;file1, const path &amp;file2)</argsstring>
+        <name>compare_binary</name>
+        <qualifiedname>neforce::file_diff::compare_binary</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>file1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>file2</declname>
+        </param>
+        <briefdescription>
+<para>二进制比较 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>file1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>file2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个文件路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>文件内容完全一致返回true</para>
+</simplesect>
+逐字节比较两个文件的内容，要求文件大小相同且每个字节都相等。 使用缓冲读取方式，避免一次性加载整个文件到内存。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_diff.hpp" line="80" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__diff_1a183698bd419e84b9489095997205924c" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::file_diff::compare_text</definition>
+        <argsstring>(const path &amp;file1, const path &amp;file2, bool ignore_case=false, bool ignore_whitespace=false)</argsstring>
+        <name>compare_text</name>
+        <qualifiedname>neforce::file_diff::compare_text</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>file1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>file2</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>ignore_case</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>ignore_whitespace</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>文本比较 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>file1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>file2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ignore_case</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否忽略大小写 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ignore_whitespace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否忽略空白字符（空格、制表符、换行等） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>文件内容相同返回true</para>
+</simplesect>
+按行比较文本文件，支持：<itemizedlist>
+<listitem><para>忽略大小写：将字母统一转换为小写后比较</para>
+</listitem><listitem><para>忽略空白字符：去除行首尾空白，将连续空白压缩为单个空格 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_diff.hpp" line="94" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1file__diff_1add5db2ba3f7997545e9d3f73522d3866" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1file__diff_1_1binary__diff__entry" kindref="compound">binary_diff_entry</ref> &gt;</type>
+        <definition>static vector&lt; binary_diff_entry &gt; neforce::file_diff::binary_diff</definition>
+        <argsstring>(const path &amp;file1, const path &amp;file2, size_type max_diffs=100)</argsstring>
+        <name>binary_diff</name>
+        <qualifiedname>neforce::file_diff::binary_diff</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>file1</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>file2</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1file__diff_1a5c93da0f456ca548667710e7ee60d19c" kindref="member">size_type</ref></type>
+          <declname>max_diffs</declname>
+          <defval>100</defval>
+        </param>
+        <briefdescription>
+<para>获取二进制差异列表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>file1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>file2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_diffs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最多返回的差异条目数，默认100 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>差异条目列表</para>
+</simplesect>
+逐字节比较两个文件，收集所有差异点。 如果文件大小不同，会包含一个标识大小差异的条目。 限制max_diffs可避免处理超大文件时产生过多条目。</para>
+<para><simplesect kind="note"><para>差异条目按文件偏移量升序排列 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_diff.hpp" line="110" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>文件比较与差异分析工具类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供静态方法进行文件比较和差异分析。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>二进制文件比较</para>
+</listitem><listitem><para>文本文件比较（支持忽略大小写和空白字符）</para>
+</listitem><listitem><para>获取详细的二进制差异列表 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/file_diff.hpp" line="33" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/file_diff.hpp" bodystart="33" bodyend="112"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1file__diff_1add5db2ba3f7997545e9d3f73522d3866" prot="public" virt="non-virtual"><scope>neforce::file_diff</scope><name>binary_diff</name></member>
+      <member refid="classneforce_1_1file__diff_1a63f095111bd8c68538dc696237508d28" prot="public" virt="non-virtual"><scope>neforce::file_diff</scope><name>compare</name></member>
+      <member refid="classneforce_1_1file__diff_1a99fed0f1ebff7918374fc3cde4f11833" prot="public" virt="non-virtual"><scope>neforce::file_diff</scope><name>compare_binary</name></member>
+      <member refid="classneforce_1_1file__diff_1a183698bd419e84b9489095997205924c" prot="public" virt="non-virtual"><scope>neforce::file_diff</scope><name>compare_text</name></member>
+      <member refid="classneforce_1_1file__diff_1a27fd908d062a00d6fc456dd4386def66" prot="public" virt="non-virtual"><scope>neforce::file_diff</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1file__diff_1a37b8123ba69097e45113c4fc58329d82" prot="public" virt="non-virtual"><scope>neforce::file_diff</scope><name>file_diff</name></member>
+      <member refid="classneforce_1_1file__diff_1a5c93da0f456ca548667710e7ee60d19c" prot="public" virt="non-virtual"><scope>neforce::file_diff</scope><name>size_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

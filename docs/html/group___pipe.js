@@ -8,14 +8,14 @@ var group___pipe =
       [ "close", "classpipe.html#a1d2b7f830e41202dd7b5c3d363e43abe", null ],
       [ "close_read", "classpipe.html#aab7159a1c68f474b1fb785724954ed96", null ],
       [ "close_write", "classpipe.html#aa1d3f29b2c33fe3fdd0aa38996068895", null ],
-      [ "detach_read_handle", "classpipe.html#a871afb05412000aea00e02b744788bb3", null ],
-      [ "detach_write_handle", "classpipe.html#a8f19c0042cb447d2912f74e0132470c0", null ],
-      [ "is_valid", "classpipe.html#a6e95e2a9525ba03f7f4a97eeb5b2c08d", null ],
-      [ "native_read_handle", "classpipe.html#a245c156bfdb9a104cd39b079b90e665f", null ],
-      [ "native_write_handle", "classpipe.html#a1960e935103dcc4ce15bc65b6e38cecf", null ],
+      [ "detach_read_handle", "classpipe.html#a30dcdd5081bc67c0a05ba957d8a7484d", null ],
+      [ "detach_write_handle", "classpipe.html#a1c75475bb92c29de6cdf3b18d8e16cb0", null ],
+      [ "is_valid", "classpipe.html#a0036cbd11cec0e6711d922edb2193449", null ],
+      [ "native_read_handle", "classpipe.html#a9f390bd867f9648e137145cd5f7c54c7", null ],
+      [ "native_write_handle", "classpipe.html#a87e1c74c33b920441bff56907c322eeb", null ],
       [ "operator=", "classpipe.html#a700d9f262f874c54517b8903fdb131a6", null ],
       [ "read", "classpipe.html#a16c487e5806079fbfd62005d8bffe0e5", null ],
-      [ "read_available", "classpipe.html#ab6f770ac312b5bcb647020d16cc56c9c", null ],
+      [ "read_available", "classpipe.html#ad06e875806e4a3fb168719d68ee486ea", null ],
       [ "write", "classpipe.html#a6834b8e2df04604f490e8eef1e63b148", null ]
     ] ]
 ];

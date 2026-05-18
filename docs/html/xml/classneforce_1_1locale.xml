@@ -1,0 +1,977 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1locale" kind="class" language="C++" prot="public">
+    <compoundname>neforce::locale</compoundname>
+    <includes refid="locale_8hpp" local="no">locale.hpp</includes>
+    <innerclass refid="structneforce_1_1locale_1_1numeric__info" prot="public">neforce::locale::numeric_info</innerclass>
+    <innerclass refid="structneforce_1_1locale_1_1monetary__info" prot="public">neforce::locale::monetary_info</innerclass>
+    <innerclass refid="structneforce_1_1locale_1_1time__info" prot="public">neforce::locale::time_info</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classneforce_1_1locale_1a6262ec6fb32492022fb03e2993fd0901" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1gaa0af497ed9ed410d4c911b409653515a" kindref="member">int32_t</ref></type>
+        <name>collate_strength</name>
+        <qualifiedname>neforce::locale::collate_strength</qualifiedname>
+        <enumvalue id="classneforce_1_1locale_1a6262ec6fb32492022fb03e2993fd0901a386bba5a5dc4fac215c9cf0b9a29b352" prot="public">
+          <name>primary</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>一级比较：忽略大小写、变音符号、标点符号 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1locale_1a6262ec6fb32492022fb03e2993fd0901a1f7ba58706f9d405023da32864d059c8" prot="public">
+          <name>secondary</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+<para>二级比较：忽略大小写、区分变音符号 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1locale_1a6262ec6fb32492022fb03e2993fd0901ac16e378185ee71ca686e24abc62bf832" prot="public">
+          <name>tertiary</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+<para>三级比较：区分大小写 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1locale_1a6262ec6fb32492022fb03e2993fd0901aee0cbdbacdada19376449799774976e8" prot="public">
+          <name>identical</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+<para>完全比较：完全比较 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>字符串比较强度 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义字符串比较时考虑的敏感度级别。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="116" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" bodystart="116" bodyend="121"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1locale_1a00bae7eba7f7e404602f0242ad6d8482" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::locale::name_</definition>
+        <argsstring></argsstring>
+        <name>name_</name>
+        <qualifiedname>neforce::locale::name_</qualifiedname>
+        <briefdescription>
+<para>区域设置名称 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="124" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1locale_1a25f569788b730bd850586d1feaaec0f7" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::locale::encoding_</definition>
+        <argsstring></argsstring>
+        <name>encoding_</name>
+        <qualifiedname>neforce::locale::encoding_</qualifiedname>
+        <briefdescription>
+<para>字符编码 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="125" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1locale_1acf15456ef3ef1201cc0baf5818b42be7" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::locale::win_name_</definition>
+        <argsstring></argsstring>
+        <name>win_name_</name>
+        <qualifiedname>neforce::locale::win_name_</qualifiedname>
+        <briefdescription>
+<para>区域设置名称 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="128" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1locale_1a87bccad489a3321148f3849fdae5d9dc" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::locale::load_locale</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>load_locale</name>
+        <qualifiedname>neforce::locale::load_locale</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="134" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::locale::locale</definition>
+        <argsstring>()</argsstring>
+        <name>locale</name>
+        <qualifiedname>neforce::locale::locale</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建&quot;C&quot;区域设置。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="142" column="5"/>
+        <referencedby refid="classneforce_1_1locale_1af21d91d74276700a9aeb0a79f3b59ae3">classic</referencedby>
+        <referencedby refid="classneforce_1_1locale_1ad8f58091fc66a96047b211f072ba5263">from_name</referencedby>
+        <referencedby refid="classneforce_1_1locale_1ae8813dd4e3afb5e23cb56585699a8a30">locale</referencedby>
+        <referencedby refid="classneforce_1_1locale_1a8a6330dad1cb729a937b71833b1e1a66">locale</referencedby>
+        <referencedby refid="classneforce_1_1locale_1afae59db4c89c8a6b2a05064d3b2670c0" compoundref="locale_8hpp" startline="225" endline="225">operator!=</referencedby>
+        <referencedby refid="classneforce_1_1locale_1af84632a84dc5614fa9b37ffd6e78c868">operator=</referencedby>
+        <referencedby refid="classneforce_1_1locale_1a35cc30a27ce618280437f1e33a4e3e06">operator=</referencedby>
+        <referencedby refid="classneforce_1_1locale_1ad05c8da94a3a55e92b64c43cfe660bbe" compoundref="locale_8hpp" startline="218" endline="218">operator==</referencedby>
+        <referencedby refid="classneforce_1_1locale_1a35bd63948909314f677d132d7145d08b">system</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a9c1cd6955b95fc79fe13464abb40fe3e" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::locale::locale</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>locale</name>
+        <qualifiedname>neforce::locale::locale</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>从名称构造区域设置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>区域设置名称（如&quot;en_US.UTF-8&quot;） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1locale__exception" kindref="compound">locale_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>区域设置不存在时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="149" column="14"/>
+        <references refid="classneforce_1_1locale_1a34e0212a6a77bb46db59ec37ef60d220" compoundref="locale_8hpp" startline="205" endline="205">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1aed584a508162bdf74d128a378d54af56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::locale::~locale</definition>
+        <argsstring>()</argsstring>
+        <name>~locale</name>
+        <qualifiedname>neforce::locale::~locale</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="154" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1ae8813dd4e3afb5e23cb56585699a8a30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::locale::locale</definition>
+        <argsstring>(const locale &amp;other)</argsstring>
+        <name>locale</name>
+        <qualifiedname>neforce::locale::locale</qualifiedname>
+        <param>
+          <type>const locale &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源区域设置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="160" column="5"/>
+        <references refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d">locale</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1af84632a84dc5614fa9b37ffd6e78c868" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d" kindref="member">locale</ref> &amp;</type>
+        <definition>locale &amp; neforce::locale::operator=</definition>
+        <argsstring>(const locale &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::locale::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d" kindref="member">locale</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源区域设置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="167" column="12"/>
+        <references refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d">locale</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a8a6330dad1cb729a937b71833b1e1a66" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::locale::locale</definition>
+        <argsstring>(locale &amp;&amp;other) noexcept</argsstring>
+        <name>locale</name>
+        <qualifiedname>neforce::locale::locale</qualifiedname>
+        <param>
+          <type>locale &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源区域设置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="173" column="5"/>
+        <references refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d">locale</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a35cc30a27ce618280437f1e33a4e3e06" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d" kindref="member">locale</ref> &amp;</type>
+        <definition>locale &amp; neforce::locale::operator=</definition>
+        <argsstring>(locale &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::locale::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d" kindref="member">locale</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源区域设置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="180" column="12"/>
+        <references refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d">locale</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a34e0212a6a77bb46db59ec37ef60d220" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+        <definition>const string &amp; neforce::locale::name</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>name</name>
+        <qualifiedname>neforce::locale::name</qualifiedname>
+        <briefdescription>
+<para>获取区域设置名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>区域设置名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="205" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" bodystart="205" bodyend="205"/>
+        <referencedby refid="classneforce_1_1locale_1ad8f58091fc66a96047b211f072ba5263">from_name</referencedby>
+        <referencedby refid="classneforce_1_1locale_1a9c1cd6955b95fc79fe13464abb40fe3e">locale</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1afffaeadee18ef5f44e4aa7d9a386e266" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+        <definition>const string &amp; neforce::locale::encoding</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>encoding</name>
+        <qualifiedname>neforce::locale::encoding</qualifiedname>
+        <briefdescription>
+<para>获取字符编码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>编码名称（如&quot;UTF-8&quot;） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="211" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" bodystart="211" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1ad05c8da94a3a55e92b64c43cfe660bbe" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::locale::operator==</definition>
+        <argsstring>(const locale &amp;o) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>neforce::locale::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d" kindref="member">locale</ref> &amp;</type>
+          <declname>o</declname>
+        </param>
+        <briefdescription>
+<para>相等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>o</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个区域设置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>名称相同返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="218" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" bodystart="218" bodyend="218"/>
+        <references refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d">locale</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1afae59db4c89c8a6b2a05064d3b2670c0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::locale::operator!=</definition>
+        <argsstring>(const locale &amp;o) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>neforce::locale::operator!=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d" kindref="member">locale</ref> &amp;</type>
+          <declname>o</declname>
+        </param>
+        <briefdescription>
+<para>不等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>o</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>另一个区域设置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>名称不同返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="225" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" bodystart="225" bodyend="225"/>
+        <references refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d">locale</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a579533e7f5430c27720123055c62e6d1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1locale_1_1numeric__info" kindref="compound">numeric_info</ref></type>
+        <definition>numeric_info neforce::locale::numeric</definition>
+        <argsstring>() const</argsstring>
+        <name>numeric</name>
+        <qualifiedname>neforce::locale::numeric</qualifiedname>
+        <briefdescription>
+<para>获取数字格式信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>数字格式信息 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="231" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a609e0992c78034ea2605d8613608adfa" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1locale_1_1monetary__info" kindref="compound">monetary_info</ref></type>
+        <definition>monetary_info neforce::locale::monetary</definition>
+        <argsstring>() const</argsstring>
+        <name>monetary</name>
+        <qualifiedname>neforce::locale::monetary</qualifiedname>
+        <briefdescription>
+<para>获取货币格式信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>货币格式信息 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="237" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a366a0a914b967ef0046f73cf3fa9b5b5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1locale_1_1time__info" kindref="compound">time_info</ref></type>
+        <definition>time_info neforce::locale::time</definition>
+        <argsstring>() const</argsstring>
+        <name>time</name>
+        <qualifiedname>neforce::locale::time</qualifiedname>
+        <briefdescription>
+<para>获取时间格式信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>时间格式信息 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="243" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a4f8f123a9d3ca74326709dcd0a27cfec" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::locale::is_alpha</definition>
+        <argsstring>(char32_t cp) const noexcept</argsstring>
+        <name>is_alpha</name>
+        <qualifiedname>neforce::locale::is_alpha</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>cp</declname>
+        </param>
+        <briefdescription>
+<para>是否为字母 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="245" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a96c4596860d3b79484cde028f04f29a7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::locale::is_digit</definition>
+        <argsstring>(char32_t cp) const noexcept</argsstring>
+        <name>is_digit</name>
+        <qualifiedname>neforce::locale::is_digit</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>cp</declname>
+        </param>
+        <briefdescription>
+<para>是否为数字 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="246" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1afa4a0ab48e150ea8a26fce9b0569a614" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::locale::is_alnum</definition>
+        <argsstring>(char32_t cp) const noexcept</argsstring>
+        <name>is_alnum</name>
+        <qualifiedname>neforce::locale::is_alnum</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>cp</declname>
+        </param>
+        <briefdescription>
+<para>是否为字母或数字 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="247" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a31e5c76acf42d3421245883084460c41" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::locale::is_space</definition>
+        <argsstring>(char32_t cp) const noexcept</argsstring>
+        <name>is_space</name>
+        <qualifiedname>neforce::locale::is_space</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>cp</declname>
+        </param>
+        <briefdescription>
+<para>是否为空白字符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="248" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1af28b1e9469fb619ef609d5db4d839104" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::locale::is_upper</definition>
+        <argsstring>(char32_t cp) const noexcept</argsstring>
+        <name>is_upper</name>
+        <qualifiedname>neforce::locale::is_upper</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>cp</declname>
+        </param>
+        <briefdescription>
+<para>是否为大写字母 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="249" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a5ed4733ab69e2bc6ade2c5a4bcca1d59" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::locale::is_lower</definition>
+        <argsstring>(char32_t cp) const noexcept</argsstring>
+        <name>is_lower</name>
+        <qualifiedname>neforce::locale::is_lower</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>cp</declname>
+        </param>
+        <briefdescription>
+<para>是否为小写字母 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="250" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1ae4cb530f02c2588c66b1a0c9b3fe24a9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::locale::is_punct</definition>
+        <argsstring>(char32_t cp) const noexcept</argsstring>
+        <name>is_punct</name>
+        <qualifiedname>neforce::locale::is_punct</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>cp</declname>
+        </param>
+        <briefdescription>
+<para>是否为标点符号 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="251" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a307273f024cc0b6c83a3f7b5af139207" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::locale::is_print</definition>
+        <argsstring>(char32_t cp) const noexcept</argsstring>
+        <name>is_print</name>
+        <qualifiedname>neforce::locale::is_print</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>cp</declname>
+        </param>
+        <briefdescription>
+<para>是否为可打印字符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="252" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1aa4aff635ff33f47f05190f33fb593580" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>char32_t</type>
+        <definition>char32_t neforce::locale::to_upper</definition>
+        <argsstring>(char32_t cp) const noexcept</argsstring>
+        <name>to_upper</name>
+        <qualifiedname>neforce::locale::to_upper</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>cp</declname>
+        </param>
+        <briefdescription>
+<para>转换为大写 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="254" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a49cfae385d5c5ed11d96c3af120a9a69" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>char32_t</type>
+        <definition>char32_t neforce::locale::to_lower</definition>
+        <argsstring>(char32_t cp) const noexcept</argsstring>
+        <name>to_lower</name>
+        <qualifiedname>neforce::locale::to_lower</qualifiedname>
+        <param>
+          <type>char32_t</type>
+          <declname>cp</declname>
+        </param>
+        <briefdescription>
+<para>转换为小写 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="255" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a251650d1d887b10c0197ab2ad2038e8f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int neforce::locale::compare</definition>
+        <argsstring>(const string &amp;a, const string &amp;b, collate_strength strength=collate_strength::tertiary) const</argsstring>
+        <name>compare</name>
+        <qualifiedname>neforce::locale::compare</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1locale_1a6262ec6fb32492022fb03e2993fd0901" kindref="member">collate_strength</ref></type>
+          <declname>strength</declname>
+          <defval><ref refid="classneforce_1_1locale_1a6262ec6fb32492022fb03e2993fd0901ac16e378185ee71ca686e24abc62bf832" kindref="member">collate_strength::tertiary</ref></defval>
+        </param>
+        <briefdescription>
+<para>比较两个字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第一个字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>第二个字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>strength</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较强度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>负数表示a&lt;b，0表示a=b，正数表示a&gt;b </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="264" column="10"/>
+        <references refid="classneforce_1_1locale_1a6262ec6fb32492022fb03e2993fd0901ac16e378185ee71ca686e24abc62bf832" compoundref="locale_8hpp" startline="119">tertiary</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1ae2a7307bab50d4247591e427be937018" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::locale::collation_key</definition>
+        <argsstring>(const string &amp;s) const</argsstring>
+        <name>collation_key</name>
+        <qualifiedname>neforce::locale::collation_key</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+<para>生成排序键 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>s</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>可用于二进制比较的排序键</para>
+</simplesect>
+排序键可直接用于快速比较，但需要更多存储空间。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="274" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1aac982eaf0c562702bb3d2c2fae5d6e71" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::locale::to_multibyte</definition>
+        <argsstring>(const u32string &amp;ucs4) const</argsstring>
+        <name>to_multibyte</name>
+        <qualifiedname>neforce::locale::to_multibyte</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1gaa69aa9a57364f666ddc310b92bc8a21d" kindref="member">u32string</ref> &amp;</type>
+          <declname>ucs4</declname>
+        </param>
+        <briefdescription>
+<para>将UTF-32字符串转换为当前区域设置的多字节字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ucs4</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>UTF-32字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>多字节字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="281" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a3ab9248473ad81f5f1687fba25b912b4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1gaa69aa9a57364f666ddc310b92bc8a21d" kindref="member">u32string</ref></type>
+        <definition>u32string neforce::locale::to_ucs4</definition>
+        <argsstring>(const string &amp;mb) const</argsstring>
+        <name>to_ucs4</name>
+        <qualifiedname>neforce::locale::to_ucs4</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>mb</declname>
+        </param>
+        <briefdescription>
+<para>将当前区域设置的多字节字符串转换为UTF-32 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>mb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>多字节字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>UTF-32字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="288" column="16"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1locale_1af21d91d74276700a9aeb0a79f3b59ae3" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d" kindref="member">locale</ref></type>
+        <definition>static locale neforce::locale::classic</definition>
+        <argsstring>()</argsstring>
+        <name>classic</name>
+        <qualifiedname>neforce::locale::classic</qualifiedname>
+        <briefdescription>
+<para>获取&quot;C&quot;区域设置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>&quot;C&quot;区域设置对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="186" column="20"/>
+        <references refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d">locale</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a35bd63948909314f677d132d7145d08b" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d" kindref="member">locale</ref></type>
+        <definition>static locale neforce::locale::system</definition>
+        <argsstring>()</argsstring>
+        <name>system</name>
+        <qualifiedname>neforce::locale::system</qualifiedname>
+        <briefdescription>
+<para>获取系统区域设置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>系统默认区域设置 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="192" column="20"/>
+        <references refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d">locale</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1ad8f58091fc66a96047b211f072ba5263" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d" kindref="member">locale</ref></type>
+        <definition>static locale neforce::locale::from_name</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>from_name</name>
+        <qualifiedname>neforce::locale::from_name</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>从名称创建区域设置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>区域设置名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>区域设置对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="199" column="20"/>
+        <references refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d">locale</references>
+        <references refid="classneforce_1_1locale_1a34e0212a6a77bb46db59ec37ef60d220" compoundref="locale_8hpp" startline="205" endline="205">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1locale_1a61082e672b2b4ab52c86d118ebd1bb70" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+        <definition>static vector&lt; string &gt; neforce::locale::available_locales</definition>
+        <argsstring>()</argsstring>
+        <name>available_locales</name>
+        <qualifiedname>neforce::locale::available_locales</qualifiedname>
+        <briefdescription>
+<para>获取系统所有可用的区域设置列表 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>区域设置名称列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="294" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>区域设置管理类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供跨平台的区域设置信息查询和字符处理功能。</para>
+<para>使用场景：<itemizedlist>
+<listitem><para>国际化/本地化应用程序</para>
+</listitem><listitem><para>格式化数字、货币、日期时间</para>
+</listitem><listitem><para>本地化字符串排序</para>
+</listitem><listitem><para>字符分类和大小写转换</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>区域设置对象是独立的，修改一个对象不影响其他对象。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="64" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" bodystart="64" bodyend="295"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1locale_1a61082e672b2b4ab52c86d118ebd1bb70" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>available_locales</name></member>
+      <member refid="classneforce_1_1locale_1af21d91d74276700a9aeb0a79f3b59ae3" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>classic</name></member>
+      <member refid="classneforce_1_1locale_1a6262ec6fb32492022fb03e2993fd0901" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>collate_strength</name></member>
+      <member refid="classneforce_1_1locale_1ae2a7307bab50d4247591e427be937018" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>collation_key</name></member>
+      <member refid="classneforce_1_1locale_1a251650d1d887b10c0197ab2ad2038e8f" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>compare</name></member>
+      <member refid="classneforce_1_1locale_1afffaeadee18ef5f44e4aa7d9a386e266" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>encoding</name></member>
+      <member refid="classneforce_1_1locale_1a25f569788b730bd850586d1feaaec0f7" prot="private" virt="non-virtual"><scope>neforce::locale</scope><name>encoding_</name></member>
+      <member refid="classneforce_1_1locale_1ad8f58091fc66a96047b211f072ba5263" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>from_name</name></member>
+      <member refid="classneforce_1_1locale_1afa4a0ab48e150ea8a26fce9b0569a614" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>is_alnum</name></member>
+      <member refid="classneforce_1_1locale_1a4f8f123a9d3ca74326709dcd0a27cfec" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>is_alpha</name></member>
+      <member refid="classneforce_1_1locale_1a96c4596860d3b79484cde028f04f29a7" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>is_digit</name></member>
+      <member refid="classneforce_1_1locale_1a5ed4733ab69e2bc6ade2c5a4bcca1d59" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>is_lower</name></member>
+      <member refid="classneforce_1_1locale_1a307273f024cc0b6c83a3f7b5af139207" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>is_print</name></member>
+      <member refid="classneforce_1_1locale_1ae4cb530f02c2588c66b1a0c9b3fe24a9" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>is_punct</name></member>
+      <member refid="classneforce_1_1locale_1a31e5c76acf42d3421245883084460c41" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>is_space</name></member>
+      <member refid="classneforce_1_1locale_1af28b1e9469fb619ef609d5db4d839104" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>is_upper</name></member>
+      <member refid="classneforce_1_1locale_1a87bccad489a3321148f3849fdae5d9dc" prot="private" virt="non-virtual"><scope>neforce::locale</scope><name>load_locale</name></member>
+      <member refid="classneforce_1_1locale_1a2370232ba57ad800aac18819e8e9157d" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>locale</name></member>
+      <member refid="classneforce_1_1locale_1a9c1cd6955b95fc79fe13464abb40fe3e" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>locale</name></member>
+      <member refid="classneforce_1_1locale_1ae8813dd4e3afb5e23cb56585699a8a30" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>locale</name></member>
+      <member refid="classneforce_1_1locale_1a8a6330dad1cb729a937b71833b1e1a66" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>locale</name></member>
+      <member refid="classneforce_1_1locale_1a609e0992c78034ea2605d8613608adfa" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>monetary</name></member>
+      <member refid="classneforce_1_1locale_1a34e0212a6a77bb46db59ec37ef60d220" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>name</name></member>
+      <member refid="classneforce_1_1locale_1a00bae7eba7f7e404602f0242ad6d8482" prot="private" virt="non-virtual"><scope>neforce::locale</scope><name>name_</name></member>
+      <member refid="classneforce_1_1locale_1a579533e7f5430c27720123055c62e6d1" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>numeric</name></member>
+      <member refid="classneforce_1_1locale_1afae59db4c89c8a6b2a05064d3b2670c0" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>operator!=</name></member>
+      <member refid="classneforce_1_1locale_1af84632a84dc5614fa9b37ffd6e78c868" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1locale_1a35cc30a27ce618280437f1e33a4e3e06" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1locale_1ad05c8da94a3a55e92b64c43cfe660bbe" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>operator==</name></member>
+      <member refid="classneforce_1_1locale_1a35bd63948909314f677d132d7145d08b" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>system</name></member>
+      <member refid="classneforce_1_1locale_1a366a0a914b967ef0046f73cf3fa9b5b5" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>time</name></member>
+      <member refid="classneforce_1_1locale_1a49cfae385d5c5ed11d96c3af120a9a69" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>to_lower</name></member>
+      <member refid="classneforce_1_1locale_1aac982eaf0c562702bb3d2c2fae5d6e71" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>to_multibyte</name></member>
+      <member refid="classneforce_1_1locale_1a3ab9248473ad81f5f1687fba25b912b4" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>to_ucs4</name></member>
+      <member refid="classneforce_1_1locale_1aa4aff635ff33f47f05190f33fb593580" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>to_upper</name></member>
+      <member refid="classneforce_1_1locale_1acf15456ef3ef1201cc0baf5818b42be7" prot="private" virt="non-virtual"><scope>neforce::locale</scope><name>win_name_</name></member>
+      <member refid="classneforce_1_1locale_1aed584a508162bdf74d128a378d54af56" prot="public" virt="non-virtual"><scope>neforce::locale</scope><name>~locale</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

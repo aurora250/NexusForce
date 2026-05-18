@@ -12,8 +12,8 @@ var group___system_info =
         [ "processor_revision", "structsysinfo_1_1system__info.html#a89038a3ebb1bdaebff488872f57e8557", null ]
       ] ],
       [ "memory_info", "structsysinfo_1_1memory__info.html", [
-        [ "available_memory", "structsysinfo_1_1memory__info.html#a4011ac0c3f351714ff2c30dc250483ef", null ],
-        [ "physical_memory_usage", "structsysinfo_1_1memory__info.html#ac441be26de90e27c2403b0e904573a6b", null ],
+        [ "available_memory", "structsysinfo_1_1memory__info.html#a5b09a82d68c13254c114100775f79e7d", null ],
+        [ "physical_memory_usage", "structsysinfo_1_1memory__info.html#a4ebfbcae263f478553c366d62a798204", null ],
         [ "available_page_file", "structsysinfo_1_1memory__info.html#a4c5e4ce8d790deca09645139ea1710ff", null ],
         [ "available_physical", "structsysinfo_1_1memory__info.html#a21a729921aebe562a2cf6ff03b02fe35", null ],
         [ "available_virtual", "structsysinfo_1_1memory__info.html#a1092f6344f1cb17952196fce0f494ca2", null ],
@@ -22,7 +22,7 @@ var group___system_info =
         [ "total_virtual", "structsysinfo_1_1memory__info.html#afe2a7222ee4f088e014338f60e9a70e0", null ]
       ] ],
       [ "CPU_info", "structsysinfo_1_1_c_p_u__info.html", [
-        [ "hyperthreading", "structsysinfo_1_1_c_p_u__info.html#a7fcdb67c44d302cdead6baa15ace39bf", null ],
+        [ "hyperthreading", "structsysinfo_1_1_c_p_u__info.html#a14eec4a7e08ee652775f5127cab015af", null ],
         [ "brand", "structsysinfo_1_1_c_p_u__info.html#ac444585514c69df4fb285d73905c8b11", null ],
         [ "cores", "structsysinfo_1_1_c_p_u__info.html#a72950152b1295f64fbae6363e0a91215", null ],
         [ "current_MHz", "structsysinfo_1_1_c_p_u__info.html#a1b737fae9977a80fdbcd3b5476d2c1ec", null ],
@@ -32,7 +32,7 @@ var group___system_info =
         [ "vendor", "structsysinfo_1_1_c_p_u__info.html#ad92712b7ebb0f39a392fa9b79c6d591b", null ]
       ] ],
       [ "os_version_info", "structsysinfo_1_1os__version__info.html", [
-        [ "version", "structsysinfo_1_1os__version__info.html#a4a621a548d804a4689c9844f1eb55b24", null ],
+        [ "version", "structsysinfo_1_1os__version__info.html#aa471b825701252b9e5f399187132c395", null ],
         [ "build", "structsysinfo_1_1os__version__info.html#a201fa2fa0bd48266b2fc5b51d2adffe6", null ],
         [ "csd_version", "structsysinfo_1_1os__version__info.html#a89f969c3030593ee73ee26fa9a09b55c", null ],
         [ "major", "structsysinfo_1_1os__version__info.html#a4bc0bcb61957f45421e727cabcf43de8", null ],
@@ -51,12 +51,12 @@ var group___system_info =
         [ "LOONGARCH64", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a444899381b9d044c3d148a9e99a3ec9f", null ],
         [ "LOONGARCH32", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a3a91efc2ac870d790cd3e6fc9b7c7f9a", null ]
       ] ],
-      [ "get_architecture", "classsysinfo.html#a2969c1689b21d9bc883071ccb353bbfd", null ],
-      [ "get_CPU_info", "classsysinfo.html#a3bd522897d213009f59aae487346d179", null ],
-      [ "get_memory_info", "classsysinfo.html#a2f66e2dc6fe96e9419e1920d6cdf0760", null ],
-      [ "get_os_version_info", "classsysinfo.html#ad81387f467fedd67a87a8cc5c927ff44", null ],
-      [ "get_system_info", "classsysinfo.html#ac5e05b4839bb2b63b4b2b7f51bb9e5c5", null ],
-      [ "is_initialized", "classsysinfo.html#ab9331206875e9553e338c5a34d601498", null ],
+      [ "get_architecture", "classsysinfo.html#a263fc148efdf13bbca1b9923aba436a9", null ],
+      [ "get_CPU_info", "classsysinfo.html#a12cd20c6d4ac8029b5c12430d8508ed5", null ],
+      [ "get_memory_info", "classsysinfo.html#a6f58a437df985dfc5817a76dbfe967e6", null ],
+      [ "get_os_version_info", "classsysinfo.html#a38b1558f84e3d0dec584ba243ee27d6f", null ],
+      [ "get_system_info", "classsysinfo.html#a683ee1cdfdb503e7e36a3348bfa81602", null ],
+      [ "is_initialized", "classsysinfo.html#ae4bc26b756f0201340e586d61ec1321f", null ],
       [ "refresh", "classsysinfo.html#aa59d27a7571c3ccfa6fff2c833f6efeb", null ]
     ] ]
 ];

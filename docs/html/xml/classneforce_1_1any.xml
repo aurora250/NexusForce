@@ -1,0 +1,1017 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1any" kind="class" language="C++" prot="public">
+    <compoundname>neforce::any</compoundname>
+    <includes refid="utility_2any_8hpp" local="no">any.hpp</includes>
+    <innerclass refid="unionneforce_1_1any_1_1storage__internal" prot="private">neforce::any::storage_internal</innerclass>
+    <innerclass refid="unionneforce_1_1any_1_1_arg_t" prot="private">neforce::any::ArgT</innerclass>
+    <innerclass refid="structneforce_1_1any_1_1internal__manage" prot="private">neforce::any::internal_manage</innerclass>
+    <innerclass refid="structneforce_1_1any_1_1external__manage" prot="private">neforce::any::external_manage</innerclass>
+    <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classneforce_1_1any_1a28dd174b950fdc775b807adb6e24c57d" prot="private" static="no" strong="no">
+        <type></type>
+        <name>any_operation</name>
+        <qualifiedname>neforce::any::any_operation</qualifiedname>
+        <enumvalue id="classneforce_1_1any_1a28dd174b950fdc775b807adb6e24c57da203356165027e27b6b21367ac9c36397" prot="private">
+          <name>ACCESS</name>
+          <briefdescription>
+<para>访问操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1any_1a28dd174b950fdc775b807adb6e24c57da2ddd985b3f2bbe487620c58fdd3ce100" prot="private">
+          <name>GET_TYPE_INFO</name>
+          <briefdescription>
+<para>获取类型信息操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1any_1a28dd174b950fdc775b807adb6e24c57da4fa407e63aa25cbb414f2ad4786c29e0" prot="private">
+          <name>COPY</name>
+          <briefdescription>
+<para>复制操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1any_1a28dd174b950fdc775b807adb6e24c57da6422787f8785976e0c627eedf47eaef0" prot="private">
+          <name>DESTROY</name>
+          <briefdescription>
+<para>销毁操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1any_1a28dd174b950fdc775b807adb6e24c57dac8e4634be4f0d2f4b7c69cc1413f1d5a" prot="private">
+          <name>SWAP</name>
+          <briefdescription>
+<para>交换操作 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>any操作类型枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义any内部分发时的操作类型。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="99" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="99" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1any_1ac80a6524daeaa1cca6840eb12b036135" prot="private" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1gaa9ea3c80d957cac4f923264b29fddb54" kindref="member">conditional_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gae20ac6ad74f8179d6959c23cbda15965" kindref="member">is_nothrow_move_constructible_v</ref>&lt; T &gt; &amp;&amp;sizeof(T)&lt;=sizeof(storage_internal) &amp;&amp; alignof(T)&lt;=alignof(storage_internal), internal_manage&lt; T &gt;, external_manage&lt; T &gt; &gt;</type>
+        <definition>using neforce::any::manage_t = conditional_t&lt;is_nothrow_move_constructible_v&lt;T&gt; &amp;&amp; sizeof(T) &lt;= sizeof(storage_internal) &amp;&amp;
+                                          alignof(T) &lt;= alignof(storage_internal),
+                                  internal_manage&lt;T&gt;, external_manage&lt;T&gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>manage_t</name>
+        <qualifiedname>neforce::any::manage_t</qualifiedname>
+        <briefdescription>
+<para>管理器类型选择 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+根据类型特性选择栈存储或堆存储管理。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="202" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="202" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1any_1a478e9b19fcb0f811556c79085238a70c" prot="private" static="no">
+        <type>void(*)(any_operation, const <ref refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49" kindref="member">any</ref> *, ArgT *)</type>
+        <definition>using neforce::any::manage_func = void (*)(any_operation, const any*, ArgT*)</definition>
+        <argsstring></argsstring>
+        <name>manage_func</name>
+        <qualifiedname>neforce::any::manage_func</qualifiedname>
+        <briefdescription>
+<para>管理器函数指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="206" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="206" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1any_1a44032bc258eed2d09579b1c52b972dc2" prot="private" static="no" mutable="no">
+        <type>manage_func</type>
+        <definition>manage_func neforce::any::manage_</definition>
+        <argsstring></argsstring>
+        <name>manage_</name>
+        <qualifiedname>neforce::any::manage_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>管理器函数指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="208" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="208" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1any_1a0558aa35563a4e7a62b97d555281d5a8" prot="private" static="no" mutable="no">
+        <type>storage_internal</type>
+        <definition>storage_internal neforce::any::storage_</definition>
+        <argsstring></argsstring>
+        <name>storage_</name>
+        <qualifiedname>neforce::any::storage_</qualifiedname>
+        <briefdescription>
+<para>存储对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="209" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="209" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classneforce_1_1any_1a5160bc98a81e05d5cc0de4b952ff2889" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>const T *</type>
+        <definition>const T * inner::__any_cast_aux_dispatch_impl</definition>
+        <argsstring>(const any *value, inner::any_cast_true_tag) noexcept</argsstring>
+        <name>inner::__any_cast_aux_dispatch_impl</name>
+        <qualifiedname>neforce::any::__any_cast_aux_dispatch_impl</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49" kindref="member">any</ref> *</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>inner::any_cast_true_tag</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="212" column="20"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1any_1ab560b9fcd17458a79c11cc3cec6b7f8d" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type>typename Manager</type>
+            <defval>manage_t&lt;T&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::any::try_emplace</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>try_emplace</name>
+        <qualifiedname>neforce::any::try_emplace</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>尝试构造值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Manager</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>管理器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="222" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="222" bodyend="226"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1any_1a7102cda8a9531e0b83da1f3d069999ef" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type>typename Manager</type>
+            <defval>manage_t&lt;T&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::any::try_emplace</definition>
+        <argsstring>(std::initializer_list&lt; U &gt; ilist, Args &amp;&amp;... args)</argsstring>
+        <name>try_emplace</name>
+        <qualifiedname>neforce::any::try_emplace</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; U &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>尝试使用初始化列表构造值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Manager</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>管理器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="238" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="238" bodyend="242"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::any::any</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>any</name>
+        <qualifiedname>neforce::any::any</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="248" column="5"/>
+        <referencedby refid="classneforce_1_1any_1a9d02b2dcf765fa197868cba593d69897">any</referencedby>
+        <referencedby refid="classneforce_1_1any_1a4613c4d96998e825a769d5595b134718">any</referencedby>
+        <referencedby refid="classneforce_1_1any_1a12a8b121ecde91c04b54446becb53c08">operator=</referencedby>
+        <referencedby refid="classneforce_1_1any_1a94794b044765240c812cab2e848dc50e" compoundref="utility_2any_8hpp" startline="262" endline="265">operator=</referencedby>
+        <referencedby refid="classneforce_1_1any_1a57013c61b59bba6ef97d244fa0d920c2" compoundref="utility_2any_8hpp" startline="301" endline="304">operator=</referencedby>
+        <referencedby refid="classneforce_1_1any_1a81e8ede7d8c6753b9273db5981c99017">swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1any_1a4613c4d96998e825a769d5595b134718" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::any::any</definition>
+        <argsstring>(const any &amp;other)</argsstring>
+        <name>any</name>
+        <qualifiedname>neforce::any::any</qualifiedname>
+        <param>
+          <type>const any &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>复制构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源any对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="254" column="5"/>
+        <references refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49">any</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1any_1a94794b044765240c812cab2e848dc50e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49" kindref="member">any</ref> &amp;</type>
+        <definition>any &amp; neforce::any::operator=</definition>
+        <argsstring>(const any &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::any::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49" kindref="member">any</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>复制赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源any对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="262" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="262" bodyend="265"/>
+        <references refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49">any</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1any_1a9d02b2dcf765fa197868cba593d69897" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::any::any</definition>
+        <argsstring>(any &amp;&amp;other) noexcept</argsstring>
+        <name>any</name>
+        <qualifiedname>neforce::any::any</qualifiedname>
+        <param>
+          <type>any &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源any对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="271" column="5"/>
+        <references refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49">any</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1any_1a12a8b121ecde91c04b54446becb53c08" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49" kindref="member">any</ref> &amp;</type>
+        <definition>any &amp; neforce::any::operator=</definition>
+        <argsstring>(any &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::any::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49" kindref="member">any</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源any对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="278" column="9"/>
+        <references refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49">any</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1any_1a7fdd26ead3f77e7408bd0d64df01cdde" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename VT</type>
+            <defval><ref refid="group___type_attribute_operations_1ga63500a8dd0f79ce1c721aebb8023ce89" kindref="member">decay_t</ref>&lt;T&gt;</defval>
+          </param>
+          <param>
+            <type>typename Manager</type>
+            <defval>manage_t&lt;VT&gt;</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga69f65e60be3587bd4cac30425301c8b8" kindref="member">is_copy_constructible_v</ref>&lt; VT &gt; &amp;&amp;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; <ref refid="structneforce_1_1inplace__construct__tag" kindref="compound">inplace_construct_tag</ref>, VT &gt; &amp;&amp;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; VT, <ref refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49" kindref="member">any</ref> &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::any::any</definition>
+        <argsstring>(T &amp;&amp;value)</argsstring>
+        <name>any</name>
+        <qualifiedname>neforce::any::any</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从值构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要存储的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="288" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="288" bodyend="291"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3019" endline="3021">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1any_1a57013c61b59bba6ef97d244fa0d920c2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename VT</type>
+            <defval><ref refid="group___type_attribute_operations_1ga63500a8dd0f79ce1c721aebb8023ce89" kindref="member">decay_t</ref>&lt;T&gt;</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; VT, <ref refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49" kindref="member">any</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga69f65e60be3587bd4cac30425301c8b8" kindref="member">is_copy_constructible_v</ref>&lt; VT &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49" kindref="member">any</ref> &amp;</type>
+        <definition>any &amp; neforce::any::operator=</definition>
+        <argsstring>(T &amp;&amp;value)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::any::operator=</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从值赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要存储的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="301" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="301" bodyend="304"/>
+        <references refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49">any</references>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3019" endline="3021">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1any_1aa075e0549f8cea750111a6e5aa4a1271" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type>typename VT</type>
+            <defval><ref refid="group___type_attribute_operations_1ga63500a8dd0f79ce1c721aebb8023ce89" kindref="member">decay_t</ref>&lt;T&gt;</defval>
+          </param>
+          <param>
+            <type>typename Manager</type>
+            <defval>manage_t&lt;VT&gt;</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1ga8f016dc0792f4b698f38abb48c34c25b" kindref="member">conjunction_v</ref>&lt; <ref refid="structneforce_1_1is__copy__constructible" kindref="compound">is_copy_constructible</ref>&lt; VT &gt;, <ref refid="structneforce_1_1is__constructible" kindref="compound">is_constructible</ref>&lt; VT, Args &amp;&amp;... &gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::any::any</definition>
+        <argsstring>(pass_template_construct_tag&lt; T &gt;, Args &amp;&amp;... args)</argsstring>
+        <name>any</name>
+        <qualifiedname>neforce::any::any</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1pass__template__construct__tag" kindref="compound">pass_template_construct_tag</ref>&lt; T &gt;</type>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>就地构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="314" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="314" bodyend="317"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3019" endline="3021">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1any_1ae54376e088119af4868a2f2b68df762d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type>typename VT</type>
+            <defval><ref refid="group___type_attribute_operations_1ga63500a8dd0f79ce1c721aebb8023ce89" kindref="member">decay_t</ref>&lt;T&gt;</defval>
+          </param>
+          <param>
+            <type>typename Manager</type>
+            <defval>manage_t&lt;VT&gt;</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1ga8f016dc0792f4b698f38abb48c34c25b" kindref="member">conjunction_v</ref>&lt; <ref refid="structneforce_1_1is__copy__constructible" kindref="compound">is_copy_constructible</ref>&lt; VT &gt;, <ref refid="structneforce_1_1is__constructible" kindref="compound">is_constructible</ref>&lt; VT, std::initializer_list&lt; U &gt; &amp;, Args &amp;&amp;... &gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::any::any</definition>
+        <argsstring>(pass_template_construct_tag&lt; T &gt;, std::initializer_list&lt; U &gt; ilist, Args &amp;&amp;... args)</argsstring>
+        <name>any</name>
+        <qualifiedname>neforce::any::any</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1pass__template__construct__tag" kindref="compound">pass_template_construct_tag</ref>&lt; T &gt;</type>
+        </param>
+        <param>
+          <type>std::initializer_list&lt; U &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="323" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="323" bodyend="326"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1any_1a66f269a84314acc797bce3b01234c72a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::any::~any</definition>
+        <argsstring>()</argsstring>
+        <name>~any</name>
+        <qualifiedname>neforce::any::~any</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="331" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="331" bodyend="331"/>
+        <references refid="classneforce_1_1any_1a14c89d3dda4b0d27f82b7e66536d926e" compoundref="utility_2any_8hpp" startline="368" endline="373">reset</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1any_1ae4ad758138967a254e8a7415deb03763" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type>typename DT</type>
+            <defval><ref refid="group___type_attribute_operations_1ga63500a8dd0f79ce1c721aebb8023ce89" kindref="member">decay_t</ref>&lt;T&gt;</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1ga8f016dc0792f4b698f38abb48c34c25b" kindref="member">conjunction_v</ref>&lt; <ref refid="structneforce_1_1is__copy__constructible" kindref="compound">is_copy_constructible</ref>&lt; DT &gt;, <ref refid="structneforce_1_1is__constructible" kindref="compound">is_constructible</ref>&lt; DT, Args &amp;&amp;... &gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>DT &amp;</type>
+        <definition>DT &amp; neforce::any::emplace</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>neforce::any::emplace</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>就地构造值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>构造的值的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="342" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="342" bodyend="345"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3019" endline="3021">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1any_1a0b1e9b25521e57cd8a52f96a109b43ee" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type>typename DT</type>
+            <defval><ref refid="group___type_attribute_operations_1ga63500a8dd0f79ce1c721aebb8023ce89" kindref="member">decay_t</ref>&lt;T&gt;</defval>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1ga8f016dc0792f4b698f38abb48c34c25b" kindref="member">conjunction_v</ref>&lt; <ref refid="structneforce_1_1is__copy__constructible" kindref="compound">is_copy_constructible</ref>&lt; DT &gt;, <ref refid="structneforce_1_1is__constructible" kindref="compound">is_constructible</ref>&lt; DT, std::initializer_list&lt; U &gt; &amp;, Args &amp;&amp;... &gt; &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>DT &amp;</type>
+        <definition>DT &amp; neforce::any::emplace</definition>
+        <argsstring>(std::initializer_list&lt; U &gt; ilist, Args &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>neforce::any::emplace</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; U &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>使用初始化列表就地构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表元素类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>构造的值的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="360" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="360" bodyend="363"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3019" endline="3021">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1any_1a14c89d3dda4b0d27f82b7e66536d926e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::any::reset</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>neforce::any::reset</qualifiedname>
+        <briefdescription>
+<para>重置any对象为空 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="368" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="368" bodyend="373"/>
+        <references refid="classneforce_1_1any_1a40cce4c9b99329321328a3a8f8b07631" compoundref="utility_2any_8hpp" startline="379" endline="379">has_value</references>
+        <referencedby refid="classneforce_1_1any_1a66f269a84314acc797bce3b01234c72a" compoundref="utility_2any_8hpp" startline="331" endline="331">~any</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1any_1a40cce4c9b99329321328a3a8f8b07631" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::any::has_value</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>has_value</name>
+        <qualifiedname>neforce::any::has_value</qualifiedname>
+        <briefdescription>
+<para>检查是否包含值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否包含值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="379" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="379" bodyend="379"/>
+        <referencedby refid="classneforce_1_1any_1a14c89d3dda4b0d27f82b7e66536d926e" compoundref="utility_2any_8hpp" startline="368" endline="373">reset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1any_1a1e3bffee2496e8d13ca716aa2a8c5ef9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const std::type_info &amp;</type>
+        <definition>const std::type_info &amp; neforce::any::type</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>type</name>
+        <qualifiedname>neforce::any::type</qualifiedname>
+        <briefdescription>
+<para>获取存储值的类型信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>类型信息引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="385" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1any_1a81e8ede7d8c6753b9273db5981c99017" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::any::swap</definition>
+        <argsstring>(any &amp;rhs) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::any::swap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49" kindref="member">any</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>交换两个any对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的any对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="391" column="10"/>
+        <references refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49">any</references>
+        <references refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" compoundref="type__traits_8hpp" startline="2365">neforce::is_constructible_v</references>
+        <references refid="classneforce_1_1any_1a81e8ede7d8c6753b9273db5981c99017">swap</references>
+        <referencedby refid="classneforce_1_1any_1a81e8ede7d8c6753b9273db5981c99017">swap</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>任意类型容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>可以在运行时存储任何类型的值，提供类型安全的访问机制。 支持复制、移动、类型查询和类型转换操作。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" line="77" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/any.hpp" bodystart="77" bodyend="392"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1any_1a28dd174b950fdc775b807adb6e24c57da203356165027e27b6b21367ac9c36397" prot="private" virt="non-virtual"><scope>neforce::any</scope><name>ACCESS</name></member>
+      <member refid="classneforce_1_1any_1a5ac229992e00dc213ae162b1ff6acc49" prot="public" virt="non-virtual"><scope>neforce::any</scope><name>any</name></member>
+      <member refid="classneforce_1_1any_1a4613c4d96998e825a769d5595b134718" prot="public" virt="non-virtual"><scope>neforce::any</scope><name>any</name></member>
+      <member refid="classneforce_1_1any_1a9d02b2dcf765fa197868cba593d69897" prot="public" virt="non-virtual"><scope>neforce::any</scope><name>any</name></member>
+      <member refid="classneforce_1_1any_1a7fdd26ead3f77e7408bd0d64df01cdde" prot="public" virt="non-virtual"><scope>neforce::any</scope><name>any</name></member>
+      <member refid="classneforce_1_1any_1aa075e0549f8cea750111a6e5aa4a1271" prot="public" virt="non-virtual"><scope>neforce::any</scope><name>any</name></member>
+      <member refid="classneforce_1_1any_1ae54376e088119af4868a2f2b68df762d" prot="public" virt="non-virtual"><scope>neforce::any</scope><name>any</name></member>
+      <member refid="classneforce_1_1any_1a28dd174b950fdc775b807adb6e24c57d" prot="private" virt="non-virtual"><scope>neforce::any</scope><name>any_operation</name></member>
+      <member refid="classneforce_1_1any_1a28dd174b950fdc775b807adb6e24c57da4fa407e63aa25cbb414f2ad4786c29e0" prot="private" virt="non-virtual"><scope>neforce::any</scope><name>COPY</name></member>
+      <member refid="classneforce_1_1any_1a28dd174b950fdc775b807adb6e24c57da6422787f8785976e0c627eedf47eaef0" prot="private" virt="non-virtual"><scope>neforce::any</scope><name>DESTROY</name></member>
+      <member refid="classneforce_1_1any_1ae4ad758138967a254e8a7415deb03763" prot="public" virt="non-virtual"><scope>neforce::any</scope><name>emplace</name></member>
+      <member refid="classneforce_1_1any_1a0b1e9b25521e57cd8a52f96a109b43ee" prot="public" virt="non-virtual"><scope>neforce::any</scope><name>emplace</name></member>
+      <member refid="classneforce_1_1any_1a28dd174b950fdc775b807adb6e24c57da2ddd985b3f2bbe487620c58fdd3ce100" prot="private" virt="non-virtual"><scope>neforce::any</scope><name>GET_TYPE_INFO</name></member>
+      <member refid="classneforce_1_1any_1a40cce4c9b99329321328a3a8f8b07631" prot="public" virt="non-virtual"><scope>neforce::any</scope><name>has_value</name></member>
+      <member refid="classneforce_1_1any_1a5160bc98a81e05d5cc0de4b952ff2889" prot="private" virt="non-virtual"><scope>neforce::any</scope><name>inner::__any_cast_aux_dispatch_impl</name></member>
+      <member refid="classneforce_1_1any_1a44032bc258eed2d09579b1c52b972dc2" prot="private" virt="non-virtual"><scope>neforce::any</scope><name>manage_</name></member>
+      <member refid="classneforce_1_1any_1a478e9b19fcb0f811556c79085238a70c" prot="private" virt="non-virtual"><scope>neforce::any</scope><name>manage_func</name></member>
+      <member refid="classneforce_1_1any_1ac80a6524daeaa1cca6840eb12b036135" prot="private" virt="non-virtual"><scope>neforce::any</scope><name>manage_t</name></member>
+      <member refid="classneforce_1_1any_1a94794b044765240c812cab2e848dc50e" prot="public" virt="non-virtual"><scope>neforce::any</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1any_1a12a8b121ecde91c04b54446becb53c08" prot="public" virt="non-virtual"><scope>neforce::any</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1any_1a57013c61b59bba6ef97d244fa0d920c2" prot="public" virt="non-virtual"><scope>neforce::any</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1any_1a14c89d3dda4b0d27f82b7e66536d926e" prot="public" virt="non-virtual"><scope>neforce::any</scope><name>reset</name></member>
+      <member refid="classneforce_1_1any_1a0558aa35563a4e7a62b97d555281d5a8" prot="private" virt="non-virtual"><scope>neforce::any</scope><name>storage_</name></member>
+      <member refid="classneforce_1_1any_1a28dd174b950fdc775b807adb6e24c57dac8e4634be4f0d2f4b7c69cc1413f1d5a" prot="private" virt="non-virtual"><scope>neforce::any</scope><name>SWAP</name></member>
+      <member refid="classneforce_1_1any_1a81e8ede7d8c6753b9273db5981c99017" prot="public" virt="non-virtual"><scope>neforce::any</scope><name>swap</name></member>
+      <member refid="classneforce_1_1any_1ab560b9fcd17458a79c11cc3cec6b7f8d" prot="private" virt="non-virtual"><scope>neforce::any</scope><name>try_emplace</name></member>
+      <member refid="classneforce_1_1any_1a7102cda8a9531e0b83da1f3d069999ef" prot="private" virt="non-virtual"><scope>neforce::any</scope><name>try_emplace</name></member>
+      <member refid="classneforce_1_1any_1a1e3bffee2496e8d13ca716aa2a8c5ef9" prot="public" virt="non-virtual"><scope>neforce::any</scope><name>type</name></member>
+      <member refid="classneforce_1_1any_1a66f269a84314acc797bce3b01234c72a" prot="public" virt="non-virtual"><scope>neforce::any</scope><name>~any</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

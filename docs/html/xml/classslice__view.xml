@@ -12,9 +12,9 @@
       </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classslice__view_1ab8297c86b761bcac73986e8fac53281c" prot="private" static="no">
-        <type>decltype(1 <ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt; <ref refid="group___remove_qualifiers_1ga75ab6c9a804ec997a6e8cb9c5b36c3e4" kindref="member">remove_const_t</ref>&lt; V &gt; &gt;().begin())</type>
-        <definition>using slice_view&lt; V &gt;::base_iterator = decltype(1 declval&lt;remove_const_t&lt;V&gt;&gt;().begin())</definition>
+      <memberdef kind="typedef" id="classslice__view_1ad073de9b23a63fb39ae921f6fdbbc467" prot="private" static="no">
+        <type>decltype(_NEFORCE <ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt; <ref refid="group___remove_qualifiers_1ga75ab6c9a804ec997a6e8cb9c5b36c3e4" kindref="member">remove_const_t</ref>&lt; V &gt; &gt;().begin())</type>
+        <definition>using slice_view&lt; V &gt;::base_iterator = decltype(_NEFORCE declval&lt;remove_const_t&lt;V&gt;&gt;().begin())</definition>
         <argsstring></argsstring>
         <name>base_iterator</name>
         <qualifiedname>slice_view::base_iterator</qualifiedname>
@@ -26,9 +26,9 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1764" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1764" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classslice__view_1a0ec9fd49d31721b230d58b752f025483" prot="private" static="no">
-        <type>decltype(1 <ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt; <ref refid="group___add_qualifiers_1ga9c558ffe7355932ea12b66ec6bcf06db" kindref="member">add_const_t</ref>&lt; V &gt; &gt;().begin())</type>
-        <definition>using slice_view&lt; V &gt;::const_base_iterator = decltype(1 declval&lt;add_const_t&lt;V&gt;&gt;().begin())</definition>
+      <memberdef kind="typedef" id="classslice__view_1a0402a6806fac245c6b7e5c660232bcb1" prot="private" static="no">
+        <type>decltype(_NEFORCE <ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt; <ref refid="group___add_qualifiers_1ga9c558ffe7355932ea12b66ec6bcf06db" kindref="member">add_const_t</ref>&lt; V &gt; &gt;().begin())</type>
+        <definition>using slice_view&lt; V &gt;::const_base_iterator = decltype(_NEFORCE declval&lt;add_const_t&lt;V&gt;&gt;().begin())</definition>
         <argsstring></argsstring>
         <name>const_base_iterator</name>
         <qualifiedname>slice_view::const_base_iterator</qualifiedname>
@@ -41,7 +41,7 @@
         <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1765" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1765" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classslice__view_1acf49ec17d5960e069a4737563f8f973a" prot="private" static="no">
-        <type><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1ga6b799734e6d6a4258cb1fb79ac2551f3" kindref="member">is_const_v</ref>&lt; V &gt;, const_base_iterator, base_iterator &gt;</type>
+        <type><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1ga0bf567b7866a96e4005d64743e0859b0" kindref="member">is_const_v</ref>&lt; V &gt;, const_base_iterator, base_iterator &gt;</type>
         <definition>using slice_view&lt; V &gt;::iterator = conditional_t&lt;is_const_v&lt;V&gt;, const_base_iterator, base_iterator&gt;</definition>
         <argsstring></argsstring>
         <name>iterator</name>
@@ -287,11 +287,11 @@
     <location file="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" line="1763" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/iterator/ranges.hpp" bodystart="1763" bodyend="1830"/>
     <listofallmembers>
       <member refid="classslice__view_1a82aedd93224f9fe56682553a3c6343cb" prot="private" virt="non-virtual"><scope>slice_view</scope><name>base_</name></member>
-      <member refid="classslice__view_1ab8297c86b761bcac73986e8fac53281c" prot="private" virt="non-virtual"><scope>slice_view</scope><name>base_iterator</name></member>
+      <member refid="classslice__view_1ad073de9b23a63fb39ae921f6fdbbc467" prot="private" virt="non-virtual"><scope>slice_view</scope><name>base_iterator</name></member>
       <member refid="classslice__view_1a81d36c1ea2d1c30ea6515aa7f7192476" prot="public" virt="non-virtual"><scope>slice_view</scope><name>begin</name></member>
       <member refid="classslice__view_1a4befd335ad3d4a1960f74a759f76bceb" prot="public" virt="non-virtual"><scope>slice_view</scope><name>begin</name></member>
       <member refid="classslice__view_1ac96c5caf8d960f605a54baa7dd1ef518" prot="private" virt="non-virtual"><scope>slice_view</scope><name>cache_</name></member>
-      <member refid="classslice__view_1a0ec9fd49d31721b230d58b752f025483" prot="private" virt="non-virtual"><scope>slice_view</scope><name>const_base_iterator</name></member>
+      <member refid="classslice__view_1a0402a6806fac245c6b7e5c660232bcb1" prot="private" virt="non-virtual"><scope>slice_view</scope><name>const_base_iterator</name></member>
       <member refid="classslice__view_1a91240274f1e4387ea563dd06e700240a" prot="private" virt="non-virtual"><scope>slice_view</scope><name>difference_type</name></member>
       <member refid="classslice__view_1a52bd54c8b5dea3fee75ad082e65e7ad4" prot="public" virt="non-virtual"><scope>slice_view</scope><name>end</name></member>
       <member refid="classslice__view_1ab98f274fc99f9ea0b977bf9a81390c27" prot="public" virt="non-virtual"><scope>slice_view</scope><name>end</name></member>

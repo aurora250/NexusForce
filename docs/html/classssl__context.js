@@ -1,13 +1,13 @@
 var classssl__context =
 [
     [ "ssl_context", "classssl__context.html#a66547e0420877dfe3109b5c1ebab7437", null ],
-    [ "clone", "classssl__context.html#aead2f35459c96c45a82e8a2f06229656", null ],
-    [ "clone_shared", "classssl__context.html#afd2628b66a19c8d6a89e94d21c297a16", null ],
-    [ "is_valid", "classssl__context.html#a578442e1760cc9d136347c462611fedf", null ],
+    [ "clone", "classssl__context.html#a10459f705e17d31675e237b26d1f1b2a", null ],
+    [ "clone_shared", "classssl__context.html#a6536a5dc7d62c6d07cc861b45722fa89", null ],
+    [ "is_valid", "classssl__context.html#a5ca913fa6f629eb5101c194f3f4b28df", null ],
     [ "load_certificate", "classssl__context.html#a22215336ea11c5521366581dec47543f", null ],
     [ "load_certificate_from_memory", "classssl__context.html#aec13982e180a000537a06105e556ff28", null ],
     [ "load_verify_locations", "classssl__context.html#af745272315450d6031ef5c672a6e9129", null ],
-    [ "native_handle", "classssl__context.html#aa5b41ad6a5228d7eaeab06dd4d8a33d1", null ],
+    [ "native_handle", "classssl__context.html#a0963338938f74e60568794c0266c419a", null ],
     [ "operator bool", "classssl__context.html#a033f21fdfb92c225f5c2dd92a6c1a4ef", null ],
     [ "require_client_certificate", "classssl__context.html#aa9de73f40d992c24c2e31946a3c35cc1", null ],
     [ "set_alpn_protos", "classssl__context.html#ab8aad3c116c70eb8fd80c1eae3ebb1ed", null ],

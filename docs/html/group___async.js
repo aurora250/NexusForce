@@ -54,7 +54,7 @@ var group___async =
       [ "operator=", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#acdf07176055889ad21430d63393c1fc3", null ],
       [ "reset", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a13ff349103d61896e17b7afed6947cec", null ],
       [ "swap", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#aa6f152cd498d6f799acdeafdbf183616", null ],
-      [ "valid", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#ab3b664d109dcfba1181779d3e83956a3", null ]
+      [ "valid", "classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a7cd09ddad944479f2a571e124afe79b4", null ]
     ] ],
     [ "promise&lt; Res &amp; &gt;", "classpromise_3_01_res_01_6_01_4.html", [
       [ "ptr_type", "classpromise_3_01_res_01_6_01_4.html#a58f321250d62ee76eeb219ee0e67c3ae", null ],
@@ -81,7 +81,7 @@ var group___async =
       [ "promise", "classpromise_3_01void_01_4.html#a1bc7fd6a05bb8861144d8645c361a95b", null ],
       [ "promise", "classpromise_3_01void_01_4.html#a79894a850aab5199527197290e90e65d", null ],
       [ "~promise", "classpromise_3_01void_01_4.html#aeeeb02e8e3d6fdcd36d8b2f16a10e113", null ],
-      [ "get_future", "classpromise_3_01void_01_4.html#a3da9c44b95b28660bbb46ee5abf2f669", null ],
+      [ "get_future", "classpromise_3_01void_01_4.html#ab6d2478a2da868e4f153efc6d8076708", null ],
       [ "operator=", "classpromise_3_01void_01_4.html#a050e0ae955ddd82ff8c6748723aaea4c", null ],
       [ "operator=", "classpromise_3_01void_01_4.html#a0543dd01a3e38815590bbfeb7f4a33b1", null ],
       [ "set_exception", "classpromise_3_01void_01_4.html#ad247f65ad7a9524faf3309c3d468e377", null ],
@@ -107,7 +107,7 @@ var group___async =
       [ "launch::async", "group___async.html#gga9b3224d19f20667b3b24145a7b395a33a0df93e34273b367bb63bad28c94c78d5", null ],
       [ "launch::deferred", "group___async.html#gga9b3224d19f20667b3b24145a7b395a33a43fff3df3fc0b3417c86dc3040fb2d86", null ]
     ] ],
-    [ "async", "group___async.html#gaf02db8c05cbd8fd9ea17355adcc164f0", null ],
-    [ "async", "group___async.html#gacb2c2756930195cd969cc14a06c437bf", null ],
+    [ "async", "group___async.html#gadb2e4929c373d071c43f75182fda1239", null ],
+    [ "async", "group___async.html#ga4bbf8cf030239a4806813af4dcafec6f", null ],
     [ "get", "group___async.html#gac14e5033806977e33886d78a20feffaa", null ]
 ];

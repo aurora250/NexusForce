@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1env__value" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>neforce::env_value</compoundname>
+    <basecompoundref refid="structneforce_1_1istringify" prot="public" virt="non-virtual">neforce::istringify&lt; env_value &gt;</basecompoundref>
+    <derivedcompoundref refid="classneforce_1_1env__variable" prot="public" virt="non-virtual">neforce::env_variable</derivedcompoundref>
+    <includes refid="env__value_8hpp" local="no">env_value.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classneforce_1_1env__value_1ab6ceb676a38ec5b24fcf9dcbdcb3b05e" prot="public" static="no" strong="no">
+        <type></type>
+        <name>types</name>
+        <qualifiedname>neforce::env_value::types</qualifiedname>
+        <enumvalue id="classneforce_1_1env__value_1ab6ceb676a38ec5b24fcf9dcbdcb3b05ea33f041c413b33470c00cdcdc52f7b784" prot="public">
+          <name>Variable</name>
+          <briefdescription>
+<para>变量类型 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>环境值类型枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="67" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="67" bodyend="69"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1env__value_1a418243368c98cc862ae65554806ef83e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual neforce::env_value::~env_value</definition>
+        <argsstring>()=default</argsstring>
+        <name>~env_value</name>
+        <qualifiedname>neforce::env_value::~env_value</qualifiedname>
+        <briefdescription>
+<para>虚析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="74" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1env__value_1a6325a39a9d4513936f062671b01e937a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="pure-virtual">
+        <type><ref refid="classneforce_1_1env__value_1ab6ceb676a38ec5b24fcf9dcbdcb3b05e" kindref="member">types</ref></type>
+        <definition>virtual types neforce::env_value::type</definition>
+        <argsstring>() const noexcept=0</argsstring>
+        <name>type</name>
+        <qualifiedname>neforce::env_value::type</qualifiedname>
+        <reimplementedby refid="classneforce_1_1env__variable_1a4d57031580b408aaa735154013f07ea4">type</reimplementedby>
+        <briefdescription>
+<para>获取环境值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>类型枚举值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="80" column="20"/>
+        <referencedby refid="classneforce_1_1env__value_1ae08ade4f736c965896265d63269997c8" compoundref="env__value_8hpp" startline="92" endline="92">is_variable</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1env__value_1aace7b5e230ca08eab1b69d1d26447ce2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>const <ref refid="classneforce_1_1env__variable" kindref="compound">env_variable</ref> *</type>
+        <definition>virtual const env_variable * neforce::env_value::as_variable</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>as_variable</name>
+        <qualifiedname>neforce::env_value::as_variable</qualifiedname>
+        <reimplementedby refid="classneforce_1_1env__variable_1ad844d6337b0e22ac5de128f8864d9ff1">as_variable</reimplementedby>
+        <briefdescription>
+<para>转换为环境变量指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果是变量类型返回自身指针，否则返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="86" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="86" bodyend="86"/>
+        <references refid="classneforce_1_1env__value_1aace7b5e230ca08eab1b69d1d26447ce2" compoundref="env__value_8hpp" startline="86" endline="86">as_variable</references>
+        <referencedby refid="classneforce_1_1env__value_1aace7b5e230ca08eab1b69d1d26447ce2" compoundref="env__value_8hpp" startline="86" endline="86">as_variable</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1env__value_1ae08ade4f736c965896265d63269997c8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::env_value::is_variable</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_variable</name>
+        <qualifiedname>neforce::env_value::is_variable</qualifiedname>
+        <briefdescription>
+<para>判断是否为变量类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果是变量类型返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="92" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="92" bodyend="92"/>
+        <references refid="classneforce_1_1env__value_1a6325a39a9d4513936f062671b01e937a">type</references>
+        <references refid="classneforce_1_1env__value_1ab6ceb676a38ec5b24fcf9dcbdcb3b05ea33f041c413b33470c00cdcdc52f7b784" compoundref="env__value_8hpp" startline="68">Variable</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1env__value_1a5c6937b7d90b9cd8f2a08a84980562c5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::env_value::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>neforce::env_value::to_string</qualifiedname>
+        <briefdescription>
+<para>转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>环境值的字符串表示 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="98" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1env__value_1a82fe7cba10ae3964d08a67f1d6c2d697" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::env_value::to_document</definition>
+        <argsstring>() const</argsstring>
+        <name>to_document</name>
+        <qualifiedname>neforce::env_value::to_document</qualifiedname>
+        <briefdescription>
+<para>转换为文档字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>环境值的文档格式字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="104" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>环境值抽象基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供环境值的统一接口，支持类型识别和字符串转换。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::env_value</label>
+        <link refid="classneforce_1_1env__value"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::env_variable</label>
+        <link refid="classneforce_1_1env__variable"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::istringify&lt; env_value &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::env_value</label>
+        <link refid="classneforce_1_1env__value"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::istringify&lt; env_value &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" line="61" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/env/env_value.hpp" bodystart="61" bodyend="105"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1env__value_1aace7b5e230ca08eab1b69d1d26447ce2" prot="public" virt="virtual"><scope>neforce::env_value</scope><name>as_variable</name></member>
+      <member refid="classneforce_1_1env__value_1ae08ade4f736c965896265d63269997c8" prot="public" virt="non-virtual"><scope>neforce::env_value</scope><name>is_variable</name></member>
+      <member refid="classneforce_1_1env__value_1a82fe7cba10ae3964d08a67f1d6c2d697" prot="public" virt="non-virtual"><scope>neforce::env_value</scope><name>to_document</name></member>
+      <member refid="classneforce_1_1env__value_1a5c6937b7d90b9cd8f2a08a84980562c5" prot="public" virt="non-virtual"><scope>neforce::env_value</scope><name>to_string</name></member>
+      <member refid="classneforce_1_1env__value_1a6325a39a9d4513936f062671b01e937a" prot="public" virt="pure-virtual"><scope>neforce::env_value</scope><name>type</name></member>
+      <member refid="classneforce_1_1env__value_1ab6ceb676a38ec5b24fcf9dcbdcb3b05e" prot="public" virt="non-virtual"><scope>neforce::env_value</scope><name>types</name></member>
+      <member refid="classneforce_1_1env__value_1ab6ceb676a38ec5b24fcf9dcbdcb3b05ea33f041c413b33470c00cdcdc52f7b784" prot="public" virt="non-virtual"><scope>neforce::env_value</scope><name>Variable</name></member>
+      <member refid="classneforce_1_1env__value_1a418243368c98cc862ae65554806ef83e" prot="public" virt="virtual"><scope>neforce::env_value</scope><name>~env_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

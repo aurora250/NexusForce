@@ -1,0 +1,1594 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1toml__builder" kind="class" language="C++" prot="public">
+    <compoundname>neforce::toml_builder</compoundname>
+    <includes refid="toml__builder_8hpp" local="no">toml_builder.hpp</includes>
+    <innerclass refid="structneforce_1_1toml__builder_1_1frame" prot="private">neforce::toml_builder::frame</innerclass>
+    <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classneforce_1_1toml__builder_1aaa98a3070d9b8d4c986eff7c236c0dc2" prot="private" static="no" strong="no">
+        <type></type>
+        <name>range_type</name>
+        <qualifiedname>neforce::toml_builder::range_type</qualifiedname>
+        <enumvalue id="classneforce_1_1toml__builder_1aaa98a3070d9b8d4c986eff7c236c0dc2a7d943867ddb357d0ffdda68fc801d5b1" prot="private">
+          <name>table</name>
+          <briefdescription>
+<para>标准表格 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1toml__builder_1aaa98a3070d9b8d4c986eff7c236c0dc2afd803b7c0ff341adabf2788bf85f47f6" prot="private">
+          <name>inline_table</name>
+          <briefdescription>
+<para>内联表格 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1toml__builder_1aaa98a3070d9b8d4c986eff7c236c0dc2a76e805a172d34b37687cf167705bdf43" prot="private">
+          <name>array</name>
+          <briefdescription>
+<para>数组 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>上下文类型枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="46" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="46" bodyend="50"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1toml__builder_1a8d09889a2c6f8ef2ecb7c6fadc6fedf3" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1stack" kindref="compound">stack</ref>&lt; frame &gt;</type>
+        <definition>stack&lt;frame&gt; neforce::toml_builder::contexts_</definition>
+        <argsstring></argsstring>
+        <name>contexts_</name>
+        <qualifiedname>neforce::toml_builder::contexts_</qualifiedname>
+        <briefdescription>
+<para>上下文栈 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="80" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1toml__builder_1ac537b3a3ad50cfd7f97edab755832ce1" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1toml__table" kindref="compound">toml_table</ref> &gt;</type>
+        <definition>unique_ptr&lt;toml_table&gt; neforce::toml_builder::root_</definition>
+        <argsstring></argsstring>
+        <name>root_</name>
+        <qualifiedname>neforce::toml_builder::root_</qualifiedname>
+        <briefdescription>
+<para>根表格 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="81" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1toml__builder_1ae4d494403594d7111a9e33cf25ce2a04" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::toml_builder::current_key_</definition>
+        <argsstring></argsstring>
+        <name>current_key_</name>
+        <qualifiedname>neforce::toml_builder::current_key_</qualifiedname>
+        <briefdescription>
+<para>当前键名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="82" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a0e9f5e57e01f79904c67f5aa16225a43" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::value_impl</definition>
+        <argsstring>(unique_ptr&lt; T &gt; value)</argsstring>
+        <name>value_impl</name>
+        <qualifiedname>neforce::toml_builder::value_impl</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; T &gt;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>值设置的通用实现 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>TOML值类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要设置的值指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效、键名缺失或键重复时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+根据当前上下文决定值的放置位置：<itemizedlist>
+<listitem><para>数组中：作为新元素添加</para>
+</listitem><listitem><para>表格中：与当前键名配对添加 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="97" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="97" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a60eb0d1802e63d2b6b6ba1ee8b0c0052" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Map</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_action_check_1ga80b2d444543224db10bcb49f6d87761d" kindref="member">is_maplike_v</ref>&lt; Map &gt;, <ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp; &gt;</type>
+        <definition>enable_if_t&lt; is_maplike_v&lt; Map &gt;, toml_builder &amp; &gt; neforce::toml_builder::value_iterable_impl</definition>
+        <argsstring>(const Map &amp;maplike)</argsstring>
+        <name>value_iterable_impl</name>
+        <qualifiedname>neforce::toml_builder::value_iterable_impl</qualifiedname>
+        <param>
+          <type>const Map &amp;</type>
+          <declname>maplike</declname>
+        </param>
+        <briefdescription>
+<para>映射表类型的实现（转换为内联表格） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Map</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>映射表类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>maplike</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>映射表对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="125" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="125" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1aa98e153b473b00b51f51f07c6c43603e" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterable</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_action_check_1ga80b2d444543224db10bcb49f6d87761d" kindref="member">is_maplike_v</ref>&lt; Iterable &gt;, <ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp; &gt;</type>
+        <definition>enable_if_t&lt;!is_maplike_v&lt; Iterable &gt;, toml_builder &amp; &gt; neforce::toml_builder::value_iterable_impl</definition>
+        <argsstring>(const Iterable &amp;iterable)</argsstring>
+        <name>value_iterable_impl</name>
+        <qualifiedname>neforce::toml_builder::value_iterable_impl</qualifiedname>
+        <param>
+          <type>const Iterable &amp;</type>
+          <declname>iterable</declname>
+        </param>
+        <briefdescription>
+<para>一般可迭代类型的实现（转换为数组） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可迭代类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>iterable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可迭代对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="141" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="141" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a790a8941ef91e513431ac7d1290d6f76" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__table" kindref="compound">toml_table</ref> *</type>
+        <definition>toml_table * neforce::toml_builder::get_or_create_table_path</definition>
+        <argsstring>(const vector&lt; string &gt; &amp;path) const</argsstring>
+        <name>get_or_create_table_path</name>
+        <qualifiedname>neforce::toml_builder::get_or_create_table_path</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>获取或创建表格路径 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表格路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>目标表格指针 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当路径中的键已存在但不是表格时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+沿路径获取表格，如果不存在则创建。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="158" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a6f2d42a06583985a0346ec37de3ee5e9" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__array" kindref="compound">toml_array</ref> *</type>
+        <definition>toml_array * neforce::toml_builder::get_or_create_array_for_array_table</definition>
+        <argsstring>(const vector&lt; string &gt; &amp;path) const</argsstring>
+        <name>get_or_create_array_for_array_table</name>
+        <qualifiedname>neforce::toml_builder::get_or_create_array_for_array_table</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>获取或创建表格数组 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表格数组路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>目标数组指针 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当路径中的键已存在但不是数组时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+沿路径获取或创建用于表格数组的数组。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="168" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::toml_builder::toml_builder</definition>
+        <argsstring>()</argsstring>
+        <name>toml_builder</name>
+        <qualifiedname>neforce::toml_builder::toml_builder</qualifiedname>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建一个新的构建器实例，初始化根表格。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="176" column="5"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+        <referencedby refid="classneforce_1_1toml__builder_1a47d416d7e7f68964e5bb9af8528f61f2">begin_array</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a66a4283623ed3855a84f65471223df16">begin_array_table</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1aa62b84c69deac6b4553c2423c6d589bc">begin_array_table</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1aaee4b85fc8f04b5fdc4215a7bf7d02dd">begin_inline_table</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a9751c3febff4d76735c6fa45c1e9d345">begin_table</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1adcec22cc8e49a0a712c20ce42bd40ba6">begin_table</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a314e7abcb084475c4fe966fb50d4754d">end_array</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a8bba3b09f9c624cc548c9bf83b8f52c3">end_array_table</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1aab6790b9cdadcda3e699dd869c412988">end_inline_table</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a118efcda18f162ff3adb3d0cd97849e8">end_table</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a7dda87d513af594bed5841caf2a3e222">key</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1ab1cf2aa1bb51e51c9423d35a142834c8">operator=</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a68499a4d172ccc5869133078184ea675">toml_builder</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a115b87dc2da10625323796c9dcf31ace" compoundref="toml__builder_8hpp" startline="301" endline="301">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1aab6a9f25f5a761465f5adb7c3417cad6" compoundref="toml__builder_8hpp" startline="343" endline="343">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a7b23216986ae6ffc7e425510218ec6a5" compoundref="toml__builder_8hpp" startline="325" endline="325">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a93e038e78e017bc55b6d5c7fb5e39451" compoundref="toml__builder_8hpp" startline="317" endline="317">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1ae0179dde7b469059fce1b9a2b4e04d08" compoundref="toml__builder_8hpp" startline="309" endline="309">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a289520152b2d5ad9f10f7695c298388f" compoundref="toml__builder_8hpp" startline="351" endline="351">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a3680921a0eb563a8ae4521e2e15d858c" compoundref="toml__builder_8hpp" startline="293" endline="293">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1acc0f293ee6cebdb39f8019a545ee0690" compoundref="toml__builder_8hpp" startline="333" endline="335">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1ae73242d4531607ec7e6776e42002437d" compoundref="toml__builder_8hpp" startline="359" endline="359">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1affc57bccf1874bcfb15e2b4b1678db5e">value_array</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a9a5d7c3f9a40f4278e54c5fe6d00727a" compoundref="toml__builder_8hpp" startline="379" endline="381">value_datetime</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a21aefe97cff0d7c11777b76a1a5a76d5">value_inline_table</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1ab24f27fcda963f5be435424176b4b6c8" compoundref="toml__builder_8hpp" startline="394" endline="396">value_iterable</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1ae41d10e48a63e92b4d0372d899970429" compoundref="toml__builder_8hpp" startline="368" endline="370">value_string</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a1d79fcac5095820da1f8926f1d17c54a">value_table</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a51261702ab10e7f243388696353a93d0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::toml_builder::toml_builder</definition>
+        <argsstring>(const toml_builder &amp;)=delete</argsstring>
+        <name>toml_builder</name>
+        <qualifiedname>neforce::toml_builder::toml_builder</qualifiedname>
+        <param>
+          <type>const toml_builder &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="178" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1ae10e52d08fc929899c0eef01a24df488" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::operator=</definition>
+        <argsstring>(const toml_builder &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::toml_builder::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="179" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a68499a4d172ccc5869133078184ea675" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::toml_builder::toml_builder</definition>
+        <argsstring>(toml_builder &amp;&amp;other)=default</argsstring>
+        <name>toml_builder</name>
+        <qualifiedname>neforce::toml_builder::toml_builder</qualifiedname>
+        <param>
+          <type>toml_builder &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源构建器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="185" column="5"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1ab1cf2aa1bb51e51c9423d35a142834c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::operator=</definition>
+        <argsstring>(toml_builder &amp;&amp;other)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::toml_builder::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源构建器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="192" column="18"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a7dda87d513af594bed5841caf2a3e222" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::key</definition>
+        <argsstring>(string key)</argsstring>
+        <name>key</name>
+        <qualifiedname>neforce::toml_builder::key</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>设置当前键名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键名字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当不在表格上下文中时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="200" column="18"/>
+        <references refid="classneforce_1_1toml__builder_1a7dda87d513af594bed5841caf2a3e222">key</references>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+        <referencedby refid="classneforce_1_1toml__builder_1a7dda87d513af594bed5841caf2a3e222">key</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a9751c3febff4d76735c6fa45c1e9d345" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::begin_table</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>begin_table</name>
+        <qualifiedname>neforce::toml_builder::begin_table</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>开始一个标准表格（单键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表格名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当路径无效时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="208" column="18"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1adcec22cc8e49a0a712c20ce42bd40ba6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::begin_table</definition>
+        <argsstring>(const vector&lt; string &gt; &amp;path)</argsstring>
+        <name>begin_table</name>
+        <qualifiedname>neforce::toml_builder::begin_table</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>开始一个标准表格（路径版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表格路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当路径无效时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+格式：[parent.child.grandchild] </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="218" column="18"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a118efcda18f162ff3adb3d0cd97849e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::end_table</definition>
+        <argsstring>()</argsstring>
+        <name>end_table</name>
+        <qualifiedname>neforce::toml_builder::end_table</qualifiedname>
+        <briefdescription>
+<para>结束当前标准表格 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当没有表格可结束或试图结束根表格时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="225" column="18"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1aaee4b85fc8f04b5fdc4215a7bf7d02dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::begin_inline_table</definition>
+        <argsstring>()</argsstring>
+        <name>begin_inline_table</name>
+        <qualifiedname>neforce::toml_builder::begin_inline_table</qualifiedname>
+        <briefdescription>
+<para>开始一个内联表格 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效或键名缺失时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+格式：{ key = value, key2 = value2 } </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="234" column="18"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1aab6790b9cdadcda3e699dd869c412988" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::end_inline_table</definition>
+        <argsstring>()</argsstring>
+        <name>end_inline_table</name>
+        <qualifiedname>neforce::toml_builder::end_inline_table</qualifiedname>
+        <briefdescription>
+<para>结束当前内联表格 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当不在内联表格上下文中时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="241" column="18"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a47d416d7e7f68964e5bb9af8528f61f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::begin_array</definition>
+        <argsstring>()</argsstring>
+        <name>begin_array</name>
+        <qualifiedname>neforce::toml_builder::begin_array</qualifiedname>
+        <briefdescription>
+<para>开始一个数组 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效或键名缺失时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+格式：[element1, element2, element3] </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="250" column="18"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a314e7abcb084475c4fe966fb50d4754d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::end_array</definition>
+        <argsstring>()</argsstring>
+        <name>end_array</name>
+        <qualifiedname>neforce::toml_builder::end_array</qualifiedname>
+        <briefdescription>
+<para>结束当前数组 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当不在数组上下文中时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="257" column="18"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a66a4283623ed3855a84f65471223df16" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::begin_array_table</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>begin_array_table</name>
+        <qualifiedname>neforce::toml_builder::begin_array_table</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>开始一个表格数组（单键版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表格数组名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当路径无效时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+格式：[[array_name]] </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="267" column="18"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1aa62b84c69deac6b4553c2423c6d589bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::begin_array_table</definition>
+        <argsstring>(const vector&lt; string &gt; &amp;path)</argsstring>
+        <name>begin_array_table</name>
+        <qualifiedname>neforce::toml_builder::begin_array_table</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>开始一个表格数组（路径版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>表格数组路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当路径无效时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+格式：[[parent.child.array]] </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="277" column="18"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a8bba3b09f9c624cc548c9bf83b8f52c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::end_array_table</definition>
+        <argsstring>()</argsstring>
+        <name>end_array_table</name>
+        <qualifiedname>neforce::toml_builder::end_array_table</qualifiedname>
+        <briefdescription>
+<para>结束当前表格数组 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>自身引用，支持链式调用</para>
+</simplesect>
+等同于 <ref refid="classneforce_1_1toml__builder_1a118efcda18f162ff3adb3d0cd97849e8" kindref="member">end_table()</ref> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="285" column="18"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a3680921a0eb563a8ae4521e2e15d858c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::value</definition>
+        <argsstring>(nullptr_t np)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::toml_builder::value</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gacb98a47b9e384b2934a9c2dbd3c2d598" kindref="member">nullptr_t</ref></type>
+          <declname>np</declname>
+        </param>
+        <briefdescription>
+<para>设置null值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>np</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空指针标记 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效、键名缺失或键重复时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="293" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="293" bodyend="293"/>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+        <referencedby refid="classneforce_1_1toml__builder_1a115b87dc2da10625323796c9dcf31ace" compoundref="toml__builder_8hpp" startline="301" endline="301">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1aab6a9f25f5a761465f5adb7c3417cad6" compoundref="toml__builder_8hpp" startline="343" endline="343">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a7b23216986ae6ffc7e425510218ec6a5" compoundref="toml__builder_8hpp" startline="325" endline="325">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a93e038e78e017bc55b6d5c7fb5e39451" compoundref="toml__builder_8hpp" startline="317" endline="317">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1ae0179dde7b469059fce1b9a2b4e04d08" compoundref="toml__builder_8hpp" startline="309" endline="309">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a289520152b2d5ad9f10f7695c298388f" compoundref="toml__builder_8hpp" startline="351" endline="351">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1acc0f293ee6cebdb39f8019a545ee0690" compoundref="toml__builder_8hpp" startline="333" endline="335">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1ae73242d4531607ec7e6776e42002437d" compoundref="toml__builder_8hpp" startline="359" endline="359">value</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1a9a5d7c3f9a40f4278e54c5fe6d00727a" compoundref="toml__builder_8hpp" startline="379" endline="381">value_datetime</referencedby>
+        <referencedby refid="classneforce_1_1toml__builder_1ae41d10e48a63e92b4d0372d899970429" compoundref="toml__builder_8hpp" startline="368" endline="370">value_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a115b87dc2da10625323796c9dcf31ace" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::value</definition>
+        <argsstring>(const bool value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::toml_builder::value</qualifiedname>
+        <param>
+          <type>const bool</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>布尔值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效、键名缺失或键重复时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="301" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="301" bodyend="301"/>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+        <references refid="classneforce_1_1toml__builder_1a3680921a0eb563a8ae4521e2e15d858c" compoundref="toml__builder_8hpp" startline="293" endline="293">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1ae0179dde7b469059fce1b9a2b4e04d08" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::value</definition>
+        <argsstring>(const int64_t value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::toml_builder::value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置64位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>64位整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效、键名缺失或键重复时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="309" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="309" bodyend="309"/>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+        <references refid="classneforce_1_1toml__builder_1a3680921a0eb563a8ae4521e2e15d858c" compoundref="toml__builder_8hpp" startline="293" endline="293">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a93e038e78e017bc55b6d5c7fb5e39451" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::value</definition>
+        <argsstring>(const int value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::toml_builder::value</qualifiedname>
+        <param>
+          <type>const int</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效、键名缺失或键重复时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="317" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="317" bodyend="317"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+        <references refid="classneforce_1_1toml__builder_1a93e038e78e017bc55b6d5c7fb5e39451" compoundref="toml__builder_8hpp" startline="317" endline="317">value</references>
+        <references refid="classneforce_1_1toml__builder_1a3680921a0eb563a8ae4521e2e15d858c" compoundref="toml__builder_8hpp" startline="293" endline="293">value</references>
+        <referencedby refid="classneforce_1_1toml__builder_1a93e038e78e017bc55b6d5c7fb5e39451" compoundref="toml__builder_8hpp" startline="317" endline="317">value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a7b23216986ae6ffc7e425510218ec6a5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::value</definition>
+        <argsstring>(const double value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::toml_builder::value</qualifiedname>
+        <param>
+          <type>const double</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置双精度浮点数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>双精度浮点数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效、键名缺失或键重复时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="325" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="325" bodyend="325"/>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+        <references refid="classneforce_1_1toml__builder_1a3680921a0eb563a8ae4521e2e15d858c" compoundref="toml__builder_8hpp" startline="293" endline="293">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1acc0f293ee6cebdb39f8019a545ee0690" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::value</definition>
+        <argsstring>(string value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::toml_builder::value</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置字符串值（基本字符串类型） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效、键名缺失或键重复时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="333" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="333" bodyend="335"/>
+        <references refid="classneforce_1_1toml__string_1a92f50e2d40dd95811638a4a5f519c1c7a8553caf6ab3ca4e7fe9d9256196f09ba" compoundref="toml__value_8hpp" startline="425">neforce::toml_string::Basic</references>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+        <references refid="classneforce_1_1toml__builder_1a3680921a0eb563a8ae4521e2e15d858c" compoundref="toml__builder_8hpp" startline="293" endline="293">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1aab6a9f25f5a761465f5adb7c3417cad6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::value</definition>
+        <argsstring>(const char *value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::toml_builder::value</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置C字符串值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>C字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效、键名缺失或键重复时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="343" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="343" bodyend="343"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+        <references refid="classneforce_1_1toml__builder_1aab6a9f25f5a761465f5adb7c3417cad6" compoundref="toml__builder_8hpp" startline="343" endline="343">value</references>
+        <references refid="classneforce_1_1toml__builder_1a3680921a0eb563a8ae4521e2e15d858c" compoundref="toml__builder_8hpp" startline="293" endline="293">value</references>
+        <referencedby refid="classneforce_1_1toml__builder_1aab6a9f25f5a761465f5adb7c3417cad6" compoundref="toml__builder_8hpp" startline="343" endline="343">value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a289520152b2d5ad9f10f7695c298388f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::value</definition>
+        <argsstring>(const string_view value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::toml_builder::value</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置字符串视图值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效、键名缺失或键重复时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="351" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="351" bodyend="351"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+        <references refid="classneforce_1_1toml__builder_1a289520152b2d5ad9f10f7695c298388f" compoundref="toml__builder_8hpp" startline="351" endline="351">value</references>
+        <references refid="classneforce_1_1toml__builder_1a3680921a0eb563a8ae4521e2e15d858c" compoundref="toml__builder_8hpp" startline="293" endline="293">value</references>
+        <referencedby refid="classneforce_1_1toml__builder_1a289520152b2d5ad9f10f7695c298388f" compoundref="toml__builder_8hpp" startline="351" endline="351">value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1ae73242d4531607ec7e6776e42002437d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::value</definition>
+        <argsstring>(unique_ptr&lt; toml_value &gt; value)</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::toml_builder::value</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1toml__value" kindref="compound">toml_value</ref> &gt;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置已构建的TOML值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>TOML值指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效、键名缺失或键重复时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="359" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="359" bodyend="359"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+        <references refid="classneforce_1_1toml__builder_1a3680921a0eb563a8ae4521e2e15d858c" compoundref="toml__builder_8hpp" startline="293" endline="293">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1ae41d10e48a63e92b4d0372d899970429" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::value_string</definition>
+        <argsstring>(string value, toml_string::string_type type)</argsstring>
+        <name>value_string</name>
+        <qualifiedname>neforce::toml_builder::value_string</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1toml__string_1a92f50e2d40dd95811638a4a5f519c1c7" kindref="member">toml_string::string_type</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>设置指定类型的字符串值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串类型（Basic, Literal, MultiBasic, MultiLiteral） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效、键名缺失或键重复时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="368" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="368" bodyend="370"/>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+        <references refid="classneforce_1_1toml__builder_1a3680921a0eb563a8ae4521e2e15d858c" compoundref="toml__builder_8hpp" startline="293" endline="293">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a9a5d7c3f9a40f4278e54c5fe6d00727a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::value_datetime</definition>
+        <argsstring>(const string_view value, toml_datetime::datetime_type type)</argsstring>
+        <name>value_datetime</name>
+        <qualifiedname>neforce::toml_builder::value_datetime</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1toml__datetime_1ae97b44cc0f1bf4820b84f0e688ad7856" kindref="member">toml_datetime::datetime_type</ref></type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>设置指定类型的日期时间值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日期时间字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日期时间类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效、键名缺失或键重复时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="379" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="379" bodyend="381"/>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+        <references refid="classneforce_1_1toml__builder_1a3680921a0eb563a8ae4521e2e15d858c" compoundref="toml__builder_8hpp" startline="293" endline="293">value</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1ab24f27fcda963f5be435424176b4b6c8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterable</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_action_check_1ga868b703506f6bb0ed800378058e2df7c" kindref="member">is_iterable_v</ref>&lt; Iterable &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::value_iterable</definition>
+        <argsstring>(const Iterable &amp;iterable)</argsstring>
+        <name>value_iterable</name>
+        <qualifiedname>neforce::toml_builder::value_iterable</qualifiedname>
+        <param>
+          <type>const Iterable &amp;</type>
+          <declname>iterable</declname>
+        </param>
+        <briefdescription>
+<para>设置可迭代对象的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可迭代类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>iterable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可迭代对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用</para>
+</simplesect>
+根据类型自动转换为数组或内联表格：<itemizedlist>
+<listitem><para>映射表类型（如unordered_map）转换为内联表格</para>
+</listitem><listitem><para>其他可迭代类型转换为数组 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="394" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="394" bodyend="396"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a1d79fcac5095820da1f8926f1d17c54a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::value_table</definition>
+        <argsstring>(const function&lt; void(toml_builder &amp;)&gt; &amp;build_func)</argsstring>
+        <name>value_table</name>
+        <qualifiedname>neforce::toml_builder::value_table</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;)&gt; &amp;</type>
+          <declname>build_func</declname>
+        </param>
+        <briefdescription>
+<para>使用函数式方式构建表格值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>build_func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构建函数，接收toml_builder引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当上下文无效、键名缺失或键重复时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在独立的作用域内构建一个标准表格。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="406" column="18"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a21aefe97cff0d7c11777b76a1a5a76d5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::value_inline_table</definition>
+        <argsstring>(const function&lt; void(toml_builder &amp;)&gt; &amp;build_func)</argsstring>
+        <name>value_inline_table</name>
+        <qualifiedname>neforce::toml_builder::value_inline_table</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;)&gt; &amp;</type>
+          <declname>build_func</declname>
+        </param>
+        <briefdescription>
+<para>使用函数式方式构建内联表格值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>build_func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构建函数，接收toml_builder引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用</para>
+</simplesect>
+在独立的作用域内构建一个内联表格。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="415" column="18"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1affc57bccf1874bcfb15e2b4b1678db5e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;</type>
+        <definition>toml_builder &amp; neforce::toml_builder::value_array</definition>
+        <argsstring>(const function&lt; void(toml_builder &amp;)&gt; &amp;build_func)</argsstring>
+        <name>value_array</name>
+        <qualifiedname>neforce::toml_builder::value_array</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" kindref="member">toml_builder</ref> &amp;)&gt; &amp;</type>
+          <declname>build_func</declname>
+        </param>
+        <briefdescription>
+<para>使用函数式方式构建数组值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>build_func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构建函数，接收toml_builder引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用，支持链式调用</para>
+</simplesect>
+在独立的作用域内构建一个数组。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="424" column="18"/>
+        <references refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932">toml_builder</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1toml__builder_1a1384a4940c864a6410d865b1f5797950" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1toml__table" kindref="compound">toml_table</ref> &gt;</type>
+        <definition>unique_ptr&lt; toml_table &gt; neforce::toml_builder::build</definition>
+        <argsstring>()</argsstring>
+        <name>build</name>
+        <qualifiedname>neforce::toml_builder::build</qualifiedname>
+        <briefdescription>
+<para>构建TOML文档 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>构建完成的根表格 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1toml__exception" kindref="compound">toml_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当存在未闭合的上下文时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+完成构建过程，返回构建好的根表格。 调用前必须确保所有上下文都已正确闭合。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="434" column="16"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>TOML配置构建器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供流式接口构建TOML配置格式，支持以下特性：<itemizedlist>
+<listitem><para>链式调用构建表格和数组</para>
+</listitem><listitem><para>自动类型转换（整数、浮点数、布尔值、字符串）</para>
+</listitem><listitem><para>函数式构建嵌套结构</para>
+</listitem><listitem><para>集合类型自动转换（可迭代对象、映射表）</para>
+</listitem><listitem><para>上下文管理（自动维护当前表格/数组状态）</para>
+</listitem><listitem><para>支持所有TOML字符串类型（Basic, Literal, Multi-line）</para>
+</listitem><listitem><para>支持所有TOML日期时间类型 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" line="40" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/toml/toml_builder.hpp" bodystart="40" bodyend="435"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1toml__builder_1aaa98a3070d9b8d4c986eff7c236c0dc2a76e805a172d34b37687cf167705bdf43" prot="private" virt="non-virtual"><scope>neforce::toml_builder</scope><name>array</name></member>
+      <member refid="classneforce_1_1toml__builder_1a47d416d7e7f68964e5bb9af8528f61f2" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>begin_array</name></member>
+      <member refid="classneforce_1_1toml__builder_1a66a4283623ed3855a84f65471223df16" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>begin_array_table</name></member>
+      <member refid="classneforce_1_1toml__builder_1aa62b84c69deac6b4553c2423c6d589bc" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>begin_array_table</name></member>
+      <member refid="classneforce_1_1toml__builder_1aaee4b85fc8f04b5fdc4215a7bf7d02dd" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>begin_inline_table</name></member>
+      <member refid="classneforce_1_1toml__builder_1a9751c3febff4d76735c6fa45c1e9d345" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>begin_table</name></member>
+      <member refid="classneforce_1_1toml__builder_1adcec22cc8e49a0a712c20ce42bd40ba6" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>begin_table</name></member>
+      <member refid="classneforce_1_1toml__builder_1a1384a4940c864a6410d865b1f5797950" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>build</name></member>
+      <member refid="classneforce_1_1toml__builder_1a8d09889a2c6f8ef2ecb7c6fadc6fedf3" prot="private" virt="non-virtual"><scope>neforce::toml_builder</scope><name>contexts_</name></member>
+      <member refid="classneforce_1_1toml__builder_1ae4d494403594d7111a9e33cf25ce2a04" prot="private" virt="non-virtual"><scope>neforce::toml_builder</scope><name>current_key_</name></member>
+      <member refid="classneforce_1_1toml__builder_1a314e7abcb084475c4fe966fb50d4754d" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>end_array</name></member>
+      <member refid="classneforce_1_1toml__builder_1a8bba3b09f9c624cc548c9bf83b8f52c3" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>end_array_table</name></member>
+      <member refid="classneforce_1_1toml__builder_1aab6790b9cdadcda3e699dd869c412988" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>end_inline_table</name></member>
+      <member refid="classneforce_1_1toml__builder_1a118efcda18f162ff3adb3d0cd97849e8" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>end_table</name></member>
+      <member refid="classneforce_1_1toml__builder_1a6f2d42a06583985a0346ec37de3ee5e9" prot="private" virt="non-virtual"><scope>neforce::toml_builder</scope><name>get_or_create_array_for_array_table</name></member>
+      <member refid="classneforce_1_1toml__builder_1a790a8941ef91e513431ac7d1290d6f76" prot="private" virt="non-virtual"><scope>neforce::toml_builder</scope><name>get_or_create_table_path</name></member>
+      <member refid="classneforce_1_1toml__builder_1aaa98a3070d9b8d4c986eff7c236c0dc2afd803b7c0ff341adabf2788bf85f47f6" prot="private" virt="non-virtual"><scope>neforce::toml_builder</scope><name>inline_table</name></member>
+      <member refid="classneforce_1_1toml__builder_1a7dda87d513af594bed5841caf2a3e222" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>key</name></member>
+      <member refid="classneforce_1_1toml__builder_1ae10e52d08fc929899c0eef01a24df488" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1toml__builder_1ab1cf2aa1bb51e51c9423d35a142834c8" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1toml__builder_1aaa98a3070d9b8d4c986eff7c236c0dc2" prot="private" virt="non-virtual"><scope>neforce::toml_builder</scope><name>range_type</name></member>
+      <member refid="classneforce_1_1toml__builder_1ac537b3a3ad50cfd7f97edab755832ce1" prot="private" virt="non-virtual"><scope>neforce::toml_builder</scope><name>root_</name></member>
+      <member refid="classneforce_1_1toml__builder_1aaa98a3070d9b8d4c986eff7c236c0dc2a7d943867ddb357d0ffdda68fc801d5b1" prot="private" virt="non-virtual"><scope>neforce::toml_builder</scope><name>table</name></member>
+      <member refid="classneforce_1_1toml__builder_1aecc2ba0410759163a10f1d9bd94d5932" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>toml_builder</name></member>
+      <member refid="classneforce_1_1toml__builder_1a51261702ab10e7f243388696353a93d0" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>toml_builder</name></member>
+      <member refid="classneforce_1_1toml__builder_1a68499a4d172ccc5869133078184ea675" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>toml_builder</name></member>
+      <member refid="classneforce_1_1toml__builder_1a3680921a0eb563a8ae4521e2e15d858c" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1toml__builder_1a115b87dc2da10625323796c9dcf31ace" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1toml__builder_1ae0179dde7b469059fce1b9a2b4e04d08" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1toml__builder_1a93e038e78e017bc55b6d5c7fb5e39451" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1toml__builder_1a7b23216986ae6ffc7e425510218ec6a5" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1toml__builder_1acc0f293ee6cebdb39f8019a545ee0690" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1toml__builder_1aab6a9f25f5a761465f5adb7c3417cad6" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1toml__builder_1a289520152b2d5ad9f10f7695c298388f" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1toml__builder_1ae73242d4531607ec7e6776e42002437d" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value</name></member>
+      <member refid="classneforce_1_1toml__builder_1affc57bccf1874bcfb15e2b4b1678db5e" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value_array</name></member>
+      <member refid="classneforce_1_1toml__builder_1a9a5d7c3f9a40f4278e54c5fe6d00727a" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value_datetime</name></member>
+      <member refid="classneforce_1_1toml__builder_1a0e9f5e57e01f79904c67f5aa16225a43" prot="private" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value_impl</name></member>
+      <member refid="classneforce_1_1toml__builder_1a21aefe97cff0d7c11777b76a1a5a76d5" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value_inline_table</name></member>
+      <member refid="classneforce_1_1toml__builder_1ab24f27fcda963f5be435424176b4b6c8" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value_iterable</name></member>
+      <member refid="classneforce_1_1toml__builder_1a60eb0d1802e63d2b6b6ba1ee8b0c0052" prot="private" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value_iterable_impl</name></member>
+      <member refid="classneforce_1_1toml__builder_1aa98e153b473b00b51f51f07c6c43603e" prot="private" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value_iterable_impl</name></member>
+      <member refid="classneforce_1_1toml__builder_1ae41d10e48a63e92b4d0372d899970429" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value_string</name></member>
+      <member refid="classneforce_1_1toml__builder_1a1d79fcac5095820da1f8926f1d17c54a" prot="public" virt="non-virtual"><scope>neforce::toml_builder</scope><name>value_table</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

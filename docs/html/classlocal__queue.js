@@ -7,10 +7,10 @@ var classlocal__queue =
       [ "adaptive", "classlocal__queue.html#aae2f178f553c35b160ea3f5c6a8f1f16a8cb043b2dace9afc0680e6bae5cd316f", null ]
     ] ],
     [ "be_stolen_by", "classlocal__queue.html#aa2f9e7f7671a4d2d80459a83a58133a7", null ],
-    [ "capacity", "classlocal__queue.html#a4ea666df5cf1168666dba318973be5fe", null ],
-    [ "empty", "classlocal__queue.html#a9d2eb136a42294cfa0451dce7d500ee0", null ],
+    [ "capacity", "classlocal__queue.html#a4df6f1ab41c40e53dd4aa8136847a76e", null ],
+    [ "empty", "classlocal__queue.html#a3a06828564123022ace1687f4eed8c06", null ],
     [ "push_back", "classlocal__queue.html#a70e2ab3d3d65f423ffe571788f3ca816", null ],
-    [ "remain_size", "classlocal__queue.html#af84b6ab5fed4a7fac3b1ae7ead50bcf6", null ],
-    [ "size", "classlocal__queue.html#a479ae3faa9c13754d8af5121e659e854", null ],
+    [ "remain_size", "classlocal__queue.html#a0a53b77c9e6e290d1151b232f29b2c17", null ],
+    [ "size", "classlocal__queue.html#a3abaec7e3996eed545704cc39027f144", null ],
     [ "try_pop", "classlocal__queue.html#a4a7dfd98b0eceb8f752a61a2573c8881", null ]
 ];

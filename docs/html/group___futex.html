@@ -145,18 +145,18 @@ FUTEX 的协作图:</div>
 <tr class="memitem:ga7045b616751b8d5fec67f1a27f9c60e4" id="r_ga7045b616751b8d5fec67f1a27f9c60e4"><td class="memTemplParams" colspan="2">template&lt;typename Clock, typename Dur&gt; </td></tr>
 <tr class="memitem:ga7045b616751b8d5fec67f1a27f9c60e4 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga7045b616751b8d5fec67f1a27f9c60e4">futex_wait_until</a> (const <a class="el" href="#ga4ae42858521c6114207203888569da88">platform_wait_t</a> *addr, <a class="el" href="#ga4ae42858521c6114207203888569da88">platform_wait_t</a> old, const <a class="el" href="structtime__point.html">time_point</a>&lt; Clock, Dur &gt; &amp;timeout)</td></tr>
 <tr class="memdesc:ga7045b616751b8d5fec67f1a27f9c60e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">FUTEX定时等待函数  <br /></td></tr>
-<tr class="memitem:ga26f36b601d9ad2d293b3345e1eaf5306" id="r_ga26f36b601d9ad2d293b3345e1eaf5306"><td class="memItemLeft">void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga26f36b601d9ad2d293b3345e1eaf5306">futex_wait</a> (void *addr, <a class="el" href="#ga4ae42858521c6114207203888569da88">platform_wait_t</a> value) noexcept</td></tr>
-<tr class="memdesc:ga26f36b601d9ad2d293b3345e1eaf5306"><td class="mdescLeft">&#160;</td><td class="mdescRight">无限期等待FUTEX  <br /></td></tr>
-<tr class="memitem:ga48d2abd213cbed922449fad6f05638ed" id="r_ga48d2abd213cbed922449fad6f05638ed"><td class="memItemLeft">bool NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga48d2abd213cbed922449fad6f05638ed">futex_wait_until</a> (void *addr, <a class="el" href="#ga4ae42858521c6114207203888569da88">platform_wait_t</a> value, bool has_timeout, <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> sec, <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> ns, bool is_monotonic=false)</td></tr>
-<tr class="memdesc:ga48d2abd213cbed922449fad6f05638ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待FUTEX直到指定时间点或条件满足  <br /></td></tr>
-<tr class="memitem:ga05f2a678e4c7a16ecc3ba93dba798e19" id="r_ga05f2a678e4c7a16ecc3ba93dba798e19"><td class="memItemLeft">void NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga05f2a678e4c7a16ecc3ba93dba798e19">futex_notify</a> (void *addr, bool all) noexcept</td></tr>
-<tr class="memdesc:ga05f2a678e4c7a16ecc3ba93dba798e19"><td class="mdescLeft">&#160;</td><td class="mdescRight">通知等待的线程  <br /></td></tr>
-<tr class="memitem:gab69b11c4c6a89ae5908e07b57d892833" id="r_gab69b11c4c6a89ae5908e07b57d892833"><td class="memItemLeft">int NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#gab69b11c4c6a89ae5908e07b57d892833">futex_requeue</a> (void *wait_addr, int wake_count, void *requeue_addr, int requeue_count) noexcept</td></tr>
-<tr class="memdesc:gab69b11c4c6a89ae5908e07b57d892833"><td class="mdescLeft">&#160;</td><td class="mdescRight">将部分等待线程转移到另一个 futex  <br /></td></tr>
-<tr class="memitem:ga7122cfebb7d17bf73cee0472ae48ddec" id="r_ga7122cfebb7d17bf73cee0472ae48ddec"><td class="memItemLeft">int NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga7122cfebb7d17bf73cee0472ae48ddec">futex_wake_op</a> (void *addr, int wake_count, void *op_addr, int op_arg, int op, int cmp, int cmp_arg) noexcept</td></tr>
-<tr class="memdesc:ga7122cfebb7d17bf73cee0472ae48ddec"><td class="mdescLeft">&#160;</td><td class="mdescRight">唤醒线程的同时原子修改另一个 futex 的值  <br /></td></tr>
-<tr class="memitem:ga563dcc9c60dd5a3e7006e4227b0221ab" id="r_ga563dcc9c60dd5a3e7006e4227b0221ab"><td class="memItemLeft">int NEFORCE_API&#160;</td><td class="memItemRight"><a class="el" href="#ga563dcc9c60dd5a3e7006e4227b0221ab">futex_wait_requeue_pi</a> (void *wait_addr, int value, void *requeue_addr) noexcept</td></tr>
-<tr class="memdesc:ga563dcc9c60dd5a3e7006e4227b0221ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待并转移到 PI futex（用于条件变量与 PI 锁配合）  <br /></td></tr>
+<tr class="memitem:ga3425390f7804270ade276e1a91ae99b1" id="r_ga3425390f7804270ade276e1a91ae99b1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga3425390f7804270ade276e1a91ae99b1">futex_wait</a> (void *addr, <a class="el" href="#ga4ae42858521c6114207203888569da88">platform_wait_t</a> value) noexcept</td></tr>
+<tr class="memdesc:ga3425390f7804270ade276e1a91ae99b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">无限期等待FUTEX  <br /></td></tr>
+<tr class="memitem:gaff4bc449a315d263ca628c8e203ed771" id="r_gaff4bc449a315d263ca628c8e203ed771"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#gaff4bc449a315d263ca628c8e203ed771">futex_wait_until</a> (void *addr, <a class="el" href="#ga4ae42858521c6114207203888569da88">platform_wait_t</a> value, bool has_timeout, <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> sec, <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> ns, bool is_monotonic=false)</td></tr>
+<tr class="memdesc:gaff4bc449a315d263ca628c8e203ed771"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待FUTEX直到指定时间点或条件满足  <br /></td></tr>
+<tr class="memitem:ga84832c8b1f52bd90a456091e015122ef" id="r_ga84832c8b1f52bd90a456091e015122ef"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga84832c8b1f52bd90a456091e015122ef">futex_notify</a> (void *addr, bool all) noexcept</td></tr>
+<tr class="memdesc:ga84832c8b1f52bd90a456091e015122ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">通知等待的线程  <br /></td></tr>
+<tr class="memitem:ga0770f7dec16536eaaac354bafae908e7" id="r_ga0770f7dec16536eaaac354bafae908e7"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ga0770f7dec16536eaaac354bafae908e7">futex_requeue</a> (void *wait_addr, int wake_count, void *requeue_addr, int requeue_count) noexcept</td></tr>
+<tr class="memdesc:ga0770f7dec16536eaaac354bafae908e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">将部分等待线程转移到另一个 futex  <br /></td></tr>
+<tr class="memitem:ga448fbb4e4417647ae03bac363ea99c83" id="r_ga448fbb4e4417647ae03bac363ea99c83"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ga448fbb4e4417647ae03bac363ea99c83">futex_wake_op</a> (void *addr, int wake_count, void *op_addr, int op_arg, int op, int cmp, int cmp_arg) noexcept</td></tr>
+<tr class="memdesc:ga448fbb4e4417647ae03bac363ea99c83"><td class="mdescLeft">&#160;</td><td class="mdescRight">唤醒线程的同时原子修改另一个 futex 的值  <br /></td></tr>
+<tr class="memitem:ga51c85c94855ccbbe8742e1a4ada491df" id="r_ga51c85c94855ccbbe8742e1a4ada491df"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#ga51c85c94855ccbbe8742e1a4ada491df">futex_wait_requeue_pi</a> (void *wait_addr, int value, void *requeue_addr) noexcept</td></tr>
+<tr class="memdesc:ga51c85c94855ccbbe8742e1a4ada491df"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待并转移到 PI futex（用于条件变量与 PI 锁配合）  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>FUTEX同步原语的跨平台封装 </p>
@@ -250,8 +250,8 @@ FUTEX 的协作图:</div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="ga05f2a678e4c7a16ecc3ba93dba798e19" name="ga05f2a678e4c7a16ecc3ba93dba798e19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga05f2a678e4c7a16ecc3ba93dba798e19">&#9670;&#160;</a></span>futex_notify()</h2>
+<a id="ga84832c8b1f52bd90a456091e015122ef" name="ga84832c8b1f52bd90a456091e015122ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga84832c8b1f52bd90a456091e015122ef">&#9670;&#160;</a></span>futex_notify()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -260,7 +260,7 @@ FUTEX 的协作图:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void NEFORCE_API futex_notify </td>
+          <td class="memname">void futex_notify </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>addr</em></span>, </td>
         </tr>
@@ -288,12 +288,12 @@ FUTEX 的协作图:</div>
 <p>唤醒正在等待addr处值变化的线程。 如果all为true，唤醒所有等待线程；否则只唤醒一个等待线程。</p>
 <dl class="section warning"><dt>警告</dt><dd>调用者必须确保 addr 在等待期间保持有效且可访问 </dd></dl>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__futex_8hpp_source.html#l00273">atomic_futex&lt; WaiterBit &gt;::store_notify_all()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__futex_8hpp_source.html#l00288">atomic_futex&lt; WaiterBit &gt;::store_notify_all()</a>.</p>
 
 </div>
 </div>
-<a id="gab69b11c4c6a89ae5908e07b57d892833" name="gab69b11c4c6a89ae5908e07b57d892833"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab69b11c4c6a89ae5908e07b57d892833">&#9670;&#160;</a></span>futex_requeue()</h2>
+<a id="ga0770f7dec16536eaaac354bafae908e7" name="ga0770f7dec16536eaaac354bafae908e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0770f7dec16536eaaac354bafae908e7">&#9670;&#160;</a></span>futex_requeue()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -302,7 +302,7 @@ FUTEX 的协作图:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int NEFORCE_API futex_requeue </td>
+          <td class="memname">int futex_requeue </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>wait_addr</em></span>, </td>
         </tr>
@@ -343,8 +343,8 @@ FUTEX 的协作图:</div>
 
 </div>
 </div>
-<a id="ga26f36b601d9ad2d293b3345e1eaf5306" name="ga26f36b601d9ad2d293b3345e1eaf5306"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga26f36b601d9ad2d293b3345e1eaf5306">&#9670;&#160;</a></span>futex_wait()</h2>
+<a id="ga3425390f7804270ade276e1a91ae99b1" name="ga3425390f7804270ade276e1a91ae99b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3425390f7804270ade276e1a91ae99b1">&#9670;&#160;</a></span>futex_wait()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -353,7 +353,7 @@ FUTEX 的协作图:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void NEFORCE_API futex_wait </td>
+          <td class="memname">void futex_wait </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>addr</em></span>, </td>
         </tr>
@@ -383,8 +383,8 @@ FUTEX 的协作图:</div>
 
 </div>
 </div>
-<a id="ga563dcc9c60dd5a3e7006e4227b0221ab" name="ga563dcc9c60dd5a3e7006e4227b0221ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga563dcc9c60dd5a3e7006e4227b0221ab">&#9670;&#160;</a></span>futex_wait_requeue_pi()</h2>
+<a id="ga51c85c94855ccbbe8742e1a4ada491df" name="ga51c85c94855ccbbe8742e1a4ada491df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga51c85c94855ccbbe8742e1a4ada491df">&#9670;&#160;</a></span>futex_wait_requeue_pi()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -393,7 +393,7 @@ FUTEX 的协作图:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int NEFORCE_API futex_wait_requeue_pi </td>
+          <td class="memname">int futex_wait_requeue_pi </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>wait_addr</em></span>, </td>
         </tr>
@@ -479,14 +479,14 @@ template&lt;typename Clock, typename Dur&gt; </div>
 
 </div>
 </div>
-<a id="ga48d2abd213cbed922449fad6f05638ed" name="ga48d2abd213cbed922449fad6f05638ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga48d2abd213cbed922449fad6f05638ed">&#9670;&#160;</a></span>futex_wait_until() <span class="overload">[2/2]</span></h2>
+<a id="gaff4bc449a315d263ca628c8e203ed771" name="gaff4bc449a315d263ca628c8e203ed771"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaff4bc449a315d263ca628c8e203ed771">&#9670;&#160;</a></span>futex_wait_until() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool NEFORCE_API futex_wait_until </td>
+          <td class="memname">bool futex_wait_until </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>addr</em></span>, </td>
         </tr>
@@ -547,8 +547,8 @@ template&lt;typename Clock, typename Dur&gt; </div>
 
 </div>
 </div>
-<a id="ga7122cfebb7d17bf73cee0472ae48ddec" name="ga7122cfebb7d17bf73cee0472ae48ddec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7122cfebb7d17bf73cee0472ae48ddec">&#9670;&#160;</a></span>futex_wake_op()</h2>
+<a id="ga448fbb4e4417647ae03bac363ea99c83" name="ga448fbb4e4417647ae03bac363ea99c83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga448fbb4e4417647ae03bac363ea99c83">&#9670;&#160;</a></span>futex_wake_op()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -557,7 +557,7 @@ template&lt;typename Clock, typename Dur&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int NEFORCE_API futex_wake_op </td>
+          <td class="memname">int futex_wake_op </td>
           <td>(</td>
           <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>addr</em></span>, </td>
         </tr>

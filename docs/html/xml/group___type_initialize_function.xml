@@ -4,14 +4,14 @@
     <compoundname>TypeInitializeFunction</compoundname>
     <title>类型初始化函数</title>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___type_initialize_function_1gafff7aa9d7280a07a58464ccdf4a8931a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_default_constructible&lt; T &gt;::value" virt="non-virtual">
+      <memberdef kind="function" id="group___type_initialize_function_1ga1278f68876e9220819c733bc1b3a93c1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_default_constructible&lt; T &gt;::value" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE constexpr T</type>
-        <definition>NEFORCE_ALWAYS_INLINE constexpr T initialize</definition>
+        <type>T</type>
+        <definition>T initialize</definition>
         <argsstring>()</argsstring>
         <name>initialize</name>
         <briefdescription>
@@ -39,13 +39,13 @@ C++11后，编译器在满足以下条件时执行命名返回值优化 NRVO：<
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="4330" column="35" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="4330" bodyend="4333"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="4330" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="4330" bodyend="4333"/>
         <references refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" compoundref="type__traits_8hpp" startline="37">integral_constant&lt; bool, Value &gt;::value</references>
         <referencedby refid="classdeque_1a17268f4bf56124fa71ebb36ef241133b" compoundref="deque_8hpp" startline="810" endline="810">deque&lt; T, Alloc, BufSize &gt;::deque</referencedby>
         <referencedby refid="classdeque_1a2dde7384e1dd5acb521afd10700b6639" compoundref="deque_8hpp" startline="816" endline="816">deque&lt; T, Alloc, BufSize &gt;::deque</referencedby>
         <referencedby refid="classlist_1af6f9b0fe5254c309585f263388067bf3" compoundref="list_8hpp" startline="274" endline="275">list&lt; pair&lt; Key, Value &gt; &gt;::list</referencedby>
-        <referencedby refid="classmap_1a79845018e34d85b6bbe0c4831fed166c" compoundref="map_8hpp" startline="471" endline="477">map&lt; Key, T, Compare, Alloc &gt;::operator[]</referencedby>
-        <referencedby refid="classmap_1a6e304ddf4d1c6c2677b9ae1a4bdf596f" compoundref="map_8hpp" startline="486" endline="492">map&lt; Key, T, Compare, Alloc &gt;::operator[]</referencedby>
+        <referencedby refid="classmap_1a996e9e67df28486732cd445a56265eea" compoundref="map_8hpp" startline="471" endline="477">map&lt; Key, T, Compare, Alloc &gt;::operator[]</referencedby>
+        <referencedby refid="classmap_1a187e84e2c52de57bf6ad636560e03438" compoundref="map_8hpp" startline="486" endline="492">map&lt; Key, T, Compare, Alloc &gt;::operator[]</referencedby>
         <referencedby refid="classdeque_1a05de6d491766321374ce879f29c2f164" compoundref="deque_8hpp" startline="1071" endline="1071">deque&lt; T, Alloc, BufSize &gt;::resize</referencedby>
         <referencedby refid="group___parallel_algorithms_1ga9c84b149470430f99e5bb9f2de2a03dd" compoundref="parallel_8hpp" startline="78" endline="95">transform_reduce</referencedby>
       </memberdef>
@@ -55,7 +55,7 @@ C++11后，编译器在满足以下条件时执行命名返回值优化 NRVO：<
         <name>__NEFORCE_INITIALIZE_BASIC_FUNCTION</name>
         <param><defname>OPT</defname></param>
         <initializer>template &lt;&gt;                                                 \
-NEFORCE_ALWAYS_INLINE constexpr OPT <ref refid="group___type_initialize_function_1gafff7aa9d7280a07a58464ccdf4a8931a" kindref="member">initialize</ref>() noexcept { \
+NEFORCE_ALWAYS_INLINE constexpr OPT <ref refid="group___type_initialize_function_1ga1278f68876e9220819c733bc1b3a93c1" kindref="member">initialize</ref>() noexcept { \
     return static_cast&lt;OPT&gt;(0);                             \
 }</initializer>
         <briefdescription>

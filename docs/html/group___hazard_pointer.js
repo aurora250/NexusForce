@@ -1,7 +1,7 @@
 var group___hazard_pointer =
 [
     [ "hazard_pointer_record", "structhazard__pointer__record.html", [
-      [ "get_protected", "structhazard__pointer__record.html#a9bad8d4482e85c2b543c8d19955940f1", null ],
+      [ "get_protected", "structhazard__pointer__record.html#ae03e1630afad7e8ceb0ee028f932dac4", null ],
       [ "protect", "structhazard__pointer__record.html#a442f3b96c8298e3d907f63487b0b7ae0", null ],
       [ "release", "structhazard__pointer__record.html#a93d2746d339d50d3e596c66521829024", null ],
       [ "try_acquire", "structhazard__pointer__record.html#ab365c8bb8d47f7ed2d17c3d2b8dbb0a0", null ],
@@ -11,13 +11,13 @@ var group___hazard_pointer =
     ] ],
     [ "hazard_pointer_obj_base", "classhazard__pointer__obj__base.html", [
       [ "destroy", "classhazard__pointer__obj__base.html#a9e179233d5b592750c0e44262f75dfe8", null ],
-      [ "get_ptr", "classhazard__pointer__obj__base.html#af8293f6644d4fea8e8bc6a68f0372674", null ],
+      [ "get_ptr", "classhazard__pointer__obj__base.html#a42c67db114697d068c3de6f0bcb46c01", null ],
       [ "next", "classhazard__pointer__obj__base.html#ade76a3fc1006cff9269564b074937bf7", null ]
     ] ],
     [ "hazard_pointer_obj&lt; T, Deleter &gt;", "classhazard__pointer__obj.html", [
       [ "hazard_pointer_obj", "classhazard__pointer__obj.html#a8737ba02a9fa052b09177db2d6afb229", null ],
       [ "destroy", "classhazard__pointer__obj.html#abc7269dcc8a1838682952567cf555d87", null ],
-      [ "get_ptr", "classhazard__pointer__obj.html#afc4fd3b402b67d71f57400a37d7f6425", null ]
+      [ "get_ptr", "classhazard__pointer__obj.html#aec08bfcaf16a225634a93469a2066cd4", null ]
     ] ],
     [ "retire_list", "structretire__list.html", [
       [ "retire_list", "structretire__list.html#a1dc9f0280fe5f023d9499bae37c2ffbd", null ],

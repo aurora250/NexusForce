@@ -1,9 +1,9 @@
 var structhttp__cookie =
 [
-    [ "is_expired", "structhttp__cookie.html#a40a13229a72117f34546ed189aed230d", null ],
-    [ "is_valid", "structhttp__cookie.html#aff47401f92c19a0073e7ac2bac062083", null ],
+    [ "is_expired", "structhttp__cookie.html#abec676e6e77d16dd1a6b227d41ffa376", null ],
+    [ "is_valid", "structhttp__cookie.html#afe955dc2643ebaaa80d6dad755ca2a5d", null ],
     [ "set_expires_from_now", "structhttp__cookie.html#ab095279a9ebaaa552d60a78e485d0969", null ],
-    [ "to_string", "structhttp__cookie.html#aae74feec5b7907b1b6984ccec4f50fb7", null ],
+    [ "to_string", "structhttp__cookie.html#ace13f422925ea3bb9afee7c81933e8d6", null ],
     [ "domain", "structhttp__cookie.html#a006120f90d47eefc22cb5a1c3b291c7d", null ],
     [ "expires", "structhttp__cookie.html#a59ce4c2d2bfa39934b0efd2891fca523", null ],
     [ "http_only", "structhttp__cookie.html#a5f622b6255d7aa131034d17a4e5db76b", null ],

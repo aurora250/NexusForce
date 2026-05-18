@@ -1,0 +1,1137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1path__tree" kind="class" language="C++" prot="public">
+    <compoundname>neforce::path_tree</compoundname>
+    <basecompoundref refid="structneforce_1_1istringify" prot="public" virt="non-virtual">neforce::istringify&lt; path_tree &gt;</basecompoundref>
+    <includes refid="path__tree_8hpp" local="no">path_tree.hpp</includes>
+    <innerclass refid="classneforce_1_1path__tree_1_1node" prot="public">neforce::path_tree::node</innerclass>
+    <innerclass refid="structneforce_1_1path__tree_1_1scan__options" prot="public">neforce::path_tree::scan_options</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classneforce_1_1path__tree_1ad5a9c3450e6d1558aa194177ae18aa57" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+        <name>node_type</name>
+        <qualifiedname>neforce::path_tree::node_type</qualifiedname>
+        <enumvalue id="classneforce_1_1path__tree_1ad5a9c3450e6d1558aa194177ae18aa57aad921d60486366258809553a3db49a4a" prot="public">
+          <name>unknown</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>未知 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1path__tree_1ad5a9c3450e6d1558aa194177ae18aa57a5f8f22b8cdbaeee8cf857673a9b6ba20" prot="public">
+          <name>directory</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>目录 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1path__tree_1ad5a9c3450e6d1558aa194177ae18aa57a8c7dd922ad47494fc02c388e12c00eac" prot="public">
+          <name>file</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+<para>普通文件 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1path__tree_1ad5a9c3450e6d1558aa194177ae18aa57aa978acc8a7ae15f49f58f3495f0d85ba" prot="public">
+          <name>symlink</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+<para>符号链接 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>节点类型枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="41" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" bodystart="41" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="enum" id="classneforce_1_1path__tree_1affc45f7889a0fcbb701a61d5465ff880" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+        <name>visit_result</name>
+        <qualifiedname>neforce::path_tree::visit_result</qualifiedname>
+        <enumvalue id="classneforce_1_1path__tree_1affc45f7889a0fcbb701a61d5465ff880ac0dfc2c94bd5e3e0e48e9084ef8cc0e2" prot="public">
+          <name>proceed</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>继续遍历 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1path__tree_1affc45f7889a0fcbb701a61d5465ff880a08b43519a7e36ee4c6c5615d1663bcfd" prot="public">
+          <name>skip</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>跳过当前节点的子节点 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1path__tree_1affc45f7889a0fcbb701a61d5465ff880aef399b2d446bb37b7c32ad2cc1b6045b" prot="public">
+          <name>stop</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+<para>终止整个遍历 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>遍历控制指令 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="51" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" bodystart="51" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1path__tree_1ae0ebfc7cab40110c6a0105267bc1b019" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; <ref refid="classneforce_1_1path__tree_1affc45f7889a0fcbb701a61d5465ff880" kindref="member">visit_result</ref>(const <ref refid="classneforce_1_1path__tree_1_1node" kindref="compound">node</ref> &amp;)&gt;</type>
+        <definition>using neforce::path_tree::visitor = function&lt;visit_result(const node&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>visitor</name>
+        <qualifiedname>neforce::path_tree::visitor</qualifiedname>
+        <briefdescription>
+<para>节点访问回调类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>参数为当前节点引用，返回 <ref refid="classneforce_1_1path__tree_1affc45f7889a0fcbb701a61d5465ff880" kindref="member">visit_result</ref> 控制遍历行为。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="156" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1path__tree_1a0d463eafcae55a9367fe6cd28b82ef03" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; bool(const <ref refid="classneforce_1_1path__tree_1_1node" kindref="compound">node</ref> &amp;)&gt;</type>
+        <definition>using neforce::path_tree::filter = function&lt;bool(const node&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>filter</name>
+        <qualifiedname>neforce::path_tree::filter</qualifiedname>
+        <briefdescription>
+<para>节点过滤器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>返回 true 表示节点通过过滤，false 表示被过滤掉。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="163" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" bodystart="163" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1path__tree_1afd09930756474835ebb9d6b9a10109a1" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref></type>
+        <definition>node::ptr neforce::path_tree::root_</definition>
+        <argsstring></argsstring>
+        <name>root_</name>
+        <qualifiedname>neforce::path_tree::root_</qualifiedname>
+        <briefdescription>
+<para>根节点 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="193" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" bodystart="193" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a19377b1655283213fc39f7eb7f6c9ccd" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void neforce::path_tree::scan_impl</definition>
+        <argsstring>(const node::ptr &amp;parent, const scan_options &amp;options, size_t current_depth)</argsstring>
+        <name>scan_impl</name>
+        <qualifiedname>neforce::path_tree::scan_impl</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref> &amp;</type>
+          <declname>parent</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structneforce_1_1path__tree_1_1scan__options" kindref="compound">scan_options</ref> &amp;</type>
+          <declname>options</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>current_depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="195" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a0092abbcde3a68fe20b1e5adefd028c2" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void neforce::path_tree::traverse_dfs_impl</definition>
+        <argsstring>(const node::ptr &amp;current, const visitor &amp;v, bool &amp;stopped)</argsstring>
+        <name>traverse_dfs_impl</name>
+        <qualifiedname>neforce::path_tree::traverse_dfs_impl</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref> &amp;</type>
+          <declname>current</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1ae0ebfc7cab40110c6a0105267bc1b019" kindref="member">visitor</ref> &amp;</type>
+          <declname>v</declname>
+        </param>
+        <param>
+          <type>bool &amp;</type>
+          <declname>stopped</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="196" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a57efab8fc33f1669535ad2d72154e191" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void neforce::path_tree::collect_impl</definition>
+        <argsstring>(const node::ptr &amp;current, const filter &amp;f, vector&lt; node::ptr &gt; &amp;result)</argsstring>
+        <name>collect_impl</name>
+        <qualifiedname>neforce::path_tree::collect_impl</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref> &amp;</type>
+          <declname>current</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1a0d463eafcae55a9367fe6cd28b82ef03" kindref="member">filter</ref> &amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref> &gt; &amp;</type>
+          <declname>result</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="197" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1ad72dc834427d4c63c2fb51824d5a8146" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref></type>
+        <definition>static node::ptr neforce::path_tree::clone_node</definition>
+        <argsstring>(const node::ptr &amp;src, const node::ptr &amp;new_parent, size_t depth)</argsstring>
+        <name>clone_node</name>
+        <qualifiedname>neforce::path_tree::clone_node</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref> &amp;</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref> &amp;</type>
+          <declname>new_parent</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="198" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1acbb81451cb267b7e3ffad85118bc593b" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref></type>
+        <definition>static node::ptr neforce::path_tree::prune_impl</definition>
+        <argsstring>(const node::ptr &amp;src, const filter &amp;f, const node::ptr &amp;new_parent, size_t depth)</argsstring>
+        <name>prune_impl</name>
+        <qualifiedname>neforce::path_tree::prune_impl</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref> &amp;</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1a0d463eafcae55a9367fe6cd28b82ef03" kindref="member">filter</ref> &amp;</type>
+          <declname>f</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref> &amp;</type>
+          <declname>new_parent</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="200" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1path__tree_1af7f074bfc14a505758618367671148df" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::path_tree::to_string_impl</definition>
+        <argsstring>(const node::ptr &amp;n, string_view indent, size_t depth) const</argsstring>
+        <name>to_string_impl</name>
+        <qualifiedname>neforce::path_tree::to_string_impl</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref> &amp;</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>indent</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="202" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a0481c0648bc2117d6f2f13c2cba9dfa3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::path_tree::path_tree</definition>
+        <argsstring>()=default</argsstring>
+        <name>path_tree</name>
+        <qualifiedname>neforce::path_tree::path_tree</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="205" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1adfb34df4abda40c1218d4a41860ac3e0" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::path_tree::path_tree</definition>
+        <argsstring>(path root_path)</argsstring>
+        <name>path_tree</name>
+        <qualifiedname>neforce::path_tree::path_tree</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1path" kindref="compound">path</ref></type>
+          <declname>root_path</declname>
+        </param>
+        <briefdescription>
+<para>从路径构造树 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>root_path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>根路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="211" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" bodystart="211" bodyend="212"/>
+        <references refid="group___shared_pointer_1gacdaa04ead5936b6c9e0f024297dcf54f" compoundref="shared__ptr_8hpp" startline="835" endline="863">neforce::make_shared</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1abf5ee46771552553c8bc7f0c41e9b785" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::path_tree::path_tree</definition>
+        <argsstring>(const path_tree &amp;)=default</argsstring>
+        <name>path_tree</name>
+        <qualifiedname>neforce::path_tree::path_tree</qualifiedname>
+        <param>
+          <type>const path_tree &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="214" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a2d2160703f3e424aea7b5679cfdd6319" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::path_tree::path_tree</definition>
+        <argsstring>(path_tree &amp;&amp;) noexcept=default</argsstring>
+        <name>path_tree</name>
+        <qualifiedname>neforce::path_tree::path_tree</qualifiedname>
+        <param>
+          <type>path_tree &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="215" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a5ff6ffb21b7b61bf70401a79ca44f02f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>path_tree &amp;</type>
+        <definition>path_tree &amp; neforce::path_tree::operator=</definition>
+        <argsstring>(const path_tree &amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::path_tree::operator=</qualifiedname>
+        <param>
+          <type>const path_tree &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="216" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1af29c6db769091de3847f045939334abe" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>path_tree &amp;</type>
+        <definition>path_tree &amp; neforce::path_tree::operator=</definition>
+        <argsstring>(path_tree &amp;&amp;) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::path_tree::operator=</qualifiedname>
+        <param>
+          <type>path_tree &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="217" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a3873c116e84b47c79867b7d06ff1b0e9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref></type>
+        <definition>node::ptr neforce::path_tree::root</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>root</name>
+        <qualifiedname>neforce::path_tree::root</qualifiedname>
+        <briefdescription>
+<para>获取根节点 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="231" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" bodystart="231" bodyend="231"/>
+        <references refid="classneforce_1_1path__tree_1a3873c116e84b47c79867b7d06ff1b0e9" compoundref="path__tree_8hpp" startline="231" endline="231">root</references>
+        <referencedby refid="classneforce_1_1path__tree_1a3873c116e84b47c79867b7d06ff1b0e9" compoundref="path__tree_8hpp" startline="231" endline="231">root</referencedby>
+        <referencedby refid="classneforce_1_1path__tree_1adf22d97deca74e9b6379c20af5474168">scan</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a5980137b0552bb8ad6dd76a37f7163db" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::path_tree::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::path_tree::empty</qualifiedname>
+        <briefdescription>
+<para>树是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="234" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" bodystart="234" bodyend="234"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1af6fd0d1764ed35bcc1a0fc3fd863ba70" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::path_tree::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::path_tree::size</qualifiedname>
+        <briefdescription>
+<para>获取树中节点总数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>节点数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="240" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a95d1f4f1174a25fc2a28ccf5e56bec1f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::path_tree::max_depth</definition>
+        <argsstring>() const</argsstring>
+        <name>max_depth</name>
+        <qualifiedname>neforce::path_tree::max_depth</qualifiedname>
+        <briefdescription>
+<para>获取树的最大深度 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大深度 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="246" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a0480c1d974d857cf15dceb3a29564597" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref></type>
+        <definition>node::ptr neforce::path_tree::find</definition>
+        <argsstring>(const path &amp;p) const</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::path_tree::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>通过绝对路径查找节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>找到的节点，未找到返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="253" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a765a1de70a78193d9a4cde7dca8fbea0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref> &gt;</type>
+        <definition>vector&lt; node::ptr &gt; neforce::path_tree::find_all</definition>
+        <argsstring>(string_view name) const</argsstring>
+        <name>find_all</name>
+        <qualifiedname>neforce::path_tree::find_all</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>通过文件名查找所有匹配节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>所有匹配节点的列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="260" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a672386c59b627829ff75c578f8e82186" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref> &gt;</type>
+        <definition>vector&lt; node::ptr &gt; neforce::path_tree::find_if</definition>
+        <argsstring>(const filter &amp;f) const</argsstring>
+        <name>find_if</name>
+        <qualifiedname>neforce::path_tree::find_if</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1a0d463eafcae55a9367fe6cd28b82ef03" kindref="member">filter</ref> &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>通过过滤器查找所有匹配节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>过滤器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>所有满足条件的节点列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="267" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a8fe3c82114c7f9cc0f78655739c4cf64" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref> &gt;</type>
+        <definition>vector&lt; node::ptr &gt; neforce::path_tree::find_by_extension</definition>
+        <argsstring>(string_view ext) const</argsstring>
+        <name>find_by_extension</name>
+        <qualifiedname>neforce::path_tree::find_by_extension</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>ext</declname>
+        </param>
+        <briefdescription>
+<para>通过扩展名查找所有文件节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ext</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>扩展名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>所有匹配的文件节点列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="274" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1ab7dc7e60ab0fd890ade5fe92b95a3625" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::path_tree::traverse_dfs</definition>
+        <argsstring>(const visitor &amp;visitor) const</argsstring>
+        <name>traverse_dfs</name>
+        <qualifiedname>neforce::path_tree::traverse_dfs</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1ae0ebfc7cab40110c6a0105267bc1b019" kindref="member">visitor</ref> &amp;</type>
+          <declname>visitor</declname>
+        </param>
+        <briefdescription>
+<para>深度优先遍历（前序） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>visitor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问回调</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+对树中每个节点调用visitor， 根据返回值控制遍历行为（proceed/skip/stop）。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="283" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a28e23f34d88f8b40501cf6b298cbca1f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::path_tree::traverse_bfs</definition>
+        <argsstring>(const visitor &amp;visitor) const</argsstring>
+        <name>traverse_bfs</name>
+        <qualifiedname>neforce::path_tree::traverse_bfs</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1ae0ebfc7cab40110c6a0105267bc1b019" kindref="member">visitor</ref> &amp;</type>
+          <declname>visitor</declname>
+        </param>
+        <briefdescription>
+<para>广度优先遍历 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>visitor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问回调 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="289" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a0b0e4d0905d930eea8a21afa315700b8" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::path_tree::traverse_files</definition>
+        <argsstring>(const visitor &amp;visitor) const</argsstring>
+        <name>traverse_files</name>
+        <qualifiedname>neforce::path_tree::traverse_files</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1ae0ebfc7cab40110c6a0105267bc1b019" kindref="member">visitor</ref> &amp;</type>
+          <declname>visitor</declname>
+        </param>
+        <briefdescription>
+<para>仅遍历文件节点（深度优先） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>visitor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问回调 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="295" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a7e8d1933ebb4899bad1b088cc3b47218" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::path_tree::traverse_dirs</definition>
+        <argsstring>(const visitor &amp;visitor) const</argsstring>
+        <name>traverse_dirs</name>
+        <qualifiedname>neforce::path_tree::traverse_dirs</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1ae0ebfc7cab40110c6a0105267bc1b019" kindref="member">visitor</ref> &amp;</type>
+          <declname>visitor</declname>
+        </param>
+        <briefdescription>
+<para>仅遍历目录节点（深度优先） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>visitor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>访问回调 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="301" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a720c0cdb5fec44b05f06c91c182789cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1path__tree_1_1node_1accb30526f0028ad737eb6957527b2242" kindref="member">node::ptr</ref></type>
+        <definition>node::ptr neforce::path_tree::insert</definition>
+        <argsstring>(const path &amp;p, node_type type=node_type::file)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::path_tree::insert</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1path__tree_1ad5a9c3450e6d1558aa194177ae18aa57" kindref="member">node_type</ref></type>
+          <declname>type</declname>
+          <defval><ref refid="classneforce_1_1path__tree_1ad5a9c3450e6d1558aa194177ae18aa57a8c7dd922ad47494fc02c388e12c00eac" kindref="member">node_type::file</ref></defval>
+        </param>
+        <briefdescription>
+<para>手动插入路径节点 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的路径（相对或绝对） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>节点类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入的节点，如果路径已存在则返回已有节点</para>
+</simplesect>
+会自动创建路径中缺失的中间目录节点。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="311" column="15"/>
+        <references refid="classneforce_1_1path__tree_1ad5a9c3450e6d1558aa194177ae18aa57a8c7dd922ad47494fc02c388e12c00eac" compoundref="path__tree_8hpp" startline="44">file</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1af9b7ebd9934bb93889d37e2af8341723" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::path_tree::remove</definition>
+        <argsstring>(const path &amp;p)</argsstring>
+        <name>remove</name>
+        <qualifiedname>neforce::path_tree::remove</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>移除指定路径的节点及其子树 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移除的路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否成功移除 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="318" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a399cf90e808f621c28d10fc02062120a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::path_tree::merge</definition>
+        <argsstring>(const path_tree &amp;other)</argsstring>
+        <name>merge</name>
+        <qualifiedname>neforce::path_tree::merge</qualifiedname>
+        <param>
+          <type>const path_tree &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>将另一棵树合并到当前树 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要合并的树（根路径需与当前树兼容）</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将other中的所有节点合并入当前树，重复节点不覆盖。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="326" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1adce62096a3208fec231c7ad3e7c5fb07" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>path_tree</type>
+        <definition>path_tree neforce::path_tree::subtree</definition>
+        <argsstring>(const path &amp;p) const</argsstring>
+        <name>subtree</name>
+        <qualifiedname>neforce::path_tree::subtree</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>获取以指定路径为根的子树 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子树根路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>子树</para>
+</simplesect>
+返回以p为根的独立路径树副本。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="335" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a6488be28144d30c734f99407f91d820b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>path_tree</type>
+        <definition>path_tree neforce::path_tree::prune</definition>
+        <argsstring>(const filter &amp;f) const</argsstring>
+        <name>prune</name>
+        <qualifiedname>neforce::path_tree::prune</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path__tree_1a0d463eafcae55a9367fe6cd28b82ef03" kindref="member">filter</ref> &amp;</type>
+          <declname>f</declname>
+        </param>
+        <briefdescription>
+<para>按过滤器裁剪树，返回只含满足条件节点的新树 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>f</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>过滤器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>裁剪后的新树</para>
+</simplesect>
+若某目录下所有子节点均被过滤，该目录节点也被移除。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="344" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a34262e56340bfb7ddd24d54606637ccd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1path" kindref="compound">path</ref> &gt;</type>
+        <definition>vector&lt; path &gt; neforce::path_tree::all_paths</definition>
+        <argsstring>() const</argsstring>
+        <name>all_paths</name>
+        <qualifiedname>neforce::path_tree::all_paths</qualifiedname>
+        <briefdescription>
+<para>收集树中所有路径 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>所有节点路径列表（深度优先顺序） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="350" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a8e3d5a573c7346b37a2a264c5acdd541" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1path" kindref="compound">path</ref> &gt;</type>
+        <definition>vector&lt; path &gt; neforce::path_tree::all_file_paths</definition>
+        <argsstring>() const</argsstring>
+        <name>all_file_paths</name>
+        <qualifiedname>neforce::path_tree::all_file_paths</qualifiedname>
+        <briefdescription>
+<para>收集树中所有文件路径 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>所有文件节点的路径列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="356" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a7bfb4c4219efd9a0fd82ff311f47d116" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1path" kindref="compound">path</ref> &gt;</type>
+        <definition>vector&lt; path &gt; neforce::path_tree::all_dir_paths</definition>
+        <argsstring>() const</argsstring>
+        <name>all_dir_paths</name>
+        <qualifiedname>neforce::path_tree::all_dir_paths</qualifiedname>
+        <briefdescription>
+<para>收集树中所有目录路径 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>所有目录节点的路径列表 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="362" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a2b040fbf39a207c277f53e30f94c3c06" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::path_tree::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>neforce::path_tree::to_string</qualifiedname>
+        <briefdescription>
+<para>将树格式化为可读字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>格式化后的字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="368" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1path__tree_1a4b8401ce21d18a4eba2cf817ddc0e98e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::path_tree::to_string</definition>
+        <argsstring>(string_view indent) const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>neforce::path_tree::to_string</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>indent</declname>
+        </param>
+        <briefdescription>
+<para>将树格式化为可读字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>indent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>每层缩进字符串，默认为两个空格 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>格式化后的字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="375" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1path__tree_1adf22d97deca74e9b6379c20af5474168" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>path_tree</type>
+        <definition>static path_tree neforce::path_tree::scan</definition>
+        <argsstring>(const path &amp;root, const scan_options &amp;options)</argsstring>
+        <name>scan</name>
+        <qualifiedname>neforce::path_tree::scan</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>root</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structneforce_1_1path__tree_1_1scan__options" kindref="compound">scan_options</ref> &amp;</type>
+          <declname>options</declname>
+        </param>
+        <briefdescription>
+<para>从文件系统扫描构建路径树 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>root</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>扫描的根路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>options</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>扫描选项 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>构建好的路径树</para>
+</simplesect>
+递归扫描给定路径下的所有文件和目录， 根据选项进行过滤和深度控制。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="228" column="23"/>
+        <references refid="classneforce_1_1path__tree_1a3873c116e84b47c79867b7d06ff1b0e9" compoundref="path__tree_8hpp" startline="231" endline="231">root</references>
+        <references refid="classneforce_1_1path__tree_1adf22d97deca74e9b6379c20af5474168">scan</references>
+        <referencedby refid="classneforce_1_1path__tree_1adf22d97deca74e9b6379c20af5474168">scan</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>文件路径树 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>以树形结构表示文件系统中的目录层次。每个节点对应一个路径， 可包含子节点（子目录或文件）。支持：<itemizedlist>
+<listitem><para>从文件系统扫描构建树</para>
+</listitem><listitem><para>手动构建树</para>
+</listitem><listitem><para>深度/广度优先遍历</para>
+</listitem><listitem><para>过滤器筛选节点</para>
+</listitem><listitem><para>路径查找</para>
+</listitem><listitem><para>树的合并与裁剪 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::istringify&lt; path_tree &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+      <node id="1">
+        <label>neforce::path_tree</label>
+        <link refid="classneforce_1_1path__tree"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::istringify&lt; path_tree &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+      <node id="1">
+        <label>neforce::path_tree</label>
+        <link refid="classneforce_1_1path__tree"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" line="36" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/path_tree.hpp" bodystart="36" bodyend="376"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1path__tree_1a7bfb4c4219efd9a0fd82ff311f47d116" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>all_dir_paths</name></member>
+      <member refid="classneforce_1_1path__tree_1a8e3d5a573c7346b37a2a264c5acdd541" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>all_file_paths</name></member>
+      <member refid="classneforce_1_1path__tree_1a34262e56340bfb7ddd24d54606637ccd" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>all_paths</name></member>
+      <member refid="classneforce_1_1path__tree_1ad72dc834427d4c63c2fb51824d5a8146" prot="private" virt="non-virtual"><scope>neforce::path_tree</scope><name>clone_node</name></member>
+      <member refid="classneforce_1_1path__tree_1a57efab8fc33f1669535ad2d72154e191" prot="private" virt="non-virtual"><scope>neforce::path_tree</scope><name>collect_impl</name></member>
+      <member refid="classneforce_1_1path__tree_1a5980137b0552bb8ad6dd76a37f7163db" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>empty</name></member>
+      <member refid="classneforce_1_1path__tree_1a0d463eafcae55a9367fe6cd28b82ef03" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>filter</name></member>
+      <member refid="classneforce_1_1path__tree_1a0480c1d974d857cf15dceb3a29564597" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>find</name></member>
+      <member refid="classneforce_1_1path__tree_1a765a1de70a78193d9a4cde7dca8fbea0" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>find_all</name></member>
+      <member refid="classneforce_1_1path__tree_1a8fe3c82114c7f9cc0f78655739c4cf64" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>find_by_extension</name></member>
+      <member refid="classneforce_1_1path__tree_1a672386c59b627829ff75c578f8e82186" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>find_if</name></member>
+      <member refid="classneforce_1_1path__tree_1a720c0cdb5fec44b05f06c91c182789cd" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>insert</name></member>
+      <member refid="classneforce_1_1path__tree_1a95d1f4f1174a25fc2a28ccf5e56bec1f" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>max_depth</name></member>
+      <member refid="classneforce_1_1path__tree_1a399cf90e808f621c28d10fc02062120a" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>merge</name></member>
+      <member refid="classneforce_1_1path__tree_1ad5a9c3450e6d1558aa194177ae18aa57" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>node_type</name></member>
+      <member refid="classneforce_1_1path__tree_1a5ff6ffb21b7b61bf70401a79ca44f02f" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1path__tree_1af29c6db769091de3847f045939334abe" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1path__tree_1a0481c0648bc2117d6f2f13c2cba9dfa3" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>path_tree</name></member>
+      <member refid="classneforce_1_1path__tree_1adfb34df4abda40c1218d4a41860ac3e0" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>path_tree</name></member>
+      <member refid="classneforce_1_1path__tree_1abf5ee46771552553c8bc7f0c41e9b785" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>path_tree</name></member>
+      <member refid="classneforce_1_1path__tree_1a2d2160703f3e424aea7b5679cfdd6319" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>path_tree</name></member>
+      <member refid="classneforce_1_1path__tree_1a6488be28144d30c734f99407f91d820b" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>prune</name></member>
+      <member refid="classneforce_1_1path__tree_1acbb81451cb267b7e3ffad85118bc593b" prot="private" virt="non-virtual"><scope>neforce::path_tree</scope><name>prune_impl</name></member>
+      <member refid="classneforce_1_1path__tree_1af9b7ebd9934bb93889d37e2af8341723" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>remove</name></member>
+      <member refid="classneforce_1_1path__tree_1a3873c116e84b47c79867b7d06ff1b0e9" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>root</name></member>
+      <member refid="classneforce_1_1path__tree_1afd09930756474835ebb9d6b9a10109a1" prot="private" virt="non-virtual"><scope>neforce::path_tree</scope><name>root_</name></member>
+      <member refid="classneforce_1_1path__tree_1adf22d97deca74e9b6379c20af5474168" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>scan</name></member>
+      <member refid="classneforce_1_1path__tree_1a19377b1655283213fc39f7eb7f6c9ccd" prot="private" virt="non-virtual"><scope>neforce::path_tree</scope><name>scan_impl</name></member>
+      <member refid="classneforce_1_1path__tree_1af6fd0d1764ed35bcc1a0fc3fd863ba70" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>size</name></member>
+      <member refid="classneforce_1_1path__tree_1adce62096a3208fec231c7ad3e7c5fb07" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>subtree</name></member>
+      <member refid="classneforce_1_1path__tree_1a2b040fbf39a207c277f53e30f94c3c06" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>to_string</name></member>
+      <member refid="classneforce_1_1path__tree_1a4b8401ce21d18a4eba2cf817ddc0e98e" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>to_string</name></member>
+      <member refid="classneforce_1_1path__tree_1af7f074bfc14a505758618367671148df" prot="private" virt="non-virtual"><scope>neforce::path_tree</scope><name>to_string_impl</name></member>
+      <member refid="classneforce_1_1path__tree_1a28e23f34d88f8b40501cf6b298cbca1f" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>traverse_bfs</name></member>
+      <member refid="classneforce_1_1path__tree_1ab7dc7e60ab0fd890ade5fe92b95a3625" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>traverse_dfs</name></member>
+      <member refid="classneforce_1_1path__tree_1a0092abbcde3a68fe20b1e5adefd028c2" prot="private" virt="non-virtual"><scope>neforce::path_tree</scope><name>traverse_dfs_impl</name></member>
+      <member refid="classneforce_1_1path__tree_1a7e8d1933ebb4899bad1b088cc3b47218" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>traverse_dirs</name></member>
+      <member refid="classneforce_1_1path__tree_1a0b0e4d0905d930eea8a21afa315700b8" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>traverse_files</name></member>
+      <member refid="classneforce_1_1path__tree_1affc45f7889a0fcbb701a61d5465ff880" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>visit_result</name></member>
+      <member refid="classneforce_1_1path__tree_1ae0ebfc7cab40110c6a0105267bc1b019" prot="public" virt="non-virtual"><scope>neforce::path_tree</scope><name>visitor</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

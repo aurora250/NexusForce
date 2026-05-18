@@ -80,7 +80,7 @@
       <node id="34">
         <label>NeForce/core/async/call_once.hpp</label>
         <link refid="call__once_8hpp"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
@@ -475,8 +475,6 @@
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
       </node>
       <node id="1">
         <label>promise.hpp</label>
@@ -484,30 +482,30 @@
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="5">
+      <node id="6">
         <label>thread_pool.hpp</label>
         <link refid="thread__pool_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>timer.hpp</label>
+        <link refid="timer_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="8">
-        <label>timer.hpp</label>
-        <link refid="timer_8hpp"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-      </node>
-      <node id="7">
         <label>http_server.hpp</label>
         <link refid="http__server_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="6">
+      <node id="7">
         <label>tcp_server.hpp</label>
         <link refid="tcp__server_8hpp"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -532,9 +530,9 @@
 <codeline lineno="25"><highlight class="normal"></highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Res&gt;</highlight></codeline>
 <codeline lineno="37" refid="classpromise" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classpromise_1a980a39afa21321c8e9ec5022b0a0123c" kindref="member">promise</ref><sp/>{</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(!<ref refid="group___base_type_qualifier_check_1gae7da5e2383c9a0d42663f07c873d8183" kindref="member">is_array_v&lt;Res&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;result<sp/>type<sp/>must<sp/>not<sp/>be<sp/>an<sp/>array&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(!<ref refid="group___base_type_qualifier_check_1gaff6b26bb810adcb9074f1c910fe709ca" kindref="member">is_function_v&lt;Res&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;result<sp/>type<sp/>must<sp/>not<sp/>be<sp/>a<sp/>function&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___type_special_member_function_checks_1ga9c6f84ef4f8fa142f75efb2f4fc17160" kindref="member">is_destructible_v&lt;Res&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;result<sp/>type<sp/>must<sp/>be<sp/>destructible&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(!<ref refid="group___base_type_qualifier_check_1ga8b0e44222b6a1dc103286f3c5225ad93" kindref="member">is_array_v&lt;Res&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;result<sp/>type<sp/>must<sp/>not<sp/>be<sp/>an<sp/>array&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(!<ref refid="group___base_type_qualifier_check_1gabffc77cc5069dfe2c648737671e340d9" kindref="member">is_function_v&lt;Res&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;result<sp/>type<sp/>must<sp/>not<sp/>be<sp/>a<sp/>function&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___type_special_member_function_checks_1ga91bc16b41695c51203ff3d06d6d603be" kindref="member">is_destructible_v&lt;Res&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;result<sp/>type<sp/>must<sp/>be<sp/>destructible&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="43" refid="classpromise_1a9c9867e00fe11c873a268f9b7bfb5e5b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classpromise_1a9c9867e00fe11c873a268f9b7bfb5e5b" kindref="member">state_type</ref><sp/>=<sp/>inner::__future_base::state_base;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
@@ -583,12 +581,12 @@
 <codeline lineno="114"><highlight class="normal"></highlight></codeline>
 <codeline lineno="120" refid="classpromise_1ab0b98ede6c487688e1d9684fc979512b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfuture" kindref="compound">future&lt;Res&gt;</ref><sp/><ref refid="classpromise_1ab0b98ede6c487688e1d9684fc979512b" kindref="member">get_future</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classfuture" kindref="compound">future&lt;Res&gt;</ref>(future_ptr);<sp/>}</highlight></codeline>
 <codeline lineno="121"><highlight class="normal"></highlight></codeline>
-<codeline lineno="127" refid="classpromise_1a3002df1df9d416019fe00dd89fc0e5ff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classpromise_1a3002df1df9d416019fe00dd89fc0e5ff" kindref="member">set_value</ref>(Res&amp;&amp;<sp/>value)<sp/>{<sp/>state().set_result(state_type::create_setter(</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;Res&gt;</ref>(value)));<sp/>}</highlight></codeline>
+<codeline lineno="127" refid="classpromise_1a3002df1df9d416019fe00dd89fc0e5ff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classpromise_1a3002df1df9d416019fe00dd89fc0e5ff" kindref="member">set_value</ref>(Res&amp;&amp;<sp/>value)<sp/>{<sp/>state().set_result(state_type::create_setter(</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Res&gt;</ref>(value)));<sp/>}</highlight></codeline>
 <codeline lineno="128"><highlight class="normal"></highlight></codeline>
 <codeline lineno="134" refid="classpromise_1ae0f41e364fa8a8f21ef340ea89e6d8c5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classpromise_1ae0f41e364fa8a8f21ef340ea89e6d8c5" kindref="member">set_exception</ref>(<ref refid="classexception__ptr" kindref="compound">exception_ptr</ref><sp/><ref refid="structexception" kindref="compound">exception</ref>)<sp/>{<sp/>state().set_result(state_type::create_setter(<ref refid="structexception" kindref="compound">exception</ref>,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">));<sp/>}</highlight></codeline>
 <codeline lineno="135"><highlight class="normal"></highlight></codeline>
 <codeline lineno="142" refid="classpromise_1ae5d2f35b49c5f86a4e695ab8e5ae77f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classpromise_1ae5d2f35b49c5f86a4e695ab8e5ae77f1" kindref="member">set_value_at_thread_exit</ref>(Res&amp;&amp;<sp/>value)<sp/>{</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state().set_delayed_result(state_type::create_setter(</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;Res&gt;</ref>(value)),<sp/>future_ptr);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state().set_delayed_result(state_type::create_setter(</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Res&gt;</ref>(value)),<sp/>future_ptr);</highlight></codeline>
 <codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="145"><highlight class="normal"></highlight></codeline>
 <codeline lineno="151" refid="classpromise_1aeaadfd014af7d67f744e6791320dc8f7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classpromise_1aeaadfd014af7d67f744e6791320dc8f7" kindref="member">set_exception_at_thread_exit</ref>(<ref refid="classexception__ptr" kindref="compound">exception_ptr</ref><sp/><ref refid="structexception" kindref="compound">exception</ref>)<sp/>{</highlight></codeline>
@@ -705,7 +703,7 @@
 <codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>storage.swap(other.storage);</highlight></codeline>
 <codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="325"><highlight class="normal"></highlight></codeline>
-<codeline lineno="330" refid="classpromise_3_01void_01_4_1a3da9c44b95b28660bbb46ee5abf2f669" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classfuture" kindref="compound">future&lt;void&gt;</ref><sp/><ref refid="classpromise_3_01void_01_4_1a3da9c44b95b28660bbb46ee5abf2f669" kindref="member">get_future</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classfuture" kindref="compound">future&lt;void&gt;</ref>(future_ptr);<sp/>}</highlight></codeline>
+<codeline lineno="330" refid="classpromise_3_01void_01_4_1ab6d2478a2da868e4f153efc6d8076708" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classfuture" kindref="compound">future&lt;void&gt;</ref><sp/><ref refid="classpromise_3_01void_01_4_1ab6d2478a2da868e4f153efc6d8076708" kindref="member">get_future</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classfuture" kindref="compound">future&lt;void&gt;</ref>(future_ptr);<sp/>}</highlight></codeline>
 <codeline lineno="331"><highlight class="normal"></highlight></codeline>
 <codeline lineno="336" refid="classpromise_3_01void_01_4_1a23bdd3f754a3b11edcf91fec517c4a01" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classpromise_3_01void_01_4_1a23bdd3f754a3b11edcf91fec517c4a01" kindref="member">set_value</ref>()<sp/>{<sp/>state().set_result(state_type::create_setter(</highlight><highlight class="keyword">this</highlight><highlight class="normal">));<sp/>}</highlight></codeline>
 <codeline lineno="337"><highlight class="normal"></highlight></codeline>
@@ -729,7 +727,7 @@
 <codeline lineno="382"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="383"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*result_ptr)-&gt;set((*function_ptr)());</highlight></codeline>
 <codeline lineno="384"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(...)<sp/>{</highlight></codeline>
-<codeline lineno="385"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*result_ptr)-&gt;error_ptr<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___exception_handling_1gae2436c911c2e23511a3012d0ddc2a419" kindref="member">current_exception</ref>();</highlight></codeline>
+<codeline lineno="385"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*result_ptr)-&gt;error_ptr<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___exception_handling_1ga71f0549a1cdf5c7742d5172b7bda6a14" kindref="member">current_exception</ref>();</highlight></codeline>
 <codeline lineno="386"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="387"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(*result_ptr);</highlight></codeline>
 <codeline lineno="388"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -744,7 +742,7 @@
 <codeline lineno="402"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="403"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*function_ptr)();</highlight></codeline>
 <codeline lineno="404"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(...)<sp/>{</highlight></codeline>
-<codeline lineno="405"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*result_ptr)-&gt;error_ptr<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___exception_handling_1gae2436c911c2e23511a3012d0ddc2a419" kindref="member">current_exception</ref>();</highlight></codeline>
+<codeline lineno="405"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*result_ptr)-&gt;error_ptr<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___exception_handling_1ga71f0549a1cdf5c7742d5172b7bda6a14" kindref="member">current_exception</ref>();</highlight></codeline>
 <codeline lineno="406"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="407"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(*result_ptr);</highlight></codeline>
 <codeline lineno="408"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -775,19 +773,19 @@
 <codeline lineno="476"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func2&gt;</highlight></codeline>
 <codeline lineno="477"><highlight class="normal"><sp/><sp/><sp/><sp/>task_state(Func2&amp;&amp;<sp/>func,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Alloc&amp;<sp/>alloc)<sp/>:</highlight></codeline>
 <codeline lineno="478"><highlight class="normal"><sp/><sp/><sp/><sp/>task_state_base&lt;Res(Args...)&gt;(alloc),</highlight></codeline>
-<codeline lineno="479"><highlight class="normal"><sp/><sp/><sp/><sp/>impl(_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward</ref>&lt;Func2&gt;(func),<sp/>alloc)<sp/>{}</highlight></codeline>
+<codeline lineno="479"><highlight class="normal"><sp/><sp/><sp/><sp/>impl(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward</ref>&lt;Func2&gt;(func),<sp/>alloc)<sp/>{}</highlight></codeline>
 <codeline lineno="480"><highlight class="normal"></highlight></codeline>
 <codeline lineno="481"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="482"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>run(Args&amp;&amp;...<sp/>args)</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="483"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>bound_func<sp/>=<sp/>[&amp;]()<sp/>-&gt;<sp/>Res<sp/>{</highlight></codeline>
-<codeline lineno="484"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___invoke_function_1ga2112b65ec3b25190db36ea014f65503e" kindref="member">invoke_r&lt;Res&gt;</ref>(impl.function_ptr,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
+<codeline lineno="484"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___invoke_function_1ga86b4ffbbbf4800357dfd1f122028bb14" kindref="member">invoke_r&lt;Res&gt;</ref>(impl.function_ptr,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
 <codeline lineno="485"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="486"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state_base::set_result(__future_base::create_task_setter(this-&gt;result_storage,<sp/>bound_func));</highlight></codeline>
 <codeline lineno="487"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="488"><highlight class="normal"></highlight></codeline>
 <codeline lineno="489"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>run_delayed(Args&amp;&amp;...<sp/>args,<sp/>weak_ptr&lt;state_base&gt;<sp/>self)</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="490"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>bound_function<sp/>=<sp/>[&amp;]()<sp/>-&gt;<sp/>Res<sp/>{</highlight></codeline>
-<codeline lineno="491"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___invoke_function_1ga2112b65ec3b25190db36ea014f65503e" kindref="member">invoke_r&lt;Res&gt;</ref>(impl.function_ptr,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
+<codeline lineno="491"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___invoke_function_1ga86b4ffbbbf4800357dfd1f122028bb14" kindref="member">invoke_r&lt;Res&gt;</ref>(impl.function_ptr,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
 <codeline lineno="492"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="493"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state_base::set_delayed_result(__future_base::create_task_setter(this-&gt;result_storage,<sp/>bound_function),</highlight></codeline>
 <codeline lineno="494"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(self));</highlight></codeline>
@@ -801,14 +799,14 @@
 <codeline lineno="507"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func2&gt;</highlight></codeline>
 <codeline lineno="508"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Impl(Func2&amp;&amp;<sp/>func,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Alloc&amp;<sp/>alloc)<sp/>:</highlight></codeline>
 <codeline lineno="509"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Alloc(alloc),</highlight></codeline>
-<codeline lineno="510"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>function_ptr(_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward</ref>&lt;Func2&gt;(func))<sp/>{}</highlight></codeline>
+<codeline lineno="510"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>function_ptr(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward</ref>&lt;Func2&gt;(func))<sp/>{}</highlight></codeline>
 <codeline lineno="511"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/>impl;</highlight></codeline>
 <codeline lineno="512"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="513"><highlight class="normal"></highlight></codeline>
 <codeline lineno="523"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Sign,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Alloc<sp/>=<sp/>_NEFORCE<sp/>allocator&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;&gt;</highlight></codeline>
 <codeline lineno="524"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;__future_base::task_state_base&lt;Sign&gt;</ref>&gt;<sp/>create_task_state(Func&amp;&amp;<sp/>func,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Alloc&amp;<sp/>alloc<sp/>=<sp/>Alloc())<sp/>{</highlight></codeline>
 <codeline lineno="525"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">State<sp/>=<sp/>__future_base::task_state&lt;decay_t&lt;Func&gt;,<sp/>Alloc,<sp/>Sign&gt;;</highlight></codeline>
-<codeline lineno="526"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___shared_pointer_1gac6d23654fe34f82cb9ce90e5402945c2" kindref="member">allocate_shared&lt;State&gt;</ref>(alloc,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;Func&gt;</ref>(func),<sp/>alloc);</highlight></codeline>
+<codeline lineno="526"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___shared_pointer_1gac6d23654fe34f82cb9ce90e5402945c2" kindref="member">allocate_shared&lt;State&gt;</ref>(alloc,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Func&gt;</ref>(func),<sp/>alloc);</highlight></codeline>
 <codeline lineno="527"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="528"><highlight class="normal"></highlight></codeline>
 <codeline lineno="535"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Alloc,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Res,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>

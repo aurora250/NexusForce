@@ -114,7 +114,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="463" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="463" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a186b3e5327cd29edc93e5692f4f941d1" prot="private" static="no">
+      <memberdef kind="typedef" id="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a18b67a21acd46165f77847b81d1d64c9" prot="private" static="no">
         <templateparamlist>
           <param>
             <type>typename BoundArg</type>
@@ -123,9 +123,9 @@
             <type>typename CallArgs</type>
           </param>
         </templateparamlist>
-        <type>decltype(inner::bind_arg_mapper&lt; <ref refid="group___remove_qualifiers_1gadb53d365fce2ddba102949e4ad3bf058" kindref="member">remove_cv_t</ref>&lt; BoundArg &gt; &gt;()(1 <ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt; BoundArg &amp; &gt;(), 1 <ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt; CallArgs &amp; &gt;()))</type>
-        <definition>using binder&lt; Func(BoundArgs...)&gt;::arg_mapper_type = decltype(inner::bind_arg_mapper&lt;remove_cv_t&lt;BoundArg&gt;&gt;()(1 declval&lt;BoundArg&amp;&gt;(),
-                                                                                    1 declval&lt;CallArgs&amp;&gt;()))</definition>
+        <type>decltype(inner::bind_arg_mapper&lt; <ref refid="group___remove_qualifiers_1gadb53d365fce2ddba102949e4ad3bf058" kindref="member">remove_cv_t</ref>&lt; BoundArg &gt; &gt;()(_NEFORCE <ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt; BoundArg &amp; &gt;(), _NEFORCE <ref refid="group___declval_tools_1ga7c6502597045c02b014ec72343367f5c" kindref="member">declval</ref>&lt; CallArgs &amp; &gt;()))</type>
+        <definition>using binder&lt; Func(BoundArgs...)&gt;::arg_mapper_type = decltype(inner::bind_arg_mapper&lt;remove_cv_t&lt;BoundArg&gt;&gt;()(_NEFORCE declval&lt;BoundArg&amp;&gt;(),
+                                                                                    _NEFORCE declval&lt;CallArgs&amp;&gt;()))</definition>
         <argsstring></argsstring>
         <name>arg_mapper_type</name>
         <qualifiedname>binder&lt; Func(BoundArgs...)&gt;::arg_mapper_type</qualifiedname>
@@ -220,7 +220,7 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
-      <memberdef kind="function" id="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1aada130e0e483c2f80fe3f477cdec5f78" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1abaa96a171e385e0985df007df2fb30df" prot="private" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Res</type>
@@ -236,8 +236,8 @@
             <defname>Indexes</defname>
           </param>
         </templateparamlist>
-        <type>NEFORCE_CONSTEXPR20 Res</type>
-        <definition>NEFORCE_CONSTEXPR20 Res binder&lt; Func(BoundArgs...)&gt;::call</definition>
+        <type>Res</type>
+        <definition>Res binder&lt; Func(BoundArgs...)&gt;::call</definition>
         <argsstring>(tuple&lt; Args... &gt; &amp;&amp;args, index_tuple&lt; Indexes... &gt; idx)</argsstring>
         <name>call</name>
         <qualifiedname>binder&lt; Func(BoundArgs...)&gt;::call</qualifiedname>
@@ -301,9 +301,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="494" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="494" bodyend="497"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="494" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="494" bodyend="497"/>
       </memberdef>
-      <memberdef kind="function" id="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a05f2de8063f120a816265f51cae4918d" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a2efe400b421110e53b2f4e9087eb8e6f" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Res</type>
@@ -314,13 +314,13 @@
             <defname>Args</defname>
           </param>
           <param>
-            <type>1 size_t...</type>
+            <type>_NEFORCE size_t...</type>
             <declname>Indexes</declname>
             <defname>Indexes</defname>
           </param>
         </templateparamlist>
-        <type>NEFORCE_CONSTEXPR20 Res</type>
-        <definition>NEFORCE_CONSTEXPR20 Res binder&lt; Func(BoundArgs...)&gt;::call_const</definition>
+        <type>Res</type>
+        <definition>Res binder&lt; Func(BoundArgs...)&gt;::call_const</definition>
         <argsstring>(tuple&lt; Args... &gt; &amp;&amp;args, index_tuple&lt; Indexes... &gt; idx) const</argsstring>
         <name>call_const</name>
         <qualifiedname>binder&lt; Func(BoundArgs...)&gt;::call_const</qualifiedname>
@@ -384,11 +384,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="509" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="509" bodyend="512"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="509" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="509" bodyend="512"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a53f02d4eebc749aa7d1399681fbf68f5" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a5d5e0e04c691bc56b95d9e7705ba9189" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename...</type>
@@ -396,8 +396,8 @@
             <defname>Args</defname>
           </param>
         </templateparamlist>
-        <type>NEFORCE_CONSTEXPR20</type>
-        <definition>NEFORCE_CONSTEXPR20 binder&lt; Func(BoundArgs...)&gt;::binder</definition>
+        <type>constexpr</type>
+        <definition>binder&lt; Func(BoundArgs...)&gt;::binder</definition>
         <argsstring>(Func func, Args &amp;&amp;... args)</argsstring>
         <name>binder</name>
         <qualifiedname>binder&lt; Func(BoundArgs...)&gt;::binder</qualifiedname>
@@ -443,8 +443,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="522" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="522" bodyend="524"/>
-        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="522" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="522" bodyend="524"/>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
         <referencedby refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1af4553a79833cf454a9d30dafd98335d9">binder</referencedby>
         <referencedby refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1ab2beb6d02f0dfb44c226ff3f0c83e12e">binder</referencedby>
       </memberdef>
@@ -465,7 +465,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="526" column="5"/>
-        <references refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a53f02d4eebc749aa7d1399681fbf68f5" compoundref="bind_8hpp" startline="522" endline="524">binder</references>
+        <references refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a5d5e0e04c691bc56b95d9e7705ba9189" compoundref="bind_8hpp" startline="522" endline="524">binder</references>
       </memberdef>
       <memberdef kind="function" id="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1af4553a79833cf454a9d30dafd98335d9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -484,9 +484,9 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="527" column="5"/>
-        <references refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a53f02d4eebc749aa7d1399681fbf68f5" compoundref="bind_8hpp" startline="522" endline="524">binder</references>
+        <references refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a5d5e0e04c691bc56b95d9e7705ba9189" compoundref="bind_8hpp" startline="522" endline="524">binder</references>
       </memberdef>
-      <memberdef kind="function" id="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a4b93585b1bd2955bab445c5b9a4c0aa0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a23a5ee9d90c6199210c5761d90ad315f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename...</type>
@@ -494,8 +494,8 @@
             <defname>Args</defname>
           </param>
         </templateparamlist>
-        <type>NEFORCE_CONSTEXPR20 decltype(auto)</type>
-        <definition>NEFORCE_CONSTEXPR20 decltype(auto) binder&lt; Func(BoundArgs...)&gt;::operator()</definition>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) binder&lt; Func(BoundArgs...)&gt;::operator()</definition>
         <argsstring>(Args &amp;&amp;... args)</argsstring>
         <name>operator()</name>
         <qualifiedname>binder&lt; Func(BoundArgs...)&gt;::operator()</qualifiedname>
@@ -531,11 +531,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="536" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="536" bodyend="539"/>
-        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
-        <references refid="group___tuple_1gab4c17a8aa555027fca3b1d2888decfc7" compoundref="tuple_8hpp" startline="774" endline="777">forward_as_tuple</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="536" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="536" bodyend="539"/>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
+        <references refid="group___tuple_1gaece80f6c9ed507a749be80d138b7a5e6" compoundref="tuple_8hpp" startline="774" endline="777">forward_as_tuple</references>
       </memberdef>
-      <memberdef kind="function" id="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a8923e33c1ccf96324d98f9491c14d99b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1afafff168919cd070c83c170e2b7f7202" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename...</type>
@@ -543,8 +543,8 @@
             <defname>Args</defname>
           </param>
         </templateparamlist>
-        <type>NEFORCE_CONSTEXPR20 decltype(auto)</type>
-        <definition>NEFORCE_CONSTEXPR20 decltype(auto) binder&lt; Func(BoundArgs...)&gt;::operator()</definition>
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) binder&lt; Func(BoundArgs...)&gt;::operator()</definition>
         <argsstring>(Args &amp;&amp;... args) const</argsstring>
         <name>operator()</name>
         <qualifiedname>binder&lt; Func(BoundArgs...)&gt;::operator()</qualifiedname>
@@ -580,9 +580,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="548" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="548" bodyend="551"/>
-        <references refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
-        <references refid="group___tuple_1gab4c17a8aa555027fca3b1d2888decfc7" compoundref="tuple_8hpp" startline="774" endline="777">forward_as_tuple</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="548" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="548" bodyend="551"/>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3019" endline="3021">forward</references>
+        <references refid="group___tuple_1gaece80f6c9ed507a749be80d138b7a5e6" compoundref="tuple_8hpp" startline="774" endline="777">forward_as_tuple</references>
       </memberdef>
       <memberdef kind="function" id="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a8fdf1993c5b7ca59f3603b310e6ec5b8" prot="public" static="no" const="yes" explicit="no" inline="no" volatile="yes" virt="non-virtual">
         <templateparamlist>
@@ -636,18 +636,18 @@
     <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" line="422" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/bind.hpp" bodystart="422" bodyend="555"/>
     <listofallmembers>
       <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1aabf96a1e9b636c992fd92e4a941f102c" prot="private" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>arg_mapper_result_t</name></member>
-      <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a186b3e5327cd29edc93e5692f4f941d1" prot="private" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>arg_mapper_type</name></member>
-      <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a53f02d4eebc749aa7d1399681fbf68f5" prot="public" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>binder</name></member>
+      <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a18b67a21acd46165f77847b81d1d64c9" prot="private" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>arg_mapper_type</name></member>
+      <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a5d5e0e04c691bc56b95d9e7705ba9189" prot="public" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>binder</name></member>
       <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1ab2beb6d02f0dfb44c226ff3f0c83e12e" prot="public" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>binder</name></member>
       <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1af4553a79833cf454a9d30dafd98335d9" prot="public" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>binder</name></member>
       <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1ab82abf0c6d12b61465b461fdc20bd336" prot="private" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>bound_args_</name></member>
       <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a5a28914aec566619f02f77643df7e8ad" prot="private" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>BoundIndexes</name></member>
-      <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1aada130e0e483c2f80fe3f477cdec5f78" prot="private" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>call</name></member>
-      <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a05f2de8063f120a816265f51cae4918d" prot="private" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>call_const</name></member>
+      <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1abaa96a171e385e0985df007df2fb30df" prot="private" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>call</name></member>
+      <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a2efe400b421110e53b2f4e9087eb8e6f" prot="private" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>call_const</name></member>
       <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a97cb55f35449b543c95c835ef921742b" prot="private" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>dependent</name></member>
       <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1acfc1d8eb944097f230fbf1e3a3df9a50" prot="private" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>functor_</name></member>
-      <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a4b93585b1bd2955bab445c5b9a4c0aa0" prot="public" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>operator()</name></member>
-      <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a8923e33c1ccf96324d98f9491c14d99b" prot="public" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>operator()</name></member>
+      <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a23a5ee9d90c6199210c5761d90ad315f" prot="public" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>operator()</name></member>
+      <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1afafff168919cd070c83c170e2b7f7202" prot="public" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>operator()</name></member>
       <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a8fdf1993c5b7ca59f3603b310e6ec5b8" prot="public" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>operator()</name></member>
       <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1aa68bd8067cdf1ab4aba05c600024df44" prot="private" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>result_type</name></member>
       <member refid="classbinder_3_01_func_07_bound_args_8_8_8_08_4_1a4b660c1b9694c3355dce17c20f307ea3" prot="private" virt="non-virtual"><scope>binder&lt; Func(BoundArgs...)&gt;</scope><name>result_type_const</name></member>

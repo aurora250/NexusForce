@@ -12,7 +12,7 @@ var classbasic__timer =
     [ "expires_after", "classbasic__timer.html#a41d9db90a76e0709c03def4e5f10d73b", null ],
     [ "expires_at", "classbasic__timer.html#a4fa890be95fc2674acba94b3e11b70e0", null ],
     [ "expires_from_now", "classbasic__timer.html#a123f1272f66d05cb56a5f12fe76b3af2", null ],
-    [ "expiry", "classbasic__timer.html#a1493cbad9302b5c55cc794bb4f4d8833", null ],
-    [ "is_active", "classbasic__timer.html#a53ee820d4168dd06780380cc1c3ffca5", null ],
+    [ "expiry", "classbasic__timer.html#ae48121fdca2e692f812631d29b985e27", null ],
+    [ "is_active", "classbasic__timer.html#aede5aaa3d82e41b6c275282eb14ae3f8", null ],
     [ "operator=", "classbasic__timer.html#a795e2f0ee98918bdef6fd545a3ce7df9", null ]
 ];

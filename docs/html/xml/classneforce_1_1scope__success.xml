@@ -1,0 +1,276 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1scope__success" kind="class" language="C++" prot="public">
+    <compoundname>neforce::scope_success</compoundname>
+    <includes refid="scope_8hpp" local="no">scope.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Func</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1scope__success_1a4dea350ede6211abee83558bb2d0a3eb" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1compressed__pair" kindref="compound">compressed_pair</ref>&lt; Func, int &gt;</type>
+        <definition>compressed_pair&lt;Func, int&gt; neforce::scope_success&lt; Func &gt;::func_pair_</definition>
+        <argsstring></argsstring>
+        <name>func_pair_</name>
+        <qualifiedname>neforce::scope_success::func_pair_</qualifiedname>
+        <briefdescription>
+<para>函数对象和异常计数快照 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="216" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="216" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1scope__success_1ad94dcc052454cd8a53901ae651320e07" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; F &gt;, <ref refid="classneforce_1_1scope__success_1ad94dcc052454cd8a53901ae651320e07" kindref="member">scope_success</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; Func, F &gt; &amp;&amp;!<ref refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" kindref="member">is_nothrow_constructible_v</ref>&lt; Func, F &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::scope_success&lt; Func &gt;::scope_success</definition>
+        <argsstring>(F &amp;&amp;func)</argsstring>
+        <name>scope_success</name>
+        <qualifiedname>neforce::scope_success::scope_success</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>构造函数（异常不安全） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="227" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="227" bodyend="231"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3019" endline="3021">neforce::forward</references>
+        <references refid="group___exception_handling_1gabc7dcf83599d2da610fb14c620c0155e">neforce::uncaught_exceptions</references>
+        <referencedby refid="classneforce_1_1scope__success_1a9a92f5d07bb1f0180280ddc30aed3eae" compoundref="scope_8hpp" startline="251" endline="254">neforce::scope_success&lt; Func &gt;::scope_success</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1scope__success_1a119465b17b507d64eb5e71951d78dfdb" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename F</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa8a9c7168b974b877ec67d99e9bf5d8c" kindref="member">is_same_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga878454a8799ed6276098016ab4bd5975" kindref="member">remove_cvref_t</ref>&lt; F &gt;, <ref refid="classneforce_1_1scope__success_1ad94dcc052454cd8a53901ae651320e07" kindref="member">scope_success</ref> &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga12720172ab726e4cf98a10c97b913f6d" kindref="member">is_constructible_v</ref>&lt; Func, F &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga910040e0e7eedac28b597a7cbd403314" kindref="member">is_nothrow_constructible_v</ref>&lt; Func, F &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::scope_success&lt; Func &gt;::scope_success</definition>
+        <argsstring>(F &amp;&amp;func) noexcept</argsstring>
+        <name>scope_success</name>
+        <qualifiedname>neforce::scope_success::scope_success</qualifiedname>
+        <param>
+          <type>F &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>构造函数（异常安全） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>F</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数对象类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要执行的函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="241" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="241" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1scope__success_1aa8301eec7de2dfe65b57fd2ba84f43e7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::scope_success&lt; Func &gt;::scope_success</definition>
+        <argsstring>(const scope_success &amp;)=delete</argsstring>
+        <name>scope_success</name>
+        <qualifiedname>neforce::scope_success::scope_success</qualifiedname>
+        <param>
+          <type>const scope_success &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="244" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1scope__success_1a00dd5f179b94ecc675c3388b8fba4bbb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1scope__success_1ad94dcc052454cd8a53901ae651320e07" kindref="member">scope_success</ref> &amp;</type>
+        <definition>scope_success &amp; neforce::scope_success&lt; Func &gt;::operator=</definition>
+        <argsstring>(const scope_success &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::scope_success::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1scope__success_1ad94dcc052454cd8a53901ae651320e07" kindref="member">scope_success</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="245" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1scope__success_1a9a92f5d07bb1f0180280ddc30aed3eae" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_assignable_v&lt; Func &gt;" virt="non-virtual">
+        <type></type>
+        <definition>neforce::scope_success&lt; Func &gt;::scope_success</definition>
+        <argsstring>(scope_success &amp;&amp;rhs)</argsstring>
+        <name>scope_success</name>
+        <qualifiedname>neforce::scope_success::scope_success</qualifiedname>
+        <param>
+          <type>scope_success &amp;&amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的守卫对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="251" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="251" bodyend="254"/>
+        <references refid="group___type_special_member_function_checks_1ga4e478e886bb3f1dba6b5b2033f6b4702" compoundref="type__traits_8hpp" startline="2914">neforce::is_nothrow_move_assignable_v</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1scope__success_1ad94dcc052454cd8a53901ae651320e07" compoundref="scope_8hpp" startline="227" endline="231">neforce::scope_success&lt; Func &gt;::scope_success</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1scope__success_1ad02bdc0b37423aca44cbcb33d92c61f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1scope__success_1ad94dcc052454cd8a53901ae651320e07" kindref="member">scope_success</ref> &amp;</type>
+        <definition>scope_success &amp; neforce::scope_success&lt; Func &gt;::operator=</definition>
+        <argsstring>(scope_success &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::scope_success::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1scope__success_1ad94dcc052454cd8a53901ae651320e07" kindref="member">scope_success</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="256" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1scope__success_1a0818d920a3f49c2d778d2091c10d696e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_invocable_v&lt; Func &gt;" virt="non-virtual">
+        <type></type>
+        <definition>neforce::scope_success&lt; Func &gt;::~scope_success</definition>
+        <argsstring>()</argsstring>
+        <name>~scope_success</name>
+        <qualifiedname>neforce::scope_success::~scope_success</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>如果当前未捕获异常数量不大于构造时记录的值，说明正常退出， 执行函数对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="264" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="264" bodyend="268"/>
+        <references refid="group___invoke_function_1ga2aa28e8abceaddb1cccbda03fd82671c" compoundref="invoke_8hpp" startline="485">neforce::is_nothrow_invocable_v</references>
+        <references refid="group___exception_handling_1gabc7dcf83599d2da610fb14c620c0155e">neforce::uncaught_exceptions</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1scope__success_1a5dad08e9d7f58afa9ead32808fdcd60c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::scope_success&lt; Func &gt;::release</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>release</name>
+        <qualifiedname>neforce::scope_success::release</qualifiedname>
+        <briefdescription>
+<para>释放守卫 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>使守卫不再执行清理操作，通过将异常计数设置为极小值来实现。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="275" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="275" bodyend="275"/>
+        <references refid="classneforce_1_1numeric__traits_1a3a4cc2bdbf7e98a487d29367781db135" compoundref="numeric__traits_8hpp" startline="153" endline="153">neforce::numeric_traits&lt; T, Dummy &gt;::max</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>作用域成功守卫 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用对象类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+仅在作用域正常退出时执行指定的函数。 用于实现提交操作、日志记录等正常流程的清理。</para>
+<para><simplesect kind="note"><para>函数对象的执行不能抛出异常。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" line="214" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp" bodystart="214" bodyend="276"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1scope__success_1a4dea350ede6211abee83558bb2d0a3eb" prot="private" virt="non-virtual"><scope>neforce::scope_success</scope><name>func_pair_</name></member>
+      <member refid="classneforce_1_1scope__success_1a00dd5f179b94ecc675c3388b8fba4bbb" prot="public" virt="non-virtual"><scope>neforce::scope_success</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1scope__success_1ad02bdc0b37423aca44cbcb33d92c61f9" prot="public" virt="non-virtual"><scope>neforce::scope_success</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1scope__success_1a5dad08e9d7f58afa9ead32808fdcd60c" prot="public" virt="non-virtual"><scope>neforce::scope_success</scope><name>release</name></member>
+      <member refid="classneforce_1_1scope__success_1ad94dcc052454cd8a53901ae651320e07" prot="public" virt="non-virtual"><scope>neforce::scope_success</scope><name>scope_success</name></member>
+      <member refid="classneforce_1_1scope__success_1a119465b17b507d64eb5e71951d78dfdb" prot="public" virt="non-virtual"><scope>neforce::scope_success</scope><name>scope_success</name></member>
+      <member refid="classneforce_1_1scope__success_1aa8301eec7de2dfe65b57fd2ba84f43e7" prot="public" virt="non-virtual"><scope>neforce::scope_success</scope><name>scope_success</name></member>
+      <member refid="classneforce_1_1scope__success_1a9a92f5d07bb1f0180280ddc30aed3eae" prot="public" virt="non-virtual"><scope>neforce::scope_success</scope><name>scope_success</name></member>
+      <member refid="classneforce_1_1scope__success_1a0818d920a3f49c2d778d2091c10d696e" prot="public" virt="non-virtual"><scope>neforce::scope_success</scope><name>~scope_success</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

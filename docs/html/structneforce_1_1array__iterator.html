@@ -1,0 +1,551 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::array_iterator&lt; IsConst, Size, Array &gt; 模板结构体 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('structneforce_1_1array__iterator.html','','structneforce_1_1array__iterator-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::array_iterator&lt; IsConst, Size, Array &gt; 模板结构体 参考<div class="ingroups"><a class="el" href="group___array.html">数组</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>数组迭代器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="array_8hpp_source.html">array.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 neforce::array_iterator&lt; IsConst, Size, Array &gt; 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structneforce_1_1array__iterator__inherit__graph.svg" width="183" height="267"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:aba05887e565bf12552b96c5710cdaa8b" id="r_aba05887e565bf12552b96c5710cdaa8b"><td class="memItemLeft"><a id="aba05887e565bf12552b96c5710cdaa8b" name="aba05887e565bf12552b96c5710cdaa8b"></a>
+using&#160;</td><td class="memItemRight"><b>container_type</b> = Array</td></tr>
+<tr class="memdesc:aba05887e565bf12552b96c5710cdaa8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">容器类型 <br /></td></tr>
+<tr class="memitem:a4da2dce5d8e2d1468786b5d22ac76092" id="r_a4da2dce5d8e2d1468786b5d22ac76092"><td class="memItemLeft"><a id="a4da2dce5d8e2d1468786b5d22ac76092" name="a4da2dce5d8e2d1468786b5d22ac76092"></a>
+using&#160;</td><td class="memItemRight"><b>value_type</b> = typename container_type::value_type</td></tr>
+<tr class="memdesc:a4da2dce5d8e2d1468786b5d22ac76092"><td class="mdescLeft">&#160;</td><td class="mdescRight">值类型 <br /></td></tr>
+<tr class="memitem:a8ace058cecc5ffac9c777bfa3a1a4d69" id="r_a8ace058cecc5ffac9c777bfa3a1a4d69"><td class="memItemLeft"><a id="a8ace058cecc5ffac9c777bfa3a1a4d69" name="a8ace058cecc5ffac9c777bfa3a1a4d69"></a>
+using&#160;</td><td class="memItemRight"><b>size_type</b> = typename container_type::size_type</td></tr>
+<tr class="memdesc:a8ace058cecc5ffac9c777bfa3a1a4d69"><td class="mdescLeft">&#160;</td><td class="mdescRight">大小类型 <br /></td></tr>
+<tr class="memitem:a0d6ba106e2983b5974e3d3ba1237f3a9" id="r_a0d6ba106e2983b5974e3d3ba1237f3a9"><td class="memItemLeft"><a id="a0d6ba106e2983b5974e3d3ba1237f3a9" name="a0d6ba106e2983b5974e3d3ba1237f3a9"></a>
+using&#160;</td><td class="memItemRight"><b>difference_type</b> = typename container_type::difference_type</td></tr>
+<tr class="memdesc:a0d6ba106e2983b5974e3d3ba1237f3a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">差值类型 <br /></td></tr>
+<tr class="memitem:acf050d4439359114694d86eabed4b7b8" id="r_acf050d4439359114694d86eabed4b7b8"><td class="memItemLeft"><a id="acf050d4439359114694d86eabed4b7b8" name="acf050d4439359114694d86eabed4b7b8"></a>
+using&#160;</td><td class="memItemRight"><b>iterator_category</b> = <a class="el" href="structneforce_1_1contiguous__iterator__tag.html">contiguous_iterator_tag</a></td></tr>
+<tr class="memdesc:acf050d4439359114694d86eabed4b7b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器类别 <br /></td></tr>
+<tr class="memitem:ae8e81638a4f8e69db2d2a32153fb99c5" id="r_ae8e81638a4f8e69db2d2a32153fb99c5"><td class="memItemLeft"><a id="ae8e81638a4f8e69db2d2a32153fb99c5" name="ae8e81638a4f8e69db2d2a32153fb99c5"></a>
+using&#160;</td><td class="memItemRight"><b>reference</b></td></tr>
+<tr class="memdesc:ae8e81638a4f8e69db2d2a32153fb99c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">引用类型 <br /></td></tr>
+<tr class="memitem:a31e5db7b2865882251f7dee09231dd08" id="r_a31e5db7b2865882251f7dee09231dd08"><td class="memItemLeft"><a id="a31e5db7b2865882251f7dee09231dd08" name="a31e5db7b2865882251f7dee09231dd08"></a>
+using&#160;</td><td class="memItemRight"><b>pointer</b></td></tr>
+<tr class="memdesc:a31e5db7b2865882251f7dee09231dd08"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:ab05f43055854241b2ff37177569d5546" id="r_ab05f43055854241b2ff37177569d5546"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ab05f43055854241b2ff37177569d5546">array_iterator</a> (<a class="el" href="#a31e5db7b2865882251f7dee09231dd08">pointer</a> ptr, const <a class="el" href="#aba05887e565bf12552b96c5710cdaa8b">container_type</a> *vec) noexcept</td></tr>
+<tr class="memdesc:ab05f43055854241b2ff37177569d5546"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a9d92a83e37d34422424734fc8289dcf9" id="r_a9d92a83e37d34422424734fc8289dcf9"><td class="memItemLeft">constexpr <a class="el" href="#ae8e81638a4f8e69db2d2a32153fb99c5">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9d92a83e37d34422424734fc8289dcf9">dereference</a> () const noexcept</td></tr>
+<tr class="memdesc:a9d92a83e37d34422424734fc8289dcf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">解引用操作  <br /></td></tr>
+<tr class="memitem:a373647c9081b73c6f3d4accf9e450ca9" id="r_a373647c9081b73c6f3d4accf9e450ca9"><td class="memItemLeft"><a id="a373647c9081b73c6f3d4accf9e450ca9" name="a373647c9081b73c6f3d4accf9e450ca9"></a>
+constexpr void&#160;</td><td class="memItemRight"><b>increment</b> () noexcept</td></tr>
+<tr class="memdesc:a373647c9081b73c6f3d4accf9e450ca9"><td class="mdescLeft">&#160;</td><td class="mdescRight">递增操作 <br /></td></tr>
+<tr class="memitem:a97b6a61d646aa020e6c8d45675a4d495" id="r_a97b6a61d646aa020e6c8d45675a4d495"><td class="memItemLeft"><a id="a97b6a61d646aa020e6c8d45675a4d495" name="a97b6a61d646aa020e6c8d45675a4d495"></a>
+constexpr void&#160;</td><td class="memItemRight"><b>decrement</b> () noexcept</td></tr>
+<tr class="memdesc:a97b6a61d646aa020e6c8d45675a4d495"><td class="mdescLeft">&#160;</td><td class="mdescRight">递减操作 <br /></td></tr>
+<tr class="memitem:afd2341c81a033f4d6c0919cf9c9dd024" id="r_afd2341c81a033f4d6c0919cf9c9dd024"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#afd2341c81a033f4d6c0919cf9c9dd024">advance</a> (<a class="el" href="#a0d6ba106e2983b5974e3d3ba1237f3a9">difference_type</a> off) noexcept</td></tr>
+<tr class="memdesc:afd2341c81a033f4d6c0919cf9c9dd024"><td class="mdescLeft">&#160;</td><td class="mdescRight">前进操作  <br /></td></tr>
+<tr class="memitem:a89b88f6e255e7d7b153a37721f08375c" id="r_a89b88f6e255e7d7b153a37721f08375c"><td class="memItemLeft">constexpr <a class="el" href="#a0d6ba106e2983b5974e3d3ba1237f3a9">difference_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a89b88f6e255e7d7b153a37721f08375c">distance_to</a> (const array_iterator &amp;other) const noexcept</td></tr>
+<tr class="memdesc:a89b88f6e255e7d7b153a37721f08375c"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算距离操作  <br /></td></tr>
+<tr class="memitem:a4124d047dc7398753184c0e5a57433fc" id="r_a4124d047dc7398753184c0e5a57433fc"><td class="memItemLeft">constexpr <a class="el" href="#ae8e81638a4f8e69db2d2a32153fb99c5">reference</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4124d047dc7398753184c0e5a57433fc">operator[]</a> (const <a class="el" href="#a0d6ba106e2983b5974e3d3ba1237f3a9">difference_type</a> off) const noexcept</td></tr>
+<tr class="memdesc:a4124d047dc7398753184c0e5a57433fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">下标访问操作符  <br /></td></tr>
+<tr class="memitem:a361910d7119b4a6fe40dafe196e0f42d" id="r_a361910d7119b4a6fe40dafe196e0f42d"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a361910d7119b4a6fe40dafe196e0f42d">equal_to</a> (const array_iterator &amp;rhs) const noexcept</td></tr>
+<tr class="memdesc:a361910d7119b4a6fe40dafe196e0f42d"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较  <br /></td></tr>
+<tr class="memitem:a88c003eefd3fcdb54a14e79cc4a405ec" id="r_a88c003eefd3fcdb54a14e79cc4a405ec"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a88c003eefd3fcdb54a14e79cc4a405ec">less_than</a> (const array_iterator &amp;rhs) const noexcept</td></tr>
+<tr class="memdesc:a88c003eefd3fcdb54a14e79cc4a405ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较  <br /></td></tr>
+<tr class="memitem:aed527700bba2662a67ac47c3a0e67d88" id="r_aed527700bba2662a67ac47c3a0e67d88"><td class="memItemLeft">constexpr <a class="el" href="#a31e5db7b2865882251f7dee09231dd08">pointer</a>&#160;</td><td class="memItemRight"><a class="el" href="#aed527700bba2662a67ac47c3a0e67d88">base</a> () const noexcept</td></tr>
+<tr class="memdesc:aed527700bba2662a67ac47c3a0e67d88"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取底层指针  <br /></td></tr>
+<tr class="memitem:a99384284acbd4f7c19bc92731e0e8cae" id="r_a99384284acbd4f7c19bc92731e0e8cae"><td class="memItemLeft">constexpr const <a class="el" href="#aba05887e565bf12552b96c5710cdaa8b">container_type</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a99384284acbd4f7c19bc92731e0e8cae">container</a> () const noexcept</td></tr>
+<tr class="memdesc:a99384284acbd4f7c19bc92731e0e8cae"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取关联容器  <br /></td></tr>
+<tr class="inherit_header pub_methods_structneforce_1_1iiterator"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structneforce_1_1iiterator')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="structneforce_1_1iiterator.html">neforce::iiterator&lt; array_iterator&lt; IsConst, Size, Array &gt; &gt;</a></td></tr>
+<tr class="memitem:a95994513c3cdd0ac0f6fb140d1970fc0 inherit pub_methods_structneforce_1_1iiterator" id="r_a95994513c3cdd0ac0f6fb140d1970fc0"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iiterator.html#a95994513c3cdd0ac0f6fb140d1970fc0">operator*</a> () const noexcept</td></tr>
+<tr class="memdesc:a95994513c3cdd0ac0f6fb140d1970fc0 inherit pub_methods_structneforce_1_1iiterator"><td class="mdescLeft">&#160;</td><td class="mdescRight">解引用操作符  <br /></td></tr>
+<tr class="memitem:a7def9474b28799a483024599c9329327 inherit pub_methods_structneforce_1_1iiterator" id="r_a7def9474b28799a483024599c9329327"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iiterator.html#a7def9474b28799a483024599c9329327">operator-&gt;</a> () const noexcept</td></tr>
+<tr class="memdesc:a7def9474b28799a483024599c9329327 inherit pub_methods_structneforce_1_1iiterator"><td class="mdescLeft">&#160;</td><td class="mdescRight">成员访问操作符  <br /></td></tr>
+<tr class="memitem:aa8987a9f90cd7859268813b309b977e1 inherit pub_methods_structneforce_1_1iiterator" id="r_aa8987a9f90cd7859268813b309b977e1"><td class="memItemLeft">constexpr <a class="el" href="structneforce_1_1array__iterator.html">array_iterator</a>&lt; IsConst, Size, Array &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iiterator.html#aa8987a9f90cd7859268813b309b977e1">operator++</a> () noexcept</td></tr>
+<tr class="memdesc:aa8987a9f90cd7859268813b309b977e1 inherit pub_methods_structneforce_1_1iiterator"><td class="mdescLeft">&#160;</td><td class="mdescRight">前置递增操作符  <br /></td></tr>
+<tr class="memitem:a044b517010979c5dd346ca32435097f6 inherit pub_methods_structneforce_1_1iiterator" id="r_a044b517010979c5dd346ca32435097f6"><td class="memItemLeft">constexpr <a class="el" href="structneforce_1_1array__iterator.html">array_iterator</a>&lt; IsConst, Size, Array &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iiterator.html#a044b517010979c5dd346ca32435097f6">operator--</a> () noexcept</td></tr>
+<tr class="memdesc:a044b517010979c5dd346ca32435097f6 inherit pub_methods_structneforce_1_1iiterator"><td class="mdescLeft">&#160;</td><td class="mdescRight">前置递减操作符  <br /></td></tr>
+<tr class="memitem:a45026d73ba84c83a85fb404704c3e11b inherit pub_methods_structneforce_1_1iiterator" id="r_a45026d73ba84c83a85fb404704c3e11b"><td class="memItemLeft">constexpr <a class="el" href="structneforce_1_1array__iterator.html">array_iterator</a>&lt; IsConst, Size, Array &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iiterator.html#a45026d73ba84c83a85fb404704c3e11b">operator+=</a> (Distance n) noexcept</td></tr>
+<tr class="memdesc:a45026d73ba84c83a85fb404704c3e11b inherit pub_methods_structneforce_1_1iiterator"><td class="mdescLeft">&#160;</td><td class="mdescRight">复合加法赋值操作符  <br /></td></tr>
+<tr class="memitem:a1547244d7b905c1e3c2bf671c198deb5 inherit pub_methods_structneforce_1_1iiterator" id="r_a1547244d7b905c1e3c2bf671c198deb5"><td class="memItemLeft">constexpr <a class="el" href="structneforce_1_1array__iterator.html">array_iterator</a>&lt; IsConst, Size, Array &gt;&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iiterator.html#a1547244d7b905c1e3c2bf671c198deb5">operator+</a> (Distance n) const noexcept</td></tr>
+<tr class="memdesc:a1547244d7b905c1e3c2bf671c198deb5 inherit pub_methods_structneforce_1_1iiterator"><td class="mdescLeft">&#160;</td><td class="mdescRight">加法操作符  <br /></td></tr>
+<tr class="memitem:a2eefe176a21535fd96cef31a30fdbf14 inherit pub_methods_structneforce_1_1iiterator" id="r_a2eefe176a21535fd96cef31a30fdbf14"><td class="memItemLeft">constexpr <a class="el" href="structneforce_1_1array__iterator.html">array_iterator</a>&lt; IsConst, Size, Array &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iiterator.html#a2eefe176a21535fd96cef31a30fdbf14">operator-=</a> (Distance n) noexcept</td></tr>
+<tr class="memdesc:a2eefe176a21535fd96cef31a30fdbf14 inherit pub_methods_structneforce_1_1iiterator"><td class="mdescLeft">&#160;</td><td class="mdescRight">复合减法赋值操作符  <br /></td></tr>
+<tr class="memitem:ac60f1cd43390e5429e8d240825573132 inherit pub_methods_structneforce_1_1iiterator" id="r_ac60f1cd43390e5429e8d240825573132"><td class="memItemLeft">constexpr <a class="el" href="group___type_traits_utilities.html#ga92c50bf8e7847d7337041d7de81c3336">enable_if_t</a>&lt;!<a class="el" href="group___type_traits_utilities.html#gaa8a9c7168b974b877ec67d99e9bf5d8c">is_same_v</a>&lt; T, <a class="el" href="structneforce_1_1array__iterator.html">array_iterator</a>&lt; IsConst, Size, Array &gt; &gt;, <a class="el" href="structneforce_1_1array__iterator.html">array_iterator</a>&lt; IsConst, Size, Array &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1iiterator.html#ac60f1cd43390e5429e8d240825573132">operator-</a> (const T n) const noexcept</td></tr>
+<tr class="memdesc:ac60f1cd43390e5429e8d240825573132 inherit pub_methods_structneforce_1_1iiterator"><td class="mdescLeft">&#160;</td><td class="mdescRight">减法操作符  <br /></td></tr>
+<tr class="inherit_header pub_methods_structneforce_1_1icomparable"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structneforce_1_1icomparable')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="structneforce_1_1icomparable.html">neforce::icomparable&lt; array_iterator&lt; IsConst, Size, Array &gt; &gt;</a></td></tr>
+<tr class="memitem:ab9b06f7293eb15299f8c7d5341bfbc83 inherit pub_methods_structneforce_1_1icomparable" id="r_ab9b06f7293eb15299f8c7d5341bfbc83"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1icomparable.html#ab9b06f7293eb15299f8c7d5341bfbc83">operator==</a> (const <a class="el" href="structneforce_1_1array__iterator.html">array_iterator</a>&lt; IsConst, Size, Array &gt; &amp;rhs) const noexcept(noexcept(derived().<a class="el" href="structneforce_1_1equal__to.html">equal_to</a>(rhs)))</td></tr>
+<tr class="memdesc:ab9b06f7293eb15299f8c7d5341bfbc83 inherit pub_methods_structneforce_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较运算符  <br /></td></tr>
+<tr class="memitem:aa385e40eb8ac8bdae736966ad0cf568f inherit pub_methods_structneforce_1_1icomparable" id="r_aa385e40eb8ac8bdae736966ad0cf568f"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1icomparable.html#aa385e40eb8ac8bdae736966ad0cf568f">operator!=</a> (const <a class="el" href="structneforce_1_1array__iterator.html">array_iterator</a>&lt; IsConst, Size, Array &gt; &amp;rhs) const noexcept(noexcept(!(derived().<a class="el" href="structneforce_1_1equal__to.html">equal_to</a>(rhs))))</td></tr>
+<tr class="memdesc:aa385e40eb8ac8bdae736966ad0cf568f inherit pub_methods_structneforce_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">不等比较运算符  <br /></td></tr>
+<tr class="memitem:a0641b58de65d6a0d5b87c2bcb47496a4 inherit pub_methods_structneforce_1_1icomparable" id="r_a0641b58de65d6a0d5b87c2bcb47496a4"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1icomparable.html#a0641b58de65d6a0d5b87c2bcb47496a4">operator&lt;</a> (const <a class="el" href="structneforce_1_1array__iterator.html">array_iterator</a>&lt; IsConst, Size, Array &gt; &amp;rhs) const noexcept(noexcept(derived().less_than(rhs)))</td></tr>
+<tr class="memdesc:a0641b58de65d6a0d5b87c2bcb47496a4 inherit pub_methods_structneforce_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较运算符  <br /></td></tr>
+<tr class="memitem:ab8de930acec5c0261656b787f576f08d inherit pub_methods_structneforce_1_1icomparable" id="r_ab8de930acec5c0261656b787f576f08d"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1icomparable.html#ab8de930acec5c0261656b787f576f08d">operator&gt;</a> (const <a class="el" href="structneforce_1_1array__iterator.html">array_iterator</a>&lt; IsConst, Size, Array &gt; &amp;rhs) const noexcept(noexcept(rhs.less_than(derived())))</td></tr>
+<tr class="memdesc:ab8de930acec5c0261656b787f576f08d inherit pub_methods_structneforce_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">大于比较运算符  <br /></td></tr>
+<tr class="memitem:a313fba4bce20aced1ff0e6173ad6aab2 inherit pub_methods_structneforce_1_1icomparable" id="r_a313fba4bce20aced1ff0e6173ad6aab2"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1icomparable.html#a313fba4bce20aced1ff0e6173ad6aab2">operator&lt;=</a> (const <a class="el" href="structneforce_1_1array__iterator.html">array_iterator</a>&lt; IsConst, Size, Array &gt; &amp;rhs) const noexcept(noexcept(!(rhs.less_than(derived()))))</td></tr>
+<tr class="memdesc:a313fba4bce20aced1ff0e6173ad6aab2 inherit pub_methods_structneforce_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于等于比较运算符  <br /></td></tr>
+<tr class="memitem:a644c6002f703eb487427daadfec8fb16 inherit pub_methods_structneforce_1_1icomparable" id="r_a644c6002f703eb487427daadfec8fb16"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1icomparable.html#a644c6002f703eb487427daadfec8fb16">operator&gt;=</a> (const <a class="el" href="structneforce_1_1array__iterator.html">array_iterator</a>&lt; IsConst, Size, Array &gt; &amp;rhs) const noexcept(noexcept(!(derived().less_than(rhs))))</td></tr>
+<tr class="memdesc:a644c6002f703eb487427daadfec8fb16 inherit pub_methods_structneforce_1_1icomparable"><td class="mdescLeft">&#160;</td><td class="mdescRight">大于等于比较运算符  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;bool IsConst, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> Size, typename Array&gt;<br />
+struct neforce::array_iterator&lt; IsConst, Size, Array &gt;</div><p>数组迭代器 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IsConst</td><td>是否常量迭代器 </td></tr>
+    <tr><td class="paramname">Size</td><td>数组大小 </td></tr>
+    <tr><td class="paramname">Array</td><td>数组类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>为array提供迭代器支持，包含边界检查和调试验证。 </p>
+
+<p class="definition">在文件 <a class="el" href="array_8hpp_source.html">array.hpp</a> 第 <a class="el" href="array_8hpp_source.html#l00033">33</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="ab05f43055854241b2ff37177569d5546" name="ab05f43055854241b2ff37177569d5546"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab05f43055854241b2ff37177569d5546">&#9670;&#160;</a></span>array_iterator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> Size, typename Array&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structneforce_1_1array__iterator.html">neforce::array_iterator</a>&lt; IsConst, Size, Array &gt;::array_iterator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a31e5db7b2865882251f7dee09231dd08">pointer</a></td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#aba05887e565bf12552b96c5710cdaa8b">container_type</a> *</td>          <td class="paramname"><span class="paramname"><em>vec</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ptr</td><td>初始指针位置 </td></tr>
+    <tr><td class="paramname">vec</td><td>关联容器指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="array_8hpp_source.html">array.hpp</a> 第 <a class="el" href="array_8hpp_source.html#l00063">63</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="afd2341c81a033f4d6c0919cf9c9dd024" name="afd2341c81a033f4d6c0919cf9c9dd024"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd2341c81a033f4d6c0919cf9c9dd024">&#9670;&#160;</a></span>advance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> Size, typename Array&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="structneforce_1_1array__iterator.html">neforce::array_iterator</a>&lt; IsConst, Size, Array &gt;::advance </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a0d6ba106e2983b5974e3d3ba1237f3a9">difference_type</a></td>          <td class="paramname"><span class="paramname"><em>off</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>前进操作 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">off</td><td>前进距离 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="array_8hpp_source.html">array.hpp</a> 第 <a class="el" href="array_8hpp_source.html#l00100">100</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aed527700bba2662a67ac47c3a0e67d88" name="aed527700bba2662a67ac47c3a0e67d88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed527700bba2662a67ac47c3a0e67d88">&#9670;&#160;</a></span>base()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> Size, typename Array&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a31e5db7b2865882251f7dee09231dd08">pointer</a> <a class="el" href="structneforce_1_1array__iterator.html">neforce::array_iterator</a>&lt; IsConst, Size, Array &gt;::base </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取底层指针 </p>
+<dl class="section return"><dt>返回</dt><dd>当前指针 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="array_8hpp_source.html">array.hpp</a> 第 <a class="el" href="array_8hpp_source.html#l00150">150</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a99384284acbd4f7c19bc92731e0e8cae" name="a99384284acbd4f7c19bc92731e0e8cae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99384284acbd4f7c19bc92731e0e8cae">&#9670;&#160;</a></span>container()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> Size, typename Array&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="#aba05887e565bf12552b96c5710cdaa8b">container_type</a> * <a class="el" href="structneforce_1_1array__iterator.html">neforce::array_iterator</a>&lt; IsConst, Size, Array &gt;::container </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取关联容器 </p>
+<dl class="section return"><dt>返回</dt><dd>关联容器指针 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="array_8hpp_source.html">array.hpp</a> 第 <a class="el" href="array_8hpp_source.html#l00156">156</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9d92a83e37d34422424734fc8289dcf9" name="a9d92a83e37d34422424734fc8289dcf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d92a83e37d34422424734fc8289dcf9">&#9670;&#160;</a></span>dereference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> Size, typename Array&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ae8e81638a4f8e69db2d2a32153fb99c5">reference</a> <a class="el" href="structneforce_1_1array__iterator.html">neforce::array_iterator</a>&lt; IsConst, Size, Array &gt;::dereference </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>解引用操作 </p>
+<dl class="section return"><dt>返回</dt><dd>当前元素的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="array_8hpp_source.html">array.hpp</a> 第 <a class="el" href="array_8hpp_source.html#l00071">71</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a89b88f6e255e7d7b153a37721f08375c" name="a89b88f6e255e7d7b153a37721f08375c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89b88f6e255e7d7b153a37721f08375c">&#9670;&#160;</a></span>distance_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> Size, typename Array&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a0d6ba106e2983b5974e3d3ba1237f3a9">difference_type</a> <a class="el" href="structneforce_1_1array__iterator.html">neforce::array_iterator</a>&lt; IsConst, Size, Array &gt;::distance_to </td>
+          <td>(</td>
+          <td class="paramtype">const array_iterator&lt; IsConst, Size, Array &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>计算距离操作 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>另一个迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>两个迭代器之间的距离 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="array_8hpp_source.html">array.hpp</a> 第 <a class="el" href="array_8hpp_source.html#l00112">112</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a361910d7119b4a6fe40dafe196e0f42d" name="a361910d7119b4a6fe40dafe196e0f42d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a361910d7119b4a6fe40dafe196e0f42d">&#9670;&#160;</a></span>equal_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> Size, typename Array&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="structneforce_1_1array__iterator.html">neforce::array_iterator</a>&lt; IsConst, Size, Array &gt;::equal_to </td>
+          <td>(</td>
+          <td class="paramtype">const array_iterator&lt; IsConst, Size, Array &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>相等比较 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否相等 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="array_8hpp_source.html">array.hpp</a> 第 <a class="el" href="array_8hpp_source.html#l00131">131</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a88c003eefd3fcdb54a14e79cc4a405ec" name="a88c003eefd3fcdb54a14e79cc4a405ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88c003eefd3fcdb54a14e79cc4a405ec">&#9670;&#160;</a></span>less_than()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> Size, typename Array&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="structneforce_1_1array__iterator.html">neforce::array_iterator</a>&lt; IsConst, Size, Array &gt;::less_than </td>
+          <td>(</td>
+          <td class="paramtype">const array_iterator&lt; IsConst, Size, Array &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>小于比较 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>当前迭代器是否在rhs之前 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="array_8hpp_source.html">array.hpp</a> 第 <a class="el" href="array_8hpp_source.html#l00141">141</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a4124d047dc7398753184c0e5a57433fc" name="a4124d047dc7398753184c0e5a57433fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4124d047dc7398753184c0e5a57433fc">&#9670;&#160;</a></span>operator[]()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;bool IsConst, <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> Size, typename Array&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ae8e81638a4f8e69db2d2a32153fb99c5">reference</a> <a class="el" href="structneforce_1_1array__iterator.html">neforce::array_iterator</a>&lt; IsConst, Size, Array &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a0d6ba106e2983b5974e3d3ba1237f3a9">difference_type</a></td>          <td class="paramname"><span class="paramname"><em>off</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>下标访问操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">off</td><td>偏移量 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>偏移位置元素的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="array_8hpp_source.html">array.hpp</a> 第 <a class="el" href="array_8hpp_source.html#l00122">122</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该结构体的文档由以下文件生成:<ul>
+<li><a class="el" href="array_8hpp_source.html">array.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="structneforce_1_1array__iterator.html">array_iterator</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

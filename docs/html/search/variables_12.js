@@ -4,7 +4,7 @@ var searchData=
   ['scheme_1',['scheme',['../structurl.html#af55eb2e3fc8b82b6869cc1a006fd7b4e',1,'url']]],
   ['second_2',['second',['../structpair.html#a63ae1bbd5a6ce6bd6167b5359fa7a01f',1,'pair']]],
   ['secure_3',['secure',['../structhttp__cookie.html#af49cbc38ef9db6bec81c9ee9966a0201',1,'http_cookie']]],
-  ['semi_5fcircle_4',['SEMI_CIRCLE',['../group___math_constants.html#ga007d3842f652c65048072924d81d9ed6',1,'math.hpp']]],
+  ['semi_5fcircle_4',['SEMI_CIRCLE',['../group___math_constants.html#ga3ef3cf695ad52bca5bfb054f08fa05ec',1,'math.hpp']]],
   ['send_5ftime_5',['send_time',['../structhttp__client__response.html#a1420d42ed1dd0acdba6f1856c78bd17b',1,'http_client_response']]],
   ['send_5ftimeout_6',['send_timeout',['../structhttp__client_1_1config.html#ab480b8a9352a344a03cb2ae8b08baa31',1,'http_client::config']]],
   ['send_5ftimeout_5f_7',['send_timeout_',['../classtcp__client__base.html#af0a5d66000060e7af7f1294b95154800',1,'tcp_client_base']]],

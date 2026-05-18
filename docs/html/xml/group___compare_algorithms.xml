@@ -4,7 +4,7 @@
     <compoundname>CompareAlgorithms</compoundname>
     <title>比较算法</title>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___compare_algorithms_1ga682c1803a35a1de8b019d003138ae5dd" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(++first1) &amp;&amp;noexcept(++first2) &amp;&amp;noexcept(binary_pred(*first1, *first2))" virt="non-virtual">
+      <memberdef kind="function" id="group___compare_algorithms_1ga9cf760161111d0bfae4928ad951ed9e6" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(++first1) &amp;&amp;noexcept(++first2) &amp;&amp;noexcept(binary_pred(*first1, *first2))" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -16,8 +16,8 @@
             <type>typename BinaryPredicate</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_NODISCARD constexpr bool</type>
-        <definition>NEFORCE_NODISCARD constexpr bool equal</definition>
+        <type>bool</type>
+        <definition>bool equal</definition>
         <argsstring>(Iterator1 first1, Iterator1 last1, Iterator2 first2, BinaryPredicate binary_pred)</argsstring>
         <name>equal</name>
         <param>
@@ -104,17 +104,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="54" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="54" bodyend="65"/>
-        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
-        <referencedby refid="group___compare_algorithms_1ga0cf2685901b36aa38db0e921467ada9d" compoundref="compare_8hpp" startline="78" endline="81">equal</referencedby>
-        <referencedby refid="classarray_1aa93fda4fcfff900df8978784e8e0f553" compoundref="array_8hpp" startline="397" endline="399">array&lt; byte_t, MAC_LEN &gt;::equal_to</referencedby>
-        <referencedby refid="classbitmap_1ae0f1c790c3d879cbede08d076a4f3025" compoundref="bitmap_8hpp" startline="1160" endline="1163">bitmap::equal_to</referencedby>
-        <referencedby refid="classdeque_1ae2e9b00965da35fdb50ad702125f84d1" compoundref="deque_8hpp" startline="1427" endline="1430">deque&lt; T, Alloc, BufSize &gt;::equal_to</referencedby>
-        <referencedby refid="classlist_1a5fef0224cba4470d6f7fcfb84167a944" compoundref="list_8hpp" startline="1060" endline="1063">list&lt; pair&lt; Key, Value &gt; &gt;::equal_to</referencedby>
-        <referencedby refid="classrb__tree_1a61f13a196d711b897728a835dc5901b9" compoundref="rb__tree_8hpp" startline="1573" endline="1576">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_to</referencedby>
-        <referencedby refid="classvector_1a72f8829f78d39382e85123a0d43c32f1" compoundref="vector_8hpp" startline="1208" endline="1211">vector&lt; byte_t &gt;::equal_to</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="54" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="54" bodyend="65"/>
+        <references refid="group___iterator_category_checks_1ga599d2f4fe13322580e70e5959b69778d" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <referencedby refid="group___compare_algorithms_1ga9a48a261b8916c8b904f59544e904cbf" compoundref="compare_8hpp" startline="78" endline="81">equal</referencedby>
+        <referencedby refid="classarray_1a28911a49bdb4af0e991b784de0901194" compoundref="array_8hpp" startline="397" endline="399">array&lt; byte_t, MAC_LEN &gt;::equal_to</referencedby>
+        <referencedby refid="classbitmap_1afb5974c931da8ebd65548a0b4accbad7" compoundref="bitmap_8hpp" startline="1160" endline="1163">bitmap::equal_to</referencedby>
+        <referencedby refid="classdeque_1abf37992f45dee571ce3854545ef9c7bd" compoundref="deque_8hpp" startline="1427" endline="1430">deque&lt; T, Alloc, BufSize &gt;::equal_to</referencedby>
+        <referencedby refid="classlist_1ae5ef87351c193bbfa9359e1ee75eaa59" compoundref="list_8hpp" startline="1060" endline="1063">list&lt; pair&lt; Key, Value &gt; &gt;::equal_to</referencedby>
+        <referencedby refid="classrb__tree_1a300b4f781f320aa3d416580e73513405" compoundref="rb__tree_8hpp" startline="1573" endline="1576">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::equal_to</referencedby>
+        <referencedby refid="classvector_1a763256e271e132a5e244ef9fd562638f" compoundref="vector_8hpp" startline="1208" endline="1211">vector&lt; byte_t &gt;::equal_to</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___compare_algorithms_1ga0cf2685901b36aa38db0e921467ada9d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(1 equal(first1, last1, first2, 1 equal_to&lt;&gt;()))" virt="non-virtual">
+      <memberdef kind="function" id="group___compare_algorithms_1ga9a48a261b8916c8b904f59544e904cbf" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(_NEFORCE equal(first1, last1, first2, _NEFORCE equal_to&lt;&gt;()))" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -123,8 +123,8 @@
             <type>typename Iterator2</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_NODISCARD constexpr bool</type>
-        <definition>NEFORCE_NODISCARD constexpr bool equal</definition>
+        <type>bool</type>
+        <definition>bool equal</definition>
         <argsstring>(Iterator1 first1, Iterator1 last1, Iterator2 first2)</argsstring>
         <name>equal</name>
         <param>
@@ -192,7 +192,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="78" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="78" bodyend="81"/>
-        <references refid="group___compare_algorithms_1ga682c1803a35a1de8b019d003138ae5dd" compoundref="compare_8hpp" startline="54" endline="65">equal</references>
+        <references refid="group___compare_algorithms_1ga9cf760161111d0bfae4928ad951ed9e6" compoundref="compare_8hpp" startline="54" endline="65">equal</references>
       </memberdef>
       <memberdef kind="function" id="group___compare_algorithms_1ga396286e554573557c1781c8b3bae3860" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -295,7 +295,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="98" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="98" bodyend="102"/>
-        <references refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
+        <references refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" compoundref="concepts_8hpp" startline="561">is_ranges_fwd_iter_v</references>
         <references refid="group___bound_algorithms_1ga752e4da223be382b51f4af020097beab" compoundref="search_8hpp" startline="43" endline="63">lower_bound</references>
         <references refid="group___pair_1ga3fc92626b5f2ddb8e7b4cd5f6ccde69e" compoundref="pair_8hpp" startline="474" endline="478">make_pair</references>
         <references refid="group___bound_algorithms_1ga6b8b644144e4b0e5f0258c0b3018385e" compoundref="search_8hpp" startline="96" endline="116">upper_bound</references>
@@ -464,8 +464,8 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="133" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="133" bodyend="135"/>
         <referencedby refid="group___shared_pointer_1gac6d23654fe34f82cb9ce90e5402945c2" compoundref="shared__ptr_8hpp" startline="899" endline="939">allocate_shared</referencedby>
-        <referencedby refid="classbasic__string_1a495fd1cbd70eafbf0d16a1f85e7a976b" compoundref="basic__string_8hpp" startline="779" endline="803">basic_string&lt; char &gt;::basic_string</referencedby>
-        <referencedby refid="classvector_1a2d2774255d5dfb2e579494c7888b6348" compoundref="vector_8hpp" startline="1026" endline="1063">vector&lt; byte_t &gt;::insert</referencedby>
+        <referencedby refid="classbasic__string_1a1c2946d4c6454f5e07e8c43c9645977e" compoundref="basic__string_8hpp" startline="779" endline="803">basic_string&lt; char &gt;::basic_string</referencedby>
+        <referencedby refid="classvector_1a2b66ef497dacca36effd4c6763d1a77e" compoundref="vector_8hpp" startline="1026" endline="1063">vector&lt; byte_t &gt;::insert</referencedby>
         <referencedby refid="group___shared_pointer_1gab47fa86d2917e14f57f68dfa9e83495e" compoundref="shared__ptr_8hpp" startline="835" endline="863">make_shared</referencedby>
         <referencedby refid="group___compare_algorithms_1gaafcb422504addb63d771b9061f7533a9" compoundref="compare_8hpp" startline="337" endline="376">minmax_element</referencedby>
         <referencedby refid="classrandom__lcd_1a703adc546dd584f972bf9e69a04f847a" compoundref="random_8hpp" startline="224" endline="226">random_lcd::next_float</referencedby>
@@ -484,12 +484,12 @@
         <referencedby refid="classrandom__mt_1a5a0d442f401514a9d36805a4da5a7777" compoundref="random_8hpp" startline="330" endline="335">random_mt::next_uint64</referencedby>
         <referencedby refid="classsecret_1a1c522e5b0ba8a31775963a514e5ae4c4" compoundref="random_8hpp" startline="462" endline="467">secret::next_uint64</referencedby>
         <referencedby refid="classhashtable_1af78667277f9f62e843dcc636c5f39cfb" compoundref="hashtable_8hpp" startline="1092" endline="1124">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::rehash</referencedby>
-        <referencedby refid="classvector_1a88d7c0d46bf9436689cf8acff2138f7d" compoundref="vector_8hpp" startline="775" endline="798">vector&lt; byte_t &gt;::reserve</referencedby>
+        <referencedby refid="classvector_1a0066a7fca1a744cdb62d5fb96b51a88f" compoundref="vector_8hpp" startline="775" endline="798">vector&lt; byte_t &gt;::reserve</referencedby>
         <referencedby refid="classmeta__function_1a61a34394d3453c0e97ff29e87e261d7b" compoundref="reflect_2function_8hpp" startline="96" endline="99">meta_function::set_arg_hints</referencedby>
         <referencedby refid="classhttp__client_1a05ea7920103fb6571e2f86fae8007fdb" compoundref="http__client_8hpp" startline="205" endline="205">http_client::set_max_redirects</referencedby>
         <referencedby refid="classhttp__server_1a5a233441cb3717e67bb65f80b4abdc86" compoundref="http__server_8hpp" startline="210" endline="210">http_server::set_max_sessions</referencedby>
         <referencedby refid="classcolor_1a1b52a006d08508c7882ed9edd6129998" compoundref="color_8hpp" startline="449" endline="453">color::set_opacity</referencedby>
-        <referencedby refid="structvariant_1aa6ac13b545ec10e7c444157d69db3bd1" compoundref="variant_8hpp" startline="579" endline="597">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::swap</referencedby>
+        <referencedby refid="structvariant_1ae0767709602347108e1c79fe9a8d5a3d" compoundref="variant_8hpp" startline="579" endline="597">variant&lt; none_t, ::sockaddr_in, ::sockaddr_in6 &gt;::swap</referencedby>
         <referencedby refid="classsystem__event_1a88a8392cfe11e8ca599f429e60e4eea7">system_event::wait</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___compare_algorithms_1ga153f43401447b5e3e172c42e6461b926" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(a&lt; b)" virt="non-virtual">
@@ -630,20 +630,20 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="163" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="163" bodyend="165"/>
-        <referencedby refid="classbasic__string_1a87242a12ae7775f7af63a0519a94b754" compoundref="basic__string_8hpp" startline="1647" endline="1656">basic_string&lt; char &gt;::append</referencedby>
-        <referencedby refid="classbasic__string_1a89760f5da24be85b9a4d4decf75e01c0" compoundref="basic__string_8hpp" startline="1614" endline="1621">basic_string&lt; char &gt;::append</referencedby>
-        <referencedby refid="classbasic__string_1af6b8b2ec32fb6d4796cbbb95309551e9" compoundref="basic__string_8hpp" startline="1038" endline="1042">basic_string&lt; char &gt;::basic_string</referencedby>
+        <referencedby refid="classbasic__string_1a07d3036b5179d0e73a47c4167d40d959" compoundref="basic__string_8hpp" startline="1647" endline="1656">basic_string&lt; char &gt;::append</referencedby>
+        <referencedby refid="classbasic__string_1ae52b1914cf8ac0167f366f4580bbcdca" compoundref="basic__string_8hpp" startline="1614" endline="1621">basic_string&lt; char &gt;::append</referencedby>
+        <referencedby refid="classbasic__string_1aa49f0e9b3b3e68c7a432a5f891303071" compoundref="basic__string_8hpp" startline="1038" endline="1042">basic_string&lt; char &gt;::basic_string</referencedby>
         <referencedby refid="group___char_traits_1ga8f847c8aaf0df378c0a3b9a962313fcc" compoundref="char__traits_8hpp" startline="347" endline="361">char_traits_compare</referencedby>
         <referencedby refid="group___char_traits_1ga5ae883e1bfc078b9a88b7fcb2191de18" compoundref="char__traits_8hpp" startline="727" endline="747">char_traits_find_last_not_of</referencedby>
         <referencedby refid="group___char_traits_1ga4d643fe454e18581a72f36456aaa0dd4" compoundref="char__traits_8hpp" startline="560" endline="580">char_traits_find_last_of</referencedby>
         <referencedby refid="group___char_traits_1ga3eb4093dc3b5bcc794105372bb1aa71f" compoundref="char__traits_8hpp" startline="428" endline="446">char_traits_rfind</referencedby>
         <referencedby refid="group___char_traits_1ga6efdfa9709d06abac30062175a99820b" compoundref="char__traits_8hpp" startline="458" endline="472">char_traits_rfind_char</referencedby>
         <referencedby refid="group___char_traits_1ga82ee877d8600c7c19db0058081b1fca9" compoundref="char__traits_8hpp" startline="794" endline="808">char_traits_rfind_not_char</referencedby>
-        <referencedby refid="classbasic__string_1a31dced4b761170548e4baf6030418aa1" compoundref="basic__string_8hpp" startline="2242" endline="2258">basic_string&lt; char &gt;::compare_ignore_case</referencedby>
-        <referencedby refid="classbasic__string__view_1a4f83d288d98ea94ce3398ee9803dd14a" compoundref="basic__string__view_8hpp" startline="517" endline="533">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare_ignore_case</referencedby>
-        <referencedby refid="classbasic__string_1a76422abed6598e70dc7ec756bb824978" compoundref="basic__string_8hpp" startline="2153" endline="2158">basic_string&lt; char &gt;::copy</referencedby>
-        <referencedby refid="classbasic__string_1a8bfcb245731ff6a1a57fac97eb116571" compoundref="basic__string_8hpp" startline="1956" endline="1962">basic_string&lt; char &gt;::erase</referencedby>
-        <referencedby refid="classbasic__string_1a3d5c991e8aec3855e7a65fa58acd654d" compoundref="basic__string_8hpp" startline="1941" endline="1948">basic_string&lt; char &gt;::erase</referencedby>
+        <referencedby refid="classbasic__string_1adc18125480423d97dc344fee4e071e07" compoundref="basic__string_8hpp" startline="2242" endline="2258">basic_string&lt; char &gt;::compare_ignore_case</referencedby>
+        <referencedby refid="classbasic__string__view_1af984fb5ee3e702ef1bd20d3a24c5b646" compoundref="basic__string__view_8hpp" startline="517" endline="533">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare_ignore_case</referencedby>
+        <referencedby refid="classbasic__string_1aa3a38ec8d444bc17f98e465e8830704e" compoundref="basic__string_8hpp" startline="2153" endline="2158">basic_string&lt; char &gt;::copy</referencedby>
+        <referencedby refid="classbasic__string_1a7cc9ede6dfd6ed635ed144bffdccdab1" compoundref="basic__string_8hpp" startline="1956" endline="1962">basic_string&lt; char &gt;::erase</referencedby>
+        <referencedby refid="classbasic__string_1a6021dab75ee20566930e2094766c4fa2" compoundref="basic__string_8hpp" startline="1941" endline="1948">basic_string&lt; char &gt;::erase</referencedby>
         <referencedby refid="group___compare_algorithms_1gaafcb422504addb63d771b9061f7533a9" compoundref="compare_8hpp" startline="337" endline="376">minmax_element</referencedby>
         <referencedby refid="classrandom__lcd_1a65b89239d427581aa6d383c3d7a9e21e" compoundref="random_8hpp" startline="210" endline="215">random_lcd::next_float</referencedby>
         <referencedby refid="classrandom__mt_1a32b1b9796e96a684154aa40339ac6f3b" compoundref="random_8hpp" startline="364" endline="369">random_mt::next_float</referencedby>
@@ -651,14 +651,14 @@
         <referencedby refid="classrandom__lcd_1abd582ba360545bf2c3b7221045b49472" compoundref="random_8hpp" startline="153" endline="158">random_lcd::next_int</referencedby>
         <referencedby refid="classrandom__mt_1a1c44b797a02c0750d497c1c3d2e461b8" compoundref="random_8hpp" startline="307" endline="312">random_mt::next_int</referencedby>
         <referencedby refid="classsecret_1a132888a7104d1ad0b408f114a1204e56" compoundref="random_8hpp" startline="439" endline="444">secret::next_int</referencedby>
-        <referencedby refid="group___sort_algorithms_1ga08dba41cc540351140973e676d80fd72" compoundref="sort_8hpp" startline="337" endline="355">select_sort</referencedby>
+        <referencedby refid="group___sort_algorithms_1ga256c71a6285712b47d8e9c6869ddc0f9" compoundref="sort_8hpp" startline="337" endline="355">select_sort</referencedby>
         <referencedby refid="classmeta__function_1a61a34394d3453c0e97ff29e87e261d7b" compoundref="reflect_2function_8hpp" startline="96" endline="99">meta_function::set_arg_hints</referencedby>
         <referencedby refid="classcolor_1a1b52a006d08508c7882ed9edd6129998" compoundref="color_8hpp" startline="449" endline="453">color::set_opacity</referencedby>
-        <referencedby refid="classbasic__string_1aeb3f94c20a3444c0a0e74302cb855684" compoundref="basic__string_8hpp" startline="2105" endline="2110">basic_string&lt; char &gt;::substr</referencedby>
-        <referencedby refid="group___sort_algorithms_1gac0a8a9e872d1a63a5bbb6754b3915e07" compoundref="sort_8hpp" startline="833" endline="867">tim_sort</referencedby>
-        <referencedby refid="classbasic__string_1afb9c6828d1b987b9554d791d898dc30f" compoundref="basic__string_8hpp" startline="2140" endline="2144">basic_string&lt; char &gt;::view</referencedby>
-        <referencedby refid="classvector_1aac83fabc9baddf4059d9ec4381314d03" compoundref="vector_8hpp" startline="727" endline="731">vector&lt; byte_t &gt;::view</referencedby>
-        <referencedby refid="classvector_1ae58741c7b00167c0c09a252ab73a5307" compoundref="vector_8hpp" startline="718" endline="721">vector&lt; byte_t &gt;::view</referencedby>
+        <referencedby refid="classbasic__string_1a514995c9c88b6d95b4692bb33c74532e" compoundref="basic__string_8hpp" startline="2105" endline="2110">basic_string&lt; char &gt;::substr</referencedby>
+        <referencedby refid="group___sort_algorithms_1gaca897ca5f6f1015b57ef38709af2a2c4" compoundref="sort_8hpp" startline="833" endline="867">tim_sort</referencedby>
+        <referencedby refid="classbasic__string_1a74d1c53a97772a8b9262e81030e8dd4c" compoundref="basic__string_8hpp" startline="2140" endline="2144">basic_string&lt; char &gt;::view</referencedby>
+        <referencedby refid="classvector_1acc8374340f0099868c154074a56338fc" compoundref="vector_8hpp" startline="727" endline="731">vector&lt; byte_t &gt;::view</referencedby>
+        <referencedby refid="classvector_1a8e8c3296f50844b02d6973b2d76f2481" compoundref="vector_8hpp" startline="718" endline="721">vector&lt; byte_t &gt;::view</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___compare_algorithms_1gaf9b881461c8e7da079e090bf6760a6d1" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(b&lt; a)" virt="non-virtual">
         <templateparamlist>
@@ -955,7 +955,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="237" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="237" bodyend="249"/>
-        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <references refid="group___iterator_category_checks_1ga599d2f4fe13322580e70e5959b69778d" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
         <referencedby refid="group___compare_algorithms_1ga21bf5779df2939ac7e9bbf2fa016798c" compoundref="compare_8hpp" startline="270" endline="272">max</referencedby>
         <referencedby refid="group___compare_algorithms_1gaa226ea8eefb93332e43e44ab173c650e" compoundref="compare_8hpp" startline="259" endline="261">max_element</referencedby>
       </memberdef>
@@ -1059,8 +1059,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="270" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="270" bodyend="272"/>
-        <references refid="classlist_1a5a52c17b7cd3a3899a38f2067d7b8ec8" compoundref="list_8hpp" startline="396" endline="396">list&lt; T, Alloc &gt;::begin</references>
-        <references refid="classlist_1ac3436051e8562ead05c67ff400e78707" compoundref="list_8hpp" startline="402" endline="402">list&lt; T, Alloc &gt;::end</references>
+        <references refid="classlist_1a269e0683116684b90ee4534ee8f52293" compoundref="list_8hpp" startline="396" endline="396">list&lt; T, Alloc &gt;::begin</references>
+        <references refid="classlist_1a35dcec816e10fa7514ce494d19adc760" compoundref="list_8hpp" startline="402" endline="402">list&lt; T, Alloc &gt;::end</references>
         <references refid="group___compare_algorithms_1gae047220bf13f52d30732510ec976bf5c" compoundref="compare_8hpp" startline="237" endline="249">max_element</references>
       </memberdef>
       <memberdef kind="function" id="group___compare_algorithms_1gaab4025164d755b851a1282e3cfbc3d1a" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -1141,7 +1141,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="287" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="287" bodyend="299"/>
-        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <references refid="group___iterator_category_checks_1ga599d2f4fe13322580e70e5959b69778d" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
         <referencedby refid="group___compare_algorithms_1ga69a55cc167f3341fffddaffc0686dc2a" compoundref="compare_8hpp" startline="320" endline="322">min</referencedby>
         <referencedby refid="group___compare_algorithms_1ga4ee266bd70d4abf25afc39fe5eb8ac53" compoundref="compare_8hpp" startline="309" endline="311">min_element</referencedby>
       </memberdef>
@@ -1245,8 +1245,8 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="320" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="320" bodyend="322"/>
-        <references refid="classlist_1a5a52c17b7cd3a3899a38f2067d7b8ec8" compoundref="list_8hpp" startline="396" endline="396">list&lt; T, Alloc &gt;::begin</references>
-        <references refid="classlist_1ac3436051e8562ead05c67ff400e78707" compoundref="list_8hpp" startline="402" endline="402">list&lt; T, Alloc &gt;::end</references>
+        <references refid="classlist_1a269e0683116684b90ee4534ee8f52293" compoundref="list_8hpp" startline="396" endline="396">list&lt; T, Alloc &gt;::begin</references>
+        <references refid="classlist_1a35dcec816e10fa7514ce494d19adc760" compoundref="list_8hpp" startline="402" endline="402">list&lt; T, Alloc &gt;::end</references>
         <references refid="group___compare_algorithms_1gaab4025164d755b851a1282e3cfbc3d1a" compoundref="compare_8hpp" startline="287" endline="299">min_element</references>
       </memberdef>
       <memberdef kind="function" id="group___compare_algorithms_1gaafcb422504addb63d771b9061f7533a9" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -1327,7 +1327,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="337" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="337" bodyend="376"/>
-        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <references refid="group___iterator_category_checks_1ga599d2f4fe13322580e70e5959b69778d" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
         <references refid="group___pair_1ga3fc92626b5f2ddb8e7b4cd5f6ccde69e" compoundref="pair_8hpp" startline="474" endline="478">make_pair</references>
         <references refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" compoundref="compare_8hpp" startline="133" endline="135">max</references>
         <references refid="group___compare_algorithms_1gabf4803a4eaf181e17a6893b2aea9a4c5" compoundref="compare_8hpp" startline="163" endline="165">min</references>
@@ -1488,8 +1488,8 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="408" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="408" bodyend="416"/>
         <referencedby refid="group___compare_algorithms_1gae335939dbe758563e37614c7c39e54aa" compoundref="compare_8hpp" startline="427" endline="429">clamp</referencedby>
-        <referencedby refid="classbasic__string_1aeb3f94c20a3444c0a0e74302cb855684" compoundref="basic__string_8hpp" startline="2105" endline="2110">basic_string&lt; char &gt;::substr</referencedby>
-        <referencedby refid="classbasic__string__view_1a18b62ddd963ac92a255c3cf2a6213c84" compoundref="basic__string__view_8hpp" startline="414" endline="418">basic_string_view&lt; typename Traits::char_type, Traits &gt;::substr</referencedby>
+        <referencedby refid="classbasic__string_1a514995c9c88b6d95b4692bb33c74532e" compoundref="basic__string_8hpp" startline="2105" endline="2110">basic_string&lt; char &gt;::substr</referencedby>
+        <referencedby refid="classbasic__string__view_1a6368d37a683e75756898b0f27ff4af29" compoundref="basic__string__view_8hpp" startline="414" endline="418">basic_string_view&lt; typename Traits::char_type, Traits &gt;::substr</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___compare_algorithms_1gae335939dbe758563e37614c7c39e54aa" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(lower&lt; upper)" virt="non-virtual">
         <templateparamlist>
@@ -1560,7 +1560,7 @@
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="427" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="427" bodyend="429"/>
         <references refid="group___compare_algorithms_1ga5a3267d0bee58dc5e314113452cf2a9e" compoundref="compare_8hpp" startline="408" endline="416">clamp</references>
       </memberdef>
-      <memberdef kind="function" id="group___compare_algorithms_1ga9b8af8f5da11c5b93627d6e5fb30f784" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(++first1) &amp;&amp;noexcept(++first2) &amp;&amp;noexcept(comp(*first1, *first2)) &amp;&amp;noexcept(first1==last1 &amp;&amp;first2 !=last2)" virt="non-virtual">
+      <memberdef kind="function" id="group___compare_algorithms_1ga852d6f970d2af419ffe467715fb10b01" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(++first1) &amp;&amp;noexcept(++first2) &amp;&amp;noexcept(comp(*first1, *first2)) &amp;&amp;noexcept(first1==last1 &amp;&amp;first2 !=last2)" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -1572,8 +1572,8 @@
             <type>typename Compare</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_NODISCARD constexpr bool</type>
-        <definition>NEFORCE_NODISCARD constexpr bool lexicographical_compare</definition>
+        <type>bool</type>
+        <definition>bool lexicographical_compare</definition>
         <argsstring>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Compare comp)</argsstring>
         <name>lexicographical_compare</name>
         <param>
@@ -1678,16 +1678,16 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="450" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="450" bodyend="465"/>
-        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
-        <referencedby refid="classarray_1abf596d7adc7f80062485dcb30088efe3" compoundref="array_8hpp" startline="405" endline="407">array&lt; byte_t, MAC_LEN &gt;::less_than</referencedby>
-        <referencedby refid="classbitmap_1a51ce68374e92b6d5df3720cef9c432d6" compoundref="bitmap_8hpp" startline="1170" endline="1174">bitmap::less_than</referencedby>
-        <referencedby refid="classdeque_1a3431ff017cb8e2a5dd8a2232e9fdaa86" compoundref="deque_8hpp" startline="1437" endline="1440">deque&lt; T, Alloc, BufSize &gt;::less_than</referencedby>
-        <referencedby refid="classhashtable_1a926e1c65d564489d6f0d4397856f6aed" compoundref="hashtable_8hpp" startline="1591" endline="1595">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than</referencedby>
-        <referencedby refid="classlist_1a7710ff0bd2c2c22e82b213ca15559e72" compoundref="list_8hpp" startline="1070" endline="1073">list&lt; pair&lt; Key, Value &gt; &gt;::less_than</referencedby>
-        <referencedby refid="classrb__tree_1a5d397ab0a26a1c057c2c9a0b6ad152c1" compoundref="rb__tree_8hpp" startline="1583" endline="1586">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::less_than</referencedby>
-        <referencedby refid="classvector_1adfb9416591effa884002528c31b26218" compoundref="vector_8hpp" startline="1218" endline="1221">vector&lt; byte_t &gt;::less_than</referencedby>
+        <references refid="group___iterator_category_checks_1ga599d2f4fe13322580e70e5959b69778d" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <referencedby refid="classarray_1af0f897b53b4c8d67d563ad9965fd1864" compoundref="array_8hpp" startline="405" endline="407">array&lt; byte_t, MAC_LEN &gt;::less_than</referencedby>
+        <referencedby refid="classbitmap_1a1df8c010cbbb19649ad2ea651a731f65" compoundref="bitmap_8hpp" startline="1170" endline="1174">bitmap::less_than</referencedby>
+        <referencedby refid="classdeque_1a448b0538bc7ffbfa97efc5a080c46772" compoundref="deque_8hpp" startline="1437" endline="1440">deque&lt; T, Alloc, BufSize &gt;::less_than</referencedby>
+        <referencedby refid="classhashtable_1a9b5d36fe0eac69e3ef6b6bddb9106b35" compoundref="hashtable_8hpp" startline="1591" endline="1595">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than</referencedby>
+        <referencedby refid="classlist_1a77acd11ae6011d7fb8cf23ca77830a64" compoundref="list_8hpp" startline="1070" endline="1073">list&lt; pair&lt; Key, Value &gt; &gt;::less_than</referencedby>
+        <referencedby refid="classrb__tree_1aa47d8b82bd8fb427355a081e18233805" compoundref="rb__tree_8hpp" startline="1583" endline="1586">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::less_than</referencedby>
+        <referencedby refid="classvector_1a0946bf7ce64de70672a110fb376cfc41" compoundref="vector_8hpp" startline="1218" endline="1221">vector&lt; byte_t &gt;::less_than</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___compare_algorithms_1gabfbbda604611f4f7c0d36c08eac44941" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(inner::__lexicographical_compare_aux(first1, last1, first2, last2))" virt="non-virtual">
+      <memberdef kind="function" id="group___compare_algorithms_1ga7f28c6e08419c494bbfe697cd51d7202" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="noexcept(inner::__lexicographical_compare_aux(first1, last1, first2, last2))" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Iterator1</type>
@@ -1696,8 +1696,8 @@
             <type>typename Iterator2</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_NODISCARD constexpr bool</type>
-        <definition>NEFORCE_NODISCARD constexpr bool lexicographical_compare</definition>
+        <type>bool</type>
+        <definition>bool lexicographical_compare</definition>
         <argsstring>(Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2)</argsstring>
         <name>lexicographical_compare</name>
         <param>
@@ -1776,8 +1776,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="504" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="504" bodyend="510"/>
-        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="504" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="504" bodyend="510"/>
+        <references refid="group___iterator_category_checks_1ga599d2f4fe13322580e70e5959b69778d" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
       </memberdef>
       <memberdef kind="function" id="group___compare_algorithms_1ga879896fd048c11390116bfa1701cdafa" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1880,7 +1880,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" line="528" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/algorithm/compare.hpp" bodystart="528" bodyend="536"/>
-        <references refid="group___iterator_category_checks_1ga0cd01d6904a8c302e61f27b32d50c9fa" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
+        <references refid="group___iterator_category_checks_1ga599d2f4fe13322580e70e5959b69778d" compoundref="concepts_8hpp" startline="540">is_ranges_input_iter_v</references>
         <references refid="group___pair_1ga3fc92626b5f2ddb8e7b4cd5f6ccde69e" compoundref="pair_8hpp" startline="474" endline="478">make_pair</references>
         <referencedby refid="group___compare_algorithms_1ga16ccb89e351ec10651b7c27d3bdc9c37" compoundref="compare_8hpp" startline="548" endline="550">mismatch</referencedby>
       </memberdef>

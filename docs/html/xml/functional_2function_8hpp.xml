@@ -111,7 +111,7 @@
       <node id="27">
         <label>lazy_thread.hpp</label>
         <link refid="lazy__thread_8hpp"/>
-        <childnode refid="18" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
       <node id="16">
@@ -120,8 +120,6 @@
         <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
         </childnode>
       </node>
       <node id="15">
@@ -136,18 +134,18 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="19">
         <label>thread_pool.hpp</label>
         <link refid="thread__pool_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="21">
+      <node id="18">
         <label>timer.hpp</label>
         <link refid="timer_8hpp"/>
-        <childnode refid="18" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -219,7 +217,7 @@
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
@@ -313,10 +311,10 @@
       <node id="24">
         <label>http_router.hpp</label>
         <link refid="http__router_8hpp"/>
-        <childnode refid="20" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="20">
+      <node id="21">
         <label>http_server.hpp</label>
         <link refid="http__server_8hpp"/>
         <childnode refid="3" relation="include">
@@ -325,7 +323,7 @@
       <node id="35">
         <label>websocket.hpp</label>
         <link refid="websocket_8hpp"/>
-        <childnode refid="20" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
       <node id="12">
@@ -340,10 +338,10 @@
         <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="19">
+      <node id="20">
         <label>tcp_server.hpp</label>
         <link refid="tcp__server_8hpp"/>
-        <childnode refid="20" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -425,7 +423,7 @@
 <codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>F&gt;</highlight></codeline>
 <codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">__manager_base<sp/>{</highlight></codeline>
 <codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>stored_<sp/>=<sp/><ref refid="group___type_special_member_function_checks_1ga2ffb745d5afd8983e52ed4e6346bc52e" kindref="member">is_location_invariant_v&lt;F&gt;</ref><sp/>&amp;&amp;<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(F)<sp/>&lt;=<sp/>max_size_<sp/>&amp;&amp;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>stored_<sp/>=<sp/><ref refid="group___type_special_member_function_checks_1ga82e20db97f2b96c9c8a27da926608498" kindref="member">is_location_invariant_v&lt;F&gt;</ref><sp/>&amp;&amp;<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(F)<sp/>&lt;=<sp/>max_size_<sp/>&amp;&amp;</highlight></codeline>
 <codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">alignof</highlight><highlight class="normal">(F)<sp/>&lt;=<sp/>max_align_<sp/>&amp;&amp;<sp/>max_align_<sp/>%<sp/></highlight><highlight class="keyword">alignof</highlight><highlight class="normal">(F)<sp/>==<sp/>0;</highlight></codeline>
 <codeline lineno="118"><highlight class="normal"></highlight></codeline>
 <codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
@@ -436,7 +434,7 @@
 <codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">__get_pointer_impl&lt;U,<sp/>true&gt;<sp/>{</highlight></codeline>
 <codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>U*<sp/><ref refid="group___async_1gac14e5033806977e33886d78a20feffaa" kindref="member">get</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>storage_data&amp;<sp/>src)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>U&amp;<sp/>f<sp/>=<sp/>src.access&lt;U&gt;();</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const_cast&lt;</highlight><highlight class="normal">U*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga19657f9185af45f84174ff975bae1fa7" kindref="member">addressof</ref>(f));</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const_cast&lt;</highlight><highlight class="normal">U*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gaf77625b543da90c4cf80a7bb167b3426" kindref="member">addressof</ref>(f));</highlight></codeline>
 <codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="130"><highlight class="normal"></highlight></codeline>
@@ -452,16 +450,16 @@
 <codeline lineno="140"><highlight class="normal"></highlight></codeline>
 <codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Fn&gt;</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>create(storage_data&amp;<sp/><ref refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" kindref="member">data</ref>,<sp/>Fn&amp;&amp;<sp/>f,<sp/><ref refid="group___type_traits_utilities_1gaa4e9c28fa52ab73ef48e5cbed20c66fd" kindref="member">true_type</ref><sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>::new<sp/>(<ref refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" kindref="member">data</ref>.access())<sp/>F(_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward</ref>&lt;Fn&gt;(f));</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>create(storage_data&amp;<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>,<sp/>Fn&amp;&amp;<sp/>f,<sp/><ref refid="group___type_traits_utilities_1gaa4e9c28fa52ab73ef48e5cbed20c66fd" kindref="member">true_type</ref><sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>::new<sp/>(<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.access())<sp/>F(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward</ref>&lt;Fn&gt;(f));</highlight></codeline>
 <codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>template<sp/>&lt;typename<sp/>Fn&gt;</highlight></codeline>
-<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>static<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>create(storage_data&amp;<sp/><ref refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" kindref="member">data</ref>,<sp/>Fn&amp;&amp;<sp/>f,<sp/><ref refid="group___type_traits_utilities_1gad15d3ff5d80b8c8c22e9ce862353ba55" kindref="member">false_type</ref><sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" kindref="member">data</ref>.access&lt;F*&gt;()<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>F(_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;Fn&gt;</ref>(f));</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>static<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>create(storage_data&amp;<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>,<sp/>Fn&amp;&amp;<sp/>f,<sp/><ref refid="group___type_traits_utilities_1gad15d3ff5d80b8c8c22e9ce862353ba55" kindref="member">false_type</ref><sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.access&lt;F*&gt;()<sp/>=<sp/></highlight><highlight class="keyword">new</highlight><highlight class="normal"><sp/>F(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Fn&gt;</ref>(f));</highlight></codeline>
 <codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="150"><highlight class="normal"></highlight></codeline>
-<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group___inplace_memory_function_1ga944697ea9e7569e2eab45433e8109032" kindref="member">destroy</ref>(storage_data&amp;<sp/><ref refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" kindref="member">data</ref>,<sp/><ref refid="group___type_traits_utilities_1gaa4e9c28fa52ab73ef48e5cbed20c66fd" kindref="member">true_type</ref><sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/>{<sp/><ref refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" kindref="member">data</ref>.access&lt;F&gt;().~F();<sp/>}</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group___inplace_memory_function_1ga944697ea9e7569e2eab45433e8109032" kindref="member">destroy</ref>(storage_data&amp;<sp/><ref refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" kindref="member">data</ref>,<sp/><ref refid="group___type_traits_utilities_1gad15d3ff5d80b8c8c22e9ce862353ba55" kindref="member">false_type</ref><sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/>{<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" kindref="member">data</ref>.access&lt;F*&gt;();<sp/>}</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group___inplace_memory_function_1ga0d7b6e1476664ca8b85b124f487ae342" kindref="member">destroy</ref>(storage_data&amp;<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>,<sp/><ref refid="group___type_traits_utilities_1gaa4e9c28fa52ab73ef48e5cbed20c66fd" kindref="member">true_type</ref><sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/>{<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.access&lt;F&gt;().~F();<sp/>}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="group___inplace_memory_function_1ga0d7b6e1476664ca8b85b124f487ae342" kindref="member">destroy</ref>(storage_data&amp;<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>,<sp/><ref refid="group___type_traits_utilities_1gad15d3ff5d80b8c8c22e9ce862353ba55" kindref="member">false_type</ref><sp/></highlight><highlight class="comment">/*unused*/</highlight><highlight class="normal">)<sp/>{<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>.access&lt;F*&gt;();<sp/>}</highlight></codeline>
 <codeline lineno="153"><highlight class="normal"></highlight></codeline>
 <codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>manage(storage_data&amp;<sp/>dest,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>storage_data&amp;<sp/>src,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>FUNCTION_OPERATE<sp/>oper)<sp/>{</highlight></codeline>
@@ -484,8 +482,8 @@
 <codeline lineno="172"><highlight class="normal"></highlight></codeline>
 <codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Fn&gt;</highlight></codeline>
 <codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>init_func(storage_data&amp;<sp/>func,</highlight></codeline>
-<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Fn&amp;&amp;<sp/>f)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(<ref refid="group___type_traits_utilities_1gaf49fb9070ceeed735b3dddc7da0392d7" kindref="member">conjunction_v&lt;storage_, is_nothrow_constructible&lt;F, Fn&gt;</ref>&gt;)<sp/>{</highlight></codeline>
-<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>__manager_base::create(func,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;Fn&gt;</ref>(f),<sp/>storage_());</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Fn&amp;&amp;<sp/>f)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(<ref refid="group___type_traits_utilities_1ga5672914b2f1f9c1c4c50ded53a8db2e3" kindref="member">conjunction_v&lt;storage_, is_nothrow_constructible&lt;F, Fn&gt;</ref>&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>__manager_base::create(func,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Fn&gt;</ref>(f),<sp/>storage_());</highlight></codeline>
 <codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="178"><highlight class="normal"></highlight></codeline>
 <codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Sign&gt;</highlight></codeline>
@@ -519,7 +517,7 @@
 <codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="209"><highlight class="normal"></highlight></codeline>
-<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga57a416f9c003e19a8fae0edc3f0902bb" kindref="member">empty</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>manager_<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga4517135b3756f17e4262d5dccdab754d" kindref="member">empty</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>manager_<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
 <codeline lineno="211"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="212"><highlight class="normal"></highlight></codeline>
 <codeline lineno="221"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Sign,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>F&gt;</highlight></codeline>
@@ -545,13 +543,13 @@
 <codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="243"><highlight class="normal"></highlight></codeline>
-<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>Res<sp/><ref refid="group___invoke_function_1ga529f4a5476de9eb8ed295cb17c719c96" kindref="member">invoke</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>storage_data&amp;<sp/>f,<sp/>Args...<sp/>args)<sp/>{</highlight></codeline>
-<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___invoke_function_1ga2112b65ec3b25190db36ea014f65503e" kindref="member">invoke_r&lt;Res&gt;</ref>(*base_type::get_pointer(f),<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>Res<sp/><ref refid="group___invoke_function_1ga4c75921ddce62eae2409105dc92d6da5" kindref="member">invoke</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>storage_data&amp;<sp/>f,<sp/>Args...<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___invoke_function_1ga86b4ffbbbf4800357dfd1f122028bb14" kindref="member">invoke_r&lt;Res&gt;</ref>(*base_type::get_pointer(f),<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
 <codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="247"><highlight class="normal"></highlight></codeline>
 <codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Fn&gt;</highlight></codeline>
 <codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>nothrow_init()<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___type_traits_utilities_1gaf49fb9070ceeed735b3dddc7da0392d7" kindref="member">conjunction_v&lt;typename base_type::storage_, is_nothrow_constructible&lt;F, Fn&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___type_traits_utilities_1ga5672914b2f1f9c1c4c50ded53a8db2e3" kindref="member">conjunction_v&lt;typename base_type::storage_, is_nothrow_constructible&lt;F, Fn&gt;</ref>&gt;;</highlight></codeline>
 <codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="252"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="253"><highlight class="normal"></highlight></codeline>
@@ -588,7 +586,7 @@
 <codeline lineno="292"><highlight class="normal"></highlight></codeline>
 <codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>F&gt;</highlight></codeline>
 <codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">callable_t&lt;</highlight></codeline>
-<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>F,<sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1ga3f666e0f0741b0a6079f489797b59f2c" kindref="member">is_same_v</ref>&lt;<ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt;F&gt;,<sp/><ref refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab2a4376d93241a43bce9f05fd3400e74" kindref="member">function</ref>&gt;<sp/>&amp;&amp;<sp/><ref refid="group___invoke_function_1gabdbb43df9038587b1f25b2169c305571" kindref="member">is_invocable_r_v&lt;Res, decay_t&lt;F&gt;</ref>&amp;,<sp/>Args...&gt;&gt;&gt;</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>F,<sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" kindref="member">is_same_v</ref>&lt;<ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt;F&gt;,<sp/><ref refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab2a4376d93241a43bce9f05fd3400e74" kindref="member">function</ref>&gt;<sp/>&amp;&amp;<sp/><ref refid="group___invoke_function_1gae645fe64a93d7a5c0bf8e211d495afe2" kindref="member">is_invocable_r_v&lt;Res, decay_t&lt;F&gt;</ref>&amp;,<sp/>Args...&gt;&gt;&gt;</highlight></codeline>
 <codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/>:<sp/><ref refid="group___type_traits_utilities_1gaa4e9c28fa52ab73ef48e5cbed20c66fd" kindref="member">true_type</ref><sp/>{};</highlight></codeline>
 <codeline lineno="297"><highlight class="normal"></highlight></codeline>
 <codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>F&gt;</highlight></codeline>
@@ -636,12 +634,12 @@
 <codeline lineno="357"><highlight class="normal"><sp/><sp/><sp/><sp/>template<sp/>&lt;typename<sp/>F,<sp/>enable_if_t&lt;callable_t&lt;F&gt;::value,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
 <codeline lineno="358" refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a30ca0f61d665ad17ae8514657e9c853f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a30ca0f61d665ad17ae8514657e9c853f" kindref="member">function</ref>(F&amp;&amp;<sp/>callable)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(handler_t&lt;F&gt;::template<sp/>nothrow_init&lt;F&gt;())<sp/>:</highlight></codeline>
 <codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/>__function_base()<sp/>{</highlight></codeline>
-<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___type_special_member_function_checks_1ga27b6602d2b9da1cb2daf37f7c15f9bf2" kindref="member">is_copy_constructible_v&lt;decay_t&lt;F&gt;</ref>&gt;<sp/>&amp;&amp;<sp/><ref refid="group___type_special_member_function_checks_1gaa82283ddef45057333aca64ba0787874" kindref="member">is_constructible_v&lt;decay_t&lt;F&gt;</ref>,<sp/>F&gt;,</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___type_special_member_function_checks_1ga03f5da2852be4424089f4235ef44dec2" kindref="member">is_copy_constructible_v&lt;decay_t&lt;F&gt;</ref>&gt;<sp/>&amp;&amp;<sp/><ref refid="group___type_special_member_function_checks_1ga123009e89543c37bab698abc5f4221a0" kindref="member">is_constructible_v&lt;decay_t&lt;F&gt;</ref>,<sp/>F&gt;,</highlight></codeline>
 <codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;target<sp/>of<sp/>function<sp/>must<sp/>be<sp/>constructible&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="362"><highlight class="normal"></highlight></codeline>
 <codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">handler<sp/>=<sp/>handler_t&lt;F&gt;;</highlight></codeline>
 <codeline lineno="364"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(handler::not_empty_function(callable))<sp/>{</highlight></codeline>
-<codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>handler::init_func(func_,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;F&gt;</ref>(callable));</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>handler::init_func(func_,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;F&gt;</ref>(callable));</highlight></codeline>
 <codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>invoker_<sp/>=<sp/>&amp;handler::invoke;</highlight></codeline>
 <codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>manager_<sp/>=<sp/>&amp;handler::manage;</highlight></codeline>
 <codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -668,7 +666,7 @@
 <codeline lineno="404"><highlight class="normal"></highlight></codeline>
 <codeline lineno="411"><highlight class="normal"><sp/><sp/><sp/><sp/>template<sp/>&lt;typename<sp/>F,<sp/>enable_if_t&lt;callable_t&lt;F&gt;::value,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
 <codeline lineno="412" refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a185164751d1e41fb160dc6a9f7759045" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab2a4376d93241a43bce9f05fd3400e74" kindref="member">function</ref>&amp;<sp/><ref refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a185164751d1e41fb160dc6a9f7759045" kindref="member">operator=</ref>(F&amp;&amp;<sp/>callable)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(handler_t&lt;F&gt;::template<sp/>nothrow_init&lt;F&gt;())<sp/>{</highlight></codeline>
-<codeline lineno="413"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab2a4376d93241a43bce9f05fd3400e74" kindref="member">function</ref>(_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;F&gt;</ref>(callable)).swap(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="413"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab2a4376d93241a43bce9f05fd3400e74" kindref="member">function</ref>(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;F&gt;</ref>(callable)).swap(*</highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="414"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="415"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="416"><highlight class="normal"></highlight></codeline>
@@ -684,16 +682,16 @@
 <codeline lineno="436"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(invoker_,<sp/>other.invoker_);</highlight></codeline>
 <codeline lineno="437"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="438"><highlight class="normal"></highlight></codeline>
-<codeline lineno="443" refid="classfunction_3_01_res_07_args_8_8_8_08_4_1abdac020efb6e509d72cb4cc1df3a9e79" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!<ref refid="group___type_erasure_functions_1ga57a416f9c003e19a8fae0edc3f0902bb" kindref="member">empty</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="443" refid="classfunction_3_01_res_07_args_8_8_8_08_4_1abdac020efb6e509d72cb4cc1df3a9e79" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>!<ref refid="group___type_erasure_functions_1ga4517135b3756f17e4262d5dccdab754d" kindref="member">empty</ref>();<sp/>}</highlight></codeline>
 <codeline lineno="444"><highlight class="normal"></highlight></codeline>
 <codeline lineno="451" refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab05cff3a24c666c2bf8eaa12155dff28" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>Res<sp/><ref refid="classfunction_3_01_res_07_args_8_8_8_08_4_1ab05cff3a24c666c2bf8eaa12155dff28" kindref="member">operator()</ref>(Args...<sp/>args)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="452"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1ga57a416f9c003e19a8fae0edc3f0902bb" kindref="member">empty</ref>())<sp/>{</highlight></codeline>
+<codeline lineno="452"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___type_erasure_functions_1ga4517135b3756f17e4262d5dccdab754d" kindref="member">empty</ref>())<sp/>{</highlight></codeline>
 <codeline lineno="453"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_THROW_EXCEPTION(<ref refid="structmemory__exception" kindref="compound">memory_exception</ref>(</highlight><highlight class="stringliteral">&quot;functional<sp/>pointing<sp/>to<sp/>null.&quot;</highlight><highlight class="normal">));</highlight></codeline>
 <codeline lineno="454"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="455"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>invoker_(func_,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1ga48f94c9d04990c7a695f4fc338eba1f8" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
+<codeline lineno="455"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>invoker_(func_,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
 <codeline lineno="456"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="457"><highlight class="normal"></highlight></codeline>
-<codeline lineno="462" refid="classfunction_3_01_res_07_args_8_8_8_08_4_1add1fb2ba776265e08571d0d399904af6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::type_info&amp;<sp/><ref refid="classfunction_3_01_res_07_args_8_8_8_08_4_1add1fb2ba776265e08571d0d399904af6" kindref="member">target_type</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="462" refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a1585514a97d2ccd8e325a90f57b91781" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::type_info&amp;<sp/><ref refid="classfunction_3_01_res_07_args_8_8_8_08_4_1a1585514a97d2ccd8e325a90f57b91781" kindref="member">target_type</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
 <codeline lineno="463"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(manager_)<sp/>{</highlight></codeline>
 <codeline lineno="464"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inner::storage_data<sp/>result{};</highlight></codeline>
 <codeline lineno="465"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>manager_(result,<sp/>func_,<sp/>inner::FUNCTION_OPERATE::GET_TYPE_INFO);</highlight></codeline>

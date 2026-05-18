@@ -109,26 +109,29 @@ $(function(){initNavTree('group___merge_algorithms.html','',''); });
 <tr class="memitem:ga91839cd96c2e631f63fabfb72bd70482" id="r_ga91839cd96c2e631f63fabfb72bd70482"><td class="memTemplParams" colspan="2">template&lt;typename Iterator1, typename Iterator2, typename Iterator3&gt; </td></tr>
 <tr class="memitem:ga91839cd96c2e631f63fabfb72bd70482 template"><td class="memItemLeft">constexpr Iterator3&#160;</td><td class="memItemRight"><a class="el" href="#ga91839cd96c2e631f63fabfb72bd70482">merge</a> (Iterator1 first1, Iterator1 last1, Iterator2 first2, Iterator2 last2, Iterator3 result)</td></tr>
 <tr class="memdesc:ga91839cd96c2e631f63fabfb72bd70482"><td class="mdescLeft">&#160;</td><td class="mdescRight">合并两个已排序序列  <br /></td></tr>
-<tr class="memitem:ga55d7862a1ac8f26c6d17ad4d9e12489d" id="r_ga55d7862a1ac8f26c6d17ad4d9e12489d"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare&gt; </td></tr>
-<tr class="memitem:ga55d7862a1ac8f26c6d17ad4d9e12489d template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ga55d7862a1ac8f26c6d17ad4d9e12489d">inplace_merge</a> (Iterator first, Iterator middle, Iterator last, Compare comp)</td></tr>
-<tr class="memdesc:ga55d7862a1ac8f26c6d17ad4d9e12489d"><td class="mdescLeft">&#160;</td><td class="mdescRight">原地合并两个已排序的连续范围  <br /></td></tr>
-<tr class="memitem:gab19c5ed5eb001e8a69501fa739605fd0" id="r_gab19c5ed5eb001e8a69501fa739605fd0"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
-<tr class="memitem:gab19c5ed5eb001e8a69501fa739605fd0 template"><td class="memItemLeft">NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#gab19c5ed5eb001e8a69501fa739605fd0">inplace_merge</a> (Iterator first, Iterator middle, Iterator last)</td></tr>
-<tr class="memdesc:gab19c5ed5eb001e8a69501fa739605fd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">原地合并两个已排序的连续范围  <br /></td></tr>
+<tr class="memitem:ga6715ef726249eda60e6460a96678138f" id="r_ga6715ef726249eda60e6460a96678138f"><td class="memTemplParams" colspan="2">template&lt;typename Iterator, typename Compare&gt; </td></tr>
+<tr class="memitem:ga6715ef726249eda60e6460a96678138f template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#ga6715ef726249eda60e6460a96678138f">inplace_merge</a> (Iterator first, Iterator middle, Iterator last, Compare comp)</td></tr>
+<tr class="memdesc:ga6715ef726249eda60e6460a96678138f"><td class="mdescLeft">&#160;</td><td class="mdescRight">原地合并两个已排序的连续范围  <br /></td></tr>
+<tr class="memitem:gaee0dcfc14e269a86ad7ffaa635970ef1" id="r_gaee0dcfc14e269a86ad7ffaa635970ef1"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:gaee0dcfc14e269a86ad7ffaa635970ef1 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#gaee0dcfc14e269a86ad7ffaa635970ef1">inplace_merge</a> (Iterator first, Iterator middle, Iterator last)</td></tr>
+<tr class="memdesc:gaee0dcfc14e269a86ad7ffaa635970ef1"><td class="mdescLeft">&#160;</td><td class="mdescRight">原地合并两个已排序的连续范围  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>合并算法的实现 </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="gab19c5ed5eb001e8a69501fa739605fd0" name="gab19c5ed5eb001e8a69501fa739605fd0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab19c5ed5eb001e8a69501fa739605fd0">&#9670;&#160;</a></span>inplace_merge() <span class="overload">[1/2]</span></h2>
+<a id="gaee0dcfc14e269a86ad7ffaa635970ef1" name="gaee0dcfc14e269a86ad7ffaa635970ef1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaee0dcfc14e269a86ad7ffaa635970ef1">&#9670;&#160;</a></span>inplace_merge() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 void inplace_merge </td>
+          <td class="memname">void inplace_merge </td>
           <td>(</td>
           <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
         </tr>
@@ -143,6 +146,11 @@ template&lt;typename Iterator&gt; </div>
           <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>原地合并两个已排序的连续范围 </p>
@@ -167,16 +175,19 @@ template&lt;typename Iterator&gt; </div>
 
 </div>
 </div>
-<a id="ga55d7862a1ac8f26c6d17ad4d9e12489d" name="ga55d7862a1ac8f26c6d17ad4d9e12489d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga55d7862a1ac8f26c6d17ad4d9e12489d">&#9670;&#160;</a></span>inplace_merge() <span class="overload">[2/2]</span></h2>
+<a id="ga6715ef726249eda60e6460a96678138f" name="ga6715ef726249eda60e6460a96678138f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6715ef726249eda60e6460a96678138f">&#9670;&#160;</a></span>inplace_merge() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename Iterator, typename Compare&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 void inplace_merge </td>
+          <td class="memname">void inplace_merge </td>
           <td>(</td>
           <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
         </tr>
@@ -196,6 +207,11 @@ template&lt;typename Iterator, typename Compare&gt; </div>
           <td class="paramtype">Compare</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>原地合并两个已排序的连续范围 </p>

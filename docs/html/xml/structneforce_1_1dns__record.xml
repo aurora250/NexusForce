@@ -1,0 +1,345 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1dns__record" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::dns_record</compoundname>
+    <includes refid="dns__message_8hpp" local="no">dns_message.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435" prot="public" static="no" strong="no">
+        <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+        <name>raw</name>
+        <qualifiedname>neforce::dns_record::raw</qualifiedname>
+        <enumvalue id="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a11bd410cd63d9f8323566189cc4af2ee" prot="public">
+          <name>A</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>IPv4地址记录 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a9fd6696cac7c9d4037c2cd61155efc23" prot="public">
+          <name>NS</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+<para>名称服务器记录 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a7777541bc446baafd900e56be271dfde" prot="public">
+          <name>CNAME</name>
+          <initializer>= 5</initializer>
+          <briefdescription>
+<para>规范名称记录 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a556ecbc1c46f94488afd231e78be0695" prot="public">
+          <name>SOA</name>
+          <initializer>= 6</initializer>
+          <briefdescription>
+<para>授权开始记录 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a92d1e6055a192028d9d483d9b30bdb72" prot="public">
+          <name>PTR</name>
+          <initializer>= 12</initializer>
+          <briefdescription>
+<para>指针记录 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a3c664fd85387cbca373c05db3e988d05" prot="public">
+          <name>MX</name>
+          <initializer>= 15</initializer>
+          <briefdescription>
+<para>邮件交换记录 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a9a05a2060cdedb3db6fc2e7b12c78cfe" prot="public">
+          <name>TXT</name>
+          <initializer>= 16</initializer>
+          <briefdescription>
+<para>文本记录 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a1bfb5bacebcce15040018f3ccf5d58e3" prot="public">
+          <name>AAAA</name>
+          <initializer>= 28</initializer>
+          <briefdescription>
+<para>IPv6地址记录 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435aad8480a7b1c42012aa57e8de759a74b0" prot="public">
+          <name>SRV</name>
+          <initializer>= 33</initializer>
+          <briefdescription>
+<para>服务定位记录 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>DNS记录类型枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义常见的DNS记录类型。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="304" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="304" bodyend="314"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structneforce_1_1dns__record_1ac087666e1c452a42a79960c62a88407a" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::dns_record::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <qualifiedname>neforce::dns_record::name</qualifiedname>
+        <briefdescription>
+<para>记录名称 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="316" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="316" bodyend="-1"/>
+        <referencedby refid="structneforce_1_1dns__record_1a8a197b1177604afe54887d7f8aa03ab8" compoundref="dns__message_8hpp" startline="335" endline="340">dns_record</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1dns__record_1a8b8fb17c9fc80622a7005225a7ea867b" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::dns_record::data</definition>
+        <argsstring></argsstring>
+        <name>data</name>
+        <qualifiedname>neforce::dns_record::data</qualifiedname>
+        <briefdescription>
+<para>记录数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="317" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="317" bodyend="-1"/>
+        <referencedby refid="structneforce_1_1dns__record_1a8a197b1177604afe54887d7f8aa03ab8" compoundref="dns__message_8hpp" startline="335" endline="340">dns_record</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1dns__record_1a82660a9363319aaadeec407152f69778" prot="public" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::dns_record::ttl</definition>
+        <argsstring></argsstring>
+        <name>ttl</name>
+        <qualifiedname>neforce::dns_record::ttl</qualifiedname>
+        <briefdescription>
+<para>生存时间（秒） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="318" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="318" bodyend="-1"/>
+        <referencedby refid="structneforce_1_1dns__record_1a8a197b1177604afe54887d7f8aa03ab8" compoundref="dns__message_8hpp" startline="335" endline="340">dns_record</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1dns__record_1a45e5bd9d30fd495a6825cbe5ef163adf" prot="public" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435" kindref="member">raw</ref></type>
+        <definition>raw neforce::dns_record::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>neforce::dns_record::type</qualifiedname>
+        <initializer>{<ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a11bd410cd63d9f8323566189cc4af2ee" kindref="member">raw::A</ref>}</initializer>
+        <briefdescription>
+<para>记录类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="319" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="319" bodyend="319"/>
+        <referencedby refid="structneforce_1_1dns__record_1a8a197b1177604afe54887d7f8aa03ab8" compoundref="dns__message_8hpp" startline="335" endline="340">dns_record</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1dns__record_1a6427278d2a10c4ec19424e0472120aaa" prot="public" static="no" mutable="no">
+        <type><ref refid="group___d_n_s_1gaca51fa6c3023d2af45f863dc03c5b36c" kindref="member">dns_query</ref></type>
+        <definition>dns_query neforce::dns_record::class_type</definition>
+        <argsstring></argsstring>
+        <name>class_type</name>
+        <qualifiedname>neforce::dns_record::class_type</qualifiedname>
+        <briefdescription>
+<para>查询类 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="320" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="320" bodyend="-1"/>
+        <referencedby refid="structneforce_1_1dns__record_1a8a197b1177604afe54887d7f8aa03ab8" compoundref="dns__message_8hpp" startline="335" endline="340">dns_record</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1dns__record_1a8c34354dec050aca18e755d1cf621c46" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::dns_record::dns_record</definition>
+        <argsstring>()=default</argsstring>
+        <name>dns_record</name>
+        <qualifiedname>neforce::dns_record::dns_record</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="325" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1dns__record_1a8a197b1177604afe54887d7f8aa03ab8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::dns_record::dns_record</definition>
+        <argsstring>(string n, const raw t, const dns_query c, const uint32_t ttl_val, string d) noexcept</argsstring>
+        <name>dns_record</name>
+        <qualifiedname>neforce::dns_record::dns_record</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435" kindref="member">raw</ref></type>
+          <declname>t</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___d_n_s_1gaca51fa6c3023d2af45f863dc03c5b36c" kindref="member">dns_query</ref></type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>ttl_val</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>t</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>查询类 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ttl_val</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>生存时间 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>d</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>记录数据 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="335" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="335" bodyend="340"/>
+        <references refid="structneforce_1_1dns__record_1a6427278d2a10c4ec19424e0472120aaa" compoundref="dns__message_8hpp" startline="320">class_type</references>
+        <references refid="structneforce_1_1dns__record_1a8b8fb17c9fc80622a7005225a7ea867b" compoundref="dns__message_8hpp" startline="317">data</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="structneforce_1_1dns__record_1ac087666e1c452a42a79960c62a88407a" compoundref="dns__message_8hpp" startline="316">name</references>
+        <references refid="structneforce_1_1dns__record_1a82660a9363319aaadeec407152f69778" compoundref="dns__message_8hpp" startline="318">ttl</references>
+        <references refid="structneforce_1_1dns__record_1a45e5bd9d30fd495a6825cbe5ef163adf" compoundref="dns__message_8hpp" startline="319" endline="319">type</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>DNS资源记录结构 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示一个DNS资源记录，包含域名、类型、数据、TTL等信息。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::basic_string&lt; char &gt;</label>
+        <link refid="classneforce_1_1basic__string"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::dns_record</label>
+        <link refid="structneforce_1_1dns__record"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>data</edgelabel>
+          <edgelabel>name</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::icommon&lt; T &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="5">
+        <label>neforce::ihashable&lt; T &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="297" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="297" bodyend="341"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a11bd410cd63d9f8323566189cc4af2ee" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>A</name></member>
+      <member refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a1bfb5bacebcce15040018f3ccf5d58e3" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>AAAA</name></member>
+      <member refid="structneforce_1_1dns__record_1a6427278d2a10c4ec19424e0472120aaa" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>class_type</name></member>
+      <member refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a7777541bc446baafd900e56be271dfde" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>CNAME</name></member>
+      <member refid="structneforce_1_1dns__record_1a8b8fb17c9fc80622a7005225a7ea867b" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>data</name></member>
+      <member refid="structneforce_1_1dns__record_1a8c34354dec050aca18e755d1cf621c46" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>dns_record</name></member>
+      <member refid="structneforce_1_1dns__record_1a8a197b1177604afe54887d7f8aa03ab8" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>dns_record</name></member>
+      <member refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a3c664fd85387cbca373c05db3e988d05" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>MX</name></member>
+      <member refid="structneforce_1_1dns__record_1ac087666e1c452a42a79960c62a88407a" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>name</name></member>
+      <member refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a9fd6696cac7c9d4037c2cd61155efc23" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>NS</name></member>
+      <member refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a92d1e6055a192028d9d483d9b30bdb72" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>PTR</name></member>
+      <member refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>raw</name></member>
+      <member refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a556ecbc1c46f94488afd231e78be0695" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>SOA</name></member>
+      <member refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435aad8480a7b1c42012aa57e8de759a74b0" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>SRV</name></member>
+      <member refid="structneforce_1_1dns__record_1a82660a9363319aaadeec407152f69778" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>ttl</name></member>
+      <member refid="structneforce_1_1dns__record_1a03c1de9f39f60c8ee0e065f5d10fd435a9a05a2060cdedb3db6fc2e7b12c78cfe" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>TXT</name></member>
+      <member refid="structneforce_1_1dns__record_1a45e5bd9d30fd495a6825cbe5ef163adf" prot="public" virt="non-virtual"><scope>neforce::dns_record</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

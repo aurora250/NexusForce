@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1idb__kv__result" kind="struct" language="C++" prot="public" abstract="yes">
+    <compoundname>neforce::idb_kv_result</compoundname>
+    <basecompoundref refid="structneforce_1_1idb__result" prot="public" virt="non-virtual">neforce::idb_result</basecompoundref>
+    <derivedcompoundref refid="structneforce_1_1redis__result" prot="public" virt="non-virtual">neforce::redis_result</derivedcompoundref>
+    <includes refid="db__interface_8hpp" local="no">db_interface.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1idb__kv__result_1a75995f0c56f1fb4f298b890da34c9c28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::idb_kv_result::~idb_kv_result</definition>
+        <argsstring>() override=default</argsstring>
+        <name>~idb_kv_result</name>
+        <qualifiedname>neforce::idb_kv_result::~idb_kv_result</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="114" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__kv__result_1a4b0725493190c5dd96fb61a07f033822" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+        <definition>virtual string_view neforce::idb_kv_result::key</definition>
+        <argsstring>() const =0</argsstring>
+        <name>key</name>
+        <qualifiedname>neforce::idb_kv_result::key</qualifiedname>
+        <reimplementedby refid="structneforce_1_1redis__result_1ac7c1f522761461e9a4a7767b42feddca">key</reimplementedby>
+        <briefdescription>
+<para>获取键 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="116" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__kv__result_1ac1873e71d817ec5407d6096bf0d48638" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+        <definition>virtual string_view neforce::idb_kv_result::value</definition>
+        <argsstring>() const =0</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::idb_kv_result::value</qualifiedname>
+        <reimplementedby refid="structneforce_1_1redis__result_1afc58244363690d0018b9deb8415e4116">value</reimplementedby>
+        <briefdescription>
+<para>获取字符串值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="117" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__kv__result_1aea345eb8737566557ca35f7b998c2bb1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool neforce::idb_kv_result::value_bool</definition>
+        <argsstring>() const =0</argsstring>
+        <name>value_bool</name>
+        <qualifiedname>neforce::idb_kv_result::value_bool</qualifiedname>
+        <reimplementedby refid="structneforce_1_1redis__result_1aac134b7ea0d1f2c5165163192cdf7935">value_bool</reimplementedby>
+        <briefdescription>
+<para>获取布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="119" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__kv__result_1abd13b8f301e67c4e1c48451e250a578c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+        <definition>virtual int64_t neforce::idb_kv_result::value_int64</definition>
+        <argsstring>() const =0</argsstring>
+        <name>value_int64</name>
+        <qualifiedname>neforce::idb_kv_result::value_int64</qualifiedname>
+        <reimplementedby refid="structneforce_1_1redis__result_1aaca426d48adf3d1e01bf3f5cbe1e0831">value_int64</reimplementedby>
+        <briefdescription>
+<para>获取64位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="120" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__kv__result_1af17e1094cb8e5067c1106b0b5f4ff973" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>double</type>
+        <definition>virtual double neforce::idb_kv_result::value_double</definition>
+        <argsstring>() const =0</argsstring>
+        <name>value_double</name>
+        <qualifiedname>neforce::idb_kv_result::value_double</qualifiedname>
+        <reimplementedby refid="structneforce_1_1redis__result_1a334d637fbae2c0bb6fbe3168caa91ff7">value_double</reimplementedby>
+        <briefdescription>
+<para>获取浮点值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="121" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__kv__result_1ad0a5f8b2354f418ca8079a9cf74b61cc" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+        <definition>virtual vector&lt; string &gt; neforce::idb_kv_result::value_array</definition>
+        <argsstring>() const =0</argsstring>
+        <name>value_array</name>
+        <qualifiedname>neforce::idb_kv_result::value_array</qualifiedname>
+        <reimplementedby refid="structneforce_1_1redis__result_1afe02922d8b59fbe76791ee2dc48d7d71">value_array</reimplementedby>
+        <briefdescription>
+<para>获取数组值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="122" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1idb__kv__result_1a1f21082e15effdfc156ed65862fdae44" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &gt; &amp;</type>
+        <definition>virtual const vector&lt; pair&lt; string, string &gt; &gt; &amp; neforce::idb_kv_result::value_hash</definition>
+        <argsstring>() const =0</argsstring>
+        <name>value_hash</name>
+        <qualifiedname>neforce::idb_kv_result::value_hash</qualifiedname>
+        <reimplementedby refid="structneforce_1_1redis__result_1acf709381cd1280577f512979b7f5fdac">value_hash</reimplementedby>
+        <briefdescription>
+<para>获取哈希表值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="123" column="27"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>键值存储结果集抽象基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供键值对数据的访问接口。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::idb_kv_result</label>
+        <link refid="structneforce_1_1idb__kv__result"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::idb_result</label>
+        <link refid="structneforce_1_1idb__result"/>
+      </node>
+      <node id="3">
+        <label>neforce::redis_result</label>
+        <link refid="structneforce_1_1redis__result"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::idb_kv_result</label>
+        <link refid="structneforce_1_1idb__kv__result"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::idb_result</label>
+        <link refid="structneforce_1_1idb__result"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="113" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="113" bodyend="124"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1idb__result_1af7a1fe6b1af2018ef7737471858c214c" prot="public" virt="non-virtual"><scope>neforce::idb_kv_result</scope><name>difference_type</name></member>
+      <member refid="structneforce_1_1idb__result_1a0040c4ab65141f26d892682ac4cab61a" prot="public" virt="pure-virtual"><scope>neforce::idb_kv_result</scope><name>empty</name></member>
+      <member refid="structneforce_1_1idb__kv__result_1a4b0725493190c5dd96fb61a07f033822" prot="public" virt="pure-virtual"><scope>neforce::idb_kv_result</scope><name>key</name></member>
+      <member refid="structneforce_1_1idb__result_1a60e0f20f35ec5525768825a37772489e" prot="public" virt="pure-virtual"><scope>neforce::idb_kv_result</scope><name>next</name></member>
+      <member refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" prot="public" virt="non-virtual"><scope>neforce::idb_kv_result</scope><name>size_type</name></member>
+      <member refid="structneforce_1_1idb__kv__result_1ac1873e71d817ec5407d6096bf0d48638" prot="public" virt="pure-virtual"><scope>neforce::idb_kv_result</scope><name>value</name></member>
+      <member refid="structneforce_1_1idb__kv__result_1ad0a5f8b2354f418ca8079a9cf74b61cc" prot="public" virt="pure-virtual"><scope>neforce::idb_kv_result</scope><name>value_array</name></member>
+      <member refid="structneforce_1_1idb__kv__result_1aea345eb8737566557ca35f7b998c2bb1" prot="public" virt="pure-virtual"><scope>neforce::idb_kv_result</scope><name>value_bool</name></member>
+      <member refid="structneforce_1_1idb__kv__result_1af17e1094cb8e5067c1106b0b5f4ff973" prot="public" virt="pure-virtual"><scope>neforce::idb_kv_result</scope><name>value_double</name></member>
+      <member refid="structneforce_1_1idb__kv__result_1a1f21082e15effdfc156ed65862fdae44" prot="public" virt="pure-virtual"><scope>neforce::idb_kv_result</scope><name>value_hash</name></member>
+      <member refid="structneforce_1_1idb__kv__result_1abd13b8f301e67c4e1c48451e250a578c" prot="public" virt="pure-virtual"><scope>neforce::idb_kv_result</scope><name>value_int64</name></member>
+      <member refid="structneforce_1_1idb__kv__result_1a75995f0c56f1fb4f298b890da34c9c28" prot="public" virt="non-virtual"><scope>neforce::idb_kv_result</scope><name>~idb_kv_result</name></member>
+      <member refid="structneforce_1_1idb__result_1af5e886679c216c3b3d063d16d32eb9c7" prot="public" virt="virtual"><scope>neforce::idb_kv_result</scope><name>~idb_result</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

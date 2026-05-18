@@ -1,30 +1,30 @@
 var group___compression =
 [
-    [ "lz4_compressor", "classlz4__compressor.html", [
-      [ "stream_compressor", "classlz4__compressor_1_1stream__compressor.html", [
-        [ "stream_compressor", "classlz4__compressor_1_1stream__compressor.html#a77cba3cbbf298a3eaf68f41e5e713c33", null ],
-        [ "~stream_compressor", "classlz4__compressor_1_1stream__compressor.html#af086522b26e1674aa382b97bbce09b78", null ],
-        [ "stream_compressor", "classlz4__compressor_1_1stream__compressor.html#a770913b0c64bf9e6406163aab8a4f1c1", null ],
-        [ "bytes_input", "classlz4__compressor_1_1stream__compressor.html#a65c2d9d0ed80c66d602abf2096f4ba2a", null ],
-        [ "bytes_output", "classlz4__compressor_1_1stream__compressor.html#a16524f046d10b2ea9e0bfeef50e9d2c7", null ],
-        [ "compress", "classlz4__compressor_1_1stream__compressor.html#a20c1c50ee530254beaedfdf8d3c1d5d7", null ],
-        [ "compress", "classlz4__compressor_1_1stream__compressor.html#a5a6c9e8994a009873efe4a4595a5bb0a", null ],
-        [ "compression_ratio", "classlz4__compressor_1_1stream__compressor.html#a490e6b43cd6a1719341dfdbd1beebb53", null ],
-        [ "finish", "classlz4__compressor_1_1stream__compressor.html#a07eebbc69739632eb865c712032bb7c6", null ],
-        [ "operator=", "classlz4__compressor_1_1stream__compressor.html#aa08a414f6223e1a44bfd067c253e9caf", null ],
-        [ "reset", "classlz4__compressor_1_1stream__compressor.html#aaad07f4eb1d5eddf5868c6b2ec9a0f1f", null ]
+    [ "neforce::lz4_compressor", "classneforce_1_1lz4__compressor.html", [
+      [ "stream_compressor", "classneforce_1_1lz4__compressor_1_1stream__compressor.html", [
+        [ "stream_compressor", "classneforce_1_1lz4__compressor_1_1stream__compressor.html#ad26ab439f448ccc90190cbf8ac88b83f", null ],
+        [ "~stream_compressor", "classneforce_1_1lz4__compressor_1_1stream__compressor.html#a5282bb3c7ea83aa5d13b7c2f22288ba3", null ],
+        [ "stream_compressor", "classneforce_1_1lz4__compressor_1_1stream__compressor.html#a16513e960531c6eed8f291b794f7a72d", null ],
+        [ "bytes_input", "classneforce_1_1lz4__compressor_1_1stream__compressor.html#ab155875450f4c6f11db8eb57b71df0a0", null ],
+        [ "bytes_output", "classneforce_1_1lz4__compressor_1_1stream__compressor.html#a88bf33c59769a8f7d3c185a775e77b4f", null ],
+        [ "compress", "classneforce_1_1lz4__compressor_1_1stream__compressor.html#ac1a60335cc7b2e57b0af526e40115bc1", null ],
+        [ "compress", "classneforce_1_1lz4__compressor_1_1stream__compressor.html#ae00d9e0aa848820acfa484b771a48ef2", null ],
+        [ "compression_ratio", "classneforce_1_1lz4__compressor_1_1stream__compressor.html#ad07889fffa7455d7ddebf9569a2f2943", null ],
+        [ "finish", "classneforce_1_1lz4__compressor_1_1stream__compressor.html#af7aa3fb97d545b4bed41b1b2ab5a029f", null ],
+        [ "operator=", "classneforce_1_1lz4__compressor_1_1stream__compressor.html#ae2f75f5250f0d2f9af8a895d13c1cb5e", null ],
+        [ "reset", "classneforce_1_1lz4__compressor_1_1stream__compressor.html#a4a8e69c8ed6693cd0e852ce59e569387", null ]
       ] ],
-      [ "stream_decompressor", "classlz4__compressor_1_1stream__decompressor.html", [
-        [ "stream_decompressor", "classlz4__compressor_1_1stream__decompressor.html#aa76f9705e1354bc1d89efd03a7049681", null ],
-        [ "~stream_decompressor", "classlz4__compressor_1_1stream__decompressor.html#abf4cbcfe7bbdee1a7298361350b0e527", null ],
-        [ "stream_decompressor", "classlz4__compressor_1_1stream__decompressor.html#a0f16ee301a7a4ab71c8198039a95db26", null ],
-        [ "bytes_input", "classlz4__compressor_1_1stream__decompressor.html#a8c5bf5a1e3e3c880649a50e38b361b62", null ],
-        [ "bytes_output", "classlz4__compressor_1_1stream__decompressor.html#a9954727932abb582e0c4e9a9bd7e5334", null ],
-        [ "decompress", "classlz4__compressor_1_1stream__decompressor.html#a722a1d7c9c85ba09ca02ae3fe195946f", null ],
-        [ "expansion_ratio", "classlz4__compressor_1_1stream__decompressor.html#afbe9ac3003c29cebf88fc9c0c9e2b0c4", null ],
-        [ "finish", "classlz4__compressor_1_1stream__decompressor.html#a3911a8c7829f7e32f37e61e7b230d204", null ],
-        [ "operator=", "classlz4__compressor_1_1stream__decompressor.html#afba0f8579970eecf1222f12a0a4e4a5f", null ],
-        [ "reset", "classlz4__compressor_1_1stream__decompressor.html#aae5282e7fc70e3288c39dbe0a20f6bfc", null ]
+      [ "stream_decompressor", "classneforce_1_1lz4__compressor_1_1stream__decompressor.html", [
+        [ "stream_decompressor", "classneforce_1_1lz4__compressor_1_1stream__decompressor.html#a9a0d18df6bb19188408014fe027956f5", null ],
+        [ "~stream_decompressor", "classneforce_1_1lz4__compressor_1_1stream__decompressor.html#a744e4f0832ffaa99245583d71acd9f0a", null ],
+        [ "stream_decompressor", "classneforce_1_1lz4__compressor_1_1stream__decompressor.html#a0acb7f2a44f36f35f4fee01a9c489f9f", null ],
+        [ "bytes_input", "classneforce_1_1lz4__compressor_1_1stream__decompressor.html#a803933dbef048f4f32cebf6ef65db09b", null ],
+        [ "bytes_output", "classneforce_1_1lz4__compressor_1_1stream__decompressor.html#a84ab8052f0c12053ca3ced48f9c68b71", null ],
+        [ "decompress", "classneforce_1_1lz4__compressor_1_1stream__decompressor.html#aededc724edf110215f616b99de31005b", null ],
+        [ "expansion_ratio", "classneforce_1_1lz4__compressor_1_1stream__decompressor.html#a5ce23020763db63b00a361b9b2c68265", null ],
+        [ "finish", "classneforce_1_1lz4__compressor_1_1stream__decompressor.html#a7f6d9788bf58d79c1f07cfedc6e7b82d", null ],
+        [ "operator=", "classneforce_1_1lz4__compressor_1_1stream__decompressor.html#aec8b0546cc3178f7a0a5d81f2e680673", null ],
+        [ "reset", "classneforce_1_1lz4__compressor_1_1stream__decompressor.html#a6566c4a6a5e4ef322754296979f5ca7e", null ]
       ] ]
     ] ],
     [ "zlib_compressor", "classzlib__compressor.html", [
@@ -32,11 +32,11 @@ var group___compression =
         [ "stream_compressor", "classzlib__compressor_1_1stream__compressor.html#aeed6ccb2b5cc547dea0a3f53fc7d4823", null ],
         [ "~stream_compressor", "classzlib__compressor_1_1stream__compressor.html#ac4f3d9dc19534a863999b715f3d10477", null ],
         [ "stream_compressor", "classzlib__compressor_1_1stream__compressor.html#a693ddacffc2e2c894e6ffbf15528f6a7", null ],
-        [ "bytes_input", "classzlib__compressor_1_1stream__compressor.html#a7422ec78e1d01a78bd542264c57480bd", null ],
-        [ "bytes_output", "classzlib__compressor_1_1stream__compressor.html#a14f5b522db68df19d7ffbd7d4d222534", null ],
+        [ "bytes_input", "classzlib__compressor_1_1stream__compressor.html#a2ebd6ab8e4c4be08794b5b218852e2b6", null ],
+        [ "bytes_output", "classzlib__compressor_1_1stream__compressor.html#a729c279787591a3f0f06c70e5f5726a3", null ],
         [ "compress", "classzlib__compressor_1_1stream__compressor.html#ad76f10cd7d09443fc3873e2c31c84a1f", null ],
         [ "compress", "classzlib__compressor_1_1stream__compressor.html#a6aa30f8478704c52a6565770eaa8a31e", null ],
-        [ "compression_ratio", "classzlib__compressor_1_1stream__compressor.html#aac097325838a3d5a030f9aeadf9e9b5a", null ],
+        [ "compression_ratio", "classzlib__compressor_1_1stream__compressor.html#a86a9f46ce0a39e570f409fe06537a975", null ],
         [ "finish", "classzlib__compressor_1_1stream__compressor.html#a3c9ae650c7c4966c05ee29da212a021c", null ],
         [ "operator=", "classzlib__compressor_1_1stream__compressor.html#ae581cc759c603e5a5f6b1bfed3541948", null ],
         [ "reset", "classzlib__compressor_1_1stream__compressor.html#a4f3592f6b277785d6de048eaec01e5c1", null ]
@@ -45,10 +45,10 @@ var group___compression =
         [ "stream_decompressor", "classzlib__compressor_1_1stream__decompressor.html#a739b1c01acf4453a8648bb71f926a771", null ],
         [ "~stream_decompressor", "classzlib__compressor_1_1stream__decompressor.html#ae3a4bbc66c50a5a6b9c6de03684da888", null ],
         [ "stream_decompressor", "classzlib__compressor_1_1stream__decompressor.html#a65165f16352ba1d319fe438a6f974117", null ],
-        [ "bytes_input", "classzlib__compressor_1_1stream__decompressor.html#a6a807a9ea54ed6365129976b6da3d49e", null ],
-        [ "bytes_output", "classzlib__compressor_1_1stream__decompressor.html#a787a7952c76454ec25c60dd1f8862359", null ],
+        [ "bytes_input", "classzlib__compressor_1_1stream__decompressor.html#a29748087a356acb369935cbe95bf19d2", null ],
+        [ "bytes_output", "classzlib__compressor_1_1stream__decompressor.html#abdc6c6cf9af6b63dc6288bc9f5a8992b", null ],
         [ "decompress", "classzlib__compressor_1_1stream__decompressor.html#a10fe540ea777851030a490cab48a5cf9", null ],
-        [ "expansion_ratio", "classzlib__compressor_1_1stream__decompressor.html#a672f68e76ba20cf0a9fce487b5622ed7", null ],
+        [ "expansion_ratio", "classzlib__compressor_1_1stream__decompressor.html#ae4e4d4858d5954ac287bcdcb43dccdc4", null ],
         [ "finish", "classzlib__compressor_1_1stream__decompressor.html#a204c334f80fbcd2219b7072a899f760f", null ],
         [ "operator=", "classzlib__compressor_1_1stream__decompressor.html#ad079279d28696f435e764e2dd9dea6c5", null ],
         [ "reset", "classzlib__compressor_1_1stream__decompressor.html#ad33909522e889d1c832e14073bb40044", null ]

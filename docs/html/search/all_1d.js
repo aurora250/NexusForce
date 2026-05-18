@@ -18,9 +18,9 @@ var searchData=
   ['yaml_5ftimestamp_15',['yaml_timestamp',['../classyaml__timestamp.html',1,'yaml_timestamp'],['../classyaml__timestamp.html#a52a11468ab8b37bb2bcd148981421944',1,'yaml_timestamp::yaml_timestamp(const string_view v)'],['../classyaml__timestamp.html#ab49df2da197cd29b66db6b23a32abb40',1,'yaml_timestamp::yaml_timestamp(const datetime &amp;dt)']]],
   ['yaml_5fvalue_16',['yaml_value',['../classyaml__value.html',1,'']]],
   ['yaml_5fvalue_2ehpp_17',['yaml_value.hpp',['../yaml__value_8hpp.html',1,'']]],
-  ['year_18',['year',['../classdate.html#a74130178d05c0a806658b4b41f26b046',1,'date::year()'],['../classdatetime.html#a0bd6b28cf4b1de2da99dcea31accbde7',1,'datetime::year()']]],
+  ['year_18',['year',['../classdate.html#a6c2792a6997bb260e9b1e31e6034af64',1,'date::year()'],['../classdatetime.html#a381df26764818d526fbb39e9b4189e7d',1,'datetime::year()']]],
   ['years_19',['years',['../group___duration.html#ga4693bd6c2e63adf45c114988dd30c99b',1,'duration.hpp']]],
   ['yellow_20',['yellow',['../classcolor.html#ad2353a33b810cc78505d265f0718bfdd',1,'color']]],
-  ['yield_21',['yield',['../classvirtual__thread.html#a114a00f38ad37a3ba3bf33979845b35c',1,'virtual_thread::yield()'],['../group___thread.html#gab8ae3d955c7c6a9052597e15e896f96e',1,'yield():&#160;this_thread.hpp']]],
+  ['yield_21',['yield',['../classvirtual__thread.html#a114a00f38ad37a3ba3bf33979845b35c',1,'virtual_thread::yield()'],['../group___thread.html#ga7cad7d448c662d148415d3fef19c947d',1,'yield():&#160;this_thread.hpp']]],
   ['yield_5fvalue_22',['yield_value',['../structgenerator_1_1promise__type.html#a8c82b2d45c73631296c21d01c754b266',1,'generator::promise_type']]]
 ];

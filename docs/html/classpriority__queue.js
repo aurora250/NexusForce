@@ -15,13 +15,13 @@ var classpriority__queue =
     [ "priority_queue", "classpriority__queue.html#aff9eeb7a1f024802bc7fda943f9df1a9", null ],
     [ "priority_queue", "classpriority__queue.html#a7de58168a484c11de440c9fe74db738d", null ],
     [ "emplace", "classpriority__queue.html#a91ca4e01d1e1eade8797e7938a8e6863", null ],
-    [ "empty", "classpriority__queue.html#a357d0616c698612c8fa7ec0571ff10c8", null ],
-    [ "equal_to", "classpriority__queue.html#a1d6ab6b6a4e9bd319dcd515274331867", null ],
-    [ "less_than", "classpriority__queue.html#aefcc89e406b8bdae2ed64409783932c0", null ],
+    [ "empty", "classpriority__queue.html#aa7b9d55cbdc16db00e1376d62d0d8362", null ],
+    [ "equal_to", "classpriority__queue.html#a1cf8dff38e7a72ac96ccbbc76436653b", null ],
+    [ "less_than", "classpriority__queue.html#a6d14e32b10ca0ac72dc4ade341cb05ac", null ],
     [ "pop", "classpriority__queue.html#adffa6172c8d64a3c32516bb16a453e3a", null ],
     [ "push", "classpriority__queue.html#adbbb09cc1cb6271671905f6c05a172f8", null ],
     [ "push", "classpriority__queue.html#aef059fdad8a64085b8132d0512e2faf6", null ],
-    [ "size", "classpriority__queue.html#a48e324d88c53749166efa76ee0892454", null ],
+    [ "size", "classpriority__queue.html#a1859eb68246360bf9a65320cd46e5972", null ],
     [ "swap", "classpriority__queue.html#a1c4626a2521164be8007106c44c4d59a", null ],
-    [ "top", "classpriority__queue.html#a091bc8de6510976c62ba64e4f7b9c0f8", null ]
+    [ "top", "classpriority__queue.html#a23aca453056c2f28e5db16729d6c003b", null ]
 ];

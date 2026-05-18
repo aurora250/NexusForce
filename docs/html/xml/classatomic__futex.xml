@@ -494,8 +494,8 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classatomic__futex_1a50cfc12a191471e9630e01f530091686" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
-        <type></type>
+      <memberdef kind="function" id="classatomic__futex_1aa597317ee5605afe698a9d7098500fbf" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
         <definition>atomic_futex&lt; WaiterBit &gt;::atomic_futex</definition>
         <argsstring>(const uint32_t data)</argsstring>
         <name>atomic_futex</name>
@@ -521,13 +521,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="142" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="142" bodyend="143"/>
-        <references refid="group___type_erasure_functions_1gae37a9f659d89ae7d0be67aced9ef2b93" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="142" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="142" bodyend="143"/>
+        <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
       </memberdef>
-      <memberdef kind="function" id="classatomic__futex_1acce7dac03c1cda97f0395930f73afaba" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
-        <definition>NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE uint32_t atomic_futex&lt; WaiterBit &gt;::load</definition>
-        <argsstring>(const memory_order mo) const</argsstring>
+      <memberdef kind="function" id="classatomic__futex_1a079f25b232c776363dda8f7889d498dd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t atomic_futex&lt; WaiterBit &gt;::load</definition>
+        <argsstring>(const memory_order mo) const noexcept</argsstring>
         <name>load</name>
         <qualifiedname>atomic_futex::load</qualifiedname>
         <param>
@@ -555,15 +555,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="152" column="54" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="152" bodyend="154"/>
-        <referencedby refid="classatomic__futex_1aaa9f1b23aec187e2568d886076d7249c" compoundref="atomic__futex_8hpp" startline="179" endline="185">atomic_futex&lt; WaiterBit &gt;::load_when_equal</referencedby>
-        <referencedby refid="classatomic__futex_1afc4cd5b5e4aa13bfd9e969793c132f9a" compoundref="atomic__futex_8hpp" startline="256" endline="264">atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</referencedby>
-        <referencedby refid="classatomic__futex_1a07ae2b2d3cd0c7e0261434cbbceb19b1" compoundref="atomic__futex_8hpp" startline="237" endline="245">atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</referencedby>
-        <referencedby refid="classatomic__futex_1ad52e9d4567b50bec154abc58b4218874" compoundref="atomic__futex_8hpp" startline="164" endline="170">atomic_futex&lt; WaiterBit &gt;::load_when_not_equal</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="152" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="152" bodyend="154"/>
+        <referencedby refid="classonce__flag_1a6b72113ff3b073878b5fc971d6fe1026" compoundref="call__once_8hpp" startline="69" endline="100">once_flag::call_once</referencedby>
+        <referencedby refid="classatomic__futex_1a5b4768a52a6a17fd2e23b04362b12704" compoundref="atomic__futex_8hpp" startline="179" endline="185">atomic_futex&lt; WaiterBit &gt;::load_when_equal</referencedby>
+        <referencedby refid="classatomic__futex_1a14d87f8c91fabb3f4b36c0e8f7d52cbc" compoundref="atomic__futex_8hpp" startline="256" endline="264">atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</referencedby>
+        <referencedby refid="classatomic__futex_1a7f9e32e9519eef6fd0bfddc785e71ce2" compoundref="atomic__futex_8hpp" startline="237" endline="245">atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</referencedby>
+        <referencedby refid="classatomic__futex_1a9e4ba2f93e5aca965a78596ae2cec20f" compoundref="atomic__futex_8hpp" startline="164" endline="170">atomic_futex&lt; WaiterBit &gt;::load_when_not_equal</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classatomic__futex_1ad52e9d4567b50bec154abc58b4218874" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_ALWAYS_INLINE <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
-        <definition>NEFORCE_ALWAYS_INLINE uint32_t atomic_futex&lt; WaiterBit &gt;::load_when_not_equal</definition>
+      <memberdef kind="function" id="classatomic__futex_1a9e4ba2f93e5aca965a78596ae2cec20f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t atomic_futex&lt; WaiterBit &gt;::load_when_not_equal</definition>
         <argsstring>(const uint32_t value, const memory_order mo)</argsstring>
         <name>load_when_not_equal</name>
         <qualifiedname>atomic_futex::load_when_not_equal</qualifiedname>
@@ -602,12 +603,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="164" column="36" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="164" bodyend="170"/>
-        <references refid="classatomic__futex_1acce7dac03c1cda97f0395930f73afaba" compoundref="atomic__futex_8hpp" startline="152" endline="154">atomic_futex&lt; WaiterBit &gt;::load</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="164" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="164" bodyend="170"/>
+        <references refid="classatomic__futex_1a079f25b232c776363dda8f7889d498dd" compoundref="atomic__futex_8hpp" startline="152" endline="154">atomic_futex&lt; WaiterBit &gt;::load</references>
+        <referencedby refid="classonce__flag_1a6b72113ff3b073878b5fc971d6fe1026" compoundref="call__once_8hpp" startline="69" endline="100">once_flag::call_once</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classatomic__futex_1aaa9f1b23aec187e2568d886076d7249c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_ALWAYS_INLINE void</type>
-        <definition>NEFORCE_ALWAYS_INLINE void atomic_futex&lt; WaiterBit &gt;::load_when_equal</definition>
+      <memberdef kind="function" id="classatomic__futex_1a5b4768a52a6a17fd2e23b04362b12704" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void atomic_futex&lt; WaiterBit &gt;::load_when_equal</definition>
         <argsstring>(const uint32_t value, const memory_order mo)</argsstring>
         <name>load_when_equal</name>
         <qualifiedname>atomic_futex::load_when_equal</qualifiedname>
@@ -644,10 +646,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="179" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="179" bodyend="185"/>
-        <references refid="classatomic__futex_1acce7dac03c1cda97f0395930f73afaba" compoundref="atomic__futex_8hpp" startline="152" endline="154">atomic_futex&lt; WaiterBit &gt;::load</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="179" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="179" bodyend="185"/>
+        <references refid="classatomic__futex_1a079f25b232c776363dda8f7889d498dd" compoundref="atomic__futex_8hpp" startline="152" endline="154">atomic_futex&lt; WaiterBit &gt;::load</references>
       </memberdef>
-      <memberdef kind="function" id="classatomic__futex_1a81d70ce4efcfa781ee605bd938c8220b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classatomic__futex_1aa85254e78d5dd5dbb2984502bade0f65" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Rep</type>
@@ -656,8 +658,8 @@
             <type>typename Period</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE bool</type>
-        <definition>NEFORCE_ALWAYS_INLINE bool atomic_futex&lt; WaiterBit &gt;::load_when_equal_for</definition>
+        <type>bool</type>
+        <definition>bool atomic_futex&lt; WaiterBit &gt;::load_when_equal_for</definition>
         <argsstring>(const uint32_t value, const memory_order mo, const duration&lt; Rep, Period &gt; &amp;rtime)</argsstring>
         <name>load_when_equal_for</name>
         <qualifiedname>atomic_futex::load_when_equal_for</qualifiedname>
@@ -725,12 +727,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="197" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="197" bodyend="201"/>
-        <references refid="group___math_functions_1gaa0653fb095511a5bb2f135a246995fbc" compoundref="math_8hpp" startline="632" endline="656">ceil</references>
-        <references refid="classatomic__futex_1ac33c79141a3d638c6e825b823f07063d" compoundref="atomic__futex_8hpp" startline="215" endline="226">atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="197" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="197" bodyend="201"/>
+        <references refid="group___math_functions_1ga4b9ab0ae93aa724d216a640d96979082" compoundref="math_8hpp" startline="632" endline="656">ceil</references>
+        <references refid="classatomic__futex_1aad3626e00b9ec8eca67c946a549d6008" compoundref="atomic__futex_8hpp" startline="215" endline="226">atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</references>
         <references refid="structsteady__clock_1a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now</references>
       </memberdef>
-      <memberdef kind="function" id="classatomic__futex_1ac33c79141a3d638c6e825b823f07063d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classatomic__futex_1aad3626e00b9ec8eca67c946a549d6008" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Clock</type>
@@ -739,8 +741,8 @@
             <type>typename Dur</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE bool</type>
-        <definition>NEFORCE_ALWAYS_INLINE bool atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</definition>
+        <type>bool</type>
+        <definition>bool atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</definition>
         <argsstring>(const uint32_t value, const memory_order mo, const time_point&lt; Clock, Dur &gt; &amp;atime)</argsstring>
         <name>load_when_equal_until</name>
         <qualifiedname>atomic_futex::load_when_equal_until</qualifiedname>
@@ -810,21 +812,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="215" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="215" bodyend="226"/>
-        <references refid="group___math_functions_1gaa0653fb095511a5bb2f135a246995fbc" compoundref="math_8hpp" startline="632" endline="656">ceil</references>
-        <references refid="classatomic__futex_1ac33c79141a3d638c6e825b823f07063d" compoundref="atomic__futex_8hpp" startline="215" endline="226">atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="215" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="215" bodyend="226"/>
+        <references refid="group___math_functions_1ga4b9ab0ae93aa724d216a640d96979082" compoundref="math_8hpp" startline="632" endline="656">ceil</references>
+        <references refid="classatomic__futex_1aad3626e00b9ec8eca67c946a549d6008" compoundref="atomic__futex_8hpp" startline="215" endline="226">atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</references>
         <references refid="structsteady__clock_1a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now</references>
-        <referencedby refid="classatomic__futex_1a81d70ce4efcfa781ee605bd938c8220b" compoundref="atomic__futex_8hpp" startline="197" endline="201">atomic_futex&lt; WaiterBit &gt;::load_when_equal_for</referencedby>
-        <referencedby refid="classatomic__futex_1ac33c79141a3d638c6e825b823f07063d" compoundref="atomic__futex_8hpp" startline="215" endline="226">atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</referencedby>
+        <referencedby refid="classatomic__futex_1aa85254e78d5dd5dbb2984502bade0f65" compoundref="atomic__futex_8hpp" startline="197" endline="201">atomic_futex&lt; WaiterBit &gt;::load_when_equal_for</referencedby>
+        <referencedby refid="classatomic__futex_1aad3626e00b9ec8eca67c946a549d6008" compoundref="atomic__futex_8hpp" startline="215" endline="226">atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classatomic__futex_1a07ae2b2d3cd0c7e0261434cbbceb19b1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classatomic__futex_1a7f9e32e9519eef6fd0bfddc785e71ce2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Dur</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE bool</type>
-        <definition>NEFORCE_ALWAYS_INLINE bool atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</definition>
+        <type>bool</type>
+        <definition>bool atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</definition>
         <argsstring>(const uint32_t value, const memory_order mo, const time_point&lt; system_clock, Dur &gt; &amp;atime)</argsstring>
         <name>load_when_equal_until</name>
         <qualifiedname>atomic_futex::load_when_equal_until</qualifiedname>
@@ -884,17 +886,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="237" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="237" bodyend="245"/>
-        <references refid="classatomic__futex_1acce7dac03c1cda97f0395930f73afaba" compoundref="atomic__futex_8hpp" startline="152" endline="154">atomic_futex&lt; WaiterBit &gt;::load</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="237" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="237" bodyend="245"/>
+        <references refid="classatomic__futex_1a079f25b232c776363dda8f7889d498dd" compoundref="atomic__futex_8hpp" startline="152" endline="154">atomic_futex&lt; WaiterBit &gt;::load</references>
       </memberdef>
-      <memberdef kind="function" id="classatomic__futex_1afc4cd5b5e4aa13bfd9e969793c132f9a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classatomic__futex_1a14d87f8c91fabb3f4b36c0e8f7d52cbc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename Dur</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_ALWAYS_INLINE bool</type>
-        <definition>NEFORCE_ALWAYS_INLINE bool atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</definition>
+        <type>bool</type>
+        <definition>bool atomic_futex&lt; WaiterBit &gt;::load_when_equal_until</definition>
         <argsstring>(const uint32_t value, const memory_order mo, const time_point&lt; steady_clock, Dur &gt; &amp;atime)</argsstring>
         <name>load_when_equal_until</name>
         <qualifiedname>atomic_futex::load_when_equal_until</qualifiedname>
@@ -954,12 +956,83 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="256" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="256" bodyend="264"/>
-        <references refid="classatomic__futex_1acce7dac03c1cda97f0395930f73afaba" compoundref="atomic__futex_8hpp" startline="152" endline="154">atomic_futex&lt; WaiterBit &gt;::load</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="256" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="256" bodyend="264"/>
+        <references refid="classatomic__futex_1a079f25b232c776363dda8f7889d498dd" compoundref="atomic__futex_8hpp" startline="152" endline="154">atomic_futex&lt; WaiterBit &gt;::load</references>
       </memberdef>
-      <memberdef kind="function" id="classatomic__futex_1a5b0321d662a8193b86eda2ababc45e10" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_ALWAYS_INLINE void</type>
-        <definition>NEFORCE_ALWAYS_INLINE void atomic_futex&lt; WaiterBit &gt;::store_notify_all</definition>
+      <memberdef kind="function" id="classatomic__futex_1ae9df7c7321943c5f241114ddfd363000" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool atomic_futex&lt; WaiterBit &gt;::compare_exchange_strong</definition>
+        <argsstring>(uint32_t &amp;expected, const uint32_t desired, const memory_order success, const memory_order failure) noexcept</argsstring>
+        <name>compare_exchange_strong</name>
+        <qualifiedname>atomic_futex::compare_exchange_strong</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> &amp;</type>
+          <declname>expected</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>desired</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref></type>
+          <declname>success</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref></type>
+          <declname>failure</declname>
+        </param>
+        <briefdescription>
+<para>原子比较并交换 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>expected</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>期望值（必须包含 WaiterBit 的可能状态） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>desired</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>success</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>成功时的内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>failure</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>失败时的内存顺序 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否交换成功 </para>
+</simplesect>
+<simplesect kind="note"><para>直接操作内部原子变量，调用者需自行处理 WaiterBit 的语义 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="275" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="275" bodyend="279"/>
+        <references refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a260ca9dd8a4577fc00b7bd5810298076" compoundref="condition__variable_8hpp" startline="34">success</references>
+        <referencedby refid="classonce__flag_1a6b72113ff3b073878b5fc971d6fe1026" compoundref="call__once_8hpp" startline="69" endline="100">once_flag::call_once</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classatomic__futex_1a6eeeb0d8e8305a6e55da92ac8dfa76f7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void atomic_futex&lt; WaiterBit &gt;::store_notify_all</definition>
         <argsstring>(const uint32_t value, const memory_order mo) noexcept</argsstring>
         <name>store_notify_all</name>
         <qualifiedname>atomic_futex::store_notify_all</qualifiedname>
@@ -996,8 +1069,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="273" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="273" bodyend="278"/>
-        <references refid="group___futex_1ga05f2a678e4c7a16ecc3ba93dba798e19">futex_notify</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="288" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="288" bodyend="293"/>
+        <references refid="group___futex_1ga84832c8b1f52bd90a456091e015122ef">futex_notify</references>
+        <referencedby refid="classonce__flag_1a6b72113ff3b073878b5fc971d6fe1026" compoundref="call__once_8hpp" startline="69" endline="100">once_flag::call_once</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1015,23 +1089,24 @@
 </parameterlist>
 基于FUTEX实现的用户态互斥锁， 提供高效的线程同步机制，减少不必要的上下文切换。 </para>
     </detaileddescription>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="37" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="37" bodyend="279"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" line="37" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/atomic_futex.hpp" bodystart="37" bodyend="294"/>
     <listofallmembers>
-      <member refid="classatomic__futex_1a50cfc12a191471e9630e01f530091686" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>atomic_futex</name></member>
+      <member refid="classatomic__futex_1aa597317ee5605afe698a9d7098500fbf" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>atomic_futex</name></member>
+      <member refid="classatomic__futex_1ae9df7c7321943c5f241114ddfd363000" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>compare_exchange_strong</name></member>
       <member refid="classatomic__futex_1a09411b0993d95b80edc6e79cb2e10984" prot="private" virt="non-virtual"><scope>atomic_futex</scope><name>data_</name></member>
-      <member refid="classatomic__futex_1acce7dac03c1cda97f0395930f73afaba" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>load</name></member>
+      <member refid="classatomic__futex_1a079f25b232c776363dda8f7889d498dd" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>load</name></member>
       <member refid="classatomic__futex_1a2b73f1b08b51bc6b5a99c45a534b59cd" prot="private" virt="non-virtual"><scope>atomic_futex</scope><name>load_and_test</name></member>
       <member refid="classatomic__futex_1a16c03cf45a21f22bfa54e753d42d6884" prot="private" virt="non-virtual"><scope>atomic_futex</scope><name>load_and_test_until</name></member>
       <member refid="classatomic__futex_1a7b6f035a827fad8c630395eba00fb2e4" prot="private" virt="non-virtual"><scope>atomic_futex</scope><name>load_and_test_until_impl</name></member>
       <member refid="classatomic__futex_1a8a30cfaad5af87f8639ccd07e90ff1e9" prot="private" virt="non-virtual"><scope>atomic_futex</scope><name>load_and_test_until_impl</name></member>
       <member refid="classatomic__futex_1adb5203af4e79523ae157b52e8001cf3d" prot="private" virt="non-virtual"><scope>atomic_futex</scope><name>load_and_test_until_steady</name></member>
-      <member refid="classatomic__futex_1aaa9f1b23aec187e2568d886076d7249c" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>load_when_equal</name></member>
-      <member refid="classatomic__futex_1a81d70ce4efcfa781ee605bd938c8220b" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>load_when_equal_for</name></member>
-      <member refid="classatomic__futex_1ac33c79141a3d638c6e825b823f07063d" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>load_when_equal_until</name></member>
-      <member refid="classatomic__futex_1a07ae2b2d3cd0c7e0261434cbbceb19b1" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>load_when_equal_until</name></member>
-      <member refid="classatomic__futex_1afc4cd5b5e4aa13bfd9e969793c132f9a" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>load_when_equal_until</name></member>
-      <member refid="classatomic__futex_1ad52e9d4567b50bec154abc58b4218874" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>load_when_not_equal</name></member>
-      <member refid="classatomic__futex_1a5b0321d662a8193b86eda2ababc45e10" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>store_notify_all</name></member>
+      <member refid="classatomic__futex_1a5b4768a52a6a17fd2e23b04362b12704" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>load_when_equal</name></member>
+      <member refid="classatomic__futex_1aa85254e78d5dd5dbb2984502bade0f65" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>load_when_equal_for</name></member>
+      <member refid="classatomic__futex_1aad3626e00b9ec8eca67c946a549d6008" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>load_when_equal_until</name></member>
+      <member refid="classatomic__futex_1a7f9e32e9519eef6fd0bfddc785e71ce2" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>load_when_equal_until</name></member>
+      <member refid="classatomic__futex_1a14d87f8c91fabb3f4b36c0e8f7d52cbc" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>load_when_equal_until</name></member>
+      <member refid="classatomic__futex_1a9e4ba2f93e5aca965a78596ae2cec20f" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>load_when_not_equal</name></member>
+      <member refid="classatomic__futex_1a6eeeb0d8e8305a6e55da92ac8dfa76f7" prot="public" virt="non-virtual"><scope>atomic_futex</scope><name>store_notify_all</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

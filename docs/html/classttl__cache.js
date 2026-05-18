@@ -11,16 +11,16 @@ var classttl__cache =
     ] ],
     [ "ttl_cache", "classttl__cache.html#afd3bb71b760cd402dbe4e789d7eb997a", null ],
     [ "~ttl_cache", "classttl__cache.html#a5fe3c567f6eb5008f9cf90e9a6927414", null ],
-    [ "capacity", "classttl__cache.html#aba7c51f6c589f3a185e52da1c1279527", null ],
+    [ "capacity", "classttl__cache.html#a19bada7def24ef6e9bbe795462091ff4", null ],
     [ "cleanup", "classttl__cache.html#a28c11bd9546c0dd4d5c9940f3004cf06", null ],
     [ "clear", "classttl__cache.html#a88d04a5412e4a952f2024d2f394a8a9c", null ],
-    [ "contains", "classttl__cache.html#af79af10a945a03c93929640c2ea1a3d1", null ],
+    [ "contains", "classttl__cache.html#ac7356a533fba2418a1c03ee873df0361", null ],
     [ "disable_cleanup", "classttl__cache.html#af3f4a1979207756e29404fd7a33dea06", null ],
     [ "enable_cleanup", "classttl__cache.html#a87ea66b78a7feaf76c164f302a253108", null ],
     [ "erase", "classttl__cache.html#af6a7bf7a5a0fb14a5c10073f485c2859", null ],
-    [ "get", "classttl__cache.html#a2c3334d939dc453dc2c246f074be7c4f", null ],
+    [ "get", "classttl__cache.html#ab500f02fa13fcc31e3e4a4af955d9b0f", null ],
     [ "put", "classttl__cache.html#ad3cea11cd1c41ac8cd92ccaaa5e571d2", null ],
     [ "put", "classttl__cache.html#af132dfb27832c5ddc329d050d8220677", null ],
     [ "set_refresh_policy", "classttl__cache.html#aed97efbb6d01c5f2b42860a36a75799f", null ],
-    [ "size", "classttl__cache.html#a0577798291c247135875ca01925dda8b", null ]
+    [ "size", "classttl__cache.html#a45b1e58ca954638bedcc1aaabcdb63e2", null ]
 ];

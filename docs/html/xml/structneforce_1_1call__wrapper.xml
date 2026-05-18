@@ -1,0 +1,187 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1call__wrapper" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::call_wrapper</compoundname>
+    <includes refid="call__wrapper_8hpp" local="no">call_wrapper.hpp</includes>
+    <innerclass refid="structneforce_1_1call__wrapper_1_1result__t" prot="private">neforce::call_wrapper::result_t</innerclass>
+    <innerclass refid="structneforce_1_1call__wrapper_1_1result__t_3_01neforce_1_1tuple_3_01_func_00_01_args_8_8_8_01_4_01_4" prot="private">neforce::call_wrapper::result_t&lt; neforce::tuple&lt; Func, Args... &gt; &gt;</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename...</type>
+        <declname>Types</declname>
+        <defname>Types</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="structneforce_1_1call__wrapper_1a2f3678ffecaccded2a63c133c4d2d5b9" prot="private" static="no">
+        <type>neforce::tuple&lt; <ref refid="group___type_attribute_operations_1ga63500a8dd0f79ce1c721aebb8023ce89" kindref="member">decay_t</ref>&lt; Types &gt;... &gt;</type>
+        <definition>using neforce::call_wrapper&lt; Types &gt;::Tuple = neforce:: tuple&lt;decay_t&lt;Types&gt;...&gt;</definition>
+        <argsstring></argsstring>
+        <name>Tuple</name>
+        <qualifiedname>neforce::call_wrapper::Tuple</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/call_wrapper.hpp" line="37" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/call_wrapper.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structneforce_1_1call__wrapper_1aa31402ce5acf4e132074ac0c40d5617b" prot="private" static="no" mutable="no">
+        <type>Tuple</type>
+        <definition>Tuple neforce::call_wrapper&lt; Types &gt;::tup_</definition>
+        <argsstring></argsstring>
+        <name>tup_</name>
+        <qualifiedname>neforce::call_wrapper::tup_</qualifiedname>
+        <briefdescription>
+<para>存储函数和参数的元组 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/call_wrapper.hpp" line="39" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/call_wrapper.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="structneforce_1_1call__wrapper_1a694fcc184b4c48c35fb21146f6d41667" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>size_t...</type>
+            <declname>Index</declname>
+            <defname>Index</defname>
+          </param>
+        </templateparamlist>
+        <type>result_t&lt; Tuple &gt;::type</type>
+        <definition>result_t&lt; Tuple &gt;::type neforce::call_wrapper&lt; Types &gt;::__invoke</definition>
+        <argsstring>(index_tuple&lt; Index... &gt; idx)</argsstring>
+        <name>__invoke</name>
+        <qualifiedname>neforce::call_wrapper::__invoke</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1index__tuple" kindref="compound">index_tuple</ref>&lt; Index... &gt;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>使用索引序列调用函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引序列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>索引序列对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>函数调用结果</para>
+</simplesect>
+使用编译时索引序列展开元组中的元素，并调用函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/call_wrapper.hpp" line="50" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/call_wrapper.hpp" bodystart="50" bodyend="52"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1call__wrapper_1a21302c2891bed4e5f324ed1cc400e5de" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::call_wrapper&lt; Types &gt;::call_wrapper</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>call_wrapper</name>
+        <qualifiedname>neforce::call_wrapper::call_wrapper</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造函数参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数和参数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将传入的函数和参数完美转发到内部元组中存储。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/call_wrapper.hpp" line="63" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/call_wrapper.hpp" bodystart="63" bodyend="64"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3019" endline="3021">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1call__wrapper_1ab1ae1027f849af199d4cc18c19fe2a58" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>result_t&lt; Tuple &gt;::type</type>
+        <definition>result_t&lt; Tuple &gt;::type neforce::call_wrapper&lt; Types &gt;::operator()</definition>
+        <argsstring>()</argsstring>
+        <name>operator()</name>
+        <qualifiedname>neforce::call_wrapper::operator()</qualifiedname>
+        <briefdescription>
+<para>函数调用运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>函数调用结果</para>
+</simplesect>
+主调用接口。自动生成索引序列并调用invoke方法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/call_wrapper.hpp" line="72" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/call_wrapper.hpp" bodystart="72" bodyend="75"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>延迟调用包装器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>存储元组的参数列表</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+将函数对象和其参数打包到一个元组中，可以延迟执行函数调用。 当调用operator() 时，会展开元组并执行函数调用。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/functional/call_wrapper.hpp" line="29" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/functional/call_wrapper.hpp" bodystart="29" bodyend="76"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1call__wrapper_1a694fcc184b4c48c35fb21146f6d41667" prot="private" virt="non-virtual"><scope>neforce::call_wrapper</scope><name>__invoke</name></member>
+      <member refid="structneforce_1_1call__wrapper_1a21302c2891bed4e5f324ed1cc400e5de" prot="public" virt="non-virtual"><scope>neforce::call_wrapper</scope><name>call_wrapper</name></member>
+      <member refid="structneforce_1_1call__wrapper_1ab1ae1027f849af199d4cc18c19fe2a58" prot="public" virt="non-virtual"><scope>neforce::call_wrapper</scope><name>operator()</name></member>
+      <member refid="structneforce_1_1call__wrapper_1aa31402ce5acf4e132074ac0c40d5617b" prot="private" virt="non-virtual"><scope>neforce::call_wrapper</scope><name>tup_</name></member>
+      <member refid="structneforce_1_1call__wrapper_1a2f3678ffecaccded2a63c133c4d2d5b9" prot="private" virt="non-virtual"><scope>neforce::call_wrapper</scope><name>Tuple</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

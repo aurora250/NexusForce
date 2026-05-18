@@ -165,7 +165,7 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
-      <memberdef kind="function" id="structallocator__traits_1a41f820c3cb39561d5f1a1bde1e172f1e" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(alloc.construct(ptr, 1 forward&lt; Args &gt;(args)...))" virt="non-virtual">
+      <memberdef kind="function" id="structallocator__traits_1a46f4f110449bbb1e5d1c4858ae080107" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(alloc.construct(ptr, _NEFORCE forward&lt; Args &gt;(args)...))" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -176,7 +176,7 @@
             <defname>Args</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_action_check_1gaf9f3b4faef5f884b42c07e0319db190b" kindref="member">has_construct_v</ref>&lt; Alloc, T, Args... &gt; &gt;</type>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_action_check_1gac880d0e8ba15b6c9acca423ed8052a10" kindref="member">has_construct_v</ref>&lt; Alloc, T, Args... &gt; &gt;</type>
         <definition>static constexpr enable_if_t&lt; has_construct_v&lt; Alloc, T, Args... &gt; &gt; allocator_traits&lt; Alloc &gt;::__construct_aux</definition>
         <argsstring>(Alloc &amp;alloc, T *ptr, Args &amp;&amp;... args)</argsstring>
         <name>__construct_aux</name>
@@ -201,7 +201,7 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" line="138" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" bodystart="138" bodyend="141"/>
       </memberdef>
-      <memberdef kind="function" id="structallocator__traits_1aabdd52329821facd481af4c405172fa1" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="1 is_nothrow_constructible&lt; T, Args... &gt;::value" virt="non-virtual">
+      <memberdef kind="function" id="structallocator__traits_1ae7218e460b2ea684e194fdecb58f4de4" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="_NEFORCE is_nothrow_constructible&lt; T, Args... &gt;::value" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -212,7 +212,7 @@
             <defname>Args</defname>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1gaf49fb9070ceeed735b3dddc7da0392d7" kindref="member">conjunction_v</ref>&lt; <ref refid="structnegation" kindref="compound">negation</ref>&lt; <ref refid="structhas__construct" kindref="compound">has_construct</ref>&lt; Alloc, T, Args... &gt; &gt;, <ref refid="structis__constructible" kindref="compound">is_constructible</ref>&lt; T, Args... &gt; &gt; &gt;</type>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_traits_utilities_1ga5672914b2f1f9c1c4c50ded53a8db2e3" kindref="member">conjunction_v</ref>&lt; <ref refid="structnegation" kindref="compound">negation</ref>&lt; <ref refid="structhas__construct" kindref="compound">has_construct</ref>&lt; Alloc, T, Args... &gt; &gt;, <ref refid="structis__constructible" kindref="compound">is_constructible</ref>&lt; T, Args... &gt; &gt; &gt;</type>
         <definition>static constexpr enable_if_t&lt; conjunction_v&lt; negation&lt; has_construct&lt; Alloc, T, Args... &gt; &gt;, is_constructible&lt; T, Args... &gt; &gt; &gt; allocator_traits&lt; Alloc &gt;::__construct_aux</definition>
         <argsstring>(Alloc &amp;, T *ptr, Args &amp;&amp;... args)</argsstring>
         <name>__construct_aux</name>
@@ -354,9 +354,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="structallocator__traits_1a5ebe4a0aa32948630951406b84d18bac" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 pointer</type>
-        <definition>static NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 pointer allocator_traits&lt; Alloc &gt;::allocate</definition>
+      <memberdef kind="function" id="structallocator__traits_1a81f970b02ede75444d97d7b4a4582387" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>pointer</type>
+        <definition>static constexpr pointer allocator_traits&lt; Alloc &gt;::allocate</definition>
         <argsstring>(Alloc &amp;alloc, size_type n)</argsstring>
         <name>allocate</name>
         <qualifiedname>allocator_traits::allocate</qualifiedname>
@@ -395,13 +395,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" line="180" column="58" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" bodystart="180" bodyend="182"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" line="180" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" bodystart="180" bodyend="182"/>
         <referencedby refid="group___allocated_ptr_1ga3f77e08830ea228fc0e451c67c396ba7" compoundref="allocated__ptr_8hpp" startline="111" endline="113">allocate_guarded</referencedby>
         <referencedby refid="group___shared_pointer_1gac6d23654fe34f82cb9ce90e5402945c2" compoundref="shared__ptr_8hpp" startline="899" endline="939">allocate_shared</referencedby>
       </memberdef>
-      <memberdef kind="function" id="structallocator__traits_1a8e88b6aa814b1baade140b0e3d9d7055" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_CONSTEXPR20 void</type>
-        <definition>static NEFORCE_CONSTEXPR20 void allocator_traits&lt; Alloc &gt;::deallocate</definition>
+      <memberdef kind="function" id="structallocator__traits_1a00fd215e023c4d56e9362b8dcb3c64e3" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static constexpr void allocator_traits&lt; Alloc &gt;::deallocate</definition>
         <argsstring>(Alloc &amp;alloc, pointer ptr, size_type n)</argsstring>
         <name>deallocate</name>
         <qualifiedname>allocator_traits::deallocate</qualifiedname>
@@ -450,11 +450,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" line="190" column="37" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" bodystart="190" bodyend="190"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" line="190" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" bodystart="190" bodyend="190"/>
         <referencedby refid="group___shared_pointer_1gac6d23654fe34f82cb9ce90e5402945c2" compoundref="shared__ptr_8hpp" startline="899" endline="939">allocate_shared</referencedby>
         <referencedby refid="structallocated__ptr_1ac8a262eca5f5dbadc293c7f2f84d6c85" compoundref="allocated__ptr_8hpp" startline="75" endline="79">allocated_ptr&lt; Alloc &gt;::~allocated_ptr</referencedby>
       </memberdef>
-      <memberdef kind="function" id="structallocator__traits_1ade3b05fc36d272afd8b20ce7a9524618" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(allocator_traits::__construct_aux(alloc, ptr, 1 forward&lt; Args &gt;(args)...))" virt="non-virtual">
+      <memberdef kind="function" id="structallocator__traits_1a3aa80bdbcd962e8962a8094a9533038a" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(allocator_traits::__construct_aux(alloc, ptr, _NEFORCE forward&lt; Args &gt;(args)...))" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -465,8 +465,8 @@
             <defname>Args</defname>
           </param>
         </templateparamlist>
-        <type>NEFORCE_CONSTEXPR20 void</type>
-        <definition>static NEFORCE_CONSTEXPR20 void allocator_traits&lt; Alloc &gt;::construct</definition>
+        <type>void</type>
+        <definition>static constexpr void allocator_traits&lt; Alloc &gt;::construct</definition>
         <argsstring>(Alloc &amp;alloc, T *ptr, Args &amp;&amp;... args)</argsstring>
         <name>construct</name>
         <qualifiedname>allocator_traits::construct</qualifiedname>
@@ -532,17 +532,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" line="201" column="37" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" bodystart="201" bodyend="204"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" line="201" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" bodystart="201" bodyend="204"/>
         <referencedby refid="group___shared_pointer_1gac6d23654fe34f82cb9ce90e5402945c2" compoundref="shared__ptr_8hpp" startline="899" endline="939">allocate_shared</referencedby>
       </memberdef>
-      <memberdef kind="function" id="structallocator__traits_1ae2e2058c5770990e678430ddbf9544d7" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(allocator_traits::__destroy_aux(alloc, ptr, 0))" virt="non-virtual">
+      <memberdef kind="function" id="structallocator__traits_1a1eab99783f7eb0fea3eec78e00047491" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(allocator_traits::__destroy_aux(alloc, ptr, 0))" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_CONSTEXPR20 void</type>
-        <definition>static NEFORCE_CONSTEXPR20 void allocator_traits&lt; Alloc &gt;::destroy</definition>
+        <type>void</type>
+        <definition>static constexpr void allocator_traits&lt; Alloc &gt;::destroy</definition>
         <argsstring>(Alloc &amp;alloc, T *ptr)</argsstring>
         <name>destroy</name>
         <qualifiedname>allocator_traits::destroy</qualifiedname>
@@ -588,12 +588,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" line="213" column="37" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" bodystart="213" bodyend="216"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" line="213" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" bodystart="213" bodyend="216"/>
         <referencedby refid="group___shared_pointer_1gac6d23654fe34f82cb9ce90e5402945c2" compoundref="shared__ptr_8hpp" startline="899" endline="939">allocate_shared</referencedby>
       </memberdef>
-      <memberdef kind="function" id="structallocator__traits_1a635fe2dfe7e962b7383cc670805ffc24" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(allocator_traits::__max_size_aux(alloc, 0))" virt="non-virtual">
-        <type>NEFORCE_CONSTEXPR20 <ref refid="structallocator__traits_1a28d25351de0ff4f003c00eb4f1b9ad85" kindref="member">size_type</ref></type>
-        <definition>static NEFORCE_CONSTEXPR20 size_type allocator_traits&lt; Alloc &gt;::max_size</definition>
+      <memberdef kind="function" id="structallocator__traits_1aee0e211f1694a35d0f374dc4529b4bae" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(allocator_traits::__max_size_aux(alloc, 0))" virt="non-virtual">
+        <type><ref refid="structallocator__traits_1a28d25351de0ff4f003c00eb4f1b9ad85" kindref="member">size_type</ref></type>
+        <definition>static constexpr size_type allocator_traits&lt; Alloc &gt;::max_size</definition>
         <argsstring>(const Alloc &amp;alloc)</argsstring>
         <name>max_size</name>
         <qualifiedname>allocator_traits::max_size</qualifiedname>
@@ -647,20 +647,20 @@
     </detaileddescription>
     <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" line="82" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/allocator_traits.hpp" bodystart="82" bodyend="227"/>
     <listofallmembers>
-      <member refid="structallocator__traits_1a41f820c3cb39561d5f1a1bde1e172f1e" prot="private" virt="non-virtual"><scope>allocator_traits</scope><name>__construct_aux</name></member>
-      <member refid="structallocator__traits_1aabdd52329821facd481af4c405172fa1" prot="private" virt="non-virtual"><scope>allocator_traits</scope><name>__construct_aux</name></member>
+      <member refid="structallocator__traits_1a46f4f110449bbb1e5d1c4858ae080107" prot="private" virt="non-virtual"><scope>allocator_traits</scope><name>__construct_aux</name></member>
+      <member refid="structallocator__traits_1ae7218e460b2ea684e194fdecb58f4de4" prot="private" virt="non-virtual"><scope>allocator_traits</scope><name>__construct_aux</name></member>
       <member refid="structallocator__traits_1a5e9fa5ceda0cbfeee0ba8d6a07490fc9" prot="private" virt="non-virtual"><scope>allocator_traits</scope><name>__destroy_aux</name></member>
       <member refid="structallocator__traits_1afeab2fe8043542ebbef99435774903d5" prot="private" virt="non-virtual"><scope>allocator_traits</scope><name>__destroy_aux</name></member>
       <member refid="structallocator__traits_1a5c8d580ff34ce793469c277efee8cd48" prot="private" virt="non-virtual"><scope>allocator_traits</scope><name>__max_size_aux</name></member>
       <member refid="structallocator__traits_1a80c927f1f896a2916d200a037ab4bb6b" prot="private" virt="non-virtual"><scope>allocator_traits</scope><name>__max_size_aux</name></member>
-      <member refid="structallocator__traits_1a5ebe4a0aa32948630951406b84d18bac" prot="public" virt="non-virtual"><scope>allocator_traits</scope><name>allocate</name></member>
+      <member refid="structallocator__traits_1a81f970b02ede75444d97d7b4a4582387" prot="public" virt="non-virtual"><scope>allocator_traits</scope><name>allocate</name></member>
       <member refid="structallocator__traits_1ad233b7bcc6f8054d5bdeb4f282af34ae" prot="public" virt="non-virtual"><scope>allocator_traits</scope><name>allocator_type</name></member>
       <member refid="structallocator__traits_1a594ad3bfeb22f813a10ed3dd9431748e" prot="public" virt="non-virtual"><scope>allocator_traits</scope><name>const_pointer</name></member>
-      <member refid="structallocator__traits_1ade3b05fc36d272afd8b20ce7a9524618" prot="public" virt="non-virtual"><scope>allocator_traits</scope><name>construct</name></member>
-      <member refid="structallocator__traits_1a8e88b6aa814b1baade140b0e3d9d7055" prot="public" virt="non-virtual"><scope>allocator_traits</scope><name>deallocate</name></member>
-      <member refid="structallocator__traits_1ae2e2058c5770990e678430ddbf9544d7" prot="public" virt="non-virtual"><scope>allocator_traits</scope><name>destroy</name></member>
+      <member refid="structallocator__traits_1a3aa80bdbcd962e8962a8094a9533038a" prot="public" virt="non-virtual"><scope>allocator_traits</scope><name>construct</name></member>
+      <member refid="structallocator__traits_1a00fd215e023c4d56e9362b8dcb3c64e3" prot="public" virt="non-virtual"><scope>allocator_traits</scope><name>deallocate</name></member>
+      <member refid="structallocator__traits_1a1eab99783f7eb0fea3eec78e00047491" prot="public" virt="non-virtual"><scope>allocator_traits</scope><name>destroy</name></member>
       <member refid="structallocator__traits_1ab06473ee64af5a416dad38d58e624184" prot="public" virt="non-virtual"><scope>allocator_traits</scope><name>difference_type</name></member>
-      <member refid="structallocator__traits_1a635fe2dfe7e962b7383cc670805ffc24" prot="public" virt="non-virtual"><scope>allocator_traits</scope><name>max_size</name></member>
+      <member refid="structallocator__traits_1aee0e211f1694a35d0f374dc4529b4bae" prot="public" virt="non-virtual"><scope>allocator_traits</scope><name>max_size</name></member>
       <member refid="structallocator__traits_1ad9591c3de3b87a50936dbeba465a48c1" prot="public" virt="non-virtual"><scope>allocator_traits</scope><name>pointer</name></member>
       <member refid="structallocator__traits_1ad05bd883cf1eaef17f2051ad80be2b27" prot="public" virt="non-virtual"><scope>allocator_traits</scope><name>rebind_alloc</name></member>
       <member refid="structallocator__traits_1adf1bfd49752245c1acf613983e638504" prot="public" virt="non-virtual"><scope>allocator_traits</scope><name>rebind_traits</name></member>

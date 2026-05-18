@@ -1,7 +1,7 @@
 var structsysinfo_1_1memory__info =
 [
-    [ "available_memory", "structsysinfo_1_1memory__info.html#a4011ac0c3f351714ff2c30dc250483ef", null ],
-    [ "physical_memory_usage", "structsysinfo_1_1memory__info.html#ac441be26de90e27c2403b0e904573a6b", null ],
+    [ "available_memory", "structsysinfo_1_1memory__info.html#a5b09a82d68c13254c114100775f79e7d", null ],
+    [ "physical_memory_usage", "structsysinfo_1_1memory__info.html#a4ebfbcae263f478553c366d62a798204", null ],
     [ "available_page_file", "structsysinfo_1_1memory__info.html#a4c5e4ce8d790deca09645139ea1710ff", null ],
     [ "available_physical", "structsysinfo_1_1memory__info.html#a21a729921aebe562a2cf6ff03b02fe35", null ],
     [ "available_virtual", "structsysinfo_1_1memory__info.html#a1092f6344f1cb17952196fce0f494ca2", null ],

@@ -12,14 +12,14 @@
     <innerclass refid="structis___a_d_l__swappable" prot="public">is_ADL_swappable</innerclass>
     <innerclass refid="structis__trivially__swappable" prot="public">is_trivially_swappable</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___swap_utility_1ga9cd979a13f33937f6e8715d2bbe06502" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___swap_utility_1ga6a08681ad0c17b00662bfd185a081335" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_INLINE17 constexpr bool</type>
-        <definition>NEFORCE_INLINE17 constexpr bool is_swappable_v</definition>
+        <type>bool</type>
+        <definition>bool is_swappable_v</definition>
         <argsstring></argsstring>
         <name>is_swappable_v</name>
         <initializer>= <ref refid="structis__swappable" kindref="compound">is_swappable</ref>&lt;T&gt;::value</initializer>
@@ -30,16 +30,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3916" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3916" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3916" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3916" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="group___swap_utility_1ga9cc217ccd3ddd28edc3ebfd181bba2f3" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___swap_utility_1gaf740a9b650d7a3063e9414c3c50ffdb5" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_INLINE17 constexpr bool</type>
-        <definition>NEFORCE_INLINE17 constexpr bool is_nothrow_swappable_v</definition>
+        <type>bool</type>
+        <definition>bool is_nothrow_swappable_v</definition>
         <argsstring></argsstring>
         <name>is_nothrow_swappable_v</name>
         <initializer>= <ref refid="structis__nothrow__swappable" kindref="compound">is_nothrow_swappable</ref>&lt;T&gt;::value</initializer>
@@ -50,11 +50,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3958" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3958" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3958" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="3958" bodyend="-1"/>
         <referencedby refid="classlist_1aacbe0fc64dc761fbdfdb352f16aab53d" compoundref="list_8hpp" startline="357" endline="360">list&lt; pair&lt; Key, Value &gt; &gt;::list</referencedby>
         <referencedby refid="classlist_1a2b5b7c9b7c38fe95b546a8d0427add7b" compoundref="list_8hpp" startline="367" endline="375">list&lt; pair&lt; Key, Value &gt; &gt;::operator=</referencedby>
         <referencedby refid="classset_1aa88cfdc2731f7a0b0f034cc90c7bd58d" compoundref="container_2set_8hpp" startline="110" endline="114">set&lt; Key, Compare, Alloc &gt;::operator=</referencedby>
-        <referencedby refid="classvector_1a2314904dc463f70a95368fd51705efd3" compoundref="vector_8hpp" startline="506" endline="515">vector&lt; byte_t &gt;::operator=</referencedby>
+        <referencedby refid="classvector_1ac428305220c8324bbd4e6fa1a073365b" compoundref="vector_8hpp" startline="506" endline="515">vector&lt; byte_t &gt;::operator=</referencedby>
         <referencedby refid="classarray_1ac66ab59f1e082b018e1dd19345271215" compoundref="array_8hpp" startline="390" endline="390">array&lt; byte_t, MAC_LEN &gt;::swap</referencedby>
         <referencedby refid="structcompressed__pair_1a04ab8d4b0d667c02ea67b5901fd429b6" compoundref="compressed__pair_8hpp" startline="133" endline="133">compressed_pair&lt; IfEmpty, T, Compressed &gt;::swap</referencedby>
         <referencedby refid="classdeque_1a2bc9e5114adc88054d962dd466a18920" compoundref="deque_8hpp" startline="1411" endline="1420">deque&lt; T, Alloc, BufSize &gt;::swap</referencedby>
@@ -62,7 +62,7 @@
         <referencedby refid="classlist_1a0fd9945f22438820e69f95b2218ce019" compoundref="list_8hpp" startline="792" endline="795">list&lt; pair&lt; Key, Value &gt; &gt;::swap</referencedby>
         <referencedby refid="classmultimap_1afffcff4cad1b5f690b1019ea607a87b4" compoundref="multimap_8hpp" startline="463" endline="463">multimap&lt; Key, T, Compare, Alloc &gt;::swap</referencedby>
         <referencedby refid="classmultiset_1a725d9e1b58995fc9c52b1329e46ed86a" compoundref="multiset_8hpp" startline="433" endline="433">multiset&lt; Key, Compare, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classoptional_1ae336a413c95399231aaa0adaf3d0e4e0" compoundref="optional_8hpp" startline="792" endline="806">optional&lt; T &gt;::swap</referencedby>
+        <referencedby refid="classoptional_1a3f7813ad250922eb4f3b267d25cdc191" compoundref="optional_8hpp" startline="792" endline="806">optional&lt; T &gt;::swap</referencedby>
         <referencedby refid="classpriority__queue_1a1c4626a2521164be8007106c44c4d59a" compoundref="priority__queue_8hpp" startline="240" endline="242">priority_queue&lt; T, Sequence, Compare &gt;::swap</referencedby>
         <referencedby refid="classqueue_1ae27e3606a47a29de4d4c0554fbf03c82" compoundref="queue_8hpp" startline="189" endline="189">queue&lt; T, Sequence &gt;::swap</referencedby>
         <referencedby refid="classrb__tree_1ad580954ee75f0f3484d40a58407061bc" compoundref="rb__tree_8hpp" startline="1560" endline="1566">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::swap</referencedby>
@@ -71,17 +71,17 @@
         <referencedby refid="classunordered__multimap_1a6c4a7ced9a0f2d1e906343a1d6621e3f" compoundref="unordered__multimap_8hpp" startline="460" endline="460">unordered_multimap&lt; Key, T, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
         <referencedby refid="classunordered__multiset_1a672d778caa363664c77c7b2a8ed8c927" compoundref="unordered__multiset_8hpp" startline="411" endline="411">unordered_multiset&lt; Value, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
         <referencedby refid="classunordered__set_1aad14720d10e563bbe9233c16bb23e314" compoundref="unordered__set_8hpp" startline="441" endline="441">unordered_set&lt; Value, HashFcn, EqualKey, Alloc &gt;::swap</referencedby>
-        <referencedby refid="classvector_1a58ed5cc2b747b15398211cb57221c38b" compoundref="vector_8hpp" startline="1193" endline="1201">vector&lt; byte_t &gt;::swap</referencedby>
-        <referencedby refid="classvector_1a7ed0eb9dbae8af1ad1f43fe5fc2d6cdc" compoundref="vector_8hpp" startline="496" endline="498">vector&lt; byte_t &gt;::vector</referencedby>
+        <referencedby refid="classvector_1a1d17cda4f34b49cb366eeaccca3e98c4" compoundref="vector_8hpp" startline="1193" endline="1201">vector&lt; byte_t &gt;::swap</referencedby>
+        <referencedby refid="classvector_1a254f91b260f04d056c06bb0a01cbb915" compoundref="vector_8hpp" startline="496" endline="498">vector&lt; byte_t &gt;::vector</referencedby>
       </memberdef>
-      <memberdef kind="variable" id="group___swap_utility_1ga28d2e06d13a63326c306cb1d564ebf37" prot="public" static="no" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="group___swap_utility_1gadf4c73dc1c3cdd29e6c3efae3cd9d97d" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_INLINE17 constexpr bool</type>
-        <definition>NEFORCE_INLINE17 constexpr bool is_trivially_swappable_v</definition>
+        <type>bool</type>
+        <definition>bool is_trivially_swappable_v</definition>
         <argsstring></argsstring>
         <name>is_trivially_swappable_v</name>
         <initializer>= <ref refid="structis__trivially__swappable" kindref="compound">is_trivially_swappable</ref>&lt;T&gt;::value</initializer>
@@ -92,18 +92,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="4003" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="4003" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="4003" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" bodystart="4003" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___swap_utility_1ga41c0b69a819684ab798eb50897e9a4d3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; T &gt; &amp;&amp;is_nothrow_move_assignable_v&lt; T &gt;" virt="non-virtual">
+      <memberdef kind="function" id="group___swap_utility_1gab5828684676860ed80d0357a0be4b656" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; T &gt; &amp;&amp;is_nothrow_move_assignable_v&lt; T &gt;" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>NEFORCE_CONSTEXPR14 <ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1gaaa19f0c4fddd4e4d26d8d26de4099667" kindref="member">is_move_constructible_v</ref>&lt; T &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1ga84885918abc2e4a305c7626bd1d90dd4" kindref="member">is_move_assignable_v</ref>&lt; T &gt; &gt;</type>
-        <definition>NEFORCE_CONSTEXPR14 enable_if_t&lt; is_move_constructible_v&lt; T &gt; &amp;&amp;is_move_assignable_v&lt; T &gt; &gt; swap</definition>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___type_special_member_function_checks_1ga5181d927278f40a6a97e90944d673c0a" kindref="member">is_move_constructible_v</ref>&lt; T &gt; &amp;&amp;<ref refid="group___type_special_member_function_checks_1gafbf52ca54b0d508bfc6b9bbe916faf18" kindref="member">is_move_assignable_v</ref>&lt; T &gt; &gt;</type>
+        <definition>enable_if_t&lt; is_move_constructible_v&lt; T &gt; &amp;&amp;is_move_assignable_v&lt; T &gt; &gt; swap</definition>
         <argsstring>(T &amp;lhs, T &amp;rhs)</argsstring>
         <name>swap</name>
         <param>
@@ -149,10 +149,10 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3842" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" declline="3842" declcolumn="1"/>
-        <references refid="group___type_special_member_function_checks_1ga4e71583e475165e891f9ea1e02c6b8e4" compoundref="type__traits_8hpp" startline="2914">is_nothrow_move_assignable_v</references>
-        <references refid="group___type_special_member_function_checks_1gac3058b8518087cdea482055e5af4577a" compoundref="type__traits_8hpp" startline="2853">is_nothrow_move_constructible_v</references>
+        <references refid="group___type_special_member_function_checks_1gad26f59ba1b8a873f9d8374f72a4002c4" compoundref="type__traits_8hpp" startline="2914">is_nothrow_move_assignable_v</references>
+        <references refid="group___type_special_member_function_checks_1ga34e3584e54b63fd9e6a35fffd41080bd" compoundref="type__traits_8hpp" startline="2853">is_nothrow_move_constructible_v</references>
       </memberdef>
-      <memberdef kind="function" id="group___swap_utility_1ga789a3d11d27ddc5c4c03734fd0e6938d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_swappable&lt; T &gt;::value" virt="non-virtual">
+      <memberdef kind="function" id="group___swap_utility_1ga6f112005dfeca47e6423a7e332296429" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_swappable&lt; T &gt;::value" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -163,8 +163,8 @@
             <defname>Size</defname>
           </param>
         </templateparamlist>
-        <type>NEFORCE_CONSTEXPR14 <ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structis__swappable" kindref="compound">is_swappable</ref>&lt; T &gt;::value &gt;</type>
-        <definition>NEFORCE_CONSTEXPR14 enable_if_t&lt; is_swappable&lt; T &gt;::value &gt; swap</definition>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="structis__swappable" kindref="compound">is_swappable</ref>&lt; T &gt;::value &gt;</type>
+        <definition>enable_if_t&lt; is_swappable&lt; T &gt;::value &gt; swap</definition>
         <argsstring>(T(&amp;lhs)[Size], T(&amp;rhs)[Size])</argsstring>
         <name>swap</name>
         <param>
@@ -219,7 +219,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3852" column="34" declfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" declline="3852" declcolumn="34"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3852" column="24" declfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" declline="3852" declcolumn="24"/>
         <references refid="structintegral__constant_1acb06165dd4022817b14af1688a5c36f1" compoundref="type__traits_8hpp" startline="37">integral_constant&lt; bool, Value &gt;::value</references>
       </memberdef>
       <memberdef kind="function" id="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -235,14 +235,14 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3858" column="6" declfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" declline="3858" declcolumn="6"/>
-        <referencedby refid="group___shift_algorithms_1ga309693af10e7b124bdab41ac99f7edc3" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</referencedby>
+        <referencedby refid="group___shift_algorithms_1gaf24b9918e7d6e917eb59c4c5f9cd613d" compoundref="shift_8hpp" startline="440" endline="444">iter_swap</referencedby>
         <referencedby refid="classexception__ptr_1a6285f3410fcac0e871ed0b061719ba3b" compoundref="exception__ptr_8hpp" startline="225" endline="232">exception_ptr::operator=</referencedby>
         <referencedby refid="classexception__ptr_1ace99322177809035a72b74ef9fb9411a" compoundref="exception__ptr_8hpp" startline="239" endline="246">exception_ptr::operator=</referencedby>
         <referencedby refid="classpackaged__task_3_01_res_07_args_8_8_8_08_4_1a78e3200ea269e7f873e946b362315ff8" compoundref="packaged__task_8hpp" startline="79" endline="79">packaged_task&lt; Res(Args...)&gt;::packaged_task</referencedby>
-        <referencedby refid="group___r_b_tree_1gad1daa78f4ed31af1fbc76e03d80a749a" compoundref="rb__tree_8hpp" startline="245" endline="416">rb_tree_erase_rebalance</referencedby>
+        <referencedby refid="group___r_b_tree_1ga7d47ad64a5effc47d497d99f76889206" compoundref="rb__tree_8hpp" startline="245" endline="416">rb_tree_erase_rebalance</referencedby>
         <referencedby refid="classlist_1a5bf8d543a917e2ad5f6e541d80f62b36" compoundref="list_8hpp" startline="945" endline="954">list&lt; pair&lt; Key, Value &gt; &gt;::reverse</referencedby>
-        <referencedby refid="classbasic__string_1a2b7d0b9c6308042d8097fd975eab689a" compoundref="basic__string_8hpp" startline="2776" endline="2788">basic_string&lt; char &gt;::swap</referencedby>
-        <referencedby refid="classbitmap_1a9b6059e655d966a84a74b07dd4656e11" compoundref="bitmap_8hpp" startline="1142" endline="1153">bitmap::swap</referencedby>
+        <referencedby refid="classbasic__string_1aeba1ffe60d3b5270cd828983da073c94" compoundref="basic__string_8hpp" startline="2776" endline="2788">basic_string&lt; char &gt;::swap</referencedby>
+        <referencedby refid="classbitmap_1a926acfb2d2c80455dde5f9dcdd38e425" compoundref="bitmap_8hpp" startline="1142" endline="1153">bitmap::swap</referencedby>
         <referencedby refid="structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4_1a54b4845b7902cf40b3fd4720a42385f5" compoundref="compressed__pair_8hpp" startline="278" endline="281">compressed_pair&lt; IfEmpty, T, false &gt;::swap</referencedby>
         <referencedby refid="classdate_1a88d8ae28e2103f1757579793737d32a6" compoundref="datetime_8hpp" startline="440" endline="444">date::swap</referencedby>
         <referencedby refid="classdatetime_1af6f1db1c74c8742963d206a0b75fe652" compoundref="datetime_8hpp" startline="1447" endline="1452">datetime::swap</referencedby>
@@ -252,20 +252,20 @@
         <referencedby refid="classhazard__pointer_1a263dfea498663d2f2b7f8d3688733e26" compoundref="hazard__ptr_8hpp" startline="490" endline="493">hazard_pointer::swap</referencedby>
         <referencedby refid="classlazy__thread_1a8991c84dc19cf83aeabb25c397fe8bbc" compoundref="lazy__thread_8hpp" startline="141" endline="144">lazy_thread::swap</referencedby>
         <referencedby refid="classlist_1a0fd9945f22438820e69f95b2218ce019" compoundref="list_8hpp" startline="792" endline="795">list&lt; pair&lt; Key, Value &gt; &gt;::swap</referencedby>
-        <referencedby refid="classoptional_1ae336a413c95399231aaa0adaf3d0e4e0" compoundref="optional_8hpp" startline="792" endline="806">optional&lt; T &gt;::swap</referencedby>
-        <referencedby refid="structpair_1a8ec807d325b67fc71d77514a13ab2f28" compoundref="pair_8hpp" startline="450" endline="453">pair&lt; const Key, T &gt;::swap</referencedby>
+        <referencedby refid="classoptional_1a3f7813ad250922eb4f3b267d25cdc191" compoundref="optional_8hpp" startline="792" endline="806">optional&lt; T &gt;::swap</referencedby>
+        <referencedby refid="structpair_1acac4d296cf22d094158ff60a298c5dad" compoundref="pair_8hpp" startline="450" endline="453">pair&lt; const Key, T &gt;::swap</referencedby>
         <referencedby refid="classrb__tree_1ad580954ee75f0f3484d40a58407061bc" compoundref="rb__tree_8hpp" startline="1560" endline="1566">rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;::swap</referencedby>
         <referencedby refid="classscoped__thread_1a0a9ff2b109a329646c3854daa70a1ae9" compoundref="scoped__thread_8hpp" startline="129" endline="132">scoped_thread::swap</referencedby>
         <referencedby refid="classshared__ptr_1ace405e1a458c9e2a95c60b3626fcd20d" compoundref="shared__ptr_8hpp" startline="568" endline="574">shared_ptr&lt; periodic_task_state &gt;::swap</referencedby>
         <referencedby refid="classtime_1ae56dab67eeb6f521f84ac4ae04fd3b54" compoundref="datetime_8hpp" startline="715" endline="719">time::swap</referencedby>
-        <referencedby refid="structtuple_3_01_this_00_01_rest_8_8_8_01_4_1aa45da01d1a3e5d68b0226b0fe2a30559" compoundref="tuple_8hpp" startline="648" endline="651">tuple&lt; This, Rest... &gt;::swap</referencedby>
-        <referencedby refid="classvector_1a58ed5cc2b747b15398211cb57221c38b" compoundref="vector_8hpp" startline="1193" endline="1201">vector&lt; byte_t &gt;::swap</referencedby>
+        <referencedby refid="structtuple_3_01_this_00_01_rest_8_8_8_01_4_1aee7d9bbb8111acbfc59ce44395c8616e" compoundref="tuple_8hpp" startline="648" endline="651">tuple&lt; This, Rest... &gt;::swap</referencedby>
+        <referencedby refid="classvector_1a1d17cda4f34b49cb366eeaccca3e98c4" compoundref="vector_8hpp" startline="1193" endline="1201">vector&lt; byte_t &gt;::swap</referencedby>
         <referencedby refid="classweak__ptr_1ab6ce65d0fac958b888c5d52c029efbc2" compoundref="weak__ptr_8hpp" startline="251" endline="257">weak_ptr&lt; T &gt;::swap</referencedby>
-        <referencedby refid="classdatetime_1adc37fc90414221d2752e753cd650377c" compoundref="datetime_8hpp" startline="1402" endline="1410">datetime::try_parse_ISO8601</referencedby>
-        <referencedby refid="classdatetime_1a54f24f3e44c9023e3a050d4fa35e6fe5" compoundref="datetime_8hpp" startline="1360" endline="1368">datetime::try_parse_RFC1123</referencedby>
-        <referencedby refid="classdatetime_1ad529b2a2f53189de41ed302f96a50caa" compoundref="datetime_8hpp" startline="1281" endline="1289">datetime::try_parse_RFC3339</referencedby>
+        <referencedby refid="classdatetime_1a8a28c02a4dc5932470ece7dd7cb15b49" compoundref="datetime_8hpp" startline="1402" endline="1410">datetime::try_parse_ISO8601</referencedby>
+        <referencedby refid="classdatetime_1ad13bfd49652c56eade0cd420b75d5daf" compoundref="datetime_8hpp" startline="1360" endline="1368">datetime::try_parse_RFC1123</referencedby>
+        <referencedby refid="classdatetime_1af166e76ed260e5bdd15ca2d43eb03fed" compoundref="datetime_8hpp" startline="1281" endline="1289">datetime::try_parse_RFC3339</referencedby>
       </memberdef>
-      <memberdef kind="function" id="group___swap_utility_1ga0c5a3fc6dc35e080dc7f316405327e6e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; T &gt; &amp;&amp;is_nothrow_assignable_v&lt; T &amp;, U &gt;" virt="non-virtual">
+      <memberdef kind="function" id="group___swap_utility_1gab81413ba62b31319104a958da78b9bb2" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; T &gt; &amp;&amp;is_nothrow_assignable_v&lt; T &amp;, U &gt;" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
@@ -275,8 +275,8 @@
             <defval>T</defval>
           </param>
         </templateparamlist>
-        <type>NEFORCE_CONSTEXPR14 T</type>
-        <definition>NEFORCE_CONSTEXPR14 T exchange</definition>
+        <type>T</type>
+        <definition>T exchange</definition>
         <argsstring>(T &amp;val, U &amp;&amp;new_val)</argsstring>
         <name>exchange</name>
         <param>
@@ -331,12 +331,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3869" column="23" declfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" declline="3869" declcolumn="23"/>
-        <references refid="group___type_special_member_function_checks_1ga167e1b8821cb4036a356540e940cbe08" compoundref="type__traits_8hpp" startline="2877">is_nothrow_assignable_v</references>
-        <references refid="group___type_special_member_function_checks_1gac3058b8518087cdea482055e5af4577a" compoundref="type__traits_8hpp" startline="2853">is_nothrow_move_constructible_v</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" line="3869" column="13" declfile="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/type_traits.hpp" declline="3869" declcolumn="13"/>
+        <references refid="group___type_special_member_function_checks_1gac0c249b3afd84019ec11170a1e06d267" compoundref="type__traits_8hpp" startline="2877">is_nothrow_assignable_v</references>
+        <references refid="group___type_special_member_function_checks_1ga34e3584e54b63fd9e6a35fffd41080bd" compoundref="type__traits_8hpp" startline="2853">is_nothrow_move_constructible_v</references>
         <referencedby refid="structvirtual__thread__task_1abb78fcc28e8a4c41563a876076d6b9da" compoundref="virtual__thread_8hpp" startline="689" endline="705">virtual_thread_task&lt; T &gt;::operator=</referencedby>
         <referencedby refid="structvirtual__thread__task_3_01void_01_4_1a1c53ba115283cd6a1dfe672c25e1300c" compoundref="virtual__thread_8hpp" startline="415" endline="431">virtual_thread_task&lt; void &gt;::operator=</referencedby>
-        <referencedby refid="classsocket__base_1ada299429136c0d648e5f8bb59635e9db" compoundref="socket__base_8hpp" startline="334" endline="334">socket_base::release</referencedby>
+        <referencedby refid="classsocket__base_1a940df24ee538694021cc7350ba790524" compoundref="socket__base_8hpp" startline="334" endline="334">socket_base::release</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>

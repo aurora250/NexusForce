@@ -1,0 +1,695 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::json_value类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1json__value.html','','classneforce_1_1json__value-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::json_value类 参考<span class="mlabels"><span class="mlabel abstract">abstract</span></span><div class="ingroups"><a class="el" href="group___config_format.html">配置格式操作</a> &raquo; <a class="el" href="group___json_config.html">JSON配置</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>JSON值抽象基类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="json__value_8hpp_source.html">json_value.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 neforce::json_value 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classneforce_1_1json__value__inherit__graph.svg" width="510" height="291"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a2d371a5b996a36a7cfefef569935bf5b" id="r_a2d371a5b996a36a7cfefef569935bf5b"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a2d371a5b996a36a7cfefef569935bf5b">types</a> { <br />
+&#160;&#160;<a class="el" href="#a2d371a5b996a36a7cfefef569935bf5ba0d2e0473887f30604fbf44dd3519dc09">Null</a>
+, <a class="el" href="#a2d371a5b996a36a7cfefef569935bf5ba22163022962170ac324393f1c3f4bfc4">Bool</a>
+, <a class="el" href="#a2d371a5b996a36a7cfefef569935bf5ba96b04ce0d1ae70997ea13a4c8706b3d3">Number</a>
+, <a class="el" href="#a2d371a5b996a36a7cfefef569935bf5ba481bfa747d94c62ae5ef7c2c8fcc7737">String</a>
+, <br />
+&#160;&#160;<a class="el" href="#a2d371a5b996a36a7cfefef569935bf5ba5732fe5562a8b4c6222c4ac63bb9123b">Object</a>
+, <a class="el" href="#a2d371a5b996a36a7cfefef569935bf5baa7e13f35a92853aad62a913b019c567f">Array</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a2d371a5b996a36a7cfefef569935bf5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">JSON值类型枚举  <a href="#a2d371a5b996a36a7cfefef569935bf5b">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a81823b5a309e9557bd3dd03115476735" id="r_a81823b5a309e9557bd3dd03115476735"><td class="memItemLeft"><a id="a81823b5a309e9557bd3dd03115476735" name="a81823b5a309e9557bd3dd03115476735"></a>
+virtual&#160;</td><td class="memItemRight"><b>~json_value</b> ()=default</td></tr>
+<tr class="memdesc:a81823b5a309e9557bd3dd03115476735"><td class="mdescLeft">&#160;</td><td class="mdescRight">虚析构函数 <br /></td></tr>
+<tr class="memitem:a21b62290b69ad4339e7568a1b691a4bf" id="r_a21b62290b69ad4339e7568a1b691a4bf"><td class="memItemLeft">virtual <a class="el" href="#a2d371a5b996a36a7cfefef569935bf5b">types</a>&#160;</td><td class="memItemRight"><a class="el" href="#a21b62290b69ad4339e7568a1b691a4bf">type</a> () const noexcept=0</td></tr>
+<tr class="memdesc:a21b62290b69ad4339e7568a1b691a4bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取JSON值类型  <br /></td></tr>
+<tr class="memitem:aa13e8d932d1401adb426385b7cfa5477" id="r_aa13e8d932d1401adb426385b7cfa5477"><td class="memItemLeft">virtual const <a class="el" href="classneforce_1_1json__null.html">json_null</a> *&#160;</td><td class="memItemRight"><a class="el" href="#aa13e8d932d1401adb426385b7cfa5477">as_null</a> () const noexcept</td></tr>
+<tr class="memdesc:aa13e8d932d1401adb426385b7cfa5477"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为null指针  <br /></td></tr>
+<tr class="memitem:a80f1f1cecd0b1e999067eb8d7f3418cf" id="r_a80f1f1cecd0b1e999067eb8d7f3418cf"><td class="memItemLeft">virtual const <a class="el" href="classneforce_1_1json__bool.html">json_bool</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a80f1f1cecd0b1e999067eb8d7f3418cf">as_bool</a> () const noexcept</td></tr>
+<tr class="memdesc:a80f1f1cecd0b1e999067eb8d7f3418cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为布尔值指针  <br /></td></tr>
+<tr class="memitem:aa825567db2142a0a2a8776c2e4983136" id="r_aa825567db2142a0a2a8776c2e4983136"><td class="memItemLeft">virtual const <a class="el" href="classneforce_1_1json__number.html">json_number</a> *&#160;</td><td class="memItemRight"><a class="el" href="#aa825567db2142a0a2a8776c2e4983136">as_number</a> () const noexcept</td></tr>
+<tr class="memdesc:aa825567db2142a0a2a8776c2e4983136"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为数字指针  <br /></td></tr>
+<tr class="memitem:a5171de0d78b29816faf4da87bb285786" id="r_a5171de0d78b29816faf4da87bb285786"><td class="memItemLeft">virtual const <a class="el" href="classneforce_1_1json__string.html">json_string</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a5171de0d78b29816faf4da87bb285786">as_string</a> () const noexcept</td></tr>
+<tr class="memdesc:a5171de0d78b29816faf4da87bb285786"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为字符串指针  <br /></td></tr>
+<tr class="memitem:a98ec6c685b78021c757e719800280760" id="r_a98ec6c685b78021c757e719800280760"><td class="memItemLeft">virtual const <a class="el" href="classneforce_1_1json__object.html">json_object</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a98ec6c685b78021c757e719800280760">as_object</a> () const noexcept</td></tr>
+<tr class="memdesc:a98ec6c685b78021c757e719800280760"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为对象指针  <br /></td></tr>
+<tr class="memitem:a903dcb64981ff86029ff730c9d2193a8" id="r_a903dcb64981ff86029ff730c9d2193a8"><td class="memItemLeft">virtual const <a class="el" href="classneforce_1_1json__array.html">json_array</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a903dcb64981ff86029ff730c9d2193a8">as_array</a> () const noexcept</td></tr>
+<tr class="memdesc:a903dcb64981ff86029ff730c9d2193a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为数组指针  <br /></td></tr>
+<tr class="memitem:adde3626795f5af96b93489c1a7de29fc" id="r_adde3626795f5af96b93489c1a7de29fc"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#adde3626795f5af96b93489c1a7de29fc">is_null</a> () const noexcept</td></tr>
+<tr class="memdesc:adde3626795f5af96b93489c1a7de29fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断是否为null类型  <br /></td></tr>
+<tr class="memitem:a02962e407ce22918f27c2ecafb2e23b9" id="r_a02962e407ce22918f27c2ecafb2e23b9"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a02962e407ce22918f27c2ecafb2e23b9">is_bool</a> () const noexcept</td></tr>
+<tr class="memdesc:a02962e407ce22918f27c2ecafb2e23b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断是否为布尔类型  <br /></td></tr>
+<tr class="memitem:a9ec03a65b106ed4882b15c9c56f6291c" id="r_a9ec03a65b106ed4882b15c9c56f6291c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a9ec03a65b106ed4882b15c9c56f6291c">is_number</a> () const noexcept</td></tr>
+<tr class="memdesc:a9ec03a65b106ed4882b15c9c56f6291c"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断是否为数字类型  <br /></td></tr>
+<tr class="memitem:a203d40bd4ce96570f83d54ae2d9a11ac" id="r_a203d40bd4ce96570f83d54ae2d9a11ac"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a203d40bd4ce96570f83d54ae2d9a11ac">is_string</a> () const noexcept</td></tr>
+<tr class="memdesc:a203d40bd4ce96570f83d54ae2d9a11ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断是否为字符串类型  <br /></td></tr>
+<tr class="memitem:afb12a40def31f6815d349bb135bda675" id="r_afb12a40def31f6815d349bb135bda675"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#afb12a40def31f6815d349bb135bda675">is_object</a> () const noexcept</td></tr>
+<tr class="memdesc:afb12a40def31f6815d349bb135bda675"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断是否为对象类型  <br /></td></tr>
+<tr class="memitem:ada8ac54444b05c66ca87a8ffe3c42bcd" id="r_ada8ac54444b05c66ca87a8ffe3c42bcd"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ada8ac54444b05c66ca87a8ffe3c42bcd">is_array</a> () const noexcept</td></tr>
+<tr class="memdesc:ada8ac54444b05c66ca87a8ffe3c42bcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断是否为数组类型  <br /></td></tr>
+<tr class="memitem:a16c0d766a3eee03f39b9c56ea63ecc64" id="r_a16c0d766a3eee03f39b9c56ea63ecc64"><td class="memItemLeft"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#a16c0d766a3eee03f39b9c56ea63ecc64">to_string</a> () const</td></tr>
+<tr class="memdesc:a16c0d766a3eee03f39b9c56ea63ecc64"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为紧凑格式字符串  <br /></td></tr>
+<tr class="memitem:ae2c77b7db8c471b9bf7e52633e447cea" id="r_ae2c77b7db8c471b9bf7e52633e447cea"><td class="memItemLeft"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae2c77b7db8c471b9bf7e52633e447cea">to_indent_string</a> () const</td></tr>
+<tr class="memdesc:ae2c77b7db8c471b9bf7e52633e447cea"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为缩进格式字符串  <br /></td></tr>
+<tr class="inherit_header pub_methods_structneforce_1_1istringify"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structneforce_1_1istringify')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="structneforce_1_1istringify.html">neforce::istringify&lt; json_value &gt;</a></td></tr>
+<tr class="memitem:abf57029b9f1cdf55ffaaf90c506a0dc3 inherit pub_methods_structneforce_1_1istringify" id="r_abf57029b9f1cdf55ffaaf90c506a0dc3"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a>&#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1istringify.html#abf57029b9f1cdf55ffaaf90c506a0dc3">to_string</a> () const</td></tr>
+<tr class="memdesc:abf57029b9f1cdf55ffaaf90c506a0dc3 inherit pub_methods_structneforce_1_1istringify"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为字符串  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>JSON值抽象基类 </p>
+<p>提供JSON值的统一接口，支持类型识别和字符串转换。 </p>
+
+<p class="definition">在文件 <a class="el" href="json__value_8hpp_source.html">json_value.hpp</a> 第 <a class="el" href="json__value_8hpp_source.html#l00141">141</a> 行定义.</p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
+<a id="a2d371a5b996a36a7cfefef569935bf5b" name="a2d371a5b996a36a7cfefef569935bf5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d371a5b996a36a7cfefef569935bf5b">&#9670;&#160;</a></span>types</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#a2d371a5b996a36a7cfefef569935bf5b">neforce::json_value::types</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>JSON值类型枚举 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a2d371a5b996a36a7cfefef569935bf5ba0d2e0473887f30604fbf44dd3519dc09" name="a2d371a5b996a36a7cfefef569935bf5ba0d2e0473887f30604fbf44dd3519dc09"></a>Null&#160;</td><td class="fielddoc"><p>null值类型 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2d371a5b996a36a7cfefef569935bf5ba22163022962170ac324393f1c3f4bfc4" name="a2d371a5b996a36a7cfefef569935bf5ba22163022962170ac324393f1c3f4bfc4"></a>Bool&#160;</td><td class="fielddoc"><p>布尔值类型 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2d371a5b996a36a7cfefef569935bf5ba96b04ce0d1ae70997ea13a4c8706b3d3" name="a2d371a5b996a36a7cfefef569935bf5ba96b04ce0d1ae70997ea13a4c8706b3d3"></a>Number&#160;</td><td class="fielddoc"><p>数字类型 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2d371a5b996a36a7cfefef569935bf5ba481bfa747d94c62ae5ef7c2c8fcc7737" name="a2d371a5b996a36a7cfefef569935bf5ba481bfa747d94c62ae5ef7c2c8fcc7737"></a>String&#160;</td><td class="fielddoc"><p>字符串类型 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2d371a5b996a36a7cfefef569935bf5ba5732fe5562a8b4c6222c4ac63bb9123b" name="a2d371a5b996a36a7cfefef569935bf5ba5732fe5562a8b4c6222c4ac63bb9123b"></a>Object&#160;</td><td class="fielddoc"><p>对象类型 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2d371a5b996a36a7cfefef569935bf5baa7e13f35a92853aad62a913b019c567f" name="a2d371a5b996a36a7cfefef569935bf5baa7e13f35a92853aad62a913b019c567f"></a>Array&#160;</td><td class="fielddoc"><p>数组类型 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="json__value_8hpp_source.html">json_value.hpp</a> 第 <a class="el" href="json__value_8hpp_source.html#l00147">147</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a903dcb64981ff86029ff730c9d2193a8" name="a903dcb64981ff86029ff730c9d2193a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a903dcb64981ff86029ff730c9d2193a8">&#9670;&#160;</a></span>as_array()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const <a class="el" href="classneforce_1_1json__array.html">json_array</a> * neforce::json_value::as_array </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>转换为数组指针 </p>
+<dl class="section return"><dt>返回</dt><dd>如果是数组类型返回自身指针，否则返回nullptr </dd></dl>
+
+<p>被 <a class="el" href="classneforce_1_1json__array.html#a0d7aea0c9807595da57e82b5a662a201">neforce::json_array</a> 重载.</p>
+
+<p class="definition">在文件 <a class="el" href="json__value_8hpp_source.html">json_value.hpp</a> 第 <a class="el" href="json__value_8hpp_source.html#l00201">201</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a80f1f1cecd0b1e999067eb8d7f3418cf" name="a80f1f1cecd0b1e999067eb8d7f3418cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80f1f1cecd0b1e999067eb8d7f3418cf">&#9670;&#160;</a></span>as_bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const <a class="el" href="classneforce_1_1json__bool.html">json_bool</a> * neforce::json_value::as_bool </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>转换为布尔值指针 </p>
+<dl class="section return"><dt>返回</dt><dd>如果是布尔类型返回自身指针，否则返回nullptr </dd></dl>
+
+<p>被 <a class="el" href="classneforce_1_1json__bool.html#a6a294e304d442eb44d64f6af1e7e2e49">neforce::json_bool</a> 重载.</p>
+
+<p class="definition">在文件 <a class="el" href="json__value_8hpp_source.html">json_value.hpp</a> 第 <a class="el" href="json__value_8hpp_source.html#l00177">177</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aa13e8d932d1401adb426385b7cfa5477" name="aa13e8d932d1401adb426385b7cfa5477"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa13e8d932d1401adb426385b7cfa5477">&#9670;&#160;</a></span>as_null()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const <a class="el" href="classneforce_1_1json__null.html">json_null</a> * neforce::json_value::as_null </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>转换为null指针 </p>
+<dl class="section return"><dt>返回</dt><dd>如果是null类型返回自身指针，否则返回nullptr </dd></dl>
+
+<p>被 <a class="el" href="classneforce_1_1json__null.html#ac13e36a7f5a270c320f466fb318de503">neforce::json_null</a> 重载.</p>
+
+<p class="definition">在文件 <a class="el" href="json__value_8hpp_source.html">json_value.hpp</a> 第 <a class="el" href="json__value_8hpp_source.html#l00171">171</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="json__value_8hpp_source.html#l00171">as_null()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="json__value_8hpp_source.html#l00171">as_null()</a>.</p>
+
+</div>
+</div>
+<a id="aa825567db2142a0a2a8776c2e4983136" name="aa825567db2142a0a2a8776c2e4983136"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa825567db2142a0a2a8776c2e4983136">&#9670;&#160;</a></span>as_number()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const <a class="el" href="classneforce_1_1json__number.html">json_number</a> * neforce::json_value::as_number </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>转换为数字指针 </p>
+<dl class="section return"><dt>返回</dt><dd>如果是数字类型返回自身指针，否则返回nullptr </dd></dl>
+
+<p>被 <a class="el" href="classneforce_1_1json__number.html#af8c02ac494deacd435716b3c234a09eb">neforce::json_number</a> 重载.</p>
+
+<p class="definition">在文件 <a class="el" href="json__value_8hpp_source.html">json_value.hpp</a> 第 <a class="el" href="json__value_8hpp_source.html#l00183">183</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a98ec6c685b78021c757e719800280760" name="a98ec6c685b78021c757e719800280760"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98ec6c685b78021c757e719800280760">&#9670;&#160;</a></span>as_object()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const <a class="el" href="classneforce_1_1json__object.html">json_object</a> * neforce::json_value::as_object </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>转换为对象指针 </p>
+<dl class="section return"><dt>返回</dt><dd>如果是对象类型返回自身指针，否则返回nullptr </dd></dl>
+
+<p>被 <a class="el" href="classneforce_1_1json__object.html#adb33b53021b4a65249fe0c2533169290">neforce::json_object</a> 重载.</p>
+
+<p class="definition">在文件 <a class="el" href="json__value_8hpp_source.html">json_value.hpp</a> 第 <a class="el" href="json__value_8hpp_source.html#l00195">195</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5171de0d78b29816faf4da87bb285786" name="a5171de0d78b29816faf4da87bb285786"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5171de0d78b29816faf4da87bb285786">&#9670;&#160;</a></span>as_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual const <a class="el" href="classneforce_1_1json__string.html">json_string</a> * neforce::json_value::as_string </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>转换为字符串指针 </p>
+<dl class="section return"><dt>返回</dt><dd>如果是字符串类型返回自身指针，否则返回nullptr </dd></dl>
+
+<p>被 <a class="el" href="classneforce_1_1json__string.html#a41ec730dff5c17938c4f9de18c981eef">neforce::json_string</a> 重载.</p>
+
+<p class="definition">在文件 <a class="el" href="json__value_8hpp_source.html">json_value.hpp</a> 第 <a class="el" href="json__value_8hpp_source.html#l00189">189</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ada8ac54444b05c66ca87a8ffe3c42bcd" name="ada8ac54444b05c66ca87a8ffe3c42bcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada8ac54444b05c66ca87a8ffe3c42bcd">&#9670;&#160;</a></span>is_array()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::json_value::is_array </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>判断是否为数组类型 </p>
+<dl class="section return"><dt>返回</dt><dd>如果是数组类型返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="json__value_8hpp_source.html">json_value.hpp</a> 第 <a class="el" href="json__value_8hpp_source.html#l00237">237</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="json__value_8hpp_source.html#l00153">Array</a> , 以及 <a class="el" href="#a21b62290b69ad4339e7568a1b691a4bf">type()</a>.</p>
+
+</div>
+</div>
+<a id="a02962e407ce22918f27c2ecafb2e23b9" name="a02962e407ce22918f27c2ecafb2e23b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02962e407ce22918f27c2ecafb2e23b9">&#9670;&#160;</a></span>is_bool()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::json_value::is_bool </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>判断是否为布尔类型 </p>
+<dl class="section return"><dt>返回</dt><dd>如果是布尔类型返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="json__value_8hpp_source.html">json_value.hpp</a> 第 <a class="el" href="json__value_8hpp_source.html#l00213">213</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="json__value_8hpp_source.html#l00149">Bool</a> , 以及 <a class="el" href="#a21b62290b69ad4339e7568a1b691a4bf">type()</a>.</p>
+
+</div>
+</div>
+<a id="adde3626795f5af96b93489c1a7de29fc" name="adde3626795f5af96b93489c1a7de29fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adde3626795f5af96b93489c1a7de29fc">&#9670;&#160;</a></span>is_null()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::json_value::is_null </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>判断是否为null类型 </p>
+<dl class="section return"><dt>返回</dt><dd>如果是null类型返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="json__value_8hpp_source.html">json_value.hpp</a> 第 <a class="el" href="json__value_8hpp_source.html#l00207">207</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="json__value_8hpp_source.html#l00148">Null</a> , 以及 <a class="el" href="#a21b62290b69ad4339e7568a1b691a4bf">type()</a>.</p>
+
+</div>
+</div>
+<a id="a9ec03a65b106ed4882b15c9c56f6291c" name="a9ec03a65b106ed4882b15c9c56f6291c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ec03a65b106ed4882b15c9c56f6291c">&#9670;&#160;</a></span>is_number()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::json_value::is_number </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>判断是否为数字类型 </p>
+<dl class="section return"><dt>返回</dt><dd>如果是数字类型返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="json__value_8hpp_source.html">json_value.hpp</a> 第 <a class="el" href="json__value_8hpp_source.html#l00219">219</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="json__value_8hpp_source.html#l00150">Number</a> , 以及 <a class="el" href="#a21b62290b69ad4339e7568a1b691a4bf">type()</a>.</p>
+
+</div>
+</div>
+<a id="afb12a40def31f6815d349bb135bda675" name="afb12a40def31f6815d349bb135bda675"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb12a40def31f6815d349bb135bda675">&#9670;&#160;</a></span>is_object()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::json_value::is_object </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>判断是否为对象类型 </p>
+<dl class="section return"><dt>返回</dt><dd>如果是对象类型返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="json__value_8hpp_source.html">json_value.hpp</a> 第 <a class="el" href="json__value_8hpp_source.html#l00231">231</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="json__value_8hpp_source.html#l00152">Object</a> , 以及 <a class="el" href="#a21b62290b69ad4339e7568a1b691a4bf">type()</a>.</p>
+
+</div>
+</div>
+<a id="a203d40bd4ce96570f83d54ae2d9a11ac" name="a203d40bd4ce96570f83d54ae2d9a11ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a203d40bd4ce96570f83d54ae2d9a11ac">&#9670;&#160;</a></span>is_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::json_value::is_string </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>判断是否为字符串类型 </p>
+<dl class="section return"><dt>返回</dt><dd>如果是字符串类型返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="json__value_8hpp_source.html">json_value.hpp</a> 第 <a class="el" href="json__value_8hpp_source.html#l00225">225</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="json__value_8hpp_source.html#l00151">String</a> , 以及 <a class="el" href="#a21b62290b69ad4339e7568a1b691a4bf">type()</a>.</p>
+
+</div>
+</div>
+<a id="ae2c77b7db8c471b9bf7e52633e447cea" name="ae2c77b7db8c471b9bf7e52633e447cea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2c77b7db8c471b9bf7e52633e447cea">&#9670;&#160;</a></span>to_indent_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> neforce::json_value::to_indent_string </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>转换为缩进格式字符串 </p>
+<dl class="section return"><dt>返回</dt><dd>JSON值的格式化字符串（默认2空格缩进） </dd></dl>
+
+</div>
+</div>
+<a id="a16c0d766a3eee03f39b9c56ea63ecc64" name="a16c0d766a3eee03f39b9c56ea63ecc64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16c0d766a3eee03f39b9c56ea63ecc64">&#9670;&#160;</a></span>to_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga2c7973e279b318f9dca5bbf87ca7705f">string</a> neforce::json_value::to_string </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>转换为紧凑格式字符串 </p>
+<dl class="section return"><dt>返回</dt><dd>JSON值的紧凑格式字符串 </dd></dl>
+
+</div>
+</div>
+<a id="a21b62290b69ad4339e7568a1b691a4bf" name="a21b62290b69ad4339e7568a1b691a4bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21b62290b69ad4339e7568a1b691a4bf">&#9670;&#160;</a></span>type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="#a2d371a5b996a36a7cfefef569935bf5b">types</a> neforce::json_value::type </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取JSON值类型 </p>
+<dl class="section return"><dt>返回</dt><dd>类型枚举值 </dd></dl>
+
+<p>在 <a class="el" href="classneforce_1_1json__array.html#a71d081c73bf3f674709fe4b77f045049">neforce::json_array</a>, <a class="el" href="classneforce_1_1json__bool.html#ac6a10a88facca0150ed6a0dd3c7eb3fa">neforce::json_bool</a>, <a class="el" href="classneforce_1_1json__null.html#a85b7006426378c89c3fbbc794bdcccdc">neforce::json_null</a>, <a class="el" href="classneforce_1_1json__number.html#a26d18b88eb082c73b078d862412563c2">neforce::json_number</a>, <a class="el" href="classneforce_1_1json__object.html#ac6d8b3bdfe65d78042a8ded2781f8de7">neforce::json_object</a> , 以及 <a class="el" href="classneforce_1_1json__string.html#a5ecf1c1c3b9a524e8a9fc858cb3779db">neforce::json_string</a> 内被实现.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="json__value_8hpp_source.html#l00237">is_array()</a>, <a class="el" href="json__value_8hpp_source.html#l00213">is_bool()</a>, <a class="el" href="json__value_8hpp_source.html#l00207">is_null()</a>, <a class="el" href="json__value_8hpp_source.html#l00219">is_number()</a>, <a class="el" href="json__value_8hpp_source.html#l00231">is_object()</a> , 以及 <a class="el" href="json__value_8hpp_source.html#l00225">is_string()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="json__value_8hpp_source.html">json_value.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1json__value.html">json_value</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

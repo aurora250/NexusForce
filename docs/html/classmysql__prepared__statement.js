@@ -11,9 +11,9 @@ var classmysql__prepared__statement =
     [ "bind_param", "classmysql__prepared__statement.html#a9bb5cfcd48dd8b932e017e688957eb56", null ],
     [ "bind_param", "classmysql__prepared__statement.html#a208804b6c294ebfcf5994c93b44abb45", null ],
     [ "execute", "classmysql__prepared__statement.html#a232c3c1affb68ac94af71e1326c45ffa", null ],
-    [ "execute_query", "classmysql__prepared__statement.html#a237b3e3dc7d510b41f48033b8fe77d57", null ],
-    [ "get_errno", "classmysql__prepared__statement.html#aa3fc1b9769a1424d868b716c0145c8f1", null ],
-    [ "get_error", "classmysql__prepared__statement.html#af8b9fae314fb3fda7a160cdc867fdf1b", null ],
+    [ "execute_query", "classmysql__prepared__statement.html#a24862cf3e9752b04be5cee6265bc54f0", null ],
+    [ "get_errno", "classmysql__prepared__statement.html#a3caaf4fc1dfb1c4f364087ced27a133a", null ],
+    [ "get_error", "classmysql__prepared__statement.html#a4fcb02ce9e2d17bb4f4314dd00834f60", null ],
     [ "operator=", "classmysql__prepared__statement.html#a558e36dce44a272d4ba20b842f78eabf", null ],
-    [ "param_count", "classmysql__prepared__statement.html#afd86fdf8c16847967d5a7c5de2b676e4", null ]
+    [ "param_count", "classmysql__prepared__statement.html#a9ff148daa325fa5742b3fc287cbd195c", null ]
 ];

@@ -111,14 +111,14 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:a33b76e8739418ed6b0ffffc7811b7ccd" id="r_a33b76e8739418ed6b0ffffc7811b7ccd"><td class="memItemLeft"><a id="a33b76e8739418ed6b0ffffc7811b7ccd" name="a33b76e8739418ed6b0ffffc7811b7ccd"></a>
 <a class="el" href="classlatch.html">latch</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (const <a class="el" href="classlatch.html">latch</a> &amp;)=delete</td></tr>
 <tr class="memdesc:a33b76e8739418ed6b0ffffc7811b7ccd"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止拷贝赋值 <br /></td></tr>
-<tr class="memitem:af97b3e7f872dacf234135f65508ff964" id="r_af97b3e7f872dacf234135f65508ff964"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#af97b3e7f872dacf234135f65508ff964">count_down</a> (const <a class="el" href="group___futex.html#ga4ae42858521c6114207203888569da88">platform_wait_t</a> update=1)</td></tr>
-<tr class="memdesc:af97b3e7f872dacf234135f65508ff964"><td class="mdescLeft">&#160;</td><td class="mdescRight">减少计数器  <br /></td></tr>
-<tr class="memitem:a2206028685d6c7164ab09b8a4796eb11" id="r_a2206028685d6c7164ab09b8a4796eb11"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="#a2206028685d6c7164ab09b8a4796eb11">try_wait</a> () const noexcept</td></tr>
-<tr class="memdesc:a2206028685d6c7164ab09b8a4796eb11"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试等待  <br /></td></tr>
-<tr class="memitem:a08842ebccf3f250756b4807998f5fdff" id="r_a08842ebccf3f250756b4807998f5fdff"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#a08842ebccf3f250756b4807998f5fdff">wait</a> () const noexcept</td></tr>
-<tr class="memdesc:a08842ebccf3f250756b4807998f5fdff"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待计数器为零  <br /></td></tr>
-<tr class="memitem:ad43a11355c2e90bba7ada9dd81d14acd" id="r_ad43a11355c2e90bba7ada9dd81d14acd"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#ad43a11355c2e90bba7ada9dd81d14acd">arrive_and_wait</a> (const <a class="el" href="group___futex.html#ga4ae42858521c6114207203888569da88">platform_wait_t</a> update=1) noexcept</td></tr>
-<tr class="memdesc:ad43a11355c2e90bba7ada9dd81d14acd"><td class="mdescLeft">&#160;</td><td class="mdescRight">减少计数器并等待  <br /></td></tr>
+<tr class="memitem:a5d0363a4c163fe58fb84fd4e8ee45e15" id="r_a5d0363a4c163fe58fb84fd4e8ee45e15"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5d0363a4c163fe58fb84fd4e8ee45e15">count_down</a> (const <a class="el" href="group___futex.html#ga4ae42858521c6114207203888569da88">platform_wait_t</a> update=1)</td></tr>
+<tr class="memdesc:a5d0363a4c163fe58fb84fd4e8ee45e15"><td class="mdescLeft">&#160;</td><td class="mdescRight">减少计数器  <br /></td></tr>
+<tr class="memitem:a4ca399a140ec6ad75d2711ec7843bdfc" id="r_a4ca399a140ec6ad75d2711ec7843bdfc"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a4ca399a140ec6ad75d2711ec7843bdfc">try_wait</a> () const noexcept</td></tr>
+<tr class="memdesc:a4ca399a140ec6ad75d2711ec7843bdfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试等待  <br /></td></tr>
+<tr class="memitem:afedb29909d54b1c8c6bf136c2f900da3" id="r_afedb29909d54b1c8c6bf136c2f900da3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afedb29909d54b1c8c6bf136c2f900da3">wait</a> () const noexcept</td></tr>
+<tr class="memdesc:afedb29909d54b1c8c6bf136c2f900da3"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待计数器为零  <br /></td></tr>
+<tr class="memitem:ad9b2bff5008d4d1f690cc852fd232d38" id="r_ad9b2bff5008d4d1f690cc852fd232d38"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad9b2bff5008d4d1f690cc852fd232d38">arrive_and_wait</a> (const <a class="el" href="group___futex.html#ga4ae42858521c6114207203888569da88">platform_wait_t</a> update=1) noexcept</td></tr>
+<tr class="memdesc:ad9b2bff5008d4d1f690cc852fd232d38"><td class="mdescLeft">&#160;</td><td class="mdescRight">减少计数器并等待  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 静态 Public 成员函数</h2></td></tr>
@@ -172,8 +172,8 @@ Public 成员函数</h2></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="ad43a11355c2e90bba7ada9dd81d14acd" name="ad43a11355c2e90bba7ada9dd81d14acd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad43a11355c2e90bba7ada9dd81d14acd">&#9670;&#160;</a></span>arrive_and_wait()</h2>
+<a id="ad9b2bff5008d4d1f690cc852fd232d38" name="ad9b2bff5008d4d1f690cc852fd232d38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9b2bff5008d4d1f690cc852fd232d38">&#9670;&#160;</a></span>arrive_and_wait()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -182,7 +182,7 @@ Public 成员函数</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE void latch::arrive_and_wait </td>
+          <td class="memname">void latch::arrive_and_wait </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group___futex.html#ga4ae42858521c6114207203888569da88">platform_wait_t</a></td>          <td class="paramname"><span class="paramname"><em>update</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span></td><td>)</td>
           <td></td>
@@ -211,8 +211,8 @@ Public 成员函数</h2></td></tr>
 
 </div>
 </div>
-<a id="af97b3e7f872dacf234135f65508ff964" name="af97b3e7f872dacf234135f65508ff964"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af97b3e7f872dacf234135f65508ff964">&#9670;&#160;</a></span>count_down()</h2>
+<a id="a5d0363a4c163fe58fb84fd4e8ee45e15" name="a5d0363a4c163fe58fb84fd4e8ee45e15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d0363a4c163fe58fb84fd4e8ee45e15">&#9670;&#160;</a></span>count_down()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -221,7 +221,7 @@ Public 成员函数</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE void latch::count_down </td>
+          <td class="memname">void latch::count_down </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group___futex.html#ga4ae42858521c6114207203888569da88">platform_wait_t</a></td>          <td class="paramname"><span class="paramname"><em>update</em></span><span class="paramdefsep"> = </span><span class="paramdefval">1</span></td><td>)</td>
           <td></td>
@@ -284,8 +284,8 @@ Public 成员函数</h2></td></tr>
 
 </div>
 </div>
-<a id="a2206028685d6c7164ab09b8a4796eb11" name="a2206028685d6c7164ab09b8a4796eb11"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2206028685d6c7164ab09b8a4796eb11">&#9670;&#160;</a></span>try_wait()</h2>
+<a id="a4ca399a140ec6ad75d2711ec7843bdfc" name="a4ca399a140ec6ad75d2711ec7843bdfc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ca399a140ec6ad75d2711ec7843bdfc">&#9670;&#160;</a></span>try_wait()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -294,7 +294,7 @@ Public 成员函数</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE bool latch::try_wait </td>
+          <td class="memname">bool latch::try_wait </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -302,7 +302,7 @@ Public 成员函数</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -319,8 +319,8 @@ Public 成员函数</h2></td></tr>
 
 </div>
 </div>
-<a id="a08842ebccf3f250756b4807998f5fdff" name="a08842ebccf3f250756b4807998f5fdff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08842ebccf3f250756b4807998f5fdff">&#9670;&#160;</a></span>wait()</h2>
+<a id="afedb29909d54b1c8c6bf136c2f900da3" name="afedb29909d54b1c8c6bf136c2f900da3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afedb29909d54b1c8c6bf136c2f900da3">&#9670;&#160;</a></span>wait()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -329,7 +329,7 @@ Public 成员函数</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE void latch::wait </td>
+          <td class="memname">void latch::wait </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>

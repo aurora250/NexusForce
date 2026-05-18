@@ -147,9 +147,9 @@ unsigned long</definition>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="classprocess_1a5293a15b99a555c843daafde097ccbff" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="structprocess_1_1state__info" kindref="compound">state_info</ref></type>
-        <definition>static NEFORCE_NODISCARD state_info process::create</definition>
+      <memberdef kind="function" id="classprocess_1a551db2a7ed84051785096e1fb0440aab" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structprocess_1_1state__info" kindref="compound">state_info</ref></type>
+        <definition>static state_info process::create</definition>
         <argsstring>(const string &amp;executable, const vector&lt; string &gt; &amp;args={}, bool capture_output=false)</argsstring>
         <name>create</name>
         <qualifiedname>process::create</qualifiedname>
@@ -211,7 +211,7 @@ unsigned long</definition>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="145" column="41"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="145" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classprocess_1af035e1cfd992aecc99e4a76b1b859e7b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -359,9 +359,9 @@ unsigned long</definition>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="176" column="17"/>
       </memberdef>
-      <memberdef kind="function" id="classprocess_1a2f50399387287cda14650c65e43c2a69" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>static NEFORCE_NODISCARD bool process::is_running</definition>
+      <memberdef kind="function" id="classprocess_1a09e8fb6881db82d104440a1280cd27fe" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool process::is_running</definition>
         <argsstring>(const state_info &amp;info) noexcept</argsstring>
         <name>is_running</name>
         <qualifiedname>process::is_running</qualifiedname>
@@ -388,11 +388,11 @@ unsigned long</definition>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="183" column="35"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="183" column="18"/>
       </memberdef>
-      <memberdef kind="function" id="classprocess_1a9cf9ba18dd5084bb8999b3a16862f6a1" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classprocess_1ab91bd774333ce8998d5100bb41be1da8" kindref="member">native_id_type</ref></type>
-        <definition>static NEFORCE_NODISCARD native_id_type process::current_id</definition>
+      <memberdef kind="function" id="classprocess_1a5093f2de932909931907884f73d71156" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classprocess_1ab91bd774333ce8998d5100bb41be1da8" kindref="member">native_id_type</ref></type>
+        <definition>static native_id_type process::current_id</definition>
         <argsstring>() noexcept</argsstring>
         <name>current_id</name>
         <qualifiedname>process::current_id</qualifiedname>
@@ -406,11 +406,11 @@ unsigned long</definition>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="189" column="45"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="189" column="28"/>
       </memberdef>
-      <memberdef kind="function" id="classprocess_1a89285e10cf3d54bba043207c206f5077" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="structprocess_1_1memory__info" kindref="compound">memory_info</ref></type>
-        <definition>static NEFORCE_NODISCARD memory_info process::get_memory_info</definition>
+      <memberdef kind="function" id="classprocess_1ad481e63156d46e9148b474f9eb168bb9" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structprocess_1_1memory__info" kindref="compound">memory_info</ref></type>
+        <definition>static memory_info process::get_memory_info</definition>
         <argsstring>(const state_info &amp;info)</argsstring>
         <name>get_memory_info</name>
         <qualifiedname>process::get_memory_info</qualifiedname>
@@ -437,13 +437,13 @@ unsigned long</definition>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="196" column="42"/>
-        <references refid="classprocess_1a89285e10cf3d54bba043207c206f5077">get_memory_info</references>
-        <referencedby refid="classprocess_1a89285e10cf3d54bba043207c206f5077">get_memory_info</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="196" column="25"/>
+        <references refid="classprocess_1ad481e63156d46e9148b474f9eb168bb9">get_memory_info</references>
+        <referencedby refid="classprocess_1ad481e63156d46e9148b474f9eb168bb9">get_memory_info</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classprocess_1ad66b80c9ed81eda16bb517a0a191d380" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1" kindref="member">state</ref></type>
-        <definition>static NEFORCE_NODISCARD state process::get_state</definition>
+      <memberdef kind="function" id="classprocess_1a948a364ad23f37e1fd3c4327f06c2cd2" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1" kindref="member">state</ref></type>
+        <definition>static state process::get_state</definition>
         <argsstring>(const state_info &amp;info)</argsstring>
         <name>get_state</name>
         <qualifiedname>process::get_state</qualifiedname>
@@ -470,13 +470,13 @@ unsigned long</definition>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="203" column="36"/>
-        <references refid="classprocess_1ad66b80c9ed81eda16bb517a0a191d380">get_state</references>
-        <referencedby refid="classprocess_1ad66b80c9ed81eda16bb517a0a191d380">get_state</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="203" column="19"/>
+        <references refid="classprocess_1a948a364ad23f37e1fd3c4327f06c2cd2">get_state</references>
+        <referencedby refid="classprocess_1a948a364ad23f37e1fd3c4327f06c2cd2">get_state</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classprocess_1af9e7fffa87574903b2f26774a1f8e524" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>static NEFORCE_NODISCARD bool process::check_permission</definition>
+      <memberdef kind="function" id="classprocess_1adeb213da5ad4c874de38a06ec11c3ecc" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool process::check_permission</definition>
         <argsstring>(const state_info &amp;info, permission permission)</argsstring>
         <name>check_permission</name>
         <qualifiedname>process::check_permission</qualifiedname>
@@ -515,13 +515,13 @@ unsigned long</definition>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="211" column="35"/>
-        <references refid="classprocess_1af9e7fffa87574903b2f26774a1f8e524">check_permission</references>
-        <referencedby refid="classprocess_1af9e7fffa87574903b2f26774a1f8e524">check_permission</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="211" column="18"/>
+        <references refid="classprocess_1adeb213da5ad4c874de38a06ec11c3ecc">check_permission</references>
+        <referencedby refid="classprocess_1adeb213da5ad4c874de38a06ec11c3ecc">check_permission</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classprocess_1a8cd77c6e2a5b2e08f5254f85a5c213fc" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>static NEFORCE_NODISCARD string process::name</definition>
+      <memberdef kind="function" id="classprocess_1ade856a6398b6024b871e123149573d9e" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>static string process::name</definition>
         <argsstring>(native_id_type process_id)</argsstring>
         <name>name</name>
         <qualifiedname>process::name</qualifiedname>
@@ -548,9 +548,9 @@ unsigned long</definition>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="218" column="37"/>
-        <references refid="classprocess_1a8cd77c6e2a5b2e08f5254f85a5c213fc">name</references>
-        <referencedby refid="classprocess_1a8cd77c6e2a5b2e08f5254f85a5c213fc">name</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="218" column="20"/>
+        <references refid="classprocess_1ade856a6398b6024b871e123149573d9e">name</references>
+        <referencedby refid="classprocess_1ade856a6398b6024b871e123149573d9e">name</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -561,13 +561,13 @@ unsigned long</definition>
     </detaileddescription>
     <location file="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" line="52" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/process.hpp" bodystart="52" bodyend="219"/>
     <listofallmembers>
-      <member refid="classprocess_1af9e7fffa87574903b2f26774a1f8e524" prot="public" virt="non-virtual"><scope>process</scope><name>check_permission</name></member>
-      <member refid="classprocess_1a5293a15b99a555c843daafde097ccbff" prot="public" virt="non-virtual"><scope>process</scope><name>create</name></member>
-      <member refid="classprocess_1a9cf9ba18dd5084bb8999b3a16862f6a1" prot="public" virt="non-virtual"><scope>process</scope><name>current_id</name></member>
-      <member refid="classprocess_1a89285e10cf3d54bba043207c206f5077" prot="public" virt="non-virtual"><scope>process</scope><name>get_memory_info</name></member>
-      <member refid="classprocess_1ad66b80c9ed81eda16bb517a0a191d380" prot="public" virt="non-virtual"><scope>process</scope><name>get_state</name></member>
-      <member refid="classprocess_1a2f50399387287cda14650c65e43c2a69" prot="public" virt="non-virtual"><scope>process</scope><name>is_running</name></member>
-      <member refid="classprocess_1a8cd77c6e2a5b2e08f5254f85a5c213fc" prot="public" virt="non-virtual"><scope>process</scope><name>name</name></member>
+      <member refid="classprocess_1adeb213da5ad4c874de38a06ec11c3ecc" prot="public" virt="non-virtual"><scope>process</scope><name>check_permission</name></member>
+      <member refid="classprocess_1a551db2a7ed84051785096e1fb0440aab" prot="public" virt="non-virtual"><scope>process</scope><name>create</name></member>
+      <member refid="classprocess_1a5093f2de932909931907884f73d71156" prot="public" virt="non-virtual"><scope>process</scope><name>current_id</name></member>
+      <member refid="classprocess_1ad481e63156d46e9148b474f9eb168bb9" prot="public" virt="non-virtual"><scope>process</scope><name>get_memory_info</name></member>
+      <member refid="classprocess_1a948a364ad23f37e1fd3c4327f06c2cd2" prot="public" virt="non-virtual"><scope>process</scope><name>get_state</name></member>
+      <member refid="classprocess_1a09e8fb6881db82d104440a1280cd27fe" prot="public" virt="non-virtual"><scope>process</scope><name>is_running</name></member>
+      <member refid="classprocess_1ade856a6398b6024b871e123149573d9e" prot="public" virt="non-virtual"><scope>process</scope><name>name</name></member>
       <member refid="classprocess_1ab91bd774333ce8998d5100bb41be1da8" prot="public" virt="non-virtual"><scope>process</scope><name>native_id_type</name></member>
       <member refid="classprocess_1acfd865e47b9c3a8b63da86bc85f11242" prot="public" virt="non-virtual"><scope>process</scope><name>permission</name></member>
       <member refid="classprocess_1a2ab519914a1937c2a8208c46ab401068" prot="public" virt="non-virtual"><scope>process</scope><name>resume</name></member>

@@ -1,5 +1,6 @@
 var group___exceptions =
 [
+    [ "neforce::lz4_exception", "structneforce_1_1lz4__exception.html", null ],
     [ "zlib_exception", "structzlib__exception.html", null ],
     [ "future_exception", "structfuture__exception.html", null ],
     [ "thread_exception", "structthread__exception.html", null ],
@@ -9,11 +10,11 @@ var group___exceptions =
       [ "exception", "structexception.html#af7e2ec88aedbf1ac46326caa556ce434", null ],
       [ "exception", "structexception.html#abae6850b5707d91a23d8b8f78b99e7c7", null ],
       [ "~exception", "structexception.html#a80249b2b108c9b913dc7144839092a2b", null ],
-      [ "code", "structexception.html#a4b5c972aaec8251632ca72bdfc9820fb", null ],
+      [ "code", "structexception.html#ab8a744225b6ddc8976987ba16a0fd046", null ],
       [ "operator=", "structexception.html#a1a1667b7354203e2aa5a89d211ca3a6b", null ],
       [ "operator=", "structexception.html#a709d705f97cbad7d531dfb5023107536", null ],
-      [ "type", "structexception.html#a50dcb7544585c5cda232c3133d027eff", null ],
-      [ "what", "structexception.html#ac635798f4eb88397f79b995966b26683", null ]
+      [ "type", "structexception.html#a726d6793aa2121f2a48f502d690f1a11", null ],
+      [ "what", "structexception.html#a5d2925886b0a3350d7b29d4a8bbdf87e", null ]
     ] ],
     [ "memory_exception", "structmemory__exception.html", null ],
     [ "system_exception", "structsystem__exception.html", null ],

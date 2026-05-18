@@ -109,7 +109,7 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:a134b092166f250b215f133bbbc418172" id="r_a134b092166f250b215f133bbbc418172"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a134b092166f250b215f133bbbc418172">atomic_float_base</a> (Float value) noexcept(<a class="el" href="group___type_special_member_function_checks.html#gaf7d75265d0e5d446fa4925ac74ca3396">is_nothrow_copy_constructible_v</a>&lt; Float &gt;)</td></tr>
+<tr class="memitem:a134b092166f250b215f133bbbc418172" id="r_a134b092166f250b215f133bbbc418172"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a134b092166f250b215f133bbbc418172">atomic_float_base</a> (Float value) noexcept(<a class="el" href="group___type_special_member_function_checks.html#ga1a08255d43824dc23e14e09d4f9a3d22">is_nothrow_copy_constructible_v</a>&lt; Float &gt;)</td></tr>
 <tr class="memdesc:a134b092166f250b215f133bbbc418172"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
 <tr class="memitem:a40f07182333e5523ad2984a9caaa3dae" id="r_a40f07182333e5523ad2984a9caaa3dae"><td class="memItemLeft"><a id="a40f07182333e5523ad2984a9caaa3dae" name="a40f07182333e5523ad2984a9caaa3dae"></a>
 Float&#160;</td><td class="memItemRight"><b>operator=</b> (Float value) noexcept</td></tr>
@@ -117,23 +117,23 @@ Float&#160;</td><td class="memItemRight"><b>operator=</b> (Float value) noexcept
 <tr class="memitem:a7b15eed5ad948247ec7af43b2d96a92d" id="r_a7b15eed5ad948247ec7af43b2d96a92d"><td class="memItemLeft"><a id="a7b15eed5ad948247ec7af43b2d96a92d" name="a7b15eed5ad948247ec7af43b2d96a92d"></a>
 Float&#160;</td><td class="memItemRight"><b>operator=</b> (Float value) volatile noexcept</td></tr>
 <tr class="memdesc:a7b15eed5ad948247ec7af43b2d96a92d"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的赋值运算符 <br /></td></tr>
-<tr class="memitem:a4b9355877aeae9766f4fdf90eac89fb4" id="r_a4b9355877aeae9766f4fdf90eac89fb4"><td class="memItemLeft"><a id="a4b9355877aeae9766f4fdf90eac89fb4" name="a4b9355877aeae9766f4fdf90eac89fb4"></a>
-NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><b>is_lock_free</b> () const noexcept</td></tr>
-<tr class="memdesc:a4b9355877aeae9766f4fdf90eac89fb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否支持无锁操作 <br /></td></tr>
-<tr class="memitem:ae1757d7cd0f4fa2ef7e0ccf645904002" id="r_ae1757d7cd0f4fa2ef7e0ccf645904002"><td class="memItemLeft"><a id="ae1757d7cd0f4fa2ef7e0ccf645904002" name="ae1757d7cd0f4fa2ef7e0ccf645904002"></a>
-NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><b>is_lock_free</b> () const volatile noexcept</td></tr>
-<tr class="memdesc:ae1757d7cd0f4fa2ef7e0ccf645904002"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的检查是否支持无锁操作 <br /></td></tr>
+<tr class="memitem:a147a54a0d9a8e4f5bbbcb1b12ca6ecfb" id="r_a147a54a0d9a8e4f5bbbcb1b12ca6ecfb"><td class="memItemLeft"><a id="a147a54a0d9a8e4f5bbbcb1b12ca6ecfb" name="a147a54a0d9a8e4f5bbbcb1b12ca6ecfb"></a>
+bool&#160;</td><td class="memItemRight"><b>is_lock_free</b> () const noexcept</td></tr>
+<tr class="memdesc:a147a54a0d9a8e4f5bbbcb1b12ca6ecfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否支持无锁操作 <br /></td></tr>
+<tr class="memitem:a7736c3a4bb5a1622d5f9211a51f54fb7" id="r_a7736c3a4bb5a1622d5f9211a51f54fb7"><td class="memItemLeft"><a id="a7736c3a4bb5a1622d5f9211a51f54fb7" name="a7736c3a4bb5a1622d5f9211a51f54fb7"></a>
+bool&#160;</td><td class="memItemRight"><b>is_lock_free</b> () const volatile noexcept</td></tr>
+<tr class="memdesc:a7736c3a4bb5a1622d5f9211a51f54fb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的检查是否支持无锁操作 <br /></td></tr>
 <tr class="memitem:ad2b5a33f24780146bb9f19778ad73ef8" id="r_ad2b5a33f24780146bb9f19778ad73ef8"><td class="memItemLeft"><a id="ad2b5a33f24780146bb9f19778ad73ef8" name="ad2b5a33f24780146bb9f19778ad73ef8"></a>
-void&#160;</td><td class="memItemRight"><b>store</b> (Float value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
+void&#160;</td><td class="memItemRight"><b>store</b> (Float value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) noexcept</td></tr>
 <tr class="memdesc:ad2b5a33f24780146bb9f19778ad73ef8"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子存储操作 <br /></td></tr>
 <tr class="memitem:a6308fb3482a27cce1f042199cd411c96" id="r_a6308fb3482a27cce1f042199cd411c96"><td class="memItemLeft"><a id="a6308fb3482a27cce1f042199cd411c96" name="a6308fb3482a27cce1f042199cd411c96"></a>
-void&#160;</td><td class="memItemRight"><b>store</b> (Float value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) volatile noexcept</td></tr>
+void&#160;</td><td class="memItemRight"><b>store</b> (Float value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) volatile noexcept</td></tr>
 <tr class="memdesc:a6308fb3482a27cce1f042199cd411c96"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的原子存储操作 <br /></td></tr>
 <tr class="memitem:a29b2baabe03baf61591b9678f3bce0b5" id="r_a29b2baabe03baf61591b9678f3bce0b5"><td class="memItemLeft"><a id="a29b2baabe03baf61591b9678f3bce0b5" name="a29b2baabe03baf61591b9678f3bce0b5"></a>
-Float&#160;</td><td class="memItemRight"><b>load</b> (const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) const noexcept</td></tr>
+Float&#160;</td><td class="memItemRight"><b>load</b> (const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) const noexcept</td></tr>
 <tr class="memdesc:a29b2baabe03baf61591b9678f3bce0b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子加载操作 <br /></td></tr>
 <tr class="memitem:af3f2740586f78d8519bbc2d50c94b368" id="r_af3f2740586f78d8519bbc2d50c94b368"><td class="memItemLeft"><a id="af3f2740586f78d8519bbc2d50c94b368" name="af3f2740586f78d8519bbc2d50c94b368"></a>
-Float&#160;</td><td class="memItemRight"><b>load</b> (const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) const volatile noexcept</td></tr>
+Float&#160;</td><td class="memItemRight"><b>load</b> (const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) const volatile noexcept</td></tr>
 <tr class="memdesc:af3f2740586f78d8519bbc2d50c94b368"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的原子加载操作 <br /></td></tr>
 <tr class="memitem:a68121834fafd480f478b9f5f76dd3b66" id="r_a68121834fafd480f478b9f5f76dd3b66"><td class="memItemLeft"><a id="a68121834fafd480f478b9f5f76dd3b66" name="a68121834fafd480f478b9f5f76dd3b66"></a>
 &#160;</td><td class="memItemRight"><b>operator Float</b> () const noexcept</td></tr>
@@ -142,10 +142,10 @@ Float&#160;</td><td class="memItemRight"><b>load</b> (const <a class="el" href="
 &#160;</td><td class="memItemRight"><b>operator Float</b> () const volatile noexcept</td></tr>
 <tr class="memdesc:a5b70370c39d3aa92f895e03dd759565d"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的类型转换运算符 <br /></td></tr>
 <tr class="memitem:aab85e64411670551b86ccac41700989d" id="r_aab85e64411670551b86ccac41700989d"><td class="memItemLeft"><a id="aab85e64411670551b86ccac41700989d" name="aab85e64411670551b86ccac41700989d"></a>
-Float&#160;</td><td class="memItemRight"><b>exchange</b> (Float desire, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
+Float&#160;</td><td class="memItemRight"><b>exchange</b> (Float desire, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) noexcept</td></tr>
 <tr class="memdesc:aab85e64411670551b86ccac41700989d"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子交换操作 <br /></td></tr>
 <tr class="memitem:adf86fd62a846a2f843f33af1e4ede237" id="r_adf86fd62a846a2f843f33af1e4ede237"><td class="memItemLeft"><a id="adf86fd62a846a2f843f33af1e4ede237" name="adf86fd62a846a2f843f33af1e4ede237"></a>
-Float&#160;</td><td class="memItemRight"><b>exchange</b> (Float desire, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) volatile noexcept</td></tr>
+Float&#160;</td><td class="memItemRight"><b>exchange</b> (Float desire, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) volatile noexcept</td></tr>
 <tr class="memdesc:adf86fd62a846a2f843f33af1e4ede237"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的原子交换操作 <br /></td></tr>
 <tr class="memitem:ae269b5f3c4547a71407ee30681435ea6" id="r_ae269b5f3c4547a71407ee30681435ea6"><td class="memItemLeft"><a id="ae269b5f3c4547a71407ee30681435ea6" name="ae269b5f3c4547a71407ee30681435ea6"></a>
 bool&#160;</td><td class="memItemRight"><b>compare_exchange_weak</b> (Float &amp;expected, Float desire, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) noexcept</td></tr>
@@ -160,34 +160,34 @@ bool&#160;</td><td class="memItemRight"><b>compare_exchange_strong</b> (Float &a
 bool&#160;</td><td class="memItemRight"><b>compare_exchange_strong</b> (Float &amp;expected, Float desire, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) volatile noexcept</td></tr>
 <tr class="memdesc:a89a894741cef0e7dddfe31d061819920"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的强比较交换操作 <br /></td></tr>
 <tr class="memitem:af9f9c93088d40b86e249d5fb49898440" id="r_af9f9c93088d40b86e249d5fb49898440"><td class="memItemLeft"><a id="af9f9c93088d40b86e249d5fb49898440" name="af9f9c93088d40b86e249d5fb49898440"></a>
-bool&#160;</td><td class="memItemRight"><b>compare_exchange_weak</b> (Float &amp;expected, Float desire, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
+bool&#160;</td><td class="memItemRight"><b>compare_exchange_weak</b> (Float &amp;expected, Float desire, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) noexcept</td></tr>
 <tr class="memdesc:af9f9c93088d40b86e249d5fb49898440"><td class="mdescLeft">&#160;</td><td class="mdescRight">简化版弱比较交换操作 <br /></td></tr>
 <tr class="memitem:ad8e18ff8750432a7f4a78211fbcc20d2" id="r_ad8e18ff8750432a7f4a78211fbcc20d2"><td class="memItemLeft"><a id="ad8e18ff8750432a7f4a78211fbcc20d2" name="ad8e18ff8750432a7f4a78211fbcc20d2"></a>
-bool&#160;</td><td class="memItemRight"><b>compare_exchange_weak</b> (Float &amp;expected, Float desire, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) volatile noexcept</td></tr>
+bool&#160;</td><td class="memItemRight"><b>compare_exchange_weak</b> (Float &amp;expected, Float desire, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) volatile noexcept</td></tr>
 <tr class="memdesc:ad8e18ff8750432a7f4a78211fbcc20d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的简化版弱比较交换操作 <br /></td></tr>
 <tr class="memitem:a1ec5c1b3b2ce106bfa742e8817a784c4" id="r_a1ec5c1b3b2ce106bfa742e8817a784c4"><td class="memItemLeft"><a id="a1ec5c1b3b2ce106bfa742e8817a784c4" name="a1ec5c1b3b2ce106bfa742e8817a784c4"></a>
-bool&#160;</td><td class="memItemRight"><b>compare_exchange_strong</b> (Float &amp;expected, Float desire, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
+bool&#160;</td><td class="memItemRight"><b>compare_exchange_strong</b> (Float &amp;expected, Float desire, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) noexcept</td></tr>
 <tr class="memdesc:a1ec5c1b3b2ce106bfa742e8817a784c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">简化版强比较交换操作 <br /></td></tr>
 <tr class="memitem:ad27ddb4634a4860ec1bb28e305fe6d61" id="r_ad27ddb4634a4860ec1bb28e305fe6d61"><td class="memItemLeft"><a id="ad27ddb4634a4860ec1bb28e305fe6d61" name="ad27ddb4634a4860ec1bb28e305fe6d61"></a>
-bool&#160;</td><td class="memItemRight"><b>compare_exchange_strong</b> (Float &amp;expected, Float desire, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) volatile noexcept</td></tr>
+bool&#160;</td><td class="memItemRight"><b>compare_exchange_strong</b> (Float &amp;expected, Float desire, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) volatile noexcept</td></tr>
 <tr class="memdesc:ad27ddb4634a4860ec1bb28e305fe6d61"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的简化版强比较交换操作 <br /></td></tr>
-<tr class="memitem:a66cdf2efe9764bb6ebee8356b15b780d" id="r_a66cdf2efe9764bb6ebee8356b15b780d"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#a66cdf2efe9764bb6ebee8356b15b780d">wait</a> (Float old, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) const noexcept</td></tr>
-<tr class="memdesc:a66cdf2efe9764bb6ebee8356b15b780d"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待值改变  <br /></td></tr>
-<tr class="memitem:ae2b41b8d4924da0f9ddde463ee268e91" id="r_ae2b41b8d4924da0f9ddde463ee268e91"><td class="memItemLeft"><a id="ae2b41b8d4924da0f9ddde463ee268e91" name="ae2b41b8d4924da0f9ddde463ee268e91"></a>
-NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><b>notify_one</b> () noexcept</td></tr>
-<tr class="memdesc:ae2b41b8d4924da0f9ddde463ee268e91"><td class="mdescLeft">&#160;</td><td class="mdescRight">通知一个等待线程 <br /></td></tr>
-<tr class="memitem:a2384d636f50b3b9dd8d1415a9e0ee2c2" id="r_a2384d636f50b3b9dd8d1415a9e0ee2c2"><td class="memItemLeft"><a id="a2384d636f50b3b9dd8d1415a9e0ee2c2" name="a2384d636f50b3b9dd8d1415a9e0ee2c2"></a>
-NEFORCE_ALWAYS_INLINE void&#160;</td><td class="memItemRight"><b>notify_all</b> () noexcept</td></tr>
-<tr class="memdesc:a2384d636f50b3b9dd8d1415a9e0ee2c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">通知所有等待线程 <br /></td></tr>
-<tr class="memitem:a00883969339dafc807382196142d99d2" id="r_a00883969339dafc807382196142d99d2"><td class="memItemLeft"><a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a00883969339dafc807382196142d99d2">fetch_add</a> (<a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
+<tr class="memitem:a2a3fac8c95a386a12d61f97c32909e3a" id="r_a2a3fac8c95a386a12d61f97c32909e3a"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2a3fac8c95a386a12d61f97c32909e3a">wait</a> (Float old, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) const noexcept</td></tr>
+<tr class="memdesc:a2a3fac8c95a386a12d61f97c32909e3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待值改变  <br /></td></tr>
+<tr class="memitem:ae45c4ea5abca19092825a7430db2c216" id="r_ae45c4ea5abca19092825a7430db2c216"><td class="memItemLeft"><a id="ae45c4ea5abca19092825a7430db2c216" name="ae45c4ea5abca19092825a7430db2c216"></a>
+void&#160;</td><td class="memItemRight"><b>notify_one</b> () noexcept</td></tr>
+<tr class="memdesc:ae45c4ea5abca19092825a7430db2c216"><td class="mdescLeft">&#160;</td><td class="mdescRight">通知一个等待线程 <br /></td></tr>
+<tr class="memitem:a82c3558541247e7c7b8f8c1213e28690" id="r_a82c3558541247e7c7b8f8c1213e28690"><td class="memItemLeft"><a id="a82c3558541247e7c7b8f8c1213e28690" name="a82c3558541247e7c7b8f8c1213e28690"></a>
+void&#160;</td><td class="memItemRight"><b>notify_all</b> () noexcept</td></tr>
+<tr class="memdesc:a82c3558541247e7c7b8f8c1213e28690"><td class="mdescLeft">&#160;</td><td class="mdescRight">通知所有等待线程 <br /></td></tr>
+<tr class="memitem:a00883969339dafc807382196142d99d2" id="r_a00883969339dafc807382196142d99d2"><td class="memItemLeft"><a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a00883969339dafc807382196142d99d2">fetch_add</a> (<a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) noexcept</td></tr>
 <tr class="memdesc:a00883969339dafc807382196142d99d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并添加操作  <br /></td></tr>
 <tr class="memitem:aa2bce04ca3567dd2c7e87b42a76d6987" id="r_aa2bce04ca3567dd2c7e87b42a76d6987"><td class="memItemLeft"><a id="aa2bce04ca3567dd2c7e87b42a76d6987" name="aa2bce04ca3567dd2c7e87b42a76d6987"></a>
-<a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a>&#160;</td><td class="memItemRight"><b>fetch_add</b> (<a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) volatile noexcept</td></tr>
+<a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a>&#160;</td><td class="memItemRight"><b>fetch_add</b> (<a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) volatile noexcept</td></tr>
 <tr class="memdesc:aa2bce04ca3567dd2c7e87b42a76d6987"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的原子获取并添加操作 <br /></td></tr>
-<tr class="memitem:a112fcfb6ef70dc2534ae60fbdc7a8305" id="r_a112fcfb6ef70dc2534ae60fbdc7a8305"><td class="memItemLeft"><a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a112fcfb6ef70dc2534ae60fbdc7a8305">fetch_sub</a> (<a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) noexcept</td></tr>
+<tr class="memitem:a112fcfb6ef70dc2534ae60fbdc7a8305" id="r_a112fcfb6ef70dc2534ae60fbdc7a8305"><td class="memItemLeft"><a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a112fcfb6ef70dc2534ae60fbdc7a8305">fetch_sub</a> (<a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) noexcept</td></tr>
 <tr class="memdesc:a112fcfb6ef70dc2534ae60fbdc7a8305"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并减去操作  <br /></td></tr>
 <tr class="memitem:a77a0872204ea3809970be5c7f24b0b5e" id="r_a77a0872204ea3809970be5c7f24b0b5e"><td class="memItemLeft"><a id="a77a0872204ea3809970be5c7f24b0b5e" name="a77a0872204ea3809970be5c7f24b0b5e"></a>
-<a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a>&#160;</td><td class="memItemRight"><b>fetch_sub</b> (<a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a>) volatile noexcept</td></tr>
+<a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a>&#160;</td><td class="memItemRight"><b>fetch_sub</b> (<a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a> value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo=<a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a>) volatile noexcept</td></tr>
 <tr class="memdesc:a77a0872204ea3809970be5c7f24b0b5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">volatile版本的原子获取并减去操作 <br /></td></tr>
 <tr class="memitem:adc25a99309d0c060ac7a8e1b29aa1561" id="r_adc25a99309d0c060ac7a8e1b29aa1561"><td class="memItemLeft"><a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#adc25a99309d0c060ac7a8e1b29aa1561">operator+=</a> (<a class="el" href="#ac89f8697633c3f7b6bd1ab6939b86530">value_type</a> value) noexcept</td></tr>
 <tr class="memdesc:adc25a99309d0c060ac7a8e1b29aa1561"><td class="mdescLeft">&#160;</td><td class="mdescRight">加法赋值运算符  <br /></td></tr>
@@ -272,7 +272,7 @@ template&lt;typename Float&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -317,7 +317,7 @@ template&lt;typename Float&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a></span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -423,8 +423,8 @@ template&lt;typename Float&gt; </div>
 
 </div>
 </div>
-<a id="a66cdf2efe9764bb6ebee8356b15b780d" name="a66cdf2efe9764bb6ebee8356b15b780d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a66cdf2efe9764bb6ebee8356b15b780d">&#9670;&#160;</a></span>wait()</h2>
+<a id="a2a3fac8c95a386a12d61f97c32909e3a" name="a2a3fac8c95a386a12d61f97c32909e3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a3fac8c95a386a12d61f97c32909e3a">&#9670;&#160;</a></span>wait()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -435,14 +435,14 @@ template&lt;typename Float&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE void <a class="el" href="structatomic__float__base.html">atomic_float_base</a>&lt; Float &gt;::wait </td>
+          <td class="memname">void <a class="el" href="structatomic__float__base.html">atomic_float_base</a>&lt; Float &gt;::wait </td>
           <td>(</td>
           <td class="paramtype">Float</td>          <td class="paramname"><span class="paramname"><em>old</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3">memory_order_seq_cst</a></span>&#160;) const</td>
+          <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570">memory_order_seq_cst</a></span>&#160;) const</td>
         </tr>
       </table>
   </td>

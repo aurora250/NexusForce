@@ -9,14 +9,14 @@ var group___code_point =
       [ "append_to", "classcodepoint.html#ae92078f825d07e7989a9350cf3251321", null ],
       [ "append_to", "classcodepoint.html#a7314fbb0bd0caf0852ff3b434d4bc6a5", null ],
       [ "append_to", "classcodepoint.html#a7d9fdbda25dae744df0fac4b49444e66", null ],
-      [ "is_ascii", "classcodepoint.html#a759da81a8ac4a55fa575390732972e95", null ],
-      [ "is_bmp", "classcodepoint.html#ae85c01972390846bf8d436b5fb9e22bf", null ],
-      [ "is_replacement", "classcodepoint.html#acd893b8cb45b6e7eb09d82a3be328902", null ],
-      [ "is_supplementary", "classcodepoint.html#a51c079b76dccec699dcd33c2ed6a740f", null ],
-      [ "needs_surrogate_pair", "classcodepoint.html#abc8aed471fd4d5d4cdf356e2bc6cc726", null ],
-      [ "to_char32", "classcodepoint.html#a932ac21b7c05e1bc201c3ba6d9d44fa8", null ],
-      [ "utf16_length", "classcodepoint.html#a2e815ba6c81c622d856197e7ee9d3338", null ],
-      [ "utf8_length", "classcodepoint.html#a59059f9695b22e6cd0a9d6b757a77fdb", null ],
-      [ "value", "classcodepoint.html#a05853f838e91f7201e21b04110d6bd76", null ]
+      [ "is_ascii", "classcodepoint.html#a7876f9adc0c922f3991e081ac01716c7", null ],
+      [ "is_bmp", "classcodepoint.html#ac2541988a6b948b7496d1b39628c81fd", null ],
+      [ "is_replacement", "classcodepoint.html#a1cdc351eeb5a0c03f7cc2a7f4a34dfec", null ],
+      [ "is_supplementary", "classcodepoint.html#a911866174ad7892efd4336cab8e44676", null ],
+      [ "needs_surrogate_pair", "classcodepoint.html#a55154ba8f8d16407f7a0390fcfc0c77d", null ],
+      [ "to_char32", "classcodepoint.html#a3481e8f571d9fae334dbe74c59ad237f", null ],
+      [ "utf16_length", "classcodepoint.html#a81017f2d4c6b74945efef889037ccc21", null ],
+      [ "utf8_length", "classcodepoint.html#abbf4985b5785488a2199f3a373cb3532", null ],
+      [ "value", "classcodepoint.html#af44dad42fbb2b64fb3e842d0db9acd6d", null ]
     ] ]
 ];

@@ -58,29 +58,29 @@ var group___yaml_config =
       ] ],
       [ "set_anchor", "classyaml__value.html#a47d57ba8446097c984e55f07d7fea7aa", null ],
       [ "set_tag", "classyaml__value.html#a7407556dfb52984c3415db35ee112869", null ],
-      [ "to_document", "classyaml__value.html#a0c4328854eb893b5fe471e7fa05c8c32", null ],
-      [ "to_string", "classyaml__value.html#afe768ac15954b26002a86197725d3b74", null ],
-      [ "type", "classyaml__value.html#a887865d133b23f6d5f8e0f8f322ba10e", null ],
+      [ "to_document", "classyaml__value.html#ac4a1b4fb081801f70f4c0d9c67933b3b", null ],
+      [ "to_string", "classyaml__value.html#a73c6f623deb3d9fcda3e3b7ba319fde5", null ],
+      [ "type", "classyaml__value.html#abebae216db4b65783cac8a53b1de16b0", null ],
       [ "anchor", "classyaml__value.html#ad86b30a51fa8bab180f21e485637140c", null ],
       [ "tag", "classyaml__value.html#a0cdc7a438e67a2b66f10c0e7df489f21", null ]
     ] ],
     [ "yaml_null", "classyaml__null.html", [
-      [ "type", "classyaml__null.html#ae767952dcae3a7009de82b86fe5dfaa6", null ]
+      [ "type", "classyaml__null.html#a1c86e546049429406424c132abe2edcf", null ]
     ] ],
     [ "yaml_boolean", "classyaml__boolean.html", [
       [ "yaml_boolean", "classyaml__boolean.html#ad3d83b621c8981b20eb0f47b0c55c531", null ],
-      [ "get_value", "classyaml__boolean.html#a0ed2008fef679a3e05f92b575db40b3d", null ],
-      [ "type", "classyaml__boolean.html#a9310c232eab6725ea5467dd434dbd6a0", null ]
+      [ "get_value", "classyaml__boolean.html#ac09133512837a60662047785de6987f2", null ],
+      [ "type", "classyaml__boolean.html#af507dbe7dd012b655898178c48fac48c", null ]
     ] ],
     [ "yaml_integer", "classyaml__integer.html", [
       [ "yaml_integer", "classyaml__integer.html#af5821ded4d6668ffe40d1f38a0eb8d10", null ],
-      [ "get_value", "classyaml__integer.html#aad5c4b07de7aca65fc6d6d5e17716bba", null ],
-      [ "type", "classyaml__integer.html#a868c9ae42759aa7f4e4828ac463ee0b8", null ]
+      [ "get_value", "classyaml__integer.html#ac23d8c88f55fe844592bd076fad04c24", null ],
+      [ "type", "classyaml__integer.html#a2594f9dde88a81287eb8c04ffc843157", null ]
     ] ],
     [ "yaml_float", "classyaml__float.html", [
       [ "yaml_float", "classyaml__float.html#a4466ea144db28539288e6dcf8b5f570b", null ],
-      [ "get_value", "classyaml__float.html#a5d916b4768220b008f86d6e21162cdd3", null ],
-      [ "type", "classyaml__float.html#a3ccb8b4f32b55c2ff960d1c19b0713df", null ]
+      [ "get_value", "classyaml__float.html#ab37b04edc2866e057b2e07e524dbb8eb", null ],
+      [ "type", "classyaml__float.html#a4ef977305d25140b7e7c65488cd883c9", null ]
     ] ],
     [ "yaml_string", "classyaml__string.html", [
       [ "string_style", "classyaml__string.html#a48e128d7b4fcf4d04fb90af96a5c5a9e", [
@@ -91,16 +91,16 @@ var group___yaml_config =
         [ "Folded", "classyaml__string.html#a48e128d7b4fcf4d04fb90af96a5c5a9ea5f786c37a3e1297211444a8a0957eed2", null ]
       ] ],
       [ "yaml_string", "classyaml__string.html#a74b84f0c68cc531003ec733ff5e8660a", null ],
-      [ "get_style", "classyaml__string.html#aa0ab1204c798735f52e34c9af90dcb5f", null ],
-      [ "get_value", "classyaml__string.html#a19b8d67d6efa68987a7a70004159d365", null ],
-      [ "type", "classyaml__string.html#ac4a884aaa6ae3d556c52222639a69618", null ]
+      [ "get_style", "classyaml__string.html#aaf89d611204fe87bcf9b9e052fdc1b11", null ],
+      [ "get_value", "classyaml__string.html#aa1ac3bef6e4bd406854884a4975d863a", null ],
+      [ "type", "classyaml__string.html#a5b3302636da26ca88b07ebee021aa2d1", null ]
     ] ],
     [ "yaml_timestamp", "classyaml__timestamp.html", [
       [ "yaml_timestamp", "classyaml__timestamp.html#a52a11468ab8b37bb2bcd148981421944", null ],
       [ "yaml_timestamp", "classyaml__timestamp.html#ab49df2da197cd29b66db6b23a32abb40", null ],
-      [ "get_string_value", "classyaml__timestamp.html#a56454311d0f6f221da944a2dc7561639", null ],
-      [ "get_value", "classyaml__timestamp.html#a332b3efe5246c60ee28c3c6b7c71dc94", null ],
-      [ "type", "classyaml__timestamp.html#aefa478843aecd06aab6cb77a4f34419e", null ]
+      [ "get_string_value", "classyaml__timestamp.html#a2d5f1c55423fb2432dfd9fa85de7f58e", null ],
+      [ "get_value", "classyaml__timestamp.html#a448f4440d5fab00a762273f84115254f", null ],
+      [ "type", "classyaml__timestamp.html#a4a2520d4bc90c9b690c391d83fccc513", null ]
     ] ],
     [ "yaml_sequence", "classyaml__sequence.html", [
       [ "sequence_style", "classyaml__sequence.html#ad6b43327651f8eb2c4b1ce3d326dee39", [
@@ -109,13 +109,13 @@ var group___yaml_config =
       ] ],
       [ "yaml_sequence", "classyaml__sequence.html#afe3832ab286bc8572f0587c844a6ee36", null ],
       [ "add_element", "classyaml__sequence.html#a4937ac45a4d4b412367f0f63b29ce898", null ],
-      [ "get_element", "classyaml__sequence.html#a29c319d4c40e0999f65bf16ad1898b83", null ],
-      [ "get_element", "classyaml__sequence.html#aeb38da91019e4679124e410dc4c20274", null ],
-      [ "get_elements", "classyaml__sequence.html#a5269bb4beb2d128a9b80b5fb32a06744", null ],
-      [ "get_style", "classyaml__sequence.html#a6d0c215988bd0f15a770690ac898be97", null ],
+      [ "get_element", "classyaml__sequence.html#a1df1898f39f52d88a29d85a5ad8a0a7c", null ],
+      [ "get_element", "classyaml__sequence.html#a721c8d84c9191354e2a321255173e654", null ],
+      [ "get_elements", "classyaml__sequence.html#a0dd56441e01b93f4023fc88368cabaf3", null ],
+      [ "get_style", "classyaml__sequence.html#a970a96f49fffa0b2e103f6d3b0658167", null ],
       [ "set_style", "classyaml__sequence.html#ac844aad27cbc3a10715d62417d39c90c", null ],
-      [ "size", "classyaml__sequence.html#a730d9528326019cda8c0f16794e90ecf", null ],
-      [ "type", "classyaml__sequence.html#a1cf663bca50abb618c008aac93fb2c27", null ]
+      [ "size", "classyaml__sequence.html#adda3c5bc45db2529d11d3090c6bef32d", null ],
+      [ "type", "classyaml__sequence.html#a0d5265c217b75c253ebe6db627de5323", null ]
     ] ],
     [ "yaml_mapping", "classyaml__mapping.html", [
       [ "mapping_style", "classyaml__mapping.html#a44328ffa387eab3c55ecf4b79c1d390f", [
@@ -124,13 +124,13 @@ var group___yaml_config =
       ] ],
       [ "yaml_mapping", "classyaml__mapping.html#af223fa31db626bda23d5600e858546ae", null ],
       [ "add_member", "classyaml__mapping.html#ad3b3bb781334c9e5b289546e8789aefc", null ],
-      [ "get_member", "classyaml__mapping.html#a8e74959541b2b838165b06aba3a7285f", null ],
-      [ "get_member", "classyaml__mapping.html#ab3465e3ea7a1d29872d5610b2021d77f", null ],
-      [ "get_members", "classyaml__mapping.html#a012394c6e4f4c4dcd2c3910bcc0f89fc", null ],
-      [ "get_style", "classyaml__mapping.html#afc4f9e3f6694264e0a026e2471e991ec", null ],
-      [ "has_member", "classyaml__mapping.html#aab49e99041089d5e03b934b9d876cb00", null ],
+      [ "get_member", "classyaml__mapping.html#a0997a597a2054ee5dd6a109d9a59b90c", null ],
+      [ "get_member", "classyaml__mapping.html#a0ef4e99f2ec37548f584d01ba1704539", null ],
+      [ "get_members", "classyaml__mapping.html#a980d0d478ce3a67e583462c79a86eb82", null ],
+      [ "get_style", "classyaml__mapping.html#a4af2074af788b2aa35c1ce240b727d62", null ],
+      [ "has_member", "classyaml__mapping.html#a6371c705d5a1d0697127be34030f6fee", null ],
       [ "merge_from", "classyaml__mapping.html#a535ab4b16c2d165107d3d64315095ccd", null ],
       [ "set_style", "classyaml__mapping.html#a6041ca95930055709be7050e940ddf61", null ],
-      [ "type", "classyaml__mapping.html#ab13cc7b8ed7a63b4551d22a958f35325", null ]
+      [ "type", "classyaml__mapping.html#aa42165e6dde635c07bbf4ce5f6824792", null ]
     ] ]
 ];

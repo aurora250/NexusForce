@@ -175,75 +175,75 @@ $(function(){initNavTree('group___atomic_operations.html','',''); });
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 类型定义</h2></td></tr>
 <tr class="memitem:gacfbf78130dc8a58f92b7ec96de9ad888" id="r_gacfbf78130dc8a58f92b7ec96de9ad888"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:gacfbf78130dc8a58f92b7ec96de9ad888 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#gacfbf78130dc8a58f92b7ec96de9ad888">atomic_diff_t</a> = <a class="el" href="group___type_traits_utilities.html#ga8e4e19e025d27abb3cd4cb306262f568">conditional_t</a>&lt;<a class="el" href="group___base_type_qualifier_check.html#gaff2094428071e9bd480d66885ad85043">is_pointer_v</a>&lt;T&gt;, <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a>, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt;T&gt;&gt;</td></tr>
+<tr class="memitem:gacfbf78130dc8a58f92b7ec96de9ad888 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#gacfbf78130dc8a58f92b7ec96de9ad888">atomic_diff_t</a> = <a class="el" href="group___type_traits_utilities.html#ga8e4e19e025d27abb3cd4cb306262f568">conditional_t</a>&lt;<a class="el" href="group___base_type_qualifier_check.html#ga60d8a43ca3d5d473f1651ef5114c2628">is_pointer_v</a>&lt;T&gt;, <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a>, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt;T&gt;&gt;</td></tr>
 <tr class="memdesc:gacfbf78130dc8a58f92b7ec96de9ad888"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子操作的差值类型  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:gad09904472351069bf4052ca1aa2cef7b" id="r_gad09904472351069bf4052ca1aa2cef7b"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#gad09904472351069bf4052ca1aa2cef7b">atomic_thread_fence</a> (const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:gad09904472351069bf4052ca1aa2cef7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程内存屏障  <br /></td></tr>
-<tr class="memitem:ga68dc6572818e290f920ee64fad9f0d62" id="r_ga68dc6572818e290f920ee64fad9f0d62"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#ga68dc6572818e290f920ee64fad9f0d62">atomic_signal_fence</a> (const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:ga68dc6572818e290f920ee64fad9f0d62"><td class="mdescLeft">&#160;</td><td class="mdescRight">信号内存屏障  <br /></td></tr>
-<tr class="memitem:gaaa5c14a3bfaac1bdcf93e2292ba1608f" id="r_gaaa5c14a3bfaac1bdcf93e2292ba1608f"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:gaaa5c14a3bfaac1bdcf93e2292ba1608f template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#gaaa5c14a3bfaac1bdcf93e2292ba1608f">atomic_store</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:gaaa5c14a3bfaac1bdcf93e2292ba1608f"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子存储操作  <br /></td></tr>
-<tr class="memitem:gae881b9b04d18e6f5dd4f5d7311bb48c9" id="r_gae881b9b04d18e6f5dd4f5d7311bb48c9"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:gae881b9b04d18e6f5dd4f5d7311bb48c9 template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gae881b9b04d18e6f5dd4f5d7311bb48c9">atomic_load</a> (const volatile T *ptr, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:gae881b9b04d18e6f5dd4f5d7311bb48c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子加载操作  <br /></td></tr>
-<tr class="memitem:ga580e126483f4df7a80c529027735df8c" id="r_ga580e126483f4df7a80c529027735df8c"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga580e126483f4df7a80c529027735df8c template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga580e126483f4df7a80c529027735df8c">atomic_exchange</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:ga580e126483f4df7a80c529027735df8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子交换操作  <br /></td></tr>
-<tr class="memitem:gac0e1e634abfd1bb68c905b25576eb5d4" id="r_gac0e1e634abfd1bb68c905b25576eb5d4"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:gac0e1e634abfd1bb68c905b25576eb5d4 template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="#gac0e1e634abfd1bb68c905b25576eb5d4">atomic_cmpexch_weak</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; *expected, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) noexcept</td></tr>
-<tr class="memdesc:gac0e1e634abfd1bb68c905b25576eb5d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">弱比较交换操作  <br /></td></tr>
-<tr class="memitem:ga53e71ce4980e49652fa2787d1b3a7375" id="r_ga53e71ce4980e49652fa2787d1b3a7375"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga53e71ce4980e49652fa2787d1b3a7375 template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="#ga53e71ce4980e49652fa2787d1b3a7375">atomic_cmpexch_strong</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; *expected, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) noexcept</td></tr>
-<tr class="memdesc:ga53e71ce4980e49652fa2787d1b3a7375"><td class="mdescLeft">&#160;</td><td class="mdescRight">强比较交换操作  <br /></td></tr>
-<tr class="memitem:ga2c2c8cbfcae01cfa2bf198fd831c62b2" id="r_ga2c2c8cbfcae01cfa2bf198fd831c62b2"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga2c2c8cbfcae01cfa2bf198fd831c62b2 template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga2c2c8cbfcae01cfa2bf198fd831c62b2">atomic_fetch_add</a> (volatile T *ptr, <a class="el" href="#gacfbf78130dc8a58f92b7ec96de9ad888">atomic_diff_t</a>&lt; T &gt; value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:ga2c2c8cbfcae01cfa2bf198fd831c62b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并添加操作  <br /></td></tr>
-<tr class="memitem:ga021ba5336034625fe4ca4af59bc779da" id="r_ga021ba5336034625fe4ca4af59bc779da"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga021ba5336034625fe4ca4af59bc779da template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga021ba5336034625fe4ca4af59bc779da">atomic_fetch_sub</a> (volatile T *ptr, <a class="el" href="#gacfbf78130dc8a58f92b7ec96de9ad888">atomic_diff_t</a>&lt; T &gt; value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:ga021ba5336034625fe4ca4af59bc779da"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并减去操作  <br /></td></tr>
-<tr class="memitem:gad486ba655d266410a9282d207b75f097" id="r_gad486ba655d266410a9282d207b75f097"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:gad486ba655d266410a9282d207b75f097 template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gad486ba655d266410a9282d207b75f097">atomic_fetch_and</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:gad486ba655d266410a9282d207b75f097"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并与操作  <br /></td></tr>
-<tr class="memitem:ga9fb54274efe6570a0a2014b6a47cc5ff" id="r_ga9fb54274efe6570a0a2014b6a47cc5ff"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga9fb54274efe6570a0a2014b6a47cc5ff template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga9fb54274efe6570a0a2014b6a47cc5ff">atomic_fetch_or</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:ga9fb54274efe6570a0a2014b6a47cc5ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并或操作  <br /></td></tr>
-<tr class="memitem:ga6738b7ff1fe873ce293f75bd96fdd3bc" id="r_ga6738b7ff1fe873ce293f75bd96fdd3bc"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga6738b7ff1fe873ce293f75bd96fdd3bc template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga6738b7ff1fe873ce293f75bd96fdd3bc">atomic_fetch_xor</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:ga6738b7ff1fe873ce293f75bd96fdd3bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并异或操作  <br /></td></tr>
-<tr class="memitem:ga5b4755daf3f0c2c98dae41084f5bad65" id="r_ga5b4755daf3f0c2c98dae41084f5bad65"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga5b4755daf3f0c2c98dae41084f5bad65 template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga5b4755daf3f0c2c98dae41084f5bad65">atomic_add_fetch</a> (volatile T *ptr, <a class="el" href="#gacfbf78130dc8a58f92b7ec96de9ad888">atomic_diff_t</a>&lt; T &gt; value, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:ga5b4755daf3f0c2c98dae41084f5bad65"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子添加并获取操作  <br /></td></tr>
-<tr class="memitem:ga88203498c566079de5b0d3497abfb2ec" id="r_ga88203498c566079de5b0d3497abfb2ec"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga88203498c566079de5b0d3497abfb2ec template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga88203498c566079de5b0d3497abfb2ec">atomic_sub_fetch</a> (volatile T *ptr, <a class="el" href="#gacfbf78130dc8a58f92b7ec96de9ad888">atomic_diff_t</a>&lt; T &gt; value, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:ga88203498c566079de5b0d3497abfb2ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子减去并获取操作  <br /></td></tr>
-<tr class="memitem:gaf978cddf75785ac79968e54064f629fd" id="r_gaf978cddf75785ac79968e54064f629fd"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:gaf978cddf75785ac79968e54064f629fd template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaf978cddf75785ac79968e54064f629fd">atomic_and_fetch</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:gaf978cddf75785ac79968e54064f629fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子与并获取操作  <br /></td></tr>
-<tr class="memitem:gae43f163ab729da3abeac1aae2100d14c" id="r_gae43f163ab729da3abeac1aae2100d14c"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:gae43f163ab729da3abeac1aae2100d14c template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gae43f163ab729da3abeac1aae2100d14c">atomic_or_fetch</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:gae43f163ab729da3abeac1aae2100d14c"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子或并获取操作  <br /></td></tr>
-<tr class="memitem:ga7b991ea245c0d1d223ef0ea22b5d9c5c" id="r_ga7b991ea245c0d1d223ef0ea22b5d9c5c"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga7b991ea245c0d1d223ef0ea22b5d9c5c template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga7b991ea245c0d1d223ef0ea22b5d9c5c">atomic_xor_fetch</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:ga7b991ea245c0d1d223ef0ea22b5d9c5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子异或并获取操作  <br /></td></tr>
-<tr class="memitem:ga8a40c04917b816c033a3d5a5ccdad443" id="r_ga8a40c04917b816c033a3d5a5ccdad443"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga8a40c04917b816c033a3d5a5ccdad443 template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="#ga8a40c04917b816c033a3d5a5ccdad443">atomic_cmpexch_weak_any</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; *expected, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; *desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) noexcept</td></tr>
-<tr class="memdesc:ga8a40c04917b816c033a3d5a5ccdad443"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用弱比较交换操作  <br /></td></tr>
-<tr class="memitem:gafc070ab9d97fede6cb57cfd8074219e1" id="r_gafc070ab9d97fede6cb57cfd8074219e1"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:gafc070ab9d97fede6cb57cfd8074219e1 template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE bool&#160;</td><td class="memItemRight"><a class="el" href="#gafc070ab9d97fede6cb57cfd8074219e1">atomic_cmpexch_strong_any</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; *expected, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; *desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) noexcept</td></tr>
-<tr class="memdesc:gafc070ab9d97fede6cb57cfd8074219e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用强比较交换操作  <br /></td></tr>
-<tr class="memitem:ga235411e03936c4aa90f209ab38cab492" id="r_ga235411e03936c4aa90f209ab38cab492"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga235411e03936c4aa90f209ab38cab492 template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE void&#160;</td><td class="memItemRight"><a class="el" href="#ga235411e03936c4aa90f209ab38cab492">atomic_store_any</a> (T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:ga235411e03936c4aa90f209ab38cab492"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用原子存储操作  <br /></td></tr>
-<tr class="memitem:ga4066975858c891b3012f41c4f33073b3" id="r_ga4066975858c891b3012f41c4f33073b3"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga4066975858c891b3012f41c4f33073b3 template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga4066975858c891b3012f41c4f33073b3">atomic_load_any</a> (const T *ptr, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:ga4066975858c891b3012f41c4f33073b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用原子加载操作  <br /></td></tr>
-<tr class="memitem:gaf15a5ea63f7851db21ec52e31b494700" id="r_gaf15a5ea63f7851db21ec52e31b494700"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:gaf15a5ea63f7851db21ec52e31b494700 template"><td class="memItemLeft">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaf15a5ea63f7851db21ec52e31b494700">atomic_exchange_any</a> (T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; desired, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
-<tr class="memdesc:gaf15a5ea63f7851db21ec52e31b494700"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用原子交换操作  <br /></td></tr>
+<tr class="memitem:ga983217e8435a6bd85a2f9fa21910d358" id="r_ga983217e8435a6bd85a2f9fa21910d358"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga983217e8435a6bd85a2f9fa21910d358">atomic_thread_fence</a> (const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:ga983217e8435a6bd85a2f9fa21910d358"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程内存屏障  <br /></td></tr>
+<tr class="memitem:ga9dd12e898a2e56aa49f0257f904d4a8d" id="r_ga9dd12e898a2e56aa49f0257f904d4a8d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga9dd12e898a2e56aa49f0257f904d4a8d">atomic_signal_fence</a> (const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:ga9dd12e898a2e56aa49f0257f904d4a8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">信号内存屏障  <br /></td></tr>
+<tr class="memitem:gad653d72ae99e1e5262569ac9028d923d" id="r_gad653d72ae99e1e5262569ac9028d923d"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gad653d72ae99e1e5262569ac9028d923d template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gad653d72ae99e1e5262569ac9028d923d">atomic_store</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:gad653d72ae99e1e5262569ac9028d923d"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子存储操作  <br /></td></tr>
+<tr class="memitem:gac97fbbd35fc0bf2a6051feefa461a711" id="r_gac97fbbd35fc0bf2a6051feefa461a711"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gac97fbbd35fc0bf2a6051feefa461a711 template"><td class="memItemLeft"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gac97fbbd35fc0bf2a6051feefa461a711">atomic_load</a> (const volatile T *ptr, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:gac97fbbd35fc0bf2a6051feefa461a711"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子加载操作  <br /></td></tr>
+<tr class="memitem:gac2c6ce30140f303d56d8ba2fd436973b" id="r_gac2c6ce30140f303d56d8ba2fd436973b"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gac2c6ce30140f303d56d8ba2fd436973b template"><td class="memItemLeft"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gac2c6ce30140f303d56d8ba2fd436973b">atomic_exchange</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:gac2c6ce30140f303d56d8ba2fd436973b"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子交换操作  <br /></td></tr>
+<tr class="memitem:gaf8d716de35ef450ae5ad2a36daeaa395" id="r_gaf8d716de35ef450ae5ad2a36daeaa395"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaf8d716de35ef450ae5ad2a36daeaa395 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#gaf8d716de35ef450ae5ad2a36daeaa395">atomic_cmpexch_weak</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; *expected, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) noexcept</td></tr>
+<tr class="memdesc:gaf8d716de35ef450ae5ad2a36daeaa395"><td class="mdescLeft">&#160;</td><td class="mdescRight">弱比较交换操作  <br /></td></tr>
+<tr class="memitem:ga256cb2ebf0dd27696aaacdaa7222dd22" id="r_ga256cb2ebf0dd27696aaacdaa7222dd22"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga256cb2ebf0dd27696aaacdaa7222dd22 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga256cb2ebf0dd27696aaacdaa7222dd22">atomic_cmpexch_strong</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; *expected, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) noexcept</td></tr>
+<tr class="memdesc:ga256cb2ebf0dd27696aaacdaa7222dd22"><td class="mdescLeft">&#160;</td><td class="mdescRight">强比较交换操作  <br /></td></tr>
+<tr class="memitem:gafd379e44f03b964183af9b92423f5c96" id="r_gafd379e44f03b964183af9b92423f5c96"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gafd379e44f03b964183af9b92423f5c96 template"><td class="memItemLeft"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gafd379e44f03b964183af9b92423f5c96">atomic_fetch_add</a> (volatile T *ptr, <a class="el" href="#gacfbf78130dc8a58f92b7ec96de9ad888">atomic_diff_t</a>&lt; T &gt; value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:gafd379e44f03b964183af9b92423f5c96"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并添加操作  <br /></td></tr>
+<tr class="memitem:gac61d9fd541d5b9aef14a1067e3538924" id="r_gac61d9fd541d5b9aef14a1067e3538924"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gac61d9fd541d5b9aef14a1067e3538924 template"><td class="memItemLeft"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gac61d9fd541d5b9aef14a1067e3538924">atomic_fetch_sub</a> (volatile T *ptr, <a class="el" href="#gacfbf78130dc8a58f92b7ec96de9ad888">atomic_diff_t</a>&lt; T &gt; value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:gac61d9fd541d5b9aef14a1067e3538924"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并减去操作  <br /></td></tr>
+<tr class="memitem:gad91d94c131515208781b255ec5a2d2ab" id="r_gad91d94c131515208781b255ec5a2d2ab"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gad91d94c131515208781b255ec5a2d2ab template"><td class="memItemLeft"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gad91d94c131515208781b255ec5a2d2ab">atomic_fetch_and</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:gad91d94c131515208781b255ec5a2d2ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并与操作  <br /></td></tr>
+<tr class="memitem:ga182cc4ec32727b206b6bf0404f7d23d0" id="r_ga182cc4ec32727b206b6bf0404f7d23d0"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga182cc4ec32727b206b6bf0404f7d23d0 template"><td class="memItemLeft"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga182cc4ec32727b206b6bf0404f7d23d0">atomic_fetch_or</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:ga182cc4ec32727b206b6bf0404f7d23d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并或操作  <br /></td></tr>
+<tr class="memitem:gab370fe73a369d618c7810547f71b61c4" id="r_gab370fe73a369d618c7810547f71b61c4"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gab370fe73a369d618c7810547f71b61c4 template"><td class="memItemLeft"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gab370fe73a369d618c7810547f71b61c4">atomic_fetch_xor</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:gab370fe73a369d618c7810547f71b61c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子获取并异或操作  <br /></td></tr>
+<tr class="memitem:ga997283224060aabe3abb93501aa18d42" id="r_ga997283224060aabe3abb93501aa18d42"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga997283224060aabe3abb93501aa18d42 template"><td class="memItemLeft"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga997283224060aabe3abb93501aa18d42">atomic_add_fetch</a> (volatile T *ptr, <a class="el" href="#gacfbf78130dc8a58f92b7ec96de9ad888">atomic_diff_t</a>&lt; T &gt; value, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:ga997283224060aabe3abb93501aa18d42"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子添加并获取操作  <br /></td></tr>
+<tr class="memitem:ga1a2061210bbb322408eea7178a25f454" id="r_ga1a2061210bbb322408eea7178a25f454"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga1a2061210bbb322408eea7178a25f454 template"><td class="memItemLeft"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga1a2061210bbb322408eea7178a25f454">atomic_sub_fetch</a> (volatile T *ptr, <a class="el" href="#gacfbf78130dc8a58f92b7ec96de9ad888">atomic_diff_t</a>&lt; T &gt; value, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:ga1a2061210bbb322408eea7178a25f454"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子减去并获取操作  <br /></td></tr>
+<tr class="memitem:gab9b13da068b8edd78f4cf66566c49a95" id="r_gab9b13da068b8edd78f4cf66566c49a95"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gab9b13da068b8edd78f4cf66566c49a95 template"><td class="memItemLeft"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gab9b13da068b8edd78f4cf66566c49a95">atomic_and_fetch</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:gab9b13da068b8edd78f4cf66566c49a95"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子与并获取操作  <br /></td></tr>
+<tr class="memitem:gac7b60e55335293cbc400c9e8c481489c" id="r_gac7b60e55335293cbc400c9e8c481489c"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gac7b60e55335293cbc400c9e8c481489c template"><td class="memItemLeft"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gac7b60e55335293cbc400c9e8c481489c">atomic_or_fetch</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:gac7b60e55335293cbc400c9e8c481489c"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子或并获取操作  <br /></td></tr>
+<tr class="memitem:ga6c07918d29c54f70597709966d651b49" id="r_ga6c07918d29c54f70597709966d651b49"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga6c07918d29c54f70597709966d651b49 template"><td class="memItemLeft"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga6c07918d29c54f70597709966d651b49">atomic_xor_fetch</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:ga6c07918d29c54f70597709966d651b49"><td class="mdescLeft">&#160;</td><td class="mdescRight">原子异或并获取操作  <br /></td></tr>
+<tr class="memitem:ga3231cd0fb8a205b5b1a52f34b88e48ba" id="r_ga3231cd0fb8a205b5b1a52f34b88e48ba"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga3231cd0fb8a205b5b1a52f34b88e48ba template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga3231cd0fb8a205b5b1a52f34b88e48ba">atomic_cmpexch_weak_any</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; *expected, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; *desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) noexcept</td></tr>
+<tr class="memdesc:ga3231cd0fb8a205b5b1a52f34b88e48ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用弱比较交换操作  <br /></td></tr>
+<tr class="memitem:ga02cda74ae7b485daa38aa961566b51f1" id="r_ga02cda74ae7b485daa38aa961566b51f1"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga02cda74ae7b485daa38aa961566b51f1 template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga02cda74ae7b485daa38aa961566b51f1">atomic_cmpexch_strong_any</a> (volatile T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; *expected, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; *desired, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> success, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> failure) noexcept</td></tr>
+<tr class="memdesc:ga02cda74ae7b485daa38aa961566b51f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用强比较交换操作  <br /></td></tr>
+<tr class="memitem:gabdedaf26f8ae6909368e611cf3786b3f" id="r_gabdedaf26f8ae6909368e611cf3786b3f"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gabdedaf26f8ae6909368e611cf3786b3f template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#gabdedaf26f8ae6909368e611cf3786b3f">atomic_store_any</a> (T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:gabdedaf26f8ae6909368e611cf3786b3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用原子存储操作  <br /></td></tr>
+<tr class="memitem:ga772ceef8a06ba3e08118d11382fc6c9d" id="r_ga772ceef8a06ba3e08118d11382fc6c9d"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga772ceef8a06ba3e08118d11382fc6c9d template"><td class="memItemLeft"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga772ceef8a06ba3e08118d11382fc6c9d">atomic_load_any</a> (const T *ptr, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:ga772ceef8a06ba3e08118d11382fc6c9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用原子加载操作  <br /></td></tr>
+<tr class="memitem:gaea1e05c65bad52b40dcc6228a40e82c2" id="r_gaea1e05c65bad52b40dcc6228a40e82c2"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:gaea1e05c65bad52b40dcc6228a40e82c2 template"><td class="memItemLeft"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaea1e05c65bad52b40dcc6228a40e82c2">atomic_exchange_any</a> (T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; desired, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
+<tr class="memdesc:gaea1e05c65bad52b40dcc6228a40e82c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用原子交换操作  <br /></td></tr>
 <tr class="memitem:ga16d757b1decbe603c6648b7f7853cc4f" id="r_ga16d757b1decbe603c6648b7f7853cc4f"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ga16d757b1decbe603c6648b7f7853cc4f template"><td class="memItemLeft">T&#160;</td><td class="memItemRight"><a class="el" href="#ga16d757b1decbe603c6648b7f7853cc4f">atomic_fetch_add_any</a> (T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
 <tr class="memdesc:ga16d757b1decbe603c6648b7f7853cc4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用原子获取并添加操作  <br /></td></tr>
@@ -256,9 +256,9 @@ $(function(){initNavTree('group___atomic_operations.html','',''); });
 <tr class="memitem:ga5f06a2fdc01cfa5e7180cdd87b8444d2" id="r_ga5f06a2fdc01cfa5e7180cdd87b8444d2"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ga5f06a2fdc01cfa5e7180cdd87b8444d2 template"><td class="memItemLeft">T&#160;</td><td class="memItemRight"><a class="el" href="#ga5f06a2fdc01cfa5e7180cdd87b8444d2">atomic_sub_fetch_any</a> (T *ptr, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; value, <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a> mo) noexcept</td></tr>
 <tr class="memdesc:ga5f06a2fdc01cfa5e7180cdd87b8444d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用原子减去并获取操作  <br /></td></tr>
-<tr class="memitem:ga3a0d5268ae71df1d0d5872747ebf7c66" id="r_ga3a0d5268ae71df1d0d5872747ebf7c66"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Size, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Align&gt; </td></tr>
-<tr class="memitem:ga3a0d5268ae71df1d0d5872747ebf7c66 template"><td class="memItemLeft">NEFORCE_CONSTEXPR17 bool&#160;</td><td class="memItemRight"><a class="el" href="#ga3a0d5268ae71df1d0d5872747ebf7c66">is_always_lock_free</a> () noexcept</td></tr>
-<tr class="memdesc:ga3a0d5268ae71df1d0d5872747ebf7c66"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否支持无锁操作  <br /></td></tr>
+<tr class="memitem:ga4588c81b98fa2b7eacf87c0479094826" id="r_ga4588c81b98fa2b7eacf87c0479094826"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Size, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> Align&gt; </td></tr>
+<tr class="memitem:ga4588c81b98fa2b7eacf87c0479094826 template"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga4588c81b98fa2b7eacf87c0479094826">is_always_lock_free</a> () noexcept</td></tr>
+<tr class="memdesc:ga4588c81b98fa2b7eacf87c0479094826"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否支持无锁操作  <br /></td></tr>
 <tr class="memitem:ga4ea9991a1e00b98f7bfbb4717f63d5ec" id="r_ga4ea9991a1e00b98f7bfbb4717f63d5ec"><td class="memTemplParams" colspan="2">template&lt;typename T, typename Func, typename Clock, typename Dur&gt; </td></tr>
 <tr class="memitem:ga4ea9991a1e00b98f7bfbb4717f63d5ec template"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ga4ea9991a1e00b98f7bfbb4717f63d5ec">atomic_wait_address_until_v</a> (const T *addr, T &amp;&amp;old, Func &amp;&amp;func, const <a class="el" href="structtime__point.html">time_point</a>&lt; Clock, Dur &gt; &amp;timeout) noexcept</td></tr>
 <tr class="memdesc:ga4ea9991a1e00b98f7bfbb4717f63d5ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">基于值的原子定时等待（绝对时间）  <br /></td></tr>
@@ -302,7 +302,7 @@ $(function(){initNavTree('group___atomic_operations.html','',''); });
 template&lt;typename T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#gacfbf78130dc8a58f92b7ec96de9ad888">atomic_diff_t</a> = <a class="el" href="group___type_traits_utilities.html#ga8e4e19e025d27abb3cd4cb306262f568">conditional_t</a>&lt;<a class="el" href="group___base_type_qualifier_check.html#gaff2094428071e9bd480d66885ad85043">is_pointer_v</a>&lt;T&gt;, <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a>, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt;T&gt;&gt;</td>
+          <td class="memname">using <a class="el" href="#gacfbf78130dc8a58f92b7ec96de9ad888">atomic_diff_t</a> = <a class="el" href="group___type_traits_utilities.html#ga8e4e19e025d27abb3cd4cb306262f568">conditional_t</a>&lt;<a class="el" href="group___base_type_qualifier_check.html#ga60d8a43ca3d5d473f1651ef5114c2628">is_pointer_v</a>&lt;T&gt;, <a class="el" href="group___platform_dependent_types.html#gad967839dbf3a606e0d4c9d556c0e5e7c">ptrdiff_t</a>, <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt;T&gt;&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -320,8 +320,8 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="ga5b4755daf3f0c2c98dae41084f5bad65" name="ga5b4755daf3f0c2c98dae41084f5bad65"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga5b4755daf3f0c2c98dae41084f5bad65">&#9670;&#160;</a></span>atomic_add_fetch()</h2>
+<a id="ga997283224060aabe3abb93501aa18d42" name="ga997283224060aabe3abb93501aa18d42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga997283224060aabe3abb93501aa18d42">&#9670;&#160;</a></span>atomic_add_fetch()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -332,7 +332,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_add_fetch </td>
+          <td class="memname"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_add_fetch </td>
           <td>(</td>
           <td class="paramtype">volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -349,7 +349,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -439,8 +439,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="gaf978cddf75785ac79968e54064f629fd" name="gaf978cddf75785ac79968e54064f629fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf978cddf75785ac79968e54064f629fd">&#9670;&#160;</a></span>atomic_and_fetch()</h2>
+<a id="gab9b13da068b8edd78f4cf66566c49a95" name="gab9b13da068b8edd78f4cf66566c49a95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab9b13da068b8edd78f4cf66566c49a95">&#9670;&#160;</a></span>atomic_and_fetch()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -451,7 +451,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_and_fetch </td>
+          <td class="memname"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_and_fetch </td>
           <td>(</td>
           <td class="paramtype">volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -468,7 +468,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -499,8 +499,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="ga53e71ce4980e49652fa2787d1b3a7375" name="ga53e71ce4980e49652fa2787d1b3a7375"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga53e71ce4980e49652fa2787d1b3a7375">&#9670;&#160;</a></span>atomic_cmpexch_strong()</h2>
+<a id="ga256cb2ebf0dd27696aaacdaa7222dd22" name="ga256cb2ebf0dd27696aaacdaa7222dd22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga256cb2ebf0dd27696aaacdaa7222dd22">&#9670;&#160;</a></span>atomic_cmpexch_strong()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -511,7 +511,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE bool atomic_cmpexch_strong </td>
+          <td class="memname">bool atomic_cmpexch_strong </td>
           <td>(</td>
           <td class="paramtype">volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -538,7 +538,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -573,8 +573,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="gafc070ab9d97fede6cb57cfd8074219e1" name="gafc070ab9d97fede6cb57cfd8074219e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gafc070ab9d97fede6cb57cfd8074219e1">&#9670;&#160;</a></span>atomic_cmpexch_strong_any()</h2>
+<a id="ga02cda74ae7b485daa38aa961566b51f1" name="ga02cda74ae7b485daa38aa961566b51f1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga02cda74ae7b485daa38aa961566b51f1">&#9670;&#160;</a></span>atomic_cmpexch_strong_any()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -585,7 +585,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE bool atomic_cmpexch_strong_any </td>
+          <td class="memname">bool atomic_cmpexch_strong_any </td>
           <td>(</td>
           <td class="paramtype">volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -612,7 +612,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -645,8 +645,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="gac0e1e634abfd1bb68c905b25576eb5d4" name="gac0e1e634abfd1bb68c905b25576eb5d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gac0e1e634abfd1bb68c905b25576eb5d4">&#9670;&#160;</a></span>atomic_cmpexch_weak()</h2>
+<a id="gaf8d716de35ef450ae5ad2a36daeaa395" name="gaf8d716de35ef450ae5ad2a36daeaa395"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf8d716de35ef450ae5ad2a36daeaa395">&#9670;&#160;</a></span>atomic_cmpexch_weak()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -657,7 +657,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE bool atomic_cmpexch_weak </td>
+          <td class="memname">bool atomic_cmpexch_weak </td>
           <td>(</td>
           <td class="paramtype">volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -684,7 +684,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -719,8 +719,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="ga8a40c04917b816c033a3d5a5ccdad443" name="ga8a40c04917b816c033a3d5a5ccdad443"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8a40c04917b816c033a3d5a5ccdad443">&#9670;&#160;</a></span>atomic_cmpexch_weak_any()</h2>
+<a id="ga3231cd0fb8a205b5b1a52f34b88e48ba" name="ga3231cd0fb8a205b5b1a52f34b88e48ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga3231cd0fb8a205b5b1a52f34b88e48ba">&#9670;&#160;</a></span>atomic_cmpexch_weak_any()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -731,7 +731,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE bool atomic_cmpexch_weak_any </td>
+          <td class="memname">bool atomic_cmpexch_weak_any </td>
           <td>(</td>
           <td class="paramtype">volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -758,7 +758,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -791,8 +791,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="ga580e126483f4df7a80c529027735df8c" name="ga580e126483f4df7a80c529027735df8c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga580e126483f4df7a80c529027735df8c">&#9670;&#160;</a></span>atomic_exchange()</h2>
+<a id="gac2c6ce30140f303d56d8ba2fd436973b" name="gac2c6ce30140f303d56d8ba2fd436973b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac2c6ce30140f303d56d8ba2fd436973b">&#9670;&#160;</a></span>atomic_exchange()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -803,7 +803,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_exchange </td>
+          <td class="memname"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_exchange </td>
           <td>(</td>
           <td class="paramtype">volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -820,7 +820,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -851,8 +851,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="gaf15a5ea63f7851db21ec52e31b494700" name="gaf15a5ea63f7851db21ec52e31b494700"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf15a5ea63f7851db21ec52e31b494700">&#9670;&#160;</a></span>atomic_exchange_any()</h2>
+<a id="gaea1e05c65bad52b40dcc6228a40e82c2" name="gaea1e05c65bad52b40dcc6228a40e82c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaea1e05c65bad52b40dcc6228a40e82c2">&#9670;&#160;</a></span>atomic_exchange_any()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -863,7 +863,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_exchange_any </td>
+          <td class="memname"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_exchange_any </td>
           <td>(</td>
           <td class="paramtype">T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -880,7 +880,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -911,8 +911,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="ga2c2c8cbfcae01cfa2bf198fd831c62b2" name="ga2c2c8cbfcae01cfa2bf198fd831c62b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2c2c8cbfcae01cfa2bf198fd831c62b2">&#9670;&#160;</a></span>atomic_fetch_add()</h2>
+<a id="gafd379e44f03b964183af9b92423f5c96" name="gafd379e44f03b964183af9b92423f5c96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafd379e44f03b964183af9b92423f5c96">&#9670;&#160;</a></span>atomic_fetch_add()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -923,7 +923,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_fetch_add </td>
+          <td class="memname"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_fetch_add </td>
           <td>(</td>
           <td class="paramtype">volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -940,7 +940,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1030,8 +1030,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="gad486ba655d266410a9282d207b75f097" name="gad486ba655d266410a9282d207b75f097"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad486ba655d266410a9282d207b75f097">&#9670;&#160;</a></span>atomic_fetch_and()</h2>
+<a id="gad91d94c131515208781b255ec5a2d2ab" name="gad91d94c131515208781b255ec5a2d2ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad91d94c131515208781b255ec5a2d2ab">&#9670;&#160;</a></span>atomic_fetch_and()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1042,7 +1042,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_fetch_and </td>
+          <td class="memname"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_fetch_and </td>
           <td>(</td>
           <td class="paramtype">volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -1059,7 +1059,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1090,8 +1090,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="ga9fb54274efe6570a0a2014b6a47cc5ff" name="ga9fb54274efe6570a0a2014b6a47cc5ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga9fb54274efe6570a0a2014b6a47cc5ff">&#9670;&#160;</a></span>atomic_fetch_or()</h2>
+<a id="ga182cc4ec32727b206b6bf0404f7d23d0" name="ga182cc4ec32727b206b6bf0404f7d23d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga182cc4ec32727b206b6bf0404f7d23d0">&#9670;&#160;</a></span>atomic_fetch_or()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1102,7 +1102,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_fetch_or </td>
+          <td class="memname"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_fetch_or </td>
           <td>(</td>
           <td class="paramtype">volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -1119,7 +1119,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1150,8 +1150,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="ga021ba5336034625fe4ca4af59bc779da" name="ga021ba5336034625fe4ca4af59bc779da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga021ba5336034625fe4ca4af59bc779da">&#9670;&#160;</a></span>atomic_fetch_sub()</h2>
+<a id="gac61d9fd541d5b9aef14a1067e3538924" name="gac61d9fd541d5b9aef14a1067e3538924"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac61d9fd541d5b9aef14a1067e3538924">&#9670;&#160;</a></span>atomic_fetch_sub()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1162,7 +1162,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_fetch_sub </td>
+          <td class="memname"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_fetch_sub </td>
           <td>(</td>
           <td class="paramtype">volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -1179,7 +1179,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1269,8 +1269,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="ga6738b7ff1fe873ce293f75bd96fdd3bc" name="ga6738b7ff1fe873ce293f75bd96fdd3bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6738b7ff1fe873ce293f75bd96fdd3bc">&#9670;&#160;</a></span>atomic_fetch_xor()</h2>
+<a id="gab370fe73a369d618c7810547f71b61c4" name="gab370fe73a369d618c7810547f71b61c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab370fe73a369d618c7810547f71b61c4">&#9670;&#160;</a></span>atomic_fetch_xor()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1281,7 +1281,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_fetch_xor </td>
+          <td class="memname"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_fetch_xor </td>
           <td>(</td>
           <td class="paramtype">volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -1298,7 +1298,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1329,8 +1329,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="gae881b9b04d18e6f5dd4f5d7311bb48c9" name="gae881b9b04d18e6f5dd4f5d7311bb48c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae881b9b04d18e6f5dd4f5d7311bb48c9">&#9670;&#160;</a></span>atomic_load()</h2>
+<a id="gac97fbbd35fc0bf2a6051feefa461a711" name="gac97fbbd35fc0bf2a6051feefa461a711"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac97fbbd35fc0bf2a6051feefa461a711">&#9670;&#160;</a></span>atomic_load()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1341,7 +1341,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_load </td>
+          <td class="memname"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_load </td>
           <td>(</td>
           <td class="paramtype">const volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -1353,7 +1353,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1383,8 +1383,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="ga4066975858c891b3012f41c4f33073b3" name="ga4066975858c891b3012f41c4f33073b3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga4066975858c891b3012f41c4f33073b3">&#9670;&#160;</a></span>atomic_load_any()</h2>
+<a id="ga772ceef8a06ba3e08118d11382fc6c9d" name="ga772ceef8a06ba3e08118d11382fc6c9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga772ceef8a06ba3e08118d11382fc6c9d">&#9670;&#160;</a></span>atomic_load_any()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1395,7 +1395,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_load_any </td>
+          <td class="memname"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_load_any </td>
           <td>(</td>
           <td class="paramtype">const T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -1407,7 +1407,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1488,8 +1488,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="gae43f163ab729da3abeac1aae2100d14c" name="gae43f163ab729da3abeac1aae2100d14c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae43f163ab729da3abeac1aae2100d14c">&#9670;&#160;</a></span>atomic_or_fetch()</h2>
+<a id="gac7b60e55335293cbc400c9e8c481489c" name="gac7b60e55335293cbc400c9e8c481489c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac7b60e55335293cbc400c9e8c481489c">&#9670;&#160;</a></span>atomic_or_fetch()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1500,7 +1500,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_or_fetch </td>
+          <td class="memname"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_or_fetch </td>
           <td>(</td>
           <td class="paramtype">volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -1517,7 +1517,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1548,8 +1548,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="ga68dc6572818e290f920ee64fad9f0d62" name="ga68dc6572818e290f920ee64fad9f0d62"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga68dc6572818e290f920ee64fad9f0d62">&#9670;&#160;</a></span>atomic_signal_fence()</h2>
+<a id="ga9dd12e898a2e56aa49f0257f904d4a8d" name="ga9dd12e898a2e56aa49f0257f904d4a8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9dd12e898a2e56aa49f0257f904d4a8d">&#9670;&#160;</a></span>atomic_signal_fence()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1558,7 +1558,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE void atomic_signal_fence </td>
+          <td class="memname">void atomic_signal_fence </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span></td><td>)</td>
           <td></td>
@@ -1566,7 +1566,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1644,8 +1644,8 @@ template&lt;typename Pred, typename Spin = default_spin_policy&gt; </div>
 
 </div>
 </div>
-<a id="gaaa5c14a3bfaac1bdcf93e2292ba1608f" name="gaaa5c14a3bfaac1bdcf93e2292ba1608f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaaa5c14a3bfaac1bdcf93e2292ba1608f">&#9670;&#160;</a></span>atomic_store()</h2>
+<a id="gad653d72ae99e1e5262569ac9028d923d" name="gad653d72ae99e1e5262569ac9028d923d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad653d72ae99e1e5262569ac9028d923d">&#9670;&#160;</a></span>atomic_store()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1656,7 +1656,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE void atomic_store </td>
+          <td class="memname">void atomic_store </td>
           <td>(</td>
           <td class="paramtype">volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -1673,7 +1673,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1703,8 +1703,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="ga235411e03936c4aa90f209ab38cab492" name="ga235411e03936c4aa90f209ab38cab492"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga235411e03936c4aa90f209ab38cab492">&#9670;&#160;</a></span>atomic_store_any()</h2>
+<a id="gabdedaf26f8ae6909368e611cf3786b3f" name="gabdedaf26f8ae6909368e611cf3786b3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabdedaf26f8ae6909368e611cf3786b3f">&#9670;&#160;</a></span>atomic_store_any()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1715,7 +1715,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE void atomic_store_any </td>
+          <td class="memname">void atomic_store_any </td>
           <td>(</td>
           <td class="paramtype">T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -1732,7 +1732,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1762,8 +1762,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="ga88203498c566079de5b0d3497abfb2ec" name="ga88203498c566079de5b0d3497abfb2ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga88203498c566079de5b0d3497abfb2ec">&#9670;&#160;</a></span>atomic_sub_fetch()</h2>
+<a id="ga1a2061210bbb322408eea7178a25f454" name="ga1a2061210bbb322408eea7178a25f454"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1a2061210bbb322408eea7178a25f454">&#9670;&#160;</a></span>atomic_sub_fetch()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1774,7 +1774,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_sub_fetch </td>
+          <td class="memname"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_sub_fetch </td>
           <td>(</td>
           <td class="paramtype">volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -1791,7 +1791,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1881,8 +1881,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="gad09904472351069bf4052ca1aa2cef7b" name="gad09904472351069bf4052ca1aa2cef7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad09904472351069bf4052ca1aa2cef7b">&#9670;&#160;</a></span>atomic_thread_fence()</h2>
+<a id="ga983217e8435a6bd85a2f9fa21910d358" name="ga983217e8435a6bd85a2f9fa21910d358"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga983217e8435a6bd85a2f9fa21910d358">&#9670;&#160;</a></span>atomic_thread_fence()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1891,7 +1891,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE void atomic_thread_fence </td>
+          <td class="memname">void atomic_thread_fence </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group___memory_order.html#gad658351bedece1752acbd72886a7e0e4">memory_order</a></td>          <td class="paramname"><span class="paramname"><em>mo</em></span></td><td>)</td>
           <td></td>
@@ -1899,7 +1899,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2403,8 +2403,8 @@ template&lt;typename T, typename Func&gt; </div>
 
 </div>
 </div>
-<a id="ga7b991ea245c0d1d223ef0ea22b5d9c5c" name="ga7b991ea245c0d1d223ef0ea22b5d9c5c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7b991ea245c0d1d223ef0ea22b5d9c5c">&#9670;&#160;</a></span>atomic_xor_fetch()</h2>
+<a id="ga6c07918d29c54f70597709966d651b49" name="ga6c07918d29c54f70597709966d651b49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6c07918d29c54f70597709966d651b49">&#9670;&#160;</a></span>atomic_xor_fetch()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2415,7 +2415,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_ALWAYS_INLINE_INLINE <a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_xor_fetch </td>
+          <td class="memname"><a class="el" href="group___remove_qualifiers.html#ga52b035d7a0227468261ee211d61d7abf">remove_volatile_t</a>&lt; T &gt; atomic_xor_fetch </td>
           <td>(</td>
           <td class="paramtype">volatile T *</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span>, </td>
         </tr>
@@ -2432,7 +2432,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2463,8 +2463,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="ga3a0d5268ae71df1d0d5872747ebf7c66" name="ga3a0d5268ae71df1d0d5872747ebf7c66"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3a0d5268ae71df1d0d5872747ebf7c66">&#9670;&#160;</a></span>is_always_lock_free()</h2>
+<a id="ga4588c81b98fa2b7eacf87c0479094826" name="ga4588c81b98fa2b7eacf87c0479094826"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4588c81b98fa2b7eacf87c0479094826">&#9670;&#160;</a></span>is_always_lock_free()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2475,7 +2475,7 @@ template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR17 bool is_always_lock_free </td>
+          <td class="memname">bool is_always_lock_free </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -2483,7 +2483,7 @@ template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

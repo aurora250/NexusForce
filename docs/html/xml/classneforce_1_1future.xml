@@ -1,0 +1,323 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1future" kind="class" language="C++" prot="public">
+    <compoundname>neforce::future</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">inner::__basic_future&lt; Res &gt;</basecompoundref>
+    <includes refid="future_8hpp" local="no">future.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Res</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1future_1ab67daec74398bd1e9ff43a9756c8ca8f" prot="private" static="no">
+        <type>inner::__basic_future&lt; Res &gt;</type>
+        <definition>using neforce::future&lt; Res &gt;::base_type = inner::__basic_future&lt;Res&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>neforce::future::base_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" line="869" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" bodystart="869" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1future_1aa743fca4f0463daae8649bb958d1ad98" prot="private" static="no">
+        <type>typename base_type::state_type</type>
+        <definition>using neforce::future&lt; Res &gt;::state_type = typename base_type::state_type</definition>
+        <argsstring></argsstring>
+        <name>state_type</name>
+        <qualifiedname>neforce::future::state_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" line="870" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" bodystart="870" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classneforce_1_1future_1a47ab13419dfaddad6afa37008ee5577d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class promise&lt; Res &gt;</definition>
+        <argsstring></argsstring>
+        <name>promise&lt; Res &gt;</name>
+        <qualifiedname>neforce::future::promise&lt; Res &gt;</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1promise" kindref="compound">promise</ref>&lt; Res &gt;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" line="859" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" bodystart="861" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1future_1a01a090c398a08d8c1a25a8f2f3e4ec6a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Sign</type>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class packaged_task</definition>
+        <argsstring></argsstring>
+        <name>packaged_task</name>
+        <qualifiedname>neforce::future::packaged_task</qualifiedname>
+        <param>
+          <type>packaged_task</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" line="864" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" bodystart="864" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1future_1a5ddd8e7eacd8f4c92fc779a08f323ef0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Function</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>future&lt; <ref refid="group___async_1gac8262c6cb66019c2802377e25ab562ab" kindref="member">async_result_t</ref>&lt; Function, Args... &gt; &gt;</type>
+        <definition>future&lt; async_result_t&lt; Function, Args... &gt; &gt; async</definition>
+        <argsstring>(launch, Function &amp;&amp;, Args &amp;&amp;...)</argsstring>
+        <name>async</name>
+        <qualifiedname>neforce::future::async</qualifiedname>
+        <param>
+          <type><ref refid="group___async_1ga5cb3a59f429bfc428307430ce64f8e5f" kindref="member">launch</ref></type>
+        </param>
+        <param>
+          <type>Function &amp;&amp;</type>
+        </param>
+        <param>
+          <type>Args &amp;&amp;</type>
+          <declname>...</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" line="867" column="19"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1future_1a93d8de6bcb184652f0ed0e608103aaef" prot="private" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::future&lt; Res &gt;::future</definition>
+        <argsstring>(const state_type &amp;state)</argsstring>
+        <name>future</name>
+        <qualifiedname>neforce::future::future</qualifiedname>
+        <param>
+          <type>const state_type &amp;</type>
+          <declname>state</declname>
+        </param>
+        <briefdescription>
+<para>状态构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" line="875" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" bodystart="875" bodyend="876"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1future_1a485c440a65029ba0a4e267ca0d60e30e" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::future&lt; Res &gt;::future</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>future</name>
+        <qualifiedname>neforce::future::future</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" line="882" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" bodystart="882" bodyend="883"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1future_1a1b5b99d4a0f721f0070c1a6c44c75875" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::future&lt; Res &gt;::future</definition>
+        <argsstring>(future &amp;&amp;other) noexcept</argsstring>
+        <name>future</name>
+        <qualifiedname>neforce::future::future</qualifiedname>
+        <param>
+          <type>future &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的future </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" line="889" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" bodystart="889" bodyend="890"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1future_1aea7069e424d24226d61a6e40aab2f0c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::future&lt; Res &gt;::future</definition>
+        <argsstring>(const future &amp;)=delete</argsstring>
+        <name>future</name>
+        <qualifiedname>neforce::future::future</qualifiedname>
+        <param>
+          <type>const future &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" line="892" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1future_1a31bb76d9d7d779ef8d9fa3da9d95c219" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>future &amp;</type>
+        <definition>future &amp; neforce::future&lt; Res &gt;::operator=</definition>
+        <argsstring>(const future &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::future::operator=</qualifiedname>
+        <param>
+          <type>const future &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" line="893" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1future_1a005142778831405c2e3eba7afddc807c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>future &amp;</type>
+        <definition>future &amp; neforce::future&lt; Res &gt;::operator=</definition>
+        <argsstring>(future &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::future::operator=</qualifiedname>
+        <param>
+          <type>future &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的future </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" line="900" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" bodystart="900" bodyend="903"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1future_1ac9566d603acc81ee159ec2f115a7b11d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>Res</type>
+        <definition>Res neforce::future&lt; Res &gt;::get</definition>
+        <argsstring>()</argsstring>
+        <name>get</name>
+        <qualifiedname>neforce::future::get</qualifiedname>
+        <briefdescription>
+<para>获取结果 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>结果值 </para>
+</simplesect>
+<simplesect kind="note"><para>调用后future将变为无效状态 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" line="910" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" bodystart="910" bodyend="913"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <referencedby refid="group___async_1ga62fae7780686a01cf8f94a914db3e161" compoundref="future_8hpp" startline="1189" endline="1192">neforce::get</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1future_1a0bb90cf9b8d4aca1b7141ce7656a488d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1shared__future" kindref="compound">shared_future</ref>&lt; Res &gt;</type>
+        <definition>shared_future&lt; Res &gt; neforce::future&lt; Res &gt;::share</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>share</name>
+        <qualifiedname>neforce::future::share</qualifiedname>
+        <briefdescription>
+<para>转换为共享future </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>共享future对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" line="919" column="19"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>独占future类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Res</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结果类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+表示一个异步计算的结果，结果只能被获取一次。 <simplesect kind="note"><para>不支持拷贝，仅支持移动 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" line="848" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/future.hpp" bodystart="856" bodyend="920"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1future_1a5ddd8e7eacd8f4c92fc779a08f323ef0" prot="private" virt="non-virtual"><scope>neforce::future</scope><name>async</name></member>
+      <member refid="classneforce_1_1future_1ab67daec74398bd1e9ff43a9756c8ca8f" prot="private" virt="non-virtual"><scope>neforce::future</scope><name>base_type</name></member>
+      <member refid="classneforce_1_1future_1a93d8de6bcb184652f0ed0e608103aaef" prot="private" virt="non-virtual"><scope>neforce::future</scope><name>future</name></member>
+      <member refid="classneforce_1_1future_1a485c440a65029ba0a4e267ca0d60e30e" prot="public" virt="non-virtual"><scope>neforce::future</scope><name>future</name></member>
+      <member refid="classneforce_1_1future_1a1b5b99d4a0f721f0070c1a6c44c75875" prot="public" virt="non-virtual"><scope>neforce::future</scope><name>future</name></member>
+      <member refid="classneforce_1_1future_1aea7069e424d24226d61a6e40aab2f0c9" prot="public" virt="non-virtual"><scope>neforce::future</scope><name>future</name></member>
+      <member refid="classneforce_1_1future_1ac9566d603acc81ee159ec2f115a7b11d" prot="public" virt="non-virtual"><scope>neforce::future</scope><name>get</name></member>
+      <member refid="classneforce_1_1future_1a31bb76d9d7d779ef8d9fa3da9d95c219" prot="public" virt="non-virtual"><scope>neforce::future</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1future_1a005142778831405c2e3eba7afddc807c" prot="public" virt="non-virtual"><scope>neforce::future</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1future_1a0bb90cf9b8d4aca1b7141ce7656a488d" prot="public" virt="non-virtual"><scope>neforce::future</scope><name>share</name></member>
+      <member refid="classneforce_1_1future_1aa743fca4f0463daae8649bb958d1ad98" prot="private" virt="non-virtual"><scope>neforce::future</scope><name>state_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

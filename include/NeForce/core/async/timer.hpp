@@ -113,7 +113,7 @@ private:
             unique_lock<mutex> lock(mutex_);
 
             if (nodes_.empty()) {
-                cv_.wait(lock, [this] { return stopped_.load() || !nodes_.empty(); });
+                cv_.wait_for(lock, 500_ms, [this] { return stopped_.load() || !nodes_.empty(); });
                 if (stopped_.load()) {
                     break;
                 }
@@ -198,10 +198,10 @@ public:
         cancel_flags_[id] = move(flag);
         promises_[id] = promise;
 
-        lock.unlock_quiet();
         if (is_earliest) {
             cv_.notify_one();
         }
+        lock.unlock_quiet();
         return id;
     }
 
@@ -227,11 +227,9 @@ public:
             nodes_.erase(node_it->second);
             node_map_.erase(node_it);
 
-            lock.unlock_quiet();
             if (is_earliest) {
                 cv_.notify_one();
             }
-            lock.lock_quiet();
 
             cancel_flags_.erase(flag_it);
             promises_.erase(id);
@@ -283,7 +281,7 @@ public:
      */
     NEFORCE_NODISCARD bool is_pending(token id) const {
         lock<mutex> lock(mutex_);
-        return promises_.find(id) != promises_.end();
+        return node_map_.find(id) != node_map_.end();
     }
 };
 

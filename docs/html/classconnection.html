@@ -105,10 +105,10 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:abf4fbe074e578b5744dc6dc8e595d8e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数，创建处于已连接状态的对象 <br /></td></tr>
 <tr class="memitem:acc6d1e3a702e061bfbe2f82969e0f1c8" id="r_acc6d1e3a702e061bfbe2f82969e0f1c8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#acc6d1e3a702e061bfbe2f82969e0f1c8">disconnect</a> () noexcept</td></tr>
 <tr class="memdesc:acc6d1e3a702e061bfbe2f82969e0f1c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">断开连接  <br /></td></tr>
-<tr class="memitem:a89b63a9a3dabac0307fc3ffa0126765c" id="r_a89b63a9a3dabac0307fc3ffa0126765c"><td class="memItemLeft">NEFORCE_NODISCARD bool&#160;</td><td class="memItemRight"><a class="el" href="#a89b63a9a3dabac0307fc3ffa0126765c">connected</a> () const noexcept</td></tr>
-<tr class="memdesc:a89b63a9a3dabac0307fc3ffa0126765c"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查连接是否有效  <br /></td></tr>
-<tr class="memitem:aaee6feffb6f5b65c60833102b402e2f9" id="r_aaee6feffb6f5b65c60833102b402e2f9"><td class="memItemLeft">NEFORCE_NODISCARD <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; bool &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aaee6feffb6f5b65c60833102b402e2f9">flag</a> () const noexcept</td></tr>
-<tr class="memdesc:aaee6feffb6f5b65c60833102b402e2f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取连接标志的内部指针  <br /></td></tr>
+<tr class="memitem:a9ae30d2439c24be70e2840897cd76ce0" id="r_a9ae30d2439c24be70e2840897cd76ce0"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a9ae30d2439c24be70e2840897cd76ce0">connected</a> () const noexcept</td></tr>
+<tr class="memdesc:a9ae30d2439c24be70e2840897cd76ce0"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查连接是否有效  <br /></td></tr>
+<tr class="memitem:af56e38f6d466c0cb833446b89c9ca2eb" id="r_af56e38f6d466c0cb833446b89c9ca2eb"><td class="memItemLeft"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; bool &gt;&#160;</td><td class="memItemRight"><a class="el" href="#af56e38f6d466c0cb833446b89c9ca2eb">flag</a> () const noexcept</td></tr>
+<tr class="memdesc:af56e38f6d466c0cb833446b89c9ca2eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取连接标志的内部指针  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>连接句柄 </p>
@@ -116,8 +116,8 @@ Public 成员函数</h2></td></tr>
 
 <p class="definition">在文件 <a class="el" href="signals_8hpp_source.html">signals.hpp</a> 第 <a class="el" href="signals_8hpp_source.html#l00070">70</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="a89b63a9a3dabac0307fc3ffa0126765c" name="a89b63a9a3dabac0307fc3ffa0126765c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89b63a9a3dabac0307fc3ffa0126765c">&#9670;&#160;</a></span>connected()</h2>
+<a id="a9ae30d2439c24be70e2840897cd76ce0" name="a9ae30d2439c24be70e2840897cd76ce0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ae30d2439c24be70e2840897cd76ce0">&#9670;&#160;</a></span>connected()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -126,7 +126,7 @@ Public 成员函数</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_NODISCARD bool connection::connected </td>
+          <td class="memname">bool connection::connected </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -134,7 +134,7 @@ Public 成员函数</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -176,8 +176,8 @@ Public 成员函数</h2></td></tr>
 
 </div>
 </div>
-<a id="aaee6feffb6f5b65c60833102b402e2f9" name="aaee6feffb6f5b65c60833102b402e2f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaee6feffb6f5b65c60833102b402e2f9">&#9670;&#160;</a></span>flag()</h2>
+<a id="af56e38f6d466c0cb833446b89c9ca2eb" name="af56e38f6d466c0cb833446b89c9ca2eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af56e38f6d466c0cb833446b89c9ca2eb">&#9670;&#160;</a></span>flag()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -186,7 +186,7 @@ Public 成员函数</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_NODISCARD <a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; bool &gt; connection::flag </td>
+          <td class="memname"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; bool &gt; connection::flag </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -194,7 +194,7 @@ Public 成员函数</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

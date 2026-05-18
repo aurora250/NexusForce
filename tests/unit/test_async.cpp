@@ -1252,7 +1252,7 @@ TEST(TimerScheduler, Size) {
     EXPECT_EQ(sched.size(), 0u);
 }
 
-TEST(TimerScheduler, ImmediateTask) { // may block
+TEST(TimerScheduler, ImmediateTask) {
     promise<void> done;
     steady_scheduler sched;
     sched.add_task(steady_clock::now() - 1_h, [&] { done.set_value(); });

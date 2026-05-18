@@ -10,8 +10,8 @@ var duration_8hpp =
     [ "seconds", "group___duration.html#gafce1f041e55ef5a119744bb53b2aabd9", null ],
     [ "weeks", "group___duration.html#gae002e1b8f5eb4663baeb35336ed56d9b", null ],
     [ "years", "group___duration.html#ga4693bd6c2e63adf45c114988dd30c99b", null ],
-    [ "ceil", "group___duration.html#ga8bdbca9de6bf622390c7c5563f313fb4", null ],
-    [ "floor", "group___duration.html#ga58fc8b60fd5d6791de3ebaeb71755c61", null ],
+    [ "ceil", "group___duration.html#ga16bddef5352239d27e97297396f216b5", null ],
+    [ "floor", "group___duration.html#gab4924f82d6df2beff7959249306d6537", null ],
     [ "operator!=", "group___duration.html#ga516f0693154441d71c597508dd097339", null ],
     [ "operator\"\"_h", "group___user_literals.html#ga5def25a03d9875b84d874916899a2419", null ],
     [ "operator\"\"_h", "group___user_literals.html#gaa236f1c522ea9920d191202750a591d7", null ],
@@ -40,5 +40,5 @@ var duration_8hpp =
     [ "operator>=", "group___duration.html#ga696f242251b37ebac51f459e9c56668e", null ],
     [ "sleep_for", "group___thread.html#gadbe19150bdd95fb6be280139d5ef441c", null ],
     [ "time_cast", "group___duration.html#gafaba32c48d91da85098ecb115cea65ed", null ],
-    [ "is_duration_v", "group___duration.html#gac4563088c2189043e64c4063617957c6", null ]
+    [ "is_duration_v", "group___duration.html#ga76d927168c448763c60ed9b80e310429", null ]
 ];

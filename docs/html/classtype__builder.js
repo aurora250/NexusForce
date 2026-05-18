@@ -7,8 +7,8 @@ var classtype__builder =
     [ "constructor", "classtype__builder.html#aadd3c5a962a61d2df09e9290d95e6350", null ],
     [ "function", "classtype__builder.html#a379d14c7df5dc9c0e4d8d8b812829d9a", null ],
     [ "function", "classtype__builder.html#ab3f4880362e3f86773b612e9e84ee24e", null ],
-    [ "meta", "classtype__builder.html#acd15af7c15cdaab6f6dd537fb4a33676", null ],
-    [ "meta", "classtype__builder.html#a8cf7ccfe0b507fadaad4fb9d78ca8047", null ],
+    [ "meta", "classtype__builder.html#a0f907fe833ac6e559e4488a232b6a0cc", null ],
+    [ "meta", "classtype__builder.html#aa71e9b2d2c19d699cdda5574cc53c7c3", null ],
     [ "property", "classtype__builder.html#a7dfee419346f930acb6252545de97b55", null ],
     [ "static_function", "classtype__builder.html#a489b86bfa65620b9180104c3739d1e49", null ]
 ];

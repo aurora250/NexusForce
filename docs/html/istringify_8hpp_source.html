@@ -107,7 +107,7 @@ $(function(){initNavTree('istringify_8hpp_source.html','',''); });
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">constexpr</span> <span class="keyword">const</span> T&amp; derived() <span class="keyword">const</span> <span class="keyword">noexcept</span> { <span class="keywordflow">return</span> <span class="keyword">static_cast&lt;</span><span class="keyword">const </span>T&amp;<span class="keyword">&gt;</span>(*this); }</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structistringify.html#aeb53a048cd2b8e99462c2cf0f5c602bc">   47</a></span>    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">string</span> <a class="code hl_function" href="structistringify.html#aeb53a048cd2b8e99462c2cf0f5c602bc">to_string</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> derived().to_string(); }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structistringify.html#a87a370c84d40b2bf37b8aa5cc5252b52">   47</a></span>    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">string</span> <a class="code hl_function" href="structistringify.html#a87a370c84d40b2bf37b8aa5cc5252b52">to_string</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> derived().to_string(); }</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>};</div>
 </div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> <span class="comment">// CRTPInterfaces</span></div>
@@ -115,7 +115,7 @@ $(function(){initNavTree('istringify_8hpp_source.html','',''); });
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span></div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, enable_if_t&lt;is_base_of_v&lt;i<span class="keywordtype">string</span>ify&lt;T&gt;, T&gt;, <span class="keywordtype">int</span>&gt; = 0&gt;</div>
 <div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="group___string_converts.html#ga31c6fb8bbf417f4e00ea2f52899e84f6">   68</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">string</span> <a class="code hl_function" href="group___string_converts.html#ga31c6fb8bbf417f4e00ea2f52899e84f6">to_string</a>(<span class="keyword">const</span> T&amp; obj) {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="group___string_converts.html#ga8a5552a92ce50b338c4a6286a19cbba5">   68</a></span>NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <span class="keywordtype">string</span> <a class="code hl_function" href="group___string_converts.html#ga8a5552a92ce50b338c4a6286a19cbba5">to_string</a>(<span class="keyword">const</span> T&amp; obj) {</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">return</span> obj.to_string();</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
 </div>
@@ -123,10 +123,10 @@ $(function(){initNavTree('istringify_8hpp_source.html','',''); });
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>NEFORCE_END_NAMESPACE__</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_INTERFACE_ISTRINGIFY_HPP__</span></div>
-<div class="ttc" id="agroup___string_converts_html_ga31c6fb8bbf417f4e00ea2f52899e84f6"><div class="ttname"><a href="group___string_converts.html#ga31c6fb8bbf417f4e00ea2f52899e84f6">to_string</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(const T &amp;obj)</div><div class="ttdoc">将实现了istringify接口的对象转换为字符串</div><div class="ttdef"><b>定义</b> <a href="#l00068">istringify.hpp:68</a></div></div>
+<div class="ttc" id="agroup___string_converts_html_ga8a5552a92ce50b338c4a6286a19cbba5"><div class="ttname"><a href="group___string_converts.html#ga8a5552a92ce50b338c4a6286a19cbba5">to_string</a></div><div class="ttdeci">constexpr string to_string(const T &amp;obj)</div><div class="ttdoc">将实现了istringify接口的对象转换为字符串</div><div class="ttdef"><b>定义</b> <a href="#l00068">istringify.hpp:68</a></div></div>
 <div class="ttc" id="astring_8hpp_html"><div class="ttname"><a href="string_8hpp.html">string.hpp</a></div><div class="ttdoc">字符串类型别名和实用函数</div></div>
 <div class="ttc" id="astructistringify_html"><div class="ttname"><a href="structistringify.html">istringify</a></div><div class="ttdoc">可字符串化接口</div><div class="ttdef"><b>定义</b> <a href="#l00032">istringify.hpp:32</a></div></div>
-<div class="ttc" id="astructistringify_html_aeb53a048cd2b8e99462c2cf0f5c602bc"><div class="ttname"><a href="structistringify.html#aeb53a048cd2b8e99462c2cf0f5c602bc">istringify::to_string</a></div><div class="ttdeci">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const</div><div class="ttdoc">转换为字符串</div><div class="ttdef"><b>定义</b> <a href="#l00047">istringify.hpp:47</a></div></div>
+<div class="ttc" id="astructistringify_html_a87a370c84d40b2bf37b8aa5cc5252b52"><div class="ttname"><a href="structistringify.html#a87a370c84d40b2bf37b8aa5cc5252b52">istringify::to_string</a></div><div class="ttdeci">constexpr string to_string() const</div><div class="ttdoc">转换为字符串</div><div class="ttdef"><b>定义</b> <a href="#l00047">istringify.hpp:47</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

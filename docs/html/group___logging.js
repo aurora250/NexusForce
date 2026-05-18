@@ -17,7 +17,7 @@ var group___logging =
     ] ],
     [ "log_formatter", "classlog__formatter.html", [
       [ "log_formatter", "classlog__formatter.html#ae4dce333c41dd9e679550198ccd394ce", null ],
-      [ "format", "classlog__formatter.html#ad93b92968d24327903ab47525d250de1", null ]
+      [ "format", "classlog__formatter.html#ab7f5f5daadf75bae5f382f317b37e8ba", null ]
     ] ],
     [ "log_sink", "classlog__sink.html", [
       [ "flush", "classlog__sink.html#adb79b71ac6d34d43d31a708d9c46f599", null ],

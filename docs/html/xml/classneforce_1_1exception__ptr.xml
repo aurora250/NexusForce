@@ -1,0 +1,631 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1exception__ptr" kind="class" language="C++" prot="public">
+    <compoundname>neforce::exception_ptr</compoundname>
+    <includes refid="exception__ptr_8hpp" local="no">exception_ptr.hpp</includes>
+    <innerclass refid="structneforce_1_1exception__ptr_1_1ecb" prot="public">neforce::exception_ptr::ecb</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1exception__ptr_1a84030f6c7af64ee9b0d6c55fe0647b7e" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1exception__ptr_1_1ecb" kindref="compound">ecb</ref> *</type>
+        <definition>ecb* neforce::exception_ptr::ecb_</definition>
+        <argsstring></argsstring>
+        <name>ecb_</name>
+        <qualifiedname>neforce::exception_ptr::ecb_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+<para>控制块指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="156" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="156" bodyend="156"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1exception__ptr_1a4dc6fca5c63d96ad711e5075421a2d51" prot="private" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::exception_ptr::exception_ptr</definition>
+        <argsstring>(ecb *cb) noexcept</argsstring>
+        <name>exception_ptr</name>
+        <qualifiedname>neforce::exception_ptr::exception_ptr</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1exception__ptr_1_1ecb" kindref="compound">ecb</ref> *</type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+<para>私有构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>控制块指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>用于工厂函数创建异常指针 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="163" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="163" bodyend="164"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classneforce_1_1exception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Ex</type>
+          </param>
+        </templateparamlist>
+        <type>exception_ptr</type>
+        <definition>exception_ptr make_exception_ptr</definition>
+        <argsstring>(Ex ex)</argsstring>
+        <name>make_exception_ptr</name>
+        <qualifiedname>neforce::exception_ptr::make_exception_ptr</qualifiedname>
+        <param>
+          <type>Ex</type>
+          <declname>ex</declname>
+        </param>
+        <briefdescription>
+<para>创建异常指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Ex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异常类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异常对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>异常指针</para>
+</simplesect>
+创建引用指定异常的异常指针。 如果内存分配失败，返回空的异常指针。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="167" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="325" bodyend="335"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3019" endline="3021">neforce::forward</references>
+        <references refid="classneforce_1_1exception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" compoundref="exception__ptr_8hpp" startline="325" endline="335">make_exception_ptr</references>
+        <references refid="group___unique_pointer_1ga86ab9db93326b3badc11a15d1c0e3007" compoundref="unique__ptr_8hpp" startline="973" endline="975">neforce::make_unique</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="structneforce_1_1exception__ptr_1_1ecb_1a2bb66ab21a39ca29568bb7a59cdeb0b6" compoundref="exception__ptr_8hpp" startline="148" endline="152">neforce::exception_ptr::ecb::release</references>
+        <referencedby refid="classneforce_1_1exception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" compoundref="exception__ptr_8hpp" startline="325" endline="335">make_exception_ptr</referencedby>
+        <referencedby refid="classneforce_1_1exception__ptr_1a12342507bc5abdc903c22fabac839d32">rethrow_exception</referencedby>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1exception__ptr_1ae2436c911c2e23511a3012d0ddc2a419" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>exception_ptr NEFORCE_API</type>
+        <definition>exception_ptr NEFORCE_API current_exception</definition>
+        <argsstring>()</argsstring>
+        <name>current_exception</name>
+        <qualifiedname>neforce::exception_ptr::current_exception</qualifiedname>
+        <briefdescription>
+<para>获取当前异常 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前异常的异常指针</para>
+</simplesect>
+捕获当前异常并创建异常指针。 如果当前没有异常被捕获，返回空的异常指针。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="169" column="38"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1exception__ptr_1a12342507bc5abdc903c22fabac839d32" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void NEFORCE_API</type>
+        <definition>void NEFORCE_API rethrow_exception</definition>
+        <argsstring>(const exception_ptr &amp;p)</argsstring>
+        <name>rethrow_exception</name>
+        <qualifiedname>neforce::exception_ptr::rethrow_exception</qualifiedname>
+        <param>
+          <type>const exception_ptr &amp;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>重新抛出异常 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异常指针</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+重新抛出异常指针引用的异常。</para>
+<para><simplesect kind="note"><para>如果异常指针为空，进程将被终止。 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="171" column="29"/>
+        <references refid="classneforce_1_1exception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" compoundref="exception__ptr_8hpp" startline="325" endline="335">make_exception_ptr</references>
+        <references refid="classneforce_1_1exception__ptr_1a12342507bc5abdc903c22fabac839d32">rethrow_exception</references>
+        <referencedby refid="classneforce_1_1exception__ptr_1a12342507bc5abdc903c22fabac839d32">rethrow_exception</referencedby>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1exception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Ex</type>
+          </param>
+        </templateparamlist>
+        <type>exception_ptr</type>
+        <definition>exception_ptr make_exception_ptr</definition>
+        <argsstring>(Ex ex)</argsstring>
+        <name>make_exception_ptr</name>
+        <qualifiedname>neforce::exception_ptr::make_exception_ptr</qualifiedname>
+        <param>
+          <type>Ex</type>
+          <declname>ex</declname>
+        </param>
+        <briefdescription>
+<para>创建异常指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Ex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异常类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ex</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异常对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>异常指针</para>
+</simplesect>
+创建引用指定异常的异常指针。 如果内存分配失败，返回空的异常指针。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="174" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="325" bodyend="335"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1exception__ptr_1adf0357fce8f51722c2f546487405cea7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator==</definition>
+        <argsstring>(nullptr_t, const exception_ptr &amp;ptr) noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>neforce::exception_ptr::operator==</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gacb98a47b9e384b2934a9c2dbd3c2d598" kindref="member">nullptr_t</ref></type>
+        </param>
+        <param>
+          <type>const exception_ptr &amp;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>空指针与异常指针比较相等 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="287" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="287" bodyend="287"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1exception__ptr_1ae83e5337244cc12f57b1dd611a3d13e1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool operator!=</definition>
+        <argsstring>(nullptr_t, const exception_ptr &amp;ptr) noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>neforce::exception_ptr::operator!=</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gacb98a47b9e384b2934a9c2dbd3c2d598" kindref="member">nullptr_t</ref></type>
+        </param>
+        <param>
+          <type>const exception_ptr &amp;</type>
+          <declname>ptr</declname>
+        </param>
+        <briefdescription>
+<para>空指针与异常指针比较不等 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="298" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="298" bodyend="298"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1exception__ptr_1a52bd75e72b425bacf1e78c799d6e977a" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::exception_ptr::exception_ptr</definition>
+        <argsstring>(nullptr_t np=nullptr) noexcept</argsstring>
+        <name>exception_ptr</name>
+        <qualifiedname>neforce::exception_ptr::exception_ptr</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gacb98a47b9e384b2934a9c2dbd3c2d598" kindref="member">nullptr_t</ref></type>
+          <declname>np</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>np</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>空指针字面量</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建一个空的异常指针，不引用任何异常。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="183" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="183" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1exception__ptr_1a0375e2fe3c8306cebd53ac9468c686ac" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::exception_ptr::exception_ptr</definition>
+        <argsstring>(const exception_ptr &amp;other) noexcept</argsstring>
+        <name>exception_ptr</name>
+        <qualifiedname>neforce::exception_ptr::exception_ptr</qualifiedname>
+        <param>
+          <type>const exception_ptr &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要拷贝的异常指针</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+增加引用计数，共享异常对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="191" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="191" bodyend="196"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1exception__ptr_1aa570e5721341c2ede2b27bee12a2ac97" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::exception_ptr::exception_ptr</definition>
+        <argsstring>(exception_ptr &amp;&amp;other) noexcept</argsstring>
+        <name>exception_ptr</name>
+        <qualifiedname>neforce::exception_ptr::exception_ptr</qualifiedname>
+        <param>
+          <type>exception_ptr &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的异常指针</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+转移异常指针的所有权，不增加引用计数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="204" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="204" bodyend="207"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1exception__ptr_1a9ba58a8e960a4e15b60acc345c534296" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::exception_ptr::~exception_ptr</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>~exception_ptr</name>
+        <qualifiedname>neforce::exception_ptr::~exception_ptr</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>减少引用计数，当引用计数为0时释放资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="214" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="214" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1exception__ptr_1a5babab4253e66ac63cc68ba6ff48b2af" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>exception_ptr &amp;</type>
+        <definition>exception_ptr &amp; neforce::exception_ptr::operator=</definition>
+        <argsstring>(const exception_ptr &amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::exception_ptr::operator=</qualifiedname>
+        <param>
+          <type>const exception_ptr &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要拷贝的异常指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前异常指针的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="225" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="225" bodyend="232"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3075" endline="3077">neforce::addressof</references>
+        <references refid="classneforce_1_1exception__ptr_1a89f231656621c696085ea7d48a7d5f65" compoundref="exception__ptr_8hpp" startline="252" endline="252">swap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1exception__ptr_1a4f112fcf4f65f50783ef46053c35be29" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>exception_ptr &amp;</type>
+        <definition>exception_ptr &amp; neforce::exception_ptr::operator=</definition>
+        <argsstring>(exception_ptr &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::exception_ptr::operator=</qualifiedname>
+        <param>
+          <type>exception_ptr &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的异常指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前异常指针的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="239" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="239" bodyend="246"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3075" endline="3077">neforce::addressof</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1exception__ptr_1a89f231656621c696085ea7d48a7d5f65" compoundref="exception__ptr_8hpp" startline="252" endline="252">swap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1exception__ptr_1a89f231656621c696085ea7d48a7d5f65" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::exception_ptr::swap</definition>
+        <argsstring>(exception_ptr &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::exception_ptr::swap</qualifiedname>
+        <param>
+          <type>exception_ptr &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个异常指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的异常指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="252" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="252" bodyend="252"/>
+        <references refid="classneforce_1_1exception__ptr_1a89f231656621c696085ea7d48a7d5f65" compoundref="exception__ptr_8hpp" startline="252" endline="252">swap</references>
+        <referencedby refid="classneforce_1_1exception__ptr_1a5babab4253e66ac63cc68ba6ff48b2af" compoundref="exception__ptr_8hpp" startline="225" endline="232">operator=</referencedby>
+        <referencedby refid="classneforce_1_1exception__ptr_1a4f112fcf4f65f50783ef46053c35be29" compoundref="exception__ptr_8hpp" startline="239" endline="246">operator=</referencedby>
+        <referencedby refid="classneforce_1_1exception__ptr_1a89f231656621c696085ea7d48a7d5f65" compoundref="exception__ptr_8hpp" startline="252" endline="252">swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1exception__ptr_1a0626fe8e173546fa4ec6d6b4d7415515" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::exception_ptr::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>neforce::exception_ptr::operator bool</qualifiedname>
+        <briefdescription>
+<para>布尔转换运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否持有异常</para>
+</simplesect>
+检查异常指针是否非空。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="260" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="260" bodyend="260"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1exception__ptr_1ac7163bdf36af3ac1ddca5c91297ff466" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::exception_ptr::operator==</definition>
+        <argsstring>(const exception_ptr &amp;rhs) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>neforce::exception_ptr::operator==</qualifiedname>
+        <param>
+          <type>const exception_ptr &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否相等</para>
+</simplesect>
+比较两个异常指针是否引用同一个异常对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="269" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="269" bodyend="269"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1exception__ptr_1a8fa32ea306880a07e553dc807ac050d2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::exception_ptr::operator!=</definition>
+        <argsstring>(const exception_ptr &amp;rhs) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>neforce::exception_ptr::operator!=</qualifiedname>
+        <param>
+          <type>const exception_ptr &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>不等比较运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否不相等 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="276" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="276" bodyend="276"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1exception__ptr_1a480c1853ca5876740f29178c157590c2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::exception_ptr::operator==</definition>
+        <argsstring>(nullptr_t) const noexcept</argsstring>
+        <name>operator==</name>
+        <qualifiedname>neforce::exception_ptr::operator==</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gacb98a47b9e384b2934a9c2dbd3c2d598" kindref="member">nullptr_t</ref></type>
+        </param>
+        <briefdescription>
+<para>与空指针比较相等 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="282" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="282" bodyend="282"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1exception__ptr_1afd2b9f6963ce0cf2d6fb5339d51b2fdd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::exception_ptr::operator!=</definition>
+        <argsstring>(nullptr_t) const noexcept</argsstring>
+        <name>operator!=</name>
+        <qualifiedname>neforce::exception_ptr::operator!=</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gacb98a47b9e384b2934a9c2dbd3c2d598" kindref="member">nullptr_t</ref></type>
+        </param>
+        <briefdescription>
+<para>与空指针比较不等 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否非空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="293" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="293" bodyend="293"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1exception__ptr_1abb426ab7ed7ce0fae4051cb56e857e64" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::type_info &amp;</type>
+        <definition>const std::type_info &amp; neforce::exception_ptr::exception_type</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>exception_type</name>
+        <qualifiedname>neforce::exception_ptr::exception_type</qualifiedname>
+        <briefdescription>
+<para>获取异常类型信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>异常的类型信息</para>
+</simplesect>
+如果异常指针为空，返回typeid(void)。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="306" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="306" bodyend="311"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>异常指针类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>用于跨函数边界共享异常对象，支持引用计数和异常重新抛出。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" line="120" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception_ptr.hpp" bodystart="120" bodyend="312"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1exception__ptr_1ae2436c911c2e23511a3012d0ddc2a419" prot="private" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>current_exception</name></member>
+      <member refid="classneforce_1_1exception__ptr_1a84030f6c7af64ee9b0d6c55fe0647b7e" prot="private" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>ecb_</name></member>
+      <member refid="classneforce_1_1exception__ptr_1a4dc6fca5c63d96ad711e5075421a2d51" prot="private" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>exception_ptr</name></member>
+      <member refid="classneforce_1_1exception__ptr_1a52bd75e72b425bacf1e78c799d6e977a" prot="public" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>exception_ptr</name></member>
+      <member refid="classneforce_1_1exception__ptr_1a0375e2fe3c8306cebd53ac9468c686ac" prot="public" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>exception_ptr</name></member>
+      <member refid="classneforce_1_1exception__ptr_1aa570e5721341c2ede2b27bee12a2ac97" prot="public" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>exception_ptr</name></member>
+      <member refid="classneforce_1_1exception__ptr_1abb426ab7ed7ce0fae4051cb56e857e64" prot="public" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>exception_type</name></member>
+      <member refid="classneforce_1_1exception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" prot="private" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>make_exception_ptr</name></member>
+      <member refid="classneforce_1_1exception__ptr_1ac43ce5d8fc82090c24f3088e37cc2d89" prot="private" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>make_exception_ptr</name></member>
+      <member refid="classneforce_1_1exception__ptr_1a0626fe8e173546fa4ec6d6b4d7415515" prot="public" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>operator bool</name></member>
+      <member refid="classneforce_1_1exception__ptr_1a8fa32ea306880a07e553dc807ac050d2" prot="public" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>operator!=</name></member>
+      <member refid="classneforce_1_1exception__ptr_1afd2b9f6963ce0cf2d6fb5339d51b2fdd" prot="public" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>operator!=</name></member>
+      <member refid="classneforce_1_1exception__ptr_1ae83e5337244cc12f57b1dd611a3d13e1" prot="public" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>operator!=</name></member>
+      <member refid="classneforce_1_1exception__ptr_1a5babab4253e66ac63cc68ba6ff48b2af" prot="public" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1exception__ptr_1a4f112fcf4f65f50783ef46053c35be29" prot="public" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1exception__ptr_1ac7163bdf36af3ac1ddca5c91297ff466" prot="public" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>operator==</name></member>
+      <member refid="classneforce_1_1exception__ptr_1a480c1853ca5876740f29178c157590c2" prot="public" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>operator==</name></member>
+      <member refid="classneforce_1_1exception__ptr_1adf0357fce8f51722c2f546487405cea7" prot="public" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>operator==</name></member>
+      <member refid="classneforce_1_1exception__ptr_1a12342507bc5abdc903c22fabac839d32" prot="private" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>rethrow_exception</name></member>
+      <member refid="classneforce_1_1exception__ptr_1a89f231656621c696085ea7d48a7d5f65" prot="public" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>swap</name></member>
+      <member refid="classneforce_1_1exception__ptr_1a9ba58a8e960a4e15b60acc345c534296" prot="public" virt="non-virtual"><scope>neforce::exception_ptr</scope><name>~exception_ptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

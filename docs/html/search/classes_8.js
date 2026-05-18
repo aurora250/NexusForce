@@ -574,7 +574,7 @@ var searchData=
   ['is_5funpackaged_571',['is_unpackaged',['../structis__unpackaged.html',1,'']]],
   ['is_5funsigned_572',['is_unsigned',['../structis__unsigned.html',1,'']]],
   ['is_5fview_573',['is_view',['../structis__view.html',1,'']]],
-  ['is_5fview_3c_201_3a_3aview_5fbase_3c_20d_20_3e_20_3e_574',['is_view&lt; 1::view_base&lt; D &gt; &gt;',['../structis__view_3_011_1_1view__base_3_01_d_01_4_01_4.html',1,'']]],
+  ['is_5fview_3c_20ranges_3a_3aview_5fbase_3c_20d_20_3e_20_3e_574',['is_view&lt; ranges::view_base&lt; D &gt; &gt;',['../structis__view_3_01ranges_1_1view__base_3_01_d_01_4_01_4.html',1,'']]],
   ['is_5fvirtual_5fthread_5ftask_575',['is_virtual_thread_task',['../structis__virtual__thread__task.html',1,'']]],
   ['is_5fvoid_576',['is_void',['../structis__void.html',1,'']]],
   ['is_5fvolatile_577',['is_volatile',['../structis__volatile.html',1,'']]],

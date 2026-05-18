@@ -1,0 +1,515 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1filesystem" kind="class" language="C++" prot="public">
+    <compoundname>neforce::filesystem</compoundname>
+    <includes refid="filesystem_8hpp" local="no">filesystem.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1filesystem_1a2c3ec41407538106ed5dee9885e2b57a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::filesystem::filesystem</definition>
+        <argsstring>()=delete</argsstring>
+        <name>filesystem</name>
+        <qualifiedname>neforce::filesystem::filesystem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/filesystem.hpp" line="32" column="5"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1filesystem_1aa7fe0e56a2716474982c9af9902d4d87" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::filesystem::create_directories</definition>
+        <argsstring>(const path &amp;p)</argsstring>
+        <name>create_directories</name>
+        <qualifiedname>neforce::filesystem::create_directories</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>创建目录（含所有父级目录） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要创建的目录路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>创建成功返回true，如果目录已存在也返回true</para>
+</simplesect>
+自动创建路径中所有不存在的父级目录。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/filesystem.hpp" line="41" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1filesystem_1a05585291cea438b74ccd11aa87f2b0c5" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::filesystem::remove</definition>
+        <argsstring>(const path &amp;p) noexcept</argsstring>
+        <name>remove</name>
+        <qualifiedname>neforce::filesystem::remove</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>删除文件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的文件路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除成功返回true，文件不存在或为目录返回false</para>
+</simplesect>
+只删除文件，不能用于删除目录。 如果文件具有只读属性，在Windows上会删除失败。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/filesystem.hpp" line="51" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1filesystem_1a5d4bbf30a2efd0f8577118528d178b6a" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::filesystem::remove_directory</definition>
+        <argsstring>(const path &amp;p) noexcept</argsstring>
+        <name>remove_directory</name>
+        <qualifiedname>neforce::filesystem::remove_directory</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>删除空目录 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的目录路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除成功返回true，目录不存在或非空返回false</para>
+</simplesect>
+只能删除空目录。如需删除非空目录，请使用remove_all()。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/filesystem.hpp" line="60" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1filesystem_1a20455575718cf9204427b2f0fb4bd753" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::filesystem::remove_all_in_directory</definition>
+        <argsstring>(const path &amp;p, bool recursive=true)</argsstring>
+        <name>remove_all_in_directory</name>
+        <qualifiedname>neforce::filesystem::remove_all_in_directory</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>recursive</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>删除目录内所有内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目录路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>recursive</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否递归删除子目录，默认为true </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除成功返回true</para>
+</simplesect>
+清空目录中的所有文件和子目录，但不删除目录本身。 如果recursive为false，只删除目录中的文件，保留子目录。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/filesystem.hpp" line="71" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1filesystem_1a4408cadca85d3d22c8c8b7d2aadd2f3f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::filesystem::remove_all</definition>
+        <argsstring>(const path &amp;p)</argsstring>
+        <name>remove_all</name>
+        <qualifiedname>neforce::filesystem::remove_all</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>删除文件或目录 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的文件或目录路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除成功返回true</para>
+</simplesect>
+如果是文件，直接删除； 如果是目录，递归删除目录及其所有内容。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/filesystem.hpp" line="81" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1filesystem_1a8b2d8a26d7fbf7cfd7710ff2204bb5c3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::filesystem::copy</definition>
+        <argsstring>(const path &amp;from, const path &amp;to, bool overwrite=true)</argsstring>
+        <name>copy</name>
+        <qualifiedname>neforce::filesystem::copy</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>overwrite</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>复制文件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>from</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>to</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>overwrite</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否覆盖已存在的目标文件，默认为true </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>复制成功返回true</para>
+</simplesect>
+复制文件内容，保留文件权限和时间戳。 如果to是目录，文件将被复制到该目录下。 目标目录不存在时会自动创建。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/filesystem.hpp" line="94" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1filesystem_1a2e831d92e2a710ed0ebb116ec0471c5e" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::filesystem::copy_directory</definition>
+        <argsstring>(const path &amp;src, const path &amp;dest, bool overwrite=true)</argsstring>
+        <name>copy_directory</name>
+        <qualifiedname>neforce::filesystem::copy_directory</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>overwrite</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>复制目录 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源目录路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标目录路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>overwrite</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否覆盖已存在的文件，默认为true </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>复制成功返回true</para>
+</simplesect>
+递归复制整个目录树，包括所有子目录和文件。 目标目录不存在时会自动创建。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/filesystem.hpp" line="106" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1filesystem_1a16a4f0f3c9b4d839ac8c0d8b50b1e0fb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::filesystem::move</definition>
+        <argsstring>(const path &amp;from, const path &amp;to, bool overwrite=true)</argsstring>
+        <name>move</name>
+        <qualifiedname>neforce::filesystem::move</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>to</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>overwrite</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>移动文件或目录 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>from</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>to</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>overwrite</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否覆盖已存在的目标，默认为true </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>移动成功返回true</para>
+</simplesect>
+跨文件系统时，会执行复制后删除原文件。 支持文件和目录的移动。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/filesystem.hpp" line="118" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1filesystem_1a96b47b99d0047eb373fd63fb29b16dde" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::filesystem::rename</definition>
+        <argsstring>(const path &amp;old_name, const path &amp;new_name)</argsstring>
+        <name>rename</name>
+        <qualifiedname>neforce::filesystem::rename</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>old_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>new_name</declname>
+        </param>
+        <briefdescription>
+<para>重命名文件或目录 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>old_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>new_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>重命名成功返回true</para>
+</simplesect>
+要求新路径在同一文件系统内。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/filesystem.hpp" line="128" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1filesystem_1afcdfe4f242433c0880d5c72f48d01f89" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::filesystem::create_and_write</definition>
+        <argsstring>(const path &amp;p, const string &amp;content, bool append=false)</argsstring>
+        <name>create_and_write</name>
+        <qualifiedname>neforce::filesystem::create_and_write</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>p</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>content</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>append</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+<para>创建并写入文件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>content</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要写入的内容 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>append</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否追加到文件末尾，默认为false </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>写入成功返回true</para>
+</simplesect>
+自动创建文件所在的目录（如果不存在）。 如果append为true，在文件末尾追加内容。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/filesystem.hpp" line="140" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1filesystem_1a54aadee3d35101a8bc2f3334cf1a2b3d" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1byte__size" kindref="compound">byte_size</ref></type>
+        <definition>static byte_size neforce::filesystem::size</definition>
+        <argsstring>(const path &amp;p) noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::filesystem::size</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1path" kindref="compound">path</ref> &amp;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>获取文件大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>文件大小，如果文件不存在或获取失败返回0</para>
+</simplesect>
+对于目录，返回0。 对于大文件可能返回截断值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/file/filesystem.hpp" line="150" column="22"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>文件系统操作工具类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供文件与目录的创建、删除、复制、移动、重命名等操作。</para>
+<para><simplesect kind="note"><para>文件系统操作可能因权限不足而失败。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/file/filesystem.hpp" line="30" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/file/filesystem.hpp" bodystart="30" bodyend="151"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1filesystem_1a8b2d8a26d7fbf7cfd7710ff2204bb5c3" prot="public" virt="non-virtual"><scope>neforce::filesystem</scope><name>copy</name></member>
+      <member refid="classneforce_1_1filesystem_1a2e831d92e2a710ed0ebb116ec0471c5e" prot="public" virt="non-virtual"><scope>neforce::filesystem</scope><name>copy_directory</name></member>
+      <member refid="classneforce_1_1filesystem_1afcdfe4f242433c0880d5c72f48d01f89" prot="public" virt="non-virtual"><scope>neforce::filesystem</scope><name>create_and_write</name></member>
+      <member refid="classneforce_1_1filesystem_1aa7fe0e56a2716474982c9af9902d4d87" prot="public" virt="non-virtual"><scope>neforce::filesystem</scope><name>create_directories</name></member>
+      <member refid="classneforce_1_1filesystem_1a2c3ec41407538106ed5dee9885e2b57a" prot="public" virt="non-virtual"><scope>neforce::filesystem</scope><name>filesystem</name></member>
+      <member refid="classneforce_1_1filesystem_1a16a4f0f3c9b4d839ac8c0d8b50b1e0fb" prot="public" virt="non-virtual"><scope>neforce::filesystem</scope><name>move</name></member>
+      <member refid="classneforce_1_1filesystem_1a05585291cea438b74ccd11aa87f2b0c5" prot="public" virt="non-virtual"><scope>neforce::filesystem</scope><name>remove</name></member>
+      <member refid="classneforce_1_1filesystem_1a4408cadca85d3d22c8c8b7d2aadd2f3f" prot="public" virt="non-virtual"><scope>neforce::filesystem</scope><name>remove_all</name></member>
+      <member refid="classneforce_1_1filesystem_1a20455575718cf9204427b2f0fb4bd753" prot="public" virt="non-virtual"><scope>neforce::filesystem</scope><name>remove_all_in_directory</name></member>
+      <member refid="classneforce_1_1filesystem_1a5d4bbf30a2efd0f8577118528d178b6a" prot="public" virt="non-virtual"><scope>neforce::filesystem</scope><name>remove_directory</name></member>
+      <member refid="classneforce_1_1filesystem_1a96b47b99d0047eb373fd63fb29b16dde" prot="public" virt="non-virtual"><scope>neforce::filesystem</scope><name>rename</name></member>
+      <member refid="classneforce_1_1filesystem_1a54aadee3d35101a8bc2f3334cf1a2b3d" prot="public" virt="non-virtual"><scope>neforce::filesystem</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

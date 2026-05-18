@@ -1,0 +1,502 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1redis__result" kind="struct" language="C++" prot="public" final="yes">
+    <compoundname>neforce::redis_result</compoundname>
+    <basecompoundref refid="structneforce_1_1idb__kv__result" prot="public" virt="non-virtual">neforce::idb_kv_result</basecompoundref>
+    <includes refid="redis__result_8hpp" local="no">redis_result.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structneforce_1_1redis__result_1a58924d5d21ddf979032ada0a5c7c04cb" prot="private" static="no" mutable="no">
+        <type>::redisReply *</type>
+        <definition>::redisReply* neforce::redis_result::result_</definition>
+        <argsstring></argsstring>
+        <name>result_</name>
+        <qualifiedname>neforce::redis_result::result_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>hiredis回复对象 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="43" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1redis__result_1a773ffefae93d903ce0dd8f861e624bf7" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::redis_result::cursor_</definition>
+        <argsstring></argsstring>
+        <name>cursor_</name>
+        <qualifiedname>neforce::redis_result::cursor_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>当前游标位置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="44" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1redis__result_1ad31bd47df76c998940f74bb5eba75cad" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::redis_result::rows_</definition>
+        <argsstring></argsstring>
+        <name>rows_</name>
+        <qualifiedname>neforce::redis_result::rows_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>行数（键值对数量） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="45" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1redis__result_1a6cad906dda273d891d3db6ad3ab9224b" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &gt;</type>
+        <definition>unique_ptr&lt;vector&lt;string&gt; &gt; neforce::redis_result::column_names_</definition>
+        <argsstring></argsstring>
+        <name>column_names_</name>
+        <qualifiedname>neforce::redis_result::column_names_</qualifiedname>
+        <briefdescription>
+<para>列名列表（兼容性保留） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="47" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1redis__result_1a1e8b72ca9d1b4a906a7a42c22669c35a" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &gt; &gt;</type>
+        <definition>unique_ptr&lt;vector&lt;pair&lt;string, string&gt; &gt; &gt; neforce::redis_result::kv_pairs_</definition>
+        <argsstring></argsstring>
+        <name>kv_pairs_</name>
+        <qualifiedname>neforce::redis_result::kv_pairs_</qualifiedname>
+        <briefdescription>
+<para>键值对列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="48" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1redis__result_1a09b600e07dcb07449d30c86e287edb98" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::redis_result::kv_cursor_</definition>
+        <argsstring></argsstring>
+        <name>kv_cursor_</name>
+        <qualifiedname>neforce::redis_result::kv_cursor_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>键值对游标 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="50" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1redis__result_1a681ec4fdbb9b2fe2d26ec0cfed926f36" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::redis_result::is_array_</definition>
+        <argsstring></argsstring>
+        <name>is_array_</name>
+        <qualifiedname>neforce::redis_result::is_array_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否为数组回复 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="51" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="structneforce_1_1redis__result_1a3e2735ea5fefd6a571075f477dc5ed29" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::redis_result::get_string</definition>
+        <argsstring>() const</argsstring>
+        <name>get_string</name>
+        <qualifiedname>neforce::redis_result::get_string</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="53" column="13"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1redis__result_1a771eaac412136aebeca7f001509c6a91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::redis_result::redis_result</definition>
+        <argsstring>()</argsstring>
+        <name>redis_result</name>
+        <qualifiedname>neforce::redis_result::redis_result</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建空结果集。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="61" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1redis__result_1a16cfeb7648a7f76cdab5cfeabff20f5b" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::redis_result::redis_result</definition>
+        <argsstring>(::redisReply *reply)</argsstring>
+        <name>redis_result</name>
+        <qualifiedname>neforce::redis_result::redis_result</qualifiedname>
+        <param>
+          <type>::redisReply *</type>
+          <declname>reply</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>reply</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>hiredis回复对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+解析Redis回复，构建结果集。<itemizedlist>
+<listitem><para>数组回复：如果元素数为偶数，解析为键值对</para>
+</listitem><listitem><para>其他类型：作为单值处理 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="71" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1redis__result_1a35a0046f71f24a608ff6492e7c4cf4c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::redis_result::~redis_result</definition>
+        <argsstring>() override</argsstring>
+        <name>~redis_result</name>
+        <qualifiedname>neforce::redis_result::~redis_result</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>释放redisReply对象资源。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="78" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1redis__result_1a20f1b29e7c6fd4758e12aa169a02eef9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::redis_result::empty</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::redis_result::empty</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__result_1a0040c4ab65141f26d892682ac4cab61a">empty</reimplements>
+        <briefdescription>
+<para>检查结果集是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>空结果集返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="84" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" bodystart="84" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1redis__result_1ad54018765ec55408768058a42a97be46" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::redis_result::next</definition>
+        <argsstring>() noexcept override</argsstring>
+        <name>next</name>
+        <qualifiedname>neforce::redis_result::next</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__result_1a60e0f20f35ec5525768825a37772489e">next</reimplements>
+        <briefdescription>
+<para>移动到下一个键值对 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功移动返回true，到达末尾返回false</para>
+</simplesect>
+用于遍历哈希表结果集（HGETALL）的键值对。 对于单值结果，首次调用返回true。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="95" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1redis__result_1ac7c1f522761461e9a4a7767b42feddca" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+        <definition>string_view neforce::redis_result::key</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>key</name>
+        <qualifiedname>neforce::redis_result::key</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__kv__result_1a4b0725493190c5dd96fb61a07f033822">key</reimplements>
+        <briefdescription>
+<para>获取当前键 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键的字符串视图</para>
+</simplesect>
+对于哈希表结果集（HGETALL），返回当前键； 对于单值结果，返回空字符串。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="104" column="18"/>
+        <references refid="structneforce_1_1redis__result_1ac7c1f522761461e9a4a7767b42feddca">key</references>
+        <referencedby refid="structneforce_1_1redis__result_1ac7c1f522761461e9a4a7767b42feddca">key</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1redis__result_1afc58244363690d0018b9deb8415e4116" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+        <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+        <definition>string_view neforce::redis_result::value</definition>
+        <argsstring>() const noexcept override</argsstring>
+        <name>value</name>
+        <qualifiedname>neforce::redis_result::value</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__kv__result_1ac1873e71d817ec5407d6096bf0d48638">value</reimplements>
+        <briefdescription>
+<para>获取当前值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>值的字符串视图</para>
+</simplesect>
+返回当前结果的值部分。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="112" column="18"/>
+        <references refid="structneforce_1_1redis__result_1afc58244363690d0018b9deb8415e4116">value</references>
+        <referencedby refid="structneforce_1_1redis__result_1afc58244363690d0018b9deb8415e4116">value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1redis__result_1aac134b7ea0d1f2c5165163192cdf7935" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::redis_result::value_bool</definition>
+        <argsstring>() const override</argsstring>
+        <name>value_bool</name>
+        <qualifiedname>neforce::redis_result::value_bool</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__kv__result_1aea345eb8737566557ca35f7b998c2bb1">value_bool</reimplements>
+        <briefdescription>
+<para>获取布尔值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>布尔值</para>
+</simplesect>
+将字符串值解析为布尔值。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="120" column="11"/>
+        <references refid="structneforce_1_1redis__result_1aac134b7ea0d1f2c5165163192cdf7935">value_bool</references>
+        <referencedby refid="structneforce_1_1redis__result_1aac134b7ea0d1f2c5165163192cdf7935">value_bool</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1redis__result_1aaca426d48adf3d1e01bf3f5cbe1e0831" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+        <definition>int64_t neforce::redis_result::value_int64</definition>
+        <argsstring>() const override</argsstring>
+        <name>value_int64</name>
+        <qualifiedname>neforce::redis_result::value_int64</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__kv__result_1abd13b8f301e67c4e1c48451e250a578c">value_int64</reimplements>
+        <briefdescription>
+<para>获取64位整数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>整数值</para>
+</simplesect>
+优先使用Redis整型回复，否则解析字符串。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="128" column="14"/>
+        <references refid="structneforce_1_1redis__result_1aaca426d48adf3d1e01bf3f5cbe1e0831">value_int64</references>
+        <referencedby refid="structneforce_1_1redis__result_1aaca426d48adf3d1e01bf3f5cbe1e0831">value_int64</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1redis__result_1a334d637fbae2c0bb6fbe3168caa91ff7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>double</type>
+        <definition>double neforce::redis_result::value_double</definition>
+        <argsstring>() const override</argsstring>
+        <name>value_double</name>
+        <qualifiedname>neforce::redis_result::value_double</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__kv__result_1af17e1094cb8e5067c1106b0b5f4ff973">value_double</reimplements>
+        <briefdescription>
+<para>获取浮点值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>浮点值</para>
+</simplesect>
+将字符串值解析为浮点数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="136" column="13"/>
+        <references refid="structneforce_1_1redis__result_1a334d637fbae2c0bb6fbe3168caa91ff7">value_double</references>
+        <referencedby refid="structneforce_1_1redis__result_1a334d637fbae2c0bb6fbe3168caa91ff7">value_double</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1redis__result_1afe02922d8b59fbe76791ee2dc48d7d71" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+        <definition>vector&lt; string &gt; neforce::redis_result::value_array</definition>
+        <argsstring>() const override</argsstring>
+        <name>value_array</name>
+        <qualifiedname>neforce::redis_result::value_array</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__kv__result_1ad0a5f8b2354f418ca8079a9cf74b61cc">value_array</reimplements>
+        <briefdescription>
+<para>获取数组值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>字符串向量</para>
+</simplesect>
+对于Redis数组回复，返回所有元素； 对于其他类型，返回包含单个元素的向量。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="145" column="13"/>
+        <references refid="structneforce_1_1redis__result_1afe02922d8b59fbe76791ee2dc48d7d71">value_array</references>
+        <referencedby refid="structneforce_1_1redis__result_1afe02922d8b59fbe76791ee2dc48d7d71">value_array</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1redis__result_1acf709381cd1280577f512979b7f5fdac" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &gt; &amp;</type>
+        <definition>const vector&lt; pair&lt; string, string &gt; &gt; &amp; neforce::redis_result::value_hash</definition>
+        <argsstring>() const override</argsstring>
+        <name>value_hash</name>
+        <qualifiedname>neforce::redis_result::value_hash</qualifiedname>
+        <reimplements refid="structneforce_1_1idb__kv__result_1a1f21082e15effdfc156ed65862fdae44">value_hash</reimplements>
+        <briefdescription>
+<para>获取哈希表值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键值对向量的常量引用</para>
+</simplesect>
+返回解析后的键值对列表（用于HGETALL命令）。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="153" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" bodystart="153" bodyend="153"/>
+        <references refid="structneforce_1_1redis__result_1acf709381cd1280577f512979b7f5fdac" compoundref="redis__result_8hpp" startline="153" endline="153">value_hash</references>
+        <referencedby refid="structneforce_1_1redis__result_1acf709381cd1280577f512979b7f5fdac" compoundref="redis__result_8hpp" startline="153" endline="153">value_hash</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1redis__result_1a1f2df0ff1669e078ef16345bcb8c5242" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int neforce::redis_result::type</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>type</name>
+        <qualifiedname>neforce::redis_result::type</qualifiedname>
+        <briefdescription>
+<para>获取Redis回复类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>redisReplyType枚举值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="159" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" bodystart="159" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1redis__result_1a85d4d299160efe5425a9ecff85d957f6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::redis_result::is_nil</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_nil</name>
+        <qualifiedname>neforce::redis_result::is_nil</qualifiedname>
+        <briefdescription>
+<para>检查是否为空值回复 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>空值回复返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="165" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" bodystart="165" bodyend="165"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Redis结果集类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现idb_kv_result接口， 自动解析不同类型的Redis回复，提供统一的访问接口。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>支持多种Redis回复类型</para>
+</listitem><listitem><para>数组回复自动解析为键值对</para>
+</listitem><listitem><para>单值回复的统一访问</para>
+</listitem><listitem><para>类型安全的值获取 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::idb_kv_result</label>
+        <link refid="structneforce_1_1idb__kv__result"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::idb_result</label>
+        <link refid="structneforce_1_1idb__result"/>
+      </node>
+      <node id="1">
+        <label>neforce::redis_result</label>
+        <link refid="structneforce_1_1redis__result"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::idb_kv_result</label>
+        <link refid="structneforce_1_1idb__kv__result"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::idb_result</label>
+        <link refid="structneforce_1_1idb__result"/>
+      </node>
+      <node id="1">
+        <label>neforce::redis_result</label>
+        <link refid="structneforce_1_1redis__result"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" line="41" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/redis/redis_result.hpp" bodystart="41" bodyend="166"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1redis__result_1a6cad906dda273d891d3db6ad3ab9224b" prot="private" virt="non-virtual"><scope>neforce::redis_result</scope><name>column_names_</name></member>
+      <member refid="structneforce_1_1redis__result_1a773ffefae93d903ce0dd8f861e624bf7" prot="private" virt="non-virtual"><scope>neforce::redis_result</scope><name>cursor_</name></member>
+      <member refid="structneforce_1_1idb__result_1af7a1fe6b1af2018ef7737471858c214c" prot="public" virt="non-virtual"><scope>neforce::redis_result</scope><name>difference_type</name></member>
+      <member refid="structneforce_1_1redis__result_1a20f1b29e7c6fd4758e12aa169a02eef9" prot="public" virt="virtual"><scope>neforce::redis_result</scope><name>empty</name></member>
+      <member refid="structneforce_1_1redis__result_1a3e2735ea5fefd6a571075f477dc5ed29" prot="private" virt="non-virtual"><scope>neforce::redis_result</scope><name>get_string</name></member>
+      <member refid="structneforce_1_1redis__result_1a681ec4fdbb9b2fe2d26ec0cfed926f36" prot="private" virt="non-virtual"><scope>neforce::redis_result</scope><name>is_array_</name></member>
+      <member refid="structneforce_1_1redis__result_1a85d4d299160efe5425a9ecff85d957f6" prot="public" virt="non-virtual"><scope>neforce::redis_result</scope><name>is_nil</name></member>
+      <member refid="structneforce_1_1redis__result_1ac7c1f522761461e9a4a7767b42feddca" prot="public" virt="virtual"><scope>neforce::redis_result</scope><name>key</name></member>
+      <member refid="structneforce_1_1redis__result_1a09b600e07dcb07449d30c86e287edb98" prot="private" virt="non-virtual"><scope>neforce::redis_result</scope><name>kv_cursor_</name></member>
+      <member refid="structneforce_1_1redis__result_1a1e8b72ca9d1b4a906a7a42c22669c35a" prot="private" virt="non-virtual"><scope>neforce::redis_result</scope><name>kv_pairs_</name></member>
+      <member refid="structneforce_1_1redis__result_1ad54018765ec55408768058a42a97be46" prot="public" virt="virtual"><scope>neforce::redis_result</scope><name>next</name></member>
+      <member refid="structneforce_1_1redis__result_1a771eaac412136aebeca7f001509c6a91" prot="public" virt="non-virtual"><scope>neforce::redis_result</scope><name>redis_result</name></member>
+      <member refid="structneforce_1_1redis__result_1a16cfeb7648a7f76cdab5cfeabff20f5b" prot="public" virt="non-virtual"><scope>neforce::redis_result</scope><name>redis_result</name></member>
+      <member refid="structneforce_1_1redis__result_1a58924d5d21ddf979032ada0a5c7c04cb" prot="private" virt="non-virtual"><scope>neforce::redis_result</scope><name>result_</name></member>
+      <member refid="structneforce_1_1redis__result_1ad31bd47df76c998940f74bb5eba75cad" prot="private" virt="non-virtual"><scope>neforce::redis_result</scope><name>rows_</name></member>
+      <member refid="structneforce_1_1idb__result_1a23ed87a91a6b3170822618ec0c82199c" prot="public" virt="non-virtual"><scope>neforce::redis_result</scope><name>size_type</name></member>
+      <member refid="structneforce_1_1redis__result_1a1f2df0ff1669e078ef16345bcb8c5242" prot="public" virt="non-virtual"><scope>neforce::redis_result</scope><name>type</name></member>
+      <member refid="structneforce_1_1redis__result_1afc58244363690d0018b9deb8415e4116" prot="public" virt="virtual"><scope>neforce::redis_result</scope><name>value</name></member>
+      <member refid="structneforce_1_1redis__result_1afe02922d8b59fbe76791ee2dc48d7d71" prot="public" virt="virtual"><scope>neforce::redis_result</scope><name>value_array</name></member>
+      <member refid="structneforce_1_1redis__result_1aac134b7ea0d1f2c5165163192cdf7935" prot="public" virt="virtual"><scope>neforce::redis_result</scope><name>value_bool</name></member>
+      <member refid="structneforce_1_1redis__result_1a334d637fbae2c0bb6fbe3168caa91ff7" prot="public" virt="virtual"><scope>neforce::redis_result</scope><name>value_double</name></member>
+      <member refid="structneforce_1_1redis__result_1acf709381cd1280577f512979b7f5fdac" prot="public" virt="virtual"><scope>neforce::redis_result</scope><name>value_hash</name></member>
+      <member refid="structneforce_1_1redis__result_1aaca426d48adf3d1e01bf3f5cbe1e0831" prot="public" virt="virtual"><scope>neforce::redis_result</scope><name>value_int64</name></member>
+      <member refid="structneforce_1_1idb__kv__result_1a75995f0c56f1fb4f298b890da34c9c28" prot="public" virt="non-virtual"><scope>neforce::redis_result</scope><name>~idb_kv_result</name></member>
+      <member refid="structneforce_1_1idb__result_1af5e886679c216c3b3d063d16d32eb9c7" prot="public" virt="virtual"><scope>neforce::redis_result</scope><name>~idb_result</name></member>
+      <member refid="structneforce_1_1redis__result_1a35a0046f71f24a608ff6492e7c4cf4c1" prot="public" virt="non-virtual"><scope>neforce::redis_result</scope><name>~redis_result</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

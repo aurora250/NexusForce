@@ -1,0 +1,997 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1hexadecimal" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::hexadecimal</compoundname>
+    <basecompoundref refid="structneforce_1_1iobject" prot="public" virt="non-virtual">neforce::iobject&lt; hexadecimal &gt;</basecompoundref>
+    <basecompoundref refid="structneforce_1_1ipackage" prot="public" virt="non-virtual">neforce::ipackage&lt; hexadecimal, int64_t &gt;</basecompoundref>
+    <includes refid="hexadecimal_8hpp" local="no">hexadecimal.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structneforce_1_1hexadecimal_1a3c25e9ec9e3ec765a96538278dcfac60" prot="public" static="no">
+        <type><ref refid="group___core_types_1gaeb2e937665218c4098c40d49b13533af" kindref="member">int64_t</ref></type>
+        <definition>using neforce::hexadecimal::value_type = int64_t</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::hexadecimal::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="31" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structneforce_1_1hexadecimal_1afb304adfbe4befe98e47a769da8ce1d6" prot="public" static="no">
+        <type>ipackage</type>
+        <definition>using neforce::hexadecimal::base = ipackage</definition>
+        <argsstring></argsstring>
+        <name>base</name>
+        <qualifiedname>neforce::hexadecimal::base</qualifiedname>
+        <briefdescription>
+<para>基类类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="32" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structneforce_1_1hexadecimal_1a6ac741482d84cbfff7f04048efab3485" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref></type>
+        <definition>byte_t neforce::hexadecimal::invalid_xdigit</definition>
+        <argsstring></argsstring>
+        <name>invalid_xdigit</name>
+        <qualifiedname>neforce::hexadecimal::invalid_xdigit</qualifiedname>
+        <initializer>= <ref refid="classneforce_1_1numeric__traits" kindref="compound">numeric_traits</ref>&lt;<ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref>&gt;<ref refid="group___compare_algorithms_1gacc7ec6cd2134fb437b992f481b7e5057" kindref="member">::max</ref>()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="35" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1a7850cf832150da26559c8802f97a1dbf" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref></type>
+        <definition>static constexpr byte_t neforce::hexadecimal::xdigit_value</definition>
+        <argsstring>(const char c) noexcept</argsstring>
+        <name>xdigit_value</name>
+        <qualifiedname>neforce::hexadecimal::xdigit_value</qualifiedname>
+        <param>
+          <type>const char</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+<para>将十六进制字符转换为对应的数值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>c</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>十六进制字符（0-9, a-f, A-F） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应的数值（0-15），当字符无效时返回invalid_xdigit </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="42" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="42" bodyend="53"/>
+        <referencedby refid="structneforce_1_1hexadecimal_1a00889c685677479eb52cefc4972f4089" compoundref="hexadecimal_8hpp" startline="64" endline="71">xdigit_value</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1a00889c685677479eb52cefc4972f4089" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; bool, <ref refid="group___core_types_1ga146242c39a2b187142d7b3ca35872740" kindref="member">byte_t</ref> &gt;</type>
+        <definition>static constexpr pair&lt; bool, byte_t &gt; neforce::hexadecimal::xdigit_value</definition>
+        <argsstring>(const char high, const char low) noexcept</argsstring>
+        <name>xdigit_value</name>
+        <qualifiedname>neforce::hexadecimal::xdigit_value</qualifiedname>
+        <param>
+          <type>const char</type>
+          <declname>high</declname>
+        </param>
+        <param>
+          <type>const char</type>
+          <declname>low</declname>
+        </param>
+        <briefdescription>
+<para>将两个十六进制数字字符转换为对应的字节值。 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>high</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>高半字节十六进制字符（&apos;0&apos;-&apos;9&apos;, &apos;A&apos;-&apos;F&apos;, &apos;a&apos;-&apos;f&apos;） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>low</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>低半字节十六进制字符（&apos;0&apos;-&apos;9&apos;, &apos;A&apos;-&apos;F&apos;, &apos;a&apos;-&apos;f&apos;） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="structneforce_1_1pair" kindref="compound">pair&lt;bool, byte_t&gt;</ref><itemizedlist>
+<listitem><para><computeroutput>first</computeroutput>: <computeroutput>true</computeroutput> 表示转换成功，<computeroutput>false</computeroutput> 表示存在非法字符。</para>
+</listitem><listitem><para><computeroutput>second</computeroutput>: 转换成功时为 <computeroutput>(xdigit_value(high) &lt;&lt; 4) | xdigit_value(low)</computeroutput> 的字节值； 失败时为 #invalid_xdigit。 </para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="64" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="64" bodyend="71"/>
+        <references refid="structneforce_1_1hexadecimal_1a7850cf832150da26559c8802f97a1dbf" compoundref="hexadecimal_8hpp" startline="42" endline="53">xdigit_value</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1a00a70a217d3d148d3d2e4c51de24a318" prot="public" static="yes" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1hexadecimal_1ac4be4411ecafdc8e386058691a1e24fb" kindref="member">hexadecimal</ref></type>
+        <definition>static constexpr hexadecimal neforce::hexadecimal::parse</definition>
+        <argsstring>(const string_view str)</argsstring>
+        <name>parse</name>
+        <qualifiedname>neforce::hexadecimal::parse</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>从字符串解析十六进制值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要解析的字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析得到的十六进制对象 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="276" column="35" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="276" bodyend="276"/>
+        <references refid="structneforce_1_1hexadecimal_1ac4be4411ecafdc8e386058691a1e24fb" compoundref="hexadecimal_8hpp" startline="140" endline="141">hexadecimal</references>
+        <referencedby refid="classneforce_1_1color_1a6bd5cef0e2f2559120f6fc4b9ca76287" compoundref="color_8hpp" startline="628" endline="649">neforce::color::parse</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1ab4a8d536d04452929a90424759d3effc" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1hexadecimal_1a3c25e9ec9e3ec765a96538278dcfac60" kindref="member">value_type</ref></type>
+        <definition>static constexpr value_type neforce::hexadecimal::parse_view</definition>
+        <argsstring>(const string_view view)</argsstring>
+        <name>parse_view</name>
+        <qualifiedname>neforce::hexadecimal::parse_view</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>view</declname>
+        </param>
+        <briefdescription>
+<para>从字符串视图解析十六进制值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>view</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要解析的字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析后的十六进制值 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+支持的格式：可选的符号（+/-），可选的0x/0X前缀， 十六进制数字（0-9, a-f, A-F），忽略前导和尾随空格。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="83" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="83" bodyend="133"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1ac4be4411ecafdc8e386058691a1e24fb" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::hexadecimal::hexadecimal</definition>
+        <argsstring>(const int16_t value) noexcept</argsstring>
+        <name>hexadecimal</name>
+        <qualifiedname>neforce::hexadecimal::hexadecimal</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1gac6f134e56c47f0f3a9e09fe035862ce1" kindref="member">int16_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从16位有符号整数构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="140" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="140" bodyend="141"/>
+        <references refid="structneforce_1_1ipackage_1ada39825f8477a3477689e82e869c24b1" compoundref="ipackage_8hpp" startline="92" endline="92">neforce::ipackage&lt; hexadecimal, int64_t &gt;::value</references>
+        <referencedby refid="structneforce_1_1hexadecimal_1a6fb7f02559ed1a8d00c174b06afe2115" compoundref="hexadecimal_8hpp" startline="256" endline="262">flip_bit</referencedby>
+        <referencedby refid="structneforce_1_1hexadecimal_1af578df7ed9e6b7b12b2860b12c053948" compoundref="hexadecimal_8hpp" startline="184" endline="185">hexadecimal</referencedby>
+        <referencedby refid="structneforce_1_1hexadecimal_1a84e4b108ca65a26ddc6c609afe390fc6" compoundref="hexadecimal_8hpp" startline="192" endline="193">hexadecimal</referencedby>
+        <referencedby refid="structneforce_1_1hexadecimal_1a00a70a217d3d148d3d2e4c51de24a318" compoundref="hexadecimal_8hpp" startline="276" endline="276">parse</referencedby>
+        <referencedby refid="structneforce_1_1hexadecimal_1a94c805811fb600bba1af24e03ee1d9c7" compoundref="hexadecimal_8hpp" startline="238" endline="248">set_bit</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1acfeebc1c91e01b69c1902b9650d48380" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::hexadecimal::hexadecimal</definition>
+        <argsstring>(const int32_t value) noexcept</argsstring>
+        <name>hexadecimal</name>
+        <qualifiedname>neforce::hexadecimal::hexadecimal</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1gaa0af497ed9ed410d4c911b409653515a" kindref="member">int32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从32位有符号整数构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="147" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="147" bodyend="148"/>
+        <references refid="structneforce_1_1ipackage_1ada39825f8477a3477689e82e869c24b1" compoundref="ipackage_8hpp" startline="92" endline="92">neforce::ipackage&lt; hexadecimal, int64_t &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1add763d7c943a4ff48cc39c4f18b15641" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::hexadecimal::hexadecimal</definition>
+        <argsstring>(const uint16_t value) noexcept</argsstring>
+        <name>hexadecimal</name>
+        <qualifiedname>neforce::hexadecimal::hexadecimal</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从16位无符号整数构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="154" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="154" bodyend="155"/>
+        <references refid="structneforce_1_1ipackage_1ada39825f8477a3477689e82e869c24b1" compoundref="ipackage_8hpp" startline="92" endline="92">neforce::ipackage&lt; hexadecimal, int64_t &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1a697e24b8ebe5d5f8d377108d4ca2f5a6" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::hexadecimal::hexadecimal</definition>
+        <argsstring>(const uint32_t value) noexcept</argsstring>
+        <name>hexadecimal</name>
+        <qualifiedname>neforce::hexadecimal::hexadecimal</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从32位无符号整数构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="161" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="161" bodyend="162"/>
+        <references refid="structneforce_1_1ipackage_1ada39825f8477a3477689e82e869c24b1" compoundref="ipackage_8hpp" startline="92" endline="92">neforce::ipackage&lt; hexadecimal, int64_t &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1a417acfd26e01e52c2c6f057373090507" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::hexadecimal::hexadecimal</definition>
+        <argsstring>(const uint64_t value) noexcept</argsstring>
+        <name>hexadecimal</name>
+        <qualifiedname>neforce::hexadecimal::hexadecimal</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga33de6a1cba865b86a4bc63036a465c0f" kindref="member">uint64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>从64位无符号整数构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>整数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="168" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="168" bodyend="169"/>
+        <references refid="structneforce_1_1ipackage_1ada39825f8477a3477689e82e869c24b1" compoundref="ipackage_8hpp" startline="92" endline="92">neforce::ipackage&lt; hexadecimal, int64_t &gt;::value</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1a0290ebf4cd75e2cd459005d854d4ca76" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::hexadecimal::hexadecimal</definition>
+        <argsstring>(const string_view view)</argsstring>
+        <name>hexadecimal</name>
+        <qualifiedname>neforce::hexadecimal::hexadecimal</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+          <declname>view</declname>
+        </param>
+        <briefdescription>
+<para>从字符串视图构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>view</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>十六进制字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="176" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="176" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1af578df7ed9e6b7b12b2860b12c053948" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::hexadecimal::hexadecimal</definition>
+        <argsstring>(const char *str)</argsstring>
+        <name>hexadecimal</name>
+        <qualifiedname>neforce::hexadecimal::hexadecimal</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>从C风格字符串构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>十六进制字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="184" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="184" bodyend="185"/>
+        <references refid="structneforce_1_1hexadecimal_1ac4be4411ecafdc8e386058691a1e24fb" compoundref="hexadecimal_8hpp" startline="140" endline="141">hexadecimal</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1a84e4b108ca65a26ddc6c609afe390fc6" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::hexadecimal::hexadecimal</definition>
+        <argsstring>(const string &amp;str)</argsstring>
+        <name>hexadecimal</name>
+        <qualifiedname>neforce::hexadecimal::hexadecimal</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>从字符串对象构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>十六进制字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>解析失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="192" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="192" bodyend="193"/>
+        <references refid="structneforce_1_1hexadecimal_1ac4be4411ecafdc8e386058691a1e24fb" compoundref="hexadecimal_8hpp" startline="140" endline="141">hexadecimal</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1a00c4a3a34af82734ad0a365e4689f552" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::hexadecimal::hexadecimal</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>hexadecimal</name>
+        <qualifiedname>neforce::hexadecimal::hexadecimal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="195" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1a932d5679249a3c3588821ce5d8930178" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::hexadecimal::~hexadecimal</definition>
+        <argsstring>()=default</argsstring>
+        <name>~hexadecimal</name>
+        <qualifiedname>neforce::hexadecimal::~hexadecimal</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="196" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1ac22293c5b0fe4f3455ad826eee7c9df6" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::hexadecimal::hexadecimal</definition>
+        <argsstring>(const hexadecimal &amp;) noexcept=default</argsstring>
+        <name>hexadecimal</name>
+        <qualifiedname>neforce::hexadecimal::hexadecimal</qualifiedname>
+        <param>
+          <type>const hexadecimal &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="198" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1a27e4d6b80547a2c5fa9187f0b15a8f26" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::hexadecimal::hexadecimal</definition>
+        <argsstring>(hexadecimal &amp;&amp;) noexcept=default</argsstring>
+        <name>hexadecimal</name>
+        <qualifiedname>neforce::hexadecimal::hexadecimal</qualifiedname>
+        <param>
+          <type>hexadecimal &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="199" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1ad4d2202450a186e72c2edea6ff903072" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1hexadecimal_1ac4be4411ecafdc8e386058691a1e24fb" kindref="member">hexadecimal</ref> &amp;</type>
+        <definition>hexadecimal &amp; neforce::hexadecimal::operator=</definition>
+        <argsstring>(const hexadecimal &amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::hexadecimal::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1hexadecimal_1ac4be4411ecafdc8e386058691a1e24fb" kindref="member">hexadecimal</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="201" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1a570be97dee75665b5850b6ca3ddaff58" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1hexadecimal_1ac4be4411ecafdc8e386058691a1e24fb" kindref="member">hexadecimal</ref> &amp;</type>
+        <definition>hexadecimal &amp; neforce::hexadecimal::operator=</definition>
+        <argsstring>(hexadecimal &amp;&amp;other) noexcept=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::hexadecimal::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1hexadecimal_1ac4be4411ecafdc8e386058691a1e24fb" kindref="member">hexadecimal</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="202" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1ab695b198ce2f845d383fa0025e42da23" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::hexadecimal::hexadecimal</definition>
+        <argsstring>(const value_type value) noexcept</argsstring>
+        <name>hexadecimal</name>
+        <qualifiedname>neforce::hexadecimal::hexadecimal</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1hexadecimal_1a3c25e9ec9e3ec765a96538278dcfac60" kindref="member">value_type</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="204" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="204" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1a84c1e87575eaf412da490750cd997f5c" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1hexadecimal_1ac4be4411ecafdc8e386058691a1e24fb" kindref="member">hexadecimal</ref> &amp;</type>
+        <definition>hexadecimal &amp; neforce::hexadecimal::operator=</definition>
+        <argsstring>(const value_type value) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::hexadecimal::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1hexadecimal_1a3c25e9ec9e3ec765a96538278dcfac60" kindref="member">value_type</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="207" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="207" bodyend="210"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1ad1b67a26515d6fbaaeec28fb8db0b372" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
+        <definition>neforce::hexadecimal::operator bool</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>operator bool</name>
+        <qualifiedname>neforce::hexadecimal::operator bool</qualifiedname>
+        <briefdescription>
+<para>转换为bool操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>值是否非零 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="216" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="216" bodyend="216"/>
+        <references refid="structneforce_1_1ipackage_1a74278dfe7631eaa0ef16d03365cb2e10" compoundref="ipackage_8hpp" startline="53" endline="53">neforce::ipackage&lt; hexadecimal, int64_t &gt;::value_</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1a69767c78824dc8cdbfd8a6d9709b67db" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::hexadecimal::get_bit</definition>
+        <argsstring>(const size_t position) const</argsstring>
+        <name>get_bit</name>
+        <qualifiedname>neforce::hexadecimal::get_bit</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>获取指定位的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位位置（0-63） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>该位的值（0或1） </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位置超出范围时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="224" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="224" bodyend="229"/>
+        <references refid="structneforce_1_1ipackage_1a74278dfe7631eaa0ef16d03365cb2e10" compoundref="ipackage_8hpp" startline="53" endline="53">neforce::ipackage&lt; hexadecimal, int64_t &gt;::value_</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1a94c805811fb600bba1af24e03ee1d9c7" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1hexadecimal_1ac4be4411ecafdc8e386058691a1e24fb" kindref="member">hexadecimal</ref> &amp;</type>
+        <definition>hexadecimal &amp; neforce::hexadecimal::set_bit</definition>
+        <argsstring>(const size_t position, const bool bit_value_=true)</argsstring>
+        <name>set_bit</name>
+        <qualifiedname>neforce::hexadecimal::set_bit</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>bit_value_</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>设置指定位的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位位置（0-63） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>bit_value_</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要设置的值（true为1，false为0） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位置超出范围时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="238" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="238" bodyend="248"/>
+        <references refid="structneforce_1_1hexadecimal_1ac4be4411ecafdc8e386058691a1e24fb" compoundref="hexadecimal_8hpp" startline="140" endline="141">hexadecimal</references>
+        <references refid="structneforce_1_1ipackage_1a74278dfe7631eaa0ef16d03365cb2e10" compoundref="ipackage_8hpp" startline="53" endline="53">neforce::ipackage&lt; hexadecimal, int64_t &gt;::value_</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1a6fb7f02559ed1a8d00c174b06afe2115" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1hexadecimal_1ac4be4411ecafdc8e386058691a1e24fb" kindref="member">hexadecimal</ref> &amp;</type>
+        <definition>hexadecimal &amp; neforce::hexadecimal::flip_bit</definition>
+        <argsstring>(const size_t position)</argsstring>
+        <name>flip_bit</name>
+        <qualifiedname>neforce::hexadecimal::flip_bit</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>翻转指定位 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位位置（0-63） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1value__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>位置超出范围时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="256" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="256" bodyend="262"/>
+        <references refid="structneforce_1_1hexadecimal_1ac4be4411ecafdc8e386058691a1e24fb" compoundref="hexadecimal_8hpp" startline="140" endline="141">hexadecimal</references>
+        <references refid="structneforce_1_1ipackage_1a74278dfe7631eaa0ef16d03365cb2e10" compoundref="ipackage_8hpp" startline="53" endline="53">neforce::ipackage&lt; hexadecimal, int64_t &gt;::value_</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1hexadecimal_1a1c476a4b40612a49081bc610d8d3f143" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::hexadecimal::to_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_string</name>
+        <qualifiedname>neforce::hexadecimal::to_string</qualifiedname>
+        <briefdescription>
+<para>转换为字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>十六进制格式的字符串（带0x前缀） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="268" column="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>十六进制数值包装类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供十六进制数值的包装，支持从字符串解析、位操作、格式化等功能。 内部使用int64_t存储，支持64位以内的十六进制值。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::hexadecimal</label>
+        <link refid="structneforce_1_1hexadecimal"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>neforce::iarithmetic&lt; hexadecimal &gt;</label>
+        <link refid="structneforce_1_1iarithmetic"/>
+      </node>
+      <node id="9">
+        <label>neforce::ibinary&lt; hexadecimal &gt;</label>
+        <link refid="structneforce_1_1ibinary"/>
+      </node>
+      <node id="5">
+        <label>neforce::icommon&lt; hexadecimal &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>neforce::icomparable&lt; hexadecimal &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="7">
+        <label>neforce::ihashable&lt; hexadecimal &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="2">
+        <label>neforce::iobject&lt; hexadecimal &gt;</label>
+        <link refid="structneforce_1_1iobject"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::ipackage&lt; hexadecimal, int64_t &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::istringify&lt; hexadecimal &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::hexadecimal</label>
+        <link refid="structneforce_1_1hexadecimal"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>neforce::iarithmetic&lt; hexadecimal &gt;</label>
+        <link refid="structneforce_1_1iarithmetic"/>
+      </node>
+      <node id="9">
+        <label>neforce::ibinary&lt; hexadecimal &gt;</label>
+        <link refid="structneforce_1_1ibinary"/>
+      </node>
+      <node id="5">
+        <label>neforce::icommon&lt; hexadecimal &gt;</label>
+        <link refid="structneforce_1_1icommon"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>neforce::icomparable&lt; hexadecimal &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="7">
+        <label>neforce::ihashable&lt; hexadecimal &gt;</label>
+        <link refid="structneforce_1_1ihashable"/>
+      </node>
+      <node id="2">
+        <label>neforce::iobject&lt; hexadecimal &gt;</label>
+        <link refid="structneforce_1_1iobject"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::ipackage&lt; hexadecimal, int64_t &gt;</label>
+        <link refid="structneforce_1_1ipackage"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::istringify&lt; hexadecimal &gt;</label>
+        <link refid="structneforce_1_1istringify"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" line="29" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/utility/hexadecimal.hpp" bodystart="29" bodyend="277"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1hexadecimal_1afb304adfbe4befe98e47a769da8ce1d6" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>base</name></member>
+      <member refid="structneforce_1_1ipackage_1ae72a50582400c9bed28da1d7b2f37c7e" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>bits</name></member>
+      <member refid="structneforce_1_1ipackage_1a0fa5edb34662651e7f6e85a68c982dfd" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>bytes</name></member>
+      <member refid="structneforce_1_1ipackage_1a0947aaa8a4c7fe299361deb079867737" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>equal_to</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a6fb7f02559ed1a8d00c174b06afe2115" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>flip_bit</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a69767c78824dc8cdbfd8a6d9709b67db" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>get_bit</name></member>
+      <member refid="structneforce_1_1hexadecimal_1ac4be4411ecafdc8e386058691a1e24fb" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>hexadecimal</name></member>
+      <member refid="structneforce_1_1hexadecimal_1acfeebc1c91e01b69c1902b9650d48380" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>hexadecimal</name></member>
+      <member refid="structneforce_1_1hexadecimal_1add763d7c943a4ff48cc39c4f18b15641" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>hexadecimal</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a697e24b8ebe5d5f8d377108d4ca2f5a6" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>hexadecimal</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a417acfd26e01e52c2c6f057373090507" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>hexadecimal</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a0290ebf4cd75e2cd459005d854d4ca76" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>hexadecimal</name></member>
+      <member refid="structneforce_1_1hexadecimal_1af578df7ed9e6b7b12b2860b12c053948" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>hexadecimal</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a84e4b108ca65a26ddc6c609afe390fc6" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>hexadecimal</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a00c4a3a34af82734ad0a365e4689f552" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>hexadecimal</name></member>
+      <member refid="structneforce_1_1hexadecimal_1ac22293c5b0fe4f3455ad826eee7c9df6" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>hexadecimal</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a27e4d6b80547a2c5fa9187f0b15a8f26" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>hexadecimal</name></member>
+      <member refid="structneforce_1_1hexadecimal_1ab695b198ce2f845d383fa0025e42da23" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>hexadecimal</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a6ac741482d84cbfff7f04048efab3485" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>invalid_xdigit</name></member>
+      <member refid="structneforce_1_1ipackage_1a2129afca313ba55c0d3249c948208d26" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>ipackage</name></member>
+      <member refid="structneforce_1_1ipackage_1a4d409656c2945f6838a0402979961e09" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>less_than</name></member>
+      <member refid="structneforce_1_1hexadecimal_1ad1b67a26515d6fbaaeec28fb8db0b372" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator bool</name></member>
+      <member refid="structneforce_1_1ipackage_1a5644222c157497152f8cad1b6ca22f04" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator package_type</name></member>
+      <member refid="structneforce_1_1icomparable_1aa385e40eb8ac8bdae736966ad0cf568f" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator!=</name></member>
+      <member refid="structneforce_1_1iarithmetic_1a8b3cee3c8c5ea4eb596fc3ba2f994168" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator%</name></member>
+      <member refid="structneforce_1_1ipackage_1a7196368c898a0b74138e89b873443143" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator%=</name></member>
+      <member refid="structneforce_1_1ibinary_1a993e6484c9b971a72f3d969dd606e62a" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator&amp;</name></member>
+      <member refid="structneforce_1_1ipackage_1a8afafa00f2860f7748ff835158ab6fe2" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator&amp;=</name></member>
+      <member refid="structneforce_1_1iarithmetic_1aea0538de6e5aaa13d9dcec82a80976c6" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator*</name></member>
+      <member refid="structneforce_1_1ipackage_1ac580fff3bc61e0e580f758e502f47b00" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator*=</name></member>
+      <member refid="structneforce_1_1iarithmetic_1a6fac690bd10d6c3198b751d9f865d7d2" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator+</name></member>
+      <member refid="structneforce_1_1ipackage_1a5cd0cae7c46627e7bb40bf4faf1a3db6" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator++</name></member>
+      <member refid="structneforce_1_1ipackage_1ad1e33653a5074ba5400ba6c95321a537" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator+=</name></member>
+      <member refid="structneforce_1_1ipackage_1acb1c5bb22b3a554b029806cd8060af8e" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator-</name></member>
+      <member refid="structneforce_1_1iarithmetic_1abd7c750e7e0904f597c8ae3585a5ba85" prot="public" virt="non-virtual" ambiguityscope="neforce::iarithmetic&lt; hexadecimal &gt;::"><scope>neforce::hexadecimal</scope><name>operator-</name></member>
+      <member refid="structneforce_1_1ipackage_1a2c71920d6492efedaab4dd5a46ec6dd6" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator--</name></member>
+      <member refid="structneforce_1_1ipackage_1a29992201616b2cd39a0e9dbfbf7fb5fa" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator-=</name></member>
+      <member refid="structneforce_1_1iarithmetic_1a5c66e86584682da3b96fd3f2440adb2e" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator/</name></member>
+      <member refid="structneforce_1_1ipackage_1a4c30e02fc8ab3f74997f2377a0d3e366" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator/=</name></member>
+      <member refid="structneforce_1_1icomparable_1a0641b58de65d6a0d5b87c2bcb47496a4" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator&lt;</name></member>
+      <member refid="structneforce_1_1ibinary_1a517fe9e5f39745d1f0139893e86a482e" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator&lt;&lt;</name></member>
+      <member refid="structneforce_1_1ipackage_1a81de5635ce595282fe9cf52b51c592e1" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator&lt;&lt;=</name></member>
+      <member refid="structneforce_1_1icomparable_1a313fba4bce20aced1ff0e6173ad6aab2" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator&lt;=</name></member>
+      <member refid="structneforce_1_1hexadecimal_1ad4d2202450a186e72c2edea6ff903072" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a570be97dee75665b5850b6ca3ddaff58" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a84c1e87575eaf412da490750cd997f5c" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1ipackage_1a588ab3032347852c7cb58d577293fe59" prot="public" virt="non-virtual" ambiguityscope="neforce::ipackage&lt; hexadecimal, int64_t &gt;::"><scope>neforce::hexadecimal</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1icomparable_1ab9b06f7293eb15299f8c7d5341bfbc83" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator==</name></member>
+      <member refid="structneforce_1_1icomparable_1ab8de930acec5c0261656b787f576f08d" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator&gt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a644c6002f703eb487427daadfec8fb16" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator&gt;=</name></member>
+      <member refid="structneforce_1_1ibinary_1a8ffce852a517dd7921f6954d3eaae4ef" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator&gt;&gt;</name></member>
+      <member refid="structneforce_1_1ipackage_1aee84c88f612070cc6e9b4eae3aced584" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator&gt;&gt;=</name></member>
+      <member refid="structneforce_1_1ibinary_1abee0e90cccc02be1e6e8b9343d3c99da" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator^</name></member>
+      <member refid="structneforce_1_1ipackage_1a7c55bcca5e31e0877708970382550f2a" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator^=</name></member>
+      <member refid="structneforce_1_1ibinary_1a1b60f4a316f0e1d3461000b675ebed65" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator|</name></member>
+      <member refid="structneforce_1_1ipackage_1ae59f3a19c7bfd581800e2ed95723393c" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator|=</name></member>
+      <member refid="structneforce_1_1ipackage_1a81873ef6815adb601f3352202cb04c3b" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>operator~</name></member>
+      <member refid="structneforce_1_1ipackage_1a64cac633509e5457c20755adbd43013a" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>package_type</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a00a70a217d3d148d3d2e4c51de24a318" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>parse</name></member>
+      <member refid="structneforce_1_1hexadecimal_1ab4a8d536d04452929a90424759d3effc" prot="private" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>parse_view</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a94c805811fb600bba1af24e03ee1d9c7" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>set_bit</name></member>
+      <member refid="structneforce_1_1ipackage_1aef0076d7d8c07af43e8c39a6c94a67a1" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>swap</name></member>
+      <member refid="structneforce_1_1ipackage_1acde7b1c934c36bd7a20bb9fd73139de2" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>to_hash</name></member>
+      <member refid="structneforce_1_1ihashable_1a3bedfaa42740465ea8b6e58309c1f67e" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>to_ihash</name></member>
+      <member refid="structneforce_1_1ipackage_1ac278cde2c6bdf631880a1752d27d1b33" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>to_int64</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a1c476a4b40612a49081bc610d8d3f143" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>to_string</name></member>
+      <member refid="structneforce_1_1iobject_1ae8235cec74a7cfe8188d40827d5293d4" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>try_parse</name></member>
+      <member refid="structneforce_1_1ipackage_1ada39825f8477a3477689e82e869c24b1" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>value</name></member>
+      <member refid="structneforce_1_1ipackage_1a74278dfe7631eaa0ef16d03365cb2e10" prot="protected" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>value_</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a3c25e9ec9e3ec765a96538278dcfac60" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>value_type</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a7850cf832150da26559c8802f97a1dbf" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>xdigit_value</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a00889c685677479eb52cefc4972f4089" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>xdigit_value</name></member>
+      <member refid="structneforce_1_1hexadecimal_1a932d5679249a3c3588821ce5d8930178" prot="public" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>~hexadecimal</name></member>
+      <member refid="structneforce_1_1ipackage_1ad2ffcc2bb7ea56b0ddf647e3e771124c" prot="protected" virt="non-virtual"><scope>neforce::hexadecimal</scope><name>~ipackage</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

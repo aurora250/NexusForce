@@ -25,7 +25,7 @@ var group___system_signal =
         [ "FORCE_EXIT", "classsystem__signal__manager.html#a442e5d505e7801160e93504232ce2616ae0c9af36ecdf6234e3375848ba086f0c", null ]
       ] ],
       [ "block_signals", "classsystem__signal__manager.html#a3af6e2356781fec0f0a9384eeccf0dd7", null ],
-      [ "is_running", "classsystem__signal__manager.html#a84099c3f7f5034925d3b6e01cc0c7d4b", null ],
+      [ "is_running", "classsystem__signal__manager.html#a6e6fffc5a25521df157728188cea5959", null ],
       [ "register_handler", "classsystem__signal__manager.html#aff87adac772e9afc0e4cccba963ab388", null ],
       [ "register_handlers", "classsystem__signal__manager.html#aa01b3037c1b3d2b8437afe65f3674abb", null ],
       [ "remove_handler", "classsystem__signal__manager.html#a885408c015803c747c139cc64d31d9b0", null ],

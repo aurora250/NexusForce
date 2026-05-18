@@ -14,13 +14,13 @@ var group___format =
     ] ],
     [ "formatter&lt; Number, Dummy &gt;", "structformatter.html", null ],
     [ "formatter&lt; T, enable_if_t&lt; is_floating_point_v&lt; T &gt; &gt; &gt;", "structformatter_3_01_t_00_01enable__if__t_3_01is__floating__point__v_3_01_t_01_4_01_4_01_4.html", [
-      [ "operator()", "structformatter_3_01_t_00_01enable__if__t_3_01is__floating__point__v_3_01_t_01_4_01_4_01_4.html#ac2103c0369fd4a5333925d60c0f9ff2a", null ]
+      [ "operator()", "structformatter_3_01_t_00_01enable__if__t_3_01is__floating__point__v_3_01_t_01_4_01_4_01_4.html#a225051d290a5950ba4b26e2436b44cb5", null ]
     ] ],
     [ "formatter&lt; T, enable_if_t&lt; is_standard_integral_v&lt; T &gt; &amp;&amp;is_signed_v&lt; T &gt; &gt; &gt;", "structformatter_3_01_t_00_01enable__if__t_3_01is__standard__integral__v_3_01_t_01_4_01_6_6is__signed__v_3_01_t_01_4_01_4_01_4.html", [
-      [ "operator()", "structformatter_3_01_t_00_01enable__if__t_3_01is__standard__integral__v_3_01_t_01_4_01_6_6is__signed__v_3_01_t_01_4_01_4_01_4.html#a69d7cf28bfa94189d6ba5abeee9b9954", null ]
+      [ "operator()", "structformatter_3_01_t_00_01enable__if__t_3_01is__standard__integral__v_3_01_t_01_4_01_6_6is__signed__v_3_01_t_01_4_01_4_01_4.html#acca91c96728e9ecfeb056bb3b37cbd3e", null ]
     ] ],
     [ "formatter&lt; T, enable_if_t&lt; is_standard_integral_v&lt; T &gt; &amp;&amp;is_unsigned_v&lt; T &gt; &gt; &gt;", "structformatter_3_01_t_00_01enable__if__t_3_01is__standard__integral__v_3_01_t_01_4_01_6_6is__unsigned__v_3_01_t_01_4_01_4_01_4.html", [
-      [ "operator()", "structformatter_3_01_t_00_01enable__if__t_3_01is__standard__integral__v_3_01_t_01_4_01_6_6is__unsigned__v_3_01_t_01_4_01_4_01_4.html#a9c34b0b23a68ae6ea010e313bacf5742", null ]
+      [ "operator()", "structformatter_3_01_t_00_01enable__if__t_3_01is__standard__integral__v_3_01_t_01_4_01_6_6is__unsigned__v_3_01_t_01_4_01_4_01_4.html#a49c8088f011380b3b0654eeb26da002d", null ]
     ] ],
     [ "formatter&lt; char &gt;", "structformatter_3_01char_01_4.html", null ],
     [ "formatter&lt; bool &gt;", "structformatter_3_01bool_01_4.html", null ],
@@ -48,5 +48,5 @@ var group___format =
       [ "format_type::GENERAL", "group___format.html#ggacf69152a3f3bf73a87406d0730a11a3cab61773b9b3968a9988d765d728985862", null ],
       [ "format_type::CHAR", "group___format.html#ggacf69152a3f3bf73a87406d0730a11a3ca027acd3aa6b1dd7f26119d3cf0f9a063", null ]
     ] ],
-    [ "format", "group___format.html#ga2f48d1b0493594ccd0e5571cfc7f3ecf", null ]
+    [ "format", "group___format.html#gac0f4499364ec899fcdfaae1f7acbda76", null ]
 ];

@@ -7,7 +7,7 @@ var structduration =
     [ "duration", "structduration.html#a78728d719122c4c6459eafd65d833169", null ],
     [ "duration", "structduration.html#a3d5ba4ac8c538586202be5c6b001524a", null ],
     [ "duration", "group___time_point.html#gaeb19717e2329f809d58d4b20c372e6be", null ],
-    [ "count", "structduration.html#aa560d1665731d7c0397991fa5ec4f211", null ],
+    [ "count", "structduration.html#a79d16de289fadf4ffd36a989cb985a98", null ],
     [ "operator%=", "structduration.html#a39fc31ba3a074c1c3f71a672ad2382e8", null ],
     [ "operator%=", "structduration.html#a51a3646c6e66178792b4119a46e1db1f", null ],
     [ "operator*=", "structduration.html#ad00488273b61d2c584b850e86686161b", null ],

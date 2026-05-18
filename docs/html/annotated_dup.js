@@ -1,5 +1,9 @@
 var annotated_dup =
 [
+    [ "neforce", null, [
+      [ "lz4_exception", "structneforce_1_1lz4__exception.html", null ],
+      [ "lz4_compressor", "classneforce_1_1lz4__compressor.html", "classneforce_1_1lz4__compressor" ]
+    ] ],
     [ "add_const", "structadd__const.html", null ],
     [ "add_cv", "structadd__cv.html", null ],
     [ "add_lvalue_reference", "structadd__lvalue__reference.html", null ],
@@ -396,7 +400,7 @@ var annotated_dup =
     [ "is_unpackaged", "structis__unpackaged.html", null ],
     [ "is_unsigned", "structis__unsigned.html", null ],
     [ "is_view", "structis__view.html", null ],
-    [ "is_view&lt; 1::view_base&lt; D &gt; &gt;", "structis__view_3_011_1_1view__base_3_01_d_01_4_01_4.html", null ],
+    [ "is_view&lt; ranges::view_base&lt; D &gt; &gt;", "structis__view_3_01ranges_1_1view__base_3_01_d_01_4_01_4.html", null ],
     [ "is_virtual_thread_task", "structis__virtual__thread__task.html", null ],
     [ "is_void", "structis__void.html", null ],
     [ "is_volatile", "structis__volatile.html", null ],
@@ -434,7 +438,6 @@ var annotated_dup =
     [ "logger", "classlogger.html", "classlogger" ],
     [ "logging_filter", "classlogging__filter.html", "classlogging__filter" ],
     [ "lru_cache", "classlru__cache.html", "classlru__cache" ],
-    [ "lz4_compressor", "classlz4__compressor.html", "classlz4__compressor" ],
     [ "mac_address", "classmac__address.html", "classmac__address" ],
     [ "make_integer", "structmake__integer.html", null ],
     [ "make_signed", "structmake__signed.html", null ],

@@ -7,9 +7,9 @@ var searchData=
   ['day_5fnames_4',['day_names',['../structlocale_1_1time__info.html#ad003d34d42a19c0acb7a4ac394afb564',1,'locale::time_info']]],
   ['decimal_5fpoint_5',['decimal_point',['../structlocale_1_1numeric__info.html#a7ecf44911dbb66b25200d37b8b327c22',1,'locale::numeric_info']]],
   ['default_5fheaders_6',['default_headers',['../structhttp__client_1_1config.html#ab614057d43e024e718f8597b3d592a87',1,'http_client::config']]],
-  ['default_5ftolerance_7',['DEFAULT_TOLERANCE',['../group___math_constants.html#ga6b2f5fadae8acf971067aaf9edc78c6f',1,'math.hpp']]],
+  ['default_5ftolerance_7',['DEFAULT_TOLERANCE',['../group___math_constants.html#gad62cb98b78e83330e55e9b9ce87af8ae',1,'math.hpp']]],
   ['default_5fvalue_8',['default_value',['../structcmdline_1_1option.html#aa8fd89ce075231d20ac58df5760c36f8',1,'cmdline::option']]],
-  ['defer_5flock_9',['defer_lock',['../group___mutex.html#gafd2a4ed346c171a31775c9d071a3f32f',1,'mutex.hpp']]],
+  ['defer_5flock_9',['defer_lock',['../group___mutex.html#ga0a567f2acedc6f0f1a1c12a18172747f',1,'mutex.hpp']]],
   ['delimiter_10',['delimiter',['../structenvironment.html#aeda4c85dfd8e57007ca391fa315e4065',1,'environment']]],
   ['den_11',['den',['../structratio.html#ae5a7c6e950924f0db56cf721e716eb09',1,'ratio']]],
   ['description_12',['description',['../structcmdline_1_1option.html#a9c4df1d4784905b7a528396681f26161',1,'cmdline::option::description'],['../structplugin__info.html#a23f446a01701d7d0f86e3d1e0b672811',1,'plugin_info::description']]],
@@ -19,10 +19,10 @@ var searchData=
   ['digits10_16',['digits10',['../classnumeric__traits_3_01float32__t_01_4.html#a89877dd58aa9e9674e829ef2b1e0fe4d',1,'numeric_traits&lt; float32_t &gt;']]],
   ['dirs_5fonly_17',['dirs_only',['../structpath__tree_1_1scan__options.html#abf61b8ca4d4cd9e1b5ed87c6c4730292',1,'path_tree::scan_options']]],
   ['disconnect_5fcallback_5f_18',['disconnect_callback_',['../classtcp__client__base.html#a7b8f7559db533ecff45f052ad4352803',1,'tcp_client_base']]],
-  ['disjunction_5fv_19',['disjunction_v',['../group___type_traits_utilities.html#ga07b45a12528ab6274b3945b59508495d',1,'type_traits.hpp']]],
+  ['disjunction_5fv_19',['disjunction_v',['../group___type_traits_utilities.html#gabb3abcd15bf9ea4a0629b7e03498e1e1',1,'type_traits.hpp']]],
   ['distinct_20',['distinct',['../structsql__builder_1_1select__data.html#add421e89f759afd659a40477672ac68e',1,'sql_builder::select_data']]],
   ['dns_5f_21',['dns_',['../classtcp__client__base.html#ab8584da06a5e778efd18bbd35a08a425',1,'tcp_client_base']]],
   ['domain_22',['domain',['../structhttp__cookie.html#a006120f90d47eefc22cb5a1c3b291c7d',1,'http_cookie']]],
   ['dt_23',['dt',['../structlog__event.html#a661ad84d9d08d7873df51f27c398108a',1,'log_event']]],
-  ['dynamic_5fextent_24',['dynamic_extent',['../group___memory_view.html#gae58590b34c5a273cdafc1f2f69ace9c8',1,'memory_view.hpp']]]
+  ['dynamic_5fextent_24',['dynamic_extent',['../group___memory_view.html#gae948792a33f05cf1eb8bfed242c38056',1,'memory_view.hpp']]]
 ];

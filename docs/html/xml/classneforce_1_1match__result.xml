@@ -1,0 +1,478 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1match__result" kind="class" language="C++" prot="public">
+    <compoundname>neforce::match_result</compoundname>
+    <includes refid="regex_8hpp" local="no">regex.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1match__result_1afb9a52d3106bb6168c6d9537176a9ccf" prot="public" static="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;<ref refid="classneforce_1_1vector" kindref="compound">::const_iterator</ref></type>
+        <definition>using neforce::match_result::iterator = vector&lt;string&gt;::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>neforce::match_result::iterator</qualifiedname>
+        <briefdescription>
+<para>捕获组迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="60" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1match__result_1a35aef72f19460646a6db1bd1883873fa" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt;</type>
+        <definition>vector&lt;string&gt; neforce::match_result::groups_</definition>
+        <argsstring></argsstring>
+        <name>groups_</name>
+        <qualifiedname>neforce::match_result::groups_</qualifiedname>
+        <briefdescription>
+<para>捕获组文本 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="63" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1match__result_1aeb62a76236a5db939512f292ac7e9818" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref>, <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref> &gt; &gt;</type>
+        <definition>vector&lt;pair&lt;size_t, size_t&gt; &gt; neforce::match_result::group_positions_</definition>
+        <argsstring></argsstring>
+        <name>group_positions_</name>
+        <qualifiedname>neforce::match_result::group_positions_</qualifiedname>
+        <briefdescription>
+<para>捕获组位置和长度 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="64" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1match__result_1a3a94553d3a90b1e89c4882c425b14a45" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::match_result::position_</definition>
+        <argsstring></argsstring>
+        <name>position_</name>
+        <qualifiedname>neforce::match_result::position_</qualifiedname>
+        <initializer>= <ref refid="classneforce_1_1basic__string_1ac6cace2dfc00539b3c8afec48f6226c8" kindref="member">string::npos</ref></initializer>
+        <briefdescription>
+<para>匹配起始位置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="65" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1match__result_1ab9c1d2695bcc48ccf018240b113cab27" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::match_result::length_</definition>
+        <argsstring></argsstring>
+        <name>length_</name>
+        <qualifiedname>neforce::match_result::length_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>匹配长度 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="66" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1match__result_1a67a4ed227e1a063f77c1598e893df4b4" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::match_result::subject_</definition>
+        <argsstring></argsstring>
+        <name>subject_</name>
+        <qualifiedname>neforce::match_result::subject_</qualifiedname>
+        <briefdescription>
+<para>原始字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="67" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1match__result_1aecb893ee83cefaca0bc1a88dcaeb830e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::match_result::match_result</definition>
+        <argsstring>()=default</argsstring>
+        <name>match_result</name>
+        <qualifiedname>neforce::match_result::match_result</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="73" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1match__result_1a12e36c1b8ef4d6e08e8d65f0e90b61b2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::match_result::match_result</definition>
+        <argsstring>(string subject, size_t pos, size_t len, const vector&lt; string &gt; &amp;groups, vector&lt; pair&lt; size_t, size_t &gt; &gt; group_positions)</argsstring>
+        <name>match_result</name>
+        <qualifiedname>neforce::match_result::match_result</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>subject</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>len</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>groups</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref>, <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref> &gt; &gt;</type>
+          <declname>group_positions</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>subject</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原始字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>匹配起始位置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>匹配长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>groups</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>捕获组文本列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>group_positions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>捕获组位置列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="83" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1match__result_1a7d045ad4422aa3c89ed2b7168bc9d30d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::match_result::matched</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>matched</name>
+        <qualifiedname>neforce::match_result::matched</qualifiedname>
+        <briefdescription>
+<para>检查是否匹配成功 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>匹配成功返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="90" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="90" bodyend="90"/>
+        <references refid="classneforce_1_1basic__string_1ac6cace2dfc00539b3c8afec48f6226c8" compoundref="basic__string_8hpp" startline="198">neforce::basic_string&lt; char &gt;::npos</references>
+        <referencedby refid="classneforce_1_1match__result_1a5125a7ccea007c6b3ec7f46e04d72d3b" compoundref="regex_8hpp" startline="108" endline="108">data</referencedby>
+        <referencedby refid="classneforce_1_1match__result_1adf8079f194ea6f21dc20cfe0f4083d17" compoundref="regex_8hpp" startline="138" endline="138">prefix</referencedby>
+        <referencedby refid="classneforce_1_1match__result_1a8b2176623dc68074a2cc5adf90ee1943" compoundref="regex_8hpp" startline="144" endline="146">suffix</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1match__result_1aefd7bc5bdd40ab98ad3476501832c4d4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::match_result::position</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>position</name>
+        <qualifiedname>neforce::match_result::position</qualifiedname>
+        <briefdescription>
+<para>获取匹配起始位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>匹配在字符串中的起始索引 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="96" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="96" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1match__result_1a914ba272c95c0a6299a7fb6149b43cdd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::match_result::length</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>length</name>
+        <qualifiedname>neforce::match_result::length</qualifiedname>
+        <briefdescription>
+<para>获取匹配长度 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>匹配的字符长度 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="102" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="102" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1match__result_1a5125a7ccea007c6b3ec7f46e04d72d3b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+        <definition>string_view neforce::match_result::data</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>data</name>
+        <qualifiedname>neforce::match_result::data</qualifiedname>
+        <briefdescription>
+<para>获取完整匹配的文本 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>匹配到的完整字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="108" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="108" bodyend="108"/>
+        <references refid="classneforce_1_1match__result_1a7d045ad4422aa3c89ed2b7168bc9d30d" compoundref="regex_8hpp" startline="90" endline="90">matched</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1match__result_1abceb017da5b1e485fcde1c0c01d67210" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::match_result::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::match_result::size</qualifiedname>
+        <briefdescription>
+<para>获取捕获组数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>捕获组总数（包括第0组完整匹配） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="114" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="114" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1match__result_1a9f206da84ee7243f29e161375c222235" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+        <definition>string_view neforce::match_result::operator[]</definition>
+        <argsstring>(const size_t idx) const noexcept</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>neforce::match_result::operator[]</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>获取指定捕获组 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>捕获组索引（0表示完整匹配） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>捕获组文本，越界返回空字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="121" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="121" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1match__result_1a4fb3b17691c19a5a01875e0fa93e1578" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref>, <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref> &gt;</type>
+        <definition>pair&lt; size_t, size_t &gt; neforce::match_result::position</definition>
+        <argsstring>(const size_t idx) const noexcept</argsstring>
+        <name>position</name>
+        <qualifiedname>neforce::match_result::position</qualifiedname>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>获取指定捕获组的位置信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>捕获组索引 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含起始位置和长度的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="130" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="130" bodyend="132"/>
+        <references refid="classneforce_1_1basic__string_1ac6cace2dfc00539b3c8afec48f6226c8" compoundref="basic__string_8hpp" startline="198">neforce::basic_string&lt; char &gt;::npos</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1match__result_1adf8079f194ea6f21dc20cfe0f4083d17" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+        <definition>string_view neforce::match_result::prefix</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>prefix</name>
+        <qualifiedname>neforce::match_result::prefix</qualifiedname>
+        <briefdescription>
+<para>获取匹配前的前缀 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>匹配位置之前的字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="138" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="138" bodyend="138"/>
+        <references refid="classneforce_1_1match__result_1a7d045ad4422aa3c89ed2b7168bc9d30d" compoundref="regex_8hpp" startline="90" endline="90">matched</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1match__result_1a8b2176623dc68074a2cc5adf90ee1943" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___string_view_1ga5a6e8b9da034ce8d4818231c4e005eff" kindref="member">string_view</ref></type>
+        <definition>string_view neforce::match_result::suffix</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>suffix</name>
+        <qualifiedname>neforce::match_result::suffix</qualifiedname>
+        <briefdescription>
+<para>获取匹配后的后缀 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>匹配位置之后的字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="144" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="144" bodyend="146"/>
+        <references refid="classneforce_1_1match__result_1a7d045ad4422aa3c89ed2b7168bc9d30d" compoundref="regex_8hpp" startline="90" endline="90">matched</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1match__result_1a03c121fe71a5574c4db40ac0d697f3f1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1match__result_1afb9a52d3106bb6168c6d9537176a9ccf" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::match_result::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::match_result::begin</qualifiedname>
+        <briefdescription>
+<para>格式化替换结果 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式化字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>格式化后的字符串</para>
+</simplesect>
+支持的转义序列：<itemizedlist>
+<listitem><para>$$: 美元符号</para>
+</listitem><listitem><para>$&amp;: 完整匹配</para>
+</listitem><listitem><para>$`: 前缀</para>
+</listitem><listitem><para>$&apos;: 后缀</para>
+</listitem><listitem><para>$n: 第n个捕获组（n为0-9）</para>
+</listitem><listitem><para>${name}: 命名捕获组 */ [[nodiscard]] string format(string_view fmt) const;</para>
+</listitem></itemizedlist>
+</para>
+<para>/**</para>
+<para>获取捕获组迭代器起始位置 <simplesect kind="return"><para>捕获组迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="167" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="167" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1match__result_1a447d5058b9d1e3247804b8f05468f022" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1match__result_1afb9a52d3106bb6168c6d9537176a9ccf" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::match_result::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::match_result::end</qualifiedname>
+        <briefdescription>
+<para>获取捕获组迭代器结束位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>捕获组迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="173" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="173" bodyend="173"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>正则表达式匹配结果类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>存储一次正则表达式匹配的结果，包括匹配到的文本、捕获组、 匹配位置等信息。支持格式化输出和迭代器访问。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" line="58" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/regex.hpp" bodystart="58" bodyend="174"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1match__result_1a03c121fe71a5574c4db40ac0d697f3f1" prot="public" virt="non-virtual"><scope>neforce::match_result</scope><name>begin</name></member>
+      <member refid="classneforce_1_1match__result_1a5125a7ccea007c6b3ec7f46e04d72d3b" prot="public" virt="non-virtual"><scope>neforce::match_result</scope><name>data</name></member>
+      <member refid="classneforce_1_1match__result_1a447d5058b9d1e3247804b8f05468f022" prot="public" virt="non-virtual"><scope>neforce::match_result</scope><name>end</name></member>
+      <member refid="classneforce_1_1match__result_1aeb62a76236a5db939512f292ac7e9818" prot="private" virt="non-virtual"><scope>neforce::match_result</scope><name>group_positions_</name></member>
+      <member refid="classneforce_1_1match__result_1a35aef72f19460646a6db1bd1883873fa" prot="private" virt="non-virtual"><scope>neforce::match_result</scope><name>groups_</name></member>
+      <member refid="classneforce_1_1match__result_1afb9a52d3106bb6168c6d9537176a9ccf" prot="public" virt="non-virtual"><scope>neforce::match_result</scope><name>iterator</name></member>
+      <member refid="classneforce_1_1match__result_1a914ba272c95c0a6299a7fb6149b43cdd" prot="public" virt="non-virtual"><scope>neforce::match_result</scope><name>length</name></member>
+      <member refid="classneforce_1_1match__result_1ab9c1d2695bcc48ccf018240b113cab27" prot="private" virt="non-virtual"><scope>neforce::match_result</scope><name>length_</name></member>
+      <member refid="classneforce_1_1match__result_1aecb893ee83cefaca0bc1a88dcaeb830e" prot="public" virt="non-virtual"><scope>neforce::match_result</scope><name>match_result</name></member>
+      <member refid="classneforce_1_1match__result_1a12e36c1b8ef4d6e08e8d65f0e90b61b2" prot="public" virt="non-virtual"><scope>neforce::match_result</scope><name>match_result</name></member>
+      <member refid="classneforce_1_1match__result_1a7d045ad4422aa3c89ed2b7168bc9d30d" prot="public" virt="non-virtual"><scope>neforce::match_result</scope><name>matched</name></member>
+      <member refid="classneforce_1_1match__result_1a9f206da84ee7243f29e161375c222235" prot="public" virt="non-virtual"><scope>neforce::match_result</scope><name>operator[]</name></member>
+      <member refid="classneforce_1_1match__result_1aefd7bc5bdd40ab98ad3476501832c4d4" prot="public" virt="non-virtual"><scope>neforce::match_result</scope><name>position</name></member>
+      <member refid="classneforce_1_1match__result_1a4fb3b17691c19a5a01875e0fa93e1578" prot="public" virt="non-virtual"><scope>neforce::match_result</scope><name>position</name></member>
+      <member refid="classneforce_1_1match__result_1a3a94553d3a90b1e89c4882c425b14a45" prot="private" virt="non-virtual"><scope>neforce::match_result</scope><name>position_</name></member>
+      <member refid="classneforce_1_1match__result_1adf8079f194ea6f21dc20cfe0f4083d17" prot="public" virt="non-virtual"><scope>neforce::match_result</scope><name>prefix</name></member>
+      <member refid="classneforce_1_1match__result_1abceb017da5b1e485fcde1c0c01d67210" prot="public" virt="non-virtual"><scope>neforce::match_result</scope><name>size</name></member>
+      <member refid="classneforce_1_1match__result_1a67a4ed227e1a063f77c1598e893df4b4" prot="private" virt="non-virtual"><scope>neforce::match_result</scope><name>subject_</name></member>
+      <member refid="classneforce_1_1match__result_1a8b2176623dc68074a2cc5adf90ee1943" prot="public" virt="non-virtual"><scope>neforce::match_result</scope><name>suffix</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

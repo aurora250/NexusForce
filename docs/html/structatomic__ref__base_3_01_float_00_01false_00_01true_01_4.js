@@ -10,14 +10,14 @@ var structatomic__ref__base_3_01_float_00_01false_00_01true_01_4 =
     [ "exchange", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a1c606b766bc4952cc43dd879436375dc", null ],
     [ "fetch_add", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a8065485c88d98d95f67ed562517212eb", null ],
     [ "fetch_sub", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#adb450547460e550bac73301a28e89e1a", null ],
-    [ "is_lock_free", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#ad00a5f9076ef7ea3fbe698eaf41b0502", null ],
+    [ "is_lock_free", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a66bd5fda4b71a5291d0193c0f9c49a63", null ],
     [ "load", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a20649a71b96b780d8567e7a7657994ed", null ],
-    [ "notify_all", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a28e149d06ed20a3492ea643533b2dbd6", null ],
-    [ "notify_one", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a89b127ce19c5c41b7e8c1ae39eb7c415", null ],
+    [ "notify_all", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a561ffa7416ba472c42f18a172656e900", null ],
+    [ "notify_one", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#afac9b7bd898e1455962cf3eb9aa3208c", null ],
     [ "operator Float", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a42913bb9d170d6dacd3eaecedf1541f3", null ],
     [ "operator+=", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a65d9db4cf47968ce6d8662c6a4e96330", null ],
     [ "operator-=", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a6ddc1843039d1e2e195c96cc52384edd", null ],
     [ "operator=", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#add7991ea5336b44587d8578a9c7c22f5", null ],
     [ "store", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a1cfbc9ed4cee59c6aafcf3bd75b78617", null ],
-    [ "wait", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#aafa9406edb191fe58fdf629ec03606c2", null ]
+    [ "wait", "structatomic__ref__base_3_01_float_00_01false_00_01true_01_4.html#a229b566632dce6e14e80d3387711acc4", null ]
 ];

@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="conceptneforce_1_1derived__from" kind="concept">
+    <compoundname>neforce::derived_from</compoundname>
+    <includes refid="concepts_8hpp" local="no">concepts.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Derived</type>
+      </param>
+      <param>
+        <type>typename Base</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename Derived, typename Base&gt;
+concept <ref refid="conceptneforce_1_1derived__from" kindref="compound">neforce::derived_from</ref> =  <ref refid="group___base_type_qualifier_check_1gaf587c525b5f808c49df5c82b74e7400c" kindref="member">is_base_of_v</ref>&lt;Base, Derived&gt; &amp;&amp; convertible_to&lt;const volatile Derived*, const volatile Base*&gt;</initializer>
+    <conceptparts>
+      <codepart line="86">    <programlisting>
+<codeline><highlight class="keyword">template</highlight><highlight class="normal">&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Derived,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Base&gt;</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal">derived_from<sp/>=<sp/>is_base_of_v&lt;Base,<sp/>Derived&gt;<sp/>&amp;&amp;<sp/>convertible_to&lt;const<sp/>volatile<sp/>Derived*,<sp/>const<sp/>volatile<sp/>Base*&gt;</highlight></codeline>
+    </programlisting>
+</codepart>
+    </conceptparts>
+    <briefdescription>
+<para>检查类型是否派生自另一个类型 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Derived</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>派生类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Base</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>基类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+要求Derived是Base的派生类，并且可以安全地进行指针转换。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/typeinfo/concepts.hpp" line="86" column="1"/>
+  </compounddef>
+</doxygen>

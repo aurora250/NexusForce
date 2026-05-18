@@ -1,0 +1,359 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1static__file__filter" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>neforce::http::static_file_filter</compoundname>
+    <basecompoundref refid="classneforce_1_1http_1_1http__filter" prot="public" virt="non-virtual">neforce::http::http_filter</basecompoundref>
+    <includes refid="http__filter_8hpp" local="no">http_filter.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1static__file__filter_1a21cd127ea8d7c189eeefc7dba9c8d6bd" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::http::static_file_filter::root_path_</definition>
+        <argsstring></argsstring>
+        <name>root_path_</name>
+        <qualifiedname>neforce::http::static_file_filter::root_path_</qualifiedname>
+        <briefdescription>
+<para>文件根目录 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="223" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="223" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1static__file__filter_1a9df45ab515e3f8eb7030e354d245cc3b" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="structneforce_1_1http_1_1http__content" kindref="compound">http_content</ref> &gt;</type>
+        <definition>unordered_map&lt;string, http_content&gt; neforce::http::static_file_filter::mime_types_</definition>
+        <argsstring></argsstring>
+        <name>mime_types_</name>
+        <qualifiedname>neforce::http::static_file_filter::mime_types_</qualifiedname>
+        <briefdescription>
+<para>MIME类型映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="224" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="224" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1static__file__filter_1a56d48cdcffc613c67fecf8f8abf63794" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool neforce::http::static_file_filter::enable_cache_</definition>
+        <argsstring></argsstring>
+        <name>enable_cache_</name>
+        <qualifiedname>neforce::http::static_file_filter::enable_cache_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>是否启用缓存 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="225" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="225" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1static__file__filter_1a3465f99232b700a0aa1ee2d0ae4ac5c6" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1byte__size" kindref="compound">byte_size</ref></type>
+        <definition>byte_size neforce::http::static_file_filter::max_file_size_</definition>
+        <argsstring></argsstring>
+        <name>max_file_size_</name>
+        <qualifiedname>neforce::http::static_file_filter::max_file_size_</qualifiedname>
+        <initializer>{10_MB}</initializer>
+        <briefdescription>
+<para>最大文件大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="226" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="226" bodyend="226"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1static__file__filter_1a79b3bc51add2079f95f05cd7b51b7822" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::static_file_filter::static_file_filter</definition>
+        <argsstring>(string root_path)</argsstring>
+        <name>static_file_filter</name>
+        <qualifiedname>neforce::http::static_file_filter::static_file_filter</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+          <declname>root_path</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>root_path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件根目录 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="233" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1static__file__filter_1a2adcaac9d4b26d8799c34dc87e25ae74" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::static_file_filter::pre_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>pre_filter</name>
+        <qualifiedname>neforce::http::static_file_filter::pre_filter</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a66c5af31a812075314a85ef38b9d55eb">pre_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>预处理方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>返回false表示中断后续处理</para>
+</simplesect>
+在请求处理前调用，可以检查请求、修改请求或提前返回响应。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="235" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1static__file__filter_1afc9790e0ed0eaedecf236a6bf0809dd1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void neforce::http::static_file_filter::do_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>do_filter</name>
+        <qualifiedname>neforce::http::static_file_filter::do_filter</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a354b28748f728effc3a651e7c9fa96a6">do_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>核心过滤方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+执行实际的过滤逻辑。通常由具体处理器实现， 中间件过滤器可能不实现此方法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="236" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="236" bodyend="236"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1static__file__filter_1a6e9d5af41a460c6f8cfaeeef08ca7b6b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>string neforce::http::static_file_filter::name</definition>
+        <argsstring>() const override</argsstring>
+        <name>name</name>
+        <qualifiedname>neforce::http::static_file_filter::name</qualifiedname>
+        <reimplements refid="classneforce_1_1http_1_1http__filter_1a16dc9ccb76e7dccf41f4ae732ea01afe">name</reimplements>
+        <briefdescription>
+<para>获取过滤器名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>过滤器名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="237" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="237" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1static__file__filter_1a370c2618194d02f1b533889238770c37" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="structneforce_1_1http_1_1http__content" kindref="compound">http_content</ref> &gt;</type>
+        <definition>optional&lt; http_content &gt; neforce::http::static_file_filter::get_mime_type</definition>
+        <argsstring>(const string &amp;path) const</argsstring>
+        <name>get_mime_type</name>
+        <qualifiedname>neforce::http::static_file_filter::get_mime_type</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>获取MIME类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>MIME类型，未找到返回none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="253" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1static__file__filter_1add091a139284f7e8553e07ac58211f68" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::static_file_filter::add_mime_type</definition>
+        <argsstring>(const string &amp;extension, http_content content_type)</argsstring>
+        <name>add_mime_type</name>
+        <qualifiedname>neforce::http::static_file_filter::add_mime_type</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>extension</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1http_1_1http__content" kindref="compound">http_content</ref></type>
+          <declname>content_type</declname>
+        </param>
+        <briefdescription>
+<para>添加MIME类型映射 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>extension</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件扩展名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>content_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MIME类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="260" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1static__file__filter_1a5df3491e23cabacbe9cf6ea8352c5666" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool neforce::http::static_file_filter::is_safe_path</definition>
+        <argsstring>(const string &amp;path)</argsstring>
+        <name>is_safe_path</name>
+        <qualifiedname>neforce::http::static_file_filter::is_safe_path</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>检查路径是否安全 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>安全返回true</para>
+</simplesect>
+防止路径遍历攻击，拒绝包含&quot;..&quot;或&quot;//&quot;的路径。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="246" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>静态文件服务过滤器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供静态文件服务功能，当请求匹配文件路径时返回文件内容。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>neforce::http::http_filter</label>
+        <link refid="classneforce_1_1http_1_1http__filter"/>
+      </node>
+      <node id="1">
+        <label>neforce::http::static_file_filter</label>
+        <link refid="classneforce_1_1http_1_1static__file__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>neforce::http::http_filter</label>
+        <link refid="classneforce_1_1http_1_1http__filter"/>
+      </node>
+      <node id="1">
+        <label>neforce::http::static_file_filter</label>
+        <link refid="classneforce_1_1http_1_1static__file__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="221" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="221" bodyend="261"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1static__file__filter_1add091a139284f7e8553e07ac58211f68" prot="public" virt="non-virtual"><scope>neforce::http::static_file_filter</scope><name>add_mime_type</name></member>
+      <member refid="classneforce_1_1http_1_1static__file__filter_1afc9790e0ed0eaedecf236a6bf0809dd1" prot="public" virt="virtual"><scope>neforce::http::static_file_filter</scope><name>do_filter</name></member>
+      <member refid="classneforce_1_1http_1_1static__file__filter_1a56d48cdcffc613c67fecf8f8abf63794" prot="private" virt="non-virtual"><scope>neforce::http::static_file_filter</scope><name>enable_cache_</name></member>
+      <member refid="classneforce_1_1http_1_1static__file__filter_1a370c2618194d02f1b533889238770c37" prot="public" virt="non-virtual"><scope>neforce::http::static_file_filter</scope><name>get_mime_type</name></member>
+      <member refid="classneforce_1_1http_1_1static__file__filter_1a5df3491e23cabacbe9cf6ea8352c5666" prot="public" virt="non-virtual"><scope>neforce::http::static_file_filter</scope><name>is_safe_path</name></member>
+      <member refid="classneforce_1_1http_1_1static__file__filter_1a3465f99232b700a0aa1ee2d0ae4ac5c6" prot="private" virt="non-virtual"><scope>neforce::http::static_file_filter</scope><name>max_file_size_</name></member>
+      <member refid="classneforce_1_1http_1_1static__file__filter_1a9df45ab515e3f8eb7030e354d245cc3b" prot="private" virt="non-virtual"><scope>neforce::http::static_file_filter</scope><name>mime_types_</name></member>
+      <member refid="classneforce_1_1http_1_1static__file__filter_1a6e9d5af41a460c6f8cfaeeef08ca7b6b" prot="public" virt="virtual"><scope>neforce::http::static_file_filter</scope><name>name</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter_1a14ac82a85eee7e20c9d912f97b50535f" prot="public" virt="virtual"><scope>neforce::http::static_file_filter</scope><name>post_filter</name></member>
+      <member refid="classneforce_1_1http_1_1static__file__filter_1a2adcaac9d4b26d8799c34dc87e25ae74" prot="public" virt="virtual"><scope>neforce::http::static_file_filter</scope><name>pre_filter</name></member>
+      <member refid="classneforce_1_1http_1_1static__file__filter_1a21cd127ea8d7c189eeefc7dba9c8d6bd" prot="private" virt="non-virtual"><scope>neforce::http::static_file_filter</scope><name>root_path_</name></member>
+      <member refid="classneforce_1_1http_1_1static__file__filter_1a79b3bc51add2079f95f05cd7b51b7822" prot="public" virt="non-virtual"><scope>neforce::http::static_file_filter</scope><name>static_file_filter</name></member>
+      <member refid="classneforce_1_1http_1_1http__filter_1a157ba2513278a823db4ea1b36be341f0" prot="public" virt="virtual"><scope>neforce::http::static_file_filter</scope><name>~http_filter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

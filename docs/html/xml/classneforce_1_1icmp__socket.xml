@@ -1,0 +1,486 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1icmp__socket" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>neforce::icmp_socket</compoundname>
+    <basecompoundref refid="classneforce_1_1socket__base" prot="public" virt="non-virtual">neforce::socket_base</basecompoundref>
+    <includes refid="icmp__socket_8hpp" local="no">icmp_socket.hpp</includes>
+    <innerclass refid="structneforce_1_1icmp__socket_1_1ping__result" prot="public">neforce::icmp_socket::ping_result</innerclass>
+    <innerclass refid="structneforce_1_1icmp__socket_1_1traceroute__hop" prot="public">neforce::icmp_socket::traceroute_hop</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classneforce_1_1icmp__socket_1aa7e1c9ee2bb8fe59e3f19c3ca968526b" prot="public" static="no" strong="no">
+        <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+        <name>icmp_type</name>
+        <qualifiedname>neforce::icmp_socket::icmp_type</qualifiedname>
+        <enumvalue id="classneforce_1_1icmp__socket_1aa7e1c9ee2bb8fe59e3f19c3ca968526ba9b0665cd3059876e4ada1f13c9943069" prot="public">
+          <name>ICMP_ECHO_REPLY</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>Echo Reply（Ping响应） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1icmp__socket_1aa7e1c9ee2bb8fe59e3f19c3ca968526ba9ba13c17ded5f46816d67f68c9d355b0" prot="public">
+          <name>ICMP_ECHO_REQUEST</name>
+          <initializer>= 8</initializer>
+          <briefdescription>
+<para>Echo Request（Ping请求） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1icmp__socket_1aa7e1c9ee2bb8fe59e3f19c3ca968526baca638ddbcb21f5b46a72b07941e6bdb0" prot="public">
+          <name>ICMP_TIME_EXCEEDED</name>
+          <initializer>= 11</initializer>
+          <briefdescription>
+<para>Time Exceeded（TTL超时） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>ICMP消息类型常量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="107" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" bodystart="107" bodyend="111"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1icmp__socket_1a0ecdafa60872f2d95ca930e00fb4d5aa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::icmp_socket::receive_reply</definition>
+        <argsstring>(milliseconds timeout, uint16_t expected_id, uint16_t expected_seq, ip_address &amp;sender, icmp_header &amp;out_header, vector&lt; char &gt; &amp;out_data, uint8_t &amp;recv_ttl)</argsstring>
+        <name>receive_reply</name>
+        <qualifiedname>neforce::icmp_socket::receive_reply</qualifiedname>
+        <param>
+          <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+          <declname>timeout</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+          <declname>expected_id</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+          <declname>expected_seq</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>sender</declname>
+        </param>
+        <param>
+          <type><ref refid="structneforce_1_1icmp__header" kindref="compound">icmp_header</ref> &amp;</type>
+          <declname>out_header</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; char &gt; &amp;</type>
+          <declname>out_data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref> &amp;</type>
+          <declname>recv_ttl</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="136" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1icmp__socket_1a18f322797d761175b014b6a1a138dcf5" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::icmp_socket::send_echo_request</definition>
+        <argsstring>(const ip_address &amp;dest, uint16_t id, uint16_t seq, uint8_t ttl, const void *data, size_t data_len)</argsstring>
+        <name>send_echo_request</name>
+        <qualifiedname>neforce::icmp_socket::send_echo_request</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+          <declname>seq</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+          <declname>ttl</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>data_len</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="139" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1icmp__socket_1a3570c151adec6c416fa41eacd799926c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::icmp_socket::icmp_socket</definition>
+        <argsstring>()=default</argsstring>
+        <name>icmp_socket</name>
+        <qualifiedname>neforce::icmp_socket::icmp_socket</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="146" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1icmp__socket_1a49870cae561262283efde7e18c05ca66" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::icmp_socket::icmp_socket</definition>
+        <argsstring>(native_handle_type fd) noexcept</argsstring>
+        <name>icmp_socket</name>
+        <qualifiedname>neforce::icmp_socket::icmp_socket</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1socket__base_1adcffd7b995ddcc49a6ab844e75fb7dde" kindref="member">native_handle_type</ref></type>
+          <declname>fd</declname>
+        </param>
+        <briefdescription>
+<para>从原生句柄构造 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>原生socket句柄 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="152" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" bodystart="152" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1icmp__socket_1a50fc7b97c473a0fbeab35fb917f20727" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::icmp_socket::open</definition>
+        <argsstring>()</argsstring>
+        <name>open</name>
+        <qualifiedname>neforce::icmp_socket::open</qualifiedname>
+        <briefdescription>
+<para>打开ICMP socket </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structneforce_1_1socket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>创建失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建原始ICMP套接字，需要适当权限。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="161" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1icmp__socket_1ab55084298084be71ee8028d8136a32d8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structneforce_1_1icmp__socket_1_1ping__result" kindref="compound">ping_result</ref></type>
+        <definition>ping_result neforce::icmp_socket::ping</definition>
+        <argsstring>(const ip_address &amp;dest, milliseconds timeout, uint16_t sequence=0, const void *data=nullptr, size_t data_len=0)</argsstring>
+        <name>ping</name>
+        <qualifiedname>neforce::icmp_socket::ping</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+          <declname>timeout</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+          <declname>sequence</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>data</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>data_len</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>执行Ping操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标IPv4地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时时间 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sequence</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列号（默认0） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>附加数据（可选） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>data_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>附加数据长度 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Ping结果</para>
+</simplesect>
+发送ICMP Echo请求并等待响应，测量RTT。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="174" column="17"/>
+        <references refid="group___type_erasure_functions_1ga3b4836c7ce514573ca8d622d4a71af1f" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1icmp__socket_1a463e462f1e68f80e93a3d30195ff1ef3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="structneforce_1_1icmp__socket_1_1traceroute__hop" kindref="compound">traceroute_hop</ref> &gt;</type>
+        <definition>vector&lt; traceroute_hop &gt; neforce::icmp_socket::traceroute</definition>
+        <argsstring>(const ip_address &amp;dest, int max_hops=30, milliseconds probe_timeout=milliseconds(1000), int probes_per_hop=3)</argsstring>
+        <name>traceroute</name>
+        <qualifiedname>neforce::icmp_socket::traceroute</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1ip__address" kindref="compound">ip_address</ref> &amp;</type>
+          <declname>dest</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>max_hops</declname>
+          <defval>30</defval>
+        </param>
+        <param>
+          <type><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref></type>
+          <declname>probe_timeout</declname>
+          <defval><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref>(1000)</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>probes_per_hop</declname>
+          <defval>3</defval>
+        </param>
+        <briefdescription>
+<para>执行Traceroute操作 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dest</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标IPv4地址 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_hops</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大跳数（默认30） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>probe_timeout</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>每跳探测超时时间（默认1000ms） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>probes_per_hop</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>每跳探测次数（默认3） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>跳点信息列表</para>
+</simplesect>
+通过逐步增加TTL值探测网络路径， 收集每个中间路由器的IP地址和响应时间。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="188" column="12"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>ICMP Socket类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>实现ICMP协议的原始套接字，支持Ping和Traceroute功能。</para>
+<para>主要功能：<itemizedlist>
+<listitem><para>ICMP Echo请求/回复（Ping）</para>
+</listitem><listitem><para>网络路径追踪（Traceroute）</para>
+</listitem><listitem><para>ICMP超时消息处理</para>
+</listitem><listitem><para>RTT（往返时间）测量</para>
+</listitem><listitem><para>TTL设置和读取</para>
+</listitem></itemizedlist>
+</para>
+<para>使用示例： <programlisting><codeline><highlight class="comment">//<sp/>Ping示例</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><ref refid="classneforce_1_1icmp__socket_1a3570c151adec6c416fa41eacd799926c" kindref="member">icmp_socket</ref><sp/>sock;</highlight></codeline>
+<codeline><highlight class="normal">sock.open(AF_INET);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dest<sp/>=<sp/><ref refid="classneforce_1_1ip__address_1a97ab60c5c74caa7679adc3220a206044" kindref="member">ip_address::parse</ref>(</highlight><highlight class="stringliteral">&quot;8.8.8.8&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(dest)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>sock.ping(*dest,<sp/><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref>(2000));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(result.success)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1ga9c4e1ac58957b1892c3091006222f66b" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;Reply<sp/>from<sp/>&quot;</highlight><highlight class="normal">,<sp/>result.destination,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;:<sp/>bytes=&quot;</highlight><highlight class="normal">,<sp/>result.reply_size,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;<sp/>time=&quot;</highlight><highlight class="normal">,<sp/>result.rtt.count(),<sp/></highlight><highlight class="stringliteral">&quot;ms&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;<sp/>TTL=&quot;</highlight><highlight class="normal">,<sp/>result.reply_ttl);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1ga9c4e1ac58957b1892c3091006222f66b" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;Request<sp/>timed<sp/>out&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Traceroute示例</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>hops<sp/>=<sp/>sock.traceroute(*dest,<sp/>30,<sp/><ref refid="group___duration_1gaa97729fe53f9bafafb607a9e01cf1fa4" kindref="member">milliseconds</ref>(1000),<sp/>3);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>hops.size();<sp/>++i)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>hop<sp/>=<sp/>hops[i];</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1ga6a54a4e2e702a171b0ab05cacaa740ec" kindref="member">print</ref>(i<sp/>+<sp/>1,<sp/></highlight><highlight class="stringliteral">&quot;.<sp/>&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(hop.address.is_valid())<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1ga6a54a4e2e702a171b0ab05cacaa740ec" kindref="member">print</ref>(hop.address);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>3;<sp/>++j)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(hop.rtt[j].count()<sp/>&gt;=<sp/>0)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1ga6a54a4e2e702a171b0ab05cacaa740ec" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">,<sp/>hop.rtt[j].count(),<sp/></highlight><highlight class="stringliteral">&quot;ms&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1ga6a54a4e2e702a171b0ab05cacaa740ec" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;<sp/>*&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1ga9c4e1ac58957b1892c3091006222f66b" kindref="member">println</ref>();</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1ga9c4e1ac58957b1892c3091006222f66b" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;*<sp/>*<sp/>*&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(hop.reached)<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><simplesect kind="note"><para>在Linux上需要root权限才能创建原始ICMP套接字。 Windows可能需要管理员权限。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::icmp_socket</label>
+        <link refid="classneforce_1_1icmp__socket"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::socket_base</label>
+        <link refid="classneforce_1_1socket__base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::icmp_socket</label>
+        <link refid="classneforce_1_1icmp__socket"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::socket_base</label>
+        <link refid="classneforce_1_1socket__base"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="101" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" bodystart="101" bodyend="190"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1socket__base_1ae7a4566c2df82eb0ba3fff8b5fc7df46" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>bind</name></member>
+      <member refid="classneforce_1_1socket__base_1a8de8f78559fccaf6b9ed6da6b89f27c3" prot="public" virt="virtual"><scope>neforce::icmp_socket</scope><name>close</name></member>
+      <member refid="classneforce_1_1socket__base_1a0d91356affbee30bd1e6f7cc483e508d" prot="protected" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>fd_</name></member>
+      <member refid="classneforce_1_1socket__base_1a17ec17b8a17e3bee456b0048596320a8" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>get_option</name></member>
+      <member refid="classneforce_1_1icmp__socket_1aa7e1c9ee2bb8fe59e3f19c3ca968526ba9b0665cd3059876e4ada1f13c9943069" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>ICMP_ECHO_REPLY</name></member>
+      <member refid="classneforce_1_1icmp__socket_1aa7e1c9ee2bb8fe59e3f19c3ca968526ba9ba13c17ded5f46816d67f68c9d355b0" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>ICMP_ECHO_REQUEST</name></member>
+      <member refid="classneforce_1_1icmp__socket_1a3570c151adec6c416fa41eacd799926c" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>icmp_socket</name></member>
+      <member refid="classneforce_1_1icmp__socket_1a49870cae561262283efde7e18c05ca66" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>icmp_socket</name></member>
+      <member refid="classneforce_1_1icmp__socket_1aa7e1c9ee2bb8fe59e3f19c3ca968526baca638ddbcb21f5b46a72b07941e6bdb0" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>ICMP_TIME_EXCEEDED</name></member>
+      <member refid="classneforce_1_1icmp__socket_1aa7e1c9ee2bb8fe59e3f19c3ca968526b" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>icmp_type</name></member>
+      <member refid="classneforce_1_1socket__base_1af49691de702dac3413c30d84bb64f734" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>invalid_handle</name></member>
+      <member refid="classneforce_1_1socket__base_1a688c59e456551b33a230cb139dbd685a" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>is_open</name></member>
+      <member refid="classneforce_1_1socket__base_1aada611fdaa46fb9f055ef566be7fbd05" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>listen</name></member>
+      <member refid="classneforce_1_1socket__base_1abaa18d7f634b115ad1989ec023c0bf32" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>local_endpoint</name></member>
+      <member refid="classneforce_1_1socket__base_1a55e7e77823236aaf022990256793783d" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>native_handle</name></member>
+      <member refid="classneforce_1_1socket__base_1adcffd7b995ddcc49a6ab844e75fb7dde" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>native_handle_type</name></member>
+      <member refid="classneforce_1_1icmp__socket_1a50fc7b97c473a0fbeab35fb917f20727" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>open</name></member>
+      <member refid="classneforce_1_1socket__base_1acbaee07b3d802e67ad82a99614d43b49" prot="public" virt="non-virtual" ambiguityscope="neforce::socket_base::"><scope>neforce::icmp_socket</scope><name>open</name></member>
+      <member refid="classneforce_1_1socket__base_1ac4c5240cbfd92f1b31e3f8dc7093987a" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>operator bool</name></member>
+      <member refid="classneforce_1_1socket__base_1ab20b8caa25bbb8071e4c908691251667" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1socket__base_1a9e86d2bd403dbba7ba100a163ea130d0" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1icmp__socket_1ab55084298084be71ee8028d8136a32d8" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>ping</name></member>
+      <member refid="classneforce_1_1icmp__socket_1a0ecdafa60872f2d95ca930e00fb4d5aa" prot="private" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>receive_reply</name></member>
+      <member refid="classneforce_1_1socket__base_1a32f1e147a349925c32839fa1ce3b8fdc" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>release</name></member>
+      <member refid="classneforce_1_1socket__base_1ae1a4b45ff284ba83fac92aa5dc4a9adb" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>remote_endpoint</name></member>
+      <member refid="classneforce_1_1icmp__socket_1a18f322797d761175b014b6a1a138dcf5" prot="private" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>send_echo_request</name></member>
+      <member refid="classneforce_1_1socket__base_1ab55494ddb7435ace44483bf2a13d1b19" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>set_keep_alive</name></member>
+      <member refid="classneforce_1_1socket__base_1a9b75e2f51a01febdd29f2fd6941fd2ab" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>set_nonblocking</name></member>
+      <member refid="classneforce_1_1socket__base_1aebf9cdaaa399bcbdff7e7a47345d039a" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>set_option</name></member>
+      <member refid="classneforce_1_1socket__base_1a2b3e9bc783b3e3469bb213604220deed" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>set_receive_buffer_size</name></member>
+      <member refid="classneforce_1_1socket__base_1a3e028a27cad5bca645c4d8f645751dfa" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>set_receive_timeout</name></member>
+      <member refid="classneforce_1_1socket__base_1af311eb5e4b8693da9b1d1e16d0b10d13" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>set_reuse_address</name></member>
+      <member refid="classneforce_1_1socket__base_1ad2cd6c991e1b7689ecffadc57ec44df5" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>set_reuse_port</name></member>
+      <member refid="classneforce_1_1socket__base_1a5b90babf7b270d141fdeeab138550374" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>set_send_buffer_size</name></member>
+      <member refid="classneforce_1_1socket__base_1a21e4ba35840c0cc904beaaf005a846b1" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>set_send_timeout</name></member>
+      <member refid="classneforce_1_1socket__base_1a82ea11bfa98bbbd2ad2d9feeffd44782" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>set_tcp_nodelay</name></member>
+      <member refid="classneforce_1_1socket__base_1a53d78f352e1c34a1d54f475d6eaf7922" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>shutdown_both</name></member>
+      <member refid="classneforce_1_1socket__base_1a852458c313e65acc1e74bc16130e0502" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>shutdown_receive</name></member>
+      <member refid="classneforce_1_1socket__base_1ac0d78cde8681391cedca79f28e89119e" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>shutdown_send</name></member>
+      <member refid="classneforce_1_1socket__base_1a9b8731a4cb059cf60c43ca97aa688162" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1accb5b278a3bc2792f893357f1e7e9812" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1afa79ec1d00e839df5aaf63de31028566" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1socket__base_1a08db6bdff24ac7930d2010da313fe5f8" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>socket_base</name></member>
+      <member refid="classneforce_1_1icmp__socket_1a463e462f1e68f80e93a3d30195ff1ef3" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>traceroute</name></member>
+      <member refid="classneforce_1_1socket__base_1aa4888bb12d134a9eb33e832022b5c46d" prot="public" virt="non-virtual"><scope>neforce::icmp_socket</scope><name>try_open</name></member>
+      <member refid="classneforce_1_1socket__base_1aef05deba68ee95bf9f5a5e3c408851a3" prot="public" virt="virtual"><scope>neforce::icmp_socket</scope><name>~socket_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

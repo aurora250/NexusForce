@@ -354,9 +354,9 @@
     <innerclass refid="classgeneric__error__category" prot="public">generic_error_category</innerclass>
     <innerclass refid="classsystem__error__category" prot="public">system_error_category</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="error__category_8hpp_1a20afa75d522285e5d146e73d98959255" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_API const error_category &amp;</type>
-        <definition>NEFORCE_API const error_category &amp; generic_category</definition>
+      <memberdef kind="function" id="error__category_8hpp_1a44686197784a7bc703b8eb62ba7cb064" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const error_category &amp;</type>
+        <definition>const error_category &amp; generic_category</definition>
         <argsstring>() noexcept</argsstring>
         <name>generic_category</name>
         <briefdescription>
@@ -365,7 +365,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="42" column="34" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" declline="42" declcolumn="34"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="42" column="23" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" declline="42" declcolumn="23"/>
       </memberdef>
       <memberdef kind="function" id="error__category_8hpp_1a93e09becd8af3be0dc0fa5711a338861" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>error_code</type>
@@ -401,9 +401,9 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="45" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_condition.hpp" bodystart="53" bodyend="53" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" declline="45" declcolumn="24"/>
       </memberdef>
-      <memberdef kind="function" id="error__category_8hpp_1a0266eed3616252b280f66942ca9861d9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_API const error_category &amp;</type>
-        <definition>NEFORCE_API const error_category &amp; system_category</definition>
+      <memberdef kind="function" id="error__category_8hpp_1a0a43b58885d603f4ee012cee3debd9f9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const error_category &amp;</type>
+        <definition>const error_category &amp; system_category</definition>
         <argsstring>() noexcept</argsstring>
         <name>system_category</name>
         <briefdescription>
@@ -412,7 +412,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="57" column="34" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" declline="57" declcolumn="34"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" line="57" column="23" declfile="D:/Workspace/NexusForce/include/NeForce/core/exception/error_category.hpp" declline="57" declcolumn="23"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -454,7 +454,7 @@
 <codeline lineno="32"><highlight class="normal"></highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/>generic_error_category<sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>error_category<sp/>{</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" kindref="member">name</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;generic&quot;</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;generic&quot;</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>message(<ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref><sp/>ev)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight></codeline>
@@ -469,7 +469,7 @@
 <codeline lineno="47"><highlight class="normal"></highlight></codeline>
 <codeline lineno="48"><highlight class="normal">class<sp/>NEFORCE_API<sp/>system_error_category<sp/>final<sp/>:<sp/>public<sp/>error_category<sp/>{</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="group___thread_1ga6f83c2a4509ed1d467ba909884e9850b" kindref="member">name</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;system&quot;</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>()<sp/>const<sp/>noexcept</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;system&quot;</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
 <codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>message(<ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref><sp/>ev)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"></highlight></codeline>

@@ -48,7 +48,7 @@ signbit(const T x) noexcept {
     struct {
         byte_t data[16];
     } buf;
-    memory_copy(&buf, &x, sizeof(buf));
+    _NEFORCE memory_copy(&buf, &x, sizeof(buf));
     return (buf.data[9] & 0x80) != 0;
 }
 

@@ -12,9 +12,9 @@ var classyaml__value =
     ] ],
     [ "set_anchor", "classyaml__value.html#a47d57ba8446097c984e55f07d7fea7aa", null ],
     [ "set_tag", "classyaml__value.html#a7407556dfb52984c3415db35ee112869", null ],
-    [ "to_document", "classyaml__value.html#a0c4328854eb893b5fe471e7fa05c8c32", null ],
-    [ "to_string", "classyaml__value.html#afe768ac15954b26002a86197725d3b74", null ],
-    [ "type", "classyaml__value.html#a887865d133b23f6d5f8e0f8f322ba10e", null ],
+    [ "to_document", "classyaml__value.html#ac4a1b4fb081801f70f4c0d9c67933b3b", null ],
+    [ "to_string", "classyaml__value.html#a73c6f623deb3d9fcda3e3b7ba319fde5", null ],
+    [ "type", "classyaml__value.html#abebae216db4b65783cac8a53b1de16b0", null ],
     [ "anchor", "classyaml__value.html#ad86b30a51fa8bab180f21e485637140c", null ],
     [ "tag", "classyaml__value.html#a0cdc7a438e67a2b66f10c0e7df489f21", null ]
 ];

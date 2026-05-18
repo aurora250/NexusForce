@@ -10,8 +10,8 @@ var classpgsql__prepared__statement =
     [ "bind_param", "classpgsql__prepared__statement.html#a158179900bee192490f766ab9fbae959", null ],
     [ "bind_param", "classpgsql__prepared__statement.html#a155adacd26169d3b26cd2fd89f7f8cdd", null ],
     [ "execute", "classpgsql__prepared__statement.html#a4dec6eebfb652d049b6af57f78c9537d", null ],
-    [ "execute_query", "classpgsql__prepared__statement.html#a38616e604329c1b75a1a8cdcc9460a71", null ],
-    [ "get_errno", "classpgsql__prepared__statement.html#a96ed8c714d711dda975172617c346a55", null ],
-    [ "get_error", "classpgsql__prepared__statement.html#aab90cd565b147686a6faf5ea482ec55e", null ],
-    [ "param_count", "classpgsql__prepared__statement.html#a92b434c6a3ca0ae10f440d71249c9ee0", null ]
+    [ "execute_query", "classpgsql__prepared__statement.html#a49d169a0457f178f08e7aef6b14f7977", null ],
+    [ "get_errno", "classpgsql__prepared__statement.html#a4f9deb46a2aa67cab9620729a4b85cf4", null ],
+    [ "get_error", "classpgsql__prepared__statement.html#a2fe0f607ab726bce954ab0cf18e532b6", null ],
+    [ "param_count", "classpgsql__prepared__statement.html#abac49e30b43317bd7293f1c9fb653627", null ]
 ];

@@ -1,0 +1,402 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1icollector" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::icollector</compoundname>
+    <basecompoundref refid="structneforce_1_1icomparable" prot="public" virt="non-virtual">neforce::icomparable&lt; T &gt;</basecompoundref>
+    <derivedcompoundref refid="classneforce_1_1deque" prot="public" virt="non-virtual">neforce::deque&lt; connection_entry &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1deque" prot="public" virt="non-virtual">neforce::deque&lt; frame &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1deque" prot="public" virt="non-virtual">neforce::deque&lt; neforce::log_event &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1hashtable" prot="public" virt="non-virtual">neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1hashtable" prot="public" virt="non-virtual">neforce::hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1priority__queue" prot="public" virt="non-virtual">neforce::priority_queue&lt; priority_task &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1queue" prot="public" virt="non-virtual">neforce::queue&lt; connection_entry &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1queue" prot="public" virt="non-virtual">neforce::queue&lt; neforce::log_event &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1rb__tree" prot="private" virt="non-virtual">neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1rb__tree" prot="private" virt="non-virtual">neforce::rb_tree&lt; Key, Key, identity&lt; Key &gt;, Compare, Alloc &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1stack" prot="public" virt="non-virtual">neforce::stack&lt; frame &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; byte_t &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; ptr &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::const_iterator&lt; string &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; neforce::cmdline::option &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; neforce::dns_record &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; aiocb_type * &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; char &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; neforce::http::http_cookie &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; route_entry &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; part &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt;::MYSQL_BIND &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; const char * &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; int &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; neforce::reflect::meta_type * &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; neforce::match_result &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; slot_entry &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; neforce::stacktrace::frame &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; pending_signal &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; neforce::thread &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; priority_task &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; context &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; neforce::hashtable_node&lt; pair&lt; const T *, neforce::stacktrace &gt; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; neforce::hashtable_node&lt; pair&lt; const Key, T &gt; &gt; &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; indent_context &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1deque" prot="public" virt="non-virtual">neforce::deque&lt; T, Alloc, BufSize &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1priority__queue" prot="public" virt="non-virtual">neforce::priority_queue&lt; T, Sequence, Compare &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1queue" prot="public" virt="non-virtual">neforce::queue&lt; T, Sequence &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1stack" prot="public" virt="non-virtual">neforce::stack&lt; T, Sequence &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classneforce_1_1vector" prot="public" virt="non-virtual">neforce::vector&lt; T, Alloc &gt;</derivedcompoundref>
+    <includes refid="icollector_8hpp" local="no">icollector.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="structneforce_1_1icollector_1a5577eb05d1043a5f05a5bd1cb81a69ba" prot="private" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const T &amp;</type>
+        <definition>const T &amp; neforce::icollector&lt; T &gt;::derived</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>derived</name>
+        <qualifiedname>neforce::icollector::derived</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icollector.hpp" line="30" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icollector.hpp" bodystart="30" bodyend="30"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1icollector_1a07058c394c65c6521a2449e13ec694a9" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(derived().size())" virt="non-virtual">
+        <type>decltype(auto)</type>
+        <definition>decltype(auto) neforce::icollector&lt; T &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::icollector::size</qualifiedname>
+        <briefdescription>
+<para>获取集合大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>集合中元素的数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icollector.hpp" line="37" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icollector.hpp" bodystart="37" bodyend="39"/>
+        <references refid="structneforce_1_1icollector_1a07058c394c65c6521a2449e13ec694a9" compoundref="icollector_8hpp" startline="37" endline="39">neforce::icollector&lt; T &gt;::size</references>
+        <referencedby refid="structneforce_1_1icollector_1a07058c394c65c6521a2449e13ec694a9" compoundref="icollector_8hpp" startline="37" endline="39">neforce::icollector&lt; T &gt;::size</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1icollector_1a315b414618fa1a38644c21d73f4806e9" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(derived().empty())" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::icollector&lt; T &gt;::empty</definition>
+        <argsstring>() const</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::icollector::empty</qualifiedname>
+        <briefdescription>
+<para>检查集合是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icollector.hpp" line="45" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icollector.hpp" bodystart="45" bodyend="45"/>
+        <references refid="structneforce_1_1icollector_1a315b414618fa1a38644c21d73f4806e9" compoundref="icollector_8hpp" startline="45" endline="45">neforce::icollector&lt; T &gt;::empty</references>
+        <referencedby refid="structneforce_1_1icollector_1a315b414618fa1a38644c21d73f4806e9" compoundref="icollector_8hpp" startline="45" endline="45">neforce::icollector&lt; T &gt;::empty</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>集合器接口模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>派生类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+为集合类型提供统一的接口，包括大小查询、空检查和哈希计算。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="3">
+        <label>neforce::deque&lt; connection_entry &gt;</label>
+        <link refid="classneforce_1_1deque"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>neforce::deque&lt; T, Alloc, BufSize &gt;</label>
+        <link refid="classneforce_1_1deque"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::deque&lt; frame &gt;</label>
+        <link refid="classneforce_1_1deque"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::deque&lt; neforce::log_event &gt;</label>
+        <link refid="classneforce_1_1deque"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>neforce::hashtable&lt; Value, Value, HashFcn, identity&lt; Value &gt;, EqualKey, Alloc &gt;</label>
+        <link refid="classneforce_1_1hashtable"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>neforce::hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;</label>
+        <link refid="classneforce_1_1hashtable"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::icollector&lt; T &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+      <node id="39">
+        <label>neforce::priority_queue&lt; T, Sequence, Compare &gt;</label>
+        <link refid="classneforce_1_1priority__queue"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>neforce::priority_queue&lt; priority_task &gt;</label>
+        <link refid="classneforce_1_1priority__queue"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>neforce::queue&lt; connection_entry &gt;</label>
+        <link refid="classneforce_1_1queue"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>neforce::queue&lt; neforce::log_event &gt;</label>
+        <link refid="classneforce_1_1queue"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>neforce::queue&lt; T, Sequence &gt;</label>
+        <link refid="classneforce_1_1queue"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>neforce::rb_tree&lt; Key, Key, identity&lt; Key &gt;, Compare, Alloc &gt;</label>
+        <link refid="classneforce_1_1rb__tree"/>
+        <childnode refid="1" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>neforce::rb_tree&lt; Key, pair&lt; const Key, T &gt;, select1st&lt; pair&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;</label>
+        <link refid="classneforce_1_1rb__tree"/>
+        <childnode refid="1" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>neforce::stack&lt; frame &gt;</label>
+        <link refid="classneforce_1_1stack"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>neforce::stack&lt; T, Sequence &gt;</label>
+        <link refid="classneforce_1_1stack"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>neforce::vector&lt; aiocb_type * &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>neforce::vector&lt; byte_t &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>neforce::vector&lt; char &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>neforce::vector&lt; const char * &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>neforce::vector&lt; context &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>neforce::vector&lt; indent_context &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>neforce::vector&lt; int &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>neforce::vector&lt; neforce::cmdline::option &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>neforce::vector&lt; neforce::dns_record &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>neforce::vector&lt; neforce::hashtable_node&lt; pair&lt; const Key, T &gt; &gt; &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>neforce::vector&lt; neforce::hashtable_node&lt; pair&lt; const T *, neforce::stacktrace &gt; &gt; &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>neforce::vector&lt; neforce::http::http_cookie &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>neforce::vector&lt; neforce::match_result &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>neforce::vector&lt; neforce::reflect::meta_type * &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>neforce::vector&lt; neforce::stacktrace::frame &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>neforce::vector&lt; neforce::thread &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>neforce::vector&lt; part &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>neforce::vector&lt; pending_signal &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>neforce::vector&lt; priority_task &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>neforce::vector&lt; ptr &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>neforce::vector&lt; route_entry &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>neforce::vector&lt; slot_entry &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>neforce::const_iterator&lt; string &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>neforce::vector&lt; T, Alloc &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>neforce::vector&lt;::MYSQL_BIND &gt;</label>
+        <link refid="classneforce_1_1vector"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::icollector&lt; T &gt;</label>
+        <link refid="structneforce_1_1icollector"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::icomparable&lt; T &gt;</label>
+        <link refid="structneforce_1_1icomparable"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/interface/icollector.hpp" line="28" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/interface/icollector.hpp" bodystart="28" bodyend="46"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1icollector_1a5577eb05d1043a5f05a5bd1cb81a69ba" prot="private" virt="non-virtual"><scope>neforce::icollector</scope><name>derived</name></member>
+      <member refid="structneforce_1_1icollector_1a315b414618fa1a38644c21d73f4806e9" prot="public" virt="non-virtual"><scope>neforce::icollector</scope><name>empty</name></member>
+      <member refid="structneforce_1_1icomparable_1aa385e40eb8ac8bdae736966ad0cf568f" prot="public" virt="non-virtual"><scope>neforce::icollector</scope><name>operator!=</name></member>
+      <member refid="structneforce_1_1icomparable_1a0641b58de65d6a0d5b87c2bcb47496a4" prot="public" virt="non-virtual"><scope>neforce::icollector</scope><name>operator&lt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a313fba4bce20aced1ff0e6173ad6aab2" prot="public" virt="non-virtual"><scope>neforce::icollector</scope><name>operator&lt;=</name></member>
+      <member refid="structneforce_1_1icomparable_1ab9b06f7293eb15299f8c7d5341bfbc83" prot="public" virt="non-virtual"><scope>neforce::icollector</scope><name>operator==</name></member>
+      <member refid="structneforce_1_1icomparable_1ab8de930acec5c0261656b787f576f08d" prot="public" virt="non-virtual"><scope>neforce::icollector</scope><name>operator&gt;</name></member>
+      <member refid="structneforce_1_1icomparable_1a644c6002f703eb487427daadfec8fb16" prot="public" virt="non-virtual"><scope>neforce::icollector</scope><name>operator&gt;=</name></member>
+      <member refid="structneforce_1_1icollector_1a07058c394c65c6521a2449e13ec694a9" prot="public" virt="non-virtual"><scope>neforce::icollector</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

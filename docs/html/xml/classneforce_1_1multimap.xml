@@ -1,0 +1,1963 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1multimap" kind="class" language="C++" prot="public">
+    <compoundname>neforce::multimap</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">icollector&lt; multimap&lt; Key, T, less&lt; Key &gt;, allocator&lt; rb_tree_node&lt; pair&lt; const Key, T &gt; &gt; &gt; &gt; &gt;</basecompoundref>
+    <includes refid="multimap_8hpp" local="no">multimap.hpp</includes>
+    <innerclass refid="structneforce_1_1multimap_1_1value__compare" prot="public">neforce::multimap::value_compare</innerclass>
+    <templateparamlist>
+      <param>
+        <type>typename Key</type>
+      </param>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename Compare</type>
+        <defval><ref refid="structneforce_1_1less" kindref="compound">less</ref>&lt;Key&gt;</defval>
+      </param>
+      <param>
+        <type>typename Alloc</type>
+        <defval><ref refid="group___memory_allocator_1gabd6174043c688f04c1d71b9b21148ec1" kindref="member">allocator</ref>&lt;<ref refid="structneforce_1_1rb__tree__node" kindref="compound">rb_tree_node</ref>&lt;<ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt;const Key, T&gt;&gt;&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1a10c599966d92814299180b5dacda5114" prot="public" static="no">
+        <type>Key</type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::key_type = Key</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <qualifiedname>neforce::multimap::key_type</qualifiedname>
+        <briefdescription>
+<para>键类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="43" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1a6f943334c63241f04945856e4391311c" prot="public" static="no">
+        <type>T</type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::data_type = T</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>neforce::multimap::data_type</qualifiedname>
+        <briefdescription>
+<para>数据类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="44" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1a76b40a3983734d5d9be8c4f65a603c96" prot="public" static="no">
+        <type>T</type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::mapped_type = T</definition>
+        <argsstring></argsstring>
+        <name>mapped_type</name>
+        <qualifiedname>neforce::multimap::mapped_type</qualifiedname>
+        <briefdescription>
+<para>映射值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="45" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1a98b61d98b339972ae53ac37704860f46" prot="public" static="no">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; const Key, T &gt;</type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::value_type = pair&lt;const Key, T&gt;</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>neforce::multimap::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="46" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1a8d626cfd9e74e7d4774ac458928ffb68" prot="public" static="no">
+        <type>Compare</type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::key_compare = Compare</definition>
+        <argsstring></argsstring>
+        <name>key_compare</name>
+        <qualifiedname>neforce::multimap::key_compare</qualifiedname>
+        <briefdescription>
+<para>键比较函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="47" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1a7668a33289e31292e47a67e1248a7451" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1rb__tree_1a6642b9ebad3a6eb4b54bc88f78331cf5" kindref="member">base_type::size_type</ref></type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::size_type = typename base_type::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>neforce::multimap::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="80" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1a4734dce1881cea96f735606d619df1d6" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1rb__tree_1aa255645addc4c8947a65b19b25957b6a" kindref="member">base_type::difference_type</ref></type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::difference_type = typename base_type::difference_type</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>neforce::multimap::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="81" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1a40c417d040c79d6020736a97838b7bb7" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1rb__tree_1af6c3b2665bd3d05e517f2100c64c71a2" kindref="member">base_type::pointer</ref></type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::pointer = typename base_type::pointer</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>neforce::multimap::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="82" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1a24e007caec4d8dde212d2b4c0f4c9366" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1rb__tree_1a15c1a16c2d21d48427080dff135de068" kindref="member">base_type::const_pointer</ref></type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::const_pointer = typename base_type::const_pointer</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>neforce::multimap::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="83" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1ace51c2a0dbbadd018a9abcf80cc36c22" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1rb__tree_1ae152128b6c105bbd0f4e5391b19ba178" kindref="member">base_type::reference</ref></type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::reference = typename base_type::reference</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>neforce::multimap::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="84" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1a2446b3757ca8a0d0f1b2851cedf61368" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1rb__tree_1a110c8048f3bcd304a538fe7b028ce946" kindref="member">base_type::const_reference</ref></type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::const_reference = typename base_type::const_reference</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>neforce::multimap::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="85" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1rb__tree_1ade09a54d6df8affbd84e64e226099424" kindref="member">base_type::iterator</ref></type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::iterator = typename base_type::iterator</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>neforce::multimap::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="86" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1abdf1ee9df87a0c1100344a83aae3aca9" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1rb__tree_1ad1c913568b5fe36333f6a5f0339301f1" kindref="member">base_type::const_iterator</ref></type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::const_iterator = typename base_type::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>neforce::multimap::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="87" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1a96d4201b8b9b3cee7445c23181993390" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1rb__tree_1a6dd154646930413cae9c9a12b7534464" kindref="member">base_type::reverse_iterator</ref></type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::reverse_iterator = typename base_type::reverse_iterator</definition>
+        <argsstring></argsstring>
+        <name>reverse_iterator</name>
+        <qualifiedname>neforce::multimap::reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="88" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1a7a2c67725d3aa181be3d3a860a98e9b8" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1rb__tree_1aa90092fa4e494b442498583693772443" kindref="member">base_type::const_reverse_iterator</ref></type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::const_reverse_iterator = typename base_type::const_reverse_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_reverse_iterator</name>
+        <qualifiedname>neforce::multimap::const_reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>常量反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="89" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1a067441c95b4ecaf05daa7e9fc401da65" prot="public" static="no">
+        <type>typename <ref refid="classneforce_1_1rb__tree_1a1120f099bdc6d0bea47b8fc634f09fd5" kindref="member">base_type::allocator_type</ref></type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::allocator_type = typename base_type::allocator_type</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>neforce::multimap::allocator_type</qualifiedname>
+        <briefdescription>
+<para>分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="90" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classneforce_1_1multimap_1aa15456bd0b0daccb14d8d1c1108e8eb4" prot="private" static="no">
+        <type><ref refid="classneforce_1_1rb__tree" kindref="compound">rb_tree</ref>&lt; Key, <ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; const Key, T &gt;, <ref refid="structneforce_1_1select1st" kindref="compound">select1st</ref>&lt; <ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; const Key, T &gt; &gt;, Compare, Alloc &gt;</type>
+        <definition>using neforce::multimap&lt; Key, T, Compare, Alloc &gt;::base_type = 
+rb_tree&lt;Key, pair&lt;const Key, T&gt;, select1st&lt;pair&lt;const Key, T&gt;&gt;, Compare, Alloc&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>neforce::multimap::base_type</qualifiedname>
+        <briefdescription>
+<para>底层红黑树类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="76" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1multimap_1aebd42b69babef40aa4a292db6ceae03f" prot="private" static="no" mutable="no">
+        <type>base_type</type>
+        <definition>base_type neforce::multimap&lt; Key, T, Compare, Alloc &gt;::tree_</definition>
+        <argsstring></argsstring>
+        <name>tree_</name>
+        <qualifiedname>neforce::multimap::tree_</qualifiedname>
+        <briefdescription>
+<para>底层红黑树实例 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="93" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</definition>
+        <argsstring>()</argsstring>
+        <name>multimap</name>
+        <qualifiedname>neforce::multimap::multimap</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造一个空multimap，使用默认的比较函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="101" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="101" bodyend="102"/>
+        <referencedby refid="classneforce_1_1multimap_1a0d54e8c3e217fc0ed8d12ea406f17e7e" compoundref="multimap_8hpp" startline="470" endline="472">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::equal_to</referencedby>
+        <referencedby refid="classneforce_1_1multimap_1a4a04acbcd4beb6934669fd9f887cd297" compoundref="multimap_8hpp" startline="479" endline="481">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::less_than</referencedby>
+        <referencedby refid="classneforce_1_1multimap_1a3a832a802a452ea6efc60629dd3e6f6c" compoundref="multimap_8hpp" startline="115" endline="116">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</referencedby>
+        <referencedby refid="classneforce_1_1multimap_1ad0add87f4c849a0754326ff52b21a97d" compoundref="multimap_8hpp" startline="132" endline="133">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</referencedby>
+        <referencedby refid="classneforce_1_1multimap_1a8d9b4f18018d702c75eee98d10507207" compoundref="multimap_8hpp" startline="174" endline="175">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</referencedby>
+        <referencedby refid="classneforce_1_1multimap_1a86150a4005545d0b02426f339eb58095" compoundref="multimap_8hpp" startline="182" endline="183">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</referencedby>
+        <referencedby refid="classneforce_1_1multimap_1ac349b3a2e9a8d424856d1e1e5d90f756" compoundref="multimap_8hpp" startline="123" endline="126">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1multimap_1af6e26ed254f088178854c980fd0b123c" compoundref="multimap_8hpp" startline="140" endline="143">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1multimap_1ab1f4b1e85c91c4c25839b12b8462b363" compoundref="multimap_8hpp" startline="190" endline="194">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classneforce_1_1multimap_1a713cdb8d784d525326b222ad2751d329" compoundref="multimap_8hpp" startline="463" endline="463">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1ae12848c797c805da5e2b820b27695bfc" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</definition>
+        <argsstring>(const key_compare &amp;comp)</argsstring>
+        <name>multimap</name>
+        <qualifiedname>neforce::multimap::multimap</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a8d626cfd9e74e7d4774ac458928ffb68" kindref="member">key_compare</ref> &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="108" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="108" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a3a832a802a452ea6efc60629dd3e6f6c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</definition>
+        <argsstring>(const multimap &amp;other)</argsstring>
+        <name>multimap</name>
+        <qualifiedname>neforce::multimap::multimap</qualifiedname>
+        <param>
+          <type>const multimap &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="115" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="115" bodyend="116"/>
+        <references refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" compoundref="multimap_8hpp" startline="101" endline="102">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1ac349b3a2e9a8d424856d1e1e5d90f756" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" kindref="member">multimap</ref> &amp;</type>
+        <definition>multimap &amp; neforce::multimap&lt; Key, T, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(const multimap &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::multimap::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" kindref="member">multimap</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="123" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="123" bodyend="126"/>
+        <references refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" compoundref="multimap_8hpp" startline="101" endline="102">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1ad0add87f4c849a0754326ff52b21a97d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; base_type &gt;" virt="non-virtual">
+        <type></type>
+        <definition>neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</definition>
+        <argsstring>(multimap &amp;&amp;other)</argsstring>
+        <name>multimap</name>
+        <qualifiedname>neforce::multimap::multimap</qualifiedname>
+        <param>
+          <type>multimap &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="132" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="132" bodyend="133"/>
+        <references refid="group___type_special_member_function_checks_1gae20ac6ad74f8179d6959c23cbda15965" compoundref="type__traits_8hpp" startline="2853">neforce::is_nothrow_move_constructible_v</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" compoundref="multimap_8hpp" startline="101" endline="102">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1af6e26ed254f088178854c980fd0b123c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_assignable_v&lt; base_type &gt;" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" kindref="member">multimap</ref> &amp;</type>
+        <definition>multimap &amp; neforce::multimap&lt; Key, T, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(multimap &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::multimap::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" kindref="member">multimap</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="140" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="140" bodyend="143"/>
+        <references refid="group___type_special_member_function_checks_1ga4e478e886bb3f1dba6b5b2033f6b4702" compoundref="type__traits_8hpp" startline="2914">neforce::is_nothrow_move_assignable_v</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" compoundref="multimap_8hpp" startline="101" endline="102">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a767abded75d0b71aa04ab75b59980500" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>multimap</name>
+        <qualifiedname>neforce::multimap::multimap</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="152" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="152" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1ae0d66ec0b9d63ebbae629d55a796760c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</definition>
+        <argsstring>(Iterator first, Iterator last, const key_compare &amp;comp)</argsstring>
+        <name>multimap</name>
+        <qualifiedname>neforce::multimap::multimap</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a8d626cfd9e74e7d4774ac458928ffb68" kindref="member">key_compare</ref> &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="165" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="165" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a8d9b4f18018d702c75eee98d10507207" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>multimap</name>
+        <qualifiedname>neforce::multimap::multimap</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1multimap_1a98b61d98b339972ae53ac37704860f46" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="174" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="174" bodyend="175"/>
+        <references refid="classneforce_1_1multimap_1a5bf37e6c7703c74297542522dbfd6b8f" compoundref="multimap_8hpp" startline="205" endline="205">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::begin</references>
+        <references refid="classneforce_1_1multimap_1a40cf1557f14d8db3f95a7f62118f0057" compoundref="multimap_8hpp" startline="211" endline="211">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::end</references>
+        <references refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" compoundref="multimap_8hpp" startline="101" endline="102">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a86150a4005545d0b02426f339eb58095" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist, const key_compare &amp;comp)</argsstring>
+        <name>multimap</name>
+        <qualifiedname>neforce::multimap::multimap</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1multimap_1a98b61d98b339972ae53ac37704860f46" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a8d626cfd9e74e7d4774ac458928ffb68" kindref="member">key_compare</ref> &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="182" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="182" bodyend="183"/>
+        <references refid="classneforce_1_1multimap_1a5bf37e6c7703c74297542522dbfd6b8f" compoundref="multimap_8hpp" startline="205" endline="205">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::begin</references>
+        <references refid="classneforce_1_1multimap_1a40cf1557f14d8db3f95a7f62118f0057" compoundref="multimap_8hpp" startline="211" endline="211">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::end</references>
+        <references refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" compoundref="multimap_8hpp" startline="101" endline="102">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1ab1f4b1e85c91c4c25839b12b8462b363" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" kindref="member">multimap</ref> &amp;</type>
+        <definition>multimap &amp; neforce::multimap&lt; Key, T, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::multimap::operator=</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classneforce_1_1multimap_1a98b61d98b339972ae53ac37704860f46" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="190" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="190" bodyend="194"/>
+        <references refid="classneforce_1_1multimap_1a9f71d453830e2872d8d6a001e33db377" compoundref="multimap_8hpp" startline="392" endline="392">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::clear</references>
+        <references refid="classneforce_1_1multimap_1a5517455b897633d4eaff800288577bf8" compoundref="multimap_8hpp" startline="319" endline="319">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::insert</references>
+        <references refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" compoundref="multimap_8hpp" startline="101" endline="102">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a6b6ae7b6738b99438769b389f84c2537" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::multimap&lt; Key, T, Compare, Alloc &gt;::~multimap</definition>
+        <argsstring>()=default</argsstring>
+        <name>~multimap</name>
+        <qualifiedname>neforce::multimap::~multimap</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="199" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a5bf37e6c7703c74297542522dbfd6b8f" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::multimap::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="205" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="205" bodyend="205"/>
+        <referencedby refid="classneforce_1_1multimap_1a8d9b4f18018d702c75eee98d10507207" compoundref="multimap_8hpp" startline="174" endline="175">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</referencedby>
+        <referencedby refid="classneforce_1_1multimap_1a86150a4005545d0b02426f339eb58095" compoundref="multimap_8hpp" startline="182" endline="183">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a40cf1557f14d8db3f95a7f62118f0057" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::multimap::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="211" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="211" bodyend="211"/>
+        <referencedby refid="classneforce_1_1multimap_1a8d9b4f18018d702c75eee98d10507207" compoundref="multimap_8hpp" startline="174" endline="175">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</referencedby>
+        <referencedby refid="classneforce_1_1multimap_1a86150a4005545d0b02426f339eb58095" compoundref="multimap_8hpp" startline="182" endline="183">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a61d4547edb614b42ad7975d690a23488" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1abdf1ee9df87a0c1100344a83aae3aca9" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>neforce::multimap::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="217" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="217" bodyend="217"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a2e169238d7ff60d08535b54734e01f30" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1abdf1ee9df87a0c1100344a83aae3aca9" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>neforce::multimap::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="223" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="223" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a4a0f49f6dfc07057cd7a66c8f5810041" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1abdf1ee9df87a0c1100344a83aae3aca9" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>neforce::multimap::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="229" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="229" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a4511178b76a709ffcde56e71f0352d7a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1abdf1ee9df87a0c1100344a83aae3aca9" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>neforce::multimap::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="235" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="235" bodyend="235"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a5aa198c83ca8bc62fb5269c8b910ae10" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a96d4201b8b9b3cee7445c23181993390" kindref="member">reverse_iterator</ref></type>
+        <definition>reverse_iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::rbegin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>neforce::multimap::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="241" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="241" bodyend="241"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a604df0a55beab98ada3209bed6c80c27" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a96d4201b8b9b3cee7445c23181993390" kindref="member">reverse_iterator</ref></type>
+        <definition>reverse_iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::rend</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>neforce::multimap::rend</qualifiedname>
+        <briefdescription>
+<para>获取反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="247" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="247" bodyend="247"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a05e1799dde30aa251d330f6f5ce34c5a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a7a2c67725d3aa181be3d3a860a98e9b8" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::rbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>neforce::multimap::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="253" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="253" bodyend="253"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a0e5640c1ded9f69d21bc86a7978ca547" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a7a2c67725d3aa181be3d3a860a98e9b8" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::rend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>neforce::multimap::rend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="259" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="259" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1aa794b3974b68d5d36013377425f05935" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a7a2c67725d3aa181be3d3a860a98e9b8" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::crbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crbegin</name>
+        <qualifiedname>neforce::multimap::crbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="265" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="265" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a2600a3ff4aedd2fde605d997df0e84ce" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a7a2c67725d3aa181be3d3a860a98e9b8" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::crend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crend</name>
+        <qualifiedname>neforce::multimap::crend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="271" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="271" bodyend="271"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a53b8c309d6c3c582358e76aca1179c20" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a7668a33289e31292e47a67e1248a7451" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::multimap&lt; Key, T, Compare, Alloc &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::multimap::size</qualifiedname>
+        <briefdescription>
+<para>获取元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>multimap中的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="277" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="277" bodyend="277"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1aae122a0779fe5df6bc3cbb3e979205ad" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a7668a33289e31292e47a67e1248a7451" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::multimap&lt; Key, T, Compare, Alloc &gt;::max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_size</name>
+        <qualifiedname>neforce::multimap::max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大可能大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="283" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="283" bodyend="283"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1aba35823de97b729afb4795e33a7eb42e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::multimap&lt; Key, T, Compare, Alloc &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::multimap::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="289" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="289" bodyend="289"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1acf9418f9d184dee788c90529a25a67a3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a8d626cfd9e74e7d4774ac458928ffb68" kindref="member">key_compare</ref></type>
+        <definition>key_compare neforce::multimap&lt; Key, T, Compare, Alloc &gt;::key_comp</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>key_comp</name>
+        <qualifiedname>neforce::multimap::key_comp</qualifiedname>
+        <briefdescription>
+<para>获取键比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="295" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="295" bodyend="295"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1ae03e1287d2b48e91568609400febad46" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1multimap_1_1value__compare" kindref="compound">value_compare</ref></type>
+        <definition>value_compare neforce::multimap&lt; Key, T, Compare, Alloc &gt;::value_comp</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>value_comp</name>
+        <qualifiedname>neforce::multimap::value_comp</qualifiedname>
+        <briefdescription>
+<para>获取值比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>值比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="301" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="301" bodyend="301"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a0c80c087c6fadea71e98ce0ffe1c4136" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::emplace</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>neforce::multimap::emplace</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在multimap中就地构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="310" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="310" bodyend="312"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3019" endline="3021">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a5517455b897633d4eaff800288577bf8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::multimap::insert</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a98b61d98b339972ae53ac37704860f46" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>拷贝插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="319" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="319" bodyend="319"/>
+        <referencedby refid="classneforce_1_1multimap_1ab1f4b1e85c91c4c25839b12b8462b363" compoundref="multimap_8hpp" startline="190" endline="194">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a8b8dd9df9f3413f00390ffe6fe731459" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::multimap::insert</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1multimap_1a98b61d98b339972ae53ac37704860f46" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="326" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="326" bodyend="326"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a3bab1f39e0d5e18a1ec5c1b7436413d0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::emplace_hint</definition>
+        <argsstring>(iterator position, Args &amp;&amp;... args)</argsstring>
+        <name>emplace_hint</name>
+        <qualifiedname>neforce::multimap::emplace_hint</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近就地构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="336" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="336" bodyend="338"/>
+        <references refid="group___args_forward_functions_1gaae3d0159afe42df987e129188261b635" compoundref="type__traits_8hpp" startline="3019" endline="3021">neforce::forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1afc2dd3b81d5c149b2d30986edc6ad098" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(iterator position, const value_type &amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::multimap::insert</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a98b61d98b339972ae53ac37704860f46" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近拷贝插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="346" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="346" bodyend="346"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1ab35f8a8a88c04f51015d478e1e13a3a8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(iterator position, value_type &amp;&amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::multimap::insert</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1multimap_1a98b61d98b339972ae53ac37704860f46" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="354" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="354" bodyend="356"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1af63ea70380ac503cd17d902428e929ab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void neforce::multimap&lt; Key, T, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert</name>
+        <qualifiedname>neforce::multimap::insert</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="365" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="365" bodyend="367"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a5e08369f8b0e7684d4171a876a5ab006" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(tree_.erase(position))" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::multimap&lt; Key, T, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(iterator position)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::multimap::erase</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="373" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="373" bodyend="373"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1ae5575814bfa240e1400d0e7350cc14f7" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(tree_.erase(key))" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a7668a33289e31292e47a67e1248a7451" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::multimap&lt; Key, T, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::multimap::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a10c599966d92814299180b5dacda5114" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>删除所有具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="380" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="380" bodyend="380"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a852d7309e704fac3e046d541bbf67640" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(tree_.erase(first, last))" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::multimap&lt; Key, T, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(iterator first, iterator last)</argsstring>
+        <name>erase</name>
+        <qualifiedname>neforce::multimap::erase</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="387" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="387" bodyend="387"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a9f71d453830e2872d8d6a001e33db377" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(tree_.clear())" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::multimap&lt; Key, T, Compare, Alloc &gt;::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>neforce::multimap::clear</qualifiedname>
+        <briefdescription>
+<para>清空multimap </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="392" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="392" bodyend="392"/>
+        <references refid="classneforce_1_1multimap_1a9f71d453830e2872d8d6a001e33db377" compoundref="multimap_8hpp" startline="392" endline="392">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::clear</references>
+        <referencedby refid="classneforce_1_1multimap_1a9f71d453830e2872d8d6a001e33db377" compoundref="multimap_8hpp" startline="392" endline="392">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::clear</referencedby>
+        <referencedby refid="classneforce_1_1multimap_1ab1f4b1e85c91c4c25839b12b8462b363" compoundref="multimap_8hpp" startline="190" endline="194">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a6b677c467fa58c41adb28d3487722846" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::multimap::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a10c599966d92814299180b5dacda5114" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的迭代器，未找到则返回end() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="399" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="399" bodyend="399"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a0dd6973f3c848f2075ca7947e77d2414" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1abdf1ee9df87a0c1100344a83aae3aca9" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>find</name>
+        <qualifiedname>neforce::multimap::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a10c599966d92814299180b5dacda5114" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的常量迭代器，未找到则返回cend() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="406" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="406" bodyend="406"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a88c05d918323cfd13143b5a41f4a97d3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a7668a33289e31292e47a67e1248a7451" kindref="member">size_type</ref></type>
+        <definition>size_type neforce::multimap&lt; Key, T, Compare, Alloc &gt;::count</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>count</name>
+        <qualifiedname>neforce::multimap::count</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a10c599966d92814299180b5dacda5114" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>统计具有指定键的元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要统计的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="413" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="413" bodyend="413"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1aa3e733e277acbdb0997f86134542093c" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::lower_bound</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>lower_bound</name>
+        <qualifiedname>neforce::multimap::lower_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a10c599966d92814299180b5dacda5114" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个不小于指定键的元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不小于key的元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="420" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="420" bodyend="420"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1adf5c26a86480aedbf524202e8dab1d7d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1abdf1ee9df87a0c1100344a83aae3aca9" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::lower_bound</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>lower_bound</name>
+        <qualifiedname>neforce::multimap::lower_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a10c599966d92814299180b5dacda5114" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个不小于指定键的常量元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不小于key的元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="427" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="427" bodyend="427"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a35d724439d6c5e9e3b110e54096fc00c" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref></type>
+        <definition>iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::upper_bound</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>upper_bound</name>
+        <qualifiedname>neforce::multimap::upper_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a10c599966d92814299180b5dacda5114" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个大于指定键的元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个大于key的元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="434" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="434" bodyend="434"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a59793b79b6d9726d678776b4245e4740" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1multimap_1abdf1ee9df87a0c1100344a83aae3aca9" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator neforce::multimap&lt; Key, T, Compare, Alloc &gt;::upper_bound</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>upper_bound</name>
+        <qualifiedname>neforce::multimap::upper_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a10c599966d92814299180b5dacda5114" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个大于指定键的常量元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个大于key的元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="441" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="441" bodyend="441"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a3548c87682c63a14080c68b6b279a703" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref>, <ref refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" kindref="member">iterator</ref> &gt;</type>
+        <definition>pair&lt; iterator, iterator &gt; neforce::multimap&lt; Key, T, Compare, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>neforce::multimap::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a10c599966d92814299180b5dacda5114" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含lower_bound和upper_bound的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="448" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="448" bodyend="448"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a477d12a0df68c2bf1a3e3981fefb59f8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="classneforce_1_1multimap_1abdf1ee9df87a0c1100344a83aae3aca9" kindref="member">const_iterator</ref>, <ref refid="classneforce_1_1multimap_1abdf1ee9df87a0c1100344a83aae3aca9" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>pair&lt; const_iterator, const_iterator &gt; neforce::multimap&lt; Key, T, Compare, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>neforce::multimap::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a10c599966d92814299180b5dacda5114" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的常量元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含lower_bound和upper_bound的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="455" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="455" bodyend="457"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a713cdb8d784d525326b222ad2751d329" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; base_type &gt;" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::multimap&lt; Key, T, Compare, Alloc &gt;::swap</definition>
+        <argsstring>(multimap &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::multimap::swap</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" kindref="member">multimap</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个multimap的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="463" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="463" bodyend="463"/>
+        <references refid="group___swap_utility_1gafcc46bf052d9d5c47c99d6a20dadd5bc" compoundref="type__traits_8hpp" startline="3958">neforce::is_nothrow_swappable_v</references>
+        <references refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" compoundref="multimap_8hpp" startline="101" endline="102">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a0d54e8c3e217fc0ed8d12ea406f17e7e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(tree_==rhs.tree_)" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::multimap&lt; Key, T, Compare, Alloc &gt;::equal_to</definition>
+        <argsstring>(const multimap &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>neforce::multimap::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" kindref="member">multimap</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果两个multimap大小相等且对应元素相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="470" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="470" bodyend="472"/>
+        <references refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" compoundref="multimap_8hpp" startline="101" endline="102">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1multimap_1a4a04acbcd4beb6934669fd9f887cd297" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(tree_&lt; rhs.tree_)" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::multimap&lt; Key, T, Compare, Alloc &gt;::less_than</definition>
+        <argsstring>(const multimap &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>neforce::multimap::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" kindref="member">multimap</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧multimap </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="479" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="479" bodyend="481"/>
+        <references refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" compoundref="multimap_8hpp" startline="101" endline="102">neforce::multimap&lt; Key, T, Compare, Alloc &gt;::multimap</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>多重映射容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键比较函数类型，默认为less&lt;Key&gt; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+multimap是一种关联容器，存储键值对（key-value pairs），允许重复键。 元素按照键的顺序自动排序，排序标准由Compare函数对象指定。 支持快速的键查找，但键可以重复出现。底层使用红黑树实现。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" line="37" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/multimap.hpp" bodystart="37" bodyend="482"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1multimap_1a067441c95b4ecaf05daa7e9fc401da65" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>allocator_type</name></member>
+      <member refid="classneforce_1_1multimap_1aa15456bd0b0daccb14d8d1c1108e8eb4" prot="private" virt="non-virtual"><scope>neforce::multimap</scope><name>base_type</name></member>
+      <member refid="classneforce_1_1multimap_1a5bf37e6c7703c74297542522dbfd6b8f" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>begin</name></member>
+      <member refid="classneforce_1_1multimap_1a61d4547edb614b42ad7975d690a23488" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>begin</name></member>
+      <member refid="classneforce_1_1multimap_1a4a0f49f6dfc07057cd7a66c8f5810041" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>cbegin</name></member>
+      <member refid="classneforce_1_1multimap_1a4511178b76a709ffcde56e71f0352d7a" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>cend</name></member>
+      <member refid="classneforce_1_1multimap_1a9f71d453830e2872d8d6a001e33db377" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>clear</name></member>
+      <member refid="classneforce_1_1multimap_1abdf1ee9df87a0c1100344a83aae3aca9" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>const_iterator</name></member>
+      <member refid="classneforce_1_1multimap_1a24e007caec4d8dde212d2b4c0f4c9366" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>const_pointer</name></member>
+      <member refid="classneforce_1_1multimap_1a2446b3757ca8a0d0f1b2851cedf61368" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>const_reference</name></member>
+      <member refid="classneforce_1_1multimap_1a7a2c67725d3aa181be3d3a860a98e9b8" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>const_reverse_iterator</name></member>
+      <member refid="classneforce_1_1multimap_1a88c05d918323cfd13143b5a41f4a97d3" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>count</name></member>
+      <member refid="classneforce_1_1multimap_1aa794b3974b68d5d36013377425f05935" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>crbegin</name></member>
+      <member refid="classneforce_1_1multimap_1a2600a3ff4aedd2fde605d997df0e84ce" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>crend</name></member>
+      <member refid="classneforce_1_1multimap_1a6f943334c63241f04945856e4391311c" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>data_type</name></member>
+      <member refid="classneforce_1_1multimap_1a4734dce1881cea96f735606d619df1d6" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>difference_type</name></member>
+      <member refid="classneforce_1_1multimap_1a0c80c087c6fadea71e98ce0ffe1c4136" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>emplace</name></member>
+      <member refid="classneforce_1_1multimap_1a3bab1f39e0d5e18a1ec5c1b7436413d0" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>emplace_hint</name></member>
+      <member refid="classneforce_1_1multimap_1aba35823de97b729afb4795e33a7eb42e" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>empty</name></member>
+      <member refid="classneforce_1_1multimap_1a40cf1557f14d8db3f95a7f62118f0057" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>end</name></member>
+      <member refid="classneforce_1_1multimap_1a2e169238d7ff60d08535b54734e01f30" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>end</name></member>
+      <member refid="classneforce_1_1multimap_1a3548c87682c63a14080c68b6b279a703" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>equal_range</name></member>
+      <member refid="classneforce_1_1multimap_1a477d12a0df68c2bf1a3e3981fefb59f8" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>equal_range</name></member>
+      <member refid="classneforce_1_1multimap_1a0d54e8c3e217fc0ed8d12ea406f17e7e" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>equal_to</name></member>
+      <member refid="classneforce_1_1multimap_1a5e08369f8b0e7684d4171a876a5ab006" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>erase</name></member>
+      <member refid="classneforce_1_1multimap_1ae5575814bfa240e1400d0e7350cc14f7" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>erase</name></member>
+      <member refid="classneforce_1_1multimap_1a852d7309e704fac3e046d541bbf67640" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>erase</name></member>
+      <member refid="classneforce_1_1multimap_1a6b677c467fa58c41adb28d3487722846" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>find</name></member>
+      <member refid="classneforce_1_1multimap_1a0dd6973f3c848f2075ca7947e77d2414" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>find</name></member>
+      <member refid="classneforce_1_1multimap_1a5517455b897633d4eaff800288577bf8" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>insert</name></member>
+      <member refid="classneforce_1_1multimap_1a8b8dd9df9f3413f00390ffe6fe731459" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>insert</name></member>
+      <member refid="classneforce_1_1multimap_1afc2dd3b81d5c149b2d30986edc6ad098" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>insert</name></member>
+      <member refid="classneforce_1_1multimap_1ab35f8a8a88c04f51015d478e1e13a3a8" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>insert</name></member>
+      <member refid="classneforce_1_1multimap_1af63ea70380ac503cd17d902428e929ab" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>insert</name></member>
+      <member refid="classneforce_1_1multimap_1a6b9fe80b84e5a9ecc0b9e9052628950d" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>iterator</name></member>
+      <member refid="classneforce_1_1multimap_1acf9418f9d184dee788c90529a25a67a3" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>key_comp</name></member>
+      <member refid="classneforce_1_1multimap_1a8d626cfd9e74e7d4774ac458928ffb68" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>key_compare</name></member>
+      <member refid="classneforce_1_1multimap_1a10c599966d92814299180b5dacda5114" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>key_type</name></member>
+      <member refid="classneforce_1_1multimap_1a4a04acbcd4beb6934669fd9f887cd297" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>less_than</name></member>
+      <member refid="classneforce_1_1multimap_1aa3e733e277acbdb0997f86134542093c" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>lower_bound</name></member>
+      <member refid="classneforce_1_1multimap_1adf5c26a86480aedbf524202e8dab1d7d" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>lower_bound</name></member>
+      <member refid="classneforce_1_1multimap_1a76b40a3983734d5d9be8c4f65a603c96" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>mapped_type</name></member>
+      <member refid="classneforce_1_1multimap_1aae122a0779fe5df6bc3cbb3e979205ad" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>max_size</name></member>
+      <member refid="classneforce_1_1multimap_1a596abefdf9daf2c6ad956802d5883b03" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>multimap</name></member>
+      <member refid="classneforce_1_1multimap_1ae12848c797c805da5e2b820b27695bfc" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>multimap</name></member>
+      <member refid="classneforce_1_1multimap_1a3a832a802a452ea6efc60629dd3e6f6c" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>multimap</name></member>
+      <member refid="classneforce_1_1multimap_1ad0add87f4c849a0754326ff52b21a97d" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>multimap</name></member>
+      <member refid="classneforce_1_1multimap_1a767abded75d0b71aa04ab75b59980500" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>multimap</name></member>
+      <member refid="classneforce_1_1multimap_1ae0d66ec0b9d63ebbae629d55a796760c" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>multimap</name></member>
+      <member refid="classneforce_1_1multimap_1a8d9b4f18018d702c75eee98d10507207" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>multimap</name></member>
+      <member refid="classneforce_1_1multimap_1a86150a4005545d0b02426f339eb58095" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>multimap</name></member>
+      <member refid="classneforce_1_1multimap_1ac349b3a2e9a8d424856d1e1e5d90f756" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1multimap_1af6e26ed254f088178854c980fd0b123c" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1multimap_1ab1f4b1e85c91c4c25839b12b8462b363" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1multimap_1a40c417d040c79d6020736a97838b7bb7" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>pointer</name></member>
+      <member refid="classneforce_1_1multimap_1a5aa198c83ca8bc62fb5269c8b910ae10" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>rbegin</name></member>
+      <member refid="classneforce_1_1multimap_1a05e1799dde30aa251d330f6f5ce34c5a" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>rbegin</name></member>
+      <member refid="classneforce_1_1multimap_1ace51c2a0dbbadd018a9abcf80cc36c22" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>reference</name></member>
+      <member refid="classneforce_1_1multimap_1a604df0a55beab98ada3209bed6c80c27" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>rend</name></member>
+      <member refid="classneforce_1_1multimap_1a0e5640c1ded9f69d21bc86a7978ca547" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>rend</name></member>
+      <member refid="classneforce_1_1multimap_1a96d4201b8b9b3cee7445c23181993390" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>reverse_iterator</name></member>
+      <member refid="classneforce_1_1multimap_1a53b8c309d6c3c582358e76aca1179c20" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>size</name></member>
+      <member refid="classneforce_1_1multimap_1a7668a33289e31292e47a67e1248a7451" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>size_type</name></member>
+      <member refid="classneforce_1_1multimap_1a713cdb8d784d525326b222ad2751d329" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>swap</name></member>
+      <member refid="classneforce_1_1multimap_1aebd42b69babef40aa4a292db6ceae03f" prot="private" virt="non-virtual"><scope>neforce::multimap</scope><name>tree_</name></member>
+      <member refid="classneforce_1_1multimap_1a35d724439d6c5e9e3b110e54096fc00c" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>upper_bound</name></member>
+      <member refid="classneforce_1_1multimap_1a59793b79b6d9726d678776b4245e4740" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>upper_bound</name></member>
+      <member refid="classneforce_1_1multimap_1ae03e1287d2b48e91568609400febad46" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>value_comp</name></member>
+      <member refid="classneforce_1_1multimap_1a98b61d98b339972ae53ac37704860f46" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>value_type</name></member>
+      <member refid="classneforce_1_1multimap_1a6b6ae7b6738b99438769b389f84c2537" prot="public" virt="non-virtual"><scope>neforce::multimap</scope><name>~multimap</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

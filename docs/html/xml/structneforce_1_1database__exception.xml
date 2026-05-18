@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1database__exception" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::database_exception</compoundname>
+    <basecompoundref refid="structneforce_1_1thirdparty__exception" prot="public" virt="non-virtual">neforce::thirdparty_exception</basecompoundref>
+    <derivedcompoundref refid="structneforce_1_1database__stmt__exception" prot="public" virt="non-virtual">neforce::database_stmt_exception</derivedcompoundref>
+    <derivedcompoundref refid="structneforce_1_1database__typecast__exception" prot="public" virt="non-virtual">neforce::database_typecast_exception</derivedcompoundref>
+    <includes refid="exception_8hpp" local="no">exception.hpp</includes>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structneforce_1_1database__exception_1ad91f56f61c55fc6af4a0be303f03f384" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto neforce::database_exception::static_type</definition>
+        <argsstring></argsstring>
+        <name>static_type</name>
+        <qualifiedname>neforce::database_exception::static_type</qualifiedname>
+        <initializer>= &quot;database_exception&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="252" column="194" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="252" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1database__exception_1ac8cec927647f319e80f34758649a48c2" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::database_exception::database_exception</definition>
+        <argsstring>(const char *info=&quot;Database Operation Failed.&quot;, const char *type=static_type, const int code=0) noexcept</argsstring>
+        <name>database_exception</name>
+        <qualifiedname>neforce::database_exception::database_exception</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>info</declname>
+          <defval>&quot;Database Operation Failed.&quot;</defval>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>type</declname>
+          <defval>static_type</defval>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>code</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="252" column="56" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="252" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1database__exception_1a2ca79db618798d56e0891eef5fc60b54" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::database_exception::database_exception</definition>
+        <argsstring>(const exception &amp;e)</argsstring>
+        <name>database_exception</name>
+        <qualifiedname>neforce::database_exception::database_exception</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1exception" kindref="compound">exception</ref> &amp;</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="252" column="112" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="252" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1database__exception_1a9e4458c0d4c3229035a7672fa113788c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual neforce::database_exception::~database_exception</definition>
+        <argsstring>()=default</argsstring>
+        <name>~database_exception</name>
+        <qualifiedname>neforce::database_exception::~database_exception</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="252" column="142"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>数据库行为异常 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>neforce::database_exception</label>
+        <link refid="structneforce_1_1database__exception"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::database_stmt_exception</label>
+        <link refid="structneforce_1_1database__stmt__exception"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::database_typecast_exception</label>
+        <link refid="structneforce_1_1database__typecast__exception"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::exception</label>
+        <link refid="structneforce_1_1exception"/>
+      </node>
+      <node id="2">
+        <label>neforce::thirdparty_exception</label>
+        <link refid="structneforce_1_1thirdparty__exception"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>neforce::database_exception</label>
+        <link refid="structneforce_1_1database__exception"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::exception</label>
+        <link refid="structneforce_1_1exception"/>
+      </node>
+      <node id="2">
+        <label>neforce::thirdparty_exception</label>
+        <link refid="structneforce_1_1thirdparty__exception"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="252" column="2" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="252" bodyend="252"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1exception_1a41cdf6712fb5f1347e3830397667c9c0" prot="public" virt="non-virtual"><scope>neforce::database_exception</scope><name>code</name></member>
+      <member refid="structneforce_1_1database__exception_1ac8cec927647f319e80f34758649a48c2" prot="public" virt="non-virtual"><scope>neforce::database_exception</scope><name>database_exception</name></member>
+      <member refid="structneforce_1_1database__exception_1a2ca79db618798d56e0891eef5fc60b54" prot="public" virt="non-virtual"><scope>neforce::database_exception</scope><name>database_exception</name></member>
+      <member refid="structneforce_1_1exception_1ae72723ceb6dce14a5c44dfb36d74ff94" prot="public" virt="non-virtual"><scope>neforce::database_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1a9ae6ab2dc5699adfc63ec7571e87ec94" prot="public" virt="non-virtual"><scope>neforce::database_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1a295286b9d2ce7d9338815964b564e289" prot="public" virt="non-virtual"><scope>neforce::database_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1ae2992fe5862a76e5fae94c9290aca38e" prot="public" virt="non-virtual"><scope>neforce::database_exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1a159169892770b6020d5ab0bcbf6066e5" prot="public" virt="non-virtual"><scope>neforce::database_exception</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1exception_1a9e4ddd8f9b01a26777cff21e282511a5" prot="public" virt="non-virtual"><scope>neforce::database_exception</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1database__exception_1ad91f56f61c55fc6af4a0be303f03f384" prot="public" virt="non-virtual"><scope>neforce::database_exception</scope><name>static_type</name></member>
+      <member refid="structneforce_1_1thirdparty__exception_1ab309850d4a77c79582845e5c47eee31f" prot="public" virt="non-virtual"><scope>neforce::database_exception</scope><name>thirdparty_exception</name></member>
+      <member refid="structneforce_1_1thirdparty__exception_1a1a7605578bd3a587a911ade0f891286e" prot="public" virt="non-virtual"><scope>neforce::database_exception</scope><name>thirdparty_exception</name></member>
+      <member refid="structneforce_1_1exception_1a26bee61d829f3eb1df7f86ec9029413c" prot="public" virt="non-virtual"><scope>neforce::database_exception</scope><name>type</name></member>
+      <member refid="structneforce_1_1exception_1a0fd5c01a8bdb6f38522f57e157ccf034" prot="public" virt="non-virtual"><scope>neforce::database_exception</scope><name>what</name></member>
+      <member refid="structneforce_1_1database__exception_1a9e4458c0d4c3229035a7672fa113788c" prot="public" virt="virtual"><scope>neforce::database_exception</scope><name>~database_exception</name></member>
+      <member refid="structneforce_1_1exception_1aaa0545c19e5f71dd3da3ef74e19c190e" prot="public" virt="virtual"><scope>neforce::database_exception</scope><name>~exception</name></member>
+      <member refid="structneforce_1_1thirdparty__exception_1aaaa04ff1d32a984bc188f5f1d91a99fb" prot="public" virt="virtual"><scope>neforce::database_exception</scope><name>~thirdparty_exception</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

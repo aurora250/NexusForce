@@ -111,50 +111,50 @@ to_string.hpp 的引用(Include)关系图:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga801e4d9a7e7bb386d60e07ab8492c1b0" id="r_ga801e4d9a7e7bb386d60e07ab8492c1b0"><td class="memTemplParams" colspan="2">template&lt;typename T, typename P = package_t&lt;T&gt;, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga2097f41e78735e8dfe11d7bce991afc7">is_packaged_v</a>&lt; T &gt; &amp;&amp;<a class="el" href="group___base_type_qualifier_check.html#ga2dd33cb2936b9c2e75a085b78a7349a1">is_base_of_v</a>&lt; <a class="el" href="structistringify.html">istringify</a>&lt; P &gt;, P &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga801e4d9a7e7bb386d60e07ab8492c1b0 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#ga801e4d9a7e7bb386d60e07ab8492c1b0">to_string</a> (const T &amp;value)</td></tr>
-<tr class="memdesc:ga801e4d9a7e7bb386d60e07ab8492c1b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">将可包装类型转换为字符串  <br /></td></tr>
-<tr class="memitem:gaec0c42db45ec17d4fcfc7fd3d05e3628" id="r_gaec0c42db45ec17d4fcfc7fd3d05e3628"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#gaec0c42db45ec17d4fcfc7fd3d05e3628">to_string</a> (<a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a> np)</td></tr>
-<tr class="memdesc:gaec0c42db45ec17d4fcfc7fd3d05e3628"><td class="mdescLeft">&#160;</td><td class="mdescRight">将空指针转换为字符串  <br /></td></tr>
-<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6" id="r_ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#gaff2094428071e9bd480d66885ad85043">is_pointer_v</a>&lt; T &gt; &amp;&amp;!<a class="el" href="group___base_type_qualifier_check.html#ga632532c73fe2a0b2060443dd837a2a7b">is_cstring_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">to_string</a> (const T &amp;ptr)</td></tr>
-<tr class="memdesc:ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">将指针转换为字符串  <br /></td></tr>
-<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6" id="r_ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#ga2dd33cb2936b9c2e75a085b78a7349a1">is_base_of_v</a>&lt; <a class="el" href="structicollector.html">icollector</a>&lt; T &gt;, T &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">to_string</a> (const T &amp;c)</td></tr>
-<tr class="memdesc:ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">将容器转换为字符串  <br /></td></tr>
-<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6" id="r_ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#ga5c4bd9266e99bedba2e77f755b5d36a0">is_unbounded_array_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">to_string</a> (const T &amp;)</td></tr>
-<tr class="memdesc:ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">将无界数组转换为字符串  <br /></td></tr>
-<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6" id="r_ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#ga218efd7ae1e45541d39fa24a5db89016">is_bounded_array_v</a>&lt; T &gt; &amp;&amp;!<a class="el" href="group___base_type_qualifier_check.html#ga632532c73fe2a0b2060443dd837a2a7b">is_cstring_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga31c6fb8bbf417f4e00ea2f52899e84f6 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">to_string</a> (const T &amp;arr)</td></tr>
-<tr class="memdesc:ga31c6fb8bbf417f4e00ea2f52899e84f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">将有界数组转换为字符串  <br /></td></tr>
-<tr class="memitem:ga094214fc66ed142546ccf87a3dd3084d" id="r_ga094214fc66ed142546ccf87a3dd3084d"><td class="memTemplParams" colspan="2">template&lt;typename IfEmpty, typename T&gt; </td></tr>
-<tr class="memitem:ga094214fc66ed142546ccf87a3dd3084d template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#ga094214fc66ed142546ccf87a3dd3084d">to_string</a> (const <a class="el" href="structcompressed__pair.html">compressed_pair</a>&lt; IfEmpty, T, true &gt; &amp;obj)</td></tr>
-<tr class="memdesc:ga094214fc66ed142546ccf87a3dd3084d"><td class="mdescLeft">&#160;</td><td class="mdescRight">将压缩对（已压缩版本）转换为字符串  <br /></td></tr>
-<tr class="memitem:ga3a2ec08d836344f9ff90f555c1db97a5" id="r_ga3a2ec08d836344f9ff90f555c1db97a5"><td class="memTemplParams" colspan="2">template&lt;typename IfEmpty, typename T&gt; </td></tr>
-<tr class="memitem:ga3a2ec08d836344f9ff90f555c1db97a5 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#ga3a2ec08d836344f9ff90f555c1db97a5">to_string</a> (const <a class="el" href="structcompressed__pair.html">compressed_pair</a>&lt; IfEmpty, T, false &gt; &amp;obj)</td></tr>
-<tr class="memdesc:ga3a2ec08d836344f9ff90f555c1db97a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">将压缩对（未压缩版本）转换为字符串  <br /></td></tr>
-<tr class="memitem:ga0f8469e436acf31ada4f8c5af47ba82a" id="r_ga0f8469e436acf31ada4f8c5af47ba82a"><td class="memTemplParams" colspan="2">template&lt;typename T1, typename T2&gt; </td></tr>
-<tr class="memitem:ga0f8469e436acf31ada4f8c5af47ba82a template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#ga0f8469e436acf31ada4f8c5af47ba82a">to_string</a> (const <a class="el" href="structpair.html">pair</a>&lt; T1, T2 &gt; &amp;obj)</td></tr>
-<tr class="memdesc:ga0f8469e436acf31ada4f8c5af47ba82a"><td class="mdescLeft">&#160;</td><td class="mdescRight">将对转换为字符串  <br /></td></tr>
-<tr class="memitem:ga26dff0e6014b2d81ef57177e67ecd86a" id="r_ga26dff0e6014b2d81ef57177e67ecd86a"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:ga26dff0e6014b2d81ef57177e67ecd86a template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#ga26dff0e6014b2d81ef57177e67ecd86a">to_string</a> (const tuple&lt; Args... &gt; &amp;tup)</td></tr>
-<tr class="memdesc:ga26dff0e6014b2d81ef57177e67ecd86a"><td class="mdescLeft">&#160;</td><td class="mdescRight">将元组转换为字符串  <br /></td></tr>
-<tr class="memitem:gaaea09a977e7aca90ca8a7932146302c4" id="r_gaaea09a977e7aca90ca8a7932146302c4"><td class="memTemplParams" colspan="2">template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;(sizeof...(Args) &gt; 1), int &gt; = 0&gt; </td></tr>
-<tr class="memitem:gaaea09a977e7aca90ca8a7932146302c4 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#gaaea09a977e7aca90ca8a7932146302c4">to_string</a> (Args &amp;&amp;... args)</td></tr>
-<tr class="memdesc:gaaea09a977e7aca90ca8a7932146302c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">将多个参数转换为字符串并连接  <br /></td></tr>
-<tr class="memitem:ga5a2a115e331bd1a82024837f9e433a94" id="r_ga5a2a115e331bd1a82024837f9e433a94"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__floating__point.html">is_floating_point</a>&lt; T &gt;::value, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga5a2a115e331bd1a82024837f9e433a94 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#ga5a2a115e331bd1a82024837f9e433a94">to_string_with_precision</a> (T x, int precision, bool scientific=false)</td></tr>
-<tr class="memdesc:ga5a2a115e331bd1a82024837f9e433a94"><td class="mdescLeft">&#160;</td><td class="mdescRight">将浮点数转换为字符串（带精度控制）  <br /></td></tr>
-<tr class="memitem:gab3736804eb4cabadcc2e6f47424fa071" id="r_gab3736804eb4cabadcc2e6f47424fa071"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__floating__point.html">is_floating_point</a>&lt; T &gt;::value, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:gab3736804eb4cabadcc2e6f47424fa071 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#gab3736804eb4cabadcc2e6f47424fa071">to_string_general</a> (T x, int precision=6)</td></tr>
-<tr class="memdesc:gab3736804eb4cabadcc2e6f47424fa071"><td class="mdescLeft">&#160;</td><td class="mdescRight">将浮点数转换为字符串（通用格式）  <br /></td></tr>
-<tr class="memitem:ga7054cdde046bf5c14e9905779ad35a07" id="r_ga7054cdde046bf5c14e9905779ad35a07"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__floating__point.html">is_floating_point</a>&lt; T &gt;::value, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:ga7054cdde046bf5c14e9905779ad35a07 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#ga7054cdde046bf5c14e9905779ad35a07">to_string_fixed</a> (T x, int precision=6)</td></tr>
-<tr class="memdesc:ga7054cdde046bf5c14e9905779ad35a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">将浮点数转换为字符串（固定小数格式）  <br /></td></tr>
-<tr class="memitem:gab003720775a25ba5769677b38db10a44" id="r_gab003720775a25ba5769677b38db10a44"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__floating__point.html">is_floating_point</a>&lt; T &gt;::value, int &gt; = 0&gt; </td></tr>
-<tr class="memitem:gab003720775a25ba5769677b38db10a44 template"><td class="memItemLeft">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#gab003720775a25ba5769677b38db10a44">to_string_scientific</a> (T x, int precision=6)</td></tr>
-<tr class="memdesc:gab003720775a25ba5769677b38db10a44"><td class="mdescLeft">&#160;</td><td class="mdescRight">将浮点数转换为字符串（科学计数法格式）  <br /></td></tr>
+<tr class="memitem:gaf299c1a15ebd7e7d84110e86eda3180c" id="r_gaf299c1a15ebd7e7d84110e86eda3180c"><td class="memTemplParams" colspan="2">template&lt;typename T, typename P = package_t&lt;T&gt;, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_properties.html#ga8b05ec45a809cf721186814267d41579">is_packaged_v</a>&lt; T &gt; &amp;&amp;<a class="el" href="group___base_type_qualifier_check.html#ga096bf5b121d9f427c8027f2949e8198e">is_base_of_v</a>&lt; <a class="el" href="structistringify.html">istringify</a>&lt; P &gt;, P &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gaf299c1a15ebd7e7d84110e86eda3180c template"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#gaf299c1a15ebd7e7d84110e86eda3180c">to_string</a> (const T &amp;value)</td></tr>
+<tr class="memdesc:gaf299c1a15ebd7e7d84110e86eda3180c"><td class="mdescLeft">&#160;</td><td class="mdescRight">将可包装类型转换为字符串  <br /></td></tr>
+<tr class="memitem:ga5ab4d2736187c534b36b1ff3498421b9" id="r_ga5ab4d2736187c534b36b1ff3498421b9"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#ga5ab4d2736187c534b36b1ff3498421b9">to_string</a> (<a class="el" href="group___core_types.html#gafb2c9350d32e78a0e4c960b9859ccb40">nullptr_t</a> np)</td></tr>
+<tr class="memdesc:ga5ab4d2736187c534b36b1ff3498421b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">将空指针转换为字符串  <br /></td></tr>
+<tr class="memitem:ga8a5552a92ce50b338c4a6286a19cbba5" id="r_ga8a5552a92ce50b338c4a6286a19cbba5"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#ga60d8a43ca3d5d473f1651ef5114c2628">is_pointer_v</a>&lt; T &gt; &amp;&amp;!<a class="el" href="group___base_type_qualifier_check.html#ga632532c73fe2a0b2060443dd837a2a7b">is_cstring_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga8a5552a92ce50b338c4a6286a19cbba5 template"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga8a5552a92ce50b338c4a6286a19cbba5">to_string</a> (const T &amp;ptr)</td></tr>
+<tr class="memdesc:ga8a5552a92ce50b338c4a6286a19cbba5"><td class="mdescLeft">&#160;</td><td class="mdescRight">将指针转换为字符串  <br /></td></tr>
+<tr class="memitem:ga8a5552a92ce50b338c4a6286a19cbba5" id="r_ga8a5552a92ce50b338c4a6286a19cbba5"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#ga096bf5b121d9f427c8027f2949e8198e">is_base_of_v</a>&lt; <a class="el" href="structicollector.html">icollector</a>&lt; T &gt;, T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga8a5552a92ce50b338c4a6286a19cbba5 template"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga8a5552a92ce50b338c4a6286a19cbba5">to_string</a> (const T &amp;c)</td></tr>
+<tr class="memdesc:ga8a5552a92ce50b338c4a6286a19cbba5"><td class="mdescLeft">&#160;</td><td class="mdescRight">将容器转换为字符串  <br /></td></tr>
+<tr class="memitem:ga8a5552a92ce50b338c4a6286a19cbba5" id="r_ga8a5552a92ce50b338c4a6286a19cbba5"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#ga687f368c330615460df7f61947e88279">is_unbounded_array_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga8a5552a92ce50b338c4a6286a19cbba5 template"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga8a5552a92ce50b338c4a6286a19cbba5">to_string</a> (const T &amp;)</td></tr>
+<tr class="memdesc:ga8a5552a92ce50b338c4a6286a19cbba5"><td class="mdescLeft">&#160;</td><td class="mdescRight">将无界数组转换为字符串  <br /></td></tr>
+<tr class="memitem:ga8a5552a92ce50b338c4a6286a19cbba5" id="r_ga8a5552a92ce50b338c4a6286a19cbba5"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#ga7a699f9a94f5d0c71c5e85e84f7baeb4">is_bounded_array_v</a>&lt; T &gt; &amp;&amp;!<a class="el" href="group___base_type_qualifier_check.html#ga632532c73fe2a0b2060443dd837a2a7b">is_cstring_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga8a5552a92ce50b338c4a6286a19cbba5 template"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ga8a5552a92ce50b338c4a6286a19cbba5">to_string</a> (const T &amp;arr)</td></tr>
+<tr class="memdesc:ga8a5552a92ce50b338c4a6286a19cbba5"><td class="mdescLeft">&#160;</td><td class="mdescRight">将有界数组转换为字符串  <br /></td></tr>
+<tr class="memitem:ga0c8a9f659a362664408df2e8edcf8ee1" id="r_ga0c8a9f659a362664408df2e8edcf8ee1"><td class="memTemplParams" colspan="2">template&lt;typename IfEmpty, typename T&gt; </td></tr>
+<tr class="memitem:ga0c8a9f659a362664408df2e8edcf8ee1 template"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#ga0c8a9f659a362664408df2e8edcf8ee1">to_string</a> (const <a class="el" href="structcompressed__pair.html">compressed_pair</a>&lt; IfEmpty, T, true &gt; &amp;obj)</td></tr>
+<tr class="memdesc:ga0c8a9f659a362664408df2e8edcf8ee1"><td class="mdescLeft">&#160;</td><td class="mdescRight">将压缩对（已压缩版本）转换为字符串  <br /></td></tr>
+<tr class="memitem:gad7ec8a3d461192283c01ff482bdae548" id="r_gad7ec8a3d461192283c01ff482bdae548"><td class="memTemplParams" colspan="2">template&lt;typename IfEmpty, typename T&gt; </td></tr>
+<tr class="memitem:gad7ec8a3d461192283c01ff482bdae548 template"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#gad7ec8a3d461192283c01ff482bdae548">to_string</a> (const <a class="el" href="structcompressed__pair.html">compressed_pair</a>&lt; IfEmpty, T, false &gt; &amp;obj)</td></tr>
+<tr class="memdesc:gad7ec8a3d461192283c01ff482bdae548"><td class="mdescLeft">&#160;</td><td class="mdescRight">将压缩对（未压缩版本）转换为字符串  <br /></td></tr>
+<tr class="memitem:gaa32de20a0663a6c9aa0cbab9fd31e072" id="r_gaa32de20a0663a6c9aa0cbab9fd31e072"><td class="memTemplParams" colspan="2">template&lt;typename T1, typename T2&gt; </td></tr>
+<tr class="memitem:gaa32de20a0663a6c9aa0cbab9fd31e072 template"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#gaa32de20a0663a6c9aa0cbab9fd31e072">to_string</a> (const <a class="el" href="structpair.html">pair</a>&lt; T1, T2 &gt; &amp;obj)</td></tr>
+<tr class="memdesc:gaa32de20a0663a6c9aa0cbab9fd31e072"><td class="mdescLeft">&#160;</td><td class="mdescRight">将对转换为字符串  <br /></td></tr>
+<tr class="memitem:gabb26f40532026a8580f78ec0b16e5523" id="r_gabb26f40532026a8580f78ec0b16e5523"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:gabb26f40532026a8580f78ec0b16e5523 template"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#gabb26f40532026a8580f78ec0b16e5523">to_string</a> (const tuple&lt; Args... &gt; &amp;tup)</td></tr>
+<tr class="memdesc:gabb26f40532026a8580f78ec0b16e5523"><td class="mdescLeft">&#160;</td><td class="mdescRight">将元组转换为字符串  <br /></td></tr>
+<tr class="memitem:ga3d57a44c65762d93dac024bb2927e211" id="r_ga3d57a44c65762d93dac024bb2927e211"><td class="memTemplParams" colspan="2">template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;(sizeof...(Args) &gt; 1), int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga3d57a44c65762d93dac024bb2927e211 template"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#ga3d57a44c65762d93dac024bb2927e211">to_string</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:ga3d57a44c65762d93dac024bb2927e211"><td class="mdescLeft">&#160;</td><td class="mdescRight">将多个参数转换为字符串并连接  <br /></td></tr>
+<tr class="memitem:ga151dfefdfe7af19fe7af0aea5ce4b337" id="r_ga151dfefdfe7af19fe7af0aea5ce4b337"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__floating__point.html">is_floating_point</a>&lt; T &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga151dfefdfe7af19fe7af0aea5ce4b337 template"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#ga151dfefdfe7af19fe7af0aea5ce4b337">to_string_with_precision</a> (T x, int precision, bool scientific=false)</td></tr>
+<tr class="memdesc:ga151dfefdfe7af19fe7af0aea5ce4b337"><td class="mdescLeft">&#160;</td><td class="mdescRight">将浮点数转换为字符串（带精度控制）  <br /></td></tr>
+<tr class="memitem:ga58394681e3d7024a8dfa5c704afe85dd" id="r_ga58394681e3d7024a8dfa5c704afe85dd"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__floating__point.html">is_floating_point</a>&lt; T &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga58394681e3d7024a8dfa5c704afe85dd template"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#ga58394681e3d7024a8dfa5c704afe85dd">to_string_general</a> (T x, int precision=6)</td></tr>
+<tr class="memdesc:ga58394681e3d7024a8dfa5c704afe85dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">将浮点数转换为字符串（通用格式）  <br /></td></tr>
+<tr class="memitem:gadffbf1f8c4d301847d5c519d2a83b07f" id="r_gadffbf1f8c4d301847d5c519d2a83b07f"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__floating__point.html">is_floating_point</a>&lt; T &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gadffbf1f8c4d301847d5c519d2a83b07f template"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#gadffbf1f8c4d301847d5c519d2a83b07f">to_string_fixed</a> (T x, int precision=6)</td></tr>
+<tr class="memdesc:gadffbf1f8c4d301847d5c519d2a83b07f"><td class="mdescLeft">&#160;</td><td class="mdescRight">将浮点数转换为字符串（固定小数格式）  <br /></td></tr>
+<tr class="memitem:ga67cbb27e91942b19deae0d2cf4b292cc" id="r_ga67cbb27e91942b19deae0d2cf4b292cc"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="structis__floating__point.html">is_floating_point</a>&lt; T &gt;::value, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga67cbb27e91942b19deae0d2cf4b292cc template"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___string_converts.html#ga67cbb27e91942b19deae0d2cf4b292cc">to_string_scientific</a> (T x, int precision=6)</td></tr>
+<tr class="memdesc:ga67cbb27e91942b19deae0d2cf4b292cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">将浮点数转换为字符串（科学计数法格式）  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>类型到字符串的转换函数 </p>
@@ -162,21 +162,29 @@ to_string.hpp 的引用(Include)关系图:</div>
 
 <p class="definition">在文件 <a class="el" href="to__string_8hpp_source.html">to_string.hpp</a> 中定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="ga31c6fb8bbf417f4e00ea2f52899e84f6" name="ga31c6fb8bbf417f4e00ea2f52899e84f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[1/4]</span></h2>
+<a id="ga8a5552a92ce50b338c4a6286a19cbba5" name="ga8a5552a92ce50b338c4a6286a19cbba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8a5552a92ce50b338c4a6286a19cbba5">&#9670;&#160;</a></span>to_string() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#ga5c4bd9266e99bedba2e77f755b5d36a0">is_unbounded_array_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#ga687f368c330615460df7f61947e88279">is_unbounded_array_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> to_string </td>
+          <td class="memname"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> to_string </td>
           <td>(</td>
           <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>将无界数组转换为字符串 </p>
@@ -192,21 +200,29 @@ template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#g
 
 </div>
 </div>
-<a id="ga31c6fb8bbf417f4e00ea2f52899e84f6" name="ga31c6fb8bbf417f4e00ea2f52899e84f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[2/4]</span></h2>
+<a id="ga8a5552a92ce50b338c4a6286a19cbba5" name="ga8a5552a92ce50b338c4a6286a19cbba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8a5552a92ce50b338c4a6286a19cbba5">&#9670;&#160;</a></span>to_string() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#ga218efd7ae1e45541d39fa24a5db89016">is_bounded_array_v</a>&lt; T &gt; &amp;&amp;!<a class="el" href="group___base_type_qualifier_check.html#ga632532c73fe2a0b2060443dd837a2a7b">is_cstring_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#ga7a699f9a94f5d0c71c5e85e84f7baeb4">is_bounded_array_v</a>&lt; T &gt; &amp;&amp;!<a class="el" href="group___base_type_qualifier_check.html#ga632532c73fe2a0b2060443dd837a2a7b">is_cstring_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> to_string </td>
+          <td class="memname"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> to_string </td>
           <td>(</td>
           <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>arr</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>将有界数组转换为字符串 </p>
@@ -228,21 +244,29 @@ template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#g
 
 </div>
 </div>
-<a id="ga31c6fb8bbf417f4e00ea2f52899e84f6" name="ga31c6fb8bbf417f4e00ea2f52899e84f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[3/4]</span></h2>
+<a id="ga8a5552a92ce50b338c4a6286a19cbba5" name="ga8a5552a92ce50b338c4a6286a19cbba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8a5552a92ce50b338c4a6286a19cbba5">&#9670;&#160;</a></span>to_string() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#ga2dd33cb2936b9c2e75a085b78a7349a1">is_base_of_v</a>&lt; <a class="el" href="structicollector.html">icollector</a>&lt; T &gt;, T &gt;, int &gt; = 0&gt; </div>
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#ga096bf5b121d9f427c8027f2949e8198e">is_base_of_v</a>&lt; <a class="el" href="structicollector.html">icollector</a>&lt; T &gt;, T &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> to_string </td>
+          <td class="memname"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> to_string </td>
           <td>(</td>
           <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>c</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>将容器转换为字符串 </p>
@@ -264,21 +288,29 @@ template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#g
 
 </div>
 </div>
-<a id="ga31c6fb8bbf417f4e00ea2f52899e84f6" name="ga31c6fb8bbf417f4e00ea2f52899e84f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga31c6fb8bbf417f4e00ea2f52899e84f6">&#9670;&#160;</a></span>to_string() <span class="overload">[4/4]</span></h2>
+<a id="ga8a5552a92ce50b338c4a6286a19cbba5" name="ga8a5552a92ce50b338c4a6286a19cbba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8a5552a92ce50b338c4a6286a19cbba5">&#9670;&#160;</a></span>to_string() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#gaff2094428071e9bd480d66885ad85043">is_pointer_v</a>&lt; T &gt; &amp;&amp;!<a class="el" href="group___base_type_qualifier_check.html#ga632532c73fe2a0b2060443dd837a2a7b">is_cstring_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#ga60d8a43ca3d5d473f1651ef5114c2628">is_pointer_v</a>&lt; T &gt; &amp;&amp;!<a class="el" href="group___base_type_qualifier_check.html#ga632532c73fe2a0b2060443dd837a2a7b">is_cstring_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> to_string </td>
+          <td class="memname"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> to_string </td>
           <td>(</td>
           <td class="paramtype">const T &amp;</td>          <td class="paramname"><span class="paramname"><em>ptr</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>将指针转换为字符串 </p>

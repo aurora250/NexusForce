@@ -30,10 +30,10 @@ var memory__order_8hpp =
     [ "is_valid_cmpexch_failure_order", "group___memory_order.html#ga0ebbd1fbd5cee109f313d7ef89dd257f", null ],
     [ "operator&", "group___memory_order.html#gaa412d48215ac5173e7fc457a4e9443e6", null ],
     [ "operator|", "group___memory_order.html#ga4d9a876d4d53afcbc2b20efdf7f0d170", null ],
-    [ "memory_order_acq_rel", "group___memory_order.html#ga3b921278ed46859e35eae165a2f2e96d", null ],
-    [ "memory_order_acquire", "group___memory_order.html#gac472f4b38d5bc0ba23a6113984118c24", null ],
-    [ "memory_order_consume", "group___memory_order.html#ga5f22a1191ac5d936f9fc1c7b3b72eddd", null ],
-    [ "memory_order_relaxed", "group___memory_order.html#gab7d3a13cfab1d0d9d1e747ac3d774d61", null ],
-    [ "memory_order_release", "group___memory_order.html#ga80883e2cd37a8e670dc016e91059d936", null ],
-    [ "memory_order_seq_cst", "group___memory_order.html#ga9e670570506f24d28d99c8e004906bb3", null ]
+    [ "memory_order_acq_rel", "group___memory_order.html#gaa90b85f888215e5b95f088518bbf9adf", null ],
+    [ "memory_order_acquire", "group___memory_order.html#ga52729ffe1460a0069a1736f2e4e61d2e", null ],
+    [ "memory_order_consume", "group___memory_order.html#ga5d85cc03b2570d50c7da5a08961f4eb7", null ],
+    [ "memory_order_relaxed", "group___memory_order.html#ga4c8b2df710dbe4b801447898624fa3ca", null ],
+    [ "memory_order_release", "group___memory_order.html#ga1872f4bd7e5e4170b898e1dcab55bbec", null ],
+    [ "memory_order_seq_cst", "group___memory_order.html#ga4be2d174b1a12bf2c3477a854d96f570", null ]
 ];

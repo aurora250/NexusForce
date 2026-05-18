@@ -1,12 +1,12 @@
 var structhttp__server__response =
 [
     [ "http_server_response", "structhttp__server__response.html#ae46a45f3c25128212550656c3d23355e", null ],
-    [ "has_header", "structhttp__server__response.html#a31ae9ff6d0141f85bf94bb52c8eb9f1b", null ],
-    [ "header", "structhttp__server__response.html#a1ae85de5a80c3e6e0108825f64e55e07", null ],
+    [ "has_header", "structhttp__server__response.html#af717bcfe16092b631a29c6d4bcdc920c", null ],
+    [ "header", "structhttp__server__response.html#a382d420c9b9c08cb9fcf35e847901937", null ],
     [ "set_content_type", "structhttp__server__response.html#a283b6cd33f07f80eb2024694dbff6c01", null ],
     [ "set_content_type", "structhttp__server__response.html#ad374366962f14690d3ae7b996e9171cf", null ],
     [ "set_header", "structhttp__server__response.html#a65d53ed69d5a6533432d3bf81c2503e3", null ],
-    [ "to_string", "structhttp__server__response.html#a21c25a17df534ad53b0eb71ddb5101bd", null ],
+    [ "to_string", "structhttp__server__response.html#a59f545a3dc6b21280771d31719c028a8", null ],
     [ "body", "structhttp__server__response.html#a7eb8d64f75162d65e089ab24654ffb33", null ],
     [ "cookies", "structhttp__server__response.html#a9eabe9c2ee241127b75193bdeed530ae", null ],
     [ "forward_path", "structhttp__server__response.html#a2750c433cd599f52e454ef6448988b28", null ],

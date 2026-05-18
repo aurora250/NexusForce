@@ -1,0 +1,26 @@
+var classneforce_1_1tcp__server__base =
+[
+    [ "client_handler_t", "classneforce_1_1tcp__server__base.html#a46c1086e1751fd1c07f9c48d5608513e", null ],
+    [ "exception_handler_t", "classneforce_1_1tcp__server__base.html#a078aa172df59799167a6ef20994e8e65", null ],
+    [ "tcp_server_base", "classneforce_1_1tcp__server__base.html#aeb35105113288be89b8f88b65a4f441d", null ],
+    [ "~tcp_server_base", "classneforce_1_1tcp__server__base.html#aabd99c9fa61ecdb62c23e38e7745bffd", null ],
+    [ "accept_loop", "classneforce_1_1tcp__server__base.html#a211fdf9694b267014a39c510b544f237", null ],
+    [ "accept_one", "classneforce_1_1tcp__server__base.html#a84653fd712f2d7d8cfc6ad49aacfb321", null ],
+    [ "create_acceptor", "classneforce_1_1tcp__server__base.html#a4ad09b500300f6bad8e859fb1f8dce0e", null ],
+    [ "handle_client", "classneforce_1_1tcp__server__base.html#a44451ce01e7d71717dbd82a5f1cb36d7", null ],
+    [ "is_running", "classneforce_1_1tcp__server__base.html#a4fb5ce5c8746e7bd2ab80f2fc53fdf50", null ],
+    [ "notify_stop", "classneforce_1_1tcp__server__base.html#a1f588702d8bfa0a54fb01ed1669a4528", null ],
+    [ "port", "classneforce_1_1tcp__server__base.html#a7abdf6b40285f61f8d4e83e26dc25a66", null ],
+    [ "set_client_handler", "classneforce_1_1tcp__server__base.html#a9022e7a54a73d2c325fb35fda5c0406e", null ],
+    [ "set_exception_handler", "classneforce_1_1tcp__server__base.html#a28c05522921c5e044c33cb08840d89aa", null ],
+    [ "start", "classneforce_1_1tcp__server__base.html#a11f1f18ed71e77da01bd2f42adba94e4", null ],
+    [ "stop", "classneforce_1_1tcp__server__base.html#aa40255225817e61f03cfc45236dab2cd", null ],
+    [ "acceptor_", "classneforce_1_1tcp__server__base.html#ac0f3ea69f0f8e798f03c58f3df5a29cd", null ],
+    [ "acceptor_mutex_", "classneforce_1_1tcp__server__base.html#ae4fd26d9aad681afaa6f840b454783e3", null ],
+    [ "client_handler_", "classneforce_1_1tcp__server__base.html#a0a1b5a8e8e6c38e15b69048561bd0bee", null ],
+    [ "client_pool_", "classneforce_1_1tcp__server__base.html#a5f7ce4631a436f64d723f427a4f6dbdc", null ],
+    [ "exception_handler_", "classneforce_1_1tcp__server__base.html#a537f7efc2740b8160f887a8ce5453a7c", null ],
+    [ "port_", "classneforce_1_1tcp__server__base.html#a47267e12bff4bafd32124499e1f94d71", null ],
+    [ "running_", "classneforce_1_1tcp__server__base.html#a15b95a7e58d0477e6cea925173f18e5e", null ],
+    [ "worker_threads_", "classneforce_1_1tcp__server__base.html#ab096165cb0d343f1bcddab07e94a393e", null ]
+];

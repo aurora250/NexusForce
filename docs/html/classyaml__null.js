@@ -1,4 +1,4 @@
 var classyaml__null =
 [
-    [ "type", "classyaml__null.html#ae767952dcae3a7009de82b86fe5dfaa6", null ]
+    [ "type", "classyaml__null.html#a1c86e546049429406424c132abe2edcf", null ]
 ];

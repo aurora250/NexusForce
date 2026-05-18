@@ -1,10 +1,10 @@
 var group___x_o_r =
 [
     [ "XOR", "struct_x_o_r.html", null ],
-    [ "XOR_decrypt", "group___x_o_r.html#ga3d83be7132f464c8ae3aceb8c6b4a8c4", null ],
-    [ "XOR_decrypt", "group___x_o_r.html#ga1d1cc0815ce4e92bb086aea6f0682bf5", null ],
-    [ "XOR_decrypt", "group___x_o_r.html#gaa0a82e80059bd84c825c0090df847e73", null ],
-    [ "XOR_encrypt", "group___x_o_r.html#gacc99ef05b5f45b5e03097d385ba7c87d", null ],
-    [ "XOR_encrypt", "group___x_o_r.html#ga83f94408205b906e9e72b0d7c6c6fc23", null ],
-    [ "XOR_encrypt", "group___x_o_r.html#gac2a495f2810bfb6c90688a09a94e2454", null ]
+    [ "XOR_decrypt", "group___x_o_r.html#ga2ffcae3b1cb528181a8c3d3fc93d43a5", null ],
+    [ "XOR_decrypt", "group___x_o_r.html#ga69df10d7ab8000e678e2edf1221afa99", null ],
+    [ "XOR_decrypt", "group___x_o_r.html#gaea653b9f3d096301bd30f9aaa7ea5710", null ],
+    [ "XOR_encrypt", "group___x_o_r.html#ga70718b669ca5528364c434202f51c92c", null ],
+    [ "XOR_encrypt", "group___x_o_r.html#ga11ed95e3094fbb91cd843a74c003131b", null ],
+    [ "XOR_encrypt", "group___x_o_r.html#ga2bc3224daaeacadfa16e6bb68caa01e3", null ]
 ];

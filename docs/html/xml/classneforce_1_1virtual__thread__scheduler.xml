@@ -1,0 +1,244 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1virtual__thread__scheduler" kind="class" language="C++" prot="public">
+    <compoundname>neforce::virtual_thread_scheduler</compoundname>
+    <includes refid="virtual__thread_8hpp" local="no">virtual_thread.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1virtual__thread__scheduler_1afec056fafcf35d2a4a2d323101e0e901" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1queue" kindref="compound">queue</ref>&lt; <ref refid="group___coroutine_1gaeab1ef2c1054244fa37d634f805cf95d" kindref="member">coroutine_handle</ref>&lt;&gt; &gt;</type>
+        <definition>queue&lt;coroutine_handle&lt;&gt; &gt; neforce::virtual_thread_scheduler::task_queue_</definition>
+        <argsstring></argsstring>
+        <name>task_queue_</name>
+        <qualifiedname>neforce::virtual_thread_scheduler::task_queue_</qualifiedname>
+        <briefdescription>
+<para>协程任务队列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="122" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1virtual__thread__scheduler_1ac271fae868c640b37e672ceec990da2d" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1thread" kindref="compound">thread</ref> &gt;</type>
+        <definition>vector&lt;thread&gt; neforce::virtual_thread_scheduler::workers_</definition>
+        <argsstring></argsstring>
+        <name>workers_</name>
+        <qualifiedname>neforce::virtual_thread_scheduler::workers_</qualifiedname>
+        <briefdescription>
+<para>工作线程池 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="123" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1virtual__thread__scheduler_1a23ce7fbf2ba45c749ce4f2a05a33c42e" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::virtual_thread_scheduler::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>neforce::virtual_thread_scheduler::mutex_</qualifiedname>
+        <briefdescription>
+<para>保护任务队列的互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="124" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1virtual__thread__scheduler_1a18fdafddb5ad8490b630c582bd586a3e" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1condition__variable" kindref="compound">condition_variable</ref></type>
+        <definition>condition_variable neforce::virtual_thread_scheduler::cv_</definition>
+        <argsstring></argsstring>
+        <name>cv_</name>
+        <qualifiedname>neforce::virtual_thread_scheduler::cv_</qualifiedname>
+        <briefdescription>
+<para>任务通知条件变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="125" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1virtual__thread__scheduler_1a7da2e3abd213f9ac89ed8b543504401c" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; neforce::virtual_thread_scheduler::shutdown_</definition>
+        <argsstring></argsstring>
+        <name>shutdown_</name>
+        <qualifiedname>neforce::virtual_thread_scheduler::shutdown_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>关闭标志 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="126" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="126" bodyend="126"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1virtual__thread__scheduler_1af2ec6ca0e46dcd5f7a8a2e4e2708b9fc" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classneforce_1_1virtual__thread__scheduler" kindref="compound">virtual_thread_scheduler</ref> &amp;</type>
+        <definition>static virtual_thread_scheduler &amp; neforce::virtual_thread_scheduler::get_instance</definition>
+        <argsstring>()</argsstring>
+        <name>get_instance</name>
+        <qualifiedname>neforce::virtual_thread_scheduler::get_instance</qualifiedname>
+        <briefdescription>
+<para>获取调度器单例实例 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>调度器引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="133" column="37" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="133" bodyend="136"/>
+        <referencedby refid="structneforce_1_1virtual__thread__task_1_1promise__type_1ad96759272509eb21339ef3ac659c918c" compoundref="virtual__thread_8hpp" startline="581" endline="599">neforce::virtual_thread_task&lt; T &gt;::promise_type::await_transform</referencedby>
+        <referencedby refid="structneforce_1_1virtual__thread__task_1_1promise__type_1adeb18cadf0231ec8d8912447ef674bb3" compoundref="virtual__thread_8hpp" startline="561" endline="575">neforce::virtual_thread_task&lt; T &gt;::promise_type::await_transform</referencedby>
+        <referencedby refid="structneforce_1_1virtual__thread__task_3_01void_01_4_1_1promise__type_1a60c2e26f7ce02ae7b87d23b5b68fb34a" compoundref="virtual__thread_8hpp" startline="315" endline="333">neforce::virtual_thread_task&lt; void &gt;::promise_type::await_transform</referencedby>
+        <referencedby refid="structneforce_1_1virtual__thread__task_3_01void_01_4_1_1promise__type_1a39715ad3fb87985f4f563982471772a4" compoundref="virtual__thread_8hpp" startline="294" endline="308">neforce::virtual_thread_task&lt; void &gt;::promise_type::await_transform</referencedby>
+        <referencedby refid="structneforce_1_1virtual__thread__task_1_1promise__type_1a6d8e9b64add12696cee451a6ae9b7689" compoundref="virtual__thread_8hpp" startline="535" endline="556">neforce::virtual_thread_task&lt; T &gt;::promise_type::final_suspend</referencedby>
+        <referencedby refid="structneforce_1_1virtual__thread__task_3_01void_01_4_1_1promise__type_1af2afdfbdfcf107d87789306fc9b12f7e" compoundref="virtual__thread_8hpp" startline="267" endline="288">neforce::virtual_thread_task&lt; void &gt;::promise_type::final_suspend</referencedby>
+        <referencedby refid="classneforce_1_1virtual__thread_1ae6ecb104412f4ed600677f7861379c81" compoundref="virtual__thread_8hpp" startline="819" endline="819">neforce::virtual_thread::initialize</referencedby>
+        <referencedby refid="classneforce_1_1virtual__thread_1aaf669e8a474f8140fcb32da7691fccf4" compoundref="virtual__thread_8hpp" startline="824" endline="824">neforce::virtual_thread::shutdown</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1virtual__thread__scheduler_1a1c06f535dd0dc8cd6dfa72a2fcad7d54" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::virtual_thread_scheduler::schedule</definition>
+        <argsstring>(coroutine_handle&lt;&gt; handle)</argsstring>
+        <name>schedule</name>
+        <qualifiedname>neforce::virtual_thread_scheduler::schedule</qualifiedname>
+        <param>
+          <type><ref refid="group___coroutine_1gaeab1ef2c1054244fa37d634f805cf95d" kindref="member">coroutine_handle</ref>&lt;&gt;</type>
+          <declname>handle</declname>
+        </param>
+        <briefdescription>
+<para>将协程加入调度队列 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handle</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>协程句柄 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="142" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="142" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1virtual__thread__scheduler_1a7afd53b29febc37efbbe6d14105df401" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::virtual_thread_scheduler::start_workers</definition>
+        <argsstring>(size_t num_threads)</argsstring>
+        <name>start_workers</name>
+        <qualifiedname>neforce::virtual_thread_scheduler::start_workers</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+          <declname>num_threads</declname>
+        </param>
+        <briefdescription>
+<para>启动指定数量的工作线程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>num_threads</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>工作线程数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="154" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="154" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1virtual__thread__scheduler_1a2187686bebf2c51cf5fc263a7f18a803" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::virtual_thread_scheduler::shutdown</definition>
+        <argsstring>()</argsstring>
+        <name>shutdown</name>
+        <qualifiedname>neforce::virtual_thread_scheduler::shutdown</qualifiedname>
+        <briefdescription>
+<para>关闭调度器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>设置关闭标志，唤醒所有工作线程并等待它们退出。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="165" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="165" bodyend="177"/>
+        <referencedby refid="classneforce_1_1virtual__thread__scheduler_1a06b1d5e5383d3a72aaa5f0684d655f6c" compoundref="virtual__thread_8hpp" startline="182" endline="182">~virtual_thread_scheduler</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1virtual__thread__scheduler_1a06b1d5e5383d3a72aaa5f0684d655f6c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::virtual_thread_scheduler::~virtual_thread_scheduler</definition>
+        <argsstring>()</argsstring>
+        <name>~virtual_thread_scheduler</name>
+        <qualifiedname>neforce::virtual_thread_scheduler::~virtual_thread_scheduler</qualifiedname>
+        <briefdescription>
+<para>析构函数，自动调用 <ref refid="classneforce_1_1virtual__thread__scheduler_1a2187686bebf2c51cf5fc263a7f18a803" kindref="member">shutdown()</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="182" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="182" bodyend="182"/>
+        <references refid="classneforce_1_1virtual__thread__scheduler_1a2187686bebf2c51cf5fc263a7f18a803" compoundref="virtual__thread_8hpp" startline="165" endline="177">shutdown</references>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1virtual__thread__scheduler_1a644cc2888422afa30278d616a6fdb10c" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::virtual_thread_scheduler::worker_loop</definition>
+        <argsstring>()</argsstring>
+        <name>worker_loop</name>
+        <qualifiedname>neforce::virtual_thread_scheduler::worker_loop</qualifiedname>
+        <briefdescription>
+<para>工作线程主循环 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>循环等待任务队列中的协程，取出并恢复执行。 若协程执行完毕则销毁帧，否则等待下次调度。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="191" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="191" bodyend="216"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>虚拟线程调度器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理协程任务的调度和执行，全局统一调度。 内部维护一个任务队列和一组工作线程，工作线程从队列中取出协程并执行。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" line="120" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/virtual_thread.hpp" bodystart="120" bodyend="217"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1virtual__thread__scheduler_1a18fdafddb5ad8490b630c582bd586a3e" prot="private" virt="non-virtual"><scope>neforce::virtual_thread_scheduler</scope><name>cv_</name></member>
+      <member refid="classneforce_1_1virtual__thread__scheduler_1af2ec6ca0e46dcd5f7a8a2e4e2708b9fc" prot="public" virt="non-virtual"><scope>neforce::virtual_thread_scheduler</scope><name>get_instance</name></member>
+      <member refid="classneforce_1_1virtual__thread__scheduler_1a23ce7fbf2ba45c749ce4f2a05a33c42e" prot="private" virt="non-virtual"><scope>neforce::virtual_thread_scheduler</scope><name>mutex_</name></member>
+      <member refid="classneforce_1_1virtual__thread__scheduler_1a1c06f535dd0dc8cd6dfa72a2fcad7d54" prot="public" virt="non-virtual"><scope>neforce::virtual_thread_scheduler</scope><name>schedule</name></member>
+      <member refid="classneforce_1_1virtual__thread__scheduler_1a2187686bebf2c51cf5fc263a7f18a803" prot="public" virt="non-virtual"><scope>neforce::virtual_thread_scheduler</scope><name>shutdown</name></member>
+      <member refid="classneforce_1_1virtual__thread__scheduler_1a7da2e3abd213f9ac89ed8b543504401c" prot="private" virt="non-virtual"><scope>neforce::virtual_thread_scheduler</scope><name>shutdown_</name></member>
+      <member refid="classneforce_1_1virtual__thread__scheduler_1a7afd53b29febc37efbbe6d14105df401" prot="public" virt="non-virtual"><scope>neforce::virtual_thread_scheduler</scope><name>start_workers</name></member>
+      <member refid="classneforce_1_1virtual__thread__scheduler_1afec056fafcf35d2a4a2d323101e0e901" prot="private" virt="non-virtual"><scope>neforce::virtual_thread_scheduler</scope><name>task_queue_</name></member>
+      <member refid="classneforce_1_1virtual__thread__scheduler_1a644cc2888422afa30278d616a6fdb10c" prot="private" virt="non-virtual"><scope>neforce::virtual_thread_scheduler</scope><name>worker_loop</name></member>
+      <member refid="classneforce_1_1virtual__thread__scheduler_1ac271fae868c640b37e672ceec990da2d" prot="private" virt="non-virtual"><scope>neforce::virtual_thread_scheduler</scope><name>workers_</name></member>
+      <member refid="classneforce_1_1virtual__thread__scheduler_1a06b1d5e5383d3a72aaa5f0684d655f6c" prot="public" virt="non-virtual"><scope>neforce::virtual_thread_scheduler</scope><name>~virtual_thread_scheduler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

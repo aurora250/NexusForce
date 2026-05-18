@@ -1,0 +1,326 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="namespaceneforce_1_1http" kind="namespace" language="C++">
+    <compoundname>neforce::http</compoundname>
+    <innerclass refid="classneforce_1_1http_1_1http__client" prot="public">neforce::http::http_client</innerclass>
+    <innerclass refid="structneforce_1_1http_1_1http__client__response" prot="public">neforce::http::http_client_response</innerclass>
+    <innerclass refid="structneforce_1_1http_1_1http__client__request" prot="public">neforce::http::http_client_request</innerclass>
+    <innerclass refid="structneforce_1_1http_1_1http__content" prot="public">neforce::http::http_content</innerclass>
+    <innerclass refid="structneforce_1_1http_1_1http__method" prot="public">neforce::http::http_method</innerclass>
+    <innerclass refid="structneforce_1_1http_1_1http__cookie__name" prot="public">neforce::http::http_cookie_name</innerclass>
+    <innerclass refid="structneforce_1_1http_1_1http__key" prot="public">neforce::http::http_key</innerclass>
+    <innerclass refid="classneforce_1_1http_1_1http__filter" prot="public">neforce::http::http_filter</innerclass>
+    <innerclass refid="classneforce_1_1http_1_1http__filter__chain" prot="public">neforce::http::http_filter_chain</innerclass>
+    <innerclass refid="classneforce_1_1http_1_1cors__filter" prot="public">neforce::http::cors_filter</innerclass>
+    <innerclass refid="classneforce_1_1http_1_1logging__filter" prot="public">neforce::http::logging_filter</innerclass>
+    <innerclass refid="classneforce_1_1http_1_1static__file__filter" prot="public">neforce::http::static_file_filter</innerclass>
+    <innerclass refid="classneforce_1_1http_1_1rate__limit__filter" prot="public">neforce::http::rate_limit_filter</innerclass>
+    <innerclass refid="classneforce_1_1http_1_1authentication__filter" prot="public">neforce::http::authentication_filter</innerclass>
+    <innerclass refid="classneforce_1_1http_1_1http__router" prot="public">neforce::http::http_router</innerclass>
+    <innerclass refid="classneforce_1_1http_1_1http__server" prot="public">neforce::http::http_server</innerclass>
+    <innerclass refid="structneforce_1_1http_1_1http__server__request" prot="public">neforce::http::http_server_request</innerclass>
+    <innerclass refid="structneforce_1_1http_1_1http__server__response" prot="public">neforce::http::http_server_response</innerclass>
+    <innerclass refid="structneforce_1_1http_1_1http__cookie" prot="public">neforce::http::http_cookie</innerclass>
+    <innerclass refid="structneforce_1_1http_1_1http__session" prot="public">neforce::http::http_session</innerclass>
+    <innerclass refid="structneforce_1_1http_1_1websocket__frame__header" prot="public">neforce::http::websocket_frame_header</innerclass>
+    <innerclass refid="classneforce_1_1http_1_1websocket__server" prot="public">neforce::http::websocket_server</innerclass>
+    <innerclass refid="classneforce_1_1http_1_1websocket__session" prot="public">neforce::http::websocket_session</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56e" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+        <name>http_status</name>
+        <qualifiedname>neforce::http::http_status</qualifiedname>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea3c266ecde8a7bb86ba08a9f6f363b92d" prot="public">
+          <name>S1_CONTINUE</name>
+          <initializer>= 100</initializer>
+          <briefdescription>
+<para>100 Continue 服务器收到请求头，客户端可以继续发送请求体 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea89facff6ff11ebcfe69b47acfb4111ee" prot="public">
+          <name>S1_SWITCH_PROTOCOL</name>
+          <initializer>= 101</initializer>
+          <briefdescription>
+<para>101 Switching Protocols 同意切换协议 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56eaa83896e2df473a400c23e956ffc554f6" prot="public">
+          <name>S2_OK</name>
+          <initializer>= 200</initializer>
+          <briefdescription>
+<para>200 OK 请求成功 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea6193bd6cc646c7cf4bfdc1f05279877c" prot="public">
+          <name>S2_CREATED</name>
+          <initializer>= 201</initializer>
+          <briefdescription>
+<para>201 Created 请求成功并创建了新资源 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea8d42f2965c28afe10d1b05b33db0a416" prot="public">
+          <name>S2_NO_CONTENT</name>
+          <initializer>= 204</initializer>
+          <briefdescription>
+<para>204 No Content 请求成功但无内容返回 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea696ce3f29058109bb04f848bf1b1d1a2" prot="public">
+          <name>S2_PARTIAL_CONTENT</name>
+          <initializer>= 206</initializer>
+          <briefdescription>
+<para>206 Partial Content 部分请求成功（范围请求） </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea6ad07ea94d4b2ecf04eddb103449b051" prot="public">
+          <name>S3_MOVED_PERMANENT</name>
+          <initializer>= 301</initializer>
+          <briefdescription>
+<para>301 Moved Permanently 资源已永久迁移到新URL </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56eaab919dcc929ab53a898db9669fcf1e5e" prot="public">
+          <name>S3_FOUND</name>
+          <initializer>= 302</initializer>
+          <briefdescription>
+<para>302 Found 资源临时迁移到新URL </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea16bbec1d94dcdc5c5e5df3d10e23cbc8" prot="public">
+          <name>S3_NO_MODIFIED</name>
+          <initializer>= 304</initializer>
+          <briefdescription>
+<para>304 Not Modified 资源未修改，可使用本地缓存 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56eada2aa008b3b166c842b0b401441626a0" prot="public">
+          <name>S3_TEMPORARY_REDIRECT</name>
+          <initializer>= 307</initializer>
+          <briefdescription>
+<para>307 Temporary Redirect 临时重定向 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56eadaf17fc8235b23fc1e6dc42729bdefe0" prot="public">
+          <name>S3_PERMANENT_REDIRECT</name>
+          <initializer>= 308</initializer>
+          <briefdescription>
+<para>308 Permanent Redirect 永久重定向 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56eacc8baea14488f6d94b0425c8f4927bbe" prot="public">
+          <name>S4_BAD_REQUEST</name>
+          <initializer>= 400</initializer>
+          <briefdescription>
+<para>400 Bad Request 请求格式错误 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea25a638b42981b1cd34824c4041da53fa" prot="public">
+          <name>S4_UNAUTHORIZED</name>
+          <initializer>= 401</initializer>
+          <briefdescription>
+<para>401 Unauthorized 需要身份验证 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea335c1bcef2020f298cd6c113d2a60e15" prot="public">
+          <name>S4_FORBIDDEN</name>
+          <initializer>= 403</initializer>
+          <briefdescription>
+<para>403 Forbidden 服务器拒绝请求 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea6ee8b119267b990c677d97ecb05d5b90" prot="public">
+          <name>S4_NOT_FOUNT</name>
+          <initializer>= 404</initializer>
+          <briefdescription>
+<para>404 Not Found 请求的资源不存在 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea2d527ba076940f69996a2dfd75bccd1d" prot="public">
+          <name>S4_METHOD_NOT_ALLOWED</name>
+          <initializer>= 405</initializer>
+          <briefdescription>
+<para>405 Method Not Allowed 请求方法不允许 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56eae8e7f3def061fba55cfcd97e1b02d7d5" prot="public">
+          <name>S4_REQUEST_TIMEOUT</name>
+          <initializer>= 408</initializer>
+          <briefdescription>
+<para>408 Request Timeout 客户端请求超时 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea3e29df50fdccbe42eb28b739f8d70c85" prot="public">
+          <name>S4_PAYLOAD_LARGE</name>
+          <initializer>= 413</initializer>
+          <briefdescription>
+<para>413 Payload Too Large 请求体过大 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea4ffa395d1b3d8303bf241d49a4595c4c" prot="public">
+          <name>S4_URL_LONG</name>
+          <initializer>= 414</initializer>
+          <briefdescription>
+<para>414 URI Too Long 请求URL过长 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea1f863a4da61fc4d41f6a7912a59901a7" prot="public">
+          <name>S4_MANY_REQUESTS</name>
+          <initializer>= 429</initializer>
+          <briefdescription>
+<para>429 Too Many Requests 请求次数过多 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea09699209b13061ea3397c2eef26129a5" prot="public">
+          <name>S5_INTERNAL_ERROR</name>
+          <initializer>= 500</initializer>
+          <briefdescription>
+<para>500 Internal Server Error 服务器内部错误 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea1b2fcd21f1c6b22773696e08ff8bed76" prot="public">
+          <name>S5_BAD_GATEWAY</name>
+          <initializer>= 502</initializer>
+          <briefdescription>
+<para>502 Bad Gateway 上游服务器响应无效 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea8c71cd08789b108bc683683d44c0acbe" prot="public">
+          <name>S5_SERVICE_UNAVAILABLE</name>
+          <initializer>= 503</initializer>
+          <briefdescription>
+<para>503 Service Unavailable 服务暂时不可用 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea0f68fb990eb482eb482d2ff145a1283f" prot="public">
+          <name>S5_GATEWAY_TIMEOUT</name>
+          <initializer>= 504</initializer>
+          <briefdescription>
+<para>504 Gateway Timeout 上游服务器响应超时 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56ea27d70a90647e862409a82231321cf089" prot="public">
+          <name>S5_HTTP_VERSION_NOT_SUPPORT</name>
+          <initializer>= 505</initializer>
+          <briefdescription>
+<para>505 HTTP Version Not Supported 不支持的HTTP版本 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>HTTP状态码枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>定义了标准的HTTP状态码，按响应类别分组：<itemizedlist>
+<listitem><para>1xx：信息性状态码</para>
+</listitem><listitem><para>2xx：成功状态码</para>
+</listitem><listitem><para>3xx：重定向状态码</para>
+</listitem><listitem><para>4xx：客户端错误状态码</para>
+</listitem><listitem><para>5xx：服务器错误状态码 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" line="197" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" bodystart="197" bodyend="347"/>
+      </memberdef>
+      <member refid="group___web_socket_1gabf74590dcea32a891e0afcc69f6edccf" kind="enum"><name>websocket_status</name></member>
+      <member refid="group___web_socket_1gaa6e6a0ac548957aa24b1aa2c6b55d90c" kind="enum"><name>websocket_opcode</name></member>
+    </sectiondef>
+    <sectiondef kind="typedef">
+      <member refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kind="typedef"><name>http_request</name></member>
+      <member refid="group___h_t_t_p_1ga7430ee17f3275c4a16eec508c2bf7ff3" kind="typedef"><name>http_response</name></member>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="http__constants_8hpp_1a594aca93b6be835d0d58eaaa6d3c3966" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>NEFORCE_API <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref></type>
+        <definition>NEFORCE_API string neforce::http::http_status_message</definition>
+        <argsstring>(http_status status)</argsstring>
+        <name>http_status_message</name>
+        <qualifiedname>neforce::http::http_status_message</qualifiedname>
+        <param>
+          <type><ref refid="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56e" kindref="member">http_status</ref></type>
+          <declname>status</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" line="349" column="20" declfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" declline="349" declcolumn="20"/>
+      </memberdef>
+      <memberdef kind="function" id="http__constants_8hpp_1a18707c04962cda4f6a9a5bbcce6a905d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>NEFORCE_API <ref refid="http__constants_8hpp_1a29061e70490dc2afa6bbf6304e14d56e" kindref="member">http_status</ref></type>
+        <definition>NEFORCE_API http_status neforce::http::http_status_from_code</definition>
+        <argsstring>(uint16_t code) noexcept</argsstring>
+        <name>http_status_from_code</name>
+        <qualifiedname>neforce::http::http_status_from_code</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gabca631c03e4d34e2e77587fc66d05f52" kindref="member">uint16_t</ref></type>
+          <declname>code</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" line="351" column="25" declfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_constants.hpp" declline="351" declcolumn="25"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_client.hpp" line="19" column="1"/>
+  </compounddef>
+</doxygen>

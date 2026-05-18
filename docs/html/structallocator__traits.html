@@ -118,18 +118,18 @@ using&#160;</td><td class="memItemRight"><b>size_type</b> = typename real_size&l
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 静态 Public 成员函数</h2></td></tr>
-<tr class="memitem:a5ebe4a0aa32948630951406b84d18bac" id="r_a5ebe4a0aa32948630951406b84d18bac"><td class="memItemLeft">static NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 pointer&#160;</td><td class="memItemRight"><a class="el" href="#a5ebe4a0aa32948630951406b84d18bac">allocate</a> (Alloc &amp;alloc, <a class="el" href="#a28d25351de0ff4f003c00eb4f1b9ad85">size_type</a> n)</td></tr>
-<tr class="memdesc:a5ebe4a0aa32948630951406b84d18bac"><td class="mdescLeft">&#160;</td><td class="mdescRight">分配内存  <br /></td></tr>
-<tr class="memitem:a8e88b6aa814b1baade140b0e3d9d7055" id="r_a8e88b6aa814b1baade140b0e3d9d7055"><td class="memItemLeft">static NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#a8e88b6aa814b1baade140b0e3d9d7055">deallocate</a> (Alloc &amp;alloc, pointer ptr, <a class="el" href="#a28d25351de0ff4f003c00eb4f1b9ad85">size_type</a> n)</td></tr>
-<tr class="memdesc:a8e88b6aa814b1baade140b0e3d9d7055"><td class="mdescLeft">&#160;</td><td class="mdescRight">释放内存  <br /></td></tr>
-<tr class="memitem:ade3b05fc36d272afd8b20ce7a9524618" id="r_ade3b05fc36d272afd8b20ce7a9524618"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; </td></tr>
-<tr class="memitem:ade3b05fc36d272afd8b20ce7a9524618 template"><td class="memItemLeft">static NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ade3b05fc36d272afd8b20ce7a9524618">construct</a> (Alloc &amp;alloc, T *ptr, Args &amp;&amp;... args) noexcept(noexcept(allocator_traits::__construct_aux(alloc, ptr, 1 <a class="el" href="group___args_forward_functions.html#ga48f94c9d04990c7a695f4fc338eba1f8">forward</a>&lt; Args &gt;(args)...)))</td></tr>
-<tr class="memdesc:ade3b05fc36d272afd8b20ce7a9524618"><td class="mdescLeft">&#160;</td><td class="mdescRight">在已分配内存上构造对象  <br /></td></tr>
-<tr class="memitem:ae2e2058c5770990e678430ddbf9544d7" id="r_ae2e2058c5770990e678430ddbf9544d7"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ae2e2058c5770990e678430ddbf9544d7 template"><td class="memItemLeft">static NEFORCE_CONSTEXPR20 void&#160;</td><td class="memItemRight"><a class="el" href="#ae2e2058c5770990e678430ddbf9544d7">destroy</a> (Alloc &amp;alloc, T *ptr) noexcept(noexcept(allocator_traits::__destroy_aux(alloc, ptr, 0)))</td></tr>
-<tr class="memdesc:ae2e2058c5770990e678430ddbf9544d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">销毁对象  <br /></td></tr>
-<tr class="memitem:a635fe2dfe7e962b7383cc670805ffc24" id="r_a635fe2dfe7e962b7383cc670805ffc24"><td class="memItemLeft">static NEFORCE_CONSTEXPR20 <a class="el" href="#a28d25351de0ff4f003c00eb4f1b9ad85">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a635fe2dfe7e962b7383cc670805ffc24">max_size</a> (const Alloc &amp;alloc) noexcept(noexcept(allocator_traits::__max_size_aux(alloc, 0)))</td></tr>
-<tr class="memdesc:a635fe2dfe7e962b7383cc670805ffc24"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取分配器支持的最大大小  <br /></td></tr>
+<tr class="memitem:a81f970b02ede75444d97d7b4a4582387" id="r_a81f970b02ede75444d97d7b4a4582387"><td class="memItemLeft">static constexpr pointer&#160;</td><td class="memItemRight"><a class="el" href="#a81f970b02ede75444d97d7b4a4582387">allocate</a> (Alloc &amp;alloc, <a class="el" href="#a28d25351de0ff4f003c00eb4f1b9ad85">size_type</a> n)</td></tr>
+<tr class="memdesc:a81f970b02ede75444d97d7b4a4582387"><td class="mdescLeft">&#160;</td><td class="mdescRight">分配内存  <br /></td></tr>
+<tr class="memitem:a00fd215e023c4d56e9362b8dcb3c64e3" id="r_a00fd215e023c4d56e9362b8dcb3c64e3"><td class="memItemLeft">static constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a00fd215e023c4d56e9362b8dcb3c64e3">deallocate</a> (Alloc &amp;alloc, pointer ptr, <a class="el" href="#a28d25351de0ff4f003c00eb4f1b9ad85">size_type</a> n)</td></tr>
+<tr class="memdesc:a00fd215e023c4d56e9362b8dcb3c64e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">释放内存  <br /></td></tr>
+<tr class="memitem:a3aa80bdbcd962e8962a8094a9533038a" id="r_a3aa80bdbcd962e8962a8094a9533038a"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Args&gt; </td></tr>
+<tr class="memitem:a3aa80bdbcd962e8962a8094a9533038a template"><td class="memItemLeft">static constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a3aa80bdbcd962e8962a8094a9533038a">construct</a> (Alloc &amp;alloc, T *ptr, Args &amp;&amp;... args) noexcept(noexcept(allocator_traits::__construct_aux(alloc, ptr, _NEFORCE <a class="el" href="group___args_forward_functions.html#gadbaa877478c57b027d5be364ca1585be">forward</a>&lt; Args &gt;(args)...)))</td></tr>
+<tr class="memdesc:a3aa80bdbcd962e8962a8094a9533038a"><td class="mdescLeft">&#160;</td><td class="mdescRight">在已分配内存上构造对象  <br /></td></tr>
+<tr class="memitem:a1eab99783f7eb0fea3eec78e00047491" id="r_a1eab99783f7eb0fea3eec78e00047491"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:a1eab99783f7eb0fea3eec78e00047491 template"><td class="memItemLeft">static constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a1eab99783f7eb0fea3eec78e00047491">destroy</a> (Alloc &amp;alloc, T *ptr) noexcept(noexcept(allocator_traits::__destroy_aux(alloc, ptr, 0)))</td></tr>
+<tr class="memdesc:a1eab99783f7eb0fea3eec78e00047491"><td class="mdescLeft">&#160;</td><td class="mdescRight">销毁对象  <br /></td></tr>
+<tr class="memitem:aee0e211f1694a35d0f374dc4529b4bae" id="r_aee0e211f1694a35d0f374dc4529b4bae"><td class="memItemLeft">static constexpr <a class="el" href="#a28d25351de0ff4f003c00eb4f1b9ad85">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#aee0e211f1694a35d0f374dc4529b4bae">max_size</a> (const Alloc &amp;alloc) noexcept(noexcept(allocator_traits::__max_size_aux(alloc, 0)))</td></tr>
+<tr class="memdesc:aee0e211f1694a35d0f374dc4529b4bae"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取分配器支持的最大大小  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Alloc&gt;<br />
@@ -207,8 +207,8 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="a5ebe4a0aa32948630951406b84d18bac" name="a5ebe4a0aa32948630951406b84d18bac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ebe4a0aa32948630951406b84d18bac">&#9670;&#160;</a></span>allocate()</h2>
+<a id="a81f970b02ede75444d97d7b4a4582387" name="a81f970b02ede75444d97d7b4a4582387"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81f970b02ede75444d97d7b4a4582387">&#9670;&#160;</a></span>allocate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -219,7 +219,7 @@ template&lt;typename Alloc&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 pointer <a class="el" href="structallocator__traits.html">allocator_traits</a>&lt; Alloc &gt;::allocate </td>
+          <td class="memname">constexpr pointer <a class="el" href="structallocator__traits.html">allocator_traits</a>&lt; Alloc &gt;::allocate </td>
           <td>(</td>
           <td class="paramtype">Alloc &amp;</td>          <td class="paramname"><span class="paramname"><em>alloc</em></span>, </td>
         </tr>
@@ -231,7 +231,7 @@ template&lt;typename Alloc&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -252,8 +252,8 @@ template&lt;typename Alloc&gt; </div>
 
 </div>
 </div>
-<a id="ade3b05fc36d272afd8b20ce7a9524618" name="ade3b05fc36d272afd8b20ce7a9524618"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade3b05fc36d272afd8b20ce7a9524618">&#9670;&#160;</a></span>construct()</h2>
+<a id="a3aa80bdbcd962e8962a8094a9533038a" name="a3aa80bdbcd962e8962a8094a9533038a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3aa80bdbcd962e8962a8094a9533038a">&#9670;&#160;</a></span>construct()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -266,7 +266,7 @@ template&lt;typename T, typename... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 void <a class="el" href="structallocator__traits.html">allocator_traits</a>&lt; Alloc &gt;::construct </td>
+          <td class="memname">constexpr void <a class="el" href="structallocator__traits.html">allocator_traits</a>&lt; Alloc &gt;::construct </td>
           <td>(</td>
           <td class="paramtype">Alloc &amp;</td>          <td class="paramname"><span class="paramname"><em>alloc</em></span>, </td>
         </tr>
@@ -283,7 +283,7 @@ template&lt;typename T, typename... Args&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -311,8 +311,8 @@ template&lt;typename T, typename... Args&gt; </div>
 
 </div>
 </div>
-<a id="a8e88b6aa814b1baade140b0e3d9d7055" name="a8e88b6aa814b1baade140b0e3d9d7055"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8e88b6aa814b1baade140b0e3d9d7055">&#9670;&#160;</a></span>deallocate()</h2>
+<a id="a00fd215e023c4d56e9362b8dcb3c64e3" name="a00fd215e023c4d56e9362b8dcb3c64e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00fd215e023c4d56e9362b8dcb3c64e3">&#9670;&#160;</a></span>deallocate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -323,7 +323,7 @@ template&lt;typename Alloc&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 void <a class="el" href="structallocator__traits.html">allocator_traits</a>&lt; Alloc &gt;::deallocate </td>
+          <td class="memname">constexpr void <a class="el" href="structallocator__traits.html">allocator_traits</a>&lt; Alloc &gt;::deallocate </td>
           <td>(</td>
           <td class="paramtype">Alloc &amp;</td>          <td class="paramname"><span class="paramname"><em>alloc</em></span>, </td>
         </tr>
@@ -340,7 +340,7 @@ template&lt;typename Alloc&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -361,8 +361,8 @@ template&lt;typename Alloc&gt; </div>
 
 </div>
 </div>
-<a id="ae2e2058c5770990e678430ddbf9544d7" name="ae2e2058c5770990e678430ddbf9544d7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae2e2058c5770990e678430ddbf9544d7">&#9670;&#160;</a></span>destroy()</h2>
+<a id="a1eab99783f7eb0fea3eec78e00047491" name="a1eab99783f7eb0fea3eec78e00047491"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1eab99783f7eb0fea3eec78e00047491">&#9670;&#160;</a></span>destroy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -375,7 +375,7 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 void <a class="el" href="structallocator__traits.html">allocator_traits</a>&lt; Alloc &gt;::destroy </td>
+          <td class="memname">constexpr void <a class="el" href="structallocator__traits.html">allocator_traits</a>&lt; Alloc &gt;::destroy </td>
           <td>(</td>
           <td class="paramtype">Alloc &amp;</td>          <td class="paramname"><span class="paramname"><em>alloc</em></span>, </td>
         </tr>
@@ -387,7 +387,7 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -413,8 +413,8 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a id="a635fe2dfe7e962b7383cc670805ffc24" name="a635fe2dfe7e962b7383cc670805ffc24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a635fe2dfe7e962b7383cc670805ffc24">&#9670;&#160;</a></span>max_size()</h2>
+<a id="aee0e211f1694a35d0f374dc4529b4bae" name="aee0e211f1694a35d0f374dc4529b4bae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee0e211f1694a35d0f374dc4529b4bae">&#9670;&#160;</a></span>max_size()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -425,7 +425,7 @@ template&lt;typename Alloc&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">NEFORCE_CONSTEXPR20 <a class="el" href="#a28d25351de0ff4f003c00eb4f1b9ad85">size_type</a> <a class="el" href="structallocator__traits.html">allocator_traits</a>&lt; Alloc &gt;::max_size </td>
+          <td class="memname">constexpr <a class="el" href="#a28d25351de0ff4f003c00eb4f1b9ad85">size_type</a> <a class="el" href="structallocator__traits.html">allocator_traits</a>&lt; Alloc &gt;::max_size </td>
           <td>(</td>
           <td class="paramtype">const Alloc &amp;</td>          <td class="paramname"><span class="paramname"><em>alloc</em></span></td><td>)</td>
           <td></td>
@@ -433,7 +433,7 @@ template&lt;typename Alloc&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

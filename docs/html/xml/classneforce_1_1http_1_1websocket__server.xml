@@ -1,0 +1,402 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1http_1_1websocket__server" kind="class" language="C++" prot="public">
+    <compoundname>neforce::http::websocket_server</compoundname>
+    <includes refid="websocket_8hpp" local="no">websocket.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1http_1_1websocket__server_1a5ee206306dfad4614c541ac19f5e6bcc" prot="public" static="no">
+        <type><ref refid="classneforce_1_1shared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classneforce_1_1http_1_1websocket__session" kindref="compound">websocket_session</ref> &gt;</type>
+        <definition>using neforce::http::websocket_server::session_ptr = shared_ptr&lt;websocket_session&gt;</definition>
+        <argsstring></argsstring>
+        <name>session_ptr</name>
+        <qualifiedname>neforce::http::websocket_server::session_ptr</qualifiedname>
+        <briefdescription>
+<para>会话智能指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="133" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classneforce_1_1http_1_1websocket__server_1a00d071d536523b2ba0472376868f6507" prot="public" static="no">
+        <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void(<ref refid="classneforce_1_1http_1_1websocket__server_1a5ee206306dfad4614c541ac19f5e6bcc" kindref="member">session_ptr</ref>)&gt;</type>
+        <definition>using neforce::http::websocket_server::session_handler = function&lt;void(session_ptr)&gt;</definition>
+        <argsstring></argsstring>
+        <name>session_handler</name>
+        <qualifiedname>neforce::http::websocket_server::session_handler</qualifiedname>
+        <briefdescription>
+<para>会话处理器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="134" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="134" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1http_1_1websocket__server_1a41e3a7adeb5ba65c59367be924c66e7c" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1unordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref>, <ref refid="classneforce_1_1http_1_1websocket__server_1a00d071d536523b2ba0472376868f6507" kindref="member">session_handler</ref> &gt;</type>
+        <definition>unordered_map&lt;string, session_handler&gt; neforce::http::websocket_server::route_handlers_</definition>
+        <argsstring></argsstring>
+        <name>route_handlers_</name>
+        <qualifiedname>neforce::http::websocket_server::route_handlers_</qualifiedname>
+        <briefdescription>
+<para>路由处理器映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="137" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1websocket__server_1a496a6c8ce1ff7f42afb642a4c2c49b30" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1vector" kindref="compound">vector</ref>&lt; <ref refid="classneforce_1_1http_1_1websocket__server_1a5ee206306dfad4614c541ac19f5e6bcc" kindref="member">session_ptr</ref> &gt;</type>
+        <definition>vector&lt;session_ptr&gt; neforce::http::websocket_server::sessions_</definition>
+        <argsstring></argsstring>
+        <name>sessions_</name>
+        <qualifiedname>neforce::http::websocket_server::sessions_</qualifiedname>
+        <briefdescription>
+<para>所有活动会话 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="138" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1http_1_1websocket__server_1a1a76d0c0bf78f33ba3302e12c255a933" prot="private" static="no" mutable="yes">
+        <type><ref refid="classneforce_1_1mutex" kindref="compound">mutex</ref></type>
+        <definition>mutex neforce::http::websocket_server::sessions_mutex_</definition>
+        <argsstring></argsstring>
+        <name>sessions_mutex_</name>
+        <qualifiedname>neforce::http::websocket_server::sessions_mutex_</qualifiedname>
+        <briefdescription>
+<para>会话列表互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="139" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="139" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__server_1aa442ba299ace0226e023e42246ca3394" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::websocket_server::websocket_server</definition>
+        <argsstring>()=default</argsstring>
+        <name>websocket_server</name>
+        <qualifiedname>neforce::http::websocket_server::websocket_server</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="142" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__server_1a7c7b6cea8799131e154a4214c8a80816" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::websocket_server::~websocket_server</definition>
+        <argsstring>()=default</argsstring>
+        <name>~websocket_server</name>
+        <qualifiedname>neforce::http::websocket_server::~websocket_server</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="143" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__server_1a47682682aebf9d3435145ecb552153b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::websocket_server::websocket_server</definition>
+        <argsstring>(const websocket_server &amp;)=delete</argsstring>
+        <name>websocket_server</name>
+        <qualifiedname>neforce::http::websocket_server::websocket_server</qualifiedname>
+        <param>
+          <type>const websocket_server &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="145" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__server_1a3399bfa47c9e754a64c1d28180e39daa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>websocket_server &amp;</type>
+        <definition>websocket_server &amp; neforce::http::websocket_server::operator=</definition>
+        <argsstring>(const websocket_server &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::http::websocket_server::operator=</qualifiedname>
+        <param>
+          <type>const websocket_server &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="146" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__server_1a31eabace0280e8e6f55c7c62e09faf97" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::http::websocket_server::websocket_server</definition>
+        <argsstring>(websocket_server &amp;&amp;) noexcept=delete</argsstring>
+        <name>websocket_server</name>
+        <qualifiedname>neforce::http::websocket_server::websocket_server</qualifiedname>
+        <param>
+          <type>websocket_server &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="148" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__server_1ae51b66e632e558824b2e30c89d4b7f12" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>websocket_server &amp;</type>
+        <definition>websocket_server &amp; neforce::http::websocket_server::operator=</definition>
+        <argsstring>(websocket_server &amp;&amp;) noexcept=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::http::websocket_server::operator=</qualifiedname>
+        <param>
+          <type>websocket_server &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="149" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__server_1ac4a82e5b67c27bd1bcb21395142365d2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::websocket_server::route</definition>
+        <argsstring>(const string &amp;path, session_handler handler)</argsstring>
+        <name>route</name>
+        <qualifiedname>neforce::http::websocket_server::route</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1http_1_1websocket__server_1a00d071d536523b2ba0472376868f6507" kindref="member">session_handler</ref></type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>注册WebSocket路由 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>路由路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>会话处理器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="156" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="156" bodyend="156"/>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+        <references refid="classneforce_1_1http_1_1websocket__server_1ac4a82e5b67c27bd1bcb21395142365d2" compoundref="websocket_8hpp" startline="156" endline="156">route</references>
+        <referencedby refid="classneforce_1_1http_1_1websocket__server_1ac4a82e5b67c27bd1bcb21395142365d2" compoundref="websocket_8hpp" startline="156" endline="156">route</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__server_1a0fac1c23e244eba53566812b05f5160f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::http::websocket_server::handle_upgrade</definition>
+        <argsstring>(const http_request &amp;request, unique_ptr&lt; tcp_socket &gt; sock)</argsstring>
+        <name>handle_upgrade</name>
+        <qualifiedname>neforce::http::websocket_server::handle_upgrade</qualifiedname>
+        <param>
+          <type>const <ref refid="group___h_t_t_p_1gaf5206366b9367d7f118365ad62b26ff5" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="classneforce_1_1unique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classneforce_1_1tcp__socket" kindref="compound">tcp_socket</ref> &gt;</type>
+          <declname>sock</declname>
+        </param>
+        <briefdescription>
+<para>处理WebSocket升级请求 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP升级请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sock</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已建立的TCP/SSL socket </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>成功创建会话返回true，未找到对应路由返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="164" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__server_1a7f5490f1a06a8e92d35e86f51f7601f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::websocket_server::remove_session</definition>
+        <argsstring>(const session_ptr &amp;session)</argsstring>
+        <name>remove_session</name>
+        <qualifiedname>neforce::http::websocket_server::remove_session</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1http_1_1websocket__server_1a5ee206306dfad4614c541ac19f5e6bcc" kindref="member">session_ptr</ref> &amp;</type>
+          <declname>session</declname>
+        </param>
+        <briefdescription>
+<para>移除会话 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>session</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移除的会话 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="170" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__server_1a79e68333eb0e7f340799481024abaab1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::http::websocket_server::broadcast</definition>
+        <argsstring>(const string &amp;data, websocket_opcode opcode=websocket_opcode::TEXT)</argsstring>
+        <name>broadcast</name>
+        <qualifiedname>neforce::http::websocket_server::broadcast</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga2c7973e279b318f9dca5bbf87ca7705f" kindref="member">string</ref> &amp;</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___web_socket_1gaa6e6a0ac548957aa24b1aa2c6b55d90c" kindref="member">websocket_opcode</ref></type>
+          <declname>opcode</declname>
+          <defval><ref refid="group___web_socket_1ggaa6e6a0ac548957aa24b1aa2c6b55d90ca61a96ffcb251bb9bf0abf8fec19d0ea8" kindref="member">websocket_opcode::TEXT</ref></defval>
+        </param>
+        <briefdescription>
+<para>向所有会话广播消息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>消息数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>opcode</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>操作码（默认TEXT） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="177" column="10"/>
+        <references refid="group___type_erasure_functions_1ga3b4836c7ce514573ca8d622d4a71af1f" compoundref="type__erase_8hpp" startline="395" endline="397">neforce::data</references>
+        <references refid="group___web_socket_1ggaa6e6a0ac548957aa24b1aa2c6b55d90ca61a96ffcb251bb9bf0abf8fec19d0ea8" compoundref="websocket_8hpp" startline="79">TEXT</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1http_1_1websocket__server_1a51f4031f6258e833a0c67baec5b3aa76" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::http::websocket_server::session_count</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>session_count</name>
+        <qualifiedname>neforce::http::websocket_server::session_count</qualifiedname>
+        <briefdescription>
+<para>获取活动会话数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>会话数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="183" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="183" bodyend="186"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>WebSocket服务器类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理WebSocket路由和会话，处理协议升级请求。</para>
+<para>使用示例： <programlisting><codeline><highlight class="normal">websocket_server<sp/>ws_server;</highlight></codeline>
+<codeline><highlight class="normal">ws_server.route(</highlight><highlight class="stringliteral">&quot;/chat&quot;</highlight><highlight class="normal">,<sp/>[](<ref refid="classneforce_1_1http_1_1websocket__server_1a5ee206306dfad4614c541ac19f5e6bcc" kindref="member">websocket_server::session_ptr</ref><sp/>session)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>session-&gt;set_message_handler([](</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>msg,<sp/><ref refid="group___web_socket_1gaa6e6a0ac548957aa24b1aa2c6b55d90c" kindref="member">websocket_opcode</ref><sp/>opcode)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1ga9c4e1ac58957b1892c3091006222f66b" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;Received:<sp/>&quot;</highlight><highlight class="normal">,<sp/>msg);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>session-&gt;send(</highlight><highlight class="stringliteral">&quot;Echo:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>msg);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>在HTTP服务器中处理升级请求</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(request.method<sp/>==<sp/><ref refid="structneforce_1_1http_1_1http__method_1aaf85f2c258aaacaab7ca82a9ef103919" kindref="member">http_method::GET</ref>()<sp/>&amp;&amp;<sp/>request.header(</highlight><highlight class="stringliteral">&quot;Upgrade&quot;</highlight><highlight class="normal">)<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;websocket&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ws_server.handle_upgrade(request,<sp/><ref refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" kindref="member">move</ref>(socket)))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;<sp/></highlight><highlight class="comment">//<sp/>连接已升级为WebSocket</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" line="131" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/websocket.hpp" bodystart="131" bodyend="187"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1http_1_1websocket__server_1a79e68333eb0e7f340799481024abaab1" prot="public" virt="non-virtual"><scope>neforce::http::websocket_server</scope><name>broadcast</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__server_1a0fac1c23e244eba53566812b05f5160f" prot="public" virt="non-virtual"><scope>neforce::http::websocket_server</scope><name>handle_upgrade</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__server_1a3399bfa47c9e754a64c1d28180e39daa" prot="public" virt="non-virtual"><scope>neforce::http::websocket_server</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__server_1ae51b66e632e558824b2e30c89d4b7f12" prot="public" virt="non-virtual"><scope>neforce::http::websocket_server</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__server_1a7f5490f1a06a8e92d35e86f51f7601f3" prot="public" virt="non-virtual"><scope>neforce::http::websocket_server</scope><name>remove_session</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__server_1ac4a82e5b67c27bd1bcb21395142365d2" prot="public" virt="non-virtual"><scope>neforce::http::websocket_server</scope><name>route</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__server_1a41e3a7adeb5ba65c59367be924c66e7c" prot="private" virt="non-virtual"><scope>neforce::http::websocket_server</scope><name>route_handlers_</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__server_1a51f4031f6258e833a0c67baec5b3aa76" prot="public" virt="non-virtual"><scope>neforce::http::websocket_server</scope><name>session_count</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__server_1a00d071d536523b2ba0472376868f6507" prot="public" virt="non-virtual"><scope>neforce::http::websocket_server</scope><name>session_handler</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__server_1a5ee206306dfad4614c541ac19f5e6bcc" prot="public" virt="non-virtual"><scope>neforce::http::websocket_server</scope><name>session_ptr</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__server_1a496a6c8ce1ff7f42afb642a4c2c49b30" prot="private" virt="non-virtual"><scope>neforce::http::websocket_server</scope><name>sessions_</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__server_1a1a76d0c0bf78f33ba3302e12c255a933" prot="private" virt="non-virtual"><scope>neforce::http::websocket_server</scope><name>sessions_mutex_</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__server_1aa442ba299ace0226e023e42246ca3394" prot="public" virt="non-virtual"><scope>neforce::http::websocket_server</scope><name>websocket_server</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__server_1a47682682aebf9d3435145ecb552153b9" prot="public" virt="non-virtual"><scope>neforce::http::websocket_server</scope><name>websocket_server</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__server_1a31eabace0280e8e6f55c7c62e09faf97" prot="public" virt="non-virtual"><scope>neforce::http::websocket_server</scope><name>websocket_server</name></member>
+      <member refid="classneforce_1_1http_1_1websocket__server_1a7c7b6cea8799131e154a4214c8a80816" prot="public" virt="non-virtual"><scope>neforce::http::websocket_server</scope><name>~websocket_server</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

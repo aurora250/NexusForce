@@ -1,15 +1,16 @@
 var group___futex =
 [
     [ "atomic_futex&lt; WaiterBit &gt;", "classatomic__futex.html", [
-      [ "atomic_futex", "classatomic__futex.html#a50cfc12a191471e9630e01f530091686", null ],
-      [ "load", "classatomic__futex.html#acce7dac03c1cda97f0395930f73afaba", null ],
-      [ "load_when_equal", "classatomic__futex.html#aaa9f1b23aec187e2568d886076d7249c", null ],
-      [ "load_when_equal_for", "classatomic__futex.html#a81d70ce4efcfa781ee605bd938c8220b", null ],
-      [ "load_when_equal_until", "classatomic__futex.html#ac33c79141a3d638c6e825b823f07063d", null ],
-      [ "load_when_equal_until", "classatomic__futex.html#afc4cd5b5e4aa13bfd9e969793c132f9a", null ],
-      [ "load_when_equal_until", "classatomic__futex.html#a07ae2b2d3cd0c7e0261434cbbceb19b1", null ],
-      [ "load_when_not_equal", "classatomic__futex.html#ad52e9d4567b50bec154abc58b4218874", null ],
-      [ "store_notify_all", "classatomic__futex.html#a5b0321d662a8193b86eda2ababc45e10", null ]
+      [ "atomic_futex", "classatomic__futex.html#aa597317ee5605afe698a9d7098500fbf", null ],
+      [ "compare_exchange_strong", "classatomic__futex.html#ae9df7c7321943c5f241114ddfd363000", null ],
+      [ "load", "classatomic__futex.html#a079f25b232c776363dda8f7889d498dd", null ],
+      [ "load_when_equal", "classatomic__futex.html#a5b4768a52a6a17fd2e23b04362b12704", null ],
+      [ "load_when_equal_for", "classatomic__futex.html#aa85254e78d5dd5dbb2984502bade0f65", null ],
+      [ "load_when_equal_until", "classatomic__futex.html#aad3626e00b9ec8eca67c946a549d6008", null ],
+      [ "load_when_equal_until", "classatomic__futex.html#a14d87f8c91fabb3f4b36c0e8f7d52cbc", null ],
+      [ "load_when_equal_until", "classatomic__futex.html#a7f9e32e9519eef6fd0bfddc785e71ce2", null ],
+      [ "load_when_not_equal", "classatomic__futex.html#a9e4ba2f93e5aca965a78596ae2cec20f", null ],
+      [ "store_notify_all", "classatomic__futex.html#a6eeeb0d8e8305a6e55da92ac8dfa76f7", null ]
     ] ],
     [ "platform_wait_t", "group___futex.html#ga4ae42858521c6114207203888569da88", null ],
     [ "futex_wait_flags", "group___futex.html#gab7057283120da679629ce8fb1238219b", [
@@ -32,11 +33,11 @@ var group___futex =
       [ "futex_wait_flags::wake_bitset_private", "group___futex.html#ggab7057283120da679629ce8fb1238219ba4744eac77e3eaa5a8c7d4d9cd30f2c49", null ],
       [ "futex_wait_flags::bitset_match_any", "group___futex.html#ggab7057283120da679629ce8fb1238219ba28fb4c528a4d49af012e73bc2807c4a8", null ]
     ] ],
-    [ "futex_notify", "group___futex.html#ga05f2a678e4c7a16ecc3ba93dba798e19", null ],
-    [ "futex_requeue", "group___futex.html#gab69b11c4c6a89ae5908e07b57d892833", null ],
-    [ "futex_wait", "group___futex.html#ga26f36b601d9ad2d293b3345e1eaf5306", null ],
-    [ "futex_wait_requeue_pi", "group___futex.html#ga563dcc9c60dd5a3e7006e4227b0221ab", null ],
+    [ "futex_notify", "group___futex.html#ga84832c8b1f52bd90a456091e015122ef", null ],
+    [ "futex_requeue", "group___futex.html#ga0770f7dec16536eaaac354bafae908e7", null ],
+    [ "futex_wait", "group___futex.html#ga3425390f7804270ade276e1a91ae99b1", null ],
+    [ "futex_wait_requeue_pi", "group___futex.html#ga51c85c94855ccbbe8742e1a4ada491df", null ],
     [ "futex_wait_until", "group___futex.html#ga7045b616751b8d5fec67f1a27f9c60e4", null ],
-    [ "futex_wait_until", "group___futex.html#ga48d2abd213cbed922449fad6f05638ed", null ],
-    [ "futex_wake_op", "group___futex.html#ga7122cfebb7d17bf73cee0472ae48ddec", null ]
+    [ "futex_wait_until", "group___futex.html#gaff4bc449a315d263ca628c8e203ed771", null ],
+    [ "futex_wake_op", "group___futex.html#ga448fbb4e4417647ae03bac363ea99c83", null ]
 ];

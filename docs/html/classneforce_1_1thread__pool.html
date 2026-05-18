@@ -1,0 +1,951 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::thread_pool类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1thread__pool.html','','classneforce_1_1thread__pool-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::thread_pool类 参考<div class="ingroups"><a class="el" href="group___async_components.html">异步组件</a> &raquo; <a class="el" href="group___thread_pool.html">线程池</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>线程池类  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:periodic_5Ftask_5Fstate" id="r_periodic_5Ftask_5Fstate"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1thread__pool_1_1periodic__task__state.html">periodic_task_state</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">周期性任务状态  <a href="structneforce_1_1thread__pool_1_1periodic__task__state.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:pool_5Fstatistics" id="r_pool_5Fstatistics"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structneforce_1_1thread__pool_1_1pool__statistics.html">pool_statistics</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程池统计信息  <a href="structneforce_1_1thread__pool_1_1pool__statistics.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a3a8a5b36a24eaba5da3ed964b2730aef" id="r_a3a8a5b36a24eaba5da3ed964b2730aef"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a3a8a5b36a24eaba5da3ed964b2730aef">pool_mode</a> : uint8_t { <a class="el" href="#a3a8a5b36a24eaba5da3ed964b2730aefacec315e3d0975e5cc2811d5d8725f149">fixed</a>
+, <a class="el" href="#a3a8a5b36a24eaba5da3ed964b2730aefa1fb1a060534164a18a99494122825190">cached</a>
+ }</td></tr>
+<tr class="memdesc:a3a8a5b36a24eaba5da3ed964b2730aef"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程池运行模式  <a href="#a3a8a5b36a24eaba5da3ed964b2730aef">更多...</a><br /></td></tr>
+<tr class="memitem:a312122d2fbfddf3fe60bd095d5214ded" id="r_a312122d2fbfddf3fe60bd095d5214ded"><td class="memItemLeft"><a id="a312122d2fbfddf3fe60bd095d5214ded" name="a312122d2fbfddf3fe60bd095d5214ded"></a>
+using&#160;</td><td class="memItemRight"><b>steal_strategy</b> = <a class="el" href="classneforce_1_1local__queue.html#afe459baddb3762b3c5614a42f609aa5c">local_queue::steal_strategy</a></td></tr>
+<tr class="memdesc:a312122d2fbfddf3fe60bd095d5214ded"><td class="mdescLeft">&#160;</td><td class="mdescRight">窃取策略类型别名 <br /></td></tr>
+<tr class="memitem:a392ca392802bd73f59cea1f4744bfffd" id="r_a392ca392802bd73f59cea1f4744bfffd"><td class="memItemLeft"><a id="a392ca392802bd73f59cea1f4744bfffd" name="a392ca392802bd73f59cea1f4744bfffd"></a>
+using&#160;</td><td class="memItemRight"><b>id_type</b> = <a class="el" href="group___core_types.html#ga4d7d3599901e73c7d6bf65a66e80b534">uint32_t</a></td></tr>
+<tr class="memdesc:a392ca392802bd73f59cea1f4744bfffd"><td class="mdescLeft">&#160;</td><td class="mdescRight">线程ID类型别名 <br /></td></tr>
+<tr class="memitem:a75d40a5a7990975876ce03d2d443a5bb" id="r_a75d40a5a7990975876ce03d2d443a5bb"><td class="memItemLeft"><a id="a75d40a5a7990975876ce03d2d443a5bb" name="a75d40a5a7990975876ce03d2d443a5bb"></a>
+using&#160;</td><td class="memItemRight"><b>periodic_token</b> = <a class="el" href="classneforce_1_1shared__ptr.html">shared_ptr</a>&lt;<a class="el" href="structneforce_1_1thread__pool_1_1periodic__task__state.html">periodic_task_state</a>&gt;</td></tr>
+<tr class="memdesc:a75d40a5a7990975876ce03d2d443a5bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">周期性任务令牌 <br /></td></tr>
+<tr class="memitem:a00d494b5d7ab26495ccd38dc3120ef47" id="r_a00d494b5d7ab26495ccd38dc3120ef47"><td class="memItemLeft"><a id="a00d494b5d7ab26495ccd38dc3120ef47" name="a00d494b5d7ab26495ccd38dc3120ef47"></a>
+using&#160;</td><td class="memItemRight"><b>priority_type</b> = task_info::priority_type</td></tr>
+<tr class="memdesc:a00d494b5d7ab26495ccd38dc3120ef47"><td class="mdescLeft">&#160;</td><td class="mdescRight">优先级类型别名 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a312e1a7fd2fe58bbab272e524cb12022" id="r_a312e1a7fd2fe58bbab272e524cb12022"><td class="memItemLeft"><a id="a312e1a7fd2fe58bbab272e524cb12022" name="a312e1a7fd2fe58bbab272e524cb12022"></a>
+&#160;</td><td class="memItemRight"><b>thread_pool</b> ()</td></tr>
+<tr class="memdesc:a312e1a7fd2fe58bbab272e524cb12022"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数 <br /></td></tr>
+<tr class="memitem:a73c2591891cd0554656ed73b17878dcb" id="r_a73c2591891cd0554656ed73b17878dcb"><td class="memItemLeft"><a id="a73c2591891cd0554656ed73b17878dcb" name="a73c2591891cd0554656ed73b17878dcb"></a>
+&#160;</td><td class="memItemRight"><b>~thread_pool</b> ()</td></tr>
+<tr class="memdesc:a73c2591891cd0554656ed73b17878dcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:a4cf077d1cb342abee27f84c8122ee4e8" id="r_a4cf077d1cb342abee27f84c8122ee4e8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a4cf077d1cb342abee27f84c8122ee4e8">set_mode</a> (<a class="el" href="#a3a8a5b36a24eaba5da3ed964b2730aef">pool_mode</a> <a class="el" href="#a2f121eac4e93944cbd5ea1e5c53a7646">mode</a>) noexcept</td></tr>
+<tr class="memdesc:a4cf077d1cb342abee27f84c8122ee4e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置线程池模式  <br /></td></tr>
+<tr class="memitem:a7c7a6349d111d835a7f70420fa8364a3" id="r_a7c7a6349d111d835a7f70420fa8364a3"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a7c7a6349d111d835a7f70420fa8364a3">set_steal_mode</a> (<a class="el" href="classneforce_1_1local__queue.html#afe459baddb3762b3c5614a42f609aa5c">steal_strategy</a> strategy, <a class="el" href="group___core_types.html#ga4d7d3599901e73c7d6bf65a66e80b534">uint32_t</a> steal_batch=4) noexcept</td></tr>
+<tr class="memdesc:a7c7a6349d111d835a7f70420fa8364a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置窃取策略  <br /></td></tr>
+<tr class="memitem:a89bde7b7fce55fd83721dd12dffd117f" id="r_a89bde7b7fce55fd83721dd12dffd117f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a89bde7b7fce55fd83721dd12dffd117f">set_task_threshhold</a> (<a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> threshhold) noexcept</td></tr>
+<tr class="memdesc:a89bde7b7fce55fd83721dd12dffd117f"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置任务队列阈值  <br /></td></tr>
+<tr class="memitem:aa71babafbfd6fa8bd458f233d5deb0f5" id="r_aa71babafbfd6fa8bd458f233d5deb0f5"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa71babafbfd6fa8bd458f233d5deb0f5">set_thread_threshhold</a> (<a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> threshhold) noexcept</td></tr>
+<tr class="memdesc:aa71babafbfd6fa8bd458f233d5deb0f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置线程数阈值  <br /></td></tr>
+<tr class="memitem:ae481bc1b668cc251a8eb0b62815577ca" id="r_ae481bc1b668cc251a8eb0b62815577ca"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ae481bc1b668cc251a8eb0b62815577ca">running</a> () const noexcept</td></tr>
+<tr class="memdesc:ae481bc1b668cc251a8eb0b62815577ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查线程池是否正在运行  <br /></td></tr>
+<tr class="memitem:a2f121eac4e93944cbd5ea1e5c53a7646" id="r_a2f121eac4e93944cbd5ea1e5c53a7646"><td class="memItemLeft"><a class="el" href="#a3a8a5b36a24eaba5da3ed964b2730aef">pool_mode</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2f121eac4e93944cbd5ea1e5c53a7646">mode</a> () const noexcept</td></tr>
+<tr class="memdesc:a2f121eac4e93944cbd5ea1e5c53a7646"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取线程池模式  <br /></td></tr>
+<tr class="memitem:af161059b96d92ef28f4ff7a906c6252a" id="r_af161059b96d92ef28f4ff7a906c6252a"><td class="memItemLeft"><a class="el" href="structneforce_1_1thread__pool_1_1pool__statistics.html">pool_statistics</a>&#160;</td><td class="memItemRight"><a class="el" href="#af161059b96d92ef28f4ff7a906c6252a">statistics</a> () const</td></tr>
+<tr class="memdesc:af161059b96d92ef28f4ff7a906c6252a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取线程池统计信息  <br /></td></tr>
+<tr class="memitem:aedb99ec1bd6102eb4d6a3588e053b431" id="r_aedb99ec1bd6102eb4d6a3588e053b431"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aedb99ec1bd6102eb4d6a3588e053b431">start</a> (<a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a> init_thread_size=3)</td></tr>
+<tr class="memdesc:aedb99ec1bd6102eb4d6a3588e053b431"><td class="mdescLeft">&#160;</td><td class="mdescRight">启动线程池  <br /></td></tr>
+<tr class="memitem:a50cfc595775ccccf3e766e98990ae9d4" id="r_a50cfc595775ccccf3e766e98990ae9d4"><td class="memItemLeft"><a class="el" href="structneforce_1_1thread__pool_1_1pool__statistics.html">pool_statistics</a>&#160;</td><td class="memItemRight"><a class="el" href="#a50cfc595775ccccf3e766e98990ae9d4">stop</a> ()</td></tr>
+<tr class="memdesc:a50cfc595775ccccf3e766e98990ae9d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">停止线程池  <br /></td></tr>
+<tr class="memitem:aa15a9833652fb506cb01f8e07113838b" id="r_aa15a9833652fb506cb01f8e07113838b"><td class="memTemplParams" colspan="2">template&lt;typename Func, typename... Args&gt; </td></tr>
+<tr class="memitem:aa15a9833652fb506cb01f8e07113838b template"><td class="memItemLeft"><a class="el" href="structneforce_1_1submit__result.html">submit_result</a>&lt; <a class="el" href="group___invoke_function.html#ga2d367d0c6ab0c690c67d0091d8e83c3b">invoke_result_t</a>&lt; Func, Args... &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aa15a9833652fb506cb01f8e07113838b">submit_task</a> (<a class="el" href="#a00d494b5d7ab26495ccd38dc3120ef47">priority_type</a> priority, Func &amp;&amp;func, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:aa15a9833652fb506cb01f8e07113838b"><td class="mdescLeft">&#160;</td><td class="mdescRight">提交任务  <br /></td></tr>
+<tr class="memitem:a1b2b9eae752b819105cc42a3bda89c21" id="r_a1b2b9eae752b819105cc42a3bda89c21"><td class="memTemplParams" colspan="2">template&lt;typename Func, typename... Args&gt; </td></tr>
+<tr class="memitem:a1b2b9eae752b819105cc42a3bda89c21 template"><td class="memItemLeft"><a class="el" href="structneforce_1_1submit__result.html">submit_result</a>&lt; <a class="el" href="group___invoke_function.html#ga2d367d0c6ab0c690c67d0091d8e83c3b">invoke_result_t</a>&lt; Func, Args... &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a1b2b9eae752b819105cc42a3bda89c21">submit_task</a> (Func &amp;&amp;func, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a1b2b9eae752b819105cc42a3bda89c21"><td class="mdescLeft">&#160;</td><td class="mdescRight">提交任务（使用默认优先级0）  <br /></td></tr>
+<tr class="memitem:a2ee142b23fd7fe7407647fc9cb85517c" id="r_a2ee142b23fd7fe7407647fc9cb85517c"><td class="memTemplParams" colspan="2">template&lt;typename Func, typename... Args&gt; </td></tr>
+<tr class="memitem:a2ee142b23fd7fe7407647fc9cb85517c template"><td class="memItemLeft"><a class="el" href="structneforce_1_1submit__result.html">submit_result</a>&lt; <a class="el" href="group___invoke_function.html#ga2d367d0c6ab0c690c67d0091d8e83c3b">invoke_result_t</a>&lt; Func, Args... &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a2ee142b23fd7fe7407647fc9cb85517c">submit_after</a> (<a class="el" href="group___core_types.html#gaeb2e937665218c4098c40d49b13533af">int64_t</a> delay_ms, <a class="el" href="#a00d494b5d7ab26495ccd38dc3120ef47">priority_type</a> priority, Func &amp;&amp;func, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a2ee142b23fd7fe7407647fc9cb85517c"><td class="mdescLeft">&#160;</td><td class="mdescRight">提交延迟任务  <br /></td></tr>
+<tr class="memitem:afbe2493d5c65f7dadd5ade8dedd179c9" id="r_afbe2493d5c65f7dadd5ade8dedd179c9"><td class="memTemplParams" colspan="2">template&lt;typename Func, typename... Args&gt; </td></tr>
+<tr class="memitem:afbe2493d5c65f7dadd5ade8dedd179c9 template"><td class="memItemLeft"><a class="el" href="structneforce_1_1submit__result.html">submit_result</a>&lt; <a class="el" href="group___invoke_function.html#ga2d367d0c6ab0c690c67d0091d8e83c3b">invoke_result_t</a>&lt; Func, Args... &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#afbe2493d5c65f7dadd5ade8dedd179c9">submit_after</a> (<a class="el" href="group___core_types.html#gaeb2e937665218c4098c40d49b13533af">int64_t</a> delay_ms, Func &amp;&amp;func, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:afbe2493d5c65f7dadd5ade8dedd179c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">提交延迟任务（使用默认优先级0）  <br /></td></tr>
+<tr class="memitem:a81e010fc43be11e8d51eb665fbbdb2d4" id="r_a81e010fc43be11e8d51eb665fbbdb2d4"><td class="memTemplParams" colspan="2">template&lt;typename Func, typename... Args&gt; </td></tr>
+<tr class="memitem:a81e010fc43be11e8d51eb665fbbdb2d4 template"><td class="memItemLeft"><a class="el" href="#a75d40a5a7990975876ce03d2d443a5bb">periodic_token</a>&#160;</td><td class="memItemRight"><a class="el" href="#a81e010fc43be11e8d51eb665fbbdb2d4">submit_every</a> (<a class="el" href="group___core_types.html#gaeb2e937665218c4098c40d49b13533af">int64_t</a> interval_ms, <a class="el" href="#a00d494b5d7ab26495ccd38dc3120ef47">priority_type</a> priority, Func &amp;&amp;func, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a81e010fc43be11e8d51eb665fbbdb2d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">提交周期性任务  <br /></td></tr>
+<tr class="memitem:a316fe5971cf12b56091a85fa45b7bf0f" id="r_a316fe5971cf12b56091a85fa45b7bf0f"><td class="memTemplParams" colspan="2">template&lt;typename Func, typename... Args&gt; </td></tr>
+<tr class="memitem:a316fe5971cf12b56091a85fa45b7bf0f template"><td class="memItemLeft"><a class="el" href="#a75d40a5a7990975876ce03d2d443a5bb">periodic_token</a>&#160;</td><td class="memItemRight"><a class="el" href="#a316fe5971cf12b56091a85fa45b7bf0f">submit_every</a> (<a class="el" href="group___core_types.html#gaeb2e937665218c4098c40d49b13533af">int64_t</a> interval_ms, Func &amp;&amp;func, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a316fe5971cf12b56091a85fa45b7bf0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">提交周期性任务（使用默认优先级0）  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:acdf3390238c2ca4f4f2a7c3e5966edb5" id="r_acdf3390238c2ca4f4f2a7c3e5966edb5"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#acdf3390238c2ca4f4f2a7c3e5966edb5">cancel_periodic_task</a> (const <a class="el" href="#a75d40a5a7990975876ce03d2d443a5bb">periodic_token</a> &amp;token)</td></tr>
+<tr class="memdesc:acdf3390238c2ca4f4f2a7c3e5966edb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">取消周期性任务  <br /></td></tr>
+<tr class="memitem:a6a776b1226de5813c9d2c0239c94a761" id="r_a6a776b1226de5813c9d2c0239c94a761"><td class="memTemplParams" colspan="2">template&lt;typename... Types&gt; </td></tr>
+<tr class="memitem:a6a776b1226de5813c9d2c0239c94a761 template"><td class="memItemLeft">static tuple&lt; <a class="el" href="group___async.html#gae41bda7414d7dca6209c6c2c024871eb">future_result_t</a>&lt; Types &gt;... &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a6a776b1226de5813c9d2c0239c94a761">wait</a> (<a class="el" href="classneforce_1_1future.html">future</a>&lt; Types &gt; &amp;&amp;... futures)</td></tr>
+<tr class="memdesc:a6a776b1226de5813c9d2c0239c94a761"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待多个future完成  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+静态 Public 属性</h2></td></tr>
+<tr class="memitem:ada6f032c4d92f4464dba47810aca7283" id="r_ada6f032c4d92f4464dba47810aca7283"><td class="memItemLeft"><a id="ada6f032c4d92f4464dba47810aca7283" name="ada6f032c4d92f4464dba47810aca7283"></a>
+static constexpr <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><b>task_max_threshhold</b> = <a class="el" href="classneforce_1_1numeric__traits.html">numeric_traits</a>&lt;<a class="el" href="group___core_types.html#gaa0af497ed9ed410d4c911b409653515a">int32_t</a>&gt;<a class="el" href="group___compare_algorithms.html#gacc7ec6cd2134fb437b992f481b7e5057">::max</a>()</td></tr>
+<tr class="memdesc:ada6f032c4d92f4464dba47810aca7283"><td class="mdescLeft">&#160;</td><td class="mdescRight">最大任务队列阈值 <br /></td></tr>
+<tr class="memitem:a2fc2309785c39e9f5d201b2f30619b51" id="r_a2fc2309785c39e9f5d201b2f30619b51"><td class="memItemLeft"><a id="a2fc2309785c39e9f5d201b2f30619b51" name="a2fc2309785c39e9f5d201b2f30619b51"></a>
+static constexpr <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a>&#160;</td><td class="memItemRight"><b>max_idle_seconds</b> = 60</td></tr>
+<tr class="memdesc:a2fc2309785c39e9f5d201b2f30619b51"><td class="mdescLeft">&#160;</td><td class="mdescRight">最大空闲秒数 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>线程池类 </p>
+<p>高性能线程池实现，支持：</p><ul>
+<li>固定模式和缓存模式</li>
+<li>任务优先级调度</li>
+<li>工作窃取算法</li>
+<li>延迟任务和周期性任务</li>
+<li>任务组跟踪 </li>
+</ul>
+
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00309">309</a> 行定义.</p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
+<a id="a3a8a5b36a24eaba5da3ed964b2730aef" name="a3a8a5b36a24eaba5da3ed964b2730aef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a8a5b36a24eaba5da3ed964b2730aef">&#9670;&#160;</a></span>pool_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a3a8a5b36a24eaba5da3ed964b2730aef">neforce::thread_pool::pool_mode</a> : <a class="el" href="group___core_types.html#ga98dc79b31c54d477c6cbfc90bbdb74bd">uint8_t</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>线程池运行模式 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a3a8a5b36a24eaba5da3ed964b2730aefacec315e3d0975e5cc2811d5d8725f149" name="a3a8a5b36a24eaba5da3ed964b2730aefacec315e3d0975e5cc2811d5d8725f149"></a>fixed&#160;</td><td class="fielddoc"><p>固定线程数模式 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a3a8a5b36a24eaba5da3ed964b2730aefa1fb1a060534164a18a99494122825190" name="a3a8a5b36a24eaba5da3ed964b2730aefa1fb1a060534164a18a99494122825190"></a>cached&#160;</td><td class="fielddoc"><p>缓存模式，可动态增减线程 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00315">315</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="acdf3390238c2ca4f4f2a7c3e5966edb5" name="acdf3390238c2ca4f4f2a7c3e5966edb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdf3390238c2ca4f4f2a7c3e5966edb5">&#9670;&#160;</a></span>cancel_periodic_task()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void neforce::thread_pool::cancel_periodic_task </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a75d40a5a7990975876ce03d2d443a5bb">periodic_token</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>token</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>取消周期性任务 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">token</td><td>周期性任务令牌 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00588">588</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2f121eac4e93944cbd5ea1e5c53a7646" name="a2f121eac4e93944cbd5ea1e5c53a7646"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f121eac4e93944cbd5ea1e5c53a7646">&#9670;&#160;</a></span>mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a3a8a5b36a24eaba5da3ed964b2730aef">pool_mode</a> neforce::thread_pool::mode </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取线程池模式 </p>
+<dl class="section return"><dt>返回</dt><dd>当前模式 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00480">480</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a4cf077d1cb342abee27f84c8122ee4e8">set_mode()</a>.</p>
+
+</div>
+</div>
+<a id="ae481bc1b668cc251a8eb0b62815577ca" name="ae481bc1b668cc251a8eb0b62815577ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae481bc1b668cc251a8eb0b62815577ca">&#9670;&#160;</a></span>running()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::thread_pool::running </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查线程池是否正在运行 </p>
+<dl class="section return"><dt>返回</dt><dd>正在运行返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00474">474</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="thread__pool_8hpp_source.html#l00474">running()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="thread__pool_8hpp_source.html#l00474">running()</a>.</p>
+
+</div>
+</div>
+<a id="a4cf077d1cb342abee27f84c8122ee4e8" name="a4cf077d1cb342abee27f84c8122ee4e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cf077d1cb342abee27f84c8122ee4e8">&#9670;&#160;</a></span>set_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::thread_pool::set_mode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a3a8a5b36a24eaba5da3ed964b2730aef">pool_mode</a></td>          <td class="paramname"><span class="paramname"><em>mode</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置线程池模式 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mode</td><td>新模式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>设置成功返回true（线程池未运行时） </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="thread__pool_8hpp_source.html#l00480">mode()</a>.</p>
+
+</div>
+</div>
+<a id="a7c7a6349d111d835a7f70420fa8364a3" name="a7c7a6349d111d835a7f70420fa8364a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c7a6349d111d835a7f70420fa8364a3">&#9670;&#160;</a></span>set_steal_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::thread_pool::set_steal_mode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1local__queue.html#afe459baddb3762b3c5614a42f609aa5c">steal_strategy</a></td>          <td class="paramname"><span class="paramname"><em>strategy</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga4d7d3599901e73c7d6bf65a66e80b534">uint32_t</a></td>          <td class="paramname"><span class="paramname"><em>steal_batch</em></span><span class="paramdefsep"> = </span><span class="paramdefval">4</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置窃取策略 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">strategy</td><td>窃取策略 </td></tr>
+    <tr><td class="paramname">steal_batch</td><td>批次大小 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>设置成功返回true（线程池未运行时） </dd></dl>
+
+</div>
+</div>
+<a id="a89bde7b7fce55fd83721dd12dffd117f" name="a89bde7b7fce55fd83721dd12dffd117f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89bde7b7fce55fd83721dd12dffd117f">&#9670;&#160;</a></span>set_task_threshhold()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::thread_pool::set_task_threshhold </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>threshhold</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置任务队列阈值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">threshhold</td><td>新阈值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>设置成功返回true（线程池未运行时） </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a89bde7b7fce55fd83721dd12dffd117f">set_task_threshhold()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a89bde7b7fce55fd83721dd12dffd117f">set_task_threshhold()</a>.</p>
+
+</div>
+</div>
+<a id="aa71babafbfd6fa8bd458f233d5deb0f5" name="aa71babafbfd6fa8bd458f233d5deb0f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa71babafbfd6fa8bd458f233d5deb0f5">&#9670;&#160;</a></span>set_thread_threshhold()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::thread_pool::set_thread_threshhold </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>threshhold</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置线程数阈值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">threshhold</td><td>新阈值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>设置成功返回true（线程池未运行时且处于缓存模式） </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#aa71babafbfd6fa8bd458f233d5deb0f5">set_thread_threshhold()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#aa71babafbfd6fa8bd458f233d5deb0f5">set_thread_threshhold()</a>.</p>
+
+</div>
+</div>
+<a id="aedb99ec1bd6102eb4d6a3588e053b431" name="aedb99ec1bd6102eb4d6a3588e053b431"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedb99ec1bd6102eb4d6a3588e053b431">&#9670;&#160;</a></span>start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool neforce::thread_pool::start </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td>          <td class="paramname"><span class="paramname"><em>init_thread_size</em></span><span class="paramdefsep"> = </span><span class="paramdefval">3</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>启动线程池 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">init_thread_size</td><td>初始线程数，默认为3 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>启动成功返回true </dd></dl>
+
+</div>
+</div>
+<a id="af161059b96d92ef28f4ff7a906c6252a" name="af161059b96d92ef28f4ff7a906c6252a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af161059b96d92ef28f4ff7a906c6252a">&#9670;&#160;</a></span>statistics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structneforce_1_1thread__pool_1_1pool__statistics.html">pool_statistics</a> neforce::thread_pool::statistics </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取线程池统计信息 </p>
+<dl class="section return"><dt>返回</dt><dd>统计信息 </dd></dl>
+
+</div>
+</div>
+<a id="a50cfc595775ccccf3e766e98990ae9d4" name="a50cfc595775ccccf3e766e98990ae9d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50cfc595775ccccf3e766e98990ae9d4">&#9670;&#160;</a></span>stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structneforce_1_1thread__pool_1_1pool__statistics.html">pool_statistics</a> neforce::thread_pool::stop </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>停止线程池 </p>
+<dl class="section return"><dt>返回</dt><dd>停止前的统计信息 </dd></dl>
+
+</div>
+</div>
+<a id="afbe2493d5c65f7dadd5ade8dedd179c9" name="afbe2493d5c65f7dadd5ade8dedd179c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbe2493d5c65f7dadd5ade8dedd179c9">&#9670;&#160;</a></span>submit_after() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Func, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structneforce_1_1submit__result.html">submit_result</a>&lt; <a class="el" href="group___invoke_function.html#ga2d367d0c6ab0c690c67d0091d8e83c3b">invoke_result_t</a>&lt; Func, Args... &gt; &gt; neforce::thread_pool::submit_after </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gaeb2e937665218c4098c40d49b13533af">int64_t</a></td>          <td class="paramname"><span class="paramname"><em>delay_ms</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Func &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>提交延迟任务（使用默认优先级0） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td>可调用对象类型 </td></tr>
+    <tr><td class="paramname">Args</td><td>参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delay_ms</td><td>延迟时间（毫秒） </td></tr>
+    <tr><td class="paramname">func</td><td>可调用对象 </td></tr>
+    <tr><td class="paramname">args</td><td>参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含future和任务信息的结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00551">551</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03019">neforce::forward()</a> , 以及 <a class="el" href="#a2ee142b23fd7fe7407647fc9cb85517c">submit_after()</a>.</p>
+
+</div>
+</div>
+<a id="a2ee142b23fd7fe7407647fc9cb85517c" name="a2ee142b23fd7fe7407647fc9cb85517c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ee142b23fd7fe7407647fc9cb85517c">&#9670;&#160;</a></span>submit_after() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Func, typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structneforce_1_1submit__result.html">submit_result</a>&lt; <a class="el" href="group___invoke_function.html#ga2d367d0c6ab0c690c67d0091d8e83c3b">invoke_result_t</a>&lt; Func, Args... &gt; &gt; neforce::thread_pool::submit_after </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gaeb2e937665218c4098c40d49b13533af">int64_t</a></td>          <td class="paramname"><span class="paramname"><em>delay_ms</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a00d494b5d7ab26495ccd38dc3120ef47">priority_type</a></td>          <td class="paramname"><span class="paramname"><em>priority</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Func &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>提交延迟任务 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td>可调用对象类型 </td></tr>
+    <tr><td class="paramname">Args</td><td>参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delay_ms</td><td>延迟时间（毫秒） </td></tr>
+    <tr><td class="paramname">priority</td><td>任务优先级 </td></tr>
+    <tr><td class="paramname">func</td><td>可调用对象 </td></tr>
+    <tr><td class="paramname">args</td><td>参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含future和任务信息的结果 </dd></dl>
+
+<p class="reference">被这些函数引用 <a class="el" href="thread__pool_8hpp_source.html#l00551">submit_after()</a>.</p>
+
+</div>
+</div>
+<a id="a316fe5971cf12b56091a85fa45b7bf0f" name="a316fe5971cf12b56091a85fa45b7bf0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a316fe5971cf12b56091a85fa45b7bf0f">&#9670;&#160;</a></span>submit_every() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Func, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a75d40a5a7990975876ce03d2d443a5bb">periodic_token</a> neforce::thread_pool::submit_every </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gaeb2e937665218c4098c40d49b13533af">int64_t</a></td>          <td class="paramname"><span class="paramname"><em>interval_ms</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Func &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>提交周期性任务（使用默认优先级0） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td>可调用对象类型 </td></tr>
+    <tr><td class="paramname">Args</td><td>参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">interval_ms</td><td>执行间隔（毫秒） </td></tr>
+    <tr><td class="paramname">func</td><td>可调用对象 </td></tr>
+    <tr><td class="paramname">args</td><td>参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>周期性任务令牌，用于取消任务 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00579">579</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03019">neforce::forward()</a> , 以及 <a class="el" href="#a81e010fc43be11e8d51eb665fbbdb2d4">submit_every()</a>.</p>
+
+</div>
+</div>
+<a id="a81e010fc43be11e8d51eb665fbbdb2d4" name="a81e010fc43be11e8d51eb665fbbdb2d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81e010fc43be11e8d51eb665fbbdb2d4">&#9670;&#160;</a></span>submit_every() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Func, typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a75d40a5a7990975876ce03d2d443a5bb">periodic_token</a> neforce::thread_pool::submit_every </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#gaeb2e937665218c4098c40d49b13533af">int64_t</a></td>          <td class="paramname"><span class="paramname"><em>interval_ms</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a00d494b5d7ab26495ccd38dc3120ef47">priority_type</a></td>          <td class="paramname"><span class="paramname"><em>priority</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Func &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>提交周期性任务 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td>可调用对象类型 </td></tr>
+    <tr><td class="paramname">Args</td><td>参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">interval_ms</td><td>执行间隔（毫秒） </td></tr>
+    <tr><td class="paramname">priority</td><td>任务优先级 </td></tr>
+    <tr><td class="paramname">func</td><td>可调用对象 </td></tr>
+    <tr><td class="paramname">args</td><td>参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>周期性任务令牌，用于取消任务 </dd></dl>
+
+<p class="reference">被这些函数引用 <a class="el" href="thread__pool_8hpp_source.html#l00579">submit_every()</a>.</p>
+
+</div>
+</div>
+<a id="a1b2b9eae752b819105cc42a3bda89c21" name="a1b2b9eae752b819105cc42a3bda89c21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b2b9eae752b819105cc42a3bda89c21">&#9670;&#160;</a></span>submit_task() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Func, typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structneforce_1_1submit__result.html">submit_result</a>&lt; <a class="el" href="group___invoke_function.html#ga2d367d0c6ab0c690c67d0091d8e83c3b">invoke_result_t</a>&lt; Func, Args... &gt; &gt; neforce::thread_pool::submit_task </td>
+          <td>(</td>
+          <td class="paramtype">Func &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>提交任务（使用默认优先级0） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td>可调用对象类型 </td></tr>
+    <tr><td class="paramname">Args</td><td>参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">func</td><td>可调用对象 </td></tr>
+    <tr><td class="paramname">args</td><td>参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含future和任务信息的结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00522">522</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03019">neforce::forward()</a> , 以及 <a class="el" href="#aa15a9833652fb506cb01f8e07113838b">submit_task()</a>.</p>
+
+</div>
+</div>
+<a id="aa15a9833652fb506cb01f8e07113838b" name="aa15a9833652fb506cb01f8e07113838b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa15a9833652fb506cb01f8e07113838b">&#9670;&#160;</a></span>submit_task() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Func, typename... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structneforce_1_1submit__result.html">submit_result</a>&lt; <a class="el" href="group___invoke_function.html#ga2d367d0c6ab0c690c67d0091d8e83c3b">invoke_result_t</a>&lt; Func, Args... &gt; &gt; neforce::thread_pool::submit_task </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a00d494b5d7ab26495ccd38dc3120ef47">priority_type</a></td>          <td class="paramname"><span class="paramname"><em>priority</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Func &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>func</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>提交任务 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Func</td><td>可调用对象类型 </td></tr>
+    <tr><td class="paramname">Args</td><td>参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">priority</td><td>任务优先级 </td></tr>
+    <tr><td class="paramname">func</td><td>可调用对象 </td></tr>
+    <tr><td class="paramname">args</td><td>参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含future和任务信息的结果 </dd></dl>
+
+<p class="reference">被这些函数引用 <a class="el" href="thread__pool_8hpp_source.html#l00522">submit_task()</a>.</p>
+
+</div>
+</div>
+<a id="a6a776b1226de5813c9d2c0239c94a761" name="a6a776b1226de5813c9d2c0239c94a761"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a776b1226de5813c9d2c0239c94a761">&#9670;&#160;</a></span>wait()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Types&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tuple&lt; <a class="el" href="group___async.html#gae41bda7414d7dca6209c6c2c024871eb">future_result_t</a>&lt; Types &gt;... &gt; neforce::thread_pool::wait </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classneforce_1_1future.html">future</a>&lt; Types &gt; &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>futures</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>等待多个future完成 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Types</td><td>future结果类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">futures</td><td>要等待的future </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含所有结果的元组 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00601">601</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="future_8hpp_source.html#l01189">neforce::get()</a> , 以及 <a class="el" href="tuple_8hpp_source.html#l00750">neforce::make_tuple()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1thread__pool.html">thread_pool</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

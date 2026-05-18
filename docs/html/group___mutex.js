@@ -36,10 +36,10 @@ var group___mutex =
       [ "unique_lock", "classunique__lock.html#af9ba8cd379db40771df210a3987eb59d", null ],
       [ "~unique_lock", "classunique__lock.html#a13eff43602002fe318715d71e929d342", null ],
       [ "lock_quiet", "classunique__lock.html#aa31d80f6bf8c45a5e30d075896e0426a", null ],
-      [ "mutex", "classunique__lock.html#a9732001877bf83c2d0cbd51c404a0bfb", null ],
-      [ "operator bool", "classunique__lock.html#ac9969c01f6fb36a11e1a811a909f3a7c", null ],
+      [ "mutex", "classunique__lock.html#af9ed87e847e619f5b3f72ed5b054542d", null ],
+      [ "operator bool", "classunique__lock.html#a8f1e81c5962e45dafe8f7a9708c39183", null ],
       [ "operator=", "classunique__lock.html#af4e3bf904517122a7dea67c6cfc7d113", null ],
-      [ "owns_lock", "classunique__lock.html#ace616792a495c421fbe42157cd4a89f9", null ],
+      [ "owns_lock", "classunique__lock.html#a7f1b270e5b84faffec22e255a398ea75", null ],
       [ "release", "classunique__lock.html#a7e86a8f23cf3dc70f56fe36b988b4718", null ],
       [ "try_lock", "classunique__lock.html#a0f7defd5ab0b7d85f7d8bbc7d7a712a9", null ],
       [ "unlock_quiet", "classunique__lock.html#a0473323402bab23a6c89eb5a5ab58798", null ]
@@ -66,14 +66,14 @@ var group___mutex =
       [ "shared_lock", "classshared__lock.html#a1177948b8f2cd8cad8fe9e18b543747b", null ],
       [ "~shared_lock", "classshared__lock.html#a09cd913ffb52b9607316cf60610d98ed", null ],
       [ "lock", "classshared__lock.html#a6f23f530fdf0db5d46479d3aea0f2b06", null ],
-      [ "mutex", "classshared__lock.html#a839809cd7bc530f7da8ea551c8f78056", null ],
-      [ "operator bool", "classshared__lock.html#a6eae6df07ed587161a3e6d28a0527a9c", null ],
+      [ "mutex", "classshared__lock.html#af80d6ab7d5d15b3431b661b15bae577d", null ],
+      [ "operator bool", "classshared__lock.html#a88c0dc1a162f10b14700eff254e5b835", null ],
       [ "operator=", "classshared__lock.html#a4c66a9c5c30d81a6e1b170dde4028a82", null ],
-      [ "owns_lock", "classshared__lock.html#a82fc8d66a9615845125dbf93e40ba856", null ],
+      [ "owns_lock", "classshared__lock.html#aac427c729924dab03e04834cb8f54699", null ],
       [ "release", "classshared__lock.html#a510931a6627f2dcb9ac52e687546800b", null ],
       [ "try_lock", "classshared__lock.html#a65cab5e791cfcc07c95fa0a3e1ae92d2", null ],
       [ "unlock", "classshared__lock.html#a790e469cdff391b2ecea7b2f3bea4a08", null ]
     ] ],
-    [ "defer_lock", "group___mutex.html#gafd2a4ed346c171a31775c9d071a3f32f", null ],
-    [ "try_lock", "group___mutex.html#ga350cd44b97804684fc729a02a728a33e", null ]
+    [ "defer_lock", "group___mutex.html#ga0a567f2acedc6f0f1a1c12a18172747f", null ],
+    [ "try_lock", "group___mutex.html#gad268b389b17e2f23260e8e10cef8b455", null ]
 ];

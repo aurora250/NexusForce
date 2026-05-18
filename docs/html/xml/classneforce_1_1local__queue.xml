@@ -1,0 +1,572 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1local__queue" kind="class" language="C++" prot="public">
+    <compoundname>neforce::local_queue</compoundname>
+    <includes refid="thread__pool_8hpp" local="no">thread_pool.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classneforce_1_1local__queue_1afe459baddb3762b3c5614a42f609aa5c" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga98dc79b31c54d477c6cbfc90bbdb74bd" kindref="member">uint8_t</ref></type>
+        <name>steal_strategy</name>
+        <qualifiedname>neforce::local_queue::steal_strategy</qualifiedname>
+        <enumvalue id="classneforce_1_1local__queue_1afe459baddb3762b3c5614a42f609aa5ca7afe399f1415b137d0962f82662fa9d4" prot="public">
+          <name>half</name>
+          <briefdescription>
+<para>窃取一半任务 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1local__queue_1afe459baddb3762b3c5614a42f609aa5cad9c03a7a5c46b68317c3634254fad0d8" prot="public">
+          <name>fixed_batch</name>
+          <briefdescription>
+<para>窃取固定数量的任务 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1local__queue_1afe459baddb3762b3c5614a42f609aa5cadd5c07036f2975ff4bce568b6511d3bc" prot="public">
+          <name>single</name>
+          <briefdescription>
+<para>每次只窃取一个任务 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classneforce_1_1local__queue_1afe459baddb3762b3c5614a42f609aa5ca8cb043b2dace9afc0680e6bae5cd316f" prot="public">
+          <name>adaptive</name>
+          <briefdescription>
+<para>自适应策略 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>任务窃取策略 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="88" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="88" bodyend="93"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classneforce_1_1local__queue_1a138e557407fb9413f06afb3c53cc6ae7" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::local_queue::queue_size</definition>
+        <argsstring></argsstring>
+        <name>queue_size</name>
+        <qualifiedname>neforce::local_queue::queue_size</qualifiedname>
+        <initializer>= 256</initializer>
+        <briefdescription>
+<para>队列容量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="95" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classneforce_1_1local__queue_1ad604de8c05583cfb2d90100848e1d540" prot="private" static="yes" mutable="no">
+        <type><ref refid="classneforce_1_1local__queue_1afe459baddb3762b3c5614a42f609aa5c" kindref="member">steal_strategy</ref></type>
+        <definition>steal_strategy neforce::local_queue::steal_strategy_</definition>
+        <argsstring></argsstring>
+        <name>steal_strategy_</name>
+        <qualifiedname>neforce::local_queue::steal_strategy_</qualifiedname>
+        <briefdescription>
+<para>全局窃取策略 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="98" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1local__queue_1a295e10b4093c112beaa76e38cb7781c6" prot="private" static="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::local_queue::fixed_batch_size_</definition>
+        <argsstring></argsstring>
+        <name>fixed_batch_size_</name>
+        <qualifiedname>neforce::local_queue::fixed_batch_size_</qualifiedname>
+        <briefdescription>
+<para>固定批次大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="99" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1local__queue_1ac09c97db945d3545e6d58cc66e7f7476" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::local_queue::mask_</definition>
+        <argsstring></argsstring>
+        <name>mask_</name>
+        <qualifiedname>neforce::local_queue::mask_</qualifiedname>
+        <initializer>= <ref refid="classneforce_1_1local__queue_1a138e557407fb9413f06afb3c53cc6ae7" kindref="member">queue_size</ref> - 1</initializer>
+        <briefdescription>
+<para>掩码，用于环形索引计算 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="106" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="106" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1local__queue_1a90ef05cfddd41df2265204a499219308" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1array" kindref="compound">array</ref>&lt; <ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void()&gt;, <ref refid="classneforce_1_1local__queue_1a138e557407fb9413f06afb3c53cc6ae7" kindref="member">queue_size</ref> &gt;</type>
+        <definition>array&lt;function&lt;void()&gt;, queue_size&gt; neforce::local_queue::tasks_</definition>
+        <argsstring></argsstring>
+        <name>tasks_</name>
+        <qualifiedname>neforce::local_queue::tasks_</qualifiedname>
+        <briefdescription>
+<para>任务数组 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="101" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1local__queue_1a10515229f6be8e7f1847caa710cd643e" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; <ref refid="group___core_types_1ga33de6a1cba865b86a4bc63036a465c0f" kindref="member">uint64_t</ref> &gt;</type>
+        <definition>atomic&lt;uint64_t&gt; neforce::local_queue::head_</definition>
+        <argsstring></argsstring>
+        <name>head_</name>
+        <qualifiedname>neforce::local_queue::head_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>队列头指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="102" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="102" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1local__queue_1a318a1327bdc4eaaa8fff9e7c1e82e262" prot="private" static="no" mutable="no">
+        <type><ref refid="structneforce_1_1atomic" kindref="compound">atomic</ref>&lt; <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref> &gt;</type>
+        <definition>atomic&lt;uint32_t&gt; neforce::local_queue::tail_</definition>
+        <argsstring></argsstring>
+        <name>tail_</name>
+        <qualifiedname>neforce::local_queue::tail_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>队列尾指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="103" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="103" bodyend="103"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classneforce_1_1local__queue_1a287a75fd7d8c0a4722bbbc056a0cf54a" prot="private" static="yes" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga33de6a1cba865b86a4bc63036a465c0f" kindref="member">uint64_t</ref></type>
+        <definition>static uint64_t neforce::local_queue::pack</definition>
+        <argsstring>(const uint32_t steal, const uint32_t local_head) noexcept</argsstring>
+        <name>pack</name>
+        <qualifiedname>neforce::local_queue::pack</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>steal</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>local_head</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="108" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="108" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1local__queue_1a780f16316bdd96db65b3326424ad8b2b" prot="private" static="yes" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1pair" kindref="compound">pair</ref>&lt; <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref>, <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref> &gt;</type>
+        <definition>static pair&lt; uint32_t, uint32_t &gt; neforce::local_queue::unpack</definition>
+        <argsstring>(const uint64_t head) noexcept</argsstring>
+        <name>unpack</name>
+        <qualifiedname>neforce::local_queue::unpack</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga33de6a1cba865b86a4bc63036a465c0f" kindref="member">uint64_t</ref></type>
+          <declname>head</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="112" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="112" bodyend="114"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classneforce_1_1local__queue_1abf5e479c67055c29f0415f10256ac96b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t neforce::local_queue::be_stolen_by_impl</definition>
+        <argsstring>(local_queue &amp;dst, uint32_t dst_tail)</argsstring>
+        <name>be_stolen_by_impl</name>
+        <qualifiedname>neforce::local_queue::be_stolen_by_impl</qualifiedname>
+        <param>
+          <type>local_queue &amp;</type>
+          <declname>dst</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>dst_tail</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="116" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1local__queue_1a71e135120edddd192529874199f051bf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::local_queue::local_queue</definition>
+        <argsstring>()=default</argsstring>
+        <name>local_queue</name>
+        <qualifiedname>neforce::local_queue::local_queue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="119" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1local__queue_1a10b0d1256c4984b94c9b8e6994959e76" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::local_queue::~local_queue</definition>
+        <argsstring>()=default</argsstring>
+        <name>~local_queue</name>
+        <qualifiedname>neforce::local_queue::~local_queue</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="120" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1local__queue_1a7d77fda0474b6ab23971ed2ab64d21e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>neforce::local_queue::local_queue</definition>
+        <argsstring>(const local_queue &amp;)=delete</argsstring>
+        <name>local_queue</name>
+        <qualifiedname>neforce::local_queue::local_queue</qualifiedname>
+        <param>
+          <type>const local_queue &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="121" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1local__queue_1ae9e664457907d0be8622dba9da6a805d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>local_queue &amp;</type>
+        <definition>local_queue &amp; neforce::local_queue::operator=</definition>
+        <argsstring>(const local_queue &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::local_queue::operator=</qualifiedname>
+        <param>
+          <type>const local_queue &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="122" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1local__queue_1ac254d33a1754bc0fec8a96a4964b06c3" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::local_queue::local_queue</definition>
+        <argsstring>(local_queue &amp;&amp;other) noexcept</argsstring>
+        <name>local_queue</name>
+        <qualifiedname>neforce::local_queue::local_queue</qualifiedname>
+        <param>
+          <type>local_queue &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="123" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1local__queue_1a9f51aee00f5132f605c51842ea89c6e9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>local_queue &amp;</type>
+        <definition>local_queue &amp; neforce::local_queue::operator=</definition>
+        <argsstring>(local_queue &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::local_queue::operator=</qualifiedname>
+        <param>
+          <type>local_queue &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="124" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1local__queue_1ada31a177a8359e473cbb497aa479672a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::local_queue::capacity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>capacity</name>
+        <qualifiedname>neforce::local_queue::capacity</qualifiedname>
+        <briefdescription>
+<para>获取队列容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队列最大容量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="130" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="130" bodyend="130"/>
+        <referencedby refid="classneforce_1_1local__queue_1a62bddf2fa482efb1326996f5e4db0c47" compoundref="thread__pool_8hpp" startline="142" endline="149">remain_size</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1local__queue_1a087328cf17082b5a39a87384c4a54211" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::local_queue::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>neforce::local_queue::empty</qualifiedname>
+        <briefdescription>
+<para>检查队列是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队列为空返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="136" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="136" bodyend="136"/>
+        <references refid="classneforce_1_1local__queue_1a5208c66ea317d82341e3c05fd9dcce08" compoundref="thread__pool_8hpp" startline="155" endline="160">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1local__queue_1a62bddf2fa482efb1326996f5e4db0c47" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::local_queue::remain_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>remain_size</name>
+        <qualifiedname>neforce::local_queue::remain_size</qualifiedname>
+        <briefdescription>
+<para>获取剩余容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队列剩余可用空间 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="142" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="142" bodyend="149"/>
+        <references refid="classneforce_1_1local__queue_1ada31a177a8359e473cbb497aa479672a" compoundref="thread__pool_8hpp" startline="130" endline="130">capacity</references>
+        <references refid="group___memory_order_1ga6367df7d3e137e9b30e17740435d1816" compoundref="memory__order_8hpp" startline="177">neforce::memory_order_acquire</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1local__queue_1a5208c66ea317d82341e3c05fd9dcce08" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::local_queue::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>neforce::local_queue::size</qualifiedname>
+        <briefdescription>
+<para>获取队列当前大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>队列中的任务数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="155" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="155" bodyend="160"/>
+        <references refid="group___memory_order_1ga6367df7d3e137e9b30e17740435d1816" compoundref="memory__order_8hpp" startline="177">neforce::memory_order_acquire</references>
+        <referencedby refid="classneforce_1_1local__queue_1a087328cf17082b5a39a87384c4a54211" compoundref="thread__pool_8hpp" startline="136" endline="136">empty</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1local__queue_1a477c781e7b5e354340e5251bb6938232" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::local_queue::push_back</definition>
+        <argsstring>(function&lt; void()&gt; task)</argsstring>
+        <name>push_back</name>
+        <qualifiedname>neforce::local_queue::push_back</qualifiedname>
+        <param>
+          <type><ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void()&gt;</type>
+          <declname>task</declname>
+        </param>
+        <briefdescription>
+<para>推送任务到队列尾部 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>task</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要推送的任务 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="176" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="176" bodyend="180"/>
+        <references refid="group___memory_order_1gaf2fa121cd3849278f261b2c04fdf90a8" compoundref="memory__order_8hpp" startline="173">neforce::memory_order_relaxed</references>
+        <references refid="group___memory_order_1ga0ecbdbbd5ddbe9eda2820b9cea4826fc" compoundref="memory__order_8hpp" startline="179">neforce::memory_order_release</references>
+        <references refid="group___shift_algorithms_1gae346eba5fb576da65e097b60463d3790" compoundref="shift_8hpp" startline="312" endline="321">neforce::move</references>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1local__queue_1ac12661ba3ab9496dc2892d7a0492ba7f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void()&gt; &gt;</type>
+        <definition>optional&lt; function&lt; void()&gt; &gt; neforce::local_queue::try_pop</definition>
+        <argsstring>()</argsstring>
+        <name>try_pop</name>
+        <qualifiedname>neforce::local_queue::try_pop</qualifiedname>
+        <briefdescription>
+<para>从队列头部弹出任务 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>弹出的任务，队列为空时返回none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="186" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1local__queue_1a6f2b3e7226ce0f8874311ab2ed9cd29a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classneforce_1_1optional" kindref="compound">optional</ref>&lt; <ref refid="classneforce_1_1function" kindref="compound">function</ref>&lt; void()&gt; &gt;</type>
+        <definition>optional&lt; function&lt; void()&gt; &gt; neforce::local_queue::be_stolen_by</definition>
+        <argsstring>(local_queue &amp;dst_queue)</argsstring>
+        <name>be_stolen_by</name>
+        <qualifiedname>neforce::local_queue::be_stolen_by</qualifiedname>
+        <param>
+          <type>local_queue &amp;</type>
+          <declname>dst_queue</declname>
+        </param>
+        <briefdescription>
+<para>被其他队列窃取任务 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>dst_queue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标队列 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>窃取到的任务，如果窃取失败返回none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="193" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classneforce_1_1local__queue_1a5601725193449d8642cade3213c25e03" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>static void neforce::local_queue::set_steal_strategy</definition>
+        <argsstring>(const steal_strategy strategy, const uint32_t batch_size=4)</argsstring>
+        <name>set_steal_strategy</name>
+        <qualifiedname>neforce::local_queue::set_steal_strategy</qualifiedname>
+        <param>
+          <type>const <ref refid="classneforce_1_1local__queue_1afe459baddb3762b3c5614a42f609aa5c" kindref="member">steal_strategy</ref></type>
+          <declname>strategy</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga4d7d3599901e73c7d6bf65a66e80b534" kindref="member">uint32_t</ref></type>
+          <declname>batch_size</declname>
+          <defval>4</defval>
+        </param>
+        <briefdescription>
+<para>设置窃取策略 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>strategy</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>窃取策略 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>batch_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>批次大小（仅对fixed_batch策略有效） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="167" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="167" bodyend="170"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>线程本地任务队列 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>每个工作线程的本地任务队列，支持无锁的任务推送、弹出和任务窃取。 采用环形缓冲区实现，支持多种窃取策略。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" line="82" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_pool.hpp" bodystart="82" bodyend="194"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1local__queue_1a6f2b3e7226ce0f8874311ab2ed9cd29a" prot="public" virt="non-virtual"><scope>neforce::local_queue</scope><name>be_stolen_by</name></member>
+      <member refid="classneforce_1_1local__queue_1abf5e479c67055c29f0415f10256ac96b" prot="private" virt="non-virtual"><scope>neforce::local_queue</scope><name>be_stolen_by_impl</name></member>
+      <member refid="classneforce_1_1local__queue_1ada31a177a8359e473cbb497aa479672a" prot="public" virt="non-virtual"><scope>neforce::local_queue</scope><name>capacity</name></member>
+      <member refid="classneforce_1_1local__queue_1a087328cf17082b5a39a87384c4a54211" prot="public" virt="non-virtual"><scope>neforce::local_queue</scope><name>empty</name></member>
+      <member refid="classneforce_1_1local__queue_1a295e10b4093c112beaa76e38cb7781c6" prot="private" virt="non-virtual"><scope>neforce::local_queue</scope><name>fixed_batch_size_</name></member>
+      <member refid="classneforce_1_1local__queue_1a10515229f6be8e7f1847caa710cd643e" prot="private" virt="non-virtual"><scope>neforce::local_queue</scope><name>head_</name></member>
+      <member refid="classneforce_1_1local__queue_1a71e135120edddd192529874199f051bf" prot="public" virt="non-virtual"><scope>neforce::local_queue</scope><name>local_queue</name></member>
+      <member refid="classneforce_1_1local__queue_1a7d77fda0474b6ab23971ed2ab64d21e8" prot="public" virt="non-virtual"><scope>neforce::local_queue</scope><name>local_queue</name></member>
+      <member refid="classneforce_1_1local__queue_1ac254d33a1754bc0fec8a96a4964b06c3" prot="public" virt="non-virtual"><scope>neforce::local_queue</scope><name>local_queue</name></member>
+      <member refid="classneforce_1_1local__queue_1ac09c97db945d3545e6d58cc66e7f7476" prot="private" virt="non-virtual"><scope>neforce::local_queue</scope><name>mask_</name></member>
+      <member refid="classneforce_1_1local__queue_1ae9e664457907d0be8622dba9da6a805d" prot="public" virt="non-virtual"><scope>neforce::local_queue</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1local__queue_1a9f51aee00f5132f605c51842ea89c6e9" prot="public" virt="non-virtual"><scope>neforce::local_queue</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1local__queue_1a287a75fd7d8c0a4722bbbc056a0cf54a" prot="private" virt="non-virtual"><scope>neforce::local_queue</scope><name>pack</name></member>
+      <member refid="classneforce_1_1local__queue_1a477c781e7b5e354340e5251bb6938232" prot="public" virt="non-virtual"><scope>neforce::local_queue</scope><name>push_back</name></member>
+      <member refid="classneforce_1_1local__queue_1a138e557407fb9413f06afb3c53cc6ae7" prot="public" virt="non-virtual"><scope>neforce::local_queue</scope><name>queue_size</name></member>
+      <member refid="classneforce_1_1local__queue_1a62bddf2fa482efb1326996f5e4db0c47" prot="public" virt="non-virtual"><scope>neforce::local_queue</scope><name>remain_size</name></member>
+      <member refid="classneforce_1_1local__queue_1a5601725193449d8642cade3213c25e03" prot="public" virt="non-virtual"><scope>neforce::local_queue</scope><name>set_steal_strategy</name></member>
+      <member refid="classneforce_1_1local__queue_1a5208c66ea317d82341e3c05fd9dcce08" prot="public" virt="non-virtual"><scope>neforce::local_queue</scope><name>size</name></member>
+      <member refid="classneforce_1_1local__queue_1afe459baddb3762b3c5614a42f609aa5c" prot="public" virt="non-virtual"><scope>neforce::local_queue</scope><name>steal_strategy</name></member>
+      <member refid="classneforce_1_1local__queue_1ad604de8c05583cfb2d90100848e1d540" prot="private" virt="non-virtual"><scope>neforce::local_queue</scope><name>steal_strategy_</name></member>
+      <member refid="classneforce_1_1local__queue_1a318a1327bdc4eaaa8fff9e7c1e82e262" prot="private" virt="non-virtual"><scope>neforce::local_queue</scope><name>tail_</name></member>
+      <member refid="classneforce_1_1local__queue_1a90ef05cfddd41df2265204a499219308" prot="private" virt="non-virtual"><scope>neforce::local_queue</scope><name>tasks_</name></member>
+      <member refid="classneforce_1_1local__queue_1ac12661ba3ab9496dc2892d7a0492ba7f" prot="public" virt="non-virtual"><scope>neforce::local_queue</scope><name>try_pop</name></member>
+      <member refid="classneforce_1_1local__queue_1a780f16316bdd96db65b3326424ad8b2b" prot="private" virt="non-virtual"><scope>neforce::local_queue</scope><name>unpack</name></member>
+      <member refid="classneforce_1_1local__queue_1a10b0d1256c4984b94c9b8e6994959e76" prot="public" virt="non-virtual"><scope>neforce::local_queue</scope><name>~local_queue</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,5 +1,5 @@
 var structicollector =
 [
-    [ "empty", "structicollector.html#ac33304ea8012621d7c00ebb1295425ca", null ],
-    [ "size", "structicollector.html#aa12122cd69ca1ec919297f84f0e4b0a4", null ]
+    [ "empty", "structicollector.html#ae47d32b5c747d4f85fd9aa4fb850a2dc", null ],
+    [ "size", "structicollector.html#a81c300cff7d482cad8064e08abdb5392", null ]
 ];

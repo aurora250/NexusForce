@@ -8,7 +8,7 @@ var classyaml__string =
       [ "Folded", "classyaml__string.html#a48e128d7b4fcf4d04fb90af96a5c5a9ea5f786c37a3e1297211444a8a0957eed2", null ]
     ] ],
     [ "yaml_string", "classyaml__string.html#a74b84f0c68cc531003ec733ff5e8660a", null ],
-    [ "get_style", "classyaml__string.html#aa0ab1204c798735f52e34c9af90dcb5f", null ],
-    [ "get_value", "classyaml__string.html#a19b8d67d6efa68987a7a70004159d365", null ],
-    [ "type", "classyaml__string.html#ac4a884aaa6ae3d556c52222639a69618", null ]
+    [ "get_style", "classyaml__string.html#aaf89d611204fe87bcf9b9e052fdc1b11", null ],
+    [ "get_value", "classyaml__string.html#aa1ac3bef6e4bd406854884a4975d863a", null ],
+    [ "type", "classyaml__string.html#a5b3302636da26ca88b07ebee021aa2d1", null ]
 ];

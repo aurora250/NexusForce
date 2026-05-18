@@ -1,0 +1,742 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: neforce::ttl_cache&lt; Key, Value &gt; 模板类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classneforce_1_1ttl__cache.html','','classneforce_1_1ttl__cache-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">neforce::ttl_cache&lt; Key, Value &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___cache.html">缓存</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>TTL缓存类模板  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a975ef437fc384b3a168bc87ba9f590da" id="r_a975ef437fc384b3a168bc87ba9f590da"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a975ef437fc384b3a168bc87ba9f590da">refresh_policy</a> : uint8_t { <a class="el" href="#a975ef437fc384b3a168bc87ba9f590daac7561db7a418dd39b2201dfe110ab4a4">never</a>
+, <a class="el" href="#a975ef437fc384b3a168bc87ba9f590daa2f4ac8b5829664cbdfbb154b2f003cbd">on_access</a>
+, <a class="el" href="#a975ef437fc384b3a168bc87ba9f590daad1f82d8c5e5a93e50244c13e3500a070">sliding_window</a>
+ }</td></tr>
+<tr class="memdesc:a975ef437fc384b3a168bc87ba9f590da"><td class="mdescLeft">&#160;</td><td class="mdescRight">过期时间刷新策略  <a href="#a975ef437fc384b3a168bc87ba9f590da">更多...</a><br /></td></tr>
+<tr class="memitem:ad34ee15a831ea0079dcb33cc2add201c" id="r_ad34ee15a831ea0079dcb33cc2add201c"><td class="memItemLeft"><a id="ad34ee15a831ea0079dcb33cc2add201c" name="ad34ee15a831ea0079dcb33cc2add201c"></a>
+using&#160;</td><td class="memItemRight"><b>clock</b> = <a class="el" href="structneforce_1_1steady__clock.html">steady_clock</a></td></tr>
+<tr class="memdesc:ad34ee15a831ea0079dcb33cc2add201c"><td class="mdescLeft">&#160;</td><td class="mdescRight">时钟类型 <br /></td></tr>
+<tr class="memitem:ac9e564f67b079459413dad72d2eda6bc" id="r_ac9e564f67b079459413dad72d2eda6bc"><td class="memItemLeft"><a id="ac9e564f67b079459413dad72d2eda6bc" name="ac9e564f67b079459413dad72d2eda6bc"></a>
+using&#160;</td><td class="memItemRight"><b>time_point</b> = <a class="el" href="structneforce_1_1steady__clock.html#afb4d1ffa96ad444dc44ed81f7857f1aa">clock::time_point</a></td></tr>
+<tr class="memdesc:ac9e564f67b079459413dad72d2eda6bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">时间点类型 <br /></td></tr>
+<tr class="memitem:a132d034b211e7ef0e5f71ca32646afc1" id="r_a132d034b211e7ef0e5f71ca32646afc1"><td class="memItemLeft"><a id="a132d034b211e7ef0e5f71ca32646afc1" name="a132d034b211e7ef0e5f71ca32646afc1"></a>
+using&#160;</td><td class="memItemRight"><b>duration</b> = <a class="el" href="structneforce_1_1steady__clock.html#ada904e5c4376b5d153ad18c53d85b563">clock::duration</a></td></tr>
+<tr class="memdesc:a132d034b211e7ef0e5f71ca32646afc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">持续时间类型 <br /></td></tr>
+<tr class="memitem:ac1647b63a1964acfc44543bd395a4a1e" id="r_ac1647b63a1964acfc44543bd395a4a1e"><td class="memItemLeft"><a id="ac1647b63a1964acfc44543bd395a4a1e" name="ac1647b63a1964acfc44543bd395a4a1e"></a>
+using&#160;</td><td class="memItemRight"><b>size_type</b> = <a class="el" href="group___platform_dependent_types.html#ga31f116430081a5b50d607a7dc714b717">size_t</a></td></tr>
+<tr class="memdesc:ac1647b63a1964acfc44543bd395a4a1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">大小类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a28f64ab731fea03826b6314104984c44" id="r_a28f64ab731fea03826b6314104984c44"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a28f64ab731fea03826b6314104984c44">ttl_cache</a> (<a class="el" href="#ac1647b63a1964acfc44543bd395a4a1e">size_type</a> <a class="el" href="#a48e1afe656dc1aaf2b2c08683785673c">capacity</a>, <a class="el" href="#a132d034b211e7ef0e5f71ca32646afc1">duration</a> default_ttl=<a class="el" href="group___duration.html#ga8254730759b00eba24c4a01b0c8e10c3">seconds</a>(60))</td></tr>
+<tr class="memdesc:a28f64ab731fea03826b6314104984c44"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a353656281e131d8098013427fdab3a6d" id="r_a353656281e131d8098013427fdab3a6d"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a353656281e131d8098013427fdab3a6d">~ttl_cache</a> ()</td></tr>
+<tr class="memdesc:a353656281e131d8098013427fdab3a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数  <br /></td></tr>
+<tr class="memitem:a4a4e595316da3f80cae9ca244e64e198" id="r_a4a4e595316da3f80cae9ca244e64e198"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4a4e595316da3f80cae9ca244e64e198">enable_cleanup</a> (<a class="el" href="#a132d034b211e7ef0e5f71ca32646afc1">duration</a> interval=<a class="el" href="group___duration.html#ga8254730759b00eba24c4a01b0c8e10c3">seconds</a>(1))</td></tr>
+<tr class="memdesc:a4a4e595316da3f80cae9ca244e64e198"><td class="mdescLeft">&#160;</td><td class="mdescRight">启用后台清理线程  <br /></td></tr>
+<tr class="memitem:a968ce1484e5822e9521755b12dd9277b" id="r_a968ce1484e5822e9521755b12dd9277b"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a968ce1484e5822e9521755b12dd9277b">disable_cleanup</a> ()</td></tr>
+<tr class="memdesc:a968ce1484e5822e9521755b12dd9277b"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁用后台清理线程  <br /></td></tr>
+<tr class="memitem:a85b7861e5fd49ce4006776e97cc49b60" id="r_a85b7861e5fd49ce4006776e97cc49b60"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a85b7861e5fd49ce4006776e97cc49b60">set_refresh_policy</a> (<a class="el" href="#a975ef437fc384b3a168bc87ba9f590da">refresh_policy</a> policy)</td></tr>
+<tr class="memdesc:a85b7861e5fd49ce4006776e97cc49b60"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置刷新策略  <br /></td></tr>
+<tr class="memitem:a3c08bfa27db3e3e12ff777adbe22b3b9" id="r_a3c08bfa27db3e3e12ff777adbe22b3b9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3c08bfa27db3e3e12ff777adbe22b3b9">put</a> (const Key &amp;key, const Value &amp;value)</td></tr>
+<tr class="memdesc:a3c08bfa27db3e3e12ff777adbe22b3b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入缓存项（使用默认TTL）  <br /></td></tr>
+<tr class="memitem:a54ecfcb1251ffe4dcd7401bd95a9c077" id="r_a54ecfcb1251ffe4dcd7401bd95a9c077"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a54ecfcb1251ffe4dcd7401bd95a9c077">put</a> (const Key &amp;key, const Value &amp;value, <a class="el" href="#a132d034b211e7ef0e5f71ca32646afc1">duration</a> ttl)</td></tr>
+<tr class="memdesc:a54ecfcb1251ffe4dcd7401bd95a9c077"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入缓存项（指定TTL）  <br /></td></tr>
+<tr class="memitem:ad21b2abcaf44332a77d20642110c47bc" id="r_ad21b2abcaf44332a77d20642110c47bc"><td class="memItemLeft"><a class="el" href="classneforce_1_1optional.html">optional</a>&lt; Value &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ad21b2abcaf44332a77d20642110c47bc">get</a> (const Key &amp;key)</td></tr>
+<tr class="memdesc:ad21b2abcaf44332a77d20642110c47bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取缓存项  <br /></td></tr>
+<tr class="memitem:adcc445ff144f708f66eb20269d478810" id="r_adcc445ff144f708f66eb20269d478810"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#adcc445ff144f708f66eb20269d478810">contains</a> (const Key &amp;key)</td></tr>
+<tr class="memdesc:adcc445ff144f708f66eb20269d478810"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查缓存是否包含指定键  <br /></td></tr>
+<tr class="memitem:aaf211f0158dd23b5052b70ff489f90fa" id="r_aaf211f0158dd23b5052b70ff489f90fa"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aaf211f0158dd23b5052b70ff489f90fa">erase</a> (const Key &amp;key)</td></tr>
+<tr class="memdesc:aaf211f0158dd23b5052b70ff489f90fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除缓存项  <br /></td></tr>
+<tr class="memitem:ac2bfe6f76fb09b2af94f21a7a17989b0" id="r_ac2bfe6f76fb09b2af94f21a7a17989b0"><td class="memItemLeft"><a id="ac2bfe6f76fb09b2af94f21a7a17989b0" name="ac2bfe6f76fb09b2af94f21a7a17989b0"></a>
+void&#160;</td><td class="memItemRight"><b>clear</b> ()</td></tr>
+<tr class="memdesc:ac2bfe6f76fb09b2af94f21a7a17989b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">清空所有缓存项 <br /></td></tr>
+<tr class="memitem:a06b87994a4609eeed7196b8765499760" id="r_a06b87994a4609eeed7196b8765499760"><td class="memItemLeft"><a class="el" href="#ac1647b63a1964acfc44543bd395a4a1e">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a06b87994a4609eeed7196b8765499760">size</a> () const noexcept</td></tr>
+<tr class="memdesc:a06b87994a4609eeed7196b8765499760"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前缓存大小  <br /></td></tr>
+<tr class="memitem:a48e1afe656dc1aaf2b2c08683785673c" id="r_a48e1afe656dc1aaf2b2c08683785673c"><td class="memItemLeft"><a class="el" href="#ac1647b63a1964acfc44543bd395a4a1e">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a48e1afe656dc1aaf2b2c08683785673c">capacity</a> () const noexcept</td></tr>
+<tr class="memdesc:a48e1afe656dc1aaf2b2c08683785673c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取缓存容量  <br /></td></tr>
+<tr class="memitem:ad14b0e8f88545e66d155bbf51f3a2399" id="r_ad14b0e8f88545e66d155bbf51f3a2399"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad14b0e8f88545e66d155bbf51f3a2399">cleanup</a> ()</td></tr>
+<tr class="memdesc:ad14b0e8f88545e66d155bbf51f3a2399"><td class="mdescLeft">&#160;</td><td class="mdescRight">手动清理过期项  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Key, typename Value&gt;<br />
+class neforce::ttl_cache&lt; Key, Value &gt;</div><p>TTL缓存类模板 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Key</td><td>键类型 </td></tr>
+    <tr><td class="paramname">Value</td><td>值类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>实现带有生存时间（TTL）的缓存容器，基于LRU缓存实现。 每个缓存项都有独立的过期时间，过期后自动失效。 支持可选的自动清理线程，定时清理过期项。</p>
+<p>特性：</p><ul>
+<li>自动过期：每个缓存项有独立的TTL</li>
+<li>过期清理：支持后台线程自动清理过期项</li>
+<li>刷新策略：支持多种过期时间刷新策略</li>
+<li>继承LRU特性：满容量时淘汰最久未使用的项</li>
+</ul>
+<dl class="section note"><dt>注解</dt><dd>此类不是线程安全的，多线程环境下需要外部同步 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00044">44</a> 行定义.</p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
+<a id="a975ef437fc384b3a168bc87ba9f590da" name="a975ef437fc384b3a168bc87ba9f590da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a975ef437fc384b3a168bc87ba9f590da">&#9670;&#160;</a></span>refresh_policy</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a975ef437fc384b3a168bc87ba9f590da">neforce::ttl_cache::refresh_policy</a> : <a class="el" href="group___core_types.html#ga98dc79b31c54d477c6cbfc90bbdb74bd">uint8_t</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>过期时间刷新策略 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a975ef437fc384b3a168bc87ba9f590daac7561db7a418dd39b2201dfe110ab4a4" name="a975ef437fc384b3a168bc87ba9f590daac7561db7a418dd39b2201dfe110ab4a4"></a>never&#160;</td><td class="fielddoc"><p>不刷新，保持原始过期时间 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a975ef437fc384b3a168bc87ba9f590daa2f4ac8b5829664cbdfbb154b2f003cbd" name="a975ef437fc384b3a168bc87ba9f590daa2f4ac8b5829664cbdfbb154b2f003cbd"></a>on_access&#160;</td><td class="fielddoc"><p>访问时刷新，每次访问都重置过期时间 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a975ef437fc384b3a168bc87ba9f590daad1f82d8c5e5a93e50244c13e3500a070" name="a975ef437fc384b3a168bc87ba9f590daad1f82d8c5e5a93e50244c13e3500a070"></a>sliding_window&#160;</td><td class="fielddoc"><p>滑动窗口，每次访问延长TTL </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00055">55</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a28f64ab731fea03826b6314104984c44" name="a28f64ab731fea03826b6314104984c44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28f64ab731fea03826b6314104984c44">&#9670;&#160;</a></span>ttl_cache()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1ttl__cache.html">neforce::ttl_cache</a>&lt; Key, Value &gt;::ttl_cache </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ac1647b63a1964acfc44543bd395a4a1e">size_type</a></td>          <td class="paramname"><span class="paramname"><em>capacity</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a132d034b211e7ef0e5f71ca32646afc1">duration</a></td>          <td class="paramname"><span class="paramname"><em>default_ttl</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___duration.html#ga8254730759b00eba24c4a01b0c8e10c3">seconds</a>(60)</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">capacity</td><td>缓存容量 </td></tr>
+    <tr><td class="paramname">default_ttl</td><td>默认生存时间，默认为60秒</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>创建一个指定容量和默认TTL的缓存。 </p>
+
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00089">89</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="ttl__cache_8hpp_source.html#l00238">capacity()</a>.</p>
+
+</div>
+</div>
+<a id="a353656281e131d8098013427fdab3a6d" name="a353656281e131d8098013427fdab3a6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a353656281e131d8098013427fdab3a6d">&#9670;&#160;</a></span>~ttl_cache()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1ttl__cache.html">neforce::ttl_cache</a>&lt; Key, Value &gt;::~<a class="el" href="#a28f64ab731fea03826b6314104984c44">ttl_cache</a> </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>析构函数 </p>
+<p>自动停止并等待清理线程结束。 </p>
+
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00098">98</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="ttl__cache_8hpp_source.html#l00128">disable_cleanup()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a48e1afe656dc1aaf2b2c08683785673c" name="a48e1afe656dc1aaf2b2c08683785673c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48e1afe656dc1aaf2b2c08683785673c">&#9670;&#160;</a></span>capacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ac1647b63a1964acfc44543bd395a4a1e">size_type</a> <a class="el" href="classneforce_1_1ttl__cache.html">neforce::ttl_cache</a>&lt; Key, Value &gt;::capacity </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取缓存容量 </p>
+<dl class="section return"><dt>返回</dt><dd>缓存的最大容量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00238">238</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ttl__cache_8hpp_source.html#l00089">ttl_cache()</a>.</p>
+
+</div>
+</div>
+<a id="ad14b0e8f88545e66d155bbf51f3a2399" name="ad14b0e8f88545e66d155bbf51f3a2399"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad14b0e8f88545e66d155bbf51f3a2399">&#9670;&#160;</a></span>cleanup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1ttl__cache.html">neforce::ttl_cache</a>&lt; Key, Value &gt;::cleanup </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>手动清理过期项 </p>
+<p>遍历所有缓存项，删除已过期的项。 此方法在启用后台清理线程时会自动定期调用。 </p>
+
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00246">246</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="structneforce_1_1steady__clock.html#a21d376e7630c7c35cde610180e214a1d">neforce::steady_clock::now()</a> , 以及 <a class="el" href="pair_8hpp_source.html#l00101">neforce::pair&lt; T1, T2 &gt;::second</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ttl__cache_8hpp_source.html#l00107">enable_cleanup()</a>.</p>
+
+</div>
+</div>
+<a id="adcc445ff144f708f66eb20269d478810" name="adcc445ff144f708f66eb20269d478810"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcc445ff144f708f66eb20269d478810">&#9670;&#160;</a></span>contains()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classneforce_1_1ttl__cache.html">neforce::ttl_cache</a>&lt; Key, Value &gt;::contains </td>
+          <td>(</td>
+          <td class="paramtype">const Key &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查缓存是否包含指定键 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果键存在且未过期返回true，否则返回false</dd></dl>
+<p>此方法会检查过期时间，如果键已过期则自动删除。 </p>
+
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00203">203</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="structneforce_1_1steady__clock.html#a21d376e7630c7c35cde610180e214a1d">neforce::steady_clock::now()</a>.</p>
+
+</div>
+</div>
+<a id="a968ce1484e5822e9521755b12dd9277b" name="a968ce1484e5822e9521755b12dd9277b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a968ce1484e5822e9521755b12dd9277b">&#9670;&#160;</a></span>disable_cleanup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1ttl__cache.html">neforce::ttl_cache</a>&lt; Key, Value &gt;::disable_cleanup </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>禁用后台清理线程 </p>
+<p>停止后台清理线程并等待其结束。 不会清空已有缓存项，只是停止自动清理。 </p>
+
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00128">128</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ttl__cache_8hpp_source.html#l00098">~ttl_cache()</a>.</p>
+
+</div>
+</div>
+<a id="a4a4e595316da3f80cae9ca244e64e198" name="a4a4e595316da3f80cae9ca244e64e198"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a4e595316da3f80cae9ca244e64e198">&#9670;&#160;</a></span>enable_cleanup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1ttl__cache.html">neforce::ttl_cache</a>&lt; Key, Value &gt;::enable_cleanup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a132d034b211e7ef0e5f71ca32646afc1">duration</a></td>          <td class="paramname"><span class="paramname"><em>interval</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="group___duration.html#ga8254730759b00eba24c4a01b0c8e10c3">seconds</a>(1)</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>启用后台清理线程 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">interval</td><td>清理间隔，默认为1秒</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>启动后台线程定期清理过期的缓存项。 如果清理线程已运行，此操作无效。 </p>
+
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00107">107</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="ttl__cache_8hpp_source.html#l00246">cleanup()</a> , 以及 <a class="el" href="duration_8hpp_source.html#l00886">neforce::this_thread::sleep_for()</a>.</p>
+
+</div>
+</div>
+<a id="aaf211f0158dd23b5052b70ff489f90fa" name="aaf211f0158dd23b5052b70ff489f90fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf211f0158dd23b5052b70ff489f90fa">&#9670;&#160;</a></span>erase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classneforce_1_1ttl__cache.html">neforce::ttl_cache</a>&lt; Key, Value &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype">const Key &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除缓存项 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果键存在并成功删除返回true，否则返回false </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00221">221</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad21b2abcaf44332a77d20642110c47bc" name="ad21b2abcaf44332a77d20642110c47bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad21b2abcaf44332a77d20642110c47bc">&#9670;&#160;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classneforce_1_1optional.html">optional</a>&lt; Value &gt; <a class="el" href="classneforce_1_1ttl__cache.html">neforce::ttl_cache</a>&lt; Key, Value &gt;::get </td>
+          <td>(</td>
+          <td class="paramtype">const Key &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取缓存项 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含值的optional，如果键不存在或已过期返回none</dd></dl>
+<p>根据刷新策略决定是否更新过期时间。 </p>
+
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00175">175</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="none_8hpp_source.html#l00073">neforce::none</a>, <a class="el" href="structneforce_1_1steady__clock.html#a21d376e7630c7c35cde610180e214a1d">neforce::steady_clock::now()</a>, <a class="el" href="ttl__cache_8hpp_source.html#l00057">on_access</a> , 以及 <a class="el" href="ttl__cache_8hpp_source.html#l00058">sliding_window</a>.</p>
+
+</div>
+</div>
+<a id="a3c08bfa27db3e3e12ff777adbe22b3b9" name="a3c08bfa27db3e3e12ff777adbe22b3b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c08bfa27db3e3e12ff777adbe22b3b9">&#9670;&#160;</a></span>put() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1ttl__cache.html">neforce::ttl_cache</a>&lt; Key, Value &gt;::put </td>
+          <td>(</td>
+          <td class="paramtype">const Key &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Value &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>插入缓存项（使用默认TTL） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键 </td></tr>
+    <tr><td class="paramname">value</td><td>值</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>使用默认TTL插入或更新缓存项。 </p>
+
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00150">150</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="structneforce_1_1steady__clock.html#a21d376e7630c7c35cde610180e214a1d">neforce::steady_clock::now()</a>.</p>
+
+</div>
+</div>
+<a id="a54ecfcb1251ffe4dcd7401bd95a9c077" name="a54ecfcb1251ffe4dcd7401bd95a9c077"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54ecfcb1251ffe4dcd7401bd95a9c077">&#9670;&#160;</a></span>put() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1ttl__cache.html">neforce::ttl_cache</a>&lt; Key, Value &gt;::put </td>
+          <td>(</td>
+          <td class="paramtype">const Key &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Value &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a132d034b211e7ef0e5f71ca32646afc1">duration</a></td>          <td class="paramname"><span class="paramname"><em>ttl</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>插入缓存项（指定TTL） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键 </td></tr>
+    <tr><td class="paramname">value</td><td>值 </td></tr>
+    <tr><td class="paramname">ttl</td><td>生存时间</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>使用指定的TTL插入或更新缓存项。 </p>
+
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00163">163</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="structneforce_1_1steady__clock.html#a21d376e7630c7c35cde610180e214a1d">neforce::steady_clock::now()</a>.</p>
+
+</div>
+</div>
+<a id="a85b7861e5fd49ce4006776e97cc49b60" name="a85b7861e5fd49ce4006776e97cc49b60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85b7861e5fd49ce4006776e97cc49b60">&#9670;&#160;</a></span>set_refresh_policy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classneforce_1_1ttl__cache.html">neforce::ttl_cache</a>&lt; Key, Value &gt;::set_refresh_policy </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a975ef437fc384b3a168bc87ba9f590da">refresh_policy</a></td>          <td class="paramname"><span class="paramname"><em>policy</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置刷新策略 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">policy</td><td>新的刷新策略</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>决定访问缓存项时如何影响其过期时间。 </p>
+
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00141">141</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a06b87994a4609eeed7196b8765499760" name="a06b87994a4609eeed7196b8765499760"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06b87994a4609eeed7196b8765499760">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Value&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ac1647b63a1964acfc44543bd395a4a1e">size_type</a> <a class="el" href="classneforce_1_1ttl__cache.html">neforce::ttl_cache</a>&lt; Key, Value &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前缓存大小 </p>
+<dl class="section return"><dt>返回</dt><dd>缓存中的元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a> 第 <a class="el" href="ttl__cache_8hpp_source.html#l00232">232</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="ttl__cache_8hpp_source.html">ttl_cache.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>neforce</b></li><li class="navelem"><a href="classneforce_1_1ttl__cache.html">ttl_cache</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

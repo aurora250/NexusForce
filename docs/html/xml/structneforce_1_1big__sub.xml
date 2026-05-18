@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1big__sub" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::big_sub</compoundname>
+    <includes refid="static__numeric_8hpp" local="no">static_numeric.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1ga6b799fca75477134492afc81da80d464" kindref="member">uintmax_t</ref></type>
+        <declname>High1</declname>
+        <defname>High1</defname>
+      </param>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1ga6b799fca75477134492afc81da80d464" kindref="member">uintmax_t</ref></type>
+        <declname>Low1</declname>
+        <defname>Low1</defname>
+      </param>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1ga6b799fca75477134492afc81da80d464" kindref="member">uintmax_t</ref></type>
+        <declname>High2</declname>
+        <defname>High2</defname>
+      </param>
+      <param>
+        <type><ref refid="group___platform_dependent_types_1ga6b799fca75477134492afc81da80d464" kindref="member">uintmax_t</ref></type>
+        <declname>Low2</declname>
+        <defname>Low2</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structneforce_1_1big__sub_1a86e682f58b308c22fb732cb89e2e7824" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga6b799fca75477134492afc81da80d464" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t neforce::big_sub&lt; High1, Low1, High2, Low2 &gt;::result_low</definition>
+        <argsstring></argsstring>
+        <name>result_low</name>
+        <qualifiedname>neforce::big_sub::result_low</qualifiedname>
+        <initializer>= Low1 - Low2</initializer>
+        <briefdescription>
+<para>减法结果的低位 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="134" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1big__sub_1ad2253ca554a3f52a70e9bf78139dadd8" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga6b799fca75477134492afc81da80d464" kindref="member">uintmax_t</ref></type>
+        <definition>uintmax_t neforce::big_sub&lt; High1, Low1, High2, Low2 &gt;::result_high</definition>
+        <argsstring></argsstring>
+        <name>result_high</name>
+        <qualifiedname>neforce::big_sub::result_high</qualifiedname>
+        <initializer>                               =
+(High1 - High2 - static_cast&lt;<ref refid="group___platform_dependent_types_1ga6b799fca75477134492afc81da80d464" kindref="member">uintmax_t</ref>&gt;(Low1 &lt; Low2))</initializer>
+        <briefdescription>
+<para>减法结果的高位，考虑借位 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="135" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="135" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>无符号大整数减法 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>High1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被减数的高位 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Low1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>被减数的低位 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>High2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>减数的高位 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Low2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>减数的低位</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+计算两个大整数的差，要求被减数不小于减数。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" line="132" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/numeric/static_numeric.hpp" bodystart="132" bodyend="137"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1big__sub_1ad2253ca554a3f52a70e9bf78139dadd8" prot="public" virt="non-virtual"><scope>neforce::big_sub</scope><name>result_high</name></member>
+      <member refid="structneforce_1_1big__sub_1a86e682f58b308c22fb732cb89e2e7824" prot="public" virt="non-virtual"><scope>neforce::big_sub</scope><name>result_low</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

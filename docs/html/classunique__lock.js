@@ -8,10 +8,10 @@ var classunique__lock =
     [ "unique_lock", "classunique__lock.html#af9ba8cd379db40771df210a3987eb59d", null ],
     [ "~unique_lock", "classunique__lock.html#a13eff43602002fe318715d71e929d342", null ],
     [ "lock_quiet", "classunique__lock.html#aa31d80f6bf8c45a5e30d075896e0426a", null ],
-    [ "mutex", "classunique__lock.html#a9732001877bf83c2d0cbd51c404a0bfb", null ],
-    [ "operator bool", "classunique__lock.html#ac9969c01f6fb36a11e1a811a909f3a7c", null ],
+    [ "mutex", "classunique__lock.html#af9ed87e847e619f5b3f72ed5b054542d", null ],
+    [ "operator bool", "classunique__lock.html#a8f1e81c5962e45dafe8f7a9708c39183", null ],
     [ "operator=", "classunique__lock.html#af4e3bf904517122a7dea67c6cfc7d113", null ],
-    [ "owns_lock", "classunique__lock.html#ace616792a495c421fbe42157cd4a89f9", null ],
+    [ "owns_lock", "classunique__lock.html#a7f1b270e5b84faffec22e255a398ea75", null ],
     [ "release", "classunique__lock.html#a7e86a8f23cf3dc70f56fe36b988b4718", null ],
     [ "try_lock", "classunique__lock.html#a0f7defd5ab0b7d85f7d8bbc7d7a712a9", null ],
     [ "unlock_quiet", "classunique__lock.html#a0473323402bab23a6c89eb5a5ab58798", null ]

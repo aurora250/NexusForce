@@ -1,0 +1,655 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structneforce_1_1exception" kind="struct" language="C++" prot="public">
+    <compoundname>neforce::exception</compoundname>
+    <derivedcompoundref refid="structneforce_1_1expected__exception" prot="public" virt="non-virtual">neforce::expected_exception</derivedcompoundref>
+    <derivedcompoundref refid="structneforce_1_1future__exception" prot="public" virt="non-virtual">neforce::future_exception</derivedcompoundref>
+    <derivedcompoundref refid="structneforce_1_1memory__exception" prot="public" virt="non-virtual">neforce::memory_exception</derivedcompoundref>
+    <derivedcompoundref refid="structneforce_1_1network__exception" prot="public" virt="non-virtual">neforce::network_exception</derivedcompoundref>
+    <derivedcompoundref refid="structneforce_1_1system__exception" prot="public" virt="non-virtual">neforce::system_exception</derivedcompoundref>
+    <derivedcompoundref refid="structneforce_1_1thirdparty__exception" prot="public" virt="non-virtual">neforce::thirdparty_exception</derivedcompoundref>
+    <derivedcompoundref refid="structneforce_1_1value__exception" prot="public" virt="non-virtual">neforce::value_exception</derivedcompoundref>
+    <includes refid="exception_8hpp" local="no">exception.hpp</includes>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="structneforce_1_1exception_1afae5a8150a909b919767d7d8892a2a0c" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::exception::INFO_SIZE</definition>
+        <argsstring></argsstring>
+        <name>INFO_SIZE</name>
+        <qualifiedname>neforce::exception::INFO_SIZE</qualifiedname>
+        <initializer>= 256</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="78" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1exception_1a25c4bc739a406e254129980d51963491" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga31f116430081a5b50d607a7dc714b717" kindref="member">size_t</ref></type>
+        <definition>size_t neforce::exception::TYPE_SIZE</definition>
+        <argsstring></argsstring>
+        <name>TYPE_SIZE</name>
+        <qualifiedname>neforce::exception::TYPE_SIZE</qualifiedname>
+        <initializer>= 48</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="79" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structneforce_1_1exception_1a95f9acabee7f77aeee526333ab7db122" prot="private" static="no" mutable="no">
+        <type>char</type>
+        <definition>char neforce::exception::info_[INFO_SIZE]</definition>
+        <argsstring>[INFO_SIZE]</argsstring>
+        <name>info_</name>
+        <qualifiedname>neforce::exception::info_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="81" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1exception_1a191a9c4f83c9c16137e3d7efcd61685d" prot="private" static="no" mutable="no">
+        <type>char</type>
+        <definition>char neforce::exception::type_[TYPE_SIZE]</definition>
+        <argsstring>[TYPE_SIZE]</argsstring>
+        <name>type_</name>
+        <qualifiedname>neforce::exception::type_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="82" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structneforce_1_1exception_1aabe1b28f38e4bf5967e1f4b1f56cbf60" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int neforce::exception::code_</definition>
+        <argsstring></argsstring>
+        <name>code_</name>
+        <qualifiedname>neforce::exception::code_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="83" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="83" bodyend="83"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structneforce_1_1exception_1aa21d162565006e60056a7464a2e3643b" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>auto</type>
+        <definition>auto neforce::exception::static_type</definition>
+        <argsstring></argsstring>
+        <name>static_type</name>
+        <qualifiedname>neforce::exception::static_type</qualifiedname>
+        <initializer>= &quot;exception&quot;</initializer>
+        <briefdescription>
+<para>静态类型字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="191" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="191" bodyend="-1"/>
+        <referencedby refid="structneforce_1_1exception_1ae72723ceb6dce14a5c44dfb36d74ff94" compoundref="exception_8hpp" startline="92" endline="100">exception</referencedby>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structneforce_1_1exception_1ae72723ceb6dce14a5c44dfb36d74ff94" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::exception::exception</definition>
+        <argsstring>(const char *info=static_type, const char *type=static_type, const int code=0)</argsstring>
+        <name>exception</name>
+        <qualifiedname>neforce::exception::exception</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>info</declname>
+          <defval><ref refid="structneforce_1_1exception_1aa21d162565006e60056a7464a2e3643b" kindref="member">static_type</ref></defval>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>type</declname>
+          <defval><ref refid="structneforce_1_1exception_1aa21d162565006e60056a7464a2e3643b" kindref="member">static_type</ref></defval>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>code</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异常信息 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异常类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>code</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>异常码 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="92" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="92" bodyend="100"/>
+        <references refid="structneforce_1_1exception_1a41cdf6712fb5f1347e3830397667c9c0" compoundref="exception_8hpp" startline="189" endline="189">code</references>
+        <references refid="structneforce_1_1exception_1aa21d162565006e60056a7464a2e3643b" compoundref="exception_8hpp" startline="191">static_type</references>
+        <references refid="group___string_operations_1gab1870ce94fc88b6a4c9ef4f177e8998d" compoundref="memory_8hpp" startline="392" endline="404">neforce::string_copy</references>
+        <references refid="structneforce_1_1exception_1a26bee61d829f3eb1df7f86ec9029413c" compoundref="exception_8hpp" startline="183" endline="183">type</references>
+        <referencedby refid="structneforce_1_1exception_1ae2992fe5862a76e5fae94c9290aca38e" compoundref="exception_8hpp" startline="165" endline="166">exception</referencedby>
+        <referencedby refid="structneforce_1_1exception_1a9ae6ab2dc5699adfc63ec7571e87ec94" compoundref="exception_8hpp" startline="105" endline="109">exception</referencedby>
+        <referencedby refid="structneforce_1_1exception_1a295286b9d2ce7d9338815964b564e289" compoundref="exception_8hpp" startline="129" endline="136">exception</referencedby>
+        <referencedby refid="structneforce_1_1exception_1a159169892770b6020d5ab0bcbf6066e5" compoundref="exception_8hpp" startline="114" endline="124">operator=</referencedby>
+        <referencedby refid="structneforce_1_1exception_1a9e4ddd8f9b01a26777cff21e282511a5" compoundref="exception_8hpp" startline="141" endline="155">operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1exception_1a9ae6ab2dc5699adfc63ec7571e87ec94" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::exception::exception</definition>
+        <argsstring>(const exception &amp;other) noexcept</argsstring>
+        <name>exception</name>
+        <qualifiedname>neforce::exception::exception</qualifiedname>
+        <param>
+          <type>const exception &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>复制构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="105" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="105" bodyend="109"/>
+        <references refid="structneforce_1_1exception_1ae72723ceb6dce14a5c44dfb36d74ff94" compoundref="exception_8hpp" startline="92" endline="100">exception</references>
+        <references refid="group___memory_functions_1ga5e08d60da165a1ac99e892d9efa6626f" compoundref="memory_8hpp" startline="29" endline="48">neforce::memory_copy</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1exception_1a159169892770b6020d5ab0bcbf6066e5" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1exception_1ae72723ceb6dce14a5c44dfb36d74ff94" kindref="member">exception</ref> &amp;</type>
+        <definition>exception &amp; neforce::exception::operator=</definition>
+        <argsstring>(const exception &amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::exception::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="structneforce_1_1exception_1ae72723ceb6dce14a5c44dfb36d74ff94" kindref="member">exception</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>复制赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="114" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="114" bodyend="124"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3075" endline="3077">neforce::addressof</references>
+        <references refid="structneforce_1_1exception_1ae72723ceb6dce14a5c44dfb36d74ff94" compoundref="exception_8hpp" startline="92" endline="100">exception</references>
+        <references refid="group___memory_functions_1ga5e08d60da165a1ac99e892d9efa6626f" compoundref="memory_8hpp" startline="29" endline="48">neforce::memory_copy</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1exception_1a295286b9d2ce7d9338815964b564e289" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::exception::exception</definition>
+        <argsstring>(exception &amp;&amp;other) noexcept</argsstring>
+        <name>exception</name>
+        <qualifiedname>neforce::exception::exception</qualifiedname>
+        <param>
+          <type>exception &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="129" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="129" bodyend="136"/>
+        <references refid="structneforce_1_1exception_1ae72723ceb6dce14a5c44dfb36d74ff94" compoundref="exception_8hpp" startline="92" endline="100">exception</references>
+        <references refid="group___memory_functions_1ga5e08d60da165a1ac99e892d9efa6626f" compoundref="memory_8hpp" startline="29" endline="48">neforce::memory_copy</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1exception_1a9e4ddd8f9b01a26777cff21e282511a5" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structneforce_1_1exception_1ae72723ceb6dce14a5c44dfb36d74ff94" kindref="member">exception</ref> &amp;</type>
+        <definition>exception &amp; neforce::exception::operator=</definition>
+        <argsstring>(exception &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::exception::operator=</qualifiedname>
+        <param>
+          <type><ref refid="structneforce_1_1exception_1ae72723ceb6dce14a5c44dfb36d74ff94" kindref="member">exception</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="141" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="141" bodyend="155"/>
+        <references refid="group___args_forward_functions_1ga57a2cf85645286e20c82caae70cd13dc" compoundref="type__traits_8hpp" startline="3075" endline="3077">neforce::addressof</references>
+        <references refid="structneforce_1_1exception_1ae72723ceb6dce14a5c44dfb36d74ff94" compoundref="exception_8hpp" startline="92" endline="100">exception</references>
+        <references refid="group___memory_functions_1ga5e08d60da165a1ac99e892d9efa6626f" compoundref="memory_8hpp" startline="29" endline="48">neforce::memory_copy</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1exception_1ae2992fe5862a76e5fae94c9290aca38e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Error</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1gaf587c525b5f808c49df5c82b74e7400c" kindref="member">is_base_of_v</ref>&lt; <ref refid="structneforce_1_1exception_1ae72723ceb6dce14a5c44dfb36d74ff94" kindref="member">exception</ref>, Error &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::exception::exception</definition>
+        <argsstring>(const Error &amp;error)</argsstring>
+        <name>exception</name>
+        <qualifiedname>neforce::exception::exception</qualifiedname>
+        <param>
+          <type>const Error &amp;</type>
+          <declname>error</declname>
+        </param>
+        <briefdescription>
+<para>模板构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>error</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>错误对象</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+从其他异常类型构造。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="165" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="165" bodyend="166"/>
+        <references refid="structneforce_1_1exception_1a41cdf6712fb5f1347e3830397667c9c0" compoundref="exception_8hpp" startline="189" endline="189">code</references>
+        <references refid="structneforce_1_1exception_1ae72723ceb6dce14a5c44dfb36d74ff94" compoundref="exception_8hpp" startline="92" endline="100">exception</references>
+        <references refid="structneforce_1_1exception_1a26bee61d829f3eb1df7f86ec9029413c" compoundref="exception_8hpp" startline="183" endline="183">type</references>
+        <references refid="structneforce_1_1exception_1a0fd5c01a8bdb6f38522f57e157ccf034" compoundref="exception_8hpp" startline="177" endline="177">what</references>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1exception_1aaa0545c19e5f71dd3da3ef74e19c190e" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual neforce::exception::~exception</definition>
+        <argsstring>()=default</argsstring>
+        <name>~exception</name>
+        <qualifiedname>neforce::exception::~exception</qualifiedname>
+        <briefdescription>
+<para>虚析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="171" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1exception_1a0fd5c01a8bdb6f38522f57e157ccf034" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * neforce::exception::what</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>what</name>
+        <qualifiedname>neforce::exception::what</qualifiedname>
+        <briefdescription>
+<para>获取错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>错误信息字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="177" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="177" bodyend="177"/>
+        <referencedby refid="structneforce_1_1exception_1ae2992fe5862a76e5fae94c9290aca38e" compoundref="exception_8hpp" startline="165" endline="166">exception</referencedby>
+        <referencedby refid="group___thread_pool_1ga07be2a63ced064f491142998d9b9236c">neforce::get_current_task_group</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1exception_1a26bee61d829f3eb1df7f86ec9029413c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char * neforce::exception::type</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>type</name>
+        <qualifiedname>neforce::exception::type</qualifiedname>
+        <briefdescription>
+<para>获取异常类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>异常类型字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="183" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="183" bodyend="183"/>
+        <referencedby refid="structneforce_1_1exception_1ae72723ceb6dce14a5c44dfb36d74ff94" compoundref="exception_8hpp" startline="92" endline="100">exception</referencedby>
+        <referencedby refid="structneforce_1_1exception_1ae2992fe5862a76e5fae94c9290aca38e" compoundref="exception_8hpp" startline="165" endline="166">exception</referencedby>
+        <referencedby refid="structneforce_1_1socket__exception_1a9d80a91da2a8eaf7da99e104dfd5204f">neforce::socket_exception::is_would_block</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structneforce_1_1exception_1a41cdf6712fb5f1347e3830397667c9c0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int neforce::exception::code</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>code</name>
+        <qualifiedname>neforce::exception::code</qualifiedname>
+        <briefdescription>
+<para>获取异常码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>异常类型码 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="189" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="189" bodyend="189"/>
+        <referencedby refid="structneforce_1_1exception_1ae72723ceb6dce14a5c44dfb36d74ff94" compoundref="exception_8hpp" startline="92" endline="100">exception</referencedby>
+        <referencedby refid="structneforce_1_1exception_1ae2992fe5862a76e5fae94c9290aca38e" compoundref="exception_8hpp" startline="165" endline="166">exception</referencedby>
+        <referencedby refid="structneforce_1_1socket__exception_1a9d80a91da2a8eaf7da99e104dfd5204f">neforce::socket_exception::is_would_block</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>异常基类 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="10">
+        <label>http_exception</label>
+        <link refid="structhttp__exception"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>neforce::allocate_exception</label>
+        <link refid="structneforce_1_1allocate__exception"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>neforce::anycast_exception</label>
+        <link refid="structneforce_1_1anycast__exception"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>neforce::cmdline_exception</label>
+        <link refid="structneforce_1_1cmdline__exception"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>neforce::console_exception</label>
+        <link refid="structneforce_1_1console__exception"/>
+        <childnode refid="17" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>neforce::database_exception</label>
+        <link refid="structneforce_1_1database__exception"/>
+        <childnode refid="26" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>neforce::database_stmt_exception</label>
+        <link refid="structneforce_1_1database__stmt__exception"/>
+        <childnode refid="27" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>neforce::database_typecast_exception</label>
+        <link refid="structneforce_1_1database__typecast__exception"/>
+        <childnode refid="27" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>neforce::device_exception</label>
+        <link refid="structneforce_1_1device__exception"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>neforce::dns_exception</label>
+        <link refid="classneforce_1_1dns__exception"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>neforce::dynamic_library_exception</label>
+        <link refid="structneforce_1_1dynamic__library__exception"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>neforce::env_exception</label>
+        <link refid="structneforce_1_1env__exception"/>
+        <childnode refid="33" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>neforce::exception</label>
+        <link refid="structneforce_1_1exception"/>
+      </node>
+      <node id="20">
+        <label>neforce::file_exception</label>
+        <link refid="structneforce_1_1file__exception"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>neforce::ftp_exception</label>
+        <link refid="structneforce_1_1ftp__exception"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>neforce::future_exception</label>
+        <link refid="structneforce_1_1future__exception"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>neforce::ini_exception</label>
+        <link refid="structneforce_1_1ini__exception"/>
+        <childnode refid="33" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>neforce::iterator_exception</label>
+        <link refid="structneforce_1_1iterator__exception"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>neforce::json_exception</label>
+        <link refid="structneforce_1_1json__exception"/>
+        <childnode refid="33" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>neforce::locale_exception</label>
+        <link refid="structneforce_1_1locale__exception"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>neforce::lz4_exception</label>
+        <link refid="structneforce_1_1lz4__exception"/>
+        <childnode refid="26" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>neforce::math_exception</label>
+        <link refid="structneforce_1_1math__exception"/>
+        <childnode refid="33" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>neforce::memory_exception</label>
+        <link refid="structneforce_1_1memory__exception"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>neforce::network_exception</label>
+        <link refid="structneforce_1_1network__exception"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>neforce::optional_exception</label>
+        <link refid="structneforce_1_1optional__exception"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>neforce::pipe_exception</label>
+        <link refid="structneforce_1_1pipe__exception"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>neforce::process_exception</label>
+        <link refid="structneforce_1_1process__exception"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>neforce::regex_exception</label>
+        <link refid="structneforce_1_1regex__exception"/>
+        <childnode refid="33" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>neforce::share_memory_exception</label>
+        <link refid="structneforce_1_1share__memory__exception"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>neforce::smtp_exception</label>
+        <link refid="structneforce_1_1smtp__exception"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>neforce::socket_exception</label>
+        <link refid="structneforce_1_1socket__exception"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>neforce::ssl_exception</label>
+        <link refid="structneforce_1_1ssl__exception"/>
+        <childnode refid="26" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>neforce::system_exception</label>
+        <link refid="structneforce_1_1system__exception"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>neforce::thirdparty_exception</label>
+        <link refid="structneforce_1_1thirdparty__exception"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>neforce::thread_exception</label>
+        <link refid="structneforce_1_1thread__exception"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>neforce::toml_exception</label>
+        <link refid="structneforce_1_1toml__exception"/>
+        <childnode refid="33" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>neforce::typecast_exception</label>
+        <link refid="structneforce_1_1typecast__exception"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>neforce::value_exception</label>
+        <link refid="structneforce_1_1value__exception"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>neforce::yaml_exception</label>
+        <link refid="structneforce_1_1yaml__exception"/>
+        <childnode refid="33" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>neforce::zlib_exception</label>
+        <link refid="structneforce_1_1zlib__exception"/>
+        <childnode refid="26" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" line="76" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/exception/exception.hpp" bodystart="76" bodyend="192"/>
+    <listofallmembers>
+      <member refid="structneforce_1_1exception_1a41cdf6712fb5f1347e3830397667c9c0" prot="public" virt="non-virtual"><scope>neforce::exception</scope><name>code</name></member>
+      <member refid="structneforce_1_1exception_1aabe1b28f38e4bf5967e1f4b1f56cbf60" prot="private" virt="non-virtual"><scope>neforce::exception</scope><name>code_</name></member>
+      <member refid="structneforce_1_1exception_1ae72723ceb6dce14a5c44dfb36d74ff94" prot="public" virt="non-virtual"><scope>neforce::exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1a9ae6ab2dc5699adfc63ec7571e87ec94" prot="public" virt="non-virtual"><scope>neforce::exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1a295286b9d2ce7d9338815964b564e289" prot="public" virt="non-virtual"><scope>neforce::exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1ae2992fe5862a76e5fae94c9290aca38e" prot="public" virt="non-virtual"><scope>neforce::exception</scope><name>exception</name></member>
+      <member refid="structneforce_1_1exception_1a95f9acabee7f77aeee526333ab7db122" prot="private" virt="non-virtual"><scope>neforce::exception</scope><name>info_</name></member>
+      <member refid="structneforce_1_1exception_1afae5a8150a909b919767d7d8892a2a0c" prot="private" virt="non-virtual"><scope>neforce::exception</scope><name>INFO_SIZE</name></member>
+      <member refid="structneforce_1_1exception_1a159169892770b6020d5ab0bcbf6066e5" prot="public" virt="non-virtual"><scope>neforce::exception</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1exception_1a9e4ddd8f9b01a26777cff21e282511a5" prot="public" virt="non-virtual"><scope>neforce::exception</scope><name>operator=</name></member>
+      <member refid="structneforce_1_1exception_1aa21d162565006e60056a7464a2e3643b" prot="public" virt="non-virtual"><scope>neforce::exception</scope><name>static_type</name></member>
+      <member refid="structneforce_1_1exception_1a26bee61d829f3eb1df7f86ec9029413c" prot="public" virt="non-virtual"><scope>neforce::exception</scope><name>type</name></member>
+      <member refid="structneforce_1_1exception_1a191a9c4f83c9c16137e3d7efcd61685d" prot="private" virt="non-virtual"><scope>neforce::exception</scope><name>type_</name></member>
+      <member refid="structneforce_1_1exception_1a25c4bc739a406e254129980d51963491" prot="private" virt="non-virtual"><scope>neforce::exception</scope><name>TYPE_SIZE</name></member>
+      <member refid="structneforce_1_1exception_1a0fd5c01a8bdb6f38522f57e157ccf034" prot="public" virt="non-virtual"><scope>neforce::exception</scope><name>what</name></member>
+      <member refid="structneforce_1_1exception_1aaa0545c19e5f71dd3da3ef74e19c190e" prot="public" virt="virtual"><scope>neforce::exception</scope><name>~exception</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

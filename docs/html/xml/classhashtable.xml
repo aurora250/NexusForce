@@ -379,9 +379,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
-      <memberdef kind="function" id="classhashtable_1a474bad2f3ff78ef1886d2ab01c934098" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">size_type</ref></type>
-        <definition>static NEFORCE_NODISCARD size_type hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::next_size</definition>
+      <memberdef kind="function" id="classhashtable_1ae478faf20fc57ce4d716d100fff80185" prot="private" static="yes" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">size_type</ref></type>
+        <definition>static size_type hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::next_size</definition>
         <argsstring>(const size_type n) noexcept</argsstring>
         <name>next_size</name>
         <qualifiedname>hashtable::next_size</qualifiedname>
@@ -408,7 +408,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="440" column="40" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="440" bodyend="445"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="440" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="440" bodyend="445"/>
       </memberdef>
       <memberdef kind="function" id="classhashtable_1a52d63310f5e04492c9a927df02a2d07e" prot="private" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classhashtable_1a8a8736c15142a779db875a0ab1c4d15a" kindref="member">iterator</ref></type>
@@ -736,7 +736,7 @@
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
         <definition>enable_if_t&lt;!is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique_aux</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>insert_unique_aux</name>
@@ -791,7 +791,7 @@
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
         <definition>enable_if_t&lt; is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique_aux</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>insert_unique_aux</name>
@@ -846,7 +846,7 @@
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
         <definition>enable_if_t&lt;!is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal_aux</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>insert_equal_aux</name>
@@ -901,7 +901,7 @@
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga47b4de454cb338a8959fd068e1d827e6" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga3d298019699d72aef974a27a13c65393" kindref="member">is_ranges_fwd_iter_v</ref>&lt; Iterator &gt; &gt;</type>
         <definition>enable_if_t&lt; is_ranges_fwd_iter_v&lt; Iterator &gt; &gt; hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal_aux</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>insert_equal_aux</name>
@@ -1518,9 +1518,9 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="947" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="947" bodyend="947"/>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1afbc46f0dee2aedaa290f5199677474eb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a8a8736c15142a779db875a0ab1c4d15a" kindref="member">iterator</ref></type>
-        <definition>NEFORCE_NODISCARD iterator hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::begin</definition>
+      <memberdef kind="function" id="classhashtable_1aefb294b70ac71abd7dd4ca7cbf9b37c2" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhashtable_1a8a8736c15142a779db875a0ab1c4d15a" kindref="member">iterator</ref></type>
+        <definition>iterator hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::begin</definition>
         <argsstring>() noexcept</argsstring>
         <name>begin</name>
         <qualifiedname>hashtable::begin</qualifiedname>
@@ -1534,11 +1534,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="953" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="953" bodyend="960"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="953" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="953" bodyend="960"/>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1a5d78db59d460b91861fe1685b28d11ec" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a8a8736c15142a779db875a0ab1c4d15a" kindref="member">iterator</ref></type>
-        <definition>NEFORCE_NODISCARD iterator hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::end</definition>
+      <memberdef kind="function" id="classhashtable_1aa9b9d7f3a092da243eb9ac317bca8bce" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhashtable_1a8a8736c15142a779db875a0ab1c4d15a" kindref="member">iterator</ref></type>
+        <definition>iterator hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::end</definition>
         <argsstring>() noexcept</argsstring>
         <name>end</name>
         <qualifiedname>hashtable::end</qualifiedname>
@@ -1552,16 +1552,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="966" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="966" bodyend="966"/>
-        <referencedby refid="classhashtable_1afbc46f0dee2aedaa290f5199677474eb" compoundref="hashtable_8hpp" startline="953" endline="960">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::begin</referencedby>
-        <referencedby refid="classhashtable_1ac84d8b21aa3d5f181c7ae7ee77c9296a" compoundref="hashtable_8hpp" startline="1464" endline="1501">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::equal_range</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="966" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="966" bodyend="966"/>
+        <referencedby refid="classhashtable_1aefb294b70ac71abd7dd4ca7cbf9b37c2" compoundref="hashtable_8hpp" startline="953" endline="960">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::begin</referencedby>
+        <referencedby refid="classhashtable_1a2d7444122a7121df1e6d657307423602" compoundref="hashtable_8hpp" startline="1464" endline="1501">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::equal_range</referencedby>
         <referencedby refid="classhashtable_1a69cb3ef1f09f278a837e3e8e758d6369" compoundref="hashtable_8hpp" startline="1284" endline="1323">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
         <referencedby refid="classhashtable_1a33185aeb2ea3ef8b694919568fd03705" compoundref="hashtable_8hpp" startline="1331" endline="1355">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::erase</referencedby>
-        <referencedby refid="classhashtable_1a3269c651cf82ba48ce0b323b81170b01" compoundref="hashtable_8hpp" startline="1398" endline="1410">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::find</referencedby>
+        <referencedby refid="classhashtable_1acbce53f2593135ac86f624327aca6ea0" compoundref="hashtable_8hpp" startline="1398" endline="1410">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::find</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1a8b40718d99276113c2bd67ac9dd36ad8" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a7187950e0d6060fc8ee371fb3ac1ad6a" kindref="member">const_iterator</ref></type>
-        <definition>NEFORCE_NODISCARD const_iterator hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::begin</definition>
+      <memberdef kind="function" id="classhashtable_1a9f8b7223faa5f7290104bd80d0207c2c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhashtable_1a7187950e0d6060fc8ee371fb3ac1ad6a" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::begin</definition>
         <argsstring>() const noexcept</argsstring>
         <name>begin</name>
         <qualifiedname>hashtable::begin</qualifiedname>
@@ -1575,11 +1575,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="972" column="38" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="972" bodyend="972"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="972" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="972" bodyend="972"/>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1a79997a1bf3d25bd2bfc7dcd005b00d7d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a7187950e0d6060fc8ee371fb3ac1ad6a" kindref="member">const_iterator</ref></type>
-        <definition>NEFORCE_NODISCARD const_iterator hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::end</definition>
+      <memberdef kind="function" id="classhashtable_1aba6dc6b45ececd03f65311a4c1f3aeff" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhashtable_1a7187950e0d6060fc8ee371fb3ac1ad6a" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::end</definition>
         <argsstring>() const noexcept</argsstring>
         <name>end</name>
         <qualifiedname>hashtable::end</qualifiedname>
@@ -1593,11 +1593,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="978" column="38" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="978" bodyend="978"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="978" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="978" bodyend="978"/>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1a79aa27f0419b75a540aa2049a44b86a4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a7187950e0d6060fc8ee371fb3ac1ad6a" kindref="member">const_iterator</ref></type>
-        <definition>NEFORCE_NODISCARD const_iterator hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::cbegin</definition>
+      <memberdef kind="function" id="classhashtable_1a887f7252756698f707190a28cae648fe" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhashtable_1a7187950e0d6060fc8ee371fb3ac1ad6a" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::cbegin</definition>
         <argsstring>() const noexcept</argsstring>
         <name>cbegin</name>
         <qualifiedname>hashtable::cbegin</qualifiedname>
@@ -1611,13 +1611,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="984" column="38" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="984" bodyend="991"/>
-        <referencedby refid="classhashtable_1a8b40718d99276113c2bd67ac9dd36ad8" compoundref="hashtable_8hpp" startline="972" endline="972">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::begin</referencedby>
-        <referencedby refid="classhashtable_1a926e1c65d564489d6f0d4397856f6aed" compoundref="hashtable_8hpp" startline="1591" endline="1595">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="984" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="984" bodyend="991"/>
+        <referencedby refid="classhashtable_1a9f8b7223faa5f7290104bd80d0207c2c" compoundref="hashtable_8hpp" startline="972" endline="972">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::begin</referencedby>
+        <referencedby refid="classhashtable_1a9b5d36fe0eac69e3ef6b6bddb9106b35" compoundref="hashtable_8hpp" startline="1591" endline="1595">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1a056a06cf6e2ead290d2c3f9d384f5eb9" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a7187950e0d6060fc8ee371fb3ac1ad6a" kindref="member">const_iterator</ref></type>
-        <definition>NEFORCE_NODISCARD const_iterator hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::cend</definition>
+      <memberdef kind="function" id="classhashtable_1a92702f219aedd4ba45a1054dd7b4bdb0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhashtable_1a7187950e0d6060fc8ee371fb3ac1ad6a" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::cend</definition>
         <argsstring>() const noexcept</argsstring>
         <name>cend</name>
         <qualifiedname>hashtable::cend</qualifiedname>
@@ -1631,17 +1631,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="997" column="38" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="997" bodyend="997"/>
-        <referencedby refid="classhashtable_1a79aa27f0419b75a540aa2049a44b86a4" compoundref="hashtable_8hpp" startline="984" endline="991">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::cbegin</referencedby>
-        <referencedby refid="classhashtable_1a22424473156d28f00e8f57077d147dba" compoundref="hashtable_8hpp" startline="1455" endline="1457">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::contains</referencedby>
-        <referencedby refid="classhashtable_1a79997a1bf3d25bd2bfc7dcd005b00d7d" compoundref="hashtable_8hpp" startline="978" endline="978">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::end</referencedby>
-        <referencedby refid="classhashtable_1aeff44f9d9a9c356a62e3aded9ff05ffb" compoundref="hashtable_8hpp" startline="1508" endline="1545">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::equal_range</referencedby>
-        <referencedby refid="classhashtable_1aae63d8a272b25e7c68cabbabf03705d7" compoundref="hashtable_8hpp" startline="1417" endline="1429">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::find</referencedby>
-        <referencedby refid="classhashtable_1a926e1c65d564489d6f0d4397856f6aed" compoundref="hashtable_8hpp" startline="1591" endline="1595">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="997" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="997" bodyend="997"/>
+        <referencedby refid="classhashtable_1a887f7252756698f707190a28cae648fe" compoundref="hashtable_8hpp" startline="984" endline="991">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::cbegin</referencedby>
+        <referencedby refid="classhashtable_1a46d44567e4d83e549bf824fa66a129ab" compoundref="hashtable_8hpp" startline="1455" endline="1457">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::contains</referencedby>
+        <referencedby refid="classhashtable_1aba6dc6b45ececd03f65311a4c1f3aeff" compoundref="hashtable_8hpp" startline="978" endline="978">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::end</referencedby>
+        <referencedby refid="classhashtable_1a41f01b39387c9dabae70c06730533c76" compoundref="hashtable_8hpp" startline="1508" endline="1545">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::equal_range</referencedby>
+        <referencedby refid="classhashtable_1a5601c4779b8f98c1c8c5bd6f2432368b" compoundref="hashtable_8hpp" startline="1417" endline="1429">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::find</referencedby>
+        <referencedby refid="classhashtable_1a9b5d36fe0eac69e3ef6b6bddb9106b35" compoundref="hashtable_8hpp" startline="1591" endline="1595">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::less_than</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1af3555f9884993e9515931c27786bd520" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">size_type</ref></type>
-        <definition>NEFORCE_NODISCARD size_type hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::size</definition>
+      <memberdef kind="function" id="classhashtable_1a3221462049f9f5088b538c357281c644" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">size_type</ref></type>
+        <definition>size_type hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::size</definition>
         <argsstring>() const noexcept</argsstring>
         <name>size</name>
         <qualifiedname>hashtable::size</qualifiedname>
@@ -1655,12 +1655,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1003" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1003" bodyend="1003"/>
-        <referencedby refid="classhashtable_1a19da1bf17e9b5a79991b17e1091076ea" compoundref="hashtable_8hpp" startline="1069" endline="1071">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::load_factor</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1003" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1003" bodyend="1003"/>
+        <referencedby refid="classhashtable_1ac19a6a947c81213dd1f4de5777717469" compoundref="hashtable_8hpp" startline="1069" endline="1071">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::load_factor</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1addbaa0d4237e4a7f1ceea0706a1605bb" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">size_type</ref></type>
-        <definition>NEFORCE_NODISCARD size_type hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::max_size</definition>
+      <memberdef kind="function" id="classhashtable_1ac4f85831f407725c36402934c321e084" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">size_type</ref></type>
+        <definition>size_type hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::max_size</definition>
         <argsstring>() const noexcept</argsstring>
         <name>max_size</name>
         <qualifiedname>hashtable::max_size</qualifiedname>
@@ -1674,11 +1674,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1009" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1009" bodyend="1009"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1009" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1009" bodyend="1009"/>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1a01d99839fe85ec067bcd559a3d940045" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>NEFORCE_NODISCARD bool hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::empty</definition>
+      <memberdef kind="function" id="classhashtable_1af1c9d12e77ebcefe20815774f45b9a88" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::empty</definition>
         <argsstring>() const noexcept</argsstring>
         <name>empty</name>
         <qualifiedname>hashtable::empty</qualifiedname>
@@ -1692,11 +1692,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1015" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1015" bodyend="1015"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1015" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1015" bodyend="1015"/>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1a30b01b1609fb6470c9bdcc1845c0ce7d" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">size_type</ref></type>
-        <definition>NEFORCE_NODISCARD size_type hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::buckets_size</definition>
+      <memberdef kind="function" id="classhashtable_1a118a8ea6824df95c16a570e221d0fc1c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">size_type</ref></type>
+        <definition>size_type hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::buckets_size</definition>
         <argsstring>() const noexcept</argsstring>
         <name>buckets_size</name>
         <qualifiedname>hashtable::buckets_size</qualifiedname>
@@ -1710,12 +1710,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1021" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1021" bodyend="1021"/>
-        <referencedby refid="classhashtable_1a19da1bf17e9b5a79991b17e1091076ea" compoundref="hashtable_8hpp" startline="1069" endline="1071">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::load_factor</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1021" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1021" bodyend="1021"/>
+        <referencedby refid="classhashtable_1ac19a6a947c81213dd1f4de5777717469" compoundref="hashtable_8hpp" startline="1069" endline="1071">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::load_factor</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1ae8a62a464589037c602ada94f77f5531" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">size_type</ref></type>
-        <definition>NEFORCE_NODISCARD size_type hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::bucket_index</definition>
+      <memberdef kind="function" id="classhashtable_1ae09d3623d57fac2e6616eac7d9589e85" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type><ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">size_type</ref></type>
+        <definition>size_type hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::bucket_index</definition>
         <argsstring>(const key_type &amp;key) const</argsstring>
         <name>bucket_index</name>
         <qualifiedname>hashtable::bucket_index</qualifiedname>
@@ -1742,11 +1742,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1036" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1036" bodyend="1038"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1036" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1036" bodyend="1038"/>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1a7af8b7c0599f59e8988900ad69bbbcf6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">size_type</ref></type>
-        <definition>NEFORCE_NODISCARD size_type hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::bucket_size</definition>
+      <memberdef kind="function" id="classhashtable_1a8880fe9644696c1cb6cbdb92da729df0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">size_type</ref></type>
+        <definition>size_type hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::bucket_size</definition>
         <argsstring>(size_type index) const noexcept</argsstring>
         <name>bucket_size</name>
         <qualifiedname>hashtable::bucket_size</qualifiedname>
@@ -1773,11 +1773,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1045" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1045" bodyend="1051"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1045" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1045" bodyend="1051"/>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1a2ff7961fbfa2f48f2c8676d06616dfd2" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; hasher &gt;" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a283933168f42e039508f8c756c5d0124" kindref="member">hasher</ref></type>
-        <definition>NEFORCE_NODISCARD hasher hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hash_func</definition>
+      <memberdef kind="function" id="classhashtable_1a5c297118874a18939b42f1b1844c95ea" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; hasher &gt;" virt="non-virtual">
+        <type><ref refid="classhashtable_1a283933168f42e039508f8c756c5d0124" kindref="member">hasher</ref></type>
+        <definition>hasher hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::hash_func</definition>
         <argsstring>() const</argsstring>
         <name>hash_func</name>
         <qualifiedname>hashtable::hash_func</qualifiedname>
@@ -1791,11 +1791,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1057" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1057" bodyend="1057"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1057" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1057" bodyend="1057"/>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1a90db8cca7a68ffa755962163b53a01b4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; key_equal &gt;" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1acc0ee670388f0cd08557180388bf3f18" kindref="member">key_equal</ref></type>
-        <definition>NEFORCE_NODISCARD key_equal hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::key_eql</definition>
+      <memberdef kind="function" id="classhashtable_1a3ff241f7f25d1419387951d8b6b8c25a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_copy_constructible_v&lt; key_equal &gt;" virt="non-virtual">
+        <type><ref refid="classhashtable_1acc0ee670388f0cd08557180388bf3f18" kindref="member">key_equal</ref></type>
+        <definition>key_equal hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::key_eql</definition>
         <argsstring>() const</argsstring>
         <name>key_eql</name>
         <qualifiedname>hashtable::key_eql</qualifiedname>
@@ -1809,11 +1809,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1063" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1063" bodyend="1063"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1063" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1063" bodyend="1063"/>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1a19da1bf17e9b5a79991b17e1091076ea" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD float</type>
-        <definition>NEFORCE_NODISCARD float hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::load_factor</definition>
+      <memberdef kind="function" id="classhashtable_1ac19a6a947c81213dd1f4de5777717469" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::load_factor</definition>
         <argsstring>() const noexcept</argsstring>
         <name>load_factor</name>
         <qualifiedname>hashtable::load_factor</qualifiedname>
@@ -1827,11 +1827,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1069" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1069" bodyend="1071"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1069" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1069" bodyend="1071"/>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1a59f57a1bac339b40d65fbdb34573d484" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD float</type>
-        <definition>NEFORCE_NODISCARD float hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::max_load_factor</definition>
+      <memberdef kind="function" id="classhashtable_1a46f4f1da966df844fc4b2a2bf75dc3b9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>float</type>
+        <definition>float hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::max_load_factor</definition>
         <argsstring>() const noexcept</argsstring>
         <name>max_load_factor</name>
         <qualifiedname>hashtable::max_load_factor</qualifiedname>
@@ -1845,7 +1845,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1077" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1077" bodyend="1077"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1077" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1077" bodyend="1077"/>
         <referencedby refid="classhashtable_1af78667277f9f62e843dcc636c5f39cfb" compoundref="hashtable_8hpp" startline="1092" endline="1124">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::rehash</referencedby>
         <referencedby refid="classhashtable_1aade225b3d610a99390047417b93fc8bc" compoundref="hashtable_8hpp" startline="1132" endline="1143">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::reserve</referencedby>
       </memberdef>
@@ -2169,7 +2169,7 @@
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga5e725088b59bdd828910a9652983553a" kindref="member">is_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga82451b532c89a512421a6d0d783bbb20" kindref="member">is_iter_v</ref>&lt; Iterator &gt; &gt;</type>
         <definition>enable_if_t&lt; is_iter_v&lt; Iterator &gt; &gt; hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_unique</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>insert_unique</name>
@@ -2253,7 +2253,7 @@
             <type>typename Iterator</type>
           </param>
         </templateparamlist>
-        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga5e725088b59bdd828910a9652983553a" kindref="member">is_iter_v</ref>&lt; Iterator &gt; &gt;</type>
+        <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___iterator_category_checks_1ga82451b532c89a512421a6d0d783bbb20" kindref="member">is_iter_v</ref>&lt; Iterator &gt; &gt;</type>
         <definition>enable_if_t&lt; is_iter_v&lt; Iterator &gt; &gt; hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::insert_equal</definition>
         <argsstring>(Iterator first, Iterator last)</argsstring>
         <name>insert_equal</name>
@@ -2530,9 +2530,9 @@
         <referencedby refid="classhashtable_1a9e1b16edd19ff7b6a4f6f5066685e245" compoundref="hashtable_8hpp" startline="935" endline="942">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::operator=</referencedby>
         <referencedby refid="classhashtable_1aa315e4d4bacf3b06d1b3b4399be87825" compoundref="hashtable_8hpp" startline="947" endline="947">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::~hashtable</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1a3269c651cf82ba48ce0b323b81170b01" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a8a8736c15142a779db875a0ab1c4d15a" kindref="member">iterator</ref></type>
-        <definition>NEFORCE_NODISCARD iterator hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::find</definition>
+      <memberdef kind="function" id="classhashtable_1acbce53f2593135ac86f624327aca6ea0" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type><ref refid="classhashtable_1a8a8736c15142a779db875a0ab1c4d15a" kindref="member">iterator</ref></type>
+        <definition>iterator hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::find</definition>
         <argsstring>(const key_type &amp;key)</argsstring>
         <name>find</name>
         <qualifiedname>hashtable::find</qualifiedname>
@@ -2559,12 +2559,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1398" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1398" bodyend="1410"/>
-        <referencedby refid="classhashtable_1a22424473156d28f00e8f57077d147dba" compoundref="hashtable_8hpp" startline="1455" endline="1457">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::contains</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1398" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1398" bodyend="1410"/>
+        <referencedby refid="classhashtable_1a46d44567e4d83e549bf824fa66a129ab" compoundref="hashtable_8hpp" startline="1455" endline="1457">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::contains</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1aae63d8a272b25e7c68cabbabf03705d7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a7187950e0d6060fc8ee371fb3ac1ad6a" kindref="member">const_iterator</ref></type>
-        <definition>NEFORCE_NODISCARD const_iterator hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::find</definition>
+      <memberdef kind="function" id="classhashtable_1a5601c4779b8f98c1c8c5bd6f2432368b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type><ref refid="classhashtable_1a7187950e0d6060fc8ee371fb3ac1ad6a" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::find</definition>
         <argsstring>(const key_type &amp;key) const</argsstring>
         <name>find</name>
         <qualifiedname>hashtable::find</qualifiedname>
@@ -2591,11 +2591,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1417" column="38" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1417" bodyend="1429"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1417" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1417" bodyend="1429"/>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1a8ccb8315dbb19507e79397848a3bc4a4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">size_type</ref></type>
-        <definition>NEFORCE_NODISCARD size_type hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::count</definition>
+      <memberdef kind="function" id="classhashtable_1affb28cf15a9d4201371030127d46d86d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type><ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">size_type</ref></type>
+        <definition>size_type hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::count</definition>
         <argsstring>(const key_type &amp;key) const</argsstring>
         <name>count</name>
         <qualifiedname>hashtable::count</qualifiedname>
@@ -2622,11 +2622,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1436" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1436" bodyend="1448"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1436" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1436" bodyend="1448"/>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1a22424473156d28f00e8f57077d147dba" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>NEFORCE_NODISCARD bool hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::contains</definition>
+      <memberdef kind="function" id="classhashtable_1a46d44567e4d83e549bf824fa66a129ab" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_hashable_v&lt; key_type &gt;" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::contains</definition>
         <argsstring>(const key_type &amp;key) const</argsstring>
         <name>contains</name>
         <qualifiedname>hashtable::contains</qualifiedname>
@@ -2653,11 +2653,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1455" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1455" bodyend="1457"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1455" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1455" bodyend="1457"/>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1ac84d8b21aa3d5f181c7ae7ee77c9296a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classhashtable_1a8a8736c15142a779db875a0ab1c4d15a" kindref="member">iterator</ref>, <ref refid="classhashtable_1a8a8736c15142a779db875a0ab1c4d15a" kindref="member">iterator</ref> &gt;</type>
-        <definition>NEFORCE_NODISCARD pair&lt; iterator, iterator &gt; hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_range</definition>
+      <memberdef kind="function" id="classhashtable_1a2d7444122a7121df1e6d657307423602" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classhashtable_1a8a8736c15142a779db875a0ab1c4d15a" kindref="member">iterator</ref>, <ref refid="classhashtable_1a8a8736c15142a779db875a0ab1c4d15a" kindref="member">iterator</ref> &gt;</type>
+        <definition>pair&lt; iterator, iterator &gt; hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_range</definition>
         <argsstring>(const key_type &amp;key)</argsstring>
         <name>equal_range</name>
         <qualifiedname>hashtable::equal_range</qualifiedname>
@@ -2684,11 +2684,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1464" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1464" bodyend="1501"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1464" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1464" bodyend="1501"/>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1aeff44f9d9a9c356a62e3aded9ff05ffb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classhashtable_1a7187950e0d6060fc8ee371fb3ac1ad6a" kindref="member">const_iterator</ref>, <ref refid="classhashtable_1a7187950e0d6060fc8ee371fb3ac1ad6a" kindref="member">const_iterator</ref> &gt;</type>
-        <definition>NEFORCE_NODISCARD pair&lt; const_iterator, const_iterator &gt; hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_range</definition>
+      <memberdef kind="function" id="classhashtable_1a41f01b39387c9dabae70c06730533c76" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classhashtable_1a7187950e0d6060fc8ee371fb3ac1ad6a" kindref="member">const_iterator</ref>, <ref refid="classhashtable_1a7187950e0d6060fc8ee371fb3ac1ad6a" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>pair&lt; const_iterator, const_iterator &gt; hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_range</definition>
         <argsstring>(const key_type &amp;key) const</argsstring>
         <name>equal_range</name>
         <qualifiedname>hashtable::equal_range</qualifiedname>
@@ -2715,7 +2715,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1508" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1508" bodyend="1545"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1508" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1508" bodyend="1545"/>
       </memberdef>
       <memberdef kind="function" id="classhashtable_1ad4653c3ae73acfeb1f22cee7b8796691" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; HashFcn &gt; &amp;&amp;is_nothrow_swappable_v&lt; EqualKey &gt; &amp;&amp;is_nothrow_swappable_v&lt; allocator_type &gt;" virt="non-virtual">
         <type>void</type>
@@ -2747,9 +2747,9 @@
         <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1551" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1551" bodyend="1562"/>
         <referencedby refid="classhashtable_1a9e1b16edd19ff7b6a4f6f5066685e245" compoundref="hashtable_8hpp" startline="935" endline="942">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::operator=</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1adc2507de9fa289cacefe67ce86e7f81a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>NEFORCE_NODISCARD bool hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_to</definition>
+      <memberdef kind="function" id="classhashtable_1a677df8fe6d4c8f52e97b40fca99057e3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::equal_to</definition>
         <argsstring>(const hashtable &amp;rhs) const</argsstring>
         <name>equal_to</name>
         <qualifiedname>hashtable::equal_to</qualifiedname>
@@ -2776,11 +2776,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1569" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1569" bodyend="1584"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1569" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1569" bodyend="1584"/>
       </memberdef>
-      <memberdef kind="function" id="classhashtable_1a926e1c65d564489d6f0d4397856f6aed" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(1 lexicographical_compare(hashtable::cbegin(), hashtable::cend(), rhs.cbegin(), rhs.cend()))" virt="non-virtual">
-        <type>NEFORCE_NODISCARD bool</type>
-        <definition>NEFORCE_NODISCARD bool hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::less_than</definition>
+      <memberdef kind="function" id="classhashtable_1a9b5d36fe0eac69e3ef6b6bddb9106b35" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(_NEFORCE lexicographical_compare(hashtable::cbegin(), hashtable::cend(), rhs.cbegin(), rhs.cend()))" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::less_than</definition>
         <argsstring>(const hashtable &amp;rhs) const</argsstring>
         <name>less_than</name>
         <qualifiedname>hashtable::less_than</qualifiedname>
@@ -2807,13 +2807,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1591" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1591" bodyend="1595"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1591" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1591" bodyend="1595"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="classhashtable_1a68b3fc1d307fab03675582fe19a7a310" prot="public" static="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>NEFORCE_NODISCARD <ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">size_type</ref></type>
-        <definition>static NEFORCE_NODISCARD size_type hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::buckets_max_size</definition>
+      <memberdef kind="function" id="classhashtable_1aeeac656f644537162f466fbdb2e8ee89" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" kindref="member">size_type</ref></type>
+        <definition>static size_type hashtable&lt; Value, Key, HashFcn, ExtractKey, EqualKey, Alloc &gt;::buckets_max_size</definition>
         <argsstring>() noexcept</argsstring>
         <name>buckets_max_size</name>
         <qualifiedname>hashtable::buckets_max_size</qualifiedname>
@@ -2827,7 +2827,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1027" column="40" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1027" bodyend="1029"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="1027" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="1027" bodyend="1029"/>
         <referencedby refid="classhashtable_1aade225b3d610a99390047417b93fc8bc" compoundref="hashtable_8hpp" startline="1132" endline="1143">hashtable&lt; pair&lt; const Key, T &gt;, Key, HashFcn, select1st&lt; pair&lt; const Key, T &gt; &gt;, EqualKey, Alloc &gt;::reserve</referencedby>
       </memberdef>
     </sectiondef>
@@ -2925,36 +2925,36 @@
     <location file="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" line="390" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/hashtable.hpp" bodystart="403" bodyend="1596"/>
     <listofallmembers>
       <member refid="classhashtable_1a7dfad262d218f67878950a8044718468" prot="public" virt="non-virtual"><scope>hashtable</scope><name>allocator_type</name></member>
-      <member refid="classhashtable_1afbc46f0dee2aedaa290f5199677474eb" prot="public" virt="non-virtual"><scope>hashtable</scope><name>begin</name></member>
-      <member refid="classhashtable_1a8b40718d99276113c2bd67ac9dd36ad8" prot="public" virt="non-virtual"><scope>hashtable</scope><name>begin</name></member>
-      <member refid="classhashtable_1ae8a62a464589037c602ada94f77f5531" prot="public" virt="non-virtual"><scope>hashtable</scope><name>bucket_index</name></member>
+      <member refid="classhashtable_1aefb294b70ac71abd7dd4ca7cbf9b37c2" prot="public" virt="non-virtual"><scope>hashtable</scope><name>begin</name></member>
+      <member refid="classhashtable_1a9f8b7223faa5f7290104bd80d0207c2c" prot="public" virt="non-virtual"><scope>hashtable</scope><name>begin</name></member>
+      <member refid="classhashtable_1ae09d3623d57fac2e6616eac7d9589e85" prot="public" virt="non-virtual"><scope>hashtable</scope><name>bucket_index</name></member>
       <member refid="classhashtable_1a0d9e1c9fe2728c27356a574f5c938844" prot="private" virt="non-virtual"><scope>hashtable</scope><name>bucket_index_key</name></member>
       <member refid="classhashtable_1a8a463fac587ba8f26d5dbf20cdcec31a" prot="private" virt="non-virtual"><scope>hashtable</scope><name>bucket_index_value</name></member>
-      <member refid="classhashtable_1a7af8b7c0599f59e8988900ad69bbbcf6" prot="public" virt="non-virtual"><scope>hashtable</scope><name>bucket_size</name></member>
+      <member refid="classhashtable_1a8880fe9644696c1cb6cbdb92da729df0" prot="public" virt="non-virtual"><scope>hashtable</scope><name>bucket_size</name></member>
       <member refid="classhashtable_1a1cd7733ae4dbb0ba9a8de67a586c102d" prot="private" virt="non-virtual"><scope>hashtable</scope><name>buckets_</name></member>
-      <member refid="classhashtable_1a68b3fc1d307fab03675582fe19a7a310" prot="public" virt="non-virtual"><scope>hashtable</scope><name>buckets_max_size</name></member>
-      <member refid="classhashtable_1a30b01b1609fb6470c9bdcc1845c0ce7d" prot="public" virt="non-virtual"><scope>hashtable</scope><name>buckets_size</name></member>
-      <member refid="classhashtable_1a79aa27f0419b75a540aa2049a44b86a4" prot="public" virt="non-virtual"><scope>hashtable</scope><name>cbegin</name></member>
-      <member refid="classhashtable_1a056a06cf6e2ead290d2c3f9d384f5eb9" prot="public" virt="non-virtual"><scope>hashtable</scope><name>cend</name></member>
+      <member refid="classhashtable_1aeeac656f644537162f466fbdb2e8ee89" prot="public" virt="non-virtual"><scope>hashtable</scope><name>buckets_max_size</name></member>
+      <member refid="classhashtable_1a118a8ea6824df95c16a570e221d0fc1c" prot="public" virt="non-virtual"><scope>hashtable</scope><name>buckets_size</name></member>
+      <member refid="classhashtable_1a887f7252756698f707190a28cae648fe" prot="public" virt="non-virtual"><scope>hashtable</scope><name>cbegin</name></member>
+      <member refid="classhashtable_1a92702f219aedd4ba45a1054dd7b4bdb0" prot="public" virt="non-virtual"><scope>hashtable</scope><name>cend</name></member>
       <member refid="classhashtable_1a79d33043e3271488652bd33f49277885" prot="public" virt="non-virtual"><scope>hashtable</scope><name>clear</name></member>
       <member refid="classhashtable_1a7187950e0d6060fc8ee371fb3ac1ad6a" prot="public" virt="non-virtual"><scope>hashtable</scope><name>const_iterator</name></member>
       <member refid="classhashtable_1a2776dd83d03ad5a303d786f90cf394e1" prot="public" virt="non-virtual"><scope>hashtable</scope><name>const_pointer</name></member>
       <member refid="classhashtable_1a6b95bd41b2d19b8ad99a1fdefade3fc4" prot="public" virt="non-virtual"><scope>hashtable</scope><name>const_reference</name></member>
-      <member refid="classhashtable_1a22424473156d28f00e8f57077d147dba" prot="public" virt="non-virtual"><scope>hashtable</scope><name>contains</name></member>
+      <member refid="classhashtable_1a46d44567e4d83e549bf824fa66a129ab" prot="public" virt="non-virtual"><scope>hashtable</scope><name>contains</name></member>
       <member refid="classhashtable_1a70f3ea395413710cfc0305ee84c3667d" prot="private" virt="non-virtual"><scope>hashtable</scope><name>copy_from</name></member>
-      <member refid="classhashtable_1a8ccb8315dbb19507e79397848a3bc4a4" prot="public" virt="non-virtual"><scope>hashtable</scope><name>count</name></member>
+      <member refid="classhashtable_1affb28cf15a9d4201371030127d46d86d" prot="public" virt="non-virtual"><scope>hashtable</scope><name>count</name></member>
       <member refid="classhashtable_1af90daa39b9c299397c7bfe70a3be1b08" prot="private" virt="non-virtual"><scope>hashtable</scope><name>delete_node</name></member>
       <member refid="classhashtable_1a384b9b4e9ed2153582c4f6f118542fa9" prot="public" virt="non-virtual"><scope>hashtable</scope><name>difference_type</name></member>
       <member refid="classhashtable_1a394993e79d2908cdea83bc0f5505603b" prot="public" virt="non-virtual"><scope>hashtable</scope><name>emplace_equal</name></member>
       <member refid="classhashtable_1a412c7b832d9bc7fb5296029f6a76265f" prot="public" virt="non-virtual"><scope>hashtable</scope><name>emplace_unique</name></member>
-      <member refid="classhashtable_1a01d99839fe85ec067bcd559a3d940045" prot="public" virt="non-virtual"><scope>hashtable</scope><name>empty</name></member>
-      <member refid="classhashtable_1a5d78db59d460b91861fe1685b28d11ec" prot="public" virt="non-virtual"><scope>hashtable</scope><name>end</name></member>
-      <member refid="classhashtable_1a79997a1bf3d25bd2bfc7dcd005b00d7d" prot="public" virt="non-virtual"><scope>hashtable</scope><name>end</name></member>
+      <member refid="classhashtable_1af1c9d12e77ebcefe20815774f45b9a88" prot="public" virt="non-virtual"><scope>hashtable</scope><name>empty</name></member>
+      <member refid="classhashtable_1aa9b9d7f3a092da243eb9ac317bca8bce" prot="public" virt="non-virtual"><scope>hashtable</scope><name>end</name></member>
+      <member refid="classhashtable_1aba6dc6b45ececd03f65311a4c1f3aeff" prot="public" virt="non-virtual"><scope>hashtable</scope><name>end</name></member>
       <member refid="classhashtable_1a03454eb562f0de39b31b00ca66800b4a" prot="private" virt="non-virtual"><scope>hashtable</scope><name>equal_large</name></member>
-      <member refid="classhashtable_1ac84d8b21aa3d5f181c7ae7ee77c9296a" prot="public" virt="non-virtual"><scope>hashtable</scope><name>equal_range</name></member>
-      <member refid="classhashtable_1aeff44f9d9a9c356a62e3aded9ff05ffb" prot="public" virt="non-virtual"><scope>hashtable</scope><name>equal_range</name></member>
+      <member refid="classhashtable_1a2d7444122a7121df1e6d657307423602" prot="public" virt="non-virtual"><scope>hashtable</scope><name>equal_range</name></member>
+      <member refid="classhashtable_1a41f01b39387c9dabae70c06730533c76" prot="public" virt="non-virtual"><scope>hashtable</scope><name>equal_range</name></member>
       <member refid="classhashtable_1a0e6d3c8fb29554680553425318aa7cbe" prot="private" virt="non-virtual"><scope>hashtable</scope><name>equal_small</name></member>
-      <member refid="classhashtable_1adc2507de9fa289cacefe67ce86e7f81a" prot="public" virt="non-virtual"><scope>hashtable</scope><name>equal_to</name></member>
+      <member refid="classhashtable_1a677df8fe6d4c8f52e97b40fca99057e3" prot="public" virt="non-virtual"><scope>hashtable</scope><name>equal_to</name></member>
       <member refid="classhashtable_1ae8347c809a1ba7016e802e2876594a17" prot="private" virt="non-virtual"><scope>hashtable</scope><name>equals_</name></member>
       <member refid="classhashtable_1a98fde6b1f065ecae67b668f67e5f288f" prot="public" virt="non-virtual"><scope>hashtable</scope><name>erase</name></member>
       <member refid="classhashtable_1a69cb3ef1f09f278a837e3e8e758d6369" prot="public" virt="non-virtual"><scope>hashtable</scope><name>erase</name></member>
@@ -2965,9 +2965,9 @@
       <member refid="classhashtable_1ae644340a30bedcd35cd403c41bb26914" prot="private" virt="non-virtual"><scope>hashtable</scope><name>erase_bucket_range</name></member>
       <member refid="classhashtable_1a4b064c4e1df1353259613001b9545a8c" prot="private" virt="non-virtual"><scope>hashtable</scope><name>erase_bucket_to_node</name></member>
       <member refid="classhashtable_1a459cccd538377b936abb687332ca51de" prot="private" virt="non-virtual"><scope>hashtable</scope><name>extracter_</name></member>
-      <member refid="classhashtable_1a3269c651cf82ba48ce0b323b81170b01" prot="public" virt="non-virtual"><scope>hashtable</scope><name>find</name></member>
-      <member refid="classhashtable_1aae63d8a272b25e7c68cabbabf03705d7" prot="public" virt="non-virtual"><scope>hashtable</scope><name>find</name></member>
-      <member refid="classhashtable_1a2ff7961fbfa2f48f2c8676d06616dfd2" prot="public" virt="non-virtual"><scope>hashtable</scope><name>hash_func</name></member>
+      <member refid="classhashtable_1acbce53f2593135ac86f624327aca6ea0" prot="public" virt="non-virtual"><scope>hashtable</scope><name>find</name></member>
+      <member refid="classhashtable_1a5601c4779b8f98c1c8c5bd6f2432368b" prot="public" virt="non-virtual"><scope>hashtable</scope><name>find</name></member>
+      <member refid="classhashtable_1a5c297118874a18939b42f1b1844c95ea" prot="public" virt="non-virtual"><scope>hashtable</scope><name>hash_func</name></member>
       <member refid="classhashtable_1a283933168f42e039508f8c756c5d0124" prot="public" virt="non-virtual"><scope>hashtable</scope><name>hasher</name></member>
       <member refid="classhashtable_1a8257aaee0593c29abbf8f2aea5a2e932" prot="private" virt="non-virtual"><scope>hashtable</scope><name>hasher_</name></member>
       <member refid="classhashtable_1aed4421eb5877b69024074be54806b876" prot="public" virt="non-virtual"><scope>hashtable</scope><name>hashtable</name></member>
@@ -2992,32 +2992,32 @@
       <member refid="classhashtable_1af83517cd97213cb383ac1181d6bb47c6" prot="private" virt="non-virtual"><scope>hashtable</scope><name>insert_unique_aux</name></member>
       <member refid="classhashtable_1aa0965bc4e04879afd602187444dc42a5" prot="private" virt="non-virtual"><scope>hashtable</scope><name>insert_unique_noresize</name></member>
       <member refid="classhashtable_1a8a8736c15142a779db875a0ab1c4d15a" prot="public" virt="non-virtual"><scope>hashtable</scope><name>iterator</name></member>
-      <member refid="classhashtable_1a90db8cca7a68ffa755962163b53a01b4" prot="public" virt="non-virtual"><scope>hashtable</scope><name>key_eql</name></member>
+      <member refid="classhashtable_1a3ff241f7f25d1419387951d8b6b8c25a" prot="public" virt="non-virtual"><scope>hashtable</scope><name>key_eql</name></member>
       <member refid="classhashtable_1acc0ee670388f0cd08557180388bf3f18" prot="public" virt="non-virtual"><scope>hashtable</scope><name>key_equal</name></member>
       <member refid="classhashtable_1aae291f880b71bf248fa077e9aa7e9940" prot="public" virt="non-virtual"><scope>hashtable</scope><name>key_type</name></member>
-      <member refid="classhashtable_1a926e1c65d564489d6f0d4397856f6aed" prot="public" virt="non-virtual"><scope>hashtable</scope><name>less_than</name></member>
+      <member refid="classhashtable_1a9b5d36fe0eac69e3ef6b6bddb9106b35" prot="public" virt="non-virtual"><scope>hashtable</scope><name>less_than</name></member>
       <member refid="classhashtable_1abdda0e779738a58656122942d3683494" prot="private" virt="non-virtual"><scope>hashtable</scope><name>link_type</name></member>
-      <member refid="classhashtable_1a19da1bf17e9b5a79991b17e1091076ea" prot="public" virt="non-virtual"><scope>hashtable</scope><name>load_factor</name></member>
-      <member refid="classhashtable_1a59f57a1bac339b40d65fbdb34573d484" prot="public" virt="non-virtual"><scope>hashtable</scope><name>max_load_factor</name></member>
+      <member refid="classhashtable_1ac19a6a947c81213dd1f4de5777717469" prot="public" virt="non-virtual"><scope>hashtable</scope><name>load_factor</name></member>
+      <member refid="classhashtable_1a46f4f1da966df844fc4b2a2bf75dc3b9" prot="public" virt="non-virtual"><scope>hashtable</scope><name>max_load_factor</name></member>
       <member refid="classhashtable_1a9ec5906da18f87306b0badaca1e1c527" prot="public" virt="non-virtual"><scope>hashtable</scope><name>max_load_factor</name></member>
-      <member refid="classhashtable_1addbaa0d4237e4a7f1ceea0706a1605bb" prot="public" virt="non-virtual"><scope>hashtable</scope><name>max_size</name></member>
+      <member refid="classhashtable_1ac4f85831f407725c36402934c321e084" prot="public" virt="non-virtual"><scope>hashtable</scope><name>max_size</name></member>
       <member refid="classhashtable_1a0acc9db6bea5fbb056b855d29e9a98a4" prot="private" virt="non-virtual"><scope>hashtable</scope><name>new_node</name></member>
-      <member refid="classhashtable_1a474bad2f3ff78ef1886d2ab01c934098" prot="private" virt="non-virtual"><scope>hashtable</scope><name>next_size</name></member>
+      <member refid="classhashtable_1ae478faf20fc57ce4d716d100fff80185" prot="private" virt="non-virtual"><scope>hashtable</scope><name>next_size</name></member>
       <member refid="classhashtable_1a0be62f3c0d4a92354ceefe6890ba0995" prot="private" virt="non-virtual"><scope>hashtable</scope><name>node_type</name></member>
-      <member refid="structicomparable_1ad134f4e53dc43901a6de1aa551d31499" prot="public" virt="non-virtual"><scope>hashtable</scope><name>operator!=</name></member>
-      <member refid="structicomparable_1a2339f5e686412b22a88642ec08ad7466" prot="public" virt="non-virtual"><scope>hashtable</scope><name>operator&lt;</name></member>
-      <member refid="structicomparable_1a8e9a700d86faf563c96bcb27cd6e9593" prot="public" virt="non-virtual"><scope>hashtable</scope><name>operator&lt;=</name></member>
+      <member refid="structicomparable_1a5666568813e0b179355cae28bb101cb5" prot="public" virt="non-virtual"><scope>hashtable</scope><name>operator!=</name></member>
+      <member refid="structicomparable_1ad55728ed77b4804c1cfc944085e1ff01" prot="public" virt="non-virtual"><scope>hashtable</scope><name>operator&lt;</name></member>
+      <member refid="structicomparable_1a024a6a008fa61eb0e486150f52d36310" prot="public" virt="non-virtual"><scope>hashtable</scope><name>operator&lt;=</name></member>
       <member refid="classhashtable_1a621a896e8af89bb12485201325ccb106" prot="public" virt="non-virtual"><scope>hashtable</scope><name>operator=</name></member>
       <member refid="classhashtable_1a9e1b16edd19ff7b6a4f6f5066685e245" prot="public" virt="non-virtual"><scope>hashtable</scope><name>operator=</name></member>
-      <member refid="structicomparable_1aa689aadaf9cd384d7ab5bad5a848c966" prot="public" virt="non-virtual"><scope>hashtable</scope><name>operator==</name></member>
-      <member refid="structicomparable_1a0f38100bba5ca8cf12b0828acb9a77e2" prot="public" virt="non-virtual"><scope>hashtable</scope><name>operator&gt;</name></member>
-      <member refid="structicomparable_1a771a3b0634a0b38a5f92f2a40aaef3db" prot="public" virt="non-virtual"><scope>hashtable</scope><name>operator&gt;=</name></member>
+      <member refid="structicomparable_1a19b050f922dcb00e282f1fd440e2df77" prot="public" virt="non-virtual"><scope>hashtable</scope><name>operator==</name></member>
+      <member refid="structicomparable_1a5d2fcdbcf595020adcaccc310d90fc16" prot="public" virt="non-virtual"><scope>hashtable</scope><name>operator&gt;</name></member>
+      <member refid="structicomparable_1a108835b6418a11d9f26fb6849e820f0f" prot="public" virt="non-virtual"><scope>hashtable</scope><name>operator&gt;=</name></member>
       <member refid="classhashtable_1ab1dd1dcbed5d30c79a0ea1a0c14d32c5" prot="private" virt="non-virtual"><scope>hashtable</scope><name>pair_</name></member>
       <member refid="classhashtable_1a4c3e2ca33edeb50042e2f250abaff685" prot="public" virt="non-virtual"><scope>hashtable</scope><name>pointer</name></member>
       <member refid="classhashtable_1a832269fbb741721437d43754623d7290" prot="public" virt="non-virtual"><scope>hashtable</scope><name>reference</name></member>
       <member refid="classhashtable_1af78667277f9f62e843dcc636c5f39cfb" prot="public" virt="non-virtual"><scope>hashtable</scope><name>rehash</name></member>
       <member refid="classhashtable_1aade225b3d610a99390047417b93fc8bc" prot="public" virt="non-virtual"><scope>hashtable</scope><name>reserve</name></member>
-      <member refid="classhashtable_1af3555f9884993e9515931c27786bd520" prot="public" virt="non-virtual"><scope>hashtable</scope><name>size</name></member>
+      <member refid="classhashtable_1a3221462049f9f5088b538c357281c644" prot="public" virt="non-virtual"><scope>hashtable</scope><name>size</name></member>
       <member refid="classhashtable_1aa89d6111ce1fcb53b845da61f11213b8" prot="private" virt="non-virtual"><scope>hashtable</scope><name>size_</name></member>
       <member refid="classhashtable_1a943ab934a2ae3aee17931f48d5435d62" prot="public" virt="non-virtual"><scope>hashtable</scope><name>size_type</name></member>
       <member refid="classhashtable_1ad4653c3ae73acfeb1f22cee7b8796691" prot="public" virt="non-virtual"><scope>hashtable</scope><name>swap</name></member>

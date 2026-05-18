@@ -1,0 +1,910 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classneforce_1_1weak__ptr" kind="class" language="C++" prot="public">
+    <compoundname>neforce::weak_ptr</compoundname>
+    <includes refid="weak__ptr_8hpp" local="no">weak_ptr.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classneforce_1_1weak__ptr_1a579feb5cdff99fbe7c4f94951de87c3e" prot="public" static="no">
+        <type>T</type>
+        <definition>using neforce::weak_ptr&lt; T &gt;::element_type = T</definition>
+        <argsstring></argsstring>
+        <name>element_type</name>
+        <qualifiedname>neforce::weak_ptr::element_type</qualifiedname>
+        <briefdescription>
+<para>元素类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="46" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classneforce_1_1weak__ptr_1a6731958e5cd6f1ab7c462a89cff42b76" prot="private" static="no" mutable="no">
+        <type><ref refid="classneforce_1_1weak__ptr_1a579feb5cdff99fbe7c4f94951de87c3e" kindref="member">element_type</ref> *</type>
+        <definition>element_type* neforce::weak_ptr&lt; T &gt;::ptr_</definition>
+        <argsstring></argsstring>
+        <name>ptr_</name>
+        <qualifiedname>neforce::weak_ptr::ptr_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>观察的对象指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="49" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classneforce_1_1weak__ptr_1a900679b8fc8711e3013de2e06c8d885a" prot="private" static="no" mutable="no">
+        <type>inner::__smart_ptr_counter *</type>
+        <definition>inner::__smart_ptr_counter* neforce::weak_ptr&lt; T &gt;::owner_</definition>
+        <argsstring></argsstring>
+        <name>owner_</name>
+        <qualifiedname>neforce::weak_ptr::owner_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>控制块指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="50" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classneforce_1_1weak__ptr_1a27df6e2a1650d985bdeda33f0303c83f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class weak_ptr</definition>
+        <argsstring></argsstring>
+        <name>weak_ptr</name>
+        <qualifiedname>neforce::weak_ptr::weak_ptr</qualifiedname>
+        <param>
+          <type>weak_ptr</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="53" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1weak__ptr_1ab2104fa6e839672da3c30400e8325e52" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class shared_ptr</definition>
+        <argsstring></argsstring>
+        <name>shared_ptr</name>
+        <qualifiedname>neforce::weak_ptr::shared_ptr</qualifiedname>
+        <param>
+          <type>shared_ptr</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="56" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="friend" id="classneforce_1_1weak__ptr_1aed96c692d7820b2c6d2f211055e8b449" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>class</type>
+        <definition>friend class inner::smart_pointer_atomic</definition>
+        <argsstring></argsstring>
+        <name>inner::smart_pointer_atomic</name>
+        <qualifiedname>neforce::weak_ptr::smart_pointer_atomic</qualifiedname>
+        <param>
+          <type>inner::smart_pointer_atomic</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="59" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1abd5732f4ab2add2dc82a2d0e83e87ea2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::weak_ptr&lt; T &gt;::weak_ptr</definition>
+        <argsstring>(nullptr_t=nullptr) noexcept</argsstring>
+        <name>weak_ptr</name>
+        <qualifiedname>neforce::weak_ptr::weak_ptr</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1gacb98a47b9e384b2934a9c2dbd3c2d598" kindref="member">nullptr_t</ref></type>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="65" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1a80f4b082a88d88846c49a7b508bc9870" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U *, T * &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::weak_ptr&lt; T &gt;::weak_ptr</definition>
+        <argsstring>(const shared_ptr&lt; U &gt; &amp;shared) noexcept</argsstring>
+        <name>weak_ptr</name>
+        <qualifiedname>neforce::weak_ptr::weak_ptr</qualifiedname>
+        <param>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
+          <declname>shared</declname>
+        </param>
+        <briefdescription>
+<para>共享智能指针构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可转换为T*的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>shared</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>共享指针</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建观察sp管理的对象的弱指针。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="75" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="75" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1a6a4edd7c3d7a94c36f58ebbc5981d9b9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::weak_ptr&lt; T &gt;::weak_ptr</definition>
+        <argsstring>(const weak_ptr &amp;other) noexcept</argsstring>
+        <name>weak_ptr</name>
+        <qualifiedname>neforce::weak_ptr::weak_ptr</qualifiedname>
+        <param>
+          <type>const weak_ptr &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要拷贝的弱指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="87" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="87" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1aea68b406d3e3694ee64da11551d09ca4" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U *, T * &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::weak_ptr&lt; T &gt;::weak_ptr</definition>
+        <argsstring>(const weak_ptr&lt; U &gt; &amp;other) noexcept</argsstring>
+        <name>weak_ptr</name>
+        <qualifiedname>neforce::weak_ptr::weak_ptr</qualifiedname>
+        <param>
+          <type>const weak_ptr&lt; U &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>类型转换拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可转换为T*的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要拷贝的弱指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="101" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="101" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1a5cbe86a14a578b1de884b5b56abe35ca" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::weak_ptr&lt; T &gt;::weak_ptr</definition>
+        <argsstring>(weak_ptr &amp;&amp;other) noexcept</argsstring>
+        <name>weak_ptr</name>
+        <qualifiedname>neforce::weak_ptr::weak_ptr</qualifiedname>
+        <param>
+          <type>weak_ptr &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的弱指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="113" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="113" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1a6c06efa65e7ca7c3bc759a696630fb52" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U *, T * &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>neforce::weak_ptr&lt; T &gt;::weak_ptr</definition>
+        <argsstring>(weak_ptr&lt; U &gt; &amp;&amp;other) noexcept</argsstring>
+        <name>weak_ptr</name>
+        <qualifiedname>neforce::weak_ptr::weak_ptr</qualifiedname>
+        <param>
+          <type>weak_ptr&lt; U &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>类型转换移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可转换为T*的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的弱指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="126" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="126" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1a8235a095216aa1bd80b19a4e0008ae98" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>neforce::weak_ptr&lt; T &gt;::~weak_ptr</definition>
+        <argsstring>()</argsstring>
+        <name>~weak_ptr</name>
+        <qualifiedname>neforce::weak_ptr::~weak_ptr</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>减少弱引用计数，当弱引用计数为0时删除控制块 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="137" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="137" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1a73167fa305d37ed56f887e7b52b61492" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>weak_ptr &amp;</type>
+        <definition>weak_ptr &amp; neforce::weak_ptr&lt; T &gt;::operator=</definition>
+        <argsstring>(const weak_ptr &amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::weak_ptr::operator=</qualifiedname>
+        <param>
+          <type>const weak_ptr &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要拷贝的弱指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前弱指针的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="144" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="144" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1ad942efe4f448cccd9eb775f44b56f7c0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U *, T * &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>weak_ptr &amp;</type>
+        <definition>weak_ptr &amp; neforce::weak_ptr&lt; T &gt;::operator=</definition>
+        <argsstring>(const weak_ptr&lt; U &gt; &amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::weak_ptr::operator=</qualifiedname>
+        <param>
+          <type>const weak_ptr&lt; U &gt; &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>类型转换拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可转换为T*的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要拷贝的弱指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前弱指针的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="166" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="166" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1aa9ae30753d6a035b97ff085f9e9b9254" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U *, T * &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>weak_ptr &amp;</type>
+        <definition>weak_ptr &amp; neforce::weak_ptr&lt; T &gt;::operator=</definition>
+        <argsstring>(const shared_ptr&lt; U &gt; &amp;shared) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::weak_ptr::operator=</qualifiedname>
+        <param>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
+          <declname>shared</declname>
+        </param>
+        <briefdescription>
+<para>共享智能指针赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可转换为T*的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>shared</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前弱指针的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="185" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="185" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1a8f336d923e0fb8fcd735876c69ed37e1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>weak_ptr &amp;</type>
+        <definition>weak_ptr &amp; neforce::weak_ptr&lt; T &gt;::operator=</definition>
+        <argsstring>(weak_ptr &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::weak_ptr::operator=</qualifiedname>
+        <param>
+          <type>weak_ptr &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的弱指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前弱指针的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="202" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="202" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1a60069fed3473c3662c20e1e9674deeb2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1ga92c50bf8e7847d7337041d7de81c3336" kindref="member">enable_if_t</ref>&lt; <ref refid="group___convertible_checks_1ga0c9428cfa7f4367bab026a919ffebd7d" kindref="member">is_convertible_v</ref>&lt; U *, T * &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type>weak_ptr &amp;</type>
+        <definition>weak_ptr &amp; neforce::weak_ptr&lt; T &gt;::operator=</definition>
+        <argsstring>(weak_ptr&lt; U &gt; &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>neforce::weak_ptr::operator=</qualifiedname>
+        <param>
+          <type>weak_ptr&lt; U &gt; &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>类型转换移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可转换为T*的类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的弱指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前弱指针的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="223" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="223" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1ae13f47e741658187c753c491daba937b" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::weak_ptr&lt; T &gt;::reset</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>neforce::weak_ptr::reset</qualifiedname>
+        <briefdescription>
+<para>重置弱指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>使弱指针不再观察任何对象，减少弱引用计数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="239" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="239" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1acde410a58f65f9940e49ee643ba30db0" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void neforce::weak_ptr&lt; T &gt;::swap</definition>
+        <argsstring>(weak_ptr &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>neforce::weak_ptr::swap</qualifiedname>
+        <param>
+          <type>weak_ptr &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个弱指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的弱指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="251" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="251" bodyend="257"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1add9285c60ae97d3e3cae1419f87ed60b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>long</type>
+        <definition>long neforce::weak_ptr&lt; T &gt;::use_count</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>use_count</name>
+        <qualifiedname>neforce::weak_ptr::use_count</qualifiedname>
+        <briefdescription>
+<para>获取观察对象的引用计数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>强引用计数值 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="263" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="263" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1a465b8a0e6c7a05d91acca1d17520d099" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool neforce::weak_ptr&lt; T &gt;::expired</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>expired</name>
+        <qualifiedname>neforce::weak_ptr::expired</qualifiedname>
+        <briefdescription>
+<para>检查观察的对象是否已被销毁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>对象是否已被销毁 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="271" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="271" bodyend="271"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1a9b6a5c3237ea141dac81beea6333b80c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>shared_ptr&lt; T &gt;</type>
+        <definition>shared_ptr&lt; T &gt; neforce::weak_ptr&lt; T &gt;::lock</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>lock</name>
+        <qualifiedname>neforce::weak_ptr::lock</qualifiedname>
+        <briefdescription>
+<para>尝试获取共享智能指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>如果对象仍然存在，返回共享智能指针；否则返回空共享智能指针</para>
+</simplesect>
+如果观察的对象仍然存在，则创建一个新的共享智能指针。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="279" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="279" bodyend="284"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1ac5a25ef4f69e3c22a0eda5cd5c1a4a6a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::weak_ptr&lt; T &gt;::owner_equal</definition>
+        <argsstring>(const weak_ptr&lt; U &gt; &amp;rhs) const noexcept</argsstring>
+        <name>owner_equal</name>
+        <qualifiedname>neforce::weak_ptr::owner_equal</qualifiedname>
+        <param>
+          <type>const weak_ptr&lt; U &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>检查所有权是否相等 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较的弱指针类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要比较的弱指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否共享同一控制块 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="293" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="293" bodyend="295"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1a7bf543431ef38ccd5d85d98f4ffc7786" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::weak_ptr&lt; T &gt;::owner_equal</definition>
+        <argsstring>(const shared_ptr&lt; U &gt; &amp;rhs) const noexcept</argsstring>
+        <name>owner_equal</name>
+        <qualifiedname>neforce::weak_ptr::owner_equal</qualifiedname>
+        <param>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>与共享指针检查所有权是否相等 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较的共享指针类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要比较的共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>是否共享同一控制块 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="304" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="304" bodyend="306"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1a0c037ac70f55a6b097418eab7b0944b7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::weak_ptr&lt; T &gt;::owner_before</definition>
+        <argsstring>(const weak_ptr&lt; U &gt; &amp;rhs) const noexcept</argsstring>
+        <name>owner_before</name>
+        <qualifiedname>neforce::weak_ptr::owner_before</qualifiedname>
+        <param>
+          <type>const weak_ptr&lt; U &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>比较所有权顺序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较的弱指针类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要比较的弱指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前控制块地址是否小于rhs的控制块地址 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="315" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="315" bodyend="317"/>
+      </memberdef>
+      <memberdef kind="function" id="classneforce_1_1weak__ptr_1ad33ad94b586aa18b38c850a9ffb9133b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename U</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool neforce::weak_ptr&lt; T &gt;::owner_before</definition>
+        <argsstring>(const shared_ptr&lt; U &gt; &amp;rhs) const noexcept</argsstring>
+        <name>owner_before</name>
+        <qualifiedname>neforce::weak_ptr::owner_before</qualifiedname>
+        <param>
+          <type>const shared_ptr&lt; U &gt; &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>与共享指针比较所有权顺序 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>U</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较的共享指针类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要比较的共享指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前控制块地址是否小于rhs的控制块地址 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="326" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="326" bodyend="328"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>弱智能指针类模板 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>对象类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+弱智能指针用于观察由共享智能指针管理的对象，但不拥有对象的所有权。 不会增加对象的引用计数，因此不会阻止对象被销毁。</para>
+<para>特性：<itemizedlist>
+<listitem><para>不增加对象引用计数</para>
+</listitem><listitem><para>可检测对象是否已被销毁</para>
+</listitem><listitem><para>可安全地升级为shared_ptr</para>
+</listitem><listitem><para>支持所有权比较和排序</para>
+</listitem><listitem><para>线程安全的过期检测</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>弱指针本身是线程安全的，但升级后的共享指针需要单独管理 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" line="27" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="44" bodyend="329"/>
+    <listofallmembers>
+      <member refid="classneforce_1_1weak__ptr_1a579feb5cdff99fbe7c4f94951de87c3e" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>element_type</name></member>
+      <member refid="classneforce_1_1weak__ptr_1a465b8a0e6c7a05d91acca1d17520d099" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>expired</name></member>
+      <member refid="classneforce_1_1weak__ptr_1a9b6a5c3237ea141dac81beea6333b80c" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>lock</name></member>
+      <member refid="classneforce_1_1weak__ptr_1a73167fa305d37ed56f887e7b52b61492" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1weak__ptr_1ad942efe4f448cccd9eb775f44b56f7c0" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1weak__ptr_1aa9ae30753d6a035b97ff085f9e9b9254" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1weak__ptr_1a8f336d923e0fb8fcd735876c69ed37e1" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1weak__ptr_1a60069fed3473c3662c20e1e9674deeb2" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>operator=</name></member>
+      <member refid="classneforce_1_1weak__ptr_1a900679b8fc8711e3013de2e06c8d885a" prot="private" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>owner_</name></member>
+      <member refid="classneforce_1_1weak__ptr_1a0c037ac70f55a6b097418eab7b0944b7" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>owner_before</name></member>
+      <member refid="classneforce_1_1weak__ptr_1ad33ad94b586aa18b38c850a9ffb9133b" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>owner_before</name></member>
+      <member refid="classneforce_1_1weak__ptr_1ac5a25ef4f69e3c22a0eda5cd5c1a4a6a" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>owner_equal</name></member>
+      <member refid="classneforce_1_1weak__ptr_1a7bf543431ef38ccd5d85d98f4ffc7786" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>owner_equal</name></member>
+      <member refid="classneforce_1_1weak__ptr_1a6731958e5cd6f1ab7c462a89cff42b76" prot="private" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>ptr_</name></member>
+      <member refid="classneforce_1_1weak__ptr_1ae13f47e741658187c753c491daba937b" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>reset</name></member>
+      <member refid="classneforce_1_1weak__ptr_1acde410a58f65f9940e49ee643ba30db0" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>swap</name></member>
+      <member refid="classneforce_1_1weak__ptr_1add9285c60ae97d3e3cae1419f87ed60b" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>use_count</name></member>
+      <member refid="classneforce_1_1weak__ptr_1abd5732f4ab2add2dc82a2d0e83e87ea2" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>weak_ptr</name></member>
+      <member refid="classneforce_1_1weak__ptr_1a80f4b082a88d88846c49a7b508bc9870" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>weak_ptr</name></member>
+      <member refid="classneforce_1_1weak__ptr_1a6a4edd7c3d7a94c36f58ebbc5981d9b9" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>weak_ptr</name></member>
+      <member refid="classneforce_1_1weak__ptr_1aea68b406d3e3694ee64da11551d09ca4" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>weak_ptr</name></member>
+      <member refid="classneforce_1_1weak__ptr_1a5cbe86a14a578b1de884b5b56abe35ca" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>weak_ptr</name></member>
+      <member refid="classneforce_1_1weak__ptr_1a6c06efa65e7ca7c3bc759a696630fb52" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>weak_ptr</name></member>
+      <member refid="classneforce_1_1weak__ptr_1a8235a095216aa1bd80b19a4e0008ae98" prot="public" virt="non-virtual"><scope>neforce::weak_ptr</scope><name>~weak_ptr</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
