@@ -903,7 +903,7 @@ struct __broadern_tuple_hash_aux<Tuple, 1> {
 };
 template <typename Tuple>
 struct __broadern_tuple_hash_aux<Tuple, 0> {
-    static constexpr size_t hash(const Tuple&) { return 0; }
+    static constexpr size_t hash(const Tuple& /*unused*/) { return 0; }
 };
 
 NEFORCE_END_INNER__

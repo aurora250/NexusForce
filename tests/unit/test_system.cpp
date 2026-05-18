@@ -1518,11 +1518,11 @@ TEST_F(EnvironmentTest, PathList_WithConsecutiveDelimiters_Success) {
 
 TEST_F(EnvironmentTest, ThreadSafety_ConcurrentGetSet) {
     constexpr int num_threads = 4;
-    constexpr int num_iterations = 50;
     vector<thread> threads;
 
     for (int t = 0; t < num_threads; ++t) {
         threads.emplace_back([t]() {
+            constexpr int num_iterations = 50;
             for (int i = 0; i < num_iterations; ++i) {
                 string var_name = string(test_var_name) + "_" + to_string(t);
                 string value = "value_" + to_string(i);

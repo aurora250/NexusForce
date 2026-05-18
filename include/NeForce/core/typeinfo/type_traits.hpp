@@ -1797,6 +1797,11 @@ NEFORCE_INLINE17 constexpr bool is_allocable_v = is_allocable<T>::value;
 #endif
 
 
+#ifdef NEFORCE_COMPILER_MSVC
+#    pragma warning(push)
+#    pragma warning(disable : 4180)
+#endif
+
 /**
  * @struct is_object
  * @brief 判断类型是否为对象类型
@@ -1815,6 +1820,10 @@ struct is_object : bool_constant<is_const<const T>::value && !is_void<T>::value>
  */
 template <typename T>
 NEFORCE_INLINE17 constexpr bool is_object_v = is_object<T>::value;
+#endif
+
+#ifdef NEFORCE_COMPILER_MSVC
+#    pragma warning(pop)
 #endif
 
 

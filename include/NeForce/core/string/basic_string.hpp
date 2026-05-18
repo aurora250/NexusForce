@@ -3040,7 +3040,7 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator>=(const basic_string<CharT, 
 }
 
 #ifndef NEFORCE_STANDARD_17
-#ifdef NEFORCE_USING_SSO
+#    ifdef NEFORCE_USING_SSO
 template <typename CharT, typename Traits, typename Alloc>
 constexpr size_t basic_string<CharT, Traits, Alloc>::sso_buffer_bytes;
 template <typename CharT, typename Traits, typename Alloc>
@@ -3049,7 +3049,7 @@ template <typename CharT, typename Traits, typename Alloc>
 constexpr size_t basic_string<CharT, Traits, Alloc>::sso_capacity;
 template <typename CharT, typename Traits, typename Alloc>
 constexpr size_t basic_string<CharT, Traits, Alloc>::long_flag;
-#endif
+#    endif
 template <typename CharT, typename Traits, typename Alloc>
 constexpr size_t basic_string<CharT, Traits, Alloc>::npos;
 #endif
