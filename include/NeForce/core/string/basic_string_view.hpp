@@ -1032,6 +1032,11 @@ public:
     }
 };
 
+#ifndef NEFORCE_STANDARD_17
+template <typename CharT, typename Traits>
+constexpr size_t basic_string_view<CharT, Traits>::npos;
+#endif
+
 #ifndef NEFORCE_COMPILER_CLANG_CL
 extern template class basic_string_view<char>;
 extern template class basic_string_view<wchar_t>;

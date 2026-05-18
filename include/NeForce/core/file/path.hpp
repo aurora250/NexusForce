@@ -467,6 +467,11 @@ public:
     void swap(path& other) noexcept { path_.swap(other.path_); }
 };
 
+#ifdef NEFORCE_STANDARD_17
+constexpr size_t path::buffer_size;
+constexpr string_view path::spliter;
+#endif
+
 /** @} */ // File
 
 NEFORCE_END_NAMESPACE__

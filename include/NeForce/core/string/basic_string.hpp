@@ -3039,6 +3039,22 @@ NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 bool operator>=(const basic_string<CharT, 
     return !(rhs < lhs);
 }
 
+#ifndef NEFORCE_STANDARD_17
+#ifdef NEFORCE_USING_SSO
+template <typename CharT, typename Traits, typename Alloc>
+constexpr size_t basic_string<CharT, Traits, Alloc>::sso_buffer_bytes;
+template <typename CharT, typename Traits, typename Alloc>
+constexpr size_t basic_string<CharT, Traits, Alloc>::sso_buffer_size;
+template <typename CharT, typename Traits, typename Alloc>
+constexpr size_t basic_string<CharT, Traits, Alloc>::sso_capacity;
+template <typename CharT, typename Traits, typename Alloc>
+constexpr size_t basic_string<CharT, Traits, Alloc>::long_flag;
+#endif
+template <typename CharT, typename Traits, typename Alloc>
+constexpr size_t basic_string<CharT, Traits, Alloc>::npos;
+#endif
+
+
 #ifndef NEFORCE_COMPILER_CLANG_CL
 extern template class basic_string<char>;
 extern template class basic_string<wchar_t>;

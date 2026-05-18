@@ -820,9 +820,9 @@ TEST_F(ApplyTest, ApplyReturnTypeIsCorrect) {
 }
 
 TEST_F(ApplyTest, ApplyWithConstexprLambda) {
-    constexpr auto t = make_tuple(3, 4);
-    constexpr auto lambda = [](int a, int b) { return a * b; };
-    constexpr int result = apply(lambda, t);
+    const auto t = make_tuple(3, 4);
+    const auto lambda = [](int a, int b) { return a * b; };
+    const int result = apply(lambda, t);
     EXPECT_EQ(result, 12);
 }
 

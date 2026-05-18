@@ -45,6 +45,7 @@ namespace {
             return *this;
         }
         bool operator==(const move_only& other) const { return value == other.value; }
+        bool operator!=(const move_only& other) const { return value != other.value; }
     };
 
     struct counting_predicate {

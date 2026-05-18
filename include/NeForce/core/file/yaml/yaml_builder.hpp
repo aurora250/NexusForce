@@ -121,6 +121,26 @@ private:
         return *this;
     }
 
+    template <typename Iterable>
+    enable_if_t<is_maplike_v<Iterable>> value_iterable_impl(const Iterable& iterable) {
+        begin_flow_mapping();
+        for (const auto& pair: iterable) {
+            this->key(pair.first).value(pair.second);
+        }
+        end_mapping();
+        return;
+    }
+
+    template <typename Iterable>
+    enable_if_t<!is_maplike_v<Iterable>> value_iterable_impl(const Iterable& iterable) {
+        begin_sequence();
+        for (const auto& element: iterable) {
+            this->value(element);
+        }
+        end_sequence();
+        return;
+    }
+
     /**
      * @brief 将新容器添加到父上下文并压入上下文栈
      */
@@ -297,19 +317,7 @@ public:
      */
     template <typename Iterable, enable_if_t<is_iterable_v<Iterable>, int> = 0>
     yaml_builder& value_iterable(const Iterable& iterable) {
-        if constexpr (is_maplike_v<Iterable>) {
-            begin_flow_mapping();
-            for (const auto& pair: iterable) {
-                this->key(pair.first).value(pair.second);
-            }
-            end_mapping();
-        } else {
-            begin_sequence();
-            for (const auto& element: iterable) {
-                this->value(element);
-            }
-            end_sequence();
-        }
+        value_iterable_impl(iterable);
         return *this;
     }
 

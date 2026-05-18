@@ -283,7 +283,7 @@ public:
     using allocator_type = Alloc;                                             ///< 分配器类型
 
     /// 缓冲区大小
-    static constexpr difference_type buffer_size = iterator::buffer_size;
+    static constexpr ptrdiff_t buffer_size = iterator::buffer_size;
 
 private:
     using map_pointer = pointer*;                                          ///< 中控器指针类型
@@ -1439,6 +1439,14 @@ public:
         return _NEFORCE lexicographical_compare(cbegin(), cend(), rhs.cbegin(), rhs.cend());
     }
 };
+
+#ifndef NEFORCE_STANDARD_17
+template <typename T, typename Alloc, size_t BufSize>
+constexpr ptrdiff_t deque<T, Alloc, BufSize>::buffer_size;
+template <typename T, typename Alloc, size_t BufSize>
+constexpr size_t deque<T, Alloc, BufSize>::init_map_size;
+#endif
+
 
 #ifdef NEFORCE_STANDARD_17
 template <typename T, typename Alloc>

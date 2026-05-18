@@ -37,6 +37,7 @@ struct compressed_pair final : IfEmpty, icommon<compressed_pair<IfEmpty, T, Comp
      * @brief 默认构造函数
      */
     constexpr compressed_pair() noexcept(is_nothrow_default_constructible_v<T>) :
+    IfEmpty(),
     value() {}
 
     /**
@@ -44,6 +45,7 @@ struct compressed_pair final : IfEmpty, icommon<compressed_pair<IfEmpty, T, Comp
      * @param p 要拷贝的压缩对
      */
     constexpr compressed_pair(const compressed_pair& p) noexcept(is_nothrow_copy_constructible_v<T>) :
+    IfEmpty(p.get_base()),
     value(p.value) {}
 
     /**
@@ -61,6 +63,7 @@ struct compressed_pair final : IfEmpty, icommon<compressed_pair<IfEmpty, T, Comp
      * @param p 要移动的压缩对
      */
     constexpr compressed_pair(compressed_pair&& p) noexcept(is_nothrow_move_constructible_v<T>) :
+    IfEmpty(p.get_base()),
     value(_NEFORCE move(p.value)) {}
 
     /**
