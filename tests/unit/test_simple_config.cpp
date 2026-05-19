@@ -2179,6 +2179,20 @@ TEST_F(JsonValueTest, ToIndentStringObjectWithMembers) {
     EXPECT_NE(result.find("\n}"), string::npos);
 }
 
+TEST_F(JsonValueTest, ToStringEscapedString) {
+    json_string str("line1\nline2\ttext\"quote\"");
+    string result = str.to_string();
+    EXPECT_NE(result.find("\\n"), string::npos);
+    EXPECT_NE(result.find("\\t"), string::npos);
+    EXPECT_NE(result.find("\\\""), string::npos);
+}
+
+TEST_F(JsonValueTest, ToIndentStringEscapedString) {
+    json_string str("line1\nline2");
+    string result = str.to_indent_string();
+    EXPECT_NE(result.find("\\n"), string::npos);
+}
+
 
 class JsonParserTest : public ::testing::Test {
 protected:
@@ -2441,6 +2455,128 @@ TEST_F(JsonParserTest, ParseUnterminatedStringThrows) {
 TEST_F(JsonParserTest, ParseInvalidNumberFormatThrows) {
     json_parser parser("01");
     EXPECT_THROW(parser.parse(), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseLeadingZerosThrows) {
+    json_parser parser("007");
+    EXPECT_THROW(parser.parse(), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseNegativeLeadingZerosThrows) {
+    json_parser parser("-01");
+    EXPECT_THROW(parser.parse(), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseZeroNumberValid) {
+    json_parser parser("0");
+    auto result = parser.parse();
+    ASSERT_NE(result, nullptr);
+    EXPECT_TRUE(result->is_number());
+    EXPECT_DOUBLE_EQ(result->as_number()->get_value(), 0.0);
+}
+
+TEST_F(JsonParserTest, ParseStringEscapeNewline) {
+    json_parser parser("\"hello\\nworld\"");
+    auto result = parser.parse();
+    ASSERT_NE(result, nullptr);
+    EXPECT_EQ(result->as_string()->get_value(), "hello\nworld");
+}
+
+TEST_F(JsonParserTest, ParseStringEscapeTab) {
+    json_parser parser("\"hello\\tworld\"");
+    auto result = parser.parse();
+    ASSERT_NE(result, nullptr);
+    EXPECT_EQ(result->as_string()->get_value(), "hello\tworld");
+}
+
+TEST_F(JsonParserTest, ParseStringEscapeBackslash) {
+    json_parser parser("\"hello\\\\world\"");
+    auto result = parser.parse();
+    ASSERT_NE(result, nullptr);
+    EXPECT_EQ(result->as_string()->get_value(), "hello\\world");
+}
+
+TEST_F(JsonParserTest, ParseStringEscapeQuote) {
+    json_parser parser("\"hello\\\"world\"");
+    auto result = parser.parse();
+    ASSERT_NE(result, nullptr);
+    EXPECT_EQ(result->as_string()->get_value(), "hello\"world");
+}
+
+TEST_F(JsonParserTest, ParseStringEscapeSlash) {
+    json_parser parser("\"hello\\/world\"");
+    auto result = parser.parse();
+    ASSERT_NE(result, nullptr);
+    EXPECT_EQ(result->as_string()->get_value(), "hello/world");
+}
+
+TEST_F(JsonParserTest, ParseStringEscapeBackspace) {
+    json_parser parser("\"hello\\bworld\"");
+    auto result = parser.parse();
+    ASSERT_NE(result, nullptr);
+    EXPECT_EQ(result->as_string()->get_value(), "hello\bworld");
+}
+
+TEST_F(JsonParserTest, ParseStringEscapeFormfeed) {
+    json_parser parser("\"hello\\fworld\"");
+    auto result = parser.parse();
+    ASSERT_NE(result, nullptr);
+    EXPECT_EQ(result->as_string()->get_value(), "hello\fworld");
+}
+
+TEST_F(JsonParserTest, ParseStringEscapeCarriageReturn) {
+    json_parser parser("\"hello\\rworld\"");
+    auto result = parser.parse();
+    ASSERT_NE(result, nullptr);
+    EXPECT_EQ(result->as_string()->get_value(), "hello\rworld");
+}
+
+TEST_F(JsonParserTest, ParseStringUnicodeEscape) {
+    json_parser parser("\"\\u0048\\u0065\\u006C\\u006C\\u006F\"");
+    auto result = parser.parse();
+    ASSERT_NE(result, nullptr);
+    EXPECT_EQ(result->as_string()->get_value(), "Hello");
+}
+
+TEST_F(JsonParserTest, ParseStringInvalidEscapeThrows) {
+    json_parser parser("\"\\x\"");
+    EXPECT_THROW(parser.parse(), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseStringControlCharacterThrows) {
+    string s = "\"hello\x01world\"";
+    json_parser parser(s);
+    EXPECT_THROW(parser.parse(), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseStringControlCharacterTabThrows) {
+    string s = "\"hello\x09world\"";
+    json_parser parser(s);
+    EXPECT_THROW(parser.parse(), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseStringUnpairedHighSurrogateThrows) {
+    json_parser parser("\"\\uD800\"");
+    EXPECT_THROW(parser.parse(), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseStringUnpairedLowSurrogateThrows) {
+    json_parser parser("\"\\uDC00\"");
+    EXPECT_THROW(parser.parse(), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseStringUnicodeSurrogateBoundaryValid) {
+    json_parser parser("\"\\uD7FF\"");
+    auto result = parser.parse();
+    ASSERT_NE(result, nullptr);
+    EXPECT_FALSE(result->as_string()->get_value().empty());
+}
+
+TEST_F(JsonParserTest, ParseStringUnicodeValidAboveSurrogate) {
+    json_parser parser("\"\\uE000\"");
+    auto result = parser.parse();
+    ASSERT_NE(result, nullptr);
+    EXPECT_FALSE(result->as_string()->get_value().empty());
 }
 
 TEST_F(JsonParserTest, ParseEmptyInputThrows) {
@@ -2777,6 +2913,18 @@ TEST_F(JsonBuilderTest, KeyWithoutValueThrows) {
     builder.begin_object();
     builder.key("name");
     EXPECT_THROW(builder.end_object(), json_exception);
+}
+
+TEST_F(JsonParserTest, ParseStringUnicodeSurrogatePairValid) {
+    json_parser parser("\"\\uD83D\\uDE00\"");
+    auto result = parser.parse();
+    ASSERT_NE(result, nullptr);
+    EXPECT_EQ(result->as_string()->get_value(), "\xF0\x9F\x98\x80");
+}
+
+TEST_F(JsonParserTest, ParseStringUnicodeHighSurrogateNotFollowedByLowThrows) {
+    json_parser parser("\"\\uD83Dx\"");
+    EXPECT_THROW(parser.parse(), json_exception);
 }
 
 TEST_F(JsonBuilderTest, MultiValueDispatchesToNull) {

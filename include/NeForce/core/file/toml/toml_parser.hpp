@@ -22,6 +22,7 @@
  */
 
 #include "NeForce/core/file/toml/toml_value.hpp"
+#include "NeForce/core/string/codepoint.hpp"
 #include "NeForce/core/utility/optional.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -166,7 +167,7 @@ private:
      *
      * @throws toml_exception 当转义序列无效时抛出
      */
-    char32_t parse_unicode_escape(size_t digits);
+    codepoint parse_unicode_escape(size_t digits);
 
     /**
      * @brief 解析字符串

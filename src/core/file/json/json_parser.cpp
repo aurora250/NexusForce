@@ -1,4 +1,6 @@
 #include <NeForce/core/file/json/json_parser.hpp>
+#include <NeForce/core/string/codepoint.hpp>
+#include <NeForce/core/utility/hexadecimal.hpp>
 #include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -19,18 +21,100 @@ bool json_parser::eof() const noexcept { return pos_ >= len_; }
 
 unique_ptr<json_string> json_parser::parse_string() {
     pos_++;
-    const size_t start_pos = pos_;
+    string result;
 
     while (pos_ < len_) {
         const char c = text_[pos_++];
+        if (c == '"') {
+            return make_unique<json_string>(move(result));
+        }
         if (c == '\\') {
             if (pos_ >= len_) {
                 NEFORCE_THROW_EXCEPTION(json_exception("Unterminated escape sequence in string"));
             }
-            pos_++;
-        } else if (c == '"') {
-            const size_t end_pos = pos_ - 1;
-            return make_unique<json_string>(text_.view(start_pos, end_pos - start_pos));
+            const char esc = text_[pos_++];
+            switch (esc) {
+                case '"':
+                    result += '"';
+                    break;
+                case '\\':
+                    result += '\\';
+                    break;
+                case '/':
+                    result += '/';
+                    break;
+                case 'b':
+                    result += '\b';
+                    break;
+                case 'f':
+                    result += '\f';
+                    break;
+                case 'n':
+                    result += '\n';
+                    break;
+                case 'r':
+                    result += '\r';
+                    break;
+                case 't':
+                    result += '\t';
+                    break;
+                case 'u': {
+                    if (pos_ + 4 > len_) {
+                        NEFORCE_THROW_EXCEPTION(json_exception("Unterminated unicode escape sequence"));
+                    }
+                    const string_view hex_str = text_.view(pos_, 4);
+                    for (size_t i = 0; i < 4; i++) {
+                        if (!is_xdigit(hex_str[i])) {
+                            NEFORCE_THROW_EXCEPTION(json_exception("Invalid unicode escape sequence"));
+                        }
+                    }
+                    pos_ += 4;
+                    try {
+                        const uint32_t cp_val = static_cast<uint32_t>(hexadecimal(hex_str).value());
+                        const auto high = static_cast<char16_t>(cp_val);
+
+                        if (codepoint::is_high_surrogate(high)) {
+                            if (pos_ + 6 <= len_ && text_[pos_] == '\\' && text_[pos_ + 1] == 'u') {
+                                const string_view hex_str2 = text_.view(pos_ + 2, 4);
+                                bool valid_low = true;
+                                for (size_t i = 0; i < 4 && valid_low; i++) {
+                                    if (!is_xdigit(hex_str2[i])) {
+                                        valid_low = false;
+                                    }
+                                }
+                                if (valid_low) {
+                                    const uint32_t low_val = static_cast<uint32_t>(hexadecimal(hex_str2).value());
+                                    const auto low = static_cast<char16_t>(low_val);
+                                    if (codepoint::is_low_surrogate(low)) {
+                                        pos_ += 6;
+                                        codepoint::combine_surrogates(high, low).append_to(result);
+                                        break;
+                                    }
+                                }
+                            }
+                            NEFORCE_THROW_EXCEPTION(json_exception("Unpaired high surrogate in unicode escape"));
+                        }
+                        if (codepoint::is_low_surrogate(high)) {
+                            NEFORCE_THROW_EXCEPTION(json_exception("Unpaired low surrogate in unicode escape"));
+                        }
+                        if (!codepoint::is_valid_codepoint(cp_val)) {
+                            NEFORCE_THROW_EXCEPTION(json_exception("Unicode codepoint out of range"));
+                        }
+                        codepoint{cp_val}.append_to(result);
+                    } catch (const exception&) {
+                        throw;
+                    } catch (...) {
+                        NEFORCE_THROW_EXCEPTION(json_exception("Invalid unicode escape value"));
+                    }
+                    break;
+                }
+                default:
+                    NEFORCE_THROW_EXCEPTION(json_exception("Invalid escape sequence in string"));
+            }
+        } else if (static_cast<uint8_t>(c) < 0x20) {
+            NEFORCE_THROW_EXCEPTION(json_exception("Unescaped control character in string"));
+        } else {
+            result += c;
         }
     }
     NEFORCE_THROW_EXCEPTION(json_exception("Unterminated string"));
@@ -52,6 +136,8 @@ unique_ptr<json_number> json_parser::parse_number() {
             while (pos_ < len_ && is_digit(text_[pos_])) {
                 pos_++;
             }
+        } else if (pos_ < len_ && is_digit(text_[pos_])) {
+            NEFORCE_THROW_EXCEPTION(json_exception("Leading zeros are not allowed"));
         }
     } else if (is_digit(current())) {
         while (pos_ < len_ && is_digit(text_[pos_])) {

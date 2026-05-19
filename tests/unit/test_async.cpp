@@ -42,8 +42,309 @@ namespace {
             }
         }
     };
+
+    void dummy_func() {}
 } // namespace
 
+TEST(ThreadIdTest, DefaultConstructor) {
+    thread::id id;
+    EXPECT_EQ(id, thread::id{});
+}
+
+TEST(ThreadIdTest, Equality) {
+    auto id1 = this_thread::id();
+    auto id2 = this_thread::id();
+    EXPECT_EQ(id1, id2);
+    EXPECT_FALSE(id1 != id2);
+}
+
+TEST(ThreadIdTest, Hash) {
+    auto id1 = this_thread::id();
+    auto id2 = this_thread::id();
+    EXPECT_EQ(id1.to_hash(), id2.to_hash());
+}
+
+TEST(ThreadIdTest, NativeHandleDefault) {
+    thread::id id;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    EXPECT_EQ(id.native_handle(), 0);
+#else
+    EXPECT_EQ(id.native_handle(), thread::id{}.native_handle());
+#endif
+}
+
+TEST(ThreadTest, DefaultConstructor) {
+    thread t;
+    EXPECT_FALSE(t.joinable());
+    EXPECT_EQ(t.get_id(), thread::id{});
+}
+
+TEST(ThreadTest, ConstructFromFunction) {
+    thread t(dummy_func);
+    EXPECT_TRUE(t.joinable());
+    t.join();
+    EXPECT_FALSE(t.joinable());
+}
+
+TEST(ThreadTest, ConstructFromLambda) {
+    int x = 0;
+    thread t([&] { x = 42; });
+    t.join();
+    EXPECT_EQ(x, 42);
+}
+
+TEST(ThreadTest, ConstructWithArgs) {
+    int result = 0;
+    auto f = [](int a, int b, int& out) { out = a + b; };
+    thread t(f, 2, 3, ref(result));
+    t.join();
+    EXPECT_EQ(result, 5);
+}
+
+TEST(ThreadTest, MoveConstructor) {
+    thread t1(dummy_func);
+    thread::id id1 = t1.get_id();
+    thread t2(move(t1));
+    EXPECT_FALSE(t1.joinable());
+    EXPECT_TRUE(t2.joinable());
+    EXPECT_EQ(t2.get_id(), id1);
+    t2.join();
+}
+
+TEST(ThreadTest, MoveAssignment) {
+    thread t1(dummy_func);
+    thread::id id1 = t1.get_id();
+    thread t2;
+    t2 = move(t1);
+    EXPECT_FALSE(t1.joinable());
+    EXPECT_TRUE(t2.joinable());
+    EXPECT_EQ(t2.get_id(), id1);
+    t2.join();
+}
+
+TEST(ThreadTest, SelfMoveAssignment) {
+    thread t(dummy_func);
+    thread::id id = t.get_id();
+    t = move(t);
+    EXPECT_TRUE(t.joinable());
+    EXPECT_EQ(t.get_id(), id);
+    t.join();
+}
+
+TEST(ThreadTest, Start) {
+    thread t;
+    int val = 0;
+    t.start([&] { val = 99; });
+    EXPECT_TRUE(t.joinable());
+    t.join();
+    EXPECT_EQ(val, 99);
+}
+
+TEST(ThreadTest, StartThrowsIfAlreadyStarted) {
+    thread t;
+    t.start([] {});
+    EXPECT_THROW(t.start([] {}), thread_exception);
+    t.join();
+}
+
+TEST(ThreadTest, JoinNotJoinableThrows) {
+    thread t;
+    EXPECT_THROW(t.join(), thread_exception);
+}
+
+TEST(ThreadTest, DetachNotJoinableThrows) {
+    thread t;
+    EXPECT_THROW(t.detach(), thread_exception);
+}
+
+TEST(ThreadTest, DoubleJoinThrows) {
+    thread t([] {});
+    t.join();
+    EXPECT_THROW(t.join(), thread_exception);
+}
+
+TEST(ThreadTest, DetachAfterJoinThrows) {
+    thread t([] {});
+    t.join();
+    EXPECT_THROW(t.detach(), thread_exception);
+}
+
+TEST(ThreadTest, JoinAfterDetachThrows) {
+    thread t([] {});
+    t.detach();
+    EXPECT_THROW(t.join(), thread_exception);
+}
+
+TEST(ThreadTest, DoubleDetachThrows) {
+    thread t([] {});
+    t.detach();
+    EXPECT_THROW(t.detach(), thread_exception);
+}
+
+TEST(ThreadTest, Swap) {
+    thread t1([] {});
+    thread t2([] {});
+    thread::id id1 = t1.get_id();
+    thread::id id2 = t2.get_id();
+    t1.swap(t2);
+    EXPECT_EQ(t1.get_id(), id2);
+    EXPECT_EQ(t2.get_id(), id1);
+    t1.join();
+    t2.join();
+}
+
+TEST(ThreadTest, SetName) {
+    thread t([] {});
+    bool res = t.set_name("test_thread");
+    EXPECT_TRUE(res || !res);
+    t.join();
+}
+
+TEST(ThreadTest, GetNameAfterSet) {
+    thread t([] {});
+    char buf[32] = {};
+    bool set_ok = t.set_name("mythread");
+    if (set_ok) {
+        bool get_ok = t.name(buf, sizeof(buf));
+        if (get_ok) {
+            EXPECT_STREQ(buf, "mythread");
+        }
+    }
+    t.join();
+}
+
+TEST(ThreadTest, GetNameOnNonJoinable) {
+    thread t;
+    char buf[32] = {};
+    EXPECT_FALSE(t.name(buf, sizeof(buf)));
+}
+
+TEST(ThreadTest, StaticSetNameCurrentThread) {
+    bool res = thread::set_name(this_thread::handle(), "main_test");
+    EXPECT_TRUE(res || !res);
+}
+
+TEST(ThreadTest, StaticGetNameCurrentThread) {
+    char buf[32] = {};
+    bool set_ok = thread::set_name(this_thread::handle(), "get_test");
+    if (set_ok) {
+        bool get_ok = thread::name(this_thread::handle(), buf, sizeof(buf));
+        if (get_ok) {
+            EXPECT_STREQ(buf, "get_test");
+        }
+    }
+}
+
+TEST(ThisThreadTest, GetId) {
+    auto id = this_thread::id();
+    EXPECT_EQ(id, this_thread::id());
+}
+
+TEST(ThisThreadTest, SetName) {
+    bool res = this_thread::set_name("main");
+    EXPECT_TRUE(res || !res);
+}
+
+TEST(ThisThreadTest, GetName) {
+    char buf[32] = {};
+    bool set_ok = this_thread::set_name("main");
+    if (set_ok) {
+        bool get_ok = this_thread::name(buf, sizeof(buf));
+        if (get_ok) {
+            EXPECT_STREQ(buf, "main");
+        }
+    }
+}
+
+namespace {
+    int g_hook_call_count = 0;
+    thread::hook::point g_last_hook_point;
+    thread::id g_last_hook_thread_id;
+
+    void test_hook_func(thread::hook::point p, thread::id tid) {
+        ++g_hook_call_count;
+        g_last_hook_point = p;
+        g_last_hook_thread_id = tid;
+    }
+
+    atomic<int> g_before_create{0};
+    atomic<int> g_after_create{0};
+    atomic<int> g_thread_start{0};
+    atomic<int> g_thread_end{0};
+    atomic<int> g_before_destroy{0};
+
+    void lifecycle_hook(thread::hook::point p, thread::id) {
+        switch (p) {
+        case thread::hook::point::before_create: ++g_before_create; break;
+        case thread::hook::point::after_create: ++g_after_create; break;
+        case thread::hook::point::thread_start: ++g_thread_start; break;
+        case thread::hook::point::thread_end: ++g_thread_end; break;
+        case thread::hook::point::before_destroy: ++g_before_destroy; break;
+        }
+    }
+
+    int g_multi_count_a = 0;
+    int g_multi_count_b = 0;
+
+    void multi_hook_a(thread::hook::point, thread::id) { ++g_multi_count_a; }
+    void multi_hook_b(thread::hook::point, thread::id) { ++g_multi_count_b; }
+}
+
+TEST(ThreadHookTest, AddRemoveInvoke) {
+    g_hook_call_count = 0;
+    thread::hook::add_hook(test_hook_func);
+    thread::id dummy_id;
+    thread::hook::invoke(thread::hook::point::thread_start, dummy_id);
+    EXPECT_EQ(g_hook_call_count, 1);
+    EXPECT_EQ(g_last_hook_point, thread::hook::point::thread_start);
+    EXPECT_EQ(g_last_hook_thread_id, dummy_id);
+
+    thread::hook::remove_hook(test_hook_func);
+    g_hook_call_count = 0;
+    thread::hook::invoke(thread::hook::point::thread_end, dummy_id);
+    EXPECT_EQ(g_hook_call_count, 0);
+}
+
+TEST(ThreadHookTest, HookLifecycle) {
+    g_before_create = 0;
+    g_after_create = 0;
+    g_thread_start = 0;
+    g_thread_end = 0;
+    g_before_destroy = 0;
+
+    thread::hook::add_hook(lifecycle_hook);
+    {
+        thread t([] {});
+        t.join();
+    }
+    EXPECT_EQ(g_before_create.load(), 1);
+    EXPECT_EQ(g_after_create.load(), 1);
+    EXPECT_EQ(g_thread_start.load(), 1);
+    EXPECT_EQ(g_thread_end.load(), 1);
+    EXPECT_EQ(g_before_destroy.load(), 1);
+    thread::hook::remove_hook(lifecycle_hook);
+}
+
+TEST(ThreadHookTest, MultipleHooks) {
+    g_multi_count_a = 0;
+    g_multi_count_b = 0;
+
+    thread::hook::add_hook(multi_hook_a);
+    thread::hook::add_hook(multi_hook_b);
+    thread::hook::invoke(thread::hook::point::after_create, thread::id{});
+    EXPECT_EQ(g_multi_count_a, 1);
+    EXPECT_EQ(g_multi_count_b, 1);
+
+    thread::hook::remove_hook(multi_hook_a);
+    thread::hook::invoke(thread::hook::point::after_create, thread::id{});
+    EXPECT_EQ(g_multi_count_a, 1);
+    EXPECT_EQ(g_multi_count_b, 2);
+
+    thread::hook::remove_hook(multi_hook_b);
+    thread::hook::invoke(thread::hook::point::after_create, thread::id{});
+    EXPECT_EQ(g_multi_count_a, 1);
+    EXPECT_EQ(g_multi_count_b, 2);
+}
 
 TEST(FuturePromise, SetValueInt) {
     promise<int> p;

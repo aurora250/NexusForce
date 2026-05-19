@@ -79,7 +79,7 @@
     <h2>基础功能测试</h2>
     <ul>
         <li><a href="/">测试根路径(/) - 返回index.html</a></li>
-        <li><a href="/api/data">测试API数据(/api/data) - JSON响应</a></li>
+        <li><a href="/api/data/111">测试API数据(/api/data) - JSON响应</a></li>
         <li><a href="/detail">测试自身(detail.html)</a></li>
     </ul>
 </div>
@@ -219,7 +219,7 @@
             });
 
             document.getElementById('test-cors').addEventListener('click', function() {
-                fetch(API_BASE + '/api/data', {
+                fetch(API_BASE + '/api/data/111', {
                     method: 'OPTIONS',
                     credentials: 'same-origin'
                 })

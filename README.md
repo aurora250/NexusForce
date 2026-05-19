@@ -27,6 +27,7 @@
 - [标准合规](#-标准合规)
 - [特性](#-特性)
 - [编译指南](#-编译指南)
+- [快速开始](#-快速开始)
 - [文档](#-文档)
 - [协议](#️-协议)
 - [更新日志](#-更新日志)
@@ -83,15 +84,15 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ### 🌐 网络协议与互联网标准
 
-| 组件 | 遵循标准 | 说明 |
-|------|----------|------|
-| **URL 解析与编码** | [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986), [RFC 3987](https://www.rfc-editor.org/rfc/rfc3987), [WHATWG URL](https://url.spec.whatwg.org/) | URI 通用语法、百分号编码及国际化资源标识符 |
-| **网络端口定义** | [IANA 端口号注册表](https://www.iana.org/assignments/service-names-port-numbers/), [RFC 6335](https://www.rfc-editor.org/rfc/rfc6335) | HTTP/HTTPS/FTP/SSH/DNS 等知名端口分配 |
-| **Base64 编码** | [RFC 4648](https://www.rfc-editor.org/rfc/rfc4648) | 标准 Base64 与 URL 安全 Base64 字符表 |
-| **JSON 数据格式** | [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259), [ECMA-404](https://ecma-international.org/publications-and-standards/standards/ecma-404/) | JSON 语法、数据类型与 UTF-8 编码要求 |
-| **TOML 配置格式** | [TOML v1.0.0](https://toml.io/en/v1.0.0) | 包含日期时间格式遵循 [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) / ISO 8601 |
-| **UUID 生成** | [RFC 4122](https://www.rfc-editor.org/rfc/rfc4122), [RFC 9562](https://www.rfc-editor.org/rfc/rfc9562) | UUID v4（随机）与 v7（时间有序）生成规范 |
-| **HTTP 与 WebSocket** | [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) / [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) (HTTP/1.1), [RFC 6265](https://www.rfc-editor.org/rfc/rfc6265.html) (Cookie), [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455.html) (WebSocket), [W3C Fetch CORS](https://fetch.spec.whatwg.org/#http-cors-protocol) | 完整 HTTP 语义与路由、Cookie 管理、CORS 跨域策略、WebSocket 升级与帧协议 |
+| 组件                     | 遵循标准 | 说明 |
+|------------------------|----------|------|
+| **URL 解析与编码**          | [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986), [RFC 3987](https://www.rfc-editor.org/rfc/rfc3987), [WHATWG URL](https://url.spec.whatwg.org/) | URI 通用语法、百分号编码及国际化资源标识符 |
+| **网络端口定义**             | [IANA 端口号注册表](https://www.iana.org/assignments/service-names-port-numbers/), [RFC 6335](https://www.rfc-editor.org/rfc/rfc6335) | HTTP/HTTPS/FTP/SSH/DNS 等知名端口分配 |
+| **Base64 编码**          | [RFC 4648](https://www.rfc-editor.org/rfc/rfc4648) | 标准 Base64 与 URL 安全 Base64 字符表 |
+| **JSON RFC 8259 数据格式** | [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259), [ECMA-404](https://ecma-international.org/publications-and-standards/standards/ecma-404/) | JSON 语法、数据类型与 UTF-8 编码要求 |
+| **TOML 1.0.0 配置格式**    | [TOML v1.0.0](https://toml.io/en/v1.0.0) | 包含日期时间格式遵循 [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) / ISO 8601 |
+| **UUID 生成**            | [RFC 4122](https://www.rfc-editor.org/rfc/rfc4122), [RFC 9562](https://www.rfc-editor.org/rfc/rfc9562) | UUID v4（随机）与 v7（时间有序）生成规范 |
+| **HTTP 与 WebSocket**   | [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) / [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) (HTTP/1.1), [RFC 6265](https://www.rfc-editor.org/rfc/rfc6265.html) (Cookie), [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455.html) (WebSocket), [W3C Fetch CORS](https://fetch.spec.whatwg.org/#http-cors-protocol) | 完整 HTTP 语义与路由、Cookie 管理、CORS 跨域策略、WebSocket 升级与帧协议 |
 
 ### 🔐 密码学与安全算法
 
@@ -146,53 +147,52 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 ## 🚀 特性
 
 ### 🔄 并发与异步 (Async)
-- **线程池** - 基于任务窃取的多策略线程池
-- **协程支持** - 协程原语和生成器
-- **虚拟线程** - 基于协程的轻量级虚拟线程
-- **无锁队列** - 线程安全的无锁队列实现
-- **同步原语** - 互斥锁、读写锁、信号量、线程屏障与闩锁
-- **原子操作** - 原子类型、FUTEX、定时等待
-- **Future/Promise** - 异步编程模型
-- **危险指针** - 无锁数据结构的内存管理
-- **停止令牌** - 可取消的异步操作
+- **`thread_pool`** - 基于任务窃取的多策略线程池
+- **`timer_scheduler`/`basic_timer`** - 基于红黑树的定时任务调度
+- **`generator`/`task`** - 协程原语和任务生成器
+- **`virtual_thread`** - C#风格的轻量级协程
+- **`connection`/`signal`** - 观察者模式的信号槽
+- **`call_once`** - 基于FUTEX的多线程单次调用实现
+- **停止令牌** - 可取消的异步操作 `stop_token`/`stop_source`/`stop_callback`
+- **同步原语** - 互斥锁 `mutex`、读写锁 `shared_mutex`、信号量 `semaphore`/`atomic_semaphore`、线程屏障 `barrier`与闩锁 `latch`
+- **原子操作** - 原子类型 `atomic`、原子FUTEX `atomic_futex`、全局原子操作函数体系
+- **多策略线程** - 通用线程 `thread`、携带停止令牌的作用域线程 `scoped_thread`、手动开启的惰性线程 `lazy_thread`
+- **基本异步模型** - `async` 及其配套的 `future`/`promise`/`packaged_task` 结构
+- **危险指针** - 无锁数据结构的内存管理 `hazard_ptr`/`hazard_pointer_domain`
 
 ### 📦 容器 (Container)
-- **标准容器** - vector、list、deque、map、set 等
-- **红黑树** - 自平衡二叉搜索树实现
-- **哈希表** - 开放寻址哈希表
-- **布隆过滤器** - 概率性数据结构
-- **LRU/TTL 缓存** - 基于最近最少使用/过期时间的缓存策略
-- **位图/位集** - 高效位操作容器
-- **莱昂纳多堆** - 莱昂纳多堆算法实现
+- **标准容器** - `array`/`vector`/`list`/`deque`/`map`/`set`/`unordered_map`/`unordered_set` 等
+- **`rb_tree`** - 自平衡二叉搜索树实现
+- **`hashtable`** - 开放寻址哈希表
+- **`bloom_filter`** - 概率性数据结构
+- **`lru_cache`/`ttl_cache`** - 基于最近最少使用/过期时间的缓存策略
+- **`bitmap`/`bitset`** - 高效位操作容器
 
 ### 🔐 加密与安全 (Encrypt)
-- **AES256** - 高级加密标准实现
-- **SHA1/SHA256** - 安全哈希算法
-- **MD5** - 消息摘要算法
-- **Base64** - 二进制数据编码
-- **XOR** - 简单异或加密
+- **`AES256`** - 高级加密标准实现
+- **`SHA1`/`SHA256`** - 安全哈希算法
+- **`MD5`** - 消息摘要算法
+- **`base64`** - 二进制数据编码
 
 ### 📁 文件系统 (File)
-- **路径/文件操作** - 路径/文件系统操作
-- **文件监控** - 实时文件系统变更监控
-- **配置文件解析** - JSON/TOML/INI/ENV 格式解析与流式构建
-- **临时文件** - 安全的临时文件管理
-- **系统管道** - 管道操作类
-- **共享内存** - 跨进程共享内存
+- **路径/文件操作** - 路径/文件系统操作 `path`/`path_tree`/`file`/`file_async`/`file_diff`/`file_locker`/`file_mapper`
+- **`file_watcher`** - 实时文件系统变更监控
+- **配置文件解析** - JSON/TOML/YAML/INI/ENV 值系统、格式解析与流式构建
+- **`temp_file`** - 安全的临时文件管理
 
 ### 🌐 网络库 (Network)
-- **WebSocket** - 全双工通信协议
-- **TCP/UDP 套接字** - 高性能网络通信
-- **SSL/TLS** - 加密网络传输
-- **HTTP 客户端/服务器** - HTTP 协议实现，包含路由器、过滤器
-- **DNS 客户端** - 域名解析
-- **URL 解析** - URL 处理
+- **WebSocket** - 全双工通信协议 `websocket_session` / `websocket_server`
+- **TCP/UDP 套接字** - 高性能网络通信 `tcp_socket` / `udp_socket`
+- **SSL/TLS** - 加密网络传输 `ssl_context` / `ssl_stream`
+- **HTTP 客户端/服务器** - HTTP 协议实现，包含路由器、过滤器 `http_filter` / `http_router` / `http_server` / `http_client`
+- **`dns_client`** - 域名解析
+- **FTP** - FTP 服务器与客户端
 - **ICMP/SMTP** - ICMP 和 SMTP 协议操作
-- **ARP/MAC/IP/Ports** - 底层网络操作
+- **`arp`/`mac_address`/`ip_address`/`ports`/`url`** - 网络编程工具
 
 ### 🗄️ 数据库 (DB)
-- **数据库连接池** - 连接复用与管理
-- **SQL 构建器** - 标准 SQL 语句流式构建
+- **`database_pool`** - 数据库连接复用与管理
+- **`sql_builder`** - 标准 SQL 语句流式构建
 - **多数据库支持**:
   - MySQL 客户端
   - PostgreSQL 客户端
@@ -202,95 +202,99 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **结果集封装** - 统一结果访问接口
 
 ### 📝 日志系统 (Logging)
+- **`log_sink`** - 可扩展的日志输出目标
+- **`file_sink`** - 日志文件管理与轮转
 - **多级别日志** - 支持不同日志级别
-- **日志输出** - 日志文件管理与轮转
-- **日志格式化** - 自定义日志格式
-- **多接收器** - 可扩展的日志输出目标
-- **日志器** - 灵活可配置的日志器
+- **`log_formatter`** - 自定义日志格式
+- **`logger`** - 灵活可配置的日志器
 
 ### 🔤 字符串处理 (String)
-- **PCRE2 正则表达式** - 支持 JIT 的高效正则匹配
-- **Unicode 支持** - UTF 转换系统、码点操作类
-- **字符串格式化** - 类型安全的格式化输出
-- **字符串视图** - 大量使用字符串视图优化操作
-- **数值转换** - 字符串与数值互转
+- **PCRE2 正则表达式** - 支持 JIT 的高效正则匹配 `regex`/`match_result`/`regex_iterator`/`regex_token_iterator`
+- **Unicode 支持** - UTF 转换系统、码点操作类 `codepoint`
+- **`formatter`/`format`** - 类型安全的格式化输出
+- **`string_view`** - 大量使用字符串视图优化操作
+- **数值转换** - 可扩展的字符串与数值互转体系
 
 ### ⚙️ 系统接口 (System)
-- **进程管理** - 进程创建与控制
-- **管道操作** - 管道创建与管理
-- **动态库加载** - 运行时库加载
-- **控制台操作** - 终端交互
-- **进程参数解析** - 进程参数分析与操作
-- **堆栈跟踪** - 异常调试
-- **系统信息** - 硬件与 OS 信息
-- **环境变量** - 环境变量操作
-- **信号管理** - 信号控制
+- **`process`** - 进程创建与控制
+- **`pipe`** - 管道创建与管理
+- **`dynamic_library`** - 运行时库加载
+- **`console`** - 高集成度的终端交互
+- **`cmdline`** - 进程参数分析与操作
+- **`stacktrace`** - 异常调试
+- **`share_memory`** - 跨进程共享内存
+- **`locale`** - 本地化设置与解析
+- **`sysinfo`** - 硬件与 OS 信息
+- **`environment`** - 环境变量操作
+- **`system_signal_manager`** - 系统信号控制
+- **`system_event`** - 系统事件管理
 
 ### ⏰ 时间处理 (Time)
-- **高精度时钟** - 多种时钟源
-- **时间点/时长** - 时间计算
-- **日期时间** - 日历操作
-- **范围计时** - 代码块执行时间测量
+- **`steady_clock` / `system_clock`** - 多种时钟源高精度时钟
+- **`duration`** - 时间跨度计算
+- **`date` / `time` / `datetime` / `timestamp`** - 日历操作
+- **`scoped_click`** - 代码块执行时间测量
 
 ### 🛠️ 工具库 (Utility)
-- **Optional** - 可选值处理
-- **Variant** - 类型安全联合体
-- **Expected** - 错误处理
-- **Any** - 类型擦除容器
-- **Tuple** - 编译期元组
-- **Color** - RGB 颜色操作
-- **Scope 操作** - 作用域守卫
-- **数值信息** - 数值极限信息
-- **数学比率** - 编译期比率计算
-- **UUID** - UUID v4/v7 生成器
-- **端序操作** - 大小端转换
-- **断点调用** - 调试断点触发
+- **字面类型包装类** - 字面类型的高级封装
+- **`optional`** - 可选值处理
+- **`variant`** - 类型安全联合体
+- **`expected`** - 错误状态处理
+- **`any`** - 类型擦除容器
+- **`pair`/`tuple`** - 编译期键值对/元组
+- **`color`** - RGB 颜色操作
+- **`scope_exit` / `scope_fail` / `scope_success`** - 作用域守卫
+- **数值/字符信息** - 数值/字符类型信息获取
+- **`ratio`** - 编译期比率计算
+- **`uuid`** - UUID v4/v7 生成器
+- **`compressed_pair`** - EBCO内存优化
 
 ### 🔍 反射系统 (Reflection)
-- **反射注册表** - 类型反射与元信息管理
-- **类型信息** - 运行时类型查询
+- **`registry`** - 类型反射与元信息管理
+- **`meta_type` / `meta_property` / `meta_function`** - 运行时类型查询
 
 ### 🧬 类型与特性 (TypeInfo)
-- **类型萃取** - 编译期类型判断
-- **概念约束** - C++20 概念支持
-- **类型检查** - 运行时类型信息
-- **CRTP 静态多态** - 零开销接口统一
+- **类型萃取** - 完备的编译期类型判断
+- **概念约束** - 概念集支持
+- **`check_type`** - 运行时可读的类型名
+- **CRTP 静态多态** - 全局统一的零开销接口
 
 ### 💾 内存管理 (Memory)
-- **智能指针** - shared_ptr、unique_ptr、weak_ptr
-- **原子智能指针** - `atomic<shared_ptr/weak_ptr>` 无锁操作
-- **内存视图** - 安全内存访问
+- **`shared_ptr`、`unique_ptr`、`weak_ptr`** - 智能指针结构
+- **`atomic<shared_ptr/weak_ptr>`** - 原子智能指针无锁操作
+- **`memory_view`** - 安全内存访问
+- **位/端序/字节流操作** - 内存状态修改
 - **构造/析构工具** - 对象生命周期管理
-- **内存跟踪** - 调试用内存监控
-- **标准分配器** - 基于编译器特性的策略特化分配器
-- **空基类压缩** - `compressed_pair` 优化
+- **`trace_allocator` ** - 调试用内存监控
+- **`standard_allocator`** - 基于编译器特性的策略特化分配器
 
 ### 📦 压缩 (Compress)
-- **lz4 压缩** - 高速数据压缩/解压
-- **zlib 压缩** - 通用数据压缩/解压
+- **lz4 压缩** - `lz4_compressor` 高速数据压缩/解压
+- **zlib 压缩** - `zlib_compressor` 多策略通用数据压缩/解压
 
 ### 🔌 插件系统 (Plugin)
-- **动态插件管理** - 运行时加载卸载插件
+- **动态插件管理** - `plugin_manager` 运行时加载卸载插件
 - **插件接口** - 标准化插件开发
 
 ### ❗ 异常处理 (Exception)
-- **异常指针** - 跨线程异常传递
-- **终止处理** - 程序终止管理
-- **异常系统** - 标准异常体系
+- **异常指针** - `exception_ptr` 跨线程异常传递
+- **终止处理** - 多状态程序终止方式与对应回调
+- **异常/错误码系统** - 自定义的异常与错误码体系
+- **断点处理** - 调试断点触发与处理
 
 ### 📐 算法库 (Algorithm)
-- **标准算法** - sort、find、transform 等
+- **标准算法** - 基于迭代器系统的范围迭代算法
 - **并行算法** - 并行执行策略
 - **数值算法** - 数值计算与累加
 - **堆算法** - 堆操作与优先级队列
 - **范围操作** - ranges 库支持
 - **哈希算法** - 多种哈希函数实现
-- **位操作** - 位操作函数系列
 
 ### 📊 数学库 (Math)
 - **数学常量** - 常用数学常数
 - **数学函数** - 超越函数与数值计算
-- **随机数生成** - LC、梅森旋转、硬件噪声算法
+- **随机数生成** - LC、梅森旋转、硬件噪声算法 `random_lcd` / `random_mt` / `secret`
+- **128位数学计算** - 128位有符号/无符号数值操作 `int128_t` / `uint128_t`
 
 ---
 
@@ -298,25 +302,27 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ### 📋 前置依赖
 
-| 类型 | 依赖 | 版本要求   |
-|------|------|--------|
-| 🔨 构建工具 | [CMake](https://cmake.org/) | 3.19+  |
-| 📦 包管理器 | [vcpkg](https://github.com/microsoft/vcpkg) | Latest |
-| 🎨 代码格式化 | [clang-format](https://clang.llvm.org/docs/ClangFormat.html) | 19+    |
-| 🔍 静态分析 | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) | 19+    |
-| ⚠️ 必选依赖 | [GTest](https://google.github.io/googletest/) | 1.17.0+ |
-| | [pcre2](https://www.pcre.org/) | 10.47+ |
-| | [OpenSSL](https://www.openssl.org/) | 3.6.1+ |
-| 📦 可选依赖 | [libpq](https://www.postgresql.org/) | 16.9+  |
-| | [libmysql](https://www.mysql.com/) | 8.0.40+ |
-| | [sqlite3](https://sqlite.org/index.html) | 3.51.2+ |
-| | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0+ |
-| | [lz4](https://lz4.org/) | 1.10.0+ |
-| | [zlib](https://www.zlib.net/) | 1.3.1+ |
+| 类型             | 依赖                                                                  | 版本要求     |
+|----------------|---------------------------------------------------------------------|----------|
+| 🔨 构建工具        | [CMake](https://cmake.org/)                                         | 3.19+    |
+| 📦 包管理器        | [vcpkg](https://github.com/microsoft/vcpkg)                         | Latest   |
+| 🎨 代码格式化       | [clang-format](https://clang.llvm.org/docs/ClangFormat.html)        | 19+      |
+| 🔍 静态分析        | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)              | 19+      |
+| ⚠️ 必选依赖(vcpkg) | [GTest](https://google.github.io/googletest/)                       | 1.17.0+  |
+|                | [pcre2](https://www.pcre.org/)                                      | 10.47+   |
+|                | [OpenSSL](https://www.openssl.org/)                                 | 3.6.1+   |
+| 📦 可选依赖(vcpkg) | [libpq](https://www.postgresql.org/)                                | 16.9+    |
+|                | [libmysql](https://www.mysql.com/)                                  | 8.0.40+  |
+|                | [sqlite3](https://sqlite.org/index.html)                            | 3.51.2+  |
+|                | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0+   |
+|                | [lz4](https://lz4.org/)                                             | 1.10.0+  |
+|                | [zlib](https://www.zlib.net/)                                       | 1.3.1+   |
 
 ### 🏗️ 编译步骤
 
-> 💡 您可以在项目根目录的 `config.json` 中更改对外配置项以进行个性化编译。
+编译前确保您已经正确安装并配置了 CMake、vcpkg、clang-format、clang-tidy
+
+> 💡 您可以在项目根目录的 `config.json` (编译项配置) 与 `vcpkg.json` (包管理配置) 中更改配置项以进行个性化编译
 
 #### 🪟 Windows
 
@@ -360,6 +366,27 @@ sudo make install
 
 ---
 
+---
+
+## 🚀 快速开始
+
+在开始之前，请确保已完成编译指南中的安装步骤。
+
+快速开始示例全览如下：
+
+| 示例       | 推荐场景             | 关键特性            |
+|----------|------------------|-----------------|
+| HTTP 服务器 | REST API、微服务     | 路由、中间件、SSL      |
+| 线程池      | CPU 密集型任务、批量处理   | 任务窃取、负载均衡       |
+| 配置解析     | 应用配置管理           | 多格式支持、类型安全      |
+| 加密工具     | 数据加密、完整性校验       | AES-256、SHA-256 |
+| 数据库操作    | 数据持久化            | 连接池、SQL 构建器     |
+| 文件监控     | 热重载、实时同步         | 跨平台、事件驱动        |
+
+具体参见 [使用 NexusForce 快速构建常见功能！](QUICK_START.md)
+
+---
+
 ## 📚 文档
 
 完整 API 文档请访问 [NexusForce 文档网站](https://nexusforce.org.cn)
@@ -386,9 +413,4 @@ sudo make install
 
 ## 📌 TODO
 
-- [ ] 📊 Google Benchmark 性能基准测试
-- [ ] ⚡ 热点代码优化
-- [ ] 🍎 支持 macOS 平台
-- [ ] 🖥️ 支持 ARM / RISC-V / LOONG ARCH 架构
-
-更多 TODO 条例参见代码内的 TODO 注释
+TODO 条例参见代码内的 TODO 注释

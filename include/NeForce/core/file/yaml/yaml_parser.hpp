@@ -9,6 +9,7 @@
  */
 
 #include "NeForce/core/file/yaml/yaml_value.hpp"
+#include "NeForce/core/string/codepoint.hpp"
 #include "NeForce/core/utility/optional.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -531,7 +532,7 @@ private:
      * @return 对应的Unicode码点
      * @throws yaml_exception 转义序列无效时抛出
      */
-    char32_t parse_unicode_escape(size_t digits);
+    codepoint parse_unicode_escape(size_t digits);
 
     /**
      * @brief 反转义字符串中的转义序列

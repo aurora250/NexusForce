@@ -109,7 +109,7 @@ namespace {
             }
             case json_value::String: {
                 const json_string* str_val = value->as_string();
-                return "\"" + str_val->get_value() + "\"";
+                return "\"" + escape(str_val->get_value()) + "\"";
             }
             case json_value::Array: {
                 const json_array* arr_val = value->as_array();

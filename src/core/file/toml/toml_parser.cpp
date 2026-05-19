@@ -103,7 +103,7 @@ void toml_parser::throw_parse_error(string message) const {
     NEFORCE_THROW_EXCEPTION(toml_exception(error_msg.data()));
 }
 
-char32_t toml_parser::parse_unicode_escape(const size_t digits) {
+codepoint toml_parser::parse_unicode_escape(const size_t digits) {
     const size_t start_pos = pos_;
     for (size_t i = 0; i < digits; i++) {
         if (eof() || !is_xdigit(current())) {
@@ -113,16 +113,16 @@ char32_t toml_parser::parse_unicode_escape(const size_t digits) {
     }
 
     const string_view hex_str = text_.view(start_pos, digits);
+    int64_t value = 0;
     try {
-        const int64_t value = hexadecimal(hex_str).value();
-        if (value < 0 || value > 0x10FFFF) {
-            throw_parse_error("Unicode codepoint out of range");
-        }
-        return static_cast<char32_t>(value);
+        value = hexadecimal(hex_str).value();
     } catch (...) {
-        throw_parse_error("Invalid unicode escape value");
+        throw_parse_error("Invalid unicode format");
     }
-    return 0;
+    if (!codepoint::is_valid_codepoint(static_cast<uint32_t>(value))) {
+        throw_parse_error("Invalid unicode codepoint");
+    }
+    return codepoint{static_cast<uint32_t>(value)};
 }
 
 unique_ptr<toml_string> toml_parser::parse_string() {
@@ -184,8 +184,8 @@ unique_ptr<toml_string> toml_parser::parse_basic_string() {
                     if (eof()) {
                         throw_parse_error("Unexpected end after \\u");
                     }
-                    const char32_t cp = parse_unicode_escape(4);
-                    result += _NEFORCE to_string(cp);
+                    const codepoint cp = parse_unicode_escape(4);
+                    cp.append_to(result);
                     continue;
                 }
                 case 'U': {
@@ -193,8 +193,8 @@ unique_ptr<toml_string> toml_parser::parse_basic_string() {
                     if (eof()) {
                         throw_parse_error("Unexpected end after \\U");
                     }
-                    const char32_t cp = parse_unicode_escape(8);
-                    result += _NEFORCE to_string(cp);
+                    const codepoint cp = parse_unicode_escape(8);
+                    cp.append_to(result);
                     continue;
                 }
                 default:
@@ -305,14 +305,14 @@ unique_ptr<toml_string> toml_parser::parse_multiline_basic_string() {
                     break;
                 case 'u': {
                     advance();
-                    const char32_t cp = parse_unicode_escape(4);
-                    result += _NEFORCE to_string(cp);
+                    const codepoint cp = parse_unicode_escape(4);
+                    cp.append_to(result);
                     continue;
                 }
                 case 'U': {
                     advance();
-                    const char32_t cp = parse_unicode_escape(8);
-                    result += _NEFORCE to_string(cp);
+                    const codepoint cp = parse_unicode_escape(8);
+                    cp.append_to(result);
                     continue;
                 }
                 default:
@@ -360,7 +360,8 @@ unique_ptr<toml_value> toml_parser::parse_number() {
     const size_t start_pos = pos_;
     bool is_float = false;
 
-    if (current() == '+' || current() == '-') {
+    const bool has_sign = current() == '+' || current() == '-';
+    if (has_sign) {
         advance();
     }
 
@@ -381,16 +382,25 @@ unique_ptr<toml_value> toml_parser::parse_number() {
     if (current() == '0' && !eof()) {
         const char next = peek();
         if (next == 'x' || next == 'X') {
+            if (has_sign) {
+                throw_parse_error("Sign not allowed for hexadecimal integer");
+            }
             advance();
             advance();
             return parse_integer(16);
         }
         if (next == 'o' || next == 'O') {
+            if (has_sign) {
+                throw_parse_error("Sign not allowed for octal integer");
+            }
             advance();
             advance();
             return parse_integer(8);
         }
         if (next == 'b' || next == 'B') {
+            if (has_sign) {
+                throw_parse_error("Sign not allowed for binary integer");
+            }
             advance();
             advance();
             return parse_integer(2);
@@ -436,6 +446,16 @@ unique_ptr<toml_value> toml_parser::parse_number() {
 
     string num_str = text_.substr(start_pos, pos_ - start_pos);
     num_str.erase(remove(num_str.begin(), num_str.end(), '_'), num_str.end());
+
+    if (!is_float) {
+        string_view digits = num_str.view();
+        if (!digits.empty() && (digits[0] == '+' || digits[0] == '-')) {
+            digits = digits.substr(1);
+        }
+        if (digits.size() > 1 && digits[0] == '0') {
+            throw_parse_error("Leading zeros are not allowed in decimal integers");
+        }
+    }
 
     try {
         if (is_float) {
@@ -557,19 +577,9 @@ unique_ptr<toml_array> toml_parser::parse_array() {
     expect('[');
     auto arr = make_unique<toml_array>();
     skip_whitespace_and_comments();
-    optional<toml_value::types> element_type;
 
     while (!eof() && current() != ']') {
         auto element = parse_value();
-
-        if (!element_type.has_value()) {
-            element_type = element->type();
-        } else {
-            if (element->type() != element_type.value()) {
-                throw_parse_error("Mixed types in array are not allowed");
-            }
-        }
-
         arr->add_element(move(element));
         skip_whitespace_and_comments();
 
@@ -577,7 +587,7 @@ unique_ptr<toml_array> toml_parser::parse_array() {
             advance();
             skip_whitespace_and_comments();
             if (current() == ']') {
-                break;
+                throw_parse_error("Trailing comma is not allowed in array");
             }
         } else if (current() != ']') {
             throw_parse_error("Expected ',' or ']' in array");
@@ -611,6 +621,9 @@ unique_ptr<toml_table> toml_parser::parse_inline_table() {
         if (current() == ',') {
             advance();
             skip_whitespace_no_newline();
+            if (current() == '}') {
+                throw_parse_error("Trailing comma is not allowed in inline table");
+            }
         } else if (current() != '}') {
             throw_parse_error("Expected ',' or '}' in inline table");
         }
@@ -840,6 +853,12 @@ void toml_parser::set_current_table(const vector<string>& path) {
 }
 
 unique_ptr<toml_table> toml_parser::parse() {
+    if (pos_ + 3 <= len_ && static_cast<uint8_t>(text_[pos_]) == 0xEF &&
+        static_cast<uint8_t>(text_[pos_ + 1]) == 0xBB && static_cast<uint8_t>(text_[pos_ + 2]) == 0xBF) {
+        pos_ += 3;
+        column_ += 3;
+    }
+
     while (!eof()) {
         skip_whitespace_and_comments();
         if (eof()) {

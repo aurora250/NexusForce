@@ -1100,9 +1100,18 @@ TEST_F(TomlParserTest, ParseDuplicateKeyThrows) {
     EXPECT_THROW(parser.parse(), toml_exception);
 }
 
-TEST_F(TomlParserTest, ParseMixedArrayTypesThrows) {
-    toml_parser parser("key = [1, \"string\"]");
-    EXPECT_THROW(parser.parse(), toml_exception);
+TEST_F(TomlParserTest, ParseMixedArrayTypes) {
+    toml_parser parser("key = [1, \"string\", true, 3.14]");
+    auto result = parser.parse();
+
+    const toml_value* val = result->get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_TRUE(val->is_array());
+    EXPECT_EQ(val->as_array()->size(), 4);
+    EXPECT_EQ(val->as_array()->get_element(0)->as_integer()->get_value(), 1);
+    EXPECT_EQ(val->as_array()->get_element(1)->as_string()->get_value(), "string");
+    EXPECT_TRUE(val->as_array()->get_element(2)->as_boolean()->get_value());
+    EXPECT_DOUBLE_EQ(val->as_array()->get_element(3)->as_float()->get_value(), 3.14);
 }
 
 TEST_F(TomlParserTest, ParseUnterminatedStringThrows) {
@@ -1112,6 +1121,121 @@ TEST_F(TomlParserTest, ParseUnterminatedStringThrows) {
 
 TEST_F(TomlParserTest, ParseInvalidNumberThrows) {
     toml_parser parser("key = 12.34.56");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseLeadingZerosIntegerThrows) {
+    toml_parser parser("key = 00");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseLeadingZerosIntegerNegativeThrows) {
+    toml_parser parser("key = -01");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseLeadingZerosIntegerPositiveThrows) {
+    toml_parser parser("key = +00");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseLeadingZerosIntegerMultiDigitThrows) {
+    toml_parser parser("key = 0042");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseZeroIntegerValid) {
+    toml_parser parser("key = 0");
+    auto result = parser.parse();
+    const toml_value* val = result->get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_TRUE(val->is_integer());
+    EXPECT_EQ(val->as_integer()->get_value(), 0);
+}
+
+TEST_F(TomlParserTest, ParseHexIntegerWithSignThrows) {
+    toml_parser parser("key = -0xFF");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseOctalIntegerWithSignThrows) {
+    toml_parser parser("key = +0o77");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseBinaryIntegerWithSignThrows) {
+    toml_parser parser("key = -0b1010");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseArrayTrailingCommaThrows) {
+    toml_parser parser("key = [1, 2, ]");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseInlineTableTrailingCommaThrows) {
+    toml_parser parser("key = { a = 1, }");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseUnicodeSurrogatePairThrows) {
+    toml_parser parser("key = \"\\uD800\"");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseUnicodeSurrogatePairHighThrows) {
+    toml_parser parser("key = \"\\uDFFF\"");
+    EXPECT_THROW(parser.parse(), toml_exception);
+}
+
+TEST_F(TomlParserTest, ParseUnicodeValidCodepoint) {
+    toml_parser parser("key = \"\\u2764\"");
+    auto result = parser.parse();
+    const toml_value* val = result->get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_TRUE(val->is_string());
+}
+
+TEST_F(TomlParserTest, ParseBOM) {
+    string doc = "\xEF\xBB\xBFkey = 42";
+    toml_parser parser(doc);
+    auto result = parser.parse();
+    const toml_value* val = result->get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_TRUE(val->is_integer());
+    EXPECT_EQ(val->as_integer()->get_value(), 42);
+}
+
+TEST_F(TomlParserTest, ParseBOMWithTableHeaders) {
+    string doc = "\xEF\xBB\xBF[tbl]\nkey = 1";
+    toml_parser parser(doc);
+    auto result = parser.parse();
+    const toml_value* tbl = result->get_member("tbl");
+    ASSERT_NE(tbl, nullptr);
+    EXPECT_TRUE(tbl->is_table());
+    EXPECT_EQ(tbl->as_table()->get_member("key")->as_integer()->get_value(), 1);
+}
+
+TEST_F(TomlParserTest, ParseMixedArrayTypesNested) {
+    toml_parser parser("key = [[1, 2], [\"a\", \"b\"]]");
+    auto result = parser.parse();
+    const toml_value* val = result->get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_TRUE(val->is_array());
+    EXPECT_EQ(val->as_array()->size(), 2);
+}
+
+TEST_F(TomlParserTest, ParseMixedArrayTypesIntegersAndFloats) {
+    toml_parser parser("key = [1, 2.5, -3, 4e1]");
+    auto result = parser.parse();
+    const toml_value* val = result->get_member("key");
+    ASSERT_NE(val, nullptr);
+    EXPECT_TRUE(val->is_array());
+    EXPECT_EQ(val->as_array()->size(), 4);
+}
+
+TEST_F(TomlParserTest, ParseSurrogatePairInMultibasicStringThrows) {
+    toml_parser parser("key = \"\"\"\\uD800\"\"\"");
     EXPECT_THROW(parser.parse(), toml_exception);
 }
 
@@ -2668,6 +2792,27 @@ TEST_F(YamlParserTest, ParseStringDoubleQuotedEscapeEscape) {
                                                 "esc");
 }
 
+TEST_F(YamlParserTest, ParseStringDoubleQuotedUnicodeSupplementaryPlane) {
+    yaml_parser parser("\"\\U0001F600\"");
+    auto result = parser.parse();
+    ASSERT_NE(result, nullptr);
+    EXPECT_TRUE(result->is_string());
+    EXPECT_EQ(result->as_string()->get_value(), "\xF0\x9F\x98\x80");
+}
+
+TEST_F(YamlParserTest, ParseStringDoubleQuotedUnicodeMaxCodepoint) {
+    yaml_parser parser("\"\\U0010FFFF\"");
+    auto result = parser.parse();
+    ASSERT_NE(result, nullptr);
+    EXPECT_TRUE(result->is_string());
+    EXPECT_EQ(result->as_string()->get_value(), "\xF4\x8F\xBF\xBF");
+}
+
+TEST_F(YamlParserTest, ParseStringDoubleQuotedUnicodeOutOfRangeThrows) {
+    yaml_parser parser("\"\\U00110000\"");
+    EXPECT_THROW(parser.parse(), yaml_exception);
+}
+
 TEST_F(YamlParserTest, ParseTagInMappingValue) {
     yaml_parser parser("key: !mytag value\n");
     auto result = parser.parse();
@@ -2986,6 +3131,34 @@ content: tagged node
     ASSERT_NE(doc4, nullptr);
     EXPECT_EQ(doc4->tag, "my!type");
     EXPECT_EQ(doc4->get_member("content")->as_string()->get_value(), "tagged node");
+}
+
+TEST_F(YamlParserTest, ParseIntegerLeadingZeroThrows) {
+    yaml_parser parser("07\n");
+    EXPECT_THROW(parser.parse(), yaml_exception);
+}
+
+TEST_F(YamlParserTest, ParseIntegerLeadingZeroNegativeThrows) {
+    yaml_parser parser("-07\n");
+    EXPECT_THROW(parser.parse(), yaml_exception);
+}
+
+TEST_F(YamlParserTest, ParseIntegerLeadingZeroWithUnderscoreThrows) {
+    yaml_parser parser("0_7\n");
+    EXPECT_THROW(parser.parse(), yaml_exception);
+}
+
+TEST_F(YamlParserTest, ParseStringDoubleQuotedInvalidEscapeThrows) {
+    yaml_parser parser("\"\\z\"");
+    EXPECT_THROW(parser.parse(), yaml_exception);
+}
+
+TEST_F(YamlParserTest, ParseStringDoubleQuotedHexEscapeHighByte) {
+    yaml_parser parser("\"\\xFF\"");
+    auto result = parser.parse();
+    ASSERT_NE(result, nullptr);
+    EXPECT_TRUE(result->is_string());
+    EXPECT_EQ(result->as_string()->get_value(), "\xC3\xBF");
 }
 
 

@@ -1,4 +1,6 @@
 #include <NeForce/core/file/yaml/yaml_parser.hpp>
+#include <NeForce/core/string/codepoint.hpp>
+#include <NeForce/core/utility/hexadecimal.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 char yaml_parser::current() const noexcept { return eof() ? '\0' : yaml_[pos_]; }
@@ -324,7 +326,7 @@ void yaml_parser::parse_document_end() {
     }
 }
 
-char32_t yaml_parser::parse_unicode_escape(const size_t digits) {
+codepoint yaml_parser::parse_unicode_escape(const size_t digits) {
     char32_t code_point = 0;
 
     for (size_t i = 0; i < digits; ++i) {
@@ -342,7 +344,10 @@ char32_t yaml_parser::parse_unicode_escape(const size_t digits) {
         }
         advance();
     }
-    return code_point;
+    if (!codepoint::is_valid_codepoint(static_cast<uint32_t>(code_point))) {
+        throw_parse_error("Invalid unicode codepoint");
+    }
+    return codepoint{code_point};
 }
 
 string yaml_parser::unescape_string(const string& str) const {
@@ -404,6 +409,80 @@ string yaml_parser::unescape_string(const string& str) const {
                 case 'P':
                     result += "\u2029";
                     break;
+                case 'x': {
+                    if (i + 2 >= str.size()) {
+                        result += str[i];
+                        break;
+                    }
+                    const string_view hex2 = str.view(i + 1, 2);
+                    bool valid = true;
+                    for (const char c: hex2) {
+                        if (!is_xdigit(c)) {
+                            valid = false;
+                            break;
+                        }
+                    }
+                    if (valid) {
+                        const codepoint cp_val{static_cast<uint32_t>(hexadecimal(hex2).value())};
+                        cp_val.append_to(result);
+                        i += 2;
+                    } else {
+                        result += str[i];
+                    }
+                    break;
+                }
+                case 'u': {
+                    if (i + 4 >= str.size()) {
+                        result += str[i];
+                        break;
+                    }
+                    const string_view hex4 = str.view(i + 1, 4);
+                    bool valid = true;
+                    for (const char c: hex4) {
+                        if (!is_xdigit(c)) {
+                            valid = false;
+                            break;
+                        }
+                    }
+                    if (valid) {
+                        const auto cp_val = static_cast<uint32_t>(hexadecimal(hex4).value());
+                        if (codepoint::is_valid_codepoint(cp_val)) {
+                            codepoint{cp_val}.append_to(result);
+                            i += 4;
+                        } else {
+                            result += str[i];
+                        }
+                    } else {
+                        result += str[i];
+                    }
+                    break;
+                }
+                case 'U': {
+                    if (i + 8 >= str.size()) {
+                        result += str[i];
+                        break;
+                    }
+                    const string_view hex8 = str.view(i + 1, 8);
+                    bool valid = true;
+                    for (const char c: hex8) {
+                        if (!is_xdigit(c)) {
+                            valid = false;
+                            break;
+                        }
+                    }
+                    if (valid) {
+                        const auto cp_val = static_cast<uint32_t>(hexadecimal(hex8).value());
+                        if (codepoint::is_valid_codepoint(cp_val)) {
+                            codepoint{cp_val}.append_to(result);
+                            i += 8;
+                        } else {
+                            result += str[i];
+                        }
+                    } else {
+                        result += str[i];
+                    }
+                    break;
+                }
                 default:
                     result += '\\';
                     result += str[i];
@@ -559,42 +638,19 @@ shared_ptr<yaml_string> yaml_parser::parse_double_quoted_string() {
                     break;
                 case 'x': {
                     advance();
-                    result += static_cast<char>(parse_unicode_escape(2));
+                    parse_unicode_escape(2).append_to(result);
                     break;
                 }
                 case 'u': {
                     advance();
-                    char32_t cp = parse_unicode_escape(4);
-                    if (cp < 0x80) {
-                        result += static_cast<char>(cp);
-                    } else if (cp < 0x800) {
-                        result += static_cast<char>(0xC0 | (cp >> 6));
-                        result += static_cast<char>(0x80 | (cp & 0x3F));
-                    } else {
-                        result += static_cast<char>(0xE0 | (cp >> 12));
-                        result += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
-                        result += static_cast<char>(0x80 | (cp & 0x3F));
-                    }
+                    const codepoint cp = parse_unicode_escape(4);
+                    cp.append_to(result);
                     break;
                 }
                 case 'U': {
                     advance();
-                    char32_t cp = parse_unicode_escape(8);
-                    if (cp < 0x80) {
-                        result += static_cast<char>(cp);
-                    } else if (cp < 0x800) {
-                        result += static_cast<char>(0xC0 | (cp >> 6));
-                        result += static_cast<char>(0x80 | (cp & 0x3F));
-                    } else if (cp < 0x10000) {
-                        result += static_cast<char>(0xE0 | (cp >> 12));
-                        result += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
-                        result += static_cast<char>(0x80 | (cp & 0x3F));
-                    } else {
-                        result += static_cast<char>(0xF0 | (cp >> 18));
-                        result += static_cast<char>(0x80 | ((cp >> 12) & 0x3F));
-                        result += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
-                        result += static_cast<char>(0x80 | (cp & 0x3F));
-                    }
+                    const codepoint cp = parse_unicode_escape(8);
+                    cp.append_to(result);
                     break;
                 }
                 case '\n': {
@@ -603,9 +659,7 @@ shared_ptr<yaml_string> yaml_parser::parse_double_quoted_string() {
                     break;
                 }
                 default: {
-                    result += current();
-                    advance();
-                    break;
+                    throw_parse_error(string("Invalid escape sequence: \\") + current());
                 }
             }
         } else if (is_newline(current())) {
@@ -884,6 +938,14 @@ shared_ptr<yaml_value> yaml_parser::parse_number() {
             is_binary = true;
             num_str += current();
             advance();
+        } else {
+            size_t peek_pos = pos_;
+            while (peek_pos < len_ && yaml_[peek_pos] == '_') {
+                peek_pos++;
+            }
+            if (peek_pos < len_ && is_digit(yaml_[peek_pos])) {
+                throw_parse_error("Leading zeros are not allowed in decimal integers");
+            }
         }
     }
 
