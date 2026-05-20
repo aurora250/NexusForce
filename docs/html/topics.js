@@ -126,7 +126,14 @@ var topics =
     [ "数据库", "group___database.html", "group___database" ],
     [ "SQL", "group___s_q_l.html", "group___s_q_l" ],
     [ "日志系统", "group___logging.html", "group___logging" ],
-    [ "网络通信", "group___network.html", "group___network" ],
+    [ "DNS", "group___d_n_s.html", "group___d_n_s" ],
     [ "HTTP", "group___h_t_t_p.html", "group___h_t_t_p" ],
-    [ "插件", "group___plugin.html", "group___plugin" ]
+    [ "ICMP", "group___i_c_m_p.html", "group___i_c_m_p" ],
+    [ "SMTP", "group___s_m_t_p.html", "group___s_m_t_p" ],
+    [ "SSL/TLS", "group___s_s_l.html", "group___s_s_l" ],
+    [ "TCP", "group___t_c_p.html", "group___t_c_p" ],
+    [ "UDP", "group___u_d_p.html", "group___u_d_p" ],
+    [ "网络通信工具", "group___network_util.html", "group___network_util" ],
+    [ "插件", "group___plugin.html", "group___plugin" ],
+    [ "网络通信", "group___network.html", "group___network" ]
 ];

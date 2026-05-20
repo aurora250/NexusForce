@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['⚙️_20系统、并发与命令行_0',['⚙️ 系统、并发与命令行',['../index.html#autotoc_md15',1,'']]],
-  ['⚙️_20系统接口_20system_1',['⚙️ 系统接口 (System)',['../index.html#autotoc_md27',1,'']]]
+  ['三角函数实现_0',['三角函数实现',['../group___math_functions.html#trigonometric_functions',1,'']]]
 ];

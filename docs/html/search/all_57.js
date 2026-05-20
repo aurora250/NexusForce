@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['字符串处理_20string_0',['🔤 字符串处理 (String)',['../index.html#autotoc_md26',1,'']]],
+  ['字符串处理_20string_0',['🔤 字符串处理 (String)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md23',1,'']]],
   ['字符串引号类型_1',['字符串引号类型',['../group___toml_config.html#string_types',1,'']]],
   ['字符串操作_2',['字符串操作',['../group___string_operations.html',1,'']]],
   ['字符串标量样式_3',['字符串标量样式',['../group___yaml_config.html#string_styles',1,'']]],
@@ -12,7 +12,7 @@ var searchData=
   ['字符特征_9',['字符特征',['../group___char_traits.html',1,'']]],
   ['字符类型与编码对应_10',['字符类型与编码对应',['../group___u_t_f.html#character_types',1,'']]],
   ['字符类型检查_11',['字符类型检查',['../group___char_type_checking.html',1,'']]],
-  ['字符编码与国际化_12',['🔤 字符编码与国际化',['../index.html#autotoc_md13',1,'']]],
+  ['字符编码与国际化_12',['🔤 字符编码与国际化',['../md__m_a_i_n_p_a_g_e.html#autotoc_md10',1,'']]],
   ['字符表对比_13',['字符表对比',['../group___base64.html#alphabet_comparison',1,'']]],
   ['字符转换支持矩阵_14',['字符转换支持矩阵',['../group___u_t_f.html#conversion_matrix',1,'']]],
   ['字符转换_15',['字符转换',['../group___char_case_conversion.html',1,'']]],

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['压缩对_0',['压缩对',['../group___compressed_pair.html',1,'']]],
-  ['压缩解压缩_1',['压缩解压缩',['../group___compression.html',1,'']]],
-  ['压缩_20compress_2',['📦 压缩 (Compress)',['../index.html#autotoc_md33',1,'']]]
+  ['参数示例_0',['参数示例',['../group___bloom_filter.html#parameter_examples',1,'']]],
+  ['参数转发函数_1',['参数转发函数',['../group___args_forward_functions.html',1,'']]]
 ];

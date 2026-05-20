@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['典型应用场景_0',['典型应用场景',['../group___bloom_filter.html#applications',1,'']]]
+  ['兼容性_0',['YAML 1.2 与 JSON 兼容性',['../group___yaml_config.html#yaml_vs_json',1,'']]]
 ];

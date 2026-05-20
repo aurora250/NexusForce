@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['📝_20日志系统_20logging_0',['📝 日志系统 (Logging)',['../index.html#autotoc_md25',1,'']]],
-  ['📝_20更新日志_1',['📝 更新日志',['../index.html#autotoc_md49',1,'']]]
+  ['🔐_20加密与安全_20encrypt_0',['🔐 加密与安全 (Encrypt)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md18',1,'']]],
+  ['🔐_20密码学与安全算法_1',['🔐 密码学与安全算法',['../md__m_a_i_n_p_a_g_e.html#autotoc_md9',1,'']]]
 ];

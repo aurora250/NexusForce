@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['特性_0',['🚀 特性',['../index.html#autotoc_md18',1,'']]],
-  ['特殊值处理_1',['特殊值处理',['../group___math_functions.html#special_values',1,'']]]
+  ['状态码分类_0',['HTTP 状态码分类',['../group___h_t_t_p.html#http_status_categories',1,'']]]
 ];

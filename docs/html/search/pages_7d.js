@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['选项语法规则_0',['选项语法规则',['../group___command_line.html#option_syntax',1,'']]]
+  ['遵循的国际标准_0',['遵循的国际标准',['../group___s_m_t_p.html#standards',1,'']]]
 ];

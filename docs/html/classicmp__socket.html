@@ -89,7 +89,7 @@ $(function(){initNavTree('classicmp__socket.html','','classicmp__socket-members'
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">icmp_socket类 参考<span class="mlabels"><span class="mlabel final">final</span></span><div class="ingroups"><a class="el" href="group___network.html">网络通信</a></div></div></div>
+  <div class="headertitle"><div class="title">icmp_socket类 参考<span class="mlabels"><span class="mlabel final">final</span></span><div class="ingroups"><a class="el" href="group___i_c_m_p.html">ICMP</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -219,54 +219,9 @@ virtual&#160;</td><td class="memItemRight"><b>~socket_base</b> ()</td></tr>
 <li>RTT（往返时间）测量</li>
 <li>TTL设置和读取</li>
 </ul>
-<p>使用示例： </p><div class="fragment"><div class="line"><span class="comment">// Ping示例</span></div>
-<div class="line"><a class="code hl_function" href="#aac2cac2399e8a99f0b5ba883d800ddeb">icmp_socket</a> sock;</div>
-<div class="line">sock.<a class="code hl_function" href="#a5e22d67c0aa794d751b4bee655c762af">open</a>(AF_INET);</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">auto</span> dest = <a class="code hl_function" href="classip__address.html#add2ce58669f6042593d6970743e7311a">ip_address::parse</a>(<span class="stringliteral">&quot;8.8.8.8&quot;</span>);</div>
-<div class="line"><span class="keywordflow">if</span> (dest) {</div>
-<div class="line">    <span class="keyword">auto</span> result = sock.<a class="code hl_function" href="#a2635f1da346bb2d7473d692cd960497f">ping</a>(*dest, <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>(2000));</div>
-<div class="line">    <span class="keywordflow">if</span> (result.success) {</div>
-<div class="line">        <a class="code hl_function" href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a>(<span class="stringliteral">&quot;Reply from &quot;</span>, result.destination,</div>
-<div class="line">                <span class="stringliteral">&quot;: bytes=&quot;</span>, result.reply_size,</div>
-<div class="line">                <span class="stringliteral">&quot; time=&quot;</span>, result.rtt.count(), <span class="stringliteral">&quot;ms&quot;</span>,</div>
-<div class="line">                <span class="stringliteral">&quot; TTL=&quot;</span>, result.reply_ttl);</div>
-<div class="line">    } <span class="keywordflow">else</span> {</div>
-<div class="line">        <a class="code hl_function" href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a>(<span class="stringliteral">&quot;Request timed out&quot;</span>);</div>
-<div class="line">    }</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Traceroute示例</span></div>
-<div class="line"><span class="keyword">auto</span> hops = sock.<a class="code hl_function" href="#a5d7a7d636558ba6fb91d5d4e1ff2811d">traceroute</a>(*dest, 30, <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>(1000), 3);</div>
-<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; hops.size(); ++i) {</div>
-<div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span>&amp; hop = hops[i];</div>
-<div class="line">    <a class="code hl_function" href="group___console_i_o.html#ga9f7ee8aaf17d6a59f5fce3710fd1dce9">print</a>(i + 1, <span class="stringliteral">&quot;. &quot;</span>);</div>
-<div class="line">    <span class="keywordflow">if</span> (hop.address.is_valid()) {</div>
-<div class="line">        <a class="code hl_function" href="group___console_i_o.html#ga9f7ee8aaf17d6a59f5fce3710fd1dce9">print</a>(hop.address);</div>
-<div class="line">        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j = 0; j &lt; 3; ++j) {</div>
-<div class="line">            <span class="keywordflow">if</span> (hop.rtt[j].count() &gt;= 0) {</div>
-<div class="line">                <a class="code hl_function" href="group___console_i_o.html#ga9f7ee8aaf17d6a59f5fce3710fd1dce9">print</a>(<span class="stringliteral">&quot; &quot;</span>, hop.rtt[j].count(), <span class="stringliteral">&quot;ms&quot;</span>);</div>
-<div class="line">            } <span class="keywordflow">else</span> {</div>
-<div class="line">                <a class="code hl_function" href="group___console_i_o.html#ga9f7ee8aaf17d6a59f5fce3710fd1dce9">print</a>(<span class="stringliteral">&quot; *&quot;</span>);</div>
-<div class="line">            }</div>
-<div class="line">        }</div>
-<div class="line">        <a class="code hl_function" href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a>();</div>
-<div class="line">    } <span class="keywordflow">else</span> {</div>
-<div class="line">        <a class="code hl_function" href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a>(<span class="stringliteral">&quot;* * *&quot;</span>);</div>
-<div class="line">    }</div>
-<div class="line">    <span class="keywordflow">if</span> (hop.reached) <span class="keywordflow">break</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="aclassicmp__socket_html_a2635f1da346bb2d7473d692cd960497f"><div class="ttname"><a href="#a2635f1da346bb2d7473d692cd960497f">icmp_socket::ping</a></div><div class="ttdeci">ping_result ping(const ip_address &amp;dest, milliseconds timeout, uint16_t sequence=0, const void *data=nullptr, size_t data_len=0)</div><div class="ttdoc">执行Ping操作</div></div>
-<div class="ttc" id="aclassicmp__socket_html_a5d7a7d636558ba6fb91d5d4e1ff2811d"><div class="ttname"><a href="#a5d7a7d636558ba6fb91d5d4e1ff2811d">icmp_socket::traceroute</a></div><div class="ttdeci">vector&lt; traceroute_hop &gt; traceroute(const ip_address &amp;dest, int max_hops=30, milliseconds probe_timeout=milliseconds(1000), int probes_per_hop=3)</div><div class="ttdoc">执行Traceroute操作</div></div>
-<div class="ttc" id="aclassicmp__socket_html_a5e22d67c0aa794d751b4bee655c762af"><div class="ttname"><a href="#a5e22d67c0aa794d751b4bee655c762af">icmp_socket::open</a></div><div class="ttdeci">void open()</div><div class="ttdoc">打开ICMP socket</div></div>
-<div class="ttc" id="aclassicmp__socket_html_aac2cac2399e8a99f0b5ba883d800ddeb"><div class="ttname"><a href="#aac2cac2399e8a99f0b5ba883d800ddeb">icmp_socket::icmp_socket</a></div><div class="ttdeci">icmp_socket()=default</div><div class="ttdoc">默认构造函数</div></div>
-<div class="ttc" id="aclassip__address_html_add2ce58669f6042593d6970743e7311a"><div class="ttname"><a href="classip__address.html#add2ce58669f6042593d6970743e7311a">ip_address::parse</a></div><div class="ttdeci">static optional&lt; ip_address &gt; parse(const string &amp;host, ports port=ports{}) noexcept</div><div class="ttdoc">从字符串解析IP地址</div></div>
-<div class="ttc" id="agroup___console_i_o_html_ga9f7ee8aaf17d6a59f5fce3710fd1dce9"><div class="ttname"><a href="group___console_i_o.html#ga9f7ee8aaf17d6a59f5fce3710fd1dce9">print</a></div><div class="ttdeci">void print(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00673">console.hpp:673</a></div></div>
-<div class="ttc" id="agroup___console_i_o_html_gadd269b1d24f35618e1eb0ea848dbf6a0"><div class="ttname"><a href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00689">console.hpp:689</a></div></div>
-<div class="ttc" id="agroup___duration_html_ga0c9e480a0040ed5977448019fb74cd55"><div class="ttname"><a href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></div><div class="ttdeci">duration&lt; int64_t, milli &gt; milliseconds</div><div class="ttdoc">毫秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00157">duration.hpp:157</a></div></div>
-</div><!-- fragment --><dl class="section note"><dt>注解</dt><dd>在Linux上需要root权限才能创建原始ICMP套接字。 Windows可能需要管理员权限。 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>在Linux上需要root权限才能创建原始ICMP套接字。 Windows可能需要管理员权限。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="icmp__socket_8hpp_source.html">icmp_socket.hpp</a> 第 <a class="el" href="icmp__socket_8hpp_source.html#l00101">101</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="icmp__socket_8hpp_source.html">icmp_socket.hpp</a> 第 <a class="el" href="icmp__socket_8hpp_source.html#l00202">202</a> 行定义.</p>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
 <a id="a3602a3e64eabdf93cf60088a785803fc" name="a3602a3e64eabdf93cf60088a785803fc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3602a3e64eabdf93cf60088a785803fc">&#9670;&#160;</a></span>icmp_type</h2>
@@ -290,7 +245,7 @@ virtual&#160;</td><td class="memItemRight"><b>~socket_base</b> ()</td></tr>
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="icmp__socket_8hpp_source.html">icmp_socket.hpp</a> 第 <a class="el" href="icmp__socket_8hpp_source.html#l00107">107</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="icmp__socket_8hpp_source.html">icmp_socket.hpp</a> 第 <a class="el" href="icmp__socket_8hpp_source.html#l00208">208</a> 行定义.</p>
 
 </div>
 </div>
@@ -326,7 +281,7 @@ virtual&#160;</td><td class="memItemRight"><b>~socket_base</b> ()</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="icmp__socket_8hpp_source.html">icmp_socket.hpp</a> 第 <a class="el" href="icmp__socket_8hpp_source.html#l00152">152</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="icmp__socket_8hpp_source.html">icmp_socket.hpp</a> 第 <a class="el" href="icmp__socket_8hpp_source.html#l00253">253</a> 行定义.</p>
 
 </div>
 </div>

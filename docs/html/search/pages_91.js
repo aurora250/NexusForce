@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['📚_20文档_0',['📚 文档',['../index.html#autotoc_md45',1,'']]]
+  ['🔐_20加密与安全_20encrypt_0',['🔐 加密与安全 (Encrypt)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md18',1,'']]],
+  ['🔐_20密码学与安全算法_1',['🔐 密码学与安全算法',['../md__m_a_i_n_p_a_g_e.html#autotoc_md9',1,'']]]
 ];

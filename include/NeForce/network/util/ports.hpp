@@ -13,12 +13,6 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Network 网络通信
- * @brief 网络通信相关组件
- * @{
- */
-
-/**
  * @defgroup NetworkUtil 网络通信工具
  * @brief 网络通信辅助工具组件
  * @{
@@ -310,8 +304,6 @@ NEFORCE_NODISCARD NEFORCE_ALWAYS_INLINE_INLINE constexpr bool operator!=(const p
 }
 
 /** @} */ // NetworkUtil
-
-/** @} */ // Network
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_UTIL_PORTS_HPP__

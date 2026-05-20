@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['单位后缀说明_0',['单位后缀说明',['../group___byte_size.html#unit_suffixes',1,'']]]
+  ['双哈希技术_0',['双哈希技术',['../group___bloom_filter.html#double_hashing',1,'']]]
 ];

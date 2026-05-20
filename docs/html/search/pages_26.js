@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['兼容性_0',['YAML 1.2 与 JSON 兼容性',['../group___yaml_config.html#yaml_vs_json',1,'']]]
+  ['加密与安全_20encrypt_0',['🔐 加密与安全 (Encrypt)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md18',1,'']]]
 ];

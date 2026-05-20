@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['弃用列表_0',['弃用列表',['../deprecated.html',1,'']]]
+  ['性能与精度说明_0',['性能与精度说明',['../group___math_functions.html#performance_notes',1,'']]]
 ];

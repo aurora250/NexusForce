@@ -1,11 +1,5 @@
 var NAVTREEINDEX39 =
 {
-"structworker__context.html":[2,4,14,2],
-"structworker__context.html#a0708436cfb366b691690600be934454e":[2,4,14,2,3],
-"structworker__context.html#a0ce42d0b767acc53e81ba0e89aa4e3c4":[2,4,14,2,2],
-"structworker__context.html#a3d472b2df48065b84ccdb033671a352c":[2,4,14,2,4],
-"structworker__context.html#a9819ca5bea261e9484d75f512fc38326":[2,4,14,2,0],
-"structworker__context.html#aa4cb896c147fd86efed7b3f176e8a233":[2,4,14,2,1],
 "structyaml__exception.html":[2,27,0,20],
 "structzlib__exception.html":[2,27,0,1],
 "sysinfo_8hpp.html":[6,0,0,0,1,15,10],

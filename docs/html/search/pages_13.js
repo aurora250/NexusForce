@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['time_0',['⏰ 时间处理 (Time)',['../index.html#autotoc_md28',1,'']]],
-  ['todo_1',['📌 TODO',['../index.html#autotoc_md53',1,'']]],
-  ['toml_20值类型定义_2',['TOML 值类型定义',['../group___toml_config.html#toml_types',1,'']]],
-  ['typeinfo_3',['🧬 类型与特性 (TypeInfo)',['../index.html#autotoc_md31',1,'']]]
+  ['unicode_20码点范围定义_0',['Unicode 码点范围定义',['../group___code_point.html#unicode_ranges',1,'']]],
+  ['url组成部分_1',['URL组成部分',['../structurl.html#url_components',1,'']]],
+  ['url结构定义_2',['URL结构定义',['../structurl.html#url_structure',1,'']]],
+  ['utf_2016_20代理对编码规则_3',['UTF-16 代理对编码规则',['../group___code_point.html#utf16_surrogates',1,'']]],
+  ['utf_208_20编码规则_4',['UTF-8 编码规则',['../group___code_point.html#utf8_encoding',1,'']]],
+  ['utility_5',['🛠️ 工具库 (Utility)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md26',1,'']]]
 ];

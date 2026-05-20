@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['双哈希技术_0',['双哈希技术',['../group___bloom_filter.html#double_hashing',1,'']]]
+  ['变体_0',['变体',['../group___variant.html',1,'']]]
 ];

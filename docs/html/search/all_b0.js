@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['计数算法_0',['计数算法',['../group___counting_algorithms.html',1,'']]],
-  ['计时器_1',['计时器',['../group___click.html',1,'']]]
+  ['认证方式_0',['SMTP 认证方式',['../group___s_m_t_p.html#auth_methods',1,'']]]
 ];

@@ -1,4 +1,4 @@
-# NexusForce V1.0.0
+# NexusForce V1.0.0-beta
 
 [![vcpkg](https://img.shields.io/badge/vcpkg-Enabled-0A7FAA?style=flat-square&logo=vcpkg&logoColor=white)](https://vcpkg.io)
 [![CMake](https://img.shields.io/badge/CMake-3.19+-064C8B?style=flat-square&logo=cmake&logoColor=white)](https://cmake.org)
@@ -27,6 +27,7 @@
 - [Standards Compliance](#-standards-compliance)
 - [Features](#-features)
 - [Build Guide](#-build-guide)
+- [Quick Start](#-quick-start)
 - [Documentation](#-documentation)
 - [License](#️-license)
 - [Changelog](#-changelog)
@@ -41,19 +42,20 @@ This project aims to establish a **feature-complete, stylistically unified, high
 
 💡 Please feel free to [submit Issues](https://github.com/aurora250/NexusForce/issues) to help improve this project. If there are any deficiencies, please don't hesitate to provide feedback.
 
-> ℹ️ **Character Encoding Notice**  
-> This library assumes the default system code page of the runtime environment is **UTF-8**. If using I/O related functionalities in a non-UTF-8 environment, please ensure the UTF-8 locale is correctly configured to avoid potential character behavior anomalies.
-
 ---
 
 ## 🖥️ Supported Environments
 
-| Platform | Instruction Set | Bit Width | Compiler | C++ Standard |
-|----------|-----------------|-----------|----------|--------------|
-| 🪟 WINDOWS | X86 | 32-bit | MSVC | 14 |
-| 🐧 LINUX | | 64-bit | MinGW | 17 |
-| | | | GCC | 20 |
-| | | | Clang | |
+| Item            | Details                                                                        |
+|-----------------|--------------------------------------------------------------------------------|
+| Platform        | 🪟 WINDOWS / 🐧 LINUX                                                          |
+| Instruction Set | X86                                                                            |
+| Bit Width       | 64-bit                                                                         |
+| Compiler        | MSVC (Windows) / LLVM-Clang (Windows, Linux) / ClangCL (Windows) / GCC (Linux) |
+| C++ Standard    | 14 / 17 / 20                                                                   |
+
+> ℹ️ **Compatibility Note**  
+> This library welcomes developers to contribute compatibility with more compilers and operating systems. Your contributions are greatly appreciated.
 
 ---
 
@@ -61,13 +63,13 @@ This project aims to establish a **feature-complete, stylistically unified, high
 
 NexusForce strictly adheres to modern C++ engineering best practices, ensuring code robustness and readability through multi-layered automated checks.
 
-| Metric | Status | Description |
-|--------|--------|-------------|
-| 📊 **Codebase Size** | 120k+ Lines | Core library source and header files |
-| 🔒 **CodeQL Security Analysis** | **0 Vulnerabilities** | Full `security-and-quality` suite, zero security alerts |
-| 🔍 **Clang-Tidy Static Analysis** | **Zero Warnings** | Full ruleset (`bugprone`/`cppcoreguidelines`/`hicpp`/`modernize`/`performance`/`readability`), warnings as errors |
-| 🎨 **Clang-Format Code Style** | **Strictly Enforced** | 120 columns, 4 spaces, K&R variant braces, mandatory brace insertion, etc. |
-| 💧 **Dynamic Memory Check** | **0 Leaks** | Valgrind full test suite, zero memory leaks or out-of-bounds access |
+| Metric                            | Status                | Description                                                                                                                 |
+|-----------------------------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------|
+| 📊 **Codebase Size**              | 120k+ Lines           | Core library source and header files                                                                                        |
+| 🔒 **CodeQL Security Analysis**   | **0 Vulnerabilities** | Full `security-and-quality` suite, zero security alerts                                                                     |
+| 🔍 **Clang-Tidy Static Analysis** | **Zero Warnings**     | Full ruleset (`bugprone` / `cppcoreguidelines` / `hicpp` / `modernize` / `performance` / `readability`), warnings as errors |
+| 🎨 **Clang-Format Code Style**    | **Strictly Enforced** | 120 columns, 4 spaces, K&R variant braces, mandatory brace insertion, etc.                                                  |
+| 💧 **Dynamic Memory Check**       | **0 Leaks**           | Valgrind full test suite, zero memory leaks or out-of-bounds access                                                         |
 
 > 📋 **Regarding Rule Exemptions**: [`.clang-tidy`](.clang-tidy) contains approximately 60 explicit exemptions, and [`.clang-format`](.clang-format) includes several style customizations. Each exemption addresses inherent requirements of low-level system programming, adhering to the principle of "strict by default, relaxed as needed."
 
@@ -79,59 +81,71 @@ The core components of NexusForce strictly adhere to relevant international stan
 
 ### 🌐 Network Protocols & Internet Standards
 
-| Component | Standards Followed | Description |
-|-----------|-------------------|-------------|
-| **URL Parsing & Encoding** | [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986), [RFC 3987](https://www.rfc-editor.org/rfc/rfc3987), [WHATWG URL](https://url.spec.whatwg.org/) | Generic URI syntax, percent-encoding, and Internationalized Resource Identifiers |
-| **Network Port Definitions** | [IANA Service Name and Transport Protocol Port Number Registry](https://www.iana.org/assignments/service-names-port-numbers/), [RFC 6335](https://www.rfc-editor.org/rfc/rfc6335) | Well-known port assignments for HTTP/HTTPS/FTP/SSH/DNS, etc. |
-| **Base64 Encoding** | [RFC 4648](https://www.rfc-editor.org/rfc/rfc4648) | Standard Base64 and URL-safe Base64 character alphabets |
-| **JSON Data Format** | [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259), [ECMA-404](https://ecma-international.org/publications-and-standards/standards/ecma-404/) | JSON syntax, data types, and UTF-8 encoding requirements |
-| **TOML Configuration Format** | [TOML v1.0.0](https://toml.io/en/v1.0.0) | Includes date-time format following [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) / ISO 8601 |
-| **UUID Generation** | [RFC 4122](https://www.rfc-editor.org/rfc/rfc4122), [RFC 9562](https://www.rfc-editor.org/rfc/rfc9562) | UUID v4 (random) and v7 (time-ordered) generation specifications |
+| Component                    | Standards Followed                                                                                                                                                                                                                                                                                                                                                                                         | Description                                                                                                                                                    |
+|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **HTTP & WebSocket**         | [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) / [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) (HTTP/1.1), [RFC 6265](https://www.rfc-editor.org/rfc/rfc6265.html) (Cookie), [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455.html) (WebSocket), [W3C Fetch CORS](https://fetch.spec.whatwg.org/#http-cors-protocol)                                                                   | HTTP semantics and routing, Cookie management, CORS cross-origin policy, WebSocket upgrade and frame protocol                                                  |
+| **DNS Client**               | [RFC 1034](https://www.rfc-editor.org/rfc/rfc1034.html), [RFC 1035](https://www.rfc-editor.org/rfc/rfc1035.html), [RFC 2181](https://www.rfc-editor.org/rfc/rfc2181.html), [RFC 6891](https://www.rfc-editor.org/rfc/rfc6891.html), [RFC 3596](https://www.rfc-editor.org/rfc/rfc3596.html), [RFC 2782](https://www.rfc-editor.org/rfc/rfc2782.html)                                                       | DNS protocol client, A/AAAA/MX/SRV/PTR record queries, UDP/TCP transport auto-switching and TTL cache management                                               |
+| **ICMP Protocol**            | [RFC 792](https://www.rfc-editor.org/rfc/rfc792.html) (STD 5), [RFC 1122](https://www.rfc-editor.org/rfc/rfc1122.html), [RFC 4884](https://www.rfc-editor.org/rfc/rfc4884.html), [IANA ICMP Parameters Registry](https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml)                                                                                                                   | Ping (Echo Request/Reply) and Traceroute (Time Exceeded) network diagnostics, including RFC 1071 checksum algorithm                                            |
+| **SMTP Protocol**            | [RFC 5321](https://www.rfc-editor.org/rfc/rfc5321.html) (STD 10), [RFC 5322](https://www.rfc-editor.org/rfc/rfc5322.html), [RFC 3207](https://www.rfc-editor.org/rfc/rfc3207.html) (STARTTLS), [RFC 8314](https://www.rfc-editor.org/rfc/rfc8314.html) (Implicit TLS), [RFC 4954](https://www.rfc-editor.org/rfc/rfc4954.html) (AUTH), [RFC 2045–2047](https://www.rfc-editor.org/rfc/rfc2045.html) (MIME) | Email transport and message format, supporting PLAIN/LOGIN authentication, STARTTLS/Implicit TLS encryption, and MIME multipart messages                       |
+| **MAC Address**              | [IEEE 802-2014](https://standards.ieee.org/ieee/802/3714/), [IEEE 802.3-2022](https://standards.ieee.org/ieee/802.3/10422/), [RFC 7042](https://www.rfc-editor.org/rfc/rfc7042.html)                                                                                                                                                                                                                       | 48-bit EUI-48 address parsing and formatting, supporting unicast/multicast/locally administered address identification and standard hexadecimal representation |
+| **URL Parsing & Encoding**   | [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986), [RFC 3987](https://www.rfc-editor.org/rfc/rfc3987), [WHATWG URL](https://url.spec.whatwg.org/)                                                                                                                                                                                                                                                         | Generic URI syntax, percent-encoding, and Internationalized Resource Identifiers                                                                               |
+| **Network Port Definitions** | [IANA Service Name and Transport Protocol Port Number Registry](https://www.iana.org/assignments/service-names-port-numbers/), [RFC 6335](https://www.rfc-editor.org/rfc/rfc6335)                                                                                                                                                                                                                          | Well-known port assignments                                                                                                                                    |
+| **UUID Generation**          | [RFC 4122](https://www.rfc-editor.org/rfc/rfc4122), [RFC 9562](https://www.rfc-editor.org/rfc/rfc9562)                                                                                                                                                                                                                                                                                                     | UUID v4 (random) and v7 (time-ordered) generation specifications                                                                                               |
+| **Byte Size Units**          | [IEC 80000-13:2008](https://www.iso.org/standard/31898.html), [IEEE 1541-2021](https://standards.ieee.org/ieee/1541/10790/), [BIPM SI Brochure (9th Ed.)](https://www.bipm.org/en/publications/si-brochure)                                                                                                                                                                                                | Binary prefixes (KiB/MiB/GiB) and decimal prefixes (kB/MB/GB)                                                                                                  |
+
+### 📁 Configuration File Formats
+
+| Component         | Standards Followed                                                                                                                                                                                                       | Description                                                                                                                                |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| **JSON RFC 8259** | [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259), [ECMA-404:2017](https://ecma-international.org/publications-and-standards/standards/ecma-404/)                                                                       | JSON six value types, UTF-8 encoding, IEEE 754-2019 double-precision numbers, and string escape sequences                                  |
+| **TOML 1.0.0**    | [TOML v1.0.0](https://toml.io/en/v1.0.0)                                                                                                                                                                                 | Includes date-time format following [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) / ISO 8601                                          |
+| **YAML 1.2**      | [YAML 1.2.2](https://yaml.org/spec/1.2.2/), [RFC 8259](https://www.rfc-editor.org/rfc/rfc8259.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339.html), [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/) | YAML 1.2 is a strict superset of JSON, supporting eight core value types, five string scalar styles, anchors and aliases, and a tag system |
 
 ### 🔐 Cryptography & Security Algorithms
 
-| Component | Standards Followed | Description |
-|-----------|-------------------|-------------|
+| Component              | Standards Followed                                                                                                                         | Description                                                                                                                                                                             |
+|------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **AES-256 Encryption** | [NIST FIPS 197](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf), [ISO/IEC 18033-3](https://www.iso.org/standard/54531.html) | Advanced Encryption Standard, supports ECB/CBC/GCM modes ([NIST SP 800-38A](https://csrc.nist.gov/pubs/sp/800/38/a/final) / [SP 800-38D](https://csrc.nist.gov/pubs/sp/800/38/d/final)) |
-| **SHA-256 Hashing** | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf), [RFC 6234](https://www.rfc-editor.org/rfc/rfc6234) | Secure Hash Algorithm (SHA-2 family), 256-bit output |
-| **SHA-1 Hashing** | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) (historical compatibility) | ⚠️ Marked with security warning ([SHAttered](https://shattered.io/) collision attack) |
-| **MD5 Hashing** | [RFC 1321](https://www.rfc-editor.org/rfc/rfc1321) (historical compatibility) | ⚠️ Marked with security warning, for non-cryptographic checksum scenarios only |
-| **PKCS#7 Padding** | [RFC 5652](https://www.rfc-editor.org/rfc/rfc5652), [RFC 8018](https://www.rfc-editor.org/rfc/rfc8018) | Cryptographic Message Syntax and password-based encryption padding scheme |
+| **SHA-256 Hashing**    | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf), [RFC 6234](https://www.rfc-editor.org/rfc/rfc6234)          | Secure Hash Algorithm (SHA-2 family), 256-bit output                                                                                                                                    |
+| **SHA-1 Hashing**      | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) (historical compatibility)                                   | ⚠️ Marked with security warning ([SHAttered](https://shattered.io/) collision attack)                                                                                                   |
+| **MD5 Hashing**        | [RFC 1321](https://www.rfc-editor.org/rfc/rfc1321) (historical compatibility)                                                              | ⚠️ Marked with security warning, for non-cryptographic checksum scenarios only                                                                                                          |
+| **Base64 Encoding**    | [RFC 4648 §4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4), [RFC 4648 §5](https://www.rfc-editor.org/rfc/rfc4648.html#section-5) | Standard and URL-safe Base64 encoding/decoding, strict padding rules and illegal character detection                                                                                    |
 
 ### 🔤 Character Encoding & Internationalization
 
-| Component | Standards Followed | Description |
-|-----------|-------------------|-------------|
-| **UTF-8 / UTF-16 / UTF-32** | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/), [ISO/IEC 10646](https://www.iso.org/standard/76835.html), [RFC 3629](https://www.rfc-editor.org/rfc/rfc3629) / [RFC 2781](https://www.rfc-editor.org/rfc/rfc2781) | Unicode codepoint operations, normalization, and encoding conversion with invalid sequence detection |
-| **Unicode Codepoint Processing** | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/) §2.4, §2.13 | Surrogate pair handling, BOM detection, and replacement character (U+FFFD) rules |
+| Component                        | Standards Followed                                                                                                                                                                                                               | Description                                                                                          |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|
+| **UTF-8 / UTF-16 / UTF-32**      | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/), [ISO/IEC 10646](https://www.iso.org/standard/76835.html), [RFC 3629](https://www.rfc-editor.org/rfc/rfc3629) / [RFC 2781](https://www.rfc-editor.org/rfc/rfc2781) | Unicode codepoint operations, normalization, and encoding conversion with invalid sequence detection |
+| **Unicode Codepoint Processing** | [Unicode 15.1.0](https://unicode.org/versions/Unicode15.1.0/) §2.4, §2.13                                                                                                                                                        | Surrogate pair handling, BOM detection, and replacement character (U+FFFD) rules                     |
 
 ### 📐 Data Structures & Algorithms
 
-| Component | Standards Followed / Academic Literature | Description |
-|-----------|------------------------------------------|-------------|
-| **Heap Algorithms** | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §25.8.6 | Complexity guarantees and Floyd's heap adjustment optimization ([Algorithm 245](https://dl.acm.org/doi/10.1145/512274.512284)) |
-| **Red-Black Tree** | [Guibas & Sedgewick (1978)](https://doi.org/10.1109/SFCS.1978.3) | Classic implementation of self-balancing binary search tree, O(log n) complexity guarantee |
-| **Leonardo Heap / Smoothsort** | [Dijkstra (1981) EWD796a](https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html) | Adaptive sorting algorithm, optimal time complexity O(n) |
-| **Introsort** | [Musser (1997)](https://doi.org/10.1002/(SICI)1097-024X(199708)27:8<983::AID-SPE117>3.0.CO;2-%23) | Hybrid quick/heap/insertion sort, default algorithm for C++ standard library `sort` |
-| **Non-cryptographic Hashing** | [FNV-1a Draft](https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17), [MurmurHash3](https://github.com/aappleby/smhasher/wiki/MurmurHash3) | High-performance hash tables and Bloom filters |
+| Component                      | Standards Followed / Academic Literature                                                                                                                                                                 | Description                                                                                                                                                                            |
+|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Heap Algorithms**            | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §25.8.6                                                                                                                                    | Complexity guarantees and Floyd's heap adjustment optimization ([Algorithm 245](https://dl.acm.org/doi/10.1145/512274.512284))                                                         |
+| **Red-Black Tree**             | [Guibas & Sedgewick (1978)](https://doi.org/10.1109/SFCS.1978.3)                                                                                                                                         | Classic implementation of self-balancing binary search tree, O(log n) complexity guarantee                                                                                             |
+| **Leonardo Heap / Smoothsort** | [Dijkstra (1981) EWD796a](https://www.cs.utexas.edu/~EWD/transcriptions/EWD07xx/EWD796a.html)                                                                                                            | Adaptive sorting algorithm, optimal time complexity O(n)                                                                                                                               |
+| **Introsort**                  | [Musser (1997)](https://doi.org/10.1002/(SICI)1097-024X(199708)27:8<983::AID-SPE117>3.0.CO;2-%23)                                                                                                        | Hybrid quick/heap/insertion sort, default algorithm for C++ standard library `sort`                                                                                                    |
+| **Non-cryptographic Hashing**  | [FNV-1a Draft](https://datatracker.ietf.org/doc/html/draft-eastlake-fnv-17), [MurmurHash3](https://github.com/aappleby/smhasher/wiki/MurmurHash3)                                                        | High-performance hash tables and Bloom filters                                                                                                                                         |
+| **Bloom Filter**               | [Bloom (1970)](https://doi.org/10.1145/362686.362692), [Broder & Mitzenmacher (2004)](https://doi.org/10.1080/15427951.2004.10129096), [Kirsch & Mitzenmacher (2006)](https://doi.org/10.1002/rsa.20208) | Probabilistic set membership query structure with double hashing optimization, O(k) insertion/query, supporting optimal parameter (m, k) derivation and false positive rate estimation |
 
 ### ⚙️ System, Concurrency & Command-Line
 
-| Component | Standards Followed | Description |
-|-----------|-------------------|-------------|
-| **Atomic Memory Order** | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §31.4 | C++ memory model, includes x86/ARM hardware barrier equivalents and Intel TSX HLE support |
-| **Command-Line Parsing** | [POSIX.1-2017 (IEEE 1003.1)](https://pubs.opengroup.org/onlinepubs/9699919799/) Chapter 12, [GNU getopt_long](https://man7.org/linux/man-pages/man3/getopt.3.html) | Supports short option grouping, long options, `--` delimiter, and optional values |
-| **Date & Time** | [ISO 8601-1:2019](https://www.iso.org/standard/70907.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339), [POSIX Timestamp](https://pubs.opengroup.org/onlinepubs/9699919799/) | Gregorian calendar calculations, Julian day conversion, and Unix epoch handling |
-| **SQL Statement Builder** | [ISO/IEC 9075](https://www.iso.org/standard/16663.html) (SQL-92 and later) | Generates ANSI SQL compliant SELECT/INSERT/UPDATE/DELETE statements |
+| Component                 | Standards Followed                                                                                                                                                                   | Description                                                                       |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| **Atomic Memory Order**   | [ISO/IEC 14882:2020](https://www.iso.org/standard/79358.html) §31.4                                                                                                                  | C++ memory model, includes hardware barrier equivalents and Intel TSX HLE support |
+| **Command-Line Parsing**  | [POSIX.1-2017 (IEEE 1003.1)](https://pubs.opengroup.org/onlinepubs/9699919799/) Chapter 12, [GNU getopt_long](https://man7.org/linux/man-pages/man3/getopt.3.html)                   | Supports short option grouping, long options, `--` delimiter, and optional values |
+| **Date & Time**           | [ISO 8601-1:2019](https://www.iso.org/standard/70907.html), [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339), [POSIX Timestamp](https://pubs.opengroup.org/onlinepubs/9699919799/) | Gregorian calendar calculations, Julian day conversion, and Unix epoch handling   |
+| **SQL Statement Builder** | [ISO/IEC 9075](https://www.iso.org/standard/16663.html) (SQL-92 and later)                                                                                                           | Generates ANSI SQL compliant SELECT/INSERT/UPDATE/DELETE statements               |
 
 ### 🎨 Graphics, Color & Mathematics
 
-| Component | Standards Followed | Description |
-|-----------|-------------------|-------------|
-| **RGB Color Model** | [W3C CSS Color Level 4](https://www.w3.org/TR/css-color-4/), [Compositing Level 1](https://www.w3.org/TR/compositing-1/) | Straight alpha compositing, hexadecimal formats, and ANSI 256-color palette |
-| **Grayscale Conversion** | [ITU-R BT.709](https://www.itu.int/rec/R-REC-BT.709/) / [IEC 61966-2-1 (sRGB)](https://webstore.iec.ch/publication/6169) | Human perception weighting (0.299R + 0.587G + 0.114B) |
-| **Mathematical Functions & Constants** | [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/), [ISO/IEC 10967 (LIA)](https://www.iso.org/standard/24417.html) | Trigonometric reduction, Newton's method iterations, and machine epsilon tolerances |
-| **Random Number Generation** | [ISO/IEC 18031:2011](https://www.iso.org/standard/54945.html), [NIST SP 800-90A](https://csrc.nist.gov/pubs/sp/800/90/a/r1/final) | Mersenne Twister (MT19937) and OS entropy source true random numbers |
+| Component                              | Standards Followed                                                                                                                | Description                                                                         |
+|----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|
+| **RGB Color Model**                    | [W3C CSS Color Level 4](https://www.w3.org/TR/css-color-4/), [Compositing Level 1](https://www.w3.org/TR/compositing-1/)          | Straight alpha compositing, hexadecimal formats, and ANSI 256-color palette         |
+| **Grayscale Conversion**               | [ITU-R BT.709](https://www.itu.int/rec/R-REC-BT.709/) / [IEC 61966-2-1 (sRGB)](https://webstore.iec.ch/publication/6169)          | Human perception weighting (0.299R + 0.587G + 0.114B)                               |
+| **Mathematical Functions & Constants** | [IEEE 754-2019](https://standards.ieee.org/ieee/754/6210/), [ISO/IEC 10967 (LIA)](https://www.iso.org/standard/24417.html)        | Trigonometric reduction, Newton's method iterations, and machine epsilon tolerances |
+| **Random Number Generation**           | [ISO/IEC 18031:2011](https://www.iso.org/standard/54945.html), [NIST SP 800-90A](https://csrc.nist.gov/pubs/sp/800/90/a/r1/final) | Mersenne Twister (MT19937) and OS entropy source true random numbers                |
 
 > 📖 **Documentation Completeness**: All classes and functions referencing the above standards include specific standard section numbers and official links in their API comments (Doxygen format), enabling developers to trace and verify at any time.
 
@@ -140,53 +154,52 @@ The core components of NexusForce strictly adhere to relevant international stan
 ## 🚀 Features
 
 ### 🔄 Concurrency & Async
-- **Thread Pool** - Multi-strategy thread pool based on work stealing
-- **Coroutine Support** - Coroutine primitives and generators
-- **Virtual Threads** - Lightweight virtual threads based on coroutines
-- **Lock-Free Queue** - Thread-safe lock-free queue implementation
-- **Synchronization Primitives** - Mutex, shared mutex, semaphore, barrier, and latch
-- **Atomic Operations** - Atomic types, FUTEX, timed waiting
-- **Future/Promise** - Asynchronous programming model
-- **Hazard Pointer** - Memory management for lock-free data structures
-- **Stop Token** - Cancellable asynchronous operations
+- **`thread_pool`** - Multi-strategy thread pool based on work stealing
+- **`timer_scheduler` / `basic_timer`** - Timer task scheduling based on red-black tree
+- **`generator` / `task`** - Coroutine primitives and task generator
+- **`virtual_thread`** - C#-style lightweight coroutines
+- **`connection` / `signal`** - Observer pattern signal-slot
+- **`call_once`** - Multi-threaded single-call implementation based on FUTEX
+- **Stop Token** - Cancellable asynchronous operations `stop_token` / `stop_source` / `stop_callback`
+- **Synchronization Primitives** - Mutex `mutex`, shared mutex `shared_mutex`, semaphore `semaphore` / `atomic_semaphore`, thread barrier `barrier` and latch `latch`
+- **Atomic Operations** - Atomic types `atomic`, atomic FUTEX `atomic_futex`, global atomic operation function system
+- **Multi-strategy Threads** - General thread `thread`, scoped thread with stop token `scoped_thread`, manually started lazy thread `lazy_thread`
+- **Basic Async Model** - `async` and its supporting `future` / `promise` / `packaged_task` structures
+- **Hazard Pointer** - Memory management for lock-free data structures `hazard_ptr` / `hazard_pointer_domain`
 
 ### 📦 Containers
-- **Standard Containers** - vector, list, deque, map, set, etc.
-- **Red-Black Tree** - Self-balancing binary search tree implementation
-- **Hash Table** - Open addressing hash table
-- **Bloom Filter** - Probabilistic data structure
-- **LRU/TTL Cache** - Cache policies based on Least Recently Used / Time-To-Live
-- **Bitmap/Bitset** - Efficient bit manipulation container
-- **Leonardo Heap** - Leonardo heap algorithm implementation
+- **Standard Containers** - `array` / `vector` / `list` / `deque` / `map` / `set` / `unordered_map` / `unordered_set`, etc.
+- **`rb_tree`** - Self-balancing binary search tree implementation
+- **`hashtable`** - Open addressing hash table
+- **`bloom_filter`** - Probabilistic data structure
+- **`lru_cache` / `ttl_cache`** - Cache policies based on Least Recently Used / Time-To-Live
+- **`bitmap` / `bitset`** - Efficient bit manipulation containers
 
 ### 🔐 Encryption & Security
-- **AES256** - Advanced Encryption Standard implementation
-- **SHA1/SHA256** - Secure Hash Algorithm
-- **MD5** - Message Digest Algorithm
-- **Base64** - Binary data encoding
-- **XOR** - Simple XOR encryption
+- **`AES256`** - Advanced Encryption Standard implementation
+- **`SHA1` / `SHA256`** - Secure Hash Algorithm
+- **`MD5`** - Message Digest Algorithm
+- **`base64`** - Binary data encoding
 
 ### 📁 File System
-- **Path/File Operations** - Path and file system operations
-- **File Watcher** - Real-time file system change monitoring
-- **Config File Parsing** - JSON/TOML/INI/ENV format parsing and streaming builder
-- **Temporary File** - Secure temporary file management
-- **System Pipe** - Pipe operation class
-- **Shared Memory** - Cross-process shared memory
+- **Path/File Operations** - Path and file system operations `path` / `path_tree` / `file` / `file_async` / `file_diff` / `file_locker` / `file_mapper`
+- **`file_watcher`** - Real-time file system change monitoring
+- **Config File Parsing** - JSON/TOML/YAML/INI/ENV value system, format parsing and streaming builder
+- **`temp_file`** - Secure temporary file management
 
 ### 🌐 Networking
-- **WebSocket** - Full-duplex communication protocol
-- **TCP/UDP Socket** - High-performance network communication
-- **SSL/TLS** - Encrypted network transport
-- **HTTP Client/Server** - HTTP protocol implementation, including routers and filters
-- **DNS Client** - Domain name resolution
-- **URL Parser** - URL handling
+- **WebSocket** - Full-duplex communication protocol `websocket_session` / `websocket_server`
+- **TCP/UDP Socket** - High-performance network communication `tcp_socket` / `udp_socket`
+- **SSL/TLS** - Encrypted network transport `ssl_context` / `ssl_stream`
+- **HTTP Client/Server** - HTTP protocol implementation, including router, filters `http_filter` / `http_router` / `http_server` / `http_client`
+- **`dns_client`** - Domain name resolution
+- **FTP** - FTP server and client
 - **ICMP/SMTP** - ICMP and SMTP protocol operations
-- **ARP/MAC/IP/Ports** - Low-level network operations
+- **`arp` / `mac_address` / `ip_address` / `ports` / `url`** - Network programming utilities
 
 ### 🗄️ Database
-- **Database Connection Pool** - Connection reuse and management
-- **SQL Builder** - Fluent builder for standard SQL statements
+- **`database_pool`** - Database connection reuse and management
+- **`sql_builder`** - Fluent builder for standard SQL statements
 - **Multi-Database Support**:
   - MySQL Client
   - PostgreSQL Client
@@ -196,95 +209,99 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **Result Set Wrapper** - Unified result access interface
 
 ### 📝 Logging
+- **`log_sink`** - Extensible log output targets
+- **`file_sink`** - Log file management and rotation
 - **Multi-Level Logging** - Support for different log levels
-- **Log Output** - Log file management and rotation
-- **Log Formatting** - Customizable log format
-- **Multi-Sink** - Extensible log output targets
-- **Loggers** - Flexible and configurable loggers
+- **`log_formatter`** - Customizable log format
+- **`logger`** - Flexible and configurable logger
 
 ### 🔤 String Processing
-- **PCRE2 Regular Expressions** - Efficient regular expression matching with JIT support
-- **Unicode Support** - UTF conversion system, codepoint operation classes
-- **String Formatting** - Type-safe formatted output
-- **String View** - Extensive use of string views for optimized operations
-- **Numeric Conversion** - Conversion between strings and numeric values
+- **PCRE2 Regular Expressions** - Efficient regular expression matching with JIT support `regex` / `match_result` / `regex_iterator` / `regex_token_iterator`
+- **Unicode Support** - UTF conversion system, codepoint operation class `codepoint`
+- **`formatter` / `format`** - Type-safe formatted output
+- **`string_view`** - Extensive use of string views for optimized operations
+- **Numeric Conversion** - Extensible string-to-number and number-to-string conversion system
 
 ### ⚙️ System Interface
-- **Process Management** - Process creation and control
-- **Pipe Operations** - Pipe creation and management
-- **Dynamic Library Loading** - Runtime library loading
-- **Console Operations** - Terminal interaction
-- **Process Argument Parsing** - Analysis and manipulation of process arguments
-- **Stack Trace** - Exception debugging
-- **System Information** - Hardware and OS information
-- **Environment Variables** - Environment variable manipulation
-- **Signal Management** - Signal control
+- **`process`** - Process creation and control
+- **`pipe`** - Pipe creation and management
+- **`dynamic_library`** - Runtime library loading
+- **`console`** - Highly integrated terminal interaction
+- **`cmdline`** - Process argument analysis and manipulation
+- **`stacktrace`** - Exception debugging
+- **`share_memory`** - Cross-process shared memory
+- **`locale`** - Locale configuration and parsing
+- **`sysinfo`** - Hardware and OS information
+- **`environment`** - Environment variable manipulation
+- **`system_signal_manager`** - System signal control
+- **`system_event`** - System event management
 
 ### ⏰ Time Utilities
-- **High-Resolution Clock** - Multiple clock sources
-- **Time Point / Duration** - Time calculations
-- **Date Time** - Calendar operations
-- **Scope Timer** - Execution time measurement for code blocks
+- **`steady_clock` / `system_clock`** - High-resolution clocks with multiple clock sources
+- **`duration`** - Time span calculation
+- **`date` / `time` / `datetime` / `timestamp`** - Calendar operations
+- **`scoped_click`** - Execution time measurement for code blocks
 
 ### 🛠️ Utility Library
-- **Optional** - Optional value handling
-- **Variant** - Type-safe union
-- **Expected** - Error handling
-- **Any** - Type-erased container
-- **Tuple** - Compile-time tuple
-- **Color** - RGB color operations
-- **Scope Operations** - Scope guards
-- **Numeric Limits** - Numerical limit information
-- **Math Ratio** - Compile-time ratio calculations
-- **UUID** - UUID v4/v7 generator
-- **Endian Operations** - Endianness conversion
-- **Breakpoint Call** - Debug breakpoint trigger
+- **Literal Type Wrapper Classes** - Advanced encapsulation of literal types
+- **`optional`** - Optional value handling
+- **`variant`** - Type-safe union
+- **`expected`** - Error state handling
+- **`any`** - Type-erased container
+- **`pair` / `tuple`** - Compile-time key-value pair / tuple
+- **`color`** - RGB color operations
+- **`scope_exit` / `scope_fail` / `scope_success`** - Scope guards
+- **Numeric/Character Info** - Numeric and character type information retrieval
+- **`ratio`** - Compile-time ratio calculation
+- **`uuid`** - UUID v4/v7 generator
+- **`compressed_pair`** - EBCO memory optimization
 
 ### 🔍 Reflection System
-- **Reflection Registry** - Type reflection and metadata management
-- **Type Information** - Runtime type querying
+- **`registry`** - Type reflection and metadata management
+- **`meta_type` / `meta_property` / `meta_function`** - Runtime type querying
 
 ### 🧬 Type Traits & Concepts
-- **Type Traits** - Compile-time type judgments
-- **Concept Constraints** - C++20 concept support
-- **Type Checking** - Runtime type information
-- **CRTP Static Polymorphism** - Zero-overhead interface unification
+- **Type Traits** - Comprehensive compile-time type judgments
+- **Concept Constraints** - Concept set support
+- **`check_type`** - Human-readable type names at runtime
+- **CRTP Static Polymorphism** - Globally unified zero-overhead interface
 
 ### 💾 Memory Management
-- **Smart Pointers** - shared_ptr, unique_ptr, weak_ptr
-- **Atomic Smart Pointers** - Lock-free operations for `atomic<shared_ptr/weak_ptr>`
-- **Memory View** - Safe memory access
+- **`shared_ptr`, `unique_ptr`, `weak_ptr`** - Smart pointer structures
+- **`atomic<shared_ptr/weak_ptr>`** - Lock-free operations for atomic smart pointers
+- **`memory_view`** - Safe memory access
+- **Bit/Endian/Byte Stream Operations** - Memory state modification
 - **Construction/Destruction Tools** - Object lifecycle management
-- **Memory Tracing** - Memory monitoring for debugging
-- **Standard Allocators** - Strategy-specialized allocators based on compiler features
-- **Empty Base Class Optimization** - `compressed_pair` utility
+- **`trace_allocator`** - Memory monitoring for debugging
+- **`standard_allocator`** - Strategy-specialized allocators based on compiler features
 
 ### 📦 Compression
-- **lz4 Compression** - High-speed data compression/decompression
-- **zlib Compression** - General-purpose data compression/decompression
+- **lz4 Compression** - `lz4_compressor` high-speed data compression/decompression
+- **zlib Compression** - `zlib_compressor` multi-strategy general-purpose data compression/decompression
 
 ### 🔌 Plugin System
-- **Dynamic Plugin Management** - Runtime plugin loading and unloading
+- **Dynamic Plugin Management** - `plugin_manager` runtime plugin loading and unloading
 - **Plugin Interface** - Standardized plugin development
 
 ### ❗ Exception Handling
-- **Exception Pointer** - Cross-thread exception propagation
-- **Termination Handling** - Program termination management
-- **Exception System** - Standard exception hierarchy
+- **Exception Pointer** - `exception_ptr` cross-thread exception propagation
+- **Termination Handling** - Multi-state program termination methods and corresponding callbacks
+- **Exception/Error Code System** - Custom exception and error code system
+- **Breakpoint Handling** - Debug breakpoint triggering and handling
 
 ### 📐 Algorithm Library
-- **Standard Algorithms** - sort, find, transform, etc.
+- **Standard Algorithms** - Range iteration algorithms based on iterator system
 - **Parallel Algorithms** - Parallel execution policies
 - **Numeric Algorithms** - Numerical computation and accumulation
 - **Heap Algorithms** - Heap operations and priority queues
 - **Range Operations** - Ranges library support
 - **Hash Algorithms** - Multiple hash function implementations
-- **Bit Operations** - Series of bit manipulation functions
 
 ### 📊 Math Library
 - **Mathematical Constants** - Common mathematical constants
 - **Mathematical Functions** - Transcendental functions and numerical computation
-- **Random Number Generation** - LC, Mersenne Twister, hardware noise algorithms
+- **Random Number Generation** - LC, Mersenne Twister, hardware noise algorithms `random_lcd` / `random_mt` / `secret`
+- **128-bit Math** - 128-bit signed/unsigned numeric operations `int128_t` / `uint128_t`
 
 ---
 
@@ -292,25 +309,27 @@ The core components of NexusForce strictly adhere to relevant international stan
 
 ### 📋 Prerequisites
 
-| Type | Dependency | Version Requirement |
-|------|------------|---------------------|
-| 🔨 Build Tool | [CMake](https://cmake.org/) | 3.19+ |
-| 📦 Package Manager | [vcpkg](https://github.com/microsoft/vcpkg) | Latest |
-| 🎨 Code Formatter | [clang-format](https://clang.llvm.org/docs/ClangFormat.html) | 19+ |
-| 🔍 Static Analyzer | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/) | 19+ |
-| ⚠️ Mandatory Dependencies | [GTest](https://google.github.io/googletest/) | 1.17.0#2+ |
-| | [pcre2](https://www.pcre.org/) | 10.47+ |
-| | [OpenSSL](https://www.openssl.org/) | 3.6.1#2+ |
-| 📦 Optional Dependencies | [libpq](https://www.postgresql.org/) | 16.9#3+ |
-| | [libmysql](https://www.mysql.com/) | 8.0.40#1+ |
-| | [sqlite3](https://sqlite.org/index.html) | 3.51.2+ |
-| | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0+ |
-| | [lz4](https://lz4.org/) | 1.10.0+ |
-| | [zlib](https://www.zlib.net/) | 1.3.1+ |
+| Type                              | Dependency                                                          | Version Requirement |
+|-----------------------------------|---------------------------------------------------------------------|---------------------|
+| 🔨 Build Tool                     | [CMake](https://cmake.org/)                                         | 3.19+               |
+| 📦 Package Manager                | [vcpkg](https://github.com/microsoft/vcpkg)                         | Latest              |
+| 🎨 Code Formatter                 | [clang-format](https://clang.llvm.org/docs/ClangFormat.html)        | 19+                 |
+| 🔍 Static Analyzer                | [clang-tidy](https://clang.llvm.org/extra/clang-tidy/)              | 19+                 |
+| ⚠️ Mandatory Dependencies (vcpkg) | [GTest](https://google.github.io/googletest/)                       | 1.17.0+             |
+|                                   | [pcre2](https://www.pcre.org/)                                      | 10.47+              |
+|                                   | [OpenSSL](https://www.openssl.org/)                                 | 3.6.1+              |
+| 📦 Optional Dependencies (vcpkg)  | [libpq](https://www.postgresql.org/)                                | 16.9+               |
+|                                   | [libmysql](https://www.mysql.com/)                                  | 8.0.40+             |
+|                                   | [sqlite3](https://sqlite.org/index.html)                            | 3.51.2+             |
+|                                   | [hiredis](https://redis.ac.cn/docs/latest/develop/clients/hiredis/) | 1.3.0+              |
+|                                   | [lz4](https://lz4.org/)                                             | 1.10.0+             |
+|                                   | [zlib](https://www.zlib.net/)                                       | 1.3.1+              |
 
 ### 🏗️ Build Steps
 
-> 💡 You can modify the configuration items in `config.json` in the project root directory for personalized builds.
+Ensure that CMake, vcpkg, clang-format, and clang-tidy are correctly installed and configured before building.
+
+> 💡 You can modify the configuration items in `config.json` (build options) and `vcpkg.json` (package management configuration) in the project root directory for personalized builds.
 
 #### 🪟 Windows
 
@@ -354,6 +373,25 @@ sudo make install
 
 ---
 
+## 🚀 Quick Start
+
+Before you begin, ensure you have completed the installation steps in the Build Guide.
+
+Quick start example overview:
+
+| Example             | Recommended Scenario                    | Key Features                      |
+|---------------------|-----------------------------------------|-----------------------------------|
+| HTTP Server         | REST APIs, Microservices                | Routing, Middleware, SSL          |
+| Thread Pool         | CPU-intensive tasks, Batch processing   | Work Stealing, Load Balancing     |
+| Config Parsing      | Application configuration management    | Multi-format support, Type Safety |
+| Encryption          | Data encryption, Integrity verification | AES-256, SHA-256                  |
+| Database Operations | Data persistence                        | Connection Pool, SQL Builder      |
+| File Watcher        | Hot reload, Real-time sync              | Cross-platform, Event-driven      |
+
+For details, see [Quickly Build Common Features with NexusForce!](QUICK_START.md)
+
+---
+
 ## 📚 Documentation
 
 For complete API documentation, please visit the [NexusForce Documentation Website](https://nexusforce.org.cn)
@@ -380,7 +418,6 @@ Thanks to all the developers who have contributed to this project! See [CONTRIBU
 
 ## 📌 TODO
 
-- [ ] 📊 Google Benchmark Performance Benchmarking
-- [ ] ⚡ Hotspot Code Optimization
-- [ ] 🍎 Support for macOS Platform
-- [ ] 🖥️ Support for ARM / RISC-V / LOONGARCH Architectures
+The core ABI has been stabilized.
+
+For TODO items, see TODO comments within the code.

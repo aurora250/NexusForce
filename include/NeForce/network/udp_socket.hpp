@@ -14,7 +14,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @addtogroup Network 网络通信
+ * @defgroup UDP UDP
  * @{
  */
 
@@ -106,7 +106,7 @@ public:
     ssize_t receive(memory_view<char> buffer, int flags = 0);
 };
 
-/** @} */ // Network
+/** @} */ // UDP
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_UDP_SOCKET_HPP__

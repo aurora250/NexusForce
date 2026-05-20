@@ -12,11 +12,6 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @addtogroup Network 网络通信
- * @{
- */
-
-/**
  * @defgroup TCP TCP
  * @brief TCP通信相关组件
  * @{
@@ -112,8 +107,6 @@ public:
 };
 
 /** @} */ // TCP
-
-/** @} */ // Network
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_TCP_TCP_ACCEPTOR_HPP__

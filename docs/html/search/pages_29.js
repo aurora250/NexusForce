@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['加密与安全_20encrypt_0',['🔐 加密与安全 (Encrypt)',['../index.html#autotoc_md21',1,'']]]
+  ['单位后缀说明_0',['单位后缀说明',['../group___byte_size.html#unit_suffixes',1,'']]]
 ];

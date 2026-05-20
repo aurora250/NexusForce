@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['唯一键与允许重复键_0',['唯一键与允许重复键',['../group___hash_table.html#unique_vs_equal',1,'']]]
+  ['地址结构_0',['MAC 地址结构',['../classmac__address.html#mac_address_structure',1,'']]],
+  ['地址表示格式_1',['MAC 地址表示格式',['../classmac__address.html#mac_address_format',1,'']]]
 ];

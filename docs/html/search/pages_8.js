@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['file_0',['📁 文件系统 (File)',['../index.html#autotoc_md22',1,'']]],
-  ['floyd_20堆调整优化_1',['Floyd 堆调整优化',['../group___heap_algorithms.html#floyd_optimization',1,'']]]
+  ['gnu_20扩展特性_0',['GNU 扩展特性',['../group___command_line.html#gnu_extensions',1,'']]]
 ];

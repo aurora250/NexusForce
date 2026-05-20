@@ -89,7 +89,7 @@ $(function(){initNavTree('classmac__address.html','','classmac__address-members'
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">mac_address类 参考<div class="ingroups"><a class="el" href="group___network.html">网络通信</a> &raquo; <a class="el" href="group___network_util.html">网络通信工具</a></div></div></div>
+  <div class="headertitle"><div class="title">mac_address类 参考<div class="ingroups"><a class="el" href="group___network_util.html">网络通信工具</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -144,15 +144,69 @@ static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d3
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>MAC地址封装类 </p>
-<p>封装6字节的MAC地址，提供地址解析、格式化和ARP查询功能。</p>
-<p>MAC地址格式：XX:XX:XX:XX:XX:XX（6组十六进制数，每组2位）</p>
-<p>主要功能：</p><ul>
-<li>MAC地址字符串解析</li>
-<li>MAC地址格式化输出</li>
-<li>通过ARP协议从IP地址获取MAC地址 </li>
+<p>支持MAC地址的解析、格式化和通过ARP协议从IP地址获取MAC地址。</p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下网络寻址与协议相关标准规范：</p>
+<p><b>MAC 地址标准（IEEE 802 系列）：</b></p><ul>
+<li>**IEEE 802-2014**：IEEE 局域网和城域网标准 — 概览与架构 <a href="https://standards.ieee.org/ieee/802/3714/">https://standards.ieee.org/ieee/802/3714/</a></li>
+<li>**IEEE 802.3-2022**：以太网标准（MAC 地址格式定义） <a href="https://standards.ieee.org/ieee/802.3/10422/">https://standards.ieee.org/ieee/802.3/10422/</a></li>
 </ul>
+<p><b>地址表示格式标准：</b></p><ul>
+<li>**IEEE 802.3 §3.2.4**：MAC 地址的十六进制表示规范</li>
+<li>**IETF RFC 7042**：IANA 参数与 IETF 协议使用中的常见 MAC 地址约定 <a href="https://www.rfc-editor.org/rfc/rfc7042.html">https://www.rfc-editor.org/rfc/rfc7042.html</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="mac_address_structure"></a>
+MAC 地址结构</h1>
+<p>根据 IEEE 802.3，MAC 地址（48 位 EUI-48）由以下部分组成：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">字段  </th><th class="markdownTableHeadNone">位数  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">OUI  </td><td class="markdownTableBodyNone">24  </td><td class="markdownTableBodyNone">组织唯一标识符，由 IEEE 分配给制造商  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">NIC Specific  </td><td class="markdownTableBodyNone">24  </td><td class="markdownTableBodyNone">网络接口卡特定部分，由制造商分配  </td></tr>
+</table>
+<p>**地址类型标识**（第一个字节的最低位）： </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">位值  </th><th class="markdownTableHeadNone">类型  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">0  </td><td class="markdownTableBodyNone">单播地址  </td><td class="markdownTableBodyNone">发送到单个网络接口  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">多播地址  </td><td class="markdownTableBodyNone">发送到一组网络接口  </td></tr>
+</table>
+<p>**本地管理标识**（第一个字节的次低位）： </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">位值  </th><th class="markdownTableHeadNone">类型  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">0  </td><td class="markdownTableBodyNone">全局唯一地址  </td><td class="markdownTableBodyNone">IEEE 分配的 OUI  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1  </td><td class="markdownTableBodyNone">本地管理地址  </td><td class="markdownTableBodyNone">由网络管理员分配  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="mac_address_format"></a>
+MAC 地址表示格式</h1>
+<p>根据 IEEE 802.3 §3.2.4 和 RFC 7042，MAC 地址的标准表示为：</p><ul>
+<li>6 组十六进制数字，每组 2 位</li>
+<li>常用分隔符：冒号（:）、连字符（-）、点号（.）或无分隔符</li>
+<li>字母使用大写（推荐）或小写</li>
+</ul>
+<p>**支持的格式示例**： </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">格式  </th><th class="markdownTableHeadNone">示例  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">冒号分隔（推荐）  </td><td class="markdownTableBodyNone">00:11:22:33:44:55  </td><td class="markdownTableBodyNone">本实现默认格式  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">连字符分隔  </td><td class="markdownTableBodyNone">00-11-22-33-44-55  </td><td class="markdownTableBodyNone">常见于某些操作系统  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">无分隔符  </td><td class="markdownTableBodyNone">001122334455  </td><td class="markdownTableBodyNone">紧凑格式  </td></tr>
+</table>
+<dl class="section note"><dt>注解</dt><dd>MAC 地址格式遵循 IEEE 802.3 标准，通常表示为 6 组十六进制数字。 ARP 查询仅在本地网络有效，且需要目标主机在线。</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>ARP 查询需要适当的系统权限（在某些系统上可能需要 root/管理员权限）。 跨网段的 IP 地址无法通过 ARP 解析 MAC 地址（需要使用默认网关的 MAC 地址）。 ARP 协议无认证机制，存在 ARP 欺骗攻击风险。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://standards.ieee.org/products-services/regauth/">https://standards.ieee.org/products-services/regauth/</a> </dd>
+<dd>
+<a href="https://www.rfc-editor.org/rfc/rfc826.html">https://www.rfc-editor.org/rfc/rfc826.html</a> </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="mac__address_8hpp_source.html">mac_address.hpp</a> 第 <a class="el" href="mac__address_8hpp_source.html#l00039">39</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mac__address_8hpp_source.html">mac_address.hpp</a> 第 <a class="el" href="mac__address_8hpp_source.html#l00084">84</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="aa1ded32d3a7d520511d240cf937373b0" name="aa1ded32d3a7d520511d240cf937373b0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa1ded32d3a7d520511d240cf937373b0">&#9670;&#160;</a></span>mac_address() <span class="overload">[1/3]</span></h2>
@@ -180,7 +234,7 @@ static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d3
 <p>默认构造函数 </p>
 <p>创建全零的MAC地址。 </p>
 
-<p class="reference">被这些函数引用 <a class="el" href="mac__address_8hpp_source.html#l00059">mac_address()</a>, <a class="el" href="mac__address_8hpp_source.html#l00110">operator!=()</a> , 以及 <a class="el" href="mac__address_8hpp_source.html#l00103">operator==()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="mac__address_8hpp_source.html#l00104">mac_address()</a>, <a class="el" href="mac__address_8hpp_source.html#l00155">operator!=()</a> , 以及 <a class="el" href="mac__address_8hpp_source.html#l00148">operator==()</a>.</p>
 
 </div>
 </div>
@@ -215,9 +269,9 @@ static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d3
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="mac__address_8hpp_source.html">mac_address.hpp</a> 第 <a class="el" href="mac__address_8hpp_source.html#l00059">59</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mac__address_8hpp_source.html">mac_address.hpp</a> 第 <a class="el" href="mac__address_8hpp_source.html#l00104">104</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="mac__address_8hpp_source.html#l00116">bytes()</a>, <a class="el" href="shift_8hpp_source.html#l00090">copy()</a>, <a class="el" href="#aa1ded32d3a7d520511d240cf937373b0">mac_address()</a> , 以及 <a class="el" href="mac__address_8hpp_source.html#l00041">MAC_LEN</a>.</p>
+<p class="reference">引用了 <a class="el" href="mac__address_8hpp_source.html#l00161">bytes()</a>, <a class="el" href="shift_8hpp_source.html#l00090">copy()</a>, <a class="el" href="#aa1ded32d3a7d520511d240cf937373b0">mac_address()</a> , 以及 <a class="el" href="mac__address_8hpp_source.html#l00086">MAC_LEN</a>.</p>
 
 </div>
 </div>
@@ -252,9 +306,9 @@ static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d3
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="mac__address_8hpp_source.html">mac_address.hpp</a> 第 <a class="el" href="mac__address_8hpp_source.html#l00065">65</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mac__address_8hpp_source.html">mac_address.hpp</a> 第 <a class="el" href="mac__address_8hpp_source.html#l00110">110</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="mac__address_8hpp_source.html#l00116">bytes()</a>.</p>
+<p class="reference">引用了 <a class="el" href="mac__address_8hpp_source.html#l00161">bytes()</a>.</p>
 
 </div>
 </div>
@@ -285,9 +339,9 @@ static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d3
 <p>获取MAC地址字节数组 </p>
 <dl class="section return"><dt>返回</dt><dd>6字节数组的常量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="mac__address_8hpp_source.html">mac_address.hpp</a> 第 <a class="el" href="mac__address_8hpp_source.html#l00116">116</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mac__address_8hpp_source.html">mac_address.hpp</a> 第 <a class="el" href="mac__address_8hpp_source.html#l00161">161</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="mac__address_8hpp_source.html#l00059">mac_address()</a> , 以及 <a class="el" href="mac__address_8hpp_source.html#l00065">mac_address()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="mac__address_8hpp_source.html#l00104">mac_address()</a> , 以及 <a class="el" href="mac__address_8hpp_source.html#l00110">mac_address()</a>.</p>
 
 </div>
 </div>
@@ -323,7 +377,7 @@ static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d3
 </dl>
 <dl class="section return"><dt>返回</dt><dd>地址不同返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="mac__address_8hpp_source.html">mac_address.hpp</a> 第 <a class="el" href="mac__address_8hpp_source.html#l00110">110</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mac__address_8hpp_source.html">mac_address.hpp</a> 第 <a class="el" href="mac__address_8hpp_source.html#l00155">155</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="#aa1ded32d3a7d520511d240cf937373b0">mac_address()</a>.</p>
 
@@ -361,7 +415,7 @@ static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d3
 </dl>
 <dl class="section return"><dt>返回</dt><dd>地址相同返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="mac__address_8hpp_source.html">mac_address.hpp</a> 第 <a class="el" href="mac__address_8hpp_source.html#l00103">103</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mac__address_8hpp_source.html">mac_address.hpp</a> 第 <a class="el" href="mac__address_8hpp_source.html#l00148">148</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="#aa1ded32d3a7d520511d240cf937373b0">mac_address()</a>.</p>
 

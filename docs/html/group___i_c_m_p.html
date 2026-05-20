@@ -1,0 +1,276 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: ICMP</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('group___i_c_m_p.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ICMP </div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>ICMP协议实现  
+<a href="#details">更多...</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:icmp_5Fheader" id="r_icmp_5Fheader"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structicmp__header.html">icmp_header</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ICMP头部结构定义  <a href="structicmp__header.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:icmp_5Fsocket" id="r_icmp_5Fsocket"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classicmp__socket.html">icmp_socket</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ICMP Socket类  <a href="classicmp__socket.html#details">更多...</a><br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>ICMP协议实现 </p>
+<p>提供了ICMP（Internet控制消息协议）Socket的实现， 支持Ping和Traceroute等网络诊断功能。</p>
+<h1 class="doxsection"><a class="anchor" id="standards"></a>
+遵循的国际标准</h1>
+<p>本实现严格遵循以下网络诊断协议与相关标准规范：</p>
+<p><b>ICMP 核心协议规范：</b></p><ul>
+<li>**IETF STD 5 / RFC 792**：Internet 控制消息协议（ICMP） <a href="https://www.rfc-editor.org/rfc/rfc792.html">https://www.rfc-editor.org/rfc/rfc792.html</a></li>
+<li>**IETF RFC 1122**：Internet 主机要求 — 通信层（§3.2.2 ICMP 要求） <a href="https://www.rfc-editor.org/rfc/rfc1122.html">https://www.rfc-editor.org/rfc/rfc1122.html</a></li>
+<li>**IETF RFC 1812**：IPv4 路由器要求（§4.3 ICMP 协议处理） <a href="https://www.rfc-editor.org/rfc/rfc1812.html">https://www.rfc-editor.org/rfc/rfc1812.html</a></li>
+</ul>
+<p><b>ICMP 扩展与更新：</b></p><ul>
+<li>**IETF RFC 4884**：ICMP 多部分消息扩展 <a href="https://www.rfc-editor.org/rfc/rfc4884.html">https://www.rfc-editor.org/rfc/rfc4884.html</a></li>
+<li>**IETF RFC 6918**：ICMP 代码注册表更新 <a href="https://www.rfc-editor.org/rfc/rfc6918.html">https://www.rfc-editor.org/rfc/rfc6918.html</a></li>
+</ul>
+<p><b>ICMP 参数注册：</b></p><ul>
+<li>**IANA ICMP Parameters Registry**：ICMP 类型和代码注册表 <a href="https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml">https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml</a></li>
+</ul>
+<p><b>IPv4 协议标准：</b></p><ul>
+<li>**IETF RFC 791**：Internet 协议（IPv4） <a href="https://www.rfc-editor.org/rfc/rfc791.html">https://www.rfc-editor.org/rfc/rfc791.html</a></li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="icmp_message_types"></a>
+ICMP 消息类型</h1>
+<p>根据 RFC 792 和 IANA 注册表，ICMP 消息类型分类如下：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">类型值  </th><th class="markdownTableHeadNone">名称  </th><th class="markdownTableHeadNone">用途  </th><th class="markdownTableHeadNone">本实现支持  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">0  </td><td class="markdownTableBodyNone">Echo Reply  </td><td class="markdownTableBodyNone">Ping 响应  </td><td class="markdownTableBodyNone">✓  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">3  </td><td class="markdownTableBodyNone">Destination Unreachable  </td><td class="markdownTableBodyNone">目标不可达  </td><td class="markdownTableBodyNone">-  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">5  </td><td class="markdownTableBodyNone">Redirect  </td><td class="markdownTableBodyNone">路由重定向  </td><td class="markdownTableBodyNone">-  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">8  </td><td class="markdownTableBodyNone">Echo Request  </td><td class="markdownTableBodyNone">Ping 请求  </td><td class="markdownTableBodyNone">✓  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">11  </td><td class="markdownTableBodyNone">Time Exceeded  </td><td class="markdownTableBodyNone">TTL 超时（Traceroute 依赖）  </td><td class="markdownTableBodyNone">✓  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">13  </td><td class="markdownTableBodyNone">Timestamp  </td><td class="markdownTableBodyNone">时间戳请求  </td><td class="markdownTableBodyNone">-  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">14  </td><td class="markdownTableBodyNone">Timestamp Reply  </td><td class="markdownTableBodyNone">时间戳响应  </td><td class="markdownTableBodyNone">-  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="icmp_header_format"></a>
+ICMP 头部格式</h1>
+<p>根据 RFC 792 §2，ICMP 头部由以下字段组成：</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">字段  </th><th class="markdownTableHeadNone">大小  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Type  </td><td class="markdownTableBodyNone">8 位  </td><td class="markdownTableBodyNone">消息类型（0=Echo Reply, 8=Echo Request, 11=TTL Exceeded）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Code  </td><td class="markdownTableBodyNone">8 位  </td><td class="markdownTableBodyNone">消息子类型（通常为 0）  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Checksum  </td><td class="markdownTableBodyNone">16 位  </td><td class="markdownTableBodyNone">整个 ICMP 消息的校验和（RFC 1071 算法）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">ID  </td><td class="markdownTableBodyNone">16 位  </td><td class="markdownTableBodyNone">标识符，用于匹配请求和响应  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Sequence  </td><td class="markdownTableBodyNone">16 位  </td><td class="markdownTableBodyNone">序列号，用于匹配请求和响应  </td></tr>
+</table>
+<p>**Echo Request/Reply 消息**（RFC 792 §3.2）：</p><ul>
+<li>数据部分可选，内容任意</li>
+<li>响应的标识符和序列号必须与请求匹配</li>
+<li>数据部分原样返回</li>
+</ul>
+<p>**Time Exceeded 消息**（RFC 792 §3.3）：</p><ul>
+<li>Code 0：TTL 在传输中耗尽</li>
+<li>Code 1：分片重组超时</li>
+<li>包含原始数据包的 IP 头部和前 8 字节</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="checksum_algorithm"></a>
+校验和算法</h1>
+<p>根据 RFC 1071，ICMP 校验和计算步骤：</p><ol type="1">
+<li>将校验和字段清零</li>
+<li>将数据按 16 位字累加</li>
+<li>将进位加到低 16 位</li>
+<li>结果取反码</li>
+</ol>
+<h1 class="doxsection"><a class="anchor" id="ping_operation"></a>
+Ping 操作原理</h1>
+<p>Ping 使用 ICMP Echo Request/Reply 消息测试网络连通性：</p>
+<p>**工作流程**：</p><ol type="1">
+<li>发送方构造 ICMP Echo Request（Type=8），包含 ID 和序列号</li>
+<li>目标主机收到后返回 ICMP Echo Reply（Type=0）</li>
+<li>发送方根据 ID 和序列号匹配响应</li>
+<li>计算往返时间（RTT = 接收时间 - 发送时间）</li>
+</ol>
+<p>**测量指标**： </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">指标  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">RTT  </td><td class="markdownTableBodyNone">往返时间（毫秒）  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Reply TTL  </td><td class="markdownTableBodyNone">响应数据包的剩余 TTL 值  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Reply Size  </td><td class="markdownTableBodyNone">响应数据大小（字节）  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="traceroute_operation"></a>
+Traceroute 操作原理</h1>
+<p>Traceroute 利用 IP TTL 和 ICMP Time Exceeded 探测网络路径：</p>
+<p>**工作流程**：</p><ol type="1">
+<li>发送 TTL=1 的 UDP 或 ICMP Echo Request 数据包</li>
+<li>第一跳路由器丢弃数据包（TTL=0），返回 ICMP Time Exceeded（Type=11）</li>
+<li>发送方从 Time Exceeded 消息中提取路由器 IP 地址</li>
+<li>逐步增加 TTL（2, 3, ...），重复以上步骤</li>
+<li>当数据包到达目标主机时，返回 ICMP Echo Reply（Type=0）或 UDP Port Unreachable</li>
+</ol>
+<p>**跳点信息**： </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">字段  </th><th class="markdownTableHeadNone">说明  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">address  </td><td class="markdownTableBodyNone">该跳路由器的 IP 地址  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">rtt[3]  </td><td class="markdownTableBodyNone">三次探测的往返时间  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">reached  </td><td class="markdownTableBodyNone">是否已到达目标  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="usage_examples"></a>
+使用示例</h1>
+<p>Ping 操作： </p><div class="fragment"><div class="line"><a class="code hl_class" href="classicmp__socket.html">icmp_socket</a> sock;</div>
+<div class="line">sock.<a class="code hl_function" href="classicmp__socket.html#a5e22d67c0aa794d751b4bee655c762af">open</a>();</div>
+<div class="line"><span class="keyword">auto</span> dest = <a class="code hl_function" href="classip__address.html#add2ce58669f6042593d6970743e7311a">ip_address::parse</a>(<span class="stringliteral">&quot;8.8.8.8&quot;</span>);</div>
+<div class="line"><span class="keywordflow">if</span> (dest) {</div>
+<div class="line">    <span class="keyword">auto</span> result = sock.<a class="code hl_function" href="classicmp__socket.html#a2635f1da346bb2d7473d692cd960497f">ping</a>(*dest, <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>(2000));</div>
+<div class="line">    <span class="keywordflow">if</span> (result.success) {</div>
+<div class="line">        <a class="code hl_function" href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a>(<span class="stringliteral">&quot;{}: bytes={} time={}ms TTL={}&quot;</span>,</div>
+<div class="line">                dest-&gt;to_string(), result.reply_size,</div>
+<div class="line">                result.rtt.count(), result.reply_ttl);</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="ttc" id="aclassicmp__socket_html"><div class="ttname"><a href="classicmp__socket.html">icmp_socket</a></div><div class="ttdoc">ICMP Socket类</div><div class="ttdef"><b>定义</b> <a href="icmp__socket_8hpp_source.html#l00202">icmp_socket.hpp:202</a></div></div>
+<div class="ttc" id="aclassicmp__socket_html_a2635f1da346bb2d7473d692cd960497f"><div class="ttname"><a href="classicmp__socket.html#a2635f1da346bb2d7473d692cd960497f">icmp_socket::ping</a></div><div class="ttdeci">ping_result ping(const ip_address &amp;dest, milliseconds timeout, uint16_t sequence=0, const void *data=nullptr, size_t data_len=0)</div><div class="ttdoc">执行Ping操作</div></div>
+<div class="ttc" id="aclassicmp__socket_html_a5e22d67c0aa794d751b4bee655c762af"><div class="ttname"><a href="classicmp__socket.html#a5e22d67c0aa794d751b4bee655c762af">icmp_socket::open</a></div><div class="ttdeci">void open()</div><div class="ttdoc">打开ICMP socket</div></div>
+<div class="ttc" id="aclassip__address_html_add2ce58669f6042593d6970743e7311a"><div class="ttname"><a href="classip__address.html#add2ce58669f6042593d6970743e7311a">ip_address::parse</a></div><div class="ttdeci">static optional&lt; ip_address &gt; parse(const string &amp;host, ports port=ports{}) noexcept</div><div class="ttdoc">从字符串解析IP地址</div></div>
+<div class="ttc" id="agroup___console_i_o_html_gadd269b1d24f35618e1eb0ea848dbf6a0"><div class="ttname"><a href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00689">console.hpp:689</a></div></div>
+<div class="ttc" id="agroup___duration_html_ga0c9e480a0040ed5977448019fb74cd55"><div class="ttname"><a href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></div><div class="ttdeci">duration&lt; int64_t, milli &gt; milliseconds</div><div class="ttdoc">毫秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00157">duration.hpp:157</a></div></div>
+</div><!-- fragment --><p>Traceroute 操作： </p><div class="fragment"><div class="line"><span class="keyword">auto</span> hops = sock.<a class="code hl_function" href="classicmp__socket.html#a5d7a7d636558ba6fb91d5d4e1ff2811d">traceroute</a>(*dest, 30, <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>(1000), 3);</div>
+<div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; hops.size(); ++i) {</div>
+<div class="line">    <a class="code hl_function" href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a>(<span class="stringliteral">&quot;{}: {} (reached={})&quot;</span>, i + 1,</div>
+<div class="line">            hops[i].address.is_valid() ? hops[i].address.to_string() : <span class="stringliteral">&quot;*&quot;</span>,</div>
+<div class="line">            hops[i].reached);</div>
+<div class="line">}</div>
+<div class="ttc" id="aclassicmp__socket_html_a5d7a7d636558ba6fb91d5d4e1ff2811d"><div class="ttname"><a href="classicmp__socket.html#a5d7a7d636558ba6fb91d5d4e1ff2811d">icmp_socket::traceroute</a></div><div class="ttdeci">vector&lt; traceroute_hop &gt; traceroute(const ip_address &amp;dest, int max_hops=30, milliseconds probe_timeout=milliseconds(1000), int probes_per_hop=3)</div><div class="ttdoc">执行Traceroute操作</div></div>
+</div><!-- fragment --><dl class="section note"><dt>注解</dt><dd>Ping 和 Traceroute 是网络诊断中最常用的工具， Ping 用于测试连通性和延迟，Traceroute 用于分析网络路径。</dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>原始套接字操作需要 root/管理员权限。 某些网络环境可能过滤 ICMP 数据包，导致 Ping/Traceroute 结果不准确。 Traceroute 的中间路由器可能不响应 ICMP Time Exceeded（显示为 *）。</dd></dl>
+<dl class="section see"><dt>参见</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc792.html">https://www.rfc-editor.org/rfc/rfc792.html</a> </dd>
+<dd>
+<a href="https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml">https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml</a> </dd>
+<dd>
+<a href="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol">https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol</a> </dd>
+<dd>
+<a href="https://en.wikipedia.org/wiki/Ping_(networking_utility)">https://en.wikipedia.org/wiki/Ping_(networking_utility)</a> </dd>
+<dd>
+<a href="https://en.wikipedia.org/wiki/Traceroute">https://en.wikipedia.org/wiki/Traceroute</a> </dd></dl>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['端口号注册表_0',['IANA 端口号注册表',['../structports.html#port_registry',1,'']]]
+  ['类型与特性_20typeinfo_0',['🧬 类型与特性 (TypeInfo)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md28',1,'']]]
 ];

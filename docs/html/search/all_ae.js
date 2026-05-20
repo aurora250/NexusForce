@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['视图_0',['视图',['../group___view.html',1,'']]]
+  ['解析器架构_0',['解析器架构',['../classyaml__parser.html#parser_architecture',1,'']]]
 ];

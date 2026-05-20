@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['类型与特性_20typeinfo_0',['🧬 类型与特性 (TypeInfo)',['../index.html#autotoc_md31',1,'']]]
+  ['红黑树性质_0',['红黑树性质',['../group___r_b_tree.html#rb_tree_properties',1,'']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['颜色分量定义_0',['颜色分量定义',['../group___color.html#color_components',1,'']]],
-  ['颜色_1',['颜色',['../group___color.html',1,'']]]
+  ['预定义颜色常量_0',['预定义颜色常量',['../group___color.html#named_colors',1,'']]]
 ];

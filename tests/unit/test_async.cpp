@@ -275,11 +275,21 @@ namespace {
 
     void lifecycle_hook(thread::hook::point p, thread::id) {
         switch (p) {
-        case thread::hook::point::before_create: ++g_before_create; break;
-        case thread::hook::point::after_create: ++g_after_create; break;
-        case thread::hook::point::thread_start: ++g_thread_start; break;
-        case thread::hook::point::thread_end: ++g_thread_end; break;
-        case thread::hook::point::before_destroy: ++g_before_destroy; break;
+            case thread::hook::point::before_create:
+                ++g_before_create;
+                break;
+            case thread::hook::point::after_create:
+                ++g_after_create;
+                break;
+            case thread::hook::point::thread_start:
+                ++g_thread_start;
+                break;
+            case thread::hook::point::thread_end:
+                ++g_thread_end;
+                break;
+            case thread::hook::point::before_destroy:
+                ++g_before_destroy;
+                break;
         }
     }
 
@@ -288,7 +298,7 @@ namespace {
 
     void multi_hook_a(thread::hook::point, thread::id) { ++g_multi_count_a; }
     void multi_hook_b(thread::hook::point, thread::id) { ++g_multi_count_b; }
-}
+} // namespace
 
 TEST(ThreadHookTest, AddRemoveInvoke) {
     g_hook_call_count = 0;

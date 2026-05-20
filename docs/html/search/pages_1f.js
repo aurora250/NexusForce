@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['事务中止状态码_0',['事务中止状态码',['../group___memory_order.html#rtm_abort_codes',1,'']]]
+  ['会话流程_0',['SMTP 会话流程',['../group___s_m_t_p.html#smtp_session',1,'']]]
 ];

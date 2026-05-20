@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['合成规则_0',['Alpha 合成规则',['../group___color.html#alpha_compositing',1,'']]]
+  ['响应头_0',['CORS 响应头',['../group___h_t_t_p.html#cors_headers',1,'']]],
+  ['响应码分类_1',['SMTP 响应码分类',['../group___s_m_t_p.html#smtp_response_codes',1,'']]]
 ];

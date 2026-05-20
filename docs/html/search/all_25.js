@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['三角函数实现_0',['三角函数实现',['../group___math_functions.html#trigonometric_functions',1,'']]]
+  ['临时缓冲区_0',['临时缓冲区',['../group___temporary_buffer.html',1,'']]]
 ];

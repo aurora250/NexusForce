@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['十六进制表示_0',['十六进制表示',['../group___color.html#hex_format',1,'']]]
+  ['压缩_20compress_0',['📦 压缩 (Compress)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md30',1,'']]]
 ];

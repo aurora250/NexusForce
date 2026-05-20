@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['三角函数实现_0',['三角函数实现',['../group___math_functions.html#trigonometric_functions',1,'']]]
+  ['二进制与十进制前缀对比_0',['二进制与十进制前缀对比',['../group___byte_size.html#binary_vs_decimal',1,'']]]
 ];

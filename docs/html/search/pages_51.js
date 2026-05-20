@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['文件系统_20file_0',['📁 文件系统 (File)',['../index.html#autotoc_md22',1,'']]],
-  ['文档_1',['📚 文档',['../index.html#autotoc_md45',1,'']]]
+  ['方根函数实现_0',['方根函数实现',['../group___math_functions.html#root_functions',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📖_20项目简介_0',['📖 项目简介',['../index.html#autotoc_md4',1,'']]]
+  ['🔌_20插件系统_20plugin_0',['🔌 插件系统 (Plugin)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md31',1,'']]]
 ];

@@ -19,7 +19,7 @@ var searchData=
   ['size_5fvalue_16',['size_value',['../structaligned__union.html#a438bb9ca11dee9742a583f6ba3d011c6',1,'aligned_union']]],
   ['socket_5f_17',['socket_',['../classtcp__client__base.html#ae3f0cb8189dc0880404cdb1c331197a8',1,'tcp_client_base']]],
   ['space_5fsign_18',['space_sign',['../structformat__options.html#a16efbb924767d50e491ef5379c205da4',1,'format_options']]],
-  ['spliter_19',['spliter',['../classpath.html#a83162df475448fe25f86e8ae54bcb02a',1,'path']]],
+  ['spliter_19',['spliter',['../group___file.html#ga83162df475448fe25f86e8ae54bcb02a',1,'path']]],
   ['src_5faddr_20',['src_addr',['../structip__header.html#aae09c570dd68d80b20d5e765adb4fa1e',1,'ip_header']]],
   ['start_5ftime_21',['start_time',['../structtask__info.html#a16acfc5751d1fd71ef6bf34ae7658fe9',1,'task_info::start_time'],['../structclick.html#a11b3d1779cb59165ade637b132ad61b1',1,'click::start_time']]],
   ['started_22',['started',['../structclick.html#a408ee0a1d7de299a9dd91a9f40092e93',1,'click']]],

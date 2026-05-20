@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['algorithm_0',['📐 算法库 (Algorithm)',['../index.html#autotoc_md36',1,'']]],
-  ['alpha_20合成规则_1',['Alpha 合成规则',['../group___color.html#alpha_compositing',1,'']]],
-  ['ansi_20256_20色调色板_2',['ANSI 256 色调色板',['../group___color.html#ansi_256_palette',1,'']]],
-  ['ansi_208_2016_20色_3',['基本 ANSI 8/16 色',['../group___color.html#basic_ansi_colors',1,'']]],
-  ['async_4',['🔄 并发与异步 (Async)',['../index.html#autotoc_md19',1,'']]]
+  ['compress_0',['📦 压缩 (Compress)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md30',1,'']]],
+  ['container_1',['📦 容器 (Container)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md17',1,'']]],
+  ['cookie_20属性说明_2',['Cookie 属性说明',['../group___h_t_t_p.html#cookie_attributes',1,'']]],
+  ['cors_20响应头_3',['CORS 响应头',['../group___h_t_t_p.html#cors_headers',1,'']]]
 ];

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['实现细节_0',['实现细节',['../group___h_t_t_p.html#implementation_details',1,'实现细节'],['../classyaml__parser.html#parser_implementation',1,'实现细节']]],
-  ['实用程序语法指南_1',['POSIX 实用程序语法指南',['../group___command_line.html#guideline_reference',1,'']]]
+  ['家族对比_0',['SHA-2 家族对比',['../group___s_h_a256.html#comparison',1,'']]]
 ];

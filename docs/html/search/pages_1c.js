@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['❗_20异常处理_20exception_0',['❗ 异常处理 (Exception)',['../index.html#autotoc_md35',1,'']]]
+  ['事务中止状态码_0',['事务中止状态码',['../group___memory_order.html#rtm_abort_codes',1,'']]]
 ];

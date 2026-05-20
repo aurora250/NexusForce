@@ -14,11 +14,6 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @addtogroup Network 网络通信
- * @{
- */
-
-/**
  * @addtogroup NetworkUtil 网络通信工具
  * @{
  */
@@ -251,8 +246,6 @@ struct NEFORCE_API url : iobject<url> {
 };
 
 /** @} */ // NetworkUtil
-
-/** @} */ // Network
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_UTIL_URL_HPP__

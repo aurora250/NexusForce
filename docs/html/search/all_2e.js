@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['仿函数_0',['仿函数',['../group___functor.html',1,'']]]
+  ['传输协议_0',['DNS 传输协议',['../group___d_n_s.html#dns_transport',1,'']]]
 ];

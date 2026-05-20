@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['临时缓冲区_0',['临时缓冲区',['../group___temporary_buffer.html',1,'']]]
+  ['二进制与十进制前缀对比_0',['二进制与十进制前缀对比',['../group___byte_size.html#binary_vs_decimal',1,'']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['iana_20端口号注册表_0',['IANA 端口号注册表',['../structports.html#port_registry',1,'']]],
-  ['ieee_201541_202021_20建议_1',['IEEE 1541-2021 建议',['../group___byte_size.html#ieee_1541',1,'']]]
+  ['json_20值类型定义_0',['JSON 值类型定义',['../group___json_config.html#json_types',1,'']]],
+  ['json_20兼容性_1',['YAML 1.2 与 JSON 兼容性',['../group___yaml_config.html#yaml_vs_json',1,'']]]
 ];

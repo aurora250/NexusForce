@@ -16,11 +16,6 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @addtogroup Network 网络通信
- * @{
- */
-
-/**
  * @defgroup SSL SSL/TLS
  * @brief SSL/TLS相关组件
  * @{
@@ -251,8 +246,6 @@ public:
 };
 
 /** @} */ // SSL/TLS
-
-/** @} */ // Network
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_SSL_SSL_CONTEXT_HPP__

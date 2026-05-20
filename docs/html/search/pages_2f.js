@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['双哈希技术_0',['双哈希技术',['../group___bloom_filter.html#double_hashing',1,'']]]
+  ['同步模式_0',['同步模式',['../group___memory_order.html#synchronization_patterns',1,'']]]
 ];

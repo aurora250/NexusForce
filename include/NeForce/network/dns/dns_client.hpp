@@ -19,11 +19,6 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @addtogroup Network 网络通信
- * @{
- */
-
-/**
  * @addtogroup DNS DNS
  * @{
  */
@@ -193,8 +188,6 @@ public:
 };
 
 /** @} */ // DNS
-
-/** @} */ // Network
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_DNS_DNS_CLIENT_HPP__

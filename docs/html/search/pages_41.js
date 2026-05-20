@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['对数函数实现_0',['对数函数实现',['../group___math_functions.html#logarithm_implementation',1,'']]]
+  ['局限性_0',['局限性',['../group___bloom_filter.html#limitations',1,'']]]
 ];

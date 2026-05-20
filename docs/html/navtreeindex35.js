@@ -1,11 +1,5 @@
 var NAVTREEINDEX35 =
 {
-"structis__empty.html":[2,104,7,24],
-"structis__enum.html":[2,104,7,8],
-"structis__final.html":[2,104,7,27],
-"structis__floating__point.html":[2,104,2,9],
-"structis__function.html":[2,104,7,16],
-"structis__fundamental.html":[2,104,7,12],
 "structis__hash.html":[2,36,6],
 "structis__implicitly__default__constructible.html":[2,104,8,6],
 "structis__incrementible.html":[2,104,15,2],
@@ -249,5 +243,11 @@ var NAVTREEINDEX35 =
 "structowner__less_3_01weak__ptr_3_01_t_01_4_01_4.html#ac8cd31ac55b018e03af5041c91b9b015":[2,62,3,1],
 "structowner__less_3_01weak__ptr_3_01_t_01_4_01_4.html#acb55b07ecf8be10a9fb8413e9e7864ba":[2,62,3,0],
 "structpackage.html":[2,104,2,1],
-"structpair.html":[2,118,0]
+"structpair.html":[2,118,0],
+"structpair.html#a1165835f93274f3d06671688adcff8cc":[2,118,0,4],
+"structpair.html#a2834474907baa69a5d8246d0864ea184":[2,118,0,13],
+"structpair.html#a2a54da78ca8f14cfc372f46ee6cd23be":[2,118,0,8],
+"structpair.html#a35afeb5508ec0e09080875af07985576":[2,118,0,14],
+"structpair.html#a4228dcd6c554a802e1976884534bdace":[2,118,0,18],
+"structpair.html#a5fc8fdee8d793958cc55b507f85eaafe":[2,118,0,12]
 };

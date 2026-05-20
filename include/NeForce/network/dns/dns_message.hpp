@@ -23,12 +23,6 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Network 网络通信
- * @brief 网络通信相关组件
- * @{
- */
-
-/**
  * @defgroup DNS DNS
  * @brief DNS组件
  *
@@ -216,8 +210,6 @@ enum class dns_response : uint8_t {
 
 /** @} */ // DNS
 
-/** @} */ // Network
-
 /**
  * @addtogroup Exceptions 异常类集
  * @{
@@ -277,11 +269,6 @@ public:
 };
 
 /** @} */ // Exceptions
-
-/**
- * @addtogroup Network 网络通信
- * @{
- */
 
 /**
  * @addtogroup DNS DNS
@@ -378,8 +365,6 @@ struct dns_header {
 };
 
 /** @} */ // DNS
-
-/** @} */ // Network
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_DNS_DNS_MESSAGE_HPP__

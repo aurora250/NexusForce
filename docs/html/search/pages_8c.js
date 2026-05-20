@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📋_20前置依赖_0',['📋 前置依赖',['../index.html#autotoc_md40',1,'']]]
+  ['📡_20标准合规_0',['📡 标准合规',['../md__m_a_i_n_p_a_g_e.html#autotoc_md7',1,'']]]
 ];

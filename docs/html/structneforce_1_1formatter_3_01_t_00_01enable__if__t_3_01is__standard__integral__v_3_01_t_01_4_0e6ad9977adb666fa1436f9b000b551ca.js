@@ -1,4 +1,0 @@
-var structneforce_1_1formatter_3_01_t_00_01enable__if__t_3_01is__standard__integral__v_3_01_t_01_4_0e6ad9977adb666fa1436f9b000b551ca =
-[
-    [ "operator()", "structneforce_1_1formatter_3_01_t_00_01enable__if__t_3_01is__standard__integral__v_3_01_t_01_4_0e6ad9977adb666fa1436f9b000b551ca.html#a81a412c4bfe54377a7e60c8b2bef3c25", null ]
-];

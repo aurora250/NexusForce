@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['记录类型_0',['DNS 记录类型',['../group___d_n_s.html#dns_record_types',1,'']]]
+  ['误报率估算_0',['误报率估算',['../group___bloom_filter.html#false_positive_estimation',1,'']]]
 ];

@@ -45,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="107" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" bodystart="107" bodyend="111"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="208" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" bodystart="208" bodyend="212"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -89,7 +89,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="136" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="237" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classicmp__socket_1a09a10d0acc27a4667ca2e3bdccfa3553" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -127,7 +127,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="139" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="240" column="10"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -144,7 +144,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="146" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="247" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classicmp__socket_1a44e15ef51b407c62986da1db429c56f2" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="152" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" bodystart="152" bodyend="153"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="253" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" bodystart="253" bodyend="254"/>
       </memberdef>
       <memberdef kind="function" id="classicmp__socket_1a5e22d67c0aa794d751b4bee655c762af" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -198,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="161" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="262" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classicmp__socket_1a2635f1da346bb2d7473d692cd960497f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structicmp__socket_1_1ping__result" kindref="compound">ping_result</ref></type>
@@ -280,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="174" column="17"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="275" column="17"/>
         <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
       </memberdef>
       <memberdef kind="function" id="classicmp__socket_1a5d7a7d636558ba6fb91d5d4e1ff2811d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -351,7 +351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="188" column="12"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="289" column="12"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -367,44 +367,6 @@
 </listitem><listitem><para>TTL设置和读取</para>
 </listitem></itemizedlist>
 </para>
-<para>使用示例： <programlisting><codeline><highlight class="comment">//<sp/>Ping示例</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"><ref refid="classicmp__socket_1aac2cac2399e8a99f0b5ba883d800ddeb" kindref="member">icmp_socket</ref><sp/>sock;</highlight></codeline>
-<codeline><highlight class="normal">sock.<ref refid="classicmp__socket_1a5e22d67c0aa794d751b4bee655c762af" kindref="member">open</ref>(AF_INET);</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dest<sp/>=<sp/><ref refid="classip__address_1add2ce58669f6042593d6970743e7311a" kindref="member">ip_address::parse</ref>(</highlight><highlight class="stringliteral">&quot;8.8.8.8&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(dest)<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>sock.<ref refid="classicmp__socket_1a2635f1da346bb2d7473d692cd960497f" kindref="member">ping</ref>(*dest,<sp/><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref>(2000));</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(result.success)<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;Reply<sp/>from<sp/>&quot;</highlight><highlight class="normal">,<sp/>result.destination,</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;:<sp/>bytes=&quot;</highlight><highlight class="normal">,<sp/>result.reply_size,</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;<sp/>time=&quot;</highlight><highlight class="normal">,<sp/>result.rtt.count(),<sp/></highlight><highlight class="stringliteral">&quot;ms&quot;</highlight><highlight class="normal">,</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;<sp/>TTL=&quot;</highlight><highlight class="normal">,<sp/>result.reply_ttl);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;Request<sp/>timed<sp/>out&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline><highlight class="normal">}</highlight></codeline>
-<codeline><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>Traceroute示例</highlight><highlight class="normal"></highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>hops<sp/>=<sp/>sock.<ref refid="classicmp__socket_1a5d7a7d636558ba6fb91d5d4e1ff2811d" kindref="member">traceroute</ref>(*dest,<sp/>30,<sp/><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref>(1000),<sp/>3);</highlight></codeline>
-<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>hops.size();<sp/>++i)<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>hop<sp/>=<sp/>hops[i];</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1ga9f7ee8aaf17d6a59f5fce3710fd1dce9" kindref="member">print</ref>(i<sp/>+<sp/>1,<sp/></highlight><highlight class="stringliteral">&quot;.<sp/>&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(hop.address.is_valid())<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1ga9f7ee8aaf17d6a59f5fce3710fd1dce9" kindref="member">print</ref>(hop.address);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>j<sp/>=<sp/>0;<sp/>j<sp/>&lt;<sp/>3;<sp/>++j)<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(hop.rtt[j].count()<sp/>&gt;=<sp/>0)<sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1ga9f7ee8aaf17d6a59f5fce3710fd1dce9" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">,<sp/>hop.rtt[j].count(),<sp/></highlight><highlight class="stringliteral">&quot;ms&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1ga9f7ee8aaf17d6a59f5fce3710fd1dce9" kindref="member">print</ref>(</highlight><highlight class="stringliteral">&quot;<sp/>*&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>();</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;*<sp/>*<sp/>*&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(hop.reached)<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
-<codeline><highlight class="normal">}</highlight></codeline>
-</programlisting></para>
 <para><simplesect kind="note"><para>在Linux上需要root权限才能创建原始ICMP套接字。 Windows可能需要管理员权限。 </para>
 </simplesect>
 </para>
@@ -433,7 +395,7 @@
         <link refid="classsocket__base"/>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="101" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" bodystart="101" bodyend="190"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="202" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" bodystart="202" bodyend="291"/>
     <listofallmembers>
       <member refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" prot="public" virt="non-virtual"><scope>icmp_socket</scope><name>bind</name></member>
       <member refid="classsocket__base_1a5ca6bcc243acaaa75ab86a1e3316a996" prot="public" virt="virtual"><scope>icmp_socket</scope><name>close</name></member>

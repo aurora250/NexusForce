@@ -1,0 +1,239 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___i_c_m_p" kind="group">
+    <compoundname>ICMP</compoundname>
+    <title>ICMP</title>
+    <innerclass refid="structicmp__header" prot="public">icmp_header</innerclass>
+    <innerclass refid="classicmp__socket" prot="public">icmp_socket</innerclass>
+    <briefdescription>
+<para>ICMP协议实现 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供了ICMP（Internet控制消息协议）Socket的实现， 支持Ping和Traceroute等网络诊断功能。</para>
+<sect1 id="group___s_m_t_p_1standards">
+<title>遵循的国际标准</title><para>本实现严格遵循以下网络诊断协议与相关标准规范：</para>
+<para><bold>ICMP 核心协议规范：</bold><itemizedlist>
+<listitem><para>**IETF STD 5 / RFC 792**：Internet 控制消息协议（ICMP） <ulink url="https://www.rfc-editor.org/rfc/rfc792.html">https://www.rfc-editor.org/rfc/rfc792.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 1122**：Internet 主机要求 — 通信层（§3.2.2 ICMP 要求） <ulink url="https://www.rfc-editor.org/rfc/rfc1122.html">https://www.rfc-editor.org/rfc/rfc1122.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 1812**：IPv4 路由器要求（§4.3 ICMP 协议处理） <ulink url="https://www.rfc-editor.org/rfc/rfc1812.html">https://www.rfc-editor.org/rfc/rfc1812.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>ICMP 扩展与更新：</bold><itemizedlist>
+<listitem><para>**IETF RFC 4884**：ICMP 多部分消息扩展 <ulink url="https://www.rfc-editor.org/rfc/rfc4884.html">https://www.rfc-editor.org/rfc/rfc4884.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 6918**：ICMP 代码注册表更新 <ulink url="https://www.rfc-editor.org/rfc/rfc6918.html">https://www.rfc-editor.org/rfc/rfc6918.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>ICMP 参数注册：</bold><itemizedlist>
+<listitem><para>**IANA ICMP Parameters Registry**：ICMP 类型和代码注册表 <ulink url="https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml">https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>IPv4 协议标准：</bold><itemizedlist>
+<listitem><para>**IETF RFC 791**：Internet 协议（IPv4） <ulink url="https://www.rfc-editor.org/rfc/rfc791.html">https://www.rfc-editor.org/rfc/rfc791.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___i_c_m_p_1icmp_message_types">
+<title>ICMP 消息类型</title><para>根据 RFC 792 和 IANA 注册表，ICMP 消息类型分类如下：</para>
+<para><table rows="8" cols="4"><row>
+<entry thead="yes"><para>类型值  </para>
+</entry><entry thead="yes"><para>名称  </para>
+</entry><entry thead="yes"><para>用途  </para>
+</entry><entry thead="yes"><para>本实现支持  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>0  </para>
+</entry><entry thead="no"><para>Echo Reply  </para>
+</entry><entry thead="no"><para>Ping 响应  </para>
+</entry><entry thead="no"><para>✓  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>3  </para>
+</entry><entry thead="no"><para>Destination Unreachable  </para>
+</entry><entry thead="no"><para>目标不可达  </para>
+</entry><entry thead="no"><para>-  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>5  </para>
+</entry><entry thead="no"><para>Redirect  </para>
+</entry><entry thead="no"><para>路由重定向  </para>
+</entry><entry thead="no"><para>-  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>8  </para>
+</entry><entry thead="no"><para>Echo Request  </para>
+</entry><entry thead="no"><para>Ping 请求  </para>
+</entry><entry thead="no"><para>✓  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>11  </para>
+</entry><entry thead="no"><para>Time Exceeded  </para>
+</entry><entry thead="no"><para>TTL 超时（Traceroute 依赖）  </para>
+</entry><entry thead="no"><para>✓  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>13  </para>
+</entry><entry thead="no"><para>Timestamp  </para>
+</entry><entry thead="no"><para>时间戳请求  </para>
+</entry><entry thead="no"><para>-  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>14  </para>
+</entry><entry thead="no"><para>Timestamp Reply  </para>
+</entry><entry thead="no"><para>时间戳响应  </para>
+</entry><entry thead="no"><para>-  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___i_c_m_p_1icmp_header_format">
+<title>ICMP 头部格式</title><para>根据 RFC 792 §2，ICMP 头部由以下字段组成：</para>
+<para><table rows="6" cols="3"><row>
+<entry thead="yes"><para>字段  </para>
+</entry><entry thead="yes"><para>大小  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Type  </para>
+</entry><entry thead="no"><para>8 位  </para>
+</entry><entry thead="no"><para>消息类型（0=Echo Reply, 8=Echo Request, 11=TTL Exceeded）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Code  </para>
+</entry><entry thead="no"><para>8 位  </para>
+</entry><entry thead="no"><para>消息子类型（通常为 0）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Checksum  </para>
+</entry><entry thead="no"><para>16 位  </para>
+</entry><entry thead="no"><para>整个 ICMP 消息的校验和（RFC 1071 算法）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>ID  </para>
+</entry><entry thead="no"><para>16 位  </para>
+</entry><entry thead="no"><para>标识符，用于匹配请求和响应  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Sequence  </para>
+</entry><entry thead="no"><para>16 位  </para>
+</entry><entry thead="no"><para>序列号，用于匹配请求和响应  </para>
+</entry></row>
+</table>
+</para>
+<para>**Echo Request/Reply 消息**（RFC 792 §3.2）：<itemizedlist>
+<listitem><para>数据部分可选，内容任意</para>
+</listitem><listitem><para>响应的标识符和序列号必须与请求匹配</para>
+</listitem><listitem><para>数据部分原样返回</para>
+</listitem></itemizedlist>
+</para>
+<para>**Time Exceeded 消息**（RFC 792 §3.3）：<itemizedlist>
+<listitem><para>Code 0：TTL 在传输中耗尽</para>
+</listitem><listitem><para>Code 1：分片重组超时</para>
+</listitem><listitem><para>包含原始数据包的 IP 头部和前 8 字节</para>
+</listitem></itemizedlist>
+</para>
+</sect1>
+<sect1 id="group___i_c_m_p_1checksum_algorithm">
+<title>校验和算法</title><para>根据 RFC 1071，ICMP 校验和计算步骤：<orderedlist>
+<listitem><para>将校验和字段清零</para>
+</listitem><listitem><para>将数据按 16 位字累加</para>
+</listitem><listitem><para>将进位加到低 16 位</para>
+</listitem><listitem><para>结果取反码</para>
+</listitem></orderedlist>
+</para>
+</sect1>
+<sect1 id="group___i_c_m_p_1ping_operation">
+<title>Ping 操作原理</title><para>Ping 使用 ICMP Echo Request/Reply 消息测试网络连通性：</para>
+<para>**工作流程**：<orderedlist>
+<listitem><para>发送方构造 ICMP Echo Request（Type=8），包含 ID 和序列号</para>
+</listitem><listitem><para>目标主机收到后返回 ICMP Echo Reply（Type=0）</para>
+</listitem><listitem><para>发送方根据 ID 和序列号匹配响应</para>
+</listitem><listitem><para>计算往返时间（RTT = 接收时间 - 发送时间）</para>
+</listitem></orderedlist>
+</para>
+<para>**测量指标**： <table rows="4" cols="2"><row>
+<entry thead="yes"><para>指标  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>RTT  </para>
+</entry><entry thead="no"><para>往返时间（毫秒）  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Reply TTL  </para>
+</entry><entry thead="no"><para>响应数据包的剩余 TTL 值  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>Reply Size  </para>
+</entry><entry thead="no"><para>响应数据大小（字节）  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___i_c_m_p_1traceroute_operation">
+<title>Traceroute 操作原理</title><para>Traceroute 利用 IP TTL 和 ICMP Time Exceeded 探测网络路径：</para>
+<para>**工作流程**：<orderedlist>
+<listitem><para>发送 TTL=1 的 UDP 或 ICMP Echo Request 数据包</para>
+</listitem><listitem><para>第一跳路由器丢弃数据包（TTL=0），返回 ICMP Time Exceeded（Type=11）</para>
+</listitem><listitem><para>发送方从 Time Exceeded 消息中提取路由器 IP 地址</para>
+</listitem><listitem><para>逐步增加 TTL（2, 3, ...），重复以上步骤</para>
+</listitem><listitem><para>当数据包到达目标主机时，返回 ICMP Echo Reply（Type=0）或 UDP Port Unreachable</para>
+</listitem></orderedlist>
+</para>
+<para>**跳点信息**： <table rows="4" cols="2"><row>
+<entry thead="yes"><para>字段  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>address  </para>
+</entry><entry thead="no"><para>该跳路由器的 IP 地址  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>rtt[3]  </para>
+</entry><entry thead="no"><para>三次探测的往返时间  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>reached  </para>
+</entry><entry thead="no"><para>是否已到达目标  </para>
+</entry></row>
+</table>
+</para>
+</sect1>
+<sect1 id="group___s_m_t_p_1usage_examples">
+<title>使用示例</title><para>Ping 操作： <programlisting filename=".cpp"><codeline><highlight class="normal"><ref refid="classicmp__socket" kindref="compound">icmp_socket</ref><sp/>sock;</highlight></codeline>
+<codeline><highlight class="normal">sock.<ref refid="classicmp__socket_1a5e22d67c0aa794d751b4bee655c762af" kindref="member">open</ref>();</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>dest<sp/>=<sp/><ref refid="classip__address_1add2ce58669f6042593d6970743e7311a" kindref="member">ip_address::parse</ref>(</highlight><highlight class="stringliteral">&quot;8.8.8.8&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(dest)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>sock.<ref refid="classicmp__socket_1a2635f1da346bb2d7473d692cd960497f" kindref="member">ping</ref>(*dest,<sp/><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref>(2000));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(result.success)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;{}:<sp/>bytes={}<sp/>time={}ms<sp/>TTL={}&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dest-&gt;to_string(),<sp/>result.reply_size,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.rtt.count(),<sp/>result.reply_ttl);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para>Traceroute 操作： <programlisting filename=".cpp"><codeline><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>hops<sp/>=<sp/>sock.<ref refid="classicmp__socket_1a5d7a7d636558ba6fb91d5d4e1ff2811d" kindref="member">traceroute</ref>(*dest,<sp/>30,<sp/><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref>(1000),<sp/>3);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>hops.size();<sp/>++i)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___console_i_o_1gadd269b1d24f35618e1eb0ea848dbf6a0" kindref="member">println</ref>(</highlight><highlight class="stringliteral">&quot;{}:<sp/>{}<sp/>(reached={})&quot;</highlight><highlight class="normal">,<sp/>i<sp/>+<sp/>1,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hops[i].address.is_valid()<sp/>?<sp/>hops[i].address.to_string()<sp/>:<sp/></highlight><highlight class="stringliteral">&quot;*&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hops[i].reached);</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><simplesect kind="note"><para>Ping 和 Traceroute 是网络诊断中最常用的工具， Ping 用于测试连通性和延迟，Traceroute 用于分析网络路径。</para>
+</simplesect>
+<simplesect kind="warning"><para>原始套接字操作需要 root/管理员权限。 某些网络环境可能过滤 ICMP 数据包，导致 Ping/Traceroute 结果不准确。 Traceroute 的中间路由器可能不响应 ICMP Time Exceeded（显示为 *）。</para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc792.html">https://www.rfc-editor.org/rfc/rfc792.html</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml">https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol">https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.wikipedia.org/wiki/Ping_(networking_utility)">https://en.wikipedia.org/wiki/Ping_(networking_utility)</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://en.wikipedia.org/wiki/Traceroute">https://en.wikipedia.org/wiki/Traceroute</ulink> </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

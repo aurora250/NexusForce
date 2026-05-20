@@ -378,5 +378,7 @@ var group___file =
       [ "file_watch_event::RENAMED", "group___file.html#gga43a6bee6e48cc42ec150c994b67f1cd7aa25e78d8d98c26f0fd73aa560f93c828", null ],
       [ "file_watch_event::ACCESSED", "group___file.html#gga43a6bee6e48cc42ec150c994b67f1cd7a86e694e287d2c453e981896da405b512", null ],
       [ "file_watch_event::ALL", "group___file.html#gga43a6bee6e48cc42ec150c994b67f1cd7a5fb1f955b45e38e31789286a1790398d", null ]
-    ] ]
+    ] ],
+    [ "path::buffer_size", "group___file.html#ga5966175b5d0ce8ba9e161419086faba0", null ],
+    [ "path::spliter", "group___file.html#ga83162df475448fe25f86e8ae54bcb02a", null ]
 ];

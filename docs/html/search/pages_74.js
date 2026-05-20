@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['表单编码规则_0',['表单编码规则',['../structurl.html#form_encoding',1,'']]]
+  ['认证方式_0',['SMTP 认证方式',['../group___s_m_t_p.html#auth_methods',1,'']]]
 ];

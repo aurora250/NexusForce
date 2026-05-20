@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['解析器架构_0',['解析器架构',['../classyaml__parser.html#parser_architecture',1,'']]]
+  ['记录类型_0',['DNS 记录类型',['../group___d_n_s.html#dns_record_types',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['消息结构_0',['DNS 消息结构',['../group___d_n_s.html#dns_message_structure',1,'']]]
+  ['混合排序算法详解_0',['混合排序算法详解',['../group___sort_algorithms.html#hybrid_algorithms',1,'']]]
 ];

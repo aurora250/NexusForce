@@ -13,11 +13,6 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @addtogroup Network 网络通信
- * @{
- */
-
-/**
  * @addtogroup SSL SSL/TLS
  * @{
  */
@@ -267,8 +262,6 @@ public:
 };
 
 /** @} */ // SSL/TLS
-
-/** @} */ // Network
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_SSL_SSL_STREAM_HPP__

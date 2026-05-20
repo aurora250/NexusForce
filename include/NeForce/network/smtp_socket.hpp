@@ -43,7 +43,166 @@ struct NEFORCE_API smtp_exception final : network_exception {
 /** @} */ // Exceptions
 
 /**
- * @addtogroup Network 网络通信
+ * @defgroup SMTP SMTP
+ * @brief SMTP协议实现
+ *
+ * 支持明文、STARTTLS和隐式TLS连接与多种认证方式。
+ *
+ * @section standards 遵循的国际标准
+ * 本实现严格遵循以下电子邮件传输与安全相关标准规范：
+ *
+ * **SMTP 核心协议规范：**
+ * - **IETF STD 10 / RFC 5321**：简单邮件传输协议（SMTP）
+ *   https://www.rfc-editor.org/rfc/rfc5321.html
+ * - **IETF RFC 5322**：Internet 消息格式（邮件头部与正文格式）
+ *   https://www.rfc-editor.org/rfc/rfc5322.html
+ *
+ * **SMTP 扩展标准：**
+ * - **IETF RFC 1869**：SMTP 服务扩展（ESMTP，EHLO 命令）
+ *   https://www.rfc-editor.org/rfc/rfc1869.html
+ * - **IETF RFC 1870**：SMTP 消息大小声明扩展（SIZE）
+ *   https://www.rfc-editor.org/rfc/rfc1870.html
+ * - **IETF RFC 3461**：SMTP 投递状态通知扩展（DSN）
+ *   https://www.rfc-editor.org/rfc/rfc3461.html
+ *
+ * **SMTP 安全标准：**
+ * - **IETF RFC 3207**：SMTP 服务的 TLS 扩展（STARTTLS）
+ *   https://www.rfc-editor.org/rfc/rfc3207.html
+ * - **IETF RFC 8314**：邮件协议的 TLS 使用建议（隐式 TLS）
+ *   https://www.rfc-editor.org/rfc/rfc8314.html
+ *
+ * **SMTP 认证标准：**
+ * - **IETF RFC 4954**：SMTP 服务认证（AUTH 扩展，PLAIN/LOGIN）
+ *   https://www.rfc-editor.org/rfc/rfc4954.html
+ * - **IETF RFC 4616**：PLAIN SASL 机制
+ *   https://www.rfc-editor.org/rfc/rfc4616.html
+ *
+ * **邮件格式与 MIME 标准：**
+ * - **IETF RFC 2045**：MIME 第一部分：Internet 消息体格式
+ *   https://www.rfc-editor.org/rfc/rfc2045.html
+ * - **IETF RFC 2046**：MIME 第二部分：媒体类型
+ *   https://www.rfc-editor.org/rfc/rfc2046.html
+ * - **IETF RFC 2047**：MIME 第三部分：非 ASCII 文本头扩展
+ *   https://www.rfc-editor.org/rfc/rfc2047.html
+ *
+ * @section smtp_session SMTP 会话流程
+ * 根据 RFC 5321 §3.1，SMTP 会话的基本流程：
+ *
+ * | 步骤 | 客户端命令     | 服务器响应码 | 说明                           |
+ * |------|----------------|--------------|--------------------------------|
+ * | 1    | -              | 220          | 服务器就绪                     |
+ * | 2    | EHLO domain    | 250          | 扩展问候（ESMTP）              |
+ * | 3    | STARTTLS       | 220          | 升级到 TLS（可选）             |
+ * | 4    | AUTH LOGIN     | 334/235      | 认证（可选）                   |
+ * | 5    | MAIL FROM:     | 250          | 设置发件人                     |
+ * | 6    | RCPT TO:       | 250          | 设置收件人（可多次）           |
+ * | 7    | DATA           | 354          | 开始发送邮件正文               |
+ * | 8    | .              | 250          | 邮件正文结束                   |
+ * | 9    | QUIT           | 221          | 断开连接                       |
+ *
+ * @section smtp_response_codes SMTP 响应码分类
+ * 根据 RFC 5321 §4.2，SMTP 响应码按百位数字分类：
+ *
+ * | 类别 | 响应码范围 | 含义               | 典型响应码                   |
+ * |------|------------|--------------------|------------------------------|
+ * | 2xx  | 200 – 299  | 命令成功           | 220 (就绪), 250 (OK), 235 (认证成功) |
+ * | 3xx  | 300 – 399  | 命令待处理         | 334 (等待认证凭据), 354 (开始数据) |
+ * | 4xx  | 400 – 499  | 临时失败（可重试） | 450 (邮箱不可用)             |
+ * | 5xx  | 500 – 599  | 永久失败           | 550 (邮箱不存在), 554 (事务失败) |
+ *
+ * @section tls_modes TLS 连接模式
+ * 根据 RFC 3207 和 RFC 8314，SMTP 支持三种 TLS 模式：
+ *
+ * | 模式       | TLS 时机         | 端口    | 安全性                           |
+ * |------------|------------------|---------|----------------------------------|
+ * | none       | 不加密           | 25      | 最低（明文传输）                 |
+ * | starttls   | 先明文，后升级   | 587     | 中等（存在降级攻击风险）         |
+ * | implicit   | 连接即 TLS       | 465     | 最高（始终加密）                 |
+ *
+ * @section auth_methods SMTP 认证方式
+ * 根据 RFC 4954，本实现支持以下认证方式：
+ *
+ * | 方式  | RFC 引用 | 说明                                           |
+ * |-------|----------|------------------------------------------------|
+ * | none  | -        | 无认证                                         |
+ * | plain | RFC 4616 | 用户名和密码 Base64 编码传输（需 TLS）         |
+ * | login | RFC 4954 | 用户名和密码分两步 Base64 编码传输（需 TLS）   |
+ *
+ * @section email_format 邮件格式说明
+ * 根据 RFC 5322 和 RFC 2045，邮件格式规范：
+ *
+ * **邮件头字段**：
+ * | 字段         | RFC 引用  | 说明                   | 是否必需 |
+ * |--------------|-----------|------------------------|----------|
+ * | From         | §3.4      | 发件人地址             | 是       |
+ * | To           | §3.4      | 收件人地址             | 是       |
+ * | Cc           | §3.4      | 抄送地址               | 否       |
+ * | Bcc          | §3.4      | 密送地址（不显示）     | 否       |
+ * | Subject      | §3.6.5    | 邮件主题               | 否       |
+ * | Date         | §3.6.1    | 发送日期               | 否（自动生成） |
+ * | Content-Type | RFC 2045  | 内容类型（text/plain 或 text/html） | 是 |
+ * | MIME-Version | RFC 2045  | MIME 版本（固定 1.0）  | 是       |
+ *
+ * **正文编码规则**：
+ * - 以 `\r\n.\r\n` 作为邮件正文结束标记
+ * - 正文中以 `.` 开头的行需要额外转义一个 `.`
+ * - Bcc 收件人不在邮件头中显示，但同样通过 RCPT TO 发送
+ *
+ * @section usage_examples 使用示例
+ * 基本 SMTP 连接与邮件发送：
+ * ```cpp
+ * smtp_socket smtp;
+ *
+ * // 连接到 SMTP 服务器（IP 地址）
+ * auto addr = ip_address::parse("192.168.1.100", ports::smtp);
+ * smtp.connect(*addr, "example.com", smtp_socket::tls_mode::none);
+ *
+ * // 构建邮件
+ * smtp_message msg;
+ * msg.from = "sender@example.com";
+ * msg.to = {"recipient@example.com"};
+ * msg.subject = "Test Email";
+ * msg.body = "Hello, this is a test email!";
+ *
+ * // 发送邮件
+ * smtp.send(msg);
+ * smtp.disconnect();
+ * ```
+ *
+ * 使用 STARTTLS 和认证：
+ * ```cpp
+ * ssl_context ctx(ssl_method::TLS_CLIENT);
+ * ctx.load_verify_locations("ca-bundle.crt");
+ *
+ * smtp_socket smtp;
+ * smtp.connect("smtp.qq.com", 587, "example.com",
+ *              smtp_socket::tls_mode::starttls, nullptr, &ctx);
+ *
+ * smtp.authenticate("username@qq.com", "password",
+ *                   smtp_socket::auth_method::login);
+ *
+ * smtp_message msg;
+ * msg.from = "sender@qq.com";
+ * msg.to = {"recipient@example.com"};
+ * msg.subject = "Encrypted Email";
+ * msg.body = "<h1>Hello</h1><p>This is HTML email.</p>";
+ * msg.is_html = true;
+ *
+ * smtp.send(msg);
+ * smtp.disconnect();
+ * ```
+ *
+ * @note SMTP 协议使用 TCP 端口 25（明文）、587（STARTTLS）或 465（隐式 TLS）。
+ *       现代邮件服务推荐使用 STARTTLS（端口 587）或隐式 TLS（端口 465）。
+ *
+ * @warning 明文 SMTP 传输的所有数据都是可见的，
+ *          仅应在受控网络环境中使用。生产环境强烈建议使用 STARTTLS 或隐式 TLS。
+ *          PLAIN/LOGIN 认证方式在无 TLS 保护时等同于明文密码传输。
+ *
+ * @see https://www.rfc-editor.org/rfc/rfc5321.html
+ * @see https://www.rfc-editor.org/rfc/rfc3207.html
+ * @see https://www.rfc-editor.org/rfc/rfc4954.html
+ * @see https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol
  * @{
  */
 
@@ -78,38 +237,6 @@ struct NEFORCE_API smtp_message {
  * - 邮件发送（支持收件人、抄送、密送、HTML邮件）
  * - EHLO/HELO协议协商
  * - DNS解析
- *
- * 使用示例：
- * @code
- * // 创建SSL上下文（用于TLS）
- * ssl_context ctx(ssl_method::TLS_CLIENT);
- * ctx.load_verify_locations("ca-bundle.crt");
- *
- * // 创建SMTP socket
- * smtp_socket smtp;
- *
- * // 连接到QQ邮箱（STARTTLS）
- * smtp.connect("smtp.qq.com", ports::smtp, "example.com",
- *              smtp_socket::tls_mode::starttls, nullptr, &ctx);
- *
- * // 认证
- * smtp.authenticate("username@qq.com", "password",
- *                   smtp_socket::auth_method::login);
- *
- * // 构建邮件
- * smtp_message msg;
- * msg.from = "sender@qq.com";
- * msg.to = {"recipient@example.com"};
- * msg.subject = "Test Email";
- * msg.body = "Hello, this is a test email!";
- * msg.is_html = false;
- *
- * // 发送邮件
- * smtp.send(msg);
- *
- * // 断开连接
- * smtp.disconnect();
- * @endcode
  */
 class NEFORCE_API smtp_socket final : public ip_socket {
 public:
@@ -284,7 +411,7 @@ public:
     NEFORCE_NODISCARD string tls_version() const { return ssl_.get_version(); }
 };
 
-/** @} */ // Network
+/** @} */ // SMTP
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NEWORK_SMTP_SOCKET_HPP__

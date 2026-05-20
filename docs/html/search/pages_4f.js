@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['支持环境_0',['🖥️ 支持环境',['../index.html#autotoc_md6',1,'']]],
-  ['支持的yaml_201_202特性_1',['支持的YAML 1.2特性',['../classyaml__parser.html#parser_features',1,'']]]
+  ['数学常量定义_0',['数学常量定义',['../group___math_constants.html#math_constants',1,'']]],
+  ['数学库_20math_1',['📊 数学库 (Math)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md34',1,'']]],
+  ['数据库兼容性_2',['数据库兼容性',['../group___s_q_l.html#compatibility',1,'']]],
+  ['数据库_20db_3',['🗄️ 数据库 (DB)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md21',1,'']]],
+  ['数据结构与算法_4',['📐 数据结构与算法',['../md__m_a_i_n_p_a_g_e.html#autotoc_md11',1,'']]]
 ];

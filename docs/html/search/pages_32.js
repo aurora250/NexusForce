@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['同步模式_0',['同步模式',['../group___memory_order.html#synchronization_patterns',1,'']]]
+  ['唯一键与允许重复键_0',['唯一键与允许重复键',['../group___hash_table.html#unique_vs_equal',1,'']]]
 ];

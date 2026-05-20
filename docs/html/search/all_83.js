@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['查找元素算法_0',['查找元素算法',['../group___finding_algorithms.html',1,'']]],
-  ['查询类（class）_1',['查询类（CLASS）',['../group___d_n_s.html#dns_classes',1,'']]],
-  ['查询_2',['反向 DNS 查询',['../group___d_n_s.html#reverse_dns',1,'']]]
+  ['标准合规_0',['📡 标准合规',['../md__m_a_i_n_p_a_g_e.html#autotoc_md7',1,'']]],
+  ['标准容器_1',['标准容器',['../group___container.html',1,'']]],
+  ['标准检测_2',['C++标准检测',['../group___cxx_standard_detection.html',1,'']]],
+  ['标准算法_3',['标准算法',['../group___standard_algorithms.html',1,'']]],
+  ['标准迭代器_4',['标准迭代器',['../group___normal_iterators.html',1,'']]]
 ];

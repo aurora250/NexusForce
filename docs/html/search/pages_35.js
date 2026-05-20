@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['唯一键与允许重复键_0',['唯一键与允许重复键',['../group___hash_table.html#unique_vs_equal',1,'']]]
+  ['基本_20ansi_208_2016_20色_0',['基本 ANSI 8/16 色',['../group___color.html#basic_ansi_colors',1,'']]]
 ];

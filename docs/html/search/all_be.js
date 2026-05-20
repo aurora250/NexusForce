@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['配置格式操作_0',['配置格式操作',['../group___config_format.html',1,'']]]
+  ['部分排序_0',['部分排序',['../group___sort_algorithms.html#partial_sorting',1,'']]]
 ];

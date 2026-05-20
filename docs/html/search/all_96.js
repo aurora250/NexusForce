@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['目录_0',['📑 目录',['../index.html#autotoc_md2',1,'']]]
+  ['相邻元素算法_0',['相邻元素算法',['../group___adjacent_algorithms.html',1,'']]]
 ];

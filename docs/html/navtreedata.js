@@ -25,7 +25,40 @@
 var NAVTREE =
 [
   [ "NexusForce", "index.html", [
-    [ "NexusForce V1.0.0", "index.html", "index" ],
+    [ "NexusForce", "md__m_a_i_n_p_a_g_e.html", [
+      [ "📖 项目简介", "md__m_a_i_n_p_a_g_e.html#autotoc_md1", null ],
+      [ "🖥️ 支持环境", "md__m_a_i_n_p_a_g_e.html#autotoc_md3", null ],
+      [ "✨ 工程质量", "md__m_a_i_n_p_a_g_e.html#autotoc_md5", null ],
+      [ "📡 标准合规", "md__m_a_i_n_p_a_g_e.html#autotoc_md7", [
+        [ "🌐 网络协议与互联网标准", "md__m_a_i_n_p_a_g_e.html#autotoc_md8", null ],
+        [ "🔐 密码学与安全算法", "md__m_a_i_n_p_a_g_e.html#autotoc_md9", null ],
+        [ "🔤 字符编码与国际化", "md__m_a_i_n_p_a_g_e.html#autotoc_md10", null ],
+        [ "📐 数据结构与算法", "md__m_a_i_n_p_a_g_e.html#autotoc_md11", null ],
+        [ "⚙️ 系统、并发与命令行", "md__m_a_i_n_p_a_g_e.html#autotoc_md12", null ],
+        [ "🎨 图形、色彩与数学", "md__m_a_i_n_p_a_g_e.html#autotoc_md13", null ]
+      ] ],
+      [ "🚀 特性", "md__m_a_i_n_p_a_g_e.html#autotoc_md15", [
+        [ "🔄 并发与异步 (Async)", "md__m_a_i_n_p_a_g_e.html#autotoc_md16", null ],
+        [ "📦 容器 (Container)", "md__m_a_i_n_p_a_g_e.html#autotoc_md17", null ],
+        [ "🔐 加密与安全 (Encrypt)", "md__m_a_i_n_p_a_g_e.html#autotoc_md18", null ],
+        [ "📁 文件系统 (File)", "md__m_a_i_n_p_a_g_e.html#autotoc_md19", null ],
+        [ "🌐 网络库 (Network)", "md__m_a_i_n_p_a_g_e.html#autotoc_md20", null ],
+        [ "🗄️ 数据库 (DB)", "md__m_a_i_n_p_a_g_e.html#autotoc_md21", null ],
+        [ "📝 日志系统 (Logging)", "md__m_a_i_n_p_a_g_e.html#autotoc_md22", null ],
+        [ "🔤 字符串处理 (String)", "md__m_a_i_n_p_a_g_e.html#autotoc_md23", null ],
+        [ "⚙️ 系统接口 (System)", "md__m_a_i_n_p_a_g_e.html#autotoc_md24", null ],
+        [ "⏰ 时间处理 (Time)", "md__m_a_i_n_p_a_g_e.html#autotoc_md25", null ],
+        [ "🛠️ 工具库 (Utility)", "md__m_a_i_n_p_a_g_e.html#autotoc_md26", null ],
+        [ "🔍 反射系统 (Reflection)", "md__m_a_i_n_p_a_g_e.html#autotoc_md27", null ],
+        [ "🧬 类型与特性 (TypeInfo)", "md__m_a_i_n_p_a_g_e.html#autotoc_md28", null ],
+        [ "💾 内存管理 (Memory)", "md__m_a_i_n_p_a_g_e.html#autotoc_md29", null ],
+        [ "📦 压缩 (Compress)", "md__m_a_i_n_p_a_g_e.html#autotoc_md30", null ],
+        [ "🔌 插件系统 (Plugin)", "md__m_a_i_n_p_a_g_e.html#autotoc_md31", null ],
+        [ "❗ 异常处理 (Exception)", "md__m_a_i_n_p_a_g_e.html#autotoc_md32", null ],
+        [ "📐 算法库 (Algorithm)", "md__m_a_i_n_p_a_g_e.html#autotoc_md33", null ],
+        [ "📊 数学库 (Math)", "md__m_a_i_n_p_a_g_e.html#autotoc_md34", null ]
+      ] ]
+    ] ],
     [ "弃用列表", "deprecated.html", null ],
     [ "专题", "topics.html", "topics" ],
     [ "命名空间", "namespaces.html", [
@@ -89,23 +122,23 @@ var NAVTREEINDEX =
 "functions_vars_b.html",
 "group___base_type_qualifier_check.html#ga3ef5774cd5e76fbd9ee680c7ab03c40b",
 "group___d_n_s.html#gga4512397ee6460c3c286f1220692348c7a57779da5393b24165afff75397dd8862",
-"group___function_wrapper.html#ga445cf4ef6b33e97b2e24b538f3efcd33",
-"group___memory_order.html#gae82e0aa93c3ecd9dd220fd45ae4ab659",
-"group___s_h_a1.html#ga74086081d178b6f9936d1e720272711c",
-"group___template_traits_utilities.html#ga22f5f67a05ea1919df230c50cf5d6a5a",
-"group___unique_pointer.html#gad594540a669260eea0cca34015b4653c",
-"locale_8hpp.html",
-"structaligned__buffer.html",
+"group___function_wrapper.html",
+"group___memory_order.html#gaa412d48215ac5173e7fc457a4e9443e6",
+"group___reverse_iterator.html#gaef957127a778bd747a07d86fb0059946",
+"group___system_signal.html",
+"group___unique_pointer.html#ga8867df3884b0fdb28aeed9dcee96f43b",
+"md__m_a_i_n_p_a_g_e.html#autotoc_md20",
+"structaligned__buffer.html#ae61b06e86bd1c848afdff91a5fce7ec2",
 "structatomic.html#aebc58046cb114024522dba369e66859c",
-"structatomic__float__base.html#a6308fb3482a27cce1f042199cd411c96",
-"structcompressed__pair.html#aa9af84bedce8e4a97a48852571aae81d",
-"structgenerator_1_1promise__type.html#adae56dfd455e63193f90202e9fd67e52",
-"structibinary.html#a6cdeaf8f8870f73638a342bf8a875640",
-"structis__empty.html",
-"structpair.html#a1165835f93274f3d06671688adcff8cc",
-"structsmtp__message.html#a526d9a80b9ae2a75ec1ca257866182d8",
-"structthread__pool_1_1pool__statistics.html#abf2cb7bccc5cd7e308bce4996093d35b",
-"structworker__context.html"
+"structatomic__float__base.html#a89a894741cef0e7dddfe31d061819920",
+"structcompressed__pair_3_01_if_empty_00_01_t_00_01false_01_4.html",
+"structget__first__temp__para.html",
+"structicharacter.html",
+"structis__hash.html",
+"structpair.html#a63ae1bbd5a6ce6bd6167b5359fa7a01f",
+"structsmtp__message.html#afd9b01b7cad63e664e41f3cd1d143d18",
+"structtime__point.html#a475b3ca4a21f376abc98727867256bda",
+"structyaml__exception.html"
 ];
 
 var SYNCONMSG = '点击 关闭 面板同步';
