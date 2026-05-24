@@ -114,6 +114,18 @@ public:
      * @throws value_exception acceptor未打开或SSL上下文无效时抛出
      */
     NEFORCE_NODISCARD ssl_socket accept_ssl();
+
+    /**
+     * @brief 非阻塞接受TLS客户端连接
+     * @return 有新连接返回已建立TLS连接的SSL socket，无连接返回none
+     * @throws socket_exception 发生错误时抛出
+     * @throws ssl_exception SSL握手失败时抛出
+     *
+     * 非阻塞地尝试接受新的TLS连接并完成握手。
+     * 如果没有待处理的TCP连接，立即返回none。
+     * 需要先设置acceptor为非阻塞模式。
+     */
+    NEFORCE_NODISCARD optional<ssl_socket> accept_ssl_nonblock();
 };
 
 /** @} */ // SSL/TLS

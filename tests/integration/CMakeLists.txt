@@ -1,7 +1,12 @@
 add_executable(NexusForceIntegrationTest
         main.cpp
         test_db.cpp
+        test_dns_client.cpp
+        test_http.cpp
         test_network.cpp
+        test_network_socket.cpp
+        test_tcp_socket.cpp
+        test_ssl_socket.cpp
 )
 
 set_target_properties(NexusForceIntegrationTest PROPERTIES

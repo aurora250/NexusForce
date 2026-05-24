@@ -176,11 +176,17 @@ bool socket_base::get_option(const int level, const int optname, void* optval, :
 }
 
 bool socket_base::set_reuse_address(const bool enable) noexcept {
+    if (!is_open()) {
+        return false;
+    }
     const int value = enable ? 1 : 0;
     return set_option(SOL_SOCKET, SO_REUSEADDR, &value, sizeof(value));
 }
 
 bool socket_base::set_reuse_port(const bool enable) noexcept {
+    if (!is_open()) {
+        return false;
+    }
 #ifdef SO_REUSEPORT
     const int value = enable ? 1 : 0;
     return set_option(SOL_SOCKET, SO_REUSEPORT, &value, sizeof(value));
@@ -191,20 +197,32 @@ bool socket_base::set_reuse_port(const bool enable) noexcept {
 }
 
 bool socket_base::set_keep_alive(const bool enable) noexcept {
+    if (!is_open()) {
+        return false;
+    }
     const ::socklen_t value = enable ? 1 : 0;
     return set_option(SOL_SOCKET, SO_KEEPALIVE, &value, sizeof(value));
 }
 
 bool socket_base::set_tcp_nodelay(const bool enable) noexcept {
+    if (!is_open()) {
+        return false;
+    }
     const ::socklen_t value = enable ? 1 : 0;
     return set_option(IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
 }
 
 bool socket_base::set_receive_buffer_size(const int size) noexcept {
+    if (!is_open()) {
+        return false;
+    }
     return set_option(SOL_SOCKET, SO_RCVBUF, &size, sizeof(size));
 }
 
 bool socket_base::set_send_buffer_size(const int size) noexcept {
+    if (!is_open()) {
+        return false;
+    }
     return set_option(SOL_SOCKET, SO_SNDBUF, &size, sizeof(size));
 }
 

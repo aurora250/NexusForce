@@ -327,22 +327,3 @@ TEST_F(LoggerTest, MultipleSinks) {
     EXPECT_EQ(sink1->events.size(), 1u);
     EXPECT_EQ(sink2->events.size(), 1u);
 }
-
-// 通过测试，但含有内存泄漏 - glibc pthread_create TLS内部分配，
-// Valgrind报Leak_PossiblyLost，属已知误报，非项目代码泄漏
-TEST_F(LoggerTest, DISABLED_ThreadSafetyUnderAsync) {
-    auto& log = logger::instance();
-    log.set_level(log_level::INFO);
-    auto sink = create_sink();
-    log.enable_async(true);
-    vector<thread> threads;
-    for (int i = 0; i < 10; ++i) {
-        threads.emplace_back([i]() { NEFORCE_LOG_INFO("thread " + to_string(i)); });
-    }
-    for (auto& t: threads) {
-        t.join();
-    }
-    log.flush();
-    EXPECT_EQ(sink->events.size(), 10u);
-    log.enable_async(false);
-}

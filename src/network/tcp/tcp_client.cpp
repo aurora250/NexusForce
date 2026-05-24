@@ -136,13 +136,13 @@ bool tcp_client_base::connect(const string& host, ports port) {
         try {
             vector<string> ipv4s, ipv6s;
             try {
-                ipv4s = dns_.resolve_a(host.view());
+                ipv4s = dns_->resolve_a(host.view());
                 // NOLINTNEXTLINE(bugprone-empty-catch)
             } catch (...) {
                 // ignore
             }
             try {
-                ipv6s = dns_.resolve_aaaa(host.view());
+                ipv6s = dns_->resolve_aaaa(host.view());
                 // NOLINTNEXTLINE(bugprone-empty-catch)
             } catch (...) {
                 // ignore
@@ -490,28 +490,28 @@ bool ssl_client::load_ca_path(const string& ca_path) {
     return ssl_ctx_->load_verify_locations("", ca_path);
 }
 
-NEFORCE_NODISCARD string_view ssl_client::peer_certificate_info() const {
+NEFORCE_NODISCARD string ssl_client::peer_certificate_info() const {
     if (!is_connected() || !ssl_initialized_) {
         return "";
     }
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return static_cast<const ssl_socket*>(socket_.get())->peer_certificate_info().view();
+    return static_cast<const ssl_socket*>(socket_.get())->peer_certificate_info();
 }
 
-NEFORCE_NODISCARD string_view ssl_client::cipher_name() const {
+NEFORCE_NODISCARD string ssl_client::cipher_name() const {
     if (!is_connected() || !ssl_initialized_) {
         return "";
     }
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return static_cast<const ssl_socket*>(socket_.get())->ssl().get_cipher_name().view();
+    return static_cast<const ssl_socket*>(socket_.get())->ssl().get_cipher_name();
 }
 
-NEFORCE_NODISCARD string_view ssl_client::protocol_version() const {
+NEFORCE_NODISCARD string ssl_client::protocol_version() const {
     if (!is_connected() || !ssl_initialized_) {
         return "";
     }
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
-    return static_cast<const ssl_socket*>(socket_.get())->ssl().get_version().view();
+    return static_cast<const ssl_socket*>(socket_.get())->ssl().get_version();
 }
 
 ssl_socket& ssl_client::ssl_socket_ref() {

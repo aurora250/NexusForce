@@ -1,10 +1,17 @@
-#include <NeForce/core/string/string_util.hpp>
 #include <NeForce/network/http/http_router.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
 namespace {
     optional<regex> compile_pattern(const string& pattern, vector<string>& param_names) {
+        if (pattern.contains('(') || pattern.contains('[')) {
+            try {
+                return regex("^" + pattern + "$");
+            } catch (...) {
+                return none;
+            }
+        }
+
         if (pattern.contains(':') && pattern.contains('*')) {
             return none;
         }
@@ -15,7 +22,8 @@ namespace {
         while (pos < pattern.length()) {
             if (pattern[pos] == ':') {
                 size_t end = pos + 1;
-                while (end < pattern.length() && (is_digit(pattern[end]) || pattern[end] == '_')) {
+                while (end < pattern.length() &&
+                       (is_alpha(pattern[end]) || is_digit(pattern[end]) || pattern[end] == '_')) {
                     ++end;
                 }
 
@@ -27,9 +35,7 @@ namespace {
                 regex_pattern += "(.*)";
                 ++pos;
             } else if (pattern[pos] == '/' || pattern[pos] == '.' || pattern[pos] == '?' || pattern[pos] == '+' ||
-                       pattern[pos] == '(' || pattern[pos] == ')' || pattern[pos] == '[' || pattern[pos] == ']' ||
-                       pattern[pos] == '{' || pattern[pos] == '}' || pattern[pos] == '^' || pattern[pos] == '$' ||
-                       pattern[pos] == '|' || pattern[pos] == '\\') {
+                       pattern[pos] == '^' || pattern[pos] == '$' || pattern[pos] == '|' || pattern[pos] == '\\') {
                 regex_pattern += '\\';
                 regex_pattern += pattern[pos];
                 ++pos;
@@ -182,6 +188,9 @@ http_router::route_entry* http_router::find_handler(const http_method& method, c
                 for (size_t i = 0; i < entry.param_names.size() && i + 1 < matches.size(); ++i) {
                     request.set_parameter(entry.param_names[i], matches[i + 1]);
                 }
+                for (size_t i = entry.param_names.size(); i + 1 < matches.size(); ++i) {
+                    request.set_parameter(to_string(i + 1), matches[i + 1]);
+                }
                 return &entry;
             }
         } else {
@@ -203,7 +212,7 @@ http_router::route_entry* http_router::find_handler(const http_method& method, c
 
 void http_router::setup_default_handlers() {
     not_found_handler_ = [](http_request& request, http_response& response) {
-        response.status = http_status::S4_NOT_FOUNT;
+        response.status = http_status::S4_NOT_FOUND;
         response.status_message = "Not Found";
         response.set_content_type(http_content::HTML_TEXT());
         response.body = "<!DOCTYPE html>"
@@ -229,7 +238,7 @@ void http_router::setup_default_handlers() {
     };
 
     exception_handler_ = [](http_request& request, http_response& response, const exception& e) {
-        response.status = http_status::S5_INTERNAL_ERROR;
+        response.status = http_status::S5_INTERNAL_SERVER_ERROR;
         response.status_message = "Internal Server Error";
         response.set_content_type(http_content::HTML_TEXT());
         response.body = "<!DOCTYPE html>"
@@ -299,7 +308,7 @@ http_response http_router::handle_request(http_request& request) {
         if (exception_handler_) {
             exception_handler_(request, response, e);
         } else {
-            response.status = http_status::S5_INTERNAL_ERROR;
+            response.status = http_status::S5_INTERNAL_SERVER_ERROR;
             response.status_message = "Internal Server Error";
             response.set_content_type(http_content::PLAIN_TEXT());
             response.body = "Internal Server Error: "_s + e.what();

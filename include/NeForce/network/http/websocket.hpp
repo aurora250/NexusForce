@@ -89,15 +89,17 @@ enum class websocket_opcode : uint8_t {
  * @brief WebSocket帧头部结构
  *
  * 定义WebSocket帧头部的位域布局。
+ *
+ * @note 基于 LSB→MSB 分配策略。
  */
 struct websocket_frame_header {
-    byte_t fin : 1;         ///< 是否最后一帧
-    byte_t rsv1 : 1;        ///< 保留位1
-    byte_t rsv2 : 1;        ///< 保留位2
-    byte_t rsv3 : 1;        ///< 保留位3
-    byte_t opcode : 4;      ///< 操作码
-    byte_t masked : 1;      ///< 是否掩码
-    byte_t payload_len : 7; ///< 负载长度
+    byte_t opcode : 4;      ///< 操作码 (bits 0-3)
+    byte_t rsv3 : 1;        ///< 保留位3 (bit 4)
+    byte_t rsv2 : 1;        ///< 保留位2 (bit 5)
+    byte_t rsv1 : 1;        ///< 保留位1 (bit 6)
+    byte_t fin : 1;         ///< 是否最后一帧 (bit 7)
+    byte_t payload_len : 7; ///< 负载长度 (bits 0-6)
+    byte_t masked : 1;      ///< 是否掩码 (bit 7)
 };
 #pragma pack(pop)
 

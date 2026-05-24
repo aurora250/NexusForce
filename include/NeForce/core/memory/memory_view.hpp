@@ -470,6 +470,12 @@ using byte_view = memory_view<byte_t>;
 /// 常量字节视图类型别名
 using cbyte_view = memory_view<const byte_t>;
 
+
+template <typename To, typename From, size_t Extent>
+memory_view<To, Extent> dynamic_view_cast(const memory_view<From, Extent>& view) noexcept {
+    return memory_view<To, Extent>{reinterpret_cast<To*>(view.data()), view.size()};
+}
+
 /** @} */ // MemoryView
 
 NEFORCE_END_NAMESPACE__

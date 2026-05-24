@@ -208,9 +208,9 @@ void thread_pool::thread_function(const id_type thread_id) {
     ++idle_thread_size_;
     auto last = system_clock::now();
 
-    constexpr size_t MIN_WAIT_MS = 1;    // 最小等待 1ms
-    constexpr size_t MAX_WAIT_MS = 100;  // 最大等待 100ms
-    constexpr size_t MAX_IDLE_SHIFT = 7; // 最多 2^7 = 128 倍
+    constexpr size_t MIN_WAIT_MS = 1;
+    constexpr size_t MAX_WAIT_MS = 100;
+    constexpr size_t MAX_IDLE_SHIFT = 7;
 
     for (;;) {
         optional<task_type> task{};

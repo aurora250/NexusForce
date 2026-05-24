@@ -2373,24 +2373,6 @@ TEST(VirtualThread, ConcurrentGetResult) {
     EXPECT_TRUE(task.is_done());
 }
 
-namespace {
-    virtual_thread_task<int> multiply_task(int val) {
-        co_await virtual_thread::yield();
-        co_return val * 2;
-    }
-} // namespace
-
-TEST(VirtualThread, DISABLED_ManyConcurrentYields) {
-    constexpr int N = 20;
-    vector<virtual_thread_task<int>> tasks;
-    for (int i = 0; i < N; ++i) {
-        tasks.push_back(multiply_task(i));
-    }
-    for (int i = 0; i < N; ++i) {
-        EXPECT_EQ(tasks[i].get_result(), i * 2);
-    }
-}
-
 #endif
 
 TEST(SignalTest, BasicEmit) {

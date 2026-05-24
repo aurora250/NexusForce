@@ -6,13 +6,17 @@ add_executable(NexusForceUnitTests
         test_complex_config.cpp
         test_compress.cpp
         test_db.cpp
+        test_dns.cpp
         test_encrypt.cpp
         test_exception.cpp
         test_file.cpp
         test_functional.cpp
+        test_http.cpp
         test_logging.cpp
         test_memory.cpp
         test_network.cpp
+        test_network_ssl_tcp.cpp
+        test_network_util.cpp
         test_numeric.cpp
         test_ranges.cpp
         test_sequence_container.cpp

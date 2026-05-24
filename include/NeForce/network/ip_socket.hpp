@@ -38,8 +38,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * - 目的地址(32位)
  */
 struct ip_header {
-    uint8_t ihl : 4;     ///< IP头部长度
-    uint8_t version : 4; ///< IP版本号
+    uint8_t version_ihl; ///< 版本(高4位) + 头部长度(低4位)
     uint8_t tos;         ///< 服务类型
     uint16_t total_len;  ///< IP数据包总长度
     uint16_t id;         ///< 标识符
@@ -49,6 +48,9 @@ struct ip_header {
     uint16_t checksum;   ///< 头部校验和
     uint32_t src_addr;   ///< 源IP地址
     uint32_t dest_addr;  ///< 目的IP地址
+
+    NEFORCE_NODISCARD uint8_t version() const { return version_ihl >> 4; }
+    NEFORCE_NODISCARD uint8_t ihl() const { return version_ihl & 0x0F; }
 };
 #pragma pack(pop)
 

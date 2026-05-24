@@ -1,8 +1,15 @@
 #include <NeForce/network/ssl/ssl_context.hpp>
+#include <NeForce/core/system/pipe.hpp>
 #include <openssl/err.h>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
+    struct ssl_module_init {
+        ssl_module_init() noexcept { pipe::ignore_sigpipe(); }
+    };
+
+    ssl_module_init ssl_init_instance{};
+
     constexpr auto cipher_list = "ECDHE-ECDSA-AES128-GCM-SHA256:"
                                  "ECDHE-RSA-AES128-GCM-SHA256:"
                                  "ECDHE-ECDSA-AES256-GCM-SHA384:"
@@ -133,19 +140,21 @@ method_(method) {
                                            "TLS_CHACHA20_POLY1305_SHA256");
 #endif
 
-    const bool ca_loaded = (::SSL_CTX_set_default_verify_paths(ctx_.get()) == 1);
-    if (!ca_loaded) {
-        static constexpr const char* ca_paths[] = {"/etc/ssl/certs", "/etc/pki/tls/certs", "/usr/local/share/certs",
-                                                   "/etc/ssl/cert.pem"};
+    if (method == ssl_method::TLS_CLIENT || method == ssl_method::TLS_CLIENT_DTLS) {
+        const bool ca_loaded = (::SSL_CTX_set_default_verify_paths(ctx_.get()) == 1);
+        if (!ca_loaded) {
+            static constexpr const char* ca_paths[] = {"/etc/ssl/certs", "/etc/pki/tls/certs", "/usr/local/share/certs",
+                                                       "/etc/ssl/cert.pem"};
 
-        for (const auto& path: ca_paths) {
-            if (::SSL_CTX_load_verify_locations(ctx_.get(), nullptr, path) == 1) {
-                break;
+            for (const auto& path: ca_paths) {
+                if (::SSL_CTX_load_verify_locations(ctx_.get(), nullptr, path) == 1) {
+                    break;
+                }
             }
         }
-    }
 
-    ::SSL_CTX_set_verify(ctx_.get(), SSL_VERIFY_PEER, nullptr);
+        ::SSL_CTX_set_verify(ctx_.get(), SSL_VERIFY_PEER, nullptr);
+    }
 }
 
 ssl_context ssl_context::clone() const {
@@ -157,8 +166,9 @@ ssl_context ssl_context::clone() const {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to increment SSL_CTX reference count"));
     }
 
-    ssl_context cloned(method_);
+    ssl_context cloned(method_, nullptr);
     cloned.ctx_.reset(ctx_.get());
+    cloned.cert_loaded_ = cert_loaded_;
     return cloned;
 }
 
@@ -174,7 +184,11 @@ bool ssl_context::load_certificate(const string& cert_file, const string& key_fi
     if (::SSL_CTX_use_PrivateKey_file(ctx_.get(), key_file.data(), SSL_FILETYPE_PEM) <= 0) {
         return false;
     }
-    return ::SSL_CTX_check_private_key(ctx_.get()) == 1;
+    if (::SSL_CTX_check_private_key(ctx_.get()) != 1) {
+        return false;
+    }
+    cert_loaded_ = true;
+    return true;
 }
 
 void ssl_context::load_certificate_from_memory(const string& cert_pem, const string& key_pem) {
@@ -208,6 +222,7 @@ void ssl_context::load_certificate_from_memory(const string& cert_pem, const str
     if (::SSL_CTX_check_private_key(ctx_.get()) != 1) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Private key does not match certificate"));
     }
+    cert_loaded_ = true;
 }
 
 bool ssl_context::load_verify_locations(const string& ca_file, const string& ca_path) {

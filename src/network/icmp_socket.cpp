@@ -25,7 +25,7 @@ namespace {
 } // namespace
 
 
-void icmp_socket::send_echo_request(const ip_address& dest, const uint16_t id, const uint16_t seq, const uint8_t ttl,
+void icmp_socket::send_echo_request(const ip_address& dest, const uint16_t id, const uint16_t seq, const int ttl,
                                     const void* data, const size_t data_len) {
 
     if (!is_open()) {
@@ -69,10 +69,19 @@ bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expec
     const auto start = steady_clock::now();
     auto remaining = timeout;
 
-    bool old_blocking = true;
     if (!set_nonblocking(true)) {
         NEFORCE_THROW_EXCEPTION(socket_exception("Set nonblocking mode failed"));
     }
+
+    struct blocking_guard {
+        socket_base& sock;
+        bool active;
+        ~blocking_guard() {
+            if (active) {
+                sock.set_nonblocking(false);
+            }
+        }
+    } guard{*this, true};
 
     char recv_buffer[65536];
     ::sockaddr_storage peer_addr{};
@@ -102,7 +111,6 @@ bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expec
                 remaining = timeout - time_cast<milliseconds>(elapsed);
                 continue;
             }
-            set_nonblocking(old_blocking);
             NEFORCE_THROW_EXCEPTION(socket_exception("select failed"));
         }
 
@@ -121,7 +129,6 @@ bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expec
                 remaining = timeout - time_cast<milliseconds>(elapsed);
                 continue;
             }
-            set_nonblocking(old_blocking);
             NEFORCE_THROW_EXCEPTION(socket_exception("recvfrom failed"));
         }
 
@@ -139,10 +146,10 @@ bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expec
             continue;
         }
         const auto* ip = reinterpret_cast<const ip_header*>(recv_buffer);
-        if (ip->version != 4) {
+        if (ip->version() != 4) {
             continue;
         }
-        ip_header_len = static_cast<size_t>(ip->ihl * 4);
+        ip_header_len = static_cast<size_t>(ip->ihl() * 4);
         if (ip_header_len < 20 || ip_header_len > static_cast<size_t>(recv_len)) {
             continue;
         }
@@ -174,7 +181,7 @@ bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expec
             }
 
             const auto* orig_ip = reinterpret_cast<const ip_header*>(icmp_start + sizeof(icmp_header));
-            const auto orig_ip_header_len = static_cast<size_t>(orig_ip->ihl * 4);
+            const auto orig_ip_header_len = static_cast<size_t>(orig_ip->ihl() * 4);
             if (orig_ip_header_len < sizeof(ip_header) || orig_ip_header_len > icmp_len - sizeof(icmp_header)) {
                 continue;
             }
@@ -201,7 +208,6 @@ bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expec
         remaining = timeout - time_cast<milliseconds>(elapsed);
     }
 
-    set_nonblocking(old_blocking);
     return received;
 }
 
@@ -264,10 +270,11 @@ vector<icmp_socket::traceroute_hop> icmp_socket::traceroute(const ip_address& de
         traceroute_hop hop;
         hop.reached = false;
         hop.address = ip_address();
+        hop.rtt.reserve(static_cast<size_t>(probes_per_hop));
 
         for (int probe = 0; probe < probes_per_hop; ++probe) {
             const auto seq = static_cast<uint16_t>((ttl << 8) | probe);
-            send_echo_request(dest, id, seq, static_cast<uint8_t>(ttl), nullptr, 0);
+            send_echo_request(dest, id, seq, ttl, nullptr, 0);
 
             ip_address sender;
             icmp_header reply_hdr{};
@@ -284,13 +291,13 @@ vector<icmp_socket::traceroute_hop> icmp_socket::traceroute(const ip_address& de
                 if (!hop.address.is_valid()) {
                     hop.address = sender;
                 }
-                hop.rtt[probe] = rtt;
+                hop.rtt.push_back(rtt);
 
                 if (reply_hdr.type == ICMP_ECHO_REPLY) {
                     hop.reached = true;
                 }
             } else {
-                hop.rtt[probe] = milliseconds(-1);
+                hop.rtt.push_back(milliseconds(-1));
             }
             this_thread::sleep_for(milliseconds(50));
         }

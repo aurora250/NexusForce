@@ -9,6 +9,7 @@
  * 包括协程特征、协程句柄、暂停点定义等。
  */
 
+#include "NeForce/core/config/c++config.hpp"
 #ifdef NEFORCE_STANDARD_20
 #    include "NeForce/core/functional/hash.hpp"
 #    include <coroutine>

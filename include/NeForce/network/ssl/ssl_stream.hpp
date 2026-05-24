@@ -21,7 +21,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @class ssl_stream
  * @brief SSL/TLS流封装类
  *
- * 封装OpenSSL的SSL对象，提供加密通信流的接口。
+ * 提供加密通信流的接口。
  * 需要先建立TCP连接，然后在连接上建立SSL/TLS会话。
  *
  * 主要功能：
@@ -48,7 +48,6 @@ private:
     struct ssl_deleter {
         void operator()(::SSL* ssl) const noexcept {
             if (ssl != nullptr) {
-                ::SSL_shutdown(ssl);
                 ::SSL_free(ssl);
             }
         }
@@ -63,7 +62,7 @@ private:
     };
     using x509_ptr = unique_ptr<::X509, x509_deleter>;
 
-    unique_ptr<::SSL, ssl_deleter> ssl_; ///< OpenSSL SSL对象
+    unique_ptr<::SSL, ssl_deleter> ssl_; ///< SSL对象
     string last_error_;                  ///< 最后错误信息
 
     void handle_ssl_error(int ret, const char* operation);
@@ -132,7 +131,7 @@ public:
      * 发送close_notify告警，释放SSL对象。
      * 底层的socket不会关闭，需要单独关闭。
      */
-    void close();
+    void close() noexcept;
 
     /**
      * @brief 读取加密数据

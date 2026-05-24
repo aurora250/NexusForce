@@ -114,7 +114,7 @@ NEFORCE_ALWAYS_INLINE_INLINE void sleep_for_ms(uint32_t milliseconds) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::Sleep(milliseconds);
 #else
-    struct ::timespec ts;
+    ::timespec ts;
     ts.tv_sec = milliseconds / 1000;
     ts.tv_nsec = static_cast<decay_t<decltype(ts.tv_nsec)>>(milliseconds % 1000) * 1000000;
     ::nanosleep(&ts, nullptr);

@@ -1,12 +1,40 @@
 #include <NeForce/core/encrypt/base64.hpp>
+#include <NeForce/core/system/process.hpp>
+#include <NeForce/core/time/clocks.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/network/smtp_socket.hpp>
+#include <ctime>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
     string build_message(const smtp_message& msg) {
-        string result;
+        string date_header;
+        {
+            const auto now = system_clock::now();
+            const auto secs = system_clock::to_seconds(now);
+            const auto t = static_cast<::time_t>(secs.count());
+            ::tm gmt{};
+#ifdef NEFORCE_PLATFORM_WINDOWS
+            ::gmtime_s(&gmt, &t);
+#else
+            ::gmtime_r(&t, &gmt);
+#endif
+            char date_buf[64];
+            ::strftime(date_buf, sizeof(date_buf), "%a, %d %b %Y %H:%M:%S +0000", &gmt);
+            date_header = string("Date: ") + date_buf + "\r\n";
+        }
 
+        string message_id;
+        {
+            const auto now = system_clock::now();
+            const auto secs = system_clock::to_seconds(now);
+            const uint16_t pid = process::current_id();
+            message_id = "Message-ID: <" + to_string(secs.count()) + "." + to_string(pid) + "@nexusforce.local>\r\n";
+        }
+
+        string result;
+        result += date_header;
+        result += message_id;
         result += "From: " + msg.from + "\r\n";
         result += "To: ";
         for (size_t i = 0; i < msg.to.size(); ++i) {
@@ -39,8 +67,11 @@ namespace {
         result += "MIME-Version: 1.0\r\n";
 
         for (const auto& header: msg.extra_headers) {
-            const auto& key = header.first;
-            const auto& value = header.second;
+            auto key = header.first;
+            auto value = header.second;
+            if (key.lowercase() == "date" || key.lowercase() == "message-id") {
+                continue;
+            }
             result += key + ": " + value + "\r\n";
         }
 
@@ -166,6 +197,9 @@ vector<string> smtp_socket::do_ehlo(const string& domain) {
 
         int code = 0;
         for (int i = 0; i < 3; ++i) {
+            if (line[i] < '0' || line[i] > '9') {
+                NEFORCE_THROW_EXCEPTION(smtp_exception("Malformed EHLO response code"));
+            }
             code = code * 10 + (line[i] - '0');
         }
 

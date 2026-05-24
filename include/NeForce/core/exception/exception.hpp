@@ -271,7 +271,7 @@ int NEFORCE_API uncaught_exceptions() noexcept;
  * @brief 抛出异常并打印堆栈信息
  * @param err 要抛出的异常对象
  */
-void NEFORCE_API throw_with_stack(const exception& err);
+NEFORCE_NORETURN void NEFORCE_API throw_with_stack(const exception& err);
 
 #if (defined(NEFORCE_STATE_DEBUG) || !defined(NDEBUG)) && 0 // 0 switch
 #    define NEFORCE_THROW_EXCEPTION(err) throw_with_stack(err)

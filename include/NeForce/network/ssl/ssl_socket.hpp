@@ -157,6 +157,13 @@ public:
     ssize_t receive(memory_view<char> buffer, int flags = 0) override;
 
     /**
+     * @brief 关闭SSL连接和底层socket
+     *
+     * 先发送SSL关闭通知，再关闭底层TCP socket。
+     */
+    bool close() noexcept override;
+
+    /**
      * @brief 检查是否为SSL/TLS socket
      * @return 始终返回true（SSL/TLS激活时）
      */
@@ -165,14 +172,26 @@ public:
     /**
      * @brief 获取SSL流对象的引用
      * @return SSL流引用
+     * @throws ssl_exception SSL未初始化时抛出
      */
-    NEFORCE_NODISCARD ssl_stream& ssl() noexcept { return *ssl_; }
+    NEFORCE_NODISCARD ssl_stream& ssl() {
+        if (!ssl_) {
+            NEFORCE_THROW_EXCEPTION(ssl_exception("SSL stream not initialized"));
+        }
+        return *ssl_;
+    }
 
     /**
      * @brief 获取SSL流对象的常量引用
      * @return SSL流常量引用
+     * @throws ssl_exception SSL未初始化时抛出
      */
-    NEFORCE_NODISCARD const ssl_stream& ssl() const noexcept { return *ssl_; }
+    NEFORCE_NODISCARD const ssl_stream& ssl() const {
+        if (!ssl_) {
+            NEFORCE_THROW_EXCEPTION(ssl_exception("SSL stream not initialized"));
+        }
+        return *ssl_;
+    }
 };
 
 /** @} */ // SSL/TLS

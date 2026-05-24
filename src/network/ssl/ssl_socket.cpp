@@ -1,6 +1,14 @@
 #include <NeForce/network/ssl/ssl_socket.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
+bool ssl_socket::close() noexcept {
+    if (ssl_.has_value()) {
+        ssl_->close();
+        ssl_.reset();
+    }
+    return tcp_socket::close();
+}
+
 void ssl_socket::init_server_ssl(const ssl_context& ctx) {
     if (!is_open()) {
         NEFORCE_THROW_EXCEPTION(value_exception("Socket is not open"));

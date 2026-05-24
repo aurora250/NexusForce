@@ -18,6 +18,7 @@
 #    include <dirent.h>
 #    include <fcntl.h>
 #    include <sys/stat.h>
+#    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -295,6 +296,25 @@ path path::temp_directory_path() {
     }
 #endif
     return path(move(temp));
+}
+
+path path::current_executable_path() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    char buf[MAX_PATH];
+    ::DWORD len = ::GetModuleFileNameA(NULL, buf, MAX_PATH);
+    if (len == 0) {
+        return "";
+    }
+    return path{string(buf, len)};
+#else
+    char buf[PATH_MAX];
+    ssize_t len = ::readlink("/proc/self/exe", buf, sizeof(buf) - 1);
+    if (len == -1) {
+        return {};
+    }
+    buf[len] = '\0';
+    return path(buf);
+#endif
 }
 
 path& path::operator/=(const path& other) {

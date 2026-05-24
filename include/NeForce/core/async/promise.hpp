@@ -124,7 +124,7 @@ public:
      * @param value 要设置的结果值
      * @throw future_exception 如果结果已被设置
      */
-    void set_value(Res&& value) { state().set_result(state_type::create_setter(this, _NEFORCE forward<Res>(value))); }
+    void set_value(Res value) { state().set_result(state_type::create_setter(this, _NEFORCE forward<Res>(value))); }
 
     /**
      * @brief 设置异常
@@ -139,7 +139,7 @@ public:
      * @throw future_exception 如果结果已被设置
      * @note 结果会在当前线程退出时设置，适用于需要保证某些资源在结果设置前有效的场景
      */
-    void set_value_at_thread_exit(Res&& value) {
+    void set_value_at_thread_exit(Res value) {
         state().set_delayed_result(state_type::create_setter(this, _NEFORCE forward<Res>(value)), future_ptr);
     }
 

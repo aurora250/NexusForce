@@ -4,7 +4,22 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 optional<mac_address> mac_address::parse(const string_view str) {
-    if (str.size() != 17) {
+    const size_t len = str.size();
+
+    if (len == 12) {
+        mac_address result;
+        byte_t* ptr = result.bytes_.data();
+        for (size_t i = 0; i < 6; ++i) {
+            const auto xpair = hexadecimal::xdigit_value(str[i * 2], str[i * 2 + 1]);
+            if (!xpair.first) {
+                return none;
+            }
+            ptr[i] = xpair.second;
+        }
+        return result;
+    }
+
+    if (len != 17) {
         return none;
     }
 
@@ -18,7 +33,7 @@ optional<mac_address> mac_address::parse(const string_view str) {
         if (i > 0) {
             const char sep = str[pos++];
             if (i == 1) {
-                if (sep != ':' && sep != '-') {
+                if (sep != ':' && sep != '-' && sep != '.') {
                     return none;
                 }
                 expected_sep = sep;

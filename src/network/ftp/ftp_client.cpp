@@ -105,7 +105,52 @@ void ftp_client::do_ctrl_tls_handshake() {
 }
 
 tcp_socket ftp_client::open_data_channel() {
+    const bool use_ipv6 = address_family() == AF_INET6;
+
     if (passive_mode_ == passive_mode::passive) {
+        if (use_ipv6) {
+            const auto resp = send_command("EPSV");
+            if (resp.code != 229) {
+                NEFORCE_THROW_EXCEPTION(ftp_exception("EPSV command failed"));
+            }
+            const auto msg = resp.message.view();
+            const size_t lp = msg.rfind('(');
+            const size_t rp = msg.rfind(')');
+            if (lp == string::npos || rp == string::npos || rp <= lp) {
+                NEFORCE_THROW_EXCEPTION(ftp_exception("Failed to parse EPSV response"));
+            }
+            const auto port_part = msg.substr(lp + 1, rp - lp - 1);
+            size_t p = port_part.rfind('|');
+            if (p == string::npos || p < 1) {
+                NEFORCE_THROW_EXCEPTION(ftp_exception("Invalid EPSV response format"));
+            }
+            const auto port_str = port_part.view(port_part.rfind('|', p - 1) + 1, p - port_part.rfind('|', p - 1) - 1);
+            const auto data_port = static_cast<uint16_t>(integer32::parse(port_str).value());
+
+            const auto ctrl_local = local_endpoint();
+            if (!ctrl_local) {
+                NEFORCE_THROW_EXCEPTION(ftp_exception("Failed to get control connection local address"));
+            }
+            string host_str = ctrl_local->to_string();
+            const size_t port_col = host_str.rfind(':');
+            if (port_col != string::npos) {
+                host_str = host_str.view(0, port_col);
+            }
+            if (host_str.starts_with("[")) {
+                host_str = host_str.view(1, host_str.size() - 2);
+            }
+
+            auto data_addr = ip_address::parse(host_str, ports(data_port));
+            if (!data_addr) {
+                NEFORCE_THROW_EXCEPTION(ftp_exception("Invalid data channel address from EPSV"));
+            }
+
+            tcp_socket data_sock;
+            data_sock.open(use_ipv6 ? AF_INET6 : AF_INET);
+            static_cast<ip_socket&>(data_sock).connect(*data_addr);
+            return data_sock;
+        }
+
         const auto resp = send_command("PASV");
         if (resp.code != 227) {
             NEFORCE_THROW_EXCEPTION(ftp_exception("PASV command failed"));
@@ -145,43 +190,56 @@ tcp_socket ftp_client::open_data_channel() {
         }
 
         tcp_socket data_sock;
-        data_sock.open();
+        data_sock.open(AF_INET);
         static_cast<ip_socket&>(data_sock).connect(*data_addr);
         return data_sock;
     }
-    const auto local = local_endpoint();
-    if (!local) {
-        NEFORCE_THROW_EXCEPTION(ftp_exception("Failed to get local endpoint for PORT"));
-    }
 
     tcp_socket listen_sock;
-    listen_sock.open();
-    listen_sock.bind(ip_address::any());
+    listen_sock.open(use_ipv6 ? AF_INET6 : AF_INET);
+    listen_sock.bind(ip_address::any(ports(0U), use_ipv6 ? AF_INET6 : AF_INET));
     listen_sock.listen(1);
 
     const auto bound = listen_sock.local_endpoint();
     if (!bound) {
-        NEFORCE_THROW_EXCEPTION(ftp_exception("PORT: failed to get bound address"));
+        NEFORCE_THROW_EXCEPTION(ftp_exception("Failed to get bound address for active mode"));
     }
 
-    string local_ip;
-    {
-        char buf[INET_ADDRSTRLEN] = {};
-        const auto* sa4 = reinterpret_cast<const ::sockaddr_in*>(local->data());
-        ::inet_ntop(AF_INET, &sa4->sin_addr, buf, sizeof(buf));
-        local_ip = buf;
+    const auto ctrl_local = local_endpoint();
+    if (!ctrl_local) {
+        NEFORCE_THROW_EXCEPTION(ftp_exception("Failed to get control connection local address"));
     }
 
-    const uint16_t bp = static_cast<uint16_t>(bound->port());
-    string ip_comma = local_ip;
-    for (char& c: ip_comma) {
-        if (c == '.') {
-            c = ',';
+    if (use_ipv6) {
+        // RFC 2428 EPRT command: |2|<ipv6-address>|<tcp-port>|
+        string ctrl_str = ctrl_local->to_string();
+        const size_t port_col = ctrl_str.rfind(':');
+        string ctrl_host = ctrl_str.view(0, port_col);
+        if (ctrl_host.starts_with("[")) {
+            ctrl_host = ctrl_host.view(1, ctrl_host.size() - 2);
         }
-    }
+        const string eprt_cmd = "EPRT |2|" + ctrl_host + "|" + to_string(static_cast<uint16_t>(bound->port())) + "|";
+        expect_code(200, eprt_cmd);
+    } else {
+        string local_ip;
+        {
+            char buf[INET_ADDRSTRLEN] = {};
+            const auto* sa4 = reinterpret_cast<const ::sockaddr_in*>(ctrl_local->data());
+            ::inet_ntop(AF_INET, &sa4->sin_addr, buf, sizeof(buf));
+            local_ip = buf;
+        }
 
-    const string port_cmd = "PORT " + ip_comma + "," + to_string(bp >> 8) + "," + to_string(bp & 0xFF);
-    expect_code(200, port_cmd);
+        const uint16_t bp = static_cast<uint16_t>(bound->port());
+        string ip_comma = local_ip;
+        for (char& c: ip_comma) {
+            if (c == '.') {
+                c = ',';
+            }
+        }
+
+        const string port_cmd = "PORT " + ip_comma + "," + to_string(bp >> 8) + "," + to_string(bp & 0xFF);
+        expect_code(200, port_cmd);
+    }
 
     {
         const int lfd = static_cast<int>(listen_sock.native_handle());
@@ -191,10 +249,10 @@ tcp_socket ftp_client::open_data_channel() {
         ::timeval tv{kActiveAcceptTimeoutSec, 0};
         const int sel = ::select(lfd + 1, &fds, nullptr, nullptr, &tv);
         if (sel < 0) {
-            NEFORCE_THROW_EXCEPTION(socket_exception("PORT: select failed"));
+            NEFORCE_THROW_EXCEPTION(socket_exception("select failed"));
         }
         if (sel == 0) {
-            NEFORCE_THROW_EXCEPTION(socket_exception("PORT: accept timed out"));
+            NEFORCE_THROW_EXCEPTION(socket_exception("accept timed out"));
         }
     }
 
@@ -503,11 +561,16 @@ void ftp_client::login(const string& username, const string& password) {
         NEFORCE_THROW_EXCEPTION(ftp_exception("Not connected to FTP server"));
     }
 
-    expect_code(331, "USER " + username);
-
-    const auto resp = send_command("PASS " + password);
-    if (resp.code != 230) {
-        NEFORCE_THROW_EXCEPTION(ftp_exception("FTP login failed"));
+    const auto user_resp = send_command("USER " + username);
+    if (user_resp.code == 331) {
+        const auto resp = send_command("PASS " + password);
+        if (resp.code != 230) {
+            NEFORCE_THROW_EXCEPTION(ftp_exception("FTP login failed"));
+        }
+    } else if (user_resp.code != 230) {
+        const string err =
+                "FTP USER command failed [" + username + "] got=" + to_string(user_resp.code) + " " + user_resp.message;
+        NEFORCE_THROW_EXCEPTION(ftp_exception(err.data()));
     }
 
     set_transfer_mode(transfer_mode::binary);

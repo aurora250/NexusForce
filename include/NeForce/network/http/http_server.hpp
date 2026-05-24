@@ -125,8 +125,8 @@ public:
     bool enable_websocket{true};             ///< 是否启用WebSocket
 
 private:
-    void handle_client(tcp_socket client_socket);
-    bool try_websocket_upgrade(tcp_socket& client_socket, http_request& request);
+    void handle_client(unique_ptr<tcp_socket> client_socket);
+    bool try_websocket_upgrade(unique_ptr<tcp_socket>& client_socket, http_request& request);
     void handle_request_with_forward(tcp_socket& client_socket, http_request& request, http_session* sess);
 
 public:

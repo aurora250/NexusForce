@@ -116,7 +116,15 @@ bool http_cookie::is_valid() const noexcept {
         return false;
     }
 
-    if (expires > datetime::epoch() && expires < datetime::now()) {
+    if (max_age == 0_s) {
+        return false;
+    }
+
+    if (max_age > 0_s && expires > datetime::epoch() && expires < datetime::now()) {
+        return false;
+    }
+
+    if (max_age <= 0_s && expires > datetime::epoch() && expires < datetime::now()) {
         return false;
     }
 
@@ -124,6 +132,12 @@ bool http_cookie::is_valid() const noexcept {
 }
 
 bool http_cookie::is_expired() const noexcept {
+    if (max_age == 0_s) {
+        return true;
+    }
+    if (max_age > 0_s && expires > datetime::epoch()) {
+        return expires < datetime::now();
+    }
     if (expires <= datetime::epoch()) {
         return false;
     }

@@ -32,4 +32,29 @@ ssl_socket ssl_acceptor::accept_ssl() {
     return ssl_client;
 }
 
+optional<ssl_socket> ssl_acceptor::accept_ssl_nonblock() {
+    if (!is_open()) {
+        return none;
+    }
+    if (!ctx_.is_valid()) {
+        NEFORCE_THROW_EXCEPTION(ssl_exception("SSL context is invalid"));
+    }
+
+    auto client = tcp_acceptor::accept_nonblock();
+    if (!client) {
+        return none;
+    }
+
+    ssl_socket ssl_client(client->release());
+
+    try {
+        ssl_client.init_server_ssl(ctx_);
+    } catch (...) {
+        ssl_client.close();
+        throw;
+    }
+
+    return ssl_client;
+}
+
 NEFORCE_END_NAMESPACE__

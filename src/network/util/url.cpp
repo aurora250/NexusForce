@@ -45,6 +45,7 @@ url url::parse(const string_view str) {
         NEFORCE_THROW_EXCEPTION(network_exception("URL missing scheme"));
     }
     target.scheme = str.head(scheme_end);
+    target.scheme.lowercase();
     size_t pos = scheme_end + 3;
     if (pos >= len) {
         NEFORCE_THROW_EXCEPTION(network_exception("URL scheme invalid"));
@@ -218,9 +219,6 @@ optional<string> url::decode(const string_view str) {
 
             result += static_cast<char>(xpair.second);
             i += 3;
-        } else if (c == '+') {
-            result += ' ';
-            ++i;
         } else {
             result += c;
             ++i;
@@ -251,13 +249,8 @@ string url::encode_form(const string_view str) {
 }
 
 string url::decode_tolerant(const string_view str) {
-    auto result = url::decode(str);
-    if (result) {
-        return move(*result);
-    }
-
-    string fallback;
-    fallback.reserve(str.size());
+    string result;
+    result.reserve(str.size());
 
     size_t i = 0;
     while (i < str.size()) {
@@ -266,21 +259,21 @@ string url::decode_tolerant(const string_view str) {
         if (c == '%' && i + 2 < str.size()) {
             auto decoded = url::decode(str.substr(i, 3));
             if (decoded && decoded->size() == 1) {
-                fallback += (*decoded)[0];
+                result += (*decoded)[0];
                 i += 3;
                 continue;
             }
         }
 
         if (c == '+') {
-            fallback += ' ';
+            result += ' ';
         } else {
-            fallback += c;
+            result += c;
         }
         ++i;
     }
 
-    return fallback;
+    return result;
 }
 
 void url::parse_query(const string_view query, unordered_map<string, string>& params) {

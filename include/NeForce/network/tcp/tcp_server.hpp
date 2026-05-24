@@ -29,8 +29,8 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API tcp_server_base {
 public:
-    using client_handler_t = function<void(tcp_socket)>;          ///< 客户端处理器类型
-    using exception_handler_t = function<void(const exception&)>; ///< 异常处理器类型
+    using client_handler_t = function<void(unique_ptr<tcp_socket>)>; ///< 客户端处理器类型
+    using exception_handler_t = function<void(const exception&)>;    ///< 异常处理器类型
 
 protected:
     unique_ptr<tcp_acceptor> acceptor_; ///< TCP接受器
@@ -67,9 +67,9 @@ protected:
      * 调用客户端处理器处理连接。
      * 派生类可重写此方法以自定义处理逻辑。
      */
-    virtual void handle_client(tcp_socket client) {
+    virtual void handle_client(unique_ptr<tcp_socket> client) {
         if (client_handler_) {
-            client_handler_(_NEFORCE move(client));
+            client_handler_(move(client));
         }
     }
 
@@ -80,7 +80,7 @@ protected:
      * 派生类实现具体的连接接受逻辑。
      * 支持阻塞和非阻塞模式。
      */
-    virtual optional<tcp_socket> accept_one() = 0;
+    virtual optional<unique_ptr<tcp_socket>> accept_one() = 0;
 
     /**
      * @brief 创建并配置acceptor
@@ -176,7 +176,7 @@ public:
 class NEFORCE_API tcp_server final : public tcp_server_base {
 private:
     void create_acceptor(const ip_address& endpoint, int backlog) override;
-    optional<tcp_socket> accept_one() override;
+    optional<unique_ptr<tcp_socket>> accept_one() override;
 
 public:
     using tcp_server_base::tcp_server_base;
@@ -206,9 +206,9 @@ public:
  * }
  *
  * // 设置客户端处理器
- * server.set_client_handler([](tcp_socket client) {
- *     auto& ssl_client = static_cast<ssl_socket&>(client);
- *     // 处理加密连接...
+ * server.set_client_handler([](unique_ptr<tcp_socket> client) {
+ *     // client is polymorphic — ssl_socket methods work via virtual dispatch
+ *     client->send_all({"response"});
  * });
  *
  * // 启动服务器
@@ -221,7 +221,7 @@ private:
 
 private:
     void create_acceptor(const ip_address& endpoint, int backlog) override;
-    optional<tcp_socket> accept_one() override;
+    optional<unique_ptr<tcp_socket>> accept_one() override;
 
 public:
     /**

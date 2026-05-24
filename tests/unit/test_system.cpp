@@ -3242,162 +3242,364 @@ protected:
         return "/bin/sleep";
 #endif
     }
+
+    static string get_stdin_test_executable() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return "cmd.exe";
+#else
+        return "/bin/cat";
+#endif
+    }
+
+    static vector<string> get_stdin_test_args() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return {"/c", "findstr", ".*"};
+#else
+        return {};
+#endif
+    }
 };
 
-TEST_F(ProcessTest, Create_SimpleProcess_ReturnsValidInfo) {
-    auto info = process::create(get_test_executable(), get_test_args());
-    EXPECT_GT(info.process_id, 0);
-    EXPECT_TRUE(info.is_running);
+TEST_F(ProcessTest, Start_SimpleProcess_ReturnsValidId) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    EXPECT_GT(p.id(), 0);
+    p.wait();
 }
 
-TEST_F(ProcessTest, Create_WithCaptureOutput_ReturnsValidInfo) {
-    auto info = process::create(get_test_output_executable(), get_test_output_args(), true);
-    EXPECT_GT(info.process_id, 0);
-    EXPECT_TRUE(info.is_running);
+TEST_F(ProcessTest, Start_WithCaptureOutput_ReturnsValidId) {
+    process p;
+    p.set_capture_stdout(true);
+    p.start(get_test_output_executable(), get_test_output_args());
+    EXPECT_GT(p.id(), 0);
+    p.wait();
 }
 
-TEST_F(ProcessTest, Create_CaptureOutput_HasOutput) {
-    auto info = process::create(get_test_output_executable(), get_test_output_args(), true);
-    process::wait_for(info);
-
-    string output = info.stdout_output;
-    EXPECT_FALSE(output.empty());
+TEST_F(ProcessTest, Start_InvalidExecutable_ThrowsException) {
+    process p;
+    EXPECT_THROW(p.start("nonexistent_executable_xyz_12345", {}), process_exception);
 }
 
-TEST_F(ProcessTest, Create_WithoutOutput_OutputEmpty) {
-    auto info = process::create(get_test_executable(), get_test_args(), false);
-    process::wait_for(info);
-
-    string output = info.stdout_output;
-    EXPECT_TRUE(output.empty());
+TEST_F(ProcessTest, Start_EmptyExecutable_ThrowsException) {
+    process p;
+    EXPECT_THROW(p.start("", {}), process_exception);
 }
 
-TEST_F(ProcessTest, Create_InvalidExecutable_ThrowsException) {
-    EXPECT_THROW(ignore = process::create("nonexistent_executable_xyz_12345", {}), process_exception);
+TEST_F(ProcessTest, Start_DoubleStart_ThrowsException) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    EXPECT_THROW(p.start(get_test_executable(), get_test_args()), process_exception);
+    p.wait();
 }
 
-TEST_F(ProcessTest, Create_EmptyExecutable_ThrowsException) {
-    EXPECT_THROW(ignore = process::create("", {}), process_exception);
+TEST_F(ProcessTest, Start_WithArgs_Success) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    EXPECT_GT(p.id(), 0);
+    p.wait();
 }
 
-TEST_F(ProcessTest, Create_WithArgs_Success) {
-    auto info = process::create(get_test_executable(), get_test_args());
-    EXPECT_GT(info.process_id, 0);
-    process::wait_for(info);
+TEST_F(ProcessTest, Start_MultipleProcesses_UniqueIds) {
+    process p1;
+    p1.start(get_test_executable(), get_test_args());
+    process p2;
+    p2.start(get_test_executable(), get_test_args());
+
+    EXPECT_NE(p1.id(), p2.id());
+
+    p1.wait();
+    p2.wait();
 }
 
-TEST_F(ProcessTest, Create_MultipleProcesses_UniqueIds) {
-    auto info1 = process::create(get_test_executable(), get_test_args());
-    auto info2 = process::create(get_test_executable(), get_test_args());
-
-    EXPECT_NE(info1.process_id, info2.process_id);
-
-    process::wait_for(info1);
-    process::wait_for(info2);
+TEST_F(ProcessTest, Start_WithSpacesInPath_Success) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    EXPECT_GT(p.id(), 0);
+    p.wait();
 }
 
-TEST_F(ProcessTest, WaitFor_InfiniteTimeout_ReturnsExitCode) {
-    auto info = process::create(get_test_executable(), get_test_args());
-    int exit_code = process::wait_for(info);
+TEST_F(ProcessTest, Wait_InfiniteTimeout_ReturnsExitCode) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    int exit_code = p.wait();
     EXPECT_GE(exit_code, 0);
 }
 
-TEST_F(ProcessTest, WaitFor_ZeroTimeout_ReturnsMinusOne) {
-    auto info = process::create(get_long_running_executable(), get_long_running_args());
-    int exit_code = process::wait_for(info, 0);
+TEST_F(ProcessTest, Wait_ZeroTimeout_ReturnsMinusOne) {
+    process p;
+    p.start(get_long_running_executable(), get_long_running_args());
+    int exit_code = p.wait(0);
     EXPECT_EQ(exit_code, -1);
-    process::terminate(info);
+    p.terminate();
 }
 
-TEST_F(ProcessTest, WaitFor_ProcessCompletes_ReturnsExitCode) {
-    auto info = process::create(get_test_executable(), get_test_args());
-    int exit_code = process::wait_for(info, 5000);
+TEST_F(ProcessTest, Wait_ProcessCompletes_ReturnsExitCode) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    int exit_code = p.wait(5000);
     EXPECT_GE(exit_code, 0);
 }
 
-TEST_F(ProcessTest, WaitFor_UpdatesIsRunningToFalse) {
-    auto info = process::create(get_test_executable(), get_test_args());
-    process::wait_for(info);
-    EXPECT_FALSE(info.is_running);
+TEST_F(ProcessTest, Wait_UpdatesIsRunningToFalse) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    p.wait();
+    EXPECT_FALSE(p.is_running());
 }
 
-TEST_F(ProcessTest, WaitFor_CapturesStdoutOutput) {
-    auto info = process::create(get_test_output_executable(), get_test_output_args(), true);
-    process::wait_for(info);
-
-    string output = info.stdout_output;
-    EXPECT_FALSE(output.empty());
+TEST_F(ProcessTest, Wait_TimeoutNegative_EquivalentToInfinite) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    int exit_code = p.wait(-1);
+    EXPECT_GE(exit_code, 0);
 }
 
-TEST_F(ProcessTest, Terminate_RunningProcess_ReturnsTrue) {
-    auto info = process::create(get_long_running_executable(), get_long_running_args());
-    EXPECT_TRUE(process::is_running(info));
-
-    bool result = process::terminate(info);
-    EXPECT_TRUE(result);
+TEST_F(ProcessTest, Wait_NotStarted_ThrowsException) {
+    process p;
+    EXPECT_THROW(p.wait(), process_exception);
 }
 
-TEST_F(ProcessTest, Terminate_AlreadyExited_ReturnsFalse) {
-    auto info = process::create(get_test_executable(), get_test_args());
-    process::wait_for(info);
-
-    bool result = process::terminate(info);
-    EXPECT_TRUE(result || !result);
+TEST_F(ProcessTest, Wait_DoubleWait_ReturnsSameExitCode) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    int ec1 = p.wait();
+    int ec2 = p.wait();
+    EXPECT_EQ(ec1, ec2);
 }
 
-TEST_F(ProcessTest, Suspend_RunningProcess_ReturnsTrue) {
-    auto info = process::create(get_long_running_executable(), get_long_running_args());
+TEST_F(ProcessTest, CaptureOutput_HasOutput) {
+    process p;
+    p.set_capture_stdout(true);
+    p.start(get_test_output_executable(), get_test_output_args());
+    p.wait();
 
-    bool result = process::suspend(info);
-    EXPECT_TRUE(result);
-
-    process::terminate(info);
+    EXPECT_FALSE(p.stdout_output().empty());
 }
 
-TEST_F(ProcessTest, Suspend_AlreadyExited_ReturnsFalse) {
-    auto info = process::create(get_test_executable(), get_test_args());
-    process::wait_for(info);
+TEST_F(ProcessTest, CaptureOutput_WithoutCapture_OutputEmpty) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    p.wait();
 
-    bool result = process::suspend(info);
-    EXPECT_TRUE(result || !result);
+    EXPECT_TRUE(p.stdout_output().empty());
 }
 
-TEST_F(ProcessTest, Resume_SuspendedProcess_ReturnsTrue) {
-    auto info = process::create(get_long_running_executable(), get_long_running_args());
+TEST_F(ProcessTest, CaptureOutput_MultipleLines_Success) {
+    process p;
+    p.set_capture_stdout(true);
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    p.start("cmd.exe", {"/c", "echo line1 && echo line2"});
+#else
+    p.start("/bin/sh", {"-c", "echo line1 && echo line2"});
+#endif
+    p.wait();
 
-    process::suspend(info);
-    bool result = process::resume(info);
-    EXPECT_TRUE(result);
-
-    process::terminate(info);
+    EXPECT_FALSE(p.stdout_output().empty());
 }
 
-TEST_F(ProcessTest, Resume_NotSuspended_ReturnsFalse) {
-    auto info = process::create(get_test_executable(), get_test_args());
-    process::wait_for(info);
+TEST_F(ProcessTest, CaptureOutput_LargeOutput_NoDeadlock) {
+    // 通过 stdin 输入 128KB 数据，由 cat 输出，验证异步管道读取不会死锁
+    process p;
+    p.set_capture_stdout(true);
+    string large_data(131072, 'x');
+    p.set_stdin_data(large_data);
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    p.start("cmd.exe", {"/c", "findstr", ".*"});
+#else
+    p.start("/bin/cat", {});
+#endif
+    int ec = p.wait(30000);
+    EXPECT_GE(ec, 0);
+    EXPECT_GT(p.stdout_output().size(), 65536); // 应超过典型管道缓冲区 64KB
+}
 
-    bool result = process::resume(info);
-    EXPECT_TRUE(result || !result);
+TEST_F(ProcessTest, SeparateStderr_StderrNotEmpty) {
+    process p;
+    p.set_capture_stdout(true);
+    p.set_capture_stderr(true);
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    p.start("cmd.exe", {"/c", "echo stdout_msg && echo stderr_msg >&2"});
+#else
+    p.start("/bin/sh", {"-c", "echo stdout_msg; echo stderr_msg >&2"});
+#endif
+    p.wait();
+
+    EXPECT_FALSE(p.stdout_output().empty());
+    EXPECT_FALSE(p.stderr_output().empty());
+}
+
+TEST_F(ProcessTest, SeparateStderr_StdoutOnly_StderrEmpty) {
+    process p;
+    p.set_capture_stdout(true);
+    p.set_capture_stderr(true);
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    p.start("cmd.exe", {"/c", "echo only stdout"});
+#else
+    p.start("/bin/sh", {"-c", "echo only stdout"});
+#endif
+    p.wait();
+
+    EXPECT_FALSE(p.stdout_output().empty());
+    EXPECT_TRUE(p.stderr_output().empty());
+}
+
+TEST_F(ProcessTest, StdinData_PresetData_ChildReceivesIt) {
+    process p;
+    p.set_capture_stdout(true);
+    p.set_stdin_data("hello_stdin\n");
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    p.start("cmd.exe", {"/c", "findstr", ".*"});
+#else
+    p.start("/bin/cat", {});
+#endif
+    p.wait(5000);
+
+    EXPECT_FALSE(p.stdout_output().empty());
+    EXPECT_TRUE(p.stdout_output().find("hello_stdin") != string::npos);
+}
+
+TEST_F(ProcessTest, Terminate_RunningProcess_Success) {
+    process p;
+    p.start(get_long_running_executable(), get_long_running_args());
+    EXPECT_TRUE(p.is_running());
+
+    p.terminate();
+    EXPECT_FALSE(p.is_running());
+}
+
+TEST_F(ProcessTest, Terminate_NotStarted_NoThrow) {
+    process p;
+    EXPECT_NO_THROW(p.terminate());
+}
+
+TEST_F(ProcessTest, Terminate_AlreadyExited_NoThrow) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    p.wait();
+    EXPECT_NO_THROW(p.terminate());
+}
+
+TEST_F(ProcessTest, Suspend_RunningProcess_Success) {
+    process p;
+    p.start(get_long_running_executable(), get_long_running_args());
+
+    EXPECT_NO_THROW(p.suspend());
+    p.terminate();
+}
+
+TEST_F(ProcessTest, Suspend_AlreadyExited_Throws) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    p.wait();
+
+    EXPECT_THROW(p.suspend(), process_exception);
+}
+
+TEST_F(ProcessTest, Resume_SuspendedProcess_Success) {
+    process p;
+    p.start(get_long_running_executable(), get_long_running_args());
+
+    p.suspend();
+    EXPECT_NO_THROW(p.resume());
+    p.terminate();
+}
+
+TEST_F(ProcessTest, Resume_AlreadyExited_Throws) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    p.wait();
+
+    EXPECT_THROW(p.resume(), process_exception);
+}
+
+TEST_F(ProcessTest, Wait_AfterTerminate_ReturnsCorrectly) {
+    process p;
+    p.start(get_long_running_executable(), get_long_running_args());
+    p.terminate();
+
+    this_thread::sleep_for(milliseconds(200));
+    int exit_code = p.wait(1000);
+    EXPECT_TRUE(exit_code >= 0 || exit_code == -1);
 }
 
 TEST_F(ProcessTest, IsRunning_RunningProcess_ReturnsTrue) {
-    auto info = process::create(get_long_running_executable(), get_long_running_args());
-    EXPECT_TRUE(process::is_running(info));
-    process::terminate(info);
+    process p;
+    p.start(get_long_running_executable(), get_long_running_args());
+    EXPECT_TRUE(p.is_running());
+    p.terminate();
 }
 
 TEST_F(ProcessTest, IsRunning_ExitedProcess_ReturnsFalse) {
-    auto info = process::create(get_test_executable(), get_test_args());
-    process::wait_for(info);
-    EXPECT_FALSE(process::is_running(info));
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    p.wait();
+    EXPECT_FALSE(p.is_running());
+}
+
+TEST_F(ProcessTest, IsRunning_NotStarted_ReturnsFalse) {
+    process p;
+    EXPECT_FALSE(p.is_running());
 }
 
 TEST_F(ProcessTest, IsRunning_TerminatedProcess_ReturnsFalse) {
-    auto info = process::create(get_long_running_executable(), get_long_running_args());
-    process::terminate(info);
+    process p;
+    p.start(get_long_running_executable(), get_long_running_args());
+    p.terminate();
 
     this_thread::sleep_for(milliseconds(100));
-    EXPECT_FALSE(process::is_running(info));
+    EXPECT_FALSE(p.is_running());
+}
+
+TEST_F(ProcessTest, GetMemoryInfo_RunningProcess_ReturnsNonZero) {
+    process p;
+    p.start(get_long_running_executable(), get_long_running_args());
+
+    auto mem_info = p.get_memory_info();
+    EXPECT_GT(mem_info.working_set_size, 0);
+
+    p.terminate();
+}
+
+TEST_F(ProcessTest, GetMemoryInfo_NotStarted_ReturnsZero) {
+    process p;
+    auto mem_info = p.get_memory_info();
+    EXPECT_EQ(mem_info.working_set_size, 0);
+}
+
+TEST_F(ProcessTest, GetState_ExitedProcess_ReturnsExited) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    p.wait();
+
+    EXPECT_EQ(p.get_state(), process::state::exited);
+}
+
+TEST_F(ProcessTest, GetState_NotStarted_ReturnsUnknown) {
+    process p;
+    EXPECT_EQ(p.get_state(), process::state::unknown);
+}
+
+TEST_F(ProcessTest, GetState_SuspendedProcess_ReturnsSuspended) {
+    process p;
+    p.start(get_long_running_executable(), get_long_running_args());
+    p.suspend();
+
+    auto state = p.get_state();
+    EXPECT_TRUE(state == process::state::suspended || state == process::state::running);
+
+    p.terminate();
+}
+
+TEST_F(ProcessTest, Id_NotStarted_ReturnsZero) {
+    process p;
+    EXPECT_EQ(p.id(), 0);
+}
+
+TEST_F(ProcessTest, ExitCode_NotWaited_ReturnsMinusOne) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    EXPECT_EQ(p.exit_code(), -1);
+    p.wait();
 }
 
 TEST_F(ProcessTest, CurrentId_ReturnsPositiveValue) {
@@ -3414,82 +3616,48 @@ TEST_F(ProcessTest, CurrentId_ReturnsCurrentProcessId) {
 #endif
 }
 
-TEST_F(ProcessTest, GetMemoryInfo_RunningProcess_ReturnsNonZero) {
-    auto info = process::create(get_long_running_executable(), get_long_running_args());
-
-    auto mem_info = process::get_memory_info(info);
-    EXPECT_GT(mem_info.working_set_size, 0);
-
-    process::terminate(info);
-}
-
-TEST_F(ProcessTest, GetMemoryInfo_CurrentProcess_ReturnsNonZero) {
-    process::state_info info{};
-    info.process_id = process::current_id();
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    info.process_handle = ::GetCurrentProcess();
-#endif
-
-    auto mem_info = process::get_memory_info(info);
+TEST_F(ProcessTest, GetMemoryInfoByPid_CurrentProcess_ReturnsNonZero) {
+    auto mem_info = process::get_memory_info(process::current_id());
     EXPECT_GT(mem_info.working_set_size, 0);
 }
 
-TEST_F(ProcessTest, GetState_ExitedProcess_ReturnsExited) {
-    auto info = process::create(get_test_executable(), get_test_args());
-    process::wait_for(info);
+TEST_F(ProcessTest, GetMemoryInfoByPid_ExitedProcess_ReturnsNonNegative) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    p.wait();
 
-    auto state = process::get_state(info);
-    EXPECT_EQ(state, process::state::exited);
+    auto mem_info = process::get_memory_info(p.id());
+    EXPECT_GE(mem_info.working_set_size, 0);
 }
 
-TEST_F(ProcessTest, GetState_SuspendedProcess_ReturnsSuspended) {
-    auto info = process::create(get_long_running_executable(), get_long_running_args());
-    process::suspend(info);
-
-    auto state = process::get_state(info);
-    EXPECT_TRUE(state == process::state::suspended || state == process::state::running);
-
-    process::terminate(info);
+TEST_F(ProcessTest, GetStateByPid_CurrentProcess_ReturnsRunning) {
+    auto state = process::get_state(process::current_id());
+    EXPECT_TRUE(state == process::state::running);
 }
 
 TEST_F(ProcessTest, CheckPermission_CurrentProcess_ReturnsTrue) {
-    process::state_info info{};
-    info.process_id = process::current_id();
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    info.process_handle = ::GetCurrentProcess();
-#endif
-
-    EXPECT_TRUE(process::check_permission(info, process::permission::query_info));
+    EXPECT_TRUE(process::check_permission(process::current_id(), process::permission::query_info));
 }
 
 TEST_F(ProcessTest, CheckPermission_ReadPermission_ReturnsResult) {
-    process::state_info info{};
-    info.process_id = process::current_id();
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    info.process_handle = ::GetCurrentProcess();
-#endif
-
-    bool result = process::check_permission(info, process::permission::read);
+    bool result = process::check_permission(process::current_id(), process::permission::read);
     EXPECT_TRUE(result || !result);
 }
 
 TEST_F(ProcessTest, CheckPermission_AllPermission_ReturnsResult) {
-    process::state_info info{};
-    info.process_id = process::current_id();
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    info.process_handle = ::GetCurrentProcess();
-#endif
-
-    bool result = process::check_permission(info, process::permission::all);
+    bool result = process::check_permission(process::current_id(), process::permission::all);
     EXPECT_TRUE(result || !result);
 }
 
 TEST_F(ProcessTest, CheckPermission_NonExistentProcess_ReturnsFalse) {
-    process::state_info info{};
-    info.process_id = 99999999;
-
-    bool result = process::check_permission(info, process::permission::query_info);
+    bool result = process::check_permission(99999999, process::permission::query_info);
     EXPECT_FALSE(result);
+}
+
+TEST_F(ProcessTest, CheckPermission_NoPermission_ReturnsResult) {
+    process::permission no_perm = static_cast<process::permission>(0);
+    bool result = process::check_permission(process::current_id(), no_perm);
+    EXPECT_TRUE(result || !result);
 }
 
 TEST_F(ProcessTest, Name_CurrentProcess_ReturnsNonEmpty) {
@@ -3502,11 +3670,69 @@ TEST_F(ProcessTest, Name_NonExistentProcess_ReturnsEmpty) {
     EXPECT_TRUE(name.empty());
 }
 
-TEST_F(ProcessTest, StateInfo_Defaults_Correct) {
-    process::state_info info{};
-    EXPECT_EQ(info.process_id, 0);
-    EXPECT_FALSE(info.is_running);
-    EXPECT_TRUE(info.stdout_output.empty());
+TEST_F(ProcessTest, Name_ConsistentWithCurrentProcess) {
+    string name1 = process::name(process::current_id());
+    string name2 = process::name(process::current_id());
+    EXPECT_EQ(name1, name2);
+}
+
+TEST_F(ProcessTest, GetStateByPid_NonExistentProcess_ReturnsExited) {
+    auto state = process::get_state(99999999);
+    EXPECT_TRUE(state == process::state::exited || state == process::state::unknown);
+}
+
+TEST_F(ProcessTest, CurrentProcessPrivilegeLevel) {
+    const auto level = process::current_privilege_level();
+
+    ASSERT_NE(level, process::privilege_level::unknown);
+    ASSERT_TRUE(level == process::privilege_level::privileged || level == process::privilege_level::not_privileged);
+}
+
+TEST_F(ProcessTest, GetPrivilegeLevelByCurrentId) {
+    const auto current_id = process::current_id();
+    const auto level = process::get_privilege_level(current_id);
+
+    const auto current_level = process::current_privilege_level();
+
+    ASSERT_NE(level, process::privilege_level::unknown);
+    ASSERT_EQ(level, current_level);
+}
+
+TEST_F(ProcessTest, GetPrivilegeLevelInvalidPid) {
+    constexpr process::native_id_type invalid_pid = 99999999;
+
+    const auto level = process::get_privilege_level(invalid_pid);
+    ASSERT_EQ(level, process::privilege_level::unknown);
+}
+
+TEST_F(ProcessTest, RootProcessHasPrivilegedLevel) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const auto level = process::current_privilege_level();
+    if (level == process::privilege_level::unknown) {
+        GTEST_SKIP() << "Cannot determine privilege level on this system";
+    }
+#else
+    if (::geteuid() != 0) {
+        GTEST_SKIP() << "Test requires root privileges";
+    }
+    const auto level = process::current_privilege_level();
+    ASSERT_EQ(level, process::privilege_level::privileged);
+#endif
+}
+
+TEST_F(ProcessTest, NonRootProcessHasNotPrivilegedLevel) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const auto level = process::current_privilege_level();
+    if (level == process::privilege_level::unknown) {
+        GTEST_SKIP() << "Cannot determine privilege level on this system";
+    }
+#else
+    if (::geteuid() == 0) {
+        GTEST_SKIP() << "Test requires non-root privileges";
+    }
+    const auto level = process::current_privilege_level();
+    ASSERT_EQ(level, process::privilege_level::not_privileged);
+#endif
 }
 
 TEST_F(ProcessTest, MemoryInfo_Defaults_AllZero) {
@@ -3538,58 +3764,12 @@ TEST_F(ProcessTest, StateValues_AreDistinct) {
     EXPECT_NE(static_cast<int>(process::state::running), static_cast<int>(process::state::unknown));
 }
 
-TEST_F(ProcessTest, DISABLED_Create_WithEmptyArgs_Success) {
-    auto info = process::create(get_test_executable());
-    EXPECT_GT(info.process_id, 0);
-    process::wait_for(info, 5000);
-}
-
-TEST_F(ProcessTest, WaitFor_AfterTerminate_ReturnsCorrectly) {
-    auto info = process::create(get_long_running_executable(), get_long_running_args());
-    process::terminate(info);
-
-    this_thread::sleep_for(milliseconds(200));
-    int exit_code = process::wait_for(info, 1000);
-    EXPECT_TRUE(exit_code >= 0 || exit_code == -1);
-}
-
-TEST_F(ProcessTest, GetMemoryInfo_ExitedProcess_ReturnsNonNegative) {
-    auto info = process::create(get_test_executable(), get_test_args());
-    process::wait_for(info);
-
-    auto mem_info = process::get_memory_info(info);
-    EXPECT_GE(mem_info.working_set_size, 0);
-}
-
-TEST_F(ProcessTest, DISABLED_GetState_CurrentProcess_ReturnsRunning) {
-    process::state_info info{};
-    info.process_id = process::current_id();
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    info.process_handle = ::GetCurrentProcess();
-#endif
-
-    auto state = process::get_state(info);
-    EXPECT_TRUE(state == process::state::running);
-}
-
-TEST_F(ProcessTest, Name_ConsistentWithCurrentProcess) {
-    string name1 = process::name(process::current_id());
-    string name2 = process::name(process::current_id());
-    EXPECT_EQ(name1, name2);
-}
-
-TEST_F(ProcessTest, IsRunning_CurrentProcess_ReturnsTrue) {
-    process::state_info info{};
-    info.process_id = process::current_id();
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    info.process_handle = ::GetCurrentProcess();
-#endif
-    EXPECT_TRUE(process::is_running(info));
-}
+TEST_F(ProcessTest, NativeIdType_IsIntegral) { EXPECT_TRUE(is_integral<process::native_id_type>::value); }
 
 TEST_F(ProcessTest, Exception_CopyConstructor_Success) {
     try {
-        ignore = process::create("nonexistent_executable_xyz_12345", {});
+        process p;
+        p.start("nonexistent_executable_xyz_12345", {});
         FAIL() << "Expected process_exception";
     } catch (const process_exception& e) {
         process_exception copied(e);
@@ -3599,7 +3779,8 @@ TEST_F(ProcessTest, Exception_CopyConstructor_Success) {
 
 TEST_F(ProcessTest, Exception_What_ContainsErrorInfo) {
     try {
-        ignore = process::create("nonexistent_executable_xyz_12345", {});
+        process p;
+        p.start("nonexistent_executable_xyz_12345", {});
         FAIL() << "Expected process_exception";
     } catch (const process_exception& e) {
         EXPECT_NE(e.what(), nullptr);
@@ -3607,42 +3788,121 @@ TEST_F(ProcessTest, Exception_What_ContainsErrorInfo) {
     }
 }
 
-TEST_F(ProcessTest, CaptureOutput_MultipleLines_Success) {
+TEST_F(ProcessTest, ExecuteShell_ReturnsNonEmptyOutput) {
+    auto result = process::execute_shell("echo hello");
+    EXPECT_FALSE(result.output.empty());
+}
+
+TEST_F(ProcessTest, ExecuteShell_ReturnsExitCodeZero) {
+    auto result = process::execute_shell("echo hello");
+    EXPECT_EQ(result.exit_code, 0);
+}
+
+TEST_F(ProcessTest, ExecuteShell_EmptyCommand_Throws) { EXPECT_THROW(process::execute_shell(""), process_exception); }
+
+TEST_F(ProcessTest, Destructor_AutoTerminatesRunningProcess) {
+    {
+        process p;
+        p.start(get_long_running_executable(), get_long_running_args());
+        EXPECT_TRUE(p.is_running());
+    }
+    SUCCEED();
+}
+
+TEST_F(ProcessTest, Close_ExplicitCleanup) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    p.close();
+
+    EXPECT_EQ(p.id(), 0);
+    EXPECT_FALSE(p.is_running());
+}
+
+TEST_F(ProcessTest, Close_AfterClose_NoThrow) {
+    process p;
+    p.close();
+    EXPECT_NO_THROW(p.close());
+}
+
+TEST_F(ProcessTest, MoveConstructor_TransfersOwnership) {
+    process p1;
+    p1.start(get_test_executable(), get_test_args());
+    auto original_id = p1.id();
+    EXPECT_GT(original_id, 0);
+
+    process p2(move(p1));
+
+    EXPECT_EQ(p1.id(), 0);
+    EXPECT_FALSE(p1.is_running());
+    EXPECT_EQ(p2.id(), original_id);
+    EXPECT_TRUE(p2.is_running());
+
+    p2.wait();
+}
+
+TEST_F(ProcessTest, MoveAssignment_TransfersOwnership) {
+    process p1;
+    p1.start(get_test_executable(), get_test_args());
+    auto original_id = p1.id();
+
+    process p2;
+    p2 = move(p1);
+
+    EXPECT_EQ(p1.id(), 0);
+    EXPECT_FALSE(p1.is_running());
+    EXPECT_EQ(p2.id(), original_id);
+    EXPECT_TRUE(p2.is_running());
+
+    p2.wait();
+}
+
+TEST_F(ProcessTest, MoveAssignment_SelfAssign_Noop) {
+    process p;
+    p.start(get_test_executable(), get_test_args());
+    auto original_id = p.id();
+
+    p = move(p);
+
+    EXPECT_EQ(p.id(), original_id);
+    p.wait();
+}
+
+TEST_F(ProcessTest, MoveAssignment_CleansUpOldProcess) {
+    process p1;
+    p1.start(get_long_running_executable(), get_long_running_args());
+    auto p1_id = p1.id();
+
+    process p2;
+    p2.start(get_test_executable(), get_test_args());
+    auto p2_id = p2.id();
+
+    p2 = move(p1);
+
+    EXPECT_EQ(p2.id(), p1_id);
+    EXPECT_EQ(p1.id(), 0);
+}
+
+TEST_F(ProcessTest, ChainConfiguration_Works) {
+    process p;
+    p.set_capture_stdout(true).set_capture_stderr(false);
+    p.start(get_test_output_executable(), get_test_output_args());
+    p.wait();
+
+    EXPECT_FALSE(p.stdout_output().empty());
+}
+
+TEST_F(ProcessTest, MergedStderr_WhenOnlyStdoutCaptured) {
+    process p;
+    p.set_capture_stdout(true);
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    auto info = process::create("cmd.exe", {"/c", "echo line1 && echo line2"}, true);
+    p.start("cmd.exe", {"/c", "echo merged && echo err_msg >&2"});
 #else
-    auto info = process::create("/bin/sh", {"-c", "echo line1 && echo line2"}, true);
+    p.start("/bin/sh", {"-c", "echo merged; echo err_msg >&2"});
 #endif
-    process::wait_for(info);
+    p.wait();
 
-    string output = info.stdout_output;
-    EXPECT_FALSE(output.empty());
-}
-
-TEST_F(ProcessTest, NativeIdType_IsIntegral) { EXPECT_TRUE(is_integral<process::native_id_type>::value); }
-
-TEST_F(ProcessTest, Create_ProcessWithSpacesInPath_Success) {
-    auto info = process::create(get_test_executable(), get_test_args());
-    EXPECT_GT(info.process_id, 0);
-    process::wait_for(info);
-}
-
-TEST_F(ProcessTest, WaitFor_TimeoutNegative_EquivalentToInfinite) {
-    auto info = process::create(get_test_executable(), get_test_args());
-    int exit_code = process::wait_for(info, -1);
-    EXPECT_GE(exit_code, 0);
-}
-
-TEST_F(ProcessTest, CheckPermission_NoPermission_ReturnsResult) {
-    process::state_info info{};
-    info.process_id = process::current_id();
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    info.process_handle = ::GetCurrentProcess();
-#endif
-
-    process::permission no_perm = static_cast<process::permission>(0);
-    bool result = process::check_permission(info, no_perm);
-    EXPECT_TRUE(result || !result);
+    string output = p.stdout_output();
+    EXPECT_TRUE(output.find("err_msg") != string::npos || output.find("merged") != string::npos);
 }
 
 class ShareMemoryTest : public ::testing::Test {

@@ -35,6 +35,10 @@ bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout,
         NEFORCE_THROW_EXCEPTION(value_exception("Invalid endpoint"));
     }
 
+    if (fd_ >= FD_SETSIZE) {
+        NEFORCE_THROW_EXCEPTION(socket_exception("Socket fd exceeds FD_SETSIZE"));
+    }
+
 #ifdef NEFORCE_PLATFORM_WINDOWS
     unsigned long mode = 1;
     ::ioctlsocket(fd_, FIONBIO, &mode);
@@ -131,7 +135,7 @@ ssize_t tcp_socket::send(const memory_view<const char> data, const int flags) {
         return 0;
     }
 
-    const ssize_t result = ::send(fd_, data.data(), static_cast<int>(data.size()), flags);
+    const ssize_t result = ::send(fd_, data.data(), static_cast<int>(data.size()), flags | MSG_NOSIGNAL);
     if (result < 0) {
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to send data"));
     }
@@ -152,7 +156,7 @@ ssize_t tcp_socket::send(const memory_view<const char> data, const milliseconds 
         }
     }
 
-    const ssize_t result = ::send(fd_, data.data(), static_cast<int>(data.size()), flags);
+    const ssize_t result = ::send(fd_, data.data(), static_cast<int>(data.size()), flags | MSG_NOSIGNAL);
     if (result < 0) {
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to send data"));
     }

@@ -264,7 +264,7 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
  */
 struct NEFORCE_API http_server_response : istringify<http_server_response> {
     string version{"HTTP/1.1"};                    ///< HTTP版本
-    http_status status{http_status::S4_NOT_FOUNT}; ///< HTTP状态码
+    http_status status{http_status::S4_NOT_FOUND}; ///< HTTP状态码
     string status_message;                         ///< 状态消息
     unordered_map<string, string> headers;         ///< 响应头
     vector<http_cookie> cookies;                   ///< 设置的Cookie

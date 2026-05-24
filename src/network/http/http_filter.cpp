@@ -2,6 +2,7 @@
 #include <NeForce/core/file/filesystem.hpp>
 #include <NeForce/core/system/console.hpp>
 #include <NeForce/network/http/http_filter.hpp>
+#include <NeForce/network/util/url.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
@@ -88,8 +89,19 @@ bool cors_filter::pre_filter(http_request& request, http_response& response) {
         return true;
     }
 
+    const auto origin = request.header("Origin");
+    if (origin.empty()) {
+        return true;
+    }
+
+    if (allowed_origins != "*" && allowed_origins != origin) {
+        return true;
+    }
+
     response.headers[http_key::Access_Control_Allow_Origin()] = allowed_origins;
-    response.headers[http_key::Access_Control_Allow_Credentials()] = to_string(allow_credentials);
+    if (allow_credentials) {
+        response.headers[http_key::Access_Control_Allow_Credentials()] = "true";
+    }
     response.headers[http_key::Access_Control_Allow_Methods()] = allowed_methods.to_string();
     response.headers[http_key::Access_Control_Allow_Headers()] = allowed_headers;
     response.headers[http_key::Access_Control_Max_Age()] = to_string(max_age.count());
@@ -197,11 +209,20 @@ optional<http_content> static_file_filter::get_mime_type(const string& path) con
 }
 
 bool static_file_filter::is_safe_path(const string& path) {
+    if (path.empty()) {
+        return false;
+    }
     if (path.contains("..")) {
         return false;
     }
     if (path.contains("//")) {
         return false;
+    }
+    if (path.contains('%')) {
+        auto decoded = url::decode(path.view());
+        if (decoded && (decoded->contains("..") || decoded->contains("//"))) {
+            return false;
+        }
     }
     return true;
 }
@@ -235,7 +256,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
 
         const auto file_size = filesystem::size(file_path);
         if (file_size > max_file_size_) {
-            response.status = http_status::S4_PAYLOAD_LARGE;
+            response.status = http_status::S4_PAYLOAD_TOO_LARGE;
             response.status_message = "Payload Too Large";
             response.set_content_type(http_content::PLAIN_TEXT());
             response.body = "File too large";
@@ -292,7 +313,7 @@ bool rate_limit_filter::pre_filter(http_request& request, http_response& respons
     info.count++;
 
     if (info.count > max_requests) {
-        response.status = http_status::S4_MANY_REQUESTS;
+        response.status = http_status::S4_TOO_MANY_REQUESTS;
         response.status_message = "Too Many Requests";
         response.set_content_type(http_content::PLAIN_TEXT());
         response.body = "Rate limit exceeded";

@@ -13,12 +13,15 @@
  *  - get_result() 阻塞获取结果
  */
 
+#include "NeForce/core/async/coroutine.hpp"
 #ifdef NEFORCE_STANDARD_20
 #    include "NeForce/core/async/atomic.hpp"
 #    include "NeForce/core/async/condition_variable.hpp"
-#    include "NeForce/core/async/coroutine.hpp"
 #    include "NeForce/core/async/mutex.hpp"
+#    include "NeForce/core/async/thread.hpp"
 #    include "NeForce/core/container/queue.hpp"
+#    include "NeForce/core/container/vector.hpp"
+#    include "NeForce/core/exception/exception_ptr.hpp"
 #    include "NeForce/core/memory/aligned_buffer.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -208,9 +211,6 @@ private:
 
             if (handle) {
                 handle.resume();
-                if (handle.done()) {
-                    handle.destroy();
-                }
             }
         }
     }
@@ -268,7 +268,7 @@ struct virtual_thread_task<void> {
             struct final_awaiter {
                 bool await_ready() noexcept { return false; }
 
-                void await_suspend(coroutine_handle<promise_type> h) noexcept {
+                bool await_suspend(coroutine_handle<promise_type> h) noexcept {
                     auto& p = h.promise();
                     auto* state = p.shared_state_;
 
@@ -277,9 +277,15 @@ struct virtual_thread_task<void> {
 
                     auto cont = state->continuation_.exchange(nullptr, memory_order_acq_rel);
                     if (cont) {
-                        inner::mark_continuation_scheduled(cont);
-                        virtual_thread_scheduler::get_instance().schedule(cont);
+                        try {
+                            inner::mark_continuation_scheduled(cont);
+                            virtual_thread_scheduler::get_instance().schedule(cont);
+                            // NOLINTNEXTLINE(bugprone-empty-catch)
+                        } catch (...) {
+                            // ignore
+                        }
                     }
+                    return false;
                 }
 
                 void await_resume() noexcept {}
@@ -291,11 +297,11 @@ struct virtual_thread_task<void> {
          * @brief 处理 co_await yield
          * @return yield 等待器
          */
-        auto await_transform(inner::yield_tag) {
+        auto await_transform(inner::yield_tag /*unused*/) {
             struct yield_awaiter {
                 inner::task_shared_state<void>* shared_state_;
 
-                bool await_ready() const noexcept { return false; }
+                NEFORCE_NODISCARD bool await_ready() const noexcept { return false; }
 
                 void await_suspend(coroutine_handle<> handle) const {
                     shared_state_->scheduled_.store(true, memory_order_release);
@@ -317,7 +323,7 @@ struct virtual_thread_task<void> {
                 inner::task_shared_state<void>* shared_state_;
                 int64_t ms_;
 
-                bool await_ready() const noexcept { return ms_ <= 0; }
+                NEFORCE_NODISCARD bool await_ready() const noexcept { return ms_ <= 0; }
 
                 void await_suspend(coroutine_handle<> handle) const {
                     shared_state_->scheduled_.store(true, memory_order_release);
@@ -354,7 +360,7 @@ struct virtual_thread_task<void> {
          * @brief 析构时释放共享状态的引用
          */
         ~promise_type() {
-            if (shared_state_) {
+            if (shared_state_ != nullptr) {
                 shared_state_->release();
             }
         }
@@ -376,7 +382,7 @@ struct virtual_thread_task<void> {
     handle_(h) {
         if (handle_) {
             shared_state_ = handle_.promise().shared_state_;
-            if (shared_state_) {
+            if (shared_state_ != nullptr) {
                 shared_state_->add_ref();
             }
         }
@@ -389,12 +395,13 @@ struct virtual_thread_task<void> {
      */
     ~virtual_thread_task() {
         if (handle_) {
-            bool was_scheduled = shared_state_ ? shared_state_->scheduled_.load(memory_order_acquire) : false;
-            if (!was_scheduled) {
+            bool completed = shared_state_ != nullptr && shared_state_->completed_.load(memory_order_acquire);
+            bool was_scheduled = shared_state_ != nullptr && shared_state_->scheduled_.load(memory_order_acquire);
+            if (!completed && !was_scheduled) {
                 handle_.destroy();
             }
         }
-        if (shared_state_) {
+        if (shared_state_ != nullptr) {
             shared_state_->release();
         }
     }
@@ -417,12 +424,13 @@ struct virtual_thread_task<void> {
             return *this;
         }
         if (handle_) {
-            bool was_scheduled = shared_state_ ? shared_state_->scheduled_.load(memory_order_acquire) : false;
-            if (!was_scheduled) {
+            bool completed = shared_state_ != nullptr && shared_state_->completed_.load(memory_order_acquire);
+            bool was_scheduled = shared_state_ != nullptr && shared_state_->scheduled_.load(memory_order_acquire);
+            if (!completed && !was_scheduled) {
                 handle_.destroy();
             }
         }
-        if (shared_state_) {
+        if (shared_state_ != nullptr) {
             shared_state_->release();
         }
         handle_ = _NEFORCE exchange(other.handle_, nullptr);
@@ -434,7 +442,9 @@ struct virtual_thread_task<void> {
      * @brief co_await 就绪检查
      * @return 任务是否已完成
      */
-    bool await_ready() noexcept { return shared_state_ && shared_state_->completed_.load(memory_order_acquire); }
+    bool await_ready() noexcept {
+        return shared_state_ != nullptr && shared_state_->completed_.load(memory_order_acquire);
+    }
 
     /**
      * @brief co_await 挂起时注册 continuation
@@ -480,12 +490,14 @@ struct virtual_thread_task<void> {
     /**
      * @brief 检查任务是否已完成
      */
-    bool is_done() const noexcept { return shared_state_ && shared_state_->completed_.load(memory_order_acquire); }
+    NEFORCE_NODISCARD bool is_done() const noexcept {
+        return shared_state_ != nullptr && shared_state_->completed_.load(memory_order_acquire);
+    }
 
     /**
      * @brief 检查任务是否关联有效共享状态
      */
-    bool valid() const noexcept { return shared_state_ != nullptr; }
+    NEFORCE_NODISCARD bool valid() const noexcept { return shared_state_ != nullptr; }
 };
 
 
@@ -536,7 +548,7 @@ struct virtual_thread_task {
             struct final_awaiter {
                 bool await_ready() noexcept { return false; }
 
-                void await_suspend(coroutine_handle<promise_type> h) noexcept {
+                bool await_suspend(coroutine_handle<promise_type> h) noexcept {
                     auto& p = h.promise();
                     auto* state = p.shared_state_;
 
@@ -545,9 +557,15 @@ struct virtual_thread_task {
 
                     auto cont = state->continuation_.exchange(nullptr, memory_order_acq_rel);
                     if (cont) {
-                        inner::mark_continuation_scheduled(cont);
-                        virtual_thread_scheduler::get_instance().schedule(cont);
+                        try {
+                            inner::mark_continuation_scheduled(cont);
+                            virtual_thread_scheduler::get_instance().schedule(cont);
+                            // NOLINTNEXTLINE(bugprone-empty-catch)
+                        } catch (...) {
+                            // ignore
+                        }
                     }
+                    return false;
                 }
 
                 void await_resume() noexcept {}
@@ -558,11 +576,11 @@ struct virtual_thread_task {
         /**
          * @brief 处理 co_await yield
          */
-        auto await_transform(inner::yield_tag) {
+        auto await_transform(inner::yield_tag /*unused*/) {
             struct yield_awaiter {
                 inner::task_shared_state<T>* shared_state_;
 
-                bool await_ready() const noexcept { return false; }
+                NEFORCE_NODISCARD bool await_ready() const noexcept { return false; }
 
                 void await_suspend(coroutine_handle<> handle) const {
                     shared_state_->scheduled_.store(true, memory_order_release);
@@ -583,7 +601,7 @@ struct virtual_thread_task {
                 inner::task_shared_state<T>* shared_state_;
                 int64_t ms_;
 
-                bool await_ready() const noexcept { return ms_ <= 0; }
+                NEFORCE_NODISCARD bool await_ready() const noexcept { return ms_ <= 0; }
 
                 void await_suspend(coroutine_handle<> handle) const {
                     shared_state_->scheduled_.store(true, memory_order_release);
@@ -663,8 +681,9 @@ struct virtual_thread_task {
      */
     ~virtual_thread_task() {
         if (handle_) {
-            bool was_scheduled = shared_state_ ? shared_state_->scheduled_.load(memory_order_acquire) : false;
-            if (!was_scheduled) {
+            bool completed = shared_state_ && shared_state_->completed_.load(memory_order_acquire);
+            bool was_scheduled = shared_state_ && shared_state_->scheduled_.load(memory_order_acquire);
+            if (!completed && !was_scheduled) {
                 handle_.destroy();
             }
         }
@@ -691,8 +710,9 @@ struct virtual_thread_task {
             return *this;
         }
         if (handle_) {
-            bool was_scheduled = shared_state_ ? shared_state_->scheduled_.load(memory_order_acquire) : false;
-            if (!was_scheduled) {
+            bool completed = shared_state_ && shared_state_->completed_.load(memory_order_acquire);
+            bool was_scheduled = shared_state_ && shared_state_->scheduled_.load(memory_order_acquire);
+            if (!completed && !was_scheduled) {
                 handle_.destroy();
             }
         }
@@ -755,12 +775,14 @@ struct virtual_thread_task {
     /**
      * @brief 检查任务是否已完成
      */
-    bool is_done() const noexcept { return shared_state_ && shared_state_->completed_.load(memory_order_acquire); }
+    NEFORCE_NODISCARD bool is_done() const noexcept {
+        return shared_state_ && shared_state_->completed_.load(memory_order_acquire);
+    }
 
     /**
      * @brief 检查任务是否关联有效共享状态
      */
-    bool valid() const noexcept { return shared_state_ != nullptr; }
+    NEFORCE_NODISCARD bool valid() const noexcept { return shared_state_ != nullptr; }
 };
 
 /**

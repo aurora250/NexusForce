@@ -63,6 +63,10 @@ private:
 
     unique_ptr<::SSL_CTX, ctx_deleter> ctx_; ///< OpenSSL SSL_CTX对象
     ssl_method method_;                      ///< 记录创建时使用的方法
+    bool cert_loaded_{false};                ///< 证书是否已加载
+
+    ssl_context(ssl_method method, ssl_context* /*tag*/) :
+    method_(method) {}
 
 public:
     /**
@@ -243,6 +247,12 @@ public:
      * @return 有效返回true
      */
     NEFORCE_NODISCARD bool is_valid() const noexcept { return ctx_ != nullptr; }
+
+    /**
+     * @brief 检查是否已加载证书
+     * @return 已加载证书返回true
+     */
+    NEFORCE_NODISCARD bool has_certificate() const noexcept { return cert_loaded_; }
 };
 
 /** @} */ // SSL/TLS

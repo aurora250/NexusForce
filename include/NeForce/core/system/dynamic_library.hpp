@@ -53,15 +53,7 @@ private:
     string path_;           ///< 库文件路径
 
 private:
-    /**
-     * @brief 打开动态库
-     * @throws dl_exception 加载失败时抛出
-     */
     void open();
-
-    /**
-     * @brief 关闭动态库
-     */
     void close();
 
 public:

@@ -91,8 +91,8 @@ bool websocket_server::handle_upgrade(const http_request& request, unique_ptr<tc
         lock<mutex> lk(sessions_mutex_);
         sessions_.push_back(session);
     }
+    it->second(session);
     session->start();
-    it->second(_NEFORCE move(session));
     return true;
 }
 

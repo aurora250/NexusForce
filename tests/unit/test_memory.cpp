@@ -2343,18 +2343,6 @@ TEST(AtomicSharedPtrTest, CompareExchangeStrong) {
     EXPECT_EQ(*expected, 1);
 }
 
-// 通过测试，但含有内存泄漏
-TEST(AtomicSharedPtrTest, DISABLED_CompareExchangeStrongFail) {
-    auto sp1 = make_shared<int>(1);
-    auto sp2 = make_shared<int>(2);
-    atomic<shared_ptr<int>> atom(sp1);
-    shared_ptr<int> expected = make_shared<int>(999);
-    bool result = atom.compare_exchange_strong(expected, sp2);
-    EXPECT_FALSE(result);
-    EXPECT_EQ(*atom.load(), 1);
-    EXPECT_EQ(expected.get(), sp1.get());
-}
-
 TEST(SharedPtrArrayTest, Subscript) {
     auto sp = make_shared<int[]>(3);
     sp[0] = 10;
@@ -2750,16 +2738,6 @@ TEST(AllocatedPtrTest, AssignNullptr) {
     EXPECT_EQ(guard.get(), nullptr);
     EXPECT_EQ(alloc.deallocate_count, 0);
     ::operator delete(raw);
-}
-
-// 通过测试，但含有内存泄漏
-TEST(AllocatedPtrTest, DISABLED_Get) {
-    tracking_allocator<int> alloc;
-    int* raw = alloc.allocate(1);
-    allocated_ptr<tracking_allocator<int>> guard(alloc, raw);
-    EXPECT_EQ(guard.get(), raw);
-    guard = nullptr;
-    EXPECT_EQ(guard.get(), nullptr);
 }
 
 TEST(AllocatedPtrTest, AllocateGuarded) {

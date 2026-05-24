@@ -2,437 +2,353 @@
 
 本章节通过 `examples` 目录中的实际示例，展示如何使用 NexusForce 库快速构建常见功能。每个示例均可独立编译运行。
 
-## 🌐 示例 1：HTTP 服务器
+---
 
-**文件位置**：`examples/http_server/http_server.cpp`
+## 网络模块
 
-使用 NexusForce 在 5 分钟内搭建一个 RESTful API 服务器。
+### 1. TCP Echo（tcp_echo_server / tcp_echo_client）
 
-```cpp
-#include <NeForce/core/exception/terminate.hpp>
-#include <NeForce/core/file/file.hpp>
-#include <NeForce/core/file/json/json_builder.hpp>
-#include <NeForce/core/file/json/json_parser.hpp>
-#include <NeForce/core/system/console.hpp>
-#include <NeForce/core/system/signal.hpp>
-#include <NeForce/network/http/http_server.hpp>
-using namespace neforce::literals;
+演示 TCP 客户端/服务器的基本用法：创建服务器、设置客户端处理器、连接、收发、超时、异常处理。
 
-namespace {
-    const neforce::path& res_root() {
-        static neforce::path res_root
-#ifdef NEFORCE_PLATFORM_WINDOWS
-                {R"(D:/Workspace/Cpp Workspace/CLine Workspace/NexusForce/tests/resource)"};
-#elif defined(NEFORCE_PLATFORM_LINUX)
-                {R"(/media/huenqi/Programming/Workspace/NexusForce-Linux/tests/resource)"};
-#endif
-        return res_root;
-    }
-} // namespace
+**启动服务器：**
+```bash
+./build/bin/NexusForceTcpEchoServerExample
+# TCP Echo Server started on port 8080
+# Connect with: telnet localhost 8080
+```
 
+**运行客户端：**
+```bash
+./build/bin/NexusForceTcpEchoClientExample
+# Connecting to 127.0.0.1:8080...
+# Connected!
+# Sent 37 bytes: Hello from NexusForce TCP Client!
+# Received 37 bytes: Hello from NexusForce TCP Client!
+```
 
-void handle_session_api(neforce::http::http_request& request, neforce::http::http_response& response,
-                        neforce::http::http_server& server) {
-    neforce::http::http_session* sess = server.get_session(request);
-    neforce::string action = request.parameter("action");
-
-    if (action == "create") {
-        sess = server.get_session(request, true);
-        response.status = neforce::http::http_status::S2_OK;
-        response.status_message = "OK";
-        response.set_content_type(neforce::http::http_content::JSON_APP());
-        response.body = R"({"sessionId":")" + sess->id + R"("})";
-    } else if (action == "invalidate" && sess) {
-        sess->invalidated = true;
-        sess->data.clear();
-        response.status = neforce::http::http_status::S2_OK;
-        response.status_message = "OK";
-        response.set_content_type(neforce::http::http_content::JSON_APP());
-        response.body = R"({"message":"Session invalidated"})";
-    } else if (action == "info") {
-        if (sess) {
-            auto json = neforce::json_builder()
-                                .begin_object()
-                                .key("sessionId")
-                                .value(sess->id)
-                                .key("createTime")
-                                .value(sess->create_time.to_RFC3339())
-                                .key("lastAccess")
-                                .value(sess->last_access.to_RFC3339())
-                                .key("attributes")
-                                .value(sess->data)
-                                .end_object()
-                                .build();
-
-            response.status = neforce::http::http_status::S2_OK;
-            response.status_message = "OK";
-            response.set_content_type(neforce::http::http_content::JSON_APP());
-            response.body = json->to_string();
-        } else {
-            response.status = neforce::http::http_status::S4_BAD_REQUEST;
-            response.status_message = "Bad Request";
-            response.set_content_type(neforce::http::http_content::JSON_APP());
-            response.body = R"({"error":"No active session found"})";
-        }
-    } else {
-        response.status = neforce::http::http_status::S4_BAD_REQUEST;
-        response.status_message = "Bad Request";
-        response.set_content_type(neforce::http::http_content::JSON_APP());
-        response.body = R"({"error":"Invalid session action"})";
-    }
-}
-
-void handle_session_attribute(neforce::http::http_request& request, neforce::http::http_response& response,
-                              neforce::http::http_server& server) {
-    neforce::string attrName, attrValue;
-    neforce::string content_type = request.header(neforce::http::http_key::Content_Type());
-
-    if (content_type.find(neforce::http::http_content::JSON_APP().content()) == 0) {
-        try {
-            auto root = neforce::json_parser(request.body).parse();
-            if (root && root->is_object()) {
-                const neforce::json_object* obj = root->as_object();
-
-                const neforce::json_value* attrNameVal = obj->get_member("attrName");
-                if (attrNameVal && attrNameVal->is_string()) {
-                    attrName = attrNameVal->as_string()->get_value();
-                }
-
-                const neforce::json_value* attrValueVal = obj->get_member("attrValue");
-                if (attrValueVal && attrValueVal->is_string()) {
-                    attrValue = attrValueVal->as_string()->get_value();
-                }
-            }
-        } catch (const neforce::exception& e) {
-            neforce::println("JSON parse error:", e.what());
-        }
-    } else {
-        attrName = request.parameter("attrName");
-        attrValue = request.parameter("attrValue");
-    }
-
-    neforce::http::http_session* sess = server.get_session(request, true);
-
-    if (!attrName.empty()) {
-        (*sess)[attrName] = attrValue;
-
-        auto json = neforce::json_builder()
-                            .begin_object()
-                            .key("attrName")
-                            .value(attrName)
-                            .key("attrValue")
-                            .value(attrValue)
-                            .end_object()
-                            .build();
-
-        response.status = neforce::http::http_status::S2_OK;
-        response.status_message = "OK";
-        response.set_content_type(neforce::http::http_content::JSON_APP());
-        response.body = json->to_string();
-    } else {
-        response.status = neforce::http::http_status::S4_BAD_REQUEST;
-        response.status_message = "Bad Request";
-        response.set_content_type(neforce::http::http_content::JSON_APP());
-        response.body = R"({"error":"Missing attribute name"})";
-    }
-}
-
-void handle_cookie_api(neforce::http::http_request& request, neforce::http::http_response& response) {
-    if (request.method.is_post()) {
-        neforce::http::http_cookie_name name;
-        neforce::string value, max_age_str;
-        neforce::string content_type = request.header(neforce::http::http_key::Content_Type());
-
-        if (content_type.find(neforce::http::http_content::JSON_APP().content()) != neforce::string::npos) {
-            try {
-                auto root = neforce::json_parser(request.body).parse();
-                if (root && root->is_object()) {
-                    const neforce::json_object* obj = root->as_object();
-
-                    const neforce::json_value* nameVal = obj->get_member("name");
-                    const neforce::json_value* valueVal = obj->get_member("value");
-                    const neforce::json_value* maxAgeVal = obj->get_member("maxAge");
-
-                    if (nameVal && nameVal->is_string()) {
-                        name = neforce::http::http_cookie_name(nameVal->as_string()->get_value());
-                    }
-                    if (valueVal && valueVal->is_string()) {
-                        value = valueVal->as_string()->get_value();
-                    }
-                    if (maxAgeVal) {
-                        if (maxAgeVal->is_string()) {
-                            max_age_str = maxAgeVal->as_string()->get_value();
-                        } else if (maxAgeVal->is_number()) {
-                            max_age_str = _NEFORCE to_string(maxAgeVal->as_number()->get_value());
-                        }
-                    }
-                }
-            } catch (const neforce::exception& e) {
-                neforce::println("JSON parse error:", e.what());
-            }
-        } else {
-            name = neforce::http::http_cookie_name(request.parameter("name"));
-            value = request.parameter("value");
-            max_age_str = request.parameter("maxAge");
-        }
-
-        if (!name.cookie_name().empty()) {
-            neforce::http::http_cookie ck;
-            ck.name = name;
-            ck.value = value;
-            if (!max_age_str.empty()) {
-                ck.max_age = neforce::seconds{neforce::integer32::parse(max_age_str.view()).value()};
-            }
-            response.cookies.emplace_back(move(ck));
-
-            auto json = neforce::json_builder()
-                                .begin_object()
-                                .key("name")
-                                .value(name.cookie_name())
-                                .key("value")
-                                .value(value)
-                                .end_object()
-                                .build();
-
-            response.status = neforce::http::http_status::S2_OK;
-            response.status_message = "OK";
-            response.set_content_type(neforce::http::http_content::JSON_APP());
-            response.body = json->to_string();
-        } else {
-            response.status = neforce::http::http_status::S4_BAD_REQUEST;
-            response.status_message = "Bad Request";
-            response.set_content_type(neforce::http::http_content::JSON_APP());
-            response.body = R"({"error":"Missing cookie name"})";
-        }
-    } else if (request.method.is_delete()) {
-        neforce::http::http_cookie_name name(request.parameter("name"));
-        if (!name.cookie_name().empty()) {
-            neforce::http::http_cookie ck;
-            ck.name = name;
-            ck.max_age = 0_s;
-            ck.expires = neforce::datetime::epoch();
-            response.cookies.emplace_back(move(ck));
-
-            response.status = neforce::http::http_status::S2_OK;
-            response.status_message = "OK";
-            response.set_content_type(neforce::http::http_content::JSON_APP());
-            response.body = R"({"name":")" + name.to_string() + R"("})";
-        } else {
-            response.status = neforce::http::http_status::S4_BAD_REQUEST;
-            response.status_message = "Bad Request";
-            response.set_content_type(neforce::http::http_content::JSON_APP());
-            response.body = R"({"error":"Missing cookie name"})";
-        }
-    }
-}
-
-void start_server() {
-    try {
-        neforce::http::http_server server(neforce::ports(8080), 128);
-        //         server.load_certificate(
-        // #ifdef NEFORCE_PLATFORM_LINUX
-        //                 "/home/huenqi/server.crt", "/home/huenqi/server.key"
-        // #else
-        //                 "D:/OpenSSL/server.crt", "D:/OpenSSL/server.key"
-        // #endif
-        //         );
-
-        neforce::http::http_router& router = server.router();
-        router.use(neforce::make_unique<neforce::http::logging_filter>());
-        router.use(neforce::make_unique<neforce::http::cors_filter>("http://127.0.0.1:5500"));
-        router.use(make_unique<neforce::http::static_file_filter>(res_root().str()));
-
-        router.post("/old-link", [](neforce::http::http_request&, neforce::http::http_response& response) {
-            response.redirect_url = "/new-link";
-        });
-        router.post("/forward-me", [](neforce::http::http_request&, neforce::http::http_response& response) {
-            response.forward_path = "/forward-target";
-        });
-        router.post("/forward-target", [](neforce::http::http_request&, neforce::http::http_response& response) {
-            response.status = neforce::http::http_status::S2_OK;
-            response.status_message = "OK";
-            response.body = "Forward Successfully";
-        });
-
-        router.get_post("/api/session",
-                        [&server](neforce::http::http_request& request, neforce::http::http_response& response) {
-                            handle_session_api(request, response, server);
-                        });
-        router.get_post("/api/session-attribute",
-                        [&server](neforce::http::http_request& request, neforce::http::http_response& response) {
-                            handle_session_attribute(request, response, server);
-                        });
-        router.post_delete("/api/cookie",
-                           [](neforce::http::http_request& request, neforce::http::http_response& response) {
-                               handle_cookie_api(request, response);
-                           });
-
-        router.get("/api/logger-test", [](neforce::http::http_request&, neforce::http::http_response& response) {
-            response.status = neforce::http::http_status::S2_OK;
-            response.status_message = "OK";
-            response.body = "Logging filter test successful";
-        });
-        router.get("/api/data/*", [](neforce::http::http_request&, neforce::http::http_response& response) {
-            response.status = neforce::http::http_status::S2_OK;
-            response.status_message = "OK";
-            response.set_content_type(neforce::http::http_content::JSON_APP());
-            response.body = R"({"status":"success"})";
-        });
-
-        router.get("/", [](neforce::http::http_request&, neforce::http::http_response& response) {
-            static neforce::file index{res_root() / "index.html"};
-            response.status = neforce::http::http_status::S2_OK;
-            response.status_message = "OK";
-            response.set_content_type(neforce::http::http_content::HTML_TEXT());
-            response.body = index.read();
-        });
-
-        router.get("/detail", [](neforce::http::http_request&, neforce::http::http_response& response) {
-            static neforce::file detail{res_root() / "detail.html"};
-            response.status = neforce::http::http_status::S2_OK;
-            response.status_message = "OK";
-            response.set_content_type(neforce::http::http_content::HTML_TEXT());
-            response.body = detail.read();
-        });
-
-        router.get("/new-link", [](neforce::http::http_request&, neforce::http::http_response& response) {
-            static neforce::file index{res_root() / "index.html"};
-            response.status = neforce::http::http_status::S2_OK;
-            response.status_message = "OK";
-            response.set_content_type(neforce::http::http_content::HTML_TEXT());
-            response.body = index.read();
-        });
-
-        router.get("/test", [](neforce::http::http_request&, neforce::http::http_response& response) {
-            static neforce::file test{res_root() / "test.html"};
-            response.status = neforce::http::http_status::S2_OK;
-            response.status_message = "OK";
-            response.set_content_type(neforce::http::http_content::HTML_TEXT());
-            response.body = test.read();
-        });
-
-        router.set_not_found_handler([](neforce::http::http_request&, neforce::http::http_response& response) {
-            static neforce::file err{res_root() / "404err.html"};
-            response.status = neforce::http::http_status::S4_NOT_FOUNT;
-            response.status_message = "Not Found";
-            response.set_content_type(neforce::http::http_content::HTML_TEXT());
-            response.body = err.read();
-        });
-
-        auto& ws = server.websocket();
-
-        ws.route("/chat", [](neforce::shared_ptr<neforce::http::websocket_session> session) {
-            neforce::println("New WebSocket connection established");
-
-            neforce::weak_ptr<neforce::http::websocket_session> weak_session{session};
-
-            session->set_message_handler(
-                    [weak_session](const neforce::string& message, neforce::http::websocket_opcode opcode) {
-                        neforce::println("Received: ", message);
-
-                        if (auto session = weak_session.lock()) {
-                            if (session->is_open()) {
-                                session->send("Server received: " + message);
-                            }
-                        }
-                    });
-
-            session->set_close_handler([](neforce::http::websocket_status status, const neforce::string& reason) {
-                neforce::println("Connection closed:", reason);
-            });
-
-            if (session->is_open()) {
-                session->send("Welcome to chat room!");
-            }
-        });
-
-        if (server.start()) {
-            neforce::system_signal_manager::instance().start_monitoring();
-
-            neforce::system_signal_manager::instance().register_handler(
-                    neforce::system_signal_manager::event::INTERRUPT,
-                    [&server](neforce::system_signal_manager::event event, void* context) -> bool {
-                        if (event == neforce::system_signal_manager::event::INTERRUPT) {
-                            neforce::println("Interrupting...");
-                            server.stop();
-                            neforce::immediate_exit(0);
-                        }
-                        return false;
-                    });
-
-            neforce::printcln(neforce::color::green(), "Press Ctrl+C to stop the server.");
-            while (server.is_running()) {
-                neforce::this_thread::sleep_for(1_s);
-            }
-            return;
-        }
-        neforce::printcln(neforce::color::red(), "Failed to start server!");
-    } catch (const neforce::exception& e) {
-        neforce::printcln(neforce::color::red(), "HTTP Server error: " + neforce::string(e.what()));
-    }
-}
-
-int main() { start_server(); }
+**手动测试：**
+```bash
+echo "hello world" | nc localhost 8080
 ```
 
 ---
 
-## 🔄 示例 2：并发任务处理
+### 2. UDP Echo（udp_echo）
 
-**文件位置**：`examples/async_mission/async_mission.cpp`
+演示 UDP socket 的无连接模式（send_to / receive_from）和已连接模式（connect + send / receive）。
 
-使用线程池并行处理大批量数据。
-
-```cpp
-
+```bash
+./build/bin/NexusForceUdpEchoExample
+# --- Connectionless Mode ---
+# [Server] Received 30 bytes from 127.0.0.1:xxxxx: Hello UDP from NexusForce!
+# [Server] Echoed 30 bytes back
+# [Client] Sent 30 bytes to 127.0.0.1:9999
+# [Client] Received 30 bytes from 127.0.0.1:9999: Hello UDP from NexusForce!
+#
+# --- Connected Mode ---
+# [Client] Sent 26 bytes
+# [Client] Received 26 bytes: Hello via connected UDP!
 ```
 
 ---
 
-## 📦 示例 3：配置文件解析
+### 3. HTTP Server（http_server）
 
-**文件位置**：`examples/config_settings/config_settings.cpp`
+演示完整 HTTP 服务器的核心功能：路由注册（GET/POST/PUT/DELETE）、路径参数、正则路由、静态页面、JSON API、表单处理、查询参数、405/404 处理器。
 
-同时解析 JSON、TOML 和 INI 格式的配置文件。
+```bash
+./build/bin/NexusForceHttpServerExample
+# HTTP Server started on http://localhost:8080
+```
 
-```cpp
+**测试端点：**
+```bash
+# 首页
+curl http://localhost:8080/
 
+# JSON API
+curl http://localhost:8080/api/hello
+# {"message":"Hello from NexusForce!","status":"ok"}
+
+# 路径参数
+curl http://localhost:8080/api/users/42
+# {"user_id":"42","name":"User 42"}
+
+# POST Echo
+curl -X POST http://localhost:8080/api/echo -d 'hello world'
+# {"echo":"hello world","content_type":"application/x-www-form-urlencoded"}
+
+# 查询参数
+curl "http://localhost:8080/api/greet?name=NexusForce"
+# {"greeting":"Hello, NexusForce"}
+
+# 查看请求头
+curl http://localhost:8080/api/headers
+
+# 正则路由
+curl http://localhost:8080/api/v1/anything/here
+# {"version":"v1","path":"anything/here"}
+
+# 表单页面（浏览器访问）
+open http://localhost:8080/form
 ```
 
 ---
 
-## 🔐 示例 4：加密与哈希
+### 4. HTTPS Server（https_server）
 
-**文件位置**：`examples/crypto/crypto.cpp`
+演示 HTTPS 服务器：加载 SSL/TLS 证书、加密 HTTP 服务。
 
-AES 加密、SHA256 哈希与 Base64 编码的组合使用。
+**生成自签名证书（一次性）：**
+```bash
+openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt \
+  -days 365 -nodes -subj '/CN=localhost'
+```
 
-```cpp
+**启动服务器：**
+```bash
+./build/bin/NexusForceHttpsServerExample
+# Certificate loaded successfully
+# HTTPS Server started on https://localhost:8443
+```
 
+**测试：**
+```bash
+curl -k https://localhost:8443/api/hello
+# {"message":"Hello from NexusForce HTTPS!","status":"ok","tls":true}
+
+curl -k https://localhost:8443/api/users/42
+# {"user_id":"42","name":"User 42","tls":true}
+
+curl -k https://localhost:8443/api/info
+# {"protocol":"HTTPS (HTTP over TLS)","user_agent":"curl/...","client_ip":"127.0.0.1"}
 ```
 
 ---
 
-## 🗄️ 示例 5：数据库操作
+### 5. HTTP Client（http_client）
 
-**文件位置**：`examples/database/database.cpp`
+演示 HTTP 客户端：GET/POST 请求、自定义请求头、JSON/表单提交、重定向、HTTPS、超时配置。
 
-使用 SQL 构建器和连接池操作 SQLite 数据库。
-
-```cpp
-
+```bash
+./build/bin/NexusForceHttpClientExample
+# === GET Request ===
+# Status: 200
+# Body: {"args":{"hello":"world"},...}
+#
+# === Custom Headers ===
+# Status: 200
+#
+# === POST JSON ===
+# Status: 200
+#
+# === POST Form ===
+# Status: 200
+#
+# === Redirect ===
+# Status: 200
+#
+# === HTTPS Request ===
+# Status: 200
+#
+# === Timeout Config ===
+# Connect timeout: 10000ms
+# ...
 ```
 
 ---
 
-## 🔍 示例 6：文件监控
+### 6. WebSocket Server（websocket_server）
 
-**文件位置**：`examples/file_watch/file_watch.cpp`
+演示 WebSocket 协议：路由注册、消息收发（文本/二进制）、心跳检测（Ping/Pong）、广播、关闭处理。
 
-实时监控目录变化并作出响应。
-
-```cpp
-
+```bash
+./build/bin/NexusForceWebSocketServerExample
+# WebSocket Server started on http://localhost:8080
+# Open your browser and navigate to the address above.
+# Or use wscat: wscat -c ws://localhost:8080/chat
 ```
 
-示例代码文件请访问 [NexusForce - example 子目录](https://github.com/aurora250/NexusForce/tree/dev/examples)
+**使用 wscat 测试：**
+```bash
+wscat -c ws://localhost:8080/chat
+# Connected (press CTRL+C to quit)
+# < Welcome to NexusForce WebSocket Chat!
+# > hello
+# < Echo: hello
+# > ping
+# < Echo: ping
+```
+
+**浏览器测试：**
+打开 `http://localhost:8080/`，页面内置了完整的 WebSocket 聊天 Demo，可以直接收发消息。
+
+---
+
+### 7. SSL Echo（ssl_echo_server / ssl_echo_client）
+
+演示 SSL/TLS 套接字的直接使用（非 HTTP）：证书加载、TLS 握手、加密数据收发、客户端证书验证。
+
+**生成证书：**
+```bash
+openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt \
+  -days 365 -nodes -subj '/CN=localhost'
+```
+
+**启动服务器：**
+```bash
+./build/bin/NexusForceSslEchoServerExample
+# Certificate loaded successfully
+# TLS Echo Server listening on 0.0.0.0:8443
+```
+
+**运行客户端：**
+```bash
+./build/bin/NexusForceSslEchoClientExample
+# Connecting to 127.0.0.1:8443...
+# TCP connected, starting TLS handshake...
+# TLS handshake successful
+# Server certificate:
+#   Subject: CN=localhost
+# Sent: Hello from NexusForce SSL Client!
+# Received: Hello from NexusForce SSL Client!
+# Connection closed
+```
+
+**手动测试：**
+```bash
+echo "hello tls" | openssl s_client -connect localhost:8443 -quiet 2>/dev/null
+```
+
+---
+
+### 8. DNS Resolver（dns_resolver）
+
+演示 DNS 客户端：A/AAAA/MX/TXT/SOA 记录查询、反向解析（PTR）、批量查询、缓存控制、DNSSEC。
+
+> **中国大陆用户注意：** 示例已使用 `114.114.114.114` 替代被阻断的 `8.8.8.8`，查询域名也替换为国内可访问域名。
+
+```bash
+./build/bin/NexusForceDnsResolverExample
+# DNS Server: 114.114.114.114
+#
+# === A Record (IPv4) ===
+#   IPv4: 142.250.80.4
+#
+# === AAAA Record (IPv6) ===
+#   IPv6: 2404:6800:4005:801::2004
+#
+# === MX Record ===
+#   MX: 30 alt3.gmr-smtp-in.l.google.com. (priority=30)
+#
+# === TXT Record ===
+#   TXT: v=spf1 include:_spf.google.com ~all
+#
+# === SOA Record ===
+#   MName: ns1.google.com
+#   RName: dns-admin.google.com
+#   Serial: ...
+#
+# === Reverse DNS (PTR) ===
+#   114.114.114.114 → public1.114dns.com
+#
+# === Batch Query ===
+#   baidu.com → X answers
+#   taobao.com → X answers
+#   jd.com → X answers
+```
+
+---
+
+### 9. ICMP Ping（ping）
+
+演示 ICMP 协议：Ping（Echo Request/Reply）、Traceroute（路由追踪）、RTT 测量。
+
+> **需要 root 权限：** Linux 下原始 ICMP 套接字需要 `CAP_NET_RAW` 能力。
+
+```bash
+sudo ./build/bin/NexusForcePingExample
+# === Ping 8.8.8.8 ===
+#
+# 64 bytes from 8.8.8.8: icmp_seq=1 ttl=118 time=15.3ms
+# 64 bytes from 8.8.8.8: icmp_seq=2 ttl=118 time=14.8ms
+# 64 bytes from 8.8.8.8: icmp_seq=3 ttl=118 time=15.1ms
+# 64 bytes from 8.8.8.8: icmp_seq=4 ttl=118 time=14.9ms
+#
+# --- 8.8.8.8 ping statistics ---
+# 4 packets transmitted, 4 received, 0% loss
+#
+# === Traceroute to 8.8.8.8 ===
+# 1  192.168.1.1  1.2ms  1.1ms  1.3ms
+# 2  10.0.0.1  5.4ms  5.2ms  5.6ms
+# ...
+```
+
+---
+
+### 10. SMTP Mail（smtp_mail）
+
+演示 SMTP 邮件发送：STARTTLS 加密、LOGIN 认证、HTML 邮件格式。
+
+> 示例使用 QQ 邮箱 SMTP（smtp.qq.com:587），需要将授权码放入 `tests/resource/authcode` 文件。
+
+```bash
+# 准备授权码文件
+echo "你的QQ邮箱授权码" > tests/resource/authcode
+
+./build/bin/NexusForceSmtpMailExample
+# === SMTP Client Example ===
+# /path/to/tests/resource/authcode
+# Authorization code loaded (16 chars)
+# Connecting to smtp.qq.com:587...
+# Upgrading to TLS...
+# Authenticating...
+# Sending email...
+# Email sent successfully!
+```
+
+---
+
+### 11. FTP Client（ftp_client）
+
+演示 FTP 客户端：匿名登录、目录列表、文件浏览。通过环境变量可配置目标服务器。
+
+```bash
+# 使用默认服务器（ftp.gnu.org，匿名登录）
+./build/bin/NexusForceFtpClientExample
+# === FTP Client Example ===
+# FTP_HOST not set, using default: ftp.gnu.org
+# Connecting to ftp.gnu.org:21...
+# Connected!
+# Logging in as anonymous...
+# Login successful!
+# Current directory: /
+#
+# === Directory Listing ===
+# d           4096  pub
+# -          12345  README
+# ...
+```
+
+**自定义服务器：**
+```bash
+FTP_HOST=ftp.example.com FTP_USER=myuser FTP_PASS=mypass ./build/bin/NexusForceFtpClientExample
+```
+
+---
+
+## 文件路径说明
+
+| 示例 | 源文件 |
+|------|--------|
+| TCP Echo Server/Client | `examples/network/tcp_echo_server.cpp` / `tcp_echo_client.cpp` |
+| UDP Echo | `examples/network/udp_echo.cpp` |
+| HTTP Server | `examples/network/http_server.cpp` |
+| HTTPS Server | `examples/network/https_server.cpp` |
+| HTTP Client | `examples/network/http_client.cpp` |
+| WebSocket Server | `examples/network/websocket_server.cpp` |
+| SSL Echo Server/Client | `examples/network/ssl_echo_server.cpp` / `ssl_echo_client.cpp` |
+| DNS Resolver | `examples/network/dns_resolver.cpp` |
+| ICMP Ping | `examples/network/ping.cpp` |
+| SMTP Mail | `examples/network/smtp_mail.cpp` |
+| FTP Client | `examples/network/ftp_client.cpp` |

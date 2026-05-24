@@ -84,82 +84,6 @@ void test_download() {
     println("Download result:", res);
 }
 
-void test_dns() {
-    try {
-        dns_client::config cf_config;
-        cf_config.server = "1.1.1.1";
-        cf_config.timeout = milliseconds(3000);
-        dns_client cloudflare_client(cf_config);
-
-        dns_client::config od_config;
-        od_config.server = "208.67.222.222";
-        od_config.timeout = milliseconds(3000);
-        dns_client opendns_client(od_config);
-
-        dns_client::config custom_config;
-        custom_config.server = "192.168.1.1";
-        custom_config.port = ports{5353};
-        custom_config.timeout = milliseconds(3000);
-        dns_client custom_client(custom_config);
-
-        auto ips = cloudflare_client.resolve_a("example.com");
-        println("IPv4 addresses for example.com:");
-        for (const auto& ip: ips) {
-            println("  ", ip);
-        }
-
-        dns_client client;
-        vector<string> ipv6_addrs;
-
-        click c;
-        {
-            scoped_click sc(c);
-            ipv6_addrs = client.resolve_aaaa("www.google.com");
-        }
-        println("First query (no cache): ", c.during().count(), "ns");
-        println("IPv6 addresses:");
-        for (const auto& addr: ipv6_addrs) {
-            println("  ", addr);
-        }
-
-        {
-            scoped_click sc(c);
-            ipv6_addrs = client.resolve_aaaa("www.google.com");
-        }
-        println("Second query (cached): ", c.during().count(), "ns");
-
-        auto mx_records = client.resolve_mx("gmail.com");
-        println("MX records for gmail.com:");
-        for (const auto& mx: mx_records) {
-            println("  ", mx);
-        }
-
-        vector<string> domains = {"google.com", "facebook.com", "twitter.com", "github.com", "stackoverflow.com"};
-        auto results = client.batch_query(domains, dns_record::A);
-
-        for (size_t i = 0; i < domains.size(); ++i) {
-            println(domains[i], ":");
-
-            if (results[i].is_success()) {
-                for (const auto& answer: results[i].answers) {
-                    println("  ", answer.data);
-                }
-                println("  Query time:", results[i].query_time.count(), "ms");
-            } else {
-                println("  Query failed\n");
-            }
-        }
-
-        auto txt_records = client.resolve_txt("google.com");
-        println("TXT records for google.com:");
-        for (const auto& txt: txt_records) {
-            println("  ", txt);
-        }
-    } catch (const exception& e) {
-        printcln(color::red(), "DNS test error: " + string(e.what()));
-    }
-}
-
 void test_traceroute() {
     try {
         icmp_socket icmp;
@@ -298,24 +222,4 @@ void test_smtp() {
 
     smtp.send(msg);
     smtp.disconnect();
-}
-
-void test_ftp_client() {
-    logger::instance().set_level(log_level::TRACE);
-    logger::instance().add_sink(make_shared<console_sink>());
-
-    ftp_client client;
-    try {
-        client.connect("ftp.debian.org");
-        client.login_anonymous();
-
-        auto entries = client.list();
-        for (const auto& e: entries) {
-            println(e.is_directory ? "d" : "-", e.name);
-        }
-
-        client.disconnect();
-    } catch (const exception& e) {
-        println(e.what());
-    }
 }

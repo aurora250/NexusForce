@@ -39,7 +39,6 @@ pool_cfg_(pool_config) {
 #endif
         default:
             NEFORCE_THROW_EXCEPTION(value_exception("Unsupported database type"));
-            unreachable();
     }
 
     size_t created = 0;

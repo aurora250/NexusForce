@@ -228,16 +228,16 @@ public:
      * @brief Traceroute跳点信息
      */
     struct traceroute_hop {
-        ip_address address;  ///< 跳点IP地址
-        milliseconds rtt[3]; ///< 三次探测的RTT值（-1超时）
-        bool reached;        ///< 是否到达目标
+        ip_address address;       ///< 跳点IP地址
+        vector<milliseconds> rtt; ///< 每次探测的RTT值（-1超时）
+        bool reached;             ///< 是否到达目标
     };
 
 private:
     bool receive_reply(milliseconds timeout, uint16_t expected_id, uint16_t expected_seq, ip_address& sender,
                        icmp_header& out_header, vector<char>& out_data, uint8_t& recv_ttl);
 
-    void send_echo_request(const ip_address& dest, uint16_t id, uint16_t seq, uint8_t ttl, const void* data,
+    void send_echo_request(const ip_address& dest, uint16_t id, uint16_t seq, int ttl, const void* data,
                            size_t data_len);
 
 public:

@@ -1,5 +1,6 @@
 #include <NeForce/core/encrypt/base64.hpp>
 #include <NeForce/core/encrypt/sha1.hpp>
+#include <NeForce/core/utility/hexadecimal.hpp>
 #include <NeForce/network/http/http_server.hpp>
 #include <NeForce/network/util/url.hpp>
 NEFORCE_BEGIN_NAMESPACE__
@@ -8,11 +9,70 @@ NEFORCE_BEGIN_HTTP__
 namespace {
     constexpr int max_forward_count = 5;
 
+    bool parse_header_value_ci(const string& data, const string_view lower_key, size_t header_end, string& value_out) {
+        const string data_lower = string(data.view(0, header_end)).lowercase();
+        const size_t pos = data_lower.find(string(lower_key));
+        if (pos == string::npos) {
+            return false;
+        }
+        const size_t val_end = data.find("\r\n", pos);
+        if (val_end == string::npos || val_end > header_end) {
+            return false;
+        }
+        value_out = data.substr(pos + lower_key.length(), val_end - pos - lower_key.length()).trim();
+        return true;
+    }
+
     string compute_websocket_accept(const string_view key) {
         constexpr string_view websocket_guid = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
         const string combined = string(key) + websocket_guid;
         const string sha1_result = sha1(combined);
         return base64_encode(cbyte_view{reinterpret_cast<const byte_t*>(sha1_result.data()), sha1_result.size()});
+    }
+
+    string decode_chunked_body(const string_view chunked_data) {
+        string decoded;
+        size_t pos = 0;
+
+        while (pos < chunked_data.size()) {
+            size_t line_end = chunked_data.find("\r\n", pos);
+            if (line_end == string::npos) {
+                NEFORCE_THROW_EXCEPTION(http_exception("Malformed chunked body: missing chunk size line"));
+            }
+            string_view size_line = chunked_data.view(pos, line_end - pos).trim();
+            size_t semi = size_line.find(';');
+            if (semi != string_view::npos) {
+                size_line = size_line.head(semi);
+            }
+            uint64_t chunk_size = 0;
+            try {
+                chunk_size = hexadecimal::parse(size_line).value();
+            } catch (...) {
+                NEFORCE_THROW_EXCEPTION(http_exception("Malformed chunked body: invalid chunk size"));
+            }
+            pos = line_end + 2;
+
+            if (chunk_size == 0) {
+                while (pos < chunked_data.size()) {
+                    size_t trailer_end = chunked_data.find("\r\n", pos);
+                    if (trailer_end == string::npos || trailer_end == pos) {
+                        if (trailer_end == pos) {
+                            pos = trailer_end + 2;
+                        }
+                        break;
+                    }
+                    pos = trailer_end + 2;
+                }
+                break;
+            }
+
+            if (pos + chunk_size + 2 > chunked_data.size()) {
+                NEFORCE_THROW_EXCEPTION(http_exception("Malformed chunked body: chunk exceeds data"));
+            }
+            decoded.append(chunked_data.view(pos, chunk_size));
+            pos += chunk_size + 2;
+        }
+        return decoded;
     }
 
     void parse_parameters(http_request& request) {
@@ -146,40 +206,65 @@ http_request http_server::parse_request(tcp_socket* client_socket, session_manag
         const size_t header_end = request_data.find("\r\n\r\n");
         if (header_end != string::npos) {
             size_t content_length = 0;
-            const size_t cl_pos = request_data.find("Content-Length:");
-            if (cl_pos != string::npos && cl_pos < header_end) {
-                const size_t cl_end = request_data.find("\r\n", cl_pos);
-                if (cl_end != string::npos) {
-                    const auto cl_str = request_data.view(cl_pos + 15, cl_end - cl_pos - 15).trim();
-                    try {
-                        content_length = uinteger64::parse(cl_str).value();
-                    } catch (...) {
-                        NEFORCE_THROW_EXCEPTION(http_exception("Invalid Content-Length"));
-                    }
+
+            string cl_value;
+            if (parse_header_value_ci(request_data, "content-length:", header_end, cl_value)) {
+                try {
+                    content_length = uinteger64::parse(cl_value.view()).value();
+                } catch (...) {
+                    NEFORCE_THROW_EXCEPTION(http_exception("Invalid Content-Length"));
                 }
             }
 
-            if (content_length > max_body_size.bytes()) {
-                NEFORCE_THROW_EXCEPTION(http_exception("Request body too large"));
+            bool is_chunked = false;
+            string te_value;
+            if (parse_header_value_ci(request_data, "transfer-encoding:", header_end, te_value)) {
+                is_chunked = te_value.lowercase().contains("chunked");
             }
 
             const size_t body_start = header_end + 4;
-            const size_t body_received = request_data.size() - body_start;
 
-            if (body_received < content_length) {
-                size_t remaining = content_length - body_received;
-                request_data.reserve(body_start + content_length);
-
-                while (remaining > 0) {
-                    const size_t to_read = (remaining < sizeof(buffer)) ? remaining : sizeof(buffer);
-                    const ssize_t n = client_socket->receive(memory_view<char>(static_cast<char*>(buffer), to_read));
-
-                    if (n <= 0) {
-                        NEFORCE_THROW_EXCEPTION(http_exception("Connection closed while reading body"));
+            if (is_chunked) {
+                if (request_data.size() - body_start > max_body_size.bytes()) {
+                    NEFORCE_THROW_EXCEPTION(http_exception("Request body too large"));
+                }
+                while (request_data.find("\r\n0\r\n\r\n", body_start) == string::npos &&
+                       request_data.view(body_start) != "0\r\n\r\n") {
+                    if (request_data.size() > max_body_size.bytes()) {
+                        NEFORCE_THROW_EXCEPTION(http_exception("Request body too large"));
                     }
+                    const ssize_t n = client_socket->receive(memory_view<char>(buffer));
+                    if (n <= 0) {
+                        NEFORCE_THROW_EXCEPTION(http_exception("Connection closed while reading chunked body"));
+                    }
+                    request_data.append(buffer, n);
+                }
+                string decoded = decode_chunked_body(request_data.view(body_start));
+                request_data.resize(body_start);
+                request_data += decoded;
+            } else {
+                if (content_length > max_body_size.bytes()) {
+                    NEFORCE_THROW_EXCEPTION(http_exception("Request body too large"));
+                }
 
-                    request_data.append(static_cast<char*>(buffer), n);
-                    remaining -= n;
+                const size_t body_received = request_data.size() - body_start;
+
+                if (body_received < content_length) {
+                    size_t remaining = content_length - body_received;
+                    request_data.reserve(body_start + content_length);
+
+                    while (remaining > 0) {
+                        const size_t to_read = (remaining < sizeof(buffer)) ? remaining : sizeof(buffer);
+                        const ssize_t n =
+                                client_socket->receive(memory_view<char>(static_cast<char*>(buffer), to_read));
+
+                        if (n <= 0) {
+                            NEFORCE_THROW_EXCEPTION(http_exception("Connection closed while reading body"));
+                        }
+
+                        request_data.append(static_cast<char*>(buffer), n);
+                        remaining -= n;
+                    }
                 }
             }
             break;
@@ -269,12 +354,12 @@ void send_error_response(tcp_socket* client_socket, const http_status status, co
     }
 }
 
-void http_server::handle_client(tcp_socket client_socket) {
+void http_server::handle_client(unique_ptr<tcp_socket> client_socket) {
     try {
-        http_request request = parse_request(&client_socket, session_manager_, cookie_name_, max_server_header_size,
-                                             max_server_body_size);
+        http_request request = parse_request(client_socket.get(), session_manager_, cookie_name_,
+                                             max_server_header_size, max_server_body_size);
 
-        if (client_socket.is_ssl()) {
+        if (client_socket->is_ssl()) {
             request.set_header(http_key::X_Forwarded_Proto(), "https");
         }
 
@@ -283,21 +368,22 @@ void http_server::handle_client(tcp_socket client_socket) {
         }
 
         http_session* sess = get_or_create_session(request, true, session_manager_, cookie_name_);
-        handle_request_with_forward(client_socket, request, sess);
+        // NOLINTNEXTLINE(clang-analyzer-cplusplus.Move)
+        handle_request_with_forward(*client_socket, request, sess);
     } catch (const http_exception& e) {
-        send_error_response(&client_socket, http_status::S4_BAD_REQUEST, e.what());
+        send_error_response(client_socket.get(), http_status::S4_BAD_REQUEST, e.what());
     } catch (const exception& e) {
-        send_error_response(&client_socket, http_status::S5_INTERNAL_ERROR, e.what());
+        send_error_response(client_socket.get(), http_status::S5_INTERNAL_SERVER_ERROR, e.what());
     } catch (...) {
-        send_error_response(&client_socket, http_status::S5_INTERNAL_ERROR, "Unknown internal error");
+        send_error_response(client_socket.get(), http_status::S5_INTERNAL_SERVER_ERROR, "Unknown internal error");
     }
 }
 
-bool http_server::try_websocket_upgrade(tcp_socket& client_socket, http_request& request) {
-    const string_view upgrade = request.header("Upgrade");
-    const string_view connection = request.header("Connection");
+bool http_server::try_websocket_upgrade(unique_ptr<tcp_socket>& client_socket, http_request& request) {
+    string upgrade = request.header("Upgrade");
+    string connection = request.header("Connection");
 
-    if (upgrade != "websocket" || connection.contains("Upgrade")) {
+    if (upgrade.lowercase() != "websocket" || !connection.lowercase().contains("upgrade")) {
         return false;
     }
 
@@ -309,16 +395,15 @@ bool http_server::try_websocket_upgrade(tcp_socket& client_socket, http_request&
     string accept = compute_websocket_accept(key);
 
     http_response upgrade_response;
-    upgrade_response.status = http_status::S1_SWITCH_PROTOCOL;
+    upgrade_response.status = http_status::S1_SWITCHING_PROTOCOLS;
     upgrade_response.status_message = "Switching Protocols";
     upgrade_response.set_header("Upgrade", "websocket");
     upgrade_response.set_header("Connection", "Upgrade");
     upgrade_response.set_header("Sec-WebSocket-Accept", move(accept));
 
-    send_response(&client_socket, upgrade_response);
+    send_response(client_socket.get(), upgrade_response);
 
-    auto sock_ptr = make_unique<tcp_socket>(_NEFORCE move(client_socket));
-    return ws_server_.handle_upgrade(request, move(sock_ptr));
+    return ws_server_.handle_upgrade(request, move(client_socket));
 }
 
 void http_server::handle_request_with_forward(tcp_socket& client_socket, http_request& request, http_session* sess) {
@@ -344,13 +429,13 @@ void http_server::handle_request_with_forward(tcp_socket& client_socket, http_re
     }
 
     if (forward_count >= max_forward_count) {
-        send_error_response(&client_socket, http_status::S5_INTERNAL_ERROR, "Too many forwards");
+        send_error_response(&client_socket, http_status::S5_INTERNAL_SERVER_ERROR, "Too many forwards");
     }
 }
 
 http_server::http_server(ports port, size_t worker_count) :
 server_(make_unique<tcp_server>(port, worker_count)) {
-    server_->set_client_handler([this](tcp_socket sock) { this->handle_client(_NEFORCE move(sock)); });
+    server_->set_client_handler([this](unique_ptr<tcp_socket> sock) { this->handle_client(move(sock)); });
 }
 
 http_server::http_server(ports port, ssl_context ctx, size_t worker_count) :
@@ -359,7 +444,7 @@ server_(make_unique<ssl_server>(port, worker_count)) {
     if (ssl_srv != nullptr) {
         ssl_srv->set_ssl_context(_NEFORCE move(ctx));
     }
-    server_->set_client_handler([this](tcp_socket sock) { this->handle_client(_NEFORCE move(sock)); });
+    server_->set_client_handler([this](unique_ptr<tcp_socket> sock) { this->handle_client(move(sock)); });
 }
 
 bool http_server::load_certificate(const string& cert_file, const string& key_file) {

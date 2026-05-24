@@ -41,7 +41,7 @@ public:
     using disconnect_callback_t = function<void()>;                  ///< 断开回调类型
 
 protected:
-    dns_client dns_;                ///< DNS解析客户端
+    unique_ptr<dns_client> dns_;    ///< DNS解析客户端
     unique_ptr<tcp_socket> socket_; ///< TCP socket
 
     string connected_host_;                    ///< 已连接的主机名
@@ -107,14 +107,16 @@ public:
     /**
      * @brief 默认构造函数
      */
-    tcp_client_base() = default;
+    tcp_client_base() :
+    dns_(make_unique<dns_client>()) {}
 
     /**
      * @brief 构造函数（带DNS客户端）
-     * @param dns DNS客户端
+     * @param cfg DNS配置
+     * @param use_tcp DNS是否使用TCP
      */
-    explicit tcp_client_base(dns_client dns) :
-    dns_(_NEFORCE move(dns)) {}
+    explicit tcp_client_base(dns_client::config cfg, bool use_tcp = false) :
+    dns_(make_unique<dns_client>(_NEFORCE move(cfg), use_tcp)) {}
 
     /**
      * @brief 析构函数
@@ -220,7 +222,7 @@ public:
      * @brief 设置DNS服务器配置
      * @param cfg DNS配置
      */
-    void set_dns_server(dns_client::config cfg) { dns_.set_config(move(cfg)); }
+    void set_dns_server(dns_client::config cfg) { dns_->set_config(move(cfg)); }
 
     /**
      * @brief 设置异常处理器
@@ -367,13 +369,13 @@ public:
      * @brief 获取DNS客户端
      * @return DNS客户端引用
      */
-    NEFORCE_NODISCARD dns_client& get_dns_client() noexcept { return dns_; }
+    NEFORCE_NODISCARD dns_client& get_dns_client() noexcept { return *dns_; }
 
     /**
      * @brief 获取DNS客户端常量引用
      * @return DNS客户端常量引用
      */
-    NEFORCE_NODISCARD const dns_client& get_dns_client() const noexcept { return dns_; }
+    NEFORCE_NODISCARD const dns_client& get_dns_client() const noexcept { return *dns_; }
 };
 
 /**
@@ -494,19 +496,19 @@ public:
      * @brief 获取对等方证书信息
      * @return 证书信息字符串
      */
-    NEFORCE_NODISCARD string_view peer_certificate_info() const;
+    NEFORCE_NODISCARD string peer_certificate_info() const;
 
     /**
      * @brief 获取当前密码套件名称
      * @return 密码套件名称
      */
-    NEFORCE_NODISCARD string_view cipher_name() const;
+    NEFORCE_NODISCARD string cipher_name() const;
 
     /**
      * @brief 获取当前协议版本
      * @return 协议版本字符串
      */
-    NEFORCE_NODISCARD string_view protocol_version() const;
+    NEFORCE_NODISCARD string protocol_version() const;
 
     /**
      * @brief 检查是否有SSL上下文

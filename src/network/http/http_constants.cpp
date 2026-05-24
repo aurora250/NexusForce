@@ -10,12 +10,14 @@ string http_status_message(const http_status status) {
     switch (status) {
         case http_status::S1_CONTINUE:
             return "Continue";
-        case http_status::S1_SWITCH_PROTOCOL:
+        case http_status::S1_SWITCHING_PROTOCOLS:
             return "Switching Protocols";
         case http_status::S2_OK:
             return "OK";
         case http_status::S2_CREATED:
             return "Created";
+        case http_status::S2_ACCEPTED:
+            return "Accepted";
         case http_status::S2_NO_CONTENT:
             return "No Content";
         case http_status::S2_PARTIAL_CONTENT:
@@ -24,7 +26,9 @@ string http_status_message(const http_status status) {
             return "Moved Permanently";
         case http_status::S3_FOUND:
             return "Found";
-        case http_status::S3_NO_MODIFIED:
+        case http_status::S3_SEE_OTHER:
+            return "See Other";
+        case http_status::S3_NOT_MODIFIED:
             return "Not Modified";
         case http_status::S3_TEMPORARY_REDIRECT:
             return "Temporary Redirect";
@@ -36,27 +40,55 @@ string http_status_message(const http_status status) {
             return "Unauthorized";
         case http_status::S4_FORBIDDEN:
             return "Forbidden";
-        case http_status::S4_NOT_FOUNT:
+        case http_status::S4_NOT_FOUND:
             return "Not Found";
         case http_status::S4_METHOD_NOT_ALLOWED:
             return "Method Not Allowed";
+        case http_status::S4_NOT_ACCEPTABLE:
+            return "Not Acceptable";
+        case http_status::S4_PROXY_AUTH_REQUIRED:
+            return "Proxy Authentication Required";
         case http_status::S4_REQUEST_TIMEOUT:
             return "Request Timeout";
-        case http_status::S4_PAYLOAD_LARGE:
+        case http_status::S4_CONFLICT:
+            return "Conflict";
+        case http_status::S4_GONE:
+            return "Gone";
+        case http_status::S4_LENGTH_REQUIRED:
+            return "Length Required";
+        case http_status::S4_PRECONDITION_FAILED:
+            return "Precondition Failed";
+        case http_status::S4_PAYLOAD_TOO_LARGE:
             return "Payload Too Large";
-        case http_status::S4_URL_LONG:
+        case http_status::S4_URI_TOO_LONG:
             return "URI Too Long";
-        case http_status::S4_MANY_REQUESTS:
+        case http_status::S4_UNSUPPORTED_MEDIA_TYPE:
+            return "Unsupported Media Type";
+        case http_status::S4_RANGE_NOT_SATISFIABLE:
+            return "Range Not Satisfiable";
+        case http_status::S4_EXPECTATION_FAILED:
+            return "Expectation Failed";
+        case http_status::S4_UNPROCESSABLE_CONTENT:
+            return "Unprocessable Content";
+        case http_status::S4_UPGRADE_REQUIRED:
+            return "Upgrade Required";
+        case http_status::S4_TOO_MANY_REQUESTS:
             return "Too Many Requests";
-        case http_status::S5_INTERNAL_ERROR:
+        case http_status::S4_HEADER_FIELDS_TOO_LARGE:
+            return "Request Header Fields Too Large";
+        case http_status::S4_UNAVAILABLE_FOR_LEGAL_REASONS:
+            return "Unavailable For Legal Reasons";
+        case http_status::S5_INTERNAL_SERVER_ERROR:
             return "Internal Server Error";
+        case http_status::S5_NOT_IMPLEMENTED:
+            return "Not Implemented";
         case http_status::S5_BAD_GATEWAY:
             return "Bad Gateway";
         case http_status::S5_SERVICE_UNAVAILABLE:
             return "Service Unavailable";
         case http_status::S5_GATEWAY_TIMEOUT:
             return "Gateway Timeout";
-        case http_status::S5_HTTP_VERSION_NOT_SUPPORT:
+        case http_status::S5_HTTP_VERSION_NOT_SUPPORTED:
             return "HTTP Version Not Supported";
         default:
             return "Unknown";
@@ -68,11 +100,13 @@ http_status http_status_from_code(const uint16_t code) noexcept {
         case 100:
             return http_status::S1_CONTINUE;
         case 101:
-            return http_status::S1_SWITCH_PROTOCOL;
+            return http_status::S1_SWITCHING_PROTOCOLS;
         case 200:
             return http_status::S2_OK;
         case 201:
             return http_status::S2_CREATED;
+        case 202:
+            return http_status::S2_ACCEPTED;
         case 204:
             return http_status::S2_NO_CONTENT;
         case 206:
@@ -81,8 +115,10 @@ http_status http_status_from_code(const uint16_t code) noexcept {
             return http_status::S3_MOVED_PERMANENT;
         case 302:
             return http_status::S3_FOUND;
+        case 303:
+            return http_status::S3_SEE_OTHER;
         case 304:
-            return http_status::S3_NO_MODIFIED;
+            return http_status::S3_NOT_MODIFIED;
         case 307:
             return http_status::S3_TEMPORARY_REDIRECT;
         case 308:
@@ -94,19 +130,47 @@ http_status http_status_from_code(const uint16_t code) noexcept {
         case 403:
             return http_status::S4_FORBIDDEN;
         case 404:
-            return http_status::S4_NOT_FOUNT;
+            return http_status::S4_NOT_FOUND;
         case 405:
             return http_status::S4_METHOD_NOT_ALLOWED;
+        case 406:
+            return http_status::S4_NOT_ACCEPTABLE;
+        case 407:
+            return http_status::S4_PROXY_AUTH_REQUIRED;
         case 408:
             return http_status::S4_REQUEST_TIMEOUT;
+        case 409:
+            return http_status::S4_CONFLICT;
+        case 410:
+            return http_status::S4_GONE;
+        case 411:
+            return http_status::S4_LENGTH_REQUIRED;
+        case 412:
+            return http_status::S4_PRECONDITION_FAILED;
         case 413:
-            return http_status::S4_PAYLOAD_LARGE;
+            return http_status::S4_PAYLOAD_TOO_LARGE;
         case 414:
-            return http_status::S4_URL_LONG;
+            return http_status::S4_URI_TOO_LONG;
+        case 415:
+            return http_status::S4_UNSUPPORTED_MEDIA_TYPE;
+        case 416:
+            return http_status::S4_RANGE_NOT_SATISFIABLE;
+        case 417:
+            return http_status::S4_EXPECTATION_FAILED;
+        case 422:
+            return http_status::S4_UNPROCESSABLE_CONTENT;
+        case 426:
+            return http_status::S4_UPGRADE_REQUIRED;
         case 429:
-            return http_status::S4_MANY_REQUESTS;
+            return http_status::S4_TOO_MANY_REQUESTS;
+        case 431:
+            return http_status::S4_HEADER_FIELDS_TOO_LARGE;
+        case 451:
+            return http_status::S4_UNAVAILABLE_FOR_LEGAL_REASONS;
         case 500:
-            return http_status::S5_INTERNAL_ERROR;
+            return http_status::S5_INTERNAL_SERVER_ERROR;
+        case 501:
+            return http_status::S5_NOT_IMPLEMENTED;
         case 502:
             return http_status::S5_BAD_GATEWAY;
         case 503:
@@ -114,9 +178,25 @@ http_status http_status_from_code(const uint16_t code) noexcept {
         case 504:
             return http_status::S5_GATEWAY_TIMEOUT;
         case 505:
-            return http_status::S5_HTTP_VERSION_NOT_SUPPORT;
-        default:
-            return http_status::S5_INTERNAL_ERROR;
+            return http_status::S5_HTTP_VERSION_NOT_SUPPORTED;
+        default: {
+            if (code >= 100 && code < 200) {
+                return http_status::S1_CONTINUE;
+            }
+            if (code >= 200 && code < 300) {
+                return http_status::S2_OK;
+            }
+            if (code >= 300 && code < 400) {
+                return http_status::S3_FOUND;
+            }
+            if (code >= 400 && code < 500) {
+                return http_status::S4_BAD_REQUEST;
+            }
+            if (code >= 500 && code < 600) {
+                return http_status::S5_INTERNAL_SERVER_ERROR;
+            }
+            return http_status::S5_INTERNAL_SERVER_ERROR;
+        }
     }
 }
 

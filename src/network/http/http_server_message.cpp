@@ -150,10 +150,18 @@ string http_response::to_string() const {
     result.reserve(1024 + body.size());
 
     if (!redirect_url.empty()) {
-        result += version + " 302 Found\r\n";
+        const auto code = static_cast<uint16_t>(status);
+        const uint16_t use_code = (code >= 300 && code < 400) ? code : 302;
+        const string use_status_msg = !status_message.empty() ? status_message : http_status_message(status);
+        result += version + " " + _NEFORCE to_string(use_code) + " " + use_status_msg + "\r\n";
         result += "Location: " + redirect_url + "\r\n";
     } else {
-        result += version + " " + _NEFORCE to_string(static_cast<uint16_t>(status)) + " " + status_message + "\r\n";
+        const string use_status_msg = !status_message.empty() ? status_message : http_status_message(status);
+        result += version + " " + _NEFORCE to_string(static_cast<uint16_t>(status)) + " " + use_status_msg + "\r\n";
+    }
+
+    for (const auto& header: headers) {
+        result += header.first + ": " + header.second + "\r\n";
     }
 
     for (const auto& cookie: cookies) {
@@ -164,9 +172,6 @@ string http_response::to_string() const {
         result += http_key::Content_Length() + ": " + _NEFORCE to_string(body.size()) + "\r\n";
     }
 
-    for (const auto& header: headers) {
-        result += header.first + ": " + header.second + "\r\n";
-    }
     result += "\r\n";
 
     if (redirect_url.empty()) {

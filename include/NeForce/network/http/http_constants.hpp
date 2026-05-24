@@ -205,7 +205,7 @@ enum class http_status : uint16_t {
      * @brief 101 Switching Protocols
      * 同意切换协议
      */
-    S1_SWITCH_PROTOCOL = 101,
+    S1_SWITCHING_PROTOCOLS = 101,
 
     /**
      * @brief 200 OK
@@ -218,6 +218,12 @@ enum class http_status : uint16_t {
      * 请求成功并创建了新资源
      */
     S2_CREATED = 201,
+
+    /**
+     * @brief 202 Accepted
+     * 请求已接受但尚未处理
+     */
+    S2_ACCEPTED = 202,
 
     /**
      * @brief 204 No Content
@@ -244,10 +250,16 @@ enum class http_status : uint16_t {
     S3_FOUND = 302,
 
     /**
+     * @brief 303 See Other
+     * 重定向到另一个URI获取响应
+     */
+    S3_SEE_OTHER = 303,
+
+    /**
      * @brief 304 Not Modified
      * 资源未修改，可使用本地缓存
      */
-    S3_NO_MODIFIED = 304,
+    S3_NOT_MODIFIED = 304,
 
     /**
      * @brief 307 Temporary Redirect
@@ -283,13 +295,24 @@ enum class http_status : uint16_t {
      * @brief 404 Not Found
      * 请求的资源不存在
      */
-    S4_NOT_FOUNT = 404,
+    S4_NOT_FOUND = 404,
 
     /**
      * @brief 405 Method Not Allowed
      * 请求方法不允许
      */
     S4_METHOD_NOT_ALLOWED = 405,
+    /**
+     * @brief 406 Not Acceptable
+     * 无法生成匹配Accept头的内容
+     */
+    S4_NOT_ACCEPTABLE = 406,
+
+    /**
+     * @brief 407 Proxy Authentication Required
+     * 需要通过代理认证
+     */
+    S4_PROXY_AUTH_REQUIRED = 407,
 
     /**
      * @brief 408 Request Timeout
@@ -298,28 +321,91 @@ enum class http_status : uint16_t {
     S4_REQUEST_TIMEOUT = 408,
 
     /**
+     * @brief 409 Conflict
+     * 请求与资源当前状态冲突
+     */
+    S4_CONFLICT = 409,
+
+    /**
+     * @brief 410 Gone
+     * 资源已永久删除
+     */
+    S4_GONE = 410,
+    /**
+     * @brief 411 Length Required
+     * 请求未指定Content-Length
+     */
+    S4_LENGTH_REQUIRED = 411,
+
+    /**
+     * @brief 412 Precondition Failed
+     * 请求先决条件未满足
+     */
+    S4_PRECONDITION_FAILED = 412,
+
+    /**
+     * @brief 415 Unsupported Media Type
+     * 不支持的媒体格式
+     */
+    S4_UNSUPPORTED_MEDIA_TYPE = 415,
+
+    /**
+     * @brief 416 Range Not Satisfiable
+     * 无法满足Range请求
+     */
+    S4_RANGE_NOT_SATISFIABLE = 416,
+    /**
+     * @brief 417 Expectation Failed
+     * 无法满足Expect请求头
+     */
+    S4_EXPECTATION_FAILED = 417,
+
+    /**
+     * @brief 422 Unprocessable Content
+     * 请求格式正确但语义有误
+     */
+    S4_UNPROCESSABLE_CONTENT = 422,
+
+    /**
+     * @brief 426 Upgrade Required
+     * 需要升级协议
+     */
+    S4_UPGRADE_REQUIRED = 426,
+
+    /**
      * @brief 413 Payload Too Large
      * 请求体过大
      */
-    S4_PAYLOAD_LARGE = 413,
+    S4_PAYLOAD_TOO_LARGE = 413,
 
     /**
      * @brief 414 URI Too Long
      * 请求URL过长
      */
-    S4_URL_LONG = 414,
+    S4_URI_TOO_LONG = 414,
 
     /**
      * @brief 429 Too Many Requests
      * 请求次数过多
      */
-    S4_MANY_REQUESTS = 429,
+    S4_TOO_MANY_REQUESTS = 429,
+    /**
+     * @brief 431 Request Header Fields Too Large
+     * 请求头字段过大
+     */
+    S4_HEADER_FIELDS_TOO_LARGE = 431,
+
+    /**
+     * @brief 451 Unavailable For Legal Reasons
+     * 因法律原因不可用
+     */
+    S4_UNAVAILABLE_FOR_LEGAL_REASONS = 451,
 
     /**
      * @brief 500 Internal Server Error
      * 服务器内部错误
      */
-    S5_INTERNAL_ERROR = 500,
+    S5_INTERNAL_SERVER_ERROR = 500,
 
     /**
      * @brief 502 Bad Gateway
@@ -340,10 +426,16 @@ enum class http_status : uint16_t {
     S5_GATEWAY_TIMEOUT = 504,
 
     /**
+     * @brief 501 Not Implemented
+     * 服务器不支持该请求功能
+     */
+    S5_NOT_IMPLEMENTED = 501,
+
+    /**
      * @brief 505 HTTP Version Not Supported
      * 不支持的HTTP版本
      */
-    S5_HTTP_VERSION_NOT_SUPPORT = 505
+    S5_HTTP_VERSION_NOT_SUPPORTED = 505
 };
 
 NEFORCE_API string http_status_message(http_status status);

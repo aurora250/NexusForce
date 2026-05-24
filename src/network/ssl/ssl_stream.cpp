@@ -42,7 +42,6 @@ void ssl_stream::handle_ssl_error(const int ret, const char* operation) {
             ::ERR_error_string_n(ssl_err, static_cast<char*>(buf), sizeof(buf));
             last_error_ = string(operation) + " syscall error: " + static_cast<char*>(buf);
             NEFORCE_THROW_EXCEPTION(ssl_exception(static_cast<int>(ssl_err)));
-            unreachable();
         }
         case SSL_ERROR_SSL: {
             const unsigned long ssl_err = ::ERR_get_error();
@@ -50,7 +49,6 @@ void ssl_stream::handle_ssl_error(const int ret, const char* operation) {
             ::ERR_error_string_n(ssl_err, static_cast<char*>(buf), sizeof(buf));
             last_error_ = string(operation) + " SSL protocol error: " + static_cast<char*>(buf);
             NEFORCE_THROW_EXCEPTION(ssl_exception(static_cast<int>(ssl_err)));
-            unreachable();
         }
         default: {
             last_error_ = string(operation) + " unknown error";
@@ -106,45 +104,13 @@ bool ssl_stream::connect() {
     const int ret = SSL_connect(ssl_.get());
 
     if (ret != 1) {
-        const int err = SSL_get_error(ssl_.get(), ret);
-        const auto ssl_err = ERR_get_error();
-        char err_buf[256];
-        ERR_error_string_n(ssl_err, static_cast<char*>(err_buf), sizeof(err_buf));
-
-        string error_msg = "SSL handshake failed: ";
-        error_msg += static_cast<char*>(err_buf);
-
-        switch (err) {
-            case SSL_ERROR_SYSCALL: {
-                error_msg += " (System call error)";
-                break;
-            }
-            case SSL_ERROR_SSL: {
-                error_msg += " (SSL protocol error)";
-                break;
-            }
-            case SSL_ERROR_WANT_READ: {
-                error_msg += " (Want read)";
-                break;
-            }
-            case SSL_ERROR_WANT_WRITE: {
-                error_msg += " (Want write)";
-                break;
-            }
-            case SSL_ERROR_ZERO_RETURN: {
-                error_msg += " (Connection closed)";
-                break;
-            }
-            default:
-                unreachable();
-        }
-        NEFORCE_THROW_EXCEPTION(ssl_exception(error_msg.data()));
+        handle_ssl_error(ret, "SSL_connect");
     }
 
     return true;
 }
 
-void ssl_stream::close() {
+void ssl_stream::close() noexcept {
     auto* ssl = ssl_.release();
     if (ssl != nullptr) {
         ::SSL_shutdown(ssl);
@@ -158,9 +124,12 @@ ssize_t ssl_stream::read(void* buffer, const size_t size) {
         last_error_ = "SSL object not initialized";
         return -1;
     }
-    if (buffer == nullptr || size == 0) {
-        last_error_ = "Invalid buffer or size";
+    if (buffer == nullptr && size > 0) {
+        last_error_ = "Invalid buffer";
         return -1;
+    }
+    if (size == 0) {
+        return 0;
     }
 
     if (size > numeric_traits<int>::max()) {
@@ -173,6 +142,10 @@ ssize_t ssl_stream::read(void* buffer, const size_t size) {
         const int err = ::SSL_get_error(ssl_.get(), ret);
         if (err == SSL_ERROR_WANT_READ || err == SSL_ERROR_WANT_WRITE) {
             last_error_ = "SSL_read would block";
+            return 0;
+        }
+        if (err == SSL_ERROR_ZERO_RETURN) {
+            last_error_ = "SSL connection closed cleanly";
             return 0;
         }
         handle_ssl_error(ret, "SSL_read");
@@ -188,7 +161,11 @@ ssize_t ssl_stream::write(const void* buffer, const size_t size) {
         last_error_ = "SSL object not initialized";
         return -1;
     }
-    if (buffer == nullptr || size == 0) {
+    if (buffer == nullptr && size > 0) {
+        last_error_ = "Invalid buffer";
+        return -1;
+    }
+    if (size == 0) {
         return 0;
     }
 
@@ -233,12 +210,12 @@ vector<char> ssl_stream::read_all(const size_t max_size) {
             NEFORCE_THROW_EXCEPTION(ssl_exception("Failed to read data"));
         }
         if (ret == 0) {
-            break;
+            continue;
         }
 
         buffer.insert(buffer.end(), static_cast<char*>(temp), static_cast<char*>(temp) + ret);
 
-        if (ret < sizeof(temp)) {
+        if (ret < static_cast<ssize_t>(to_read)) {
             break;
         }
     }

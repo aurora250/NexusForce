@@ -12,8 +12,8 @@
  * - 组合操作符 (when_all, retry 等)
  */
 
+#include "NeForce/core/async/coroutine.hpp"
 #ifdef NEFORCE_STANDARD_20
-#    include "NeForce/core/async/coroutine.hpp"
 #    include "NeForce/core/async/atomic.hpp"
 #    include "NeForce/core/exception/exception_ptr.hpp"
 #    include "NeForce/core/functional/function.hpp"

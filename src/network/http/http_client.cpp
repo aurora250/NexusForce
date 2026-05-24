@@ -338,7 +338,7 @@ optional<http_client_response> http_client::read_response(time_point& receive_st
 }
 
 bool http_client::ensure_connected(const string& host, const ports port) {
-    const bool is_https = port == ports::HTTPS;
+    const bool is_https = client_.has_ssl_context();
 
     if (client_.is_connected()) {
         if (client_.connected_host() == host && client_.connected_port() == port) {
@@ -348,7 +348,6 @@ bool http_client::ensure_connected(const string& host, const ports port) {
     }
 
     try {
-        // Set SNI hostname for HTTPS connections
         if (is_https) {
             client_.set_sni_hostname(host);
         }
@@ -366,14 +365,14 @@ http_client_response http_client::do_request(http_client_request request, int re
     const auto start_time = steady_clock::now();
 
     url req_url;
-    req_url.scheme = request.port.to_string();
+    req_url.scheme = client_.has_ssl_context() ? "https" : "http";
     req_url.host = request.host;
     req_url.port = request.port;
     req_url.path = request.path;
 
     const auto connect_start = steady_clock::now();
     if (!ensure_connected(request.host, request.port)) {
-        response.status = http_status::S5_INTERNAL_ERROR;
+        response.status = http_status::S5_INTERNAL_SERVER_ERROR;
         response.status_message = "Connection failed";
         response.effective_url = req_url.to_string();
         return response;
@@ -383,7 +382,7 @@ http_client_response http_client::do_request(http_client_request request, int re
     const string request_str = build_request_str(request, req_url);
     steady_clock::time_point send_start;
     if (!send_request(request_str.view(), send_start)) {
-        response.status = http_status::S5_INTERNAL_ERROR;
+        response.status = http_status::S5_INTERNAL_SERVER_ERROR;
         response.status_message = "Send failed";
         response.effective_url = req_url.to_string();
         return response;
@@ -393,7 +392,7 @@ http_client_response http_client::do_request(http_client_request request, int re
     steady_clock::time_point receive_start;
     auto resp_opt = read_response(receive_start, request.host, request.path);
     if (!resp_opt) {
-        response.status = http_status::S5_INTERNAL_ERROR;
+        response.status = http_status::S5_INTERNAL_SERVER_ERROR;
         response.status_message = "Receive/Parse failed";
         response.effective_url = req_url.to_string();
         return response;
@@ -493,8 +492,12 @@ string http_client::build_cookie_header(const url& request_url) const {
         if (c.domain.empty() || request_url.host == c.domain) {
             domain_match = true;
         } else if (c.domain.starts_with(".")) {
-            if (request_url.host.ends_with(c.domain.view(1))) {
+            const string_view domain_without_dot = c.domain.view(1);
+            if (request_url.host == domain_without_dot) {
                 domain_match = true;
+            } else if (request_url.host.size() > domain_without_dot.size() &&
+                       request_url.host[request_url.host.size() - domain_without_dot.size() - 1] == '.') {
+                domain_match = request_url.host.ends_with(domain_without_dot);
             }
         }
 
@@ -503,6 +506,11 @@ string http_client::build_cookie_header(const url& request_url) const {
         }
         if (!request_url.path.starts_with(c.path.view())) {
             continue;
+        }
+        if (!c.path.ends_with("/") && request_url.path.length() > c.path.length()) {
+            if (request_url.path[c.path.length()] != '/') {
+                continue;
+            }
         }
         if (c.secure && request_url.scheme != "https") {
             continue;

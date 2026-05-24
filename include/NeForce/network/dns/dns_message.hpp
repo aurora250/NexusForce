@@ -181,16 +181,17 @@ enum class dns_opcode : uint8_t {
 };
 
 /**
- * @enum dns_query
- * @brief DNS查询类型枚举
+ * @enum dns_class
+ * @brief DNS查询类枚举
  *
- * 定义DNS查询的类别，指定查询的协议族或类型。
+ * 定义DNS查询的类别（CLASS），指定查询的协议族。
+ * 符合 RFC 1035 §3.2.4 和 IANA DNS Parameters 注册表。
  */
-enum class dns_query : uint16_t {
-    INTERNET = 1, ///< Internet类
-    CHAOS = 3,    ///< CHAOS类
-    HESIOD = 4,   ///< HESIOD类
-    ANY = 255     ///< 任何类
+enum class dns_class : uint16_t {
+    IN = 1,   ///< Internet (IN)
+    CH = 3,   ///< CHAOS
+    HS = 4,   ///< Hesiod
+    ANY = 255 ///< 任何类
 };
 
 /**
@@ -304,7 +305,7 @@ struct dns_record {
     string data;          ///< 记录数据
     uint32_t ttl;         ///< 生存时间（秒）
     raw type{raw::A};     ///< 记录类型
-    dns_query class_type; ///< 查询类
+    dns_class class_type; ///< 查询类
 
     /**
      * @brief 默认构造函数
@@ -319,7 +320,7 @@ struct dns_record {
      * @param ttl_val 生存时间
      * @param d 记录数据
      */
-    dns_record(string n, const raw t, const dns_query c, const uint32_t ttl_val, string d) noexcept :
+    dns_record(string n, const raw t, const dns_class c, const uint32_t ttl_val, string d) noexcept :
     name(_NEFORCE move(n)),
     data(_NEFORCE move(d)),
     ttl(ttl_val),
@@ -339,14 +340,27 @@ struct dns_query_result {
     vector<dns_record> additional;                       ///< 附加记录
     milliseconds query_time;                             ///< 查询耗时
     dns_response response_code{dns_response::NON_ERROR}; ///< 响应码
-    bool truncated;                                      ///< 响应是否被截断
-    bool recursive_available;                            ///< 递归查询是否可用
+    uint8_t extended_rcode{0};                           ///< 扩展响应码（EDNS0，RFC 6891）
+    uint16_t udp_payload_size{512};                      ///< 服务器支持的UDP载荷大小（EDNS0）
+    uint8_t edns_version{0};                             ///< EDNS版本号
+    bool dnssec_ok{false};                               ///< 服务器支持DNSSEC（DO标志位）
+    bool authoritative{false};                           ///< 权威应答（AA标志位）
+    bool truncated{false};                               ///< 响应是否被截断
+    bool recursive_available{false};                     ///< 递归查询是否可用
 
     /**
      * @brief 检查查询是否成功
      * @return 成功返回true
      */
     NEFORCE_NODISCARD bool is_success() const noexcept { return response_code == dns_response::NON_ERROR; }
+
+    /**
+     * @brief 获取完整响应码（含EDNS0扩展位）
+     * @return 12位完整响应码
+     */
+    NEFORCE_NODISCARD uint16_t full_rcode() const noexcept {
+        return static_cast<uint16_t>(response_code) | (static_cast<uint16_t>(extended_rcode) << 4);
+    }
 };
 
 /**
@@ -362,6 +376,63 @@ struct dns_header {
     uint16_t ancount = 0; ///< 答案计数
     uint16_t nscount = 0; ///< 权威计数
     uint16_t arcount = 0; ///< 附加计数
+};
+
+/**
+ * @namespace edns
+ * @brief EDNS0 协议常量（RFC 6891）
+ *
+ * EDNS0 (Extension Mechanisms for DNS) 扩展了DNS消息的UDP载荷大小、
+ * 响应码位数和可选功能。
+ */
+namespace edns {
+    NEFORCE_INLINE17 constexpr uint16_t OPT_TYPE = 41;              ///< OPT伪资源记录类型
+    NEFORCE_INLINE17 constexpr uint16_t DEFAULT_UDP_PAYLOAD = 1232; ///< 默认UDP载荷大小（RFC 6891 建议值）
+    NEFORCE_INLINE17 constexpr uint16_t MAX_UDP_PAYLOAD = 4096;     ///< 最大UDP载荷大小
+    NEFORCE_INLINE17 constexpr uint8_t VERSION = 0;                 ///< EDNS版本号
+    NEFORCE_INLINE17 constexpr uint8_t EXT_RCODE_SHIFT = 24;        ///< 扩展RCODE在TTL字段中的偏移
+    NEFORCE_INLINE17 constexpr uint8_t VERSION_SHIFT = 16;          ///< EDNS版本在TTL字段中的偏移
+    NEFORCE_INLINE17 constexpr uint16_t DO_BIT = 0x8000;            ///< DNSSEC OK标志位
+    NEFORCE_INLINE17 constexpr uint8_t MAX_UDP_RETRIES = 2;         ///< UDP最大重试次数
+    NEFORCE_INLINE17 constexpr seconds NEGATIVE_CACHE_TTL{30};      ///< 否定缓存TTL（RFC 2308）
+} // namespace edns
+
+/**
+ * @struct dns_srv_record
+ * @brief DNS SRV资源记录
+ *
+ * SRV记录用于服务发现，指定服务的主机和端口。
+ */
+struct dns_srv_record {
+    uint16_t priority{0}; ///< 优先级（越低越优先）
+    uint16_t weight{0};   ///< 权重（同优先级下负载均衡）
+    uint16_t port{0};     ///< 服务端口号
+    string target;        ///< 目标主机名
+
+    dns_srv_record() = default;
+    dns_srv_record(const uint16_t prio, const uint16_t w, const uint16_t p, string t) :
+    priority(prio),
+    weight(w),
+    port(p),
+    target(_NEFORCE move(t)) {}
+};
+
+/**
+ * @struct dns_soa_record
+ * @brief DNS SOA（Start of Authority）资源记录
+ *
+ * SOA记录标记DNS区域的授权起始，包含区域传输参数。
+ */
+struct dns_soa_record {
+    string mname;        ///< 主名称服务器
+    string rname;        ///< 管理员邮箱
+    uint32_t serial{0};  ///< 区域序列号
+    uint32_t refresh{0}; ///< 刷新间隔（秒）
+    uint32_t retry{0};   ///< 重试间隔（秒）
+    uint32_t expire{0};  ///< 过期时间（秒）
+    uint32_t minimum{0}; ///< 最小TTL（秒）
+
+    dns_soa_record() = default;
 };
 
 /** @} */ // DNS

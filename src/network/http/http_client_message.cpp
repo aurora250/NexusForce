@@ -15,7 +15,7 @@ string http_client_request::build_full_path() const {
             if (!first) {
                 full_path += "&";
             }
-            full_path += url::decode_tolerant(key.view()) + "=" + url::decode_tolerant(value.view());
+            full_path += url::encode(key.view()) + "=" + url::encode(value.view());
             first = false;
         }
     }

@@ -327,6 +327,12 @@ public:
     static path temp_directory_path();
 
     /**
+     * @brief 获取当前可执行文件路径
+     * @return 当前可执行文件路径
+     */
+    static path current_executable_path();
+
+    /**
      * @brief 路径连接赋值操作符
      * @param other 要连接的路径
      * @return 自身引用

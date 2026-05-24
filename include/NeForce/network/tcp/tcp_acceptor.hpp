@@ -69,6 +69,8 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API tcp_acceptor : public ip_socket {
 public:
+    using socket_base::open;
+
     /**
      * @brief 默认构造函数
      */

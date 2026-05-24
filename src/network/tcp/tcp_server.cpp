@@ -1,6 +1,7 @@
 #include <NeForce/network/tcp/tcp_server.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <poll.h>
+#    include <cerrno>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -51,54 +52,9 @@ void tcp_server_base::accept_loop() {
         return;
     }
 
-#if 1
-
-    while (running_) {
-        try {
-            auto client_opt = accept_one();
-            if (!client_opt) {
-                if (!running_) {
-                    break;
-                }
-                this_thread::sleep_for(milliseconds(10));
-                continue;
-            }
-
-            client_handler_t handler;
-            {
-                shared_lock<shared_mutex> lock(handler_mutex_);
-                handler = client_handler_;
-            }
-
-            if (!handler) {
-                continue;
-            }
-
-            client_pool_.submit_task([handler = move(handler), sock = move(*client_opt), this]() mutable {
-                try {
-                    handler(move(sock));
-                } catch (const exception& e) {
-                    if (!running_) {
-                        return;
-                    }
-                    shared_lock<shared_mutex> lock(handler_mutex_);
-                    if (exception_handler_) {
-                        exception_handler_(e);
-                    }
-                }
-            });
-        } catch (const exception& e) {
-            if (running_ && exception_handler_) {
-                exception_handler_(e);
-            }
-        }
-    }
-
-#else
-
     const auto acceptor_fd = acceptor_->native_handle();
 
-#    ifdef NEFORCE_PLATFORM_WINDOWS
+#ifdef NEFORCE_PLATFORM_WINDOWS
 
     wsa_event_guard accept_guard(::WSACreateEvent());
     if (accept_guard.event == WSA_INVALID_EVENT) {
@@ -168,7 +124,7 @@ void tcp_server_base::accept_loop() {
         }
     }
 
-#    else
+#else
     const auto wake_read_fd = wake_pipe_.native_read_handle();
 
     pollfd pfds[2];
@@ -189,11 +145,11 @@ void tcp_server_base::accept_loop() {
             }
             break;
         }
-        if (pfds[1].revents & POLLIN) {
+        if ((pfds[1].revents & POLLIN) != 0) {
             break;
         }
 
-        if (!(pfds[0].revents & POLLIN)) {
+        if ((pfds[0].revents & POLLIN) == 0) {
             continue;
         }
 
@@ -234,8 +190,6 @@ void tcp_server_base::accept_loop() {
             }
         }
     }
-#    endif
-
 #endif
 }
 
@@ -245,7 +199,6 @@ port_(port) {
         NEFORCE_THROW_EXCEPTION(value_exception("Worker count must be greater than 0"));
     }
     client_pool_.set_thread_threshhold(worker_count);
-    client_pool_.start();
 }
 
 bool tcp_server_base::set_client_handler(client_handler_t handler) {
@@ -306,6 +259,12 @@ bool tcp_server_base::start(const int backlog) noexcept {
         const auto endpoint = ip_address::any(port_);
         create_acceptor(endpoint, backlog);
 
+        if (port_.value() == 0) {
+            if (const auto local = acceptor_->local_endpoint()) {
+                port_ = local->port();
+            }
+        }
+
         running_ = true;
         worker_threads_.emplace_back(&tcp_server_base::accept_loop, this);
         return true;
@@ -362,12 +321,16 @@ void tcp_server::create_acceptor(const ip_address& endpoint, int backlog) {
     acceptor_ = move(acc);
 }
 
-optional<tcp_socket> tcp_server::accept_one() {
+optional<unique_ptr<tcp_socket>> tcp_server::accept_one() {
     auto* acc = static_cast<tcp_acceptor*>(acceptor_.get());
     if (acc == nullptr) {
         return none;
     }
-    return acc->accept_nonblock();
+    auto client = acc->accept_nonblock();
+    if (!client) {
+        return none;
+    }
+    return make_unique<tcp_socket>(move(*client));
 }
 
 ssl_server::ssl_server(const ports port, const size_t worker_count) :
@@ -388,14 +351,14 @@ void ssl_server::set_ssl_context(ssl_context ctx) {
     if (is_running()) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Cannot set SSL context while server is running"));
     }
-    if (!ctx.is_valid()) {
+    if (!ctx.is_valid() || !ctx.has_certificate()) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Invalid SSL context"));
     }
     ssl_ctx_ = _NEFORCE move(ctx);
 }
 
 bool ssl_server::start(const int backlog) noexcept {
-    if (!ssl_ctx_.is_valid()) {
+    if (!ssl_ctx_.is_valid() || !ssl_ctx_.has_certificate()) {
         return false;
     }
     return tcp_server_base::start(backlog);
@@ -411,14 +374,14 @@ void ssl_server::create_acceptor(const ip_address& endpoint, int backlog) {
     acceptor_ = move(acc);
 }
 
-optional<tcp_socket> ssl_server::accept_one() {
+optional<unique_ptr<tcp_socket>> ssl_server::accept_one() {
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     auto* acc = static_cast<ssl_acceptor*>(acceptor_.get());
     if (acc == nullptr) {
         return none;
     }
     try {
-        return acc->accept_ssl();
+        return make_unique<ssl_socket>(acc->accept_ssl());
     } catch (const exception& e) {
         if (running_) {
             shared_lock<shared_mutex> hl(handler_mutex_);
