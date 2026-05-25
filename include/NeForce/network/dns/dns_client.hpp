@@ -57,7 +57,7 @@ public:
 
 private:
     struct pending_entry {
-        promise<dns_query_result> promise;
+        _NEFORCE promise<dns_query_result> promise;
         byte_vector query_data;
         steady_clock::time_point created_at{steady_clock::now()};
     };

@@ -36,21 +36,11 @@ struct registry_key_exception final : system_exception {
 class NEFORCE_API registry_key {
 public:
     struct NEFORCE_API root_key {
-        static ::HKEY classes_root() {
-            return HKEY_CLASSES_ROOT;
-        }
-        static ::HKEY current_user() {
-            return HKEY_CURRENT_USER;
-        }
-        static ::HKEY local_machine() {
-            return HKEY_LOCAL_MACHINE;
-        }
-        static ::HKEY users() {
-            return HKEY_USERS;
-        }
-        static ::HKEY current_config() {
-            return HKEY_CURRENT_CONFIG;
-        }
+        static ::HKEY classes_root() { return HKEY_CLASSES_ROOT; }
+        static ::HKEY current_user() { return HKEY_CURRENT_USER; }
+        static ::HKEY local_machine() { return HKEY_LOCAL_MACHINE; }
+        static ::HKEY users() { return HKEY_USERS; }
+        static ::HKEY current_config() { return HKEY_CURRENT_CONFIG; }
     };
 
     enum class value_type : ::DWORD {

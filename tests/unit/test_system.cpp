@@ -5904,7 +5904,8 @@ TEST_F(RegistryKeyTest, OpenValidKey) {
 
 TEST_F(RegistryKeyTest, OpenInvalidKeyThrows) {
     registry_key key;
-    EXPECT_THROW(key.open(registry_key::root_key::current_user(), L"Software\\NonExistentPath12345"), registry_key_exception);
+    EXPECT_THROW(key.open(registry_key::root_key::current_user(), L"Software\\NonExistentPath12345"),
+                 registry_key_exception);
 }
 
 TEST_F(RegistryKeyTest, MoveConstructorTransfersOwnership) {
