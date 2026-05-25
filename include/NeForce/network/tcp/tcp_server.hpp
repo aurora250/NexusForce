@@ -38,6 +38,7 @@ protected:
     atomic<bool> running_{false};       ///< 运行标志
     vector<thread> worker_threads_;     ///< 工作线程列表
     thread_pool client_pool_;           ///< 客户端处理线程池
+    size_t worker_count_;               ///< 工作线程数
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::WSAEVENT wake_event_{WSA_INVALID_EVENT};

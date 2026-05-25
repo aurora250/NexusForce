@@ -89,8 +89,19 @@ void ssl_stream::accept() {
         NEFORCE_THROW_EXCEPTION(ssl_exception("SSL object not initialized"));
     }
 
-    const int ret = ::SSL_accept(ssl_.get());
-    if (ret != 1) {
+    while (true) {
+        const int ret = ::SSL_accept(ssl_.get());
+        if (ret == 1) {
+            return;
+        }
+        const int err = ::SSL_get_error(ssl_.get(), ret);
+        if (err == SSL_ERROR_WANT_READ || err == SSL_ERROR_WANT_WRITE) {
+            continue;
+        }
+        if (err == SSL_ERROR_SYSCALL && ::ERR_get_error() == 0) {
+            last_error_ = "SSL_accept system call error";
+            NEFORCE_THROW_EXCEPTION(ssl_exception("SSL accept failed: connection error"));
+        }
         handle_ssl_error(ret, "SSL_accept");
     }
 }
@@ -101,13 +112,21 @@ bool ssl_stream::connect() {
     }
     SSL_set_connect_state(ssl_.get());
 
-    const int ret = SSL_connect(ssl_.get());
-
-    if (ret != 1) {
+    while (true) {
+        const int ret = SSL_connect(ssl_.get());
+        if (ret == 1) {
+            return true;
+        }
+        const int err = ::SSL_get_error(ssl_.get(), ret);
+        if (err == SSL_ERROR_WANT_READ || err == SSL_ERROR_WANT_WRITE) {
+            continue;
+        }
+        if (err == SSL_ERROR_SYSCALL && ::ERR_get_error() == 0) {
+            last_error_ = "SSL_connect system call error";
+            NEFORCE_THROW_EXCEPTION(ssl_exception("SSL connect failed: connection error"));
+        }
         handle_ssl_error(ret, "SSL_connect");
     }
-
-    return true;
 }
 
 void ssl_stream::close() noexcept {
@@ -148,7 +167,18 @@ ssize_t ssl_stream::read(void* buffer, const size_t size) {
             last_error_ = "SSL connection closed cleanly";
             return 0;
         }
-        handle_ssl_error(ret, "SSL_read");
+        const unsigned long ssl_err = ::ERR_get_error();
+        if (err == SSL_ERROR_SYSCALL && ssl_err == 0) {
+            last_error_ = "SSL_read system call error";
+            return -1;
+        }
+        if (ssl_err != 0) {
+            char buf[256];
+            ::ERR_error_string_n(ssl_err, static_cast<char*>(buf), sizeof(buf));
+            last_error_ = string("SSL_read error: ") + static_cast<char*>(buf);
+        } else {
+            last_error_ = "SSL_read error";
+        }
         return -1;
     }
 
@@ -181,7 +211,18 @@ ssize_t ssl_stream::write(const void* buffer, const size_t size) {
             last_error_ = "SSL_write would block";
             return 0;
         }
-        handle_ssl_error(ret, "SSL_write");
+        const unsigned long ssl_err = ::ERR_get_error();
+        if (err == SSL_ERROR_SYSCALL && ssl_err == 0) {
+            last_error_ = "SSL_write system call error";
+            return -1;
+        }
+        if (ssl_err != 0) {
+            char buf[256];
+            ::ERR_error_string_n(ssl_err, static_cast<char*>(buf), sizeof(buf));
+            last_error_ = string("SSL_write error: ") + static_cast<char*>(buf);
+        } else {
+            last_error_ = "SSL_write error";
+        }
         return -1;
     }
 

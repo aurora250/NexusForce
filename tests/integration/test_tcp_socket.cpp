@@ -343,7 +343,7 @@ TEST_F(TcpClientIntegration, ConnectInvalidHostThrows) {
 
 TEST_F(TcpClientIntegration, SocketAccessThrowsWhenNotConnected) {
     tcp_client client;
-    EXPECT_THROW(client.socket(), value_exception);
+    EXPECT_THROW(ignore = client.socket(), value_exception);
 }
 
 class TcpServerIntegration : public ::testing::Test {

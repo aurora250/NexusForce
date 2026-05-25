@@ -71,10 +71,10 @@ public:
     /**
      * @brief 构造函数
      * @param initial_state 初始信号状态
-     * @param type 事件类型
+     * @param t 事件类型
      * @throws system_exception 创建失败时抛出
      */
-    explicit system_event(bool initial_state = false, type type = type::auto_reset);
+    explicit system_event(bool initial_state = false, type t = type::auto_reset);
 
     /**
      * @brief 析构函数
@@ -125,6 +125,14 @@ public:
      * @return 事件类型
      */
     NEFORCE_NODISCARD type event_type() const noexcept { return type_; }
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    /**
+     * @brief 获取原生事件句柄
+     * @return 原生句柄
+     */
+    NEFORCE_NODISCARD void* native_handle() const noexcept { return handle_; }
+#endif
 };
 
 /** @} */ // SystemEvent

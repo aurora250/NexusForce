@@ -301,9 +301,9 @@ path path::temp_directory_path() {
 path path::current_executable_path() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     char buf[MAX_PATH];
-    ::DWORD len = ::GetModuleFileNameA(NULL, buf, MAX_PATH);
+    ::DWORD len = ::GetModuleFileNameA(nullptr, buf, MAX_PATH);
     if (len == 0) {
-        return "";
+        return {};
     }
     return path{string(buf, len)};
 #else

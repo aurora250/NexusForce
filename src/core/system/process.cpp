@@ -1,10 +1,13 @@
 #include <NeForce/core/system/process.hpp>
 #include <NeForce/core/system/environment.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
+#    include <NeForce/core/exception/error_code.hpp>
 #    include <NeForce/core/config/windef.hpp>
 #    include <windef.h>
 #    include <WinBase.h>
+#    include <WinUser.h>
 #    include <Psapi.h>
+#    include <shellapi.h>
 #    include <securitybaseapi.h>
 #    include <TlHelp32.h>
 #    ifdef max
@@ -338,10 +341,10 @@ void process::reader_loop() {
 
         if (capture_stdout_) {
             DWORD available = 0;
-            if (::PeekNamedPipe(stdout_pipe_.native_read_handle(), nullptr, 0, nullptr, &available, nullptr) &&
+            if (::PeekNamedPipe(stdout_pipe_.native_read_handle(), nullptr, 0, nullptr, &available, nullptr) == TRUE &&
                 available > 0) {
                 DWORD bytes_read = 0;
-                if (::ReadFile(stdout_pipe_.native_read_handle(), buffer, buf_size - 1, &bytes_read, nullptr) &&
+                if (::ReadFile(stdout_pipe_.native_read_handle(), buffer, buf_size - 1, &bytes_read, nullptr) == TRUE &&
                     bytes_read > 0) {
                     buffer[bytes_read] = '\0';
                     stdout_buf_.append(buffer, bytes_read);
@@ -352,10 +355,10 @@ void process::reader_loop() {
 
         if (capture_stderr_) {
             DWORD available = 0;
-            if (::PeekNamedPipe(stderr_pipe_.native_read_handle(), nullptr, 0, nullptr, &available, nullptr) &&
+            if (::PeekNamedPipe(stderr_pipe_.native_read_handle(), nullptr, 0, nullptr, &available, nullptr) == TRUE &&
                 available > 0) {
                 DWORD bytes_read = 0;
-                if (::ReadFile(stderr_pipe_.native_read_handle(), buffer, buf_size - 1, &bytes_read, nullptr) &&
+                if (::ReadFile(stderr_pipe_.native_read_handle(), buffer, buf_size - 1, &bytes_read, nullptr) == TRUE &&
                     bytes_read > 0) {
                     buffer[bytes_read] = '\0';
                     stderr_buf_.append(buffer, bytes_read);
@@ -439,12 +442,15 @@ void process::start(const string& executable, const vector<string>& args) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (capture_stdout_) {
         stdout_pipe_ = pipe(true);
+        ::SetHandleInformation(stdout_pipe_.native_read_handle(), HANDLE_FLAG_INHERIT, 0);
     }
     if (capture_stderr_) {
         stderr_pipe_ = pipe(true);
+        ::SetHandleInformation(stderr_pipe_.native_read_handle(), HANDLE_FLAG_INHERIT, 0);
     }
     if (!stdin_data_.empty()) {
         stdin_pipe_ = pipe(true);
+        ::SetHandleInformation(stdin_pipe_.native_write_handle(), HANDLE_FLAG_INHERIT, 0);
     }
 
     ::STARTUPINFOA si{};
@@ -626,6 +632,11 @@ void process::start(const string& executable, const vector<string>& args) {
 
     started_ = true;
 
+    if (capture_stdout_ || capture_stderr_) {
+        reader_running_ = true;
+        reader_thread_ = thread(&process::reader_loop, this);
+    }
+
     if (!stdin_data_.empty()) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
         DWORD written = 0;
@@ -636,11 +647,6 @@ void process::start(const string& executable, const vector<string>& args) {
 #endif
         close_stdin();
         stdin_data_.clear();
-    }
-
-    if (capture_stdout_ || capture_stderr_) {
-        reader_running_ = true;
-        reader_thread_ = thread(&process::reader_loop, this);
     }
 }
 
@@ -842,7 +848,7 @@ void process::suspend() {
     ::THREADENTRY32 te{};
     te.dwSize = sizeof(te);
 
-    if (::Thread32First(hSnapshot, &te)) {
+    if (::Thread32First(hSnapshot, &te) == TRUE) {
         do {
             if (te.th32OwnerProcessID == process_id_) {
                 const ::HANDLE hThread = ::OpenThread(
@@ -852,7 +858,7 @@ void process::suspend() {
                     ::CloseHandle(hThread);
                 }
             }
-        } while (::Thread32Next(hSnapshot, &te));
+        } while (::Thread32Next(hSnapshot, &te) == TRUE);
     }
 
     ::CloseHandle(hSnapshot);
@@ -878,7 +884,7 @@ void process::resume() {
     ::THREADENTRY32 te{};
     te.dwSize = sizeof(te);
 
-    if (::Thread32First(hSnapshot, &te)) {
+    if (::Thread32First(hSnapshot, &te) == TRUE) {
         do {
             if (te.th32OwnerProcessID == process_id_) {
                 const ::HANDLE hThread = ::OpenThread(
@@ -888,7 +894,7 @@ void process::resume() {
                     ::CloseHandle(hThread);
                 }
             }
-        } while (::Thread32Next(hSnapshot, &te));
+        } while (::Thread32Next(hSnapshot, &te) == TRUE);
     }
 
     ::CloseHandle(hSnapshot);
@@ -974,7 +980,7 @@ process::shell_result process::execute_shell(const string& command, const int ti
     p.set_capture_stdout(true);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    p.start("cmd.exe", {"/c", escape_for_cmd(command)});
+    p.start("cmd.exe", {"/c", command});
 #else
     p.start("/bin/sh", {"-c", command});
 #endif
@@ -1023,7 +1029,16 @@ process::native_id_type process::current_id() noexcept {
 
 process::privilege_level process::current_privilege_level() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    return get_privilege_level(current_id());
+    ::BOOL is_admin = FALSE;
+    ::SID_IDENTIFIER_AUTHORITY nt_auth = SECURITY_NT_AUTHORITY;
+    ::PSID admin_sid = nullptr;
+    if (::AllocateAndInitializeSid(&nt_auth, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0,
+                                   &admin_sid) == TRUE) {
+        ::CheckTokenMembership(nullptr, admin_sid, &is_admin);
+        ::FreeSid(admin_sid);
+        return is_admin == TRUE ? privilege_level::privileged : privilege_level::not_privileged;
+    }
+    return privilege_level::unknown;
 #else
     return (::geteuid() == 0) ? privilege_level::privileged : privilege_level::not_privileged;
 #endif
@@ -1199,7 +1214,7 @@ process::state process::get_state(native_id_type process_id) {
     }
 
     ::DWORD exit_code = 0;
-    state result = state::unknown;
+    state result = state::running;
     if (::GetExitCodeProcess(hProcess, &exit_code) == TRUE) {
         if (exit_code != STILL_ACTIVE) {
             result = state::exited;
@@ -1208,7 +1223,7 @@ process::state process::get_state(native_id_type process_id) {
             if (hSnapshot != INVALID_HANDLE_VALUE) {
                 THREADENTRY32 te{};
                 te.dwSize = sizeof(te);
-                if (::Thread32First(hSnapshot, &te)) {
+                if (::Thread32First(hSnapshot, &te) == TRUE) {
                     do {
                         if (te.th32OwnerProcessID == process_id) {
                             const HANDLE hThread = ::OpenThread(THREAD_QUERY_INFORMATION, FALSE, te.th32ThreadID);
@@ -1226,7 +1241,7 @@ process::state process::get_state(native_id_type process_id) {
                             }
                             break;
                         }
-                    } while (::Thread32Next(hSnapshot, &te));
+                    } while (::Thread32Next(hSnapshot, &te) == TRUE);
                 }
                 ::CloseHandle(hSnapshot);
             }
@@ -1313,6 +1328,21 @@ process::state process::get_state(native_id_type process_id) {
 process::privilege_level process::get_privilege_level(native_id_type process_id) {
     try {
 #ifdef NEFORCE_PLATFORM_WINDOWS
+        if (process_id == ::GetCurrentProcessId()) {
+            ::BOOL is_admin = FALSE;
+            ::SID_IDENTIFIER_AUTHORITY nt_auth = SECURITY_NT_AUTHORITY;
+            ::PSID admin_sid = nullptr;
+            if (::AllocateAndInitializeSid(&nt_auth, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0,
+                                           0, 0, 0, &admin_sid) == TRUE) {
+                if (::CheckTokenMembership(nullptr, admin_sid, &is_admin) == FALSE) {
+                    is_admin = FALSE;
+                }
+                ::FreeSid(admin_sid);
+                return is_admin == TRUE ? privilege_level::privileged : privilege_level::not_privileged;
+            }
+            return privilege_level::unknown;
+        }
+
         const ::HANDLE hProcess = ::OpenProcess(PROCESS_QUERY_INFORMATION, FALSE, process_id);
         if (hProcess == nullptr) {
             return privilege_level::unknown;
@@ -1342,7 +1372,7 @@ process::privilege_level process::get_privilege_level(native_id_type process_id)
         if (checkResult == FALSE) {
             return privilege_level::unknown;
         }
-        return bIsAdmin ? privilege_level::privileged : privilege_level::not_privileged;
+        return (bIsAdmin == TRUE) ? privilege_level::privileged : privilege_level::not_privileged;
 #else
         const string proc_status_path = string("/proc/") + to_string(process_id) + "/status";
         ::FILE* fp = ::fopen(proc_status_path.data(), "r");

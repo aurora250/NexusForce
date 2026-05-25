@@ -8,6 +8,10 @@
 using namespace neforce;
 using namespace neforce::http;
 
+#ifdef DELETE
+#    undef DELETE
+#endif
+
 class HttpStatusTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -388,7 +392,7 @@ TEST_F(HttpRequestParseTest, ParsePostRequest) {
 }
 
 TEST_F(HttpRequestParseTest, ParseInvalidRequestLineThrows) {
-    EXPECT_THROW(http_request::parse("INVALID\r\n\r\n"), http_exception);
+    EXPECT_THROW(ignore = http_request::parse("INVALID\r\n\r\n"), http_exception);
 }
 
 TEST_F(HttpRequestParseTest, IsKeepAliveDetectsKeepAliveConnection) {

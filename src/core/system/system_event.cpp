@@ -7,10 +7,10 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-system_event::system_event(bool initial_state, const type type) :
-type_(type) {
+system_event::system_event(bool initial_state, const type t) :
+type_(t) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    const ::BOOL manual = (type == type::manual_reset) ? TRUE : FALSE;
+    const ::BOOL manual = (t == type::manual_reset) ? TRUE : FALSE;
     handle_ = ::CreateEventA(nullptr, manual, initial_state ? TRUE : FALSE, nullptr);
     if (handle_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(system_exception("CreateEvent failed"));

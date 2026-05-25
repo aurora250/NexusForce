@@ -68,6 +68,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/locale.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/pipe.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/process.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/registry.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/share_memory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/signal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/stacktrace.cpp

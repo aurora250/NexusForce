@@ -1,8 +1,11 @@
 #include <NeForce/core/memory/endian.hpp>
 #include <NeForce/network/dns/dns_client.hpp>
-#include <NeForce/network/util/ip_address.hpp>
 #include <gtest/gtest.h>
-#include <arpa/inet.h>
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#    include <ws2tcpip.h>
+#else
+#    include <arpa/inet.h>
+#endif
 using namespace neforce;
 
 namespace {
@@ -59,11 +62,9 @@ namespace {
         v.insert(v.end(), reinterpret_cast<const byte_t*>(&nttl), reinterpret_cast<const byte_t*>(&nttl) + 4);
         const uint16_t nrdlen = endian::host_to_network<uint16_t>(4);
         v.insert(v.end(), reinterpret_cast<const byte_t*>(&nrdlen), reinterpret_cast<const byte_t*>(&nrdlen) + 2);
-#ifdef NEFORCE_PLATFORM_LINUX
         in_addr addr;
         ::inet_pton(AF_INET, ip.data(), &addr);
         v.insert(v.end(), reinterpret_cast<const byte_t*>(&addr), reinterpret_cast<const byte_t*>(&addr) + 4);
-#endif
     }
 
     void append_aaaa_record(byte_vector& v, const string& name, const uint32_t ttl, const string& ip) {
@@ -77,11 +78,9 @@ namespace {
         v.insert(v.end(), reinterpret_cast<const byte_t*>(&nttl), reinterpret_cast<const byte_t*>(&nttl) + 4);
         const uint16_t nrdlen = endian::host_to_network<uint16_t>(16);
         v.insert(v.end(), reinterpret_cast<const byte_t*>(&nrdlen), reinterpret_cast<const byte_t*>(&nrdlen) + 2);
-#ifdef NEFORCE_PLATFORM_LINUX
         in6_addr addr;
         ::inet_pton(AF_INET6, ip.data(), &addr);
         v.insert(v.end(), reinterpret_cast<const byte_t*>(&addr), reinterpret_cast<const byte_t*>(&addr) + 16);
-#endif
     }
 
     void append_domain_name_record(byte_vector& v, const string& name, const uint16_t rtype, const uint32_t ttl,
@@ -199,7 +198,7 @@ namespace {
 } // namespace
 
 TEST(DnsMessageBuilding, QueryHeaderFormat) {
-    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::IN, true, false);
+    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, false);
 
     ASSERT_GE(q.size(), sizeof(dns_header) + 13 + 4);
 
@@ -221,7 +220,7 @@ TEST(DnsMessageBuilding, QueryHeaderFormat) {
 }
 
 TEST(DnsMessageBuilding, DomainNameEncoding) {
-    auto q = dns_client::build_query("www.example.com", dns_record::A, dns_class::IN, true, false);
+    auto q = dns_client::build_query("www.example.com", dns_record::A, dns_class::INTERNET, true, false);
 
     size_t offset = sizeof(dns_header);
     EXPECT_EQ(q[offset], 3);
@@ -237,14 +236,14 @@ TEST(DnsMessageBuilding, DomainNameEncoding) {
 }
 
 TEST(DnsMessageBuilding, TrailingDotIsStripped) {
-    auto q1 = dns_client::build_query("example.com.", dns_record::A, dns_class::IN, true, false);
-    auto q2 = dns_client::build_query("example.com", dns_record::A, dns_class::IN, true, false);
+    auto q1 = dns_client::build_query("example.com.", dns_record::A, dns_class::INTERNET, true, false);
+    auto q2 = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, false);
     EXPECT_EQ(q1.size(), q2.size());
     EXPECT_TRUE(equal(q1.begin() + 2, q1.end(), q2.begin() + 2));
 }
 
 TEST(DnsMessageBuilding, QueryWithEDNS0) {
-    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::IN, true, true, false, 1232);
+    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, true, false, 1232);
 
     const uint16_t arcount = endian::network_to_host(*reinterpret_cast<const uint16_t*>(q.data() + 10));
     EXPECT_EQ(arcount, 1);
@@ -261,14 +260,14 @@ TEST(DnsMessageBuilding, QueryWithEDNS0) {
 }
 
 TEST(DnsMessageBuilding, QueryWithoutRD) {
-    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::IN, false, false);
+    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, false, false);
     const uint16_t flags = endian::network_to_host(*reinterpret_cast<const uint16_t*>(q.data() + 2));
     EXPECT_EQ(flags & 0x0100, 0);
     EXPECT_EQ(flags & 0x8000, 0);
 }
 
 TEST(DnsMessageBuilding, QueryWithDNSsecOK) {
-    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::IN, true, true, true, 1232);
+    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, true, true, 1232);
 
     const uint16_t arcount = endian::network_to_host(*reinterpret_cast<const uint16_t*>(q.data() + 10));
     ASSERT_EQ(arcount, 1);
@@ -279,12 +278,12 @@ TEST(DnsMessageBuilding, QueryWithDNSsecOK) {
 }
 
 TEST(DnsMessageBuilding, DifferentRecordTypes) {
-    auto q_a = dns_client::build_query("example.com", dns_record::A, dns_class::IN, false, false);
-    auto q_aaaa = dns_client::build_query("example.com", dns_record::AAAA, dns_class::IN, false, false);
-    auto q_mx = dns_client::build_query("example.com", dns_record::MX, dns_class::IN, false, false);
-    auto q_srv = dns_client::build_query("example.com", dns_record::SRV, dns_class::IN, false, false);
-    auto q_soa = dns_client::build_query("example.com", dns_record::SOA, dns_class::IN, false, false);
-    auto q_txt = dns_client::build_query("example.com", dns_record::TXT, dns_class::IN, false, false);
+    auto q_a = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, false, false);
+    auto q_aaaa = dns_client::build_query("example.com", dns_record::AAAA, dns_class::INTERNET, false, false);
+    auto q_mx = dns_client::build_query("example.com", dns_record::MX, dns_class::INTERNET, false, false);
+    auto q_srv = dns_client::build_query("example.com", dns_record::SRV, dns_class::INTERNET, false, false);
+    auto q_soa = dns_client::build_query("example.com", dns_record::SOA, dns_class::INTERNET, false, false);
+    auto q_txt = dns_client::build_query("example.com", dns_record::TXT, dns_class::INTERNET, false, false);
 
     EXPECT_NE(q_a, q_aaaa);
     EXPECT_NE(q_a, q_mx);
@@ -294,9 +293,9 @@ TEST(DnsMessageBuilding, DifferentRecordTypes) {
 }
 
 TEST(DnsMessageBuilding, DifferentClasses) {
-    auto q_in = dns_client::build_query("example.com", dns_record::A, dns_class::IN, false, false);
-    auto q_ch = dns_client::build_query("example.com", dns_record::A, dns_class::CH, false, false);
-    auto q_hs = dns_client::build_query("example.com", dns_record::A, dns_class::HS, false, false);
+    auto q_in = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, false, false);
+    auto q_ch = dns_client::build_query("example.com", dns_record::A, dns_class::CHAOS, false, false);
+    auto q_hs = dns_client::build_query("example.com", dns_record::A, dns_class::HESIOD, false, false);
     auto q_any = dns_client::build_query("example.com", dns_record::A, dns_class::ANY, false, false);
 
     EXPECT_NE(q_in, q_ch);
@@ -652,11 +651,9 @@ TEST(DomainNameCompression, SimplePointer) {
     resp.insert(resp.end(), reinterpret_cast<const byte_t*>(&nttl), reinterpret_cast<const byte_t*>(&nttl) + 4);
     const uint16_t nrdlen = endian::host_to_network<uint16_t>(4);
     resp.insert(resp.end(), reinterpret_cast<const byte_t*>(&nrdlen), reinterpret_cast<const byte_t*>(&nrdlen) + 2);
-#ifdef NEFORCE_PLATFORM_LINUX
-    in_addr addr;
-    ::inet_pton(AF_INET, "1.2.3.4", &addr);
-    resp.insert(resp.end(), reinterpret_cast<const byte_t*>(&addr), reinterpret_cast<const byte_t*>(&addr) + 4);
-#endif
+    in_addr addr2;
+    ::inet_pton(AF_INET, "1.2.3.4", &addr2);
+    resp.insert(resp.end(), reinterpret_cast<const byte_t*>(&addr2), reinterpret_cast<const byte_t*>(&addr2) + 4);
 
     auto result = dns_client::parse_response(resp, 1234);
     ASSERT_EQ(result.answers.size(), 2);
@@ -819,10 +816,10 @@ TEST(DnsRecord, DefaultConstruction) {
 }
 
 TEST(DnsRecord, ValueConstruction) {
-    dns_record r("example.com", dns_record::AAAA, dns_class::IN, 600, "2001:db8::1");
+    dns_record r("example.com", dns_record::AAAA, dns_class::INTERNET, 600, "2001:db8::1");
     EXPECT_EQ(r.name, "example.com");
     EXPECT_EQ(r.type, dns_record::AAAA);
-    EXPECT_EQ(r.class_type, dns_class::IN);
+    EXPECT_EQ(r.class_type, dns_class::INTERNET);
     EXPECT_EQ(r.ttl, 600);
     EXPECT_EQ(r.data, "2001:db8::1");
 }
@@ -840,9 +837,9 @@ TEST(EnumValues, DnsRecordTypes) {
 }
 
 TEST(EnumValues, DnsClass) {
-    EXPECT_EQ(static_cast<uint16_t>(dns_class::IN), 1);
-    EXPECT_EQ(static_cast<uint16_t>(dns_class::CH), 3);
-    EXPECT_EQ(static_cast<uint16_t>(dns_class::HS), 4);
+    EXPECT_EQ(static_cast<uint16_t>(dns_class::INTERNET), 1);
+    EXPECT_EQ(static_cast<uint16_t>(dns_class::CHAOS), 3);
+    EXPECT_EQ(static_cast<uint16_t>(dns_class::HESIOD), 4);
     EXPECT_EQ(static_cast<uint16_t>(dns_class::ANY), 255);
 }
 
@@ -1011,9 +1008,9 @@ TEST(DnsClient, ClearCache) {
 }
 
 TEST(DnsMessageBuilding, CustomEDNSPayloadSize) {
-    auto q512 = dns_client::build_query("example.com", dns_record::A, dns_class::IN, true, true, false, 512);
-    auto q1232 = dns_client::build_query("example.com", dns_record::A, dns_class::IN, true, true, false, 1232);
-    auto q4096 = dns_client::build_query("example.com", dns_record::A, dns_class::IN, true, true, false, 4096);
+    auto q512 = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, true, false, 512);
+    auto q1232 = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, true, false, 1232);
+    auto q4096 = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, true, false, 4096);
 
     for (const auto& q: {q512, q1232, q4096}) {
         const uint16_t arcount = endian::network_to_host(*reinterpret_cast<const uint16_t*>(q.data() + 10));
@@ -1025,13 +1022,14 @@ TEST(DnsMessageBuilding, CustomEDNSPayloadSize) {
 }
 
 TEST(DnsMessageBuilding, DNSSECFlagInQuery) {
-    auto q_with = dns_client::build_query("example.com", dns_record::A, dns_class::IN, true, true, true, 1232);
-    auto q_without = dns_client::build_query("example.com", dns_record::A, dns_class::IN, true, true, false, 1232);
+    auto q_with = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, true, true, 1232);
+    auto q_without =
+            dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, true, false, 1232);
     EXPECT_NE(q_with, q_without);
 }
 
 TEST(DnsMessageBuilding, EDNSDisabledARCountZero) {
-    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::IN, true, false);
+    auto q = dns_client::build_query("example.com", dns_record::A, dns_class::INTERNET, true, false);
     const uint16_t arcount = endian::network_to_host(*reinterpret_cast<const uint16_t*>(q.data() + 10));
     EXPECT_EQ(arcount, 0);
 }
@@ -1044,7 +1042,7 @@ TEST(DnsMessageBuilding, QueryForAllRecordTypes) {
     };
 
     for (const auto& [type, name]: types) {
-        auto q = dns_client::build_query("test.example.com", type, dns_class::IN, true, false);
+        auto q = dns_client::build_query("test.example.com", type, dns_class::INTERNET, true, false);
         ASSERT_GE(q.size(), sizeof(dns_header) + 18 + 4) << "Failed for type: " << name.data();
     }
 }

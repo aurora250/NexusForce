@@ -7,7 +7,7 @@ NEFORCE_BEGIN_NAMESPACE__
 class error_code;
 class error_condition;
 
-class error_category : public icomparable<error_category> {
+class NEFORCE_API error_category : public icomparable<error_category> {
 public:
     error_category() noexcept = default;
     virtual ~error_category() noexcept = default;

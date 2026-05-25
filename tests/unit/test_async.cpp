@@ -1857,10 +1857,9 @@ TEST(ThreadPool, Statistics) {
     pool.start(2);
     auto res = pool.submit_task([] { return 0; });
     res.future.get();
-    auto stats = pool.statistics();
+    auto stats = pool.stop();
     EXPECT_GT(stats.total_threads, 0u);
     EXPECT_GT(stats.total_completed, 0u);
-    pool.stop();
 }
 
 TEST(ThreadPool, ModeFixed) {
@@ -2297,7 +2296,7 @@ TEST(VirtualThreadTask, MoveAssignToNonEmpty) {
     EXPECT_EQ(task2.get_result(), 42);
 }
 
-TEST(VirtualThreadTask, MoveAssignToNonEmptyWithYield) {
+TEST(VirtualThreadTask, MoveAssignToNonEmptyWithYield) { // may block
     auto task1 = virtual_thread::start([]() -> virtual_thread_task<int> {
         co_await virtual_thread::yield();
         co_return 77;

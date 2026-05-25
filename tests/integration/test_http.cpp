@@ -11,6 +11,10 @@
 using namespace neforce;
 using namespace neforce::http;
 
+#ifdef DELETE
+#    undef DELETE
+#endif
+
 class CookieLifecycleTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -431,7 +435,7 @@ TEST_F(HttpServerIntegrationTest, ServerPortConfiguration) {
     EXPECT_FALSE(server.is_running());
 }
 
-TEST_F(HttpServerIntegrationTest, ServerRouterAccess) {
+TEST_F(HttpServerIntegrationTest, ServerRouterAccess) { // may block
     http_server server(ports{18081});
     server.router().get("/test", [](http_request&, http_response& res) {
         res.status = http_status::S2_OK;

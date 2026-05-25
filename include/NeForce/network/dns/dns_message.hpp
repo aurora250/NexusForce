@@ -188,10 +188,10 @@ enum class dns_opcode : uint8_t {
  * 符合 RFC 1035 §3.2.4 和 IANA DNS Parameters 注册表。
  */
 enum class dns_class : uint16_t {
-    IN = 1,   ///< Internet (IN)
-    CH = 3,   ///< CHAOS
-    HS = 4,   ///< Hesiod
-    ANY = 255 ///< 任何类
+    INTERNET = 1, ///< Internet (IN)
+    CHAOS = 3,    ///< CHAOS
+    HESIOD = 4,   ///< Hesiod
+    ANY = 255     ///< 任何类
 };
 
 /**

@@ -540,7 +540,7 @@ TEST(DnsClientIntegration, QueryCHClass) {
     dns_client client(cfg);
 
     EXPECT_NO_THROW({
-        auto result = client.query("version.bind", dns_record::TXT, dns_class::CH);
+        auto result = client.query("version.bind", dns_record::TXT, dns_class::CHAOS);
         (void) result;
     });
 }

@@ -1,5 +1,6 @@
 #include <NeForce/core/async/latch.hpp>
 #include <NeForce/core/file/filesystem.hpp>
+#include <NeForce/core/system/console.hpp>
 #include <NeForce/core/system/process.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/network/ssl/ssl_acceptor.hpp>
@@ -26,21 +27,40 @@ namespace {
         return local.has_value();
     }
 
-    bool openssl_available() { return process::execute_shell("openssl version > /dev/null 2>&1").exit_code == 0; }
+    bool openssl_available() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        return process::execute_shell("openssl version > NUL 2>&1").exit_code == 0;
+#else
+        return process::execute_shell("openssl version > /dev/null 2>&1").exit_code == 0;
+#endif
+    }
 
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const char* SERVER_CERT = "D:/OpenSSL/neforce_test_server.crt";
+    const char* SERVER_KEY = "D:/OpenSSL/neforce_test_server.key";
+#else
     const char* SERVER_CERT = "/tmp/neforce_test_server.crt";
     const char* SERVER_KEY = "/tmp/neforce_test_server.key";
+#endif
 
     bool generate_self_signed_cert() {
         if (!openssl_available()) {
             return false;
         }
 
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        const char* redirect = "2>NUL";
+#else
+        const char* redirect = "2>/dev/null";
+#endif
         string cmd = "openssl req -x509 -newkey rsa:2048 -keyout ";
         cmd += SERVER_KEY;
         cmd += " -out ";
         cmd += SERVER_CERT;
-        cmd += " -days 1 -nodes -subj /CN=localhost -addext 'subjectAltName=DNS:localhost' 2>/dev/null";
+        cmd += " -days 1 -nodes -subj ";
+        cmd += "/CN=localhost";
+        cmd += " -addext subjectAltName=DNS:localhost ";
+        cmd += redirect;
         return process::execute_shell(cmd.data()).exit_code == 0;
     }
 
@@ -68,17 +88,27 @@ protected:
 
     void TearDown() override { cleanup_certs(); }
 
-    void run_ssl_echo_server(tcp_acceptor& acceptor, const ssl_context& ctx) {
-        auto tcp_client = acceptor.accept();
-        ssl_socket ssl_client(move(tcp_client));
-        ssl_client.init_server_ssl(ctx);
+    void run_ssl_echo_server(tcp_acceptor& acceptor, const ssl_context& ctx, latch* ready = nullptr) {
+        try {
+            auto tcp_client = acceptor.accept();
+            ssl_socket ssl_client(move(tcp_client));
+            ssl_client.init_server_ssl(ctx);
+            if (ready != nullptr) {
+                ready->count_down();
+            }
 
-        char buf[65536];
-        ssize_t received = ssl_client.receive({buf, sizeof(buf)});
-        if (received > 0) {
-            ssl_client.send_all({buf, static_cast<size_t>(received)});
+            char buf[65536];
+            ssize_t received = ssl_client.receive({buf, sizeof(buf)});
+            if (received > 0) {
+                ssl_client.send_all({buf, static_cast<size_t>(received)});
+            }
+            ssl_client.close();
+        } catch (const ssl_exception& e) {
+            if (ready != nullptr) {
+                ready->count_down();
+            }
+            eprintln(e.what());
         }
-        ssl_client.close();
     }
 };
 
@@ -127,18 +157,22 @@ TEST_F(SslEchoIntegration, SslMultipleMessages) {
     ASSERT_TRUE(server_ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     thread server_thread([&]() {
-        auto tcp_client = acceptor.accept();
-        ssl_socket ssl_client(move(tcp_client));
-        ssl_client.init_server_ssl(server_ctx);
+        try {
+            auto tcp_client = acceptor.accept();
+            ssl_socket ssl_client(move(tcp_client));
+            ssl_client.init_server_ssl(server_ctx);
 
-        for (int i = 0; i < 5; ++i) {
-            char buf[256];
-            ssize_t received = ssl_client.receive({buf, sizeof(buf)});
-            if (received > 0) {
-                ssl_client.send_all({buf, static_cast<size_t>(received)});
+            for (int i = 0; i < 5; ++i) {
+                char buf[256];
+                ssize_t received = ssl_client.receive({buf, sizeof(buf)});
+                if (received > 0) {
+                    ssl_client.send_all({buf, static_cast<size_t>(received)});
+                }
             }
+            ssl_client.close();
+        } catch (const ssl_exception&) {
+        } catch (...) {
         }
-        ssl_client.close();
     });
 
     ssl_context client_ctx(ssl_method::TLS_CLIENT);
@@ -175,7 +209,9 @@ TEST_F(SslEchoIntegration, SslPeerCertificateInfo) {
     ssl_context server_ctx(ssl_method::TLS_SERVER);
     ASSERT_TRUE(server_ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
-    thread server_thread([&]() { run_ssl_echo_server(acceptor, server_ctx); });
+    latch ssl_ready(1);
+
+    thread server_thread([&]() { run_ssl_echo_server(acceptor, server_ctx, &ssl_ready); });
 
     ssl_context client_ctx(ssl_method::TLS_CLIENT);
     client_ctx.set_verify_mode(SSL_VERIFY_NONE);
@@ -184,6 +220,7 @@ TEST_F(SslEchoIntegration, SslPeerCertificateInfo) {
     client.open(AF_INET);
     ASSERT_TRUE(client.connect(*bound, milliseconds(5000)));
     client.init_client_ssl(client_ctx, "localhost");
+    ssl_ready.wait();
 
     string cert_info = client.peer_certificate_info();
     EXPECT_FALSE(cert_info.empty());
@@ -211,7 +248,9 @@ TEST_F(SslEchoIntegration, SslCipherAndProtocol) {
     ssl_context server_ctx(ssl_method::TLS_SERVER);
     ASSERT_TRUE(server_ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
-    thread server_thread([&]() { run_ssl_echo_server(acceptor, server_ctx); });
+    latch ssl_ready(1);
+
+    thread server_thread([&]() { run_ssl_echo_server(acceptor, server_ctx, &ssl_ready); });
 
     ssl_context client_ctx(ssl_method::TLS_CLIENT);
     client_ctx.set_verify_mode(SSL_VERIFY_NONE);
@@ -220,6 +259,7 @@ TEST_F(SslEchoIntegration, SslCipherAndProtocol) {
     client.open(AF_INET);
     ASSERT_TRUE(client.connect(*bound, milliseconds(5000)));
     client.init_client_ssl(client_ctx, "localhost");
+    ssl_ready.wait();
 
     string cipher = client.ssl().get_cipher_name();
     EXPECT_FALSE(cipher.empty()) << "Cipher name should not be empty";
@@ -255,6 +295,8 @@ TEST_F(SslAcceptorIntegration, AcceptSslCompletesHandshake) {
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
 
+    latch server_done(1);
+
     thread client_thread([&]() {
         ssl_context client_ctx(ssl_method::TLS_CLIENT);
         client_ctx.set_verify_mode(SSL_VERIFY_NONE);
@@ -264,6 +306,7 @@ TEST_F(SslAcceptorIntegration, AcceptSslCompletesHandshake) {
         if (client.connect(*bound, milliseconds(5000))) {
             client.init_client_ssl(client_ctx, "localhost");
             client.send_all({"ssl_acceptor_test"});
+            server_done.wait();
             client.close();
         }
     });
@@ -277,6 +320,7 @@ TEST_F(SslAcceptorIntegration, AcceptSslCompletesHandshake) {
     EXPECT_EQ(received, 18);
     EXPECT_EQ(string_view(buf, 17), "ssl_acceptor_test");
 
+    server_done.count_down();
     ssl_client.close();
     client_thread.join();
     acceptor.close();
@@ -295,6 +339,8 @@ TEST_F(SslAcceptorIntegration, AcceptSslNonblock) {
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
 
+    latch server_done(1);
+
     thread client_thread([&]() {
         ssl_context client_ctx(ssl_method::TLS_CLIENT);
         client_ctx.set_verify_mode(SSL_VERIFY_NONE);
@@ -304,6 +350,7 @@ TEST_F(SslAcceptorIntegration, AcceptSslNonblock) {
         if (client.connect(*bound, milliseconds(5000))) {
             client.init_client_ssl(client_ctx, "localhost");
             client.send_all({"nonblock_ssl"});
+            server_done.wait();
             client.close();
         }
     });
@@ -325,6 +372,7 @@ TEST_F(SslAcceptorIntegration, AcceptSslNonblock) {
     EXPECT_EQ(received, 13);
     EXPECT_EQ(string_view(buf, 12), "nonblock_ssl");
 
+    server_done.count_down();
     ssl_client->close();
     client_thread.join();
     acceptor.close();
@@ -368,17 +416,24 @@ TEST_F(SslClientIntegration, ConnectWithSslContext) {
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
 
-    thread server_thread([&]() {
-        auto tcp_client = acceptor.accept();
-        ssl_socket ssl_client(move(tcp_client));
-        ssl_client.init_server_ssl(server_ctx);
+    latch server_done(1);
 
-        char buf[256];
-        ssize_t received = ssl_client.receive({buf, sizeof(buf)});
-        if (received > 0) {
-            ssl_client.send_all({buf, static_cast<size_t>(received)});
+    thread server_thread([&]() {
+        try {
+            auto tcp_client = acceptor.accept();
+            ssl_socket ssl_client(move(tcp_client));
+            ssl_client.init_server_ssl(server_ctx);
+
+            char buf[256];
+            ssize_t received = ssl_client.receive({buf, sizeof(buf)});
+            if (received > 0) {
+                ssl_client.send_all({buf, static_cast<size_t>(received)});
+            }
+            ssl_client.close();
+        } catch (const ssl_exception& e) {
+            eprintln(e.what());
         }
-        ssl_client.close();
+        server_done.count_down();
     });
 
     ssl_client client;
@@ -397,6 +452,7 @@ TEST_F(SslClientIntegration, ConnectWithSslContext) {
     EXPECT_EQ(string_view(buf, 23), "ssl_client connect test");
 
     client.disconnect();
+    server_done.wait();
     server_thread.join();
     acceptor.close();
 }
@@ -412,11 +468,15 @@ TEST_F(SslClientIntegration, PeerVerificationDisabled) {
     ASSERT_TRUE(bound.has_value());
 
     thread server_thread([&]() {
-        auto tcp_client = acceptor.accept();
-        ssl_socket ssl_client(move(tcp_client));
-        ssl_client.init_server_ssl(server_ctx);
-        ssl_client.send_all({"verified"});
-        ssl_client.close();
+        try {
+            auto tcp_client = acceptor.accept();
+            ssl_socket ssl_client(move(tcp_client));
+            ssl_client.init_server_ssl(server_ctx);
+            ssl_client.send_all({"verified"});
+            ssl_client.close();
+        } catch (const ssl_exception& e) {
+            eprintln(e.what());
+        }
     });
 
     ssl_client client;

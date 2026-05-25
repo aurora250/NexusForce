@@ -26,7 +26,7 @@ namespace {
     }
 
     template <typename T>
-    T read_network_be(const byte_vector& data, size_t offset) {
+    T read_network_be(const byte_vector& data, const size_t offset) {
         T value;
         memory_copy(&value, &data[offset], sizeof(T));
         return endian::network_to_host(value);
@@ -76,7 +76,7 @@ namespace {
         byte_vector query;
         query.reserve(sizeof(dns_header) + domain.length() + 6 + (edns_enable ? 11 : 0));
 
-        dns_header header;
+        dns_header header{};
         header.id = endian::host_to_network<uint16_t>(generate_dns_client_id());
         uint16_t flags = 0x0000; // QR=0, OPCODE=0(QUERY)
         if (rd) {
@@ -380,13 +380,13 @@ namespace {
                     break;
                 }
                 case dns_record::SRV: {
-                    auto srv = parse_srv_record(data, rdata_offset, rdlength);
+                    const auto srv = parse_srv_record(data, rdata_offset, rdlength);
                     record.data = _NEFORCE to_string(srv.priority) + " " + to_string(srv.weight) + " " +
                                   to_string(srv.port) + " " + srv.target;
                     break;
                 }
                 case dns_record::SOA: {
-                    auto soa = parse_soa_record(data, rdata_offset, rdlength);
+                    const auto soa = parse_soa_record(data, rdata_offset, rdlength);
                     record.data = soa.mname + " " + soa.rname + " " + to_string(soa.serial) + " " +
                                   to_string(soa.refresh) + " " + to_string(soa.retry) + " " + to_string(soa.expire) +
                                   " " + to_string(soa.minimum);
@@ -497,12 +497,16 @@ void dns_client::start_io() {
         NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to create shared UDP socket"));
     }
 
+    shared_socket_.bind(ip_address::any(ports(0), AF_INET));
+
+#ifndef NEFORCE_PLATFORM_WINDOWS
     try {
         wake_pipe_ = pipe(false);
     } catch (...) {
         shared_socket_.close();
         NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to create wake pipe"));
     }
+#endif
 
     if (!io_pool_.running()) {
         io_pool_.start(1);
@@ -518,10 +522,12 @@ void dns_client::stop_io() {
         return;
     }
 
+#ifndef NEFORCE_PLATFORM_WINDOWS
     if (wake_pipe_.is_valid()) {
         constexpr char byte = 1;
         (void) wake_pipe_.write(&byte, 1);
     }
+#endif
 
     io_pool_.stop();
 
@@ -538,14 +544,90 @@ void dns_client::stop_io() {
     }
 
     shared_socket_.close();
+#ifndef NEFORCE_PLATFORM_WINDOWS
     wake_pipe_.close();
+#endif
 }
 
 void dns_client::io_receive_loop() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const auto sock_fd = shared_socket_.native_handle();
+
+    while (io_running_) {
+        ::fd_set read_fds;
+        FD_ZERO(&read_fds);
+        FD_SET(sock_fd, &read_fds);
+
+        ::timeval tv{0, 250000};
+
+        const int ret = ::select(0, &read_fds, nullptr, nullptr, &tv);
+
+        if (ret == SOCKET_ERROR) {
+            break;
+        }
+
+        if (ret > 0) {
+            try {
+                byte_vector buffer(65535);
+                const auto received = shared_socket_.receive_from(
+                        memory_view<char>{reinterpret_cast<char*>(buffer.data()), buffer.size()});
+
+                if (received.first > 0) {
+                    buffer.resize(static_cast<size_t>(received.first));
+                    if (buffer.size() >= sizeof(uint16_t)) {
+                        const uint16_t response_id =
+                                endian::network_to_host(*reinterpret_cast<const uint16_t*>(buffer.data()));
+
+                        pending_entry entry;
+                        bool resolved = false;
+                        {
+                            lock<mutex> lock(pending_mutex_);
+                            auto it = pending_queries_.find(response_id);
+                            if (it != pending_queries_.end()) {
+                                entry = move(it->second);
+                                pending_queries_.erase(it);
+                                resolved = true;
+                            }
+                        }
+
+                        if (resolved) {
+                            try {
+                                auto result = parse_dns_response(buffer, response_id);
+                                entry.promise.set_value(move(result));
+                            } catch (...) {
+                                entry.promise.set_exception(current_exception());
+                            }
+                        }
+                    }
+                }
+                // NOLINTNEXTLINE(bugprone-empty-catch)
+            } catch (...) {
+                // ignore
+            }
+        }
+
+        {
+            lock<mutex> lock(pending_mutex_);
+            auto now = steady_clock::now();
+            for (auto it = pending_queries_.begin(); it != pending_queries_.end();) {
+                if (now - it->second.created_at > config_.timeout) {
+                    try {
+                        NEFORCE_THROW_EXCEPTION(dns_exception::timeout());
+                    } catch (...) {
+                        it->second.promise.set_exception(current_exception());
+                    }
+                    it = pending_queries_.erase(it);
+                } else {
+                    ++it;
+                }
+            }
+        }
+    }
+#else
     const auto sock_fd = shared_socket_.native_handle();
     const auto wake_fd = wake_pipe_.native_read_handle();
 
-    pollfd pfds[2];
+    ::pollfd pfds[2];
     pfds[0].fd = sock_fd;
     pfds[0].events = POLLIN;
     pfds[1].fd = wake_fd;
@@ -565,41 +647,46 @@ void dns_client::io_receive_loop() {
         }
 
         if ((pfds[1].revents & POLLIN) != 0) {
-            break;
+            break; // wake pipe
         }
 
         if ((pfds[0].revents & POLLIN) != 0) {
-            byte_vector buffer(4096);
-            const auto received = shared_socket_.receive_from(
-                    memory_view<char>{reinterpret_cast<char*>(buffer.data()), buffer.size()});
+            try {
+                byte_vector buffer(65535);
+                const auto received = shared_socket_.receive_from(
+                        memory_view<char>{reinterpret_cast<char*>(buffer.data()), buffer.size()});
 
-            if (received.first > 0) {
-                buffer.resize(static_cast<size_t>(received.first));
-                if (buffer.size() >= sizeof(uint16_t)) {
-                    const uint16_t response_id =
-                            endian::network_to_host(*reinterpret_cast<const uint16_t*>(buffer.data()));
+                if (received.first > 0) {
+                    buffer.resize(static_cast<size_t>(received.first));
+                    if (buffer.size() >= sizeof(uint16_t)) {
+                        const uint16_t response_id =
+                                endian::network_to_host(*reinterpret_cast<const uint16_t*>(buffer.data()));
 
-                    pending_entry entry;
-                    bool resolved = false;
-                    {
-                        lock<mutex> lock(pending_mutex_);
-                        auto it = pending_queries_.find(response_id);
-                        if (it != pending_queries_.end()) {
-                            entry = move(it->second);
-                            pending_queries_.erase(it);
-                            resolved = true;
+                        pending_entry entry;
+                        bool resolved = false;
+                        {
+                            lock<mutex> lock(pending_mutex_);
+                            auto it = pending_queries_.find(response_id);
+                            if (it != pending_queries_.end()) {
+                                entry = move(it->second);
+                                pending_queries_.erase(it);
+                                resolved = true;
+                            }
                         }
-                    }
 
-                    if (resolved) {
-                        try {
-                            auto result = parse_dns_response(buffer, response_id);
-                            entry.promise.set_value(move(result));
-                        } catch (...) {
-                            entry.promise.set_exception(current_exception());
+                        if (resolved) {
+                            try {
+                                auto result = parse_dns_response(buffer, response_id);
+                                entry.promise.set_value(move(result));
+                            } catch (...) {
+                                entry.promise.set_exception(current_exception());
+                            }
                         }
                     }
                 }
+                // NOLINTNEXTLINE(bugprone-empty-catch)
+            } catch (...) {
+                // ignore
             }
         }
 
@@ -621,6 +708,7 @@ void dns_client::io_receive_loop() {
             }
         }
     }
+#endif
 }
 
 void dns_client::send_query(const byte_vector& query) {
@@ -822,7 +910,7 @@ dns_query_result dns_client::query(const string_view domain, const dns_record::r
     }
 }
 
-future<dns_query_result> dns_client::query_async(const string& domain, dns_record::raw type, dns_class qclass) {
+future<dns_query_result> dns_client::query_async(const string& domain, const dns_record::raw type, const dns_class qclass) {
     ensure_io_started();
 
     if (domain.empty()) {

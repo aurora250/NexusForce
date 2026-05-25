@@ -79,10 +79,10 @@ public:
      * 包含进程的工作集和页面文件使用情况。
      */
     struct memory_info {
-        size_t working_set_size{0};
-        size_t peak_working_set_size{0};
-        size_t pagefile_usage{0};
-        size_t peak_pagefile_usage{0};
+        size_t working_set_size{0};      /**< 当前工作集大小（字节） */
+        size_t peak_working_set_size{0}; /**< 峰值工作集大小（字节） */
+        size_t pagefile_usage{0};        /**< 当前页面文件使用量（字节） */
+        size_t peak_pagefile_usage{0};   /**< 峰值页面文件使用量（字节） */
     };
 
     /**
@@ -92,9 +92,9 @@ public:
      * 包含进程的用户态、内核态和墙上时间。
      */
     struct time_info {
-        uint64_t user_time_ms{0};
-        uint64_t kernel_time_ms{0};
-        uint64_t wall_time_ms{0};
+        uint64_t user_time_ms{0};   /**< 用户态 CPU 时间（毫秒） */
+        uint64_t kernel_time_ms{0}; /**< 内核态 CPU 时间（毫秒） */
+        uint64_t wall_time_ms{0};   /**< 墙上经过时间（毫秒） */
     };
 
     /**
@@ -102,11 +102,11 @@ public:
      * @brief 进程状态枚举
      */
     enum class state {
-        running,
-        suspended,
-        stopped,
-        exited,
-        unknown
+        running,   /**< 进程正在运行 */
+        suspended, /**< 进程已被挂起 */
+        stopped,   /**< 进程已停止 */
+        exited,    /**< 进程已退出 */
+        unknown    /**< 进程状态未知 */
     };
 
     /**
@@ -114,12 +114,12 @@ public:
      * @brief 进程权限枚举
      */
     enum class permission {
-        read = 0x01,
-        write = 0x02,
-        execute = 0x04,
-        terminate = 0x08,
-        query_info = 0x10,
-        all = 0xFF
+        read = 0x01,       /**< 读取权限 */
+        write = 0x02,      /**< 写入权限 */
+        execute = 0x04,    /**< 执行权限 */
+        terminate = 0x08,  /**< 终止权限 */
+        query_info = 0x10, /**< 查询信息权限 */
+        all = 0xFF         /**< 所有权限 */
     };
 
     /**
@@ -127,18 +127,18 @@ public:
      * @brief 进程特权级别
      */
     enum class privilege_level {
-        privileged,
-        not_privileged,
-        unknown
+        privileged,     /**< 具有管理员/root 权限 */
+        not_privileged, /**< 普通权限 */
+        unknown         /**< 无法确定权限级别 */
     };
 
     /**
      * @brief 提权工具选择
      */
     enum class elevation_tool {
-        auto_, // Windows 忽略，Linux 自动尝试 pkexec > sudo
-        sudo,  // Linux 强制使用 sudo
-        pkexec // Linux 强制使用 pkexec
+        auto_, /**< Windows 忽略此选项；Linux 自动尝试 pkexec，回退至 sudo */
+        sudo,  /**< Linux 强制使用 sudo 提权 */
+        pkexec /**< Linux 强制使用 pkexec 提权 */
     };
 
     /**
@@ -146,8 +146,8 @@ public:
      * @brief shell 命令执行结果
      */
     struct shell_result {
-        int exit_code;
-        string output;
+        int exit_code; /**< 命令退出码 */
+        string output; /**< 合并的标准输出和标准错误 */
     };
 
 private:
@@ -155,37 +155,37 @@ private:
 
     void close_handles() noexcept;
 
-    native_id_type process_id_{0};
-    int exit_code_{-1};
-    bool started_{false};
-    bool finished_{false};
+    native_id_type process_id_{0}; /**< 子进程 ID */
+    int exit_code_{-1};            /**< 子进程退出码，-1 表示尚未退出 */
+    bool started_{false};          /**< 子进程是否已启动 */
+    bool finished_{false};         /**< 子进程是否已完成 */
 
-    string work_dir_;
-    vector<pair<string, string>> env_vars_;
-    bool capture_stdout_{false};
-    bool capture_stderr_{false};
-    string stdin_data_;
+    string work_dir_;                       /**< 子进程工作目录 */
+    vector<pair<string, string>> env_vars_; /**< 子进程环境变量列表 */
+    bool capture_stdout_{false};            /**< 是否捕获标准输出 */
+    bool capture_stderr_{false};            /**< 是否捕获标准错误 */
+    string stdin_data_;                     /**< 预设的 stdin 输入数据 */
 
-    pipe stdout_pipe_;
-    pipe stderr_pipe_;
-    pipe stdin_pipe_;
+    pipe stdout_pipe_; /**< stdout 管道 */
+    pipe stderr_pipe_; /**< stderr 管道 */
+    pipe stdin_pipe_;  /**< stdin 管道 */
 
-    string stdout_buf_;
-    string stderr_buf_;
+    string stdout_buf_; /**< stdout 数据缓冲区 */
+    string stderr_buf_; /**< stderr 数据缓冲区 */
 
-    thread reader_thread_;
-    atomic<bool> reader_running_{false};
+    thread reader_thread_;               /**< 异步读取线程 */
+    atomic<bool> reader_running_{false}; /**< 读取线程运行标志 */
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    void* process_handle_{nullptr};
-    void* thread_handle_{nullptr};
+    void* process_handle_{nullptr}; /**< Windows 进程句柄 */
+    void* thread_handle_{nullptr};  /**< Windows 主线程句柄 */
 #endif
 
 public:
     /**
      * @brief 默认构造，不启动任何进程
      */
-    process() noexcept = default;
+    process() = default;
 
     /**
      * @brief 析构，自动终止未退出的子进程并清理资源

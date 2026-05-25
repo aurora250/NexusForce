@@ -418,12 +418,12 @@ TEST_F(SslSocketTest, IsSslInitiallyFalse) {
 
 TEST_F(SslSocketTest, SslAccessorThrowsWhenNotInitialized) {
     ssl_socket sock;
-    EXPECT_THROW(sock.ssl(), ssl_exception);
+    EXPECT_THROW(ignore = sock.ssl(), ssl_exception);
 }
 
 TEST_F(SslSocketTest, SslConstAccessorThrowsWhenNotInitialized) {
     const ssl_socket sock;
-    EXPECT_THROW(sock.ssl(), ssl_exception);
+    EXPECT_THROW(ignore = sock.ssl(), ssl_exception);
 }
 
 TEST_F(SslSocketTest, InitServerSslWithoutOpenThrows) {
@@ -531,7 +531,7 @@ TEST_F(SslAcceptorTest, AcceptSslWithoutOpenThrows) {
     ssl_acceptor acceptor;
     ssl_context ctx(ssl_method::TLS_SERVER);
     acceptor.set_ssl_context(move(ctx));
-    EXPECT_THROW(acceptor.accept_ssl(), value_exception);
+    EXPECT_THROW(ignore = acceptor.accept_ssl(), value_exception);
 }
 
 TEST_F(SslAcceptorTest, AcceptSslNonblockWithoutOpenReturnsNone) {
@@ -689,7 +689,7 @@ TEST_F(TcpAcceptorTest, OpenWithAnyPortSucceeds) {
 
 TEST_F(TcpAcceptorTest, AcceptWithoutOpenThrows) {
     tcp_acceptor acceptor;
-    EXPECT_THROW(acceptor.accept(), value_exception);
+    EXPECT_THROW(ignore = acceptor.accept(), value_exception);
 }
 
 TEST_F(TcpAcceptorTest, AcceptNonblockWithoutOpenReturnsNone) {
@@ -772,12 +772,12 @@ TEST_F(TcpClientTest, DefaultAutoReconnectDisabled) {
 
 TEST_F(TcpClientTest, SocketAccessorWithoutConnectThrows) {
     tcp_client client;
-    EXPECT_THROW(client.socket(), value_exception);
+    EXPECT_THROW(ignore = client.socket(), value_exception);
 }
 
 TEST_F(TcpClientTest, ConstSocketAccessorWithoutConnectThrows) {
     const tcp_client client;
-    EXPECT_THROW(client.socket(), value_exception);
+    EXPECT_THROW(ignore = client.socket(), value_exception);
 }
 
 TEST_F(TcpClientTest, ConnectEmptyHostReturnsFalse) {
@@ -940,7 +940,7 @@ TEST_F(SslClientTest, ProtocolVersionReturnsStringNotStringView) {
 
 TEST_F(SslClientTest, SslSocketRefNotConnectedThrows) {
     ssl_client client;
-    EXPECT_THROW(client.ssl_socket_ref(), value_exception);
+    EXPECT_THROW(ignore = client.ssl_socket_ref(), value_exception);
 }
 
 TEST_F(SslClientTest, LoadCaPathCreatesContext) {

@@ -84,42 +84,45 @@ void tcp_server_base::accept_loop() {
 
         ::WSAResetEvent(accept_guard.event);
 
-        try {
-            auto client_opt = accept_one();
-            if (!client_opt) {
-                continue;
-            }
-
-            client_handler_t handler;
-            {
-                shared_lock<shared_mutex> lock(handler_mutex_);
-                handler = client_handler_;
-            }
-
-            if (!handler) {
-                continue;
-            }
-
-            client_pool_.submit_task([handler = move(handler), sock = move(*client_opt), this]() mutable {
-                try {
-                    handler(move(sock));
-                } catch (const exception& e) {
-                    if (!running_) {
-                        return;
-                    }
-                    shared_lock<shared_mutex> lock(handler_mutex_);
-                    if (exception_handler_) {
-                        exception_handler_(e);
-                    }
+        while (running_) {
+            try {
+                auto client_opt = accept_one();
+                if (!client_opt) {
+                    break;
                 }
-            });
-        } catch (const exception& e) {
-            if (!running_) {
+
+                client_handler_t handler;
+                {
+                    shared_lock<shared_mutex> lock(handler_mutex_);
+                    handler = client_handler_;
+                }
+
+                if (!handler) {
+                    continue;
+                }
+
+                client_pool_.submit_task([handler = move(handler), sock = move(*client_opt), this]() mutable {
+                    try {
+                        handler(move(sock));
+                    } catch (const exception& e) {
+                        if (!running_) {
+                            return;
+                        }
+                        shared_lock<shared_mutex> lock(handler_mutex_);
+                        if (exception_handler_) {
+                            exception_handler_(e);
+                        }
+                    }
+                });
+            } catch (const exception& e) {
+                if (!running_) {
+                    break;
+                }
+                shared_lock lock(handler_mutex_);
+                if (exception_handler_) {
+                    exception_handler_(e);
+                }
                 break;
-            }
-            shared_lock lock(handler_mutex_);
-            if (exception_handler_) {
-                exception_handler_(e);
             }
         }
     }
@@ -153,40 +156,43 @@ void tcp_server_base::accept_loop() {
             continue;
         }
 
-        try {
-            auto client_opt = accept_one();
-            if (!client_opt) {
-                continue;
-            }
-
-            client_handler_t handler;
-            {
-                shared_lock<shared_mutex> lock(handler_mutex_);
-                handler = client_handler_;
-            }
-
-            client_pool_.submit_task([this, handler = move(handler), sock = move(*client_opt)]() mutable {
-                try {
-                    if (handler) {
-                        handler(move(sock));
-                    }
-                } catch (const exception& e) {
-                    if (!running_) {
-                        return;
-                    }
-                    shared_lock<shared_mutex> lock(handler_mutex_);
-                    if (exception_handler_) {
-                        exception_handler_(e);
-                    }
+        while (running_) {
+            try {
+                auto client_opt = accept_one();
+                if (!client_opt) {
+                    break;
                 }
-            });
-        } catch (const exception& e) {
-            if (!running_) {
+
+                client_handler_t handler;
+                {
+                    shared_lock<shared_mutex> lock(handler_mutex_);
+                    handler = client_handler_;
+                }
+
+                client_pool_.submit_task([this, handler = move(handler), sock = move(*client_opt)]() mutable {
+                    try {
+                        if (handler) {
+                            handler(move(sock));
+                        }
+                    } catch (const exception& e) {
+                        if (!running_) {
+                            return;
+                        }
+                        shared_lock<shared_mutex> lock(handler_mutex_);
+                        if (exception_handler_) {
+                            exception_handler_(e);
+                        }
+                    }
+                });
+            } catch (const exception& e) {
+                if (!running_) {
+                    break;
+                }
+                shared_lock<shared_mutex> lock(handler_mutex_);
+                if (exception_handler_) {
+                    exception_handler_(e);
+                }
                 break;
-            }
-            shared_lock<shared_mutex> lock(handler_mutex_);
-            if (exception_handler_) {
-                exception_handler_(e);
             }
         }
     }
@@ -194,11 +200,11 @@ void tcp_server_base::accept_loop() {
 }
 
 tcp_server_base::tcp_server_base(const ports port, const size_t worker_count) :
-port_(port) {
+port_(port),
+worker_count_(worker_count) {
     if (worker_count == 0) {
         NEFORCE_THROW_EXCEPTION(value_exception("Worker count must be greater than 0"));
     }
-    client_pool_.set_thread_threshhold(worker_count);
 }
 
 bool tcp_server_base::set_client_handler(client_handler_t handler) {
@@ -252,7 +258,7 @@ bool tcp_server_base::start(const int backlog) noexcept {
 #endif
 
     if (!client_pool_.running()) {
-        client_pool_.start();
+        client_pool_.start(worker_count_);
     }
 
     try {
@@ -330,6 +336,10 @@ optional<unique_ptr<tcp_socket>> tcp_server::accept_one() {
     if (!client) {
         return none;
     }
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::WSAEventSelect(client->native_handle(), nullptr, 0);
+#endif
+    client->set_nonblocking(false);
     return make_unique<tcp_socket>(move(*client));
 }
 

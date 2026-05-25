@@ -14,7 +14,9 @@
 #include "NeForce/core/async/shared_mutex.hpp"
 #include "NeForce/core/async/thread_pool.hpp"
 #include "NeForce/core/container/unordered_map.hpp"
-#include "NeForce/core/system/pipe.hpp"
+#ifndef NEFORCE_PLATFORM_WINDOWS
+#    include "NeForce/core/system/pipe.hpp"
+#endif
 #include "NeForce/core/time/clocks.hpp"
 #include "NeForce/core/utility/optional.hpp"
 #include "NeForce/network/dns/dns_message.hpp"
@@ -74,8 +76,10 @@ private:
     mutable mutex pending_mutex_;                            ///< 待处理查询互斥锁
     mutable mutex send_mutex_;                               ///< 发送互斥锁
     thread_pool io_pool_;                                    ///< I/O线程池
-    pipe wake_pipe_;                                         ///< 唤醒管道
-    atomic<bool> io_running_{false};                         ///< I/O循环运行标志
+#ifndef NEFORCE_PLATFORM_WINDOWS
+    pipe wake_pipe_; ///< 唤醒管道
+#endif
+    atomic<bool> io_running_{false}; ///< I/O循环运行标志
 
 private:
     void ensure_io_started();
@@ -168,7 +172,8 @@ public:
      * @return 查询结果
      * @throws dns_exception 查询失败时抛出
      */
-    dns_query_result query(string_view domain, dns_record::raw type = dns_record::A, dns_class qclass = dns_class::IN);
+    dns_query_result query(string_view domain, dns_record::raw type = dns_record::A,
+                           dns_class qclass = dns_class::INTERNET);
 
     /**
      * @brief 异步DNS查询
@@ -178,7 +183,7 @@ public:
      * @return future对象，可等待查询结果
      */
     future<dns_query_result> query_async(const string& domain, dns_record::raw type = dns_record::A,
-                                         dns_class qclass = dns_class::IN);
+                                         dns_class qclass = dns_class::INTERNET);
 
     /**
      * @brief 解析A记录（IPv4地址）
@@ -262,7 +267,7 @@ public:
      * @return 编码后的DNS查询消息
      */
     static byte_vector build_query(string_view domain, dns_record::raw type = dns_record::A,
-                                   dns_class qclass = dns_class::IN, bool rd = true, bool edns_enable = true,
+                                   dns_class qclass = dns_class::INTERNET, bool rd = true, bool edns_enable = true,
                                    bool dnssec_ok = false, uint16_t edns_payload = edns::DEFAULT_UDP_PAYLOAD);
 
     /**
