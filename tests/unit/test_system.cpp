@@ -9,6 +9,7 @@
 #include <NeForce/core/system/stacktrace.hpp>
 #include <NeForce/core/system/sysinfo.hpp>
 #include <NeForce/core/system/system_event.hpp>
+#include <NeForce/core/system/registry.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <gtest/gtest.h>
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -5865,3 +5866,549 @@ TEST_F(SignalManagerTest, HandlerReceivesCorrectEvent) {
 
     mgr.stop_monitoring();
 }
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+
+class RegistryKeyTest : public ::testing::Test {
+protected:
+    static constexpr wchar_t test_base_path[] = L"Software\\NeForceTest";
+    static constexpr wchar_t test_sub_key[] = L"TestSubKey";
+    static constexpr wchar_t test_value_name[] = L"TestValue";
+
+    void SetUp() override {
+        registry_key key;
+        key.open(registry_key::root_key::current_user(), L"Software", KEY_READ | KEY_WRITE);
+        key.create_sub_key(L"NeForceTest");
+    }
+
+    void TearDown() override { registry_key::delete_key_tree(registry_key::root_key::current_user(), test_base_path); }
+
+    registry_key open_test_key(REGSAM access = KEY_READ | KEY_WRITE) const {
+        registry_key key;
+        key.open(registry_key::root_key::current_user(), test_base_path, access);
+        return key;
+    }
+};
+
+TEST_F(RegistryKeyTest, DefaultConstructorCreatesInvalidKey) {
+    registry_key key;
+    EXPECT_FALSE(key.is_valid());
+    EXPECT_FALSE(static_cast<bool>(key));
+}
+
+TEST_F(RegistryKeyTest, OpenValidKey) {
+    auto key = open_test_key();
+    EXPECT_TRUE(key.is_valid());
+    EXPECT_TRUE(static_cast<bool>(key));
+}
+
+TEST_F(RegistryKeyTest, OpenInvalidKeyThrows) {
+    registry_key key;
+    EXPECT_THROW(key.open(registry_key::root_key::current_user(), L"Software\\NonExistentPath12345"), registry_key_exception);
+}
+
+TEST_F(RegistryKeyTest, MoveConstructorTransfersOwnership) {
+    auto key1 = open_test_key();
+    HKEY raw_handle = key1.native_handle();
+    EXPECT_NE(raw_handle, nullptr);
+
+    registry_key key2(move(key1));
+    EXPECT_FALSE(key1.is_valid());
+    EXPECT_TRUE(key2.is_valid());
+    EXPECT_EQ(key2.native_handle(), raw_handle);
+}
+
+TEST_F(RegistryKeyTest, MoveAssignmentTransfersOwnership) {
+    auto key1 = open_test_key();
+    HKEY raw_handle = key1.native_handle();
+
+    registry_key key2;
+    key2 = move(key1);
+    EXPECT_FALSE(key1.is_valid());
+    EXPECT_TRUE(key2.is_valid());
+    EXPECT_EQ(key2.native_handle(), raw_handle);
+}
+
+TEST_F(RegistryKeyTest, MoveAssignmentToSelfIsNoop) {
+    auto key = open_test_key();
+    HKEY raw_handle = key.native_handle();
+
+    key = move(key);
+    EXPECT_TRUE(key.is_valid());
+    EXPECT_EQ(key.native_handle(), raw_handle);
+}
+
+TEST_F(RegistryKeyTest, CreateSubKey) {
+    auto key = open_test_key();
+    EXPECT_FALSE(key.has_sub_key(test_sub_key));
+    key.create_sub_key(test_sub_key);
+    EXPECT_TRUE(key.has_sub_key(test_sub_key));
+}
+
+TEST_F(RegistryKeyTest, CreateSubKeyOnInvalidKeyThrows) {
+    registry_key key;
+    EXPECT_THROW(key.create_sub_key(L"Test"), registry_key_exception);
+}
+
+TEST_F(RegistryKeyTest, OpenSubKey) {
+    auto key = open_test_key();
+    key.create_sub_key(test_sub_key);
+
+    auto sub_key = key.open_sub_key(test_sub_key, KEY_READ);
+    EXPECT_TRUE(sub_key.is_valid());
+}
+
+TEST_F(RegistryKeyTest, OpenSubKeyNonExistentThrows) {
+    auto key = open_test_key();
+    EXPECT_THROW(ignore = key.open_sub_key(L"NonExistent"), registry_key_exception);
+}
+
+TEST_F(RegistryKeyTest, DeleteSubKey) {
+    auto key = open_test_key();
+    key.create_sub_key(test_sub_key);
+    EXPECT_TRUE(key.has_sub_key(test_sub_key));
+
+    key.delete_sub_key(test_sub_key);
+    EXPECT_FALSE(key.has_sub_key(test_sub_key));
+}
+
+TEST_F(RegistryKeyTest, DeleteSubKeyNonExistentThrows) {
+    auto key = open_test_key();
+    EXPECT_THROW(key.delete_sub_key(L"NonExistent"), registry_key_exception);
+}
+
+TEST_F(RegistryKeyTest, DeleteKeyTree) {
+    auto key = open_test_key();
+    key.create_sub_key(L"Level1");
+
+    auto sub1 = key.open_sub_key(L"Level1", KEY_READ | KEY_WRITE);
+    sub1.create_sub_key(L"Level2");
+
+    registry_key::delete_key_tree(registry_key::root_key::current_user(), wstring(test_base_path) + L"\\Level1");
+    EXPECT_FALSE(key.has_sub_key(L"Level1"));
+}
+
+TEST_F(RegistryKeyTest, HasSubKeyReturnsTrue) {
+    auto key = open_test_key();
+    key.create_sub_key(test_sub_key);
+    EXPECT_TRUE(key.has_sub_key(test_sub_key));
+}
+
+TEST_F(RegistryKeyTest, HasSubKeyReturnsFalse) {
+    auto key = open_test_key();
+    EXPECT_FALSE(key.has_sub_key(L"NonExistent"));
+}
+
+TEST_F(RegistryKeyTest, HasValueReturnsTrue) {
+    auto key = open_test_key();
+    key.set_string_value(test_value_name, L"Hello");
+    EXPECT_TRUE(key.has_value(test_value_name));
+}
+
+TEST_F(RegistryKeyTest, HasValueReturnsFalse) {
+    auto key = open_test_key();
+    EXPECT_FALSE(key.has_value(L"NonExistent"));
+}
+
+TEST_F(RegistryKeyTest, SetAndGetStringValue) {
+    auto key = open_test_key();
+    const wstring expected = L"Test String Value";
+
+    key.set_string_value(test_value_name, expected);
+    EXPECT_EQ(key.get_string_value(test_value_name), expected);
+}
+
+TEST_F(RegistryKeyTest, GetStringValueWithDefault) {
+    auto key = open_test_key();
+    const wstring default_val = L"Default";
+    EXPECT_EQ(key.get_string_value(L"NonExistent", default_val), default_val);
+}
+
+TEST_F(RegistryKeyTest, GetStringValueEmptyDefault) {
+    auto key = open_test_key();
+    EXPECT_EQ(key.get_string_value(L"NonExistent"), L"");
+}
+
+TEST_F(RegistryKeyTest, SetAndGetExpandStringValue) {
+    auto key = open_test_key();
+    const wstring expected = L"%PATH%";
+
+    key.set_expand_string_value(test_value_name, expected);
+    EXPECT_EQ(key.get_string_value(test_value_name), expected);
+}
+
+TEST_F(RegistryKeyTest, SetAndGetDwordValue) {
+    auto key = open_test_key();
+    const DWORD expected = 12345;
+
+    key.set_dword_value(test_value_name, expected);
+    EXPECT_EQ(key.get_dword_value(test_value_name), expected);
+}
+
+TEST_F(RegistryKeyTest, GetDwordValueWithDefault) {
+    auto key = open_test_key();
+    const DWORD default_val = 999;
+    EXPECT_EQ(key.get_dword_value(L"NonExistent", default_val), default_val);
+}
+
+TEST_F(RegistryKeyTest, GetDwordValueDefaultZero) {
+    auto key = open_test_key();
+    EXPECT_EQ(key.get_dword_value(L"NonExistent"), 0u);
+}
+
+TEST_F(RegistryKeyTest, SetAndGetQwordValue) {
+    auto key = open_test_key();
+    const ULONGLONG expected = 0x123456789ABCDEF0;
+
+    key.set_qword_value(test_value_name, expected);
+    EXPECT_EQ(key.get_qword_value(test_value_name), expected);
+}
+
+TEST_F(RegistryKeyTest, GetQwordValueWithDefault) {
+    auto key = open_test_key();
+    const ULONGLONG default_val = 888;
+    EXPECT_EQ(key.get_qword_value(L"NonExistent", default_val), default_val);
+}
+
+TEST_F(RegistryKeyTest, GetQwordValueDefaultZero) {
+    auto key = open_test_key();
+    EXPECT_EQ(key.get_qword_value(L"NonExistent"), 0ull);
+}
+
+TEST_F(RegistryKeyTest, SetAndGetBinaryValue) {
+    auto key = open_test_key();
+    const BYTE data[] = {0x00, 0x01, 0x02, 0xFF, 0xFE, 0xFD};
+    const DWORD size = sizeof(data);
+
+    key.set_binary_value(test_value_name, data, size);
+    auto result = key.get_binary_value(test_value_name);
+
+    ASSERT_EQ(result.size(), size);
+    for (DWORD i = 0; i < size; ++i) {
+        EXPECT_EQ(result[i], data[i]);
+    }
+}
+
+TEST_F(RegistryKeyTest, GetBinaryValueThrowsOnNonExistent) {
+    auto key = open_test_key();
+    EXPECT_THROW(ignore = key.get_binary_value(L"NonExistent"), registry_key_exception);
+}
+
+TEST_F(RegistryKeyTest, SetAndGetMultiStringValue) {
+    auto key = open_test_key();
+    const vector<wstring> expected = {L"String1", L"String2", L"String3"};
+
+    key.set_multi_string_value(test_value_name, expected);
+    auto result = key.get_multi_string_value(test_value_name);
+
+    ASSERT_EQ(result.size(), expected.size());
+    for (size_t i = 0; i < expected.size(); ++i) {
+        EXPECT_EQ(result[i], expected[i]);
+    }
+}
+
+TEST_F(RegistryKeyTest, SetMultiStringValueEmptyList) {
+    auto key = open_test_key();
+    const vector<wstring> empty;
+
+    key.set_multi_string_value(test_value_name, empty);
+    auto result = key.get_multi_string_value(test_value_name);
+    EXPECT_TRUE(result.empty());
+}
+
+TEST_F(RegistryKeyTest, DeleteValue) {
+    auto key = open_test_key();
+    key.set_string_value(test_value_name, L"ToDelete");
+    EXPECT_TRUE(key.has_value(test_value_name));
+
+    key.delete_value(test_value_name);
+    EXPECT_FALSE(key.has_value(test_value_name));
+}
+
+TEST_F(RegistryKeyTest, DeleteValueNonExistentThrows) {
+    auto key = open_test_key();
+    EXPECT_THROW(key.delete_value(L"NonExistent"), registry_key_exception);
+}
+
+TEST_F(RegistryKeyTest, EnumSubKeyNames) {
+    auto key = open_test_key();
+    key.create_sub_key(L"SubKey1");
+    key.create_sub_key(L"SubKey2");
+    key.create_sub_key(L"SubKey3");
+
+    auto names = key.enum_sub_key_names();
+    EXPECT_GE(names.size(), 3u);
+}
+
+TEST_F(RegistryKeyTest, EnumSubKeyNamesEmpty) {
+    auto key = open_test_key();
+    auto names = key.enum_sub_key_names();
+    EXPECT_TRUE(names.empty());
+}
+
+TEST_F(RegistryKeyTest, EnumValues) {
+    auto key = open_test_key();
+    key.set_string_value(L"Val1", L"String");
+    key.set_dword_value(L"Val2", 42);
+
+    auto values = key.enum_values();
+    EXPECT_GE(values.size(), 2u);
+}
+
+TEST_F(RegistryKeyTest, EnumValuesEmpty) {
+    auto key = open_test_key();
+    auto values = key.enum_values();
+    EXPECT_TRUE(values.empty());
+}
+
+TEST_F(RegistryKeyTest, ValueInfoToString) {
+    auto key = open_test_key();
+    const wstring expected = L"StringValue";
+    key.set_string_value(test_value_name, expected);
+
+    auto values = key.enum_values();
+    for (auto& v: values) {
+        if (v.name == test_value_name) {
+            EXPECT_EQ(v.to_string(), expected);
+            return;
+        }
+    }
+    FAIL() << "Value not found in enumeration";
+}
+
+TEST_F(RegistryKeyTest, ValueInfoToDword) {
+    auto key = open_test_key();
+    const DWORD expected = 0xDEADBEEF;
+    key.set_dword_value(test_value_name, expected);
+
+    auto values = key.enum_values();
+    for (auto& v: values) {
+        if (v.name == test_value_name) {
+            EXPECT_EQ(v.to_dword(), expected);
+            return;
+        }
+    }
+    FAIL() << "Value not found in enumeration";
+}
+
+TEST_F(RegistryKeyTest, ValueInfoToDwordInvalidType) {
+    auto key = open_test_key();
+    key.set_string_value(test_value_name, L"NotADword");
+
+    auto values = key.enum_values();
+    for (auto& v: values) {
+        if (v.name == test_value_name) {
+            EXPECT_EQ(v.to_dword(), 0u);
+            return;
+        }
+    }
+    FAIL() << "Value not found in enumeration";
+}
+
+TEST_F(RegistryKeyTest, ValueInfoToQword) {
+    auto key = open_test_key();
+    const ULONGLONG expected = 0x123456789ABCDEF0;
+    key.set_qword_value(test_value_name, expected);
+
+    auto values = key.enum_values();
+    for (auto& v: values) {
+        if (v.name == test_value_name) {
+            EXPECT_EQ(v.to_qword(), expected);
+            return;
+        }
+    }
+    FAIL() << "Value not found in enumeration";
+}
+
+TEST_F(RegistryKeyTest, ValueInfoToQwordInvalidType) {
+    auto key = open_test_key();
+    key.set_string_value(test_value_name, L"NotAQword");
+
+    auto values = key.enum_values();
+    for (auto& v: values) {
+        if (v.name == test_value_name) {
+            EXPECT_EQ(v.to_qword(), 0ull);
+            return;
+        }
+    }
+    FAIL() << "Value not found in enumeration";
+}
+
+TEST_F(RegistryKeyTest, ValueInfoToMultiString) {
+    auto key = open_test_key();
+    const vector<wstring> expected = {L"First", L"Second", L"Third"};
+    key.set_multi_string_value(test_value_name, expected);
+
+    auto values = key.enum_values();
+    for (auto& v: values) {
+        if (v.name == test_value_name) {
+            auto result = v.to_multi_string();
+            ASSERT_EQ(result.size(), expected.size());
+            for (size_t i = 0; i < expected.size(); ++i) {
+                EXPECT_EQ(result[i], expected[i]);
+            }
+            return;
+        }
+    }
+    FAIL() << "Value not found in enumeration";
+}
+
+TEST_F(RegistryKeyTest, ValueInfoToMultiStringInvalidType) {
+    auto key = open_test_key();
+    key.set_string_value(test_value_name, L"NotMultiString");
+
+    auto values = key.enum_values();
+    for (auto& v: values) {
+        if (v.name == test_value_name) {
+            auto result = v.to_multi_string();
+            EXPECT_TRUE(result.empty());
+            return;
+        }
+    }
+    FAIL() << "Value not found in enumeration";
+}
+
+TEST_F(RegistryKeyTest, ValueInfoEmptyString) {
+    auto key = open_test_key();
+    key.set_string_value(test_value_name, L"");
+
+    auto values = key.enum_values();
+    for (auto& v: values) {
+        if (v.name == test_value_name) {
+            EXPECT_EQ(v.to_string(), L"");
+            return;
+        }
+    }
+    FAIL() << "Value not found in enumeration";
+}
+
+TEST_F(RegistryKeyTest, NativeHandleReturnsValidHandle) {
+    auto key = open_test_key();
+    EXPECT_NE(key.native_handle(), nullptr);
+}
+
+TEST_F(RegistryKeyTest, DestructorClosesHandle) {
+    HKEY raw_handle;
+    {
+        auto key = open_test_key();
+        raw_handle = key.native_handle();
+    }
+    SUCCEED();
+}
+
+TEST_F(RegistryKeyTest, OpenKeyWithReadOnlyAccess) {
+    auto key = open_test_key();
+    key.set_string_value(test_value_name, L"ReadTest");
+
+    auto read_only = open_test_key(KEY_READ);
+    EXPECT_EQ(read_only.get_string_value(test_value_name), L"ReadTest");
+}
+
+TEST_F(RegistryKeyTest, SetValueOnInvalidKeyThrows) {
+    registry_key key;
+    EXPECT_THROW(key.set_string_value(L"Test", L"Value"), registry_key_exception);
+    EXPECT_THROW(key.set_dword_value(L"Test", 42), registry_key_exception);
+    EXPECT_THROW(key.set_qword_value(L"Test", 42), registry_key_exception);
+    EXPECT_THROW(key.set_binary_value(L"Test", nullptr, 0), registry_key_exception);
+    EXPECT_THROW(key.set_multi_string_value(L"Test", {}), registry_key_exception);
+    EXPECT_THROW(key.set_expand_string_value(L"Test", L"Value"), registry_key_exception);
+}
+
+TEST_F(RegistryKeyTest, GetValueOnInvalidKeyThrows) {
+    registry_key key;
+    EXPECT_THROW(ignore = key.get_binary_value(L"Test"), registry_key_exception);
+    EXPECT_THROW(ignore = key.get_multi_string_value(L"Test"), registry_key_exception);
+}
+
+TEST_F(RegistryKeyTest, GetValueOnInvalidKeyReturnsDefault) {
+    registry_key key;
+    EXPECT_EQ(key.get_string_value(L"Test", L"Default"), L"Default");
+    EXPECT_EQ(key.get_string_value(L"Test"), L"");
+    EXPECT_EQ(key.get_dword_value(L"Test", 42), 42u);
+    EXPECT_EQ(key.get_dword_value(L"Test"), 0u);
+    EXPECT_EQ(key.get_qword_value(L"Test", 99), 99ull);
+    EXPECT_EQ(key.get_qword_value(L"Test"), 0ull);
+}
+
+TEST_F(RegistryKeyTest, HasSubKeyOnInvalidKeyThrows) {
+    registry_key key;
+    EXPECT_THROW(ignore = key.has_sub_key(L"Test"), registry_key_exception);
+}
+
+TEST_F(RegistryKeyTest, HasValueOnInvalidKeyThrows) {
+    registry_key key;
+    EXPECT_THROW(ignore = key.has_value(L"Test"), registry_key_exception);
+}
+
+TEST_F(RegistryKeyTest, EnumSubKeyNamesOnInvalidKeyThrows) {
+    registry_key key;
+    EXPECT_THROW(ignore = key.enum_sub_key_names(), registry_key_exception);
+}
+
+TEST_F(RegistryKeyTest, EnumValuesOnInvalidKeyThrows) {
+    registry_key key;
+    EXPECT_THROW(ignore = key.enum_values(), registry_key_exception);
+}
+
+TEST_F(RegistryKeyTest, DeleteSubKeyOnInvalidKeyThrows) {
+    registry_key key;
+    EXPECT_THROW(key.delete_sub_key(L"Test"), registry_key_exception);
+}
+
+TEST_F(RegistryKeyTest, DeleteValueOnInvalidKeyThrows) {
+    registry_key key;
+    EXPECT_THROW(key.delete_value(L"Test"), registry_key_exception);
+}
+
+TEST_F(RegistryKeyTest, ValueTypeEnumValues) {
+    EXPECT_NE(static_cast<DWORD>(registry_key::value_type::string),
+              static_cast<DWORD>(registry_key::value_type::dword));
+    EXPECT_NE(static_cast<DWORD>(registry_key::value_type::binary),
+              static_cast<DWORD>(registry_key::value_type::qword));
+}
+
+TEST_F(RegistryKeyTest, OverwriteExistingValue) {
+    auto key = open_test_key();
+
+    key.set_string_value(test_value_name, L"Original");
+    EXPECT_EQ(key.get_string_value(test_value_name), L"Original");
+
+    key.set_string_value(test_value_name, L"Overwritten");
+    EXPECT_EQ(key.get_string_value(test_value_name), L"Overwritten");
+}
+
+TEST_F(RegistryKeyTest, SetBinaryValueEmpty) {
+    auto key = open_test_key();
+    key.set_binary_value(test_value_name, nullptr, 0);
+
+    auto result = key.get_binary_value(test_value_name);
+    EXPECT_TRUE(result.empty());
+}
+
+TEST_F(RegistryKeyTest, MultiStringSingleElement) {
+    auto key = open_test_key();
+    const vector<wstring> input = {L"OnlyOne"};
+
+    key.set_multi_string_value(test_value_name, input);
+    auto result = key.get_multi_string_value(test_value_name);
+
+    ASSERT_EQ(result.size(), 1u);
+    EXPECT_EQ(result[0], L"OnlyOne");
+}
+
+TEST_F(RegistryKeyTest, GetValueInfoOnInvalidKeyThrows) {
+    registry_key key;
+    EXPECT_THROW(ignore = key.get_binary_value(L"Test"), registry_key_exception);
+}
+
+TEST_F(RegistryKeyTest, ExceptionMessageContent) {
+    try {
+        registry_key key;
+        key.open(registry_key::root_key::current_user(), L"Software\\NonExistentPath12345", KEY_READ);
+        FAIL() << "Expected exception not thrown";
+    } catch (const registry_key_exception& e) {
+        EXPECT_STREQ(e.type(), "registry_key_exception");
+    }
+}
+
+#endif

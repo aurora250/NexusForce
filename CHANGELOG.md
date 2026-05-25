@@ -28,7 +28,7 @@
 - 添加错误流输出能力 eprint
 - 添加本地化配置类 locale
 - 添加系统管道操作类 pipe
-- 添加 Windows 注册表修复类 registry
+- 添加 Windows 注册表类 registry
 - 添加共享内存类 share_memory
 - 添加系统信息获取类 sysinfo
 - 添加范围计时类 click

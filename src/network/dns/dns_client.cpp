@@ -910,7 +910,8 @@ dns_query_result dns_client::query(const string_view domain, const dns_record::r
     }
 }
 
-future<dns_query_result> dns_client::query_async(const string& domain, const dns_record::raw type, const dns_class qclass) {
+future<dns_query_result> dns_client::query_async(const string& domain, const dns_record::raw type,
+                                                 const dns_class qclass) {
     ensure_io_started();
 
     if (domain.empty()) {

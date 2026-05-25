@@ -3,13 +3,6 @@
 #    include <winerror.h>
 NEFORCE_BEGIN_NAMESPACE__
 
-namespace {
-    ::HKEY to_hkey(registry_key::root_key key) noexcept {
-        return reinterpret_cast<::HKEY>(static_cast<::ULONG_PTR>(key));
-    }
-} // namespace
-
-
 wstring registry_key::value_info::to_string() const {
     if (type == value_type::string || type == value_type::expand_string) {
         if (!data.empty()) {
@@ -108,9 +101,9 @@ void registry_key::create_sub_key(const wstring& name) {
     ::RegCloseKey(sub_key);
 }
 
-void registry_key::open(const root_key root, const wstring& path, const ::REGSAM sam_desired) {
+void registry_key::open(const ::HKEY root, const wstring& path, const ::REGSAM sam_desired) {
     close();
-    const ::LONG result = ::RegOpenKeyExW(to_hkey(root), path.data(), 0, sam_desired, &m_key);
+    const ::LONG result = ::RegOpenKeyExW(root, path.data(), 0, sam_desired, &m_key);
     if (result != ERROR_SUCCESS) {
         throw registry_key_exception("Failed to open registry key");
     }
@@ -143,8 +136,8 @@ void registry_key::delete_value(const wstring& name) {
     }
 }
 
-void registry_key::delete_key_tree(const root_key root, const wstring& path) {
-    const ::LONG result = ::RegDeleteTreeW(to_hkey(root), path.data());
+void registry_key::delete_key_tree(const ::HKEY root, const wstring& path) {
+    const ::LONG result = ::RegDeleteTreeW(root, path.data());
     if (result != ERROR_SUCCESS) {
         throw registry_key_exception("Failed to delete key tree");
     }
@@ -295,7 +288,7 @@ registry_key::value_info registry_key::get_value_info(const wstring& name) const
     }
 
     vector<::BYTE> data(data_size);
-    result = RegQueryValueExW(m_key, name.data(), nullptr, nullptr, data.data(), &data_size);
+    result = ::RegQueryValueExW(m_key, name.data(), nullptr, nullptr, data.data(), &data_size);
     if (result != ERROR_SUCCESS) {
         throw registry_key_exception("Failed to read value data");
     }

@@ -35,12 +35,22 @@ struct registry_key_exception final : system_exception {
 
 class NEFORCE_API registry_key {
 public:
-    enum class root_key : ::ULONG_PTR {
-        classes_root = reinterpret_cast<::ULONG_PTR>(HKEY_CLASSES_ROOT),
-        current_user = reinterpret_cast<::ULONG_PTR>(HKEY_CURRENT_USER),
-        local_machine = reinterpret_cast<::ULONG_PTR>(HKEY_LOCAL_MACHINE),
-        users = reinterpret_cast<::ULONG_PTR>(HKEY_USERS),
-        current_config = reinterpret_cast<::ULONG_PTR>(HKEY_CURRENT_CONFIG)
+    struct NEFORCE_API root_key {
+        static ::HKEY classes_root() {
+            return HKEY_CLASSES_ROOT;
+        }
+        static ::HKEY current_user() {
+            return HKEY_CURRENT_USER;
+        }
+        static ::HKEY local_machine() {
+            return HKEY_LOCAL_MACHINE;
+        }
+        static ::HKEY users() {
+            return HKEY_USERS;
+        }
+        static ::HKEY current_config() {
+            return HKEY_CURRENT_CONFIG;
+        }
     };
 
     enum class value_type : ::DWORD {
@@ -63,7 +73,6 @@ public:
         NEFORCE_NODISCARD ::ULONGLONG to_qword() const;
         NEFORCE_NODISCARD vector<wstring> to_multi_string() const;
     };
-
 
 private:
     void close();
@@ -88,12 +97,12 @@ public:
 
     void create_sub_key(const wstring& name);
 
-    void open(root_key root, const wstring& path, ::REGSAM sam_desired = KEY_READ | KEY_WRITE);
+    void open(::HKEY root, const wstring& path, ::REGSAM sam_desired = KEY_READ | KEY_WRITE);
     NEFORCE_NODISCARD registry_key open_sub_key(const wstring& name, REGSAM sam_desired = KEY_READ) const;
 
     void delete_sub_key(const wstring& name);
     void delete_value(const wstring& name);
-    static void delete_key_tree(root_key root, const wstring& path);
+    static void delete_key_tree(::HKEY root, const wstring& path);
 
     NEFORCE_NODISCARD bool has_sub_key(const wstring& name) const;
     NEFORCE_NODISCARD bool has_value(const wstring& name) const;
