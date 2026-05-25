@@ -4,7 +4,7 @@
 
 ### 🚀 New Features
 - 项目从 MSTL 重命名为 NexusForce
-- 添加 GTest 全量测试
+- 添加 GTest 全量单元测试于集成测试
 - 导出 cmake 配置函数
 - 添加代码格式化与检测配置
 - 添加 lz4 压缩操作
@@ -28,6 +28,7 @@
 - 添加错误流输出能力 eprint
 - 添加本地化配置类 locale
 - 添加系统管道操作类 pipe
+- 添加 Windows 注册表修复类 registry
 - 添加共享内存类 share_memory
 - 添加系统信息获取类 sysinfo
 - 添加范围计时类 click
@@ -59,6 +60,8 @@
 - 优化数据库连接池实现
 - 优化测试结构
 - 使用匿名命名空间优化编译单元内部实现
+- 修复 tcp_socket 的链接问题
+- 重构 process 操作为 RAII 设计
 - 去除 builtin_allocator 内置行为的分配器
 - 去除 device 操作
 
