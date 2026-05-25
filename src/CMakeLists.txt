@@ -79,6 +79,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/typeinfo/check_type.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/any.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/byte_size.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/hexadecimal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/utility/uuid.cpp
 
         ${CMAKE_CURRENT_SOURCE_DIR}/db/database_pool.cpp

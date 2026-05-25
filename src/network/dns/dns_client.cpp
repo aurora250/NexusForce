@@ -533,11 +533,11 @@ void dns_client::stop_io() {
 
     {
         lock<mutex> lock(pending_mutex_);
-        for (auto& [id, entry]: pending_queries_) {
+        for (auto& query: pending_queries_) {
             try {
                 NEFORCE_THROW_EXCEPTION(dns_exception::network_error("DNS client shutting down"));
             } catch (...) {
-                entry.promise.set_exception(current_exception());
+                query.second.promise.set_exception(current_exception());
             }
         }
         pending_queries_.clear();
