@@ -80,7 +80,7 @@ string stacktrace::frame::to_string() const {
     string result = address_string(address_);
     const string symbol = name();
     if (!symbol.empty() && symbol != "<unknown>") {
-        result += " in " + _NEFORCE move(symbol);
+        result += " in " + move(symbol);
     }
     return result;
 }
@@ -101,7 +101,7 @@ stacktrace::stacktrace(const size_t skip, const size_t max_depth) {
         return;
     }
 
-    const size_t to_skip = _NEFORCE min(static_cast<size_t>(captured), skip + 2);
+    const size_t to_skip = min(static_cast<size_t>(captured), skip + 2);
     const size_t valid_frames = captured - to_skip;
 
     frames_.reserve(valid_frames);

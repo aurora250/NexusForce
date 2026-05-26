@@ -6,5 +6,8 @@ var searchData=
   ['variant_5findex_5fv_3',['variant_index_v',['../group___variant.html#ga6a6286e88fa95ee0ae386a322640f6ce',1,'variant.hpp']]],
   ['vendor_4',['vendor',['../structsysinfo_1_1_c_p_u__info.html#ad92712b7ebb0f39a392fa9b79c6d591b',1,'sysinfo::CPU_info']]],
   ['verify_5fssl_5',['verify_ssl',['../structhttp__client_1_1config.html#a5e858bd2bc62d77bf15b409fa9e2d9ae',1,'http_client::config']]],
-  ['version_6',['version',['../structhttp__client__request.html#aa25e7aeb60cca2fe903076f6a4d5a66f',1,'http_client_request::version'],['../structhttp__server__request.html#ae2c3f23b354fed92026d6c87c5a2afaa',1,'http_server_request::version'],['../structhttp__server__response.html#a662f92b251d031f04c055a7874d8fc35',1,'http_server_response::version'],['../structip__header.html#aa30d424e1ebdcca84cf42cac98383c29',1,'ip_header::version'],['../structplugin__info.html#a899b491fc4007aeae0431f4d030e904a',1,'plugin_info::version']]]
+  ['version_6',['VERSION',['../namespaceedns.html#a11b0311ad6d0efaecf69751bc01007df',1,'edns']]],
+  ['version_7',['version',['../structhttp__client__request.html#aa25e7aeb60cca2fe903076f6a4d5a66f',1,'http_client_request::version'],['../structhttp__server__request.html#ae2c3f23b354fed92026d6c87c5a2afaa',1,'http_server_request::version'],['../structhttp__server__response.html#a662f92b251d031f04c055a7874d8fc35',1,'http_server_response::version'],['../structplugin__info.html#a899b491fc4007aeae0431f4d030e904a',1,'plugin_info::version']]],
+  ['version_5fihl_8',['version_ihl',['../structip__header.html#a71a77a437fd86a4a56097c82400f6a25',1,'ip_header']]],
+  ['version_5fshift_9',['VERSION_SHIFT',['../namespaceedns.html#a9f7b804f6af6661cf1b2da326807fbba',1,'edns']]]
 ];

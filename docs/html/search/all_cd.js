@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['💾_20内存管理_20memory_0',['💾 内存管理 (Memory)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md29',1,'']]]
+  ['🎨_20图形、色彩与数学_0',['🎨 图形、色彩与数学',['../md__m_a_i_n_p_a_g_e.html#autotoc_md15',1,'']]]
 ];

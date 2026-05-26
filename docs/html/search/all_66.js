@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['延迟调用包装_0',['延迟调用包装',['../group___call_wrapper.html',1,'']]]
+  ['并发与异步_20async_0',['🔄 并发与异步 (Async)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md18',1,'']]],
+  ['并行算法_1',['并行算法',['../group___parallel_algorithms.html',1,'']]]
 ];

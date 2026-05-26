@@ -8,7 +8,7 @@ NEFORCE_BEGIN_HTTP__
 
 void http_filter_chain::add_filter(unique_ptr<http_filter> filter) {
     if (filter) {
-        filters_.emplace_back(_NEFORCE move(filter));
+        filters_.emplace_back(move(filter));
     }
 }
 
@@ -179,7 +179,7 @@ void logging_filter::post_filter(http_request& request, http_response& response)
 }
 
 static_file_filter::static_file_filter(string root_path) :
-root_path_(_NEFORCE move(root_path)) {
+root_path_(move(root_path)) {
     if (!root_path_.empty() && !root_path_.ends_with("/")) {
         root_path_ += "/";
     }
@@ -289,7 +289,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
 
 void static_file_filter::add_mime_type(const string& extension, http_content content_type) {
     if (!extension.empty()) {
-        mime_types_[extension] = _NEFORCE move(content_type);
+        mime_types_[extension] = move(content_type);
     }
 }
 

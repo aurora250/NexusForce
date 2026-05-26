@@ -154,6 +154,41 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" line="116" column="17"/>
       </memberdef>
+      <memberdef kind="function" id="classssl__acceptor_1a4a4d5434756d41fffbf1809805191569" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="classssl__socket" kindref="compound">ssl_socket</ref> &gt;</type>
+        <definition>optional&lt; ssl_socket &gt; ssl_acceptor::accept_ssl_nonblock</definition>
+        <argsstring>()</argsstring>
+        <name>accept_ssl_nonblock</name>
+        <qualifiedname>ssl_acceptor::accept_ssl_nonblock</qualifiedname>
+        <briefdescription>
+<para>非阻塞接受TLS客户端连接 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>有新连接返回已建立TLS连接的SSL socket，无连接返回none </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsocket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>发生错误时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structssl__exception" kindref="compound">ssl_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL握手失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+非阻塞地尝试接受新的TLS连接并完成握手。 如果没有待处理的TCP连接，立即返回none。 需要先设置acceptor为非阻塞模式。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" line="128" column="15"/>
+      </memberdef>
     </sectiondef>
     <briefdescription>
 <para>SSL/TLS服务器Acceptor类 </para>
@@ -256,11 +291,12 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" line="77" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" bodystart="77" bodyend="117"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" line="77" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_acceptor.hpp" bodystart="77" bodyend="129"/>
     <listofallmembers>
       <member refid="classtcp__acceptor_1a4981086af1b46cb09f58784469d16f13" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>accept</name></member>
       <member refid="classtcp__acceptor_1a677e1317fe230cd82993671b39e0fec9" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>accept_nonblock</name></member>
       <member refid="classssl__acceptor_1a839b43648acf22c7fc584dd90963cd04" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>accept_ssl</name></member>
+      <member refid="classssl__acceptor_1a4a4d5434756d41fffbf1809805191569" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>accept_ssl_nonblock</name></member>
       <member refid="classip__socket_1a415f4ab8b75623a4474eabaa211c1323" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>address_family</name></member>
       <member refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>bind</name></member>
       <member refid="classip__socket_1a242bf63bfaf65fdb748d02ac8193dfb1" prot="public" virt="virtual"><scope>ssl_acceptor</scope><name>close</name></member>
@@ -284,7 +320,7 @@
       <member refid="classsocket__base_1ad99d1582b07a547df0c6e25d7d057262" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>native_handle</name></member>
       <member refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>native_handle_type</name></member>
       <member refid="classtcp__acceptor_1a01f29ebfd1e0f953d9f1f5ca7ec9896a" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>open</name></member>
-      <member refid="classsocket__base_1ac45ca9c8151fc981e49861f5e85b0434" prot="public" virt="non-virtual" ambiguityscope="ip_socket::"><scope>ssl_acceptor</scope><name>open</name></member>
+      <member refid="classtcp__acceptor_1ac45ca9c8151fc981e49861f5e85b0434" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>open</name></member>
       <member refid="classip__socket_1af46a0c10c0c23ab91a8445c16733ed61" prot="protected" virt="non-virtual"><scope>ssl_acceptor</scope><name>open_ip</name></member>
       <member refid="classsocket__base_1ade45e5ade072d22d377f6582660a872e" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>operator bool</name></member>
       <member refid="classip__socket_1a5df14bf84d50bdad66ab775ad2c5cbba" prot="public" virt="non-virtual"><scope>ssl_acceptor</scope><name>operator=</name></member>

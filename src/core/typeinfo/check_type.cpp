@@ -12,8 +12,8 @@ string real_symbol_name(string name) {
             std::free(p);
         }
     };
-    _NEFORCE unique_ptr<char, decltype(deleter)> real_name{
-            ::abi::__cxa_demangle(name.data(), nullptr, nullptr, nullptr), deleter};
+    unique_ptr<char, decltype(deleter)> real_name{::abi::__cxa_demangle(name.data(), nullptr, nullptr, nullptr),
+                                                  deleter};
     return {real_name.get()};
 }
 

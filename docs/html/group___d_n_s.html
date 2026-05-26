@@ -96,6 +96,11 @@ $(function(){initNavTree('group___d_n_s.html','',''); });
 <p>DNS组件  
 <a href="#details">更多...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-namespaces" class="groupheader"><a id="namespaces" name="namespaces"></a>
+命名空间</h2></td></tr>
+<tr class="memitem:edns" id="r_edns"><td class="memItemLeft">namespace &#160;</td><td class="memItemRight"><a class="el" href="namespaceedns.html">edns</a></td></tr>
+<tr class="memdesc:namespaceedns"><td class="mdescLeft">&#160;</td><td class="mdescRight">EDNS0 协议常量（RFC 6891） <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 类</h2></td></tr>
 <tr class="memitem:dns_5Fclient" id="r_dns_5Fclient"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classdns__client.html">dns_client</a></td></tr>
@@ -106,6 +111,10 @@ $(function(){initNavTree('group___d_n_s.html','',''); });
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DNS查询结果结构  <a href="structdns__query__result.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:dns_5Fheader" id="r_dns_5Fheader"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structdns__header.html">dns_header</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DNS消息头部结构  <a href="structdns__header.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:dns_5Fsrv_5Frecord" id="r_dns_5Fsrv_5Frecord"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structdns__srv__record.html">dns_srv_record</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DNS SRV资源记录  <a href="structdns__srv__record.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:dns_5Fsoa_5Frecord" id="r_dns_5Fsoa_5Frecord"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structdns__soa__record.html">dns_soa_record</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DNS SOA（Start of Authority）资源记录  <a href="structdns__soa__record.html#details">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 枚举</h2></td></tr>
@@ -119,12 +128,12 @@ $(function(){initNavTree('group___d_n_s.html','',''); });
 <br />
  }</td></tr>
 <tr class="memdesc:ga973c6b85131920f4de96d7db1206a51b"><td class="mdescLeft">&#160;</td><td class="mdescRight">DNS操作码枚举  <a href="#ga973c6b85131920f4de96d7db1206a51b">更多...</a><br /></td></tr>
-<tr class="memitem:ga12a6552e04528df27737709ea060c9d1" id="r_ga12a6552e04528df27737709ea060c9d1"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ga12a6552e04528df27737709ea060c9d1">dns_query</a> : uint16_t { <a class="el" href="#gga12a6552e04528df27737709ea060c9d1ae43bd933c18b06d29f9c46cce78de0f2">dns_query::INTERNET</a> = 1
-, <a class="el" href="#gga12a6552e04528df27737709ea060c9d1a7f903fc95c5f6059a3c0d1b22820dbf7">dns_query::CHAOS</a> = 3
-, <a class="el" href="#gga12a6552e04528df27737709ea060c9d1a968ced8fabc2a848519f87df57607aee">dns_query::HESIOD</a> = 4
-, <a class="el" href="#gga12a6552e04528df27737709ea060c9d1a8e1bde3c3d303163521522cf1d62f21f">dns_query::ANY</a> = 255
+<tr class="memitem:ga6f72845b22666dbf3cce34aeb6d805a0" id="r_ga6f72845b22666dbf3cce34aeb6d805a0"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ga6f72845b22666dbf3cce34aeb6d805a0">dns_class</a> : uint16_t { <a class="el" href="#gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2">dns_class::INTERNET</a> = 1
+, <a class="el" href="#gga6f72845b22666dbf3cce34aeb6d805a0a7f903fc95c5f6059a3c0d1b22820dbf7">dns_class::CHAOS</a> = 3
+, <a class="el" href="#gga6f72845b22666dbf3cce34aeb6d805a0a968ced8fabc2a848519f87df57607aee">dns_class::HESIOD</a> = 4
+, <a class="el" href="#gga6f72845b22666dbf3cce34aeb6d805a0a8e1bde3c3d303163521522cf1d62f21f">dns_class::ANY</a> = 255
  }</td></tr>
-<tr class="memdesc:ga12a6552e04528df27737709ea060c9d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">DNS查询类型枚举  <a href="#ga12a6552e04528df27737709ea060c9d1">更多...</a><br /></td></tr>
+<tr class="memdesc:ga6f72845b22666dbf3cce34aeb6d805a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">DNS查询类枚举  <a href="#ga6f72845b22666dbf3cce34aeb6d805a0">更多...</a><br /></td></tr>
 <tr class="memitem:ga4512397ee6460c3c286f1220692348c7" id="r_ga4512397ee6460c3c286f1220692348c7"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ga4512397ee6460c3c286f1220692348c7">dns_response</a> : uint8_t { <br />
 &#160;&#160;<a class="el" href="#gga4512397ee6460c3c286f1220692348c7a71b596df7cfe9f22486d013e022dab21">dns_response::NON_ERROR</a> = 0
 , <a class="el" href="#gga4512397ee6460c3c286f1220692348c7a57779da5393b24165afff75397dd8862">dns_response::FORMAT_ERROR</a> = 1
@@ -309,6 +318,43 @@ DNS 缓存机制</h1>
 <dd>
 <a href="https://www.cloudflare.com/learning/dns/what-is-dns/">https://www.cloudflare.com/learning/dns/what-is-dns/</a></dd></dl>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">枚举类型说明</h2>
+<a id="ga6f72845b22666dbf3cce34aeb6d805a0" name="ga6f72845b22666dbf3cce34aeb6d805a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6f72845b22666dbf3cce34aeb6d805a0">&#9670;&#160;</a></span>dns_class</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#ga6f72845b22666dbf3cce34aeb6d805a0">dns_class</a> : <a class="el" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>DNS查询类枚举 </p>
+<p>定义DNS查询的类别（CLASS），指定查询的协议族。 符合 RFC 1035 §3.2.4 和 IANA DNS Parameters 注册表。 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2" name="gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2"></a>INTERNET&#160;</td><td class="fielddoc"><p>Internet (IN) </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga6f72845b22666dbf3cce34aeb6d805a0a7f903fc95c5f6059a3c0d1b22820dbf7" name="gga6f72845b22666dbf3cce34aeb6d805a0a7f903fc95c5f6059a3c0d1b22820dbf7"></a>CHAOS&#160;</td><td class="fielddoc"><p>CHAOS </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga6f72845b22666dbf3cce34aeb6d805a0a968ced8fabc2a848519f87df57607aee" name="gga6f72845b22666dbf3cce34aeb6d805a0a968ced8fabc2a848519f87df57607aee"></a>HESIOD&#160;</td><td class="fielddoc"><p>Hesiod </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga6f72845b22666dbf3cce34aeb6d805a0a8e1bde3c3d303163521522cf1d62f21f" name="gga6f72845b22666dbf3cce34aeb6d805a0a8e1bde3c3d303163521522cf1d62f21f"></a>ANY&#160;</td><td class="fielddoc"><p>任何类 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="dns__message_8hpp_source.html">dns_message.hpp</a> 第 <a class="el" href="dns__message_8hpp_source.html#l00190">190</a> 行定义.</p>
+
+</div>
+</div>
 <a id="ga973c6b85131920f4de96d7db1206a51b" name="ga973c6b85131920f4de96d7db1206a51b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga973c6b85131920f4de96d7db1206a51b">&#9670;&#160;</a></span>dns_opcode</h2>
 
@@ -345,43 +391,6 @@ DNS 缓存机制</h1>
 </table>
 
 <p class="definition">在文件 <a class="el" href="dns__message_8hpp_source.html">dns_message.hpp</a> 第 <a class="el" href="dns__message_8hpp_source.html#l00175">175</a> 行定义.</p>
-
-</div>
-</div>
-<a id="ga12a6552e04528df27737709ea060c9d1" name="ga12a6552e04528df27737709ea060c9d1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga12a6552e04528df27737709ea060c9d1">&#9670;&#160;</a></span>dns_query</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum class <a class="el" href="#ga12a6552e04528df27737709ea060c9d1">dns_query</a> : <a class="el" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>DNS查询类型枚举 </p>
-<p>定义DNS查询的类别，指定查询的协议族或类型。 </p>
-<table class="fieldtable">
-<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="gga12a6552e04528df27737709ea060c9d1ae43bd933c18b06d29f9c46cce78de0f2" name="gga12a6552e04528df27737709ea060c9d1ae43bd933c18b06d29f9c46cce78de0f2"></a>INTERNET&#160;</td><td class="fielddoc"><p>Internet类 </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga12a6552e04528df27737709ea060c9d1a7f903fc95c5f6059a3c0d1b22820dbf7" name="gga12a6552e04528df27737709ea060c9d1a7f903fc95c5f6059a3c0d1b22820dbf7"></a>CHAOS&#160;</td><td class="fielddoc"><p>CHAOS类 </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga12a6552e04528df27737709ea060c9d1a968ced8fabc2a848519f87df57607aee" name="gga12a6552e04528df27737709ea060c9d1a968ced8fabc2a848519f87df57607aee"></a>HESIOD&#160;</td><td class="fielddoc"><p>HESIOD类 </p>
-</td></tr>
-<tr><td class="fieldname"><a id="gga12a6552e04528df27737709ea060c9d1a8e1bde3c3d303163521522cf1d62f21f" name="gga12a6552e04528df27737709ea060c9d1a8e1bde3c3d303163521522cf1d62f21f"></a>ANY&#160;</td><td class="fielddoc"><p>任何类 </p>
-</td></tr>
-</table>
-
-<p class="definition">在文件 <a class="el" href="dns__message_8hpp_source.html">dns_message.hpp</a> 第 <a class="el" href="dns__message_8hpp_source.html#l00189">189</a> 行定义.</p>
 
 </div>
 </div>
@@ -422,7 +431,7 @@ DNS 缓存机制</h1>
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="dns__message_8hpp_source.html">dns_message.hpp</a> 第 <a class="el" href="dns__message_8hpp_source.html#l00202">202</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dns__message_8hpp_source.html">dns_message.hpp</a> 第 <a class="el" href="dns__message_8hpp_source.html#l00203">203</a> 行定义.</p>
 
 </div>
 </div>

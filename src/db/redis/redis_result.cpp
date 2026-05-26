@@ -11,7 +11,7 @@ namespace {
             case REDIS_REPLY_ERROR:
                 return {element->str, element->len};
             case REDIS_REPLY_INTEGER:
-                return _NEFORCE to_string(element->integer);
+                return to_string(element->integer);
             case REDIS_REPLY_NIL:
                 return {};
             case REDIS_REPLY_ARRAY: {
@@ -68,7 +68,7 @@ kv_pairs_(make_unique<vector<pair<string, string>>>()) {
                 for (size_t i = 0; i < rows_; i += 2) {
                     const string key = format_redis_reply_element(result_->element[i]);
                     const string value = format_redis_reply_element(result_->element[i + 1]);
-                    kv_pairs_->emplace_back(_NEFORCE move(key), _NEFORCE move(value));
+                    kv_pairs_->emplace_back(move(key), move(value));
                 }
                 rows_ = kv_pairs_->size();
             } else {
@@ -83,7 +83,7 @@ kv_pairs_(make_unique<vector<pair<string, string>>>()) {
             rows_ = 1;
             column_names_->push_back("result");
             string value = format_redis_reply_element(result_);
-            kv_pairs_->emplace_back("", _NEFORCE move(value));
+            kv_pairs_->emplace_back("", move(value));
             break;
         }
         case REDIS_REPLY_NIL: {
@@ -146,7 +146,7 @@ vector<string> redis_result::value_array() const {
     if (result_ != nullptr && result_->type == REDIS_REPLY_ARRAY) {
         for (size_t i = 0; i < result_->elements; ++i) {
             string value = format_redis_reply_element(result_->element[i]);
-            result.push_back(_NEFORCE move(value));
+            result.push_back(move(value));
         }
     }
     return result;

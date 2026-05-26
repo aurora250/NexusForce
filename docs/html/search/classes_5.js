@@ -51,7 +51,7 @@ var searchData=
   ['function_3c_20void_28http_5frequest_20_26_2c_20http_5fresponse_20_26_2c_20const_20exception_20_26_29_3e_48',['function&lt; void(http_request &amp;, http_response &amp;, const exception &amp;)&gt;',['../classfunction.html',1,'']]],
   ['function_3c_20void_28session_5fptr_29_3e_49',['function&lt; void(session_ptr)&gt;',['../classfunction.html',1,'']]],
   ['function_3c_20void_28size_5ft_2c_20size_5ft_29_3e_50',['function&lt; void(size_t, size_t)&gt;',['../classfunction.html',1,'']]],
-  ['function_3c_20void_28tcp_5fsocket_29_3e_51',['function&lt; void(tcp_socket)&gt;',['../classfunction.html',1,'']]],
+  ['function_3c_20void_28unique_5fptr_3c_20tcp_5fsocket_20_3e_29_3e_51',['function&lt; void(unique_ptr&lt; tcp_socket &gt;)&gt;',['../classfunction.html',1,'']]],
   ['function_3c_20void_28void_20_2a_2c_20const_20meta_5fany_20_26_29_3e_52',['function&lt; void(void *, const meta_any &amp;)&gt;',['../classfunction.html',1,'']]],
   ['function_3c_20void_28websocket_5fstatus_2c_20const_20string_20_26_29_3e_53',['function&lt; void(websocket_status, const string &amp;)&gt;',['../classfunction.html',1,'']]],
   ['future_54',['future',['../classfuture.html',1,'']]],

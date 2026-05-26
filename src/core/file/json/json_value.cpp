@@ -19,9 +19,9 @@ namespace {
                 if (val == static_cast<double>(static_cast<long long>(val)) &&
                     val >= static_cast<double>(numeric_traits<int64_t>::min()) &&
                     val <= static_cast<double>(numeric_traits<int64_t>::max())) {
-                    return _NEFORCE to_string(static_cast<long long>(val));
+                    return to_string(static_cast<long long>(val));
                 }
-                string result = _NEFORCE to_string(val);
+                string result = to_string(val);
                 if (result.contains('.')) {
                     while (!result.empty() && result.back() == '0') {
                         result.pop_back();

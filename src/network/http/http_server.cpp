@@ -442,7 +442,7 @@ http_server::http_server(ports port, ssl_context ctx, size_t worker_count) :
 server_(make_unique<ssl_server>(port, worker_count)) {
     auto* ssl_srv = dynamic_cast<ssl_server*>(server_.get());
     if (ssl_srv != nullptr) {
-        ssl_srv->set_ssl_context(_NEFORCE move(ctx));
+        ssl_srv->set_ssl_context(move(ctx));
     }
     server_->set_client_handler([this](unique_ptr<tcp_socket> sock) { this->handle_client(move(sock)); });
 }

@@ -22,15 +22,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="390" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="390" bodyend="390"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="392" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="392" bodyend="392"/>
         <references refid="group___unique_pointer_1ga20caa9b68a94ba614667d6ec6585c044" compoundref="unique__ptr_8hpp" startline="973" endline="975">make_unique</references>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classtcp__client_1a5f445fbc003f62fbec15cf13422eaf5d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classtcp__client_1ae81557265085d2bec93e958c2440c281" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
         <definition>tcp_client_base::tcp_client_base</definition>
-        <argsstring>()=default</argsstring>
+        <argsstring>()</argsstring>
         <name>tcp_client_base</name>
         <qualifiedname>tcp_client::tcp_client_base</qualifiedname>
         <briefdescription>
@@ -40,17 +40,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="387" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="389" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="110" bodyend="111"/>
       </memberdef>
-      <memberdef kind="function" id="classtcp__client_1ae871291551e7990a0716bb07ce8aa850" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classtcp__client_1a2fb51291207591885f561ea3e8577126" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
         <definition>tcp_client_base::tcp_client_base</definition>
-        <argsstring>(dns_client dns)</argsstring>
+        <argsstring>(dns_client::config cfg, bool use_tcp=false)</argsstring>
         <name>tcp_client_base</name>
         <qualifiedname>tcp_client::tcp_client_base</qualifiedname>
         <param>
-          <type><ref refid="classdns__client" kindref="compound">dns_client</ref></type>
-          <declname>dns</declname>
+          <type><ref refid="structdns__client_1_1config" kindref="compound">dns_client::config</ref></type>
+          <declname>cfg</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>use_tcp</declname>
+          <defval>false</defval>
         </param>
         <briefdescription>
 <para>构造函数（带DNS客户端） </para>
@@ -58,10 +63,18 @@
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>dns</parametername>
+<parametername>cfg</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>DNS客户端 </para>
+<para>DNS配置 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>use_tcp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>DNS是否使用TCP </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -69,7 +82,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="387" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="116" bodyend="117"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="389" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="118" bodyend="119"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__client_1af887f41cf05a9c8eb1fbe4633b544b4e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -86,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="387" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="389" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__client_1a748111cebf2c812f1e9b2a709d24196a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -103,7 +116,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="387" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="389" column="5"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -144,10 +157,6 @@
         <link refid="classbasic__string"/>
         <childnode refid="6" relation="public-inheritance">
         </childnode>
-      </node>
-      <node id="3">
-        <label>dns_client</label>
-        <link refid="classdns__client"/>
       </node>
       <node id="14">
         <label>duration&lt; int64_t, milli &gt;</label>
@@ -240,12 +249,16 @@
           <edgelabel>exception_handler_</edgelabel>
         </childnode>
       </node>
+      <node id="3">
+        <label>unique_ptr&lt; dns_client &gt;</label>
+        <link refid="classunique__ptr"/>
+      </node>
       <node id="4">
         <label>unique_ptr&lt; tcp_socket &gt;</label>
         <link refid="classunique__ptr"/>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="385" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="385" bodyend="391"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" line="387" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_client.hpp" bodystart="387" bodyend="393"/>
     <listofallmembers>
       <member refid="classtcp__client__base_1acf721307adb69e3f6a6c9d18f295170e" prot="protected" virt="non-virtual"><scope>tcp_client</scope><name>auto_reconnect_</name></member>
       <member refid="classtcp__client__base_1aff2ce3b983291c2d894d6077b0882d5a" prot="public" virt="virtual"><scope>tcp_client</scope><name>connect</name></member>
@@ -263,7 +276,7 @@
       <member refid="classtcp__client__base_1ad668ea445e32510902c22e6fc378e58b" prot="public" virt="non-virtual"><scope>tcp_client</scope><name>disconnect</name></member>
       <member refid="classtcp__client__base_1a7b8f7559db533ecff45f052ad4352803" prot="protected" virt="non-virtual"><scope>tcp_client</scope><name>disconnect_callback_</name></member>
       <member refid="classtcp__client__base_1adb8a5f228722c6db09638ab34761236a" prot="public" virt="non-virtual"><scope>tcp_client</scope><name>disconnect_callback_t</name></member>
-      <member refid="classtcp__client__base_1ab8584da06a5e778efd18bbd35a08a425" prot="protected" virt="non-virtual"><scope>tcp_client</scope><name>dns_</name></member>
+      <member refid="classtcp__client__base_1a4a2602c7b3ac452c878f8f43bbca1933" prot="protected" virt="non-virtual"><scope>tcp_client</scope><name>dns_</name></member>
       <member refid="classtcp__client__base_1a43b7dfb431c521c2cba6daa833efe6eb" prot="protected" virt="non-virtual"><scope>tcp_client</scope><name>exception_handler_</name></member>
       <member refid="classtcp__client__base_1ae623bfbec50de5d6d23c4ab5e92c9264" prot="public" virt="non-virtual"><scope>tcp_client</scope><name>exception_handler_t</name></member>
       <member refid="classtcp__client__base_1a3ccfccc64bdf978a9a2da48aca0732b3" prot="public" virt="non-virtual"><scope>tcp_client</scope><name>get_dns_client</name></member>
@@ -309,8 +322,8 @@
       <member refid="classtcp__client__base_1a90b8d02d4c7ceee1648a3f7214d1f04f" prot="public" virt="non-virtual"><scope>tcp_client</scope><name>socket</name></member>
       <member refid="classtcp__client__base_1a203529022852e925aa30dbf689a57069" prot="public" virt="non-virtual"><scope>tcp_client</scope><name>socket</name></member>
       <member refid="classtcp__client__base_1ae3f0cb8189dc0880404cdb1c331197a8" prot="protected" virt="non-virtual"><scope>tcp_client</scope><name>socket_</name></member>
-      <member refid="classtcp__client_1a5f445fbc003f62fbec15cf13422eaf5d" prot="public" virt="non-virtual"><scope>tcp_client</scope><name>tcp_client_base</name></member>
-      <member refid="classtcp__client_1ae871291551e7990a0716bb07ce8aa850" prot="public" virt="non-virtual"><scope>tcp_client</scope><name>tcp_client_base</name></member>
+      <member refid="classtcp__client_1ae81557265085d2bec93e958c2440c281" prot="public" virt="non-virtual"><scope>tcp_client</scope><name>tcp_client_base</name></member>
+      <member refid="classtcp__client_1a2fb51291207591885f561ea3e8577126" prot="public" virt="non-virtual"><scope>tcp_client</scope><name>tcp_client_base</name></member>
       <member refid="classtcp__client_1af887f41cf05a9c8eb1fbe4633b544b4e" prot="public" virt="non-virtual"><scope>tcp_client</scope><name>tcp_client_base</name></member>
       <member refid="classtcp__client_1a748111cebf2c812f1e9b2a709d24196a" prot="public" virt="non-virtual"><scope>tcp_client</scope><name>tcp_client_base</name></member>
       <member refid="classtcp__client__base_1a1f61b161f3a5771e1a03e59dc3783dde" prot="protected" virt="non-virtual"><scope>tcp_client</scope><name>try_connect_to_ip</name></member>

@@ -52,7 +52,8 @@ struct NEFORCE_API socket_exception final : network_exception {
 /** @} */ // Exceptions
 
 /**
- * @addtogroup Network 网络通信
+ * @defgroup SocketBase socket基类
+ * @brief 系统socket基类实现
  * @{
  */
 
@@ -334,7 +335,7 @@ public:
     NEFORCE_NODISCARD native_handle_type release() noexcept { return exchange(fd_, invalid_handle); }
 };
 
-/** @} */ // Network
+/** @} */ // SocketBase
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_SOCKET_BASE_HPP__

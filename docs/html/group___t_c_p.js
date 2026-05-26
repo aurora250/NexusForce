@@ -4,14 +4,15 @@ var group___t_c_p =
       [ "tcp_acceptor", "classtcp__acceptor.html#a7a7be44b5b84d5114202f0abc78dca02", null ],
       [ "accept", "classtcp__acceptor.html#a4981086af1b46cb09f58784469d16f13", null ],
       [ "accept_nonblock", "classtcp__acceptor.html#a677e1317fe230cd82993671b39e0fec9", null ],
-      [ "open", "classtcp__acceptor.html#a01f29ebfd1e0f953d9f1f5ca7ec9896a", null ]
+      [ "open", "classtcp__acceptor.html#a01f29ebfd1e0f953d9f1f5ca7ec9896a", null ],
+      [ "open", "classtcp__acceptor.html#ac45ca9c8151fc981e49861f5e85b0434", null ]
     ] ],
     [ "tcp_client_base", "classtcp__client__base.html", [
       [ "connect_callback_t", "classtcp__client__base.html#ad09db647aea484d8b3fa32368c41da67", null ],
       [ "disconnect_callback_t", "classtcp__client__base.html#adb8a5f228722c6db09638ab34761236a", null ],
       [ "exception_handler_t", "classtcp__client__base.html#ae623bfbec50de5d6d23c4ab5e92c9264", null ],
-      [ "tcp_client_base", "classtcp__client__base.html#a5f445fbc003f62fbec15cf13422eaf5d", null ],
-      [ "tcp_client_base", "classtcp__client__base.html#ae871291551e7990a0716bb07ce8aa850", null ],
+      [ "tcp_client_base", "classtcp__client__base.html#ae81557265085d2bec93e958c2440c281", null ],
+      [ "tcp_client_base", "classtcp__client__base.html#a2fb51291207591885f561ea3e8577126", null ],
       [ "~tcp_client_base", "classtcp__client__base.html#a81d04e7bbfd939b65c6a3bbb394f148c", null ],
       [ "connect", "classtcp__client__base.html#aff2ce3b983291c2d894d6077b0882d5a", null ],
       [ "connect_timeout", "classtcp__client__base.html#a3c5738f3f29fa71f7076bc1484c3e659", null ],
@@ -62,7 +63,7 @@ var group___t_c_p =
       [ "connected_port_", "classtcp__client__base.html#a73bde0cc117b889468d6d90f8a185270", null ],
       [ "current_reconnect_attempt_", "classtcp__client__base.html#a6084cc447e8b87ae52079de26bcaf7da", null ],
       [ "disconnect_callback_", "classtcp__client__base.html#a7b8f7559db533ecff45f052ad4352803", null ],
-      [ "dns_", "classtcp__client__base.html#ab8584da06a5e778efd18bbd35a08a425", null ],
+      [ "dns_", "classtcp__client__base.html#a4a2602c7b3ac452c878f8f43bbca1933", null ],
       [ "exception_handler_", "classtcp__client__base.html#a43b7dfb431c521c2cba6daa833efe6eb", null ],
       [ "is_reconnecting_", "classtcp__client__base.html#a46713f7e7056ef28662b6f3cb2337018", null ],
       [ "prefer_ipv6_", "classtcp__client__base.html#adc606871aad1d2ecc27dc92fbdbb3eaa", null ],
@@ -74,18 +75,18 @@ var group___t_c_p =
     ] ],
     [ "tcp_client", "classtcp__client.html", [
       [ "create_socket", "classtcp__client.html#a1c6ad9cebb50df86eb1a086cf9654a04", null ],
-      [ "tcp_client_base", "classtcp__client.html#a5f445fbc003f62fbec15cf13422eaf5d", null ],
-      [ "tcp_client_base", "classtcp__client.html#ae871291551e7990a0716bb07ce8aa850", null ]
+      [ "tcp_client_base", "classtcp__client.html#ae81557265085d2bec93e958c2440c281", null ],
+      [ "tcp_client_base", "classtcp__client.html#a2fb51291207591885f561ea3e8577126", null ]
     ] ],
     [ "tcp_server_base", "classtcp__server__base.html", [
-      [ "client_handler_t", "classtcp__server__base.html#a32641f5767778e30b8c31b3d32441295", null ],
+      [ "client_handler_t", "classtcp__server__base.html#abef2c5b5cbfeda60f09e2c43f7b9a6ae", null ],
       [ "exception_handler_t", "classtcp__server__base.html#a5f608ddaffbd9596fd27cdfc6401a27b", null ],
       [ "tcp_server_base", "classtcp__server__base.html#afd3f0bf8e207d844dbedb1b8c6720e5c", null ],
       [ "~tcp_server_base", "classtcp__server__base.html#ae8163e7386fbe9d18a798e5a6e1f1b3e", null ],
       [ "accept_loop", "classtcp__server__base.html#a339fb280765125ff0e63bb3cb89bcb15", null ],
-      [ "accept_one", "classtcp__server__base.html#adba355ecdbc0013f1172b368c30107e1", null ],
+      [ "accept_one", "classtcp__server__base.html#a0f40159b08863e754d41ea0a32ff78ce", null ],
       [ "create_acceptor", "classtcp__server__base.html#ab04f76ce60e358af3452ca403ad8c2c3", null ],
-      [ "handle_client", "classtcp__server__base.html#a24bf1c8ad6716a8348518f48fad88eb2", null ],
+      [ "handle_client", "classtcp__server__base.html#ad0918dc0cbe8e5bb50e51efffb1cfbcb", null ],
       [ "is_running", "classtcp__server__base.html#aae7b9c4980b19196d0f8e34b428b3758", null ],
       [ "notify_stop", "classtcp__server__base.html#a6cfadb556ef18b029e0c510f143e833b", null ],
       [ "port", "classtcp__server__base.html#afb78680be84f7030e9af5fe6958f258b", null ],
@@ -100,6 +101,7 @@ var group___t_c_p =
       [ "exception_handler_", "classtcp__server__base.html#a831cef70165579b406d091ded06b6a19", null ],
       [ "port_", "classtcp__server__base.html#aa38767b5f095b470707df772b5cb0107", null ],
       [ "running_", "classtcp__server__base.html#ae598f3ebdc396f44146ba8da6bed8f67", null ],
+      [ "worker_count_", "classtcp__server__base.html#a735bef21abd2a1a64c22fc2ebb9c9ec8", null ],
       [ "worker_threads_", "classtcp__server__base.html#aa8d9f9a53edb4699d0825cf499baba0c", null ]
     ] ],
     [ "tcp_server", "classtcp__server.html", [

@@ -46,6 +46,6 @@ var group___exception_handling =
     [ "current_exception", "group___exception_handling.html#ga71f0549a1cdf5c7742d5172b7bda6a14", null ],
     [ "make_exception_ptr", "group___exception_handling.html#gac43ce5d8fc82090c24f3088e37cc2d89", null ],
     [ "rethrow_exception", "group___exception_handling.html#ga0f02f03c5458da96674d6339945db262", null ],
-    [ "throw_with_stack", "group___exception_handling.html#ga26a943a5175254fd422ec576b075a3d9", null ],
+    [ "throw_with_stack", "group___exception_handling.html#gafe66b310cbf7bfa17ba13537186a4891", null ],
     [ "uncaught_exceptions", "group___exception_handling.html#ga85d57a425c36f9ca490ce7e62793bef1", null ]
 ];

@@ -216,14 +216,14 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
-      <memberdef kind="function" id="classhttp__server_1a410866c3b085e12448cf37e975e857aa" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhttp__server_1a42900572f80787d24b7e53586a4a31e3" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void http_server::handle_client</definition>
-        <argsstring>(tcp_socket client_socket)</argsstring>
+        <argsstring>(unique_ptr&lt; tcp_socket &gt; client_socket)</argsstring>
         <name>handle_client</name>
         <qualifiedname>http_server::handle_client</qualifiedname>
         <param>
-          <type><ref refid="classtcp__socket" kindref="compound">tcp_socket</ref></type>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &gt;</type>
           <declname>client_socket</declname>
         </param>
         <briefdescription>
@@ -234,14 +234,14 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="128" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classhttp__server_1ac294af9c31ade0fd6842a680fd435a37" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classhttp__server_1aa28f56a99268858ee3a8c228e0481b3b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
         <definition>bool http_server::try_websocket_upgrade</definition>
-        <argsstring>(tcp_socket &amp;client_socket, http_request &amp;request)</argsstring>
+        <argsstring>(unique_ptr&lt; tcp_socket &gt; &amp;client_socket, http_request &amp;request)</argsstring>
         <name>try_websocket_upgrade</name>
         <qualifiedname>http_server::try_websocket_upgrade</qualifiedname>
         <param>
-          <type><ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &amp;</type>
+          <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &gt; &amp;</type>
           <declname>client_socket</declname>
         </param>
         <param>
@@ -941,7 +941,7 @@
       <member refid="classhttp__server_1a6448c63c08a21979469e9e1ffc56012b" prot="public" virt="non-virtual"><scope>http_server</scope><name>enable_websocket</name></member>
       <member refid="classhttp__server_1a491c7cc10be8d5b932984c9caa6f820f" prot="private" virt="non-virtual"><scope>http_server</scope><name>get_or_create_session</name></member>
       <member refid="classhttp__server_1a03440381bb1a27bd8bf77bb396645497" prot="public" virt="non-virtual"><scope>http_server</scope><name>get_session</name></member>
-      <member refid="classhttp__server_1a410866c3b085e12448cf37e975e857aa" prot="private" virt="non-virtual"><scope>http_server</scope><name>handle_client</name></member>
+      <member refid="classhttp__server_1a42900572f80787d24b7e53586a4a31e3" prot="private" virt="non-virtual"><scope>http_server</scope><name>handle_client</name></member>
       <member refid="classhttp__server_1a1a6b049d0e2b5a37dacab05a10a0d048" prot="private" virt="non-virtual"><scope>http_server</scope><name>handle_request_with_forward</name></member>
       <member refid="classhttp__server_1a7b7f5de4c7c6eadc0012134d33f96cc2" prot="public" virt="non-virtual"><scope>http_server</scope><name>http_server</name></member>
       <member refid="classhttp__server_1aba4ee10f91e7ed646e3f49c5d7bf4a1f" prot="public" virt="non-virtual"><scope>http_server</scope><name>http_server</name></member>
@@ -968,7 +968,7 @@
       <member refid="classhttp__server_1a755df815f0f63dae3a202c876d4ad75b" prot="public" virt="non-virtual"><scope>http_server</scope><name>socket_type</name></member>
       <member refid="classhttp__server_1a16d4679ab288d1c2a76aa52b05d87650" prot="public" virt="non-virtual"><scope>http_server</scope><name>start</name></member>
       <member refid="classhttp__server_1adab9d134cf5e2bffa2ba2a93701cb0d5" prot="public" virt="non-virtual"><scope>http_server</scope><name>stop</name></member>
-      <member refid="classhttp__server_1ac294af9c31ade0fd6842a680fd435a37" prot="private" virt="non-virtual"><scope>http_server</scope><name>try_websocket_upgrade</name></member>
+      <member refid="classhttp__server_1aa28f56a99268858ee3a8c228e0481b3b" prot="private" virt="non-virtual"><scope>http_server</scope><name>try_websocket_upgrade</name></member>
       <member refid="classhttp__server_1a8f03753ab36550d253352f4c3ba35888" prot="public" virt="non-virtual"><scope>http_server</scope><name>websocket</name></member>
       <member refid="classhttp__server_1a4555bf3aa9e757021d7668978439dd01" prot="public" virt="non-virtual"><scope>http_server</scope><name>websocket</name></member>
       <member refid="classhttp__server_1ab6a954520676d17ebc039639b2f1fa57" prot="private" virt="non-virtual"><scope>http_server</scope><name>ws_server_</name></member>

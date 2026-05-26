@@ -8,8 +8,8 @@ NEFORCE_BEGIN_NAMESPACE__
 pgsql_prepared_statement::pgsql_prepared_statement(::PGconn* conn, string sql) :
 conn_(conn),
 sql_(move(sql)) {
-    static _NEFORCE atomic<uint64_t> stmt_counter{0};
-    stmt_name_ = "pstmt_" + _NEFORCE to_string(stmt_counter++);
+    static atomic<uint64_t> stmt_counter{0};
+    stmt_name_ = "pstmt_" + to_string(stmt_counter++);
 
     size_t pos = 0;
     uint32_t max_param = 0;
@@ -54,7 +54,7 @@ pgsql_prepared_statement::~pgsql_prepared_statement() {
     }
 
     try {
-        const string deallocate_sql = "DEALLOCATE " + _NEFORCE move(stmt_name_);
+        const string deallocate_sql = "DEALLOCATE " + move(stmt_name_);
         ::PGresult* result = ::PQexec(conn_, deallocate_sql.data());
         if (result != nullptr) {
             ::PQclear(result);
@@ -87,15 +87,15 @@ bool pgsql_prepared_statement::bind_param(const uint32_t index, const string_vie
 }
 
 bool pgsql_prepared_statement::bind_param(const uint32_t index, const int32_t value) {
-    return bind_param(index, _NEFORCE to_string(value));
+    return bind_param(index, to_string(value));
 }
 
 bool pgsql_prepared_statement::bind_param(const uint32_t index, const int64_t value) {
-    return bind_param(index, _NEFORCE to_string(value));
+    return bind_param(index, to_string(value));
 }
 
 bool pgsql_prepared_statement::bind_param(const uint32_t index, const float64_t value) {
-    return bind_param(index, _NEFORCE to_string(value));
+    return bind_param(index, to_string(value));
 }
 
 bool pgsql_prepared_statement::bind_param(const uint32_t index, const cbyte_view value) {

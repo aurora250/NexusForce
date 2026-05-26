@@ -46,28 +46,28 @@ ini_builder& ini_builder::value(string value) {
 
 ini_builder& ini_builder::value(const int value) {
     test_exception();
-    current_section_->set_property(current_key_, _NEFORCE to_string(value));
+    current_section_->set_property(current_key_, to_string(value));
     current_key_.clear();
     return *this;
 }
 
 ini_builder& ini_builder::value(const int64_t value) {
     test_exception();
-    current_section_->set_property(current_key_, _NEFORCE to_string(value));
+    current_section_->set_property(current_key_, to_string(value));
     current_key_.clear();
     return *this;
 }
 
 ini_builder& ini_builder::value(const double value) {
     test_exception();
-    current_section_->set_property(current_key_, _NEFORCE to_string(value));
+    current_section_->set_property(current_key_, to_string(value));
     current_key_.clear();
     return *this;
 }
 
 ini_builder& ini_builder::value(const bool value) {
     test_exception();
-    current_section_->set_property(current_key_, _NEFORCE to_string(value));
+    current_section_->set_property(current_key_, to_string(value));
     current_key_.clear();
     return *this;
 }

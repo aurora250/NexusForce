@@ -29,7 +29,7 @@ path_tree::node::ptr path_tree::node::find_child(const string_view name) const n
 
 void path_tree::node::add_child(ptr child) {
     child->parent_ = shared_from_this();
-    children_.push_back(_NEFORCE move(child));
+    children_.push_back(move(child));
 }
 
 bool path_tree::node::remove_child(const string_view name) noexcept {
@@ -240,7 +240,7 @@ size_t path_tree::size() const {
         return 0;
     }
     size_t count = 0;
-    traverse_dfs([&](const node& /*n*/) -> visit_result {
+    traverse_dfs([&count](const node& /*n*/) -> visit_result {
         ++count;
         return visit_result::proceed;
     });
@@ -252,7 +252,7 @@ size_t path_tree::max_depth() const {
         return 0;
     }
     size_t max_d = 0;
-    traverse_dfs([&](const node& n) -> visit_result {
+    traverse_dfs([&max_d](const node& n) -> visit_result {
         max_d = max(max_d, n.depth());
         return visit_result::proceed;
     });
@@ -267,7 +267,7 @@ path_tree::node::ptr path_tree::find(const path& p) const {
     const path target = p.absolute();
 
     node::ptr result;
-    traverse_dfs([&](const node& n) -> visit_result {
+    traverse_dfs([&result, &target](const node& n) -> visit_result {
         if (n.get_path() == target) {
             result = const_cast<node&>(n).shared_from_this();
             return visit_result::stop;
@@ -278,7 +278,7 @@ path_tree::node::ptr path_tree::find(const path& p) const {
 }
 
 vector<path_tree::node::ptr> path_tree::find_all(const string_view name) const {
-    return find_if([&](const node& n) { return n.get_path().filename() == name; });
+    return find_if([name](const node& n) { return n.get_path().filename() == name; });
 }
 
 vector<path_tree::node::ptr> path_tree::find_if(const filter& f) const {
@@ -288,7 +288,7 @@ vector<path_tree::node::ptr> path_tree::find_if(const filter& f) const {
 }
 
 vector<path_tree::node::ptr> path_tree::find_by_extension(const string_view ext) const {
-    return find_if([&](const node& n) { return n.is_file() && n.get_path().extension() == ext; });
+    return find_if([ext](const node& n) { return n.is_file() && n.get_path().extension() == ext; });
 }
 
 void path_tree::collect_impl(const node::ptr& current, const filter& f, vector<node::ptr>& result) {
@@ -366,7 +366,7 @@ void path_tree::traverse_bfs(const visitor& visitor) const {
 }
 
 void path_tree::traverse_files(const visitor& visitor) const {
-    traverse_dfs([&](const node& n) -> visit_result {
+    traverse_dfs([&visitor](const node& n) -> visit_result {
         if (n.is_file()) {
             return visitor(n);
         }
@@ -375,7 +375,7 @@ void path_tree::traverse_files(const visitor& visitor) const {
 }
 
 void path_tree::traverse_dirs(const visitor& visitor) const {
-    traverse_dfs([&](const node& n) -> visit_result {
+    traverse_dfs([&visitor](const node& n) -> visit_result {
         if (n.is_directory()) {
             return visitor(n);
         }
@@ -468,9 +468,9 @@ void path_tree::merge(const path_tree& other) {
         root_ = make_shared<node>(other.root_->get_path(), other.root_->type(), 0);
     }
 
-    other.traverse_dfs([&](const node& n) -> visit_result {
+    other.traverse_dfs([this](const node& n) -> visit_result {
         if (!n.is_root()) {
-            insert(n.get_path(), n.type());
+            this->insert(n.get_path(), n.type());
         }
         return visit_result::proceed;
     });
@@ -544,7 +544,7 @@ path_tree::node::ptr path_tree::prune_impl(const node::ptr& src, const filter& f
 
 vector<path> path_tree::all_paths() const {
     vector<path> result;
-    traverse_dfs([&](const node& n) -> visit_result {
+    traverse_dfs([&result](const node& n) -> visit_result {
         result.push_back(n.get_path());
         return visit_result::proceed;
     });
@@ -553,7 +553,7 @@ vector<path> path_tree::all_paths() const {
 
 vector<path> path_tree::all_file_paths() const {
     vector<path> result;
-    traverse_files([&](const node& n) -> visit_result {
+    traverse_files([&result](const node& n) -> visit_result {
         result.push_back(n.get_path());
         return visit_result::proceed;
     });
@@ -562,7 +562,7 @@ vector<path> path_tree::all_file_paths() const {
 
 vector<path> path_tree::all_dir_paths() const {
     vector<path> result;
-    traverse_dirs([&](const node& n) -> visit_result {
+    traverse_dirs([&result](const node& n) -> visit_result {
         result.push_back(n.get_path());
         return visit_result::proceed;
     });

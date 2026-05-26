@@ -13,7 +13,7 @@ namespace {
             result += "host=" + config.host + " ";
         }
         if (config.port) {
-            result += "port=" + _NEFORCE to_string(config.port) + " ";
+            result += "port=" + to_string(config.port) + " ";
         }
         if (!config.database.empty()) {
             result += "dbname=" + config.database + " ";

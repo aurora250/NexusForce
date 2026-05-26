@@ -23,11 +23,12 @@ var searchData=
   ['equal_5fto_3c_20key_20_3e_20',['equal_to&lt; Key &gt;',['../structequal__to.html',1,'']]],
   ['equal_5fto_3c_20t_20_2a_20_3e_21',['equal_to&lt; T * &gt;',['../structequal__to.html',1,'']]],
   ['equal_5fto_3c_20type_5fid_20_3e_22',['equal_to&lt; type_id &gt;',['../structequal__to.html',1,'']]],
-  ['equal_5fto_3c_20value_20_3e_23',['equal_to&lt; Value &gt;',['../structequal__to.html',1,'']]],
-  ['equal_5fto_3c_20void_20_3e_24',['equal_to&lt; void &gt;',['../structequal__to_3_01void_01_4.html',1,'']]],
-  ['exact_5farg_5fconstruct_5ftag_25',['exact_arg_construct_tag',['../structexact__arg__construct__tag.html',1,'']]],
-  ['exception_26',['exception',['../structexception.html',1,'']]],
-  ['exception_5fptr_27',['exception_ptr',['../classexception__ptr.html',1,'']]],
-  ['exception_5fwrapper_28',['exception_wrapper',['../classexception__wrapper.html',1,'']]],
-  ['extent_29',['extent',['../structextent.html',1,'']]]
+  ['equal_5fto_3c_20uint16_5ft_20_3e_23',['equal_to&lt; uint16_t &gt;',['../structequal__to.html',1,'']]],
+  ['equal_5fto_3c_20value_20_3e_24',['equal_to&lt; Value &gt;',['../structequal__to.html',1,'']]],
+  ['equal_5fto_3c_20void_20_3e_25',['equal_to&lt; void &gt;',['../structequal__to_3_01void_01_4.html',1,'']]],
+  ['exact_5farg_5fconstruct_5ftag_26',['exact_arg_construct_tag',['../structexact__arg__construct__tag.html',1,'']]],
+  ['exception_27',['exception',['../structexception.html',1,'']]],
+  ['exception_5fptr_28',['exception_ptr',['../classexception__ptr.html',1,'']]],
+  ['exception_5fwrapper_29',['exception_wrapper',['../classexception__wrapper.html',1,'']]],
+  ['extent_30',['extent',['../structextent.html',1,'']]]
 ];

@@ -100,15 +100,25 @@ $(function(){initNavTree('classprocess.html','','classprocess-members'); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 类</h2></td></tr>
-<tr class="memitem:state_5Finfo" id="r_state_5Finfo"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structprocess_1_1state__info.html">state_info</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">进程信息结构  <a href="structprocess_1_1state__info.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:memory_5Finfo" id="r_memory_5Finfo"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structprocess_1_1memory__info.html">memory_info</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">进程内存信息  <a href="structprocess_1_1memory__info.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:time_5Finfo" id="r_time_5Finfo"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structprocess_1_1time__info.html">time_info</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">进程时间信息  <a href="structprocess_1_1time__info.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:shell_5Fresult" id="r_shell_5Fresult"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structprocess_1_1shell__result.html">shell_result</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">shell 命令执行结果  <a href="structprocess_1_1shell__result.html#details">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public 类型</h2></td></tr>
+<tr class="memitem:a372470dfa6edcf9a6b8c9dff60738dc1" id="r_a372470dfa6edcf9a6b8c9dff60738dc1"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1">state</a> { <br />
+&#160;&#160;<a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1a75101dcdfc88455bcafc9e53e0b06689">running</a>
+, <a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1a735fda5d72b5c650f3f0435195a211bd">suspended</a>
+, <a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1af0a0bfe6bc7d2c58d2989034f83183e0">stopped</a>
+, <a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1ab854d4deac1316c8d36e519393f3f2ae">exited</a>
+, <br />
+&#160;&#160;<a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1aad921d60486366258809553a3db49a4a">unknown</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a372470dfa6edcf9a6b8c9dff60738dc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">进程状态枚举  <a href="#a372470dfa6edcf9a6b8c9dff60738dc1">更多...</a><br /></td></tr>
 <tr class="memitem:acfd865e47b9c3a8b63da86bc85f11242" id="r_acfd865e47b9c3a8b63da86bc85f11242"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#acfd865e47b9c3a8b63da86bc85f11242">permission</a> { <br />
 &#160;&#160;<a class="el" href="#acfd865e47b9c3a8b63da86bc85f11242aecae13117d6f0584c25a9da6c8f8415e">read</a> = 0x01
 , <a class="el" href="#acfd865e47b9c3a8b63da86bc85f11242aefb2a684e4afb7d55e6147fbe5a332ee">write</a> = 0x02
@@ -120,51 +130,165 @@ Public 类型</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="memdesc:acfd865e47b9c3a8b63da86bc85f11242"><td class="mdescLeft">&#160;</td><td class="mdescRight">进程权限枚举  <a href="#acfd865e47b9c3a8b63da86bc85f11242">更多...</a><br /></td></tr>
-<tr class="memitem:a372470dfa6edcf9a6b8c9dff60738dc1" id="r_a372470dfa6edcf9a6b8c9dff60738dc1"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1">state</a> { <br />
-&#160;&#160;<a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1a75101dcdfc88455bcafc9e53e0b06689">running</a>
-, <a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1a735fda5d72b5c650f3f0435195a211bd">suspended</a>
-, <a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1af0a0bfe6bc7d2c58d2989034f83183e0">stopped</a>
-, <a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1ab854d4deac1316c8d36e519393f3f2ae">exited</a>
-, <br />
-&#160;&#160;<a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1aad921d60486366258809553a3db49a4a">unknown</a>
-<br />
+<tr class="memitem:a85cd03dae91e9e2a916de7b19044520d" id="r_a85cd03dae91e9e2a916de7b19044520d"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</a> { <a class="el" href="#a85cd03dae91e9e2a916de7b19044520dabd638b36d2814f488c1497cfe49eceea">privileged</a>
+, <a class="el" href="#a85cd03dae91e9e2a916de7b19044520da28770b882ab896ee0d7539ef7e4681ee">not_privileged</a>
+, <a class="el" href="#a85cd03dae91e9e2a916de7b19044520daad921d60486366258809553a3db49a4a">unknown</a>
  }</td></tr>
-<tr class="memdesc:a372470dfa6edcf9a6b8c9dff60738dc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">进程状态枚举  <a href="#a372470dfa6edcf9a6b8c9dff60738dc1">更多...</a><br /></td></tr>
+<tr class="memdesc:a85cd03dae91e9e2a916de7b19044520d"><td class="mdescLeft">&#160;</td><td class="mdescRight">进程特权级别  <a href="#a85cd03dae91e9e2a916de7b19044520d">更多...</a><br /></td></tr>
+<tr class="memitem:a09e419ffd86bcf6a536ecd9ddfe895d1" id="r_a09e419ffd86bcf6a536ecd9ddfe895d1"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1">elevation_tool</a> { <a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1ae271e2d9f011df547b9b98db5a3f287a">auto_</a>
+, <a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1ad338b3f0f405eb5e51c8cc1e5ca66f02">sudo</a>
+, <a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1a823735810c73ae1ef92c4985e0222a32">pkexec</a>
+ }</td></tr>
+<tr class="memdesc:a09e419ffd86bcf6a536ecd9ddfe895d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">提权工具选择  <a href="#a09e419ffd86bcf6a536ecd9ddfe895d1">更多...</a><br /></td></tr>
 <tr class="memitem:ab91bd774333ce8998d5100bb41be1da8" id="r_ab91bd774333ce8998d5100bb41be1da8"><td class="memItemLeft"><a id="ab91bd774333ce8998d5100bb41be1da8" name="ab91bd774333ce8998d5100bb41be1da8"></a>
 using&#160;</td><td class="memItemRight"><b>native_id_type</b></td></tr>
 <tr class="memdesc:ab91bd774333ce8998d5100bb41be1da8"><td class="mdescLeft">&#160;</td><td class="mdescRight">进程ID类型 <br /></td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:afd5c4dd719317354311b87ef18c5ea8b" id="r_afd5c4dd719317354311b87ef18c5ea8b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#afd5c4dd719317354311b87ef18c5ea8b">process</a> ()=default</td></tr>
+<tr class="memdesc:afd5c4dd719317354311b87ef18c5ea8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造  <br /></td></tr>
+<tr class="memitem:a554113f7890a643f4434695ced702924" id="r_a554113f7890a643f4434695ced702924"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a554113f7890a643f4434695ced702924">~process</a> ()</td></tr>
+<tr class="memdesc:a554113f7890a643f4434695ced702924"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构  <br /></td></tr>
+<tr class="memitem:acf7b6c831eb297ee42a2b980517edf0d" id="r_acf7b6c831eb297ee42a2b980517edf0d"><td class="memItemLeft"><a id="acf7b6c831eb297ee42a2b980517edf0d" name="acf7b6c831eb297ee42a2b980517edf0d"></a>
+&#160;</td><td class="memItemRight"><b>process</b> (<a class="el" href="classprocess.html">process</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:acf7b6c831eb297ee42a2b980517edf0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造 <br /></td></tr>
+<tr class="memitem:a791fb4987d270cce4ee03d4f355e193f" id="r_a791fb4987d270cce4ee03d4f355e193f"><td class="memItemLeft"><a id="a791fb4987d270cce4ee03d4f355e193f" name="a791fb4987d270cce4ee03d4f355e193f"></a>
+<a class="el" href="classprocess.html">process</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (<a class="el" href="classprocess.html">process</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a791fb4987d270cce4ee03d4f355e193f"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值 <br /></td></tr>
+<tr class="memitem:a83e591137cd9379e480bbe217381e64a" id="r_a83e591137cd9379e480bbe217381e64a"><td class="memItemLeft"><a class="el" href="classprocess.html">process</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a83e591137cd9379e480bbe217381e64a">set_work_dir</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;dir)</td></tr>
+<tr class="memdesc:a83e591137cd9379e480bbe217381e64a"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置子进程工作目录  <br /></td></tr>
+<tr class="memitem:aaa97f4fb9c28902a0c740102a632add3" id="r_aaa97f4fb9c28902a0c740102a632add3"><td class="memItemLeft"><a class="el" href="classprocess.html">process</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aaa97f4fb9c28902a0c740102a632add3">set_env</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;key, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;value)</td></tr>
+<tr class="memdesc:aaa97f4fb9c28902a0c740102a632add3"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置子进程环境变量  <br /></td></tr>
+<tr class="memitem:a44a52ee3fa64b6c7da293e27ee2e6071" id="r_a44a52ee3fa64b6c7da293e27ee2e6071"><td class="memItemLeft"><a class="el" href="classprocess.html">process</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a44a52ee3fa64b6c7da293e27ee2e6071">set_capture_stdout</a> (bool v=true)</td></tr>
+<tr class="memdesc:a44a52ee3fa64b6c7da293e27ee2e6071"><td class="mdescLeft">&#160;</td><td class="mdescRight">捕获标准输出  <br /></td></tr>
+<tr class="memitem:ab5d86f0c3462903994e14106252ce8b8" id="r_ab5d86f0c3462903994e14106252ce8b8"><td class="memItemLeft"><a class="el" href="classprocess.html">process</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab5d86f0c3462903994e14106252ce8b8">set_capture_stderr</a> (bool v=true)</td></tr>
+<tr class="memdesc:ab5d86f0c3462903994e14106252ce8b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">捕获标准错误  <br /></td></tr>
+<tr class="memitem:a2f25c2fdd0fea8b01e9b9d025bd95ba8" id="r_a2f25c2fdd0fea8b01e9b9d025bd95ba8"><td class="memItemLeft"><a class="el" href="classprocess.html">process</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2f25c2fdd0fea8b01e9b9d025bd95ba8">set_stdin_data</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;<a class="el" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>)</td></tr>
+<tr class="memdesc:a2f25c2fdd0fea8b01e9b9d025bd95ba8"><td class="mdescLeft">&#160;</td><td class="mdescRight">预设要写入子进程 stdin 的数据  <br /></td></tr>
+<tr class="memitem:a71e9006061494f2017d16304a6e0125d" id="r_a71e9006061494f2017d16304a6e0125d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a71e9006061494f2017d16304a6e0125d">start</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;executable, const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;args={})</td></tr>
+<tr class="memdesc:a71e9006061494f2017d16304a6e0125d"><td class="mdescLeft">&#160;</td><td class="mdescRight">启动子进程  <br /></td></tr>
+<tr class="memitem:a08dd4dadc59859b2488faf41b4b486a1" id="r_a08dd4dadc59859b2488faf41b4b486a1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a08dd4dadc59859b2488faf41b4b486a1">start_elevated</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;executable, const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;args={}, <a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1">elevation_tool</a> tool=<a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1ae271e2d9f011df547b9b98db5a3f287a">elevation_tool::auto_</a>)</td></tr>
+<tr class="memdesc:a08dd4dadc59859b2488faf41b4b486a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">以管理员/root 权限启动子进程  <br /></td></tr>
+<tr class="memitem:a2e4e873b41113a498b26a4e1d55b3333" id="r_a2e4e873b41113a498b26a4e1d55b3333"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a2e4e873b41113a498b26a4e1d55b3333">wait</a> (int timeout_ms=-1)</td></tr>
+<tr class="memdesc:a2e4e873b41113a498b26a4e1d55b3333"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待子进程退出  <br /></td></tr>
+<tr class="memitem:abb5fdbc705fa2636930c7c13fe584206" id="r_abb5fdbc705fa2636930c7c13fe584206"><td class="memItemLeft"><a id="abb5fdbc705fa2636930c7c13fe584206" name="abb5fdbc705fa2636930c7c13fe584206"></a>
+void&#160;</td><td class="memItemRight"><b>terminate</b> ()</td></tr>
+<tr class="memdesc:abb5fdbc705fa2636930c7c13fe584206"><td class="mdescLeft">&#160;</td><td class="mdescRight">终止子进程（SIGTERM → 短暂等待 → SIGKILL） <br /></td></tr>
+<tr class="memitem:a52208338a54f7d44ae3ab2e1ea1028df" id="r_a52208338a54f7d44ae3ab2e1ea1028df"><td class="memItemLeft"><a id="a52208338a54f7d44ae3ab2e1ea1028df" name="a52208338a54f7d44ae3ab2e1ea1028df"></a>
+void&#160;</td><td class="memItemRight"><b>suspend</b> ()</td></tr>
+<tr class="memdesc:a52208338a54f7d44ae3ab2e1ea1028df"><td class="mdescLeft">&#160;</td><td class="mdescRight">挂起子进程 <br /></td></tr>
+<tr class="memitem:ad0fc72309a07084788f2f808d2fe976a" id="r_ad0fc72309a07084788f2f808d2fe976a"><td class="memItemLeft"><a id="ad0fc72309a07084788f2f808d2fe976a" name="ad0fc72309a07084788f2f808d2fe976a"></a>
+void&#160;</td><td class="memItemRight"><b>resume</b> ()</td></tr>
+<tr class="memdesc:ad0fc72309a07084788f2f808d2fe976a"><td class="mdescLeft">&#160;</td><td class="mdescRight">恢复子进程 <br /></td></tr>
+<tr class="memitem:a39b0e2a79a5fd1c6887c35c6c7608c09" id="r_a39b0e2a79a5fd1c6887c35c6c7608c09"><td class="memItemLeft"><a id="a39b0e2a79a5fd1c6887c35c6c7608c09" name="a39b0e2a79a5fd1c6887c35c6c7608c09"></a>
+void&#160;</td><td class="memItemRight"><b>close</b> () noexcept</td></tr>
+<tr class="memdesc:a39b0e2a79a5fd1c6887c35c6c7608c09"><td class="mdescLeft">&#160;</td><td class="mdescRight">显式关闭进程句柄并清理资源 <br /></td></tr>
+<tr class="memitem:a634eb7995ac62bf44c49463e5780f406" id="r_a634eb7995ac62bf44c49463e5780f406"><td class="memItemLeft"><a id="a634eb7995ac62bf44c49463e5780f406" name="a634eb7995ac62bf44c49463e5780f406"></a>
+bool&#160;</td><td class="memItemRight"><b>is_running</b> () const</td></tr>
+<tr class="memdesc:a634eb7995ac62bf44c49463e5780f406"><td class="mdescLeft">&#160;</td><td class="mdescRight">子进程是否正在运行 <br /></td></tr>
+<tr class="memitem:a9df40bb72871d8f94b737047293405de" id="r_a9df40bb72871d8f94b737047293405de"><td class="memItemLeft"><a id="a9df40bb72871d8f94b737047293405de" name="a9df40bb72871d8f94b737047293405de"></a>
+<a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1">state</a>&#160;</td><td class="memItemRight"><b>get_state</b> () const</td></tr>
+<tr class="memdesc:a9df40bb72871d8f94b737047293405de"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取子进程状态 <br /></td></tr>
+<tr class="memitem:a398c8c5e19b9fa0825552b1cbf0eb637" id="r_a398c8c5e19b9fa0825552b1cbf0eb637"><td class="memItemLeft"><a id="a398c8c5e19b9fa0825552b1cbf0eb637" name="a398c8c5e19b9fa0825552b1cbf0eb637"></a>
+<a class="el" href="structprocess_1_1memory__info.html">memory_info</a>&#160;</td><td class="memItemRight"><b>get_memory_info</b> () const</td></tr>
+<tr class="memdesc:a398c8c5e19b9fa0825552b1cbf0eb637"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取子进程内存信息 <br /></td></tr>
+<tr class="memitem:a4975453c3a379c94e4e6586b13bb239a" id="r_a4975453c3a379c94e4e6586b13bb239a"><td class="memItemLeft"><a id="a4975453c3a379c94e4e6586b13bb239a" name="a4975453c3a379c94e4e6586b13bb239a"></a>
+<a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a>&#160;</td><td class="memItemRight"><b>id</b> () const noexcept</td></tr>
+<tr class="memdesc:a4975453c3a379c94e4e6586b13bb239a"><td class="mdescLeft">&#160;</td><td class="mdescRight">子进程 ID <br /></td></tr>
+<tr class="memitem:a74f6d6755a0beec5a2a3cc10408c3671" id="r_a74f6d6755a0beec5a2a3cc10408c3671"><td class="memItemLeft"><a id="a74f6d6755a0beec5a2a3cc10408c3671" name="a74f6d6755a0beec5a2a3cc10408c3671"></a>
+int&#160;</td><td class="memItemRight"><b>exit_code</b> () const noexcept</td></tr>
+<tr class="memdesc:a74f6d6755a0beec5a2a3cc10408c3671"><td class="mdescLeft">&#160;</td><td class="mdescRight">子进程退出码（仅在 <a class="el" href="#a2e4e873b41113a498b26a4e1d55b3333" title="等待子进程退出">wait()</a> 返回后有效） <br /></td></tr>
+<tr class="memitem:ab479b5aedbbf34d3e927b95bc718077e" id="r_ab479b5aedbbf34d3e927b95bc718077e"><td class="memItemLeft"><a id="ab479b5aedbbf34d3e927b95bc718077e" name="ab479b5aedbbf34d3e927b95bc718077e"></a>
+const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;&#160;</td><td class="memItemRight"><b>stdout_output</b> () const noexcept</td></tr>
+<tr class="memdesc:ab479b5aedbbf34d3e927b95bc718077e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取捕获的标准输出 <br /></td></tr>
+<tr class="memitem:a762b01632db7fde3736578de676902da" id="r_a762b01632db7fde3736578de676902da"><td class="memItemLeft"><a id="a762b01632db7fde3736578de676902da" name="a762b01632db7fde3736578de676902da"></a>
+const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;&#160;</td><td class="memItemRight"><b>stderr_output</b> () const noexcept</td></tr>
+<tr class="memdesc:a762b01632db7fde3736578de676902da"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取捕获的标准错误 <br /></td></tr>
+<tr class="memitem:aa91787da10fc84ddafd4306f5399d6ca" id="r_aa91787da10fc84ddafd4306f5399d6ca"><td class="memItemLeft"><a id="aa91787da10fc84ddafd4306f5399d6ca" name="aa91787da10fc84ddafd4306f5399d6ca"></a>
+void&#160;</td><td class="memItemRight"><b>write_stdin</b> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;<a class="el" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>)</td></tr>
+<tr class="memdesc:aa91787da10fc84ddafd4306f5399d6ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">向子进程的 stdin 写入数据 <br /></td></tr>
+<tr class="memitem:a42975de169bed2eae165ea223c763293" id="r_a42975de169bed2eae165ea223c763293"><td class="memItemLeft"><a id="a42975de169bed2eae165ea223c763293" name="a42975de169bed2eae165ea223c763293"></a>
+void&#160;</td><td class="memItemRight"><b>close_stdin</b> ()</td></tr>
+<tr class="memdesc:a42975de169bed2eae165ea223c763293"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭子进程的 stdin <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 静态 Public 成员函数</h2></td></tr>
-<tr class="memitem:a551db2a7ed84051785096e1fb0440aab" id="r_a551db2a7ed84051785096e1fb0440aab"><td class="memItemLeft">static <a class="el" href="structprocess_1_1state__info.html">state_info</a>&#160;</td><td class="memItemRight"><a class="el" href="#a551db2a7ed84051785096e1fb0440aab">create</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;executable, const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;args={}, bool capture_output=false)</td></tr>
-<tr class="memdesc:a551db2a7ed84051785096e1fb0440aab"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建新进程  <br /></td></tr>
-<tr class="memitem:af035e1cfd992aecc99e4a76b1b859e7b" id="r_af035e1cfd992aecc99e4a76b1b859e7b"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#af035e1cfd992aecc99e4a76b1b859e7b">wait_for</a> (<a class="el" href="structprocess_1_1state__info.html">state_info</a> &amp;info, int timeout_ms=-1)</td></tr>
-<tr class="memdesc:af035e1cfd992aecc99e4a76b1b859e7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待进程结束  <br /></td></tr>
-<tr class="memitem:a3860ef0f7524625536545c099a011041" id="r_a3860ef0f7524625536545c099a011041"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#a3860ef0f7524625536545c099a011041">terminate</a> (const <a class="el" href="structprocess_1_1state__info.html">state_info</a> &amp;info) noexcept</td></tr>
-<tr class="memdesc:a3860ef0f7524625536545c099a011041"><td class="mdescLeft">&#160;</td><td class="mdescRight">终止进程  <br /></td></tr>
-<tr class="memitem:a80739bcf05a7757d16cbb04f8586b839" id="r_a80739bcf05a7757d16cbb04f8586b839"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#a80739bcf05a7757d16cbb04f8586b839">suspend</a> (const <a class="el" href="structprocess_1_1state__info.html">state_info</a> &amp;info) noexcept</td></tr>
-<tr class="memdesc:a80739bcf05a7757d16cbb04f8586b839"><td class="mdescLeft">&#160;</td><td class="mdescRight">挂起进程  <br /></td></tr>
-<tr class="memitem:a2ab519914a1937c2a8208c46ab401068" id="r_a2ab519914a1937c2a8208c46ab401068"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#a2ab519914a1937c2a8208c46ab401068">resume</a> (const <a class="el" href="structprocess_1_1state__info.html">state_info</a> &amp;info) noexcept</td></tr>
-<tr class="memdesc:a2ab519914a1937c2a8208c46ab401068"><td class="mdescLeft">&#160;</td><td class="mdescRight">恢复进程  <br /></td></tr>
-<tr class="memitem:a09e8fb6881db82d104440a1280cd27fe" id="r_a09e8fb6881db82d104440a1280cd27fe"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#a09e8fb6881db82d104440a1280cd27fe">is_running</a> (const <a class="el" href="structprocess_1_1state__info.html">state_info</a> &amp;info) noexcept</td></tr>
-<tr class="memdesc:a09e8fb6881db82d104440a1280cd27fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查进程是否正在运行  <br /></td></tr>
-<tr class="memitem:a5093f2de932909931907884f73d71156" id="r_a5093f2de932909931907884f73d71156"><td class="memItemLeft">static <a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5093f2de932909931907884f73d71156">current_id</a> () noexcept</td></tr>
-<tr class="memdesc:a5093f2de932909931907884f73d71156"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前进程ID  <br /></td></tr>
-<tr class="memitem:ad481e63156d46e9148b474f9eb168bb9" id="r_ad481e63156d46e9148b474f9eb168bb9"><td class="memItemLeft">static <a class="el" href="structprocess_1_1memory__info.html">memory_info</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad481e63156d46e9148b474f9eb168bb9">get_memory_info</a> (const <a class="el" href="structprocess_1_1state__info.html">state_info</a> &amp;info)</td></tr>
-<tr class="memdesc:ad481e63156d46e9148b474f9eb168bb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取进程内存信息  <br /></td></tr>
-<tr class="memitem:a948a364ad23f37e1fd3c4327f06c2cd2" id="r_a948a364ad23f37e1fd3c4327f06c2cd2"><td class="memItemLeft">static <a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1">state</a>&#160;</td><td class="memItemRight"><a class="el" href="#a948a364ad23f37e1fd3c4327f06c2cd2">get_state</a> (const <a class="el" href="structprocess_1_1state__info.html">state_info</a> &amp;info)</td></tr>
-<tr class="memdesc:a948a364ad23f37e1fd3c4327f06c2cd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取进程状态  <br /></td></tr>
-<tr class="memitem:adeb213da5ad4c874de38a06ec11c3ecc" id="r_adeb213da5ad4c874de38a06ec11c3ecc"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#adeb213da5ad4c874de38a06ec11c3ecc">check_permission</a> (const <a class="el" href="structprocess_1_1state__info.html">state_info</a> &amp;info, <a class="el" href="#acfd865e47b9c3a8b63da86bc85f11242">permission</a> <a class="el" href="#acfd865e47b9c3a8b63da86bc85f11242">permission</a>)</td></tr>
-<tr class="memdesc:adeb213da5ad4c874de38a06ec11c3ecc"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查进程权限  <br /></td></tr>
+<tr class="memitem:a349506cd8b7cfb65c99fd22b6da1156f" id="r_a349506cd8b7cfb65c99fd22b6da1156f"><td class="memItemLeft">static <a class="el" href="structprocess_1_1shell__result.html">shell_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#a349506cd8b7cfb65c99fd22b6da1156f">execute_shell</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;command, int timeout_ms=-1)</td></tr>
+<tr class="memdesc:a349506cd8b7cfb65c99fd22b6da1156f"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行 shell 命令并获取输出  <br /></td></tr>
+<tr class="memitem:a4de847b0677456d1edf8fa7973f7f134" id="r_a4de847b0677456d1edf8fa7973f7f134"><td class="memItemLeft">static <a class="el" href="structprocess_1_1shell__result.html">shell_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4de847b0677456d1edf8fa7973f7f134">execute_elevated_shell</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;command, int timeout_ms=-1, <a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1">elevation_tool</a> tool=<a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1ae271e2d9f011df547b9b98db5a3f287a">elevation_tool::auto_</a>)</td></tr>
+<tr class="memdesc:a4de847b0677456d1edf8fa7973f7f134"><td class="mdescLeft">&#160;</td><td class="mdescRight">以管理员/root 权限执行 shell 命令  <br /></td></tr>
+<tr class="memitem:a5093f2de932909931907884f73d71156" id="r_a5093f2de932909931907884f73d71156"><td class="memItemLeft"><a id="a5093f2de932909931907884f73d71156" name="a5093f2de932909931907884f73d71156"></a>
+static <a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a>&#160;</td><td class="memItemRight"><b>current_id</b> () noexcept</td></tr>
+<tr class="memdesc:a5093f2de932909931907884f73d71156"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前进程 ID <br /></td></tr>
+<tr class="memitem:a7d0f21dba66731c0f94365ff54568a69" id="r_a7d0f21dba66731c0f94365ff54568a69"><td class="memItemLeft"><a id="a7d0f21dba66731c0f94365ff54568a69" name="a7d0f21dba66731c0f94365ff54568a69"></a>
+static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</a>&#160;</td><td class="memItemRight"><b>current_privilege_level</b> () noexcept</td></tr>
+<tr class="memdesc:a7d0f21dba66731c0f94365ff54568a69"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前进程的特权级别 <br /></td></tr>
 <tr class="memitem:ade856a6398b6024b871e123149573d9e" id="r_ade856a6398b6024b871e123149573d9e"><td class="memItemLeft">static <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ade856a6398b6024b871e123149573d9e">name</a> (<a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a> process_id)</td></tr>
-<tr class="memdesc:ade856a6398b6024b871e123149573d9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">根据进程ID获取进程名称  <br /></td></tr>
+<tr class="memdesc:ade856a6398b6024b871e123149573d9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">根据进程 ID 获取进程名称  <br /></td></tr>
+<tr class="memitem:a569c5edb19b71e4dc2befbec8e0c2209" id="r_a569c5edb19b71e4dc2befbec8e0c2209"><td class="memItemLeft">static <a class="el" href="structprocess_1_1memory__info.html">memory_info</a>&#160;</td><td class="memItemRight"><a class="el" href="#a569c5edb19b71e4dc2befbec8e0c2209">get_memory_info</a> (<a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a> process_id)</td></tr>
+<tr class="memdesc:a569c5edb19b71e4dc2befbec8e0c2209"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询任意进程的内存信息  <br /></td></tr>
+<tr class="memitem:a9e981fa039010fa4887dc963170aec6f" id="r_a9e981fa039010fa4887dc963170aec6f"><td class="memItemLeft">static <a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1">state</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9e981fa039010fa4887dc963170aec6f">get_state</a> (<a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a> process_id)</td></tr>
+<tr class="memdesc:a9e981fa039010fa4887dc963170aec6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询任意进程的运行状态  <br /></td></tr>
+<tr class="memitem:a04579cabe3f4c1d873e02654ec768f64" id="r_a04579cabe3f4c1d873e02654ec768f64"><td class="memItemLeft">static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</a>&#160;</td><td class="memItemRight"><a class="el" href="#a04579cabe3f4c1d873e02654ec768f64">get_privilege_level</a> (<a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a> process_id)</td></tr>
+<tr class="memdesc:a04579cabe3f4c1d873e02654ec768f64"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取指定进程的特权级别  <br /></td></tr>
+<tr class="memitem:a95e578a566573bbafc902c1a3e1bde62" id="r_a95e578a566573bbafc902c1a3e1bde62"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#a95e578a566573bbafc902c1a3e1bde62">check_permission</a> (<a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a> process_id, <a class="el" href="#acfd865e47b9c3a8b63da86bc85f11242">permission</a> perm)</td></tr>
+<tr class="memdesc:a95e578a566573bbafc902c1a3e1bde62"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查对指定进程的访问权限  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>进程管理类 </p>
-<p>提供静态方法用于创建和管理进程。 </p>
-
-<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00052">52</a> 行定义.</p>
+<p>支持 stdout/stderr 分离捕获、stdin 写入、工作目录和环境变量设置。</p>
+<div class="fragment"><div class="line"><a class="code hl_function" href="#afd5c4dd719317354311b87ef18c5ea8b">process</a> p;</div>
+<div class="line">p.<a class="code hl_function" href="#a44a52ee3fa64b6c7da293e27ee2e6071">set_capture_stdout</a>(<span class="keyword">true</span>)</div>
+<div class="line"> .<a class="code hl_function" href="#ab5d86f0c3462903994e14106252ce8b8">set_capture_stderr</a>(<span class="keyword">true</span>)</div>
+<div class="line"> .<a class="code hl_function" href="#a83e591137cd9379e480bbe217381e64a">set_work_dir</a>(<span class="stringliteral">&quot;/tmp&quot;</span>);</div>
+<div class="line">p.<a class="code hl_function" href="#a71e9006061494f2017d16304a6e0125d">start</a>(<span class="stringliteral">&quot;/bin/ls&quot;</span>, {<span class="stringliteral">&quot;-la&quot;</span>});</div>
+<div class="line"><span class="keywordtype">int</span> rc = p.<a class="code hl_function" href="#a2e4e873b41113a498b26a4e1d55b3333">wait</a>(5000);</div>
+<div class="line"><span class="keywordtype">string</span> out = p.<a class="code hl_function" href="#ab479b5aedbbf34d3e927b95bc718077e">stdout_output</a>();</div>
+<div class="ttc" id="aclassprocess_html_a2e4e873b41113a498b26a4e1d55b3333"><div class="ttname"><a href="#a2e4e873b41113a498b26a4e1d55b3333">process::wait</a></div><div class="ttdeci">int wait(int timeout_ms=-1)</div><div class="ttdoc">等待子进程退出</div></div>
+<div class="ttc" id="aclassprocess_html_a44a52ee3fa64b6c7da293e27ee2e6071"><div class="ttname"><a href="#a44a52ee3fa64b6c7da293e27ee2e6071">process::set_capture_stdout</a></div><div class="ttdeci">process &amp; set_capture_stdout(bool v=true)</div><div class="ttdoc">捕获标准输出</div></div>
+<div class="ttc" id="aclassprocess_html_a71e9006061494f2017d16304a6e0125d"><div class="ttname"><a href="#a71e9006061494f2017d16304a6e0125d">process::start</a></div><div class="ttdeci">void start(const string &amp;executable, const vector&lt; string &gt; &amp;args={})</div><div class="ttdoc">启动子进程</div></div>
+<div class="ttc" id="aclassprocess_html_a83e591137cd9379e480bbe217381e64a"><div class="ttname"><a href="#a83e591137cd9379e480bbe217381e64a">process::set_work_dir</a></div><div class="ttdeci">process &amp; set_work_dir(const string &amp;dir)</div><div class="ttdoc">设置子进程工作目录</div></div>
+<div class="ttc" id="aclassprocess_html_ab479b5aedbbf34d3e927b95bc718077e"><div class="ttname"><a href="#ab479b5aedbbf34d3e927b95bc718077e">process::stdout_output</a></div><div class="ttdeci">const string &amp; stdout_output() const noexcept</div><div class="ttdoc">获取捕获的标准输出</div><div class="ttdef"><b>定义</b> <a href="process_8hpp_source.html#l00298">process.hpp:298</a></div></div>
+<div class="ttc" id="aclassprocess_html_ab5d86f0c3462903994e14106252ce8b8"><div class="ttname"><a href="#ab5d86f0c3462903994e14106252ce8b8">process::set_capture_stderr</a></div><div class="ttdeci">process &amp; set_capture_stderr(bool v=true)</div><div class="ttdoc">捕获标准错误</div></div>
+<div class="ttc" id="aclassprocess_html_afd5c4dd719317354311b87ef18c5ea8b"><div class="ttname"><a href="#afd5c4dd719317354311b87ef18c5ea8b">process::process</a></div><div class="ttdeci">process()=default</div><div class="ttdoc">默认构造</div></div>
+</div><!-- fragment --> 
+<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00063">63</a> 行定义.</p>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
+<a id="a09e419ffd86bcf6a536ecd9ddfe895d1" name="a09e419ffd86bcf6a536ecd9ddfe895d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09e419ffd86bcf6a536ecd9ddfe895d1">&#9670;&#160;</a></span>elevation_tool</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1">process::elevation_tool</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>提权工具选择 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a09e419ffd86bcf6a536ecd9ddfe895d1ae271e2d9f011df547b9b98db5a3f287a" name="a09e419ffd86bcf6a536ecd9ddfe895d1ae271e2d9f011df547b9b98db5a3f287a"></a>auto_&#160;</td><td class="fielddoc"><p>Windows 忽略此选项；Linux 自动尝试 pkexec，回退至 sudo </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a09e419ffd86bcf6a536ecd9ddfe895d1ad338b3f0f405eb5e51c8cc1e5ca66f02" name="a09e419ffd86bcf6a536ecd9ddfe895d1ad338b3f0f405eb5e51c8cc1e5ca66f02"></a>sudo&#160;</td><td class="fielddoc"><p>Linux 强制使用 sudo 提权 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a09e419ffd86bcf6a536ecd9ddfe895d1a823735810c73ae1ef92c4985e0222a32" name="a09e419ffd86bcf6a536ecd9ddfe895d1a823735810c73ae1ef92c4985e0222a32"></a>pkexec&#160;</td><td class="fielddoc"><p>Linux 强制使用 pkexec 提权 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00138">138</a> 行定义.</p>
+
+</div>
+</div>
 <a id="acfd865e47b9c3a8b63da86bc85f11242" name="acfd865e47b9c3a8b63da86bc85f11242"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#acfd865e47b9c3a8b63da86bc85f11242">&#9670;&#160;</a></span>permission</h2>
 
@@ -186,7 +310,6 @@ using&#160;</td><td class="memItemRight"><b>native_id_type</b></td></tr>
 </div><div class="memdoc">
 
 <p>进程权限枚举 </p>
-<p>用于检查对进程的访问权限。 </p>
 <table class="fieldtable">
 <tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="acfd865e47b9c3a8b63da86bc85f11242aecae13117d6f0584c25a9da6c8f8415e" name="acfd865e47b9c3a8b63da86bc85f11242aecae13117d6f0584c25a9da6c8f8415e"></a>read&#160;</td><td class="fielddoc"><p>读取权限 </p>
 </td></tr>
@@ -203,6 +326,40 @@ using&#160;</td><td class="memItemRight"><b>native_id_type</b></td></tr>
 </table>
 
 <p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00116">116</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a85cd03dae91e9e2a916de7b19044520d" name="a85cd03dae91e9e2a916de7b19044520d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85cd03dae91e9e2a916de7b19044520d">&#9670;&#160;</a></span>privilege_level</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">process::privilege_level</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>进程特权级别 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a85cd03dae91e9e2a916de7b19044520dabd638b36d2814f488c1497cfe49eceea" name="a85cd03dae91e9e2a916de7b19044520dabd638b36d2814f488c1497cfe49eceea"></a>privileged&#160;</td><td class="fielddoc"><p>具有管理员/root 权限 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a85cd03dae91e9e2a916de7b19044520da28770b882ab896ee0d7539ef7e4681ee" name="a85cd03dae91e9e2a916de7b19044520da28770b882ab896ee0d7539ef7e4681ee"></a>not_privileged&#160;</td><td class="fielddoc"><p>普通权限 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a85cd03dae91e9e2a916de7b19044520daad921d60486366258809553a3db49a4a" name="a85cd03dae91e9e2a916de7b19044520daad921d60486366258809553a3db49a4a"></a>unknown&#160;</td><td class="fielddoc"><p>无法确定权限级别 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00129">129</a> 行定义.</p>
 
 </div>
 </div>
@@ -230,23 +387,76 @@ using&#160;</td><td class="memItemRight"><b>native_id_type</b></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a372470dfa6edcf9a6b8c9dff60738dc1a75101dcdfc88455bcafc9e53e0b06689" name="a372470dfa6edcf9a6b8c9dff60738dc1a75101dcdfc88455bcafc9e53e0b06689"></a>running&#160;</td><td class="fielddoc"><p>进程正在运行 </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a372470dfa6edcf9a6b8c9dff60738dc1a735fda5d72b5c650f3f0435195a211bd" name="a372470dfa6edcf9a6b8c9dff60738dc1a735fda5d72b5c650f3f0435195a211bd"></a>suspended&#160;</td><td class="fielddoc"><p>进程被挂起 </p>
+<tr><td class="fieldname"><a id="a372470dfa6edcf9a6b8c9dff60738dc1a735fda5d72b5c650f3f0435195a211bd" name="a372470dfa6edcf9a6b8c9dff60738dc1a735fda5d72b5c650f3f0435195a211bd"></a>suspended&#160;</td><td class="fielddoc"><p>进程已被挂起 </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a372470dfa6edcf9a6b8c9dff60738dc1af0a0bfe6bc7d2c58d2989034f83183e0" name="a372470dfa6edcf9a6b8c9dff60738dc1af0a0bfe6bc7d2c58d2989034f83183e0"></a>stopped&#160;</td><td class="fielddoc"><p>进程被停止 </p>
+<tr><td class="fieldname"><a id="a372470dfa6edcf9a6b8c9dff60738dc1af0a0bfe6bc7d2c58d2989034f83183e0" name="a372470dfa6edcf9a6b8c9dff60738dc1af0a0bfe6bc7d2c58d2989034f83183e0"></a>stopped&#160;</td><td class="fielddoc"><p>进程已停止 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a372470dfa6edcf9a6b8c9dff60738dc1ab854d4deac1316c8d36e519393f3f2ae" name="a372470dfa6edcf9a6b8c9dff60738dc1ab854d4deac1316c8d36e519393f3f2ae"></a>exited&#160;</td><td class="fielddoc"><p>进程已退出 </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a372470dfa6edcf9a6b8c9dff60738dc1aad921d60486366258809553a3db49a4a" name="a372470dfa6edcf9a6b8c9dff60738dc1aad921d60486366258809553a3db49a4a"></a>unknown&#160;</td><td class="fielddoc"><p>未知状态 </p>
+<tr><td class="fieldname"><a id="a372470dfa6edcf9a6b8c9dff60738dc1aad921d60486366258809553a3db49a4a" name="a372470dfa6edcf9a6b8c9dff60738dc1aad921d60486366258809553a3db49a4a"></a>unknown&#160;</td><td class="fielddoc"><p>进程状态未知 </p>
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00129">129</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00104">104</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="afd5c4dd719317354311b87ef18c5ea8b" name="afd5c4dd719317354311b87ef18c5ea8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd5c4dd719317354311b87ef18c5ea8b">&#9670;&#160;</a></span>process()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">process::process </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>默认构造 </p>
+<p>不启动任何进程 </p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a791fb4987d270cce4ee03d4f355e193f">operator=()</a>, <a class="el" href="#acf7b6c831eb297ee42a2b980517edf0d">process()</a>, <a class="el" href="#ab5d86f0c3462903994e14106252ce8b8">set_capture_stderr()</a>, <a class="el" href="#a44a52ee3fa64b6c7da293e27ee2e6071">set_capture_stdout()</a>, <a class="el" href="#aaa97f4fb9c28902a0c740102a632add3">set_env()</a>, <a class="el" href="#a2f25c2fdd0fea8b01e9b9d025bd95ba8">set_stdin_data()</a>, <a class="el" href="#a83e591137cd9379e480bbe217381e64a">set_work_dir()</a> , 以及 <a class="el" href="#a554113f7890a643f4434695ced702924">~process()</a>.</p>
+
+</div>
+</div>
+<a id="a554113f7890a643f4434695ced702924" name="a554113f7890a643f4434695ced702924"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a554113f7890a643f4434695ced702924">&#9670;&#160;</a></span>~process()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">process::~process </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>析构 </p>
+<p>自动终止未退出的子进程并清理资源 </p>
+
+<p class="reference">引用了 <a class="el" href="#afd5c4dd719317354311b87ef18c5ea8b">process()</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="adeb213da5ad4c874de38a06ec11c3ecc" name="adeb213da5ad4c874de38a06ec11c3ecc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adeb213da5ad4c874de38a06ec11c3ecc">&#9670;&#160;</a></span>check_permission()</h2>
+<a id="a95e578a566573bbafc902c1a3e1bde62" name="a95e578a566573bbafc902c1a3e1bde62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95e578a566573bbafc902c1a3e1bde62">&#9670;&#160;</a></span>check_permission()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -257,12 +467,12 @@ using&#160;</td><td class="memItemRight"><b>native_id_type</b></td></tr>
         <tr>
           <td class="memname">bool process::check_permission </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structprocess_1_1state__info.html">state_info</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>info</em></span>, </td>
+          <td class="paramtype"><a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a></td>          <td class="paramname"><span class="paramname"><em>process_id</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#acfd865e47b9c3a8b63da86bc85f11242">permission</a></td>          <td class="paramname"><span class="paramname"><em>permission</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#acfd865e47b9c3a8b63da86bc85f11242">permission</a></td>          <td class="paramname"><span class="paramname"><em>perm</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -272,24 +482,24 @@ using&#160;</td><td class="memItemRight"><b>native_id_type</b></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>检查进程权限 </p>
+<p>检查对指定进程的访问权限 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">info</td><td>进程信息 </td></tr>
-    <tr><td class="paramname">permission</td><td>要检查的权限 </td></tr>
+    <tr><td class="paramname">process_id</td><td>目标进程 ID </td></tr>
+    <tr><td class="paramname">perm</td><td>要检查的权限 </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>是否拥有指定权限 </dd></dl>
+<dl class="section return"><dt>返回</dt><dd>是否拥有该权限 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="#adeb213da5ad4c874de38a06ec11c3ecc">check_permission()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a95e578a566573bbafc902c1a3e1bde62">check_permission()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="#adeb213da5ad4c874de38a06ec11c3ecc">check_permission()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#a95e578a566573bbafc902c1a3e1bde62">check_permission()</a>.</p>
 
 </div>
 </div>
-<a id="a551db2a7ed84051785096e1fb0440aab" name="a551db2a7ed84051785096e1fb0440aab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a551db2a7ed84051785096e1fb0440aab">&#9670;&#160;</a></span>create()</h2>
+<a id="a4de847b0677456d1edf8fa7973f7f134" name="a4de847b0677456d1edf8fa7973f7f134"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4de847b0677456d1edf8fa7973f7f134">&#9670;&#160;</a></span>execute_elevated_shell()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -298,49 +508,52 @@ using&#160;</td><td class="memItemRight"><b>native_id_type</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structprocess_1_1state__info.html">state_info</a> process::create </td>
+          <td class="memname"><a class="el" href="structprocess_1_1shell__result.html">shell_result</a> process::execute_elevated_shell </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>executable</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>command</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>args</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>, </td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span><span class="paramdefsep"> = </span><span class="paramdefval">-1</span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>capture_output</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1">elevation_tool</a></td>          <td class="paramname"><span class="paramname"><em>tool</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1ae271e2d9f011df547b9b98db5a3f287a">elevation_tool::auto_</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>创建新进程 </p>
+<p>以管理员/root 权限执行 shell 命令 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">executable</td><td>可执行文件路径 </td></tr>
-    <tr><td class="paramname">args</td><td>命令行参数列表 </td></tr>
-    <tr><td class="paramname">capture_output</td><td>是否捕获标准输出 </td></tr>
+    <tr><td class="paramname">command</td><td>命令字符串 </td></tr>
+    <tr><td class="paramname">timeout_ms</td><td>超时毫秒，-1 无限等待 </td></tr>
+    <tr><td class="paramname">tool</td><td>提权工具选择 </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>进程信息结构 </dd></dl>
+<dl class="section return"><dt>返回</dt><dd>包含退出码和空输出的 <a class="el" href="structprocess_1_1shell__result.html" title="shell 命令执行结果">shell_result</a> </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structprocess__exception.html" title="进程操作异常">process_exception</a></td><td>创建失败时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structprocess__exception.html" title="进程操作异常">process_exception</a></td><td>执行失败或超时 </td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>注解</dt><dd>不捕获输出 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="process_8hpp_source.html#l00139">auto_</a>.</p>
 
 </div>
 </div>
-<a id="a5093f2de932909931907884f73d71156" name="a5093f2de932909931907884f73d71156"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5093f2de932909931907884f73d71156">&#9670;&#160;</a></span>current_id()</h2>
+<a id="a349506cd8b7cfb65c99fd22b6da1156f" name="a349506cd8b7cfb65c99fd22b6da1156f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a349506cd8b7cfb65c99fd22b6da1156f">&#9670;&#160;</a></span>execute_shell()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -349,26 +562,43 @@ using&#160;</td><td class="memItemRight"><b>native_id_type</b></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a> process::current_id </td>
+          <td class="memname"><a class="el" href="structprocess_1_1shell__result.html">shell_result</a> process::execute_shell </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>command</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span><span class="paramdefsep"> = </span><span class="paramdefval">-1</span>&#160;)</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>获取当前进程ID </p>
-<dl class="section return"><dt>返回</dt><dd>当前进程ID </dd></dl>
+<p>执行 shell 命令并获取输出 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">command</td><td>命令字符串 </td></tr>
+    <tr><td class="paramname">timeout_ms</td><td>超时毫秒，-1 无限等待 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含退出码和合并的 stdout+stderr 的 <a class="el" href="structprocess_1_1shell__result.html" title="shell 命令执行结果">shell_result</a> </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structprocess__exception.html" title="进程操作异常">process_exception</a></td><td>执行失败或超时 </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a id="ad481e63156d46e9148b474f9eb168bb9" name="ad481e63156d46e9148b474f9eb168bb9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad481e63156d46e9148b474f9eb168bb9">&#9670;&#160;</a></span>get_memory_info()</h2>
+<a id="a569c5edb19b71e4dc2befbec8e0c2209" name="a569c5edb19b71e4dc2befbec8e0c2209"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a569c5edb19b71e4dc2befbec8e0c2209">&#9670;&#160;</a></span>get_memory_info()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -379,7 +609,7 @@ using&#160;</td><td class="memItemRight"><b>native_id_type</b></td></tr>
         <tr>
           <td class="memname"><a class="el" href="structprocess_1_1memory__info.html">memory_info</a> process::get_memory_info </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structprocess_1_1state__info.html">state_info</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>info</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a></td>          <td class="paramname"><span class="paramname"><em>process_id</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -390,23 +620,57 @@ using&#160;</td><td class="memItemRight"><b>native_id_type</b></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>获取进程内存信息 </p>
+<p>查询任意进程的内存信息 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">info</td><td>进程信息 </td></tr>
+    <tr><td class="paramname">process_id</td><td>目标进程 ID </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>内存信息结构 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="#ad481e63156d46e9148b474f9eb168bb9">get_memory_info()</a>.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="#ad481e63156d46e9148b474f9eb168bb9">get_memory_info()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a398c8c5e19b9fa0825552b1cbf0eb637">get_memory_info()</a>.</p>
 
 </div>
 </div>
-<a id="a948a364ad23f37e1fd3c4327f06c2cd2" name="a948a364ad23f37e1fd3c4327f06c2cd2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a948a364ad23f37e1fd3c4327f06c2cd2">&#9670;&#160;</a></span>get_state()</h2>
+<a id="a04579cabe3f4c1d873e02654ec768f64" name="a04579cabe3f4c1d873e02654ec768f64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04579cabe3f4c1d873e02654ec768f64">&#9670;&#160;</a></span>get_privilege_level()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</a> process::get_privilege_level </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a></td>          <td class="paramname"><span class="paramname"><em>process_id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取指定进程的特权级别 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">process_id</td><td>目标进程 ID </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#a04579cabe3f4c1d873e02654ec768f64">get_privilege_level()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a04579cabe3f4c1d873e02654ec768f64">get_privilege_level()</a>.</p>
+
+</div>
+</div>
+<a id="a9e981fa039010fa4887dc963170aec6f" name="a9e981fa039010fa4887dc963170aec6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e981fa039010fa4887dc963170aec6f">&#9670;&#160;</a></span>get_state()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -417,7 +681,7 @@ using&#160;</td><td class="memItemRight"><b>native_id_type</b></td></tr>
         <tr>
           <td class="memname"><a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1">state</a> process::get_state </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structprocess_1_1state__info.html">state_info</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>info</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a></td>          <td class="paramname"><span class="paramname"><em>process_id</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -428,52 +692,15 @@ using&#160;</td><td class="memItemRight"><b>native_id_type</b></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>获取进程状态 </p>
+<p>查询任意进程的运行状态 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">info</td><td>进程信息 </td></tr>
+    <tr><td class="paramname">process_id</td><td>目标进程 ID </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>进程状态枚举值 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="#a948a364ad23f37e1fd3c4327f06c2cd2">get_state()</a>.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="#a948a364ad23f37e1fd3c4327f06c2cd2">get_state()</a>.</p>
-
-</div>
-</div>
-<a id="a09e8fb6881db82d104440a1280cd27fe" name="a09e8fb6881db82d104440a1280cd27fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09e8fb6881db82d104440a1280cd27fe">&#9670;&#160;</a></span>is_running()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool process::is_running </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structprocess_1_1state__info.html">state_info</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>info</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>检查进程是否正在运行 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">info</td><td>进程信息 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>是否正在运行 </dd></dl>
+<p class="reference">引用了 <a class="el" href="#a9df40bb72871d8f94b737047293405de">get_state()</a>.</p>
 
 </div>
 </div>
@@ -500,10 +727,10 @@ using&#160;</td><td class="memItemRight"><b>native_id_type</b></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>根据进程ID获取进程名称 </p>
+<p>根据进程 ID 获取进程名称 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">process_id</td><td>进程ID </td></tr>
+    <tr><td class="paramname">process_id</td><td>目标进程 ID </td></tr>
   </table>
   </dd>
 </dl>
@@ -515,144 +742,248 @@ using&#160;</td><td class="memItemRight"><b>native_id_type</b></td></tr>
 
 </div>
 </div>
-<a id="a2ab519914a1937c2a8208c46ab401068" name="a2ab519914a1937c2a8208c46ab401068"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ab519914a1937c2a8208c46ab401068">&#9670;&#160;</a></span>resume()</h2>
+<a id="ab5d86f0c3462903994e14106252ce8b8" name="ab5d86f0c3462903994e14106252ce8b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5d86f0c3462903994e14106252ce8b8">&#9670;&#160;</a></span>set_capture_stderr()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool process::resume </td>
+          <td class="memname"><a class="el" href="classprocess.html">process</a> &amp; process::set_capture_stderr </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structprocess_1_1state__info.html">state_info</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>info</em></span></td><td>)</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>v</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>恢复进程 </p>
+<p>捕获标准错误 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">info</td><td>进程信息 </td></tr>
+    <tr><td class="paramname">v</td><td>是否捕获，为 true 时 stderr 写入独立缓冲区 </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>是否成功恢复 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd5c4dd719317354311b87ef18c5ea8b">process()</a>.</p>
 
 </div>
 </div>
-<a id="a80739bcf05a7757d16cbb04f8586b839" name="a80739bcf05a7757d16cbb04f8586b839"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80739bcf05a7757d16cbb04f8586b839">&#9670;&#160;</a></span>suspend()</h2>
+<a id="a44a52ee3fa64b6c7da293e27ee2e6071" name="a44a52ee3fa64b6c7da293e27ee2e6071"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44a52ee3fa64b6c7da293e27ee2e6071">&#9670;&#160;</a></span>set_capture_stdout()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool process::suspend </td>
+          <td class="memname"><a class="el" href="classprocess.html">process</a> &amp; process::set_capture_stdout </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structprocess_1_1state__info.html">state_info</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>info</em></span></td><td>)</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>v</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>挂起进程 </p>
+<p>捕获标准输出 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">info</td><td>进程信息 </td></tr>
+    <tr><td class="paramname">v</td><td>是否捕获 </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>是否成功挂起 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd5c4dd719317354311b87ef18c5ea8b">process()</a>.</p>
 
 </div>
 </div>
-<a id="a3860ef0f7524625536545c099a011041" name="a3860ef0f7524625536545c099a011041"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3860ef0f7524625536545c099a011041">&#9670;&#160;</a></span>terminate()</h2>
+<a id="aaa97f4fb9c28902a0c740102a632add3" name="aaa97f4fb9c28902a0c740102a632add3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa97f4fb9c28902a0c740102a632add3">&#9670;&#160;</a></span>set_env()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool process::terminate </td>
+          <td class="memname"><a class="el" href="classprocess.html">process</a> &amp; process::set_env </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="structprocess_1_1state__info.html">state_info</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>info</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>终止进程 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">info</td><td>进程信息 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>返回</dt><dd>是否成功终止 </dd></dl>
-
-</div>
-</div>
-<a id="af035e1cfd992aecc99e4a76b1b859e7b" name="af035e1cfd992aecc99e4a76b1b859e7b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af035e1cfd992aecc99e4a76b1b859e7b">&#9670;&#160;</a></span>wait_for()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int process::wait_for </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structprocess_1_1state__info.html">state_info</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>info</em></span>, </td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span><span class="paramdefsep"> = </span><span class="paramdefval">-1</span>&#160;)</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>等待进程结束 </p>
+<p>设置子进程环境变量 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">info</td><td>进程信息 </td></tr>
-    <tr><td class="paramname">timeout_ms</td><td>超时时间（毫秒），-1表示无限等待 </td></tr>
+    <tr><td class="paramname">key</td><td>变量名 </td></tr>
+    <tr><td class="paramname">value</td><td>变量值 </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>进程退出码，-1表示超时或错误 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd5c4dd719317354311b87ef18c5ea8b">process()</a>.</p>
+
+</div>
+</div>
+<a id="a2f25c2fdd0fea8b01e9b9d025bd95ba8" name="a2f25c2fdd0fea8b01e9b9d025bd95ba8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f25c2fdd0fea8b01e9b9d025bd95ba8">&#9670;&#160;</a></span>set_stdin_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classprocess.html">process</a> &amp; process::set_stdin_data </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>预设要写入子进程 stdin 的数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>数据内容，在子进程启动后自动写入并关闭 stdin </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a> , 以及 <a class="el" href="#afd5c4dd719317354311b87ef18c5ea8b">process()</a>.</p>
+
+</div>
+</div>
+<a id="a83e591137cd9379e480bbe217381e64a" name="a83e591137cd9379e480bbe217381e64a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83e591137cd9379e480bbe217381e64a">&#9670;&#160;</a></span>set_work_dir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classprocess.html">process</a> &amp; process::set_work_dir </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>dir</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置子进程工作目录 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dir</td><td>工作目录路径 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#afd5c4dd719317354311b87ef18c5ea8b">process()</a>.</p>
+
+</div>
+</div>
+<a id="a71e9006061494f2017d16304a6e0125d" name="a71e9006061494f2017d16304a6e0125d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71e9006061494f2017d16304a6e0125d">&#9670;&#160;</a></span>start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void process::start </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>executable</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>args</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>启动子进程 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">executable</td><td>可执行文件路径 </td></tr>
+    <tr><td class="paramname">args</td><td>命令行参数列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structprocess__exception.html" title="进程操作异常">process_exception</a></td><td>启动失败时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a08dd4dadc59859b2488faf41b4b486a1" name="a08dd4dadc59859b2488faf41b4b486a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08dd4dadc59859b2488faf41b4b486a1">&#9670;&#160;</a></span>start_elevated()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void process::start_elevated </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>executable</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>args</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1">elevation_tool</a></td>          <td class="paramname"><span class="paramname"><em>tool</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1ae271e2d9f011df547b9b98db5a3f287a">elevation_tool::auto_</a></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>以管理员/root 权限启动子进程 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">executable</td><td>可执行文件路径 </td></tr>
+    <tr><td class="paramname">args</td><td>命令行参数列表 </td></tr>
+    <tr><td class="paramname">tool</td><td>提权工具 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structprocess__exception.html" title="进程操作异常">process_exception</a></td><td>启动失败或已设置了管道捕获时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>不捕获输出 </dd></dl>
+
+</div>
+</div>
+<a id="a2e4e873b41113a498b26a4e1d55b3333" name="a2e4e873b41113a498b26a4e1d55b3333"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e4e873b41113a498b26a4e1d55b3333">&#9670;&#160;</a></span>wait()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int process::wait </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span><span class="paramdefsep"> = </span><span class="paramdefval">-1</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>等待子进程退出 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout_ms</td><td>超时毫秒数，-1 表示无限等待 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>退出码，-1 超时 </dd></dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="structprocess__exception.html" title="进程操作异常">process_exception</a></td><td>等待失败时抛出 </td></tr>

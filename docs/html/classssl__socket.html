@@ -125,12 +125,14 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a23a2685c9657643210f24d9f52e9acd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">发送加密数据  <br /></td></tr>
 <tr class="memitem:a0607573c4459e1ea3cb7c95dceaf3f8a" id="r_a0607573c4459e1ea3cb7c95dceaf3f8a"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0607573c4459e1ea3cb7c95dceaf3f8a">receive</a> (<a class="el" href="classmemory__view.html">memory_view</a>&lt; char &gt; buffer, int flags=0) override</td></tr>
 <tr class="memdesc:a0607573c4459e1ea3cb7c95dceaf3f8a"><td class="mdescLeft">&#160;</td><td class="mdescRight">接收解密数据  <br /></td></tr>
+<tr class="memitem:ac93b5cdb322b13fce97428b4b366c228" id="r_ac93b5cdb322b13fce97428b4b366c228"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ac93b5cdb322b13fce97428b4b366c228">close</a> () noexcept override</td></tr>
+<tr class="memdesc:ac93b5cdb322b13fce97428b4b366c228"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭SSL连接和底层socket  <br /></td></tr>
 <tr class="memitem:adb1487480405a5778013113b583fed8c" id="r_adb1487480405a5778013113b583fed8c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#adb1487480405a5778013113b583fed8c">is_ssl</a> () const noexcept override</td></tr>
 <tr class="memdesc:adb1487480405a5778013113b583fed8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否为SSL/TLS socket  <br /></td></tr>
-<tr class="memitem:abef648a903726e8cb17ecda4ce5c14b0" id="r_abef648a903726e8cb17ecda4ce5c14b0"><td class="memItemLeft"><a class="el" href="classssl__stream.html">ssl_stream</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#abef648a903726e8cb17ecda4ce5c14b0">ssl</a> () noexcept</td></tr>
-<tr class="memdesc:abef648a903726e8cb17ecda4ce5c14b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取SSL流对象的引用  <br /></td></tr>
-<tr class="memitem:a1fdc33ea412b910bb9afc8cbeb07787e" id="r_a1fdc33ea412b910bb9afc8cbeb07787e"><td class="memItemLeft">const <a class="el" href="classssl__stream.html">ssl_stream</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a1fdc33ea412b910bb9afc8cbeb07787e">ssl</a> () const noexcept</td></tr>
-<tr class="memdesc:a1fdc33ea412b910bb9afc8cbeb07787e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取SSL流对象的常量引用  <br /></td></tr>
+<tr class="memitem:a83b1e2549b67189b505a0a1b3b117df4" id="r_a83b1e2549b67189b505a0a1b3b117df4"><td class="memItemLeft"><a class="el" href="classssl__stream.html">ssl_stream</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a83b1e2549b67189b505a0a1b3b117df4">ssl</a> ()</td></tr>
+<tr class="memdesc:a83b1e2549b67189b505a0a1b3b117df4"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取SSL流对象的引用  <br /></td></tr>
+<tr class="memitem:adfc138e89dbf0d8244579797a39d2878" id="r_adfc138e89dbf0d8244579797a39d2878"><td class="memItemLeft">const <a class="el" href="classssl__stream.html">ssl_stream</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#adfc138e89dbf0d8244579797a39d2878">ssl</a> () const</td></tr>
+<tr class="memdesc:adfc138e89dbf0d8244579797a39d2878"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取SSL流对象的常量引用  <br /></td></tr>
 <tr class="inherit_header pub_methods_classtcp__socket"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classtcp__socket')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="classtcp__socket.html">tcp_socket</a></td></tr>
 <tr class="memitem:a72e6e572e36c55fb4b110a315e79fe13 inherit pub_methods_classtcp__socket" id="r_a72e6e572e36c55fb4b110a315e79fe13"><td class="memItemLeft">
 &#160;</td><td class="memItemRight"><b>tcp_socket</b> ()=default</td></tr>
@@ -167,8 +169,6 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a2022ec8175200f4d69e925e3375f81b2 inherit pub_methods_classip__socket"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否为IPv6 socket  <br /></td></tr>
 <tr class="memitem:a50186a110e9b4e5c67aac5a23e021ace inherit pub_methods_classip__socket" id="r_a50186a110e9b4e5c67aac5a23e021ace"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="classip__socket.html#a50186a110e9b4e5c67aac5a23e021ace">connect</a> (const <a class="el" href="classip__address.html">ip_address</a> &amp;endpoint)</td></tr>
 <tr class="memdesc:a50186a110e9b4e5c67aac5a23e021ace inherit pub_methods_classip__socket"><td class="mdescLeft">&#160;</td><td class="mdescRight">连接到远程端点（TCP客户端）  <br /></td></tr>
-<tr class="memitem:a242bf63bfaf65fdb748d02ac8193dfb1 inherit pub_methods_classip__socket" id="r_a242bf63bfaf65fdb748d02ac8193dfb1"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="classip__socket.html#a242bf63bfaf65fdb748d02ac8193dfb1">close</a> () noexcept override</td></tr>
-<tr class="memdesc:a242bf63bfaf65fdb748d02ac8193dfb1 inherit pub_methods_classip__socket"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭socket  <br /></td></tr>
 <tr class="inherit_header pub_methods_classsocket__base"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classsocket__base')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="classsocket__base.html">socket_base</a></td></tr>
 <tr class="memitem:a94270ff7405e94a47c1d4681c7186027 inherit pub_methods_classsocket__base" id="r_a94270ff7405e94a47c1d4681c7186027"><td class="memItemLeft">
 &#160;</td><td class="memItemRight"><b>socket_base</b> ()</td></tr>
@@ -392,6 +392,36 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="ac93b5cdb322b13fce97428b4b366c228" name="ac93b5cdb322b13fce97428b4b366c228"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac93b5cdb322b13fce97428b4b366c228">&#9670;&#160;</a></span>close()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ssl_socket::close </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>关闭SSL连接和底层socket </p>
+<p>先发送SSL关闭通知，再关闭底层TCP socket。 </p>
+
+<p>重载 <a class="el" href="classip__socket.html#a242bf63bfaf65fdb748d02ac8193dfb1">ip_socket</a> .</p>
+
+</div>
+</div>
 <a id="a33d98abb79c38434ba74f2eb5834261e" name="a33d98abb79c38434ba74f2eb5834261e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a33d98abb79c38434ba74f2eb5834261e">&#9670;&#160;</a></span>init_client_ssl()</h2>
 
@@ -491,7 +521,11 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 
 <p>重载 <a class="el" href="classtcp__socket.html#a57397ce241cbe72787a8b452321c715a">tcp_socket</a> .</p>
 
-<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00163">163</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00170">170</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="ssl__socket_8hpp_source.html#l00170">is_ssl()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ssl__socket_8hpp_source.html#l00170">is_ssl()</a>.</p>
 
 </div>
 </div>
@@ -622,38 +656,8 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
 
 </div>
 </div>
-<a id="a1fdc33ea412b910bb9afc8cbeb07787e" name="a1fdc33ea412b910bb9afc8cbeb07787e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1fdc33ea412b910bb9afc8cbeb07787e">&#9670;&#160;</a></span>ssl() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="classssl__stream.html">ssl_stream</a> &amp; ssl_socket::ssl </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>获取SSL流对象的常量引用 </p>
-<dl class="section return"><dt>返回</dt><dd>SSL流常量引用 </dd></dl>
-
-<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00175">175</a> 行定义.</p>
-
-</div>
-</div>
-<a id="abef648a903726e8cb17ecda4ce5c14b0" name="abef648a903726e8cb17ecda4ce5c14b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abef648a903726e8cb17ecda4ce5c14b0">&#9670;&#160;</a></span>ssl() <span class="overload">[2/2]</span></h2>
+<a id="a83b1e2549b67189b505a0a1b3b117df4" name="a83b1e2549b67189b505a0a1b3b117df4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83b1e2549b67189b505a0a1b3b117df4">&#9670;&#160;</a></span>ssl() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -670,15 +674,57 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>获取SSL流对象的引用 </p>
 <dl class="section return"><dt>返回</dt><dd>SSL流引用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structssl__exception.html" title="SSL操作异常">ssl_exception</a></td><td>SSL未初始化时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00169">169</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00177">177</a> 行定义.</p>
+
+</div>
+</div>
+<a id="adfc138e89dbf0d8244579797a39d2878" name="adfc138e89dbf0d8244579797a39d2878"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfc138e89dbf0d8244579797a39d2878">&#9670;&#160;</a></span>ssl() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classssl__stream.html">ssl_stream</a> &amp; ssl_socket::ssl </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取SSL流对象的常量引用 </p>
+<dl class="section return"><dt>返回</dt><dd>SSL流常量引用 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structssl__exception.html" title="SSL操作异常">ssl_exception</a></td><td>SSL未初始化时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="ssl__socket_8hpp_source.html">ssl_socket.hpp</a> 第 <a class="el" href="ssl__socket_8hpp_source.html#l00189">189</a> 行定义.</p>
 
 </div>
 </div>

@@ -62,7 +62,7 @@ namespace {
         string escaped;
         escaped.reserve(cmd.size() + 2);
         escaped.push_back('"');
-        for (char ch: cmd) {
+        for (const char ch: cmd) {
             if (ch == '"') {
                 escaped.push_back('\\');
                 escaped.push_back('"');
@@ -79,7 +79,7 @@ namespace {
             return arg;
         }
         string escaped = "\"";
-        for (char c: arg) {
+        for (const char c: arg) {
             if (c == '\"') {
                 escaped += "\\\"";
             } else if (c == '\\') {
@@ -313,13 +313,13 @@ process& process::set_env(const string& key, const string& value) {
     return *this;
 }
 
-process& process::set_capture_stdout(bool v) {
+process& process::set_capture_stdout(const bool v) {
     NEFORCE_DEBUG_VERIFY(!started_, "Cannot configure after process has been started");
     capture_stdout_ = v;
     return *this;
 }
 
-process& process::set_capture_stderr(bool v) {
+process& process::set_capture_stderr(const bool v) {
     NEFORCE_DEBUG_VERIFY(!started_, "Cannot configure after process has been started");
     capture_stderr_ = v;
     return *this;
@@ -333,17 +333,17 @@ process& process::set_stdin_data(const string& data) {
 
 void process::reader_loop() {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    constexpr DWORD buf_size = MEMORY_BIG_ALLOC_THRESHHOLD;
+    constexpr ::DWORD buf_size = MEMORY_BIG_ALLOC_THRESHHOLD;
     char buffer[buf_size];
 
     while (reader_running_) {
         bool any_data = false;
 
         if (capture_stdout_) {
-            DWORD available = 0;
+            ::DWORD available = 0;
             if (::PeekNamedPipe(stdout_pipe_.native_read_handle(), nullptr, 0, nullptr, &available, nullptr) == TRUE &&
                 available > 0) {
-                DWORD bytes_read = 0;
+                ::DWORD bytes_read = 0;
                 if (::ReadFile(stdout_pipe_.native_read_handle(), buffer, buf_size - 1, &bytes_read, nullptr) == TRUE &&
                     bytes_read > 0) {
                     buffer[bytes_read] = '\0';
@@ -354,10 +354,10 @@ void process::reader_loop() {
         }
 
         if (capture_stderr_) {
-            DWORD available = 0;
+            ::DWORD available = 0;
             if (::PeekNamedPipe(stderr_pipe_.native_read_handle(), nullptr, 0, nullptr, &available, nullptr) == TRUE &&
                 available > 0) {
-                DWORD bytes_read = 0;
+                ::DWORD bytes_read = 0;
                 if (::ReadFile(stderr_pipe_.native_read_handle(), buffer, buf_size - 1, &bytes_read, nullptr) == TRUE &&
                     bytes_read > 0) {
                     buffer[bytes_read] = '\0';
@@ -367,8 +367,8 @@ void process::reader_loop() {
             }
         }
 
-        bool stdout_alive = capture_stdout_ && stdout_pipe_.is_valid();
-        bool stderr_alive = capture_stderr_ && stderr_pipe_.is_valid();
+        const bool stdout_alive = capture_stdout_ && stdout_pipe_.is_valid();
+        const bool stderr_alive = capture_stderr_ && stderr_pipe_.is_valid();
 
         if (!stdout_alive && !stderr_alive) {
             break;
@@ -479,7 +479,7 @@ void process::start(const string& executable, const vector<string>& args) {
             env_block_str.push_back('\0');
         }
         env_block_str.push_back('\0');
-        env_block = const_cast<char*>(env_block_str.data());
+        env_block = env_block_str.data();
     }
 
     ::PROCESS_INFORMATION pi;
@@ -639,8 +639,8 @@ void process::start(const string& executable, const vector<string>& args) {
 
     if (!stdin_data_.empty()) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        DWORD written = 0;
-        ::WriteFile(stdin_pipe_.native_write_handle(), stdin_data_.data(), static_cast<DWORD>(stdin_data_.size()),
+        ::DWORD written = 0;
+        ::WriteFile(stdin_pipe_.native_write_handle(), stdin_data_.data(), static_cast<::DWORD>(stdin_data_.size()),
                     &written, nullptr);
 #else
         stdin_pipe_.write(stdin_data_.data(), stdin_data_.size());
@@ -668,7 +668,7 @@ void process::start_elevated(const string& executable, const vector<string>& arg
     sei.nShow = SW_HIDE;
 
     if (::ShellExecuteExA(&sei) == FALSE) {
-        const DWORD err = ::GetLastError();
+        const ::DWORD err = ::GetLastError();
         if (err == ERROR_CANCELLED) {
             NEFORCE_THROW_EXCEPTION(process_exception("User cancelled elevation prompt"));
         }
@@ -957,7 +957,7 @@ void process::write_stdin(const string& data) {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD written = 0;
-    ::WriteFile(stdin_pipe_.native_write_handle(), data.data(), static_cast<DWORD>(data.size()), &written, nullptr);
+    ::WriteFile(stdin_pipe_.native_write_handle(), data.data(), static_cast<::DWORD>(data.size()), &written, nullptr);
 #else
     stdin_pipe_.write(data.data(), data.size());
 #endif
@@ -1214,21 +1214,21 @@ process::state process::get_state(native_id_type process_id) {
     }
 
     ::DWORD exit_code = 0;
-    state result = state::running;
+    auto result = state::running;
     if (::GetExitCodeProcess(hProcess, &exit_code) == TRUE) {
         if (exit_code != STILL_ACTIVE) {
             result = state::exited;
         } else {
-            const HANDLE hSnapshot = ::CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
+            const ::HANDLE hSnapshot = ::CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD, 0);
             if (hSnapshot != INVALID_HANDLE_VALUE) {
-                THREADENTRY32 te{};
+                ::THREADENTRY32 te{};
                 te.dwSize = sizeof(te);
                 if (::Thread32First(hSnapshot, &te) == TRUE) {
                     do {
                         if (te.th32OwnerProcessID == process_id) {
-                            const HANDLE hThread = ::OpenThread(THREAD_QUERY_INFORMATION, FALSE, te.th32ThreadID);
+                            const ::HANDLE hThread = ::OpenThread(THREAD_QUERY_INFORMATION, FALSE, te.th32ThreadID);
                             if (hThread != nullptr) {
-                                ::DWORD suspend_count = ::SuspendThread(hThread);
+                                const ::DWORD suspend_count = ::SuspendThread(hThread);
                                 if (suspend_count != static_cast<::DWORD>(-1)) {
                                     ::ResumeThread(hThread);
                                     if (suspend_count > 0) {

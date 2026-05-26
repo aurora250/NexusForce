@@ -1,13 +1,13 @@
 var classtcp__server__base =
 [
-    [ "client_handler_t", "classtcp__server__base.html#a32641f5767778e30b8c31b3d32441295", null ],
+    [ "client_handler_t", "classtcp__server__base.html#abef2c5b5cbfeda60f09e2c43f7b9a6ae", null ],
     [ "exception_handler_t", "classtcp__server__base.html#a5f608ddaffbd9596fd27cdfc6401a27b", null ],
     [ "tcp_server_base", "classtcp__server__base.html#afd3f0bf8e207d844dbedb1b8c6720e5c", null ],
     [ "~tcp_server_base", "classtcp__server__base.html#ae8163e7386fbe9d18a798e5a6e1f1b3e", null ],
     [ "accept_loop", "classtcp__server__base.html#a339fb280765125ff0e63bb3cb89bcb15", null ],
-    [ "accept_one", "classtcp__server__base.html#adba355ecdbc0013f1172b368c30107e1", null ],
+    [ "accept_one", "classtcp__server__base.html#a0f40159b08863e754d41ea0a32ff78ce", null ],
     [ "create_acceptor", "classtcp__server__base.html#ab04f76ce60e358af3452ca403ad8c2c3", null ],
-    [ "handle_client", "classtcp__server__base.html#a24bf1c8ad6716a8348518f48fad88eb2", null ],
+    [ "handle_client", "classtcp__server__base.html#ad0918dc0cbe8e5bb50e51efffb1cfbcb", null ],
     [ "is_running", "classtcp__server__base.html#aae7b9c4980b19196d0f8e34b428b3758", null ],
     [ "notify_stop", "classtcp__server__base.html#a6cfadb556ef18b029e0c510f143e833b", null ],
     [ "port", "classtcp__server__base.html#afb78680be84f7030e9af5fe6958f258b", null ],
@@ -22,5 +22,6 @@ var classtcp__server__base =
     [ "exception_handler_", "classtcp__server__base.html#a831cef70165579b406d091ded06b6a19", null ],
     [ "port_", "classtcp__server__base.html#aa38767b5f095b470707df772b5cb0107", null ],
     [ "running_", "classtcp__server__base.html#ae598f3ebdc396f44146ba8da6bed8f67", null ],
+    [ "worker_count_", "classtcp__server__base.html#a735bef21abd2a1a64c22fc2ebb9c9ec8", null ],
     [ "worker_threads_", "classtcp__server__base.html#aa8d9f9a53edb4699d0825cf499baba0c", null ]
 ];

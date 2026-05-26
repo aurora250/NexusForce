@@ -3135,26 +3135,51 @@
     <member refid="classdns__client_1aa052424faaea499d4134cf91a049d8e8" kind="variable"><name>cache_mutex_</name></member>
     <member refid="classdns__client_1ad1d637c5629c574e5436949bfbeaf90e" kind="variable"><name>cache_ttl_</name></member>
     <member refid="classdns__client_1a8d4ac78462aaba21b650d0eb3227f7f6" kind="variable"><name>use_tcp_</name></member>
-    <member refid="classdns__client_1a227907910aa82d6db4631909cf1dfa06" kind="function"><name>send_udp_query</name></member>
-    <member refid="classdns__client_1a9b95dff83aa9aff82fe476100288ba69" kind="function"><name>send_tcp_query</name></member>
+    <member refid="classdns__client_1ac09761177f39cbfb2d686889c3039e3e" kind="variable"><name>recursion_desired_</name></member>
+    <member refid="classdns__client_1a894b059679777b4b6e1fe211c32e7245" kind="variable"><name>edns_udp_payload_</name></member>
+    <member refid="classdns__client_1af52771a4616843edf7c58d45cacb60bb" kind="variable"><name>dnssec_ok_</name></member>
+    <member refid="classdns__client_1aa45984d89df591f3f7f3bff0dc249946" kind="variable"><name>shared_socket_</name></member>
+    <member refid="classdns__client_1ad6e2381c9b3775a136a879a7b215190d" kind="variable"><name>pending_queries_</name></member>
+    <member refid="classdns__client_1aa531b95ac0323c19dc9b02f8b47924ad" kind="variable"><name>pending_mutex_</name></member>
+    <member refid="classdns__client_1af8cf06c502543c4978b276ef7d6747e7" kind="variable"><name>send_mutex_</name></member>
+    <member refid="classdns__client_1af94a7acfc822b7d9cb4f335b963a7110" kind="variable"><name>io_pool_</name></member>
+    <member refid="classdns__client_1a2eaca1da7811bc1215dc5bfd96867c60" kind="variable"><name>io_running_</name></member>
+    <member refid="classdns__client_1a784d51070a26c90a1dc9b7d00bb8747d" kind="function"><name>ensure_io_started</name></member>
+    <member refid="classdns__client_1a58c2f427086698945633ec2fb8e29f84" kind="function"><name>start_io</name></member>
+    <member refid="classdns__client_1a7016a05a5b650900afa01a54bf31afbc" kind="function"><name>stop_io</name></member>
+    <member refid="classdns__client_1a7caadf6e0f7c27132f5ebf0c04990ad9" kind="function"><name>io_receive_loop</name></member>
+    <member refid="classdns__client_1a7ddd579586a8ac02a428f8eacf33d7dc" kind="function"><name>send_query</name></member>
+    <member refid="classdns__client_1a5ed0a2a0ee4a3ab0245545b85e3d8537" kind="function"><name>send_tcp_query</name></member>
     <member refid="classdns__client_1a956e30ef214fa779fc117e6e5bac23ce" kind="function"><name>check_cache</name></member>
     <member refid="classdns__client_1abe4da0b069be27c9622ce9a255060a57" kind="function"><name>update_cache</name></member>
     <member refid="classdns__client_1a8c20c9dde44af13993769f4422981684" kind="function"><name>dns_client</name></member>
     <member refid="classdns__client_1a370b7017afd3cb7057169a0a57ec055b" kind="function"><name>dns_client</name></member>
-    <member refid="classdns__client_1a6402a25f9372f93624db6eaf0970113c" kind="function"><name>set_config</name></member>
-    <member refid="classdns__client_1a2ceac54fd9b2b6594adc7f8ecb734b19" kind="function"><name>set_timeout</name></member>
-    <member refid="classdns__client_1a49de896f0aa09622fc312dc481bf7dcf" kind="function"><name>set_use_tcp</name></member>
-    <member refid="classdns__client_1ad6aac14fe723931fdd23c17c282d7dd6" kind="function"><name>set_cache_ttl</name></member>
-    <member refid="classdns__client_1a293ce1ff50f14a8685267faf71cada91" kind="function"><name>clear_cache</name></member>
-    <member refid="classdns__client_1a38a0bcba1bbc6eeb5168799b62f56595" kind="function"><name>query</name></member>
-    <member refid="classdns__client_1aeb37b3cc90da866f70312ac3a2e57093" kind="function"><name>query_async</name></member>
+    <member refid="classdns__client_1a59ac4e421fccc7050b83995a0869fce4" kind="function"><name>~dns_client</name></member>
+    <member refid="classdns__client_1a4d8791290564cbb4d6a5e845735157c0" kind="function"><name>dns_client</name></member>
+    <member refid="classdns__client_1a9b823ec3ca31d0b61cee834a2df41f20" kind="function"><name>operator=</name></member>
+    <member refid="classdns__client_1a7f18ad9f959c882b4c9c05c970a8e197" kind="function"><name>dns_client</name></member>
+    <member refid="classdns__client_1a023f0ab6457ed1be750b80145dbb53d9" kind="function"><name>operator=</name></member>
+    <member refid="classdns__client_1a537280a1846c09630af1c534a83a2ce2" kind="function"><name>set_config</name></member>
+    <member refid="classdns__client_1a5f1384cf1bb9a17c6c1ed57592785513" kind="function"><name>set_timeout</name></member>
+    <member refid="classdns__client_1a8798882626c3a891f6d93ff69b5efb3e" kind="function"><name>set_use_tcp</name></member>
+    <member refid="classdns__client_1af0b1c211296f65301e8ae6b5caca05e2" kind="function"><name>set_cache_ttl</name></member>
+    <member refid="classdns__client_1a223261533df5ad7d30d609db1a205cc5" kind="function"><name>set_recursion_desired</name></member>
+    <member refid="classdns__client_1a4ddc884584c0f30de8a7bea7ec4cefec" kind="function"><name>set_edns_udp_payload</name></member>
+    <member refid="classdns__client_1aca121d56b87e302c7bca3e736000293a" kind="function"><name>set_dnssec_ok</name></member>
+    <member refid="classdns__client_1a6ebe6d67d0a69e3b60facc24d41ae968" kind="function"><name>clear_cache</name></member>
+    <member refid="classdns__client_1ae8f3ba97e2a5c2a3260f8eea9a174525" kind="function"><name>query</name></member>
+    <member refid="classdns__client_1a12c1a550173e9a600c4ecaa27ef98d8e" kind="function"><name>query_async</name></member>
     <member refid="classdns__client_1ab1ffb7132c5521d8fc2d63325a3556a2" kind="function"><name>resolve_a</name></member>
     <member refid="classdns__client_1a0aec8dde61805ee2efcf1d7662dc7bd9" kind="function"><name>resolve_aaaa</name></member>
     <member refid="classdns__client_1ad849698d1c498c88ae034fff46776f75" kind="function"><name>resolve_cname</name></member>
     <member refid="classdns__client_1afb94d5c9b5e963359d20a6dfb3ede162" kind="function"><name>resolve_mx</name></member>
     <member refid="classdns__client_1a81f5256f98dc39727b4d55a7dbb92e42" kind="function"><name>resolve_txt</name></member>
+    <member refid="classdns__client_1a31a048f9c5f6f3720bc7f34765dbea57" kind="function"><name>resolve_srv</name></member>
+    <member refid="classdns__client_1a6e27fcc650a0ddf7a5cdb270bc8dc5df" kind="function"><name>resolve_soa</name></member>
     <member refid="classdns__client_1a3c24ec3e33330b5d4a6f33a8867ba08f" kind="function"><name>reverse_query</name></member>
     <member refid="classdns__client_1a8916c88780f4fff4097d783d17f428a8" kind="function"><name>batch_query</name></member>
+    <member refid="classdns__client_1a71fa0565d1def9a1300d9285c5351a27" kind="function"><name>build_query</name></member>
+    <member refid="classdns__client_1a0233cd26c8972d7f507cd9cbd1ce0704" kind="function"><name>parse_response</name></member>
   </compound>
   <compound refid="classdns__exception" kind="class"><name>dns_exception</name>
     <member refid="classdns__exception_1a67b3537fad6fd5a5d873b41c82020270" kind="enum"><name>code</name></member>
@@ -3185,9 +3210,15 @@
     <member refid="structdns__query__result_1a9beeefa6c0e7822b9a1916b7bd82c18b" kind="variable"><name>additional</name></member>
     <member refid="structdns__query__result_1a21c9236b9cc4ee8242ecb639d7a45488" kind="variable"><name>query_time</name></member>
     <member refid="structdns__query__result_1abe18f5e616b4ee16ed33aa2e73a71fc2" kind="variable"><name>response_code</name></member>
+    <member refid="structdns__query__result_1a6927b0290565da34b23d6153e0cb8d81" kind="variable"><name>extended_rcode</name></member>
+    <member refid="structdns__query__result_1a2aba114116c25cbbc24b7670fdc3f2ba" kind="variable"><name>udp_payload_size</name></member>
+    <member refid="structdns__query__result_1aaeef4b8ea9d34cc4759131e3a77ff6e5" kind="variable"><name>edns_version</name></member>
+    <member refid="structdns__query__result_1a0ffc68c3153c09fb37c40b1f61f71f3f" kind="variable"><name>dnssec_ok</name></member>
+    <member refid="structdns__query__result_1a89e3ff0d5b84bf1481b0a64788d6af35" kind="variable"><name>authoritative</name></member>
     <member refid="structdns__query__result_1a59916cb58111bdf5191b7a09170411ce" kind="variable"><name>truncated</name></member>
     <member refid="structdns__query__result_1a8587f8d8175665904ba91f70d161025e" kind="variable"><name>recursive_available</name></member>
     <member refid="structdns__query__result_1aac4fafad6e1d0ee8b49baba47ae30217" kind="function"><name>is_success</name></member>
+    <member refid="structdns__query__result_1a5eb20513ed7919a6ab0b2799f32c7121" kind="function"><name>full_rcode</name></member>
   </compound>
   <compound refid="structdns__record" kind="struct"><name>dns_record</name>
     <member refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8" kind="enum"><name>raw</name></member>
@@ -3204,9 +3235,27 @@
     <member refid="structdns__record_1a58ce6de88c43819be128d7336752d9ed" kind="variable"><name>data</name></member>
     <member refid="structdns__record_1adc15bc830564c38b904b792ce4331a57" kind="variable"><name>ttl</name></member>
     <member refid="structdns__record_1ad71d9704e49d96e8bfac0996454c9bf3" kind="variable"><name>type</name></member>
-    <member refid="structdns__record_1a13bbf6573e1f8ef7490e8e59b08ed0d3" kind="variable"><name>class_type</name></member>
+    <member refid="structdns__record_1a6a0e72633a5787c3da5a12aa97c7599b" kind="variable"><name>class_type</name></member>
     <member refid="structdns__record_1ada4e684a691e195b704dec1fe2020b18" kind="function"><name>dns_record</name></member>
-    <member refid="structdns__record_1a45df17017ee83165712be7227cb6257f" kind="function"><name>dns_record</name></member>
+    <member refid="structdns__record_1a96754a120aea2919748c6b626274ea63" kind="function"><name>dns_record</name></member>
+  </compound>
+  <compound refid="structdns__soa__record" kind="struct"><name>dns_soa_record</name>
+    <member refid="structdns__soa__record_1a017d0a4766dffcdadfad5fc019feb454" kind="variable"><name>mname</name></member>
+    <member refid="structdns__soa__record_1adae3cc8489f8bda019ad45b88dd577a8" kind="variable"><name>rname</name></member>
+    <member refid="structdns__soa__record_1acea9fd13417b4d69c3c4adb3a433d1c5" kind="variable"><name>serial</name></member>
+    <member refid="structdns__soa__record_1a3f8f3da90760952f84f4ddb1eff5883f" kind="variable"><name>refresh</name></member>
+    <member refid="structdns__soa__record_1a641fae60f99e0bc846334d734beac422" kind="variable"><name>retry</name></member>
+    <member refid="structdns__soa__record_1a3d81b9464f906ddc6e7d946fa0f4844f" kind="variable"><name>expire</name></member>
+    <member refid="structdns__soa__record_1ae58843f45515c99b0698f8b2d86568b7" kind="variable"><name>minimum</name></member>
+    <member refid="structdns__soa__record_1a88825eb9e09a7152c646c858934d2b86" kind="function"><name>dns_soa_record</name></member>
+  </compound>
+  <compound refid="structdns__srv__record" kind="struct"><name>dns_srv_record</name>
+    <member refid="structdns__srv__record_1ae5a171f11857703d97960438cc5cb5e8" kind="variable"><name>priority</name></member>
+    <member refid="structdns__srv__record_1a631b1d6a26ad420683c24690746d08a3" kind="variable"><name>weight</name></member>
+    <member refid="structdns__srv__record_1ab9c9ba9964d85ae0927f950254e49cd6" kind="variable"><name>port</name></member>
+    <member refid="structdns__srv__record_1a89ca3446dcbb0f8e8fa5fafaa1c53863" kind="variable"><name>target</name></member>
+    <member refid="structdns__srv__record_1adaf12803f137ef7ba0bdbe3100a3b69e" kind="function"><name>dns_srv_record</name></member>
+    <member refid="structdns__srv__record_1ac51b506b131d63ba8c0a25d6ea1225ff" kind="function"><name>dns_srv_record</name></member>
   </compound>
   <compound refid="structdrop__adaptor" kind="struct"><name>drop_adaptor</name>
     <member refid="structdrop__adaptor_1aef93400b7f74d57f6d0005890bb44bb0" kind="function"><name>operator()</name></member>
@@ -5209,8 +5258,8 @@
     <member refid="classhttp__server_1a6448c63c08a21979469e9e1ffc56012b" kind="variable"><name>enable_websocket</name></member>
     <member refid="classhttp__server_1abb5113cbdad9ae2d3e8173fe9d006dff" kind="function"><name>parse_request</name></member>
     <member refid="classhttp__server_1a491c7cc10be8d5b932984c9caa6f820f" kind="function"><name>get_or_create_session</name></member>
-    <member refid="classhttp__server_1a410866c3b085e12448cf37e975e857aa" kind="function"><name>handle_client</name></member>
-    <member refid="classhttp__server_1ac294af9c31ade0fd6842a680fd435a37" kind="function"><name>try_websocket_upgrade</name></member>
+    <member refid="classhttp__server_1a42900572f80787d24b7e53586a4a31e3" kind="function"><name>handle_client</name></member>
+    <member refid="classhttp__server_1aa28f56a99268858ee3a8c228e0481b3b" kind="function"><name>try_websocket_upgrade</name></member>
     <member refid="classhttp__server_1a1a6b049d0e2b5a37dacab05a10a0d048" kind="function"><name>handle_request_with_forward</name></member>
     <member refid="classhttp__server_1a7b7f5de4c7c6eadc0012134d33f96cc2" kind="function"><name>http_server</name></member>
     <member refid="classhttp__server_1aba4ee10f91e7ed646e3f49c5d7bf4a1f" kind="function"><name>http_server</name></member>
@@ -5368,7 +5417,7 @@
     <member refid="classicmp__socket_1a3602a3e64eabdf93cf60088a785803fcaad778ab52bf39bd7c027d9a55fb4a1f8" kind="enumvalue"><name>ICMP_ECHO_REQUEST</name></member>
     <member refid="classicmp__socket_1a3602a3e64eabdf93cf60088a785803fcaeb63a66662e6a29d8be766d64f534963" kind="enumvalue"><name>ICMP_TIME_EXCEEDED</name></member>
     <member refid="classicmp__socket_1a533bd8e5d912cf1a702c10f32b00e5f0" kind="function"><name>receive_reply</name></member>
-    <member refid="classicmp__socket_1a09a10d0acc27a4667ca2e3bdccfa3553" kind="function"><name>send_echo_request</name></member>
+    <member refid="classicmp__socket_1a7ef133a7369c129f8c75085f484657c1" kind="function"><name>send_echo_request</name></member>
     <member refid="classicmp__socket_1aac2cac2399e8a99f0b5ba883d800ddeb" kind="function"><name>icmp_socket</name></member>
     <member refid="classicmp__socket_1a44e15ef51b407c62986da1db429c56f2" kind="function"><name>icmp_socket</name></member>
     <member refid="classicmp__socket_1a5e22d67c0aa794d751b4bee655c762af" kind="function"><name>open</name></member>
@@ -5903,8 +5952,7 @@
     <member refid="classip__address_1add2ce58669f6042593d6970743e7311a" kind="function"><name>parse</name></member>
   </compound>
   <compound refid="structip__header" kind="struct"><name>ip_header</name>
-    <member refid="structip__header_1ac9e80c1c0657ab8ac9518d450797a6be" kind="variable"><name>ihl</name></member>
-    <member refid="structip__header_1aa30d424e1ebdcca84cf42cac98383c29" kind="variable"><name>version</name></member>
+    <member refid="structip__header_1a71a77a437fd86a4a56097c82400f6a25" kind="variable"><name>version_ihl</name></member>
     <member refid="structip__header_1a4b8fd75fcf4a0fba56250ecd9fa37ebf" kind="variable"><name>tos</name></member>
     <member refid="structip__header_1ace5f4d34bd1a5acb66915756908669e4" kind="variable"><name>total_len</name></member>
     <member refid="structip__header_1acdd6df1c36489e1eeb023ffceba19f9b" kind="variable"><name>id</name></member>
@@ -5914,6 +5962,8 @@
     <member refid="structip__header_1a9d31b15783d26657a395409096c4a7fb" kind="variable"><name>checksum</name></member>
     <member refid="structip__header_1aae09c570dd68d80b20d5e765adb4fa1e" kind="variable"><name>src_addr</name></member>
     <member refid="structip__header_1ad5ac81eb58c24fe469776774656ab1bc" kind="variable"><name>dest_addr</name></member>
+    <member refid="structip__header_1aa976dd86686589735fd77f7c56bf0760" kind="function"><name>version</name></member>
+    <member refid="structip__header_1a388eca5da96b025d8aa90f6b32232608" kind="function"><name>ihl</name></member>
   </compound>
   <compound refid="classip__socket" kind="class"><name>ip_socket</name>
     <member refid="classip__socket_1a5bef8064a2f2e096f28993a0f6542c87" kind="variable"><name>family_</name></member>
@@ -8419,6 +8469,7 @@
     <member refid="classpath_1ace5a07dc6519ab36d9ea568544ba46cc" kind="function"><name>swap</name></member>
     <member refid="classpath_1a6bdf9c727c802b39bc2f78c5feeeb74b" kind="function"><name>current_path</name></member>
     <member refid="classpath_1ad2ee3e13caaf69920642c0c61398fce4" kind="function"><name>temp_directory_path</name></member>
+    <member refid="classpath_1a0c81082527842f757660713381acba21" kind="function"><name>current_executable_path</name></member>
     <member refid="classpath_1a6039d7b613cc087e3c7a304c6bbcd215" kind="function"><name>exists</name></member>
     <member refid="classpath_1a42b2533d9ed6e7054456c1093edd6117" kind="function"><name>is_directory</name></member>
     <member refid="classpath_1acde29ae467268c16c7046e228b80d6db" kind="function"><name>is_file</name></member>
@@ -8474,10 +8525,15 @@
     <member refid="classpath__tree_1aa185cf45ef324f9ccd7095e46ef13073" kind="function"><name>scan</name></member>
   </compound>
   <compound refid="structregex_1_1pcre2__code__deleter" kind="struct"><name>regex::pcre2_code_deleter</name>
-    <member refid="structregex_1_1pcre2__code__deleter_1a148b48697e22661ee47dcae5870d6208" kind="function"><name>operator()</name></member>
+    <member refid="structregex_1_1pcre2__code__deleter_1a0330bcfbc039be53af36ef30b35890f9" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structregex_1_1pcre2__match__data__deleter" kind="struct"><name>regex::pcre2_match_data_deleter</name>
-    <member refid="structregex_1_1pcre2__match__data__deleter_1a6b065b5de970d31b7ed516a96a392f97" kind="function"><name>operator()</name></member>
+    <member refid="structregex_1_1pcre2__match__data__deleter_1aae339bf065c4d486f18e5260d67f04b7" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="structdns__client_1_1pending__entry" kind="struct"><name>dns_client::pending_entry</name>
+    <member refid="structdns__client_1_1pending__entry_1ab5f9e15dbdbd9d0f7fcb7ce21e7900a4" kind="variable"><name>promise</name></member>
+    <member refid="structdns__client_1_1pending__entry_1a52907348e74223ab9c5e9d22c15ae009" kind="variable"><name>query_data</name></member>
+    <member refid="structdns__client_1_1pending__entry_1ad29498d42c2bb3cd5234f8338f53acb5" kind="variable"><name>created_at</name></member>
   </compound>
   <compound refid="structsystem__signal__manager_1_1pending__signal" kind="struct"><name>system_signal_manager::pending_signal</name>
     <member refid="structsystem__signal__manager_1_1pending__signal_1a432113ff100c9237f538c6a171ba92f0" kind="variable"><name>signal_event</name></member>
@@ -8799,6 +8855,12 @@
     <member refid="structthread__pool_1_1priority__task_1a3649f2afcd99c7e6561db49fd8e0c363" kind="function"><name>operator&lt;</name></member>
   </compound>
   <compound refid="classprocess" kind="class"><name>process</name>
+    <member refid="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1" kind="enum"><name>state</name></member>
+    <member refid="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1a75101dcdfc88455bcafc9e53e0b06689" kind="enumvalue"><name>running</name></member>
+    <member refid="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1a735fda5d72b5c650f3f0435195a211bd" kind="enumvalue"><name>suspended</name></member>
+    <member refid="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1af0a0bfe6bc7d2c58d2989034f83183e0" kind="enumvalue"><name>stopped</name></member>
+    <member refid="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1ab854d4deac1316c8d36e519393f3f2ae" kind="enumvalue"><name>exited</name></member>
+    <member refid="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1aad921d60486366258809553a3db49a4a" kind="enumvalue"><name>unknown</name></member>
     <member refid="classprocess_1acfd865e47b9c3a8b63da86bc85f11242" kind="enum"><name>permission</name></member>
     <member refid="classprocess_1acfd865e47b9c3a8b63da86bc85f11242aecae13117d6f0584c25a9da6c8f8415e" kind="enumvalue"><name>read</name></member>
     <member refid="classprocess_1acfd865e47b9c3a8b63da86bc85f11242aefb2a684e4afb7d55e6147fbe5a332ee" kind="enumvalue"><name>write</name></member>
@@ -8806,24 +8868,71 @@
     <member refid="classprocess_1acfd865e47b9c3a8b63da86bc85f11242a1459e53d3fbaa95cebaf90860dd7a259" kind="enumvalue"><name>terminate</name></member>
     <member refid="classprocess_1acfd865e47b9c3a8b63da86bc85f11242ae62cad8f38445bfffefe4b944d257350" kind="enumvalue"><name>query_info</name></member>
     <member refid="classprocess_1acfd865e47b9c3a8b63da86bc85f11242aa181a603769c1f98ad927e7367c7aa51" kind="enumvalue"><name>all</name></member>
-    <member refid="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1" kind="enum"><name>state</name></member>
-    <member refid="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1a75101dcdfc88455bcafc9e53e0b06689" kind="enumvalue"><name>running</name></member>
-    <member refid="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1a735fda5d72b5c650f3f0435195a211bd" kind="enumvalue"><name>suspended</name></member>
-    <member refid="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1af0a0bfe6bc7d2c58d2989034f83183e0" kind="enumvalue"><name>stopped</name></member>
-    <member refid="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1ab854d4deac1316c8d36e519393f3f2ae" kind="enumvalue"><name>exited</name></member>
-    <member refid="classprocess_1a372470dfa6edcf9a6b8c9dff60738dc1aad921d60486366258809553a3db49a4a" kind="enumvalue"><name>unknown</name></member>
+    <member refid="classprocess_1a85cd03dae91e9e2a916de7b19044520d" kind="enum"><name>privilege_level</name></member>
+    <member refid="classprocess_1a85cd03dae91e9e2a916de7b19044520dabd638b36d2814f488c1497cfe49eceea" kind="enumvalue"><name>privileged</name></member>
+    <member refid="classprocess_1a85cd03dae91e9e2a916de7b19044520da28770b882ab896ee0d7539ef7e4681ee" kind="enumvalue"><name>not_privileged</name></member>
+    <member refid="classprocess_1a85cd03dae91e9e2a916de7b19044520daad921d60486366258809553a3db49a4a" kind="enumvalue"><name>unknown</name></member>
+    <member refid="classprocess_1a09e419ffd86bcf6a536ecd9ddfe895d1" kind="enum"><name>elevation_tool</name></member>
+    <member refid="classprocess_1a09e419ffd86bcf6a536ecd9ddfe895d1ae271e2d9f011df547b9b98db5a3f287a" kind="enumvalue"><name>auto_</name></member>
+    <member refid="classprocess_1a09e419ffd86bcf6a536ecd9ddfe895d1ad338b3f0f405eb5e51c8cc1e5ca66f02" kind="enumvalue"><name>sudo</name></member>
+    <member refid="classprocess_1a09e419ffd86bcf6a536ecd9ddfe895d1a823735810c73ae1ef92c4985e0222a32" kind="enumvalue"><name>pkexec</name></member>
     <member refid="classprocess_1ab91bd774333ce8998d5100bb41be1da8" kind="typedef"><name>native_id_type</name></member>
-    <member refid="classprocess_1a551db2a7ed84051785096e1fb0440aab" kind="function"><name>create</name></member>
-    <member refid="classprocess_1af035e1cfd992aecc99e4a76b1b859e7b" kind="function"><name>wait_for</name></member>
-    <member refid="classprocess_1a3860ef0f7524625536545c099a011041" kind="function"><name>terminate</name></member>
-    <member refid="classprocess_1a80739bcf05a7757d16cbb04f8586b839" kind="function"><name>suspend</name></member>
-    <member refid="classprocess_1a2ab519914a1937c2a8208c46ab401068" kind="function"><name>resume</name></member>
-    <member refid="classprocess_1a09e8fb6881db82d104440a1280cd27fe" kind="function"><name>is_running</name></member>
+    <member refid="classprocess_1a0472ff96aa0abef95ea81198976fc598" kind="variable"><name>process_id_</name></member>
+    <member refid="classprocess_1a5626779f6cfe525f16b6c614d28c70fa" kind="variable"><name>exit_code_</name></member>
+    <member refid="classprocess_1a6972a6e160f829d0d3451ccc57aac630" kind="variable"><name>started_</name></member>
+    <member refid="classprocess_1a8f452466173208cb7ae67dafa469432f" kind="variable"><name>finished_</name></member>
+    <member refid="classprocess_1a2ef247296057f04b8b51781d0a345679" kind="variable"><name>work_dir_</name></member>
+    <member refid="classprocess_1aac92167cad8f9173f0e08aa518454a72" kind="variable"><name>env_vars_</name></member>
+    <member refid="classprocess_1a9a6f2abb6b80f6c104f286fe315788d2" kind="variable"><name>capture_stdout_</name></member>
+    <member refid="classprocess_1a8fb2c12d0128554c6df47536a5914383" kind="variable"><name>capture_stderr_</name></member>
+    <member refid="classprocess_1a9561247b5a0401e9c8bc33726ffb925e" kind="variable"><name>stdin_data_</name></member>
+    <member refid="classprocess_1aceb4470ce44eba9d52c9a7cd116237e9" kind="variable"><name>stdout_pipe_</name></member>
+    <member refid="classprocess_1ac06b89ca7f88ff75c0b5a1b4c7d98231" kind="variable"><name>stderr_pipe_</name></member>
+    <member refid="classprocess_1a4777737d860100d2df20c57f2e234f0c" kind="variable"><name>stdin_pipe_</name></member>
+    <member refid="classprocess_1a0c529209153548af86e6421e80dc1e73" kind="variable"><name>stdout_buf_</name></member>
+    <member refid="classprocess_1a9bcaa64735e79d1dae1650a0a2482796" kind="variable"><name>stderr_buf_</name></member>
+    <member refid="classprocess_1a85974b55dfa3c05896a147fd4f5f4feb" kind="variable"><name>reader_thread_</name></member>
+    <member refid="classprocess_1a4f716edea06bfe43aa27ba0394788e62" kind="variable"><name>reader_running_</name></member>
+    <member refid="classprocess_1a034f2cce3048f629fbd18e033c5259fd" kind="variable"><name>process_handle_</name></member>
+    <member refid="classprocess_1af00f1664a1613776042d97908f333b46" kind="variable"><name>thread_handle_</name></member>
+    <member refid="classprocess_1aa68b46896691a6bbacd1a96c10e5a18f" kind="function"><name>reader_loop</name></member>
+    <member refid="classprocess_1a4f8ca2a87c850c84237f3c50ba7386a1" kind="function"><name>close_handles</name></member>
+    <member refid="classprocess_1afd5c4dd719317354311b87ef18c5ea8b" kind="function"><name>process</name></member>
+    <member refid="classprocess_1a554113f7890a643f4434695ced702924" kind="function"><name>~process</name></member>
+    <member refid="classprocess_1a62c4c3d9e55262613139201fd4d9b2af" kind="function"><name>process</name></member>
+    <member refid="classprocess_1aa7c505a3d7097ed768df03e0fefae5e9" kind="function"><name>operator=</name></member>
+    <member refid="classprocess_1acf7b6c831eb297ee42a2b980517edf0d" kind="function"><name>process</name></member>
+    <member refid="classprocess_1a791fb4987d270cce4ee03d4f355e193f" kind="function"><name>operator=</name></member>
+    <member refid="classprocess_1a83e591137cd9379e480bbe217381e64a" kind="function"><name>set_work_dir</name></member>
+    <member refid="classprocess_1aaa97f4fb9c28902a0c740102a632add3" kind="function"><name>set_env</name></member>
+    <member refid="classprocess_1a44a52ee3fa64b6c7da293e27ee2e6071" kind="function"><name>set_capture_stdout</name></member>
+    <member refid="classprocess_1ab5d86f0c3462903994e14106252ce8b8" kind="function"><name>set_capture_stderr</name></member>
+    <member refid="classprocess_1a2f25c2fdd0fea8b01e9b9d025bd95ba8" kind="function"><name>set_stdin_data</name></member>
+    <member refid="classprocess_1a71e9006061494f2017d16304a6e0125d" kind="function"><name>start</name></member>
+    <member refid="classprocess_1a08dd4dadc59859b2488faf41b4b486a1" kind="function"><name>start_elevated</name></member>
+    <member refid="classprocess_1a2e4e873b41113a498b26a4e1d55b3333" kind="function"><name>wait</name></member>
+    <member refid="classprocess_1abb5fdbc705fa2636930c7c13fe584206" kind="function"><name>terminate</name></member>
+    <member refid="classprocess_1a52208338a54f7d44ae3ab2e1ea1028df" kind="function"><name>suspend</name></member>
+    <member refid="classprocess_1ad0fc72309a07084788f2f808d2fe976a" kind="function"><name>resume</name></member>
+    <member refid="classprocess_1a39b0e2a79a5fd1c6887c35c6c7608c09" kind="function"><name>close</name></member>
+    <member refid="classprocess_1a634eb7995ac62bf44c49463e5780f406" kind="function"><name>is_running</name></member>
+    <member refid="classprocess_1a9df40bb72871d8f94b737047293405de" kind="function"><name>get_state</name></member>
+    <member refid="classprocess_1a398c8c5e19b9fa0825552b1cbf0eb637" kind="function"><name>get_memory_info</name></member>
+    <member refid="classprocess_1a4975453c3a379c94e4e6586b13bb239a" kind="function"><name>id</name></member>
+    <member refid="classprocess_1a74f6d6755a0beec5a2a3cc10408c3671" kind="function"><name>exit_code</name></member>
+    <member refid="classprocess_1ab479b5aedbbf34d3e927b95bc718077e" kind="function"><name>stdout_output</name></member>
+    <member refid="classprocess_1a762b01632db7fde3736578de676902da" kind="function"><name>stderr_output</name></member>
+    <member refid="classprocess_1aa91787da10fc84ddafd4306f5399d6ca" kind="function"><name>write_stdin</name></member>
+    <member refid="classprocess_1a42975de169bed2eae165ea223c763293" kind="function"><name>close_stdin</name></member>
+    <member refid="classprocess_1a349506cd8b7cfb65c99fd22b6da1156f" kind="function"><name>execute_shell</name></member>
+    <member refid="classprocess_1a4de847b0677456d1edf8fa7973f7f134" kind="function"><name>execute_elevated_shell</name></member>
     <member refid="classprocess_1a5093f2de932909931907884f73d71156" kind="function"><name>current_id</name></member>
-    <member refid="classprocess_1ad481e63156d46e9148b474f9eb168bb9" kind="function"><name>get_memory_info</name></member>
-    <member refid="classprocess_1a948a364ad23f37e1fd3c4327f06c2cd2" kind="function"><name>get_state</name></member>
-    <member refid="classprocess_1adeb213da5ad4c874de38a06ec11c3ecc" kind="function"><name>check_permission</name></member>
+    <member refid="classprocess_1a7d0f21dba66731c0f94365ff54568a69" kind="function"><name>current_privilege_level</name></member>
     <member refid="classprocess_1ade856a6398b6024b871e123149573d9e" kind="function"><name>name</name></member>
+    <member refid="classprocess_1a569c5edb19b71e4dc2befbec8e0c2209" kind="function"><name>get_memory_info</name></member>
+    <member refid="classprocess_1a9e981fa039010fa4887dc963170aec6f" kind="function"><name>get_state</name></member>
+    <member refid="classprocess_1a04579cabe3f4c1d873e02654ec768f64" kind="function"><name>get_privilege_level</name></member>
+    <member refid="classprocess_1a95e578a566573bbafc902c1a3e1bde62" kind="function"><name>check_permission</name></member>
   </compound>
   <compound refid="structprocess__exception" kind="struct"><name>process_exception</name>
     <member refid="structprocess__exception_1a362c2114b9309aa262a55d68cbbd0957" kind="variable"><name>static_type</name></member>
@@ -8847,9 +8956,9 @@
     <member refid="classpromise_1a42de93529f3ded56619ec146e701c556" kind="function"><name>~promise</name></member>
     <member refid="classpromise_1a4e1557182307b5f8298782037b153939" kind="function"><name>swap</name></member>
     <member refid="classpromise_1ab0b98ede6c487688e1d9684fc979512b" kind="function"><name>get_future</name></member>
-    <member refid="classpromise_1a3002df1df9d416019fe00dd89fc0e5ff" kind="function"><name>set_value</name></member>
+    <member refid="classpromise_1a461ea3f3f0793054804d79c134788515" kind="function"><name>set_value</name></member>
     <member refid="classpromise_1ae0f41e364fa8a8f21ef340ea89e6d8c5" kind="function"><name>set_exception</name></member>
-    <member refid="classpromise_1ae5d2f35b49c5f86a4e695ab8e5ae77f1" kind="function"><name>set_value_at_thread_exit</name></member>
+    <member refid="classpromise_1ad89aeb3b702bf1654334299b08761ea4" kind="function"><name>set_value_at_thread_exit</name></member>
     <member refid="classpromise_1aeaadfd014af7d67f744e6791320dc8f7" kind="function"><name>set_exception_at_thread_exit</name></member>
   </compound>
   <compound refid="classpromise_3_01_res_01_6_01_4" kind="class"><name>promise&lt; Res &amp; &gt;</name>
@@ -9365,14 +9474,14 @@
     <member refid="classreference__wrapper_1ac0f65d922b88762e4171e558ab25ef92" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classregex" kind="class"><name>regex</name>
-    <member refid="classregex_1a5e9707203d05c206395c19c51f92443c" kind="variable"><name>code_</name></member>
+    <member refid="classregex_1a992fb775aa7434637e96132178628055" kind="variable"><name>code_</name></member>
     <member refid="classregex_1a4e7bde1b65ce8af2a8579e9495d5e5a3" kind="variable"><name>pattern_</name></member>
     <member refid="classregex_1a85dff104b358a643f043bde140850f68" kind="variable"><name>options_</name></member>
     <member refid="classregex_1aa384cd05c0c15746b6d16f342da91aa7" kind="variable"><name>capture_count_</name></member>
     <member refid="classregex_1a75574f98c2d8ab13860242a869ab1b85" kind="friend"><name>regex_iterator</name></member>
     <member refid="classregex_1a3c4cd74b0e744ae1ce26370721a872b9" kind="friend"><name>regex_token_iterator</name></member>
     <member refid="classregex_1a24e9eff1234eae54d91720ddd60d0954" kind="function"><name>compile</name></member>
-    <member refid="classregex_1af3af858d39b5d98ad8cb021e0782b19f" kind="function"><name>do_match</name></member>
+    <member refid="classregex_1a01df627b4bbd4dceea978b20d58e7639" kind="function"><name>do_match</name></member>
     <member refid="classregex_1a9cc420382e161b3120f0c1fa2b96de1b" kind="function"><name>regex</name></member>
     <member refid="classregex_1ac235c60a1b1adfc5721c00f66b77c3c3" kind="function"><name>regex</name></member>
     <member refid="classregex_1a96a6616e3fa26d1d2960c8b5462a7663" kind="function"><name>operator=</name></member>
@@ -9462,6 +9571,58 @@
     <member refid="classregistry_1ab9aa0e1c8f702d631bfb427f5ee4feeb" kind="function"><name>find</name></member>
     <member refid="classregistry_1a113a83de57e98c1e6f06a47aff4b5557" kind="function"><name>for_each</name></member>
     <member refid="classregistry_1ad9f2bc1e953093b1492a327fedc7566f" kind="function"><name>resolve_all_bases</name></member>
+  </compound>
+  <compound refid="classregistry__key" kind="class"><name>registry_key</name>
+    <member refid="classregistry__key_1a257871e0b2a75bc616d2b83d6ff96477" kind="enum"><name>value_type</name></member>
+    <member refid="classregistry__key_1a257871e0b2a75bc616d2b83d6ff96477a334c4a4c42fdb79d7ebc3e73b517e6f8" kind="enumvalue"><name>none</name></member>
+    <member refid="classregistry__key_1a257871e0b2a75bc616d2b83d6ff96477ab45cffe084dd3d20d928bee85e7b0f21" kind="enumvalue"><name>string</name></member>
+    <member refid="classregistry__key_1a257871e0b2a75bc616d2b83d6ff96477a0978fc35db2463791ebfde962517ef48" kind="enumvalue"><name>expand_string</name></member>
+    <member refid="classregistry__key_1a257871e0b2a75bc616d2b83d6ff96477a9d7183f16acce70658f686ae7f1a4d20" kind="enumvalue"><name>binary</name></member>
+    <member refid="classregistry__key_1a257871e0b2a75bc616d2b83d6ff96477afc50124be4e2da8156d08b7375d79804" kind="enumvalue"><name>dword</name></member>
+    <member refid="classregistry__key_1a257871e0b2a75bc616d2b83d6ff96477aa8411161cb16f462b1bdd4611965b43f" kind="enumvalue"><name>qword</name></member>
+    <member refid="classregistry__key_1a257871e0b2a75bc616d2b83d6ff96477a0eb11d63c2fc32b79389f0f26e14434d" kind="enumvalue"><name>multi_string</name></member>
+    <member refid="classregistry__key_1aa954bd6837021fb2c21ef81b7b97c944" kind="variable"><name>hkey_</name></member>
+    <member refid="classregistry__key_1a2bcb8ffdf34337061a53e7768f6311b4" kind="variable"><name>owns_handle_</name></member>
+    <member refid="classregistry__key_1a43e1f3ce74ad5e47c6a8b58c5c29f896" kind="function"><name>close</name></member>
+    <member refid="classregistry__key_1a5ebeb33ad5aff02bd3c04055c8fe19a1" kind="function"><name>throw_if_invalid</name></member>
+    <member refid="classregistry__key_1afd61fb7bff075aaca02f6468d6fe6201" kind="function"><name>get_value_info</name></member>
+    <member refid="classregistry__key_1a0e76f5b910636b2b440fc362b2888f22" kind="function"><name>registry_key</name></member>
+    <member refid="classregistry__key_1afcddc32b40ba2d0f8b8a5450e8281bcb" kind="function"><name>registry_key</name></member>
+    <member refid="classregistry__key_1a9e0f5149b4f122961b1a5d4208423151" kind="function"><name>~registry_key</name></member>
+    <member refid="classregistry__key_1ae53e09ef53eaf8637a8dbf94a3845166" kind="function"><name>registry_key</name></member>
+    <member refid="classregistry__key_1aabb70aec1e285f8cb6384ce4ffb4d307" kind="function"><name>operator=</name></member>
+    <member refid="classregistry__key_1a7026720c9c9831418cde1c409f8000af" kind="function"><name>registry_key</name></member>
+    <member refid="classregistry__key_1a59337159d4f3b2acca44875cde73c0bb" kind="function"><name>operator=</name></member>
+    <member refid="classregistry__key_1ae8bfbed18d27ce49652470602201044b" kind="function"><name>is_valid</name></member>
+    <member refid="classregistry__key_1a5f206fd7f2e929e600192190c4b7915a" kind="function"><name>operator bool</name></member>
+    <member refid="classregistry__key_1a15a5655f64b0a85e826b0845c12fea29" kind="function"><name>create_sub_key</name></member>
+    <member refid="classregistry__key_1ab07ea0f75761264f42ba667ce65ad6b6" kind="function"><name>open</name></member>
+    <member refid="classregistry__key_1ac086c8455a820a2ac609ac409e90f330" kind="function"><name>open_sub_key</name></member>
+    <member refid="classregistry__key_1abd55857cc4346c1f96cea42c5d76754d" kind="function"><name>delete_sub_key</name></member>
+    <member refid="classregistry__key_1a841b1623e976f4181fbc269f049230c4" kind="function"><name>delete_value</name></member>
+    <member refid="classregistry__key_1a077d9d92901497b062508e067fa27f5f" kind="function"><name>has_sub_key</name></member>
+    <member refid="classregistry__key_1a402366bac6e693e667a234b250e6e193" kind="function"><name>has_value</name></member>
+    <member refid="classregistry__key_1ad3f810015c2e1169afd0b16009d2ae22" kind="function"><name>enum_sub_key_names</name></member>
+    <member refid="classregistry__key_1a14dc6ef60a66414cfec1b40d4527c289" kind="function"><name>enum_values</name></member>
+    <member refid="classregistry__key_1af3b9088988ee31316a9cb0c02b5af11d" kind="function"><name>set_string_value</name></member>
+    <member refid="classregistry__key_1a47e06191eb7d9dcf26c4f66d26853543" kind="function"><name>set_expand_string_value</name></member>
+    <member refid="classregistry__key_1a58f4dc2ea8895063d395d4a81b3dcdc3" kind="function"><name>set_dword_value</name></member>
+    <member refid="classregistry__key_1a26771910ea2657941052117177218028" kind="function"><name>set_qword_value</name></member>
+    <member refid="classregistry__key_1a93a079782143e4d92a65ff8ad9fc7447" kind="function"><name>set_binary_value</name></member>
+    <member refid="classregistry__key_1a0e87105d61256b44b3dd71c81504a609" kind="function"><name>set_multi_string_value</name></member>
+    <member refid="classregistry__key_1ad160714cb70bc00d6235b6abc0c36942" kind="function"><name>get_string_value</name></member>
+    <member refid="classregistry__key_1a5809d78ce40d269e285a08397b527756" kind="function"><name>get_dword_value</name></member>
+    <member refid="classregistry__key_1ad8090858030a677d063828e51390bb3a" kind="function"><name>get_qword_value</name></member>
+    <member refid="classregistry__key_1aeaa082dc39ad655faf73e28b11164d3b" kind="function"><name>get_binary_value</name></member>
+    <member refid="classregistry__key_1a066662ef175ec33a66538be770a1bb99" kind="function"><name>get_multi_string_value</name></member>
+    <member refid="classregistry__key_1a423f8659ca8f39e1d0311150542429aa" kind="function"><name>native_handle</name></member>
+    <member refid="classregistry__key_1ac6f93b625ef168e9832bc645e41a0d8e" kind="function"><name>delete_key_tree</name></member>
+  </compound>
+  <compound refid="structregistry__key__exception" kind="struct"><name>registry_key_exception</name>
+    <member refid="structregistry__key__exception_1a6243417303d69210937867f5dc86a936" kind="variable"><name>static_type</name></member>
+    <member refid="structregistry__key__exception_1afd26cee9d334eaf6dc1eb2c1cd8e6e9d" kind="function"><name>registry_key_exception</name></member>
+    <member refid="structregistry__key__exception_1ae3cd2064b9995a9df9eac8b4e75e2dba" kind="function"><name>registry_key_exception</name></member>
+    <member refid="structregistry__key__exception_1a7db7a635d97af55a0aff4f0e37f934ee" kind="function"><name>~registry_key_exception</name></member>
   </compound>
   <compound refid="structremove__all__extents" kind="struct"><name>remove_all_extents</name>
     <member refid="structremove__all__extents_1a915c501b53420a85009f457ca98c35df" kind="typedef"><name>type</name></member>
@@ -9634,6 +9795,13 @@
     <member refid="classreverse__view_1a7ea9f9719f8d3e93e0b1bca8bf7e3183" kind="function"><name>end</name></member>
     <member refid="classreverse__view_1a23258787322d0270bfa6f003b1d38948" kind="function"><name>base</name></member>
     <member refid="classreverse__view_1a12be3191f60ae2fac2cb5758bf877500" kind="function"><name>base</name></member>
+  </compound>
+  <compound refid="structregistry__key_1_1root__key" kind="struct"><name>registry_key::root_key</name>
+    <member refid="structregistry__key_1_1root__key_1af78dd0c53130faa7dc0d96fea83ede1c" kind="function"><name>classes_root</name></member>
+    <member refid="structregistry__key_1_1root__key_1a1058278abcbfe1dcd95b77b0a1b001ca" kind="function"><name>current_user</name></member>
+    <member refid="structregistry__key_1_1root__key_1a70e9a5e41c8049fef6d6ced0035ab423" kind="function"><name>local_machine</name></member>
+    <member refid="structregistry__key_1_1root__key_1a15cbd37d4909f3a1478854412d21df8e" kind="function"><name>users</name></member>
+    <member refid="structregistry__key_1_1root__key_1a7aa8b0e67a42a12aa0b02fda78240e5c" kind="function"><name>current_config</name></member>
   </compound>
   <compound refid="structhttp__router_1_1route__entry" kind="struct"><name>http_router::route_entry</name>
     <member refid="structhttp__router_1_1route__entry_1afd49e4c7c34af81ebab9875b17b13073" kind="variable"><name>pattern</name></member>
@@ -10069,6 +10237,10 @@
     <member refid="classshared__ptr_1aef8d8d99bfeed7889551d590742e05cc" kind="variable"><name>owner_</name></member>
     <member refid="classshared__ptr_1af1d6a6f3f2a27ed68db73635116a6eaf" kind="function"><name>shared_ptr</name></member>
     <member refid="classshared__ptr_1a9b0476a9fee76473ff0beee5309d8fbe" kind="friend"><name>inner::__make_shared_fused</name></member>
+  </compound>
+  <compound refid="structprocess_1_1shell__result" kind="struct"><name>process::shell_result</name>
+    <member refid="structprocess_1_1shell__result_1ac22875b9da3a09de1534f9006aee8f26" kind="variable"><name>exit_code</name></member>
+    <member refid="structprocess_1_1shell__result_1aa6e17b33533d0f41b8e5f050362cab34" kind="variable"><name>output</name></member>
   </compound>
   <compound refid="structsignal" kind="struct"><name>signal</name>
     <member refid="structsignal_1a9df288a30ff22567d758cec5893b36e3" kind="variable"><name>slots_</name></member>
@@ -10543,6 +10715,7 @@
     <member refid="classssl__acceptor_1a53d9c6410185f9c8247a00d25241a56f" kind="function"><name>context</name></member>
     <member refid="classssl__acceptor_1ab3b3814b4288fd8c8c99e6d5ebe9d56f" kind="function"><name>context</name></member>
     <member refid="classssl__acceptor_1a839b43648acf22c7fc584dd90963cd04" kind="function"><name>accept_ssl</name></member>
+    <member refid="classssl__acceptor_1a4a4d5434756d41fffbf1809805191569" kind="function"><name>accept_ssl_nonblock</name></member>
   </compound>
   <compound refid="classssl__client" kind="class"><name>ssl_client</name>
     <member refid="classssl__client_1a7f6e80f95f17bfdbe3b8efb6be43c874" kind="variable"><name>ssl_ctx_</name></member>
@@ -10561,9 +10734,9 @@
     <member refid="classssl__client_1a56c7d59e7374abe16566a6aeca3cfbbe" kind="function"><name>sni_hostname</name></member>
     <member refid="classssl__client_1ab63f76a3d3fd9f179598c22d747668da" kind="function"><name>load_ca_file</name></member>
     <member refid="classssl__client_1a277e03d41b0e9a0c62318a8c70a4b862" kind="function"><name>load_ca_path</name></member>
-    <member refid="classssl__client_1a783c6690380339f2dfc50db4d0e761c4" kind="function"><name>peer_certificate_info</name></member>
-    <member refid="classssl__client_1aeee1733d62f29ba8cfa859b46c218957" kind="function"><name>cipher_name</name></member>
-    <member refid="classssl__client_1a7b0c4e95d48d8913d67cc5542008d298" kind="function"><name>protocol_version</name></member>
+    <member refid="classssl__client_1a0f2c669a9c981f3271b1efcd58e40ace" kind="function"><name>peer_certificate_info</name></member>
+    <member refid="classssl__client_1a332a96dfd3d5575a3f55baff027c0eda" kind="function"><name>cipher_name</name></member>
+    <member refid="classssl__client_1a3ef229a0d9ad5bea4ef9b4c7b1d835ff" kind="function"><name>protocol_version</name></member>
     <member refid="classssl__client_1aad1ef465d608d0d3da503c032614f7c4" kind="function"><name>has_ssl_context</name></member>
     <member refid="classssl__client_1adb01af63e24c81f3902bb8036ae6d046" kind="function"><name>is_ssl_initialized</name></member>
     <member refid="classssl__client_1acce0879cb4d27521ae8dc4a629e61c6b" kind="function"><name>ssl_socket_ref</name></member>
@@ -10572,6 +10745,8 @@
   <compound refid="classssl__context" kind="class"><name>ssl_context</name>
     <member refid="classssl__context_1a716dd4edd8b6bb98830f4ed6d7b93735" kind="variable"><name>ctx_</name></member>
     <member refid="classssl__context_1afa17e2d688e443378ec42e052ab52d03" kind="variable"><name>method_</name></member>
+    <member refid="classssl__context_1a33e181209b2b5870ccf658f0797ee186" kind="variable"><name>cert_loaded_</name></member>
+    <member refid="classssl__context_1ad3e1b721f7e5e0e33e52df9fa174516d" kind="function"><name>ssl_context</name></member>
     <member refid="classssl__context_1a66547e0420877dfe3109b5c1ebab7437" kind="function"><name>ssl_context</name></member>
     <member refid="classssl__context_1af5508cf9235d3fad59ed66daaeacb8b9" kind="function"><name>~ssl_context</name></member>
     <member refid="classssl__context_1a981739a338c50bca405c6c185777f200" kind="function"><name>ssl_context</name></member>
@@ -10595,6 +10770,7 @@
     <member refid="classssl__context_1a0963338938f74e60568794c0266c419a" kind="function"><name>native_handle</name></member>
     <member refid="classssl__context_1a033f21fdfb92c225f5c2dd92a6c1a4ef" kind="function"><name>operator bool</name></member>
     <member refid="classssl__context_1a5ca913fa6f629eb5101c194f3f4b28df" kind="function"><name>is_valid</name></member>
+    <member refid="classssl__context_1a081da1db4d177dada4c7b7464e309a14" kind="function"><name>has_certificate</name></member>
   </compound>
   <compound refid="structssl__stream_1_1ssl__deleter" kind="struct"><name>ssl_stream::ssl_deleter</name>
     <member refid="structssl__stream_1_1ssl__deleter_1a391ebac58460e657da6e96eb0823f1ac" kind="function"><name>operator()</name></member>
@@ -10611,7 +10787,7 @@
   <compound refid="classssl__server" kind="class"><name>ssl_server</name>
     <member refid="classssl__server_1a9630754b70908341540328c7e70f6d16" kind="variable"><name>ssl_ctx_</name></member>
     <member refid="classssl__server_1a77ddd9e4f1baf16db48d0967084acaa7" kind="function"><name>create_acceptor</name></member>
-    <member refid="classssl__server_1a1f9f07638f0cb6bb7fa552ce73c29b41" kind="function"><name>accept_one</name></member>
+    <member refid="classssl__server_1acb728856c49a52662f8ea6057e78e12b" kind="function"><name>accept_one</name></member>
     <member refid="classssl__server_1ae975999b59c678bdf7e16867ecdd1d31" kind="function"><name>ssl_server</name></member>
     <member refid="classssl__server_1adc241568c950d70a1a0e4d2e5d7c899a" kind="function"><name>load_certificate</name></member>
     <member refid="classssl__server_1a76f284fac9a5869f37c82d710e8a1bdd" kind="function"><name>set_ssl_context</name></member>
@@ -10632,9 +10808,10 @@
     <member refid="classssl__socket_1ae5cdd0fd39c6bbbc8ba69ee78e5b956c" kind="function"><name>peer_certificate_info</name></member>
     <member refid="classssl__socket_1a23a2685c9657643210f24d9f52e9acd9" kind="function"><name>send</name></member>
     <member refid="classssl__socket_1a0607573c4459e1ea3cb7c95dceaf3f8a" kind="function"><name>receive</name></member>
+    <member refid="classssl__socket_1ac93b5cdb322b13fce97428b4b366c228" kind="function"><name>close</name></member>
     <member refid="classssl__socket_1adb1487480405a5778013113b583fed8c" kind="function"><name>is_ssl</name></member>
-    <member refid="classssl__socket_1abef648a903726e8cb17ecda4ce5c14b0" kind="function"><name>ssl</name></member>
-    <member refid="classssl__socket_1a1fdc33ea412b910bb9afc8cbeb07787e" kind="function"><name>ssl</name></member>
+    <member refid="classssl__socket_1a83b1e2549b67189b505a0a1b3b117df4" kind="function"><name>ssl</name></member>
+    <member refid="classssl__socket_1adfc138e89dbf0d8244579797a39d2878" kind="function"><name>ssl</name></member>
   </compound>
   <compound refid="classssl__stream" kind="class"><name>ssl_stream</name>
     <member refid="classssl__stream_1ae051cc1c9f187ca1d0d7d6ed3bfbae11" kind="typedef"><name>native_handle_type</name></member>
@@ -10650,7 +10827,7 @@
     <member refid="classssl__stream_1a9f63a0a0a510ba7bc733bce6b29fc0b8" kind="function"><name>set_fd</name></member>
     <member refid="classssl__stream_1a8d50c0caaf302839aba7a8989a3fa875" kind="function"><name>accept</name></member>
     <member refid="classssl__stream_1a33c58ee785d4e58e80eaf07e73e27217" kind="function"><name>connect</name></member>
-    <member refid="classssl__stream_1a5d919c932bf06d932d0a36dd70faad71" kind="function"><name>close</name></member>
+    <member refid="classssl__stream_1a8e82ce0526198cc603022c76b73ad1e1" kind="function"><name>close</name></member>
     <member refid="classssl__stream_1a4725342e2cbd45353601ea030135487a" kind="function"><name>read</name></member>
     <member refid="classssl__stream_1aee26c635332fe8806177a5cf52b7a7b4" kind="function"><name>write</name></member>
     <member refid="classssl__stream_1adc3dfd5b9f969e5a3d5e646c3ae11994" kind="function"><name>read_all</name></member>
@@ -10733,15 +10910,6 @@
   </compound>
   <compound refid="structtree__barrier_1_1state__data" kind="struct"><name>tree_barrier::state_data</name>
     <member refid="structtree__barrier_1_1state__data_1a86b0134329734e5d7c21811ee96e3ebb" kind="variable"><name>tickets</name></member>
-  </compound>
-  <compound refid="structprocess_1_1state__info" kind="struct"><name>process::state_info</name>
-    <member refid="structprocess_1_1state__info_1a6598dd1fe07df238467557f2ab7df2c4" kind="variable"><name>process_id</name></member>
-    <member refid="structprocess_1_1state__info_1ac10f295add86d82d6fb2806ebd643e2d" kind="variable"><name>thread_id</name></member>
-    <member refid="structprocess_1_1state__info_1a364db330c5b9d31721f46338bd99ba3b" kind="variable"><name>process_handle</name></member>
-    <member refid="structprocess_1_1state__info_1ab1796cf3e0dbde7f205ddc77fcf9c074" kind="variable"><name>thread_handle</name></member>
-    <member refid="structprocess_1_1state__info_1afc29813a5d417fc8ae7d9c0703e3c037" kind="variable"><name>stdout_pipe</name></member>
-    <member refid="structprocess_1_1state__info_1af076950a1963de275017f09ebc4fff65" kind="variable"><name>is_running</name></member>
-    <member refid="structprocess_1_1state__info_1a1f7f72dc813cbea2a3f5fc1605d4055c" kind="variable"><name>stdout_output</name></member>
   </compound>
   <compound refid="structstatic__abs" kind="struct"><name>static_abs</name>
   </compound>
@@ -11207,7 +11375,7 @@
     <member refid="classsystem__event_1a836fe1a751b10858f44697fdd940aa9fad15df6f4bb58577e7078575bd2924794" kind="enumvalue"><name>auto_reset</name></member>
     <member refid="classsystem__event_1af02e041ae9a6184ea35906f3c38c182e" kind="variable"><name>handle_</name></member>
     <member refid="classsystem__event_1a4a744bf4cbc914d2b0607f48c9aa8017" kind="variable"><name>type_</name></member>
-    <member refid="classsystem__event_1aaffbccb71e65565978b0a320143debd9" kind="function"><name>system_event</name></member>
+    <member refid="classsystem__event_1a6b4cbd5be761d22c4cac58418c14d4ca" kind="function"><name>system_event</name></member>
     <member refid="classsystem__event_1aa16f20c9949030b16ca0b787f63572f4" kind="function"><name>~system_event</name></member>
     <member refid="classsystem__event_1acd4c7016816d6bda0b3d80c915fbd5a7" kind="function"><name>system_event</name></member>
     <member refid="classsystem__event_1ae0a6c81228cd98f64461e71ee03d7549" kind="function"><name>operator=</name></member>
@@ -11217,6 +11385,7 @@
     <member refid="classsystem__event_1a7c349b939fea1a128c803d1035ee76f8" kind="function"><name>reset</name></member>
     <member refid="classsystem__event_1a88a8392cfe11e8ca599f429e60e4eea7" kind="function"><name>wait</name></member>
     <member refid="classsystem__event_1af3914964c19a58d549eec0587b8fac1f" kind="function"><name>event_type</name></member>
+    <member refid="classsystem__event_1a09f6cc9daf074ce180c14b5a6cd1661e" kind="function"><name>native_handle</name></member>
   </compound>
   <compound refid="structsystem__exception" kind="struct"><name>system_exception</name>
     <member refid="structsystem__exception_1a8990e7ffc6a44de5648dc41fd0a56476" kind="variable"><name>static_type</name></member>
@@ -11508,11 +11677,12 @@
     <member refid="classtcp__acceptor_1a01f29ebfd1e0f953d9f1f5ca7ec9896a" kind="function"><name>open</name></member>
     <member refid="classtcp__acceptor_1a4981086af1b46cb09f58784469d16f13" kind="function"><name>accept</name></member>
     <member refid="classtcp__acceptor_1a677e1317fe230cd82993671b39e0fec9" kind="function"><name>accept_nonblock</name></member>
+    <member refid="classtcp__acceptor_1ac45ca9c8151fc981e49861f5e85b0434" kind="function"><name>open</name></member>
   </compound>
   <compound refid="classtcp__client" kind="class"><name>tcp_client</name>
     <member refid="classtcp__client_1a1c6ad9cebb50df86eb1a086cf9654a04" kind="function"><name>create_socket</name></member>
-    <member refid="classtcp__client_1a5f445fbc003f62fbec15cf13422eaf5d" kind="function"><name>tcp_client_base</name></member>
-    <member refid="classtcp__client_1ae871291551e7990a0716bb07ce8aa850" kind="function"><name>tcp_client_base</name></member>
+    <member refid="classtcp__client_1ae81557265085d2bec93e958c2440c281" kind="function"><name>tcp_client_base</name></member>
+    <member refid="classtcp__client_1a2fb51291207591885f561ea3e8577126" kind="function"><name>tcp_client_base</name></member>
     <member refid="classtcp__client_1af887f41cf05a9c8eb1fbe4633b544b4e" kind="function"><name>tcp_client_base</name></member>
     <member refid="classtcp__client_1a748111cebf2c812f1e9b2a709d24196a" kind="function"><name>tcp_client_base</name></member>
   </compound>
@@ -11520,7 +11690,7 @@
     <member refid="classtcp__client__base_1ae623bfbec50de5d6d23c4ab5e92c9264" kind="typedef"><name>exception_handler_t</name></member>
     <member refid="classtcp__client__base_1ad09db647aea484d8b3fa32368c41da67" kind="typedef"><name>connect_callback_t</name></member>
     <member refid="classtcp__client__base_1adb8a5f228722c6db09638ab34761236a" kind="typedef"><name>disconnect_callback_t</name></member>
-    <member refid="classtcp__client__base_1ab8584da06a5e778efd18bbd35a08a425" kind="variable"><name>dns_</name></member>
+    <member refid="classtcp__client__base_1a4a2602c7b3ac452c878f8f43bbca1933" kind="variable"><name>dns_</name></member>
     <member refid="classtcp__client__base_1ae3f0cb8189dc0880404cdb1c331197a8" kind="variable"><name>socket_</name></member>
     <member refid="classtcp__client__base_1a7d2d1a53ec558a06102823e38a18be74" kind="variable"><name>connected_host_</name></member>
     <member refid="classtcp__client__base_1a73bde0cc117b889468d6d90f8a185270" kind="variable"><name>connected_port_</name></member>
@@ -11542,8 +11712,8 @@
     <member refid="classtcp__client__base_1a1f61b161f3a5771e1a03e59dc3783dde" kind="function"><name>try_connect_to_ip</name></member>
     <member refid="classtcp__client__base_1a8e8daee93857653ebe71413cd72b94e8" kind="function"><name>reconnect_if_needed</name></member>
     <member refid="classtcp__client__base_1a027f6ee8937a242f8b06edf1070cb5eb" kind="function"><name>handle_exception</name></member>
-    <member refid="classtcp__client__base_1a5f445fbc003f62fbec15cf13422eaf5d" kind="function"><name>tcp_client_base</name></member>
-    <member refid="classtcp__client__base_1ae871291551e7990a0716bb07ce8aa850" kind="function"><name>tcp_client_base</name></member>
+    <member refid="classtcp__client__base_1ae81557265085d2bec93e958c2440c281" kind="function"><name>tcp_client_base</name></member>
+    <member refid="classtcp__client__base_1a2fb51291207591885f561ea3e8577126" kind="function"><name>tcp_client_base</name></member>
     <member refid="classtcp__client__base_1a81d04e7bbfd939b65c6a3bbb394f148c" kind="function"><name>~tcp_client_base</name></member>
     <member refid="classtcp__client__base_1af887f41cf05a9c8eb1fbe4633b544b4e" kind="function"><name>tcp_client_base</name></member>
     <member refid="classtcp__client__base_1a88a7fbdf7d1bc6b7b4fcb3034dc702a8" kind="function"><name>operator=</name></member>
@@ -11588,19 +11758,20 @@
   </compound>
   <compound refid="classtcp__server" kind="class"><name>tcp_server</name>
     <member refid="classtcp__server_1af1b99d7667e6fe8458ba8514330d3326" kind="function"><name>create_acceptor</name></member>
-    <member refid="classtcp__server_1a208f12b7ca522eca2a609764409b5db9" kind="function"><name>accept_one</name></member>
+    <member refid="classtcp__server_1acc3956671f739e7022d82201f0bb87a4" kind="function"><name>accept_one</name></member>
     <member refid="classtcp__server_1afd3f0bf8e207d844dbedb1b8c6720e5c" kind="function"><name>tcp_server_base</name></member>
     <member refid="classtcp__server_1a7dbdc38039a593e363a0ecb0eee2bbbf" kind="function"><name>tcp_server_base</name></member>
     <member refid="classtcp__server_1aff23675d9f2b7e6b8f269e68eda0c8df" kind="function"><name>tcp_server_base</name></member>
   </compound>
   <compound refid="classtcp__server__base" kind="class"><name>tcp_server_base</name>
-    <member refid="classtcp__server__base_1a32641f5767778e30b8c31b3d32441295" kind="typedef"><name>client_handler_t</name></member>
+    <member refid="classtcp__server__base_1abef2c5b5cbfeda60f09e2c43f7b9a6ae" kind="typedef"><name>client_handler_t</name></member>
     <member refid="classtcp__server__base_1a5f608ddaffbd9596fd27cdfc6401a27b" kind="typedef"><name>exception_handler_t</name></member>
     <member refid="classtcp__server__base_1aff2d84f5024c7b4e2bda393c213bf2c7" kind="variable"><name>acceptor_</name></member>
     <member refid="classtcp__server__base_1aa38767b5f095b470707df772b5cb0107" kind="variable"><name>port_</name></member>
     <member refid="classtcp__server__base_1ae598f3ebdc396f44146ba8da6bed8f67" kind="variable"><name>running_</name></member>
     <member refid="classtcp__server__base_1aa8d9f9a53edb4699d0825cf499baba0c" kind="variable"><name>worker_threads_</name></member>
     <member refid="classtcp__server__base_1a2d72c2c3af83d0bc20fcd5effaf05874" kind="variable"><name>client_pool_</name></member>
+    <member refid="classtcp__server__base_1a735bef21abd2a1a64c22fc2ebb9c9ec8" kind="variable"><name>worker_count_</name></member>
     <member refid="classtcp__server__base_1af6dd3d7553c83b5c22e63790a189996f" kind="variable"><name>wake_event_</name></member>
     <member refid="classtcp__server__base_1ade73ba8bbe4053f6f29d41cb2a34aba5" kind="variable"><name>handler_mutex_</name></member>
     <member refid="classtcp__server__base_1a5e6ff6717c9972d255c9bee34975594e" kind="variable"><name>client_handler_</name></member>
@@ -11608,8 +11779,8 @@
     <member refid="classtcp__server__base_1a1a7e1de9c6df5ba9aa1a12feb06023b8" kind="variable"><name>acceptor_mutex_</name></member>
     <member refid="classtcp__server__base_1a6cfadb556ef18b029e0c510f143e833b" kind="function"><name>notify_stop</name></member>
     <member refid="classtcp__server__base_1a339fb280765125ff0e63bb3cb89bcb15" kind="function"><name>accept_loop</name></member>
-    <member refid="classtcp__server__base_1a24bf1c8ad6716a8348518f48fad88eb2" kind="function"><name>handle_client</name></member>
-    <member refid="classtcp__server__base_1adba355ecdbc0013f1172b368c30107e1" kind="function"><name>accept_one</name></member>
+    <member refid="classtcp__server__base_1ad0918dc0cbe8e5bb50e51efffb1cfbcb" kind="function"><name>handle_client</name></member>
+    <member refid="classtcp__server__base_1a0f40159b08863e754d41ea0a32ff78ce" kind="function"><name>accept_one</name></member>
     <member refid="classtcp__server__base_1ab04f76ce60e358af3452ca403ad8c2c3" kind="function"><name>create_acceptor</name></member>
     <member refid="classtcp__server__base_1afd3f0bf8e207d844dbedb1b8c6720e5c" kind="function"><name>tcp_server_base</name></member>
     <member refid="classtcp__server__base_1ae8163e7386fbe9d18a798e5a6e1f1b3e" kind="function"><name>~tcp_server_base</name></member>
@@ -12211,7 +12382,7 @@
   </compound>
   <compound refid="structicmp__socket_1_1traceroute__hop" kind="struct"><name>icmp_socket::traceroute_hop</name>
     <member refid="structicmp__socket_1_1traceroute__hop_1af415cdec4d92a7280940fbd2c9941ee6" kind="variable"><name>address</name></member>
-    <member refid="structicmp__socket_1_1traceroute__hop_1a625ac742b839eaae6c0d6f8a0e42f54f" kind="variable"><name>rtt</name></member>
+    <member refid="structicmp__socket_1_1traceroute__hop_1af3d927aae8630a8e6b4b1c9507b7a579" kind="variable"><name>rtt</name></member>
     <member refid="structicmp__socket_1_1traceroute__hop_1a21b126242c47e88372efbb157bfe0cee" kind="variable"><name>reached</name></member>
   </compound>
   <compound refid="structtransform__adaptor" kind="struct"><name>transform_adaptor</name>
@@ -13147,6 +13318,15 @@
     <member refid="structvalue__exception_1a62e42e4366446f308bddac122dc685ca" kind="function"><name>value_exception</name></member>
     <member refid="structvalue__exception_1a7ed7431697b28ae8f8a7bfdd919c4795" kind="function"><name>~value_exception</name></member>
   </compound>
+  <compound refid="structregistry__key_1_1value__info" kind="struct"><name>registry_key::value_info</name>
+    <member refid="structregistry__key_1_1value__info_1a47895af2be8df6861d1735584a82e75c" kind="variable"><name>name</name></member>
+    <member refid="structregistry__key_1_1value__info_1aefe90f1b0a50eabfef71b2536fe87995" kind="variable"><name>type</name></member>
+    <member refid="structregistry__key_1_1value__info_1a50b6609c33b6da1d6356f17f43767962" kind="variable"><name>data</name></member>
+    <member refid="structregistry__key_1_1value__info_1add64701bf69fbe8b81e1a19354aef600" kind="function"><name>to_string</name></member>
+    <member refid="structregistry__key_1_1value__info_1ad634b24f9518755103b72c785eec0800" kind="function"><name>to_dword</name></member>
+    <member refid="structregistry__key_1_1value__info_1a70771f4f5c15961c71a4c1d4945e7087" kind="function"><name>to_qword</name></member>
+    <member refid="structregistry__key_1_1value__info_1a5fdc7641a36cf240468d956674446bb6" kind="function"><name>to_multi_string</name></member>
+  </compound>
   <compound refid="structvariant" kind="struct"><name>variant</name>
     <member refid="structvariant_1a25f8a68e82f68692108de05f3fa39904" kind="typedef"><name>destruct_function</name></member>
     <member refid="structvariant_1a7d9e5ab150e078d2695b8d6686286171" kind="typedef"><name>copy_construct_function</name></member>
@@ -13444,13 +13624,13 @@
     <member refid="classweak__ptr_1a4d6ab0f9309ca450a190754f5b0951af" kind="function"><name>owner_before</name></member>
   </compound>
   <compound refid="structwebsocket__frame__header" kind="struct"><name>websocket_frame_header</name>
-    <member refid="structwebsocket__frame__header_1a1b549e887de81243c660984a5998a6d8" kind="variable"><name>fin</name></member>
-    <member refid="structwebsocket__frame__header_1a21caef92ad381f3a3345d1065a713941" kind="variable"><name>rsv1</name></member>
-    <member refid="structwebsocket__frame__header_1a1c13753070b5ff4b78ace0bc4645844c" kind="variable"><name>rsv2</name></member>
-    <member refid="structwebsocket__frame__header_1a80cda03abff7f3c4dcc8dbb7e82b36da" kind="variable"><name>rsv3</name></member>
     <member refid="structwebsocket__frame__header_1a99bff57a2a67a456892b25753778cea9" kind="variable"><name>opcode</name></member>
-    <member refid="structwebsocket__frame__header_1adefb09ea38566fb365fe7ae2e75a1493" kind="variable"><name>masked</name></member>
+    <member refid="structwebsocket__frame__header_1a80cda03abff7f3c4dcc8dbb7e82b36da" kind="variable"><name>rsv3</name></member>
+    <member refid="structwebsocket__frame__header_1a1c13753070b5ff4b78ace0bc4645844c" kind="variable"><name>rsv2</name></member>
+    <member refid="structwebsocket__frame__header_1a21caef92ad381f3a3345d1065a713941" kind="variable"><name>rsv1</name></member>
+    <member refid="structwebsocket__frame__header_1a1b549e887de81243c660984a5998a6d8" kind="variable"><name>fin</name></member>
     <member refid="structwebsocket__frame__header_1aa02fde6646c5df941bee1b5446dc9f5a" kind="variable"><name>payload_len</name></member>
+    <member refid="structwebsocket__frame__header_1adefb09ea38566fb365fe7ae2e75a1493" kind="variable"><name>masked</name></member>
   </compound>
   <compound refid="classwebsocket__server" kind="class"><name>websocket_server</name>
     <member refid="classwebsocket__server_1ae34039860d8e90e6112af725a134005a" kind="typedef"><name>session_ptr</name></member>
@@ -13599,7 +13779,7 @@
     <member refid="classyaml__builder_1a767f084a2a3142b8190470b388cffd66" kind="function"><name>value_flow_sequence</name></member>
     <member refid="classyaml__builder_1abf640029a79cd8b4c580f06aa78f38a4" kind="function"><name>anchor</name></member>
     <member refid="classyaml__builder_1a2e163eab341fe7de98b81521d91b9d65" kind="function"><name>tag</name></member>
-    <member refid="classyaml__builder_1a015f1851426fa2eebe9012d56ba68b85" kind="function"><name>alias</name></member>
+    <member refid="classyaml__builder_1a475d92a13ac52a9a0e98c71da71f1eae" kind="function"><name>alias</name></member>
     <member refid="classyaml__builder_1a9d283281f1259c7c80d8a0963aff8d95" kind="function"><name>begin_document</name></member>
     <member refid="classyaml__builder_1a2d372bc19a85519834d067a14177b233" kind="function"><name>build</name></member>
     <member refid="classyaml__builder_1a2bd8550faac05c3243a6699bf8010207" kind="function"><name>build_documents</name></member>
@@ -13920,6 +14100,17 @@
   <compound refid="concepttotally__ordered__with" kind="concept"><name>totally_ordered_with</name>
   </compound>
   <compound refid="concept_view" kind="concept"><name>View</name>
+  </compound>
+  <compound refid="namespaceedns" kind="namespace"><name>edns</name>
+    <member refid="namespaceedns_1a52485fee82b9ac7ddaab859aee7e13e9" kind="variable"><name>OPT_TYPE</name></member>
+    <member refid="namespaceedns_1af389633c2659ce56089ac80bc1581fa9" kind="variable"><name>DEFAULT_UDP_PAYLOAD</name></member>
+    <member refid="namespaceedns_1a9df548f93049460a80ead54982296a03" kind="variable"><name>MAX_UDP_PAYLOAD</name></member>
+    <member refid="namespaceedns_1a11b0311ad6d0efaecf69751bc01007df" kind="variable"><name>VERSION</name></member>
+    <member refid="namespaceedns_1a681d9eed57ebab5572572d2e9479f550" kind="variable"><name>EXT_RCODE_SHIFT</name></member>
+    <member refid="namespaceedns_1a9f7b804f6af6661cf1b2da326807fbba" kind="variable"><name>VERSION_SHIFT</name></member>
+    <member refid="namespaceedns_1a4c36762d5b9406f61e0c82265eee9313" kind="variable"><name>DO_BIT</name></member>
+    <member refid="namespaceedns_1a50cc7e4c00d6743106c57a70281924de" kind="variable"><name>MAX_UDP_RETRIES</name></member>
+    <member refid="namespaceedns_1ac85aba7c0bd93d829d20355291d13cf7" kind="variable"><name>NEGATIVE_CACHE_TTL</name></member>
   </compound>
   <compound refid="namespaceinner" kind="namespace"><name>inner</name>
   </compound>
@@ -14721,7 +14912,7 @@
     <member refid="group___exception_handling_1ga68249361ffc8d150053285c070c426b9" kind="define"><name>NEFORCE_THROW_EXCEPTION</name></member>
     <member refid="group___exception_handling_1gab8d2a61217d1d4200f90aefe0e99a813" kind="define"><name>NEFORCE_ASSERTION</name></member>
     <member refid="group___exception_handling_1ga85d57a425c36f9ca490ce7e62793bef1" kind="function"><name>uncaught_exceptions</name></member>
-    <member refid="group___exception_handling_1ga26a943a5175254fd422ec576b075a3d9" kind="function"><name>throw_with_stack</name></member>
+    <member refid="group___exception_handling_1gafe66b310cbf7bfa17ba13537186a4891" kind="function"><name>throw_with_stack</name></member>
   </compound>
   <compound refid="exception__ptr_8hpp" kind="file"><name>exception_ptr.hpp</name>
     <member refid="group___exception_handling_1ga0f02f03c5458da96674d6339945db262" kind="function"><name>rethrow_exception</name></member>
@@ -15103,6 +15294,7 @@
     <member refid="group___memory_view_1ga9c885eabdc7bd07abd80b7eed318f976" kind="function"><name>memory_view</name></member>
     <member refid="group___memory_view_1gab1ac4a27b222e2edff55cf80d966a683" kind="function"><name>memory_view</name></member>
     <member refid="group___memory_view_1gaa735d26387b1826e55ac7b6dfbc6d776" kind="function"><name>memory_view</name></member>
+    <member refid="group___memory_view_1ga39145c55cc84b31a5f6601a1c4d3a122" kind="function"><name>dynamic_view_cast</name></member>
   </compound>
   <compound refid="shared__ptr_8hpp" kind="file"><name>shared_ptr.hpp</name>
     <member refid="group___shared_pointer_1ga8d020ec774ed485200b46a82eacbcdb9" kind="variable"><name>is_shared_ptr_v</name></member>
@@ -15328,7 +15520,9 @@
     <member refid="group___reflection_1gafc434cedd29fcb0b3450b3f9a7d3286d" kind="define"><name>NEFORCE_REFLECT_REGISTER_DERIVED</name></member>
     <member refid="group___reflection_1ga5a74d42372d4485518ebb6915c124a37" kind="function"><name>reflect</name></member>
   </compound>
-  <compound refid="registry_8hpp" kind="file"><name>registry.hpp</name>
+  <compound refid="reflect_2registry_8hpp" kind="file"><name>reflect/registry.hpp</name>
+  </compound>
+  <compound refid="system_2registry_8hpp" kind="file"><name>system/registry.hpp</name>
   </compound>
   <compound refid="type_8hpp" kind="file"><name>type.hpp</name>
   </compound>
@@ -16049,7 +16243,7 @@
   </compound>
   <compound refid="dns__message_8hpp" kind="file"><name>dns_message.hpp</name>
     <member refid="group___d_n_s_1ga973c6b85131920f4de96d7db1206a51b" kind="enum"><name>dns_opcode</name></member>
-    <member refid="group___d_n_s_1ga12a6552e04528df27737709ea060c9d1" kind="enum"><name>dns_query</name></member>
+    <member refid="group___d_n_s_1ga6f72845b22666dbf3cce34aeb6d805a0" kind="enum"><name>dns_class</name></member>
     <member refid="group___d_n_s_1ga4512397ee6460c3c286f1220692348c7" kind="enum"><name>dns_response</name></member>
   </compound>
   <compound refid="ftp__client_8hpp" kind="file"><name>ftp_client.hpp</name>
@@ -16065,30 +16259,46 @@
   <compound refid="http__constants_8hpp" kind="file"><name>http_constants.hpp</name>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57" kind="enum"><name>http_status</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a3c266ecde8a7bb86ba08a9f6f363b92d" kind="enumvalue"><name>S1_CONTINUE</name></member>
-    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a89facff6ff11ebcfe69b47acfb4111ee" kind="enumvalue"><name>S1_SWITCH_PROTOCOL</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a257cce4a273a6fb4c13bfa843588fd7f" kind="enumvalue"><name>S1_SWITCHING_PROTOCOLS</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57aa83896e2df473a400c23e956ffc554f6" kind="enumvalue"><name>S2_OK</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a6193bd6cc646c7cf4bfdc1f05279877c" kind="enumvalue"><name>S2_CREATED</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57abc86a97590ca34b7ab190b16b9d09e7e" kind="enumvalue"><name>S2_ACCEPTED</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a8d42f2965c28afe10d1b05b33db0a416" kind="enumvalue"><name>S2_NO_CONTENT</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a696ce3f29058109bb04f848bf1b1d1a2" kind="enumvalue"><name>S2_PARTIAL_CONTENT</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a6ad07ea94d4b2ecf04eddb103449b051" kind="enumvalue"><name>S3_MOVED_PERMANENT</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57aab919dcc929ab53a898db9669fcf1e5e" kind="enumvalue"><name>S3_FOUND</name></member>
-    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a16bbec1d94dcdc5c5e5df3d10e23cbc8" kind="enumvalue"><name>S3_NO_MODIFIED</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57aff97c356ef9341dbe1a23b0f78a9a91f" kind="enumvalue"><name>S3_SEE_OTHER</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a5ad13c19147ebbbd88ac377a5492ccee" kind="enumvalue"><name>S3_NOT_MODIFIED</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57ada2aa008b3b166c842b0b401441626a0" kind="enumvalue"><name>S3_TEMPORARY_REDIRECT</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57adaf17fc8235b23fc1e6dc42729bdefe0" kind="enumvalue"><name>S3_PERMANENT_REDIRECT</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57acc8baea14488f6d94b0425c8f4927bbe" kind="enumvalue"><name>S4_BAD_REQUEST</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a25a638b42981b1cd34824c4041da53fa" kind="enumvalue"><name>S4_UNAUTHORIZED</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a335c1bcef2020f298cd6c113d2a60e15" kind="enumvalue"><name>S4_FORBIDDEN</name></member>
-    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a6ee8b119267b990c677d97ecb05d5b90" kind="enumvalue"><name>S4_NOT_FOUNT</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57ab4a27499c9d97b7e5bb4825ae00040aa" kind="enumvalue"><name>S4_NOT_FOUND</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a2d527ba076940f69996a2dfd75bccd1d" kind="enumvalue"><name>S4_METHOD_NOT_ALLOWED</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57adee1fea15ea13fe956c1aee931699263" kind="enumvalue"><name>S4_NOT_ACCEPTABLE</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57ada647e0a22d32d8a603f81b5c1cdacac" kind="enumvalue"><name>S4_PROXY_AUTH_REQUIRED</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57ae8e7f3def061fba55cfcd97e1b02d7d5" kind="enumvalue"><name>S4_REQUEST_TIMEOUT</name></member>
-    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a3e29df50fdccbe42eb28b739f8d70c85" kind="enumvalue"><name>S4_PAYLOAD_LARGE</name></member>
-    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a4ffa395d1b3d8303bf241d49a4595c4c" kind="enumvalue"><name>S4_URL_LONG</name></member>
-    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a1f863a4da61fc4d41f6a7912a59901a7" kind="enumvalue"><name>S4_MANY_REQUESTS</name></member>
-    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a09699209b13061ea3397c2eef26129a5" kind="enumvalue"><name>S5_INTERNAL_ERROR</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a73b1029c99b96c06d84d8acb424a6a6e" kind="enumvalue"><name>S4_CONFLICT</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57ae0c8d3a7b88e93f5e7cc577a0fba950a" kind="enumvalue"><name>S4_GONE</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a7f7aaf345526658f5b59d43bea4fb436" kind="enumvalue"><name>S4_LENGTH_REQUIRED</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a8502c05ccda769b77635e0f517904876" kind="enumvalue"><name>S4_PRECONDITION_FAILED</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a673f3cac9b31b1e8412bc77c1b6c57c3" kind="enumvalue"><name>S4_UNSUPPORTED_MEDIA_TYPE</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57ac26956ba9fd851a107c3c5b42a159b01" kind="enumvalue"><name>S4_RANGE_NOT_SATISFIABLE</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a3ee02b657a3d2840734b77268a15e9eb" kind="enumvalue"><name>S4_EXPECTATION_FAILED</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a8da9ee13e1822f738718f3f8bfd2ed6e" kind="enumvalue"><name>S4_UNPROCESSABLE_CONTENT</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a9c51d02045be6610805dc4542cea8e3b" kind="enumvalue"><name>S4_UPGRADE_REQUIRED</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57ac31c497c821792015879c93a3abfc805" kind="enumvalue"><name>S4_PAYLOAD_TOO_LARGE</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a6646df4828f4bb98cbddd5d7c382f6e7" kind="enumvalue"><name>S4_URI_TOO_LONG</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a7852aa3234e5d5ad8152f2e897cea25e" kind="enumvalue"><name>S4_TOO_MANY_REQUESTS</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57aa5fd6ad8f9f9463632b596b723c94d7c" kind="enumvalue"><name>S4_HEADER_FIELDS_TOO_LARGE</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a3a17fa83a40ae8c4acc814cc4e396525" kind="enumvalue"><name>S4_UNAVAILABLE_FOR_LEGAL_REASONS</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a1bebfb76ff25605feaf072cf7c4cddd6" kind="enumvalue"><name>S5_INTERNAL_SERVER_ERROR</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a1b2fcd21f1c6b22773696e08ff8bed76" kind="enumvalue"><name>S5_BAD_GATEWAY</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a8c71cd08789b108bc683683d44c0acbe" kind="enumvalue"><name>S5_SERVICE_UNAVAILABLE</name></member>
     <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a0f68fb990eb482eb482d2ff145a1283f" kind="enumvalue"><name>S5_GATEWAY_TIMEOUT</name></member>
-    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a27d70a90647e862409a82231321cf089" kind="enumvalue"><name>S5_HTTP_VERSION_NOT_SUPPORT</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a68e6edb46bc09b4bb1b5e501ec4ac767" kind="enumvalue"><name>S5_NOT_IMPLEMENTED</name></member>
+    <member refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57a03e19cfa2ee1933aa9ce3b8e25c87fd1" kind="enumvalue"><name>S5_HTTP_VERSION_NOT_SUPPORTED</name></member>
     <member refid="group___exceptions_1gafd75aa661d656d0fe01b7869965c0bd6" kind="function"><name>NEFORCE_ERROR_BUILD_FINAL_CLASS</name></member>
     <member refid="http__constants_8hpp_1adbbe82d9ba76298b19bf325beda9ec70" kind="function"><name>http_status_message</name></member>
     <member refid="http__constants_8hpp_1a081479674fa54aed6caa7a94bc85f412" kind="function"><name>http_status_from_code</name></member>
@@ -17005,7 +17215,7 @@
   </compound>
   <compound refid="group___exception_handling" kind="group"><name>ExceptionHandling</name>
     <member refid="group___exception_handling_1ga85d57a425c36f9ca490ce7e62793bef1" kind="function"><name>uncaught_exceptions</name></member>
-    <member refid="group___exception_handling_1ga26a943a5175254fd422ec576b075a3d9" kind="function"><name>throw_with_stack</name></member>
+    <member refid="group___exception_handling_1gafe66b310cbf7bfa17ba13537186a4891" kind="function"><name>throw_with_stack</name></member>
     <member refid="group___exception_handling_1ga0f02f03c5458da96674d6339945db262" kind="function"><name>rethrow_exception</name></member>
     <member refid="group___exception_handling_1gac43ce5d8fc82090c24f3088e37cc2d89" kind="function"><name>make_exception_ptr</name></member>
     <member refid="group___exception_handling_1ga71f0549a1cdf5c7742d5172b7bda6a14" kind="function"><name>current_exception</name></member>
@@ -17353,6 +17563,7 @@
     <member refid="group___memory_view_1ga9c885eabdc7bd07abd80b7eed318f976" kind="function"><name>memory_view</name></member>
     <member refid="group___memory_view_1gab1ac4a27b222e2edff55cf80d966a683" kind="function"><name>memory_view</name></member>
     <member refid="group___memory_view_1gaa735d26387b1826e55ac7b6dfbc6d776" kind="function"><name>memory_view</name></member>
+    <member refid="group___memory_view_1ga39145c55cc84b31a5f6601a1c4d3a122" kind="function"><name>dynamic_view_cast</name></member>
   </compound>
   <compound refid="group___shared_pointer" kind="group"><name>SharedPointer</name>
     <member refid="group___shared_pointer_1ga8d020ec774ed485200b46a82eacbcdb9" kind="variable"><name>is_shared_ptr_v</name></member>
@@ -17779,6 +17990,8 @@
   <compound refid="group___pipe" kind="group"><name>Pipe</name>
   </compound>
   <compound refid="group___process" kind="group"><name>Process</name>
+  </compound>
+  <compound refid="group___windows_system_registry" kind="group"><name>WindowsSystemRegistry</name>
   </compound>
   <compound refid="group___share_memory" kind="group"><name>ShareMemory</name>
   </compound>
@@ -18255,11 +18468,11 @@
     <member refid="group___d_n_s_1gga973c6b85131920f4de96d7db1206a51ba5f241c8c8f985b3c51e05d39cf030f4c" kind="enumvalue"><name>STATUS</name></member>
     <member refid="group___d_n_s_1gga973c6b85131920f4de96d7db1206a51ba9d087bfb809874e1b3e9adcbae8ca761" kind="enumvalue"><name>NOTIFY</name></member>
     <member refid="group___d_n_s_1gga973c6b85131920f4de96d7db1206a51ba15a8022d0ed9cd9c2a2e756822703eb4" kind="enumvalue"><name>UPDATE</name></member>
-    <member refid="group___d_n_s_1ga12a6552e04528df27737709ea060c9d1" kind="enum"><name>dns_query</name></member>
-    <member refid="group___d_n_s_1gga12a6552e04528df27737709ea060c9d1ae43bd933c18b06d29f9c46cce78de0f2" kind="enumvalue"><name>INTERNET</name></member>
-    <member refid="group___d_n_s_1gga12a6552e04528df27737709ea060c9d1a7f903fc95c5f6059a3c0d1b22820dbf7" kind="enumvalue"><name>CHAOS</name></member>
-    <member refid="group___d_n_s_1gga12a6552e04528df27737709ea060c9d1a968ced8fabc2a848519f87df57607aee" kind="enumvalue"><name>HESIOD</name></member>
-    <member refid="group___d_n_s_1gga12a6552e04528df27737709ea060c9d1a8e1bde3c3d303163521522cf1d62f21f" kind="enumvalue"><name>ANY</name></member>
+    <member refid="group___d_n_s_1ga6f72845b22666dbf3cce34aeb6d805a0" kind="enum"><name>dns_class</name></member>
+    <member refid="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2" kind="enumvalue"><name>INTERNET</name></member>
+    <member refid="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0a7f903fc95c5f6059a3c0d1b22820dbf7" kind="enumvalue"><name>CHAOS</name></member>
+    <member refid="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0a968ced8fabc2a848519f87df57607aee" kind="enumvalue"><name>HESIOD</name></member>
+    <member refid="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0a8e1bde3c3d303163521522cf1d62f21f" kind="enumvalue"><name>ANY</name></member>
     <member refid="group___d_n_s_1ga4512397ee6460c3c286f1220692348c7" kind="enum"><name>dns_response</name></member>
     <member refid="group___d_n_s_1gga4512397ee6460c3c286f1220692348c7a71b596df7cfe9f22486d013e022dab21" kind="enumvalue"><name>NON_ERROR</name></member>
     <member refid="group___d_n_s_1gga4512397ee6460c3c286f1220692348c7a57779da5393b24165afff75397dd8862" kind="enumvalue"><name>FORMAT_ERROR</name></member>
@@ -18302,6 +18515,8 @@
   </compound>
   <compound refid="group___s_m_t_p" kind="group"><name>SMTP</name>
   </compound>
+  <compound refid="group___socket_base" kind="group"><name>SocketBase</name>
+  </compound>
   <compound refid="group___s_s_l" kind="group"><name>SSL</name>
     <member refid="group___s_s_l_1ga4012ce4e3211cb41f69956042abba0c8" kind="enum"><name>ssl_method</name></member>
     <member refid="group___s_s_l_1gga4012ce4e3211cb41f69956042abba0c8a14d312999c21d820b35f5990c4304387" kind="enumvalue"><name>TLS_SERVER</name></member>
@@ -18331,8 +18546,6 @@
     <member refid="group___plugin_1ga74771a48a81e35febe1026112c62e1f8" kind="function"><name>destroy_plugin</name></member>
     <member refid="group___plugin_1gaf25d3a0e4b54927bc59ad58466f31dcc" kind="define"><name>NEFORCE_PLUGIN_CREATE_FUNC</name></member>
     <member refid="group___plugin_1gad609af93bddb00f7c05edb56b9dc08bf" kind="define"><name>NEFORCE_PLUGIN_DESTROY_FUNC</name></member>
-  </compound>
-  <compound refid="group___network" kind="group"><name>Network</name>
   </compound>
   <compound refid="md__m_a_i_n_p_a_g_e" kind="page"><name>md__m_a_i_n_p_a_g_e</name>
   </compound>

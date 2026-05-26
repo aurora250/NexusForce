@@ -364,6 +364,7 @@
         <referencedby refid="structexception_1a33710bd2e564614575128e2c3de94883" compoundref="exception_8hpp" startline="92" endline="100">exception</referencedby>
         <referencedby refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" compoundref="exception_8hpp" startline="165" endline="166">exception</referencedby>
         <referencedby refid="structsocket__exception_1ac120faa4a48b9c05bb4e0632ce707a38">socket_exception::is_would_block</referencedby>
+        <referencedby refid="structregistry__key__exception_1afd26cee9d334eaf6dc1eb2c1cd8e6e9d" compoundref="system_2registry_8hpp" startline="37" endline="39">registry_key_exception::registry_key_exception</referencedby>
       </memberdef>
       <memberdef kind="function" id="structexception_1ab8a744225b6ddc8976987ba16a0fd046" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>int</type>
@@ -385,6 +386,7 @@
         <referencedby refid="structexception_1a33710bd2e564614575128e2c3de94883" compoundref="exception_8hpp" startline="92" endline="100">exception</referencedby>
         <referencedby refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" compoundref="exception_8hpp" startline="165" endline="166">exception</referencedby>
         <referencedby refid="structsocket__exception_1ac120faa4a48b9c05bb4e0632ce707a38">socket_exception::is_would_block</referencedby>
+        <referencedby refid="structregistry__key__exception_1afd26cee9d334eaf6dc1eb2c1cd8e6e9d" compoundref="system_2registry_8hpp" startline="37" endline="39">registry_key_exception::registry_key_exception</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -417,22 +419,22 @@
         <childnode refid="17" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="27">
+      <node id="28">
         <label>database_exception</label>
         <link refid="structdatabase__exception"/>
-        <childnode refid="26" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="28">
-        <label>database_stmt_exception</label>
-        <link refid="structdatabase__stmt__exception"/>
         <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
       <node id="29">
+        <label>database_stmt_exception</label>
+        <link refid="structdatabase__stmt__exception"/>
+        <childnode refid="28" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="30">
         <label>database_typecast_exception</label>
         <link refid="structdatabase__typecast__exception"/>
-        <childnode refid="27" relation="public-inheritance">
+        <childnode refid="28" relation="public-inheritance">
         </childnode>
       </node>
       <node id="17">
@@ -453,10 +455,10 @@
         <childnode refid="15" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="34">
+      <node id="35">
         <label>env_exception</label>
         <link refid="structenv__exception"/>
-        <childnode refid="33" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -487,10 +489,10 @@
         <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="35">
+      <node id="36">
         <label>ini_exception</label>
         <link refid="structini__exception"/>
-        <childnode refid="33" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
       <node id="5">
@@ -499,10 +501,10 @@
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="36">
+      <node id="37">
         <label>json_exception</label>
         <link refid="structjson__exception"/>
-        <childnode refid="33" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
       <node id="21">
@@ -511,10 +513,10 @@
         <childnode refid="15" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="37">
+      <node id="38">
         <label>math_exception</label>
         <link refid="structmath__exception"/>
-        <childnode refid="33" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
@@ -523,10 +525,10 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="30">
+      <node id="31">
         <label>neforce::lz4_exception</label>
         <link refid="structneforce_1_1lz4__exception"/>
-        <childnode refid="26" relation="public-inheritance">
+        <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
       <node id="9">
@@ -553,13 +555,19 @@
         <childnode refid="15" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="38">
+      <node id="39">
         <label>regex_exception</label>
         <link refid="structregex__exception"/>
-        <childnode refid="33" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
       <node id="24">
+        <label>registry_key_exception</label>
+        <link refid="structregistry__key__exception"/>
+        <childnode refid="15" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="25">
         <label>share_memory_exception</label>
         <link refid="structshare__memory__exception"/>
         <childnode refid="15" relation="public-inheritance">
@@ -577,10 +585,10 @@
         <childnode refid="9" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="31">
+      <node id="32">
         <label>ssl_exception</label>
         <link refid="structssl__exception"/>
-        <childnode refid="26" relation="public-inheritance">
+        <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
       <node id="15">
@@ -589,22 +597,22 @@
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="26">
+      <node id="27">
         <label>thirdparty_exception</label>
         <link refid="structthirdparty__exception"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="25">
+      <node id="26">
         <label>thread_exception</label>
         <link refid="structthread__exception"/>
         <childnode refid="15" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="39">
+      <node id="40">
         <label>toml_exception</label>
         <link refid="structtoml__exception"/>
-        <childnode refid="33" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
       <node id="7">
@@ -613,22 +621,22 @@
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="33">
+      <node id="34">
         <label>value_exception</label>
         <link refid="structvalue__exception"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="40">
+      <node id="41">
         <label>yaml_exception</label>
         <link refid="structyaml__exception"/>
-        <childnode refid="33" relation="public-inheritance">
+        <childnode refid="34" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="32">
+      <node id="33">
         <label>zlib_exception</label>
         <link refid="structzlib__exception"/>
-        <childnode refid="26" relation="public-inheritance">
+        <childnode refid="27" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>

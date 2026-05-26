@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['认证方式_0',['SMTP 认证方式',['../group___s_m_t_p.html#auth_methods',1,'']]]
+  ['解析器架构_0',['解析器架构',['../classyaml__parser.html#parser_architecture',1,'']]]
 ];

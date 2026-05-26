@@ -34,5 +34,6 @@ var searchData=
   ['string_5futil_2ehpp_31',['string_util.hpp',['../string__util_8hpp.html',1,'']]],
   ['string_5fview_2ehpp_32',['string_view.hpp',['../string__view_8hpp.html',1,'']]],
   ['sysinfo_2ehpp_33',['sysinfo.hpp',['../sysinfo_8hpp.html',1,'']]],
-  ['system_5fevent_2ehpp_34',['system_event.hpp',['../system__event_8hpp.html',1,'']]]
+  ['system_2fregistry_2ehpp_34',['registry.hpp',['../system_2registry_8hpp.html',1,'']]],
+  ['system_5fevent_2ehpp_35',['system_event.hpp',['../system__event_8hpp.html',1,'']]]
 ];

@@ -27,7 +27,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @addtogroup NetworkUtil 网络通信工具
+ * @addtogroup NetworkUtil 网络工具
  * @{
  */
 

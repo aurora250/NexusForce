@@ -1,5 +1,16 @@
 var namespaces_dup =
 [
+    [ "edns", "namespaceedns.html", [
+      [ "DEFAULT_UDP_PAYLOAD", "namespaceedns.html#af389633c2659ce56089ac80bc1581fa9", null ],
+      [ "DO_BIT", "namespaceedns.html#a4c36762d5b9406f61e0c82265eee9313", null ],
+      [ "EXT_RCODE_SHIFT", "namespaceedns.html#a681d9eed57ebab5572572d2e9479f550", null ],
+      [ "MAX_UDP_PAYLOAD", "namespaceedns.html#a9df548f93049460a80ead54982296a03", null ],
+      [ "MAX_UDP_RETRIES", "namespaceedns.html#a50cc7e4c00d6743106c57a70281924de", null ],
+      [ "NEGATIVE_CACHE_TTL", "namespaceedns.html#ac85aba7c0bd93d829d20355291d13cf7", null ],
+      [ "OPT_TYPE", "namespaceedns.html#a52485fee82b9ac7ddaab859aee7e13e9", null ],
+      [ "VERSION", "namespaceedns.html#a11b0311ad6d0efaecf69751bc01007df", null ],
+      [ "VERSION_SHIFT", "namespaceedns.html#a9f7b804f6af6661cf1b2da326807fbba", null ]
+    ] ],
     [ "literals", "namespaceliterals.html", null ],
     [ "placeholders", "namespaceplaceholders.html", [
       [ "p1", "namespaceplaceholders.html#a24cb77f9d90366061989fddf5199a9f9", null ],

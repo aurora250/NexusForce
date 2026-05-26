@@ -26,7 +26,7 @@ var searchData=
   ['no_5fsuch_5fprocess_23',['no_such_process',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6ad91a9b8a734f2bef4b778f89806cbab7',1,'errc.hpp']]],
   ['non_5ferror_24',['NON_ERROR',['../group___d_n_s.html#gga4512397ee6460c3c286f1220692348c7a71b596df7cfe9f22486d013e022dab21',1,'dns_message.hpp']]],
   ['none_25',['None',['../classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40a3b3c056c09c6aa3121f41fcaf0987d21',1,'env_variable']]],
-  ['none_26',['none',['../classsmtp__socket.html#ac7a4dad72a3278c790807d7ab64efc95a334c4a4c42fdb79d7ebc3e73b517e6f8',1,'smtp_socket::none'],['../classsmtp__socket.html#abb07d7f04c19a03d2270597e95c526f6a334c4a4c42fdb79d7ebc3e73b517e6f8',1,'smtp_socket::none'],['../group___compression.html#ggabdadcdb8dedcef8891e61f37348a3b89a334c4a4c42fdb79d7ebc3e73b517e6f8',1,'none:&#160;zlib_compress.hpp']]],
+  ['none_26',['none',['../classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477a334c4a4c42fdb79d7ebc3e73b517e6f8',1,'registry_key::none'],['../classsmtp__socket.html#ac7a4dad72a3278c790807d7ab64efc95a334c4a4c42fdb79d7ebc3e73b517e6f8',1,'smtp_socket::none'],['../classsmtp__socket.html#abb07d7f04c19a03d2270597e95c526f6a334c4a4c42fdb79d7ebc3e73b517e6f8',1,'smtp_socket::none'],['../group___compression.html#ggabdadcdb8dedcef8891e61f37348a3b89a334c4a4c42fdb79d7ebc3e73b517e6f8',1,'none:&#160;zlib_compress.hpp']]],
   ['normal_27',['NORMAL',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea1e23852820b9154316c7c06e2b7ba051',1,'NORMAL:&#160;file_constants.hpp'],['../group___file.html#gga53c3f75e3242a97262ec084d0a588b9fa1e23852820b9154316c7c06e2b7ba051',1,'NORMAL:&#160;file_constants.hpp']]],
   ['normal_5fclosure_28',['NORMAL_CLOSURE',['../group___web_socket.html#ggab56e001ece32405515a29e0bf0d10c0fa459901592f44ead38af2f02c74a777d0',1,'websocket.hpp']]],
   ['not_5fa_5fdirectory_29',['not_a_directory',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a21e867ca95e1dfecff4701863547dcec',1,'errc.hpp']]],
@@ -34,11 +34,12 @@ var searchData=
   ['not_5fconnected_31',['not_connected',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a69c2dbb5917ca550a862e9c1c839bca1',1,'errc.hpp']]],
   ['not_5fenough_5fmemory_32',['not_enough_memory',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6aafdb5594dc3e484fc1bfd7c564d550c1',1,'errc.hpp']]],
   ['not_5fimplemented_33',['NOT_IMPLEMENTED',['../group___d_n_s.html#gga4512397ee6460c3c286f1220692348c7a3e860a081575fc82cc7b6ed2ca602947',1,'dns_message.hpp']]],
-  ['not_5fsupported_34',['not_supported',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6aa55e82356e9721946aa9ba954733c6f0',1,'errc.hpp']]],
-  ['notify_35',['NOTIFY',['../group___d_n_s.html#gga973c6b85131920f4de96d7db1206a51ba9d087bfb809874e1b3e9adcbae8ca761',1,'dns_message.hpp']]],
-  ['ns_36',['NS',['../structdns__record.html#ace803844a79fd551cc236ca97f8425e8aa0859e0465c13a07256b67200b4d6aa9',1,'dns_record']]],
-  ['ntp_37',['NTP',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8affd9626ed90842c4f788925c4409c0aa',1,'ports']]],
-  ['null_38',['Null',['../classjson__value.html#a04fcd4c27b006cfc74a3204774a5805faf3d38d2ee1fb610ab1344aa3910aaf2e',1,'json_value::Null'],['../classyaml__value.html#a408d20891c27dc523f9ac6fa971c7633aa775a43cea16e807d355941f57dbf173',1,'yaml_value::Null']]],
-  ['number_39',['Number',['../classjson__value.html#a04fcd4c27b006cfc74a3204774a5805fa0caaf5439c72e875abb005f577287514',1,'json_value']]],
-  ['numeric_40',['NUMERIC',['../group___format.html#gga42d318d7a8f82021aa5e0db07e420bebab22f521f17b09d0fd389e231f8f6d66d',1,'format.hpp']]]
+  ['not_5fprivileged_34',['not_privileged',['../classprocess.html#a85cd03dae91e9e2a916de7b19044520da28770b882ab896ee0d7539ef7e4681ee',1,'process']]],
+  ['not_5fsupported_35',['not_supported',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6aa55e82356e9721946aa9ba954733c6f0',1,'errc.hpp']]],
+  ['notify_36',['NOTIFY',['../group___d_n_s.html#gga973c6b85131920f4de96d7db1206a51ba9d087bfb809874e1b3e9adcbae8ca761',1,'dns_message.hpp']]],
+  ['ns_37',['NS',['../structdns__record.html#ace803844a79fd551cc236ca97f8425e8aa0859e0465c13a07256b67200b4d6aa9',1,'dns_record']]],
+  ['ntp_38',['NTP',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8affd9626ed90842c4f788925c4409c0aa',1,'ports']]],
+  ['null_39',['Null',['../classjson__value.html#a04fcd4c27b006cfc74a3204774a5805faf3d38d2ee1fb610ab1344aa3910aaf2e',1,'json_value::Null'],['../classyaml__value.html#a408d20891c27dc523f9ac6fa971c7633aa775a43cea16e807d355941f57dbf173',1,'yaml_value::Null']]],
+  ['number_40',['Number',['../classjson__value.html#a04fcd4c27b006cfc74a3204774a5805fa0caaf5439c72e875abb005f577287514',1,'json_value']]],
+  ['numeric_41',['NUMERIC',['../group___format.html#gga42d318d7a8f82021aa5e0db07e420bebab22f521f17b09d0fd389e231f8f6d66d',1,'format.hpp']]]
 ];

@@ -91,6 +91,7 @@ var topics =
     [ "区域设置", "group___locale.html", "group___locale" ],
     [ "管道", "group___pipe.html", "group___pipe" ],
     [ "进程", "group___process.html", "group___process" ],
+    [ "系统注册表", "group___windows_system_registry.html", "group___windows_system_registry" ],
     [ "共享内存", "group___share_memory.html", "group___share_memory" ],
     [ "系统信号", "group___system_signal.html", "group___system_signal" ],
     [ "系统信息", "group___system_info.html", "group___system_info" ],
@@ -130,10 +131,10 @@ var topics =
     [ "HTTP", "group___h_t_t_p.html", "group___h_t_t_p" ],
     [ "ICMP", "group___i_c_m_p.html", "group___i_c_m_p" ],
     [ "SMTP", "group___s_m_t_p.html", "group___s_m_t_p" ],
+    [ "socket基类", "group___socket_base.html", "group___socket_base" ],
     [ "SSL/TLS", "group___s_s_l.html", "group___s_s_l" ],
     [ "TCP", "group___t_c_p.html", "group___t_c_p" ],
     [ "UDP", "group___u_d_p.html", "group___u_d_p" ],
-    [ "网络通信工具", "group___network_util.html", "group___network_util" ],
-    [ "插件", "group___plugin.html", "group___plugin" ],
-    [ "网络通信", "group___network.html", "group___network" ]
+    [ "网络工具", "group___network_util.html", "group___network_util" ],
+    [ "插件", "group___plugin.html", "group___plugin" ]
 ];

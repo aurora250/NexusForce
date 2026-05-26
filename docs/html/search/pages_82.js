@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['预定义颜色常量_0',['预定义颜色常量',['../group___color.html#named_colors',1,'']]]
+  ['集合样式_0',['集合样式',['../group___yaml_config.html#collection_styles',1,'']]]
 ];

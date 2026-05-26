@@ -230,7 +230,7 @@ namespace {
         offset += 2;
 
         const string exchange = decode_domain_name(data, offset);
-        return _NEFORCE to_string(preference) + " " + exchange;
+        return to_string(preference) + " " + exchange;
     }
 
     string parse_txt_record(const byte_vector& rdata) {
@@ -381,8 +381,8 @@ namespace {
                 }
                 case dns_record::SRV: {
                     const auto srv = parse_srv_record(data, rdata_offset, rdlength);
-                    record.data = _NEFORCE to_string(srv.priority) + " " + to_string(srv.weight) + " " +
-                                  to_string(srv.port) + " " + srv.target;
+                    record.data = to_string(srv.priority) + " " + to_string(srv.weight) + " " + to_string(srv.port) +
+                                  " " + srv.target;
                     break;
                 }
                 case dns_record::SOA: {

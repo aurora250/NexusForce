@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['三角函数实现_0',['三角函数实现',['../group___math_functions.html#trigonometric_functions',1,'']]]
+  ['❗_20异常处理_20exception_0',['❗ 异常处理 (Exception)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md34',1,'']]]
 ];

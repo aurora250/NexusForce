@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['建议_0',['IEEE 1541-2021 建议',['../group___byte_size.html#ieee_1541',1,'']]]
+  ['延迟调用包装_0',['延迟调用包装',['../group___call_wrapper.html',1,'']]]
 ];

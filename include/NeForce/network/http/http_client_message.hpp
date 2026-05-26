@@ -135,7 +135,7 @@ public:
  *
  * 表示一个HTTP请求，包含方法、URL、头部、查询参数和正文。
  */
-struct http_client_request {
+struct NEFORCE_API http_client_request {
     http_method method{http_method::GET()};     ///< HTTP方法
     string host;                                ///< 主机名
     ports port;                                 ///< 端口号

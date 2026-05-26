@@ -13,7 +13,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup NetworkUtil 网络通信工具
+ * @defgroup NetworkUtil 网络工具
  * @brief 网络通信辅助工具组件
  * @{
  */

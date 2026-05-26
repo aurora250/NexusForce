@@ -118,35 +118,35 @@ path path::lexically_normal() const {
     bool is_absolute = false;
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    // 处理 "C:" 驱动器字母或 "\\" 网络路径前缀
+    // Handles the "C:" drive letter or the "\\" network path prefix
     if (length >= 2 && path_[1] == ':') {
         drive_prefix = path_.view(0, 2);
         start = 2;
-        // 若驱动器后紧跟分隔符，则路径为绝对路径
+        // If the driver is immediately followed by a separator, the path is an absolute path
         if (length > 2 && (path_[2] == '\\' || path_[2] == '/')) {
             is_absolute = true;
             start = 3;
         }
     } else if (length >= 2 && path_[0] == '\\' && path_[1] == '\\') {
-        // UNC 路径
+        // UNC path
         is_absolute = true;
         drive_prefix = "\\\\";
         start = 2;
     } else if (!path_.empty() && (path_[0] == '\\' || path_[0] == '/')) {
-        // 无驱动器字母的绝对路径
+        // absolute path without driver letters
         is_absolute = true;
         start = 1;
     }
 
 #else
-    // 检查是否以 '/' 开头
+    // Check if it starts with '/'
     if (!path_.empty() && path_[0] == '/') {
         is_absolute = true;
         start = 1;
     }
 #endif
 
-    // 将路径拆分为组件
+    // Split the path into components
     size_t pos = start;
     while (pos < length) {
         size_t next_sep = pos;
@@ -162,7 +162,7 @@ path path::lexically_normal() const {
         pos = (next_sep < length) ? next_sep + 1 : length;
     }
 
-    // 规范化组件
+    // Standardized components
     vector<string_view> normalized;
     for (const auto& part: parts) {
         if (part.empty() || part == ".") {
@@ -179,7 +179,7 @@ path path::lexically_normal() const {
         }
     }
 
-    // 重建规范化后的路径字符串
+    // Reconstruct the normalized path string
 #ifdef NEFORCE_PLATFORM_WINDOWS
     result = drive_prefix;
     if (is_absolute) {
@@ -202,7 +202,7 @@ path path::lexically_normal() const {
         return path(".");
     }
 
-    // 处理绝对路径下所有组件都被消除的情况
+    // Handles situations where all components are eliminated on the absolute path
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (is_absolute && normalized.empty()) {
         return path(drive_prefix + preferred_separator);

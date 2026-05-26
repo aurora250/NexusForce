@@ -377,15 +377,13 @@ sql_builder& sql_builder::set(string field, string value) {
 
 sql_builder& sql_builder::set_increment(string field, const int value) {
     string field_copy = field;
-    ensure_update_data()->assignments.emplace_back(move(field) + " = " + move(field_copy) + " + " +
-                                                   _NEFORCE to_string(value));
+    ensure_update_data()->assignments.emplace_back(move(field) + " = " + move(field_copy) + " + " + to_string(value));
     return *this;
 }
 
 sql_builder& sql_builder::set_decrement(string field, const int value) {
     string field_copy = field;
-    ensure_update_data()->assignments.emplace_back(move(field) + " = " + move(field_copy) + " - " +
-                                                   _NEFORCE to_string(value));
+    ensure_update_data()->assignments.emplace_back(move(field) + " = " + move(field_copy) + " - " + to_string(value));
     return *this;
 }
 

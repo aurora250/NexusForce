@@ -9,8 +9,8 @@ var searchData=
   ['reflect_2ehpp_6',['reflect.hpp',['../reflect_8hpp.html',1,'']]],
   ['reflect_2fany_2ehpp_7',['any.hpp',['../reflect_2any_8hpp.html',1,'']]],
   ['reflect_2ffunction_2ehpp_8',['function.hpp',['../reflect_2function_8hpp.html',1,'']]],
-  ['regex_2ehpp_9',['regex.hpp',['../regex_8hpp.html',1,'']]],
-  ['registry_2ehpp_10',['registry.hpp',['../registry_8hpp.html',1,'']]],
+  ['reflect_2fregistry_2ehpp_9',['registry.hpp',['../reflect_2registry_8hpp.html',1,'']]],
+  ['regex_2ehpp_10',['regex.hpp',['../regex_8hpp.html',1,'']]],
   ['remove_2ehpp_11',['remove.hpp',['../remove_8hpp.html',1,'']]],
   ['reverse_5fiterator_2ehpp_12',['reverse_iterator.hpp',['../reverse__iterator_8hpp.html',1,'']]]
 ];

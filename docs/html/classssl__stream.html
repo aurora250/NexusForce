@@ -118,8 +118,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a8d50c0caaf302839aba7a8989a3fa875"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行服务器端TLS握手  <br /></td></tr>
 <tr class="memitem:a33c58ee785d4e58e80eaf07e73e27217" id="r_a33c58ee785d4e58e80eaf07e73e27217"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a33c58ee785d4e58e80eaf07e73e27217">connect</a> ()</td></tr>
 <tr class="memdesc:a33c58ee785d4e58e80eaf07e73e27217"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行客户端TLS握手  <br /></td></tr>
-<tr class="memitem:a5d919c932bf06d932d0a36dd70faad71" id="r_a5d919c932bf06d932d0a36dd70faad71"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5d919c932bf06d932d0a36dd70faad71">close</a> ()</td></tr>
-<tr class="memdesc:a5d919c932bf06d932d0a36dd70faad71"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭SSL连接  <br /></td></tr>
+<tr class="memitem:a8e82ce0526198cc603022c76b73ad1e1" id="r_a8e82ce0526198cc603022c76b73ad1e1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8e82ce0526198cc603022c76b73ad1e1">close</a> () noexcept</td></tr>
+<tr class="memdesc:a8e82ce0526198cc603022c76b73ad1e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭SSL连接  <br /></td></tr>
 <tr class="memitem:a4725342e2cbd45353601ea030135487a" id="r_a4725342e2cbd45353601ea030135487a"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4725342e2cbd45353601ea030135487a">read</a> (void *buffer, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="group___type_erasure_functions.html#ga630d7b0d77515784d2391b3725ac6df0">size</a>)</td></tr>
 <tr class="memdesc:a4725342e2cbd45353601ea030135487a"><td class="mdescLeft">&#160;</td><td class="mdescRight">读取加密数据  <br /></td></tr>
 <tr class="memitem:aee26c635332fe8806177a5cf52b7a7b4" id="r_aee26c635332fe8806177a5cf52b7a7b4"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2f30f05ade8bbe5bda5e59d2698af9f5">ssize_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#aee26c635332fe8806177a5cf52b7a7b4">write</a> (const void *buffer, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="group___type_erasure_functions.html#ga630d7b0d77515784d2391b3725ac6df0">size</a>)</td></tr>
@@ -153,7 +153,7 @@ Public 成员函数</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>SSL/TLS流封装类 </p>
-<p>封装OpenSSL的SSL对象，提供加密通信流的接口。 需要先建立TCP连接，然后在连接上建立SSL/TLS会话。</p>
+<p>提供加密通信流的接口。 需要先建立TCP连接，然后在连接上建立SSL/TLS会话。</p>
 <p>主要功能：</p><ul>
 <li>SSL/TLS握手</li>
 <li>加密数据读写</li>
@@ -230,7 +230,7 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00084">84</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00083">83</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="#ad2cdaf860512de64970b322f71be7e6e">reset()</a>.</p>
 
@@ -263,11 +263,14 @@ Public 成员函数</h2></td></tr>
 
 </div>
 </div>
-<a id="a5d919c932bf06d932d0a36dd70faad71" name="a5d919c932bf06d932d0a36dd70faad71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d919c932bf06d932d0a36dd70faad71">&#9670;&#160;</a></span>close()</h2>
+<a id="a8e82ce0526198cc603022c76b73ad1e1" name="a8e82ce0526198cc603022c76b73ad1e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e82ce0526198cc603022c76b73ad1e1">&#9670;&#160;</a></span>close()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void ssl_stream::close </td>
@@ -276,6 +279,11 @@ Public 成员函数</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>关闭SSL连接 </p>
@@ -337,6 +345,10 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>密码套件名称</dd></dl>
 <p>返回当前TLS连接使用的密码套件名称。 </p>
 
+<p class="reference">引用了 <a class="el" href="#a82e33ad7a2ed79e8a62282aac299ba14">get_cipher_name()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a82e33ad7a2ed79e8a62282aac299ba14">get_cipher_name()</a>.</p>
+
 </div>
 </div>
 <a id="ab8f71a5a604d3472e79c381eccf2622c" name="ab8f71a5a604d3472e79c381eccf2622c"></a>
@@ -366,6 +378,10 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>X509证书指针</dd></dl>
 <p>获取TLS握手时对等方提供的证书。 </p>
 
+<p class="reference">引用了 <a class="el" href="#ab8f71a5a604d3472e79c381eccf2622c">get_peer_certificate()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ab8f71a5a604d3472e79c381eccf2622c">get_peer_certificate()</a>.</p>
+
 </div>
 </div>
 <a id="a782a9c43d8fe89be96f61c9115c8cc46" name="a782a9c43d8fe89be96f61c9115c8cc46"></a>
@@ -393,6 +409,10 @@ Public 成员函数</h2></td></tr>
 
 <p>获取TLS协议版本 </p>
 <dl class="section return"><dt>返回</dt><dd>协议版本字符串（如"TLSv1.2"） </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a782a9c43d8fe89be96f61c9115c8cc46">get_version()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a782a9c43d8fe89be96f61c9115c8cc46">get_version()</a>.</p>
 
 </div>
 </div>
@@ -422,9 +442,9 @@ Public 成员函数</h2></td></tr>
 <p>检查SSL对象是否有效 </p>
 <dl class="section return"><dt>返回</dt><dd>有效返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00241">241</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00240">240</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="ssl__stream_8hpp_source.html#l00247">operator bool()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="ssl__stream_8hpp_source.html#l00246">operator bool()</a>.</p>
 
 </div>
 </div>
@@ -454,7 +474,11 @@ Public 成员函数</h2></td></tr>
 <p>获取最后错误信息 </p>
 <dl class="section return"><dt>返回</dt><dd>错误描述字符串 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00235">235</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00234">234</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="ssl__stream_8hpp_source.html#l00234">last_error()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ssl__stream_8hpp_source.html#l00234">last_error()</a>.</p>
 
 </div>
 </div>
@@ -484,7 +508,7 @@ Public 成员函数</h2></td></tr>
 <p>获取原生SSL对象指针 </p>
 <dl class="section return"><dt>返回</dt><dd>SSL指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00253">253</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00252">252</a> 行定义.</p>
 
 </div>
 </div>
@@ -514,9 +538,9 @@ Public 成员函数</h2></td></tr>
 <p>布尔转换运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>有效返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00247">247</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00246">246</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="ssl__stream_8hpp_source.html#l00241">is_valid()</a>.</p>
+<p class="reference">引用了 <a class="el" href="ssl__stream_8hpp_source.html#l00240">is_valid()</a>.</p>
 
 </div>
 </div>
@@ -546,6 +570,10 @@ Public 成员函数</h2></td></tr>
 <p>获取缓冲区中可读字节数 </p>
 <dl class="section return"><dt>返回</dt><dd>可读字节数</dd></dl>
 <p>返回SSL对象内部缓冲区中已解密但未读取的字节数。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a3868457f5430c5b4e318d82239e3591c">pending()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a3868457f5430c5b4e318d82239e3591c">pending()</a>.</p>
 
 </div>
 </div>
@@ -579,7 +607,9 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>实际读取的字节数，-1表示错误，0表示需要重试（非阻塞模式）</dd></dl>
 <p>从SSL连接读取解密后的数据。 非阻塞模式下，如果没有数据可读返回0。 </p>
 
-<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a4725342e2cbd45353601ea030135487a">read()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a4725342e2cbd45353601ea030135487a">read()</a>.</p>
 
 </div>
 </div>
@@ -614,6 +644,10 @@ Public 成员函数</h2></td></tr>
 </dl>
 <p>持续读取直到连接关闭或达到最大大小。 适用于阻塞模式下的完整响应读取。 </p>
 
+<p class="reference">引用了 <a class="el" href="#adc3dfd5b9f969e5a3d5e646c3ae11994">read_all()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#adc3dfd5b9f969e5a3d5e646c3ae11994">read_all()</a>.</p>
+
 </div>
 </div>
 <a id="a399a00a02614e792a35f69bf11f241fd" name="a399a00a02614e792a35f69bf11f241fd"></a>
@@ -643,7 +677,7 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>SSL指针</dd></dl>
 <p>释放SSL对象的所有权，调用方负责释放。 </p>
 
-<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00261">261</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00260">260</a> 行定义.</p>
 
 </div>
 </div>
@@ -677,7 +711,7 @@ Public 成员函数</h2></td></tr>
 </dl>
 <p>创建新的SSL对象并关联到指定的上下文。 如果已有SSL对象，会先关闭并释放。 </p>
 
-<p class="reference">被这些函数引用 <a class="el" href="ssl__stream_8hpp_source.html#l00084">ssl_stream()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="ssl__stream_8hpp_source.html#l00083">ssl_stream()</a>.</p>
 
 </div>
 </div>
@@ -745,6 +779,10 @@ Public 成员函数</h2></td></tr>
 </dl>
 <p>在客户端TLS握手中设置服务器名称指示（SNI）扩展。 用于指示客户端想要连接的服务器名称。 </p>
 
+<p class="reference">引用了 <a class="el" href="#a1d4f7de8ebab2a49cbf631bcdfdf217e">set_sni_hostname()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a1d4f7de8ebab2a49cbf631bcdfdf217e">set_sni_hostname()</a>.</p>
+
 </div>
 </div>
 <a id="aa102ae252b03f4ed162bd7d2acecaf01" name="aa102ae252b03f4ed162bd7d2acecaf01"></a>
@@ -773,6 +811,10 @@ Public 成员函数</h2></td></tr>
 <p>验证对等方证书 </p>
 <dl class="section return"><dt>返回</dt><dd>验证通过返回true</dd></dl>
 <p>检查对等方证书是否有效（未过期、链完整、信任CA）。 需要在握手完成后调用。 </p>
+
+<p class="reference">引用了 <a class="el" href="#aa102ae252b03f4ed162bd7d2acecaf01">verify_peer()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#aa102ae252b03f4ed162bd7d2acecaf01">verify_peer()</a>.</p>
 
 </div>
 </div>
@@ -806,7 +848,9 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>实际写入的字节数，-1表示错误，0表示需要重试（非阻塞模式）</dd></dl>
 <p>加密并发送数据到SSL连接。 非阻塞模式下，如果无法立即发送返回0。 </p>
 
-<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a> , 以及 <a class="el" href="#aee26c635332fe8806177a5cf52b7a7b4">write()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#aee26c635332fe8806177a5cf52b7a7b4">write()</a>.</p>
 
 </div>
 </div>
@@ -840,7 +884,9 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>成功返回true</dd></dl>
 <p>持续写入直到所有数据发送完毕。 适用于阻塞模式下的完整数据发送。 </p>
 
-<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>, <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a> , 以及 <a class="el" href="#a4ae572dd7e946624dcb3c2048251cdda">write_all()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a4ae572dd7e946624dcb3c2048251cdda">write_all()</a>.</p>
 
 </div>
 </div>

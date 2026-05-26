@@ -3,6 +3,7 @@
   <compounddef id="promise_8hpp" kind="file" language="C++">
     <compoundname>promise.hpp</compoundname>
     <includes refid="future_8hpp" local="yes">NeForce/core/async/future.hpp</includes>
+    <includedby refid="dns__client_8hpp" local="yes">dns_client.hpp</includedby>
     <includedby refid="packaged__task_8hpp" local="yes">packaged_task.hpp</includedby>
     <incdepgraph>
       <node id="56">
@@ -462,18 +463,18 @@
         <label>NeForce.hpp</label>
         <link refid="_ne_force_8hpp"/>
       </node>
-      <node id="3">
+      <node id="9">
         <label>async.hpp</label>
         <link refid="async_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="2">
+      <node id="8">
         <label>packaged_task.hpp</label>
         <link refid="packaged__task_8hpp"/>
-        <childnode refid="3" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -481,31 +482,69 @@
         <link refid="promise_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
       </node>
-      <node id="6">
+      <node id="11">
         <label>thread_pool.hpp</label>
         <link refid="thread__pool_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="5">
+      <node id="10">
         <label>timer.hpp</label>
         <link refid="timer_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>dns_client.hpp</label>
+        <link refid="dns__client_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="8">
+      <node id="3">
+        <label>ftp_client.hpp</label>
+        <link refid="ftp__client_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>http_client.hpp</label>
+        <link refid="http__client_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
         <label>http_server.hpp</label>
         <link refid="http__server_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="7">
+      <node id="5">
+        <label>smtp_socket.hpp</label>
+        <link refid="smtp__socket_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>tcp_client.hpp</label>
+        <link refid="tcp__client_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
         <label>tcp_server.hpp</label>
         <link refid="tcp__server_8hpp"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -581,11 +620,11 @@
 <codeline lineno="114"><highlight class="normal"></highlight></codeline>
 <codeline lineno="120" refid="classpromise_1ab0b98ede6c487688e1d9684fc979512b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfuture" kindref="compound">future&lt;Res&gt;</ref><sp/><ref refid="classpromise_1ab0b98ede6c487688e1d9684fc979512b" kindref="member">get_future</ref>()<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classfuture" kindref="compound">future&lt;Res&gt;</ref>(future_ptr);<sp/>}</highlight></codeline>
 <codeline lineno="121"><highlight class="normal"></highlight></codeline>
-<codeline lineno="127" refid="classpromise_1a3002df1df9d416019fe00dd89fc0e5ff" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classpromise_1a3002df1df9d416019fe00dd89fc0e5ff" kindref="member">set_value</ref>(Res&amp;&amp;<sp/>value)<sp/>{<sp/>state().set_result(state_type::create_setter(</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Res&gt;</ref>(value)));<sp/>}</highlight></codeline>
+<codeline lineno="127" refid="classpromise_1a461ea3f3f0793054804d79c134788515" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classpromise_1a461ea3f3f0793054804d79c134788515" kindref="member">set_value</ref>(Res<sp/>value)<sp/>{<sp/>state().set_result(state_type::create_setter(</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Res&gt;</ref>(value)));<sp/>}</highlight></codeline>
 <codeline lineno="128"><highlight class="normal"></highlight></codeline>
 <codeline lineno="134" refid="classpromise_1ae0f41e364fa8a8f21ef340ea89e6d8c5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classpromise_1ae0f41e364fa8a8f21ef340ea89e6d8c5" kindref="member">set_exception</ref>(<ref refid="classexception__ptr" kindref="compound">exception_ptr</ref><sp/><ref refid="structexception" kindref="compound">exception</ref>)<sp/>{<sp/>state().set_result(state_type::create_setter(<ref refid="structexception" kindref="compound">exception</ref>,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">));<sp/>}</highlight></codeline>
 <codeline lineno="135"><highlight class="normal"></highlight></codeline>
-<codeline lineno="142" refid="classpromise_1ae5d2f35b49c5f86a4e695ab8e5ae77f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classpromise_1ae5d2f35b49c5f86a4e695ab8e5ae77f1" kindref="member">set_value_at_thread_exit</ref>(Res&amp;&amp;<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="142" refid="classpromise_1ad89aeb3b702bf1654334299b08761ea4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classpromise_1ad89aeb3b702bf1654334299b08761ea4" kindref="member">set_value_at_thread_exit</ref>(Res<sp/>value)<sp/>{</highlight></codeline>
 <codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>state().set_delayed_result(state_type::create_setter(</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Res&gt;</ref>(value)),<sp/>future_ptr);</highlight></codeline>
 <codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="145"><highlight class="normal"></highlight></codeline>

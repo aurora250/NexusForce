@@ -10,11 +10,11 @@
  * 并提供迭代器接口用于遍历匹配结果。
  */
 
-#include <pcre2.h>
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/string/string.hpp"
+#include <pcre2.h>
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -188,25 +188,25 @@ class NEFORCE_API regex_token_iterator;
 class NEFORCE_API regex {
 private:
     struct pcre2_code_deleter {
-        void operator()(pcre2_code* code) const noexcept {
+        void operator()(::pcre2_code* code) const noexcept {
             if (code != nullptr) {
-                pcre2_code_free(code);
+                ::pcre2_code_free(code);
             }
         }
     };
 
     struct pcre2_match_data_deleter {
-        void operator()(pcre2_match_data* data) const noexcept {
+        void operator()(::pcre2_match_data* data) const noexcept {
             if (data != nullptr) {
-                pcre2_match_data_free(data);
+                ::pcre2_match_data_free(data);
             }
         }
     };
 
-    unique_ptr<pcre2_code, pcre2_code_deleter> code_; ///< PCRE2编译后的正则表达式
-    string pattern_;                                  ///< 原始正则表达式模式
-    uint32_t options_;                                ///< 编译选项
-    int capture_count_ = 0;                           ///< 捕获组数量
+    unique_ptr<::pcre2_code, pcre2_code_deleter> code_; ///< PCRE2编译后的正则表达式
+    string pattern_;                                    ///< 原始正则表达式模式
+    uint32_t options_;                                  ///< 编译选项
+    int capture_count_ = 0;                             ///< 捕获组数量
 
     friend class regex_iterator;
     friend class regex_token_iterator;
@@ -214,7 +214,7 @@ private:
 private:
     void compile(const string& pattern, uint32_t options = 0);
 
-    match_result do_match(PCRE2_SPTR subject, size_t length, size_t start_offset, uint32_t options,
+    match_result do_match(::PCRE2_SPTR subject, size_t length, size_t start_offset, uint32_t options,
                           const string& subject_str) const;
 
 public:

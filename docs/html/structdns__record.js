@@ -12,8 +12,8 @@ var structdns__record =
       [ "SRV", "structdns__record.html#ace803844a79fd551cc236ca97f8425e8a202e1e93f74afadffc2f099536a978ce", null ]
     ] ],
     [ "dns_record", "structdns__record.html#ada4e684a691e195b704dec1fe2020b18", null ],
-    [ "dns_record", "structdns__record.html#a45df17017ee83165712be7227cb6257f", null ],
-    [ "class_type", "structdns__record.html#a13bbf6573e1f8ef7490e8e59b08ed0d3", null ],
+    [ "dns_record", "structdns__record.html#a96754a120aea2919748c6b626274ea63", null ],
+    [ "class_type", "structdns__record.html#a6a0e72633a5787c3da5a12aa97c7599b", null ],
     [ "data", "structdns__record.html#a58ce6de88c43819be128d7336752d9ed", null ],
     [ "name", "structdns__record.html#ad21c4f21dcec4c34446903e929b17a50", null ],
     [ "ttl", "structdns__record.html#adc15bc830564c38b904b792ce4331a57", null ],

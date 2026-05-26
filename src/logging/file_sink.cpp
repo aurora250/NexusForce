@@ -25,14 +25,14 @@ void file_sink::rotate_file() {
 
 void file_sink::rotate_by_date(string today) {
     file_.close();
-    current_date_ = _NEFORCE move(today);
+    current_date_ = move(today);
     file_index_ = 0;
     current_size_ = 0;
     open_new_file();
 }
 
 file_sink::file_sink(path filename, const size_t max_file_size, const bool enable_date_rotation) :
-base_filename_(_NEFORCE move(filename)),
+base_filename_(move(filename)),
 max_file_size_(max_file_size),
 current_size_(0),
 file_index_(0),

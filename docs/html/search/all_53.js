@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['基本_20ansi_208_2016_20色_0',['基本 ANSI 8/16 色',['../group___color.html#basic_ansi_colors',1,'']]]
+  ['地址结构_0',['MAC 地址结构',['../classmac__address.html#mac_address_structure',1,'']]],
+  ['地址表示格式_1',['MAC 地址表示格式',['../classmac__address.html#mac_address_format',1,'']]]
 ];

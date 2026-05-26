@@ -183,12 +183,16 @@ private:
 
 public:
     /**
-     * @brief 默认构造，不启动任何进程
+     * @brief 默认构造
+     *
+     * 不启动任何进程
      */
     process() = default;
 
     /**
-     * @brief 析构，自动终止未退出的子进程并清理资源
+     * @brief 析构
+     *
+     * 自动终止未退出的子进程并清理资源
      */
     ~process();
 

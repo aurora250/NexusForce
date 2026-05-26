@@ -139,7 +139,7 @@ void file::reset_sub_objects() noexcept {
     info_.reset();
 }
 
-void file::set_last_error() const { last_error_code_ = _NEFORCE last_error(); }
+void file::set_last_error() const { last_error_code_ = last_error(); }
 
 void file::adjust_buffer_size() {
     if (!opened_ || handle_ == invalid_handle) {
@@ -316,7 +316,7 @@ void file::close() noexcept {
         return;
     }
 
-    flush_write_buffer();
+    ignore = flush_write_buffer();
     reset_sub_objects();
 
 #ifdef NEFORCE_PLATFORM_WINDOWS

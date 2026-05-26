@@ -19,7 +19,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" line="75" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" line="77" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__acceptor_1a01f29ebfd1e0f953d9f1f5ca7ec9896a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -78,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" line="84" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" line="86" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__acceptor_1a4981086af1b46cb09f58784469d16f13" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classtcp__socket" kindref="compound">tcp_socket</ref></type>
@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" line="95" column="17"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" line="97" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classtcp__acceptor_1a677e1317fe230cd82993671b39e0fec9" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="classtcp__socket" kindref="compound">tcp_socket</ref> &gt;</type>
@@ -140,7 +140,77 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" line="106" column="15"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" line="108" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classtcp__acceptor_1ac45ca9c8151fc981e49861f5e85b0434" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void socket_base::open</definition>
+        <argsstring>(int family, int type, int protocol)</argsstring>
+        <name>open</name>
+        <qualifiedname>tcp_acceptor::open</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>family</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>protocol</declname>
+        </param>
+        <briefdescription>
+<para>打开socket </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>family</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>地址族（AF_INET或AF_INET6） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>socket类型（SOCK_STREAM、SOCK_DGRAM等） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>protocol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>协议（0为自动选择） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structsocket__exception" kindref="compound">socket_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>创建失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>地址族无效时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" line="72" column="5"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -233,7 +303,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" line="70" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" bodystart="70" bodyend="107"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" line="70" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/tcp/tcp_acceptor.hpp" bodystart="70" bodyend="109"/>
     <listofallmembers>
       <member refid="classtcp__acceptor_1a4981086af1b46cb09f58784469d16f13" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>accept</name></member>
       <member refid="classtcp__acceptor_1a677e1317fe230cd82993671b39e0fec9" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>accept_nonblock</name></member>
@@ -257,7 +327,7 @@
       <member refid="classsocket__base_1ad99d1582b07a547df0c6e25d7d057262" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>native_handle</name></member>
       <member refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>native_handle_type</name></member>
       <member refid="classtcp__acceptor_1a01f29ebfd1e0f953d9f1f5ca7ec9896a" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>open</name></member>
-      <member refid="classsocket__base_1ac45ca9c8151fc981e49861f5e85b0434" prot="public" virt="non-virtual" ambiguityscope="ip_socket::"><scope>tcp_acceptor</scope><name>open</name></member>
+      <member refid="classtcp__acceptor_1ac45ca9c8151fc981e49861f5e85b0434" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>open</name></member>
       <member refid="classip__socket_1af46a0c10c0c23ab91a8445c16733ed61" prot="protected" virt="non-virtual"><scope>tcp_acceptor</scope><name>open_ip</name></member>
       <member refid="classsocket__base_1ade45e5ade072d22d377f6582660a872e" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>operator bool</name></member>
       <member refid="classip__socket_1a5df14bf84d50bdad66ab775ad2c5cbba" prot="public" virt="non-virtual"><scope>tcp_acceptor</scope><name>operator=</name></member>

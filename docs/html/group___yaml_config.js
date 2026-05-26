@@ -3,7 +3,7 @@ var group___yaml_config =
     [ "yaml_builder", "classyaml__builder.html", [
       [ "yaml_builder", "classyaml__builder.html#afd0f5f049fdb832594099498ac0ed88c", null ],
       [ "yaml_builder", "classyaml__builder.html#ae086d26c7bad498fa96e9d94fcada35a", null ],
-      [ "alias", "classyaml__builder.html#a015f1851426fa2eebe9012d56ba68b85", null ],
+      [ "alias", "classyaml__builder.html#a475d92a13ac52a9a0e98c71da71f1eae", null ],
       [ "anchor", "classyaml__builder.html#abf640029a79cd8b4c580f06aa78f38a4", null ],
       [ "begin_block_mapping", "classyaml__builder.html#a2413efd2943639d0be2666bf85c32ca5", null ],
       [ "begin_block_sequence", "classyaml__builder.html#a8bf0a640a8266a18e3f0191bc7587391", null ],

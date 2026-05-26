@@ -32,7 +32,7 @@ bool sqlite_result::next() noexcept {
     return ::sqlite3_step(stmt_) == SQLITE_ROW && (++cursor_) != 0U;
 }
 
-_NEFORCE string_view sqlite_result::get(const size_type n) const noexcept {
+string_view sqlite_result::get(const size_type n) const noexcept {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto* text = reinterpret_cast<const char*>(::sqlite3_column_text(stmt_, static_cast<int>(n)));
@@ -81,7 +81,7 @@ decimal_t sqlite_result::get_decimal(const size_type n) const {
     return static_cast<decimal_t>(::sqlite3_column_double(stmt_, static_cast<int>(n)));
 }
 
-_NEFORCE vector<char> sqlite_result::get_blob(const size_type n) const {
+vector<char> sqlite_result::get_blob(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const string_view view = this->get(n);
@@ -99,17 +99,17 @@ uint64_t sqlite_result::get_bit(const size_type n) const noexcept {
     return value;
 }
 
-_NEFORCE datetime sqlite_result::get_datetime(const size_type n) const {
+datetime sqlite_result::get_datetime(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     const auto* text = reinterpret_cast<const char*>(::sqlite3_column_text(stmt_, static_cast<int>(n)));
     if (text != nullptr) {
-        return _NEFORCE datetime::parse(text);
+        return datetime::parse(text);
     }
     return {};
 }
 
-_NEFORCE timestamp sqlite_result::get_timestamp(const size_type n) const {
+timestamp sqlite_result::get_timestamp(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     return timestamp{static_cast<long>(::sqlite3_column_int64(stmt_, static_cast<int>(n)))};

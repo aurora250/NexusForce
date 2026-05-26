@@ -239,7 +239,7 @@ bool pipe::is_valid() const noexcept {
 
 pipe::native_handle_type pipe::detach_read_handle() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    native_handle_type handle = read_handle_;
+    const native_handle_type handle = read_handle_;
     read_handle_ = nullptr;
     return handle;
 #else
@@ -251,7 +251,7 @@ pipe::native_handle_type pipe::detach_read_handle() noexcept {
 
 pipe::native_handle_type pipe::detach_write_handle() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    native_handle_type handle = write_handle_;
+    const native_handle_type handle = write_handle_;
     write_handle_ = nullptr;
     return handle;
 #else

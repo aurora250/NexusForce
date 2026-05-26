@@ -69,7 +69,7 @@ string log_formatter::resolve_placeholder(string ph, const log_event& event) con
     return "{" + move(ph) + "}";
 }
 
-void log_sink::set_formatter(unique_ptr<log_formatter> formatter) { formatter_ = _NEFORCE move(formatter); }
+void log_sink::set_formatter(unique_ptr<log_formatter> formatter) { formatter_ = move(formatter); }
 
 void console_sink::log(const log_event& event) {
     const string formatted = formatter_ ? formatter_->format(event) : default_sink_format(event);

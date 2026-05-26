@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['消息类型_0',['ICMP 消息类型',['../group___i_c_m_p.html#icmp_message_types',1,'']]],
-  ['消息结构_1',['DNS 消息结构',['../group___d_n_s.html#dns_message_structure',1,'']]]
+  ['比率_0',['比率',['../group___ratio_class.html',1,'']]],
+  ['比较交换失败顺序规则_1',['比较交换失败顺序规则',['../group___memory_order.html#cmpexch_failure_order',1,'']]],
+  ['比较器的严格弱序要求_2',['比较器的严格弱序要求',['../group___heap_algorithms.html#comparison_strictness',1,'']]],
+  ['比较算法_3',['比较算法',['../group___compare_algorithms.html',1,'']]],
+  ['比较运算仿函数_4',['比较运算仿函数',['../group___comparison_functors.html',1,'']]]
 ];

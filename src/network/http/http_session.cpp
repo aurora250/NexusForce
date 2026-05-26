@@ -167,7 +167,7 @@ string_view http_session::get(const string& key) const {
 
 void http_session::set(const string& key, string value) {
     touch();
-    data[key] = _NEFORCE move(value);
+    data[key] = move(value);
 }
 
 bool http_session::remove(const string& key) {

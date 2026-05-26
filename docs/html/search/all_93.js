@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['独占智能指针_0',['独占智能指针',['../group___unique_pointer.html',1,'']]]
+  ['状态码分类_0',['HTTP 状态码分类',['../group___h_t_t_p.html#http_status_categories',1,'']]]
 ];

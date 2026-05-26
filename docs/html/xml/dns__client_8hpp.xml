@@ -3,11 +3,14 @@
   <compounddef id="dns__client_8hpp" kind="file" language="C++">
     <compoundname>dns_client.hpp</compoundname>
     <includes refid="future_8hpp" local="yes">NeForce/core/async/future.hpp</includes>
+    <includes refid="promise_8hpp" local="yes">NeForce/core/async/promise.hpp</includes>
     <includes refid="shared__mutex_8hpp" local="yes">NeForce/core/async/shared_mutex.hpp</includes>
+    <includes refid="thread__pool_8hpp" local="yes">NeForce/core/async/thread_pool.hpp</includes>
     <includes refid="unordered__map_8hpp" local="yes">NeForce/core/container/unordered_map.hpp</includes>
     <includes refid="clocks_8hpp" local="yes">NeForce/core/time/clocks.hpp</includes>
     <includes refid="optional_8hpp" local="yes">NeForce/core/utility/optional.hpp</includes>
     <includes refid="dns__message_8hpp" local="yes">NeForce/network/dns/dns_message.hpp</includes>
+    <includes refid="udp__socket_8hpp" local="yes">NeForce/network/udp_socket.hpp</includes>
     <includes refid="ports_8hpp" local="yes">NeForce/network/util/ports.hpp</includes>
     <includedby refid="ftp__client_8hpp" local="yes">ftp_client.hpp</includedby>
     <includedby refid="smtp__socket_8hpp" local="yes">smtp_socket.hpp</includedby>
@@ -25,7 +28,7 @@
         <childnode refid="61" relation="include">
         </childnode>
       </node>
-      <node id="71">
+      <node id="83">
         <label>NeForce/core/algorithm/heap.hpp</label>
         <link refid="heap_8hpp"/>
         <childnode refid="60" relation="include">
@@ -43,18 +46,18 @@
         <childnode refid="50" relation="include">
         </childnode>
       </node>
-      <node id="72">
+      <node id="93">
         <label>NeForce/core/algorithm/merge.hpp</label>
         <link refid="merge_8hpp"/>
-        <childnode refid="73" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
-        <childnode refid="74" relation="include">
+        <childnode refid="94" relation="include">
         </childnode>
       </node>
-      <node id="76">
+      <node id="95">
         <label>NeForce/core/algorithm/partition.hpp</label>
         <link refid="partition_8hpp"/>
-        <childnode refid="73" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
       </node>
       <node id="58">
@@ -65,7 +68,7 @@
         <childnode refid="59" relation="include">
         </childnode>
       </node>
-      <node id="73">
+      <node id="87">
         <label>NeForce/core/algorithm/shift.hpp</label>
         <link refid="shift_8hpp"/>
         <childnode refid="58" relation="include">
@@ -75,16 +78,24 @@
         <childnode refid="27" relation="include">
         </childnode>
       </node>
-      <node id="70">
+      <node id="92">
         <label>NeForce/core/algorithm/sort.hpp</label>
         <link refid="sort_8hpp"/>
         <childnode refid="56" relation="include">
         </childnode>
-        <childnode refid="71" relation="include">
+        <childnode refid="83" relation="include">
         </childnode>
-        <childnode refid="72" relation="include">
+        <childnode refid="93" relation="include">
         </childnode>
-        <childnode refid="76" relation="include">
+        <childnode refid="95" relation="include">
+        </childnode>
+      </node>
+      <node id="108">
+        <label>NeForce/core/algorithm/type_erase.hpp</label>
+        <link refid="type__erase_8hpp"/>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -139,6 +150,14 @@
         <childnode refid="35" relation="include">
         </childnode>
       </node>
+      <node id="75">
+        <label>NeForce/core/async/condition_variable.hpp</label>
+        <link refid="condition__variable_8hpp"/>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
       <node id="10">
         <label>NeForce/core/async/futex.hpp</label>
         <link refid="futex_8hpp"/>
@@ -169,13 +188,21 @@
         <childnode refid="64" relation="include">
         </childnode>
       </node>
+      <node id="70">
+        <label>NeForce/core/async/lazy_thread.hpp</label>
+        <link refid="lazy__thread_8hpp"/>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
       <node id="20">
         <label>NeForce/core/async/memory_order.hpp</label>
         <link refid="memory__order_8hpp"/>
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="66">
+      <node id="67">
         <label>mutex.hpp</label>
         <link refid="mutex_8hpp"/>
         <childnode refid="11" relation="include">
@@ -184,13 +211,27 @@
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="67" relation="include">
+        <childnode refid="68" relation="include">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>NeForce/core/async/packaged_task.hpp</label>
+        <link refid="packaged__task_8hpp"/>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
         </childnode>
       </node>
       <node id="65">
+        <label>NeForce/core/async/promise.hpp</label>
+        <link refid="promise_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="66">
         <label>NeForce/core/async/shared_mutex.hpp</label>
         <link refid="shared__mutex_8hpp"/>
-        <childnode refid="66" relation="include">
+        <childnode refid="67" relation="include">
         </childnode>
       </node>
       <node id="13">
@@ -209,6 +250,58 @@
         <childnode refid="18" relation="include">
         </childnode>
       </node>
+      <node id="71">
+        <label>NeForce/core/async/thread.hpp</label>
+        <link refid="thread_8hpp"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+      </node>
+      <node id="69">
+        <label>NeForce/core/async/thread_pool.hpp</label>
+        <link refid="thread__pool_8hpp"/>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="74" relation="include">
+        </childnode>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="96" relation="include">
+        </childnode>
+        <childnode refid="116" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>NeForce/core/async/timer.hpp</label>
+        <link refid="timer_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+      </node>
       <node id="4">
         <label>NeForce/core/config/c++config.hpp</label>
         <link refid="c_09_09config_8hpp"/>
@@ -221,42 +314,80 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="79">
+      <node id="86">
         <label>NeForce/core/container/array.hpp</label>
         <link refid="array_8hpp"/>
         <childnode refid="56" relation="include">
         </childnode>
-        <childnode refid="73" relation="include">
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
         </childnode>
         <childnode refid="80" relation="include">
-        </childnode>
-        <childnode refid="81" relation="include">
         </childnode>
         <childnode refid="63" relation="include">
         </childnode>
       </node>
-      <node id="69">
+      <node id="91">
         <label>NeForce/core/container/hashtable.hpp</label>
         <link refid="hashtable_8hpp"/>
-        <childnode refid="70" relation="include">
+        <childnode refid="92" relation="include">
         </childnode>
-        <childnode refid="77" relation="include">
-        </childnode>
-      </node>
-      <node id="68">
-        <label>NeForce/core/container/unordered_map.hpp</label>
-        <link refid="unordered__map_8hpp"/>
-        <childnode refid="69" relation="include">
+        <childnode refid="84" relation="include">
         </childnode>
       </node>
       <node id="77">
-        <label>NeForce/core/container/vector.hpp</label>
-        <link refid="vector_8hpp"/>
+        <label>NeForce/core/container/map.hpp</label>
+        <link refid="map_8hpp"/>
         <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="82">
+        <label>NeForce/core/container/priority_queue.hpp</label>
+        <link refid="priority__queue_8hpp"/>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>NeForce/core/container/rb_tree.hpp</label>
+        <link refid="rb__tree_8hpp"/>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
         </childnode>
         <childnode refid="52" relation="include">
         </childnode>
-        <childnode refid="75" relation="include">
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="61" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>NeForce/core/container/set.hpp</label>
+        <link refid="container_2set_8hpp"/>
+        <childnode refid="78" relation="include">
+        </childnode>
+      </node>
+      <node id="90">
+        <label>NeForce/core/container/unordered_map.hpp</label>
+        <link refid="unordered__map_8hpp"/>
+        <childnode refid="91" relation="include">
+        </childnode>
+      </node>
+      <node id="84">
+        <label>NeForce/core/container/vector.hpp</label>
+        <link refid="vector_8hpp"/>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
         </childnode>
       </node>
       <node id="21">
@@ -279,6 +410,14 @@
         <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>NeForce/core/functional/apply.hpp</label>
+        <link refid="apply_8hpp"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
         </childnode>
       </node>
       <node id="45">
@@ -309,7 +448,15 @@
         <childnode refid="36" relation="include">
         </childnode>
       </node>
-      <node id="80">
+      <node id="110">
+        <label>NeForce/core/interface/icharacter.hpp</label>
+        <link refid="icharacter_8hpp"/>
+        <childnode refid="111" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+      </node>
+      <node id="79">
         <label>NeForce/core/interface/icollector.hpp</label>
         <link refid="icollector_8hpp"/>
         <childnode refid="42" relation="include">
@@ -321,22 +468,38 @@
         <childnode refid="43" relation="include">
         </childnode>
       </node>
-      <node id="81">
+      <node id="80">
         <label>NeForce/core/interface/iiterator.hpp</label>
         <link refid="iiterator_8hpp"/>
         <childnode refid="42" relation="include">
         </childnode>
       </node>
-      <node id="92">
-        <label>NeForce/core/interface/iobject.hpp</label>
-        <link refid="iobject_8hpp"/>
-        <childnode refid="93" relation="include">
+      <node id="112">
+        <label>NeForce/core/interface/inumeric.hpp</label>
+        <link refid="inumeric_8hpp"/>
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="93">
+      <node id="98">
+        <label>NeForce/core/interface/iobject.hpp</label>
+        <link refid="iobject_8hpp"/>
+        <childnode refid="99" relation="include">
+        </childnode>
+      </node>
+      <node id="111">
+        <label>NeForce/core/interface/ipackage.hpp</label>
+        <link refid="ipackage_8hpp"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="112" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="99">
         <label>NeForce/core/interface/istringify.hpp</label>
         <link refid="istringify_8hpp"/>
-        <childnode refid="85" relation="include">
+        <childnode refid="100" relation="include">
         </childnode>
       </node>
       <node id="51">
@@ -345,7 +508,7 @@
         <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="82">
+      <node id="88">
         <label>NeForce/core/iterator/normal_iterator.hpp</label>
         <link refid="normal__iterator_8hpp"/>
         <childnode refid="51" relation="include">
@@ -389,20 +552,26 @@
         <childnode refid="50" relation="include">
         </childnode>
       </node>
+      <node id="114">
+        <label>NeForce/core/memory/endian.hpp</label>
+        <link refid="endian_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
       <node id="19">
         <label>NeForce/core/memory/memory.hpp</label>
         <link refid="memory_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="78">
+      <node id="85">
         <label>NeForce/core/memory/memory_view.hpp</label>
         <link refid="memory__view_8hpp"/>
-        <childnode refid="79" relation="include">
+        <childnode refid="86" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="82" relation="include">
+        <childnode refid="88" relation="include">
         </childnode>
         <childnode refid="59" relation="include">
         </childnode>
@@ -437,22 +606,22 @@
         <childnode refid="28" relation="include">
         </childnode>
       </node>
-      <node id="74">
+      <node id="94">
         <label>NeForce/core/memory/temporary_buffer.hpp</label>
         <link refid="temporary__buffer_8hpp"/>
         <childnode refid="56" relation="include">
         </childnode>
         <childnode refid="52" relation="include">
         </childnode>
-        <childnode refid="75" relation="include">
+        <childnode refid="89" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
       </node>
-      <node id="75">
+      <node id="89">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="73" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
         <childnode refid="49" relation="include">
         </childnode>
@@ -513,33 +682,33 @@
         <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="86">
+      <node id="101">
         <label>NeForce/core/string/basic_string.hpp</label>
         <link refid="basic__string_8hpp"/>
-        <childnode refid="73" relation="include">
+        <childnode refid="87" relation="include">
         </childnode>
         <childnode refid="48" relation="include">
         </childnode>
         <childnode refid="52" relation="include">
         </childnode>
-        <childnode refid="75" relation="include">
+        <childnode refid="89" relation="include">
         </childnode>
-        <childnode refid="87" relation="include">
+        <childnode refid="102" relation="include">
         </childnode>
         <childnode refid="41" relation="include">
         </childnode>
       </node>
-      <node id="88">
+      <node id="103">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
-        <childnode refid="81" relation="include">
+        <childnode refid="80" relation="include">
         </childnode>
-        <childnode refid="89" relation="include">
+        <childnode refid="104" relation="include">
         </childnode>
-        <childnode refid="90" relation="include">
+        <childnode refid="105" relation="include">
         </childnode>
       </node>
-      <node id="89">
+      <node id="104">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
         <childnode refid="56" relation="include">
@@ -547,28 +716,80 @@
         <childnode refid="30" relation="include">
         </childnode>
       </node>
-      <node id="90">
+      <node id="105">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="85">
-        <label>NeForce/core/string/string.hpp</label>
-        <link refid="string_8hpp"/>
-        <childnode refid="86" relation="include">
+      <node id="113">
+        <label>NeForce/core/string/codepoint.hpp</label>
+        <link refid="codepoint_8hpp"/>
+        <childnode refid="114" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
         </childnode>
       </node>
-      <node id="87">
+      <node id="106">
+        <label>NeForce/core/string/format.hpp</label>
+        <link refid="format_8hpp"/>
+        <childnode refid="107" relation="include">
+        </childnode>
+      </node>
+      <node id="100">
+        <label>NeForce/core/string/string.hpp</label>
+        <link refid="string_8hpp"/>
+        <childnode refid="101" relation="include">
+        </childnode>
+      </node>
+      <node id="102">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="88" relation="include">
+        <childnode refid="103" relation="include">
+        </childnode>
+      </node>
+      <node id="115">
+        <label>NeForce/core/string/to_numerics.hpp</label>
+        <link refid="to__numerics_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="102" relation="include">
+        </childnode>
+      </node>
+      <node id="107">
+        <label>NeForce/core/string/to_string.hpp</label>
+        <link refid="to__string_8hpp"/>
+        <childnode refid="108" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="109" relation="include">
+        </childnode>
+      </node>
+      <node id="109">
+        <label>NeForce/core/string/utf.hpp</label>
+        <link refid="utf_8hpp"/>
+        <childnode refid="110" relation="include">
+        </childnode>
+        <childnode refid="113" relation="include">
         </childnode>
       </node>
       <node id="24">
         <label>NeForce/core/time/clocks.hpp</label>
         <link refid="clocks_8hpp"/>
         <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="96">
+        <label>NeForce/core/time/datetime.hpp</label>
+        <link refid="datetime_8hpp"/>
+        <childnode refid="97" relation="include">
         </childnode>
       </node>
       <node id="26">
@@ -627,7 +848,7 @@
         <childnode refid="42" relation="include">
         </childnode>
       </node>
-      <node id="83">
+      <node id="116">
         <label>NeForce/core/utility/optional.hpp</label>
         <link refid="optional_8hpp"/>
         <childnode refid="57" relation="include">
@@ -639,6 +860,16 @@
         <childnode refid="49" relation="include">
         </childnode>
         <childnode refid="64" relation="include">
+        </childnode>
+      </node>
+      <node id="97">
+        <label>NeForce/core/utility/packages.hpp</label>
+        <link refid="packages_8hpp"/>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="106" relation="include">
+        </childnode>
+        <childnode refid="115" relation="include">
         </childnode>
       </node>
       <node id="61">
@@ -659,6 +890,24 @@
         <childnode refid="11" relation="include">
         </childnode>
       </node>
+      <node id="73">
+        <label>NeForce/core/utility/tuple.hpp</label>
+        <link refid="tuple_8hpp"/>
+        <childnode refid="61" relation="include">
+        </childnode>
+      </node>
+      <node id="122">
+        <label>NeForce/core/utility/variant.hpp</label>
+        <link refid="variant_8hpp"/>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+      </node>
       <node id="1">
         <label>dns_client.hpp</label>
         <link refid="dns__client_8hpp"/>
@@ -666,31 +915,75 @@
         </childnode>
         <childnode refid="65" relation="include">
         </childnode>
-        <childnode refid="68" relation="include">
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="83" relation="include">
+        <childnode refid="116" relation="include">
         </childnode>
-        <childnode refid="84" relation="include">
+        <childnode refid="117" relation="include">
         </childnode>
-        <childnode refid="91" relation="include">
+        <childnode refid="118" relation="include">
+        </childnode>
+        <childnode refid="123" relation="include">
         </childnode>
       </node>
-      <node id="84">
+      <node id="117">
         <label>NeForce/network/dns/dns_message.hpp</label>
         <link refid="dns__message_8hpp"/>
-        <childnode refid="77" relation="include">
+        <childnode refid="84" relation="include">
         </childnode>
-        <childnode refid="85" relation="include">
+        <childnode refid="100" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
       </node>
-      <node id="91">
+      <node id="119">
+        <label>NeForce/network/ip_socket.hpp</label>
+        <link refid="ip__socket_8hpp"/>
+        <childnode refid="120" relation="include">
+        </childnode>
+      </node>
+      <node id="120">
+        <label>NeForce/network/socket_base.hpp</label>
+        <link refid="socket__base_8hpp"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="121" relation="include">
+        </childnode>
+      </node>
+      <node id="118">
+        <label>NeForce/network/udp_socket.hpp</label>
+        <link refid="udp__socket_8hpp"/>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="119" relation="include">
+        </childnode>
+      </node>
+      <node id="121">
+        <label>NeForce/network/util/ip_address.hpp</label>
+        <link refid="ip__address_8hpp"/>
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="116" relation="include">
+        </childnode>
+        <childnode refid="122" relation="include">
+        </childnode>
+        <childnode refid="123" relation="include">
+        </childnode>
+        <childnode refid="124" relation="include">
+        </childnode>
+        <childnode refid="125" relation="include">
+        </childnode>
+      </node>
+      <node id="123">
         <label>NeForce/network/util/ports.hpp</label>
         <link refid="ports_8hpp"/>
-        <childnode refid="92" relation="include">
+        <childnode refid="98" relation="include">
         </childnode>
       </node>
       <node id="5">
@@ -708,13 +1001,16 @@
       <node id="23">
         <label>intrin0.inl.h</label>
       </node>
+      <node id="125">
+        <label>netinet/in.h</label>
+      </node>
       <node id="53">
         <label>new</label>
       </node>
       <node id="15">
         <label>processthreadsapi.h</label>
       </node>
-      <node id="67">
+      <node id="68">
         <label>pthread.h</label>
       </node>
       <node id="17">
@@ -728,6 +1024,9 @@
       </node>
       <node id="63">
         <label>utility</label>
+      </node>
+      <node id="124">
+        <label>ws2tcpip.h</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
@@ -772,6 +1071,7 @@
     </invincdepgraph>
     <innerclass refid="classdns__client" prot="public">dns_client</innerclass>
     <innerclass refid="structdns__client_1_1config" prot="public">dns_client::config</innerclass>
+    <innerclass refid="structdns__client_1_1pending__entry" prot="private">dns_client::pending_entry</innerclass>
     <briefdescription>
 <para>DNS客户端实现 </para>
     </briefdescription>
@@ -784,77 +1084,130 @@
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="future_8hpp" kindref="compound">NeForce/core/async/future.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="shared__mutex_8hpp" kindref="compound">NeForce/core/async/shared_mutex.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="unordered__map_8hpp" kindref="compound">NeForce/core/container/unordered_map.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="clocks_8hpp" kindref="compound">NeForce/core/time/clocks.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="optional_8hpp" kindref="compound">NeForce/core/utility/optional.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="dns__message_8hpp" kindref="compound">NeForce/network/dns/dns_message.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="ports_8hpp" kindref="compound">NeForce/network/util/ports.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="19"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"></highlight></codeline>
-<codeline lineno="25"><highlight class="normal"></highlight></codeline>
-<codeline lineno="40" refid="classdns__client" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classdns__client_1a8c20c9dde44af13993769f4422981684" kindref="member">dns_client</ref><sp/>{</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="46" refid="structdns__client_1_1config" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structdns__client_1_1config" kindref="compound">config</ref><sp/>{</highlight></codeline>
-<codeline lineno="47" refid="structdns__client_1_1config_1a73732155d4d146b70fc866a6bfd10eb4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structdns__client_1_1config_1a73732155d4d146b70fc866a6bfd10eb4" kindref="member">server</ref>{</highlight><highlight class="stringliteral">&quot;8.8.8.8&quot;</highlight><highlight class="normal">};<sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="48" refid="structdns__client_1_1config_1aa384fb64dfaca7d0a77b5afd4a4f9a3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structports" kindref="compound">ports</ref><sp/><ref refid="structdns__client_1_1config_1aa384fb64dfaca7d0a77b5afd4a4f9a3f" kindref="member">port</ref>{<ref refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a305d7a53eafabf042067c988c705cd93" kindref="member">ports::DNS</ref>};<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="49" refid="structdns__client_1_1config_1a639baddffaa46d95c4efc6a81ae0dda1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref><sp/><ref refid="structdns__client_1_1config_1a639baddffaa46d95c4efc6a81ae0dda1" kindref="member">timeout</ref>{5000};<sp/></highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>config<sp/>config_{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>unordered_map&lt;string,<sp/>pair&lt;dns_query_result,<sp/>steady_clock::time_point&gt;&gt;<sp/>cache_;<sp/></highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>shared_mutex<sp/>cache_mutex_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref><sp/>cache_ttl_{300};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>use_tcp_<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="58"><highlight class="normal"></highlight></codeline>
-<codeline lineno="59"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref><sp/>send_udp_query(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref>&amp;<sp/>query)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref><sp/>send_tcp_query(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref>&amp;<sp/>query)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>optional&lt;dns_query_result&gt;<sp/>check_cache(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>key);</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>update_cache(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>key,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>dns_query_result&amp;<sp/>result);</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"></highlight></codeline>
-<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="72" refid="classdns__client_1a8c20c9dde44af13993769f4422981684" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classdns__client_1a8c20c9dde44af13993769f4422981684" kindref="member">dns_client</ref>()<sp/>:</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classdns__client_1a8c20c9dde44af13993769f4422981684" kindref="member">dns_client</ref>(<ref refid="structdns__client_1_1config" kindref="compound">config</ref>())<sp/>{}</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"></highlight></codeline>
-<codeline lineno="81" refid="classdns__client_1a370b7017afd3cb7057169a0a57ec055b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1a370b7017afd3cb7057169a0a57ec055b" kindref="member">dns_client</ref>(<ref refid="structdns__client_1_1config" kindref="compound">config</ref><sp/>cfg,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>use_tcp<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"></highlight></codeline>
-<codeline lineno="87" refid="classdns__client_1a6402a25f9372f93624db6eaf0970113c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1a6402a25f9372f93624db6eaf0970113c" kindref="member">set_config</ref>(<ref refid="structdns__client_1_1config" kindref="compound">config</ref><sp/>cfg)<sp/>{<sp/>config_<sp/>=<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(cfg);<sp/>}</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93" refid="classdns__client_1a2ceac54fd9b2b6594adc7f8ecb734b19" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1a2ceac54fd9b2b6594adc7f8ecb734b19" kindref="member">set_timeout</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref><sp/><ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>)<sp/>{<sp/>config_.timeout<sp/>=<sp/><ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>;<sp/>}</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"></highlight></codeline>
-<codeline lineno="99" refid="classdns__client_1a49de896f0aa09622fc312dc481bf7dcf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1a49de896f0aa09622fc312dc481bf7dcf" kindref="member">set_use_tcp</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>use_tcp)<sp/>{<sp/>use_tcp_<sp/>=<sp/>use_tcp;<sp/>}</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"></highlight></codeline>
-<codeline lineno="105" refid="classdns__client_1ad6aac14fe723931fdd23c17c282d7dd6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1ad6aac14fe723931fdd23c17c282d7dd6" kindref="member">set_cache_ttl</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref><sp/>ttl)<sp/>{<sp/>cache_ttl_<sp/>=<sp/>ttl;<sp/>}</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"></highlight></codeline>
-<codeline lineno="110" refid="classdns__client_1a293ce1ff50f14a8685267faf71cada91" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1a293ce1ff50f14a8685267faf71cada91" kindref="member">clear_cache</ref>()<sp/>{<sp/>cache_.clear();<sp/>}</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"></highlight></codeline>
-<codeline lineno="120" refid="classdns__client_1a38a0bcba1bbc6eeb5168799b62f56595" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structdns__query__result" kindref="compound">dns_query_result</ref><sp/><ref refid="classdns__client_1a38a0bcba1bbc6eeb5168799b62f56595" kindref="member">query</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>domain,<sp/><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8" kindref="member">dns_record::raw</ref><sp/>type<sp/>=<sp/><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9" kindref="member">dns_record::A</ref>,</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___d_n_s_1ga12a6552e04528df27737709ea060c9d1" kindref="member">dns_query</ref><sp/>qclass<sp/>=<sp/><ref refid="group___d_n_s_1gga12a6552e04528df27737709ea060c9d1ae43bd933c18b06d29f9c46cce78de0f2" kindref="member">dns_query::INTERNET</ref>);</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"></highlight></codeline>
-<codeline lineno="130" refid="classdns__client_1aeb37b3cc90da866f70312ac3a2e57093" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfuture" kindref="compound">future&lt;dns_query_result&gt;</ref><sp/><ref refid="classdns__client_1aeb37b3cc90da866f70312ac3a2e57093" kindref="member">query_async</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>domain,<sp/><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8" kindref="member">dns_record::raw</ref><sp/>type<sp/>=<sp/><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9" kindref="member">dns_record::A</ref>,</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___d_n_s_1ga12a6552e04528df27737709ea060c9d1" kindref="member">dns_query</ref><sp/>qclass<sp/>=<sp/><ref refid="group___d_n_s_1gga12a6552e04528df27737709ea060c9d1ae43bd933c18b06d29f9c46cce78de0f2" kindref="member">dns_query::INTERNET</ref>);</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"></highlight></codeline>
-<codeline lineno="138" refid="classdns__client_1ab1ffb7132c5521d8fc2d63325a3556a2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref><sp/><ref refid="classdns__client_1ab1ffb7132c5521d8fc2d63325a3556a2" kindref="member">resolve_a</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>domain);</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"></highlight></codeline>
-<codeline lineno="145" refid="classdns__client_1a0aec8dde61805ee2efcf1d7662dc7bd9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref><sp/><ref refid="classdns__client_1a0aec8dde61805ee2efcf1d7662dc7bd9" kindref="member">resolve_aaaa</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>domain);</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"></highlight></codeline>
-<codeline lineno="152" refid="classdns__client_1ad849698d1c498c88ae034fff46776f75" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref><sp/><ref refid="classdns__client_1ad849698d1c498c88ae034fff46776f75" kindref="member">resolve_cname</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>domain);</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"></highlight></codeline>
-<codeline lineno="159" refid="classdns__client_1afb94d5c9b5e963359d20a6dfb3ede162" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref><sp/><ref refid="classdns__client_1afb94d5c9b5e963359d20a6dfb3ede162" kindref="member">resolve_mx</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>domain);</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"></highlight></codeline>
-<codeline lineno="166" refid="classdns__client_1a81f5256f98dc39727b4d55a7dbb92e42" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref><sp/><ref refid="classdns__client_1a81f5256f98dc39727b4d55a7dbb92e42" kindref="member">resolve_txt</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>domain);</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"></highlight></codeline>
-<codeline lineno="177" refid="classdns__client_1a3c24ec3e33330b5d4a6f33a8867ba08f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1a3c24ec3e33330b5d4a6f33a8867ba08f" kindref="member">reverse_query</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>ip);</highlight></codeline>
-<codeline lineno="178"><highlight class="normal"></highlight></codeline>
-<codeline lineno="187" refid="classdns__client_1a8916c88780f4fff4097d783d17f428a8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;dns_query_result&gt;</ref><sp/><ref refid="classdns__client_1a8916c88780f4fff4097d783d17f428a8" kindref="member">batch_query</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref>&amp;<sp/>domains,<sp/><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8" kindref="member">dns_record::raw</ref><sp/>type<sp/>=<sp/><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9" kindref="member">dns_record::A</ref>);</highlight></codeline>
-<codeline lineno="188"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="189"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>DNS</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="191"><highlight class="normal"></highlight></codeline>
-<codeline lineno="192"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="193"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_NETWORK_DNS_DNS_CLIENT_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="promise_8hpp" kindref="compound">NeForce/core/async/promise.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="shared__mutex_8hpp" kindref="compound">NeForce/core/async/shared_mutex.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="thread__pool_8hpp" kindref="compound">NeForce/core/async/thread_pool.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="unordered__map_8hpp" kindref="compound">NeForce/core/container/unordered_map.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>include<sp/>&quot;<ref refid="pipe_8hpp" kindref="compound">NeForce/core/system/pipe.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="clocks_8hpp" kindref="compound">NeForce/core/time/clocks.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="optional_8hpp" kindref="compound">NeForce/core/utility/optional.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="dns__message_8hpp" kindref="compound">NeForce/network/dns/dns_message.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="udp__socket_8hpp" kindref="compound">NeForce/network/udp_socket.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="ports_8hpp" kindref="compound">NeForce/network/util/ports.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="classdns__client" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classdns__client_1a8c20c9dde44af13993769f4422981684" kindref="member">dns_client</ref><sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="52" refid="structdns__client_1_1config" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structdns__client_1_1config" kindref="compound">config</ref><sp/>{</highlight></codeline>
+<codeline lineno="53" refid="structdns__client_1_1config_1a73732155d4d146b70fc866a6bfd10eb4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structdns__client_1_1config_1a73732155d4d146b70fc866a6bfd10eb4" kindref="member">server</ref>{</highlight><highlight class="stringliteral">&quot;8.8.8.8&quot;</highlight><highlight class="normal">};<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="54" refid="structdns__client_1_1config_1aa384fb64dfaca7d0a77b5afd4a4f9a3f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structports" kindref="compound">ports</ref><sp/><ref refid="structdns__client_1_1config_1aa384fb64dfaca7d0a77b5afd4a4f9a3f" kindref="member">port</ref>{<ref refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a305d7a53eafabf042067c988c705cd93" kindref="member">ports::DNS</ref>};<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="55" refid="structdns__client_1_1config_1a639baddffaa46d95c4efc6a81ae0dda1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref><sp/><ref refid="structdns__client_1_1config_1a639baddffaa46d95c4efc6a81ae0dda1" kindref="member">timeout</ref>{5000};<sp/></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">pending_entry<sp/>{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="classpromise" kindref="compound">promise&lt;dns_query_result&gt;</ref><sp/><ref refid="classpromise" kindref="compound">promise</ref>;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref><sp/>query_data;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structsteady__clock_1aaf25d203f1455c8c7010a6681de52dc5" kindref="member">steady_clock::time_point</ref><sp/>created_at{<ref refid="structsteady__clock_1a1f01ac9bf1927c8b15b205f69a90c29d" kindref="member">steady_clock::now</ref>()};</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>config<sp/>config_{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>unordered_map&lt;string,<sp/>pair&lt;dns_query_result,<sp/>steady_clock::time_point&gt;&gt;<sp/>cache_;<sp/></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>shared_mutex<sp/>cache_mutex_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref><sp/>cache_ttl_{300};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>use_tcp_<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>recursion_desired_<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref><sp/>edns_udp_payload_{<ref refid="namespaceedns_1af389633c2659ce56089ac80bc1581fa9" kindref="member">edns::DEFAULT_UDP_PAYLOAD</ref>};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>dnssec_ok_<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>udp_socket<sp/>shared_socket_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>unordered_map&lt;uint16_t,<sp/>pending_entry&gt;<sp/>pending_queries_;<sp/></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>mutex<sp/>pending_mutex_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>mutex<sp/>send_mutex_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>thread_pool<sp/>io_pool_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>pipe<sp/>wake_pipe_;<sp/></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>atomic&lt;bool&gt;<sp/>io_running_{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ensure_io_started();</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>start_io();</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>stop_io();</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>io_receive_loop();</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>send_query(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref>&amp;<sp/>query);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref><sp/>send_tcp_query(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref>&amp;<sp/>query);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>optional&lt;dns_query_result&gt;<sp/>check_cache(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>key);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>update_cache(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>key,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>dns_query_result&amp;<sp/>result);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="102" refid="classdns__client_1a8c20c9dde44af13993769f4422981684" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classdns__client_1a8c20c9dde44af13993769f4422981684" kindref="member">dns_client</ref>()<sp/>:</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classdns__client_1a8c20c9dde44af13993769f4422981684" kindref="member">dns_client</ref>(<ref refid="structdns__client_1_1config" kindref="compound">config</ref>())<sp/>{}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111" refid="classdns__client_1a370b7017afd3cb7057169a0a57ec055b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1a370b7017afd3cb7057169a0a57ec055b" kindref="member">dns_client</ref>(<ref refid="structdns__client_1_1config" kindref="compound">config</ref><sp/>cfg,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>use_tcp<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classdns__client_1a8c20c9dde44af13993769f4422981684" kindref="member">~dns_client</ref>();</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classdns__client_1a8c20c9dde44af13993769f4422981684" kindref="member">dns_client</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1a8c20c9dde44af13993769f4422981684" kindref="member">dns_client</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classdns__client_1a8c20c9dde44af13993769f4422981684" kindref="member">dns_client</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1a8c20c9dde44af13993769f4422981684" kindref="member">dns_client</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classdns__client_1a8c20c9dde44af13993769f4422981684" kindref="member">dns_client</ref>(<ref refid="classdns__client_1a8c20c9dde44af13993769f4422981684" kindref="member">dns_client</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classdns__client_1a8c20c9dde44af13993769f4422981684" kindref="member">dns_client</ref>&amp;<sp/>operator=(<ref refid="classdns__client_1a8c20c9dde44af13993769f4422981684" kindref="member">dns_client</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124" refid="classdns__client_1a537280a1846c09630af1c534a83a2ce2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1a537280a1846c09630af1c534a83a2ce2" kindref="member">set_config</ref>(<ref refid="structdns__client_1_1config" kindref="compound">config</ref><sp/>cfg)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>config_<sp/>=<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(cfg);<sp/>}</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130" refid="classdns__client_1a5f1384cf1bb9a17c6c1ed57592785513" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1a5f1384cf1bb9a17c6c1ed57592785513" kindref="member">set_timeout</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref><sp/><ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>config_.timeout<sp/>=<sp/><ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136" refid="classdns__client_1a8798882626c3a891f6d93ff69b5efb3e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1a8798882626c3a891f6d93ff69b5efb3e" kindref="member">set_use_tcp</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>use_tcp)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>use_tcp_<sp/>=<sp/>use_tcp;<sp/>}</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142" refid="classdns__client_1af0b1c211296f65301e8ae6b5caca05e2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1af0b1c211296f65301e8ae6b5caca05e2" kindref="member">set_cache_ttl</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref><sp/>ttl)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>cache_ttl_<sp/>=<sp/>ttl;<sp/>}</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148" refid="classdns__client_1a223261533df5ad7d30d609db1a205cc5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1a223261533df5ad7d30d609db1a205cc5" kindref="member">set_recursion_desired</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>rd)<sp/>{<sp/>recursion_desired_<sp/>=<sp/>rd;<sp/>}</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154" refid="classdns__client_1a4ddc884584c0f30de8a7bea7ec4cefec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1a4ddc884584c0f30de8a7bea7ec4cefec" kindref="member">set_edns_udp_payload</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref><sp/>payload_size)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>edns_udp_payload_<sp/>=<sp/>payload_size;<sp/>}</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160" refid="classdns__client_1aca121d56b87e302c7bca3e736000293a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1aca121d56b87e302c7bca3e736000293a" kindref="member">set_dnssec_ok</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>ok)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>dnssec_ok_<sp/>=<sp/>ok;<sp/>}</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165" refid="classdns__client_1a6ebe6d67d0a69e3b60facc24d41ae968" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1a6ebe6d67d0a69e3b60facc24d41ae968" kindref="member">clear_cache</ref>()<sp/>noexcept<sp/>{<sp/>cache_.clear();<sp/>}</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175" refid="classdns__client_1ae8f3ba97e2a5c2a3260f8eea9a174525" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structdns__query__result" kindref="compound">dns_query_result</ref><sp/><ref refid="classdns__client_1ae8f3ba97e2a5c2a3260f8eea9a174525" kindref="member">query</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>domain,<sp/><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8" kindref="member">dns_record::raw</ref><sp/>type<sp/>=<sp/><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9" kindref="member">dns_record::A</ref>,</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___d_n_s_1ga6f72845b22666dbf3cce34aeb6d805a0" kindref="member">dns_class</ref><sp/>qclass<sp/>=<sp/><ref refid="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2" kindref="member">dns_class::INTERNET</ref>);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="185" refid="classdns__client_1a12c1a550173e9a600c4ecaa27ef98d8e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfuture" kindref="compound">future&lt;dns_query_result&gt;</ref><sp/><ref refid="classdns__client_1a12c1a550173e9a600c4ecaa27ef98d8e" kindref="member">query_async</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>domain,<sp/><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8" kindref="member">dns_record::raw</ref><sp/>type<sp/>=<sp/><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9" kindref="member">dns_record::A</ref>,</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___d_n_s_1ga6f72845b22666dbf3cce34aeb6d805a0" kindref="member">dns_class</ref><sp/>qclass<sp/>=<sp/><ref refid="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2" kindref="member">dns_class::INTERNET</ref>);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193" refid="classdns__client_1ab1ffb7132c5521d8fc2d63325a3556a2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref><sp/><ref refid="classdns__client_1ab1ffb7132c5521d8fc2d63325a3556a2" kindref="member">resolve_a</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>domain);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight></codeline>
+<codeline lineno="200" refid="classdns__client_1a0aec8dde61805ee2efcf1d7662dc7bd9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref><sp/><ref refid="classdns__client_1a0aec8dde61805ee2efcf1d7662dc7bd9" kindref="member">resolve_aaaa</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>domain);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207" refid="classdns__client_1ad849698d1c498c88ae034fff46776f75" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref><sp/><ref refid="classdns__client_1ad849698d1c498c88ae034fff46776f75" kindref="member">resolve_cname</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>domain);</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214" refid="classdns__client_1afb94d5c9b5e963359d20a6dfb3ede162" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref><sp/><ref refid="classdns__client_1afb94d5c9b5e963359d20a6dfb3ede162" kindref="member">resolve_mx</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>domain);</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221" refid="classdns__client_1a81f5256f98dc39727b4d55a7dbb92e42" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref><sp/><ref refid="classdns__client_1a81f5256f98dc39727b4d55a7dbb92e42" kindref="member">resolve_txt</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>domain);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="228" refid="classdns__client_1a31a048f9c5f6f3720bc7f34765dbea57" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;dns_srv_record&gt;</ref><sp/><ref refid="classdns__client_1a31a048f9c5f6f3720bc7f34765dbea57" kindref="member">resolve_srv</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>domain);</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"></highlight></codeline>
+<codeline lineno="235" refid="classdns__client_1a6e27fcc650a0ddf7a5cdb270bc8dc5df" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classoptional" kindref="compound">optional&lt;dns_soa_record&gt;</ref><sp/><ref refid="classdns__client_1a6e27fcc650a0ddf7a5cdb270bc8dc5df" kindref="member">resolve_soa</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>domain);</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight></codeline>
+<codeline lineno="246" refid="classdns__client_1a3c24ec3e33330b5d4a6f33a8867ba08f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classdns__client_1a3c24ec3e33330b5d4a6f33a8867ba08f" kindref="member">reverse_query</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>ip);</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"></highlight></codeline>
+<codeline lineno="256" refid="classdns__client_1a8916c88780f4fff4097d783d17f428a8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;dns_query_result&gt;</ref><sp/><ref refid="classdns__client_1a8916c88780f4fff4097d783d17f428a8" kindref="member">batch_query</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;string&gt;</ref>&amp;<sp/>domains,<sp/><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8" kindref="member">dns_record::raw</ref><sp/>type<sp/>=<sp/><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9" kindref="member">dns_record::A</ref>);</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"></highlight></codeline>
+<codeline lineno="269" refid="classdns__client_1a71fa0565d1def9a1300d9285c5351a27" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref><sp/><ref refid="classdns__client_1a71fa0565d1def9a1300d9285c5351a27" kindref="member">build_query</ref>(<ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>domain,<sp/><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8" kindref="member">dns_record::raw</ref><sp/>type<sp/>=<sp/><ref refid="structdns__record_1ace803844a79fd551cc236ca97f8425e8a78120c035ab31453a32af440383defc9" kindref="member">dns_record::A</ref>,</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___d_n_s_1ga6f72845b22666dbf3cce34aeb6d805a0" kindref="member">dns_class</ref><sp/>qclass<sp/>=<sp/><ref refid="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2" kindref="member">dns_class::INTERNET</ref>,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>rd<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>edns_enable<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>dnssec_ok<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref><sp/>edns_payload<sp/>=<sp/><ref refid="namespaceedns_1af389633c2659ce56089ac80bc1581fa9" kindref="member">edns::DEFAULT_UDP_PAYLOAD</ref>);</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"></highlight></codeline>
+<codeline lineno="280" refid="classdns__client_1a0233cd26c8972d7f507cd9cbd1ce0704" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structdns__query__result" kindref="compound">dns_query_result</ref><sp/><ref refid="classdns__client_1a0233cd26c8972d7f507cd9cbd1ce0704" kindref="member">parse_response</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref>&amp;<sp/>response,<sp/><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref><sp/>expected_id<sp/>=<sp/>0);</highlight></codeline>
+<codeline lineno="281"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>DNS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="284"><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_NETWORK_DNS_DNS_CLIENT_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp"/>
   </compounddef>

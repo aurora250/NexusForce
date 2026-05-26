@@ -130,12 +130,12 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a4e1557182307b5f8298782037b153939"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个promise对象  <br /></td></tr>
 <tr class="memitem:ab0b98ede6c487688e1d9684fc979512b" id="r_ab0b98ede6c487688e1d9684fc979512b"><td class="memItemLeft"><a class="el" href="classfuture.html">future</a>&lt; Res &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ab0b98ede6c487688e1d9684fc979512b">get_future</a> ()</td></tr>
 <tr class="memdesc:ab0b98ede6c487688e1d9684fc979512b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取关联的future对象  <br /></td></tr>
-<tr class="memitem:a3002df1df9d416019fe00dd89fc0e5ff" id="r_a3002df1df9d416019fe00dd89fc0e5ff"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a3002df1df9d416019fe00dd89fc0e5ff">set_value</a> (Res &amp;&amp;value)</td></tr>
-<tr class="memdesc:a3002df1df9d416019fe00dd89fc0e5ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置结果值  <br /></td></tr>
+<tr class="memitem:a461ea3f3f0793054804d79c134788515" id="r_a461ea3f3f0793054804d79c134788515"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a461ea3f3f0793054804d79c134788515">set_value</a> (Res value)</td></tr>
+<tr class="memdesc:a461ea3f3f0793054804d79c134788515"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置结果值  <br /></td></tr>
 <tr class="memitem:ae0f41e364fa8a8f21ef340ea89e6d8c5" id="r_ae0f41e364fa8a8f21ef340ea89e6d8c5"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae0f41e364fa8a8f21ef340ea89e6d8c5">set_exception</a> (<a class="el" href="classexception__ptr.html">exception_ptr</a> <a class="el" href="structexception.html">exception</a>)</td></tr>
 <tr class="memdesc:ae0f41e364fa8a8f21ef340ea89e6d8c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置异常  <br /></td></tr>
-<tr class="memitem:ae5d2f35b49c5f86a4e695ab8e5ae77f1" id="r_ae5d2f35b49c5f86a4e695ab8e5ae77f1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae5d2f35b49c5f86a4e695ab8e5ae77f1">set_value_at_thread_exit</a> (Res &amp;&amp;value)</td></tr>
-<tr class="memdesc:ae5d2f35b49c5f86a4e695ab8e5ae77f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">在线程退出时设置结果值  <br /></td></tr>
+<tr class="memitem:ad89aeb3b702bf1654334299b08761ea4" id="r_ad89aeb3b702bf1654334299b08761ea4"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad89aeb3b702bf1654334299b08761ea4">set_value_at_thread_exit</a> (Res value)</td></tr>
+<tr class="memdesc:ad89aeb3b702bf1654334299b08761ea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">在线程退出时设置结果值  <br /></td></tr>
 <tr class="memitem:aeaadfd014af7d67f744e6791320dc8f7" id="r_aeaadfd014af7d67f744e6791320dc8f7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aeaadfd014af7d67f744e6791320dc8f7">set_exception_at_thread_exit</a> (<a class="el" href="classexception__ptr.html">exception_ptr</a> <a class="el" href="structexception.html">exception</a>)</td></tr>
 <tr class="memdesc:aeaadfd014af7d67f744e6791320dc8f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">在线程退出时设置异常  <br /></td></tr>
 </table>
@@ -427,8 +427,8 @@ template&lt;typename Res&gt; </div>
 
 </div>
 </div>
-<a id="a3002df1df9d416019fe00dd89fc0e5ff" name="a3002df1df9d416019fe00dd89fc0e5ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3002df1df9d416019fe00dd89fc0e5ff">&#9670;&#160;</a></span>set_value()</h2>
+<a id="a461ea3f3f0793054804d79c134788515" name="a461ea3f3f0793054804d79c134788515"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a461ea3f3f0793054804d79c134788515">&#9670;&#160;</a></span>set_value()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -441,7 +441,7 @@ template&lt;typename Res&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classpromise.html">promise</a>&lt; Res &gt;::set_value </td>
           <td>(</td>
-          <td class="paramtype">Res &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td class="paramtype">Res</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -474,8 +474,8 @@ template&lt;typename Res&gt; </div>
 
 </div>
 </div>
-<a id="ae5d2f35b49c5f86a4e695ab8e5ae77f1" name="ae5d2f35b49c5f86a4e695ab8e5ae77f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae5d2f35b49c5f86a4e695ab8e5ae77f1">&#9670;&#160;</a></span>set_value_at_thread_exit()</h2>
+<a id="ad89aeb3b702bf1654334299b08761ea4" name="ad89aeb3b702bf1654334299b08761ea4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad89aeb3b702bf1654334299b08761ea4">&#9670;&#160;</a></span>set_value_at_thread_exit()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -488,7 +488,7 @@ template&lt;typename Res&gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="classpromise.html">promise</a>&lt; Res &gt;::set_value_at_thread_exit </td>
           <td>(</td>
-          <td class="paramtype">Res &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td class="paramtype">Res</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>

@@ -118,7 +118,7 @@ void tcp_server_base::accept_loop() {
                 if (!running_) {
                     break;
                 }
-                shared_lock lock(handler_mutex_);
+                shared_lock<shared_mutex> lock(handler_mutex_);
                 if (exception_handler_) {
                     exception_handler_(e);
                 }
@@ -212,7 +212,7 @@ bool tcp_server_base::set_client_handler(client_handler_t handler) {
     if (running_) {
         return false;
     }
-    client_handler_ = _NEFORCE move(handler);
+    client_handler_ = move(handler);
     return true;
 }
 
@@ -364,7 +364,7 @@ void ssl_server::set_ssl_context(ssl_context ctx) {
     if (!ctx.is_valid() || !ctx.has_certificate()) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Invalid SSL context"));
     }
-    ssl_ctx_ = _NEFORCE move(ctx);
+    ssl_ctx_ = move(ctx);
 }
 
 bool ssl_server::start(const int backlog) noexcept {

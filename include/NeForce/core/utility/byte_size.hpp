@@ -140,7 +140,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * println(size2.to_string(byte_size::unit::KB, 0));  // "1536 KB"
  * @endcode
  *
- * TODO: 优化 byte_size 的所有操作为 constexpr
+ * TODO: All operations for optimizing byte_size are constexpr
  */
 class NEFORCE_API byte_size : public iobject<byte_size>, public icommon<byte_size> {
 public:

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['边界查找算法_0',['边界查找算法',['../group___bound_algorithms.html',1,'']]]
+  ['负载因子管理_0',['负载因子管理',['../group___hash_table.html#load_factor_management',1,'']]]
 ];

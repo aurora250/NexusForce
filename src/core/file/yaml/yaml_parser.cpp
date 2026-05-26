@@ -528,7 +528,7 @@ shared_ptr<yaml_string> yaml_parser::parse_plain_string() {
     if (result.empty()) {
         throw_parse_error("Empty plain string");
     }
-    return make_shared<yaml_string>(_NEFORCE move(result), yaml_string::Plain);
+    return make_shared<yaml_string>(move(result), yaml_string::Plain);
 }
 
 shared_ptr<yaml_string> yaml_parser::parse_single_quoted_string() {
@@ -553,7 +553,7 @@ shared_ptr<yaml_string> yaml_parser::parse_single_quoted_string() {
         }
     }
 
-    return make_shared<yaml_string>(_NEFORCE move(result), yaml_string::SingleQuoted);
+    return make_shared<yaml_string>(move(result), yaml_string::SingleQuoted);
 }
 
 shared_ptr<yaml_string> yaml_parser::parse_double_quoted_string() {
@@ -673,7 +673,7 @@ shared_ptr<yaml_string> yaml_parser::parse_double_quoted_string() {
     }
 
     expect('"');
-    return make_shared<yaml_string>(_NEFORCE move(result), yaml_string::DoubleQuoted);
+    return make_shared<yaml_string>(move(result), yaml_string::DoubleQuoted);
 }
 
 string yaml_parser::parse_multiline_string(const bool is_literal) {
@@ -829,12 +829,12 @@ string yaml_parser::parse_multiline_string(const bool is_literal) {
 
 shared_ptr<yaml_string> yaml_parser::parse_literal_string() {
     string content = parse_multiline_string(true);
-    return make_shared<yaml_string>(_NEFORCE move(content), yaml_string::Literal);
+    return make_shared<yaml_string>(move(content), yaml_string::Literal);
 }
 
 shared_ptr<yaml_string> yaml_parser::parse_folded_string() {
     string content = parse_multiline_string(false);
-    return make_shared<yaml_string>(_NEFORCE move(content), yaml_string::Folded);
+    return make_shared<yaml_string>(move(content), yaml_string::Folded);
 }
 
 
@@ -1050,8 +1050,8 @@ shared_ptr<yaml_value> yaml_parser::parse_scalar() {
         }
         string word_lower = word;
         word_lower.lowercase();
-        bool word_is_null = (word == "~" || word_lower == "null");
-        bool word_is_bool =
+        const bool word_is_null = (word == "~" || word_lower == "null");
+        const bool word_is_bool =
                 (word_lower == "true" || word_lower == "false" || word_lower == "yes" || word_lower == "no" ||
                  word_lower == "on" || word_lower == "off" || word_lower == "y" || word_lower == "n");
         if (ch != '~') {
@@ -1063,7 +1063,7 @@ shared_ptr<yaml_value> yaml_parser::parse_scalar() {
             }
         }
         const char next_ch = peek(word.size());
-        bool is_word_terminated =
+        const bool is_word_terminated =
                 (next_ch == ' ' || next_ch == '\t' || next_ch == '\n' || next_ch == '\r' || next_ch == '\0' ||
                  next_ch == ':' || next_ch == ',' || next_ch == ']' || next_ch == '}' || next_ch == '#');
         if ((word_is_null || word_is_bool) && is_word_terminated) {
@@ -1090,7 +1090,7 @@ shared_ptr<yaml_value> yaml_parser::parse_scalar() {
                 is_timestamp = true;
             } else if (potential_ts.contains('-')) {
                 size_t hyphen_count = 0;
-                for (char c: potential_ts) {
+                for (const char c: potential_ts) {
                     if (c == '-') {
                         hyphen_count++;
                     }
@@ -1162,7 +1162,7 @@ shared_ptr<yaml_sequence> yaml_parser::parse_flow_sequence() {
         }
 
         auto value = parse_inline_value();
-        seq->add_element(_NEFORCE move(value));
+        seq->add_element(move(value));
         skip_whitespace_inline();
         if (current() == '\n') {
             skip_to_next_line();
@@ -1224,7 +1224,7 @@ shared_ptr<yaml_mapping> yaml_parser::parse_flow_mapping() {
         skip_whitespace_inline();
 
         auto value = parse_inline_value();
-        map->add_member(key, _NEFORCE move(value));
+        map->add_member(key, move(value));
 
         skip_whitespace_inline();
         if (current() == '\n') {
@@ -1323,7 +1323,7 @@ shared_ptr<yaml_sequence> yaml_parser::parse_block_sequence() {
                 skip_to_next_line();
             }
         }
-        seq->add_element(_NEFORCE move(value));
+        seq->add_element(move(value));
     }
     return seq;
 }
@@ -1531,7 +1531,7 @@ shared_ptr<yaml_mapping> yaml_parser::parse_block_mapping(bool parent_skipped_in
                 value->set_tag(value_tag);
             }
 
-            map->add_member(complex_key->to_string(), _NEFORCE move(value));
+            map->add_member(complex_key->to_string(), move(value));
             continue;
         }
 
@@ -1618,7 +1618,7 @@ shared_ptr<yaml_mapping> yaml_parser::parse_block_mapping(bool parent_skipped_in
                 }
             }
         } else {
-            map->add_member(key, _NEFORCE move(value));
+            map->add_member(key, move(value));
         }
     }
     return map;

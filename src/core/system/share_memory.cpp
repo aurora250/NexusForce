@@ -130,8 +130,8 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
         return;
     }
 
-    auto get_real_size = [&]() -> size_t {
-        void* temp_view = ::MapViewOfFile(handle_, FILE_MAP_READ, 0, 0, 0);
+    auto get_real_size = [this]() -> size_t {
+        const void* temp_view = ::MapViewOfFile(handle_, FILE_MAP_READ, 0, 0, 0);
         if (temp_view == nullptr) {
             return 0;
         }
@@ -230,7 +230,7 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
         flags |= O_CREAT | O_EXCL;
         handle_ = ::shm_open(shm_name.data(), flags, 0666);
         if (handle_ == g_invalid_handle) {
-            NEFORCE_THROW_EXCEPTION(share_memory_exception(_NEFORCE last_error().message().data()));
+            NEFORCE_THROW_EXCEPTION(share_memory_exception(last_error().message().data()));
         }
 
         if (::ftruncate(handle_, static_cast<::off_t>(size)) == -1) {
@@ -387,7 +387,7 @@ void* share_memory::map(size_t offset, const size_t length) {
 
     if (original_mapped_addr_ == MAP_FAILED) {
         original_mapped_addr_ = nullptr;
-        const auto error = _NEFORCE last_error();
+        const auto error = last_error();
         NEFORCE_THROW_EXCEPTION(share_memory_exception(error.message().data()));
     }
 #endif

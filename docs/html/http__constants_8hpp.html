@@ -117,36 +117,56 @@ http_constants.hpp 的引用(Include)关系图:</div>
 枚举</h2></td></tr>
 <tr class="memitem:a77669238bc4b0444c075edb87036cf57" id="r_a77669238bc4b0444c075edb87036cf57"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a77669238bc4b0444c075edb87036cf57">http_status</a> : uint16_t { <br />
 &#160;&#160;<a class="el" href="#a77669238bc4b0444c075edb87036cf57a3c266ecde8a7bb86ba08a9f6f363b92d">S1_CONTINUE</a> = 100
-, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a89facff6ff11ebcfe69b47acfb4111ee">S1_SWITCH_PROTOCOL</a> = 101
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a257cce4a273a6fb4c13bfa843588fd7f">S1_SWITCHING_PROTOCOLS</a> = 101
 , <a class="el" href="#a77669238bc4b0444c075edb87036cf57aa83896e2df473a400c23e956ffc554f6">S2_OK</a> = 200
 , <a class="el" href="#a77669238bc4b0444c075edb87036cf57a6193bd6cc646c7cf4bfdc1f05279877c">S2_CREATED</a> = 201
 , <br />
-&#160;&#160;<a class="el" href="#a77669238bc4b0444c075edb87036cf57a8d42f2965c28afe10d1b05b33db0a416">S2_NO_CONTENT</a> = 204
+&#160;&#160;<a class="el" href="#a77669238bc4b0444c075edb87036cf57abc86a97590ca34b7ab190b16b9d09e7e">S2_ACCEPTED</a> = 202
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a8d42f2965c28afe10d1b05b33db0a416">S2_NO_CONTENT</a> = 204
 , <a class="el" href="#a77669238bc4b0444c075edb87036cf57a696ce3f29058109bb04f848bf1b1d1a2">S2_PARTIAL_CONTENT</a> = 206
 , <a class="el" href="#a77669238bc4b0444c075edb87036cf57a6ad07ea94d4b2ecf04eddb103449b051">S3_MOVED_PERMANENT</a> = 301
-, <a class="el" href="#a77669238bc4b0444c075edb87036cf57aab919dcc929ab53a898db9669fcf1e5e">S3_FOUND</a> = 302
 , <br />
-&#160;&#160;<a class="el" href="#a77669238bc4b0444c075edb87036cf57a16bbec1d94dcdc5c5e5df3d10e23cbc8">S3_NO_MODIFIED</a> = 304
+&#160;&#160;<a class="el" href="#a77669238bc4b0444c075edb87036cf57aab919dcc929ab53a898db9669fcf1e5e">S3_FOUND</a> = 302
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57aff97c356ef9341dbe1a23b0f78a9a91f">S3_SEE_OTHER</a> = 303
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a5ad13c19147ebbbd88ac377a5492ccee">S3_NOT_MODIFIED</a> = 304
 , <a class="el" href="#a77669238bc4b0444c075edb87036cf57ada2aa008b3b166c842b0b401441626a0">S3_TEMPORARY_REDIRECT</a> = 307
-, <a class="el" href="#a77669238bc4b0444c075edb87036cf57adaf17fc8235b23fc1e6dc42729bdefe0">S3_PERMANENT_REDIRECT</a> = 308
-, <a class="el" href="#a77669238bc4b0444c075edb87036cf57acc8baea14488f6d94b0425c8f4927bbe">S4_BAD_REQUEST</a> = 400
 , <br />
-&#160;&#160;<a class="el" href="#a77669238bc4b0444c075edb87036cf57a25a638b42981b1cd34824c4041da53fa">S4_UNAUTHORIZED</a> = 401
+&#160;&#160;<a class="el" href="#a77669238bc4b0444c075edb87036cf57adaf17fc8235b23fc1e6dc42729bdefe0">S3_PERMANENT_REDIRECT</a> = 308
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57acc8baea14488f6d94b0425c8f4927bbe">S4_BAD_REQUEST</a> = 400
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a25a638b42981b1cd34824c4041da53fa">S4_UNAUTHORIZED</a> = 401
 , <a class="el" href="#a77669238bc4b0444c075edb87036cf57a335c1bcef2020f298cd6c113d2a60e15">S4_FORBIDDEN</a> = 403
-, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a6ee8b119267b990c677d97ecb05d5b90">S4_NOT_FOUNT</a> = 404
+, <br />
+&#160;&#160;<a class="el" href="#a77669238bc4b0444c075edb87036cf57ab4a27499c9d97b7e5bb4825ae00040aa">S4_NOT_FOUND</a> = 404
 , <a class="el" href="#a77669238bc4b0444c075edb87036cf57a2d527ba076940f69996a2dfd75bccd1d">S4_METHOD_NOT_ALLOWED</a> = 405
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57adee1fea15ea13fe956c1aee931699263">S4_NOT_ACCEPTABLE</a> = 406
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57ada647e0a22d32d8a603f81b5c1cdacac">S4_PROXY_AUTH_REQUIRED</a> = 407
 , <br />
 &#160;&#160;<a class="el" href="#a77669238bc4b0444c075edb87036cf57ae8e7f3def061fba55cfcd97e1b02d7d5">S4_REQUEST_TIMEOUT</a> = 408
-, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a3e29df50fdccbe42eb28b739f8d70c85">S4_PAYLOAD_LARGE</a> = 413
-, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a4ffa395d1b3d8303bf241d49a4595c4c">S4_URL_LONG</a> = 414
-, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a1f863a4da61fc4d41f6a7912a59901a7">S4_MANY_REQUESTS</a> = 429
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a73b1029c99b96c06d84d8acb424a6a6e">S4_CONFLICT</a> = 409
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57ae0c8d3a7b88e93f5e7cc577a0fba950a">S4_GONE</a> = 410
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a7f7aaf345526658f5b59d43bea4fb436">S4_LENGTH_REQUIRED</a> = 411
 , <br />
-&#160;&#160;<a class="el" href="#a77669238bc4b0444c075edb87036cf57a09699209b13061ea3397c2eef26129a5">S5_INTERNAL_ERROR</a> = 500
-, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a1b2fcd21f1c6b22773696e08ff8bed76">S5_BAD_GATEWAY</a> = 502
+&#160;&#160;<a class="el" href="#a77669238bc4b0444c075edb87036cf57a8502c05ccda769b77635e0f517904876">S4_PRECONDITION_FAILED</a> = 412
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a673f3cac9b31b1e8412bc77c1b6c57c3">S4_UNSUPPORTED_MEDIA_TYPE</a> = 415
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57ac26956ba9fd851a107c3c5b42a159b01">S4_RANGE_NOT_SATISFIABLE</a> = 416
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a3ee02b657a3d2840734b77268a15e9eb">S4_EXPECTATION_FAILED</a> = 417
+, <br />
+&#160;&#160;<a class="el" href="#a77669238bc4b0444c075edb87036cf57a8da9ee13e1822f738718f3f8bfd2ed6e">S4_UNPROCESSABLE_CONTENT</a> = 422
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a9c51d02045be6610805dc4542cea8e3b">S4_UPGRADE_REQUIRED</a> = 426
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57ac31c497c821792015879c93a3abfc805">S4_PAYLOAD_TOO_LARGE</a> = 413
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a6646df4828f4bb98cbddd5d7c382f6e7">S4_URI_TOO_LONG</a> = 414
+, <br />
+&#160;&#160;<a class="el" href="#a77669238bc4b0444c075edb87036cf57a7852aa3234e5d5ad8152f2e897cea25e">S4_TOO_MANY_REQUESTS</a> = 429
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57aa5fd6ad8f9f9463632b596b723c94d7c">S4_HEADER_FIELDS_TOO_LARGE</a> = 431
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a3a17fa83a40ae8c4acc814cc4e396525">S4_UNAVAILABLE_FOR_LEGAL_REASONS</a> = 451
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a1bebfb76ff25605feaf072cf7c4cddd6">S5_INTERNAL_SERVER_ERROR</a> = 500
+, <br />
+&#160;&#160;<a class="el" href="#a77669238bc4b0444c075edb87036cf57a1b2fcd21f1c6b22773696e08ff8bed76">S5_BAD_GATEWAY</a> = 502
 , <a class="el" href="#a77669238bc4b0444c075edb87036cf57a8c71cd08789b108bc683683d44c0acbe">S5_SERVICE_UNAVAILABLE</a> = 503
 , <a class="el" href="#a77669238bc4b0444c075edb87036cf57a0f68fb990eb482eb482d2ff145a1283f">S5_GATEWAY_TIMEOUT</a> = 504
+, <a class="el" href="#a77669238bc4b0444c075edb87036cf57a68e6edb46bc09b4bb1b5e501ec4ac767">S5_NOT_IMPLEMENTED</a> = 501
 , <br />
-&#160;&#160;<a class="el" href="#a77669238bc4b0444c075edb87036cf57a27d70a90647e862409a82231321cf089">S5_HTTP_VERSION_NOT_SUPPORT</a> = 505
+&#160;&#160;<a class="el" href="#a77669238bc4b0444c075edb87036cf57a03e19cfa2ee1933aa9ce3b8e25c87fd1">S5_HTTP_VERSION_NOT_SUPPORTED</a> = 505
 <br />
  }</td></tr>
 <tr class="memdesc:a77669238bc4b0444c075edb87036cf57"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP状态码枚举  <a href="#a77669238bc4b0444c075edb87036cf57">更多...</a><br /></td></tr>
@@ -194,11 +214,13 @@ http_constants.hpp 的引用(Include)关系图:</div>
 <table class="fieldtable">
 <tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a3c266ecde8a7bb86ba08a9f6f363b92d" name="a77669238bc4b0444c075edb87036cf57a3c266ecde8a7bb86ba08a9f6f363b92d"></a>S1_CONTINUE&#160;</td><td class="fielddoc"><p>100 Continue 服务器收到请求头，客户端可以继续发送请求体 </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a89facff6ff11ebcfe69b47acfb4111ee" name="a77669238bc4b0444c075edb87036cf57a89facff6ff11ebcfe69b47acfb4111ee"></a>S1_SWITCH_PROTOCOL&#160;</td><td class="fielddoc"><p>101 Switching Protocols 同意切换协议 </p>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a257cce4a273a6fb4c13bfa843588fd7f" name="a77669238bc4b0444c075edb87036cf57a257cce4a273a6fb4c13bfa843588fd7f"></a>S1_SWITCHING_PROTOCOLS&#160;</td><td class="fielddoc"><p>101 Switching Protocols 同意切换协议 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57aa83896e2df473a400c23e956ffc554f6" name="a77669238bc4b0444c075edb87036cf57aa83896e2df473a400c23e956ffc554f6"></a>S2_OK&#160;</td><td class="fielddoc"><p>200 OK 请求成功 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a6193bd6cc646c7cf4bfdc1f05279877c" name="a77669238bc4b0444c075edb87036cf57a6193bd6cc646c7cf4bfdc1f05279877c"></a>S2_CREATED&#160;</td><td class="fielddoc"><p>201 Created 请求成功并创建了新资源 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57abc86a97590ca34b7ab190b16b9d09e7e" name="a77669238bc4b0444c075edb87036cf57abc86a97590ca34b7ab190b16b9d09e7e"></a>S2_ACCEPTED&#160;</td><td class="fielddoc"><p>202 Accepted 请求已接受但尚未处理 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a8d42f2965c28afe10d1b05b33db0a416" name="a77669238bc4b0444c075edb87036cf57a8d42f2965c28afe10d1b05b33db0a416"></a>S2_NO_CONTENT&#160;</td><td class="fielddoc"><p>204 No Content 请求成功但无内容返回 </p>
 </td></tr>
@@ -208,7 +230,9 @@ http_constants.hpp 的引用(Include)关系图:</div>
 </td></tr>
 <tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57aab919dcc929ab53a898db9669fcf1e5e" name="a77669238bc4b0444c075edb87036cf57aab919dcc929ab53a898db9669fcf1e5e"></a>S3_FOUND&#160;</td><td class="fielddoc"><p>302 Found 资源临时迁移到新URL </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a16bbec1d94dcdc5c5e5df3d10e23cbc8" name="a77669238bc4b0444c075edb87036cf57a16bbec1d94dcdc5c5e5df3d10e23cbc8"></a>S3_NO_MODIFIED&#160;</td><td class="fielddoc"><p>304 Not Modified 资源未修改，可使用本地缓存 </p>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57aff97c356ef9341dbe1a23b0f78a9a91f" name="a77669238bc4b0444c075edb87036cf57aff97c356ef9341dbe1a23b0f78a9a91f"></a>S3_SEE_OTHER&#160;</td><td class="fielddoc"><p>303 See Other 重定向到另一个URI获取响应 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a5ad13c19147ebbbd88ac377a5492ccee" name="a77669238bc4b0444c075edb87036cf57a5ad13c19147ebbbd88ac377a5492ccee"></a>S3_NOT_MODIFIED&#160;</td><td class="fielddoc"><p>304 Not Modified 资源未修改，可使用本地缓存 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57ada2aa008b3b166c842b0b401441626a0" name="a77669238bc4b0444c075edb87036cf57ada2aa008b3b166c842b0b401441626a0"></a>S3_TEMPORARY_REDIRECT&#160;</td><td class="fielddoc"><p>307 Temporary Redirect 临时重定向 </p>
 </td></tr>
@@ -220,19 +244,45 @@ http_constants.hpp 的引用(Include)关系图:</div>
 </td></tr>
 <tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a335c1bcef2020f298cd6c113d2a60e15" name="a77669238bc4b0444c075edb87036cf57a335c1bcef2020f298cd6c113d2a60e15"></a>S4_FORBIDDEN&#160;</td><td class="fielddoc"><p>403 Forbidden 服务器拒绝请求 </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a6ee8b119267b990c677d97ecb05d5b90" name="a77669238bc4b0444c075edb87036cf57a6ee8b119267b990c677d97ecb05d5b90"></a>S4_NOT_FOUNT&#160;</td><td class="fielddoc"><p>404 Not Found 请求的资源不存在 </p>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57ab4a27499c9d97b7e5bb4825ae00040aa" name="a77669238bc4b0444c075edb87036cf57ab4a27499c9d97b7e5bb4825ae00040aa"></a>S4_NOT_FOUND&#160;</td><td class="fielddoc"><p>404 Not Found 请求的资源不存在 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a2d527ba076940f69996a2dfd75bccd1d" name="a77669238bc4b0444c075edb87036cf57a2d527ba076940f69996a2dfd75bccd1d"></a>S4_METHOD_NOT_ALLOWED&#160;</td><td class="fielddoc"><p>405 Method Not Allowed 请求方法不允许 </p>
 </td></tr>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57adee1fea15ea13fe956c1aee931699263" name="a77669238bc4b0444c075edb87036cf57adee1fea15ea13fe956c1aee931699263"></a>S4_NOT_ACCEPTABLE&#160;</td><td class="fielddoc"><p>406 Not Acceptable 无法生成匹配Accept头的内容 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57ada647e0a22d32d8a603f81b5c1cdacac" name="a77669238bc4b0444c075edb87036cf57ada647e0a22d32d8a603f81b5c1cdacac"></a>S4_PROXY_AUTH_REQUIRED&#160;</td><td class="fielddoc"><p>407 Proxy Authentication Required 需要通过代理认证 </p>
+</td></tr>
 <tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57ae8e7f3def061fba55cfcd97e1b02d7d5" name="a77669238bc4b0444c075edb87036cf57ae8e7f3def061fba55cfcd97e1b02d7d5"></a>S4_REQUEST_TIMEOUT&#160;</td><td class="fielddoc"><p>408 Request Timeout 客户端请求超时 </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a3e29df50fdccbe42eb28b739f8d70c85" name="a77669238bc4b0444c075edb87036cf57a3e29df50fdccbe42eb28b739f8d70c85"></a>S4_PAYLOAD_LARGE&#160;</td><td class="fielddoc"><p>413 Payload Too Large 请求体过大 </p>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a73b1029c99b96c06d84d8acb424a6a6e" name="a77669238bc4b0444c075edb87036cf57a73b1029c99b96c06d84d8acb424a6a6e"></a>S4_CONFLICT&#160;</td><td class="fielddoc"><p>409 Conflict 请求与资源当前状态冲突 </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a4ffa395d1b3d8303bf241d49a4595c4c" name="a77669238bc4b0444c075edb87036cf57a4ffa395d1b3d8303bf241d49a4595c4c"></a>S4_URL_LONG&#160;</td><td class="fielddoc"><p>414 URI Too Long 请求URL过长 </p>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57ae0c8d3a7b88e93f5e7cc577a0fba950a" name="a77669238bc4b0444c075edb87036cf57ae0c8d3a7b88e93f5e7cc577a0fba950a"></a>S4_GONE&#160;</td><td class="fielddoc"><p>410 Gone 资源已永久删除 </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a1f863a4da61fc4d41f6a7912a59901a7" name="a77669238bc4b0444c075edb87036cf57a1f863a4da61fc4d41f6a7912a59901a7"></a>S4_MANY_REQUESTS&#160;</td><td class="fielddoc"><p>429 Too Many Requests 请求次数过多 </p>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a7f7aaf345526658f5b59d43bea4fb436" name="a77669238bc4b0444c075edb87036cf57a7f7aaf345526658f5b59d43bea4fb436"></a>S4_LENGTH_REQUIRED&#160;</td><td class="fielddoc"><p>411 Length Required 请求未指定Content-Length </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a09699209b13061ea3397c2eef26129a5" name="a77669238bc4b0444c075edb87036cf57a09699209b13061ea3397c2eef26129a5"></a>S5_INTERNAL_ERROR&#160;</td><td class="fielddoc"><p>500 Internal Server Error 服务器内部错误 </p>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a8502c05ccda769b77635e0f517904876" name="a77669238bc4b0444c075edb87036cf57a8502c05ccda769b77635e0f517904876"></a>S4_PRECONDITION_FAILED&#160;</td><td class="fielddoc"><p>412 Precondition Failed 请求先决条件未满足 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a673f3cac9b31b1e8412bc77c1b6c57c3" name="a77669238bc4b0444c075edb87036cf57a673f3cac9b31b1e8412bc77c1b6c57c3"></a>S4_UNSUPPORTED_MEDIA_TYPE&#160;</td><td class="fielddoc"><p>415 Unsupported Media Type 不支持的媒体格式 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57ac26956ba9fd851a107c3c5b42a159b01" name="a77669238bc4b0444c075edb87036cf57ac26956ba9fd851a107c3c5b42a159b01"></a>S4_RANGE_NOT_SATISFIABLE&#160;</td><td class="fielddoc"><p>416 Range Not Satisfiable 无法满足Range请求 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a3ee02b657a3d2840734b77268a15e9eb" name="a77669238bc4b0444c075edb87036cf57a3ee02b657a3d2840734b77268a15e9eb"></a>S4_EXPECTATION_FAILED&#160;</td><td class="fielddoc"><p>417 Expectation Failed 无法满足Expect请求头 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a8da9ee13e1822f738718f3f8bfd2ed6e" name="a77669238bc4b0444c075edb87036cf57a8da9ee13e1822f738718f3f8bfd2ed6e"></a>S4_UNPROCESSABLE_CONTENT&#160;</td><td class="fielddoc"><p>422 Unprocessable Content 请求格式正确但语义有误 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a9c51d02045be6610805dc4542cea8e3b" name="a77669238bc4b0444c075edb87036cf57a9c51d02045be6610805dc4542cea8e3b"></a>S4_UPGRADE_REQUIRED&#160;</td><td class="fielddoc"><p>426 Upgrade Required 需要升级协议 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57ac31c497c821792015879c93a3abfc805" name="a77669238bc4b0444c075edb87036cf57ac31c497c821792015879c93a3abfc805"></a>S4_PAYLOAD_TOO_LARGE&#160;</td><td class="fielddoc"><p>413 Payload Too Large 请求体过大 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a6646df4828f4bb98cbddd5d7c382f6e7" name="a77669238bc4b0444c075edb87036cf57a6646df4828f4bb98cbddd5d7c382f6e7"></a>S4_URI_TOO_LONG&#160;</td><td class="fielddoc"><p>414 URI Too Long 请求URL过长 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a7852aa3234e5d5ad8152f2e897cea25e" name="a77669238bc4b0444c075edb87036cf57a7852aa3234e5d5ad8152f2e897cea25e"></a>S4_TOO_MANY_REQUESTS&#160;</td><td class="fielddoc"><p>429 Too Many Requests 请求次数过多 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57aa5fd6ad8f9f9463632b596b723c94d7c" name="a77669238bc4b0444c075edb87036cf57aa5fd6ad8f9f9463632b596b723c94d7c"></a>S4_HEADER_FIELDS_TOO_LARGE&#160;</td><td class="fielddoc"><p>431 Request Header Fields Too Large 请求头字段过大 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a3a17fa83a40ae8c4acc814cc4e396525" name="a77669238bc4b0444c075edb87036cf57a3a17fa83a40ae8c4acc814cc4e396525"></a>S4_UNAVAILABLE_FOR_LEGAL_REASONS&#160;</td><td class="fielddoc"><p>451 Unavailable For Legal Reasons 因法律原因不可用 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a1bebfb76ff25605feaf072cf7c4cddd6" name="a77669238bc4b0444c075edb87036cf57a1bebfb76ff25605feaf072cf7c4cddd6"></a>S5_INTERNAL_SERVER_ERROR&#160;</td><td class="fielddoc"><p>500 Internal Server Error 服务器内部错误 </p>
 </td></tr>
 <tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a1b2fcd21f1c6b22773696e08ff8bed76" name="a77669238bc4b0444c075edb87036cf57a1b2fcd21f1c6b22773696e08ff8bed76"></a>S5_BAD_GATEWAY&#160;</td><td class="fielddoc"><p>502 Bad Gateway 上游服务器响应无效 </p>
 </td></tr>
@@ -240,7 +290,9 @@ http_constants.hpp 的引用(Include)关系图:</div>
 </td></tr>
 <tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a0f68fb990eb482eb482d2ff145a1283f" name="a77669238bc4b0444c075edb87036cf57a0f68fb990eb482eb482d2ff145a1283f"></a>S5_GATEWAY_TIMEOUT&#160;</td><td class="fielddoc"><p>504 Gateway Timeout 上游服务器响应超时 </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a27d70a90647e862409a82231321cf089" name="a77669238bc4b0444c075edb87036cf57a27d70a90647e862409a82231321cf089"></a>S5_HTTP_VERSION_NOT_SUPPORT&#160;</td><td class="fielddoc"><p>505 HTTP Version Not Supported 不支持的HTTP版本 </p>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a68e6edb46bc09b4bb1b5e501ec4ac767" name="a77669238bc4b0444c075edb87036cf57a68e6edb46bc09b4bb1b5e501ec4ac767"></a>S5_NOT_IMPLEMENTED&#160;</td><td class="fielddoc"><p>501 Not Implemented 服务器不支持该请求功能 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a77669238bc4b0444c075edb87036cf57a03e19cfa2ee1933aa9ce3b8e25c87fd1" name="a77669238bc4b0444c075edb87036cf57a03e19cfa2ee1933aa9ce3b8e25c87fd1"></a>S5_HTTP_VERSION_NOT_SUPPORTED&#160;</td><td class="fielddoc"><p>505 HTTP Version Not Supported 不支持的HTTP版本 </p>
 </td></tr>
 </table>
 

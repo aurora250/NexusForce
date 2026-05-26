@@ -9,7 +9,7 @@ var searchData=
   ['chunked_6',['chunked',['../structhttp__client__response.html#a421388c834ec20f6a93fa464edb8db15',1,'http_client_response']]],
   ['cipher_5fname_7',['cipher_name',['../structsmtp__socket_1_1starttls__result.html#afb1ed46aee61cc62fb878774ace7f6fc',1,'smtp_socket::starttls_result']]],
   ['circle_8',['CIRCLE',['../group___math_constants.html#ga2f24a976ecaccac77559e13d11407ac4',1,'math.hpp']]],
-  ['class_5ftype_9',['class_type',['../structdns__record.html#a13bbf6573e1f8ef7490e8e59b08ed0d3',1,'dns_record']]],
+  ['class_5ftype_9',['class_type',['../structdns__record.html#a6a0e72633a5787c3da5a12aa97c7599b',1,'dns_record']]],
   ['client_5fhandler_5f_10',['client_handler_',['../classtcp__server__base.html#a5e6ff6717c9972d255c9bee34975594e',1,'tcp_server_base']]],
   ['client_5fpool_5f_11',['client_pool_',['../classtcp__server__base.html#a2d72c2c3af83d0bc20fcd5effaf05874',1,'tcp_server_base']]],
   ['code_12',['code',['../structicmp__header.html#ad8a33103c96f7c05e359337ba5db676d',1,'icmp_header::code'],['../structsmtp__socket_1_1response.html#a6c20183bd9127b1e76dea425d3a66906',1,'smtp_socket::response::code']]],

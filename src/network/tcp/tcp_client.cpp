@@ -473,7 +473,7 @@ void ssl_client::set_sni_hostname(string hostname) {
     if (is_connected()) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("Cannot set SNI hostname while connected"));
     }
-    sni_hostname_ = _NEFORCE move(hostname);
+    sni_hostname_ = move(hostname);
 }
 
 bool ssl_client::load_ca_file(const string& ca_file) {

@@ -18,8 +18,9 @@ var searchData=
   ['message_5ftoo_5fbig_15',['MESSAGE_TOO_BIG',['../group___web_socket.html#ggab56e001ece32405515a29e0bf0d10c0fab21fb07b059fe138857da9afbe0d752d',1,'websocket.hpp']]],
   ['modified_16',['MODIFIED',['../group___file.html#gga43a6bee6e48cc42ec150c994b67f1cd7a40e3819215b52841e19a7cac06b5f065',1,'file_constants.hpp']]],
   ['mongodb_17',['MONGODB',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a4ad3d6561fccc0bd695f388561fdc093',1,'ports']]],
-  ['multibasic_18',['MultiBasic',['../classtoml__string.html#abbe190295df8b66da998a01531a4e431a3614ffaee08c06a7993407930a53c296',1,'toml_string']]],
-  ['multiliteral_19',['MultiLiteral',['../classtoml__string.html#abbe190295df8b66da998a01531a4e431a5b6abbd2238092530e8481d249e629b0',1,'toml_string']]],
-  ['mx_20',['MX',['../structdns__record.html#ace803844a79fd551cc236ca97f8425e8a5a69b683562bdb1a70b5eef64b1fd715',1,'dns_record']]],
-  ['mysql_21',['MYSQL',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8ae1fab56c6e78f444d1fbc6f9d1de6bcd',1,'ports::MYSQL'],['../group___database.html#gga80fcb4d728eaac384a3edc19d9ad20c6a14498b83dd1667a0c78f4fdaf5afbf4b',1,'MYSQL:&#160;db_config.hpp']]]
+  ['multi_5fstring_18',['multi_string',['../classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477a0eb11d63c2fc32b79389f0f26e14434d',1,'registry_key']]],
+  ['multibasic_19',['MultiBasic',['../classtoml__string.html#abbe190295df8b66da998a01531a4e431a3614ffaee08c06a7993407930a53c296',1,'toml_string']]],
+  ['multiliteral_20',['MultiLiteral',['../classtoml__string.html#abbe190295df8b66da998a01531a4e431a5b6abbd2238092530e8481d249e629b0',1,'toml_string']]],
+  ['mx_21',['MX',['../structdns__record.html#ace803844a79fd551cc236ca97f8425e8a5a69b683562bdb1a70b5eef64b1fd715',1,'dns_record']]],
+  ['mysql_22',['MYSQL',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8ae1fab56c6e78f444d1fbc6f9d1de6bcd',1,'ports::MYSQL'],['../group___database.html#gga80fcb4d728eaac384a3edc19d9ad20c6a14498b83dd1667a0c78f4fdaf5afbf4b',1,'MYSQL:&#160;db_config.hpp']]]
 ];

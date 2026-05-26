@@ -3,7 +3,7 @@
 #include "NeForce/core/memory/endian.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
-// TODO: 实现 binary_serializer 结构
+// TODO: Implement binary_serializer structure
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_SERIALIZE_BINARY_SERIALIZER_HPP__

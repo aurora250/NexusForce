@@ -92,7 +92,7 @@ http_request http_request::parse(const string_view str) {
         if (colon_pos != string::npos) {
             string key = line.view(0, colon_pos).trim();
             string value = line.view(colon_pos + 1).trim();
-            request.set_header(key, _NEFORCE move(value));
+            request.set_header(key, move(value));
         }
     }
 

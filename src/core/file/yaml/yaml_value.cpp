@@ -132,7 +132,7 @@ namespace {
             }
             case yaml_value::Float: {
                 string float_str = to_string(value->as_float()->get_value());
-                auto dot_pos = float_str.find('.');
+                const auto dot_pos = float_str.find('.');
                 if (dot_pos != string::npos) {
                     size_t end = float_str.size();
                     while (end > dot_pos + 1 && float_str[end - 1] == '0') {

@@ -9,5 +9,6 @@ var searchData=
   ['exclusive_5fnb_6',['EXCLUSIVE_NB',['../group___file.html#gga7ff0ce5ce53760cad46eb6509f978ecfaec7817304af2e516f4ba7d65e6cdc63b',1,'file_constants.hpp']]],
   ['executable_5fformat_5ferror_7',['executable_format_error',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a4dfaf9c996cf045f32d17edc9754fc95',1,'errc.hpp']]],
   ['execute_8',['execute',['../classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aec0cd3cb91fe82b9501f62a528eb07a9',1,'process']]],
-  ['exited_9',['exited',['../classprocess.html#a372470dfa6edcf9a6b8c9dff60738dc1ab854d4deac1316c8d36e519393f3f2ae',1,'process']]]
+  ['exited_9',['exited',['../classprocess.html#a372470dfa6edcf9a6b8c9dff60738dc1ab854d4deac1316c8d36e519393f3f2ae',1,'process']]],
+  ['expand_5fstring_10',['expand_string',['../classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477a0978fc35db2463791ebfde962517ef48',1,'registry_key']]]
 ];

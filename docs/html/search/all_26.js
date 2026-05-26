@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['事务中止状态码_0',['事务中止状态码',['../group___memory_order.html#rtm_abort_codes',1,'']]]
+  ['临时缓冲区_0',['临时缓冲区',['../group___temporary_buffer.html',1,'']]]
 ];

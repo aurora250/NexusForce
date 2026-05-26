@@ -19,7 +19,7 @@ void yaml_builder::apply_pending_metadata(const shared_ptr<yaml_value>& value) {
     }
 }
 
-void yaml_builder::add_to_parent_and_push(const shared_ptr<yaml_value>& container, frame f) {
+void yaml_builder::add_to_parent_and_push(const shared_ptr<yaml_value>& container, const frame f) {
     apply_pending_metadata(container);
 
     const auto& top = contexts_.top();
@@ -56,14 +56,14 @@ yaml_builder& yaml_builder::key(string key) {
 yaml_builder& yaml_builder::begin_mapping() { return begin_block_mapping(); }
 
 yaml_builder& yaml_builder::begin_block_mapping() {
-    auto map = make_shared<yaml_mapping>(yaml_mapping::Block);
+    const auto map = make_shared<yaml_mapping>(yaml_mapping::Block);
     yaml_mapping* map_ptr = map.get();
     add_to_parent_and_push(map, frame(frame::mapping, map_ptr));
     return *this;
 }
 
 yaml_builder& yaml_builder::begin_flow_mapping() {
-    auto map = make_shared<yaml_mapping>(yaml_mapping::Flow);
+    const auto map = make_shared<yaml_mapping>(yaml_mapping::Flow);
     yaml_mapping* map_ptr = map.get();
     add_to_parent_and_push(map, frame(frame::mapping, map_ptr));
     return *this;
@@ -92,14 +92,14 @@ yaml_builder& yaml_builder::end_mapping() {
 yaml_builder& yaml_builder::begin_sequence() { return begin_block_sequence(); }
 
 yaml_builder& yaml_builder::begin_block_sequence() {
-    auto seq = make_shared<yaml_sequence>(yaml_sequence::Block);
+    const auto seq = make_shared<yaml_sequence>(yaml_sequence::Block);
     yaml_sequence* seq_ptr = seq.get();
     add_to_parent_and_push(seq, frame(frame::sequence, seq_ptr));
     return *this;
 }
 
 yaml_builder& yaml_builder::begin_flow_sequence() {
-    auto seq = make_shared<yaml_sequence>(yaml_sequence::Flow);
+    const auto seq = make_shared<yaml_sequence>(yaml_sequence::Flow);
     yaml_sequence* seq_ptr = seq.get();
     add_to_parent_and_push(seq, frame(frame::sequence, seq_ptr));
     return *this;
@@ -128,7 +128,7 @@ yaml_builder& yaml_builder::end_sequence() {
 yaml_builder& yaml_builder::value_datetime(const datetime& dt) { return value_impl(make_shared<yaml_timestamp>(dt)); }
 
 yaml_builder& yaml_builder::value_string(string v, yaml_string::string_style style) {
-    return value_impl(make_shared<yaml_string>(_NEFORCE move(v), style));
+    return value_impl(make_shared<yaml_string>(move(v), style));
 }
 
 yaml_builder& yaml_builder::value_mapping(const function<void(yaml_builder&)>& build_func) {
@@ -177,8 +177,8 @@ yaml_builder& yaml_builder::tag(string t) {
     return *this;
 }
 
-yaml_builder& yaml_builder::alias(string name) {
-    auto it = anchors_.find(name);
+yaml_builder& yaml_builder::alias(const string& name) {
+    const auto it = anchors_.find(name);
     if (it == anchors_.end()) {
         NEFORCE_THROW_EXCEPTION(yaml_exception(("Anchor not found: " + name).data()));
     }
@@ -194,8 +194,7 @@ yaml_builder& yaml_builder::begin_document() {
     documents_.push_back(root_);
     contexts_.pop();
 
-    auto new_root = make_shared<yaml_mapping>(yaml_mapping::Block);
-    root_ = new_root;
+    root_ = make_shared<yaml_mapping>(yaml_mapping::Block);
     // NOLINTNEXTLINE(cppcoreguidelines-pro-type-static-cast-downcast)
     contexts_.push(frame(frame::mapping, static_cast<yaml_mapping*>(root_.get())));
     current_key_.clear();

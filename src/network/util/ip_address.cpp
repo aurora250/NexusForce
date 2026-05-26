@@ -84,7 +84,7 @@ namespace {
         enable_if_t<is_same_v<T, ::sockaddr_in>, string> operator()(const T& value) {
             if (::inet_ntop(AF_INET, &value.sin_addr, static_cast<char*>(buffer), sizeof(buffer))) {
                 return string(static_cast<char*>(buffer)) + ":" +
-                       _NEFORCE to_string(endian::network_to_host<uint16_t>(value.sin_port));
+                       to_string(endian::network_to_host<uint16_t>(value.sin_port));
             }
             return ""_s;
         }
@@ -92,7 +92,7 @@ namespace {
         enable_if_t<is_same_v<T, ::sockaddr_in6>, string> operator()(const T& value) {
             if (::inet_ntop(AF_INET6, &value.sin6_addr, static_cast<char*>(buffer), sizeof(buffer))) {
                 return "["_s + string(static_cast<char*>(buffer)) +
-                       "]:" + _NEFORCE to_string(endian::network_to_host<uint16_t>(value.sin6_port));
+                       "]:" + to_string(endian::network_to_host<uint16_t>(value.sin6_port));
             }
             return ""_s;
         }

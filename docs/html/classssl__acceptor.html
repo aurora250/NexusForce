@@ -116,6 +116,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:ab3b3814b4288fd8c8c99e6d5ebe9d56f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取SSL上下文常量引用  <br /></td></tr>
 <tr class="memitem:a839b43648acf22c7fc584dd90963cd04" id="r_a839b43648acf22c7fc584dd90963cd04"><td class="memItemLeft"><a class="el" href="classssl__socket.html">ssl_socket</a>&#160;</td><td class="memItemRight"><a class="el" href="#a839b43648acf22c7fc584dd90963cd04">accept_ssl</a> ()</td></tr>
 <tr class="memdesc:a839b43648acf22c7fc584dd90963cd04"><td class="mdescLeft">&#160;</td><td class="mdescRight">接受TLS客户端连接  <br /></td></tr>
+<tr class="memitem:a4a4d5434756d41fffbf1809805191569" id="r_a4a4d5434756d41fffbf1809805191569"><td class="memItemLeft"><a class="el" href="classoptional.html">optional</a>&lt; <a class="el" href="classssl__socket.html">ssl_socket</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a4a4d5434756d41fffbf1809805191569">accept_ssl_nonblock</a> ()</td></tr>
+<tr class="memdesc:a4a4d5434756d41fffbf1809805191569"><td class="mdescLeft">&#160;</td><td class="mdescRight">非阻塞接受TLS客户端连接  <br /></td></tr>
 <tr class="inherit_header pub_methods_classtcp__acceptor"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classtcp__acceptor')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="classtcp__acceptor.html">tcp_acceptor</a></td></tr>
 <tr class="memitem:a7a7be44b5b84d5114202f0abc78dca02 inherit pub_methods_classtcp__acceptor" id="r_a7a7be44b5b84d5114202f0abc78dca02"><td class="memItemLeft">
 &#160;</td><td class="memItemRight"><b>tcp_acceptor</b> ()=default</td></tr>
@@ -126,6 +128,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a4981086af1b46cb09f58784469d16f13 inherit pub_methods_classtcp__acceptor"><td class="mdescLeft">&#160;</td><td class="mdescRight">接受客户端连接（阻塞模式）  <br /></td></tr>
 <tr class="memitem:a677e1317fe230cd82993671b39e0fec9 inherit pub_methods_classtcp__acceptor" id="r_a677e1317fe230cd82993671b39e0fec9"><td class="memItemLeft"><a class="el" href="classoptional.html">optional</a>&lt; <a class="el" href="classtcp__socket.html">tcp_socket</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="classtcp__acceptor.html#a677e1317fe230cd82993671b39e0fec9">accept_nonblock</a> ()</td></tr>
 <tr class="memdesc:a677e1317fe230cd82993671b39e0fec9 inherit pub_methods_classtcp__acceptor"><td class="mdescLeft">&#160;</td><td class="mdescRight">接受客户端连接（非阻塞模式）  <br /></td></tr>
+<tr class="memitem:ac45ca9c8151fc981e49861f5e85b0434 inherit pub_methods_classtcp__acceptor" id="r_ac45ca9c8151fc981e49861f5e85b0434"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="classtcp__acceptor.html#ac45ca9c8151fc981e49861f5e85b0434">open</a> (int family, int type, int protocol)</td></tr>
+<tr class="memdesc:ac45ca9c8151fc981e49861f5e85b0434 inherit pub_methods_classtcp__acceptor"><td class="mdescLeft">&#160;</td><td class="mdescRight">打开socket  <br /></td></tr>
 <tr class="inherit_header pub_methods_classip__socket"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classip__socket')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="classip__socket.html">ip_socket</a></td></tr>
 <tr class="memitem:aaae0820ef1814fdd2299e646e7ce0b88 inherit pub_methods_classip__socket" id="r_aaae0820ef1814fdd2299e646e7ce0b88"><td class="memItemLeft">
 &#160;</td><td class="memItemRight"><b>ip_socket</b> ()=default</td></tr>
@@ -320,6 +324,42 @@ int&#160;</td><td class="memItemRight"><b>family_</b> = AF_UNSPEC</td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a4a4d5434756d41fffbf1809805191569" name="a4a4d5434756d41fffbf1809805191569"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a4d5434756d41fffbf1809805191569">&#9670;&#160;</a></span>accept_ssl_nonblock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classoptional.html">optional</a>&lt; <a class="el" href="classssl__socket.html">ssl_socket</a> &gt; ssl_acceptor::accept_ssl_nonblock </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>非阻塞接受TLS客户端连接 </p>
+<dl class="section return"><dt>返回</dt><dd>有新连接返回已建立TLS连接的SSL socket，无连接返回none </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structsocket__exception.html" title="Socket操作异常类">socket_exception</a></td><td>发生错误时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structssl__exception.html" title="SSL操作异常">ssl_exception</a></td><td>SSL握手失败时抛出</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>非阻塞地尝试接受新的TLS连接并完成握手。 如果没有待处理的TCP连接，立即返回none。 需要先设置acceptor为非阻塞模式。 </p>
 
 </div>
 </div>

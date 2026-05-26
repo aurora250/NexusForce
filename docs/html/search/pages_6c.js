@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['红黑树性质_0',['红黑树性质',['../group___r_b_tree.html#rb_tree_properties',1,'']]]
+  ['系统、并发与命令行_0',['⚙️ 系统、并发与命令行',['../md__m_a_i_n_p_a_g_e.html#autotoc_md14',1,'']]],
+  ['系统接口_20system_1',['⚙️ 系统接口 (System)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md26',1,'']]]
 ];

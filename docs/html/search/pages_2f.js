@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['同步模式_0',['同步模式',['../group___memory_order.html#synchronization_patterns',1,'']]]
+  ['合成规则_0',['Alpha 合成规则',['../group___color.html#alpha_compositing',1,'']]]
 ];

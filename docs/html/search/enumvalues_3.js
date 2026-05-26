@@ -22,5 +22,6 @@ var searchData=
   ['directory_5fnot_5fempty_19',['directory_not_empty',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a6a336135d33e62f49edc55f29354e12e',1,'errc.hpp']]],
   ['dns_20',['DNS',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8a305d7a53eafabf042067c988c705cd93',1,'ports']]],
   ['double_21',['Double',['../classenv__variable.html#a3c9dac569ea7176d7ffc478c6ad4ae40abd5ce183a4a24485809f6e36a4380d50',1,'env_variable']]],
-  ['doublequoted_22',['DoubleQuoted',['../classyaml__string.html#a48e128d7b4fcf4d04fb90af96a5c5a9ea87a025534958443263359b4970cf2974',1,'yaml_string']]]
+  ['doublequoted_22',['DoubleQuoted',['../classyaml__string.html#a48e128d7b4fcf4d04fb90af96a5c5a9ea87a025534958443263359b4970cf2974',1,'yaml_string']]],
+  ['dword_23',['dword',['../classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477afc50124be4e2da8156d08b7375d79804',1,'registry_key']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['架构检测_0',['架构检测',['../group___architecture_detection.html',1,'']]]
+  ['构造标签_0',['构造标签',['../group___construction_tags.html',1,'']]]
 ];

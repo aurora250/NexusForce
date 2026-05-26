@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['连接模式_0',['TLS 连接模式',['../group___s_m_t_p.html#tls_modes',1,'']]]
+  ['负载因子管理_0',['负载因子管理',['../group___hash_table.html#load_factor_management',1,'']]]
 ];

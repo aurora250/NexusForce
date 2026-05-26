@@ -269,6 +269,7 @@ locale locale::system() {
     replace(wn.begin(), wn.end(), L'-', L'_');
     return locale(wcharacter::to_string(wn.view()));
 #else
+    // TODO: use environment instead of using ::getenv
     // NOLINTNEXTLINE(concurrency-mt-unsafe)
     const char* env = ::getenv("LC_ALL");
     if (env == nullptr || (*env) == 0) {

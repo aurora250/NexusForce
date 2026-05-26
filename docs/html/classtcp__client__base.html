@@ -117,11 +117,11 @@ using&#160;</td><td class="memItemRight"><b>disconnect_callback_t</b> = <a class
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:a5f445fbc003f62fbec15cf13422eaf5d" id="r_a5f445fbc003f62fbec15cf13422eaf5d"><td class="memItemLeft"><a id="a5f445fbc003f62fbec15cf13422eaf5d" name="a5f445fbc003f62fbec15cf13422eaf5d"></a>
-&#160;</td><td class="memItemRight"><b>tcp_client_base</b> ()=default</td></tr>
-<tr class="memdesc:a5f445fbc003f62fbec15cf13422eaf5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数 <br /></td></tr>
-<tr class="memitem:ae871291551e7990a0716bb07ce8aa850" id="r_ae871291551e7990a0716bb07ce8aa850"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae871291551e7990a0716bb07ce8aa850">tcp_client_base</a> (<a class="el" href="classdns__client.html">dns_client</a> dns)</td></tr>
-<tr class="memdesc:ae871291551e7990a0716bb07ce8aa850"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数（带DNS客户端）  <br /></td></tr>
+<tr class="memitem:ae81557265085d2bec93e958c2440c281" id="r_ae81557265085d2bec93e958c2440c281"><td class="memItemLeft"><a id="ae81557265085d2bec93e958c2440c281" name="ae81557265085d2bec93e958c2440c281"></a>
+&#160;</td><td class="memItemRight"><b>tcp_client_base</b> ()</td></tr>
+<tr class="memdesc:ae81557265085d2bec93e958c2440c281"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数 <br /></td></tr>
+<tr class="memitem:a2fb51291207591885f561ea3e8577126" id="r_a2fb51291207591885f561ea3e8577126"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a2fb51291207591885f561ea3e8577126">tcp_client_base</a> (<a class="el" href="structdns__client_1_1config.html">dns_client::config</a> cfg, bool use_tcp=false)</td></tr>
+<tr class="memdesc:a2fb51291207591885f561ea3e8577126"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数（带DNS客户端）  <br /></td></tr>
 <tr class="memitem:a81d04e7bbfd939b65c6a3bbb394f148c" id="r_a81d04e7bbfd939b65c6a3bbb394f148c"><td class="memItemLeft"><a id="a81d04e7bbfd939b65c6a3bbb394f148c" name="a81d04e7bbfd939b65c6a3bbb394f148c"></a>
 virtual&#160;</td><td class="memItemRight"><b>~tcp_client_base</b> ()</td></tr>
 <tr class="memdesc:a81d04e7bbfd939b65c6a3bbb394f148c"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
@@ -217,9 +217,9 @@ virtual void&#160;</td><td class="memItemRight"><b>pre_disconnect</b> ()</td></t
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected 属性</h2></td></tr>
-<tr class="memitem:ab8584da06a5e778efd18bbd35a08a425" id="r_ab8584da06a5e778efd18bbd35a08a425"><td class="memItemLeft"><a id="ab8584da06a5e778efd18bbd35a08a425" name="ab8584da06a5e778efd18bbd35a08a425"></a>
-<a class="el" href="classdns__client.html">dns_client</a>&#160;</td><td class="memItemRight"><b>dns_</b></td></tr>
-<tr class="memdesc:ab8584da06a5e778efd18bbd35a08a425"><td class="mdescLeft">&#160;</td><td class="mdescRight">DNS解析客户端 <br /></td></tr>
+<tr class="memitem:a4a2602c7b3ac452c878f8f43bbca1933" id="r_a4a2602c7b3ac452c878f8f43bbca1933"><td class="memItemLeft"><a id="a4a2602c7b3ac452c878f8f43bbca1933" name="a4a2602c7b3ac452c878f8f43bbca1933"></a>
+<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classdns__client.html">dns_client</a> &gt;&#160;</td><td class="memItemRight"><b>dns_</b></td></tr>
+<tr class="memdesc:a4a2602c7b3ac452c878f8f43bbca1933"><td class="mdescLeft">&#160;</td><td class="mdescRight">DNS解析客户端 <br /></td></tr>
 <tr class="memitem:ae3f0cb8189dc0880404cdb1c331197a8" id="r_ae3f0cb8189dc0880404cdb1c331197a8"><td class="memItemLeft"><a id="ae3f0cb8189dc0880404cdb1c331197a8" name="ae3f0cb8189dc0880404cdb1c331197a8"></a>
 <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classtcp__socket.html">tcp_socket</a> &gt;&#160;</td><td class="memItemRight"><b>socket_</b></td></tr>
 <tr class="memdesc:ae3f0cb8189dc0880404cdb1c331197a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">TCP socket <br /></td></tr>
@@ -272,8 +272,8 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 
 <p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00037">37</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
-<a id="ae871291551e7990a0716bb07ce8aa850" name="ae871291551e7990a0716bb07ce8aa850"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae871291551e7990a0716bb07ce8aa850">&#9670;&#160;</a></span>tcp_client_base()</h2>
+<a id="a2fb51291207591885f561ea3e8577126" name="a2fb51291207591885f561ea3e8577126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fb51291207591885f561ea3e8577126">&#9670;&#160;</a></span>tcp_client_base()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -284,8 +284,12 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
         <tr>
           <td class="memname">tcp_client_base::tcp_client_base </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classdns__client.html">dns_client</a></td>          <td class="paramname"><span class="paramname"><em>dns</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="structdns__client_1_1config.html">dns_client::config</a></td>          <td class="paramname"><span class="paramname"><em>cfg</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>use_tcp</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -298,14 +302,15 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 <p>构造函数（带DNS客户端） </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dns</td><td>DNS客户端 </td></tr>
+    <tr><td class="paramname">cfg</td><td>DNS配置 </td></tr>
+    <tr><td class="paramname">use_tcp</td><td>DNS是否使用TCP </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00116">116</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00118">118</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00044">dns_</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00044">dns_</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -376,11 +381,11 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 <p>获取连接超时时间 </p>
 <dl class="section return"><dt>返回</dt><dd>超时时间 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00140">140</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00142">142</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00140">connect_timeout()</a> , 以及 <a class="el" href="tcp__client_8hpp_source.html#l00052">connect_timeout_</a>.</p>
+<p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00142">connect_timeout()</a> , 以及 <a class="el" href="tcp__client_8hpp_source.html#l00052">connect_timeout_</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="tcp__client_8hpp_source.html#l00140">connect_timeout()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="tcp__client_8hpp_source.html#l00142">connect_timeout()</a>.</p>
 
 </div>
 </div>
@@ -410,7 +415,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 <p>获取当前连接的主机名 </p>
 <dl class="section return"><dt>返回</dt><dd>主机名 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00344">344</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00346">346</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00047">connected_host_</a>.</p>
 
@@ -442,7 +447,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 <p>获取当前连接的端口 </p>
 <dl class="section return"><dt>返回</dt><dd>端口 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00350">350</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00352">352</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00048">connected_port_</a>.</p>
 
@@ -504,7 +509,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 <p>获取当前重连尝试次数 </p>
 <dl class="section return"><dt>返回</dt><dd>当前次数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00192">192</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00194">194</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00050">current_reconnect_attempt_</a>.</p>
 
@@ -536,7 +541,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 <p>获取DNS客户端常量引用 </p>
 <dl class="section return"><dt>返回</dt><dd>DNS客户端常量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00376">376</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00378">378</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00044">dns_</a>.</p>
 
@@ -568,7 +573,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 <p>获取DNS客户端 </p>
 <dl class="section return"><dt>返回</dt><dd>DNS客户端引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00370">370</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00372">372</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00044">dns_</a>.</p>
 
@@ -637,7 +642,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 <p>检查是否启用自动重连 </p>
 <dl class="section return"><dt>返回</dt><dd>启用返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00180">180</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00182">182</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00057">auto_reconnect_</a>.</p>
 
@@ -669,7 +674,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 <p>检查是否已连接 </p>
 <dl class="section return"><dt>返回</dt><dd>已连接返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00332">332</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00334">334</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00045">socket_</a>.</p>
 
@@ -701,7 +706,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 <p>检查是否正在重连 </p>
 <dl class="section return"><dt>返回</dt><dd>正在重连返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00338">338</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00340">340</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00059">is_reconnecting_</a>.</p>
 
@@ -765,7 +770,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 <p>检查是否优先使用IPv6 </p>
 <dl class="section return"><dt>返回</dt><dd>优先返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00217">217</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00219">219</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00058">prefer_ipv6_</a>.</p>
 
@@ -909,7 +914,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 <p>获取最大重连次数 </p>
 <dl class="section return"><dt>返回</dt><dd>重连次数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00186">186</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00188">188</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00049">reconnect_attempts_</a>.</p>
 
@@ -941,7 +946,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 <p>获取重连延迟时间 </p>
 <dl class="section return"><dt>返回</dt><dd>延迟时间 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00205">205</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00207">207</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00055">reconnect_delay_</a>.</p>
 
@@ -1001,7 +1006,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 <p>获取接收超时时间 </p>
 <dl class="section return"><dt>返回</dt><dd>超时时间 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00166">166</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00168">168</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00054">recv_timeout_</a>.</p>
 
@@ -1039,7 +1044,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 
 <p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a> , 以及 <a class="el" href="#ab82d9541a6e63484559c1d4af9daf45b">send()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="#ab82d9541a6e63484559c1d4af9daf45b">send()</a> , 以及 <a class="el" href="tcp__client_8hpp_source.html#l00274">send()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#ab82d9541a6e63484559c1d4af9daf45b">send()</a> , 以及 <a class="el" href="tcp__client_8hpp_source.html#l00276">send()</a>.</p>
 
 </div>
 </div>
@@ -1075,11 +1080,11 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>实际发送字节数，失败返回-1 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00274">274</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00276">276</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>, <a class="el" href="#ab82d9541a6e63484559c1d4af9daf45b">send()</a> , 以及 <a class="el" href="tcp__client_8hpp_source.html#l00274">send()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>, <a class="el" href="#ab82d9541a6e63484559c1d4af9daf45b">send()</a> , 以及 <a class="el" href="tcp__client_8hpp_source.html#l00276">send()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="tcp__client_8hpp_source.html#l00274">send()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="tcp__client_8hpp_source.html#l00276">send()</a>.</p>
 
 </div>
 </div>
@@ -1149,11 +1154,11 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>发送成功返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00291">291</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00293">293</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a> , 以及 <a class="el" href="tcp__client_8hpp_source.html#l00291">send_all()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a> , 以及 <a class="el" href="tcp__client_8hpp_source.html#l00293">send_all()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="tcp__client_8hpp_source.html#l00291">send_all()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="tcp__client_8hpp_source.html#l00293">send_all()</a>.</p>
 
 </div>
 </div>
@@ -1183,7 +1188,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
 <p>获取发送超时时间 </p>
 <dl class="section return"><dt>返回</dt><dd>超时时间 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00153">153</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00155">155</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00053">send_timeout_</a>.</p>
 
@@ -1256,7 +1261,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00235">235</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00237">237</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00061">connect_callback_</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
@@ -1328,7 +1333,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00241">241</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00243">243</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00062">disconnect_callback_</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
@@ -1365,7 +1370,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00223">223</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00225">225</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00044">dns_</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
@@ -1402,7 +1407,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00229">229</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00231">231</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00063">exception_handler_</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
@@ -1439,7 +1444,7 @@ bool&#160;</td><td class="memItemRight"><b>prefer_ipv6_</b> = false</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00211">211</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__client_8hpp_source.html">tcp_client.hpp</a> 第 <a class="el" href="tcp__client_8hpp_source.html#l00213">213</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__client_8hpp_source.html#l00058">prefer_ipv6_</a>.</p>
 

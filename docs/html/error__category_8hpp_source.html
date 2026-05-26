@@ -101,7 +101,7 @@ $(function(){initNavTree('error__category_8hpp_source.html','',''); });
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">class </span>error_code;</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">class </span>error_condition;</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">class </span>error_category : <span class="keyword">public</span> <a class="code hl_struct" href="structicomparable.html">icomparable</a>&lt;error_category&gt; {</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">class </span>NEFORCE_API error_category : <span class="keyword">public</span> <a class="code hl_struct" href="structicomparable.html">icomparable</a>&lt;error_category&gt; {</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    error_category() noexcept = default;</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    virtual ~error_category() noexcept = default;</div>
@@ -109,7 +109,7 @@ $(function(){initNavTree('error__category_8hpp_source.html','',''); });
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    error_category(const error_category&amp;) = delete;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    error_category&amp; operator=(const error_category&amp;) = delete;</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    NEFORCE_NODISCARD virtual const <span class="keywordtype">char</span>* name() const noexcept = 0;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    NEFORCE_NODISCARD virtual const <span class="keywordtype">char</span>* <a class="code hl_function" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>() const noexcept = 0;</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    NEFORCE_NODISCARD virtual <span class="keywordtype">string</span> message(<a class="code hl_typedef" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a> ev) const = 0;</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    NEFORCE_NODISCARD virtual error_condition default_error_condition(<a class="code hl_typedef" href="group___core_types.html#ga9f99c01571d1afadb9d8d2e48ec532bb">int32_t</a> ev) const noexcept;</div>

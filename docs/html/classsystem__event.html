@@ -107,8 +107,8 @@ Public 类型</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:aaffbccb71e65565978b0a320143debd9" id="r_aaffbccb71e65565978b0a320143debd9"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aaffbccb71e65565978b0a320143debd9">system_event</a> (bool initial_state=false, <a class="el" href="#a836fe1a751b10858f44697fdd940aa9f">type</a> <a class="el" href="#a836fe1a751b10858f44697fdd940aa9f">type</a>=<a class="el" href="#a836fe1a751b10858f44697fdd940aa9fad15df6f4bb58577e7078575bd2924794">type::auto_reset</a>)</td></tr>
-<tr class="memdesc:aaffbccb71e65565978b0a320143debd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a6b4cbd5be761d22c4cac58418c14d4ca" id="r_a6b4cbd5be761d22c4cac58418c14d4ca"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6b4cbd5be761d22c4cac58418c14d4ca">system_event</a> (bool initial_state=false, <a class="el" href="#a836fe1a751b10858f44697fdd940aa9f">type</a> t=<a class="el" href="#a836fe1a751b10858f44697fdd940aa9fad15df6f4bb58577e7078575bd2924794">type::auto_reset</a>)</td></tr>
+<tr class="memdesc:a6b4cbd5be761d22c4cac58418c14d4ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
 <tr class="memitem:aa16f20c9949030b16ca0b787f63572f4" id="r_aa16f20c9949030b16ca0b787f63572f4"><td class="memItemLeft"><a id="aa16f20c9949030b16ca0b787f63572f4" name="aa16f20c9949030b16ca0b787f63572f4"></a>
 &#160;</td><td class="memItemRight"><b>~system_event</b> ()</td></tr>
 <tr class="memdesc:aa16f20c9949030b16ca0b787f63572f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
@@ -125,6 +125,8 @@ void&#160;</td><td class="memItemRight"><b>reset</b> () noexcept</td></tr>
 <tr class="memdesc:a88a8392cfe11e8ca599f429e60e4eea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待事件变为有信号状态  <br /></td></tr>
 <tr class="memitem:af3914964c19a58d549eec0587b8fac1f" id="r_af3914964c19a58d549eec0587b8fac1f"><td class="memItemLeft"><a class="el" href="#a836fe1a751b10858f44697fdd940aa9f">type</a>&#160;</td><td class="memItemRight"><a class="el" href="#af3914964c19a58d549eec0587b8fac1f">event_type</a> () const noexcept</td></tr>
 <tr class="memdesc:af3914964c19a58d549eec0587b8fac1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取事件类型  <br /></td></tr>
+<tr class="memitem:a09f6cc9daf074ce180c14b5a6cd1661e" id="r_a09f6cc9daf074ce180c14b5a6cd1661e"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#a09f6cc9daf074ce180c14b5a6cd1661e">native_handle</a> () const noexcept</td></tr>
+<tr class="memdesc:a09f6cc9daf074ce180c14b5a6cd1661e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取原生事件句柄  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>系统事件类 </p>
@@ -169,8 +171,8 @@ void&#160;</td><td class="memItemRight"><b>reset</b> () noexcept</td></tr>
 </div>
 </div>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
-<a id="aaffbccb71e65565978b0a320143debd9" name="aaffbccb71e65565978b0a320143debd9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaffbccb71e65565978b0a320143debd9">&#9670;&#160;</a></span>system_event() <span class="overload">[1/2]</span></h2>
+<a id="a6b4cbd5be761d22c4cac58418c14d4ca" name="a6b4cbd5be761d22c4cac58418c14d4ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b4cbd5be761d22c4cac58418c14d4ca">&#9670;&#160;</a></span>system_event() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -186,7 +188,7 @@ void&#160;</td><td class="memItemRight"><b>reset</b> () noexcept</td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a836fe1a751b10858f44697fdd940aa9f">type</a></td>          <td class="paramname"><span class="paramname"><em>type</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a836fe1a751b10858f44697fdd940aa9fad15df6f4bb58577e7078575bd2924794">type::auto_reset</a></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#a836fe1a751b10858f44697fdd940aa9f">type</a></td>          <td class="paramname"><span class="paramname"><em>t</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#a836fe1a751b10858f44697fdd940aa9fad15df6f4bb58577e7078575bd2924794">type::auto_reset</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -200,7 +202,7 @@ void&#160;</td><td class="memItemRight"><b>reset</b> () noexcept</td></tr>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
     <tr><td class="paramname">initial_state</td><td>初始信号状态 </td></tr>
-    <tr><td class="paramname">type</td><td>事件类型 </td></tr>
+    <tr><td class="paramname">t</td><td>事件类型 </td></tr>
   </table>
   </dd>
 </dl>
@@ -248,7 +250,7 @@ void&#160;</td><td class="memItemRight"><b>reset</b> () noexcept</td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="#aaffbccb71e65565978b0a320143debd9">system_event()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a6b4cbd5be761d22c4cac58418c14d4ca">system_event()</a>.</p>
 
 </div>
 </div>
@@ -287,6 +289,36 @@ void&#160;</td><td class="memItemRight"><b>reset</b> () noexcept</td></tr>
 
 </div>
 </div>
+<a id="a09f6cc9daf074ce180c14b5a6cd1661e" name="a09f6cc9daf074ce180c14b5a6cd1661e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09f6cc9daf074ce180c14b5a6cd1661e">&#9670;&#160;</a></span>native_handle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * system_event::native_handle </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取原生事件句柄 </p>
+<dl class="section return"><dt>返回</dt><dd>原生句柄 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="system__event_8hpp_source.html">system_event.hpp</a> 第 <a class="el" href="system__event_8hpp_source.html#l00134">134</a> 行定义.</p>
+
+</div>
+</div>
 <a id="a998f73cdf1659d029a1abcace0c0c3aa" name="a998f73cdf1659d029a1abcace0c0c3aa"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a998f73cdf1659d029a1abcace0c0c3aa">&#9670;&#160;</a></span>operator=()</h2>
 
@@ -319,7 +351,7 @@ void&#160;</td><td class="memItemRight"><b>reset</b> () noexcept</td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="#aaffbccb71e65565978b0a320143debd9">system_event()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a6b4cbd5be761d22c4cac58418c14d4ca">system_event()</a>.</p>
 
 </div>
 </div>

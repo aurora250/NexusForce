@@ -64,9 +64,9 @@ void sys_console::print_error_unsafe(const string_view str) const {
 
 void sys_console::set_color_unsafe(const color& color, const bool use_256_color) const {
     if (use_256_color) {
-        print_string_unsafe("\033[38;5;" + _NEFORCE to_string(color.to_ansi_256()) + "m");
+        print_string_unsafe("\033[38;5;" + to_string(color.to_ansi_256()) + "m");
     } else {
-        print_string_unsafe("\033[" + _NEFORCE to_string(color.to_ansi_basic(false)) + "m");
+        print_string_unsafe("\033[" + to_string(color.to_ansi_basic(false)) + "m");
     }
 }
 
@@ -156,7 +156,7 @@ string sys_console::read_unsafe() const {
         if (::ReadConsoleA(in_, &ch, 1, &read, nullptr) == FALSE || read == 0) {
             break;
         }
-        if (_NEFORCE is_space(ch)) {
+        if (is_space(ch)) {
             if (result.empty()) {
                 continue;
             }
@@ -188,7 +188,7 @@ string sys_console::read_unsafe() const {
                 }
                 break;
             }
-            if (_NEFORCE is_space(ch)) {
+            if (is_space(ch)) {
                 if (result.empty()) {
                     continue;
                 }
@@ -209,7 +209,7 @@ char sys_console::read_char_unsafe() const {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::DWORD original_mode = 0;
     ::GetConsoleMode(in_, &original_mode);
-    ::DWORD new_mode = original_mode & ~(ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT);
+    const ::DWORD new_mode = original_mode & ~(ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT);
     ::SetConsoleMode(in_, new_mode);
     char ch = '\0';
     ::DWORD read = 0;
@@ -263,7 +263,7 @@ sys_console::console_size sys_console::get_console_size_unsafe() const {
     const string cols = environment::get("COLUMNS");
     const string rows = environment::get("LINES");
     if (!cols.empty() && !rows.empty()) {
-        return console_size{_NEFORCE to_int32(cols.view()), _NEFORCE to_int32(rows.view())};
+        return console_size{to_int32(cols.view()), to_int32(rows.view())};
     }
     return console_size{80, 24};
 #endif
@@ -474,7 +474,7 @@ void sys_console::eprintln() {
 void sys_console::clear() {
     lock<mutex> lock(mutex_);
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    constexpr ::COORD top_left = {0, 0};
+    constexpr ::COORD top_left{0, 0};
     ::CONSOLE_SCREEN_BUFFER_INFO screen{};
     ::DWORD written = 0;
 
@@ -715,9 +715,9 @@ void sys_console::set_color(const color& color, const bool use_256_color) {
 void sys_console::set_background_color(const color& color, const bool use_256_color) {
     lock<mutex> lock(mutex_);
     if (use_256_color) {
-        print_string_unsafe("\033[48;5;" + _NEFORCE to_string(color.to_ansi_256()) + "m");
+        print_string_unsafe("\033[48;5;" + to_string(color.to_ansi_256()) + "m");
     } else {
-        print_string_unsafe("\033[" + _NEFORCE to_string(color.to_ansi_basic(true)) + "m");
+        print_string_unsafe("\033[" + to_string(color.to_ansi_basic(true)) + "m");
     }
 }
 
@@ -893,7 +893,7 @@ void sys_console::progress_bar(double percentage, const int width, const bool sh
     bar.push_back(']');
     if (show_percentage) {
         bar.append(" ");
-        bar.append(_NEFORCE to_string(static_cast<int>(display_percentage * 100)));
+        bar.append(to_string(static_cast<int>(display_percentage * 100)));
         bar.append("%");
     }
 
@@ -908,7 +908,7 @@ void sys_console::set_cursor_position(int row, int column) {
     const ::COORD pos{static_cast<::SHORT>(column), static_cast<::SHORT>(row)};
     ::SetConsoleCursorPosition(out_, pos);
 #else
-    print_string_unsafe("\033[" + _NEFORCE to_string(row) + ";" + _NEFORCE to_string(column) + "H");
+    print_string_unsafe("\033[" + to_string(row) + ";" + to_string(column) + "H");
 #endif
 }
 

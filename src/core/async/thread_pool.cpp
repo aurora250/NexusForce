@@ -45,7 +45,7 @@ uint32_t local_queue::be_stolen_by_impl(local_queue& dst, const uint32_t dst_tai
             }
             case steal_strategy::fixed_batch: {
                 steal_num = (cur_src_size >= fixed_batch_size_) ? fixed_batch_size_
-                                                                : _NEFORCE min(cur_src_size, static_cast<uint32_t>(1));
+                                                                : min(cur_src_size, static_cast<uint32_t>(1));
                 break;
             }
             case steal_strategy::adaptive: {
@@ -444,7 +444,7 @@ bool thread_pool::start(const size_t init_thread_size) {
     for (id_type i = 0; i < init_thread_size_; i++) {
         id_type thread_id = thread_pool_id_generator::get_new_id();
         auto worker_func = [this, thread_id]() { thread_function(thread_id); };
-        auto ptr = _NEFORCE make_unique<lazy_thread>(_NEFORCE move(worker_func));
+        auto ptr = make_unique<lazy_thread>(move(worker_func));
 
         {
             lock<mutex> ctx_lock(worker_contexts_mtx_);
@@ -453,12 +453,12 @@ bool thread_pool::start(const size_t init_thread_size) {
                 for (size_t j = worker_contexts_ptr_.size(); j <= thread_id; ++j) {
                     atomic<worker_context*> tmp;
                     tmp.store(nullptr, memory_order_relaxed);
-                    worker_contexts_ptr_.emplace_back(_NEFORCE move(tmp));
+                    worker_contexts_ptr_.emplace_back(move(tmp));
                 }
             }
         }
 
-        threads_map_.emplace(thread_id, _NEFORCE move(ptr));
+        threads_map_.emplace(thread_id, move(ptr));
         threads_map_[thread_id]->start();
         threads_map_[thread_id]->detach();
     }

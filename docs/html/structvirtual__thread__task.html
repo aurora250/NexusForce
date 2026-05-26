@@ -158,7 +158,7 @@ struct virtual_thread_task&lt; T &gt;</div><p>异步任务主模板 </p>
 </dl>
 <p>表示一个返回 T 类型值的异步任务。 提供带返回值的 <a class="el" href="#ae51b0e7b3a5acec19201ccad4c0a17db" title="阻塞获取任务结果">get_result()</a> 和 <a class="el" href="#a75475798d8c7d48b708c5498c1b677a6" title="co_await 恢复时返回结果或抛出异常">await_resume()</a>。 </p>
 
-<p class="definition">在文件 <a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a> 第 <a class="el" href="virtual__thread_8hpp_source.html#l00510">510</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a> 第 <a class="el" href="virtual__thread_8hpp_source.html#l00522">522</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="a770c0058ecfbae33d5f6fdbf2309d5fd" name="a770c0058ecfbae33d5f6fdbf2309d5fd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a770c0058ecfbae33d5f6fdbf2309d5fd">&#9670;&#160;</a></span>await_ready()</h2>
@@ -188,11 +188,11 @@ template&lt;typename T&gt; </div>
 <p>co_await 就绪检查 </p>
 <dl class="section return"><dt>返回</dt><dd>任务是否已完成 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a> 第 <a class="el" href="virtual__thread_8hpp_source.html#l00711">711</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a> 第 <a class="el" href="virtual__thread_8hpp_source.html#l00731">731</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a> , 以及 <a class="el" href="virtual__thread_8hpp_source.html#l00641">shared_state_</a>.</p>
+<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a> , 以及 <a class="el" href="virtual__thread_8hpp_source.html#l00659">shared_state_</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="virtual__thread_8hpp_source.html#l00581">virtual_thread_task&lt; T &gt;::promise_type::await_transform()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00561">virtual_thread_task&lt; T &gt;::promise_type::await_transform()</a> , 以及 <a class="el" href="virtual__thread_8hpp_source.html#l00535">virtual_thread_task&lt; T &gt;::promise_type::final_suspend()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="virtual__thread_8hpp_source.html#l00599">virtual_thread_task&lt; T &gt;::promise_type::await_transform()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00579">virtual_thread_task&lt; T &gt;::promise_type::await_transform()</a> , 以及 <a class="el" href="virtual__thread_8hpp_source.html#l00547">virtual_thread_task&lt; T &gt;::promise_type::final_suspend()</a>.</p>
 
 </div>
 </div>
@@ -224,11 +224,11 @@ template&lt;typename T&gt; </div>
 <p>co_await 恢复时返回结果或抛出异常 </p>
 <dl class="section return"><dt>返回</dt><dd>任务的返回值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a> 第 <a class="el" href="virtual__thread_8hpp_source.html#l00731">731</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a> 第 <a class="el" href="virtual__thread_8hpp_source.html#l00751">751</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>, <a class="el" href="group___exception_handling.html#ga0f02f03c5458da96674d6339945db262">rethrow_exception()</a> , 以及 <a class="el" href="virtual__thread_8hpp_source.html#l00641">shared_state_</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>, <a class="el" href="group___exception_handling.html#ga0f02f03c5458da96674d6339945db262">rethrow_exception()</a> , 以及 <a class="el" href="virtual__thread_8hpp_source.html#l00659">shared_state_</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="virtual__thread_8hpp_source.html#l00581">virtual_thread_task&lt; T &gt;::promise_type::await_transform()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00561">virtual_thread_task&lt; T &gt;::promise_type::await_transform()</a> , 以及 <a class="el" href="virtual__thread_8hpp_source.html#l00535">virtual_thread_task&lt; T &gt;::promise_type::final_suspend()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="virtual__thread_8hpp_source.html#l00599">virtual_thread_task&lt; T &gt;::promise_type::await_transform()</a>, <a class="el" href="virtual__thread_8hpp_source.html#l00579">virtual_thread_task&lt; T &gt;::promise_type::await_transform()</a> , 以及 <a class="el" href="virtual__thread_8hpp_source.html#l00547">virtual_thread_task&lt; T &gt;::promise_type::final_suspend()</a>.</p>
 
 </div>
 </div>
@@ -260,9 +260,9 @@ template&lt;typename T&gt; </div>
 <p>阻塞获取任务结果 </p>
 <p>若任务未完成则阻塞当前线程。任务异常会在此重新抛出。 </p><dl class="section return"><dt>返回</dt><dd>任务的返回值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a> 第 <a class="el" href="virtual__thread_8hpp_source.html#l00744">744</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="virtual__thread_8hpp_source.html">virtual_thread.hpp</a> 第 <a class="el" href="virtual__thread_8hpp_source.html#l00764">764</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a>, <a class="el" href="group___exception_handling.html#ga0f02f03c5458da96674d6339945db262">rethrow_exception()</a> , 以及 <a class="el" href="virtual__thread_8hpp_source.html#l00641">shared_state_</a>.</p>
+<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a>, <a class="el" href="group___exception_handling.html#ga0f02f03c5458da96674d6339945db262">rethrow_exception()</a> , 以及 <a class="el" href="virtual__thread_8hpp_source.html#l00659">shared_state_</a>.</p>
 
 </div>
 </div>

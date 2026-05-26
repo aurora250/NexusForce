@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['系统、并发与命令行_0',['⚙️ 系统、并发与命令行',['../md__m_a_i_n_p_a_g_e.html#autotoc_md12',1,'']]],
-  ['系统接口_20system_1',['⚙️ 系统接口 (System)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md24',1,'']]]
+  ['类型与特性_20typeinfo_0',['🧬 类型与特性 (TypeInfo)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md30',1,'']]]
 ];

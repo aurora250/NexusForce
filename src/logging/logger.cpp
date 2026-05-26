@@ -4,7 +4,7 @@ NEFORCE_BEGIN_NAMESPACE__
 void logger::enqueue(log_event&& event) {
     {
         lock<mutex> lock(queue_mutex_);
-        queue_.push(_NEFORCE move(event));
+        queue_.push(move(event));
     }
     cv_.notify_one();
 }
@@ -44,7 +44,7 @@ void logger::worker_loop() {
             });
 
             while (!queue_.empty()) {
-                events.push_back(_NEFORCE move(queue_.front()));
+                events.push_back(move(queue_.front()));
                 queue_.pop();
             }
 
@@ -154,7 +154,7 @@ void logger::enable_async(const bool async) {
         {
             lock<mutex> lk(queue_mutex_);
             while (!queue_.empty()) {
-                remaining.push_back(_NEFORCE move(queue_.front()));
+                remaining.push_back(move(queue_.front()));
                 queue_.pop();
             }
         }
@@ -198,7 +198,7 @@ void logger::log(const log_level level, string msg, string file, string func, co
     }
 
     if (async_.load(memory_order_acquire)) {
-        enqueue(_NEFORCE move(ev));
+        enqueue(move(ev));
     } else {
         lock<mutex> lock(sinks_mutex_);
         for (const auto& sink: sinks_) {

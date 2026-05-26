@@ -597,6 +597,8 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
       </node>
       <node id="1">
         <label>timer.hpp</label>
@@ -604,16 +606,50 @@
         <childnode refid="2" relation="include">
         </childnode>
       </node>
+      <node id="4">
+        <label>dns_client.hpp</label>
+        <link refid="dns__client_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
       <node id="5">
+        <label>ftp_client.hpp</label>
+        <link refid="ftp__client_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>http_client.hpp</label>
+        <link refid="http__client_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
         <label>http_server.hpp</label>
         <link refid="http__server_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="4">
+      <node id="6">
+        <label>smtp_socket.hpp</label>
+        <link refid="smtp__socket_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>tcp_client.hpp</label>
+        <link refid="tcp__client_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
         <label>tcp_server.hpp</label>
         <link refid="tcp__server_8hpp"/>
-        <childnode refid="5" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -764,7 +800,7 @@
 <codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!flag-&gt;load(<ref refid="group___memory_order_1ga52729ffe1460a0069a1736f2e4e61d2e" kindref="member">memory_order_acquire</ref>))<sp/>{</highlight></codeline>
 <codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>h();</highlight></codeline>
 <codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classpromise" kindref="compound">promise</ref>-&gt;<ref refid="classpromise_1a3002df1df9d416019fe00dd89fc0e5ff" kindref="member">set_value</ref>();</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classpromise" kindref="compound">promise</ref>-&gt;<ref refid="classpromise_1a461ea3f3f0793054804d79c134788515" kindref="member">set_value</ref>();</highlight></codeline>
 <codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="192"><highlight class="normal"></highlight></codeline>
 <codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_earliest<sp/>=<sp/>nodes_.empty()<sp/>||<sp/>expire<sp/>&lt;<sp/>nodes_.begin()-&gt;expire;</highlight></codeline>

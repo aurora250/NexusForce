@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['无偏映射算法_0',['next_int 无偏映射算法',['../group___random_generators.html#next_int_algorithm',1,'']]]
+  ['方根函数实现_0',['方根函数实现',['../group___math_functions.html#root_functions',1,'']]]
 ];

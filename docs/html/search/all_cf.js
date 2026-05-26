@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['📊_20数学库_20math_0',['📊 数学库 (Math)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md34',1,'']]]
+  ['📁_20文件系统_20file_0',['📁 文件系统 (File)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md21',1,'']]],
+  ['📁_20配置文件格式_1',['📁 配置文件格式',['../md__m_a_i_n_p_a_g_e.html#autotoc_md10',1,'']]]
 ];

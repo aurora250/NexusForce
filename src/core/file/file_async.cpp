@@ -136,14 +136,14 @@ file_async::async_result file_async::read(string& buffer, const size_type size, 
 #ifdef NEFORCE_PLATFORM_WINDOWS
         ::LARGE_INTEGER current{};
         if (::SetFilePointerEx(handle_, {}, &current, FILE_CURRENT) == FALSE) {
-            result.error = _NEFORCE last_error();
+            result.error = last_error();
             return result;
         }
         resolved_offset = current.QuadPart;
 #else
         const difference_type pos = ::lseek(handle_, 0, SEEK_CUR);
         if (pos == static_cast<difference_type>(-1)) {
-            result.error = _NEFORCE last_error();
+            result.error = last_error();
             return result;
         }
         resolved_offset = pos;
@@ -167,7 +167,7 @@ file_async::async_result file_async::read(string& buffer, const size_type size, 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (ctx->cb->hEvent == nullptr) {
         delete ctx;
-        result.error = _NEFORCE last_error();
+        result.error = last_error();
         return result;
     }
 
@@ -214,7 +214,7 @@ file_async::async_result file_async::read(string& buffer, const size_type size, 
         operations_.push_back(ctx->cb);
         contexts_[ctx->cb] = ctx;
     } else {
-        result.error = _NEFORCE last_error();
+        result.error = last_error();
         delete ctx;
     }
 #endif
@@ -228,16 +228,16 @@ file_async::async_result file_async::write(string data, const size_type size, co
     difference_type resolved_offset = offset;
     if (offset < 0) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        LARGE_INTEGER current{};
+        ::LARGE_INTEGER current{};
         if (::SetFilePointerEx(handle_, {}, &current, FILE_CURRENT) == FALSE) {
-            result.error = _NEFORCE last_error();
+            result.error = last_error();
             return result;
         }
         resolved_offset = current.QuadPart;
 #else
         const difference_type pos = ::lseek(handle_, 0, SEEK_CUR);
         if (pos == static_cast<difference_type>(-1)) {
-            result.error = _NEFORCE last_error();
+            result.error = last_error();
             return result;
         }
         resolved_offset = pos;
@@ -253,7 +253,7 @@ file_async::async_result file_async::write(string data, const size_type size, co
 #ifdef NEFORCE_PLATFORM_WINDOWS
     if (ctx->cb->hEvent == nullptr) {
         delete ctx;
-        result.error = _NEFORCE last_error();
+        result.error = last_error();
         return result;
     }
 
@@ -300,7 +300,7 @@ file_async::async_result file_async::write(string data, const size_type size, co
         operations_.push_back(ctx->cb);
         contexts_[ctx->cb] = ctx;
     } else {
-        result.error = _NEFORCE last_error();
+        result.error = last_error();
         delete ctx;
     }
 #endif
@@ -336,12 +336,12 @@ bool file_async::wait(async_result& result, const uint32_t timeout_ms) {
                 result.error = errc::timed_out;
                 return false;
             } else {
-                result.error = _NEFORCE last_error();
+                result.error = last_error();
                 return false;
             }
         }
     }
-    result.error = _NEFORCE last_error();
+    result.error = last_error();
     return false;
 
 #else
@@ -359,11 +359,11 @@ bool file_async::wait(async_result& result, const uint32_t timeout_ms) {
         if (::aio_suspend(list, 1, &ts) == 0) {
             return check_completion(result);
         } else {
-            result.error = _NEFORCE last_error();
+            result.error = last_error();
             return false;
         }
     }
-    result.error = _NEFORCE last_error();
+    result.error = last_error();
     return false;
 #endif
 }
@@ -384,7 +384,7 @@ void file_async::cancel(async_result& result) noexcept {
         if (::GetOverlappedResult(handle_, result.cb, &bytes, FALSE) == TRUE) {
             result.bytes_transferred = bytes;
         } else {
-            result.error = _NEFORCE last_error();
+            result.error = last_error();
         }
     } else {
         result.error = errc::operation_canceled;
@@ -400,7 +400,7 @@ void file_async::cancel(async_result& result) noexcept {
         ::aio_suspend(list, 1, nullptr);
         const ssize_t ret = ::aio_return(result.cb);
         result.bytes_transferred = (ret > 0) ? static_cast<size_t>(ret) : 0;
-        result.error = (ret >= 0) ? errc::success : _NEFORCE last_error();
+        result.error = (ret >= 0) ? errc::success : last_error();
     }
     result.completed = true;
 

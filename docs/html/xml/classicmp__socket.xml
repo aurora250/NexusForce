@@ -91,10 +91,10 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/icmp_socket.hpp" line="237" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classicmp__socket_1a09a10d0acc27a4667ca2e3bdccfa3553" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classicmp__socket_1a7ef133a7369c129f8c75085f484657c1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void icmp_socket::send_echo_request</definition>
-        <argsstring>(const ip_address &amp;dest, uint16_t id, uint16_t seq, uint8_t ttl, const void *data, size_t data_len)</argsstring>
+        <argsstring>(const ip_address &amp;dest, uint16_t id, uint16_t seq, int ttl, const void *data, size_t data_len)</argsstring>
         <name>send_echo_request</name>
         <qualifiedname>icmp_socket::send_echo_request</qualifiedname>
         <param>
@@ -110,7 +110,7 @@
           <declname>seq</declname>
         </param>
         <param>
-          <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+          <type>int</type>
           <declname>ttl</declname>
         </param>
         <param>
@@ -422,7 +422,7 @@
       <member refid="classicmp__socket_1a533bd8e5d912cf1a702c10f32b00e5f0" prot="private" virt="non-virtual"><scope>icmp_socket</scope><name>receive_reply</name></member>
       <member refid="classsocket__base_1a940df24ee538694021cc7350ba790524" prot="public" virt="non-virtual"><scope>icmp_socket</scope><name>release</name></member>
       <member refid="classsocket__base_1a3a861847a9b28069c28a4ae626f8a4b9" prot="public" virt="non-virtual"><scope>icmp_socket</scope><name>remote_endpoint</name></member>
-      <member refid="classicmp__socket_1a09a10d0acc27a4667ca2e3bdccfa3553" prot="private" virt="non-virtual"><scope>icmp_socket</scope><name>send_echo_request</name></member>
+      <member refid="classicmp__socket_1a7ef133a7369c129f8c75085f484657c1" prot="private" virt="non-virtual"><scope>icmp_socket</scope><name>send_echo_request</name></member>
       <member refid="classsocket__base_1a6059faa2b63d09c36188a5aee9b64b83" prot="public" virt="non-virtual"><scope>icmp_socket</scope><name>set_keep_alive</name></member>
       <member refid="classsocket__base_1a7189d507bfa09539dd7fd3abc4d85a34" prot="public" virt="non-virtual"><scope>icmp_socket</scope><name>set_nonblocking</name></member>
       <member refid="classsocket__base_1a243eecfa633156956f8eef37d642af6b" prot="public" virt="non-virtual"><scope>icmp_socket</scope><name>set_option</name></member>

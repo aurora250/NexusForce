@@ -101,7 +101,7 @@ unordered_map<string, string> environment::all_envs() {
         if (eq_pos != string::npos) {
             const string name = env_str.head(eq_pos);
             const string value = (eq_pos + 1 < env_str.length()) ? env_str.tail(eq_pos + 1) : "";
-            env_map[name] = _NEFORCE move(value);
+            env_map[name] = move(value);
         }
     }
 #endif
@@ -206,7 +206,7 @@ string environment::temp_directory() {
     shared_lock<shared_mutex> lock(get_mutex());
 #ifdef NEFORCE_PLATFORM_WINDOWS
     char buffer[MAX_PATH];
-    const DWORD length = ::GetTempPathA(MAX_PATH, buffer);
+    const ::DWORD length = ::GetTempPathA(MAX_PATH, buffer);
     if (length == 0) {
         return "C:\\Temp";
     }

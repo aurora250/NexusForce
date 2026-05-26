@@ -153,7 +153,6 @@ toml_builder& toml_builder::begin_array_table(const vector<string>& path) {
     toml_table* new_table_ptr = new_table.get();
     arr->add_element(move(new_table));
 
-    // 压入新的上下文
     contexts_.push(frame(table, new_table_ptr));
     current_key_.clear();
 
@@ -240,7 +239,7 @@ toml_array* toml_builder::get_or_create_array_for_array_table(const vector<strin
         NEFORCE_THROW_EXCEPTION(toml_exception("Array table path cannot be empty"));
     }
 
-    vector<string> parent_path(path.begin(), path.end() - 1);
+    const vector<string> parent_path(path.begin(), path.end() - 1);
     const string& array_name = path.back();
     toml_table* parent = parent_path.empty() ? root_.get() : get_or_create_table_path(parent_path);
     const toml_value* existing = parent->get_member(array_name);

@@ -3,6 +3,7 @@ var classssl__context =
     [ "ssl_context", "classssl__context.html#a66547e0420877dfe3109b5c1ebab7437", null ],
     [ "clone", "classssl__context.html#a10459f705e17d31675e237b26d1f1b2a", null ],
     [ "clone_shared", "classssl__context.html#a6536a5dc7d62c6d07cc861b45722fa89", null ],
+    [ "has_certificate", "classssl__context.html#a081da1db4d177dada4c7b7464e309a14", null ],
     [ "is_valid", "classssl__context.html#a5ca913fa6f629eb5101c194f3f4b28df", null ],
     [ "load_certificate", "classssl__context.html#a22215336ea11c5521366581dec47543f", null ],
     [ "load_certificate_from_memory", "classssl__context.html#aec13982e180a000537a06105e556ff28", null ],

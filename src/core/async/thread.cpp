@@ -76,12 +76,12 @@ atomic<int> thread_tracker::count_{0};
 
 void thread::hook::add_hook(callback_t hook) {
     lock<mutex> lock(thread_hook_mutex());
-    thread_hook_hooks().push_back(_NEFORCE move(hook));
+    thread_hook_hooks().push_back(move(hook));
 }
 
 void thread::hook::remove_hook(callback_t hook) {
     lock<mutex> lock(thread_hook_mutex());
-    auto it = find(thread_hook_hooks().begin(), thread_hook_hooks().end(), _NEFORCE move(hook));
+    const auto it = find(thread_hook_hooks().begin(), thread_hook_hooks().end(), move(hook));
     if (it != thread_hook_hooks().end()) {
         thread_hook_hooks().erase(it);
     }
@@ -116,7 +116,7 @@ unsigned int __stdcall thread::thread_entry(void* arg) {
 void* thread::thread_entry(void* arg) {
 #endif
     auto* args = static_cast<thread_startup_args*>(arg);
-    const unique_ptr<data_base> data = _NEFORCE move(args->data);
+    const unique_ptr<data_base> data = move(args->data);
     thread_monitor monitor(args->thread_id);
 
     // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
@@ -281,7 +281,7 @@ bool thread::set_name(native_handle_type handle, const char* name) {
     init_thread_name_funcs();
     if (g_set_thread_description != nullptr) {
         wstring wstr{to_wstring(name)};
-        HRESULT hr = g_set_thread_description(handle, wstr.data());
+        ::HRESULT hr = g_set_thread_description(handle, wstr.data());
         return SUCCEEDED(hr);
     }
 #    ifdef NEFORCE_COMPILER_MSVC

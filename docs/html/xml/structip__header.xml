@@ -4,37 +4,20 @@
     <compoundname>ip_header</compoundname>
     <includes refid="ip__socket_8hpp" local="no">ip_socket.hpp</includes>
     <sectiondef kind="public-attrib">
-      <memberdef kind="variable" id="structip__header_1ac9e80c1c0657ab8ac9518d450797a6be" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="structip__header_1a71a77a437fd86a4a56097c82400f6a25" prot="public" static="no" mutable="no">
         <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
-        <definition>uint8_t ip_header::ihl</definition>
+        <definition>uint8_t ip_header::version_ihl</definition>
         <argsstring></argsstring>
-        <name>ihl</name>
-        <qualifiedname>ip_header::ihl</qualifiedname>
-        <bitfield> 4</bitfield>
+        <name>version_ihl</name>
+        <qualifiedname>ip_header::version_ihl</qualifiedname>
         <briefdescription>
-<para>IP头部长度 </para>
+<para>版本(高4位) + 头部长度(低4位) </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="41" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="41" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structip__header_1aa30d424e1ebdcca84cf42cac98383c29" prot="public" static="no" mutable="no">
-        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
-        <definition>uint8_t ip_header::version</definition>
-        <argsstring></argsstring>
-        <name>version</name>
-        <qualifiedname>ip_header::version</qualifiedname>
-        <bitfield> 4</bitfield>
-        <briefdescription>
-<para>IP版本号 </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="42" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structip__header_1a4b8fd75fcf4a0fba56250ecd9fa37ebf" prot="public" static="no" mutable="no">
         <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
@@ -49,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="43" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="43" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="42" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structip__header_1ace5f4d34bd1a5acb66915756908669e4" prot="public" static="no" mutable="no">
         <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
@@ -64,7 +47,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="44" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="44" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="43" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="43" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structip__header_1acdd6df1c36489e1eeb023ffceba19f9b" prot="public" static="no" mutable="no">
         <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
@@ -79,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="45" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="45" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="44" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structip__header_1a16cd0c5b6490675dd2f664e1f114056a" prot="public" static="no" mutable="no">
         <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
@@ -94,7 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="46" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="46" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="45" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="45" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structip__header_1a166f6113adf8a8a9a741b08198575aee" prot="public" static="no" mutable="no">
         <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
@@ -109,7 +92,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="47" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="47" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="46" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="46" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structip__header_1a21da8e6419fd42d1b41eb252d0d957f0" prot="public" static="no" mutable="no">
         <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
@@ -124,7 +107,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="48" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="48" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="47" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="47" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structip__header_1a9d31b15783d26657a395409096c4a7fb" prot="public" static="no" mutable="no">
         <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
@@ -139,7 +122,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="49" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="49" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="48" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structip__header_1aae09c570dd68d80b20d5e765adb4fa1e" prot="public" static="no" mutable="no">
         <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
@@ -154,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="50" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="50" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="49" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structip__header_1ad5ac81eb58c24fe469776774656ab1bc" prot="public" static="no" mutable="no">
         <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
@@ -169,7 +152,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="51" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="51" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="50" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structip__header_1aa976dd86686589735fd77f7c56bf0760" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <definition>uint8_t ip_header::version</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>version</name>
+        <qualifiedname>ip_header::version</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="52" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="52" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="structip__header_1a388eca5da96b025d8aa90f6b32232608" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <definition>uint8_t ip_header::ihl</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>ihl</name>
+        <qualifiedname>ip_header::ihl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="53" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="53" bodyend="53"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -191,19 +204,20 @@
 </listitem></itemizedlist>
 </para>
     </detaileddescription>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="40" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="40" bodyend="52"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="40" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="40" bodyend="54"/>
     <listofallmembers>
       <member refid="structip__header_1a9d31b15783d26657a395409096c4a7fb" prot="public" virt="non-virtual"><scope>ip_header</scope><name>checksum</name></member>
       <member refid="structip__header_1ad5ac81eb58c24fe469776774656ab1bc" prot="public" virt="non-virtual"><scope>ip_header</scope><name>dest_addr</name></member>
       <member refid="structip__header_1a16cd0c5b6490675dd2f664e1f114056a" prot="public" virt="non-virtual"><scope>ip_header</scope><name>frag_off</name></member>
       <member refid="structip__header_1acdd6df1c36489e1eeb023ffceba19f9b" prot="public" virt="non-virtual"><scope>ip_header</scope><name>id</name></member>
-      <member refid="structip__header_1ac9e80c1c0657ab8ac9518d450797a6be" prot="public" virt="non-virtual"><scope>ip_header</scope><name>ihl</name></member>
+      <member refid="structip__header_1a388eca5da96b025d8aa90f6b32232608" prot="public" virt="non-virtual"><scope>ip_header</scope><name>ihl</name></member>
       <member refid="structip__header_1a21da8e6419fd42d1b41eb252d0d957f0" prot="public" virt="non-virtual"><scope>ip_header</scope><name>protocol</name></member>
       <member refid="structip__header_1aae09c570dd68d80b20d5e765adb4fa1e" prot="public" virt="non-virtual"><scope>ip_header</scope><name>src_addr</name></member>
       <member refid="structip__header_1a4b8fd75fcf4a0fba56250ecd9fa37ebf" prot="public" virt="non-virtual"><scope>ip_header</scope><name>tos</name></member>
       <member refid="structip__header_1ace5f4d34bd1a5acb66915756908669e4" prot="public" virt="non-virtual"><scope>ip_header</scope><name>total_len</name></member>
       <member refid="structip__header_1a166f6113adf8a8a9a741b08198575aee" prot="public" virt="non-virtual"><scope>ip_header</scope><name>ttl</name></member>
-      <member refid="structip__header_1aa30d424e1ebdcca84cf42cac98383c29" prot="public" virt="non-virtual"><scope>ip_header</scope><name>version</name></member>
+      <member refid="structip__header_1aa976dd86686589735fd77f7c56bf0760" prot="public" virt="non-virtual"><scope>ip_header</scope><name>version</name></member>
+      <member refid="structip__header_1a71a77a437fd86a4a56097c82400f6a25" prot="public" virt="non-virtual"><scope>ip_header</scope><name>version_ihl</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

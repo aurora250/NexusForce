@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['表单编码规则_0',['表单编码规则',['../structurl.html#form_encoding',1,'']]]
+  ['莱昂纳多堆结构_0',['莱昂纳多堆结构',['../group___leonardo_heap.html#heap_structure',1,'']]],
+  ['莱昂纳多数列_1',['莱昂纳多数列',['../group___leonardo_heap.html#leonardo_numbers',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['持续时间_0',['持续时间',['../group___duration.html',1,'']]]
+  ['扩展特性_0',['GNU 扩展特性',['../group___command_line.html#gnu_extensions',1,'']]]
 ];

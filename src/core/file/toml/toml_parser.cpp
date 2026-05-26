@@ -98,8 +98,7 @@ bool toml_parser::match(const char ch) noexcept {
 }
 
 void toml_parser::throw_parse_error(string message) const {
-    const string error_msg =
-            "Line " + _NEFORCE to_string(line_) + ", Column " + _NEFORCE to_string(column_) + ": " + move(message);
+    const string error_msg = "Line " + to_string(line_) + ", Column " + to_string(column_) + ": " + move(message);
     NEFORCE_THROW_EXCEPTION(toml_exception(error_msg.data()));
 }
 

@@ -12,7 +12,7 @@ var classpromise =
     [ "operator=", "classpromise.html#a0b28670f46097ce539ac1349fc6bdf69", null ],
     [ "set_exception", "classpromise.html#ae0f41e364fa8a8f21ef340ea89e6d8c5", null ],
     [ "set_exception_at_thread_exit", "classpromise.html#aeaadfd014af7d67f744e6791320dc8f7", null ],
-    [ "set_value", "classpromise.html#a3002df1df9d416019fe00dd89fc0e5ff", null ],
-    [ "set_value_at_thread_exit", "classpromise.html#ae5d2f35b49c5f86a4e695ab8e5ae77f1", null ],
+    [ "set_value", "classpromise.html#a461ea3f3f0793054804d79c134788515", null ],
+    [ "set_value_at_thread_exit", "classpromise.html#ad89aeb3b702bf1654334299b08761ea4", null ],
     [ "swap", "classpromise.html#a4e1557182307b5f8298782037b153939", null ]
 ];

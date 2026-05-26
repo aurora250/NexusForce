@@ -8,7 +8,7 @@ var searchData=
   ['char_5ftraits_5fptr_5ft_5',['char_traits_ptr_t',['../group___char_traits.html#ga288b36ae3d6183f3db9d626b46c748e1',1,'char_traits.hpp']]],
   ['char_5ftype_6',['char_type',['../structbase__char__traits.html#a2ac1b1346a0cb20eee00b5eb9a4886f9',1,'base_char_traits::char_type'],['../structnarrow__char__traits.html#a3c59eb90ff0c14bfcfd03c0149ac237c',1,'narrow_char_traits::char_type']]],
   ['children_5flist_7',['children_list',['../classpath__tree_1_1node.html#a2a0801dd531b8ab16eec183e86081ce8',1,'path_tree::node']]],
-  ['client_5fhandler_5ft_8',['client_handler_t',['../classtcp__server__base.html#a32641f5767778e30b8c31b3d32441295',1,'tcp_server_base']]],
+  ['client_5fhandler_5ft_8',['client_handler_t',['../classtcp__server__base.html#abef2c5b5cbfeda60f09e2c43f7b9a6ae',1,'tcp_server_base']]],
   ['client_5ftype_9',['client_type',['../classhttp__client.html#ae55bc5297efdfad468f3f9c81693d55b',1,'http_client']]],
   ['clock_10',['clock',['../classlru__cache.html#af5c9f1f0d941c88179b008e50dda5db5',1,'lru_cache::clock'],['../classttl__cache.html#a889f01b5343ab704593312acfa6ce7a5',1,'ttl_cache::clock']]],
   ['clock_5ftype_11',['clock_type',['../classcondition__variable.html#aced8c8b80dcb261481de04240cb41013',1,'condition_variable::clock_type'],['../classtimer__scheduler.html#a63b53abd0cbc9f95d0c55027a1581617',1,'timer_scheduler::clock_type'],['../classbasic__timer.html#a7e207030e1c38d14b3db768051754597',1,'basic_timer::clock_type'],['../structtime__point.html#adf5e45aea1ca0cfe444a27b73e698db2',1,'time_point::clock_type'],['../structidb__connect.html#ab9be909e9ecc1db9cbcc28186de35c95',1,'idb_connect::clock_type']]],

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['部分排序_0',['部分排序',['../group___sort_algorithms.html#partial_sorting',1,'']]]
+  ['邮件格式说明_0',['邮件格式说明',['../group___s_m_t_p.html#email_format',1,'']]]
 ];

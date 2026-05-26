@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['会话流程_0',['SMTP 会话流程',['../group___s_m_t_p.html#smtp_session',1,'']]]
+  ['代理对编码规则_0',['UTF-16 代理对编码规则',['../group___code_point.html#utf16_surrogates',1,'']]]
 ];

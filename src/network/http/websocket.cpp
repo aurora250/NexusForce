@@ -86,7 +86,7 @@ bool websocket_server::handle_upgrade(const http_request& request, unique_ptr<tc
         return false;
     }
 
-    auto session = make_shared<websocket_session>(_NEFORCE move(sock), this);
+    auto session = make_shared<websocket_session>(move(sock), this);
     {
         lock<mutex> lk(sessions_mutex_);
         sessions_.push_back(session);
@@ -117,12 +117,12 @@ bool websocket_session::queue_frame(byte_vector frame, const bool is_control) {
     {
         lock<mutex> lk(write_mutex_);
         if (is_control) {
-            ctrl_queue_.push(_NEFORCE move(frame));
+            ctrl_queue_.push(move(frame));
         } else {
             if (write_queue_.size() >= max_write_queue_size) {
                 return false;
             }
-            write_queue_.push(_NEFORCE move(frame));
+            write_queue_.push(move(frame));
         }
     }
     write_cv_.notify_one();
@@ -352,7 +352,7 @@ void websocket_session::deliver_message(const string& data, websocket_opcode opc
 
 void websocket_session::send_close_frame(const websocket_status status, const string& reason) {
     auto frame = build_frame(websocket_opcode::CLOSE, make_close_payload(status, reason), false);
-    queue_frame(_NEFORCE move(frame), true);
+    queue_frame(move(frame), true);
 }
 
 void websocket_session::handle_close_frame(string payload) {
@@ -445,7 +445,7 @@ void websocket_session::do_stop(websocket_status status, const string& reason) {
 }
 
 websocket_session::websocket_session(unique_ptr<tcp_socket> sock, websocket_server* server) :
-socket_(_NEFORCE move(sock)),
+socket_(move(sock)),
 server_(server) {}
 
 websocket_session::~websocket_session() {

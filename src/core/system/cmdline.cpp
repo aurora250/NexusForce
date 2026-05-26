@@ -173,7 +173,7 @@ vector<string> cmdline::get_os_argv() {
         NEFORCE_THROW_EXCEPTION(cmdline_exception("CommandLineToArgvW failed"));
     }
     for (int i = 0; i < argc; ++i) {
-        args.push_back(_NEFORCE to_string(argv_wide[i]));
+        args.push_back(to_string(argv_wide[i]));
     }
     ::LocalFree(static_cast<void*>(argv_wide));
 #else

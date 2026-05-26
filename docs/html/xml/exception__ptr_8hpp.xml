@@ -7,6 +7,7 @@
     <includes refid="unique__ptr_8hpp" local="yes">NeForce/core/memory/unique_ptr.hpp</includes>
     <includedby refid="future_8hpp" local="yes">future.hpp</includedby>
     <includedby refid="generator_8hpp" local="yes">generator.hpp</includedby>
+    <includedby refid="virtual__thread_8hpp" local="yes">virtual_thread.hpp</includedby>
     <incdepgraph>
       <node id="3">
         <label>NeForce/core/async/atomic.hpp</label>
@@ -227,6 +228,8 @@
       <node id="9">
         <label>promise.hpp</label>
         <link refid="promise_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
@@ -234,6 +237,8 @@
         <label>thread_pool.hpp</label>
         <link refid="thread__pool_8hpp"/>
         <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
@@ -244,12 +249,20 @@
         <childnode refid="13" relation="include">
         </childnode>
       </node>
+      <node id="17">
+        <label>virtual_thread.hpp</label>
+        <link refid="virtual__thread_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
       <node id="1">
         <label>exception_ptr.hpp</label>
         <link refid="exception__ptr_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="3">

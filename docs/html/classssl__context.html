@@ -136,6 +136,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a033f21fdfb92c225f5c2dd92a6c1a4ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">布尔转换运算符  <br /></td></tr>
 <tr class="memitem:a5ca913fa6f629eb5101c194f3f4b28df" id="r_a5ca913fa6f629eb5101c194f3f4b28df"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a5ca913fa6f629eb5101c194f3f4b28df">is_valid</a> () const noexcept</td></tr>
 <tr class="memdesc:a5ca913fa6f629eb5101c194f3f4b28df"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查上下文是否有效  <br /></td></tr>
+<tr class="memitem:a081da1db4d177dada4c7b7464e309a14" id="r_a081da1db4d177dada4c7b7464e309a14"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a081da1db4d177dada4c7b7464e309a14">has_certificate</a> () const noexcept</td></tr>
+<tr class="memdesc:a081da1db4d177dada4c7b7464e309a14"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否已加载证书  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>SSL/TLS上下文管理类 </p>
@@ -194,9 +196,7 @@ Public 成员函数</h2></td></tr>
 <li>设置默认CA验证路径 </li>
 </ul>
 
-<p class="reference">引用了 <a class="el" href="#a66547e0420877dfe3109b5c1ebab7437">ssl_context()</a> , 以及 <a class="el" href="ssl__context_8hpp_source.html#l00031">TLS_SERVER</a>.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="#a10459f705e17d31675e237b26d1f1b2a">clone()</a> , 以及 <a class="el" href="#a66547e0420877dfe3109b5c1ebab7437">ssl_context()</a>.</p>
+<p class="reference">引用了 <a class="el" href="ssl__context_8hpp_source.html#l00031">TLS_SERVER</a>.</p>
 
 </div>
 </div>
@@ -234,8 +234,6 @@ Public 成员函数</h2></td></tr>
 </dl>
 <dl class="section note"><dt>注解</dt><dd>克隆的上下文与原上下文共享同一底层SSL_CTX，对任意一个的配置修改将影响所有克隆实例。 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="#a66547e0420877dfe3109b5c1ebab7437">ssl_context()</a>.</p>
-
 </div>
 </div>
 <a id="a6536a5dc7d62c6d07cc861b45722fa89" name="a6536a5dc7d62c6d07cc861b45722fa89"></a>
@@ -272,6 +270,36 @@ Public 成员函数</h2></td></tr>
 
 </div>
 </div>
+<a id="a081da1db4d177dada4c7b7464e309a14" name="a081da1db4d177dada4c7b7464e309a14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a081da1db4d177dada4c7b7464e309a14">&#9670;&#160;</a></span>has_certificate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ssl_context::has_certificate </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否已加载证书 </p>
+<dl class="section return"><dt>返回</dt><dd>已加载证书返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="ssl__context_8hpp_source.html">ssl_context.hpp</a> 第 <a class="el" href="ssl__context_8hpp_source.html#l00255">255</a> 行定义.</p>
+
+</div>
+</div>
 <a id="a5ca913fa6f629eb5101c194f3f4b28df" name="a5ca913fa6f629eb5101c194f3f4b28df"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5ca913fa6f629eb5101c194f3f4b28df">&#9670;&#160;</a></span>is_valid()</h2>
 
@@ -298,7 +326,7 @@ Public 成员函数</h2></td></tr>
 <p>检查上下文是否有效 </p>
 <dl class="section return"><dt>返回</dt><dd>有效返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ssl__context_8hpp_source.html">ssl_context.hpp</a> 第 <a class="el" href="ssl__context_8hpp_source.html#l00245">245</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__context_8hpp_source.html">ssl_context.hpp</a> 第 <a class="el" href="ssl__context_8hpp_source.html#l00249">249</a> 行定义.</p>
 
 </div>
 </div>
@@ -430,7 +458,7 @@ Public 成员函数</h2></td></tr>
 <p>获取原生SSL_CTX句柄 </p>
 <dl class="section return"><dt>返回</dt><dd>SSL_CTX指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ssl__context_8hpp_source.html">ssl_context.hpp</a> 第 <a class="el" href="ssl__context_8hpp_source.html#l00233">233</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__context_8hpp_source.html">ssl_context.hpp</a> 第 <a class="el" href="ssl__context_8hpp_source.html#l00237">237</a> 行定义.</p>
 
 </div>
 </div>
@@ -460,7 +488,7 @@ Public 成员函数</h2></td></tr>
 <p>布尔转换运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>上下文有效返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ssl__context_8hpp_source.html">ssl_context.hpp</a> 第 <a class="el" href="ssl__context_8hpp_source.html#l00239">239</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__context_8hpp_source.html">ssl_context.hpp</a> 第 <a class="el" href="ssl__context_8hpp_source.html#l00243">243</a> 行定义.</p>
 
 </div>
 </div>

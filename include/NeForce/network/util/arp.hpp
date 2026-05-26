@@ -17,13 +17,13 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @addtogroup NetworkUtil 网络通信工具
+ * @addtogroup NetworkUtil 网络工具
  * @{
  */
 
 /**
  * @class arp
- * @brief ARP协议实现类
+ * @brief ARP协议
  *
  * 提供ARP地址解析功能，将IPv4地址转换为MAC地址。
  * 需要在本地网络中有效，目标主机必须在线且可达。

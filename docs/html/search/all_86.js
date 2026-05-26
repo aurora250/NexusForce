@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['核心类型_0',['核心类型',['../group___core_types.html',1,'']]]
+  ['校验和算法_0',['校验和算法',['../group___i_c_m_p.html#checksum_algorithm',1,'']]]
 ];

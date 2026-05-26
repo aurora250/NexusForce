@@ -35,17 +35,17 @@ string generic_error_category::message(const int32_t ev) const {
     if (::strerror_s(buf, sizeof(buf), ev) == 0) {
         return {buf};
     }
-    return "unknown error " + _NEFORCE to_string(ev);
+    return "unknown error " + to_string(ev);
 #else
     char buf[256];
 #    if (_POSIX_C_SOURCE >= 200112L) && !defined(_GNU_SOURCE)
     if (::strerror_r(ev, buf, sizeof(buf)) == 0) {
         return string(buf);
     }
-    return "unknown error " + _NEFORCE to_string(ev);
+    return "unknown error " + to_string(ev);
 #    else
     const char* s = ::strerror_r(ev, buf, sizeof(buf));
-    return s != nullptr ? string(s) : "unknown error " + _NEFORCE to_string(ev);
+    return s != nullptr ? string(s) : "unknown error " + to_string(ev);
 #    endif
 #endif
 }
@@ -81,7 +81,7 @@ string system_error_category::message(const int32_t ev) const {
     return "unknown error " + to_string(ev);
 #    else
     const char* s = ::strerror_r(ev, buf, sizeof(buf));
-    return s != nullptr ? string(s) : "unknown error " + _NEFORCE to_string(ev);
+    return s != nullptr ? string(s) : "unknown error " + to_string(ev);
 #    endif
 #endif
 }

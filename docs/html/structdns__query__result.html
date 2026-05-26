@@ -102,6 +102,8 @@ $(function(){initNavTree('structdns__query__result.html','','structdns__query__r
 Public 成员函数</h2></td></tr>
 <tr class="memitem:aac4fafad6e1d0ee8b49baba47ae30217" id="r_aac4fafad6e1d0ee8b49baba47ae30217"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aac4fafad6e1d0ee8b49baba47ae30217">is_success</a> () const noexcept</td></tr>
 <tr class="memdesc:aac4fafad6e1d0ee8b49baba47ae30217"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查查询是否成功  <br /></td></tr>
+<tr class="memitem:a5eb20513ed7919a6ab0b2799f32c7121" id="r_a5eb20513ed7919a6ab0b2799f32c7121"><td class="memItemLeft"><a class="el" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5eb20513ed7919a6ab0b2799f32c7121">full_rcode</a> () const noexcept</td></tr>
+<tr class="memdesc:a5eb20513ed7919a6ab0b2799f32c7121"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取完整响应码（含EDNS0扩展位）  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public 属性</h2></td></tr>
@@ -120,19 +122,66 @@ Public 属性</h2></td></tr>
 <tr class="memitem:abe18f5e616b4ee16ed33aa2e73a71fc2" id="r_abe18f5e616b4ee16ed33aa2e73a71fc2"><td class="memItemLeft"><a id="abe18f5e616b4ee16ed33aa2e73a71fc2" name="abe18f5e616b4ee16ed33aa2e73a71fc2"></a>
 <a class="el" href="group___d_n_s.html#ga4512397ee6460c3c286f1220692348c7">dns_response</a>&#160;</td><td class="memItemRight"><b>response_code</b> {<a class="el" href="group___d_n_s.html#gga4512397ee6460c3c286f1220692348c7a71b596df7cfe9f22486d013e022dab21">dns_response::NON_ERROR</a>}</td></tr>
 <tr class="memdesc:abe18f5e616b4ee16ed33aa2e73a71fc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">响应码 <br /></td></tr>
+<tr class="memitem:a6927b0290565da34b23d6153e0cb8d81" id="r_a6927b0290565da34b23d6153e0cb8d81"><td class="memItemLeft"><a id="a6927b0290565da34b23d6153e0cb8d81" name="a6927b0290565da34b23d6153e0cb8d81"></a>
+<a class="el" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a>&#160;</td><td class="memItemRight"><b>extended_rcode</b> {0}</td></tr>
+<tr class="memdesc:a6927b0290565da34b23d6153e0cb8d81"><td class="mdescLeft">&#160;</td><td class="mdescRight">扩展响应码（EDNS0，RFC 6891） <br /></td></tr>
+<tr class="memitem:a2aba114116c25cbbc24b7670fdc3f2ba" id="r_a2aba114116c25cbbc24b7670fdc3f2ba"><td class="memItemLeft"><a id="a2aba114116c25cbbc24b7670fdc3f2ba" name="a2aba114116c25cbbc24b7670fdc3f2ba"></a>
+<a class="el" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a>&#160;</td><td class="memItemRight"><b>udp_payload_size</b> {512}</td></tr>
+<tr class="memdesc:a2aba114116c25cbbc24b7670fdc3f2ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">服务器支持的UDP载荷大小（EDNS0） <br /></td></tr>
+<tr class="memitem:aaeef4b8ea9d34cc4759131e3a77ff6e5" id="r_aaeef4b8ea9d34cc4759131e3a77ff6e5"><td class="memItemLeft"><a id="aaeef4b8ea9d34cc4759131e3a77ff6e5" name="aaeef4b8ea9d34cc4759131e3a77ff6e5"></a>
+<a class="el" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a>&#160;</td><td class="memItemRight"><b>edns_version</b> {0}</td></tr>
+<tr class="memdesc:aaeef4b8ea9d34cc4759131e3a77ff6e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">EDNS版本号 <br /></td></tr>
+<tr class="memitem:a0ffc68c3153c09fb37c40b1f61f71f3f" id="r_a0ffc68c3153c09fb37c40b1f61f71f3f"><td class="memItemLeft"><a id="a0ffc68c3153c09fb37c40b1f61f71f3f" name="a0ffc68c3153c09fb37c40b1f61f71f3f"></a>
+bool&#160;</td><td class="memItemRight"><b>dnssec_ok</b> {false}</td></tr>
+<tr class="memdesc:a0ffc68c3153c09fb37c40b1f61f71f3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">服务器支持DNSSEC（DO标志位） <br /></td></tr>
+<tr class="memitem:a89e3ff0d5b84bf1481b0a64788d6af35" id="r_a89e3ff0d5b84bf1481b0a64788d6af35"><td class="memItemLeft"><a id="a89e3ff0d5b84bf1481b0a64788d6af35" name="a89e3ff0d5b84bf1481b0a64788d6af35"></a>
+bool&#160;</td><td class="memItemRight"><b>authoritative</b> {false}</td></tr>
+<tr class="memdesc:a89e3ff0d5b84bf1481b0a64788d6af35"><td class="mdescLeft">&#160;</td><td class="mdescRight">权威应答（AA标志位） <br /></td></tr>
 <tr class="memitem:a59916cb58111bdf5191b7a09170411ce" id="r_a59916cb58111bdf5191b7a09170411ce"><td class="memItemLeft"><a id="a59916cb58111bdf5191b7a09170411ce" name="a59916cb58111bdf5191b7a09170411ce"></a>
-bool&#160;</td><td class="memItemRight"><b>truncated</b></td></tr>
+bool&#160;</td><td class="memItemRight"><b>truncated</b> {false}</td></tr>
 <tr class="memdesc:a59916cb58111bdf5191b7a09170411ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">响应是否被截断 <br /></td></tr>
 <tr class="memitem:a8587f8d8175665904ba91f70d161025e" id="r_a8587f8d8175665904ba91f70d161025e"><td class="memItemLeft"><a id="a8587f8d8175665904ba91f70d161025e" name="a8587f8d8175665904ba91f70d161025e"></a>
-bool&#160;</td><td class="memItemRight"><b>recursive_available</b></td></tr>
+bool&#160;</td><td class="memItemRight"><b>recursive_available</b> {false}</td></tr>
 <tr class="memdesc:a8587f8d8175665904ba91f70d161025e"><td class="mdescLeft">&#160;</td><td class="mdescRight">递归查询是否可用 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>DNS查询结果结构 </p>
 <p>包含DNS查询的完整响应数据，包括答案记录、权威记录、附加记录等。 </p>
 
-<p class="definition">在文件 <a class="el" href="dns__message_8hpp_source.html">dns_message.hpp</a> 第 <a class="el" href="dns__message_8hpp_source.html#l00336">336</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dns__message_8hpp_source.html">dns_message.hpp</a> 第 <a class="el" href="dns__message_8hpp_source.html#l00337">337</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a5eb20513ed7919a6ab0b2799f32c7121" name="a5eb20513ed7919a6ab0b2799f32c7121"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5eb20513ed7919a6ab0b2799f32c7121">&#9670;&#160;</a></span>full_rcode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> dns_query_result::full_rcode </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取完整响应码（含EDNS0扩展位） </p>
+<dl class="section return"><dt>返回</dt><dd>12位完整响应码 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dns__message_8hpp_source.html">dns_message.hpp</a> 第 <a class="el" href="dns__message_8hpp_source.html#l00361">361</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="dns__message_8hpp_source.html#l00343">extended_rcode</a> , 以及 <a class="el" href="dns__message_8hpp_source.html#l00342">response_code</a>.</p>
+
+</div>
+</div>
 <a id="aac4fafad6e1d0ee8b49baba47ae30217" name="aac4fafad6e1d0ee8b49baba47ae30217"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aac4fafad6e1d0ee8b49baba47ae30217">&#9670;&#160;</a></span>is_success()</h2>
 
@@ -159,9 +208,9 @@ bool&#160;</td><td class="memItemRight"><b>recursive_available</b></td></tr>
 <p>检查查询是否成功 </p>
 <dl class="section return"><dt>返回</dt><dd>成功返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="dns__message_8hpp_source.html">dns_message.hpp</a> 第 <a class="el" href="dns__message_8hpp_source.html#l00349">349</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dns__message_8hpp_source.html">dns_message.hpp</a> 第 <a class="el" href="dns__message_8hpp_source.html#l00355">355</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="dns__message_8hpp_source.html#l00203">NON_ERROR</a> , 以及 <a class="el" href="dns__message_8hpp_source.html#l00341">response_code</a>.</p>
+<p class="reference">引用了 <a class="el" href="dns__message_8hpp_source.html#l00204">NON_ERROR</a> , 以及 <a class="el" href="dns__message_8hpp_source.html#l00342">response_code</a>.</p>
 
 </div>
 </div>

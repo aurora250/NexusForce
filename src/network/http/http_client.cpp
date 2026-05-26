@@ -541,8 +541,8 @@ config_(move(config)) {
 }
 
 http_client::http_client(ssl_context ctx, config config) :
-client_(_NEFORCE move(ctx)),
-config_(_NEFORCE move(config)) {
+client_(move(ctx)),
+config_(move(config)) {
     persistent_headers_["User-Agent"] = config_.user_agent;
     persistent_headers_["Accept"] = "*/*";
 
@@ -705,7 +705,7 @@ http_client_response http_client::patch(const string& url, const string& body, c
     req.headers["Content-Type"] = content_type;
     req.body = body;
 
-    return request(_NEFORCE move(req));
+    return request(move(req));
 }
 
 bool http_client::download_file(const string& url, path output, const bool is_binary) {
@@ -744,7 +744,7 @@ bool http_client::download_file(const string& url, path output, const bool is_bi
 http_client_response http_client::request(http_client_request req) { return do_request(move(req), 0); }
 
 future<http_client_response> http_client::request_async(http_client_request req) {
-    return _NEFORCE async(launch::async, [this, req = move(req)]() mutable { return request(move(req)); });
+    return async(launch::async, [this, req = move(req)]() mutable { return request(move(req)); });
 }
 
 void http_client::close() { client_.disconnect(); }

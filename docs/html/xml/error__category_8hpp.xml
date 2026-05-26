@@ -429,7 +429,7 @@
 <codeline lineno="7"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">error_code;</highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">error_condition;</highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">error_category<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structicomparable" kindref="compound">icomparable</ref>&lt;error_category&gt;<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/>error_category<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="structicomparable" kindref="compound">icomparable</ref>&lt;error_category&gt;<sp/>{</highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>error_category()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>virtual<sp/>~error_category()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
@@ -437,7 +437,7 @@
 <codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>error_category(const<sp/>error_category&amp;)<sp/>=<sp/>delete;</highlight></codeline>
 <codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/>error_category&amp;<sp/>operator=(const<sp/>error_category&amp;)<sp/>=<sp/>delete;</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight></codeline>
-<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>virtual<sp/>const<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>name()<sp/>const<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>virtual<sp/>const<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>()<sp/>const<sp/>noexcept<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>virtual<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>message(<ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref><sp/>ev)<sp/>const<sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>virtual<sp/>error_condition<sp/>default_error_condition(<ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref><sp/>ev)<sp/>const<sp/>noexcept;</highlight></codeline>

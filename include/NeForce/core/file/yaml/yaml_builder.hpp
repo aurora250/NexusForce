@@ -389,7 +389,7 @@ public:
      *
      * 引用之前通过anchor()设置的同名节点。
      */
-    yaml_builder& alias(string name);
+    yaml_builder& alias(const string& name);
 
     /**
      * @brief 开始新文档（多文档模式）

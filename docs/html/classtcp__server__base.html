@@ -105,9 +105,9 @@ $(function(){initNavTree('classtcp__server__base.html','','classtcp__server__bas
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public 类型</h2></td></tr>
-<tr class="memitem:a32641f5767778e30b8c31b3d32441295" id="r_a32641f5767778e30b8c31b3d32441295"><td class="memItemLeft"><a id="a32641f5767778e30b8c31b3d32441295" name="a32641f5767778e30b8c31b3d32441295"></a>
-using&#160;</td><td class="memItemRight"><b>client_handler_t</b> = <a class="el" href="classfunction.html">function</a>&lt;void(<a class="el" href="classtcp__socket.html">tcp_socket</a>)&gt;</td></tr>
-<tr class="memdesc:a32641f5767778e30b8c31b3d32441295"><td class="mdescLeft">&#160;</td><td class="mdescRight">客户端处理器类型 <br /></td></tr>
+<tr class="memitem:abef2c5b5cbfeda60f09e2c43f7b9a6ae" id="r_abef2c5b5cbfeda60f09e2c43f7b9a6ae"><td class="memItemLeft"><a id="abef2c5b5cbfeda60f09e2c43f7b9a6ae" name="abef2c5b5cbfeda60f09e2c43f7b9a6ae"></a>
+using&#160;</td><td class="memItemRight"><b>client_handler_t</b> = <a class="el" href="classfunction.html">function</a>&lt;void(<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt;<a class="el" href="classtcp__socket.html">tcp_socket</a>&gt;)&gt;</td></tr>
+<tr class="memdesc:abef2c5b5cbfeda60f09e2c43f7b9a6ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">客户端处理器类型 <br /></td></tr>
 <tr class="memitem:a5f608ddaffbd9596fd27cdfc6401a27b" id="r_a5f608ddaffbd9596fd27cdfc6401a27b"><td class="memItemLeft"><a id="a5f608ddaffbd9596fd27cdfc6401a27b" name="a5f608ddaffbd9596fd27cdfc6401a27b"></a>
 using&#160;</td><td class="memItemRight"><b>exception_handler_t</b> = <a class="el" href="classfunction.html">function</a>&lt;void(const <a class="el" href="structexception.html">exception</a>&amp;)&gt;</td></tr>
 <tr class="memdesc:a5f608ddaffbd9596fd27cdfc6401a27b"><td class="mdescLeft">&#160;</td><td class="mdescRight">异常处理器类型 <br /></td></tr>
@@ -118,7 +118,7 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:afd3f0bf8e207d844dbedb1b8c6720e5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
 <tr class="memitem:ae8163e7386fbe9d18a798e5a6e1f1b3e" id="r_ae8163e7386fbe9d18a798e5a6e1f1b3e"><td class="memItemLeft">virtual&#160;</td><td class="memItemRight"><a class="el" href="#ae8163e7386fbe9d18a798e5a6e1f1b3e">~tcp_server_base</a> ()</td></tr>
 <tr class="memdesc:ae8163e7386fbe9d18a798e5a6e1f1b3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数  <br /></td></tr>
-<tr class="memitem:a49f2008a2bc05e9f00c51e6098bb5a6e" id="r_a49f2008a2bc05e9f00c51e6098bb5a6e"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a49f2008a2bc05e9f00c51e6098bb5a6e">set_client_handler</a> (<a class="el" href="#a32641f5767778e30b8c31b3d32441295">client_handler_t</a> handler)</td></tr>
+<tr class="memitem:a49f2008a2bc05e9f00c51e6098bb5a6e" id="r_a49f2008a2bc05e9f00c51e6098bb5a6e"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a49f2008a2bc05e9f00c51e6098bb5a6e">set_client_handler</a> (<a class="el" href="#abef2c5b5cbfeda60f09e2c43f7b9a6ae">client_handler_t</a> handler)</td></tr>
 <tr class="memdesc:a49f2008a2bc05e9f00c51e6098bb5a6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置客户端处理器  <br /></td></tr>
 <tr class="memitem:aa7a0567cb6f4b407b8f2afb1a82d90b8" id="r_aa7a0567cb6f4b407b8f2afb1a82d90b8"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa7a0567cb6f4b407b8f2afb1a82d90b8">set_exception_handler</a> (<a class="el" href="#a5f608ddaffbd9596fd27cdfc6401a27b">exception_handler_t</a> handler)</td></tr>
 <tr class="memdesc:aa7a0567cb6f4b407b8f2afb1a82d90b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置异常处理器  <br /></td></tr>
@@ -139,10 +139,10 @@ void&#160;</td><td class="memItemRight"><b>notify_stop</b> () noexcept</td></tr>
 <tr class="memitem:a339fb280765125ff0e63bb3cb89bcb15" id="r_a339fb280765125ff0e63bb3cb89bcb15"><td class="memItemLeft"><a id="a339fb280765125ff0e63bb3cb89bcb15" name="a339fb280765125ff0e63bb3cb89bcb15"></a>
 void&#160;</td><td class="memItemRight"><b>accept_loop</b> ()</td></tr>
 <tr class="memdesc:a339fb280765125ff0e63bb3cb89bcb15"><td class="mdescLeft">&#160;</td><td class="mdescRight">接受连接的主循环 <br /></td></tr>
-<tr class="memitem:a24bf1c8ad6716a8348518f48fad88eb2" id="r_a24bf1c8ad6716a8348518f48fad88eb2"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a24bf1c8ad6716a8348518f48fad88eb2">handle_client</a> (<a class="el" href="classtcp__socket.html">tcp_socket</a> client)</td></tr>
-<tr class="memdesc:a24bf1c8ad6716a8348518f48fad88eb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">处理单个客户端连接  <br /></td></tr>
-<tr class="memitem:adba355ecdbc0013f1172b368c30107e1" id="r_adba355ecdbc0013f1172b368c30107e1"><td class="memItemLeft">virtual <a class="el" href="classoptional.html">optional</a>&lt; <a class="el" href="classtcp__socket.html">tcp_socket</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#adba355ecdbc0013f1172b368c30107e1">accept_one</a> ()=0</td></tr>
-<tr class="memdesc:adba355ecdbc0013f1172b368c30107e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建一个客户端连接  <br /></td></tr>
+<tr class="memitem:ad0918dc0cbe8e5bb50e51efffb1cfbcb" id="r_ad0918dc0cbe8e5bb50e51efffb1cfbcb"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#ad0918dc0cbe8e5bb50e51efffb1cfbcb">handle_client</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classtcp__socket.html">tcp_socket</a> &gt; client)</td></tr>
+<tr class="memdesc:ad0918dc0cbe8e5bb50e51efffb1cfbcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">处理单个客户端连接  <br /></td></tr>
+<tr class="memitem:a0f40159b08863e754d41ea0a32ff78ce" id="r_a0f40159b08863e754d41ea0a32ff78ce"><td class="memItemLeft">virtual <a class="el" href="classoptional.html">optional</a>&lt; <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classtcp__socket.html">tcp_socket</a> &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a0f40159b08863e754d41ea0a32ff78ce">accept_one</a> ()=0</td></tr>
+<tr class="memdesc:a0f40159b08863e754d41ea0a32ff78ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建一个客户端连接  <br /></td></tr>
 <tr class="memitem:ab04f76ce60e358af3452ca403ad8c2c3" id="r_ab04f76ce60e358af3452ca403ad8c2c3"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#ab04f76ce60e358af3452ca403ad8c2c3">create_acceptor</a> (const <a class="el" href="classip__address.html">ip_address</a> &amp;endpoint, int backlog)=0</td></tr>
 <tr class="memdesc:ab04f76ce60e358af3452ca403ad8c2c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建并配置acceptor  <br /></td></tr>
 </table><table class="memberdecls">
@@ -163,8 +163,11 @@ Protected 属性</h2></td></tr>
 <tr class="memitem:a2d72c2c3af83d0bc20fcd5effaf05874" id="r_a2d72c2c3af83d0bc20fcd5effaf05874"><td class="memItemLeft"><a id="a2d72c2c3af83d0bc20fcd5effaf05874" name="a2d72c2c3af83d0bc20fcd5effaf05874"></a>
 <a class="el" href="classthread__pool.html">thread_pool</a>&#160;</td><td class="memItemRight"><b>client_pool_</b></td></tr>
 <tr class="memdesc:a2d72c2c3af83d0bc20fcd5effaf05874"><td class="mdescLeft">&#160;</td><td class="mdescRight">客户端处理线程池 <br /></td></tr>
+<tr class="memitem:a735bef21abd2a1a64c22fc2ebb9c9ec8" id="r_a735bef21abd2a1a64c22fc2ebb9c9ec8"><td class="memItemLeft"><a id="a735bef21abd2a1a64c22fc2ebb9c9ec8" name="a735bef21abd2a1a64c22fc2ebb9c9ec8"></a>
+<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><b>worker_count_</b></td></tr>
+<tr class="memdesc:a735bef21abd2a1a64c22fc2ebb9c9ec8"><td class="mdescLeft">&#160;</td><td class="mdescRight">工作线程数 <br /></td></tr>
 <tr class="memitem:a5e6ff6717c9972d255c9bee34975594e" id="r_a5e6ff6717c9972d255c9bee34975594e"><td class="memItemLeft"><a id="a5e6ff6717c9972d255c9bee34975594e" name="a5e6ff6717c9972d255c9bee34975594e"></a>
-<a class="el" href="#a32641f5767778e30b8c31b3d32441295">client_handler_t</a>&#160;</td><td class="memItemRight"><b>client_handler_</b></td></tr>
+<a class="el" href="#abef2c5b5cbfeda60f09e2c43f7b9a6ae">client_handler_t</a>&#160;</td><td class="memItemRight"><b>client_handler_</b></td></tr>
 <tr class="memdesc:a5e6ff6717c9972d255c9bee34975594e"><td class="mdescLeft">&#160;</td><td class="mdescRight">客户端处理器 <br /></td></tr>
 <tr class="memitem:a831cef70165579b406d091ded06b6a19" id="r_a831cef70165579b406d091ded06b6a19"><td class="memItemLeft"><a id="a831cef70165579b406d091ded06b6a19" name="a831cef70165579b406d091ded06b6a19"></a>
 <a class="el" href="#a5f608ddaffbd9596fd27cdfc6401a27b">exception_handler_t</a>&#160;</td><td class="memItemRight"><b>exception_handler_</b></td></tr>
@@ -221,7 +224,7 @@ Protected 属性</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="tcp__server_8hpp_source.html#l00159">port()</a>.</p>
+<p class="reference">引用了 <a class="el" href="tcp__server_8hpp_source.html#l00160">port()</a>.</p>
 
 </div>
 </div>
@@ -251,15 +254,15 @@ Protected 属性</h2></td></tr>
 <p>析构函数 </p>
 <p>自动停止服务器。 </p>
 
-<p class="definition">在文件 <a class="el" href="tcp__server_8hpp_source.html">tcp_server.hpp</a> 第 <a class="el" href="tcp__server_8hpp_source.html#l00108">108</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__server_8hpp_source.html">tcp_server.hpp</a> 第 <a class="el" href="tcp__server_8hpp_source.html#l00109">109</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="#a77bb0334985546f7b3b27f7ebbcbb902">stop()</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="adba355ecdbc0013f1172b368c30107e1" name="adba355ecdbc0013f1172b368c30107e1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adba355ecdbc0013f1172b368c30107e1">&#9670;&#160;</a></span>accept_one()</h2>
+<a id="a0f40159b08863e754d41ea0a32ff78ce" name="a0f40159b08863e754d41ea0a32ff78ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f40159b08863e754d41ea0a32ff78ce">&#9670;&#160;</a></span>accept_one()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -268,7 +271,7 @@ Protected 属性</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classoptional.html">optional</a>&lt; <a class="el" href="classtcp__socket.html">tcp_socket</a> &gt; tcp_server_base::accept_one </td>
+          <td class="memname">virtual <a class="el" href="classoptional.html">optional</a>&lt; <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classtcp__socket.html">tcp_socket</a> &gt; &gt; tcp_server_base::accept_one </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -326,8 +329,8 @@ Protected 属性</h2></td></tr>
 
 </div>
 </div>
-<a id="a24bf1c8ad6716a8348518f48fad88eb2" name="a24bf1c8ad6716a8348518f48fad88eb2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24bf1c8ad6716a8348518f48fad88eb2">&#9670;&#160;</a></span>handle_client()</h2>
+<a id="ad0918dc0cbe8e5bb50e51efffb1cfbcb" name="ad0918dc0cbe8e5bb50e51efffb1cfbcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0918dc0cbe8e5bb50e51efffb1cfbcb">&#9670;&#160;</a></span>handle_client()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -338,7 +341,7 @@ Protected 属性</h2></td></tr>
         <tr>
           <td class="memname">virtual void tcp_server_base::handle_client </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classtcp__socket.html">tcp_socket</a></td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classtcp__socket.html">tcp_socket</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>client</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -358,11 +361,11 @@ Protected 属性</h2></td></tr>
 </dl>
 <p>调用客户端处理器处理连接。 派生类可重写此方法以自定义处理逻辑。 </p>
 
-<p class="definition">在文件 <a class="el" href="tcp__server_8hpp_source.html">tcp_server.hpp</a> 第 <a class="el" href="tcp__server_8hpp_source.html#l00070">70</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__server_8hpp_source.html">tcp_server.hpp</a> 第 <a class="el" href="tcp__server_8hpp_source.html#l00071">71</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="tcp__server_8hpp_source.html#l00049">client_handler_</a>, <a class="el" href="tcp__server_8hpp_source.html#l00070">handle_client()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="tcp__server_8hpp_source.html#l00050">client_handler_</a>, <a class="el" href="tcp__server_8hpp_source.html#l00071">handle_client()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="tcp__server_8hpp_source.html#l00070">handle_client()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="tcp__server_8hpp_source.html#l00071">handle_client()</a>.</p>
 
 </div>
 </div>
@@ -392,7 +395,7 @@ Protected 属性</h2></td></tr>
 <p>检查服务器是否运行中 </p>
 <dl class="section return"><dt>返回</dt><dd>运行中返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__server_8hpp_source.html">tcp_server.hpp</a> 第 <a class="el" href="tcp__server_8hpp_source.html#l00153">153</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__server_8hpp_source.html">tcp_server.hpp</a> 第 <a class="el" href="tcp__server_8hpp_source.html#l00154">154</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__server_8hpp_source.html#l00038">running_</a>.</p>
 
@@ -424,7 +427,7 @@ Protected 属性</h2></td></tr>
 <p>获取监听端口 </p>
 <dl class="section return"><dt>返回</dt><dd>端口号 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="tcp__server_8hpp_source.html">tcp_server.hpp</a> 第 <a class="el" href="tcp__server_8hpp_source.html#l00159">159</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="tcp__server_8hpp_source.html">tcp_server.hpp</a> 第 <a class="el" href="tcp__server_8hpp_source.html#l00160">160</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="tcp__server_8hpp_source.html#l00037">port_</a>.</p>
 
@@ -441,7 +444,7 @@ Protected 属性</h2></td></tr>
         <tr>
           <td class="memname">bool tcp_server_base::set_client_handler </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a32641f5767778e30b8c31b3d32441295">client_handler_t</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#abef2c5b5cbfeda60f09e2c43f7b9a6ae">client_handler_t</a></td>          <td class="paramname"><span class="paramname"><em>handler</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -540,7 +543,7 @@ Protected 属性</h2></td></tr>
 <p>停止服务器 </p>
 <p>停止接受新连接，等待现有连接处理完成。 </p>
 
-<p class="reference">被这些函数引用 <a class="el" href="tcp__server_8hpp_source.html#l00108">~tcp_server_base()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="tcp__server_8hpp_source.html#l00109">~tcp_server_base()</a>.</p>
 
 </div>
 </div>

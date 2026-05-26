@@ -63,7 +63,7 @@ namespace {
             auto method = method_str.substr(start, pos - start);
             method.trim();
             if (!method.empty()) {
-                result.push_back(_NEFORCE move(method));
+                result.push_back(move(method));
             }
             start = pos + 1;
             pos = method_str.find(',', start);
@@ -77,50 +77,40 @@ namespace {
 
 http_router::http_router() { setup_default_handlers(); }
 
-void http_router::get(const string& path, http_handler_t handler) {
-    route(http_method::GET(), path, _NEFORCE move(handler));
-}
+void http_router::get(const string& path, http_handler_t handler) { route(http_method::GET(), path, move(handler)); }
 
-void http_router::post(const string& path, http_handler_t handler) {
-    route(http_method::POST(), path, _NEFORCE move(handler));
-}
+void http_router::post(const string& path, http_handler_t handler) { route(http_method::POST(), path, move(handler)); }
 
-void http_router::put(const string& path, http_handler_t handler) {
-    route(http_method::PUT(), path, _NEFORCE move(handler));
-}
+void http_router::put(const string& path, http_handler_t handler) { route(http_method::PUT(), path, move(handler)); }
 
-void http_router::del(const string& path, http_handler_t handler) {
-    route(http_method::DELETE(), path, _NEFORCE move(handler));
-}
+void http_router::del(const string& path, http_handler_t handler) { route(http_method::DELETE(), path, move(handler)); }
 
-void http_router::head(const string& path, http_handler_t handler) {
-    route(http_method::HEAD(), path, _NEFORCE move(handler));
-}
+void http_router::head(const string& path, http_handler_t handler) { route(http_method::HEAD(), path, move(handler)); }
 
 void http_router::options(const string& path, http_handler_t handler) {
-    route(http_method::OPTIONS(), path, _NEFORCE move(handler));
+    route(http_method::OPTIONS(), path, move(handler));
 }
 
 void http_router::trace(const string& path, http_handler_t handler) {
-    route(http_method::TRACE(), path, _NEFORCE move(handler));
+    route(http_method::TRACE(), path, move(handler));
 }
 
 void http_router::connect(const string& path, http_handler_t handler) {
-    route(http_method::CONNECT(), path, _NEFORCE move(handler));
+    route(http_method::CONNECT(), path, move(handler));
 }
 
 void http_router::patch(const string& path, http_handler_t handler) {
-    route(http_method::PATCH(), path, _NEFORCE move(handler));
+    route(http_method::PATCH(), path, move(handler));
 }
 
 void http_router::get_post(const string& path, http_handler_t handler) {
     route(http_method::GET(), path, handler);
-    route(http_method::POST(), path, _NEFORCE move(handler));
+    route(http_method::POST(), path, move(handler));
 }
 
 void http_router::post_delete(const string& path, http_handler_t handler) {
     route(http_method::POST(), path, handler);
-    route(http_method::DELETE(), path, _NEFORCE move(handler));
+    route(http_method::DELETE(), path, move(handler));
 }
 
 void http_router::all(const string& path, http_handler_t handler) {
@@ -132,7 +122,7 @@ void http_router::all(const string& path, http_handler_t handler) {
     route(http_method::OPTIONS(), path, handler);
     route(http_method::TRACE(), path, handler);
     route(http_method::CONNECT(), path, handler);
-    route(http_method::PATCH(), path, _NEFORCE move(handler));
+    route(http_method::PATCH(), path, move(handler));
 }
 
 void http_router::route(const http_method& method, const string& path, const http_handler_t& handler) {
@@ -161,11 +151,11 @@ void http_router::route(const http_method& method, const string& path, const htt
 
         auto regex_opt = compile_pattern(path, entry.param_names);
         if (regex_opt) {
-            entry.regex_pattern = _NEFORCE move(*regex_opt);
+            entry.regex_pattern = move(*regex_opt);
             entry.is_regex = true;
         }
 
-        routes_[m].push_back(_NEFORCE move(entry));
+        routes_[m].push_back(move(entry));
     }
 }
 

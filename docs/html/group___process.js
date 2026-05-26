@@ -1,15 +1,6 @@
 var group___process =
 [
     [ "process", "classprocess.html", [
-      [ "state_info", "structprocess_1_1state__info.html", [
-        [ "is_running", "structprocess_1_1state__info.html#af076950a1963de275017f09ebc4fff65", null ],
-        [ "process_handle", "structprocess_1_1state__info.html#a364db330c5b9d31721f46338bd99ba3b", null ],
-        [ "process_id", "structprocess_1_1state__info.html#a6598dd1fe07df238467557f2ab7df2c4", null ],
-        [ "stdout_output", "structprocess_1_1state__info.html#a1f7f72dc813cbea2a3f5fc1605d4055c", null ],
-        [ "stdout_pipe", "structprocess_1_1state__info.html#afc29813a5d417fc8ae7d9c0703e3c037", null ],
-        [ "thread_handle", "structprocess_1_1state__info.html#ab1796cf3e0dbde7f205ddc77fcf9c074", null ],
-        [ "thread_id", "structprocess_1_1state__info.html#ac10f295add86d82d6fb2806ebd643e2d", null ]
-      ] ],
       [ "memory_info", "structprocess_1_1memory__info.html", [
         [ "pagefile_usage", "structprocess_1_1memory__info.html#ad82ffba7bbad1c45c5783a326008bdfe", null ],
         [ "peak_pagefile_usage", "structprocess_1_1memory__info.html#a090cbd72651413766906606148b81c1c", null ],
@@ -21,7 +12,16 @@ var group___process =
         [ "user_time_ms", "structprocess_1_1time__info.html#a7bb18a8a5556aee85d652152a5e243c5", null ],
         [ "wall_time_ms", "structprocess_1_1time__info.html#a15225d1b9e0bcd24c1512c5c810757c6", null ]
       ] ],
+      [ "shell_result", "structprocess_1_1shell__result.html", [
+        [ "exit_code", "structprocess_1_1shell__result.html#ac22875b9da3a09de1534f9006aee8f26", null ],
+        [ "output", "structprocess_1_1shell__result.html#aa6e17b33533d0f41b8e5f050362cab34", null ]
+      ] ],
       [ "native_id_type", "classprocess.html#ab91bd774333ce8998d5100bb41be1da8", null ],
+      [ "elevation_tool", "classprocess.html#a09e419ffd86bcf6a536ecd9ddfe895d1", [
+        [ "auto_", "classprocess.html#a09e419ffd86bcf6a536ecd9ddfe895d1ae271e2d9f011df547b9b98db5a3f287a", null ],
+        [ "sudo", "classprocess.html#a09e419ffd86bcf6a536ecd9ddfe895d1ad338b3f0f405eb5e51c8cc1e5ca66f02", null ],
+        [ "pkexec", "classprocess.html#a09e419ffd86bcf6a536ecd9ddfe895d1a823735810c73ae1ef92c4985e0222a32", null ]
+      ] ],
       [ "permission", "classprocess.html#acfd865e47b9c3a8b63da86bc85f11242", [
         [ "read", "classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aecae13117d6f0584c25a9da6c8f8415e", null ],
         [ "write", "classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aefb2a684e4afb7d55e6147fbe5a332ee", null ],
@@ -30,12 +30,42 @@ var group___process =
         [ "query_info", "classprocess.html#acfd865e47b9c3a8b63da86bc85f11242ae62cad8f38445bfffefe4b944d257350", null ],
         [ "all", "classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aa181a603769c1f98ad927e7367c7aa51", null ]
       ] ],
+      [ "privilege_level", "classprocess.html#a85cd03dae91e9e2a916de7b19044520d", [
+        [ "privileged", "classprocess.html#a85cd03dae91e9e2a916de7b19044520dabd638b36d2814f488c1497cfe49eceea", null ],
+        [ "not_privileged", "classprocess.html#a85cd03dae91e9e2a916de7b19044520da28770b882ab896ee0d7539ef7e4681ee", null ],
+        [ "unknown", "classprocess.html#a85cd03dae91e9e2a916de7b19044520daad921d60486366258809553a3db49a4a", null ]
+      ] ],
       [ "state", "classprocess.html#a372470dfa6edcf9a6b8c9dff60738dc1", [
         [ "running", "classprocess.html#a372470dfa6edcf9a6b8c9dff60738dc1a75101dcdfc88455bcafc9e53e0b06689", null ],
         [ "suspended", "classprocess.html#a372470dfa6edcf9a6b8c9dff60738dc1a735fda5d72b5c650f3f0435195a211bd", null ],
         [ "stopped", "classprocess.html#a372470dfa6edcf9a6b8c9dff60738dc1af0a0bfe6bc7d2c58d2989034f83183e0", null ],
         [ "exited", "classprocess.html#a372470dfa6edcf9a6b8c9dff60738dc1ab854d4deac1316c8d36e519393f3f2ae", null ],
         [ "unknown", "classprocess.html#a372470dfa6edcf9a6b8c9dff60738dc1aad921d60486366258809553a3db49a4a", null ]
-      ] ]
+      ] ],
+      [ "process", "classprocess.html#afd5c4dd719317354311b87ef18c5ea8b", null ],
+      [ "~process", "classprocess.html#a554113f7890a643f4434695ced702924", null ],
+      [ "process", "classprocess.html#acf7b6c831eb297ee42a2b980517edf0d", null ],
+      [ "close", "classprocess.html#a39b0e2a79a5fd1c6887c35c6c7608c09", null ],
+      [ "close_stdin", "classprocess.html#a42975de169bed2eae165ea223c763293", null ],
+      [ "exit_code", "classprocess.html#a74f6d6755a0beec5a2a3cc10408c3671", null ],
+      [ "get_memory_info", "classprocess.html#a398c8c5e19b9fa0825552b1cbf0eb637", null ],
+      [ "get_state", "classprocess.html#a9df40bb72871d8f94b737047293405de", null ],
+      [ "id", "classprocess.html#a4975453c3a379c94e4e6586b13bb239a", null ],
+      [ "is_running", "classprocess.html#a634eb7995ac62bf44c49463e5780f406", null ],
+      [ "operator=", "classprocess.html#a791fb4987d270cce4ee03d4f355e193f", null ],
+      [ "resume", "classprocess.html#ad0fc72309a07084788f2f808d2fe976a", null ],
+      [ "set_capture_stderr", "classprocess.html#ab5d86f0c3462903994e14106252ce8b8", null ],
+      [ "set_capture_stdout", "classprocess.html#a44a52ee3fa64b6c7da293e27ee2e6071", null ],
+      [ "set_env", "classprocess.html#aaa97f4fb9c28902a0c740102a632add3", null ],
+      [ "set_stdin_data", "classprocess.html#a2f25c2fdd0fea8b01e9b9d025bd95ba8", null ],
+      [ "set_work_dir", "classprocess.html#a83e591137cd9379e480bbe217381e64a", null ],
+      [ "start", "classprocess.html#a71e9006061494f2017d16304a6e0125d", null ],
+      [ "start_elevated", "classprocess.html#a08dd4dadc59859b2488faf41b4b486a1", null ],
+      [ "stderr_output", "classprocess.html#a762b01632db7fde3736578de676902da", null ],
+      [ "stdout_output", "classprocess.html#ab479b5aedbbf34d3e927b95bc718077e", null ],
+      [ "suspend", "classprocess.html#a52208338a54f7d44ae3ab2e1ea1028df", null ],
+      [ "terminate", "classprocess.html#abb5fdbc705fa2636930c7c13fe584206", null ],
+      [ "wait", "classprocess.html#a2e4e873b41113a498b26a4e1d55b3333", null ],
+      [ "write_stdin", "classprocess.html#aa91787da10fc84ddafd4306f5399d6ca", null ]
     ] ]
 ];

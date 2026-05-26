@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['遵循的国际标准_0',['遵循的国际标准',['../group___s_m_t_p.html#standards',1,'']]]
+  ['选择运算仿函数_0',['选择运算仿函数',['../group___selection_functors.html',1,'']]],
+  ['选项语法规则_1',['选项语法规则',['../group___command_line.html#option_syntax',1,'']]]
 ];

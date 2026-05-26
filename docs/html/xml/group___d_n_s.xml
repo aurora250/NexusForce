@@ -7,6 +7,9 @@
     <innerclass refid="structdns__record" prot="public">dns_record</innerclass>
     <innerclass refid="structdns__query__result" prot="public">dns_query_result</innerclass>
     <innerclass refid="structdns__header" prot="public">dns_header</innerclass>
+    <innerclass refid="structdns__srv__record" prot="public">dns_srv_record</innerclass>
+    <innerclass refid="structdns__soa__record" prot="public">dns_soa_record</innerclass>
+    <innernamespace refid="namespaceedns">edns</innernamespace>
     <sectiondef kind="enum">
       <memberdef kind="enum" id="group___d_n_s_1ga973c6b85131920f4de96d7db1206a51b" prot="public" static="no" strong="yes">
         <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
@@ -66,37 +69,37 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="175" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="175" bodyend="181"/>
       </memberdef>
-      <memberdef kind="enum" id="group___d_n_s_1ga12a6552e04528df27737709ea060c9d1" prot="public" static="no" strong="yes">
+      <memberdef kind="enum" id="group___d_n_s_1ga6f72845b22666dbf3cce34aeb6d805a0" prot="public" static="no" strong="yes">
         <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
-        <name>dns_query</name>
-        <enumvalue id="group___d_n_s_1gga12a6552e04528df27737709ea060c9d1ae43bd933c18b06d29f9c46cce78de0f2" prot="public">
+        <name>dns_class</name>
+        <enumvalue id="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0ae43bd933c18b06d29f9c46cce78de0f2" prot="public">
           <name>INTERNET</name>
           <initializer>= 1</initializer>
           <briefdescription>
-<para>Internet类 </para>
+<para>Internet (IN) </para>
           </briefdescription>
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___d_n_s_1gga12a6552e04528df27737709ea060c9d1a7f903fc95c5f6059a3c0d1b22820dbf7" prot="public">
+        <enumvalue id="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0a7f903fc95c5f6059a3c0d1b22820dbf7" prot="public">
           <name>CHAOS</name>
           <initializer>= 3</initializer>
           <briefdescription>
-<para>CHAOS类 </para>
+<para>CHAOS </para>
           </briefdescription>
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___d_n_s_1gga12a6552e04528df27737709ea060c9d1a968ced8fabc2a848519f87df57607aee" prot="public">
+        <enumvalue id="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0a968ced8fabc2a848519f87df57607aee" prot="public">
           <name>HESIOD</name>
           <initializer>= 4</initializer>
           <briefdescription>
-<para>HESIOD类 </para>
+<para>Hesiod </para>
           </briefdescription>
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___d_n_s_1gga12a6552e04528df27737709ea060c9d1a8e1bde3c3d303163521522cf1d62f21f" prot="public">
+        <enumvalue id="group___d_n_s_1gga6f72845b22666dbf3cce34aeb6d805a0a8e1bde3c3d303163521522cf1d62f21f" prot="public">
           <name>ANY</name>
           <initializer>= 255</initializer>
           <briefdescription>
@@ -106,14 +109,14 @@
           </detaileddescription>
         </enumvalue>
         <briefdescription>
-<para>DNS查询类型枚举 </para>
+<para>DNS查询类枚举 </para>
         </briefdescription>
         <detaileddescription>
-<para>定义DNS查询的类别，指定查询的协议族或类型。 </para>
+<para>定义DNS查询的类别（CLASS），指定查询的协议族。 符合 RFC 1035 §3.2.4 和 IANA DNS Parameters 注册表。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="189" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="189" bodyend="194"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="190" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="190" bodyend="195"/>
       </memberdef>
       <memberdef kind="enum" id="group___d_n_s_1ga4512397ee6460c3c286f1220692348c7" prot="public" static="no" strong="yes">
         <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
@@ -180,7 +183,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="202" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="202" bodyend="209"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" line="203" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_message.hpp" bodystart="203" bodyend="210"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

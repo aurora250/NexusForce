@@ -1,0 +1,52 @@
+var group___windows_system_registry =
+[
+    [ "registry_key", "classregistry__key.html", [
+      [ "root_key", "structregistry__key_1_1root__key.html", null ],
+      [ "value_info", "structregistry__key_1_1value__info.html", [
+        [ "to_dword", "structregistry__key_1_1value__info.html#ad634b24f9518755103b72c785eec0800", null ],
+        [ "to_multi_string", "structregistry__key_1_1value__info.html#a5fdc7641a36cf240468d956674446bb6", null ],
+        [ "to_qword", "structregistry__key_1_1value__info.html#a70771f4f5c15961c71a4c1d4945e7087", null ],
+        [ "to_string", "structregistry__key_1_1value__info.html#add64701bf69fbe8b81e1a19354aef600", null ],
+        [ "data", "structregistry__key_1_1value__info.html#a50b6609c33b6da1d6356f17f43767962", null ],
+        [ "name", "structregistry__key_1_1value__info.html#a47895af2be8df6861d1735584a82e75c", null ],
+        [ "type", "structregistry__key_1_1value__info.html#aefe90f1b0a50eabfef71b2536fe87995", null ]
+      ] ],
+      [ "value_type", "classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477", [
+        [ "none", "classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477a334c4a4c42fdb79d7ebc3e73b517e6f8", null ],
+        [ "string", "classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477ab45cffe084dd3d20d928bee85e7b0f21", null ],
+        [ "expand_string", "classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477a0978fc35db2463791ebfde962517ef48", null ],
+        [ "binary", "classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477a9d7183f16acce70658f686ae7f1a4d20", null ],
+        [ "dword", "classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477afc50124be4e2da8156d08b7375d79804", null ],
+        [ "qword", "classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477aa8411161cb16f462b1bdd4611965b43f", null ],
+        [ "multi_string", "classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477a0eb11d63c2fc32b79389f0f26e14434d", null ]
+      ] ],
+      [ "registry_key", "classregistry__key.html#a0e76f5b910636b2b440fc362b2888f22", null ],
+      [ "registry_key", "classregistry__key.html#afcddc32b40ba2d0f8b8a5450e8281bcb", null ],
+      [ "~registry_key", "classregistry__key.html#a9e0f5149b4f122961b1a5d4208423151", null ],
+      [ "registry_key", "classregistry__key.html#a7026720c9c9831418cde1c409f8000af", null ],
+      [ "create_sub_key", "classregistry__key.html#a15a5655f64b0a85e826b0845c12fea29", null ],
+      [ "delete_sub_key", "classregistry__key.html#abd55857cc4346c1f96cea42c5d76754d", null ],
+      [ "delete_value", "classregistry__key.html#a841b1623e976f4181fbc269f049230c4", null ],
+      [ "enum_sub_key_names", "classregistry__key.html#ad3f810015c2e1169afd0b16009d2ae22", null ],
+      [ "enum_values", "classregistry__key.html#a14dc6ef60a66414cfec1b40d4527c289", null ],
+      [ "get_binary_value", "classregistry__key.html#aeaa082dc39ad655faf73e28b11164d3b", null ],
+      [ "get_dword_value", "classregistry__key.html#a5809d78ce40d269e285a08397b527756", null ],
+      [ "get_multi_string_value", "classregistry__key.html#a066662ef175ec33a66538be770a1bb99", null ],
+      [ "get_qword_value", "classregistry__key.html#ad8090858030a677d063828e51390bb3a", null ],
+      [ "get_string_value", "classregistry__key.html#ad160714cb70bc00d6235b6abc0c36942", null ],
+      [ "has_sub_key", "classregistry__key.html#a077d9d92901497b062508e067fa27f5f", null ],
+      [ "has_value", "classregistry__key.html#a402366bac6e693e667a234b250e6e193", null ],
+      [ "is_valid", "classregistry__key.html#ae8bfbed18d27ce49652470602201044b", null ],
+      [ "native_handle", "classregistry__key.html#a423f8659ca8f39e1d0311150542429aa", null ],
+      [ "open", "classregistry__key.html#ab07ea0f75761264f42ba667ce65ad6b6", null ],
+      [ "open_sub_key", "classregistry__key.html#ac086c8455a820a2ac609ac409e90f330", null ],
+      [ "operator bool", "classregistry__key.html#a5f206fd7f2e929e600192190c4b7915a", null ],
+      [ "operator=", "classregistry__key.html#a59337159d4f3b2acca44875cde73c0bb", null ],
+      [ "set_binary_value", "classregistry__key.html#a93a079782143e4d92a65ff8ad9fc7447", null ],
+      [ "set_dword_value", "classregistry__key.html#a58f4dc2ea8895063d395d4a81b3dcdc3", null ],
+      [ "set_expand_string_value", "classregistry__key.html#a47e06191eb7d9dcf26c4f66d26853543", null ],
+      [ "set_multi_string_value", "classregistry__key.html#a0e87105d61256b44b3dd71c81504a609", null ],
+      [ "set_qword_value", "classregistry__key.html#a26771910ea2657941052117177218028", null ],
+      [ "set_string_value", "classregistry__key.html#af3b9088988ee31316a9cb0c02b5af11d", null ]
+    ] ]
+];

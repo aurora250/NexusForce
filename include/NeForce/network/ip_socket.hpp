@@ -13,7 +13,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @addtogroup Network 网络通信
+ * @addtogroup SocketBase socket基类
  * @{
  */
 
@@ -49,8 +49,8 @@ struct ip_header {
     uint32_t src_addr;   ///< 源IP地址
     uint32_t dest_addr;  ///< 目的IP地址
 
-    NEFORCE_NODISCARD uint8_t version() const { return version_ihl >> 4; }
-    NEFORCE_NODISCARD uint8_t ihl() const { return version_ihl & 0x0F; }
+    NEFORCE_NODISCARD uint8_t version() const noexcept { return version_ihl >> 4; }
+    NEFORCE_NODISCARD uint8_t ihl() const noexcept { return version_ihl & 0x0F; }
 };
 #pragma pack(pop)
 
@@ -141,7 +141,7 @@ public:
     }
 };
 
-/** @} */ // Network
+/** @} */ // SocketBase
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_IP_SOCKET_HPP__

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['编码规则_0',['UTF-8 编码规则',['../group___code_point.html#utf8_encoding',1,'']]],
-  ['编译器检测_1',['编译器检测',['../group___compiler_detection.html',1,'']]]
+  ['缓冲区格式化_0',['缓冲区格式化',['../group___buffer_format.html',1,'']]],
+  ['缓存机制_1',['DNS 缓存机制',['../group___d_n_s.html#dns_caching',1,'']]],
+  ['缓存_2',['缓存',['../group___cache.html',1,'']]]
 ];

@@ -81,7 +81,7 @@ namespace {
         char vendor[13] = {};
         char brand[49] = {};
 
-        // 获取 CPU 厂商信息
+        // Get CPU manufacturer information
         ::__cpuid(cpu_info_data, 0);
         memory_copy(vendor, &cpu_info_data[1], 4);
         memory_copy(vendor + 4, &cpu_info_data[3], 4);
@@ -90,7 +90,7 @@ namespace {
 
         cpu_info.vendor = vendor;
 
-        // 获取 CPU 品牌字符串
+        // Get the CPU brand string
         for (int i = static_cast<int>(0x80000002); i <= static_cast<int>(0x80000004); i++) {
             ::__cpuid(cpu_info_data, i);
             memory_copy(brand + static_cast<ptrdiff_t>((i - 0x80000002) * 16), cpu_info_data, sizeof(cpu_info_data));
@@ -99,7 +99,7 @@ namespace {
         cpu_info.brand = brand;
         cpu_info.brand.trim_right();
 
-        // 获取 NUMA 和处理器核心关系
+        // Obtain the relationship between NUMA and processor core
         ::DWORD buffer_size = 0;
         ::GetLogicalProcessorInformation(nullptr, &buffer_size);
 
@@ -124,7 +124,7 @@ namespace {
             }
         }
 
-        // 从注册表获取当前 CPU 频率
+        // Get the current CPU frequency from the registry
         ::HKEY hkey = nullptr;
         if (::RegOpenKeyExA(HKEY_LOCAL_MACHINE, R"(HARDWARE\DESCRIPTION\System\CentralProcessor\0)", 0, KEY_READ,
                             &hkey) == ERROR_SUCCESS) {
@@ -452,7 +452,7 @@ namespace {
 
             string current_number;
             for (const char c: release) {
-                if (_NEFORCE is_digit(c)) {
+                if (is_digit(c)) {
                     current_number += c;
                 } else if (c == '.' && !current_number.empty() && part_index < 3) {
                     version_parts[part_index] = to_int32(current_number.view());
@@ -795,7 +795,7 @@ uint32_t sysinfo::process_count() {
             if (entry->d_type == DT_DIR) {
                 bool is_numeric = true;
                 for (int i = 0; entry->d_name[i] != '\0'; i++) {
-                    if (!_NEFORCE is_digit(entry->d_name[i])) {
+                    if (!is_digit(entry->d_name[i])) {
                         is_numeric = false;
                         break;
                     }

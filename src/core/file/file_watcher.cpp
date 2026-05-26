@@ -422,7 +422,7 @@ bool file_watcher::update_recursive(const bool recursive) {
     }
 
     callback_t saved_callback;
-    file_watch_event saved_events{file_watch_event::ALL};
+    auto saved_events = file_watch_event::ALL;
     {
         lock<mutex> lock(callback_mutex_);
         saved_callback = callback_;

@@ -4,5 +4,7 @@ var searchData=
   ['offset_5fcount_1',['offset_count',['../structsql__builder_1_1select__data.html#ab0297a02c13d5e83b81bbaab34d20a85',1,'sql_builder::select_data']]],
   ['oneshot_2',['oneshot',['../group___signals.html#gad225dff83ab3b2a154bc713fad3ca113',1,'signals.hpp']]],
   ['opcode_3',['opcode',['../structwebsocket__frame__header.html#a99bff57a2a67a456892b25753778cea9',1,'websocket_frame_header']]],
-  ['order_5fby_5fclauses_4',['order_by_clauses',['../structsql__builder_1_1select__data.html#ad18e65c5c582f944ad6de154236f038e',1,'sql_builder::select_data']]]
+  ['opt_5ftype_4',['OPT_TYPE',['../namespaceedns.html#a52485fee82b9ac7ddaab859aee7e13e9',1,'edns']]],
+  ['order_5fby_5fclauses_5',['order_by_clauses',['../structsql__builder_1_1select__data.html#ad18e65c5c582f944ad6de154236f038e',1,'sql_builder::select_data']]],
+  ['output_6',['output',['../structprocess_1_1shell__result.html#aa6e17b33533d0f41b8e5f050362cab34',1,'process::shell_result']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['概念约束_0',['概念约束',['../group___concepts.html',1,'']]]
+  ['桶大小策略_0',['桶大小策略',['../group___hash_table.html#bucket_size_strategy',1,'']]]
 ];

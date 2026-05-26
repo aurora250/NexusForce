@@ -30,6 +30,8 @@ namespace {
         li.HighPart = ft.dwHighDateTime;
         return li.QuadPart / 10000;
     }
+
+    const auto pcount = sysinfo::instance().get_system_info().processor_numbers;
 } // namespace
 #endif
 
@@ -224,7 +226,6 @@ bool affinity(uint64_t& affi) noexcept {
 }
 
 bool bind_core(const uint32_t core_index) noexcept {
-    thread_local auto pcount = sysinfo::instance().get_system_info().processor_numbers;
     if (core_index >= pcount) {
         return false;
     }

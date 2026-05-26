@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structdns__client_1_1pending__entry" kind="struct" language="C++" prot="private">
+    <compoundname>dns_client::pending_entry</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structdns__client_1_1pending__entry_1ab5f9e15dbdbd9d0f7fcb7ce21e7900a4" prot="public" static="no" mutable="no">
+        <type>_NEFORCE <ref refid="classpromise" kindref="compound">promise</ref>&lt; <ref refid="structdns__query__result" kindref="compound">dns_query_result</ref> &gt;</type>
+        <definition>_NEFORCE promise&lt;dns_query_result&gt; dns_client::pending_entry::promise</definition>
+        <argsstring></argsstring>
+        <name>promise</name>
+        <qualifiedname>dns_client::pending_entry::promise</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="60" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structdns__client_1_1pending__entry_1a52907348e74223ab9c5e9d22c15ae009" prot="public" static="no" mutable="no">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>byte_vector dns_client::pending_entry::query_data</definition>
+        <argsstring></argsstring>
+        <name>query_data</name>
+        <qualifiedname>dns_client::pending_entry::query_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="61" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structdns__client_1_1pending__entry_1ad29498d42c2bb3cd5234f8338f53acb5" prot="public" static="no" mutable="no">
+        <type><ref refid="structsteady__clock_1aaf25d203f1455c8c7010a6681de52dc5" kindref="member">steady_clock::time_point</ref></type>
+        <definition>steady_clock::time_point dns_client::pending_entry::created_at</definition>
+        <argsstring></argsstring>
+        <name>created_at</name>
+        <qualifiedname>dns_client::pending_entry::created_at</qualifiedname>
+        <initializer>{<ref refid="structsteady__clock_1a1f01ac9bf1927c8b15b205f69a90c29d" kindref="member">steady_clock::now</ref>()}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="62" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="62" bodyend="62"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>dns_client::pending_entry</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>promise</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>query_data</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>created_at</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>icollector&lt; T &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="2">
+        <label>promise&lt; dns_query_result &gt;</label>
+        <link refid="classpromise"/>
+      </node>
+      <node id="6">
+        <label>time_point&lt; steady_clock &gt;</label>
+        <link refid="structtime__point"/>
+      </node>
+      <node id="3">
+        <label>vector&lt; byte_t &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" line="59" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/dns/dns_client.hpp" bodystart="59" bodyend="63"/>
+    <listofallmembers>
+      <member refid="structdns__client_1_1pending__entry_1ad29498d42c2bb3cd5234f8338f53acb5" prot="public" virt="non-virtual"><scope>dns_client::pending_entry</scope><name>created_at</name></member>
+      <member refid="structdns__client_1_1pending__entry_1ab5f9e15dbdbd9d0f7fcb7ce21e7900a4" prot="public" virt="non-virtual"><scope>dns_client::pending_entry</scope><name>promise</name></member>
+      <member refid="structdns__client_1_1pending__entry_1a52907348e74223ab9c5e9d22c15ae009" prot="public" virt="non-virtual"><scope>dns_client::pending_entry</scope><name>query_data</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

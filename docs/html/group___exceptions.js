@@ -40,6 +40,9 @@ var group___exceptions =
     [ "locale_exception", "structlocale__exception.html", null ],
     [ "pipe_exception", "structpipe__exception.html", null ],
     [ "process_exception", "structprocess__exception.html", null ],
+    [ "registry_key_exception", "structregistry__key__exception.html", [
+      [ "registry_key_exception", "structregistry__key__exception.html#afd26cee9d334eaf6dc1eb2c1cd8e6e9d", null ]
+    ] ],
     [ "share_memory_exception", "structshare__memory__exception.html", null ],
     [ "anycast_exception", "structanycast__exception.html", null ],
     [ "optional_exception", "structoptional__exception.html", null ],

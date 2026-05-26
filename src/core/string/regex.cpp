@@ -73,48 +73,48 @@ string match_result::format(const string_view fmt) const {
 
 void regex::compile(const string& pattern, const uint32_t options) {
     int error_code = 0;
-    PCRE2_SIZE error_offset = 0;
+    ::PCRE2_SIZE error_offset = 0;
 
-    code_.reset(pcre2_compile(reinterpret_cast<PCRE2_SPTR>(pattern.data()), pattern.length(), options, &error_code,
-                              &error_offset, nullptr));
+    code_.reset(::pcre2_compile(reinterpret_cast<::PCRE2_SPTR>(pattern.data()), pattern.length(), options, &error_code,
+                                &error_offset, nullptr));
 
     if (!code_) {
         char error_message[256];
-        pcre2_get_error_message(error_code, reinterpret_cast<PCRE2_UCHAR*>(error_message), sizeof(error_message));
+        ::pcre2_get_error_message(error_code, reinterpret_cast<::PCRE2_UCHAR*>(error_message), sizeof(error_message));
         NEFORCE_THROW_EXCEPTION(regex_exception(error_message));
     }
 
-    pcre2_pattern_info(code_.get(), PCRE2_INFO_CAPTURECOUNT, &capture_count_);
+    ::pcre2_pattern_info(code_.get(), PCRE2_INFO_CAPTURECOUNT, &capture_count_);
 
     pattern_ = pattern;
     options_ = options;
 }
 
-match_result regex::do_match(const PCRE2_SPTR subject, const size_t length, const size_t start_offset,
+match_result regex::do_match(const ::PCRE2_SPTR subject, const size_t length, const size_t start_offset,
                              const uint32_t options, const string& subject_str) const {
     if (!code_) {
         NEFORCE_THROW_EXCEPTION(regex_exception("Uninitialized regex object"));
     }
 
-    const unique_ptr<pcre2_match_data, pcre2_match_data_deleter> match_data(
-            pcre2_match_data_create_from_pattern(code_.get(), nullptr));
+    const unique_ptr<::pcre2_match_data, pcre2_match_data_deleter> match_data(
+            ::pcre2_match_data_create_from_pattern(code_.get(), nullptr));
 
     if (!match_data) {
         NEFORCE_THROW_EXCEPTION(regex_exception("Failed to create match data"));
     }
 
-    const int rc = pcre2_match(code_.get(), subject, length, start_offset, options, match_data.get(), nullptr);
+    const int rc = ::pcre2_match(code_.get(), subject, length, start_offset, options, match_data.get(), nullptr);
 
     if (rc < 0) {
         if (rc == PCRE2_ERROR_NOMATCH) {
             return {};
         }
         char error_message[256];
-        pcre2_get_error_message(rc, reinterpret_cast<PCRE2_UCHAR*>(error_message), sizeof(error_message));
+        ::pcre2_get_error_message(rc, reinterpret_cast<::PCRE2_UCHAR*>(error_message), sizeof(error_message));
         NEFORCE_THROW_EXCEPTION(regex_exception(error_message));
     }
 
-    const PCRE2_SIZE* ovector = pcre2_get_ovector_pointer(match_data.get());
+    const ::PCRE2_SIZE* ovector = ::pcre2_get_ovector_pointer(match_data.get());
 
     vector<string> groups;
     vector<pair<size_t, size_t>> group_positions;
@@ -158,21 +158,23 @@ regex& regex::operator=(regex&& other) noexcept {
 }
 
 match_result regex::do_match(const string& str) const {
-    return do_match(reinterpret_cast<PCRE2_SPTR>(str.data()), str.length(), 0, PCRE2_ANCHORED | PCRE2_ENDANCHORED, str);
+    return do_match(reinterpret_cast<::PCRE2_SPTR>(str.data()), str.length(), 0, PCRE2_ANCHORED | PCRE2_ENDANCHORED,
+                    str);
 }
 
 bool regex::match(const string& str) const {
-    return do_match(reinterpret_cast<PCRE2_SPTR>(str.data()), str.length(), 0, PCRE2_ANCHORED | PCRE2_ENDANCHORED, str)
+    return do_match(reinterpret_cast<::PCRE2_SPTR>(str.data()), str.length(), 0, PCRE2_ANCHORED | PCRE2_ENDANCHORED,
+                    str)
             .matched();
 }
 
 match_result regex::search(const string& str, const size_t pos) const {
-    return do_match(reinterpret_cast<PCRE2_SPTR>(str.data()), str.length(), pos, 0, str);
+    return do_match(reinterpret_cast<::PCRE2_SPTR>(str.data()), str.length(), pos, 0, str);
 }
 
 vector<match_result> regex::find_all(const string& str) const {
     vector<match_result> results;
-    const auto* subject = reinterpret_cast<PCRE2_SPTR>(str.data());
+    const auto* subject = reinterpret_cast<::PCRE2_SPTR>(str.data());
     const size_t length = str.length();
     size_t start_offset = 0;
 
@@ -304,8 +306,8 @@ void regex_iterator::move_previous() {
 void regex_iterator::find_from_position(size_t pos) const {
     build_cache();
 
-    auto it = find_if(cached_matches_.begin(), cached_matches_.end(),
-                      [pos](const match_result& m) { return m.position() >= pos; });
+    const auto it = find_if(cached_matches_.begin(), cached_matches_.end(),
+                            [pos](const match_result& m) { return m.position() >= pos; });
 
     if (it != cached_matches_.end()) {
         current_index_ = distance(cached_matches_.begin(), it);
@@ -344,7 +346,7 @@ subject_(move(str)) {
     }
 }
 
-regex_iterator regex_iterator::from_index(const regex* re, const string& str, ptrdiff_t index) {
+regex_iterator regex_iterator::from_index(const regex* re, const string& str, const ptrdiff_t index) {
     regex_iterator it;
     it.regex_ = re;
     it.subject_ = str;
@@ -395,8 +397,8 @@ void regex_token_iterator::find_next() {
         switch (state_) {
             case state::BEFORE_FIRST: {
                 if (match_iterator_ != end_iterator_) {
-                    size_t start = 0;
-                    size_t end = match_iterator_->position();
+                    constexpr size_t start = 0;
+                    const size_t end = match_iterator_->position();
                     current_ = (start < end) ? subject_.view(start, end - start) : "";
                     last_pos_ = match_iterator_->position() + match_iterator_->length();
                     ++match_iterator_;
@@ -409,8 +411,8 @@ void regex_token_iterator::find_next() {
             }
             case state::BETWEEN_MATCHES: {
                 if (match_iterator_ != end_iterator_) {
-                    size_t start = last_pos_;
-                    size_t end = match_iterator_->position();
+                    const size_t start = last_pos_;
+                    const size_t end = match_iterator_->position();
                     current_ = (start < end) ? subject_.view(start, end - start) : "";
                     last_pos_ = match_iterator_->position() + match_iterator_->length();
                     ++match_iterator_;

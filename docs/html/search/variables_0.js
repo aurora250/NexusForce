@@ -28,9 +28,10 @@ var searchData=
   ['arcount_25',['arcount',['../structdns__header.html#a7b840ee6675cd6935d77f2c89a6f263e',1,'dns_header']]],
   ['assignments_26',['assignments',['../structsql__builder_1_1update__data.html#a46b571901367cf506d62b4348f616780',1,'sql_builder::update_data']]],
   ['author_27',['author',['../structplugin__info.html#ac9c48c117b3400890a4e83dfd9fc31cd',1,'plugin_info']]],
-  ['authorities_28',['authorities',['../structdns__query__result.html#a48baecffcfa14836de44df9058039fc4',1,'dns_query_result']]],
-  ['auto_5freconnect_5f_29',['auto_reconnect_',['../classtcp__client__base.html#acf721307adb69e3f6a6c9d18f295170e',1,'tcp_client_base']]],
-  ['available_5fpage_5ffile_30',['available_page_file',['../structsysinfo_1_1memory__info.html#a4c5e4ce8d790deca09645139ea1710ff',1,'sysinfo::memory_info']]],
-  ['available_5fphysical_31',['available_physical',['../structsysinfo_1_1memory__info.html#a21a729921aebe562a2cf6ff03b02fe35',1,'sysinfo::memory_info']]],
-  ['available_5fvirtual_32',['available_virtual',['../structsysinfo_1_1memory__info.html#a1092f6344f1cb17952196fce0f494ca2',1,'sysinfo::memory_info']]]
+  ['authoritative_28',['authoritative',['../structdns__query__result.html#a89e3ff0d5b84bf1481b0a64788d6af35',1,'dns_query_result']]],
+  ['authorities_29',['authorities',['../structdns__query__result.html#a48baecffcfa14836de44df9058039fc4',1,'dns_query_result']]],
+  ['auto_5freconnect_5f_30',['auto_reconnect_',['../classtcp__client__base.html#acf721307adb69e3f6a6c9d18f295170e',1,'tcp_client_base']]],
+  ['available_5fpage_5ffile_31',['available_page_file',['../structsysinfo_1_1memory__info.html#a4c5e4ce8d790deca09645139ea1710ff',1,'sysinfo::memory_info']]],
+  ['available_5fphysical_32',['available_physical',['../structsysinfo_1_1memory__info.html#a21a729921aebe562a2cf6ff03b02fe35',1,'sysinfo::memory_info']]],
+  ['available_5fvirtual_33',['available_virtual',['../structsysinfo_1_1memory__info.html#a1092f6344f1cb17952196fce0f494ca2',1,'sysinfo::memory_info']]]
 ];

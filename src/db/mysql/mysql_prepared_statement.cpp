@@ -57,7 +57,7 @@ param_buffers_(move(other.param_buffers_)) {
 }
 
 mysql_prepared_statement& mysql_prepared_statement::operator=(mysql_prepared_statement&& other) noexcept {
-    if (_NEFORCE addressof(other) == this) {
+    if (addressof(other) == this) {
         return *this;
     }
 
