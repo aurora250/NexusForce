@@ -61,14 +61,14 @@ socket_base& socket_base::operator=(socket_base&& other) noexcept {
     return *this;
 }
 
-void socket_base::open(const int family, const int type, const int protocol) {
-    if (family != AF_INET && family != AF_INET6) {
+void socket_base::open(const family f, const type t, const protocol p) {
+    if (f != family::INET4 && f != family::INET6) {
         NEFORCE_THROW_EXCEPTION(value_exception("Invalid address family for socket"));
     }
 
     close();
 
-    fd_ = ::socket(family, type, protocol);
+    fd_ = ::socket(static_cast<int>(f), static_cast<int>(t), static_cast<int>(p));
     if (!is_open()) {
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to create socket"));
     }
@@ -90,13 +90,13 @@ bool socket_base::close() noexcept {
     return success;
 }
 
-bool socket_base::try_open(const int family, const int type, const int protocol) noexcept {
-    if (family != AF_INET && family != AF_INET6) {
+bool socket_base::try_open(const family f, const type t, const protocol p) noexcept {
+    if (f != family::INET4 && f != family::INET6) {
         return false;
     }
 
     close();
-    fd_ = ::socket(family, type, protocol);
+    fd_ = ::socket(static_cast<int>(f), static_cast<int>(t), static_cast<int>(p));
     return is_open();
 }
 
@@ -235,7 +235,7 @@ bool socket_base::set_send_timeout(const milliseconds timeout) noexcept {
     const auto ms = static_cast<::DWORD>(timeout.count());
     return set_option(SOL_SOCKET, SO_SNDTIMEO, &ms, sizeof(ms));
 #else
-    struct ::timeval tv;
+    ::timeval tv;
     tv.tv_sec = timeout.count() / 1000;
     tv.tv_usec = (timeout.count() % 1000) * 1000;
     return set_option(SOL_SOCKET, SO_SNDTIMEO, &tv, sizeof(tv));
@@ -251,7 +251,7 @@ bool socket_base::set_receive_timeout(const milliseconds timeout) noexcept {
     const auto ms = static_cast<::DWORD>(timeout.count());
     return set_option(SOL_SOCKET, SO_RCVTIMEO, &ms, sizeof(ms));
 #else
-    struct ::timeval tv;
+    ::timeval tv;
     tv.tv_sec = timeout.count() / 1000;
     tv.tv_usec = (timeout.count() % 1000) * 1000;
     return set_option(SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));

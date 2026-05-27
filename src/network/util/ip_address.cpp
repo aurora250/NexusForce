@@ -47,17 +47,17 @@ namespace {
 
     struct family_visitor {
         template <typename T>
-        enable_if_t<is_same_v<T, ::sockaddr_in>, int> operator()(const T& value) noexcept {
-            return value.sin_family;
+        enable_if_t<is_same_v<T, ::sockaddr_in>, ip_address::family> operator()(const T& value) noexcept {
+            return static_cast<ip_address::family>(value.sin_family);
         }
         template <typename T>
-        enable_if_t<is_same_v<T, ::sockaddr_in6>, int> operator()(const T& value) noexcept {
-            return value.sin6_family;
+        enable_if_t<is_same_v<T, ::sockaddr_in6>, ip_address::family> operator()(const T& value) noexcept {
+            return static_cast<ip_address::family>(value.sin6_family);
         }
         template <typename T>
-        enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, int>
+        enable_if_t<!is_same_v<T, ::sockaddr_in> && !is_same_v<T, ::sockaddr_in6>, ip_address::family>
         operator()(const T& /*unused*/) noexcept {
-            return AF_UNSPEC;
+            return ip_address::family::UNDEF;
         }
     };
 
@@ -134,15 +134,16 @@ namespace {
 } // namespace
 
 
-ip_address ip_address::any(const ports port, const int family) noexcept {
+ip_address ip_address::any(const ports port, const family f) noexcept {
     ip_address result;
-    if (family == AF_INET6) {
+    if (f == family::INET6) {
         ::sockaddr_in6 a6{};
         a6.sin6_family = AF_INET6;
         a6.sin6_addr = ::in6addr_any;
         a6.sin6_port = endian::host_to_network(static_cast<uint16_t>(port));
         result.addr_ = a6;
-    } else if (family == AF_INET) {
+    }
+    if (f == family::INET4) {
         ::sockaddr_in a4{};
         a4.sin_family = AF_INET;
         a4.sin_addr.s_addr = INADDR_ANY;
@@ -152,15 +153,16 @@ ip_address ip_address::any(const ports port, const int family) noexcept {
     return result;
 }
 
-ip_address ip_address::loopback(const ports port, const int family) noexcept {
+ip_address ip_address::loopback(const ports port, const family f) noexcept {
     ip_address result;
-    if (family == AF_INET6) {
+    if (f == family::INET6) {
         ::sockaddr_in6 a6{};
         a6.sin6_family = AF_INET6;
         a6.sin6_addr = ::in6addr_loopback;
         a6.sin6_port = endian::host_to_network(static_cast<uint16_t>(port));
         result.addr_ = a6;
-    } else if (family == AF_INET) {
+    }
+    if (f == family::INET4) {
         ::sockaddr_in a4{};
         a4.sin_family = AF_INET;
         a4.sin_addr.s_addr = endian::host_to_network<uint32_t>(INADDR_LOOPBACK);
@@ -176,7 +178,7 @@ const ::sockaddr* ip_address::data() const noexcept { return addr_.visit(const_d
 
 int ip_address::size() const noexcept { return addr_.visit(size_visitor{}); }
 
-int ip_address::family() const noexcept { return addr_.visit(family_visitor{}); }
+ip_address::family ip_address::address_family() const noexcept { return addr_.visit(family_visitor{}); }
 
 ports ip_address::port() const noexcept { return ports{addr_.visit(port_visitor{})}; }
 
@@ -212,7 +214,7 @@ bool ip_address::operator==(const ip_address& other) const {
         return false;
     }
 
-    if (family() != other.family()) {
+    if (address_family() != other.address_family()) {
         return false;
     }
     if (port() != other.port()) {

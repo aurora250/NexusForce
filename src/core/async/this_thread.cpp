@@ -13,8 +13,8 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
 namespace {
+#ifdef NEFORCE_PLATFORM_WINDOWS
     int64_t qpc_frequency() noexcept {
         static const int64_t freq = []() {
             ::LARGE_INTEGER f;
@@ -30,10 +30,10 @@ namespace {
         li.HighPart = ft.dwHighDateTime;
         return li.QuadPart / 10000;
     }
+#endif
 
     const auto pcount = sysinfo::instance().get_system_info().processor_numbers;
 } // namespace
-#endif
 
 
 NEFORCE_BEGIN_THIS_THREAD__
@@ -95,7 +95,7 @@ void sleep_for_ms(const uint32_t ms, const bool busy_wait) noexcept {
             const auto half = remaining.count() / 2;
             if (half > 0) {
                 ::timespec ts;
-                ts.tv_sec = static_cast<time_t>(half / 1000);
+                ts.tv_sec = static_cast<::time_t>(half / 1000);
                 ts.tv_nsec = static_cast<long>((half % 1000) * 1000000L);
                 ::nanosleep(&ts, nullptr);
             }
@@ -211,7 +211,7 @@ bool affinity(uint64_t& affi) noexcept {
 #else
     ::cpu_set_t cpuset{};
     CPU_ZERO(&cpuset);
-    if (::pthread_getaffinity_np(pthread_self(), sizeof(cpu_set_t), &cpuset) != 0) {
+    if (::pthread_getaffinity_np(pthread_self(), sizeof(::cpu_set_t), &cpuset) != 0) {
         return false;
     }
     uint64_t mask = 0;
@@ -244,7 +244,7 @@ bool cpu_time(cpu_times& times) noexcept {
     return true;
 #else
     ::timespec ts;
-    if (clock_gettime(CLOCK_THREAD_CPUTIME_ID, &ts) != 0) {
+    if (::clock_gettime(CLOCK_THREAD_CPUTIME_ID, &ts) != 0) {
         return false;
     }
     times.user = ts.tv_sec * 1000 + ts.tv_nsec / 1000000;

@@ -13,7 +13,7 @@ namespace {
             result += "host=" + config.host + " ";
         }
         if (config.port) {
-            result += "port=" + to_string(config.port) + " ";
+            result += "port=" + to_string(config.port.value()) + " ";
         }
         if (!config.database.empty()) {
             result += "dbname=" + config.database + " ";
@@ -40,9 +40,10 @@ bool pgsql_connect::connect(const db_config& config) {
     link_ = ::PQconnectdb(conn_str.data());
 
     if (link_ == nullptr || ::PQstatus(link_) != ::CONNECTION_OK) {
-        last_error_ = ::PQerrorMessage(link_);
-        last_errno_ = 1;
+        string last_error = ::PQerrorMessage(link_);
         close();
+        last_error_ = move(last_error);
+        last_errno_ = 1;
         return false;
     }
 
@@ -60,8 +61,6 @@ void pgsql_connect::close() {
         ::PQfinish(link_);
         link_ = nullptr;
     }
-    last_error_.clear();
-    last_errno_ = 0;
 }
 
 bool pgsql_connect::set_character_set(const string& encoding) const {
@@ -146,6 +145,58 @@ unique_ptr<idb_prepared_statement> pgsql_connect::prepare_statement(const string
         return nullptr;
     }
     return {stmt};
+}
+
+size_t pgsql_connect::batch_insert(const string& table, const vector<string>& columns,
+                                   const vector<vector<string>>& rows) {
+    if (rows.empty() || columns.empty()) {
+        return 0;
+    }
+
+    string sql;
+    sql.reserve(table.size() + columns.size() * 32 + rows.size() * columns.size() * 32);
+    sql += "INSERT INTO " + table + " (";
+    for (size_t i = 0; i < columns.size(); ++i) {
+        if (i > 0) {
+            sql += ", ";
+        }
+        sql += columns[i];
+    }
+    sql += ") VALUES ";
+
+    size_t param_idx = 1;
+    for (size_t r = 0; r < rows.size(); ++r) {
+        if (r > 0) {
+            sql += ", ";
+        }
+        sql += "(";
+        for (size_t c = 0; c < columns.size(); ++c) {
+            if (c > 0) {
+                sql += ", ";
+            }
+            sql += "$" + to_string(param_idx++);
+        }
+        sql += ")";
+    }
+
+    auto stmt = prepare_statement(sql);
+    if (stmt == nullptr) {
+        return 0;
+    }
+
+    param_idx = 1;
+    for (const auto& row: rows) {
+        for (const auto& val: row) {
+            stmt->bind_param(param_idx++, val);
+        }
+    }
+
+    return stmt->execute() ? rows.size() : 0;
+}
+
+bool pgsql_connect::table_exists(const string& table) const {
+    auto result = query("SELECT 1 FROM information_schema.tables WHERE table_name = '" + table + "'");
+    return result != nullptr && result->next();
 }
 
 idb_connect* pgsql_factory::create_connect() {

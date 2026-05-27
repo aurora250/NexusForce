@@ -1,6 +1,6 @@
 #include <NeForce/db/sqlite/sqlite_prepared_statement.hpp>
 #ifdef NEFORCE_SUPPORT_SQLITE3
-#    include <NeForce/db/sqlite/sqlite_prepared_result.hpp>
+#    include <NeForce/db/sqlite/sqlite_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 void sqlite_prepared_statement::clear_bindings() {
@@ -171,13 +171,13 @@ bool sqlite_prepared_statement::execute() {
     return true;
 }
 
-unique_ptr<idb_prepared_result> sqlite_prepared_statement::execute_query() {
+unique_ptr<idb_tb_result> sqlite_prepared_statement::execute_query() {
     if (!prepared_ || stmt_ == nullptr) {
         last_error_ = "Statement not prepared";
         return nullptr;
     }
     ::sqlite3_reset(stmt_);
-    return make_unique<sqlite_prepared_result>(stmt_);
+    return make_unique<sqlite_result>(stmt_, sqlite_cleanup_action::reset);
 }
 
 NEFORCE_END_NAMESPACE__

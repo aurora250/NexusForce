@@ -61,8 +61,9 @@ system_clock::time_point system_clock::now() noexcept {
         ::timespec ts{};
         ::clock_gettime(CLOCK_REALTIME, &ts);
 
-        using rep = system_clock::rep;
-        const rep total_nanos = static_cast<rep>(ts.tv_sec) * 1'000'000'000LL + static_cast<rep>(ts.tv_nsec);
+        using clock_rep = system_clock::rep;
+        const clock_rep total_nanos =
+                static_cast<clock_rep>(ts.tv_sec) * 1'000'000'000LL + static_cast<clock_rep>(ts.tv_nsec);
 #endif
         return time_point(duration(total_nanos));
     } catch (...) {
@@ -91,8 +92,9 @@ steady_clock::time_point steady_clock::now() noexcept {
         ::timespec ts{};
         ::clock_gettime(CLOCK_MONOTONIC, &ts);
 
-        using rep = steady_clock::rep;
-        const rep total_nanos = static_cast<rep>(ts.tv_sec) * 1'000'000'000LL + static_cast<rep>(ts.tv_nsec);
+        using clock_rep = steady_clock::rep;
+        const clock_rep total_nanos =
+                static_cast<clock_rep>(ts.tv_sec) * 1'000'000'000LL + static_cast<clock_rep>(ts.tv_nsec);
 #endif
         return time_point(duration(total_nanos));
     } catch (...) {

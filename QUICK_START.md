@@ -337,6 +337,229 @@ FTP_HOST=ftp.example.com FTP_USER=myuser FTP_PASS=mypass ./build/bin/NexusForceF
 
 ---
 
+---
+
+## 数据库模块
+
+### 1. SQL Builder（sql_builder）
+
+演示 sql_builder 编程式 SQL 构建：SELECT/INSERT/UPDATE/DELETE、聚合函数、分页、子查询、多表 JOIN、复杂 WHERE 条件。
+
+```bash
+./build/bin/NexusForceSqlBuilderExample
+# SELECT: SELECT id, name, email, COUNT(id) AS total FROM users AS u ...
+# INSERT: INSERT INTO users (name, email, age) VALUES (?, ?, ?)
+# UPDATE: UPDATE users SET name = 'NewName', age = 25 WHERE id = '1'
+# DELETE: DELETE FROM users WHERE age < '18'
+# 聚合:   SELECT SUM(amount) AS total_amount, AVG(amount) AS avg_amount, ...
+# 分页:   SELECT * FROM users ORDER BY id ASC LIMIT 10 OFFSET 20
+# 子查询: SELECT (SELECT MAX(amount) FROM orders WHERE ...) AS max_order FROM users
+# 多JOIN: SELECT * FROM t1 INNER JOIN t2 ON ... LEFT JOIN t3 ON ... RIGHT JOIN t4 ON ...
+# 条件:   SELECT * FROM users WHERE status = 'active' AND age BETWEEN 18 AND 65 AND ...
+```
+
+---
+
+### 2. DB Config（db_config）
+
+演示 db_config 的多后端连接配置：SQLite、MySQL、PostgreSQL、Redis，以及配置的复制与赋值。
+
+```bash
+./build/bin/NexusForceDbConfigExample
+# SQLite: database=example.db
+# MySQL: host=192.168.1.100, database=mydb, user=admin, charset=utf8mb4
+# PgSQL: host=192.168.1.100, database=mydb, user=postgres
+# Redis: host=192.168.1.100, database=0
+# 复制: database=example.db
+# 赋值: database=example.db
+```
+
+---
+
+### 3. CRUD + 事务（db_crud）
+
+演示基于 idb_tb_connect 接口的完整数据库操作：建表、插入、查询、更新、删除、表存在性检查、事务 Begin/Commit/Rollback。
+
+```bash
+./build/bin/NexusForceDbCrudExample
+# 已连接到 SQLite 内存数据库
+# users 表已创建
+# 已插入 3 行数据
+#
+# === 查询所有用户 ===
+# 列数: 5, 列名: id, name, age, email, salary
+#   Row: id=1, name=Alice, age=30, email=alice@test.com, salary=75000.5
+#   Row: id=2, name=Bob, age=25, email=bob@test.com, salary=62000.0
+#   Row: id=3, name=Charlie, age=35, email=charlie@test.com, salary=88000.0
+#
+# === 更新 Alice 的薪资 ===
+# Alice 更新后: age=31, salary=80000.0
+#
+# === 删除 Charlie ===
+# 删除后剩余行数: 2
+#
+# === table_exists ===
+# users 表存在: true
+# nonexistent 表存在: false
+#
+# === 事务：Commit ===
+# Commit 后查到: name=TxUser
+#
+# === 事务：Rollback ===
+# Rollback 后查到: false (预期 false)
+```
+
+---
+
+### 4. Transaction Guard（transaction_guard）
+
+演示 RAII 事务管理模式：构造时自动 BEGIN、commit() 显式提交、析构时自动 ROLLBACK、make_transaction 工厂函数。
+
+```bash
+./build/bin/NexusForceTransactionGuardExample
+# === 转账成功（Commit） ===
+# 事务已提交
+#   Alice: balance=800.0
+#   Bob: balance=700.0
+#
+# === 转账失败（自动回滚） ===
+# 未调用 commit，离开作用域时将自动 rollback
+#   Alice: balance=800.0 (应为转账前的值)
+#   Bob: balance=700.0 (应为转账前的值)
+#
+# === make_transaction 工厂函数 ===
+# 使用工厂函数创建事务并提交
+```
+
+---
+
+### 5. Prepared Statement（prepared_statement）
+
+演示预处理语句的参数化查询：参数绑定（字符串/整数/浮点）、执行型与查询型语句、参数数量获取。
+
+```bash
+./build/bin/NexusForcePreparedStatementExample
+# 参数数量: 3
+# 插入成功: Alice
+# 插入成功: Bob
+# 插入成功: Charlie
+#
+# === 年龄 > 20 的用户 ===
+#   name=Alice, age=30, email=alice@test.com
+#   name=Bob, age=25, email=bob@test.com
+#   name=Charlie, age=35, email=charlie@test.com
+```
+
+---
+
+### 6. Batch Insert（batch_insert）
+
+演示 batch_insert 批量数据写入：单次调用插入多行、自动参数化、空数据边界处理。
+
+```bash
+./build/bin/NexusForceBatchInsertExample
+# === 批量插入 ===
+# 批量插入了 5 行
+#
+# === 查询结果 ===
+#   Laptop | 5999.00 | Electronics
+#   Mouse | 299.00 | Electronics
+#   Keyboard | 899.00 | Electronics
+#   Monitor | 2999.00 | Electronics
+#   Desk | 1599.00 | Furniture
+#
+# === 边界情况 ===
+# 空数据返回: 0 (预期 0)
+```
+
+---
+
+### 7. Connection Pool（database_pool）
+
+演示 database_pool 连接池管理：池配置、获取/归还连接、RAII 自动归还、状态查询、优雅停止。
+
+```bash
+./build/bin/NexusForceConnectionPoolExample
+# 连接池已创建
+#   运行状态: true
+#   总连接数: 2
+#   空闲连接数: 2
+#
+# === 获取连接执行操作 ===
+# 查询结果: pool_example
+# 连接已归还到池中
+#
+# === 同时获取多个连接 ===
+# 同时持有 2 个连接
+#
+# 连接池已停止
+#   运行状态: false
+#   总连接数: 0
+```
+
+---
+
+### 8. Result Metadata（result_metadata）
+
+演示结果集元数据与类型安全访问：列名、列类型、类型安全 getter（get_int32/get_float64）、NULL 检测。
+
+```bash
+./build/bin/NexusForceResultMetadataExample
+# 列数: 5
+# 列元数据:
+#   列[0]: name=id, type=INTEGER, ...
+#   列[1]: name=name, type=TEXT, ...
+#   ...
+#
+# === 类型安全访问 ===
+#   get(1)        → Alice
+#   get_int32(2)  → 30
+#   get_float64(3) → 75000.0
+#   get(4)        → Engineering
+```
+
+---
+
+### 9. Redis（redis_example）
+
+演示 Redis 键值操作：SET/GET/EXISTS/DEL、SETEX 过期、Hash（HSET/HGETALL）、List（LPUSH/LRANGE）、Set（SADD/SMEMBERS）、事务（MULTI/EXEC）。
+
+```bash
+./build/bin/NexusForceRedisExample
+# === SET/GET ===
+# GET greeting → Hello from NexusForce!
+# SETEX temp_key (600s TTL)
+#
+# === EXISTS / DEL ===
+# EXISTS del_test: true
+# EXISTS del_test (after DEL): false
+#
+# === Hash 操作 ===
+# HGETALL user:1:
+#   name → Alice
+#   age → 30
+#   email → alice@test.com
+#
+# === List 操作 ===
+# LRANGE tasks 0 -1:
+#   [0] task1
+#   [1] task2
+#   [2] task3
+#
+# === Set 操作 ===
+# SMEMBERS tags:
+#   - cpp
+#   - database
+#   - network
+#
+# === Redis 事务 ===
+# GET tx_key → tx_value
+```
+
+**构建选项：** 需要启用示例构建 `-DNEXUSFORCE_BUILD_EXAMPLES=ON`，各数据库后端通过 `-DNEXUSFORCE_SUPPORT_SQLITE3=ON`、`-DNEXUSFORCE_SUPPORT_HIREDIS=ON` 等选项控制。
+
+---
+
 ## 文件路径说明
 
 | 示例 | 源文件 |
@@ -352,3 +575,12 @@ FTP_HOST=ftp.example.com FTP_USER=myuser FTP_PASS=mypass ./build/bin/NexusForceF
 | ICMP Ping | `examples/network/ping.cpp` |
 | SMTP Mail | `examples/network/smtp_mail.cpp` |
 | FTP Client | `examples/network/ftp_client.cpp` |
+| SQL Builder | `examples/db/sql_builder_example.cpp` |
+| DB Config | `examples/db/db_config_example.cpp` |
+| CRUD + 事务 | `examples/db/db_crud_example.cpp` |
+| Transaction Guard | `examples/db/transaction_guard_example.cpp` |
+| Prepared Statement | `examples/db/prepared_statement_example.cpp` |
+| Batch Insert | `examples/db/batch_insert_example.cpp` |
+| Connection Pool | `examples/db/connection_pool_example.cpp` |
+| Result Metadata | `examples/db/result_metadata_example.cpp` |
+| Redis | `examples/db/redis_example.cpp` |

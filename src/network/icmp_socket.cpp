@@ -90,11 +90,11 @@ bool icmp_socket::receive_reply(const milliseconds timeout, const uint16_t expec
     bool received = false;
 
     while (remaining.count() > 0 && !received) {
-        fd_set read_fds;
+        ::fd_set read_fds;
         FD_ZERO(&read_fds);
         FD_SET(fd_, &read_fds);
 
-        timeval tv{};
+        ::timeval tv{};
         tv.tv_sec = static_cast<long>(remaining.count() / 1000);
         tv.tv_usec = static_cast<long>((remaining.count() % 1000) * 1000);
 

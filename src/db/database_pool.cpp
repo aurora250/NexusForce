@@ -116,13 +116,7 @@ void database_pool::stop() {
 
 idb_connect* database_pool::try_create_connect() noexcept {
     try {
-        auto* conn = factory_->create_connect();
-        if (conn != nullptr) {
-            return conn;
-        }
-        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
-        delete conn;
-        return nullptr;
+        return factory_->create_connect();
     } catch (...) {
         return nullptr;
     }

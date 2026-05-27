@@ -10,11 +10,11 @@ using namespace neforce;
 namespace {
     bool network_available() {
         udp_socket sock;
-        if (!sock.try_open(AF_INET, SOCK_DGRAM, 0)) {
+        if (!sock.try_open(socket_base::family::INET4, socket_base::type::DGRAM)) {
             return false;
         }
         sock.set_reuse_address(true);
-        auto addr = ip_address::any(ports(0u), AF_INET);
+        auto addr = ip_address::any();
         sock.bind(addr);
         auto local = sock.local_endpoint();
         sock.close();
@@ -47,7 +47,7 @@ TEST_F(TcpEchoIntegration, BasicEcho) {
     }
 
     tcp_acceptor acceptor;
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     acceptor.open(addr);
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
@@ -55,7 +55,7 @@ TEST_F(TcpEchoIntegration, BasicEcho) {
     thread server_thread([&]() { run_echo_server(acceptor); });
 
     tcp_socket client;
-    client.open(AF_INET);
+    client.open();
     ASSERT_TRUE(client.connect(*bound, milliseconds(3000)));
 
     const char* msg = "Hello TCP Echo!";
@@ -78,7 +78,7 @@ TEST_F(TcpEchoIntegration, SendAllReceiveAll) {
     }
 
     tcp_acceptor acceptor;
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     acceptor.open(addr);
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
@@ -93,7 +93,7 @@ TEST_F(TcpEchoIntegration, SendAllReceiveAll) {
     });
 
     tcp_socket client;
-    client.open(AF_INET);
+    client.open();
     ASSERT_TRUE(client.connect(*bound, milliseconds(3000)));
 
     vector<char> payload(65536);
@@ -117,9 +117,9 @@ TEST_F(TcpEchoIntegration, ConnectToRefusedPort) {
     }
 
     tcp_socket client;
-    client.open(AF_INET);
+    client.open();
 
-    auto addr = ip_address::loopback(ports(19999u), AF_INET);
+    auto addr = ip_address::loopback(ports(19999u));
     bool connected = false;
     try {
         connected = client.connect(addr, milliseconds(500));
@@ -136,7 +136,7 @@ TEST_F(TcpEchoIntegration, ConnectToUnreachableHost) {
     }
 
     tcp_socket client;
-    client.open(AF_INET);
+    client.open();
 
     auto addr = ip_address::parse("192.0.2.1", ports(12345u));
     ASSERT_TRUE(addr.has_value());
@@ -163,7 +163,7 @@ TEST_F(TcpAcceptorIntegration, OpenAndBind) {
     }
 
     tcp_acceptor acceptor;
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     EXPECT_NO_THROW(acceptor.open(addr));
 
     auto local = acceptor.local_endpoint();
@@ -180,7 +180,7 @@ TEST_F(TcpAcceptorIntegration, AcceptNonblockEmpty) {
     }
 
     tcp_acceptor acceptor;
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     acceptor.open(addr);
     acceptor.set_nonblocking(true);
 
@@ -196,14 +196,14 @@ TEST_F(TcpAcceptorIntegration, AcceptNonblockWithPending) {
     }
 
     tcp_acceptor acceptor;
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     acceptor.open(addr);
     acceptor.set_nonblocking(true);
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
 
     tcp_socket client;
-    client.open(AF_INET);
+    client.open();
     ASSERT_TRUE(client.connect(*bound, milliseconds(3000)));
 
     this_thread::sleep_for(milliseconds(50));
@@ -241,7 +241,7 @@ TEST_F(TcpClientIntegration, ConnectDisconnectLifecycle) {
     }
 
     tcp_acceptor acceptor;
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     acceptor.open(addr);
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
@@ -268,7 +268,7 @@ TEST_F(TcpClientIntegration, SendReceiveRoundtrip) {
     }
 
     tcp_acceptor acceptor;
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     acceptor.open(addr);
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
@@ -381,7 +381,7 @@ TEST_F(TcpServerIntegration, ClientHandlerCalled) {
     auto test_port = ports(0u);
     {
         tcp_acceptor tmp;
-        auto addr = ip_address::loopback(ports(0u), AF_INET);
+        auto addr = ip_address::loopback();
         tmp.open(addr);
         auto bound = tmp.local_endpoint();
         if (bound.has_value()) {
@@ -432,7 +432,7 @@ TEST_F(TcpServerIntegration, MultipleClients) {
     auto test_port = ports(0u);
     {
         tcp_acceptor tmp;
-        auto addr = ip_address::loopback(ports(0u), AF_INET);
+        auto addr = ip_address::loopback();
         tmp.open(addr);
         auto bound = tmp.local_endpoint();
         if (bound.has_value()) {
@@ -511,7 +511,7 @@ TEST_F(TcpSocketStandalone, OpenAndClose) {
     }
 
     tcp_socket sock;
-    EXPECT_NO_THROW(sock.open(AF_INET));
+    EXPECT_NO_THROW(sock.open());
     EXPECT_TRUE(sock.is_open());
     sock.close();
     EXPECT_FALSE(sock.is_open());

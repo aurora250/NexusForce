@@ -1225,7 +1225,7 @@ TEST_F(IpAddressTest, ConstructorFromSockaddrIn) {
     EXPECT_TRUE(addr.is_valid());
     EXPECT_TRUE(addr.is_ipv4());
     EXPECT_FALSE(addr.is_ipv6());
-    EXPECT_EQ(addr.family(), AF_INET);
+    EXPECT_EQ(addr.address_family(), ip_address::family::INET4);
     EXPECT_EQ(addr.port(), ports(8080u));
 }
 
@@ -1239,7 +1239,7 @@ TEST_F(IpAddressTest, ConstructorFromSockaddrIn6) {
     EXPECT_TRUE(addr.is_valid());
     EXPECT_FALSE(addr.is_ipv4());
     EXPECT_TRUE(addr.is_ipv6());
-    EXPECT_EQ(addr.family(), AF_INET6);
+    EXPECT_EQ(addr.address_family(), ip_address::family::INET6);
     EXPECT_EQ(addr.port(), ports(443u));
 }
 
@@ -1254,7 +1254,7 @@ TEST_F(IpAddressTest, CopyConstructor) {
 
     EXPECT_TRUE(addr2.is_valid());
     EXPECT_TRUE(addr2.is_ipv4());
-    EXPECT_EQ(addr2.family(), AF_INET);
+    EXPECT_EQ(addr2.address_family(), ip_address::family::INET4);
     EXPECT_EQ(addr2.port(), ports(80u));
     EXPECT_EQ(addr1, addr2);
 }
@@ -1305,42 +1305,42 @@ TEST_F(IpAddressTest, IsValid) {
     ip_address invalid;
     EXPECT_FALSE(invalid.is_valid());
 
-    auto valid = ip_address::loopback(ports(80u), AF_INET);
+    auto valid = ip_address::loopback(ports(80u), ip_address::family::INET4);
     EXPECT_TRUE(valid.is_valid());
 }
 
 TEST_F(IpAddressTest, IsIpv4) {
-    auto addr = ip_address::loopback(ports(80u), AF_INET);
+    auto addr = ip_address::loopback(ports(80u), ip_address::family::INET4);
     EXPECT_TRUE(addr.is_ipv4());
     EXPECT_FALSE(addr.is_ipv6());
 }
 
 TEST_F(IpAddressTest, IsIpv6) {
-    auto addr = ip_address::loopback(ports(80u), AF_INET6);
+    auto addr = ip_address::loopback(ports(80u), ip_address::family::INET6);
     EXPECT_FALSE(addr.is_ipv4());
     EXPECT_TRUE(addr.is_ipv6());
 }
 
 TEST_F(IpAddressTest, AnyIpv4) {
-    auto addr = ip_address::any(ports(8080u), AF_INET);
+    auto addr = ip_address::any(ports(8080u), ip_address::family::INET4);
     EXPECT_TRUE(addr.is_valid());
     EXPECT_TRUE(addr.is_ipv4());
-    EXPECT_EQ(addr.family(), AF_INET);
+    EXPECT_EQ(addr.address_family(), ip_address::family::INET4);
     EXPECT_EQ(addr.port(), ports(8080u));
     EXPECT_NE(addr.size(), 0);
 }
 
 TEST_F(IpAddressTest, AnyIpv6) {
-    auto addr = ip_address::any(ports(8443u), AF_INET6);
+    auto addr = ip_address::any(ports(8443u), ip_address::family::INET6);
     EXPECT_TRUE(addr.is_valid());
     EXPECT_TRUE(addr.is_ipv6());
-    EXPECT_EQ(addr.family(), AF_INET6);
+    EXPECT_EQ(addr.address_family(), ip_address::family::INET6);
     EXPECT_EQ(addr.port(), ports(8443u));
     EXPECT_NE(addr.size(), 0);
 }
 
 TEST_F(IpAddressTest, AnyDefaultPort) {
-    auto addr = ip_address::any(ports::UNDEF, AF_INET);
+    auto addr = ip_address::any();
     EXPECT_TRUE(addr.is_valid());
     EXPECT_EQ(addr.port(), ports::UNDEF);
 }
@@ -1349,29 +1349,29 @@ TEST_F(IpAddressTest, AnyDefaultFamily) {
     auto addr = ip_address::any(ports(80u));
     EXPECT_TRUE(addr.is_valid());
     EXPECT_TRUE(addr.is_ipv4());
-    EXPECT_EQ(addr.family(), AF_INET);
+    EXPECT_EQ(addr.address_family(), ip_address::family::INET4);
 }
 
 TEST_F(IpAddressTest, LoopbackIpv4) {
-    auto addr = ip_address::loopback(ports(22u), AF_INET);
+    auto addr = ip_address::loopback(ports(22u), ip_address::family::INET4);
     EXPECT_TRUE(addr.is_valid());
     EXPECT_TRUE(addr.is_ipv4());
-    EXPECT_EQ(addr.family(), AF_INET);
+    EXPECT_EQ(addr.address_family(), ip_address::family::INET4);
     EXPECT_EQ(addr.port(), ports(22u));
     EXPECT_NE(addr.size(), 0);
 }
 
 TEST_F(IpAddressTest, LoopbackIpv6) {
-    auto addr = ip_address::loopback(ports(443u), AF_INET6);
+    auto addr = ip_address::loopback(ports(443u), ip_address::family::INET6);
     EXPECT_TRUE(addr.is_valid());
     EXPECT_TRUE(addr.is_ipv6());
-    EXPECT_EQ(addr.family(), AF_INET6);
+    EXPECT_EQ(addr.address_family(), ip_address::family::INET6);
     EXPECT_EQ(addr.port(), ports(443u));
     EXPECT_NE(addr.size(), 0);
 }
 
 TEST_F(IpAddressTest, LoopbackDefaultPort) {
-    auto addr = ip_address::loopback(ports::UNDEF, AF_INET);
+    auto addr = ip_address::loopback();
     EXPECT_TRUE(addr.is_valid());
     EXPECT_EQ(addr.port(), ports::UNDEF);
 }
@@ -1380,18 +1380,18 @@ TEST_F(IpAddressTest, LoopbackDefaultFamily) {
     auto addr = ip_address::loopback(ports(53u));
     EXPECT_TRUE(addr.is_valid());
     EXPECT_TRUE(addr.is_ipv4());
-    EXPECT_EQ(addr.family(), AF_INET);
+    EXPECT_EQ(addr.address_family(), ip_address::family::INET4);
 }
 
 TEST_F(IpAddressTest, DataConstValidIpv4) {
-    auto addr = ip_address::loopback(ports(80u), AF_INET);
+    auto addr = ip_address::loopback(ports(80u), ip_address::family::INET4);
     const ::sockaddr* sa = addr.data();
     EXPECT_NE(sa, nullptr);
     EXPECT_EQ(sa->sa_family, AF_INET);
 }
 
 TEST_F(IpAddressTest, DataConstValidIpv6) {
-    auto addr = ip_address::loopback(ports(80u), AF_INET6);
+    auto addr = ip_address::loopback(ports(80u), ip_address::family::INET6);
     const ::sockaddr* sa = addr.data();
     EXPECT_NE(sa, nullptr);
     EXPECT_EQ(sa->sa_family, AF_INET6);
@@ -1404,7 +1404,7 @@ TEST_F(IpAddressTest, DataConstInvalid) {
 }
 
 TEST_F(IpAddressTest, DataNonConstValid) {
-    auto addr = ip_address::loopback(ports(80u), AF_INET);
+    auto addr = ip_address::loopback(ports(80u), ip_address::family::INET4);
     ::sockaddr* sa = addr.data();
     EXPECT_NE(sa, nullptr);
     EXPECT_EQ(sa->sa_family, AF_INET);
@@ -1417,12 +1417,12 @@ TEST_F(IpAddressTest, DataNonConstInvalid) {
 }
 
 TEST_F(IpAddressTest, SizeIpv4) {
-    auto addr = ip_address::loopback(ports(80u), AF_INET);
+    auto addr = ip_address::loopback(ports(80u), ip_address::family::INET4);
     EXPECT_EQ(addr.size(), static_cast<int>(sizeof(::sockaddr_in)));
 }
 
 TEST_F(IpAddressTest, SizeIpv6) {
-    auto addr = ip_address::loopback(ports(80u), AF_INET6);
+    auto addr = ip_address::loopback(ports(80u), ip_address::family::INET6);
     EXPECT_EQ(addr.size(), static_cast<int>(sizeof(::sockaddr_in6)));
 }
 
@@ -1432,7 +1432,7 @@ TEST_F(IpAddressTest, SizeInvalid) {
 }
 
 TEST_F(IpAddressTest, AddressAccessorIpv4) {
-    auto addr = ip_address::loopback(ports(80u), AF_INET);
+    auto addr = ip_address::loopback(ports(80u), ip_address::family::INET4);
     const auto& var = addr.address();
     EXPECT_TRUE(var.holds_alternative<::sockaddr_in>());
     EXPECT_FALSE(var.holds_alternative<::sockaddr_in6>());
@@ -1440,7 +1440,7 @@ TEST_F(IpAddressTest, AddressAccessorIpv4) {
 }
 
 TEST_F(IpAddressTest, AddressAccessorIpv6) {
-    auto addr = ip_address::loopback(ports(80u), AF_INET6);
+    auto addr = ip_address::loopback(ports(80u), ip_address::family::INET6);
     const auto& var = addr.address();
     EXPECT_FALSE(var.holds_alternative<::sockaddr_in>());
     EXPECT_TRUE(var.holds_alternative<::sockaddr_in6>());
@@ -1454,27 +1454,27 @@ TEST_F(IpAddressTest, AddressAccessorInvalid) {
 }
 
 TEST_F(IpAddressTest, FamilyIpv4) {
-    auto addr = ip_address::loopback(ports::UNDEF, AF_INET);
-    EXPECT_EQ(addr.family(), AF_INET);
+    auto addr = ip_address::loopback(ports::UNDEF, ip_address::family::INET4);
+    EXPECT_EQ(addr.address_family(), ip_address::family::INET4);
 }
 
 TEST_F(IpAddressTest, FamilyIpv6) {
-    auto addr = ip_address::loopback(ports::UNDEF, AF_INET6);
-    EXPECT_EQ(addr.family(), AF_INET6);
+    auto addr = ip_address::loopback(ports::UNDEF, ip_address::family::INET6);
+    EXPECT_EQ(addr.address_family(), ip_address::family::INET6);
 }
 
 TEST_F(IpAddressTest, FamilyInvalid) {
     ip_address addr;
-    EXPECT_EQ(addr.family(), AF_UNSPEC);
+    EXPECT_EQ(addr.address_family(), ip_address::family::UNDEF);
 }
 
 TEST_F(IpAddressTest, PortIpv4) {
-    auto addr = ip_address::loopback(ports(25u), AF_INET);
+    auto addr = ip_address::loopback(ports(25u), ip_address::family::INET4);
     EXPECT_EQ(addr.port(), ports(25u));
 }
 
 TEST_F(IpAddressTest, PortIpv6) {
-    auto addr = ip_address::loopback(ports(993u), AF_INET6);
+    auto addr = ip_address::loopback(ports(993u), ip_address::family::INET6);
     EXPECT_EQ(addr.port(), ports(993u));
 }
 
@@ -1484,13 +1484,13 @@ TEST_F(IpAddressTest, PortInvalid) {
 }
 
 TEST_F(IpAddressTest, ToStringIpv4) {
-    auto addr = ip_address::loopback(ports(8080u), AF_INET);
+    auto addr = ip_address::loopback(ports(8080u), ip_address::family::INET4);
     string str = addr.to_string();
     EXPECT_EQ(str, "127.0.0.1:8080");
 }
 
 TEST_F(IpAddressTest, ToStringIpv6) {
-    auto addr = ip_address::loopback(ports(443u), AF_INET6);
+    auto addr = ip_address::loopback(ports(443u), ip_address::family::INET6);
     string str = addr.to_string();
     EXPECT_EQ(str, "[::1]:443");
 }
@@ -1502,13 +1502,13 @@ TEST_F(IpAddressTest, ToStringInvalid) {
 }
 
 TEST_F(IpAddressTest, ToStringAnyIpv4) {
-    auto addr = ip_address::any(ports(80u), AF_INET);
+    auto addr = ip_address::any(ports(80u), ip_address::family::INET4);
     string str = addr.to_string();
     EXPECT_EQ(str, "0.0.0.0:80");
 }
 
 TEST_F(IpAddressTest, ToStringAnyIpv6) {
-    auto addr = ip_address::any(ports(80u), AF_INET6);
+    auto addr = ip_address::any(ports(80u), ip_address::family::INET6);
     string str = addr.to_string();
     EXPECT_EQ(str, "[::]:80");
 }
@@ -1628,19 +1628,19 @@ TEST_F(IpAddressTest, EqualityOneInvalid) {
 }
 
 TEST_F(IpAddressTest, EqualitySameAddressDifferentObjectOrder) {
-    auto addr1 = ip_address::loopback(ports(80u), AF_INET);
-    auto addr2 = ip_address::loopback(ports(80u), AF_INET);
+    auto addr1 = ip_address::loopback(ports(80u), ip_address::family::INET4);
+    auto addr2 = ip_address::loopback(ports(80u), ip_address::family::INET4);
     EXPECT_TRUE(addr1 == addr2);
     EXPECT_TRUE(addr2 == addr1);
 }
 
 TEST_F(IpAddressTest, AnyInvalidFamily) {
-    auto addr = ip_address::any(ports(80u), AF_UNSPEC);
+    auto addr = ip_address::any(ports(80u), ip_address::family::UNDEF);
     EXPECT_FALSE(addr.is_valid());
 }
 
 TEST_F(IpAddressTest, LoopbackInvalidFamily) {
-    auto addr = ip_address::loopback(ports(80u), AF_UNSPEC);
+    auto addr = ip_address::loopback(ports(80u), ip_address::family::UNDEF);
     EXPECT_FALSE(addr.is_valid());
 }
 
@@ -1670,7 +1670,7 @@ TEST_F(IpAddressTest, ParseIpv4Broadcast) {
 }
 
 TEST_F(IpAddressTest, EqualityAfterMove) {
-    auto addr1 = ip_address::loopback(ports(80u), AF_INET);
+    auto addr1 = ip_address::loopback(ports(80u), ip_address::family::INET4);
     ip_address addr2(move(addr1));
     EXPECT_TRUE(addr2.is_valid());
 }
@@ -2139,7 +2139,7 @@ TEST_F(ArpTest, ResolveLocalhostWithoutOpen) {
         GTEST_SKIP() << "Root privileges required";
     }
     arp resolver;
-    auto ip = ip_address::loopback(ports::UNDEF, AF_INET);
+    auto ip = ip_address::loopback(ports::UNDEF, ip_address::family::INET4);
     auto result = resolver.resolve(ip, milliseconds(500));
     resolver.close();
 }

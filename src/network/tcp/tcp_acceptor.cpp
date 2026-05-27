@@ -6,7 +6,7 @@ void tcp_acceptor::open(const ip_address& endpoint, const int backlog) {
         NEFORCE_THROW_EXCEPTION(value_exception("Invalid endpoint for TCP acceptor"));
     }
 
-    open_ip(endpoint.family(), SOCK_STREAM, IPPROTO_TCP);
+    open_ip(endpoint.address_family(), type::STREAM, protocol::TCP);
 
     if (!set_reuse_address(true)) {
         close();

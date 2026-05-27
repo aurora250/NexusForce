@@ -173,7 +173,7 @@ public:
      * 执行查询并返回结果集对象。
      * 注意：结果集对象在析构时会重置语句，允许语句被复用。
      */
-    unique_ptr<idb_prepared_result> execute_query() override;
+    unique_ptr<idb_tb_result> execute_query() override;
 
     /**
      * @brief 获取错误信息

@@ -76,7 +76,7 @@ cv_status condition_variable_base::wait_until(mutex& mtx, const bool is_monotoni
     terminate();
 #else
     const ::timespec ts{static_cast<ssize_t>(sec), static_cast<ssize_t>(ns)};
-    const clockid_t clock_id = is_monotonic ? CLOCK_MONOTONIC : CLOCK_REALTIME;
+    const ::clockid_t clock_id = is_monotonic ? CLOCK_MONOTONIC : CLOCK_REALTIME;
     const int result = ::pthread_cond_clockwait(&cond_, mtx.native_handle(), clock_id, &ts);
     return (result == ETIMEDOUT) ? cv_status::timeout : cv_status::success;
 #endif

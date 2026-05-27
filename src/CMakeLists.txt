@@ -59,7 +59,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/codepoint.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/regex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/string.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/string/string_util.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/string/vsprintf.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/cmdline.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/console.cpp
@@ -95,7 +94,6 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/db/redis/redis_connect.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/redis/redis_result.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_connect.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_prepared_result.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_prepared_statement.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/db/sqlite/sqlite_result.cpp
 
@@ -265,13 +263,32 @@ else()
 endif()
 
 if(NEXUSFORCE_ENABLE_SQLITE3)
-    find_package(unofficial-sqlite3 CONFIG QUIET)
-    if(TARGET unofficial::sqlite3::sqlite3)
-        target_link_libraries(NexusForce PUBLIC unofficial::sqlite3::sqlite3)
-        target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_SQLITE3 NEFORCE_SUPPORT_DB)
-        message(STATUS "SQLite3 linked successfully")
+    if(WIN32)
+        # Windows: prefer SQLCipher for encryption support
+        find_package(unofficial-sqlcipher CONFIG QUIET)
+        if(TARGET unofficial::sqlcipher::sqlcipher)
+            target_link_libraries(NexusForce PUBLIC unofficial::sqlcipher::sqlcipher)
+            target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_SQLITE3 NEFORCE_SUPPORT_SQLCIPHER NEFORCE_SUPPORT_DB)
+            message(STATUS "SQLCipher linked successfully (encryption enabled)")
+        else()
+            message(WARNING "SQLCipher not found on Windows - falling back to SQLite3 without encryption")
+            find_package(unofficial-sqlite3 CONFIG QUIET)
+            if(TARGET unofficial::sqlite3::sqlite3)
+                target_link_libraries(NexusForce PUBLIC unofficial::sqlite3::sqlite3)
+                target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_SQLITE3 NEFORCE_SUPPORT_DB)
+                message(STATUS "SQLite3 linked successfully (no encryption)")
+            endif()
+        endif()
     else()
-        message(WARNING "SQLite3 not found - related functionality will be disabled")
+        # Linux/macOS: use standard SQLite3
+        find_package(unofficial-sqlite3 CONFIG QUIET)
+        if(TARGET unofficial::sqlite3::sqlite3)
+            target_link_libraries(NexusForce PUBLIC unofficial::sqlite3::sqlite3)
+            target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_SQLITE3 NEFORCE_SUPPORT_DB)
+            message(STATUS "SQLite3 linked successfully (no encryption)")
+        else()
+            message(WARNING "SQLite3 not found - related functionality will be disabled")
+        endif()
     endif()
 else()
     message(STATUS "SQLite3 support disabled")

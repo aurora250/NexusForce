@@ -60,6 +60,9 @@ int main() {
 
     // ========== Traceroute ==========
     printfln("\n=== Traceroute to {} ===\n", target);
+
+    using neforce::printf;
+
     {
         auto hops = sock.traceroute(*dest, 30, milliseconds(2000), 3);
 

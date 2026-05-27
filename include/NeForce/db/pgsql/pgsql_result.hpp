@@ -40,12 +40,12 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 class NEFORCE_API pgsql_tb_result final : public idb_tb_result {
 private:
-    ::PGresult* result_ = nullptr;             ///< PostgreSQL结果集句柄
-    size_type current_row_ = 0;                ///< 当前行索引
-    size_type row_count_ = 0;                  ///< 总行数
-    size_type column_count_ = 0;               ///< 总列数
-    mutable vector<string_view> column_names_; ///< 列名列表
-    bool owns_result_;                         ///< 是否拥有结果集所有权
+    ::PGresult* result_ = nullptr;                      ///< PostgreSQL结果集句柄
+    size_type current_row_{static_cast<size_type>(-1)}; ///< 当前行索引
+    size_type row_count_ = 0;                           ///< 总行数
+    size_type column_count_ = 0;                        ///< 总列数
+    mutable vector<string_view> column_names_;          ///< 列名列表
+    bool owns_result_;                                  ///< 是否拥有结果集所有权
 
 public:
     /**
@@ -106,6 +106,8 @@ public:
      * 首次调用时从PGresult中提取列名并缓存。
      */
     NEFORCE_NODISCARD const vector<string_view>& column_names() const override;
+
+    NEFORCE_NODISCARD column_meta column_metadata(size_type index) const override;
 
     /**
      * @brief 获取字符串值

@@ -44,7 +44,7 @@ bool file_locker::lock(const difference_type offset, difference_type length, con
     return ::LockFileEx(handle_, flags, 0, len_lo, len_hi, &ov) != 0;
 
 #else
-    struct ::flock fl{};
+    ::flock fl{};
     fl.l_whence = SEEK_SET;
     fl.l_start = offset;
     fl.l_len = length;
@@ -92,7 +92,7 @@ bool file_locker::unlock(const difference_type offset, difference_type length) c
     return ::UnlockFileEx(handle_, 0, len_lo, len_hi, &ov) != 0;
 
 #else
-    struct ::flock fl{};
+    ::flock fl{};
     fl.l_type = F_UNLCK;
     fl.l_whence = SEEK_SET;
     fl.l_start = offset;
@@ -122,7 +122,7 @@ bool file_locker::is_locked(const difference_type offset, const difference_type 
     return true;
 
 #else
-    struct ::flock fl{};
+    ::flock fl{};
     fl.l_type = F_WRLCK;
     fl.l_whence = SEEK_SET;
     fl.l_start = offset;

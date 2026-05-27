@@ -39,7 +39,7 @@ bool pgsql_tb_result::next() noexcept {
 }
 
 const vector<string_view>& pgsql_tb_result::column_names() const {
-    if (!column_names_.empty() || result_ == nullptr) {
+    if (column_names_.empty() && result_ != nullptr) {
         column_names_.reserve(column_count_);
         for (size_type i = 0; i < column_count_; ++i) {
             column_names_.emplace_back(::PQfname(result_, static_cast<int>(i)));
@@ -100,6 +100,17 @@ time pgsql_tb_result::get_time(const size_type index) const { return time::parse
 datetime pgsql_tb_result::get_datetime(const size_type index) const { return datetime::parse(get(index)); }
 
 timestamp pgsql_tb_result::get_timestamp(const size_type index) const { return timestamp(get_datetime(index)); }
+
+column_meta pgsql_tb_result::column_metadata(const size_type index) const {
+    column_meta meta;
+    if (result_ != nullptr && index < column_count_) {
+        meta.name = ::PQfname(result_, static_cast<int>(index));
+        meta.type = ::PQftype(result_, static_cast<int>(index));
+        meta.max_length = static_cast<size_t>(::PQfsize(result_, static_cast<int>(index)));
+        meta.nullable = ::PQfnumber(result_, ::PQfname(result_, static_cast<int>(index))) != -1;
+    }
+    return meta;
+}
 
 NEFORCE_END_NAMESPACE__
 #endif

@@ -12,7 +12,6 @@
 #    include <wbemcli.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
-#    include <NeForce/core/file/file.hpp>
 #    include <dirent.h>
 #    include <sys/sysinfo.h>
 #    include <sys/utsname.h>
@@ -584,8 +583,8 @@ void sysinfo::init() {
     }
 
 #else
-    system_info_.page_size = ::sysconf(::_SC_PAGESIZE);
-    system_info_.processor_numbers = ::sysconf(::_SC_NPROCESSORS_ONLN);
+    system_info_.page_size = ::sysconf(_SC_PAGESIZE);
+    system_info_.processor_numbers = ::sysconf(_SC_NPROCESSORS_ONLN);
     system_info_.allocation_granularity = system_info_.page_size;
     const long online_cpus = ::sysconf(_SC_NPROCESSORS_ONLN);
     if (online_cpus > 0 && static_cast<size_t>(online_cpus) <= sizeof(uintptr_t) * 8) {

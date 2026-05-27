@@ -153,7 +153,7 @@ date mysql_result::get_date(const size_type n) const {
 time mysql_result::get_time(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
-    if (column_types_->at(n) != ::MYSQL_TYPE_DATE) {
+    if (column_types_->at(n) != ::MYSQL_TYPE_TIME) {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("database type cast to time mismatch"));
     }
     return time::parse(cursor_[n]);
@@ -175,6 +175,14 @@ timestamp mysql_result::get_timestamp(const size_type n) const {
         NEFORCE_THROW_EXCEPTION(database_typecast_exception("database type cast to timestamp mismatch"));
     }
     return timestamp(datetime::parse(cursor_[n]));
+}
+
+column_meta mysql_result::column_metadata(const size_type n) const {
+    NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
+    column_meta meta;
+    meta.name = (*column_name_)[n];
+    meta.type = static_cast<int32_t>((*column_types_)[n]);
+    return meta;
 }
 
 NEFORCE_END_NAMESPACE__

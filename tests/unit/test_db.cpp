@@ -1,4 +1,8 @@
+#include <NeForce/db/db_config.hpp>
+#include <NeForce/db/db_interface.hpp>
 #include <NeForce/db/sql_builder.hpp>
+#include <NeForce/db/sql_connect_base.hpp>
+#include <NeForce/db/transaction_guard.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
 
@@ -649,3 +653,538 @@ TEST_F(SqlBuilderTest, WhereConditionsCombinedWithAnd) {
                                "AND age < 65 "
                                "AND attempts <= 3;");
 }
+
+struct MockTransaction {
+    int begin_calls = 0;
+    int commit_calls = 0;
+    int rollback_calls = 0;
+
+    void begin() { ++begin_calls; }
+    void commit() { ++commit_calls; }
+    void rollback() { ++rollback_calls; }
+};
+
+class TransactionGuardTest : public ::testing::Test {
+protected:
+    MockTransaction mock;
+};
+
+TEST_F(TransactionGuardTest, ConstructorCallsBegin) {
+    transaction_guard tx{mock};
+    EXPECT_EQ(mock.begin_calls, 1);
+    EXPECT_EQ(mock.commit_calls, 0);
+    EXPECT_EQ(mock.rollback_calls, 0);
+}
+
+TEST_F(TransactionGuardTest, DestructorRollsBackWhenNotCommitted) {
+    {
+        transaction_guard tx{mock};
+        EXPECT_EQ(mock.begin_calls, 1);
+    }
+    EXPECT_EQ(mock.rollback_calls, 1);
+    EXPECT_EQ(mock.commit_calls, 0);
+}
+
+TEST_F(TransactionGuardTest, CommitCallsCommitAndPreventsRollback) {
+    {
+        transaction_guard tx{mock};
+        tx.commit();
+        EXPECT_EQ(mock.commit_calls, 1);
+        EXPECT_TRUE(tx.committed());
+    }
+    EXPECT_EQ(mock.rollback_calls, 0);
+    EXPECT_EQ(mock.commit_calls, 1);
+}
+
+TEST_F(TransactionGuardTest, DoubleCommitIsIdempotent) {
+    transaction_guard tx{mock};
+    tx.commit();
+    tx.commit();
+    EXPECT_EQ(mock.commit_calls, 1);
+}
+
+TEST_F(TransactionGuardTest, CommittedReturnsFalseBeforeCommit) {
+    transaction_guard tx{mock};
+    EXPECT_FALSE(tx.committed());
+    tx.commit();
+    EXPECT_TRUE(tx.committed());
+}
+
+TEST_F(TransactionGuardTest, MoveConstructorTransfersOwnership) {
+    {
+        transaction_guard tx1{mock};
+        EXPECT_EQ(mock.begin_calls, 1);
+
+        transaction_guard tx2{move(tx1)};
+        EXPECT_EQ(mock.begin_calls, 1);
+        EXPECT_EQ(mock.commit_calls, 0);
+        EXPECT_EQ(mock.rollback_calls, 0);
+    }
+    EXPECT_EQ(mock.rollback_calls, 1);
+}
+
+TEST_F(TransactionGuardTest, MoveAssignmentRollsBackCurrentAndTransfers) {
+    MockTransaction mock2;
+    {
+        transaction_guard tx1{mock};
+        transaction_guard tx2{mock2};
+        EXPECT_EQ(mock.begin_calls, 1);
+        EXPECT_EQ(mock2.begin_calls, 1);
+
+        tx2 = move(tx1);
+        EXPECT_EQ(mock2.rollback_calls, 1);
+        EXPECT_EQ(mock.commit_calls, 0);
+    }
+    EXPECT_EQ(mock.rollback_calls, 1);
+}
+
+TEST_F(TransactionGuardTest, MovedFromDoesNotRollback) {
+    transaction_guard tx1{mock};
+    transaction_guard tx2{move(tx1)};
+    EXPECT_EQ(mock.rollback_calls, 0);
+}
+
+TEST_F(TransactionGuardTest, MakeTransactionCreatesGuard) {
+    auto tx = make_transaction(mock);
+    EXPECT_EQ(mock.begin_calls, 1);
+    tx.commit();
+    EXPECT_TRUE(tx.committed());
+}
+
+TEST_F(TransactionGuardTest, NoBeginOnMovedFrom) {
+    transaction_guard tx1{mock};
+    EXPECT_EQ(mock.begin_calls, 1);
+    transaction_guard tx2{move(tx1)};
+    EXPECT_EQ(mock.begin_calls, 1);
+}
+
+class DbConfigTest : public ::testing::Test {};
+
+TEST_F(DbConfigTest, DefaultHostIsLocalhost) {
+    db_config cfg;
+    EXPECT_EQ(cfg.host, "127.0.0.1");
+}
+
+TEST_F(DbConfigTest, FieldsAreDefaultInitialized) {
+    db_config cfg;
+    EXPECT_TRUE(cfg.username.empty());
+    EXPECT_TRUE(cfg.password.empty());
+    EXPECT_TRUE(cfg.database.empty());
+    EXPECT_TRUE(cfg.charset.empty());
+}
+
+TEST_F(DbConfigTest, CopyConstructor) {
+    db_config cfg;
+    cfg.username = "admin";
+    cfg.password = "secret";
+    cfg.database = "testdb";
+    cfg.host = "10.0.0.1";
+
+    db_config copy{cfg};
+    EXPECT_EQ(copy.username, "admin");
+    EXPECT_EQ(copy.password, "secret");
+    EXPECT_EQ(copy.database, "testdb");
+    EXPECT_EQ(copy.host, "10.0.0.1");
+}
+
+TEST_F(DbConfigTest, CopyAssignment) {
+    db_config cfg;
+    cfg.username = "admin";
+    cfg.database = "testdb";
+
+    db_config assigned;
+    assigned = cfg;
+    EXPECT_EQ(assigned.username, "admin");
+    EXPECT_EQ(assigned.database, "testdb");
+}
+
+TEST_F(DbConfigTest, MoveConstructor) {
+    db_config cfg;
+    cfg.username = "admin";
+    cfg.database = "testdb";
+
+    db_config moved{move(cfg)};
+    EXPECT_EQ(moved.username, "admin");
+    EXPECT_EQ(moved.database, "testdb");
+}
+
+TEST_F(DbConfigTest, MoveAssignment) {
+    db_config cfg;
+    cfg.username = "admin";
+    cfg.database = "testdb";
+
+    db_config assigned;
+    assigned = move(cfg);
+    EXPECT_EQ(assigned.username, "admin");
+    EXPECT_EQ(assigned.database, "testdb");
+}
+
+#ifdef NEFORCE_SUPPORT_SQLITE3
+TEST_F(DbConfigTest, ForSqliteSetsCorrectDefaults) {
+    db_config cfg = db_config::for_sqlite("test.db");
+    EXPECT_EQ(cfg.database, "test.db");
+    EXPECT_EQ(cfg.host, "127.0.0.1");
+}
+
+TEST_F(DbConfigTest, ForSqliteEmptyFile) {
+    db_config cfg = db_config::for_sqlite("");
+    EXPECT_TRUE(cfg.database.empty());
+}
+#endif
+
+#ifdef NEFORCE_SUPPORT_MYSQL
+TEST_F(DbConfigTest, ForMysqlSetsCorrectDefaults) {
+    db_config cfg = db_config::for_mysql("mydb");
+    EXPECT_EQ(cfg.database, "mydb");
+    EXPECT_EQ(cfg.username, "root");
+    EXPECT_EQ(cfg.host, "127.0.0.1");
+}
+
+TEST_F(DbConfigTest, ForMysqlDefaultPort) {
+    db_config cfg = db_config::for_mysql("mydb");
+    EXPECT_EQ(cfg.port.value(), 3306);
+}
+#endif
+
+#ifdef NEFORCE_SUPPORT_POSTGRESQL
+TEST_F(DbConfigTest, ForPostgresqlSetsCorrectDefaults) {
+    db_config cfg = db_config::for_postgresql("mydb");
+    EXPECT_EQ(cfg.database, "mydb");
+    EXPECT_EQ(cfg.username, "postgres");
+    EXPECT_EQ(cfg.host, "127.0.0.1");
+}
+
+TEST_F(DbConfigTest, ForPostgresqlDefaultDatabase) {
+    db_config cfg = db_config::for_postgresql();
+    EXPECT_EQ(cfg.database, "postgres");
+}
+#endif
+
+#ifdef NEFORCE_SUPPORT_HIREDIS
+TEST_F(DbConfigTest, ForRedisSetsCorrectDefaults) {
+    db_config cfg = db_config::for_redis("0");
+    EXPECT_EQ(cfg.database, "0");
+    EXPECT_EQ(cfg.port.value(), 6379);
+    EXPECT_EQ(cfg.host, "127.0.0.1");
+}
+#endif
+
+class ColumnMetaTest : public ::testing::Test {};
+
+TEST_F(ColumnMetaTest, DefaultValues) {
+    column_meta meta;
+    EXPECT_TRUE(meta.name.empty());
+    EXPECT_EQ(meta.type, 0);
+    EXPECT_EQ(meta.max_length, 0);
+    EXPECT_TRUE(meta.nullable);
+}
+
+TEST_F(ColumnMetaTest, CanSetName) {
+    column_meta meta;
+    meta.name = "user_id";
+    EXPECT_EQ(meta.name, "user_id");
+}
+
+TEST_F(ColumnMetaTest, CanSetType) {
+    column_meta meta;
+    meta.type = 3;
+    EXPECT_EQ(meta.type, 3);
+}
+
+TEST_F(ColumnMetaTest, CanSetMaxLength) {
+    column_meta meta;
+    meta.max_length = 255;
+    EXPECT_EQ(meta.max_length, 255);
+}
+
+TEST_F(ColumnMetaTest, CanSetNullable) {
+    column_meta meta;
+    meta.nullable = false;
+    EXPECT_FALSE(meta.nullable);
+}
+
+TEST_F(ColumnMetaTest, CopyConstruction) {
+    column_meta meta;
+    meta.name = "email";
+    meta.type = 5;
+    meta.max_length = 128;
+    meta.nullable = false;
+
+    column_meta copy{meta};
+    EXPECT_EQ(copy.name, "email");
+    EXPECT_EQ(copy.type, 5);
+    EXPECT_EQ(copy.max_length, 128);
+    EXPECT_FALSE(copy.nullable);
+}
+
+#ifdef NEFORCE_SUPPORT_MYSQL
+#    include <NeForce/db/mysql/mysql_connect.hpp>
+#    include <NeForce/db/mysql/mysql_result.hpp>
+#    include <NeForce/db/mysql/mysql_prepared_result.hpp>
+#    include <NeForce/db/mysql/mysql_prepared_statement.hpp>
+
+class MysqlConnectTest : public ::testing::Test {
+protected:
+    mysql_connect conn;
+};
+
+TEST_F(MysqlConnectTest, DefaultConstructedHasValidHandle) { EXPECT_TRUE(conn.connected()); }
+
+TEST_F(MysqlConnectTest, NativeHandleReturnsLink) { EXPECT_NE(conn.native_handle(), nullptr); }
+
+TEST_F(MysqlConnectTest, GetCharacterSetBeforeConnectReturnsNonNull) {
+    auto cs = conn.get_character_set();
+    SUCCEED();
+}
+
+TEST_F(MysqlConnectTest, SetOptionsBeforeConnectReturnsTrue) {
+    EXPECT_TRUE(conn.set_options(MYSQL_OPT_CONNECT_TIMEOUT, "10"));
+}
+
+TEST_F(MysqlConnectTest, IsValidWithoutConnectReturnsFalse) { EXPECT_FALSE(conn.is_valid()); }
+
+TEST_F(MysqlConnectTest, UpdateWithoutConnectReturnsFalse) { EXPECT_FALSE(conn.update("SELECT 1")); }
+
+TEST_F(MysqlConnectTest, QueryWithoutConnectReturnsNull) {
+    auto result = conn.query("SELECT 1");
+    EXPECT_EQ(result, nullptr);
+}
+
+class MysqlResultTest : public ::testing::Test {};
+
+TEST_F(MysqlResultTest, DefaultConstructorCreatesEmpty) {
+    mysql_result result;
+    EXPECT_TRUE(result.empty());
+    EXPECT_EQ(result.row_count(), 0);
+    EXPECT_EQ(result.column_count(), 0);
+}
+
+class MysqlFactoryTest : public ::testing::Test {
+protected:
+    db_config config{db_config::for_mysql("test")};
+};
+
+TEST_F(MysqlFactoryTest, FactoryConstruction) {
+    mysql_factory factory{config};
+    SUCCEED();
+}
+
+TEST_F(MysqlFactoryTest, FactoryMoveConstruction) {
+    mysql_factory factory1{config};
+    mysql_factory factory2{move(factory1)};
+    SUCCEED();
+}
+
+TEST_F(MysqlFactoryTest, FactoryDestructionIsSafe) {
+    mysql_factory factory{config};
+    SUCCEED();
+}
+#endif
+
+#ifdef NEFORCE_SUPPORT_POSTGRESQL
+#    include <NeForce/db/pgsql/pgsql_connect.hpp>
+#    include <NeForce/db/pgsql/pgsql_result.hpp>
+#    include <NeForce/db/pgsql/pgsql_prepared_statement.hpp>
+
+class PgsqlConnectTest : public ::testing::Test {
+protected:
+    pgsql_connect conn;
+};
+
+TEST_F(PgsqlConnectTest, DefaultConstructedIsNotConnected) { EXPECT_FALSE(conn.connected()); }
+
+TEST_F(PgsqlConnectTest, CloseOnUnconnectedIsSafe) {
+    EXPECT_NO_THROW(conn.close());
+    EXPECT_FALSE(conn.connected());
+}
+
+TEST_F(PgsqlConnectTest, NativeHandleIsNullBeforeConnect) { EXPECT_EQ(conn.native_handle(), nullptr); }
+
+TEST_F(PgsqlConnectTest, GetErrorBeforeConnectReturnsEmpty) { EXPECT_TRUE(conn.get_error().empty()); }
+
+TEST_F(PgsqlConnectTest, GetErrnoBeforeConnectIsZero) { EXPECT_EQ(conn.get_errno(), 0); }
+
+TEST_F(PgsqlConnectTest, IsValidBeforeConnectReturnsFalse) { EXPECT_FALSE(conn.connected()); }
+
+TEST_F(PgsqlConnectTest, GetCharacterSetBeforeConnectReturnsEmpty) { EXPECT_TRUE(conn.get_character_set().empty()); }
+
+TEST_F(PgsqlConnectTest, SetCharacterSetBeforeConnectReturnsFalse) { EXPECT_FALSE(conn.set_character_set("UTF8")); }
+
+class PgsqlResultTest : public ::testing::Test {};
+
+TEST_F(PgsqlResultTest, NullResultIsEmpty) {
+    pgsql_tb_result result{static_cast<::PGresult*>(nullptr), true};
+    EXPECT_TRUE(result.empty());
+}
+
+TEST_F(PgsqlResultTest, NullResultHasZeroRows) {
+    pgsql_tb_result result{static_cast<::PGresult*>(nullptr), true};
+    EXPECT_EQ(result.row_count(), 0);
+    EXPECT_EQ(result.column_count(), 0);
+}
+
+class PgsqlFactoryTest : public ::testing::Test {
+protected:
+    db_config config{db_config::for_postgresql("test")};
+};
+
+TEST_F(PgsqlFactoryTest, FactoryConstruction) {
+    pgsql_factory factory{config};
+    SUCCEED();
+}
+
+TEST_F(PgsqlFactoryTest, CreateResultWithNullReturnsNull) {
+    pgsql_factory factory{config};
+    auto* result = factory.create_result(nullptr);
+    EXPECT_EQ(result, nullptr);
+}
+#endif
+
+#ifdef NEFORCE_SUPPORT_HIREDIS
+#    include <NeForce/db/redis/redis_connect.hpp>
+#    include <NeForce/db/redis/redis_result.hpp>
+
+class RedisConnectTest : public ::testing::Test {
+protected:
+    redis_connect conn;
+};
+
+TEST_F(RedisConnectTest, DefaultConstructedIsNotConnected) { EXPECT_FALSE(conn.connected()); }
+
+TEST_F(RedisConnectTest, CloseOnUnconnectedIsSafe) {
+    EXPECT_NO_THROW(conn.close());
+    EXPECT_FALSE(conn.connected());
+}
+
+TEST_F(RedisConnectTest, NativeHandleIsNullBeforeConnect) { EXPECT_EQ(conn.native_handle(), nullptr); }
+
+TEST_F(RedisConnectTest, GetErrnoIsZeroBeforeConnect) { EXPECT_EQ(conn.get_errno(), 0); }
+
+TEST_F(RedisConnectTest, IsValidWithoutConnectReturnsFalse) { EXPECT_FALSE(conn.is_valid()); }
+
+TEST_F(RedisConnectTest, SetBeforeConnectReturnsFalse) { EXPECT_FALSE(conn.set("key", "value")); }
+
+TEST_F(RedisConnectTest, SetexBeforeConnectReturnsFalse) { EXPECT_FALSE(conn.setex("key", "value", 60)); }
+
+TEST_F(RedisConnectTest, GetBeforeConnectReturnsNull) {
+    auto result = conn.get("key");
+    EXPECT_EQ(result, nullptr);
+}
+
+TEST_F(RedisConnectTest, DelBeforeConnectReturnsFalse) { EXPECT_FALSE(conn.del("key")); }
+
+TEST_F(RedisConnectTest, ExistsBeforeConnectReturnsFalse) { EXPECT_FALSE(conn.exists("key")); }
+
+TEST_F(RedisConnectTest, ExpireBeforeConnectReturnsFalse) { EXPECT_FALSE(conn.expire("key", 60)); }
+
+TEST_F(RedisConnectTest, HsetBeforeConnectReturnsFalse) { EXPECT_FALSE(conn.hset("hash", "field", "value")); }
+
+TEST_F(RedisConnectTest, HgetBeforeConnectReturnsNull) {
+    auto result = conn.hget("hash", "field");
+    EXPECT_EQ(result, nullptr);
+}
+
+TEST_F(RedisConnectTest, HgetallBeforeConnectReturnsNull) {
+    auto result = conn.hgetall("hash");
+    EXPECT_EQ(result, nullptr);
+}
+
+TEST_F(RedisConnectTest, LpushBeforeConnectReturnsFalse) { EXPECT_FALSE(conn.lpush("list", "value")); }
+
+TEST_F(RedisConnectTest, RpushBeforeConnectReturnsFalse) { EXPECT_FALSE(conn.rpush("list", "value")); }
+
+TEST_F(RedisConnectTest, LrangeBeforeConnectReturnsNull) {
+    auto result = conn.lrange("list", 0, -1);
+    EXPECT_EQ(result, nullptr);
+}
+
+TEST_F(RedisConnectTest, SaddBeforeConnectReturnsFalse) { EXPECT_FALSE(conn.sadd("set", "member")); }
+
+TEST_F(RedisConnectTest, SmembersBeforeConnectReturnsNull) {
+    auto result = conn.smembers("set");
+    EXPECT_EQ(result, nullptr);
+}
+
+TEST_F(RedisConnectTest, GetCharacterSetReturnsEmpty) { EXPECT_TRUE(conn.get_character_set().empty()); }
+
+TEST_F(RedisConnectTest, SetCharacterSetReturnsFalse) { EXPECT_FALSE(conn.set_character_set("UTF8")); }
+
+TEST_F(RedisConnectTest, BeginBeforeConnectReturnsFalse) { EXPECT_FALSE(conn.begin()); }
+
+TEST_F(RedisConnectTest, CommitBeforeConnectReturnsFalse) { EXPECT_FALSE(conn.commit()); }
+
+TEST_F(RedisConnectTest, RollbackBeforeConnectReturnsFalse) { EXPECT_FALSE(conn.rollback()); }
+
+class RedisResultTest : public ::testing::Test {};
+
+TEST_F(RedisResultTest, DefaultConstructorCreatesEmpty) {
+    redis_result result;
+    EXPECT_TRUE(result.empty());
+}
+
+TEST_F(RedisResultTest, DefaultConstructorTypeIsNegative) {
+    redis_result result;
+    EXPECT_EQ(result.type(), -1);
+}
+
+TEST_F(RedisResultTest, DefaultConstructorIsNotNil) {
+    redis_result result;
+    EXPECT_FALSE(result.is_nil());
+}
+
+TEST_F(RedisResultTest, NullReplyIsEmpty) {
+    redis_result result{static_cast<::redisReply*>(nullptr)};
+    EXPECT_TRUE(result.empty());
+}
+
+TEST_F(RedisResultTest, ValueHashIsEmptyByDefault) {
+    redis_result result;
+    EXPECT_TRUE(result.value_hash().empty());
+}
+
+class RedisFactoryTest : public ::testing::Test {
+protected:
+    db_config config{db_config::for_redis("0")};
+};
+
+TEST_F(RedisFactoryTest, FactoryConstruction) {
+    redis_factory factory{config};
+    SUCCEED();
+}
+
+TEST_F(RedisFactoryTest, CreateResultWithNullCreatesValidResult) {
+    redis_factory factory{config};
+    auto* result = factory.create_result(nullptr);
+    ASSERT_NE(result, nullptr);
+    delete result;
+}
+#endif
+
+#ifdef NEFORCE_SUPPORT_SQLITE3
+#    include <NeForce/db/sqlite/sqlite_connect.hpp>
+
+class SqliteFactoryTest : public ::testing::Test {
+protected:
+    db_config config{db_config::for_sqlite(":memory:")};
+};
+
+TEST_F(SqliteFactoryTest, FactoryConstruction) {
+    sqlite_factory factory{config};
+    SUCCEED();
+}
+
+TEST_F(SqliteFactoryTest, CreateResultWithNullCreatesValidResult) {
+    sqlite_factory factory{config};
+    auto* result = factory.create_result(nullptr);
+    ASSERT_NE(result, nullptr);
+    delete result;
+}
+
+TEST_F(SqliteFactoryTest, CreateConnectReturnsValidConnection) {
+    sqlite_factory factory{config};
+    auto* conn = factory.create_connect();
+    ASSERT_NE(conn, nullptr);
+    EXPECT_TRUE(conn->connected());
+    delete conn;
+}
+#endif

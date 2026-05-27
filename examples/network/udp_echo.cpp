@@ -19,7 +19,7 @@ using namespace neforce;
 
 static void udp_echo_once(ports port) {
     udp_socket server;
-    server.open(AF_INET);
+    server.open();
     server.bind(ip_address::any(port));
 
     char buffer[1024];
@@ -45,7 +45,7 @@ int main() {
         this_thread::sleep_for(milliseconds(100));
 
         udp_socket client;
-        client.open(AF_INET);
+        client.open();
         auto server_addr = ip_address::parse("127.0.0.1", port);
         if (!server_addr) {
             println("Failed to parse address");
@@ -74,7 +74,7 @@ int main() {
         this_thread::sleep_for(milliseconds(100));
 
         udp_socket connected_client;
-        connected_client.open(AF_INET);
+        connected_client.open();
         auto server_addr = ip_address::parse("127.0.0.1", port);
         connected_client.connect(*server_addr);
 

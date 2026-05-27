@@ -72,9 +72,9 @@ struct ip_header {
  */
 class NEFORCE_API ip_socket : public socket_base {
 protected:
-    int family_ = AF_UNSPEC; ///< 地址族
+    family family_ = family::UNDEF; ///< 地址族
 
-    void open_ip(int family, int type, int protocol);
+    void open_ip(family f, type t, protocol p);
 
 public:
     /**
@@ -102,21 +102,20 @@ public:
 
     /**
      * @brief 获取地址族
-     * @return AF_INET、AF_INET6或AF_UNSPEC
      */
-    NEFORCE_NODISCARD int address_family() const noexcept { return family_; }
+    NEFORCE_NODISCARD family address_family() const noexcept { return family_; }
 
     /**
      * @brief 检查是否为IPv4 socket
      * @return IPv4返回true
      */
-    NEFORCE_NODISCARD bool is_ipv4() const noexcept { return family_ == AF_INET; }
+    NEFORCE_NODISCARD bool is_ipv4() const noexcept { return family_ == family::INET4; }
 
     /**
      * @brief 检查是否为IPv6 socket
      * @return IPv6返回true
      */
-    NEFORCE_NODISCARD bool is_ipv6() const noexcept { return family_ == AF_INET6; }
+    NEFORCE_NODISCARD bool is_ipv6() const noexcept { return family_ == family::INET6; }
 
     /**
      * @brief 连接到远程端点（TCP客户端）
@@ -136,7 +135,7 @@ public:
      * 重置地址族为AF_UNSPEC，然后关闭socket。
      */
     bool close() noexcept override {
-        family_ = AF_UNSPEC;
+        family_ = family::UNDEF;
         return socket_base::close();
     }
 };

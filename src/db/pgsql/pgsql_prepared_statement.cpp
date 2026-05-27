@@ -2,7 +2,7 @@
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
 #    include <NeForce/core/async/atomic.hpp>
 #    include <NeForce/core/utility/packages.hpp>
-#    include <NeForce/db/pgsql/pgsql_prepared_result.hpp>
+#    include <NeForce/db/pgsql/pgsql_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 pgsql_prepared_statement::pgsql_prepared_statement(::PGconn* conn, string sql) :
@@ -105,7 +105,7 @@ bool pgsql_prepared_statement::bind_param(const uint32_t index, const cbyte_view
     }
 
     if (value.empty()) {
-        return bind_param(index, static_cast<const char*>(nullptr));
+        return bind_param(index, string_view{});
     }
 
     const size_t idx = index - 1;
@@ -148,7 +148,7 @@ bool pgsql_prepared_statement::execute() {
     return true;
 }
 
-unique_ptr<idb_prepared_result> pgsql_prepared_statement::execute_query() {
+unique_ptr<idb_tb_result> pgsql_prepared_statement::execute_query() {
     last_error_.clear();
     last_errno_ = 0;
 
@@ -169,7 +169,7 @@ unique_ptr<idb_prepared_result> pgsql_prepared_statement::execute_query() {
         return nullptr;
     }
 
-    return make_unique<pgsql_prepared_result>(result);
+    return make_unique<pgsql_tb_result>(result, true);
 }
 
 NEFORCE_END_NAMESPACE__

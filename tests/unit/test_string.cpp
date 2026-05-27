@@ -2,6 +2,7 @@
 #include <NeForce/core/string/char_types.hpp>
 #include <NeForce/core/string/string.hpp>
 #include <NeForce/core/string/to_numerics.hpp>
+#include <NeForce/core/utility/packages.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
 
@@ -3250,4 +3251,299 @@ TEST_F(BasicStringOtherTest, Repeat) {
     string s("Hi");
     string result = s.repeat(3);
     EXPECT_EQ(result, "HiHiHi");
+}
+
+class BasicStringSplitTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+};
+
+TEST_F(BasicStringSplitTest, SplitBasicFunctionality) {
+    string str("hello,world,test");
+    auto result = str.split(",");
+
+    ASSERT_EQ(result.size(), 3);
+    EXPECT_EQ(result[0], "hello");
+    EXPECT_EQ(result[1], "world");
+    EXPECT_EQ(result[2], "test");
+}
+
+TEST_F(BasicStringSplitTest, SplitMultipleDelimiters) {
+    string str("apple,banana;orange:grape");
+    auto result = str.split(",;:");
+
+    ASSERT_EQ(result.size(), 4);
+    EXPECT_EQ(result[0], "apple");
+    EXPECT_EQ(result[1], "banana");
+    EXPECT_EQ(result[2], "orange");
+    EXPECT_EQ(result[3], "grape");
+}
+
+TEST_F(BasicStringSplitTest, SplitEmptyString) {
+    string str("");
+
+    auto result1 = str.split(",");
+    EXPECT_TRUE(result1.empty());
+
+    auto result2 = str.split(",", false);
+    ASSERT_EQ(result2.size(), 1);
+    EXPECT_TRUE(result2[0].empty());
+}
+
+TEST_F(BasicStringSplitTest, SplitEmptyDelimiter) {
+    string str("hello");
+    auto result = str.split("");
+
+    ASSERT_EQ(result.size(), 1);
+    EXPECT_EQ(result[0], "hello");
+}
+
+TEST_F(BasicStringSplitTest, SplitOnlyDelimiters) {
+    string str(",,,");
+
+    auto result1 = str.split(",");
+    EXPECT_TRUE(result1.empty());
+
+    auto result2 = str.split(",", false);
+    ASSERT_EQ(result2.size(), 4);
+    for (const auto& token: result2) {
+        EXPECT_TRUE(token.empty());
+    }
+}
+
+TEST_F(BasicStringSplitTest, SplitStartingWithDelimiter) {
+    string str(",hello,world");
+
+    auto result1 = str.split(",");
+    ASSERT_EQ(result1.size(), 2);
+    EXPECT_EQ(result1[0], "hello");
+    EXPECT_EQ(result1[1], "world");
+
+    auto result2 = str.split(",", false);
+    ASSERT_EQ(result2.size(), 3);
+    EXPECT_TRUE(result2[0].empty());
+    EXPECT_EQ(result2[1], "hello");
+    EXPECT_EQ(result2[2], "world");
+}
+
+TEST_F(BasicStringSplitTest, SplitEndingWithDelimiter) {
+    string str("hello,world,");
+
+    auto result1 = str.split(",");
+    ASSERT_EQ(result1.size(), 2);
+    EXPECT_EQ(result1[0], "hello");
+    EXPECT_EQ(result1[1], "world");
+
+    auto result2 = str.split(",", false);
+    ASSERT_EQ(result2.size(), 3);
+    EXPECT_EQ(result2[0], "hello");
+    EXPECT_EQ(result2[1], "world");
+    EXPECT_TRUE(result2[2].empty());
+}
+
+TEST_F(BasicStringSplitTest, SplitConsecutiveDelimiters) {
+    string str("hello,,world");
+
+    auto result1 = str.split(",");
+    ASSERT_EQ(result1.size(), 2);
+    EXPECT_EQ(result1[0], "hello");
+    EXPECT_EQ(result1[1], "world");
+
+    auto result2 = str.split(",", false);
+    ASSERT_EQ(result2.size(), 3);
+    EXPECT_EQ(result2[0], "hello");
+    EXPECT_TRUE(result2[1].empty());
+    EXPECT_EQ(result2[2], "world");
+}
+
+TEST_F(BasicStringSplitTest, SplitNoDelimiterFound) {
+    string str("hello");
+    auto result = str.split(",");
+
+    ASSERT_EQ(result.size(), 1);
+    EXPECT_EQ(result[0], "hello");
+}
+
+TEST_F(BasicStringSplitTest, SplitSingleCharacter) {
+    string str1("a");
+    auto result1 = str1.split(",");
+    ASSERT_EQ(result1.size(), 1);
+    EXPECT_EQ(result1[0], "a");
+
+    string str2(",");
+
+    auto result2 = str2.split(",");
+    EXPECT_TRUE(result2.empty());
+
+    auto result3 = str2.split(",", false);
+    ASSERT_EQ(result3.size(), 2);
+    EXPECT_TRUE(result3[0].empty());
+    EXPECT_TRUE(result3[1].empty());
+}
+
+TEST_F(BasicStringSplitTest, SplitWithUnicode) {
+    string str("你好,世界,测试");
+    auto result = str.split(",");
+
+    ASSERT_EQ(result.size(), 3);
+    EXPECT_EQ(result[0], "你好");
+    EXPECT_EQ(result[1], "世界");
+    EXPECT_EQ(result[2], "测试");
+}
+
+TEST_F(BasicStringSplitTest, SplitLargeData) {
+    string base = "token";
+    string large_str;
+    const int count = 10000;
+
+    for (int i = 0; i < count; ++i) {
+        if (i != 0) {
+            large_str += ",";
+        }
+        large_str += base + to_string(i);
+    }
+
+    string str(large_str.data());
+    auto result = str.split(",");
+
+    ASSERT_EQ(result.size(), count);
+    for (int i = 0; i < count; ++i) {
+        EXPECT_EQ(result[i], base + to_string(i));
+    }
+}
+
+class BasicStringJoinTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+};
+
+TEST_F(BasicStringJoinTest, JoinBasicFunctionality) {
+    vector<string> vec = {"hello", "world", "test"};
+    auto result = string::join(vec, ",");
+
+    EXPECT_EQ(result, "hello,world,test");
+}
+
+TEST_F(BasicStringJoinTest, JoinEmptyVector) {
+    vector<string> vec;
+    auto result = string::join(vec, ",");
+
+    EXPECT_TRUE(result.empty());
+}
+
+TEST_F(BasicStringJoinTest, JoinSingleElement) {
+    vector<string> vec = {"hello"};
+    auto result = string::join(vec, ",");
+
+    EXPECT_EQ(result, "hello");
+}
+
+TEST_F(BasicStringJoinTest, JoinEmptyDelimiter) {
+    vector<string> vec = {"a", "b", "c"};
+    auto result = string::join(vec, "");
+
+    EXPECT_EQ(result, "abc");
+}
+
+TEST_F(BasicStringJoinTest, JoinWithEmptyElements) {
+    vector<string> vec = {"hello", "", "world"};
+    auto result = string::join(vec, ",");
+
+    EXPECT_EQ(result, "hello,,world");
+}
+
+TEST_F(BasicStringJoinTest, JoinAllEmptyElements) {
+    vector<string> vec = {"", "", ""};
+    auto result = string::join(vec, ",");
+
+    EXPECT_EQ(result, ",,");
+}
+
+TEST_F(BasicStringJoinTest, JoinLongDelimiter) {
+    vector<string> vec = {"hello", "world"};
+    auto result = string::join(vec, " | ");
+
+    EXPECT_EQ(result, "hello | world");
+}
+
+class BasicStringJoinViewTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+};
+
+TEST_F(BasicStringJoinViewTest, JoinViewBasicFunctionality) {
+    vector<typename string::view_type> vec = {"hello", "world", "test"};
+    auto result = string::join(vec, ",");
+
+    EXPECT_EQ(result, "hello,world,test");
+}
+
+TEST_F(BasicStringJoinViewTest, JoinViewEmptyVector) {
+    vector<typename string::view_type> vec;
+    auto result = string::join(vec, ",");
+
+    EXPECT_TRUE(result.empty());
+}
+
+TEST_F(BasicStringJoinViewTest, JoinViewSingleElement) {
+    vector<typename string::view_type> vec = {"hello"};
+    auto result = string::join(vec, ",");
+
+    EXPECT_EQ(result, "hello");
+}
+
+TEST_F(BasicStringJoinViewTest, JoinViewEmptyDelimiter) {
+    vector<typename string::view_type> vec = {"a", "b", "c"};
+    auto result = string::join(vec, "");
+
+    EXPECT_EQ(result, "abc");
+}
+
+class BasicStringSplitJoinTest : public ::testing::Test {};
+
+TEST_F(BasicStringSplitJoinTest, SplitJoinRoundTrip) {
+    string original("hello,world,test");
+    auto split_result = original.split(",");
+    auto joined = string::join(split_result, ",");
+
+    EXPECT_EQ(original, joined);
+}
+
+TEST_F(BasicStringSplitJoinTest, SplitJoinRoundTripWithEmpty) {
+    string original(",hello,,world,");
+    auto split_result = original.split(",", false);
+    auto joined = string::join(split_result, ",");
+
+    EXPECT_EQ(original, joined);
+}
+
+TEST_F(BasicStringSplitJoinTest, MultipleSplitJoin) {
+    string original("a|b|c|d|e");
+
+    auto split1 = original.split("|");
+    auto joined1 = string::join(split1, "|");
+    EXPECT_EQ(original, joined1);
+
+    auto split2 = joined1.split("|");
+    auto joined2 = string::join(split2, "|");
+    EXPECT_EQ(original, joined2);
+}
+
+TEST_F(BasicStringSplitJoinTest, LargeDataSplitJoin) {
+    string base = "token";
+    string large_str;
+    const int count = 1000;
+
+    for (int i = 0; i < count; ++i) {
+        if (i != 0) {
+            large_str += ",";
+        }
+        large_str += base + to_string(i);
+    }
+
+    string original(large_str.data());
+    auto split_result = original.split(",");
+    auto joined = string::join(split_result, ",");
+
+    EXPECT_EQ(original, joined);
 }

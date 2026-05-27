@@ -20,8 +20,8 @@
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
-namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
+namespace {
     void ensure_initialized() noexcept {
         static once_flag init_flag{};
         call_once(init_flag, []() {
@@ -34,8 +34,8 @@ namespace {
         static mutex mtx{};
         return mtx;
     }
-#endif
 } // namespace
+#endif
 
 
 string stacktrace::frame::name() const {

@@ -2,7 +2,6 @@
 #include <NeForce/core/memory/endian.hpp>
 #include <NeForce/core/numeric/random.hpp>
 #include <NeForce/core/string/format.hpp>
-#include <NeForce/core/string/string_util.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/network/dns/dns_client.hpp>
 #include <NeForce/network/tcp/tcp_socket.hpp>
@@ -497,7 +496,7 @@ void dns_client::start_io() {
         NEFORCE_THROW_EXCEPTION(dns_exception::network_error("Failed to create shared UDP socket"));
     }
 
-    shared_socket_.bind(ip_address::any(ports(0), AF_INET));
+    shared_socket_.bind(ip_address::any());
 
 #ifndef NEFORCE_PLATFORM_WINDOWS
     try {
@@ -1064,11 +1063,11 @@ vector<dns_srv_record> dns_client::resolve_srv(const string_view domain) {
     for (const auto& record: result.answers) {
         if (record.type == dns_record::SRV) {
             dns_srv_record srv;
-            const auto parts = split(record.data.view(), " ");
+            const auto parts = record.data.split(" ");
             if (parts.size() >= 4) {
-                srv.priority = to_uint16(parts[0]);
-                srv.weight = to_uint16(parts[1]);
-                srv.port = to_uint16(parts[2]);
+                srv.priority = to_uint16(parts[0].view());
+                srv.weight = to_uint16(parts[1].view());
+                srv.port = to_uint16(parts[2].view());
                 srv.target = parts[3];
                 srv_records.push_back(srv);
             }
@@ -1083,15 +1082,15 @@ optional<dns_soa_record> dns_client::resolve_soa(const string_view domain) {
     for (const auto& record: result.answers) {
         if (record.type == dns_record::SOA) {
             dns_soa_record soa;
-            const auto parts = split(record.data.view(), " ");
+            const auto parts = record.data.split(" ");
             if (parts.size() >= 7) {
                 soa.mname = parts[0];
                 soa.rname = parts[1];
-                soa.serial = to_uint32(parts[2]);
-                soa.refresh = to_uint32(parts[3]);
-                soa.retry = to_uint32(parts[4]);
-                soa.expire = to_uint32(parts[5]);
-                soa.minimum = to_uint32(parts[6]);
+                soa.serial = to_uint32(parts[2].view());
+                soa.refresh = to_uint32(parts[3].view());
+                soa.retry = to_uint32(parts[4].view());
+                soa.expire = to_uint32(parts[5].view());
+                soa.minimum = to_uint32(parts[6].view());
                 return optional<dns_soa_record>{soa};
             }
         }

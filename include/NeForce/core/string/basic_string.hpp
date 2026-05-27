@@ -8,10 +8,11 @@
  * 此文件提供了动态字符串容器的实现。
  */
 
+#include <string>
+
 #include "NeForce/core/algorithm/shift.hpp"
+#include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/memory/allocator_traits.hpp"
-#include "NeForce/core/memory/standard_allocator.hpp"
-#include "NeForce/core/memory/uninitialized.hpp"
 #include "NeForce/core/string/string_view.hpp"
 #include "NeForce/core/utility/compressed_pair.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -2722,6 +2723,113 @@ public:
     template <typename Predicate>
     NEFORCE_CONSTEXPR20 basic_string& trim_if(Predicate pred) {
         return trim_left_if(pred).trim_right_if(pred);
+    }
+
+    /**
+     * @brief 分割字符串
+     * @param delimiters 分隔符集合
+     * @param skip_empty 是否跳过空字符串
+     * @return 分割后的字符串向量
+     *
+     * 使用指定的分隔符集合分割字符串，返回子串的字符串向量。
+     */
+    NEFORCE_NODISCARD vector<basic_string> split(const view_type delimiters, const bool skip_empty = true) const {
+        vector<basic_string> tokens;
+
+        if (empty()) {
+            if (!skip_empty) {
+                tokens.push_back(basic_string());
+            }
+            return tokens;
+        }
+
+        if (delimiters.empty()) {
+            tokens.push_back(*this);
+            return tokens;
+        }
+
+        size_t start = 0;
+        size_t end = find_first_of(delimiters);
+
+        while (end != view_type::npos) {
+            view_type token = view(start, end - start);
+            if (!skip_empty || !token.empty()) {
+                tokens.push_back(token);
+            }
+            start = end + 1;
+            end = find_first_of(delimiters, start);
+        }
+
+        const auto last_token = tail(start);
+        if (!skip_empty || !last_token.empty()) {
+            tokens.push_back(move(last_token));
+        }
+
+        return tokens;
+    }
+
+    /**
+     * @brief 连接字符串
+     * @param vec 字符串向量
+     * @param delimiter 连接符
+     * @return 字符串
+     *
+     * 将字符串向量中的所有字符串用指定的连接符连接起来。
+     */
+    NEFORCE_NODISCARD static basic_string join(const vector<basic_string>& vec, const view_type delimiter) {
+        if (vec.empty()) {
+            return {};
+        }
+
+        size_t total_length = 0;
+        for (const auto& s: vec) {
+            total_length += s.length();
+        }
+        total_length += delimiter.length() * (vec.size() - 1);
+
+        basic_string result;
+        result.reserve(total_length);
+
+        for (size_t i = 0; i < vec.size(); ++i) {
+            if (i != 0) {
+                result.append(delimiter);
+            }
+            result.append(vec[i]);
+        }
+
+        return result;
+    }
+
+    /**
+     * @brief 连接字符串视图
+     * @param vec 字符串视图向量
+     * @param delimiter 连接符
+     * @return 字符串
+     *
+     * 将字符串视图向量中的所有字符串用指定的连接符连接起来。
+     */
+    NEFORCE_NODISCARD static basic_string join(const vector<view_type>& vec, const view_type delimiter) {
+        if (vec.empty()) {
+            return {};
+        }
+
+        size_t total_length = 0;
+        for (const auto& s: vec) {
+            total_length += s.length();
+        }
+        total_length += delimiter.length() * (vec.size() - 1);
+
+        basic_string result;
+        result.reserve(total_length);
+
+        for (size_t i = 0; i < vec.size(); ++i) {
+            if (i != 0) {
+                result.append(delimiter);
+            }
+            result.append(vec[i]);
+        }
+
+        return result;
     }
 
     /**

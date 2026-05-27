@@ -1,7 +1,6 @@
 #include <NeForce/core/file/file.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <cerrno>
-#    include <cstring>
 #    include <sys/stat.h>
 #    include <unistd.h>
 #endif
@@ -282,12 +281,11 @@ bool file::open(path pth, const bool append, file_access access, file_shared sha
         set_last_error();
         return false;
     }
+
 #ifdef NEFORCE_PLATFORM_LINUX
-    else {
-        const int fd_flags = ::fcntl(handle_, F_GETFD);
-        if (fd_flags != -1) {
-            ::fcntl(handle_, F_SETFD, fd_flags | FD_CLOEXEC);
-        }
+    const int fd_flags = ::fcntl(handle_, F_GETFD);
+    if (fd_flags != -1) {
+        ::fcntl(handle_, F_SETFD, fd_flags | FD_CLOEXEC);
     }
 #endif
 

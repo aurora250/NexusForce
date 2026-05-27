@@ -25,7 +25,7 @@ int main() {
 
     // 创建SSL Socket
     ssl_socket client;
-    client.open(AF_INET);
+    client.open();
 
     // 连接到服务器
     const string host = "127.0.0.1";

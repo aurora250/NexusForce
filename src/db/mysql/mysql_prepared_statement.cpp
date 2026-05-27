@@ -196,7 +196,7 @@ bool mysql_prepared_statement::execute() {
     return ::mysql_stmt_execute(stmt_) == 0;
 }
 
-unique_ptr<idb_prepared_result> mysql_prepared_statement::execute_query() {
+unique_ptr<idb_tb_result> mysql_prepared_statement::execute_query() {
     throw_if_stmt_null(stmt_);
     if (param_count_ > 0) {
         if (::mysql_stmt_bind_param(stmt_, bind_params_.data())) {

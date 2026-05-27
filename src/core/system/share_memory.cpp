@@ -14,8 +14,6 @@
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <NeForce/core/exception/error_code.hpp>
-#    include <cerrno>
-#    include <cstring>
 #    include <fcntl.h>
 #    include <sys/mman.h>
 #    include <sys/stat.h>

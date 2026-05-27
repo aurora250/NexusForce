@@ -10,7 +10,7 @@
 
 #ifdef NEFORCE_SUPPORT_MYSQL
 #    include <mysql/mysql.h>
-#    include "NeForce/db/db_interface.hpp"
+#    include "NeForce/db/sql_connect_base.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -38,9 +38,14 @@ NEFORCE_BEGIN_NAMESPACE__
  * - 查询结果获取
  * - 预处理语句支持
  */
-struct NEFORCE_API mysql_connect final : idb_tb_connect {
-private:
+struct NEFORCE_API mysql_connect final : sql_connect_base<mysql_connect> {
+protected:
     ::MYSQL* link_ = nullptr; ///< MySQL连接句柄
+    friend sql_connect_base<mysql_connect>;
+
+private:
+    mutable string last_error_;       ///< 最后错误信息
+    mutable uint32_t last_errno_ = 0; ///< 最后错误码
 
 public:
     /**
@@ -64,7 +69,7 @@ public:
      *
      * 使用配置建立连接，连接后自动设置字符集。
      */
-    NEFORCE_NODISCARD bool connect(const db_config& config) noexcept override;
+    NEFORCE_NODISCARD bool connect(const db_config& config) override;
 
     /**
      * @brief 重新连接数据库
@@ -118,14 +123,14 @@ public:
      * @param sql SQL语句
      * @return 执行成功返回true
      */
-    NEFORCE_NODISCARD bool update(const string& sql) const noexcept override;
+    NEFORCE_NODISCARD bool update(const string& sql) const override;
 
     /**
      * @brief 执行查询SQL语句
      * @param sql SELECT语句
      * @return 查询结果集，失败返回空指针
      */
-    NEFORCE_NODISCARD unique_ptr<idb_tb_result> query(const string& sql) const noexcept override;
+    NEFORCE_NODISCARD unique_ptr<idb_tb_result> query(const string& sql) const override;
 
     /**
      * @brief 创建预处理语句
@@ -146,6 +151,15 @@ public:
      * @return 有效返回true
      */
     NEFORCE_NODISCARD bool is_valid() const noexcept override { return ::mysql_ping(link_) == 0; }
+
+    size_t batch_insert(const string& table, const vector<string>& columns,
+                        const vector<vector<string>>& rows) override;
+
+private:
+    string begin_sql() { return "START TRANSACTION"; }
+    string commit_sql() { return "COMMIT"; }
+    string rollback_sql() { return "ROLLBACK"; }
+    string table_exists_query(const string& table) const { return "SHOW TABLES LIKE '" + table + "'"; }
 };
 
 /**

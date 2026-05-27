@@ -2150,27 +2150,33 @@ TEST(PermutationConsistency, NextPrevRoundTrip) {
     EXPECT_EQ(v, original);
 }
 
-TEST(PermutationConsistency, DISABLED_AllPermutationsGenerated) {
+TEST(PermutationConsistency, AllPermutationsGenerated) {
     vector<int> v = {1, 2, 2, 3};
     vector<vector<int>> all;
     auto start = v;
+
     do {
         all.push_back(v);
     } while (next_permutation(v.begin(), v.end()));
-
     EXPECT_EQ(all.size(), 12);
+
     auto sorted = all;
     sort(sorted.begin(), sorted.end());
     auto last = unique(sorted.begin(), sorted.end());
     EXPECT_EQ(distance(sorted.begin(), last), 12);
-    EXPECT_EQ(v, (vector<int>{3, 2, 2, 1}));
+    EXPECT_EQ(v, start);
+    EXPECT_EQ(all.back(), (vector<int>{3, 2, 2, 1}));
 
     vector<vector<int>> rev;
+    v = all.back();
     do {
         rev.push_back(v);
     } while (prev_permutation(v.begin(), v.end()));
-    EXPECT_EQ(v, start);
+    EXPECT_EQ(v, all.back());
     EXPECT_EQ(rev.size(), 12);
+
+    reverse(all.begin(), all.end());
+    EXPECT_EQ(rev, all);
 }
 
 TEST(RemoveCopyTest, Basic) {

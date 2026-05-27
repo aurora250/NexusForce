@@ -19,11 +19,11 @@ namespace {
 
     bool network_available() {
         udp_socket sock;
-        if (!sock.try_open(AF_INET, SOCK_DGRAM, 0)) {
+        if (!sock.try_open(socket_base::family::INET4, socket_base::type::DGRAM)) {
             return false;
         }
         sock.set_reuse_address(true);
-        auto addr = ip_address::any(ports(0u), AF_INET);
+        auto addr = ip_address::any();
         sock.bind(addr);
         auto local = sock.local_endpoint();
         sock.close();
@@ -43,15 +43,15 @@ TEST_F(UdpSocketIntegration, LoopbackSendReceive) {
     }
 
     udp_socket server;
-    server.open(AF_INET);
+    server.open();
     server.set_reuse_address(true);
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     server.bind(addr);
     auto bound = server.local_endpoint();
     ASSERT_TRUE(bound.has_value());
 
     udp_socket client;
-    client.open(AF_INET);
+    client.open();
 
     const char* msg = "integration test message";
     ssize_t sent = client.send_to(memory_view<const char>(msg, 24), *bound);
@@ -73,15 +73,15 @@ TEST_F(UdpSocketIntegration, SendReceiveMultiplePackets) {
     }
 
     udp_socket server;
-    server.open(AF_INET);
+    server.open();
     server.set_reuse_address(true);
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     server.bind(addr);
     auto bound = server.local_endpoint();
     ASSERT_TRUE(bound.has_value());
 
     udp_socket client;
-    client.open(AF_INET);
+    client.open();
 
     for (int i = 0; i < 5; ++i) {
         string msg = "packet_" + to_string(i);
@@ -104,8 +104,8 @@ TEST_F(UdpSocketIntegration, EmptySendToReturnsZero) {
     }
 
     udp_socket sock;
-    sock.open(AF_INET);
-    auto addr = ip_address::loopback(ports(12345u), AF_INET);
+    sock.open();
+    auto addr = ip_address::loopback(ports(12345u));
     EXPECT_EQ(sock.send_to(memory_view<const char>(), addr), 0);
     sock.close();
 }
@@ -116,15 +116,15 @@ TEST_F(UdpSocketIntegration, ConnectedModeSendReceive) {
     }
 
     udp_socket server;
-    server.open(AF_INET);
+    server.open();
     server.set_reuse_address(true);
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     server.bind(addr);
     auto bound = server.local_endpoint();
     ASSERT_TRUE(bound.has_value());
 
     udp_socket client;
-    client.open(AF_INET);
+    client.open();
     client.connect(*bound);
 
     const char* msg = "connected udp";
@@ -146,15 +146,15 @@ TEST_F(UdpSocketIntegration, Ipv6LoopbackSendReceive) {
     }
 
     udp_socket server;
-    server.open(AF_INET6);
+    server.open(socket_base::family::INET6);
     server.set_reuse_address(true);
-    auto addr = ip_address::loopback(ports(0u), AF_INET6);
+    auto addr = ip_address::loopback(ports(0u), socket_base::family::INET6);
     server.bind(addr);
     auto bound = server.local_endpoint();
     ASSERT_TRUE(bound.has_value());
 
     udp_socket client;
-    client.open(AF_INET6);
+    client.open(socket_base::family::INET6);
 
     const char* msg = "ipv6 udp test";
     ssize_t sent = client.send_to(memory_view<const char>(msg, 14), *bound);
@@ -204,7 +204,7 @@ TEST_F(IcmpSocketIntegration, PingLoopback) {
     icmp_socket sock;
     ASSERT_NO_THROW(sock.open());
 
-    auto dest = ip_address::loopback(ports::UNDEF, AF_INET);
+    auto dest = ip_address::loopback();
     auto result = sock.ping(dest, milliseconds(500));
     EXPECT_TRUE(result.success);
     EXPECT_GE(result.rtt.count(), 0);
@@ -219,7 +219,7 @@ TEST_F(IcmpSocketIntegration, PingWithCustomPayload) {
     ASSERT_NO_THROW(sock.open());
 
     char payload[] = "ICMP test payload data";
-    auto dest = ip_address::loopback(ports::UNDEF, AF_INET);
+    auto dest = ip_address::loopback();
     auto result = sock.ping(dest, milliseconds(1000), 1, payload, sizeof(payload));
     if (result.success) {
         EXPECT_EQ(result.reply_size, sizeof(payload));
@@ -234,7 +234,7 @@ TEST_F(IcmpSocketIntegration, TracerouteToLoopback) {
     icmp_socket sock;
     ASSERT_NO_THROW(sock.open());
 
-    auto dest = ip_address::loopback(ports::UNDEF, AF_INET);
+    auto dest = ip_address::loopback();
     auto hops = sock.traceroute(dest, 5, milliseconds(500), 2);
     EXPECT_GE(hops.size(), 1u);
     EXPECT_TRUE(hops[0].reached);
@@ -304,10 +304,10 @@ TEST_F(SocketBaseIntegration, OpenTcpAndBindToAnyPort) {
     }
 
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(socket_base::family::INET4);
     sock.set_reuse_address(true);
 
-    auto addr = ip_address::any(ports(0u), AF_INET);
+    auto addr = ip_address::any();
     EXPECT_NO_THROW(sock.bind(addr));
 
     auto local = sock.local_endpoint();
@@ -323,7 +323,7 @@ TEST_F(SocketBaseIntegration, GetOptionOnOpenSocket) {
     }
 
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(socket_base::family::INET4);
     sock.set_reuse_address(true);
 
     int val = 0;
@@ -338,7 +338,7 @@ TEST_F(SocketBaseIntegration, NonblockingModeToggle) {
     }
 
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(socket_base::family::INET4);
 
     EXPECT_TRUE(sock.set_nonblocking(true));
     EXPECT_TRUE(sock.set_nonblocking(false));
@@ -351,7 +351,7 @@ TEST_F(SocketBaseIntegration, SoReusePort) {
     }
 
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(socket_base::family::INET4);
     sock.set_reuse_port(true);
     sock.close();
 }
@@ -368,16 +368,16 @@ TEST_F(IpSocketIntegration, ConnectToLoopbackWithTcp) {
     }
 
     socket_base server;
-    server.open(AF_INET, SOCK_STREAM, 0);
+    server.open(socket_base::family::INET4);
     server.set_reuse_address(true);
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     server.bind(addr);
     server.listen(1);
     auto bound = server.local_endpoint();
     ASSERT_TRUE(bound.has_value());
 
     udp_socket client;
-    client.open(AF_INET);
+    client.open();
     client.connect(*bound);
     EXPECT_TRUE(client.is_open());
 

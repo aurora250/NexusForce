@@ -51,7 +51,7 @@ namespace {
 bool arp::local_info(const char* iface) {
     socket_base query_sock;
 
-    const bool res = query_sock.try_open(AF_INET, SOCK_DGRAM, 0);
+    const bool res = query_sock.try_open(ip_address::family::INET4, socket_base::type::DGRAM);
     if (!res) {
         return false;
     }
@@ -143,7 +143,9 @@ bool arp::open(const char* iface) {
         return false;
     }
 
-    const bool res = sock_.try_open(AF_PACKET, SOCK_RAW, endian::host_to_network<int>(ETH_P_ARP));
+    const bool res = sock_.try_open(ip_address::family::PACKET, socket_base::type::RAW,
+                                    // NOLINTNEXTLINE(clang-analyzer-optin.core.EnumCastOutOfRange)
+                                    static_cast<socket_base::protocol>(endian::host_to_network<int>(ETH_P_ARP)));
     if (!res) {
         return false;
     }
@@ -182,7 +184,7 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    // 使用系统 SendARP
+    // Using system SendARP
     ::ULONG mac[2] = {0};
     ::ULONG mac_len = 6;
     const auto ip_addr = static_cast<::IPAddr>(target.address().get<::sockaddr_in>().sin_addr.s_addr);
@@ -201,7 +203,7 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
     }
     int fd = sock_.native_handle();
 
-    // 构造 ARP 请求报文
+    // Construct ARP request packet
     byte_t packet[sizeof(arp_ether_header) + sizeof(arp_packet)];
     memory_zero(packet);
 
@@ -210,7 +212,7 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
     memory_copy(eth->src_mac, local_mac_.bytes().data(), 6);
     eth->ether_type = endian::host_to_network<uint16_t>(ARP_ETHER_TYPE);
 
-    // 填充 ARP 报文
+    // Fill ARP packet
     auto* const arp_pkt = reinterpret_cast<arp_packet*>(packet + sizeof(arp_ether_header));
     arp_pkt->hw_type = endian::host_to_network<uint16_t>(1);
     arp_pkt->proto_type = endian::host_to_network<uint16_t>(ETH_P_IP);
@@ -223,7 +225,7 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
     const uint32_t target_ip = target.address().get<::sockaddr_in>().sin_addr.s_addr;
     memory_copy(arp_pkt->target_ip, &target_ip, 4);
 
-    // 设置目标地址并发送广播
+    // Set dest address and broadcast
     ::sockaddr_ll dest_addr{};
     memory_zero(&dest_addr);
     dest_addr.sll_family = AF_PACKET;
@@ -240,7 +242,7 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
         return none;
     }
 
-    // 轮询等待 ARP 回复
+    // Wait ARP response
     const auto start = steady_clock::now();
     auto remaining = timeout;
 
@@ -265,7 +267,7 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
             break;
         }
 
-        // 接收并解析响应报文
+        // Receive and resolve packet
         byte_t recv_buf[2048];
         ::sockaddr_ll from;
         ::socklen_t from_len = sizeof(from);
@@ -281,45 +283,39 @@ optional<mac_address> arp::resolve(const ip_address& target, const milliseconds 
             return none;
         }
 
-        // 检查报文长度是否足够
         if (static_cast<size_t>(recv_len) < sizeof(arp_ether_header) + sizeof(arp_packet)) {
             continue;
         }
 
-        // 验证以太类型是否为 ARP
         const auto* recv_eth = reinterpret_cast<const arp_ether_header*>(recv_buf);
         if (endian::network_to_host<uint16_t>(recv_eth->ether_type) != ARP_ETHER_TYPE) {
             continue;
         }
 
-        // 验证是否为 ARP 回复
         const auto* recv_arp = reinterpret_cast<const arp_packet*>(recv_buf + sizeof(arp_ether_header));
         if (endian::network_to_host<uint16_t>(recv_arp->opcode) != ARP_REPLY) {
             continue;
         }
 
-        // 验证目标 IP 是否为本机 IP
         uint32_t recv_target_ip = 0;
         memory_copy(&recv_target_ip, recv_arp->target_ip, 4);
         if (recv_target_ip != local_ip_) {
             continue;
         }
 
-        // 验证发送方 IP 是否为目标 IP
         uint32_t recv_sender_ip = 0;
         memory_copy(&recv_sender_ip, recv_arp->sender_ip, 4);
         if (recv_sender_ip != target_ip) {
             continue;
         }
 
-        // 提取发送方 MAC 地址并返回
+        // Get MAC address
         byte_t mac_bytes[6];
         memory_copy(mac_bytes, recv_arp->sender_mac, 6);
         return mac_address(mac_bytes);
     }
 
     return none;
-
 #endif
 }
 

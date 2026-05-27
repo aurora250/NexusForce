@@ -157,7 +157,7 @@ public:
      *
      * 执行查询并返回结果集对象。
      */
-    NEFORCE_NODISCARD unique_ptr<idb_prepared_result> execute_query() override;
+    NEFORCE_NODISCARD unique_ptr<idb_tb_result> execute_query() override;
 
     /**
      * @brief 获取错误信息

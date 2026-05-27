@@ -94,6 +94,8 @@ public:
      */
     NEFORCE_NODISCARD const vector<string_view>& column_names() const noexcept override { return *column_name_; }
 
+    NEFORCE_NODISCARD column_meta column_metadata(size_type n) const override;
+
     /**
      * @brief 获取列类型列表
      * @return MySQL字段类型列表

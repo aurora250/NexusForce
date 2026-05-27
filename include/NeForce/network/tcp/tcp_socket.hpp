@@ -85,12 +85,12 @@ public:
 
     /**
      * @brief 打开TCP socket
-     * @param family 地址族（AF_INET或AF_INET6），默认IPv4
+     * @param f 地址族，默认IPv4
      * @throws socket_exception 创建失败时抛出
      *
      * 创建TCP协议的socket，使用SOCK_STREAM类型和IPPROTO_TCP协议。
      */
-    void open(int family = AF_INET);
+    void open(family f = family::INET4);
 
     /**
      * @brief 连接到远程服务器

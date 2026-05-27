@@ -10,6 +10,9 @@
 
 #include "NeForce/core/time/duration.hpp"
 #include "NeForce/network/util/ip_address.hpp"
+#ifdef NEFORCE_PLATFORM_LINUX
+#    include <linux/if_ether.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -73,29 +76,6 @@ struct NEFORCE_API socket_exception final : network_exception {
  * - 本地/远程端点查询
  * - 绑定和监听
  * - 移动语义支持
- *
- * 使用示例：
- * @code
- * // 创建TCP socket
- * socket_base sock;
- * sock.open(AF_INET, SOCK_STREAM, 0);
- *
- * // 设置选项
- * sock.set_reuse_address(true);
- * sock.set_tcp_nodelay(true);
- * sock.set_nonblocking(true);
- *
- * // 绑定端口
- * auto addr = ip_address::any(ports(8080));
- * sock.bind(addr);
- * sock.listen(128);
- *
- * // 获取本地地址
- * auto local = sock.local_endpoint();
- * if (local) {
- *     println(local);
- * }
- * @endcode
  */
 class NEFORCE_API socket_base {
 public:
@@ -115,6 +95,48 @@ public:
 #else
             -1; ///< 无效句柄
 #endif
+
+    using family = ip_address::family; ///< 网络地址族类型
+
+    /**
+     * @brief socket 类型枚举
+     */
+    enum class type : int32_t {
+        STREAM = SOCK_STREAM,       ///< 流式套接字（TCP）
+        DGRAM = SOCK_DGRAM,         ///< 数据报套接字（UDP）
+        RAW = SOCK_RAW,             ///< 原始套接字
+        RDM = SOCK_RDM,             ///< 可靠数据报套接字
+        SEQPACKET = SOCK_SEQPACKET, ///< 有序分组套接字（SCTP）
+        CLOEXEC = SOCK_CLOEXEC,     ///< 执行时关闭标志
+        NONBLOCK = SOCK_NONBLOCK,   ///< 非阻塞标志
+        DCCP = SOCK_DCCP,           ///< 数据报拥塞控制协议（DCCP）
+    };
+
+    /**
+     * @brief socket 协议枚举
+     *
+     * 封装了底层协议标识常量，用于指定套接字使用的网络协议类型。
+     */
+    enum class protocol : int32_t {
+        AUTO = 0,            ///< 自动选择协议
+        ICMP = IPPROTO_ICMP, ///< Internet 控制报文协议
+        TCP = IPPROTO_TCP,   ///< 传输控制协议
+        UDP = IPPROTO_UDP,   ///< 用户数据报协议
+        SCTP = IPPROTO_SCTP, ///< 流控制传输协议
+        RAW = IPPROTO_RAW,   ///< 原始 IP 数据包
+        ESP = IPPROTO_ESP,   ///< IPsec 封装安全载荷
+        AH = IPPROTO_AH,     ///< IPsec 认证头
+        DCCP = IPPROTO_DCCP, ///< 数据报拥塞控制协议
+
+        IP = ETH_P_IP,             ///< IPv4 以太网帧类型
+        ARP = ETH_P_ARP,           ///< 地址解析协议帧类型
+        IPV6 = ETH_P_IPV6,         ///< IPv6 以太网帧类型
+        LAT = ETH_P_LAT,           ///< 局域传输协议
+        ETHERCAT = ETH_P_ETHERCAT, ///< EtherCAT 工业以太网协议
+        VLAN = ETH_P_8021Q,        ///< IEEE 802.1Q VLAN 标签帧
+        LLDP = ETH_P_LLDP,         ///< 链路层发现协议
+        MPLS = ETH_P_MPLS_UC       ///< 多协议标签交换单播
+    };
 
 protected:
     native_handle_type fd_ = invalid_handle; ///< Socket句柄
@@ -174,13 +196,13 @@ public:
 
     /**
      * @brief 打开socket
-     * @param family 地址族（AF_INET或AF_INET6）
-     * @param type socket类型（SOCK_STREAM、SOCK_DGRAM等）
-     * @param protocol 协议（0为自动选择）
+     * @param f 地址族
+     * @param t socket类型
+     * @param p 协议
      * @throws socket_exception 创建失败时抛出
      * @throws value_exception 地址族无效时抛出
      */
-    void open(int family, int type, int protocol);
+    void open(family f, type t = socket_base::type::STREAM, protocol p = socket_base::protocol::AUTO);
 
     /**
      * @brief 关闭socket
@@ -189,13 +211,13 @@ public:
     virtual bool close() noexcept;
 
     /**
-     * @brief 尝试打开socket（不抛出异常）
-     * @param family 地址族
-     * @param type socket类型
-     * @param protocol 协议
+     * @brief 尝试打开socket
+     * @param f 地址族
+     * @param t socket类型
+     * @param p 协议
      * @return 打开成功返回true
      */
-    bool try_open(int family, int type, int protocol) noexcept;
+    bool try_open(family f, type t = socket_base::type::STREAM, protocol p = socket_base::protocol::AUTO) noexcept;
 
     /**
      * @brief 设置非阻塞模式

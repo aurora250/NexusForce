@@ -1,6 +1,5 @@
 #include <NeForce/core/file/file.hpp>
 #include <NeForce/core/file/file_diff.hpp>
-#include <NeForce/core/string/string_util.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 bool file_diff::compare(const path& file1, const path& file2, const bool binary) {
@@ -65,7 +64,7 @@ bool file_diff::compare_text(const path& file1, const path& file2, const bool ig
     }
 
     auto get_lines = [](const string& content) {
-        vector<string> lines = split(content, "\n", false);
+        vector<string> lines = content.split("\n", false);
         for (auto& line: lines) {
             if (!line.empty() && line.back() == '\r') {
                 line.pop_back();

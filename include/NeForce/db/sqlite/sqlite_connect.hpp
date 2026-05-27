@@ -10,7 +10,7 @@
 
 #ifdef NEFORCE_SUPPORT_SQLITE3
 #    include <sqlite3.h>
-#    include "NeForce/db/db_interface.hpp"
+#    include "NeForce/db/sql_connect_base.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -42,10 +42,14 @@ NEFORCE_BEGIN_NAMESPACE__
  * @note SQLite连接是文件级别的，database字段指定数据库文件路径。
  *       支持内存数据库（":memory:"）。
  */
-struct NEFORCE_API sqlite_connect final : idb_tb_connect {
-private:
+struct NEFORCE_API sqlite_connect final : sql_connect_base<sqlite_connect> {
+protected:
     ::sqlite3* link_ = nullptr; ///< SQLite数据库连接句柄
-    mutable string last_error_; ///< 最后错误信息
+    friend sql_connect_base<sqlite_connect>;
+
+private:
+    mutable string last_error_;       ///< 最后错误信息
+    mutable uint32_t last_errno_ = 0; ///< 最后错误码
 
 public:
     /**
@@ -109,7 +113,7 @@ public:
      * @brief 获取最后错误码
      * @return SQLite错误码
      */
-    NEFORCE_NODISCARD uint32_t get_errno() const override { return link_ != nullptr ? ::sqlite3_errcode(link_) : 0; }
+    NEFORCE_NODISCARD uint32_t get_errno() const override { return last_errno_; }
 
     /**
      * @brief 执行非查询SQL语句
@@ -143,6 +147,19 @@ public:
      * @return 有效返回true
      */
     NEFORCE_NODISCARD bool is_valid() const override;
+
+    NEFORCE_NODISCARD bool table_exists(const string& table) const override;
+
+    size_t batch_insert(const string& table, const vector<string>& columns,
+                        const vector<vector<string>>& rows) override;
+
+private:
+    string begin_sql() { return "BEGIN TRANSACTION"; }
+    string commit_sql() { return "COMMIT"; }
+    string rollback_sql() { return "ROLLBACK"; }
+    string table_exists_query(const string& table) const {
+        return "SELECT name FROM sqlite_master WHERE type='table' AND name='" + table + "'";
+    }
 };
 
 /**

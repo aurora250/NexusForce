@@ -19,9 +19,27 @@ column_types_(make_unique<vector<int>>()) {
     }
 }
 
+sqlite_result::sqlite_result(::sqlite3_stmt* statement, const sqlite_cleanup_action cleanup) :
+stmt_(statement),
+cleanup_(cleanup),
+column_names_(make_unique<vector<string_view>>()),
+column_types_(make_unique<vector<int>>()) {
+    if (stmt_ != nullptr) {
+        columns_ = ::sqlite3_column_count(stmt_);
+        for (size_type i = 0; i < columns_; ++i) {
+            column_names_->push_back(::sqlite3_column_name(stmt_, static_cast<int>(i)));
+            column_types_->push_back(::sqlite3_column_type(stmt_, static_cast<int>(i)));
+        }
+    }
+}
+
 sqlite_result::~sqlite_result() {
     if (stmt_ != nullptr) {
-        ::sqlite3_finalize(stmt_);
+        if (cleanup_ == sqlite_cleanup_action::finalize) {
+            ::sqlite3_finalize(stmt_);
+        } else {
+            ::sqlite3_reset(stmt_);
+        }
     }
 }
 
@@ -113,6 +131,14 @@ timestamp sqlite_result::get_timestamp(const size_type n) const {
     NEFORCE_DEBUG_VERIFY(cursor_, "index can`t dereference nullptr.")
     NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
     return timestamp{static_cast<long>(::sqlite3_column_int64(stmt_, static_cast<int>(n)))};
+}
+
+column_meta sqlite_result::column_metadata(const size_type n) const {
+    NEFORCE_DEBUG_VERIFY(columns_ > n, "index out of ranges.")
+    column_meta meta;
+    meta.name = (*column_names_)[n];
+    meta.type = (*column_types_)[n];
+    return meta;
 }
 
 NEFORCE_END_NAMESPACE__

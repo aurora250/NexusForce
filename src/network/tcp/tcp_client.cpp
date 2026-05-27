@@ -10,7 +10,7 @@ bool tcp_client_base::try_connect_to_ip(const string& ip, ports port) {
             return false;
         }
 
-        sock->open(is_ipv6_conn ? AF_INET6 : AF_INET);
+        sock->open(is_ipv6_conn ? ip_address::family::INET6 : ip_address::family::INET4);
 
         if (!sock->set_send_timeout(send_timeout_) || !sock->set_receive_timeout(recv_timeout_)) {
             sock->close();

@@ -259,7 +259,7 @@ void smtp_socket::do_tls_handshake(const ssl_context& ctx, const string& sni_hos
 }
 
 void smtp_socket::open_and_connect(const ip_address& addr) {
-    open_ip(addr.family(), SOCK_STREAM, IPPROTO_TCP);
+    open_ip(addr.address_family(), type::STREAM, protocol::TCP);
     if (::connect(fd_, addr.data(), addr.size()) != 0) {
         close();
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to connect to SMTP server"));

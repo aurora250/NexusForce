@@ -1,7 +1,7 @@
 #include <NeForce/network/udp_socket.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-void udp_socket::open(const int family) { open_ip(family, SOCK_DGRAM, IPPROTO_UDP); }
+void udp_socket::open(const family f) { open_ip(f, type::DGRAM, protocol::UDP); }
 
 ssize_t udp_socket::send_to(memory_view<const char> data, const ip_address& endpoint, const int flags) {
     if (!is_open()) {

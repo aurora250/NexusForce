@@ -61,6 +61,19 @@ struct NEFORCE_API idb_result {
 };
 
 /**
+ * @struct column_meta
+ * @brief 列元数据
+ *
+ * 描述结果集中列的类型和属性信息。
+ */
+struct NEFORCE_API column_meta {
+    string_view name;     ///< 列名
+    int32_t type{0};      ///< 列类型（数据库原生类型码）
+    size_t max_length{0}; ///< 最大长度
+    bool nullable{true};  ///< 是否可为空
+};
+
+/**
  * @struct idb_tb_result
  * @brief 关系型数据库结果集抽象基类
  *
@@ -86,6 +99,13 @@ struct NEFORCE_API idb_tb_result : idb_result {
      * @return 列名列表（按查询顺序）
      */
     NEFORCE_NODISCARD virtual const vector<string_view>& column_names() const = 0;
+
+    /**
+     * @brief 获取列元数据
+     * @param n 列索引（从0开始）
+     * @return 列元数据
+     */
+    NEFORCE_NODISCARD virtual column_meta column_metadata(size_type n) const = 0;
 
     NEFORCE_NODISCARD virtual string_view get(size_type n) const = 0; ///< 字符串
 
@@ -124,16 +144,6 @@ struct NEFORCE_API idb_kv_result : idb_result {
 };
 
 /**
- * @struct idb_prepared_result
- * @brief 预处理语句执行结果
- *
- * 表示预处理语句查询的结果集。
- */
-struct NEFORCE_API idb_prepared_result : idb_tb_result {
-    ~idb_prepared_result() override = default;
-};
-
-/**
  * @struct idb_prepared_statement
  * @brief 预处理语句抽象基类
  *
@@ -166,7 +176,7 @@ struct NEFORCE_API idb_prepared_statement {
      * @brief 执行查询语句（SELECT）
      * @return 查询结果集
      */
-    virtual unique_ptr<idb_prepared_result> execute_query() = 0;
+    virtual unique_ptr<idb_tb_result> execute_query() = 0;
 
     /**
      * @brief 获取错误信息
@@ -230,12 +240,27 @@ public:
     NEFORCE_NODISCARD virtual bool update(const string& sql) const = 0;
 
     /**
+     * @name 事务管理
+     * @{
+     */
+    virtual bool begin() = 0;    ///< 开始事务
+    virtual bool commit() = 0;   ///< 提交事务
+    virtual bool rollback() = 0; ///< 回滚事务
+    /** @} */
+
+    /**
      * @name 连接状态检测
      * @{
      */
     NEFORCE_NODISCARD virtual bool connected() const = 0; ///< 检查连接状态
     NEFORCE_NODISCARD virtual bool is_valid() const = 0;  ///< 检查连接有效性
     /** @} */
+
+    /**
+     * @brief 获取原生连接句柄
+     * @return 原生句柄指针
+     */
+    NEFORCE_NODISCARD virtual void* native_handle() noexcept = 0;
 
     /**
      * @brief 刷新连接存活时间
@@ -275,6 +300,21 @@ struct NEFORCE_API idb_tb_connect : idb_connect {
      * @return 预处理语句对象
      */
     NEFORCE_NODISCARD virtual unique_ptr<idb_prepared_statement> prepare_statement(const string& sql) const = 0;
+
+    /**
+     * @name 批量操作
+     * @{
+     */
+    virtual size_t batch_insert(const string& table, const vector<string>& columns,
+                                const vector<vector<string>>& rows) = 0;
+    /** @} */
+
+    /**
+     * @name 数据库管理
+     * @{
+     */
+    NEFORCE_NODISCARD virtual bool table_exists(const string& table) const = 0;
+    /** @} */
 };
 
 /**

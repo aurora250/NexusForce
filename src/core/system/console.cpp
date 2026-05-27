@@ -523,7 +523,7 @@ string sys_console::password(const string_view prompt, const char mask, const bo
     }
     string password;
 
-    auto erase_chars = [&](const size_t n) {
+    auto erase_chars = [this](const size_t n) {
         for (size_t i = 0; i < n; ++i) {
             print_string_unsafe("\b \b");
         }
@@ -612,7 +612,7 @@ string sys_console::password(const string_view prompt, const char mask, const bo
     print_string_unsafe(prompt);
     flush_unsafe();
 
-    auto refresh_length_display = [&](size_t old_len, size_t new_len) {
+    auto refresh_length_display = [show_length, &erase_chars, this](size_t old_len, size_t new_len) {
         if (!show_length) {
             return;
         }

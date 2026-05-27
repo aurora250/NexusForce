@@ -112,8 +112,8 @@ void system_signal_manager::initialize() {
     ::sigemptyset(&sa.sa_mask);
     sa.sa_flags = SA_RESTART;
 
-    const int sigs[] = {SIGINT, SIGTERM, SIGABRT, SIGILL, SIGFPE,  SIGSEGV,
-                        SIGBUS, SIGPIPE, SIGALRM, SIGHUP, SIGUSR1, SIGUSR2};
+    constexpr int sigs[] = {SIGINT, SIGTERM, SIGABRT, SIGILL, SIGFPE,  SIGSEGV,
+                            SIGBUS, SIGPIPE, SIGALRM, SIGHUP, SIGUSR1, SIGUSR2};
     for (const int sig: sigs) {
         ::sigaction(sig, &sa, &old_actions_[sig]);
     }
@@ -420,7 +420,7 @@ void system_signal_manager::process_signal(const event event, void* context) {
             trigger_force_exit();
 #else
             printcln(color::red(), "Critical error detected, aborting: ", static_cast<int>(event));
-            _NEFORCE abort();
+            abort();
 #endif
         }
         case event::ABORT: {
@@ -428,7 +428,7 @@ void system_signal_manager::process_signal(const event event, void* context) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
             trigger_force_exit();
 #else
-            _NEFORCE abort();
+            abort();
 #endif
         }
         case event::PIPE_BROKEN: {

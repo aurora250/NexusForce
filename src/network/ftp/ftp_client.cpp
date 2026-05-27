@@ -105,7 +105,7 @@ void ftp_client::do_ctrl_tls_handshake() {
 }
 
 tcp_socket ftp_client::open_data_channel() {
-    const bool use_ipv6 = address_family() == AF_INET6;
+    const bool use_ipv6 = address_family() == ip_address::family::INET6;
 
     if (passive_mode_ == passive_mode::passive) {
         if (use_ipv6) {
@@ -146,7 +146,7 @@ tcp_socket ftp_client::open_data_channel() {
             }
 
             tcp_socket data_sock;
-            data_sock.open(use_ipv6 ? AF_INET6 : AF_INET);
+            data_sock.open(use_ipv6 ? ip_address::family::INET6 : ip_address::family::INET4);
             static_cast<ip_socket&>(data_sock).connect(*data_addr);
             return data_sock;
         }
@@ -190,14 +190,14 @@ tcp_socket ftp_client::open_data_channel() {
         }
 
         tcp_socket data_sock;
-        data_sock.open(AF_INET);
+        data_sock.open();
         static_cast<ip_socket&>(data_sock).connect(*data_addr);
         return data_sock;
     }
 
     tcp_socket listen_sock;
-    listen_sock.open(use_ipv6 ? AF_INET6 : AF_INET);
-    listen_sock.bind(ip_address::any(ports(0U), use_ipv6 ? AF_INET6 : AF_INET));
+    listen_sock.open(use_ipv6 ? ip_address::family::INET6 : ip_address::family::INET4);
+    listen_sock.bind(ip_address::any(ports(0U), use_ipv6 ? ip_address::family::INET6 : ip_address::family::INET4));
     listen_sock.listen(1);
 
     const auto bound = listen_sock.local_endpoint();
@@ -332,7 +332,7 @@ void ftp_client::upload_impl(const string& remote_path, tcp_socket& data_sock, c
 }
 
 void ftp_client::open_and_connect(const ip_address& addr) {
-    open_ip(addr.family(), SOCK_STREAM, IPPROTO_TCP);
+    open_ip(addr.address_family(), type::STREAM, protocol::TCP);
     set_receive_timeout(15000_ms);
     if (::connect(fd_, addr.data(), addr.size()) != 0) {
         close();

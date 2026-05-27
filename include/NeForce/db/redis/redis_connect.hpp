@@ -44,6 +44,7 @@ struct NEFORCE_API redis_connect final : idb_kv_connect {
 private:
     ::redisContext* link_ = nullptr; ///< Redis连接上下文
     mutable string last_error_;      ///< 最后错误信息
+    mutable uint32_t last_errno_ = 0; ///< 最后错误码
 
     ::redisReply* execute_command(string_view command, const vector<string_view>& args) const;
     bool authenticate(const string& password) const;
@@ -107,7 +108,7 @@ public:
      * @brief 获取最后错误码
      * @return hiredis错误码
      */
-    uint32_t get_errno() const noexcept override { return link_ != nullptr ? link_->err : 0; }
+    uint32_t get_errno() const noexcept override { return last_errno_; }
 
     /**
      * @brief 执行非查询命令
@@ -134,6 +135,12 @@ public:
      * @return 有效返回true
      */
     bool is_valid() const override;
+
+    bool begin() override;
+    bool commit() override;
+    bool rollback() override;
+
+    NEFORCE_NODISCARD void* native_handle() noexcept override { return link_; }
 
     bool set(const string& key, const string& value) override;                ///< SET命令
     bool setex(const string& key, const string& value, int seconds) override; ///< SETEX命令（带过期时间）

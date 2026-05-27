@@ -46,12 +46,12 @@ public:
 
     /**
      * @brief 打开UDP socket
-     * @param family 地址族（AF_INET或AF_INET6），默认IPv4
+     * @param f 地址族，默认IPv4
      * @throws socket_exception 创建失败时抛出
      *
      * 创建UDP协议的socket，使用SOCK_DGRAM类型和IPPROTO_UDP协议。
      */
-    void open(int family = AF_INET);
+    void open(family f = family::INET4);
 
     /**
      * @brief 向指定端点发送数据报

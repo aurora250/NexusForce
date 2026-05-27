@@ -370,5 +370,13 @@ timestamp mysql_prepared_result::get_timestamp(const size_type n) const {
                  static_cast<time_type>(mt->second))));
 }
 
+column_meta mysql_prepared_result::column_metadata(const size_type n) const {
+    NEFORCE_DEBUG_VERIFY(n < column_count_, "Column index out of range")
+    column_meta meta;
+    meta.name = (*column_names_)[n];
+    meta.type = static_cast<int32_t>((*column_types_)[n]);
+    return meta;
+}
+
 NEFORCE_END_NAMESPACE__
 #endif

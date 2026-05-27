@@ -10,7 +10,7 @@
 
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
 #    include <libpq-fe.h>
-#    include "NeForce/db/db_interface.hpp"
+#    include "NeForce/db/sql_connect_base.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -39,9 +39,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * - 预处理语句支持
  * - 连接健康检查
  */
-class NEFORCE_API pgsql_connect final : public idb_tb_connect {
+class NEFORCE_API pgsql_connect final : public sql_connect_base<pgsql_connect> {
+protected:
+    ::PGconn* link_ = nullptr; ///< PostgreSQL连接句柄
+    friend sql_connect_base<pgsql_connect>;
+
 private:
-    ::PGconn* link_ = nullptr;        ///< PostgreSQL连接句柄
     mutable string last_error_;       ///< 最后错误信息
     mutable uint32_t last_errno_ = 0; ///< 最后错误码
 
@@ -142,6 +145,20 @@ public:
      * @return 有效返回true
      */
     NEFORCE_NODISCARD bool is_valid() const override { return connected(); }
+
+    size_t batch_insert(const string& table, const vector<string>& columns,
+                        const vector<vector<string>>& rows) override;
+
+    // PgSQL table_exists 使用 SELECT EXISTS(...) 模式，不同于基类的简单查询
+    NEFORCE_NODISCARD bool table_exists(const string& table) const override;
+
+private:
+    string begin_sql() { return "BEGIN"; }
+    string commit_sql() { return "COMMIT"; }
+    string rollback_sql() { return "ROLLBACK"; }
+    string table_exists_query(const string& table) const {
+        return "SELECT EXISTS (SELECT FROM information_schema.tables WHERE table_name = '" + table + "')";
+    }
 };
 
 /**

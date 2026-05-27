@@ -16,8 +16,8 @@ type_(t) {
         NEFORCE_THROW_EXCEPTION(system_exception("CreateEvent failed"));
     }
 #else
-    auto* const m = ::new (std::nothrow) pthread_mutex_t;
-    auto* const c = ::new (std::nothrow) pthread_cond_t;
+    auto* const m = ::new (std::nothrow)::pthread_mutex_t;
+    auto* const c = ::new (std::nothrow)::pthread_cond_t;
     mutex_.reset(m);
     cond_.reset(c);
 

@@ -6,6 +6,7 @@
 #    include <stringapiset.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
+#    include <NeForce/core/system/environment.hpp>
 #    include <cstdlib>
 #    include <glob.h>
 #    include <langinfo.h>
@@ -269,18 +270,14 @@ locale locale::system() {
     replace(wn.begin(), wn.end(), L'-', L'_');
     return locale(wcharacter::to_string(wn.view()));
 #else
-    // TODO: use environment instead of using ::getenv
-    // NOLINTNEXTLINE(concurrency-mt-unsafe)
-    const char* env = ::getenv("LC_ALL");
-    if (env == nullptr || (*env) == 0) {
-        // NOLINTNEXTLINE(concurrency-mt-unsafe)
-        env = ::getenv("LC_CTYPE");
+    string env = environment::get("LC_ALL");
+    if (env.empty()) {
+        env = environment::get("LC_CTYPE");
     }
-    if (env == nullptr || (*env) == 0) {
-        // NOLINTNEXTLINE(concurrency-mt-unsafe)
-        env = ::getenv("LANG");
+    if (env.empty()) {
+        env = environment::get("LANG");
     }
-    return locale(env != nullptr ? env : "C");
+    return locale(!env.empty() ? env : "C");
 #endif
 }
 
@@ -499,7 +496,7 @@ int locale::compare(const string& a, const string& b, const collate_strength str
     return linguistic_result;
 
 #else
-    auto to_wide = [&](const string& s) -> wstring {
+    auto to_wide = [this](const string& s) -> wstring {
         wstring out(s.size() + 1, L'\0');
         const ::locale_t saved = ::uselocale(loc_);
         const size_t n = ::mbstowcs(out.data(), s.data(), out.size());
@@ -565,7 +562,7 @@ int locale::compare(const string& a, const string& b, const collate_strength str
             if (rc != 0) {
                 return (rc < 0) ? -1 : 1;
             }
-            rc = ::wcscmp(wa.data(), wb.data());
+            rc = string_compare(wa.data(), wb.data());
             return (rc < 0) ? -1 : (rc > 0) ? 1 : 0;
         }
     }
@@ -597,7 +594,7 @@ string locale::collation_key(const string& s) const {
                     sz, nullptr, nullptr, 0);
     return key;
 #else
-    auto to_wide = [&](const string& mb) -> wstring {
+    auto to_wide = [this](const string& mb) -> wstring {
         wstring out(mb.size() + 1, L'\0');
         const ::locale_t saved = ::uselocale(loc_);
         const size_t n = ::mbstowcs(out.data(), mb.data(), out.size());
@@ -730,7 +727,7 @@ vector<string> locale::available_locales() {
 
     vector<string> result;
 
-    auto collect = [&](const char* pattern) {
+    auto collect = [&result](const char* pattern) {
         ::glob_t g{};
         // NOLINTNEXTLINE(concurrency-mt-unsafe)
         if (::glob(pattern, GLOB_NOSORT, nullptr, &g) == 0) {

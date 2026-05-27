@@ -247,7 +247,7 @@ TEST_F(SocketBaseTest, RemoteEndpointUnopenedReturnsNone) {
 
 TEST_F(SocketBaseTest, BindUnopenedThrows) {
     socket_base sock;
-    auto addr = ip_address::loopback(ports(80u), AF_INET);
+    auto addr = ip_address::loopback(ports(80u));
     EXPECT_THROW(sock.bind(addr), value_exception);
 }
 
@@ -258,17 +258,17 @@ TEST_F(SocketBaseTest, ListenUnopenedThrows) {
 
 TEST_F(SocketBaseTest, OpenInvalidFamilyThrows) {
     socket_base sock;
-    EXPECT_THROW(sock.open(AF_UNSPEC, SOCK_STREAM, 0), value_exception);
+    EXPECT_THROW(sock.open(ip_address::family::UNDEF), value_exception);
 }
 
 TEST_F(SocketBaseTest, TryOpenInvalidFamilyReturnsFalse) {
     socket_base sock;
-    EXPECT_FALSE(sock.try_open(AF_UNSPEC, SOCK_STREAM, 0));
+    EXPECT_FALSE(sock.try_open(ip_address::family::UNDEF));
 }
 
 TEST_F(SocketBaseTest, OpenAndClose) {
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(ip_address::family::INET4);
     EXPECT_TRUE(sock.is_open());
     EXPECT_TRUE(static_cast<bool>(sock));
     sock.close();
@@ -277,37 +277,37 @@ TEST_F(SocketBaseTest, OpenAndClose) {
 
 TEST_F(SocketBaseTest, OpenReplacesExistingSocket) {
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(ip_address::family::INET4);
     EXPECT_TRUE(sock.is_open());
-    sock.open(AF_INET, SOCK_DGRAM, 0);
+    sock.open(ip_address::family::INET4, socket_base::type::DGRAM);
     EXPECT_TRUE(sock.is_open());
     sock.close();
 }
 
 TEST_F(SocketBaseTest, SetReuseAddressOnOpenSocket) {
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(ip_address::family::INET4);
     EXPECT_TRUE(sock.set_reuse_address(true));
     sock.close();
 }
 
 TEST_F(SocketBaseTest, SetKeepAliveOnOpenSocket) {
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(ip_address::family::INET4);
     EXPECT_TRUE(sock.set_keep_alive(true));
     sock.close();
 }
 
 TEST_F(SocketBaseTest, SetTcpNodelayOnOpenSocket) {
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(ip_address::family::INET4);
     EXPECT_TRUE(sock.set_tcp_nodelay(true));
     sock.close();
 }
 
 TEST_F(SocketBaseTest, SetBufferSizesOnOpenSocket) {
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(ip_address::family::INET4);
     EXPECT_TRUE(sock.set_receive_buffer_size(65536));
     EXPECT_TRUE(sock.set_send_buffer_size(65536));
     sock.close();
@@ -315,7 +315,7 @@ TEST_F(SocketBaseTest, SetBufferSizesOnOpenSocket) {
 
 TEST_F(SocketBaseTest, SetNonblockingOnOpenSocket) {
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(ip_address::family::INET4);
     EXPECT_TRUE(sock.set_nonblocking(true));
     EXPECT_TRUE(sock.set_nonblocking(false));
     sock.close();
@@ -323,7 +323,7 @@ TEST_F(SocketBaseTest, SetNonblockingOnOpenSocket) {
 
 TEST_F(SocketBaseTest, SetTimeoutsOnOpenSocket) {
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(ip_address::family::INET4);
     EXPECT_TRUE(sock.set_send_timeout(milliseconds(5000)));
     EXPECT_TRUE(sock.set_receive_timeout(milliseconds(5000)));
     sock.close();
@@ -331,16 +331,16 @@ TEST_F(SocketBaseTest, SetTimeoutsOnOpenSocket) {
 
 TEST_F(SocketBaseTest, ShutdownOnOpenSocket) {
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(ip_address::family::INET4);
     EXPECT_NO_THROW(sock.shutdown_both());
     sock.close();
 }
 
 TEST_F(SocketBaseTest, LocalEndpointOnOpenSocket) {
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(ip_address::family::INET4);
     sock.set_reuse_address(true);
-    auto addr = ip_address::any(ports(0u), AF_INET);
+    auto addr = ip_address::any();
     sock.bind(addr);
     auto local = sock.local_endpoint();
     EXPECT_TRUE(local.has_value());
@@ -350,9 +350,9 @@ TEST_F(SocketBaseTest, LocalEndpointOnOpenSocket) {
 
 TEST_F(SocketBaseTest, ListenAndLocalEndpoint) {
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(ip_address::family::INET4);
     sock.set_reuse_address(true);
-    auto addr = ip_address::any(ports(0u), AF_INET);
+    auto addr = ip_address::any();
     sock.bind(addr);
     sock.listen(8);
     auto local = sock.local_endpoint();
@@ -362,7 +362,7 @@ TEST_F(SocketBaseTest, ListenAndLocalEndpoint) {
 
 TEST_F(SocketBaseTest, BindInvalidEndpointThrows) {
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(ip_address::family::INET4);
     ip_address invalid;
     EXPECT_THROW(sock.bind(invalid), value_exception);
     sock.close();
@@ -370,20 +370,20 @@ TEST_F(SocketBaseTest, BindInvalidEndpointThrows) {
 
 TEST_F(SocketBaseTest, CloseIsIdempotent) {
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(ip_address::family::INET4);
     EXPECT_TRUE(sock.close());
     EXPECT_TRUE(sock.close());
 }
 
 TEST_F(SocketBaseTest, DestructorClosesSocket) {
     socket_base sock;
-    sock.open(AF_INET, SOCK_STREAM, 0);
+    sock.open(ip_address::family::INET4);
     EXPECT_TRUE(sock.is_open());
 }
 
 TEST_F(SocketBaseTest, TryOpenValidFamily) {
     socket_base sock;
-    EXPECT_TRUE(sock.try_open(AF_INET, SOCK_STREAM, 0));
+    EXPECT_TRUE(sock.try_open(ip_address::family::INET4));
     EXPECT_TRUE(sock.is_open());
     sock.close();
 }
@@ -396,20 +396,20 @@ protected:
 
 TEST_F(IpSocketTest, DefaultConstructorFamilyIsUnspec) {
     udp_socket sock;
-    EXPECT_EQ(sock.address_family(), AF_UNSPEC);
+    EXPECT_EQ(sock.address_family(), ip_address::family::UNDEF);
     EXPECT_FALSE(sock.is_ipv4());
     EXPECT_FALSE(sock.is_ipv6());
 }
 
 TEST_F(IpSocketTest, ConnectUnopenedThrows) {
     udp_socket sock;
-    auto addr = ip_address::loopback(ports(80u), AF_INET);
+    auto addr = ip_address::loopback(ports(80u));
     EXPECT_THROW(sock.connect(addr), value_exception);
 }
 
 TEST_F(IpSocketTest, ConnectInvalidEndpointThrows) {
     udp_socket sock;
-    sock.open(AF_INET);
+    sock.open();
     ip_address invalid;
     EXPECT_THROW(sock.connect(invalid), value_exception);
     sock.close();
@@ -417,18 +417,18 @@ TEST_F(IpSocketTest, ConnectInvalidEndpointThrows) {
 
 TEST_F(IpSocketTest, CloseResetsFamilyToUnspec) {
     udp_socket sock;
-    sock.open(AF_INET);
-    EXPECT_EQ(sock.address_family(), AF_INET);
+    sock.open();
+    EXPECT_EQ(sock.address_family(), ip_address::family::INET4);
     EXPECT_TRUE(sock.is_ipv4());
     sock.close();
-    EXPECT_EQ(sock.address_family(), AF_UNSPEC);
+    EXPECT_EQ(sock.address_family(), ip_address::family::UNDEF);
     EXPECT_FALSE(sock.is_ipv4());
 }
 
 TEST_F(IpSocketTest, OpenIpv4SetsFamily) {
     udp_socket sock;
-    sock.open(AF_INET);
-    EXPECT_EQ(sock.address_family(), AF_INET);
+    sock.open(ip_address::family::INET4);
+    EXPECT_EQ(sock.address_family(), ip_address::family::INET4);
     EXPECT_TRUE(sock.is_ipv4());
     EXPECT_FALSE(sock.is_ipv6());
     sock.close();
@@ -436,8 +436,8 @@ TEST_F(IpSocketTest, OpenIpv4SetsFamily) {
 
 TEST_F(IpSocketTest, OpenIpv6SetsFamily) {
     udp_socket sock;
-    sock.open(AF_INET6);
-    EXPECT_EQ(sock.address_family(), AF_INET6);
+    sock.open(ip_address::family::INET6);
+    EXPECT_EQ(sock.address_family(), ip_address::family::INET6);
     EXPECT_FALSE(sock.is_ipv4());
     EXPECT_TRUE(sock.is_ipv6());
     sock.close();
@@ -445,7 +445,7 @@ TEST_F(IpSocketTest, OpenIpv6SetsFamily) {
 
 TEST_F(IpSocketTest, OpenIpInvalidFamilyThrows) {
     udp_socket sock;
-    EXPECT_THROW(sock.open(AF_UNSPEC), value_exception);
+    EXPECT_THROW(sock.open(ip_address::family::UNDEF), value_exception);
 }
 
 class UdpSocketTest : public ::testing::Test {
@@ -461,14 +461,14 @@ TEST_F(UdpSocketTest, DefaultConstructor) {
 
 TEST_F(UdpSocketTest, SendToUnopenedThrows) {
     udp_socket sock;
-    auto addr = ip_address::loopback(ports(80u), AF_INET);
+    auto addr = ip_address::loopback(ports(80u), ip_address::family::INET4);
     char data[] = "test";
     EXPECT_THROW(sock.send_to(memory_view<const char>(data, 4), addr), value_exception);
 }
 
 TEST_F(UdpSocketTest, SendToInvalidEndpointThrows) {
     udp_socket sock;
-    sock.open(AF_INET);
+    sock.open(ip_address::family::INET4);
     ip_address invalid;
     char data[] = "test";
     EXPECT_THROW(sock.send_to(memory_view<const char>(data, 4), invalid), value_exception);
@@ -477,8 +477,8 @@ TEST_F(UdpSocketTest, SendToInvalidEndpointThrows) {
 
 TEST_F(UdpSocketTest, SendToEmptyDataReturnsZero) {
     udp_socket sock;
-    sock.open(AF_INET);
-    ip_address addr = ip_address::loopback(ports(12345u), AF_INET);
+    sock.open(ip_address::family::INET4);
+    ip_address addr = ip_address::loopback(ports(12345u), ip_address::family::INET4);
     EXPECT_EQ(sock.send_to(memory_view<const char>(), addr), 0);
     sock.close();
 }
@@ -497,7 +497,7 @@ TEST_F(UdpSocketTest, ReceiveFromUnopenedThrows) {
 
 TEST_F(UdpSocketTest, ReceiveFromEmptyBufferThrows) {
     udp_socket sock;
-    sock.open(AF_INET);
+    sock.open(ip_address::family::INET4);
     EXPECT_THROW(sock.receive_from(memory_view<char>()), value_exception);
     sock.close();
 }
@@ -510,28 +510,28 @@ TEST_F(UdpSocketTest, ReceiveUnopenedThrows) {
 
 TEST_F(UdpSocketTest, ReceiveEmptyBufferThrows) {
     udp_socket sock;
-    sock.open(AF_INET);
+    sock.open(ip_address::family::INET4);
     EXPECT_THROW(sock.receive(memory_view<char>()), value_exception);
     sock.close();
 }
 
 TEST_F(UdpSocketTest, OpenCloseAndReopen) {
     udp_socket sock;
-    sock.open(AF_INET);
+    sock.open(ip_address::family::INET4);
     EXPECT_TRUE(sock.is_open());
     sock.close();
     EXPECT_FALSE(sock.is_open());
-    sock.open(AF_INET6);
+    sock.open(ip_address::family::INET6);
     EXPECT_TRUE(sock.is_open());
     sock.close();
 }
 
 TEST_F(UdpSocketTest, SendAndReceiveOnLoopback) {
     udp_socket sock;
-    sock.open(AF_INET);
+    sock.open(ip_address::family::INET4);
     sock.set_reuse_address(true);
 
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback(ports(0u), ip_address::family::INET4);
     sock.bind(addr);
     auto bound = sock.local_endpoint();
     ASSERT_TRUE(bound.has_value());
@@ -599,7 +599,7 @@ TEST_F(IcmpSocketTest, PingLocalhost) {
     }
     icmp_socket sock;
     sock.open();
-    auto dest = ip_address::loopback(ports::UNDEF, AF_INET);
+    auto dest = ip_address::loopback(ports::UNDEF, ip_address::family::INET4);
     auto result = sock.ping(dest, milliseconds(500));
     EXPECT_TRUE(result.success);
     EXPECT_GE(result.rtt.count(), 0);
@@ -611,7 +611,7 @@ TEST_F(IcmpSocketTest, ChecksumProducesValidResult) {
     }
     icmp_socket sock;
     sock.open();
-    auto dest = ip_address::loopback(ports::UNDEF, AF_INET);
+    auto dest = ip_address::loopback(ports::UNDEF, ip_address::family::INET4);
     char payload[] = "checksum-test";
     auto result = sock.ping(dest, milliseconds(500), 0, payload, sizeof(payload));
     EXPECT_TRUE(result.success);

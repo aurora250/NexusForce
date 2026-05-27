@@ -16,11 +16,11 @@ using namespace neforce;
 namespace {
     bool network_available() {
         udp_socket sock;
-        if (!sock.try_open(AF_INET, SOCK_DGRAM, 0)) {
+        if (!sock.try_open(socket_base::family::INET4, socket_base::type::DGRAM)) {
             return false;
         }
         sock.set_reuse_address(true);
-        auto addr = ip_address::any(ports(0u), AF_INET);
+        auto addr = ip_address::any();
         sock.bind(addr);
         auto local = sock.local_endpoint();
         sock.close();
@@ -114,7 +114,7 @@ protected:
 
 TEST_F(SslEchoIntegration, SslEchoRoundtrip) {
     tcp_acceptor acceptor;
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     acceptor.open(addr);
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
@@ -128,7 +128,7 @@ TEST_F(SslEchoIntegration, SslEchoRoundtrip) {
     client_ctx.set_verify_mode(SSL_VERIFY_NONE);
 
     ssl_socket client;
-    client.open(AF_INET);
+    client.open();
     ASSERT_TRUE(client.connect(*bound, milliseconds(5000)));
     client.init_client_ssl(client_ctx, "localhost");
 
@@ -148,7 +148,7 @@ TEST_F(SslEchoIntegration, SslEchoRoundtrip) {
 
 TEST_F(SslEchoIntegration, SslMultipleMessages) {
     tcp_acceptor acceptor;
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     acceptor.open(addr);
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
@@ -179,7 +179,7 @@ TEST_F(SslEchoIntegration, SslMultipleMessages) {
     client_ctx.set_verify_mode(SSL_VERIFY_NONE);
 
     ssl_socket client;
-    client.open(AF_INET);
+    client.open();
     ASSERT_TRUE(client.connect(*bound, milliseconds(5000)));
     client.init_client_ssl(client_ctx, "localhost");
 
@@ -201,7 +201,7 @@ TEST_F(SslEchoIntegration, SslMultipleMessages) {
 
 TEST_F(SslEchoIntegration, SslPeerCertificateInfo) {
     tcp_acceptor acceptor;
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     acceptor.open(addr);
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
@@ -217,7 +217,7 @@ TEST_F(SslEchoIntegration, SslPeerCertificateInfo) {
     client_ctx.set_verify_mode(SSL_VERIFY_NONE);
 
     ssl_socket client;
-    client.open(AF_INET);
+    client.open();
     ASSERT_TRUE(client.connect(*bound, milliseconds(5000)));
     client.init_client_ssl(client_ctx, "localhost");
     ssl_ready.wait();
@@ -240,7 +240,7 @@ TEST_F(SslEchoIntegration, SslPeerCertificateInfo) {
 
 TEST_F(SslEchoIntegration, SslCipherAndProtocol) {
     tcp_acceptor acceptor;
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     acceptor.open(addr);
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
@@ -256,7 +256,7 @@ TEST_F(SslEchoIntegration, SslCipherAndProtocol) {
     client_ctx.set_verify_mode(SSL_VERIFY_NONE);
 
     ssl_socket client;
-    client.open(AF_INET);
+    client.open();
     ASSERT_TRUE(client.connect(*bound, milliseconds(5000)));
     client.init_client_ssl(client_ctx, "localhost");
     ssl_ready.wait();
@@ -290,7 +290,7 @@ TEST_F(SslAcceptorIntegration, AcceptSslCompletesHandshake) {
     ssl_acceptor acceptor;
     acceptor.set_ssl_context(ctx.clone());
 
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     acceptor.open(addr);
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
@@ -302,7 +302,7 @@ TEST_F(SslAcceptorIntegration, AcceptSslCompletesHandshake) {
         client_ctx.set_verify_mode(SSL_VERIFY_NONE);
 
         ssl_socket client;
-        client.open(AF_INET);
+        client.open();
         if (client.connect(*bound, milliseconds(5000))) {
             client.init_client_ssl(client_ctx, "localhost");
             client.send_all({"ssl_acceptor_test"});
@@ -333,7 +333,7 @@ TEST_F(SslAcceptorIntegration, AcceptSslNonblock) {
     ssl_acceptor acceptor;
     acceptor.set_ssl_context(ctx.clone());
 
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     acceptor.open(addr);
     acceptor.set_nonblocking(true);
     auto bound = acceptor.local_endpoint();
@@ -346,7 +346,7 @@ TEST_F(SslAcceptorIntegration, AcceptSslNonblock) {
         client_ctx.set_verify_mode(SSL_VERIFY_NONE);
 
         ssl_socket client;
-        client.open(AF_INET);
+        client.open();
         if (client.connect(*bound, milliseconds(5000))) {
             client.init_client_ssl(client_ctx, "localhost");
             client.send_all({"nonblock_ssl"});
@@ -385,7 +385,7 @@ TEST_F(SslAcceptorIntegration, AcceptSslNonblockEmpty) {
     ssl_acceptor acceptor;
     acceptor.set_ssl_context(ctx.clone());
 
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     acceptor.open(addr);
     acceptor.set_nonblocking(true);
 
@@ -411,7 +411,7 @@ TEST_F(SslClientIntegration, ConnectWithSslContext) {
     ASSERT_TRUE(server_ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     tcp_acceptor acceptor;
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     acceptor.open(addr);
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
@@ -462,7 +462,7 @@ TEST_F(SslClientIntegration, PeerVerificationDisabled) {
     ASSERT_TRUE(server_ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     tcp_acceptor acceptor;
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     acceptor.open(addr);
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());
@@ -514,7 +514,7 @@ TEST_F(SslClientIntegration, CertificateInfoAfterConnect) {
     ASSERT_TRUE(server_ctx.load_certificate(SERVER_CERT, SERVER_KEY));
 
     tcp_acceptor acceptor;
-    auto addr = ip_address::loopback(ports(0u), AF_INET);
+    auto addr = ip_address::loopback();
     acceptor.open(addr);
     auto bound = acceptor.local_endpoint();
     ASSERT_TRUE(bound.has_value());

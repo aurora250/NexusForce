@@ -49,6 +49,24 @@ class NEFORCE_API ip_address : public istringify<ip_address> {
 public:
     using address_type = variant<none_t, ::sockaddr_in, ::sockaddr_in6>; ///< 地址存储类型
 
+    /**
+     * @brief 网络地址族类型枚举
+     */
+    enum class family : int32_t {
+        UNDEF = AF_UNSPEC,        ///< 未指定地址族，通常用于通配或自动选择
+        UNIX = AF_UNIX,           ///< Unix 域套接字
+        INET4 = AF_INET,          ///< IPv4 互联网协议族
+        INET6 = AF_INET6,         ///< IPv6 互联网协议族
+        PACKET = AF_PACKET,       ///< 链路层数据包套接字
+        NETLINK = AF_NETLINK,     ///< 内核用户空间通信
+        BLUETOOTH = AF_BLUETOOTH, ///< 蓝牙通信协议族
+        CAN = AF_CAN,             ///< CAN 总线协议族
+        ALG = AF_ALG,             ///< 内核加密 API 接口
+        VSOCK = AF_VSOCK,         ///< 虚拟机套接字
+        NFC = AF_NFC,             ///< 近场通信协议族
+        XDP = AF_XDP,             ///< 高性能数据路径
+    };
+
 private:
     address_type addr_; ///< 存储的地址
 
@@ -101,20 +119,20 @@ public:
     /**
      * @brief 获取通配地址
      * @param port 端口号
-     * @param family 地址族，默认为IPv4
+     * @param f 地址族，默认为INET4
      * @return 通配地址对象
      *
      * 通配地址用于绑定到所有网络接口。
      */
-    NEFORCE_NODISCARD static ip_address any(ports port = ports::UNDEF, int family = AF_INET) noexcept;
+    NEFORCE_NODISCARD static ip_address any(ports port = ports::UNDEF, family f = family::INET4) noexcept;
 
     /**
      * @brief 获取回环地址
      * @param port 端口号
-     * @param family 地址族（AF_INET或AF_INET6），默认为IPv4
+     * @param f 地址族，默认为INET4
      * @return 回环地址对象
      */
-    NEFORCE_NODISCARD static ip_address loopback(ports port = ports::UNDEF, int family = AF_INET) noexcept;
+    NEFORCE_NODISCARD static ip_address loopback(ports port = ports::UNDEF, family f = family::INET4) noexcept;
 
     /**
      * @brief 获取底层指针
@@ -144,7 +162,7 @@ public:
      * @brief 获取地址族
      * @return 地址族
      */
-    NEFORCE_NODISCARD int family() const noexcept;
+    NEFORCE_NODISCARD family address_family() const noexcept;
 
     /**
      * @brief 获取端口号

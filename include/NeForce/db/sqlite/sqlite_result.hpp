@@ -26,6 +26,14 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
+ * @brief SQLite语句清理方式
+ */
+enum class NEFORCE_API sqlite_cleanup_action : uint8_t {
+    finalize, ///< 调用sqlite3_finalize释放语句（用于普通查询）
+    reset     ///< 调用sqlite3_reset重置语句（用于预处理语句复用）
+};
+
+/**
  * @struct sqlite_result
  * @brief SQLite查询结果集类
  *
@@ -37,15 +45,16 @@ NEFORCE_BEGIN_NAMESPACE__
  * - 逐行遍历结果集
  * - 支持多种数据类型转换
  * - NULL值处理
- * - 自动语句资源管理
+ * - 自动语句资源管理（finalize或reset）
  *
- * @note 不允许复用。
+ * @note 普通查询使用finalize模式（默认），预处理语句查询使用reset模式以允许语句复用。
  */
 struct NEFORCE_API sqlite_result final : idb_tb_result {
 private:
-    ::sqlite3_stmt* stmt_ = nullptr; ///< SQLite预处理语句句柄
-    size_type cursor_ = 0;           ///< 当前行索引
-    size_type columns_ = 0;          ///< 总列数
+    ::sqlite3_stmt* stmt_ = nullptr;                                  ///< SQLite预处理语句句柄
+    sqlite_cleanup_action cleanup_ = sqlite_cleanup_action::finalize; ///< 清理方式
+    size_type cursor_ = 0;                                            ///< 当前行索引
+    size_type columns_ = 0;                                           ///< 总列数
 
     unique_ptr<vector<string_view>> column_names_; ///< 列名列表
     unique_ptr<vector<int>> column_types_;         ///< 列类型列表
@@ -63,13 +72,23 @@ public:
      * @param statement SQLite预处理语句句柄
      *
      * 获取结果集的列数、列名和列类型信息。
+     * 默认使用finalize清理方式。
      */
     explicit sqlite_result(::sqlite3_stmt* statement);
 
     /**
+     * @brief 构造函数（带清理方式）
+     * @param statement SQLite预处理语句句柄
+     * @param cleanup 清理方式（finalize或reset）
+     *
+     * 预处理语句查询应使用reset方式，以允许语句复用。
+     */
+    sqlite_result(::sqlite3_stmt* statement, sqlite_cleanup_action cleanup);
+
+    /**
      * @brief 析构函数
      *
-     * 释放sqlite3_stmt资源。
+     * 根据cleanup_标志调用sqlite3_finalize或sqlite3_reset。
      */
     ~sqlite_result() override;
 
@@ -100,6 +119,8 @@ public:
      * @return 列名视图列表
      */
     NEFORCE_NODISCARD const vector<string_view>& column_names() const noexcept override { return *column_names_; }
+
+    NEFORCE_NODISCARD column_meta column_metadata(size_type n) const override;
 
     /**
      * @brief 获取列类型列表

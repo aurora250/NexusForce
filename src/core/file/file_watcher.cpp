@@ -14,9 +14,9 @@ namespace {
     // inotify event ~= sizeof(inotify_event) + NAME_MAX = 272 bytes.
     // 64KB holds ~240 events per read(), preventing kernel queue overflow
     // under bursty workloads such as builds or checkouts.
-    constexpr size_t kWatchBufferSize = 65536;
+    constexpr size_t g_watch_buffer_size = 65536;
     // Batch pre-allocation: enough for a single read() worth of events.
-    constexpr size_t kEventBatchCapacity = 256;
+    constexpr size_t g_event_batch_capacity = 256;
 } // namespace
 
 
@@ -162,7 +162,7 @@ void file_watcher::stop() {
 }
 
 void file_watcher::watch_thread_func() {
-    buffer_.resize(kWatchBufferSize);
+    buffer_.resize(g_watch_buffer_size);
 
     string path_prefix = watch_path_.str();
     if (!path_prefix.empty() && path_prefix.back() != path::preferred_separator) {
@@ -175,7 +175,7 @@ void file_watcher::watch_thread_func() {
         file_watch_event type;
     };
     vector<batched_event> event_batch;
-    event_batch.reserve(kEventBatchCapacity);
+    event_batch.reserve(g_event_batch_capacity);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::OVERLAPPED local_overlapped{};

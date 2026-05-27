@@ -37,7 +37,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * - 支持多种数据类型转换
  * - 自动处理数据截断和NULL值
  */
-class NEFORCE_API mysql_prepared_result final : public idb_prepared_result {
+class NEFORCE_API mysql_prepared_result final : public idb_tb_result {
 private:
     ::MYSQL_STMT* stmt_ = nullptr;    ///< MySQL预处理语句句柄
     ::MYSQL_RES* metadata_ = nullptr; ///< 结果集元数据
@@ -107,6 +107,8 @@ public:
      * @return 列名视图列表
      */
     NEFORCE_NODISCARD const vector<string_view>& column_names() const override { return *column_names_; }
+
+    NEFORCE_NODISCARD column_meta column_metadata(size_type n) const override;
 
     /**
      * @brief 获取列类型列表

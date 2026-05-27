@@ -130,7 +130,7 @@ void tcp_server_base::accept_loop() {
 #else
     const auto wake_read_fd = wake_pipe_.native_read_handle();
 
-    pollfd pfds[2];
+    ::pollfd pfds[2];
     pfds[0].fd = acceptor_fd;
     pfds[0].events = POLLIN;
     pfds[1].fd = wake_read_fd;
