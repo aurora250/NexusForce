@@ -107,6 +107,7 @@ cleanup_running_(true) {
 
 http_server::session_manager::~session_manager() {
     cleanup_running_ = false;
+    cv_.notify_one();
     if (cleanup_thread_.joinable()) {
         cleanup_thread_.join();
     }
@@ -167,8 +168,8 @@ void http_server::session_manager::cleanup_expired_sessions() {
                 }
             }
         }
-
-        this_thread::sleep_for(cleanup_interval_);
+        unique_lock<mutex> lk(mutex_);
+        cv_.wait_for(lk, cleanup_interval_, [&] { return !cleanup_running_.load(); });
     }
 }
 

@@ -435,7 +435,7 @@ TEST_F(HttpServerIntegrationTest, ServerPortConfiguration) {
     EXPECT_FALSE(server.is_running());
 }
 
-TEST_F(HttpServerIntegrationTest, ServerRouterAccess) { // may block
+TEST_F(HttpServerIntegrationTest, ServerRouterAccess) {
     http_server server(ports{18081});
     server.router().get("/test", [](http_request&, http_response& res) {
         res.status = http_status::S2_OK;

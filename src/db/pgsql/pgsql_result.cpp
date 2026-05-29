@@ -105,7 +105,7 @@ column_meta pgsql_tb_result::column_metadata(const size_type index) const {
     column_meta meta;
     if (result_ != nullptr && index < column_count_) {
         meta.name = ::PQfname(result_, static_cast<int>(index));
-        meta.type = ::PQftype(result_, static_cast<int>(index));
+        meta.type = static_cast<int32_t>(::PQftype(result_, static_cast<int>(index)));
         meta.max_length = static_cast<size_t>(::PQfsize(result_, static_cast<int>(index)));
         meta.nullable = ::PQfnumber(result_, ::PQfname(result_, static_cast<int>(index))) != -1;
     }

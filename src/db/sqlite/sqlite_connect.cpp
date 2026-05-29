@@ -16,17 +16,17 @@ bool sqlite_connect::connect(const db_config& config) {
         close();
         return false;
     }
-#ifdef NEFORCE_SUPPORT_SQLCIPHER
+#    ifdef NEFORCE_SUPPORT_SQLCIPHER
     if (!config.encryption_key.empty()) {
-        if (::sqlite3_key(link_, config.encryption_key.data(),
-                          static_cast<int>(config.encryption_key.size())) != SQLITE_OK) {
+        if (::sqlite3_key(link_, config.encryption_key.data(), static_cast<int>(config.encryption_key.size())) !=
+            SQLITE_OK) {
             last_error_ = ::sqlite3_errmsg(link_);
             last_errno_ = ::sqlite3_errcode(link_);
             close();
             return false;
         }
     }
-#endif
+#    endif
     return true;
 }
 

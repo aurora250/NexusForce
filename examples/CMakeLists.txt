@@ -4,4 +4,5 @@ if(NOT NEXUSFORCE_BUILD_EXAMPLES)
 endif()
 
 add_subdirectory(db)
+add_subdirectory(logging)
 add_subdirectory(network)

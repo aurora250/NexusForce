@@ -42,8 +42,8 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 struct NEFORCE_API redis_connect final : idb_kv_connect {
 private:
-    ::redisContext* link_ = nullptr; ///< Redis连接上下文
-    mutable string last_error_;      ///< 最后错误信息
+    ::redisContext* link_ = nullptr;  ///< Redis连接上下文
+    mutable string last_error_;       ///< 最后错误信息
     mutable uint32_t last_errno_ = 0; ///< 最后错误码
 
     ::redisReply* execute_command(string_view command, const vector<string_view>& args) const;

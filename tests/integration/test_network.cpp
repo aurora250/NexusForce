@@ -1,4 +1,10 @@
-#include <NeForce/NeForce.hpp>
+#include <NeForce/network/http/http_client.hpp>
+#include <NeForce/network/http/http_server.hpp>
+#include <NeForce/network/util/arp.hpp>
+#include <NeForce/network/icmp_socket.hpp>
+#include <NeForce/network/smtp_socket.hpp>
+#include <NeForce/core/file/file.hpp>
+#include <NeForce/core/system/console.hpp>
 using namespace neforce;
 using namespace neforce::http;
 

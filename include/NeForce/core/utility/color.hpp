@@ -833,6 +833,9 @@ public:
     /** @brief 青色 */
     static constexpr color cyan() noexcept { return {0, 255, 255, 255}; }
 
+    /** @brief 紫色 */
+    static constexpr color purple() noexcept { return {255, 0, 255, 255}; }
+
     /** @brief 完全透明 */
     static constexpr color transparent() noexcept { return {0, 0, 0, 0}; }
 };

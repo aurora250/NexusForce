@@ -11,6 +11,7 @@
  */
 
 #include "NeForce/core/async/atomic.hpp"
+#include "NeForce/core/async/condition_variable.hpp"
 #include "NeForce/core/async/thread.hpp"
 #include "NeForce/core/container/lru_cache.hpp"
 #include "NeForce/core/time/clocks.hpp"
@@ -77,6 +78,8 @@ private:
     refresh_policy refresh_policy_{refresh_policy::never}; ///< 刷新策略
     duration cleanup_interval_{seconds(1)};                ///< 清理间隔
     thread cleanup_thread_;                                ///< 后台清理线程
+    mutable mutex cv_mutex_;                               ///< 条件变量互斥锁
+    condition_variable cv_;                                ///< 条件变量
 
 public:
     /**
@@ -113,8 +116,11 @@ public:
         running_ = true;
         cleanup_thread_ = thread([this] {
             while (running_) {
-                this_thread::sleep_for(cleanup_interval_);
-                cleanup();
+                unique_lock<mutex> lk(cv_mutex_);
+                if (cv_.wait_for(lk, cleanup_interval_) == cv_status::timeout) {
+                    lk.unlock_quiet();
+                    cleanup();
+                }
             }
         });
     }
@@ -127,6 +133,7 @@ public:
      */
     void disable_cleanup() {
         running_ = false;
+        cv_.notify_one();
         if (cleanup_thread_.joinable()) {
             cleanup_thread_.join();
         }

@@ -191,12 +191,6 @@ public:
     }
 
     /**
-     * @brief 一元负号操作符
-     * @return 取负后的新对象
-     */
-    NEFORCE_NODISCARD constexpr T operator-() const noexcept { return T(-value_); }
-
-    /**
      * @brief 前置递增操作符
      * @return 递增后的自身引用
      */

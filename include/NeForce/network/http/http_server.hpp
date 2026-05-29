@@ -19,6 +19,7 @@
  * - 大请求处理
  */
 
+#include "NeForce/core/async/condition_variable.hpp"
 #include "NeForce/core/numeric/random.hpp"
 #include "NeForce/network/http/http_router.hpp"
 #include "NeForce/network/http/websocket.hpp"
@@ -79,6 +80,7 @@ private:
     struct NEFORCE_API session_manager {
         unordered_map<string, http_session> sessions_; ///< 会话存储
         mutable mutex mutex_;                          ///< 会话互斥锁
+        condition_variable cv_;                        ///< 条件变量
         atomic<bool> cleanup_running_;                 ///< 清理线程运行标志
         thread cleanup_thread_;                        ///< 清理线程
         random_mt rand_;                               ///< 随机数生成器

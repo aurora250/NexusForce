@@ -381,7 +381,7 @@ public:
      * @brief 暂停并等待用户按键
      * @param msg 提示信息
      */
-    void pause(string_view msg = "Press any char to continue...");
+    void pause(string_view msg = "Press enter to continue...");
 
     /**
      * @brief 用户确认对话框

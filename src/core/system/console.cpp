@@ -16,7 +16,6 @@
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <NeForce/core/system/environment.hpp>
 #    include <cerrno>
-#    include <cstdlib>
 #    include <fcntl.h>
 #    include <sys/ioctl.h>
 #    include <termios.h>
@@ -492,7 +491,10 @@ void sys_console::pause(const string_view msg) {
     lock<mutex> lock(mutex_);
     flush_unsafe();
     print_string_unsafe(msg);
-    ignore_unsafe();
+#ifdef NEFORCE_PLATFORM_LINUX
+    ::tcflush(in_, TCIFLUSH);
+#endif
+    (void) read_char_unsafe();
     flush_unsafe();
 }
 

@@ -560,10 +560,131 @@ FTP_HOST=ftp.example.com FTP_USER=myuser FTP_PASS=mypass ./build/bin/NexusForceF
 
 ---
 
+---
+
+## 日志模块
+
+### 1. 基础日志（logging_basic）
+
+演示多级别日志、格式模式、控制台彩色输出、文件输出与轮转、全局上下文、自定义过滤器。
+
+```bash
+./build/bin/NexusForceLoggingBasicExample
+# === 日志系统基础示例 ===
+#
+# --- 多级别日志 ---
+# [2024-01-15 10:30:00] [TRACE] logging_basic.cpp:28 main() - 这是 TRACE 级别的日志
+# [2024-01-15 10:30:00] [DEBUG] logging_basic.cpp:29 main() - 这是 DEBUG 级别的日志
+# [2024-01-15 10:30:00] [INFO]  logging_basic.cpp:30 main() - 这是 INFO 级别的日志
+# [2024-01-15 10:30:00] [WARN]  logging_basic.cpp:31 main() - 这是 WARN 级别的日志
+# [2024-01-15 10:30:00] [ERROR] logging_basic.cpp:32 main() - 这是 ERROR 级别的日志
+# [2024-01-15 10:30:00] [FATAL] logging_basic.cpp:33 main() - 这是 FATAL 级别的日志
+#
+# --- 格式化日志 ---
+# 用户 admin 在 2024-01-15 10:30:00 登录成功
+# 连接超时: 3000ms, 重试次数: 3
+#
+# --- 文件输出 ---
+# 日志同时写入 logs/app.log，1MB 自动轮转，最多保留 5 个文件
+```
+
+### 2. 层级化 Logger（logging_hierarchy）
+
+演示命名 Logger 的点分隔层级、级别继承与重载、`LOG_IF` / `LOG_EVERY_N` / `LOG_FIRST_N` 条件日志、便捷宏。
+
+```bash
+./build/bin/NexusForceLoggingHierarchyExample
+# === 层级化 Logger 示例 ===
+#
+# --- Logger 层级结构 ---
+# root -> app -> app.network
+#              -> app.db
+# app.parent() = root
+# app.network.parent() = app
+#
+# --- 级别继承 ---
+# root level = WARN
+# app level  = WARN (继承自 root)
+# app.network level = WARN (继承自 root)
+#
+# --- 条件日志 LOG_IF ---
+# i=0 是偶数，输出警告
+# i=2 是偶数，输出警告
+# i=4 是偶数，输出警告
+#
+# --- 频率控制 LOG_EVERY_N ---
+# 每 3 次输出 1 次: i=0
+# 每 3 次输出 1 次: i=3
+# 每 3 次输出 1 次: i=6
+# 每 3 次输出 1 次: i=9
+#
+# --- 次数限制 LOG_FIRST_N ---
+# 只输出前 2 次: i=0
+# 只输出前 2 次: i=1
+```
+
+### 3. 异步日志（logging_async）
+
+演示线程池异步模式、三种溢出策略（block / discard / overrun_oldest）、自动刷新、同步/异步切换、多线程并发写入。
+
+```bash
+./build/bin/NexusForceLoggingAsyncExample
+# === 异步日志示例 ===
+#
+# --- 同步模式 ---
+# 同步模式：事件立即写入 sink
+#
+# --- 异步模式（block 策略）---
+# 异步模式已启用: is_async=true
+# 异步模式：事件进入队列，由线程池异步处理
+# flush() 完成后，队列中事件已被处理完毕
+#
+# --- 小容量队列 + discard 策略 ---
+# 队列容量=8，发送50条事件 → 大量被丢弃
+#
+# --- 小容量队列 + overrun_oldest 策略 ---
+# 队列容量=8，发送50条事件 → 保留最新8条
+#
+# --- 多线程并发写入 ---
+# 4 个线程各发送 5 条消息，全部异步处理完成
+```
+
+### 4. 上下文与 Syslog（logging_context）
+
+演示 Logger 上下文（COW）、MDC 线程局部上下文、三层合并、子 Logger 独立上下文、Syslog 输出。
+
+```bash
+./build/bin/NexusForceLoggingContextExample
+# === 上下文与 MDC 示例 ===
+#
+# --- Logger 上下文 ---
+# Logger 上下文已设置
+# 上下文在修改时才执行 Copy-On-Write
+# 移除 environment 上下文后
+#
+# --- MDC 线程局部上下文 ---
+# [req=REQ-001] [user=alice] 开始处理请求
+# [req=REQ-001] [user=alice] 查询数据库...
+# [req=REQ-002] [user=bob]   开始处理请求
+# [req=REQ-001] [user=alice] 请求处理完成
+# [req=REQ-002] [user=bob]   查询数据库...
+# [req=REQ-002] [user=bob]   请求处理完成
+#
+# --- Syslog 输出 ---
+# 这条警告同时写入 syslog
+# 可以通过 journalctl -f 或 tail -f /var/log/syslog 查看
+```
+
+---
+
 ## 文件路径说明
 
 | 示例 | 源文件 |
 |------|--------|
+| Logging Basic | `examples/logging/logging_basic.cpp` |
+| Logging Hierarchy | `examples/logging/logging_hierarchy.cpp` |
+| Logging Async | `examples/logging/logging_async.cpp` |
+| Logging Context | `examples/logging/logging_context.cpp` |
 | TCP Echo Server/Client | `examples/network/tcp_echo_server.cpp` / `tcp_echo_client.cpp` |
 | UDP Echo | `examples/network/udp_echo.cpp` |
 | HTTP Server | `examples/network/http_server.cpp` |
