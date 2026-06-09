@@ -107,9 +107,11 @@ public:
         RAW = SOCK_RAW,             ///< 原始套接字
         RDM = SOCK_RDM,             ///< 可靠数据报套接字
         SEQPACKET = SOCK_SEQPACKET, ///< 有序分组套接字（SCTP）
-        CLOEXEC = SOCK_CLOEXEC,     ///< 执行时关闭标志
-        NONBLOCK = SOCK_NONBLOCK,   ///< 非阻塞标志
-        DCCP = SOCK_DCCP,           ///< 数据报拥塞控制协议（DCCP）
+#ifdef NEFORCE_PLATFORM_LINUX
+        CLOEXEC = SOCK_CLOEXEC,   ///< 执行时关闭标志
+        NONBLOCK = SOCK_NONBLOCK, ///< 非阻塞标志
+        DCCP = SOCK_DCCP,         ///< 数据报拥塞控制协议（DCCP）
+#endif
     };
 
     /**
@@ -126,6 +128,7 @@ public:
         RAW = IPPROTO_RAW,   ///< 原始 IP 数据包
         ESP = IPPROTO_ESP,   ///< IPsec 封装安全载荷
         AH = IPPROTO_AH,     ///< IPsec 认证头
+#ifdef NEFORCE_PLATFORM_LINUX
         DCCP = IPPROTO_DCCP, ///< 数据报拥塞控制协议
 
         IP = ETH_P_IP,             ///< IPv4 以太网帧类型
@@ -136,10 +139,12 @@ public:
         VLAN = ETH_P_8021Q,        ///< IEEE 802.1Q VLAN 标签帧
         LLDP = ETH_P_LLDP,         ///< 链路层发现协议
         MPLS = ETH_P_MPLS_UC       ///< 多协议标签交换单播
+#endif
     };
 
 protected:
     native_handle_type fd_ = invalid_handle; ///< Socket句柄
+    bool nonblocking_{false};                ///< 非阻塞模式状态跟踪
 
 public:
     /**
@@ -162,7 +167,8 @@ public:
      * @param other 源对象
      */
     socket_base(socket_base&& other) noexcept :
-    fd_(exchange(other.fd_, invalid_handle)) {}
+    fd_(exchange(other.fd_, invalid_handle)),
+    nonblocking_(exchange(other.nonblocking_, false)) {}
 
     /**
      * @brief 移动赋值运算符
@@ -202,7 +208,7 @@ public:
      * @throws socket_exception 创建失败时抛出
      * @throws value_exception 地址族无效时抛出
      */
-    void open(family f, type t = socket_base::type::STREAM, protocol p = socket_base::protocol::AUTO);
+    void open(family f, type t = type::STREAM, protocol p = protocol::AUTO);
 
     /**
      * @brief 关闭socket
@@ -217,7 +223,13 @@ public:
      * @param p 协议
      * @return 打开成功返回true
      */
-    bool try_open(family f, type t = socket_base::type::STREAM, protocol p = socket_base::protocol::AUTO) noexcept;
+    bool try_open(family f, type t = type::STREAM, protocol p = protocol::AUTO) noexcept;
+
+    /**
+     * @brief 查询是否为非阻塞模式
+     * @return 非阻塞返回true
+     */
+    NEFORCE_NODISCARD bool is_nonblocking() const noexcept;
 
     /**
      * @brief 设置非阻塞模式
@@ -265,18 +277,36 @@ public:
     bool get_option(int level, int optname, void* optval, ::socklen_t* optlen) const noexcept;
 
     /**
-     * @brief 设置地址重用（SO_REUSEADDR）
+     * @brief 查询地址重用
+     * @return 已启用返回true，失败返回false
+     */
+    NEFORCE_NODISCARD bool get_reuse_address() const noexcept;
+
+    /**
+     * @brief 设置地址重用
      * @param enable 是否启用
      * @return 设置成功返回true
      */
     bool set_reuse_address(bool enable = true) noexcept;
 
     /**
-     * @brief 设置端口重用（SO_REUSEPORT）
+     * @brief 查询端口重用
+     * @return 已启用返回true，失败或平台不支持返回false
+     */
+    NEFORCE_NODISCARD bool get_reuse_port() const noexcept;
+
+    /**
+     * @brief 设置端口重用
      * @param enable 是否启用
-     * @return 设置成功返回true（Linux支持，Windows不支持）
+     * @return 设置成功返回true（Windows不支持）
      */
     bool set_reuse_port(bool enable = true) noexcept;
+
+    /**
+     * @brief 查询TCP KeepAlive
+     * @return 已启用返回true，失败返回false
+     */
+    NEFORCE_NODISCARD bool get_keep_alive() const noexcept;
 
     /**
      * @brief 设置TCP KeepAlive
@@ -286,11 +316,23 @@ public:
     bool set_keep_alive(bool enable = true) noexcept;
 
     /**
-     * @brief 设置TCP_NODELAY（禁用Nagle算法）
+     * @brief 查询Nagle算法
+     * @return 已禁用Nagle返回true，失败返回false
+     */
+    NEFORCE_NODISCARD bool get_tcp_nodelay() const noexcept;
+
+    /**
+     * @brief 设置禁用Nagle算法
      * @param enable 是否启用
      * @return 设置成功返回true
      */
     bool set_tcp_nodelay(bool enable = true) noexcept;
+
+    /**
+     * @brief 查询接收缓冲区大小
+     * @return 缓冲区大小（字节），失败返回-1
+     */
+    NEFORCE_NODISCARD int get_receive_buffer_size() const noexcept;
 
     /**
      * @brief 设置接收缓冲区大小
@@ -300,6 +342,12 @@ public:
     bool set_receive_buffer_size(int size) noexcept;
 
     /**
+     * @brief 查询发送缓冲区大小
+     * @return 缓冲区大小（字节），失败返回-1
+     */
+    NEFORCE_NODISCARD int get_send_buffer_size() const noexcept;
+
+    /**
      * @brief 设置发送缓冲区大小
      * @param size 缓冲区大小（字节）
      * @return 设置成功返回true
@@ -307,11 +355,23 @@ public:
     bool set_send_buffer_size(int size) noexcept;
 
     /**
+     * @brief 获取发送超时时间
+     * @return 超时时间，失败返回none
+     */
+    NEFORCE_NODISCARD optional<milliseconds> get_send_timeout() const noexcept;
+
+    /**
      * @brief 设置发送超时时间
      * @param timeout 超时时间
      * @return 设置成功返回true
      */
     bool set_send_timeout(milliseconds timeout) noexcept;
+
+    /**
+     * @brief 获取接收超时时间
+     * @return 超时时间，失败返回none
+     */
+    NEFORCE_NODISCARD optional<milliseconds> get_receive_timeout() const noexcept;
 
     /**
      * @brief 设置接收超时时间

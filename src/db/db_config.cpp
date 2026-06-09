@@ -24,10 +24,9 @@ db_config db_config::for_mysql(const string& db) {
 #endif
 
 #ifdef NEFORCE_SUPPORT_SQLITE3
-db_config db_config::for_sqlite(const string& file, const string& key) {
+db_config db_config::for_sqlite(const string& file) {
     db_config config;
     config.database = file;
-    config.encryption_key = key;
     return config;
 }
 #endif

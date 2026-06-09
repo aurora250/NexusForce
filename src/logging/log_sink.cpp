@@ -178,24 +178,6 @@ void syslog_sink::flush() {
     // syslog 每次调用立即写入，无需显式 flush
 }
 
-#else // !NEFORCE_PLATFORM_LINUX
-
-int to_syslog_priority(log_level) { return 0; }
-
-syslog_sink::syslog_sink(string, syslog_facility) {}
-
-syslog_sink::~syslog_sink() = default;
-
-void syslog_sink::ensure_open() {}
-
-void syslog_sink::log(const log_event& event) {
-    // 非 Linux 平台：fallback 到 console
-    const string formatted = formatter_ ? formatter_->format(event) : default_sink_format(event);
-    println(formatted);
-}
-
-void syslog_sink::flush() {}
-
 #endif // NEFORCE_PLATFORM_LINUX
 
 NEFORCE_END_NAMESPACE__

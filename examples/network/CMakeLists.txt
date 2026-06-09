@@ -1,275 +1,84 @@
-# =============================================================================
-# NexusForce Network Module Examples
-# =============================================================================
-
 # ---- TCP Echo Server ----
-add_executable(NexusForceTcpEchoServerExample
+add_nexusforce_example(NexusForceTcpEchoServerExample
     tcp_echo_server.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForceTcpEchoServerExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForceTcpEchoServerExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForceTcpEchoServerExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForceTcpEchoServerExample)
 
 # ---- TCP Echo Client ----
-add_executable(NexusForceTcpEchoClientExample
+add_nexusforce_example(NexusForceTcpEchoClientExample
     tcp_echo_client.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForceTcpEchoClientExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForceTcpEchoClientExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForceTcpEchoClientExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForceTcpEchoClientExample)
 
 # ---- HTTP Server ----
-add_executable(NexusForceHttpServerExample
+add_nexusforce_example(NexusForceHttpServerExample
     http_server.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForceHttpServerExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForceHttpServerExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForceHttpServerExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForceHttpServerExample)
 
 # ---- HTTP Client ----
-add_executable(NexusForceHttpClientExample
+add_nexusforce_example(NexusForceHttpClientExample
     http_client.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForceHttpClientExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForceHttpClientExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForceHttpClientExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForceHttpClientExample)
 
 # ---- SSL Echo Server ----
-add_executable(NexusForceSslEchoServerExample
+add_nexusforce_example(NexusForceSslEchoServerExample
     ssl_echo_server.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForceSslEchoServerExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForceSslEchoServerExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForceSslEchoServerExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForceSslEchoServerExample)
 
 # ---- SSL Echo Client ----
-add_executable(NexusForceSslEchoClientExample
+add_nexusforce_example(NexusForceSslEchoClientExample
     ssl_echo_client.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForceSslEchoClientExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForceSslEchoClientExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForceSslEchoClientExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForceSslEchoClientExample)
 
 # ---- DNS Resolver ----
-add_executable(NexusForceDnsResolverExample
+add_nexusforce_example(NexusForceDnsResolverExample
     dns_resolver.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForceDnsResolverExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForceDnsResolverExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForceDnsResolverExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForceDnsResolverExample)
 
 # ---- ICMP Ping ----
-add_executable(NexusForcePingExample
+add_nexusforce_example(NexusForcePingExample
     ping.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForcePingExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForcePingExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForcePingExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForcePingExample)
 
 # ---- SMTP Mail ----
-add_executable(NexusForceSmtpMailExample
+add_nexusforce_example(NexusForceSmtpMailExample
     smtp_mail.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForceSmtpMailExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForceSmtpMailExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForceSmtpMailExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForceSmtpMailExample)
 
 # ---- FTP Client ----
-add_executable(NexusForceFtpClientExample
+add_nexusforce_example(NexusForceFtpClientExample
     ftp_client.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForceFtpClientExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForceFtpClientExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForceFtpClientExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForceFtpClientExample)
 
 # ---- UDP Echo ----
-add_executable(NexusForceUdpEchoExample
+add_nexusforce_example(NexusForceUdpEchoExample
     udp_echo.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForceUdpEchoExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForceUdpEchoExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForceUdpEchoExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForceUdpEchoExample)
 
 # ---- WebSocket Server ----
-add_executable(NexusForceWebSocketServerExample
+add_nexusforce_example(NexusForceWebSocketServerExample
     websocket_server.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForceWebSocketServerExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForceWebSocketServerExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForceWebSocketServerExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForceWebSocketServerExample)
 
 # ---- HTTPS Server ----
-add_executable(NexusForceHttpsServerExample
+add_nexusforce_example(NexusForceHttpsServerExample
     https_server.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForceHttpsServerExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForceHttpsServerExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForceHttpsServerExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForceHttpsServerExample)
 
 # ---- HTTP/2 Server (h2c + h2 ALPN) ----
-add_executable(NexusForceHttp2ServerExample
+add_nexusforce_example(NexusForceHttp2ServerExample
     http2_server.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForceHttp2ServerExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForceHttp2ServerExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForceHttp2ServerExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForceHttp2ServerExample)
 
 # ---- gRPC Server ----
-add_executable(NexusForceGrpcServerExample
+add_nexusforce_example(NexusForceGrpcServerExample
     grpc_server.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForceGrpcServerExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForceGrpcServerExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForceGrpcServerExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForceGrpcServerExample)
 
 # ---- Reverse Proxy + Load Balancer ----
-add_executable(NexusForceReverseProxyExample
+add_nexusforce_example(NexusForceReverseProxyExample
     reverse_proxy.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForceReverseProxyExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForceReverseProxyExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForceReverseProxyExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForceReverseProxyExample)
 
 # ---- Health Check + Rate Limiting + Logging ----
-add_executable(NexusForceHealthCheckExample
+add_nexusforce_example(NexusForceHealthCheckExample
     health_check.cpp
 )
-if(WIN32)
-    set_target_properties(NexusForceHealthCheckExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-elseif(UNIX AND NOT APPLE)
-    set_target_properties(NexusForceHealthCheckExample PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-    )
-endif()
-target_link_libraries(NexusForceHealthCheckExample PRIVATE NexusForce::NexusForce)
-nexusforce_compiler_options(NexusForceHealthCheckExample)

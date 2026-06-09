@@ -38,7 +38,7 @@ NEFORCE_INLINE17 constexpr uint32_t epoll_et = 0x80000000;
  * @note 所有回调在事件循环线程中执行，长耗时回调会阻塞 I/O 分发。
  * @warning 不支持从其他线程注册 fd；通过 wake() + 外部队列实现跨线程操作。
  */
-class event_loop {
+class NEFORCE_API event_loop {
 public:
     /// @brief fd 事件回调
     using fd_callback = function<void(int fd, uint32_t events)>;

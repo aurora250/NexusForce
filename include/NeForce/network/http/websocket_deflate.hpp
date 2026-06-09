@@ -27,7 +27,7 @@ NEFORCE_BEGIN_HTTP__
  *
  * RFC 7692 §7 定义的扩展参数。
  */
-struct websocket_deflate_config {
+struct NEFORCE_API websocket_deflate_config {
     /** @brief 客户端→服务端压缩窗口比特位 (8-15)，默认15 */
     int client_max_window_bits = 15;
 
@@ -69,7 +69,7 @@ struct websocket_deflate_config {
  *
  * 支持上下文接管优化（跨消息复用 zlib 流状态）。
  */
-class websocket_deflate {
+class NEFORCE_API websocket_deflate {
 private:
     /// @brief true=压缩模式，false=解压模式
     bool compress_mode_;

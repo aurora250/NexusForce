@@ -3599,10 +3599,6 @@ TEST(MultipartFieldTest, IsFileReturnsCorrectly) {
     EXPECT_TRUE(field.is_file());
 }
 
-// ============================================================================
-// ByteCursor edge-case tests
-// ============================================================================
-
 class ByteCursorEdgeTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -3636,7 +3632,7 @@ TEST_F(ByteCursorEdgeTest, TryReadBe24Truncated) {
     byte_cursor cur(data, 2);
     auto val = cur.try_read_be24();
     EXPECT_FALSE(val.has_value());
-    EXPECT_EQ(cur.remaining(), 2u); // position unchanged on failure
+    EXPECT_EQ(cur.remaining(), 2u);
 }
 
 TEST_F(ByteCursorEdgeTest, TryReadBe32ExactBoundary) {
@@ -3708,7 +3704,7 @@ TEST_F(ByteCursorEdgeTest, PeekDoesNotAdvance) {
     auto p = cur.peek_byte();
     ASSERT_TRUE(p.has_value());
     EXPECT_EQ(*p, 0x42);
-    EXPECT_EQ(cur.remaining(), 2u); // same position
+    EXPECT_EQ(cur.remaining(), 2u);
 }
 
 TEST_F(ByteCursorEdgeTest, MixedReads) {
@@ -3751,15 +3747,11 @@ TEST_F(ByteCursorEdgeTest, ResetReusesCursor) {
     uint8_t data1[] = {0x01, 0x02};
     uint8_t data2[] = {0xFF, 0xFE, 0xFD};
     byte_cursor cur(data1, 2);
-    cur.try_read_byte();
+    ignore = cur.try_read_byte();
     cur.reset(data2, 3);
     EXPECT_EQ(cur.remaining(), 3u);
     EXPECT_EQ(cur.try_read_byte(), optional<uint8_t>(0xFF));
 }
-
-// ============================================================================
-// HTTP/2 Frame Header tests
-// ============================================================================
 
 class Http2FrameHeaderTest : public ::testing::Test {
 protected:
@@ -3778,15 +3770,15 @@ TEST_F(Http2FrameHeaderTest, GetSetLength) {
 
 TEST_F(Http2FrameHeaderTest, GetSetStreamId) {
     http2_frame_header hdr{};
-    hdr.set_stream_id(0x7FFFFFFF); // max 31-bit
+    hdr.set_stream_id(0x7FFFFFFF);
     EXPECT_EQ(hdr.get_stream_id(), 0x7FFFFFFFu);
     EXPECT_EQ(hdr.sid_r, 0x7F);
 }
 
 TEST_F(Http2FrameHeaderTest, StreamIdMasksReservedBit) {
     http2_frame_header hdr{};
-    hdr.sid_r = 0xFF;                                 // all bits set including reserved
-    EXPECT_EQ(hdr.get_stream_id() & 0x80000000u, 0u); // reserved bit is masked
+    hdr.sid_r = 0xFF;
+    EXPECT_EQ(hdr.get_stream_id() & 0x80000000u, 0u);
 }
 
 TEST_F(Http2FrameHeaderTest, ZeroStreamId) {
@@ -3795,10 +3787,6 @@ TEST_F(Http2FrameHeaderTest, ZeroStreamId) {
     EXPECT_EQ(hdr.get_stream_id(), 0u);
     EXPECT_EQ(hdr.sid_r, 0u);
 }
-
-// ============================================================================
-// HTTP/2 Frame Encode tests (static framer methods)
-// ============================================================================
 
 class Http2FrameEncodeTest : public ::testing::Test {
 protected:
@@ -3812,7 +3800,6 @@ TEST_F(Http2FrameEncodeTest, EncodeSettingsFrame) {
     sf.entries = {{http2_settings_id::MAX_CONCURRENT_STREAMS, 128}, {http2_settings_id::INITIAL_WINDOW_SIZE, 131072}};
     auto frame = http2_framer::encode_settings_frame(sf);
     ASSERT_GE(frame.size(), 9u);
-    // Verify frame header: type=SETTINGS(4), stream_id=0
     EXPECT_EQ(frame[3], 0x04); // SETTINGS type
     EXPECT_EQ(frame[4], 0x00); // no ACK flag
     uint32_t sid = (static_cast<uint32_t>(frame[5] & 0x7F) << 24) | (static_cast<uint32_t>(frame[6]) << 16) |
@@ -3825,7 +3812,6 @@ TEST_F(Http2FrameEncodeTest, EncodeSettingsAck) {
     sf.ack = true;
     auto frame = http2_framer::encode_settings_frame(sf);
     EXPECT_EQ(frame[4] & HTTP2_FLAG_ACK, HTTP2_FLAG_ACK);
-    // ACK has no payload
     http2_frame_header hdr{};
     hdr.length_hi = frame[0];
     hdr.length_mid = frame[1];
@@ -3914,10 +3900,6 @@ TEST_F(Http2FrameEncodeTest, EncodeContinuationFrame) {
     EXPECT_EQ(frame[4] & HTTP2_FLAG_END_HEADERS, HTTP2_FLAG_END_HEADERS);
 }
 
-// ============================================================================
-// HTTP/2 Frame Decode error path tests
-// ============================================================================
-
 class Http2FrameDecodeErrorTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -3934,15 +3916,14 @@ TEST_F(Http2FrameDecodeErrorTest, DecodeEmptyDataNoCallback) {
 TEST_F(Http2FrameDecodeErrorTest, DecodeTruncatedFrameHeader) {
     http2_framer framer;
     int call_count = 0;
-    uint8_t data[] = {0x00, 0x00, 0x08}; // only 3 bytes of 9-byte header
+    uint8_t data[] = {0x00, 0x00, 0x08};
     framer.decode_frames(data, 3, [&](http2_frame_type, uint8_t, uint32_t, const byte_t*, size_t) { ++call_count; });
-    EXPECT_EQ(call_count, 0); // not enough for full header
+    EXPECT_EQ(call_count, 0);
 }
 
 TEST_F(Http2FrameDecodeErrorTest, DecodeTruncatedPayload) {
     http2_framer framer;
     int call_count = 0;
-    // Frame header says length=8 but only 4 bytes of payload follow
     uint8_t data[] = {
             0x00, 0x00, 0x08,       // length = 8
             0x01,                   // type = HEADERS
@@ -3958,7 +3939,6 @@ TEST_F(Http2FrameDecodeErrorTest, DecodeTruncatedPayload) {
 TEST_F(Http2FrameDecodeErrorTest, DecodeMultipleCompleteFrames) {
     http2_framer framer;
     int call_count = 0;
-    // Build two complete SETTINGS frames (ACK with 0-length payload)
     http2_settings_frame sf;
     sf.ack = true;
     auto f1 = http2_framer::encode_settings_frame(sf);
@@ -3985,11 +3965,9 @@ TEST_F(Http2FrameDecodeErrorTest, DecodeFragmentedHeaderAcrossCalls) {
     sf.ack = true;
     auto full_frame = http2_framer::encode_settings_frame(sf);
 
-    // Send first 5 bytes of header
     framer.decode_frames(full_frame.data(), 5, [&](auto...) { ++call_count; });
     EXPECT_EQ(call_count, 0);
 
-    // Send remaining bytes
     framer.decode_frames(full_frame.data() + 5, full_frame.size() - 5, [&](auto...) { ++call_count; });
     EXPECT_EQ(call_count, 1);
 }
@@ -4017,10 +3995,6 @@ TEST_F(Http2FrameDecodeErrorTest, EncodeDecodeRoundtripDataFrame) {
     EXPECT_EQ(call_count, 1);
 }
 
-// ============================================================================
-// HTTP/2 Stream state machine tests
-// ============================================================================
-
 class Http2StreamStateTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -4036,15 +4010,14 @@ TEST_F(Http2StreamStateTest, NewStreamIsIdle) {
 
 TEST_F(Http2StreamStateTest, IdleStreamCanOnlySendHeaders) {
     http2_stream s(1);
-    // IDLE: can send/receive HEADERS but cannot receive DATA
     EXPECT_TRUE(s.can_send_headers());
     EXPECT_FALSE(s.can_send_data());
-    EXPECT_FALSE(s.can_receive()); // DATA not receivable in IDLE
+    EXPECT_FALSE(s.can_receive());
 }
 
 TEST_F(Http2StreamStateTest, ReceiveHeadersOpensStream) {
     http2_stream s(1);
-    s.on_receive_headers(false); // not end_stream
+    s.on_receive_headers(false);
     EXPECT_EQ(s.state(), http2_stream_state::OPEN);
     EXPECT_TRUE(s.can_receive());
     EXPECT_TRUE(s.can_send_headers());
@@ -4052,7 +4025,7 @@ TEST_F(Http2StreamStateTest, ReceiveHeadersOpensStream) {
 
 TEST_F(Http2StreamStateTest, ReceiveHeadersWithEndStreamGoesHalfClosedRemote) {
     http2_stream s(1);
-    s.on_receive_headers(true); // end_stream
+    s.on_receive_headers(true);
     EXPECT_EQ(s.state(), http2_stream_state::HALF_CLOSED_REMOTE);
 }
 
@@ -4074,9 +4047,9 @@ TEST_F(Http2StreamStateTest, FullLifecycleOpenToClosed) {
     EXPECT_EQ(s.state(), http2_stream_state::OPEN);
     s.on_send_headers(false);
     EXPECT_EQ(s.state(), http2_stream_state::OPEN);
-    s.on_receive_data(true); // remote closes
+    s.on_receive_data(true);
     EXPECT_EQ(s.state(), http2_stream_state::HALF_CLOSED_REMOTE);
-    s.on_send_data(true); // local closes
+    s.on_send_data(true);
     EXPECT_EQ(s.state(), http2_stream_state::CLOSED);
     EXPECT_TRUE(s.is_closed());
 }
@@ -4104,10 +4077,6 @@ TEST_F(Http2StreamStateTest, CloseMethodSetsClosed) {
     EXPECT_TRUE(s.is_closed());
     EXPECT_EQ(s.state(), http2_stream_state::CLOSED);
 }
-
-// ============================================================================
-// WebSocket deflate config tests
-// ============================================================================
 
 class WebsocketDeflateConfigTest : public ::testing::Test {
 protected:
@@ -4164,10 +4133,6 @@ TEST_F(WebsocketDeflateConfigTest, ResponseHeaderWhenInactive) {
     EXPECT_TRUE(cfg.to_response_header().empty());
 }
 
-// ============================================================================
-// WebSocket deflate compress/decompress roundtrip tests
-// ============================================================================
-
 class WebsocketDeflateTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -4181,7 +4146,7 @@ TEST_F(WebsocketDeflateTest, CompressDecompressRoundtrip) {
     string original = "Hello, WebSocket! This is a test message for deflate compression.";
     auto compressed = compressor.process(original.view(), true);
     EXPECT_FALSE(compressed.empty());
-    EXPECT_NE(compressed, original); // should be different (compressed)
+    EXPECT_NE(compressed, original);
 
     auto decompressed = decompressor.process(compressed.view(), true);
     EXPECT_EQ(decompressed, original);
@@ -4190,16 +4155,13 @@ TEST_F(WebsocketDeflateTest, CompressDecompressRoundtrip) {
 TEST_F(WebsocketDeflateTest, CompressEmptyData) {
     websocket_deflate compressor(true, 15, false);
     auto result = compressor.process("", true);
-    // Empty input should produce minimal output (compressed empty)
     EXPECT_FALSE(result.empty());
 }
 
 TEST_F(WebsocketDeflateTest, DecompressEmptyData) {
     websocket_deflate decompressor(false, 15, false);
-    // Empty deflate stream should produce error/empty
     auto result = decompressor.process("", true);
-    // Raw decompression of empty input
-    EXPECT_TRUE(result.empty() || !result.empty()); // doesn't crash
+    EXPECT_TRUE(result.empty() || !result.empty());
 }
 
 TEST_F(WebsocketDeflateTest, FragmentedMessageRoundtrip) {
@@ -4222,7 +4184,7 @@ TEST_F(WebsocketDeflateTest, FragmentedMessageRoundtrip) {
 }
 
 TEST_F(WebsocketDeflateTest, NoContextTakeoverResetsStream) {
-    websocket_deflate compressor(true, 15, true); // no_context_takeover=true
+    websocket_deflate compressor(true, 15, true);
     websocket_deflate decompressor(false, 15, true);
 
     auto c1 = compressor.process("Message one", true);
@@ -4233,10 +4195,6 @@ TEST_F(WebsocketDeflateTest, NoContextTakeoverResetsStream) {
     auto d2 = decompressor.process(c2.view(), true);
     EXPECT_EQ(d2, "Message two");
 }
-
-// ============================================================================
-// HPACK encoder/decoder roundtrip tests
-// ============================================================================
 
 class HpackRoundtripTest : public ::testing::Test {
 protected:
@@ -4300,19 +4258,17 @@ TEST_F(HpackRoundtripTest, DecodeInvalidData) {
 
 TEST_F(HpackRoundtripTest, DynamicTableEvolution) {
     hpack_encoder encoder(4096);
-    // Encode same header multiple times — second should use dynamic table reference
     vector<hpack_header_field> headers1 = {{"x-repeat", "value1"}};
     auto e1 = encoder.encode(headers1);
-    EXPECT_GT(encoder.table_size(), 0u); // entry added to dynamic table
+    EXPECT_GT(encoder.table_size(), 0u);
 
     vector<hpack_header_field> headers2 = {{"x-repeat", "value1"}};
     auto e2 = encoder.encode(headers2);
-    // Second encoding should be smaller (uses dynamic table index)
     EXPECT_LT(e2.size(), e1.size());
 }
 
 TEST_F(HpackRoundtripTest, MaxTableSizeLimits) {
-    hpack_encoder encoder(256); // small table
+    hpack_encoder encoder(256);
     hpack_decoder decoder(256);
 
     vector<hpack_header_field> headers;
@@ -4325,10 +4281,6 @@ TEST_F(HpackRoundtripTest, MaxTableSizeLimits) {
     EXPECT_EQ(decoded.size(), headers.size());
 }
 
-// ============================================================================
-// WebSocket frame header tests
-// ============================================================================
-
 class WebsocketFrameHeaderTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -4340,7 +4292,7 @@ TEST_F(WebsocketFrameHeaderTest, HeaderSizeIsTwoBytes) { EXPECT_EQ(sizeof(websoc
 TEST_F(WebsocketFrameHeaderTest, FinAndOpcodeSetting) {
     websocket_frame_header hdr{};
     hdr.fin = 1;
-    hdr.opcode = 0x2; // BINARY
+    hdr.opcode = 0x2;
     EXPECT_EQ(hdr.fin, 1u);
     EXPECT_EQ(hdr.opcode, 0x2u);
 }
@@ -4382,10 +4334,6 @@ TEST_F(WebsocketFrameHeaderTest, DefaultValuesAreZero) {
     EXPECT_EQ(hdr.rsv3, 0u);
 }
 
-// ============================================================================
-// WebSocket server routing tests
-// ============================================================================
-
 class WebsocketServerRoutingTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -4401,7 +4349,6 @@ TEST_F(WebsocketServerRoutingTest, RouteRegistersHandler) {
     websocket_server server;
     bool called = false;
     server.route("/chat", [&](websocket_server::session_ptr) { called = true; });
-    // Route registration doesn't fail
     EXPECT_FALSE(called);
 }
 
@@ -4414,14 +4361,6 @@ TEST_F(WebsocketServerRoutingTest, MultipleRoutesCanBeRegistered) {
     EXPECT_EQ(count, 0);
 }
 
-// ============================================================================
-// HTTP Server ALPN 测试
-// ============================================================================
-
-#include <NeForce/network/ssl/ssl_context.hpp>
-#include <NeForce/network/ssl/ssl_socket.hpp>
-#include <NeForce/network/tcp/tcp_server.hpp>
-
 class HttpServerAlpnTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -4429,7 +4368,6 @@ protected:
 };
 
 TEST_F(HttpServerAlpnTest, HttpsConstructorSetsAlpnProtocols) {
-    // 验证 HTTPS 构造函数能正常启动和停止（ALPN 协议在构造函数中自动注册）
     ssl_context ctx(ssl_method::TLS_SERVER);
     bool cert_loaded = ctx.load_certificate("/tmp/h2test.crt", "/tmp/h2test.key");
     if (!cert_loaded) {
@@ -4443,7 +4381,6 @@ TEST_F(HttpServerAlpnTest, HttpsConstructorSetsAlpnProtocols) {
 }
 
 TEST_F(HttpServerAlpnTest, HttpServerWithoutSslDoesNotCrash) {
-    // 非 SSL HTTP 服务器无 ALPN 逻辑，正常启动停止
     http_server server(ports(8088), 1);
     server.start();
     EXPECT_TRUE(server.is_running());
@@ -4451,14 +4388,12 @@ TEST_F(HttpServerAlpnTest, HttpServerWithoutSslDoesNotCrash) {
 }
 
 TEST_F(HttpServerAlpnTest, SslSocketGetAlpnNegotiatedProxyWorks) {
-    // ssl_socket 的 get_alpn_negotiated 正确代理到 ssl_stream
     ssl_socket sock;
     EXPECT_TRUE(sock.get_alpn_negotiated().empty());
     EXPECT_FALSE(sock.is_ssl());
 }
 
 TEST_F(HttpServerAlpnTest, SslStreamGetAlpnNegotiatedWithoutHandshake) {
-    // 握手前 ssl_stream::get_alpn_negotiated 返回空
     ssl_context ctx(ssl_method::TLS_CLIENT);
     ctx.set_alpn_protos({"h2"});
     ssl_stream stream(ctx);

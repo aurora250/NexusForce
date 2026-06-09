@@ -4,6 +4,7 @@
 #    include <NeForce/db/sqlite/sqlite_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
+
 bool sqlite_connect::connect(const db_config& config) {
     last_error_.clear();
     last_errno_ = 0;
@@ -16,17 +17,6 @@ bool sqlite_connect::connect(const db_config& config) {
         close();
         return false;
     }
-#    ifdef NEFORCE_SUPPORT_SQLCIPHER
-    if (!config.encryption_key.empty()) {
-        if (::sqlite3_key(link_, config.encryption_key.data(), static_cast<int>(config.encryption_key.size())) !=
-            SQLITE_OK) {
-            last_error_ = ::sqlite3_errmsg(link_);
-            last_errno_ = ::sqlite3_errcode(link_);
-            close();
-            return false;
-        }
-    }
-#    endif
     return true;
 }
 
@@ -35,6 +25,58 @@ bool sqlite_connect::reconnect(const db_config& config) {
     return connect(config);
 }
 
+#    ifdef NEFORCE_SUPPORT_SQLCIPHER
+
+bool sqlite_connect::connect(const db_config& config, const string& encryption_key, const key_type type) {
+    last_error_.clear();
+    last_errno_ = 0;
+    if (connected()) {
+        close();
+    }
+    if (::sqlite3_open(config.database.data(), &link_) != SQLITE_OK) {
+        last_error_ = ::sqlite3_errmsg(link_);
+        last_errno_ = ::sqlite3_errcode(link_);
+        close();
+        return false;
+    }
+    if (!encryption_key.empty()) {
+        if (type == key_type::RAW) {
+            ::sqlite3_exec(link_, "PRAGMA cipher_kdf_iter = 1;", nullptr, nullptr, nullptr);
+        }
+        const int rc = ::sqlite3_key_v2(link_, "main", encryption_key.data(), static_cast<int>(encryption_key.size()));
+        if (rc != SQLITE_OK) {
+            last_error_ = ::sqlite3_errmsg(link_);
+            last_errno_ = ::sqlite3_errcode(link_);
+            close();
+            return false;
+        }
+    }
+    return true;
+}
+
+bool sqlite_connect::reconnect(const db_config& config, const string& encryption_key, const key_type type) {
+    close();
+    return connect(config, encryption_key, type);
+}
+
+bool sqlite_connect::rekey(const string& new_key, const key_type type) {
+    if (link_ == nullptr) {
+        return false;
+    }
+    if (type == key_type::RAW) {
+        ::sqlite3_exec(link_, "PRAGMA cipher_kdf_iter = 1;", nullptr, nullptr, nullptr);
+    }
+    const int rc = ::sqlite3_rekey_v2(link_, "main", new_key.data(), static_cast<int>(new_key.size()));
+    if (rc != SQLITE_OK) {
+        last_error_ = ::sqlite3_errmsg(link_);
+        last_errno_ = ::sqlite3_errcode(link_);
+        return false;
+    }
+    return true;
+}
+
+#    endif
+
 void sqlite_connect::close() noexcept {
     if (link_ != nullptr) {
         ::sqlite3_close(link_);
@@ -42,7 +84,7 @@ void sqlite_connect::close() noexcept {
     }
 }
 
-bool sqlite_connect::set_character_set(const string& encoding) const {
+bool sqlite_connect::set_character_set(const string& encoding) {
     const string sql = "PRAGMA encoding = '" + encoding + "';";
     return update(sql);
 }
@@ -144,7 +186,7 @@ size_t sqlite_connect::batch_insert(const string& table, const vector<string>& c
 
 idb_connect* sqlite_factory::create_connect() {
     auto* conn = new sqlite_connect();
-    if (!conn->connect(config_)) {
+    if (!conn->connect(config_, encryption_key_, key_type_)) {
         delete conn;
         return nullptr;
     }

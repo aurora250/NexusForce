@@ -101,7 +101,7 @@ struct grpc_message {
  *
  * 线程安全的消息帧编码/解码。
  */
-class grpc_framer {
+class NEFORCE_API grpc_framer {
 public:
     /// 最大接收消息大小（默认4MB）
     byte_size max_receive_size{4_MB};
@@ -153,7 +153,7 @@ public:
  * });
  * @endcode
  */
-class grpc_handler {
+class NEFORCE_API grpc_handler {
 public:
     using unary_handler = function<grpc_message(const grpc_message&)>;
     using stream_handler = function<void(const grpc_message&, function<void(grpc_message)>)>;

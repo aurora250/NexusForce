@@ -31,7 +31,7 @@ struct byte_range {
  * @param max_ranges 最大允许的范围数量，超出时拒绝整个请求
  * @return 解析出的字节范围列表，无效返回空vector
  */
-vector<byte_range> parse_ranges(string_view range_header, uint64_t file_size, size_t max_ranges = 100);
+vector<byte_range> NEFORCE_API parse_ranges(string_view range_header, uint64_t file_size, size_t max_ranges = 100);
 
 /**
  * @brief 构建Content-Range头部值
@@ -39,7 +39,7 @@ vector<byte_range> parse_ranges(string_view range_header, uint64_t file_size, si
  * @param total_size 总大小
  * @return Content-Range值，如 "bytes 0-1023/4096"
  */
-string build_content_range(const byte_range& range, uint64_t total_size);
+string NEFORCE_API build_content_range(const byte_range& range, uint64_t total_size);
 
 /**
  * @brief 构建multipart/byteranges响应体
@@ -50,8 +50,9 @@ string build_content_range(const byte_range& range, uint64_t total_size);
  * @param total_size
  * @return multipart响应体字符串
  */
-string build_multipart_ranges(const vector<byte_range>& ranges, string_view content_type, string_view boundary,
-                              function<string(const byte_range&)> get_range_body, uint64_t total_size = 0);
+string NEFORCE_API build_multipart_ranges(const vector<byte_range>& ranges, string_view content_type,
+                                          string_view boundary, function<string(const byte_range&)> get_range_body,
+                                          uint64_t total_size = 0);
 
 /** @} */ // HTTP
 

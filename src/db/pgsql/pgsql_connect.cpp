@@ -63,7 +63,7 @@ void pgsql_connect::close() {
     }
 }
 
-bool pgsql_connect::set_character_set(const string& encoding) const {
+bool pgsql_connect::set_character_set(const string& encoding) {
     if (link_ == nullptr) {
         return false;
     }

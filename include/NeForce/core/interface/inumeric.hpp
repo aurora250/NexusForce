@@ -103,14 +103,6 @@ public:
     }
 
     /**
-     * @brief 一元负号运算符
-     * @return 对象的相反数
-     */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR14 T operator-() const noexcept(noexcept(derived().operator-())) {
-        return derived().operator-();
-    }
-
-    /**
      * @brief 加法赋值运算符
      * @param other 右操作数
      * @return 当前对象的引用

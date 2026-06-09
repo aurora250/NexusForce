@@ -58,6 +58,7 @@ socket_base& socket_base::operator=(socket_base&& other) noexcept {
     }
     close();
     fd_ = exchange(other.fd_, invalid_handle);
+    nonblocking_ = exchange(other.nonblocking_, false);
     return *this;
 }
 
@@ -87,6 +88,7 @@ bool socket_base::close() noexcept {
 #endif
 
     fd_ = invalid_handle;
+    nonblocking_ = false;
     return success;
 }
 
@@ -107,7 +109,9 @@ bool socket_base::set_nonblocking(const bool enable) noexcept {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::u_long mode = enable ? 1 : 0;
-    return ::ioctlsocket(fd_, FIONBIO, &mode) == 0;
+    if (::ioctlsocket(fd_, FIONBIO, &mode) != 0) {
+        return false;
+    }
 #else
     int flags = ::fcntl(fd_, F_GETFL, 0);
     if (flags == -1) {
@@ -119,7 +123,23 @@ bool socket_base::set_nonblocking(const bool enable) noexcept {
     } else {
         flags &= ~O_NONBLOCK;
     }
-    return ::fcntl(fd_, F_SETFL, flags) == 0;
+    if (::fcntl(fd_, F_SETFL, flags) == -1) {
+        return false;
+    }
+#endif
+    nonblocking_ = enable;
+    return true;
+}
+
+bool socket_base::is_nonblocking() const noexcept {
+    if (!is_open()) {
+        return false;
+    }
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    return nonblocking_;
+#else
+    const int flags = ::fcntl(fd_, F_GETFL, 0);
+    return (flags != -1) && (flags & O_NONBLOCK);
 #endif
 }
 
@@ -183,6 +203,18 @@ bool socket_base::set_reuse_address(const bool enable) noexcept {
     return set_option(SOL_SOCKET, SO_REUSEADDR, &value, sizeof(value));
 }
 
+bool socket_base::get_reuse_address() const noexcept {
+    if (!is_open()) {
+        return false;
+    }
+    int value = 0;
+    ::socklen_t optlen = sizeof(value);
+    if (!get_option(SOL_SOCKET, SO_REUSEADDR, &value, &optlen)) {
+        return false;
+    }
+    return value != 0;
+}
+
 bool socket_base::set_reuse_port(const bool enable) noexcept {
     if (!is_open()) {
         return false;
@@ -196,12 +228,40 @@ bool socket_base::set_reuse_port(const bool enable) noexcept {
 #endif
 }
 
+bool socket_base::get_reuse_port() const noexcept {
+    if (!is_open()) {
+        return false;
+    }
+#ifdef SO_REUSEPORT
+    int value = 0;
+    ::socklen_t optlen = sizeof(value);
+    if (!get_option(SOL_SOCKET, SO_REUSEPORT, &value, &optlen)) {
+        return false;
+    }
+    return value != 0;
+#else
+    return false;
+#endif
+}
+
 bool socket_base::set_keep_alive(const bool enable) noexcept {
     if (!is_open()) {
         return false;
     }
     const ::socklen_t value = enable ? 1 : 0;
     return set_option(SOL_SOCKET, SO_KEEPALIVE, &value, sizeof(value));
+}
+
+bool socket_base::get_keep_alive() const noexcept {
+    if (!is_open()) {
+        return false;
+    }
+    int value = 0;
+    ::socklen_t optlen = sizeof(value);
+    if (!get_option(SOL_SOCKET, SO_KEEPALIVE, &value, &optlen)) {
+        return false;
+    }
+    return value != 0;
 }
 
 bool socket_base::set_tcp_nodelay(const bool enable) noexcept {
@@ -212,6 +272,18 @@ bool socket_base::set_tcp_nodelay(const bool enable) noexcept {
     return set_option(IPPROTO_TCP, TCP_NODELAY, &value, sizeof(value));
 }
 
+bool socket_base::get_tcp_nodelay() const noexcept {
+    if (!is_open()) {
+        return false;
+    }
+    int value = 0;
+    ::socklen_t optlen = sizeof(value);
+    if (!get_option(IPPROTO_TCP, TCP_NODELAY, &value, &optlen)) {
+        return false;
+    }
+    return value != 0;
+}
+
 bool socket_base::set_receive_buffer_size(const int size) noexcept {
     if (!is_open()) {
         return false;
@@ -219,11 +291,57 @@ bool socket_base::set_receive_buffer_size(const int size) noexcept {
     return set_option(SOL_SOCKET, SO_RCVBUF, &size, sizeof(size));
 }
 
+int socket_base::get_receive_buffer_size() const noexcept {
+    if (!is_open()) {
+        return -1;
+    }
+    int value = 0;
+    ::socklen_t optlen = sizeof(value);
+    if (!get_option(SOL_SOCKET, SO_RCVBUF, &value, &optlen)) {
+        return -1;
+    }
+    return value;
+}
+
 bool socket_base::set_send_buffer_size(const int size) noexcept {
     if (!is_open()) {
         return false;
     }
     return set_option(SOL_SOCKET, SO_SNDBUF, &size, sizeof(size));
+}
+
+int socket_base::get_send_buffer_size() const noexcept {
+    if (!is_open()) {
+        return -1;
+    }
+    int value = 0;
+    ::socklen_t optlen = sizeof(value);
+    if (!get_option(SOL_SOCKET, SO_SNDBUF, &value, &optlen)) {
+        return -1;
+    }
+    return value;
+}
+
+optional<milliseconds> socket_base::get_send_timeout() const noexcept {
+    if (!is_open()) {
+        return none;
+    }
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::DWORD ms = 0;
+    int optlen = sizeof(ms);
+    if (!get_option(SOL_SOCKET, SO_SNDTIMEO, &ms, &optlen)) {
+        return none;
+    }
+    return milliseconds(ms);
+#else
+    ::timeval tv = {};
+    ::socklen_t optlen = sizeof(tv);
+    if (!get_option(SOL_SOCKET, SO_SNDTIMEO, &tv, &optlen)) {
+        return none;
+    }
+    return milliseconds(tv.tv_sec * 1000 + tv.tv_usec / 1000);
+#endif
 }
 
 bool socket_base::set_send_timeout(const milliseconds timeout) noexcept {
@@ -255,6 +373,28 @@ bool socket_base::set_receive_timeout(const milliseconds timeout) noexcept {
     tv.tv_sec = timeout.count() / 1000;
     tv.tv_usec = (timeout.count() % 1000) * 1000;
     return set_option(SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
+#endif
+}
+
+optional<milliseconds> socket_base::get_receive_timeout() const noexcept {
+    if (!is_open()) {
+        return none;
+    }
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::DWORD ms = 0;
+    int optlen = sizeof(ms);
+    if (!get_option(SOL_SOCKET, SO_RCVTIMEO, &ms, &optlen)) {
+        return none;
+    }
+    return milliseconds(ms);
+#else
+    ::timeval tv = {};
+    ::socklen_t optlen = sizeof(tv);
+    if (!get_option(SOL_SOCKET, SO_RCVTIMEO, &tv, &optlen)) {
+        return none;
+    }
+    return milliseconds(tv.tv_sec * 1000 + tv.tv_usec / 1000);
 #endif
 }
 

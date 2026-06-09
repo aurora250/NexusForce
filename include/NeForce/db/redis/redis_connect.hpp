@@ -89,7 +89,7 @@ public:
      * @deprecated Redis不支持设置字符集
      */
     NEFORCE_DEPRECATED_FOR("Redis not support setting character sets")
-    bool set_character_set(const string& /*encoding*/) const noexcept override { return false; }
+    bool set_character_set(const string& /*encoding*/) noexcept override { return false; }
 
     /**
      * @brief 获取字符集（Redis不支持）

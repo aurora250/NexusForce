@@ -28,7 +28,7 @@ NEFORCE_BEGIN_HTTP__
  *
  * 仅验证状态变更方法：POST、PUT、PATCH、DELETE
  */
-class csrf_filter final : public http_filter {
+class NEFORCE_API csrf_filter final : public http_filter {
 public:
     string cookie_name{"XSRF-TOKEN"};   ///< CSRF Cookie名称
     string header_name{"X-CSRF-Token"}; ///< CSRF Header名称

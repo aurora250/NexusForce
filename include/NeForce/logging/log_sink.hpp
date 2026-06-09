@@ -136,7 +136,7 @@ enum class syslog_facility : int {
  * @class syslog_sink
  * @brief 系统日志输出目标
  *
- * 将日志写入 Linux syslog。在非 Linux 平台上回退到 console 输出。
+ * 将日志写入 Linux syslog。
  */
 class NEFORCE_API syslog_sink final : public log_sink {
 private:

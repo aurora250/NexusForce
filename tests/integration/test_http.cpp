@@ -1675,10 +1675,6 @@ TEST_F(ChunkedReaderIntegrationTest, ConfigurableLimits) {
     EXPECT_EQ(byte_size{}.bytes(), 0u);
 }
 
-// ============================================================================
-// H2 TLS (ALPN) 集成测试
-// ============================================================================
-
 class H2TlsIntegrationTest : public ::testing::Test {
 protected:
     const char* cert_path = "/tmp/h2test.crt";
@@ -1689,7 +1685,6 @@ protected:
 };
 
 TEST_F(H2TlsIntegrationTest, H2AlpnNegotiationServerClient) {
-    // 启动 HTTPS 服务器（h2 + http/1.1 ALPN）
     ssl_context server_ctx(ssl_method::TLS_SERVER);
     if (!server_ctx.load_certificate(cert_path, key_path)) {
         GTEST_SKIP() << "Test certificate not found at " << cert_path;
@@ -1697,9 +1692,8 @@ TEST_F(H2TlsIntegrationTest, H2AlpnNegotiationServerClient) {
 
     http_server server(ports(8443), move(server_ctx), 1);
     server.start();
-    this_thread::sleep_for(milliseconds(200)); // 等待服务器就绪
+    this_thread::sleep_for(milliseconds(200));
 
-    // 客户端请求 h2 ALPN
     ssl_context client_ctx(ssl_method::TLS_CLIENT);
     client_ctx.set_alpn_protos({"h2"});
 
@@ -1710,7 +1704,6 @@ TEST_F(H2TlsIntegrationTest, H2AlpnNegotiationServerClient) {
         GTEST_SKIP() << "TLS connection failed (port 8443 may be unavailable)";
     }
 
-    // 验证 ALPN 协商结果
     auto* ssl_sock = dynamic_cast<ssl_socket*>(&client.socket());
     ASSERT_NE(ssl_sock, nullptr);
     string negotiated = ssl_sock->get_alpn_negotiated();
@@ -1728,7 +1721,7 @@ TEST_F(H2TlsIntegrationTest, Http11AlpnFallback) {
 
     http_server server(ports(8444), move(server_ctx), 1);
     server.start();
-    this_thread::sleep_for(milliseconds(200)); // 等待服务器就绪
+    this_thread::sleep_for(milliseconds(200));
 
     ssl_context client_ctx(ssl_method::TLS_CLIENT);
     client_ctx.set_alpn_protos({"http/1.1"});
@@ -1750,7 +1743,6 @@ TEST_F(H2TlsIntegrationTest, Http11AlpnFallback) {
 }
 
 TEST_F(H2TlsIntegrationTest, NoAlpnReturnsEmpty) {
-    // 未握手时 get_alpn_negotiated 返回空
     ssl_stream s;
     EXPECT_TRUE(s.get_alpn_negotiated().empty());
 
@@ -1759,7 +1751,6 @@ TEST_F(H2TlsIntegrationTest, NoAlpnReturnsEmpty) {
 }
 
 TEST_F(H2TlsIntegrationTest, SslSocketGetAlpnWorks) {
-    // ssl_socket get_alpn_negotiated 代理测试
     ssl_socket sock;
     EXPECT_TRUE(sock.get_alpn_negotiated().empty());
     EXPECT_FALSE(sock.is_ssl());

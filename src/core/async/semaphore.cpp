@@ -84,7 +84,7 @@ semaphore::~semaphore() noexcept {
 
 void semaphore::acquire() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    ::WaitForSingleObjectEx(handle_, INFINITE, FALSE);
+    ::WaitForSingleObjectEx(handle_, numeric_traits<::DWORD>::max(), FALSE);
 #else
     int ret = 0;
     do {

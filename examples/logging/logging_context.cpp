@@ -84,11 +84,6 @@ int main() {
 
     NEFORCE_LOG_WARN("这条警告同时写入 syslog");
     println("可以通过 journalctl -f 或 tail -f /var/log/syslog 查看");
-#else
-    println("当前平台不支持 syslog，已 fallback 到 console 输出");
-    auto fallback_sink = make_shared<syslog_sink>();
-    log->add_sink(fallback_sink);
-    NEFORCE_LOG_WARN("Fallback 模式：syslog 消息输出到 console");
 #endif
 
     // ========== 清除上下文 ==========

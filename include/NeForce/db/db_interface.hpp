@@ -220,8 +220,8 @@ public:
      * @name 字符集设置
      * @{
      */
-    NEFORCE_NODISCARD virtual bool set_character_set(const string& encoding) const = 0; ///< 设置字符集
-    NEFORCE_NODISCARD virtual string_view get_character_set() const = 0;                ///< 获取字符集
+    NEFORCE_NODISCARD virtual bool set_character_set(const string& encoding) = 0; ///< 设置字符集
+    NEFORCE_NODISCARD virtual string_view get_character_set() const = 0;          ///< 获取字符集
     /** @} */
 
     /**

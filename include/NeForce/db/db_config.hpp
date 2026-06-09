@@ -95,7 +95,6 @@ struct NEFORCE_API db_config {
     string host{"127.0.0.1"}; ///< 数据库主机地址
     string charset;           ///< 数据库字符集
     ports port;               ///< 数据库端口号
-    string encryption_key;    ///< 数据库加密密钥
 
 #ifdef NEFORCE_SUPPORT_POSTGRESQL
     /**
@@ -129,13 +128,12 @@ struct NEFORCE_API db_config {
     /**
      * @brief 创建SQLite3数据库配置
      * @param file 数据库文件路径
-     * @param key 加密密钥
      * @return 使用默认SQLite3参数的配置对象
      *
      * 对于SQLite，host和port字段被忽略，
      * database字段存储文件路径。
      */
-    static db_config for_sqlite(const string& file, const string& key = "");
+    static db_config for_sqlite(const string& file);
 #endif
 
 #ifdef NEFORCE_SUPPORT_HIREDIS

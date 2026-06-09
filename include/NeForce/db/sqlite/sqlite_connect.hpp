@@ -9,7 +9,13 @@
  */
 
 #ifdef NEFORCE_SUPPORT_SQLITE3
-#    include <sqlite3.h>
+#    ifdef NEFORCE_SUPPORT_SQLCIPHER
+#        include <sqlcipher/sqlite3.h>
+
+#        include <utility>
+#    else
+#        include <sqlite3.h>
+#    endif
 #    include "NeForce/db/sql_connect_base.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -43,6 +49,21 @@ NEFORCE_BEGIN_NAMESPACE__
  *       支持内存数据库（":memory:"）。
  */
 struct NEFORCE_API sqlite_connect final : sql_connect_base<sqlite_connect> {
+public:
+    /**
+     * @enum key_type
+     * @brief SQLCipher 加密密钥类型
+     *
+     * 控制 SQLCipher 如何处理传入的密钥数据。
+     *
+     * - PBKDF2：口令派生（PBKDF2-HMAC-SHA256，默认）
+     * - RAW：原始密钥（32 字节 AES-256 key，不派生）
+     */
+    enum class key_type : byte_t {
+        PBKDF2, ///< 口令派生
+        RAW     ///< 原始密钥
+    };
+
 protected:
     ::sqlite3* link_ = nullptr; ///< SQLite数据库连接句柄
     friend sql_connect_base<sqlite_connect>;
@@ -85,6 +106,44 @@ public:
      */
     NEFORCE_NODISCARD bool reconnect(const db_config& config) override;
 
+#    ifdef NEFORCE_SUPPORT_SQLCIPHER
+
+    /**
+     * @brief 建立数据库连接
+     * @param config 连接配置
+     * @param encryption_key 加密密钥
+     * @param type 密钥类型
+     * @return 连接成功返回true
+     *
+     * 打开config.database指定的数据库文件。
+     * 如果database为空，创建内存数据库。
+     */
+    bool connect(const db_config& config, const string& encryption_key, key_type type = key_type::PBKDF2);
+
+    /**
+     * @brief 重新连接数据库
+     * @param config 连接配置
+     * @param encryption_key 加密密钥
+     * @param type 密钥类型
+     * @return 重连成功返回true
+     *
+     * 关闭当前连接，使用新配置重新连接。
+     */
+    NEFORCE_NODISCARD bool reconnect(const db_config& config, const string& encryption_key,
+                                     key_type type = key_type::PBKDF2);
+
+    /**
+     * @brief 修改已打开数据库的加密密钥
+     * @param new_key 新密钥
+     * @param type 密钥类型
+     * @return 修改成功返回true
+     *
+     * 允许在不关闭连接的情况下更换加密密钥。如果从未加密数据库调用此方法，将为其启用加密。
+     */
+    NEFORCE_NODISCARD bool rekey(const string& new_key, key_type type = key_type::PBKDF2);
+
+#    endif
+
     /**
      * @brief 关闭数据库连接
      */
@@ -95,7 +154,7 @@ public:
      * @param encoding 字符集名称
      * @return 设置成功返回true
      */
-    NEFORCE_NODISCARD bool set_character_set(const string& encoding) const override;
+    NEFORCE_NODISCARD bool set_character_set(const string& encoding) override;
 
     /**
      * @brief 获取当前字符集
@@ -169,6 +228,11 @@ private:
  * 实现idb_factory接口，用于创建SQLite连接和结果集对象。
  */
 class NEFORCE_API sqlite_factory final : public idb_factory {
+#    ifdef NEFORCE_SUPPORT_SQLCIPHER
+    string encryption_key_;                                                ///< 加密密钥
+    sqlite_connect::key_type key_type_ = sqlite_connect::key_type::PBKDF2; ///< 密钥类型
+#    endif
+
 public:
     /**
      * @brief 构造函数
@@ -176,6 +240,20 @@ public:
      */
     explicit sqlite_factory(db_config config) :
     idb_factory(move(config)) {}
+
+#    ifdef NEFORCE_SUPPORT_SQLCIPHER
+    /**
+     * @brief 构造函数
+     * @param config 数据库配置
+     * @param encryption_key 加密密钥
+     * @param type 密钥类型：PBKDF2=口令派生, RAW=原始密钥字节
+     */
+    explicit sqlite_factory(db_config config, string encryption_key,
+                            sqlite_connect::key_type type = sqlite_connect::key_type::PBKDF2) :
+    idb_factory(move(config)),
+    encryption_key_(move(encryption_key)),
+    key_type_(type) {}
+#    endif
 
     /**
      * @brief 创建SQLite连接对象

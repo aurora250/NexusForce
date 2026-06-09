@@ -37,7 +37,7 @@ struct cached_response {
  * 基于URL的响应缓存，支持ETag和Cache-Control。
  * 线程安全，支持LRU淘汰。
  */
-class response_cache {
+class NEFORCE_API response_cache {
 public:
     seconds default_max_age{60};   ///< 默认缓存时间
     size_t max_entries{10000};     ///< 最大缓存条目数

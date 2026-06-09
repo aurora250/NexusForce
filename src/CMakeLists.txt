@@ -172,6 +172,10 @@ if(NEXUSFORCE_USING_INTEL_TSX)
     target_compile_definitions(NexusForce PUBLIC NEFORCE_USING_INTEL_TSX)
 endif()
 
+if(NEXUSFORCE_USING_SQLCIPHER)
+    target_compile_definitions(NexusForce PUBLIC NEFORCE_USING_SQLCIPHER)
+endif()
+
 
 # 编译设置
 if (WIN32)
@@ -182,27 +186,6 @@ if (WIN32)
             LINKER_LANGUAGE CXX
             VERSION ${NEXUSFORCE_VERSION}
             SOVERSION ${NEXUSFORCE_VERSION_MAJOR}
-
-            RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-            LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
-            ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
-
-            ARCHIVE_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/lib/Debug
-            LIBRARY_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/lib/Debug
-            RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_BINARY_DIR}/bin/Debug
-
-            ARCHIVE_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/lib/Release
-            LIBRARY_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/lib/Release
-            RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin/Release
-
-            ARCHIVE_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_BINARY_DIR}/lib/RelWithDebInfo
-            LIBRARY_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_BINARY_DIR}/lib/RelWithDebInfo
-            RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_BINARY_DIR}/bin/RelWithDebInfo
-
-            ARCHIVE_OUTPUT_DIRECTORY_MINSIZEREL ${CMAKE_BINARY_DIR}/lib/MinSizeRel
-            LIBRARY_OUTPUT_DIRECTORY_MINSIZEREL ${CMAKE_BINARY_DIR}/lib/MinSizeRel
-            RUNTIME_OUTPUT_DIRECTORY_MINSIZEREL ${CMAKE_BINARY_DIR}/bin/MinSizeRel
-
     )
     if(MSVC)
         set_target_properties(NexusForce PROPERTIES WINDOWS_EXPORT_ALL_SYMBOLS ON)
@@ -217,10 +200,6 @@ elseif(UNIX AND NOT APPLE)
             LINKER_LANGUAGE CXX
             VERSION ${NEXUSFORCE_VERSION}
             SOVERSION ${NEXUSFORCE_VERSION_MAJOR}
-
-            RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
-            LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
-            ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib"
     )
 endif()
 
@@ -282,29 +261,32 @@ else()
 endif()
 
 if(NEXUSFORCE_ENABLE_SQLITE3)
-    if(WIN32)
-        # Windows: prefer SQLCipher for encryption support
-        find_package(unofficial-sqlcipher CONFIG QUIET)
-        if(TARGET unofficial::sqlcipher::sqlcipher)
-            target_link_libraries(NexusForce PUBLIC unofficial::sqlcipher::sqlcipher)
-            target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_SQLITE3 NEFORCE_SUPPORT_SQLCIPHER NEFORCE_SUPPORT_DB)
-            message(STATUS "SQLCipher linked successfully (encryption enabled)")
+    if(WIN32 AND NEXUSFORCE_USING_SQLCIPHER)
+        find_package(sqlcipher CONFIG QUIET)
+        if(TARGET sqlcipher::sqlcipher)
+            target_link_libraries(NexusForce PUBLIC sqlcipher::sqlcipher)
+            target_compile_definitions(NexusForce PUBLIC
+                NEFORCE_SUPPORT_SQLITE3 NEFORCE_SUPPORT_SQLCIPHER NEFORCE_SUPPORT_DB
+                SQLITE_HAS_CODEC SQLITE_TEMP_STORE=2)
+            set(NEXUSFORCE_SQLCIPHER_LINKED TRUE PARENT_SCOPE)
+            message(STATUS "SQLCipher linked successfully")
         else()
-            message(WARNING "SQLCipher not found on Windows - falling back to SQLite3 without encryption")
+            message(WARNING "SQLCipher not found - falling back to SQLite3 without encryption")
             find_package(unofficial-sqlite3 CONFIG QUIET)
             if(TARGET unofficial::sqlite3::sqlite3)
                 target_link_libraries(NexusForce PUBLIC unofficial::sqlite3::sqlite3)
                 target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_SQLITE3 NEFORCE_SUPPORT_DB)
-                message(STATUS "SQLite3 linked successfully (no encryption)")
+                message(STATUS "SQLite3 linked successfully")
+            else()
+                message(WARNING "SQLite3 not found - related functionality will be disabled")
             endif()
         endif()
     else()
-        # Linux/macOS: use standard SQLite3
         find_package(unofficial-sqlite3 CONFIG QUIET)
         if(TARGET unofficial::sqlite3::sqlite3)
             target_link_libraries(NexusForce PUBLIC unofficial::sqlite3::sqlite3)
             target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_SQLITE3 NEFORCE_SUPPORT_DB)
-            message(STATUS "SQLite3 linked successfully (no encryption)")
+            message(STATUS "SQLite3 linked successfully")
         else()
             message(WARNING "SQLite3 not found - related functionality will be disabled")
         endif()
@@ -366,47 +348,24 @@ message(STATUS "")
 
 
 # 安装库文件
-if(WIN32)
-    install(TARGETS NexusForce
-            EXPORT NexusForceTargets
+install(TARGETS NexusForce
+        EXPORT NexusForceTargets
 
-            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 
-            LIBRARY
-            DESTINATION ${CMAKE_INSTALL_LIBDIR}/$<CONFIG>
-            CONFIGURATIONS Debug Release RelWithDebInfo MinSizeRel
+        LIBRARY
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/$<CONFIG>
+        CONFIGURATIONS Debug Release RelWithDebInfo MinSizeRel
 
-            ARCHIVE
-            DESTINATION ${CMAKE_INSTALL_LIBDIR}/$<CONFIG>
-            CONFIGURATIONS Debug Release RelWithDebInfo MinSizeRel
+        ARCHIVE
+        DESTINATION ${CMAKE_INSTALL_LIBDIR}/$<CONFIG>
+        CONFIGURATIONS Debug Release RelWithDebInfo MinSizeRel
 
-            RUNTIME
-            DESTINATION ${CMAKE_INSTALL_BINDIR}/$<CONFIG>
-            CONFIGURATIONS Debug Release RelWithDebInfo MinSizeRel
+        RUNTIME
+        DESTINATION ${CMAKE_INSTALL_BINDIR}/$<CONFIG>
+        CONFIGURATIONS Debug Release RelWithDebInfo MinSizeRel
 
-            INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    )
-elseif(UNIX AND NOT APPLE)
-    install(TARGETS NexusForce
-            EXPORT NexusForceTargets
-
-            RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-            LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-            ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-
-            INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-    )
-endif()
-
-if(UNIX AND NOT APPLE)
-    install(TARGETS NexusForce
-            LIBRARY
-                DESTINATION ${CMAKE_INSTALL_LIBDIR}
-                COMPONENT Runtime
-            ARCHIVE
-                DESTINATION ${CMAKE_INSTALL_LIBDIR}
-                COMPONENT Development
-    )
-endif()
+        INCLUDES DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)

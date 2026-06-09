@@ -36,7 +36,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * SSL_CTX* ctx = sni.select_context(servername);
  * @endcode
  */
-class sni_manager {
+class NEFORCE_API sni_manager {
 private:
     /// @brief hostname → SSL 上下文映射
     unordered_map<string, ssl_context> hosts_;

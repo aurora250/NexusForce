@@ -1,8 +1,9 @@
 # CHANGELOG
 
-## [1.0.0-rc] - 2026-06-08
+## [1.0.0-rc] - 2026-06-09
 
 ### 🚀 New Features
+- 添加 GoogleBenchmark 配置
 - 添加 HTTP/2 (h2) TLS+ALPN 协商支持，`ssl_stream::get_alpn_negotiated()` 接口
 - 添加 HTTP/2 连接管理 `http2_connection`（h2c 升级 + h2 ALPN 双模式）
 - 添加 HTTP/2 协议帧处理 `http2_protocol`
@@ -30,6 +31,7 @@
 - 更新所有网络示例代码（http_server, https_server, http2_server, websocket_server 等）
 
 ### 🐛 Bug Fixes
+- 修复 Linux 平台的 CMake install 配置
 - 修复 `http_server::send_response()` 对 TLS 连接使用 `::writev()` 裸 fd 绕过 SSL 的问题
 - 修复 HTTP/2 h2c 升级握手挂起（缺少 SETTINGS 帧发送与 `flush_writes()`）
 - 修复 HTTP/2 h2c 升级后请求体丢失（`handle_upgrade_request` 传递空数据）

@@ -1,0 +1,231 @@
+name: "Build Verify"
+
+on:
+  push:
+    branches: [ dev ]
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - 'tests/**'
+      - 'examples/**'
+      - 'benchmark/**'
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'vcpkg.json'
+      - 'config.json'
+      - '.github/workflows/ci-build.yml'
+  pull_request:
+    branches: [ dev ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: "${{ matrix.os }} · ${{ matrix.compiler }} · ${{ matrix.config }} · C++${{ matrix.cppstd }}"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            compiler: msvc
+            config: full
+            cppstd: 20
+          - os: windows-latest
+            compiler: msvc
+            config: minimal
+            cppstd: 14
+          - os: windows-latest
+            compiler: msvc
+            config: sqlcipher
+            cppstd: 20
+
+          - os: windows-latest
+            compiler: clang-cl
+            config: full
+            cppstd: 20
+          - os: windows-latest
+            compiler: clang-cl
+            config: minimal
+            cppstd: 17
+
+          - os: ubuntu-latest
+            compiler: gcc
+            config: full
+            cppstd: 20
+          - os: ubuntu-latest
+            compiler: gcc
+            config: minimal
+            cppstd: 14
+          - os: ubuntu-latest
+            compiler: gcc
+            config: all-db
+            cppstd: 20
+
+          - os: ubuntu-latest
+            compiler: clang
+            config: full
+            cppstd: 20
+          - os: ubuntu-latest
+            compiler: clang
+            config: minimal
+            cppstd: 17
+          - os: ubuntu-latest
+            compiler: clang
+            config: no-compress
+            cppstd: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install system dependencies (Ubuntu)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            build-essential      \
+            cmake                \
+            ninja-build          \
+            pkg-config           \
+            libtirpc-dev         \
+            curl                 \
+            zip                  \
+            unzip                \
+            tar
+
+      - name: Install Clang (Ubuntu)
+        if: runner.os == 'Linux' && matrix.compiler == 'clang'
+        run: |
+          UBUNTU_VERSION=$(lsb_release -cs)
+          wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc
+          sudo add-apt-repository "deb http://apt.llvm.org/${UBUNTU_VERSION}/ llvm-toolchain-${UBUNTU_VERSION}-19 main"
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends clang-19 clang++-19
+          sudo update-alternatives --install /usr/bin/clang   clang   /usr/bin/clang-19   100
+          sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-19 100
+          clang++ --version
+
+      - name: Cache vcpkg
+        uses: actions/cache@v4
+        id: cache-vcpkg
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/vcpkg
+          key: ${{ runner.os }}-${{ matrix.compiler }}-vcpkg-${{ hashFiles('vcpkg.json') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.compiler }}-vcpkg-
+
+      - name: Setup vcpkg
+        if: steps.cache-vcpkg.outputs.cache-hit != 'true'
+        run: |
+          git clone --depth 1 https://github.com/Microsoft/vcpkg.git $HOME/vcpkg
+          $HOME/vcpkg/bootstrap-vcpkg.sh
+        shell: bash
+
+      - name: Setup vcpkg (bootstrap only, cache hit)
+        if: steps.cache-vcpkg.outputs.cache-hit == 'true'
+        run: |
+          if [ ! -f "$HOME/vcpkg/vcpkg" ] && [ ! -f "$HOME/vcpkg/vcpkg.exe" ]; then
+            $HOME/vcpkg/bootstrap-vcpkg.sh
+          fi
+        shell: bash
+
+      - name: Export vcpkg environment
+        run: |
+          echo "VCPKG_ROOT=$HOME/vcpkg" >> $GITHUB_ENV
+          echo "$HOME/vcpkg" >> $GITHUB_PATH
+        shell: bash
+
+      - name: CMake configure
+        run: |
+          FLAGS=(
+            -DCMAKE_TOOLCHAIN_FILE="$HOME/vcpkg/scripts/buildsystems/vcpkg.cmake"
+            -DNEXUSFORCE_BUILD_DOCS=OFF
+            -DCMAKE_CXX_STANDARD=${{ matrix.cppstd }}
+          )
+
+          case "${{ matrix.config }}" in
+            full)
+              ;;
+            minimal)
+              FLAGS+=(
+                -DNEXUSFORCE_ENABLE_POSTGRESQL=OFF
+                -DNEXUSFORCE_ENABLE_MYSQL=OFF
+                -DNEXUSFORCE_ENABLE_SQLITE3=OFF
+                -DNEXUSFORCE_ENABLE_REDIS=OFF
+                -DNEXUSFORCE_ENABLE_ZLIB=OFF
+                -DNEXUSFORCE_ENABLE_LZ4=OFF
+                -DNEXUSFORCE_USING_SSO=OFF
+                -DNEXUSFORCE_USING_INTEL_TSX=OFF
+                -DNEXUSFORCE_USING_SQLCIPHER=OFF
+                -DNEXUSFORCE_BUILD_TESTS=OFF
+                -DNEXUSFORCE_BUILD_EXAMPLES=OFF
+                -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+              )
+              ;;
+            sqlcipher)
+              FLAGS+=(
+                -DNEXUSFORCE_USING_SQLCIPHER=ON
+                -DNEXUSFORCE_BUILD_TESTS=OFF
+                -DNEXUSFORCE_BUILD_EXAMPLES=OFF
+                -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+              )
+              ;;
+            all-db)
+              FLAGS+=(
+                -DNEXUSFORCE_ENABLE_POSTGRESQL=ON
+                -DNEXUSFORCE_ENABLE_MYSQL=ON
+                -DNEXUSFORCE_ENABLE_SQLITE3=ON
+                -DNEXUSFORCE_ENABLE_REDIS=ON
+                -DNEXUSFORCE_BUILD_EXAMPLES=OFF
+                -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+              )
+              ;;
+            no-compress)
+              FLAGS+=(
+                -DNEXUSFORCE_ENABLE_ZLIB=OFF
+                -DNEXUSFORCE_ENABLE_LZ4=OFF
+                -DNEXUSFORCE_BUILD_EXAMPLES=OFF
+                -DNEXUSFORCE_BUILD_BENCHMARKS=OFF
+              )
+              ;;
+          esac
+
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            if [ "${{ matrix.compiler }}" = "clang-cl" ]; then
+              cmake -B build -G "Visual Studio 17 2022" -T ClangCL -A x64 "${FLAGS[@]}"
+            else
+              cmake -B build -G "Visual Studio 17 2022" -A x64 "${FLAGS[@]}"
+            fi
+          else
+            if [ "${{ matrix.compiler }}" = "clang" ]; then
+              cmake -B build -G Ninja \
+                -DCMAKE_C_COMPILER=clang \
+                -DCMAKE_CXX_COMPILER=clang++ \
+                -DCMAKE_BUILD_TYPE=Release \
+                "${FLAGS[@]}"
+            else
+              cmake -B build -G Ninja \
+                -DCMAKE_C_COMPILER=gcc \
+                -DCMAKE_CXX_COMPILER=g++ \
+                -DCMAKE_BUILD_TYPE=Release \
+                "${FLAGS[@]}"
+            fi
+          fi
+        shell: bash
+
+      - name: Build
+        run: cmake --build build --config Release --parallel
+        shell: bash
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "| 项目 | 值 |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|----|" >> $GITHUB_STEP_SUMMARY
+          echo "| 平台 | ${{ runner.os }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 编译器 | ${{ matrix.compiler }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 配置 | ${{ matrix.config }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| C++ 标准 | ${{ matrix.cppstd }} |" >> $GITHUB_STEP_SUMMARY
+        shell: bash

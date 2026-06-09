@@ -38,7 +38,7 @@ struct multipart_field {
  * 解析 HTTP multipart/form-data 请求体。
  * 支持文件上传字段和普通表单字段。
  */
-class multipart_parser {
+class NEFORCE_API multipart_parser {
 public:
     /// 最大单字段大小
     byte_size max_field_size{10_MB};

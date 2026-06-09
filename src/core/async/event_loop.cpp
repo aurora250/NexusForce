@@ -5,6 +5,9 @@
 #    include <sys/eventfd.h>
 #    include <unistd.h>
 #endif
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#    include <WinSock2.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -13,23 +16,23 @@ namespace {
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    long to_wsa_events(uint32_t e) {
+    long to_wsa_events(const uint32_t e) {
         long wsa = 0;
-        if (e & epoll_in) {
+        if ((e & epoll_in) != 0U) {
             wsa |= FD_READ | FD_ACCEPT | FD_CLOSE;
         }
-        if (e & epoll_out) {
+        if ((e & epoll_out) != 0U) {
             wsa |= FD_WRITE;
         }
         return wsa;
     }
 
-    uint32_t from_wsa_events(long network_events) {
+    uint32_t from_wsa_events(const long network_events) {
         uint32_t out = 0;
-        if (network_events & (FD_READ | FD_ACCEPT | FD_CLOSE)) {
+        if ((network_events & (FD_READ | FD_ACCEPT | FD_CLOSE)) != 0) {
             out |= epoll_in;
         }
-        if (network_events & FD_WRITE) {
+        if ((network_events & FD_WRITE) != 0) {
             out |= epoll_out;
         }
         return out;
@@ -41,7 +44,7 @@ namespace {
 #ifdef NEFORCE_PLATFORM_WINDOWS
 void event_loop::monitor_loop() {
     while (monitor_running_) {
-        lock<mutex> lk(fd_mutex_);
+        unique_lock<mutex> lk(fd_mutex_);
         vector<::HANDLE> handles;
         vector<int> fds;
         handles.push_back(wake_event_);
@@ -56,7 +59,7 @@ void event_loop::monitor_loop() {
         ::DWORD count = (handles.size() > WSA_MAXIMUM_WAIT_EVENTS) ? WSA_MAXIMUM_WAIT_EVENTS
                                                                    : static_cast<DWORD>(handles.size());
 
-        ::DWORD result = ::WSAWaitForMultipleEvents(count, handles.data(), FALSE, 50, FALSE);
+        const ::DWORD result = ::WSAWaitForMultipleEvents(count, handles.data(), FALSE, 50, FALSE);
 
         if (result >= WSA_WAIT_EVENT_0 && result < WSA_WAIT_EVENT_0 + count) {
             const size_t idx = result - WSA_WAIT_EVENT_0;
@@ -68,7 +71,7 @@ void event_loop::monitor_loop() {
                 if (::WSAEnumNetworkEvents(fd, handles[idx], &net_ev) == 0) {
                     uint32_t events = from_wsa_events(net_ev.lNetworkEvents);
                     if (events != 0) {
-                        ::PostQueuedCompletionStatus(iocp_handle_, (DWORD) events, (ULONG_PTR) (intptr_t) fd, NULL);
+                        ::PostQueuedCompletionStatus(iocp_handle_, (DWORD) events, (ULONG_PTR) (intptr_t) fd, nullptr);
                     }
                 }
             }
@@ -140,8 +143,8 @@ event_loop::event_loop() {
     wake_info.events = epoll_in;
     fd_map_[wake_fd_] = move(wake_info);
 #else
-    iocp_handle_ = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, 0);
-    wake_event_ = ::CreateEventW(NULL, TRUE, FALSE, NULL);
+    iocp_handle_ = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE, nullptr, 0, 0);
+    wake_event_ = ::CreateEventW(nullptr, TRUE, FALSE, nullptr);
 #endif
 }
 
@@ -156,14 +159,14 @@ event_loop::~event_loop() {
         ::close(wake_fd_);
     }
 #else
-    if (iocp_handle_ != NULL) {
+    if (iocp_handle_ != nullptr) {
         ::CloseHandle(iocp_handle_);
     }
-    if (wake_event_ != NULL) {
+    if (wake_event_ != nullptr) {
         ::CloseHandle(wake_event_);
     }
     for (auto& pair: fd_events_) {
-        if (pair.second != NULL) {
+        if (pair.second != nullptr) {
             ::CloseHandle(pair.second);
         }
     }
@@ -183,9 +186,10 @@ void event_loop::add_fd(int fd, uint32_t events, fd_callback cb) {
     info.callback = move(cb);
     fd_map_[fd] = move(info);
 #else
-    ::CreateIoCompletionPort((HANDLE) (SOCKET) fd, iocp_handle_, (ULONG_PTR) fd, 0);
+    ::CreateIoCompletionPort(reinterpret_cast<::HANDLE>(static_cast<::SOCKET>(fd)), iocp_handle_,
+                             static_cast<::ULONG_PTR>(fd), 0);
 
-    ::WSAEVENT wevent = WSACreateEvent();
+    const ::WSAEVENT wevent = ::WSACreateEvent();
     ::WSAEventSelect(fd, wevent, to_wsa_events(events));
 
     {
@@ -224,7 +228,7 @@ void event_loop::mod_fd(int fd, uint32_t events) {
 
     lock<mutex> lk(fd_mutex_);
     auto eit = fd_events_.find(fd);
-    if (eit != fd_events_.end() && eit->second != NULL) {
+    if (eit != fd_events_.end() && eit->second != nullptr) {
         ::WSAEventSelect(fd, eit->second, to_wsa_events(events));
     }
 #endif
@@ -240,8 +244,8 @@ void event_loop::remove_fd(int fd) {
     lock<mutex> lk(fd_mutex_);
     auto eit = fd_events_.find(fd);
     if (eit != fd_events_.end()) {
-        ::WSAEventSelect(fd, NULL, 0);
-        if (eit->second != NULL) {
+        ::WSAEventSelect(fd, nullptr, 0);
+        if (eit->second != nullptr) {
             ::CloseHandle(eit->second);
         }
         fd_events_.erase(eit);
@@ -255,7 +259,7 @@ void event_loop::wake() {
     constexpr uint64_t val = 1;
     ::write(wake_fd_, &val, sizeof(val));
 #else
-    ::PostQueuedCompletionStatus(iocp_handle_, 0, 0, NULL);
+    ::PostQueuedCompletionStatus(iocp_handle_, 0, 0, nullptr);
 #endif
 }
 
@@ -283,7 +287,7 @@ void event_loop::run() {
 
     while (running_) {
         const uint64_t deadline = next_timer_deadline();
-        ::DWORD timeout = INFINITE;
+        ::DWORD timeout = numeric_traits<::DWORD>::max();
         if (deadline != numeric_traits<uint64_t>::max()) {
             const uint64_t n_ms = now_ms();
             if (deadline > n_ms) {
@@ -327,25 +331,24 @@ void event_loop::run_once(int timeout_ms) {
     }
 
 #else
-    ::DWORD bytes;
-    ::ULONG_PTR key;
-    ::LPOVERLAPPED overlapped;
-    ::DWORD t = (timeout_ms < 0) ? INFINITE : static_cast<::DWORD>(timeout_ms);
-
-    ::BOOL ok = ::GetQueuedCompletionStatus(iocp_handle_, &bytes, &key, &overlapped, t);
+    ::DWORD bytes = 0;
+    ::ULONG_PTR key = 0;
+    ::LPOVERLAPPED overlapped = nullptr;
+    const ::DWORD t = (timeout_ms < 0) ? numeric_traits<::DWORD>::max() : static_cast<::DWORD>(timeout_ms);
+    const ::BOOL ok = ::GetQueuedCompletionStatus(iocp_handle_, &bytes, &key, &overlapped, t);
 
     if (key == 0) {
         process_timers();
         return;
     }
 
-    if (!ok && overlapped == NULL && ::GetLastError() == WAIT_TIMEOUT) {
+    if (ok == TRUE && overlapped == nullptr && ::GetLastError() == WAIT_TIMEOUT) {
         process_timers();
         return;
     }
 
-    int fd = static_cast<int>(reinterpret_cast<intptr_t>(key));
-    uint32_t events = static_cast<uint32_t>(bytes);
+    int fd = static_cast<int>(key);
+    auto events = static_cast<uint32_t>(bytes);
 
     auto it = fd_map_.find(fd);
     if (it != fd_map_.end() && it->second.callback) {

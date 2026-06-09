@@ -71,6 +71,13 @@ class NEFORCE_API tcp_acceptor : public ip_socket {
 public:
     using socket_base::open;
 
+private:
+    using ip_socket::connect;
+    using socket_base::shutdown_both;
+    using socket_base::shutdown_receive;
+    using socket_base::shutdown_send;
+
+public:
     /**
      * @brief 默认构造函数
      */

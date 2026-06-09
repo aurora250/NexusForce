@@ -75,7 +75,7 @@ struct lb_backend {
  * }
  * @endcode
  */
-class load_balancer {
+class NEFORCE_API load_balancer {
 public:
     using health_check_cb = function<bool(const lb_backend&)>;
 

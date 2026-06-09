@@ -69,7 +69,7 @@ void tcp_server_base::accept_loop() {
     ::HANDLE events[2] = {accept_guard.event, wake_event_};
 
     while (running_) {
-        ::DWORD ret = ::WaitForMultipleObjects(2, events, FALSE, INFINITE);
+        ::DWORD ret = ::WaitForMultipleObjects(2, events, FALSE, numeric_traits<::DWORD>::max());
 
         if (ret == WAIT_OBJECT_0 + 1) {
             break;

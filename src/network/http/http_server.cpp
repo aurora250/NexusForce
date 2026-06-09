@@ -11,8 +11,11 @@
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <poll.h>
 #    include <sys/uio.h>
+#    include <cerrno>
+#elif defined(NEFORCE_PLATFORM_WINDOWS)
+#    include <winsock2.h>
+#    include <windows.h>
 #endif
-#include <cerrno>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
@@ -224,22 +227,15 @@ http_request http_server::parse_request(tcp_socket* client_socket, session_manag
                                         const byte_size max_body_size, const size_t max_header_count,
                                         const milliseconds body_read_timeout) {
 
-    const int sock_fd = static_cast<int>(client_socket->native_handle());
-    timeval original_timeout = {};
-    bool timeout_modified = false;
+    const auto original_timeout = client_socket->get_receive_timeout();
 
     if (body_read_timeout.count() > 0) {
-        socklen_t optlen = sizeof(original_timeout);
-        if (::getsockopt(sock_fd, SOL_SOCKET, SO_RCVTIMEO, &original_timeout, &optlen) == 0) {
-            timeout_modified = true;
-        }
-        const timeval tv{body_read_timeout.count() / 1000, (body_read_timeout.count() % 1000) * 1000};
-        ::setsockopt(sock_fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
+        client_socket->set_receive_timeout(body_read_timeout);
     }
 
     scope_exit restore_timeout([&] {
-        if (timeout_modified) {
-            ::setsockopt(sock_fd, SOL_SOCKET, SO_RCVTIMEO, &original_timeout, sizeof(original_timeout));
+        if (original_timeout.has_value()) {
+            client_socket->set_receive_timeout(original_timeout.value());
         }
     });
 
@@ -630,8 +626,8 @@ void http_server::handle_connect(const unique_ptr<tcp_socket>& client_socket, ht
     established.status_message = "Connection Established";
     send_response(client_socket.get(), established);
 
-    const int client_fd = static_cast<int>(client_socket->native_handle());
-    const int tunnel_fd = static_cast<int>(tunnel.socket().native_handle());
+    const auto client_fd = client_socket->native_handle();
+    const auto tunnel_fd = tunnel.socket().native_handle();
 
     client_socket->set_nonblocking(true);
     tunnel.socket().set_nonblocking(true);
@@ -641,7 +637,11 @@ void http_server::handle_connect(const unique_ptr<tcp_socket>& client_socket, ht
     bool tunnel_open = true;
 
     while (client_open && tunnel_open) {
-        pollfd fds[2];
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        ::WSAPOLLFD fds[2];
+#else
+        ::pollfd fds[2];
+#endif
         int nfds = 0;
 
         if (client_open) {
@@ -657,6 +657,15 @@ void http_server::handle_connect(const unique_ptr<tcp_socket>& client_socket, ht
             nfds++;
         }
 
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        const int ret = ::WSAPoll(fds, nfds, -1);
+        if (ret < 0) {
+            if (::WSAGetLastError() == WSAEINTR) {
+                continue;
+            }
+            break;
+        }
+#else
         const int ret = ::poll(fds, nfds, -1);
         if (ret < 0) {
             if (errno == EINTR) {
@@ -664,6 +673,7 @@ void http_server::handle_connect(const unique_ptr<tcp_socket>& client_socket, ht
             }
             break;
         }
+#endif
 
         for (int i = 0; i < nfds; ++i) {
             if ((fds[i].revents & POLLIN) == 0) {

@@ -9,7 +9,11 @@
  */
 
 #ifdef NEFORCE_SUPPORT_SQLITE3
-#    include <sqlite3.h>
+#    ifdef NEFORCE_SUPPORT_SQLCIPHER
+#        include <sqlcipher/sqlite3.h>
+#    else
+#        include <sqlite3.h>
+#    endif
 #    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 

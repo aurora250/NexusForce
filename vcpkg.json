@@ -14,12 +14,17 @@
     "zlib",
     "lz4",
     "sqlite3",
+    {
+      "name": "sqlcipher",
+      "platform": "windows"
+    },
     "hiredis",
     {
       "name": "pcre2",
       "features": ["jit"]
     },
-    "gtest"
+    "gtest",
+    "benchmark"
   ],
   "features": {
     "postgresql": {
@@ -61,6 +66,10 @@
     "gtest": {
       "description": "gtest support",
       "dependencies": ["gtest"]
+    },
+    "benchmark": {
+      "description": "Google Benchmark support",
+      "dependencies": ["benchmark"]
     }
   },
   "default-features": [
@@ -68,6 +77,6 @@
     "zlib", "lz4",
     "openssl",
     "pcre2",
-    "gtest"
+    "gtest", "benchmark"
   ]
 }

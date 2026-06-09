@@ -9,7 +9,11 @@
  */
 
 #ifdef NEFORCE_SUPPORT_SQLITE3
-#    include <sqlite3.h>
+#    ifdef NEFORCE_SUPPORT_SQLCIPHER
+#        include <sqlcipher/sqlite3.h>
+#    else
+#        include <sqlite3.h>
+#    endif
 #    include "NeForce/db/db_interface.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -28,7 +32,7 @@ NEFORCE_BEGIN_NAMESPACE__
 /**
  * @brief SQLite语句清理方式
  */
-enum class NEFORCE_API sqlite_cleanup_action : uint8_t {
+enum class sqlite_cleanup_action : uint8_t {
     finalize, ///< 调用sqlite3_finalize释放语句（用于普通查询）
     reset     ///< 调用sqlite3_reset重置语句（用于预处理语句复用）
 };

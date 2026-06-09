@@ -1,5 +1,6 @@
 #include <NeForce/core/system/daemon.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
+#    include <NeForce/core/utility/packages.hpp>
 #    include <NeForce/core/config/windef.hpp>
 #    include <fileapi.h>
 #    include <windef.h>
@@ -87,10 +88,9 @@ bool daemon::write_pid_file(const string& path) {
         return false;
     }
 
-    char buf[32];
-    const int len = ::snprintf(buf, sizeof(buf), "%lu\n", ::GetCurrentProcessId());
+    const string id = to_string(::GetCurrentProcessId());
     ::DWORD written = 0;
-    ::WriteFile(hFile, buf, static_cast<::DWORD>(len), &written, nullptr);
+    ::WriteFile(hFile, id.data(), static_cast<::DWORD>(id.size()), &written, nullptr);
 
     pid_handle_ = hFile;
     pid_path_ = path;

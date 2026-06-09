@@ -16,6 +16,11 @@
 #include "NeForce/network/http/http2_protocol.hpp"
 #include "NeForce/network/http/http_router.hpp"
 #include "NeForce/network/tcp/tcp_socket.hpp"
+
+#ifdef NO_ERROR
+#    undef NO_ERROR
+#endif
+
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 

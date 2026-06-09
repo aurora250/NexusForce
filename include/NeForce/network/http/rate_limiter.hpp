@@ -29,7 +29,7 @@ NEFORCE_BEGIN_HTTP__
  *
  * 使用原子操作实现无锁的令牌消耗和补充。
  */
-struct token_bucket {
+struct NEFORCE_API token_bucket {
     double tokens;           ///< 当前令牌数
     uint64_t last_refill_ms; ///< 上次补充时间（毫秒时间戳）
     double refill_rate;      ///< 每秒补充令牌数

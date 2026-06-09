@@ -15,7 +15,7 @@
 #include "NeForce/core/container/queue.hpp"
 #include "NeForce/core/container/unordered_map.hpp"
 #include "NeForce/core/functional/function.hpp"
-#include "NeForce/core/memory/shared_ptr.hpp"
+#include "NeForce/core/memory/weak_ptr.hpp"
 #include "NeForce/network/http/http_server_message.hpp"
 #include "NeForce/network/http/websocket_deflate.hpp"
 #include "NeForce/network/ssl/ssl_socket.hpp"

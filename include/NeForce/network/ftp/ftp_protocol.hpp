@@ -8,7 +8,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @struct ftp_exception
  * @brief FTP操作异常
  */
-struct NEFORCE_API ftp_exception final : network_exception {
+struct ftp_exception final : network_exception {
     explicit ftp_exception(const char* info = "FTP Operation Failed.", const char* type = static_type,
                            const int code = 0) noexcept :
     network_exception(info, type, code) {}

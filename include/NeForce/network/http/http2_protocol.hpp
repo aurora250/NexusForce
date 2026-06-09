@@ -53,6 +53,10 @@ enum class http2_frame_type : uint8_t {
     CONTINUATION = 0x9,  ///< 头部块续帧
 };
 
+#ifdef NO_ERROR
+#    undef NO_ERROR
+#endif
+
 /**
  * @brief HTTP/2 错误码（RFC 7540 §7）
  */
@@ -256,7 +260,7 @@ struct hpack_header_field {
  * 将 HTTP/2 头部字段列表编码为 HPACK 格式的字节块，
  * 支持静态表和动态表的索引优化。
  */
-class hpack_encoder {
+class NEFORCE_API hpack_encoder {
 private:
     struct table_entry {
         string name;
@@ -294,7 +298,7 @@ public:
  * 将 HPACK 编码的字节块解码为 HTTP/2 头部字段列表。
  * 支持增量解码和回调模式。
  */
-class hpack_decoder {
+class NEFORCE_API hpack_decoder {
 public:
     /// @brief 解码回调：void(const string& name, const string& value)
     using header_callback = function<void(const string& name, const string& value)>;
@@ -334,7 +338,7 @@ public:
  * 负责 HTTP/2 帧的编码和字节流解析。
  * 支持不完整帧的缓冲和回调式解码。
  */
-class http2_framer {
+class NEFORCE_API http2_framer {
 public:
     using frame_callback =
             function<void(http2_frame_type type, uint8_t flags, uint32_t stream_id, const byte_t* payload, size_t len)>;
@@ -383,7 +387,7 @@ enum class http2_stream_state {
  *
  * 追踪单个 HTTP/2 流的生命周期状态和流控窗口。
  */
-class http2_stream {
+class NEFORCE_API http2_stream {
 public:
     explicit http2_stream(uint32_t stream_id);
 
@@ -428,7 +432,7 @@ private:
  * 管理连接级和流级的发送窗口。
  * WINDOW_UPDATE 帧增加窗口，DATA 发送消费窗口。
  */
-class http2_flow_control {
+class NEFORCE_API http2_flow_control {
 public:
     explicit http2_flow_control(uint32_t initial_window = HTTP2_DEFAULT_INITIAL_WINDOW_SIZE);
 
@@ -457,7 +461,7 @@ private:
  * 维护本地和远端 SETTINGS 参数值。
  * 支持默认值和远端参数应用时的范围校验。
  */
-class http2_settings {
+class NEFORCE_API http2_settings {
 public:
     http2_settings();
 

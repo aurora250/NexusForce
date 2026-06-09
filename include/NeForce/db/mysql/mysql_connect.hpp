@@ -90,7 +90,7 @@ public:
      * @param encoding 字符集名称
      * @return 设置成功返回true
      */
-    NEFORCE_NODISCARD bool set_character_set(const string& encoding) const noexcept override;
+    NEFORCE_NODISCARD bool set_character_set(const string& encoding) noexcept override;
 
     /**
      * @brief 设置MySQL连接选项

@@ -5,7 +5,7 @@ endif()
 
 find_package(Doxygen QUIET)
 
-if(NEXUSFORCE_BUILD_DOCS AND NOT DOXYGEN_FOUND)
+if(NOT DOXYGEN_FOUND)
      message(FATAL_ERROR "Doxygen not found. Please install Doxygen to build documentation.")
 endif()
 

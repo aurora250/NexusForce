@@ -30,11 +30,13 @@ string(JSON CONFIG_ENABLE_LZ4        GET ${JSON_CONTENT} dependency lz4        s
 
 string(JSON CONFIG_USING_SSO         GET ${JSON_CONTENT} feature sso)
 string(JSON CONFIG_USING_INTEL_TSX   GET ${JSON_CONTENT} feature intel-tsx)
+string(JSON CONFIG_USING_SQLCIPHER   GET ${JSON_CONTENT} feature sqlcipher)
 
 string(JSON CONFIG_BUILD_TESTS       GET ${JSON_CONTENT} build tests)
 string(JSON CONFIG_BUILD_EXAMPLES    GET ${JSON_CONTENT} build examples)
+string(JSON CONFIG_BUILD_BENCHMARKS  GET ${JSON_CONTENT} build benchmarks)
 string(JSON CONFIG_BUILD_DOCS        GET ${JSON_CONTENT} build docs)
-string(JSON CONFIG_BUILD_COVERAGE    GET ${JSON_CONTENT} build coverage)
+
 
 
 set(NEXUSFORCE_VERSION_MAJOR 1)
@@ -42,10 +44,31 @@ set(NEXUSFORCE_VERSION_MINOR 0)
 set(NEXUSFORCE_VERSION_PATCH 0)
 set(NEXUSFORCE_VERSION "${NEXUSFORCE_VERSION_MAJOR}.${NEXUSFORCE_VERSION_MINOR}.${NEXUSFORCE_VERSION_PATCH}")
 
+
+# Force MSVC English locale so CMake can parse /showIncludes output for dependency tracking.
+# Without this, non-English MSVC outputs localized "Note: including file:" lines that
+# CMake's regex cannot match, causing them to leak to the terminal as noise.
+if(WIN32 AND (CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR NOT DEFINED CMAKE_CXX_COMPILER_ID))
+    set(ENV{VSLANG} "1033")
+endif()
+
+
 project(NexusForce
         VERSION ${NEXUSFORCE_VERSION}
         LANGUAGES CXX
 )
+
+
+# VSLANG=1033 forces MSVC to emit English diagnostics so Ninja/Makefile
+# generators can parse /showIncludes output for dependency tracking.
+# ENV{VSLANG} (above) covers compiler detection during configure;
+# CMAKE_*_COMPILER_LAUNCHER covers every compiler invocation during build.
+if(WIN32 AND CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+    set(VSLANG_LAUNCHER "${CMAKE_COMMAND};-E;env;VSLANG=1033")
+    set(CMAKE_C_COMPILER_LAUNCHER "${VSLANG_LAUNCHER}")
+    set(CMAKE_CXX_COMPILER_LAUNCHER "${VSLANG_LAUNCHER}")
+endif()
+
 
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
@@ -139,11 +162,13 @@ option(NEXUSFORCE_ENABLE_LZ4        "Enable lz4 compression support"     ${CONFI
 
 option(NEXUSFORCE_USING_SSO         "Using basic_string SSO"             ${CONFIG_USING_SSO})
 option(NEXUSFORCE_USING_INTEL_TSX   "Using Intel TSX"                    ${CONFIG_USING_INTEL_TSX})
+option(NEXUSFORCE_USING_SQLCIPHER   "Using SQLCipher (encrypted SQLite3)" ${CONFIG_USING_SQLCIPHER})
 
 option(NEXUSFORCE_BUILD_TESTS       "Build unit tests"                   ${CONFIG_BUILD_TESTS})
 option(NEXUSFORCE_BUILD_EXAMPLES    "Build example programs"             ${CONFIG_BUILD_EXAMPLES})
+option(NEXUSFORCE_BUILD_BENCHMARKS  "Build benchmark programs"           ${CONFIG_BUILD_BENCHMARKS})
 option(NEXUSFORCE_BUILD_DOCS        "Build documentation with Doxygen"   ${CONFIG_BUILD_DOCS})
-option(NEXUSFORCE_BUILD_COVERAGE    "Build coverage analysis "           ${CONFIG_BUILD_COVERAGE})
+
 
 option(NEXUSFORCE_FORMAT            "Enable clang-format code formatting"   ON)
 option(NEXUSFORCE_CLANG_TIDY        "Enable clang-tidy static analysis"     ON)
@@ -166,18 +191,33 @@ message(STATUS "  NEXUSFORCE_ENABLE_PCRE2:        ON (NECESSARY)")
 message(STATUS "")
 message(STATUS "  NEXUSFORCE_USING_SSO:           ${NEXUSFORCE_USING_SSO}")
 message(STATUS "  NEXUSFORCE_USING_INTEL_TSX:     ${NEXUSFORCE_USING_INTEL_TSX}")
+message(STATUS "  NEXUSFORCE_USING_SQLCIPHER:     ${NEXUSFORCE_USING_SQLCIPHER}")
 message(STATUS "")
 message(STATUS "  NEXUSFORCE_BUILD_TESTS:         ${NEXUSFORCE_BUILD_TESTS}")
 message(STATUS "  NEXUSFORCE_BUILD_EXAMPLES:      ${NEXUSFORCE_BUILD_EXAMPLES}")
+message(STATUS "  NEXUSFORCE_BUILD_BENCHMARKS:    ${NEXUSFORCE_BUILD_BENCHMARKS}")
 message(STATUS "  NEXUSFORCE_BUILD_DOCS:          ${NEXUSFORCE_BUILD_DOCS}")
-message(STATUS "  NEXUSFORCE_BUILD_COVERAGE:      ${NEXUSFORCE_BUILD_COVERAGE}")
+
 message(STATUS "")
+
+
+# Unified output directories. $<CONFIG> ensures per-config subdirectories
+# (bin/Debug/, bin/Release/, etc.) on both multi-config generators (MSVC,
+# Xcode) and single-config generators (Ninja, Makefiles).
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/$<CONFIG>")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY  "${CMAKE_BINARY_DIR}/lib/$<CONFIG>")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY  "${CMAKE_BINARY_DIR}/lib/$<CONFIG>")
+
+
+set(NEXUSFORCE_SQLCIPHER_LINKED FALSE)
 
 
 add_subdirectory(src)
 add_subdirectory(tests)
 add_subdirectory(examples)
+add_subdirectory(benchmark)
 add_subdirectory(docs)
+
 
 include(cmake/NexusForceClangFormat.cmake)
 include(cmake/NexusForceClangTidy.cmake)
@@ -207,6 +247,7 @@ set(PACKAGE_VERSION_VARS
         NEXUSFORCE_ENABLE_LZ4
         NEXUSFORCE_USING_SSO
         NEXUSFORCE_USING_INTEL_TSX
+        NEXUSFORCE_USING_SQLCIPHER
 )
 
 foreach(_var ${PACKAGE_VERSION_VARS})

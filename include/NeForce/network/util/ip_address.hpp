@@ -53,10 +53,11 @@ public:
      * @brief 网络地址族类型枚举
      */
     enum class family : int32_t {
-        UNDEF = AF_UNSPEC,        ///< 未指定地址族，通常用于通配或自动选择
-        UNIX = AF_UNIX,           ///< Unix 域套接字
-        INET4 = AF_INET,          ///< IPv4 互联网协议族
-        INET6 = AF_INET6,         ///< IPv6 互联网协议族
+        UNDEF = AF_UNSPEC, ///< 未指定地址族，通常用于通配或自动选择
+        UNIX = AF_UNIX,    ///< Unix 域套接字
+        INET4 = AF_INET,   ///< IPv4 互联网协议族
+        INET6 = AF_INET6,  ///< IPv6 互联网协议族
+#ifdef NEFORCE_PLATFORM_LINUX
         PACKET = AF_PACKET,       ///< 链路层数据包套接字
         NETLINK = AF_NETLINK,     ///< 内核用户空间通信
         BLUETOOTH = AF_BLUETOOTH, ///< 蓝牙通信协议族
@@ -65,6 +66,7 @@ public:
         VSOCK = AF_VSOCK,         ///< 虚拟机套接字
         NFC = AF_NFC,             ///< 近场通信协议族
         XDP = AF_XDP,             ///< 高性能数据路径
+#endif
     };
 
 private:

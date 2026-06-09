@@ -93,7 +93,7 @@ public:
      * @param encoding 字符集名称
      * @return 设置成功返回true
      */
-    bool set_character_set(const string& encoding) const override;
+    bool set_character_set(const string& encoding) override;
 
     /**
      * @brief 获取当前字符集

@@ -34,7 +34,7 @@ void mysql_connect::close() noexcept {
     }
 }
 
-bool mysql_connect::set_character_set(const string& encoding) const noexcept {
+bool mysql_connect::set_character_set(const string& encoding) noexcept {
     return connected() && ::mysql_set_character_set(link_, encoding.data()) == 0;
 }
 

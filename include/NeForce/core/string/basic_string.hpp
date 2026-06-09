@@ -8,8 +8,6 @@
  * 此文件提供了动态字符串容器的实现。
  */
 
-#include <string>
-
 #include "NeForce/core/algorithm/shift.hpp"
 #include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/memory/allocator_traits.hpp"
@@ -447,7 +445,7 @@ private:
         return *this;
 #else
         if (static_cast<size_type>(end() - first) < n1) {
-            n1 = cend() - first;
+            n1 = static_cast<size_type>(end() - first);
         }
 
         if (n1 < n2) {
@@ -723,7 +721,7 @@ private:
         const size_t new_cap = _NEFORCE max(old_cap + n, old_cap + (old_cap >> 1));
         pointer new_buffer = capacity_pair_.get_base().allocate(new_cap);
         pointer end1 = traits_type::move(new_buffer, data_, diff) + diff;
-        pointer end2 = _NEFORCE uninitialized_copy_n(first, n, end1).second + n;
+        pointer end2 = _NEFORCE uninitialized_copy_n(first, n, end1) + n;
         traits_type::move(end2, data_ + diff, size_ - diff);
         capacity_pair_.get_base().deallocate(data_, old_cap);
         data_ = new_buffer;
