@@ -228,6 +228,15 @@ public:
     NEFORCE_NODISCARD string get_version() const;
 
     /**
+     * @brief 获取ALPN协商的协议名称
+     * @return 协议名称字符串（如"h2"、"http/1.1"），未协商返回空字符串
+     *
+     * 返回TLS握手期间通过ALPN（Application-Layer Protocol Negotiation）
+     * 协商确定的应用层协议。需要在TLS握手（accept/connect）完成后调用。
+     */
+    NEFORCE_NODISCARD string get_alpn_negotiated() const;
+
+    /**
      * @brief 获取最后错误信息
      * @return 错误描述字符串
      */

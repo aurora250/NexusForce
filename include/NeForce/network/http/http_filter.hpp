@@ -20,7 +20,6 @@
  */
 
 #include "NeForce/core/async/mutex.hpp"
-#include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/time/duration.hpp"
@@ -94,18 +93,15 @@ public:
  */
 class NEFORCE_API http_filter_chain {
 private:
-    vector<unique_ptr<http_filter>> filters_; ///< 过滤器列表
-    bool owns_filters_ = true;                ///< 是否拥有过滤器所有权
+    struct filter_entry {
+        unique_ptr<http_filter> filter;
+        bool owned = true;
+    };
+    vector<filter_entry> filters_; ///< 过滤器列表
 
 public:
     http_filter_chain() = default;
-
-    /**
-     * @brief 构造函数
-     * @param owns_filters 是否拥有过滤器所有权
-     */
-    explicit http_filter_chain(const bool owns_filters) :
-    owns_filters_(owns_filters) {}
+    ~http_filter_chain() { clear(); }
 
     http_filter_chain(const http_filter_chain&) = delete;
     http_filter_chain& operator=(const http_filter_chain&) = delete;
@@ -156,6 +152,26 @@ public:
      * @param response HTTP响应
      */
     void execute_post_filters(http_request& request, http_response& response);
+
+    /**
+     * @brief 异步执行所有预过滤器（回调链模式）
+     * @param request HTTP请求
+     * @param response HTTP响应
+     * @param ctx 请求上下文
+     * @param next 所有过滤器通过后调用 next(true)，任一中断调用 next(false)
+     */
+    void execute_pre_filters_async(http_request& request, http_response& response, http_context& ctx,
+                                   function<void(bool)> next);
+
+    /**
+     * @brief 异步执行所有后过滤器（回调链模式）
+     * @param request HTTP请求
+     * @param response HTTP响应
+     * @param ctx 请求上下文
+     * @param next 所有过滤器完成后调用
+     */
+    void execute_post_filters_async(http_request& request, http_response& response, http_context& ctx,
+                                    function<void()> next);
 
     /**
      * @brief 执行所有核心过滤器
@@ -223,6 +239,7 @@ private:
     string root_path_;                               ///< 文件根目录
     unordered_map<string, http_content> mime_types_; ///< MIME类型映射
     bool enable_cache_ = true;                       ///< 是否启用缓存
+    bool enable_range_ = true;                       ///< 是否启用Range请求支持
     byte_size max_file_size_{10_MB};                 ///< 最大文件大小
 
 public:
@@ -258,6 +275,8 @@ public:
      * @param content_type MIME类型
      */
     void add_mime_type(const string& extension, http_content content_type);
+
+    void set_enable_range(const bool enable) { enable_range_ = enable; }
 };
 
 /**
@@ -266,7 +285,8 @@ public:
  *
  * 基于客户端IP限制请求频率，防止滥用。
  */
-class NEFORCE_API rate_limit_filter final : public http_filter {
+class NEFORCE_DEPRECATED_FOR("Use token_bucket_filter instead") NEFORCE_API rate_limit_filter final
+: public http_filter {
 private:
     struct rate_limit_info {
         size_t count = 0;                     ///< 请求计数
@@ -311,10 +331,12 @@ public:
  */
 class NEFORCE_API authentication_filter final : public http_filter {
 private:
-    vector<string> excluded_paths_;                      ///< 排除的路径
+    vector<string> excluded_paths_;                      ///< 排除的路径（不要求认证）
+    vector<string> included_paths_;                      ///< 包含的路径（要求认证），为空时所有路径均需认证
     function<bool(const http_request&)> auth_validator_; ///< 认证验证器
 
     NEFORCE_NODISCARD bool is_path_excluded(const string& path) const;
+    NEFORCE_NODISCARD bool is_path_protected(const string& path) const;
 
 public:
     authentication_filter() = default;
@@ -335,15 +357,30 @@ public:
     }
 
     /**
-     * @brief 添加排除路径
+     * @brief 添加排除路径（不要求认证）
      * @param path 路径（支持前缀匹配）
+     *
+     * 仅在 included_paths_ 为空时生效（全量认证模式）。
      */
     void add_excluded_path(string path) { excluded_paths_.push_back(_NEFORCE move(path)); }
+
+    /**
+     * @brief 添加受保护路径（要求认证）
+     * @param path 路径（支持前缀匹配）
+     *
+     * 设置后仅这些路径需要认证，其余路径为公开访问。
+     */
+    void add_included_path(string path) { included_paths_.push_back(_NEFORCE move(path)); }
 
     /**
      * @brief 清除所有排除路径
      */
     void clear_excluded_paths() { excluded_paths_.clear(); }
+
+    /**
+     * @brief 清除所有包含路径
+     */
+    void clear_included_paths() { included_paths_.clear(); }
 
     bool pre_filter(http_request& request, http_response& response) override;
     void do_filter(http_request& request, http_response& response) override {}

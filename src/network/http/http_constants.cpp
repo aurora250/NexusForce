@@ -383,5 +383,40 @@ const string& http_key::X_Forwarded_Proto() {
     return key;
 }
 
+const string& http_key::Strict_Transport_Security() {
+    static string key{"Strict-Transport-Security"};
+    return key;
+}
+
+const string& http_key::X_Frame_Options() {
+    static string key{"X-Frame-Options"};
+    return key;
+}
+
+const string& http_key::X_Content_Type_Options() {
+    static string key{"X-Content-Type-Options"};
+    return key;
+}
+
+const string& http_key::Content_Security_Policy() {
+    static string key{"Content-Security-Policy"};
+    return key;
+}
+
+const string& http_key::X_XSS_Protection() {
+    static string key{"X-XSS-Protection"};
+    return key;
+}
+
+const string& http_key::Referrer_Policy() {
+    static string key{"Referrer-Policy"};
+    return key;
+}
+
+const string& http_key::Permissions_Policy() {
+    static string key{"Permissions-Policy"};
+    return key;
+}
+
 NEFORCE_END_HTTP__
 NEFORCE_END_NAMESPACE__

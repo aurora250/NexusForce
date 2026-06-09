@@ -75,6 +75,13 @@ string ssl_socket::peer_certificate_info() const {
     return result;
 }
 
+string ssl_socket::get_alpn_negotiated() const {
+    if (!ssl_ || !ssl_->is_valid()) {
+        return "";
+    }
+    return ssl_->get_alpn_negotiated();
+}
+
 ssize_t ssl_socket::send(memory_view<const char> data, const int flags) {
     if (ssl_ && ssl_->is_valid()) {
         if (data.empty()) {

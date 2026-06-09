@@ -501,9 +501,7 @@ size_t path::to_hash() const {
         return hash<const char*>()("");
     }
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    auto lower_str = norm_path.str();
-    lower_str.lowercase();
-    return hash<string>()(lower_str);
+    return hash<string>()(norm_path.str().lowercase());
 #else
     return hash<string>()(norm_path.str());
 #endif

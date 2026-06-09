@@ -199,6 +199,7 @@ struct icmp_header {
  * @note 在Linux上需要root权限才能创建原始ICMP套接字。
  *       Windows可能需要管理员权限。
  */
+// TODO: Impl full ICMP socket
 class NEFORCE_API icmp_socket final : public socket_base {
 public:
     /**

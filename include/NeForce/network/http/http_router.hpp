@@ -11,6 +11,7 @@
 
 #include "NeForce/core/string/regex.hpp"
 #include "NeForce/network/http/http_filter.hpp"
+#include "NeForce/network/http/radix_router.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
@@ -89,6 +90,7 @@ private:
     };
 
     unordered_map<string, vector<route_entry>> routes_; ///< HTTP方法到路由条目的映射
+    unordered_map<string, route_trie> tries_;           ///< 每方法的路由Trie
     http_filter_chain middleware_chain_;                ///< 中间件链
 
     http_handler_t not_found_handler_;          ///< 404处理器
@@ -100,7 +102,8 @@ public:
     bool strict_routing = false; ///< 是否严格匹配尾部斜杠
 
 private:
-    route_entry* find_handler(const http_method& method, const string& path, http_request& request);
+    NEFORCE_NODISCARD http_handler_t find_handler(const http_method& method, const string& path, http_request& request);
+    void resolve_handler(http_request& request, http_response& response);
 
     void setup_default_handlers();
 
@@ -211,6 +214,23 @@ public:
     http_response handle_request(http_request& request);
 
     /**
+     * @brief 异步处理HTTP请求（回调模式）
+     * @param request HTTP请求对象
+     * @param cb 处理完成回调，接收响应对象
+     *
+     * 与 handle_request 等效，但支持 async_filter 中间件。
+     * 若无 async_filter，内部直接调用同步路径（零开销）。
+     * 适用于 HTTP/2 和事件驱动模式下的请求分发。
+     *
+     * 处理流程：
+     * 1. 执行异步预过滤器链
+     * 2. 查找匹配的路由处理器并执行
+     * 3. 执行异步后过滤器链
+     * 4. 调用 cb(response)
+     */
+    void handle_request_async(http_request request, function<void(http_response)> cb);
+
+    /**
      * @brief 检查是否存在指定路由
      * @param method HTTP方法
      * @param path 路由路径
@@ -227,7 +247,10 @@ public:
     /**
      * @brief 清空所有路由
      */
-    void clear_routes() noexcept { routes_.clear(); }
+    void clear_routes() noexcept {
+        routes_.clear();
+        tries_.clear();
+    }
 };
 
 /** @} */ // HTTP

@@ -54,17 +54,19 @@ echo "hello world" | nc localhost 8080
 
 ### 3. HTTP Server（http_server）
 
-演示完整 HTTP 服务器的核心功能：路由注册（GET/POST/PUT/DELETE）、路径参数、正则路由、静态页面、JSON API、表单处理、查询参数、405/404 处理器。
+演示完整 HTTP 服务器的核心功能：路由注册（GET/POST/PUT/DELETE）、路径参数、正则路由、会话管理（含 Session Fixation 防护与 `regenerate_id`）、CSRF 防护（Double-Submit Cookie）、HTTP 响应压缩（gzip/deflate）、静态文件服务（含 Range 断点续传）、过滤器链（CORS → Rate Limit → CSRF → Compress → Static File → Bearer Auth）、Bearer Token 认证（`/api/protected`）、JSON API、表单处理、查询参数、405/404 处理器。
 
 ```bash
 ./build/bin/NexusForceHttpServerExample
 # HTTP Server started on http://localhost:8080
+# Features: Session, CSRF, Rate Limit, Bearer Auth, Gzip/Deflate, Range, Static Files
 ```
 
 **测试端点：**
 ```bash
-# 首页
-curl http://localhost:8080/
+# 首页（含会话计数器）
+curl -c /tmp/cookie -b /tmp/cookie http://localhost:8080/
+# 每次刷新 visits 计数递增
 
 # JSON API
 curl http://localhost:8080/api/hello
@@ -74,22 +76,46 @@ curl http://localhost:8080/api/hello
 curl http://localhost:8080/api/users/42
 # {"user_id":"42","name":"User 42"}
 
-# POST Echo
-curl -X POST http://localhost:8080/api/echo -d 'hello world'
+# 会话信息（需要cookie）
+curl -c /tmp/cookie -b /tmp/cookie http://localhost:8080/api/session
+# {"session_id":"abc123...","is_new":false,"max_age":1800,"data":{"visits":"3"}}
+
+# POST Echo（CSRF自动验证，需带XSRF-TOKEN）
+TOKEN=$(curl -s -c /tmp/cookie http://localhost:8080/ | grep -o 'XSRF-TOKEN=[^;]*' | cut -d= -f2)
+curl -X POST http://localhost:8080/api/echo \
+  -b /tmp/cookie \
+  -H "X-CSRF-Token: $TOKEN" \
+  -d 'hello world'
 # {"echo":"hello world","content_type":"application/x-www-form-urlencoded"}
 
 # 查询参数
 curl "http://localhost:8080/api/greet?name=NexusForce"
 # {"greeting":"Hello, NexusForce"}
 
-# 查看请求头
-curl http://localhost:8080/api/headers
+# 查看请求头（含压缩协商）
+curl -H "Accept-Encoding: gzip, deflate" http://localhost:8080/api/headers
 
 # 正则路由
 curl http://localhost:8080/api/v1/anything/here
 # {"version":"v1","path":"anything/here"}
 
-# 表单页面（浏览器访问）
+# 静态文件（Range断点续传）
+curl -H "Range: bytes=0-1023" http://localhost:8080/public/README.md
+
+# 受保护的 API（需要 Bearer Token 认证）
+curl -H "Authorization: Bearer nexusforce-demo-token" http://localhost:8080/api/protected
+# {"access":"granted","message":"You accessed the protected endpoint"}
+
+# 无Token访问受保护API返回401
+curl http://localhost:8080/api/protected
+# 401 Unauthorized
+
+# 登录（设置Session用户 + Session Fixation防护 regenerate_id）
+curl -c /tmp/cookie -b /tmp/cookie -X POST http://localhost:8080/api/login \
+  -d "username=alice"
+# {"status":"ok","user":"alice","session_id":"def456..."}
+
+# 表单页面（浏览器访问，含CSRF token自动填充）
 open http://localhost:8080/form
 ```
 
@@ -97,7 +123,7 @@ open http://localhost:8080/form
 
 ### 4. HTTPS Server（https_server）
 
-演示 HTTPS 服务器：加载 SSL/TLS 证书、加密 HTTP 服务。
+演示 HTTPS 服务器：加载 SSL/TLS 证书、会话管理、ALPN 自动协商（HTTP/1.1 + HTTP/2 h2）、过滤器链（CORS + Compress + Logging + Static File）。
 
 **生成自签名证书（一次性）：**
 ```bash
@@ -110,18 +136,34 @@ openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt \
 ./build/bin/NexusForceHttpsServerExample
 # Certificate loaded successfully
 # HTTPS Server started on https://localhost:8443
+#   Supports: HTTP/1.1 and HTTP/2 (h2 via ALPN)
 ```
 
 **测试：**
 ```bash
+# HTTP/1.1 请求
 curl -k https://localhost:8443/api/hello
 # {"message":"Hello from NexusForce HTTPS!","status":"ok","tls":true}
 
+# 路径参数
 curl -k https://localhost:8443/api/users/42
 # {"user_id":"42","name":"User 42","tls":true}
 
+# 连接信息（含 ALPN/http2 说明）
 curl -k https://localhost:8443/api/info
-# {"protocol":"HTTPS (HTTP over TLS)","user_agent":"curl/...","client_ip":"127.0.0.1"}
+# {"protocol":"HTTPS (HTTP over TLS)","http2_support":"h2 via ALPN negotiation",
+#  "alpn_protocols":"h2, http/1.1","user_agent":"curl/...","client_ip":"127.0.0.1"}
+
+# HTTP/2 请求（需要 curl 支持 --http2）
+curl --http2 -k https://localhost:8443/api/info
+
+# 会话管理（自动获得 session cookie）
+curl -k -c /tmp/cookie -b /tmp/cookie https://localhost:8443/api/session
+# {"session_id":"abc123...","is_new":false,"max_age":1800,"data":{"visits":"3"}}
+
+# POST Echo
+curl -k -X POST https://localhost:8443/api/echo -d 'hello tls'
+# {"echo":"hello tls","content_type":"application/x-www-form-urlencoded","size":9}
 ```
 
 ---
@@ -160,20 +202,21 @@ curl -k https://localhost:8443/api/info
 
 ### 6. WebSocket Server（websocket_server）
 
-演示 WebSocket 协议：路由注册、消息收发（文本/二进制）、心跳检测（Ping/Pong）、广播、关闭处理。
+演示 WebSocket 协议：路由注册、消息收发（文本/二进制）、**permessage-deflate 消息压缩**（RFC 7692，自动协商）、event_loop 事件驱动 I/O、心跳检测（Ping/Pong）、广播、关闭处理。
 
 ```bash
 ./build/bin/NexusForceWebSocketServerExample
 # WebSocket Server started on http://localhost:8080
 # Open your browser and navigate to the address above.
 # Or use wscat: wscat -c ws://localhost:8080/chat
+# permessage-deflate is automatically negotiated when client requests it.
 ```
 
-**使用 wscat 测试：**
+**使用 wscat 测试（会自动协商deflate压缩）：**
 ```bash
 wscat -c ws://localhost:8080/chat
 # Connected (press CTRL+C to quit)
-# < Welcome to NexusForce WebSocket Chat!
+# < Welcome to NexusForce WebSocket Chat! (deflate enabled)
 # > hello
 # < Echo: hello
 # > ping
@@ -181,7 +224,13 @@ wscat -c ws://localhost:8080/chat
 ```
 
 **浏览器测试：**
-打开 `http://localhost:8080/`，页面内置了完整的 WebSocket 聊天 Demo，可以直接收发消息。
+打开 `http://localhost:8080/`，页面内置了完整的 WebSocket 聊天 Demo，可直接收发消息。页面顶部会显示 `permessage-deflate compression: active`（绿色）或 `inactive`（橙色），指示压缩是否已启用。
+
+**压缩协商参数（服务端日志输出）：**
+```
+New WebSocket connection
+  permessage-deflate enabled: client_wbits=15, server_wbits=15, client_noctx=false, server_noctx=false
+```
 
 ---
 
@@ -336,6 +385,146 @@ FTP_HOST=ftp.example.com FTP_USER=myuser FTP_PASS=mypass ./build/bin/NexusForceF
 ```
 
 ---
+
+### 12. gRPC Server（grpc_server）
+
+演示 gRPC 协议核心功能：gRPC 帧编解码（grpc_framer）、Unary RPC 处理、gRPC 状态码映射（grpc_to_http_status）、HTTP/1.1 承载 gRPC 流量、健康检查 RPC（grpc.health.v1.Health/Check）。
+
+```bash
+./build/bin/NexusForceGrpcServerExample
+# gRPC Server started on http://localhost:8080
+```
+
+**测试 Greeter 服务：**
+```bash
+# 浏览器辅助页面（生成 curl 命令）
+curl http://localhost:8080/test/sayhello?name=NexusForce
+# {"name":"NexusForce","frame_size":10,"curl_example":"..."}
+
+# 直接 gRPC 帧请求（二进制帧格式: [无压缩][长度=5][payload="Hello"]）
+printf '\x00\x00\x00\x00\x05Hello' | curl -s -X POST \
+  http://localhost:8080/helloworld.Greeter/SayHello \
+  -H 'Content-Type: application/grpc' --data-binary @- --output - | xxd
+
+# 健康检查 RPC
+printf '\x00\x00\x00\x00\x12helloworld.Greeter' | curl -s -X POST \
+  http://localhost:8080/grpc.health.v1.Health/Check \
+  -H 'Content-Type: application/grpc' --data-binary @- --output - | xxd
+# 返回 {"status":"SERVING"}
+```
+
+---
+
+### 13. Health Check + 生产特性（health_check）
+
+演示生产环境常用 Filter 综合示例：health_check_filter（多后端健康检查：DB、Redis、磁盘、内存）、token_bucket_filter（IP 级别限流 10 req/s，突发 20）、logging_filter（请求/响应日志含 Headers 和 Body）、security_headers_filter（自动添加 HSTS、CSP、X-Frame-Options 等安全头）。
+
+```bash
+./build/bin/NexusForceHealthCheckExample
+# Production Server started on http://localhost:8080
+```
+
+**测试端点：**
+```bash
+# 健康检查（汇总状态）
+curl http://localhost:8080/healthz
+# {"status":"healthy","checks":{"database":true,"redis":true,"disk_space":true,"memory":true}}
+
+# 详细健康检查
+curl http://localhost:8080/healthz?details=1
+# {"status":"healthy","checks":{"database":{"healthy":true},"redis":{"healthy":true},...}}
+
+# 受保护 API（响应头含 X-RateLimit-Remaining）
+curl http://localhost:8080/api/data
+# {"status":"ok","data":["item1","item2","item3"],"rate_limit_header":"19"}
+
+# 限流测试（快速连续请求，超过 10 req/s 后返回 429）
+for i in $(seq 1 25); do curl -s -o /dev/null -w '%{http_code}\n' \
+  http://localhost:8080/api/data; done
+# 200 200 ... 429 429 ...
+
+# 模拟 DB 故障 → 健康检查变 unhealthy
+curl -X POST http://localhost:8080/api/simulate/error
+curl http://localhost:8080/healthz
+# {"status":"unhealthy","checks":{"database":false,...}}
+
+# 恢复所有后端
+curl -X POST http://localhost:8080/api/simulate/recover
+```
+
+---
+
+### 14. HTTP/2 Server（http2_server）
+
+演示 HTTP/2 双模式服务器：h2c 模式（port 8080，HTTP/1.1 Upgrade 升级）、h2 模式（port 8443，TLS + ALPN 自动协商）、路由注册（路径参数、JSON 响应）、HTTP/2 Server Push（Link preload header）、过滤器链（日志 + 压缩）。
+
+```bash
+./build/bin/NexusForceHttp2ServerExample
+# [h2c] HTTP/2 (cleartext) on http://localhost:8080
+# [h2] HTTP/2 (TLS) on https://localhost:8443
+```
+
+**测试 h2c（明文升级）：**
+```bash
+# 升级到 HTTP/2
+curl --http2 http://localhost:8080/api/info
+# {"protocol":"HTTP/2 (h2c)","method":"GET","path":"/api/info","http_version":"2.0"}
+
+# 路径参数
+curl --http2 http://localhost:8080/api/users/42
+# {"user_id":"42","source":"HTTP/2 h2c"}
+
+# POST Echo
+curl --http2 -X POST http://localhost:8080/api/echo -d 'test'
+# {"echo":"test","size":4}
+```
+
+**测试 h2（TLS + ALPN）：**
+```bash
+# HTTP/2 over TLS
+curl --http2 -k https://localhost:8443/api/info
+# {"protocol":"HTTP/2 (h2)","tls":true,"alpn":"h2","method":"GET"}
+
+# Server Push 演示（Link preload header）
+curl --http2 -k https://localhost:8443/api/push
+# {"message":"Link preload header set for /api/info","feature":"HTTP/2 Server Push"}
+```
+
+> **注意：** 需要 curl 7.33+ 且编译时支持 HTTP/2（`curl --version` 查看是否有 `HTTP2` 特性）。若证书不存在，h2c 服务器仍会启动。
+
+---
+
+### 15. Reverse Proxy + 负载均衡（reverse_proxy）
+
+演示反向代理与负载均衡：启动 2 个后端 HTTP 服务器（port 8081、8082）、持久 http_client 连接池（keep-alive 复用）、自定义 Round-Robin 负载均衡、`/api/*` 请求轮询转发到后端、非 API 路径直接由代理服务器处理。
+
+```bash
+./build/bin/NexusForceReverseProxyExample
+# Starting backend servers...
+#   backend-1: http://localhost:8081
+#   backend-2: http://localhost:8082
+# Connection pool: 2 persistent HTTP clients
+# Reverse Proxy started on http://localhost:8080
+```
+
+**测试负载均衡：**
+```bash
+# 多次请求观察 Round-Robin 轮转
+curl http://localhost:8080/api/info
+# {"backend":"backend-1","port":8081,"timestamp":...}
+curl http://localhost:8080/api/info
+# {"backend":"backend-2","port":8082,"timestamp":...}
+curl http://localhost:8080/api/info
+# {"backend":"backend-1","port":8081,"timestamp":...}
+
+# 后端健康检查（也经过负载均衡）
+curl http://localhost:8080/api/health
+# {"status":"ok"}
+
+# 直接路由（不走代理）
+curl http://localhost:8080/frontend
+# {"source":"frontend (direct)"}
+```
 
 ---
 
@@ -696,6 +885,10 @@ FTP_HOST=ftp.example.com FTP_USER=myuser FTP_PASS=mypass ./build/bin/NexusForceF
 | ICMP Ping | `examples/network/ping.cpp` |
 | SMTP Mail | `examples/network/smtp_mail.cpp` |
 | FTP Client | `examples/network/ftp_client.cpp` |
+| gRPC Server | `examples/network/grpc_server.cpp` |
+| Health Check | `examples/network/health_check.cpp` |
+| HTTP/2 Server | `examples/network/http2_server.cpp` |
+| Reverse Proxy | `examples/network/reverse_proxy.cpp` |
 | SQL Builder | `examples/db/sql_builder_example.cpp` |
 | DB Config | `examples/db/db_config_example.cpp` |
 | CRUD + 事务 | `examples/db/db_crud_example.cpp` |

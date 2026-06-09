@@ -273,6 +273,16 @@ public:
     }
 
     /**
+     * @brief 读取24位大端整数
+     * @param data 字节数组指针
+     * @return 读取的24位整数（扩展为uint32_t）
+     */
+    static constexpr uint32_t read_be24(const byte_t* data) noexcept {
+        return (static_cast<uint32_t>(data[0]) << 16) | (static_cast<uint32_t>(data[1]) << 8) |
+               static_cast<uint32_t>(data[2]);
+    }
+
+    /**
      * @brief 读取32位大端整数
      * @param data 字节数组指针
      * @return 读取的32位整数

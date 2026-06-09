@@ -1,3 +1,4 @@
+#include <NeForce/core/numeric/random.hpp>
 #include <NeForce/core/string/to_string.hpp>
 #include <NeForce/network/http/http_session.hpp>
 NEFORCE_BEGIN_NAMESPACE__
@@ -183,6 +184,17 @@ void http_session::clear() {
 void http_session::invalidate() noexcept {
     invalidated = true;
     data.clear();
+}
+
+void http_session::regenerate_id() {
+    string new_id;
+    new_id.reserve(32);
+    for (int i = 0; i < 32; ++i) {
+        new_id += format("{:x}", secret::next_int<uint32_t>(16));
+    }
+    id = move(new_id);
+    touch();
+    is_new = true;
 }
 
 void http_session::touch() noexcept {

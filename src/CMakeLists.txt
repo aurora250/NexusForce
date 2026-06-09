@@ -7,6 +7,7 @@ set(CPP_SOURCES
 
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/at_thread_exit.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/condition_variable.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/event_loop.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/futex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/lazy_thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
@@ -65,6 +66,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/dynamic_library.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/environment.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/locale.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/daemon.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/pipe.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/process.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/registry.cpp
@@ -112,14 +114,31 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ftp/ftp_server.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_client.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_client_message.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http2_connection.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http2_protocol.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_compress.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_constants.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_filter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_range.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_router.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_security.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/rate_limiter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/session_store_redis.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_server.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_server_message.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_session.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/chunked_reader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/csrf_filter.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/grpc.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/health_check.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/http_cache.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/load_balancer.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/multipart_parser.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/reverse_proxy.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/http/websocket.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/http/websocket_deflate.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_acceptor.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/sni_manager.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_context.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_socket.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/network/ssl/ssl_stream.cpp

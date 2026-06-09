@@ -228,7 +228,8 @@ byte_vector zlib_compressor::stream_compressor::compress(const cbyte_view& data,
         const size_t have = chunk_size - stream_->avail_out;
         output.resize(output.size() - chunk_size + have);
         bytes_output_ += have;
-    } while (stream_->avail_out == 0 || (finish && result != Z_STREAM_END && !data.empty()));
+    } while (stream_->avail_out == 0 ||
+             (finish && result != Z_STREAM_END && (stream_->avail_in > 0 || result != Z_BUF_ERROR)));
 
     return output;
 }
@@ -324,7 +325,8 @@ byte_vector zlib_compressor::stream_decompressor::decompress(const byte_view& da
         const size_t have = chunk_size - stream_->avail_out;
         output.resize(output.size() - chunk_size + have);
         bytes_output_ += have;
-    } while (stream_->avail_out == 0 || (finish && result != Z_STREAM_END && !data.empty()));
+    } while (stream_->avail_out == 0 ||
+             (finish && result != Z_STREAM_END && (stream_->avail_in > 0 || result != Z_BUF_ERROR)));
 
     return output;
 }

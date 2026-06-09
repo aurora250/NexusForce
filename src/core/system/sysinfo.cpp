@@ -14,6 +14,7 @@
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <dirent.h>
 #    include <sys/sysinfo.h>
+#    include <sys/statvfs.h>
 #    include <sys/utsname.h>
 #    include <unistd.h>
 #    include <cstdio>
@@ -734,7 +735,7 @@ float64_t sysinfo::cpu_usage() {
     if (line.starts_with("cpu ")) {
         const string_view data = line.view(4);
         string_view token;
-        uint64_t fields[8] = {0};
+        uint64_t fields[8] = {};
         size_t offset = 0;
         int idx = 0;
 
@@ -808,6 +809,46 @@ uint32_t sysinfo::process_count() {
     }
     return count;
 #endif
+}
+
+sysinfo::disk_info sysinfo::get_disk_info(const char* path) {
+    disk_info info;
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    char resolved_path[MAX_PATH];
+    if (path == nullptr) {
+        if (::GetCurrentDirectoryA(MAX_PATH, resolved_path) == FALSE) {
+            return info;
+        }
+        if (resolved_path[1] == ':') {
+            resolved_path[3] = '\0';
+        } else {
+            string_copy(resolved_path, "C:\\");
+        }
+    } else {
+        string_copy(resolved_path, path);
+    }
+
+    ::ULARGE_INTEGER freeBytesAvailable, totalBytes, totalFreeBytes;
+    if (::GetDiskFreeSpaceExA(resolved_path, &freeBytesAvailable, &totalBytes, &totalFreeBytes) == TRUE) {
+        info.path = resolved_path;
+        info.total_bytes = totalBytes.QuadPart;
+        info.free_bytes = totalFreeBytes.QuadPart;
+        info.used_bytes = info.total_bytes - info.free_bytes;
+    }
+#else
+    const char* target_path = (path != nullptr) ? path : "/";
+    struct ::statvfs stat = {};
+    if (::statvfs(target_path, &stat) == 0) {
+        info.path = target_path;
+        unsigned long block_size = stat.f_frsize;
+        info.total_bytes = static_cast<uint64_t>(stat.f_blocks) * block_size;
+        info.free_bytes = static_cast<uint64_t>(stat.f_bavail) * block_size;
+        info.used_bytes = info.total_bytes - info.free_bytes;
+    }
+#endif
+
+    return info;
 }
 
 NEFORCE_END_NAMESPACE__

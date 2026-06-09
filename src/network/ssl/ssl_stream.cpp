@@ -110,10 +110,10 @@ bool ssl_stream::connect() {
     if (!ssl_) {
         NEFORCE_THROW_EXCEPTION(ssl_exception("SSL not initialized"));
     }
-    SSL_set_connect_state(ssl_.get());
+    ::SSL_set_connect_state(ssl_.get());
 
     while (true) {
-        const int ret = SSL_connect(ssl_.get());
+        const int ret = ::SSL_connect(ssl_.get());
         if (ret == 1) {
             return true;
         }
@@ -368,6 +368,19 @@ string ssl_stream::get_version() const {
         return "";
     }
     return ::SSL_get_version(ssl_.get());
+}
+
+string ssl_stream::get_alpn_negotiated() const {
+    if (!ssl_) {
+        return "";
+    }
+    const byte_t* data = nullptr;
+    uint32_t len = 0;
+    ::SSL_get0_alpn_selected(ssl_.get(), &data, &len);
+    if (data == nullptr || len == 0) {
+        return "";
+    }
+    return {reinterpret_cast<const char*>(data), len};
 }
 
 NEFORCE_END_NAMESPACE__

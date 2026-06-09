@@ -1,19 +1,25 @@
 #include <NeForce/core/numeric/random.hpp>
+#include <NeForce/network/http/byte_cursor.hpp>
 #include <NeForce/network/http/websocket.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
 namespace {
     constexpr size_t max_write_queue_size = 1024;
+    constexpr size_t max_ctrl_queue_size = 256;
     constexpr seconds heartbeat_interval_sec{30};
     constexpr seconds heartbeat_timeout_sec{10};
 
     int64_t now_ms() noexcept { return time_cast<milliseconds>(steady_clock::now().since_epoch()).count(); }
 
-    byte_vector build_frame(websocket_opcode opcode, const string& payload, bool masked) {
+    byte_vector build_frame(websocket_opcode opcode, const string& payload, bool masked, bool rsv1 = false) {
         byte_vector frame;
         frame.reserve(14 + payload.size());
-        frame.push_back(static_cast<byte_t>(0x80 | (static_cast<uint8_t>(opcode) & 0x0F)));
+        auto first_byte = static_cast<byte_t>(0x80 | (static_cast<uint8_t>(opcode) & 0x0F));
+        if (rsv1) {
+            first_byte |= 0x40;
+        }
+        frame.push_back(first_byte);
 
         const size_t len = payload.size();
         const byte_t second = masked ? 0x80 : 0x00;
@@ -87,6 +93,20 @@ bool websocket_server::handle_upgrade(const http_request& request, unique_ptr<tc
     }
 
     auto session = make_shared<websocket_session>(move(sock), this);
+    if (loop_ != nullptr) {
+        session->set_event_loop(loop_);
+    }
+
+#ifdef NEFORCE_SUPPORT_ZLIB
+    const string_view extensions = request.header("Sec-WebSocket-Extensions");
+    if (!extensions.empty()) {
+        const auto deflate_cfg = websocket_deflate_config::negotiate(extensions);
+        if (deflate_cfg.active) {
+            session->set_deflate_config(deflate_cfg);
+        }
+    }
+#endif
+
     {
         lock<mutex> lk(sessions_mutex_);
         sessions_.push_back(session);
@@ -104,6 +124,26 @@ void websocket_server::remove_session(const session_ptr& session) {
     }
 }
 
+websocket_server::~websocket_server() {
+    try {
+        stop();
+        // NOLINTNEXTLINE(bugprone-empty-catch)
+    } catch (...) {
+        // ignore
+    }
+}
+
+void websocket_server::stop() {
+    vector<session_ptr> sessions_copy;
+    {
+        lock<mutex> lk(sessions_mutex_);
+        sessions_copy.swap(sessions_);
+    }
+    for (auto& session: sessions_copy) {
+        session->stop();
+    }
+}
+
 void websocket_server::broadcast(const string& data, const websocket_opcode opcode) {
     lock<mutex> lk(sessions_mutex_);
     for (const auto& s: sessions_) {
@@ -117,6 +157,9 @@ bool websocket_session::queue_frame(byte_vector frame, const bool is_control) {
     {
         lock<mutex> lk(write_mutex_);
         if (is_control) {
+            if (ctrl_queue_.size() >= max_ctrl_queue_size) {
+                return false;
+            }
             ctrl_queue_.push(move(frame));
         } else {
             if (write_queue_.size() >= max_write_queue_size) {
@@ -125,7 +168,11 @@ bool websocket_session::queue_frame(byte_vector frame, const bool is_control) {
             write_queue_.push(move(frame));
         }
     }
-    write_cv_.notify_one();
+    if (event_driven_ && loop_ != nullptr) {
+        flush_event_writes();
+    } else {
+        write_cv_.notify_one();
+    }
     return true;
 }
 
@@ -195,7 +242,6 @@ void websocket_session::read_loop() {
                 // ignore
             }
         }
-        return;
     }
 }
 
@@ -206,13 +252,19 @@ bool websocket_session::read_frame() {
             return false;
         }
 
-        if (hdr.rsv1 || hdr.rsv2 || hdr.rsv3) {
+        const auto opcode = static_cast<websocket_opcode>(hdr.opcode);
+        const bool is_ctrl = (hdr.opcode >= 0x8);
+
+        if (hdr.rsv2 || hdr.rsv3) {
             send_close_frame(websocket_status::PROTOCOL_ERROR, "Reserved bits set");
             return false;
         }
-
-        const auto opcode = static_cast<websocket_opcode>(hdr.opcode);
-        const bool is_ctrl = (hdr.opcode >= 0x8);
+        if (hdr.rsv1) {
+            if (!deflate_config_.active || is_ctrl) {
+                send_close_frame(websocket_status::PROTOCOL_ERROR, "RSV1 set without negotiation");
+                return false;
+            }
+        }
 
         if (is_ctrl && !hdr.fin) {
             send_close_frame(websocket_status::PROTOCOL_ERROR, "Fragmented control frame");
@@ -291,12 +343,30 @@ bool websocket_session::dispatch(const websocket_frame_header& hdr, const websoc
                 send_close_frame(websocket_status::PROTOCOL_ERROR, "New data frame before fragment complete");
                 return false;
             }
-            if (!hdr.fin) {
-                fragment_opcode_ = opcode;
-                fragment_buffer_ = move(payload);
-                in_fragment_ = true;
+            if (hdr.rsv1 && deflate_decompressor_) {
+                if (!hdr.fin) {
+                    fragment_opcode_ = opcode;
+                    deflate_fragment_buffer_.insert(deflate_fragment_buffer_.end(), payload.begin(), payload.end());
+                    in_fragment_ = true;
+                } else {
+                    try {
+                        const string decompressed = deflate_decompressor_->process(payload.view(), true);
+                        deliver_message(decompressed, opcode);
+                    } catch (...) {
+                        deliver_message(payload, opcode);
+                    }
+                    if (deflate_config_.client_no_context_takeover) {
+                        deflate_decompressor_->reset_context();
+                    }
+                }
             } else {
-                deliver_message(payload, opcode);
+                if (!hdr.fin) {
+                    fragment_opcode_ = opcode;
+                    fragment_buffer_ = move(payload);
+                    in_fragment_ = true;
+                } else {
+                    deliver_message(payload, opcode);
+                }
             }
             return true;
         }
@@ -305,11 +375,30 @@ bool websocket_session::dispatch(const websocket_frame_header& hdr, const websoc
                 send_close_frame(websocket_status::PROTOCOL_ERROR, "Unexpected continuation frame");
                 return false;
             }
-            fragment_buffer_ += move(payload);
-            if (hdr.fin) {
-                deliver_message(fragment_buffer_, fragment_opcode_);
-                fragment_buffer_.clear();
-                in_fragment_ = false;
+            if (hdr.rsv1 && deflate_decompressor_ && !deflate_fragment_buffer_.empty()) {
+                deflate_fragment_buffer_.insert(deflate_fragment_buffer_.end(), payload.begin(), payload.end());
+                if (hdr.fin) {
+                    try {
+                        const string compressed(reinterpret_cast<const char*>(deflate_fragment_buffer_.data()),
+                                                deflate_fragment_buffer_.size());
+                        const string decompressed = deflate_decompressor_->process(compressed.view(), true);
+                        deliver_message(decompressed, fragment_opcode_);
+                    } catch (...) {
+                        fragment_buffer_.clear();
+                    }
+                    deflate_fragment_buffer_.clear();
+                    if (deflate_config_.client_no_context_takeover) {
+                        deflate_decompressor_->reset_context();
+                    }
+                    in_fragment_ = false;
+                }
+            } else {
+                fragment_buffer_ += move(payload);
+                if (hdr.fin) {
+                    deliver_message(fragment_buffer_, fragment_opcode_);
+                    fragment_buffer_.clear();
+                    in_fragment_ = false;
+                }
             }
             return true;
         }
@@ -405,15 +494,62 @@ void websocket_session::heartbeat_loop() {
                 // ignore
             }
         }
-        return;
     }
 }
 
-void websocket_session::do_stop(websocket_status status, const string& reason) {
+void websocket_session::do_stop(websocket_status status, const string& reason, bool notify_server) {
     if (closed_once_.test_and_set()) {
         return;
     }
 
+    running_ = false;
+
+    if (event_driven_ && loop_ != nullptr) {
+        if (heartbeat_timer_id_ != 0) {
+            loop_->cancel_timer(heartbeat_timer_id_);
+            heartbeat_timer_id_ = 0;
+        }
+        const int fd = static_cast<int>(socket_->native_handle());
+        loop_->remove_fd(fd);
+    } else {
+        write_cv_.notify_all();
+    }
+
+    socket_->close();
+
+    if (!event_driven_) {
+        auto join_if_not_self = [](thread& t) {
+            if (t.joinable() && t.get_id() != this_thread::id()) {
+                t.join();
+            } else if (t.joinable()) {
+                t.detach();
+            }
+        };
+
+        join_if_not_self(read_thread_);
+        join_if_not_self(write_thread_);
+        join_if_not_self(heartbeat_thread_);
+    }
+
+    if (on_close_) {
+        try {
+            on_close_(move(status), reason);
+            // NOLINTNEXTLINE(bugprone-empty-catch)
+        } catch (...) {
+            // ignore
+        }
+    }
+
+    if (notify_server && server_ != nullptr) {
+        server_->remove_session(shared_from_this());
+    }
+}
+
+websocket_session::websocket_session(unique_ptr<tcp_socket> sock, websocket_server* server) :
+socket_(move(sock)),
+server_(server) {}
+
+websocket_session::~websocket_session() {
     running_ = false;
     write_cv_.notify_all();
     socket_->close();
@@ -425,36 +561,9 @@ void websocket_session::do_stop(websocket_status status, const string& reason) {
             t.detach();
         }
     };
-
     join_if_not_self(read_thread_);
     join_if_not_self(write_thread_);
     join_if_not_self(heartbeat_thread_);
-
-    if (on_close_) {
-        try {
-            on_close_(move(status), reason);
-            // NOLINTNEXTLINE(bugprone-empty-catch)
-        } catch (...) {
-            // ignore
-        }
-    }
-
-    if (server_ != nullptr) {
-        server_->remove_session(shared_from_this());
-    }
-}
-
-websocket_session::websocket_session(unique_ptr<tcp_socket> sock, websocket_server* server) :
-socket_(move(sock)),
-server_(server) {}
-
-websocket_session::~websocket_session() {
-    try {
-        do_stop(websocket_status::NORMAL_CLOSURE, "Session destroyed");
-        // NOLINTNEXTLINE(bugprone-empty-catch)
-    } catch (...) {
-        // ignore
-    }
 }
 
 void websocket_session::start() {
@@ -462,9 +571,15 @@ void websocket_session::start() {
         return;
     }
     last_pong_ms_ = now_ms();
-    read_thread_.start(&websocket_session::read_loop, this);
-    write_thread_.start(&websocket_session::write_loop, this);
-    heartbeat_thread_.start(&websocket_session::heartbeat_loop, this);
+
+    if (event_driven_ && loop_ != nullptr) {
+        start_event_driven();
+    } else {
+        socket_->set_nonblocking(false);
+        read_thread_.start(&websocket_session::read_loop, this);
+        write_thread_.start(&websocket_session::write_loop, this);
+        heartbeat_thread_.start(&websocket_session::heartbeat_loop, this);
+    }
 }
 
 void websocket_session::close(const websocket_status status, const string& reason) {
@@ -492,7 +607,219 @@ bool websocket_session::send(const string& data, const websocket_opcode opcode) 
     if (!running_) {
         return false;
     }
+
+#ifdef NEFORCE_SUPPORT_ZLIB
+    if (deflate_compressor_ && (opcode == websocket_opcode::TEXT || opcode == websocket_opcode::BINARY)) {
+        try {
+            const string compressed = deflate_compressor_->process(data.view(), true);
+            if (!compressed.empty()) {
+                const bool ok = queue_frame(build_frame(opcode, compressed, false, true));
+                if (deflate_config_.server_no_context_takeover) {
+                    deflate_compressor_->reset_context();
+                }
+                return ok;
+            }
+            // NOLINTNEXTLINE(bugprone-empty-catch)
+        } catch (...) {
+            // ignore
+        }
+    }
+#endif
+
     return queue_frame(build_frame(opcode, data, false));
+}
+
+void websocket_session::set_deflate_config(const websocket_deflate_config& cfg) {
+    deflate_config_ = cfg;
+#ifdef NEFORCE_SUPPORT_ZLIB
+    if (cfg.active) {
+        deflate_compressor_ =
+                make_unique<websocket_deflate>(true, cfg.server_max_window_bits, cfg.server_no_context_takeover);
+        deflate_decompressor_ =
+                make_unique<websocket_deflate>(false, cfg.client_max_window_bits, cfg.client_no_context_takeover);
+    }
+#endif
+}
+
+void websocket_session::start_event_driven() {
+    socket_->set_nonblocking(true);
+    const int fd = static_cast<int>(socket_->native_handle());
+
+    auto self = shared_from_this();
+
+    loop_->add_fd(fd, epoll_in, [self](int f, uint32_t ev) {
+        if (ev & epoll_in) {
+            self->on_readable(f, ev);
+        }
+        if (ev & epoll_out) {
+            self->on_writable(f, ev);
+        }
+    });
+
+    heartbeat_timer_id_ = loop_->schedule_timer(static_cast<uint64_t>(heartbeat_interval_sec.count() * 1000),
+                                                [self]() { self->on_heartbeat_timer(); });
+}
+
+void websocket_session::on_readable(int /*fd*/, uint32_t /*events*/) {
+    if (!running_) {
+        return;
+    }
+
+    byte_t buf[8192];
+    while (true) {
+        const ssize_t n = socket_->receive(memory_view<char>(reinterpret_cast<char*>(buf), sizeof(buf)));
+        if (n > 0) {
+            read_buffer_.insert(read_buffer_.end(), buf, buf + n);
+        } else {
+            break;
+        }
+    }
+
+    try_parse_frames();
+}
+
+void websocket_session::try_parse_frames() {
+    while (running_ && read_buffer_.size() >= 2) {
+        byte_cursor cur(read_buffer_.data(), read_buffer_.size());
+
+        auto b0_opt = cur.try_read_byte();
+        auto b1_opt = cur.try_read_byte();
+        if (!b0_opt || !b1_opt) {
+            return;
+        }
+        uint8_t b0 = *b0_opt;
+        uint8_t b1 = *b1_opt;
+
+        websocket_frame_header hdr;
+        hdr.opcode = b0 & 0x0F;
+        hdr.rsv3 = (b0 >> 4) & 0x01;
+        hdr.rsv2 = (b0 >> 5) & 0x01;
+        hdr.rsv1 = (b0 >> 6) & 0x01;
+        hdr.fin = b0 >> 7;
+        hdr.payload_len = b1 & 0x7F;
+        hdr.masked = b1 >> 7;
+
+        const auto opcode = static_cast<websocket_opcode>(hdr.opcode);
+        const bool is_ctrl_ev = (hdr.opcode >= 0x8);
+
+        if (hdr.rsv2 || hdr.rsv3) {
+            send_close_frame(websocket_status::PROTOCOL_ERROR, "Reserved bits set");
+            break;
+        }
+        if (hdr.rsv1 && (!deflate_config_.active || is_ctrl_ev)) {
+            send_close_frame(websocket_status::PROTOCOL_ERROR, "RSV1 set without negotiation");
+            break;
+        }
+
+        uint64_t payload_len = hdr.payload_len;
+        if (payload_len == 126) {
+            auto ext_opt = cur.try_read_be16();
+            if (!ext_opt) {
+                return;
+            }
+            payload_len = *ext_opt;
+        } else if (payload_len == 127) {
+            auto ext_opt = cur.try_read_be64();
+            if (!ext_opt) {
+                return;
+            }
+            payload_len = *ext_opt;
+        }
+
+        // 64 MB payload cap — aligned with read_frame()
+        constexpr uint64_t max_payload_length = 64ULL * 1024ULL * 1024ULL;
+        if (payload_len > max_payload_length) {
+            send_close_frame(websocket_status::MESSAGE_TOO_BIG, "Payload exceeds limit");
+            break;
+        }
+
+        byte_t mask_key[4]{};
+        if (hdr.masked) {
+            for (byte_t& i: mask_key) {
+                auto b = cur.try_read_byte();
+                if (!b) {
+                    return;
+                }
+                i = *b;
+            }
+        }
+
+        auto payload_opt = cur.try_read_bytes(static_cast<size_t>(payload_len));
+        if (!payload_opt) {
+            return;
+        }
+
+        string payload;
+        if (payload_len > 0) {
+            payload.assign(reinterpret_cast<const char*>(payload_opt->data()), static_cast<size_t>(payload_len));
+        }
+
+        if (hdr.masked && payload_len > 0) {
+            for (size_t i = 0; i < static_cast<size_t>(payload_len); ++i) {
+                payload[i] = static_cast<char>(static_cast<byte_t>(payload[i]) ^ mask_key[i % 4]);
+            }
+        }
+
+        read_buffer_.erase(read_buffer_.begin(), read_buffer_.begin() + static_cast<ssize_t>(cur.consumed_bytes()));
+
+        if (!dispatch(hdr, opcode, payload)) {
+            break;
+        }
+    }
+}
+
+void websocket_session::on_writable(int /*fd*/, uint32_t /*events*/) { flush_event_writes(); }
+
+void websocket_session::flush_event_writes() {
+    lock<mutex> lk(write_mutex_);
+
+    while (!ctrl_queue_.empty()) {
+        auto& frame = ctrl_queue_.front();
+        try {
+            socket_->send_all(memory_view<const char>(reinterpret_cast<const char*>(frame.data()), frame.size()));
+        } catch (...) {
+            return;
+        }
+        ctrl_queue_.pop();
+    }
+
+    while (!write_queue_.empty()) {
+        auto& frame = write_queue_.front();
+        try {
+            socket_->send_all(memory_view<const char>(reinterpret_cast<const char*>(frame.data()), frame.size()));
+        } catch (...) {
+            return;
+        }
+        write_queue_.pop();
+    }
+
+    if (ctrl_queue_.empty() && write_queue_.empty() && running_) {
+        const int fd = static_cast<int>(socket_->native_handle());
+        loop_->mod_fd(fd, epoll_in);
+    }
+}
+
+void websocket_session::on_heartbeat_timer() {
+    if (!running_) {
+        return;
+    }
+
+    const int64_t elapsed_ms = now_ms() - last_pong_ms_.load();
+    constexpr milliseconds timeout_ms = heartbeat_timeout_sec.to_milli();
+
+    if (ping_pending_.load() && elapsed_ms > timeout_ms.count()) {
+        do_stop(websocket_status::ABNORMAL_CLOSURE, "Heartbeat timeout");
+        return;
+    }
+
+    if (!ping_pending_.load()) {
+        ping_pending_ = true;
+        queue_frame(build_frame(websocket_opcode::PING, "", false), true);
+    }
+
+    auto self = shared_from_this();
+    heartbeat_timer_id_ = loop_->schedule_timer(static_cast<uint64_t>(heartbeat_interval_sec.count() * 1000),
+                                                [self]() { self->on_heartbeat_timer(); });
 }
 
 NEFORCE_END_HTTP__

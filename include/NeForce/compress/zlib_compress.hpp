@@ -10,9 +10,8 @@
  * 包括一次性压缩和流式压缩两种模式。
  */
 
-#if defined(NEFORCE_SUPPORT_ZLIB) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#ifdef NEFORCE_SUPPORT_ZLIB
 #    include <zlib.h>
-#    include "NeForce/core/container/vector.hpp"
 #    include "NeForce/core/string/string.hpp"
 #    include "NeForce/core/memory/unique_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__

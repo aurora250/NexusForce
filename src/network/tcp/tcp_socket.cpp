@@ -187,6 +187,9 @@ ssize_t tcp_socket::receive(memory_view<char> buffer, const int flags) {
 
     const ssize_t result = ::recv(fd_, buffer.data(), static_cast<int>(buffer.size()), flags);
     if (result < 0) {
+        if (errno == EAGAIN || errno == EWOULDBLOCK) {
+            return 0;
+        }
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to receive data"));
     }
     return result;

@@ -127,7 +127,7 @@ private:
     string build_cookie_header(const url& request_url) const;
 
     http_client_response do_request(http_client_request request, int redirect_count = 0);
-    bool ensure_connected(const string& host, ports port);
+    bool ensure_connected(const string& host, ports port, bool use_ssl = false);
 
 public:
     /**

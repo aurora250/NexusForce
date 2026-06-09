@@ -20,9 +20,11 @@
  */
 
 #include "NeForce/core/async/condition_variable.hpp"
-#include "NeForce/core/numeric/random.hpp"
+#include "NeForce/core/async/event_loop.hpp"
 #include "NeForce/network/http/http_router.hpp"
+#include "NeForce/network/http/session_store.hpp"
 #include "NeForce/network/http/websocket.hpp"
+#include "NeForce/network/ssl/sni_manager.hpp"
 #include "NeForce/network/tcp/tcp_server.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
@@ -70,7 +72,6 @@ class NEFORCE_API http_server {
 public:
     using socket_type = tcp_socket; ///< Socket类型
 
-private:
     /**
      * @struct session_manager
      * @brief 会话管理器
@@ -83,11 +84,8 @@ private:
         condition_variable cv_;                        ///< 条件变量
         atomic<bool> cleanup_running_;                 ///< 清理线程运行标志
         thread cleanup_thread_;                        ///< 清理线程
-        random_mt rand_;                               ///< 随机数生成器
         seconds cleanup_interval_{300};                ///< 清理间隔
         size_t max_sessions_{10000};                   ///< 最大会话数
-
-        string generate_session_id();
 
         session_manager();
         ~session_manager();
@@ -108,15 +106,25 @@ private:
         void set_max_sessions(size_t max) noexcept;
     };
 
-    unique_ptr<tcp_server_base> server_; ///< TCP/SSL服务器
-    http_router router_;                 ///< HTTP路由器
-    websocket_server ws_server_;         ///< WebSocket服务器
-    session_manager session_manager_;    ///< 会话管理器
+private:
+    unique_ptr<tcp_server_base> server_;       ///< TCP/SSL服务器
+    vector<shared_ptr<event_loop>> h2c_loops_; ///< h2c升级连接的事件循环
+    vector<thread> h2c_threads_;               ///< h2c升级连接的线程
+    mutable mutex h2c_mutex_;                  ///< 保护h2c列表
+    http_router router_;                       ///< HTTP路由器
+    websocket_server ws_server_;               ///< WebSocket服务器
+    session_manager session_manager_;          ///< 会话管理器
+    sni_manager sni_;                          ///< SNI证书管理器
 
     http_cookie_name cookie_name_{http_cookie_name::JSESSIONID()}; ///< 会话Cookie名称
+    unique_ptr<http::session_store> session_store_;                ///< 可插拔会话存储后端
+
+    mutable mutex conn_mutex_;
+    unordered_map<string, size_t> conn_per_ip_; ///< 每个IP的连接计数
 
     static http_request parse_request(tcp_socket* client_socket, session_manager& manager, const http_cookie_name& name,
-                                      byte_size max_header_size, byte_size max_body_size);
+                                      byte_size max_header_size, byte_size max_body_size, size_t max_header_count,
+                                      milliseconds body_read_timeout);
 
     static http_session* get_or_create_session(http_request& request, bool create, session_manager& manager,
                                                const http_cookie_name& name);
@@ -125,10 +133,19 @@ public:
     byte_size max_server_header_size{16_KB}; ///< 最大请求头大小
     byte_size max_server_body_size{100_MB};  ///< 最大请求体大小
     bool enable_websocket{true};             ///< 是否启用WebSocket
+    bool enable_connect{true};               ///< 是否启用CONNECT隧道
+
+    size_t max_connections_per_ip{0};      ///< 每IP最大连接数（0=不限制）
+    size_t max_header_count{100};          ///< 最大请求头数量
+    size_t max_h2c_upgrades{32};           ///< 最大h2c升级连接数
+    milliseconds body_read_timeout{30000}; ///< 请求体读取超时（毫秒）
 
 private:
+    unordered_map<string, function<bool(http_request&, tcp_socket*)>> upgrade_handlers_;
+
     void handle_client(unique_ptr<tcp_socket> client_socket);
-    bool try_websocket_upgrade(unique_ptr<tcp_socket>& client_socket, http_request& request);
+    bool try_upgrade(unique_ptr<tcp_socket>& client_socket, http_request& request);
+    static void handle_connect(const unique_ptr<tcp_socket>& client_socket, http_request& request);
     void handle_request_with_forward(tcp_socket& client_socket, http_request& request, http_session* sess);
 
 public:
@@ -147,7 +164,7 @@ public:
      */
     http_server(ports port, ssl_context ctx, size_t worker_count = thread_pool::max_thread_threshhold());
 
-    ~http_server() = default;
+    ~http_server();
 
     http_server(const http_server&) = delete;
     http_server& operator=(const http_server&) = delete;
@@ -162,6 +179,28 @@ public:
      * @return 加载成功返回true
      */
     bool load_certificate(const string& cert_file, const string& key_file);
+
+    /**
+     * @brief 添加SNI多域名证书
+     * @param hostname 域名（如 "example.com"）
+     * @param ctx 该域名的SSL上下文
+     *
+     * 允许同一端口为不同域名提供不同证书。
+     * 在TLS握手时根据客户端SNI自动选择对应证书。
+     */
+    void add_sni_host(const string& hostname, ssl_context ctx) { sni_.add_host(hostname, move(ctx)); }
+
+    /**
+     * @brief 获取SNI管理器
+     * @return SNI管理器引用
+     */
+    NEFORCE_NODISCARD sni_manager& sni() noexcept { return sni_; }
+
+    /**
+     * @brief 获取SNI管理器常量引用
+     * @return SNI管理器常量引用
+     */
+    NEFORCE_NODISCARD const sni_manager& sni() const noexcept { return sni_; }
 
     /**
      * @brief 获取路由器引用
@@ -194,6 +233,21 @@ public:
     void set_cookie_name(http_cookie_name name) noexcept { cookie_name_ = move(name); }
 
     /**
+     * @brief 设置自定义会话存储后端
+     * @param store 会话存储实现
+     *
+     * 可传入 redis_session_store 等实现以实现分布式会话。
+     * 不设置则使用默认内存存储（session_manager内置）。
+     */
+    void set_session_store(unique_ptr<session_store> store) noexcept { session_store_ = move(store); }
+
+    /**
+     * @brief 获取会话存储后端
+     * @return 存储后端指针，未设置返回nullptr
+     */
+    NEFORCE_NODISCARD http::session_store* session_store() noexcept { return session_store_.get(); }
+
+    /**
      * @brief 获取会话Cookie名称
      * @return Cookie名称
      */
@@ -210,6 +264,18 @@ public:
      * @param max 最大数量
      */
     void set_max_sessions(size_t max) noexcept { session_manager_.set_max_sessions(max); }
+
+    /**
+     * @brief 注册协议升级处理器
+     * @param protocol 协议名（如 "websocket", "h2c"）
+     * @param handler 处理器函数，接收请求和socket，返回true表示已处理
+     *
+     * 服务器收到 Upgrade 请求时，按 Upgrade 头部值查找并调用对应处理器。
+     * WebSocket 升级处理器已默认注册（当 enable_websocket 为 true 时）。
+     */
+    void set_upgrade_handler(string protocol, function<bool(http_request&, tcp_socket*)> handler) {
+        upgrade_handlers_[move(protocol)] = move(handler);
+    }
 
     /**
      * @brief 获取监听端口

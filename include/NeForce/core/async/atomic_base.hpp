@@ -2468,7 +2468,7 @@ public:
      */
     bool compare_exchange_weak(Float& expected, Float desire, const memory_order success,
                                const memory_order failure) noexcept {
-        return _NEFORCE atomic_cmpexch_weak_any(&float_, expected, desire, success, failure);
+        return _NEFORCE atomic_cmpexch_weak_any(&float_, &expected, &desire, success, failure);
     }
 
     /**
@@ -2476,7 +2476,7 @@ public:
      */
     bool compare_exchange_weak(Float& expected, Float desire, const memory_order success,
                                const memory_order failure) volatile noexcept {
-        return _NEFORCE atomic_cmpexch_weak_any(&float_, expected, desire, success, failure);
+        return _NEFORCE atomic_cmpexch_weak_any(&float_, &expected, &desire, success, failure);
     }
 
     /**
@@ -2484,7 +2484,7 @@ public:
      */
     bool compare_exchange_strong(Float& expected, Float desire, const memory_order success,
                                  const memory_order failure) noexcept {
-        return _NEFORCE atomic_cmpexch_strong_any(&float_, expected, desire, success, failure);
+        return _NEFORCE atomic_cmpexch_strong_any(&float_, &expected, &desire, success, failure);
     }
 
     /**
@@ -2492,14 +2492,14 @@ public:
      */
     bool compare_exchange_strong(Float& expected, Float desire, const memory_order success,
                                  const memory_order failure) volatile noexcept {
-        return _NEFORCE atomic_cmpexch_strong_any(&float_, expected, desire, success, failure);
+        return _NEFORCE atomic_cmpexch_strong_any(&float_, &expected, &desire, success, failure);
     }
 
     /**
      * @brief 简化版弱比较交换操作
      */
     bool compare_exchange_weak(Float& expected, Float desire, const memory_order mo = memory_order_seq_cst) noexcept {
-        return _NEFORCE atomic_cmpexch_weak(&float_, expected, desire, mo, cmpexch_failure_order(mo));
+        return _NEFORCE atomic_cmpexch_weak_any(&float_, &expected, &desire, mo, cmpexch_failure_order(mo));
     }
 
     /**
@@ -2507,14 +2507,14 @@ public:
      */
     bool compare_exchange_weak(Float& expected, Float desire,
                                const memory_order mo = memory_order_seq_cst) volatile noexcept {
-        return _NEFORCE atomic_cmpexch_weak(&float_, expected, desire, mo, cmpexch_failure_order(mo));
+        return _NEFORCE atomic_cmpexch_weak_any(&float_, &expected, &desire, mo, cmpexch_failure_order(mo));
     }
 
     /**
      * @brief 简化版强比较交换操作
      */
     bool compare_exchange_strong(Float& expected, Float desire, const memory_order mo = memory_order_seq_cst) noexcept {
-        return _NEFORCE atomic_cmpexch_strong(&float_, expected, desire, mo, cmpexch_failure_order(mo));
+        return _NEFORCE atomic_cmpexch_strong_any(&float_, &expected, &desire, mo, cmpexch_failure_order(mo));
     }
 
     /**
@@ -2522,7 +2522,7 @@ public:
      */
     bool compare_exchange_strong(Float& expected, Float desire,
                                  const memory_order mo = memory_order_seq_cst) volatile noexcept {
-        return _NEFORCE atomic_cmpexch_strong(&float_, expected, desire, mo, cmpexch_failure_order(mo));
+        return _NEFORCE atomic_cmpexch_strong_any(&float_, &expected, &desire, mo, cmpexch_failure_order(mo));
     }
 
     /**

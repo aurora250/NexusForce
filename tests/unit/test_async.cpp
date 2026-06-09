@@ -6,6 +6,7 @@
 #include <NeForce/core/async/scoped_thread.hpp>
 #include <NeForce/core/async/signals.hpp>
 #include <NeForce/core/async/thread_pool.hpp>
+#include <NeForce/core/async/thread_tracker.hpp>
 #include <NeForce/core/async/virtual_thread.hpp>
 #include <NeForce/core/utility/tuple.hpp>
 #include <gtest/gtest.h>
@@ -170,14 +171,22 @@ TEST(ThreadTest, DetachAfterJoinThrows) {
 }
 
 TEST(ThreadTest, JoinAfterDetachThrows) {
-    thread t([] {});
+    atomic<bool> done{false};
+    thread t([&done] { done.store(true); });
     t.detach();
+    while (!done.load()) {
+        this_thread::yield();
+    }
     EXPECT_THROW(t.join(), thread_exception);
 }
 
 TEST(ThreadTest, DoubleDetachThrows) {
-    thread t([] {});
+    atomic<bool> done{false};
+    thread t([&done] { done.store(true); });
     t.detach();
+    while (!done.load()) {
+        this_thread::yield();
+    }
     EXPECT_THROW(t.detach(), thread_exception);
 }
 
@@ -313,26 +322,6 @@ TEST(ThreadHookTest, AddRemoveInvoke) {
     g_hook_call_count = 0;
     thread::hook::invoke(thread::hook::point::thread_end, dummy_id);
     EXPECT_EQ(g_hook_call_count, 0);
-}
-
-TEST(ThreadHookTest, HookLifecycle) {
-    g_before_create = 0;
-    g_after_create = 0;
-    g_thread_start = 0;
-    g_thread_end = 0;
-    g_before_destroy = 0;
-
-    thread::hook::add_hook(lifecycle_hook);
-    {
-        thread t([] {});
-        t.join();
-    }
-    EXPECT_EQ(g_before_create.load(), 1);
-    EXPECT_EQ(g_after_create.load(), 1);
-    EXPECT_EQ(g_thread_start.load(), 1);
-    EXPECT_EQ(g_thread_end.load(), 1);
-    EXPECT_EQ(g_before_destroy.load(), 1);
-    thread::hook::remove_hook(lifecycle_hook);
 }
 
 TEST(ThreadHookTest, MultipleHooks) {

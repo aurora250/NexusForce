@@ -209,3 +209,67 @@ elseif(UNIX AND NOT APPLE)
 endif()
 target_link_libraries(NexusForceHttpsServerExample PRIVATE NexusForce::NexusForce)
 nexusforce_compiler_options(NexusForceHttpsServerExample)
+
+# ---- HTTP/2 Server (h2c + h2 ALPN) ----
+add_executable(NexusForceHttp2ServerExample
+    http2_server.cpp
+)
+if(WIN32)
+    set_target_properties(NexusForceHttp2ServerExample PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+elseif(UNIX AND NOT APPLE)
+    set_target_properties(NexusForceHttp2ServerExample PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+endif()
+target_link_libraries(NexusForceHttp2ServerExample PRIVATE NexusForce::NexusForce)
+nexusforce_compiler_options(NexusForceHttp2ServerExample)
+
+# ---- gRPC Server ----
+add_executable(NexusForceGrpcServerExample
+    grpc_server.cpp
+)
+if(WIN32)
+    set_target_properties(NexusForceGrpcServerExample PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+elseif(UNIX AND NOT APPLE)
+    set_target_properties(NexusForceGrpcServerExample PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+endif()
+target_link_libraries(NexusForceGrpcServerExample PRIVATE NexusForce::NexusForce)
+nexusforce_compiler_options(NexusForceGrpcServerExample)
+
+# ---- Reverse Proxy + Load Balancer ----
+add_executable(NexusForceReverseProxyExample
+    reverse_proxy.cpp
+)
+if(WIN32)
+    set_target_properties(NexusForceReverseProxyExample PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+elseif(UNIX AND NOT APPLE)
+    set_target_properties(NexusForceReverseProxyExample PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+endif()
+target_link_libraries(NexusForceReverseProxyExample PRIVATE NexusForce::NexusForce)
+nexusforce_compiler_options(NexusForceReverseProxyExample)
+
+# ---- Health Check + Rate Limiting + Logging ----
+add_executable(NexusForceHealthCheckExample
+    health_check.cpp
+)
+if(WIN32)
+    set_target_properties(NexusForceHealthCheckExample PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+elseif(UNIX AND NOT APPLE)
+    set_target_properties(NexusForceHealthCheckExample PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+    )
+endif()
+target_link_libraries(NexusForceHealthCheckExample PRIVATE NexusForce::NexusForce)
+nexusforce_compiler_options(NexusForceHealthCheckExample)

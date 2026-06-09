@@ -84,6 +84,30 @@ public:
     };
 
     /**
+     * @struct disk_info
+     * @brief 磁盘空间信息
+     *
+     * 描述单个磁盘分区（或挂载点）的容量及使用情况。
+     */
+    struct NEFORCE_API disk_info {
+        string path;             ///< 磁盘路径或挂载点
+        uint64_t total_bytes{0}; ///< 总容量（字节）
+        uint64_t free_bytes{0};  ///< 可用空间（字节）
+        uint64_t used_bytes{0};  ///< 已用空间（字节）
+
+        /**
+         * @brief 磁盘使用率
+         * @return 使用百分比（0.0 - 100.0）
+         */
+        NEFORCE_NODISCARD float64_t usage_percent() const noexcept {
+            if (total_bytes == 0) {
+                return 0.0;
+            }
+            return 100.0 * static_cast<float64_t>(used_bytes) / static_cast<float64_t>(total_bytes);
+        }
+    };
+
+    /**
      * @struct CPU_info
      * @brief CPU信息
      *
@@ -234,6 +258,13 @@ public:
      * @return 进程数量
      */
     NEFORCE_NODISCARD static uint32_t process_count();
+
+    /**
+     * @brief 获取指定路径的磁盘空间信息
+     * @param path 文件系统路径，若为 nullptr 则自动获取当前工作目录所在磁盘或根目录
+     * @return 磁盘信息
+     */
+    NEFORCE_NODISCARD static disk_info get_disk_info(const char* path = nullptr);
 };
 
 /** @} */ // SystemInfo

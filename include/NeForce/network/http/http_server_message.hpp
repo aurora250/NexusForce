@@ -19,8 +19,17 @@
  * - 内容类型设置
  */
 
+#include "NeForce/core/container/buffer_chain.hpp"
+#include "NeForce/core/utility/any.hpp"
 #include "NeForce/network/http/http_session.hpp"
 NEFORCE_BEGIN_NAMESPACE__
+
+/**
+ * @typedef http_context
+ * @brief 请求上下文，跨过滤器/中间件传递任意数据
+ */
+using http_context = unordered_map<string, any>;
+
 NEFORCE_BEGIN_HTTP__
 
 /**
@@ -79,8 +88,10 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
     unordered_map<string, string> cookies;    ///< Cookie
     unordered_map<string, string> parameters; ///< 请求参数
     unordered_map<string, string> form_data;  ///< 表单数据
+    unordered_map<string, string> trailers;   ///< Trailer头部
 
     http_session* session = nullptr; ///< 会话对象
+    http_context context;            ///< 请求上下文
 
     /**
      * @brief 获取参数值
@@ -172,7 +183,15 @@ struct NEFORCE_API http_server_request : iobject<http_server_request> {
      */
     NEFORCE_NODISCARD bool is_keep_alive() const {
         const auto conn = header(http_key::Connection());
-        return conn == "keep-alive" || conn == "Keep-Alive";
+        const string conn_lower = string(conn).lowercase();
+        if (conn_lower == "close") {
+            return false;
+        }
+        // HTTP/1.1+ defaults to keep-alive; HTTP/1.0 requires explicit keep-alive
+        if (!version.starts_with("HTTP/1.0")) {
+            return true;
+        }
+        return conn_lower.starts_with("keep-alive");
     }
 
     /**
@@ -271,6 +290,8 @@ struct NEFORCE_API http_server_response : istringify<http_server_response> {
     string body;                                   ///< 响应正文
     string redirect_url;                           ///< 重定向URL
     string forward_path;                           ///< 转发路径
+    unordered_map<string, string> trailers;        ///< Trailer头部
+    bool chunked_encoding{false};                  ///< 是否使用chunked传输编码
 
     /**
      * @brief 默认构造函数
@@ -279,7 +300,6 @@ struct NEFORCE_API http_server_response : istringify<http_server_response> {
      */
     http_server_response() {
         headers[http_key::Content_Type()] = http_content::PLAIN_TEXT().to_string() + "; charset=utf-8";
-        headers[http_key::Connection()] = "close";
     }
 
     /**
@@ -326,6 +346,11 @@ struct NEFORCE_API http_server_response : istringify<http_server_response> {
      * 自动添加Content-Length头。
      */
     NEFORCE_NODISCARD string to_string() const;
+
+    /**
+     * @brief 构建响应头字符串
+     */
+    NEFORCE_NODISCARD string build_header_string() const;
 };
 
 /**

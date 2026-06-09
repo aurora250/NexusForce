@@ -805,6 +805,20 @@ public:
         owner_->incref_strong();
         return inner::__make_shared_fused(static_cast<const T*>(this), owner_);
     }
+
+    /**
+     * @brief 获取指向 this 的弱指针
+     * @return 指向 this 的 weak_ptr
+     * @note 如果对象没有被 shared_ptr 管理，返回空的 weak_ptr
+     */
+    weak_ptr<T> weak_from_this() noexcept;
+
+    /**
+     * @brief 获取指向 this 的常量弱指针
+     * @return 指向 this 常量版本的 weak_ptr
+     * @note 如果对象没有被 shared_ptr 管理，返回空的 weak_ptr
+     */
+    weak_ptr<const T> weak_from_this() const noexcept;
 };
 
 

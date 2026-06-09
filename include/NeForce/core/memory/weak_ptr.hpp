@@ -56,6 +56,9 @@ private:
     friend class shared_ptr;
 
     template <typename U>
+    friend struct enable_shared_from_this;
+
+    template <typename U>
     friend class inner::smart_pointer_atomic;
 
 public:
@@ -63,6 +66,19 @@ public:
      * @brief 默认构造函数
      */
     weak_ptr(nullptr_t = nullptr) noexcept {}
+
+    /**
+     * @brief 从原始指针和控制块构造弱指针（供 enable_shared_from_this 内部使用）
+     * @param ptr 原始指针
+     * @param owner 控制块指针
+     */
+    weak_ptr(T* ptr, inner::__smart_ptr_counter* owner) noexcept :
+    ptr_(ptr),
+    owner_(owner) {
+        if (owner_ != nullptr) {
+            owner_->incref_weak();
+        }
+    }
 
     /**
      * @brief 共享智能指针构造函数
@@ -327,6 +343,24 @@ public:
         return owner_ < reinterpret_cast<inner::__smart_ptr_counter*>(rhs.owner_);
     }
 };
+
+template <typename T>
+weak_ptr<T> enable_shared_from_this<T>::weak_from_this() noexcept {
+    static_assert(is_base_of_v<enable_shared_from_this, T>, "weak_from_this requires derived class");
+    if (owner_ == nullptr) {
+        return weak_ptr<T>();
+    }
+    return weak_ptr<T>(static_cast<T*>(this), owner_);
+}
+
+template <typename T>
+weak_ptr<const T> enable_shared_from_this<T>::weak_from_this() const noexcept {
+    static_assert(is_base_of_v<enable_shared_from_this, T>, "weak_from_this requires derived class");
+    if (owner_ == nullptr) {
+        return weak_ptr<const T>();
+    }
+    return weak_ptr<const T>(static_cast<const T*>(this), owner_);
+}
 
 
 /**

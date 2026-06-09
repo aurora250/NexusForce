@@ -9,6 +9,7 @@
  */
 
 #include <initializer_list>
+#include <new>
 #include "NeForce/core/exception/exception.hpp"
 #include "NeForce/core/functional/invoke.hpp"
 #include "NeForce/core/memory/construct.hpp"
@@ -152,7 +153,7 @@ public:
      * @brief 从值拷贝构造
      * @param value 源值
      */
-    explicit constexpr optional(const T& value) noexcept(is_nothrow_copy_constructible_v<T>) :
+    constexpr optional(const T& value) noexcept(is_nothrow_copy_constructible_v<T>) :
     have_value_(true) {
         _NEFORCE construct(get_ptr(), value);
     }
@@ -161,7 +162,7 @@ public:
      * @brief 从值移动构造
      * @param value 源值
      */
-    explicit constexpr optional(T&& value) noexcept(is_nothrow_move_constructible_v<T>) :
+    constexpr optional(T&& value) noexcept(is_nothrow_move_constructible_v<T>) :
     have_value_(true) {
         _NEFORCE construct(get_ptr(), _NEFORCE move(value));
     }
@@ -211,7 +212,7 @@ public:
     template <typename U, enable_if_t<!is_same_v<T, U> && is_constructible_v<T, const U&> &&
                                               !is_convertible_v<const U&, T> && !convertible_from_optional<U>::value,
                                       int> = 0>
-    constexpr explicit optional(const optional<U>& other) noexcept(is_nothrow_constructible_v<T, const U&>) {
+    constexpr optional(const optional<U>& other) noexcept(is_nothrow_constructible_v<T, const U&>) {
         if (other) {
             _NEFORCE construct(get_ptr(), *other);
             have_value_ = true;

@@ -1,50 +1,51 @@
 #include <NeForce/core/file/file.hpp>
 #include <NeForce/core/file/filesystem.hpp>
+#include <NeForce/core/memory/shared_ptr.hpp>
+#include <NeForce/core/numeric/random.hpp>
 #include <NeForce/core/system/console.hpp>
+#include <NeForce/network/http/async_filter.hpp>
 #include <NeForce/network/http/http_filter.hpp>
+#include <NeForce/network/http/http_range.hpp>
 #include <NeForce/network/util/url.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
 void http_filter_chain::add_filter(unique_ptr<http_filter> filter) {
     if (filter) {
-        filters_.emplace_back(move(filter));
+        filters_.push_back({move(filter), true});
     }
 }
 
 void http_filter_chain::add_filter_ref(http_filter* filter) {
     if (filter != nullptr) {
-        filters_.push_back(unique_ptr<http_filter>(filter));
-        owns_filters_ = false;
+        filters_.push_back({unique_ptr<http_filter>(filter), false});
     }
 }
 
 void http_filter_chain::clear() noexcept {
-    if (owns_filters_) {
-        filters_.clear();
-    } else {
-        for (auto& filter: filters_) {
-            filter.release();
+    for (auto& entry: filters_) {
+        if (!entry.owned) {
+            static_cast<void>(entry.filter.release());
         }
-        filters_.clear();
     }
+    filters_.clear();
 }
 
 bool http_filter_chain::execute_pre_filters(http_request& request, http_response& response) {
-    for (const auto& filter: filters_) {
-        if (!filter) {
+    for (const auto& entry: filters_) {
+        if (!entry.filter) {
             continue;
         }
 
         try {
-            if (!filter->pre_filter(request, response)) {
+            if (!entry.filter->pre_filter(request, response)) {
                 return false;
             }
         } catch (const exception& e) {
-            println("[ERROR] Pre-filter '", filter->name(), "' failed: ", e.what());
+            println("[ERROR] Pre-filter '", entry.filter->name(), "' failed: ", e.what());
             return false;
         } catch (...) {
-            println("[ERROR] Pre-filter '", filter->name(), "' failed with unknown error");
+            println("[ERROR] Pre-filter '", entry.filter->name(), "' failed with unknown error");
             return false;
         }
     }
@@ -54,34 +55,181 @@ bool http_filter_chain::execute_pre_filters(http_request& request, http_response
 void http_filter_chain::execute_post_filters(http_request& request, http_response& response) {
     // NOLINTNEXTLINE(modernize-loop-convert)
     for (auto it = filters_.rbegin(); it != filters_.rend(); ++it) {
-        if (!*it) {
+        if (!it->filter) {
             continue;
         }
 
         try {
-            (*it)->post_filter(request, response);
+            it->filter->post_filter(request, response);
         } catch (const exception& e) {
-            println("[ERROR] Post-filter '", (*it)->name(), "' failed: ", e.what());
+            println("[ERROR] Post-filter '", it->filter->name(), "' failed: ", e.what());
         } catch (...) {
-            println("[ERROR] Post-filter '", (*it)->name(), "' failed with unknown error");
+            println("[ERROR] Post-filter '", it->filter->name(), "' failed with unknown error");
         }
     }
 }
 
 void http_filter_chain::execute_filters(http_request& request, http_response& response) {
-    for (const auto& filter: filters_) {
-        if (!filter) {
+    for (const auto& entry: filters_) {
+        if (!entry.filter) {
             continue;
         }
 
         try {
-            filter->do_filter(request, response);
+            entry.filter->do_filter(request, response);
         } catch (const exception& e) {
-            println("[ERROR] Filter '", filter->name(), "' failed: ", e.what());
+            println("[ERROR] Filter '", entry.filter->name(), "' failed: ", e.what());
         } catch (...) {
-            println("[ERROR] Filter '", filter->name(), "' failed with unknown error");
+            println("[ERROR] Filter '", entry.filter->name(), "' failed with unknown error");
         }
     }
+}
+
+void http_filter_chain::execute_pre_filters_async(http_request& request, http_response& response, http_context& ctx,
+                                                  function<void(bool)> next) {
+    auto* filters = &filters_;
+
+    struct chain_state {
+        const vector<filter_entry>* filters;
+        size_t index = 0;
+        http_request* request_raw = nullptr;
+        http_response* response_raw = nullptr;
+        http_context* ctx_raw = nullptr;
+        shared_ptr<http_request> request_own;
+        shared_ptr<http_response> response_own;
+        shared_ptr<http_context> ctx_own;
+        function<void(bool)> next;
+        bool migrated = false;
+
+        http_request& req() { return migrated ? *request_own : *request_raw; }
+        http_response& res() { return migrated ? *response_own : *response_raw; }
+        http_context& c() { return migrated ? *ctx_own : *ctx_raw; }
+
+        void ensure_ownership() {
+            if (migrated) {
+                return;
+            }
+            request_own = make_shared<http_request>(*request_raw);
+            response_own = make_shared<http_response>(*response_raw);
+            ctx_own = make_shared<http_context>(*ctx_raw);
+            migrated = true;
+        }
+
+        void run_next() {
+            if (index >= filters->size()) {
+                next(true);
+                return;
+            }
+            const auto& entry = (*filters)[index++];
+            if (!entry.filter) {
+                run_next();
+                return;
+            }
+            auto* af = dynamic_cast<async_filter*>(entry.filter.get());
+            if (af != nullptr) {
+                ensure_ownership();
+                try {
+                    af->pre_filter_async(req(), res(), c(), [this](bool ok) {
+                        if (ok) {
+                            run_next();
+                        } else {
+                            next(false);
+                        }
+                    });
+                } catch (...) {
+                    next(false);
+                }
+            } else {
+                try {
+                    if (!entry.filter->pre_filter(req(), res())) {
+                        next(false);
+                        return;
+                    }
+                } catch (...) {
+                    next(false);
+                    return;
+                }
+                run_next();
+            }
+        }
+    };
+
+    auto state = make_shared<chain_state>();
+    state->filters = filters;
+    state->request_raw = &request;
+    state->response_raw = &response;
+    state->ctx_raw = &ctx;
+    state->next = move(next);
+    state->run_next();
+}
+
+void http_filter_chain::execute_post_filters_async(http_request& request, http_response& response, http_context& ctx,
+                                                   function<void()> next) {
+    auto* filters = &filters_;
+
+    struct chain_state {
+        const vector<filter_entry>* filters;
+        size_t index = 0;
+        http_request* request_raw = nullptr;
+        http_response* response_raw = nullptr;
+        http_context* ctx_raw = nullptr;
+        shared_ptr<http_request> request_own;
+        shared_ptr<http_response> response_own;
+        shared_ptr<http_context> ctx_own;
+        function<void()> next;
+        bool migrated = false;
+
+        http_request& req() { return migrated ? *request_own : *request_raw; }
+        http_response& res() { return migrated ? *response_own : *response_raw; }
+        http_context& c() { return migrated ? *ctx_own : *ctx_raw; }
+
+        void ensure_ownership() {
+            if (migrated) {
+                return;
+            }
+            request_own = make_shared<http_request>(*request_raw);
+            response_own = make_shared<http_response>(*response_raw);
+            ctx_own = make_shared<http_context>(*ctx_raw);
+            migrated = true;
+        }
+
+        void run_next() {
+            if (index >= filters->size()) {
+                next();
+                return;
+            }
+            const auto& entry = (*filters)[index++];
+            if (!entry.filter) {
+                run_next();
+                return;
+            }
+            auto* af = dynamic_cast<async_filter*>(entry.filter.get());
+            if (af != nullptr) {
+                ensure_ownership();
+                try {
+                    af->post_filter_async(req(), res(), c(), [this](bool) { run_next(); });
+                } catch (...) {
+                    run_next();
+                }
+            } else {
+                try {
+                    entry.filter->post_filter(req(), res());
+                    // NOLINTNEXTLINE(bugprone-empty-catch)
+                } catch (...) {
+                    // ignore
+                }
+                run_next();
+            }
+        }
+    };
+
+    auto state = make_shared<chain_state>();
+    state->filters = filters;
+    state->request_raw = &request;
+    state->response_raw = &response;
+    state->ctx_raw = &ctx;
+    state->next = move(next);
+    state->run_next();
 }
 
 bool cors_filter::pre_filter(http_request& request, http_response& response) {
@@ -99,6 +247,10 @@ bool cors_filter::pre_filter(http_request& request, http_response& response) {
     }
 
     response.headers[http_key::Access_Control_Allow_Origin()] = allowed_origins;
+    // 反射非通配符 origin 时需添加 Vary: Origin（W3C Fetch 规范）
+    if (allowed_origins != "*") {
+        response.headers["Vary"] = "Origin";
+    }
     if (allow_credentials) {
         response.headers[http_key::Access_Control_Allow_Credentials()] = "true";
     }
@@ -185,16 +337,24 @@ root_path_(move(root_path)) {
     }
 
     mime_types_[".css"] = http_content::CSS_TEXT();
+    mime_types_[".js"] = "application/javascript";
+    mime_types_[".svg"] = "image/svg+xml";
+    mime_types_[".ico"] = "image/x-icon";
     mime_types_[".jpg"] = http_content::JPEG_IMG();
     mime_types_[".jpeg"] = http_content::JPEG_IMG();
     mime_types_[".png"] = http_content::PNG_IMG();
     mime_types_[".bmp"] = http_content::BMP_IMG();
     mime_types_[".webp"] = http_content::WEBP_IMG();
+    mime_types_[".gif"] = "image/gif";
     mime_types_[".html"] = http_content::HTML_TEXT();
     mime_types_[".htm"] = http_content::HTML_TEXT();
     mime_types_[".json"] = http_content::JSON_APP();
     mime_types_[".txt"] = http_content::PLAIN_TEXT();
     mime_types_[".xml"] = http_content::XML_TEXT();
+    mime_types_[".woff2"] = "font/woff2";
+    mime_types_[".ttf"] = "font/ttf";
+    mime_types_[".pdf"] = "application/pdf";
+    mime_types_[".mp4"] = "video/mp4";
 }
 
 optional<http_content> static_file_filter::get_mime_type(const string& path) const {
@@ -272,9 +432,54 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
             response.body = file(file_path).read();
         }
 
-        response.status = http_status::S2_OK;
-        response.status_message = "OK";
         response.set_content_type(*mime_type);
+
+        if (enable_range_ && !response.body.empty()) {
+            const auto range_header = request.header("Range");
+            if (!range_header.empty()) {
+                const string full_content = move(response.body);
+                auto ranges = parse_ranges(range_header, full_content.size());
+
+                if (ranges.empty()) {
+                    response.status = http_status::S4_RANGE_NOT_SATISFIABLE;
+                    response.status_message = "Range Not Satisfiable";
+                    response.set_header("Content-Range", string("bytes */") + to_string(full_content.size()));
+                    response.body.clear();
+                    return false;
+                }
+
+                if (ranges.size() == 1) {
+                    const auto& r = ranges[0];
+                    const uint64_t length = r.end - r.start + 1;
+                    response.body = full_content.substr(r.start, static_cast<size_t>(length));
+
+                    response.status = http_status::S2_PARTIAL_CONTENT;
+                    response.status_message = "Partial Content";
+                    response.set_header("Content-Range", build_content_range(r, full_content.size()));
+                } else {
+                    string boundary = "NEXUSFORCE_";
+                    for (int i = 0; i < 16; ++i) {
+                        boundary += format("{:x}", secret::next_int<uint32_t>(16));
+                    }
+                    response.body = build_multipart_ranges(ranges, mime_type->to_string().view(), boundary.view(),
+                                                           [&full_content](const byte_range& rng) -> string {
+                                                               const uint64_t length = rng.end - rng.start + 1;
+                                                               return full_content.substr(rng.start,
+                                                                                          static_cast<size_t>(length));
+                                                           });
+
+                    response.status = http_status::S2_PARTIAL_CONTENT;
+                    response.status_message = "Partial Content";
+                    response.set_content_type("multipart/byteranges; boundary="_s + boundary);
+                }
+            } else {
+                response.status = http_status::S2_OK;
+                response.status_message = "OK";
+            }
+        } else {
+            response.status = http_status::S2_OK;
+            response.status_message = "OK";
+        }
 
         if (enable_cache_) {
             response.set_header("Cache-Control", "public, max-age=3600");
@@ -352,8 +557,20 @@ bool authentication_filter::is_path_excluded(const string& path) const {
     return false;
 }
 
+bool authentication_filter::is_path_protected(const string& path) const {
+    if (included_paths_.empty()) {
+        return !is_path_excluded(path);
+    }
+    for (const auto& included: included_paths_) {
+        if (path == included || path.starts_with(included)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool authentication_filter::pre_filter(http_request& request, http_response& response) {
-    if (is_path_excluded(request.path)) {
+    if (!is_path_protected(request.path)) {
         return true;
     }
     if (!auth_validator_) {
@@ -365,7 +582,7 @@ bool authentication_filter::pre_filter(http_request& request, http_response& res
         response.status_message = "Unauthorized";
         response.set_content_type(http_content::PLAIN_TEXT());
         response.body = "Authentication required";
-        response.set_header("WWW-Authenticate", "Bearer");
+        response.set_header("WWW-Authenticate", "Bearer realm=\"Restricted Access\"");
         return false;
     }
 

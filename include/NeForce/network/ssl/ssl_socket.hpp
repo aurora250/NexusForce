@@ -135,6 +135,15 @@ public:
     NEFORCE_NODISCARD string peer_certificate_info() const;
 
     /**
+     * @brief 获取ALPN协商的协议名称
+     * @return 协议名称字符串（如"h2"、"http/1.1"），未协商返回空字符串
+     *
+     * TLS握手完成后通过ALPN协商确定的应用层协议。
+     * 需要在init_server_ssl()或init_client_ssl()之后调用。
+     */
+    NEFORCE_NODISCARD string get_alpn_negotiated() const;
+
+    /**
      * @brief 发送加密数据
      * @param data 要发送的数据
      * @param flags 发送标志（忽略）

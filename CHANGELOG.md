@@ -1,5 +1,53 @@
 # CHANGELOG
 
+## [1.0.0-rc] - 2026-06-08
+
+### 🚀 New Features
+- 添加 HTTP/2 (h2) TLS+ALPN 协商支持，`ssl_stream::get_alpn_negotiated()` 接口
+- 添加 HTTP/2 连接管理 `http2_connection`（h2c 升级 + h2 ALPN 双模式）
+- 添加 HTTP/2 协议帧处理 `http2_protocol`
+- 添加 gRPC 服务端示例（Greeter + Health Check）
+- 添加反向代理示例 `reverse_proxy`（连接池 + 轮询负载均衡）
+- 添加健康检查端点示例 `health_check`（限流 + 安全头）
+- 添加异步过滤器框架 `async_filter`，支持异步 pre/post 过滤链
+- 添加 HTTP 缓存 `http_cache`、CSRF 防护 `csrf_filter`、安全头 `http_security`
+- 添加 HTTP 压缩传输 `http_compress`、范围请求 `http_range`
+- 添加多部分解析器 `multipart_parser`、分块传输读取器 `chunked_reader`
+- 添加字节游标 `byte_cursor` 用于无拷贝帧解析
+- 添加基数树路由器 `radix_router`
+- 添加负载均衡器 `load_balancer`
+- 添加缓冲区链 `buffer_chain`
+- 添加异步事件循环 `event_loop`
+- 添加 `http_client_request` 的 `scheme` 字段，支持基于 scheme 的 SSL 自动检测
+
+### 🔧 Improvements
+- `http_client` 重构为 scheme 感知模式：`scheme == "https"` 时自动创建 SSL 上下文
+- `ssl_client::post_connect()` 无 SSL 上下文时跳过 TLS 握手，支持纯 TCP 模式
+- `http_server` HTTPS 构造函数自动设置 ALPN 协议列表 (`h2`, `http/1.1`)
+- `tcp_socket::receive()` 在非阻塞模式下 EAGAIN/EWOULDBLOCK 返回 0（不再抛异常）
+- `websocket_server` 支持事件驱动模式 (`event_loop`) 与多线程模式切换
+- `authentication_filter` 添加 `add_included_path()` 白名单模式
+- 更新所有网络示例代码（http_server, https_server, http2_server, websocket_server 等）
+
+### 🐛 Bug Fixes
+- 修复 `http_server::send_response()` 对 TLS 连接使用 `::writev()` 裸 fd 绕过 SSL 的问题
+- 修复 HTTP/2 h2c 升级握手挂起（缺少 SETTINGS 帧发送与 `flush_writes()`）
+- 修复 HTTP/2 h2c 升级后请求体丢失（`handle_upgrade_request` 传递空数据）
+- 修复 HTTP/2 h2c POST 请求 `end_stream` 始终为 true 导致请求体为空
+- 修复 HTTP/2 响应头大小写未转换为小写（HTTP/2 要求小写头）
+- 修复 `http_client` `set_verify_ssl()` 在已连接状态下调用 `set_verify_peer()` 导致崩溃
+- 修复 `reverse_proxy::forward()` 未设置 `creq.host`/`creq.port` 导致无响应
+- 修复反向代理 `http_client` 连接慢（`ssl_client::post_connect()` 对纯 HTTP 也尝试 TLS 握手）
+- 修复 WebSocket 事件驱动模式无回显（`queue_frame()` 在 ET epoll 下等待 EPOLLOUT 永远不触发）
+- 修复 `tcp_socket::receive()` 非阻塞模式下 EAGAIN 抛异常导致 SIGABRT
+- 修复 WebSocket 掩码键字节序反转导致小端系统上文本乱码（`try_read_be32` + `reinterpret_cast`）
+- 修复 WebSocket 第二条消息解压乱码（解压器未在消息间重置上下文）
+- 修复 zlib 流式压缩/解压无限循环（`!data.empty()` 条件永不变化）
+- 修复浏览器 WebSocket permessage-deflate 压缩消息被拒绝 (PROTOCOL_ERROR 1002)：
+  zlib `Z_FINISH` 在 raw deflate 下不保证追加空存储块，导致压缩输出不符合 RFC 7692 格式。
+  修复方案：`websocket_deflate::process()` 中检测并手动追加空存储块（BFINAL=1, BTYPE=00），
+  再剥离 4 字节 LEN+NLEN 尾部，确保输出始终以 `0x01` 结尾
+
 ## [1.0.0-beta] - 2026-05-18
 
 ### 🚀 New Features

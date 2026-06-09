@@ -106,6 +106,16 @@ http_request http_request::parse(const string_view str) {
         parse_cookies(cookie_str, request);
     }
 
+    // Paths for Handling Percent Sign Encoding (RFC 3986)
+    request.path = url::decode_tolerant(request.path.view());
+
+    // HTTP/1.1 request Host header（RFC 7230 §5.4）
+    if (request.version.starts_with("HTTP/1.1") || request.version.starts_with("HTTP/2")) {
+        if (request.header("Host").empty()) {
+            NEFORCE_THROW_EXCEPTION(http_exception("Missing Host header"));
+        }
+    }
+
     return request;
 }
 
@@ -145,9 +155,9 @@ string http_request::to_string() const {
     return result;
 }
 
-string http_response::to_string() const {
+string http_response::build_header_string() const {
     string result;
-    result.reserve(1024 + body.size());
+    result.reserve(1024);
 
     if (!redirect_url.empty()) {
         const auto code = static_cast<uint16_t>(status);
@@ -168,12 +178,19 @@ string http_response::to_string() const {
         result += "Set-Cookie: " + cookie.to_string() + "\r\n";
     }
 
-    if (redirect_url.empty() && !has_header(http_key::Content_Length())) {
+    const auto code = static_cast<uint16_t>(status);
+    const bool no_body = (code >= 100 && code < 200) || code == 204 || code == 304;
+
+    if (redirect_url.empty() && !no_body && !has_header(http_key::Content_Length())) {
         result += http_key::Content_Length() + ": " + _NEFORCE to_string(body.size()) + "\r\n";
     }
 
     result += "\r\n";
+    return result;
+}
 
+string http_response::to_string() const {
+    string result = build_header_string();
     if (redirect_url.empty()) {
         result += body;
     }

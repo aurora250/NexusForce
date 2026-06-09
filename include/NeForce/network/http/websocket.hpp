@@ -10,12 +10,14 @@
 
 #include "NeForce/core/async/atomic.hpp"
 #include "NeForce/core/async/condition_variable.hpp"
+#include "NeForce/core/async/event_loop.hpp"
 #include "NeForce/core/async/thread.hpp"
 #include "NeForce/core/container/queue.hpp"
 #include "NeForce/core/container/unordered_map.hpp"
 #include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/memory/shared_ptr.hpp"
 #include "NeForce/network/http/http_server_message.hpp"
+#include "NeForce/network/http/websocket_deflate.hpp"
 #include "NeForce/network/ssl/ssl_socket.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
@@ -139,10 +141,11 @@ private:
     unordered_map<string, session_handler> route_handlers_; ///< 路由处理器映射
     vector<session_ptr> sessions_;                          ///< 所有活动会话
     mutable mutex sessions_mutex_;                          ///< 会话列表互斥锁
+    event_loop* loop_ = nullptr;                            ///< 事件循环指针
 
 public:
     websocket_server() = default;
-    ~websocket_server() = default;
+    ~websocket_server();
 
     websocket_server(const websocket_server&) = delete;
     websocket_server& operator=(const websocket_server&) = delete;
@@ -170,6 +173,7 @@ public:
      * @param session 要移除的会话
      */
     void remove_session(const session_ptr& session);
+    void stop();
 
     /**
      * @brief 向所有会话广播消息
@@ -177,6 +181,15 @@ public:
      * @param opcode 操作码（默认TEXT）
      */
     void broadcast(const string& data, websocket_opcode opcode = websocket_opcode::TEXT);
+
+    /**
+     * @brief 设置事件循环
+     * @param loop 事件循环指针
+     *
+     * 设置后，新创建的 WebSocket 会话将使用 event_loop 驱动 I/O。
+     * 设为 nullptr 则回退到线程模式。
+     */
+    void set_event_loop(event_loop* loop) noexcept { loop_ = loop; }
 
     /**
      * @brief 获取活动会话数量
@@ -223,9 +236,15 @@ private:
     atomic<bool> running_{false}; ///< 运行标志
     atomic_flag closed_once_;     ///< 防止重复关闭
 
-    thread read_thread_;      ///< 读线程
-    thread write_thread_;     ///< 写线程
-    thread heartbeat_thread_; ///< 心跳线程
+    thread read_thread_;      ///< 读线程（线程模式）
+    thread write_thread_;     ///< 写线程（线程模式）
+    thread heartbeat_thread_; ///< 心跳线程（线程模式）
+
+    event_loop* loop_ = nullptr;    ///< 事件循环指针
+    bool event_driven_ = false;     ///< 是否使用事件驱动模式
+    size_t heartbeat_timer_id_ = 0; ///< 心跳定时器ID
+    byte_vector read_buffer_;       ///< 非阻塞读取缓冲区
+    bool write_registered_ = false; ///< 是否已注册EPOLLOUT
 
     mutex write_mutex_;              ///< 写队列互斥锁
     condition_variable write_cv_;    ///< 写条件变量
@@ -238,6 +257,11 @@ private:
 
     atomic<bool> ping_pending_{false}; ///< 是否有待响应的Ping
     atomic<int64_t> last_pong_ms_{0};  ///< 最后收到Pong的时间
+
+    websocket_deflate_config deflate_config_;            ///< 协商后的deflate配置
+    unique_ptr<websocket_deflate> deflate_compressor_;   ///< 发送方向压缩器
+    unique_ptr<websocket_deflate> deflate_decompressor_; ///< 接收方向解压器
+    byte_vector deflate_fragment_buffer_;                ///< 分片消息压缩数据缓冲
 
     message_handler on_message_; ///< 消息回调
     close_handler on_close_;     ///< 关闭回调
@@ -256,8 +280,16 @@ private:
     void handle_close_frame(string payload);
 
     void heartbeat_loop();
+    void do_stop(websocket_status status, const string& reason, bool notify_server = true);
 
-    void do_stop(websocket_status status, const string& reason);
+    void start_event_driven();
+
+    void on_readable(int fd, uint32_t events);
+    void on_writable(int fd, uint32_t events);
+    void on_heartbeat_timer();
+
+    void flush_event_writes();
+    void try_parse_frames();
 
 public:
     /**
@@ -332,6 +364,39 @@ public:
      * @param handler 处理函数
      */
     void set_error_handler(error_handler handler) { on_error_ = _NEFORCE move(handler); }
+
+    /**
+     * @brief 设置permessage-deflate配置
+     * @param cfg 协商后的压缩配置
+     *
+     * 必须在 start() 之前调用。若 cfg.active 为 true，
+     * 则创建压缩/解压器用于消息的permessage-deflate处理。
+     */
+    void set_deflate_config(const websocket_deflate_config& cfg);
+
+    /**
+     * @brief 获取permessage-deflate协商配置
+     * @return 配置的常量引用
+     */
+    const websocket_deflate_config& deflate_config() const noexcept { return deflate_config_; }
+
+    /**
+     * @brief 检查是否已启用deflate压缩
+     * @return 启用返回true
+     */
+    bool has_deflate_config() const noexcept { return deflate_config_.active; }
+
+    /**
+     * @brief 设置事件循环（启用事件驱动模式）
+     * @param loop 事件循环指针
+     *
+     * 必须在 start() 之前调用。设置后会话将以事件驱动模式运行，
+     * 使用 event_loop 回调替代 3 个专用线程。
+     */
+    void set_event_loop(event_loop* loop) noexcept {
+        loop_ = loop;
+        event_driven_ = (loop != nullptr);
+    }
 
     /**
      * @brief 获取底层socket引用

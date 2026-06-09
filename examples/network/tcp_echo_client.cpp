@@ -9,7 +9,6 @@
  */
 
 #include <NeForce/core/system/console.hpp>
-#include <NeForce/core/string/format.hpp>
 #include <NeForce/network/tcp/tcp_client.hpp>
 
 using namespace neforce;

@@ -83,7 +83,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 | 组件                   | 遵循标准                                                                                                                                                                                                                                                                                                                                                                                                 | 说明                                                                           |
 |----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| **HTTP 与 WebSocket** | [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) / [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) (HTTP/1.1), [RFC 6265](https://www.rfc-editor.org/rfc/rfc6265.html) (Cookie), [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455.html) (WebSocket), [W3C Fetch CORS](https://fetch.spec.whatwg.org/#http-cors-protocol)                                                             | HTTP 语义与路由、Cookie 管理、CORS 跨域策略、WebSocket 升级与帧协议                              |
+| **HTTP 与 WebSocket** | [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) / [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) (HTTP/1.1), [RFC 7540](https://www.rfc-editor.org/rfc/rfc7540.html) / [RFC 7541](https://www.rfc-editor.org/rfc/rfc7541.html) (HTTP/2, HPACK), [RFC 6265](https://www.rfc-editor.org/rfc/rfc6265.html) (Cookie), [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455.html) / [RFC 7692](https://www.rfc-editor.org/rfc/rfc7692.html) (WebSocket, permessage-deflate), [RFC 6066](https://www.rfc-editor.org/rfc/rfc6066.html) (SNI), [W3C Fetch CORS](https://fetch.spec.whatwg.org/#http-cors-protocol) | HTTP/1.1 语义与路由、HTTP/2 帧层与 HPACK 头部压缩、Range 请求、响应压缩、CONNECT 隧道、Cookie 与 CSRF、CORS 跨域策略、WebSocket 升级/帧协议/permessage-deflate 压缩、SNI 多证书 |
 | **DNS 客户端**          | [RFC 1034](https://www.rfc-editor.org/rfc/rfc1034.html), [RFC 1035](https://www.rfc-editor.org/rfc/rfc1035.html), [RFC 2181](https://www.rfc-editor.org/rfc/rfc2181.html), [RFC 6891](https://www.rfc-editor.org/rfc/rfc6891.html), [RFC 3596](https://www.rfc-editor.org/rfc/rfc3596.html), [RFC 2782](https://www.rfc-editor.org/rfc/rfc2782.html)                                                 | DNS 协议客户端，A/AAAA/MX/SRV/PTR 记录查询、UDP/TCP 传输自动切换与 TTL 缓存管理                    |
 | **ICMP 协议**          | [RFC 792](https://www.rfc-editor.org/rfc/rfc792.html) (STD 5), [RFC 1122](https://www.rfc-editor.org/rfc/rfc1122.html), [RFC 4884](https://www.rfc-editor.org/rfc/rfc4884.html), [IANA ICMP 参数注册表](https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml)                                                                                                                           | Ping (Echo Request/Reply) 与 Traceroute (Time Exceeded) 网络诊断，含 RFC 1071 校验和算法 |
 | **SMTP 协议**          | [RFC 5321](https://www.rfc-editor.org/rfc/rfc5321.html) (STD 10), [RFC 5322](https://www.rfc-editor.org/rfc/rfc5322.html), [RFC 3207](https://www.rfc-editor.org/rfc/rfc3207.html) (STARTTLS), [RFC 8314](https://www.rfc-editor.org/rfc/rfc8314.html) (隐式 TLS), [RFC 4954](https://www.rfc-editor.org/rfc/rfc4954.html) (AUTH), [RFC 2045–2047](https://www.rfc-editor.org/rfc/rfc2045.html) (MIME) | 邮件传输与消息格式，支持 PLAIN/LOGIN 认证、STARTTLS/隐式 TLS 加密及 MIME 多部分消息                   |
@@ -154,6 +154,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 ## 🚀 特性
 
 ### 🔄 并发与异步 (Async)
+- **`event_loop`** - Linux epoll 边缘触发事件循环，min-heap 定时器，fd 注册/回调驱动
 - **`thread_pool`** - 基于任务窃取的多策略线程池
 - **`timer_scheduler`/`basic_timer`** - 基于红黑树的定时任务调度
 - **`generator`/`task`** - 协程原语和任务生成器
@@ -173,6 +174,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`hashtable`** - 开放寻址哈希表
 - **`bloom_filter`** - 概率性数据结构
 - **`lru_cache`/`ttl_cache`** - 基于最近最少使用/过期时间的缓存策略
+- **`buffer_chain`** - 零拷贝链式缓冲区，支持 writev 聚合输出
 - **`bitmap`/`bitset`** - 高效位操作容器
 
 ### 🔐 加密与安全 (Encrypt)
@@ -188,10 +190,17 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`temp_file`** - 安全的临时文件管理
 
 ### 🌐 网络库 (Network)
-- **WebSocket** - 全双工通信协议 `websocket_session` / `websocket_server`
+- **HTTP/1.1 服务器** - 完整协议实现：`http_server` / `http_router` / `http_filter` 中间件链
+- **HTTP/2 支持** - 帧层与 HPACK 头部压缩（RFC 7540/7541），9 种帧类型，流状态机，流量控制
+- **Radix Tree 路由** - 基于压缩前缀树的 O(k) 路由匹配，支持静态路径、:param 参数、* 通配符、正则回退
+- **HTTP 高级特性** - Range 请求（206 单/多范围）、gzip/deflate 响应压缩、Chunked 分块传输、CONNECT 隧道
+- **会话管理** - 可插拔 session_store（内存/Redis），CSRF Double-Submit Cookie 防护，Session Fixation 防护
+- **WebSocket** - RFC 6455/7692 全双工通信 `websocket_session` / `websocket_server`，事件驱动零线程模式
+- **WebSocket 压缩** - permessage-deflate（RFC 7692），窗口比特位协商与上下文接管控制
+- **HTTP 客户端** - `http_client` 请求/响应处理
 - **TCP/UDP 套接字** - 高性能网络通信 `tcp_socket` / `udp_socket`
-- **SSL/TLS** - 加密网络传输 `ssl_context` / `ssl_stream`
-- **HTTP 客户端/服务器** - HTTP 协议实现，包含路由器、过滤器 `http_filter` / `http_router` / `http_server` / `http_client`
+- **SSL/TLS** - 加密网络传输 `ssl_context` / `ssl_stream`，SNI 多证书管理 `sni_manager`
+- **Event Loop** - Linux epoll 边缘触发，min-heap 定时器，异步 I/O 回调驱动
 - **`dns_client`** - 域名解析
 - **FTP** - FTP 服务器与客户端
 - **ICMP/SMTP** - ICMP 和 SMTP 协议操作

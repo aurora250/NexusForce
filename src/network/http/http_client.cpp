@@ -337,9 +337,7 @@ optional<http_client_response> http_client::read_response(time_point& receive_st
     }
 }
 
-bool http_client::ensure_connected(const string& host, const ports port) {
-    const bool is_https = client_.has_ssl_context();
-
+bool http_client::ensure_connected(const string& host, const ports port, bool use_ssl) {
     if (client_.is_connected()) {
         if (client_.connected_host() == host && client_.connected_port() == port) {
             return true;
@@ -348,7 +346,7 @@ bool http_client::ensure_connected(const string& host, const ports port) {
     }
 
     try {
-        if (is_https) {
+        if (use_ssl) {
             client_.set_sni_hostname(host);
         }
         return client_.connect(host, port);
@@ -364,14 +362,24 @@ http_client_response http_client::do_request(http_client_request request, int re
     http_client_response response;
     const auto start_time = steady_clock::now();
 
+    const bool need_ssl = (request.scheme == "https");
+    if (need_ssl && !client_.has_ssl_context()) {
+        if (client_.is_connected()) {
+            client_.disconnect();
+        }
+        ssl_context ctx(ssl_method::TLS_CLIENT);
+        client_.set_verify_peer(config_.verify_ssl);
+        client_.set_ssl_context(move(ctx));
+    }
+
     url req_url;
-    req_url.scheme = client_.has_ssl_context() ? "https" : "http";
+    req_url.scheme = request.scheme;
     req_url.host = request.host;
     req_url.port = request.port;
     req_url.path = request.path;
 
     const auto connect_start = steady_clock::now();
-    if (!ensure_connected(request.host, request.port)) {
+    if (!ensure_connected(request.host, request.port, need_ssl)) {
         response.status = http_status::S5_INTERNAL_SERVER_ERROR;
         response.status_message = "Connection failed";
         response.effective_url = req_url.to_string();
@@ -554,16 +562,14 @@ config_(move(config)) {
 
 void http_client::set_ssl_context(ssl_context ctx) { client_.set_ssl_context(move(ctx)); }
 
-void http_client::set_verify_ssl(const bool verify) {
-    config_.verify_ssl = verify;
-    client_.set_verify_peer(verify);
-}
+void http_client::set_verify_ssl(const bool verify) { config_.verify_ssl = verify; }
 
 http_client_response http_client::get(const string& url, const unordered_map<string, string>& headers) {
     _NEFORCE url parsed_url{url::parse(url.view())};
 
     http_client_request req;
     req.host = parsed_url.host;
+    req.scheme = parsed_url.scheme;
     req.port = ports::parse(parsed_url.scheme.view());
     req.method = http_method::GET();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
@@ -583,6 +589,7 @@ http_client_response http_client::post(const string& url, const string& body, co
 
     http_client_request req;
     req.host = parsed_url.host;
+    req.scheme = parsed_url.scheme;
     req.port = ports::parse(parsed_url.scheme.view());
     req.method = http_method::POST();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
@@ -617,6 +624,7 @@ http_client_response http_client::put(const string& url, const string& body, con
 
     http_client_request req;
     req.host = parsed_url.host;
+    req.scheme = parsed_url.scheme;
     req.port = ports::parse(parsed_url.scheme.view());
     req.method = http_method::PUT();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
@@ -637,6 +645,7 @@ http_client_response http_client::del(const string& url, const unordered_map<str
 
     http_client_request req;
     req.host = parsed_url.host;
+    req.scheme = parsed_url.scheme;
     req.port = ports::parse(parsed_url.scheme.view());
     req.method = http_method::DELETE();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
@@ -655,6 +664,7 @@ http_client_response http_client::head(const string& url, const unordered_map<st
 
     http_client_request req;
     req.host = parsed_url.host;
+    req.scheme = parsed_url.scheme;
     req.port = ports::parse(parsed_url.scheme.view());
     req.method = http_method::HEAD();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
@@ -673,6 +683,7 @@ http_client_response http_client::options(const string& url, const unordered_map
 
     http_client_request req;
     req.host = parsed_url.host;
+    req.scheme = parsed_url.scheme;
     req.port = ports::parse(parsed_url.scheme.view());
     req.method = http_method::OPTIONS();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;
@@ -693,6 +704,7 @@ http_client_response http_client::patch(const string& url, const string& body, c
 
     http_client_request req;
     req.host = parsed_url.host;
+    req.scheme = parsed_url.scheme;
     req.port = ports::parse(parsed_url.scheme.view());
     req.method = http_method::PATCH();
     req.path = parsed_url.path.empty() ? "/" : parsed_url.path;

@@ -2878,6 +2878,24 @@ public:
     }
 
     /**
+     * @brief 转换为小写
+     */
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string lowercase() const {
+        basic_string tmp(*this);
+        _NEFORCE transform(tmp.begin(), tmp.end(), tmp.begin(), _NEFORCE to_lowercase<CharT>);
+        return move(tmp);
+    }
+
+    /**
+     * @brief 转换为大写
+     */
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 basic_string uppercase() const {
+        basic_string tmp(*this);
+        _NEFORCE transform(tmp.begin(), tmp.end(), tmp.begin(), _NEFORCE to_uppercase<CharT>);
+        return move(tmp);
+    }
+
+    /**
      * @brief 交换两个字符串
      * @param other 另一个字符串
      */

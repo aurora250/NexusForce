@@ -94,7 +94,7 @@ int main() {
         auto response = client.get("https://httpbin.org/json");
         printfln("Status: {}", static_cast<uint16_t>(response.status));
         if (response.is_success()) {
-            printfln("Body: {}", response.body.view(0, 200));
+            printfln("Body: {}", response.body.head(200), "...");
         }
     }
 

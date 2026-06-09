@@ -410,7 +410,7 @@ const tcp_socket& tcp_client_base::socket() const {
 
 bool ssl_client::post_connect() {
     if (!ssl_ctx_) {
-        ssl_ctx_ = ssl_context(ssl_method::TLS_CLIENT);
+        return true;
     }
     ssl_ctx_->set_verify_mode(verify_peer_ ? SSL_VERIFY_PEER : SSL_VERIFY_NONE);
 

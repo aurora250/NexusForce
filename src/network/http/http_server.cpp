@@ -1,8 +1,18 @@
 #include <NeForce/core/encrypt/base64.hpp>
 #include <NeForce/core/encrypt/sha1.hpp>
+#include <NeForce/core/numeric/random.hpp>
 #include <NeForce/core/utility/hexadecimal.hpp>
+#include <NeForce/core/utility/scope.hpp>
 #include <NeForce/network/http/http_server.hpp>
+#include <NeForce/network/http/http2_connection.hpp>
+#include <NeForce/network/ssl/ssl_socket.hpp>
+#include <NeForce/network/tcp/tcp_client.hpp>
 #include <NeForce/network/util/url.hpp>
+#ifdef NEFORCE_PLATFORM_LINUX
+#    include <poll.h>
+#    include <sys/uio.h>
+#endif
+#include <cerrno>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
@@ -30,7 +40,7 @@ namespace {
         return base64_encode(cbyte_view{reinterpret_cast<const byte_t*>(sha1_result.data()), sha1_result.size()});
     }
 
-    string decode_chunked_body(const string_view chunked_data) {
+    string decode_chunked_body(const string_view chunked_data, unordered_map<string, string>* trailers_out = nullptr) {
         string decoded;
         size_t pos = 0;
 
@@ -53,15 +63,35 @@ namespace {
             pos = line_end + 2;
 
             if (chunk_size == 0) {
-                while (pos < chunked_data.size()) {
-                    size_t trailer_end = chunked_data.find("\r\n", pos);
-                    if (trailer_end == string::npos || trailer_end == pos) {
-                        if (trailer_end == pos) {
-                            pos = trailer_end + 2;
+                if (trailers_out != nullptr) {
+                    while (pos < chunked_data.size()) {
+                        size_t trailer_end = chunked_data.find("\r\n", pos);
+                        if (trailer_end == string::npos || trailer_end == pos) {
+                            if (trailer_end == pos) {
+                                pos = trailer_end + 2;
+                            }
+                            break;
                         }
-                        break;
+                        string_view trailer_line = chunked_data.view(pos, trailer_end - pos);
+                        size_t colon = trailer_line.find(':');
+                        if (colon != string_view::npos) {
+                            string key(trailer_line.view(0, colon).trim());
+                            string val(trailer_line.view(colon + 1).trim());
+                            (*trailers_out)[move(key)] = move(val);
+                        }
+                        pos = trailer_end + 2;
                     }
-                    pos = trailer_end + 2;
+                } else {
+                    while (pos < chunked_data.size()) {
+                        size_t trailer_end = chunked_data.find("\r\n", pos);
+                        if (trailer_end == string::npos || trailer_end == pos) {
+                            if (trailer_end == pos) {
+                                pos = trailer_end + 2;
+                            }
+                            break;
+                        }
+                        pos = trailer_end + 2;
+                    }
                 }
                 break;
             }
@@ -88,17 +118,16 @@ namespace {
         }
     }
 
+    string generate_session_id() {
+        string str;
+        str.reserve(32);
+        for (int i = 0; i < 32; ++i) {
+            str += format("{:x}", secret::next_int<uint32_t>(16));
+        }
+        return move(str);
+    }
 } // namespace
 
-
-string http_server::session_manager::generate_session_id() {
-    string str;
-    str.reserve(32);
-    for (int i = 0; i < 32; ++i) {
-        str += format("{:x}", rand_.next_int(0, 15));
-    }
-    return move(str);
-}
 
 http_server::session_manager::session_manager() :
 cleanup_running_(true) {
@@ -192,7 +221,27 @@ void http_server::session_manager::set_max_sessions(const size_t max) noexcept {
 
 http_request http_server::parse_request(tcp_socket* client_socket, session_manager& manager,
                                         const http_cookie_name& name, const byte_size max_header_size,
-                                        const byte_size max_body_size) {
+                                        const byte_size max_body_size, const size_t max_header_count,
+                                        const milliseconds body_read_timeout) {
+
+    const int sock_fd = static_cast<int>(client_socket->native_handle());
+    timeval original_timeout = {};
+    bool timeout_modified = false;
+
+    if (body_read_timeout.count() > 0) {
+        socklen_t optlen = sizeof(original_timeout);
+        if (::getsockopt(sock_fd, SOL_SOCKET, SO_RCVTIMEO, &original_timeout, &optlen) == 0) {
+            timeout_modified = true;
+        }
+        const timeval tv{body_read_timeout.count() / 1000, (body_read_timeout.count() % 1000) * 1000};
+        ::setsockopt(sock_fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
+    }
+
+    scope_exit restore_timeout([&] {
+        if (timeout_modified) {
+            ::setsockopt(sock_fd, SOL_SOCKET, SO_RCVTIMEO, &original_timeout, sizeof(original_timeout));
+        }
+    });
 
     string request_data;
     char buffer[8192];
@@ -206,6 +255,14 @@ http_request http_server::parse_request(tcp_socket* client_socket, session_manag
 
         const size_t header_end = request_data.find("\r\n\r\n");
         if (header_end != string::npos) {
+            bool expect_continue = false;
+            {
+                string expect_val;
+                if (parse_header_value_ci(request_data, "expect:", header_end, expect_val)) {
+                    expect_continue = expect_val.lowercase() == "100-continue";
+                }
+            }
+
             size_t content_length = 0;
 
             string cl_value;
@@ -224,6 +281,11 @@ http_request http_server::parse_request(tcp_socket* client_socket, session_manag
             }
 
             const size_t body_start = header_end + 4;
+
+            if (expect_continue && (content_length > 0 || is_chunked) && content_length <= max_body_size.bytes()) {
+                static constexpr string_view continue_resp = "HTTP/1.1 100 Continue\r\n\r\n";
+                client_socket->send_all(memory_view<const char>(continue_resp.data(), continue_resp.size()));
+            }
 
             if (is_chunked) {
                 if (request_data.size() - body_start > max_body_size.bytes()) {
@@ -277,6 +339,11 @@ http_request http_server::parse_request(tcp_socket* client_socket, session_manag
     }
 
     http_request request = http_request::parse(request_data.view());
+
+    if (max_header_count > 0 && request.headers.size() > max_header_count) {
+        NEFORCE_THROW_EXCEPTION(http_exception("Too many request headers"));
+    }
+
     parse_parameters(request);
 
     const string& session_id = request.cookie(name.cookie_name());
@@ -308,9 +375,38 @@ http_session* http_server::get_or_create_session(http_request& request, const bo
 }
 
 void send_response(tcp_socket* client_socket, const http_response& response) {
-    string res_str = response.to_string();
-    // NOLINTNEXTLINE(clang-analyzer-cplusplus.Move)
-    client_socket->send_all(memory_view<const char>(res_str.data(), res_str.size()));
+    const string header = response.build_header_string();
+
+#ifdef NEFORCE_PLATFORM_LINUX
+    if (!client_socket->is_ssl() && response.redirect_url.empty() && !response.body.empty()) {
+        ::iovec iov[2];
+        iov[0].iov_base = const_cast<char*>(header.data());
+        iov[0].iov_len = header.size();
+        iov[1].iov_base = const_cast<char*>(response.body.data());
+        iov[1].iov_len = response.body.size();
+
+        while (iov[0].iov_len > 0) {
+            const ssize_t n = ::writev(client_socket->native_handle(), iov, 2);
+            if (n <= 0) {
+                NEFORCE_THROW_EXCEPTION(socket_exception("send_response writev failed"));
+            }
+            auto written = static_cast<size_t>(n);
+            if (written >= iov[0].iov_len) {
+                written -= iov[0].iov_len;
+                iov[0].iov_len = 0;
+                iov[1].iov_base = static_cast<char*>(iov[1].iov_base) + written;
+                iov[1].iov_len -= written;
+            } else {
+                iov[0].iov_base = static_cast<char*>(iov[0].iov_base) + written;
+                iov[0].iov_len -= written;
+            }
+        }
+        return;
+    }
+#endif
+
+    const string data = header + response.body;
+    client_socket->send_all(memory_view<const char>(data.data(), data.size()));
 }
 
 void add_session_cookie(const http_request& request, http_response& response, http_session* session,
@@ -356,55 +452,237 @@ void send_error_response(tcp_socket* client_socket, const http_status status, co
 }
 
 void http_server::handle_client(unique_ptr<tcp_socket> client_socket) {
-    try {
-        http_request request = parse_request(client_socket.get(), session_manager_, cookie_name_,
-                                             max_server_header_size, max_server_body_size);
+    static constexpr size_t max_keep_alive_requests = 100;
 
-        if (client_socket->is_ssl()) {
-            request.set_header(http_key::X_Forwarded_Proto(), "https");
+    string client_ip;
+    if (max_connections_per_ip > 0) {
+        const auto endpoint = client_socket->remote_endpoint();
+        if (endpoint.has_value()) {
+            client_ip = endpoint.value().to_string();
+            lock<mutex> lk(conn_mutex_);
+            if (conn_per_ip_[client_ip] >= max_connections_per_ip) {
+                return;
+            }
+            ++conn_per_ip_[client_ip];
         }
+    }
 
-        if (enable_websocket && try_websocket_upgrade(client_socket, request)) {
+    auto ip_cleanup = scope_exit([&]() noexcept {
+        if (client_ip.empty()) {
             return;
         }
+        lock<mutex> lk(conn_mutex_);
+        auto it = conn_per_ip_.find(client_ip);
+        if (it != conn_per_ip_.end() && --it->second == 0) {
+            conn_per_ip_.erase(it);
+        }
+    });
 
-        http_session* sess = get_or_create_session(request, true, session_manager_, cookie_name_);
-        // NOLINTNEXTLINE(clang-analyzer-cplusplus.Move)
-        handle_request_with_forward(*client_socket, request, sess);
-    } catch (const http_exception& e) {
-        send_error_response(client_socket.get(), http_status::S4_BAD_REQUEST, e.what());
-    } catch (const exception& e) {
-        send_error_response(client_socket.get(), http_status::S5_INTERNAL_SERVER_ERROR, e.what());
-    } catch (...) {
-        send_error_response(client_socket.get(), http_status::S5_INTERNAL_SERVER_ERROR, "Unknown internal error");
+    // ALPN h2 detection: If the TLS handshake is agreed to h2, the HTTP/2 connection is directly initiated
+    if (client_socket->is_ssl()) {
+        auto* ssl_sock = dynamic_cast<ssl_socket*>(client_socket.get());
+        if (ssl_sock != nullptr) {
+            string alpn = ssl_sock->get_alpn_negotiated();
+            if (alpn == "h2") {
+                auto loop = make_shared<event_loop>();
+                auto conn = make_shared<http2_connection>(move(client_socket), loop);
+                conn->set_router(&router_);
+                conn->start();
+                thread t([loop]() { loop->run(); });
+                {
+                    lock<mutex> lk(h2c_mutex_);
+                    h2c_loops_.push_back(loop);
+                    h2c_threads_.push_back(move(t));
+                }
+                return;
+            }
+        }
+    }
+
+    bool keep_alive = true;
+    for (size_t req_count = 0; req_count < max_keep_alive_requests && keep_alive; ++req_count) {
+        try {
+            http_request request =
+                    parse_request(client_socket.get(), session_manager_, cookie_name_, max_server_header_size,
+                                  max_server_body_size, max_header_count, body_read_timeout);
+
+            if (client_socket->is_ssl()) {
+                request.set_header(http_key::X_Forwarded_Proto(), "https");
+            }
+
+            if (enable_connect && request.method.is_connect()) {
+                handle_connect(move(client_socket), request);
+                return;
+            }
+
+            if (try_upgrade(client_socket, request)) {
+                return;
+            }
+
+            http_session* sess = get_or_create_session(request, true, session_manager_, cookie_name_);
+            // NOLINTNEXTLINE(clang-analyzer-cplusplus.Move)
+            handle_request_with_forward(*client_socket, request, sess);
+
+            keep_alive = request.is_keep_alive();
+        } catch (const http_exception& e) {
+            send_error_response(client_socket.get(), http_status::S4_BAD_REQUEST, e.what());
+            keep_alive = false;
+        } catch (const exception& e) {
+            send_error_response(client_socket.get(), http_status::S5_INTERNAL_SERVER_ERROR, e.what());
+            keep_alive = false;
+        } catch (...) {
+            send_error_response(client_socket.get(), http_status::S5_INTERNAL_SERVER_ERROR, "Unknown internal error");
+            keep_alive = false;
+        }
     }
 }
 
-bool http_server::try_websocket_upgrade(unique_ptr<tcp_socket>& client_socket, http_request& request) {
-    string upgrade = request.header("Upgrade");
-    string connection = request.header("Connection");
+bool http_server::try_upgrade(unique_ptr<tcp_socket>& client_socket, http_request& request) {
+    const string upgrade = request.header("Upgrade");
+    const string connection = request.header("Connection");
 
-    if (upgrade.lowercase() != "websocket" || !connection.lowercase().contains("upgrade")) {
+    if (upgrade.empty() || !connection.lowercase().contains("upgrade")) {
         return false;
     }
 
-    const string_view key = request.header("Sec-WebSocket-Key");
-    if (key.empty()) {
-        return false;
+    {
+        const string proto_lower = upgrade.lowercase();
+        auto it = upgrade_handlers_.find(string(proto_lower));
+        if (it != upgrade_handlers_.end() && it->second) {
+            if (it->second(request, client_socket.get())) {
+                static_cast<void>(client_socket.release());
+                return true;
+            }
+            return false;
+        }
     }
 
-    string accept = compute_websocket_accept(key);
+    if (enable_websocket) {
+        const string upgrade_lower = upgrade.lowercase();
+        if (upgrade_lower == "websocket") {
+            const string_view key = request.header("Sec-WebSocket-Key");
+            if (key.empty()) {
+                return false;
+            }
 
-    http_response upgrade_response;
-    upgrade_response.status = http_status::S1_SWITCHING_PROTOCOLS;
-    upgrade_response.status_message = "Switching Protocols";
-    upgrade_response.set_header("Upgrade", "websocket");
-    upgrade_response.set_header("Connection", "Upgrade");
-    upgrade_response.set_header("Sec-WebSocket-Accept", move(accept));
+            string accept = compute_websocket_accept(key);
 
-    send_response(client_socket.get(), upgrade_response);
+            http_response upgrade_response;
+            upgrade_response.status = http_status::S1_SWITCHING_PROTOCOLS;
+            upgrade_response.status_message = "Switching Protocols";
+            upgrade_response.set_header("Upgrade", "websocket");
+            upgrade_response.set_header("Connection", "Upgrade");
+            upgrade_response.set_header("Sec-WebSocket-Accept", move(accept));
 
-    return ws_server_.handle_upgrade(request, move(client_socket));
+            const string_view ws_extensions = request.header("Sec-WebSocket-Extensions");
+#ifdef NEFORCE_SUPPORT_ZLIB
+            if (!ws_extensions.empty()) {
+                const auto deflate_cfg = websocket_deflate_config::negotiate(ws_extensions);
+                if (deflate_cfg.active) {
+                    upgrade_response.set_header("Sec-WebSocket-Extensions", deflate_cfg.to_response_header());
+                }
+            }
+#endif
+
+            send_response(client_socket.get(), upgrade_response);
+
+            return ws_server_.handle_upgrade(request, move(client_socket));
+        }
+    }
+
+    http_response not_impl;
+    not_impl.status = http_status::S5_NOT_IMPLEMENTED;
+    not_impl.status_message = "Not Implemented";
+    not_impl.set_content_type(http_content::PLAIN_TEXT());
+    not_impl.body = "Unsupported upgrade protocol";
+    send_response(client_socket.get(), not_impl);
+    return true;
+}
+
+void http_server::handle_connect(const unique_ptr<tcp_socket>& client_socket, http_request& request) {
+    const string_view path = request.path.view();
+    size_t colon = path.find(':');
+    if (colon == string_view::npos) {
+        send_error_response(client_socket.get(), http_status::S4_BAD_REQUEST, "Invalid CONNECT target");
+        return;
+    }
+
+    const string host(path.view(0, colon));
+    const string_view port_str(path.view(colon + 1));
+    uint16_t port_num = 0;
+    try {
+        port_num = static_cast<uint16_t>(uinteger64::parse(port_str).value());
+    } catch (...) {
+        send_error_response(client_socket.get(), http_status::S4_BAD_REQUEST, "Invalid port in CONNECT target");
+        return;
+    }
+
+    tcp_client tunnel;
+    tunnel.set_connect_timeout(milliseconds(10000));
+    if (!tunnel.connect(host, ports{port_num})) {
+        send_error_response(client_socket.get(), http_status::S5_BAD_GATEWAY, "Failed to connect to tunnel target");
+        return;
+    }
+
+    http_response established;
+    established.version = request.version;
+    established.status = http_status::S2_OK;
+    established.status_message = "Connection Established";
+    send_response(client_socket.get(), established);
+
+    const int client_fd = static_cast<int>(client_socket->native_handle());
+    const int tunnel_fd = static_cast<int>(tunnel.socket().native_handle());
+
+    client_socket->set_nonblocking(true);
+    tunnel.socket().set_nonblocking(true);
+
+    char buffer[8192];
+    bool client_open = true;
+    bool tunnel_open = true;
+
+    while (client_open && tunnel_open) {
+        pollfd fds[2];
+        int nfds = 0;
+
+        if (client_open) {
+            fds[nfds].fd = client_fd;
+            fds[nfds].events = POLLIN;
+            fds[nfds].revents = 0;
+            nfds++;
+        }
+        if (tunnel_open) {
+            fds[nfds].fd = tunnel_fd;
+            fds[nfds].events = POLLIN;
+            fds[nfds].revents = 0;
+            nfds++;
+        }
+
+        const int ret = ::poll(fds, nfds, -1);
+        if (ret < 0) {
+            if (errno == EINTR) {
+                continue;
+            }
+            break;
+        }
+
+        for (int i = 0; i < nfds; ++i) {
+            if ((fds[i].revents & POLLIN) == 0) {
+                continue;
+            }
+
+            const bool from_client = (fds[i].fd == client_fd);
+            tcp_socket& src = from_client ? *client_socket : tunnel.socket();
+            tcp_socket& dst = from_client ? tunnel.socket() : *client_socket;
+            bool& src_open = from_client ? client_open : tunnel_open;
+
+            const ssize_t n = src.receive(memory_view<char>(buffer));
+            if (n <= 0) {
+                src_open = false;
+                continue;
+            }
+            dst.send_all(memory_view<const char>(buffer, n));
+        }
+    }
 }
 
 void http_server::handle_request_with_forward(tcp_socket& client_socket, http_request& request, http_session* sess) {
@@ -437,15 +715,75 @@ void http_server::handle_request_with_forward(tcp_socket& client_socket, http_re
 http_server::http_server(ports port, size_t worker_count) :
 server_(make_unique<tcp_server>(port, worker_count)) {
     server_->set_client_handler([this](unique_ptr<tcp_socket> sock) { this->handle_client(move(sock)); });
+
+    set_upgrade_handler("h2c", [this](http_request& request, tcp_socket* sock) -> bool {
+        const string_view settings_b64 = request.header("HTTP2-Settings");
+        if (settings_b64.empty()) {
+            return false;
+        }
+
+        {
+            lock<mutex> lk(h2c_mutex_);
+            if (h2c_loops_.size() >= max_h2c_upgrades) {
+                return false;
+            }
+        }
+
+        http_response upgrade_resp;
+        upgrade_resp.version = request.version;
+        upgrade_resp.status = http_status::S1_SWITCHING_PROTOCOLS;
+        upgrade_resp.status_message = "Switching Protocols";
+        upgrade_resp.set_header("Connection", "Upgrade");
+        upgrade_resp.set_header("Upgrade", "h2c");
+        send_response(sock, upgrade_resp);
+
+        auto loop = make_shared<event_loop>();
+        auto conn = make_shared<http2_connection>(unique_ptr<tcp_socket>(sock), loop);
+        conn->set_router(&router_);
+        conn->start();
+        thread t([loop, conn]() { loop->run(); });
+        {
+            lock<mutex> lk(h2c_mutex_);
+            h2c_loops_.push_back(loop);
+            h2c_threads_.push_back(move(t));
+        }
+
+        // RFC 7540 §3.2: after h2c upgraded，raw HTTP/1.1 request will be regarded as the HEADERS frame of stream 1
+        http_response h2_resp = router_.handle_request(request);
+        vector<hpack_header_field> resp_headers;
+        resp_headers.push_back({":status", to_string(static_cast<uint16_t>(h2_resp.status))});
+        for (const auto& h: h2_resp.headers) {
+            resp_headers.push_back({h.first.lowercase(), h.second});
+        }
+        conn->send_response(1, resp_headers, h2_resp.body, true);
+
+        return true;
+    });
 }
 
 http_server::http_server(ports port, ssl_context ctx, size_t worker_count) :
 server_(make_unique<ssl_server>(port, worker_count)) {
     auto* ssl_srv = dynamic_cast<ssl_server*>(server_.get());
     if (ssl_srv != nullptr) {
+        ctx.set_alpn_protos({"h2", "http/1.1"});
         ssl_srv->set_ssl_context(move(ctx));
     }
     server_->set_client_handler([this](unique_ptr<tcp_socket> sock) { this->handle_client(move(sock)); });
+}
+
+http_server::~http_server() {
+    server_->stop();
+    {
+        lock<mutex> lk(h2c_mutex_);
+        for (auto& loop: h2c_loops_) {
+            loop->stop();
+        }
+    }
+    for (auto& t: h2c_threads_) {
+        if (t.joinable()) {
+            t.join();
+        }
+    }
 }
 
 bool http_server::load_certificate(const string& cert_file, const string& key_file) {

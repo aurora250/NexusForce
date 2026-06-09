@@ -153,6 +153,11 @@ void logger::disable_async() {
 
     drain_scheduled_.store(false, memory_order_release);
     async_.store(false, memory_order_release);
+
+    // Release worker threads and its TLS resources
+    if (thread_pool_ && thread_pool_->running()) {
+        thread_pool_->stop();
+    }
 }
 
 void logger::enqueue_async(log_event&& event) {
@@ -194,6 +199,11 @@ void logger::submit_drain() {
 }
 
 void logger::drain_events() {
+    if (!async_.load(memory_order_acquire)) {
+        drain_scheduled_.store(false, memory_order_release);
+        return;
+    }
+
     vector<log_event> events;
     bool should_flush = false;
 

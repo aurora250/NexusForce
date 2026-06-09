@@ -49,6 +49,17 @@ NEFORCE_BEGIN_HTTP__
  * - **IETF RFC 9112**：HTTP/1.1（消息语法与路由）
  *   https://www.rfc-editor.org/rfc/rfc9112.html
  *
+ * **HTTP/2 核心协议：**
+ * - **IETF RFC 7540**：HTTP/2（帧层、流、连接管理）
+ *   https://www.rfc-editor.org/rfc/rfc7540.html
+ * - **IETF RFC 7541**：HPACK（HTTP/2 头部压缩算法）
+ *   https://www.rfc-editor.org/rfc/rfc7541.html
+ *
+ * **HTTP 扩展能力：**
+ * - **IETF RFC 9110 §8**：内容编码协商（Accept-Encoding / Content-Encoding）
+ * - **IETF RFC 9110 §14**：字节范围请求（Range / Content-Range / 206 Partial Content）
+ * - **IETF RFC 9110 §9.3.6**：CONNECT 方法（TCP 隧道代理）
+ *
  * **HTTP 状态码与头字段注册：**
  * - **IANA HTTP Status Code Registry**：HTTP 状态码注册表
  *   https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
@@ -59,6 +70,14 @@ NEFORCE_BEGIN_HTTP__
  * - **IETF RFC 9110 §11**：HTTP 认证框架
  * - **IETF RFC 6797**：HTTP Strict Transport Security (HSTS)
  *   https://www.rfc-editor.org/rfc/rfc6797.html
+ * - **CSRF 防护**：Double-Submit Cookie 模式（防御跨站请求伪造攻击）
+ * - **Session Fixation 防护**：会话标识符再生（regenerate_id）
+ *
+ * **TLS / SNI 安全传输：**
+ * - **IETF RFC 6066 §3**：Server Name Indication（TLS 扩展）
+ *   https://www.rfc-editor.org/rfc/rfc6066.html
+ * - **IETF RFC 8446 §4.4.2**：TLS 1.3 中的 SNI 支持
+ *   https://www.rfc-editor.org/rfc/rfc8446.html
  *
  * **Cookie 与会话管理：**
  * - **IETF RFC 6265**：HTTP State Management Mechanism（Cookie 规范）
@@ -72,6 +91,8 @@ NEFORCE_BEGIN_HTTP__
  * **WebSocket 协议：**
  * - **IETF RFC 6455**：The WebSocket Protocol
  *   https://www.rfc-editor.org/rfc/rfc6455.html
+ * - **IETF RFC 7692**：WebSocket Per-Message Deflate 扩展（permessage-deflate）
+ *   https://www.rfc-editor.org/rfc/rfc7692.html
  *
  * **MIME 类型规范：**
  * - **IANA Media Types Registry**：MIME 类型注册表
@@ -161,25 +182,38 @@ NEFORCE_BEGIN_HTTP__
  * @section implementation_details 实现细节
  * | 特性              | 规范参数                                  |
  * |-------------------|-------------------------------------------|
- * | HTTP 版本         | HTTP/1.1（RFC 9112）                      |
- * | 头部字段大小写    | 不区分大小写，存储为原始大小写            |
- * | Cookie 解析       | 支持 Set-Cookie 和 Cookie 头              |
- * | 会话标识符        | 支持 JESSIONID, SESSIONID, PHPSESSID 等常见名称 |
- * | 路由匹配          | 支持静态路径、路径参数（:id）、通配符（*）、正则表达式 |
- * | 中间件执行顺序    | 预过滤 → 核心过滤 → 路由处理 → 后过滤     |
- * | WebSocket 心跳    | 周期性发送 Ping 帧，等待 Pong 响应        |
+ * | HTTP 版本         | HTTP/1.1（RFC 9112）与 HTTP/2（RFC 7540） |
+ * | HTTP/2 帧层       | 9 种帧类型：DATA / HEADERS / SETTINGS / PING / GOAWAY / RST_STREAM / WINDOW_UPDATE / PRIORITY /
+ * PUSH_PROMISE | | HPACK 头部压缩    | 静态表 61 项 + 动态表 + Huffman 编码（RFC 7541） | | 头部字段大小写    |
+ * 不区分大小写，存储为原始大小写            | | 分块传输编码      | 流式增量 chunked 解析，支持 Trailing Headers | |
+ * 内容协商          | Accept-Encoding 解析，gzip/deflate 响应压缩 | | 字节范围请求      | 单范围 206 与多范围
+ * multipart/byteranges 206 | | CONNECT 隧道      | 双工 TCP 隧道中继，用于 HTTPS 代理       | | 路由匹配          |
+ * 基于 Segment Radix Tree 的 O(k) 前缀匹配   | | 静态路径、路径参数（:id）、通配符（*）、正则表达式回退 | |
+ * 中间件执行顺序    | 预过滤 → 核心过滤 → 路由处理 → 后过滤     | | 会话存储          | 可插拔 session_store（内存 /
+ * Redis 后端） | | Cookie 解析       | 支持 Set-Cookie 和 Cookie 头              | | 会话标识符        | 支持
+ * JESSIONID, SESSIONID, PHPSESSID 等常见名称 | | CSRF 防护         | Double-Submit Cookie 模式，仅验证状态变更方法 | |
+ * SNI 多证书        | 基于 TLS SNI 扩展的 hostname → SSL_CTX 映射，支持通配符 | | Event Loop        | Linux epoll
+ * 边缘触发，min-heap 定时器，单线程异步 I/O | | WebSocket 运行模式 | 线程模式（3线程/会话）和事件驱动模式（零线程）双模
+ * | | WebSocket 心跳    | 周期性发送 Ping 帧，等待 Pong 响应        | | WebSocket 压缩    | permessage-deflate（RFC
+ * 7692），支持窗口比特位协商与上下文接管 | | WebSocket 升级    | 通用 Upgrade 分发器，支持自定义协议处理器 |
  *
  * @note 本模块的 HTTP 解析器严格遵循 RFC 9112 语法规则，支持分块传输编码（chunked）
  *       和 Content-Length 两种方式确定消息体长度。WebSocket 实现完整支持 RFC 6455
- *       定义的控制帧（Ping/Pong/Close）和分片消息。
+ *       定义的控制帧（Ping/Pong/Close）和分片消息，并支持 RFC 7692 定义的
+ *       permessage-deflate 压缩扩展。HTTP/2 协议层提供纯 C++14 同步帧编解码，
+ *       传输层由 event_loop 驱动。
  *
  * @warning 生产环境中应始终通过 HTTPS 使用 Secure 属性的 Cookie，
  *          并在敏感路由上启用 CSRF 防护。WebSocket 连接应考虑使用 WSS（WebSocket Secure）。
  *
  * @see https://www.rfc-editor.org/rfc/rfc9110.html
  * @see https://www.rfc-editor.org/rfc/rfc9112.html
+ * @see https://www.rfc-editor.org/rfc/rfc7540.html
+ * @see https://www.rfc-editor.org/rfc/rfc7541.html
  * @see https://www.rfc-editor.org/rfc/rfc6265.html
  * @see https://www.rfc-editor.org/rfc/rfc6455.html
+ * @see https://www.rfc-editor.org/rfc/rfc7692.html
+ * @see https://www.rfc-editor.org/rfc/rfc6066.html
  * @see https://fetch.spec.whatwg.org/
  */
 
@@ -783,6 +817,14 @@ struct NEFORCE_API http_key {
     static const string& Lax();
     static const string& Strict();
     static const string& X_Forwarded_Proto();
+
+    static const string& Strict_Transport_Security();
+    static const string& X_Frame_Options();
+    static const string& X_Content_Type_Options();
+    static const string& Content_Security_Policy();
+    static const string& X_XSS_Protection();
+    static const string& Referrer_Policy();
+    static const string& Permissions_Policy();
 };
 
 /** @} */ // Http

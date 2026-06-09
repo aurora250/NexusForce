@@ -130,6 +130,10 @@ struct NEFORCE_API http_cookie : iobject<http_cookie> {
  * 表示一个服务器端HTTP会话，用于存储用户会话数据。
  * 每个会话有唯一的ID，可以存储键值对数据。
  *
+ * @note 此类不是线程安全的。session_manager::get_session()
+ * 返回的裸指针仅在调用者持有 session_manager 锁时有效。
+ * 不要在锁外缓存或跨线程共享该指针。
+ *
  * 使用示例：
  * @code
  * // 创建新会话
@@ -217,6 +221,13 @@ struct NEFORCE_API http_session : istringify<http_session> {
      * 不会立即清除数据，但is_valid()会返回false。
      */
     void invalidate() noexcept;
+
+    /**
+     * @brief 重新生成会话ID
+     *
+     * 生成新的随机ID，保留所有会话数据。
+     */
+    void regenerate_id();
 
     /**
      * @brief 更新最后访问时间

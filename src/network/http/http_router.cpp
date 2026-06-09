@@ -156,48 +156,55 @@ void http_router::route(const http_method& method, const string& path, const htt
         }
 
         routes_[m].push_back(move(entry));
+
+        if (!routes_[m].back().is_regex) {
+            tries_[m].insert(path, handler);
+        }
     }
 }
 
-http_router::route_entry* http_router::find_handler(const http_method& method, const string& path,
-                                                    http_request& request) {
-    auto method_it = routes_.find(method.method());
-    if (method_it == routes_.end()) {
-        return nullptr;
-    }
-
+http_router::http_handler_t http_router::find_handler(const http_method& method, const string& path,
+                                                      http_request& request) {
     string search_path = path;
     if (!strict_routing && search_path.length() > 1 && search_path.ends_with("/")) {
         search_path = search_path.head(search_path.length() - 1);
     }
 
-    for (auto& entry: method_it->second) {
-        if (entry.is_regex) {
-            match_result matches = entry.regex_pattern->search(search_path);
-            if (matches.matched()) {
-                for (size_t i = 0; i < entry.param_names.size() && i + 1 < matches.size(); ++i) {
-                    request.set_parameter(entry.param_names[i], matches[i + 1]);
-                }
-                for (size_t i = entry.param_names.size(); i + 1 < matches.size(); ++i) {
-                    request.set_parameter(to_string(i + 1), matches[i + 1]);
-                }
-                return &entry;
+    auto trie_it = tries_.find(method.method());
+    if (trie_it != tries_.end()) {
+        vector<pair<string, string>> params;
+        auto handler = trie_it->second.match(search_path, case_sensitive, params);
+        if (handler) {
+            for (auto& p: params) {
+                request.set_parameter(p.first, p.second);
             }
-        } else {
-            string pattern = entry.pattern;
-            if (!strict_routing && pattern.length() > 1 && pattern.ends_with("/")) {
-                pattern = pattern.head(pattern.length() - 1);
-            }
-
-            bool match = case_sensitive ? search_path == pattern : search_path.lowercase() == pattern.lowercase();
-
-            if (match) {
-                return &entry;
-            }
+            return handler;
         }
     }
 
-    return nullptr;
+    auto method_it = routes_.find(method.method());
+    if (method_it == routes_.end()) {
+        return {};
+    }
+
+    for (auto& entry: method_it->second) {
+        if (!entry.is_regex) {
+            continue;
+        }
+
+        match_result matches = entry.regex_pattern->search(search_path);
+        if (matches.matched()) {
+            for (size_t i = 0; i < entry.param_names.size() && i + 1 < matches.size(); ++i) {
+                request.set_parameter(entry.param_names[i], matches[i + 1]);
+            }
+            for (size_t i = entry.param_names.size(); i + 1 < matches.size(); ++i) {
+                request.set_parameter(to_string(i + 1), matches[i + 1]);
+            }
+            return entry.handler;
+        }
+    }
+
+    return {};
 }
 
 void http_router::setup_default_handlers() {
@@ -235,15 +242,51 @@ void http_router::setup_default_handlers() {
                         "<html><head><title>500 Internal Server Error</title></head>"
                         "<body><h1>500 - Internal Server Error</h1>"
                         "<p>An error occurred while processing your request.</p>"
-                        "<p>Error: " +
-                        string(e.what()) +
-                        "</p>"
                         "</body></html>";
     };
 }
 
+void http_router::resolve_handler(http_request& request, http_response& response) {
+    auto handler = find_handler(request.method, request.path, request);
+
+    if (handler) {
+        handler(request, response);
+        return;
+    }
+
+    bool path_exists = false;
+    for (const auto& trie_pair: tries_) {
+        if (trie_pair.second.contains_path(request.path, case_sensitive)) {
+            path_exists = true;
+            break;
+        }
+    }
+    if (!path_exists) {
+        for (const auto& route: routes_) {
+            for (const auto& entry: route.second) {
+                if (entry.is_regex && entry.regex_pattern->match(request.path)) {
+                    path_exists = true;
+                    break;
+                }
+            }
+            if (path_exists) {
+                break;
+            }
+        }
+    }
+
+    if (path_exists) {
+        method_not_allowed_handler_(request, response);
+    } else {
+        not_found_handler_(request, response);
+    }
+}
+
 http_response http_router::handle_request(http_request& request) {
     http_response response;
+    if (!request.version.empty()) {
+        response.version = request.version;
+    }
 
     try {
         if (!middleware_chain_.execute_pre_filters(request, response)) {
@@ -252,45 +295,14 @@ http_response http_router::handle_request(http_request& request) {
 
         middleware_chain_.execute_filters(request, response);
 
-        const auto* route_entry = find_handler(request.method, request.path, request);
-
-        if (route_entry != nullptr) {
-            try {
-                route_entry->handler(request, response);
-            } catch (const exception& e) {
-                if (exception_handler_) {
-                    exception_handler_(request, response, e);
-                } else {
-                    throw;
-                }
+        try {
+            resolve_handler(request, response);
+        } catch (const exception& e) {
+            if (exception_handler_) {
+                exception_handler_(request, response, e);
+                return response;
             }
-        } else {
-            bool path_exists = false;
-            for (const auto& route: routes_) {
-                const auto& entries = route.second;
-                for (const auto& entry: entries) {
-                    if (entry.is_regex) {
-                        if (entry.regex_pattern->match(request.path)) {
-                            path_exists = true;
-                            break;
-                        }
-                    } else {
-                        if (entry.pattern == request.path) {
-                            path_exists = true;
-                            break;
-                        }
-                    }
-                }
-                if (path_exists) {
-                    break;
-                }
-            }
-
-            if (path_exists) {
-                method_not_allowed_handler_(request, response);
-            } else {
-                not_found_handler_(request, response);
-            }
+            throw;
         }
 
         middleware_chain_.execute_post_filters(request, response);
@@ -301,11 +313,44 @@ http_response http_router::handle_request(http_request& request) {
             response.status = http_status::S5_INTERNAL_SERVER_ERROR;
             response.status_message = "Internal Server Error";
             response.set_content_type(http_content::PLAIN_TEXT());
-            response.body = "Internal Server Error: "_s + e.what();
+            response.body = "Internal Server Error";
         }
     }
 
     return response;
+}
+
+void http_router::handle_request_async(http_request request, function<void(http_response)> cb) {
+    http_response response;
+    if (!request.version.empty()) {
+        response.version = request.version;
+    }
+
+    middleware_chain_.execute_pre_filters_async(
+            request, response, request.context, [this, req = move(request), cb, response](bool ok) mutable {
+                if (!ok) {
+                    cb(move(response));
+                    return;
+                }
+
+                try {
+                    middleware_chain_.execute_filters(req, response);
+                    resolve_handler(req, response);
+                } catch (const exception& e) {
+                    if (exception_handler_) {
+                        exception_handler_(req, response, e);
+                        cb(move(response));
+                        return;
+                    }
+                    response.status = http_status::S5_INTERNAL_SERVER_ERROR;
+                    response.status_message = "Internal Server Error";
+                    response.set_content_type(http_content::PLAIN_TEXT());
+                    response.body = "Internal Server Error";
+                }
+
+                middleware_chain_.execute_post_filters_async(req, response, req.context,
+                                                             [cb, response]() mutable { cb(move(response)); });
+            });
 }
 
 size_t http_router::route_count() const noexcept {
@@ -328,6 +373,18 @@ bool http_router::has_route(const http_method& method, const string& path) const
             return true;
         }
     }
+
+    const auto trie_it = tries_.find(method.method());
+    if (trie_it != tries_.end() && trie_it->second.contains_path(path, case_sensitive)) {
+        return true;
+    }
+
+    for (const auto& entry: method_it->second) {
+        if (entry.is_regex && entry.regex_pattern->match(path)) {
+            return true;
+        }
+    }
+
     return false;
 }
 

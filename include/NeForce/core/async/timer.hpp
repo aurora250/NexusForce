@@ -156,7 +156,12 @@ public:
     /**
      * @brief 析构函数，停止调度线程并等待其结束
      */
-    ~timer_scheduler() {
+    ~timer_scheduler() { stop(); }
+
+    /**
+     * @brief 停止调度线程并等待其结束
+     */
+    void stop() {
         stopped_.store(true);
         cv_.notify_one();
         if (thread_.joinable()) {

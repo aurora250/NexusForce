@@ -470,9 +470,11 @@ thread_pool::pool_statistics thread_pool::stop() {
     if (!is_running_) {
         return {};
     }
+    const size_t saved_total_threads = threads_map_.size();
+
     is_running_ = false;
 
-    const size_t saved_total_threads = threads_map_.size();
+    timer_.stop();
 
     {
         unique_lock<mutex> lk(task_queue_mtx_);

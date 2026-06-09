@@ -980,3 +980,61 @@ TEST_F(SslExceptionTest, LastErrorMessageReturnsString) {
     auto msg = ssl_exception::last_error_message();
     EXPECT_TRUE(msg.empty() || !msg.empty());
 }
+
+// ============================================================================
+// ALPN 协商测试
+// ============================================================================
+
+class SslAlpnNegotiateTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+TEST_F(SslAlpnNegotiateTest, StreamWithoutSslReturnsEmpty) {
+    ssl_stream stream;
+    EXPECT_TRUE(stream.get_alpn_negotiated().empty());
+}
+
+TEST_F(SslAlpnNegotiateTest, StreamBeforeHandshakeReturnsEmpty) {
+    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_stream stream(ctx);
+    // SSL object exists but no handshake → ALPN should be empty
+    auto alpn = stream.get_alpn_negotiated();
+    EXPECT_TRUE(alpn.empty());
+}
+
+TEST_F(SslAlpnNegotiateTest, StreamWithClientContextNoHandshake) {
+    ssl_context ctx(ssl_method::TLS_CLIENT);
+    ctx.set_alpn_protos({"h2", "http/1.1"});
+    ssl_stream stream(ctx);
+    auto alpn = stream.get_alpn_negotiated();
+    EXPECT_TRUE(alpn.empty()); // no handshake yet
+}
+
+TEST_F(SslAlpnNegotiateTest, SocketWithoutSslReturnsEmpty) {
+    ssl_socket sock;
+    EXPECT_TRUE(sock.get_alpn_negotiated().empty());
+}
+
+TEST_F(SslAlpnNegotiateTest, SocketWithSslNoHandshakeReturnsEmpty) {
+    ssl_context ctx(ssl_method::TLS_SERVER);
+    ssl_socket sock;
+    // 即使构造了ssl_context, 但未执行init_server_ssl → ssl_未初始化
+    EXPECT_TRUE(sock.get_alpn_negotiated().empty());
+}
+
+TEST_F(SslAlpnNegotiateTest, ContextSetAlpnProtosH2) {
+    ssl_context ctx(ssl_method::TLS_SERVER);
+    EXPECT_NO_THROW(ctx.set_alpn_protos({"h2", "http/1.1"}));
+}
+
+TEST_F(SslAlpnNegotiateTest, ContextSetAlpnProtosHttp11Only) {
+    ssl_context ctx(ssl_method::TLS_SERVER);
+    EXPECT_NO_THROW(ctx.set_alpn_protos({"http/1.1"}));
+}
+
+TEST_F(SslAlpnNegotiateTest, ContextSetAlpnProtosEmpty) {
+    ssl_context ctx(ssl_method::TLS_SERVER);
+    EXPECT_NO_THROW(ctx.set_alpn_protos({}));
+}

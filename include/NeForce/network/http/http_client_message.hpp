@@ -139,6 +139,7 @@ struct NEFORCE_API http_client_request {
     http_method method{http_method::GET()};     ///< HTTP方法
     string host;                                ///< 主机名
     ports port;                                 ///< 端口号
+    string scheme{"http"};                      ///< 协议
     string path = "/";                          ///< 请求路径
     string version = "HTTP/1.1";                ///< HTTP版本
     unordered_map<string, string> headers;      ///< 请求头
