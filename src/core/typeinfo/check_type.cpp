@@ -8,9 +8,7 @@ NEFORCE_BEGIN_INNER__
 
 string real_symbol_name(string name) {
     auto deleter = [](char* p) {
-        if (p) {
-            std::free(p);
-        }
+        std::free(p);
     };
     unique_ptr<char, decltype(deleter)> real_name{::abi::__cxa_demangle(name.data(), nullptr, nullptr, nullptr),
                                                   deleter};

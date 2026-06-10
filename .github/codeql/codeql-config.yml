@@ -1,0 +1,41 @@
+name: "NexusForce CodeQL Configuration"
+
+disable-default-queries: false
+
+queries:
+  - uses: security-and-quality
+
+query-filters:
+  - exclude:
+      id: cpp/unused-static-variable
+  - exclude:
+      id: cpp/unused-static-function
+
+  - exclude:
+      id: cpp/array-to-pointer-decay
+
+  - exclude:
+      tags contain: maintainability
+      severity: warning
+      pattern: |
+        switch
+        case
+
+  - exclude:
+      id: cpp/commented-out-code
+
+paths:
+  - src
+  - include
+
+paths-ignore:
+  - '**/vcpkg/**'
+  - '**/vcpkg_installed/**'
+  - '**/build/_deps/**'
+  - cmake
+  - docs
+  - examples
+  - tests
+  - build
+  - third_party
+  - submodules

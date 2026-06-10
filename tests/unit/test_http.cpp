@@ -1518,6 +1518,8 @@ TEST_F(HttpRangeTest, BuildMultipartRanges) {
     EXPECT_TRUE(body.ends_with("--BOUNDARY--\r\n"));
 }
 
+#ifdef NEFORCE_SUPPORT_ZLIB
+
 class HttpCompressFilterTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -1630,6 +1632,8 @@ TEST_F(HttpCompressFilterTest, QZeroWithFallback) {
     filter.post_filter(req, resp);
     EXPECT_EQ(resp.header("Content-Encoding"), "deflate");
 }
+
+#endif
 
 class CsrfFilterTest : public ::testing::Test {
 protected:

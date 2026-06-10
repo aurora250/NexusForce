@@ -139,17 +139,15 @@ jobs:
         shell: bash
 
       - name: Setup MSVC environment (Windows)
-        if: runner.os == 'Windows' && matrix.compiler != 'clang-cl'
+        if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
         with:
           arch: amd64
 
-      - name: Setup ClangCL environment (Windows)
+      - name: Install Ninja (Windows clang-cl)
         if: runner.os == 'Windows' && matrix.compiler == 'clang-cl'
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: amd64
-          toolset: ClangCL
+        shell: bash
+        run: choco install ninja -y --no-progress --limit-output
 
       - name: CMake configure
         shell: bash
@@ -208,7 +206,12 @@ jobs:
 
           if [ "${{ runner.os }}" = "Windows" ]; then
             if [ "${{ matrix.compiler }}" = "clang-cl" ]; then
-              cmake -B build -G "Visual Studio 17 2022" -T ClangCL -A x64 "${FLAGS[@]}"
+              # Ninja + standalone clang-cl (avoids VS ClangCL toolset dependency)
+              cmake -B build -G Ninja \
+                -DCMAKE_C_COMPILER=clang-cl \
+                -DCMAKE_CXX_COMPILER=clang-cl \
+                -DCMAKE_BUILD_TYPE=Release \
+                "${FLAGS[@]}"
             else
               cmake -B build -G "Visual Studio 17 2022" -A x64 "${FLAGS[@]}"
             fi
