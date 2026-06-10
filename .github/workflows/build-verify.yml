@@ -138,59 +138,20 @@ jobs:
           echo "$HOME/vcpkg" >> $GITHUB_PATH
         shell: bash
 
-      - name: CMake configure (Windows)
-        if: runner.os == 'Windows'
-        shell: pwsh
-        run: |
-          $toolchain = "$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake"
-          $flags = @(
-            "-DCMAKE_TOOLCHAIN_FILE=$toolchain",
-            "-DNEXUSFORCE_BUILD_DOCS=OFF",
-            "-DCMAKE_CXX_STANDARD=${{ matrix.cppstd }}"
-          )
+      - name: Setup MSVC environment (Windows)
+        if: runner.os == 'Windows' && matrix.compiler != 'clang-cl'
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
 
-          switch ("${{ matrix.config }}") {
-            'minimal' {
-              $flags += @(
-                "-DNEXUSFORCE_ENABLE_POSTGRESQL=OFF",
-                "-DNEXUSFORCE_ENABLE_MYSQL=OFF",
-                "-DNEXUSFORCE_ENABLE_SQLITE3=OFF",
-                "-DNEXUSFORCE_ENABLE_REDIS=OFF",
-                "-DNEXUSFORCE_ENABLE_ZLIB=OFF",
-                "-DNEXUSFORCE_ENABLE_LZ4=OFF",
-                "-DNEXUSFORCE_USING_SSO=OFF",
-                "-DNEXUSFORCE_USING_INTEL_TSX=OFF",
-                "-DNEXUSFORCE_USING_SQLCIPHER=OFF",
-                "-DNEXUSFORCE_BUILD_TESTS=OFF",
-                "-DNEXUSFORCE_BUILD_EXAMPLES=OFF",
-                "-DNEXUSFORCE_BUILD_BENCHMARKS=OFF"
-              )
-            }
-            'sqlcipher' {
-              $flags += @(
-                "-DNEXUSFORCE_USING_SQLCIPHER=ON",
-                "-DNEXUSFORCE_BUILD_TESTS=OFF",
-                "-DNEXUSFORCE_BUILD_EXAMPLES=OFF",
-                "-DNEXUSFORCE_BUILD_BENCHMARKS=OFF"
-              )
-            }
-          }
+      - name: Setup ClangCL environment (Windows)
+        if: runner.os == 'Windows' && matrix.compiler == 'clang-cl'
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: amd64
+          toolset: ClangCL
 
-          # Locate VS and import its Developer PowerShell module
-          $vsPath = & "${env:ProgramFiles}\Microsoft Visual Studio\Installer\vswhere.exe" `
-            -latest -property installationPath
-          Import-Module "$vsPath\Common7\Tools\Microsoft.VisualStudio.DevShell.dll" -Force
-          Enter-VsDevShell -VsInstallPath $vsPath -SkipAutomaticLocation -DevCmdArguments '-arch=x64'
-
-          if ("${{ matrix.compiler }}" -eq "clang-cl") {
-            cmake -B build -G "Visual Studio 17 2022" -T ClangCL -A x64 $flags
-          } else {
-            cmake -B build -G "Visual Studio 17 2022" -A x64 $flags
-          }
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-
-      - name: CMake configure (Linux)
-        if: runner.os == 'Linux'
+      - name: CMake configure
         shell: bash
         run: |
           FLAGS=(
@@ -245,33 +206,29 @@ jobs:
               ;;
           esac
 
-          if [ "${{ matrix.compiler }}" = "clang" ]; then
-            cmake -B build -G Ninja \
-              -DCMAKE_C_COMPILER=clang \
-              -DCMAKE_CXX_COMPILER=clang++ \
-              -DCMAKE_BUILD_TYPE=Release \
-              "${FLAGS[@]}"
+          if [ "${{ runner.os }}" = "Windows" ]; then
+            if [ "${{ matrix.compiler }}" = "clang-cl" ]; then
+              cmake -B build -G "Visual Studio 17 2022" -T ClangCL -A x64 "${FLAGS[@]}"
+            else
+              cmake -B build -G "Visual Studio 17 2022" -A x64 "${FLAGS[@]}"
+            fi
           else
-            cmake -B build -G Ninja \
-              -DCMAKE_C_COMPILER=gcc \
-              -DCMAKE_CXX_COMPILER=g++ \
-              -DCMAKE_BUILD_TYPE=Release \
-              "${FLAGS[@]}"
+            if [ "${{ matrix.compiler }}" = "clang" ]; then
+              cmake -B build -G Ninja \
+                -DCMAKE_C_COMPILER=clang \
+                -DCMAKE_CXX_COMPILER=clang++ \
+                -DCMAKE_BUILD_TYPE=Release \
+                "${FLAGS[@]}"
+            else
+              cmake -B build -G Ninja \
+                -DCMAKE_C_COMPILER=gcc \
+                -DCMAKE_CXX_COMPILER=g++ \
+                -DCMAKE_BUILD_TYPE=Release \
+                "${FLAGS[@]}"
+            fi
           fi
 
-      - name: Build (Windows)
-        if: runner.os == 'Windows'
-        shell: pwsh
-        run: |
-          $vsPath = & "${env:ProgramFiles}\Microsoft Visual Studio\Installer\vswhere.exe" `
-            -latest -property installationPath
-          Import-Module "$vsPath\Common7\Tools\Microsoft.VisualStudio.DevShell.dll" -Force
-          Enter-VsDevShell -VsInstallPath $vsPath -SkipAutomaticLocation -DevCmdArguments '-arch=x64'
-          cmake --build build --config Release --parallel
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-
-      - name: Build (Linux)
-        if: runner.os == 'Linux'
+      - name: Build
         shell: bash
         run: cmake --build build --config Release --parallel
 

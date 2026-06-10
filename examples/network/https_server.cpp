@@ -60,10 +60,12 @@ int main() {
     // 1. CORS 跨域支持
     router.use(make_unique<cors_filter>("*"));
 
+#ifdef NEFORCE_SUPPORT_ZLIB
     // 2. HTTP 响应压缩 — gzip/deflate
     auto compress = make_unique<compress_filter>();
-    compress->min_size = byte_size(1_KB);
+    compress->min_size = 1_KB;
     router.use(move(compress));
+#endif
 
     // 3. 请求/响应日志
     auto logging = make_unique<logging_filter>();

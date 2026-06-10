@@ -47,9 +47,11 @@ int main() {
     });
 
     r1.use(make_unique<logging_filter>());
+#ifdef NEFORCE_SUPPORT_ZLIB
     auto c1 = make_unique<compress_filter>();
-    c1->min_size = byte_size(1_KB);
+    c1->min_size = 1_KB;
     r1.use(move(c1));
+#endif
 
     r1.get("/", [](http_request& req, http_response& res) {
         json_builder jb;

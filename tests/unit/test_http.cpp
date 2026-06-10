@@ -1887,6 +1887,8 @@ TEST_F(SessionRegenerateTest, TouchOnRegenerate) {
     EXPECT_GE(s.last_access, before);
 }
 
+#ifdef NEFORCE_SUPPORT_ZLIB
+
 class WebSocketDeflateConfigTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -2005,7 +2007,6 @@ TEST_F(WebSocketDeflateConfigTest, ToResponseHeaderInactiveReturnsEmpty) {
     EXPECT_TRUE(hdr.empty());
 }
 
-#ifdef NEFORCE_SUPPORT_ZLIB
 TEST_F(WebSocketDeflateConfigTest, CompressionRoundTrip) {
     websocket_deflate compressor(true, 15, false);
     websocket_deflate decompressor(false, 15, false);
@@ -2058,6 +2059,7 @@ TEST_F(WebSocketDeflateConfigTest, CompressionWithNoContextTakeover) {
     const string d2 = decompressor.process(c2.view(), true);
     EXPECT_EQ(d2, msg2);
 }
+
 #endif
 
 class HpackTest : public ::testing::Test {
@@ -4078,6 +4080,8 @@ TEST_F(Http2StreamStateTest, CloseMethodSetsClosed) {
     EXPECT_EQ(s.state(), http2_stream_state::CLOSED);
 }
 
+#ifdef NEFORCE_SUPPORT_ZLIB
+
 class WebsocketDeflateConfigTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -4195,6 +4199,8 @@ TEST_F(WebsocketDeflateTest, NoContextTakeoverResetsStream) {
     auto d2 = decompressor.process(c2.view(), true);
     EXPECT_EQ(d2, "Message two");
 }
+
+#endif
 
 class HpackRoundtripTest : public ::testing::Test {
 protected:

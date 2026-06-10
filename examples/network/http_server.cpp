@@ -47,10 +47,12 @@ int main() {
     csrf->token_max_age = seconds(3600);
     router.use(move(csrf));
 
+#ifdef NEFORCE_SUPPORT_ZLIB
     // 4. HTTP 响应压缩 — 自动选择gzip或deflate
     auto compress = make_unique<compress_filter>();
-    compress->min_size = byte_size(1_KB);
+    compress->min_size = 1_KB;
     router.use(move(compress));
+#endif
 
     // 5. 静态文件服务 — 支持Range请求（断点续传）
     auto static_files = make_unique<static_file_filter>("./public");

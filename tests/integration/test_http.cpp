@@ -670,6 +670,8 @@ TEST(HttpMethodIntegrationTest, EmptyPathRouteIgnored) {
     EXPECT_EQ(router.route_count(), 0u);
 }
 
+#ifdef NEFORCE_SUPPORT_ZLIB
+
 class WebSocketDeflateIntegrationTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -761,6 +763,8 @@ TEST_F(CompressFilterIntegrationTest, DeflateFallbackWhenNoGzip) {
     filter.post_filter(req, resp);
     EXPECT_EQ(resp.header("Content-Encoding"), "deflate");
 }
+
+#endif
 
 class SessionStoreIntegrationTest : public ::testing::Test {
 protected:
