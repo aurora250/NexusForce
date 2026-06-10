@@ -194,10 +194,13 @@ jobs:
           esac
 
           if [ "${{ runner.os }}" = "Windows" ]; then
+            VS_PATH=$(vswhere -latest -property installationPath)
+            VSVCVARS="$VS_PATH/VC/Auxiliary/Build/vcvars64.bat"
+    
             if [ "${{ matrix.compiler }}" = "clang-cl" ]; then
-              cmake -B build -G "Visual Studio 17 2022" -T ClangCL -A x64 "${FLAGS[@]}"
+              cmd //c "call \"$VSVCVARS\" && cmake -B build -G \"Visual Studio 17 2022\" -T ClangCL -A x64 ${FLAGS[*]}"
             else
-              cmake -B build -G "Visual Studio 17 2022" -A x64 "${FLAGS[@]}"
+              cmd //c "call \"$VSVCVARS\" && cmake -B build -G \"Visual Studio 17 2022\" -A x64 ${FLAGS[*]}"
             fi
           else
             if [ "${{ matrix.compiler }}" = "clang" ]; then

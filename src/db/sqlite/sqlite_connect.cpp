@@ -186,7 +186,12 @@ size_t sqlite_connect::batch_insert(const string& table, const vector<string>& c
 
 idb_connect* sqlite_factory::create_connect() {
     auto* conn = new sqlite_connect();
-    if (!conn->connect(config_, encryption_key_, key_type_)) {
+    if (!conn->connect(config_
+#    ifdef NEFORCE_SUPPORT_SQLCIPHER
+                       ,
+                       encryption_key_, key_type_
+#    endif
+                       )) {
         delete conn;
         return nullptr;
     }

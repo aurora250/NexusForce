@@ -50,6 +50,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 struct NEFORCE_API sqlite_connect final : sql_connect_base<sqlite_connect> {
 public:
+#    ifdef NEFORCE_SUPPORT_SQLCIPHER
     /**
      * @enum key_type
      * @brief SQLCipher 加密密钥类型
@@ -63,6 +64,7 @@ public:
         PBKDF2, ///< 口令派生
         RAW     ///< 原始密钥
     };
+#    endif
 
 protected:
     ::sqlite3* link_ = nullptr; ///< SQLite数据库连接句柄
