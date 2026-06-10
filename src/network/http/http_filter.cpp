@@ -498,55 +498,6 @@ void static_file_filter::add_mime_type(const string& extension, http_content con
     }
 }
 
-bool rate_limit_filter::pre_filter(http_request& request, http_response& response) {
-    const auto client_ip = request.client_ip();
-    if (client_ip.empty()) {
-        return true;
-    }
-
-    lock<mutex> lk(mutex_);
-
-    const auto now = datetime::now();
-    auto& info = client_requests_[client_ip];
-
-    const auto elapsed = now - info.last_reset;
-    if (elapsed >= window_seconds.count()) {
-        info.count = 0;
-        info.last_reset = now;
-    }
-
-    info.count++;
-
-    if (info.count > max_requests) {
-        response.status = http_status::S4_TOO_MANY_REQUESTS;
-        response.status_message = "Too Many Requests";
-        response.set_content_type(http_content::PLAIN_TEXT());
-        response.body = "Rate limit exceeded";
-        response.set_header("Retry-After", to_string(window_seconds.count()));
-        return false;
-    }
-
-    response.set_header("X-RateLimit-Limit", to_string(max_requests));
-    response.set_header("X-RateLimit-Remaining", to_string(max_requests - info.count));
-    response.set_header("X-RateLimit-Reset", to_string(timestamp(info.last_reset).value() + window_seconds.count()));
-
-    return true;
-}
-
-void rate_limit_filter::cleanup_old_entries() {
-    lock<mutex> lk(mutex_);
-
-    const auto now = datetime::now();
-    for (auto it = client_requests_.begin(); it != client_requests_.end();) {
-        const auto elapsed = now - it->second.last_reset;
-        if (elapsed >= window_seconds.count() * 2) {
-            it = client_requests_.erase(it);
-        } else {
-            ++it;
-        }
-    }
-}
-
 bool authentication_filter::is_path_excluded(const string& path) const {
     // NOLINTNEXTLINE(readability-use-anyofallof)
     for (const auto& excluded: excluded_paths_) {

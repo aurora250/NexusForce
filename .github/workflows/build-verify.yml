@@ -105,38 +105,47 @@ jobs:
           sudo update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-19 100
           clang++ --version
 
+      - name: Set vcpkg paths
+        shell: bash
+        run: |
+          echo "VCPKG_ROOT=${HOME}/vcpkg" >> $GITHUB_ENV
+          echo "VCPKG_CACHE=${HOME}/.cache/vcpkg" >> $GITHUB_ENV
+
       - name: Cache vcpkg
         uses: actions/cache@v4
         id: cache-vcpkg
         with:
           path: |
-            ~/vcpkg
-            ~/.cache/vcpkg
+            ${{ env.VCPKG_ROOT }}
+            ${{ env.VCPKG_CACHE }}
+            ${{ github.workspace }}/build/vcpkg_installed
           key: ${{ runner.os }}-${{ matrix.compiler }}-vcpkg-${{ hashFiles('vcpkg.json') }}
           restore-keys: |
             ${{ runner.os }}-${{ matrix.compiler }}-vcpkg-
 
       - name: Setup vcpkg
         if: steps.cache-vcpkg.outputs.cache-hit != 'true'
-        run: |
-          git clone https://github.com/Microsoft/vcpkg.git $HOME/vcpkg
-          $HOME/vcpkg/bootstrap-vcpkg.sh
         shell: bash
+        run: |
+          if [ ! -d "$VCPKG_ROOT" ]; then
+            git clone https://github.com/Microsoft/vcpkg.git "$VCPKG_ROOT"
+          fi
+          if [ ! -f "$VCPKG_ROOT/vcpkg" ] && [ ! -f "$VCPKG_ROOT/vcpkg.exe" ]; then
+            "$VCPKG_ROOT/bootstrap-vcpkg.sh"
+          fi
 
       - name: Setup vcpkg (cache hit — unshallow + bootstrap)
         if: steps.cache-vcpkg.outputs.cache-hit == 'true'
+        shell: bash
         run: |
-          git -C $HOME/vcpkg fetch --unshallow 2>/dev/null || true
-          if [ ! -f "$HOME/vcpkg/vcpkg" ] && [ ! -f "$HOME/vcpkg/vcpkg.exe" ]; then
-            $HOME/vcpkg/bootstrap-vcpkg.sh
+          git -C "$VCPKG_ROOT" fetch --unshallow 2>/dev/null || true
+          if [ ! -f "$VCPKG_ROOT/vcpkg" ] && [ ! -f "$VCPKG_ROOT/vcpkg.exe" ]; then
+            "$VCPKG_ROOT/bootstrap-vcpkg.sh"
           fi
-        shell: bash
 
-      - name: Export vcpkg environment
-        run: |
-          echo "VCPKG_ROOT=$HOME/vcpkg" >> $GITHUB_ENV
-          echo "$HOME/vcpkg" >> $GITHUB_PATH
+      - name: Export vcpkg to PATH
         shell: bash
+        run: echo "$VCPKG_ROOT" >> $GITHUB_PATH
 
       - name: Setup MSVC environment (Windows)
         if: runner.os == 'Windows'

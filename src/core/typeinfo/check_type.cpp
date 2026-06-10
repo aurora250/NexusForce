@@ -7,9 +7,7 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_INNER__
 
 string real_symbol_name(string name) {
-    auto deleter = [](char* p) {
-        std::free(p);
-    };
+    auto deleter = [](char* p) { std::free(p); };
     unique_ptr<char, decltype(deleter)> real_name{::abi::__cxa_demangle(name.data(), nullptr, nullptr, nullptr),
                                                   deleter};
     return {real_name.get()};

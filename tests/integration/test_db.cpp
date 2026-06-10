@@ -112,11 +112,15 @@ protected:
     }
 
     void insert_test_data() {
-        conn.update("INSERT INTO users (name, age, email, salary) VALUES ('Alice', 30, 'alice@test.com', 75000.5)");
-        conn.update("INSERT INTO users (name, age, email, salary) VALUES ('Bob', 25, 'bob@test.com', 62000.0)");
-        conn.update("INSERT INTO users (name, age, email, salary) VALUES ('Charlie', 35, 'charlie@test.com', 88000.0)");
-        conn.update("INSERT INTO users (name, age, email, salary) VALUES ('Diana', 28, 'diana@test.com', 71000.0)");
-        conn.update("INSERT INTO users (name, age, email) VALUES ('Eve', 22, 'eve@test.com')");
+        ignore = conn.update(
+                "INSERT INTO users (name, age, email, salary) VALUES ('Alice', 30, 'alice@test.com', 75000.5)");
+        ignore =
+                conn.update("INSERT INTO users (name, age, email, salary) VALUES ('Bob', 25, 'bob@test.com', 62000.0)");
+        ignore = conn.update(
+                "INSERT INTO users (name, age, email, salary) VALUES ('Charlie', 35, 'charlie@test.com', 88000.0)");
+        ignore = conn.update(
+                "INSERT INTO users (name, age, email, salary) VALUES ('Diana', 28, 'diana@test.com', 71000.0)");
+        ignore = conn.update("INSERT INTO users (name, age, email) VALUES ('Eve', 22, 'eve@test.com')");
     }
 };
 
@@ -182,7 +186,7 @@ TEST_F(SqliteIntegrationTest, UpdateAndDelete) {
 TEST_F(SqliteIntegrationTest, TransactionBeginCommit) {
     create_test_table();
     conn.begin();
-    conn.update("INSERT INTO users (name, age) VALUES ('TxUser', 50)");
+    ignore = conn.update("INSERT INTO users (name, age) VALUES ('TxUser', 50)");
     conn.commit();
 
     auto result = conn.query("SELECT name FROM users WHERE name = 'TxUser'");
@@ -193,7 +197,7 @@ TEST_F(SqliteIntegrationTest, TransactionBeginCommit) {
 TEST_F(SqliteIntegrationTest, TransactionBeginRollback) {
     create_test_table();
     conn.begin();
-    conn.update("INSERT INTO users (name, age) VALUES ('RbUser', 50)");
+    ignore = conn.update("INSERT INTO users (name, age) VALUES ('RbUser', 50)");
     conn.rollback();
 
     auto result = conn.query("SELECT * FROM users WHERE name = 'RbUser'");
@@ -204,7 +208,7 @@ TEST_F(SqliteIntegrationTest, TransactionGuardCommits) {
     create_test_table();
     {
         transaction_guard tx{conn};
-        conn.update("INSERT INTO users (name, age) VALUES ('GuardCommit', 99)");
+        ignore = conn.update("INSERT INTO users (name, age) VALUES ('GuardCommit', 99)");
         tx.commit();
     }
     auto result = conn.query("SELECT name FROM users WHERE name = 'GuardCommit'");
@@ -215,7 +219,7 @@ TEST_F(SqliteIntegrationTest, TransactionGuardRollsBackOnScopeExit) {
     create_test_table();
     {
         transaction_guard tx{conn};
-        conn.update("INSERT INTO users (name, age) VALUES ('GuardNoCommit', 99)");
+        ignore = conn.update("INSERT INTO users (name, age) VALUES ('GuardNoCommit', 99)");
     }
     auto result = conn.query("SELECT * FROM users WHERE name = 'GuardNoCommit'");
     EXPECT_FALSE(result->next());
@@ -348,8 +352,8 @@ TEST_F(SqlitePoolTest, AcquireAndQuery) {
     EXPECT_TRUE(pool.is_running());
     auto conn = pool.get_tb_connect();
     ASSERT_NE(conn, nullptr);
-    conn->update("CREATE TABLE t(x INTEGER)");
-    conn->update("INSERT INTO t VALUES (42)");
+    ignore = conn->update("CREATE TABLE t(x INTEGER)");
+    ignore = conn->update("INSERT INTO t VALUES (42)");
     auto result = conn->query("SELECT x FROM t");
     ASSERT_TRUE(result->next());
     EXPECT_EQ(result->get_int32(0), 42);
@@ -407,7 +411,7 @@ protected:
                 eprintln(setup_conn.get_error());
                 GTEST_SKIP() << "MySQL server not available";
             }
-            setup_conn.update("CREATE DATABASE IF NOT EXISTS `" + config.database + "`");
+            ignore = setup_conn.update("CREATE DATABASE IF NOT EXISTS `" + config.database + "`");
             setup_conn.close();
         }
 
@@ -420,13 +424,13 @@ protected:
     void TearDown() override { conn.close(); }
 
     void create_test_table() {
-        conn.update("CREATE TABLE IF NOT EXISTS test_users ("
-                    "id INT AUTO_INCREMENT PRIMARY KEY, "
-                    "name VARCHAR(100) NOT NULL, "
-                    "age INT, "
-                    "email VARCHAR(200), "
-                    "salary DOUBLE)");
-        conn.update("TRUNCATE TABLE test_users");
+        ignore = conn.update("CREATE TABLE IF NOT EXISTS test_users ("
+                             "id INT AUTO_INCREMENT PRIMARY KEY, "
+                             "name VARCHAR(100) NOT NULL, "
+                             "age INT, "
+                             "email VARCHAR(200), "
+                             "salary DOUBLE)");
+        ignore = conn.update("TRUNCATE TABLE test_users");
     }
 };
 
@@ -437,8 +441,8 @@ TEST_F(MysqlIntegrationTest, ConnectAndPing) {
 
 TEST_F(MysqlIntegrationTest, CreateTableAndQuery) {
     create_test_table();
-    conn.update("INSERT INTO test_users (name, age) VALUES ('MySQL_Alice', 30)");
-    conn.update("INSERT INTO test_users (name, age) VALUES ('MySQL_Bob', 25)");
+    ignore = conn.update("INSERT INTO test_users (name, age) VALUES ('MySQL_Alice', 30)");
+    ignore = conn.update("INSERT INTO test_users (name, age) VALUES ('MySQL_Bob', 25)");
 
     auto result = conn.query("SELECT name, age FROM test_users ORDER BY id");
     ASSERT_NE(result, nullptr);
@@ -450,11 +454,11 @@ TEST_F(MysqlIntegrationTest, CreateTableAndQuery) {
 TEST_F(MysqlIntegrationTest, TransactionBeginCommitRollback) {
     create_test_table();
     conn.begin();
-    conn.update("INSERT INTO test_users (name, age) VALUES ('TxUser', 50)");
+    ignore = conn.update("INSERT INTO test_users (name, age) VALUES ('TxUser', 50)");
     conn.commit();
 
     conn.begin();
-    conn.update("INSERT INTO test_users (name, age) VALUES ('RbUser', 50)");
+    ignore = conn.update("INSERT INTO test_users (name, age) VALUES ('RbUser', 50)");
     conn.rollback();
 
     auto result = conn.query("SELECT name FROM test_users WHERE name = 'TxUser'");
@@ -468,12 +472,12 @@ TEST_F(MysqlIntegrationTest, TransactionGuardRAII) {
     create_test_table();
     {
         transaction_guard tx{conn};
-        conn.update("INSERT INTO test_users (name, age) VALUES ('GdCommit', 99)");
+        ignore = conn.update("INSERT INTO test_users (name, age) VALUES ('GdCommit', 99)");
         tx.commit();
     }
     {
         transaction_guard tx{conn};
-        conn.update("INSERT INTO test_users (name, age) VALUES ('GdRollback', 99)");
+        ignore = conn.update("INSERT INTO test_users (name, age) VALUES ('GdRollback', 99)");
     }
     auto result = conn.query("SELECT name FROM test_users WHERE name = 'GdCommit'");
     ASSERT_TRUE(result->next());
@@ -520,7 +524,7 @@ protected:
             no_db.database.clear();
             mysql_connect setup_conn;
             if (setup_conn.connect(no_db)) {
-                setup_conn.update("CREATE DATABASE IF NOT EXISTS `" + config.database + "`");
+                ignore = setup_conn.update("CREATE DATABASE IF NOT EXISTS `" + config.database + "`");
                 setup_conn.close();
             }
         }

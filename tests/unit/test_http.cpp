@@ -838,40 +838,6 @@ TEST(StaticFileFilterTest, KnownMimeTypes) {
     EXPECT_FALSE(filter.get_mime_type("/unknown.xyz").has_value());
 }
 
-class RateLimitFilterTest : public ::testing::Test {
-protected:
-    void SetUp() override {}
-    void TearDown() override {}
-};
-
-TEST_F(RateLimitFilterTest, FirstRequestPasses) {
-    rate_limit_filter filter(5, seconds{60});
-    http_request req;
-    req.set_header("X-Forwarded-For", "192.168.1.1");
-    http_response resp;
-    EXPECT_TRUE(filter.pre_filter(req, resp));
-}
-
-TEST_F(RateLimitFilterTest, ExceedingLimitReturns429) {
-    rate_limit_filter filter(2, seconds{60});
-    http_request req;
-    req.set_header("X-Forwarded-For", "10.0.0.1");
-    http_response resp;
-
-    EXPECT_TRUE(filter.pre_filter(req, resp));
-    EXPECT_TRUE(filter.pre_filter(req, resp));
-    EXPECT_FALSE(filter.pre_filter(req, resp));
-    EXPECT_EQ(static_cast<uint16_t>(resp.status), 429u);
-    EXPECT_EQ(resp.header("Retry-After"), "60");
-}
-
-TEST_F(RateLimitFilterTest, EmptyClientIpPasses) {
-    rate_limit_filter filter(1, seconds{60});
-    http_request req;
-    http_response resp;
-    EXPECT_TRUE(filter.pre_filter(req, resp));
-}
-
 class AuthFilterTest : public ::testing::Test {
 protected:
     void SetUp() override {}

@@ -280,50 +280,6 @@ public:
 };
 
 /**
- * @class rate_limit_filter
- * @brief 限流过滤器
- *
- * 基于客户端IP限制请求频率，防止滥用。
- */
-class NEFORCE_DEPRECATED_FOR("Use token_bucket_filter instead") NEFORCE_API rate_limit_filter final
-: public http_filter {
-private:
-    struct rate_limit_info {
-        size_t count = 0;                     ///< 请求计数
-        datetime last_reset{datetime::now()}; ///< 上次重置时间
-    };
-    unordered_map<string, rate_limit_info> client_requests_; ///< 客户端请求记录
-    mutex mutex_;                                            ///< 保护共享数据
-
-public:
-    size_t max_requests = 100;  ///< 窗口内最大请求数
-    seconds window_seconds{60}; ///< 时间窗口
-
-    /**
-     * @brief 构造函数
-     * @param max_requests 最大请求数
-     * @param window 时间窗口
-     */
-    explicit rate_limit_filter(const size_t max_requests = 100, const seconds window = seconds(60)) :
-    max_requests(max_requests),
-    window_seconds(window) {}
-
-    void set_max_requests(const size_t max_request) { max_requests = max_request; }
-    void set_window(const seconds window) { window_seconds = window; }
-
-    bool pre_filter(http_request& request, http_response& response) override;
-    void do_filter(http_request& request, http_response& response) override {}
-    string name() const override { return "rate_limit_filter"; }
-
-    /**
-     * @brief 清理过期的条目
-     *
-     * 移除超过两个时间窗口未更新的客户端记录。
-     */
-    void cleanup_old_entries();
-};
-
-/**
  * @class authentication_filter
  * @brief 认证过滤器
  *
