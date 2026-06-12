@@ -42,6 +42,8 @@ public:
     void do_filter(http_request& /*request*/, http_response& /*response*/) override {}
 
     NEFORCE_NODISCARD string name() const override { return "csrf_filter"; }
+
+    // TODO: Synchronizer Token pattern — server-side token storage (in addition to Double-Submit Cookie) for stricter CSRF enforcement
 };
 
 /** @} */ // HTTP

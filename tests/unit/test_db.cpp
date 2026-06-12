@@ -654,6 +654,633 @@ TEST_F(SqlBuilderTest, WhereConditionsCombinedWithAnd) {
                                "AND attempts <= 3;");
 }
 
+TEST_F(SqlBuilderTest, UnionBasic) {
+    builder.select("id").from("users").union_("SELECT id FROM archived");
+    EXPECT_EQ(builder.build(), "SELECT id FROM users\n"
+                               "UNION\n"
+                               "SELECT id FROM archived;");
+}
+
+TEST_F(SqlBuilderTest, UnionAll) {
+    builder.select("id").from("active").union_all("SELECT id FROM inactive");
+    EXPECT_EQ(builder.build(), "SELECT id FROM active\n"
+                               "UNION ALL\n"
+                               "SELECT id FROM inactive;");
+}
+
+TEST_F(SqlBuilderTest, Intersect) {
+    builder.select("email").from("users").intersect("SELECT email FROM subscribers");
+    EXPECT_EQ(builder.build(), "SELECT email FROM users\n"
+                               "INTERSECT\n"
+                               "SELECT email FROM subscribers;");
+}
+
+TEST_F(SqlBuilderTest, IntersectAll) {
+    builder.select("id").from("t1").intersect_all("SELECT id FROM t2");
+    EXPECT_EQ(builder.build(), "SELECT id FROM t1\n"
+                               "INTERSECT ALL\n"
+                               "SELECT id FROM t2;");
+}
+
+TEST_F(SqlBuilderTest, Except) {
+    builder.select("id").from("all_users").except_("SELECT id FROM deleted_users");
+    EXPECT_EQ(builder.build(), "SELECT id FROM all_users\n"
+                               "EXCEPT\n"
+                               "SELECT id FROM deleted_users;");
+}
+
+TEST_F(SqlBuilderTest, ExceptAll) {
+    builder.select("id").from("t1").except_all("SELECT id FROM t2");
+    EXPECT_EQ(builder.build(), "SELECT id FROM t1\n"
+                               "EXCEPT ALL\n"
+                               "SELECT id FROM t2;");
+}
+
+TEST_F(SqlBuilderTest, MultipleUnions) {
+    builder.select("id").from("active").union_("SELECT id FROM inactive").union_all("SELECT id FROM migrated");
+    EXPECT_EQ(builder.build(), "SELECT id FROM active\n"
+                               "UNION\n"
+                               "SELECT id FROM inactive\n"
+                               "UNION ALL\n"
+                               "SELECT id FROM migrated;");
+}
+
+TEST_F(SqlBuilderTest, UnionWithOrderBy) {
+    builder.select("name").from("users").union_("SELECT name FROM archived").order_by_asc("name");
+    EXPECT_EQ(builder.build(), "SELECT name FROM users\n"
+                               "UNION\n"
+                               "SELECT name FROM archived ORDER BY name ASC;");
+}
+
+TEST_F(SqlBuilderTest, UnionWithLimit) {
+    builder.select("id").from("t1").union_("SELECT id FROM t2").limit(10);
+    EXPECT_EQ(builder.build(), "SELECT id FROM t1\n"
+                               "UNION\n"
+                               "SELECT id FROM t2 LIMIT 10;");
+}
+
+TEST_F(SqlBuilderTest, UnionAllWithWhere) {
+    builder.select("name")
+            .from("users")
+            .where_eq("status", "'active'")
+            .union_all("SELECT name FROM archived WHERE status = 'active'");
+    EXPECT_EQ(builder.build(), "SELECT name FROM users WHERE status = 'active'\n"
+                               "UNION ALL\n"
+                               "SELECT name FROM archived WHERE status = 'active';");
+}
+
+TEST_F(SqlBuilderTest, SetOpPreservesType) {
+    builder.select("id").from("users").union_("SELECT id FROM archived");
+    EXPECT_EQ(builder.type(), sql_operate::SELECT);
+}
+
+TEST_F(SqlBuilderTest, SetOpCopyPreserved) {
+    builder.select("id").from("users").union_("SELECT id FROM archived");
+    sql_builder copy{builder};
+    EXPECT_EQ(copy.build(), "SELECT id FROM users\n"
+                            "UNION\n"
+                            "SELECT id FROM archived;");
+}
+
+TEST_F(SqlBuilderTest, SetOpResetClears) {
+    builder.select("id").from("users").union_("SELECT id FROM archived");
+    builder.reset();
+    EXPECT_TRUE(builder.is_empty());
+}
+
+TEST_F(SqlBuilderTest, WithCTE) {
+    builder.with_("regional_users", "SELECT id, name FROM users WHERE region = 'US'")
+            .select_all()
+            .from("regional_users");
+    EXPECT_EQ(builder.build(), "WITH regional_users AS (\n"
+                               "SELECT id, name FROM users WHERE region = 'US'\n"
+                               ")\n"
+                               "SELECT * FROM regional_users;");
+}
+
+TEST_F(SqlBuilderTest, WithRecursiveCTE) {
+    builder.with_recursive("org_tree", "SELECT id, parent_id, name FROM employees WHERE parent_id IS NULL\n"
+                                       "UNION ALL\n"
+                                       "SELECT e.id, e.parent_id, e.name FROM employees e\n"
+                                       "INNER JOIN org_tree ot ON e.parent_id = ot.id")
+            .select_all()
+            .from("org_tree");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("WITH RECURSIVE"), string::npos);
+    EXPECT_NE(sql.find("org_tree AS ("), string::npos);
+}
+
+TEST_F(SqlBuilderTest, WithMultipleCTEs) {
+    builder.with_("cte1", "SELECT id FROM table_a").with_("cte2", "SELECT id FROM table_b").select_all().from("cte1");
+    EXPECT_EQ(builder.build(), "WITH cte1 AS (\n"
+                               "SELECT id FROM table_a\n"
+                               "),\n"
+                               "cte2 AS (\n"
+                               "SELECT id FROM table_b\n"
+                               ")\n"
+                               "SELECT * FROM cte1;");
+}
+
+TEST_F(SqlBuilderTest, CrossJoin) {
+    builder.select_all().from("users").cross_join("departments");
+    EXPECT_EQ(builder.build(), "SELECT * FROM users CROSS JOIN departments;");
+}
+
+TEST_F(SqlBuilderTest, CrossJoinWithWhere) {
+    builder.select_all().from("products").cross_join("inventory").where("products.id = inventory.product_id");
+    EXPECT_EQ(builder.build(), "SELECT * FROM products CROSS JOIN inventory WHERE products.id = inventory.product_id;");
+}
+
+TEST_F(SqlBuilderTest, CTEWithUnion) {
+    builder.with_("active", "SELECT id FROM users WHERE active = 1")
+            .select("id")
+            .from("active")
+            .union_("SELECT id FROM archived");
+    EXPECT_EQ(builder.build(), "WITH active AS (\n"
+                               "SELECT id FROM users WHERE active = 1\n"
+                               ")\n"
+                               "SELECT id FROM active\n"
+                               "UNION\n"
+                               "SELECT id FROM archived;");
+}
+
+TEST_F(SqlBuilderTest, CTECopyPreserved) {
+    builder.with_("cte", "SELECT 1").select_all().from("cte");
+    sql_builder copy{builder};
+    EXPECT_EQ(copy.build(), "WITH cte AS (\n"
+                            "SELECT 1\n"
+                            ")\n"
+                            "SELECT * FROM cte;");
+}
+
+TEST_F(SqlBuilderTest, CTEClearedOnReset) {
+    builder.with_("cte", "SELECT 1").select_all().from("cte");
+    builder.reset();
+    EXPECT_TRUE(builder.is_empty());
+    EXPECT_THROW(ignore = builder.build(), value_exception);
+}
+
+TEST_F(SqlBuilderTest, SelectRowNumber) {
+    builder.select("name").select_row_number("rn", {}, {"salary DESC"}).from("employees");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("ROW_NUMBER() OVER (ORDER BY salary DESC) AS rn"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, SelectRankWithPartition) {
+    builder.select("dept_id").select_rank("rk", {"dept_id"}, {"salary DESC"}).from("employees");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("RANK() OVER (PARTITION BY dept_id ORDER BY salary DESC) AS rk"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, SelectDenseRank) {
+    builder.select("name").select_dense_rank("dr", {}, {"score DESC"}).from("scores");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("DENSE_RANK() OVER (ORDER BY score DESC) AS dr"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, SelectNtile) {
+    builder.select("name").select_ntile(4, "quartile", {}, {"sales DESC"}).from("sales");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("NTILE(4) OVER (ORDER BY sales DESC) AS quartile"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, SelectLead) {
+    builder.select_lead("salary", "next_salary", {"dept_id"}, {"id ASC"}).from("employees");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("LEAD(salary) OVER (PARTITION BY dept_id ORDER BY id ASC) AS next_salary"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, SelectLag) {
+    builder.select_lag("salary", "prev_salary", {"dept_id"}, {"id ASC"}).from("employees");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("LAG(salary) OVER (PARTITION BY dept_id ORDER BY id ASC) AS prev_salary"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, SelectFirstValue) {
+    builder.select("dept_id").select_first_value("salary", "highest", {"dept_id"}, {"salary DESC"}).from("employees");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("FIRST_VALUE(salary) OVER (PARTITION BY dept_id ORDER BY salary DESC) AS highest"),
+              string::npos);
+}
+
+TEST_F(SqlBuilderTest, SelectLastValue) {
+    builder.select_last_value("salary", "lowest", {"dept_id"}, {"salary DESC"}).from("employees");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("LAST_VALUE(salary) OVER (PARTITION BY dept_id ORDER BY salary DESC) AS lowest"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, CaseSimpleExpression) {
+    vector<pair<string, string>> when_then;
+    when_then.emplace_back(string("'active'"), string("'Enabled'"));
+    when_then.emplace_back(string("'inactive'"), string("'Disabled'"));
+    string expr = sql_builder::make_case_simple("status", move(when_then), "'Unknown'");
+    builder.select(expr + " AS status_label").from("users");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("CASE status WHEN 'active' THEN 'Enabled' WHEN 'inactive' THEN 'Disabled' ELSE 'Unknown' END"),
+              string::npos);
+}
+
+TEST_F(SqlBuilderTest, CaseSearchedExpression) {
+    vector<pair<string, string>> when_then;
+    when_then.emplace_back(string("age >= 18"), string("'Adult'"));
+    when_then.emplace_back(string("age >= 13"), string("'Teen'"));
+    string expr = sql_builder::make_case_searched(move(when_then), "'Child'");
+    builder.select("name").select(expr + " AS category").from("users");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("CASE WHEN age >= 18 THEN 'Adult' WHEN age >= 13 THEN 'Teen' ELSE 'Child' END"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, CastExpression) {
+    string expr = sql_builder::make_cast("price", "INTEGER");
+    builder.select(expr + " AS price_int").from("products");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("CAST(price AS INTEGER) AS price_int"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, WindowWithWhereAndOrderBy) {
+    builder.select({"name", "department"})
+            .select_rank("rnk", {"department"}, {"salary DESC"})
+            .from("employees")
+            .where_gt("salary", "50000")
+            .order_by_asc("department");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("OVER (PARTITION BY department ORDER BY salary DESC)"), string::npos);
+    EXPECT_NE(sql.find("ORDER BY department ASC"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, MultipleWindowFunctions) {
+    builder.select_row_number("rn", {}, {"id"}).select_rank("rk", {}, {"score DESC"}).from("results");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("ROW_NUMBER()"), string::npos);
+    EXPECT_NE(sql.find("RANK()"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, WindowWithoutAlias) {
+    builder.select("name").select_rank("", {}).from("players");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("RANK() OVER ()"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, CreateTempTable) {
+    builder.create_temp_table("tmp_data").column("id", "INTEGER").column("val", "TEXT");
+    EXPECT_EQ(builder.build(), "CREATE TEMP TABLE tmp_data (\n"
+                               "    id INTEGER,\n"
+                               "    val TEXT\n"
+                               ");");
+}
+
+TEST_F(SqlBuilderTest, CreateTempTableIfNotExists) {
+    builder.create_temp_table_if_not_exists("tmp_users").column_primary_key("id", "INTEGER").column("name", "TEXT");
+    EXPECT_EQ(builder.build(), "CREATE TEMP TABLE IF NOT EXISTS tmp_users (\n"
+                               "    id INTEGER PRIMARY KEY,\n"
+                               "    name TEXT\n"
+                               ");");
+}
+
+TEST_F(SqlBuilderTest, TempTableWithConstraints) {
+    builder.create_temp_table("tmp_products")
+            .column_primary_key("id", "INTEGER")
+            .column_not_null("name", "VARCHAR(100)")
+            .table_unique({"name"});
+    string sql = builder.build();
+    EXPECT_NE(sql.find("CREATE TEMP TABLE"), string::npos);
+    EXPECT_NE(sql.find("NOT NULL"), string::npos);
+    EXPECT_NE(sql.find("UNIQUE (name)"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, TempTableCopyPreserved) {
+    builder.create_temp_table("tmp").column("a", "INT");
+    sql_builder copy{builder};
+    EXPECT_EQ(copy.build(), "CREATE TEMP TABLE tmp (\n"
+                            "    a INT\n"
+                            ");");
+}
+
+TEST_F(SqlBuilderTest, InsertMultiRowWithAddValues) {
+    builder.insert_into("users", {"name", "email"}).values({"?", "?"}).add_values({"?", "?"}).add_values({"?", "?"});
+    EXPECT_EQ(builder.build(), "INSERT INTO users (name, email) VALUES (?, ?), (?, ?), (?, ?);");
+}
+
+TEST_F(SqlBuilderTest, InsertBatchValues) {
+    vector<vector<string>> rows;
+    rows.push_back({"'a'", "'a@x.com'"});
+    rows.push_back({"'b'", "'b@x.com'"});
+    rows.push_back({"'c'", "'c@x.com'"});
+    builder.insert_into("users", {"name", "email"}).values(move(rows));
+    EXPECT_EQ(builder.build(),
+              "INSERT INTO users (name, email) VALUES ('a', 'a@x.com'), ('b', 'b@x.com'), ('c', 'c@x.com');");
+}
+
+TEST_F(SqlBuilderTest, InsertBatchValuesSingleRow) {
+    vector<vector<string>> rows;
+    rows.push_back({"'only'"});
+    builder.insert_into("users", {"name"}).values(move(rows));
+    EXPECT_EQ(builder.build(), "INSERT INTO users (name) VALUES ('only');");
+}
+
+TEST_F(SqlBuilderTest, InsertBatchValuesEmpty) {
+    builder.insert_into("users", {"name", "email"}).values(vector<vector<string>>{});
+    EXPECT_EQ(builder.build(), "INSERT INTO users (name, email) VALUES ();");
+}
+
+TEST_F(SqlBuilderTest, InsertValuesClearsExtraRows) {
+    builder.insert_into("t", {"a", "b"}).values({"x", "y"});
+    EXPECT_EQ(builder.build(), "INSERT INTO t (a, b) VALUES (x, y);");
+}
+
+TEST_F(SqlBuilderTest, InsertMultiRowCopyPreserved) {
+    builder.insert_into("t", {"a", "b"}).values({"?", "?"}).add_values({"?", "?"});
+    sql_builder copy{builder};
+    EXPECT_EQ(copy.build(), "INSERT INTO t (a, b) VALUES (?, ?), (?, ?);");
+}
+
+TEST_F(SqlBuilderTest, GroupByRollup) {
+    builder.select({"year", "month"})
+            .select_sum("sales", "total")
+            .from("sales_data")
+            .group_by_rollup({"year", "month"});
+    EXPECT_EQ(builder.build(), "SELECT year, month, SUM(sales) AS total FROM sales_data GROUP BY ROLLUP(year, month);");
+}
+
+TEST_F(SqlBuilderTest, GroupByCube) {
+    builder.select({"region", "product"})
+            .select_sum("revenue", "total")
+            .from("sales")
+            .group_by_cube({"region", "product"});
+    EXPECT_EQ(builder.build(),
+              "SELECT region, product, SUM(revenue) AS total FROM sales GROUP BY CUBE(region, product);");
+}
+
+TEST_F(SqlBuilderTest, GroupByRollupSingleField) {
+    builder.select("category").select_count().from("products").group_by_rollup({"category"});
+    EXPECT_EQ(builder.build(), "SELECT category, COUNT(*) FROM products GROUP BY ROLLUP(category);");
+}
+
+TEST_F(SqlBuilderTest, RollupClearsRegularGroupBy) {
+    builder.select({"a", "b"}).select_count().from("t").group_by("a").group_by_rollup({"b"});
+    string sql = builder.build();
+    EXPECT_NE(sql.find("ROLLUP(b)"), string::npos);
+    EXPECT_EQ(sql.find("GROUP BY a"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, CubeCopyPreserved) {
+    builder.select({"a"}).select_count().from("t").group_by_cube({"a", "b"});
+    sql_builder copy{builder};
+    EXPECT_NE(copy.build().find("GROUP BY CUBE(a, b)"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, FetchFirst) {
+    builder.select_all().from("users").fetch_first(10);
+    EXPECT_EQ(builder.build(), "SELECT * FROM users FETCH FIRST 10 ROWS ONLY;");
+}
+
+TEST_F(SqlBuilderTest, FetchFirstWithOffset) {
+    builder.select_all().from("users").offset(20).fetch_first(10);
+    EXPECT_EQ(builder.build(), "SELECT * FROM users OFFSET 20 ROWS FETCH FIRST 10 ROWS ONLY;");
+}
+
+TEST_F(SqlBuilderTest, FetchFirstOverridesLimit) {
+    builder.select_all().from("users").limit(5).fetch_first(10);
+    string sql = builder.build();
+    EXPECT_NE(sql.find("FETCH FIRST 10 ROWS ONLY"), string::npos);
+    EXPECT_EQ(sql.find("LIMIT"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, LimitOverridesFetchFirst) {
+    builder.select_all().from("users").fetch_first(10).limit(5);
+    string sql = builder.build();
+    EXPECT_NE(sql.find("LIMIT 5"), string::npos);
+    EXPECT_EQ(sql.find("FETCH FIRST"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, FetchFirstCopyPreserved) {
+    builder.select_all().from("users").offset(10).fetch_first(5);
+    sql_builder copy{builder};
+    EXPECT_EQ(copy.build(), "SELECT * FROM users OFFSET 10 ROWS FETCH FIRST 5 ROWS ONLY;");
+}
+
+TEST_F(SqlBuilderTest, FetchFirstWithoutOffset) {
+    builder.select("id").from("users").order_by_asc("name").fetch_first(25);
+    EXPECT_EQ(builder.build(), "SELECT id FROM users ORDER BY name ASC FETCH FIRST 25 ROWS ONLY;");
+}
+
+TEST_F(SqlBuilderTest, CreateIndex) {
+    builder.create_index("idx_users_email", "users", {"email"});
+    EXPECT_EQ(builder.build(), "CREATE INDEX idx_users_email ON users (email);");
+}
+
+TEST_F(SqlBuilderTest, CreateUniqueIndex) {
+    builder.create_unique_index("idx_users_email", "users", {"email"});
+    EXPECT_EQ(builder.build(), "CREATE UNIQUE INDEX idx_users_email ON users (email);");
+}
+
+TEST_F(SqlBuilderTest, CreateCompositeIndex) {
+    builder.create_index("idx_users_name", "users", {"last_name", "first_name"});
+    EXPECT_EQ(builder.build(), "CREATE INDEX idx_users_name ON users (last_name, first_name);");
+}
+
+TEST_F(SqlBuilderTest, DropIndex) {
+    builder.drop_index("idx_users_email");
+    EXPECT_EQ(builder.build(), "DROP INDEX idx_users_email;");
+}
+
+TEST_F(SqlBuilderTest, DropIndexIfExists) {
+    builder.drop_index_if_exists("idx_users_email");
+    EXPECT_EQ(builder.build(), "DROP INDEX IF EXISTS idx_users_email;");
+}
+
+TEST_F(SqlBuilderTest, TruncateTable) {
+    builder.truncate("users");
+    EXPECT_EQ(builder.build(), "TRUNCATE TABLE users;");
+}
+
+TEST_F(SqlBuilderTest, CreateIndexThrowsWithoutColumns) {
+    builder.create_index("idx_empty", "t", {});
+    EXPECT_THROW(ignore = builder.build(), value_exception);
+}
+
+TEST_F(SqlBuilderTest, CreateIndexCopyPreserved) {
+    builder.create_index("idx_test", "users", {"name"});
+    sql_builder copy{builder};
+    EXPECT_EQ(copy.build(), "CREATE INDEX idx_test ON users (name);");
+}
+
+TEST_F(SqlBuilderTest, CreateTableBasic) {
+    builder.create_table("users")
+            .column("id", "INTEGER")
+            .column_not_null("name", "TEXT")
+            .column_unique("email", "TEXT");
+    EXPECT_EQ(builder.build(), "CREATE TABLE users (\n"
+                               "    id INTEGER,\n"
+                               "    name TEXT NOT NULL,\n"
+                               "    email TEXT UNIQUE\n"
+                               ");");
+}
+
+TEST_F(SqlBuilderTest, CreateTableWithPrimaryKey) {
+    builder.create_table("users").column_primary_key("id", "INTEGER").column_not_null("name", "VARCHAR(255)");
+    EXPECT_EQ(builder.build(), "CREATE TABLE users (\n"
+                               "    id INTEGER PRIMARY KEY,\n"
+                               "    name VARCHAR(255) NOT NULL\n"
+                               ");");
+}
+
+TEST_F(SqlBuilderTest, CreateTableWithAutoIncrement) {
+    builder.create_table("users").column_auto_increment("id", "INTEGER").column("name", "TEXT");
+    EXPECT_EQ(builder.build(), "CREATE TABLE users (\n"
+                               "    id INTEGER AUTO_INCREMENT PRIMARY KEY,\n"
+                               "    name TEXT\n"
+                               ");");
+}
+
+TEST_F(SqlBuilderTest, CreateTableWithDefault) {
+    builder.create_table("users")
+            .column_primary_key("id", "INTEGER")
+            .column_default("status", "VARCHAR(20)", "'active'");
+    EXPECT_EQ(builder.build(), "CREATE TABLE users (\n"
+                               "    id INTEGER PRIMARY KEY,\n"
+                               "    status VARCHAR(20) DEFAULT 'active'\n"
+                               ");");
+}
+
+TEST_F(SqlBuilderTest, CreateTableWithCheck) {
+    builder.create_table("products")
+            .column_primary_key("id", "INTEGER")
+            .column_check("price", "DECIMAL(10,2)", "price > 0");
+    EXPECT_EQ(builder.build(), "CREATE TABLE products (\n"
+                               "    id INTEGER PRIMARY KEY,\n"
+                               "    price DECIMAL(10,2) CHECK (price > 0)\n"
+                               ");");
+}
+
+TEST_F(SqlBuilderTest, CreateTableIfNotExists) {
+    builder.create_table_if_not_exists("users").column_primary_key("id", "INTEGER").column("name", "TEXT");
+    EXPECT_EQ(builder.build(), "CREATE TABLE IF NOT EXISTS users (\n"
+                               "    id INTEGER PRIMARY KEY,\n"
+                               "    name TEXT\n"
+                               ");");
+}
+
+TEST_F(SqlBuilderTest, CreateTableTableLevelConstraints) {
+    builder.create_table("orders")
+            .column("order_id", "INTEGER")
+            .column("user_id", "INTEGER")
+            .column("amount", "DECIMAL(10,2)")
+            .table_primary_key({"order_id"})
+            .table_foreign_key("user_id", "users", "id");
+    EXPECT_EQ(builder.build(), "CREATE TABLE orders (\n"
+                               "    order_id INTEGER,\n"
+                               "    user_id INTEGER,\n"
+                               "    amount DECIMAL(10,2),\n"
+                               "    PRIMARY KEY (order_id),\n"
+                               "    FOREIGN KEY (user_id) REFERENCES users(id)\n"
+                               ");");
+}
+
+TEST_F(SqlBuilderTest, CreateTableWithUniqueConstraint) {
+    builder.create_table("users")
+            .column("first_name", "TEXT")
+            .column("last_name", "TEXT")
+            .table_unique({"first_name", "last_name"});
+    EXPECT_NE(builder.build().find("UNIQUE (first_name, last_name)"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, CreateTableWithCheckConstraint) {
+    builder.create_table("products").column("price", "DECIMAL(10,2)").table_check("price > 0");
+    EXPECT_NE(builder.build().find("CHECK (price > 0)"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, CreateTableThrowsWithoutColumns) {
+    builder.create_table("empty");
+    EXPECT_THROW(ignore = builder.build(), value_exception);
+}
+
+TEST_F(SqlBuilderTest, CreateView) {
+    builder.create_view("active_users", "SELECT id, name FROM users WHERE active = 1");
+    EXPECT_EQ(builder.build(), "CREATE VIEW active_users AS\n"
+                               "SELECT id, name FROM users WHERE active = 1;");
+}
+
+TEST_F(SqlBuilderTest, CreateOrReplaceView) {
+    builder.create_or_replace_view("user_count", "SELECT COUNT(*) FROM users");
+    EXPECT_EQ(builder.build(), "CREATE OR REPLACE VIEW user_count AS\n"
+                               "SELECT COUNT(*) FROM users;");
+}
+
+TEST_F(SqlBuilderTest, DropView) {
+    builder.drop_view("old_view");
+    EXPECT_EQ(builder.build(), "DROP VIEW old_view;");
+}
+
+TEST_F(SqlBuilderTest, DropViewIfExists) {
+    builder.drop_view_if_exists("maybe_view");
+    EXPECT_EQ(builder.build(), "DROP VIEW IF EXISTS maybe_view;");
+}
+
+TEST_F(SqlBuilderTest, AlterTableAddColumn) {
+    builder.alter_table("users").add_column("age", "INTEGER");
+    EXPECT_EQ(builder.build(), "ALTER TABLE users ADD COLUMN age INTEGER;");
+}
+
+TEST_F(SqlBuilderTest, AlterTableDropColumn) {
+    builder.alter_table("users").drop_column("age");
+    EXPECT_EQ(builder.build(), "ALTER TABLE users DROP COLUMN age;");
+}
+
+TEST_F(SqlBuilderTest, AlterTableRenameColumn) {
+    builder.alter_table("users").rename_column("name", "full_name");
+    EXPECT_EQ(builder.build(), "ALTER TABLE users RENAME COLUMN name TO full_name;");
+}
+
+TEST_F(SqlBuilderTest, AlterTableSetDefault) {
+    builder.alter_table("users").alter_column_set_default("status", "'active'");
+    EXPECT_EQ(builder.build(), "ALTER TABLE users ALTER COLUMN status SET DEFAULT 'active';");
+}
+
+TEST_F(SqlBuilderTest, AlterTableDropDefault) {
+    builder.alter_table("users").alter_column_drop_default("status");
+    EXPECT_EQ(builder.build(), "ALTER TABLE users ALTER COLUMN status DROP DEFAULT;");
+}
+
+TEST_F(SqlBuilderTest, AlterTableSetNotNull) {
+    builder.alter_table("users").alter_column_set_not_null("email");
+    EXPECT_EQ(builder.build(), "ALTER TABLE users ALTER COLUMN email SET NOT NULL;");
+}
+
+TEST_F(SqlBuilderTest, AlterTableDropNotNull) {
+    builder.alter_table("users").alter_column_drop_not_null("email");
+    EXPECT_EQ(builder.build(), "ALTER TABLE users ALTER COLUMN email DROP NOT NULL;");
+}
+
+TEST_F(SqlBuilderTest, AlterTableMultipleActions) {
+    builder.alter_table("users")
+            .add_column("age", "INTEGER")
+            .alter_column_set_default("status", "'active'")
+            .alter_column_set_not_null("name");
+    EXPECT_EQ(builder.build(), "ALTER TABLE users ADD COLUMN age INTEGER, ALTER COLUMN status SET DEFAULT 'active', "
+                               "ALTER COLUMN name SET NOT NULL;");
+}
+
+TEST_F(SqlBuilderTest, AlterTableSetType) {
+    builder.alter_table("users").alter_column_set_type("name", "VARCHAR(255)");
+    EXPECT_EQ(builder.build(), "ALTER TABLE users ALTER COLUMN name SET DATA TYPE VARCHAR(255);");
+}
+
+TEST_F(SqlBuilderTest, AlterTableAddPrimaryKey) {
+    builder.alter_table("users").add_primary_key({"id"});
+    EXPECT_EQ(builder.build(), "ALTER TABLE users ADD PRIMARY KEY (id);");
+}
+
+TEST_F(SqlBuilderTest, AlterTableDropConstraint) {
+    builder.alter_table("users").drop_constraint("uq_email");
+    EXPECT_EQ(builder.build(), "ALTER TABLE users DROP CONSTRAINT uq_email;");
+}
+
+TEST_F(SqlBuilderTest, AlterTableThrowsWithoutActions) {
+    builder.alter_table("users");
+    EXPECT_THROW(ignore = builder.build(), value_exception);
+}
+
 struct MockTransaction {
     int begin_calls = 0;
     int commit_calls = 0;

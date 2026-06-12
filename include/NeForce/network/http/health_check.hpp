@@ -56,6 +56,11 @@ private:
     pair<string, bool> build_health_json();
 };
 
+// TODO: Metrics collection — request count, latency percentiles (p50/p95/p99), error rate, active connections gauge
+// TODO: Prometheus exposition format — /metrics endpoint with Prometheus text format for scraping
+// TODO: OpenTelemetry tracing — distributed trace context propagation (W3C TraceContext / B3), span export to OTLP/Jaeger/Zipkin
+// TODO: Admin endpoints — /actuator/loggers (dynamic log level), /actuator/threaddump, /actuator/env
+
 /** @} */ // HTTP
 
 NEFORCE_END_HTTP__

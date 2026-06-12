@@ -98,6 +98,9 @@ public:
         string user_agent{"NexusForce HTTP Client/1.0"}; ///< User-Agent
         string proxy_host;                               ///< 代理主机
         ports proxy_port;                                ///< 代理端口
+        // TODO: Connection pool — max_connections_per_host, idle_timeout, max_idle_connections
+        // TODO: Retry policy — max_retries, retry_backoff_ms, retry_on_status_codes (429, 502, 503, 504)
+        // TODO: Circuit breaker — failure_threshold, recovery_timeout, half_open_max_requests
     };
 
     using progress_callback_t = function<void(size_t, size_t)>; ///< 进度回调类型
@@ -156,6 +159,8 @@ public:
 
     http_client(http_client&&) noexcept = delete;
     http_client& operator=(http_client&&) noexcept = delete;
+
+    // TODO: Declarative HTTP client — interface-based client generation (like @FeignClient / HttpExchange), define API as abstract methods with annotations
 
     /**
      * @brief 设置客户端配置

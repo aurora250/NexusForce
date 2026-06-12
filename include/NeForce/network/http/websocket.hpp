@@ -199,6 +199,9 @@ public:
         lock<mutex> lk(sessions_mutex_);
         return sessions_.size();
     }
+
+    // TODO: STOMP sub-protocol support — STOMP 1.2 over WebSocket with destination-based routing, subscription management, ACK modes
+    // TODO: SockJS fallback — HTTP long-polling / XHR streaming fallback for browsers without WebSocket support
 };
 
 /**

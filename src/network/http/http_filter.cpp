@@ -355,6 +355,7 @@ root_path_(move(root_path)) {
     mime_types_[".ttf"] = "font/ttf";
     mime_types_[".pdf"] = "application/pdf";
     mime_types_[".mp4"] = "video/mp4";
+    mime_types_[".mjs"] = "application/javascript";  ///< ES module (Vite/Rollup/Node.js)
 }
 
 optional<http_content> static_file_filter::get_mime_type(const string& path) const {
@@ -402,16 +403,12 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
         return false;
     }
 
-    const auto mime_type = get_mime_type(req_path);
-    if (!mime_type) {
-        return true;
-    }
-
-    try {
-        const path file_path(root_path_ + req_path);
+    // Lambda: try serving a file at a given relative path with a given MIME type
+    auto try_serve_file = [&](const string& rel_path, const http_content& mime_type) -> bool {
+        const path file_path(root_path_ + rel_path);
 
         if (!file_path.exists()) {
-            return true;
+            return false;
         }
 
         const auto file_size = filesystem::size(file_path);
@@ -420,11 +417,11 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
             response.status_message = "Payload Too Large";
             response.set_content_type(http_content::PLAIN_TEXT());
             response.body = "File too large";
-            return false;
+            return true; // response already set, caller should return false
         }
 
-        const bool is_binary = mime_type->is_jpeg_img() || mime_type->is_png_img() || mime_type->is_bmp_img() ||
-                               mime_type->is_webp_img();
+        const bool is_binary = mime_type.is_jpeg_img() || mime_type.is_png_img() || mime_type.is_bmp_img() ||
+                               mime_type.is_webp_img();
 
         if (is_binary) {
             response.body = file(file_path).read_binary();
@@ -432,7 +429,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
             response.body = file(file_path).read();
         }
 
-        response.set_content_type(*mime_type);
+        response.set_content_type(mime_type);
 
         if (enable_range_ && !response.body.empty()) {
             const auto range_header = request.header("Range");
@@ -445,7 +442,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
                     response.status_message = "Range Not Satisfiable";
                     response.set_header("Content-Range", string("bytes */") + to_string(full_content.size()));
                     response.body.clear();
-                    return false;
+                    return true; // response already set, caller should return false
                 }
 
                 if (ranges.size() == 1) {
@@ -461,7 +458,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
                     for (int i = 0; i < 16; ++i) {
                         boundary += format("{:x}", secret::next_int<uint32_t>(16));
                     }
-                    response.body = build_multipart_ranges(ranges, mime_type->to_string().view(), boundary.view(),
+                    response.body = build_multipart_ranges(ranges, mime_type.to_string().view(), boundary.view(),
                                                            [&full_content](const byte_range& rng) -> string {
                                                                const uint64_t length = rng.end - rng.start + 1;
                                                                return full_content.substr(rng.start,
@@ -485,16 +482,69 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
             response.set_header("Cache-Control", "public, max-age=3600");
         }
 
+        return true; // file served successfully
+    };
+
+    // Check if the request path should be excluded from SPA fallback
+    auto is_spa_excluded = [this](const string& path) -> bool {
+        for (const auto& prefix : spa_exclude_paths_) {
+            if (path == prefix || path.starts_with(prefix)) {
+                return true;
+            }
+        }
         return false;
-    } catch (const exception& e) {
-        println("[ERROR] Static file filter failed: ", e.what());
-        return true;
+    };
+
+    // Try to serve the requested path as a static file
+    const auto mime_type = get_mime_type(req_path);
+    if (mime_type) {
+        try {
+            if (try_serve_file(req_path, *mime_type)) {
+                return false;
+            }
+        } catch (const exception& e) {
+            println("[ERROR] Static file filter failed for '", req_path, "': ", e.what());
+        }
     }
+
+    // SPA fallback: if enabled and path is not excluded, serve the fallback file
+    if (spa_fallback_enabled_ && !spa_fallback_path_.empty() && !is_spa_excluded(req_path)) {
+        // Only fallback if the request path itself does not match a known static extension
+        // OR the file for a known extension doesn't exist (we already tried above)
+        const auto fallback_mime = get_mime_type(spa_fallback_path_);
+        if (fallback_mime) {
+            try {
+                if (try_serve_file(spa_fallback_path_, *fallback_mime)) {
+                    return false;
+                }
+            } catch (const exception& e) {
+                println("[ERROR] SPA fallback failed for '", spa_fallback_path_, "': ", e.what());
+            }
+        }
+    }
+
+    return true;
 }
 
 void static_file_filter::add_mime_type(const string& extension, http_content content_type) {
     if (!extension.empty()) {
         mime_types_[extension] = move(content_type);
+    }
+}
+
+void static_file_filter::set_spa_fallback(string index_file) {
+    if (index_file.empty()) {
+        spa_fallback_path_.clear();
+        spa_fallback_enabled_ = false;
+    } else {
+        spa_fallback_path_ = move(index_file);
+        spa_fallback_enabled_ = true;
+    }
+}
+
+void static_file_filter::add_spa_exclude_path(string path_prefix) {
+    if (!path_prefix.empty()) {
+        spa_exclude_paths_.push_back(move(path_prefix));
     }
 }
 

@@ -14,17 +14,15 @@ query-filters:
       id: cpp/unused-local-variable
 
   - exclude:
-      id: cpp/array-to-pointer-decay
-
+      id: cpp/array-in-interface
   - exclude:
-      tags contain: maintainability
-      severity: warning
-      pattern: |
-        switch
-        case
-
+      id: cpp/long-switch
   - exclude:
       id: cpp/commented-out-code
+  - exclude:
+      id: cpp/complex-condition
+  - exclude:
+      id: cpp/large-parameter
 
 paths:
   - src

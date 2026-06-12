@@ -543,6 +543,10 @@ public:
     static const http_content& WEBP_IMG();   ///< image/webp
     static const http_content& HTML_MSG();   ///< message/html
 
+    // TODO: application/problem+json — RFC 9457 Problem Details MIME type for standardized API error responses
+    // TODO: application/octet-stream — generic binary data MIME type for file downloads
+    // TODO: multipart/form-data — MIME type constant for form upload content negotiation
+
     NEFORCE_NODISCARD bool is_html_text() const { return content_ == HTML_TEXT().content_; }
     NEFORCE_NODISCARD bool is_xml_text() const { return content_ == XML_TEXT().content_; }
     NEFORCE_NODISCARD bool is_css_text() const { return content_ == CSS_TEXT().content_; }

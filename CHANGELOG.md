@@ -4,6 +4,7 @@
 
 ### 🚀 New Features
 - 添加 GoogleBenchmark 配置
+- `sql_builder` 达到 ANSI SQL-92 Entry/Intermediate 级完整覆盖
 - 添加 HTTP/2 (h2) TLS+ALPN 协商支持，`ssl_stream::get_alpn_negotiated()` 接口
 - 添加 HTTP/2 连接管理 `http2_connection`（h2c 升级 + h2 ALPN 双模式）
 - 添加 HTTP/2 协议帧处理 `http2_protocol`
@@ -22,6 +23,7 @@
 - 添加 `http_client_request` 的 `scheme` 字段，支持基于 scheme 的 SSL 自动检测
 
 ### 🔧 Improvements
+- `sql_builder` 扩展 API，覆盖 DML/DDL/视图/索引/CTE/窗口函数/集合操作
 - `http_client` 重构为 scheme 感知模式：`scheme == "https"` 时自动创建 SSL 上下文
 - `ssl_client::post_connect()` 无 SSL 上下文时跳过 TLS 握手，支持纯 TCP 模式
 - `http_server` HTTPS 构造函数自动设置 ALPN 协议列表 (`h2`, `http/1.1`)
@@ -31,6 +33,7 @@
 - 更新所有网络示例代码（http_server, https_server, http2_server, websocket_server 等）
 
 ### 🐛 Bug Fixes
+- 修复 SSO 启用时 `sql_builder` 的 `values(initializer_list<string>)` 在 LONG 模式字符串边界导致堆损坏的问题
 - 修复 Linux 平台的 CMake install 配置
 - 修复 `http_server::send_response()` 对 TLS 连接使用 `::writev()` 裸 fd 绕过 SSL 的问题
 - 修复 HTTP/2 h2c 升级握手挂起（缺少 SETTINGS 帧发送与 `flush_writes()`）

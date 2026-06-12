@@ -13,6 +13,7 @@
 #include <NeForce/core/system/console.hpp>
 #include <NeForce/db/database_pool.hpp>
 #include <NeForce/db/db_config.hpp>
+#include <NeForce/db/sql_builder.hpp>
 
 #ifdef NEFORCE_SUPPORT_SQLITE3
 #    include <NeForce/db/sqlite/sqlite_connect.hpp>
@@ -44,10 +45,15 @@ int main() {
     {
         auto conn = pool.get_tb_connect();
         if (conn != nullptr) {
-            conn->update("CREATE TABLE pool_test (id INTEGER PRIMARY KEY, value TEXT)");
-            conn->update("INSERT INTO pool_test (value) VALUES ('pool_example')");
+            ignore = conn->update("CREATE TABLE pool_test (id INTEGER PRIMARY KEY, value TEXT)");
 
-            auto result = conn->query("SELECT value FROM pool_test");
+            sql_builder ins;
+            ins.insert_into("pool_test", {"value"}).values({"'pool_example'"});
+            ignore = conn->update(ins.build());
+
+            sql_builder sel;
+            sel.select("value").from("pool_test");
+            auto result = conn->query(sel.build());
             if (result != nullptr && result->next()) {
                 printfln("查询结果: {}", result->get(0));
             }

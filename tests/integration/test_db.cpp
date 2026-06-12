@@ -542,9 +542,11 @@ TEST_F(MysqlPoolTest, AcquireAndOperate) {
         delete pool;
         GTEST_SKIP() << "MySQL pool unavailable";
     }
-    auto conn = pool->get_tb_connect();
-    ASSERT_NE(conn, nullptr);
-    EXPECT_TRUE(conn->is_valid());
+    {
+        auto conn = pool->get_tb_connect();
+        ASSERT_NE(conn, nullptr);
+        EXPECT_TRUE(conn->is_valid());
+    }
     delete pool;
 }
 #endif
@@ -713,9 +715,11 @@ TEST_F(PgsqlPoolTest, AcquireAndOperate) {
         delete pool;
         GTEST_SKIP() << "PostgreSQL pool unavailable";
     }
-    auto conn = pool->get_tb_connect();
-    ASSERT_NE(conn, nullptr);
-    EXPECT_TRUE(conn->is_valid());
+    {
+        auto conn = pool->get_tb_connect();
+        ASSERT_NE(conn, nullptr);
+        EXPECT_TRUE(conn->is_valid());
+    }
     delete pool;
 }
 #endif
@@ -869,14 +873,16 @@ TEST_F(RedisPoolTest, AcquireAndOperate) {
         delete pool;
         GTEST_SKIP() << "Redis pool unavailable";
     }
-    auto conn = pool->get_kv_connect();
-    ASSERT_NE(conn, nullptr);
-    EXPECT_TRUE(conn->is_valid());
-    conn->set("pool_test", "ok");
-    auto result = conn->get("pool_test");
-    ASSERT_NE(result, nullptr);
-    ASSERT_TRUE(result->next());
-    EXPECT_EQ(result->value(), "ok");
+    {
+        auto conn = pool->get_kv_connect();
+        ASSERT_NE(conn, nullptr);
+        EXPECT_TRUE(conn->is_valid());
+        conn->set("pool_test", "ok");
+        auto result = conn->get("pool_test");
+        ASSERT_NE(result, nullptr);
+        ASSERT_TRUE(result->next());
+        EXPECT_EQ(result->value(), "ok");
+    }
     delete pool;
 }
 #endif

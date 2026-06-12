@@ -156,6 +156,10 @@ public:
     void cleanup_expired(seconds max_age = seconds{300});
 
     NEFORCE_NODISCARD string name() const override { return "token_bucket_filter"; }
+
+    // TODO: Distributed rate limiting — Redis/Lua-script based shared counter for multi-instance rate limit coordination
+    // TODO: Sliding window algorithm — more precise rate limiting using sliding log/window instead of token bucket
+    // TODO: Rate limit response headers — X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset in 429 responses
 };
 
 /** @} */ // HTTP

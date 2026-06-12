@@ -43,7 +43,7 @@ pool_cfg_(pool_config) {
 
     size_t created = 0;
     size_t consecutive_failures = 0;
-    constexpr size_t max_consecutive_failures = 5;
+    constexpr size_t max_consecutive_failures = 2;
 
     while (created < pool_cfg_.init_size) {
         idb_connect* conn = try_create_connect();

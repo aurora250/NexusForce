@@ -35,6 +35,8 @@ public:
     void do_filter(http_request& request, http_response& response) override {}
     void post_filter(http_request& request, http_response& response) override;
     NEFORCE_NODISCARD string name() const override { return "compress_filter"; }
+
+    // TODO: Brotli compression support — add 'br' to Accept-Encoding negotiation, Brotli offers ~20% better compression than gzip
 };
 
 /** @} */ // HTTP

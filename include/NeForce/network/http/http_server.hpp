@@ -140,6 +140,12 @@ public:
     size_t max_h2c_upgrades{32};           ///< 最大h2c升级连接数
     milliseconds body_read_timeout{30000}; ///< 请求体读取超时（毫秒）
 
+    // TODO: HTTP/3 (QUIC) protocol support — integrate QUIC transport (RFC 9114) for 0-RTT, reduced head-of-line blocking
+    // TODO: Configuration file support — load server settings from YAML/JSON config files (port, SSL, worker_count, limits)
+    // TODO: Server-sent events (SSE) — add SSE stream support for unidirectional real-time data push to browsers
+    // TODO: Actuator-style management endpoints — /actuator/metrics, /actuator/env, /actuator/loggers, /actuator/threaddump
+    // TODO: Hot reload / DevTools — watch static file directory for changes and notify connected browsers (LiveReload)
+
 private:
     unordered_map<string, function<bool(http_request&, tcp_socket*)>> upgrade_handlers_;
 

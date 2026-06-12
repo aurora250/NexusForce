@@ -358,6 +358,9 @@ cmake --build . --config Release
 
 # 安装到系统目录
 cmake --install . --config Release
+
+# 或使用脚本快速安装，更多参数参见install_nexusforce.py注释
+python ./scripts/install_nexusforce.py --release
 ```
 
 #### 🐧 Linux
@@ -378,6 +381,9 @@ make -j$(nproc)
 
 # 安装到系统目录
 sudo make install
+
+# 或使用脚本快速安装，更多参数参见install_nexusforce.py注释
+python ./scripts/install_nexusforce.py --release
 ```
 
 ---
