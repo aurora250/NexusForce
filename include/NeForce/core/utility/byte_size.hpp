@@ -652,9 +652,9 @@ NEFORCE_NODISCARD constexpr byte_size operator""_EB(const decimal_t bytes) {
     return byte_size{bytes, byte_size::unit::EB};
 }
 
-/** @} */ // UserLiterals
+/** @} */
 
 NEFORCE_END_LITERALS__
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_CORE_UTILITY_BYTE_SIZE_HPP__
+#endif
