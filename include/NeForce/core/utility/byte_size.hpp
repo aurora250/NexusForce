@@ -9,7 +9,10 @@
  * 字符串解析和格式化输出。支持二进制和十进制两种标准。
  */
 
-#include "NeForce/core/interface/iobject.hpp"
+#include "NeForce/core/utility/packages.hpp"
+#include "NeForce/core/string/format.hpp"
+#include "NeForce/core/string/to_numerics.hpp"
+#include "NeForce/core/algorithm/type_erase.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -139,8 +142,6 @@ NEFORCE_BEGIN_NAMESPACE__
  * // 格式化输出
  * println(size2.to_string(byte_size::unit::KB, 0));  // "1536 KB"
  * @endcode
- *
- * TODO: All operations for optimizing byte_size are constexpr
  */
 class NEFORCE_API byte_size : public iobject<byte_size>, public icommon<byte_size> {
 public:
@@ -184,7 +185,7 @@ public:
      * @param binary 是否使用二进制，默认true
      * @throws value_exception 值为负数或超出范围时抛出
      */
-    byte_size(decimal_t value, unit u, bool binary = true);
+    constexpr byte_size(decimal_t value, unit u, bool binary = true);
 
     /**
      * @brief 从字符串解析字节大小
@@ -195,7 +196,7 @@ public:
      * 支持的单位：B、KB/K、MB/M、GB/G、TB/T、PB/P、EB/E
      * 示例："1024", "1.5 MB", "2G", "500KB"
      */
-    NEFORCE_NODISCARD static byte_size parse(string_view str) { return parse(str, true); }
+    NEFORCE_NODISCARD static constexpr byte_size parse(string_view str) { return parse(str, true); }
 
     /**
      * @brief 从字符串解析字节大小（指定进制）
@@ -204,7 +205,7 @@ public:
      * @return 字节大小对象
      * @throws value_exception 解析失败时抛出
      */
-    NEFORCE_NODISCARD static byte_size parse(string_view str, bool binary);
+    NEFORCE_NODISCARD static constexpr byte_size parse(string_view str, bool binary);
 
     /**
      * @brief 获取字节数
@@ -219,13 +220,13 @@ public:
      * @return 转换后的浮点值
      * @throws value_exception unit为AUTO时抛出
      */
-    NEFORCE_NODISCARD decimal_t as(unit u, bool binary = true) const;
+    NEFORCE_NODISCARD constexpr decimal_t as(unit u, bool binary = true) const;
 
     /**
      * @brief 转换为可读字符串
      * @return 格式化字符串
      */
-    NEFORCE_NODISCARD string to_string() const { return to_string(unit::AUTO, 2, true); }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string() const { return to_string(unit::AUTO, 2, true); }
 
     /**
      * @brief 转换为指定单位的字符串
@@ -234,7 +235,7 @@ public:
      * @param binary 是否使用二进制
      * @return 格式化字符串
      */
-    NEFORCE_NODISCARD string to_string(unit u, int precision = 2, bool binary = true) const;
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string to_string(unit u, int precision = 2, bool binary = true) const;
 
     /**
      * @brief 检查是否为零
@@ -242,12 +243,12 @@ public:
      */
     NEFORCE_NODISCARD constexpr bool is_zero() const noexcept { return bytes_ == 0; }
 
-    byte_size& operator+=(const byte_size& rhs) noexcept {
+    constexpr byte_size& operator+=(const byte_size& rhs) noexcept {
         bytes_ += rhs.bytes_;
         return *this;
     }
 
-    byte_size& operator-=(const byte_size& rhs) {
+    constexpr byte_size& operator-=(const byte_size& rhs) {
         if (bytes_ < rhs.bytes_) {
             NEFORCE_THROW_EXCEPTION(value_exception("Memory size subtraction underflow"));
         }
@@ -255,12 +256,12 @@ public:
         return *this;
     }
 
-    byte_size& operator*=(uint64_t factor) noexcept {
+    constexpr byte_size& operator*=(uint64_t factor) noexcept {
         bytes_ *= factor;
         return *this;
     }
 
-    byte_size& operator/=(uint64_t divisor) {
+    constexpr byte_size& operator/=(uint64_t divisor) {
         if (divisor == 0) {
             NEFORCE_THROW_EXCEPTION(value_exception("Division by zero"));
         }
@@ -272,45 +273,252 @@ public:
         return byte_size(bytes_ + rhs.bytes_);
     }
 
-    NEFORCE_NODISCARD byte_size operator-(const byte_size& rhs) const {
+    NEFORCE_NODISCARD constexpr byte_size operator-(const byte_size& rhs) const {
         if (bytes_ < rhs.bytes_) {
             NEFORCE_THROW_EXCEPTION(value_exception("Memory size subtraction underflow"));
         }
         return byte_size(bytes_ - rhs.bytes_);
     }
 
-    NEFORCE_NODISCARD byte_size operator*(uint64_t factor) const {
+    NEFORCE_NODISCARD constexpr byte_size operator*(uint64_t factor) const {
         if (factor > 0 && bytes_ > numeric_traits<uint64_t>::max() / factor) {
             NEFORCE_THROW_EXCEPTION(value_exception("Memory size multiplication overflow"));
         }
         return byte_size(bytes_ * factor);
     }
 
-    NEFORCE_NODISCARD byte_size operator/(uint64_t divisor) const {
+    NEFORCE_NODISCARD constexpr byte_size operator/(uint64_t divisor) const {
         if (divisor == 0) {
             NEFORCE_THROW_EXCEPTION(value_exception("Division by zero"));
         }
         return byte_size(bytes_ / divisor);
     }
 
-    NEFORCE_NODISCARD friend byte_size operator*(uint64_t factor, const byte_size& size) { return size * factor; }
+    NEFORCE_NODISCARD friend constexpr byte_size operator*(uint64_t factor, const byte_size& size) {
+        return size * factor;
+    }
 
-    NEFORCE_NODISCARD bool equal_to(const byte_size& rhs) const noexcept { return bytes_ == rhs.bytes_; }
-    NEFORCE_NODISCARD bool less_than(const byte_size& rhs) const noexcept { return bytes_ < rhs.bytes_; }
+    NEFORCE_NODISCARD constexpr bool equal_to(const byte_size& rhs) const noexcept { return bytes_ == rhs.bytes_; }
+    NEFORCE_NODISCARD constexpr bool less_than(const byte_size& rhs) const noexcept { return bytes_ < rhs.bytes_; }
 
     /**
      * @brief 计算哈希值
      * @return 哈希值
      */
-    NEFORCE_NODISCARD size_t to_hash() const noexcept { return hash<uint64_t>()(bytes_); }
+    NEFORCE_NODISCARD constexpr size_t to_hash() const noexcept { return hash<uint64_t>()(bytes_); }
 };
 
+/**
+ * @brief byte_size 的类型解包特化
+ *
+ * 允许从 byte_size 提取底层的 uint64_t 存储，
+ * 用于类型擦除和泛型编程工具。
+ *
+ * @see ipackage
+ * @see unpackage
+ */
 template <>
 struct unpackage<byte_size> {
     using type = uint64_t;
 };
 
 /** @} */ // ByteSize
+
+
+/// @cond
+NEFORCE_BEGIN_INNER__
+
+struct byte_size_unit_mapping {
+    string_view name;
+    string_view alt_name;
+    byte_size::unit unit_val;
+};
+
+
+NEFORCE_INLINE17 constexpr uint64_t byte_size_binary_multipliers[] = {
+        1ULL,                                      // B
+        1024ULL,                                   // KB
+        1024ULL * 1024,                            // MB
+        1024ULL * 1024 * 1024,                     // GB
+        1024ULL * 1024 * 1024 * 1024,              // TB
+        1024ULL * 1024 * 1024 * 1024 * 1024,       // PB
+        1024ULL * 1024 * 1024 * 1024 * 1024 * 1024 // EB
+};
+
+NEFORCE_INLINE17 constexpr uint64_t byte_size_decimal_multipliers[] = {
+        1ULL,                                      // B
+        1000ULL,                                   // KB
+        1000ULL * 1000,                            // MB
+        1000ULL * 1000 * 1000,                     // GB
+        1000ULL * 1000 * 1000 * 1000,              // TB
+        1000ULL * 1000 * 1000 * 1000 * 1000,       // PB
+        1000ULL * 1000 * 1000 * 1000 * 1000 * 1000 // EB
+};
+
+NEFORCE_INLINE17 constexpr byte_size_unit_mapping byte_size_unit_mappings[] = {
+        {"B", "", byte_size::unit::B},    {"KB", "K", byte_size::unit::KB}, {"MB", "M", byte_size::unit::MB},
+        {"GB", "G", byte_size::unit::GB}, {"TB", "T", byte_size::unit::TB}, {"PB", "P", byte_size::unit::PB},
+        {"EB", "E", byte_size::unit::EB},
+};
+
+constexpr uint64_t byte_size_get_multiplier(byte_size::unit u, bool binary) {
+    const auto& table = binary ? byte_size_binary_multipliers : byte_size_decimal_multipliers;
+    const auto index = static_cast<size_t>(u);
+    constexpr size_t table_size = 7; // B, KB, MB, GB, TB, PB, EB
+    if (index >= table_size) {
+        NEFORCE_THROW_EXCEPTION(value_exception("Invalid unit for multiplier"));
+    }
+    return table[index];
+}
+
+constexpr byte_size::unit byte_size_parse_unit(const string_view unit_str) {
+    if (unit_str.empty()) {
+        return byte_size::unit::B;
+    }
+
+    for (const auto& mapping: byte_size_unit_mappings) {
+        if (unit_str.compare_ignore_case(mapping.name) == 0) {
+            return mapping.unit_val;
+        }
+        if (!mapping.alt_name.empty() && unit_str.compare_ignore_case(mapping.alt_name) == 0) {
+            return mapping.unit_val;
+        }
+    }
+
+    return byte_size::unit::AUTO;
+}
+
+NEFORCE_CONSTEXPR20 string byte_size_unit_to_string(byte_size::unit unit, bool binary) {
+    switch (unit) {
+        case byte_size::unit::B:
+            return "B";
+        case byte_size::unit::KB:
+            return binary ? "KiB" : "kB";
+        case byte_size::unit::MB:
+            return binary ? "MiB" : "MB";
+        case byte_size::unit::GB:
+            return binary ? "GiB" : "GB";
+        case byte_size::unit::TB:
+            return binary ? "TiB" : "TB";
+        case byte_size::unit::PB:
+            return binary ? "PiB" : "PB";
+        case byte_size::unit::EB:
+            return binary ? "EiB" : "EB";
+        default:
+            return "";
+    }
+}
+
+NEFORCE_END_INNER__
+
+
+constexpr byte_size::byte_size(decimal_t value, unit u, bool binary) {
+    if (value < 0.0L) {
+        NEFORCE_THROW_EXCEPTION(value_exception("Memory size cannot be negative"));
+    }
+    if (u == unit::AUTO) {
+        NEFORCE_THROW_EXCEPTION(value_exception("Cannot construct byte_size with AUTO unit"));
+    }
+
+    const uint64_t multiplier = inner::byte_size_get_multiplier(u, binary);
+    const decimal_t bytes = value * static_cast<decimal_t>(multiplier);
+
+    constexpr decimal_t max_safe = static_cast<decimal_t>(numeric_traits<uint64_t>::max()) - 0.5L;
+    if (bytes > max_safe) {
+        NEFORCE_THROW_EXCEPTION(value_exception("Memory size exceeds maximum representable value"));
+    }
+
+    bytes_ = static_cast<uint64_t>(round(bytes + 0.5L));
+}
+
+constexpr byte_size byte_size::parse(string_view str, bool binary) {
+    str = str.trim();
+    if (str.empty()) {
+        NEFORCE_THROW_EXCEPTION(value_exception("Empty memory size string"));
+    }
+
+    size_t i = 0;
+
+    if (i < str.size() && (str[i] == '+' || str[i] == '-')) {
+        ++i;
+    }
+
+    const size_t num_start = i;
+
+    while (i < str.size() && is_digit(str[i])) {
+        ++i;
+    }
+    if (i < str.size() && str[i] == '.') {
+        ++i;
+        while (i < str.size() && is_digit(str[i])) {
+            ++i;
+        }
+    }
+
+    const string_view num_str = str.view(0, i);
+    if (i == num_start || (i == num_start + 1 && !is_digit(str[num_start]))) {
+        NEFORCE_THROW_EXCEPTION(value_exception("Missing numeric value"));
+    }
+
+    decimal_t value = numeric_traits<decimal_t>::quiet_nan();
+    try {
+        value = decimal::parse(num_str).value();
+    } catch (...) {
+        NEFORCE_THROW_EXCEPTION(value_exception(("Invalid numeric value: "_s + num_str).data()));
+    }
+    if (value < 0.0L) {
+        NEFORCE_THROW_EXCEPTION(value_exception("Memory size cannot be negative"));
+    }
+
+    const string_view unit_str = str.view(i).trim();
+    const unit parsed_unit = inner::byte_size_parse_unit(unit_str);
+    if (parsed_unit == unit::AUTO && !unit_str.empty()) {
+        NEFORCE_THROW_EXCEPTION(value_exception(("Unknown unit")));
+    }
+
+    return {value, parsed_unit == unit::AUTO ? unit::B : parsed_unit, binary};
+}
+
+constexpr decimal_t byte_size::as(unit u, bool binary) const {
+    if (u == unit::AUTO) {
+        NEFORCE_THROW_EXCEPTION(value_exception("unit cannot be Auto for as"));
+    }
+    const uint64_t divisor = inner::byte_size_get_multiplier(u, binary);
+    return static_cast<decimal_t>(bytes_) / static_cast<decimal_t>(divisor);
+}
+
+NEFORCE_CONSTEXPR20 string byte_size::to_string(unit u, int precision, bool binary) const {
+    if (u == unit::AUTO) {
+        if (bytes_ == 0) {
+            const string fmt = "{" + format(":.{}f", precision) + "} B";
+            return format(fmt.view(), static_cast<decimal_t>(0));
+        }
+
+        const string fmt = "{" + format(":.{}f", precision) + "} {}";
+        const uint64_t base = binary ? 1024 : 1000;
+        auto val = static_cast<decimal_t>(bytes_);
+        auto current_unit = unit::B;
+
+        constexpr unit units[] = {unit::B, unit::KB, unit::MB, unit::GB, unit::TB, unit::PB, unit::EB};
+
+        for (size_t i = 0; i < 6; ++i) {
+            if (val < static_cast<decimal_t>(base)) {
+                break;
+            }
+            val /= static_cast<decimal_t>(base);
+            current_unit = units[i + 1];
+        }
+
+        return format(fmt.view(), val, inner::byte_size_unit_to_string(current_unit, binary));
+    }
+
+    const string fmt = "{" + format(":.{}f", precision) + "} {}";
+    const decimal_t val = as(u, binary);
+    return format(fmt.view(), val, inner::byte_size_unit_to_string(u, binary));
+}
+
+/// @endcond
+
 
 NEFORCE_BEGIN_LITERALS__
 
@@ -325,21 +533,23 @@ NEFORCE_BEGIN_LITERALS__
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_B(const unsigned long long bytes) noexcept { return byte_size{bytes}; }
+NEFORCE_NODISCARD constexpr byte_size operator""_B(const unsigned long long bytes) noexcept { return byte_size{bytes}; }
 
 /**
  * @brief 创建byte_size的字面量操作符
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_B(const decimal_t bytes) { return byte_size{bytes, byte_size::unit::B}; }
+NEFORCE_NODISCARD constexpr byte_size operator""_B(const decimal_t bytes) {
+    return byte_size{bytes, byte_size::unit::B};
+}
 
 /**
  * @brief 创建byte_size的字面量操作符
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_KB(const unsigned long long bytes) {
+NEFORCE_NODISCARD constexpr byte_size operator""_KB(const unsigned long long bytes) {
     return byte_size{static_cast<decimal_t>(bytes), byte_size::unit::KB};
 }
 
@@ -348,7 +558,7 @@ NEFORCE_NODISCARD inline byte_size operator""_KB(const unsigned long long bytes)
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_KB(const decimal_t bytes) {
+NEFORCE_NODISCARD constexpr byte_size operator""_KB(const decimal_t bytes) {
     return byte_size{bytes, byte_size::unit::KB};
 }
 
@@ -357,7 +567,7 @@ NEFORCE_NODISCARD inline byte_size operator""_KB(const decimal_t bytes) {
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_MB(const unsigned long long bytes) {
+NEFORCE_NODISCARD constexpr byte_size operator""_MB(const unsigned long long bytes) {
     return byte_size{static_cast<decimal_t>(bytes), byte_size::unit::MB};
 }
 
@@ -366,7 +576,7 @@ NEFORCE_NODISCARD inline byte_size operator""_MB(const unsigned long long bytes)
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_MB(const decimal_t bytes) {
+NEFORCE_NODISCARD constexpr byte_size operator""_MB(const decimal_t bytes) {
     return byte_size{bytes, byte_size::unit::MB};
 }
 
@@ -375,7 +585,7 @@ NEFORCE_NODISCARD inline byte_size operator""_MB(const decimal_t bytes) {
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_GB(const unsigned long long bytes) {
+NEFORCE_NODISCARD constexpr byte_size operator""_GB(const unsigned long long bytes) {
     return byte_size{static_cast<decimal_t>(bytes), byte_size::unit::GB};
 }
 
@@ -384,7 +594,7 @@ NEFORCE_NODISCARD inline byte_size operator""_GB(const unsigned long long bytes)
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_GB(const decimal_t bytes) {
+NEFORCE_NODISCARD constexpr byte_size operator""_GB(const decimal_t bytes) {
     return byte_size{bytes, byte_size::unit::GB};
 }
 
@@ -393,7 +603,7 @@ NEFORCE_NODISCARD inline byte_size operator""_GB(const decimal_t bytes) {
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_TB(const unsigned long long bytes) {
+NEFORCE_NODISCARD constexpr byte_size operator""_TB(const unsigned long long bytes) {
     return byte_size{static_cast<decimal_t>(bytes), byte_size::unit::TB};
 }
 
@@ -402,7 +612,7 @@ NEFORCE_NODISCARD inline byte_size operator""_TB(const unsigned long long bytes)
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_TB(const decimal_t bytes) {
+NEFORCE_NODISCARD constexpr byte_size operator""_TB(const decimal_t bytes) {
     return byte_size{bytes, byte_size::unit::TB};
 }
 
@@ -411,7 +621,7 @@ NEFORCE_NODISCARD inline byte_size operator""_TB(const decimal_t bytes) {
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_PB(const unsigned long long bytes) {
+NEFORCE_NODISCARD constexpr byte_size operator""_PB(const unsigned long long bytes) {
     return byte_size{static_cast<decimal_t>(bytes), byte_size::unit::PB};
 }
 
@@ -420,7 +630,7 @@ NEFORCE_NODISCARD inline byte_size operator""_PB(const unsigned long long bytes)
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_PB(const decimal_t bytes) {
+NEFORCE_NODISCARD constexpr byte_size operator""_PB(const decimal_t bytes) {
     return byte_size{bytes, byte_size::unit::PB};
 }
 
@@ -429,7 +639,7 @@ NEFORCE_NODISCARD inline byte_size operator""_PB(const decimal_t bytes) {
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_EB(const unsigned long long bytes) {
+NEFORCE_NODISCARD constexpr byte_size operator""_EB(const unsigned long long bytes) {
     return byte_size{static_cast<decimal_t>(bytes), byte_size::unit::EB};
 }
 
@@ -438,7 +648,7 @@ NEFORCE_NODISCARD inline byte_size operator""_EB(const unsigned long long bytes)
  * @param bytes 字节数
  * @return byte_size对象
  */
-NEFORCE_NODISCARD inline byte_size operator""_EB(const decimal_t bytes) {
+NEFORCE_NODISCARD constexpr byte_size operator""_EB(const decimal_t bytes) {
     return byte_size{bytes, byte_size::unit::EB};
 }
 
