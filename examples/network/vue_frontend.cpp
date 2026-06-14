@@ -103,7 +103,9 @@ public:
     vector<User> get_users(int page, int page_size) const {
         vector<User> result;
         const int start = (page - 1) * page_size;
-        if (start >= static_cast<int>(users_.size())) return result;
+        if (start >= static_cast<int>(users_.size())) {
+            return result;
+        }
         const int end = min(start + page_size, static_cast<int>(users_.size()));
         for (int i = start; i < end; ++i) {
             result.push_back(users_[i]);
@@ -112,8 +114,10 @@ public:
     }
 
     const User* get_user(int id) const {
-        for (const auto& u : users_) {
-            if (u.id == id) return &u;
+        for (const auto& u: users_) {
+            if (u.id == id) {
+                return &u;
+            }
         }
         return nullptr;
     }
@@ -125,11 +129,17 @@ public:
     }
 
     bool update_user(int id, const string& name, const string& email, const string& role) {
-        for (auto& u : users_) {
+        for (auto& u: users_) {
             if (u.id == id) {
-                if (!name.empty()) u.name = name;
-                if (!email.empty()) u.email = email;
-                if (!role.empty()) u.role = role;
+                if (!name.empty()) {
+                    u.name = name;
+                }
+                if (!email.empty()) {
+                    u.email = email;
+                }
+                if (!role.empty()) {
+                    u.role = role;
+                }
                 return true;
             }
         }
@@ -265,8 +275,7 @@ static void register_api_routes(http_router& router, MockDatabase& db) {
         if (query.contains("page_size=")) {
             auto pos = query.find("page_size=");
             auto end = query.find('&', pos);
-            page_size = max(1, min(100, to_int32(
-                query.view(pos + 10, end == string::npos ? query.size() : end))));
+            page_size = max(1, min(100, to_int32(query.view(pos + 10, end == string::npos ? query.size() : end))));
         }
 
         const auto users = db.get_users(page, page_size);
@@ -275,15 +284,14 @@ static void register_api_routes(http_router& router, MockDatabase& db) {
         jb.begin_object();
         jb.key("data");
         jb.begin_array();
-        for (const auto& u : users) {
+        for (const auto& u: users) {
             write_user_json(jb, u);
         }
         jb.end_array();
         jb.key("page").value(static_cast<double>(page));
         jb.key("page_size").value(static_cast<double>(page_size));
         jb.key("total").value(static_cast<double>(db.total_users()));
-        jb.key("total_pages").value(static_cast<double>(
-                (db.total_users() + page_size - 1) / page_size));
+        jb.key("total_pages").value(static_cast<double>((db.total_users() + page_size - 1) / page_size));
         jb.end_object();
         res.body = jb.build()->to_string();
         res.set_content_type(http_content::JSON_APP());
@@ -494,8 +502,8 @@ int main(int argc, char* argv[]) {
 
     // 6. 静态文件服务 + SPA 回退（作为最后一个中间件）
     auto static_files = make_unique<static_file_filter>(static_dir);
-    static_files->set_spa_fallback("index.html");       // Vue Router history 模式
-    static_files->add_spa_exclude_path("/api");          // API 路由不触发 SPA 回退
+    static_files->set_spa_fallback("index.html"); // Vue Router history 模式
+    static_files->add_spa_exclude_path("/api");   // API 路由不触发 SPA 回退
     static_files->set_enable_cache(true);
     router.use(move(static_files));
 

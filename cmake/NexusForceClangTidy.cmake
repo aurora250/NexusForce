@@ -18,6 +18,8 @@ message(STATUS "Found clang-tidy: ${CLANG_TIDY_EXECUTABLE}")
 file(GLOB_RECURSE TIDY_SOURCES
         "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/*.hpp"
+        "${CMAKE_CURRENT_SOURCE_DIR}/tools/*.cpp"
 )
 
 list(FILTER TIDY_SOURCES EXCLUDE REGEX ".*/(build|vcpkg_installed)/.*")

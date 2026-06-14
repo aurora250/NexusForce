@@ -15,6 +15,7 @@
 #include "NeForce/core/functional/apply.hpp"
 #include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/memory/weak_ptr.hpp"
+#include "NeForce/core/reflect/any.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -22,6 +23,60 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 观察者模式的信号槽实现
  * @{
  */
+
+/**
+ * @class signal_base
+ * @brief 信号类型擦除基类
+ *
+ * 所有 signal<Types...> 的公共非模板基类，提供类型擦除操作。
+ * 反射系统通过此基类操作异质信号实例。
+ */
+class signal_base {
+public:
+    virtual ~signal_base() = default;
+
+    /**
+     * @brief 断开所有连接
+     */
+    virtual void disconnect_all() = 0;
+
+    /**
+     * @brief 阻塞信号触发
+     */
+    virtual void block() = 0;
+
+    /**
+     * @brief 解除阻塞
+     */
+    virtual void unblock() = 0;
+
+    /**
+     * @brief 是否处于阻塞状态
+     */
+    NEFORCE_NODISCARD virtual bool is_blocked() const = 0;
+
+    /**
+     * @brief 获取已连接槽数量
+     */
+    NEFORCE_NODISCARD virtual size_t slot_count() const = 0;
+
+    /**
+     * @brief 通过 meta_any 参数列表触发信号（类型擦除版本）
+     * @param args 参数列表
+     *
+     * 由子类实现，将 meta_any 解包后转为强类型 emit 调用。
+     */
+    virtual void emit_dynamic(const vector<reflect::meta_any>& args) = 0;
+
+    /**
+     * @brief 动态连接槽回调（类型擦除版本）
+     * @param callback 回调函数，接收 meta_any 参数列表
+     *
+     * 由子类实现，将类型擦除的回调适配为强类型连接。
+     */
+    virtual void connect_dynamic(function<void(const vector<reflect::meta_any>&)> callback) = 0;
+};
+
 
 /**
  * @enum callback_result
@@ -238,7 +293,7 @@ public:
  * 多播委托实现。
  */
 template <typename... Types>
-struct signal {
+struct signal : public signal_base {
 private:
     /**
      * @struct slot_entry
@@ -412,9 +467,14 @@ private:
         return count;
     }
 
+    template <size_t... Is>
+    void emit_dynamic_impl(const vector<reflect::meta_any>& args, index_sequence<Is...> /*unused*/) {
+        this->emit(args[Is].template convert<Types>()...);
+    }
+
 public:
     signal() = default;
-    ~signal() = default;
+    ~signal() override = default;
     signal(const signal&) = delete;
     signal& operator=(const signal&) = delete;
     signal(signal&&) = delete;
@@ -549,7 +609,7 @@ public:
     /**
      * @brief 断开所有连接
      */
-    void disconnect_all() {
+    void disconnect_all() override {
         this->with_lock([this] { slots_.clear(); });
     }
 
@@ -708,14 +768,59 @@ public:
      * @brief 检查信号是否被阻塞
      * @return 是否被阻塞
      */
-    bool is_blocked() const noexcept { return blocked_flag_ && *blocked_flag_; }
+    bool is_blocked() const noexcept override { return blocked_flag_ && *blocked_flag_; }
+
+    /**
+     * @brief 阻塞信号触发
+     */
+    void block() override {
+        if (blocked_flag_) {
+            *blocked_flag_ = true;
+        }
+    }
+
+    /**
+     * @brief 解除阻塞
+     */
+    void unblock() override {
+        if (blocked_flag_) {
+            *blocked_flag_ = false;
+        }
+    }
 
     /**
      * @brief 获取活跃槽的数量
      * @return 槽数量
      */
-    size_t slot_count() const noexcept {
+    size_t slot_count() const noexcept override {
         return this->with_lock([this] { return slot_count_unlocked(); });
+    }
+
+    /**
+     * @brief 动态连接（类型擦除版本）
+     * @param callback 接收 meta_any 参数列表的回调
+     *
+     * 将类型擦除的回调适配为信号的实际参数类型并连接。
+     */
+    void connect_dynamic(function<void(const vector<reflect::meta_any>&)> callback) override {
+        this->connect([cb = _NEFORCE move(callback)](Types... args) {
+            vector<reflect::meta_any> wrapped;
+            wrapped.reserve(sizeof...(Types));
+            (wrapped.emplace_back(_NEFORCE forward<Types>(args)), ...);
+            cb(wrapped);
+            return callback_result::keep;
+        });
+    }
+
+    /**
+     * @brief 通过 meta_any 触发信号（类型擦除版本）
+     * @param args 参数列表
+     */
+    void emit_dynamic(const vector<reflect::meta_any>& args) override {
+        if (args.size() < sizeof...(Types)) {
+            return;
+        }
+        emit_dynamic_impl(args, make_index_sequence<sizeof...(Types)>{});
     }
 
     /**

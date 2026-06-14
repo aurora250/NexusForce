@@ -1,7 +1,7 @@
 #include <NeForce/db/redis/redis_connect.hpp>
 #ifdef NEFORCE_SUPPORT_HIREDIS
 #    include <NeForce/db/redis/redis_result.hpp>
-#include <WinSock2.h>
+#    include <WinSock2.h>
 NEFORCE_BEGIN_NAMESPACE__
 
 ::redisReply* redis_connect::execute_command(const string_view command, const vector<string_view>& args) const {
@@ -68,7 +68,7 @@ bool redis_connect::connect(const db_config& config) {
     last_error_.clear();
     last_errno_ = 0;
 
-    constexpr ::timeval connect_timeout{5, 0};   // 5s TCP connect timeout
+    constexpr ::timeval connect_timeout{5, 0}; // 5s TCP connect timeout
 
     link_ = ::redisConnectWithTimeout(config.host.data(), static_cast<int>(config.port.value()), connect_timeout);
     if (link_ == nullptr || link_->err != 0) {
@@ -84,18 +84,14 @@ bool redis_connect::connect(const db_config& config) {
         return false;
     }
 
-    // Set socket read/write timeouts.
-    // On Windows hiredis passes `struct timeval` to setsockopt(SO_RCVTIMEO)
-    // which expects DWORD milliseconds — the call either fails or sets a
-    // garbage timeout.  Use the platform-correct optval directly.
-#ifdef NEFORCE_PLATFORM_WINDOWS
+#    ifdef NEFORCE_PLATFORM_WINDOWS
     constexpr ::DWORD timeout_ms = 3000;
     ::setsockopt(link_->fd, SOL_SOCKET, SO_RCVTIMEO, reinterpret_cast<const char*>(&timeout_ms), sizeof(timeout_ms));
     ::setsockopt(link_->fd, SOL_SOCKET, SO_SNDTIMEO, reinterpret_cast<const char*>(&timeout_ms), sizeof(timeout_ms));
-#else
+#    else
     constexpr struct timeval rw_timeout{3, 0};
     ::redisSetTimeout(link_, rw_timeout);
-#endif
+#    endif
 
     if (!authenticate(config.password)) {
         close();

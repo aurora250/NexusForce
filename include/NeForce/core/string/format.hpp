@@ -10,6 +10,7 @@
  */
 
 #include "NeForce/core/string/to_string.hpp"
+#include "NeForce/core/utility/tuple.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -585,13 +586,69 @@ struct formatter<char*> {
 /// @cond
 NEFORCE_BEGIN_INNER__
 
+#ifdef NEFORCE_STANDARD_20
+
 /**
- * @brief 格式化实现（无参数版本）
+ * @brief 编译期格式字符串验证
+ * @tparam N 格式字符串长度
  * @param fmt 格式字符串
- * @param pos 当前解析位置
- * @param out 输出到的字符串位置
+ * @return 括号平衡时返回true
+ */
+template <size_t N>
+consteval bool validate_format_string(const char (&fmt)[N]) noexcept {
+    size_t brace_count = 0;
+    for (size_t i = 0; i < N - 1; ++i) {
+        if (fmt[i] == '{') {
+            if (i + 1 < N - 1 && fmt[i + 1] == '{') {
+                ++i;
+                continue;
+            }
+            ++brace_count;
+        } else if (fmt[i] == '}') {
+            if (i + 1 < N - 1 && fmt[i + 1] == '}') {
+                ++i;
+                continue;
+            }
+            if (brace_count == 0) {
+                return false;
+            }
+            --brace_count;
+        }
+    }
+    return brace_count == 0;
+}
+
+#endif
+
+/**
+ * @brief 从tuple中按运行时索引获取参数并应用formatter
+ *
+ * 通过编译期递归展开实现运行时索引的O(N)分发。
+ * @tparam I 当前检查的索引
+ * @tparam Tuple 参数tuple类型
+ * @param idx 运行时目标索引
+ * @param args 参数tuple
+ * @param opts 格式化选项
  * @return 格式化后的字符串
- * @throws value_exception 如果格式错误
+ * @throws value_exception 索引越界时抛出
+ */
+template <size_t I, typename Tuple>
+NEFORCE_CONSTEXPR20 enable_if_t<I == tuple_size_v<Tuple>, string>
+format_get_and_apply(const size_t idx, const Tuple& args, const format_options& opts) {
+    NEFORCE_THROW_EXCEPTION(value_exception("Format argument index out of range"));
+}
+
+template <size_t I, typename Tuple>
+NEFORCE_CONSTEXPR20 enable_if_t<(I < tuple_size_v<Tuple>), string>
+format_get_and_apply(const size_t idx, const Tuple& args, const format_options& opts) {
+    if (idx == I) {
+        return formatter<decay_t<tuple_element_t<I, Tuple>>>()(_NEFORCE get<I>(args), opts);
+    }
+    return format_get_and_apply<I + 1, Tuple>(idx, args, opts);
+}
+
+/**
+ * @brief 格式化实现（无参数tuple版本，仅文本复制）
  */
 NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string& out) {
     while (pos < fmt.size()) {
@@ -616,19 +673,17 @@ NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string&
 }
 
 /**
- * @brief 格式化实现（带参数版本）
- * @tparam First 第一个参数类型
- * @tparam Rest 剩余参数类型
+ * @brief 格式化实现（带参数tuple版本，支持{0}{1}位置参数）
+ * @tparam Tuple 参数tuple类型
  * @param fmt 格式字符串
  * @param pos 当前解析位置
  * @param out 输出到的字符串位置
- * @param first 第一个参数
- * @param rest 剩余参数
- * @return 格式化后的字符串
- * @throws value_exception 如果格式错误
+ * @param args 参数tuple的const引用
+ * @param next_seq 下一个顺序参数索引
  */
-template <typename First, typename... Rest>
-NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string& out, First&& first, Rest&&... rest) {
+template <typename Tuple>
+NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string& out, const Tuple& args,
+                                     size_t& next_seq) {
     while (pos < fmt.size()) {
         if (fmt[pos] == '{') {
             if (pos + 1 < fmt.size() && fmt[pos + 1] == '{') {
@@ -657,16 +712,41 @@ NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string&
             pos = end_pos + 1;
 
             format_options opts;
+            size_t arg_idx = next_seq;
+
             if (spec_str.empty()) {
+                // {} — sequential consumption
                 opts = inner::parse_number_format("");
+                ++next_seq;
+            } else if (is_digit(spec_str[0])) {
+                // {N} or {N:options} — positional
+                size_t num_end = 0;
+                arg_idx = 0;
+                while (num_end < spec_str.size() && is_digit(spec_str[num_end])) {
+                    arg_idx = arg_idx * 10 + static_cast<size_t>(spec_str[num_end] - '0');
+                    ++num_end;
+                }
+                const string_view rest = spec_str.tail(num_end);
+                if (rest.empty()) {
+                    opts = inner::parse_number_format("");
+                } else if (rest[0] == ':') {
+                    opts = inner::parse_number_format(rest.tail(1));
+                } else {
+                    NEFORCE_THROW_EXCEPTION(value_exception("Invalid format specifier"));
+                }
             } else if (spec_str[0] == ':') {
+                // {:options} — sequential consumption with format options
                 opts = inner::parse_number_format(spec_str.tail(1));
+                ++next_seq;
             } else {
-                opts = format_options{};
+                NEFORCE_THROW_EXCEPTION(value_exception("Invalid format specifier"));
             }
-            out += formatter<decay_t<First>>()(_NEFORCE forward<First>(first), opts);
-            inner::format_impl(fmt, pos, out, _NEFORCE forward<Rest>(rest)...);
-            return;
+
+            if (arg_idx >= tuple_size_v<Tuple>) {
+                NEFORCE_THROW_EXCEPTION(value_exception("Format argument index out of range"));
+            }
+
+            out += inner::format_get_and_apply<0, Tuple>(arg_idx, args, opts);
         } else if (fmt[pos] == '}') {
             if (pos + 1 < fmt.size() && fmt[pos + 1] == '}') {
                 out += '}';
@@ -680,6 +760,16 @@ NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string&
     }
 }
 
+/**
+ * @brief 格式化实现
+ */
+template <typename First, typename... Rest>
+NEFORCE_CONSTEXPR20 void format_impl(const string_view fmt, size_t& pos, string& out, First&& first, Rest&&... rest) {
+    const auto args = _NEFORCE forward_as_tuple(_NEFORCE forward<First>(first), _NEFORCE forward<Rest>(rest)...);
+    size_t next_seq = 0;
+    inner::format_impl(fmt, pos, out, args, next_seq);
+}
+
 NEFORCE_END_INNER__
 /// @endcond
 
@@ -690,13 +780,96 @@ NEFORCE_END_INNER__
  * @param args 要格式化的参数
  * @return 格式化后的字符串
  * @throws value_exception 如果格式错误
+ *
+ * 支持以下格式：
+ * - `{}`：顺序参数
+ * - `{0}` `{1}`：位置参数
+ * - `{:d}` `{:x}`：带格式选项的顺序参数
+ * - `{0:d}` `{1:x}`：带格式选项的位置参数
+ * - `{{` `}}`：转义花括号
  */
 template <typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
 NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string format(const string_view fmt, Args&&... args) {
     string result;
     result.reserve(fmt.size() + sizeof...(Args) * 8);
+    const auto args_tuple = _NEFORCE forward_as_tuple(_NEFORCE forward<Args>(args)...);
+    size_t next_seq = 0;
     size_t pos = 0;
-    inner::format_impl(fmt, pos, result, _NEFORCE forward<Args>(args)...);
+    inner::format_impl(fmt, pos, result, args_tuple, next_seq);
+    return result;
+}
+
+/**
+ * @brief 格式化字符串
+ * @tparam N 格式字符串长度
+ * @tparam Args 参数类型
+ * @param fmt 格式字符串字面量
+ * @param args 要格式化的参数
+ * @return 格式化后的字符串
+ * @throws value_exception 如果格式错误
+ *
+ * 在编译期验证格式字符串中花括号的平衡性。
+ * 用法：format("Hello, {}!", name)
+ */
+template <size_t N, typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string format(const char (&fmt)[N], Args&&... args) {
+    return _NEFORCE format(string_view(fmt, N - 1), _NEFORCE forward<Args>(args)...);
+}
+
+/**
+ * @brief 命名参数格式化
+ * @param fmt 格式字符串，使用 {name} 标记命名占位符
+ * @param params 命名参数列表
+ * @return 格式化后的字符串
+ *
+ * 将格式字符串中的 {name} 替换为 params 中的对应值。
+ * 不支持格式选项，仅做纯文本替换。
+ * 用法：format_named("{greeting}, {name}!", {{"greeting", "Hello"}, {"name", "World"}})
+ */
+NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 string
+format_named(const string_view fmt, const std::initializer_list<pair<const char*, string_view>> params) {
+    string result;
+    result.reserve(fmt.size());
+    size_t i = 0;
+
+    while (i < fmt.size()) {
+        if (fmt[i] == '{' && i + 1 < fmt.size()) {
+            if (fmt[i + 1] == '{') {
+                result += '{';
+                i += 2;
+                continue;
+            }
+
+            size_t j = i + 1;
+            while (j < fmt.size() && fmt[j] != '}') {
+                ++j;
+            }
+            if (j >= fmt.size()) {
+                result += fmt[i++];
+                continue;
+            }
+
+            const string_view name = fmt.view(i + 1, j - (i + 1));
+            bool found = false;
+            for (const auto& param: params) {
+                const string_view key(param.first);
+                if (key == name) {
+                    result += param.second;
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                result += fmt.view(i, j - i + 1);
+            }
+            i = j + 1;
+        } else if (fmt[i] == '}' && i + 1 < fmt.size() && fmt[i + 1] == '}') {
+            result += '}';
+            i += 2;
+        } else {
+            result += fmt[i++];
+        }
+    }
     return result;
 }
 

@@ -46,10 +46,17 @@ set(NEXUSFORCE_VERSION "${NEXUSFORCE_VERSION_MAJOR}.${NEXUSFORCE_VERSION_MINOR}.
 
 
 # Force MSVC English locale so CMake can parse /showIncludes output for dependency tracking.
-# Without this, non-English MSVC outputs localized "Note: including file:" lines that
+# Without this, non-English MSVC outputs localized "注意: 包含文件:" lines that
 # CMake's regex cannot match, causing them to leak to the terminal as noise.
-if(WIN32 AND (CMAKE_CXX_COMPILER_ID MATCHES "MSVC" OR NOT DEFINED CMAKE_CXX_COMPILER_ID))
+#
+# ENV{VSLANG} covers compiler detection during the configure step.
+# CMAKE_*_COMPILER_LAUNCHER covers every compiler invocation during the build step
+# and MUST be set before project() so CMake initializes its internal cache entry.
+if(WIN32)
     set(ENV{VSLANG} "1033")
+    set(VSLANG_LAUNCHER "${CMAKE_COMMAND};-E;env;VSLANG=1033")
+    set(CMAKE_C_COMPILER_LAUNCHER "${VSLANG_LAUNCHER}")
+    set(CMAKE_CXX_COMPILER_LAUNCHER "${VSLANG_LAUNCHER}")
 endif()
 
 
@@ -57,17 +64,6 @@ project(NexusForce
         VERSION ${NEXUSFORCE_VERSION}
         LANGUAGES CXX
 )
-
-
-# VSLANG=1033 forces MSVC to emit English diagnostics so Ninja/Makefile
-# generators can parse /showIncludes output for dependency tracking.
-# ENV{VSLANG} (above) covers compiler detection during configure;
-# CMAKE_*_COMPILER_LAUNCHER covers every compiler invocation during build.
-if(WIN32 AND CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-    set(VSLANG_LAUNCHER "${CMAKE_COMMAND};-E;env;VSLANG=1033")
-    set(CMAKE_C_COMPILER_LAUNCHER "${VSLANG_LAUNCHER}")
-    set(CMAKE_CXX_COMPILER_LAUNCHER "${VSLANG_LAUNCHER}")
-endif()
 
 
 include(GNUInstallDirs)
@@ -215,6 +211,7 @@ set(NEXUSFORCE_SQLCIPHER_LINKED FALSE)
 add_subdirectory(src)
 add_subdirectory(tests)
 add_subdirectory(examples)
+add_subdirectory(tools)
 add_subdirectory(benchmark)
 add_subdirectory(docs)
 

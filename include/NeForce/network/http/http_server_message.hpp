@@ -352,7 +352,8 @@ struct NEFORCE_API http_server_response : istringify<http_server_response> {
      */
     NEFORCE_NODISCARD string build_header_string() const;
 
-    // TODO: Problem Details (RFC 9457) — add set_problem_detail(type, title, detail, instance) for standardized error responses
+    // TODO: Problem Details (RFC 9457) — add set_problem_detail(type, title, detail, instance) for standardized error
+    // responses
 };
 
 /**

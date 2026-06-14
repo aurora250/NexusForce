@@ -1,3 +1,12 @@
+add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/_nfrs_test_gen.cpp
+    COMMAND $<TARGET_FILE:NFRS> ${CMAKE_CURRENT_SOURCE_DIR}/nfrs_test_data
+            -o ${CMAKE_CURRENT_BINARY_DIR}/_nfrs_test_gen.cpp
+    DEPENDS NFRS ${CMAKE_CURRENT_SOURCE_DIR}/nfrs_test_data/test_classes.hpp
+    COMMENT "Running NFRS to generate reflection registration code..."
+)
+set(NEXUSFORCE_NFRS_GEN_SRC ${CMAKE_CURRENT_BINARY_DIR}/_nfrs_test_gen.cpp)
+
 add_executable(NexusForceUnitTests
         main.cpp
         test_algorithm.cpp
@@ -17,9 +26,12 @@ add_executable(NexusForceUnitTests
         test_network.cpp
         test_network_ssl_tcp.cpp
         test_network_util.cpp
+        test_nfrs.cpp
         test_numeric.cpp
         test_ranges.cpp
+        test_reflect.cpp
         test_sequence_container.cpp
+        test_serialize.cpp
         test_simple_config.cpp
         test_string.cpp
         test_string_utils.cpp
@@ -27,6 +39,7 @@ add_executable(NexusForceUnitTests
         test_time.cpp
         test_util_container.cpp
         test_utility.cpp
+        ${NEXUSFORCE_NFRS_GEN_SRC}
 )
 
 target_link_libraries(NexusForceUnitTests PRIVATE NexusForce::NexusForce)

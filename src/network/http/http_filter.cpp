@@ -355,7 +355,7 @@ root_path_(move(root_path)) {
     mime_types_[".ttf"] = "font/ttf";
     mime_types_[".pdf"] = "application/pdf";
     mime_types_[".mp4"] = "video/mp4";
-    mime_types_[".mjs"] = "application/javascript";  ///< ES module (Vite/Rollup/Node.js)
+    mime_types_[".mjs"] = "application/javascript"; ///< ES module (Vite/Rollup/Node.js)
 }
 
 optional<http_content> static_file_filter::get_mime_type(const string& path) const {
@@ -420,8 +420,8 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
             return true; // response already set, caller should return false
         }
 
-        const bool is_binary = mime_type.is_jpeg_img() || mime_type.is_png_img() || mime_type.is_bmp_img() ||
-                               mime_type.is_webp_img();
+        const bool is_binary =
+                mime_type.is_jpeg_img() || mime_type.is_png_img() || mime_type.is_bmp_img() || mime_type.is_webp_img();
 
         if (is_binary) {
             response.body = file(file_path).read_binary();
@@ -487,7 +487,7 @@ bool static_file_filter::pre_filter(http_request& request, http_response& respon
 
     // Check if the request path should be excluded from SPA fallback
     auto is_spa_excluded = [this](const string& path) -> bool {
-        for (const auto& prefix : spa_exclude_paths_) {
+        for (const auto& prefix: spa_exclude_paths_) {
             if (path == prefix || path.starts_with(prefix)) {
                 return true;
             }

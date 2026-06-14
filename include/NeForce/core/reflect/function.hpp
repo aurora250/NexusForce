@@ -63,7 +63,7 @@ public:
             return meta_any{};
         }
         try {
-            return invoker_(move(obj), args);
+            return invoker_(obj, args);
         } catch (...) {
             return meta_any{};
         }
@@ -117,6 +117,11 @@ Ret invoke_impl(const Class* obj, Ret (Class::*func)(Args...) const, const vecto
     return (obj->*func)(args[Is].template convert<Args>()...);
 }
 
+template <typename Ret, typename... Args, size_t... Is>
+Ret invoke_impl(Ret (*func)(Args...), const vector<reflect::meta_any>& args, index_sequence<Is...> /*unused*/) {
+    return (*func)(args[Is].template convert<Args>()...);
+}
+
 template <typename Ret, typename Class, typename... Args, enable_if_t<is_void_v<Ret>, int> = 0>
 decltype(auto) make_member_invoker(Ret (Class::*func)(Args...)) {
     return [func](void* obj, const vector<reflect::meta_any>& args) -> reflect::meta_any {
@@ -168,8 +173,8 @@ decltype(auto) make_static_invoker(Ret (*func)(Args...)) {
         if (sizeof...(Args) != args.size()) {
             NEFORCE_THROW_EXCEPTION(value_exception("Argument count mismatch"));
         }
-        auto result = inner::invoke_impl(nullptr, func, args, make_index_sequence<sizeof...(Args)>{});
-        return reflect::meta_any(result);
+        inner::invoke_impl(func, args, make_index_sequence<sizeof...(Args)>{});
+        return reflect::meta_any{};
     };
 }
 
@@ -179,7 +184,7 @@ decltype(auto) make_static_invoker(Ret (*func)(Args...)) {
         if (sizeof...(Args) != args.size()) {
             NEFORCE_THROW_EXCEPTION(value_exception("Argument count mismatch"));
         }
-        auto result = inner::invoke_impl(nullptr, func, args, make_index_sequence<sizeof...(Args)>{});
+        auto result = inner::invoke_impl(func, args, make_index_sequence<sizeof...(Args)>{});
         return reflect::meta_any(result);
     };
 }
