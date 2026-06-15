@@ -40,6 +40,10 @@ public:
 private:
     redis_connect* conn_;
     string prefix_{"session:"};
+
+    // TODO: Redis Cluster/Sentinel support — handle MOVED/ASK redirection and automatic failover for HA deployments
+    // TODO: Improved serialization — use JSON or MessagePack instead of key=value& pairs to handle special characters
+    // TODO: Session count implementation — use SCAN/KEYS with prefix to return accurate session count
 };
 
 /** @} */ // HTTP

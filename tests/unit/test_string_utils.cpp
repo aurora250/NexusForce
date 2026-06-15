@@ -1,6 +1,7 @@
 #include <NeForce/core/string/utf.hpp>
 #include <NeForce/core/string/regex.hpp>
 #include <NeForce/core/utility/packages.hpp>
+#include <NeForce/core/string/utf_iterator.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
 
@@ -484,28 +485,6 @@ TEST_F(RegexIteratorTest, PostfixIncrement) {
     EXPECT_EQ(it->data(), "2");
 }
 
-TEST_F(RegexIteratorTest, Decrement) {
-    regex re("\\d+");
-    string str = "1 2 3";
-    auto it = re.end(str);
-    --it;
-    EXPECT_EQ(it->data(), "3");
-    --it;
-    EXPECT_EQ(it->data(), "2");
-    --it;
-    EXPECT_EQ(it->data(), "1");
-}
-
-TEST_F(RegexIteratorTest, PostfixDecrement) {
-    regex re("\\d+");
-    string str = "1 2 3";
-    auto it = re.end(str);
-    it--;
-    auto it2 = it--;
-    EXPECT_EQ(it2->data(), "3");
-    EXPECT_EQ(it->data(), "2");
-}
-
 TEST_F(RegexIteratorTest, NotEqual) {
     regex re("\\d+");
     string str = "1 2";
@@ -527,20 +506,6 @@ TEST_F(RegexIteratorTest, WithGroups) {
     EXPECT_EQ(names.size(), 2u);
     EXPECT_EQ(names[0], "name");
     EXPECT_EQ(names[1], "age");
-}
-
-TEST_F(RegexIteratorTest, FromIndex) {
-    regex re("\\d+");
-    string str = "1 2 3";
-    auto it = regex_iterator::from_index(&re, str, 2);
-    EXPECT_EQ(it->data(), "3");
-}
-
-TEST_F(RegexIteratorTest, FromIndexEnd) {
-    regex re("\\d+");
-    string str = "1 2 3";
-    auto it = regex_iterator::from_index(&re, str, 3);
-    EXPECT_EQ(it, re.end(str));
 }
 
 TEST_F(RegexTokenIteratorTest, SplitMode) {
@@ -1808,4 +1773,190 @@ TEST_F(FormatFormatTest, MoveOnlyArguments) {
     string s = "test";
     string result = format("{}", move(s));
     EXPECT_EQ(result, "test");
+}
+
+class FormatPositionalTest : public ::testing::Test {};
+class FormatNamedTest : public ::testing::Test {};
+class RegexCopyTest : public ::testing::Test {};
+class UTF8IteratorTest : public ::testing::Test {};
+
+TEST_F(FormatPositionalTest, PositionalBasic) {
+    EXPECT_EQ(format("{0} {1}", "a", "b"), "a b");
+    EXPECT_EQ(format("{1} {0}", "a", "b"), "b a");
+}
+
+TEST_F(FormatPositionalTest, PositionalRepeated) {
+    EXPECT_EQ(format("{0} {0} {0}", "x"), "x x x");
+    EXPECT_EQ(format("{0}{1}{0}", "a", "b"), "aba");
+}
+
+TEST_F(FormatPositionalTest, PositionalWithFormatOptions) {
+    EXPECT_EQ(format("{0:d} {1:x}", 42, 255), "42 ff");
+    EXPECT_EQ(format("{0:x} {1:d}", 255, 42), "ff 42");
+    EXPECT_EQ(format("{0:#x} {1:04}", 255, 7), "0xff 0007");
+}
+
+TEST_F(FormatPositionalTest, PositionalOutOfRange) { EXPECT_THROW(ignore = format("{5}", 1, 2), value_exception); }
+
+TEST_F(FormatPositionalTest, MixedPositionalAndSequential) { EXPECT_EQ(format("{1} {} {}", "a", "b", "c"), "b a b"); }
+
+TEST_F(FormatPositionalTest, PositionalWithEmptySpec) { EXPECT_EQ(format("{} {} {}", "a", "b", "c"), "a b c"); }
+
+TEST_F(FormatPositionalTest, PositionalSequentialFormatOption) { EXPECT_EQ(format("{:d} {:x}", 42, 255), "42 ff"); }
+
+TEST_F(FormatNamedTest, BasicSubstitution) {
+    EXPECT_EQ(format_named("{greeting}, {name}!", {{"greeting", "Hello"}, {"name", "World"}}), "Hello, World!");
+}
+
+TEST_F(FormatNamedTest, SingleParam) { EXPECT_EQ(format_named("{value}", {{"value", "test"}}), "test"); }
+
+TEST_F(FormatNamedTest, UnknownNameCopiedAsIs) {
+    EXPECT_EQ(format_named("{known} {unknown}", {{"known", "val"}}), "val {unknown}");
+}
+
+TEST_F(FormatNamedTest, NoParams) { EXPECT_EQ(format_named("Hello World", {}), "Hello World"); }
+
+TEST_F(FormatNamedTest, EscapedBraces) {
+    EXPECT_EQ(format_named("{{not_substituted}}", {{"not_substituted", "val"}}), "{not_substituted}");
+}
+
+TEST_F(FormatNamedTest, EmptyName) { EXPECT_EQ(format_named("{}", {{"", "empty"}}), "empty"); }
+
+TEST_F(RegexCopyTest, CopyConstructor) {
+    regex re1("(\\w+)=(\\d+)");
+    regex re2(re1);
+    EXPECT_TRUE(re2.valid());
+    EXPECT_EQ(re2.pattern(), "(\\w+)=(\\d+)");
+    EXPECT_EQ(re2.capture_count(), 2);
+    auto result = re2.search("name=123");
+    EXPECT_TRUE(result.matched());
+    EXPECT_EQ(result[1], "name");
+}
+
+TEST_F(RegexCopyTest, CopyAssignment) {
+    regex re1("(\\w+)=(\\d+)");
+    regex re2("other");
+    re2 = re1;
+    EXPECT_TRUE(re2.valid());
+    EXPECT_EQ(re2.pattern(), "(\\w+)=(\\d+)");
+    auto result = re2.search("key=456");
+    EXPECT_TRUE(result.matched());
+    EXPECT_EQ(result[2], "456");
+}
+
+TEST_F(RegexCopyTest, CopyAssignmentSelf) {
+    regex re("hello");
+    re = re;
+    EXPECT_TRUE(re.valid());
+    EXPECT_TRUE(re.match("hello"));
+}
+
+TEST_F(RegexCopyTest, CopyEmptyPattern) {
+    regex re1("^$");
+    regex re2(re1);
+    EXPECT_TRUE(re2.valid());
+    EXPECT_TRUE(re2.match(""));
+}
+
+TEST_F(RegexCopyTest, CopyAssignmentEmptyPatternToValid) {
+    regex re1("^$");
+    regex re2("hello");
+    re2 = re1;
+    EXPECT_TRUE(re2.valid());
+    EXPECT_TRUE(re2.match(""));
+    EXPECT_FALSE(re2.match("hello"));
+}
+
+TEST_F(UTF8IteratorTest, EmptyRange) {
+    size_t count = 0;
+    for (codepoint cp: utf8_view("")) {
+        ignore = cp;
+        ++count;
+    }
+    EXPECT_EQ(count, 0u);
+}
+
+TEST_F(UTF8IteratorTest, AsciiOnly) {
+    vector<uint32_t> values;
+    for (codepoint cp: utf8_view("ABC")) {
+        values.push_back(cp.value());
+    }
+    ASSERT_EQ(values.size(), 3u);
+    EXPECT_EQ(values[0], 0x41u);
+    EXPECT_EQ(values[1], 0x42u);
+    EXPECT_EQ(values[2], 0x43u);
+}
+
+TEST_F(UTF8IteratorTest, CJKCharacters) {
+    string_view sv("\xE4\xB8\x96\xE7\x95\x8C");
+    vector<uint32_t> values;
+    for (codepoint cp: utf8_view(sv)) {
+        values.push_back(cp.value());
+    }
+    ASSERT_EQ(values.size(), 2u);
+    EXPECT_EQ(values[0], 0x4E16u);
+    EXPECT_EQ(values[1], 0x754Cu);
+}
+
+TEST_F(UTF8IteratorTest, MixedAsciiAndMultiByte) {
+    string hello_world = "Hello \xE4\xB8\x96\xE7\x95\x8C";
+    vector<uint32_t> values;
+    for (codepoint cp: utf8_view(hello_world.view())) {
+        values.push_back(cp.value());
+    }
+    ASSERT_EQ(values.size(), 8u);
+    EXPECT_EQ(values[0], 0x48u);
+    EXPECT_EQ(values[5], 0x20u);
+    EXPECT_EQ(values[6], 0x4E16u);
+    EXPECT_EQ(values[7], 0x754Cu);
+}
+
+TEST_F(UTF8IteratorTest, InvalidSequenceYieldsReplacement) {
+    const byte_t data[] = {0xFF, 0x41};
+    size_t count = 0;
+    for (codepoint cp: utf8_range(data, 2)) {
+        if (count == 0) {
+            EXPECT_TRUE(cp.is_replacement());
+        } else {
+            EXPECT_EQ(cp.value(), 0x41u);
+        }
+        ++count;
+    }
+    EXPECT_EQ(count, 2u);
+}
+
+TEST_F(UTF8IteratorTest, TruncatedSequence) {
+    const byte_t data[] = {0xE2, 0x82};
+    size_t count = 0;
+    for (codepoint cp: utf8_range(data, 2)) {
+        EXPECT_TRUE(cp.is_replacement());
+        ++count;
+    }
+    EXPECT_EQ(count, 2u);
+}
+
+TEST_F(UTF8IteratorTest, IteratorComparison) {
+    auto range = utf8_view("AB");
+    auto it = range.begin();
+    auto end = range.end();
+    EXPECT_NE(it, end);
+    ++it;
+    EXPECT_NE(it, end);
+    ++it;
+    EXPECT_EQ(it, end);
+}
+
+TEST_F(UTF8IteratorTest, PostfixIncrement) {
+    auto range = utf8_view("AB");
+    auto it = range.begin();
+    auto prev = it++;
+    EXPECT_EQ(prev->value(), 0x41u);
+    EXPECT_EQ(it->value(), 0x42u);
+}
+
+TEST_F(UTF8IteratorTest, ArrowOperator) {
+    auto range = utf8_view("X");
+    auto it = range.begin();
+    EXPECT_EQ(it->value(), 0x58u);
+    EXPECT_TRUE(it->is_ascii());
 }

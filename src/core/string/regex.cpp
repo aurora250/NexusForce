@@ -157,6 +157,26 @@ regex& regex::operator=(regex&& other) noexcept {
     return *this;
 }
 
+regex::regex(const regex& other) {
+    if (!other.pattern_.empty()) {
+        compile(other.pattern_, other.options_);
+    }
+}
+
+regex& regex::operator=(const regex& other) {
+    if (this != &other) {
+        if (!other.pattern_.empty()) {
+            compile(other.pattern_, other.options_);
+        } else {
+            code_.reset();
+            pattern_.clear();
+            options_ = 0;
+            capture_count_ = 0;
+        }
+    }
+    return *this;
+}
+
 match_result regex::do_match(const string& str) const {
     return do_match(reinterpret_cast<::PCRE2_SPTR>(str.data()), str.length(), 0, PCRE2_ANCHORED | PCRE2_ENDANCHORED,
                     str);
@@ -274,112 +294,49 @@ vector<string> regex::split(const string& str, const int max_splits) const {
     return parts;
 }
 
-void regex_iterator::build_cache() const {
-    if (!cache_built_ && regex_ != nullptr) {
-        cached_matches_ = regex_->find_all(subject_);
-        cache_built_ = true;
-
-        if (!cached_matches_.empty()) {
-            current_index_ = 0;
-        }
-    }
-}
-
-void regex_iterator::move_next() {
-    build_cache();
-    if (current_index_ >= 0 && current_index_ + 1 < static_cast<ptrdiff_t>(cached_matches_.size())) {
-        ++current_index_;
-    } else {
-        current_index_ = -1;
-    }
-}
-
-void regex_iterator::move_previous() {
-    build_cache();
-    if (current_index_ > 0) {
-        --current_index_;
-    } else {
-        current_index_ = -1;
-    }
-}
-
-void regex_iterator::find_from_position(size_t pos) const {
-    build_cache();
-
-    const auto it = find_if(cached_matches_.begin(), cached_matches_.end(),
-                            [pos](const match_result& m) { return m.position() >= pos; });
-
-    if (it != cached_matches_.end()) {
-        current_index_ = distance(cached_matches_.begin(), it);
-    } else {
-        current_index_ = -1;
-    }
-}
-
-void regex_iterator::find_last_before_position(const size_t pos) {
-    build_cache();
-
-    if (cached_matches_.empty()) {
-        current_index_ = -1;
+void regex_iterator::find_next() {
+    if (regex_ == nullptr || !regex_->valid() || next_pos_ > subject_.length()) {
+        current_ = match_result{};
+        done_ = true;
         return;
     }
 
-    for (ptrdiff_t i = static_cast<ptrdiff_t>(cached_matches_.size()) - 1; i >= 0; --i) {
-        if (cached_matches_[i].position() < pos) {
-            current_index_ = i;
-            return;
+    auto result = regex_->search(subject_, next_pos_);
+    if (result.matched()) {
+        next_pos_ = result.position() + _NEFORCE max(result.length(), size_t(1));
+        if (next_pos_ > subject_.length()) {
+            next_pos_ = subject_.length() + 1;
         }
+        current_ = _NEFORCE move(result);
+    } else {
+        current_ = match_result{};
+        done_ = true;
     }
-
-    current_index_ = -1;
 }
 
 regex_iterator::regex_iterator(const regex* re, string str, const size_t pos) :
 regex_(re),
-subject_(move(str)) {
-    if (regex_ != nullptr) {
-        if (pos == 0) {
-            build_cache();
-        } else {
-            find_from_position(pos);
-        }
-    }
+subject_(move(str)),
+next_pos_(pos),
+done_(false) {
+    find_next();
 }
 
-regex_iterator regex_iterator::from_index(const regex* re, const string& str, const ptrdiff_t index) {
-    regex_iterator it;
-    it.regex_ = re;
-    it.subject_ = str;
-    if (re != nullptr) {
-        it.build_cache();
-        if (index >= 0 && index < static_cast<ptrdiff_t>(it.cached_matches_.size())) {
-            it.current_index_ = index;
-        } else if (index == static_cast<ptrdiff_t>(it.cached_matches_.size())) {
-            it.current_index_ = -1;
-        }
+regex_iterator& regex_iterator::operator++() {
+    if (!done_) {
+        find_next();
     }
-    return it;
-}
-
-regex_iterator::reference regex_iterator::operator*() const {
-    thread_local const match_result empty_result{};
-    build_cache();
-    if (current_index_ >= 0 && current_index_ < static_cast<ptrdiff_t>(cached_matches_.size())) {
-        return cached_matches_[current_index_];
-    }
-    return empty_result;
+    return *this;
 }
 
 bool regex_iterator::operator==(const regex_iterator& other) const noexcept {
-    if (current_index_ == -1 && other.current_index_ == -1) {
+    if (done_ && other.done_) {
         return true;
     }
-
-    if (!cache_built_ || !other.cache_built_) {
-        return regex_ == other.regex_ && subject_ == other.subject_ && current_index_ == other.current_index_;
+    if (done_ || other.done_) {
+        return false;
     }
-
-    return regex_ == other.regex_ && subject_ == other.subject_ && current_index_ == other.current_index_;
+    return regex_ == other.regex_ && subject_ == other.subject_ && next_pos_ == other.next_pos_;
 }
 
 void regex_token_iterator::find_next() {

@@ -351,6 +351,9 @@ struct NEFORCE_API http_server_response : istringify<http_server_response> {
      * @brief 构建响应头字符串
      */
     NEFORCE_NODISCARD string build_header_string() const;
+
+    // TODO: Problem Details (RFC 9457) — add set_problem_detail(type, title, detail, instance) for standardized error
+    // responses
 };
 
 /**

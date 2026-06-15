@@ -101,6 +101,10 @@ public:
     bool case_sensitive = true;  ///< 是否大小写敏感
     bool strict_routing = false; ///< 是否严格匹配尾部斜杠
 
+    // TODO: Content negotiation — auto-select handler based on request Accept header, support produces/consumes qualifiers
+    // TODO: Route grouping / prefix — support route group with shared path prefix (e.g., router.group("/api/v1", ...))
+    // TODO: Route ordering / priority — allow explicit priority for route matching when multiple patterns overlap
+
 private:
     NEFORCE_NODISCARD http_handler_t find_handler(const http_method& method, const string& path, http_request& request);
     void resolve_handler(http_request& request, http_response& response);

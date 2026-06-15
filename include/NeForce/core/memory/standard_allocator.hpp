@@ -410,6 +410,14 @@ public:
      * @param p 要释放的内存指针
      */
     NEFORCE_CONSTEXPR20 static void deallocate(pointer p) noexcept { standard_allocator::deallocate(p, 1); }
+
+    /**
+     * @brief 获取分配器可分配的最大元素数量
+     * @return 最大可分配元素数量
+     */
+    NEFORCE_NODISCARD static constexpr size_type max_size() noexcept {
+        return static_cast<size_type>(-1) / sizeof(value_type);
+    }
 };
 
 /**

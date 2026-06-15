@@ -214,6 +214,8 @@ public:
      * @param str 以空字符结尾的C风格字符串
      *
      * 注意：字符串长度通过Traits::length计算，要求字符串以空字符结尾。
+     * @note 若源字符串内部包含空字符（\\0），构造时会在此处截断。
+     *       如需保留内部 NUL 字符，请使用带长度参数的构造函数。
      */
     constexpr basic_string_view(const_pointer str) noexcept :
     data_(str),
@@ -326,7 +328,8 @@ public:
      * @brief 获取底层数据指针
      * @return 指向字符串数据的指针
      *
-     * 注意：返回的指针不保证以空字符结尾，不应作为C风格字符串使用。
+     * @note 返回的指针不保证以空字符结尾，不应直接作为C风格字符串使用。
+     *       如需作为 C 风格字符串使用，请确保视图来源是以空字符结尾的字符串。
      */
     NEFORCE_NODISCARD constexpr const_pointer data() const noexcept { return data_; }
 

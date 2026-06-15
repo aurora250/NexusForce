@@ -6,10 +6,14 @@
  * - 结果集元数据获取（列数、列名、列类型）
  * - 类型安全的 getter（get_int32 / get_float64 等）
  * - NULL 值检测
+ *
+ * @note 使用 sql_builder 构建查询语句，展示编程式 SQL 构建
+ *       与结果集元数据访问的配合使用。
  */
 
 #include <NeForce/core/system/console.hpp>
 #include <NeForce/db/db_config.hpp>
+#include <NeForce/db/sql_builder.hpp>
 
 #ifdef NEFORCE_SUPPORT_SQLITE3
 #    include <NeForce/db/sqlite/sqlite_connect.hpp>
@@ -21,15 +25,27 @@ int main() {
 #ifdef NEFORCE_SUPPORT_SQLITE3
     sqlite_connect conn;
     conn.connect(db_config::for_sqlite(":memory:"));
-    conn.update("CREATE TABLE employees ("
-                "id INTEGER PRIMARY KEY, "
-                "name TEXT NOT NULL, "
-                "age INTEGER, "
-                "salary REAL, "
-                "department TEXT)");
-    conn.update("INSERT INTO employees VALUES (1, 'Alice', 30, 75000.0, 'Engineering')");
 
-    auto result = conn.query("SELECT * FROM employees");
+    // 建表
+    ignore = conn.update("CREATE TABLE employees ("
+                         "id INTEGER PRIMARY KEY, "
+                         "name TEXT NOT NULL, "
+                         "age INTEGER, "
+                         "salary REAL, "
+                         "department TEXT)");
+
+    // 插入数据
+    {
+        sql_builder ins;
+        ins.insert_into("employees", {"id", "name", "age", "salary", "department"})
+                .values({"'1'", "'Alice'", "30", "75000.0", "'Engineering'"});
+        ignore = conn.update(ins.build());
+    }
+
+    // 查询
+    sql_builder sel;
+    sel.select_all().from("employees");
+    auto result = conn.query(sel.build());
     if (result == nullptr) {
         eprintln("查询失败!");
         return 1;

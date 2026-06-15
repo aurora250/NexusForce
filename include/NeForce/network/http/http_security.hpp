@@ -64,6 +64,11 @@ public:
     NEFORCE_NODISCARD string name() const override { return "security_headers_filter"; }
 };
 
+// TODO: OAuth2 / OIDC authentication filter — implement Authorization Code, Client Credentials, PKCE flows with token validation
+// TODO: JWT token filter — parse, validate (exp/nbf/iss/aud), and extract claims from Bearer tokens; support JWKS key rotation
+// TODO: Role-based access control (RBAC) filter — @PreAuthorize-style method/route-level role & permission checking
+// TODO: Password encoding utilities — BCrypt, Argon2id, PBKDF2 hashing with salt generation and constant-time verification
+
 /** @} */ // HTTP
 
 NEFORCE_END_HTTP__

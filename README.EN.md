@@ -158,7 +158,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **`timer_scheduler` / `basic_timer`** - Timer task scheduling based on red-black tree
 - **`generator` / `task`** - Coroutine primitives and task generator
 - **`virtual_thread`** - C#-style lightweight coroutines
-- **`connection` / `signal`** - Observer pattern signal-slot
+- **`connection` / `signal` / `signal_base`** - Observer pattern signal-slot, `signal_base` provides type-erased base for reflection-driven dynamic connections
 - **`call_once`** - Multi-threaded single-call implementation based on FUTEX
 - **Stop Token** - Cancellable asynchronous operations `stop_token` / `stop_source` / `stop_callback`
 - **Synchronization Primitives** - Mutex `mutex`, shared mutex `shared_mutex`, semaphore `semaphore` / `atomic_semaphore`, thread barrier `barrier` and latch `latch`
@@ -257,8 +257,19 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **`compressed_pair`** - EBCO memory optimization
 
 ### 🔍 Reflection System
-- **`registry`** - Type reflection and metadata management
-- **`meta_type` / `meta_property` / `meta_function`** - Runtime type querying
+- **`NFRS`** - MOC-like pre-compile code generator, scans `NEFORCE_REFLECT_*` markers to auto-generate type registration code, with incremental scanning (file modification time cache)
+- **`meta_any`** - SBO-optimized + function-pointer dispatch type-erased container, supports `emplace<T>()` in-place construction (compatible with non-copyable/non-movable types)
+- **`registry`** - Global type reflection registry with name/type_id dual lookup, thread-safe registration, and dynamic signal-slot connection `connect_signal_to_slot()`
+- **`meta_type`** - Runtime type metadata: base class list, property/function maps, constructor/clone factory, enum/container info, signal name list, dynamic property registration `add_property()`
+- **`meta_property`** - Property reflection descriptor with getter/setter, annotation flags (transient/required/readonly/optional/versioned), and change notification signal `notify_signal()`
+- **`meta_function`** - Member/static function reflection descriptor with overload support, parameter hints, and runtime `invoke()` call
+- **`meta_enum`** - Enum reflection: name↔value bidirectional lookup, entry iteration
+- **`type_builder`** - Fluent API type builder: base class registration, property/function/signal registration, constructor/clone/container configuration
+- **`signal_base`** - Type-erased base class for `signal<T...>`, providing `connect_dynamic()` / `emit_dynamic()` for runtime reflection-driven signal-slot connections
+- **JSON Serializer** - Reflection-driven object↔JSON serialization/deserialization, recursive nested types and containers
+- **Binary Serializer** - Big-endian format (Magic "NEBF" + type table + data segment), attribute-controlled serialization behavior
+- **Type Identification** - Hash-based type_id via type_name specialization + compiler function signature, non-intrusive type registration
+- **Reflection Macros** - `NEFORCE_REFLECT_OBJ` / `PROP` / `FUNC` / `SIGNAL` / `ENUM` / `ENUM_VAL` in-class markers for NFRS scanner recognition
 
 ### 🧬 Type Traits & Concepts
 - **Type Traits** - Comprehensive compile-time type judgments

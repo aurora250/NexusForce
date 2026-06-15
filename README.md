@@ -159,7 +159,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`timer_scheduler`/`basic_timer`** - 基于红黑树的定时任务调度
 - **`generator`/`task`** - 协程原语和任务生成器
 - **`virtual_thread`** - C#风格的轻量级协程
-- **`connection`/`signal`** - 观察者模式的信号槽
+- **`connection`/`signal`/`signal_base`** - 观察者模式的信号槽，`signal_base` 提供类型擦除基类支持反射驱动的动态连接
 - **`call_once`** - 基于FUTEX的多线程单次调用实现
 - **停止令牌** - 可取消的异步操作 `stop_token`/`stop_source`/`stop_callback`
 - **同步原语** - 互斥锁 `mutex`、读写锁 `shared_mutex`、信号量 `semaphore`/`atomic_semaphore`、线程屏障 `barrier`与闩锁 `latch`
@@ -225,11 +225,12 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`logger`** - 灵活可配置的日志器
 
 ### 🔤 字符串处理 (String)
-- **PCRE2 正则表达式** - 支持 JIT 的高效正则匹配 `regex`/`match_result`/`regex_iterator`/`regex_token_iterator`
-- **Unicode 支持** - UTF 转换系统、码点操作类 `codepoint`
-- **`formatter`/`format`** - 类型安全的格式化输出
+- **PCRE2 正则表达式** - 支持 JIT 的高效正则匹配 `regex`/`match_result`/`regex_iterator`/`regex_token_iterator`，支持拷贝
+- **Unicode 支持** - UTF 转换系统、码点操作类 `codepoint`、UTF-8 码点迭代器 `utf8_iterator` / `utf8_view`
+- **`formatter`/`format`** - 类型安全的格式化输出，支持位置参数 `{0}` `{1}` 和命名参数 `format_named()`
 - **`string_view`** - 大量使用字符串视图优化操作
 - **数值转换** - 可扩展的字符串与数值互转体系
+- **Boyer-Moore-Horspool** - 窄字符子串搜索加速
 
 ### ⚙️ 系统接口 (System)
 - **`process`** - 进程创建与控制
@@ -266,8 +267,19 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`compressed_pair`** - EBCO内存优化
 
 ### 🔍 反射系统 (Reflection)
-- **`registry`** - 类型反射与元信息管理
-- **`meta_type` / `meta_property` / `meta_function`** - 运行时类型查询
+- **`NFRS`** - 预编译代码生成器，扫描 `NEFORCE_REFLECT_*` 标记自动生成类型注册代码，支持增量扫描
+- **`meta_any`** - 类型擦除容器，支持 `emplace<T>()` 原地构造
+- **`registry`** - 全局类型反射注册表，支持名称/type_id 双重查找、线程安全注册、动态信号槽连接 `connect_signal_to_slot()`
+- **`meta_type`** - 运行时类型元数据：基类列表、属性/函数映射、构造/克隆工厂、枚举/容器信息、信号名称列表、动态属性注册 `add_property()`
+- **`meta_property`** - 属性反射描述符，支持 getter/setter、注解标志（transient/required/readonly/optional/versioned）、变更通知信号 `notify_signal()`
+- **`meta_function`** - 成员函数/静态函数反射描述符，支持重载、参数提示与运行时 `invoke()` 调用
+- **`meta_enum`** - 枚举反射：名称↔值双向查找、条目遍历
+- **`type_builder`** - 链式API 类型构建器：基类注册、属性/函数/信号注册、构造/克隆/容器配置
+- **`signal_base`** - `signal<T...>` 的类型擦除基类，提供 `connect_dynamic()` / `emit_dynamic()` 实现运行时反射驱动的信号槽连接
+- **JSON 序列化器** - 反射驱动的对象↔JSON 序列化与反序列化，递归处理嵌套类型与容器
+- **二进制序列化器** - 大端格式（Magic "NEBF" + 类型表 + 数据段），属性注解控制序列化行为
+- **类型识别** - 基于 type_name 特化 + 编译器函数签名的 hash-based type_id，非侵入式类型注册
+- **反射宏** - `NEFORCE_REFLECT_OBJ` / `PROP` / `FUNC` / `SIGNAL` / `ENUM` / `ENUM_VAL` 类体内标记，供 NFRS 扫描器识别
 
 ### 🧬 类型与特性 (TypeInfo)
 - **类型萃取** - 完备的编译期类型判断
@@ -358,6 +370,9 @@ cmake --build . --config Release
 
 # 安装到系统目录
 cmake --install . --config Release
+
+# 或使用脚本快速安装，更多参数参见install_nexusforce.py注释
+python ./scripts/install_nexusforce.py --release
 ```
 
 #### 🐧 Linux
@@ -378,6 +393,9 @@ make -j$(nproc)
 
 # 安装到系统目录
 sudo make install
+
+# 或使用脚本快速安装，更多参数参见install_nexusforce.py注释
+python ./scripts/install_nexusforce.py --release
 ```
 
 ---

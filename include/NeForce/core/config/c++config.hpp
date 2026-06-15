@@ -286,6 +286,25 @@
 /** @} */ // ArchitectureDetection
 
 /**
+ * @defgroup SimdDetection SIMD 指令集检测
+ * @brief 检测硬件 SIMD 指令集支持
+ * @{
+ */
+
+#if defined(NEFORCE_ARCH_X86)
+#    if defined(__SSE2__) || defined(_M_X64) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#        define NEFORCE_SIMD_SSE2 1 ///< SSE2指令集可用
+#    endif
+#    if defined(__AVX2__) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#        define NEFORCE_SIMD_AVX2 1 ///< AVX2指令集可用
+#    endif
+#elif (defined(NEFORCE_ARCH_ARM) && defined(__ARM_NEON)) || defined(NEXUSFORCE_ENABLE_DOXYGEN)
+#    define NEFORCE_SIMD_NEON 1 ///< ARM NEON指令集可用
+#endif
+
+/** @} */ // SimdDetection
+
+/**
  * @defgroup DataBusWidth 数据总线宽度
  * @brief 系统架构位宽检测
  * @{
@@ -408,6 +427,10 @@
 #define __NEFORCE_REFLECT_NAMESPACE__ reflect
 #define NEFORCE_BEGIN_REFLECT__ namespace __NEFORCE_REFLECT_NAMESPACE__ {
 #define NEFORCE_END_REFLECT__ }
+
+#define __NEFORCE_SERIALIZE_NAMESPACE__ serialize
+#define NEFORCE_BEGIN_SERIALIZE__ namespace __NEFORCE_SERIALIZE_NAMESPACE__ {
+#define NEFORCE_END_SERIALIZE__ }
 
 #define __NEFORCE_HTTP_NAMESPACE__ http
 #define NEFORCE_BEGIN_HTTP__ namespace __NEFORCE_HTTP_NAMESPACE__ {

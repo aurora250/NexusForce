@@ -182,6 +182,13 @@ private:
     grpc_framer framer_;
 };
 
+// TODO: Client streaming support — implement request-streaming handler with backpressure and flow control
+// TODO: Server streaming support — implement response-streaming handler with chunked gRPC frames
+// TODO: Bidirectional streaming support — full duplex bidi streaming with concurrent read/write channels
+// TODO: Protobuf integration — code generation from .proto files, typed request/response wrappers (beyond raw byte_vector)
+// TODO: gRPC-Web support — gRPC-Web protocol translation for browser-based gRPC clients (text and binary modes)
+// TODO: gRPC interceptor chain — unary/stream interceptor stack for logging, auth, metrics, tracing
+
 /** @} */ // gRPC
 
 NEFORCE_END_HTTP__

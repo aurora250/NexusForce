@@ -1,6 +1,7 @@
 #include <NeForce/db/redis/redis_connect.hpp>
 #ifdef NEFORCE_SUPPORT_HIREDIS
 #    include <NeForce/db/redis/redis_result.hpp>
+#    include <WinSock2.h>
 NEFORCE_BEGIN_NAMESPACE__
 
 ::redisReply* redis_connect::execute_command(const string_view command, const vector<string_view>& args) const {
@@ -66,7 +67,10 @@ bool redis_connect::select_database(const string& db_index) const {
 bool redis_connect::connect(const db_config& config) {
     last_error_.clear();
     last_errno_ = 0;
-    link_ = ::redisConnect(config.host.data(), static_cast<int>(config.port.value()));
+
+    constexpr ::timeval connect_timeout{5, 0}; // 5s TCP connect timeout
+
+    link_ = ::redisConnectWithTimeout(config.host.data(), static_cast<int>(config.port.value()), connect_timeout);
     if (link_ == nullptr || link_->err != 0) {
         if (link_ != nullptr) {
             last_error_ = link_->errstr;
@@ -79,6 +83,16 @@ bool redis_connect::connect(const db_config& config) {
         }
         return false;
     }
+
+#    ifdef NEFORCE_PLATFORM_WINDOWS
+    constexpr ::DWORD timeout_ms = 3000;
+    ::setsockopt(link_->fd, SOL_SOCKET, SO_RCVTIMEO, reinterpret_cast<const char*>(&timeout_ms), sizeof(timeout_ms));
+    ::setsockopt(link_->fd, SOL_SOCKET, SO_SNDTIMEO, reinterpret_cast<const char*>(&timeout_ms), sizeof(timeout_ms));
+#    else
+    constexpr struct timeval rw_timeout{3, 0};
+    ::redisSetTimeout(link_, rw_timeout);
+#    endif
+
     if (!authenticate(config.password)) {
         close();
         return false;

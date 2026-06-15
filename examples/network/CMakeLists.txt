@@ -82,3 +82,8 @@ add_nexusforce_example(NexusForceReverseProxyExample
 add_nexusforce_example(NexusForceHealthCheckExample
     health_check.cpp
 )
+
+# ---- Vue.js Frontend SPA Example ----
+add_nexusforce_example(NexusForceVueFrontendExample
+    vue_frontend.cpp
+)

@@ -101,6 +101,10 @@ private:
     unordered_map<string, entry> entries_;
 
     void evict_lru();
+
+    // TODO: Distributed cache backends — Redis/Memcached as shared cache store for multi-instance deployments
+    // TODO: Cache statistics — hit_rate, miss_count, eviction_count, cache_size_bytes for monitoring
+    // TODO: Cache-control directive parsing — honor no-cache, no-store, max-age, s-maxage in addition to If-None-Match
 };
 
 /**

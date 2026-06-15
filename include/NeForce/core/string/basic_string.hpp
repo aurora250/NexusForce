@@ -1043,6 +1043,8 @@ public:
     /**
      * @brief 从C风格字符串构造
      * @param str C风格字符串
+     * @note 若源字符串内部包含空字符（\\0），构造时会在此处截断。
+     *       如需保留内部 NUL 字符，请使用带长度参数的构造函数。
      */
     NEFORCE_CONSTEXPR20 basic_string(const_pointer str) { construct_from_ptr(str, 0, traits_type::length(str)); }
 
@@ -1057,6 +1059,8 @@ public:
      * @brief C风格字符串赋值运算符
      * @param str C风格字符串
      * @return 自身引用
+     * @note 若源字符串内部包含空字符（\\0），赋值时会在此处截断。
+     *       如需保留内部 NUL 字符，请使用带长度参数的 assign() 方法。
      */
     NEFORCE_CONSTEXPR20 basic_string& operator=(const_pointer str) {
         const size_type len = traits_type::length(str);
@@ -1228,7 +1232,16 @@ public:
      * @brief 获取最大可能大小
      * @return 最大长度
      */
-    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type max_size() const noexcept { return npos; }
+    NEFORCE_NODISCARD NEFORCE_CONSTEXPR20 size_type max_size() const noexcept {
+#ifdef NEFORCE_USING_SSO
+        constexpr size_type flag_mask = ~long_flag;
+        const size_type alloc_max = size_pair_.get_base().max_size();
+#else
+        constexpr size_type flag_mask = npos;
+        const size_type alloc_max = capacity_pair_.get_base().max_size();
+#endif
+        return _NEFORCE min(alloc_max - 1, npos & flag_mask);
+    }
 
     /**
      * @brief 获取容量
@@ -1737,6 +1750,8 @@ public:
      * @brief 追加C风格字符串
      * @param str C风格字符串
      * @return 自身引用
+     * @note 若源字符串内部包含空字符（\\0），追加时会在此处截断。
+     *       如需保留内部 NUL 字符，请使用带长度参数的 append() 重载。
      */
     NEFORCE_CONSTEXPR20 basic_string& append(const_pointer str) { return append(str, traits_type::length(str)); }
 

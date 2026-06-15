@@ -241,6 +241,9 @@ private:
     bool enable_cache_ = true;                       ///< 是否启用缓存
     bool enable_range_ = true;                       ///< 是否启用Range请求支持
     byte_size max_file_size_{10_MB};                 ///< 最大文件大小
+    string spa_fallback_path_;                       ///< SPA回退文件路径（如"index.html"），空字符串禁用
+    bool spa_fallback_enabled_ = false;              ///< 是否启用SPA回退
+    vector<string> spa_exclude_paths_;               ///< SPA回退排除路径前缀（如"/api"）
 
 public:
     /**
@@ -276,7 +279,43 @@ public:
      */
     void add_mime_type(const string& extension, http_content content_type);
 
+    /**
+     * @brief 启用SPA回退模式
+     * @param index_file 回退文件路径（如"index.html"）
+     *
+     * 当请求的路径不是已知静态文件时，返回指定的回退文件。
+     * 用于 Vue Router / React Router 的 history 模式。
+     * 传入空字符串可禁用SPA回退。
+     */
+    void set_spa_fallback(string index_file);
+
+    /**
+     * @brief 查询SPA回退文件
+     * @return 回退文件路径，空字符串表示未启用
+     */
+    NEFORCE_NODISCARD const string& spa_fallback() const noexcept { return spa_fallback_path_; }
+
+    /**
+     * @brief 查询SPA回退是否启用
+     * @return 已启用返回true
+     */
+    NEFORCE_NODISCARD bool is_spa_fallback_enabled() const noexcept { return spa_fallback_enabled_; }
+
+    /**
+     * @brief 添加SPA回退排除路径
+     * @param path_prefix 路径前缀（如"/api"）
+     *
+     * 以该前缀开头的请求不会被SPA回退处理，将传递给路由器。
+     * 用于保护API路由不被SPA回退拦截。
+     */
+    void add_spa_exclude_path(string path_prefix);
+
     void set_enable_range(const bool enable) { enable_range_ = enable; }
+    void set_enable_cache(const bool enable) { enable_cache_ = enable; }
+    void set_max_file_size(byte_size size) { max_file_size_ = size; }
+
+    // TODO: Pre-compressed resource support — serve .gz/.br variants when client Accept-Encoding matches, avoiding on-the-fly compression
+    // TODO: Directory listing — optional HTML directory listing for paths without an index file (Apache-style auto-index)
 };
 
 /**
@@ -341,7 +380,13 @@ public:
     bool pre_filter(http_request& request, http_response& response) override;
     void do_filter(http_request& request, http_response& response) override {}
     NEFORCE_NODISCARD string name() const override { return "authentication_filter"; }
+
+    // TODO: Multi-scheme auth support — support Basic (base64 user:pass), Bearer (token), Digest (RFC 7616) in addition to custom validator
+    // TODO: Auth challenge response — set WWW-Authenticate header with realm and scopes on 401 responses
 };
+
+// TODO: Request validation filter — declarative field validation (required, min/max length, regex pattern, numeric range) with JSON error response
+// TODO: Server-side templating filter — render dynamic HTML using template engines (Jinja2-like, Mustache) with data injection from request context
 
 /** @} */ // HTTP
 

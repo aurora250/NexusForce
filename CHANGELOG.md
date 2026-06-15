@@ -3,7 +3,15 @@
 ## [1.0.0-rc] - 2026-06-09
 
 ### 🚀 New Features
+- 添加 UTF-8 码点迭代器 `utf8_iterator` / `utf8_range` / `utf8_view`，支持 range-for 字符级遍历
+- format 引擎支持位置参数 `{0}` `{1}` 和顺序格式选项 `{:d}` `{:x}`
+- 添加命名参数格式化函数 `format_named()`
+- regex 支持拷贝构造和拷贝赋值
+- 添加 SIMD 检测宏 `NEFORCE_HAS_SSE2` / `NEFORCE_HAS_AVX2` / `NEFORCE_HAS_NEON`
+- 实现反射驱动的 JSON 序列化器 `json_serializer`（序列化/反序列化/递归嵌套/容器遍历）
+- 实现反射驱动的二进制序列化器 `binary_serializer`（大端格式、类型表、属性注解控制）
 - 添加 GoogleBenchmark 配置
+- `sql_builder` 达到 ANSI SQL-92 Entry/Intermediate 级完整覆盖
 - 添加 HTTP/2 (h2) TLS+ALPN 协商支持，`ssl_stream::get_alpn_negotiated()` 接口
 - 添加 HTTP/2 连接管理 `http2_connection`（h2c 升级 + h2 ALPN 双模式）
 - 添加 HTTP/2 协议帧处理 `http2_protocol`
@@ -22,15 +30,41 @@
 - 添加 `http_client_request` 的 `scheme` 字段，支持基于 scheme 的 SSL 自动检测
 
 ### 🔧 Improvements
+- `char_traits_find` 窄字符子串搜索采用 Boyer-Moore-Horspool 算法，平均 O(n) 复杂度
+- `standard_allocator` 添加 `max_size()` 成员函数
+- `regex_iterator` 改为惰性求值 forward_iterator，避免全量缓存 O(n) 内存占用
+- `format` 引擎内部重构为 tuple 随机访问架构
+- `basic_string` / `basic_string_view` 添加 `@note` 注释注明 NUL 字符截断风险
+- `sql_builder` 扩展 API，覆盖 DML/DDL/视图/索引/CTE/窗口函数/集合操作
 - `http_client` 重构为 scheme 感知模式：`scheme == "https"` 时自动创建 SSL 上下文
 - `ssl_client::post_connect()` 无 SSL 上下文时跳过 TLS 握手，支持纯 TCP 模式
 - `http_server` HTTPS 构造函数自动设置 ALPN 协议列表 (`h2`, `http/1.1`)
 - `tcp_socket::receive()` 在非阻塞模式下 EAGAIN/EWOULDBLOCK 返回 0（不再抛异常）
 - `websocket_server` 支持事件驱动模式 (`event_loop`) 与多线程模式切换
 - `authentication_filter` 添加 `add_included_path()` 白名单模式
-- 更新所有网络示例代码（http_server, https_server, http2_server, websocket_server 等）
+- `meta_any` 采用 SBO + 函数指针分发架构，支持属性注解、枚举反射、多态克隆工厂、容器类型标识
+- NFRS 生成代码使用完全限定名 `neforce::reflect::` 避免命名空间污染
+- 分离 `reflect_macros.hpp`（空标记宏，供扫描器识别）与 `reflect.hpp`（构建器 API），消除同一宏两种定义导致的重复定义警告
+- 添加 `NEFORCE_REFLECT_ENUM` / `NEFORCE_REFLECT_ENUM_VAL` 宏用于枚举注册
+- 添加 `NEFORCE_REFLECT_RESOLVE_BASES()` 统一延迟基类解析
+- 添加反射扫描器 NFRS（NeForce Reflection Scanner），MOC 类预编译代码生成器，扫描 `NEFORCE_REFLECT_*` 标记并生成 `_neforce_reflect_gen.cpp`
+- NFRS 支持增量扫描（基于文件修改时间缓存，文件未变更跳过重新生成）
+- NFRS 支持枚举扫描注册（`NEFORCE_REFLECT_ENUM` / `NEFORCE_REFLECT_ENUM_VAL`）
+- NFRS 支持信号扫描注册（`NEFORCE_REFLECT_SIGNAL` 宏）
+- NFRS 支持复合属性注解（`PROP_OPTIONAL | PROP_TRANSIENT` 管道组合）
+- 添加 `signal_base` 类型擦除基类，为 `signal<T...>` 提供虚函数接口（`disconnect_all`、`block`、`unblock`、`slot_count`、`emit_dynamic`、`connect_dynamic`）
+- 添加 `meta_function::invoke()` 运行时调用支持
+- 添加 `registry::connect_signal_to_slot()` 运行时动态信号槽连接
+- 添加 `meta_type::add_property()` 动态属性注册
+- 添加 `meta_property::set_notify_signal()` / `notify_signal()` 属性变更通知信号
+- 添加 `meta_any::emplace<T>()` 原地构造，支持不可拷贝/不可移动类型
 
 ### 🐛 Bug Fixes
+- 修复 `__string_bitmap` 对 `char16_t`/`char32_t` 宽字符截断高位导致 false positive
+- 修复 `utf8_iterator::operator++` 无效 UTF-8 字节跳过数量错误（以 `decode_utf8` 实际消耗代替 `utf8_length()`）
+- 修复 `utf8_iterator::operator==` 空 range 比较失败导致 range-for 死循环
+- 修复 `regex_token_iterator` 悬挂 `string_view` 改为持有 `string` 拷贝
+- 修复 SSO 启用时 `sql_builder` 的 `values(initializer_list<string>)` 在 LONG 模式字符串边界导致堆损坏的问题
 - 修复 Linux 平台的 CMake install 配置
 - 修复 `http_server::send_response()` 对 TLS 连接使用 `::writev()` 裸 fd 绕过 SSL 的问题
 - 修复 HTTP/2 h2c 升级握手挂起（缺少 SETTINGS 帧发送与 `flush_writes()`）
@@ -45,10 +79,10 @@
 - 修复 WebSocket 掩码键字节序反转导致小端系统上文本乱码（`try_read_be32` + `reinterpret_cast`）
 - 修复 WebSocket 第二条消息解压乱码（解压器未在消息间重置上下文）
 - 修复 zlib 流式压缩/解压无限循环（`!data.empty()` 条件永不变化）
-- 修复浏览器 WebSocket permessage-deflate 压缩消息被拒绝 (PROTOCOL_ERROR 1002)：
-  zlib `Z_FINISH` 在 raw deflate 下不保证追加空存储块，导致压缩输出不符合 RFC 7692 格式。
-  修复方案：`websocket_deflate::process()` 中检测并手动追加空存储块（BFINAL=1, BTYPE=00），
-  再剥离 4 字节 LEN+NLEN 尾部，确保输出始终以 `0x01` 结尾
+- 修复 zlib `Z_FINISH` 在 raw deflate 下不保证追加空存储块导致浏览器 WebSocket permessage-deflate 压缩消息被拒绝 (PROTOCOL_ERROR 1002)
+- 修复 MSVC `/OPT:ICF` 将不同模板实例化的 `type_id_for<T>()` 函数合并，导致所有未注册类型的 type_id 碰撞为同一值。
+- 修复 `registry::instance()` 在库边界上被复制为多份单例，导致库内与测试代码使用不同的注册表实例
+- 修复 `binary_serializer::deserialize()` 中 `be_to_host(read_beXX())` 双重字节序转换导致整数损坏
 
 ## [1.0.0-beta] - 2026-05-18
 

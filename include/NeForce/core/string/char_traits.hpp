@@ -264,18 +264,37 @@ using char_traits_ptr_t = const typename Traits::char_type*;
 
 
 /// @cond
+
+template <typename Traits>
+constexpr size_t char_traits_find_char(char_traits_ptr_t<Traits> dest, size_t dest_size, size_t start,
+                                       char_traits_char_t<Traits> chr) noexcept;
+
+template <typename Traits>
+constexpr size_t char_traits_rfind_char(char_traits_ptr_t<Traits> dest, size_t dest_size, size_t start,
+                                        char_traits_char_t<Traits> chr) noexcept;
+
 NEFORCE_BEGIN_INNER__
 
 /**
  * @class __string_bitmap
  * @brief 字符串查找优化用的简易位图
  * @tparam CharT 字符类型
- * @tparam IsChar 是否为字符类型
  *
  * 用于加速字符串查找操作，通过位图记录字符出现情况。
  */
-template <typename CharT, bool IsChar = is_character_v<CharT>>
+template <typename CharT, typename = void>
 class __string_bitmap {
+public:
+    constexpr bool mark(const CharT* /*unused*/, const CharT* /*unused*/) const noexcept { return false; }
+    constexpr bool match(const CharT /*unused*/) const noexcept { return false; }
+};
+
+/**
+ * @brief 单字节字符类型的位图特化
+ * @tparam CharT 单字节字符类型
+ */
+template <typename CharT>
+class __string_bitmap<CharT, enable_if_t<is_character_v<CharT> && sizeof(CharT) == 1>> {
 private:
     bool matches_[numeric_traits<byte_t>::max() + 1] = {}; ///< 字符匹配位图
 
@@ -306,8 +325,154 @@ public:
     constexpr bool match(const CharT chr) const noexcept { return matches_[static_cast<byte_t>(chr)]; }
 };
 
-template <typename CharT>
-class __string_bitmap<CharT, false> {};
+/**
+ * @brief Boyer-Moore-Horspool子串查找
+ * @tparam Traits 字符特征类型
+ * @param dest 目标序列
+ * @param dest_size 目标序列长度
+ * @param start 起始位置
+ * @param rsc 要查找的子序列
+ * @param rsc_size 子序列长度
+ * @return 子序列首次出现的位置，未找到则返回-1
+ */
+template <typename Traits>
+constexpr size_t char_traits_find_bmh(const char_traits_ptr_t<Traits> dest, const size_t dest_size, const size_t start,
+                                      const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
+    if (rsc_size == 1) {
+        return _NEFORCE char_traits_find_char<Traits>(dest, dest_size, start, rsc[0]);
+    }
+
+    size_t skip[256];
+    for (auto& s: skip) {
+        s = rsc_size;
+    }
+    for (size_t i = 0; i + 1 < rsc_size; ++i) {
+        skip[static_cast<byte_t>(rsc[i])] = rsc_size - 1 - i;
+    }
+
+    const auto last = rsc[rsc_size - 1];
+    size_t i = start;
+    const size_t limit = dest_size - rsc_size;
+
+    while (i <= limit) {
+        if (Traits::eq(dest[i + rsc_size - 1], last)) {
+            if (Traits::compare(dest + i, rsc, rsc_size) == 0) {
+                return i;
+            }
+        }
+        i += skip[static_cast<byte_t>(dest[i + rsc_size - 1])];
+    }
+    return static_cast<size_t>(-1);
+}
+
+/**
+ * @brief Boyer-Moore-Horspool 从后向前子串查找
+ * @tparam Traits 字符特征类型
+ * @param dest 目标序列
+ * @param dest_size 目标序列长度
+ * @param start 起始位置
+ * @param rsc 要查找的子序列
+ * @param rsc_size 子序列长度
+ * @return 子序列最后一次出现的位置，未找到则返回-1
+ *
+ * 复用BMH前向查找，迭代收集所有匹配，返回最后一次结果。
+ */
+template <typename Traits>
+constexpr size_t char_traits_rfind_bmh(const char_traits_ptr_t<Traits> dest, const size_t dest_size, const size_t start,
+                                       const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
+    if (rsc_size == 1) {
+        return _NEFORCE char_traits_rfind_char<Traits>(dest, dest_size, start, rsc[0]);
+    }
+
+    size_t skip[256];
+    for (auto& s: skip) {
+        s = rsc_size;
+    }
+    for (size_t i = 0; i + 1 < rsc_size; ++i) {
+        skip[static_cast<byte_t>(rsc[i])] = rsc_size - 1 - i;
+    }
+
+    const auto last = rsc[rsc_size - 1];
+    size_t last_found = static_cast<size_t>(-1);
+    const size_t limit = _NEFORCE min(start, dest_size - rsc_size);
+    size_t i = 0;
+
+    while (i <= limit) {
+        if (Traits::eq(dest[i + rsc_size - 1], last)) {
+            if (Traits::compare(dest + i, rsc, rsc_size) == 0) {
+                last_found = i;
+                ++i;
+                continue;
+            }
+        }
+        i += skip[static_cast<byte_t>(dest[i + rsc_size - 1])];
+    }
+
+    return last_found;
+}
+
+template <typename Traits>
+constexpr size_t char_traits_find_naive(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
+                                        const size_t start, const char_traits_ptr_t<Traits> rsc,
+                                        const size_t rsc_size) noexcept {
+    const auto may_match_end = dest + (dest_size - rsc_size) + 1;
+    for (auto if_match = dest + start;; ++if_match) {
+        if_match = Traits::find(if_match, static_cast<size_t>(may_match_end - if_match), *rsc);
+        if (!if_match) {
+            return static_cast<size_t>(-1);
+        }
+
+        if (Traits::compare(if_match, rsc, rsc_size) == 0) {
+            return static_cast<size_t>(if_match - dest);
+        }
+    }
+}
+
+template <typename Traits>
+constexpr enable_if_t<sizeof(typename Traits::char_type) == 1, size_t>
+char_traits_find_dispatch(const char_traits_ptr_t<Traits> dest, const size_t dest_size, const size_t start,
+                          const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
+    return inner::char_traits_find_bmh<Traits>(dest, dest_size, start, rsc, rsc_size);
+}
+
+template <typename Traits>
+constexpr enable_if_t<(sizeof(typename Traits::char_type) != 1), size_t>
+char_traits_find_dispatch(const char_traits_ptr_t<Traits> dest, const size_t dest_size, const size_t start,
+                          const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
+    return inner::char_traits_find_naive<Traits>(dest, dest_size, start, rsc, rsc_size);
+}
+
+template <typename Traits>
+constexpr size_t char_traits_rfind_naive(const char_traits_ptr_t<Traits> dest, const size_t dest_size,
+                                         const size_t start, const char_traits_ptr_t<Traits> rsc,
+                                         const size_t rsc_size) noexcept {
+    if (rsc_size <= dest_size) {
+        for (auto if_match = dest + _NEFORCE min(start, dest_size - rsc_size);; --if_match) {
+            if (Traits::eq(*if_match, *rsc) && Traits::compare(if_match, rsc, rsc_size) == 0) {
+                return static_cast<size_t>(if_match - dest);
+            }
+
+            if (if_match == dest) {
+                break;
+            }
+        }
+    }
+    return static_cast<size_t>(-1);
+}
+
+template <typename Traits>
+constexpr enable_if_t<sizeof(typename Traits::char_type) == 1, size_t>
+char_traits_rfind_dispatch(const char_traits_ptr_t<Traits> dest, const size_t dest_size, const size_t start,
+                           const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
+    return inner::char_traits_rfind_bmh<Traits>(dest, dest_size, start, rsc, rsc_size);
+}
+
+template <typename Traits>
+constexpr enable_if_t<(sizeof(typename Traits::char_type) != 1), size_t>
+char_traits_rfind_dispatch(const char_traits_ptr_t<Traits> dest, const size_t dest_size, const size_t start,
+                           const char_traits_ptr_t<Traits> rsc, const size_t rsc_size) noexcept {
+    return inner::char_traits_rfind_naive<Traits>(dest, dest_size, start, rsc, rsc_size);
+}
 
 NEFORCE_END_INNER__
 /// @endcond
@@ -380,17 +545,7 @@ constexpr size_t char_traits_find(const char_traits_ptr_t<Traits> dest, const si
         return start;
     }
 
-    const auto may_match_end = dest + (dest_size - rsc_size) + 1;
-    for (auto if_match = dest + start;; ++if_match) {
-        if_match = Traits::find(if_match, static_cast<size_t>(may_match_end - if_match), *rsc);
-        if (!if_match) {
-            return static_cast<size_t>(-1);
-        }
-
-        if (Traits::compare(if_match, rsc, rsc_size) == 0) {
-            return static_cast<size_t>(if_match - dest);
-        }
-    }
+    return inner::char_traits_find_dispatch<Traits>(dest, dest_size, start, rsc, rsc_size);
 }
 
 /**
@@ -430,19 +585,11 @@ constexpr size_t char_traits_rfind(const char_traits_ptr_t<Traits> dest, const s
     if (rsc_size == 0) {
         return _NEFORCE min(start, dest_size);
     }
-
-    if (rsc_size <= dest_size) {
-        for (auto if_match = dest + _NEFORCE min(start, dest_size - rsc_size);; --if_match) {
-            if (Traits::eq(*if_match, *rsc) && Traits::compare(if_match, rsc, rsc_size) == 0) {
-                return static_cast<size_t>(if_match - dest);
-            }
-
-            if (if_match == dest) {
-                break;
-            }
-        }
+    if (rsc_size > dest_size) {
+        return static_cast<size_t>(-1);
     }
-    return static_cast<size_t>(-1);
+
+    return inner::char_traits_rfind_dispatch<Traits>(dest, dest_size, start, rsc, rsc_size);
 }
 
 /**

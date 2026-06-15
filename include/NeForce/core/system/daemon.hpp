@@ -43,7 +43,7 @@ struct daemon_exception final : system_exception {
 
 /**
  * @class daemon
- * @brief 工程级守护进程
+ * @brief 守护进程
  *
  * 封装了守护进程的完整生命周期：后台化 → PID 文件锁 → 子进程管理 → 信号驱动主循环 → 优雅关闭。
  *

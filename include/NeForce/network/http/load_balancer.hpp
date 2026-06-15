@@ -175,6 +175,10 @@ private:
     lb_backend* select_random();
 };
 
+// TODO: Circuit breaker pattern — track failure rate per backend, auto-open circuit on threshold breach, half-open probing
+// TODO: Service discovery integration — Consul / Eureka / Nacos / DNS-based backend registration and health sync
+// TODO: Sticky sessions — session affinity based on cookie or client IP for stateful backends
+
 /** @} */ // HTTP
 
 NEFORCE_END_HTTP__

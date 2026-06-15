@@ -229,8 +229,20 @@ public:
     regex(regex&& other) noexcept;
     regex& operator=(regex&& other) noexcept;
 
-    regex(const regex&) = delete;
-    regex& operator=(const regex&) = delete;
+    /**
+     * @brief 拷贝构造函数
+     * @param other 源正则表达式
+     * @throws regex_exception 编译失败时抛出
+     */
+    regex(const regex& other);
+
+    /**
+     * @brief 拷贝赋值运算符
+     * @param other 源正则表达式
+     * @return 自身引用
+     * @throws regex_exception 编译失败时抛出
+     */
+    regex& operator=(const regex& other);
 
     /**
      * @brief 执行完整匹配
@@ -333,33 +345,25 @@ public:
  * @class regex_iterator
  * @brief 正则表达式匹配迭代器
  *
- * 双向迭代器，用于遍历字符串中的所有匹配结果。
- * 支持向前和向后遍历。
+ * 前向迭代器，惰性遍历字符串中的匹配结果。
  */
 class NEFORCE_API regex_iterator {
 public:
-    using iterator_category = bidirectional_iterator_tag; ///< 迭代器类型
-    using value_type = match_result;                      ///< 元素类型
-    using difference_type = ptrdiff_t;                    ///< 差值类型
-    using pointer = const match_result*;                  ///< 指针类型
-    using reference = const match_result&;                ///< 引用类型
+    using iterator_category = forward_iterator_tag; ///< 迭代器类型
+    using value_type = match_result;                ///< 元素类型
+    using difference_type = ptrdiff_t;              ///< 差值类型
+    using pointer = const match_result*;            ///< 指针类型
+    using reference = const match_result&;          ///< 引用类型
 
 private:
     const regex* regex_ = nullptr; ///< 关联的正则表达式
     string subject_;               ///< 待遍历的字符串
 
-    mutable vector<match_result> cached_matches_; ///< 缓存的匹配结果
-    mutable bool cache_built_ = false;            ///< 缓存是否已构建
+    match_result current_; ///< 当前匹配结果
+    size_t next_pos_ = 0;  ///< 下一次搜索的起始位置
+    bool done_ = true;     ///< 是否已到达末尾
 
-    mutable ptrdiff_t current_index_ = -1; ///< 当前索引
-
-    void build_cache() const;
-
-    void move_next();
-    void move_previous();
-
-    void find_from_position(size_t pos) const;
-    void find_last_before_position(size_t pos);
+    void find_next();
 
 public:
     /**
@@ -376,34 +380,22 @@ public:
     regex_iterator(const regex* re, string str, size_t pos = 0);
 
     /**
-     * @brief 从指定索引构造迭代器
-     * @param re 正则表达式对象
-     * @param str 待遍历的字符串
-     * @param index 索引位置
-     * @return 迭代器
-     */
-    static regex_iterator from_index(const regex* re, const string& str, ptrdiff_t index);
-
-    /**
      * @brief 解引用操作符
      * @return 当前匹配结果
      */
-    NEFORCE_NODISCARD reference operator*() const;
+    NEFORCE_NODISCARD reference operator*() const noexcept { return current_; }
 
     /**
      * @brief 成员访问操作符
      * @return 当前匹配结果指针
      */
-    NEFORCE_NODISCARD pointer operator->() const { return &(operator*()); }
+    NEFORCE_NODISCARD pointer operator->() const noexcept { return &current_; }
 
     /**
      * @brief 前置递增操作符
      * @return 递增后的迭代器
      */
-    regex_iterator& operator++() {
-        move_next();
-        return *this;
-    }
+    regex_iterator& operator++();
 
     /**
      * @brief 后置递增操作符
@@ -412,31 +404,6 @@ public:
     regex_iterator operator++(int) {
         regex_iterator tmp = *this;
         ++(*this);
-        return tmp;
-    }
-
-    /**
-     * @brief 前置递减操作符
-     * @return 递减后的迭代器
-     */
-    regex_iterator& operator--() {
-        if (current_index_ == -1 && cache_built_) {
-            if (!cached_matches_.empty()) {
-                current_index_ = static_cast<ptrdiff_t>(cached_matches_.size()) - 1;
-            }
-        } else {
-            move_previous();
-        }
-        return *this;
-    }
-
-    /**
-     * @brief 后置递减操作符
-     * @return 递减前的迭代器
-     */
-    regex_iterator operator--(int) {
-        regex_iterator tmp = *this;
-        --(*this);
         return tmp;
     }
 
@@ -472,10 +439,7 @@ public:
         regex_iterator it;
         it.regex_ = re;
         it.subject_ = str;
-        if (re != nullptr) {
-            it.build_cache();
-            it.current_index_ = -1;
-        }
+        it.done_ = true;
         return it;
     }
 };
@@ -505,7 +469,7 @@ private:
     string subject_;                ///< 待遍历的字符串
     regex_iterator match_iterator_; ///< 匹配迭代器
     regex_iterator end_iterator_;   ///< 结束迭代器
-    string_view current_;           ///< 当前令牌
+    string current_;                ///< 当前令牌
     int index_ = 0;                 ///< 捕获组索引（负数表示分隔符模式）
     state state_ = state::END;      ///< 当前状态
     size_t last_pos_ = 0;           ///< 最后处理位置
@@ -531,7 +495,7 @@ public:
      * @brief 解引用操作符
      * @return 当前令牌字符串
      */
-    NEFORCE_NODISCARD string_view operator*() const noexcept { return current_; }
+    NEFORCE_NODISCARD string_view operator*() const noexcept { return current_.view(); }
 
     /**
      * @brief 前置递增操作符

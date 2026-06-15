@@ -133,6 +133,9 @@ private:
     bool should_proxy(const string& path) const;
     http_client_response forward(const proxy_backend& backend, const http_request& request);
     void copy_response(const http_client_response& from, http_response& to);
+
+    // TODO: WebSocket proxy — tunnel WebSocket connections through to backend with bidirectional frame forwarding
+    // TODO: Response body transformation — modify/rewrite proxied response bodies (e.g., URL rewriting for CDN paths)
 };
 
 /** @} */ // HTTP

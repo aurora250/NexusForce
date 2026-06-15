@@ -33,6 +33,10 @@ public:
     NEFORCE_NODISCARD virtual bool exists(const string& id) const = 0;
     virtual void cleanup() = 0;
     NEFORCE_NODISCARD virtual size_t count() const = 0;
+
+    // TODO: Session event callbacks — on_create / on_destroy / on_expire hooks for audit logging and cleanup actions
+    // TODO: JDBC session store — database-backed session persistence for relational DBs (MySQL, PostgreSQL, SQLite)
+    // TODO: MongoDB session store — document-based session storage for MongoDB deployments
 };
 
 /**

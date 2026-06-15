@@ -5,12 +5,11 @@
  * @file any.hpp
  * @brief 类型擦除容器
  *
- * 此文件提供了any类型的实现，用于存储任意类型的值，
+ * 此文件提供了 meta_any 类型的实现，用于存储任意类型的值，
  * 支持类型安全的存取操作，是反射系统的核心基础。
  */
 
 #include "NeForce/core/exception/exception.hpp"
-#include "NeForce/core/memory/unique_ptr.hpp"
 #include "NeForce/core/string/string_view.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_REFLECT__
@@ -29,7 +28,7 @@ using type_id = size_t; ///< 类型标识符
  * @brief 类型名称获取器
  * @tparam T 目标类型
  *
- * 提供编译期类型名称字符串。可对自定义类型进行特化。
+ * 提供编译期类型名称字符串。算术类型已通过宏自动特化。
  */
 template <typename T>
 struct type_name {
@@ -37,7 +36,7 @@ struct type_name {
 };
 
 /**
- * @brief type_name的便捷访问变量模板
+ * @brief type_name 的便捷访问变量模板
  */
 template <typename T>
 NEFORCE_INLINE17 constexpr string_view type_name_v = type_name<T>::value;
@@ -53,6 +52,25 @@ NEFORCE_MACRO_RANGE_ARITHMETIC(__NEFORCE_SPECIALIZE_TYPE_NAME)
 #undef __NEFORCE_SPECIALIZE_TYPE_NAME
 /// @endcond
 
+
+/**
+ * @brief 计算类型 T 的运行时期类型标识
+ */
+template <typename T>
+NEFORCE_NODISCARD constexpr type_id type_id_for() noexcept {
+    NEFORCE_IF_CONSTEXPR(type_name_v<T>.to_hash() != string_view("unknown").to_hash()) {
+        return type_name_v<T>.to_hash();
+    }
+    else {
+#ifdef NEFORCE_COMPILER_MSVC
+        return FNV_hash_string(__FUNCSIG__, sizeof(__FUNCSIG__) - 1);
+#else
+        return FNV_hash_string(__PRETTY_FUNCTION__, sizeof(__PRETTY_FUNCTION__) - 1);
+#endif
+    }
+}
+
+
 /**
  * @class meta_any
  * @brief 类型擦除容器
@@ -60,26 +78,204 @@ NEFORCE_MACRO_RANGE_ARITHMETIC(__NEFORCE_SPECIALIZE_TYPE_NAME)
  * 可以存储任意类型的值，并提供类型安全的存取接口。
  */
 class meta_any {
+public:
+    static constexpr size_t SBO_SIZE = sizeof(void*) * 2; ///< SBO 缓冲区大小
+
 private:
-    struct concepts {
-        virtual ~concepts() = default;
-        NEFORCE_NODISCARD virtual unique_ptr<concepts> clone() const = 0;
-        NEFORCE_NODISCARD virtual reflect::type_id type_id() const noexcept = 0;
+    /**
+     * @union storage_internal
+     * @brief 内部存储联合体
+     *
+     * 小对象存储在 buffer_ 中，大对象通过 ptr_ 指向堆内存。
+     */
+    union storage_internal {
+        storage_internal() noexcept = default;
+        storage_internal(const storage_internal&) = delete;
+        storage_internal& operator=(const storage_internal&) = delete;
+
+        void* ptr_ = nullptr;                                               ///< 堆存储指针
+        aligned_storage_t<SBO_SIZE, alignof(_NEFORCE max_align_t)> buffer_; ///< SBO 栈缓冲区
     };
+
+    /**
+     * @enum operation
+     * @brief 管理器操作类型枚举
+     */
+    enum class operation : uint8_t {
+        ACCESS,      ///< 获取值指针
+        GET_TYPE_ID, ///< 获取类型 ID
+        COPY,        ///< 深拷贝到另一个 meta_any
+        DESTROY,     ///< 销毁存储的值
+        MOVE,        ///< 移动构造到另一个 meta_any
+    };
+
+    /**
+     * @union arg_t
+     * @brief 操作参数联合体
+     */
+    union arg_t {
+        void* obj_ptr_{};     ///< ACCESS 输出值指针
+        meta_any* any_ptr_;   ///< COPY/MOVE 目标 meta_any 指针
+        type_id type_id_val_; ///< GET_TYPE_ID 输出类型 ID
+    };
+
+    using manage_func = void (*)(operation, const meta_any*, arg_t*); ///< 管理器函数指针类型
+
+    /**
+     * @struct internal_manage
+     * @brief SBO 栈存储管理器
+     * @tparam T 存储的值类型
+     */
+    template <typename T>
+    struct internal_manage {
+        NEFORCE_NODISCARD static type_id type_id_val() noexcept { return type_id_for<T>(); }
+
+        template <typename... Args>
+        static void create(storage_internal& storage, Args&&... args) {
+            void* addr = const_cast<void*>(static_cast<const void*>(&storage.buffer_));
+            ::new (addr) T(_NEFORCE forward<Args>(args)...);
+        }
+
+        static T* access(const storage_internal& storage) noexcept {
+            const void* addr = &storage.buffer_;
+            return static_cast<T*>(const_cast<void*>(addr));
+        }
+
+        template <typename U = T, enable_if_t<is_copy_constructible_v<U>, int> = 0>
+        static void copy_op(const meta_any* self, arg_t* arg) {
+            auto* ptr = access(self->storage_);
+            create(arg->any_ptr_->storage_, *ptr);
+            arg->any_ptr_->manage_ = &manage;
+            arg->any_ptr_->type_id_ = type_id_val();
+        }
+
+        template <typename U = T, enable_if_t<!is_copy_constructible_v<U>, int> = 0>
+        static void copy_op(const meta_any*, arg_t*) {}
+
+        template <typename U = T, enable_if_t<is_move_constructible_v<U>, int> = 0>
+        static void move_op(const meta_any* self, arg_t* arg) {
+            auto* ptr = access(self->storage_);
+            create(arg->any_ptr_->storage_, _NEFORCE move(*ptr));
+            ptr->~T();
+            arg->any_ptr_->manage_ = &manage;
+            arg->any_ptr_->type_id_ = type_id_val();
+        }
+
+        template <typename U = T, enable_if_t<!is_move_constructible_v<U>, int> = 0>
+        static void move_op(const meta_any*, arg_t*) {}
+
+        static void manage(const operation op, const meta_any* self, arg_t* arg) {
+            auto* ptr = access(self->storage_);
+            switch (op) {
+                case operation::ACCESS: {
+                    arg->obj_ptr_ = static_cast<void*>(ptr);
+                    break;
+                }
+                case operation::GET_TYPE_ID: {
+                    arg->type_id_val_ = type_id_val();
+                    break;
+                }
+                case operation::COPY: {
+                    copy_op(self, arg);
+                    break;
+                }
+                case operation::DESTROY: {
+                    ptr->~T();
+                    break;
+                }
+                case operation::MOVE: {
+                    move_op(self, arg);
+                    break;
+                }
+            }
+        }
+    };
+
+    /**
+     * @struct external_manage
+     * @brief 堆存储管理器
+     * @tparam T 存储的值类型
+     */
+    template <typename T>
+    struct external_manage {
+        NEFORCE_NODISCARD static type_id type_id_val() noexcept { return type_id_for<T>(); }
+
+        template <typename... Args>
+        static void create(storage_internal& storage, Args&&... args) {
+            storage.ptr_ = new T(_NEFORCE forward<Args>(args)...);
+        }
+
+        static T* access(const storage_internal& storage) noexcept { return static_cast<T*>(storage.ptr_); }
+
+        template <typename U = T, enable_if_t<is_copy_constructible_v<U>, int> = 0>
+        static void copy_op(const meta_any* self, arg_t* arg) {
+            auto* ptr = access(self->storage_);
+            create(arg->any_ptr_->storage_, *ptr);
+            arg->any_ptr_->manage_ = &manage;
+            arg->any_ptr_->type_id_ = type_id_val();
+        }
+
+        template <typename U = T, enable_if_t<!is_copy_constructible_v<U>, int> = 0>
+        static void copy_op(const meta_any*, arg_t*) {}
+
+        static void manage(const operation op, const meta_any* self, arg_t* arg) {
+            auto* ptr = access(self->storage_);
+            switch (op) {
+                case operation::ACCESS: {
+                    arg->obj_ptr_ = static_cast<void*>(ptr);
+                    break;
+                }
+                case operation::GET_TYPE_ID: {
+                    arg->type_id_val_ = type_id_val();
+                    break;
+                }
+                case operation::COPY: {
+                    copy_op(self, arg);
+                    break;
+                }
+                case operation::DESTROY: {
+                    delete ptr;
+                    break;
+                }
+                case operation::MOVE: {
+                    arg->any_ptr_->storage_.ptr_ = self->storage_.ptr_;
+                    arg->any_ptr_->manage_ = &manage;
+                    arg->any_ptr_->type_id_ = type_id_val();
+                    break;
+                }
+            }
+        }
+    };
+
+    /**
+     * @brief SBO 阈值选择
+     */
+    template <typename T>
+    struct use_internal_storage : bool_constant<is_nothrow_move_constructible_v<T> && sizeof(T) <= SBO_SIZE &&
+                                                alignof(T) <= alignof(storage_internal)> {};
 
     template <typename T>
-    struct model final : concepts {
-        T value_;
+    using manage_t = conditional_t<use_internal_storage<T>::value, internal_manage<T>, external_manage<T>>;
 
-        explicit model(T value) :
-        value_(_NEFORCE move(value)) {}
+    manage_func manage_ = nullptr; ///< 管理器函数指针
+    storage_internal storage_;     ///< 存储对象
+    type_id type_id_ = 0;          ///< 存储值的类型 ID
 
-        NEFORCE_NODISCARD unique_ptr<concepts> clone() const override { return _NEFORCE make_unique<model<T>>(value_); }
+    void reset_internal() noexcept {
+        if (manage_ != nullptr) {
+            manage_(operation::DESTROY, this, nullptr);
+            manage_ = nullptr;
+        }
+        type_id_ = 0;
+    }
 
-        NEFORCE_NODISCARD reflect::type_id type_id() const noexcept override { return type_name_v<T>.to_hash(); }
-    };
-
-    unique_ptr<concepts> storage_{nullptr}; ///< 存储容器
+    template <typename T, typename... Args, typename Manager = manage_t<decay_t<T>>>
+    void emplace_impl(Args&&... args) {
+        reset_internal();
+        Manager::create(storage_, _NEFORCE forward<Args>(args)...);
+        manage_ = &Manager::manage;
+        type_id_ = Manager::type_id_val();
+    }
 
 public:
     /**
@@ -92,22 +288,55 @@ public:
      * @tparam T 值类型
      * @param value 要存储的值
      */
-    template <typename T, typename = enable_if_t<!is_same_v<decay_t<T>, meta_any>>>
-    explicit meta_any(T&& value) :
-    storage_(_NEFORCE make_unique<model<decay_t<T>>>(_NEFORCE forward<T>(value))) {}
+    template <typename T, typename DecayT = decay_t<T>, typename = enable_if_t<!is_same_v<DecayT, meta_any>>,
+              typename = enable_if_t<is_copy_constructible_v<DecayT>>>
+    meta_any(T&& value) {
+        emplace_impl<T>(_NEFORCE forward<T>(value));
+    }
 
-    meta_any(meta_any&&) noexcept = default;
-    meta_any& operator=(meta_any&&) noexcept = default;
+    /**
+     * @brief 原地构造值
+     * @tparam T 值类型
+     * @tparam Args 构造函数参数类型
+     * @param args 构造函数参数
+     *
+     * 在 meta_any 存储空间内直接构造 T，无需拷贝或移动。
+     */
+    template <typename T, typename... Args>
+    void emplace(Args&&... args) {
+        emplace_impl<T>(_NEFORCE forward<Args>(args)...);
+    }
 
     /**
      * @brief 拷贝构造函数
      * @param other 源对象
      */
     meta_any(const meta_any& other) {
-        if (other.storage_) {
-            storage_ = other.storage_->clone();
+        if (other.manage_ != nullptr) {
+            arg_t arg;
+            arg.any_ptr_ = this;
+            other.manage_(operation::COPY, &other, &arg);
         }
     }
+
+    /**
+     * @brief 移动构造函数
+     * @param other 源对象
+     */
+    meta_any(meta_any&& other) noexcept {
+        if (other.manage_ != nullptr) {
+            arg_t arg;
+            arg.any_ptr_ = this;
+            other.manage_(operation::MOVE, &other, &arg);
+            other.manage_ = nullptr;
+            other.type_id_ = 0;
+        }
+    }
+
+    /**
+     * @brief 析构函数
+     */
+    ~meta_any() { reset_internal(); }
 
     /**
      * @brief 拷贝赋值运算符
@@ -115,69 +344,84 @@ public:
      * @return 自身引用
      */
     meta_any& operator=(const meta_any& other) {
-        if (addressof(other) == this) {
+        if (_NEFORCE addressof(other) == this) {
             return *this;
         }
-
-        if (other.storage_) {
-            storage_ = other.storage_->clone();
-        } else {
-            storage_.reset();
+        reset_internal();
+        if (other.manage_ != nullptr) {
+            arg_t arg;
+            arg.any_ptr_ = this;
+            other.manage_(operation::COPY, &other, &arg);
         }
-
         return *this;
     }
 
     /**
-     * @brief 获取存储值的类型ID
-     * @return 类型ID，空对象返回0
+     * @brief 移动赋值运算符
+     * @param other 源对象
+     * @return 自身引用
      */
-    NEFORCE_NODISCARD reflect::type_id type_id() const noexcept { return storage_ ? storage_->type_id() : 0; }
+    meta_any& operator=(meta_any&& other) noexcept {
+        if (_NEFORCE addressof(other) == this) {
+            return *this;
+        }
+        reset_internal();
+        if (other.manage_ != nullptr) {
+            arg_t arg;
+            arg.any_ptr_ = this;
+            other.manage_(operation::MOVE, &other, &arg);
+            other.manage_ = nullptr;
+            other.type_id_ = 0;
+        }
+        return *this;
+    }
+
+    /**
+     * @brief 获取存储值的类型 ID
+     * @return 类型 ID，空对象返回 0
+     */
+    NEFORCE_NODISCARD type_id type_id() const noexcept { return type_id_; }
 
     /**
      * @brief 检查是否包含值
-     * @return 包含值返回true
+     * @return 包含值返回 true
      */
-    NEFORCE_NODISCARD bool has_value() const noexcept { return !!storage_; }
+    NEFORCE_NODISCARD bool has_value() const noexcept { return manage_ != nullptr; }
 
     /**
      * @brief 布尔转换运算符
-     * @return 包含值返回true
+     * @return 包含值返回 true
      */
     explicit operator bool() const noexcept { return has_value(); }
 
     /**
      * @brief 尝试转换为指定类型的指针
      * @tparam T 目标类型
-     * @return 类型匹配返回指针，否则返回nullptr
+     * @return 类型匹配返回指针，否则返回 nullptr
      */
     template <typename T>
     NEFORCE_NODISCARD T* cast() noexcept {
-        if (!storage_) {
+        if (!manage_ || type_id_ != type_id_for<T>()) {
             return nullptr;
         }
-        if (storage_->type_id() != type_name_v<T>.to_hash()) {
-            return nullptr;
-        }
-        auto* md = dynamic_cast<model<T>*>(storage_.get());
-        return md ? &md->value_ : nullptr;
+        arg_t arg;
+        manage_(operation::ACCESS, this, &arg);
+        return static_cast<T*>(arg.obj_ptr_);
     }
 
     /**
      * @brief 尝试转换为指定类型的常量指针
      * @tparam T 目标类型
-     * @return 类型匹配返回指针，否则返回nullptr
+     * @return 类型匹配返回指针，否则返回 nullptr
      */
     template <typename T>
     NEFORCE_NODISCARD const T* cast() const noexcept {
-        if (!storage_) {
+        if (!manage_ || type_id_ != type_id_for<T>()) {
             return nullptr;
         }
-        if (storage_->type_id() != type_name_v<T>.to_hash()) {
-            return nullptr;
-        }
-        auto* md = dynamic_cast<model<T>*>(storage_.get());
-        return md ? &md->value_ : nullptr;
+        arg_t arg;
+        manage_(operation::ACCESS, this, &arg);
+        return static_cast<const T*>(arg.obj_ptr_);
     }
 
     /**
@@ -213,7 +457,7 @@ public:
     /**
      * @brief 检查是否可以转换为指定类型
      * @tparam T 目标类型
-     * @return 可以转换返回true
+     * @return 可以转换返回 true
      */
     template <typename T>
     NEFORCE_NODISCARD bool can_cast() const noexcept {
@@ -225,8 +469,6 @@ public:
      * @tparam T 目标类型
      * @return 转换后的值
      * @throws typecast_exception 类型不匹配时抛出
-     *
-     * 返回存储值的副本，而非引用。
      */
     template <typename T>
     NEFORCE_NODISCARD T convert() const {
@@ -236,7 +478,57 @@ public:
         NEFORCE_THROW_EXCEPTION(typecast_exception("Not a valid type"));
         unreachable();
     }
+
+    /**
+     * @brief 获取存储值的原始指针（不检查类型）
+     * @return 原始对象指针，空返回 nullptr
+     */
+    NEFORCE_NODISCARD void* raw() noexcept {
+        if (manage_ == nullptr) {
+            return nullptr;
+        }
+        arg_t arg;
+        manage_(operation::ACCESS, this, &arg);
+        return arg.obj_ptr_;
+    }
+
+    /**
+     * @brief 获取存储值的常量原始指针（不检查类型）
+     */
+    NEFORCE_NODISCARD const void* raw() const noexcept {
+        if (manage_ == nullptr) {
+            return nullptr;
+        }
+        arg_t arg;
+        manage_(operation::ACCESS, this, &arg);
+        return arg.obj_ptr_;
+    }
+
+    /**
+     * @brief 重置为空状态
+     */
+    void reset() noexcept { reset_internal(); }
+
+    /**
+     * @brief 交换两个 meta_any
+     * @param other 要交换的对象
+     */
+    void swap(meta_any& other) noexcept {
+        if (_NEFORCE addressof(other) == this) {
+            return;
+        }
+        meta_any tmp(_NEFORCE move(*this));
+        *this = _NEFORCE move(other);
+        other = _NEFORCE move(tmp);
+    }
 };
+
+/**
+ * @brief 交换两个 meta_any
+ * @param lhs 左操作数
+ * @param rhs 右操作数
+ */
+inline void swap(meta_any& lhs, meta_any& rhs) noexcept { lhs.swap(rhs); }
 
 /** @} */ // Reflection
 
