@@ -2204,28 +2204,28 @@ TEST(ByteSizeTest, ToStringDefault_Zero) {
 
 TEST(ByteSizeTest, ToStringDefault_AutoUnit) {
     byte_size bs(1024ULL);
-    EXPECT_EQ(bs.to_string(), "1.00 KB");
+    EXPECT_EQ(bs.to_string(), "1.00 KiB");
 }
 
 TEST(ByteSizeTest, ToStringDefault_LargeValue) {
     byte_size bs(3ULL * 1024 * 1024 * 1024);
-    EXPECT_EQ(bs.to_string(), "3.00 GB");
+    EXPECT_EQ(bs.to_string(), "3.00 GiB");
 }
 
 TEST(ByteSizeTest, ToString_SpecificUnit) {
     byte_size bs(1536ULL);
     EXPECT_EQ(bs.to_string(byte_size::unit::B, 0, true), "1536 B");
-    EXPECT_EQ(bs.to_string(byte_size::unit::KB, 2, true), "1.50 KB");
+    EXPECT_EQ(bs.to_string(byte_size::unit::KB, 2, true), "1.50 KiB");
 }
 
 TEST(ByteSizeTest, ToString_DecimalMode) {
     byte_size bs(1500ULL);
-    EXPECT_EQ(bs.to_string(byte_size::unit::KB, 1, false), "1.5 KB");
+    EXPECT_EQ(bs.to_string(byte_size::unit::KB, 1, false), "1.5 kB");
 }
 
 TEST(ByteSizeTest, ToString_Precision) {
     byte_size bs(1025ULL);
-    EXPECT_EQ(bs.to_string(byte_size::unit::KB, 4, true), "1.0010 KB");
+    EXPECT_EQ(bs.to_string(byte_size::unit::KB, 4, true), "1.0010 KiB");
 }
 
 TEST(ByteSizeTest, ToString_MaxValueAuto) {
