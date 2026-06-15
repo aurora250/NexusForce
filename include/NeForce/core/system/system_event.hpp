@@ -63,9 +63,9 @@ private:
 #else
     unique_ptr<::pthread_mutex_t, mutex_deleter> mutex_; ///< 互斥锁
     unique_ptr<::pthread_cond_t, cond_deleter> cond_;    ///< 条件变量
-    bool signaled_;                                      ///< 信号状态
 #endif
-    type type_; ///< 事件类型
+    bool signaled_; ///< 信号状态
+    type type_;     ///< 事件类型
 
 public:
     /**
@@ -119,6 +119,20 @@ public:
      * 对于手动重置事件，唤醒后事件保持有信号状态。
      */
     bool wait(uint32_t timeout_ms = numeric_traits<uint32_t>::max()) noexcept;
+
+    /**
+     * @brief 尝试获取事件（非阻塞）
+     * @return 事件是否已处于有信号状态
+     *
+     * 对于自动重置事件，成功时自动重置为无信号状态。
+     */
+    bool try_wait() noexcept;
+
+    /**
+     * @brief 查询事件是否处于有信号状态
+     * @return 是否已设置
+     */
+    NEFORCE_NODISCARD bool is_set() const noexcept { return signaled_; }
 
     /**
      * @brief 获取事件类型

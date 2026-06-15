@@ -15,6 +15,7 @@
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <NeForce/core/exception/error_code.hpp>
 #    include <fcntl.h>
+#    include <pthread.h>
 #    include <sys/mman.h>
 #    include <sys/stat.h>
 #    include <unistd.h>
@@ -23,6 +24,15 @@ NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
 #ifdef NEFORCE_PLATFORM_LINUX
+    struct shm_header {
+        pthread_mutex_t mutex;
+        int ready; /**< 0=uninit, 1=initing, 2=ready */
+    };
+
+    constexpr size_t k_header_size = (sizeof(shm_header) + 63) & ~size_t{63};
+
+    static_assert(k_header_size >= sizeof(shm_header), "Header size must accommodate shm_header");
+
     string normalize_name(const string& name) {
         if (name.empty()) {
             return "/neforce_shm_default";
@@ -67,7 +77,14 @@ mapped_size_(other.mapped_size_),
 original_mapped_addr_(other.original_mapped_addr_),
 mapped_addr_(other.mapped_addr_),
 access_mode_(other.access_mode_),
-is_open_(other.is_open_) {
+is_open_(other.is_open_),
+data_offset_(other.data_offset_),
+mutex_owner_(other.mutex_owner_)
+#ifdef NEFORCE_PLATFORM_WINDOWS
+,
+mutex_handle_(other.mutex_handle_)
+#endif
+{
     other.handle_ = g_invalid_handle;
     other.size_ = 0;
     other.internal_mapped_size_ = 0;
@@ -75,6 +92,11 @@ is_open_(other.is_open_) {
     other.original_mapped_addr_ = nullptr;
     other.mapped_addr_ = nullptr;
     other.is_open_ = false;
+    other.data_offset_ = 0;
+    other.mutex_owner_ = false;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    other.mutex_handle_ = nullptr;
+#endif
 }
 
 share_memory& share_memory::operator=(share_memory&& other) noexcept {
@@ -93,6 +115,11 @@ share_memory& share_memory::operator=(share_memory&& other) noexcept {
     mapped_addr_ = other.mapped_addr_;
     access_mode_ = other.access_mode_;
     is_open_ = other.is_open_;
+    data_offset_ = other.data_offset_;
+    mutex_owner_ = other.mutex_owner_;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    mutex_handle_ = other.mutex_handle_;
+#endif
 
     other.handle_ = g_invalid_handle;
     other.size_ = 0;
@@ -101,6 +128,11 @@ share_memory& share_memory::operator=(share_memory&& other) noexcept {
     other.original_mapped_addr_ = nullptr;
     other.mapped_addr_ = nullptr;
     other.is_open_ = false;
+    other.data_offset_ = 0;
+    other.mutex_owner_ = false;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    other.mutex_handle_ = nullptr;
+#endif
 
     return *this;
 }
@@ -218,6 +250,8 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
 #else
     const string shm_name = normalize_name(name);
 
+    data_offset_ = k_header_size;
+
     int flags = (access == access_mode::read_only) ? O_RDONLY : O_RDWR;
 
     if (mode == open_mode::create_only) {
@@ -231,7 +265,9 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
             NEFORCE_THROW_EXCEPTION(share_memory_exception(last_error().message().data()));
         }
 
-        if (::ftruncate(handle_, static_cast<::off_t>(size)) == -1) {
+        mutex_owner_ = true;
+
+        if (::ftruncate(handle_, static_cast<::off_t>(data_offset_ + size)) == -1) {
             const auto error = last_error();
             ::close(handle_);
             handle_ = g_invalid_handle;
@@ -254,13 +290,13 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
             NEFORCE_THROW_EXCEPTION(share_memory_exception(error.message().data()));
         }
 
-        if (stat_buf.st_size == 0) {
+        if (stat_buf.st_size <= static_cast<::off_t>(data_offset_)) {
             ::close(handle_);
             handle_ = g_invalid_handle;
-            NEFORCE_THROW_EXCEPTION(share_memory_exception("Shared memory exists but has zero size"));
+            NEFORCE_THROW_EXCEPTION(share_memory_exception("Shared memory exists but has insufficient size"));
         }
 
-        size_ = static_cast<size_t>(stat_buf.st_size);
+        size_ = static_cast<size_t>(stat_buf.st_size) - data_offset_;
     } else {
         if (size == 0) {
             handle_ = ::shm_open(shm_name.data(), flags, 0666);
@@ -277,13 +313,13 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
                 NEFORCE_THROW_EXCEPTION(share_memory_exception(error.message().data()));
             }
 
-            if (stat_buf.st_size == 0) {
+            if (stat_buf.st_size <= static_cast<::off_t>(data_offset_)) {
                 ::close(handle_);
                 handle_ = g_invalid_handle;
-                NEFORCE_THROW_EXCEPTION(share_memory_exception("Shared memory exists but has zero size"));
+                NEFORCE_THROW_EXCEPTION(share_memory_exception("Shared memory exists but has insufficient size"));
             }
 
-            size_ = static_cast<size_t>(stat_buf.st_size);
+            size_ = static_cast<size_t>(stat_buf.st_size) - data_offset_;
         } else {
             handle_ = ::shm_open(shm_name.data(), flags | O_CREAT, 0666);
             if (handle_ == g_invalid_handle) {
@@ -300,7 +336,9 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
             }
 
             if (stat_buf.st_size == 0) {
-                if (::ftruncate(handle_, static_cast<::off_t>(size)) == -1) {
+                mutex_owner_ = true;
+
+                if (::ftruncate(handle_, static_cast<::off_t>(data_offset_ + size)) == -1) {
                     const auto error = last_error();
                     ::close(handle_);
                     handle_ = g_invalid_handle;
@@ -309,7 +347,7 @@ void share_memory::open(const string& name, size_t size, open_mode mode, access_
                 }
                 size_ = size;
             } else {
-                size_ = static_cast<size_t>(stat_buf.st_size);
+                size_ = static_cast<size_t>(stat_buf.st_size) - data_offset_;
             }
         }
     }
@@ -333,6 +371,148 @@ void share_memory::close() noexcept {
     is_open_ = false;
     name_.clear();
     size_ = 0;
+}
+
+void share_memory::grow(size_t new_size) {
+    if (!is_open_) {
+        NEFORCE_THROW_EXCEPTION(share_memory_exception("Shared memory not open"));
+    }
+    if (new_size <= size_) {
+        NEFORCE_THROW_EXCEPTION(share_memory_exception("New size must be greater than current size"));
+    }
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const ::DWORD protect = (access_mode_ == access_mode::read_only) ? PAGE_READONLY : PAGE_READWRITE;
+    const ::DWORD access_flags = (access_mode_ == access_mode::read_only) ? FILE_MAP_READ : FILE_MAP_ALL_ACCESS;
+
+    const bool was_mapped = mapped_addr_ != nullptr;
+    vector<char> saved_data;
+    if (was_mapped) {
+        saved_data.assign(static_cast<char*>(mapped_addr_), static_cast<char*>(mapped_addr_) + mapped_size_);
+        unmap();
+    }
+
+    ::CloseHandle(handle_);
+
+#    ifdef NEFORCE_ARCH_BITS_64
+    const auto size_high = static_cast<::DWORD>(new_size >> 32);
+    const auto size_low = static_cast<::DWORD>(new_size & 0xFFFFFFFF);
+#    else
+    constexpr ::DWORD size_high = 0;
+    const auto size_low = static_cast<::DWORD>(new_size);
+#    endif
+
+    handle_ = ::CreateFileMappingA(INVALID_HANDLE_VALUE, nullptr, protect, size_high, size_low, name_.data());
+    if (handle_ == g_invalid_handle) {
+        is_open_ = false;
+        NEFORCE_THROW_EXCEPTION(share_memory_exception("CreateFileMapping failed during grow"));
+    }
+
+    size_ = new_size;
+    data_offset_ = 0;
+
+    if (was_mapped) {
+        constexpr auto offset_high = static_cast<::DWORD>(0);
+        constexpr auto offset_low = static_cast<::DWORD>(0);
+        original_mapped_addr_ = ::MapViewOfFile(handle_, access_flags, offset_high, offset_low, new_size);
+        if (original_mapped_addr_ == nullptr) {
+            NEFORCE_THROW_EXCEPTION(share_memory_exception("MapViewOfFile failed during grow"));
+        }
+        mapped_addr_ = original_mapped_addr_;
+        internal_mapped_size_ = new_size;
+        mapped_size_ = new_size;
+
+        if (!saved_data.empty()) {
+            memcpy(mapped_addr_, saved_data.data(), saved_data.size());
+        }
+
+        if (mutex_handle_ == nullptr) {
+            const string mutex_name = "NeForce_shm_mutex_" + name_;
+            mutex_handle_ = ::CreateMutexA(nullptr, FALSE, mutex_name.data());
+        }
+    }
+#else
+    const size_t fd_new_size = data_offset_ + new_size;
+    if (::ftruncate(handle_, static_cast<::off_t>(fd_new_size)) == -1) {
+        const auto error = last_error();
+        NEFORCE_THROW_EXCEPTION(share_memory_exception(error.message().data()));
+    }
+
+    size_ = new_size;
+
+    if (mapped_addr_ != nullptr) {
+        void* old_addr = original_mapped_addr_;
+        size_t old_size = internal_mapped_size_;
+        int prot = (access_mode_ == access_mode::read_only) ? PROT_READ : (PROT_READ | PROT_WRITE);
+
+        original_mapped_addr_ = ::mremap(old_addr, old_size, fd_new_size, MREMAP_MAYMOVE);
+        if (original_mapped_addr_ == MAP_FAILED) {
+            original_mapped_addr_ = nullptr;
+            mapped_addr_ = nullptr;
+            const auto error = last_error();
+            NEFORCE_THROW_EXCEPTION(share_memory_exception(error.message().data()));
+        }
+        mapped_addr_ = static_cast<char*>(original_mapped_addr_) + data_offset_;
+        internal_mapped_size_ = fd_new_size;
+        mapped_size_ = new_size;
+    }
+#endif
+}
+
+void share_memory::lock() {
+    if (mapped_addr_ == nullptr) {
+        NEFORCE_THROW_EXCEPTION(share_memory_exception("Shared memory must be mapped before locking"));
+    }
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    if (mutex_handle_ == nullptr) {
+        NEFORCE_THROW_EXCEPTION(share_memory_exception("Mutex not initialized; call map() first"));
+    }
+    ::WaitForSingleObject(mutex_handle_, INFINITE);
+#else
+    auto* header = static_cast<shm_header*>(original_mapped_addr_);
+    int ret = ::pthread_mutex_lock(&header->mutex);
+    if (ret == EOWNERDEAD) {
+        ::pthread_mutex_consistent(&header->mutex);
+    }
+#endif
+}
+
+void share_memory::unlock() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    if (mutex_handle_ == nullptr) {
+        NEFORCE_THROW_EXCEPTION(share_memory_exception("Mutex not initialized; call map() first"));
+    }
+    ::ReleaseMutex(mutex_handle_);
+#else
+    if (original_mapped_addr_ != nullptr) {
+        auto* header = static_cast<shm_header*>(original_mapped_addr_);
+        ::pthread_mutex_unlock(&header->mutex);
+    }
+#endif
+}
+
+bool share_memory::try_lock() {
+    if (mapped_addr_ == nullptr) {
+        NEFORCE_THROW_EXCEPTION(share_memory_exception("Shared memory must be mapped before locking"));
+    }
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    if (mutex_handle_ == nullptr) {
+        return false;
+    }
+    return ::WaitForSingleObject(mutex_handle_, 0) == WAIT_OBJECT_0;
+#else
+    auto* header = static_cast<shm_header*>(original_mapped_addr_);
+    int ret = ::pthread_mutex_trylock(&header->mutex);
+    if (ret == EBUSY) {
+        return false;
+    }
+    if (ret == EOWNERDEAD) {
+        ::pthread_mutex_consistent(&header->mutex);
+    }
+    return (ret == 0 || ret == EOWNERDEAD);
+#endif
 }
 
 void* share_memory::map(size_t offset, const size_t length) {
@@ -377,21 +557,54 @@ void* share_memory::map(size_t offset, const size_t length) {
     if (original_mapped_addr_ == nullptr) {
         NEFORCE_THROW_EXCEPTION(share_memory_exception("MapViewOfFile failed"));
     }
+
+    data_offset_ = 0;
+
+    if (mutex_handle_ == nullptr) {
+        const string mutex_name = "NeForce_shm_mutex_" + name_;
+        mutex_handle_ = ::CreateMutexA(nullptr, FALSE, mutex_name.data());
+    }
 #else
     int prot = (access_mode_ == access_mode::read_only) ? PROT_READ : (PROT_READ | PROT_WRITE);
 
-    original_mapped_addr_ =
-            ::mmap(nullptr, map_length, prot, MAP_SHARED, handle_, static_cast<::off_t>(aligned_offset));
+    // Always map from file offset 0 to include the shared-memory header
+    const size_t total_map = data_offset_ + offset + map_length;
+    original_mapped_addr_ = ::mmap(nullptr, total_map, prot, MAP_SHARED, handle_, 0);
 
     if (original_mapped_addr_ == MAP_FAILED) {
         original_mapped_addr_ = nullptr;
         const auto error = last_error();
         NEFORCE_THROW_EXCEPTION(share_memory_exception(error.message().data()));
     }
+
+    // Initialize the process-shared mutex using CAS to elect a single initializer
+    {
+        auto* header = static_cast<shm_header*>(original_mapped_addr_);
+        int expected = 0;
+        if (__atomic_compare_exchange_n(&header->ready, &expected, 1, false, __ATOMIC_ACQUIRE, __ATOMIC_RELAXED)) {
+            ::pthread_mutexattr_t attr;
+            ::pthread_mutexattr_init(&attr);
+            ::pthread_mutexattr_setpshared(&attr, PTHREAD_PROCESS_SHARED);
+            ::pthread_mutexattr_setrobust(&attr, PTHREAD_MUTEX_ROBUST);
+            ::pthread_mutex_init(&header->mutex, &attr);
+            ::pthread_mutexattr_destroy(&attr);
+            mutex_owner_ = true;
+            __atomic_store_n(&header->ready, 2, __ATOMIC_RELEASE);
+        } else {
+            while (__atomic_load_n(&header->ready, __ATOMIC_ACQUIRE) != 2) {
+                // spin-wait for the initializer to complete
+            }
+        }
+    }
 #endif
 
-    mapped_addr_ = static_cast<char*>(original_mapped_addr_) + padding;
-    internal_mapped_size_ = map_length;
+    mapped_addr_ = static_cast<char*>(original_mapped_addr_) + data_offset_ + offset;
+    internal_mapped_size_ =
+#ifdef NEFORCE_PLATFORM_WINDOWS
+            map_length;
+#else
+            total_map;
+#endif
     mapped_size_ = (length == 0) ? (size_ - offset) : length;
     return mapped_addr_;
 }
@@ -403,6 +616,10 @@ void share_memory::unmap() noexcept {
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
     ::UnmapViewOfFile(original_mapped_addr_);
+    if (mutex_handle_ != nullptr) {
+        ::CloseHandle(mutex_handle_);
+        mutex_handle_ = nullptr;
+    }
 #else
     ::munmap(original_mapped_addr_, internal_mapped_size_);
 #endif

@@ -596,6 +596,16 @@ public:
     NEFORCE_NODISCARD string console_type() const;
 
     /**
+     * @brief 查询光标位置
+     * @return 光标位置，失败返回 (0, 0)
+     *
+     * 通过 DSR 转义序列查询光标位置。
+     *
+     * @note 仅在支持 ANSI 转义的终端上有效。
+     */
+    NEFORCE_NODISCARD console_size query_cursor_position();
+
+    /**
      * @brief 打字机效果打印
      * @param text 要打印的文本
      * @param delay_per_char 每个字符的延迟

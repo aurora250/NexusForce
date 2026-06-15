@@ -1,6 +1,9 @@
 #include <NeForce/core/system/registry.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <winerror.h>
+#    include <synchapi.h>
+#    include <handleapi.h>
+#    include <WinBase.h>
 NEFORCE_BEGIN_NAMESPACE__
 
 wstring registry_key::value_info::to_string() const {
@@ -329,6 +332,35 @@ vector<::BYTE> registry_key::get_binary_value(const wstring& name) const { retur
 
 vector<wstring> registry_key::get_multi_string_value(const wstring& name) const {
     return get_value_info(name).to_multi_string();
+}
+
+void registry_key::open(const ::HKEY root, const wstring& path, const wow64_view view, const ::REGSAM sam_desired) {
+    open(root, path, sam_desired | static_cast<::REGSAM>(view));
+}
+
+bool registry_key::notify_change(const bool watch_subtree, const int timeout_ms) {
+    throw_if_invalid();
+
+    constexpr ::DWORD filter = REG_NOTIFY_CHANGE_NAME | REG_NOTIFY_CHANGE_ATTRIBUTES | REG_NOTIFY_CHANGE_LAST_SET |
+                               REG_NOTIFY_CHANGE_SECURITY;
+
+    const ::HANDLE event = ::CreateEventA(nullptr, FALSE, FALSE, nullptr);
+    if (event == nullptr) {
+        NEFORCE_THROW_EXCEPTION(registry_key_exception("CreateEvent failed for registry notify"));
+    }
+
+    const ::LONG ret = ::RegNotifyChangeKeyValue(hkey_, watch_subtree ? TRUE : FALSE, filter, event, TRUE);
+
+    if (ret != ERROR_SUCCESS) {
+        ::CloseHandle(event);
+        NEFORCE_THROW_EXCEPTION(registry_key_exception("RegNotifyChangeKeyValue failed"));
+    }
+
+    const ::DWORD wait_ms = (timeout_ms < 0) ? INFINITE : static_cast<::DWORD>(timeout_ms);
+    const ::DWORD wait_ret = ::WaitForSingleObject(event, wait_ms);
+    ::CloseHandle(event);
+
+    return wait_ret == WAIT_OBJECT_0;
 }
 
 NEFORCE_END_NAMESPACE__

@@ -48,9 +48,24 @@ struct dynamic_library_exception final : system_exception {
  * 支持动态库的加载、卸载和符号解析操作。
  */
 class NEFORCE_API dynamic_library {
+public:
+    /**
+     * @enum load_mode
+     * @brief 动态库加载模式
+     */
+    enum class load_mode : int {
+        default_ = 0,      /**< 默认模式（惰性解析，本地符号可见性） */
+        lazy = 1 << 0,     /**< 惰性符号解析 */
+        now = 1 << 1,      /**< 立即符号解析 */
+        global = 1 << 2,   /**< 全局符号可见性 */
+        local = 1 << 3,    /**< 本地符号可见性 */
+        deep_bind = 1 << 4 /**< 深层绑定 */
+    };
+
 private:
-    void* handle_{nullptr}; ///< 动态库句柄
-    string path_;           ///< 库文件路径
+    void* handle_{nullptr};                    /**< 动态库句柄 */
+    string path_;                              /**< 库文件路径 */
+    load_mode load_mode_{load_mode::default_}; /**< 加载模式 */
 
 private:
     void open();
@@ -58,11 +73,26 @@ private:
 
 public:
     /**
+     * @brief 默认构造函数
+     *
+     * 创建一个未初始化的动态库对象。
+     */
+    dynamic_library() noexcept = default;
+
+    /**
      * @brief 构造函数，打开指定的动态库
      * @param pth 动态库路径
      * @throws dynamic_library_exception 加载失败时抛出
      */
     explicit dynamic_library(string pth);
+
+    /**
+     * @brief 以指定的模式打开动态库
+     * @param pth 动态库路径
+     * @param mode 加载模式
+     * @throws dynamic_library_exception 加载失败时抛出
+     */
+    dynamic_library(string pth, load_mode mode);
 
     ~dynamic_library();
 
@@ -131,6 +161,49 @@ public:
      * @return 路径字符串
      */
     NEFORCE_NODISCARD const string& path() const noexcept { return path_; }
+
+    /**
+     * @brief 获取当前加载模式
+     * @return 加载模式枚举值
+     */
+    NEFORCE_NODISCARD load_mode get_load_mode() const noexcept { return load_mode_; }
+
+    /**
+     * @brief 加载自身（当前进程可执行文件）
+     * @return 表示当前进程的动态库对象
+     * @note 返回的对象析构时不会卸载自身
+     */
+    static dynamic_library load_self();
+
+    /**
+     * @brief 按名称加载动态库
+     * @param name 库名称（不含前缀和后缀）
+     * @param mode 加载模式
+     * @return 动态库对象
+     * @throws dynamic_library_exception 加载失败时抛出
+     */
+    static dynamic_library load_by_name(const string& name, load_mode mode = load_mode::default_);
+
+    /**
+     * @brief 列出动态库中的符号
+     * @param name_filter 名称过滤（留空返回全部）
+     * @return 符号名称列表
+     * @note Windows 不支持，返回空列表
+     */
+    NEFORCE_NODISCARD vector<string> list_symbols(const string& name_filter = "") const;
+
+    /**
+     * @brief 获取当前程序的可执行文件路径
+     * @return 可执行文件完整路径
+     */
+    NEFORCE_NODISCARD static string program_location();
+
+    /**
+     * @brief 获取指定符号所在的动态库路径
+     * @param symbol_ptr 符号地址
+     * @return 动态库文件路径，失败返回空字符串
+     */
+    NEFORCE_NODISCARD static string symbol_location(void* symbol_ptr);
 };
 
 /** @} */ // DynamicLibrary

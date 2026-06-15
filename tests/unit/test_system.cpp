@@ -1,4 +1,7 @@
+#include <NeForce/core/async/named_mutex.hpp>
 #include <NeForce/core/system/cmdline.hpp>
+#include <NeForce/core/system/console.hpp>
+#include <NeForce/core/system/daemon.hpp>
 #include <NeForce/core/system/dynamic_library.hpp>
 #include <NeForce/core/system/environment.hpp>
 #include <NeForce/core/system/locale.hpp>
@@ -9,7 +12,9 @@
 #include <NeForce/core/system/stacktrace.hpp>
 #include <NeForce/core/system/sysinfo.hpp>
 #include <NeForce/core/system/system_event.hpp>
-#include <NeForce/core/system/registry.hpp>
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#    include <NeForce/core/system/registry.hpp>
+#endif
 #include <NeForce/core/utility/packages.hpp>
 #include <gtest/gtest.h>
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -613,6 +618,104 @@ TEST_F(CmdlineTest, OptionDefaultConstructor_Success) {
     EXPECT_TRUE(opt.values.empty());
 }
 
+TEST_F(CmdlineTest, AddDependency_PresentAndRequired_NoError) {
+    cmdline_.add_option("output", 'o', "Output file", true, false, "a.out");
+    cmdline_.add_option("format", 'f', "Format", true);
+    cmdline_.add_dependency("format", "output");
+
+    EXPECT_NO_THROW(cmdline_.parse(vector<string>{"program", "--output=a.out", "--format=text"}));
+    EXPECT_TRUE(cmdline_.has("output"));
+    EXPECT_TRUE(cmdline_.has("format"));
+}
+
+TEST_F(CmdlineTest, AddDependency_MissingRequired_ThrowsException) {
+    cmdline_.add_option("output", 'o', "Output file", true, false, "a.out");
+    cmdline_.add_option("format", 'f', "Format", true);
+    cmdline_.add_dependency("format", "output");
+
+    EXPECT_THROW(cmdline_.parse(vector<string>{"program", "--format=text"}), cmdline_exception);
+}
+
+TEST_F(CmdlineTest, AddConflict_ErrorBehavior_ThrowsException) {
+    cmdline_.add_option("verbose", 'v', "Enable verbose output");
+    cmdline_.add_option("quiet", 'q', "Enable quiet mode");
+    cmdline_.add_conflict("verbose", "quiet");
+    cmdline_.set_conflict_behavior(cmdline::conflict_behavior::error);
+
+    EXPECT_THROW(cmdline_.parse(vector<string>{"program", "--verbose", "--quiet"}), cmdline_exception);
+}
+
+TEST_F(CmdlineTest, AddConflict_WarningBehavior_NoThrow) {
+    cmdline_.add_option("verbose", 'v', "Enable verbose output");
+    cmdline_.add_option("quiet", 'q', "Enable quiet mode");
+    cmdline_.add_conflict("verbose", "quiet");
+    cmdline_.set_conflict_behavior(cmdline::conflict_behavior::warning);
+
+    EXPECT_NO_THROW(cmdline_.parse(vector<string>{"program", "--verbose", "--quiet"}));
+    EXPECT_TRUE(cmdline_.has("verbose"));
+    EXPECT_TRUE(cmdline_.has("quiet"));
+}
+
+TEST_F(CmdlineTest, AddConflict_IgnoreBehavior_NoThrow) {
+    cmdline_.add_option("verbose", 'v', "Enable verbose output");
+    cmdline_.add_option("quiet", 'q', "Enable quiet mode");
+    cmdline_.add_conflict("verbose", "quiet");
+    cmdline_.set_conflict_behavior(cmdline::conflict_behavior::ignore);
+
+    EXPECT_NO_THROW(cmdline_.parse(vector<string>{"program", "-v", "-q"}));
+}
+
+TEST_F(CmdlineTest, AddDependency_ChainOfTwo_Success) {
+    cmdline_.add_option("a", 0, "Option A");
+    cmdline_.add_option("b", 0, "Option B");
+    cmdline_.add_option("c", 0, "Option C");
+    cmdline_.add_dependency("b", "a");
+    cmdline_.add_dependency("c", "b");
+
+    EXPECT_NO_THROW(cmdline_.parse(vector<string>{"program", "--a", "--b", "--c"}));
+}
+
+TEST_F(CmdlineTest, AddDependency_ChainBroken_ThrowsException) {
+    cmdline_.add_option("a", 0, "Option A");
+    cmdline_.add_option("b", 0, "Option B");
+    cmdline_.add_option("c", 0, "Option C");
+    cmdline_.add_dependency("b", "a");
+    cmdline_.add_dependency("c", "b");
+
+    EXPECT_THROW(cmdline_.parse(vector<string>{"program", "--b", "--c"}), cmdline_exception);
+}
+
+TEST_F(CmdlineTest, AddConflict_MultiplePairs_Success) {
+    cmdline_.add_option("mode1", 0, "Mode 1");
+    cmdline_.add_option("mode2", 0, "Mode 2");
+    cmdline_.add_option("mode3", 0, "Mode 3");
+    cmdline_.add_conflict("mode1", "mode2");
+    cmdline_.add_conflict("mode2", "mode3");
+    cmdline_.set_conflict_behavior(cmdline::conflict_behavior::error);
+
+    EXPECT_NO_THROW(cmdline_.parse(vector<string>{"program", "--mode1"}));
+    EXPECT_THROW(cmdline_.parse(vector<string>{"program", "--mode1", "--mode2"}), cmdline_exception);
+}
+
+TEST_F(CmdlineTest, ConflictBehavior_EnumValues) {
+    EXPECT_NE(static_cast<int>(cmdline::conflict_behavior::error),
+              static_cast<int>(cmdline::conflict_behavior::warning));
+    EXPECT_NE(static_cast<int>(cmdline::conflict_behavior::warning),
+              static_cast<int>(cmdline::conflict_behavior::ignore));
+}
+
+TEST_F(CmdlineTest, OptionDependency_StructDefaults) {
+    cmdline::option_dependency dep;
+    EXPECT_TRUE(dep.present.empty());
+    EXPECT_TRUE(dep.required.empty());
+}
+
+TEST_F(CmdlineTest, OptionConflict_StructDefaults) {
+    cmdline::option_conflict conflict;
+    EXPECT_TRUE(conflict.option_a.empty());
+    EXPECT_TRUE(conflict.option_b.empty());
+}
+
 class DynamicLibraryTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -1122,6 +1225,95 @@ TEST_F(DynamicLibraryTest, MoveAssignment_DifferentLibraries_SourceClosedCorrect
 
     EXPECT_EQ(lib2.native_handle(), handle1_before);
     EXPECT_EQ(lib1.native_handle(), nullptr);
+}
+
+TEST_F(DynamicLibraryTest, LoadSelf_ReturnsValidLibrary) {
+    dynamic_library lib = dynamic_library::load_self();
+    EXPECT_TRUE(lib.is_open());
+}
+
+TEST_F(DynamicLibraryTest, LoadSelf_HasSymbols) {
+    dynamic_library lib = dynamic_library::load_self();
+    EXPECT_TRUE(lib.is_open());
+}
+
+TEST_F(DynamicLibraryTest, LoadByName_WithShortName_LoadsSuccessfully) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    dynamic_library lib = dynamic_library::load_by_name("kernel32");
+#else
+    dynamic_library lib = dynamic_library::load_by_name("pthread");
+#endif
+    EXPECT_TRUE(lib.is_open());
+}
+
+TEST_F(DynamicLibraryTest, LoadByName_WithFullName_LoadsSuccessfully) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    dynamic_library lib = dynamic_library::load_by_name("kernel32.dll");
+#else
+    dynamic_library lib = dynamic_library::load_by_name("libpthread.so.0");
+#endif
+    EXPECT_TRUE(lib.is_open());
+}
+
+TEST_F(DynamicLibraryTest, LoadMode_Default_LoadsSuccessfully) {
+    dynamic_library lib(get_test_library_path(), dynamic_library::load_mode::default_);
+    EXPECT_TRUE(lib.is_open());
+}
+
+TEST_F(DynamicLibraryTest, LoadMode_Lazy_LoadsSuccessfully) {
+    dynamic_library lib(get_test_library_path(), dynamic_library::load_mode::lazy);
+    EXPECT_TRUE(lib.is_open());
+}
+
+TEST_F(DynamicLibraryTest, LoadMode_Now_LoadsSuccessfully) {
+    dynamic_library lib(get_test_library_path(), dynamic_library::load_mode::now);
+    EXPECT_TRUE(lib.is_open());
+}
+
+#ifdef NEFORCE_PLATFORM_LINUX
+TEST_F(DynamicLibraryTest, LoadMode_Global_LoadsSuccessfully) {
+    dynamic_library lib(get_test_library_path(), dynamic_library::load_mode::Global);
+    EXPECT_TRUE(lib.is_open());
+}
+
+TEST_F(DynamicLibraryTest, LoadMode_DeepBind_LoadsSuccessfully) {
+    dynamic_library lib(get_test_library_path(), dynamic_library::load_mode::DeepBind);
+    EXPECT_TRUE(lib.is_open());
+}
+#endif
+
+TEST_F(DynamicLibraryTest, LoadMode_EnumValues) {
+    EXPECT_NE(static_cast<int>(dynamic_library::load_mode::default_),
+              static_cast<int>(dynamic_library::load_mode::lazy));
+    EXPECT_NE(static_cast<int>(dynamic_library::load_mode::lazy), static_cast<int>(dynamic_library::load_mode::now));
+}
+
+TEST_F(DynamicLibraryTest, ListSymbols_NonEmpty) {
+    dynamic_library lib(get_test_library_path());
+    vector<string> symbols = lib.list_symbols();
+    EXPECT_FALSE(symbols.empty());
+}
+
+TEST_F(DynamicLibraryTest, ListSymbols_WithNameFilter_ReturnsFiltered) {
+    dynamic_library lib(get_test_library_path());
+    string filter_name = get_test_symbol_name();
+    vector<string> symbols = lib.list_symbols(filter_name);
+    EXPECT_FALSE(symbols.empty());
+    for (const auto& s: symbols) {
+        EXPECT_NE(s.find(filter_name), string::npos);
+    }
+}
+
+TEST_F(DynamicLibraryTest, ListSymbols_NotLoaded_ReturnsEmpty) {
+    dynamic_library lib;
+    vector<string> symbols = lib.list_symbols();
+    EXPECT_TRUE(symbols.empty());
+}
+
+TEST_F(DynamicLibraryTest, ListSymbols_NonexistentFilter_ReturnsEmpty) {
+    dynamic_library lib(get_test_library_path());
+    vector<string> symbols = lib.list_symbols("nonexistent_symbol_xyz_12345");
+    EXPECT_TRUE(symbols.empty());
 }
 
 class EnvironmentTest : public ::testing::Test {
@@ -3198,6 +3390,62 @@ TEST_F(PipeTest, WriteAfterMove_SourcePipe_ReturnsMinusOne) {
     EXPECT_EQ(written, -1);
 }
 
+TEST_F(PipeTest, Constructor_Nonblocking_CreatesValidPipe) {
+    pipe p(false, true);
+    EXPECT_TRUE(p.is_valid());
+    EXPECT_TRUE(p.is_nonblocking());
+}
+
+TEST_F(PipeTest, Constructor_NonblockingInheritable_CreatesValidPipe) {
+    pipe p(true, true);
+    EXPECT_TRUE(p.is_valid());
+    EXPECT_TRUE(p.is_nonblocking());
+}
+
+TEST_F(PipeTest, Constructor_DefaultCreatesBlockingPipe) {
+    pipe p(false);
+    EXPECT_TRUE(p.is_valid());
+    EXPECT_FALSE(p.is_nonblocking());
+}
+
+TEST_F(PipeTest, SetNonblocking_True_SetsFlag) {
+    pipe p(false);
+    EXPECT_TRUE(p.set_nonblocking(true));
+    EXPECT_TRUE(p.is_nonblocking());
+}
+
+TEST_F(PipeTest, SetNonblocking_False_AfterTrue_SetsFlag) {
+    pipe p(false, true);
+    EXPECT_TRUE(p.is_nonblocking());
+    EXPECT_TRUE(p.set_nonblocking(false));
+    EXPECT_FALSE(p.is_nonblocking());
+}
+
+TEST_F(PipeTest, SetNonblocking_OnInvalidPipe_ReturnsFalse) {
+    pipe p;
+    EXPECT_FALSE(p.is_valid());
+    p.set_nonblocking(true);
+    SUCCEED();
+}
+
+TEST_F(PipeTest, Read_NonblockingNoData_ReturnsZero) {
+    pipe p(false, true);
+    char buf[64];
+    int n = p.read(buf, sizeof(buf));
+    EXPECT_TRUE(n == 0 || n == -1);
+}
+
+TEST_F(PipeTest, Read_NonblockingThenWrite_ReturnsData) {
+    pipe p(false, true);
+    const char* msg = "hello";
+    p.write(msg, string_length(msg));
+
+    char buf[64];
+    int n = p.read(buf, sizeof(buf));
+    EXPECT_GT(n, 0);
+    EXPECT_EQ(string(buf, static_cast<size_t>(n)), "hello");
+}
+
 class ProcessTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -3916,6 +4164,78 @@ TEST_F(ProcessTest, MergedStderr_WhenOnlyStdoutCaptured) {
     EXPECT_TRUE(output.find("err_msg") != string::npos || output.find("merged") != string::npos);
 }
 
+TEST_F(ProcessTest, Spawn_SimpleProcess_ReturnsValidId) {
+    process::native_id_type pid = process::spawn(get_test_executable(), get_test_args());
+    EXPECT_GT(pid, 0);
+}
+
+TEST_F(ProcessTest, Spawn_WithArgs_ReturnsValidId) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    process::native_id_type pid = process::spawn("cmd.exe", {"/c", "exit", "0"});
+#else
+    process::native_id_type pid = process::spawn("/bin/sleep", {"0.1"});
+#endif
+    EXPECT_GT(pid, 0);
+}
+
+TEST_F(ProcessTest, System_SuccessfulProcess_ReturnsZero) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    int ret = process::system("cmd.exe", {"/c", "exit", "0"});
+#else
+    int ret = process::system("/bin/true");
+#endif
+    EXPECT_EQ(ret, 0);
+}
+
+TEST_F(ProcessTest, System_WithTimeout_ReturnsExitCode) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    int ret = process::system("cmd.exe", {"/c", "exit", "0"}, 5000);
+#else
+    int ret = process::system("/bin/true", {}, 5000);
+#endif
+    EXPECT_EQ(ret, 0);
+}
+
+TEST_F(ProcessTest, Capture_ReturnsNonEmptyOutput) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    string output = process::capture("cmd.exe", {"/c", "echo", "hello_world"});
+#else
+    string output = process::capture("/bin/sh", {"-c", "echo hello_world"});
+#endif
+    EXPECT_NE(output.find("hello_world"), string::npos);
+}
+
+TEST_F(ProcessTest, Capture_WithTimeout_ReturnsOutput) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    string output = process::capture("cmd.exe", {"/c", "echo", "neforce"}, 5000);
+#else
+    string output = process::capture("/bin/sh", {"-c", "echo neforce"}, 5000);
+#endif
+    EXPECT_NE(output.find("neforce"), string::npos);
+}
+
+TEST_F(ProcessTest, Chain_TwoProcesses_SecondReceivesFirstOutput) {
+    pipe p(true);
+    process first;
+    first.set_external_stdout(p);
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    first.start("cmd.exe", {"/c", "echo", "chained"});
+#else
+    first.start("/bin/sh", {"-c", "echo chained"});
+#endif
+    first.wait();
+
+    p.close_write();
+
+    string output;
+    char buf[256];
+    int n;
+    while ((n = p.read(buf, sizeof(buf))) > 0) {
+        output.append(buf, static_cast<size_t>(n));
+    }
+    EXPECT_NE(output.find("chained"), string::npos);
+}
+
 class ShareMemoryTest : public ::testing::Test {
 protected:
     static constexpr const char* test_shm_name = "neforce_test_shm_12345";
@@ -4506,6 +4826,110 @@ TEST_F(ShareMemoryTest, Data_AfterMove_SourceDataNull) {
 
     EXPECT_EQ(shm2.data(), addr);
     EXPECT_EQ(shm1.data(), nullptr);
+}
+
+TEST_F(ShareMemoryTest, Grow_IncreasesSize) {
+    share_memory shm(test_shm_name, test_size, share_memory::open_mode::create_only);
+    shm.map();
+    EXPECT_EQ(shm.size(), test_size);
+
+    size_t new_size = test_size * 2;
+    shm.grow(new_size);
+    EXPECT_EQ(shm.size(), new_size);
+    EXPECT_TRUE(shm.is_mapped());
+}
+
+TEST_F(ShareMemoryTest, Grow_PreservesData) {
+    share_memory shm(test_shm_name, test_size, share_memory::open_mode::create_only);
+    shm.map();
+    auto* data = shm.data<int>();
+    data[0] = 0x12345678;
+
+    size_t new_size = test_size * 2;
+    shm.grow(new_size);
+    auto* data2 = shm.data<int>();
+    EXPECT_EQ(data2[0], 0x12345678);
+}
+
+TEST_F(ShareMemoryTest, Grow_NotOpen_ThrowsException) {
+    share_memory shm;
+    EXPECT_THROW(shm.grow(8192), share_memory_exception);
+}
+
+TEST_F(ShareMemoryTest, Grow_NewSizeNotGreater_ThrowsException) {
+    share_memory shm(test_shm_name, test_size, share_memory::open_mode::create_only);
+    shm.map();
+    EXPECT_THROW(shm.grow(test_size), share_memory_exception);
+    EXPECT_THROW(shm.grow(test_size / 2), share_memory_exception);
+}
+
+TEST_F(ShareMemoryTest, Lock_Unlock_Success) {
+    share_memory shm(test_shm_name, test_size, share_memory::open_mode::create_only);
+    shm.map();
+
+    shm.lock();
+    shm.unlock();
+    SUCCEED();
+}
+
+TEST_F(ShareMemoryTest, Lock_WithoutMap_ThrowsException) {
+    share_memory shm(test_shm_name, test_size, share_memory::open_mode::create_only);
+    EXPECT_THROW(shm.lock(), share_memory_exception);
+}
+
+TEST_F(ShareMemoryTest, TryLock_Uncontended_ReturnsTrue) {
+    share_memory shm(test_shm_name, test_size, share_memory::open_mode::create_only);
+    shm.map();
+
+    EXPECT_TRUE(shm.try_lock());
+    shm.unlock();
+}
+
+TEST_F(ShareMemoryTest, TryLock_Contended_ReturnsFalse) {
+    share_memory shm(test_shm_name, test_size, share_memory::open_mode::create_only);
+    shm.map();
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    // Windows named mutex is reentrant for the same thread;
+    // use a separate thread to test contention
+    atomic<bool> locked{false};
+    atomic<bool> try_result{true};
+
+    shm.lock();
+
+    thread contender([&]() {
+        share_memory shm2(test_shm_name, 0, share_memory::open_mode::open_only);
+        shm2.map();
+        try_result.store(shm2.try_lock());
+        if (try_result.load()) {
+            shm2.unlock();
+        }
+    });
+
+    contender.join();
+    EXPECT_FALSE(try_result.load());
+    shm.unlock();
+#else
+    shm.lock();
+    EXPECT_FALSE(shm.try_lock());
+    shm.unlock();
+#endif
+}
+
+TEST_F(ShareMemoryTest, Unlock_WithoutLock_NoThrow) {
+    share_memory shm(test_shm_name, test_size, share_memory::open_mode::create_only);
+    shm.map();
+    shm.lock();
+    shm.unlock();
+    EXPECT_NO_THROW(shm.unlock());
+}
+
+TEST_F(ShareMemoryTest, Grow_AfterMap_PreservesMapping) {
+    share_memory shm(test_shm_name, test_size, share_memory::open_mode::create_only);
+    shm.map();
+    shm.grow(test_size * 2);
+    EXPECT_TRUE(shm.is_mapped());
+    EXPECT_GE(shm.mapped_size(), test_size * 2 - 1);
 }
 
 class SysinfoTest : public ::testing::Test {
@@ -5867,6 +6291,186 @@ TEST_F(SignalManagerTest, HandlerReceivesCorrectEvent) {
     mgr.stop_monitoring();
 }
 
+TEST_F(SignalManagerTest, FromNative_Interrupt_ReturnsInterrupt) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    EXPECT_EQ(system_signal_manager::from_native(CTRL_C_EVENT), system_signal_manager::event::INTERRUPT);
+#else
+    EXPECT_EQ(system_signal_manager::from_native(SIGINT), system_signal_manager::event::INTERRUPT);
+#endif
+}
+
+TEST_F(SignalManagerTest, FromNative_Terminate_ReturnsTerminate) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    EXPECT_EQ(system_signal_manager::from_native(CTRL_BREAK_EVENT), system_signal_manager::event::CTRL_BREAK);
+#else
+    EXPECT_EQ(system_signal_manager::from_native(SIGTERM), system_signal_manager::event::TERMINATE);
+#endif
+}
+
+TEST_F(SignalManagerTest, FromNative_UnknownSignal_ReturnsCustom) {
+    int unknown = 99999;
+    system_signal_manager::event ev = system_signal_manager::from_native(unknown);
+    EXPECT_NE(static_cast<int>(ev), static_cast<int>(system_signal_manager::event::INTERRUPT));
+    EXPECT_NE(static_cast<int>(ev), static_cast<int>(system_signal_manager::event::TERMINATE));
+}
+
+TEST_F(SignalManagerTest, ToNative_Interrupt_ReturnsValidSignal) {
+    int sig = system_signal_manager::to_native(system_signal_manager::event::INTERRUPT);
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    EXPECT_EQ(sig, CTRL_C_EVENT);
+#else
+    EXPECT_EQ(sig, SIGINT);
+#endif
+}
+
+TEST_F(SignalManagerTest, ToNative_Terminate_ReturnsValidSignal) {
+    int sig = system_signal_manager::to_native(system_signal_manager::event::TERMINATE);
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    EXPECT_EQ(sig, -1);
+#else
+    EXPECT_EQ(sig, SIGTERM);
+#endif
+}
+
+TEST_F(SignalManagerTest, ToNative_CustomEvent_ReturnsMinusOne) {
+    int sig = system_signal_manager::to_native(system_signal_manager::event::CUSTOM_1);
+    EXPECT_EQ(sig, -1);
+}
+
+TEST_F(SignalManagerTest, FromNativeToNative_Roundtrip_Consistent) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    system_signal_manager::event ev = system_signal_manager::from_native(CTRL_C_EVENT);
+    EXPECT_EQ(system_signal_manager::to_native(ev), CTRL_C_EVENT);
+#else
+    system_signal_manager::event ev = system_signal_manager::from_native(SIGINT);
+    EXPECT_EQ(system_signal_manager::to_native(ev), SIGINT);
+#endif
+}
+
+#ifdef NEFORCE_PLATFORM_LINUX
+
+class DaemonTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        const char* socket = ::getenv("NOTIFY_SOCKET");
+        if (socket != nullptr) {
+            original_socket_value_ = socket;
+        }
+        ::unsetenv("NOTIFY_SOCKET");
+    }
+
+    void TearDown() override {
+        if (!original_socket_value_.empty()) {
+            ::setenv("NOTIFY_SOCKET", original_socket_value_.data(), 1);
+        }
+    }
+
+    string original_socket_value_;
+};
+
+TEST_F(DaemonTest, NotifyReady_NoThrow) { EXPECT_NO_THROW(daemon::notify_ready()); }
+
+TEST_F(DaemonTest, NotifyStatus_NoThrow) { EXPECT_NO_THROW(daemon::notify_status("test status message")); }
+
+TEST_F(DaemonTest, NotifyWatchdog_NoThrow) { EXPECT_NO_THROW(daemon::notify_watchdog()); }
+
+#endif
+
+class StacktraceTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+TEST_F(StacktraceTest, SourceFile_NonNullAddress_ReturnsString) {
+    stacktrace st = stacktrace::current();
+    ASSERT_FALSE(st.empty());
+    EXPECT_NO_THROW(ignore = st[0].source_file());
+}
+
+TEST_F(StacktraceTest, SourceLine_NonNullAddress_ReturnsNonNegativeValue) {
+    stacktrace st = stacktrace::current();
+    ASSERT_FALSE(st.empty());
+    EXPECT_NO_THROW(ignore = st[0].source_line());
+}
+
+TEST_F(StacktraceTest, SourceFile_NullAddress_ReturnsEmpty) {
+    stacktrace::frame f(nullptr);
+    EXPECT_TRUE(f.source_file().empty());
+}
+
+TEST_F(StacktraceTest, SourceLine_NullAddress_ReturnsZero) {
+    stacktrace::frame f(nullptr);
+    EXPECT_EQ(f.source_line(), 0u);
+}
+
+TEST_F(StacktraceTest, Current_ReturnsNonEmptyStack) {
+    stacktrace st = stacktrace::current();
+    EXPECT_FALSE(st.empty());
+}
+
+TEST_F(StacktraceTest, Current_SkipZero_IncludesCurrent) {
+    stacktrace st = stacktrace::current(0, 10);
+    EXPECT_FALSE(st.empty());
+}
+
+TEST_F(StacktraceTest, Current_MaxDepth_RespectsLimit) {
+    stacktrace st = stacktrace::current(0, 3);
+    EXPECT_LE(st.size(), 3u);
+}
+
+TEST_F(StacktraceTest, ToString_DefaultFormat_NonEmpty) {
+    stacktrace st = stacktrace::current(0, 5);
+    string result = st.to_string();
+    EXPECT_FALSE(result.empty());
+}
+
+TEST_F(StacktraceTest, ToString_ShowSource_ContainsSourceInfo) {
+    stacktrace st = stacktrace::current(0, 5);
+    string result = st.to_string(stacktrace::FMT_SHOW_SOURCE);
+    EXPECT_FALSE(result.empty());
+    EXPECT_NE(result.find("#0"), string::npos);
+}
+
+TEST_F(StacktraceTest, ToString_NoAddress_OmitsAddress) {
+    stacktrace st = stacktrace::current(0, 5);
+    string with_addr = st.to_string();
+    string without_addr = st.to_string(stacktrace::FMT_NO_ADDRESS);
+
+    EXPECT_FALSE(with_addr.empty());
+    EXPECT_FALSE(without_addr.empty());
+    EXPECT_LE(without_addr.size(), with_addr.size());
+}
+
+TEST_F(StacktraceTest, ToString_CombinedFlags_NonEmpty) {
+    stacktrace st = stacktrace::current(0, 5);
+    string result = st.to_string(stacktrace::FMT_SHOW_SOURCE | stacktrace::FMT_NO_ADDRESS);
+    EXPECT_FALSE(result.empty());
+}
+
+TEST_F(StacktraceTest, Frame_SourceFile_MultipleCalls_ReturnConsistent) {
+    stacktrace st = stacktrace::current(0, 5);
+    ASSERT_FALSE(st.empty());
+
+    string src1 = st[0].source_file();
+    string src2 = st[0].source_file();
+    EXPECT_EQ(src1, src2);
+}
+
+TEST_F(StacktraceTest, Frame_SourceLine_MultipleCalls_ReturnConsistent) {
+    stacktrace st = stacktrace::current(0, 5);
+    ASSERT_FALSE(st.empty());
+
+    size_t line1 = st[0].source_line();
+    size_t line2 = st[0].source_line();
+    EXPECT_EQ(line1, line2);
+}
+
+TEST_F(StacktraceTest, FormatFlags_EnumValues) {
+    EXPECT_NE(stacktrace::FMT_DEFAULT, stacktrace::FMT_SHOW_SOURCE);
+    EXPECT_NE(stacktrace::FMT_SHOW_SOURCE, stacktrace::FMT_NO_ADDRESS);
+}
+
 #ifdef NEFORCE_PLATFORM_WINDOWS
 
 class RegistryKeyTest : public ::testing::Test {
@@ -6413,3 +7017,328 @@ TEST_F(RegistryKeyTest, ExceptionMessageContent) {
 }
 
 #endif
+
+class NamedPipeTest : public ::testing::Test {
+protected:
+    void TearDown() override {
+        if (!pipe_name_.empty()) {
+            named_pipe::remove(pipe_name_);
+        }
+    }
+    string pipe_name_{"neforce_test_pipe_" + to_string(process::current_id())};
+};
+
+TEST_F(NamedPipeTest, CreateServerPipe) {
+    named_pipe np;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    EXPECT_NO_THROW(np.create(pipe_name_));
+    EXPECT_TRUE(np.is_valid());
+#else
+    string fifo_path = "/tmp/" + pipe_name_ + ".fifo";
+    EXPECT_NO_THROW(np.create(fifo_path));
+    EXPECT_TRUE(np.is_valid());
+    ::unlink(fifo_path.data());
+#endif
+}
+
+TEST_F(NamedPipeTest, ClosePipe) {
+    named_pipe np;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    np.create(pipe_name_);
+#else
+    string fifo_path = "/tmp/" + pipe_name_ + ".fifo";
+    np.create(fifo_path);
+#endif
+    EXPECT_TRUE(np.is_valid());
+    np.close();
+    EXPECT_FALSE(np.is_valid());
+#ifndef NEFORCE_PLATFORM_WINDOWS
+    ::unlink(fifo_path.data());
+#endif
+}
+
+TEST_F(NamedPipeTest, MoveConstructor) {
+    named_pipe np;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    np.create(pipe_name_);
+#else
+    string fifo_path = "/tmp/" + pipe_name_ + ".fifo";
+    np.create(fifo_path);
+#endif
+    EXPECT_TRUE(np.is_valid());
+    named_pipe np2(move(np));
+    EXPECT_TRUE(np2.is_valid());
+    EXPECT_FALSE(np.is_valid());
+    np2.close();
+#ifndef NEFORCE_PLATFORM_WINDOWS
+    ::unlink(fifo_path.data());
+#endif
+}
+
+TEST_F(NamedPipeTest, MoveAssignment) {
+    named_pipe np;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    np.create(pipe_name_);
+#else
+    string fifo_path = "/tmp/" + pipe_name_ + ".fifo";
+    np.create(fifo_path);
+#endif
+    named_pipe np2;
+    np2 = move(np);
+    EXPECT_TRUE(np2.is_valid());
+    EXPECT_FALSE(np.is_valid());
+    np2.close();
+#ifndef NEFORCE_PLATFORM_WINDOWS
+    ::unlink(fifo_path.data());
+#endif
+}
+
+TEST_F(NamedPipeTest, NameProperty) {
+    named_pipe np;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    np.create(pipe_name_);
+    EXPECT_EQ(np.name(), pipe_name_);
+#else
+    string fifo_path = "/tmp/" + pipe_name_ + ".fifo";
+    np.create(fifo_path);
+    EXPECT_EQ(np.name(), fifo_path);
+    ::unlink(fifo_path.data());
+#endif
+}
+
+#ifndef NEFORCE_PLATFORM_WINDOWS
+TEST_F(NamedPipeTest, RemoveFifo) {
+    string fifo_path = "/tmp/" + pipe_name_ + "_remove.fifo";
+    named_pipe np;
+    np.create(fifo_path);
+    np.close();
+    EXPECT_TRUE(named_pipe::remove(fifo_path));
+}
+#endif
+
+TEST_F(EnvironmentTest, AppDataDirectoryNotEmpty) {
+    string dir = environment::app_data_directory();
+#if defined(NEFORCE_PLATFORM_WINDOWS) || defined(NEFORCE_PLATFORM_LINUX)
+    EXPECT_FALSE(dir.empty());
+#endif
+}
+
+TEST_F(EnvironmentTest, ConfigDirectoryNotEmpty) {
+    string dir = environment::config_directory();
+#if defined(NEFORCE_PLATFORM_WINDOWS) || defined(NEFORCE_PLATFORM_LINUX)
+    EXPECT_FALSE(dir.empty());
+#endif
+}
+
+TEST_F(SystemEventTest, TryWaitReturnsImmediately) {
+    system_event ev(false, system_event::type::auto_reset);
+    EXPECT_FALSE(ev.try_wait());
+    ev.set();
+    EXPECT_TRUE(ev.try_wait());
+    EXPECT_FALSE(ev.try_wait());
+}
+
+TEST_F(SystemEventTest, TryWaitManualReset) {
+    system_event ev(false, system_event::type::manual_reset);
+    EXPECT_FALSE(ev.try_wait());
+    ev.set();
+    EXPECT_TRUE(ev.try_wait());
+    EXPECT_TRUE(ev.try_wait());
+    ev.reset();
+    EXPECT_FALSE(ev.try_wait());
+}
+
+TEST_F(SystemEventTest, IsSetDoesNotConsume) {
+    system_event ev(false, system_event::type::auto_reset);
+    EXPECT_FALSE(ev.is_set());
+    ev.set();
+    EXPECT_TRUE(ev.is_set());
+    EXPECT_TRUE(ev.is_set());
+}
+
+TEST_F(CmdlineTest, CustomValidatorPasses) {
+    cmdline_.add_option("name", 0, "Name", true);
+    cmdline_.add_validator([](const string& name, const string& value) -> string {
+        if (name == "name" && value.empty()) {
+            return "Name cannot be empty";
+        }
+        return "";
+    });
+    EXPECT_NO_THROW(cmdline_.parse(vector<string>{"program", "--name=Alice"}));
+    EXPECT_EQ(cmdline_.get("name"), "Alice");
+}
+
+TEST_F(CmdlineTest, CustomValidatorFails) {
+    cmdline_.add_option("name", 0, "Name", true);
+    cmdline_.add_validator([](const string& name, const string& value) -> string {
+        if (name == "name" && value.empty()) {
+            return "Name cannot be empty";
+        }
+        return "";
+    });
+    EXPECT_THROW(cmdline_.parse(vector<string>{"program", "--name="}), cmdline_exception);
+}
+
+TEST_F(CmdlineTest, RangeValidatorPasses) {
+    cmdline_.add_option("count", 0, "Count", true);
+    cmdline_.add_range_validator("count", 1, 100);
+    EXPECT_NO_THROW(cmdline_.parse(vector<string>{"program", "--count=50"}));
+    EXPECT_EQ(cmdline_.get("count"), "50");
+}
+
+TEST_F(CmdlineTest, RangeValidatorFailsBelow) {
+    cmdline_.add_option("count", 0, "Count", true);
+    cmdline_.add_range_validator("count", 1, 100);
+    EXPECT_THROW(cmdline_.parse(vector<string>{"program", "--count=0"}), cmdline_exception);
+}
+
+TEST_F(CmdlineTest, RangeValidatorFailsAbove) {
+    cmdline_.add_option("count", 0, "Count", true);
+    cmdline_.add_range_validator("count", 1, 100);
+    EXPECT_THROW(cmdline_.parse(vector<string>{"program", "--count=101"}), cmdline_exception);
+}
+
+TEST_F(CmdlineTest, RegexValidatorPasses) {
+    cmdline_.add_option("email", 0, "Email", true);
+    cmdline_.add_regex_validator("email", "[a-z]+@[a-z]+\\.[a-z]+");
+    EXPECT_NO_THROW(cmdline_.parse(vector<string>{"program", "--email=test@example.com"}));
+}
+
+TEST_F(CmdlineTest, RegexValidatorFails) {
+    cmdline_.add_option("email", 0, "Email", true);
+    cmdline_.add_regex_validator("email", "^[a-z]+@[a-z]+\\.[a-z]+$");
+    EXPECT_THROW(cmdline_.parse(vector<string>{"program", "--email=invalid"}), cmdline_exception);
+}
+
+TEST_F(DynamicLibraryTest, ProgramLocationNotEmpty) {
+    string loc = dynamic_library::program_location();
+    EXPECT_FALSE(loc.empty());
+}
+
+TEST_F(DynamicLibraryTest, SymbolLocationOfSelf) {
+    void* func_ptr = reinterpret_cast<void*>(&dynamic_library::program_location);
+    string loc = dynamic_library::symbol_location(func_ptr);
+    EXPECT_FALSE(loc.empty());
+}
+
+TEST_F(DynamicLibraryTest, SymbolLocationNullptr) {
+    string loc = dynamic_library::symbol_location(nullptr);
+    EXPECT_TRUE(loc.empty());
+}
+
+TEST_F(StacktraceTest, FromExceptionReturnsStack) {
+    try {
+        throw value_exception("test");
+    } catch (...) {
+        auto st = stacktrace::from_exception(current_exception());
+        EXPECT_FALSE(st.empty());
+        EXPECT_GT(st.size(), 1u);
+    }
+}
+
+TEST_F(StacktraceTest, CurrentReturnsStack) {
+    auto st = stacktrace::current();
+    EXPECT_FALSE(st.empty());
+}
+
+TEST_F(ProcessTest, SearchPathFindsSystemCommand) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    string path = process::search_path("cmd");
+    EXPECT_FALSE(path.empty());
+    EXPECT_TRUE(path.find("cmd") != string::npos);
+#else
+    string path = process::search_path("sh");
+    EXPECT_FALSE(path.empty());
+    EXPECT_TRUE(path.find("sh") != string::npos);
+#endif
+}
+
+TEST_F(ProcessTest, SearchPathEmptyReturnsEmpty) {
+    string path = process::search_path("");
+    EXPECT_TRUE(path.empty());
+}
+
+TEST_F(ProcessTest, SearchPathNonexistentReturnsEmpty) {
+    string path = process::search_path("nonexistent_executable_12345");
+    EXPECT_TRUE(path.empty());
+}
+
+TEST_F(SysinfoTest, NetworkInterfacesReturnsList) {
+    auto ifaces = sysinfo::network_interfaces();
+    SUCCEED();
+}
+
+TEST_F(SysinfoTest, UptimeSecondsPositive) {
+    uint64_t uptime = sysinfo::uptime_seconds();
+    EXPECT_GT(uptime, 0u);
+}
+
+TEST_F(LocaleTest, FormatNumberBasic) {
+    locale loc = locale::system();
+    string formatted = loc.format_number(1234567);
+    EXPECT_FALSE(formatted.empty());
+    EXPECT_TRUE(formatted.find("1234567") != string::npos || formatted.find("1") != string::npos);
+}
+
+TEST_F(LocaleTest, FormatNumberNegative) {
+    locale loc = locale::system();
+    string formatted = loc.format_number(-42);
+    EXPECT_FALSE(formatted.empty());
+}
+
+TEST_F(LocaleTest, FormatNumberWithPrecision) {
+    locale loc = locale::system();
+    string formatted = loc.format_number(42, 2);
+    EXPECT_FALSE(formatted.empty());
+    EXPECT_TRUE(formatted.find(loc.numeric().decimal_point) != string::npos);
+}
+
+TEST_F(LocaleTest, FormatDateValid) {
+    locale loc = locale::system();
+    string formatted = loc.format_date(time(nullptr));
+    EXPECT_FALSE(formatted.empty());
+}
+
+TEST_F(LocaleTest, FormatDatetimeValid) {
+    locale loc = locale::system();
+    string formatted = loc.format_datetime();
+    EXPECT_FALSE(formatted.empty());
+}
+
+class NamedMutexTest : public ::testing::Test {
+protected:
+    void TearDown() override {
+        if (!mutex_name_.empty()) {
+            named_mutex::remove(mutex_name_);
+        }
+    }
+    string mutex_name_{"neforce_test_mutex_" + to_string(process::current_id())};
+};
+
+TEST_F(NamedMutexTest, CreateMutex) {
+    EXPECT_NO_THROW({
+        named_mutex mtx(mutex_name_, true);
+        EXPECT_TRUE(mtx.is_valid());
+        EXPECT_EQ(mtx.name(), mutex_name_);
+    });
+}
+
+TEST_F(NamedMutexTest, LockUnlock) {
+    named_mutex mtx(mutex_name_, true);
+    EXPECT_NO_THROW(mtx.lock());
+    EXPECT_NO_THROW(mtx.unlock());
+}
+
+TEST_F(NamedMutexTest, TryLock) {
+    named_mutex mtx(mutex_name_, true);
+    EXPECT_TRUE(mtx.try_lock());
+    mtx.unlock();
+}
+
+TEST_F(NamedMutexTest, MoveSemantics) {
+    named_mutex mtx1(mutex_name_, true);
+    EXPECT_TRUE(mtx1.is_valid());
+    named_mutex mtx2(move(mtx1));
+    EXPECT_TRUE(mtx2.is_valid());
+    EXPECT_FALSE(mtx1.is_valid());
+}

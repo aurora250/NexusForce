@@ -8,13 +8,41 @@
 #else
 #    include <cerrno>
 #    include <cstdio>
+#    include <cstdlib>
 #    include <fcntl.h>
 #    include <sys/file.h>
+#    include <sys/socket.h>
 #    include <sys/stat.h>
+#    include <sys/un.h>
 #    include <unistd.h>
 #endif
-
 NEFORCE_BEGIN_NAMESPACE__
+
+#ifdef NEFORCE_PLATFORM_LINUX
+namespace {
+    bool sd_notify_impl(const string& state) {
+        const char* socket_path = ::getenv("NOTIFY_SOCKET");
+        if (socket_path == nullptr || socket_path[0] == '\0') {
+            return false;
+        }
+
+        const int fd = ::socket(AF_UNIX, SOCK_DGRAM | SOCK_CLOEXEC, 0);
+        if (fd < 0) {
+            return false;
+        }
+
+        struct ::sockaddr_un addr{};
+        addr.sun_family = AF_UNIX;
+        string_copy(addr.sun_path, socket_path, sizeof(addr.sun_path) - 1);
+
+        const ssize_t sent = ::sendto(fd, state.data(), state.size(), MSG_NOSIGNAL,
+                                      reinterpret_cast<struct ::sockaddr*>(&addr), sizeof(addr));
+        ::close(fd);
+        return sent >= 0;
+    }
+} // namespace
+#endif
+
 
 daemon::~daemon() {
     if (state_ != daemon_state::stopped) {
@@ -56,6 +84,7 @@ bool daemon::daemonize_impl() noexcept {
     }
 
     if (::chdir(work_dir_.data()) < 0) {
+        // best-effort: ignore chdir failure
     }
 
     ::umask(0);
@@ -187,7 +216,7 @@ bool daemon::add_child(const child_config& cfg) {
 void daemon::remove_child(const string& name) {
     unique_lock<mutex> lock(children_mutex_);
 
-    auto it = children_.find(name);
+    const auto it = children_.find(name);
     if (it == children_.end()) {
         return;
     }
@@ -202,7 +231,7 @@ void daemon::remove_child(const string& name) {
 daemon::child_status daemon::get_child_status(const string& name) const {
     unique_lock<mutex> lock(children_mutex_);
 
-    auto it = children_.find(name);
+    const auto it = children_.find(name);
     if (it == children_.end()) {
         return {};
     }
@@ -289,6 +318,18 @@ void daemon::check_and_restart_children() {
 
         if (!entry.running || entry.proc == nullptr) {
             continue;
+        }
+
+        if (entry.config.health_check_interval_ms > 0 && entry.proc->is_running()) {
+            const int64_t now = steady_clock::now().since_epoch().to_milli().count();
+            if (now - entry.last_health_check_ms >= entry.config.health_check_interval_ms) {
+                entry.last_health_check_ms = now;
+                const bool healthy = entry.proc->is_running();
+                if (!healthy) {
+                    entry.running = false;
+                    entry.exit_code = -1;
+                }
+            }
         }
 
         if (!entry.proc->is_running()) {
@@ -416,7 +457,7 @@ void daemon::request_reload() {
 
 void daemon::watchdog_ping() { last_ping_.store(steady_clock::now().since_epoch().to_milli().count()); }
 
-void daemon::set_watchdog_timeout(int timeout_ms) { watchdog_timeout_ms_ = timeout_ms; }
+void daemon::set_watchdog_timeout(const int timeout_ms) { watchdog_timeout_ms_ = timeout_ms; }
 
 void daemon::watchdog_loop() {
     while (watchdog_enabled_) {
@@ -440,5 +481,15 @@ void daemon::watchdog_loop() {
         }
     }
 }
+
+#ifdef NEFORCE_PLATFORM_LINUX
+
+void daemon::notify_ready() { sd_notify_impl("READY=1"); }
+
+void daemon::notify_status(const string& status) { sd_notify_impl("STATUS=" + status); }
+
+void daemon::notify_watchdog() { sd_notify_impl("WATCHDOG=1"); }
+
+#endif
 
 NEFORCE_END_NAMESPACE__

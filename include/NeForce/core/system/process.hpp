@@ -48,7 +48,8 @@ struct process_exception final : system_exception {
  * @class process
  * @brief 进程管理类
  *
- * 支持 stdout/stderr 分离捕获、stdin 写入、工作目录和环境变量设置。
+ * 支持 stdout/stderr 分离捕获、stdin 写入、工作目录和环境变量设置，
+ * 外部管道连接、文件重定向和进程链。
  *
  * @code
  * process p;
@@ -71,6 +72,16 @@ public:
 #else
             int;
 #endif
+
+    /**
+     * @enum std_stream
+     * @brief 标准流标识
+     */
+    enum class std_stream {
+        stdin,  ///< 标准输入
+        stdout, ///< 标准输出
+        stderr  ///< 标准错误
+    };
 
     /**
      * @struct memory_info
@@ -155,6 +166,11 @@ private:
 
     void close_handles() noexcept;
 
+    /**
+     * @brief 分离进程句柄，使子进程生命周期不再受 process 对象控制
+     */
+    void detach_handles() noexcept;
+
     native_id_type process_id_{0}; /**< 子进程 ID */
     int exit_code_{-1};            /**< 子进程退出码，-1 表示尚未退出 */
     bool started_{false};          /**< 子进程是否已启动 */
@@ -165,6 +181,15 @@ private:
     bool capture_stdout_{false};            /**< 是否捕获标准输出 */
     bool capture_stderr_{false};            /**< 是否捕获标准错误 */
     string stdin_data_;                     /**< 预设的 stdin 输入数据 */
+
+    string stdout_file_; /**< stdout 重定向文件路径 */
+    string stderr_file_; /**< stderr 重定向文件路径 */
+
+    pipe* external_stdin_pipe_{nullptr};  /**< 外部提供的 stdin 管道（不拥有所有权） */
+    pipe* external_stdout_pipe_{nullptr}; /**< 外部提供的 stdout 管道（不拥有所有权） */
+    pipe* external_stderr_pipe_{nullptr}; /**< 外部提供的 stderr 管道（不拥有所有权） */
+
+    bool detached_{false}; /**< 是否已与子进程分离（分离后析构不终止子进程） */
 
     pipe stdout_pipe_; /**< stdout 管道 */
     pipe stderr_pipe_; /**< stderr 管道 */
@@ -239,6 +264,64 @@ public:
      * @param data 数据内容，在子进程启动后自动写入并关闭 stdin
      */
     process& set_stdin_data(const string& data);
+
+    /**
+     * @brief 将 stdout 重定向到文件
+     * @param file_path 文件路径
+     * @return 自身引用
+     */
+    process& set_stdout_file(const string& file_path);
+
+    /**
+     * @brief 将 stderr 重定向到文件
+     * @param file_path 文件路径
+     * @return 自身引用
+     */
+    process& set_stderr_file(const string& file_path);
+
+    /**
+     * @brief 设置外部管道作为 stdin（用于进程链）
+     * @param external_pipe 上游进程的 stdout 连接的管道
+     * @return 自身引用
+     * @note 该管道生命周期由调用者管理，process 不拥有所有权
+     */
+    process& set_external_stdin(pipe& external_pipe);
+
+    /**
+     * @brief 将 stdout 连接到外部管道（供下游进程读取）
+     * @param external_pipe 外部管道对象
+     * @return 自身引用
+     * @note 该管道生命周期由调用者管理
+     */
+    process& set_external_stdout(pipe& external_pipe);
+
+    /**
+     * @brief 将 stderr 连接到外部管道（供下游进程读取）
+     * @param external_pipe 外部管道对象
+     * @return 自身引用
+     * @note 该管道生命周期由调用者管理
+     */
+    process& set_external_stderr(pipe& external_pipe);
+
+    /**
+     * @brief 管道连接两个进程（A 的 stdout -> B 的 stdin）
+     * @param first 上游进程（已配置但未启动）
+     * @param second 下游进程（已配置但未启动）
+     *
+     * 内部创建管道并将 first 的 stdout 连接到 second 的 stdin。
+     * 管道生命周期由下游进程管理。
+     */
+    static void chain(process& first, process& second);
+
+    /**
+     * @brief 管道连接多个进程
+     * @param processes 要连接的进程列表（已配置但未启动）
+     *
+     * 将进程列表中的进程按顺序用管道串联：
+     * processes[0] stdout -> processes[1] stdin,
+     * processes[1] stdout -> processes[2] stdin, ...
+     */
+    static void chain(vector<process*>& processes);
 
     /**
      * @brief 启动子进程
@@ -327,6 +410,36 @@ public:
     static shell_result execute_elevated_shell(const string& command, int timeout_ms = -1,
                                                elevation_tool tool = elevation_tool::auto_);
 
+    /**
+     * @brief 启动子进程并分离（fire-and-forget）
+     * @param executable 可执行文件路径
+     * @param args 命令行参数
+     * @return 子进程 ID
+     *
+     * 启动后立即分离，不等待。进程在后台运行。
+     */
+    static native_id_type spawn(const string& executable, const vector<string>& args = {});
+
+    /**
+     * @brief 同步运行进程并返回退出码
+     * @param executable 可执行文件路径
+     * @param args 命令行参数
+     * @param timeout_ms 超时毫秒，-1 无限等待
+     * @return 退出码
+     * @throws process_exception 超时或执行失败
+     */
+    static int system(const string& executable, const vector<string>& args = {}, int timeout_ms = -1);
+
+    /**
+     * @brief 执行进程并捕获 stdout 输出
+     * @param executable 可执行文件路径
+     * @param args 命令行参数
+     * @param timeout_ms 超时毫秒，-1 无限等待
+     * @return 标准输出字符串
+     * @throws process_exception 超时或执行失败
+     */
+    static string capture(const string& executable, const vector<string>& args = {}, int timeout_ms = -1);
+
     /** @brief 获取当前进程 ID */
     NEFORCE_NODISCARD static native_id_type current_id() noexcept;
 
@@ -361,10 +474,17 @@ public:
     /**
      * @brief 检查对指定进程的访问权限
      * @param process_id 目标进程 ID
-     * @param perm 要检查的权限
+     * @param permission 要检查的权限
      * @return 是否拥有该权限
      */
-    NEFORCE_NODISCARD static bool check_permission(native_id_type process_id, permission perm);
+    NEFORCE_NODISCARD static bool check_permission(native_id_type process_id, permission permission);
+
+    /**
+     * @brief 在 PATH 环境变量中搜索可执行文件
+     * @param executable 可执行文件名
+     * @return 可执行文件完整路径，未找到返回空字符串
+     */
+    NEFORCE_NODISCARD static string search_path(const string& executable);
 };
 
 /** @} */ // Process

@@ -1110,6 +1110,52 @@ void sys_console::fade_in_out(const string_view text, const milliseconds in_dura
     flush_unsafe();
 }
 
+sys_console::console_size sys_console::query_cursor_position() {
+    lock<mutex> lock(mutex_);
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::CONSOLE_SCREEN_BUFFER_INFO csbi;
+    if (::GetConsoleScreenBufferInfo(out_, &csbi) != FALSE) {
+        return console_size(csbi.dwCursorPosition.X + 1, csbi.dwCursorPosition.Y + 1);
+    }
+    return console_size(0, 0);
+#else
+    print_string_unsafe("\033[6n");
+    flush_unsafe();
+
+    string response;
+    const auto start = steady_clock::now();
+    while (response.empty() || response.back() != 'R') {
+        const auto now = steady_clock::now();
+        if ((now - start) > milliseconds(500)) {
+            return console_size(0, 0);
+        }
+
+        const char ch = read_char_unsafe();
+        response += ch;
+    }
+
+    size_t semi = response.find(';');
+    if (semi == string::npos) {
+        return console_size(0, 0);
+    }
+    const size_t esc_start = response.find('[');
+    if (esc_start == string::npos) {
+        return console_size(0, 0);
+    }
+
+    const string row_str = response.substr(esc_start + 1, semi - esc_start - 1);
+    string col_str = response.substr(semi + 1);
+    while (!col_str.empty() && (col_str.back() < '0' || col_str.back() > '9')) {
+        col_str.pop_back();
+    }
+
+    const int row = to_int32(row_str);
+    const int col = to_int32(col_str);
+    return console_size(col, row);
+#endif
+}
+
 sys_console& console = sys_console::instance();
 
 NEFORCE_END_NAMESPACE__

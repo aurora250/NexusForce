@@ -296,6 +296,20 @@ public:
         return v > 0 && v < 64;
 #endif
     }
+
+    /**
+     * @brief 将平台原生信号转换为统一事件
+     * @param native_signal 平台原生信号值
+     * @return 对应的统一事件，无法映射时返回原值强转
+     */
+    NEFORCE_NODISCARD static event from_native(int native_signal) noexcept;
+
+    /**
+     * @brief 将统一事件转换为平台原生信号
+     * @param e 统一事件
+     * @return 平台原生信号值，模拟事件返回 -1
+     */
+    NEFORCE_NODISCARD static int to_native(event e) noexcept;
 };
 
 /**

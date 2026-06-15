@@ -1,5 +1,6 @@
 #include <NeForce/core/system/locale.hpp>
 #include <NeForce/core/algorithm/sort.hpp>
+#include <ctime>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/utility/packages.hpp>
 #    include <NeForce/core/config/windef.hpp>
@@ -757,6 +758,70 @@ vector<string> locale::available_locales() {
     sort(result.begin(), result.end());
     return result;
 #endif
+}
+
+string locale::format_number(int64_t value, const int precision) const {
+    const auto ni = numeric();
+    string result;
+
+    if (value < 0) {
+        result = "-";
+        value = -value;
+    }
+
+    string int_part = to_string(value);
+    if (!ni.thousands_sep.empty() && !ni.grouping.empty()) {
+        string grouped;
+        int count = 0;
+        for (auto it = int_part.rbegin(); it != int_part.rend(); ++it) {
+            if (count > 0 && count % 3 == 0) {
+                grouped = ni.thousands_sep + grouped;
+            }
+            grouped = *it + grouped;
+            ++count;
+        }
+        int_part = grouped;
+    }
+    result += int_part;
+
+    if (precision > 0) {
+        result += ni.decimal_point;
+        const string zeros(static_cast<size_t>(precision), '0');
+        result += move(zeros);
+    }
+
+    return result;
+}
+
+string locale::format_date(intptr_t timestamp) const {
+    const auto ti = time();
+    ::tm tm_buf{};
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::localtime_s(&tm_buf, &timestamp);
+#else
+    ::localtime_r(&timestamp, &tm_buf);
+#endif
+
+    char buf[256];
+    const string fmt = ti.date_fmt.empty() ? "%x" : ti.date_fmt;
+    ::strftime(buf, sizeof(buf), fmt.data(), &tm_buf);
+    return {buf};
+}
+
+string locale::format_datetime() const {
+    const auto ti = time();
+    const time_t now = ::time(nullptr);
+    ::tm tm_buf{};
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::localtime_s(&tm_buf, &now);
+#else
+    ::localtime_r(&now, &tm_buf);
+#endif
+
+    char buf[256];
+    const string fmt = ti.datetime_fmt.empty() ? "%c" : ti.datetime_fmt;
+    ::strftime(buf, sizeof(buf), fmt.data(), &tm_buf);
+    return {buf};
 }
 
 NEFORCE_END_NAMESPACE__

@@ -8,6 +8,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 system_event::system_event(bool initial_state, const type t) :
+signaled_(initial_state),
 type_(t) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     const ::BOOL manual = (t == type::manual_reset) ? TRUE : FALSE;
@@ -48,8 +49,6 @@ type_(t) {
         cond_.reset();
         NEFORCE_THROW_EXCEPTION(system_exception("pthread_cond_init failed"));
     }
-
-    signaled_ = initial_state;
 #endif
 }
 
@@ -64,6 +63,7 @@ system_event::~system_event() {
 system_event::system_event(system_event&& other) noexcept :
 #ifdef NEFORCE_PLATFORM_WINDOWS
 handle_(other.handle_),
+signaled_(other.signaled_),
 type_(other.type_) {
     other.handle_ = nullptr;
 }
@@ -86,6 +86,7 @@ system_event& system_event::operator=(system_event&& other) noexcept {
 
 void system_event::set() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
+    signaled_ = true;
     ::SetEvent(handle_);
 #else
     ::pthread_mutex_lock(mutex_.get());
@@ -101,6 +102,7 @@ void system_event::set() noexcept {
 
 void system_event::reset() noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
+    signaled_ = false;
     ::ResetEvent(handle_);
 #else
     ::pthread_mutex_lock(mutex_.get());
@@ -111,7 +113,11 @@ void system_event::reset() noexcept {
 
 bool system_event::wait(uint32_t timeout_ms) noexcept {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    return ::WaitForSingleObject(handle_, timeout_ms) == WAIT_OBJECT_0;
+    const bool result = ::WaitForSingleObject(handle_, timeout_ms) == WAIT_OBJECT_0;
+    if (result && type_ == type::auto_reset) {
+        signaled_ = false;
+    }
+    return result;
 #else
     ::pthread_mutex_lock(mutex_.get());
 
@@ -158,5 +164,7 @@ bool system_event::wait(uint32_t timeout_ms) noexcept {
     return true;
 #endif
 }
+
+bool system_event::try_wait() noexcept { return wait(0); }
 
 NEFORCE_END_NAMESPACE__

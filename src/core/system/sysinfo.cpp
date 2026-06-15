@@ -4,8 +4,11 @@
 #include <NeForce/core/utility/packages.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/memory/bit.hpp>
+#    include <WinSock2.h>
+#    include <ws2ipdef.h>
 #    include <comdef.h>
 #    include <intrin.h>
+#    include <iphlpapi.h>
 #    include <pdh.h>
 #    include <psapi.h>
 #    include <winternl.h>
@@ -13,6 +16,8 @@
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <dirent.h>
+#    include <ifaddrs.h>
+#    include <net/if.h>
 #    include <sys/sysinfo.h>
 #    include <sys/statvfs.h>
 #    include <sys/utsname.h>
@@ -849,6 +854,103 @@ sysinfo::disk_info sysinfo::get_disk_info(const char* path) {
 #endif
 
     return info;
+}
+
+vector<sysinfo::network_interface> sysinfo::network_interfaces() {
+    vector<network_interface> result;
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    ::ULONG buf_size = 15000;
+    vector<::BYTE> buf(buf_size);
+    auto* addrs = reinterpret_cast<::PIP_ADAPTER_ADDRESSES>(buf.data());
+    constexpr ::ULONG flags = GAA_FLAG_INCLUDE_PREFIX;
+
+    ::DWORD ret = ::GetAdaptersAddresses(AF_UNSPEC, flags, nullptr, addrs, &buf_size);
+    if (ret == ERROR_BUFFER_OVERFLOW) {
+        buf.resize(buf_size);
+        addrs = reinterpret_cast<::PIP_ADAPTER_ADDRESSES>(buf.data());
+        ret = ::GetAdaptersAddresses(AF_UNSPEC, flags, nullptr, addrs, &buf_size);
+    }
+    if (ret != NO_ERROR) {
+        return result;
+    }
+
+    for (const auto* a = addrs; a != nullptr; a = a->Next) {
+        network_interface iface;
+        iface.name = a->AdapterName;
+        iface.is_up = a->OperStatus == IfOperStatusUp;
+
+        if (a->FirstUnicastAddress != nullptr) {
+            wchar_t addr_buf[64] = {};
+            ::DWORD addr_len = sizeof(addr_buf);
+            const ::SOCKADDR* sa = a->FirstUnicastAddress->Address.lpSockaddr;
+            ::WSAAddressToStringW(
+                    const_cast<::LPSOCKADDR>(sa),
+                    static_cast<::DWORD>(sa->sa_family == AF_INET6 ? sizeof(::SOCKADDR_IN6) : sizeof(::SOCKADDR_IN)),
+                    nullptr, addr_buf, &addr_len);
+            iface.address = to_string(addr_buf);
+        }
+
+        if (a->PhysicalAddressLength > 0) {
+            iface.mac =
+                    format("{:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X}", a->PhysicalAddress[0], a->PhysicalAddress[1],
+                           a->PhysicalAddress[2], a->PhysicalAddress[3], a->PhysicalAddress[4], a->PhysicalAddress[5]);
+        }
+        result.push_back(iface);
+    }
+#else
+    struct ::ifaddrs* ifa = nullptr;
+    if (::getifaddrs(&ifa) != 0) {
+        return result;
+    }
+
+    for (struct ::ifaddrs* p = ifa; p != nullptr; p = p->ifa_next) {
+        if (p->ifa_addr == nullptr) {
+            continue;
+        }
+
+        network_interface iface;
+        iface.name = p->ifa_name;
+        iface.is_up = (p->ifa_flags & IFF_UP) != 0;
+
+        char addr_buf[INET6_ADDRSTRLEN] = {};
+        if (p->ifa_addr->sa_family == AF_INET) {
+            ::inet_ntop(AF_INET, &reinterpret_cast<struct ::sockaddr_in*>(p->ifa_addr)->sin_addr, addr_buf,
+                        sizeof(addr_buf));
+            iface.address = addr_buf;
+        } else if (p->ifa_addr->sa_family == AF_INET6) {
+            ::inet_ntop(AF_INET6, &reinterpret_cast<struct ::sockaddr_in6*>(p->ifa_addr)->sin6_addr, addr_buf,
+                        sizeof(addr_buf));
+            iface.address = addr_buf;
+        }
+
+        if (p->ifa_netmask != nullptr) {
+            char nm_buf[INET6_ADDRSTRLEN] = {};
+            if (p->ifa_netmask->sa_family == AF_INET) {
+                ::inet_ntop(AF_INET, &reinterpret_cast<struct ::sockaddr_in*>(p->ifa_netmask)->sin_addr, nm_buf,
+                            sizeof(nm_buf));
+                iface.netmask = nm_buf;
+            }
+        }
+
+        result.push_back(iface);
+    }
+    ::freeifaddrs(ifa);
+#endif
+
+    return result;
+}
+
+uint64_t sysinfo::uptime_seconds() {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    return static_cast<uint64_t>(::GetTickCount64()) / 1000;
+#else
+    struct ::sysinfo info;
+    if (::sysinfo(&info) != 0) {
+        return 0;
+    }
+    return static_cast<uint64_t>(info.uptime);
+#endif
 }
 
 NEFORCE_END_NAMESPACE__

@@ -292,6 +292,31 @@ public:
      * @return 区域设置名称列表
      */
     NEFORCE_NODISCARD static vector<string> available_locales();
+
+    /**
+     * @brief 使用区域设置格式化数字
+     * @param value 数值
+     * @param precision 小数位数
+     * @return 格式化后的数字字符串
+     *
+     * 根据区域设置的数字格式信息（千位分隔符、小数点等）格式化数字。
+     */
+    NEFORCE_NODISCARD string format_number(int64_t value, int precision = 0) const;
+
+    /**
+     * @brief 使用区域设置格式化日期
+     * @param timestamp Unix 时间戳（秒）
+     * @return 格式化后的日期字符串
+     *
+     * 根据区域设置的日期格式信息格式化日期。
+     */
+    NEFORCE_NODISCARD string format_date(intptr_t timestamp) const;
+
+    /**
+     * @brief 使用区域设置格式化当前日期时间
+     * @return 格式化后的日期时间字符串
+     */
+    NEFORCE_NODISCARD string format_datetime() const;
 };
 
 /** @} */ // Locale

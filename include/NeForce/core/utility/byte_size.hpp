@@ -428,6 +428,7 @@ constexpr byte_size::byte_size(decimal_t value, unit u, bool binary) {
         NEFORCE_THROW_EXCEPTION(value_exception("Memory size exceeds maximum representable value"));
     }
 
+    // NOLINTNEXTLINE(bugprone-incorrect-roundings)
     bytes_ = static_cast<uint64_t>(bytes + 0.5L);
 }
 

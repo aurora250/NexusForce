@@ -5,6 +5,7 @@
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <windef.h>
 #    include <WinBase.h>
+#    include <consoleapi2.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <NeForce/core/system/pipe.hpp>
@@ -70,6 +71,20 @@ namespace {
 #endif
 
     thread_local void* g_signal_context = nullptr;
+
+    void send_platform_signal(system_signal_manager::event e) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        const int native = system_signal_manager::to_native(e);
+        if (native >= 0) {
+            ::GenerateConsoleCtrlEvent(static_cast<::DWORD>(native), 0);
+        }
+#else
+        const int native = system_signal_manager::to_native(e);
+        if (native > 0) {
+            ::raise(native);
+        }
+#endif
+    }
 } // namespace
 
 
@@ -498,7 +513,105 @@ system_signal_manager::signal_result system_signal_manager::wait_for_signal_inte
     return signal_result{event::TIMEOUT, nullptr};
 }
 
+system_signal_manager::event system_signal_manager::from_native(int native_signal) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    switch (native_signal) {
+        case CTRL_C_EVENT:
+            return event::INTERRUPT;
+        case CTRL_BREAK_EVENT:
+            return event::CTRL_BREAK;
+        case CTRL_CLOSE_EVENT:
+            return event::CLOSE;
+        case CTRL_LOGOFF_EVENT:
+            return event::LOGOFF;
+        case CTRL_SHUTDOWN_EVENT:
+            return event::SHUTDOWN;
+        default:
+            return static_cast<event>(native_signal);
+    }
+#else
+    switch (native_signal) {
+        case SIGINT:
+            return event::INTERRUPT;
+        case SIGTERM:
+            return event::TERMINATE;
+        case SIGABRT:
+            return event::ABORT;
+        case SIGILL:
+            return event::ILLEGAL_INSTR;
+        case SIGFPE:
+            return event::FLOATING_POINT;
+        case SIGSEGV:
+            return event::SEGMENT_FAULT;
+        case SIGBUS:
+            return event::BUS_ERROR;
+        case SIGPIPE:
+            return event::PIPE_BROKEN;
+        case SIGALRM:
+            return event::ALARM;
+        case SIGHUP:
+            return event::HANGUP;
+        case SIGUSR1:
+            return event::USER1;
+        case SIGUSR2:
+            return event::USER2;
+        default:
+            return static_cast<event>(native_signal);
+    }
+#endif
+}
+
+int system_signal_manager::to_native(event e) noexcept {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    switch (e) {
+        case event::INTERRUPT:
+            return CTRL_C_EVENT;
+        case event::CTRL_BREAK:
+            return CTRL_BREAK_EVENT;
+        case event::CLOSE:
+            return CTRL_CLOSE_EVENT;
+        case event::LOGOFF:
+            return CTRL_LOGOFF_EVENT;
+        case event::SHUTDOWN:
+            return CTRL_SHUTDOWN_EVENT;
+        default:
+            return -1;
+    }
+#else
+    switch (e) {
+        case event::INTERRUPT:
+            return SIGINT;
+        case event::TERMINATE:
+            return SIGTERM;
+        case event::ABORT:
+            return SIGABRT;
+        case event::ILLEGAL_INSTR:
+            return SIGILL;
+        case event::FLOATING_POINT:
+            return SIGFPE;
+        case event::SEGMENT_FAULT:
+            return SIGSEGV;
+        case event::BUS_ERROR:
+            return SIGBUS;
+        case event::PIPE_BROKEN:
+            return SIGPIPE;
+        case event::ALARM:
+            return SIGALRM;
+        case event::HANGUP:
+            return SIGHUP;
+        case event::USER1:
+            return SIGUSR1;
+        case event::USER2:
+            return SIGUSR2;
+        default:
+            return -1;
+    }
+#endif
+}
+
 void system_signal_manager::send_signal_nolock(event event, void* context) {
+    send_platform_signal(event);
+
     pending_signals_.emplace_back(event, context, steady_clock::now());
     cv_.notify_all();
 #ifdef NEFORCE_PLATFORM_WINDOWS
@@ -517,7 +630,7 @@ bool system_signal_manager::block_signals(const vector<event>& signals_to_block)
     ::sigemptyset(&mask);
     for (auto ev: signals_to_block) {
         const int sig = static_cast<int>(ev);
-        if (sig > 0) {
+        if (sig > 0 && sig < NSIG) {
             ::sigaddset(&mask, sig);
         }
     }
@@ -534,7 +647,7 @@ bool system_signal_manager::unblock_signals(const vector<event>& signals_to_unbl
     ::sigemptyset(&mask);
     for (auto ev: signals_to_unblock) {
         const int sig = static_cast<int>(ev);
-        if (sig > 0) {
+        if (sig > 0 && sig < NSIG) {
             ::sigaddset(&mask, sig);
         }
     }

@@ -9,8 +9,8 @@
  * 支持跨平台获取当前调用堆栈，并解析函数符号名称。
  */
 
-#include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/interface/istringify.hpp"
+#include "NeForce/core/exception/exception_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -66,6 +66,18 @@ public:
         NEFORCE_NODISCARD string name() const;
 
         /**
+         * @brief 获取源文件路径
+         * @return 源文件路径，不可用时返回空字符串
+         */
+        NEFORCE_NODISCARD string source_file() const;
+
+        /**
+         * @brief 获取源文件行号
+         * @return 行号，不可用时返回 0
+         */
+        NEFORCE_NODISCARD size_t source_line() const;
+
+        /**
          * @brief 相等比较
          * @param other 另一个堆栈帧
          * @return 是否相等
@@ -88,6 +100,35 @@ public:
         NEFORCE_NODISCARD string to_string() const;
     };
 
+    /**
+     * @brief 格式化标志
+     */
+    enum format_flags {
+        FMT_DEFAULT = 0,     /**< 默认格式 */
+        FMT_SHOW_SOURCE = 1, /**< 显示源文件位置信息 */
+        FMT_NO_ADDRESS = 2,  /**< 不显示地址 */
+    };
+
+    /**
+     * @brief 格式化标志位或运算
+     * @param a 左操作数
+     * @param b 右操作数
+     * @return 组合标志
+     */
+    friend constexpr format_flags operator|(format_flags a, format_flags b) noexcept {
+        return static_cast<format_flags>(static_cast<int>(a) | static_cast<int>(b));
+    }
+
+    /**
+     * @brief 格式化标志位与运算
+     * @param a 左操作数
+     * @param b 右操作数
+     * @return 交集标志
+     */
+    friend constexpr format_flags operator&(format_flags a, format_flags b) noexcept {
+        return static_cast<format_flags>(static_cast<int>(a) & static_cast<int>(b));
+    }
+
 private:
     vector<frame> frames_; ///< 堆栈帧列表
 
@@ -100,6 +141,24 @@ public:
      * 捕获当前线程的调用堆栈，跳过指定数量的顶层帧。
      */
     explicit stacktrace(size_t skip = 0, size_t max_depth = 64);
+
+    /**
+     * @brief 获取当前线程堆栈
+     * @param skip 要跳过的帧数
+     * @param max_depth 最大捕获深度
+     * @return 堆栈跟踪对象
+     */
+    NEFORCE_NODISCARD static stacktrace current(size_t skip = 0, size_t max_depth = 64);
+
+    /**
+     * @brief 从异常指针获取堆栈跟踪
+     * @param ep 异常指针
+     * @param max_depth 最大捕获深度
+     * @return 堆栈跟踪对象
+     *
+     * 提取嵌套异常链中的堆栈信息。
+     */
+    NEFORCE_NODISCARD static stacktrace from_exception(const exception_ptr& ep, size_t max_depth = 64);
 
     /**
      * @brief 获取堆栈深度
@@ -158,6 +217,13 @@ public:
      * 每行格式：#索引 地址 [in 函数名]
      */
     NEFORCE_NODISCARD string to_string() const;
+
+    /**
+     * @brief 以指定格式转换为字符串
+     * @param flags 格式化标志
+     * @return 格式化的完整堆栈信息
+     */
+    NEFORCE_NODISCARD string to_string(format_flags flags) const;
 };
 
 /** @} */ // Stacktrace

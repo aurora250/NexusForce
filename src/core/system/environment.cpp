@@ -2,6 +2,7 @@
 #include <NeForce/core/system/environment.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <processenv.h>
+#    include <shlobj.h>
 #    include <urlmon.h>
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
@@ -273,6 +274,56 @@ string environment::home_directory() {
     // NOLINTNEXTLINE(concurrency-mt-unsafe)
     const char* home = ::getenv("HOME");
     return home != nullptr ? string(home) : "";
+#endif
+}
+
+string environment::app_data_directory() {
+    shared_lock<shared_mutex> lock(get_mutex());
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    char buffer[MAX_PATH];
+    if (::SHGetFolderPathA(nullptr, CSIDL_LOCAL_APPDATA, nullptr, 0, buffer) == S_OK) {
+        return {buffer};
+    }
+    string appdata = get_unsafe("LOCALAPPDATA");
+    if (!appdata.empty()) {
+        return move(appdata);
+    }
+    return home_directory() + "\\AppData\\Local";
+#else
+    const char* xdg = ::getenv("XDG_DATA_HOME");
+    if (xdg != nullptr && xdg[0] != '\0') {
+        return xdg;
+    }
+    const string home = get_unsafe("HOME");
+    if (!home.empty()) {
+        return home + "/.local/share";
+    }
+    return "";
+#endif
+}
+
+string environment::config_directory() {
+    shared_lock<shared_mutex> lock(get_mutex());
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    char buffer[MAX_PATH];
+    if (::SHGetFolderPathA(nullptr, CSIDL_APPDATA, nullptr, 0, buffer) == S_OK) {
+        return {buffer};
+    }
+    string appdata = get_unsafe("APPDATA");
+    if (!appdata.empty()) {
+        return move(appdata);
+    }
+    return home_directory() + "\\AppData\\Roaming";
+#else
+    const char* xdg = ::getenv("XDG_CONFIG_HOME");
+    if (xdg != nullptr && xdg[0] != '\0') {
+        return xdg;
+    }
+    const string home = get_unsafe("HOME");
+    if (!home.empty()) {
+        return home + "/.config";
+    }
+    return "";
 #endif
 }
 

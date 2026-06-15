@@ -102,22 +102,26 @@ struct NEFORCE_API environment {
     /**
      * @brief 获取临时目录路径
      * @return 临时目录路径
-     *
-     * 按照优先级尝试：
-     * - Windows: TMP, TEMP, USERPROFILE
-     * - Linux: TMPDIR, TEMP, TMP, /tmp
      */
     NEFORCE_NODISCARD static string temp_directory();
 
     /**
      * @brief 获取用户主目录路径
      * @return 主目录路径
-     *
-     * 按照优先级尝试：
-     * - Windows: USERPROFILE, HOMEDRIVE+HOMEPATH
-     * - Linux: HOME
      */
     NEFORCE_NODISCARD static string home_directory();
+
+    /**
+     * @brief 获取应用程序数据目录路径
+     * @return 应用数据目录路径
+     */
+    NEFORCE_NODISCARD static string app_data_directory();
+
+    /**
+     * @brief 获取应用程序配置目录路径
+     * @return 应用配置目录路径
+     */
+    NEFORCE_NODISCARD static string config_directory();
 };
 
 /** @} */ // EnvironmentVariables

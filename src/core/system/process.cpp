@@ -202,6 +202,12 @@ env_vars_(move(other.env_vars_)),
 capture_stdout_(other.capture_stdout_),
 capture_stderr_(other.capture_stderr_),
 stdin_data_(move(other.stdin_data_)),
+stdout_file_(move(other.stdout_file_)),
+stderr_file_(move(other.stderr_file_)),
+external_stdin_pipe_(other.external_stdin_pipe_),
+external_stdout_pipe_(other.external_stdout_pipe_),
+external_stderr_pipe_(other.external_stderr_pipe_),
+detached_(other.detached_),
 stdout_pipe_(move(other.stdout_pipe_)),
 stderr_pipe_(move(other.stderr_pipe_)),
 stdin_pipe_(move(other.stdin_pipe_)),
@@ -221,6 +227,10 @@ thread_handle_(other.thread_handle_)
     other.finished_ = false;
     other.capture_stdout_ = false;
     other.capture_stderr_ = false;
+    other.detached_ = false;
+    other.external_stdin_pipe_ = nullptr;
+    other.external_stdout_pipe_ = nullptr;
+    other.external_stderr_pipe_ = nullptr;
     other.reader_running_ = false;
 #ifdef NEFORCE_PLATFORM_WINDOWS
     other.process_handle_ = nullptr;
@@ -243,6 +253,12 @@ process& process::operator=(process&& other) noexcept {
     capture_stdout_ = other.capture_stdout_;
     capture_stderr_ = other.capture_stderr_;
     stdin_data_ = move(other.stdin_data_);
+    stdout_file_ = move(other.stdout_file_);
+    stderr_file_ = move(other.stderr_file_);
+    external_stdin_pipe_ = other.external_stdin_pipe_;
+    external_stdout_pipe_ = other.external_stdout_pipe_;
+    external_stderr_pipe_ = other.external_stderr_pipe_;
+    detached_ = other.detached_;
     stdout_pipe_ = move(other.stdout_pipe_);
     stderr_pipe_ = move(other.stderr_pipe_);
     stdin_pipe_ = move(other.stdin_pipe_);
@@ -264,6 +280,10 @@ process& process::operator=(process&& other) noexcept {
     other.finished_ = false;
     other.capture_stdout_ = false;
     other.capture_stderr_ = false;
+    other.detached_ = false;
+    other.external_stdin_pipe_ = nullptr;
+    other.external_stdout_pipe_ = nullptr;
+    other.external_stderr_pipe_ = nullptr;
     other.reader_running_ = false;
 
     return *this;
@@ -276,16 +296,36 @@ void process::close() noexcept {
         reader_thread_.join();
     }
 
-    close_handles();
+    if (!detached_) {
+        close_handles();
+    }
 
-    stdout_pipe_.close();
-    stderr_pipe_.close();
-    stdin_pipe_.close();
+    // Only close pipes this own (not externally provided ones)
+    if (external_stdout_pipe_ == nullptr) {
+        stdout_pipe_.close();
+    }
+    if (external_stderr_pipe_ == nullptr) {
+        stderr_pipe_.close();
+    }
+    if (external_stdin_pipe_ == nullptr) {
+        stdin_pipe_.close();
+    }
+
+    external_stdin_pipe_ = nullptr;
+    external_stdout_pipe_ = nullptr;
+    external_stderr_pipe_ = nullptr;
 
     process_id_ = 0;
     exit_code_ = -1;
     started_ = false;
     finished_ = false;
+}
+
+void process::detach_handles() noexcept {
+    if (!detached_) {
+        detached_ = true;
+        close_handles();
+    }
 }
 
 void process::close_handles() noexcept {
@@ -302,32 +342,82 @@ void process::close_handles() noexcept {
 }
 
 process& process::set_work_dir(const string& dir) {
-    NEFORCE_DEBUG_VERIFY(!started_, "Cannot configure after process has been started");
+    if (started_) {
+        NEFORCE_THROW_EXCEPTION(process_exception("Cannot configure after process has been started"));
+    }
     work_dir_ = dir;
     return *this;
 }
 
 process& process::set_env(const string& key, const string& value) {
-    NEFORCE_DEBUG_VERIFY(!started_, "Cannot configure after process has been started");
+    if (started_) {
+        NEFORCE_THROW_EXCEPTION(process_exception("Cannot configure after process has been started"));
+    }
     env_vars_.emplace_back(key, value);
     return *this;
 }
 
 process& process::set_capture_stdout(const bool v) {
-    NEFORCE_DEBUG_VERIFY(!started_, "Cannot configure after process has been started");
+    if (started_) {
+        NEFORCE_THROW_EXCEPTION(process_exception("Cannot configure after process has been started"));
+    }
     capture_stdout_ = v;
     return *this;
 }
 
 process& process::set_capture_stderr(const bool v) {
-    NEFORCE_DEBUG_VERIFY(!started_, "Cannot configure after process has been started");
+    if (started_) {
+        NEFORCE_THROW_EXCEPTION(process_exception("Cannot configure after process has been started"));
+    }
     capture_stderr_ = v;
     return *this;
 }
 
 process& process::set_stdin_data(const string& data) {
-    NEFORCE_DEBUG_VERIFY(!started_, "Cannot configure after process has been started");
+    if (started_) {
+        NEFORCE_THROW_EXCEPTION(process_exception("Cannot configure after process has been started"));
+    }
     stdin_data_ = data;
+    return *this;
+}
+
+process& process::set_stdout_file(const string& file_path) {
+    if (started_) {
+        NEFORCE_THROW_EXCEPTION(process_exception("Cannot configure after process has been started"));
+    }
+    stdout_file_ = file_path;
+    return *this;
+}
+
+process& process::set_stderr_file(const string& file_path) {
+    if (started_) {
+        NEFORCE_THROW_EXCEPTION(process_exception("Cannot configure after process has been started"));
+    }
+    stderr_file_ = file_path;
+    return *this;
+}
+
+process& process::set_external_stdin(pipe& external_pipe) {
+    if (started_) {
+        NEFORCE_THROW_EXCEPTION(process_exception("Cannot configure after process has been started"));
+    }
+    external_stdin_pipe_ = &external_pipe;
+    return *this;
+}
+
+process& process::set_external_stdout(pipe& external_pipe) {
+    if (started_) {
+        NEFORCE_THROW_EXCEPTION(process_exception("Cannot configure after process has been started"));
+    }
+    external_stdout_pipe_ = &external_pipe;
+    return *this;
+}
+
+process& process::set_external_stderr(pipe& external_pipe) {
+    if (started_) {
+        NEFORCE_THROW_EXCEPTION(process_exception("Cannot configure after process has been started"));
+    }
+    external_stderr_pipe_ = &external_pipe;
     return *this;
 }
 
@@ -440,29 +530,66 @@ void process::start(const string& executable, const vector<string>& args) {
     }
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (capture_stdout_) {
+    const bool use_stdout_ext = external_stdout_pipe_ != nullptr;
+    const bool use_stderr_ext = external_stderr_pipe_ != nullptr;
+    const bool use_stdin_ext = external_stdin_pipe_ != nullptr;
+
+    auto* stdout_write_handle = ::GetStdHandle(STD_OUTPUT_HANDLE);
+    auto* stderr_write_handle = ::GetStdHandle(STD_ERROR_HANDLE);
+    auto* stdin_read_handle = ::GetStdHandle(STD_INPUT_HANDLE);
+
+    if (use_stdout_ext) {
+        stdout_write_handle = external_stdout_pipe_->native_write_handle();
+    } else if (capture_stdout_) {
         stdout_pipe_ = pipe(true);
         ::SetHandleInformation(stdout_pipe_.native_read_handle(), HANDLE_FLAG_INHERIT, 0);
+        stdout_write_handle = stdout_pipe_.native_write_handle();
+    } else if (!stdout_file_.empty()) {
+        ::SECURITY_ATTRIBUTES sa{sizeof(::SECURITY_ATTRIBUTES), nullptr, TRUE};
+        stdout_write_handle = ::CreateFileA(stdout_file_.data(), GENERIC_WRITE, FILE_SHARE_READ, &sa, CREATE_ALWAYS,
+                                            FILE_ATTRIBUTE_NORMAL, nullptr);
+        if (stdout_write_handle == INVALID_HANDLE_VALUE) {
+            const auto error = last_error();
+            NEFORCE_THROW_EXCEPTION(process_exception(error.message().data()));
+        }
     }
-    if (capture_stderr_) {
+
+    if (use_stderr_ext) {
+        stderr_write_handle = external_stderr_pipe_->native_write_handle();
+    } else if (capture_stderr_) {
         stderr_pipe_ = pipe(true);
         ::SetHandleInformation(stderr_pipe_.native_read_handle(), HANDLE_FLAG_INHERIT, 0);
+        stderr_write_handle = stderr_pipe_.native_write_handle();
+    } else if (!stderr_file_.empty()) {
+        ::SECURITY_ATTRIBUTES sa{sizeof(::SECURITY_ATTRIBUTES), nullptr, TRUE};
+        stderr_write_handle = ::CreateFileA(stderr_file_.data(), GENERIC_WRITE, FILE_SHARE_READ, &sa, CREATE_ALWAYS,
+                                            FILE_ATTRIBUTE_NORMAL, nullptr);
+        if (stderr_write_handle == INVALID_HANDLE_VALUE) {
+            const auto error = last_error();
+            NEFORCE_THROW_EXCEPTION(process_exception(error.message().data()));
+        }
+    } else if (capture_stdout_ && !capture_stderr_) {
+        stderr_write_handle = stdout_write_handle;
     }
-    if (!stdin_data_.empty()) {
+
+    if (use_stdin_ext) {
+        stdin_read_handle = external_stdin_pipe_->native_read_handle();
+    } else if (!stdin_data_.empty()) {
         stdin_pipe_ = pipe(true);
         ::SetHandleInformation(stdin_pipe_.native_write_handle(), HANDLE_FLAG_INHERIT, 0);
+        stdin_read_handle = stdin_pipe_.native_read_handle();
     }
 
     ::STARTUPINFOA si{};
     si.cb = sizeof(::STARTUPINFOA);
+    const bool has_custom_io = capture_stdout_ || capture_stderr_ || !stdin_data_.empty() || use_stdout_ext ||
+                               use_stderr_ext || use_stdin_ext || !stdout_file_.empty() || !stderr_file_.empty();
 
-    if (capture_stdout_ || capture_stderr_ || !stdin_data_.empty()) {
+    if (has_custom_io) {
         si.dwFlags |= STARTF_USESTDHANDLES;
-        si.hStdInput = !stdin_data_.empty() ? stdin_pipe_.native_read_handle() : ::GetStdHandle(STD_INPUT_HANDLE);
-        si.hStdOutput = capture_stdout_ ? stdout_pipe_.native_write_handle() : ::GetStdHandle(STD_OUTPUT_HANDLE);
-        si.hStdError = capture_stderr_   ? stderr_pipe_.native_write_handle()
-                       : capture_stdout_ ? stdout_pipe_.native_write_handle()
-                                         : ::GetStdHandle(STD_ERROR_HANDLE);
+        si.hStdInput = stdin_read_handle;
+        si.hStdOutput = stdout_write_handle;
+        si.hStdError = stderr_write_handle;
     }
 
     const string cmd_line = build_command_line(executable, args);
@@ -483,10 +610,9 @@ void process::start(const string& executable, const vector<string>& args) {
     }
 
     ::PROCESS_INFORMATION pi;
-    const ::BOOL success =
-            ::CreateProcessA(nullptr, const_cast<char*>(cmd_line.data()), nullptr, nullptr,
-                             (capture_stdout_ || capture_stderr_ || !stdin_data_.empty()) ? TRUE : FALSE,
-                             CREATE_NO_WINDOW, env_block, work_dir_.empty() ? nullptr : work_dir_.data(), &si, &pi);
+    const ::BOOL success = ::CreateProcessA(nullptr, const_cast<char*>(cmd_line.data()), nullptr, nullptr,
+                                            has_custom_io ? TRUE : FALSE, CREATE_NO_WINDOW, env_block,
+                                            work_dir_.empty() ? nullptr : work_dir_.data(), &si, &pi);
 
     if (success == FALSE) {
         const auto error = last_error();
@@ -497,25 +623,34 @@ void process::start(const string& executable, const vector<string>& args) {
     thread_handle_ = pi.hThread;
     process_id_ = pi.dwProcessId;
 
-    if (capture_stdout_) {
+    if (capture_stdout_ && !use_stdout_ext) {
         stdout_pipe_.close_write();
     }
-    if (capture_stderr_) {
+    if (capture_stderr_ && !use_stderr_ext) {
         stderr_pipe_.close_write();
     }
-
-    if (!stdin_data_.empty()) {
+    if (!stdin_data_.empty() && !use_stdin_ext) {
         stdin_pipe_.close_read();
     }
-#else
 
-    if (capture_stdout_) {
+    if (!stdout_file_.empty() && stdout_write_handle != INVALID_HANDLE_VALUE) {
+        ::CloseHandle(stdout_write_handle);
+    }
+    if (!stderr_file_.empty() && stderr_write_handle != INVALID_HANDLE_VALUE) {
+        ::CloseHandle(stderr_write_handle);
+    }
+#else
+    const bool use_stdout_ext = external_stdout_pipe_ != nullptr;
+    const bool use_stderr_ext = external_stderr_pipe_ != nullptr;
+    const bool use_stdin_ext = external_stdin_pipe_ != nullptr;
+
+    if (!use_stdout_ext && capture_stdout_) {
         stdout_pipe_ = pipe(false);
     }
-    if (capture_stderr_) {
+    if (!use_stderr_ext && capture_stderr_) {
         stderr_pipe_ = pipe(false);
     }
-    if (!stdin_data_.empty()) {
+    if (!use_stdin_ext && !stdin_data_.empty()) {
         stdin_pipe_ = pipe(false);
     }
 
@@ -536,40 +671,89 @@ void process::start(const string& executable, const vector<string>& args) {
     if (pid == 0) {
         ::close(notify_fds[0]);
 
-        if (!stdin_data_.empty() && stdin_pipe_.native_read_handle() >= 0) {
+        // Setup stdin
+        int stdin_fd = -1;
+        if (use_stdin_ext && external_stdin_pipe_->native_read_handle() >= 0) {
+            stdin_fd = external_stdin_pipe_->native_read_handle();
+        } else if (!stdin_data_.empty() && stdin_pipe_.native_read_handle() >= 0) {
             stdin_pipe_.close_write();
-            if (::dup2(stdin_pipe_.native_read_handle(), STDIN_FILENO) == -1) {
+            stdin_fd = stdin_pipe_.native_read_handle();
+        }
+
+        if (stdin_fd >= 0) {
+            if (::dup2(stdin_fd, STDIN_FILENO) == -1) {
                 const auto error = last_error();
                 const int saved_errno = error.value();
                 ::write(notify_fds[1], &saved_errno, sizeof(saved_errno));
                 ::_exit(1);
             }
-            stdin_pipe_.close_read();
+            if (!use_stdin_ext) {
+                stdin_pipe_.close_read();
+            }
         }
 
-        if (capture_stdout_ && stdout_pipe_.native_write_handle() >= 0) {
+        // Setup stdout
+        int stdout_fd = -1;
+        if (!stdout_file_.empty()) {
+            stdout_fd = ::open(stdout_file_.data(), O_CREAT | O_WRONLY | O_TRUNC, 0644);
+            if (stdout_fd < 0) {
+                const auto error = last_error();
+                const int saved_errno = error.value();
+                ::write(notify_fds[1], &saved_errno, sizeof(saved_errno));
+                ::_exit(1);
+            }
+        } else if (use_stdout_ext && external_stdout_pipe_->native_write_handle() >= 0) {
+            external_stdout_pipe_->close_read();
+            stdout_fd = external_stdout_pipe_->native_write_handle();
+        } else if (capture_stdout_ && stdout_pipe_.native_write_handle() >= 0) {
             stdout_pipe_.close_read();
-            if (::dup2(stdout_pipe_.native_write_handle(), STDOUT_FILENO) == -1) {
-                const auto error = last_error();
-                const int saved_errno = error.value();
-                ::write(notify_fds[1], &saved_errno, sizeof(saved_errno));
-                ::_exit(1);
-            }
-            stdout_pipe_.close_write();
+            stdout_fd = stdout_pipe_.native_write_handle();
         }
 
-        if (capture_stderr_ && stderr_pipe_.native_write_handle() >= 0) {
-            stderr_pipe_.close_read();
-            if (::dup2(stderr_pipe_.native_write_handle(), STDERR_FILENO) == -1) {
+        if (stdout_fd >= 0) {
+            if (::dup2(stdout_fd, STDOUT_FILENO) == -1) {
                 const auto error = last_error();
                 const int saved_errno = error.value();
                 ::write(notify_fds[1], &saved_errno, sizeof(saved_errno));
                 ::_exit(1);
             }
-            stderr_pipe_.close_write();
-        } else if (capture_stdout_ && !capture_stderr_ && stdout_pipe_.native_write_handle() >= 0) {
-            if (::dup2(stdout_pipe_.native_write_handle(), STDERR_FILENO) == -1) {
+            if (!use_stdout_ext) {
+                stdout_pipe_.close_write();
+            }
+        }
+
+        // Setup stderr
+        int stderr_fd = -1;
+        if (!stderr_file_.empty()) {
+            stderr_fd = ::open(stderr_file_.data(), O_CREAT | O_WRONLY | O_TRUNC, 0644);
+            if (stderr_fd < 0) {
+                const auto error = last_error();
+                const int saved_errno = error.value();
+                ::write(notify_fds[1], &saved_errno, sizeof(saved_errno));
+                ::_exit(1);
+            }
+        } else if (use_stderr_ext && external_stderr_pipe_->native_write_handle() >= 0) {
+            external_stderr_pipe_->close_read();
+            stderr_fd = external_stderr_pipe_->native_write_handle();
+        } else if (capture_stderr_ && stderr_pipe_.native_write_handle() >= 0) {
+            stderr_pipe_.close_read();
+            stderr_fd = stderr_pipe_.native_write_handle();
+        } else if (capture_stdout_ && stdout_fd >= 0) {
+            // Merge stderr into stdout
+            if (::dup2(stdout_fd, STDERR_FILENO) == -1) {
                 // Non-fatal: stderr merging failed
+            }
+        }
+
+        if (stderr_fd >= 0) {
+            if (::dup2(stderr_fd, STDERR_FILENO) == -1) {
+                const auto error = last_error();
+                const int saved_errno = error.value();
+                ::write(notify_fds[1], &saved_errno, sizeof(saved_errno));
+                ::_exit(1);
+            }
+            if (!use_stderr_ext) {
+                stderr_pipe_.close_write();
             }
         }
 
@@ -606,13 +790,13 @@ void process::start(const string& executable, const vector<string>& args) {
 
     ::close(notify_fds[1]);
 
-    if (capture_stdout_) {
+    if (capture_stdout_ && !use_stdout_ext) {
         stdout_pipe_.close_write();
     }
-    if (capture_stderr_) {
+    if (capture_stderr_ && !use_stderr_ext) {
         stderr_pipe_.close_write();
     }
-    if (!stdin_data_.empty()) {
+    if (!stdin_data_.empty() && !use_stdin_ext) {
         stdin_pipe_.close_read();
     }
 
@@ -1454,6 +1638,86 @@ bool process::check_permission(native_id_type process_id, permission permission)
 
     return ::access(proc_path.data(), access_mode) == 0;
 #endif
+}
+
+process::native_id_type process::spawn(const string& executable, const vector<string>& args) {
+    process p;
+    p.start(executable, args);
+    const native_id_type id = p.id();
+    p.detach_handles();
+    return id;
+}
+
+int process::system(const string& executable, const vector<string>& args, const int timeout_ms) {
+    process p;
+    p.start(executable, args);
+    const int rc = p.wait(timeout_ms);
+    if (rc == -1 && timeout_ms >= 0) {
+        p.terminate();
+        NEFORCE_THROW_EXCEPTION(process_exception("Process execution timeout"));
+    }
+    return rc;
+}
+
+string process::capture(const string& executable, const vector<string>& args, const int timeout_ms) {
+    process p;
+    p.set_capture_stdout(true);
+    p.start(executable, args);
+    const int rc = p.wait(timeout_ms);
+    if (rc == -1 && timeout_ms >= 0) {
+        p.terminate();
+        NEFORCE_THROW_EXCEPTION(process_exception("Process execution timeout"));
+    }
+    return p.stdout_output();
+}
+
+void process::chain(process& first, process& second) {
+    second.stdin_pipe_ = pipe(false);
+    first.set_external_stdout(second.stdin_pipe_);
+    second.set_external_stdin(second.stdin_pipe_);
+}
+
+void process::chain(vector<process*>& processes) {
+    if (processes.size() < 2) {
+        return;
+    }
+    for (size_t i = 0; i < processes.size() - 1; ++i) {
+        chain(*processes[i], *processes[i + 1]);
+    }
+}
+
+string process::search_path(const string& executable) {
+    if (executable.empty()) {
+        return "";
+    }
+
+    if (executable.find('/') != string::npos || executable.find('\\') != string::npos) {
+        return executable;
+    }
+
+    const auto paths = environment::path_list();
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const vector<const char*> extensions = {".exe", ".bat", ".cmd", ""};
+    for (const auto& dir: paths) {
+        for (const char* ext: extensions) {
+            const string full_path = dir + "\\" + executable + ext;
+            const ::DWORD attrs = ::GetFileAttributesA(full_path.data());
+            if (attrs != INVALID_FILE_ATTRIBUTES && (attrs & FILE_ATTRIBUTE_DIRECTORY) == 0) {
+                return full_path;
+            }
+        }
+    }
+#else
+    for (const auto& dir: paths) {
+        const string full_path = dir + "/" + executable;
+        if (::access(full_path.data(), X_OK) == 0) {
+            return full_path;
+        }
+    }
+#endif
+
+    return "";
 }
 
 NEFORCE_END_NAMESPACE__

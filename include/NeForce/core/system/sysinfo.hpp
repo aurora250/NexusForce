@@ -149,6 +149,18 @@ public:
     };
 
     /**
+     * @struct network_interface
+     * @brief 网络接口信息
+     */
+    struct network_interface {
+        string name;       ///< 接口名称
+        string address;    ///< IP 地址
+        string netmask;    ///< 子网掩码
+        string mac;        ///< MAC 地址（格式 xx:xx:xx:xx:xx:xx）
+        bool is_up{false}; ///< 接口是否启用
+    };
+
+    /**
      * @enum architecture
      * @brief 系统架构枚举
      */
@@ -265,6 +277,18 @@ public:
      * @return 磁盘信息
      */
     NEFORCE_NODISCARD static disk_info get_disk_info(const char* path = nullptr);
+
+    /**
+     * @brief 枚举所有网络接口
+     * @return 网络接口信息列表
+     */
+    NEFORCE_NODISCARD static vector<network_interface> network_interfaces();
+
+    /**
+     * @brief 获取系统运行时间
+     * @return 系统启动以来的秒数
+     */
+    NEFORCE_NODISCARD static uint64_t uptime_seconds();
 };
 
 /** @} */ // SystemInfo

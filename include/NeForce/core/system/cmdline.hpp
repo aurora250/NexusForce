@@ -10,6 +10,7 @@
 
 #include "NeForce/core/container/unordered_map.hpp"
 #include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -189,12 +190,57 @@ public:
         option(string lname, char sname, string desc, bool req_val, bool allow_multi, string def_val);
     };
 
+    /**
+     * @enum conflict_behavior
+     * @brief 约束冲突处理行为
+     */
+    enum class conflict_behavior {
+        error,   /**< 冲突时抛出异常 */
+        warning, /**< 冲突时打印警告 */
+        ignore   /**< 冲突时忽略 */
+    };
+
+    /**
+     * @struct option_dependency
+     * @brief 选项依赖关系
+     *
+     * 若 present 选项被指定，则 required 选项也必须被指定。
+     */
+    struct option_dependency {
+        string present;  /**< 触发依赖的选项名 */
+        string required; /**< 必须同时出现的选项名 */
+    };
+
+    /**
+     * @struct option_conflict
+     * @brief 选项冲突关系
+     *
+     * option_a 和 option_b 不能同时出现。
+     */
+    struct option_conflict {
+        string option_a; /**< 冲突选项A */
+        string option_b; /**< 冲突选项B */
+    };
+
+    /**
+     * @brief 选项值验证器类型
+     * @param name 选项名称
+     * @param value 选项值
+     * @return 验证通过返回空字符串，失败返回错误信息
+     */
+    using validator = function<string(const string& name, const string& value)>;
+
 private:
     string program_name_;                        ///< 程序名称
     vector<option> options_;                     ///< 选项列表
     unordered_map<string, size_t> options_long_; ///< 长选项名索引
     unordered_map<char, size_t> options_short_;  ///< 短选项字符索引
     vector<string> positional_;                  ///< 位置参数
+
+    vector<option_dependency> dependencies_;                        ///< 选项依赖关系列表
+    vector<option_conflict> conflicts_;                             ///< 选项冲突关系列表
+    conflict_behavior conflict_behavior_{conflict_behavior::error}; ///< 冲突处理行为
+    vector<validator> validators_;                                  ///< 选项值验证器列表
 
     /**
      * @brief 根据长选项名查找选项
@@ -227,6 +273,22 @@ private:
      * @throws cmdline_exception 解析失败时抛出
      */
     void parse_short_options(const string& arg, const vector<string>& args, size_t& index);
+
+    /**
+     * @brief 验证选项值
+     * @throws cmdline_exception 验证失败时抛出
+     *
+     * 依次调用所有已注册的验证器。
+     */
+    void validate_values();
+
+    /**
+     * @brief 验证选项约束
+     * @throws cmdline_exception 约束违反且行为为 error 时抛出
+     *
+     * 检查所有依赖关系和冲突关系。
+     */
+    void validate_constraints();
 
 public:
     /**
@@ -311,6 +373,69 @@ public:
      * @throws cmdline_exception 获取失败时抛出
      */
     NEFORCE_NODISCARD static vector<string> get_os_argv();
+
+    /**
+     * @brief 添加选项依赖关系
+     * @param present 当此选项出现时
+     * @param required 此选项也必须出现
+     */
+    void add_dependency(const string& present, const string& required);
+
+    /**
+     * @brief 添加选项冲突关系
+     * @param option_a 选项A
+     * @param option_b 选项B
+     */
+    void add_conflict(const string& option_a, const string& option_b);
+
+    /**
+     * @brief 设置冲突处理行为
+     * @param behavior 冲突时的处理方式
+     */
+    void set_conflict_behavior(conflict_behavior behavior) noexcept { conflict_behavior_ = behavior; }
+
+    /**
+     * @brief 从配置文件加载选项值
+     * @param config_path 配置文件路径
+     * @param section 配置节名或嵌套键名
+     * @throws cmdline_exception 文件不存在或解析失败时抛出
+     *
+     * 支持的文件格式：
+     * - .ini：INI 格式，通过 section 参数指定节
+     * - .json：JSON 格式，通过 section 参数指定顶层键导航到嵌套对象
+     * - .toml：TOML 格式，通过 section 参数指定顶层键导航到嵌套表
+     * - .yaml / .yml：YAML 格式，通过 section 参数指定顶层键导航到嵌套映射
+     * - .env：环境变量格式（section 参数忽略）
+     *
+     * 配置文件中的值仅填充命令行未指定的选项，命令行参数优先级更高。
+     */
+    void load_config(const string& config_path, const string& section = "");
+
+    /**
+     * @brief 添加选项验证器
+     * @param v 验证器函数
+     *
+     * 可以多次调用以添加多个验证器，所有验证器都会被依次调用。
+     * 验证在 parse() 完成后、validate_constraints() 之前执行。
+     */
+    void add_validator(validator v);
+
+    /**
+     * @brief 添加选项值范围验证器（数值范围）
+     * @param long_name 选项名称
+     * @param min_val 最小值（包含）
+     * @param max_val 最大值（包含）
+     * @throws cmdline_exception 选项不存在时抛出
+     */
+    void add_range_validator(string long_name, int64_t min_val, int64_t max_val);
+
+    /**
+     * @brief 添加选项值正则验证器
+     * @param long_name 选项名称
+     * @param pattern 正则表达式模式
+     * @throws cmdline_exception 选项不存在时抛出
+     */
+    void add_regex_validator(string long_name, const string& pattern);
 };
 
 /** @} */ // CommandLine

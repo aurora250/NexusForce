@@ -80,6 +80,11 @@ private:
     void* mapped_addr_{nullptr};                       ///< 映射地址
     access_mode access_mode_{access_mode::read_write}; ///< 访问模式
     bool is_open_{false};                              ///< 是否已打开
+    size_t data_offset_{0};                            ///< 用户数据区相对于映射基址的偏移
+    bool mutex_owner_{false};                          ///< 是否为本进程初始化共享互斥锁
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    void* mutex_handle_{nullptr}; ///< 进程间互斥锁句柄
+#endif
 
 public:
     /**
@@ -200,6 +205,33 @@ public:
     bool flush(bool async = false);
 
     /**
+     * @brief 扩增共享内存大小
+     * @param new_size 新的大小（字节），必须大于当前大小
+     * @throws share_memory_exception 扩增失败时抛出
+     * @warning 调用前必须先 map()
+     */
+    void grow(size_t new_size);
+
+    /**
+     * @brief 获取进程间互斥锁
+     * @warning 调用前必须先 map()
+     *
+     * 阻塞直到锁可用，支持跨进程同步。
+     */
+    void lock();
+
+    /**
+     * @brief 释放进程间互斥锁
+     */
+    void unlock();
+
+    /**
+     * @brief 尝试获取进程间互斥锁
+     * @return 是否成功获取锁
+     */
+    bool try_lock();
+
+    /**
      * @brief 删除共享内存对象
      * @param name 共享内存名称
      * @return 是否成功删除
@@ -219,5 +251,4 @@ public:
 /** @} */ // ShareMemory
 
 NEFORCE_END_NAMESPACE__
-
 #endif // NEFORCE_CORE_SYSTEM_SHARE_MEMORY_HPP__

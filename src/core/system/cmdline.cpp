@@ -1,14 +1,18 @@
 #include <NeForce/core/system/cmdline.hpp>
 #include <NeForce/core/system/console.hpp>
+#include <NeForce/core/file/env/env_parser.hpp>
+#include <NeForce/core/file/file.hpp>
+#include <NeForce/core/file/ini/ini_parser.hpp>
+#include <NeForce/core/file/json/json_parser.hpp>
+#include <NeForce/core/file/toml/toml_parser.hpp>
+#include <NeForce/core/file/yaml/yaml_parser.hpp>
+#include <NeForce/core/string/regex.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/string/to_string.hpp>
 #    include <windef.h>
 #    include <WinBase.h>
 #    include <processthreadsapi.h>
 #    include <shellapi.h>
-#endif
-#ifdef NEFORCE_PLATFORM_LINUX
-#    include <NeForce/core/file/file.hpp>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -87,6 +91,9 @@ void cmdline::parse(const vector<string>& args) {
             positional_.push_back(arg);
         }
     }
+
+    validate_values();
+    validate_constraints();
 }
 
 string cmdline::get(const string& long_name, const size_t index) const {
@@ -256,6 +263,179 @@ void cmdline::parse_long_option(const string& arg, const vector<string>& args, s
     }
 }
 
+void cmdline::add_dependency(const string& present, const string& required) {
+    dependencies_.push_back({present, required});
+}
+
+void cmdline::add_conflict(const string& option_a, const string& option_b) {
+    conflicts_.push_back({option_a, option_b});
+}
+
+void cmdline::validate_values() {
+    for (const auto& opt: options_) {
+        if (opt.values.empty()) {
+            continue;
+        }
+        for (const auto& v: validators_) {
+            for (const auto& val: opt.values) {
+                const string error = v(opt.long_name, val);
+                if (!error.empty()) {
+                    NEFORCE_THROW_EXCEPTION(cmdline_exception(error.data()));
+                }
+            }
+        }
+    }
+}
+
+void cmdline::validate_constraints() {
+    for (const auto& dep: dependencies_) {
+        if (has(dep.present) && !has(dep.required)) {
+            const string msg = "Option '" + dep.present + "' requires option '" + dep.required + "'";
+            switch (conflict_behavior_) {
+                case conflict_behavior::error:
+                    NEFORCE_THROW_EXCEPTION(cmdline_exception(msg.data()));
+                case conflict_behavior::warning:
+                    println("[WARNING] ", msg);
+                    break;
+                case conflict_behavior::ignore:
+                    break;
+            }
+        }
+    }
+
+    for (const auto& conf: conflicts_) {
+        if (has(conf.option_a) && has(conf.option_b)) {
+            const string msg = "Conflicting options: '" + conf.option_a + "' and '" + conf.option_b + "'";
+            switch (conflict_behavior_) {
+                case conflict_behavior::error:
+                    NEFORCE_THROW_EXCEPTION(cmdline_exception(msg.data()));
+                case conflict_behavior::warning:
+                    println("[WARNING] ", msg);
+                    break;
+                case conflict_behavior::ignore:
+                    break;
+            }
+        }
+    }
+}
+
+void cmdline::load_config(const string& config_path, const string& section) {
+    file config_file(path{config_path});
+    if (!config_file.is_opened()) {
+        NEFORCE_THROW_EXCEPTION(cmdline_exception(("Cannot open config file: " + config_path).data()));
+    }
+    const string content = config_file.read();
+
+    unordered_map<string, string> config_values;
+    const string ext = path{config_path}.extension();
+
+    if (ext == ".ini") {
+        ini_parser parser(content);
+        auto doc = parser.parse();
+        const ini_section* sec = section.empty() ? doc->get_global_section() : doc->get_section(section);
+        if (sec != nullptr) {
+            for (const auto& entry: sec->get_properties()) {
+                config_values[entry.first] = entry.second->get_value();
+            }
+        }
+    } else if (ext == ".json") {
+        json_parser parser(content);
+        auto root = parser.parse();
+        const json_value* current = root.get();
+        if (!section.empty()) {
+            const auto* root_obj = dynamic_cast<const json_object*>(current);
+            if (root_obj != nullptr) {
+                for (const auto& member: root_obj->get_members()) {
+                    if (member.first == section) {
+                        current = member.second.get();
+                        break;
+                    }
+                }
+            }
+        }
+        const auto* obj = dynamic_cast<const json_object*>(current);
+        if (obj != nullptr) {
+            for (const auto& member: obj->get_members()) {
+                const string val_str = member.second->to_string();
+                if (val_str.size() >= 2 && val_str.front() == '"' && val_str.back() == '"') {
+                    config_values[member.first] = val_str.substr(1, val_str.size() - 2);
+                } else {
+                    config_values[member.first] = val_str;
+                }
+            }
+        }
+    } else if (ext == ".toml") {
+        toml_parser parser(content);
+        auto root = parser.parse();
+        const toml_value* current = root.get();
+        if (!section.empty()) {
+            const auto* root_tbl = dynamic_cast<const toml_table*>(current);
+            if (root_tbl != nullptr) {
+                for (const auto& member: root_tbl->get_members()) {
+                    if (member.first == section) {
+                        current = member.second.get();
+                        break;
+                    }
+                }
+            }
+        }
+        const auto* tbl = dynamic_cast<const toml_table*>(current);
+        if (tbl != nullptr) {
+            for (const auto& member: tbl->get_members()) {
+                const string val_str = member.second->to_string();
+                if (val_str.size() >= 2 && val_str.front() == '"' && val_str.back() == '"') {
+                    config_values[member.first] = val_str.substr(1, val_str.size() - 2);
+                } else {
+                    config_values[member.first] = val_str;
+                }
+            }
+        }
+    } else if (ext == ".yaml" || ext == ".yml") {
+        yaml_parser parser(content);
+        auto root = parser.parse();
+        const yaml_value* current = root.get();
+        if (!section.empty()) {
+            const auto* root_map = dynamic_cast<const yaml_mapping*>(current);
+            if (root_map != nullptr) {
+                for (const auto& member: root_map->get_members()) {
+                    if (member.first == section) {
+                        current = member.second.get();
+                        break;
+                    }
+                }
+            }
+        }
+        const auto* map_val = dynamic_cast<const yaml_mapping*>(current);
+        if (map_val != nullptr) {
+            for (const auto& member: map_val->get_members()) {
+                const string val_str = member.second->to_string();
+                if (val_str.size() >= 2 && val_str.front() == '"' && val_str.back() == '"') {
+                    config_values[member.first] = val_str.substr(1, val_str.size() - 2);
+                } else {
+                    config_values[member.first] = val_str;
+                }
+            }
+        }
+    } else if (ext == ".env") {
+        env_parser parser(content);
+        auto doc = parser.parse();
+        for (const auto& entry: doc->get_variables()) {
+            config_values[entry.first] = entry.second->get_value();
+        }
+    } else {
+        NEFORCE_THROW_EXCEPTION(cmdline_exception(("Unsupported config file format: " + ext).data()));
+    }
+
+    for (auto& opt: options_) {
+        if (opt.values.empty()) {
+            const auto it = config_values.find(opt.long_name);
+            if (it != config_values.end()) {
+                opt.values.push_back(it->second);
+            }
+        }
+    }
+}
+
 void cmdline::parse_short_options(const string& arg, const vector<string>& args, size_t& index) {
     for (size_t j = 1; j < arg.size(); ++j) {
         const char short_name = arg[j];
@@ -296,6 +476,50 @@ void cmdline::parse_short_options(const string& arg, const vector<string>& args,
             }
         }
     }
+}
+
+void cmdline::add_validator(validator v) { validators_.push_back(move(v)); }
+
+void cmdline::add_range_validator(string long_name, const int64_t min_val, const int64_t max_val) {
+    if (options_long_.find(long_name) == options_long_.end()) {
+        NEFORCE_THROW_EXCEPTION(cmdline_exception(("Option not found: " + long_name).data()));
+    }
+    validators_.push_back(
+            [long_name = move(long_name), min_val, max_val](const string& name, const string& value) -> string {
+                try {
+                    if (name != long_name) {
+                        return "";
+                    }
+                    const int64_t num = to_int64(value.view());
+                    if (num < min_val || num > max_val) {
+                        return "Value for --" + long_name + " must be in range [" + to_string(min_val) + ", " +
+                               to_string(max_val) + "]";
+                    }
+                    return "";
+                } catch (...) {
+                    return "Value for --" + long_name + " is not a valid integer";
+                }
+            });
+}
+
+void cmdline::add_regex_validator(string long_name, const string& pattern) {
+    if (options_long_.find(long_name) == options_long_.end()) {
+        NEFORCE_THROW_EXCEPTION(cmdline_exception(("Option not found: " + long_name).data()));
+    }
+    validators_.push_back(
+            [long_name = move(long_name), re = regex(pattern)](const string& name, const string& value) -> string {
+                try {
+                    if (name != long_name) {
+                        return "";
+                    }
+                    if (!re.match(value)) {
+                        return "Value for --" + long_name + " does not match required pattern";
+                    }
+                    return "";
+                } catch (...) {
+                    return "Value for --" + long_name + " does not match required pattern";
+                }
+            });
 }
 
 NEFORCE_END_NAMESPACE__

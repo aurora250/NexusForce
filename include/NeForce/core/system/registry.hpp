@@ -11,7 +11,6 @@
 
 #include "NeForce/core/config/windef.hpp"
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#    include "NeForce/core/container/vector.hpp"
 #    include "NeForce/core/string/string.hpp"
 #    include <windef.h>
 #    include <winreg.h>
@@ -111,6 +110,16 @@ public:
         dword = REG_DWORD,             ///< 32位无符号整数
         qword = REG_QWORD,             ///< 64位无符号整数
         multi_string = REG_MULTI_SZ    ///< 多字符串类型
+    };
+
+    /**
+     * @enum wow64_view
+     * @brief 注册表 32/64 位视图控制
+     */
+    enum wow64_view : ::REGSAM {
+        view_default = 0,             /**< 默认视图 */
+        view_32bit = KEY_WOW64_32KEY, /**< 32 位视图 */
+        view_64bit = KEY_WOW64_64KEY, /**< 64 位视图 */
     };
 
     /**
@@ -387,6 +396,25 @@ public:
      * @return HKEY句柄
      */
     NEFORCE_NODISCARD ::HKEY native_handle() const noexcept { return hkey_; }
+
+    /**
+     * @brief 打开注册表项
+     * @param root 根键
+     * @param path 完整路径
+     * @param view WOW64 视图选择
+     * @param sam_desired 访问权限，默认为读写
+     * @throws registry_key_exception 当打开失败时抛出
+     */
+    void open(::HKEY root, const wstring& path, wow64_view view, ::REGSAM sam_desired = KEY_READ | KEY_WRITE);
+
+    /**
+     * @brief 监听注册表项变更（阻塞直到变更或超时）
+     * @param watch_subtree 是否同时监听子项
+     * @param timeout_ms 超时毫秒，-1 无限等待
+     * @return 是否发生了变更
+     * @throws registry_key_exception 监听失败时抛出
+     */
+    bool notify_change(bool watch_subtree = true, int timeout_ms = -1);
 };
 
 /** @} */ // Registry

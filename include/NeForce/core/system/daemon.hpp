@@ -10,10 +10,8 @@
 #include "NeForce/core/async/mutex.hpp"
 #include "NeForce/core/async/thread.hpp"
 #include "NeForce/core/container/unordered_map.hpp"
-#include "NeForce/core/container/vector.hpp"
 #include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/memory/unique_ptr.hpp"
-#include "NeForce/core/system/pipe.hpp"
 #include "NeForce/core/system/process.hpp"
 #include "NeForce/core/system/signal.hpp"
 #include "NeForce/core/system/system_event.hpp"
@@ -129,6 +127,7 @@ private:
         unique_ptr<process> proc;
         int restart_count{0};
         int exit_code{0};
+        int64_t last_health_check_ms{0};
         bool running{false};
     };
     mutable mutex children_mutex_;
@@ -241,6 +240,24 @@ public:
      * @param timeout_ms 超时毫秒数，0 表示禁用
      */
     void set_watchdog_timeout(int timeout_ms);
+
+#ifdef NEFORCE_PLATFORM_LINUX
+    /**
+     * @brief 通知 systemd 服务已就绪
+     */
+    static void notify_ready();
+
+    /**
+     * @brief 通知 systemd 服务状态
+     * @param status 状态描述字符串
+     */
+    static void notify_status(const string& status);
+
+    /**
+     * @brief 通知 systemd 看门狗喂狗
+     */
+    static void notify_watchdog();
+#endif
 };
 
 /** @} */ // Daemon
