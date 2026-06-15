@@ -27,7 +27,7 @@ NEFORCE_BEGIN_SERIALIZE__
  * 将反射注册的对象转换为 JSON 表示，或从 JSON 重建对象。
  * 自动遍历 meta_type 的属性列表，跳过暂态属性。
  */
-class json_serializer {
+class NEFORCE_API json_serializer {
 public:
     /**
      * @brief 将反射对象序列化为 JSON 值树

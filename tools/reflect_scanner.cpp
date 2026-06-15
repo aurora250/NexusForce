@@ -262,15 +262,17 @@ namespace {
             out += format("// === Enum registration: {} ===\n", en.name);
             out += "namespace {\n";
             out += format("static auto _neforce_enum_{} = []() {{\n", en.name);
-            out += format("    auto builder = neforce::reflect::reflect<{}>(\"{}\");\n", en.name, en.name);
+            out += format(
+                    "    auto& _neforce_meta = neforce::reflect::registry::instance().register_type<{}>(\"{}\");\n",
+                    en.name, en.name);
             out += format("    auto ei = neforce::make_unique<neforce::reflect::meta_enum>(\"{}\", "
                           "neforce::reflect::type_id_for<{}>());\n",
                           en.name, en.underlying);
             for (const auto& val: en.values) {
                 out += format("    ei->add_entry(\"{}\", static_cast<int64_t>({}::{}));\n", val, en.name, val);
             }
-            out += "    builder.meta().enum_info(neforce::move(ei));\n";
-            out += "    return builder;\n";
+            out += "    _neforce_meta.enum_info(neforce::move(ei));\n";
+            out += "    return 0;\n";
             out += "}();\n";
             out += "}  // anonymous namespace\n";
             out += "\n";

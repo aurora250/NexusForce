@@ -114,9 +114,9 @@ private:
      * @brief 操作参数联合体
      */
     union arg_t {
-        void* obj_ptr_{};     ///< ACCESS 输出值指针
-        meta_any* any_ptr_;   ///< COPY/MOVE 目标 meta_any 指针
-        type_id type_id_val_; ///< GET_TYPE_ID 输出类型 ID
+        void* obj_ptr_{};              ///< ACCESS 输出值指针
+        meta_any* any_ptr_;            ///< COPY/MOVE 目标 meta_any 指针
+        reflect::type_id type_id_val_; ///< GET_TYPE_ID 输出类型 ID
     };
 
     using manage_func = void (*)(operation, const meta_any*, arg_t*); ///< 管理器函数指针类型
@@ -128,7 +128,7 @@ private:
      */
     template <typename T>
     struct internal_manage {
-        NEFORCE_NODISCARD static type_id type_id_val() noexcept { return type_id_for<T>(); }
+        NEFORCE_NODISCARD static reflect::type_id type_id_val() noexcept { return type_id_for<T>(); }
 
         template <typename... Args>
         static void create(storage_internal& storage, Args&&... args) {
@@ -198,7 +198,7 @@ private:
      */
     template <typename T>
     struct external_manage {
-        NEFORCE_NODISCARD static type_id type_id_val() noexcept { return type_id_for<T>(); }
+        NEFORCE_NODISCARD static reflect::type_id type_id_val() noexcept { return type_id_for<T>(); }
 
         template <typename... Args>
         static void create(storage_internal& storage, Args&&... args) {
@@ -259,7 +259,7 @@ private:
 
     manage_func manage_ = nullptr; ///< 管理器函数指针
     storage_internal storage_;     ///< 存储对象
-    type_id type_id_ = 0;          ///< 存储值的类型 ID
+    reflect::type_id type_id_ = 0; ///< 存储值的类型 ID
 
     void reset_internal() noexcept {
         if (manage_ != nullptr) {
@@ -380,7 +380,7 @@ public:
      * @brief 获取存储值的类型 ID
      * @return 类型 ID，空对象返回 0
      */
-    NEFORCE_NODISCARD type_id type_id() const noexcept { return type_id_; }
+    NEFORCE_NODISCARD reflect::type_id type_id() const noexcept { return type_id_; }
 
     /**
      * @brief 检查是否包含值

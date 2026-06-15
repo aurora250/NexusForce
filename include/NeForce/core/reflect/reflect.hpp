@@ -318,8 +318,10 @@ public:
  * @tparam T 要注册的类型
  * @param name 类型名称
  * @return 类型构建器
+ * @note 枚举类型请直接使用 registry::instance().register_type<EnumType>(name)
+ *       并通过返回的 meta_type& 设置 enum_info
  */
-template <typename T>
+template <typename T, enable_if_t<is_class_v<T>, int> = 0>
 type_builder<T> reflect(string_view name) {
     return type_builder<T>(name);
 }

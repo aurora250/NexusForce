@@ -1,7 +1,9 @@
 #include <NeForce/db/redis/redis_connect.hpp>
 #ifdef NEFORCE_SUPPORT_HIREDIS
 #    include <NeForce/db/redis/redis_result.hpp>
-#    include <WinSock2.h>
+#    ifdef NEFORCE_PLATFORM_WINDOWS
+#        include <WinSock2.h>
+#    endif
 NEFORCE_BEGIN_NAMESPACE__
 
 ::redisReply* redis_connect::execute_command(const string_view command, const vector<string_view>& args) const {

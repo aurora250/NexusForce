@@ -35,7 +35,7 @@ NEFORCE_BEGIN_SERIALIZE__
  * 将反射注册的对象序列化为大端字节序的二进制格式，
  * 或从二进制数据重建对象。
  */
-class binary_serializer {
+class NEFORCE_API binary_serializer {
 public:
     using buffer = vector<byte_t>; ///< 二进制缓冲区类型
 

@@ -7,4 +7,5 @@ nexusforce_compiler_options(NFRS)
 
 install(TARGETS NFRS
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+        CONFIGURATIONS Release
 )

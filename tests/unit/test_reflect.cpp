@@ -45,12 +45,12 @@ namespace {
                     .property("extra", &TestDerived::extra)
                     .constructor();
 
-            auto builder = reflect::reflect<TestColor>("TestColor");
+            auto& meta = reflect::registry::instance().register_type<TestColor>("TestColor");
             auto enum_info = make_unique<reflect::meta_enum>("TestColor", type_id_for<int>());
             enum_info->add_entry("Red", static_cast<int64_t>(TestColor::Red));
             enum_info->add_entry("Green", static_cast<int64_t>(TestColor::Green));
             enum_info->add_entry("Blue", static_cast<int64_t>(TestColor::Blue));
-            builder.meta().enum_info(move(enum_info));
+            meta.enum_info(move(enum_info));
 
             NEFORCE_REFLECT_RESOLVE_BASES();
         });

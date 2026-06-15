@@ -102,14 +102,10 @@ def cmake_configure(args: argparse.Namespace, toolchain: Path | None) -> int:
 
     cmd += [f"-DCMAKE_INSTALL_PREFIX={args.prefix}"]
 
-    if not args.tests:
-        cmd += ["-DNEXUSFORCE_BUILD_TESTS=OFF"]
-    if not args.examples:
-        cmd += ["-DNEXUSFORCE_BUILD_EXAMPLES=OFF"]
-    if not args.benchmarks:
-        cmd += ["-DNEXUSFORCE_BUILD_BENCHMARKS=OFF"]
-    if not args.docs:
-        cmd += ["-DNEXUSFORCE_BUILD_DOCS=OFF"]
+    cmd += ["-DNEXUSFORCE_BUILD_TESTS=OFF"]
+    cmd += ["-DNEXUSFORCE_BUILD_EXAMPLES=OFF"]
+    cmd += ["-DNEXUSFORCE_BUILD_BENCHMARKS=OFF"]
+    cmd += ["-DNEXUSFORCE_BUILD_DOCS=OFF"]
 
     env = os.environ.copy()
     if platform.system() == "Windows":
@@ -156,10 +152,6 @@ def print_summary(args: argparse.Namespace, toolchain: Path | None) -> None:
     print(f"  生成器:       {args.generator or get_generator() or '(CMake 默认)'}")
     print(f"  vcpkg:        {toolchain or '未检测到'}")
     print(f"  并行任务:     {args.parallel}")
-    print(f"  单元测试:     {'ON' if args.tests else 'OFF'}")
-    print(f"  示例:         {'ON' if args.examples else 'OFF'}")
-    print(f"  基准测试:     {'ON' if args.benchmarks else 'OFF'}")
-    print(f"  文档:         {'ON' if args.docs else 'OFF'}")
     print("=" * 64)
 
 
@@ -236,32 +228,6 @@ def main() -> int:
         "--verbose", "-v",
         action="store_true",
         help="详细构建输出",
-    )
-
-    # ── 可选组件 ──
-    parser.add_argument(
-        "--no-tests",
-        action="store_false", dest="tests",
-        default=build_cfg.get("tests", True),
-        help="跳过单元测试编译",
-    )
-    parser.add_argument(
-        "--no-examples",
-        action="store_false", dest="examples",
-        default=build_cfg.get("examples", True),
-        help="跳过示例编译",
-    )
-    parser.add_argument(
-        "--no-benchmarks",
-        action="store_false", dest="benchmarks",
-        default=build_cfg.get("benchmarks", True),
-        help="跳过基准测试编译",
-    )
-    parser.add_argument(
-        "--no-docs",
-        action="store_false", dest="docs",
-        default=build_cfg.get("docs", True),
-        help="跳过文档生成",
     )
 
     args = parser.parse_args()

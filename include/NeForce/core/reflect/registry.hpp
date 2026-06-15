@@ -30,7 +30,7 @@ NEFORCE_BEGIN_REFLECT__
  * 全局唯一的类型注册表，存储所有已注册的反射类型元数据。
  * 提供类型查找、遍历和基类解析功能。
  */
-class registry {
+class NEFORCE_API registry {
 private:
     mutex mutex_;                                          ///< 保护类型映射的互斥锁
     unordered_map<type_id, unique_ptr<meta_type>> types_;  ///< 类型ID到元数据的映射
@@ -43,7 +43,7 @@ public:
      * @brief 获取单例实例
      * @return 注册表实例引用
      */
-    NEFORCE_API static registry& instance();
+    static registry& instance();
 
     /**
      * @brief 注册类型
