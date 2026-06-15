@@ -393,7 +393,7 @@ constexpr size_t char_traits_rfind_bmh(const char_traits_ptr_t<Traits> dest, con
     }
 
     const auto last = rsc[rsc_size - 1];
-    size_t last_found = static_cast<size_t>(-1);
+    auto last_found = static_cast<size_t>(-1);
     const size_t limit = _NEFORCE min(start, dest_size - rsc_size);
     size_t i = 0;
 

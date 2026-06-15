@@ -150,7 +150,7 @@ private:
         }
 
         template <typename U = T, enable_if_t<!is_copy_constructible_v<U>, int> = 0>
-        static void copy_op(const meta_any*, arg_t*) {}
+        static void copy_op(const meta_any* /*unused*/, arg_t* /*unused*/) {}
 
         template <typename U = T, enable_if_t<is_move_constructible_v<U>, int> = 0>
         static void move_op(const meta_any* self, arg_t* arg) {
@@ -162,7 +162,7 @@ private:
         }
 
         template <typename U = T, enable_if_t<!is_move_constructible_v<U>, int> = 0>
-        static void move_op(const meta_any*, arg_t*) {}
+        static void move_op(const meta_any* /*unused*/, arg_t* /*unused*/) {}
 
         static void manage(const operation op, const meta_any* self, arg_t* arg) {
             auto* ptr = access(self->storage_);
@@ -216,7 +216,7 @@ private:
         }
 
         template <typename U = T, enable_if_t<!is_copy_constructible_v<U>, int> = 0>
-        static void copy_op(const meta_any*, arg_t*) {}
+        static void copy_op(const meta_any* /*unused*/, arg_t* /*unused*/) {}
 
         static void manage(const operation op, const meta_any* self, arg_t* arg) {
             auto* ptr = access(self->storage_);

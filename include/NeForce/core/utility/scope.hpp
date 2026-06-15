@@ -100,8 +100,13 @@ public:
      * 必须保证不抛出异常。
      */
     ~scope_exit() noexcept {
-        if (func_pair_.value) {
-            func_pair_.get_base()();
+        try {
+            if (func_pair_.value) {
+                func_pair_.get_base()();
+            }
+            // NOLINTNEXTLINE(bugprone-empty-catch)
+        } catch (...) {
+            // ignore
         }
     }
 
@@ -181,8 +186,13 @@ public:
      * 执行函数对象。
      */
     ~scope_fail() noexcept {
-        if (uncaught_exceptions() > func_pair_.value) {
-            func_pair_.get_base()();
+        try {
+            if (uncaught_exceptions() > func_pair_.value) {
+                func_pair_.get_base()();
+            }
+            // NOLINTNEXTLINE(bugprone-empty-catch)
+        } catch (...) {
+            // ignore
         }
     }
 
@@ -261,9 +271,14 @@ public:
      * 如果当前未捕获异常数量不大于构造时记录的值，说明正常退出，
      * 执行函数对象。
      */
-    ~scope_success() noexcept(is_nothrow_invocable_v<Func>) {
-        if (uncaught_exceptions() <= func_pair_.value) {
-            func_pair_.get_base()();
+    ~scope_success() noexcept {
+        try {
+            if (uncaught_exceptions() <= func_pair_.value) {
+                func_pair_.get_base()();
+            }
+            // NOLINTNEXTLINE(bugprone-empty-catch)
+        } catch (...) {
+            // ignore
         }
     }
 

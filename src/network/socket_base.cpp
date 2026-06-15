@@ -139,7 +139,7 @@ bool socket_base::is_nonblocking() const noexcept {
     return nonblocking_;
 #else
     const int flags = ::fcntl(fd_, F_GETFL, 0);
-    return (flags != -1) && (flags & O_NONBLOCK);
+    return flags != -1 && (flags & O_NONBLOCK) != 0;
 #endif
 }
 

@@ -333,7 +333,7 @@ namespace {
 NEFORCE_END_NAMESPACE__
 
 
-int main(int argc, const char* argv[]) {
+void impl(int argc, const char* argv[]) {
     using namespace neforce;
 
     cmdline cmd;
@@ -345,23 +345,23 @@ int main(int argc, const char* argv[]) {
         cmd.parse(argc, argv);
     } catch (const exception& e) {
         eprintfln("Error: {}", e.what());
-        return 1;
+        throw;
     }
 
     if (cmd.has("help")) {
         print_usage(cmd);
-        return 0;
+        return;
     }
 
     if (!cmd.has("output")) {
         eprintln("Error: -o <output_file> is required");
-        return 1;
+        throw;
     }
 
     const auto& positional = cmd.positional_args();
     if (positional.empty()) {
         eprintln("Error: <input_dir> is required");
-        return 1;
+        throw;
     }
 
     string input_dir = positional[0];
@@ -390,7 +390,7 @@ int main(int argc, const char* argv[]) {
 
             bool excluded = false;
             for (const auto& ex: excludes) {
-                if (file_path.find(ex) != string::npos) {
+                if (file_path.contains(ex)) {
                     excluded = true;
                     break;
                 }
@@ -403,7 +403,7 @@ int main(int argc, const char* argv[]) {
         });
     } catch (const exception& e) {
         eprintfln("Error scanning directory: {}", e.what());
-        return 1;
+        throw;
     }
 
     eprintfln("Found {} header file(s)", headers.size());
@@ -464,7 +464,7 @@ int main(int argc, const char* argv[]) {
 
     if (!need_regenerate) {
         eprintfln("All {} header(s) unchanged, skipping generation.", headers.size());
-        return 0;
+        return;
     }
 
     unordered_map<string, string> new_cache;
@@ -496,7 +496,7 @@ int main(int argc, const char* argv[]) {
         out_file.write(generated.data(), static_cast<file::size_type>(generated.size()));
     } catch (const exception& e) {
         eprintfln("Error writing output: {}", e.what());
-        return 1;
+        throw;
     }
 
     try {
@@ -516,6 +516,20 @@ int main(int argc, const char* argv[]) {
     if (all_classes.empty() && all_enums.empty()) {
         eprintln("Warning: No reflect-registered types found in scanned headers.");
     }
+}
 
-    return 0;
+
+int main(int argc, const char* argv[]) {
+    using namespace neforce;
+
+    try {
+        impl(argc, argv);
+    } catch (const exception& e) {
+        try {
+            eprintfln("Error: {}", e.what());
+            // NOLINTNEXTLINE(bugprone-empty-catch)
+        } catch (...) {
+            // ignore
+        }
+    }
 }
