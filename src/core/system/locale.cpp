@@ -8,6 +8,7 @@
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <NeForce/core/system/environment.hpp>
+#    include <NeForce/core/utility/packages.hpp>
 #    include <cstdlib>
 #    include <glob.h>
 #    include <langinfo.h>

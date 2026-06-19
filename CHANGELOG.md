@@ -83,6 +83,8 @@
 - 修复 MSVC `/OPT:ICF` 将不同模板实例化的 `type_id_for<T>()` 函数合并，导致所有未注册类型的 type_id 碰撞为同一值。
 - 修复 `registry::instance()` 在库边界上被复制为多份单例，导致库内与测试代码使用不同的注册表实例
 - 修复 `binary_serializer::deserialize()` 中 `be_to_host(read_beXX())` 双重字节序转换导致整数损坏
+- 修复 `dynamic_library::load_by_name()` 在 Linux 上对含版本后缀的名称（如 `libpthread.so.0`）错误追加 `.so` 后缀的问题
+- 修复 `share_memory::map()` 在只读访问模式下因 `__atomic_compare_exchange_n` 在 x86 上失败时仍执行写入（`lock cmpxchg`）导致 SIGSEGV 的问题
 
 ## [1.0.0-beta] - 2026-05-18
 

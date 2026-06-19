@@ -1238,21 +1238,29 @@ TEST_F(DynamicLibraryTest, LoadSelf_HasSymbols) {
 }
 
 TEST_F(DynamicLibraryTest, LoadByName_WithShortName_LoadsSuccessfully) {
+    try {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    dynamic_library lib = dynamic_library::load_by_name("kernel32");
+        dynamic_library lib = dynamic_library::load_by_name("kernel32");
 #else
-    dynamic_library lib = dynamic_library::load_by_name("pthread");
+        dynamic_library lib = dynamic_library::load_by_name("z");
 #endif
-    EXPECT_TRUE(lib.is_open());
+        EXPECT_TRUE(lib.is_open());
+    } catch (const exception& e) {
+        FAIL() << e.what();
+    }
 }
 
 TEST_F(DynamicLibraryTest, LoadByName_WithFullName_LoadsSuccessfully) {
+    try {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    dynamic_library lib = dynamic_library::load_by_name("kernel32.dll");
+        dynamic_library lib = dynamic_library::load_by_name("kernel32.dll");
 #else
-    dynamic_library lib = dynamic_library::load_by_name("libpthread.so.0");
+        dynamic_library lib = dynamic_library::load_by_name("libz.so.1");
 #endif
-    EXPECT_TRUE(lib.is_open());
+        EXPECT_TRUE(lib.is_open());
+    } catch (const exception& e) {
+        FAIL() << e.what();
+    }
 }
 
 TEST_F(DynamicLibraryTest, LoadMode_Default_LoadsSuccessfully) {
@@ -1272,12 +1280,12 @@ TEST_F(DynamicLibraryTest, LoadMode_Now_LoadsSuccessfully) {
 
 #ifdef NEFORCE_PLATFORM_LINUX
 TEST_F(DynamicLibraryTest, LoadMode_Global_LoadsSuccessfully) {
-    dynamic_library lib(get_test_library_path(), dynamic_library::load_mode::Global);
+    dynamic_library lib(get_test_library_path(), dynamic_library::load_mode::global);
     EXPECT_TRUE(lib.is_open());
 }
 
 TEST_F(DynamicLibraryTest, LoadMode_DeepBind_LoadsSuccessfully) {
-    dynamic_library lib(get_test_library_path(), dynamic_library::load_mode::DeepBind);
+    dynamic_library lib(get_test_library_path(), dynamic_library::load_mode::deep_bind);
     EXPECT_TRUE(lib.is_open());
 }
 #endif
@@ -3391,30 +3399,35 @@ TEST_F(PipeTest, WriteAfterMove_SourcePipe_ReturnsMinusOne) {
 }
 
 TEST_F(PipeTest, Constructor_Nonblocking_CreatesValidPipe) {
+    using neforce::pipe;
     pipe p(false, true);
     EXPECT_TRUE(p.is_valid());
     EXPECT_TRUE(p.is_nonblocking());
 }
 
 TEST_F(PipeTest, Constructor_NonblockingInheritable_CreatesValidPipe) {
+    using neforce::pipe;
     pipe p(true, true);
     EXPECT_TRUE(p.is_valid());
     EXPECT_TRUE(p.is_nonblocking());
 }
 
 TEST_F(PipeTest, Constructor_DefaultCreatesBlockingPipe) {
+    using neforce::pipe;
     pipe p(false);
     EXPECT_TRUE(p.is_valid());
     EXPECT_FALSE(p.is_nonblocking());
 }
 
 TEST_F(PipeTest, SetNonblocking_True_SetsFlag) {
+    using neforce::pipe;
     pipe p(false);
     EXPECT_TRUE(p.set_nonblocking(true));
     EXPECT_TRUE(p.is_nonblocking());
 }
 
 TEST_F(PipeTest, SetNonblocking_False_AfterTrue_SetsFlag) {
+    using neforce::pipe;
     pipe p(false, true);
     EXPECT_TRUE(p.is_nonblocking());
     EXPECT_TRUE(p.set_nonblocking(false));
@@ -3422,6 +3435,7 @@ TEST_F(PipeTest, SetNonblocking_False_AfterTrue_SetsFlag) {
 }
 
 TEST_F(PipeTest, SetNonblocking_OnInvalidPipe_ReturnsFalse) {
+    using neforce::pipe;
     pipe p;
     EXPECT_FALSE(p.is_valid());
     p.set_nonblocking(true);
@@ -3429,6 +3443,7 @@ TEST_F(PipeTest, SetNonblocking_OnInvalidPipe_ReturnsFalse) {
 }
 
 TEST_F(PipeTest, Read_NonblockingNoData_ReturnsZero) {
+    using neforce::pipe;
     pipe p(false, true);
     char buf[64];
     int n = p.read(buf, sizeof(buf));
@@ -3436,6 +3451,7 @@ TEST_F(PipeTest, Read_NonblockingNoData_ReturnsZero) {
 }
 
 TEST_F(PipeTest, Read_NonblockingThenWrite_ReturnsData) {
+    using neforce::pipe;
     pipe p(false, true);
     const char* msg = "hello";
     p.write(msg, string_length(msg));
@@ -4215,6 +4231,7 @@ TEST_F(ProcessTest, Capture_WithTimeout_ReturnsOutput) {
 }
 
 TEST_F(ProcessTest, Chain_TwoProcesses_SecondReceivesFirstOutput) {
+    using neforce::pipe;
     pipe p(true);
     process first;
     first.set_external_stdout(p);

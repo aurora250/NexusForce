@@ -18,6 +18,8 @@
 #    include <dirent.h>
 #    include <ifaddrs.h>
 #    include <net/if.h>
+#    include <arpa/inet.h>
+#    include <netinet/in.h>
 #    include <sys/sysinfo.h>
 #    include <sys/statvfs.h>
 #    include <sys/utsname.h>
@@ -899,12 +901,12 @@ vector<sysinfo::network_interface> sysinfo::network_interfaces() {
         result.push_back(iface);
     }
 #else
-    struct ::ifaddrs* ifa = nullptr;
+    ::ifaddrs* ifa = nullptr;
     if (::getifaddrs(&ifa) != 0) {
         return result;
     }
 
-    for (struct ::ifaddrs* p = ifa; p != nullptr; p = p->ifa_next) {
+    for (::ifaddrs* p = ifa; p != nullptr; p = p->ifa_next) {
         if (p->ifa_addr == nullptr) {
             continue;
         }
@@ -915,11 +917,10 @@ vector<sysinfo::network_interface> sysinfo::network_interfaces() {
 
         char addr_buf[INET6_ADDRSTRLEN] = {};
         if (p->ifa_addr->sa_family == AF_INET) {
-            ::inet_ntop(AF_INET, &reinterpret_cast<struct ::sockaddr_in*>(p->ifa_addr)->sin_addr, addr_buf,
-                        sizeof(addr_buf));
+            ::inet_ntop(AF_INET, &reinterpret_cast<::sockaddr_in*>(p->ifa_addr)->sin_addr, addr_buf, sizeof(addr_buf));
             iface.address = addr_buf;
         } else if (p->ifa_addr->sa_family == AF_INET6) {
-            ::inet_ntop(AF_INET6, &reinterpret_cast<struct ::sockaddr_in6*>(p->ifa_addr)->sin6_addr, addr_buf,
+            ::inet_ntop(AF_INET6, &reinterpret_cast<::sockaddr_in6*>(p->ifa_addr)->sin6_addr, addr_buf,
                         sizeof(addr_buf));
             iface.address = addr_buf;
         }
@@ -927,7 +928,7 @@ vector<sysinfo::network_interface> sysinfo::network_interfaces() {
         if (p->ifa_netmask != nullptr) {
             char nm_buf[INET6_ADDRSTRLEN] = {};
             if (p->ifa_netmask->sa_family == AF_INET) {
-                ::inet_ntop(AF_INET, &reinterpret_cast<struct ::sockaddr_in*>(p->ifa_netmask)->sin_addr, nm_buf,
+                ::inet_ntop(AF_INET, &reinterpret_cast<::sockaddr_in*>(p->ifa_netmask)->sin_addr, nm_buf,
                             sizeof(nm_buf));
                 iface.netmask = nm_buf;
             }

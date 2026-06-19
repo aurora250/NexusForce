@@ -332,8 +332,9 @@ pipe::native_handle_type pipe::detach_write_handle() noexcept {
 #endif
 }
 
-named_pipe::named_pipe() :
+named_pipe::named_pipe()
 #ifdef NEFORCE_PLATFORM_WINDOWS
+:
 pipe_handle_(INVALID_HANDLE_VALUE)
 #endif
 {

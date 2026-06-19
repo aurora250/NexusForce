@@ -13,6 +13,7 @@
 #    endif
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
+#    include <NeForce/core/async/atomic_base.hpp>
 #    include <NeForce/core/exception/error_code.hpp>
 #    include <fcntl.h>
 #    include <pthread.h>
@@ -443,7 +444,6 @@ void share_memory::grow(size_t new_size) {
     if (mapped_addr_ != nullptr) {
         void* old_addr = original_mapped_addr_;
         size_t old_size = internal_mapped_size_;
-        int prot = (access_mode_ == access_mode::read_only) ? PROT_READ : (PROT_READ | PROT_WRITE);
 
         original_mapped_addr_ = ::mremap(old_addr, old_size, fd_new_size, MREMAP_MAYMOVE);
         if (original_mapped_addr_ == MAP_FAILED) {
@@ -580,19 +580,25 @@ void* share_memory::map(size_t offset, const size_t length) {
     // Initialize the process-shared mutex using CAS to elect a single initializer
     {
         auto* header = static_cast<shm_header*>(original_mapped_addr_);
-        int expected = 0;
-        if (__atomic_compare_exchange_n(&header->ready, &expected, 1, false, __ATOMIC_ACQUIRE, __ATOMIC_RELAXED)) {
-            ::pthread_mutexattr_t attr;
-            ::pthread_mutexattr_init(&attr);
-            ::pthread_mutexattr_setpshared(&attr, PTHREAD_PROCESS_SHARED);
-            ::pthread_mutexattr_setrobust(&attr, PTHREAD_MUTEX_ROBUST);
-            ::pthread_mutex_init(&header->mutex, &attr);
-            ::pthread_mutexattr_destroy(&attr);
-            mutex_owner_ = true;
-            __atomic_store_n(&header->ready, 2, __ATOMIC_RELEASE);
-        } else {
-            while (__atomic_load_n(&header->ready, __ATOMIC_ACQUIRE) != 2) {
+        if (access_mode_ == access_mode::read_only) {
+            while (atomic_load(&header->ready, memory_order::acquire) != 2) {
                 // spin-wait for the initializer to complete
+            }
+        } else {
+            int expected = 0;
+            if (atomic_cmpexch_strong(&header->ready, &expected, 1, memory_order::acquire, memory_order::relaxed)) {
+                ::pthread_mutexattr_t attr;
+                ::pthread_mutexattr_init(&attr);
+                ::pthread_mutexattr_setpshared(&attr, PTHREAD_PROCESS_SHARED);
+                ::pthread_mutexattr_setrobust(&attr, PTHREAD_MUTEX_ROBUST);
+                ::pthread_mutex_init(&header->mutex, &attr);
+                ::pthread_mutexattr_destroy(&attr);
+                mutex_owner_ = true;
+                atomic_store(&header->ready, 2, memory_order::release);
+            } else {
+                while (atomic_load(&header->ready, memory_order::acquire) != 2) {
+                    // spin-wait for the initializer to complete
+                }
             }
         }
     }

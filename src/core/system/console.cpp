@@ -15,6 +15,7 @@
 #endif
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <NeForce/core/system/environment.hpp>
+#    include <NeForce/core/time/clocks.hpp>
 #    include <cerrno>
 #    include <fcntl.h>
 #    include <sys/ioctl.h>
@@ -1144,11 +1145,8 @@ sys_console::console_size sys_console::query_cursor_position() {
         return console_size(0, 0);
     }
 
-    const string row_str = response.substr(esc_start + 1, semi - esc_start - 1);
-    string col_str = response.substr(semi + 1);
-    while (!col_str.empty() && (col_str.back() < '0' || col_str.back() > '9')) {
-        col_str.pop_back();
-    }
+    const string_view row_str = response.view(esc_start + 1, semi - esc_start - 1);
+    const string_view col_str = response.view(semi + 1).trim_right_if([](char c) { return !is_digit(c); });
 
     const int row = to_int32(row_str);
     const int col = to_int32(col_str);
