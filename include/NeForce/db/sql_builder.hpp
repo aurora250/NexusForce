@@ -100,7 +100,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * @enum sql_operate
  * @brief SQL操作类型枚举
  */
-enum class sql_operate {
+enum class sql_operate : uint8_t {
     SELECT,       ///< SELECT查询
     INSERT,       ///< INSERT插入
     UPDATE,       ///< UPDATE更新
@@ -119,7 +119,7 @@ enum class sql_operate {
  * @enum sql_join
  * @brief JOIN类型枚举
  */
-enum class sql_join {
+enum class sql_join : uint8_t {
     INNER, ///< INNER JOIN
     LEFT,  ///< LEFT JOIN
     RIGHT, ///< RIGHT JOIN
@@ -130,16 +130,31 @@ enum class sql_join {
  * @enum sql_order
  * @brief 排序方向枚举
  */
-enum class sql_order {
+enum class sql_order : uint8_t {
     ASC, ///< 升序
     DESC ///< 降序
+};
+
+/**
+ * @enum sql_dialect
+ * @brief 数据库方言
+ *
+ * 不同的数据库在语法和功能上存在差异，选择对应方言可生成最佳兼容的 SQL。
+ */
+enum class sql_dialect : uint8_t {
+    GENERIC,    ///< ANSI SQL
+    MYSQL,      ///< MySQL / MariaDB
+    POSTGRESQL, ///< PostgreSQL
+    SQLITE,     ///< SQLite
+    MSSQL,      ///< Microsoft SQL Server
+    ORACLE      ///< Oracle Database
 };
 
 /**
  * @enum sql_set_op
  * @brief 集合操作类型枚举
  */
-enum class sql_set_op {
+enum class sql_set_op : uint8_t {
     UNION,         ///< UNION
     UNION_ALL,     ///< UNION ALL
     INTERSECT,     ///< INTERSECT
@@ -274,6 +289,8 @@ public:
 
 private:
     sql_operate sql_type_ = sql_operate::SELECT; ///< 当前SQL操作类型
+    sql_dialect dialect_ = sql_dialect::GENERIC; ///< 目标数据库方言
+    size_t param_seq_ = 0;                       ///< 参数序号计数器
     string table_;                               ///< 主表名
     string table_alias_;                         ///< 主表别名
     vector<string> where_conditions_;            ///< WHERE条件列表
@@ -299,6 +316,8 @@ private:
     create_index_data* ensure_create_index_data();
 
     void clear_data() noexcept;
+
+    NEFORCE_NODISCARD string make_placeholder(size_t index) const;
 
 public:
     /**
@@ -1362,6 +1381,61 @@ public:
      * @return 未设置表名返回true
      */
     NEFORCE_NODISCARD bool is_empty() const noexcept { return table_.empty(); }
+
+    /**
+     * @brief 设置数据库方言
+     * @param dialect 目标数据库方言
+     * @return 自身引用
+     *
+     * 设置后 build() 会根据方言调整生成的 SQL 语法。
+     */
+    sql_builder& set_dialect(const sql_dialect dialect) noexcept {
+        dialect_ = dialect;
+        return *this;
+    }
+
+    /**
+     * @brief 获取当前数据库方言
+     * @return 方言枚举值
+     */
+    NEFORCE_NODISCARD sql_dialect dialect() const noexcept { return dialect_; }
+
+    /**
+     * @brief 获取当前语句的参数占位符数量
+     * @return 参数总数（方言无关）
+     *
+     * 数量由内部计数器追踪，与占位符格式（`?` / `$N` / `:N`）无关。
+     * - 通过 insert_into() / columns() 自动填充时同步
+     * - 通过 set_param() / next_placeholder() 时自增
+     */
+    NEFORCE_NODISCARD size_t param_count() const noexcept { return param_seq_; }
+
+    /**
+     * @brief 生成方言感知的参数占位符
+     * @param index 参数序号（1-based）
+     * @return 占位符字符串
+     * @note 仅当手动调用 values() / add_values() / set() 时才需自行调用
+     */
+    NEFORCE_NODISCARD string placeholder(const size_t index) const { return make_placeholder(index); }
+
+    /**
+     * @brief 获取下一个参数占位符
+     * @return 占位符字符串
+     *
+     * 每次调用后内部序号 +1，用于 UPDATE/SELECT 中按顺序分配占位符
+     *
+     * @note 调用 reset() 时序号归零
+     */
+    NEFORCE_NODISCARD string next_placeholder() { return make_placeholder(++param_seq_); }
+
+    /**
+     * @brief 添加 SET 赋值
+     * @param field 字段名
+     * @return 自身引用
+     *
+     * 自动使用下一个参数占位符
+     */
+    sql_builder& set_param(string field) { return set(move(field), next_placeholder()); }
 
     /**
      * @brief 构建最终的SQL语句

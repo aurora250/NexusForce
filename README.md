@@ -207,8 +207,10 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`arp`/`mac_address`/`ip_address`/`ports`/`url`** - 网络编程工具
 
 ### 🗄️ 数据库 (DB)
-- **`database_pool`** - 数据库连接复用与管理
-- **`sql_builder`** - 标准 SQL 语句流式构建
+- **`database_pool`** - 数据库连接复用与管理，支持 `warm_up()` 预热 / `active_count()` 活跃查询 / `get_tb_connect_for()` 自定义超时
+- **`sql_builder`** - 标准 SQL 语句流式构建，支持**方言感知占位符**（Generic `?` / PgSQL `$N` / Oracle `:N`）和**方言感知 DDL**（AUTO_INCREMENT / SERIAL / IDENTITY 自动适配）
+- **`sql_mapper<T>`** - 反射驱动 ORM SQL 生成器，自动生成 DDL/DML 语句，支持方言感知
+- **`repository<T, Connect>`** - 泛型 CRUD 仓库模板（find_all / find_by_pk / find_where / find_page / insert / update / remove / count）
 - **多数据库支持**:
   - MySQL 客户端
   - PostgreSQL 客户端
@@ -216,6 +218,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
   - Redis 客户端
 - **预处理语句** - 防止 SQL 注入
 - **结果集封装** - 统一结果访问接口
+- **DB 属性注解** - `PROP_PRIMARY_KEY` / `PROP_AUTO_INC` / `PROP_UNIQUE` / `PROP_INDEX` / `PROP_FOREIGN_KEY`，反射系统与 ORM 共享元数据
 
 ### 📝 日志系统 (Logging)
 - **`log_sink`** - 可扩展的日志输出目标
@@ -271,7 +274,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`meta_any`** - 类型擦除容器，支持 `emplace<T>()` 原地构造
 - **`registry`** - 全局类型反射注册表，支持名称/type_id 双重查找、线程安全注册、动态信号槽连接 `connect_signal_to_slot()`
 - **`meta_type`** - 运行时类型元数据：基类列表、属性/函数映射、构造/克隆工厂、枚举/容器信息、信号名称列表、动态属性注册 `add_property()`
-- **`meta_property`** - 属性反射描述符，支持 getter/setter、注解标志（transient/required/readonly/optional/versioned）、变更通知信号 `notify_signal()`
+- **`meta_property`** - 属性反射描述符，支持 getter/setter、注解标志（transient/required/readonly/optional/versioned/primary_key/auto_inc/unique/index/foreign_key）、变更通知信号 `notify_signal()`
 - **`meta_function`** - 成员函数/静态函数反射描述符，支持重载、参数提示与运行时 `invoke()` 调用
 - **`meta_enum`** - 枚举反射：名称↔值双向查找、条目遍历
 - **`type_builder`** - 链式API 类型构建器：基类注册、属性/函数/信号注册、构造/克隆/容器配置

@@ -1,17 +1,23 @@
 # CHANGELOG
 
-## [1.0.0-rc] - 2026-06-09
+## [1.0.0-rc] - 2026-06-19
 
 ### 🚀 New Features
 - 添加 UTF-8 码点迭代器 `utf8_iterator` / `utf8_range` / `utf8_view`，支持 range-for 字符级遍历
 - format 引擎支持位置参数 `{0}` `{1}` 和顺序格式选项 `{:d}` `{:x}`
 - 添加命名参数格式化函数 `format_named()`
 - regex 支持拷贝构造和拷贝赋值
-- 添加 SIMD 检测宏 `NEFORCE_HAS_SSE2` / `NEFORCE_HAS_AVX2` / `NEFORCE_HAS_NEON`
+- 添加 SIMD 检测宏
 - 实现反射驱动的 JSON 序列化器 `json_serializer`（序列化/反序列化/递归嵌套/容器遍历）
 - 实现反射驱动的二进制序列化器 `binary_serializer`（大端格式、类型表、属性注解控制）
 - 添加 GoogleBenchmark 配置
 - `sql_builder` 达到 ANSI SQL-92 Entry/Intermediate 级完整覆盖
+- `sql_builder` 添加方言感知占位符支持（Generic/MySQL/SQLite/MSSQL → `?`，PostgreSQL → `$N`，Oracle → `:N`），新增 `set_dialect()` / `placeholder()` / `next_placeholder()` / `set_param()` / `param_count()` API
+- `sql_builder` 添加方言感知建表（AUTO_INCREMENT / SERIAL / IDENTITY / GENERATED AS IDENTITY）和方言感知分页（LIMIT/OFFSET / FETCH FIRST）
+- 添加 `sql_mapper<T>` 反射驱动 ORM SQL 生成器，自动生成 DDL（CREATE/DROP TABLE）和 DML（INSERT/UPDATE/DELETE/SELECT）语句，支持方言感知占位符
+- 添加 `repository<T, Connect>` 泛型 CRUD 仓库模板，封装 `sql_mapper` 提供高层数据访问接口（find_all / find_by_pk / find_where / find_page / insert / update / remove / count）
+- `property_attr` 添加 DB 注解标志：`PROP_PRIMARY_KEY` / `PROP_AUTO_INC` / `PROP_UNIQUE` / `PROP_INDEX` / `PROP_FOREIGN_KEY`
+- 添加 ORM 示例 `orm_example`，展示 `sql_mapper` SQL 生成与 `repository` CRUD 操作
 - 添加 HTTP/2 (h2) TLS+ALPN 协商支持，`ssl_stream::get_alpn_negotiated()` 接口
 - 添加 HTTP/2 连接管理 `http2_connection`（h2c 升级 + h2 ALPN 双模式）
 - 添加 HTTP/2 协议帧处理 `http2_protocol`
@@ -36,6 +42,7 @@
 - `format` 引擎内部重构为 tuple 随机访问架构
 - `basic_string` / `basic_string_view` 添加 `@note` 注释注明 NUL 字符截断风险
 - `sql_builder` 扩展 API，覆盖 DML/DDL/视图/索引/CTE/窗口函数/集合操作
+- `database_pool` 新增 `active_count()`（活跃连接数查询）/ `warm_up()`（连接池预热）/ `get_tb_connect_for()`（自定义超时获取表连接）API
 - `http_client` 重构为 scheme 感知模式：`scheme == "https"` 时自动创建 SSL 上下文
 - `ssl_client::post_connect()` 无 SSL 上下文时跳过 TLS 握手，支持纯 TCP 模式
 - `http_server` HTTPS 构造函数自动设置 ALPN 协议列表 (`h2`, `http/1.1`)

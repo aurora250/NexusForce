@@ -93,6 +93,9 @@ private:
     template <typename T>
     shared_ptr<T> acquire_impl();
 
+    template <typename T, typename Rep, typename Period>
+    shared_ptr<T> acquire_impl(const duration<Rep, Period>& timeout);
+
 public:
     /**
      * @brief 构造函数
@@ -154,10 +157,61 @@ public:
     size_t idle_count() const noexcept;
 
     /**
+     * @brief 获取活跃连接数
+     * @return 当前正在使用的连接数量
+     */
+    size_t active_count() const noexcept;
+
+    /**
      * @brief 获取总连接数
      * @return 当前总连接数（包括使用中和空闲）
      */
     size_t total_count() const noexcept;
+
+    /**
+     * @brief 预热连接池
+     * @param n 预创建的连接数量
+     *
+     * 创建指定数量的连接并放入空闲队列。
+     * 创建的连接数受 max_size 限制。
+     */
+    void warm_up(size_t n);
+
+    /**
+     * @brief 获取通用数据库连接（自定义超时）
+     * @tparam Rep 时长表示类型
+     * @tparam Period 时长周期类型
+     * @param timeout 获取超时时间
+     * @return 共享指针管理的连接对象，超时返回 nullptr
+     */
+    template <typename Rep, typename Period>
+    shared_ptr<idb_connect> get_connect_for(const duration<Rep, Period>& timeout) {
+        return acquire_impl<idb_connect>(timeout);
+    }
+
+    /**
+     * @brief 获取关系型数据库连接（自定义超时）
+     * @tparam Rep 时长表示类型
+     * @tparam Period 时长周期类型
+     * @param timeout 获取超时时间
+     * @return 共享指针管理的连接对象，超时返回 nullptr
+     */
+    template <typename Rep, typename Period>
+    shared_ptr<idb_tb_connect> get_tb_connect_for(const duration<Rep, Period>& timeout) {
+        return acquire_impl<idb_tb_connect>(timeout);
+    }
+
+    /**
+     * @brief 获取键值存储连接（自定义超时）
+     * @tparam Rep 时长表示类型
+     * @tparam Period 时长周期类型
+     * @param timeout 获取超时时间
+     * @return 共享指针管理的连接对象，超时返回 nullptr
+     */
+    template <typename Rep, typename Period>
+    shared_ptr<idb_kv_connect> get_kv_connect_for(const duration<Rep, Period>& timeout) {
+        return acquire_impl<idb_kv_connect>(timeout);
+    }
 
     /**
      * @brief 检查连接池是否正在运行
@@ -180,6 +234,61 @@ shared_ptr<T> database_pool::acquire_impl() {
 
     const bool got = cv_.wait_for(lk, pool_cfg_.acquire_timeout,
                                   [this] { return !idle_queue_.empty() || !running_.load(memory_order_relaxed); });
+
+    if (!running_.load(memory_order_relaxed)) {
+        return nullptr;
+    }
+
+    if (!got || idle_queue_.empty()) {
+        const size_t cur = total_count_.load(memory_order_relaxed);
+        if (cur >= pool_cfg_.max_size) {
+            return nullptr;
+        }
+        idb_connect* raw = try_create_connect();
+        if (raw == nullptr) {
+            return nullptr;
+        }
+
+        total_count_.fetch_add(1, memory_order_relaxed);
+        T* typed = dynamic_cast<T*>(raw);
+        if (typed == nullptr) {
+            delete raw;
+            total_count_.fetch_sub(1, memory_order_relaxed);
+            return nullptr;
+        }
+        return shared_ptr<T>(typed, [this](T* p) { this->return_connect(p); });
+    }
+
+    const connection_entry entry = idle_queue_.front();
+    idle_queue_.pop();
+    lk.unlock_quiet();
+
+    idb_connect* raw = entry.conn;
+
+    if (!raw->is_valid()) {
+        if (!raw->reconnect(config_)) {
+            delete raw;
+            total_count_.fetch_sub(1, memory_order_relaxed);
+            cv_.notify_one();
+            return nullptr;
+        }
+    }
+
+    T* typed = dynamic_cast<T*>(raw);
+    if (typed == nullptr) {
+        this->return_connect(raw);
+        return nullptr;
+    }
+
+    return shared_ptr<T>(typed, [this](T* p) { this->return_connect(p); });
+}
+
+template <typename T, typename Rep, typename Period>
+shared_ptr<T> database_pool::acquire_impl(const duration<Rep, Period>& timeout) {
+    unique_lock<mutex> lk(queue_mtx_);
+
+    const bool got =
+            cv_.wait_for(lk, timeout, [this] { return !idle_queue_.empty() || !running_.load(memory_order_relaxed); });
 
     if (!running_.load(memory_order_relaxed)) {
         return nullptr;

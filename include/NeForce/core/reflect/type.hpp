@@ -63,6 +63,7 @@ private:
     reflect::type_id type_id_;                                    ///< 类型ID
     string_view name_;                                            ///< 类型名称
     size_t size_;                                                 ///< 类型大小
+    string table_name_;                                           ///< 数据库表名（空表示使用类型名称）
     constructor_func constructor_;                                ///< 构造函数调用器
     clone_func cloner_;                                           ///< 克隆函数
     vector<meta_type*> base_types_;                               ///< 直接基类列表
@@ -153,6 +154,22 @@ public:
     NEFORCE_NODISCARD string_view name() const noexcept { return name_; }
 
     /**
+     * @brief 获取数据库表名
+     * @return 表名视图，未设置时返回空
+     */
+    NEFORCE_NODISCARD string_view table_name() const noexcept { return table_name_.view(); }
+
+    /**
+     * @brief 设置数据库表名
+     * @param table 表名
+     * @return 自身引用
+     */
+    meta_type& set_table_name(string_view table) {
+        table_name_ = table;
+        return *this;
+    }
+
+    /**
      * @brief 获取类型大小
      */
     NEFORCE_NODISCARD size_t size() const noexcept { return size_; }
@@ -225,7 +242,7 @@ public:
      * @return 自身引用
      */
     meta_type& property(string_view name, reflect::type_id prop_type_id, meta_property::getter getter,
-                        meta_property::setter setter, const uint8_t attrs = PROP_NONE) {
+                        meta_property::setter setter, const uint16_t attrs = PROP_NONE) {
         auto prop = make_unique<meta_property>(name, prop_type_id, move(getter), move(setter), attrs);
         properties_.emplace(name, move(prop));
         return *this;

@@ -6,7 +6,9 @@
  * - 创建连接池与配置参数
  * - get_connect / get_tb_connect 获取连接
  * - RAII 自动归还连接
- * - 连接池状态查询
+ * - 连接池状态查询（idle/active/total）
+ * - warm_up 预热连接
+ * - get_connect_for 自定义超时获取
  * - 优雅停止
  */
 
@@ -36,15 +38,24 @@ int main() {
     // 创建连接池
     database_pool pool{db_type::SQLITE3, config, pool_cfg};
     println("连接池已创建");
-    printfln("  运行状态: {}", pool.is_running());
-    printfln("  总连接数: {}", pool.total_count());
-    printfln("  空闲连接数: {}\n", pool.idle_count());
+
+    auto print_stats = [&pool](const char* label) {
+        printfln("{}: total={}, active={}, idle={}", label, pool.total_count(), pool.active_count(), pool.idle_count());
+    };
+    print_stats("初始状态");
+
+    // 预热连接
+    println("\n=== warm_up 预热 ===");
+    pool.warm_up(3);
+    print_stats("预热后");
 
     // 获取连接并使用
-    println("=== 获取连接执行操作 ===");
+    println("\n=== 获取连接执行操作 ===");
     {
         auto conn = pool.get_tb_connect();
         if (conn != nullptr) {
+            print_stats("持有1个连接时");
+
             ignore = conn->update("CREATE TABLE pool_test (id INTEGER PRIMARY KEY, value TEXT)");
 
             sql_builder ins;
@@ -60,14 +71,27 @@ int main() {
         }
         // conn 离开作用域时自动归还到池中
     }
-    println("连接已归还到池中\n");
+    println("连接已归还到池中");
+    print_stats("归还后");
 
     // 通过不同接口获取连接
-    println("=== 同时获取多个连接 ===");
+    println("\n=== 同时获取多个连接 ===");
     {
         auto conn1 = pool.get_connect();    // 返回 idb_connect*
         auto conn2 = pool.get_tb_connect(); // 返回 idb_tb_connect*
-        println("同时持有 2 个连接");
+        printfln("同时持有 2 个连接");
+        print_stats("持有2个连接时");
+    }
+
+    // 自定义超时获取
+    println("\n=== get_connect_for 自定义超时 ===");
+    {
+        auto conn = pool.get_tb_connect_for(milliseconds{1000});
+        if (conn != nullptr) {
+            printfln("1秒内获取到连接");
+        } else {
+            printfln("1秒内未获取到连接");
+        }
     }
 
     // 停止连接池

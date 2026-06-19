@@ -198,8 +198,10 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **`arp` / `mac_address` / `ip_address` / `ports` / `url`** - Network programming utilities
 
 ### 🗄️ Database
-- **`database_pool`** - Database connection reuse and management
-- **`sql_builder`** - Fluent builder for standard SQL statements
+- **`database_pool`** - Database connection reuse and management, with `warm_up()` / `active_count()` / `get_tb_connect_for()` timeout-aware acquisition
+- **`sql_builder`** - Fluent builder for standard SQL statements, with **dialect-aware placeholders** (Generic `?` / PgSQL `$N` / Oracle `:N`) and **dialect-aware DDL** (AUTO_INCREMENT / SERIAL / IDENTITY auto-adaptation)
+- **`sql_mapper<T>`** - Reflection-driven ORM SQL generator, auto-generates DDL/DML statements with dialect awareness
+- **`repository<T, Connect>`** - Generic CRUD repository template (find_all / find_by_pk / find_where / find_page / insert / update / remove / count)
 - **Multi-Database Support**:
   - MySQL Client
   - PostgreSQL Client
@@ -207,6 +209,7 @@ The core components of NexusForce strictly adhere to relevant international stan
   - Redis Client
 - **Prepared Statements** - Prevention of SQL injection
 - **Result Set Wrapper** - Unified result access interface
+- **DB Property Annotations** - `PROP_PRIMARY_KEY` / `PROP_AUTO_INC` / `PROP_UNIQUE` / `PROP_INDEX` / `PROP_FOREIGN_KEY`, shared metadata between reflection system and ORM
 
 ### 📝 Logging
 - **`log_sink`** - Extensible log output targets
@@ -261,7 +264,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **`meta_any`** - SBO-optimized + function-pointer dispatch type-erased container, supports `emplace<T>()` in-place construction (compatible with non-copyable/non-movable types)
 - **`registry`** - Global type reflection registry with name/type_id dual lookup, thread-safe registration, and dynamic signal-slot connection `connect_signal_to_slot()`
 - **`meta_type`** - Runtime type metadata: base class list, property/function maps, constructor/clone factory, enum/container info, signal name list, dynamic property registration `add_property()`
-- **`meta_property`** - Property reflection descriptor with getter/setter, annotation flags (transient/required/readonly/optional/versioned), and change notification signal `notify_signal()`
+- **`meta_property`** - Property reflection descriptor with getter/setter, annotation flags (transient/required/readonly/optional/versioned/primary_key/auto_inc/unique/index/foreign_key), and change notification signal `notify_signal()`
 - **`meta_function`** - Member/static function reflection descriptor with overload support, parameter hints, and runtime `invoke()` call
 - **`meta_enum`** - Enum reflection: name↔value bidirectional lookup, entry iteration
 - **`type_builder`** - Fluent API type builder: base class registration, property/function/signal registration, constructor/clone/container configuration

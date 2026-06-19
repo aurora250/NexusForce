@@ -88,7 +88,42 @@ size_t database_pool::idle_count() const noexcept {
     return idle_queue_.size();
 }
 
+size_t database_pool::active_count() const noexcept {
+    const size_t total = total_count_.load(memory_order_acquire);
+    const size_t idle = idle_count();
+    return total > idle ? total - idle : 0;
+}
+
 size_t database_pool::total_count() const noexcept { return total_count_.load(memory_order_acquire); }
+
+void database_pool::warm_up(const size_t n) {
+    if (!running_.load(memory_order_acquire)) {
+        return;
+    }
+
+    const size_t cur_total = total_count_.load(memory_order_relaxed);
+    const size_t available = cur_total < pool_cfg_.max_size ? pool_cfg_.max_size - cur_total : 0;
+    const size_t to_create = n < available ? n : available;
+
+    for (size_t i = 0; i < to_create; ++i) {
+        if (!running_.load(memory_order_relaxed)) {
+            return;
+        }
+
+        idb_connect* conn = try_create_connect();
+        if (conn == nullptr) {
+            break;
+        }
+
+        total_count_.fetch_add(1, memory_order_relaxed);
+
+        unique_lock<mutex> lk(queue_mtx_);
+        idle_queue_.emplace(conn);
+        lk.unlock_quiet();
+
+        cv_.notify_one();
+    }
+}
 
 void database_pool::stop() {
     bool expected = true;

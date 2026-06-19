@@ -38,6 +38,11 @@ add_nexusforce_example(NexusForceResultMetadataExample
     result_metadata_example.cpp
 )
 
+# ---- ORM ----
+add_nexusforce_example(NexusForceOrmExample
+    orm_example.cpp
+)
+
 # ---- Redis ----
 add_nexusforce_example(NexusForceRedisExample
     redis_example.cpp

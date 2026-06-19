@@ -84,6 +84,16 @@
  */
 #define NEFORCE_REFLECT_ENUM_VAL(Enum, Name)
 
+/**
+ * @def NEFORCE_DB_TABLE
+ * @brief 指定数据库表名
+ * @param TableName 数据库表名字符串字面量
+ *
+ * 当目标表名与类名不一致时，在类体内放置此宏指定表名映射。
+ * 扫描器会生成 table_name() 调用将表名写入 meta_type。
+ */
+#define NEFORCE_DB_TABLE(TableName)
+
 /** @} */ // Reflection
 
 #endif // NEFORCE_CORE_REFLECT_REFLECT_MACROS_HPP__

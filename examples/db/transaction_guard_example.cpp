@@ -41,7 +41,7 @@ int main() {
     // 转账：成功场景（显式 commit）
     println("=== 转账成功（Commit） ===");
     {
-        transaction_guard tx{conn};
+        scope_transaction tx{conn};
         // UPDATE
         {
             sql_builder upd;
@@ -70,7 +70,7 @@ int main() {
     // 转账：失败场景（离开作用域自动 rollback）
     println("\n=== 转账失败（自动回滚） ===");
     {
-        transaction_guard tx{conn};
+        scope_transaction tx{conn};
         {
             sql_builder upd;
             upd.update("accounts").set("balance = balance - 9999").where_eq("name", "'Alice'");

@@ -36,6 +36,11 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 template <typename Derived>
 struct sql_connect_base : idb_tb_connect {
+private:
+    Derived& derived() noexcept { return static_cast<Derived&>(*this); }
+    const Derived& derived() const noexcept { return static_cast<const Derived&>(*this); }
+
+public:
     bool begin() final { return derived().update(derived().begin_sql()); }
     bool commit() final { return derived().update(derived().commit_sql()); }
     bool rollback() final { return derived().update(derived().rollback_sql()); }
@@ -46,10 +51,6 @@ struct sql_connect_base : idb_tb_connect {
         auto result = derived().query(derived().table_exists_query(table));
         return result != nullptr && result->row_count() > 0;
     }
-
-private:
-    Derived& derived() { return static_cast<Derived&>(*this); }
-    const Derived& derived() const { return static_cast<const Derived&>(*this); }
 };
 
 /** @} */ // Database

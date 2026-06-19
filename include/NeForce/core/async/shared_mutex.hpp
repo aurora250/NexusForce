@@ -23,6 +23,9 @@ NEFORCE_BEGIN_NAMESPACE__
  * @{
  */
 
+class shared_mutex_base : public mutex_base {};
+
+
 /**
  * @class shared_mutex
  * @brief 共享互斥锁类
@@ -30,7 +33,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * 提供读-写锁语义的互斥锁，允许多个线程同时进行读操作，
  * 但写操作需要独占访问。
  */
-class NEFORCE_API shared_mutex {
+class NEFORCE_API shared_mutex : public shared_mutex_base {
 public:
     /**
      * @brief 共享互斥锁的系统句柄类型
@@ -130,6 +133,8 @@ public:
  */
 template <typename SharedMutex>
 class shared_lock {
+    static_assert(is_base_of_v<shared_mutex_base, SharedMutex>, "SharedMutex type must be derived from shared_mutex_base");
+
 public:
     using mutex_type = SharedMutex; ///< 共享互斥锁类型
 
@@ -164,7 +169,7 @@ public:
      *
      * 构造时不锁定共享互斥锁，稍后可以手动获取读锁。
      */
-    shared_lock(mutex_type& m, defer_lock_tag tag) noexcept :
+    shared_lock(mutex_type& m, lock_defer_tag tag) noexcept :
     mutex_(&m) {}
 
     /**
@@ -174,7 +179,7 @@ public:
      *
      * 构造时尝试获取共享互斥锁的读锁，如果失败不会阻塞。
      */
-    shared_lock(mutex_type& m, try_lock_tag tag) noexcept :
+    shared_lock(mutex_type& m, lock_quiet_tag tag) noexcept :
     mutex_(&m),
     owns_lock_(m.try_lock_shared()) {}
 

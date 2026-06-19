@@ -54,7 +54,10 @@ echo "hello world" | nc localhost 8080
 
 ### 3. HTTP Server（http_server）
 
-演示完整 HTTP 服务器的核心功能：路由注册（GET/POST/PUT/DELETE）、路径参数、正则路由、会话管理（含 Session Fixation 防护与 `regenerate_id`）、CSRF 防护（Double-Submit Cookie）、HTTP 响应压缩（gzip/deflate）、静态文件服务（含 Range 断点续传）、过滤器链（CORS → Rate Limit → CSRF → Compress → Static File → Bearer Auth）、Bearer Token 认证（`/api/protected`）、JSON API、表单处理、查询参数、405/404 处理器。
+演示完整 HTTP 服务器的核心功能：路由注册（GET/POST/PUT/DELETE）、路径参数、正则路由、
+会话管理（含 Session Fixation 防护与 `regenerate_id`）、CSRF 防护（Double-Submit Cookie）、HTTP 响应压缩（gzip/deflate）、
+静态文件服务（含 Range 断点续传）、过滤器链（CORS → Rate Limit → CSRF → Compress → Static File → Bearer Auth）、
+Bearer Token 认证（`/api/protected`）、JSON API、表单处理、查询参数、405/404 处理器。
 
 ```bash
 ./build/bin/NexusForceHttpServerExample
@@ -202,7 +205,8 @@ curl -k -X POST https://localhost:8443/api/echo -d 'hello tls'
 
 ### 6. WebSocket Server（websocket_server）
 
-演示 WebSocket 协议：路由注册、消息收发（文本/二进制）、**permessage-deflate 消息压缩**（RFC 7692，自动协商）、event_loop 事件驱动 I/O、心跳检测（Ping/Pong）、广播、关闭处理。
+演示 WebSocket 协议：路由注册、消息收发（文本/二进制）、**permessage-deflate 消息压缩**（RFC 7692，自动协商）、
+event_loop 事件驱动 I/O、心跳检测（Ping/Pong）、广播、关闭处理。
 
 ```bash
 ./build/bin/NexusForceWebSocketServerExample
@@ -224,7 +228,8 @@ wscat -c ws://localhost:8080/chat
 ```
 
 **浏览器测试：**
-打开 `http://localhost:8080/`，页面内置了完整的 WebSocket 聊天 Demo，可直接收发消息。页面顶部会显示 `permessage-deflate compression: active`（绿色）或 `inactive`（橙色），指示压缩是否已启用。
+打开 `http://localhost:8080/`，页面内置了完整的 WebSocket 聊天 Demo，可直接收发消息。页面顶部会显示 
+`permessage-deflate compression: active`（绿色）或 `inactive`（橙色），指示压缩是否已启用。
 
 **压缩协商参数（服务端日志输出）：**
 ```
@@ -388,7 +393,8 @@ FTP_HOST=ftp.example.com FTP_USER=myuser FTP_PASS=mypass ./build/bin/NexusForceF
 
 ### 12. gRPC Server（grpc_server）
 
-演示 gRPC 协议核心功能：gRPC 帧编解码（grpc_framer）、Unary RPC 处理、gRPC 状态码映射（grpc_to_http_status）、HTTP/1.1 承载 gRPC 流量、健康检查 RPC（grpc.health.v1.Health/Check）。
+演示 gRPC 协议核心功能：gRPC 帧编解码（grpc_framer）、Unary RPC 处理、gRPC 状态码映射（grpc_to_http_status）、
+HTTP/1.1 承载 gRPC 流量、健康检查 RPC（grpc.health.v1.Health/Check）。
 
 ```bash
 ./build/bin/NexusForceGrpcServerExample
@@ -417,7 +423,9 @@ printf '\x00\x00\x00\x00\x12helloworld.Greeter' | curl -s -X POST \
 
 ### 13. Health Check + 生产特性（health_check）
 
-演示生产环境常用 Filter 综合示例：health_check_filter（多后端健康检查：DB、Redis、磁盘、内存）、token_bucket_filter（IP 级别限流 10 req/s，突发 20）、logging_filter（请求/响应日志含 Headers 和 Body）、security_headers_filter（自动添加 HSTS、CSP、X-Frame-Options 等安全头）。
+演示生产环境常用 Filter 综合示例：health_check_filter（多后端健康检查：DB、Redis、磁盘、内存）、
+token_bucket_filter（IP 级别限流 10 req/s，突发 20）、logging_filter（请求/响应日志含 Headers 和 Body）、
+security_headers_filter（自动添加 HSTS、CSP、X-Frame-Options 等安全头）。
 
 ```bash
 ./build/bin/NexusForceHealthCheckExample
@@ -456,7 +464,8 @@ curl -X POST http://localhost:8080/api/simulate/recover
 
 ### 14. HTTP/2 Server（http2_server）
 
-演示 HTTP/2 双模式服务器：h2c 模式（port 8080，HTTP/1.1 Upgrade 升级）、h2 模式（port 8443，TLS + ALPN 自动协商）、路由注册（路径参数、JSON 响应）、HTTP/2 Server Push（Link preload header）、过滤器链（日志 + 压缩）。
+演示 HTTP/2 双模式服务器：h2c 模式（port 8080，HTTP/1.1 Upgrade 升级）、h2 模式（port 8443，TLS + ALPN 自动协商）、
+路由注册（路径参数、JSON 响应）、HTTP/2 Server Push（Link preload header）、过滤器链（日志 + 压缩）。
 
 ```bash
 ./build/bin/NexusForceHttp2ServerExample
@@ -496,7 +505,8 @@ curl --http2 -k https://localhost:8443/api/push
 
 ### 15. Reverse Proxy + 负载均衡（reverse_proxy）
 
-演示反向代理与负载均衡：启动 2 个后端 HTTP 服务器（port 8081、8082）、持久 http_client 连接池（keep-alive 复用）、自定义 Round-Robin 负载均衡、`/api/*` 请求轮询转发到后端、非 API 路径直接由代理服务器处理。
+演示反向代理与负载均衡：启动 2 个后端 HTTP 服务器（port 8081、8082）、持久 http_client 连接池（keep-alive 复用）、
+自定义 Round-Robin 负载均衡、`/api/*` 请求轮询转发到后端、非 API 路径直接由代理服务器处理。
 
 ```bash
 ./build/bin/NexusForceReverseProxyExample
@@ -532,7 +542,8 @@ curl http://localhost:8080/frontend
 
 ### 1. SQL Builder（sql_builder）
 
-演示 sql_builder 编程式 SQL 构建：SELECT/INSERT/UPDATE/DELETE、聚合函数、分页、子查询、多表 JOIN、复杂 WHERE 条件。
+演示 sql_builder 编程式 SQL 构建：SELECT/INSERT/UPDATE/DELETE、聚合函数、分页、子查询、多表 JOIN、复杂 WHERE 条件、
+**方言感知占位符**（Generic `?` / PgSQL `$N` / Oracle `:N`）、**方言感知建表**（AUTO_INCREMENT 适配）、**方言感知分页**。
 
 ```bash
 ./build/bin/NexusForceSqlBuilderExample
@@ -545,6 +556,17 @@ curl http://localhost:8080/frontend
 # 子查询: SELECT (SELECT MAX(amount) FROM orders WHERE ...) AS max_order FROM users
 # 多JOIN: SELECT * FROM t1 INNER JOIN t2 ON ... LEFT JOIN t3 ON ... RIGHT JOIN t4 ON ...
 # 条件:   SELECT * FROM users WHERE status = 'active' AND age BETWEEN 18 AND 65 AND ...
+#
+# === 方言感知占位符 ===
+# Generic: UPDATE users SET name = ?, email = ? WHERE id = ? (param_count=3)
+# PgSQL:   UPDATE users SET name = $1, email = $2 WHERE id = $3 (param_count=3)
+# Oracle:  UPDATE users SET name = :1, email = :2 WHERE id = :3 (param_count=3)
+#
+# === 方言感知建表 ===
+# Generic (AUTO_INCREMENT):  CREATE TABLE products (id INTEGER AUTO_INCREMENT, name TEXT)
+# PgSQL    (SERIAL):         CREATE TABLE products (id SERIAL, name TEXT)
+# MSSQL    (IDENTITY):       CREATE TABLE products (id INTEGER IDENTITY(1,1), name TEXT)
+# Oracle   (IDENTITY):       CREATE TABLE products (id INTEGER GENERATED AS IDENTITY, name TEXT)
 ```
 
 ---
@@ -665,21 +687,27 @@ curl http://localhost:8080/frontend
 
 ### 7. Connection Pool（database_pool）
 
-演示 database_pool 连接池管理：池配置、获取/归还连接、RAII 自动归还、状态查询、优雅停止。
+演示 database_pool 连接池管理：池配置、获取/归还连接、RAII 自动归还、状态查询（idle/active/total）、
+**warm_up 预热**、**get_tb_connect_for 自定义超时获取**、优雅停止。
 
 ```bash
 ./build/bin/NexusForceConnectionPoolExample
 # 连接池已创建
-#   运行状态: true
-#   总连接数: 2
-#   空闲连接数: 2
+# 初始状态: total=2, active=0, idle=2
+# 预热后: total=5, active=0, idle=5
 #
 # === 获取连接执行操作 ===
+# 持有1个连接时: total=5, active=1, idle=4
 # 查询结果: pool_example
 # 连接已归还到池中
+# 归还后: total=5, active=0, idle=5
 #
 # === 同时获取多个连接 ===
 # 同时持有 2 个连接
+# 持有2个连接时: total=5, active=2, idle=3
+#
+# === get_connect_for 自定义超时 ===
+# 1秒内获取到连接
 #
 # 连接池已停止
 #   运行状态: false
@@ -745,9 +773,48 @@ curl http://localhost:8080/frontend
 # GET tx_key → tx_value
 ```
 
-**构建选项：** 需要启用示例构建 `-DNEXUSFORCE_BUILD_EXAMPLES=ON`，各数据库后端通过 `-DNEXUSFORCE_SUPPORT_SQLITE3=ON`、`-DNEXUSFORCE_SUPPORT_HIREDIS=ON` 等选项控制。
+**构建选项：** 需要启用示例构建 `-DNEXUSFORCE_BUILD_EXAMPLES=ON`，各数据库后端通过 
+`-DNEXUSFORCE_SUPPORT_SQLITE3=ON`、`-DNEXUSFORCE_SUPPORT_HIREDIS=ON` 等选项控制。
 
 ---
+
+### 10. ORM 对象关系映射（orm_example）
+
+演示反射驱动的 ORM 功能：实体定义与反射注册（含 DB 注解）、`sql_mapper` 自动生成 DDL/DML SQL（支持多方言占位符）、
+`repository` 泛型 CRUD 操作（find_all / find_by_pk / find_where / find_page / insert / update / remove / count）、分页查询、表存在性检查。
+
+```bash
+./build/bin/NexusForceOrmExample
+# === sql_mapper 自动生成 SQL ===
+# CREATE TABLE tbl_users (id INTEGER PRIMARY KEY AUTOINCREMENT, ...)
+#
+# --- INSERT 方言感知占位符 ---
+# Generic:  INSERT INTO tbl_users (name, email, age) VALUES (?, ?, ?)
+# PgSQL:    INSERT INTO tbl_users (name, email, age) VALUES ($1, $2, $3)
+# Oracle:   INSERT INTO tbl_users (name, email, age) VALUES (:1, :2, :3)
+#
+# === repository 泛型 CRUD ===
+# 表已创建
+# 已插入 3 条记录
+#
+# === 全部用户 ===
+#   id=1, name=Alice, email=alice@test.com, age=30
+#   id=2, name=Bob, email=bob@test.com, age=25
+#   id=3, name=Charlie, email=charlie@test.com, age=35
+#
+# === 年龄 > 25 ===
+#   id=1, name=Alice, age=30
+#   id=3, name=Charlie, age=35
+#
+# === 分页查询（第1页，每页2条）===
+#   id=1, name=Alice
+#   id=2, name=Bob
+#
+# table_exists: true
+# 删表后 table_exists: false
+```
+
+> **提示：** 生产项目中通过 NFRS 反射扫描器自动生成反射注册代码，无需手动编写 `reflect::reflect<T>()` 注册。
 
 ---
 
@@ -898,3 +965,4 @@ curl http://localhost:8080/frontend
 | Connection Pool        | `examples/db/connection_pool_example.cpp`                      |
 | Result Metadata        | `examples/db/result_metadata_example.cpp`                      |
 | Redis                  | `examples/db/redis_example.cpp`                                |
+| ORM                    | `examples/db/orm_example.cpp`                                  |

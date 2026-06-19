@@ -4,7 +4,6 @@
 #    include <NeForce/db/sqlite/sqlite_result.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
-
 bool sqlite_connect::connect(const db_config& config) {
     last_error_.clear();
     last_errno_ = 0;

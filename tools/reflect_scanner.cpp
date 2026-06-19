@@ -52,6 +52,7 @@ namespace {
 
     struct class_info {
         string name;
+        string table_name;
         vector<base_info> bases;
         vector<prop_info> props;
         vector<func_info> funcs;
@@ -145,6 +146,12 @@ namespace {
 
             auto base_clause = string(cm[2]);
             info.bases = parse_bases(base_clause);
+
+            regex table_marker(R"(NEFORCE_DB_TABLE\s*\(\s*\"([^\"]+)\"\s*\))");
+            auto table_match = table_marker.search(class_body);
+            if (table_match.matched()) {
+                info.table_name = string(table_match[1]);
+            }
 
             for (const auto& pm: prop_marker.find_all(class_body)) {
                 prop_info pi;
@@ -286,6 +293,10 @@ namespace {
 
             for (const auto& base: cls.bases) {
                 out += format("    builder.base(\"{}\");\n", base.name);
+            }
+
+            if (!cls.table_name.empty()) {
+                out += format("    builder.table_name(\"{}\");\n", cls.table_name);
             }
 
             for (const auto& prop: cls.props) {

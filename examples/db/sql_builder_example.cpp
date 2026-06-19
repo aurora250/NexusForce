@@ -9,6 +9,8 @@
  * - 子查询
  * - 多表JOIN
  * - 复杂WHERE条件
+ * - 方言感知占位符（Generic `?` / PG `$N` / Oracle `:N`）
+ * - 方言感知建表（AUTO_INCREMENT 适配）
  */
 
 #include <NeForce/core/system/console.hpp>
@@ -87,6 +89,95 @@ int main() {
             .where_is_not_null("email")
             .or_where("role = 'admin'");
     printfln("条件:   {}", cond.build());
+
+    // 方言感知占位符
+    printcln(color::cyan(), "\n=== 方言感知占位符 ===\n");
+
+    // Generic / MySQL / SQLite 使用 ? 占位符
+    {
+        sql_builder b;
+        b.set_dialect(sql_dialect::GENERIC);
+        b.update("users");
+        b.set_param("name");
+        b.set_param("email");
+        b.where_eq("id", b.next_placeholder());
+        printfln("Generic: {} (param_count={})", b.build(), b.param_count());
+    }
+
+    // PostgreSQL 使用 $1, $2, $3 占位符
+    {
+        sql_builder b;
+        b.set_dialect(sql_dialect::POSTGRESQL);
+        b.update("users");
+        b.set_param("name");
+        b.set_param("email");
+        b.where_eq("id", b.next_placeholder());
+        printfln("PgSQL:   {} (param_count={})", b.build(), b.param_count());
+    }
+
+    // Oracle 使用 :1, :2, :3 占位符
+    {
+        sql_builder b;
+        b.set_dialect(sql_dialect::ORACLE);
+        b.update("users");
+        b.set_param("name");
+        b.set_param("email");
+        b.where_eq("id", b.next_placeholder());
+        printfln("Oracle:  {} (param_count={})", b.build(), b.param_count());
+    }
+
+    // INSERT 自动填充方言占位符
+    {
+        sql_builder b;
+        b.set_dialect(sql_dialect::POSTGRESQL);
+        b.insert_into("users", {"name", "email", "age"});
+        printfln("PgSQL INSERT: {} (param_count={})", b.build(), b.param_count());
+    }
+
+    // 删除语句 + dialect
+    {
+        sql_builder b;
+        b.set_dialect(sql_dialect::POSTGRESQL);
+        b.delete_from("users").where_eq("id", b.placeholder(1));
+        printfln("PgSQL DELETE: {}", b.build());
+    }
+
+    // 方言感知建表
+    printcln(color::cyan(), "\n=== 方言感知建表（AUTO_INCREMENT适配）===\n");
+
+    auto print_ddl = [](sql_dialect dialect, const char* label) {
+        sql_builder b;
+        b.set_dialect(dialect);
+        b.create_table("products").column_auto_increment("id", "INTEGER").column("name", "TEXT");
+        printfln("{}:\n{}\n", label, b.build());
+    };
+
+    print_ddl(sql_dialect::GENERIC, "Generic (AUTO_INCREMENT)");
+    print_ddl(sql_dialect::POSTGRESQL, "PgSQL    (SERIAL)");
+    print_ddl(sql_dialect::MSSQL, "MSSQL    (IDENTITY)");
+    print_ddl(sql_dialect::ORACLE, "Oracle   (GENERATED AS IDENTITY)");
+
+    // 方言感知分页
+    printcln(color::cyan(), "=== 方言感知分页 ===\n");
+
+    {
+        sql_builder b;
+        b.set_dialect(sql_dialect::GENERIC);
+        b.select_all().from("users").limit(10).offset(20);
+        printfln("Generic: {} (LIMIT/OFFSET)", b.build());
+    }
+    {
+        sql_builder b;
+        b.set_dialect(sql_dialect::ORACLE);
+        b.select_all().from("users").limit(10).offset(20);
+        printfln("Oracle:  {} (FETCH FIRST)", b.build());
+    }
+    {
+        sql_builder b;
+        b.set_dialect(sql_dialect::ORACLE);
+        b.select_all().from("users").page(3, 10);
+        printfln("Oracle page(3,10): {}", b.build());
+    }
 
     return 0;
 }

@@ -36,11 +36,13 @@ NEFORCE_BEGIN_NAMESPACE__
  * @{
  */
 
+class mutex_base {};
+
 /**
  * @class mutex
  * @brief 非递归互斥锁
  */
-class NEFORCE_API mutex {
+class NEFORCE_API mutex : public mutex_base {
 public:
     /**
      * @brief 互斥锁的系统句柄类型
@@ -112,7 +114,7 @@ public:
  *
  * 允许同一线程多次锁定同一互斥锁，需要相同次数的解锁。
  */
-class NEFORCE_API recursive_mutex {
+class NEFORCE_API recursive_mutex : public mutex_base {
 public:
     /**
      * @brief 递归互斥锁的系统句柄类型
@@ -187,6 +189,8 @@ public:
  */
 template <typename Mutex>
 class lock {
+  static_assert(is_base_of_v<mutex_base, Mutex>, "Mutex type must be derived from mutex_base");
+
 public:
     using mutex_type = Mutex; ///< 互斥锁类型
 
@@ -218,32 +222,35 @@ public:
 
 
 /**
- * @struct defer_lock_tag
+ * @struct lock_defer_tag
  * @brief 延迟锁定标签
  *
  * 用于unique_lock构造函数，表示延迟锁定互斥锁。
  */
-struct defer_lock_tag {
-    constexpr defer_lock_tag() noexcept = default;
+struct lock_defer_tag {
+    constexpr lock_defer_tag() noexcept = default;
 };
+
 /**
  * @brief 延迟锁定标签实例
  */
-NEFORCE_INLINE17 constexpr defer_lock_tag defer_lock{};
+NEFORCE_INLINE17 constexpr lock_defer_tag lock_defer{};
+
 
 /**
- * @struct try_lock_tag
+ * @struct lock_quiet_tag
  * @brief 尝试锁定标签
  *
  * 用于unique_lock构造函数，表示尝试锁定互斥锁。
  */
-struct try_lock_tag {
-    constexpr try_lock_tag() noexcept = default;
+struct lock_quiet_tag {
+    constexpr lock_quiet_tag() noexcept = default;
 };
+
 /**
  * @brief 尝试锁定标签实例
  */
-NEFORCE_INLINE17 constexpr try_lock_tag try_lock{};
+NEFORCE_INLINE17 constexpr lock_quiet_tag lock_quiet{};
 
 
 /**
@@ -254,6 +261,8 @@ NEFORCE_INLINE17 constexpr try_lock_tag try_lock{};
  */
 template <typename Mutex>
 class unique_lock {
+  static_assert(is_base_of_v<mutex_base, Mutex>, "Mutex type must be derived from mutex_base");
+
 public:
     using mutex_type = Mutex; ///< 互斥锁类型
 
@@ -288,7 +297,7 @@ public:
      *
      * 构造时不锁定互斥锁，稍后可以调用lock()锁定。
      */
-    unique_lock(mutex_type& m, defer_lock_tag tag) noexcept :
+    unique_lock(mutex_type& m, lock_defer_tag tag) noexcept :
     mutex_(&m) {}
 
     /**
@@ -298,7 +307,7 @@ public:
      *
      * 构造时尝试锁定互斥锁，如果失败则不会阻塞。
      */
-    unique_lock(mutex_type& m, try_lock_tag tag) noexcept :
+    unique_lock(mutex_type& m, lock_quiet_tag tag) noexcept :
     mutex_(&m),
     owns_lock_(m.try_lock()) {}
 

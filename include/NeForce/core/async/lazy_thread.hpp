@@ -36,8 +36,6 @@ NEFORCE_BEGIN_NAMESPACE__
  * - 需要在不同作用域间传递线程任务
  * - 需要在某些条件满足后才启动线程
  * - 避免不必要的线程创建开销
- *
- * @note lazy_thread在析构时会自动join而不是terminate。
  */
 class NEFORCE_API lazy_thread {
 public:

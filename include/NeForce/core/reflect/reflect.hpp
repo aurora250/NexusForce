@@ -76,7 +76,7 @@ public:
      * @return 自身引用
      */
     template <typename U>
-    type_builder& property(string_view name, U T::* member, const uint8_t attrs = PROP_NONE) {
+    type_builder& property(string_view name, U T::* member, const uint16_t attrs = PROP_NONE) {
         meta_property::getter getter = [member](const void* obj) -> meta_any {
             auto* instance = static_cast<const T*>(obj);
             return meta_any(instance->*member);
@@ -104,7 +104,7 @@ public:
      * @return 自身引用
      */
     template <typename U>
-    type_builder& property(string_view name, U T::* member, const uint8_t attrs, string_view notify_signal) {
+    type_builder& property(string_view name, U T::* member, const uint16_t attrs, string_view notify_signal) {
         this->template property<U>(name, member, attrs);
         const auto* prop = meta_.get_property(name);
         if (prop) {
@@ -215,6 +215,18 @@ public:
      *
      * 将信号名称记录在类型的元数据中，供动态连接查询使用。
      */
+    /**
+     * @brief 设置数据库表名
+     * @param table 表名
+     * @return 自身引用
+     *
+     * 当表名与类名不一致时使用此方法设置映射关系。
+     */
+    type_builder& table_name(string_view table) {
+        meta_.set_table_name(table);
+        return *this;
+    }
+
     type_builder& signal(string_view name) {
         meta_.register_signal(name);
         return *this;

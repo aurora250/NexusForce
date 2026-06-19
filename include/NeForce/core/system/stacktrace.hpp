@@ -34,7 +34,7 @@ public:
      *
      * 表示堆栈中的一个函数调用帧，包含返回地址和符号信息。
      */
-    class frame : public istringify<frame> {
+    class NEFORCE_API frame : public istringify<frame> {
     private:
         void* address_ = nullptr; ///< 返回地址
 

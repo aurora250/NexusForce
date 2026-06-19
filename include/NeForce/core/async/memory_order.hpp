@@ -191,7 +191,7 @@ NEFORCE_INLINE17 constexpr auto memory_order_seq_cst = memory_order::seq_cst;
  *
  * 用于扩展memory_order的功能，支持硬件锁消除（HLE）等高级特性。
  *
- * @warning 根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE
+ * @deprecated 根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE
  * 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE
  * 功能，并在运行时做好fallback 处理。
  *
@@ -214,8 +214,10 @@ enum class memory_order_modifier : int64_t {
  * @param mo 内存顺序
  * @param mod 内存顺序修饰符
  * @return 组合后的内存顺序
- *
  * @note 用于将内存顺序与修饰符组合使用
+ * @deprecated 根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE
+ * 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE
+ * 功能，并在运行时做好fallback 处理。
  */
 constexpr memory_order operator|(memory_order mo, memory_order_modifier mod) noexcept {
     return static_cast<memory_order>(static_cast<int64_t>(mo) | static_cast<int64_t>(mod));
@@ -226,8 +228,10 @@ constexpr memory_order operator|(memory_order mo, memory_order_modifier mod) noe
  * @param mo 内存顺序
  * @param mod 内存顺序修饰符
  * @return 提取后的内存顺序
- *
  * @note 用于从组合值中提取特定的内存顺序或修饰符
+ * @deprecated 根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE
+ * 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE
+ * 功能，并在运行时做好fallback 处理。
  */
 constexpr memory_order operator&(memory_order mo, memory_order_modifier mod) noexcept {
     return static_cast<memory_order>(static_cast<int64_t>(mo) & static_cast<int64_t>(mod));
@@ -237,13 +241,10 @@ constexpr memory_order operator&(memory_order mo, memory_order_modifier mod) noe
 /**
  * @enum rtm_status_flag
  * @brief RTM事务状态标志位定义
- *
- * @warning 根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE
+ * @deprecated 根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE
  * 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE
  * 功能，并在运行时做好fallback 处理。
- *
- * @see
- * https://www.intel.com/content/www/us/en/docs/cpp-compiler/developer-guide-reference/2021-8/intel-transactional-synchronization-extensions.html
+ * @see https://www.intel.com/content/www/us/en/docs/cpp-compiler/developer-guide-reference/2021-8/intel-transactional-synchronization-extensions.html
  */
 enum class rtm_status_flag : uint32_t {
     xabort_explicit = 1 << 0, ///< 由XABORT指令显式中止

@@ -2,7 +2,7 @@
 #define NEFORCE_DATABASE_TRANSACTION_GUARD_HPP__
 
 /**
- * @file transaction_guard.hpp
+ * @file scope_transaction.hpp
  * @brief RAII事务作用域守卫
  *
  * 提供异常安全的事务管理，构造时自动开始事务，析构时根据提交状态决定提交或回滚。
@@ -10,7 +10,7 @@
  * 使用示例：
  * @code
  * void do_work(auto& conn) {
- *     transaction_guard tx{conn};     // BEGIN
+ *     scope_transaction tx{conn};     // BEGIN
  *     conn.update("INSERT INTO ...");
  *     conn.update("UPDATE ...");
  *     tx.commit();                     // COMMIT
@@ -29,7 +29,7 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
- * @class transaction_guard
+ * @class scope_transaction
  * @brief RAII事务作用域守卫
  *
  * 管理数据库事务的生命周期：
@@ -42,7 +42,11 @@ NEFORCE_BEGIN_NAMESPACE__
  * @tparam Connect 连接类型，需满足 idb_connect 接口（提供 begin/commit/rollback）
  */
 template <typename Connect>
-class transaction_guard {
+class scope_transaction {
+private:
+    Connect* conn_ = nullptr; ///< 数据库连接指针
+    bool committed_ = false;  ///< 是否已提交
+
 public:
     /**
      * @brief 构造函数，开始事务
@@ -50,7 +54,7 @@ public:
      *
      * 立即调用 conn.begin() 开始事务。
      */
-    explicit transaction_guard(Connect& conn) :
+    explicit scope_transaction(Connect& conn) :
     conn_(&conn) {
         conn_->begin();
     }
@@ -61,7 +65,7 @@ public:
      * 如果事务未提交，自动调用 rollback() 回滚。
      * 如果事务已提交，不做任何操作。
      */
-    ~transaction_guard() noexcept {
+    ~scope_transaction() noexcept {
         if (conn_ != nullptr && !committed_) {
             try {
                 conn_->rollback();
@@ -72,8 +76,8 @@ public:
         }
     }
 
-    transaction_guard(const transaction_guard&) = delete;
-    transaction_guard& operator=(const transaction_guard&) = delete;
+    scope_transaction(const scope_transaction&) = delete;
+    scope_transaction& operator=(const scope_transaction&) = delete;
 
     /**
      * @brief 移动构造函数
@@ -81,7 +85,7 @@ public:
      *
      * 移动后源对象变为无效状态，不再持有连接引用。
      */
-    transaction_guard(transaction_guard&& other) noexcept :
+    scope_transaction(scope_transaction&& other) noexcept :
     conn_(other.conn_),
     committed_(other.committed_) {
         other.conn_ = nullptr;
@@ -95,7 +99,7 @@ public:
      *
      * 如果当前守卫未提交，先回滚当前事务。
      */
-    transaction_guard& operator=(transaction_guard&& other) noexcept {
+    scope_transaction& operator=(scope_transaction&& other) noexcept {
         if (addressof(other) != this) {
             if (conn_ != nullptr && !committed_) {
                 try {
@@ -132,20 +136,16 @@ public:
      * @return 已提交返回true
      */
     NEFORCE_NODISCARD bool committed() const noexcept { return committed_; }
-
-private:
-    Connect* conn_ = nullptr; ///< 数据库连接指针
-    bool committed_ = false;  ///< 是否已提交
 };
 
 /**
  * @brief 事务守卫的便捷构造函数
  * @param conn 数据库连接引用
- * @return transaction_guard 对象
+ * @return scope_transaction 对象
  */
 template <typename Connect>
-NEFORCE_NODISCARD auto make_transaction(Connect& conn) {
-    return transaction_guard<Connect>(conn);
+NEFORCE_NODISCARD scope_transaction<Connect> make_transaction(Connect& conn) {
+    return scope_transaction<Connect>(conn);
 }
 
 /** @} */ // Database

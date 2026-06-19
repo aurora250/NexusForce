@@ -2,7 +2,7 @@
 #define NEFORCE_CORE_ASYNC_SCOPED_THREAD_HPP__
 
 /**
- * @file scoped_thread.hpp
+ * @file scope_thread.hpp
  * @brief 作用域线程
  *
  * 此文件提供了作用域线程的实现，支持自动停止和清理。
@@ -24,14 +24,14 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
- * @class scoped_thread
+ * @class scope_thread
  * @brief 作用域线程类
  *
  * 提供自动停止和清理功能，在析构时会自动请求停止并等待线程结束，避免资源泄漏。
  *
  * @note 支持stop_token参数自动传递
  */
-class scoped_thread {
+class scope_thread {
 public:
     using id = thread::id;                                 ///< 线程ID类型
     using native_handle_type = thread::native_handle_type; ///< 原生句柄类型
@@ -75,7 +75,7 @@ public:
      *
      * 创建一个不表示任何线程的scoped_thread对象。
      */
-    scoped_thread() noexcept = default;
+    scope_thread() noexcept = default;
 
     /**
      * @brief 构造函数
@@ -87,26 +87,26 @@ public:
      * 创建新线程并开始执行。如果函数接受stop_token参数，会自动传递。
      */
     template <typename Callable, typename... Args,
-              typename = enable_if_t<!is_same_v<remove_cvref_t<Callable>, scoped_thread>>>
-    explicit scoped_thread(Callable&& func, Args&&... args) :
+              typename = enable_if_t<!is_same_v<remove_cvref_t<Callable>, scope_thread>>>
+    explicit scope_thread(Callable&& func, Args&&... args) :
     thread_{this->create(stop_source_, _NEFORCE forward<Callable>(func), _NEFORCE forward<Args>(args)...)} {}
 
-    scoped_thread(const scoped_thread&) = delete;            ///< 禁止拷贝构造
-    scoped_thread& operator=(const scoped_thread&) = delete; ///< 禁止拷贝赋值
+    scope_thread(const scope_thread&) = delete;            ///< 禁止拷贝构造
+    scope_thread& operator=(const scope_thread&) = delete; ///< 禁止拷贝赋值
 
     /**
      * @brief 移动构造函数
      * @param other 要移动的scoped_thread
      */
-    scoped_thread(scoped_thread&& other) noexcept = default;
+    scope_thread(scope_thread&& other) noexcept = default;
 
     /**
      * @brief 移动赋值运算符
      * @param other 要移动的scoped_thread
      * @return 当前对象的引用
      */
-    scoped_thread& operator=(scoped_thread&& other) noexcept {
-        scoped_thread(move(other)).swap(*this);
+    scope_thread& operator=(scope_thread&& other) noexcept {
+        scope_thread(move(other)).swap(*this);
         return *this;
     }
 
@@ -115,7 +115,7 @@ public:
      *
      * 如果线程可被等待结束，自动请求停止并等待线程结束。
      */
-    ~scoped_thread() {
+    ~scope_thread() {
         if (joinable()) {
             request_stop();
             join();
@@ -126,7 +126,7 @@ public:
      * @brief 交换两个scoped_thread对象
      * @param other 要交换的scoped_thread
      */
-    void swap(scoped_thread& other) noexcept {
+    void swap(scope_thread& other) noexcept {
         _NEFORCE swap(stop_source_, other.stop_source_);
         _NEFORCE swap(thread_, other.thread_);
     }

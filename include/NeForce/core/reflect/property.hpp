@@ -28,13 +28,19 @@ NEFORCE_BEGIN_REFLECT__
  *
  * 用于控制属性在序列化/反序列化中的行为。
  */
-enum property_attr : uint8_t {
+enum property_attr : uint16_t {
     PROP_NONE = 0,           ///< 无注解
     PROP_TRANSIENT = 1 << 0, ///< 序列化时跳过此属性
     PROP_REQUIRED = 1 << 1,  ///< 反序列化时必须存在
     PROP_READ_ONLY = 1 << 2, ///< 仅 getter，无 setter
     PROP_OPTIONAL = 1 << 3,  ///< 反序列化时可缺失
     PROP_VERSIONED = 1 << 4, ///< 启用版本追踪
+
+    PROP_PRIMARY_KEY = 1 << 5, ///< 数据库主键列
+    PROP_AUTO_INC = 1 << 6,    ///< 数据库自增列
+    PROP_UNIQUE = 1 << 7,      ///< 数据库唯一约束
+    PROP_INDEX = 1 << 8,       ///< 数据库普通索引
+    PROP_FOREIGN_KEY = 1 << 9, ///< 数据库外键列
 };
 
 /**
@@ -43,8 +49,8 @@ enum property_attr : uint8_t {
  * @param flag 要检查的标志
  * @return 包含返回 true
  */
-NEFORCE_NODISCARD constexpr bool prop_has_attr(const uint8_t attrs, const property_attr flag) noexcept {
-    return (attrs & static_cast<uint8_t>(flag)) != 0;
+NEFORCE_NODISCARD constexpr bool prop_has_attr(const uint16_t attrs, const property_attr flag) noexcept {
+    return (attrs & static_cast<uint16_t>(flag)) != 0;
 }
 
 /**
@@ -59,13 +65,13 @@ public:
     using setter = function<void(void*, const meta_any&)>; ///< 属性写入器类型
 
 private:
-    string_view name_;          ///< 属性名称
-    reflect::type_id type_id_;  ///< 属性类型ID
-    getter getter_;             ///< 读取器
-    setter setter_;             ///< 写入器
-    uint8_t attrs_ = PROP_NONE; ///< 属性注解
-    uint32_t version_ = 0;      ///< 版本号
-    string notify_signal_name_; ///< 变更通知信号名称（空表示无通知）
+    string_view name_;           ///< 属性名称
+    reflect::type_id type_id_;   ///< 属性类型ID
+    getter getter_;              ///< 读取器
+    setter setter_;              ///< 写入器
+    uint16_t attrs_ = PROP_NONE; ///< 属性注解
+    uint32_t version_ = 0;       ///< 版本号
+    string notify_signal_name_;  ///< 变更通知信号名称（空表示无通知）
 
 public:
     /**
@@ -77,7 +83,7 @@ public:
      * @param attrs 属性注解
      */
     meta_property(string_view name, reflect::type_id type_id, getter getter, setter setter,
-                  const uint8_t attrs = PROP_NONE) :
+                  const uint16_t attrs = PROP_NONE) :
     name_(name),
     type_id_(type_id),
     getter_(move(getter)),
@@ -100,13 +106,13 @@ public:
      * @brief 获取属性注解
      * @return 注解标志组合
      */
-    NEFORCE_NODISCARD uint8_t attributes() const noexcept { return attrs_; }
+    NEFORCE_NODISCARD uint16_t attributes() const noexcept { return attrs_; }
 
     /**
      * @brief 设置属性注解
      * @param attrs 注解标志组合
      */
-    void set_attributes(const uint8_t attrs) noexcept { attrs_ = attrs; }
+    void set_attributes(const uint16_t attrs) noexcept { attrs_ = attrs; }
 
     /**
      * @brief 是否为暂态属性（不参与序列化）
@@ -132,6 +138,31 @@ public:
      * @brief 是否启用版本追踪
      */
     NEFORCE_NODISCARD bool is_versioned() const noexcept { return prop_has_attr(attrs_, PROP_VERSIONED); }
+
+    /**
+     * @brief 是否为主键列
+     */
+    NEFORCE_NODISCARD bool is_primary_key() const noexcept { return prop_has_attr(attrs_, PROP_PRIMARY_KEY); }
+
+    /**
+     * @brief 是否为自增列
+     */
+    NEFORCE_NODISCARD bool is_auto_increment() const noexcept { return prop_has_attr(attrs_, PROP_AUTO_INC); }
+
+    /**
+     * @brief 是否有唯一约束
+     */
+    NEFORCE_NODISCARD bool is_unique() const noexcept { return prop_has_attr(attrs_, PROP_UNIQUE); }
+
+    /**
+     * @brief 是否有索引
+     */
+    NEFORCE_NODISCARD bool is_index() const noexcept { return prop_has_attr(attrs_, PROP_INDEX); }
+
+    /**
+     * @brief 是否为外键列
+     */
+    NEFORCE_NODISCARD bool is_foreign_key() const noexcept { return prop_has_attr(attrs_, PROP_FOREIGN_KEY); }
 
     /**
      * @brief 设置变更通知信号名称

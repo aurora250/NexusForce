@@ -8,6 +8,7 @@
  * 此文件提供了跨进程命名互斥锁
  */
 
+#include "NeForce/core/async/mutex.hpp"
 #include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -29,7 +30,7 @@ NEFORCE_BEGIN_NAMESPACE__
  *
  * 提供独立的跨进程命名互斥锁，可与共享内存解耦使用。
  */
-class NEFORCE_API named_mutex {
+class NEFORCE_API named_mutex : public mutex_base {
 public:
     using native_handle_type = _NEFORCE native_handle_type;
 

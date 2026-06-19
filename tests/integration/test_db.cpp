@@ -2,7 +2,7 @@
 #include <NeForce/db/db_config.hpp>
 #include <NeForce/db/db_interface.hpp>
 #include <NeForce/db/sql_builder.hpp>
-#include <NeForce/db/transaction_guard.hpp>
+#include <NeForce/db/scope_transaction.hpp>
 #include <NeForce/core/file/json/json_parser.hpp>
 #include <NeForce/core/system/console.hpp>
 #include <NeForce/core/file/file.hpp>
@@ -207,7 +207,7 @@ TEST_F(SqliteIntegrationTest, TransactionBeginRollback) {
 TEST_F(SqliteIntegrationTest, TransactionGuardCommits) {
     create_test_table();
     {
-        transaction_guard tx{conn};
+        scope_transaction tx{conn};
         ignore = conn.update("INSERT INTO users (name, age) VALUES ('GuardCommit', 99)");
         tx.commit();
     }
@@ -218,7 +218,7 @@ TEST_F(SqliteIntegrationTest, TransactionGuardCommits) {
 TEST_F(SqliteIntegrationTest, TransactionGuardRollsBackOnScopeExit) {
     create_test_table();
     {
-        transaction_guard tx{conn};
+        scope_transaction tx{conn};
         ignore = conn.update("INSERT INTO users (name, age) VALUES ('GuardNoCommit', 99)");
     }
     auto result = conn.query("SELECT * FROM users WHERE name = 'GuardNoCommit'");
@@ -471,12 +471,12 @@ TEST_F(MysqlIntegrationTest, TransactionBeginCommitRollback) {
 TEST_F(MysqlIntegrationTest, TransactionGuardRAII) {
     create_test_table();
     {
-        transaction_guard tx{conn};
+        scope_transaction tx{conn};
         ignore = conn.update("INSERT INTO test_users (name, age) VALUES ('GdCommit', 99)");
         tx.commit();
     }
     {
-        transaction_guard tx{conn};
+        scope_transaction tx{conn};
         ignore = conn.update("INSERT INTO test_users (name, age) VALUES ('GdRollback', 99)");
     }
     auto result = conn.query("SELECT name FROM test_users WHERE name = 'GdCommit'");
@@ -635,12 +635,12 @@ TEST_F(PgsqlIntegrationTest, TransactionBeginCommitRollback) {
 TEST_F(PgsqlIntegrationTest, TransactionGuardRAII) {
     create_test_table();
     {
-        transaction_guard tx{conn};
+        scope_transaction tx{conn};
         conn.update("INSERT INTO test_users (name, age) VALUES ('GdCommit', 99)");
         tx.commit();
     }
     {
-        transaction_guard tx{conn};
+        scope_transaction tx{conn};
         conn.update("INSERT INTO test_users (name, age) VALUES ('GdRollback', 99)");
     }
     auto result = conn.query("SELECT name FROM test_users WHERE name = 'GdCommit'");

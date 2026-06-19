@@ -3,7 +3,7 @@
 #include <NeForce/core/async/generator.hpp>
 #include <NeForce/core/async/hazard_ptr.hpp>
 #include <NeForce/core/async/latch.hpp>
-#include <NeForce/core/async/scoped_thread.hpp>
+#include <NeForce/core/async/scope_thread.hpp>
 #include <NeForce/core/async/signals.hpp>
 #include <NeForce/core/async/thread_pool.hpp>
 #include <NeForce/core/async/thread_tracker.hpp>
@@ -1330,24 +1330,24 @@ TEST(StopCallback, RegisterAfterStopButWithNewSource) {
     }
 }
 
-TEST(ScopedThread, DefaultConstructor) {
-    scoped_thread st;
+TEST(ScopeThread, DefaultConstructor) {
+    scope_thread st;
     EXPECT_FALSE(st.joinable());
 }
 
-TEST(ScopedThread, ConstructorStartsThread) {
+TEST(ScopeThread, ConstructorStartsThread) {
     atomic<bool> ran{false};
     {
-        scoped_thread st([&ran] { ran.store(true); });
+        scope_thread st([&ran] { ran.store(true); });
         EXPECT_TRUE(st.joinable());
     }
     EXPECT_TRUE(ran.load());
 }
 
-TEST(ScopedThread, DestructorJoinsAutomatically) {
+TEST(ScopeThread, DestructorJoinsAutomatically) {
     atomic<bool> thread_finished{false};
     {
-        scoped_thread st([&thread_finished] {
+        scope_thread st([&thread_finished] {
             this_thread::sleep_for(milliseconds(20));
             thread_finished.store(true);
         });
@@ -1355,10 +1355,10 @@ TEST(ScopedThread, DestructorJoinsAutomatically) {
     EXPECT_TRUE(thread_finished.load());
 }
 
-TEST(ScopedThread, StopTokenPassedToCallable) {
+TEST(ScopeThread, StopTokenPassedToCallable) {
     atomic<bool> stop_requested{false};
     {
-        scoped_thread st([&stop_requested](stop_token token) {
+        scope_thread st([&stop_requested](stop_token token) {
             while (!token.stop_requested()) {
                 this_thread::sleep_for(milliseconds(1));
             }
@@ -1370,30 +1370,30 @@ TEST(ScopedThread, StopTokenPassedToCallable) {
     EXPECT_TRUE(stop_requested.load());
 }
 
-TEST(ScopedThread, CallableWithoutStopToken) {
+TEST(ScopeThread, CallableWithoutStopToken) {
     atomic<int> val{0};
     {
-        scoped_thread st([&val] { val.store(42); });
+        scope_thread st([&val] { val.store(42); });
     }
     EXPECT_EQ(val.load(), 42);
 }
 
-TEST(ScopedThread, MoveConstructor) {
+TEST(ScopeThread, MoveConstructor) {
     atomic<bool> ran{false};
     {
-        scoped_thread st1([&ran] { ran.store(true); });
-        scoped_thread st2(move(st1));
+        scope_thread st1([&ran] { ran.store(true); });
+        scope_thread st2(move(st1));
         EXPECT_FALSE(st1.joinable());
         EXPECT_TRUE(st2.joinable());
     }
     EXPECT_TRUE(ran.load());
 }
 
-TEST(ScopedThread, MoveAssignment) {
+TEST(ScopeThread, MoveAssignment) {
     atomic<bool> ran{false};
     {
-        scoped_thread st1([&ran] { ran.store(true); });
-        scoped_thread st2;
+        scope_thread st1([&ran] { ran.store(true); });
+        scope_thread st2;
         st2 = move(st1);
         EXPECT_FALSE(st1.joinable());
         EXPECT_TRUE(st2.joinable());
@@ -1401,21 +1401,21 @@ TEST(ScopedThread, MoveAssignment) {
     EXPECT_TRUE(ran.load());
 }
 
-TEST(ScopedThread, Swap) {
+TEST(ScopeThread, Swap) {
     atomic<bool> ran1{false}, ran2{false};
     {
-        scoped_thread st1([&ran1] { ran1.store(true); });
-        scoped_thread st2([&ran2] { ran2.store(true); });
+        scope_thread st1([&ran1] { ran1.store(true); });
+        scope_thread st2([&ran2] { ran2.store(true); });
         st1.swap(st2);
     }
     EXPECT_TRUE(ran1.load());
     EXPECT_TRUE(ran2.load());
 }
 
-TEST(ScopedThread, Detach) {
+TEST(ScopeThread, Detach) {
     atomic<bool> ran{false};
     {
-        scoped_thread st([&ran] {
+        scope_thread st([&ran] {
             this_thread::sleep_for(milliseconds(50));
             ran.store(true);
         });
@@ -1426,40 +1426,40 @@ TEST(ScopedThread, Detach) {
     EXPECT_TRUE(ran.load());
 }
 
-TEST(ScopedThread, GetStopSource) {
-    scoped_thread st([] {});
+TEST(ScopeThread, GetStopSource) {
+    scope_thread st([] {});
     stop_source src = st.get_stop_source();
     EXPECT_TRUE(src.stop_possible());
     st.request_stop();
     EXPECT_TRUE(src.stop_requested());
 }
 
-TEST(ScopedThread, GetStopToken) {
-    scoped_thread st([] {});
+TEST(ScopeThread, GetStopToken) {
+    scope_thread st([] {});
     stop_token token = st.get_stop_token();
     EXPECT_TRUE(token.stop_possible());
     st.request_stop();
     EXPECT_TRUE(token.stop_requested());
 }
 
-TEST(ScopedThread, GetId) {
-    scoped_thread st;
+TEST(ScopeThread, GetId) {
+    scope_thread st;
     EXPECT_EQ(st.get_id(), thread::id{});
-    scoped_thread st2([] {});
+    scope_thread st2([] {});
     EXPECT_NE(st2.get_id(), thread::id{});
     st2.join();
 }
 
-TEST(ScopedThread, NativeHandle) {
-    scoped_thread st([] {});
+TEST(ScopeThread, NativeHandle) {
+    scope_thread st([] {});
     EXPECT_TRUE(st.native_handle() != 0);
     st.join();
 }
 
-TEST(ScopedThread, RequestStopManually) {
+TEST(ScopeThread, RequestStopManually) {
     atomic<bool> stop_seen{false};
     {
-        scoped_thread st([&stop_seen](stop_token token) {
+        scope_thread st([&stop_seen](stop_token token) {
             while (!token.stop_requested()) {
                 this_thread::sleep_for(milliseconds(1));
             }
@@ -1471,7 +1471,7 @@ TEST(ScopedThread, RequestStopManually) {
     EXPECT_TRUE(stop_seen.load());
 }
 
-TEST(ScopedThread, MemberFunctionWithStopToken) {
+TEST(ScopeThread, MemberFunctionWithStopToken) {
     struct worker {
         void run(stop_token token, atomic<bool>* flag) {
             while (!token.stop_requested()) {
@@ -1483,7 +1483,7 @@ TEST(ScopedThread, MemberFunctionWithStopToken) {
     atomic<bool> completed{false};
     worker w;
     {
-        scoped_thread st(&worker::run, &w, &completed);
+        scope_thread st(&worker::run, &w, &completed);
         st.request_stop();
     }
     EXPECT_TRUE(completed.load());
@@ -2285,7 +2285,7 @@ TEST(VirtualThreadTask, MoveAssignToNonEmpty) {
     EXPECT_EQ(task2.get_result(), 42);
 }
 
-TEST(VirtualThreadTask, MoveAssignToNonEmptyWithYield) { // may block
+TEST(VirtualThreadTask, MoveAssignToNonEmptyWithYield) { // may block in Windows
     auto task1 = virtual_thread::start([]() -> virtual_thread_task<int> {
         co_await virtual_thread::yield();
         co_return 77;
@@ -2390,11 +2390,11 @@ TEST(SignalTest, ConnectionDisconnect) {
     EXPECT_EQ(count, 1);
 }
 
-TEST(SignalTest, ScopedConnection) {
+TEST(SignalTest, ScopeConnection) {
     neforce::signal<int> sig;
     int count = 0;
     {
-        scoped_connection sc{sig.connect([&count](int) { ++count; })};
+        scope_connection sc{sig.connect([&count](int) { ++count; })};
         sig.emit(1);
         EXPECT_EQ(count, 1);
     }

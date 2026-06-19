@@ -1,10 +1,15 @@
+#include <NeForce/core/async/call_once.hpp>
+#include <NeForce/core/reflect/reflect.hpp>
 #include <NeForce/db/db_config.hpp>
 #include <NeForce/db/db_interface.hpp>
 #include <NeForce/db/sql_builder.hpp>
 #include <NeForce/db/sql_connect_base.hpp>
-#include <NeForce/db/transaction_guard.hpp>
+#include <NeForce/db/sql_mapper.hpp>
+#include <NeForce/db/repository.hpp>
+#include <NeForce/db/scope_transaction.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
+using namespace neforce::reflect;
 
 class SqlBuilderTest : public ::testing::Test {
 protected:
@@ -1291,30 +1296,30 @@ struct MockTransaction {
     void rollback() { ++rollback_calls; }
 };
 
-class TransactionGuardTest : public ::testing::Test {
+class ScopeTransactionTest : public ::testing::Test {
 protected:
     MockTransaction mock;
 };
 
-TEST_F(TransactionGuardTest, ConstructorCallsBegin) {
-    transaction_guard tx{mock};
+TEST_F(ScopeTransactionTest, ConstructorCallsBegin) {
+    scope_transaction tx{mock};
     EXPECT_EQ(mock.begin_calls, 1);
     EXPECT_EQ(mock.commit_calls, 0);
     EXPECT_EQ(mock.rollback_calls, 0);
 }
 
-TEST_F(TransactionGuardTest, DestructorRollsBackWhenNotCommitted) {
+TEST_F(ScopeTransactionTest, DestructorRollsBackWhenNotCommitted) {
     {
-        transaction_guard tx{mock};
+        scope_transaction tx{mock};
         EXPECT_EQ(mock.begin_calls, 1);
     }
     EXPECT_EQ(mock.rollback_calls, 1);
     EXPECT_EQ(mock.commit_calls, 0);
 }
 
-TEST_F(TransactionGuardTest, CommitCallsCommitAndPreventsRollback) {
+TEST_F(ScopeTransactionTest, CommitCallsCommitAndPreventsRollback) {
     {
-        transaction_guard tx{mock};
+        scope_transaction tx{mock};
         tx.commit();
         EXPECT_EQ(mock.commit_calls, 1);
         EXPECT_TRUE(tx.committed());
@@ -1323,26 +1328,26 @@ TEST_F(TransactionGuardTest, CommitCallsCommitAndPreventsRollback) {
     EXPECT_EQ(mock.commit_calls, 1);
 }
 
-TEST_F(TransactionGuardTest, DoubleCommitIsIdempotent) {
-    transaction_guard tx{mock};
+TEST_F(ScopeTransactionTest, DoubleCommitIsIdempotent) {
+    scope_transaction tx{mock};
     tx.commit();
     tx.commit();
     EXPECT_EQ(mock.commit_calls, 1);
 }
 
-TEST_F(TransactionGuardTest, CommittedReturnsFalseBeforeCommit) {
-    transaction_guard tx{mock};
+TEST_F(ScopeTransactionTest, CommittedReturnsFalseBeforeCommit) {
+    scope_transaction tx{mock};
     EXPECT_FALSE(tx.committed());
     tx.commit();
     EXPECT_TRUE(tx.committed());
 }
 
-TEST_F(TransactionGuardTest, MoveConstructorTransfersOwnership) {
+TEST_F(ScopeTransactionTest, MoveConstructorTransfersOwnership) {
     {
-        transaction_guard tx1{mock};
+        scope_transaction tx1{mock};
         EXPECT_EQ(mock.begin_calls, 1);
 
-        transaction_guard tx2{move(tx1)};
+        scope_transaction tx2{move(tx1)};
         EXPECT_EQ(mock.begin_calls, 1);
         EXPECT_EQ(mock.commit_calls, 0);
         EXPECT_EQ(mock.rollback_calls, 0);
@@ -1350,11 +1355,11 @@ TEST_F(TransactionGuardTest, MoveConstructorTransfersOwnership) {
     EXPECT_EQ(mock.rollback_calls, 1);
 }
 
-TEST_F(TransactionGuardTest, MoveAssignmentRollsBackCurrentAndTransfers) {
+TEST_F(ScopeTransactionTest, MoveAssignmentRollsBackCurrentAndTransfers) {
     MockTransaction mock2;
     {
-        transaction_guard tx1{mock};
-        transaction_guard tx2{mock2};
+        scope_transaction tx1{mock};
+        scope_transaction tx2{mock2};
         EXPECT_EQ(mock.begin_calls, 1);
         EXPECT_EQ(mock2.begin_calls, 1);
 
@@ -1365,23 +1370,23 @@ TEST_F(TransactionGuardTest, MoveAssignmentRollsBackCurrentAndTransfers) {
     EXPECT_EQ(mock.rollback_calls, 1);
 }
 
-TEST_F(TransactionGuardTest, MovedFromDoesNotRollback) {
-    transaction_guard tx1{mock};
-    transaction_guard tx2{move(tx1)};
+TEST_F(ScopeTransactionTest, MovedFromDoesNotRollback) {
+    scope_transaction tx1{mock};
+    scope_transaction tx2{move(tx1)};
     EXPECT_EQ(mock.rollback_calls, 0);
 }
 
-TEST_F(TransactionGuardTest, MakeTransactionCreatesGuard) {
+TEST_F(ScopeTransactionTest, MakeTransactionCreatesGuard) {
     auto tx = make_transaction(mock);
     EXPECT_EQ(mock.begin_calls, 1);
     tx.commit();
     EXPECT_TRUE(tx.committed());
 }
 
-TEST_F(TransactionGuardTest, NoBeginOnMovedFrom) {
-    transaction_guard tx1{mock};
+TEST_F(ScopeTransactionTest, NoBeginOnMovedFrom) {
+    scope_transaction tx1{mock};
     EXPECT_EQ(mock.begin_calls, 1);
-    transaction_guard tx2{move(tx1)};
+    scope_transaction tx2{move(tx1)};
     EXPECT_EQ(mock.begin_calls, 1);
 }
 
@@ -1815,3 +1820,994 @@ TEST_F(SqliteFactoryTest, CreateConnectReturnsValidConnection) {
     delete conn;
 }
 #endif
+
+TEST_F(SqlBuilderTest, SetDialectDefaultIsGeneric) { EXPECT_EQ(builder.dialect(), sql_dialect::GENERIC); }
+
+TEST_F(SqlBuilderTest, SetDialectAndGet) {
+    builder.set_dialect(sql_dialect::POSTGRESQL);
+    EXPECT_EQ(builder.dialect(), sql_dialect::POSTGRESQL);
+}
+
+TEST_F(SqlBuilderTest, SetDialectReturnsSelf) {
+    auto& ref = builder.set_dialect(sql_dialect::MYSQL);
+    EXPECT_EQ(&ref, &builder);
+}
+
+TEST_F(SqlBuilderTest, DialectGenericPlaceholderQmark) {
+    builder.set_dialect(sql_dialect::GENERIC);
+    EXPECT_EQ(builder.placeholder(1), string("?"));
+    EXPECT_EQ(builder.placeholder(5), string("?"));
+}
+
+TEST_F(SqlBuilderTest, DialectMysqlPlaceholderQmark) {
+    builder.set_dialect(sql_dialect::MYSQL);
+    EXPECT_EQ(builder.placeholder(1), string("?"));
+    EXPECT_EQ(builder.placeholder(3), string("?"));
+}
+
+TEST_F(SqlBuilderTest, DialectSqlitePlaceholderQmark) {
+    builder.set_dialect(sql_dialect::SQLITE);
+    EXPECT_EQ(builder.placeholder(1), string("?"));
+}
+
+TEST_F(SqlBuilderTest, DialectMssqlPlaceholderQmark) {
+    builder.set_dialect(sql_dialect::MSSQL);
+    EXPECT_EQ(builder.placeholder(1), string("?"));
+}
+
+TEST_F(SqlBuilderTest, DialectPostgresqlPlaceholderDollarN) {
+    builder.set_dialect(sql_dialect::POSTGRESQL);
+    EXPECT_EQ(builder.placeholder(1), string("$1"));
+    EXPECT_EQ(builder.placeholder(2), string("$2"));
+    EXPECT_EQ(builder.placeholder(5), string("$5"));
+}
+
+TEST_F(SqlBuilderTest, DialectOraclePlaceholderColonN) {
+    builder.set_dialect(sql_dialect::ORACLE);
+    EXPECT_EQ(builder.placeholder(1), string(":1"));
+    EXPECT_EQ(builder.placeholder(2), string(":2"));
+    EXPECT_EQ(builder.placeholder(10), string(":10"));
+}
+
+TEST_F(SqlBuilderTest, NextPlaceholderAutoIncrement) {
+    builder.set_dialect(sql_dialect::GENERIC);
+    EXPECT_EQ(builder.next_placeholder(), string("?"));
+    EXPECT_EQ(builder.next_placeholder(), string("?"));
+    EXPECT_EQ(builder.next_placeholder(), string("?"));
+    EXPECT_EQ(builder.param_count(), 3u);
+}
+
+TEST_F(SqlBuilderTest, NextPlaceholderPgIncrement) {
+    builder.set_dialect(sql_dialect::POSTGRESQL);
+    EXPECT_EQ(builder.next_placeholder(), string("$1"));
+    EXPECT_EQ(builder.next_placeholder(), string("$2"));
+    EXPECT_EQ(builder.next_placeholder(), string("$3"));
+    EXPECT_EQ(builder.param_count(), 3u);
+}
+
+TEST_F(SqlBuilderTest, NextPlaceholderOracleIncrement) {
+    builder.set_dialect(sql_dialect::ORACLE);
+    EXPECT_EQ(builder.next_placeholder(), string(":1"));
+    EXPECT_EQ(builder.next_placeholder(), string(":2"));
+    EXPECT_EQ(builder.next_placeholder(), string(":3"));
+    EXPECT_EQ(builder.param_count(), 3u);
+}
+
+TEST_F(SqlBuilderTest, ParamCountDefaultZero) { EXPECT_EQ(builder.param_count(), 0u); }
+
+TEST_F(SqlBuilderTest, ParamCountAfterInsertInto) {
+    builder.set_dialect(sql_dialect::GENERIC);
+    builder.insert_into("users", {"name", "email", "age"});
+    EXPECT_EQ(builder.param_count(), 3u);
+}
+
+TEST_F(SqlBuilderTest, ParamCountAfterInsertIntoPg) {
+    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.insert_into("users", {"name", "email"});
+    EXPECT_EQ(builder.param_count(), 2u);
+}
+
+TEST_F(SqlBuilderTest, ParamCountAfterColumns) {
+    builder.set_dialect(sql_dialect::GENERIC);
+    builder.insert_into("users");
+    builder.columns({"name", "email", "age", "status"});
+    EXPECT_EQ(builder.param_count(), 4u);
+}
+
+TEST_F(SqlBuilderTest, ParamCountAfterSetParam) {
+    builder.set_dialect(sql_dialect::GENERIC);
+    builder.update("users");
+    builder.set_param("name");
+    builder.set_param("email");
+    builder.set_param("age");
+    EXPECT_EQ(builder.param_count(), 3u);
+}
+
+TEST_F(SqlBuilderTest, ParamCountAfterNextPlaceholder) {
+    builder.set_dialect(sql_dialect::GENERIC);
+    builder.update("users");
+    builder.set_param("name");
+    builder.set_param("email");
+    builder.where_eq("id", builder.next_placeholder());
+    EXPECT_EQ(builder.param_count(), 3u);
+}
+
+TEST_F(SqlBuilderTest, ParamCountResetsToZero) {
+    builder.insert_into("users", {"name", "email"});
+    EXPECT_GT(builder.param_count(), 0u);
+    builder.reset();
+    EXPECT_EQ(builder.param_count(), 0u);
+}
+
+TEST_F(SqlBuilderTest, InsertIntoDialectPgGeneratesDollarN) {
+    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.insert_into("users", {"name", "email", "age"});
+    string sql = builder.build();
+    EXPECT_NE(sql.find("$1"), string::npos);
+    EXPECT_NE(sql.find("$2"), string::npos);
+    EXPECT_NE(sql.find("$3"), string::npos);
+    EXPECT_EQ(sql.find("?"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, InsertIntoDialectOracleGeneratesColonN) {
+    builder.set_dialect(sql_dialect::ORACLE);
+    builder.insert_into("users", {"name", "email"});
+    string sql = builder.build();
+    EXPECT_NE(sql.find(":1"), string::npos);
+    EXPECT_NE(sql.find(":2"), string::npos);
+    EXPECT_EQ(sql.find("?"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, InsertIntoDialectGenericGeneratesQmark) {
+    builder.set_dialect(sql_dialect::GENERIC);
+    builder.insert_into("users", {"name", "email"});
+    string sql = builder.build();
+    EXPECT_EQ(sql, string("INSERT INTO users (name, email) VALUES (?, ?);"));
+}
+
+TEST_F(SqlBuilderTest, UpdateSetParamDialectAware) {
+    builder.set_dialect(sql_dialect::GENERIC);
+    builder.update("users");
+    builder.set_param("name");
+    builder.set_param("email");
+    builder.where_eq("id", builder.next_placeholder());
+    string sql = builder.build();
+    EXPECT_EQ(sql, string("UPDATE users SET name = ?, email = ? WHERE id = ?;"));
+}
+
+TEST_F(SqlBuilderTest, UpdateSetParamPg) {
+    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.update("users");
+    builder.set_param("name");
+    builder.set_param("email");
+    builder.where_eq("id", builder.next_placeholder());
+    string sql = builder.build();
+    EXPECT_NE(sql.find("name = $1"), string::npos);
+    EXPECT_NE(sql.find("email = $2"), string::npos);
+    EXPECT_NE(sql.find("id = $3"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, UpdateSetParamOracle) {
+    builder.set_dialect(sql_dialect::ORACLE);
+    builder.update("users");
+    builder.set_param("name");
+    builder.set_param("email");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("name = :1"), string::npos);
+    EXPECT_NE(sql.find("email = :2"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, DeleteWithPlaceholderDialectAware) {
+    builder.set_dialect(sql_dialect::GENERIC);
+    builder.delete_from("users");
+    builder.where_eq("id", builder.placeholder(1));
+    EXPECT_EQ(builder.build(), string("DELETE FROM users WHERE id = ?;"));
+}
+
+TEST_F(SqlBuilderTest, DeleteWithPlaceholderPg) {
+    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.delete_from("users");
+    builder.where_eq("id", builder.placeholder(1));
+    string sql = builder.build();
+    EXPECT_NE(sql.find("id = $1"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, DeleteWithPlaceholderOracle) {
+    builder.set_dialect(sql_dialect::ORACLE);
+    builder.delete_from("users");
+    builder.where_eq("id", builder.placeholder(1));
+    string sql = builder.build();
+    EXPECT_NE(sql.find("id = :1"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, DialectCopyConstructorPreservesDialect) {
+    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.insert_into("users", {"name"});
+    sql_builder copy(builder);
+    EXPECT_EQ(copy.dialect(), sql_dialect::POSTGRESQL);
+    EXPECT_EQ(copy.param_count(), builder.param_count());
+    EXPECT_NE(copy.build().find("$1"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, DialectCopyAssignmentPreservesDialect) {
+    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.insert_into("users", {"name"});
+    sql_builder copy;
+    copy = builder;
+    EXPECT_EQ(copy.dialect(), sql_dialect::POSTGRESQL);
+    EXPECT_EQ(copy.param_count(), builder.param_count());
+}
+
+TEST_F(SqlBuilderTest, DialectMoveConstructorPreservesDialect) {
+    builder.set_dialect(sql_dialect::ORACLE);
+    builder.insert_into("users", {"name"});
+    sql_builder moved(move(builder));
+    EXPECT_EQ(moved.dialect(), sql_dialect::ORACLE);
+}
+
+TEST_F(SqlBuilderTest, DialectMoveAssignmentPreservesDialect) {
+    builder.set_dialect(sql_dialect::ORACLE);
+    builder.insert_into("users", {"name"});
+    sql_builder moved;
+    moved = move(builder);
+    EXPECT_EQ(moved.dialect(), sql_dialect::ORACLE);
+}
+
+TEST_F(SqlBuilderTest, ResetClearsParamSequence) {
+    builder.set_dialect(sql_dialect::GENERIC);
+    builder.update("users");
+    builder.set_param("a");
+    builder.set_param("b");
+    builder.set_param("c");
+    EXPECT_EQ(builder.param_count(), 3u);
+    builder.reset();
+    EXPECT_EQ(builder.param_count(), 0u);
+}
+
+TEST_F(SqlBuilderTest, ColumnsAutoFillDialectPlaceholders) {
+    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.insert_into("users");
+    builder.columns({"name", "email"});
+    string sql = builder.build();
+    EXPECT_NE(sql.find("$1"), string::npos);
+    EXPECT_NE(sql.find("$2"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, ColumnsDoesNotOverwriteExistingPlaceholders) {
+    builder.set_dialect(sql_dialect::GENERIC);
+    builder.insert_into("users");
+    builder.columns({"a"});
+    builder.columns({"a", "b"});
+    string sql = builder.build();
+    EXPECT_NE(sql.find("?"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, CreateTableAutoIncrementGeneric) {
+    builder.set_dialect(sql_dialect::GENERIC);
+    builder.create_table("users").column_auto_increment("id", "INTEGER").column("name", "TEXT");
+    string sql = builder.build();
+    EXPECT_NE(sql.find("AUTO_INCREMENT"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, CreateTableAutoIncrementPostgresql) {
+    builder.set_dialect(sql_dialect::POSTGRESQL);
+    builder.create_table("users").column_auto_increment("id", "INTEGER").column("name", "TEXT");
+    string sql = builder.build();
+    EXPECT_EQ(sql.find("AUTO_INCREMENT"), string::npos);
+    EXPECT_NE(sql.find("SERIAL"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, CreateTableAutoIncrementMssql) {
+    builder.set_dialect(sql_dialect::MSSQL);
+    builder.create_table("users").column_auto_increment("id", "INTEGER").column("name", "TEXT");
+    string sql = builder.build();
+    EXPECT_EQ(sql.find("AUTO_INCREMENT"), string::npos);
+    EXPECT_NE(sql.find("IDENTITY(1,1)"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, CreateTableAutoIncrementOracle) {
+    builder.set_dialect(sql_dialect::ORACLE);
+    builder.create_table("users").column_auto_increment("id", "INTEGER").column("name", "TEXT");
+    string sql = builder.build();
+    EXPECT_EQ(sql.find("AUTO_INCREMENT"), string::npos);
+    EXPECT_NE(sql.find("GENERATED"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, SelectLimitGenericUsesLimit) {
+    builder.set_dialect(sql_dialect::GENERIC);
+    builder.select_all().from("users").limit(10).offset(20);
+    string sql = builder.build();
+    EXPECT_NE(sql.find("LIMIT 10"), string::npos);
+    EXPECT_NE(sql.find("OFFSET 20"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, SelectLimitOracleUsesFetchFirst) {
+    builder.set_dialect(sql_dialect::ORACLE);
+    builder.select_all().from("users").limit(10);
+    string sql = builder.build();
+    EXPECT_EQ(sql.find("LIMIT"), string::npos);
+    EXPECT_NE(sql.find("FETCH FIRST 10 ROWS ONLY"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, SelectLimitOracleWithOffset) {
+    builder.set_dialect(sql_dialect::ORACLE);
+    builder.select_all().from("users").limit(10).offset(20);
+    string sql = builder.build();
+    EXPECT_EQ(sql.find("LIMIT"), string::npos);
+    EXPECT_NE(sql.find("OFFSET 20 ROWS"), string::npos);
+    EXPECT_NE(sql.find("FETCH FIRST 10 ROWS ONLY"), string::npos);
+}
+
+TEST_F(SqlBuilderTest, SelectPageOracleDoesNotUseLimit) {
+    builder.set_dialect(sql_dialect::ORACLE);
+    builder.select_all().from("users").page(3, 10);
+    string sql = builder.build();
+    EXPECT_EQ(sql.find("LIMIT"), string::npos);
+    EXPECT_NE(sql.find("FETCH FIRST 10 ROWS ONLY"), string::npos);
+    EXPECT_NE(sql.find("OFFSET 20 ROWS"), string::npos);
+}
+
+TEST(PropertyAttr, PrimaryKeyFlag) {
+    constexpr auto attrs = PROP_PRIMARY_KEY;
+    EXPECT_TRUE(prop_has_attr(attrs, PROP_PRIMARY_KEY));
+    EXPECT_FALSE(prop_has_attr(attrs, PROP_AUTO_INC));
+    EXPECT_FALSE(prop_has_attr(attrs, PROP_UNIQUE));
+}
+
+TEST(PropertyAttr, AutoIncrementFlag) {
+    constexpr auto attrs = PROP_AUTO_INC;
+    EXPECT_TRUE(prop_has_attr(attrs, PROP_AUTO_INC));
+    EXPECT_FALSE(prop_has_attr(attrs, PROP_PRIMARY_KEY));
+}
+
+TEST(PropertyAttr, UniqueFlag) {
+    constexpr auto attrs = PROP_UNIQUE;
+    EXPECT_TRUE(prop_has_attr(attrs, PROP_UNIQUE));
+}
+
+TEST(PropertyAttr, IndexFlag) {
+    constexpr auto attrs = PROP_INDEX;
+    EXPECT_TRUE(prop_has_attr(attrs, PROP_INDEX));
+}
+
+TEST(PropertyAttr, ForeignKeyFlag) {
+    constexpr auto attrs = PROP_FOREIGN_KEY;
+    EXPECT_TRUE(prop_has_attr(attrs, PROP_FOREIGN_KEY));
+}
+
+TEST(PropertyAttr, CombinedDbFlags) {
+    constexpr auto attrs = PROP_PRIMARY_KEY | PROP_AUTO_INC;
+    EXPECT_TRUE(prop_has_attr(attrs, PROP_PRIMARY_KEY));
+    EXPECT_TRUE(prop_has_attr(attrs, PROP_AUTO_INC));
+    EXPECT_FALSE(prop_has_attr(attrs, PROP_UNIQUE));
+}
+
+TEST(PropertyAttr, DbFlagsDontConflictWithSerializeFlags) {
+    constexpr auto attrs = PROP_PRIMARY_KEY | PROP_REQUIRED | PROP_TRANSIENT;
+    EXPECT_TRUE(prop_has_attr(attrs, PROP_PRIMARY_KEY));
+    EXPECT_TRUE(prop_has_attr(attrs, PROP_REQUIRED));
+    EXPECT_TRUE(prop_has_attr(attrs, PROP_TRANSIENT));
+}
+
+TEST(PropertyAttr, MetaPropertyIsPrimaryKey) {
+    meta_property prop("id", type_id_for<int>(), nullptr, nullptr, PROP_PRIMARY_KEY);
+    EXPECT_TRUE(prop.is_primary_key());
+    EXPECT_FALSE(prop.is_auto_increment());
+    EXPECT_FALSE(prop.is_unique());
+}
+
+TEST(PropertyAttr, MetaPropertyIsAutoIncrement) {
+    meta_property prop("id", type_id_for<int>(), nullptr, nullptr, PROP_PRIMARY_KEY | PROP_AUTO_INC);
+    EXPECT_TRUE(prop.is_primary_key());
+    EXPECT_TRUE(prop.is_auto_increment());
+}
+
+TEST(PropertyAttr, MetaPropertyIsUnique) {
+    meta_property prop("email", type_id_for<string>(), nullptr, nullptr, PROP_UNIQUE);
+    EXPECT_TRUE(prop.is_unique());
+    EXPECT_FALSE(prop.is_primary_key());
+}
+
+TEST(PropertyAttr, MetaPropertyIsIndex) {
+    meta_property prop("name", type_id_for<string>(), nullptr, nullptr, PROP_INDEX);
+    EXPECT_TRUE(prop.is_index());
+}
+
+TEST(PropertyAttr, MetaPropertyIsForeignKey) {
+    meta_property prop("user_id", type_id_for<int>(), nullptr, nullptr, PROP_FOREIGN_KEY);
+    EXPECT_TRUE(prop.is_foreign_key());
+}
+
+TEST(CppTypeToSqlType, IntIsInteger) { EXPECT_EQ(cpp_type_to_sql_type(type_id_for<int>()), string("INTEGER")); }
+
+TEST(CppTypeToSqlType, ShortIsSmallint) { EXPECT_EQ(cpp_type_to_sql_type(type_id_for<short>()), string("SMALLINT")); }
+
+TEST(CppTypeToSqlType, Int64IsBigint) { EXPECT_EQ(cpp_type_to_sql_type(type_id_for<int64_t>()), string("BIGINT")); }
+
+TEST(CppTypeToSqlType, DoubleIsDoublePrecision) {
+    EXPECT_EQ(cpp_type_to_sql_type(type_id_for<double>()), string("DOUBLE PRECISION"));
+}
+
+TEST(CppTypeToSqlType, FloatIsReal) { EXPECT_EQ(cpp_type_to_sql_type(type_id_for<float>()), string("REAL")); }
+
+TEST(CppTypeToSqlType, BoolIsBoolean) { EXPECT_EQ(cpp_type_to_sql_type(type_id_for<bool>()), string("BOOLEAN")); }
+
+TEST(CppTypeToSqlType, StringIsText) { EXPECT_EQ(cpp_type_to_sql_type(type_id_for<string>()), string("TEXT")); }
+
+TEST(CppTypeToSqlType, LongIsBigint) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    EXPECT_EQ(cpp_type_to_sql_type(type_id_for<long>()), string("INTEGER"));
+#else
+    EXPECT_EQ(cpp_type_to_sql_type(type_id_for<long>()), string("BIGINT"));
+#endif
+}
+
+TEST(CppTypeToSqlType, UnsignedIntIsInteger) {
+    EXPECT_EQ(cpp_type_to_sql_type(type_id_for<unsigned int>()), string("INTEGER"));
+}
+
+TEST(MetaAnyToSqlLiteral, NullWhenEmpty) {
+    meta_any empty;
+    EXPECT_EQ(meta_any_to_sql_literal(empty), string("NULL"));
+}
+
+TEST(MetaAnyToSqlLiteral, IntLiteral) {
+    meta_any val(42);
+    EXPECT_EQ(meta_any_to_sql_literal(val), string("42"));
+}
+
+TEST(MetaAnyToSqlLiteral, NegativeIntLiteral) {
+    meta_any val(-10);
+    EXPECT_EQ(meta_any_to_sql_literal(val), string("-10"));
+}
+
+TEST(MetaAnyToSqlLiteral, DoubleLiteral) {
+    meta_any val(3.14);
+    string lit = meta_any_to_sql_literal(val);
+    EXPECT_FALSE(lit.empty());
+}
+
+TEST(MetaAnyToSqlLiteral, BoolTrueLiteral) {
+    meta_any val(true);
+    EXPECT_EQ(meta_any_to_sql_literal(val), string("1"));
+}
+
+TEST(MetaAnyToSqlLiteral, BoolFalseLiteral) {
+    meta_any val(false);
+    EXPECT_EQ(meta_any_to_sql_literal(val), string("0"));
+}
+
+TEST(MetaAnyToSqlLiteral, StringLiteralQuoted) {
+    meta_any val(string("hello"));
+    EXPECT_EQ(meta_any_to_sql_literal(val), string("'hello'"));
+}
+
+TEST(MetaAnyToSqlLiteral, StringLiteralEscapesSingleQuote) {
+    meta_any val(string("it's"));
+    EXPECT_EQ(meta_any_to_sql_literal(val), string("'it''s'"));
+}
+
+TEST(MetaAnyToSqlLiteral, ShortLiteral) {
+    meta_any val(static_cast<short>(5));
+    string lit = meta_any_to_sql_literal(val);
+    EXPECT_FALSE(lit.empty());
+}
+
+namespace {
+
+    struct DbTestUser {
+        int id = 0;
+        string name;
+        string email;
+        int age = 0;
+        bool active = true;
+    };
+
+    once_flag g_db_test_init;
+
+    void ensure_db_test_registered() {
+        call_once(g_db_test_init, [] {
+            reflect::reflect<DbTestUser>("DbTestUser")
+                    .table_name("tbl_users")
+                    .property("id", &DbTestUser::id, PROP_PRIMARY_KEY | PROP_AUTO_INC)
+                    .property("name", &DbTestUser::name, PROP_REQUIRED)
+                    .property("email", &DbTestUser::email, PROP_UNIQUE)
+                    .property("age", &DbTestUser::age)
+                    .property("active", &DbTestUser::active)
+                    .constructor();
+            NEFORCE_REFLECT_RESOLVE_BASES();
+        });
+    }
+
+    struct DbTestProduct {
+        int64_t product_id = 0;
+        string title;
+        double price = 0.0;
+    };
+
+    once_flag g_db_product_init;
+
+    void ensure_db_product_registered() {
+        call_once(g_db_product_init, [] {
+            reflect::reflect<DbTestProduct>("DbTestProduct")
+                    .property("product_id", &DbTestProduct::product_id, PROP_PRIMARY_KEY)
+                    .property("title", &DbTestProduct::title)
+                    .property("price", &DbTestProduct::price)
+                    .constructor();
+            NEFORCE_REFLECT_RESOLVE_BASES();
+        });
+    }
+
+    struct DbTestNoPk {
+        string data;
+    };
+
+    once_flag g_db_nopk_init;
+
+    void ensure_db_nopk_registered() {
+        call_once(g_db_nopk_init, [] {
+            reflect::reflect<DbTestNoPk>("DbTestNoPk").property("data", &DbTestNoPk::data).constructor();
+            NEFORCE_REFLECT_RESOLVE_BASES();
+        });
+    }
+
+} // namespace
+
+class SqlMapperTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        ensure_db_test_registered();
+        ensure_db_product_registered();
+        ensure_db_nopk_registered();
+    }
+};
+
+TEST_F(SqlMapperTest, TableNameFromAnnotation) { EXPECT_EQ(sql_mapper<DbTestUser>::table_name(), string("tbl_users")); }
+
+TEST_F(SqlMapperTest, TableNameFallbackToTypeName) {
+    EXPECT_EQ(sql_mapper<DbTestProduct>::table_name(), string("DbTestProduct"));
+}
+
+TEST_F(SqlMapperTest, CreateTableSql) {
+    string sql = sql_mapper<DbTestUser>::create_table_sql();
+    EXPECT_NE(sql.find("CREATE TABLE IF NOT EXISTS tbl_users"), string::npos);
+    EXPECT_NE(sql.find("id"), string::npos);
+    EXPECT_NE(sql.find("name"), string::npos);
+    EXPECT_NE(sql.find("email"), string::npos);
+    EXPECT_NE(sql.find("UNIQUE"), string::npos);
+}
+
+TEST_F(SqlMapperTest, CreateTableSqlWithOverride) {
+    string sql = sql_mapper<DbTestUser>::create_table_sql("custom_users");
+    EXPECT_NE(sql.find("custom_users"), string::npos);
+}
+
+TEST_F(SqlMapperTest, DropTableSql) {
+    string sql = sql_mapper<DbTestUser>::drop_table_sql();
+    EXPECT_NE(sql.find("DROP TABLE IF EXISTS tbl_users"), string::npos);
+}
+
+TEST_F(SqlMapperTest, DropTableSqlWithOverride) {
+    string sql = sql_mapper<DbTestUser>::drop_table_sql("custom_users");
+    EXPECT_NE(sql.find("custom_users"), string::npos);
+}
+
+TEST_F(SqlMapperTest, SelectSql) {
+    string sql = sql_mapper<DbTestUser>::select_sql();
+    EXPECT_NE(sql.find("SELECT"), string::npos);
+    EXPECT_NE(sql.find("FROM tbl_users"), string::npos);
+}
+
+TEST_F(SqlMapperTest, SelectSqlSkipsTransient) {
+    ensure_db_test_registered();
+    string sql = sql_mapper<DbTestUser>::select_sql();
+    EXPECT_NE(sql.find("id"), string::npos);
+    EXPECT_NE(sql.find("name"), string::npos);
+    EXPECT_NE(sql.find("email"), string::npos);
+    EXPECT_NE(sql.find("age"), string::npos);
+    EXPECT_NE(sql.find("active"), string::npos);
+}
+
+TEST_F(SqlMapperTest, InsertSqlDefaultDialect) {
+    string sql = sql_mapper<DbTestUser>::insert_sql();
+    EXPECT_NE(sql.find("INSERT INTO tbl_users"), string::npos);
+    EXPECT_NE(sql.find("?"), string::npos);
+    EXPECT_EQ(sql.find("$1"), string::npos);
+    EXPECT_EQ(sql.find("id"), string::npos);
+}
+
+TEST_F(SqlMapperTest, InsertSqlPostgresql) {
+    string sql = sql_mapper<DbTestUser>::insert_sql("", sql_dialect::POSTGRESQL);
+    EXPECT_NE(sql.find("INSERT INTO tbl_users"), string::npos);
+    EXPECT_NE(sql.find("$1"), string::npos);
+    EXPECT_NE(sql.find("$2"), string::npos);
+    EXPECT_EQ(sql.find("?"), string::npos);
+}
+
+TEST_F(SqlMapperTest, InsertSqlOracle) {
+    string sql = sql_mapper<DbTestUser>::insert_sql("", sql_dialect::ORACLE);
+    EXPECT_NE(sql.find(":1"), string::npos);
+    EXPECT_NE(sql.find(":2"), string::npos);
+    EXPECT_EQ(sql.find("?"), string::npos);
+}
+
+TEST_F(SqlMapperTest, InsertSqlSkipsAutoIncrement) {
+    string sql = sql_mapper<DbTestUser>::insert_sql();
+    EXPECT_EQ(sql.find("id"), string::npos);
+}
+
+TEST_F(SqlMapperTest, UpdateSqlDefaultDialect) {
+    string sql = sql_mapper<DbTestUser>::update_sql();
+    EXPECT_NE(sql.find("UPDATE tbl_users SET"), string::npos);
+    EXPECT_NE(sql.find("WHERE id = ?"), string::npos);
+}
+
+TEST_F(SqlMapperTest, UpdateSqlPostgresql) {
+    string sql = sql_mapper<DbTestUser>::update_sql("", sql_dialect::POSTGRESQL);
+    EXPECT_NE(sql.find("$"), string::npos);
+    EXPECT_EQ(sql.find("?"), string::npos);
+}
+
+TEST_F(SqlMapperTest, UpdateSqlSkipsPkAndAutoInc) {
+    string sql = sql_mapper<DbTestUser>::update_sql();
+    auto set_pos = sql.find("SET ");
+    auto where_pos = sql.find("WHERE");
+    auto id_eq_pos = sql.find("id =");
+    EXPECT_NE(where_pos, string::npos);
+    EXPECT_TRUE(id_eq_pos > where_pos);
+}
+
+TEST_F(SqlMapperTest, UpdateSqlThrowsWithoutPk) {
+    EXPECT_THROW(ignore = sql_mapper<DbTestNoPk>::update_sql(), value_exception);
+}
+
+TEST_F(SqlMapperTest, DeleteSqlDefaultDialect) {
+    string sql = sql_mapper<DbTestUser>::delete_sql();
+    EXPECT_NE(sql.find("DELETE FROM tbl_users"), string::npos);
+    EXPECT_NE(sql.find("WHERE id = ?"), string::npos);
+}
+
+TEST_F(SqlMapperTest, DeleteSqlPostgresql) {
+    string sql = sql_mapper<DbTestUser>::delete_sql("", sql_dialect::POSTGRESQL);
+    EXPECT_NE(sql.find("$1"), string::npos);
+    EXPECT_EQ(sql.find("?"), string::npos);
+}
+
+TEST_F(SqlMapperTest, DeleteSqlThrowsWithoutPk) {
+    EXPECT_THROW(ignore = sql_mapper<DbTestNoPk>::delete_sql(), value_exception);
+}
+
+TEST_F(SqlMapperTest, SelectByPkSqlDefaultDialect) {
+    string sql = sql_mapper<DbTestUser>::select_by_pk_sql();
+    EXPECT_NE(sql.find("SELECT"), string::npos);
+    EXPECT_NE(sql.find("FROM tbl_users"), string::npos);
+    EXPECT_NE(sql.find("WHERE id = ?"), string::npos);
+}
+
+TEST_F(SqlMapperTest, SelectByPkSqlPostgresql) {
+    string sql = sql_mapper<DbTestUser>::select_by_pk_sql("", sql_dialect::POSTGRESQL);
+    EXPECT_NE(sql.find("$1"), string::npos);
+    EXPECT_EQ(sql.find("?"), string::npos);
+}
+
+TEST_F(SqlMapperTest, SelectByPkSqlThrowsWithoutPk) {
+    EXPECT_THROW(ignore = sql_mapper<DbTestNoPk>::select_by_pk_sql(), value_exception);
+}
+
+TEST_F(SqlMapperTest, GetValues) {
+    DbTestUser user;
+    user.id = 1;
+    user.name = "Alice";
+    user.email = "alice@test.com";
+    user.age = 30;
+    user.active = true;
+
+    auto values = sql_mapper<DbTestUser>::get_values(user, false);
+    EXPECT_GE(values.size(), 4u);
+}
+
+TEST_F(SqlMapperTest, GetValuesIncludesPkByDefault) {
+    DbTestUser user;
+    user.id = 1;
+    user.name = "Bob";
+    user.email = "bob@test.com";
+    user.age = 25;
+
+    auto values = sql_mapper<DbTestUser>::get_values(user, true);
+    EXPECT_GE(values.size(), 5u);
+}
+
+TEST_F(SqlMapperTest, GetPkValue) {
+    DbTestUser user;
+    user.id = 42;
+    user.name = "Test";
+
+    auto pk = sql_mapper<DbTestUser>::get_pk_value(user);
+    EXPECT_TRUE(pk.has_value());
+    EXPECT_EQ(pk.get<int>(), 42);
+}
+
+TEST_F(SqlMapperTest, GetPkValueNoPkReturnsEmpty) {
+    DbTestNoPk obj;
+    obj.data = "test";
+
+    auto pk = sql_mapper<DbTestNoPk>::get_pk_value(obj);
+    EXPECT_FALSE(pk.has_value());
+}
+
+TEST_F(SqlMapperTest, InsertSqlPlaceholdersCountMatchesFields) {
+    string sql = sql_mapper<DbTestProduct>::insert_sql();
+    EXPECT_NE(sql.find("title"), string::npos);
+    EXPECT_NE(sql.find("price"), string::npos);
+}
+
+TEST_F(SqlMapperTest, CreateTableSqlProductNoAutoIncPk) {
+    string sql = sql_mapper<DbTestProduct>::create_table_sql();
+    EXPECT_NE(sql.find("PRIMARY KEY"), string::npos);
+}
+
+TEST_F(SqlMapperTest, AllPlaceholdersAreDialectConsistentInInsert) {
+    string pg_sql = sql_mapper<DbTestProduct>::insert_sql("", sql_dialect::POSTGRESQL);
+    EXPECT_EQ(pg_sql.find("?"), string::npos);
+
+    string oracle_sql = sql_mapper<DbTestProduct>::insert_sql("", sql_dialect::ORACLE);
+    EXPECT_EQ(oracle_sql.find("?"), string::npos);
+}
+
+class MockTbConnect : public idb_tb_connect {
+public:
+    vector<string> sql_history;
+    vector<string> results;
+    size_t result_index = 0;
+    bool update_result = true;
+    bool table_exists_result = true;
+    bool connected_result = true;
+    bool is_valid_result = true;
+
+    void reset_mock() {
+        sql_history.clear();
+        results.clear();
+        result_index = 0;
+        update_result = true;
+        table_exists_result = true;
+        connected_result = true;
+        is_valid_result = true;
+    }
+
+    string last_sql() const { return sql_history.empty() ? string() : sql_history.back(); }
+
+    bool connect(const db_config&) override { return true; }
+    bool reconnect(const db_config&) override { return true; }
+    void close() override {}
+    bool set_character_set(const string&) override { return true; }
+    string_view get_character_set() const override { return ""; }
+    string_view get_error() const override { return ""; }
+    uint32_t get_errno() const override { return 0; }
+    bool update(const string& sql) const override {
+        const_cast<MockTbConnect*>(this)->sql_history.push_back(sql);
+        return const_cast<MockTbConnect*>(this)->update_result;
+    }
+    bool begin() override { return true; }
+    bool commit() override { return true; }
+    bool rollback() override { return true; }
+    bool connected() const override { return connected_result; }
+    bool is_valid() const override { return is_valid_result; }
+    void* native_handle() noexcept override { return nullptr; }
+
+    unique_ptr<idb_tb_result> query(const string& sql) const override {
+        const_cast<MockTbConnect*>(this)->sql_history.push_back(sql);
+        return nullptr;
+    }
+    unique_ptr<idb_prepared_statement> prepare_statement(const string&) const override { return nullptr; }
+    size_t batch_insert(const string&, const vector<string>&, const vector<vector<string>>&) override { return 0; }
+    bool table_exists(const string& table) const override {
+        const_cast<MockTbConnect*>(this)->sql_history.push_back(table);
+        return const_cast<MockTbConnect*>(this)->table_exists_result;
+    }
+};
+
+class RepositoryTest : public ::testing::Test {
+protected:
+    MockTbConnect conn;
+    repository<DbTestUser, MockTbConnect> repo{conn};
+
+    void SetUp() override {
+        ensure_db_test_registered();
+        ensure_db_product_registered();
+        ensure_db_nopk_registered();
+        conn.reset_mock();
+    }
+};
+
+TEST_F(RepositoryTest, ConnectionAccessor) { EXPECT_EQ(&repo.connection(), &conn); }
+
+TEST_F(RepositoryTest, CreateTableGeneratesCorrectSql) {
+    conn.update_result = true;
+    EXPECT_TRUE(repo.create_table());
+    ASSERT_FALSE(conn.sql_history.empty());
+    EXPECT_NE(conn.last_sql().find("CREATE TABLE IF NOT EXISTS tbl_users"), string::npos);
+}
+
+TEST_F(RepositoryTest, CreateTableWithOverride) {
+    EXPECT_TRUE(repo.create_table("custom_tbl"));
+    EXPECT_NE(conn.last_sql().find("custom_tbl"), string::npos);
+}
+
+TEST_F(RepositoryTest, CreateTableReturnsFalseOnFailure) {
+    conn.update_result = false;
+    EXPECT_FALSE(repo.create_table());
+}
+
+TEST_F(RepositoryTest, DropTableGeneratesCorrectSql) {
+    EXPECT_TRUE(repo.drop_table());
+    EXPECT_NE(conn.last_sql().find("DROP TABLE IF EXISTS tbl_users"), string::npos);
+}
+
+TEST_F(RepositoryTest, DropTableWithOverride) {
+    EXPECT_TRUE(repo.drop_table("custom_tbl"));
+    EXPECT_NE(conn.last_sql().find("custom_tbl"), string::npos);
+}
+
+TEST_F(RepositoryTest, DropTableReturnsFalseOnFailure) {
+    conn.update_result = false;
+    EXPECT_FALSE(repo.drop_table());
+}
+
+TEST_F(RepositoryTest, InsertGeneratesSqlWithLiterals) {
+    DbTestUser user;
+    user.id = 0;
+    user.name = "Alice";
+    user.email = "alice@test.com";
+    user.age = 30;
+    user.active = true;
+
+    EXPECT_TRUE(repo.insert(user));
+    ASSERT_FALSE(conn.sql_history.empty());
+    string sql = conn.last_sql();
+    EXPECT_NE(sql.find("INSERT INTO tbl_users"), string::npos);
+    EXPECT_NE(sql.find("'Alice'"), string::npos);
+    EXPECT_NE(sql.find("'alice@test.com'"), string::npos);
+    EXPECT_EQ(sql.find("id"), string::npos);
+}
+
+TEST_F(RepositoryTest, InsertReturnsFalseOnFailure) {
+    DbTestUser user;
+    user.name = "Bob";
+    user.email = "bob@test.com";
+    user.age = 25;
+    conn.update_result = false;
+    EXPECT_FALSE(repo.insert(user));
+}
+
+TEST_F(RepositoryTest, UpdateGeneratesSqlWithLiterals) {
+    DbTestUser user;
+    user.id = 42;
+    user.name = "Updated";
+    user.email = "updated@test.com";
+    user.age = 35;
+    user.active = false;
+
+    EXPECT_TRUE(repo.update(user));
+    string sql = conn.last_sql();
+    EXPECT_NE(sql.find("UPDATE tbl_users SET"), string::npos);
+    EXPECT_NE(sql.find("WHERE id = 42"), string::npos);
+    EXPECT_NE(sql.find("'Updated'"), string::npos);
+}
+
+TEST_F(RepositoryTest, UpdateReturnsFalseOnFailure) {
+    DbTestUser user;
+    user.id = 1;
+    user.name = "X";
+    user.email = "x@x.com";
+    user.age = 1;
+    conn.update_result = false;
+    EXPECT_FALSE(repo.update(user));
+}
+
+TEST_F(RepositoryTest, RemoveGeneratesSqlWithPkLiteral) {
+    DbTestUser user;
+    user.id = 99;
+
+    EXPECT_TRUE(repo.remove(user));
+    string sql = conn.last_sql();
+    EXPECT_NE(sql.find("DELETE FROM tbl_users"), string::npos);
+    EXPECT_NE(sql.find("WHERE id = 99"), string::npos);
+}
+
+TEST_F(RepositoryTest, RemoveReturnsFalseOnFailure) {
+    DbTestUser user;
+    user.id = 1;
+    conn.update_result = false;
+    EXPECT_FALSE(repo.remove(user));
+}
+
+TEST_F(RepositoryTest, FindAllGeneratesSelectSql) {
+    conn.update_result = true;
+    repo.find_all();
+    ASSERT_FALSE(conn.sql_history.empty());
+    string sql = conn.last_sql();
+    EXPECT_NE(sql.find("SELECT"), string::npos);
+    EXPECT_NE(sql.find("FROM tbl_users"), string::npos);
+}
+
+TEST_F(RepositoryTest, FindWhereGeneratesSql) {
+    repo.find_where("age > 18");
+    string sql = conn.last_sql();
+    EXPECT_NE(sql.find("WHERE age > 18"), string::npos);
+}
+
+TEST_F(RepositoryTest, FindPageGeneratesSql) {
+    repo.find_page(2, 10, "name");
+    string sql = conn.last_sql();
+    EXPECT_NE(sql.find("LIMIT 10"), string::npos);
+    EXPECT_NE(sql.find("OFFSET 10"), string::npos);
+    EXPECT_NE(sql.find("ORDER BY name ASC"), string::npos);
+}
+
+TEST_F(RepositoryTest, FindPageFirstPageNoOffset) {
+    repo.find_page(1, 20);
+    string sql = conn.last_sql();
+    EXPECT_NE(sql.find("LIMIT 20"), string::npos);
+}
+
+TEST_F(RepositoryTest, CountGeneratesSql) {
+    conn.update_result = true;
+    repo.count();
+    string sql = conn.last_sql();
+    EXPECT_NE(sql.find("SELECT COUNT(*) FROM tbl_users"), string::npos);
+}
+
+TEST_F(RepositoryTest, TableExistsDelegatesToConnection) {
+    conn.table_exists_result = true;
+    EXPECT_TRUE(repo.table_exists());
+    EXPECT_NE(conn.last_sql().find("tbl_users"), string::npos);
+}
+
+TEST_F(RepositoryTest, TableExistsReturnsFalse) {
+    conn.table_exists_result = false;
+    EXPECT_FALSE(repo.table_exists());
+}
+
+class RepositoryProductTest : public ::testing::Test {
+protected:
+    MockTbConnect conn;
+    repository<DbTestProduct, MockTbConnect> repo{conn};
+
+    void SetUp() override {
+        ensure_db_product_registered();
+        conn.reset_mock();
+    }
+};
+
+TEST_F(RepositoryProductTest, InsertWithInt64Pk) {
+    DbTestProduct prod;
+    prod.product_id = 0;
+    prod.title = "Widget";
+    prod.price = 9.99;
+
+    EXPECT_TRUE(repo.insert(prod));
+    string sql = conn.last_sql();
+    EXPECT_NE(sql.find("INSERT INTO DbTestProduct"), string::npos);
+    EXPECT_NE(sql.find("'Widget'"), string::npos);
+    EXPECT_NE(sql.find("product_id"), string::npos);
+}
+
+TEST_F(RepositoryProductTest, UpdateWithInt64Pk) {
+    DbTestProduct prod;
+    prod.product_id = 100;
+    prod.title = "Gadget";
+    prod.price = 19.95;
+
+    EXPECT_TRUE(repo.update(prod));
+    string sql = conn.last_sql();
+    EXPECT_NE(sql.find("WHERE product_id = 100"), string::npos);
+}
+
+TEST_F(RepositoryProductTest, RemoveWithInt64Pk) {
+    DbTestProduct prod;
+    prod.product_id = 200;
+
+    EXPECT_TRUE(repo.remove(prod));
+    string sql = conn.last_sql();
+    EXPECT_NE(sql.find("WHERE product_id = 200"), string::npos);
+}

@@ -160,12 +160,12 @@ public:
 
 
 /**
- * @class scoped_connection
+ * @class scope_connection
  * @brief 作用域连接
  *
  * 析构时自动断开连接。
  */
-class scoped_connection {
+class scope_connection {
 private:
     connection conn_; ///< 被管理的连接
 
@@ -173,28 +173,28 @@ public:
     /**
      * @brief 默认构造函数
      */
-    scoped_connection() = default;
+    scope_connection() = default;
 
     /**
      * @brief 从连接构造
      * @param conn 要管理的连接
      */
-    explicit scoped_connection(connection conn) noexcept :
+    explicit scope_connection(connection conn) noexcept :
     conn_(_NEFORCE move(conn)) {}
 
     /**
      * @brief 析构函数，自动断开连接
      */
-    ~scoped_connection() { conn_.disconnect(); }
+    ~scope_connection() { conn_.disconnect(); }
 
-    scoped_connection(const scoped_connection&) = delete;
-    scoped_connection& operator=(const scoped_connection&) = delete;
+    scope_connection(const scope_connection&) = delete;
+    scope_connection& operator=(const scope_connection&) = delete;
 
     /**
      * @brief 移动构造函数
      * @param other 被移动的对象
      */
-    scoped_connection(scoped_connection&& other) noexcept :
+    scope_connection(scope_connection&& other) noexcept :
     conn_(_NEFORCE move(other.conn_)) {}
 
     /**
@@ -202,7 +202,7 @@ public:
      * @param other 被移动的对象
      * @return 自身引用
      */
-    scoped_connection& operator=(scoped_connection&& other) noexcept {
+    scope_connection& operator=(scope_connection&& other) noexcept {
         if (addressof(other) == this) {
             return *this;
         }
@@ -293,7 +293,7 @@ public:
  * 多播委托实现。
  */
 template <typename... Types>
-struct signal : public signal_base {
+struct signal final : public signal_base {
 private:
     /**
      * @struct slot_entry
