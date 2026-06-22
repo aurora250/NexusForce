@@ -10,10 +10,13 @@
  */
 
 #include "NeForce/core/async/lazy_thread.hpp"
+#include "NeForce/core/async/lock_free_queue.hpp"
 #include "NeForce/core/async/timer.hpp"
 #include "NeForce/core/container/priority_queue.hpp"
+#include "NeForce/core/container/queue.hpp"
 #include "NeForce/core/container/unordered_map.hpp"
 #include "NeForce/core/memory/weak_ptr.hpp"
+#include "NeForce/core/system/sysinfo.hpp"
 #include "NeForce/core/time/datetime.hpp"
 #include "NeForce/core/utility/optional.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -94,8 +97,8 @@ public:
     static constexpr size_t queue_size = 256; ///< 队列容量
 
 private:
-    static steal_strategy steal_strategy_; ///< 全局窃取策略
-    static uint32_t fixed_batch_size_;     ///< 固定批次大小
+    steal_strategy steal_strategy_{steal_strategy::adaptive}; ///< 窃取策略
+    uint32_t fixed_batch_size_{4};                            ///< 固定批次大小
 
     array<function<void()>, queue_size> tasks_; ///< 任务数组
     atomic<uint64_t> head_{0};                  ///< 队列头指针
@@ -163,7 +166,7 @@ public:
      * @param strategy 窃取策略
      * @param batch_size 批次大小（仅对fixed_batch策略有效）
      */
-    static void set_steal_strategy(const steal_strategy strategy, const uint32_t batch_size = 4) {
+    void set_steal_strategy(const steal_strategy strategy, const uint32_t batch_size = 4) {
         steal_strategy_ = strategy;
         fixed_batch_size_ = batch_size;
     }
@@ -205,6 +208,8 @@ struct NEFORCE_API worker_context {
     id_type id{0};                     ///< 线程ID
     atomic<bool> is_stealing{false};   ///< 是否正在执行窃取操作
     size_t consecutive_idle_count = 0; ///< 连续空闲次数
+    uint32_t cpu_core{0};              ///< 绑定的 CPU 核心编号
+    uint32_t numa_node{0};             ///< 所属 NUMA 节点编号
 
     worker_context() = default;
     worker_context(const worker_context&) = delete;
@@ -283,8 +288,8 @@ struct task_info {
  */
 template <typename T>
 struct submit_result {
-    _NEFORCE future<T> future;                ///< 任务的future
-    shared_ptr<_NEFORCE task_info> task_info; ///< 任务信息
+    future<T> future;                ///< 任务的future
+    shared_ptr<task_info> task_info; ///< 任务信息
 
     /**
      * @brief 检查提交是否有效
@@ -375,12 +380,12 @@ private:
     };
 
     struct thread_pool_id_generator {
-        static uint32_t& get_id() noexcept {
-            static uint32_t pool_thread_id = 0;
+        static atomic<uint32_t>& get_id() noexcept {
+            static atomic<uint32_t> pool_thread_id{0};
             return pool_thread_id;
         }
-        static uint32_t get_new_id() noexcept { return get_id()++; }
-        static void reset_id() noexcept { get_id() = 0; }
+        static uint32_t get_new_id() noexcept { return get_id().fetch_add(1, memory_order_relaxed); }
+        static void reset_id() noexcept { get_id().store(0, memory_order_relaxed); }
     };
 
     unordered_map<id_type, unique_ptr<lazy_thread>> threads_map_; ///< 线程映射
@@ -393,15 +398,22 @@ private:
     id_type init_thread_size_{0}; ///< 初始线程数
     size_t thread_threshhold_;    ///< 线程数阈值
 
-    priority_queue<priority_task> task_queue_;    ///< 全局优先级任务队列
-    atomic<uint32_t> task_size_{0};               ///< 全局队列大小
+    steal_strategy configured_steal_strategy_{steal_strategy::adaptive}; ///< 配置的窃取策略
+    uint32_t configured_steal_batch_{4};                                 ///< 配置的窃取批次大小
+
+    unique_ptr<lock_free_queue<shared_ptr<task_type>>> global_queue_; ///< 全局无锁任务队列
+    priority_queue<priority_task> priority_queue_;                    ///< 高优先级任务队列（仅 priority>0）
+    mutex priority_mtx_;                                              ///< 优先级队列互斥锁
+
+    atomic<uint32_t> global_task_count_{0};       ///< 全局任务队列任务计数
     atomic<uint32_t> idle_thread_size_{0};        ///< 空闲线程数
     size_t task_threshhold_{task_max_threshhold}; ///< 任务队列阈值
 
-    mutable mutex task_queue_mtx_; ///< 任务队列互斥锁
-    condition_variable not_full_;  ///< 队列非满条件变量
-    condition_variable not_empty_; ///< 队列非空条件变量
-    condition_variable exit_cond_; ///< 退出条件变量
+    mutex work_available_mtx_;          ///< 工作可用互斥锁
+    condition_variable work_available_; ///< 工作可用条件变量
+    condition_variable exit_cond_;      ///< 退出条件变量
+
+    const vector<sysinfo::numa_node_info>* numa_nodes_{nullptr}; ///< NUMA 节点信息指针
 
     atomic<pool_mode> pool_mode_{pool_mode::fixed}; ///< 线程池模式
     atomic<bool> is_running_{false};                ///< 是否正在运行
@@ -682,67 +694,51 @@ submit_result<invoke_result_t<Func, Args...>> thread_pool::submit_task(const pri
                 }
             });
 
-    future<Result> res = task->get_future();
+    auto res = task->get_future();
     task_type job([task] { (*task)(); });
 
     if (static_cast<uint32_t>(priority) > 0) {
-        unique_lock<mutex> lock(task_queue_mtx_);
-
-        if (!not_full_.wait_for(lock, seconds(1), [&]() -> bool { return task_queue_.size() < task_threshhold_; })) {
-            info->status.store(task_info::status::failed, memory_order_release);
-            info->error = "Task queue is full";
-
-            auto dummy_task = _NEFORCE make_shared<packaged_task<Result()>>([]() -> Result { return Result(); });
-            (*dummy_task)();
-            return submit_result<Result>{dummy_task->get_future(), info};
+        {
+            lock<mutex> lk(priority_mtx_);
+            priority_queue_.emplace(move(job), priority, info);
         }
-
-        task_queue_.emplace(move(job), priority, info);
-        ++task_size_;
         ++total_submitted_tasks_;
-        not_empty_.notify_one();
-
+        work_available_.notify_one();
     } else {
         auto* ctx = get_worker_context();
+
+        if (global_task_count_.load(memory_order_acquire) >= task_threshhold_) {
+            info->status.store(task_info::status::failed, memory_order_release);
+            info->error = "Task queue is full";
+            return submit_result<Result>{_NEFORCE move(res), _NEFORCE move(info)};
+        }
 
         if (ctx != nullptr && ctx->queue.remain_size() > 0) {
             ctx->queue.push_back(move(job));
             ++total_submitted_tasks_;
-        } else {
-            unique_lock<mutex> lock(task_queue_mtx_);
-            if (!not_full_.wait_for(lock, seconds(1),
-                                    [&]() -> bool { return task_queue_.size() < task_threshhold_; })) {
-                info->status.store(task_info::status::failed, memory_order_release);
-                info->error = "Task queue is full";
-
-                auto dummy_task = _NEFORCE make_shared<packaged_task<Result()>>([]() -> Result { return Result(); });
-                (*dummy_task)();
-                return submit_result<Result>{dummy_task->get_future(), info};
-            }
-
-            task_queue_.emplace(move(job), static_cast<priority_type>(0), info);
-            ++task_size_;
+        } else if (ctx == nullptr) {
+            global_task_count_.fetch_add(1, memory_order_release);
+            global_queue_->push(make_shared<task_type>(move(job)));
             ++total_submitted_tasks_;
-            not_empty_.notify_one();
+            work_available_.notify_one();
+        } else {
+            global_task_count_.fetch_add(1, memory_order_release);
+            global_queue_->push(make_shared<task_type>(move(job)));
+            ++total_submitted_tasks_;
+            work_available_.notify_one();
         }
     }
 
-    if (pool_mode_.load() == pool_mode::cached && task_size_.load() > idle_thread_size_) {
-        id_type thread_id = 0;
-
-        {
-            unique_lock<mutex> lock(task_queue_mtx_);
+    if (pool_mode_.load() == pool_mode::cached) {
+        const uint32_t idle = idle_thread_size_.load(memory_order_acquire);
+        const uint32_t pending = global_task_count_.load(memory_order_acquire);
+        if (pending > idle) {
+            lock<mutex> lk(worker_contexts_mtx_);
             if (threads_map_.size() < thread_threshhold_) {
-                thread_id = thread_pool_id_generator::get_new_id();
+                id_type thread_id = thread_pool_id_generator::get_new_id();
                 auto worker_func = [this, thread_id]() { thread_function(thread_id); };
                 auto ptr = _NEFORCE make_unique<lazy_thread>(_NEFORCE move(worker_func));
-                threads_map_.emplace(thread_id, _NEFORCE move(ptr));
-            }
-        }
 
-        if (thread_id != 0) {
-            {
-                lock<mutex> ctx_lock(worker_contexts_mtx_);
                 if (thread_id >= worker_contexts_ptr_.size()) {
                     worker_contexts_ptr_.reserve(thread_id + 1);
                     for (size_t i = worker_contexts_ptr_.size(); i <= thread_id; ++i) {
@@ -751,10 +747,11 @@ submit_result<invoke_result_t<Func, Args...>> thread_pool::submit_task(const pri
                         worker_contexts_ptr_.emplace_back(_NEFORCE move(tmp));
                     }
                 }
-            }
 
-            threads_map_[thread_id]->start();
-            threads_map_[thread_id]->detach();
+                threads_map_.emplace(thread_id, _NEFORCE move(ptr));
+                threads_map_[thread_id]->start();
+                threads_map_[thread_id]->detach();
+            }
         }
     }
 
@@ -802,7 +799,7 @@ thread_pool::submit_after(const int64_t delay_ms, const priority_type priority, 
                 }
             });
 
-    future<Result> res = task->get_future();
+    auto res = task->get_future();
 
     auto expire_time = steady_clock::now() + milliseconds(delay_ms);
     timer_.add_task(expire_time, [this, task = _NEFORCE move(task), priority]() mutable {

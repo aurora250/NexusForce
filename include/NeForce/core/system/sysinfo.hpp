@@ -176,12 +176,27 @@ public:
         LOONGARCH32  ///< 32位LoongArch
     };
 
+    /**
+     * @struct numa_node_info
+     * @brief NUMA 节点信息
+     *
+     * 描述单个 NUMA 节点的拓扑信息，包括节点编号、
+     * 所属逻辑核心列表和核心位图掩码
+     */
+    struct numa_node_info {
+        uint32_t node_id{0};        ///< NUMA 节点编号
+        uint32_t core_count{0};     ///< 属于该节点的逻辑核心数
+        uint64_t core_mask{0};      ///< 核心位图掩码（64 核以内直接可用）
+        vector<uint32_t> core_list; ///< 核心逻辑编号列表
+    };
+
 private:
     system_info system_info_{};                        ///< 系统信息
     memory_info memory_info_{};                        ///< 内存信息
     CPU_info cpu_info_{};                              ///< CPU信息
     os_version_info os_version_info_{};                ///< 操作系统信息
     architecture architecture_{architecture::UNKNOWN}; ///< 系统架构
+    vector<numa_node_info> numa_nodes_;                ///< NUMA 节点信息列表
     atomic<bool> initialized_{false};                  ///< 初始化标志
 
     /**
@@ -252,6 +267,15 @@ public:
      * @return 架构枚举值
      */
     NEFORCE_NODISCARD architecture get_architecture() const noexcept { return architecture_; }
+
+    /**
+     * @brief 获取 NUMA 节点拓扑信息
+     * @return NUMA 节点信息列表
+     *
+     * 在支持 NUMA 的系统中返回所有 NUMA 节点的拓扑信息。
+     * 不支持 NUMA 的系统返回空列表。
+     */
+    NEFORCE_NODISCARD const vector<numa_node_info>& get_numa_info() const noexcept { return numa_nodes_; }
 
     /**
      * @brief 检查是否已初始化

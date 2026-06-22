@@ -189,7 +189,7 @@ public:
  */
 template <typename Mutex>
 class lock {
-  static_assert(is_base_of_v<mutex_base, Mutex>, "Mutex type must be derived from mutex_base");
+    static_assert(is_base_of_v<mutex_base, Mutex>, "Mutex type must be derived from mutex_base");
 
 public:
     using mutex_type = Mutex; ///< 互斥锁类型
@@ -261,7 +261,7 @@ NEFORCE_INLINE17 constexpr lock_quiet_tag lock_quiet{};
  */
 template <typename Mutex>
 class unique_lock {
-  static_assert(is_base_of_v<mutex_base, Mutex>, "Mutex type must be derived from mutex_base");
+    static_assert(is_base_of_v<mutex_base, Mutex>, "Mutex type must be derived from mutex_base");
 
 public:
     using mutex_type = Mutex; ///< 互斥锁类型

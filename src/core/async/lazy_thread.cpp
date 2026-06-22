@@ -37,7 +37,7 @@ void lazy_thread::start() {
     if (joinable()) {
         NEFORCE_THROW_EXCEPTION(thread_exception("Thread already started"));
     }
-    thread_.start(move(func_));
+    thread_ = thread(move(func_));
     func_ = nullptr;
 }
 

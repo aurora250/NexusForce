@@ -347,14 +347,14 @@ public:
      * @brief 移动构造函数
      * @param other 源对象
      */
-    sql_builder(sql_builder&&) noexcept = default;
+    sql_builder(sql_builder&& other) noexcept = default;
 
     /**
      * @brief 移动赋值运算符
      * @param other 源对象
      * @return 自身引用
      */
-    sql_builder& operator=(sql_builder&&) noexcept = default;
+    sql_builder& operator=(sql_builder&& other) noexcept = default;
 
     /**
      * @brief 列表设置SELECT字段

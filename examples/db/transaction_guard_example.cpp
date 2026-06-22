@@ -11,7 +11,7 @@
 
 #include <NeForce/core/system/console.hpp>
 #include <NeForce/db/db_config.hpp>
-#include <NeForce/db/transaction_guard.hpp>
+#include <NeForce/db/scope_transaction.hpp>
 #include <NeForce/db/sql_builder.hpp>
 
 #ifdef NEFORCE_SUPPORT_SQLITE3

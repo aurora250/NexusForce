@@ -352,7 +352,7 @@ public:
      * @return 当前对象的引用
      */
     optional& operator=(optional&& other) noexcept {
-        if (addressof(other) == this) {
+        if (_NEFORCE addressof(other) == this) {
             return *this;
         }
 

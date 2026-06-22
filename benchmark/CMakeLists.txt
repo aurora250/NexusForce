@@ -16,3 +16,5 @@ macro(add_nexusforce_benchmark NAME)
     target_link_libraries(${NAME} PRIVATE NexusForce::NexusForce benchmark::benchmark)
     nexusforce_compiler_options(${NAME})
 endmacro()
+
+add_subdirectory(async)

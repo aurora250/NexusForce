@@ -15,6 +15,7 @@ endif()
 message(STATUS "Found clang-format: ${CLANG_FORMAT_EXECUTABLE}")
 
 file(GLOB_RECURSE NEXUSFORCE_FORMAT_SOURCES
+        "${CMAKE_CURRENT_SOURCE_DIR}/benchmark/*.cpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/examples/*.cpp"

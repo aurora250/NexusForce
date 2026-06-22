@@ -83,6 +83,8 @@ private:
          * @param external_count 初始外部计数
          */
         explicit node(int external_count = 2) {
+            data.store(nullptr, memory_order_relaxed);
+
             node_counter new_count;
             new_count.internal_count = 0;
             new_count.external_counters = external_count;
@@ -231,7 +233,6 @@ public:
             T* old_data = nullptr;
             if (old_tail.ptr->data.compare_exchange_strong(old_data, new_data.get())) {
                 counted_node_ptr old_next;
-                counted_node_ptr now_next = old_tail.ptr->next.load();
                 if (!old_tail.ptr->next.compare_exchange_strong(old_next, new_next)) {
                     delete new_next.ptr;
                     new_next = old_next;
@@ -265,7 +266,7 @@ public:
             node* const ptr = old_head.ptr;
             if (ptr == tail.load().ptr) {
                 ptr->release_ref();
-                return _NEFORCE make_unique<T>();
+                return unique_ptr<T>();
             }
             counted_node_ptr next = ptr->next.load();
             if (head.compare_exchange_strong(old_head, next)) {
@@ -297,21 +298,21 @@ public:
 
             if (ptr == tail.load().ptr) {
                 ptr->release_ref();
-                return make_unique<T>();
+                return unique_ptr<T>();
             }
 
             counted_node_ptr next = ptr->next.load();
             if (head.compare_exchange_strong(old_head, next)) {
                 T* res = ptr->data.exchange(nullptr);
                 lock_free_queue::free_external_counter(old_head);
-                pop_count_.fetch_add(1, _NEFORCE memory_order_relaxed);
+                pop_count_.fetch_add(1, memory_order_relaxed);
                 return unique_ptr<T>(res);
             }
 
             ptr->release_ref();
         }
 
-        return make_unique<T>();
+        return unique_ptr<T>();
     }
 
     /**

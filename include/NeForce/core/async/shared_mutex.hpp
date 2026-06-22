@@ -133,7 +133,8 @@ public:
  */
 template <typename SharedMutex>
 class shared_lock {
-    static_assert(is_base_of_v<shared_mutex_base, SharedMutex>, "SharedMutex type must be derived from shared_mutex_base");
+    static_assert(is_base_of_v<shared_mutex_base, SharedMutex>,
+                  "SharedMutex type must be derived from shared_mutex_base");
 
 public:
     using mutex_type = SharedMutex; ///< 共享互斥锁类型

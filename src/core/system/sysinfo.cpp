@@ -685,6 +685,95 @@ void sysinfo::init() {
 
 #endif
 
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    {
+        ::DWORD buf_size = 0;
+        ::GetLogicalProcessorInformation(nullptr, &buf_size);
+        if (::GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
+            auto* buf = static_cast<::SYSTEM_LOGICAL_PROCESSOR_INFORMATION*>(::malloc(buf_size));
+            if (buf != nullptr) {
+                if (::GetLogicalProcessorInformation(buf, &buf_size) == TRUE) {
+                    const ::DWORD count = buf_size / sizeof(::SYSTEM_LOGICAL_PROCESSOR_INFORMATION);
+                    for (::DWORD i = 0; i < count; i++) {
+                        if (buf[i].Relationship == ::RelationNumaNode) {
+                            const auto node_id = static_cast<uint32_t>(buf[i].NumaNode.NodeNumber);
+                            const auto mask = static_cast<uint64_t>(buf[i].ProcessorMask);
+
+                            numa_node_info* target = nullptr;
+                            for (auto& node: numa_nodes_) {
+                                if (node.node_id == node_id) {
+                                    target = &node;
+                                    break;
+                                }
+                            }
+                            if (target == nullptr) {
+                                numa_node_info info;
+                                info.node_id = node_id;
+                                numa_nodes_.push_back(move(info));
+                                target = &numa_nodes_.back();
+                            }
+
+                            target->core_mask |= mask;
+                            target->core_list.clear();
+                            uint64_t temp = target->core_mask;
+                            for (uint32_t bit = 0; bit < 64 && temp != 0; bit++, temp >>= 1) {
+                                if ((temp & 1) != 0U) {
+                                    target->core_list.push_back(bit);
+                                }
+                            }
+                            target->core_count = static_cast<uint32_t>(target->core_list.size());
+                        }
+                    }
+                }
+                ::free(buf);
+            }
+        }
+    }
+#else
+    for (uint32_t node_id = 0; node_id < 256; node_id++) {
+        string cpulist_path = "/sys/devices/system/node/node";
+        cpulist_path += to_string(node_id);
+        cpulist_path += "/cpulist";
+        string content = read_file_all(cpulist_path.data()).trim_right();
+        if (content.empty()) {
+            break;
+        }
+
+        numa_node_info info;
+        info.node_id = node_id;
+
+        // parse cpulist: "0-3,8-11" or "0"
+        size_t pos = 0;
+        string_view token;
+        while (getline(content.view(), pos, token, [](char c) { return c == ','; })) {
+            if (token.empty()) {
+                continue;
+            }
+            uint32_t start_core = 0;
+            uint32_t end_core = 0;
+
+            const auto dash_pos = token.find('-');
+            if (dash_pos != string::npos) {
+                start_core = to_uint32(token.substr(0, dash_pos));
+                end_core = to_uint32(token.substr(dash_pos + 1));
+            } else {
+                start_core = to_uint32(token);
+                end_core = start_core;
+            }
+
+            for (uint32_t core = start_core; core <= end_core; core++) {
+                info.core_list.push_back(core);
+                if (core < 64) {
+                    info.core_mask |= (uint64_t(1) << core);
+                }
+            }
+        }
+
+        info.core_count = static_cast<uint32_t>(info.core_list.size());
+        numa_nodes_.push_back(move(info));
+    }
+#endif
+
     initialized_.store(true, memory_order_release);
 }
 

@@ -5,7 +5,7 @@
  * @file atomic_base.hpp
  * @brief 原子操作基本工具
  *
- * 此文件提供了原子操作的基本工具，包括内存序定义、原子类型基础类等。
+ * 此文件提供了原子操作的基本工具，包括原子操作与原子基础类。
  */
 
 #include "NeForce/core/async/atomic_wait.hpp"
@@ -82,6 +82,12 @@ NEFORCE_ALWAYS_INLINE_INLINE void atomic_signal_fence(const memory_order mo) noe
 
 /// @cond
 NEFORCE_BEGIN_INNER__
+
+template <size_t Size>
+struct atomic_load_verifier {
+    template <typename T>
+    static void verify(const volatile T*, remove_volatile_t<T>&) noexcept {}
+};
 
 #ifdef NEFORCE_COMPILER_MSVC
 
@@ -431,6 +437,16 @@ struct atomic_is_always_lock_free_impl<16> {
 #    else
     static constexpr bool value = false;
 #    endif
+};
+
+template <>
+struct atomic_load_verifier<16> {
+    template <typename T>
+    static void verify(const volatile T* target, remove_volatile_t<T>& result) noexcept {
+        _NEFORCE memory_copy(&result, const_cast<const T*>(target), 16);
+        auto* mutable_target = const_cast<volatile T*>(target);
+        interlocked_compare_exchange_impl<16>::call(mutable_target, &result, result);
+    }
 };
 #endif
 
@@ -1109,6 +1125,8 @@ NEFORCE_ALWAYS_INLINE_INLINE remove_volatile_t<T> atomic_load_any(const T* ptr, 
 #else
     remove_volatile_t<T> result;
     _NEFORCE memory_copy<remove_volatile_t<T>>(&result, ptr);
+    // Get a consistency snapshot with CMPXCHG16B self-comparison CAS
+    inner::atomic_load_verifier<sizeof(T)>::verify(ptr, result);
     if (mo == memory_order_seq_cst || mo == memory_order_acquire) {
         ::_ReadWriteBarrier();
     }

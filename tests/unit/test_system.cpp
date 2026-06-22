@@ -5417,6 +5417,107 @@ TEST_F(SysinfoTest, CpuUsage_AfterRefresh_StillReturnsValid) {
     EXPECT_LE(usage, 100.0);
 }
 
+TEST_F(SysinfoTest, GetNumaInfo_DoesNotCrash) {
+    sysinfo& inst = sysinfo::instance();
+    const auto& nodes = inst.get_numa_info();
+    SUCCEED();
+}
+
+TEST_F(SysinfoTest, NumaInfo_NodeIdsUnique) {
+    sysinfo& inst = sysinfo::instance();
+    const auto& nodes = inst.get_numa_info();
+    for (size_t i = 0; i < nodes.size(); ++i) {
+        for (size_t j = i + 1; j < nodes.size(); ++j) {
+            EXPECT_NE(nodes[i].node_id, nodes[j].node_id);
+        }
+    }
+}
+
+TEST_F(SysinfoTest, NumaInfo_CoreCountMatchesCoreList) {
+    sysinfo& inst = sysinfo::instance();
+    const auto& nodes = inst.get_numa_info();
+    for (const auto& node: nodes) {
+        EXPECT_EQ(node.core_count, static_cast<uint32_t>(node.core_list.size()));
+    }
+}
+
+TEST_F(SysinfoTest, NumaInfo_CoreMaskConsistentWithCoreList) {
+    sysinfo& inst = sysinfo::instance();
+    const auto& nodes = inst.get_numa_info();
+    for (const auto& node: nodes) {
+        for (uint32_t core: node.core_list) {
+            if (core < 64) {
+                EXPECT_NE(node.core_mask & (uint64_t(1) << core), 0);
+            }
+        }
+        for (uint32_t bit = 0; bit < 64; ++bit) {
+            if ((node.core_mask >> bit) & 1) {
+                bool found = false;
+                for (uint32_t core: node.core_list) {
+                    if (core == bit) {
+                        found = true;
+                        break;
+                    }
+                }
+                EXPECT_TRUE(found) << "core_mask bit " << bit << " not in core_list";
+            }
+        }
+    }
+}
+
+TEST_F(SysinfoTest, NumaInfo_CoresWithinValidRange) {
+    sysinfo& inst = sysinfo::instance();
+    const auto& cpu_info = inst.get_CPU_info();
+    const uint32_t max_cores = cpu_info.logical_processors;
+    const auto& nodes = inst.get_numa_info();
+    for (const auto& node: nodes) {
+        for (uint32_t core: node.core_list) {
+            EXPECT_LT(core, max_cores);
+        }
+    }
+}
+
+TEST_F(SysinfoTest, NumaInfo_TotalCoresLessOrEqualLogicalProcessors) {
+    sysinfo& inst = sysinfo::instance();
+    const auto& cpu_info = inst.get_CPU_info();
+    const uint32_t total_logical = cpu_info.logical_processors;
+    const auto& nodes = inst.get_numa_info();
+    uint32_t total_cores = 0;
+    for (const auto& node: nodes) {
+        total_cores += node.core_count;
+    }
+    EXPECT_LE(total_cores, total_logical);
+}
+
+TEST_F(SysinfoTest, NumaInfo_CrossNodeCoresUnique) {
+    sysinfo& inst = sysinfo::instance();
+    const auto& nodes = inst.get_numa_info();
+    for (size_t i = 0; i < nodes.size(); ++i) {
+        for (size_t j = i + 1; j < nodes.size(); ++j) {
+            for (uint32_t core_i: nodes[i].core_list) {
+                for (uint32_t core_j: nodes[j].core_list) {
+                    EXPECT_NE(core_i, core_j) << "Core " << core_i << " appears in both node " << nodes[i].node_id
+                                              << " and node " << nodes[j].node_id;
+                }
+            }
+        }
+    }
+}
+
+TEST_F(SysinfoTest, NumaInfo_AfterRefresh_Consistent) {
+    sysinfo& inst = sysinfo::instance();
+    inst.refresh();
+    const auto& nodes = inst.get_numa_info();
+    for (const auto& node: nodes) {
+        EXPECT_EQ(node.core_count, static_cast<uint32_t>(node.core_list.size()));
+        for (uint32_t core: node.core_list) {
+            if (core < 64) {
+                EXPECT_NE(node.core_mask & (uint64_t(1) << core), 0);
+            }
+        }
+    }
+}
+
 class SystemEventTest : public ::testing::Test {
 protected:
     void SetUp() override {}

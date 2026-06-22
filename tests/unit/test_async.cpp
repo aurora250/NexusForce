@@ -1708,7 +1708,6 @@ TEST(LocalQueue, Empty) {
 
 TEST(LocalQueue, StealHalf) {
     local_queue src, dst;
-    local_queue::set_steal_strategy(local_queue::steal_strategy::half);
     int sum = 0;
     src.push_back([&sum] { sum += 1; });
     src.push_back([&sum] { sum += 2; });
@@ -1880,7 +1879,14 @@ TEST(ThreadPool, TaskThresholdRejection) {
     thread_pool pool;
     pool.set_task_threshhold(1);
     pool.start(1);
-    auto res1 = pool.submit_task([] { this_thread::sleep_for(2000_ms); });
+    atomic<bool> started{false};
+    auto res1 = pool.submit_task([&] {
+        started.store(true);
+        this_thread::sleep_for(2000_ms);
+    });
+    while (!started.load()) {
+        this_thread::yield();
+    }
     auto res2 = pool.submit_task([] { return 2; });
     auto res3 = pool.submit_task([] { return 3; });
     EXPECT_TRUE(res3.task_info && res3.task_info->is_finished());
