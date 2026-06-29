@@ -110,10 +110,15 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:a89830261400e85ced9bb558b44e5d213" id="r_a89830261400e85ced9bb558b44e5d213"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a89830261400e85ced9bb558b44e5d213">set_auth_validator</a> (<a class="el" href="classfunction.html">function</a>&lt; bool(const <a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;)&gt; validator)</td></tr>
 <tr class="memdesc:a89830261400e85ced9bb558b44e5d213"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置认证验证器  <br /></td></tr>
 <tr class="memitem:a8883aed5fc163d03c953466355eedc5c" id="r_a8883aed5fc163d03c953466355eedc5c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8883aed5fc163d03c953466355eedc5c">add_excluded_path</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="classpath.html">path</a>)</td></tr>
-<tr class="memdesc:a8883aed5fc163d03c953466355eedc5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加排除路径  <br /></td></tr>
+<tr class="memdesc:a8883aed5fc163d03c953466355eedc5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加排除路径（不要求认证）  <br /></td></tr>
+<tr class="memitem:a20ee4e38b23771f9e370a70d47fa0b26" id="r_a20ee4e38b23771f9e370a70d47fa0b26"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a20ee4e38b23771f9e370a70d47fa0b26">add_included_path</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> <a class="el" href="classpath.html">path</a>)</td></tr>
+<tr class="memdesc:a20ee4e38b23771f9e370a70d47fa0b26"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加受保护路径（要求认证）  <br /></td></tr>
 <tr class="memitem:a513f02f51624efb8d12131d4388851c8" id="r_a513f02f51624efb8d12131d4388851c8"><td class="memItemLeft"><a id="a513f02f51624efb8d12131d4388851c8" name="a513f02f51624efb8d12131d4388851c8"></a>
 void&#160;</td><td class="memItemRight"><b>clear_excluded_paths</b> ()</td></tr>
 <tr class="memdesc:a513f02f51624efb8d12131d4388851c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">清除所有排除路径 <br /></td></tr>
+<tr class="memitem:a654d093f5e49593cbd0ebe9cd6aaea7b" id="r_a654d093f5e49593cbd0ebe9cd6aaea7b"><td class="memItemLeft"><a id="a654d093f5e49593cbd0ebe9cd6aaea7b" name="a654d093f5e49593cbd0ebe9cd6aaea7b"></a>
+void&#160;</td><td class="memItemRight"><b>clear_included_paths</b> ()</td></tr>
+<tr class="memdesc:a654d093f5e49593cbd0ebe9cd6aaea7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">清除所有包含路径 <br /></td></tr>
 <tr class="memitem:a19bb024bb9162df64cdb8e342381f30d" id="r_a19bb024bb9162df64cdb8e342381f30d"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a19bb024bb9162df64cdb8e342381f30d">pre_filter</a> (<a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a> &amp;response) override</td></tr>
 <tr class="memdesc:a19bb024bb9162df64cdb8e342381f30d"><td class="mdescLeft">&#160;</td><td class="mdescRight">预处理方法  <br /></td></tr>
 <tr class="memitem:a1e5caced2ec556c5f017d21fce037160" id="r_a1e5caced2ec556c5f017d21fce037160"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1e5caced2ec556c5f017d21fce037160">do_filter</a> (<a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a> &amp;response) override</td></tr>
@@ -128,7 +133,7 @@ void&#160;</td><td class="memItemRight"><b>clear_excluded_paths</b> ()</td></tr>
 <div class="textblock"><p>认证过滤器 </p>
 <p>验证请求是否包含有效的认证信息。 </p>
 
-<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00312">312</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00327">327</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a8d2be4f5bae81720d8f10cfc0a918597" name="a8d2be4f5bae81720d8f10cfc0a918597"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8d2be4f5bae81720d8f10cfc0a918597">&#9670;&#160;</a></span>authentication_filter()</h2>
@@ -161,7 +166,7 @@ void&#160;</td><td class="memItemRight"><b>clear_excluded_paths</b> ()</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00326">326</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00343">343</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
@@ -191,15 +196,54 @@ void&#160;</td><td class="memItemRight"><b>clear_excluded_paths</b> ()</td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>添加排除路径 </p>
+<p>添加排除路径（不要求认证） </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">path</td><td>路径（支持前缀匹配） </td></tr>
+    <tr><td class="paramname">path</td><td>路径（支持前缀匹配）</td></tr>
   </table>
   </dd>
 </dl>
+<p>仅在 included_paths_ 为空时生效（全量认证模式）。 </p>
 
-<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00341">341</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00360">360</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+
+</div>
+</div>
+<a id="a20ee4e38b23771f9e370a70d47fa0b26" name="a20ee4e38b23771f9e370a70d47fa0b26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20ee4e38b23771f9e370a70d47fa0b26">&#9670;&#160;</a></span>add_included_path()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void authentication_filter::add_included_path </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>path</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>添加受保护路径（要求认证） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>路径（支持前缀匹配）</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>设置后仅这些路径需要认证，其余路径为公开访问。 </p>
+
+<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00368">368</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
@@ -244,7 +288,7 @@ void&#160;</td><td class="memItemRight"><b>clear_excluded_paths</b> ()</td></tr>
 
 <p>实现了 <a class="el" href="classhttp__filter.html#a00ee11e4e2b0c596d6f99cbafec3ddad">http_filter</a>.</p>
 
-<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00349">349</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00381">381</a> 行定义.</p>
 
 </div>
 </div>
@@ -276,7 +320,7 @@ void&#160;</td><td class="memItemRight"><b>clear_excluded_paths</b> ()</td></tr>
 
 <p>重载 <a class="el" href="classhttp__filter.html#a72030f612655463f1f4ef9340c03f1ec">http_filter</a> .</p>
 
-<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00350">350</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00382">382</a> 行定义.</p>
 
 </div>
 </div>
@@ -353,7 +397,7 @@ void&#160;</td><td class="memItemRight"><b>clear_excluded_paths</b> ()</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00333">333</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00350">350</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 

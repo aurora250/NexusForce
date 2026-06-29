@@ -5,6 +5,127 @@
     <basecompoundref refid="structistringify" prot="public" virt="non-virtual">istringify&lt; ip_address &gt;</basecompoundref>
     <includes refid="ip__address_8hpp" local="no">ip_address.hpp</includes>
     <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classip__address_1a1dd78d9245e92f33939bbe4f42b2180b" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref></type>
+        <name>family</name>
+        <qualifiedname>ip_address::family</qualifiedname>
+        <enumvalue id="classip__address_1a1dd78d9245e92f33939bbe4f42b2180bab3f7791472924b0d1530bb9112409c01" prot="public">
+          <name>UNDEF</name>
+          <initializer>= AF_UNSPEC</initializer>
+          <briefdescription>
+<para>未指定地址族，通常用于通配或自动选择 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classip__address_1a1dd78d9245e92f33939bbe4f42b2180ba15395d0642f86c5992abbca5e56e2b29" prot="public">
+          <name>UNIX</name>
+          <initializer>= AF_UNIX</initializer>
+          <briefdescription>
+<para>Unix 域套接字 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classip__address_1a1dd78d9245e92f33939bbe4f42b2180ba026226c3cf0400ffbf1ef901c0709aea" prot="public">
+          <name>INET4</name>
+          <initializer>= AF_INET</initializer>
+          <briefdescription>
+<para>IPv4 互联网协议族 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classip__address_1a1dd78d9245e92f33939bbe4f42b2180ba3a1be585a9d1d7af08b562f200a982bb" prot="public">
+          <name>INET6</name>
+          <initializer>= AF_INET6</initializer>
+          <briefdescription>
+<para>IPv6 互联网协议族 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classip__address_1a1dd78d9245e92f33939bbe4f42b2180ba0334b8669eb43f45f9bccb223186be65" prot="public">
+          <name>PACKET</name>
+          <initializer>= AF_PACKET</initializer>
+          <briefdescription>
+<para>链路层数据包套接字 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classip__address_1a1dd78d9245e92f33939bbe4f42b2180ba8eb72086e9ef79f8ce63e578c69a65fa" prot="public">
+          <name>NETLINK</name>
+          <initializer>= AF_NETLINK</initializer>
+          <briefdescription>
+<para>内核用户空间通信 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classip__address_1a1dd78d9245e92f33939bbe4f42b2180ba8de8a62c3191fb6cf61e0ac4b2b59045" prot="public">
+          <name>BLUETOOTH</name>
+          <initializer>= AF_BLUETOOTH</initializer>
+          <briefdescription>
+<para>蓝牙通信协议族 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classip__address_1a1dd78d9245e92f33939bbe4f42b2180ba6d5050f7a97e7e2e881a4e09dfbd6087" prot="public">
+          <name>CAN</name>
+          <initializer>= AF_CAN</initializer>
+          <briefdescription>
+<para>CAN 总线协议族 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classip__address_1a1dd78d9245e92f33939bbe4f42b2180ba1204a5c2ac4e8891367b2b2c03f72bb8" prot="public">
+          <name>ALG</name>
+          <initializer>= AF_ALG</initializer>
+          <briefdescription>
+<para>内核加密 API 接口 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classip__address_1a1dd78d9245e92f33939bbe4f42b2180baf0d4d92c0a65338b9fcf5e44348b1a67" prot="public">
+          <name>VSOCK</name>
+          <initializer>= AF_VSOCK</initializer>
+          <briefdescription>
+<para>虚拟机套接字 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classip__address_1a1dd78d9245e92f33939bbe4f42b2180bad6fef5d168d085196fddede17c3fdd05" prot="public">
+          <name>NFC</name>
+          <initializer>= AF_NFC</initializer>
+          <briefdescription>
+<para>近场通信协议族 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classip__address_1a1dd78d9245e92f33939bbe4f42b2180baf7608b81a83cba5be24044b16d192730" prot="public">
+          <name>XDP</name>
+          <initializer>= AF_XDP</initializer>
+          <briefdescription>
+<para>高性能数据路径 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>网络地址族类型枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="55" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="55" bodyend="70"/>
+      </memberdef>
       <memberdef kind="typedef" id="classip__address_1a3b98397bf02b3c92bebf8b501b8bfe19" prot="public" static="no">
         <type><ref refid="structvariant" kindref="compound">variant</ref>&lt; <ref refid="structnone__t" kindref="compound">none_t</ref>, ::sockaddr_in, ::sockaddr_in6 &gt;</type>
         <definition>using ip_address::address_type = variant&lt;none_t, ::sockaddr_in, ::sockaddr_in6&gt;</definition>
@@ -35,7 +156,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="53" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="53" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="73" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="73" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -53,11 +174,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="61" column="5"/>
-        <referencedby refid="classip__address_1a845df218a59fa6cc3101db811e0d2ae6">any</referencedby>
-        <referencedby refid="classip__address_1a80998e8dc8280df952852cffeea393fa" compoundref="ip__address_8hpp" startline="67" endline="68">ip_address</referencedby>
-        <referencedby refid="classip__address_1af3058b70dd79d1828a8aa515c40be38b">loopback</referencedby>
-        <referencedby refid="classip__address_1accc88b6e674ea278fb174fce157183ea" compoundref="ip__address_8hpp" startline="189" endline="189">operator!=</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="81" column="5"/>
+        <referencedby refid="classip__address_1a4336be517fcb42921bc9ed6a354c6302">any</referencedby>
+        <referencedby refid="classip__address_1a80998e8dc8280df952852cffeea393fa" compoundref="ip__address_8hpp" startline="87" endline="88">ip_address</referencedby>
+        <referencedby refid="classip__address_1a4169090f66b7d2e46d41150a65f6c3d0">loopback</referencedby>
+        <referencedby refid="classip__address_1accc88b6e674ea278fb174fce157183ea" compoundref="ip__address_8hpp" startline="209" endline="209">operator!=</referencedby>
         <referencedby refid="classip__address_1a848117fc5b7858284f4e06e705128712">operator==</referencedby>
         <referencedby refid="classip__address_1add2ce58669f6042593d6970743e7311a">parse</referencedby>
       </memberdef>
@@ -88,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="67" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="67" bodyend="68"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="87" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="87" bodyend="88"/>
         <references refid="classip__address_1ac938566448641af3ba1ab6942fca0486">ip_address</references>
       </memberdef>
       <memberdef kind="function" id="classip__address_1ae4239b7f69e83b99f451956238b92980" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
@@ -118,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="74" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="74" bodyend="75"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="94" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="94" bodyend="95"/>
       </memberdef>
       <memberdef kind="function" id="classip__address_1a5c89af508e8c3d05749e3dc0bd86a28a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -136,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="77" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="97" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classip__address_1aaa690aad7a7f577215bd2eac5a8c4f4d" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
@@ -154,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="78" column="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="98" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classip__address_1a88981013888118a84ab6b655af4b82d0" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -172,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="80" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="100" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classip__address_1a0b5d492982ec30c7e2c8d538c6540595" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
@@ -190,7 +311,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="81" column="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="101" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classip__address_1ac4303a065f03c1bcefb3fc2021dbf973" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -208,7 +329,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="87" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="87" bodyend="87"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="107" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="107" bodyend="107"/>
       </memberdef>
       <memberdef kind="function" id="classip__address_1a5e65a0ee46b36b3b6938b89a8bc149a4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -226,7 +347,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="93" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="93" bodyend="93"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="113" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="113" bodyend="113"/>
       </memberdef>
       <memberdef kind="function" id="classip__address_1addfa656142f2397de3eb263a03070574" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -244,7 +365,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="99" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="99" bodyend="99"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="119" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="119" bodyend="119"/>
       </memberdef>
       <memberdef kind="function" id="classip__address_1a75cfa46d8198d01c33e7b55dbc75ab4d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>const ::sockaddr *</type>
@@ -262,7 +383,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="123" column="23"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="143" column="23"/>
         <referencedby refid="classip__address_1a73d793b61070f19ebdad4f91d6962e4a">data</referencedby>
       </memberdef>
       <memberdef kind="function" id="classip__address_1a73d793b61070f19ebdad4f91d6962e4a" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -281,7 +402,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="129" column="17"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="149" column="17"/>
         <references refid="classip__address_1a75cfa46d8198d01c33e7b55dbc75ab4d">data</references>
       </memberdef>
       <memberdef kind="function" id="classip__address_1a908a54c084b6adc0d74cb0491f9fc71e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -300,7 +421,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="135" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="155" column="10"/>
         <references refid="classip__address_1a908a54c084b6adc0d74cb0491f9fc71e">size</references>
         <referencedby refid="classip__address_1a908a54c084b6adc0d74cb0491f9fc71e">size</referencedby>
       </memberdef>
@@ -320,16 +441,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="141" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="141" bodyend="141"/>
-        <references refid="classip__address_1a35c8e3f14ccbfa009341c1b52c865aee" compoundref="ip__address_8hpp" startline="141" endline="141">address</references>
-        <referencedby refid="classip__address_1a35c8e3f14ccbfa009341c1b52c865aee" compoundref="ip__address_8hpp" startline="141" endline="141">address</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="161" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="161" bodyend="161"/>
+        <references refid="classip__address_1a35c8e3f14ccbfa009341c1b52c865aee" compoundref="ip__address_8hpp" startline="161" endline="161">address</references>
+        <referencedby refid="classip__address_1a35c8e3f14ccbfa009341c1b52c865aee" compoundref="ip__address_8hpp" startline="161" endline="161">address</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classip__address_1aad007f1f33d2a5ee511a53cd0c3a219f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type>int</type>
-        <definition>int ip_address::family</definition>
+      <memberdef kind="function" id="classip__address_1af5f2bee544cb37cedcf21a74aa48193d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classip__address_1a1dd78d9245e92f33939bbe4f42b2180b" kindref="member">family</ref></type>
+        <definition>family ip_address::address_family</definition>
         <argsstring>() const noexcept</argsstring>
-        <name>family</name>
-        <qualifiedname>ip_address::family</qualifiedname>
+        <name>address_family</name>
+        <qualifiedname>ip_address::address_family</qualifiedname>
         <briefdescription>
 <para>获取地址族 </para>
         </briefdescription>
@@ -340,9 +461,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="147" column="10"/>
-        <referencedby refid="classip__address_1a845df218a59fa6cc3101db811e0d2ae6">any</referencedby>
-        <referencedby refid="classip__address_1af3058b70dd79d1828a8aa515c40be38b">loopback</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="167" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classip__address_1a81f470ab3730976248a90c5b97e38862" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="structports" kindref="compound">ports</ref></type>
@@ -360,10 +479,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="153" column="12"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="173" column="12"/>
         <references refid="classip__address_1a81f470ab3730976248a90c5b97e38862">port</references>
-        <referencedby refid="classip__address_1a845df218a59fa6cc3101db811e0d2ae6">any</referencedby>
-        <referencedby refid="classip__address_1af3058b70dd79d1828a8aa515c40be38b">loopback</referencedby>
+        <referencedby refid="classip__address_1a4336be517fcb42921bc9ed6a354c6302">any</referencedby>
+        <referencedby refid="classip__address_1a4169090f66b7d2e46d41150a65f6c3d0">loopback</referencedby>
         <referencedby refid="classip__address_1add2ce58669f6042593d6970743e7311a">parse</referencedby>
         <referencedby refid="classip__address_1a81f470ab3730976248a90c5b97e38862">port</referencedby>
       </memberdef>
@@ -383,7 +502,7 @@ IPv4格式：192.168.1.1:8080 IPv6格式：[2001:db8::1]:443 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="162" column="13"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="182" column="13"/>
         <references refid="classip__address_1a63b991619d80738e0152a94a5e746d94">to_string</references>
         <referencedby refid="classip__address_1a63b991619d80738e0152a94a5e746d94">to_string</referencedby>
       </memberdef>
@@ -416,7 +535,7 @@ IPv4格式：192.168.1.1:8080 IPv6格式：[2001:db8::1]:443 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="182" column="11"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="202" column="11"/>
         <references refid="classip__address_1ac938566448641af3ba1ab6942fca0486">ip_address</references>
       </memberdef>
       <memberdef kind="function" id="classip__address_1accc88b6e674ea278fb174fce157183ea" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
@@ -448,15 +567,15 @@ IPv4格式：192.168.1.1:8080 IPv6格式：[2001:db8::1]:443 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="189" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="189" bodyend="189"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="209" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="209" bodyend="209"/>
         <references refid="classip__address_1ac938566448641af3ba1ab6942fca0486">ip_address</references>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="classip__address_1a845df218a59fa6cc3101db811e0d2ae6" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classip__address_1a4336be517fcb42921bc9ed6a354c6302" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classip__address" kindref="compound">ip_address</ref></type>
         <definition>static ip_address ip_address::any</definition>
-        <argsstring>(ports port=ports::UNDEF, int family=AF_INET) noexcept</argsstring>
+        <argsstring>(ports port=ports::UNDEF, family f=family::INET4) noexcept</argsstring>
         <name>any</name>
         <qualifiedname>ip_address::any</qualifiedname>
         <param>
@@ -465,9 +584,9 @@ IPv4格式：192.168.1.1:8080 IPv6格式：[2001:db8::1]:443 </para>
           <defval><ref refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a04290979cd919f404c7a1e8dd0fc9046" kindref="member">ports::UNDEF</ref></defval>
         </param>
         <param>
-          <type>int</type>
-          <declname>family</declname>
-          <defval>AF_INET</defval>
+          <type><ref refid="classip__address_1a1dd78d9245e92f33939bbe4f42b2180b" kindref="member">family</ref></type>
+          <declname>f</declname>
+          <defval><ref refid="classip__address_1a1dd78d9245e92f33939bbe4f42b2180ba026226c3cf0400ffbf1ef901c0709aea" kindref="member">family::INET4</ref></defval>
         </param>
         <briefdescription>
 <para>获取通配地址 </para>
@@ -483,10 +602,10 @@ IPv4格式：192.168.1.1:8080 IPv6格式：[2001:db8::1]:443 </para>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>family</parametername>
+<parametername>f</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>地址族，默认为IPv4 </para>
+<para>地址族，默认为INET4 </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -496,16 +615,16 @@ IPv4格式：192.168.1.1:8080 IPv6格式：[2001:db8::1]:443 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="109" column="24"/>
-        <references refid="classip__address_1aad007f1f33d2a5ee511a53cd0c3a219f">family</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="129" column="24"/>
+        <references refid="classip__address_1a1dd78d9245e92f33939bbe4f42b2180ba026226c3cf0400ffbf1ef901c0709aea" compoundref="ip__address_8hpp" startline="58">INET4</references>
         <references refid="classip__address_1ac938566448641af3ba1ab6942fca0486">ip_address</references>
         <references refid="classip__address_1a81f470ab3730976248a90c5b97e38862">port</references>
         <references refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a04290979cd919f404c7a1e8dd0fc9046" compoundref="ports_8hpp" startline="130">ports::UNDEF</references>
       </memberdef>
-      <memberdef kind="function" id="classip__address_1af3058b70dd79d1828a8aa515c40be38b" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="classip__address_1a4169090f66b7d2e46d41150a65f6c3d0" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classip__address" kindref="compound">ip_address</ref></type>
         <definition>static ip_address ip_address::loopback</definition>
-        <argsstring>(ports port=ports::UNDEF, int family=AF_INET) noexcept</argsstring>
+        <argsstring>(ports port=ports::UNDEF, family f=family::INET4) noexcept</argsstring>
         <name>loopback</name>
         <qualifiedname>ip_address::loopback</qualifiedname>
         <param>
@@ -514,9 +633,9 @@ IPv4格式：192.168.1.1:8080 IPv6格式：[2001:db8::1]:443 </para>
           <defval><ref refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a04290979cd919f404c7a1e8dd0fc9046" kindref="member">ports::UNDEF</ref></defval>
         </param>
         <param>
-          <type>int</type>
-          <declname>family</declname>
-          <defval>AF_INET</defval>
+          <type><ref refid="classip__address_1a1dd78d9245e92f33939bbe4f42b2180b" kindref="member">family</ref></type>
+          <declname>f</declname>
+          <defval><ref refid="classip__address_1a1dd78d9245e92f33939bbe4f42b2180ba026226c3cf0400ffbf1ef901c0709aea" kindref="member">family::INET4</ref></defval>
         </param>
         <briefdescription>
 <para>获取回环地址 </para>
@@ -532,10 +651,10 @@ IPv4格式：192.168.1.1:8080 IPv6格式：[2001:db8::1]:443 </para>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>family</parametername>
+<parametername>f</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>地址族（AF_INET或AF_INET6），默认为IPv4 </para>
+<para>地址族，默认为INET4 </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -545,8 +664,8 @@ IPv4格式：192.168.1.1:8080 IPv6格式：[2001:db8::1]:443 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="117" column="24"/>
-        <references refid="classip__address_1aad007f1f33d2a5ee511a53cd0c3a219f">family</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="137" column="24"/>
+        <references refid="classip__address_1a1dd78d9245e92f33939bbe4f42b2180ba026226c3cf0400ffbf1ef901c0709aea" compoundref="ip__address_8hpp" startline="58">INET4</references>
         <references refid="classip__address_1ac938566448641af3ba1ab6942fca0486">ip_address</references>
         <references refid="classip__address_1a81f470ab3730976248a90c5b97e38862">port</references>
         <references refid="structports_1ac669b0e3aadb23af41c8fb0d20d8b9d8a04290979cd919f404c7a1e8dd0fc9046" compoundref="ports_8hpp" startline="130">ports::UNDEF</references>
@@ -593,7 +712,7 @@ IPv4格式：192.168.1.1:8080 IPv6格式：[2001:db8::1]:443 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="173" column="22"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="193" column="22"/>
         <references refid="classip__address_1ac938566448641af3ba1ab6942fca0486">ip_address</references>
         <references refid="classip__address_1add2ce58669f6042593d6970743e7311a">parse</references>
         <references refid="classip__address_1a81f470ab3730976248a90c5b97e38862">port</references>
@@ -639,15 +758,16 @@ IPv4格式：192.168.1.1:8080 IPv6格式：[2001:db8::1]:443 </para>
         <link refid="structistringify"/>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="48" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="48" bodyend="190"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" line="48" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/util/ip_address.hpp" bodystart="48" bodyend="210"/>
     <listofallmembers>
       <member refid="classip__address_1a96252e4fa9934ce92d4063fe454160fe" prot="private" virt="non-virtual"><scope>ip_address</scope><name>addr_</name></member>
       <member refid="classip__address_1a35c8e3f14ccbfa009341c1b52c865aee" prot="public" virt="non-virtual"><scope>ip_address</scope><name>address</name></member>
+      <member refid="classip__address_1af5f2bee544cb37cedcf21a74aa48193d" prot="public" virt="non-virtual"><scope>ip_address</scope><name>address_family</name></member>
       <member refid="classip__address_1a3b98397bf02b3c92bebf8b501b8bfe19" prot="public" virt="non-virtual"><scope>ip_address</scope><name>address_type</name></member>
-      <member refid="classip__address_1a845df218a59fa6cc3101db811e0d2ae6" prot="public" virt="non-virtual"><scope>ip_address</scope><name>any</name></member>
+      <member refid="classip__address_1a4336be517fcb42921bc9ed6a354c6302" prot="public" virt="non-virtual"><scope>ip_address</scope><name>any</name></member>
       <member refid="classip__address_1a75cfa46d8198d01c33e7b55dbc75ab4d" prot="public" virt="non-virtual"><scope>ip_address</scope><name>data</name></member>
       <member refid="classip__address_1a73d793b61070f19ebdad4f91d6962e4a" prot="public" virt="non-virtual"><scope>ip_address</scope><name>data</name></member>
-      <member refid="classip__address_1aad007f1f33d2a5ee511a53cd0c3a219f" prot="public" virt="non-virtual"><scope>ip_address</scope><name>family</name></member>
+      <member refid="classip__address_1a1dd78d9245e92f33939bbe4f42b2180b" prot="public" virt="non-virtual"><scope>ip_address</scope><name>family</name></member>
       <member refid="classip__address_1ac938566448641af3ba1ab6942fca0486" prot="public" virt="non-virtual"><scope>ip_address</scope><name>ip_address</name></member>
       <member refid="classip__address_1a80998e8dc8280df952852cffeea393fa" prot="public" virt="non-virtual"><scope>ip_address</scope><name>ip_address</name></member>
       <member refid="classip__address_1ae4239b7f69e83b99f451956238b92980" prot="public" virt="non-virtual"><scope>ip_address</scope><name>ip_address</name></member>
@@ -656,7 +776,7 @@ IPv4格式：192.168.1.1:8080 IPv6格式：[2001:db8::1]:443 </para>
       <member refid="classip__address_1a5e65a0ee46b36b3b6938b89a8bc149a4" prot="public" virt="non-virtual"><scope>ip_address</scope><name>is_ipv4</name></member>
       <member refid="classip__address_1addfa656142f2397de3eb263a03070574" prot="public" virt="non-virtual"><scope>ip_address</scope><name>is_ipv6</name></member>
       <member refid="classip__address_1ac4303a065f03c1bcefb3fc2021dbf973" prot="public" virt="non-virtual"><scope>ip_address</scope><name>is_valid</name></member>
-      <member refid="classip__address_1af3058b70dd79d1828a8aa515c40be38b" prot="public" virt="non-virtual"><scope>ip_address</scope><name>loopback</name></member>
+      <member refid="classip__address_1a4169090f66b7d2e46d41150a65f6c3d0" prot="public" virt="non-virtual"><scope>ip_address</scope><name>loopback</name></member>
       <member refid="classip__address_1accc88b6e674ea278fb174fce157183ea" prot="public" virt="non-virtual"><scope>ip_address</scope><name>operator!=</name></member>
       <member refid="classip__address_1aaa690aad7a7f577215bd2eac5a8c4f4d" prot="public" virt="non-virtual"><scope>ip_address</scope><name>operator=</name></member>
       <member refid="classip__address_1a0b5d492982ec30c7e2c8d538c6540595" prot="public" virt="non-virtual"><scope>ip_address</scope><name>operator=</name></member>

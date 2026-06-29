@@ -155,6 +155,7 @@ var group___string =
       [ "insert", "classbasic__string.html#aaa1c782e7197c7c186065fc8b2780b2d", null ],
       [ "length", "classbasic__string.html#ac50981ac7ad8f911d32fa3dd750609c2", null ],
       [ "less_than", "classbasic__string.html#a9c9f2c9be2478c366bf49a306f8ad69d", null ],
+      [ "lowercase", "classbasic__string.html#a35add6d43baf2212ce4cc7f8156a288a", null ],
       [ "lowercase", "classbasic__string.html#a39775206ece372bc267b7918ddc64a5c", null ],
       [ "max_size", "classbasic__string.html#a943a6b81f3bd0c4ebae59cf4c4fde089", null ],
       [ "operator+=", "classbasic__string.html#a0975e81a39302e68effc87782a56d779", null ],
@@ -199,6 +200,7 @@ var group___string =
       [ "rfind", "classbasic__string.html#a16d15f114f6be7dc8a033ee17555dfbe", null ],
       [ "shrink_to_fit", "classbasic__string.html#a5d8bf2cc6ed05cee178e2fdae6577bc7", null ],
       [ "size", "classbasic__string.html#a0da46f76c70abdd9b9aa03f6b62a76a6", null ],
+      [ "split", "classbasic__string.html#abd23b54384b5f87856572cafb27af10f", null ],
       [ "starts_with", "classbasic__string.html#a742fbcf8d7af90f7c4beb6e838d35832", null ],
       [ "starts_with", "classbasic__string.html#abded48e0e389c76bd98e71a252bdccd1", null ],
       [ "starts_with", "classbasic__string.html#af048b5fb65ba5f4bac945592a6608692", null ],
@@ -213,6 +215,7 @@ var group___string =
       [ "trim_left_if", "classbasic__string.html#a9d1289b549b881b2f3f8db5962ebbdea", null ],
       [ "trim_right", "classbasic__string.html#a2e4866fdebac41129c89ba2773dd4014", null ],
       [ "trim_right_if", "classbasic__string.html#a43df8c7113de5b058fa069254fed618c", null ],
+      [ "uppercase", "classbasic__string.html#afd20f265cb1a3e5d66f18890d699831e", null ],
       [ "uppercase", "classbasic__string.html#a3848149a9ec813052446a10bc01304d4", null ],
       [ "view", "classbasic__string.html#ad5aafd7e8c50ae4762af6e22069b90d7", null ],
       [ "view", "classbasic__string.html#a74d1c53a97772a8b9262e81030e8dd4c", null ]
@@ -229,11 +232,5 @@ var group___string =
     [ "getline", "group___string.html#ga761ac23c39f2db8bec4114f02ab17da2", null ],
     [ "getline", "group___string.html#ga8f0c96444c34444da23207d6578b0701", null ],
     [ "getline", "group___string.html#ga6f0a9b2ef4efe1dc14c2dc75e57d9ada", null ],
-    [ "getline", "group___string.html#ga0dc405ac19d9a06e310a066c96cd8b6c", null ],
-    [ "join", "group___string.html#gad6fef9d7dc32dcc59abbfb4f8f1e4a8c", null ],
-    [ "join_accumulate", "group___string.html#gac87cdee56122a742319deba573454116", null ],
-    [ "join_fast", "group___string.html#ga500f127f5e7c8d360e3ea93caca3308d", null ],
-    [ "split", "group___string.html#ga12f75933c718fe9810627655062cb836", null ],
-    [ "split", "group___string.html#ga449f604820ccf75d6d1c6ddbe80055b6", null ],
-    [ "unique", "group___string.html#gaf07814bea643fde173e2d57d3fff2e80", null ]
+    [ "getline", "group___string.html#ga0dc405ac19d9a06e310a066c96cd8b6c", null ]
 ];

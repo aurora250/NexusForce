@@ -52,6 +52,21 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="62" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="62" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classsystem__event_1ad44ef93148a9b3de5bb5c6fd0c3f50b1" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool system_event::signaled_</definition>
+        <argsstring></argsstring>
+        <name>signaled_</name>
+        <qualifiedname>system_event::signaled_</qualifiedname>
+        <briefdescription>
+<para>信号状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="67" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classsystem__event_1a4a744bf4cbc914d2b0607f48c9aa8017" prot="private" static="no" mutable="no">
         <type><ref refid="classsystem__event_1a836fe1a751b10858f44697fdd940aa9f" kindref="member">type</ref></type>
         <definition>type system_event::type_</definition>
@@ -305,6 +320,46 @@
         <references refid="classsystem__event_1a88a8392cfe11e8ca599f429e60e4eea7">wait</references>
         <referencedby refid="classsystem__event_1a88a8392cfe11e8ca599f429e60e4eea7">wait</referencedby>
       </memberdef>
+      <memberdef kind="function" id="classsystem__event_1a40a68df7df1f662aa755b017c80aabc2" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool system_event::try_wait</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>try_wait</name>
+        <qualifiedname>system_event::try_wait</qualifiedname>
+        <briefdescription>
+<para>尝试获取事件（非阻塞） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>事件是否已处于有信号状态</para>
+</simplesect>
+对于自动重置事件，成功时自动重置为无信号状态。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="129" column="10"/>
+        <references refid="classsystem__event_1a40a68df7df1f662aa755b017c80aabc2">try_wait</references>
+        <referencedby refid="classsystem__event_1a40a68df7df1f662aa755b017c80aabc2">try_wait</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__event_1ac50035a38a0721148f8f77b41bdae3d3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool system_event::is_set</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_set</name>
+        <qualifiedname>system_event::is_set</qualifiedname>
+        <briefdescription>
+<para>查询事件是否处于有信号状态 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否已设置 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="135" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="135" bodyend="135"/>
+        <references refid="classsystem__event_1ac50035a38a0721148f8f77b41bdae3d3" compoundref="system__event_8hpp" startline="135" endline="135">is_set</references>
+        <referencedby refid="classsystem__event_1ac50035a38a0721148f8f77b41bdae3d3" compoundref="system__event_8hpp" startline="135" endline="135">is_set</referencedby>
+      </memberdef>
       <memberdef kind="function" id="classsystem__event_1af3914964c19a58d549eec0587b8fac1f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classsystem__event_1a836fe1a751b10858f44697fdd940aa9f" kindref="member">type</ref></type>
         <definition>type system_event::event_type</definition>
@@ -321,9 +376,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="127" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="127" bodyend="127"/>
-        <references refid="classsystem__event_1af3914964c19a58d549eec0587b8fac1f" compoundref="system__event_8hpp" startline="127" endline="127">event_type</references>
-        <referencedby refid="classsystem__event_1af3914964c19a58d549eec0587b8fac1f" compoundref="system__event_8hpp" startline="127" endline="127">event_type</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="141" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="141" bodyend="141"/>
       </memberdef>
       <memberdef kind="function" id="classsystem__event_1a09f6cc9daf074ce180c14b5a6cd1661e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void *</type>
@@ -341,7 +394,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="134" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="134" bodyend="134"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="148" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="148" bodyend="148"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -355,18 +408,21 @@
 </listitem></itemizedlist>
 </para>
     </detaileddescription>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="33" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="33" bodyend="136"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" line="33" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp" bodystart="33" bodyend="150"/>
     <listofallmembers>
       <member refid="classsystem__event_1af3914964c19a58d549eec0587b8fac1f" prot="public" virt="non-virtual"><scope>system_event</scope><name>event_type</name></member>
       <member refid="classsystem__event_1af02e041ae9a6184ea35906f3c38c182e" prot="private" virt="non-virtual"><scope>system_event</scope><name>handle_</name></member>
+      <member refid="classsystem__event_1ac50035a38a0721148f8f77b41bdae3d3" prot="public" virt="non-virtual"><scope>system_event</scope><name>is_set</name></member>
       <member refid="classsystem__event_1a09f6cc9daf074ce180c14b5a6cd1661e" prot="public" virt="non-virtual"><scope>system_event</scope><name>native_handle</name></member>
       <member refid="classsystem__event_1ae0a6c81228cd98f64461e71ee03d7549" prot="public" virt="non-virtual"><scope>system_event</scope><name>operator=</name></member>
       <member refid="classsystem__event_1a998f73cdf1659d029a1abcace0c0c3aa" prot="public" virt="non-virtual"><scope>system_event</scope><name>operator=</name></member>
       <member refid="classsystem__event_1a7c349b939fea1a128c803d1035ee76f8" prot="public" virt="non-virtual"><scope>system_event</scope><name>reset</name></member>
       <member refid="classsystem__event_1a8e6d8bfe1aecd567b1916e8d1b68815c" prot="public" virt="non-virtual"><scope>system_event</scope><name>set</name></member>
+      <member refid="classsystem__event_1ad44ef93148a9b3de5bb5c6fd0c3f50b1" prot="private" virt="non-virtual"><scope>system_event</scope><name>signaled_</name></member>
       <member refid="classsystem__event_1a6b4cbd5be761d22c4cac58418c14d4ca" prot="public" virt="non-virtual"><scope>system_event</scope><name>system_event</name></member>
       <member refid="classsystem__event_1acd4c7016816d6bda0b3d80c915fbd5a7" prot="public" virt="non-virtual"><scope>system_event</scope><name>system_event</name></member>
       <member refid="classsystem__event_1aa56bde5789679822d91883a97f323128" prot="public" virt="non-virtual"><scope>system_event</scope><name>system_event</name></member>
+      <member refid="classsystem__event_1a40a68df7df1f662aa755b017c80aabc2" prot="public" virt="non-virtual"><scope>system_event</scope><name>try_wait</name></member>
       <member refid="classsystem__event_1a836fe1a751b10858f44697fdd940aa9f" prot="public" virt="non-virtual"><scope>system_event</scope><name>type</name></member>
       <member refid="classsystem__event_1a4a744bf4cbc914d2b0607f48c9aa8017" prot="private" virt="non-virtual"><scope>system_event</scope><name>type_</name></member>
       <member refid="classsystem__event_1a88a8392cfe11e8ca599f429e60e4eea7" prot="public" virt="non-virtual"><scope>system_event</scope><name>wait</name></member>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['文件_0',['文件',['../group___file.html',1,'']]]
+  ['持续时间_0',['持续时间',['../group___duration.html',1,'']]]
 ];

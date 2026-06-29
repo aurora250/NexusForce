@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['容器_20container_0',['📦 容器 (Container)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md19',1,'']]]
+  ['实现细节_0',['实现细节',['../group___h_t_t_p.html#implementation_details',1,'实现细节'],['../classyaml__parser.html#parser_implementation',1,'实现细节']]],
+  ['实用程序语法指南_1',['POSIX 实用程序语法指南',['../group___command_line.html#guideline_reference',1,'']]]
 ];

@@ -18,14 +18,17 @@ var group___thread_pool =
       [ "empty", "classlocal__queue.html#a3a06828564123022ace1687f4eed8c06", null ],
       [ "push_back", "classlocal__queue.html#a70e2ab3d3d65f423ffe571788f3ca816", null ],
       [ "remain_size", "classlocal__queue.html#a0a53b77c9e6e290d1151b232f29b2c17", null ],
+      [ "set_steal_strategy", "classlocal__queue.html#a6b1dbe093547c214d22a2abac73ef4f7", null ],
       [ "size", "classlocal__queue.html#a3abaec7e3996eed545704cc39027f144", null ],
       [ "try_pop", "classlocal__queue.html#a4a7dfd98b0eceb8f752a61a2573c8881", null ]
     ] ],
     [ "worker_context", "structworker__context.html", [
       [ "id_type", "structworker__context.html#a9819ca5bea261e9484d75f512fc38326", null ],
       [ "consecutive_idle_count", "structworker__context.html#aa4cb896c147fd86efed7b3f176e8a233", null ],
+      [ "cpu_core", "structworker__context.html#a9db4dd507d15fc2c6fbd3e2ff84f9c1f", null ],
       [ "id", "structworker__context.html#a0ce42d0b767acc53e81ba0e89aa4e3c4", null ],
       [ "is_stealing", "structworker__context.html#a0708436cfb366b691690600be934454e", null ],
+      [ "numa_node", "structworker__context.html#ad18304a27a3cae32a78163fb9375fff1", null ],
       [ "queue", "structworker__context.html#a3d472b2df48065b84ccdb033671a352c", null ]
     ] ],
     [ "task_info", "structtask__info.html", [
@@ -49,8 +52,8 @@ var group___thread_pool =
     ] ],
     [ "submit_result&lt; T &gt;", "structsubmit__result.html", [
       [ "operator bool", "structsubmit__result.html#a292d3f6d8dda2c225701f925233df75e", null ],
-      [ "future", "structsubmit__result.html#a2aec5dabd1e7c8f5aa51c4aa01faaf09", null ],
-      [ "task_info", "structsubmit__result.html#a936d7685d45adfd0eb8b2b820766047b", null ]
+      [ "future", "structsubmit__result.html#a802be06dd5f31e5337cafb5a9726d894", null ],
+      [ "task_info", "structsubmit__result.html#a113da1092501b385ab3f10c5c0bbc778", null ]
     ] ],
     [ "thread_pool", "classthread__pool.html", [
       [ "periodic_task_state", "structthread__pool_1_1periodic__task__state.html", [

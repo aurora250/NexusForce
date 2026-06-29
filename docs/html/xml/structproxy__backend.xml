@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structproxy__backend" kind="struct" language="C++" prot="public">
+    <compoundname>proxy_backend</compoundname>
+    <includes refid="reverse__proxy_8hpp" local="no">reverse_proxy.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structproxy__backend_1a60f83d374cf07b756c629380a0912494" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string proxy_backend::host</definition>
+        <argsstring></argsstring>
+        <name>host</name>
+        <qualifiedname>proxy_backend::host</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="26" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structproxy__backend_1a33315b07f93b917797e394463dda0bb3" prot="public" static="no" mutable="no">
+        <type><ref refid="structports" kindref="compound">ports</ref></type>
+        <definition>ports proxy_backend::port</definition>
+        <argsstring></argsstring>
+        <name>port</name>
+        <qualifiedname>proxy_backend::port</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="27" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structproxy__backend_1a5dd33ddd1d22b84480ea693489c9415d" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string proxy_backend::scheme</definition>
+        <argsstring></argsstring>
+        <name>scheme</name>
+        <qualifiedname>proxy_backend::scheme</qualifiedname>
+        <initializer>{&quot;http&quot;}</initializer>
+        <briefdescription>
+<para>&quot;http&quot; 或 &quot;https&quot; </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="28" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="28" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="variable" id="structproxy__backend_1ab202d9f7608dcc3df95ade0f6945eb43" prot="public" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t proxy_backend::weight</definition>
+        <argsstring></argsstring>
+        <name>weight</name>
+        <qualifiedname>proxy_backend::weight</qualifiedname>
+        <initializer>{1}</initializer>
+        <briefdescription>
+<para>权重（用于加权负载均衡） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="29" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="29" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="variable" id="structproxy__backend_1a5f568aba1ecc0ef2d4028dd7aa418bf3" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool proxy_backend::enabled</definition>
+        <argsstring></argsstring>
+        <name>enabled</name>
+        <qualifiedname>proxy_backend::enabled</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+<para>是否启用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="30" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="30" bodyend="30"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structproxy__backend_1abb93acce4d83d4bdce9d3bd8ef488fee" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string proxy_backend::to_url</definition>
+        <argsstring>(const string &amp;path) const</argsstring>
+        <name>to_url</name>
+        <qualifiedname>proxy_backend::to_url</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="32" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="32" bodyend="34"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>反向代理后端服务器配置 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>basic_string&lt; char &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icommon&lt; T &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="5">
+        <label>ihashable&lt; T &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="7">
+        <label>iobject&lt; ports &gt;</label>
+        <link refid="structiobject"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>istringify&lt; ports &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="6">
+        <label>ports</label>
+        <link refid="structports"/>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>proxy_backend</label>
+        <link refid="structproxy__backend"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>host</edgelabel>
+          <edgelabel>scheme</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>port</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="25" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="25" bodyend="35"/>
+    <listofallmembers>
+      <member refid="structproxy__backend_1a5f568aba1ecc0ef2d4028dd7aa418bf3" prot="public" virt="non-virtual"><scope>proxy_backend</scope><name>enabled</name></member>
+      <member refid="structproxy__backend_1a60f83d374cf07b756c629380a0912494" prot="public" virt="non-virtual"><scope>proxy_backend</scope><name>host</name></member>
+      <member refid="structproxy__backend_1a33315b07f93b917797e394463dda0bb3" prot="public" virt="non-virtual"><scope>proxy_backend</scope><name>port</name></member>
+      <member refid="structproxy__backend_1a5dd33ddd1d22b84480ea693489c9415d" prot="public" virt="non-virtual"><scope>proxy_backend</scope><name>scheme</name></member>
+      <member refid="structproxy__backend_1abb93acce4d83d4bdce9d3bd8ef488fee" prot="public" virt="non-virtual"><scope>proxy_backend</scope><name>to_url</name></member>
+      <member refid="structproxy__backend_1ab202d9f7608dcc3df95ade0f6945eb43" prot="public" virt="non-virtual"><scope>proxy_backend</scope><name>weight</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

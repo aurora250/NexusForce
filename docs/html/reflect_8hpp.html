@@ -96,10 +96,11 @@ $(function(){initNavTree('reflect_8hpp.html','',''); });
 <p>反射系统主入口  
 <a href="#details">更多...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="reflect_2registry_8hpp_source.html">NeForce/core/reflect/registry.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="reflect_2function_8hpp_source.html">NeForce/core/reflect/function.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 reflect.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="reflect_8hpp__incl.svg" width="2448" height="1654"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="reflect_8hpp__incl.svg" width="2391" height="1670"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="reflect_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -111,24 +112,22 @@ reflect.hpp 的引用(Include)关系图:</div>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 宏定义</h2></td></tr>
-<tr class="memitem:ga6508bad6337bffd24165f1d8038e2eb8" id="r_ga6508bad6337bffd24165f1d8038e2eb8"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___reflection.html#ga6508bad6337bffd24165f1d8038e2eb8">NEFORCE_REFLECT_REGISTER_N</a>(Class,  Name)</td></tr>
-<tr class="memdesc:ga6508bad6337bffd24165f1d8038e2eb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册类型（无基类）  <br /></td></tr>
-<tr class="memitem:gad623e383ce36c4add72a0ff8cc80c972" id="r_gad623e383ce36c4add72a0ff8cc80c972"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___reflection.html#gad623e383ce36c4add72a0ff8cc80c972">NEFORCE_REFLECT_REGISTER_N_DERIVED</a>(Class,  Base,  Name)</td></tr>
-<tr class="memdesc:gad623e383ce36c4add72a0ff8cc80c972"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册类型（带基类）  <br /></td></tr>
 <tr class="memitem:ga8cd8052ba270c6ae08c9486e3191ac60" id="r_ga8cd8052ba270c6ae08c9486e3191ac60"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___reflection.html#ga8cd8052ba270c6ae08c9486e3191ac60">NEFORCE_REFLECT_REGISTER</a>(Class)</td></tr>
 <tr class="memdesc:ga8cd8052ba270c6ae08c9486e3191ac60"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册类型（无基类）  <br /></td></tr>
 <tr class="memitem:gafc434cedd29fcb0b3450b3f9a7d3286d" id="r_gafc434cedd29fcb0b3450b3f9a7d3286d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___reflection.html#gafc434cedd29fcb0b3450b3f9a7d3286d">NEFORCE_REFLECT_REGISTER_DERIVED</a>(Class,  Base)</td></tr>
 <tr class="memdesc:gafc434cedd29fcb0b3450b3f9a7d3286d"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册类型（带基类）  <br /></td></tr>
+<tr class="memitem:ga7733136728615a337adca516a0a7ed8c" id="r_ga7733136728615a337adca516a0a7ed8c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___reflection.html#ga7733136728615a337adca516a0a7ed8c">NEFORCE_REFLECT_RESOLVE_BASES</a>()</td></tr>
+<tr class="memdesc:ga7733136728615a337adca516a0a7ed8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">统一解析所有待解析的基类引用  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga5a74d42372d4485518ebb6915c124a37" id="r_ga5a74d42372d4485518ebb6915c124a37"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga5a74d42372d4485518ebb6915c124a37 template"><td class="memItemLeft"><a class="el" href="classtype__builder.html">type_builder</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___reflection.html#ga5a74d42372d4485518ebb6915c124a37">reflect</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>)</td></tr>
-<tr class="memdesc:ga5a74d42372d4485518ebb6915c124a37"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建类型反射构建器  <br /></td></tr>
+<tr class="memitem:gac197fd7307a57ddbf46feb16ac7ebd32" id="r_gac197fd7307a57ddbf46feb16ac7ebd32"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#gaca38abc104326427a46bccfd27cbfe28">is_class_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gac197fd7307a57ddbf46feb16ac7ebd32 template"><td class="memItemLeft"><a class="el" href="classtype__builder.html">type_builder</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="group___reflection.html#gac197fd7307a57ddbf46feb16ac7ebd32">reflect</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>)</td></tr>
+<tr class="memdesc:gac197fd7307a57ddbf46feb16ac7ebd32"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建类型反射构建器  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>反射系统主入口 </p>
-<p>此文件提供了反射系统的统一入口，包含类型构建器和便利宏。 用户通过reflect函数和宏来注册类型的反射信息。 </p>
+<p>此文件提供了反射系统的统一入口，包含类型构建器和便利宏。 用户通过 reflect 函数和宏来注册类型的反射信息。 </p>
 
 <p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

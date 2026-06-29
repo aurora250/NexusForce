@@ -1,0 +1,501 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: daemon类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classdaemon.html','','classdaemon-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">daemon类 参考<div class="ingroups"><a class="el" href="group___daemon.html">守护进程</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>守护进程  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="daemon_8hpp_source.html">daemon.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:child_5Fconfig" id="r_child_5Fconfig"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structdaemon_1_1child__config.html">child_config</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">子进程配置  <a href="structdaemon_1_1child__config.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:child_5Fstatus" id="r_child_5Fstatus"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structdaemon_1_1child__status.html">child_status</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">子进程运行时状态  <a href="structdaemon_1_1child__status.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:ad05b7d9ed3adca1be5d4889df9accc19" id="r_ad05b7d9ed3adca1be5d4889df9accc19"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ad05b7d9ed3adca1be5d4889df9accc19">daemon_state</a> { <br />
+&#160;&#160;<a class="el" href="#ad05b7d9ed3adca1be5d4889df9accc19af0a0bfe6bc7d2c58d2989034f83183e0">stopped</a>
+, <a class="el" href="#ad05b7d9ed3adca1be5d4889df9accc19a1ee85f6c60017a7f0646ba8dc5824de6">starting</a>
+, <a class="el" href="#ad05b7d9ed3adca1be5d4889df9accc19a75101dcdfc88455bcafc9e53e0b06689">running</a>
+, <a class="el" href="#ad05b7d9ed3adca1be5d4889df9accc19a588835865e53c295f44581aabf98501b">reloading</a>
+, <br />
+&#160;&#160;<a class="el" href="#ad05b7d9ed3adca1be5d4889df9accc19a3b2a3c8ed19fc3647432e72885d633e7">stopping</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:ad05b7d9ed3adca1be5d4889df9accc19"><td class="mdescLeft">&#160;</td><td class="mdescRight">守护进程运行状态  <a href="#ad05b7d9ed3adca1be5d4889df9accc19">更多...</a><br /></td></tr>
+<tr class="memitem:a47927ec91c987d81dfa1f7a10792b701" id="r_a47927ec91c987d81dfa1f7a10792b701"><td class="memItemLeft"><a id="a47927ec91c987d81dfa1f7a10792b701" name="a47927ec91c987d81dfa1f7a10792b701"></a>
+using&#160;</td><td class="memItemRight"><b>start_callback</b> = <a class="el" href="classfunction.html">function</a>&lt;void()&gt;</td></tr>
+<tr class="memdesc:a47927ec91c987d81dfa1f7a10792b701"><td class="mdescLeft">&#160;</td><td class="mdescRight">启动回调，run() 进入主循环前调用 <br /></td></tr>
+<tr class="memitem:a466ecc8fb0fcdeb2e5c60ff2671e1564" id="r_a466ecc8fb0fcdeb2e5c60ff2671e1564"><td class="memItemLeft"><a id="a466ecc8fb0fcdeb2e5c60ff2671e1564" name="a466ecc8fb0fcdeb2e5c60ff2671e1564"></a>
+using&#160;</td><td class="memItemRight"><b>stop_callback</b> = <a class="el" href="classfunction.html">function</a>&lt;void()&gt;</td></tr>
+<tr class="memdesc:a466ecc8fb0fcdeb2e5c60ff2671e1564"><td class="mdescLeft">&#160;</td><td class="mdescRight">停止回调，收到终止信号后调用 <br /></td></tr>
+<tr class="memitem:a2feff6e647d1222c6849286cd76b311d" id="r_a2feff6e647d1222c6849286cd76b311d"><td class="memItemLeft"><a id="a2feff6e647d1222c6849286cd76b311d" name="a2feff6e647d1222c6849286cd76b311d"></a>
+using&#160;</td><td class="memItemRight"><b>reload_callback</b> = <a class="el" href="classfunction.html">function</a>&lt;bool()&gt;</td></tr>
+<tr class="memdesc:a2feff6e647d1222c6849286cd76b311d"><td class="mdescLeft">&#160;</td><td class="mdescRight">重载回调，收到 SIGHUP 后调用。返回 true 继续运行，false 请求终止 <br /></td></tr>
+<tr class="memitem:ade1762a78413cdd0edd81ec3a9c7899d" id="r_ade1762a78413cdd0edd81ec3a9c7899d"><td class="memItemLeft"><a id="ade1762a78413cdd0edd81ec3a9c7899d" name="ade1762a78413cdd0edd81ec3a9c7899d"></a>
+using&#160;</td><td class="memItemRight"><b>child_exit_callback</b> = <a class="el" href="classfunction.html">function</a>&lt;void(const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&amp; <a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>, int exit_code)&gt;</td></tr>
+<tr class="memdesc:ade1762a78413cdd0edd81ec3a9c7899d"><td class="mdescLeft">&#160;</td><td class="mdescRight">子进程退出回调 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a45b1d6108b80d2a4ba035a346b31c456" id="r_a45b1d6108b80d2a4ba035a346b31c456"><td class="memItemLeft"><a id="a45b1d6108b80d2a4ba035a346b31c456" name="a45b1d6108b80d2a4ba035a346b31c456"></a>
+void&#160;</td><td class="memItemRight"><b>on_start</b> (<a class="el" href="#a47927ec91c987d81dfa1f7a10792b701">start_callback</a> cb)</td></tr>
+<tr class="memdesc:a45b1d6108b80d2a4ba035a346b31c456"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册启动回调 <br /></td></tr>
+<tr class="memitem:aaa72dc82f4acf4d04e36be42fd5e4113" id="r_aaa72dc82f4acf4d04e36be42fd5e4113"><td class="memItemLeft"><a id="aaa72dc82f4acf4d04e36be42fd5e4113" name="aaa72dc82f4acf4d04e36be42fd5e4113"></a>
+void&#160;</td><td class="memItemRight"><b>on_stop</b> (<a class="el" href="#a466ecc8fb0fcdeb2e5c60ff2671e1564">stop_callback</a> cb)</td></tr>
+<tr class="memdesc:aaa72dc82f4acf4d04e36be42fd5e4113"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册停止回调 <br /></td></tr>
+<tr class="memitem:a8a4d4f065f67d775cd2118b8dbd1b22b" id="r_a8a4d4f065f67d775cd2118b8dbd1b22b"><td class="memItemLeft"><a id="a8a4d4f065f67d775cd2118b8dbd1b22b" name="a8a4d4f065f67d775cd2118b8dbd1b22b"></a>
+void&#160;</td><td class="memItemRight"><b>on_reload</b> (<a class="el" href="#a2feff6e647d1222c6849286cd76b311d">reload_callback</a> cb)</td></tr>
+<tr class="memdesc:a8a4d4f065f67d775cd2118b8dbd1b22b"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册重载回调 <br /></td></tr>
+<tr class="memitem:af4337efe742279c90fd26492cb58ee46" id="r_af4337efe742279c90fd26492cb58ee46"><td class="memItemLeft"><a id="af4337efe742279c90fd26492cb58ee46" name="af4337efe742279c90fd26492cb58ee46"></a>
+void&#160;</td><td class="memItemRight"><b>on_child_exit</b> (<a class="el" href="#ade1762a78413cdd0edd81ec3a9c7899d">child_exit_callback</a> cb)</td></tr>
+<tr class="memdesc:af4337efe742279c90fd26492cb58ee46"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册子进程退出回调 <br /></td></tr>
+<tr class="memitem:a126ce2b9fcaa320df0fba7270788f274" id="r_a126ce2b9fcaa320df0fba7270788f274"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a126ce2b9fcaa320df0fba7270788f274">daemonize</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;work_dir=&quot;/&quot;)</td></tr>
+<tr class="memdesc:a126ce2b9fcaa320df0fba7270788f274"><td class="mdescLeft">&#160;</td><td class="mdescRight">将当前进程转为守护进程（Linux 双 fork）  <br /></td></tr>
+<tr class="memitem:ae8ab5fa697056ffaca558b311ea9f53e" id="r_ae8ab5fa697056ffaca558b311ea9f53e"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ae8ab5fa697056ffaca558b311ea9f53e">write_pid_file</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;<a class="el" href="classpath.html">path</a>)</td></tr>
+<tr class="memdesc:ae8ab5fa697056ffaca558b311ea9f53e"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建并锁定 PID 文件（单实例保护）  <br /></td></tr>
+<tr class="memitem:aef4dbc01367e334207d690d137692fc9" id="r_aef4dbc01367e334207d690d137692fc9"><td class="memItemLeft"><a id="aef4dbc01367e334207d690d137692fc9" name="aef4dbc01367e334207d690d137692fc9"></a>
+void&#160;</td><td class="memItemRight"><b>remove_pid_file</b> () noexcept</td></tr>
+<tr class="memdesc:aef4dbc01367e334207d690d137692fc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除 PID 文件并释放锁 <br /></td></tr>
+<tr class="memitem:ad16b6eb4e743529fe1c2870062cfa8a5" id="r_ad16b6eb4e743529fe1c2870062cfa8a5"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ad16b6eb4e743529fe1c2870062cfa8a5">add_child</a> (const <a class="el" href="structdaemon_1_1child__config.html">child_config</a> &amp;cfg)</td></tr>
+<tr class="memdesc:ad16b6eb4e743529fe1c2870062cfa8a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加受管理的子进程  <br /></td></tr>
+<tr class="memitem:a9d9162166407ac2d23502a5775423a78" id="r_a9d9162166407ac2d23502a5775423a78"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9d9162166407ac2d23502a5775423a78">remove_child</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;<a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>)</td></tr>
+<tr class="memdesc:a9d9162166407ac2d23502a5775423a78"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除子进程（先优雅终止）  <br /></td></tr>
+<tr class="memitem:a5b30437289131ad6b80398887d5f9651" id="r_a5b30437289131ad6b80398887d5f9651"><td class="memItemLeft"><a id="a5b30437289131ad6b80398887d5f9651" name="a5b30437289131ad6b80398887d5f9651"></a>
+<a class="el" href="structdaemon_1_1child__status.html">child_status</a>&#160;</td><td class="memItemRight"><b>get_child_status</b> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;<a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>) const</td></tr>
+<tr class="memdesc:a5b30437289131ad6b80398887d5f9651"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取子进程运行状态 <br /></td></tr>
+<tr class="memitem:af302bde7714ae66b0555da379ec36447" id="r_af302bde7714ae66b0555da379ec36447"><td class="memItemLeft"><a id="af302bde7714ae66b0555da379ec36447" name="af302bde7714ae66b0555da379ec36447"></a>
+<a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="structdaemon_1_1child__status.html">child_status</a> &gt;&#160;</td><td class="memItemRight"><b>all_child_statuses</b> () const</td></tr>
+<tr class="memdesc:af302bde7714ae66b0555da379ec36447"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取所有子进程状态 <br /></td></tr>
+<tr class="memitem:a2ffe15afe821ced9a95513048cd6c5ad" id="r_a2ffe15afe821ced9a95513048cd6c5ad"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a2ffe15afe821ced9a95513048cd6c5ad">run</a> ()</td></tr>
+<tr class="memdesc:a2ffe15afe821ced9a95513048cd6c5ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">进入信号驱动主循环（阻塞）  <br /></td></tr>
+<tr class="memitem:a7c835469a4c400cd0bef83bd54c4e334" id="r_a7c835469a4c400cd0bef83bd54c4e334"><td class="memItemLeft"><a id="a7c835469a4c400cd0bef83bd54c4e334" name="a7c835469a4c400cd0bef83bd54c4e334"></a>
+void&#160;</td><td class="memItemRight"><b>request_shutdown</b> ()</td></tr>
+<tr class="memdesc:a7c835469a4c400cd0bef83bd54c4e334"><td class="mdescLeft">&#160;</td><td class="mdescRight">请求优雅关闭（可从任何线程调用） <br /></td></tr>
+<tr class="memitem:adf28f07bc6da1a0f8b1391c03d29b3b3" id="r_adf28f07bc6da1a0f8b1391c03d29b3b3"><td class="memItemLeft"><a id="adf28f07bc6da1a0f8b1391c03d29b3b3" name="adf28f07bc6da1a0f8b1391c03d29b3b3"></a>
+void&#160;</td><td class="memItemRight"><b>request_reload</b> ()</td></tr>
+<tr class="memdesc:adf28f07bc6da1a0f8b1391c03d29b3b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">请求重载配置（可从任何线程调用） <br /></td></tr>
+<tr class="memitem:a3a7493c1a716dbe9e35be4e486fb3d21" id="r_a3a7493c1a716dbe9e35be4e486fb3d21"><td class="memItemLeft"><a id="a3a7493c1a716dbe9e35be4e486fb3d21" name="a3a7493c1a716dbe9e35be4e486fb3d21"></a>
+<a class="el" href="#ad05b7d9ed3adca1be5d4889df9accc19">daemon_state</a>&#160;</td><td class="memItemRight"><b>state</b> () const noexcept</td></tr>
+<tr class="memdesc:a3a7493c1a716dbe9e35be4e486fb3d21"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前状态 <br /></td></tr>
+<tr class="memitem:a9399f7c6c02bd12610e951eea84b55c1" id="r_a9399f7c6c02bd12610e951eea84b55c1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9399f7c6c02bd12610e951eea84b55c1">watchdog_ping</a> ()</td></tr>
+<tr class="memdesc:a9399f7c6c02bd12610e951eea84b55c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">看门狗喂狗（从工作线程周期性调用）  <br /></td></tr>
+<tr class="memitem:a8d891f3daaf3348e9a002da0b0dd6761" id="r_a8d891f3daaf3348e9a002da0b0dd6761"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8d891f3daaf3348e9a002da0b0dd6761">set_watchdog_timeout</a> (int timeout_ms)</td></tr>
+<tr class="memdesc:a8d891f3daaf3348e9a002da0b0dd6761"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置看门狗超时  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:a642889abd38d6f3e193816b9db459f47" id="r_a642889abd38d6f3e193816b9db459f47"><td class="memItemLeft"><a id="a642889abd38d6f3e193816b9db459f47" name="a642889abd38d6f3e193816b9db459f47"></a>
+static bool&#160;</td><td class="memItemRight"><b>is_pid_file_locked</b> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;<a class="el" href="classpath.html">path</a>) noexcept</td></tr>
+<tr class="memdesc:a642889abd38d6f3e193816b9db459f47"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查 PID 文件是否被锁定 <br /></td></tr>
+<tr class="memitem:a333da40fd71b6d6886f104f566fa3679" id="r_a333da40fd71b6d6886f104f566fa3679"><td class="memItemLeft"><a id="a333da40fd71b6d6886f104f566fa3679" name="a333da40fd71b6d6886f104f566fa3679"></a>
+static void&#160;</td><td class="memItemRight"><b>notify_ready</b> ()</td></tr>
+<tr class="memdesc:a333da40fd71b6d6886f104f566fa3679"><td class="mdescLeft">&#160;</td><td class="mdescRight">通知 systemd 服务已就绪 <br /></td></tr>
+<tr class="memitem:a4a9123967de3ec9277d854edb73251ff" id="r_a4a9123967de3ec9277d854edb73251ff"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a4a9123967de3ec9277d854edb73251ff">notify_status</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;status)</td></tr>
+<tr class="memdesc:a4a9123967de3ec9277d854edb73251ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">通知 systemd 服务状态  <br /></td></tr>
+<tr class="memitem:a78926a4b72b6748885c7b52936487cce" id="r_a78926a4b72b6748885c7b52936487cce"><td class="memItemLeft"><a id="a78926a4b72b6748885c7b52936487cce" name="a78926a4b72b6748885c7b52936487cce"></a>
+static void&#160;</td><td class="memItemRight"><b>notify_watchdog</b> ()</td></tr>
+<tr class="memdesc:a78926a4b72b6748885c7b52936487cce"><td class="mdescLeft">&#160;</td><td class="mdescRight">通知 systemd 看门狗喂狗 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>守护进程 </p>
+<p>封装了守护进程的完整生命周期：后台化 → PID 文件锁 → 子进程管理 → 信号驱动主循环 → 优雅关闭。</p>
+<div class="fragment"><div class="line">daemon d;</div>
+<div class="line">d.<a class="code hl_function" href="#a45b1d6108b80d2a4ba035a346b31c456">on_start</a>([] { <a class="code hl_function" href="classlogger.html#a20714991a7e1651edb6c3e90a855849b">logger::info</a>(<span class="stringliteral">&quot;starting&quot;</span>); });</div>
+<div class="line">d.<a class="code hl_function" href="#aaa72dc82f4acf4d04e36be42fd5e4113">on_stop</a>([] { <a class="code hl_function" href="classlogger.html#a20714991a7e1651edb6c3e90a855849b">logger::info</a>(<span class="stringliteral">&quot;stopping&quot;</span>); });</div>
+<div class="line">d.<a class="code hl_function" href="#a126ce2b9fcaa320df0fba7270788f274">daemonize</a>(<span class="stringliteral">&quot;/&quot;</span>);</div>
+<div class="line">d.<a class="code hl_function" href="#ae8ab5fa697056ffaca558b311ea9f53e">write_pid_file</a>(<span class="stringliteral">&quot;/var/run/myapp.pid&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line">daemon::child_config cfg;</div>
+<div class="line">cfg.<a class="code hl_variable" href="structdaemon_1_1child__config.html#a8155312a84066a465764bdba65fca846">name</a> = <span class="stringliteral">&quot;worker&quot;</span>;</div>
+<div class="line">cfg.<a class="code hl_variable" href="structdaemon_1_1child__config.html#a03d3fff0fb7374e26e531785610b84f8">executable</a> = <span class="stringliteral">&quot;/usr/bin/myworker&quot;</span>;</div>
+<div class="line">cfg.auto_restart = <span class="keyword">true</span>;</div>
+<div class="line">d.<a class="code hl_function" href="#ad16b6eb4e743529fe1c2870062cfa8a5">add_child</a>(cfg);</div>
+<div class="line"><span class="keywordflow">return</span> d.<a class="code hl_function" href="#a2ffe15afe821ced9a95513048cd6c5ad">run</a>();</div>
+<div class="ttc" id="aclassdaemon_html_a126ce2b9fcaa320df0fba7270788f274"><div class="ttname"><a href="#a126ce2b9fcaa320df0fba7270788f274">daemon::daemonize</a></div><div class="ttdeci">bool daemonize(const string &amp;work_dir=&quot;/&quot;)</div><div class="ttdoc">将当前进程转为守护进程（Linux 双 fork）</div></div>
+<div class="ttc" id="aclassdaemon_html_a2ffe15afe821ced9a95513048cd6c5ad"><div class="ttname"><a href="#a2ffe15afe821ced9a95513048cd6c5ad">daemon::run</a></div><div class="ttdeci">int run()</div><div class="ttdoc">进入信号驱动主循环（阻塞）</div></div>
+<div class="ttc" id="aclassdaemon_html_a45b1d6108b80d2a4ba035a346b31c456"><div class="ttname"><a href="#a45b1d6108b80d2a4ba035a346b31c456">daemon::on_start</a></div><div class="ttdeci">void on_start(start_callback cb)</div><div class="ttdoc">注册启动回调</div><div class="ttdef"><b>定义</b> <a href="daemon_8hpp_source.html#l00164">daemon.hpp:164</a></div></div>
+<div class="ttc" id="aclassdaemon_html_aaa72dc82f4acf4d04e36be42fd5e4113"><div class="ttname"><a href="#aaa72dc82f4acf4d04e36be42fd5e4113">daemon::on_stop</a></div><div class="ttdeci">void on_stop(stop_callback cb)</div><div class="ttdoc">注册停止回调</div><div class="ttdef"><b>定义</b> <a href="daemon_8hpp_source.html#l00167">daemon.hpp:167</a></div></div>
+<div class="ttc" id="aclassdaemon_html_ad16b6eb4e743529fe1c2870062cfa8a5"><div class="ttname"><a href="#ad16b6eb4e743529fe1c2870062cfa8a5">daemon::add_child</a></div><div class="ttdeci">bool add_child(const child_config &amp;cfg)</div><div class="ttdoc">添加受管理的子进程</div></div>
+<div class="ttc" id="aclassdaemon_html_ae8ab5fa697056ffaca558b311ea9f53e"><div class="ttname"><a href="#ae8ab5fa697056ffaca558b311ea9f53e">daemon::write_pid_file</a></div><div class="ttdeci">bool write_pid_file(const string &amp;path)</div><div class="ttdoc">创建并锁定 PID 文件（单实例保护）</div></div>
+<div class="ttc" id="aclasslogger_html_a20714991a7e1651edb6c3e90a855849b"><div class="ttname"><a href="classlogger.html#a20714991a7e1651edb6c3e90a855849b">logger::info</a></div><div class="ttdeci">void info(string msg, source_loc loc)</div><div class="ttdoc">INFO 级别快捷方法</div><div class="ttdef"><b>定义</b> <a href="logger_8hpp_source.html#l00276">logger.hpp:276</a></div></div>
+<div class="ttc" id="astructdaemon_1_1child__config_html_a03d3fff0fb7374e26e531785610b84f8"><div class="ttname"><a href="structdaemon_1_1child__config.html#a03d3fff0fb7374e26e531785610b84f8">daemon::child_config::executable</a></div><div class="ttdeci">string executable</div><div class="ttdoc">可执行文件路径</div><div class="ttdef"><b>定义</b> <a href="daemon_8hpp_source.html#l00077">daemon.hpp:77</a></div></div>
+<div class="ttc" id="astructdaemon_1_1child__config_html_a8155312a84066a465764bdba65fca846"><div class="ttname"><a href="structdaemon_1_1child__config.html#a8155312a84066a465764bdba65fca846">daemon::child_config::name</a></div><div class="ttdeci">string name</div><div class="ttdoc">唯一名称</div><div class="ttdef"><b>定义</b> <a href="daemon_8hpp_source.html#l00076">daemon.hpp:76</a></div></div>
+</div><!-- fragment --> 
+<p class="definition">在文件 <a class="el" href="daemon_8hpp_source.html">daemon.hpp</a> 第 <a class="el" href="daemon_8hpp_source.html#l00063">63</a> 行定义.</p>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
+<a id="ad05b7d9ed3adca1be5d4889df9accc19" name="ad05b7d9ed3adca1be5d4889df9accc19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad05b7d9ed3adca1be5d4889df9accc19">&#9670;&#160;</a></span>daemon_state</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#ad05b7d9ed3adca1be5d4889df9accc19">daemon::daemon_state</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>守护进程运行状态 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="ad05b7d9ed3adca1be5d4889df9accc19af0a0bfe6bc7d2c58d2989034f83183e0" name="ad05b7d9ed3adca1be5d4889df9accc19af0a0bfe6bc7d2c58d2989034f83183e0"></a>stopped&#160;</td><td class="fielddoc"><p>未启动 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad05b7d9ed3adca1be5d4889df9accc19a1ee85f6c60017a7f0646ba8dc5824de6" name="ad05b7d9ed3adca1be5d4889df9accc19a1ee85f6c60017a7f0646ba8dc5824de6"></a>starting&#160;</td><td class="fielddoc"><p>正在启动 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad05b7d9ed3adca1be5d4889df9accc19a75101dcdfc88455bcafc9e53e0b06689" name="ad05b7d9ed3adca1be5d4889df9accc19a75101dcdfc88455bcafc9e53e0b06689"></a>running&#160;</td><td class="fielddoc"><p>正常运行 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad05b7d9ed3adca1be5d4889df9accc19a588835865e53c295f44581aabf98501b" name="ad05b7d9ed3adca1be5d4889df9accc19a588835865e53c295f44581aabf98501b"></a>reloading&#160;</td><td class="fielddoc"><p>正在重载配置 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ad05b7d9ed3adca1be5d4889df9accc19a3b2a3c8ed19fc3647432e72885d633e7" name="ad05b7d9ed3adca1be5d4889df9accc19a3b2a3c8ed19fc3647432e72885d633e7"></a>stopping&#160;</td><td class="fielddoc"><p>正在停止 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="daemon_8hpp_source.html">daemon.hpp</a> 第 <a class="el" href="daemon_8hpp_source.html#l00066">66</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="ad16b6eb4e743529fe1c2870062cfa8a5" name="ad16b6eb4e743529fe1c2870062cfa8a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad16b6eb4e743529fe1c2870062cfa8a5">&#9670;&#160;</a></span>add_child()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool daemon::add_child </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structdaemon_1_1child__config.html">child_config</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>cfg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加受管理的子进程 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cfg</td><td>子进程配置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true 添加成功，false 同名已存在 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#ad16b6eb4e743529fe1c2870062cfa8a5">add_child()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ad16b6eb4e743529fe1c2870062cfa8a5">add_child()</a>.</p>
+
+</div>
+</div>
+<a id="a126ce2b9fcaa320df0fba7270788f274" name="a126ce2b9fcaa320df0fba7270788f274"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a126ce2b9fcaa320df0fba7270788f274">&#9670;&#160;</a></span>daemonize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool daemon::daemonize </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>work_dir</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;/&quot;</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>将当前进程转为守护进程（Linux 双 fork） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">work_dir</td><td>守护进程工作目录 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>父进程返回 false，子进程返回 true </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>Windows 上始终返回 true </dd></dl>
+
+</div>
+</div>
+<a id="a4a9123967de3ec9277d854edb73251ff" name="a4a9123967de3ec9277d854edb73251ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a9123967de3ec9277d854edb73251ff">&#9670;&#160;</a></span>notify_status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void daemon::notify_status </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>status</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>通知 systemd 服务状态 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">status</td><td>状态描述字符串 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9d9162166407ac2d23502a5775423a78" name="a9d9162166407ac2d23502a5775423a78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d9162166407ac2d23502a5775423a78">&#9670;&#160;</a></span>remove_child()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void daemon::remove_child </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>移除子进程（先优雅终止） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>子进程名称 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a> , 以及 <a class="el" href="#a9d9162166407ac2d23502a5775423a78">remove_child()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a9d9162166407ac2d23502a5775423a78">remove_child()</a>.</p>
+
+</div>
+</div>
+<a id="a2ffe15afe821ced9a95513048cd6c5ad" name="a2ffe15afe821ced9a95513048cd6c5ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ffe15afe821ced9a95513048cd6c5ad">&#9670;&#160;</a></span>run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int daemon::run </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>进入信号驱动主循环（阻塞） </p>
+<dl class="section return"><dt>返回</dt><dd>退出码，0 为正常退出 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a2ffe15afe821ced9a95513048cd6c5ad">run()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a2ffe15afe821ced9a95513048cd6c5ad">run()</a>.</p>
+
+</div>
+</div>
+<a id="a8d891f3daaf3348e9a002da0b0dd6761" name="a8d891f3daaf3348e9a002da0b0dd6761"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d891f3daaf3348e9a002da0b0dd6761">&#9670;&#160;</a></span>set_watchdog_timeout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void daemon::set_watchdog_timeout </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置看门狗超时 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout_ms</td><td>超时毫秒数，0 表示禁用 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9399f7c6c02bd12610e951eea84b55c1" name="a9399f7c6c02bd12610e951eea84b55c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9399f7c6c02bd12610e951eea84b55c1">&#9670;&#160;</a></span>watchdog_ping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void daemon::watchdog_ping </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>看门狗喂狗（从工作线程周期性调用） </p>
+<p>若超过 <a class="el" href="#a8d891f3daaf3348e9a002da0b0dd6761" title="设置看门狗超时">set_watchdog_timeout()</a> 设置的时长未调用此方法，守护进程将强制退出。 </p>
+
+</div>
+</div>
+<a id="ae8ab5fa697056ffaca558b311ea9f53e" name="ae8ab5fa697056ffaca558b311ea9f53e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8ab5fa697056ffaca558b311ea9f53e">&#9670;&#160;</a></span>write_pid_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool daemon::write_pid_file </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>创建并锁定 PID 文件（单实例保护） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>PID 文件路径 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>true 创建成功；false 已被其他实例锁定 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structdaemon__exception.html" title="守护进程操作异常">daemon_exception</a></td><td>创建失败时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="daemon_8hpp_source.html">daemon.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classdaemon.html">daemon</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

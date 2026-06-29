@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classasync__filter" kind="class" language="C++" prot="public">
+    <compoundname>async_filter</compoundname>
+    <basecompoundref refid="classhttp__filter" prot="public" virt="non-virtual">http_filter</basecompoundref>
+    <includes refid="async__filter_8hpp" local="no">async_filter.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classasync__filter_1a05657152079a28f3776bb3f0028bf348" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(bool should_continue)&gt;</type>
+        <definition>using async_filter::next_callback = function&lt;void(bool should_continue)&gt;</definition>
+        <argsstring></argsstring>
+        <name>next_callback</name>
+        <qualifiedname>async_filter::next_callback</qualifiedname>
+        <briefdescription>
+<para>异步继续回调 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>should_continue</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>true=继续到下一过滤器，false=中断并返回当前响应 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/async_filter.hpp" line="37" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/async_filter.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classasync__filter_1a930a6987d62ee544189522d30f9c1537" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void async_filter::pre_filter_async</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response, http_context &amp;ctx, next_callback next)</argsstring>
+        <name>pre_filter_async</name>
+        <qualifiedname>async_filter::pre_filter_async</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <param>
+          <type>http_context &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classasync__filter_1a05657152079a28f3776bb3f0028bf348" kindref="member">next_callback</ref></type>
+          <declname>next</declname>
+        </param>
+        <briefdescription>
+<para>异步预过滤 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应（可预设以中断处理） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>请求上下文（跨中间件数据传递） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>next</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成时调用 next(true) 继续或 next(false) 中断</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+默认实现直接调用 next(true)，等效于同步 pre_filter 返回 true。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/async_filter.hpp" line="48" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/async_filter.hpp" bodystart="48" bodyend="55"/>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+        <references refid="classhttp__filter_1a9563cab58ce1b4217008e55b37b022f2" compoundref="http__filter_8hpp" startline="70" endline="70">http_filter::pre_filter</references>
+      </memberdef>
+      <memberdef kind="function" id="classasync__filter_1ae8709a34d9ae5687d03c46a5d80f8ede" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>virtual void async_filter::post_filter_async</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response, http_context &amp;ctx, next_callback next)</argsstring>
+        <name>post_filter_async</name>
+        <qualifiedname>async_filter::post_filter_async</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <param>
+          <type>http_context &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <param>
+          <type><ref refid="classasync__filter_1a05657152079a28f3776bb3f0028bf348" kindref="member">next_callback</ref></type>
+          <declname>next</declname>
+        </param>
+        <briefdescription>
+<para>异步后过滤 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>请求上下文 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>next</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>完成时调用</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+默认实现直接调用 post_filter 并 next(true)。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/async_filter.hpp" line="66" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/async_filter.hpp" bodystart="66" bodyend="70"/>
+        <references refid="group___iterator_operation_1ga81a6fcf5c05367caa72c5e1e26ffa38f" compoundref="iterator_8hpp" startline="157" endline="161">next</references>
+        <references refid="classhttp__filter_1acaaaf04f0a1520c29312b76336615aec" compoundref="http__filter_8hpp" startline="79" endline="79">http_filter::post_filter</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>异步过滤器基类（回调模式） </para>
+    </briefdescription>
+    <detaileddescription>
+<para>扩展 http_filter，为需要异步 I/O 的中间件提供回调式异步接口。。</para>
+<para>使用流程：<orderedlist>
+<listitem><para>框架调用 pre_filter_async(request, response, context, next)</para>
+</listitem><listitem><para>过滤器执行异步操作</para>
+</listitem><listitem><para>完成时调用 next(true) 继续，或 next(false) 中断</para>
+</listitem></orderedlist>
+</para>
+<para>无异步过滤器时，http_router 走零开销同步路径。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>async_filter</label>
+        <link refid="classasync__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>http_filter</label>
+        <link refid="classhttp__filter"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>async_filter</label>
+        <link refid="classasync__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>http_filter</label>
+        <link refid="classhttp__filter"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/async_filter.hpp" line="31" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/async_filter.hpp" bodystart="31" bodyend="71"/>
+    <listofallmembers>
+      <member refid="classhttp__filter_1a00ee11e4e2b0c596d6f99cbafec3ddad" prot="public" virt="pure-virtual"><scope>async_filter</scope><name>do_filter</name></member>
+      <member refid="classhttp__filter_1a72030f612655463f1f4ef9340c03f1ec" prot="public" virt="virtual"><scope>async_filter</scope><name>name</name></member>
+      <member refid="classasync__filter_1a05657152079a28f3776bb3f0028bf348" prot="public" virt="non-virtual"><scope>async_filter</scope><name>next_callback</name></member>
+      <member refid="classhttp__filter_1acaaaf04f0a1520c29312b76336615aec" prot="public" virt="virtual"><scope>async_filter</scope><name>post_filter</name></member>
+      <member refid="classasync__filter_1ae8709a34d9ae5687d03c46a5d80f8ede" prot="public" virt="virtual"><scope>async_filter</scope><name>post_filter_async</name></member>
+      <member refid="classhttp__filter_1a9563cab58ce1b4217008e55b37b022f2" prot="public" virt="virtual"><scope>async_filter</scope><name>pre_filter</name></member>
+      <member refid="classasync__filter_1a930a6987d62ee544189522d30f9c1537" prot="public" virt="virtual"><scope>async_filter</scope><name>pre_filter_async</name></member>
+      <member refid="classhttp__filter_1a2959973ac0c34b0323c1e3fdc03449ed" prot="public" virt="virtual"><scope>async_filter</scope><name>~http_filter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

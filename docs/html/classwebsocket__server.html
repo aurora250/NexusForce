@@ -117,6 +117,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:ab2e671190c316c10a67c9811d5db759e"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除会话  <br /></td></tr>
 <tr class="memitem:ab70f9fb7a4a031f9859946074546c21f" id="r_ab70f9fb7a4a031f9859946074546c21f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab70f9fb7a4a031f9859946074546c21f">broadcast</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;<a class="el" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>, <a class="el" href="group___web_socket.html#ga6f03b53401c24a4ee83541255774ef0f">websocket_opcode</a> opcode=<a class="el" href="group___web_socket.html#gga6f03b53401c24a4ee83541255774ef0fa61a96ffcb251bb9bf0abf8fec19d0ea8">websocket_opcode::TEXT</a>)</td></tr>
 <tr class="memdesc:ab70f9fb7a4a031f9859946074546c21f"><td class="mdescLeft">&#160;</td><td class="mdescRight">向所有会话广播消息  <br /></td></tr>
+<tr class="memitem:a8d7a63ae0103ab0c48c987638f9f276f" id="r_a8d7a63ae0103ab0c48c987638f9f276f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8d7a63ae0103ab0c48c987638f9f276f">set_event_loop</a> (<a class="el" href="classevent__loop.html">event_loop</a> *loop) noexcept</td></tr>
+<tr class="memdesc:a8d7a63ae0103ab0c48c987638f9f276f"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置事件循环  <br /></td></tr>
 <tr class="memitem:a324f35e43f1597de143ce170512841f4" id="r_a324f35e43f1597de143ce170512841f4"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a324f35e43f1597de143ce170512841f4">session_count</a> () const noexcept</td></tr>
 <tr class="memdesc:a324f35e43f1597de143ce170512841f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取活动会话数量  <br /></td></tr>
 </table>
@@ -137,17 +139,17 @@ Public 成员函数</h2></td></tr>
 <div class="line">        <span class="keywordflow">return</span>; <span class="comment">// 连接已升级为WebSocket</span></div>
 <div class="line">    }</div>
 <div class="line">}</div>
-<div class="ttc" id="aclasswebsocket__server_html_a1ef3d7d2914ea79ef7826d1c7bb2769b"><div class="ttname"><a href="#a1ef3d7d2914ea79ef7826d1c7bb2769b">websocket_server::route</a></div><div class="ttdeci">void route(const string &amp;path, session_handler handler)</div><div class="ttdoc">注册WebSocket路由</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00158">websocket.hpp:158</a></div></div>
+<div class="ttc" id="aclasswebsocket__server_html_a1ef3d7d2914ea79ef7826d1c7bb2769b"><div class="ttname"><a href="#a1ef3d7d2914ea79ef7826d1c7bb2769b">websocket_server::route</a></div><div class="ttdeci">void route(const string &amp;path, session_handler handler)</div><div class="ttdoc">注册WebSocket路由</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00161">websocket.hpp:161</a></div></div>
 <div class="ttc" id="aclasswebsocket__server_html_a3e14f19b6262afe51436d8be3e7b1201"><div class="ttname"><a href="#a3e14f19b6262afe51436d8be3e7b1201">websocket_server::handle_upgrade</a></div><div class="ttdeci">bool handle_upgrade(const http_request &amp;request, unique_ptr&lt; tcp_socket &gt; sock)</div><div class="ttdoc">处理WebSocket升级请求</div></div>
-<div class="ttc" id="aclasswebsocket__server_html_ae34039860d8e90e6112af725a134005a"><div class="ttname"><a href="#ae34039860d8e90e6112af725a134005a">websocket_server::session_ptr</a></div><div class="ttdeci">shared_ptr&lt; websocket_session &gt; session_ptr</div><div class="ttdoc">会话智能指针类型</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00135">websocket.hpp:135</a></div></div>
+<div class="ttc" id="aclasswebsocket__server_html_ae34039860d8e90e6112af725a134005a"><div class="ttname"><a href="#ae34039860d8e90e6112af725a134005a">websocket_server::session_ptr</a></div><div class="ttdeci">shared_ptr&lt; websocket_session &gt; session_ptr</div><div class="ttdoc">会话智能指针类型</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00137">websocket.hpp:137</a></div></div>
 <div class="ttc" id="aclasswebsocket__session_html_a63462f1a714a2520dca8fd4c6e6a36f6"><div class="ttname"><a href="classwebsocket__session.html#a63462f1a714a2520dca8fd4c6e6a36f6">websocket_session::send</a></div><div class="ttdeci">bool send(const string &amp;data, websocket_opcode opcode=websocket_opcode::TEXT)</div><div class="ttdoc">发送文本/二进制消息</div></div>
-<div class="ttc" id="aclasswebsocket__session_html_aaebbcc5d2e0a943226e6d53d95066cca"><div class="ttname"><a href="classwebsocket__session.html#aaebbcc5d2e0a943226e6d53d95066cca">websocket_session::set_message_handler</a></div><div class="ttdeci">void set_message_handler(message_handler handler)</div><div class="ttdoc">设置消息处理器</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00322">websocket.hpp:322</a></div></div>
-<div class="ttc" id="agroup___console_i_o_html_gadd269b1d24f35618e1eb0ea848dbf6a0"><div class="ttname"><a href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00689">console.hpp:689</a></div></div>
+<div class="ttc" id="aclasswebsocket__session_html_aaebbcc5d2e0a943226e6d53d95066cca"><div class="ttname"><a href="classwebsocket__session.html#aaebbcc5d2e0a943226e6d53d95066cca">websocket_session::set_message_handler</a></div><div class="ttdeci">void set_message_handler(message_handler handler)</div><div class="ttdoc">设置消息处理器</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00357">websocket.hpp:357</a></div></div>
+<div class="ttc" id="agroup___console_i_o_html_gadd269b1d24f35618e1eb0ea848dbf6a0"><div class="ttname"><a href="group___console_i_o.html#gadd269b1d24f35618e1eb0ea848dbf6a0">println</a></div><div class="ttdeci">void println(Args &amp;&amp;... args)</div><div class="ttdoc">打印多个值并换行</div><div class="ttdef"><b>定义</b> <a href="console_8hpp_source.html#l00699">console.hpp:699</a></div></div>
 <div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
-<div class="ttc" id="agroup___web_socket_html_ga6f03b53401c24a4ee83541255774ef0f"><div class="ttname"><a href="group___web_socket.html#ga6f03b53401c24a4ee83541255774ef0f">websocket_opcode</a></div><div class="ttdeci">websocket_opcode</div><div class="ttdoc">WebSocket帧操作码</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00077">websocket.hpp:77</a></div></div>
+<div class="ttc" id="agroup___web_socket_html_ga6f03b53401c24a4ee83541255774ef0f"><div class="ttname"><a href="group___web_socket.html#ga6f03b53401c24a4ee83541255774ef0f">websocket_opcode</a></div><div class="ttdeci">websocket_opcode</div><div class="ttdoc">WebSocket帧操作码</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00079">websocket.hpp:79</a></div></div>
 <div class="ttc" id="astructhttp__method_html_af6c7fde8159a02d5c0db0200d3e88264"><div class="ttname"><a href="structhttp__method.html#af6c7fde8159a02d5c0db0200d3e88264">http_method::GET</a></div><div class="ttdeci">static const http_method &amp; GET()</div><div class="ttdoc">GET方法</div></div>
 </div><!-- fragment --> 
-<p class="definition">在文件 <a class="el" href="websocket_8hpp_source.html">websocket.hpp</a> 第 <a class="el" href="websocket_8hpp_source.html#l00133">133</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="websocket_8hpp_source.html">websocket.hpp</a> 第 <a class="el" href="websocket_8hpp_source.html#l00135">135</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="ab70f9fb7a4a031f9859946074546c21f" name="ab70f9fb7a4a031f9859946074546c21f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab70f9fb7a4a031f9859946074546c21f">&#9670;&#160;</a></span>broadcast()</h2>
@@ -177,7 +179,7 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a> , 以及 <a class="el" href="websocket_8hpp_source.html#l00079">TEXT</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a> , 以及 <a class="el" href="websocket_8hpp_source.html#l00081">TEXT</a>.</p>
 
 </div>
 </div>
@@ -273,11 +275,11 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="websocket_8hpp_source.html">websocket.hpp</a> 第 <a class="el" href="websocket_8hpp_source.html#l00158">158</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="websocket_8hpp_source.html">websocket.hpp</a> 第 <a class="el" href="websocket_8hpp_source.html#l00161">161</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="websocket_8hpp_source.html#l00158">route()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="websocket_8hpp_source.html#l00161">route()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="websocket_8hpp_source.html#l00158">route()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="websocket_8hpp_source.html#l00161">route()</a>.</p>
 
 </div>
 </div>
@@ -307,7 +309,43 @@ Public 成员函数</h2></td></tr>
 <p>获取活动会话数量 </p>
 <dl class="section return"><dt>返回</dt><dd>会话数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="websocket_8hpp_source.html">websocket.hpp</a> 第 <a class="el" href="websocket_8hpp_source.html#l00185">185</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="websocket_8hpp_source.html">websocket.hpp</a> 第 <a class="el" href="websocket_8hpp_source.html#l00198">198</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8d7a63ae0103ab0c48c987638f9f276f" name="a8d7a63ae0103ab0c48c987638f9f276f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d7a63ae0103ab0c48c987638f9f276f">&#9670;&#160;</a></span>set_event_loop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void websocket_server::set_event_loop </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classevent__loop.html">event_loop</a> *</td>          <td class="paramname"><span class="paramname"><em>loop</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置事件循环 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">loop</td><td>事件循环指针</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>设置后，新创建的 WebSocket 会话将使用 <a class="el" href="classevent__loop.html" title="单线程 I/O 事件循环">event_loop</a> 驱动 I/O。 设为 nullptr 则回退到线程模式。 </p>
+
+<p class="definition">在文件 <a class="el" href="websocket_8hpp_source.html">websocket.hpp</a> 第 <a class="el" href="websocket_8hpp_source.html#l00192">192</a> 行定义.</p>
 
 </div>
 </div>

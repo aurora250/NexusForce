@@ -130,8 +130,8 @@ virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el"
 <tr class="memdesc:a7a9038b065d93470a68a23739987ddcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">绑定二进制数据 <br /></td></tr>
 <tr class="memitem:a5edc6ce541b1a871ee9910ba9ec565f9" id="r_a5edc6ce541b1a871ee9910ba9ec565f9"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="#a5edc6ce541b1a871ee9910ba9ec565f9">execute</a> ()=0</td></tr>
 <tr class="memdesc:a5edc6ce541b1a871ee9910ba9ec565f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行非查询语句（UPDATE/INSERT/DELETE）  <br /></td></tr>
-<tr class="memitem:a75ad5d2dbd0d97d8cfc70ed5ecea5faf" id="r_a75ad5d2dbd0d97d8cfc70ed5ecea5faf"><td class="memItemLeft">virtual <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="structidb__prepared__result.html">idb_prepared_result</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a75ad5d2dbd0d97d8cfc70ed5ecea5faf">execute_query</a> ()=0</td></tr>
-<tr class="memdesc:a75ad5d2dbd0d97d8cfc70ed5ecea5faf"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行查询语句（SELECT）  <br /></td></tr>
+<tr class="memitem:a04c96b62170d85a3476c1f7a11a8e6f4" id="r_a04c96b62170d85a3476c1f7a11a8e6f4"><td class="memItemLeft">virtual <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="structidb__tb__result.html">idb_tb_result</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a04c96b62170d85a3476c1f7a11a8e6f4">execute_query</a> ()=0</td></tr>
+<tr class="memdesc:a04c96b62170d85a3476c1f7a11a8e6f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行查询语句（SELECT）  <br /></td></tr>
 <tr class="memitem:a67f600d24fe96ea4b26508953e1ac2ed" id="r_a67f600d24fe96ea4b26508953e1ac2ed"><td class="memItemLeft">virtual <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#a67f600d24fe96ea4b26508953e1ac2ed">get_error</a> () const noexcept=0</td></tr>
 <tr class="memdesc:a67f600d24fe96ea4b26508953e1ac2ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取错误信息  <br /></td></tr>
 <tr class="memitem:ac2d8c780282f37e5033aa64025cd0435" id="r_ac2d8c780282f37e5033aa64025cd0435"><td class="memItemLeft">virtual <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac2d8c780282f37e5033aa64025cd0435">get_errno</a> () const noexcept=0</td></tr>
@@ -141,7 +141,7 @@ virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el"
 <div class="textblock"><p>预处理语句抽象基类 </p>
 <p>提供参数绑定和执行的接口，支持SQL注入防护和性能优化。 </p>
 
-<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00142">142</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00152">152</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="a5edc6ce541b1a871ee9910ba9ec565f9" name="a5edc6ce541b1a871ee9910ba9ec565f9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5edc6ce541b1a871ee9910ba9ec565f9">&#9670;&#160;</a></span>execute()</h2>
@@ -177,8 +177,8 @@ virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el"
 
 </div>
 </div>
-<a id="a75ad5d2dbd0d97d8cfc70ed5ecea5faf" name="a75ad5d2dbd0d97d8cfc70ed5ecea5faf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a75ad5d2dbd0d97d8cfc70ed5ecea5faf">&#9670;&#160;</a></span>execute_query()</h2>
+<a id="a04c96b62170d85a3476c1f7a11a8e6f4" name="a04c96b62170d85a3476c1f7a11a8e6f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04c96b62170d85a3476c1f7a11a8e6f4">&#9670;&#160;</a></span>execute_query()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -187,7 +187,7 @@ virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el"
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="structidb__prepared__result.html">idb_prepared_result</a> &gt; idb_prepared_statement::execute_query </td>
+          <td class="memname">virtual <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="structidb__tb__result.html">idb_tb_result</a> &gt; idb_prepared_statement::execute_query </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -203,11 +203,11 @@ virtual bool&#160;</td><td class="memItemRight"><b>bind_param</b> (<a class="el"
 <p>执行查询语句（SELECT） </p>
 <dl class="section return"><dt>返回</dt><dd>查询结果集 </dd></dl>
 
-<p>在 <a class="el" href="classmysql__prepared__statement.html#a24862cf3e9752b04be5cee6265bc54f0">mysql_prepared_statement</a>, <a class="el" href="classpgsql__prepared__statement.html#a49d169a0457f178f08e7aef6b14f7977">pgsql_prepared_statement</a> , 以及 <a class="el" href="classsqlite__prepared__statement.html#ae1a12499c85927d7748f87614500ad6f">sqlite_prepared_statement</a> 内被实现.</p>
+<p>在 <a class="el" href="classmysql__prepared__statement.html#a029e52db669fb4a50ea4597570541c87">mysql_prepared_statement</a>, <a class="el" href="classpgsql__prepared__statement.html#acc72fac3d313a758770409ff7e0a3fee">pgsql_prepared_statement</a> , 以及 <a class="el" href="classsqlite__prepared__statement.html#acabce993ea232003e00a44c7ee24918b">sqlite_prepared_statement</a> 内被实现.</p>
 
-<p class="reference">引用了 <a class="el" href="#a75ad5d2dbd0d97d8cfc70ed5ecea5faf">execute_query()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a04c96b62170d85a3476c1f7a11a8e6f4">execute_query()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="#a75ad5d2dbd0d97d8cfc70ed5ecea5faf">execute_query()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#a04c96b62170d85a3476c1f7a11a8e6f4">execute_query()</a>.</p>
 
 </div>
 </div>

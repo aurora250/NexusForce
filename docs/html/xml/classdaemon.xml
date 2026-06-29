@@ -1,0 +1,1128 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classdaemon" kind="class" language="C++" prot="public">
+    <compoundname>daemon</compoundname>
+    <includes refid="daemon_8hpp" local="no">daemon.hpp</includes>
+    <innerclass refid="structdaemon_1_1child__config" prot="public">daemon::child_config</innerclass>
+    <innerclass refid="structdaemon_1_1child__status" prot="public">daemon::child_status</innerclass>
+    <innerclass refid="structdaemon_1_1child__entry" prot="private">daemon::child_entry</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classdaemon_1ad05b7d9ed3adca1be5d4889df9accc19" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>daemon_state</name>
+        <qualifiedname>daemon::daemon_state</qualifiedname>
+        <enumvalue id="classdaemon_1ad05b7d9ed3adca1be5d4889df9accc19af0a0bfe6bc7d2c58d2989034f83183e0" prot="public">
+          <name>stopped</name>
+          <briefdescription>
+<para>未启动 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classdaemon_1ad05b7d9ed3adca1be5d4889df9accc19a1ee85f6c60017a7f0646ba8dc5824de6" prot="public">
+          <name>starting</name>
+          <briefdescription>
+<para>正在启动 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classdaemon_1ad05b7d9ed3adca1be5d4889df9accc19a75101dcdfc88455bcafc9e53e0b06689" prot="public">
+          <name>running</name>
+          <briefdescription>
+<para>正常运行 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classdaemon_1ad05b7d9ed3adca1be5d4889df9accc19a588835865e53c295f44581aabf98501b" prot="public">
+          <name>reloading</name>
+          <briefdescription>
+<para>正在重载配置 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classdaemon_1ad05b7d9ed3adca1be5d4889df9accc19a3b2a3c8ed19fc3647432e72885d633e7" prot="public">
+          <name>stopping</name>
+          <briefdescription>
+<para>正在停止 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>守护进程运行状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="66" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="66" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdaemon_1a47927ec91c987d81dfa1f7a10792b701" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void()&gt;</type>
+        <definition>using daemon::start_callback = function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>start_callback</name>
+        <qualifiedname>daemon::start_callback</qualifiedname>
+        <briefdescription>
+<para>启动回调，run() 进入主循环前调用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="98" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdaemon_1a466ecc8fb0fcdeb2e5c60ff2671e1564" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void()&gt;</type>
+        <definition>using daemon::stop_callback = function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>stop_callback</name>
+        <qualifiedname>daemon::stop_callback</qualifiedname>
+        <briefdescription>
+<para>停止回调，收到终止信号后调用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="101" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdaemon_1a2feff6e647d1222c6849286cd76b311d" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; bool()&gt;</type>
+        <definition>using daemon::reload_callback = function&lt;bool()&gt;</definition>
+        <argsstring></argsstring>
+        <name>reload_callback</name>
+        <qualifiedname>daemon::reload_callback</qualifiedname>
+        <briefdescription>
+<para>重载回调，收到 SIGHUP 后调用。返回 true 继续运行，false 请求终止 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="104" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classdaemon_1ade1762a78413cdd0edd81ec3a9c7899d" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;<ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>, int exit_code)&gt;</type>
+        <definition>using daemon::child_exit_callback = function&lt;void(const string&amp; name, int exit_code)&gt;</definition>
+        <argsstring></argsstring>
+        <name>child_exit_callback</name>
+        <qualifiedname>daemon::child_exit_callback</qualifiedname>
+        <briefdescription>
+<para>子进程退出回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="107" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classdaemon_1ad7abb2498aa64c4f9aba443c9ae6039f" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="classdaemon_1ad05b7d9ed3adca1be5d4889df9accc19" kindref="member">daemon_state</ref> &gt;</type>
+        <definition>atomic&lt;daemon_state&gt; daemon::state_</definition>
+        <argsstring></argsstring>
+        <name>state_</name>
+        <qualifiedname>daemon::state_</qualifiedname>
+        <initializer>{<ref refid="classdaemon_1ad05b7d9ed3adca1be5d4889df9accc19af0a0bfe6bc7d2c58d2989034f83183e0" kindref="member">daemon_state::stopped</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="110" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="110" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdaemon_1a87e3e045308665f7a98ee519441a862d" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* daemon::pid_handle_</definition>
+        <argsstring></argsstring>
+        <name>pid_handle_</name>
+        <qualifiedname>daemon::pid_handle_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="113" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="113" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdaemon_1aba409696e7397644b6aca7733e1443af" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string daemon::pid_path_</definition>
+        <argsstring></argsstring>
+        <name>pid_path_</name>
+        <qualifiedname>daemon::pid_path_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="117" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdaemon_1acd8925105dbbb04c6550a8257d79c691" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string daemon::work_dir_</definition>
+        <argsstring></argsstring>
+        <name>work_dir_</name>
+        <qualifiedname>daemon::work_dir_</qualifiedname>
+        <initializer>{&quot;/&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="118" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="118" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdaemon_1a174b6a53237b1b28f5f6946e4e066d6c" prot="private" static="no" mutable="no">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classsignal__guard" kindref="compound">signal_guard</ref> &gt;</type>
+        <definition>unique_ptr&lt;signal_guard&gt; daemon::signal_guard_</definition>
+        <argsstring></argsstring>
+        <name>signal_guard_</name>
+        <qualifiedname>daemon::signal_guard_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="120" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdaemon_1ac1e9f70cd71e393af7a622f2abc5ed7a" prot="private" static="no" mutable="no">
+        <type><ref refid="classsystem__event" kindref="compound">system_event</ref></type>
+        <definition>system_event daemon::shutdown_event_</definition>
+        <argsstring></argsstring>
+        <name>shutdown_event_</name>
+        <qualifiedname>daemon::shutdown_event_</qualifiedname>
+        <initializer>{false, <ref refid="classsystem__event_1a836fe1a751b10858f44697fdd940aa9fae24e926926861449731fb9418399a53d" kindref="member">system_event::type::manual_reset</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="122" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="122" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdaemon_1a503bd72fa9d779ba2750299981b326eb" prot="private" static="no" mutable="no">
+        <type><ref refid="classsystem__event" kindref="compound">system_event</ref></type>
+        <definition>system_event daemon::reload_event_</definition>
+        <argsstring></argsstring>
+        <name>reload_event_</name>
+        <qualifiedname>daemon::reload_event_</qualifiedname>
+        <initializer>{false, <ref refid="classsystem__event_1a836fe1a751b10858f44697fdd940aa9fad15df6f4bb58577e7078575bd2924794" kindref="member">system_event::type::auto_reset</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="123" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="123" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdaemon_1a80772c27e1bb9a57d4953894e903e3c1" prot="private" static="no" mutable="yes">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex daemon::children_mutex_</definition>
+        <argsstring></argsstring>
+        <name>children_mutex_</name>
+        <qualifiedname>daemon::children_mutex_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="133" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdaemon_1a043d267b35af7914804784d1a48626a5" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, child_entry &gt;</type>
+        <definition>unordered_map&lt;string, child_entry&gt; daemon::children_</definition>
+        <argsstring></argsstring>
+        <name>children_</name>
+        <qualifiedname>daemon::children_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="134" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdaemon_1aaf4b879a47eb819f8a54e10d9c0dc5ec" prot="private" static="no" mutable="no">
+        <type><ref refid="classdaemon_1a47927ec91c987d81dfa1f7a10792b701" kindref="member">start_callback</ref></type>
+        <definition>start_callback daemon::on_start_</definition>
+        <argsstring></argsstring>
+        <name>on_start_</name>
+        <qualifiedname>daemon::on_start_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="136" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="136" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdaemon_1abe7dfd36c0597c7b79913f9b5cebd6c2" prot="private" static="no" mutable="no">
+        <type><ref refid="classdaemon_1a466ecc8fb0fcdeb2e5c60ff2671e1564" kindref="member">stop_callback</ref></type>
+        <definition>stop_callback daemon::on_stop_</definition>
+        <argsstring></argsstring>
+        <name>on_stop_</name>
+        <qualifiedname>daemon::on_stop_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="137" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdaemon_1acc07780e6b7739aa68af93d1581517f4" prot="private" static="no" mutable="no">
+        <type><ref refid="classdaemon_1a2feff6e647d1222c6849286cd76b311d" kindref="member">reload_callback</ref></type>
+        <definition>reload_callback daemon::on_reload_</definition>
+        <argsstring></argsstring>
+        <name>on_reload_</name>
+        <qualifiedname>daemon::on_reload_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="138" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdaemon_1a893bc04bc0f7ca0c05aeb9deb997556b" prot="private" static="no" mutable="no">
+        <type><ref refid="classdaemon_1ade1762a78413cdd0edd81ec3a9c7899d" kindref="member">child_exit_callback</ref></type>
+        <definition>child_exit_callback daemon::on_child_exit_</definition>
+        <argsstring></argsstring>
+        <name>on_child_exit_</name>
+        <qualifiedname>daemon::on_child_exit_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="139" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdaemon_1a59821443692ffd8c504c151a75d9c377" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; daemon::watchdog_enabled_</definition>
+        <argsstring></argsstring>
+        <name>watchdog_enabled_</name>
+        <qualifiedname>daemon::watchdog_enabled_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="141" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="141" bodyend="141"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdaemon_1ab03d00b8c8b67e25bacc396599777178" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; int &gt;</type>
+        <definition>atomic&lt;int&gt; daemon::watchdog_timeout_ms_</definition>
+        <argsstring></argsstring>
+        <name>watchdog_timeout_ms_</name>
+        <qualifiedname>daemon::watchdog_timeout_ms_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="142" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="142" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdaemon_1a50a6e9b3175c79ae9413839052a3ba32" prot="private" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref> &gt;</type>
+        <definition>atomic&lt;int64_t&gt; daemon::last_ping_</definition>
+        <argsstring></argsstring>
+        <name>last_ping_</name>
+        <qualifiedname>daemon::last_ping_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="143" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="143" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="variable" id="classdaemon_1a4b12985fb482cdc782c0f4218d227cd1" prot="private" static="no" mutable="no">
+        <type><ref refid="classthread" kindref="compound">thread</ref></type>
+        <definition>thread daemon::watchdog_thread_</definition>
+        <argsstring></argsstring>
+        <name>watchdog_thread_</name>
+        <qualifiedname>daemon::watchdog_thread_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="144" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="144" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classdaemon_1a61525c5443d4a20041fd85bbb0174829" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool daemon::daemonize_impl</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>daemonize_impl</name>
+        <qualifiedname>daemon::daemonize_impl</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="146" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1ab4d1bdb84712cb4c891d253042f9ea3e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void daemon::setup_signal_handlers</definition>
+        <argsstring>()</argsstring>
+        <name>setup_signal_handlers</name>
+        <qualifiedname>daemon::setup_signal_handlers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="147" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1a2d267d2ea7c493146682409b70acc2b9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void daemon::start_all_children</definition>
+        <argsstring>()</argsstring>
+        <name>start_all_children</name>
+        <qualifiedname>daemon::start_all_children</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="148" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1aea351e74c1dbca14382598ebdc2ec959" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void daemon::stop_all_children</definition>
+        <argsstring>()</argsstring>
+        <name>stop_all_children</name>
+        <qualifiedname>daemon::stop_all_children</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="149" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1ad2d376ed8f472174bf7c9488a4507ee0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void daemon::check_and_restart_children</definition>
+        <argsstring>()</argsstring>
+        <name>check_and_restart_children</name>
+        <qualifiedname>daemon::check_and_restart_children</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="150" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1a8fadbd5755731bb071c4e9b73f024f77" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void daemon::watchdog_loop</definition>
+        <argsstring>()</argsstring>
+        <name>watchdog_loop</name>
+        <qualifiedname>daemon::watchdog_loop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="152" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classdaemon_1af07755cae0cee00ccdea1718778cf86e" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void daemon::start_child</definition>
+        <argsstring>(child_entry &amp;entry)</argsstring>
+        <name>start_child</name>
+        <qualifiedname>daemon::start_child</qualifiedname>
+        <param>
+          <type>child_entry &amp;</type>
+          <declname>entry</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="151" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classdaemon_1a6a571e68217f914a817a793c87457179" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>daemon::daemon</definition>
+        <argsstring>()=default</argsstring>
+        <name>daemon</name>
+        <qualifiedname>daemon::daemon</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="155" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1aeca6936ceedfcaf68cb15d6243d17a6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>daemon::~daemon</definition>
+        <argsstring>()</argsstring>
+        <name>~daemon</name>
+        <qualifiedname>daemon::~daemon</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="156" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1ab766cd0acd301c4704b50a3e18391f2b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>daemon::daemon</definition>
+        <argsstring>(const daemon &amp;)=delete</argsstring>
+        <name>daemon</name>
+        <qualifiedname>daemon::daemon</qualifiedname>
+        <param>
+          <type>const <ref refid="classdaemon" kindref="compound">daemon</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="158" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1a78c97a2a140306f61440c87cd000f836" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classdaemon" kindref="compound">daemon</ref> &amp;</type>
+        <definition>daemon &amp; daemon::operator=</definition>
+        <argsstring>(const daemon &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>daemon::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classdaemon" kindref="compound">daemon</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="159" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1abb418b322c50a913a24028f53369fdf8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>daemon::daemon</definition>
+        <argsstring>(daemon &amp;&amp;)=delete</argsstring>
+        <name>daemon</name>
+        <qualifiedname>daemon::daemon</qualifiedname>
+        <param>
+          <type><ref refid="classdaemon" kindref="compound">daemon</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="160" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1ae6224c5ed5a16b4afdf94093644defa6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classdaemon" kindref="compound">daemon</ref> &amp;</type>
+        <definition>daemon &amp; daemon::operator=</definition>
+        <argsstring>(daemon &amp;&amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>daemon::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classdaemon" kindref="compound">daemon</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="161" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1a45b1d6108b80d2a4ba035a346b31c456" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void daemon::on_start</definition>
+        <argsstring>(start_callback cb)</argsstring>
+        <name>on_start</name>
+        <qualifiedname>daemon::on_start</qualifiedname>
+        <param>
+          <type><ref refid="classdaemon_1a47927ec91c987d81dfa1f7a10792b701" kindref="member">start_callback</ref></type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+<para>注册启动回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="164" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="164" bodyend="164"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classdaemon_1a45b1d6108b80d2a4ba035a346b31c456" compoundref="daemon_8hpp" startline="164" endline="164">on_start</references>
+        <referencedby refid="classdaemon_1a45b1d6108b80d2a4ba035a346b31c456" compoundref="daemon_8hpp" startline="164" endline="164">on_start</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1aaa72dc82f4acf4d04e36be42fd5e4113" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void daemon::on_stop</definition>
+        <argsstring>(stop_callback cb)</argsstring>
+        <name>on_stop</name>
+        <qualifiedname>daemon::on_stop</qualifiedname>
+        <param>
+          <type><ref refid="classdaemon_1a466ecc8fb0fcdeb2e5c60ff2671e1564" kindref="member">stop_callback</ref></type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+<para>注册停止回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="167" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="167" bodyend="167"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1a8a4d4f065f67d775cd2118b8dbd1b22b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void daemon::on_reload</definition>
+        <argsstring>(reload_callback cb)</argsstring>
+        <name>on_reload</name>
+        <qualifiedname>daemon::on_reload</qualifiedname>
+        <param>
+          <type><ref refid="classdaemon_1a2feff6e647d1222c6849286cd76b311d" kindref="member">reload_callback</ref></type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+<para>注册重载回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="170" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="170" bodyend="170"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1af4337efe742279c90fd26492cb58ee46" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void daemon::on_child_exit</definition>
+        <argsstring>(child_exit_callback cb)</argsstring>
+        <name>on_child_exit</name>
+        <qualifiedname>daemon::on_child_exit</qualifiedname>
+        <param>
+          <type><ref refid="classdaemon_1ade1762a78413cdd0edd81ec3a9c7899d" kindref="member">child_exit_callback</ref></type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+<para>注册子进程退出回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="173" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="173" bodyend="173"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1a126ce2b9fcaa320df0fba7270788f274" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool daemon::daemonize</definition>
+        <argsstring>(const string &amp;work_dir=&quot;/&quot;)</argsstring>
+        <name>daemonize</name>
+        <qualifiedname>daemon::daemonize</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>work_dir</declname>
+          <defval>&quot;/&quot;</defval>
+        </param>
+        <briefdescription>
+<para>将当前进程转为守护进程（Linux 双 fork） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>work_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>守护进程工作目录 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>父进程返回 false，子进程返回 true </para>
+</simplesect>
+<simplesect kind="note"><para>Windows 上始终返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="181" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1ae8ab5fa697056ffaca558b311ea9f53e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool daemon::write_pid_file</definition>
+        <argsstring>(const string &amp;path)</argsstring>
+        <name>write_pid_file</name>
+        <qualifiedname>daemon::write_pid_file</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>创建并锁定 PID 文件（单实例保护） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>PID 文件路径 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true 创建成功；false 已被其他实例锁定 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structdaemon__exception" kindref="compound">daemon_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>创建失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="189" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1aef4dbc01367e334207d690d137692fc9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void daemon::remove_pid_file</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>remove_pid_file</name>
+        <qualifiedname>daemon::remove_pid_file</qualifiedname>
+        <briefdescription>
+<para>删除 PID 文件并释放锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="192" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1ad16b6eb4e743529fe1c2870062cfa8a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool daemon::add_child</definition>
+        <argsstring>(const child_config &amp;cfg)</argsstring>
+        <name>add_child</name>
+        <qualifiedname>daemon::add_child</qualifiedname>
+        <param>
+          <type>const <ref refid="structdaemon_1_1child__config" kindref="compound">child_config</ref> &amp;</type>
+          <declname>cfg</declname>
+        </param>
+        <briefdescription>
+<para>添加受管理的子进程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>cfg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子进程配置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true 添加成功，false 同名已存在 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="202" column="10"/>
+        <references refid="classdaemon_1ad16b6eb4e743529fe1c2870062cfa8a5">add_child</references>
+        <referencedby refid="classdaemon_1ad16b6eb4e743529fe1c2870062cfa8a5">add_child</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1a9d9162166407ac2d23502a5775423a78" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void daemon::remove_child</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>remove_child</name>
+        <qualifiedname>daemon::remove_child</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>移除子进程（先优雅终止） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>子进程名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="208" column="10"/>
+        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="476" endline="478">name</references>
+        <references refid="classdaemon_1a9d9162166407ac2d23502a5775423a78">remove_child</references>
+        <referencedby refid="classdaemon_1a9d9162166407ac2d23502a5775423a78">remove_child</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1a5b30437289131ad6b80398887d5f9651" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structdaemon_1_1child__status" kindref="compound">child_status</ref></type>
+        <definition>child_status daemon::get_child_status</definition>
+        <argsstring>(const string &amp;name) const</argsstring>
+        <name>get_child_status</name>
+        <qualifiedname>daemon::get_child_status</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>获取子进程运行状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="211" column="19"/>
+        <references refid="classdaemon_1a5b30437289131ad6b80398887d5f9651">get_child_status</references>
+        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="476" endline="478">name</references>
+        <referencedby refid="classdaemon_1a5b30437289131ad6b80398887d5f9651">get_child_status</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1af302bde7714ae66b0555da379ec36447" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structdaemon_1_1child__status" kindref="compound">child_status</ref> &gt;</type>
+        <definition>vector&lt; child_status &gt; daemon::all_child_statuses</definition>
+        <argsstring>() const</argsstring>
+        <name>all_child_statuses</name>
+        <qualifiedname>daemon::all_child_statuses</qualifiedname>
+        <briefdescription>
+<para>获取所有子进程状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="214" column="13"/>
+        <references refid="classdaemon_1af302bde7714ae66b0555da379ec36447">all_child_statuses</references>
+        <referencedby refid="classdaemon_1af302bde7714ae66b0555da379ec36447">all_child_statuses</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1a2ffe15afe821ced9a95513048cd6c5ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int daemon::run</definition>
+        <argsstring>()</argsstring>
+        <name>run</name>
+        <qualifiedname>daemon::run</qualifiedname>
+        <briefdescription>
+<para>进入信号驱动主循环（阻塞） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>退出码，0 为正常退出 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="220" column="9"/>
+        <references refid="classdaemon_1a2ffe15afe821ced9a95513048cd6c5ad">run</references>
+        <referencedby refid="classdaemon_1a2ffe15afe821ced9a95513048cd6c5ad">run</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1a7c835469a4c400cd0bef83bd54c4e334" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void daemon::request_shutdown</definition>
+        <argsstring>()</argsstring>
+        <name>request_shutdown</name>
+        <qualifiedname>daemon::request_shutdown</qualifiedname>
+        <briefdescription>
+<para>请求优雅关闭（可从任何线程调用） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="223" column="10"/>
+        <references refid="classdaemon_1a7c835469a4c400cd0bef83bd54c4e334">request_shutdown</references>
+        <referencedby refid="classdaemon_1a7c835469a4c400cd0bef83bd54c4e334">request_shutdown</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1adf28f07bc6da1a0f8b1391c03d29b3b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void daemon::request_reload</definition>
+        <argsstring>()</argsstring>
+        <name>request_reload</name>
+        <qualifiedname>daemon::request_reload</qualifiedname>
+        <briefdescription>
+<para>请求重载配置（可从任何线程调用） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="226" column="10"/>
+        <references refid="classdaemon_1adf28f07bc6da1a0f8b1391c03d29b3b3">request_reload</references>
+        <referencedby refid="classdaemon_1adf28f07bc6da1a0f8b1391c03d29b3b3">request_reload</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1a3a7493c1a716dbe9e35be4e486fb3d21" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classdaemon_1ad05b7d9ed3adca1be5d4889df9accc19" kindref="member">daemon_state</ref></type>
+        <definition>daemon_state daemon::state</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>state</name>
+        <qualifiedname>daemon::state</qualifiedname>
+        <briefdescription>
+<para>获取当前状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="229" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="229" bodyend="229"/>
+        <references refid="classdaemon_1a3a7493c1a716dbe9e35be4e486fb3d21" compoundref="daemon_8hpp" startline="229" endline="229">state</references>
+        <referencedby refid="classdaemon_1a3a7493c1a716dbe9e35be4e486fb3d21" compoundref="daemon_8hpp" startline="229" endline="229">state</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1a9399f7c6c02bd12610e951eea84b55c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void daemon::watchdog_ping</definition>
+        <argsstring>()</argsstring>
+        <name>watchdog_ping</name>
+        <qualifiedname>daemon::watchdog_ping</qualifiedname>
+        <briefdescription>
+<para>看门狗喂狗（从工作线程周期性调用） </para>
+        </briefdescription>
+        <detaileddescription>
+<para>若超过 <ref refid="classdaemon_1a8d891f3daaf3348e9a002da0b0dd6761" kindref="member">set_watchdog_timeout()</ref> 设置的时长未调用此方法，守护进程将强制退出。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="236" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1a8d891f3daaf3348e9a002da0b0dd6761" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void daemon::set_watchdog_timeout</definition>
+        <argsstring>(int timeout_ms)</argsstring>
+        <name>set_watchdog_timeout</name>
+        <qualifiedname>daemon::set_watchdog_timeout</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>timeout_ms</declname>
+        </param>
+        <briefdescription>
+<para>设置看门狗超时 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超时毫秒数，0 表示禁用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="242" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classdaemon_1a642889abd38d6f3e193816b9db459f47" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool daemon::is_pid_file_locked</definition>
+        <argsstring>(const string &amp;path) noexcept</argsstring>
+        <name>is_pid_file_locked</name>
+        <qualifiedname>daemon::is_pid_file_locked</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>检查 PID 文件是否被锁定 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="195" column="18"/>
+        <references refid="classdaemon_1a642889abd38d6f3e193816b9db459f47">is_pid_file_locked</references>
+        <referencedby refid="classdaemon_1a642889abd38d6f3e193816b9db459f47">is_pid_file_locked</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1a333da40fd71b6d6886f104f566fa3679" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void daemon::notify_ready</definition>
+        <argsstring>()</argsstring>
+        <name>notify_ready</name>
+        <qualifiedname>daemon::notify_ready</qualifiedname>
+        <briefdescription>
+<para>通知 systemd 服务已就绪 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="248" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1a4a9123967de3ec9277d854edb73251ff" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void daemon::notify_status</definition>
+        <argsstring>(const string &amp;status)</argsstring>
+        <name>notify_status</name>
+        <qualifiedname>daemon::notify_status</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>status</declname>
+        </param>
+        <briefdescription>
+<para>通知 systemd 服务状态 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>status</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>状态描述字符串 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="254" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classdaemon_1a78926a4b72b6748885c7b52936487cce" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void daemon::notify_watchdog</definition>
+        <argsstring>()</argsstring>
+        <name>notify_watchdog</name>
+        <qualifiedname>daemon::notify_watchdog</qualifiedname>
+        <briefdescription>
+<para>通知 systemd 看门狗喂狗 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="259" column="17"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>守护进程 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>封装了守护进程的完整生命周期：后台化 → PID 文件锁 → 子进程管理 → 信号驱动主循环 → 优雅关闭。</para>
+<para><programlisting><codeline><highlight class="normal">daemon<sp/>d;</highlight></codeline>
+<codeline><highlight class="normal">d.<ref refid="classdaemon_1a45b1d6108b80d2a4ba035a346b31c456" kindref="member">on_start</ref>([]<sp/>{<sp/><ref refid="classlogger_1a20714991a7e1651edb6c3e90a855849b" kindref="member">logger::info</ref>(</highlight><highlight class="stringliteral">&quot;starting&quot;</highlight><highlight class="normal">);<sp/>});</highlight></codeline>
+<codeline><highlight class="normal">d.<ref refid="classdaemon_1aaa72dc82f4acf4d04e36be42fd5e4113" kindref="member">on_stop</ref>([]<sp/>{<sp/><ref refid="classlogger_1a20714991a7e1651edb6c3e90a855849b" kindref="member">logger::info</ref>(</highlight><highlight class="stringliteral">&quot;stopping&quot;</highlight><highlight class="normal">);<sp/>});</highlight></codeline>
+<codeline><highlight class="normal">d.<ref refid="classdaemon_1a126ce2b9fcaa320df0fba7270788f274" kindref="member">daemonize</ref>(</highlight><highlight class="stringliteral">&quot;/&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal">d.<ref refid="classdaemon_1ae8ab5fa697056ffaca558b311ea9f53e" kindref="member">write_pid_file</ref>(</highlight><highlight class="stringliteral">&quot;/var/run/myapp.pid&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">daemon::child_config<sp/>cfg;</highlight></codeline>
+<codeline><highlight class="normal">cfg.<ref refid="structdaemon_1_1child__config_1a8155312a84066a465764bdba65fca846" kindref="member">name</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;worker&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal">cfg.<ref refid="structdaemon_1_1child__config_1a03d3fff0fb7374e26e531785610b84f8" kindref="member">executable</ref><sp/>=<sp/></highlight><highlight class="stringliteral">&quot;/usr/bin/myworker&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal">cfg.auto_restart<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline><highlight class="normal">d.<ref refid="classdaemon_1ad16b6eb4e743529fe1c2870062cfa8a5" kindref="member">add_child</ref>(cfg);</highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>d.<ref refid="classdaemon_1a2ffe15afe821ced9a95513048cd6c5ad" kindref="member">run</ref>();</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" line="63" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/daemon.hpp" bodystart="63" bodyend="261"/>
+    <listofallmembers>
+      <member refid="classdaemon_1ad16b6eb4e743529fe1c2870062cfa8a5" prot="public" virt="non-virtual"><scope>daemon</scope><name>add_child</name></member>
+      <member refid="classdaemon_1af302bde7714ae66b0555da379ec36447" prot="public" virt="non-virtual"><scope>daemon</scope><name>all_child_statuses</name></member>
+      <member refid="classdaemon_1ad2d376ed8f472174bf7c9488a4507ee0" prot="private" virt="non-virtual"><scope>daemon</scope><name>check_and_restart_children</name></member>
+      <member refid="classdaemon_1ade1762a78413cdd0edd81ec3a9c7899d" prot="public" virt="non-virtual"><scope>daemon</scope><name>child_exit_callback</name></member>
+      <member refid="classdaemon_1a043d267b35af7914804784d1a48626a5" prot="private" virt="non-virtual"><scope>daemon</scope><name>children_</name></member>
+      <member refid="classdaemon_1a80772c27e1bb9a57d4953894e903e3c1" prot="private" virt="non-virtual"><scope>daemon</scope><name>children_mutex_</name></member>
+      <member refid="classdaemon_1a6a571e68217f914a817a793c87457179" prot="public" virt="non-virtual"><scope>daemon</scope><name>daemon</name></member>
+      <member refid="classdaemon_1ab766cd0acd301c4704b50a3e18391f2b" prot="public" virt="non-virtual"><scope>daemon</scope><name>daemon</name></member>
+      <member refid="classdaemon_1abb418b322c50a913a24028f53369fdf8" prot="public" virt="non-virtual"><scope>daemon</scope><name>daemon</name></member>
+      <member refid="classdaemon_1ad05b7d9ed3adca1be5d4889df9accc19" prot="public" virt="non-virtual"><scope>daemon</scope><name>daemon_state</name></member>
+      <member refid="classdaemon_1a126ce2b9fcaa320df0fba7270788f274" prot="public" virt="non-virtual"><scope>daemon</scope><name>daemonize</name></member>
+      <member refid="classdaemon_1a61525c5443d4a20041fd85bbb0174829" prot="private" virt="non-virtual"><scope>daemon</scope><name>daemonize_impl</name></member>
+      <member refid="classdaemon_1a5b30437289131ad6b80398887d5f9651" prot="public" virt="non-virtual"><scope>daemon</scope><name>get_child_status</name></member>
+      <member refid="classdaemon_1a642889abd38d6f3e193816b9db459f47" prot="public" virt="non-virtual"><scope>daemon</scope><name>is_pid_file_locked</name></member>
+      <member refid="classdaemon_1a50a6e9b3175c79ae9413839052a3ba32" prot="private" virt="non-virtual"><scope>daemon</scope><name>last_ping_</name></member>
+      <member refid="classdaemon_1a333da40fd71b6d6886f104f566fa3679" prot="public" virt="non-virtual"><scope>daemon</scope><name>notify_ready</name></member>
+      <member refid="classdaemon_1a4a9123967de3ec9277d854edb73251ff" prot="public" virt="non-virtual"><scope>daemon</scope><name>notify_status</name></member>
+      <member refid="classdaemon_1a78926a4b72b6748885c7b52936487cce" prot="public" virt="non-virtual"><scope>daemon</scope><name>notify_watchdog</name></member>
+      <member refid="classdaemon_1af4337efe742279c90fd26492cb58ee46" prot="public" virt="non-virtual"><scope>daemon</scope><name>on_child_exit</name></member>
+      <member refid="classdaemon_1a893bc04bc0f7ca0c05aeb9deb997556b" prot="private" virt="non-virtual"><scope>daemon</scope><name>on_child_exit_</name></member>
+      <member refid="classdaemon_1a8a4d4f065f67d775cd2118b8dbd1b22b" prot="public" virt="non-virtual"><scope>daemon</scope><name>on_reload</name></member>
+      <member refid="classdaemon_1acc07780e6b7739aa68af93d1581517f4" prot="private" virt="non-virtual"><scope>daemon</scope><name>on_reload_</name></member>
+      <member refid="classdaemon_1a45b1d6108b80d2a4ba035a346b31c456" prot="public" virt="non-virtual"><scope>daemon</scope><name>on_start</name></member>
+      <member refid="classdaemon_1aaf4b879a47eb819f8a54e10d9c0dc5ec" prot="private" virt="non-virtual"><scope>daemon</scope><name>on_start_</name></member>
+      <member refid="classdaemon_1aaa72dc82f4acf4d04e36be42fd5e4113" prot="public" virt="non-virtual"><scope>daemon</scope><name>on_stop</name></member>
+      <member refid="classdaemon_1abe7dfd36c0597c7b79913f9b5cebd6c2" prot="private" virt="non-virtual"><scope>daemon</scope><name>on_stop_</name></member>
+      <member refid="classdaemon_1a78c97a2a140306f61440c87cd000f836" prot="public" virt="non-virtual"><scope>daemon</scope><name>operator=</name></member>
+      <member refid="classdaemon_1ae6224c5ed5a16b4afdf94093644defa6" prot="public" virt="non-virtual"><scope>daemon</scope><name>operator=</name></member>
+      <member refid="classdaemon_1a87e3e045308665f7a98ee519441a862d" prot="private" virt="non-virtual"><scope>daemon</scope><name>pid_handle_</name></member>
+      <member refid="classdaemon_1aba409696e7397644b6aca7733e1443af" prot="private" virt="non-virtual"><scope>daemon</scope><name>pid_path_</name></member>
+      <member refid="classdaemon_1a2feff6e647d1222c6849286cd76b311d" prot="public" virt="non-virtual"><scope>daemon</scope><name>reload_callback</name></member>
+      <member refid="classdaemon_1a503bd72fa9d779ba2750299981b326eb" prot="private" virt="non-virtual"><scope>daemon</scope><name>reload_event_</name></member>
+      <member refid="classdaemon_1a9d9162166407ac2d23502a5775423a78" prot="public" virt="non-virtual"><scope>daemon</scope><name>remove_child</name></member>
+      <member refid="classdaemon_1aef4dbc01367e334207d690d137692fc9" prot="public" virt="non-virtual"><scope>daemon</scope><name>remove_pid_file</name></member>
+      <member refid="classdaemon_1adf28f07bc6da1a0f8b1391c03d29b3b3" prot="public" virt="non-virtual"><scope>daemon</scope><name>request_reload</name></member>
+      <member refid="classdaemon_1a7c835469a4c400cd0bef83bd54c4e334" prot="public" virt="non-virtual"><scope>daemon</scope><name>request_shutdown</name></member>
+      <member refid="classdaemon_1a2ffe15afe821ced9a95513048cd6c5ad" prot="public" virt="non-virtual"><scope>daemon</scope><name>run</name></member>
+      <member refid="classdaemon_1a8d891f3daaf3348e9a002da0b0dd6761" prot="public" virt="non-virtual"><scope>daemon</scope><name>set_watchdog_timeout</name></member>
+      <member refid="classdaemon_1ab4d1bdb84712cb4c891d253042f9ea3e" prot="private" virt="non-virtual"><scope>daemon</scope><name>setup_signal_handlers</name></member>
+      <member refid="classdaemon_1ac1e9f70cd71e393af7a622f2abc5ed7a" prot="private" virt="non-virtual"><scope>daemon</scope><name>shutdown_event_</name></member>
+      <member refid="classdaemon_1a174b6a53237b1b28f5f6946e4e066d6c" prot="private" virt="non-virtual"><scope>daemon</scope><name>signal_guard_</name></member>
+      <member refid="classdaemon_1a2d267d2ea7c493146682409b70acc2b9" prot="private" virt="non-virtual"><scope>daemon</scope><name>start_all_children</name></member>
+      <member refid="classdaemon_1a47927ec91c987d81dfa1f7a10792b701" prot="public" virt="non-virtual"><scope>daemon</scope><name>start_callback</name></member>
+      <member refid="classdaemon_1af07755cae0cee00ccdea1718778cf86e" prot="private" virt="non-virtual"><scope>daemon</scope><name>start_child</name></member>
+      <member refid="classdaemon_1a3a7493c1a716dbe9e35be4e486fb3d21" prot="public" virt="non-virtual"><scope>daemon</scope><name>state</name></member>
+      <member refid="classdaemon_1ad7abb2498aa64c4f9aba443c9ae6039f" prot="private" virt="non-virtual"><scope>daemon</scope><name>state_</name></member>
+      <member refid="classdaemon_1aea351e74c1dbca14382598ebdc2ec959" prot="private" virt="non-virtual"><scope>daemon</scope><name>stop_all_children</name></member>
+      <member refid="classdaemon_1a466ecc8fb0fcdeb2e5c60ff2671e1564" prot="public" virt="non-virtual"><scope>daemon</scope><name>stop_callback</name></member>
+      <member refid="classdaemon_1a59821443692ffd8c504c151a75d9c377" prot="private" virt="non-virtual"><scope>daemon</scope><name>watchdog_enabled_</name></member>
+      <member refid="classdaemon_1a8fadbd5755731bb071c4e9b73f024f77" prot="private" virt="non-virtual"><scope>daemon</scope><name>watchdog_loop</name></member>
+      <member refid="classdaemon_1a9399f7c6c02bd12610e951eea84b55c1" prot="public" virt="non-virtual"><scope>daemon</scope><name>watchdog_ping</name></member>
+      <member refid="classdaemon_1a4b12985fb482cdc782c0f4218d227cd1" prot="private" virt="non-virtual"><scope>daemon</scope><name>watchdog_thread_</name></member>
+      <member refid="classdaemon_1ab03d00b8c8b67e25bacc396599777178" prot="private" virt="non-virtual"><scope>daemon</scope><name>watchdog_timeout_ms_</name></member>
+      <member refid="classdaemon_1acd8925105dbbb04c6550a8257d79c691" prot="private" virt="non-virtual"><scope>daemon</scope><name>work_dir_</name></member>
+      <member refid="classdaemon_1ae8ab5fa697056ffaca558b311ea9f53e" prot="public" virt="non-virtual"><scope>daemon</scope><name>write_pid_file</name></member>
+      <member refid="classdaemon_1aeca6936ceedfcaf68cb15d6243d17a6e" prot="public" virt="non-virtual"><scope>daemon</scope><name>~daemon</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

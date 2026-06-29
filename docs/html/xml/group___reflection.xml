@@ -5,11 +5,163 @@
     <title>反射系统</title>
     <innerclass refid="structtype__name" prot="public">type_name</innerclass>
     <innerclass refid="classmeta__any" prot="public">meta_any</innerclass>
+    <innerclass refid="structenum__entry" prot="public">enum_entry</innerclass>
+    <innerclass refid="classmeta__enum" prot="public">meta_enum</innerclass>
     <innerclass refid="classmeta__function" prot="public">meta_function</innerclass>
     <innerclass refid="classmeta__property" prot="public">meta_property</innerclass>
     <innerclass refid="classtype__builder" prot="public">type_builder</innerclass>
     <innerclass refid="classregistry" prot="public">registry</innerclass>
     <innerclass refid="classmeta__type" prot="public">meta_type</innerclass>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="group___reflection_1ga8a2d3fd1d9146e1f0a43e4591ec79fa5" prot="public" static="no" strong="no">
+        <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
+        <name>property_attr</name>
+        <enumvalue id="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a8134bae8bb64b7bab4a27a4b504f8081" prot="public">
+          <name>PROP_NONE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>无注解 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a35e0df006b97af65212cf752c9625e6e" prot="public">
+          <name>PROP_TRANSIENT</name>
+          <initializer>= 1 &lt;&lt; 0</initializer>
+          <briefdescription>
+<para>序列化时跳过此属性 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a8ced6b2c2bdd10488b4ee95d770c89f7" prot="public">
+          <name>PROP_REQUIRED</name>
+          <initializer>= 1 &lt;&lt; 1</initializer>
+          <briefdescription>
+<para>反序列化时必须存在 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5ae03d365f13ab2ba8b3e3735235a39829" prot="public">
+          <name>PROP_READ_ONLY</name>
+          <initializer>= 1 &lt;&lt; 2</initializer>
+          <briefdescription>
+<para>仅 getter，无 setter </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a4525e363c96b8820161e8edb28335da7" prot="public">
+          <name>PROP_OPTIONAL</name>
+          <initializer>= 1 &lt;&lt; 3</initializer>
+          <briefdescription>
+<para>反序列化时可缺失 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a17510c8324cde4078432427869936c92" prot="public">
+          <name>PROP_VERSIONED</name>
+          <initializer>= 1 &lt;&lt; 4</initializer>
+          <briefdescription>
+<para>启用版本追踪 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a425a6f7b9bbb9f23b39e5ff80c43ee22" prot="public">
+          <name>PROP_PRIMARY_KEY</name>
+          <initializer>= 1 &lt;&lt; 5</initializer>
+          <briefdescription>
+<para>数据库主键列 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a99b60c66761cf68cc2bf6b3a23ed8a55" prot="public">
+          <name>PROP_AUTO_INC</name>
+          <initializer>= 1 &lt;&lt; 6</initializer>
+          <briefdescription>
+<para>数据库自增列 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a4b3d7192079a01db1431c11f0614ce4a" prot="public">
+          <name>PROP_UNIQUE</name>
+          <initializer>= 1 &lt;&lt; 7</initializer>
+          <briefdescription>
+<para>数据库唯一约束 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a49799facf119e51b38ec7b586411691a" prot="public">
+          <name>PROP_INDEX</name>
+          <initializer>= 1 &lt;&lt; 8</initializer>
+          <briefdescription>
+<para>数据库普通索引 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a9beac021644986b0446a8bd13cc4e110" prot="public">
+          <name>PROP_FOREIGN_KEY</name>
+          <initializer>= 1 &lt;&lt; 9</initializer>
+          <briefdescription>
+<para>数据库外键列 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>属性注解标志 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>用于控制属性在序列化/反序列化中的行为。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="31" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="31" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___reflection_1ga8ba8c42c850f322ef2ef910e15c928e9" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <name>container_kind</name>
+        <enumvalue id="group___reflection_1gga8ba8c42c850f322ef2ef910e15c928e9a334c4a4c42fdb79d7ebc3e73b517e6f8" prot="public">
+          <name>none</name>
+          <briefdescription>
+<para>非容器类型 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___reflection_1gga8ba8c42c850f322ef2ef910e15c928e9a6ec7489017b25b5fff20d353b6d2162e" prot="public">
+          <name>sequential</name>
+          <briefdescription>
+<para>顺序容器 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___reflection_1gga8ba8c42c850f322ef2ef910e15c928e9a1feb49ad88ac6efc508a6a925b5a02a6" prot="public">
+          <name>associative</name>
+          <briefdescription>
+<para>关联容器 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>容器类型标识 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/type.hpp" line="33" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/type.hpp" bodystart="33" bodyend="37"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="typedef">
       <memberdef kind="typedef" id="group___reflection_1ga541516a057bbd67d55d02ece107883d9" prot="public" static="no">
         <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
@@ -23,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="24" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="24" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="23" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="23" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -39,23 +191,146 @@
         <name>type_name_v</name>
         <initializer>= <ref refid="structtype__name" kindref="compound">type_name</ref>&lt;T&gt;::value</initializer>
         <briefdescription>
-<para>type_name的便捷访问变量模板 </para>
+<para><ref refid="structtype__name" kindref="compound">type_name</ref> 的便捷访问变量模板 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="43" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="43" bodyend="-1"/>
-        <referencedby refid="classmeta__any_1af90e8f43a881d95b9c1550e5fc31bebb" compoundref="reflect_2any_8hpp" startline="172" endline="181">meta_any::cast</referencedby>
-        <referencedby refid="classmeta__any_1a98e05551bc2c5a74a2d8afceba6e3d86" compoundref="reflect_2any_8hpp" startline="155" endline="164">meta_any::cast</referencedby>
-        <referencedby refid="classtype__builder_1a7dfee419346f930acb6252545de97b55" compoundref="reflect_8hpp" startline="77" endline="93">type_builder&lt; T &gt;::property</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="42" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="42" bodyend="-1"/>
+        <referencedby refid="classtype__builder_1a5c3b7c7c1a879ec6d24cc3b6fe0491b6" compoundref="reflect_8hpp" startline="55" endline="58">type_builder&lt; T &gt;::base</referencedby>
+        <referencedby refid="group___reflection_1ga580ac475bed401f28eca8e86b4de57c2" compoundref="reflect_2any_8hpp" startline="60" endline="71">type_id_for</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___reflection_1ga5a74d42372d4485518ebb6915c124a37" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="group___reflection_1ga580ac475bed401f28eca8e86b4de57c2" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" kindref="member">type_id</ref></type>
+        <definition>type_id type_id_for</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>type_id_for</name>
+        <briefdescription>
+<para>计算类型 T 的运行时期类型标识 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="60" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="60" bodyend="71"/>
+        <references refid="group___hash_primary_1ga83de52434e3b8de687077d3ce6dad4d5" compoundref="hash_8hpp" startline="188" endline="197">FNV_hash_string</references>
+        <references refid="group___reflection_1ga71a3267b0111c48af4e304d2a756abd1" compoundref="reflect_2any_8hpp" startline="42">type_name_v</references>
+        <referencedby refid="classtype__builder_1a0a91f33b0dd9399802abb9af1108f385" compoundref="reflect_8hpp" startline="287" endline="313">type_builder&lt; T &gt;::as_associative_container</referencedby>
+        <referencedby refid="classtype__builder_1a1835fed86476205d396dfa64d7fa457f" compoundref="reflect_8hpp" startline="253" endline="276">type_builder&lt; T &gt;::as_sequential_container</referencedby>
+        <referencedby refid="group___s_q_l_mapper_1ga4ae4b359eeab58486b15997f87541791" compoundref="sql__mapper_8hpp" startline="43" endline="91">cpp_type_to_sql_type</referencedby>
+        <referencedby refid="group___s_q_l_mapper_1gac77e9362560fc03f864f72ffcb4a452c" compoundref="sql__mapper_8hpp" startline="126" endline="162">meta_any_to_sql_literal</referencedby>
+        <referencedby refid="classtype__builder_1ab05ddac0df7d2836a815f92f27191749" compoundref="reflect_8hpp" startline="79" endline="95">type_builder&lt; T &gt;::property</referencedby>
+        <referencedby refid="group___s_q_l_mapper_1gabbea4ff42670147e8abc032de12c081b" compoundref="sql__mapper_8hpp" startline="100" endline="119">read_column_by_type</referencedby>
+        <referencedby refid="classregistry_1a80b07280b49b0e28ecc3f3a1b6c7cccc" compoundref="reflect_2registry_8hpp" startline="58" endline="71">registry::register_type</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___reflection_1ga88532337ecb7282cd7543cbc2556e1de" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void swap</definition>
+        <argsstring>(meta_any &amp;lhs, meta_any &amp;rhs) noexcept</argsstring>
+        <name>swap</name>
+        <param>
+          <type><ref refid="classmeta__any" kindref="compound">meta_any</ref> &amp;</type>
+          <declname>lhs</declname>
+        </param>
+        <param>
+          <type><ref refid="classmeta__any" kindref="compound">meta_any</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>交换两个 <ref refid="classmeta__any" kindref="compound">meta_any</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>左操作数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右操作数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" line="531" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/any.hpp" bodystart="531" bodyend="531"/>
+      </memberdef>
+      <memberdef kind="function" id="group___reflection_1ga23bb003b656f3abb7643fae2220e735c" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool prop_has_attr</definition>
+        <argsstring>(const uint16_t attrs, const property_attr flag) noexcept</argsstring>
+        <name>prop_has_attr</name>
+        <param>
+          <type>const <ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
+          <declname>attrs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___reflection_1ga8a2d3fd1d9146e1f0a43e4591ec79fa5" kindref="member">property_attr</ref></type>
+          <declname>flag</declname>
+        </param>
+        <briefdescription>
+<para>检查属性注解是否包含指定标志 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>attrs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性注解组合 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>flag</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要检查的标志 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="52" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="52" bodyend="54"/>
+        <referencedby refid="classmeta__property_1ae67ac96ad8f147cc10913da0233e0f93" compoundref="property_8hpp" startline="150" endline="150">meta_property::is_auto_increment</referencedby>
+        <referencedby refid="classmeta__property_1a40a2ee05a1d86dbd723d68d2522cf9b6" compoundref="property_8hpp" startline="165" endline="165">meta_property::is_foreign_key</referencedby>
+        <referencedby refid="classmeta__property_1a6228168c917c1a2f28ef9bab8ae1b24e" compoundref="property_8hpp" startline="160" endline="160">meta_property::is_index</referencedby>
+        <referencedby refid="classmeta__property_1a13b413c06eddee398956f79d679d7ce6" compoundref="property_8hpp" startline="135" endline="135">meta_property::is_optional</referencedby>
+        <referencedby refid="classmeta__property_1a9f82529ae7168542ebbfa0d42bf8ddee" compoundref="property_8hpp" startline="145" endline="145">meta_property::is_primary_key</referencedby>
+        <referencedby refid="classmeta__property_1ad3be44678b8e9793d64fb35bc1ee6a35" compoundref="property_8hpp" startline="130" endline="130">meta_property::is_readonly</referencedby>
+        <referencedby refid="classmeta__property_1ab5b219d06f66852d44c0ee87c25d49d9" compoundref="property_8hpp" startline="125" endline="125">meta_property::is_required</referencedby>
+        <referencedby refid="classmeta__property_1ae626fae5790df2b5167957443f77a042" compoundref="property_8hpp" startline="120" endline="120">meta_property::is_transient</referencedby>
+        <referencedby refid="classmeta__property_1acdbd3f0c1d891a1f3363c34dcb5ca2f1" compoundref="property_8hpp" startline="155" endline="155">meta_property::is_unique</referencedby>
+        <referencedby refid="classmeta__property_1ad8d2192158ebf2db0068cde307a874f0" compoundref="property_8hpp" startline="140" endline="140">meta_property::is_versioned</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___reflection_1gac197fd7307a57ddbf46feb16ac7ebd32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; <ref refid="group___base_type_qualifier_check_1gaca38abc104326427a46bccfd27cbfe28" kindref="member">is_class_v</ref>&lt; T &gt;, int &gt;</type>
+            <defval>0</defval>
           </param>
         </templateparamlist>
         <type><ref refid="classtype__builder" kindref="compound">type_builder</ref>&lt; T &gt;</type>
@@ -90,20 +365,21 @@
 </parameterlist>
 <simplesect kind="return"><para>类型构建器 </para>
 </simplesect>
+<simplesect kind="note"><para>枚举类型请直接使用 <ref refid="classregistry_1ae3786801b98d932e133778a36eee1d72" kindref="member">registry::instance()</ref>.register_type&lt;EnumType&gt;(name) 并通过返回的 <ref refid="classmeta__type" kindref="compound">meta_type</ref>&amp; 设置 enum_info </para>
+</simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="198" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="198" bodyend="200"/>
-        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="337" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="337" bodyend="339"/>
+        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="476" endline="478">name</references>
       </memberdef>
     </sectiondef>
     <sectiondef kind="define">
-      <memberdef kind="define" id="group___reflection_1ga6508bad6337bffd24165f1d8038e2eb8" prot="public" static="no">
-        <name>NEFORCE_REFLECT_REGISTER_N</name>
+      <memberdef kind="define" id="group___reflection_1ga8cd8052ba270c6ae08c9486e3191ac60" prot="public" static="no">
+        <name>NEFORCE_REFLECT_REGISTER</name>
         <param><defname>Class</defname></param>
-        <param><defname>Name</defname></param>
-        <initializer>static auto _neforce_reflect_##Class = _NEFORCE <ref refid="group___reflection_1ga5a74d42372d4485518ebb6915c124a37" kindref="member">reflect::reflect</ref>&lt;Class&gt;(Name)</initializer>
+        <initializer>static auto _neforce_reflect_##Class = _NEFORCE <ref refid="group___reflection_1gac197fd7307a57ddbf46feb16ac7ebd32" kindref="member">reflect::reflect</ref>&lt;Class&gt;(#Class)</initializer>
         <briefdescription>
 <para>注册类型（无基类） </para>
         </briefdescription>
@@ -116,30 +392,18 @@
 <para>类名 </para>
 </parameterdescription>
 </parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>Name</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>注册名</para>
-</parameterdescription>
-</parameteritem>
 </parameterlist>
-注册一个没有基类的类型。 </para>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="210" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="210" bodyend="211"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="346" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="346" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="define" id="group___reflection_1gad623e383ce36c4add72a0ff8cc80c972" prot="public" static="no">
-        <name>NEFORCE_REFLECT_REGISTER_N_DERIVED</name>
+      <memberdef kind="define" id="group___reflection_1gafc434cedd29fcb0b3450b3f9a7d3286d" prot="public" static="no">
+        <name>NEFORCE_REFLECT_REGISTER_DERIVED</name>
         <param><defname>Class</defname></param>
         <param><defname>Base</defname></param>
-        <param><defname>Name</defname></param>
-        <initializer>static auto _neforce_reflect_##Class = []() {                              \
-    _NEFORCE reflect::registry::instance().resolve_all_bases();            \
-    return _NEFORCE <ref refid="group___reflection_1ga5a74d42372d4485518ebb6915c124a37" kindref="member">reflect::reflect</ref>&lt;Class&gt;(#Class).template base&lt;Base&gt;(); \
-}()</initializer>
+        <initializer>static auto _neforce_reflect_##Class = _NEFORCE <ref refid="group___reflection_1gac197fd7307a57ddbf46feb16ac7ebd32" kindref="member">reflect::reflect</ref>&lt;Class&gt;(#Class).template base&lt;Base&gt;()</initializer>
         <briefdescription>
 <para>注册类型（带基类） </para>
         </briefdescription>
@@ -160,27 +424,32 @@
 <para>基类名 </para>
 </parameterdescription>
 </parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>Name</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>注册名</para>
-</parameterdescription>
-</parameteritem>
 </parameterlist>
-注册一个有基类的类型，自动解析继承关系。 </para>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="221" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="221" bodyend="225"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="353" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="353" bodyend="354"/>
       </memberdef>
-      <memberdef kind="define" id="group___reflection_1ga8cd8052ba270c6ae08c9486e3191ac60" prot="public" static="no">
-        <name>NEFORCE_REFLECT_REGISTER</name>
-        <param><defname>Class</defname></param>
-        <initializer><ref refid="group___reflection_1ga6508bad6337bffd24165f1d8038e2eb8" kindref="member">NEFORCE_REFLECT_REGISTER_N</ref>(Class, #Class)</initializer>
+      <memberdef kind="define" id="group___reflection_1ga7733136728615a337adca516a0a7ed8c" prot="public" static="no">
+        <name>NEFORCE_REFLECT_RESOLVE_BASES</name>
+        <param></param>
+        <initializer>_NEFORCE reflect::registry::instance().resolve_all_bases()</initializer>
         <briefdescription>
-<para>注册类型（无基类） </para>
+<para>统一解析所有待解析的基类引用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>应在 main() 函数开始处调用，或在所有静态注册完成后调用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="361" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="361" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___reflection_1ga8e300ceae3db692c23e28487a0d79756" prot="public" static="no">
+        <name>NEFORCE_REFLECT_OBJ</name>
+        <param><defname>Class</defname></param>
+        <briefdescription>
+<para>标记类需要反射注册 </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -192,43 +461,246 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-注册一个没有基类的类型。 </para>
+在类体内放置此宏，扫描器将为该类生成完整的 <ref refid="classmeta__type" kindref="compound">meta_type</ref> 注册代码。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="233" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="233" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect_macros.hpp" line="25" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect_macros.hpp" bodystart="25" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="define" id="group___reflection_1gafc434cedd29fcb0b3450b3f9a7d3286d" prot="public" static="no">
-        <name>NEFORCE_REFLECT_REGISTER_DERIVED</name>
-        <param><defname>Class</defname></param>
-        <param><defname>Base</defname></param>
-        <initializer><ref refid="group___reflection_1gad623e383ce36c4add72a0ff8cc80c972" kindref="member">NEFORCE_REFLECT_REGISTER_N_DERIVED</ref>(Class, Base, #Class)</initializer>
+      <memberdef kind="define" id="group___reflection_1ga9f2f247e3f218411a3a72ba60ba83367" prot="public" static="no">
+        <name>NEFORCE_REFLECT_PROP</name>
+        <param><defname>type</defname></param>
+        <param><defname>name</defname></param>
         <briefdescription>
-<para>注册类型（带基类） </para>
+<para>标记成员属性 </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
-<parametername>Class</parametername>
+<parametername>type</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>类名 </para>
+<para>属性类型 </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>Base</parametername>
+<parametername>name</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>基类名</para>
+<para>属性名称</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-注册一个有基类的类型，自动解析继承关系。 </para>
+在类体内放置此宏标记需要反射的成员变量。 扫描器会检查类定义中对应的成员声明。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" line="242" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect.hpp" bodystart="242" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect_macros.hpp" line="36" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect_macros.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___reflection_1gab4945e6e33ddcbaae53515e967721cd5" prot="public" static="no">
+        <name>NEFORCE_REFLECT_PROP_ATTR</name>
+        <param><defname>type</defname></param>
+        <param><defname>name</defname></param>
+        <param><defname>attrs</defname></param>
+        <briefdescription>
+<para>标记带注解的成员属性 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attrs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性注解（PROP_TRANSIENT | PROP_OPTIONAL 等） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect_macros.hpp" line="45" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect_macros.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___reflection_1ga70162fcbdc111236a5b5c3656407b80c" prot="public" static="no">
+        <name>NEFORCE_REFLECT_FUNC</name>
+        <param><defname>ret</defname></param>
+        <param><defname>name</defname></param>
+        <param><defname>...</defname></param>
+        <briefdescription>
+<para>标记成员函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ret</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>返回值类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>函数名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>...</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect_macros.hpp" line="54" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect_macros.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___reflection_1ga77c72595fbb38db93a3f8723f95b78b3" prot="public" static="no">
+        <name>NEFORCE_REFLECT_SIGNAL</name>
+        <param><defname>sig_type</defname></param>
+        <param><defname>name</defname></param>
+        <param><defname>...</defname></param>
+        <briefdescription>
+<para>标记信号成员 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sig_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>信号类型（如 neforce::signal&lt;int&gt;） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>信号成员名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>...</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>信号参数类型列表（可选）</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在类体内放置此宏标记信号成员变量。 扫描器会识别并生成信号注册代码。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect_macros.hpp" line="66" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect_macros.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___reflection_1ga1762d432f7ea30c46083a2f992dccf05" prot="public" static="no">
+        <name>NEFORCE_REFLECT_ENUM</name>
+        <param><defname>Enum</defname></param>
+        <param><defname>Underlying</defname></param>
+        <briefdescription>
+<para>标记枚举类型需要反射注册 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Enum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>枚举类型名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Underlying</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>底层整数类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+此标记宏用于让扫描器识别枚举类型并生成反射注册代码。 功能版本在 <ref refid="reflect_8hpp" kindref="compound">reflect.hpp</ref> 中定义。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect_macros.hpp" line="77" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect_macros.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___reflection_1ga7df1cbdc6536deab37a43b7fec1276d0" prot="public" static="no">
+        <name>NEFORCE_REFLECT_ENUM_VAL</name>
+        <param><defname>Enum</defname></param>
+        <param><defname>Name</defname></param>
+        <briefdescription>
+<para>标记枚举值条目 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>Enum</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>枚举类型名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>枚举值名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect_macros.hpp" line="85" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect_macros.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="group___reflection_1gad4e18676202d8b050b4292bc56899b67" prot="public" static="no">
+        <name>NEFORCE_DB_TABLE</name>
+        <param><defname>TableName</defname></param>
+        <briefdescription>
+<para>指定数据库表名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>TableName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据库表名字符串字面量</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+当目标表名与类名不一致时，在类体内放置此宏指定表名映射。 扫描器会生成 table_name() 调用将表名写入 meta_type。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect_macros.hpp" line="95" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/reflect_macros.hpp" bodystart="95" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

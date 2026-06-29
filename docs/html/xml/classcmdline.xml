@@ -4,6 +4,82 @@
     <compoundname>cmdline</compoundname>
     <includes refid="cmdline_8hpp" local="no">cmdline.hpp</includes>
     <innerclass refid="structcmdline_1_1option" prot="public">cmdline::option</innerclass>
+    <innerclass refid="structcmdline_1_1option__dependency" prot="public">cmdline::option_dependency</innerclass>
+    <innerclass refid="structcmdline_1_1option__conflict" prot="public">cmdline::option_conflict</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classcmdline_1a4c84557e04980e1051cc0589118e3126" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>conflict_behavior</name>
+        <qualifiedname>cmdline::conflict_behavior</qualifiedname>
+        <enumvalue id="classcmdline_1a4c84557e04980e1051cc0589118e3126acb5e100e5a9a3e7f6d1fd97512215282" prot="public">
+          <name>error</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>冲突时抛出异常 </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classcmdline_1a4c84557e04980e1051cc0589118e3126a7b83d3f08fa392b79e3f553b585971cd" prot="public">
+          <name>warning</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>冲突时打印警告 </para>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classcmdline_1a4c84557e04980e1051cc0589118e3126a567bc1d268f135496de3d5b946b691f3" prot="public">
+          <name>ignore</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+<para>冲突时忽略 </para>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>约束冲突处理行为 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="197" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="197" bodyend="201"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classcmdline_1a47a872b81e65d32187b826b295e49545" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>(const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;<ref refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" kindref="member">name</ref>, const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;value)&gt;</type>
+        <definition>using cmdline::validator = function&lt;string(const string&amp; name, const string&amp; value)&gt;</definition>
+        <argsstring></argsstring>
+        <name>validator</name>
+        <qualifiedname>cmdline::validator</qualifiedname>
+        <briefdescription>
+<para>选项值验证器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>选项名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>选项值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>验证通过返回空字符串，失败返回错误信息 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="231" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="231" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classcmdline_1a7236794a0a668f024cb73d6e1079eb5a" prot="private" static="no" mutable="no">
         <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
@@ -18,7 +94,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="193" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="193" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="234" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="234" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classcmdline_1a135a48a970192086c376ad23e4bf22a1" prot="private" static="no" mutable="no">
         <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structcmdline_1_1option" kindref="compound">option</ref> &gt;</type>
@@ -33,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="194" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="194" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="235" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="235" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classcmdline_1a3e01c929e3ebf4656509a7bfd1e335b9" prot="private" static="no" mutable="no">
         <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
@@ -48,7 +124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="195" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="195" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="236" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="236" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classcmdline_1a56028e0b73b687da7867384c294606bb" prot="private" static="no" mutable="no">
         <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; char, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
@@ -63,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="196" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="196" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="237" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="237" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classcmdline_1ae7e9398f961620b0bdfaf03908ccd997" prot="private" static="no" mutable="no">
         <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
@@ -78,7 +154,68 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="197" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="197" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="238" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="238" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcmdline_1a9457468fa02599adb274e76908cc989d" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structcmdline_1_1option__dependency" kindref="compound">option_dependency</ref> &gt;</type>
+        <definition>vector&lt;option_dependency&gt; cmdline::dependencies_</definition>
+        <argsstring></argsstring>
+        <name>dependencies_</name>
+        <qualifiedname>cmdline::dependencies_</qualifiedname>
+        <briefdescription>
+<para>选项依赖关系列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="240" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="240" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcmdline_1aebfb0ced4b8029270e7059d98a057fbd" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structcmdline_1_1option__conflict" kindref="compound">option_conflict</ref> &gt;</type>
+        <definition>vector&lt;option_conflict&gt; cmdline::conflicts_</definition>
+        <argsstring></argsstring>
+        <name>conflicts_</name>
+        <qualifiedname>cmdline::conflicts_</qualifiedname>
+        <briefdescription>
+<para>选项冲突关系列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="241" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="241" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcmdline_1a690d9faf5926dfafb130450e5a7b4adb" prot="private" static="no" mutable="no">
+        <type><ref refid="classcmdline_1a4c84557e04980e1051cc0589118e3126" kindref="member">conflict_behavior</ref></type>
+        <definition>conflict_behavior cmdline::conflict_behavior_</definition>
+        <argsstring></argsstring>
+        <name>conflict_behavior_</name>
+        <qualifiedname>cmdline::conflict_behavior_</qualifiedname>
+        <initializer>{<ref refid="classcmdline_1a4c84557e04980e1051cc0589118e3126acb5e100e5a9a3e7f6d1fd97512215282" kindref="member">conflict_behavior::error</ref>}</initializer>
+        <briefdescription>
+<para>冲突处理行为 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="242" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="242" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="variable" id="classcmdline_1a0ac1e3889e6e8fd09e4b5cb99bc9500b" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classcmdline_1a47a872b81e65d32187b826b295e49545" kindref="member">validator</ref> &gt;</type>
+        <definition>vector&lt;validator&gt; cmdline::validators_</definition>
+        <argsstring></argsstring>
+        <name>validators_</name>
+        <qualifiedname>cmdline::validators_</qualifiedname>
+        <briefdescription>
+<para>选项值验证器列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="243" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="243" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -111,7 +248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="204" column="12"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="250" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classcmdline_1a20edb0b02229fc96b65bd67ab6ac9682" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="structcmdline_1_1option" kindref="compound">option</ref> *</type>
@@ -142,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="211" column="12"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="257" column="12"/>
       </memberdef>
       <memberdef kind="function" id="classcmdline_1a878aca154f5efa345707d73dbafbbc8f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -204,7 +341,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="220" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="266" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classcmdline_1a2fab650673a2bdf4dbe4d943fe402fd1" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -266,7 +403,57 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="229" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="275" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1aa1223da0e216758bad855fb61ef332c0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmdline::validate_values</definition>
+        <argsstring>()</argsstring>
+        <name>validate_values</name>
+        <qualifiedname>cmdline::validate_values</qualifiedname>
+        <briefdescription>
+<para>验证选项值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structcmdline__exception" kindref="compound">cmdline_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>验证失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+依次调用所有已注册的验证器。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="283" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1aaf83deed96171b8d24ec8df3c1e59214" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmdline::validate_constraints</definition>
+        <argsstring>()</argsstring>
+        <name>validate_constraints</name>
+        <qualifiedname>cmdline::validate_constraints</qualifiedname>
+        <briefdescription>
+<para>验证选项约束 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structcmdline__exception" kindref="compound">cmdline_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>约束违反且行为为 error 时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+检查所有依赖关系和冲突关系。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="291" column="10"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -369,7 +556,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="242" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="304" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classcmdline_1ac80b5cbd5223c70096faa13c430d8b33" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -394,7 +581,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="249" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="311" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classcmdline_1a27f16ada740af51e1638aa0d058be9fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -445,7 +632,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="257" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="319" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classcmdline_1ac59ec7b99c5c40ad74ccbd4ef9da0ba9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -483,7 +670,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="264" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="326" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classcmdline_1a4aab6f98f87f6f24aaeceab388fe1112" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
@@ -536,7 +723,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="273" column="13"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="335" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classcmdline_1aa30667509d2573f743e124724e76e690" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -567,8 +754,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="280" column="11"/>
-        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="342" column="11"/>
+        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="476" endline="478">name</references>
       </memberdef>
       <memberdef kind="function" id="classcmdline_1a38140f2bc12f09b3f740c17a1ac72500" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
@@ -599,8 +786,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="287" column="13"/>
-        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="349" column="13"/>
+        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="476" endline="478">name</references>
       </memberdef>
       <memberdef kind="function" id="classcmdline_1a3a98fab6199ce0f8d0423d2698a85d6b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &amp;</type>
@@ -618,7 +805,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="293" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="293" bodyend="293"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="355" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="355" bodyend="355"/>
       </memberdef>
       <memberdef kind="function" id="classcmdline_1a7d6b5721d7de0865e50ef2de4c48dcde" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
@@ -636,7 +823,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="299" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="299" bodyend="299"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="361" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="361" bodyend="361"/>
       </memberdef>
       <memberdef kind="function" id="classcmdline_1a720bda60aa8408775671e89ab7947df2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -652,7 +839,318 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="306" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="368" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1a9766b369be7c5d08a5a73f2678ce28bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmdline::add_dependency</definition>
+        <argsstring>(const string &amp;present, const string &amp;required)</argsstring>
+        <name>add_dependency</name>
+        <qualifiedname>cmdline::add_dependency</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>present</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>required</declname>
+        </param>
+        <briefdescription>
+<para>添加选项依赖关系 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>present</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>当此选项出现时 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>required</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>此选项也必须出现 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="382" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1a6ff67432daef7c2e88b8858f3de66d29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmdline::add_conflict</definition>
+        <argsstring>(const string &amp;option_a, const string &amp;option_b)</argsstring>
+        <name>add_conflict</name>
+        <qualifiedname>cmdline::add_conflict</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>option_a</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>option_b</declname>
+        </param>
+        <briefdescription>
+<para>添加选项冲突关系 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>option_a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>选项A </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>option_b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>选项B </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="389" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1a93320acf31ef68d4d38a34a0f0aff990" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmdline::set_conflict_behavior</definition>
+        <argsstring>(conflict_behavior behavior) noexcept</argsstring>
+        <name>set_conflict_behavior</name>
+        <qualifiedname>cmdline::set_conflict_behavior</qualifiedname>
+        <param>
+          <type><ref refid="classcmdline_1a4c84557e04980e1051cc0589118e3126" kindref="member">conflict_behavior</ref></type>
+          <declname>behavior</declname>
+        </param>
+        <briefdescription>
+<para>设置冲突处理行为 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>behavior</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>冲突时的处理方式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="395" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="395" bodyend="395"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1ac94ba23cffbaa9061a6c1f131ce39097" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmdline::load_config</definition>
+        <argsstring>(const string &amp;config_path, const string &amp;section=&quot;&quot;)</argsstring>
+        <name>load_config</name>
+        <qualifiedname>cmdline::load_config</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>config_path</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>section</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+<para>从配置文件加载选项值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>config_path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>配置文件路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>section</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>配置节名或嵌套键名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structcmdline__exception" kindref="compound">cmdline_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件不存在或解析失败时抛出</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+支持的文件格式：<itemizedlist>
+<listitem><para>.ini：INI 格式，通过 section 参数指定节</para>
+</listitem><listitem><para>.json：JSON 格式，通过 section 参数指定顶层键导航到嵌套对象</para>
+</listitem><listitem><para>.toml：TOML 格式，通过 section 参数指定顶层键导航到嵌套表</para>
+</listitem><listitem><para>.yaml / .yml：YAML 格式，通过 section 参数指定顶层键导航到嵌套映射</para>
+</listitem><listitem><para>.env：环境变量格式（section 参数忽略）</para>
+</listitem></itemizedlist>
+</para>
+<para>配置文件中的值仅填充命令行未指定的选项，命令行参数优先级更高。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="412" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1a2ad98a5db3ed8b92f4fd2dc5584292d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmdline::add_validator</definition>
+        <argsstring>(validator v)</argsstring>
+        <name>add_validator</name>
+        <qualifiedname>cmdline::add_validator</qualifiedname>
+        <param>
+          <type><ref refid="classcmdline_1a47a872b81e65d32187b826b295e49545" kindref="member">validator</ref></type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+<para>添加选项验证器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>v</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>验证器函数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+可以多次调用以添加多个验证器，所有验证器都会被依次调用。 验证在 <ref refid="classcmdline_1a27f16ada740af51e1638aa0d058be9fe" kindref="member">parse()</ref> 完成后、validate_constraints() 之前执行。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="421" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1a95b7023eb10ee336e56bc2ecfbda964e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmdline::add_range_validator</definition>
+        <argsstring>(string long_name, int64_t min_val, int64_t max_val)</argsstring>
+        <name>add_range_validator</name>
+        <qualifiedname>cmdline::add_range_validator</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>long_name</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>min_val</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>max_val</declname>
+        </param>
+        <briefdescription>
+<para>添加选项值范围验证器（数值范围） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>long_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>选项名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>min_val</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最小值（包含） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_val</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大值（包含） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structcmdline__exception" kindref="compound">cmdline_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>选项不存在时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="430" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classcmdline_1ad28740e1d11b3cb4666430e4fdc3e197" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmdline::add_regex_validator</definition>
+        <argsstring>(string long_name, const string &amp;pattern)</argsstring>
+        <name>add_regex_validator</name>
+        <qualifiedname>cmdline::add_regex_validator</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>long_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>pattern</declname>
+        </param>
+        <briefdescription>
+<para>添加选项值正则验证器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>long_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>选项名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pattern</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>正则表达式模式 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structcmdline__exception" kindref="compound">cmdline_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>选项不存在时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="438" column="10"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -681,7 +1179,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="313" column="20"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="375" column="20"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -698,15 +1196,25 @@
 </listitem></itemizedlist>
 </para>
     </detaileddescription>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="160" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="160" bodyend="314"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" line="161" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/cmdline.hpp" bodystart="161" bodyend="439"/>
     <listofallmembers>
+      <member refid="classcmdline_1a6ff67432daef7c2e88b8858f3de66d29" prot="public" virt="non-virtual"><scope>cmdline</scope><name>add_conflict</name></member>
+      <member refid="classcmdline_1a9766b369be7c5d08a5a73f2678ce28bd" prot="public" virt="non-virtual"><scope>cmdline</scope><name>add_dependency</name></member>
       <member refid="classcmdline_1a7c3bc45569cf890f4c0c754e52a9235a" prot="public" virt="non-virtual"><scope>cmdline</scope><name>add_option</name></member>
+      <member refid="classcmdline_1a95b7023eb10ee336e56bc2ecfbda964e" prot="public" virt="non-virtual"><scope>cmdline</scope><name>add_range_validator</name></member>
+      <member refid="classcmdline_1ad28740e1d11b3cb4666430e4fdc3e197" prot="public" virt="non-virtual"><scope>cmdline</scope><name>add_regex_validator</name></member>
+      <member refid="classcmdline_1a2ad98a5db3ed8b92f4fd2dc5584292d6" prot="public" virt="non-virtual"><scope>cmdline</scope><name>add_validator</name></member>
+      <member refid="classcmdline_1a4c84557e04980e1051cc0589118e3126" prot="public" virt="non-virtual"><scope>cmdline</scope><name>conflict_behavior</name></member>
+      <member refid="classcmdline_1a690d9faf5926dfafb130450e5a7b4adb" prot="private" virt="non-virtual"><scope>cmdline</scope><name>conflict_behavior_</name></member>
+      <member refid="classcmdline_1aebfb0ced4b8029270e7059d98a057fbd" prot="private" virt="non-virtual"><scope>cmdline</scope><name>conflicts_</name></member>
       <member refid="classcmdline_1a38140f2bc12f09b3f740c17a1ac72500" prot="public" virt="non-virtual"><scope>cmdline</scope><name>count</name></member>
+      <member refid="classcmdline_1a9457468fa02599adb274e76908cc989d" prot="private" virt="non-virtual"><scope>cmdline</scope><name>dependencies_</name></member>
       <member refid="classcmdline_1ad040b3e75f96f129bfa0a2aef70ab774" prot="private" virt="non-virtual"><scope>cmdline</scope><name>find_option_long</name></member>
       <member refid="classcmdline_1a20edb0b02229fc96b65bd67ab6ac9682" prot="private" virt="non-virtual"><scope>cmdline</scope><name>find_option_short</name></member>
       <member refid="classcmdline_1a4aab6f98f87f6f24aaeceab388fe1112" prot="public" virt="non-virtual"><scope>cmdline</scope><name>get</name></member>
       <member refid="classcmdline_1aba07f344d445667fde98855753862348" prot="public" virt="non-virtual"><scope>cmdline</scope><name>get_os_argv</name></member>
       <member refid="classcmdline_1aa30667509d2573f743e124724e76e690" prot="public" virt="non-virtual"><scope>cmdline</scope><name>has</name></member>
+      <member refid="classcmdline_1ac94ba23cffbaa9061a6c1f131ce39097" prot="public" virt="non-virtual"><scope>cmdline</scope><name>load_config</name></member>
       <member refid="classcmdline_1a135a48a970192086c376ad23e4bf22a1" prot="private" virt="non-virtual"><scope>cmdline</scope><name>options_</name></member>
       <member refid="classcmdline_1a3e01c929e3ebf4656509a7bfd1e335b9" prot="private" virt="non-virtual"><scope>cmdline</scope><name>options_long_</name></member>
       <member refid="classcmdline_1a56028e0b73b687da7867384c294606bb" prot="private" virt="non-virtual"><scope>cmdline</scope><name>options_short_</name></member>
@@ -720,6 +1228,11 @@
       <member refid="classcmdline_1a720bda60aa8408775671e89ab7947df2" prot="public" virt="non-virtual"><scope>cmdline</scope><name>print_help</name></member>
       <member refid="classcmdline_1a7d6b5721d7de0865e50ef2de4c48dcde" prot="public" virt="non-virtual"><scope>cmdline</scope><name>program_name</name></member>
       <member refid="classcmdline_1a7236794a0a668f024cb73d6e1079eb5a" prot="private" virt="non-virtual"><scope>cmdline</scope><name>program_name_</name></member>
+      <member refid="classcmdline_1a93320acf31ef68d4d38a34a0f0aff990" prot="public" virt="non-virtual"><scope>cmdline</scope><name>set_conflict_behavior</name></member>
+      <member refid="classcmdline_1aaf83deed96171b8d24ec8df3c1e59214" prot="private" virt="non-virtual"><scope>cmdline</scope><name>validate_constraints</name></member>
+      <member refid="classcmdline_1aa1223da0e216758bad855fb61ef332c0" prot="private" virt="non-virtual"><scope>cmdline</scope><name>validate_values</name></member>
+      <member refid="classcmdline_1a47a872b81e65d32187b826b295e49545" prot="public" virt="non-virtual"><scope>cmdline</scope><name>validator</name></member>
+      <member refid="classcmdline_1a0ac1e3889e6e8fd09e4b5cb99bc9500b" prot="private" virt="non-virtual"><scope>cmdline</scope><name>validators_</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

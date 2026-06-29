@@ -100,7 +100,7 @@ $(function(){initNavTree('classmysql__prepared__result.html','','classmysql__pre
 <div class="dynheader">
 类 mysql_prepared_result 继承关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classmysql__prepared__result__inherit__graph.svg" width="163" height="262"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classmysql__prepared__result__inherit__graph.svg" width="163" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -119,6 +119,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a182d60423c6e882efd96f04462e6f876"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取结果集列数  <br /></td></tr>
 <tr class="memitem:af5ab89b9a5871298c7c34e6419b7804f" id="r_af5ab89b9a5871298c7c34e6419b7804f"><td class="memItemLeft">const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#af5ab89b9a5871298c7c34e6419b7804f">column_names</a> () const override</td></tr>
 <tr class="memdesc:af5ab89b9a5871298c7c34e6419b7804f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取列名列表  <br /></td></tr>
+<tr class="memitem:a38e52eb556ca7a00780a278c7d398f7c" id="r_a38e52eb556ca7a00780a278c7d398f7c"><td class="memItemLeft"><a class="el" href="structcolumn__meta.html">column_meta</a>&#160;</td><td class="memItemRight"><a class="el" href="#a38e52eb556ca7a00780a278c7d398f7c">column_metadata</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> n) const override</td></tr>
+<tr class="memdesc:a38e52eb556ca7a00780a278c7d398f7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取列元数据  <br /></td></tr>
 <tr class="memitem:a7d8ac91ac1c850273cabbdcec84dc3be" id="r_a7d8ac91ac1c850273cabbdcec84dc3be"><td class="memItemLeft">const <a class="el" href="classvector.html">vector</a>&lt;::enum_field_types &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a7d8ac91ac1c850273cabbdcec84dc3be">column_types</a> () const</td></tr>
 <tr class="memdesc:a7d8ac91ac1c850273cabbdcec84dc3be"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取列类型列表  <br /></td></tr>
 <tr class="memitem:aa023f6cfe4fd5fdfbfaf3efd3bda6784" id="r_aa023f6cfe4fd5fdfbfaf3efd3bda6784"><td class="memItemLeft"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa023f6cfe4fd5fdfbfaf3efd3bda6784">get</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> n) const override</td></tr>
@@ -277,6 +279,42 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 
 </div>
 </div>
+<a id="a38e52eb556ca7a00780a278c7d398f7c" name="a38e52eb556ca7a00780a278c7d398f7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38e52eb556ca7a00780a278c7d398f7c">&#9670;&#160;</a></span>column_metadata()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcolumn__meta.html">column_meta</a> mysql_prepared_result::column_metadata </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取列元数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>列索引（从0开始） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>列元数据 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#a847e127d534e34bc199d6168372288f0">idb_tb_result</a>.</p>
+
+</div>
+</div>
 <a id="af5ab89b9a5871298c7c34e6419b7804f" name="af5ab89b9a5871298c7c34e6419b7804f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af5ab89b9a5871298c7c34e6419b7804f">&#9670;&#160;</a></span>column_names()</h2>
 
@@ -335,7 +373,7 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 <p>获取列类型列表 </p>
 <dl class="section return"><dt>返回</dt><dd>MySQL字段类型列表 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="mysql__prepared__result_8hpp_source.html">mysql_prepared_result.hpp</a> 第 <a class="el" href="mysql__prepared__result_8hpp_source.html#l00115">115</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mysql__prepared__result_8hpp_source.html">mysql_prepared_result.hpp</a> 第 <a class="el" href="mysql__prepared__result_8hpp_source.html#l00117">117</a> 行定义.</p>
 
 </div>
 </div>

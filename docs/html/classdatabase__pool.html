@@ -119,8 +119,21 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a9231bb1c7d553a38a23f835310d309b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取键值存储连接  <br /></td></tr>
 <tr class="memitem:a44cf9a5381a8a4deb4c9c2996557895c" id="r_a44cf9a5381a8a4deb4c9c2996557895c"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a44cf9a5381a8a4deb4c9c2996557895c">idle_count</a> () const noexcept</td></tr>
 <tr class="memdesc:a44cf9a5381a8a4deb4c9c2996557895c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取空闲连接数  <br /></td></tr>
+<tr class="memitem:aa87bcf64f905a69b3401b31bfe59d3bd" id="r_aa87bcf64f905a69b3401b31bfe59d3bd"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa87bcf64f905a69b3401b31bfe59d3bd">active_count</a> () const noexcept</td></tr>
+<tr class="memdesc:aa87bcf64f905a69b3401b31bfe59d3bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取活跃连接数  <br /></td></tr>
 <tr class="memitem:a47817942eeea79eff60c40aac98a2b24" id="r_a47817942eeea79eff60c40aac98a2b24"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a47817942eeea79eff60c40aac98a2b24">total_count</a> () const noexcept</td></tr>
 <tr class="memdesc:a47817942eeea79eff60c40aac98a2b24"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取总连接数  <br /></td></tr>
+<tr class="memitem:a2ddfd58f346fcea86fee9c33c7767089" id="r_a2ddfd58f346fcea86fee9c33c7767089"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2ddfd58f346fcea86fee9c33c7767089">warm_up</a> (<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> n)</td></tr>
+<tr class="memdesc:a2ddfd58f346fcea86fee9c33c7767089"><td class="mdescLeft">&#160;</td><td class="mdescRight">预热连接池  <br /></td></tr>
+<tr class="memitem:a022b40bee7ce7332cddcec87c8a8a11c" id="r_a022b40bee7ce7332cddcec87c8a8a11c"><td class="memTemplParams" colspan="2">template&lt;typename Rep, typename Period&gt; </td></tr>
+<tr class="memitem:a022b40bee7ce7332cddcec87c8a8a11c template"><td class="memItemLeft"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="structidb__connect.html">idb_connect</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a022b40bee7ce7332cddcec87c8a8a11c">get_connect_for</a> (const <a class="el" href="structduration.html">duration</a>&lt; Rep, Period &gt; &amp;timeout)</td></tr>
+<tr class="memdesc:a022b40bee7ce7332cddcec87c8a8a11c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取通用数据库连接（自定义超时）  <br /></td></tr>
+<tr class="memitem:acf71acbaf1c19a0c9c5f203be9bacbf9" id="r_acf71acbaf1c19a0c9c5f203be9bacbf9"><td class="memTemplParams" colspan="2">template&lt;typename Rep, typename Period&gt; </td></tr>
+<tr class="memitem:acf71acbaf1c19a0c9c5f203be9bacbf9 template"><td class="memItemLeft"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="structidb__tb__connect.html">idb_tb_connect</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#acf71acbaf1c19a0c9c5f203be9bacbf9">get_tb_connect_for</a> (const <a class="el" href="structduration.html">duration</a>&lt; Rep, Period &gt; &amp;timeout)</td></tr>
+<tr class="memdesc:acf71acbaf1c19a0c9c5f203be9bacbf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取关系型数据库连接（自定义超时）  <br /></td></tr>
+<tr class="memitem:acc86c18bc96c3fbfc93b13eea0329704" id="r_acc86c18bc96c3fbfc93b13eea0329704"><td class="memTemplParams" colspan="2">template&lt;typename Rep, typename Period&gt; </td></tr>
+<tr class="memitem:acc86c18bc96c3fbfc93b13eea0329704 template"><td class="memItemLeft"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="structidb__kv__connect.html">idb_kv_connect</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#acc86c18bc96c3fbfc93b13eea0329704">get_kv_connect_for</a> (const <a class="el" href="structduration.html">duration</a>&lt; Rep, Period &gt; &amp;timeout)</td></tr>
+<tr class="memdesc:acc86c18bc96c3fbfc93b13eea0329704"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取键值存储连接（自定义超时）  <br /></td></tr>
 <tr class="memitem:ac3cd4dc274c371f558c62ca353702490" id="r_ac3cd4dc274c371f558c62ca353702490"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ac3cd4dc274c371f558c62ca353702490">is_running</a> () const noexcept</td></tr>
 <tr class="memdesc:ac3cd4dc274c371f558c62ca353702490"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查连接池是否正在运行  <br /></td></tr>
 <tr class="memitem:a1ab7c90200d7334d1ad83e4d44899786" id="r_a1ab7c90200d7334d1ad83e4d44899786"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1ab7c90200d7334d1ad83e4d44899786">stop</a> ()</td></tr>
@@ -177,11 +190,11 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="database__pool_8hpp_source.html">database_pool.hpp</a> 第 <a class="el" href="database__pool_8hpp_source.html#l00102">102</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="database__pool_8hpp_source.html">database_pool.hpp</a> 第 <a class="el" href="database__pool_8hpp_source.html#l00105">105</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="database__pool_8hpp_source.html#l00102">database_pool()</a>.</p>
+<p class="reference">引用了 <a class="el" href="database__pool_8hpp_source.html#l00105">database_pool()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="database__pool_8hpp_source.html#l00102">database_pool()</a> , 以及 <a class="el" href="#af1c193fefa6d542e3e2e0b654734cc05">~database_pool()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="database__pool_8hpp_source.html#l00105">database_pool()</a> , 以及 <a class="el" href="#af1c193fefa6d542e3e2e0b654734cc05">~database_pool()</a>.</p>
 
 </div>
 </div>
@@ -245,11 +258,43 @@ Public 成员函数</h2></td></tr>
 <p>析构函数 </p>
 <p>停止所有后台线程，释放所有连接资源。 </p>
 
-<p class="reference">引用了 <a class="el" href="database__pool_8hpp_source.html#l00102">database_pool()</a>.</p>
+<p class="reference">引用了 <a class="el" href="database__pool_8hpp_source.html#l00105">database_pool()</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="aa87bcf64f905a69b3401b31bfe59d3bd" name="aa87bcf64f905a69b3401b31bfe59d3bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa87bcf64f905a69b3401b31bfe59d3bd">&#9670;&#160;</a></span>active_count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> database_pool::active_count </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取活跃连接数 </p>
+<dl class="section return"><dt>返回</dt><dd>当前正在使用的连接数量 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#aa87bcf64f905a69b3401b31bfe59d3bd">active_count()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#aa87bcf64f905a69b3401b31bfe59d3bd">active_count()</a>.</p>
+
+</div>
+</div>
 <a id="a8ee69804050e504438cd86805fbd32f8" name="a8ee69804050e504438cd86805fbd32f8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8ee69804050e504438cd86805fbd32f8">&#9670;&#160;</a></span>get_connect()</h2>
 
@@ -268,6 +313,55 @@ Public 成员函数</h2></td></tr>
 <p>获取通用数据库连接 </p>
 <dl class="section return"><dt>返回</dt><dd>共享指针管理的连接对象</dd></dl>
 <p>返回基类idb_connect指针，适用于不需要特定类型操作的场景。 </p>
+
+</div>
+</div>
+<a id="a022b40bee7ce7332cddcec87c8a8a11c" name="a022b40bee7ce7332cddcec87c8a8a11c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a022b40bee7ce7332cddcec87c8a8a11c">&#9670;&#160;</a></span>get_connect_for()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Rep, typename Period&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="structidb__connect.html">idb_connect</a> &gt; database_pool::get_connect_for </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structduration.html">duration</a>&lt; Rep, Period &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>timeout</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取通用数据库连接（自定义超时） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Rep</td><td>时长表示类型 </td></tr>
+    <tr><td class="paramname">Period</td><td>时长周期类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout</td><td>获取超时时间 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>共享指针管理的连接对象，超时返回 nullptr </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="database__pool_8hpp_source.html">database_pool.hpp</a> 第 <a class="el" href="database__pool_8hpp_source.html#l00188">188</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="database__pool_8hpp_source.html#l00188">get_connect_for()</a> , 以及 <a class="el" href="condition__variable_8hpp_source.html#l00035">timeout</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="database__pool_8hpp_source.html#l00188">get_connect_for()</a>.</p>
 
 </div>
 </div>
@@ -292,6 +386,53 @@ Public 成员函数</h2></td></tr>
 
 </div>
 </div>
+<a id="acc86c18bc96c3fbfc93b13eea0329704" name="acc86c18bc96c3fbfc93b13eea0329704"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc86c18bc96c3fbfc93b13eea0329704">&#9670;&#160;</a></span>get_kv_connect_for()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Rep, typename Period&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="structidb__kv__connect.html">idb_kv_connect</a> &gt; database_pool::get_kv_connect_for </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structduration.html">duration</a>&lt; Rep, Period &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>timeout</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取键值存储连接（自定义超时） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Rep</td><td>时长表示类型 </td></tr>
+    <tr><td class="paramname">Period</td><td>时长周期类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout</td><td>获取超时时间 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>共享指针管理的连接对象，超时返回 nullptr </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="database__pool_8hpp_source.html">database_pool.hpp</a> 第 <a class="el" href="database__pool_8hpp_source.html#l00212">212</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="condition__variable_8hpp_source.html#l00035">timeout</a>.</p>
+
+</div>
+</div>
 <a id="a8dfcfdfde1930667868c535548303b11" name="a8dfcfdfde1930667868c535548303b11"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8dfcfdfde1930667868c535548303b11">&#9670;&#160;</a></span>get_tb_connect()</h2>
 
@@ -310,6 +451,53 @@ Public 成员函数</h2></td></tr>
 <p>获取关系型数据库连接 </p>
 <dl class="section return"><dt>返回</dt><dd>共享指针管理的连接对象</dd></dl>
 <p>返回idb_tb_connect指针，支持SQL查询操作。 </p>
+
+</div>
+</div>
+<a id="acf71acbaf1c19a0c9c5f203be9bacbf9" name="acf71acbaf1c19a0c9c5f203be9bacbf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf71acbaf1c19a0c9c5f203be9bacbf9">&#9670;&#160;</a></span>get_tb_connect_for()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Rep, typename Period&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classshared__ptr.html">shared_ptr</a>&lt; <a class="el" href="structidb__tb__connect.html">idb_tb_connect</a> &gt; database_pool::get_tb_connect_for </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structduration.html">duration</a>&lt; Rep, Period &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>timeout</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取关系型数据库连接（自定义超时） </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Rep</td><td>时长表示类型 </td></tr>
+    <tr><td class="paramname">Period</td><td>时长周期类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout</td><td>获取超时时间 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>共享指针管理的连接对象，超时返回 nullptr </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="database__pool_8hpp_source.html">database_pool.hpp</a> 第 <a class="el" href="database__pool_8hpp_source.html#l00200">200</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="condition__variable_8hpp_source.html#l00035">timeout</a>.</p>
 
 </div>
 </div>
@@ -367,11 +555,9 @@ Public 成员函数</h2></td></tr>
 <p>检查连接池是否正在运行 </p>
 <dl class="section return"><dt>返回</dt><dd>运行中返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="database__pool_8hpp_source.html">database_pool.hpp</a> 第 <a class="el" href="database__pool_8hpp_source.html#l00166">166</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="database__pool_8hpp_source.html">database_pool.hpp</a> 第 <a class="el" href="database__pool_8hpp_source.html#l00220">220</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="database__pool_8hpp_source.html#l00166">is_running()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="database__pool_8hpp_source.html#l00166">is_running()</a>.</p>
+<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
 
 </div>
 </div>
@@ -424,6 +610,36 @@ Public 成员函数</h2></td></tr>
 <p class="reference">引用了 <a class="el" href="#a47817942eeea79eff60c40aac98a2b24">total_count()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#a47817942eeea79eff60c40aac98a2b24">total_count()</a>.</p>
+
+</div>
+</div>
+<a id="a2ddfd58f346fcea86fee9c33c7767089" name="a2ddfd58f346fcea86fee9c33c7767089"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ddfd58f346fcea86fee9c33c7767089">&#9670;&#160;</a></span>warm_up()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void database_pool::warm_up </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>预热连接池 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>预创建的连接数量</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>创建指定数量的连接并放入空闲队列。 创建的连接数受 max_size 限制。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a2ddfd58f346fcea86fee9c33c7767089">warm_up()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a2ddfd58f346fcea86fee9c33c7767089">warm_up()</a>.</p>
 
 </div>
 </div>

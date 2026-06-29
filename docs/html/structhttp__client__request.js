@@ -11,5 +11,6 @@ var structhttp__client__request =
     [ "path", "structhttp__client__request.html#ae79a2c2394898549ce2378444453df3b", null ],
     [ "port", "structhttp__client__request.html#a585ecd1da622c8706c3c643a7965b135", null ],
     [ "query_params", "structhttp__client__request.html#a299a82ecda3c9bc8de0c21cc3eed77be", null ],
+    [ "scheme", "structhttp__client__request.html#af48e2b07fbe8f13751bd636479247d66", null ],
     [ "version", "structhttp__client__request.html#aa25e7aeb60cca2fe903076f6a4d5a66f", null ]
 ];

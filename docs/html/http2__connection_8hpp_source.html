@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: http2_connection.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('http2__connection_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">http2_connection.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="http2__connection_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_NETWORK_HTTP_HTTP2_CONNECTION_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_NETWORK_HTTP_HTTP2_CONNECTION_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="atomic_8hpp.html">NeForce/core/async/atomic.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="event__loop_8hpp.html">NeForce/core/async/event_loop.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="weak__ptr_8hpp.html">NeForce/core/memory/weak_ptr.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="http2__protocol_8hpp.html">NeForce/network/http/http2_protocol.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="http__router_8hpp.html">NeForce/network/http/http_router.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="tcp__socket_8hpp.html">NeForce/network/tcp/tcp_socket.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#ifdef NO_ERROR</span></div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#    undef NO_ERROR</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>NEFORCE_BEGIN_HTTP__</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span></div>
+<div class="foldopen" id="foldopen00046" data-start="{" data-end="};">
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classhttp2__connection.html">   46</a></span><span class="keyword">class </span>http2_connection : <span class="keyword">public</span> <a class="code hl_function" href="structenable__shared__from__this.html#af6f855457646398a518c284275f5e929">enable_shared_from_this</a>&lt;http2_connection&gt; {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keyword">using </span>stream_handler = <a class="code hl_class" href="classfunction.html">function</a>&lt;void(<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> stream_id, <span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector&lt;hpack_header_field&gt;</a>&amp; headers,</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                                         <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>* <a class="code hl_function" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>, <span class="keywordtype">size_t</span> data_len, <span class="keywordtype">bool</span> end_stream)&gt;;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <span class="keyword">using </span>close_handler = <a class="code hl_class" href="classfunction.html">function</a>&lt;void(<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> error_code)&gt;;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    <a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;tcp_socket&gt;</a> socket_;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <a class="code hl_class" href="classshared__ptr.html">shared_ptr&lt;event_loop&gt;</a> loop_;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <a class="code hl_class" href="classhttp2__framer.html">http2_framer</a> framer_;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <a class="code hl_class" href="classhttp2__settings.html">http2_settings</a> local_settings_;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_class" href="classhttp2__settings.html">http2_settings</a> remote_settings_;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <a class="code hl_class" href="classhpack__encoder.html">hpack_encoder</a> encoder_;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <a class="code hl_class" href="classhpack__decoder.html">hpack_decoder</a> decoder_;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <a class="code hl_class" href="classhttp2__flow__control.html">http2_flow_control</a> flow_control_;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;uint32_t, unique_ptr&lt;http2_stream&gt;</a>&gt; streams_;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> last_stream_id_ = 0;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <a class="code hl_struct" href="structatomic.html">atomic&lt;bool&gt;</a> closed_{<span class="keyword">false</span>};</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">bool</span> preface_received_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <a class="code hl_typedef" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> read_buffer_;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <a class="code hl_typedef" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> write_buffer_;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <a class="code hl_class" href="classmutex.html">mutex</a> write_mutex_;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keyword">mutable</span> <a class="code hl_class" href="classrecursive__mutex.html">recursive_mutex</a> stream_mutex_; </div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> connection_consumed_ = 0;                   </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;uint32_t, uint32_t&gt;</a> stream_consumed_;  </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;uint32_t, uint8_t&gt;</a> stream_priorities_; </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> local_stream_window_ = 65535;               </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    stream_handler stream_handler_;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    close_handler close_handler_;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <a class="code hl_class" href="classhttp__router.html">http_router</a>* router_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keyword">struct </span>pending_stream {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        <a class="code hl_class" href="classvector.html">vector&lt;hpack_header_field&gt;</a> headers;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <a class="code hl_typedef" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> header_block_fragment;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <a class="code hl_typedef" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a> <a class="code hl_function" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordtype">bool</span> end_stream = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        <span class="keywordtype">bool</span> waiting_continuation = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    };</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span> </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;uint32_t, pending_stream&gt;</a> pending_;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <span class="keywordtype">void</span> route_stream(<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> stream_id, <span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector&lt;hpack_header_field&gt;</a>&amp; headers, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>* <a class="code hl_function" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>,</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                      <span class="keywordtype">size_t</span> data_len, <span class="keywordtype">bool</span> end_stream);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordtype">void</span> on_readable(<span class="keywordtype">int</span> fd, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> events);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordtype">void</span> on_writable(<span class="keywordtype">int</span> fd, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> events);</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <span class="keywordtype">void</span> handle_frame(<a class="code hl_enumeration" href="group___h_t_t_p.html#gae47f8f19d4cb93a49846573a1eb4e5c5">http2_frame_type</a> type, <a class="code hl_typedef" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a> flags, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> stream_id, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>* payload, <span class="keywordtype">size_t</span> len);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordtype">void</span> handle_data_frame(<a class="code hl_typedef" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a> flags, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> stream_id, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>* payload, <span class="keywordtype">size_t</span> len);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keywordtype">void</span> handle_headers_frame(<a class="code hl_typedef" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a> flags, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> stream_id, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>* payload, <span class="keywordtype">size_t</span> len);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordtype">void</span> handle_continuation_frame(<a class="code hl_typedef" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a> flags, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> stream_id, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>* payload, <span class="keywordtype">size_t</span> len);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <span class="keywordtype">void</span> handle_priority_frame(<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> stream_id, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>* payload, <span class="keywordtype">size_t</span> len);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordtype">void</span> handle_push_promise_frame(<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> stream_id, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>* payload, <span class="keywordtype">size_t</span> len);</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <span class="keywordtype">void</span> handle_settings_frame(<a class="code hl_typedef" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a> flags, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>* payload, <span class="keywordtype">size_t</span> len);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keywordtype">void</span> handle_ping_frame(<a class="code hl_typedef" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a> flags, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>* payload, <span class="keywordtype">size_t</span> len);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordtype">void</span> handle_goaway_frame(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>* payload, <span class="keywordtype">size_t</span> len);</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordtype">void</span> handle_rst_stream_frame(<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> stream_id, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>* payload);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordtype">void</span> handle_window_update_frame(<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> stream_id, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>* payload);</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keywordtype">void</span> send_window_update(<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> stream_id, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> increment);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordtype">void</span> write_frame(<span class="keyword">const</span> <a class="code hl_typedef" href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a>&amp; frame);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keywordtype">void</span> flush_writes();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordtype">void</span> close_connection(<a class="code hl_enumeration" href="group___h_t_t_p.html#ga2a07e32634a5bf7bee768485ae87041d">http2_error</a> error = <a class="code hl_enumvalue" href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041dad306b6fdee05fe87455110ddf6501e6c">http2_error::NO_ERROR</a>);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    http2_connection(<a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;tcp_socket&gt;</a> socket, <a class="code hl_class" href="classshared__ptr.html">shared_ptr&lt;event_loop&gt;</a> loop);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    ~http2_connection();</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    http2_connection(<span class="keyword">const</span> http2_connection&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    http2_connection&amp; operator=(<span class="keyword">const</span> http2_connection&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="classhttp2__connection.html#a29b7bae98a1d962c20f0793c11256d40">  128</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classhttp2__connection.html#a29b7bae98a1d962c20f0793c11256d40">start</a>();</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="classhttp2__connection.html#a110f8d63a5fe750899ffaa223098d71b">  137</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classhttp2__connection.html#a110f8d63a5fe750899ffaa223098d71b">send_response</a>(<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> stream_id, <span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector&lt;hpack_header_field&gt;</a>&amp; headers, <span class="keyword">const</span> <span class="keywordtype">string</span>&amp; body = {},</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>                       <span class="keywordtype">bool</span> end_stream = <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="classhttp2__connection.html#a2246e81a1c0f34e8a3242c19a3c85406">  149</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classhttp2__connection.html#a2246e81a1c0f34e8a3242c19a3c85406">send_push_promise</a>(<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> stream_id, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> promised_stream_id,</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                           <span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector&lt;hpack_header_field&gt;</a>&amp; request_headers);</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span></div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno"><a class="line" href="classhttp2__connection.html#a02718b01645a54f5750ba73f82cfd1cd">  155</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classhttp2__connection.html#a02718b01645a54f5750ba73f82cfd1cd">send_rst_stream</a>(<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> stream_id, <a class="code hl_enumeration" href="group___h_t_t_p.html#ga2a07e32634a5bf7bee768485ae87041d">http2_error</a> error);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="classhttp2__connection.html#a20fe70d50bb0ae7a7413421e1be2c2dd">  160</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classhttp2__connection.html#a20fe70d50bb0ae7a7413421e1be2c2dd">send_goaway</a>(<a class="code hl_enumeration" href="group___h_t_t_p.html#ga2a07e32634a5bf7bee768485ae87041d">http2_error</a> error = <a class="code hl_enumvalue" href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041dad306b6fdee05fe87455110ddf6501e6c">http2_error::NO_ERROR</a>);</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span></div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="classhttp2__connection.html#a2a83cb1b5ec0b6c216c833485e866905">  168</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classhttp2__connection.html#a2a83cb1b5ec0b6c216c833485e866905">handle_upgrade_request</a>(<a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> stream_id, <span class="keyword">const</span> <a class="code hl_class" href="classvector.html">vector&lt;hpack_header_field&gt;</a>&amp; headers, <span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>* <a class="code hl_function" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>,</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>                                <span class="keywordtype">size_t</span> data_len, <span class="keywordtype">bool</span> end_stream);</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span></div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno"><a class="line" href="classhttp2__connection.html#a587a221da5ec3118d8ce64b16efc11ec">  174</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classhttp2__connection.html#a587a221da5ec3118d8ce64b16efc11ec">set_stream_handler</a>(stream_handler handler) { stream_handler_ = <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(handler); }</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno"><a class="line" href="classhttp2__connection.html#a88d348a9513d4d4ac55428ecc118b4ca">  182</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classhttp2__connection.html#a88d348a9513d4d4ac55428ecc118b4ca">set_router</a>(<a class="code hl_class" href="classhttp__router.html">http_router</a>* router) { router_ = router; }</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span></div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno"><a class="line" href="classhttp2__connection.html#abb06925281a4b082076abc75d9e9f63b">  187</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classhttp2__connection.html#abb06925281a4b082076abc75d9e9f63b">set_close_handler</a>(close_handler handler) { close_handler_ = <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(handler); }</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno"><a class="line" href="classhttp2__connection.html#aeb035640689b58aabf64cee681043db3">  192</a></span>    <a class="code hl_class" href="classhttp2__settings.html">http2_settings</a>&amp; <a class="code hl_function" href="classhttp2__connection.html#aeb035640689b58aabf64cee681043db3">local_settings</a>() noexcept { <span class="keywordflow">return</span> local_settings_; }</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno"><a class="line" href="classhttp2__connection.html#a962f8999651b98b1397ccda5acb194a0">  197</a></span>    <span class="keyword">const</span> <a class="code hl_class" href="classhttp2__settings.html">http2_settings</a>&amp; <a class="code hl_function" href="classhttp2__connection.html#a962f8999651b98b1397ccda5acb194a0">remote_settings</a>() const noexcept { <span class="keywordflow">return</span> remote_settings_; }</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>    <span class="keywordtype">bool</span> is_closed() const noexcept { <span class="keywordflow">return</span> closed_; }</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>    <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> last_stream_id() const noexcept { <span class="keywordflow">return</span> last_stream_id_; }</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keywordtype">void</span> stop();</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>};</div>
+</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> <span class="comment">// HTTP</span></div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>NEFORCE_END_HTTP__</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_HTTP_HTTP2_CONNECTION_HPP__</span></div>
+<div class="ttc" id="aatomic_8hpp_html"><div class="ttname"><a href="atomic_8hpp.html">atomic.hpp</a></div><div class="ttdoc">原子类型完整实现</div></div>
+<div class="ttc" id="aclassfunction_html"><div class="ttname"><a href="classfunction.html">function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="functional_2function_8hpp_source.html#l00029">functional/function.hpp:29</a></div></div>
+<div class="ttc" id="aclasshpack__decoder_html"><div class="ttname"><a href="classhpack__decoder.html">hpack_decoder</a></div><div class="ttdoc">HPACK 头部解码器（RFC 7541）</div><div class="ttdef"><b>定义</b> <a href="http2__protocol_8hpp_source.html#l00301">http2_protocol.hpp:301</a></div></div>
+<div class="ttc" id="aclasshpack__encoder_html"><div class="ttname"><a href="classhpack__encoder.html">hpack_encoder</a></div><div class="ttdoc">HPACK 头部编码器（RFC 7541）</div><div class="ttdef"><b>定义</b> <a href="http2__protocol_8hpp_source.html#l00263">http2_protocol.hpp:263</a></div></div>
+<div class="ttc" id="aclasshttp2__connection_html_a02718b01645a54f5750ba73f82cfd1cd"><div class="ttname"><a href="classhttp2__connection.html#a02718b01645a54f5750ba73f82cfd1cd">http2_connection::send_rst_stream</a></div><div class="ttdeci">void send_rst_stream(uint32_t stream_id, http2_error error)</div><div class="ttdoc">发送 RST_STREAM</div></div>
+<div class="ttc" id="aclasshttp2__connection_html_a110f8d63a5fe750899ffaa223098d71b"><div class="ttname"><a href="classhttp2__connection.html#a110f8d63a5fe750899ffaa223098d71b">http2_connection::send_response</a></div><div class="ttdeci">void send_response(uint32_t stream_id, const vector&lt; hpack_header_field &gt; &amp;headers, const string &amp;body={}, bool end_stream=true)</div><div class="ttdoc">发送 HTTP 响应（HEADERS + DATA）</div></div>
+<div class="ttc" id="aclasshttp2__connection_html_a20fe70d50bb0ae7a7413421e1be2c2dd"><div class="ttname"><a href="classhttp2__connection.html#a20fe70d50bb0ae7a7413421e1be2c2dd">http2_connection::send_goaway</a></div><div class="ttdeci">void send_goaway(http2_error error=http2_error::NO_ERROR)</div><div class="ttdoc">发送 GOAWAY 并关闭连接</div></div>
+<div class="ttc" id="aclasshttp2__connection_html_a2246e81a1c0f34e8a3242c19a3c85406"><div class="ttname"><a href="classhttp2__connection.html#a2246e81a1c0f34e8a3242c19a3c85406">http2_connection::send_push_promise</a></div><div class="ttdeci">void send_push_promise(uint32_t stream_id, uint32_t promised_stream_id, const vector&lt; hpack_header_field &gt; &amp;request_headers)</div><div class="ttdoc">发送 PUSH_PROMISE（Server Push）</div></div>
+<div class="ttc" id="aclasshttp2__connection_html_a29b7bae98a1d962c20f0793c11256d40"><div class="ttname"><a href="classhttp2__connection.html#a29b7bae98a1d962c20f0793c11256d40">http2_connection::start</a></div><div class="ttdeci">void start()</div><div class="ttdoc">启动连接处理</div></div>
+<div class="ttc" id="aclasshttp2__connection_html_a2a83cb1b5ec0b6c216c833485e866905"><div class="ttname"><a href="classhttp2__connection.html#a2a83cb1b5ec0b6c216c833485e866905">http2_connection::handle_upgrade_request</a></div><div class="ttdeci">void handle_upgrade_request(uint32_t stream_id, const vector&lt; hpack_header_field &gt; &amp;headers, const byte_t *data, size_t data_len, bool end_stream)</div><div class="ttdoc">h2c 升级请求注入（RFC 7540 §3.2）</div></div>
+<div class="ttc" id="aclasshttp2__connection_html_a587a221da5ec3118d8ce64b16efc11ec"><div class="ttname"><a href="classhttp2__connection.html#a587a221da5ec3118d8ce64b16efc11ec">http2_connection::set_stream_handler</a></div><div class="ttdeci">void set_stream_handler(stream_handler handler)</div><div class="ttdoc">设置流处理器（收到完整请求时回调）</div><div class="ttdef"><b>定义</b> <a href="#l00174">http2_connection.hpp:174</a></div></div>
+<div class="ttc" id="aclasshttp2__connection_html_a88d348a9513d4d4ac55428ecc118b4ca"><div class="ttname"><a href="classhttp2__connection.html#a88d348a9513d4d4ac55428ecc118b4ca">http2_connection::set_router</a></div><div class="ttdeci">void set_router(http_router *router)</div><div class="ttdoc">设置路由器（启用自动请求分发）</div><div class="ttdef"><b>定义</b> <a href="#l00182">http2_connection.hpp:182</a></div></div>
+<div class="ttc" id="aclasshttp2__connection_html_a962f8999651b98b1397ccda5acb194a0"><div class="ttname"><a href="classhttp2__connection.html#a962f8999651b98b1397ccda5acb194a0">http2_connection::remote_settings</a></div><div class="ttdeci">const http2_settings &amp; remote_settings() const noexcept</div><div class="ttdoc">获取远程设置</div><div class="ttdef"><b>定义</b> <a href="#l00197">http2_connection.hpp:197</a></div></div>
+<div class="ttc" id="aclasshttp2__connection_html_abb06925281a4b082076abc75d9e9f63b"><div class="ttname"><a href="classhttp2__connection.html#abb06925281a4b082076abc75d9e9f63b">http2_connection::set_close_handler</a></div><div class="ttdeci">void set_close_handler(close_handler handler)</div><div class="ttdoc">设置关闭回调</div><div class="ttdef"><b>定义</b> <a href="#l00187">http2_connection.hpp:187</a></div></div>
+<div class="ttc" id="aclasshttp2__connection_html_aeb035640689b58aabf64cee681043db3"><div class="ttname"><a href="classhttp2__connection.html#aeb035640689b58aabf64cee681043db3">http2_connection::local_settings</a></div><div class="ttdeci">http2_settings &amp; local_settings() noexcept</div><div class="ttdoc">获取本地设置</div><div class="ttdef"><b>定义</b> <a href="#l00192">http2_connection.hpp:192</a></div></div>
+<div class="ttc" id="aclasshttp2__flow__control_html"><div class="ttname"><a href="classhttp2__flow__control.html">http2_flow_control</a></div><div class="ttdoc">HTTP/2 流量控制器</div><div class="ttdef"><b>定义</b> <a href="http2__protocol_8hpp_source.html#l00435">http2_protocol.hpp:435</a></div></div>
+<div class="ttc" id="aclasshttp2__framer_html"><div class="ttname"><a href="classhttp2__framer.html">http2_framer</a></div><div class="ttdoc">HTTP/2 帧编解码器</div><div class="ttdef"><b>定义</b> <a href="http2__protocol_8hpp_source.html#l00341">http2_protocol.hpp:341</a></div></div>
+<div class="ttc" id="aclasshttp2__settings_html"><div class="ttname"><a href="classhttp2__settings.html">http2_settings</a></div><div class="ttdoc">HTTP/2 连接设置管理器</div><div class="ttdef"><b>定义</b> <a href="http2__protocol_8hpp_source.html#l00464">http2_protocol.hpp:464</a></div></div>
+<div class="ttc" id="aclasshttp__router_html"><div class="ttname"><a href="classhttp__router.html">http_router</a></div><div class="ttdoc">HTTP路由器类</div><div class="ttdef"><b>定义</b> <a href="http__router_8hpp_source.html#l00078">http_router.hpp:78</a></div></div>
+<div class="ttc" id="aclassmutex_html"><div class="ttname"><a href="classmutex.html">mutex</a></div><div class="ttdoc">非递归互斥锁</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00045">mutex.hpp:45</a></div></div>
+<div class="ttc" id="aclassrecursive__mutex_html"><div class="ttname"><a href="classrecursive__mutex.html">recursive_mutex</a></div><div class="ttdoc">递归互斥锁</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00117">mutex.hpp:117</a></div></div>
+<div class="ttc" id="aclassshared__ptr_html"><div class="ttname"><a href="classshared__ptr.html">shared_ptr</a></div><div class="ttdoc">共享智能指针类模板</div><div class="ttdef"><b>定义</b> <a href="shared__ptr_8hpp_source.html#l00270">shared_ptr.hpp:270</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html"><div class="ttname"><a href="classunique__ptr.html">unique_ptr</a></div><div class="ttdoc">独占智能指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00206">unique_ptr.hpp:206</a></div></div>
+<div class="ttc" id="aclassunordered__map_html"><div class="ttname"><a href="classunordered__map.html">unordered_map</a></div><div class="ttdoc">无序映射容器</div><div class="ttdef"><b>定义</b> <a href="unordered__map_8hpp_source.html#l00038">unordered_map.hpp:38</a></div></div>
+<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
+<div class="ttc" id="aevent__loop_8hpp_html"><div class="ttname"><a href="event__loop_8hpp.html">event_loop.hpp</a></div><div class="ttdoc">单线程 I/O 事件循环</div></div>
+<div class="ttc" id="agroup___container_html_ga27ed40b9d49a4cd13b057577e4eb1c95"><div class="ttname"><a href="group___container.html#ga27ed40b9d49a4cd13b057577e4eb1c95">byte_vector</a></div><div class="ttdeci">vector&lt; byte_t &gt; byte_vector</div><div class="ttdoc">字节向量类型别名</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l01235">vector.hpp:1235</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga0ba18cab9bd5513695cbe748e9bb4879"><div class="ttname"><a href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdoc">8位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00098">types.hpp:98</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga18a5de45c0adec9c9e545674cc14755f"><div class="ttname"><a href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a></div><div class="ttdeci">unsigned char byte_t</div><div class="ttdoc">字节类型，定义为无符号字符</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00037">types.hpp:37</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00110">types.hpp:110</a></div></div>
+<div class="ttc" id="agroup___h_t_t_p_html_ga2a07e32634a5bf7bee768485ae87041d"><div class="ttname"><a href="group___h_t_t_p.html#ga2a07e32634a5bf7bee768485ae87041d">http2_error</a></div><div class="ttdeci">http2_error</div><div class="ttdoc">HTTP/2 错误码（RFC 7540 §7）</div><div class="ttdef"><b>定义</b> <a href="http2__protocol_8hpp_source.html#l00063">http2_protocol.hpp:63</a></div></div>
+<div class="ttc" id="agroup___h_t_t_p_html_gae47f8f19d4cb93a49846573a1eb4e5c5"><div class="ttname"><a href="group___h_t_t_p.html#gae47f8f19d4cb93a49846573a1eb4e5c5">http2_frame_type</a></div><div class="ttdeci">http2_frame_type</div><div class="ttdoc">HTTP/2 帧类型（RFC 7540 §6）</div><div class="ttdef"><b>定义</b> <a href="http2__protocol_8hpp_source.html#l00043">http2_protocol.hpp:43</a></div></div>
+<div class="ttc" id="agroup___h_t_t_p_html_gga2a07e32634a5bf7bee768485ae87041dad306b6fdee05fe87455110ddf6501e6c"><div class="ttname"><a href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041dad306b6fdee05fe87455110ddf6501e6c">http2_error::NO_ERROR</a></div><div class="ttdeci">@ NO_ERROR</div><div class="ttdoc">无错误</div><div class="ttdef"><b>定义</b> <a href="http2__protocol_8hpp_source.html#l00064">http2_protocol.hpp:64</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_gaeed8bfb4510a906e04808100528dd9b8"><div class="ttname"><a href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a></div><div class="ttdeci">constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00395">type_erase.hpp:395</a></div></div>
+<div class="ttc" id="ahttp2__protocol_8hpp_html"><div class="ttname"><a href="http2__protocol_8hpp.html">http2_protocol.hpp</a></div><div class="ttdoc">HTTP/2 协议帧、HPACK 编解码器与流控制</div></div>
+<div class="ttc" id="ahttp__router_8hpp_html"><div class="ttname"><a href="http__router_8hpp.html">http_router.hpp</a></div><div class="ttdoc">HTTP路由器实现</div></div>
+<div class="ttc" id="astructatomic_html"><div class="ttname"><a href="structatomic.html">atomic</a></div><div class="ttdoc">通用原子类型模板</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00037">atomic.hpp:37</a></div></div>
+<div class="ttc" id="astructenable__shared__from__this_html_af6f855457646398a518c284275f5e929"><div class="ttname"><a href="structenable__shared__from__this.html#af6f855457646398a518c284275f5e929">enable_shared_from_this&lt; http2_connection &gt;::enable_shared_from_this</a></div><div class="ttdeci">enable_shared_from_this() noexcept=default</div></div>
+<div class="ttc" id="atcp__socket_8hpp_html"><div class="ttname"><a href="tcp__socket_8hpp.html">tcp_socket.hpp</a></div><div class="ttdoc">TCP Socket实现</div></div>
+<div class="ttc" id="aweak__ptr_8hpp_html"><div class="ttname"><a href="weak__ptr_8hpp.html">weak_ptr.hpp</a></div><div class="ttdoc">弱智能指针实现</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>network</b></li><li class="navelem"><b>http</b></li><li class="navelem"><a href="http2__connection_8hpp.html">http2_connection.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

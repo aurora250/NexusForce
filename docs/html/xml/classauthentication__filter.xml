@@ -12,13 +12,28 @@
         <name>excluded_paths_</name>
         <qualifiedname>authentication_filter::excluded_paths_</qualifiedname>
         <briefdescription>
-<para>排除的路径 </para>
+<para>排除的路径（不要求认证） </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="314" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="314" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="329" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="329" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classauthentication__filter_1ad1d81eebc9875f78086f926519267fb8" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
+        <definition>vector&lt;string&gt; authentication_filter::included_paths_</definition>
+        <argsstring></argsstring>
+        <name>included_paths_</name>
+        <qualifiedname>authentication_filter::included_paths_</qualifiedname>
+        <briefdescription>
+<para>包含的路径（要求认证），为空时所有路径均需认证 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="330" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="330" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classauthentication__filter_1a3fc668370d5cb78805920fd08126d6af" prot="private" static="no" mutable="no">
         <type><ref refid="classfunction" kindref="compound">function</ref>&lt; bool(const <ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;)&gt;</type>
@@ -33,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="315" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="315" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="331" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="331" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -53,7 +68,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="317" column="11"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="333" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classauthentication__filter_1a49f0ac34bffe560ddf83cebfaeb2ef7a" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool authentication_filter::is_path_protected</definition>
+        <argsstring>(const string &amp;path) const</argsstring>
+        <name>is_path_protected</name>
+        <qualifiedname>authentication_filter::is_path_protected</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="334" column="11"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -69,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="320" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="337" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classauthentication__filter_1a8d2be4f5bae81720d8f10cfc0a918597" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -98,7 +131,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="326" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="326" bodyend="327"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="343" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="343" bodyend="344"/>
         <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
       </memberdef>
       <memberdef kind="function" id="classauthentication__filter_1a89830261400e85ced9bb558b44e5d213" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -128,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="333" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="333" bodyend="335"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="350" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="350" bodyend="352"/>
         <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
       </memberdef>
       <memberdef kind="function" id="classauthentication__filter_1a8883aed5fc163d03c953466355eedc5c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -142,7 +175,7 @@
           <declname>path</declname>
         </param>
         <briefdescription>
-<para>添加排除路径 </para>
+<para>添加排除路径（不要求认证） </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -150,15 +183,45 @@
 <parametername>path</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>路径（支持前缀匹配） </para>
+<para>路径（支持前缀匹配）</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-</para>
+仅在 included_paths_ 为空时生效（全量认证模式）。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="341" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="341" bodyend="341"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="360" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="360" bodyend="360"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classauthentication__filter_1a20ee4e38b23771f9e370a70d47fa0b26" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void authentication_filter::add_included_path</definition>
+        <argsstring>(string path)</argsstring>
+        <name>add_included_path</name>
+        <qualifiedname>authentication_filter::add_included_path</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+<para>添加受保护路径（要求认证） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>路径（支持前缀匹配）</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+设置后仅这些路径需要认证，其余路径为公开访问。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="368" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="368" bodyend="368"/>
         <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
       </memberdef>
       <memberdef kind="function" id="classauthentication__filter_1a513f02f51624efb8d12131d4388851c8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
@@ -174,7 +237,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="346" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="346" bodyend="346"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="373" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="373" bodyend="373"/>
+      </memberdef>
+      <memberdef kind="function" id="classauthentication__filter_1a654d093f5e49593cbd0ebe9cd6aaea7b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void authentication_filter::clear_included_paths</definition>
+        <argsstring>()</argsstring>
+        <name>clear_included_paths</name>
+        <qualifiedname>authentication_filter::clear_included_paths</qualifiedname>
+        <briefdescription>
+<para>清除所有包含路径 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="378" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="378" bodyend="378"/>
       </memberdef>
       <memberdef kind="function" id="classauthentication__filter_1a19bb024bb9162df64cdb8e342381f30d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -218,7 +296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="348" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="380" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classauthentication__filter_1a1e5caced2ec556c5f017d21fce037160" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -260,7 +338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="349" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="349" bodyend="349"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="381" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="381" bodyend="381"/>
       </memberdef>
       <memberdef kind="function" id="classauthentication__filter_1a05b98f2786eca2df8345620d405525d0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
         <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
@@ -279,7 +357,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="350" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="350" bodyend="350"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="382" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="382" bodyend="382"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -312,16 +390,20 @@
         <link refid="classhttp__filter"/>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="312" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="312" bodyend="351"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="327" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="327" bodyend="386"/>
     <listofallmembers>
       <member refid="classauthentication__filter_1a8883aed5fc163d03c953466355eedc5c" prot="public" virt="non-virtual"><scope>authentication_filter</scope><name>add_excluded_path</name></member>
+      <member refid="classauthentication__filter_1a20ee4e38b23771f9e370a70d47fa0b26" prot="public" virt="non-virtual"><scope>authentication_filter</scope><name>add_included_path</name></member>
       <member refid="classauthentication__filter_1a3fc668370d5cb78805920fd08126d6af" prot="private" virt="non-virtual"><scope>authentication_filter</scope><name>auth_validator_</name></member>
       <member refid="classauthentication__filter_1ad0238eb111949b09deaa72076ec1aaaa" prot="public" virt="non-virtual"><scope>authentication_filter</scope><name>authentication_filter</name></member>
       <member refid="classauthentication__filter_1a8d2be4f5bae81720d8f10cfc0a918597" prot="public" virt="non-virtual"><scope>authentication_filter</scope><name>authentication_filter</name></member>
       <member refid="classauthentication__filter_1a513f02f51624efb8d12131d4388851c8" prot="public" virt="non-virtual"><scope>authentication_filter</scope><name>clear_excluded_paths</name></member>
+      <member refid="classauthentication__filter_1a654d093f5e49593cbd0ebe9cd6aaea7b" prot="public" virt="non-virtual"><scope>authentication_filter</scope><name>clear_included_paths</name></member>
       <member refid="classauthentication__filter_1a1e5caced2ec556c5f017d21fce037160" prot="public" virt="virtual"><scope>authentication_filter</scope><name>do_filter</name></member>
       <member refid="classauthentication__filter_1ab67911128c4ad4326a7008acfd68cccc" prot="private" virt="non-virtual"><scope>authentication_filter</scope><name>excluded_paths_</name></member>
+      <member refid="classauthentication__filter_1ad1d81eebc9875f78086f926519267fb8" prot="private" virt="non-virtual"><scope>authentication_filter</scope><name>included_paths_</name></member>
       <member refid="classauthentication__filter_1ae9aeab7c904e8aa9ffaf21642393fa30" prot="private" virt="non-virtual"><scope>authentication_filter</scope><name>is_path_excluded</name></member>
+      <member refid="classauthentication__filter_1a49f0ac34bffe560ddf83cebfaeb2ef7a" prot="private" virt="non-virtual"><scope>authentication_filter</scope><name>is_path_protected</name></member>
       <member refid="classauthentication__filter_1a05b98f2786eca2df8345620d405525d0" prot="public" virt="virtual"><scope>authentication_filter</scope><name>name</name></member>
       <member refid="classhttp__filter_1acaaaf04f0a1520c29312b76336615aec" prot="public" virt="virtual"><scope>authentication_filter</scope><name>post_filter</name></member>
       <member refid="classauthentication__filter_1a19bb024bb9162df64cdb8e342381f30d" prot="public" virt="virtual"><scope>authentication_filter</scope><name>pre_filter</name></member>

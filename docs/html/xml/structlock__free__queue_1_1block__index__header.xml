@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structlock__free__queue_1_1block__index__header" kind="struct" language="C++" prot="private">
+    <compoundname>lock_free_queue::block_index_header</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structlock__free__queue_1_1block__index__header_1a61e6a832974be21243d19a260e2319a5" prot="public" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t lock_free_queue&lt; T &gt;::block_index_header::capacity_</definition>
+        <argsstring></argsstring>
+        <name>capacity_</name>
+        <qualifiedname>lock_free_queue::block_index_header::capacity_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="201" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="201" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlock__free__queue_1_1block__index__header_1aea3ab9902e34d4cb6674e5f9a065cfb8" prot="public" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; lock_free_queue&lt; T &gt;::block_index_header::tail_</definition>
+        <argsstring></argsstring>
+        <name>tail_</name>
+        <qualifiedname>lock_free_queue::block_index_header::tail_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="202" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="202" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlock__free__queue_1_1block__index__header_1a1b2e49d9f4915027cd3c0bcd289af58c" prot="public" static="no" mutable="no">
+        <type>block_index_entry *</type>
+        <definition>block_index_entry* lock_free_queue&lt; T &gt;::block_index_header::entries_</definition>
+        <argsstring></argsstring>
+        <name>entries_</name>
+        <qualifiedname>lock_free_queue::block_index_header::entries_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="203" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="203" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlock__free__queue_1_1block__index__header_1ad27be0f57bbe83228dcac22fffd06867" prot="public" static="no" mutable="no">
+        <type>block_index_entry **</type>
+        <definition>block_index_entry** lock_free_queue&lt; T &gt;::block_index_header::index_</definition>
+        <argsstring></argsstring>
+        <name>index_</name>
+        <qualifiedname>lock_free_queue::block_index_header::index_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="204" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="204" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlock__free__queue_1_1block__index__header_1ad7e32e24f94343e1a1eb809fed87acdc" prot="public" static="no" mutable="no">
+        <type>block_index_header *</type>
+        <definition>block_index_header* lock_free_queue&lt; T &gt;::block_index_header::prev_</definition>
+        <argsstring></argsstring>
+        <name>prev_</name>
+        <qualifiedname>lock_free_queue::block_index_header::prev_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="205" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="205" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>atomic&lt; size_t &gt;</label>
+        <link refid="structatomic"/>
+      </node>
+      <node id="1">
+        <label>lock_free_queue&lt; T &gt;::block_index_header</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>tail_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="200" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="200" bodyend="206"/>
+    <listofallmembers>
+      <member refid="structlock__free__queue_1_1block__index__header_1a61e6a832974be21243d19a260e2319a5" prot="public" virt="non-virtual"><scope>lock_free_queue::block_index_header</scope><name>capacity_</name></member>
+      <member refid="structlock__free__queue_1_1block__index__header_1a1b2e49d9f4915027cd3c0bcd289af58c" prot="public" virt="non-virtual"><scope>lock_free_queue::block_index_header</scope><name>entries_</name></member>
+      <member refid="structlock__free__queue_1_1block__index__header_1ad27be0f57bbe83228dcac22fffd06867" prot="public" virt="non-virtual"><scope>lock_free_queue::block_index_header</scope><name>index_</name></member>
+      <member refid="structlock__free__queue_1_1block__index__header_1ad7e32e24f94343e1a1eb809fed87acdc" prot="public" virt="non-virtual"><scope>lock_free_queue::block_index_header</scope><name>prev_</name></member>
+      <member refid="structlock__free__queue_1_1block__index__header_1aea3ab9902e34d4cb6674e5f9a065cfb8" prot="public" virt="non-virtual"><scope>lock_free_queue::block_index_header</scope><name>tail_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

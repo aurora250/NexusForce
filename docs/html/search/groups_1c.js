@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['修改算法_0',['修改算法',['../group___shift_algorithms.html',1,'']]]
+  ['仿函数_0',['仿函数',['../group___functor.html',1,'']]]
 ];

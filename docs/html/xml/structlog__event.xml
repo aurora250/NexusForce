@@ -4,50 +4,20 @@
     <compoundname>log_event</compoundname>
     <includes refid="log__event_8hpp" local="no">log_event.hpp</includes>
     <sectiondef kind="public-attrib">
-      <memberdef kind="variable" id="structlog__event_1a7bebc182c9d81a466c92e77f5f4ad22f" prot="public" static="no" mutable="no">
-        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
-        <definition>unordered_map&lt;string, string&gt; log_event::context</definition>
+      <memberdef kind="variable" id="structlog__event_1a5a3036b82f77773a741703b553211950" prot="public" static="no" mutable="no">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &gt;</type>
+        <definition>shared_ptr&lt;unordered_map&lt;string, string&gt; &gt; log_event::context</definition>
         <argsstring></argsstring>
         <name>context</name>
         <qualifiedname>log_event::context</qualifiedname>
         <briefdescription>
-<para>上下文信息键值对 </para>
+<para>上下文（Logger + MDC） </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="71" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="71" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structlog__event_1a150662d306c9c1bb8c9a65c7da663520" prot="public" static="no" mutable="no">
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string log_event::file</definition>
-        <argsstring></argsstring>
-        <name>file</name>
-        <qualifiedname>log_event::file</qualifiedname>
-        <briefdescription>
-<para>源文件名 </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="72" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="72" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structlog__event_1a4476afcf1a7d3cb5c57007bfde09c788" prot="public" static="no" mutable="no">
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string log_event::func</definition>
-        <argsstring></argsstring>
-        <name>func</name>
-        <qualifiedname>log_event::func</qualifiedname>
-        <briefdescription>
-<para>函数名 </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="73" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="73" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="189" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="189" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structlog__event_1a4d92e5e2e9ad9e2cc0c007cd4ba15d7d" prot="public" static="no" mutable="no">
         <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
@@ -56,13 +26,29 @@
         <name>message</name>
         <qualifiedname>log_event::message</qualifiedname>
         <briefdescription>
-<para>日志消息 </para>
+<para>格式化后的日志消息 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="74" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="74" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="190" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="190" bodyend="-1"/>
+        <referencedby refid="group___logging_1ga7ba3f1921075bd3adc62d2915630fce7" compoundref="log__sink_8hpp" startline="30" endline="30">default_sink_format</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structlog__event_1a045f318c6f2ce11ef902be7326220495" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string log_event::logger_name</definition>
+        <argsstring></argsstring>
+        <name>logger_name</name>
+        <qualifiedname>log_event::logger_name</qualifiedname>
+        <briefdescription>
+<para>产生此事件的 Logger 名称 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="191" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="191" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structlog__event_1a661ad84d9d08d7873df51f27c398108a" prot="public" static="no" mutable="no">
         <type><ref refid="classdatetime" kindref="compound">datetime</ref></type>
@@ -71,28 +57,28 @@
         <name>dt</name>
         <qualifiedname>log_event::dt</qualifiedname>
         <briefdescription>
-<para>时间戳 </para>
+<para>事件时间戳 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="75" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="75" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="192" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="192" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="structlog__event_1a53b14a83bf184849eadebdf9ccebcada" prot="public" static="no" mutable="no">
-        <type>int</type>
-        <definition>int log_event::line</definition>
+      <memberdef kind="variable" id="structlog__event_1a7b77dc31e7b2c9c695e2b60aebcd6e2d" prot="public" static="no" mutable="no">
+        <type><ref refid="structsource__loc" kindref="compound">source_loc</ref></type>
+        <definition>source_loc log_event::loc</definition>
         <argsstring></argsstring>
-        <name>line</name>
-        <qualifiedname>log_event::line</qualifiedname>
+        <name>loc</name>
+        <qualifiedname>log_event::loc</qualifiedname>
         <briefdescription>
-<para>行号 </para>
+<para>源码位置 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="76" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="76" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="193" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="193" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structlog__event_1acc7f525ed9549f109a271a5f9687d01b" prot="public" static="no" mutable="no">
         <type><ref refid="structthread_1_1id" kindref="compound">thread::id</ref></type>
@@ -101,16 +87,16 @@
         <name>thread_id</name>
         <qualifiedname>log_event::thread_id</qualifiedname>
         <briefdescription>
-<para>线程ID </para>
+<para>产生此事件的线程 ID </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="77" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="77" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="194" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="194" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structlog__event_1a2ee7a1f1c4c3e597cb5993b645eb4819" prot="public" static="no" mutable="no">
-        <type><ref refid="group___logging_1gac91d55174d383848b976a34de843748e" kindref="member">log_level</ref></type>
+        <type><ref refid="group___logging_1ga837946c96acd6e9638773176147baba1" kindref="member">log_level</ref></type>
         <definition>log_level log_event::level</definition>
         <argsstring></argsstring>
         <name>level</name>
@@ -122,20 +108,27 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="78" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="78" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="195" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="195" bodyend="-1"/>
+        <referencedby refid="group___logging_1ga7ba3f1921075bd3adc62d2915630fce7" compoundref="log__sink_8hpp" startline="30" endline="30">default_sink_format</referencedby>
       </memberdef>
     </sectiondef>
     <briefdescription>
 <para>日志事件结构体 </para>
     </briefdescription>
     <detaileddescription>
-<para>包含一条日志记录的所有信息，包括上下文、位置、时间、 线程、级别和消息内容。用于在日志系统中传递和格式化日志。 </para>
+<para>封装单条日志的所有信息。 同一 Logger 的所有事件在不修改上下文时共享同一份 map。 </para>
     </detaileddescription>
     <collaborationgraph>
       <node id="3">
         <label>basic_string&lt; char &gt;</label>
         <link refid="classbasic__string"/>
         <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>basic_string_view&lt; char &gt;</label>
+        <link refid="classbasic__string__view"/>
+        <childnode refid="15" relation="public-inheritance">
         </childnode>
       </node>
       <node id="7">
@@ -147,6 +140,14 @@
         </childnode>
       </node>
       <node id="4">
+        <label>icommon&lt; T &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="15">
         <label>icommon&lt; T &gt;</label>
         <link refid="structicommon"/>
         <childnode refid="5" relation="public-inheritance">
@@ -178,7 +179,7 @@
         <label>ihashable&lt; datetime &gt;</label>
         <link refid="structihashable"/>
       </node>
-      <node id="14">
+      <node id="17">
         <label>ihashable&lt; id &gt;</label>
         <link refid="structihashable"/>
       </node>
@@ -199,36 +200,45 @@
           <edgelabel>context</edgelabel>
         </childnode>
         <childnode refid="3" relation="usage">
-          <edgelabel>file</edgelabel>
-          <edgelabel>func</edgelabel>
+          <edgelabel>logger_name</edgelabel>
           <edgelabel>message</edgelabel>
         </childnode>
         <childnode refid="7" relation="usage">
           <edgelabel>dt</edgelabel>
         </childnode>
         <childnode refid="13" relation="usage">
+          <edgelabel>loc</edgelabel>
+        </childnode>
+        <childnode refid="16" relation="usage">
           <edgelabel>thread_id</edgelabel>
         </childnode>
       </node>
+      <node id="2">
+        <label>shared_ptr&lt; unordered_map&lt; basic_string&lt; char &gt;, basic_string&lt; char &gt; &gt; &gt;</label>
+        <link refid="classshared__ptr"/>
+      </node>
       <node id="13">
-        <label>thread::id</label>
-        <link refid="structthread_1_1id"/>
-        <childnode refid="14" relation="public-inheritance">
+        <label>source_loc</label>
+        <link refid="structsource__loc"/>
+        <childnode refid="14" relation="usage">
+          <edgelabel>file</edgelabel>
+          <edgelabel>func</edgelabel>
         </childnode>
       </node>
-      <node id="2">
-        <label>unordered_map&lt; basic_string&lt; char &gt;, basic_string&lt; char &gt; &gt;</label>
-        <link refid="classunordered__map"/>
+      <node id="16">
+        <label>thread::id</label>
+        <link refid="structthread_1_1id"/>
+        <childnode refid="17" relation="public-inheritance">
+        </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="70" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="70" bodyend="79"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="188" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="188" bodyend="196"/>
     <listofallmembers>
-      <member refid="structlog__event_1a7bebc182c9d81a466c92e77f5f4ad22f" prot="public" virt="non-virtual"><scope>log_event</scope><name>context</name></member>
+      <member refid="structlog__event_1a5a3036b82f77773a741703b553211950" prot="public" virt="non-virtual"><scope>log_event</scope><name>context</name></member>
       <member refid="structlog__event_1a661ad84d9d08d7873df51f27c398108a" prot="public" virt="non-virtual"><scope>log_event</scope><name>dt</name></member>
-      <member refid="structlog__event_1a150662d306c9c1bb8c9a65c7da663520" prot="public" virt="non-virtual"><scope>log_event</scope><name>file</name></member>
-      <member refid="structlog__event_1a4476afcf1a7d3cb5c57007bfde09c788" prot="public" virt="non-virtual"><scope>log_event</scope><name>func</name></member>
       <member refid="structlog__event_1a2ee7a1f1c4c3e597cb5993b645eb4819" prot="public" virt="non-virtual"><scope>log_event</scope><name>level</name></member>
-      <member refid="structlog__event_1a53b14a83bf184849eadebdf9ccebcada" prot="public" virt="non-virtual"><scope>log_event</scope><name>line</name></member>
+      <member refid="structlog__event_1a7b77dc31e7b2c9c695e2b60aebcd6e2d" prot="public" virt="non-virtual"><scope>log_event</scope><name>loc</name></member>
+      <member refid="structlog__event_1a045f318c6f2ce11ef902be7326220495" prot="public" virt="non-virtual"><scope>log_event</scope><name>logger_name</name></member>
       <member refid="structlog__event_1a4d92e5e2e9ad9e2cc0c007cd4ba15d7d" prot="public" virt="non-virtual"><scope>log_event</scope><name>message</name></member>
       <member refid="structlog__event_1acc7f525ed9549f109a271a5f9687d01b" prot="public" virt="non-virtual"><scope>log_event</scope><name>thread_id</name></member>
     </listofallmembers>

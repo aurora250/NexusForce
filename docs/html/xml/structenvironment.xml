@@ -54,7 +54,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="44" column="20"/>
-        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="476" endline="478">name</references>
       </memberdef>
       <memberdef kind="function" id="structenvironment_1a6a5a4531f8ec5310d84c067fcfb6c388" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -111,7 +111,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="53" column="17"/>
-        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="476" endline="478">name</references>
       </memberdef>
       <memberdef kind="function" id="structenvironment_1af1d2eff32051b0a9ecb3a3c0a08078eb" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -143,7 +143,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="60" column="17"/>
-        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="476" endline="478">name</references>
       </memberdef>
       <memberdef kind="function" id="structenvironment_1a2cb6fddbbc74d714d891aa35991013c8" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -175,7 +175,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="67" column="18"/>
-        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="476" endline="478">name</references>
       </memberdef>
       <memberdef kind="function" id="structenvironment_1a8a148beaeec88e375fa5eb368bab6ba6" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
@@ -312,17 +312,13 @@
 <para>获取临时目录路径 </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>临时目录路径</para>
+<para><simplesect kind="return"><para>临时目录路径 </para>
 </simplesect>
-按照优先级尝试：<itemizedlist>
-<listitem><para>Windows: TMP, TEMP, USERPROFILE</para>
-</listitem><listitem><para>Linux: TMPDIR, TEMP, TMP, /tmp </para>
-</listitem></itemizedlist>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="110" column="20"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="106" column="20"/>
       </memberdef>
       <memberdef kind="function" id="structenvironment_1af597bbc6288d71e29d5693ac718b933f" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
@@ -334,17 +330,49 @@
 <para>获取用户主目录路径 </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>主目录路径</para>
+<para><simplesect kind="return"><para>主目录路径 </para>
 </simplesect>
-按照优先级尝试：<itemizedlist>
-<listitem><para>Windows: USERPROFILE, HOMEDRIVE+HOMEPATH</para>
-</listitem><listitem><para>Linux: HOME </para>
-</listitem></itemizedlist>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="120" column="20"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="112" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="structenvironment_1a354659e5eb063adeeca8e0971a7ed625" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>static string environment::app_data_directory</definition>
+        <argsstring>()</argsstring>
+        <name>app_data_directory</name>
+        <qualifiedname>environment::app_data_directory</qualifiedname>
+        <briefdescription>
+<para>获取应用程序数据目录路径 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>应用数据目录路径 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="118" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="structenvironment_1ae884b84b9d294e0357a38047409c8a25" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>static string environment::config_directory</definition>
+        <argsstring>()</argsstring>
+        <name>config_directory</name>
+        <qualifiedname>environment::config_directory</qualifiedname>
+        <briefdescription>
+<para>获取应用程序配置目录路径 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>应用配置目录路径 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="124" column="20"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -353,10 +381,12 @@
     <detaileddescription>
 <para>提供静态方法用于访问和修改环境变量，所有操作都是线程安全的。 </para>
     </detaileddescription>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="28" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/environment.hpp" bodystart="28" bodyend="121"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/environment.hpp" line="28" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/environment.hpp" bodystart="28" bodyend="125"/>
     <listofallmembers>
       <member refid="structenvironment_1adf119ec3b8bc7c841cb0f7b4c16de664" prot="public" virt="non-virtual"><scope>environment</scope><name>add_to_path</name></member>
       <member refid="structenvironment_1a8a148beaeec88e375fa5eb368bab6ba6" prot="public" virt="non-virtual"><scope>environment</scope><name>all_envs</name></member>
+      <member refid="structenvironment_1a354659e5eb063adeeca8e0971a7ed625" prot="public" virt="non-virtual"><scope>environment</scope><name>app_data_directory</name></member>
+      <member refid="structenvironment_1ae884b84b9d294e0357a38047409c8a25" prot="public" virt="non-virtual"><scope>environment</scope><name>config_directory</name></member>
       <member refid="structenvironment_1ad50a541f94071be83bd3127f8d6eb624" prot="public" virt="non-virtual"><scope>environment</scope><name>current_directory</name></member>
       <member refid="structenvironment_1a288bbcaac0bbb2560b5d06f323073c42" prot="public" virt="non-virtual"><scope>environment</scope><name>current_user</name></member>
       <member refid="structenvironment_1aeda4c85dfd8e57007ca391fa315e4065" prot="public" virt="non-virtual"><scope>environment</scope><name>delimiter</name></member>

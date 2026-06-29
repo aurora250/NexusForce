@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['配置格式操作_0',['配置格式操作',['../group___config_format.html',1,'']]]
+  ['莱昂纳多堆算法_0',['莱昂纳多堆算法',['../group___leonardo_heap.html',1,'']]]
 ];

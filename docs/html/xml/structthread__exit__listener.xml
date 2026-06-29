@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structthread__exit__listener" kind="struct" language="C++" prot="public">
+    <compoundname>thread_exit_listener</compoundname>
+    <includes refid="thread__exit__notifier_8hpp" local="no">thread_exit_notifier.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structthread__exit__listener_1a1ac258cf28ec92738e69ceac3a681264" prot="public" static="no">
+        <type>void(*)(void *)</type>
+        <definition>using thread_exit_listener::callback_t = void (*)(void*)</definition>
+        <argsstring></argsstring>
+        <name>callback_t</name>
+        <qualifiedname>thread_exit_listener::callback_t</qualifiedname>
+        <briefdescription>
+<para>回调函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_notifier.hpp" line="25" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_notifier.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structthread__exit__listener_1a579626535c3fdb01430871946ab0d6a1" prot="public" static="no" mutable="no">
+        <type><ref refid="structthread__exit__listener_1a1ac258cf28ec92738e69ceac3a681264" kindref="member">callback_t</ref></type>
+        <definition>callback_t thread_exit_listener::callback_</definition>
+        <argsstring></argsstring>
+        <name>callback_</name>
+        <qualifiedname>thread_exit_listener::callback_</qualifiedname>
+        <briefdescription>
+<para>线程退出时的回调函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_notifier.hpp" line="26" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_notifier.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structthread__exit__listener_1a24f78ede579c07b50cd7dfa6775f3c07" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* thread_exit_listener::user_data_</definition>
+        <argsstring></argsstring>
+        <name>user_data_</name>
+        <qualifiedname>thread_exit_listener::user_data_</qualifiedname>
+        <briefdescription>
+<para>回调函数的用户数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_notifier.hpp" line="27" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_notifier.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structthread__exit__listener_1a80db9660ff88530be529e6e040cd3baf" prot="public" static="no" mutable="no">
+        <type><ref refid="structthread__exit__listener" kindref="compound">thread_exit_listener</ref> *</type>
+        <definition>thread_exit_listener* thread_exit_listener::next_</definition>
+        <argsstring></argsstring>
+        <name>next_</name>
+        <qualifiedname>thread_exit_listener::next_</qualifiedname>
+        <briefdescription>
+<para>监听器链表下一节点 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_notifier.hpp" line="28" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_notifier.hpp" bodystart="28" bodyend="-1"/>
+        <referencedby refid="classthread__exit__notifier_1a380efaf6864d84fa5cc79cf342b4d3d5" compoundref="thread__exit__notifier_8hpp" startline="72" endline="78">thread_exit_notifier::subscribe</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structthread__exit__listener_1a7871553fdcea261b2dfcd4501144f1a4" prot="public" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* thread_exit_listener::chain_</definition>
+        <argsstring></argsstring>
+        <name>chain_</name>
+        <qualifiedname>thread_exit_listener::chain_</qualifiedname>
+        <briefdescription>
+<para>所属 <ref refid="classthread__exit__notifier" kindref="compound">thread_exit_notifier</ref> 指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_notifier.hpp" line="29" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_notifier.hpp" bodystart="29" bodyend="-1"/>
+        <referencedby refid="classthread__exit__notifier_1a380efaf6864d84fa5cc79cf342b4d3d5" compoundref="thread__exit__notifier_8hpp" startline="72" endline="78">thread_exit_notifier::subscribe</referencedby>
+        <referencedby refid="classthread__exit__notifier_1a92e8b04de9d0564b71fa1d2bbafd284a" compoundref="thread__exit__notifier_8hpp" startline="84" endline="99">thread_exit_notifier::unsubscribe</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>线程退出监听器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>用于在线程退出时自动清理该线程的隐式生产者。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>thread_exit_listener</label>
+        <link refid="structthread__exit__listener"/>
+        <childnode refid="1" relation="usage">
+          <edgelabel>next_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_notifier.hpp" line="24" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_notifier.hpp" bodystart="24" bodyend="30"/>
+    <listofallmembers>
+      <member refid="structthread__exit__listener_1a579626535c3fdb01430871946ab0d6a1" prot="public" virt="non-virtual"><scope>thread_exit_listener</scope><name>callback_</name></member>
+      <member refid="structthread__exit__listener_1a1ac258cf28ec92738e69ceac3a681264" prot="public" virt="non-virtual"><scope>thread_exit_listener</scope><name>callback_t</name></member>
+      <member refid="structthread__exit__listener_1a7871553fdcea261b2dfcd4501144f1a4" prot="public" virt="non-virtual"><scope>thread_exit_listener</scope><name>chain_</name></member>
+      <member refid="structthread__exit__listener_1a80db9660ff88530be529e6e040cd3baf" prot="public" virt="non-virtual"><scope>thread_exit_listener</scope><name>next_</name></member>
+      <member refid="structthread__exit__listener_1a24f78ede579c07b50cd7dfa6775f3c07" prot="public" virt="non-virtual"><scope>thread_exit_listener</scope><name>user_data_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

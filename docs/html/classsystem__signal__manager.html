@@ -166,6 +166,10 @@ void&#160;</td><td class="memItemRight"><b>stop_monitoring</b> () noexcept</td><
 <tr class="memdesc:ad3e12c1c30e2e92d4f858859e68affa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取单例实例  <br /></td></tr>
 <tr class="memitem:abd07e7eba4bcbb2af87138dce5dc0ace" id="r_abd07e7eba4bcbb2af87138dce5dc0ace"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#abd07e7eba4bcbb2af87138dce5dc0ace">is_platform_signal</a> (<a class="el" href="#a442e5d505e7801160e93504232ce2616">event</a> <a class="el" href="#a442e5d505e7801160e93504232ce2616">event</a>)</td></tr>
 <tr class="memdesc:abd07e7eba4bcbb2af87138dce5dc0ace"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断事件是否为平台原生信号  <br /></td></tr>
+<tr class="memitem:ad3705e0a730dc38c0e966c9655eb9738" id="r_ad3705e0a730dc38c0e966c9655eb9738"><td class="memItemLeft">static <a class="el" href="#a442e5d505e7801160e93504232ce2616">event</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad3705e0a730dc38c0e966c9655eb9738">from_native</a> (int native_signal) noexcept</td></tr>
+<tr class="memdesc:ad3705e0a730dc38c0e966c9655eb9738"><td class="mdescLeft">&#160;</td><td class="mdescRight">将平台原生信号转换为统一事件  <br /></td></tr>
+<tr class="memitem:aadc87f472a920e2ca6409aaf8a79009e" id="r_aadc87f472a920e2ca6409aaf8a79009e"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#aadc87f472a920e2ca6409aaf8a79009e">to_native</a> (<a class="el" href="#a442e5d505e7801160e93504232ce2616">event</a> e) noexcept</td></tr>
+<tr class="memdesc:aadc87f472a920e2ca6409aaf8a79009e"><td class="mdescLeft">&#160;</td><td class="mdescRight">将统一事件转换为平台原生信号  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>信号管理器 </p>
@@ -306,6 +310,40 @@ void&#160;</td><td class="memItemRight"><b>stop_monitoring</b> () noexcept</td><
 
 </div>
 </div>
+<a id="ad3705e0a730dc38c0e966c9655eb9738" name="ad3705e0a730dc38c0e966c9655eb9738"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3705e0a730dc38c0e966c9655eb9738">&#9670;&#160;</a></span>from_native()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a442e5d505e7801160e93504232ce2616">event</a> system_signal_manager::from_native </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>native_signal</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>将平台原生信号转换为统一事件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">native_signal</td><td>平台原生信号值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>对应的统一事件，无法映射时返回原值强转 </dd></dl>
+
+</div>
+</div>
 <a id="ad3e12c1c30e2e92d4f858859e68affa5" name="ad3e12c1c30e2e92d4f858859e68affa5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad3e12c1c30e2e92d4f858859e68affa5">&#9670;&#160;</a></span>instance()</h2>
 
@@ -336,7 +374,7 @@ void&#160;</td><td class="memItemRight"><b>stop_monitoring</b> () noexcept</td><
 
 <p class="reference">引用了 <a class="el" href="signal_8hpp_source.html#l00200">instance()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="signal_8hpp_source.html#l00200">instance()</a>, <a class="el" href="signal_8hpp_source.html#l00314">signal_guard::signal_guard()</a> , 以及 <a class="el" href="signal_8hpp_source.html#l00321">signal_guard::~signal_guard()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="signal_8hpp_source.html#l00200">instance()</a>, <a class="el" href="signal_8hpp_source.html#l00328">signal_guard::signal_guard()</a> , 以及 <a class="el" href="signal_8hpp_source.html#l00335">signal_guard::~signal_guard()</a>.</p>
 
 </div>
 </div>
@@ -580,6 +618,40 @@ void&#160;</td><td class="memItemRight"><b>stop_monitoring</b> () noexcept</td><
   </dd>
 </dl>
 <p>超过此时间未处理的信号将被丢弃。 </p>
+
+</div>
+</div>
+<a id="aadc87f472a920e2ca6409aaf8a79009e" name="aadc87f472a920e2ca6409aaf8a79009e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadc87f472a920e2ca6409aaf8a79009e">&#9670;&#160;</a></span>to_native()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int system_signal_manager::to_native </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a442e5d505e7801160e93504232ce2616">event</a></td>          <td class="paramname"><span class="paramname"><em>e</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>将统一事件转换为平台原生信号 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>统一事件 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>平台原生信号值，模拟事件返回 -1 </dd></dl>
 
 </div>
 </div>

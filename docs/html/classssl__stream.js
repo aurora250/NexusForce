@@ -6,6 +6,7 @@ var classssl__stream =
     [ "accept", "classssl__stream.html#a8d50c0caaf302839aba7a8989a3fa875", null ],
     [ "close", "classssl__stream.html#a8e82ce0526198cc603022c76b73ad1e1", null ],
     [ "connect", "classssl__stream.html#a33c58ee785d4e58e80eaf07e73e27217", null ],
+    [ "get_alpn_negotiated", "classssl__stream.html#a391de2122472380eae5596d1d8406d9b", null ],
     [ "get_cipher_name", "classssl__stream.html#a82e33ad7a2ed79e8a62282aac299ba14", null ],
     [ "get_peer_certificate", "classssl__stream.html#ab8f71a5a604d3472e79c381eccf2622c", null ],
     [ "get_version", "classssl__stream.html#a782a9c43d8fe89be96f61c9115c8cc46", null ],

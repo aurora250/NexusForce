@@ -4,8 +4,8 @@
     <compoundname>thread::id</compoundname>
     <basecompoundref refid="structihashable" prot="public" virt="non-virtual">ihashable&lt; id &gt;</basecompoundref>
     <includes refid="thread_8hpp" local="no">thread.hpp</includes>
-    <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="structthread_1_1id_1a9636e2ff89db8b44f6b53ef284e41129" prot="private" static="no">
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structthread_1_1id_1a9636e2ff89db8b44f6b53ef284e41129" prot="public" static="no">
         <type>::DWORD</type>
         <definition>using thread::id::native_id_type = 
 
@@ -25,12 +25,12 @@
     </sectiondef>
     <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="structthread_1_1id_1adf143d3e4bdff5448e88b1c09691eb94" prot="private" static="no" mutable="no">
-        <type>native_id_type</type>
+        <type><ref refid="structthread_1_1id_1a9636e2ff89db8b44f6b53ef284e41129" kindref="member">native_id_type</ref></type>
         <definition>native_id_type thread::id::id_</definition>
         <argsstring></argsstring>
         <name>id_</name>
         <qualifiedname>thread::id::id_</qualifiedname>
-        <initializer>{}</initializer>
+        <initializer>{0}</initializer>
         <briefdescription>
 <para>系统线程标识符 </para>
         </briefdescription>
@@ -38,7 +38,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="85" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="85" bodyend="85"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="86" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="86" bodyend="86"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="friend">
@@ -57,12 +57,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="87" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="87" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="88" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="88" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structthread_1_1id_1a9947a8a4c74d5b79c0308ac815a581da" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
-        <type></type>
+      <memberdef kind="function" id="structthread_1_1id_1a60600a586f2e26c7ad834a01d44c96a4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
         <definition>thread::id::id</definition>
         <argsstring>() noexcept=default</argsstring>
         <name>id</name>
@@ -74,16 +74,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="93" column="9"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="94" column="19"/>
       </memberdef>
-      <memberdef kind="function" id="structthread_1_1id_1a1cfa2f52365f99c539d5494754907366" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
-        <type></type>
+      <memberdef kind="function" id="structthread_1_1id_1a5b9b3fc9bf638543f2ee6d6e771f783b" prot="public" static="no" constexpr="yes" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr</type>
         <definition>thread::id::id</definition>
         <argsstring>(const native_id_type id) noexcept</argsstring>
         <name>id</name>
         <qualifiedname>thread::id::id</qualifiedname>
         <param>
-          <type>const native_id_type</type>
+          <type>const <ref refid="structthread_1_1id_1a9636e2ff89db8b44f6b53ef284e41129" kindref="member">native_id_type</ref></type>
           <declname>id</declname>
         </param>
         <briefdescription>
@@ -103,10 +103,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="99" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="99" bodyend="100"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="100" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="100" bodyend="101"/>
       </memberdef>
-      <memberdef kind="function" id="structthread_1_1id_1ad46f713a633f91e1d207440abfd0efe5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>native_id_type</type>
+      <memberdef kind="function" id="structthread_1_1id_1a479f205751d42f0e16a11603a92ea567" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="structthread_1_1id_1a9636e2ff89db8b44f6b53ef284e41129" kindref="member">native_id_type</ref></type>
         <definition>native_id_type thread::id::native_handle</definition>
         <argsstring>() const noexcept</argsstring>
         <name>native_handle</name>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="106" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="106" bodyend="106"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="107" column="35" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="107" bodyend="107"/>
       </memberdef>
       <memberdef kind="function" id="structthread_1_1id_1ab1331db9207784a3d27c91eb02d9a74c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
@@ -139,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="112" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="112" bodyend="114"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="113" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="113" bodyend="115"/>
         <references refid="group___hash_primary_1ga4ed3eee51919fef3671574ecda03f33f" compoundref="hash_8hpp" startline="152" endline="159">FNV_hash</references>
       </memberdef>
       <memberdef kind="function" id="structthread_1_1id_1a0af3333e4a93c1e33eba749f44df132a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
@@ -149,7 +149,7 @@
         <name>operator==</name>
         <qualifiedname>thread::id::operator==</qualifiedname>
         <param>
-          <type>const <ref refid="structthread_1_1id_1a9947a8a4c74d5b79c0308ac815a581da" kindref="member">id</ref> &amp;</type>
+          <type>const <ref refid="structthread_1_1id_1a60600a586f2e26c7ad834a01d44c96a4" kindref="member">id</ref> &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="121" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="121" bodyend="127"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="122" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="122" bodyend="128"/>
       </memberdef>
       <memberdef kind="function" id="structthread_1_1id_1a85d4054fc92aabe640676e4d9adde487" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -180,7 +180,7 @@
         <name>operator!=</name>
         <qualifiedname>thread::id::operator!=</qualifiedname>
         <param>
-          <type>const <ref refid="structthread_1_1id_1a9947a8a4c74d5b79c0308ac815a581da" kindref="member">id</ref> &amp;</type>
+          <type>const <ref refid="structthread_1_1id_1a60600a586f2e26c7ad834a01d44c96a4" kindref="member">id</ref> &amp;</type>
           <declname>rhs</declname>
         </param>
         <briefdescription>
@@ -202,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="134" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="134" bodyend="134"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="135" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="135" bodyend="135"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -235,13 +235,13 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="73" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="73" bodyend="135"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="73" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="73" bodyend="136"/>
     <listofallmembers>
-      <member refid="structthread_1_1id_1a9947a8a4c74d5b79c0308ac815a581da" prot="public" virt="non-virtual"><scope>thread::id</scope><name>id</name></member>
-      <member refid="structthread_1_1id_1a1cfa2f52365f99c539d5494754907366" prot="public" virt="non-virtual"><scope>thread::id</scope><name>id</name></member>
+      <member refid="structthread_1_1id_1a60600a586f2e26c7ad834a01d44c96a4" prot="public" virt="non-virtual"><scope>thread::id</scope><name>id</name></member>
+      <member refid="structthread_1_1id_1a5b9b3fc9bf638543f2ee6d6e771f783b" prot="public" virt="non-virtual"><scope>thread::id</scope><name>id</name></member>
       <member refid="structthread_1_1id_1adf143d3e4bdff5448e88b1c09691eb94" prot="private" virt="non-virtual"><scope>thread::id</scope><name>id_</name></member>
-      <member refid="structthread_1_1id_1ad46f713a633f91e1d207440abfd0efe5" prot="public" virt="non-virtual"><scope>thread::id</scope><name>native_handle</name></member>
-      <member refid="structthread_1_1id_1a9636e2ff89db8b44f6b53ef284e41129" prot="private" virt="non-virtual"><scope>thread::id</scope><name>native_id_type</name></member>
+      <member refid="structthread_1_1id_1a479f205751d42f0e16a11603a92ea567" prot="public" virt="non-virtual"><scope>thread::id</scope><name>native_handle</name></member>
+      <member refid="structthread_1_1id_1a9636e2ff89db8b44f6b53ef284e41129" prot="public" virt="non-virtual"><scope>thread::id</scope><name>native_id_type</name></member>
       <member refid="structthread_1_1id_1a85d4054fc92aabe640676e4d9adde487" prot="public" virt="non-virtual"><scope>thread::id</scope><name>operator!=</name></member>
       <member refid="structthread_1_1id_1a0af3333e4a93c1e33eba749f44df132a" prot="public" virt="non-virtual"><scope>thread::id</scope><name>operator==</name></member>
       <member refid="structthread_1_1id_1ab1331db9207784a3d27c91eb02d9a74c" prot="public" virt="non-virtual"><scope>thread::id</scope><name>to_hash</name></member>

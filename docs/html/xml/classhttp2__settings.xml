@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classhttp2__settings" kind="class" language="C++" prot="public">
+    <compoundname>http2_settings</compoundname>
+    <includes refid="http2__protocol_8hpp" local="no">http2_protocol.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhttp2__settings_1a8d3c464a5ce678b9442e910a7e4f70d3" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref>, <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> &gt;</type>
+        <definition>unordered_map&lt;uint16_t, uint32_t&gt; http2_settings::params_</definition>
+        <argsstring></argsstring>
+        <name>params_</name>
+        <qualifiedname>http2_settings::params_</qualifiedname>
+        <briefdescription>
+<para>SETTINGS 参数映射（id → value） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="484" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="484" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhttp2__settings_1a425d2f45f886310f245df7e4149e3a96" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>http2_settings::http2_settings</definition>
+        <argsstring>()</argsstring>
+        <name>http2_settings</name>
+        <qualifiedname>http2_settings::http2_settings</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="466" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__settings_1a4e0ff990bb9a774b27e8f8af249ad8c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http2_settings::set</definition>
+        <argsstring>(http2_settings_id id, uint32_t value)</argsstring>
+        <name>set</name>
+        <qualifiedname>http2_settings::set</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gab4a24402dc0954ebe0037ce468ec79ff" kindref="member">http2_settings_id</ref></type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="468" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__settings_1a6ed9f152c8950350eb644b425746704b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_settings::get</definition>
+        <argsstring>(http2_settings_id id) const</argsstring>
+        <name>get</name>
+        <qualifiedname>http2_settings::get</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gab4a24402dc0954ebe0037ce468ec79ff" kindref="member">http2_settings_id</ref></type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="469" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__settings_1a25ac6a32a82cd25c54889b87acb340e5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_settings::header_table_size</definition>
+        <argsstring>() const</argsstring>
+        <name>header_table_size</name>
+        <qualifiedname>http2_settings::header_table_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="471" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__settings_1a1c17edc70110ef7cd43037535a3cb17f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool http2_settings::enable_push</definition>
+        <argsstring>() const</argsstring>
+        <name>enable_push</name>
+        <qualifiedname>http2_settings::enable_push</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="472" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__settings_1a92a9a67f6f7723d252ba01a0f732dd50" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_settings::max_concurrent_streams</definition>
+        <argsstring>() const</argsstring>
+        <name>max_concurrent_streams</name>
+        <qualifiedname>http2_settings::max_concurrent_streams</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="473" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__settings_1af8a31275cf245915afb740f14dfbcfdf" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_settings::initial_window_size</definition>
+        <argsstring>() const</argsstring>
+        <name>initial_window_size</name>
+        <qualifiedname>http2_settings::initial_window_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="474" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__settings_1a8441b5888c4ed3ede6de1815c133868a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_settings::max_frame_size</definition>
+        <argsstring>() const</argsstring>
+        <name>max_frame_size</name>
+        <qualifiedname>http2_settings::max_frame_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="475" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__settings_1a791a551c05bf15c6389cfac57099c347" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_settings::max_header_list_size</definition>
+        <argsstring>() const</argsstring>
+        <name>max_header_list_size</name>
+        <qualifiedname>http2_settings::max_header_list_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="476" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__settings_1a14734bdf7d43cd2be6c6a6045d4d4dd5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http2_settings::apply_remote_settings</definition>
+        <argsstring>(const http2_settings_frame &amp;frame)</argsstring>
+        <name>apply_remote_settings</name>
+        <qualifiedname>http2_settings::apply_remote_settings</qualifiedname>
+        <param>
+          <type>const <ref refid="structhttp2__settings__frame" kindref="compound">http2_settings_frame</ref> &amp;</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="478" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classhttp2__settings_1a028ad757de0cc223bd30b3842c9bbf3f" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classhttp2__settings" kindref="compound">http2_settings</ref></type>
+        <definition>static http2_settings http2_settings::defaults</definition>
+        <argsstring>()</argsstring>
+        <name>defaults</name>
+        <qualifiedname>http2_settings::defaults</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="480" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="480" bodyend="480"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP/2 连接设置管理器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>维护本地和远端 SETTINGS 参数值。 支持默认值和远端参数应用时的范围校验。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="464" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="464" bodyend="485"/>
+    <listofallmembers>
+      <member refid="classhttp2__settings_1a14734bdf7d43cd2be6c6a6045d4d4dd5" prot="public" virt="non-virtual"><scope>http2_settings</scope><name>apply_remote_settings</name></member>
+      <member refid="classhttp2__settings_1a028ad757de0cc223bd30b3842c9bbf3f" prot="public" virt="non-virtual"><scope>http2_settings</scope><name>defaults</name></member>
+      <member refid="classhttp2__settings_1a1c17edc70110ef7cd43037535a3cb17f" prot="public" virt="non-virtual"><scope>http2_settings</scope><name>enable_push</name></member>
+      <member refid="classhttp2__settings_1a6ed9f152c8950350eb644b425746704b" prot="public" virt="non-virtual"><scope>http2_settings</scope><name>get</name></member>
+      <member refid="classhttp2__settings_1a25ac6a32a82cd25c54889b87acb340e5" prot="public" virt="non-virtual"><scope>http2_settings</scope><name>header_table_size</name></member>
+      <member refid="classhttp2__settings_1a425d2f45f886310f245df7e4149e3a96" prot="public" virt="non-virtual"><scope>http2_settings</scope><name>http2_settings</name></member>
+      <member refid="classhttp2__settings_1af8a31275cf245915afb740f14dfbcfdf" prot="public" virt="non-virtual"><scope>http2_settings</scope><name>initial_window_size</name></member>
+      <member refid="classhttp2__settings_1a92a9a67f6f7723d252ba01a0f732dd50" prot="public" virt="non-virtual"><scope>http2_settings</scope><name>max_concurrent_streams</name></member>
+      <member refid="classhttp2__settings_1a8441b5888c4ed3ede6de1815c133868a" prot="public" virt="non-virtual"><scope>http2_settings</scope><name>max_frame_size</name></member>
+      <member refid="classhttp2__settings_1a791a551c05bf15c6389cfac57099c347" prot="public" virt="non-virtual"><scope>http2_settings</scope><name>max_header_list_size</name></member>
+      <member refid="classhttp2__settings_1a8d3c464a5ce678b9442e910a7e4f70d3" prot="private" virt="non-virtual"><scope>http2_settings</scope><name>params_</name></member>
+      <member refid="classhttp2__settings_1a4e0ff990bb9a774b27e8f8af249ad8c8" prot="public" virt="non-virtual"><scope>http2_settings</scope><name>set</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

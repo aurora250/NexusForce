@@ -230,6 +230,54 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="82" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="82" bodyend="82"/>
       </memberdef>
+      <memberdef kind="variable" id="classshare__memory_1ac5e7eda51da890bbab93dd61366a5bb9" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t share_memory::data_offset_</definition>
+        <argsstring></argsstring>
+        <name>data_offset_</name>
+        <qualifiedname>share_memory::data_offset_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>用户数据区相对于映射基址的偏移 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="83" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="83" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="variable" id="classshare__memory_1a785ee84d51b1f96f98758ef2a13845c9" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool share_memory::mutex_owner_</definition>
+        <argsstring></argsstring>
+        <name>mutex_owner_</name>
+        <qualifiedname>share_memory::mutex_owner_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>是否为本进程初始化共享互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="84" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="84" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="variable" id="classshare__memory_1a075427eb604fdd7e2073cdf7add718d4" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* share_memory::mutex_handle_</definition>
+        <argsstring></argsstring>
+        <name>mutex_handle_</name>
+        <qualifiedname>share_memory::mutex_handle_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+<para>进程间互斥锁句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="86" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="86" bodyend="86"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classshare__memory_1aa398f85ea0678ed0adb5013a6e5d8b32" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -245,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="88" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="93" column="5"/>
         <referencedby refid="classshare__memory_1a794820489c390db24e2a8facb9923bf1">operator=</referencedby>
         <referencedby refid="classshare__memory_1aa8628e04be4a1e2c4511ce09e7f14b31">share_memory</referencedby>
         <referencedby refid="classshare__memory_1a0f3329a81f686f3a00127cf2c3f90465">share_memory</referencedby>
@@ -325,10 +373,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="98" column="14"/>
-        <references refid="classshare__memory_1a74262bdf1f8b3f525ca901fa6efc2db5" compoundref="share__memory_8hpp" startline="181" endline="181">name</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="103" column="14"/>
+        <references refid="classshare__memory_1a74262bdf1f8b3f525ca901fa6efc2db5" compoundref="share__memory_8hpp" startline="186" endline="186">name</references>
         <references refid="classshare__memory_1aa398f85ea0678ed0adb5013a6e5d8b32">share_memory</references>
-        <references refid="classshare__memory_1a46d798c3535bafd04fff0d4a66b502ac" compoundref="share__memory_8hpp" startline="169" endline="169">size</references>
+        <references refid="classshare__memory_1a46d798c3535bafd04fff0d4a66b502ac" compoundref="share__memory_8hpp" startline="174" endline="174">size</references>
       </memberdef>
       <memberdef kind="function" id="classshare__memory_1afb694127ca43c3e60960b20a70be993f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -345,7 +393,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="101" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="106" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classshare__memory_1a9ca9987a9af6592a508d1e09ec019da7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classshare__memory" kindref="compound">share_memory</ref> &amp;</type>
@@ -362,7 +410,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="102" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="107" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classshare__memory_1a0f3329a81f686f3a00127cf2c3f90465" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -381,7 +429,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="107" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="112" column="5"/>
         <references refid="classshare__memory_1aa398f85ea0678ed0adb5013a6e5d8b32">share_memory</references>
       </memberdef>
       <memberdef kind="function" id="classshare__memory_1a794820489c390db24e2a8facb9923bf1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -401,7 +449,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="112" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="117" column="18"/>
         <references refid="classshare__memory_1aa398f85ea0678ed0adb5013a6e5d8b32">share_memory</references>
       </memberdef>
       <memberdef kind="function" id="classshare__memory_1a931d2cea4d64625fc4bd3c12ed0196c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -417,7 +465,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="117" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="122" column="5"/>
         <references refid="classshare__memory_1aa398f85ea0678ed0adb5013a6e5d8b32">share_memory</references>
       </memberdef>
       <memberdef kind="function" id="classshare__memory_1aae33eefe6b65765458dd5945a9acd0c9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -494,10 +542,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="127" column="10"/>
-        <references refid="classshare__memory_1a74262bdf1f8b3f525ca901fa6efc2db5" compoundref="share__memory_8hpp" startline="181" endline="181">name</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="132" column="10"/>
+        <references refid="classshare__memory_1a74262bdf1f8b3f525ca901fa6efc2db5" compoundref="share__memory_8hpp" startline="186" endline="186">name</references>
         <references refid="classshare__memory_1aae33eefe6b65765458dd5945a9acd0c9">open</references>
-        <references refid="classshare__memory_1a46d798c3535bafd04fff0d4a66b502ac" compoundref="share__memory_8hpp" startline="169" endline="169">size</references>
+        <references refid="classshare__memory_1a46d798c3535bafd04fff0d4a66b502ac" compoundref="share__memory_8hpp" startline="174" endline="174">size</references>
         <referencedby refid="classshare__memory_1aae33eefe6b65765458dd5945a9acd0c9">open</referencedby>
       </memberdef>
       <memberdef kind="function" id="classshare__memory_1af9748141b09b10dcefac10adb833d794" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
@@ -513,7 +561,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="133" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="138" column="10"/>
         <references refid="classshare__memory_1af9748141b09b10dcefac10adb833d794">close</references>
         <referencedby refid="classshare__memory_1af9748141b09b10dcefac10adb833d794">close</referencedby>
       </memberdef>
@@ -569,7 +617,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="142" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="147" column="10"/>
         <references refid="classshare__memory_1a7f93dd42e93a791947c3ef82d44b7c6f">map</references>
         <referencedby refid="classshare__memory_1a7f93dd42e93a791947c3ef82d44b7c6f">map</referencedby>
       </memberdef>
@@ -586,7 +634,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="147" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="152" column="10"/>
         <references refid="classshare__memory_1a36ea9063d34633beb9823aa4069232a1">unmap</references>
         <referencedby refid="classshare__memory_1a36ea9063d34633beb9823aa4069232a1">unmap</referencedby>
       </memberdef>
@@ -606,9 +654,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="153" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="153" bodyend="153"/>
-        <references refid="classshare__memory_1ac44531a2ddc922e11bb5ca90f3c0cd00" compoundref="share__memory_8hpp" startline="153" endline="153">data</references>
-        <referencedby refid="classshare__memory_1ac44531a2ddc922e11bb5ca90f3c0cd00" compoundref="share__memory_8hpp" startline="153" endline="153">data</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="158" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="158" bodyend="158"/>
+        <references refid="classshare__memory_1ac44531a2ddc922e11bb5ca90f3c0cd00" compoundref="share__memory_8hpp" startline="158" endline="158">data</references>
+        <referencedby refid="classshare__memory_1ac44531a2ddc922e11bb5ca90f3c0cd00" compoundref="share__memory_8hpp" startline="158" endline="158">data</referencedby>
       </memberdef>
       <memberdef kind="function" id="classshare__memory_1aaf6ede34f64ebd8792d6b50bef7f51c6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -640,7 +688,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="161" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="161" bodyend="163"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="166" column="8" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="166" bodyend="168"/>
       </memberdef>
       <memberdef kind="function" id="classshare__memory_1a46d798c3535bafd04fff0d4a66b502ac" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
@@ -658,7 +706,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="169" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="169" bodyend="169"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="174" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="174" bodyend="174"/>
         <referencedby refid="classshare__memory_1aae33eefe6b65765458dd5945a9acd0c9">open</referencedby>
         <referencedby refid="classshare__memory_1aa8628e04be4a1e2c4511ce09e7f14b31">share_memory</referencedby>
       </memberdef>
@@ -678,7 +726,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="175" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="175" bodyend="175"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="180" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="180" bodyend="180"/>
       </memberdef>
       <memberdef kind="function" id="classshare__memory_1a74262bdf1f8b3f525ca901fa6efc2db5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
@@ -696,7 +744,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="181" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="181" bodyend="181"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="186" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="186" bodyend="186"/>
         <referencedby refid="classshare__memory_1a3869ceaa39ed6bd4e7f5149a6874fced">exists</referencedby>
         <referencedby refid="classshare__memory_1aae33eefe6b65765458dd5945a9acd0c9">open</referencedby>
         <referencedby refid="classshare__memory_1a48a47c0aebb11a0497306ebc362f8975">remove</referencedby>
@@ -718,7 +766,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="187" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="187" bodyend="187"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="192" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="192" bodyend="192"/>
       </memberdef>
       <memberdef kind="function" id="classshare__memory_1af97255adba5c58f718a02088bded10c0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -736,7 +784,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="193" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="193" bodyend="193"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="198" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="198" bodyend="198"/>
       </memberdef>
       <memberdef kind="function" id="classshare__memory_1a6cfd0764176b9e974c0bcf0faad9ac61" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -768,8 +816,99 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="200" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="205" column="10"/>
         <references refid="group___async_1ga4bbf8cf030239a4806813af4dcafec6f" compoundref="async_8hpp" startline="43" endline="56">async</references>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1afd217720226c30ccdb2be654897bdccf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void share_memory::grow</definition>
+        <argsstring>(size_t new_size)</argsstring>
+        <name>grow</name>
+        <qualifiedname>share_memory::grow</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>new_size</declname>
+        </param>
+        <briefdescription>
+<para>扩增共享内存大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>new_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的大小（字节），必须大于当前大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structshare__memory__exception" kindref="compound">share_memory_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>扩增失败时抛出 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>调用前必须先 <ref refid="classshare__memory_1a7f93dd42e93a791947c3ef82d44b7c6f" kindref="member">map()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="213" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1a6b3dc0a3128e02f9e5461b010e354f9e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void share_memory::lock</definition>
+        <argsstring>()</argsstring>
+        <name>lock</name>
+        <qualifiedname>share_memory::lock</qualifiedname>
+        <briefdescription>
+<para>获取进程间互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="warning"><para>调用前必须先 <ref refid="classshare__memory_1a7f93dd42e93a791947c3ef82d44b7c6f" kindref="member">map()</ref></para>
+</simplesect>
+阻塞直到锁可用，支持跨进程同步。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="221" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1a1ed403897d52bc158896c121af895870" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void share_memory::unlock</definition>
+        <argsstring>()</argsstring>
+        <name>unlock</name>
+        <qualifiedname>share_memory::unlock</qualifiedname>
+        <briefdescription>
+<para>释放进程间互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="226" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classshare__memory_1a48ccf04b137a92e72495e9ee80c8c720" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool share_memory::try_lock</definition>
+        <argsstring>()</argsstring>
+        <name>try_lock</name>
+        <qualifiedname>share_memory::try_lock</qualifiedname>
+        <briefdescription>
+<para>尝试获取进程间互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否成功获取锁 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="232" column="10"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -804,8 +943,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="209" column="17"/>
-        <references refid="classshare__memory_1a74262bdf1f8b3f525ca901fa6efc2db5" compoundref="share__memory_8hpp" startline="181" endline="181">name</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="241" column="17"/>
+        <references refid="classshare__memory_1a74262bdf1f8b3f525ca901fa6efc2db5" compoundref="share__memory_8hpp" startline="186" endline="186">name</references>
       </memberdef>
       <memberdef kind="function" id="classshare__memory_1a3869ceaa39ed6bd4e7f5149a6874fced" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -836,8 +975,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="216" column="18"/>
-        <references refid="classshare__memory_1a74262bdf1f8b3f525ca901fa6efc2db5" compoundref="share__memory_8hpp" startline="181" endline="181">name</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="248" column="18"/>
+        <references refid="classshare__memory_1a74262bdf1f8b3f525ca901fa6efc2db5" compoundref="share__memory_8hpp" startline="186" endline="186">name</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -846,24 +985,29 @@
     <detaileddescription>
 <para>提供跨进程的共享内存创建、映射和访问功能。 </para>
     </detaileddescription>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="50" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="50" bodyend="217"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" line="50" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/share_memory.hpp" bodystart="50" bodyend="249"/>
     <listofallmembers>
       <member refid="classshare__memory_1a6f5e04ae4be89e5497ad4b6fd11cca35" prot="public" virt="non-virtual"><scope>share_memory</scope><name>access_mode</name></member>
       <member refid="classshare__memory_1a95b7d05dec65d62c809701f1e0430717" prot="private" virt="non-virtual"><scope>share_memory</scope><name>access_mode_</name></member>
       <member refid="classshare__memory_1af9748141b09b10dcefac10adb833d794" prot="public" virt="non-virtual"><scope>share_memory</scope><name>close</name></member>
       <member refid="classshare__memory_1ac44531a2ddc922e11bb5ca90f3c0cd00" prot="public" virt="non-virtual"><scope>share_memory</scope><name>data</name></member>
       <member refid="classshare__memory_1aaf6ede34f64ebd8792d6b50bef7f51c6" prot="public" virt="non-virtual"><scope>share_memory</scope><name>data</name></member>
+      <member refid="classshare__memory_1ac5e7eda51da890bbab93dd61366a5bb9" prot="private" virt="non-virtual"><scope>share_memory</scope><name>data_offset_</name></member>
       <member refid="classshare__memory_1a3869ceaa39ed6bd4e7f5149a6874fced" prot="public" virt="non-virtual"><scope>share_memory</scope><name>exists</name></member>
       <member refid="classshare__memory_1a6cfd0764176b9e974c0bcf0faad9ac61" prot="public" virt="non-virtual"><scope>share_memory</scope><name>flush</name></member>
+      <member refid="classshare__memory_1afd217720226c30ccdb2be654897bdccf" prot="public" virt="non-virtual"><scope>share_memory</scope><name>grow</name></member>
       <member refid="classshare__memory_1ab2aa8efddde9cfbf5c8c5263d9e68244" prot="private" virt="non-virtual"><scope>share_memory</scope><name>handle_</name></member>
       <member refid="classshare__memory_1aeb4b5bac1e710a980be2efa9e47da0c3" prot="private" virt="non-virtual"><scope>share_memory</scope><name>internal_mapped_size_</name></member>
       <member refid="classshare__memory_1af97255adba5c58f718a02088bded10c0" prot="public" virt="non-virtual"><scope>share_memory</scope><name>is_mapped</name></member>
       <member refid="classshare__memory_1a2b7600b954851180ebb2d1616036d2c2" prot="public" virt="non-virtual"><scope>share_memory</scope><name>is_open</name></member>
       <member refid="classshare__memory_1a2fb70968340050a39fa1b1e761554c5a" prot="private" virt="non-virtual"><scope>share_memory</scope><name>is_open_</name></member>
+      <member refid="classshare__memory_1a6b3dc0a3128e02f9e5461b010e354f9e" prot="public" virt="non-virtual"><scope>share_memory</scope><name>lock</name></member>
       <member refid="classshare__memory_1a7f93dd42e93a791947c3ef82d44b7c6f" prot="public" virt="non-virtual"><scope>share_memory</scope><name>map</name></member>
       <member refid="classshare__memory_1ab86e5be5ed042bf826d84b93025f08d5" prot="private" virt="non-virtual"><scope>share_memory</scope><name>mapped_addr_</name></member>
       <member refid="classshare__memory_1a8d2b98952a0134fab42e8d09b654eaf3" prot="public" virt="non-virtual"><scope>share_memory</scope><name>mapped_size</name></member>
       <member refid="classshare__memory_1afff729ff908a18518574e8205e6aede4" prot="private" virt="non-virtual"><scope>share_memory</scope><name>mapped_size_</name></member>
+      <member refid="classshare__memory_1a075427eb604fdd7e2073cdf7add718d4" prot="private" virt="non-virtual"><scope>share_memory</scope><name>mutex_handle_</name></member>
+      <member refid="classshare__memory_1a785ee84d51b1f96f98758ef2a13845c9" prot="private" virt="non-virtual"><scope>share_memory</scope><name>mutex_owner_</name></member>
       <member refid="classshare__memory_1a74262bdf1f8b3f525ca901fa6efc2db5" prot="public" virt="non-virtual"><scope>share_memory</scope><name>name</name></member>
       <member refid="classshare__memory_1a57952e8630500ce908b8432a4439d8e7" prot="private" virt="non-virtual"><scope>share_memory</scope><name>name_</name></member>
       <member refid="classshare__memory_1ac9c50fcaaa7bf35a411d4c327a11dcef" prot="public" virt="non-virtual"><scope>share_memory</scope><name>native_handle_type</name></member>
@@ -879,6 +1023,8 @@
       <member refid="classshare__memory_1a0f3329a81f686f3a00127cf2c3f90465" prot="public" virt="non-virtual"><scope>share_memory</scope><name>share_memory</name></member>
       <member refid="classshare__memory_1a46d798c3535bafd04fff0d4a66b502ac" prot="public" virt="non-virtual"><scope>share_memory</scope><name>size</name></member>
       <member refid="classshare__memory_1acc5fbcf45971bde879ce63ba10f4907e" prot="private" virt="non-virtual"><scope>share_memory</scope><name>size_</name></member>
+      <member refid="classshare__memory_1a48ccf04b137a92e72495e9ee80c8c720" prot="public" virt="non-virtual"><scope>share_memory</scope><name>try_lock</name></member>
+      <member refid="classshare__memory_1a1ed403897d52bc158896c121af895870" prot="public" virt="non-virtual"><scope>share_memory</scope><name>unlock</name></member>
       <member refid="classshare__memory_1a36ea9063d34633beb9823aa4069232a1" prot="public" virt="non-virtual"><scope>share_memory</scope><name>unmap</name></member>
       <member refid="classshare__memory_1a931d2cea4d64625fc4bd3c12ed0196c2" prot="public" virt="non-virtual"><scope>share_memory</scope><name>~share_memory</name></member>
     </listofallmembers>

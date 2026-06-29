@@ -11,5 +11,6 @@ var classtimer__scheduler =
     [ "cancel", "classtimer__scheduler.html#aa25522eaa375942415f6ab940174a49b", null ],
     [ "cancel_all", "classtimer__scheduler.html#ac050f83f8dbeee5c8f590c5be3e7a6d2", null ],
     [ "is_pending", "classtimer__scheduler.html#a2e336543bee81770a128f011c5f73c69", null ],
-    [ "size", "classtimer__scheduler.html#aa7d0cbe3d1396062e710b5fa202017f3", null ]
+    [ "size", "classtimer__scheduler.html#aa7d0cbe3d1396062e710b5fa202017f3", null ],
+    [ "stop", "classtimer__scheduler.html#afc0788cb4bf13471a2d573e0342613ed", null ]
 ];

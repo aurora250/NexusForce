@@ -7,13 +7,18 @@
     <includes refid="invoke_8hpp" local="yes">NeForce/core/functional/invoke.hpp</includes>
     <includes refid="construct_8hpp" local="yes">NeForce/core/memory/construct.hpp</includes>
     <includes local="no">initializer_list</includes>
-    <includedby refid="_ne_force_8hpp" local="yes">NeForce.hpp</includedby>
     <incdepgraph>
       <node id="3">
         <label>NeForce/core/config/c++config.hpp</label>
         <link refid="c_09_09config_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>NeForce/core/config/version.hpp</label>
+        <link refid="version_8hpp_source"/>
       </node>
       <node id="2">
         <label>NeForce/core/exception/breakpoint.hpp</label>
@@ -21,49 +26,49 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="5">
+      <node id="6">
         <label>NeForce/core/exception/exception.hpp</label>
         <link refid="exception_8hpp"/>
-        <childnode refid="6" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="9">
+      <node id="10">
         <label>NeForce/core/functional/invoke.hpp</label>
         <link refid="invoke_8hpp"/>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="13">
+      <node id="14">
         <label>NeForce/core/iterator/iterator_traits.hpp</label>
         <link refid="iterator__traits_8hpp"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-      </node>
-      <node id="11">
-        <label>NeForce/core/memory/construct.hpp</label>
-        <link refid="construct_8hpp"/>
-        <childnode refid="12" relation="include">
-        </childnode>
-      </node>
-      <node id="6">
-        <label>NeForce/core/memory/memory.hpp</label>
-        <link refid="memory_8hpp"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
       <node id="12">
-        <label>NeForce/core/typeinfo/concepts.hpp</label>
-        <link refid="concepts_8hpp"/>
+        <label>NeForce/core/memory/construct.hpp</label>
+        <link refid="construct_8hpp"/>
         <childnode refid="13" relation="include">
         </childnode>
       </node>
       <node id="7">
-        <label>NeForce/core/typeinfo/type_traits.hpp</label>
-        <link refid="type__traits_8hpp"/>
+        <label>NeForce/core/memory/memory.hpp</label>
+        <link refid="memory_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
+      <node id="13">
+        <label>NeForce/core/typeinfo/concepts.hpp</label>
+        <link refid="concepts_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
       <node id="8">
+        <label>NeForce/core/typeinfo/type_traits.hpp</label>
+        <link refid="type__traits_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
         <label>NeForce/core/typeinfo/types.hpp</label>
         <link refid="types_8hpp"/>
         <childnode refid="3" relation="include">
@@ -74,40 +79,28 @@
         <link refid="expected_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>NeForce/core/utility/reference_wrapper.hpp</label>
         <link refid="reference__wrapper_8hpp"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
       <node id="4">
         <label>cassert</label>
       </node>
-      <node id="14">
+      <node id="15">
         <label>initializer_list</label>
       </node>
     </incdepgraph>
-    <invincdepgraph>
-      <node id="2">
-        <label>NeForce.hpp</label>
-        <link refid="_ne_force_8hpp"/>
-      </node>
-      <node id="1">
-        <label>expected.hpp</label>
-        <link refid="expected_8hpp"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-      </node>
-    </invincdepgraph>
     <innerclass refid="structexpected__exception" prot="public">expected_exception</innerclass>
     <innerclass refid="structinplace__invoke__tag" prot="public">inplace_invoke_tag</innerclass>
     <innerclass refid="structunexpect__invoke__tag" prot="public">unexpect_invoke_tag</innerclass>

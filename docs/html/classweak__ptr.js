@@ -2,6 +2,7 @@ var classweak__ptr =
 [
     [ "element_type", "classweak__ptr.html#ae778e30aa38a100c5750aecd6f5d8d8b", null ],
     [ "weak_ptr", "classweak__ptr.html#a20a6853423bef0657ba9e7912d1118bf", null ],
+    [ "weak_ptr", "classweak__ptr.html#a3b07b6b6711dfdcf5819b0f397937ede", null ],
     [ "weak_ptr", "classweak__ptr.html#ad954d39a77ff4b8b32cd91cd4f4affa8", null ],
     [ "weak_ptr", "classweak__ptr.html#a08ea1426cad769cf04d9942258659f17", null ],
     [ "weak_ptr", "classweak__ptr.html#a2141f9583dd0cafda2f02eeb58e0bd35", null ],

@@ -4,6 +4,7 @@ var structmysql__result =
     [ "mysql_result", "structmysql__result.html#ad27cac26616b43733d40b513e8bb7218", null ],
     [ "~mysql_result", "structmysql__result.html#a835a01b9b0c05a7d39e8cc30d976dfaa", null ],
     [ "column_count", "structmysql__result.html#a953523145b115705d5ff39b0b1ee21fc", null ],
+    [ "column_metadata", "structmysql__result.html#a65c6d88ad4b557baf0d8bb1357432d78", null ],
     [ "column_names", "structmysql__result.html#a3cbbe56acc57564f9713482bc8d76343", null ],
     [ "column_types", "structmysql__result.html#ab5f348c9d043274232dfc1df665e5b3a", null ],
     [ "empty", "structmysql__result.html#a0b6c7fb2a3fa4358c6af16f7e1beb59b", null ],

@@ -1,0 +1,2286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: sparse_multiset&lt; Key, Compare, Alloc &gt; 模板类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classsparse__multiset.html','','classsparse__multiset-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">sparse_multiset&lt; Key, Compare, Alloc &gt; 模板类 参考<div class="ingroups"><a class="el" href="group___container.html">标准容器</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>稀疏多重集合容器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 sparse_multiset&lt; Key, Compare, Alloc &gt; 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classsparse__multiset__inherit__graph.svg" width="163" height="203"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a96fcf18be84cda802bef198eac345f7e" id="r_a96fcf18be84cda802bef198eac345f7e"><td class="memItemLeft"><a id="a96fcf18be84cda802bef198eac345f7e" name="a96fcf18be84cda802bef198eac345f7e"></a>
+using&#160;</td><td class="memItemRight"><b>key_type</b> = Key</td></tr>
+<tr class="memdesc:a96fcf18be84cda802bef198eac345f7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">键类型 <br /></td></tr>
+<tr class="memitem:a02195de1d384a1964ac09dce452a4733" id="r_a02195de1d384a1964ac09dce452a4733"><td class="memItemLeft"><a id="a02195de1d384a1964ac09dce452a4733" name="a02195de1d384a1964ac09dce452a4733"></a>
+using&#160;</td><td class="memItemRight"><b>value_type</b> = Key</td></tr>
+<tr class="memdesc:a02195de1d384a1964ac09dce452a4733"><td class="mdescLeft">&#160;</td><td class="mdescRight">值类型 <br /></td></tr>
+<tr class="memitem:ab5142cead507f4419946c924651bd2cf" id="r_ab5142cead507f4419946c924651bd2cf"><td class="memItemLeft"><a id="ab5142cead507f4419946c924651bd2cf" name="ab5142cead507f4419946c924651bd2cf"></a>
+using&#160;</td><td class="memItemRight"><b>key_compare</b> = Compare</td></tr>
+<tr class="memdesc:ab5142cead507f4419946c924651bd2cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">键比较函数类型 <br /></td></tr>
+<tr class="memitem:a595ddadf458c6d7eb2df743824bf7d5a" id="r_a595ddadf458c6d7eb2df743824bf7d5a"><td class="memItemLeft"><a id="a595ddadf458c6d7eb2df743824bf7d5a" name="a595ddadf458c6d7eb2df743824bf7d5a"></a>
+using&#160;</td><td class="memItemRight"><b>value_compare</b> = Compare</td></tr>
+<tr class="memdesc:a595ddadf458c6d7eb2df743824bf7d5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">值比较函数类型 <br /></td></tr>
+<tr class="memitem:aa051ff51698bd90ad62d65a49afa7fb1" id="r_aa051ff51698bd90ad62d65a49afa7fb1"><td class="memItemLeft"><a id="aa051ff51698bd90ad62d65a49afa7fb1" name="aa051ff51698bd90ad62d65a49afa7fb1"></a>
+using&#160;</td><td class="memItemRight"><b>size_type</b> = typename <a class="el" href="classsparse__vector.html#abf85f5857db9b28a9e9fa69d7be89653">base_type::size_type</a></td></tr>
+<tr class="memdesc:aa051ff51698bd90ad62d65a49afa7fb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">大小类型 <br /></td></tr>
+<tr class="memitem:a0b806f8e5ef87d097577de9d0621a532" id="r_a0b806f8e5ef87d097577de9d0621a532"><td class="memItemLeft"><a id="a0b806f8e5ef87d097577de9d0621a532" name="a0b806f8e5ef87d097577de9d0621a532"></a>
+using&#160;</td><td class="memItemRight"><b>difference_type</b> = typename <a class="el" href="classsparse__vector.html#aa8e868be083c16deb2483c353d2ae703">base_type::difference_type</a></td></tr>
+<tr class="memdesc:a0b806f8e5ef87d097577de9d0621a532"><td class="mdescLeft">&#160;</td><td class="mdescRight">差值类型 <br /></td></tr>
+<tr class="memitem:a65384211b21fa3574fab6029c0334d53" id="r_a65384211b21fa3574fab6029c0334d53"><td class="memItemLeft"><a id="a65384211b21fa3574fab6029c0334d53" name="a65384211b21fa3574fab6029c0334d53"></a>
+using&#160;</td><td class="memItemRight"><b>pointer</b> = typename <a class="el" href="classsparse__vector.html#a213ec95a1682dbf737cf5594fa6c5de4">base_type::pointer</a></td></tr>
+<tr class="memdesc:a65384211b21fa3574fab6029c0334d53"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型 <br /></td></tr>
+<tr class="memitem:a98ee7e3c788733e8fecf838f9efced70" id="r_a98ee7e3c788733e8fecf838f9efced70"><td class="memItemLeft"><a id="a98ee7e3c788733e8fecf838f9efced70" name="a98ee7e3c788733e8fecf838f9efced70"></a>
+using&#160;</td><td class="memItemRight"><b>const_pointer</b> = typename <a class="el" href="classsparse__vector.html#aa63b50dbd531c8e8a151293e011a7e01">base_type::const_pointer</a></td></tr>
+<tr class="memdesc:a98ee7e3c788733e8fecf838f9efced70"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量指针类型 <br /></td></tr>
+<tr class="memitem:ae68362639b5976e639fa07a16389e90d" id="r_ae68362639b5976e639fa07a16389e90d"><td class="memItemLeft"><a id="ae68362639b5976e639fa07a16389e90d" name="ae68362639b5976e639fa07a16389e90d"></a>
+using&#160;</td><td class="memItemRight"><b>reference</b> = typename <a class="el" href="classsparse__vector.html#a7c484689e4b001239bc65061c0f981f7">base_type::reference</a></td></tr>
+<tr class="memdesc:ae68362639b5976e639fa07a16389e90d"><td class="mdescLeft">&#160;</td><td class="mdescRight">引用类型 <br /></td></tr>
+<tr class="memitem:ad08f1cf80c77f29b6cd5db98c0a27383" id="r_ad08f1cf80c77f29b6cd5db98c0a27383"><td class="memItemLeft"><a id="ad08f1cf80c77f29b6cd5db98c0a27383" name="ad08f1cf80c77f29b6cd5db98c0a27383"></a>
+using&#160;</td><td class="memItemRight"><b>const_reference</b> = typename <a class="el" href="classsparse__vector.html#af7e8fcbd0679be9063fc72f7a9f0b32f">base_type::const_reference</a></td></tr>
+<tr class="memdesc:ad08f1cf80c77f29b6cd5db98c0a27383"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量引用类型 <br /></td></tr>
+<tr class="memitem:a28df1dcc64454e34fbd349ce663c6c1b" id="r_a28df1dcc64454e34fbd349ce663c6c1b"><td class="memItemLeft"><a id="a28df1dcc64454e34fbd349ce663c6c1b" name="a28df1dcc64454e34fbd349ce663c6c1b"></a>
+using&#160;</td><td class="memItemRight"><b>iterator</b> = typename <a class="el" href="classsparse__vector.html#a1835900c7729abbaaec3ee231fbd1d53">base_type::iterator</a></td></tr>
+<tr class="memdesc:a28df1dcc64454e34fbd349ce663c6c1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">迭代器类型 <br /></td></tr>
+<tr class="memitem:a409402d7999cc1cabd41a196990e3c86" id="r_a409402d7999cc1cabd41a196990e3c86"><td class="memItemLeft"><a id="a409402d7999cc1cabd41a196990e3c86" name="a409402d7999cc1cabd41a196990e3c86"></a>
+using&#160;</td><td class="memItemRight"><b>const_iterator</b> = typename <a class="el" href="classsparse__vector.html#ade91cee6d1c5f419351e3b7b41b96fd8">base_type::const_iterator</a></td></tr>
+<tr class="memdesc:a409402d7999cc1cabd41a196990e3c86"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量迭代器类型 <br /></td></tr>
+<tr class="memitem:a5741c492e4ac82e3a981a990c2c350cb" id="r_a5741c492e4ac82e3a981a990c2c350cb"><td class="memItemLeft"><a id="a5741c492e4ac82e3a981a990c2c350cb" name="a5741c492e4ac82e3a981a990c2c350cb"></a>
+using&#160;</td><td class="memItemRight"><b>reverse_iterator</b> = typename <a class="el" href="classsparse__vector.html#a76785a7125742d461b29b7c0d8421514">base_type::reverse_iterator</a></td></tr>
+<tr class="memdesc:a5741c492e4ac82e3a981a990c2c350cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">反向迭代器类型 <br /></td></tr>
+<tr class="memitem:aa18b20a70ffd87ca64986af50956b9c1" id="r_aa18b20a70ffd87ca64986af50956b9c1"><td class="memItemLeft"><a id="aa18b20a70ffd87ca64986af50956b9c1" name="aa18b20a70ffd87ca64986af50956b9c1"></a>
+using&#160;</td><td class="memItemRight"><b>const_reverse_iterator</b> = typename <a class="el" href="classsparse__vector.html#aafd9c245ab0f81488c5dae0268389098">base_type::const_reverse_iterator</a></td></tr>
+<tr class="memdesc:aa18b20a70ffd87ca64986af50956b9c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">常量反向迭代器类型 <br /></td></tr>
+<tr class="memitem:ace55dd9ae75886ffbd260c02529f7413" id="r_ace55dd9ae75886ffbd260c02529f7413"><td class="memItemLeft"><a id="ace55dd9ae75886ffbd260c02529f7413" name="ace55dd9ae75886ffbd260c02529f7413"></a>
+using&#160;</td><td class="memItemRight"><b>allocator_type</b> = typename <a class="el" href="classsparse__vector.html#adf1302fcc9925879193d7279520ad174">base_type::allocator_type</a></td></tr>
+<tr class="memdesc:ace55dd9ae75886ffbd260c02529f7413"><td class="mdescLeft">&#160;</td><td class="mdescRight">分配器类型 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a5affbaba336bb94bfdd2c0b06e2c61d2" id="r_a5affbaba336bb94bfdd2c0b06e2c61d2"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5affbaba336bb94bfdd2c0b06e2c61d2">sparse_multiset</a> ()</td></tr>
+<tr class="memdesc:a5affbaba336bb94bfdd2c0b06e2c61d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
+<tr class="memitem:a0e7f13470aac5fe12d01868e0c30fbce" id="r_a0e7f13470aac5fe12d01868e0c30fbce"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a0e7f13470aac5fe12d01868e0c30fbce">sparse_multiset</a> (const <a class="el" href="#ab5142cead507f4419946c924651bd2cf">key_compare</a> &amp;comp)</td></tr>
+<tr class="memdesc:a0e7f13470aac5fe12d01868e0c30fbce"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，指定比较函数  <br /></td></tr>
+<tr class="memitem:a0aa895d0b648bc3d029c384df41e061d" id="r_a0aa895d0b648bc3d029c384df41e061d"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a0aa895d0b648bc3d029c384df41e061d">sparse_multiset</a> (const <a class="el" href="classsparse__multiset.html">sparse_multiset</a> &amp;other)</td></tr>
+<tr class="memdesc:a0aa895d0b648bc3d029c384df41e061d"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝构造函数  <br /></td></tr>
+<tr class="memitem:aeb607e812f437c1ae7ba4770b2655d80" id="r_aeb607e812f437c1ae7ba4770b2655d80"><td class="memItemLeft"><a class="el" href="classsparse__multiset.html">sparse_multiset</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aeb607e812f437c1ae7ba4770b2655d80">operator=</a> (const <a class="el" href="classsparse__multiset.html">sparse_multiset</a> &amp;other)</td></tr>
+<tr class="memdesc:aeb607e812f437c1ae7ba4770b2655d80"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝赋值运算符  <br /></td></tr>
+<tr class="memitem:a4f150c1c61a40d7abd2b26471c510be2" id="r_a4f150c1c61a40d7abd2b26471c510be2"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a4f150c1c61a40d7abd2b26471c510be2">sparse_multiset</a> (<a class="el" href="classsparse__multiset.html">sparse_multiset</a> &amp;&amp;other) noexcept(<a class="el" href="group___type_special_member_function_checks.html#ga34e3584e54b63fd9e6a35fffd41080bd">is_nothrow_move_constructible_v</a>&lt; base_type &gt;)</td></tr>
+<tr class="memdesc:a4f150c1c61a40d7abd2b26471c510be2"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
+<tr class="memitem:aa3404037d1e3cdbf57dc315360b3ab88" id="r_aa3404037d1e3cdbf57dc315360b3ab88"><td class="memItemLeft"><a class="el" href="classsparse__multiset.html">sparse_multiset</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aa3404037d1e3cdbf57dc315360b3ab88">operator=</a> (<a class="el" href="classsparse__multiset.html">sparse_multiset</a> &amp;&amp;other) noexcept(<a class="el" href="group___type_special_member_function_checks.html#gad26f59ba1b8a873f9d8374f72a4002c4">is_nothrow_move_assignable_v</a>&lt; base_type &gt;)</td></tr>
+<tr class="memdesc:aa3404037d1e3cdbf57dc315360b3ab88"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动赋值运算符  <br /></td></tr>
+<tr class="memitem:ae4de83d4529509cc0d72fdcea522254c" id="r_ae4de83d4529509cc0d72fdcea522254c"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ae4de83d4529509cc0d72fdcea522254c template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae4de83d4529509cc0d72fdcea522254c">sparse_multiset</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:ae4de83d4529509cc0d72fdcea522254c"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围构造函数  <br /></td></tr>
+<tr class="memitem:ab1a279e3945578a25261196e11faf31b" id="r_ab1a279e3945578a25261196e11faf31b"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:ab1a279e3945578a25261196e11faf31b template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab1a279e3945578a25261196e11faf31b">sparse_multiset</a> (Iterator first, Iterator last, const <a class="el" href="#ab5142cead507f4419946c924651bd2cf">key_compare</a> &amp;comp)</td></tr>
+<tr class="memdesc:ab1a279e3945578a25261196e11faf31b"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围构造函数，指定比较函数  <br /></td></tr>
+<tr class="memitem:ac71d2dbbbd25f3cab57a8ac6466a2d7b" id="r_ac71d2dbbbd25f3cab57a8ac6466a2d7b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac71d2dbbbd25f3cab57a8ac6466a2d7b">sparse_multiset</a> (std::initializer_list&lt; <a class="el" href="#a02195de1d384a1964ac09dce452a4733">value_type</a> &gt; ilist)</td></tr>
+<tr class="memdesc:ac71d2dbbbd25f3cab57a8ac6466a2d7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表构造函数  <br /></td></tr>
+<tr class="memitem:af1677cf8f6a37dca935d4e016a20fcd5" id="r_af1677cf8f6a37dca935d4e016a20fcd5"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af1677cf8f6a37dca935d4e016a20fcd5">sparse_multiset</a> (std::initializer_list&lt; <a class="el" href="#a02195de1d384a1964ac09dce452a4733">value_type</a> &gt; ilist, const <a class="el" href="#ab5142cead507f4419946c924651bd2cf">key_compare</a> &amp;comp)</td></tr>
+<tr class="memdesc:af1677cf8f6a37dca935d4e016a20fcd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表构造函数，指定比较函数  <br /></td></tr>
+<tr class="memitem:a394a87c12bf190757077aa641f927d0b" id="r_a394a87c12bf190757077aa641f927d0b"><td class="memItemLeft"><a class="el" href="classsparse__multiset.html">sparse_multiset</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a394a87c12bf190757077aa641f927d0b">operator=</a> (std::initializer_list&lt; <a class="el" href="#a02195de1d384a1964ac09dce452a4733">value_type</a> &gt; ilist)</td></tr>
+<tr class="memdesc:a394a87c12bf190757077aa641f927d0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表赋值运算符  <br /></td></tr>
+<tr class="memitem:aa79329e7e674a9b7507d97d1c3df87b3" id="r_aa79329e7e674a9b7507d97d1c3df87b3"><td class="memItemLeft"><a id="aa79329e7e674a9b7507d97d1c3df87b3" name="aa79329e7e674a9b7507d97d1c3df87b3"></a>
+&#160;</td><td class="memItemRight"><b>~sparse_multiset</b> ()=default</td></tr>
+<tr class="memdesc:aa79329e7e674a9b7507d97d1c3df87b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数 <br /></td></tr>
+<tr class="memitem:a37cc875e14f3f88db137e79cedca82bd" id="r_a37cc875e14f3f88db137e79cedca82bd"><td class="memItemLeft"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a37cc875e14f3f88db137e79cedca82bd">begin</a> () noexcept</td></tr>
+<tr class="memdesc:a37cc875e14f3f88db137e79cedca82bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取起始迭代器  <br /></td></tr>
+<tr class="memitem:ad3b310b75457fecd29c2c25d82159649" id="r_ad3b310b75457fecd29c2c25d82159649"><td class="memItemLeft"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad3b310b75457fecd29c2c25d82159649">end</a> () noexcept</td></tr>
+<tr class="memdesc:ad3b310b75457fecd29c2c25d82159649"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取结束迭代器  <br /></td></tr>
+<tr class="memitem:ad9de1bf118c5a1eb16cc006d3885fc68" id="r_ad9de1bf118c5a1eb16cc006d3885fc68"><td class="memItemLeft"><a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad9de1bf118c5a1eb16cc006d3885fc68">begin</a> () const noexcept</td></tr>
+<tr class="memdesc:ad9de1bf118c5a1eb16cc006d3885fc68"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量起始迭代器  <br /></td></tr>
+<tr class="memitem:a2e52c90e9d29c49a6075ffaeed679ecd" id="r_a2e52c90e9d29c49a6075ffaeed679ecd"><td class="memItemLeft"><a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a2e52c90e9d29c49a6075ffaeed679ecd">end</a> () const noexcept</td></tr>
+<tr class="memdesc:a2e52c90e9d29c49a6075ffaeed679ecd"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量结束迭代器  <br /></td></tr>
+<tr class="memitem:a47212b67602b62474876b1ce9735f0ee" id="r_a47212b67602b62474876b1ce9735f0ee"><td class="memItemLeft"><a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a47212b67602b62474876b1ce9735f0ee">cbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:a47212b67602b62474876b1ce9735f0ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量起始迭代器  <br /></td></tr>
+<tr class="memitem:a760638ff1b287525904ad3a3d72c3f35" id="r_a760638ff1b287525904ad3a3d72c3f35"><td class="memItemLeft"><a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a760638ff1b287525904ad3a3d72c3f35">cend</a> () const noexcept</td></tr>
+<tr class="memdesc:a760638ff1b287525904ad3a3d72c3f35"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量结束迭代器  <br /></td></tr>
+<tr class="memitem:a73800393b34818c0a7098d9df6893c05" id="r_a73800393b34818c0a7098d9df6893c05"><td class="memItemLeft"><a class="el" href="#a5741c492e4ac82e3a981a990c2c350cb">reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a73800393b34818c0a7098d9df6893c05">rbegin</a> () noexcept</td></tr>
+<tr class="memdesc:a73800393b34818c0a7098d9df6893c05"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取反向起始迭代器  <br /></td></tr>
+<tr class="memitem:a71ef475718729d610fc7887da2cfd3d8" id="r_a71ef475718729d610fc7887da2cfd3d8"><td class="memItemLeft"><a class="el" href="#a5741c492e4ac82e3a981a990c2c350cb">reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a71ef475718729d610fc7887da2cfd3d8">rend</a> () noexcept</td></tr>
+<tr class="memdesc:a71ef475718729d610fc7887da2cfd3d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取反向结束迭代器  <br /></td></tr>
+<tr class="memitem:a9ebf344194244a3dfe7915ad9cd48d64" id="r_a9ebf344194244a3dfe7915ad9cd48d64"><td class="memItemLeft"><a class="el" href="#aa18b20a70ffd87ca64986af50956b9c1">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9ebf344194244a3dfe7915ad9cd48d64">rbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:a9ebf344194244a3dfe7915ad9cd48d64"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量反向起始迭代器  <br /></td></tr>
+<tr class="memitem:a884c04ef4333280c221b208e0b16850b" id="r_a884c04ef4333280c221b208e0b16850b"><td class="memItemLeft"><a class="el" href="#aa18b20a70ffd87ca64986af50956b9c1">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a884c04ef4333280c221b208e0b16850b">rend</a> () const noexcept</td></tr>
+<tr class="memdesc:a884c04ef4333280c221b208e0b16850b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量反向结束迭代器  <br /></td></tr>
+<tr class="memitem:a885f1e537f28d273024909f2a61bd943" id="r_a885f1e537f28d273024909f2a61bd943"><td class="memItemLeft"><a class="el" href="#aa18b20a70ffd87ca64986af50956b9c1">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a885f1e537f28d273024909f2a61bd943">crbegin</a> () const noexcept</td></tr>
+<tr class="memdesc:a885f1e537f28d273024909f2a61bd943"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量反向起始迭代器  <br /></td></tr>
+<tr class="memitem:ad6a0f3aef85f4f3841ea92f521114441" id="r_ad6a0f3aef85f4f3841ea92f521114441"><td class="memItemLeft"><a class="el" href="#aa18b20a70ffd87ca64986af50956b9c1">const_reverse_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad6a0f3aef85f4f3841ea92f521114441">crend</a> () const noexcept</td></tr>
+<tr class="memdesc:ad6a0f3aef85f4f3841ea92f521114441"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取常量反向结束迭代器  <br /></td></tr>
+<tr class="memitem:a33a112d19bdc33e7566f0b39aa628eb3" id="r_a33a112d19bdc33e7566f0b39aa628eb3"><td class="memItemLeft"><a class="el" href="#aa051ff51698bd90ad62d65a49afa7fb1">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a33a112d19bdc33e7566f0b39aa628eb3">size</a> () const noexcept</td></tr>
+<tr class="memdesc:a33a112d19bdc33e7566f0b39aa628eb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取元素数量  <br /></td></tr>
+<tr class="memitem:abbcc922be86dd907ee998ba129312a88" id="r_abbcc922be86dd907ee998ba129312a88"><td class="memItemLeft"><a class="el" href="#aa051ff51698bd90ad62d65a49afa7fb1">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#abbcc922be86dd907ee998ba129312a88">max_size</a> () const noexcept</td></tr>
+<tr class="memdesc:abbcc922be86dd907ee998ba129312a88"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最大可能大小  <br /></td></tr>
+<tr class="memitem:a17d881b08988a75466435a2896abbef3" id="r_a17d881b08988a75466435a2896abbef3"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a17d881b08988a75466435a2896abbef3">empty</a> () const noexcept</td></tr>
+<tr class="memdesc:a17d881b08988a75466435a2896abbef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否为空  <br /></td></tr>
+<tr class="memitem:a4f51b92e9f0640896c80285164290152" id="r_a4f51b92e9f0640896c80285164290152"><td class="memItemLeft"><a class="el" href="#ab5142cead507f4419946c924651bd2cf">key_compare</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4f51b92e9f0640896c80285164290152">key_comp</a> () const noexcept</td></tr>
+<tr class="memdesc:a4f51b92e9f0640896c80285164290152"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取键比较函数对象  <br /></td></tr>
+<tr class="memitem:a483cbc7f4b1bbc74d68c0ce91186d998" id="r_a483cbc7f4b1bbc74d68c0ce91186d998"><td class="memItemLeft"><a class="el" href="#a595ddadf458c6d7eb2df743824bf7d5a">value_compare</a>&#160;</td><td class="memItemRight"><a class="el" href="#a483cbc7f4b1bbc74d68c0ce91186d998">value_comp</a> () const noexcept</td></tr>
+<tr class="memdesc:a483cbc7f4b1bbc74d68c0ce91186d998"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取值比较函数对象  <br /></td></tr>
+<tr class="memitem:a7ee5f37740ea7002f839ef90f682cb98" id="r_a7ee5f37740ea7002f839ef90f682cb98"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a7ee5f37740ea7002f839ef90f682cb98 template"><td class="memItemLeft"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7ee5f37740ea7002f839ef90f682cb98">emplace</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:a7ee5f37740ea7002f839ef90f682cb98"><td class="mdescLeft">&#160;</td><td class="mdescRight">在sparse_multiset中就地构造元素  <br /></td></tr>
+<tr class="memitem:a79f112f3c0075dd129aaeeb27425ee3e" id="r_a79f112f3c0075dd129aaeeb27425ee3e"><td class="memItemLeft"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a79f112f3c0075dd129aaeeb27425ee3e">insert</a> (const <a class="el" href="#a02195de1d384a1964ac09dce452a4733">value_type</a> &amp;value)</td></tr>
+<tr class="memdesc:a79f112f3c0075dd129aaeeb27425ee3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝插入元素  <br /></td></tr>
+<tr class="memitem:a34518d457d7bf066c6b1ac3a309ac8ff" id="r_a34518d457d7bf066c6b1ac3a309ac8ff"><td class="memItemLeft"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a34518d457d7bf066c6b1ac3a309ac8ff">insert</a> (<a class="el" href="#a02195de1d384a1964ac09dce452a4733">value_type</a> &amp;&amp;value)</td></tr>
+<tr class="memdesc:a34518d457d7bf066c6b1ac3a309ac8ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动插入元素  <br /></td></tr>
+<tr class="memitem:af0f01d27fe4606cd35126434a0f4234f" id="r_af0f01d27fe4606cd35126434a0f4234f"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:af0f01d27fe4606cd35126434a0f4234f template"><td class="memItemLeft"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#af0f01d27fe4606cd35126434a0f4234f">emplace_hint</a> (<a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> position, Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:af0f01d27fe4606cd35126434a0f4234f"><td class="mdescLeft">&#160;</td><td class="mdescRight">在提示位置附近就地构造元素  <br /></td></tr>
+<tr class="memitem:af65a57d10867df2ba84b70c77cca23b7" id="r_af65a57d10867df2ba84b70c77cca23b7"><td class="memItemLeft"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#af65a57d10867df2ba84b70c77cca23b7">insert</a> (<a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> position, const <a class="el" href="#a02195de1d384a1964ac09dce452a4733">value_type</a> &amp;value)</td></tr>
+<tr class="memdesc:af65a57d10867df2ba84b70c77cca23b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">在提示位置附近拷贝插入元素  <br /></td></tr>
+<tr class="memitem:a6607d81d08eec00624bc513915dcae04" id="r_a6607d81d08eec00624bc513915dcae04"><td class="memItemLeft"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a6607d81d08eec00624bc513915dcae04">insert</a> (<a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> position, <a class="el" href="#a02195de1d384a1964ac09dce452a4733">value_type</a> &amp;&amp;value)</td></tr>
+<tr class="memdesc:a6607d81d08eec00624bc513915dcae04"><td class="mdescLeft">&#160;</td><td class="mdescRight">在提示位置附近移动插入元素  <br /></td></tr>
+<tr class="memitem:a4ae55a3bb66b911bf329a158e8913b9a" id="r_a4ae55a3bb66b911bf329a158e8913b9a"><td class="memTemplParams" colspan="2">template&lt;typename Iterator&gt; </td></tr>
+<tr class="memitem:a4ae55a3bb66b911bf329a158e8913b9a template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a4ae55a3bb66b911bf329a158e8913b9a">insert</a> (Iterator first, Iterator last)</td></tr>
+<tr class="memdesc:a4ae55a3bb66b911bf329a158e8913b9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">范围插入元素  <br /></td></tr>
+<tr class="memitem:a01f463d21b6dc0b045d7d6dc4794ef92" id="r_a01f463d21b6dc0b045d7d6dc4794ef92"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a01f463d21b6dc0b045d7d6dc4794ef92">erase</a> (<a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> position) noexcept(noexcept(data_.erase(position)))</td></tr>
+<tr class="memdesc:a01f463d21b6dc0b045d7d6dc4794ef92"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除指定位置的元素  <br /></td></tr>
+<tr class="memitem:a7b2fbc0791488e131f9145ae4595af38" id="r_a7b2fbc0791488e131f9145ae4595af38"><td class="memItemLeft"><a class="el" href="#aa051ff51698bd90ad62d65a49afa7fb1">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a7b2fbc0791488e131f9145ae4595af38">erase</a> (const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;key) noexcept(noexcept(data_.erase(key)))</td></tr>
+<tr class="memdesc:a7b2fbc0791488e131f9145ae4595af38"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除所有具有指定键的元素  <br /></td></tr>
+<tr class="memitem:a55a64aa7ab28ae170d22f34d88771ee9" id="r_a55a64aa7ab28ae170d22f34d88771ee9"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a55a64aa7ab28ae170d22f34d88771ee9">erase</a> (<a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> first, <a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> last) noexcept(noexcept(data_.erase(first, last)))</td></tr>
+<tr class="memdesc:a55a64aa7ab28ae170d22f34d88771ee9"><td class="mdescLeft">&#160;</td><td class="mdescRight">删除指定范围内的元素  <br /></td></tr>
+<tr class="memitem:afa7b5af4245e645feb3d60e9b1e8301b" id="r_afa7b5af4245e645feb3d60e9b1e8301b"><td class="memItemLeft"><a id="afa7b5af4245e645feb3d60e9b1e8301b" name="afa7b5af4245e645feb3d60e9b1e8301b"></a>
+void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept(noexcept(data_.clear()))</td></tr>
+<tr class="memdesc:afa7b5af4245e645feb3d60e9b1e8301b"><td class="mdescLeft">&#160;</td><td class="mdescRight">清空sparse_multiset <br /></td></tr>
+<tr class="memitem:a536776c11b656c65ea5ca196e1875c6e" id="r_a536776c11b656c65ea5ca196e1875c6e"><td class="memItemLeft"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a536776c11b656c65ea5ca196e1875c6e">find</a> (const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;key)</td></tr>
+<tr class="memdesc:a536776c11b656c65ea5ca196e1875c6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找具有指定键的元素  <br /></td></tr>
+<tr class="memitem:a89255099de9014f5197b749e7cf47c83" id="r_a89255099de9014f5197b749e7cf47c83"><td class="memItemLeft"><a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a89255099de9014f5197b749e7cf47c83">find</a> (const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:a89255099de9014f5197b749e7cf47c83"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找具有指定键的元素（常量版本）  <br /></td></tr>
+<tr class="memitem:a60a9a517a00d02fc7d3457c5ddf13c9a" id="r_a60a9a517a00d02fc7d3457c5ddf13c9a"><td class="memItemLeft"><a class="el" href="#aa051ff51698bd90ad62d65a49afa7fb1">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a60a9a517a00d02fc7d3457c5ddf13c9a">count</a> (const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:a60a9a517a00d02fc7d3457c5ddf13c9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">统计具有指定键的元素数量  <br /></td></tr>
+<tr class="memitem:a90e966d2fd80f243c2b07fa63bbec195" id="r_a90e966d2fd80f243c2b07fa63bbec195"><td class="memItemLeft"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a90e966d2fd80f243c2b07fa63bbec195">lower_bound</a> (const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;key)</td></tr>
+<tr class="memdesc:a90e966d2fd80f243c2b07fa63bbec195"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取第一个不小于指定键的元素位置  <br /></td></tr>
+<tr class="memitem:a9cccf7ac8fd5d850df597adfa3135632" id="r_a9cccf7ac8fd5d850df597adfa3135632"><td class="memItemLeft"><a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9cccf7ac8fd5d850df597adfa3135632">lower_bound</a> (const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:a9cccf7ac8fd5d850df597adfa3135632"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取第一个不小于指定键的常量元素位置  <br /></td></tr>
+<tr class="memitem:aa950fb2b9424b7438c2748b4032f5496" id="r_aa950fb2b9424b7438c2748b4032f5496"><td class="memItemLeft"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa950fb2b9424b7438c2748b4032f5496">upper_bound</a> (const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;key)</td></tr>
+<tr class="memdesc:aa950fb2b9424b7438c2748b4032f5496"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取第一个大于指定键的元素位置  <br /></td></tr>
+<tr class="memitem:a5d65161e696e66ac1af74bc9f68dee82" id="r_a5d65161e696e66ac1af74bc9f68dee82"><td class="memItemLeft"><a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5d65161e696e66ac1af74bc9f68dee82">upper_bound</a> (const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:a5d65161e696e66ac1af74bc9f68dee82"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取第一个大于指定键的常量元素位置  <br /></td></tr>
+<tr class="memitem:a6f36309514effcad47a6b7e1d356a599" id="r_a6f36309514effcad47a6b7e1d356a599"><td class="memItemLeft"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a>, <a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a6f36309514effcad47a6b7e1d356a599">equal_range</a> (const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;key)</td></tr>
+<tr class="memdesc:a6f36309514effcad47a6b7e1d356a599"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取等于指定键的元素范围  <br /></td></tr>
+<tr class="memitem:a024aacea618ffccbd67ed0791684a79f" id="r_a024aacea618ffccbd67ed0791684a79f"><td class="memItemLeft"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a>, <a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a024aacea618ffccbd67ed0791684a79f">equal_range</a> (const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;key) const</td></tr>
+<tr class="memdesc:a024aacea618ffccbd67ed0791684a79f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取等于指定键的常量元素范围  <br /></td></tr>
+<tr class="memitem:aa9ba0329e96cac6b08efe7de8ec04895" id="r_aa9ba0329e96cac6b08efe7de8ec04895"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aa9ba0329e96cac6b08efe7de8ec04895">reserve</a> (<a class="el" href="#aa051ff51698bd90ad62d65a49afa7fb1">size_type</a> n)</td></tr>
+<tr class="memdesc:aa9ba0329e96cac6b08efe7de8ec04895"><td class="mdescLeft">&#160;</td><td class="mdescRight">预留容量  <br /></td></tr>
+<tr class="memitem:ac4fe860465907cd3745972e91fa84712" id="r_ac4fe860465907cd3745972e91fa84712"><td class="memItemLeft"><a class="el" href="#aa051ff51698bd90ad62d65a49afa7fb1">size_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac4fe860465907cd3745972e91fa84712">capacity</a> () const noexcept</td></tr>
+<tr class="memdesc:ac4fe860465907cd3745972e91fa84712"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前容量  <br /></td></tr>
+<tr class="memitem:ae1edd0db94be667924fb8935b238fa4a" id="r_ae1edd0db94be667924fb8935b238fa4a"><td class="memItemLeft"><a id="ae1edd0db94be667924fb8935b238fa4a" name="ae1edd0db94be667924fb8935b238fa4a"></a>
+void&#160;</td><td class="memItemRight"><b>shrink_to_fit</b> ()</td></tr>
+<tr class="memdesc:ae1edd0db94be667924fb8935b238fa4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">收缩容量以适应实际大小 <br /></td></tr>
+<tr class="memitem:a62bfc48b8c09e588a40428df990dc8db" id="r_a62bfc48b8c09e588a40428df990dc8db"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a62bfc48b8c09e588a40428df990dc8db">swap</a> (<a class="el" href="classsparse__multiset.html">sparse_multiset</a> &amp;other) noexcept(<a class="el" href="group___swap_utility.html#gaf740a9b650d7a3063e9414c3c50ffdb5">is_nothrow_swappable_v</a>&lt; base_type &gt;)</td></tr>
+<tr class="memdesc:a62bfc48b8c09e588a40428df990dc8db"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个sparse_multiset的内容  <br /></td></tr>
+<tr class="memitem:a3d05e07daf4d5a50629c7dd4738440dd" id="r_a3d05e07daf4d5a50629c7dd4738440dd"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a3d05e07daf4d5a50629c7dd4738440dd">equal_to</a> (const <a class="el" href="classsparse__multiset.html">sparse_multiset</a> &amp;rhs) const noexcept(noexcept(data_==rhs.data_))</td></tr>
+<tr class="memdesc:a3d05e07daf4d5a50629c7dd4738440dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">相等比较操作符  <br /></td></tr>
+<tr class="memitem:a88c04bc8dd5762063bce660f69529507" id="r_a88c04bc8dd5762063bce660f69529507"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a88c04bc8dd5762063bce660f69529507">less_than</a> (const <a class="el" href="classsparse__multiset.html">sparse_multiset</a> &amp;rhs) const noexcept(noexcept(data_&lt; rhs.data_))</td></tr>
+<tr class="memdesc:a88c04bc8dd5762063bce660f69529507"><td class="mdescLeft">&#160;</td><td class="mdescRight">小于比较操作符  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt;<br />
+class sparse_multiset&lt; Key, Compare, Alloc &gt;</div><p>稀疏多重集合容器 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Key</td><td>键类型 </td></tr>
+    <tr><td class="paramname">Compare</td><td>键比较函数类型，默认为less&lt;Key&gt; </td></tr>
+    <tr><td class="paramname">Alloc</td><td>分配器类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>sparse_multiset是一种关联容器，存储键值，允许重复键。 元素按照键的顺序自动排序，排序标准由Compare函数对象指定。 底层使用有序平坦数组实现，查找O(log n)，迭代缓存友好。</p>
+<dl class="section note"><dt>注解</dt><dd>适用于查找频繁、修改较少且需要有序遍历的场景。 </dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>插入和删除操作为O(n)，可能使所有迭代器失效。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00038">38</a> 行定义.</p>
+</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="a5affbaba336bb94bfdd2c0b06e2c61d2" name="a5affbaba336bb94bfdd2c0b06e2c61d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5affbaba336bb94bfdd2c0b06e2c61d2">&#9670;&#160;</a></span>sparse_multiset() <span class="overload">[1/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::sparse_multiset </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>默认构造函数 </p>
+<p>构造一个空sparse_multiset，使用默认的比较函数。 </p>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00074">74</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sparse__multiset_8hpp_source.html#l00460">equal_to()</a>, <a class="el" href="sparse__multiset_8hpp_source.html#l00469">less_than()</a>, <a class="el" href="sparse__multiset_8hpp_source.html#l00096">operator=()</a>, <a class="el" href="sparse__multiset_8hpp_source.html#l00113">operator=()</a>, <a class="el" href="sparse__multiset_8hpp_source.html#l00163">operator=()</a>, <a class="el" href="sparse__multiset_8hpp_source.html#l00088">sparse_multiset()</a>, <a class="el" href="sparse__multiset_8hpp_source.html#l00105">sparse_multiset()</a>, <a class="el" href="sparse__multiset_8hpp_source.html#l00147">sparse_multiset()</a>, <a class="el" href="sparse__multiset_8hpp_source.html#l00155">sparse_multiset()</a> , 以及 <a class="el" href="sparse__multiset_8hpp_source.html#l00453">swap()</a>.</p>
+
+</div>
+</div>
+<a id="a0e7f13470aac5fe12d01868e0c30fbce" name="a0e7f13470aac5fe12d01868e0c30fbce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e7f13470aac5fe12d01868e0c30fbce">&#9670;&#160;</a></span>sparse_multiset() <span class="overload">[2/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::sparse_multiset </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#ab5142cead507f4419946c924651bd2cf">key_compare</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>comp</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构造函数，指定比较函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00081">81</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0aa895d0b648bc3d029c384df41e061d" name="a0aa895d0b648bc3d029c384df41e061d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0aa895d0b648bc3d029c384df41e061d">&#9670;&#160;</a></span>sparse_multiset() <span class="overload">[3/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::sparse_multiset </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源sparse_multiset </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00088">88</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="sparse__multiset_8hpp_source.html#l00074">sparse_multiset()</a>.</p>
+
+</div>
+</div>
+<a id="a4f150c1c61a40d7abd2b26471c510be2" name="a4f150c1c61a40d7abd2b26471c510be2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f150c1c61a40d7abd2b26471c510be2">&#9670;&#160;</a></span>sparse_multiset() <span class="overload">[4/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::sparse_multiset </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源sparse_multiset </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00105">105</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02862">is_nothrow_move_constructible_v</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="sparse__multiset_8hpp_source.html#l00074">sparse_multiset()</a>.</p>
+
+</div>
+</div>
+<a id="ae4de83d4529509cc0d72fdcea522254c" name="ae4de83d4529509cc0d72fdcea522254c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4de83d4529509cc0d72fdcea522254c">&#9670;&#160;</a></span>sparse_multiset() <span class="overload">[5/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::sparse_multiset </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围构造函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00125">125</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab1a279e3945578a25261196e11faf31b" name="ab1a279e3945578a25261196e11faf31b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1a279e3945578a25261196e11faf31b">&#9670;&#160;</a></span>sparse_multiset() <span class="overload">[6/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::sparse_multiset </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#ab5142cead507f4419946c924651bd2cf">key_compare</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围构造函数，指定比较函数 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00138">138</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ac71d2dbbbd25f3cab57a8ac6466a2d7b" name="ac71d2dbbbd25f3cab57a8ac6466a2d7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac71d2dbbbd25f3cab57a8ac6466a2d7b">&#9670;&#160;</a></span>sparse_multiset() <span class="overload">[7/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::sparse_multiset </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="#a02195de1d384a1964ac09dce452a4733">value_type</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化列表构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00147">147</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="sparse__multiset_8hpp_source.html#l00178">begin()</a>, <a class="el" href="sparse__multiset_8hpp_source.html#l00184">end()</a> , 以及 <a class="el" href="sparse__multiset_8hpp_source.html#l00074">sparse_multiset()</a>.</p>
+
+</div>
+</div>
+<a id="af1677cf8f6a37dca935d4e016a20fcd5" name="af1677cf8f6a37dca935d4e016a20fcd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1677cf8f6a37dca935d4e016a20fcd5">&#9670;&#160;</a></span>sparse_multiset() <span class="overload">[8/8]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::sparse_multiset </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="#a02195de1d384a1964ac09dce452a4733">value_type</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#ab5142cead507f4419946c924651bd2cf">key_compare</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>comp</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化列表构造函数，指定比较函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
+    <tr><td class="paramname">comp</td><td>比较函数对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00155">155</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="sparse__multiset_8hpp_source.html#l00178">begin()</a>, <a class="el" href="sparse__multiset_8hpp_source.html#l00184">end()</a> , 以及 <a class="el" href="sparse__multiset_8hpp_source.html#l00074">sparse_multiset()</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="ad9de1bf118c5a1eb16cc006d3885fc68" name="ad9de1bf118c5a1eb16cc006d3885fc68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9de1bf118c5a1eb16cc006d3885fc68">&#9670;&#160;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最小元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00190">190</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a37cc875e14f3f88db137e79cedca82bd" name="a37cc875e14f3f88db137e79cedca82bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37cc875e14f3f88db137e79cedca82bd">&#9670;&#160;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::begin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最小元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00178">178</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sparse__multiset_8hpp_source.html#l00147">sparse_multiset()</a> , 以及 <a class="el" href="sparse__multiset_8hpp_source.html#l00155">sparse_multiset()</a>.</p>
+
+</div>
+</div>
+<a id="ac4fe860465907cd3745972e91fa84712" name="ac4fe860465907cd3745972e91fa84712"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4fe860465907cd3745972e91fa84712">&#9670;&#160;</a></span>capacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa051ff51698bd90ad62d65a49afa7fb1">size_type</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::capacity </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前容量 </p>
+<dl class="section return"><dt>返回</dt><dd>当前分配的容量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00442">442</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a47212b67602b62474876b1ce9735f0ee" name="a47212b67602b62474876b1ce9735f0ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47212b67602b62474876b1ce9735f0ee">&#9670;&#160;</a></span>cbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::cbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最小元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00202">202</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a760638ff1b287525904ad3a3d72c3f35" name="a760638ff1b287525904ad3a3d72c3f35"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a760638ff1b287525904ad3a3d72c3f35">&#9670;&#160;</a></span>cend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::cend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00208">208</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a60a9a517a00d02fc7d3457c5ddf13c9a" name="a60a9a517a00d02fc7d3457c5ddf13c9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60a9a517a00d02fc7d3457c5ddf13c9a">&#9670;&#160;</a></span>count()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa051ff51698bd90ad62d65a49afa7fb1">size_type</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::count </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>统计具有指定键的元素数量 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要统计的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>匹配的元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00386">386</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a885f1e537f28d273024909f2a61bd943" name="a885f1e537f28d273024909f2a61bd943"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a885f1e537f28d273024909f2a61bd943">&#9670;&#160;</a></span>crbegin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa18b20a70ffd87ca64986af50956b9c1">const_reverse_iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::crbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量反向起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最大元素的常量反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00238">238</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad6a0f3aef85f4f3841ea92f521114441" name="ad6a0f3aef85f4f3841ea92f521114441"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6a0f3aef85f4f3841ea92f521114441">&#9670;&#160;</a></span>crend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa18b20a70ffd87ca64986af50956b9c1">const_reverse_iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::crend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量反向结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最小元素之前位置的常量反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00244">244</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7ee5f37740ea7002f839ef90f682cb98" name="a7ee5f37740ea7002f839ef90f682cb98"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ee5f37740ea7002f839ef90f682cb98">&#9670;&#160;</a></span>emplace()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::emplace </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在sparse_multiset中就地构造元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>构造参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">args</td><td>构造参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00283">283</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03028">forward()</a>.</p>
+
+</div>
+</div>
+<a id="af0f01d27fe4606cd35126434a0f4234f" name="af0f01d27fe4606cd35126434a0f4234f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0f01d27fe4606cd35126434a0f4234f">&#9670;&#160;</a></span>emplace_hint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::emplace_hint </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Args &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>args</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在提示位置附近就地构造元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Args</td><td>构造参数类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置提示 </td></tr>
+    <tr><td class="paramname">args</td><td>构造参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00309">309</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03028">forward()</a>.</p>
+
+</div>
+</div>
+<a id="a17d881b08988a75466435a2896abbef3" name="a17d881b08988a75466435a2896abbef3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17d881b08988a75466435a2896abbef3">&#9670;&#160;</a></span>empty()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::empty </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否为空 </p>
+<dl class="section return"><dt>返回</dt><dd>是否为空 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00262">262</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2e52c90e9d29c49a6075ffaeed679ecd" name="a2e52c90e9d29c49a6075ffaeed679ecd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e52c90e9d29c49a6075ffaeed679ecd">&#9670;&#160;</a></span>end() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00196">196</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad3b310b75457fecd29c2c25d82159649" name="ad3b310b75457fecd29c2c25d82159649"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3b310b75457fecd29c2c25d82159649">&#9670;&#160;</a></span>end() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::end </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最后一个元素之后位置的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00184">184</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sparse__multiset_8hpp_source.html#l00147">sparse_multiset()</a> , 以及 <a class="el" href="sparse__multiset_8hpp_source.html#l00155">sparse_multiset()</a>.</p>
+
+</div>
+</div>
+<a id="a6f36309514effcad47a6b7e1d356a599" name="a6f36309514effcad47a6b7e1d356a599"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f36309514effcad47a6b7e1d356a599">&#9670;&#160;</a></span>equal_range() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a>, <a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> &gt; <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::equal_range </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取等于指定键的元素范围 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含lower_bound和upper_bound的pair </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00421">421</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a024aacea618ffccbd67ed0791684a79f" name="a024aacea618ffccbd67ed0791684a79f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a024aacea618ffccbd67ed0791684a79f">&#9670;&#160;</a></span>equal_range() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structpair.html">pair</a>&lt; <a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a>, <a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a> &gt; <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::equal_range </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取等于指定键的常量元素范围 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含lower_bound和upper_bound的pair </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00428">428</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a3d05e07daf4d5a50629c7dd4738440dd" name="a3d05e07daf4d5a50629c7dd4738440dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d05e07daf4d5a50629c7dd4738440dd">&#9670;&#160;</a></span>equal_to()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::equal_to </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>相等比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧sparse_multiset </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>如果两个sparse_multiset大小相等且对应元素相等返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00460">460</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="sparse__multiset_8hpp_source.html#l00074">sparse_multiset()</a>.</p>
+
+</div>
+</div>
+<a id="a7b2fbc0791488e131f9145ae4595af38" name="a7b2fbc0791488e131f9145ae4595af38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b2fbc0791488e131f9145ae4595af38">&#9670;&#160;</a></span>erase() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa051ff51698bd90ad62d65a49afa7fb1">size_type</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除所有具有指定键的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要删除的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>删除的元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00353">353</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a55a64aa7ab28ae170d22f34d88771ee9" name="a55a64aa7ab28ae170d22f34d88771ee9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55a64aa7ab28ae170d22f34d88771ee9">&#9670;&#160;</a></span>erase() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a></td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a></td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除指定范围内的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00360">360</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a01f463d21b6dc0b045d7d6dc4794ef92" name="a01f463d21b6dc0b045d7d6dc4794ef92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01f463d21b6dc0b045d7d6dc4794ef92">&#9670;&#160;</a></span>erase() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::erase </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>删除指定位置的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>要删除的位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00346">346</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a536776c11b656c65ea5ca196e1875c6e" name="a536776c11b656c65ea5ca196e1875c6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a536776c11b656c65ea5ca196e1875c6e">&#9670;&#160;</a></span>find() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::find </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找具有指定键的元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要查找的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个匹配元素的迭代器，未找到则返回end() </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00372">372</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a89255099de9014f5197b749e7cf47c83" name="a89255099de9014f5197b749e7cf47c83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89255099de9014f5197b749e7cf47c83">&#9670;&#160;</a></span>find() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::find </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找具有指定键的元素（常量版本） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>要查找的键 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个匹配元素的常量迭代器，未找到则返回cend() </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00379">379</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a79f112f3c0075dd129aaeeb27425ee3e" name="a79f112f3c0075dd129aaeeb27425ee3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79f112f3c0075dd129aaeeb27425ee3e">&#9670;&#160;</a></span>insert() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a02195de1d384a1964ac09dce452a4733">value_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00292">292</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="sparse__multiset_8hpp_source.html#l00163">operator=()</a>.</p>
+
+</div>
+</div>
+<a id="a4ae55a3bb66b911bf329a158e8913b9a" name="a4ae55a3bb66b911bf329a158e8913b9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ae55a3bb66b911bf329a158e8913b9a">&#9670;&#160;</a></span>insert() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;typename Iterator&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Iterator</td>          <td class="paramname"><span class="paramname"><em>last</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>范围插入元素 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Iterator</td><td>迭代器类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>起始迭代器 </td></tr>
+    <tr><td class="paramname">last</td><td>结束迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00338">338</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af65a57d10867df2ba84b70c77cca23b7" name="af65a57d10867df2ba84b70c77cca23b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af65a57d10867df2ba84b70c77cca23b7">&#9670;&#160;</a></span>insert() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#a02195de1d384a1964ac09dce452a4733">value_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在提示位置附近拷贝插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置提示 </td></tr>
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00319">319</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a6607d81d08eec00624bc513915dcae04" name="a6607d81d08eec00624bc513915dcae04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6607d81d08eec00624bc513915dcae04">&#9670;&#160;</a></span>insert() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a></td>          <td class="paramname"><span class="paramname"><em>position</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a02195de1d384a1964ac09dce452a4733">value_type</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在提示位置附近移动插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>插入位置提示 </td></tr>
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00327">327</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+
+</div>
+</div>
+<a id="a34518d457d7bf066c6b1ac3a309ac8ff" name="a34518d457d7bf066c6b1ac3a309ac8ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34518d457d7bf066c6b1ac3a309ac8ff">&#9670;&#160;</a></span>insert() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::insert </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a02195de1d384a1964ac09dce452a4733">value_type</a> &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动插入元素 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>要插入的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向插入元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00299">299</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+
+</div>
+</div>
+<a id="a4f51b92e9f0640896c80285164290152" name="a4f51b92e9f0640896c80285164290152"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f51b92e9f0640896c80285164290152">&#9670;&#160;</a></span>key_comp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ab5142cead507f4419946c924651bd2cf">key_compare</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::key_comp </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取键比较函数对象 </p>
+<dl class="section return"><dt>返回</dt><dd>键比较函数对象的副本 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00268">268</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a88c04bc8dd5762063bce660f69529507" name="a88c04bc8dd5762063bce660f69529507"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88c04bc8dd5762063bce660f69529507">&#9670;&#160;</a></span>less_than()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::less_than </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>小于比较操作符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">rhs</td><td>右侧sparse_multiset </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>按字典序比较结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00469">469</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="sparse__multiset_8hpp_source.html#l00074">sparse_multiset()</a>.</p>
+
+</div>
+</div>
+<a id="a90e966d2fd80f243c2b07fa63bbec195" name="a90e966d2fd80f243c2b07fa63bbec195"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90e966d2fd80f243c2b07fa63bbec195">&#9670;&#160;</a></span>lower_bound() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::lower_bound </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取第一个不小于指定键的元素位置 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个不小于key的元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00393">393</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9cccf7ac8fd5d850df597adfa3135632" name="a9cccf7ac8fd5d850df597adfa3135632"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cccf7ac8fd5d850df597adfa3135632">&#9670;&#160;</a></span>lower_bound() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::lower_bound </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取第一个不小于指定键的常量元素位置 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个不小于key的元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00400">400</a> 行定义.</p>
+
+</div>
+</div>
+<a id="abbcc922be86dd907ee998ba129312a88" name="abbcc922be86dd907ee998ba129312a88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbcc922be86dd907ee998ba129312a88">&#9670;&#160;</a></span>max_size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa051ff51698bd90ad62d65a49afa7fb1">size_type</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::max_size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最大可能大小 </p>
+<dl class="section return"><dt>返回</dt><dd>最大元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00256">256</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aeb607e812f437c1ae7ba4770b2655d80" name="aeb607e812f437c1ae7ba4770b2655d80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb607e812f437c1ae7ba4770b2655d80">&#9670;&#160;</a></span>operator=() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsparse__multiset.html">sparse_multiset</a> &amp; <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源sparse_multiset </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00096">96</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="sparse__multiset_8hpp_source.html#l00074">sparse_multiset()</a>.</p>
+
+</div>
+</div>
+<a id="aa3404037d1e3cdbf57dc315360b3ab88" name="aa3404037d1e3cdbf57dc315360b3ab88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3404037d1e3cdbf57dc315360b3ab88">&#9670;&#160;</a></span>operator=() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsparse__multiset.html">sparse_multiset</a> &amp; <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移动赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>源sparse_multiset </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00113">113</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02923">is_nothrow_move_assignable_v</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="sparse__multiset_8hpp_source.html#l00074">sparse_multiset()</a>.</p>
+
+</div>
+</div>
+<a id="a394a87c12bf190757077aa641f927d0b" name="a394a87c12bf190757077aa641f927d0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a394a87c12bf190757077aa641f927d0b">&#9670;&#160;</a></span>operator=() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsparse__multiset.html">sparse_multiset</a> &amp; <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype">std::initializer_list&lt; <a class="el" href="#a02195de1d384a1964ac09dce452a4733">value_type</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>ilist</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化列表赋值运算符 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ilist</td><td>初始化列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00163">163</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="sparse__multiset_8hpp_source.html#l00365">clear()</a>, <a class="el" href="sparse__multiset_8hpp_source.html#l00292">insert()</a> , 以及 <a class="el" href="sparse__multiset_8hpp_source.html#l00074">sparse_multiset()</a>.</p>
+
+</div>
+</div>
+<a id="a9ebf344194244a3dfe7915ad9cd48d64" name="a9ebf344194244a3dfe7915ad9cd48d64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ebf344194244a3dfe7915ad9cd48d64">&#9670;&#160;</a></span>rbegin() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa18b20a70ffd87ca64986af50956b9c1">const_reverse_iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量反向起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最大元素的常量反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00226">226</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a73800393b34818c0a7098d9df6893c05" name="a73800393b34818c0a7098d9df6893c05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73800393b34818c0a7098d9df6893c05">&#9670;&#160;</a></span>rbegin() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a5741c492e4ac82e3a981a990c2c350cb">reverse_iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::rbegin </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取反向起始迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最大元素的反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00214">214</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a884c04ef4333280c221b208e0b16850b" name="a884c04ef4333280c221b208e0b16850b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a884c04ef4333280c221b208e0b16850b">&#9670;&#160;</a></span>rend() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa18b20a70ffd87ca64986af50956b9c1">const_reverse_iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取常量反向结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最小元素之前位置的常量反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00232">232</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a71ef475718729d610fc7887da2cfd3d8" name="a71ef475718729d610fc7887da2cfd3d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71ef475718729d610fc7887da2cfd3d8">&#9670;&#160;</a></span>rend() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a5741c492e4ac82e3a981a990c2c350cb">reverse_iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::rend </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取反向结束迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>指向最小元素之前位置的反向迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00220">220</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aa9ba0329e96cac6b08efe7de8ec04895" name="aa9ba0329e96cac6b08efe7de8ec04895"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9ba0329e96cac6b08efe7de8ec04895">&#9670;&#160;</a></span>reserve()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::reserve </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aa051ff51698bd90ad62d65a49afa7fb1">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>预留容量 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>预留的元素数量 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00436">436</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a33a112d19bdc33e7566f0b39aa628eb3" name="a33a112d19bdc33e7566f0b39aa628eb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33a112d19bdc33e7566f0b39aa628eb3">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa051ff51698bd90ad62d65a49afa7fb1">size_type</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::size </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取元素数量 </p>
+<dl class="section return"><dt>返回</dt><dd>sparse_multiset中的元素数量 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00250">250</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a62bfc48b8c09e588a40428df990dc8db" name="a62bfc48b8c09e588a40428df990dc8db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62bfc48b8c09e588a40428df990dc8db">&#9670;&#160;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>交换两个sparse_multiset的内容 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>要交换的另一个sparse_multiset </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00453">453</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03967">is_nothrow_swappable_v</a> , 以及 <a class="el" href="sparse__multiset_8hpp_source.html#l00074">sparse_multiset()</a>.</p>
+
+</div>
+</div>
+<a id="aa950fb2b9424b7438c2748b4032f5496" name="aa950fb2b9424b7438c2748b4032f5496"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa950fb2b9424b7438c2748b4032f5496">&#9670;&#160;</a></span>upper_bound() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a28df1dcc64454e34fbd349ce663c6c1b">iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::upper_bound </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取第一个大于指定键的元素位置 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个大于key的元素的迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00407">407</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5d65161e696e66ac1af74bc9f68dee82" name="a5d65161e696e66ac1af74bc9f68dee82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d65161e696e66ac1af74bc9f68dee82">&#9670;&#160;</a></span>upper_bound() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a409402d7999cc1cabd41a196990e3c86">const_iterator</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::upper_bound </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="#a96fcf18be84cda802bef198eac345f7e">key_type</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>key</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取第一个大于指定键的常量元素位置 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>键值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>指向第一个大于key的元素的常量迭代器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00414">414</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a483cbc7f4b1bbc74d68c0ce91186d998" name="a483cbc7f4b1bbc74d68c0ce91186d998"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a483cbc7f4b1bbc74d68c0ce91186d998">&#9670;&#160;</a></span>value_comp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Key, typename Compare = less&lt;Key&gt;, typename Alloc = allocator&lt;Key&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#a595ddadf458c6d7eb2df743824bf7d5a">value_compare</a> <a class="el" href="classsparse__multiset.html">sparse_multiset</a>&lt; Key, Compare, Alloc &gt;::value_comp </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取值比较函数对象 </p>
+<dl class="section return"><dt>返回</dt><dd>值比较函数对象的副本 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a> 第 <a class="el" href="sparse__multiset_8hpp_source.html#l00274">274</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="sparse__multiset_8hpp_source.html">sparse_multiset.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classsparse__multiset.html">sparse_multiset</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

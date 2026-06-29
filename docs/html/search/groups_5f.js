@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['红黑树_0',['红黑树',['../group___r_b_tree.html',1,'']]]
+  ['稀疏向量_0',['稀疏向量',['../group___sparse_vector.html',1,'']]]
 ];

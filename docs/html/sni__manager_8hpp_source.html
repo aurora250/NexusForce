@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: sni_manager.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('sni__manager_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">sni_manager.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="sni__manager_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_NETWORK_SSL_SNI_MANAGER_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_NETWORK_SSL_SNI_MANAGER_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="unordered__map_8hpp.html">NeForce/core/container/unordered_map.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="ssl__context_8hpp.html">NeForce/network/ssl/ssl_context.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="};">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classsni__manager.html">   39</a></span><span class="keyword">class </span>NEFORCE_API sni_manager {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, ssl_context&gt;</a> hosts_;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_class" href="classssl__context.html">ssl_context</a> default_context_;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">bool</span> has_default_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    sni_manager() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classsni__manager.html#a9f25af832a92422d2130f56566ec0736">   56</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classsni__manager.html#a9f25af832a92422d2130f56566ec0736">add_host</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; hostname, <a class="code hl_class" href="classssl__context.html">ssl_context</a> ctx);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span></div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno"><a class="line" href="classsni__manager.html#ac6df422173fcaae6920a15e56e6edeb1">   62</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classsni__manager.html#ac6df422173fcaae6920a15e56e6edeb1">remove_host</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; hostname);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classsni__manager.html#a62b2b204c1ec09b9874f2e691ca6e834">   68</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classsni__manager.html#a62b2b204c1ec09b9874f2e691ca6e834">set_default_context</a>(<a class="code hl_class" href="classssl__context.html">ssl_context</a> ctx);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classsni__manager.html#abe7d6b81bae2b545acb0f297c10fabf5">   80</a></span>    NEFORCE_NODISCARD <span class="keywordtype">void</span>* <a class="code hl_function" href="classsni__manager.html#abe7d6b81bae2b545acb0f297c10fabf5">select_ssl_ctx</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; server_name) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno"><a class="line" href="classsni__manager.html#a3297aba89b055614778ed8d99e4babeb">   85</a></span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> <a class="code hl_function" href="classsni__manager.html#a3297aba89b055614778ed8d99e4babeb">has_host</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; hostname) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span></div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classsni__manager.html#aa804d2255ec215cc4d0daf76eb98a055">   90</a></span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> <a class="code hl_function" href="classsni__manager.html#aa804d2255ec215cc4d0daf76eb98a055">host_count</a>() const noexcept { <span class="keywordflow">return</span> hosts_.size(); }</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="classsni__manager.html#a55942c4128375efd0b5a0aa2a846fbc9">   98</a></span>    <span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classsni__manager.html#a55942c4128375efd0b5a0aa2a846fbc9">sni_callback</a>(<span class="keywordtype">void</span>* ssl, <span class="keywordtype">int</span>* alert, <span class="keywordtype">void</span>* arg);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>};</div>
+</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> <span class="comment">// SSL/TLS</span></div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_SSL_SNI_MANAGER_HPP__</span></div>
+<div class="ttc" id="aclasssni__manager_html_a3297aba89b055614778ed8d99e4babeb"><div class="ttname"><a href="classsni__manager.html#a3297aba89b055614778ed8d99e4babeb">sni_manager::has_host</a></div><div class="ttdeci">bool has_host(const string &amp;hostname) const</div><div class="ttdoc">检查是否有指定域名的证书</div></div>
+<div class="ttc" id="aclasssni__manager_html_a55942c4128375efd0b5a0aa2a846fbc9"><div class="ttname"><a href="classsni__manager.html#a55942c4128375efd0b5a0aa2a846fbc9">sni_manager::sni_callback</a></div><div class="ttdeci">static int sni_callback(void *ssl, int *alert, void *arg)</div><div class="ttdoc">SNI回调函数（用于SSL_CTX_set_tlsext_servername_callback）</div></div>
+<div class="ttc" id="aclasssni__manager_html_a62b2b204c1ec09b9874f2e691ca6e834"><div class="ttname"><a href="classsni__manager.html#a62b2b204c1ec09b9874f2e691ca6e834">sni_manager::set_default_context</a></div><div class="ttdeci">void set_default_context(ssl_context ctx)</div><div class="ttdoc">设置默认SSL上下文（SNI未匹配时使用）</div></div>
+<div class="ttc" id="aclasssni__manager_html_a9f25af832a92422d2130f56566ec0736"><div class="ttname"><a href="classsni__manager.html#a9f25af832a92422d2130f56566ec0736">sni_manager::add_host</a></div><div class="ttdeci">void add_host(const string &amp;hostname, ssl_context ctx)</div><div class="ttdoc">添加域名及其SSL上下文</div></div>
+<div class="ttc" id="aclasssni__manager_html_aa804d2255ec215cc4d0daf76eb98a055"><div class="ttname"><a href="classsni__manager.html#aa804d2255ec215cc4d0daf76eb98a055">sni_manager::host_count</a></div><div class="ttdeci">size_t host_count() const noexcept</div><div class="ttdoc">获取配置的域名数量</div><div class="ttdef"><b>定义</b> <a href="#l00090">sni_manager.hpp:90</a></div></div>
+<div class="ttc" id="aclasssni__manager_html_abe7d6b81bae2b545acb0f297c10fabf5"><div class="ttname"><a href="classsni__manager.html#abe7d6b81bae2b545acb0f297c10fabf5">sni_manager::select_ssl_ctx</a></div><div class="ttdeci">void * select_ssl_ctx(const string &amp;server_name) const</div><div class="ttdoc">根据SNI hostname选择SSL_CTX</div></div>
+<div class="ttc" id="aclasssni__manager_html_ac6df422173fcaae6920a15e56e6edeb1"><div class="ttname"><a href="classsni__manager.html#ac6df422173fcaae6920a15e56e6edeb1">sni_manager::remove_host</a></div><div class="ttdeci">void remove_host(const string &amp;hostname)</div><div class="ttdoc">移除域名</div></div>
+<div class="ttc" id="aclassssl__context_html"><div class="ttname"><a href="classssl__context.html">ssl_context</a></div><div class="ttdoc">SSL/TLS上下文管理类</div><div class="ttdef"><b>定义</b> <a href="ssl__context_8hpp_source.html#l00054">ssl_context.hpp:54</a></div></div>
+<div class="ttc" id="aclassunordered__map_html"><div class="ttname"><a href="classunordered__map.html">unordered_map</a></div><div class="ttdoc">无序映射容器</div><div class="ttdef"><b>定义</b> <a href="unordered__map_8hpp_source.html#l00038">unordered_map.hpp:38</a></div></div>
+<div class="ttc" id="assl__context_8hpp_html"><div class="ttname"><a href="ssl__context_8hpp.html">ssl_context.hpp</a></div><div class="ttdoc">SSL/TLS上下文管理</div></div>
+<div class="ttc" id="aunordered__map_8hpp_html"><div class="ttname"><a href="unordered__map_8hpp.html">unordered_map.hpp</a></div><div class="ttdoc">无序映射容器</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>network</b></li><li class="navelem"><b>ssl</b></li><li class="navelem"><a href="sni__manager_8hpp.html">sni_manager.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

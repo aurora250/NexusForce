@@ -97,37 +97,61 @@ $(function(){initNavTree('log__event_8hpp.html','',''); });
 <a href="#details">更多...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="thread_8hpp_source.html">NeForce/core/async/thread.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="unordered__map_8hpp_source.html">NeForce/core/container/unordered_map.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="shared__ptr_8hpp_source.html">NeForce/core/memory/shared_ptr.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="datetime_8hpp_source.html">NeForce/core/time/datetime.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 log_event.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="log__event_8hpp__incl.svg" width="3195" height="1926"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="log__event_8hpp__incl.svg" width="3098" height="1942"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="log__event_8hpp_source.html">浏览该文件的源代码.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 类</h2></td></tr>
+<tr class="memitem:source_5Floc" id="r_source_5Floc"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsource__loc.html">source_loc</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">源码位置信息  <a href="structsource__loc.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:mdc" id="r_mdc"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmdc.html">mdc</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mapped Diagnostic Context，线程局部上下文  <a href="classmdc.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:log_5Fevent" id="r_log_5Fevent"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structlog__event.html">log_event</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">日志事件结构体  <a href="structlog__event.html#details">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:ga64fa989f20a658de5373cb3a1161ae86" id="r_ga64fa989f20a658de5373cb3a1161ae86"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#ga64fa989f20a658de5373cb3a1161ae86">NEFORCE_ACTIVE_LOG_LEVEL</a>&#160;&#160;&#160;NEFORCE_LOG_LEVEL_TRACE</td></tr>
+<tr class="memdesc:ga64fa989f20a658de5373cb3a1161ae86"><td class="mdescLeft">&#160;</td><td class="mdescRight">编译期日志过滤阈值  <br /></td></tr>
+<tr class="memitem:gab6a949ee079c653b574be8c2b4deddbc" id="r_gab6a949ee079c653b574be8c2b4deddbc"><td class="memItemLeft">
+#define&#160;</td><td class="memItemRight"><b>NEFORCE_SOURCE_LOC</b>()</td></tr>
+<tr class="memdesc:gab6a949ee079c653b574be8c2b4deddbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造 <a class="el" href="structsource__loc.html" title="源码位置信息">source_loc</a> 的便捷宏 <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 枚举</h2></td></tr>
-<tr class="memitem:gac91d55174d383848b976a34de843748e" id="r_gac91d55174d383848b976a34de843748e"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#gac91d55174d383848b976a34de843748e">log_level</a> { <br />
-&#160;&#160;<a class="el" href="group___logging.html#ggac91d55174d383848b976a34de843748ea2d3e4144aa384b18849ab9a8abad74d6">log_level::TRACE</a> = 0
-, <a class="el" href="group___logging.html#ggac91d55174d383848b976a34de843748eadc30ec20708ef7b0f641ef78b7880a15">log_level::DEBUG</a>
-, <a class="el" href="group___logging.html#ggac91d55174d383848b976a34de843748ea551b723eafd6a31d444fcb2f5920fbd3">log_level::INFO</a>
-, <a class="el" href="group___logging.html#ggac91d55174d383848b976a34de843748ea32bd8a1db2275458673903bdb84cb277">log_level::WARN</a>
+<tr class="memitem:ga837946c96acd6e9638773176147baba1" id="r_ga837946c96acd6e9638773176147baba1"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#ga837946c96acd6e9638773176147baba1">log_level</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="group___logging.html#gga837946c96acd6e9638773176147baba1a2d3e4144aa384b18849ab9a8abad74d6">log_level::TRACE</a> = 0
+, <a class="el" href="group___logging.html#gga837946c96acd6e9638773176147baba1adc30ec20708ef7b0f641ef78b7880a15">log_level::DEBUG</a> = 1
+, <a class="el" href="group___logging.html#gga837946c96acd6e9638773176147baba1a551b723eafd6a31d444fcb2f5920fbd3">log_level::INFO</a> = 2
+, <a class="el" href="group___logging.html#gga837946c96acd6e9638773176147baba1a32bd8a1db2275458673903bdb84cb277">log_level::WARN</a> = 3
 , <br />
-&#160;&#160;<a class="el" href="group___logging.html#ggac91d55174d383848b976a34de843748eabb1ca97ec761fc37101737ba0aa2e7c5">log_level::ERROR</a>
-, <a class="el" href="group___logging.html#ggac91d55174d383848b976a34de843748ea19da7170bea36556dde582519795f3fc">log_level::FATAL</a>
+&#160;&#160;<a class="el" href="group___logging.html#gga837946c96acd6e9638773176147baba1abb1ca97ec761fc37101737ba0aa2e7c5">log_level::ERROR</a> = 4
+, <a class="el" href="group___logging.html#gga837946c96acd6e9638773176147baba1a19da7170bea36556dde582519795f3fc">log_level::FATAL</a> = 5
+, <a class="el" href="group___logging.html#gga837946c96acd6e9638773176147baba1a88559a0cfd8250c9d65970cc145c92d4">log_level::OFF</a> = 6
 <br />
  }</td></tr>
-<tr class="memdesc:gac91d55174d383848b976a34de843748e"><td class="mdescLeft">&#160;</td><td class="mdescRight">日志级别枚举  <a href="group___logging.html#gac91d55174d383848b976a34de843748e">更多...</a><br /></td></tr>
+<tr class="memdesc:ga837946c96acd6e9638773176147baba1"><td class="mdescLeft">&#160;</td><td class="mdescRight">日志级别枚举  <a href="group___logging.html#ga837946c96acd6e9638773176147baba1">更多...</a><br /></td></tr>
+<tr class="memitem:ga35627212bfd2d281fb917509552af4cf" id="r_ga35627212bfd2d281fb917509552af4cf"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#ga35627212bfd2d281fb917509552af4cf">overflow_policy</a> : uint8_t { <a class="el" href="group___logging.html#gga35627212bfd2d281fb917509552af4cfa14511f2f5564650d129ca7cabc333278">overflow_policy::block</a>
+, <a class="el" href="group___logging.html#gga35627212bfd2d281fb917509552af4cfa70f68bb2f748b85de6526bfe236ea1e9">overflow_policy::discard</a>
+, <a class="el" href="group___logging.html#gga35627212bfd2d281fb917509552af4cfa6d09cc54ae10145444aa2f43fe46d9f2">overflow_policy::overrun_oldest</a>
+ }</td></tr>
+<tr class="memdesc:ga35627212bfd2d281fb917509552af4cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步队列溢出策略  <a href="group___logging.html#ga35627212bfd2d281fb917509552af4cf">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga22184590803524bd20e45d3d4887e82d" id="r_ga22184590803524bd20e45d3d4887e82d"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___logging.html#ga22184590803524bd20e45d3d4887e82d">to_string</a> (const <a class="el" href="group___logging.html#ga837946c96acd6e9638773176147baba1">log_level</a> level)</td></tr>
+<tr class="memdesc:ga22184590803524bd20e45d3d4887e82d"><td class="mdescLeft">&#160;</td><td class="mdescRight">将日志级别转换为字符串表示  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>日志事件定义 </p>
-<p>此文件定义了日志系统的核心数据结构， 包括日志级别枚举和日志事件结构体，用于在日志系统中传递日志信息。 </p>
+<p>此文件定义了日志系统的核心数据结构， 包括日志级别枚举、源码位置、溢出策略、MDC和日志事件结构体。 </p>
 
 <p class="definition">在文件 <a class="el" href="log__event_8hpp_source.html">log_event.hpp</a> 中定义.</p>
 </div></div><!-- contents -->

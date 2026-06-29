@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['缓冲区格式化_0',['缓冲区格式化',['../group___buffer_format.html',1,'']]],
-  ['缓存_1',['缓存',['../group___cache.html',1,'']]]
+  ['算术运算仿函数_0',['算术运算仿函数',['../group___arithmetic_functors.html',1,'']]]
 ];

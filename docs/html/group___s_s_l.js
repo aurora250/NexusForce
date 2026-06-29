@@ -1,5 +1,13 @@
 var group___s_s_l =
 [
+    [ "sni_manager", "classsni__manager.html", [
+      [ "add_host", "classsni__manager.html#a9f25af832a92422d2130f56566ec0736", null ],
+      [ "has_host", "classsni__manager.html#a3297aba89b055614778ed8d99e4babeb", null ],
+      [ "host_count", "classsni__manager.html#aa804d2255ec215cc4d0daf76eb98a055", null ],
+      [ "remove_host", "classsni__manager.html#ac6df422173fcaae6920a15e56e6edeb1", null ],
+      [ "select_ssl_ctx", "classsni__manager.html#abe7d6b81bae2b545acb0f297c10fabf5", null ],
+      [ "set_default_context", "classsni__manager.html#a62b2b204c1ec09b9874f2e691ca6e834", null ]
+    ] ],
     [ "ssl_acceptor", "classssl__acceptor.html", [
       [ "ssl_acceptor", "classssl__acceptor.html#ada1e952a280a99f5567f305c0ecff956", null ],
       [ "accept_ssl", "classssl__acceptor.html#a839b43648acf22c7fc584dd90963cd04", null ],
@@ -35,6 +43,7 @@ var group___s_s_l =
       [ "ssl_socket", "classssl__socket.html#ac28d7742ab7ed2ac7386598c872b7615", null ],
       [ "~ssl_socket", "classssl__socket.html#a76cf3d2ca514fa1fe702c82f5e534c79", null ],
       [ "close", "classssl__socket.html#ac93b5cdb322b13fce97428b4b366c228", null ],
+      [ "get_alpn_negotiated", "classssl__socket.html#a0b831adb2b2de3d7aa0741de765afde2", null ],
       [ "init_client_ssl", "classssl__socket.html#a33d98abb79c38434ba74f2eb5834261e", null ],
       [ "init_server_ssl", "classssl__socket.html#a2d62a9aa4ed97ff2e56f51cdacd833bf", null ],
       [ "is_ssl", "classssl__socket.html#adb1487480405a5778013113b583fed8c", null ],
@@ -51,6 +60,7 @@ var group___s_s_l =
       [ "accept", "classssl__stream.html#a8d50c0caaf302839aba7a8989a3fa875", null ],
       [ "close", "classssl__stream.html#a8e82ce0526198cc603022c76b73ad1e1", null ],
       [ "connect", "classssl__stream.html#a33c58ee785d4e58e80eaf07e73e27217", null ],
+      [ "get_alpn_negotiated", "classssl__stream.html#a391de2122472380eae5596d1d8406d9b", null ],
       [ "get_cipher_name", "classssl__stream.html#a82e33ad7a2ed79e8a62282aac299ba14", null ],
       [ "get_peer_certificate", "classssl__stream.html#ab8f71a5a604d3472e79c381eccf2622c", null ],
       [ "get_version", "classssl__stream.html#a782a9c43d8fe89be96f61c9115c8cc46", null ],

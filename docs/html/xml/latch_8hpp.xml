@@ -4,14 +4,11 @@
     <compoundname>latch.hpp</compoundname>
     <includes refid="atomic__base_8hpp" local="yes">NeForce/core/async/atomic_base.hpp</includes>
     <includes refid="numeric__traits_8hpp" local="yes">NeForce/core/numeric/numeric_traits.hpp</includes>
-    <includedby refid="_ne_force_8hpp" local="yes">NeForce.hpp</includedby>
     <incdepgraph>
       <node id="2">
         <label>NeForce/core/async/atomic_base.hpp</label>
         <link refid="atomic__base_8hpp"/>
         <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
@@ -19,15 +16,17 @@
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
       </node>
       <node id="3">
         <label>NeForce/core/async/atomic_wait.hpp</label>
         <link refid="atomic__wait_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="4">
@@ -41,21 +40,19 @@
         <link refid="latch_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>NeForce/core/async/memory_order.hpp</label>
         <link refid="memory__order_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="9">
+      <node id="10">
         <label>NeForce/core/async/this_thread.hpp</label>
         <link refid="this__thread_8hpp"/>
         <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
@@ -65,32 +62,40 @@
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
       </node>
       <node id="7">
         <label>NeForce/core/config/c++config.hpp</label>
         <link refid="c_09_09config_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
       </node>
-      <node id="10">
+      <node id="9">
+        <label>NeForce/core/config/version.hpp</label>
+        <link refid="version_8hpp_source"/>
+      </node>
+      <node id="11">
         <label>NeForce/core/config/windef.hpp</label>
         <link refid="windef_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="18">
         <label>NeForce/core/exception/breakpoint.hpp</label>
         <link refid="breakpoint_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>NeForce/core/memory/memory.hpp</label>
         <link refid="memory_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="20">
+      <node id="21">
         <label>NeForce/core/numeric/numeric_traits.hpp</label>
         <link refid="numeric__traits_8hpp"/>
         <childnode refid="6" relation="include">
@@ -111,37 +116,25 @@
       <node id="8">
         <label>cassert</label>
       </node>
-      <node id="14">
+      <node id="15">
         <label>ctime</label>
       </node>
-      <node id="18">
+      <node id="19">
         <label>intrin.h</label>
       </node>
-      <node id="19">
+      <node id="20">
         <label>intrin0.inl.h</label>
       </node>
-      <node id="11">
+      <node id="12">
         <label>processthreadsapi.h</label>
       </node>
-      <node id="13">
+      <node id="14">
         <label>sched.h</label>
       </node>
-      <node id="12">
+      <node id="13">
         <label>synchapi.h</label>
       </node>
     </incdepgraph>
-    <invincdepgraph>
-      <node id="2">
-        <label>NeForce.hpp</label>
-        <link refid="_ne_force_8hpp"/>
-      </node>
-      <node id="1">
-        <label>latch.hpp</label>
-        <link refid="latch_8hpp"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-      </node>
-    </invincdepgraph>
     <innerclass refid="classlatch" prot="public">latch</innerclass>
     <briefdescription>
 <para>闩锁实现 </para>
@@ -176,7 +169,7 @@
 <codeline lineno="59" refid="classlatch_1a00355a36c48695412e0ae6e8634f534f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classlatch_1a00355a36c48695412e0ae6e8634f534f" kindref="member">latch</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" kindref="member">latch</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="60" refid="classlatch_1a33b76e8739418ed6b0ffffc7811b7ccd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" kindref="member">latch</ref>&amp;<sp/><ref refid="classlatch_1a33b76e8739418ed6b0ffffc7811b7ccd" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" kindref="member">latch</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;<sp/></highlight></codeline>
 <codeline lineno="61"><highlight class="normal"></highlight></codeline>
-<codeline lineno="70" refid="classlatch_1a5d0363a4c163fe58fb84fd4e8ee45e15" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlatch_1a5d0363a4c163fe58fb84fd4e8ee45e15" kindref="member">count_down</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref><sp/>update<sp/>=<sp/>1)<sp/>{</highlight></codeline>
+<codeline lineno="70" refid="classlatch_1a364c1b21592dadad292e5493ffa5ba24" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlatch_1a364c1b21592dadad292e5493ffa5ba24" kindref="member">count_down</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref><sp/>update<sp/>=<sp/>1)<sp/>noexcept<sp/>{</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>old_value<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___atomic_operations_1gac61d9fd541d5b9aef14a1067e3538924" kindref="member">atomic_fetch_sub</ref>(&amp;counter_,<sp/>update,<sp/><ref refid="group___memory_order_1ga1872f4bd7e5e4170b898e1dcab55bbec" kindref="member">memory_order_release</ref>);</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(old_value<sp/>==<sp/>update)<sp/>{</highlight></codeline>
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___atomic_operations_1ga5c5949e5e1c0b7d9c13b91322f47f79d" kindref="member">atomic_notify_address</ref>(&amp;counter_,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
@@ -193,7 +186,7 @@
 <codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="98"><highlight class="normal"></highlight></codeline>
 <codeline lineno="108" refid="classlatch_1ad9b2bff5008d4d1f690cc852fd232d38" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_ALWAYS_INLINE<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlatch_1ad9b2bff5008d4d1f690cc852fd232d38" kindref="member">arrive_and_wait</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___futex_1ga4ae42858521c6114207203888569da88" kindref="member">platform_wait_t</ref><sp/>update<sp/>=<sp/>1)<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlatch_1a5d0363a4c163fe58fb84fd4e8ee45e15" kindref="member">count_down</ref>(update);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlatch_1a364c1b21592dadad292e5493ffa5ba24" kindref="member">count_down</ref>(update);</highlight></codeline>
 <codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classlatch_1afedb29909d54b1c8c6bf136c2f900da3" kindref="member">wait</ref>();</highlight></codeline>
 <codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="112"><highlight class="normal">};</highlight></codeline>

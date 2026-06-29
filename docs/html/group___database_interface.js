@@ -6,8 +6,15 @@ var group___database_interface =
       [ "empty", "structidb__result.html#aa1c85e3b42031de74a7fb1f7a95e2754", null ],
       [ "next", "structidb__result.html#a4ffe1b5d13e654c3cb99f000e7d4d093", null ]
     ] ],
+    [ "column_meta", "structcolumn__meta.html", [
+      [ "max_length", "structcolumn__meta.html#a3c4ae6019137ed95794c50d84a6adfd7", null ],
+      [ "name", "structcolumn__meta.html#ad60942efa3742cb5e5b4a45bbf7a9088", null ],
+      [ "nullable", "structcolumn__meta.html#a3000bd379c9fe06859103945b1dfc138", null ],
+      [ "type", "structcolumn__meta.html#a1484f2a08bd9e7727a8d8404d4dab86d", null ]
+    ] ],
     [ "idb_tb_result", "structidb__tb__result.html", [
       [ "column_count", "structidb__tb__result.html#a15bba511bedb7883a9770516e60d0502", null ],
+      [ "column_metadata", "structidb__tb__result.html#a847e127d534e34bc199d6168372288f0", null ],
       [ "column_names", "structidb__tb__result.html#acf9e2cdb951dfadb26394addafd314bd", null ],
       [ "get", "structidb__tb__result.html#ae1bc5e789f06b1d381f8922dc0c5e9af", null ],
       [ "get_bit", "structidb__tb__result.html#ab2a5e423b358828cada7a8be14651196", null ],
@@ -34,7 +41,6 @@ var group___database_interface =
       [ "value_hash", "structidb__kv__result.html#aad2ccd406c8e9409bbb6660660764cd8", null ],
       [ "value_int64", "structidb__kv__result.html#a3a4b46e33ca2aac0c205716032cd64cd", null ]
     ] ],
-    [ "idb_prepared_result", "structidb__prepared__result.html", null ],
     [ "idb_prepared_statement", "structidb__prepared__statement.html", [
       [ "bind_param", "structidb__prepared__statement.html#a7a9038b065d93470a68a23739987ddcc", null ],
       [ "bind_param", "structidb__prepared__statement.html#af8d4d5a5485c462827fa45fbd909d0ea", null ],
@@ -44,14 +50,16 @@ var group___database_interface =
       [ "bind_param", "structidb__prepared__statement.html#a203cda3f3bf52a50d91488cc333f6dcd", null ],
       [ "bind_param", "structidb__prepared__statement.html#acf37860b88bfa7fd95272d0c2b13ce0a", null ],
       [ "execute", "structidb__prepared__statement.html#a5edc6ce541b1a871ee9910ba9ec565f9", null ],
-      [ "execute_query", "structidb__prepared__statement.html#a75ad5d2dbd0d97d8cfc70ed5ecea5faf", null ],
+      [ "execute_query", "structidb__prepared__statement.html#a04c96b62170d85a3476c1f7a11a8e6f4", null ],
       [ "get_errno", "structidb__prepared__statement.html#ac2d8c780282f37e5033aa64025cd0435", null ],
       [ "get_error", "structidb__prepared__statement.html#a67f600d24fe96ea4b26508953e1ac2ed", null ],
       [ "param_count", "structidb__prepared__statement.html#a67ab1c9f04a375b478a034db711b3675", null ]
     ] ],
     [ "idb_connect", "structidb__connect.html", [
       [ "clock_type", "structidb__connect.html#ab9be909e9ecc1db9cbcc28186de35c95", null ],
+      [ "begin", "structidb__connect.html#a24b4c723358335c8a32164c021da1bc7", null ],
       [ "close", "structidb__connect.html#a689ce6c9a44cdc602e6006615e949e19", null ],
+      [ "commit", "structidb__connect.html#a15de30685e73d3b2855f132ae600a81a", null ],
       [ "connect", "structidb__connect.html#a7ae3001e8ef72724b952fac4ea66cde7", null ],
       [ "connected", "structidb__connect.html#a05b7b473cdd13c18f5b44c83e09c082d", null ],
       [ "get_alive", "structidb__connect.html#a5fe328d4bdf863d226d7065daf2cc56b", null ],
@@ -59,9 +67,11 @@ var group___database_interface =
       [ "get_errno", "structidb__connect.html#a150e2a5aac988b6abb97f9444042d06e", null ],
       [ "get_error", "structidb__connect.html#a128b6a7646a28e85e231beb150439c01", null ],
       [ "is_valid", "structidb__connect.html#a7b5c48c5ecdb1cdd54463da84cbc92a0", null ],
+      [ "native_handle", "structidb__connect.html#a795f60f7b0e4db4511ba51da8d54c7b3", null ],
       [ "reconnect", "structidb__connect.html#a5faaad097bbdc6d8e530eb9f3ec7af94", null ],
       [ "refresh_alive", "structidb__connect.html#a23d22fba9ce82c798a1363f0f816f593", null ],
-      [ "set_character_set", "structidb__connect.html#a9f0b407a683b19bee646271a19356aad", null ],
+      [ "rollback", "structidb__connect.html#ae9129bc37cfcb03085e3234e2be8583a", null ],
+      [ "set_character_set", "structidb__connect.html#a7787680de395dc737bd6b14978488854", null ],
       [ "update", "structidb__connect.html#aedacf58e2ea956b26f4862e49506c3c2", null ]
     ] ],
     [ "idb_tb_connect", "structidb__tb__connect.html", [

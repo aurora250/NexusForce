@@ -1,0 +1,688 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classbyte__cursor" kind="class" language="C++" prot="public">
+    <compoundname>byte_cursor</compoundname>
+    <includes refid="byte__cursor_8hpp" local="no">byte_cursor.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classbyte__cursor_1a27fe996a1936d40b4a721a37b9b5948a" prot="private" static="no" mutable="no">
+        <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *</type>
+        <definition>const byte_t* byte_cursor::data_</definition>
+        <argsstring></argsstring>
+        <name>data_</name>
+        <qualifiedname>byte_cursor::data_</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>底层字节缓冲区指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="32" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classbyte__cursor_1ad1768805979ba3fcfe07247cf99f53c1" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t byte_cursor::size_</definition>
+        <argsstring></argsstring>
+        <name>size_</name>
+        <qualifiedname>byte_cursor::size_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>缓冲区总大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="34" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classbyte__cursor_1ae7f76e5e099d249d3c1e96a6ec39a8cd" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t byte_cursor::pos_</definition>
+        <argsstring></argsstring>
+        <name>pos_</name>
+        <qualifiedname>byte_cursor::pos_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>当前读取位置 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="36" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classbyte__cursor_1a41ef9a1dda99966f0c16b04419ea0912" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>uint64_t byte_cursor::bit_buf_</definition>
+        <argsstring></argsstring>
+        <name>bit_buf_</name>
+        <qualifiedname>byte_cursor::bit_buf_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>位读取缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="38" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classbyte__cursor_1a9a6b041a241c06bed949a9752328ad41" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t byte_cursor::bits_in_buf_</definition>
+        <argsstring></argsstring>
+        <name>bits_in_buf_</name>
+        <qualifiedname>byte_cursor::bits_in_buf_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>位缓冲区中缓存的位数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="40" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classbyte__cursor_1a60cdf3058e0d4f5db3481a9675ae69bb" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>byte_cursor::byte_cursor</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>byte_cursor</name>
+        <qualifiedname>byte_cursor::byte_cursor</qualifiedname>
+        <briefdescription>
+<para>构造空游标 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="44" column="5"/>
+        <referencedby refid="classbyte__cursor_1abb74260c0be58137665ab23b00b10299" compoundref="byte__cursor_8hpp" startline="47" endline="49">byte_cursor</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1abb74260c0be58137665ab23b00b10299" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>byte_cursor::byte_cursor</definition>
+        <argsstring>(const byte_t *data, size_t size) noexcept</argsstring>
+        <name>byte_cursor</name>
+        <qualifiedname>byte_cursor::byte_cursor</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>从原始指针和长度构造 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="47" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="47" bodyend="49"/>
+        <references refid="classbyte__cursor_1a60cdf3058e0d4f5db3481a9675ae69bb">byte_cursor</references>
+        <references refid="classbyte__cursor_1a8541bec645b7f758a80f4411f0031282" compoundref="byte__cursor_8hpp" startline="63" endline="63">data</references>
+        <references refid="classbyte__cursor_1a5cd56490a1dbf944525511c44627cfbd" compoundref="byte__cursor_8hpp" startline="65" endline="65">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1aa9dc34973cde819f0c0f15cec2f08bf7" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>byte_cursor::byte_cursor</definition>
+        <argsstring>(cbyte_view view) noexcept</argsstring>
+        <name>byte_cursor</name>
+        <qualifiedname>byte_cursor::byte_cursor</qualifiedname>
+        <param>
+          <type><ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref></type>
+          <declname>view</declname>
+        </param>
+        <briefdescription>
+<para>从 <ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref> 构造 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="52" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="52" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1a5454850778539f9e67673cc9912f86b2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t byte_cursor::remaining</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>remaining</name>
+        <qualifiedname>byte_cursor::remaining</qualifiedname>
+        <briefdescription>
+<para>剩余可读字节数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="57" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="57" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1ad1be0724eee63d267eb42d678f7f5332" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t byte_cursor::consumed_bytes</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>consumed_bytes</name>
+        <qualifiedname>byte_cursor::consumed_bytes</qualifiedname>
+        <briefdescription>
+<para>已消费的字节数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="59" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1af43d01d051602b288a496aaf773458a5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool byte_cursor::exhausted</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>exhausted</name>
+        <qualifiedname>byte_cursor::exhausted</qualifiedname>
+        <briefdescription>
+<para>是否已读完所有数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="61" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="61" bodyend="61"/>
+        <referencedby refid="classbyte__cursor_1abf175d759782d03b781698600a375332" compoundref="byte__cursor_8hpp" startline="274" endline="281">refill_bits</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1a8541bec645b7f758a80f4411f0031282" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *</type>
+        <definition>const byte_t * byte_cursor::data</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>data</name>
+        <qualifiedname>byte_cursor::data</qualifiedname>
+        <briefdescription>
+<para>获取底层数据指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="63" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="63" bodyend="63"/>
+        <referencedby refid="classbyte__cursor_1abb74260c0be58137665ab23b00b10299" compoundref="byte__cursor_8hpp" startline="47" endline="49">byte_cursor</referencedby>
+        <referencedby refid="classbyte__cursor_1af3c7e30c15d3a8a7130921f11223ec19" compoundref="byte__cursor_8hpp" startline="212" endline="218">reset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1a5cd56490a1dbf944525511c44627cfbd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t byte_cursor::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>byte_cursor::size</qualifiedname>
+        <briefdescription>
+<para>获取底层缓冲区总大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="65" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="65" bodyend="65"/>
+        <referencedby refid="classbyte__cursor_1abb74260c0be58137665ab23b00b10299" compoundref="byte__cursor_8hpp" startline="47" endline="49">byte_cursor</referencedby>
+        <referencedby refid="classbyte__cursor_1af3c7e30c15d3a8a7130921f11223ec19" compoundref="byte__cursor_8hpp" startline="212" endline="218">reset</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1aabd6df95fb1afbdaa7952b4ad874e843" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> &gt;</type>
+        <definition>optional&lt; byte_t &gt; byte_cursor::try_read_byte</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>try_read_byte</name>
+        <qualifiedname>byte_cursor::try_read_byte</qualifiedname>
+        <briefdescription>
+<para>尝试读取一个字节 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功返回该字节，数据不足返回 none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="71" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="71" bodyend="76"/>
+        <references refid="group___none_1gab3f528d10c290b48a6035929470622c0" compoundref="none_8hpp" startline="73" endline="73">none</references>
+        <referencedby refid="classbyte__cursor_1a0115c2602e9108c42cfe85a38c1c691f" compoundref="byte__cursor_8hpp" startline="225" endline="240">try_read_bits</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1ae9bf82d7d2a854d8ce74519872a7e060" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> &gt;</type>
+        <definition>optional&lt; byte_t &gt; byte_cursor::peek_byte</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>peek_byte</name>
+        <qualifiedname>byte_cursor::peek_byte</qualifiedname>
+        <briefdescription>
+<para>查看当前字节而不消费 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前字节，数据不足返回 none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="82" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="82" bodyend="87"/>
+        <references refid="group___none_1gab3f528d10c290b48a6035929470622c0" compoundref="none_8hpp" startline="73" endline="73">none</references>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1a5e41f2e4cd85e81219c2cabe5db43d2c" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref> &gt;</type>
+        <definition>optional&lt; uint16_t &gt; byte_cursor::try_read_be16</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>try_read_be16</name>
+        <qualifiedname>byte_cursor::try_read_be16</qualifiedname>
+        <briefdescription>
+<para>尝试读取大端序 16 位无符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功返回该值，数据不足返回 none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="93" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="93" bodyend="100"/>
+        <references refid="group___none_1gab3f528d10c290b48a6035929470622c0" compoundref="none_8hpp" startline="73" endline="73">none</references>
+        <references refid="structendian_1aae7a7c93bd022deb63ca42cbaf75445e" compoundref="endian_8hpp" startline="271" endline="273">endian::read_be16</references>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1a662b05a5baf7645543370a253ed64372" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> &gt;</type>
+        <definition>optional&lt; uint32_t &gt; byte_cursor::try_read_be24</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>try_read_be24</name>
+        <qualifiedname>byte_cursor::try_read_be24</qualifiedname>
+        <briefdescription>
+<para>尝试读取大端序 24 位无符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功返回该值，数据不足返回 none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="106" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="106" bodyend="113"/>
+        <references refid="group___none_1gab3f528d10c290b48a6035929470622c0" compoundref="none_8hpp" startline="73" endline="73">none</references>
+        <references refid="structendian_1ac40943647285d0e52320fdaf05cc1ec9" compoundref="endian_8hpp" startline="280" endline="283">endian::read_be24</references>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1aa46656604299cee2bebb4d5df2f9a22a" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> &gt;</type>
+        <definition>optional&lt; uint32_t &gt; byte_cursor::try_read_be32</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>try_read_be32</name>
+        <qualifiedname>byte_cursor::try_read_be32</qualifiedname>
+        <briefdescription>
+<para>尝试读取大端序 32 位无符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功返回该值，数据不足返回 none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="119" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="119" bodyend="126"/>
+        <references refid="group___none_1gab3f528d10c290b48a6035929470622c0" compoundref="none_8hpp" startline="73" endline="73">none</references>
+        <references refid="structendian_1ae8e72014d2c1785cfdb8b48d775527a1" compoundref="endian_8hpp" startline="290" endline="293">endian::read_be32</references>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1a2d93489403fbafa8c5ada6e5333bdc72" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref> &gt;</type>
+        <definition>optional&lt; uint64_t &gt; byte_cursor::try_read_be64</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>try_read_be64</name>
+        <qualifiedname>byte_cursor::try_read_be64</qualifiedname>
+        <briefdescription>
+<para>尝试读取大端序 64 位无符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功返回该值，数据不足返回 none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="132" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="132" bodyend="139"/>
+        <references refid="group___none_1gab3f528d10c290b48a6035929470622c0" compoundref="none_8hpp" startline="73" endline="73">none</references>
+        <references refid="structendian_1ab5e3e3daf88ee5609c5477e30c3f0217" compoundref="endian_8hpp" startline="300" endline="305">endian::read_be64</references>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1aa2c2c562b8c8366440fbfe2192639c08" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref> &gt;</type>
+        <definition>optional&lt; uint16_t &gt; byte_cursor::try_read_le16</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>try_read_le16</name>
+        <qualifiedname>byte_cursor::try_read_le16</qualifiedname>
+        <briefdescription>
+<para>尝试读取小端序 16 位无符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功返回该值，数据不足返回 none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="145" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="145" bodyend="152"/>
+        <references refid="group___none_1gab3f528d10c290b48a6035929470622c0" compoundref="none_8hpp" startline="73" endline="73">none</references>
+        <references refid="structendian_1acb5eebcd1e4655d7ab89ef0cf622c224" compoundref="endian_8hpp" startline="240" endline="242">endian::read_le16</references>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1a954d8ceac1309e56ac61e43d14e513f4" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> &gt;</type>
+        <definition>optional&lt; uint32_t &gt; byte_cursor::try_read_le32</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>try_read_le32</name>
+        <qualifiedname>byte_cursor::try_read_le32</qualifiedname>
+        <briefdescription>
+<para>尝试读取小端序 32 位无符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功返回该值，数据不足返回 none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="158" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="158" bodyend="165"/>
+        <references refid="group___none_1gab3f528d10c290b48a6035929470622c0" compoundref="none_8hpp" startline="73" endline="73">none</references>
+        <references refid="structendian_1a509ea1fc5587ada5b356d0cf6dd86a13" compoundref="endian_8hpp" startline="249" endline="252">endian::read_le32</references>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1a0ca6d80a71735e653f38f601c924cbff" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref> &gt;</type>
+        <definition>optional&lt; uint64_t &gt; byte_cursor::try_read_le64</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>try_read_le64</name>
+        <qualifiedname>byte_cursor::try_read_le64</qualifiedname>
+        <briefdescription>
+<para>尝试读取小端序 64 位无符号整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>成功返回该值，数据不足返回 none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="171" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="171" bodyend="178"/>
+        <references refid="group___none_1gab3f528d10c290b48a6035929470622c0" compoundref="none_8hpp" startline="73" endline="73">none</references>
+        <references refid="structendian_1a9d431545beb8ae553f1641172196b61c" compoundref="endian_8hpp" startline="259" endline="264">endian::read_le64</references>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1a76760402926bc215f56eab568e254569" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___memory_view_1gadb791ffe50c8af2b91becad1194e2ef9" kindref="member">cbyte_view</ref> &gt;</type>
+        <definition>optional&lt; cbyte_view &gt; byte_cursor::try_read_bytes</definition>
+        <argsstring>(size_t count) noexcept</argsstring>
+        <name>try_read_bytes</name>
+        <qualifiedname>byte_cursor::try_read_bytes</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>尝试读取指定长度的字节块 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要读取的字节数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>成功返回字节视图，数据不足返回 none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="185" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="185" bodyend="192"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+        <references refid="group___none_1gab3f528d10c290b48a6035929470622c0" compoundref="none_8hpp" startline="73" endline="73">none</references>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1abb3add906c0c134ea52e5a094cc88e55" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool byte_cursor::skip</definition>
+        <argsstring>(size_t count) noexcept</argsstring>
+        <name>skip</name>
+        <qualifiedname>byte_cursor::skip</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+<para>跳过指定数量的字节 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>count</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要跳过的字节数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>跳过成功返回 true，数据不足返回 false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="199" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="199" bodyend="205"/>
+        <references refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" compoundref="search_8hpp" startline="391" endline="393">count</references>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1af3c7e30c15d3a8a7130921f11223ec19" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void byte_cursor::reset</definition>
+        <argsstring>(const byte_t *data, size_t size) noexcept</argsstring>
+        <name>reset</name>
+        <qualifiedname>byte_cursor::reset</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>重置游标到新的缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的缓冲区指针 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的缓冲区大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="212" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="212" bodyend="218"/>
+        <references refid="classbyte__cursor_1a8541bec645b7f758a80f4411f0031282" compoundref="byte__cursor_8hpp" startline="63" endline="63">data</references>
+        <references refid="classbyte__cursor_1a5cd56490a1dbf944525511c44627cfbd" compoundref="byte__cursor_8hpp" startline="65" endline="65">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1a0115c2602e9108c42cfe85a38c1c691f" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref> &gt;</type>
+        <definition>optional&lt; uint64_t &gt; byte_cursor::try_read_bits</definition>
+        <argsstring>(uint8_t n) noexcept</argsstring>
+        <name>try_read_bits</name>
+        <qualifiedname>byte_cursor::try_read_bits</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>尝试读取指定位数（用于 HPACK Huffman 解码） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要读取的位数（最多 64） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>成功返回该值，数据不足返回 none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="225" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="225" bodyend="240"/>
+        <references refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
+        <references refid="group___none_1gab3f528d10c290b48a6035929470622c0" compoundref="none_8hpp" startline="73" endline="73">none</references>
+        <references refid="classbyte__cursor_1aabd6df95fb1afbdaa7952b4ad874e843" compoundref="byte__cursor_8hpp" startline="71" endline="76">try_read_byte</references>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1a5cb90b8eef9151bfc6eac199854172fe" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref> &gt;</type>
+        <definition>optional&lt; uint64_t &gt; byte_cursor::try_peek_bits</definition>
+        <argsstring>(uint8_t n) const noexcept</argsstring>
+        <name>try_peek_bits</name>
+        <qualifiedname>byte_cursor::try_peek_bits</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>预读指定位数而不消费 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要预读的位数（最多 64） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>成功返回该值，数据不足返回 none </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="247" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="247" bodyend="253"/>
+        <references refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
+        <references refid="group___none_1gab3f528d10c290b48a6035929470622c0" compoundref="none_8hpp" startline="73" endline="73">none</references>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1a544c24398e9eb839d508f775718da509" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void byte_cursor::skip_bits</definition>
+        <argsstring>(uint8_t n) noexcept</argsstring>
+        <name>skip_bits</name>
+        <qualifiedname>byte_cursor::skip_bits</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>跳过指定位数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要跳过的位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="259" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="259" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1a1e05a9576d1d0f3323653af9f72d979c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t byte_cursor::bits_remaining</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>bits_remaining</name>
+        <qualifiedname>byte_cursor::bits_remaining</qualifiedname>
+        <briefdescription>
+<para>位缓冲区中剩余的可读位数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="268" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="268" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="function" id="classbyte__cursor_1abf175d759782d03b781698600a375332" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool byte_cursor::refill_bits</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>refill_bits</name>
+        <qualifiedname>byte_cursor::refill_bits</qualifiedname>
+        <briefdescription>
+<para>从字节缓冲区中补充位缓冲区 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>补充成功返回 true，无剩余字节返回 false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="274" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="274" bodyend="281"/>
+        <references refid="classbyte__cursor_1af43d01d051602b288a496aaf773458a5" compoundref="byte__cursor_8hpp" startline="61" endline="61">exhausted</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>带边界检查的字节游标，用于协议解析 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>封装缓冲区及读取位置，提供安全的逐字节/多位读取操作， </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" line="29" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/byte_cursor.hpp" bodystart="29" bodyend="282"/>
+    <listofallmembers>
+      <member refid="classbyte__cursor_1a41ef9a1dda99966f0c16b04419ea0912" prot="private" virt="non-virtual"><scope>byte_cursor</scope><name>bit_buf_</name></member>
+      <member refid="classbyte__cursor_1a9a6b041a241c06bed949a9752328ad41" prot="private" virt="non-virtual"><scope>byte_cursor</scope><name>bits_in_buf_</name></member>
+      <member refid="classbyte__cursor_1a1e05a9576d1d0f3323653af9f72d979c" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>bits_remaining</name></member>
+      <member refid="classbyte__cursor_1a60cdf3058e0d4f5db3481a9675ae69bb" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>byte_cursor</name></member>
+      <member refid="classbyte__cursor_1abb74260c0be58137665ab23b00b10299" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>byte_cursor</name></member>
+      <member refid="classbyte__cursor_1aa9dc34973cde819f0c0f15cec2f08bf7" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>byte_cursor</name></member>
+      <member refid="classbyte__cursor_1ad1be0724eee63d267eb42d678f7f5332" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>consumed_bytes</name></member>
+      <member refid="classbyte__cursor_1a8541bec645b7f758a80f4411f0031282" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>data</name></member>
+      <member refid="classbyte__cursor_1a27fe996a1936d40b4a721a37b9b5948a" prot="private" virt="non-virtual"><scope>byte_cursor</scope><name>data_</name></member>
+      <member refid="classbyte__cursor_1af43d01d051602b288a496aaf773458a5" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>exhausted</name></member>
+      <member refid="classbyte__cursor_1ae9bf82d7d2a854d8ce74519872a7e060" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>peek_byte</name></member>
+      <member refid="classbyte__cursor_1ae7f76e5e099d249d3c1e96a6ec39a8cd" prot="private" virt="non-virtual"><scope>byte_cursor</scope><name>pos_</name></member>
+      <member refid="classbyte__cursor_1abf175d759782d03b781698600a375332" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>refill_bits</name></member>
+      <member refid="classbyte__cursor_1a5454850778539f9e67673cc9912f86b2" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>remaining</name></member>
+      <member refid="classbyte__cursor_1af3c7e30c15d3a8a7130921f11223ec19" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>reset</name></member>
+      <member refid="classbyte__cursor_1a5cd56490a1dbf944525511c44627cfbd" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>size</name></member>
+      <member refid="classbyte__cursor_1ad1768805979ba3fcfe07247cf99f53c1" prot="private" virt="non-virtual"><scope>byte_cursor</scope><name>size_</name></member>
+      <member refid="classbyte__cursor_1abb3add906c0c134ea52e5a094cc88e55" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>skip</name></member>
+      <member refid="classbyte__cursor_1a544c24398e9eb839d508f775718da509" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>skip_bits</name></member>
+      <member refid="classbyte__cursor_1a5cb90b8eef9151bfc6eac199854172fe" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>try_peek_bits</name></member>
+      <member refid="classbyte__cursor_1a5e41f2e4cd85e81219c2cabe5db43d2c" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>try_read_be16</name></member>
+      <member refid="classbyte__cursor_1a662b05a5baf7645543370a253ed64372" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>try_read_be24</name></member>
+      <member refid="classbyte__cursor_1aa46656604299cee2bebb4d5df2f9a22a" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>try_read_be32</name></member>
+      <member refid="classbyte__cursor_1a2d93489403fbafa8c5ada6e5333bdc72" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>try_read_be64</name></member>
+      <member refid="classbyte__cursor_1a0115c2602e9108c42cfe85a38c1c691f" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>try_read_bits</name></member>
+      <member refid="classbyte__cursor_1aabd6df95fb1afbdaa7952b4ad874e843" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>try_read_byte</name></member>
+      <member refid="classbyte__cursor_1a76760402926bc215f56eab568e254569" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>try_read_bytes</name></member>
+      <member refid="classbyte__cursor_1aa2c2c562b8c8366440fbfe2192639c08" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>try_read_le16</name></member>
+      <member refid="classbyte__cursor_1a954d8ceac1309e56ac61e43d14e513f4" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>try_read_le32</name></member>
+      <member refid="classbyte__cursor_1a0ca6d80a71735e653f38f601c924cbff" prot="public" virt="non-virtual"><scope>byte_cursor</scope><name>try_read_le64</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

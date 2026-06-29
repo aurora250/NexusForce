@@ -5,6 +5,7 @@
     <includes refid="numeric__traits_8hpp" local="yes">NeForce/core/numeric/numeric_traits.hpp</includes>
     <includes refid="unique__ptr_8hpp" local="yes">NeForce/core/memory/unique_ptr.hpp</includes>
     <includes local="no">pthread.h</includes>
+    <includedby refid="daemon_8hpp" local="yes">daemon.hpp</includedby>
     <includedby refid="signal_8hpp" local="yes">signal.hpp</includedby>
     <incdepgraph>
       <node id="4">
@@ -12,41 +13,47 @@
         <link refid="c_09_09config_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
-      </node>
-      <node id="7">
-        <label>NeForce/core/functional/functor.hpp</label>
-        <link refid="functor_8hpp"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-      </node>
-      <node id="13">
-        <label>NeForce/core/functional/hash.hpp</label>
-        <link refid="hash_8hpp"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-      </node>
-      <node id="9">
-        <label>NeForce/core/functional/invoke.hpp</label>
-        <link refid="invoke_8hpp"/>
-        <childnode refid="10" relation="include">
-        </childnode>
-      </node>
-      <node id="12">
-        <label>NeForce/core/interface/icommon.hpp</label>
-        <link refid="icommon_8hpp"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="6">
-        <label>NeForce/core/memory/unique_ptr.hpp</label>
-        <link refid="unique__ptr_8hpp"/>
-        <childnode refid="7" relation="include">
-        </childnode>
+        <label>NeForce/core/config/version.hpp</label>
+        <link refid="version_8hpp_source"/>
+      </node>
+      <node id="8">
+        <label>NeForce/core/functional/functor.hpp</label>
+        <link refid="functor_8hpp"/>
         <childnode refid="9" relation="include">
         </childnode>
+      </node>
+      <node id="14">
+        <label>NeForce/core/functional/hash.hpp</label>
+        <link refid="hash_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>NeForce/core/functional/invoke.hpp</label>
+        <link refid="invoke_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
+      </node>
+      <node id="13">
+        <label>NeForce/core/interface/icommon.hpp</label>
+        <link refid="icommon_8hpp"/>
         <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>NeForce/core/memory/unique_ptr.hpp</label>
+        <link refid="unique__ptr_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -60,12 +67,12 @@
         <link refid="system__event_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="8">
+      <node id="9">
         <label>NeForce/core/typeinfo/type_traits.hpp</label>
         <link refid="type__traits_8hpp"/>
         <childnode refid="3" relation="include">
@@ -77,46 +84,48 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>NeForce/core/utility/compressed_pair.hpp</label>
         <link refid="compressed__pair_8hpp"/>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>NeForce/core/utility/deleter.hpp</label>
         <link refid="deleter_8hpp"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>NeForce/core/utility/reference_wrapper.hpp</label>
         <link refid="reference__wrapper_8hpp"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="5">
         <label>cassert</label>
       </node>
-      <node id="15">
+      <node id="16">
         <label>pthread.h</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="3">
-        <label>NeForce.hpp</label>
-        <link refid="_ne_force_8hpp"/>
-      </node>
       <node id="2">
+        <label>daemon.hpp</label>
+        <link refid="daemon_8hpp"/>
+      </node>
+      <node id="3">
         <label>signal.hpp</label>
         <link refid="signal_8hpp"/>
-        <childnode refid="3" relation="include">
+        <childnode refid="2" relation="include">
         </childnode>
       </node>
       <node id="1">
         <label>system_event.hpp</label>
         <link refid="system__event_8hpp"/>
         <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -171,9 +180,9 @@
 <codeline lineno="63"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>unique_ptr&lt;::pthread_mutex_t,<sp/>mutex_deleter&gt;<sp/>mutex_;<sp/></highlight></codeline>
 <codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>unique_ptr&lt;::pthread_cond_t,<sp/>cond_deleter&gt;<sp/>cond_;<sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>signaled_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>type<sp/>type_;<sp/></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>signaled_;<sp/></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>type<sp/>type_;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="69"><highlight class="normal"></highlight></codeline>
 <codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="77" refid="classsystem__event_1a6b4cbd5be761d22c4cac58418c14d4ca" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classsystem__event_1a6b4cbd5be761d22c4cac58418c14d4ca" kindref="member">system_event</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>initial_state<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/><ref refid="classsystem__event_1a836fe1a751b10858f44697fdd940aa9f" kindref="member">type</ref><sp/>t<sp/>=<sp/><ref refid="classsystem__event_1a836fe1a751b10858f44697fdd940aa9fad15df6f4bb58577e7078575bd2924794" kindref="member">type::auto_reset</ref>);</highlight></codeline>
@@ -193,16 +202,20 @@
 <codeline lineno="111"><highlight class="normal"></highlight></codeline>
 <codeline lineno="121" refid="classsystem__event_1a88a8392cfe11e8ca599f429e60e4eea7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsystem__event_1a88a8392cfe11e8ca599f429e60e4eea7" kindref="member">wait</ref>(<ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/>timeout_ms<sp/>=<sp/><ref refid="classnumeric__traits" kindref="compound">numeric_traits</ref>&lt;<ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref>&gt;::<ref refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" kindref="member">max</ref>())<sp/>noexcept;</highlight></codeline>
 <codeline lineno="122"><highlight class="normal"></highlight></codeline>
-<codeline lineno="127" refid="classsystem__event_1af3914964c19a58d549eec0587b8fac1f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsystem__event_1a836fe1a751b10858f44697fdd940aa9f" kindref="member">type</ref><sp/><ref refid="classsystem__event_1af3914964c19a58d549eec0587b8fac1f" kindref="member">event_type</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>type_;<sp/>}</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"></highlight></codeline>
-<codeline lineno="129"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="134" refid="classsystem__event_1a09f6cc9daf074ce180c14b5a6cd1661e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="classsystem__event_1a09f6cc9daf074ce180c14b5a6cd1661e" kindref="member">native_handle</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>handle_;<sp/>}</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="136"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>SystemEvent</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="139"><highlight class="normal"></highlight></codeline>
-<codeline lineno="140"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_SYSTEM_SYSTEM_EVENT_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="129" refid="classsystem__event_1a40a68df7df1f662aa755b017c80aabc2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsystem__event_1a40a68df7df1f662aa755b017c80aabc2" kindref="member">try_wait</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135" refid="classsystem__event_1ac50035a38a0721148f8f77b41bdae3d3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsystem__event_1ac50035a38a0721148f8f77b41bdae3d3" kindref="member">is_set</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>signaled_;<sp/>}</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141" refid="classsystem__event_1af3914964c19a58d549eec0587b8fac1f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsystem__event_1a836fe1a751b10858f44697fdd940aa9f" kindref="member">type</ref><sp/><ref refid="classsystem__event_1af3914964c19a58d549eec0587b8fac1f" kindref="member">event_type</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>type_;<sp/>}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="148" refid="classsystem__event_1a09f6cc9daf074ce180c14b5a6cd1661e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/><ref refid="classsystem__event_1a09f6cc9daf074ce180c14b5a6cd1661e" kindref="member">native_handle</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>handle_;<sp/>}</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>SystemEvent</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_SYSTEM_SYSTEM_EVENT_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="D:/Workspace/NexusForce/include/NeForce/core/system/system_event.hpp"/>
   </compounddef>

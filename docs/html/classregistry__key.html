@@ -119,6 +119,11 @@ Public 类型</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="memdesc:a257871e0b2a75bc616d2b83d6ff96477"><td class="mdescLeft">&#160;</td><td class="mdescRight">系统注册表值类型枚举  <a href="#a257871e0b2a75bc616d2b83d6ff96477">更多...</a><br /></td></tr>
+<tr class="memitem:a2d0aa080e0b0c4ef79394c48f388e10d" id="r_a2d0aa080e0b0c4ef79394c48f388e10d"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a2d0aa080e0b0c4ef79394c48f388e10d">wow64_view</a> : ::REGSAM { <a class="el" href="#a2d0aa080e0b0c4ef79394c48f388e10da6169f75deb80f901dade9191ae0eab6d">view_default</a> = 0
+, <a class="el" href="#a2d0aa080e0b0c4ef79394c48f388e10dad8105eaad2744b9827aa71557d565d3e">view_32bit</a> = KEY_WOW64_32KEY
+, <a class="el" href="#a2d0aa080e0b0c4ef79394c48f388e10da81854e8fa855139d047a1470ce263d4d">view_64bit</a> = KEY_WOW64_64KEY
+ }</td></tr>
+<tr class="memdesc:a2d0aa080e0b0c4ef79394c48f388e10d"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册表 32/64 位视图控制  <a href="#a2d0aa080e0b0c4ef79394c48f388e10d">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
@@ -178,6 +183,10 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a066662ef175ec33a66538be770a1bb99"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取多字符串值  <br /></td></tr>
 <tr class="memitem:a423f8659ca8f39e1d0311150542429aa" id="r_a423f8659ca8f39e1d0311150542429aa"><td class="memItemLeft">::HKEY&#160;</td><td class="memItemRight"><a class="el" href="#a423f8659ca8f39e1d0311150542429aa">native_handle</a> () const noexcept</td></tr>
 <tr class="memdesc:a423f8659ca8f39e1d0311150542429aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取原生注册表句柄  <br /></td></tr>
+<tr class="memitem:a8246180120d7048c43922ef91f5318da" id="r_a8246180120d7048c43922ef91f5318da"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8246180120d7048c43922ef91f5318da">open</a> (::HKEY root, const <a class="el" href="group___string.html#gac8b291943e376bed3f3ed295a7dd68af">wstring</a> &amp;<a class="el" href="classpath.html">path</a>, <a class="el" href="#a2d0aa080e0b0c4ef79394c48f388e10d">wow64_view</a> view, ::REGSAM sam_desired=KEY_READ|KEY_WRITE)</td></tr>
+<tr class="memdesc:a8246180120d7048c43922ef91f5318da"><td class="mdescLeft">&#160;</td><td class="mdescRight">打开注册表项  <br /></td></tr>
+<tr class="memitem:a6bc4b5d03ed44fd6bc3153e64bc36269" id="r_a6bc4b5d03ed44fd6bc3153e64bc36269"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6bc4b5d03ed44fd6bc3153e64bc36269">notify_change</a> (bool watch_subtree=true, int timeout_ms=-1)</td></tr>
+<tr class="memdesc:a6bc4b5d03ed44fd6bc3153e64bc36269"><td class="mdescLeft">&#160;</td><td class="mdescRight">监听注册表项变更（阻塞直到变更或超时）  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 静态 Public 成员函数</h2></td></tr>
@@ -188,7 +197,7 @@ Public 成员函数</h2></td></tr>
 <div class="textblock"><p>系统注册表项类 </p>
 <p>系统注册表项的打开、创建、读写和枚举操作。 </p>
 
-<p class="definition">在文件 <a class="el" href="system_2registry_8hpp_source.html">system/registry.hpp</a> 第 <a class="el" href="system_2registry_8hpp_source.html#l00062">62</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="system_2registry_8hpp_source.html">system/registry.hpp</a> 第 <a class="el" href="system_2registry_8hpp_source.html#l00061">61</a> 行定义.</p>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
 <a id="a257871e0b2a75bc616d2b83d6ff96477" name="a257871e0b2a75bc616d2b83d6ff96477"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a257871e0b2a75bc616d2b83d6ff96477">&#9670;&#160;</a></span>value_type</h2>
@@ -229,7 +238,33 @@ Public 成员函数</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="system_2registry_8hpp_source.html">system/registry.hpp</a> 第 <a class="el" href="system_2registry_8hpp_source.html#l00106">106</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="system_2registry_8hpp_source.html">system/registry.hpp</a> 第 <a class="el" href="system_2registry_8hpp_source.html#l00105">105</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2d0aa080e0b0c4ef79394c48f388e10d" name="a2d0aa080e0b0c4ef79394c48f388e10d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d0aa080e0b0c4ef79394c48f388e10d">&#9670;&#160;</a></span>wow64_view</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#a2d0aa080e0b0c4ef79394c48f388e10d">registry_key::wow64_view</a> : ::REGSAM</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>注册表 32/64 位视图控制 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a2d0aa080e0b0c4ef79394c48f388e10da6169f75deb80f901dade9191ae0eab6d" name="a2d0aa080e0b0c4ef79394c48f388e10da6169f75deb80f901dade9191ae0eab6d"></a>view_default&#160;</td><td class="fielddoc"><p>默认视图 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2d0aa080e0b0c4ef79394c48f388e10dad8105eaad2744b9827aa71557d565d3e" name="a2d0aa080e0b0c4ef79394c48f388e10dad8105eaad2744b9827aa71557d565d3e"></a>view_32bit&#160;</td><td class="fielddoc"><p>32 位视图 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a2d0aa080e0b0c4ef79394c48f388e10da81854e8fa855139d047a1470ce263d4d" name="a2d0aa080e0b0c4ef79394c48f388e10da81854e8fa855139d047a1470ce263d4d"></a>view_64bit&#160;</td><td class="fielddoc"><p>64 位视图 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="system_2registry_8hpp_source.html">system/registry.hpp</a> 第 <a class="el" href="system_2registry_8hpp_source.html#l00119">119</a> 行定义.</p>
 
 </div>
 </div>
@@ -390,7 +425,7 @@ Public 成员函数</h2></td></tr>
 </dl>
 <p>在当前项下创建指定的子项。如果子项已存在，则直接打开。 </p>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -463,7 +498,7 @@ Public 成员函数</h2></td></tr>
 </dl>
 <dl class="section note"><dt>注解</dt><dd>子项必须为空，否则删除失败。如需删除包含子项的项，请使用delete_key_tree。 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -496,7 +531,7 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -606,7 +641,7 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="#aeaa082dc39ad655faf73e28b11164d3b">get_binary_value()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#aeaa082dc39ad655faf73e28b11164d3b">get_binary_value()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#aeaa082dc39ad655faf73e28b11164d3b">get_binary_value()</a>.</p>
 
@@ -649,7 +684,7 @@ Public 成员函数</h2></td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>DWORD值 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -691,7 +726,7 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="#a066662ef175ec33a66538be770a1bb99">get_multi_string_value()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a066662ef175ec33a66538be770a1bb99">get_multi_string_value()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#a066662ef175ec33a66538be770a1bb99">get_multi_string_value()</a>.</p>
 
@@ -734,7 +769,7 @@ Public 成员函数</h2></td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>QWORD值 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="#ad8090858030a677d063828e51390bb3a">get_qword_value()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#ad8090858030a677d063828e51390bb3a">get_qword_value()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#ad8090858030a677d063828e51390bb3a">get_qword_value()</a>.</p>
 
@@ -783,7 +818,7 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -819,7 +854,7 @@ Public 成员函数</h2></td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>存在返回true，否则返回false </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -855,7 +890,7 @@ Public 成员函数</h2></td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>存在返回true，否则返回false </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -885,11 +920,11 @@ Public 成员函数</h2></td></tr>
 <p>检查注册表项是否有效 </p>
 <dl class="section return"><dt>返回</dt><dd>有效返回true，否则返回false </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="system_2registry_8hpp_source.html">system/registry.hpp</a> 第 <a class="el" href="system_2registry_8hpp_source.html#l00203">203</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="system_2registry_8hpp_source.html">system/registry.hpp</a> 第 <a class="el" href="system_2registry_8hpp_source.html#l00212">212</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="system_2registry_8hpp_source.html#l00203">is_valid()</a>.</p>
+<p class="reference">引用了 <a class="el" href="system_2registry_8hpp_source.html#l00212">is_valid()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="system_2registry_8hpp_source.html#l00203">is_valid()</a> , 以及 <a class="el" href="system_2registry_8hpp_source.html#l00209">operator bool()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="system_2registry_8hpp_source.html#l00212">is_valid()</a> , 以及 <a class="el" href="system_2registry_8hpp_source.html#l00218">operator bool()</a>.</p>
 
 </div>
 </div>
@@ -919,16 +954,53 @@ Public 成员函数</h2></td></tr>
 <p>获取原生注册表句柄 </p>
 <dl class="section return"><dt>返回</dt><dd>HKEY句柄 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="system_2registry_8hpp_source.html">system/registry.hpp</a> 第 <a class="el" href="system_2registry_8hpp_source.html#l00389">389</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="system_2registry_8hpp_source.html">system/registry.hpp</a> 第 <a class="el" href="system_2registry_8hpp_source.html#l00398">398</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="system_2registry_8hpp_source.html#l00389">native_handle()</a>.</p>
+<p class="reference">引用了 <a class="el" href="system_2registry_8hpp_source.html#l00398">native_handle()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="system_2registry_8hpp_source.html#l00389">native_handle()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="system_2registry_8hpp_source.html#l00398">native_handle()</a>.</p>
+
+</div>
+</div>
+<a id="a6bc4b5d03ed44fd6bc3153e64bc36269" name="a6bc4b5d03ed44fd6bc3153e64bc36269"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bc4b5d03ed44fd6bc3153e64bc36269">&#9670;&#160;</a></span>notify_change()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool registry_key::notify_change </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>watch_subtree</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span><span class="paramdefsep"> = </span><span class="paramdefval">-1</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>监听注册表项变更（阻塞直到变更或超时） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">watch_subtree</td><td>是否同时监听子项 </td></tr>
+    <tr><td class="paramname">timeout_ms</td><td>超时毫秒，-1 无限等待 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否发生了变更 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structregistry__key__exception.html" title="系统注册表操作异常">registry_key_exception</a></td><td>监听失败时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
 <a id="ab07ea0f75761264f42ba667ce65ad6b6" name="ab07ea0f75761264f42ba667ce65ad6b6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab07ea0f75761264f42ba667ce65ad6b6">&#9670;&#160;</a></span>open()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab07ea0f75761264f42ba667ce65ad6b6">&#9670;&#160;</a></span>open() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -967,6 +1039,54 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 <p>打开指定的注册表路径，替换当前对象的内容。原有句柄将被关闭。 </p>
+
+</div>
+</div>
+<a id="a8246180120d7048c43922ef91f5318da" name="a8246180120d7048c43922ef91f5318da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8246180120d7048c43922ef91f5318da">&#9670;&#160;</a></span>open() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void registry_key::open </td>
+          <td>(</td>
+          <td class="paramtype">::HKEY</td>          <td class="paramname"><span class="paramname"><em>root</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#gac8b291943e376bed3f3ed295a7dd68af">wstring</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a2d0aa080e0b0c4ef79394c48f388e10d">wow64_view</a></td>          <td class="paramname"><span class="paramname"><em>view</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">::REGSAM</td>          <td class="paramname"><span class="paramname"><em>sam_desired</em></span><span class="paramdefsep"> = </span><span class="paramdefval">KEY_READ|KEY_WRITE</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>打开注册表项 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">root</td><td>根键 </td></tr>
+    <tr><td class="paramname">path</td><td>完整路径 </td></tr>
+    <tr><td class="paramname">view</td><td>WOW64 视图选择 </td></tr>
+    <tr><td class="paramname">sam_desired</td><td>访问权限，默认为读写 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structregistry__key__exception.html" title="系统注册表操作异常">registry_key_exception</a></td><td>当打开失败时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -1013,7 +1133,7 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a> , 以及 <a class="el" href="#a0e76f5b910636b2b440fc362b2888f22">registry_key()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a> , 以及 <a class="el" href="#a0e76f5b910636b2b440fc362b2888f22">registry_key()</a>.</p>
 
 </div>
 </div>
@@ -1043,9 +1163,9 @@ Public 成员函数</h2></td></tr>
 <p>布尔转换运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>有效返回true，否则返回false </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="system_2registry_8hpp_source.html">system/registry.hpp</a> 第 <a class="el" href="system_2registry_8hpp_source.html#l00209">209</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="system_2registry_8hpp_source.html">system/registry.hpp</a> 第 <a class="el" href="system_2registry_8hpp_source.html#l00218">218</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="system_2registry_8hpp_source.html#l00203">is_valid()</a>.</p>
+<p class="reference">引用了 <a class="el" href="system_2registry_8hpp_source.html#l00212">is_valid()</a>.</p>
 
 </div>
 </div>
@@ -1125,7 +1245,7 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>, <a class="el" href="thread_8hpp_source.html#l00475">name()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>, <a class="el" href="thread_8hpp_source.html#l00476">name()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
 
 </div>
 </div>
@@ -1163,7 +1283,7 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -1201,7 +1321,7 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -1240,7 +1360,7 @@ Public 成员函数</h2></td></tr>
 </dl>
 <p>多字符串值是以空字符分隔、双空字符结尾的字符串列表。 </p>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -1278,7 +1398,7 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -1316,7 +1436,7 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>

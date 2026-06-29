@@ -2,10 +2,10 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
   <compounddef id="structsqlite__connect" kind="struct" language="C++" prot="public" final="yes">
     <compoundname>sqlite_connect</compoundname>
-    <basecompoundref refid="structidb__tb__connect" prot="public" virt="non-virtual">idb_tb_connect</basecompoundref>
+    <basecompoundref refid="structsql__connect__base" prot="public" virt="non-virtual">sql_connect_base&lt; sqlite_connect &gt;</basecompoundref>
     <includes refid="sqlite__connect_8hpp" local="no">sqlite_connect.hpp</includes>
-    <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="structsqlite__connect_1acd145309c79e48c14d43b42788f2d459" prot="private" static="no" mutable="no">
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="structsqlite__connect_1acd145309c79e48c14d43b42788f2d459" prot="protected" static="no" mutable="no">
         <type>::sqlite3 *</type>
         <definition>::sqlite3* sqlite_connect::link_</definition>
         <argsstring></argsstring>
@@ -19,8 +19,26 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="47" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="47" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="70" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="70" bodyend="-1"/>
+        <referencedby refid="structsqlite__connect_1a6047e916f38e785f15834af405ae3844" compoundref="sqlite__connect_8hpp" startline="204" endline="204">connected</referencedby>
+        <referencedby refid="structsqlite__connect_1a7f13228bcda4e91b809481828881462a" compoundref="sqlite__connect_8hpp" startline="83" endline="83">sqlite_connect</referencedby>
       </memberdef>
+      <memberdef kind="variable" id="structsqlite__connect_1aa2e63aabd6dea7bc7e1ea5f4c6589c33" prot="protected" static="no" mutable="no">
+        <type>friend</type>
+        <definition>friend sqlite_connect::sql_connect_base&lt; sqlite_connect &gt;</definition>
+        <argsstring></argsstring>
+        <name>sql_connect_base&lt; sqlite_connect &gt;</name>
+        <qualifiedname>sqlite_connect::sql_connect_base&lt; sqlite_connect &gt;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="71" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="structsqlite__connect_1af9a42795e53f61b3729e5d64526f7112" prot="private" static="no" mutable="yes">
         <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
         <definition>string sqlite_connect::last_error_</definition>
@@ -34,7 +52,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="48" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="48" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="74" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structsqlite__connect_1a135240d9e2b0dbd354e5b5fbadd8ab2a" prot="private" static="no" mutable="yes">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t sqlite_connect::last_errno_</definition>
+        <argsstring></argsstring>
+        <name>last_errno_</name>
+        <qualifiedname>sqlite_connect::last_errno_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>最后错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="75" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="75" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -52,7 +86,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="56" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="56" bodyend="56"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="83" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="83" bodyend="83"/>
+        <references refid="structsqlite__connect_1acd145309c79e48c14d43b42788f2d459" compoundref="sqlite__connect_8hpp" startline="70">link_</references>
       </memberdef>
       <memberdef kind="function" id="structsqlite__connect_1a5f2a35ca8e5fdf3aad5700dde761706c" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -68,7 +103,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="63" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="63" bodyend="63"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="90" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="90" bodyend="90"/>
         <references refid="structidb__connect_1a689ce6c9a44cdc602e6006615e949e19">idb_connect::close</references>
       </memberdef>
       <memberdef kind="function" id="structsqlite__connect_1a9b8173a41fcdbe55b7af9fd0bd3223e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
@@ -101,7 +136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="73" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="100" column="10"/>
       </memberdef>
       <memberdef kind="function" id="structsqlite__connect_1a567e3e472c3d9886150ee4040c982c20" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -133,7 +168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="82" column="11"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="109" column="11"/>
       </memberdef>
       <memberdef kind="function" id="structsqlite__connect_1a60bba60200444b0b647d26e342144509" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -149,15 +184,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="87" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="152" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="structsqlite__connect_1a58dd0462e320b686b56efccafac5b767" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="structsqlite__connect_1af502ad1f11bb8dfcb53b2f1f379244d5" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
         <definition>bool sqlite_connect::set_character_set</definition>
-        <argsstring>(const string &amp;encoding) const override</argsstring>
+        <argsstring>(const string &amp;encoding) override</argsstring>
         <name>set_character_set</name>
         <qualifiedname>sqlite_connect::set_character_set</qualifiedname>
-        <reimplements refid="structidb__connect_1a9f0b407a683b19bee646271a19356aad">set_character_set</reimplements>
+        <reimplements refid="structidb__connect_1a7787680de395dc737bd6b14978488854">set_character_set</reimplements>
         <param>
           <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
           <declname>encoding</declname>
@@ -181,9 +216,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="94" column="11"/>
-        <references refid="structsqlite__connect_1a58dd0462e320b686b56efccafac5b767">set_character_set</references>
-        <referencedby refid="structsqlite__connect_1a58dd0462e320b686b56efccafac5b767">set_character_set</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="159" column="11"/>
+        <references refid="structsqlite__connect_1af502ad1f11bb8dfcb53b2f1f379244d5">set_character_set</references>
+        <referencedby refid="structsqlite__connect_1af502ad1f11bb8dfcb53b2f1f379244d5">set_character_set</referencedby>
       </memberdef>
       <memberdef kind="function" id="structsqlite__connect_1a525f4b9ac7de9d1222c98f357c12ab7f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
@@ -202,7 +237,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="100" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="165" column="18"/>
         <references refid="structsqlite__connect_1a525f4b9ac7de9d1222c98f357c12ab7f">get_character_set</references>
         <referencedby refid="structsqlite__connect_1a525f4b9ac7de9d1222c98f357c12ab7f">get_character_set</referencedby>
       </memberdef>
@@ -223,7 +258,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="106" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="171" column="18"/>
         <references refid="structsqlite__connect_1a8731bf8800a15151e22de0c9ff7aecaf">get_error</references>
         <referencedby refid="structsqlite__connect_1a8731bf8800a15151e22de0c9ff7aecaf">get_error</referencedby>
       </memberdef>
@@ -244,9 +279,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="112" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="112" bodyend="112"/>
-        <references refid="structsqlite__connect_1adadea5227a4c0c4eb9d1cc641ba72600" compoundref="sqlite__connect_8hpp" startline="112" endline="112">get_errno</references>
-        <referencedby refid="structsqlite__connect_1adadea5227a4c0c4eb9d1cc641ba72600" compoundref="sqlite__connect_8hpp" startline="112" endline="112">get_errno</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="177" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="177" bodyend="177"/>
+        <references refid="structsqlite__connect_1adadea5227a4c0c4eb9d1cc641ba72600" compoundref="sqlite__connect_8hpp" startline="177" endline="177">get_errno</references>
+        <referencedby refid="structsqlite__connect_1adadea5227a4c0c4eb9d1cc641ba72600" compoundref="sqlite__connect_8hpp" startline="177" endline="177">get_errno</referencedby>
       </memberdef>
       <memberdef kind="function" id="structsqlite__connect_1a1493548378279ac5916f09fd757d80b1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -278,7 +313,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="119" column="11"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="184" column="11"/>
       </memberdef>
       <memberdef kind="function" id="structsqlite__connect_1a17bae48b7f3266dd36b866828397c0d2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__tb__result" kindref="compound">idb_tb_result</ref> &gt;</type>
@@ -310,7 +345,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="126" column="17"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="191" column="17"/>
       </memberdef>
       <memberdef kind="function" id="structsqlite__connect_1ab348cbf76f7b9877656b627523fdb5e3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__prepared__statement" kindref="compound">idb_prepared_statement</ref> &gt;</type>
@@ -342,7 +377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="133" column="17"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="198" column="17"/>
       </memberdef>
       <memberdef kind="function" id="structsqlite__connect_1a6047e916f38e785f15834af405ae3844" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -361,7 +396,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="139" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="139" bodyend="139"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="204" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="204" bodyend="204"/>
+        <references refid="structsqlite__connect_1acd145309c79e48c14d43b42788f2d459" compoundref="sqlite__connect_8hpp" startline="70">link_</references>
       </memberdef>
       <memberdef kind="function" id="structsqlite__connect_1a08e38af5299253b4bbe518a01b4d8260" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -380,7 +416,115 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="145" column="11"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="210" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1aebc3dc00b8068116ebba65071e658f32" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool sqlite_connect::table_exists</definition>
+        <argsstring>(const string &amp;table) const override</argsstring>
+        <name>table_exists</name>
+        <qualifiedname>sqlite_connect::table_exists</qualifiedname>
+        <reimplements refid="structsql__connect__base_1ab8a59526d650a1116b873d447068ad57">table_exists</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="212" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1a80709adcee4b2e17cb3d2d15edce55e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t sqlite_connect::batch_insert</definition>
+        <argsstring>(const string &amp;table, const vector&lt; string &gt; &amp;columns, const vector&lt; vector&lt; string &gt; &gt; &amp;rows) override</argsstring>
+        <name>batch_insert</name>
+        <qualifiedname>sqlite_connect::batch_insert</qualifiedname>
+        <reimplements refid="structidb__tb__connect_1a5952b72ab28dd8daa58bbac98e2c0e78">batch_insert</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>columns</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &gt; &amp;</type>
+          <declname>rows</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="214" column="12"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="structsqlite__connect_1a7ad60c72d4be309a44a6a256666c9f1a" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string sqlite_connect::begin_sql</definition>
+        <argsstring>()</argsstring>
+        <name>begin_sql</name>
+        <qualifiedname>sqlite_connect::begin_sql</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="218" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="218" bodyend="218"/>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1a3ba74de0db8901d600f8d686ada7b714" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string sqlite_connect::commit_sql</definition>
+        <argsstring>()</argsstring>
+        <name>commit_sql</name>
+        <qualifiedname>sqlite_connect::commit_sql</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="219" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="219" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1af197fcac92dd6e06b77e8db58faeb3b4" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string sqlite_connect::rollback_sql</definition>
+        <argsstring>()</argsstring>
+        <name>rollback_sql</name>
+        <qualifiedname>sqlite_connect::rollback_sql</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="220" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="220" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="structsqlite__connect_1a532b2836ae5429b583615fc8fd9f41d8" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string sqlite_connect::table_exists_query</definition>
+        <argsstring>(const string &amp;table) const</argsstring>
+        <name>table_exists_query</name>
+        <qualifiedname>sqlite_connect::table_exists_query</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="221" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="221" bodyend="223"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -402,13 +546,19 @@
 </para>
     </detaileddescription>
     <inheritancegraph>
-      <node id="3">
+      <node id="4">
         <label>idb_connect</label>
         <link refid="structidb__connect"/>
       </node>
-      <node id="2">
+      <node id="3">
         <label>idb_tb_connect</label>
         <link refid="structidb__tb__connect"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>sql_connect_base&lt; sqlite_connect &gt;</label>
+        <link refid="structsql__connect__base"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
@@ -420,13 +570,19 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="3">
+      <node id="4">
         <label>idb_connect</label>
         <link refid="structidb__connect"/>
       </node>
-      <node id="2">
+      <node id="3">
         <label>idb_tb_connect</label>
         <link refid="structidb__tb__connect"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>sql_connect_base&lt; sqlite_connect &gt;</label>
+        <link refid="structsql__connect__base"/>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
@@ -437,10 +593,15 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="45" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="45" bodyend="146"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" line="51" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sqlite/sqlite_connect.hpp" bodystart="51" bodyend="224"/>
     <listofallmembers>
+      <member refid="structsqlite__connect_1a80709adcee4b2e17cb3d2d15edce55e2" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>batch_insert</name></member>
+      <member refid="structsql__connect__base_1abe05e889f889d8968b23a6a278c72d4e" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>begin</name></member>
+      <member refid="structsqlite__connect_1a7ad60c72d4be309a44a6a256666c9f1a" prot="private" virt="non-virtual"><scope>sqlite_connect</scope><name>begin_sql</name></member>
       <member refid="structidb__connect_1ab9be909e9ecc1db9cbcc28186de35c95" prot="public" virt="non-virtual"><scope>sqlite_connect</scope><name>clock_type</name></member>
       <member refid="structsqlite__connect_1a60bba60200444b0b647d26e342144509" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>close</name></member>
+      <member refid="structsql__connect__base_1a65d87c665335e8b48e04011823b2f101" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>commit</name></member>
+      <member refid="structsqlite__connect_1a3ba74de0db8901d600f8d686ada7b714" prot="private" virt="non-virtual"><scope>sqlite_connect</scope><name>commit_sql</name></member>
       <member refid="structsqlite__connect_1a9b8173a41fcdbe55b7af9fd0bd3223e2" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>connect</name></member>
       <member refid="structsqlite__connect_1a6047e916f38e785f15834af405ae3844" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>connected</name></member>
       <member refid="structidb__connect_1a5fe328d4bdf863d226d7065daf2cc56b" prot="public" virt="non-virtual"><scope>sqlite_connect</scope><name>get_alive</name></member>
@@ -448,14 +609,21 @@
       <member refid="structsqlite__connect_1adadea5227a4c0c4eb9d1cc641ba72600" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>get_errno</name></member>
       <member refid="structsqlite__connect_1a8731bf8800a15151e22de0c9ff7aecaf" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>get_error</name></member>
       <member refid="structsqlite__connect_1a08e38af5299253b4bbe518a01b4d8260" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>is_valid</name></member>
+      <member refid="structsqlite__connect_1a135240d9e2b0dbd354e5b5fbadd8ab2a" prot="private" virt="non-virtual"><scope>sqlite_connect</scope><name>last_errno_</name></member>
       <member refid="structsqlite__connect_1af9a42795e53f61b3729e5d64526f7112" prot="private" virt="non-virtual"><scope>sqlite_connect</scope><name>last_error_</name></member>
-      <member refid="structsqlite__connect_1acd145309c79e48c14d43b42788f2d459" prot="private" virt="non-virtual"><scope>sqlite_connect</scope><name>link_</name></member>
+      <member refid="structsqlite__connect_1acd145309c79e48c14d43b42788f2d459" prot="protected" virt="non-virtual"><scope>sqlite_connect</scope><name>link_</name></member>
+      <member refid="structsql__connect__base_1aa0b6741b0c883b61f956a4797b121eff" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>native_handle</name></member>
       <member refid="structsqlite__connect_1ab348cbf76f7b9877656b627523fdb5e3" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>prepare_statement</name></member>
       <member refid="structsqlite__connect_1a17bae48b7f3266dd36b866828397c0d2" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>query</name></member>
       <member refid="structsqlite__connect_1a567e3e472c3d9886150ee4040c982c20" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>reconnect</name></member>
       <member refid="structidb__connect_1a23d22fba9ce82c798a1363f0f816f593" prot="public" virt="non-virtual"><scope>sqlite_connect</scope><name>refresh_alive</name></member>
-      <member refid="structsqlite__connect_1a58dd0462e320b686b56efccafac5b767" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>set_character_set</name></member>
+      <member refid="structsql__connect__base_1a2b520a2c7634de76a406fa57394e648f" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>rollback</name></member>
+      <member refid="structsqlite__connect_1af197fcac92dd6e06b77e8db58faeb3b4" prot="private" virt="non-virtual"><scope>sqlite_connect</scope><name>rollback_sql</name></member>
+      <member refid="structsqlite__connect_1af502ad1f11bb8dfcb53b2f1f379244d5" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>set_character_set</name></member>
+      <member refid="structsqlite__connect_1aa2e63aabd6dea7bc7e1ea5f4c6589c33" prot="protected" virt="non-virtual"><scope>sqlite_connect</scope><name>sql_connect_base&lt; sqlite_connect &gt;</name></member>
       <member refid="structsqlite__connect_1a7f13228bcda4e91b809481828881462a" prot="public" virt="non-virtual"><scope>sqlite_connect</scope><name>sqlite_connect</name></member>
+      <member refid="structsqlite__connect_1aebc3dc00b8068116ebba65071e658f32" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>table_exists</name></member>
+      <member refid="structsqlite__connect_1a532b2836ae5429b583615fc8fd9f41d8" prot="private" virt="non-virtual"><scope>sqlite_connect</scope><name>table_exists_query</name></member>
       <member refid="structsqlite__connect_1a1493548378279ac5916f09fd757d80b1" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>update</name></member>
       <member refid="structidb__connect_1a5d49022ee34e758b7ad6725549ba9e2e" prot="public" virt="virtual"><scope>sqlite_connect</scope><name>~idb_connect</name></member>
       <member refid="structidb__tb__connect_1a4ba8618ecc342e6ddfc5c20d9f2297ad" prot="public" virt="non-virtual"><scope>sqlite_connect</scope><name>~idb_tb_connect</name></member>

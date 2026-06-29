@@ -100,60 +100,41 @@ $(function(){initNavTree('classlog__sink.html','','classlog__sink-members'); });
 <div class="dynheader">
 类 log_sink 继承关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classlog__sink__inherit__graph.svg" width="203" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classlog__sink__inherit__graph.svg" width="316" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
 <tr class="memitem:a23426545dd75dd433f3d5b7b0407faaf" id="r_a23426545dd75dd433f3d5b7b0407faaf"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a23426545dd75dd433f3d5b7b0407faaf">log</a> (const <a class="el" href="structlog__event.html">log_event</a> &amp;event)=0</td></tr>
-<tr class="memdesc:a23426545dd75dd433f3d5b7b0407faaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">输出日志事件  <br /></td></tr>
-<tr class="memitem:adb79b71ac6d34d43d31a708d9c46f599" id="r_adb79b71ac6d34d43d31a708d9c46f599"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#adb79b71ac6d34d43d31a708d9c46f599">flush</a> ()=0</td></tr>
-<tr class="memdesc:adb79b71ac6d34d43d31a708d9c46f599"><td class="mdescLeft">&#160;</td><td class="mdescRight">刷新缓冲区  <br /></td></tr>
+<tr class="memdesc:a23426545dd75dd433f3d5b7b0407faaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">输出一条日志事件  <br /></td></tr>
+<tr class="memitem:adb79b71ac6d34d43d31a708d9c46f599" id="r_adb79b71ac6d34d43d31a708d9c46f599"><td class="memItemLeft"><a id="adb79b71ac6d34d43d31a708d9c46f599" name="adb79b71ac6d34d43d31a708d9c46f599"></a>
+virtual void&#160;</td><td class="memItemRight"><b>flush</b> ()=0</td></tr>
+<tr class="memdesc:adb79b71ac6d34d43d31a708d9c46f599"><td class="mdescLeft">&#160;</td><td class="mdescRight">强制刷新缓冲区 <br /></td></tr>
 <tr class="memitem:a354978735401f7f31d9a4c9bcc97f398" id="r_a354978735401f7f31d9a4c9bcc97f398"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a354978735401f7f31d9a4c9bcc97f398">set_formatter</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classlog__formatter.html">log_formatter</a> &gt; <a class="el" href="structformatter.html">formatter</a>)</td></tr>
 <tr class="memdesc:a354978735401f7f31d9a4c9bcc97f398"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置格式化器  <br /></td></tr>
+<tr class="memitem:a7fab32f86c81ae3da1b9c1b8c0935f61" id="r_a7fab32f86c81ae3da1b9c1b8c0935f61"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a7fab32f86c81ae3da1b9c1b8c0935f61">set_flush_interval</a> (<a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> interval_ms)</td></tr>
+<tr class="memdesc:a7fab32f86c81ae3da1b9c1b8c0935f61"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置自动刷新间隔  <br /></td></tr>
+<tr class="memitem:afbe5a916c40d83cc131cf80f53d2dbf9" id="r_afbe5a916c40d83cc131cf80f53d2dbf9"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#afbe5a916c40d83cc131cf80f53d2dbf9">should_auto_flush</a> () const</td></tr>
+<tr class="memdesc:afbe5a916c40d83cc131cf80f53d2dbf9"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否需要自动刷新  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected 属性</h2></td></tr>
 <tr class="memitem:a4ef9a9a7bd511f678816d4654ed1f9b0" id="r_a4ef9a9a7bd511f678816d4654ed1f9b0"><td class="memItemLeft"><a id="a4ef9a9a7bd511f678816d4654ed1f9b0" name="a4ef9a9a7bd511f678816d4654ed1f9b0"></a>
 <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classlog__formatter.html">log_formatter</a> &gt;&#160;</td><td class="memItemRight"><b>formatter_</b></td></tr>
-<tr class="memdesc:a4ef9a9a7bd511f678816d4654ed1f9b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">日志格式化器 <br /></td></tr>
+<tr class="memdesc:a4ef9a9a7bd511f678816d4654ed1f9b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">格式化器 <br /></td></tr>
+<tr class="memitem:a89802d501ccca179cd38b5216a31d3c5" id="r_a89802d501ccca179cd38b5216a31d3c5"><td class="memItemLeft"><a id="a89802d501ccca179cd38b5216a31d3c5" name="a89802d501ccca179cd38b5216a31d3c5"></a>
+<a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a>&#160;</td><td class="memItemRight"><b>flush_interval_ms_</b> {0}</td></tr>
+<tr class="memdesc:a89802d501ccca179cd38b5216a31d3c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">自动刷新间隔毫秒数（0=禁用） <br /></td></tr>
+<tr class="memitem:adbe06c9eb43eba4c8e946c5f635c13de" id="r_adbe06c9eb43eba4c8e946c5f635c13de"><td class="memItemLeft"><a id="adbe06c9eb43eba4c8e946c5f635c13de" name="adbe06c9eb43eba4c8e946c5f635c13de"></a>
+<a class="el" href="classtimestamp.html">timestamp</a>&#160;</td><td class="memItemRight"><b>last_flush_</b> {<a class="el" href="classtimestamp.html#a0ee50a1d67c49633c43c769bba87a0bb">timestamp::now</a>()}</td></tr>
+<tr class="memdesc:adbe06c9eb43eba4c8e946c5f635c13de"><td class="mdescLeft">&#160;</td><td class="mdescRight">上次刷新的时间戳 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>日志输出目标基类 </p>
-<p>所有日志输出目标的抽象基类，定义了日志输出和刷新的接口。 支持设置自定义格式化器。 </p>
+<p>所有日志输出目标的抽象基类。 支持设置自定义格式化器和自动刷新间隔。 </p>
 
-<p class="definition">在文件 <a class="el" href="log__sink_8hpp_source.html">log_sink.hpp</a> 第 <a class="el" href="log__sink_8hpp_source.html#l00031">31</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="log__sink_8hpp_source.html">log_sink.hpp</a> 第 <a class="el" href="log__sink_8hpp_source.html#l00047">47</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="adb79b71ac6d34d43d31a708d9c46f599" name="adb79b71ac6d34d43d31a708d9c46f599"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb79b71ac6d34d43d31a708d9c46f599">&#9670;&#160;</a></span>flush()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void log_sink::flush </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel pure-virtual">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>刷新缓冲区 </p>
-<p>确保所有缓存的日志都被实际输出。 </p>
-
-<p>在 <a class="el" href="classconsole__sink.html#a6e2aa384313eaaae970176e5b843688f">console_sink</a> , 以及 <a class="el" href="classfile__sink.html#a664527322116a172e817afa7b0766fa6">file_sink</a> 内被实现.</p>
-
-</div>
-</div>
 <a id="a23426545dd75dd433f3d5b7b0407faaf" name="a23426545dd75dd433f3d5b7b0407faaf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a23426545dd75dd433f3d5b7b0407faaf">&#9670;&#160;</a></span>log()</h2>
 
@@ -177,16 +158,52 @@ Protected 属性</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>输出日志事件 </p>
+<p>输出一条日志事件 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">event</td><td>要输出的日志事件</td></tr>
+    <tr><td class="paramname">event</td><td>要输出的日志事件 </td></tr>
   </table>
   </dd>
 </dl>
-<p>纯虚函数，由派生类实现具体的输出逻辑。 </p>
 
-<p>在 <a class="el" href="classconsole__sink.html#aabfb3e9398b18135386b9deabbc62488">console_sink</a> , 以及 <a class="el" href="classfile__sink.html#a5852a135e31a2e0d371d2c19729d052a">file_sink</a> 内被实现.</p>
+<p>在 <a class="el" href="classconsole__sink.html#aabfb3e9398b18135386b9deabbc62488">console_sink</a>, <a class="el" href="classfile__sink.html#a5852a135e31a2e0d371d2c19729d052a">file_sink</a> , 以及 <a class="el" href="classsyslog__sink.html#a9e8a533f90b698d80b78d2aee0960909">syslog_sink</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a7fab32f86c81ae3da1b9c1b8c0935f61" name="a7fab32f86c81ae3da1b9c1b8c0935f61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fab32f86c81ae3da1b9c1b8c0935f61">&#9670;&#160;</a></span>set_flush_interval()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void log_sink::set_flush_interval </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></td>          <td class="paramname"><span class="paramname"><em>interval_ms</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置自动刷新间隔 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">interval_ms</td><td>间隔毫秒数，0 表示禁用自动刷新 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="log__sink_8hpp_source.html">log_sink.hpp</a> 第 <a class="el" href="log__sink_8hpp_source.html#l00075">75</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="log__sink_8hpp_source.html#l00050">flush_interval_ms_</a>.</p>
 
 </div>
 </div>
@@ -208,11 +225,42 @@ Protected 属性</h2></td></tr>
 <p>设置格式化器 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">formatter</td><td>格式化器的唯一指针</td></tr>
+    <tr><td class="paramname">formatter</td><td>新的格式化器（unique_ptr，转移所有权） </td></tr>
   </table>
   </dd>
 </dl>
-<p>可以为不同的输出目标设置不同的格式化方式。 </p>
+
+</div>
+</div>
+<a id="afbe5a916c40d83cc131cf80f53d2dbf9" name="afbe5a916c40d83cc131cf80f53d2dbf9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbe5a916c40d83cc131cf80f53d2dbf9">&#9670;&#160;</a></span>should_auto_flush()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool log_sink::should_auto_flush </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查是否需要自动刷新 </p>
+<dl class="section return"><dt>返回</dt><dd>距上次刷新已超过间隔则返回 true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="log__sink_8hpp_source.html">log_sink.hpp</a> 第 <a class="el" href="log__sink_8hpp_source.html#l00081">81</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="log__sink_8hpp_source.html#l00050">flush_interval_ms_</a>, <a class="el" href="log__sink_8hpp_source.html#l00051">last_flush_</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l01510">timestamp::now()</a>.</p>
 
 </div>
 </div>

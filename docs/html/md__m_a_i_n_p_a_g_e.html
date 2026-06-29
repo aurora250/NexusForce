@@ -271,7 +271,7 @@ $(function(){initNavTree('md__m_a_i_n_p_a_g_e.html','',''); });
 <li><b>停止令牌</b> - 可取消的异步操作 <span class="tt"><a class="el" href="classstop__token.html" title="停止令牌类">stop_token</a></span>/<span class="tt"><a class="el" href="classstop__source.html" title="停止源类">stop_source</a></span>/<span class="tt"><a class="el" href="classstop__callback.html" title="停止回调类模板">stop_callback</a></span></li>
 <li><b>同步原语</b> - 互斥锁 <span class="tt"><a class="el" href="classmutex.html" title="非递归互斥锁">mutex</a></span>、读写锁 <span class="tt"><a class="el" href="classshared__mutex.html" title="共享互斥锁类">shared_mutex</a></span>、信号量 <span class="tt"><a class="el" href="classsemaphore.html" title="系统信号量类">semaphore</a></span>/<span class="tt"><a class="el" href="classatomic__semaphore.html" title="原子信号量类模板">atomic_semaphore</a></span>、线程屏障 <span class="tt"><a class="el" href="classbarrier.html" title="通用屏障类">barrier</a></span>与闩锁 <span class="tt"><a class="el" href="classlatch.html" title="闩锁类">latch</a></span></li>
 <li><b>原子操作</b> - 原子类型 <span class="tt"><a class="el" href="structatomic.html" title="通用原子类型模板">atomic</a></span>、原子FUTEX <span class="tt"><a class="el" href="classatomic__futex.html" title="原子快速用户态互斥锁类模板">atomic_futex</a></span>、全局原子操作函数体系</li>
-<li><b>多策略线程</b> - 通用线程 <span class="tt"><a class="el" href="classthread.html" title="线程类">thread</a></span>、携带停止令牌的作用域线程 <span class="tt"><a class="el" href="classscoped__thread.html" title="作用域线程类">scoped_thread</a></span>、手动开启的惰性线程 <span class="tt"><a class="el" href="classlazy__thread.html" title="延迟启动线程类">lazy_thread</a></span></li>
+<li><b>多策略线程</b> - 通用线程 <span class="tt"><a class="el" href="classthread.html" title="线程类">thread</a></span>、携带停止令牌的作用域线程 <span class="tt"><a class="el" href="classscope__thread.html" title="作用域线程类">scope_thread</a></span>、手动开启的惰性线程 <span class="tt"><a class="el" href="classlazy__thread.html" title="延迟启动线程类">lazy_thread</a></span></li>
 <li><b>基本异步模型</b> - <span class="tt"><a class="el" href="group___async.html#ga4bbf8cf030239a4806813af4dcafec6f" title="异步执行函数（指定策略）">async</a></span> 及其配套的 <span class="tt"><a class="el" href="classfuture.html" title="独占future类模板">future</a></span>/<span class="tt"><a class="el" href="classpromise.html" title="Promise类模板">promise</a></span>/<span class="tt">packaged_task</span> 结构</li>
 <li><b>危险指针</b> - 无锁数据结构的内存管理 <span class="tt">hazard_ptr</span>/<span class="tt"><a class="el" href="classhazard__pointer__domain.html" title="险象指针域">hazard_pointer_domain</a></span></li>
 </ul>
@@ -335,7 +335,7 @@ $(function(){initNavTree('md__m_a_i_n_p_a_g_e.html','',''); });
 <li><b><span class="tt"><a class="el" href="classfile__sink.html" title="文件日志输出目标">file_sink</a></span></b> - 日志文件管理与轮转</li>
 <li><b>多级别日志</b> - 支持不同日志级别</li>
 <li><b><span class="tt"><a class="el" href="classlog__formatter.html" title="日志格式化器">log_formatter</a></span></b> - 自定义日志格式</li>
-<li><b><span class="tt"><a class="el" href="classlogger.html" title="日志记录器单例类">logger</a></span></b> - 灵活可配置的日志器</li>
+<li><b><span class="tt"><a class="el" href="classlogger.html" title="层级化日志记录器">logger</a></span></b> - 灵活可配置的日志器</li>
 </ul>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md25"></a>
 🔤 字符串处理 (String)</h2>
@@ -350,7 +350,7 @@ $(function(){initNavTree('md__m_a_i_n_p_a_g_e.html','',''); });
 ⚙️ 系统接口 (System)</h2>
 <ul>
 <li><b><span class="tt"><a class="el" href="classprocess.html" title="进程管理类">process</a></span></b> - 进程创建与控制</li>
-<li><b><span class="tt"><a class="el" href="classpipe.html" title="阻塞式匿名管道类">pipe</a></span></b> - 管道创建与管理</li>
+<li><b><span class="tt"><a class="el" href="classpipe.html" title="匿名管道类">pipe</a></span></b> - 管道创建与管理</li>
 <li><b><span class="tt"><a class="el" href="classdynamic__library.html" title="动态链接库加载器">dynamic_library</a></span></b> - 运行时库加载</li>
 <li><b><span class="tt"><a class="el" href="group___console_i_o.html#gab80c18dffdb3640ae4a389dd9fb4929e" title="全局控制台实例">console</a></span></b> - 高集成度的终端交互</li>
 <li><b><span class="tt"><a class="el" href="classcmdline.html" title="命令行参数解析器">cmdline</a></span></b> - 进程参数分析与操作</li>

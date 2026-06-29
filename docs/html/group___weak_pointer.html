@@ -113,10 +113,88 @@ $(function(){initNavTree('group___weak_pointer.html','',''); });
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">弱指针的所有权比较器特化  <a href="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:owner_5Fless_3C_20void_20_3E" id="r_owner_5Fless_3C_20void_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structowner__less_3_01void_01_4.html">owner_less&lt; void &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">通用所有权比较器特化  <a href="structowner__less_3_01void_01_4.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ga78f9e2de1f42821593e5dd8183ae748a" id="r_ga78f9e2de1f42821593e5dd8183ae748a"><td class="memItemLeft"><a class="el" href="classweak__ptr.html">weak_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga78f9e2de1f42821593e5dd8183ae748a">enable_shared_from_this&lt; T &gt;::weak_from_this</a> () noexcept</td></tr>
+<tr class="memdesc:ga78f9e2de1f42821593e5dd8183ae748a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取指向 this 的弱指针  <br /></td></tr>
+<tr class="memitem:gaf5f0f4ef4fee4243568b7a3987ac92de" id="r_gaf5f0f4ef4fee4243568b7a3987ac92de"><td class="memItemLeft"><a class="el" href="classweak__ptr.html">weak_ptr</a>&lt; const T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaf5f0f4ef4fee4243568b7a3987ac92de">enable_shared_from_this&lt; T &gt;::weak_from_this</a> () const noexcept</td></tr>
+<tr class="memdesc:gaf5f0f4ef4fee4243568b7a3987ac92de"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取指向 this 的常量弱指针  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>弱智能指针相关类和辅助工具 </p>
-</div></div><!-- contents -->
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="gaf5f0f4ef4fee4243568b7a3987ac92de" name="gaf5f0f4ef4fee4243568b7a3987ac92de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf5f0f4ef4fee4243568b7a3987ac92de">&#9670;&#160;</a></span>weak_from_this() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classweak__ptr.html">weak_ptr</a>&lt; const T &gt; <a class="el" href="structenable__shared__from__this.html">enable_shared_from_this</a>&lt; T &gt;::weak_from_this </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取指向 this 的常量弱指针 </p>
+<dl class="section return"><dt>返回</dt><dd>指向 this 常量版本的 <a class="el" href="classweak__ptr.html" title="弱智能指针类模板">weak_ptr</a> </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>如果对象没有被 <a class="el" href="classshared__ptr.html" title="共享智能指针类模板">shared_ptr</a> 管理，返回空的 <a class="el" href="classweak__ptr.html" title="弱智能指针类模板">weak_ptr</a> </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00357">357</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02253">is_base_of_v</a>.</p>
+
+</div>
+</div>
+<a id="ga78f9e2de1f42821593e5dd8183ae748a" name="ga78f9e2de1f42821593e5dd8183ae748a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga78f9e2de1f42821593e5dd8183ae748a">&#9670;&#160;</a></span>weak_from_this() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classweak__ptr.html">weak_ptr</a>&lt; T &gt; <a class="el" href="structenable__shared__from__this.html">enable_shared_from_this</a>&lt; T &gt;::weak_from_this </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取指向 this 的弱指针 </p>
+<dl class="section return"><dt>返回</dt><dd>指向 this 的 <a class="el" href="classweak__ptr.html" title="弱智能指针类模板">weak_ptr</a> </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>如果对象没有被 <a class="el" href="classshared__ptr.html" title="共享智能指针类模板">shared_ptr</a> 管理，返回空的 <a class="el" href="classweak__ptr.html" title="弱智能指针类模板">weak_ptr</a> </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="weak__ptr_8hpp_source.html">weak_ptr.hpp</a> 第 <a class="el" href="weak__ptr_8hpp_source.html#l00348">348</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02253">is_base_of_v</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

@@ -13,38 +13,14 @@ var group___s_q_lite3 =
       [ "prepare_statement", "structsqlite__connect.html#ab348cbf76f7b9877656b627523fdb5e3", null ],
       [ "query", "structsqlite__connect.html#a17bae48b7f3266dd36b866828397c0d2", null ],
       [ "reconnect", "structsqlite__connect.html#a567e3e472c3d9886150ee4040c982c20", null ],
-      [ "set_character_set", "structsqlite__connect.html#a58dd0462e320b686b56efccafac5b767", null ],
-      [ "update", "structsqlite__connect.html#a1493548378279ac5916f09fd757d80b1", null ]
+      [ "set_character_set", "structsqlite__connect.html#af502ad1f11bb8dfcb53b2f1f379244d5", null ],
+      [ "update", "structsqlite__connect.html#a1493548378279ac5916f09fd757d80b1", null ],
+      [ "link_", "structsqlite__connect.html#acd145309c79e48c14d43b42788f2d459", null ]
     ] ],
     [ "sqlite_factory", "classsqlite__factory.html", [
       [ "sqlite_factory", "classsqlite__factory.html#a29a3eea918e06eff27ccd34ccd99d1b6", null ],
       [ "create_connect", "classsqlite__factory.html#a74ed9445802c58b3d703797a86925d6e", null ],
       [ "create_result", "classsqlite__factory.html#aa1d9bbef2b3de564de8203e065453f5f", null ]
-    ] ],
-    [ "sqlite_prepared_result", "structsqlite__prepared__result.html", [
-      [ "sqlite_prepared_result", "structsqlite__prepared__result.html#ae0e28b9c1dff27dbacbc5f26c3c4ebc2", null ],
-      [ "sqlite_prepared_result", "structsqlite__prepared__result.html#a8798a2b60e8bb702a112a64db51c8042", null ],
-      [ "~sqlite_prepared_result", "structsqlite__prepared__result.html#a3373bfa2cf54feebd9687f743ace2098", null ],
-      [ "column_count", "structsqlite__prepared__result.html#a75b3e87886afedfd21d462e56ee58227", null ],
-      [ "column_names", "structsqlite__prepared__result.html#a3c8f81ee948ef0d2d237c3f7c62182c4", null ],
-      [ "column_types", "structsqlite__prepared__result.html#a361a78df804579a4da08201f0bb0efb3", null ],
-      [ "empty", "structsqlite__prepared__result.html#a9ba1163fc21a263de513ed1884977fc1", null ],
-      [ "get", "structsqlite__prepared__result.html#ab8a8a94f1729c00d5849009a76aaf4b0", null ],
-      [ "get_bit", "structsqlite__prepared__result.html#a0f34a8f3666c0b3e05e0463cbf54858f", null ],
-      [ "get_blob", "structsqlite__prepared__result.html#a519d53bef4e502f7e035991ef81fb715", null ],
-      [ "get_bool", "structsqlite__prepared__result.html#a8b9f863495f40ca73731fc9e47cca2a3", null ],
-      [ "get_date", "structsqlite__prepared__result.html#a4703bed2f09423a22c9d8166611ad6b1", null ],
-      [ "get_datetime", "structsqlite__prepared__result.html#ac0ea4421d5d15a45f505d83e64a511e3", null ],
-      [ "get_decimal", "structsqlite__prepared__result.html#a25e0484d79e84ce01e5921207ccc7572", null ],
-      [ "get_float32", "structsqlite__prepared__result.html#ad4d0e593ed382b60567ab45fabfc9e71", null ],
-      [ "get_float64", "structsqlite__prepared__result.html#a26af70c1a77e3b227765237d9f9510cb", null ],
-      [ "get_int16", "structsqlite__prepared__result.html#a24cad997401212b260ba44eba3ea9376", null ],
-      [ "get_int32", "structsqlite__prepared__result.html#af95197313278d2929c2e0ad996e5627c", null ],
-      [ "get_int64", "structsqlite__prepared__result.html#a5c6baa97211bf82c1c296c2a0428c098", null ],
-      [ "get_time", "structsqlite__prepared__result.html#aafe6aee7b6c153e582ca901d081c715c", null ],
-      [ "get_timestamp", "structsqlite__prepared__result.html#afba4957c160438c6531837871fbab0ad", null ],
-      [ "NEFORCE_DEPRECATED_FOR", "structsqlite__prepared__result.html#a68c8db5198ec7939d93e9650418fbe3b", null ],
-      [ "next", "structsqlite__prepared__result.html#a0931a3c05c9b8ceaf51f4586d14324f8", null ]
     ] ],
     [ "sqlite_prepared_statement", "classsqlite__prepared__statement.html", [
       [ "sqlite_prepared_statement", "classsqlite__prepared__statement.html#a0b652a3b7622842aa765b189d7704d39", null ],
@@ -58,7 +34,7 @@ var group___s_q_lite3 =
       [ "bind_param", "classsqlite__prepared__statement.html#aac7ec2fc68f0e4cb1a5c9f9a27209357", null ],
       [ "bind_param", "classsqlite__prepared__statement.html#a235ed7a1068557e610d0625de3340b1e", null ],
       [ "execute", "classsqlite__prepared__statement.html#a86f109f44cc9542c828ad21fd733553d", null ],
-      [ "execute_query", "classsqlite__prepared__statement.html#ae1a12499c85927d7748f87614500ad6f", null ],
+      [ "execute_query", "classsqlite__prepared__statement.html#acabce993ea232003e00a44c7ee24918b", null ],
       [ "get_errno", "classsqlite__prepared__statement.html#ae2c107c48cb853457d6a1dc2a194d16e", null ],
       [ "get_error", "classsqlite__prepared__statement.html#ae162e7dce66d25ceb408e3b979c35697", null ],
       [ "operator=", "classsqlite__prepared__statement.html#a745c4d183b4a98928ec01ab96050d8c4", null ],
@@ -67,8 +43,10 @@ var group___s_q_lite3 =
     [ "sqlite_result", "structsqlite__result.html", [
       [ "sqlite_result", "structsqlite__result.html#a3a567d253319df439bbac39a6e0f81a1", null ],
       [ "sqlite_result", "structsqlite__result.html#a16c38a0dfa700c81e7bafd8efedf4d8e", null ],
+      [ "sqlite_result", "structsqlite__result.html#a576cfb5d65941e7524bc251bdd53e63f", null ],
       [ "~sqlite_result", "structsqlite__result.html#ae5a1354b25ea70ae0676772b87f456f3", null ],
       [ "column_count", "structsqlite__result.html#a631368f97e5e1c12b9a2651d4de91328", null ],
+      [ "column_metadata", "structsqlite__result.html#afdbf6f51d538f7f39ccece30b9df65fc", null ],
       [ "column_names", "structsqlite__result.html#ac8f1cac31c66822f59e5eae48f8efe8d", null ],
       [ "column_types", "structsqlite__result.html#acc7234272d3339f59f879a497a123e35", null ],
       [ "empty", "structsqlite__result.html#ae425d30867c970469b2af93997283b10", null ],
@@ -88,5 +66,9 @@ var group___s_q_lite3 =
       [ "get_timestamp", "structsqlite__result.html#a1593d658060a4cff8898745ea7af3107", null ],
       [ "NEFORCE_DEPRECATED_FOR", "structsqlite__result.html#ab7e252ccc1f949d071917e2af80c9f9f", null ],
       [ "next", "structsqlite__result.html#ad0b010e2dcc614aba87c3cdcfde6a4ef", null ]
+    ] ],
+    [ "sqlite_cleanup_action", "group___s_q_lite3.html#gaec2418c4d34710f16a33f7e4aba24ad1", [
+      [ "sqlite_cleanup_action::finalize", "group___s_q_lite3.html#ggaec2418c4d34710f16a33f7e4aba24ad1a12071b81bb60f781f9eb9672c5553bf0", null ],
+      [ "sqlite_cleanup_action::reset", "group___s_q_lite3.html#ggaec2418c4d34710f16a33f7e4aba24ad1a86266ee937d97f812a8e57d22b62ee29", null ]
     ] ]
 ];

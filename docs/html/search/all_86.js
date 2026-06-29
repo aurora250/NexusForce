@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['校验和算法_0',['校验和算法',['../group___i_c_m_p.html#checksum_algorithm',1,'']]]
+  ['架构检测_0',['架构检测',['../group___architecture_detection.html',1,'']]]
 ];

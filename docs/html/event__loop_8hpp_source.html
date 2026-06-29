@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: event_loop.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('event__loop_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">event_loop.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="event__loop_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_ASYNC_EVENT_LOOP_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_ASYNC_EVENT_LOOP_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="mutex_8hpp.html">NeForce/core/async/mutex.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="thread_8hpp.html">NeForce/core/async/thread.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="unordered__map_8hpp.html">NeForce/core/container/unordered_map.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="vector_8hpp.html">NeForce/core/container/vector.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="functional_2function_8hpp.html">NeForce/core/functional/function.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="group___event_loop.html#ga3df986734fa33a82d4b3fa86565598f4">   31</a></span>NEFORCE_INLINE17 <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="group___event_loop.html#ga3df986734fa33a82d4b3fa86565598f4">epoll_in</a> = 0x001;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="group___event_loop.html#gae38d49eda1fb12817352be8229f841a2">   33</a></span>NEFORCE_INLINE17 <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="group___event_loop.html#gae38d49eda1fb12817352be8229f841a2">epoll_out</a> = 0x004;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="group___event_loop.html#ga6cc93a94e5033c39c7ca6d92a10ee34a">   35</a></span>NEFORCE_INLINE17 <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="group___event_loop.html#ga6cc93a94e5033c39c7ca6d92a10ee34a">epoll_et</a> = 0x80000000;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span></div>
+<div class="foldopen" id="foldopen00047" data-start="{" data-end="};">
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classevent__loop.html">   47</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_function" href="classevent__loop.html#a96ee43711eab937be786d1fb7c638a30">event_loop</a> {</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classevent__loop.html#aa203b2df0a8b94167f19a2bfb584042c">   50</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classevent__loop.html#aa203b2df0a8b94167f19a2bfb584042c">fd_callback</a> = <a class="code hl_class" href="classfunction.html">function</a>&lt;void(<span class="keywordtype">int</span> fd, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> events)&gt;;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classevent__loop.html#ab867ebbe6a76855e438f6a132d07d860">   52</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classevent__loop.html#ab867ebbe6a76855e438f6a132d07d860">timer_callback</a> = <a class="code hl_class" href="classfunction.html">function</a>&lt;void()&gt;;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keyword">struct </span>timer_entry {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___thread.html#gaab371a4a36c3866d2f8bdd3e2be27f11">id</a>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> deadline_ms;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <a class="code hl_typedef" href="classevent__loop.html#ab867ebbe6a76855e438f6a132d07d860">timer_callback</a> callback;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordtype">bool</span> operator&gt;(<span class="keyword">const</span> timer_entry&amp; other)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> deadline_ms &gt; other.deadline_ms; }</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    };</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keyword">struct </span>fd_info {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordtype">int</span> fd;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> events;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        fd_callback callback;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    };</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">bool</span> running_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">size_t</span> next_timer_id_ = 1;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span></div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    unordered_map&lt;int, fd_info&gt; fd_map_;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    vector&lt;timer_entry&gt; timer_heap_;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    <span class="keyword">mutable</span> mutex timer_mutex_;</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <span class="keywordtype">void</span> process_timers();</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> next_timer_deadline() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">void</span> <a class="code hl_enumvalue" href="group___futex.html#ggab7057283120da679629ce8fb1238219ba37b90b7e32ba137d26fd61f2ebaa8cae">wake</a>();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_WINDOWS</span></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordtype">void</span>* iocp_handle_;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordtype">void</span>* wake_event_;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    unordered_map&lt;int, void*&gt; fd_events_;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    thread monitor_thread_;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    mutex fd_mutex_;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordtype">bool</span> monitor_running_ = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordtype">void</span> monitor_loop();</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keywordtype">int</span> epoll_fd_;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordtype">int</span> wake_fd_;</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno"><a class="line" href="classevent__loop.html#a96ee43711eab937be786d1fb7c638a30">  109</a></span>    <a class="code hl_function" href="classevent__loop.html#a96ee43711eab937be786d1fb7c638a30">event_loop</a>();</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span></div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno"><a class="line" href="classevent__loop.html#a4244dc0c57ed3f333f7cad9b56473fba">  114</a></span>    <a class="code hl_function" href="classevent__loop.html#a4244dc0c57ed3f333f7cad9b56473fba">~event_loop</a>();</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <a class="code hl_function" href="classevent__loop.html#a96ee43711eab937be786d1fb7c638a30">event_loop</a>(<span class="keyword">const</span> <a class="code hl_function" href="classevent__loop.html#a96ee43711eab937be786d1fb7c638a30">event_loop</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <a class="code hl_function" href="classevent__loop.html#a96ee43711eab937be786d1fb7c638a30">event_loop</a>&amp; operator=(<span class="keyword">const</span> <a class="code hl_function" href="classevent__loop.html#a96ee43711eab937be786d1fb7c638a30">event_loop</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="classevent__loop.html#a256dcf8569f3f5f82d103da7bdc1730e">  126</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classevent__loop.html#a256dcf8569f3f5f82d103da7bdc1730e">add_fd</a>(<span class="keywordtype">int</span> fd, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> events, <a class="code hl_typedef" href="classevent__loop.html#aa203b2df0a8b94167f19a2bfb584042c">fd_callback</a> cb);</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="classevent__loop.html#ab0021884de0dd147b943f6c23766ad15">  133</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classevent__loop.html#ab0021884de0dd147b943f6c23766ad15">mod_fd</a>(<span class="keywordtype">int</span> fd, <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> events);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="classevent__loop.html#ab836576bdb1cb76c6921408936df0995">  139</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classevent__loop.html#ab836576bdb1cb76c6921408936df0995">remove_fd</a>(<span class="keywordtype">int</span> fd);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno"><a class="line" href="classevent__loop.html#a3d13c63db02528b28a91a87a2e254c53">  147</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_function" href="classevent__loop.html#a3d13c63db02528b28a91a87a2e254c53">schedule_timer</a>(<a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> delay_ms, <a class="code hl_typedef" href="classevent__loop.html#ab867ebbe6a76855e438f6a132d07d860">timer_callback</a> cb);</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span></div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="classevent__loop.html#af3dc236d90cfdfe9d714979f2f887977">  154</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classevent__loop.html#af3dc236d90cfdfe9d714979f2f887977">cancel_timer</a>(<span class="keywordtype">size_t</span> timer_id);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span></div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno"><a class="line" href="classevent__loop.html#a33711da5633702105dc8f5433609b608">  160</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classevent__loop.html#a33711da5633702105dc8f5433609b608">run</a>();</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno"><a class="line" href="classevent__loop.html#ae5e01e9b90de2ffa20ba02882ee1596c">  166</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classevent__loop.html#ae5e01e9b90de2ffa20ba02882ee1596c">run_once</a>(<span class="keywordtype">int</span> timeout_ms = 0);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="classevent__loop.html#ae9481e13792e4f19958935d985680d5f">  172</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classevent__loop.html#ae9481e13792e4f19958935d985680d5f">stop</a>();</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span></div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno"><a class="line" href="classevent__loop.html#aea238dba6c0c4a31822c1796cbff8952">  175</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classevent__loop.html#aea238dba6c0c4a31822c1796cbff8952">is_running</a>() const noexcept { <span class="keywordflow">return</span> running_; }</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>};</div>
+</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> <span class="comment">// EventLoop</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> <span class="comment">// AsyncComponents</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_ASYNC_EVENT_LOOP_HPP__</span></div>
+<div class="ttc" id="aclassevent__loop_html_a256dcf8569f3f5f82d103da7bdc1730e"><div class="ttname"><a href="classevent__loop.html#a256dcf8569f3f5f82d103da7bdc1730e">event_loop::add_fd</a></div><div class="ttdeci">void add_fd(int fd, uint32_t events, fd_callback cb)</div><div class="ttdoc">注册文件描述符进行监控</div></div>
+<div class="ttc" id="aclassevent__loop_html_a33711da5633702105dc8f5433609b608"><div class="ttname"><a href="classevent__loop.html#a33711da5633702105dc8f5433609b608">event_loop::run</a></div><div class="ttdeci">void run()</div><div class="ttdoc">运行事件循环（阻塞直到 stop() 被调用）</div></div>
+<div class="ttc" id="aclassevent__loop_html_a3d13c63db02528b28a91a87a2e254c53"><div class="ttname"><a href="classevent__loop.html#a3d13c63db02528b28a91a87a2e254c53">event_loop::schedule_timer</a></div><div class="ttdeci">size_t schedule_timer(uint64_t delay_ms, timer_callback cb)</div><div class="ttdoc">调度一次性定时器</div></div>
+<div class="ttc" id="aclassevent__loop_html_a4244dc0c57ed3f333f7cad9b56473fba"><div class="ttname"><a href="classevent__loop.html#a4244dc0c57ed3f333f7cad9b56473fba">event_loop::~event_loop</a></div><div class="ttdeci">~event_loop()</div><div class="ttdoc">停止事件循环并释放操作系统资源</div></div>
+<div class="ttc" id="aclassevent__loop_html_a96ee43711eab937be786d1fb7c638a30"><div class="ttname"><a href="classevent__loop.html#a96ee43711eab937be786d1fb7c638a30">event_loop::event_loop</a></div><div class="ttdeci">event_loop()</div><div class="ttdoc">构造事件循环并初始化操作系统后端</div></div>
+<div class="ttc" id="aclassevent__loop_html_aa203b2df0a8b94167f19a2bfb584042c"><div class="ttname"><a href="classevent__loop.html#aa203b2df0a8b94167f19a2bfb584042c">event_loop::fd_callback</a></div><div class="ttdeci">function&lt; void(int fd, uint32_t events)&gt; fd_callback</div><div class="ttdoc">fd 事件回调</div><div class="ttdef"><b>定义</b> <a href="#l00050">event_loop.hpp:50</a></div></div>
+<div class="ttc" id="aclassevent__loop_html_ab0021884de0dd147b943f6c23766ad15"><div class="ttname"><a href="classevent__loop.html#ab0021884de0dd147b943f6c23766ad15">event_loop::mod_fd</a></div><div class="ttdeci">void mod_fd(int fd, uint32_t events)</div><div class="ttdoc">修改已注册 fd 的事件掩码</div></div>
+<div class="ttc" id="aclassevent__loop_html_ab836576bdb1cb76c6921408936df0995"><div class="ttname"><a href="classevent__loop.html#ab836576bdb1cb76c6921408936df0995">event_loop::remove_fd</a></div><div class="ttdeci">void remove_fd(int fd)</div><div class="ttdoc">取消文件描述符的监控</div></div>
+<div class="ttc" id="aclassevent__loop_html_ab867ebbe6a76855e438f6a132d07d860"><div class="ttname"><a href="classevent__loop.html#ab867ebbe6a76855e438f6a132d07d860">event_loop::timer_callback</a></div><div class="ttdeci">function&lt; void()&gt; timer_callback</div><div class="ttdoc">定时器到期回调</div><div class="ttdef"><b>定义</b> <a href="#l00052">event_loop.hpp:52</a></div></div>
+<div class="ttc" id="aclassevent__loop_html_ae5e01e9b90de2ffa20ba02882ee1596c"><div class="ttname"><a href="classevent__loop.html#ae5e01e9b90de2ffa20ba02882ee1596c">event_loop::run_once</a></div><div class="ttdeci">void run_once(int timeout_ms=0)</div><div class="ttdoc">执行事件循环的单次迭代</div></div>
+<div class="ttc" id="aclassevent__loop_html_ae9481e13792e4f19958935d985680d5f"><div class="ttname"><a href="classevent__loop.html#ae9481e13792e4f19958935d985680d5f">event_loop::stop</a></div><div class="ttdeci">void stop()</div><div class="ttdoc">停止事件循环</div></div>
+<div class="ttc" id="aclassevent__loop_html_aea238dba6c0c4a31822c1796cbff8952"><div class="ttname"><a href="classevent__loop.html#aea238dba6c0c4a31822c1796cbff8952">event_loop::is_running</a></div><div class="ttdeci">bool is_running() const noexcept</div><div class="ttdoc">检查事件循环当前是否正在运行</div><div class="ttdef"><b>定义</b> <a href="#l00175">event_loop.hpp:175</a></div></div>
+<div class="ttc" id="aclassevent__loop_html_af3dc236d90cfdfe9d714979f2f887977"><div class="ttname"><a href="classevent__loop.html#af3dc236d90cfdfe9d714979f2f887977">event_loop::cancel_timer</a></div><div class="ttdeci">bool cancel_timer(size_t timer_id)</div><div class="ttdoc">取消待执行的定时器</div></div>
+<div class="ttc" id="aclassfunction_html"><div class="ttname"><a href="classfunction.html">function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="functional_2function_8hpp_source.html#l00029">functional/function.hpp:29</a></div></div>
+<div class="ttc" id="afunctional_2function_8hpp_html"><div class="ttname"><a href="functional_2function_8hpp.html">function.hpp</a></div><div class="ttdoc">通用函数包装器</div></div>
+<div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00110">types.hpp:110</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga785d1fff9ad28a98e121ba9f90b3a3ca"><div class="ttname"><a href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></div><div class="ttdeci">unsigned long long uint64_t</div><div class="ttdoc">64位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00118">types.hpp:118</a></div></div>
+<div class="ttc" id="agroup___event_loop_html_ga3df986734fa33a82d4b3fa86565598f4"><div class="ttname"><a href="group___event_loop.html#ga3df986734fa33a82d4b3fa86565598f4">epoll_in</a></div><div class="ttdeci">constexpr uint32_t epoll_in</div><div class="ttdoc">监控可读事件</div><div class="ttdef"><b>定义</b> <a href="#l00031">event_loop.hpp:31</a></div></div>
+<div class="ttc" id="agroup___event_loop_html_ga6cc93a94e5033c39c7ca6d92a10ee34a"><div class="ttname"><a href="group___event_loop.html#ga6cc93a94e5033c39c7ca6d92a10ee34a">epoll_et</a></div><div class="ttdeci">constexpr uint32_t epoll_et</div><div class="ttdoc">边沿触发模式</div><div class="ttdef"><b>定义</b> <a href="#l00035">event_loop.hpp:35</a></div></div>
+<div class="ttc" id="agroup___event_loop_html_gae38d49eda1fb12817352be8229f841a2"><div class="ttname"><a href="group___event_loop.html#gae38d49eda1fb12817352be8229f841a2">epoll_out</a></div><div class="ttdeci">constexpr uint32_t epoll_out</div><div class="ttdoc">监控可写事件</div><div class="ttdef"><b>定义</b> <a href="#l00033">event_loop.hpp:33</a></div></div>
+<div class="ttc" id="agroup___futex_html_ggab7057283120da679629ce8fb1238219ba37b90b7e32ba137d26fd61f2ebaa8cae"><div class="ttname"><a href="group___futex.html#ggab7057283120da679629ce8fb1238219ba37b90b7e32ba137d26fd61f2ebaa8cae">futex_wait_flags::wake</a></div><div class="ttdeci">@ wake</div><div class="ttdoc">唤醒操作</div><div class="ttdef"><b>定义</b> <a href="futex_8hpp_source.html#l00053">futex.hpp:53</a></div></div>
+<div class="ttc" id="agroup___thread_html_gaab371a4a36c3866d2f8bdd3e2be27f11"><div class="ttname"><a href="group___thread.html#gaab371a4a36c3866d2f8bdd3e2be27f11">id</a></div><div class="ttdeci">thread::id id() noexcept</div><div class="ttdoc">获取当前线程标识符</div><div class="ttdef"><b>定义</b> <a href="thread_8hpp_source.html#l00450">thread.hpp:450</a></div></div>
+<div class="ttc" id="amutex_8hpp_html"><div class="ttname"><a href="mutex_8hpp.html">mutex.hpp</a></div><div class="ttdoc">互斥锁</div></div>
+<div class="ttc" id="athread_8hpp_html"><div class="ttname"><a href="thread_8hpp.html">thread.hpp</a></div><div class="ttdoc">线程管理类</div></div>
+<div class="ttc" id="aunordered__map_8hpp_html"><div class="ttname"><a href="unordered__map_8hpp.html">unordered_map.hpp</a></div><div class="ttdoc">无序映射容器</div></div>
+<div class="ttc" id="avector_8hpp_html"><div class="ttname"><a href="vector_8hpp.html">vector.hpp</a></div><div class="ttdoc">动态大小数组容器</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>async</b></li><li class="navelem"><a href="event__loop_8hpp.html">event_loop.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

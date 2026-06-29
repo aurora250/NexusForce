@@ -5,7 +5,7 @@ var searchData=
   ['make_5finteger_5ft_2',['make_integer_t',['../group___sign_manipulation.html#ga51d97772a87f38fe037b211f10d3e021',1,'type_traits.hpp']]],
   ['make_5fsigned_5ft_3',['make_signed_t',['../group___sign_manipulation.html#gaafd5f69b53391404e954cf610afa6c54',1,'type_traits.hpp']]],
   ['make_5funsigned_5ft_4',['make_unsigned_t',['../group___sign_manipulation.html#gaabeda2fce2dea6fa29533488400dd386',1,'type_traits.hpp']]],
-  ['mapped_5ftype_5',['mapped_type',['../classmap.html#a9a21bb24c4fcf4248d6708afc734dc50',1,'map::mapped_type'],['../classmultimap.html#a76c4172b8de4587017b3fab9ef0d3e25',1,'multimap::mapped_type']]],
+  ['mapped_5ftype_5',['mapped_type',['../classmap.html#a9a21bb24c4fcf4248d6708afc734dc50',1,'map::mapped_type'],['../classmultimap.html#a76c4172b8de4587017b3fab9ef0d3e25',1,'multimap::mapped_type'],['../classsparse__map.html#ae66e7d334d0636f0bcfee9d792fc73a2',1,'sparse_map::mapped_type'],['../classsparse__multimap.html#a92d5b1ca20a52f6c3c6f83930bf39f9e',1,'sparse_multimap::mapped_type']]],
   ['max_5falign_5ft_6',['max_align_t',['../group___core_types.html#ga682e63d2daefd96d4e75e4239210e233',1,'types.hpp']]],
   ['mega_7',['mega',['../group___s_i_units.html#ga0b57ff86506a53baf7278f91182faac6',1,'ratio.hpp']]],
   ['message_5fhandler_8',['message_handler',['../classwebsocket__session.html#a4abaa8761a35b3f6cbd39301a6710bcf',1,'websocket_session']]],

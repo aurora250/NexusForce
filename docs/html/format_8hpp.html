@@ -96,10 +96,11 @@ $(function(){initNavTree('format_8hpp.html','',''); });
 <p>字符串格式化功能  
 <a href="#details">更多...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="to__string_8hpp_source.html">NeForce/core/string/to_string.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="tuple_8hpp_source.html">NeForce/core/utility/tuple.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 format.hpp 的引用(Include)关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="format_8hpp__incl.svg" width="1844" height="1654"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="format_8hpp__incl.svg" width="2090" height="1670"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="format_8hpp_source.html">浏览该文件的源代码.</a></p>
@@ -164,6 +165,11 @@ format.hpp 的引用(Include)关系图:</div>
 <tr class="memitem:gac0f4499364ec899fcdfaae1f7acbda76" id="r_gac0f4499364ec899fcdfaae1f7acbda76"><td class="memTemplParams" colspan="2">template&lt;typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;(sizeof...(Args) &gt; 0), int &gt; = 0&gt; </td></tr>
 <tr class="memitem:gac0f4499364ec899fcdfaae1f7acbda76 template"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___format.html#gac0f4499364ec899fcdfaae1f7acbda76">format</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> fmt, Args &amp;&amp;... args)</td></tr>
 <tr class="memdesc:gac0f4499364ec899fcdfaae1f7acbda76"><td class="mdescLeft">&#160;</td><td class="mdescRight">格式化字符串  <br /></td></tr>
+<tr class="memitem:ga41c686a01b3d4a7f5c79d2b9c60266bd" id="r_ga41c686a01b3d4a7f5c79d2b9c60266bd"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> N, typename... Args, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt;(sizeof...(Args) &gt; 0), int &gt; = 0&gt; </td></tr>
+<tr class="memitem:ga41c686a01b3d4a7f5c79d2b9c60266bd template"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___format.html#ga41c686a01b3d4a7f5c79d2b9c60266bd">format</a> (const char(&amp;fmt)[N], Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:ga41c686a01b3d4a7f5c79d2b9c60266bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">格式化字符串  <br /></td></tr>
+<tr class="memitem:ga401d7fa93048e25a6f79fc746b2a09fe" id="r_ga401d7fa93048e25a6f79fc746b2a09fe"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="group___format.html#ga401d7fa93048e25a6f79fc746b2a09fe">format_named</a> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> fmt, const std::initializer_list&lt; <a class="el" href="structpair.html">pair</a>&lt; const char *, <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> &gt; &gt; params)</td></tr>
+<tr class="memdesc:ga401d7fa93048e25a6f79fc746b2a09fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">命名参数格式化  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>字符串格式化功能 </p>

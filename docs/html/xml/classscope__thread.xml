@@ -1,0 +1,660 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classscope__thread" kind="class" language="C++" prot="public">
+    <compoundname>scope_thread</compoundname>
+    <includes refid="scope__thread_8hpp" local="no">scope_thread.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classscope__thread_1ad3e0d591dd917cb9d44f12091e302945" prot="public" static="no">
+        <type><ref refid="structthread_1_1id" kindref="compound">thread::id</ref></type>
+        <definition>using scope_thread::id = thread::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <qualifiedname>scope_thread::id</qualifiedname>
+        <briefdescription>
+<para>线程ID类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="36" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classscope__thread_1ab775b135f50ee008b8e2428f50b379b2" prot="public" static="no">
+        <type><ref refid="classthread_1a64c16d44c53f6b7aaac118ec379ed0a4" kindref="member">thread::native_handle_type</ref></type>
+        <definition>using scope_thread::native_handle_type = thread::native_handle_type</definition>
+        <argsstring></argsstring>
+        <name>native_handle_type</name>
+        <qualifiedname>scope_thread::native_handle_type</qualifiedname>
+        <briefdescription>
+<para>原生句柄类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="37" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classscope__thread_1ab4c30bca5e95c0198f97bafa70daa289" prot="private" static="yes" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>typename Callable</type>
+          </param>
+          <param>
+            <type>typename Object</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool scope_thread::pmf_expects_stop_token</definition>
+        <argsstring></argsstring>
+        <name>pmf_expects_stop_token</name>
+        <qualifiedname>scope_thread::pmf_expects_stop_token</qualifiedname>
+        <initializer>                                     =
+<ref refid="group___type_traits_utilities_1ga5672914b2f1f9c1c4c50ded53a8db2e3" kindref="member">conjunction_v</ref>&lt;<ref refid="structis__member__function__pointer" kindref="compound">is_member_function_pointer</ref>&lt;<ref refid="group___remove_qualifiers_1ga5993e4587ccd2777e95893329360358a" kindref="member">remove_reference_t</ref>&lt;Callable&gt;&gt;,
+              <ref refid="structis__invocable" kindref="compound">is_invocable</ref>&lt;Callable, Object, <ref refid="classstop__token" kindref="compound">stop_token</ref>, Args...&gt;&gt;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="41" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classscope__thread_1a4d46c1de6c5e44cbb8d39cac241aee61" prot="private" static="no" mutable="no">
+        <type><ref refid="classstop__source" kindref="compound">stop_source</ref></type>
+        <definition>stop_source scope_thread::stop_source_</definition>
+        <argsstring></argsstring>
+        <name>stop_source_</name>
+        <qualifiedname>scope_thread::stop_source_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="45" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classscope__thread_1a400c13b82efb71535e49e7ce13cddc9d" prot="private" static="no" mutable="no">
+        <type><ref refid="classthread" kindref="compound">thread</ref></type>
+        <definition>thread scope_thread::thread_</definition>
+        <argsstring></argsstring>
+        <name>thread_</name>
+        <qualifiedname>scope_thread::thread_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="46" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classscope__thread_1a1636c53612ef67c8365dd005504ae6ac" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Callable</type>
+          </param>
+          <param>
+            <type>typename Object</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt; pmf_expects_stop_token&lt; Callable, Object, Args... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classthread" kindref="compound">thread</ref></type>
+        <definition>static thread scope_thread::create</definition>
+        <argsstring>(stop_source &amp;source, Callable func, Object &amp;&amp;object, Args &amp;&amp;... args)</argsstring>
+        <name>create</name>
+        <qualifiedname>scope_thread::create</qualifiedname>
+        <param>
+          <type><ref refid="classstop__source" kindref="compound">stop_source</ref> &amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>Callable</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>Object &amp;&amp;</type>
+          <declname>object</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="50" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="50" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1adb771bd9ed0f6c8e461186f99adaa934" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Callable</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___base_type_qualifier_check_1ga241c086fc3e628de919419dd7772e345" kindref="member">is_member_function_pointer_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga5993e4587ccd2777e95893329360358a" kindref="member">remove_reference_t</ref>&lt; Callable &gt; &gt; &amp;&amp;<ref refid="group___invoke_function_1ga81546ef85e40c0b8f4fbeb8c62add13d" kindref="member">is_invocable_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Callable &gt;, <ref refid="classstop__token" kindref="compound">stop_token</ref>, <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Args &gt;... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classthread" kindref="compound">thread</ref></type>
+        <definition>static thread scope_thread::create</definition>
+        <argsstring>(stop_source &amp;source, Callable func, Args &amp;&amp;... args)</argsstring>
+        <name>create</name>
+        <qualifiedname>scope_thread::create</qualifiedname>
+        <param>
+          <type><ref refid="classstop__source" kindref="compound">stop_source</ref> &amp;</type>
+          <declname>source</declname>
+        </param>
+        <param>
+          <type>Callable</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="58" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="58" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1a370627daf5e8aabc65fa71ae73d6a062" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Callable</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___base_type_qualifier_check_1ga241c086fc3e628de919419dd7772e345" kindref="member">is_member_function_pointer_v</ref>&lt; <ref refid="group___remove_qualifiers_1ga5993e4587ccd2777e95893329360358a" kindref="member">remove_reference_t</ref>&lt; Callable &gt; &gt; &amp;&amp;!<ref refid="group___invoke_function_1ga81546ef85e40c0b8f4fbeb8c62add13d" kindref="member">is_invocable_v</ref>&lt; <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Callable &gt;, <ref refid="classstop__token" kindref="compound">stop_token</ref>, <ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t</ref>&lt; Args &gt;... &gt;, int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classthread" kindref="compound">thread</ref></type>
+        <definition>static thread scope_thread::create</definition>
+        <argsstring>(stop_source &amp;, Callable func, Args &amp;&amp;... args)</argsstring>
+        <name>create</name>
+        <qualifiedname>scope_thread::create</qualifiedname>
+        <param>
+          <type><ref refid="classstop__source" kindref="compound">stop_source</ref> &amp;</type>
+        </param>
+        <param>
+          <type>Callable</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="66" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="66" bodyend="70"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classscope__thread_1aeec38bd68e45cea1c6cf28e67cd642f9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>scope_thread::scope_thread</definition>
+        <argsstring>() noexcept=default</argsstring>
+        <name>scope_thread</name>
+        <qualifiedname>scope_thread::scope_thread</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>创建一个不表示任何线程的scope_thread对象。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="78" column="5"/>
+        <references refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" compoundref="type__traits_8hpp" startline="188">is_same_v</references>
+        <references refid="classscope__thread_1aeec38bd68e45cea1c6cf28e67cd642f9">scope_thread</references>
+        <referencedby refid="classscope__thread_1a26e4ea9b060e7c586d71908529717586">operator=</referencedby>
+        <referencedby refid="classscope__thread_1a33d2f7fd69cc0b9fd53ba81a371339d6" compoundref="scope__thread_8hpp" startline="108" endline="111">operator=</referencedby>
+        <referencedby refid="classscope__thread_1aeec38bd68e45cea1c6cf28e67cd642f9">scope_thread</referencedby>
+        <referencedby refid="classscope__thread_1ac7ce8b2592c7bff975c70bb92aa47e63" compoundref="scope__thread_8hpp" startline="91" endline="92">scope_thread</referencedby>
+        <referencedby refid="classscope__thread_1a3458fd815527b36c75197b553b65bb31">scope_thread</referencedby>
+        <referencedby refid="classscope__thread_1af2b6bc6e468823c3e863ba667af4a0ed">scope_thread</referencedby>
+        <referencedby refid="classscope__thread_1a97c2556107ea53c6f529d49a2fb25851" compoundref="scope__thread_8hpp" startline="129" endline="132">swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1ac7ce8b2592c7bff975c70bb92aa47e63" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Callable</type>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type>typename</type>
+            <defval><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;!<ref refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" kindref="member">is_same_v</ref>&lt;<ref refid="group___remove_qualifiers_1ga3c0600da43d6867a247432fcc43ce84f" kindref="member">remove_cvref_t</ref>&lt;Callable&gt;, <ref refid="classscope__thread" kindref="compound">scope_thread</ref>&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>scope_thread::scope_thread</definition>
+        <argsstring>(Callable &amp;&amp;func, Args &amp;&amp;... args)</argsstring>
+        <name>scope_thread</name>
+        <qualifiedname>scope_thread::scope_thread</qualifiedname>
+        <param>
+          <type>Callable &amp;&amp;</type>
+          <declname>func</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Callable</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>可调用类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要在线程中执行的函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>传递给函数的参数</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+创建新线程并开始执行。如果函数接受stop_token参数，会自动传递。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="91" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="91" bodyend="92"/>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
+        <references refid="classscope__thread_1aeec38bd68e45cea1c6cf28e67cd642f9">scope_thread</references>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1a3458fd815527b36c75197b553b65bb31" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>scope_thread::scope_thread</definition>
+        <argsstring>(const scope_thread &amp;)=delete</argsstring>
+        <name>scope_thread</name>
+        <qualifiedname>scope_thread::scope_thread</qualifiedname>
+        <param>
+          <type>const <ref refid="classscope__thread" kindref="compound">scope_thread</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止拷贝构造 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="94" column="5"/>
+        <references refid="classscope__thread_1aeec38bd68e45cea1c6cf28e67cd642f9">scope_thread</references>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1a26e4ea9b060e7c586d71908529717586" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classscope__thread" kindref="compound">scope_thread</ref> &amp;</type>
+        <definition>scope_thread &amp; scope_thread::operator=</definition>
+        <argsstring>(const scope_thread &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>scope_thread::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classscope__thread" kindref="compound">scope_thread</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>禁止拷贝赋值 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="95" column="18"/>
+        <references refid="classscope__thread_1aeec38bd68e45cea1c6cf28e67cd642f9">scope_thread</references>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1af2b6bc6e468823c3e863ba667af4a0ed" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>scope_thread::scope_thread</definition>
+        <argsstring>(scope_thread &amp;&amp;other) noexcept=default</argsstring>
+        <name>scope_thread</name>
+        <qualifiedname>scope_thread::scope_thread</qualifiedname>
+        <param>
+          <type><ref refid="classscope__thread" kindref="compound">scope_thread</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的scope_thread </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="101" column="5"/>
+        <references refid="classscope__thread_1aeec38bd68e45cea1c6cf28e67cd642f9">scope_thread</references>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1a33d2f7fd69cc0b9fd53ba81a371339d6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classscope__thread" kindref="compound">scope_thread</ref> &amp;</type>
+        <definition>scope_thread &amp; scope_thread::operator=</definition>
+        <argsstring>(scope_thread &amp;&amp;other) noexcept</argsstring>
+        <name>operator=</name>
+        <qualifiedname>scope_thread::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classscope__thread" kindref="compound">scope_thread</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要移动的scope_thread </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>当前对象的引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="108" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="108" bodyend="111"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classscope__thread_1aeec38bd68e45cea1c6cf28e67cd642f9">scope_thread</references>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1a6bddf3eb6bf5b05afd5e495ada8345ab" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>scope_thread::~scope_thread</definition>
+        <argsstring>()</argsstring>
+        <name>~scope_thread</name>
+        <qualifiedname>scope_thread::~scope_thread</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>如果线程可被等待结束，自动请求停止并等待线程结束。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="118" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="118" bodyend="123"/>
+        <references refid="classscope__thread_1ae3eac4d0bb9486b5732597abcff03880" compoundref="scope__thread_8hpp" startline="145" endline="145">join</references>
+        <references refid="classscope__thread_1a9bba594f97cb4e798a93be7bf4af8993" compoundref="scope__thread_8hpp" startline="138" endline="138">joinable</references>
+        <references refid="classscope__thread_1a539179134d53af980ababd9d06301327" compoundref="scope__thread_8hpp" startline="185" endline="185">request_stop</references>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1a97c2556107ea53c6f529d49a2fb25851" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void scope_thread::swap</definition>
+        <argsstring>(scope_thread &amp;other) noexcept</argsstring>
+        <name>swap</name>
+        <qualifiedname>scope_thread::swap</qualifiedname>
+        <param>
+          <type><ref refid="classscope__thread" kindref="compound">scope_thread</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个scope_thread对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的scope_thread </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="129" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="129" bodyend="132"/>
+        <references refid="classscope__thread_1aeec38bd68e45cea1c6cf28e67cd642f9">scope_thread</references>
+        <references refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df">swap</references>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1a9bba594f97cb4e798a93be7bf4af8993" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool scope_thread::joinable</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>joinable</name>
+        <qualifiedname>scope_thread::joinable</qualifiedname>
+        <briefdescription>
+<para>检查线程是否可被等待 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否可被等待 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="138" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="138" bodyend="138"/>
+        <referencedby refid="classscope__thread_1a6bddf3eb6bf5b05afd5e495ada8345ab" compoundref="scope__thread_8hpp" startline="118" endline="123">~scope_thread</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1ae3eac4d0bb9486b5732597abcff03880" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void scope_thread::join</definition>
+        <argsstring>()</argsstring>
+        <name>join</name>
+        <qualifiedname>scope_thread::join</qualifiedname>
+        <briefdescription>
+<para>等待线程结束 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>阻塞当前线程，直到目标线程执行完成。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="145" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="145" bodyend="145"/>
+        <referencedby refid="classscope__thread_1a6bddf3eb6bf5b05afd5e495ada8345ab" compoundref="scope__thread_8hpp" startline="118" endline="123">~scope_thread</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1add58c886cb4b670285f4d223dada8f48" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void scope_thread::detach</definition>
+        <argsstring>()</argsstring>
+        <name>detach</name>
+        <qualifiedname>scope_thread::detach</qualifiedname>
+        <briefdescription>
+<para>分离线程 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>允许线程独立执行，不再与其关联。 分离后不能再加入或请求停止。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="153" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="153" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1a605045a6dadbb3d16fde06e6ce5ccd69" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classscope__thread_1ad3e0d591dd917cb9d44f12091e302945" kindref="member">id</ref></type>
+        <definition>id scope_thread::get_id</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_id</name>
+        <qualifiedname>scope_thread::get_id</qualifiedname>
+        <briefdescription>
+<para>获取线程ID </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>线程ID </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="159" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="159" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1a63946cb1ffe1eb978c275f67d3b657f0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classscope__thread_1ab775b135f50ee008b8e2428f50b379b2" kindref="member">native_handle_type</ref></type>
+        <definition>native_handle_type scope_thread::native_handle</definition>
+        <argsstring>() const</argsstring>
+        <name>native_handle</name>
+        <qualifiedname>scope_thread::native_handle</qualifiedname>
+        <briefdescription>
+<para>获取原生线程句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>原生线程句柄 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="165" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="165" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1a9adc7089758dc0419427b3a8cfcd3b65" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classstop__source" kindref="compound">stop_source</ref></type>
+        <definition>stop_source scope_thread::get_stop_source</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>get_stop_source</name>
+        <qualifiedname>scope_thread::get_stop_source</qualifiedname>
+        <briefdescription>
+<para>获取停止源 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>关联的stop_source </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="171" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="171" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1a1a698ddd721b328175704753655b1a0e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classstop__token" kindref="compound">stop_token</ref></type>
+        <definition>stop_token scope_thread::get_stop_token</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>get_stop_token</name>
+        <qualifiedname>scope_thread::get_stop_token</qualifiedname>
+        <briefdescription>
+<para>获取停止令牌 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>关联的stop_token </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="177" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="177" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="classscope__thread_1a539179134d53af980ababd9d06301327" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool scope_thread::request_stop</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>request_stop</name>
+        <qualifiedname>scope_thread::request_stop</qualifiedname>
+        <briefdescription>
+<para>请求线程停止 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否成功请求停止</para>
+</simplesect>
+设置停止标志，线程可以通过检查stop_token来响应停止请求。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="185" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="185" bodyend="185"/>
+        <referencedby refid="classscope__thread_1a6bddf3eb6bf5b05afd5e495ada8345ab" compoundref="scope__thread_8hpp" startline="118" endline="123">~scope_thread</referencedby>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>作用域线程类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>提供自动停止和清理功能，在析构时会自动请求停止并等待线程结束，避免资源泄漏。</para>
+<para><simplesect kind="note"><para>支持stop_token参数自动传递 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" line="34" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/scope_thread.hpp" bodystart="34" bodyend="186"/>
+    <listofallmembers>
+      <member refid="classscope__thread_1a1636c53612ef67c8365dd005504ae6ac" prot="private" virt="non-virtual"><scope>scope_thread</scope><name>create</name></member>
+      <member refid="classscope__thread_1adb771bd9ed0f6c8e461186f99adaa934" prot="private" virt="non-virtual"><scope>scope_thread</scope><name>create</name></member>
+      <member refid="classscope__thread_1a370627daf5e8aabc65fa71ae73d6a062" prot="private" virt="non-virtual"><scope>scope_thread</scope><name>create</name></member>
+      <member refid="classscope__thread_1add58c886cb4b670285f4d223dada8f48" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>detach</name></member>
+      <member refid="classscope__thread_1a605045a6dadbb3d16fde06e6ce5ccd69" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>get_id</name></member>
+      <member refid="classscope__thread_1a9adc7089758dc0419427b3a8cfcd3b65" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>get_stop_source</name></member>
+      <member refid="classscope__thread_1a1a698ddd721b328175704753655b1a0e" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>get_stop_token</name></member>
+      <member refid="classscope__thread_1ad3e0d591dd917cb9d44f12091e302945" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>id</name></member>
+      <member refid="classscope__thread_1ae3eac4d0bb9486b5732597abcff03880" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>join</name></member>
+      <member refid="classscope__thread_1a9bba594f97cb4e798a93be7bf4af8993" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>joinable</name></member>
+      <member refid="classscope__thread_1a63946cb1ffe1eb978c275f67d3b657f0" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>native_handle</name></member>
+      <member refid="classscope__thread_1ab775b135f50ee008b8e2428f50b379b2" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>native_handle_type</name></member>
+      <member refid="classscope__thread_1a26e4ea9b060e7c586d71908529717586" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>operator=</name></member>
+      <member refid="classscope__thread_1a33d2f7fd69cc0b9fd53ba81a371339d6" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>operator=</name></member>
+      <member refid="classscope__thread_1ab4c30bca5e95c0198f97bafa70daa289" prot="private" virt="non-virtual"><scope>scope_thread</scope><name>pmf_expects_stop_token</name></member>
+      <member refid="classscope__thread_1a539179134d53af980ababd9d06301327" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>request_stop</name></member>
+      <member refid="classscope__thread_1aeec38bd68e45cea1c6cf28e67cd642f9" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>scope_thread</name></member>
+      <member refid="classscope__thread_1ac7ce8b2592c7bff975c70bb92aa47e63" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>scope_thread</name></member>
+      <member refid="classscope__thread_1a3458fd815527b36c75197b553b65bb31" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>scope_thread</name></member>
+      <member refid="classscope__thread_1af2b6bc6e468823c3e863ba667af4a0ed" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>scope_thread</name></member>
+      <member refid="classscope__thread_1a4d46c1de6c5e44cbb8d39cac241aee61" prot="private" virt="non-virtual"><scope>scope_thread</scope><name>stop_source_</name></member>
+      <member refid="classscope__thread_1a97c2556107ea53c6f529d49a2fb25851" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>swap</name></member>
+      <member refid="classscope__thread_1a400c13b82efb71535e49e7ce13cddc9d" prot="private" virt="non-virtual"><scope>scope_thread</scope><name>thread_</name></member>
+      <member refid="classscope__thread_1a6bddf3eb6bf5b05afd5e495ada8345ab" prot="public" virt="non-virtual"><scope>scope_thread</scope><name>~scope_thread</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

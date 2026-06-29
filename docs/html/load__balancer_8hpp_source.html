@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: load_balancer.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('load__balancer_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">load_balancer.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="load__balancer_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_NETWORK_HTTP_LOAD_BALANCER_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_NETWORK_HTTP_LOAD_BALANCER_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;<a class="code" href="atomic_8hpp.html">NeForce/core/async/atomic.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;<a class="code" href="mutex_8hpp.html">NeForce/core/async/mutex.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;<a class="code" href="vector_8hpp.html">NeForce/core/container/vector.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;<a class="code" href="functional_2function_8hpp.html">NeForce/core/functional/function.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="clocks_8hpp.html">NeForce/core/time/clocks.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="packages_8hpp.html">NeForce/core/utility/packages.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="ports_8hpp.html">NeForce/network/util/ports.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>NEFORCE_BEGIN_HTTP__</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span></div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="group___h_t_t_p.html#gadf2370a616d3d1bf1ef4152acc72e793">   28</a></span><span class="keyword">enum class</span> <a class="code hl_enumeration" href="group___h_t_t_p.html#gadf2370a616d3d1bf1ef4152acc72e793">lb_strategy</a> : <a class="code hl_typedef" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a> {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="group___h_t_t_p.html#ggadf2370a616d3d1bf1ef4152acc72e793a1ebd8dbf8c34e255f5cbf28f35860b71">   29</a></span>    <a class="code hl_enumvalue" href="group___h_t_t_p.html#ggadf2370a616d3d1bf1ef4152acc72e793a1ebd8dbf8c34e255f5cbf28f35860b71">ROUND_ROBIN</a>,       </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="group___h_t_t_p.html#ggadf2370a616d3d1bf1ef4152acc72e793a9b5adc9c167d99cbc016b883cf6a8600">   30</a></span>    <a class="code hl_enumvalue" href="group___h_t_t_p.html#ggadf2370a616d3d1bf1ef4152acc72e793a9b5adc9c167d99cbc016b883cf6a8600">LEAST_CONNECTIONS</a>, </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="group___h_t_t_p.html#ggadf2370a616d3d1bf1ef4152acc72e793ae9d8ebf89324671ee286fa7bf1a2c16c">   31</a></span>    <a class="code hl_enumvalue" href="group___h_t_t_p.html#ggadf2370a616d3d1bf1ef4152acc72e793ae9d8ebf89324671ee286fa7bf1a2c16c">WEIGHTED</a>,          </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="group___h_t_t_p.html#ggadf2370a616d3d1bf1ef4152acc72e793a170e02e86972c2be8559884cc3c12254">   32</a></span>    <a class="code hl_enumvalue" href="group___h_t_t_p.html#ggadf2370a616d3d1bf1ef4152acc72e793a170e02e86972c2be8559884cc3c12254">RANDOM</a>             </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>};</div>
+</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span></div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="};">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="structlb__backend.html">   39</a></span><span class="keyword">struct </span>lb_backend {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keywordtype">string</span> host;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <a class="code hl_struct" href="structports.html">ports</a> port;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">string</span> scheme{<span class="stringliteral">&quot;http&quot;</span>};</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">size_t</span> weight{1};</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_struct" href="structatomic.html">atomic&lt;size_t&gt;</a> active_connections{0};</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <a class="code hl_struct" href="structatomic.html">atomic&lt;bool&gt;</a> healthy{<span class="keyword">true</span>};</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> last_health_check_ms{0};</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordtype">size_t</span> consecutive_failures{0};</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    lb_backend() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    lb_backend(<span class="keywordtype">string</span> h, <a class="code hl_struct" href="structports.html">ports</a> p, <span class="keywordtype">string</span> s = <span class="stringliteral">&quot;http&quot;</span>, <span class="keywordtype">size_t</span> w = 1) :</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    host(<a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(h)),</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    port(p),</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    scheme(<a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(s)),</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    weight(w) {}</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>};</div>
+</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span></div>
+<div class="foldopen" id="foldopen00078" data-start="{" data-end="};">
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="classload__balancer.html">   78</a></span><span class="keyword">class </span>NEFORCE_API load_balancer {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keyword">using </span>health_check_cb = <a class="code hl_class" href="classfunction.html">function</a>&lt;bool(<span class="keyword">const</span> <a class="code hl_struct" href="structlb__backend.html">lb_backend</a>&amp;)&gt;;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <a class="code hl_class" href="classvector.html">vector&lt;lb_backend&gt;</a> backends_;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <a class="code hl_enumeration" href="group___h_t_t_p.html#gadf2370a616d3d1bf1ef4152acc72e793">lb_strategy</a> strategy_{<a class="code hl_enumvalue" href="group___h_t_t_p.html#ggadf2370a616d3d1bf1ef4152acc72e793a1ebd8dbf8c34e255f5cbf28f35860b71">lb_strategy::ROUND_ROBIN</a>};</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keyword">mutable</span> <a class="code hl_class" href="classmutex.html">mutex</a> mutex_;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <a class="code hl_struct" href="structatomic.html">atomic&lt;size_t&gt;</a> rr_counter_{0};</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordtype">size_t</span> max_failures_{3};                    </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> health_check_interval_{10000}; </div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> health_check_timeout_{3000};   </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    health_check_cb health_checker_; </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    load_balancer() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordtype">void</span> add_backend(<a class="code hl_struct" href="structlb__backend.html">lb_backend</a> backend) {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        <a class="code hl_class" href="classlock.html">lock&lt;mutex&gt;</a> lk(mutex_);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        backends_.push_back(<a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(backend));</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordtype">void</span> remove_backend(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; host, <a class="code hl_struct" href="structports.html">ports</a> port) {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <a class="code hl_class" href="classlock.html">lock&lt;mutex&gt;</a> lk(mutex_);</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        <span class="keywordflow">for</span> (<span class="keyword">auto</span> it = backends_.begin(); it != backends_.end(); ++it) {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <span class="keywordflow">if</span> (it-&gt;host == host &amp;&amp; it-&gt;port == port) {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                backends_.erase(it);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            }</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        }</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    }</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <span class="keywordtype">void</span> set_strategy(<a class="code hl_enumeration" href="group___h_t_t_p.html#gadf2370a616d3d1bf1ef4152acc72e793">lb_strategy</a> s) {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <a class="code hl_class" href="classlock.html">lock&lt;mutex&gt;</a> lk(mutex_);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        strategy_ = s;</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    }</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <span class="keywordtype">void</span> set_health_check(health_check_cb cb) {</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <a class="code hl_class" href="classlock.html">lock&lt;mutex&gt;</a> lk(mutex_);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        health_checker_ = <a class="code hl_function" href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a>(cb);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span></div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classload__balancer.html#aabb21895043d9d239d1627326037dff6">  123</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classload__balancer.html#aabb21895043d9d239d1627326037dff6">set_max_failures</a>(<span class="keywordtype">size_t</span> <a class="code hl_function" href="group___compare_algorithms.html#ga01c48c11cc5d3222cb2e3adf0f843f3e">max</a>) { max_failures_ = <a class="code hl_function" href="group___compare_algorithms.html#ga01c48c11cc5d3222cb2e3adf0f843f3e">max</a>; }</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno"><a class="line" href="classload__balancer.html#ae40fb07cc04b81ecc867aea5b46902d1">  125</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classload__balancer.html#ae40fb07cc04b81ecc867aea5b46902d1">set_health_check_interval</a>(<a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> ms) { health_check_interval_ = ms; }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno"><a class="line" href="classload__balancer.html#a514c924f5f5d89686bb1eb0994b37b05">  127</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classload__balancer.html#a514c924f5f5d89686bb1eb0994b37b05">set_health_check_timeout</a>(<a class="code hl_typedef" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a> ms) { health_check_timeout_ = ms; }</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span></div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="classload__balancer.html#a89b1c1d2dfae054f003ec6aab70ac43f">  133</a></span>    <a class="code hl_struct" href="structlb__backend.html">lb_backend</a>* <a class="code hl_function" href="classload__balancer.html#a89b1c1d2dfae054f003ec6aab70ac43f">select_backend</a>();</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span></div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="classload__balancer.html#a5666271889c6836993dd29a9ca54d66e">  139</a></span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classload__balancer.html#a5666271889c6836993dd29a9ca54d66e">release_backend</a>(<a class="code hl_struct" href="structlb__backend.html">lb_backend</a>* backend);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span></div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="classload__balancer.html#a5a0da057c8d0fc8a23da3a41d123e634">  144</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classload__balancer.html#a5a0da057c8d0fc8a23da3a41d123e634">mark_failure</a>(<a class="code hl_struct" href="structlb__backend.html">lb_backend</a>* backend);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span></div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="classload__balancer.html#a9f94d93c102e396d9924125d40adebbd">  149</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classload__balancer.html#a9f94d93c102e396d9924125d40adebbd">run_health_checks</a>();</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span></div>
+<div class="foldopen" id="foldopen00154" data-start="{" data-end="}">
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="classload__balancer.html#a8608548c02b515560a21bf95544e4065">  154</a></span>    <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> <a class="code hl_function" href="classload__balancer.html#a8608548c02b515560a21bf95544e4065">backend_hosts</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        <a class="code hl_class" href="classlock.html">lock&lt;mutex&gt;</a> lk(mutex_);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> hosts;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; b: backends_) {</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            hosts.<a class="code hl_function" href="classvector.html#ac8d8b05ea55e928d9a4ccde8bf9bedcf">push_back</a>(b.host + <span class="stringliteral">&quot;:&quot;</span> + <a class="code hl_function" href="group___u_t_f_converts.html#ga64a58369986078d7a0ef24ca1a53c920">to_string</a>(b.port.value()));</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        }</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        <span class="keywordflow">return</span> hosts;</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    }</div>
+</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    <span class="keywordtype">size_t</span> backend_count() const noexcept { <span class="keywordflow">return</span> backends_.<a class="code hl_function" href="classvector.html#acb504d0053283e805da9c4fe5827b018">size</a>(); }</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    <a class="code hl_enumeration" href="group___h_t_t_p.html#gadf2370a616d3d1bf1ef4152acc72e793">lb_strategy</a> strategy() const noexcept { <span class="keywordflow">return</span> strategy_; }</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span></div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno"><a class="line" href="classload__balancer.html#afa766d26e5a767791cf0baefab3681e0">  169</a></span>    <span class="keywordtype">size_t</span> <a class="code hl_function" href="classload__balancer.html#afa766d26e5a767791cf0baefab3681e0">healthy_count</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    <a class="code hl_struct" href="structlb__backend.html">lb_backend</a>* select_round_robin();</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    <a class="code hl_struct" href="structlb__backend.html">lb_backend</a>* select_least_connections();</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <a class="code hl_struct" href="structlb__backend.html">lb_backend</a>* select_weighted();</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <a class="code hl_struct" href="structlb__backend.html">lb_backend</a>* select_random();</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>};</div>
+</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span><span class="comment">// TODO: Circuit breaker pattern — track failure rate per backend, auto-open circuit on threshold breach, half-open probing</span></div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span><span class="comment">// TODO: Service discovery integration — Consul / Eureka / Nacos / DNS-based backend registration and health sync</span></div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="comment">// TODO: Sticky sessions — session affinity based on cookie or client IP for stateful backends</span></div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> <span class="comment">// HTTP</span></div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span> </div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>NEFORCE_END_HTTP__</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_HTTP_LOAD_BALANCER_HPP__</span></div>
+<div class="ttc" id="aatomic_8hpp_html"><div class="ttname"><a href="atomic_8hpp.html">atomic.hpp</a></div><div class="ttdoc">原子类型完整实现</div></div>
+<div class="ttc" id="aclassfunction_html"><div class="ttname"><a href="classfunction.html">function</a></div><div class="ttdoc">函数包装器主模板声明</div><div class="ttdef"><b>定义</b> <a href="functional_2function_8hpp_source.html#l00029">functional/function.hpp:29</a></div></div>
+<div class="ttc" id="aclassload__balancer_html_a514c924f5f5d89686bb1eb0994b37b05"><div class="ttname"><a href="classload__balancer.html#a514c924f5f5d89686bb1eb0994b37b05">load_balancer::set_health_check_timeout</a></div><div class="ttdeci">void set_health_check_timeout(milliseconds ms)</div><div class="ttdoc">设置健康检查超时</div><div class="ttdef"><b>定义</b> <a href="#l00127">load_balancer.hpp:127</a></div></div>
+<div class="ttc" id="aclassload__balancer_html_a5666271889c6836993dd29a9ca54d66e"><div class="ttname"><a href="classload__balancer.html#a5666271889c6836993dd29a9ca54d66e">load_balancer::release_backend</a></div><div class="ttdeci">static void release_backend(lb_backend *backend)</div><div class="ttdoc">释放后端节点（请求完成）</div></div>
+<div class="ttc" id="aclassload__balancer_html_a5a0da057c8d0fc8a23da3a41d123e634"><div class="ttname"><a href="classload__balancer.html#a5a0da057c8d0fc8a23da3a41d123e634">load_balancer::mark_failure</a></div><div class="ttdeci">void mark_failure(lb_backend *backend)</div><div class="ttdoc">标记后端请求失败</div></div>
+<div class="ttc" id="aclassload__balancer_html_a8608548c02b515560a21bf95544e4065"><div class="ttname"><a href="classload__balancer.html#a8608548c02b515560a21bf95544e4065">load_balancer::backend_hosts</a></div><div class="ttdeci">vector&lt; string &gt; backend_hosts() const</div><div class="ttdoc">获取后端主机列表快照</div><div class="ttdef"><b>定义</b> <a href="#l00154">load_balancer.hpp:154</a></div></div>
+<div class="ttc" id="aclassload__balancer_html_a89b1c1d2dfae054f003ec6aab70ac43f"><div class="ttname"><a href="classload__balancer.html#a89b1c1d2dfae054f003ec6aab70ac43f">load_balancer::select_backend</a></div><div class="ttdeci">lb_backend * select_backend()</div><div class="ttdoc">选择后端节点</div></div>
+<div class="ttc" id="aclassload__balancer_html_a9f94d93c102e396d9924125d40adebbd"><div class="ttname"><a href="classload__balancer.html#a9f94d93c102e396d9924125d40adebbd">load_balancer::run_health_checks</a></div><div class="ttdeci">void run_health_checks()</div><div class="ttdoc">运行健康检查（将所有标记为不健康但已恢复的节点恢复）</div></div>
+<div class="ttc" id="aclassload__balancer_html_aabb21895043d9d239d1627326037dff6"><div class="ttname"><a href="classload__balancer.html#aabb21895043d9d239d1627326037dff6">load_balancer::set_max_failures</a></div><div class="ttdeci">void set_max_failures(size_t max)</div><div class="ttdoc">设置容忍的最大连续失败次数</div><div class="ttdef"><b>定义</b> <a href="#l00123">load_balancer.hpp:123</a></div></div>
+<div class="ttc" id="aclassload__balancer_html_ae40fb07cc04b81ecc867aea5b46902d1"><div class="ttname"><a href="classload__balancer.html#ae40fb07cc04b81ecc867aea5b46902d1">load_balancer::set_health_check_interval</a></div><div class="ttdeci">void set_health_check_interval(milliseconds ms)</div><div class="ttdoc">设置健康检查间隔</div><div class="ttdef"><b>定义</b> <a href="#l00125">load_balancer.hpp:125</a></div></div>
+<div class="ttc" id="aclassload__balancer_html_afa766d26e5a767791cf0baefab3681e0"><div class="ttname"><a href="classload__balancer.html#afa766d26e5a767791cf0baefab3681e0">load_balancer::healthy_count</a></div><div class="ttdeci">size_t healthy_count() const</div><div class="ttdoc">获取健康节点数</div></div>
+<div class="ttc" id="aclasslock_html"><div class="ttname"><a href="classlock.html">lock</a></div><div class="ttdoc">锁管理器模板</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00191">mutex.hpp:191</a></div></div>
+<div class="ttc" id="aclassmutex_html"><div class="ttname"><a href="classmutex.html">mutex</a></div><div class="ttdoc">非递归互斥锁</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00045">mutex.hpp:45</a></div></div>
+<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
+<div class="ttc" id="aclassvector_html_ac8d8b05ea55e928d9a4ccde8bf9bedcf"><div class="ttname"><a href="classvector.html#ac8d8b05ea55e928d9a4ccde8bf9bedcf">vector::push_back</a></div><div class="ttdeci">constexpr void push_back(const T &amp;value)</div><div class="ttdoc">在末尾拷贝插入元素</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00887">vector.hpp:887</a></div></div>
+<div class="ttc" id="aclassvector_html_acb504d0053283e805da9c4fe5827b018"><div class="ttname"><a href="classvector.html#acb504d0053283e805da9c4fe5827b018">vector::size</a></div><div class="ttdeci">constexpr size_type size() const noexcept</div><div class="ttdoc">获取当前元素数量</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00666">vector.hpp:666</a></div></div>
+<div class="ttc" id="aclocks_8hpp_html"><div class="ttname"><a href="clocks_8hpp.html">clocks.hpp</a></div><div class="ttdoc">时钟类型</div></div>
+<div class="ttc" id="afunctional_2function_8hpp_html"><div class="ttname"><a href="functional_2function_8hpp.html">function.hpp</a></div><div class="ttdoc">通用函数包装器</div></div>
+<div class="ttc" id="agroup___compare_algorithms_html_ga01c48c11cc5d3222cb2e3adf0f843f3e"><div class="ttname"><a href="group___compare_algorithms.html#ga01c48c11cc5d3222cb2e3adf0f843f3e">max</a></div><div class="ttdeci">constexpr const T &amp; max(const T &amp;a, const T &amp;b, Compare comp) noexcept(noexcept(comp(a, b)))</div><div class="ttdoc">返回两个值中的较大者</div><div class="ttdef"><b>定义</b> <a href="compare_8hpp_source.html#l00133">compare.hpp:133</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga0ba18cab9bd5513695cbe748e9bb4879"><div class="ttname"><a href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a></div><div class="ttdeci">unsigned char uint8_t</div><div class="ttdoc">8位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00098">types.hpp:98</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga785d1fff9ad28a98e121ba9f90b3a3ca"><div class="ttname"><a href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></div><div class="ttdeci">unsigned long long uint64_t</div><div class="ttdoc">64位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00118">types.hpp:118</a></div></div>
+<div class="ttc" id="agroup___duration_html_ga0c9e480a0040ed5977448019fb74cd55"><div class="ttname"><a href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a></div><div class="ttdeci">duration&lt; int64_t, milli &gt; milliseconds</div><div class="ttdoc">毫秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00157">duration.hpp:157</a></div></div>
+<div class="ttc" id="agroup___h_t_t_p_html_gadf2370a616d3d1bf1ef4152acc72e793"><div class="ttname"><a href="group___h_t_t_p.html#gadf2370a616d3d1bf1ef4152acc72e793">lb_strategy</a></div><div class="ttdeci">lb_strategy</div><div class="ttdoc">负载均衡策略</div><div class="ttdef"><b>定义</b> <a href="#l00028">load_balancer.hpp:28</a></div></div>
+<div class="ttc" id="agroup___h_t_t_p_html_ggadf2370a616d3d1bf1ef4152acc72e793a170e02e86972c2be8559884cc3c12254"><div class="ttname"><a href="group___h_t_t_p.html#ggadf2370a616d3d1bf1ef4152acc72e793a170e02e86972c2be8559884cc3c12254">lb_strategy::RANDOM</a></div><div class="ttdeci">@ RANDOM</div><div class="ttdoc">随机</div><div class="ttdef"><b>定义</b> <a href="#l00032">load_balancer.hpp:32</a></div></div>
+<div class="ttc" id="agroup___h_t_t_p_html_ggadf2370a616d3d1bf1ef4152acc72e793a1ebd8dbf8c34e255f5cbf28f35860b71"><div class="ttname"><a href="group___h_t_t_p.html#ggadf2370a616d3d1bf1ef4152acc72e793a1ebd8dbf8c34e255f5cbf28f35860b71">lb_strategy::ROUND_ROBIN</a></div><div class="ttdeci">@ ROUND_ROBIN</div><div class="ttdoc">轮询</div><div class="ttdef"><b>定义</b> <a href="#l00029">load_balancer.hpp:29</a></div></div>
+<div class="ttc" id="agroup___h_t_t_p_html_ggadf2370a616d3d1bf1ef4152acc72e793a9b5adc9c167d99cbc016b883cf6a8600"><div class="ttname"><a href="group___h_t_t_p.html#ggadf2370a616d3d1bf1ef4152acc72e793a9b5adc9c167d99cbc016b883cf6a8600">lb_strategy::LEAST_CONNECTIONS</a></div><div class="ttdeci">@ LEAST_CONNECTIONS</div><div class="ttdoc">最少连接</div><div class="ttdef"><b>定义</b> <a href="#l00030">load_balancer.hpp:30</a></div></div>
+<div class="ttc" id="agroup___h_t_t_p_html_ggadf2370a616d3d1bf1ef4152acc72e793ae9d8ebf89324671ee286fa7bf1a2c16c"><div class="ttname"><a href="group___h_t_t_p.html#ggadf2370a616d3d1bf1ef4152acc72e793ae9d8ebf89324671ee286fa7bf1a2c16c">lb_strategy::WEIGHTED</a></div><div class="ttdeci">@ WEIGHTED</div><div class="ttdoc">加权轮询</div><div class="ttdef"><b>定义</b> <a href="#l00031">load_balancer.hpp:31</a></div></div>
+<div class="ttc" id="agroup___shift_algorithms_html_ga5cf63a30ac8a14718fe8e9a65e1267ac"><div class="ttname"><a href="group___shift_algorithms.html#ga5cf63a30ac8a14718fe8e9a65e1267ac">move</a></div><div class="ttdeci">constexpr Iterator2 move(Iterator1 first, Iterator1 last, Iterator2 result) noexcept(noexcept(inner::__move_aux(first, last, result)))</div><div class="ttdoc">移动范围元素</div><div class="ttdef"><b>定义</b> <a href="shift_8hpp_source.html#l00312">shift.hpp:312</a></div></div>
+<div class="ttc" id="agroup___u_t_f_converts_html_ga64a58369986078d7a0ef24ca1a53c920"><div class="ttname"><a href="group___u_t_f_converts.html#ga64a58369986078d7a0ef24ca1a53c920">to_string</a></div><div class="ttdeci">constexpr string to_string(const CharT &amp;c)</div><div class="ttdoc">将字符转换为普通字符串</div><div class="ttdef"><b>定义</b> <a href="icharacter_8hpp_source.html#l00115">icharacter.hpp:115</a></div></div>
+<div class="ttc" id="amutex_8hpp_html"><div class="ttname"><a href="mutex_8hpp.html">mutex.hpp</a></div><div class="ttdoc">互斥锁</div></div>
+<div class="ttc" id="apackages_8hpp_html"><div class="ttname"><a href="packages_8hpp.html">packages.hpp</a></div><div class="ttdoc">数值类型包装类</div></div>
+<div class="ttc" id="aports_8hpp_html"><div class="ttname"><a href="ports_8hpp.html">ports.hpp</a></div><div class="ttdoc">网络端口定义和转换工具</div></div>
+<div class="ttc" id="astructatomic_html"><div class="ttname"><a href="structatomic.html">atomic</a></div><div class="ttdoc">通用原子类型模板</div><div class="ttdef"><b>定义</b> <a href="atomic_8hpp_source.html#l00037">atomic.hpp:37</a></div></div>
+<div class="ttc" id="astructlb__backend_html"><div class="ttname"><a href="structlb__backend.html">lb_backend</a></div><div class="ttdoc">负载均衡后端节点</div><div class="ttdef"><b>定义</b> <a href="#l00039">load_balancer.hpp:39</a></div></div>
+<div class="ttc" id="astructports_html"><div class="ttname"><a href="structports.html">ports</a></div><div class="ttdoc">网络端口封装类</div><div class="ttdef"><b>定义</b> <a href="ports_8hpp_source.html#l00124">ports.hpp:124</a></div></div>
+<div class="ttc" id="avector_8hpp_html"><div class="ttname"><a href="vector_8hpp.html">vector.hpp</a></div><div class="ttdoc">动态大小数组容器</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>network</b></li><li class="navelem"><b>http</b></li><li class="navelem"><a href="load__balancer_8hpp.html">load_balancer.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

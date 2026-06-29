@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['指针萃取_0',['指针萃取',['../group___pointer_traits.html',1,'']]]
+  ['并行算法_0',['并行算法',['../group___parallel_algorithms.html',1,'']]]
 ];

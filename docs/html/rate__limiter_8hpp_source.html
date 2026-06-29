@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: rate_limiter.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('rate__limiter_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">rate_limiter.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="rate__limiter_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_NETWORK_HTTP_RATE_LIMITER_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_NETWORK_HTTP_RATE_LIMITER_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="atomic_8hpp.html">NeForce/core/async/atomic.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="clocks_8hpp.html">NeForce/core/time/clocks.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="http__filter_8hpp.html">NeForce/network/http/http_filter.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>NEFORCE_BEGIN_HTTP__</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span></div>
+<div class="foldopen" id="foldopen00032" data-start="{" data-end="};">
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="structtoken__bucket.html">   32</a></span><span class="keyword">struct </span>NEFORCE_API token_bucket {</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="structtoken__bucket.html#a5b830b2d53ddf67a0295b4856f86a768">   33</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="structtoken__bucket.html#a5b830b2d53ddf67a0295b4856f86a768">tokens</a>;           </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="structtoken__bucket.html#aa8efe94a5cfc7d34a59b23bcb5ea9b3b">   34</a></span>    <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> <a class="code hl_variable" href="structtoken__bucket.html#aa8efe94a5cfc7d34a59b23bcb5ea9b3b">last_refill_ms</a>; </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="structtoken__bucket.html#abfd1e3fd7123a78cc98a0ea1fe51af2a">   35</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="structtoken__bucket.html#abfd1e3fd7123a78cc98a0ea1fe51af2a">refill_rate</a>;      </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="structtoken__bucket.html#a290e28a6b91d8987c1241052a9747047">   36</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="structtoken__bucket.html#a290e28a6b91d8987c1241052a9747047">capacity</a>;         </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="structtoken__bucket.html#a7c0e305f1b5c193c92f3bf3469e0eb51">   37</a></span>    <span class="keyword">mutable</span> <a class="code hl_class" href="classmutex.html">mutex</a> <a class="code hl_variable" href="structtoken__bucket.html#a7c0e305f1b5c193c92f3bf3469e0eb51">mutex_</a>;    </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    token_bucket() :</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <a class="code hl_variable" href="structtoken__bucket.html#a5b830b2d53ddf67a0295b4856f86a768">tokens</a>(0),</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <a class="code hl_variable" href="structtoken__bucket.html#aa8efe94a5cfc7d34a59b23bcb5ea9b3b">last_refill_ms</a>(0),</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_variable" href="structtoken__bucket.html#abfd1e3fd7123a78cc98a0ea1fe51af2a">refill_rate</a>(1.0),</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_variable" href="structtoken__bucket.html#a290e28a6b91d8987c1241052a9747047">capacity</a>(1.0) {}</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <a class="code hl_struct" href="structtoken__bucket.html">token_bucket</a>(<span class="keywordtype">double</span> rate, <span class="keywordtype">double</span> burst) :</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    tokens(burst),</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    last_refill_ms(static_cast&lt;<a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>&gt;(<a class="code hl_struct" href="structsteady__clock.html">steady_clock</a>::now().since_epoch().<a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>() / 1&#39;000&#39;000)),</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    refill_rate(rate),</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    capacity(burst) {}</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    token_bucket(<span class="keyword">const</span> token_bucket&amp; other) :</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    tokens(other.tokens),</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    last_refill_ms(other.last_refill_ms),</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    refill_rate(other.refill_rate),</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    capacity(other.capacity) {}</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    token_bucket&amp; operator=(<span class="keyword">const</span> token_bucket&amp; other) {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <span class="keywordflow">if</span> (<span class="keyword">this</span> != &amp;other) {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            tokens = other.<a class="code hl_variable" href="structtoken__bucket.html#a5b830b2d53ddf67a0295b4856f86a768">tokens</a>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            last_refill_ms = other.<a class="code hl_variable" href="structtoken__bucket.html#aa8efe94a5cfc7d34a59b23bcb5ea9b3b">last_refill_ms</a>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            refill_rate = other.<a class="code hl_variable" href="structtoken__bucket.html#abfd1e3fd7123a78cc98a0ea1fe51af2a">refill_rate</a>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            capacity = other.<a class="code hl_variable" href="structtoken__bucket.html#a290e28a6b91d8987c1241052a9747047">capacity</a>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span></div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="structtoken__bucket.html#a95c74be9eec833240aa4da2e98317c48">   74</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="structtoken__bucket.html#a95c74be9eec833240aa4da2e98317c48">try_consume</a>(<a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> now_ms);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span></div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="structtoken__bucket.html#a90333d30bf537fd4dd58e146e0e1038b">   80</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="structtoken__bucket.html#a90333d30bf537fd4dd58e146e0e1038b">refill</a>(<a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> now_ms);</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>};</div>
+</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span></div>
+<div class="foldopen" id="foldopen00089" data-start="{" data-end="};">
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno"><a class="line" href="classtoken__bucket__limiter.html">   89</a></span><span class="keyword">class </span>NEFORCE_API token_bucket_limiter {</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    <span class="keyword">struct </span>bucket_entry {</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        <a class="code hl_struct" href="structtoken__bucket.html">token_bucket</a> bucket;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        <a class="code hl_typedef" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> last_access_ms;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    };</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    <span class="keywordtype">double</span> default_rate_{10.0};</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordtype">double</span> default_burst_{20.0};</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <span class="keyword">mutable</span> <a class="code hl_class" href="classmutex.html">mutex</a> mutex_;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, bucket_entry&gt;</a> buckets_;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keywordtype">size_t</span> max_buckets_{10000};</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    token_bucket_limiter() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span></div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="classtoken__bucket__limiter.html#ae982b97279f5e24b25a24d04c4a0f4c4">  113</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classtoken__bucket__limiter.html#ae982b97279f5e24b25a24d04c4a0f4c4">allow</a>(<span class="keyword">const</span> <span class="keywordtype">string</span>&amp; key, <span class="keywordtype">double</span> rate = 0.0, <span class="keywordtype">double</span> burst = 0.0);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span></div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno"><a class="line" href="classtoken__bucket__limiter.html#a7b714b813a8007caa0f7167db0db0458">  116</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classtoken__bucket__limiter.html#a7b714b813a8007caa0f7167db0db0458">set_default_rate</a>(<span class="keywordtype">double</span> rate);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classtoken__bucket__limiter.html#a42cb43e614f727a1ca37231ff9bea756">  118</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classtoken__bucket__limiter.html#a42cb43e614f727a1ca37231ff9bea756">set_default_burst</a>(<span class="keywordtype">double</span> burst);</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno"><a class="line" href="classtoken__bucket__limiter.html#aead10954b1d26ff9d184b3326c830a23">  120</a></span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> <a class="code hl_function" href="classtoken__bucket__limiter.html#aead10954b1d26ff9d184b3326c830a23">size</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span></div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="classtoken__bucket__limiter.html#a6639162f9f7da7abee73f98eda7b5746">  126</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classtoken__bucket__limiter.html#a6639162f9f7da7abee73f98eda7b5746">cleanup_expired</a>(<a class="code hl_typedef" href="group___duration.html#gafce1f041e55ef5a119744bb53b2aabd9">seconds</a> max_age = <a class="code hl_typedef" href="group___duration.html#gafce1f041e55ef5a119744bb53b2aabd9">seconds</a>{300});</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>};</div>
+</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span></div>
+<div class="foldopen" id="foldopen00137" data-start="{" data-end="};">
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno"><a class="line" href="classtoken__bucket__filter.html">  137</a></span><span class="keyword">class </span>NEFORCE_API token_bucket_filter final : <span class="keyword">public</span> <a class="code hl_class" href="classhttp__filter.html">http_filter</a> {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    <a class="code hl_class" href="classtoken__bucket__limiter.html">token_bucket_limiter</a> limiter_;</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="classtoken__bucket__filter.html#a23a471c10c6caf8b146493049b749f0e">  142</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="classtoken__bucket__filter.html#a23a471c10c6caf8b146493049b749f0e">default_rate</a>{10.0};  </div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="classtoken__bucket__filter.html#ab4630cea0b1d9c28e456992f2a6e8474">  143</a></span>    <span class="keywordtype">double</span> <a class="code hl_variable" href="classtoken__bucket__filter.html#ab4630cea0b1d9c28e456992f2a6e8474">default_burst</a>{20.0}; </div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno"><a class="line" href="classtoken__bucket__filter.html#aa3c17c11321f67aea7392c3bb7a3c21d">  144</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="classtoken__bucket__filter.html#aa3c17c11321f67aea7392c3bb7a3c21d">per_route</a>{<span class="keyword">false</span>};      </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="classtoken__bucket__filter.html#aa8e569f3fadf448f14e2af8a87e9403e">  145</a></span>    <span class="keywordtype">bool</span> <a class="code hl_variable" href="classtoken__bucket__filter.html#aa8e569f3fadf448f14e2af8a87e9403e">enabled</a>{<span class="keyword">true</span>};         </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    <a class="code hl_class" href="classtoken__bucket__filter.html">token_bucket_filter</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="classtoken__bucket__filter.html">token_bucket_filter</a>(<span class="keywordtype">double</span> rate, <span class="keywordtype">double</span> burst) :</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    default_rate(rate),</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    default_burst(burst) {}</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="classtoken__bucket__filter.html#a83d7221ed39d066a0ded8e65dc8e028a">  153</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classtoken__bucket__filter.html#a83d7221ed39d066a0ded8e65dc8e028a">pre_filter</a>(<a class="code hl_typedef" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a>&amp; request, <a class="code hl_typedef" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a>&amp; response) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno"><a class="line" href="classtoken__bucket__filter.html#aea80a6e4fe3a421587ed0d1c38648a04">  154</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classtoken__bucket__filter.html#aea80a6e4fe3a421587ed0d1c38648a04">do_filter</a>(<a class="code hl_typedef" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a>&amp; request, <a class="code hl_typedef" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a>&amp; response)<span class="keyword"> override </span>{}</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>    <span class="keywordtype">void</span> cleanup_expired(<a class="code hl_typedef" href="group___duration.html#gafce1f041e55ef5a119744bb53b2aabd9">seconds</a> max_age = <a class="code hl_typedef" href="group___duration.html#gafce1f041e55ef5a119744bb53b2aabd9">seconds</a>{300});</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="classtoken__bucket__filter.html#a0fd47073ec4b709c25326d1e590e73a7">  158</a></span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="classtoken__bucket__filter.html#a0fd47073ec4b709c25326d1e590e73a7">name</a>()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;token_bucket_filter&quot;</span>; }</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    <span class="comment">// TODO: Distributed rate limiting — Redis/Lua-script based shared counter for multi-instance rate limit coordination</span></div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="comment">// TODO: Sliding window algorithm — more precise rate limiting using sliding log/window instead of token bucket</span></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    <span class="comment">// TODO: Rate limit response headers — X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset in 429 responses</span></div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>};</div>
+</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> <span class="comment">// HTTP</span></div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>NEFORCE_END_HTTP__</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_NETWORK_HTTP_RATE_LIMITER_HPP__</span></div>
+<div class="ttc" id="aatomic_8hpp_html"><div class="ttname"><a href="atomic_8hpp.html">atomic.hpp</a></div><div class="ttdoc">原子类型完整实现</div></div>
+<div class="ttc" id="aclasshttp__filter_html"><div class="ttname"><a href="classhttp__filter.html">http_filter</a></div><div class="ttdoc">HTTP过滤器基类</div><div class="ttdef"><b>定义</b> <a href="http__filter_8hpp_source.html#l00048">http_filter.hpp:48</a></div></div>
+<div class="ttc" id="aclassmutex_html"><div class="ttname"><a href="classmutex.html">mutex</a></div><div class="ttdoc">非递归互斥锁</div><div class="ttdef"><b>定义</b> <a href="mutex_8hpp_source.html#l00045">mutex.hpp:45</a></div></div>
+<div class="ttc" id="aclasstoken__bucket__filter_html"><div class="ttname"><a href="classtoken__bucket__filter.html">token_bucket_filter</a></div><div class="ttdoc">令牌桶HTTP限流过滤器</div><div class="ttdef"><b>定义</b> <a href="#l00137">rate_limiter.hpp:137</a></div></div>
+<div class="ttc" id="aclasstoken__bucket__filter_html_a0fd47073ec4b709c25326d1e590e73a7"><div class="ttname"><a href="classtoken__bucket__filter.html#a0fd47073ec4b709c25326d1e590e73a7">token_bucket_filter::name</a></div><div class="ttdeci">string name() const override</div><div class="ttdoc">获取过滤器名称</div><div class="ttdef"><b>定义</b> <a href="#l00158">rate_limiter.hpp:158</a></div></div>
+<div class="ttc" id="aclasstoken__bucket__filter_html_a23a471c10c6caf8b146493049b749f0e"><div class="ttname"><a href="classtoken__bucket__filter.html#a23a471c10c6caf8b146493049b749f0e">token_bucket_filter::default_rate</a></div><div class="ttdeci">double default_rate</div><div class="ttdoc">默认每秒请求数（每IP）</div><div class="ttdef"><b>定义</b> <a href="#l00142">rate_limiter.hpp:142</a></div></div>
+<div class="ttc" id="aclasstoken__bucket__filter_html_a83d7221ed39d066a0ded8e65dc8e028a"><div class="ttname"><a href="classtoken__bucket__filter.html#a83d7221ed39d066a0ded8e65dc8e028a">token_bucket_filter::pre_filter</a></div><div class="ttdeci">bool pre_filter(http_request &amp;request, http_response &amp;response) override</div><div class="ttdoc">预处理方法</div></div>
+<div class="ttc" id="aclasstoken__bucket__filter_html_aa3c17c11321f67aea7392c3bb7a3c21d"><div class="ttname"><a href="classtoken__bucket__filter.html#aa3c17c11321f67aea7392c3bb7a3c21d">token_bucket_filter::per_route</a></div><div class="ttdeci">bool per_route</div><div class="ttdoc">是否对每个路由单独限流</div><div class="ttdef"><b>定义</b> <a href="#l00144">rate_limiter.hpp:144</a></div></div>
+<div class="ttc" id="aclasstoken__bucket__filter_html_aa8e569f3fadf448f14e2af8a87e9403e"><div class="ttname"><a href="classtoken__bucket__filter.html#aa8e569f3fadf448f14e2af8a87e9403e">token_bucket_filter::enabled</a></div><div class="ttdeci">bool enabled</div><div class="ttdoc">是否启用</div><div class="ttdef"><b>定义</b> <a href="#l00145">rate_limiter.hpp:145</a></div></div>
+<div class="ttc" id="aclasstoken__bucket__filter_html_ab4630cea0b1d9c28e456992f2a6e8474"><div class="ttname"><a href="classtoken__bucket__filter.html#ab4630cea0b1d9c28e456992f2a6e8474">token_bucket_filter::default_burst</a></div><div class="ttdeci">double default_burst</div><div class="ttdoc">默认突发容量（每IP）</div><div class="ttdef"><b>定义</b> <a href="#l00143">rate_limiter.hpp:143</a></div></div>
+<div class="ttc" id="aclasstoken__bucket__filter_html_aea80a6e4fe3a421587ed0d1c38648a04"><div class="ttname"><a href="classtoken__bucket__filter.html#aea80a6e4fe3a421587ed0d1c38648a04">token_bucket_filter::do_filter</a></div><div class="ttdeci">void do_filter(http_request &amp;request, http_response &amp;response) override</div><div class="ttdoc">核心过滤方法</div><div class="ttdef"><b>定义</b> <a href="#l00154">rate_limiter.hpp:154</a></div></div>
+<div class="ttc" id="aclasstoken__bucket__limiter_html"><div class="ttname"><a href="classtoken__bucket__limiter.html">token_bucket_limiter</a></div><div class="ttdoc">令牌桶限流管理器</div><div class="ttdef"><b>定义</b> <a href="#l00089">rate_limiter.hpp:89</a></div></div>
+<div class="ttc" id="aclasstoken__bucket__limiter_html_a42cb43e614f727a1ca37231ff9bea756"><div class="ttname"><a href="classtoken__bucket__limiter.html#a42cb43e614f727a1ca37231ff9bea756">token_bucket_limiter::set_default_burst</a></div><div class="ttdeci">void set_default_burst(double burst)</div><div class="ttdoc">设置默认的桶容量</div></div>
+<div class="ttc" id="aclasstoken__bucket__limiter_html_a6639162f9f7da7abee73f98eda7b5746"><div class="ttname"><a href="classtoken__bucket__limiter.html#a6639162f9f7da7abee73f98eda7b5746">token_bucket_limiter::cleanup_expired</a></div><div class="ttdeci">void cleanup_expired(seconds max_age=seconds{300})</div><div class="ttdoc">清理过期的桶</div></div>
+<div class="ttc" id="aclasstoken__bucket__limiter_html_a7b714b813a8007caa0f7167db0db0458"><div class="ttname"><a href="classtoken__bucket__limiter.html#a7b714b813a8007caa0f7167db0db0458">token_bucket_limiter::set_default_rate</a></div><div class="ttdeci">void set_default_rate(double rate)</div><div class="ttdoc">设置默认的令牌补充速率</div></div>
+<div class="ttc" id="aclasstoken__bucket__limiter_html_ae982b97279f5e24b25a24d04c4a0f4c4"><div class="ttname"><a href="classtoken__bucket__limiter.html#ae982b97279f5e24b25a24d04c4a0f4c4">token_bucket_limiter::allow</a></div><div class="ttdeci">bool allow(const string &amp;key, double rate=0.0, double burst=0.0)</div><div class="ttdoc">检查并消耗令牌</div></div>
+<div class="ttc" id="aclasstoken__bucket__limiter_html_aead10954b1d26ff9d184b3326c830a23"><div class="ttname"><a href="classtoken__bucket__limiter.html#aead10954b1d26ff9d184b3326c830a23">token_bucket_limiter::size</a></div><div class="ttdeci">size_t size() const</div><div class="ttdoc">获取桶数量</div></div>
+<div class="ttc" id="aclassunordered__map_html"><div class="ttname"><a href="classunordered__map.html">unordered_map</a></div><div class="ttdoc">无序映射容器</div><div class="ttdef"><b>定义</b> <a href="unordered__map_8hpp_source.html#l00038">unordered_map.hpp:38</a></div></div>
+<div class="ttc" id="aclocks_8hpp_html"><div class="ttname"><a href="clocks_8hpp.html">clocks.hpp</a></div><div class="ttdoc">时钟类型</div></div>
+<div class="ttc" id="agroup___core_types_html_ga785d1fff9ad28a98e121ba9f90b3a3ca"><div class="ttname"><a href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></div><div class="ttdeci">unsigned long long uint64_t</div><div class="ttdoc">64位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00118">types.hpp:118</a></div></div>
+<div class="ttc" id="agroup___counting_algorithms_html_ga7f00e4c627612d89b2c6152a0c498c40"><div class="ttname"><a href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a></div><div class="ttdeci">constexpr iter_difference_t&lt; Iterator &gt; count(Iterator first, Iterator last, const T &amp;value)</div><div class="ttdoc">统计范围内等于指定值的元素数量</div><div class="ttdef"><b>定义</b> <a href="search_8hpp_source.html#l00391">search.hpp:391</a></div></div>
+<div class="ttc" id="agroup___duration_html_gafce1f041e55ef5a119744bb53b2aabd9"><div class="ttname"><a href="group___duration.html#gafce1f041e55ef5a119744bb53b2aabd9">seconds</a></div><div class="ttdeci">duration&lt; int64_t &gt; seconds</div><div class="ttdoc">秒持续时间</div><div class="ttdef"><b>定义</b> <a href="duration_8hpp_source.html#l00158">duration.hpp:158</a></div></div>
+<div class="ttc" id="agroup___h_t_t_p_html_ga215ee924d62c42786a46d2d18421391a"><div class="ttname"><a href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a></div><div class="ttdeci">http_server_response http_response</div><div class="ttdoc">HTTP响应类型别名</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00369">http_server_message.hpp:369</a></div></div>
+<div class="ttc" id="agroup___h_t_t_p_html_gad666b052985d05dd7564c4fd573c4549"><div class="ttname"><a href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a></div><div class="ttdeci">http_server_request http_request</div><div class="ttdoc">HTTP请求类型别名</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00363">http_server_message.hpp:363</a></div></div>
+<div class="ttc" id="ahttp__filter_8hpp_html"><div class="ttname"><a href="http__filter_8hpp.html">http_filter.hpp</a></div><div class="ttdoc">HTTP过滤器链实现</div></div>
+<div class="ttc" id="astructsteady__clock_html"><div class="ttname"><a href="structsteady__clock.html">steady_clock</a></div><div class="ttdoc">稳定时钟</div><div class="ttdef"><b>定义</b> <a href="clocks_8hpp_source.html#l00080">clocks.hpp:80</a></div></div>
+<div class="ttc" id="astructtoken__bucket_html"><div class="ttname"><a href="structtoken__bucket.html">token_bucket</a></div><div class="ttdoc">令牌桶数据结构</div><div class="ttdef"><b>定义</b> <a href="#l00032">rate_limiter.hpp:32</a></div></div>
+<div class="ttc" id="astructtoken__bucket_html_a290e28a6b91d8987c1241052a9747047"><div class="ttname"><a href="structtoken__bucket.html#a290e28a6b91d8987c1241052a9747047">token_bucket::capacity</a></div><div class="ttdeci">double capacity</div><div class="ttdoc">桶容量</div><div class="ttdef"><b>定义</b> <a href="#l00036">rate_limiter.hpp:36</a></div></div>
+<div class="ttc" id="astructtoken__bucket_html_a5b830b2d53ddf67a0295b4856f86a768"><div class="ttname"><a href="structtoken__bucket.html#a5b830b2d53ddf67a0295b4856f86a768">token_bucket::tokens</a></div><div class="ttdeci">double tokens</div><div class="ttdoc">当前令牌数</div><div class="ttdef"><b>定义</b> <a href="#l00033">rate_limiter.hpp:33</a></div></div>
+<div class="ttc" id="astructtoken__bucket_html_a7c0e305f1b5c193c92f3bf3469e0eb51"><div class="ttname"><a href="structtoken__bucket.html#a7c0e305f1b5c193c92f3bf3469e0eb51">token_bucket::mutex_</a></div><div class="ttdeci">mutex mutex_</div><div class="ttdoc">保护内部状态</div><div class="ttdef"><b>定义</b> <a href="#l00037">rate_limiter.hpp:37</a></div></div>
+<div class="ttc" id="astructtoken__bucket_html_a90333d30bf537fd4dd58e146e0e1038b"><div class="ttname"><a href="structtoken__bucket.html#a90333d30bf537fd4dd58e146e0e1038b">token_bucket::refill</a></div><div class="ttdeci">void refill(uint64_t now_ms)</div><div class="ttdoc">补充令牌（基于时间差）</div></div>
+<div class="ttc" id="astructtoken__bucket_html_a95c74be9eec833240aa4da2e98317c48"><div class="ttname"><a href="structtoken__bucket.html#a95c74be9eec833240aa4da2e98317c48">token_bucket::try_consume</a></div><div class="ttdeci">bool try_consume(uint64_t now_ms)</div><div class="ttdoc">尝试消耗一个令牌</div></div>
+<div class="ttc" id="astructtoken__bucket_html_aa8efe94a5cfc7d34a59b23bcb5ea9b3b"><div class="ttname"><a href="structtoken__bucket.html#aa8efe94a5cfc7d34a59b23bcb5ea9b3b">token_bucket::last_refill_ms</a></div><div class="ttdeci">uint64_t last_refill_ms</div><div class="ttdoc">上次补充时间（毫秒时间戳）</div><div class="ttdef"><b>定义</b> <a href="#l00034">rate_limiter.hpp:34</a></div></div>
+<div class="ttc" id="astructtoken__bucket_html_abfd1e3fd7123a78cc98a0ea1fe51af2a"><div class="ttname"><a href="structtoken__bucket.html#abfd1e3fd7123a78cc98a0ea1fe51af2a">token_bucket::refill_rate</a></div><div class="ttdeci">double refill_rate</div><div class="ttdoc">每秒补充令牌数</div><div class="ttdef"><b>定义</b> <a href="#l00035">rate_limiter.hpp:35</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>network</b></li><li class="navelem"><b>http</b></li><li class="navelem"><a href="rate__limiter_8hpp.html">rate_limiter.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

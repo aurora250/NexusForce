@@ -11,6 +11,7 @@ var classlocal__queue =
     [ "empty", "classlocal__queue.html#a3a06828564123022ace1687f4eed8c06", null ],
     [ "push_back", "classlocal__queue.html#a70e2ab3d3d65f423ffe571788f3ca816", null ],
     [ "remain_size", "classlocal__queue.html#a0a53b77c9e6e290d1151b232f29b2c17", null ],
+    [ "set_steal_strategy", "classlocal__queue.html#a6b1dbe093547c214d22a2abac73ef4f7", null ],
     [ "size", "classlocal__queue.html#a3abaec7e3996eed545704cc39027f144", null ],
     [ "try_pop", "classlocal__queue.html#a4a7dfd98b0eceb8f752a61a2573c8881", null ]
 ];

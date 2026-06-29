@@ -12,13 +12,13 @@
         <name>pattern_</name>
         <qualifiedname>log_formatter::pattern_</qualifiedname>
         <briefdescription>
-<para>原始格式模式 </para>
+<para>原始格式模式字符串 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="63" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" bodystart="63" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="61" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" bodystart="61" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classlog__formatter_1a21f477e46560552b7316a6f67614bb18" prot="private" static="no" mutable="no">
         <type><ref refid="classvector" kindref="compound">vector</ref>&lt; part &gt;</type>
@@ -27,13 +27,13 @@
         <name>parts_</name>
         <qualifiedname>log_formatter::parts_</qualifiedname>
         <briefdescription>
-<para>解析后的各部分 </para>
+<para>解析后的片段列表 </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="64" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" bodystart="64" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="62" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" bodystart="62" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -44,23 +44,21 @@
         <name>parse_pattern</name>
         <qualifiedname>log_formatter::parse_pattern</qualifiedname>
         <briefdescription>
-<para>解析格式模式 </para>
         </briefdescription>
         <detaileddescription>
-<para>将模式字符串解析为文本段和占位符段的列表。 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="71" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="64" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classlog__formatter_1a126df758996316fd0fba8083e8466116" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classlog__formatter_1a84f285faf4f92e4b2a51f2e91376095c" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
         <definition>string log_formatter::resolve_placeholder</definition>
-        <argsstring>(string ph, const log_event &amp;event) const</argsstring>
+        <argsstring>(const string &amp;ph, const log_event &amp;event) const</argsstring>
         <name>resolve_placeholder</name>
         <qualifiedname>log_formatter::resolve_placeholder</qualifiedname>
         <param>
-          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
           <declname>ph</declname>
         </param>
         <param>
@@ -68,33 +66,12 @@
           <declname>event</declname>
         </param>
         <briefdescription>
-<para>解析占位符 </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>ph</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>占位符名称 </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>event</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>日志事件 </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>占位符对应的值 </para>
-</simplesect>
-</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="79" column="13"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="65" column="13"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -109,7 +86,7 @@
           <declname>pattern</declname>
         </param>
         <briefdescription>
-<para>构造函数 </para>
+<para>从模式字符串构造格式化器 </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -117,7 +94,7 @@
 <parametername>pattern</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>格式模式字符串 </para>
+<para>格式模式，如 &quot;[{time}] [{level}] {message}&quot; </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -125,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="86" column="14"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="72" column="14"/>
         <references refid="classlog__formatter_1ae4dce333c41dd9e679550198ccd394ce">log_formatter</references>
         <referencedby refid="classlog__formatter_1ae4dce333c41dd9e679550198ccd394ce">log_formatter</referencedby>
       </memberdef>
@@ -141,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="88" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="74" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classlog__formatter_1aff0b5b010f7bb975f20d7aaff041273c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -158,7 +135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="90" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="76" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classlog__formatter_1a4e044c69d7b711699915b995f0e57fb2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classlog__formatter" kindref="compound">log_formatter</ref> &amp;</type>
@@ -175,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="91" column="19"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="77" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classlog__formatter_1ab8f3ccc7c496b5746b29cc56ff935aa9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -192,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="93" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="78" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classlog__formatter_1a441d55af154f408e9aa246e87fa4af07" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type><ref refid="classlog__formatter" kindref="compound">log_formatter</ref> &amp;</type>
@@ -209,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="94" column="19"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="79" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classlog__formatter_1ab7f5f5daadf75bae5f382f317b37e8ba" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
@@ -240,7 +217,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="101" column="13"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="86" column="13"/>
         <references refid="classlog__formatter_1ab7f5f5daadf75bae5f382f317b37e8ba">format</references>
         <referencedby refid="classlog__formatter_1ab7f5f5daadf75bae5f382f317b37e8ba">format</referencedby>
       </memberdef>
@@ -249,20 +226,23 @@
 <para>日志格式化器 </para>
     </briefdescription>
     <detaileddescription>
-<para>根据指定的模式字符串格式化日志事件。 支持以下占位符：<itemizedlist>
+<para>支持以下占位符：<itemizedlist>
 <listitem><para>{time} : 时间戳</para>
 </listitem><listitem><para>{level} : 日志级别</para>
-</listitem><listitem><para>{file} : 源文件名</para>
+</listitem><listitem><para>{file} : 源文件名（仅文件名，不含路径）</para>
+</listitem><listitem><para>{filepath} : 源文件完整路径</para>
 </listitem><listitem><para>{line} : 行号</para>
 </listitem><listitem><para>{func} : 函数名</para>
+</listitem><listitem><para>{name} : Logger 名称</para>
 </listitem><listitem><para>{thread} : 线程ID</para>
 </listitem><listitem><para>{message} : 日志消息</para>
 </listitem><listitem><para>{context.key} : 上下文中的指定键</para>
+</listitem><listitem><para>{color:start} / {color:end} : ANSI 颜色标记</para>
 </listitem></itemizedlist>
 </para>
 <para>示例模式：&quot;[{time}] [{level}] {file}:{line} - {message}&quot; </para>
     </detaileddescription>
-    <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="39" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" bodystart="39" bodyend="102"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" line="40" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_formatter.hpp" bodystart="40" bodyend="87"/>
     <listofallmembers>
       <member refid="classlog__formatter_1ab7f5f5daadf75bae5f382f317b37e8ba" prot="public" virt="non-virtual"><scope>log_formatter</scope><name>format</name></member>
       <member refid="classlog__formatter_1ae4dce333c41dd9e679550198ccd394ce" prot="public" virt="non-virtual"><scope>log_formatter</scope><name>log_formatter</name></member>
@@ -273,7 +253,7 @@
       <member refid="classlog__formatter_1a509a0eaec48e75592df31d1fc486dc53" prot="private" virt="non-virtual"><scope>log_formatter</scope><name>parse_pattern</name></member>
       <member refid="classlog__formatter_1a21f477e46560552b7316a6f67614bb18" prot="private" virt="non-virtual"><scope>log_formatter</scope><name>parts_</name></member>
       <member refid="classlog__formatter_1adfa732f54185cd3190b7f9218f1d12c7" prot="private" virt="non-virtual"><scope>log_formatter</scope><name>pattern_</name></member>
-      <member refid="classlog__formatter_1a126df758996316fd0fba8083e8466116" prot="private" virt="non-virtual"><scope>log_formatter</scope><name>resolve_placeholder</name></member>
+      <member refid="classlog__formatter_1a84f285faf4f92e4b2a51f2e91376095c" prot="private" virt="non-virtual"><scope>log_formatter</scope><name>resolve_placeholder</name></member>
       <member refid="classlog__formatter_1afc77f492c6eb886b58ae3d3dbfe06be2" prot="public" virt="non-virtual"><scope>log_formatter</scope><name>~log_formatter</name></member>
     </listofallmembers>
   </compounddef>

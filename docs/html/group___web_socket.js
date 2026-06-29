@@ -16,7 +16,8 @@ var group___web_socket =
       [ "handle_upgrade", "classwebsocket__server.html#a3e14f19b6262afe51436d8be3e7b1201", null ],
       [ "remove_session", "classwebsocket__server.html#ab2e671190c316c10a67c9811d5db759e", null ],
       [ "route", "classwebsocket__server.html#a1ef3d7d2914ea79ef7826d1c7bb2769b", null ],
-      [ "session_count", "classwebsocket__server.html#a324f35e43f1597de143ce170512841f4", null ]
+      [ "session_count", "classwebsocket__server.html#a324f35e43f1597de143ce170512841f4", null ],
+      [ "set_event_loop", "classwebsocket__server.html#a8d7a63ae0103ab0c48c987638f9f276f", null ]
     ] ],
     [ "websocket_session", "classwebsocket__session.html", [
       [ "close_handler", "classwebsocket__session.html#a3046e7a8e4c7d218190d5dd0267f3dd8", null ],
@@ -25,11 +26,15 @@ var group___web_socket =
       [ "websocket_session", "classwebsocket__session.html#a780f8dbdf6a0c7a69be53a00177d74c5", null ],
       [ "~websocket_session", "classwebsocket__session.html#a9c38f9d9dfabe97dc0dcbaf19266c7e6", null ],
       [ "close", "classwebsocket__session.html#a4293edef06962564c57229989f755905", null ],
+      [ "deflate_config", "classwebsocket__session.html#a9d5031322e89b2856de67e77e4d0f656", null ],
+      [ "has_deflate_config", "classwebsocket__session.html#a8d0b83258f006a6eb4d815b627be5a89", null ],
       [ "is_open", "classwebsocket__session.html#a518747318c8d053b64accbab5c2753ca", null ],
       [ "send", "classwebsocket__session.html#a63462f1a714a2520dca8fd4c6e6a36f6", null ],
       [ "send_binary", "classwebsocket__session.html#a74a5734c8df72ad7544fd3636704c665", null ],
       [ "set_close_handler", "classwebsocket__session.html#af77e313e481b77c5a125ef3c9819dcd6", null ],
+      [ "set_deflate_config", "classwebsocket__session.html#a578830e009dcb82f49a1dedd6909ea79", null ],
       [ "set_error_handler", "classwebsocket__session.html#a40df249d0e94b96b4a736c8ff752f5ea", null ],
+      [ "set_event_loop", "classwebsocket__session.html#ab4118af153f998bb2ea260b03542cee7", null ],
       [ "set_message_handler", "classwebsocket__session.html#aaebbcc5d2e0a943226e6d53d95066cca", null ],
       [ "socket", "classwebsocket__session.html#a8c5e17fbe27db7ab514b45e5af7364df", null ],
       [ "socket", "classwebsocket__session.html#ab75d9beacbd176cff4c40fe06af47e19", null ],

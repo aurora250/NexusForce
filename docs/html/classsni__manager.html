@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: sni_manager类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classsni__manager.html','','classsni__manager-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">sni_manager类 参考<div class="ingroups"><a class="el" href="group___s_s_l.html">SSL/TLS</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>SNI (Server Name Indication) 证书管理器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="sni__manager_8hpp_source.html">sni_manager.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a9f25af832a92422d2130f56566ec0736" id="r_a9f25af832a92422d2130f56566ec0736"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9f25af832a92422d2130f56566ec0736">add_host</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;hostname, <a class="el" href="classssl__context.html">ssl_context</a> ctx)</td></tr>
+<tr class="memdesc:a9f25af832a92422d2130f56566ec0736"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加域名及其SSL上下文  <br /></td></tr>
+<tr class="memitem:ac6df422173fcaae6920a15e56e6edeb1" id="r_ac6df422173fcaae6920a15e56e6edeb1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac6df422173fcaae6920a15e56e6edeb1">remove_host</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;hostname)</td></tr>
+<tr class="memdesc:ac6df422173fcaae6920a15e56e6edeb1"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除域名  <br /></td></tr>
+<tr class="memitem:a62b2b204c1ec09b9874f2e691ca6e834" id="r_a62b2b204c1ec09b9874f2e691ca6e834"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a62b2b204c1ec09b9874f2e691ca6e834">set_default_context</a> (<a class="el" href="classssl__context.html">ssl_context</a> ctx)</td></tr>
+<tr class="memdesc:a62b2b204c1ec09b9874f2e691ca6e834"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置默认SSL上下文（SNI未匹配时使用）  <br /></td></tr>
+<tr class="memitem:abe7d6b81bae2b545acb0f297c10fabf5" id="r_abe7d6b81bae2b545acb0f297c10fabf5"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#abe7d6b81bae2b545acb0f297c10fabf5">select_ssl_ctx</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;server_name) const</td></tr>
+<tr class="memdesc:abe7d6b81bae2b545acb0f297c10fabf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">根据SNI hostname选择SSL_CTX  <br /></td></tr>
+<tr class="memitem:a3297aba89b055614778ed8d99e4babeb" id="r_a3297aba89b055614778ed8d99e4babeb"><td class="memItemLeft"><a id="a3297aba89b055614778ed8d99e4babeb" name="a3297aba89b055614778ed8d99e4babeb"></a>
+bool&#160;</td><td class="memItemRight"><b>has_host</b> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;hostname) const</td></tr>
+<tr class="memdesc:a3297aba89b055614778ed8d99e4babeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否有指定域名的证书 <br /></td></tr>
+<tr class="memitem:aa804d2255ec215cc4d0daf76eb98a055" id="r_aa804d2255ec215cc4d0daf76eb98a055"><td class="memItemLeft"><a id="aa804d2255ec215cc4d0daf76eb98a055" name="aa804d2255ec215cc4d0daf76eb98a055"></a>
+<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><b>host_count</b> () const noexcept</td></tr>
+<tr class="memdesc:aa804d2255ec215cc4d0daf76eb98a055"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取配置的域名数量 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:a55942c4128375efd0b5a0aa2a846fbc9" id="r_a55942c4128375efd0b5a0aa2a846fbc9"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#a55942c4128375efd0b5a0aa2a846fbc9">sni_callback</a> (void *ssl, int *alert, void *arg)</td></tr>
+<tr class="memdesc:a55942c4128375efd0b5a0aa2a846fbc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">SNI回调函数（用于SSL_CTX_set_tlsext_servername_callback）  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>SNI (Server Name Indication) 证书管理器 </p>
+<p>支持为不同域名配置不同的SSL证书。 在TLS握手时根据客户端SNI hostname自动选择合适的SSL_CTX。</p>
+<p>使用示例： </p><div class="fragment"><div class="line">sni_manager sni;</div>
+<div class="line">sni.<a class="code hl_function" href="#a9f25af832a92422d2130f56566ec0736">add_host</a>(<span class="stringliteral">&quot;example.com&quot;</span>, <a class="code hl_class" href="classssl__context.html">ssl_context</a>(cert1, key1));</div>
+<div class="line">sni.<a class="code hl_function" href="#a9f25af832a92422d2130f56566ec0736">add_host</a>(<span class="stringliteral">&quot;api.example.com&quot;</span>, <a class="code hl_class" href="classssl__context.html">ssl_context</a>(cert2, key2));</div>
+<div class="line">sni.<a class="code hl_function" href="#a62b2b204c1ec09b9874f2e691ca6e834">set_default_context</a>(<a class="code hl_class" href="classssl__context.html">ssl_context</a>(default_cert, default_key));</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// 在SSL握手回调中使用:</span></div>
+<div class="line">SSL_CTX* ctx = sni.select_context(servername);</div>
+<div class="ttc" id="aclasssni__manager_html_a62b2b204c1ec09b9874f2e691ca6e834"><div class="ttname"><a href="#a62b2b204c1ec09b9874f2e691ca6e834">sni_manager::set_default_context</a></div><div class="ttdeci">void set_default_context(ssl_context ctx)</div><div class="ttdoc">设置默认SSL上下文（SNI未匹配时使用）</div></div>
+<div class="ttc" id="aclasssni__manager_html_a9f25af832a92422d2130f56566ec0736"><div class="ttname"><a href="#a9f25af832a92422d2130f56566ec0736">sni_manager::add_host</a></div><div class="ttdeci">void add_host(const string &amp;hostname, ssl_context ctx)</div><div class="ttdoc">添加域名及其SSL上下文</div></div>
+<div class="ttc" id="aclassssl__context_html"><div class="ttname"><a href="classssl__context.html">ssl_context</a></div><div class="ttdoc">SSL/TLS上下文管理类</div><div class="ttdef"><b>定义</b> <a href="ssl__context_8hpp_source.html#l00054">ssl_context.hpp:54</a></div></div>
+</div><!-- fragment --> 
+<p class="definition">在文件 <a class="el" href="sni__manager_8hpp_source.html">sni_manager.hpp</a> 第 <a class="el" href="sni__manager_8hpp_source.html#l00039">39</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a9f25af832a92422d2130f56566ec0736" name="a9f25af832a92422d2130f56566ec0736"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f25af832a92422d2130f56566ec0736">&#9670;&#160;</a></span>add_host()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sni_manager::add_host </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>hostname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classssl__context.html">ssl_context</a></td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加域名及其SSL上下文 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hostname</td><td>域名 </td></tr>
+    <tr><td class="paramname">ctx</td><td>SSL上下文 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac6df422173fcaae6920a15e56e6edeb1" name="ac6df422173fcaae6920a15e56e6edeb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6df422173fcaae6920a15e56e6edeb1">&#9670;&#160;</a></span>remove_host()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sni_manager::remove_host </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>hostname</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>移除域名 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hostname</td><td>域名 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abe7d6b81bae2b545acb0f297c10fabf5" name="abe7d6b81bae2b545acb0f297c10fabf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe7d6b81bae2b545acb0f297c10fabf5">&#9670;&#160;</a></span>select_ssl_ctx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * sni_manager::select_ssl_ctx </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>server_name</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>根据SNI hostname选择SSL_CTX </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">server_name</td><td>客户端发送的SNI hostname </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>匹配的SSL_CTX指针，未找到返回默认上下文或nullptr</dd></dl>
+<p>匹配规则：</p><ol type="1">
+<li>精确匹配 hostname</li>
+<li>通配符匹配 *.domain.com</li>
+<li>返回默认上下文 </li>
+</ol>
+
+</div>
+</div>
+<a id="a62b2b204c1ec09b9874f2e691ca6e834" name="a62b2b204c1ec09b9874f2e691ca6e834"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62b2b204c1ec09b9874f2e691ca6e834">&#9670;&#160;</a></span>set_default_context()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void sni_manager::set_default_context </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classssl__context.html">ssl_context</a></td>          <td class="paramname"><span class="paramname"><em>ctx</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置默认SSL上下文（SNI未匹配时使用） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ctx</td><td>默认SSL上下文 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a55942c4128375efd0b5a0aa2a846fbc9" name="a55942c4128375efd0b5a0aa2a846fbc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a55942c4128375efd0b5a0aa2a846fbc9">&#9670;&#160;</a></span>sni_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sni_manager::sni_callback </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>ssl</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int *</td>          <td class="paramname"><span class="paramname"><em>alert</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>arg</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>SNI回调函数（用于SSL_CTX_set_tlsext_servername_callback） </p>
+<p>此静态函数可作为OpenSSL的SNI回调，自动查询sni_manager实例。 通过SSL_CTX_set_tlsext_servername_arg设置manager指针。 </p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="sni__manager_8hpp_source.html">sni_manager.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classsni__manager.html">sni_manager</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,423 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classhttp2__stream" kind="class" language="C++" prot="public">
+    <compoundname>http2_stream</compoundname>
+    <includes refid="http2__protocol_8hpp" local="no">http2_protocol.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhttp2__stream_1a6ec16739556989983bc5b53e4ad2bc27" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_stream::stream_id_</definition>
+        <argsstring></argsstring>
+        <name>stream_id_</name>
+        <qualifiedname>http2_stream::stream_id_</qualifiedname>
+        <briefdescription>
+<para>流 ID </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="419" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="419" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhttp2__stream_1a58a945e6ba72c704d057a4983a6b25cb" prot="private" static="no" mutable="no">
+        <type><ref refid="group___h_t_t_p_1ga930c6dee09c2618fd01b61468fcadfe8" kindref="member">http2_stream_state</ref></type>
+        <definition>http2_stream_state http2_stream::state_</definition>
+        <argsstring></argsstring>
+        <name>state_</name>
+        <qualifiedname>http2_stream::state_</qualifiedname>
+        <initializer>= http2_stream_state::IDLE</initializer>
+        <briefdescription>
+<para>当前流状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="421" column="24" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="421" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhttp2__stream_1a9b06ce4292e898406cde070ad7bd9170" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_stream::local_window_</definition>
+        <argsstring></argsstring>
+        <name>local_window_</name>
+        <qualifiedname>http2_stream::local_window_</qualifiedname>
+        <initializer>= <ref refid="group___h_t_t_p_1ga36075bec54b2e856f4a28cb3b1acdc55" kindref="member">HTTP2_DEFAULT_INITIAL_WINDOW_SIZE</ref></initializer>
+        <briefdescription>
+<para>本地流控窗口 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="423" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="423" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhttp2__stream_1a745d300730523966f6e7c6b19c66c30c" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_stream::remote_window_</definition>
+        <argsstring></argsstring>
+        <name>remote_window_</name>
+        <qualifiedname>http2_stream::remote_window_</qualifiedname>
+        <initializer>= <ref refid="group___h_t_t_p_1ga36075bec54b2e856f4a28cb3b1acdc55" kindref="member">HTTP2_DEFAULT_INITIAL_WINDOW_SIZE</ref></initializer>
+        <briefdescription>
+<para>远端流控窗口 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="425" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="425" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhttp2__stream_1aa220568f0e4713060d08d4e33ad88fb9" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>http2_stream::http2_stream</definition>
+        <argsstring>(uint32_t stream_id)</argsstring>
+        <name>http2_stream</name>
+        <qualifiedname>http2_stream::http2_stream</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="392" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1a0f4eb13edbf4ae1227a3d705cc5df030" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_stream::id</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>id</name>
+        <qualifiedname>http2_stream::id</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="394" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="394" bodyend="394"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1a974af4f9c7ade322f3d1541dd44d5eca" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___h_t_t_p_1ga930c6dee09c2618fd01b61468fcadfe8" kindref="member">http2_stream_state</ref></type>
+        <definition>http2_stream_state http2_stream::state</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>state</name>
+        <qualifiedname>http2_stream::state</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="395" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="395" bodyend="395"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1a5242899c5590b68d2265ad93951a6d33" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool http2_stream::can_send_headers</definition>
+        <argsstring>() const</argsstring>
+        <name>can_send_headers</name>
+        <qualifiedname>http2_stream::can_send_headers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="397" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1ad574db90adabfcdbdfb225051e706a31" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool http2_stream::can_send_data</definition>
+        <argsstring>() const</argsstring>
+        <name>can_send_data</name>
+        <qualifiedname>http2_stream::can_send_data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="398" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1af28075031a1e93d632abbec4b0c90e62" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool http2_stream::can_receive</definition>
+        <argsstring>() const</argsstring>
+        <name>can_receive</name>
+        <qualifiedname>http2_stream::can_receive</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="399" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1ac3ffae8be1cf3f059ccad2a30d69f681" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool http2_stream::is_closed</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_closed</name>
+        <qualifiedname>http2_stream::is_closed</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="400" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="400" bodyend="400"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1a971b387fa6d38e962bc3732aeaec5872" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http2_stream::on_send_headers</definition>
+        <argsstring>(bool end_stream)</argsstring>
+        <name>on_send_headers</name>
+        <qualifiedname>http2_stream::on_send_headers</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>end_stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="402" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1a2f6f30b919c4812905a5c041a169f79a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http2_stream::on_send_data</definition>
+        <argsstring>(bool end_stream)</argsstring>
+        <name>on_send_data</name>
+        <qualifiedname>http2_stream::on_send_data</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>end_stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="403" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1aaf815698c2be480341c977abec354225" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http2_stream::on_receive_headers</definition>
+        <argsstring>(bool end_stream)</argsstring>
+        <name>on_receive_headers</name>
+        <qualifiedname>http2_stream::on_receive_headers</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>end_stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="404" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1a360ac775531aed507d1a91a80dcdcecd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http2_stream::on_receive_data</definition>
+        <argsstring>(bool end_stream)</argsstring>
+        <name>on_receive_data</name>
+        <qualifiedname>http2_stream::on_receive_data</qualifiedname>
+        <param>
+          <type>bool</type>
+          <declname>end_stream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="405" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1a2aed6537822d458092079f322ba605da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http2_stream::on_send_rst_stream</definition>
+        <argsstring>()</argsstring>
+        <name>on_send_rst_stream</name>
+        <qualifiedname>http2_stream::on_send_rst_stream</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="406" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1a757dc1deb01cacf8ba9ad0d2bc7809f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http2_stream::on_receive_rst_stream</definition>
+        <argsstring>()</argsstring>
+        <name>on_receive_rst_stream</name>
+        <qualifiedname>http2_stream::on_receive_rst_stream</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="407" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1a68aad858e4a7d1f6ea21fb1287fa2017" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http2_stream::close</definition>
+        <argsstring>()</argsstring>
+        <name>close</name>
+        <qualifiedname>http2_stream::close</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="408" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1a65751e72ee08722495280e0ad95ff8ad" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_stream::local_window</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>local_window</name>
+        <qualifiedname>http2_stream::local_window</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="410" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="410" bodyend="410"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1ace9f382b270befba85c927e37a85a71b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_stream::remote_window</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>remote_window</name>
+        <qualifiedname>http2_stream::remote_window</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="411" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="411" bodyend="411"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1ac5c16abae179291095d107051914299a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http2_stream::consume_local_window</definition>
+        <argsstring>(uint32_t amount)</argsstring>
+        <name>consume_local_window</name>
+        <qualifiedname>http2_stream::consume_local_window</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>amount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="412" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1acf4869f6d2905fda3e398d28c748d7c6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http2_stream::consume_remote_window</definition>
+        <argsstring>(uint32_t amount)</argsstring>
+        <name>consume_remote_window</name>
+        <qualifiedname>http2_stream::consume_remote_window</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>amount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="413" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1aac27269ccbaccfce276a4750778da765" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http2_stream::add_local_window</definition>
+        <argsstring>(uint32_t amount)</argsstring>
+        <name>add_local_window</name>
+        <qualifiedname>http2_stream::add_local_window</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>amount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="414" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__stream_1a69542ac9f0fbe5ec17a7fd138821823f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http2_stream::add_remote_window</definition>
+        <argsstring>(uint32_t amount)</argsstring>
+        <name>add_remote_window</name>
+        <qualifiedname>http2_stream::add_remote_window</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>amount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="415" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP/2 流状态机 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>追踪单个 HTTP/2 流的生命周期状态和流控窗口。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="390" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="390" bodyend="426"/>
+    <listofallmembers>
+      <member refid="classhttp2__stream_1aac27269ccbaccfce276a4750778da765" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>add_local_window</name></member>
+      <member refid="classhttp2__stream_1a69542ac9f0fbe5ec17a7fd138821823f" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>add_remote_window</name></member>
+      <member refid="classhttp2__stream_1af28075031a1e93d632abbec4b0c90e62" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>can_receive</name></member>
+      <member refid="classhttp2__stream_1ad574db90adabfcdbdfb225051e706a31" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>can_send_data</name></member>
+      <member refid="classhttp2__stream_1a5242899c5590b68d2265ad93951a6d33" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>can_send_headers</name></member>
+      <member refid="classhttp2__stream_1a68aad858e4a7d1f6ea21fb1287fa2017" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>close</name></member>
+      <member refid="classhttp2__stream_1ac5c16abae179291095d107051914299a" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>consume_local_window</name></member>
+      <member refid="classhttp2__stream_1acf4869f6d2905fda3e398d28c748d7c6" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>consume_remote_window</name></member>
+      <member refid="classhttp2__stream_1aa220568f0e4713060d08d4e33ad88fb9" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>http2_stream</name></member>
+      <member refid="classhttp2__stream_1a0f4eb13edbf4ae1227a3d705cc5df030" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>id</name></member>
+      <member refid="classhttp2__stream_1ac3ffae8be1cf3f059ccad2a30d69f681" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>is_closed</name></member>
+      <member refid="classhttp2__stream_1a65751e72ee08722495280e0ad95ff8ad" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>local_window</name></member>
+      <member refid="classhttp2__stream_1a9b06ce4292e898406cde070ad7bd9170" prot="private" virt="non-virtual"><scope>http2_stream</scope><name>local_window_</name></member>
+      <member refid="classhttp2__stream_1a360ac775531aed507d1a91a80dcdcecd" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>on_receive_data</name></member>
+      <member refid="classhttp2__stream_1aaf815698c2be480341c977abec354225" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>on_receive_headers</name></member>
+      <member refid="classhttp2__stream_1a757dc1deb01cacf8ba9ad0d2bc7809f9" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>on_receive_rst_stream</name></member>
+      <member refid="classhttp2__stream_1a2f6f30b919c4812905a5c041a169f79a" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>on_send_data</name></member>
+      <member refid="classhttp2__stream_1a971b387fa6d38e962bc3732aeaec5872" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>on_send_headers</name></member>
+      <member refid="classhttp2__stream_1a2aed6537822d458092079f322ba605da" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>on_send_rst_stream</name></member>
+      <member refid="classhttp2__stream_1ace9f382b270befba85c927e37a85a71b" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>remote_window</name></member>
+      <member refid="classhttp2__stream_1a745d300730523966f6e7c6b19c66c30c" prot="private" virt="non-virtual"><scope>http2_stream</scope><name>remote_window_</name></member>
+      <member refid="classhttp2__stream_1a974af4f9c7ade322f3d1541dd44d5eca" prot="public" virt="non-virtual"><scope>http2_stream</scope><name>state</name></member>
+      <member refid="classhttp2__stream_1a58a945e6ba72c704d057a4983a6b25cb" prot="private" virt="non-virtual"><scope>http2_stream</scope><name>state_</name></member>
+      <member refid="classhttp2__stream_1a6ec16739556989983bc5b53e4ad2bc27" prot="private" virt="non-virtual"><scope>http2_stream</scope><name>stream_id_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

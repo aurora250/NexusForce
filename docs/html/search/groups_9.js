@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['icmp_0',['ICMP',['../group___i_c_m_p.html',1,'']]],
-  ['ini配置_1',['INI配置',['../group___ini_config.html',1,'']]]
+  ['grpc支持_0',['gRPC支持',['../group__g_r_p_c.html',1,'']]]
 ];

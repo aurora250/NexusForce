@@ -20,6 +20,11 @@ var group___windows_system_registry =
         [ "qword", "classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477aa8411161cb16f462b1bdd4611965b43f", null ],
         [ "multi_string", "classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477a0eb11d63c2fc32b79389f0f26e14434d", null ]
       ] ],
+      [ "wow64_view", "classregistry__key.html#a2d0aa080e0b0c4ef79394c48f388e10d", [
+        [ "view_default", "classregistry__key.html#a2d0aa080e0b0c4ef79394c48f388e10da6169f75deb80f901dade9191ae0eab6d", null ],
+        [ "view_32bit", "classregistry__key.html#a2d0aa080e0b0c4ef79394c48f388e10dad8105eaad2744b9827aa71557d565d3e", null ],
+        [ "view_64bit", "classregistry__key.html#a2d0aa080e0b0c4ef79394c48f388e10da81854e8fa855139d047a1470ce263d4d", null ]
+      ] ],
       [ "registry_key", "classregistry__key.html#a0e76f5b910636b2b440fc362b2888f22", null ],
       [ "registry_key", "classregistry__key.html#afcddc32b40ba2d0f8b8a5450e8281bcb", null ],
       [ "~registry_key", "classregistry__key.html#a9e0f5149b4f122961b1a5d4208423151", null ],
@@ -38,7 +43,9 @@ var group___windows_system_registry =
       [ "has_value", "classregistry__key.html#a402366bac6e693e667a234b250e6e193", null ],
       [ "is_valid", "classregistry__key.html#ae8bfbed18d27ce49652470602201044b", null ],
       [ "native_handle", "classregistry__key.html#a423f8659ca8f39e1d0311150542429aa", null ],
+      [ "notify_change", "classregistry__key.html#a6bc4b5d03ed44fd6bc3153e64bc36269", null ],
       [ "open", "classregistry__key.html#ab07ea0f75761264f42ba667ce65ad6b6", null ],
+      [ "open", "classregistry__key.html#a8246180120d7048c43922ef91f5318da", null ],
       [ "open_sub_key", "classregistry__key.html#ac086c8455a820a2ac609ac409e90f330", null ],
       [ "operator bool", "classregistry__key.html#a5f206fd7f2e929e600192190c4b7915a", null ],
       [ "operator=", "classregistry__key.html#a59337159d4f3b2acca44875cde73c0bb", null ],

@@ -10,13 +10,13 @@
     <derivedcompoundref refid="classudp__socket" prot="public" virt="non-virtual">udp_socket</derivedcompoundref>
     <includes refid="ip__socket_8hpp" local="no">ip_socket.hpp</includes>
     <sectiondef kind="protected-attrib">
-      <memberdef kind="variable" id="classip__socket_1a5bef8064a2f2e096f28993a0f6542c87" prot="protected" static="no" mutable="no">
-        <type>int</type>
-        <definition>int ip_socket::family_</definition>
+      <memberdef kind="variable" id="classip__socket_1aed1326839217c5f0793747181f6e1526" prot="protected" static="no" mutable="no">
+        <type><ref refid="classip__address_1a1dd78d9245e92f33939bbe4f42b2180b" kindref="member">family</ref></type>
+        <definition>family ip_socket::family_</definition>
         <argsstring></argsstring>
         <name>family_</name>
         <qualifiedname>ip_socket::family_</qualifiedname>
-        <initializer>= AF_UNSPEC</initializer>
+        <initializer>= family::UNDEF</initializer>
         <briefdescription>
 <para>地址族 </para>
         </briefdescription>
@@ -24,31 +24,31 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="75" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="75" bodyend="-1"/>
-        <referencedby refid="classip__socket_1a415f4ab8b75623a4474eabaa211c1323" compoundref="ip__socket_8hpp" startline="107" endline="107">address_family</referencedby>
-        <referencedby refid="classip__socket_1a242bf63bfaf65fdb748d02ac8193dfb1" compoundref="ip__socket_8hpp" startline="138" endline="141">close</referencedby>
-        <referencedby refid="classip__socket_1a085fd937f8c8e4f6c0f0d27f91249bd9" compoundref="ip__socket_8hpp" startline="113" endline="113">is_ipv4</referencedby>
-        <referencedby refid="classip__socket_1a2022ec8175200f4d69e925e3375f81b2" compoundref="ip__socket_8hpp" startline="119" endline="119">is_ipv6</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="75" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="75" bodyend="-1"/>
+        <referencedby refid="classip__socket_1ad0d10499d585a7074c06152831e3dd88" compoundref="ip__socket_8hpp" startline="106" endline="106">address_family</referencedby>
+        <referencedby refid="classip__socket_1a242bf63bfaf65fdb748d02ac8193dfb1" compoundref="ip__socket_8hpp" startline="137" endline="140">close</referencedby>
+        <referencedby refid="classip__socket_1a085fd937f8c8e4f6c0f0d27f91249bd9" compoundref="ip__socket_8hpp" startline="112" endline="112">is_ipv4</referencedby>
+        <referencedby refid="classip__socket_1a2022ec8175200f4d69e925e3375f81b2" compoundref="ip__socket_8hpp" startline="118" endline="118">is_ipv6</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
-      <memberdef kind="function" id="classip__socket_1af46a0c10c0c23ab91a8445c16733ed61" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classip__socket_1aeae60b86a62a625dc2154d764b014935" prot="protected" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void ip_socket::open_ip</definition>
-        <argsstring>(int family, int type, int protocol)</argsstring>
+        <argsstring>(family f, type t, protocol p)</argsstring>
         <name>open_ip</name>
         <qualifiedname>ip_socket::open_ip</qualifiedname>
         <param>
-          <type>int</type>
-          <declname>family</declname>
+          <type><ref refid="classip__address_1a1dd78d9245e92f33939bbe4f42b2180b" kindref="member">family</ref></type>
+          <declname>f</declname>
         </param>
         <param>
-          <type>int</type>
-          <declname>type</declname>
+          <type><ref refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59" kindref="member">type</ref></type>
+          <declname>t</declname>
         </param>
         <param>
-          <type>int</type>
-          <declname>protocol</declname>
+          <type><ref refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bda" kindref="member">protocol</ref></type>
+          <declname>p</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -191,9 +191,9 @@
         <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="101" column="5"/>
         <references refid="classip__socket_1aaae0820ef1814fdd2299e646e7ce0b88">ip_socket</references>
       </memberdef>
-      <memberdef kind="function" id="classip__socket_1a415f4ab8b75623a4474eabaa211c1323" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
-        <type>int</type>
-        <definition>int ip_socket::address_family</definition>
+      <memberdef kind="function" id="classip__socket_1ad0d10499d585a7074c06152831e3dd88" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classip__address_1a1dd78d9245e92f33939bbe4f42b2180b" kindref="member">family</ref></type>
+        <definition>family ip_socket::address_family</definition>
         <argsstring>() const noexcept</argsstring>
         <name>address_family</name>
         <qualifiedname>ip_socket::address_family</qualifiedname>
@@ -201,16 +201,13 @@
 <para>获取地址族 </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>AF_INET、AF_INET6或AF_UNSPEC </para>
-</simplesect>
-</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="107" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="107" bodyend="107"/>
-        <references refid="classip__socket_1a415f4ab8b75623a4474eabaa211c1323" compoundref="ip__socket_8hpp" startline="107" endline="107">address_family</references>
-        <references refid="classip__socket_1a5bef8064a2f2e096f28993a0f6542c87" compoundref="ip__socket_8hpp" startline="75">family_</references>
-        <referencedby refid="classip__socket_1a415f4ab8b75623a4474eabaa211c1323" compoundref="ip__socket_8hpp" startline="107" endline="107">address_family</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="106" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="106" bodyend="106"/>
+        <references refid="classip__socket_1ad0d10499d585a7074c06152831e3dd88" compoundref="ip__socket_8hpp" startline="106" endline="106">address_family</references>
+        <references refid="classip__socket_1aed1326839217c5f0793747181f6e1526" compoundref="ip__socket_8hpp" startline="75">family_</references>
+        <referencedby refid="classip__socket_1ad0d10499d585a7074c06152831e3dd88" compoundref="ip__socket_8hpp" startline="106" endline="106">address_family</referencedby>
       </memberdef>
       <memberdef kind="function" id="classip__socket_1a085fd937f8c8e4f6c0f0d27f91249bd9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -228,8 +225,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="113" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="113" bodyend="113"/>
-        <references refid="classip__socket_1a5bef8064a2f2e096f28993a0f6542c87" compoundref="ip__socket_8hpp" startline="75">family_</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="112" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="112" bodyend="112"/>
+        <references refid="classip__socket_1aed1326839217c5f0793747181f6e1526" compoundref="ip__socket_8hpp" startline="75">family_</references>
       </memberdef>
       <memberdef kind="function" id="classip__socket_1a2022ec8175200f4d69e925e3375f81b2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -247,8 +244,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="119" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="119" bodyend="119"/>
-        <references refid="classip__socket_1a5bef8064a2f2e096f28993a0f6542c87" compoundref="ip__socket_8hpp" startline="75">family_</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="118" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="118" bodyend="118"/>
+        <references refid="classip__socket_1aed1326839217c5f0793747181f6e1526" compoundref="ip__socket_8hpp" startline="75">family_</references>
       </memberdef>
       <memberdef kind="function" id="classip__socket_1a50186a110e9b4e5c67aac5a23e021ace" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -256,6 +253,7 @@
         <argsstring>(const ip_address &amp;endpoint)</argsstring>
         <name>connect</name>
         <qualifiedname>ip_socket::connect</qualifiedname>
+        <reimplementedby refid="classtcp__acceptor_1a50186a110e9b4e5c67aac5a23e021ace">connect</reimplementedby>
         <param>
           <type>const <ref refid="classip__address" kindref="compound">ip_address</ref> &amp;</type>
           <declname>endpoint</declname>
@@ -294,7 +292,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="130" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="129" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classip__socket_1a242bf63bfaf65fdb748d02ac8193dfb1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -314,9 +312,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="138" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="138" bodyend="141"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="137" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="137" bodyend="140"/>
         <references refid="classsocket__base_1a5ca6bcc243acaaa75ab86a1e3316a996">socket_base::close</references>
-        <references refid="classip__socket_1a5bef8064a2f2e096f28993a0f6542c87" compoundref="ip__socket_8hpp" startline="75">family_</references>
+        <references refid="classip__socket_1aed1326839217c5f0793747181f6e1526" compoundref="ip__socket_8hpp" startline="75">family_</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -395,15 +393,24 @@
         <link refid="classsocket__base"/>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="73" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="73" bodyend="142"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" line="73" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ip_socket.hpp" bodystart="73" bodyend="141"/>
     <listofallmembers>
-      <member refid="classip__socket_1a415f4ab8b75623a4474eabaa211c1323" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>address_family</name></member>
+      <member refid="classip__socket_1ad0d10499d585a7074c06152831e3dd88" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>address_family</name></member>
       <member refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>bind</name></member>
       <member refid="classip__socket_1a242bf63bfaf65fdb748d02ac8193dfb1" prot="public" virt="virtual"><scope>ip_socket</scope><name>close</name></member>
       <member refid="classip__socket_1a50186a110e9b4e5c67aac5a23e021ace" prot="public" virt="virtual"><scope>ip_socket</scope><name>connect</name></member>
-      <member refid="classip__socket_1a5bef8064a2f2e096f28993a0f6542c87" prot="protected" virt="non-virtual"><scope>ip_socket</scope><name>family_</name></member>
+      <member refid="classsocket__base_1a815042c384cb1e40434411f9d1cfa80d" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>family</name></member>
+      <member refid="classip__socket_1aed1326839217c5f0793747181f6e1526" prot="protected" virt="non-virtual"><scope>ip_socket</scope><name>family_</name></member>
       <member refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" prot="protected" virt="non-virtual"><scope>ip_socket</scope><name>fd_</name></member>
+      <member refid="classsocket__base_1ac3103b62e4c1d6e4caef07281239ba96" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>get_keep_alive</name></member>
       <member refid="classsocket__base_1aef8dd076d9cadcea38fa14252718466c" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>get_option</name></member>
+      <member refid="classsocket__base_1a0bde21c6d19832760c24dfc205f27854" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>get_receive_buffer_size</name></member>
+      <member refid="classsocket__base_1a1626b586842a2342e12b59ab03e3c027" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>get_receive_timeout</name></member>
+      <member refid="classsocket__base_1ad6fc69fa955b9f3afc3d63c02d0addd3" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>get_reuse_address</name></member>
+      <member refid="classsocket__base_1ad1f28d1eea43b63bc7050510c480e0ae" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>get_reuse_port</name></member>
+      <member refid="classsocket__base_1af53a6dca22c01edc531761e6dd3ea491" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>get_send_buffer_size</name></member>
+      <member refid="classsocket__base_1acd796a65b1b2e380cecc38048065a458" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>get_send_timeout</name></member>
+      <member refid="classsocket__base_1ad83b27288c18c1f00fd2659c1482673f" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>get_tcp_nodelay</name></member>
       <member refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>invalid_handle</name></member>
       <member refid="classip__socket_1aaae0820ef1814fdd2299e646e7ce0b88" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>ip_socket</name></member>
       <member refid="classip__socket_1a8a478205847df7ca0529f15ca8ce50b8" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>ip_socket</name></member>
@@ -411,18 +418,21 @@
       <member refid="classip__socket_1aae6b6a8b9b8bea4d66dba690c8222980" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>ip_socket</name></member>
       <member refid="classip__socket_1a085fd937f8c8e4f6c0f0d27f91249bd9" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>is_ipv4</name></member>
       <member refid="classip__socket_1a2022ec8175200f4d69e925e3375f81b2" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>is_ipv6</name></member>
+      <member refid="classsocket__base_1ab5a66ef60a4b340dbcea96f0d5104435" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>is_nonblocking</name></member>
       <member refid="classsocket__base_1ae075f18d5fe704a278f8021d251905a0" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>is_open</name></member>
       <member refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>listen</name></member>
       <member refid="classsocket__base_1a1d9ff8b37d502077065ad505098f1c10" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>local_endpoint</name></member>
       <member refid="classsocket__base_1ad99d1582b07a547df0c6e25d7d057262" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>native_handle</name></member>
       <member refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>native_handle_type</name></member>
-      <member refid="classsocket__base_1ac45ca9c8151fc981e49861f5e85b0434" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>open</name></member>
-      <member refid="classip__socket_1af46a0c10c0c23ab91a8445c16733ed61" prot="protected" virt="non-virtual"><scope>ip_socket</scope><name>open_ip</name></member>
+      <member refid="classsocket__base_1a3b85c967d07f91b5e45349495e2a1481" prot="protected" virt="non-virtual"><scope>ip_socket</scope><name>nonblocking_</name></member>
+      <member refid="classsocket__base_1a27acf9f7219de7e4462af8744e44137a" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>open</name></member>
+      <member refid="classip__socket_1aeae60b86a62a625dc2154d764b014935" prot="protected" virt="non-virtual"><scope>ip_socket</scope><name>open_ip</name></member>
       <member refid="classsocket__base_1ade45e5ade072d22d377f6582660a872e" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>operator bool</name></member>
       <member refid="classip__socket_1a5df14bf84d50bdad66ab775ad2c5cbba" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>operator=</name></member>
       <member refid="classip__socket_1a73fbebcb7a962895a5943597b9d3d6d8" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>operator=</name></member>
       <member refid="classsocket__base_1af825fb2543e89b098bc9c1da47f09647" prot="public" virt="non-virtual" ambiguityscope="socket_base::"><scope>ip_socket</scope><name>operator=</name></member>
       <member refid="classsocket__base_1ae6442c91cf368fa6c9781f3603a31e8c" prot="public" virt="non-virtual" ambiguityscope="socket_base::"><scope>ip_socket</scope><name>operator=</name></member>
+      <member refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bda" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>protocol</name></member>
       <member refid="classsocket__base_1a940df24ee538694021cc7350ba790524" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>release</name></member>
       <member refid="classsocket__base_1a3a861847a9b28069c28a4ae626f8a4b9" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>remote_endpoint</name></member>
       <member refid="classsocket__base_1a6059faa2b63d09c36188a5aee9b64b83" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>set_keep_alive</name></member>
@@ -442,7 +452,8 @@
       <member refid="classsocket__base_1a285abeec7b22821af15b2eea0844aaf3" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>socket_base</name></member>
       <member refid="classsocket__base_1a57db04b97c49aa2c123b8b4cb155ee9b" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>socket_base</name></member>
       <member refid="classsocket__base_1ac74cda861112114c8d171f323c4e8e99" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>socket_base</name></member>
-      <member refid="classsocket__base_1a0e1b1431d88934a2de83da39b3ece88c" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>try_open</name></member>
+      <member refid="classsocket__base_1a7333214e4562884b671ed9545313985a" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>try_open</name></member>
+      <member refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>type</name></member>
       <member refid="classip__socket_1a4a1d2bcfb15b0d319defef1c9da3c0d4" prot="public" virt="non-virtual"><scope>ip_socket</scope><name>~ip_socket</name></member>
       <member refid="classsocket__base_1ad718ca0872f7a951b40b00da45151d10" prot="public" virt="virtual"><scope>ip_socket</scope><name>~socket_base</name></member>
     </listofallmembers>

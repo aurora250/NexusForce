@@ -109,6 +109,11 @@ $(function(){initNavTree('classprocess.html','','classprocess-members'); });
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public 类型</h2></td></tr>
+<tr class="memitem:a8a947a3c9361605ad811483b7e5be251" id="r_a8a947a3c9361605ad811483b7e5be251"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a8a947a3c9361605ad811483b7e5be251">std_stream</a> { <a class="el" href="#a8a947a3c9361605ad811483b7e5be251a3c6c257ed29622500badf6cc7741375c">stdin</a>
+, <a class="el" href="#a8a947a3c9361605ad811483b7e5be251a64322f5f3ff7f9f717279e1b017a997e">stdout</a>
+, <a class="el" href="#a8a947a3c9361605ad811483b7e5be251a41be535153c4b535bc9d0a610d3bd66b">stderr</a>
+ }</td></tr>
+<tr class="memdesc:a8a947a3c9361605ad811483b7e5be251"><td class="mdescLeft">&#160;</td><td class="mdescRight">标准流标识  <a href="#a8a947a3c9361605ad811483b7e5be251">更多...</a><br /></td></tr>
 <tr class="memitem:a372470dfa6edcf9a6b8c9dff60738dc1" id="r_a372470dfa6edcf9a6b8c9dff60738dc1"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1">state</a> { <br />
 &#160;&#160;<a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1a75101dcdfc88455bcafc9e53e0b06689">running</a>
 , <a class="el" href="#a372470dfa6edcf9a6b8c9dff60738dc1a735fda5d72b5c650f3f0435195a211bd">suspended</a>
@@ -166,6 +171,16 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:ab5d86f0c3462903994e14106252ce8b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">捕获标准错误  <br /></td></tr>
 <tr class="memitem:a2f25c2fdd0fea8b01e9b9d025bd95ba8" id="r_a2f25c2fdd0fea8b01e9b9d025bd95ba8"><td class="memItemLeft"><a class="el" href="classprocess.html">process</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2f25c2fdd0fea8b01e9b9d025bd95ba8">set_stdin_data</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;<a class="el" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>)</td></tr>
 <tr class="memdesc:a2f25c2fdd0fea8b01e9b9d025bd95ba8"><td class="mdescLeft">&#160;</td><td class="mdescRight">预设要写入子进程 stdin 的数据  <br /></td></tr>
+<tr class="memitem:a1feccfe84b73d2a9a0f6dcb6a46bffe3" id="r_a1feccfe84b73d2a9a0f6dcb6a46bffe3"><td class="memItemLeft"><a class="el" href="classprocess.html">process</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a1feccfe84b73d2a9a0f6dcb6a46bffe3">set_stdout_file</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;file_path)</td></tr>
+<tr class="memdesc:a1feccfe84b73d2a9a0f6dcb6a46bffe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">将 stdout 重定向到文件  <br /></td></tr>
+<tr class="memitem:a956c24d2d24118f127162c52d9630fc5" id="r_a956c24d2d24118f127162c52d9630fc5"><td class="memItemLeft"><a class="el" href="classprocess.html">process</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a956c24d2d24118f127162c52d9630fc5">set_stderr_file</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;file_path)</td></tr>
+<tr class="memdesc:a956c24d2d24118f127162c52d9630fc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">将 stderr 重定向到文件  <br /></td></tr>
+<tr class="memitem:a3ee83c9f59fb7f7b5ee9117e5eb47a64" id="r_a3ee83c9f59fb7f7b5ee9117e5eb47a64"><td class="memItemLeft"><a class="el" href="classprocess.html">process</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a3ee83c9f59fb7f7b5ee9117e5eb47a64">set_external_stdin</a> (<a class="el" href="classpipe.html">pipe</a> &amp;external_pipe)</td></tr>
+<tr class="memdesc:a3ee83c9f59fb7f7b5ee9117e5eb47a64"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置外部管道作为 stdin（用于进程链）  <br /></td></tr>
+<tr class="memitem:a36afd3d624b1950ce79c876ea7df3527" id="r_a36afd3d624b1950ce79c876ea7df3527"><td class="memItemLeft"><a class="el" href="classprocess.html">process</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a36afd3d624b1950ce79c876ea7df3527">set_external_stdout</a> (<a class="el" href="classpipe.html">pipe</a> &amp;external_pipe)</td></tr>
+<tr class="memdesc:a36afd3d624b1950ce79c876ea7df3527"><td class="mdescLeft">&#160;</td><td class="mdescRight">将 stdout 连接到外部管道（供下游进程读取）  <br /></td></tr>
+<tr class="memitem:a14bbefc0477f665d2dc1d26259cf4f37" id="r_a14bbefc0477f665d2dc1d26259cf4f37"><td class="memItemLeft"><a class="el" href="classprocess.html">process</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a14bbefc0477f665d2dc1d26259cf4f37">set_external_stderr</a> (<a class="el" href="classpipe.html">pipe</a> &amp;external_pipe)</td></tr>
+<tr class="memdesc:a14bbefc0477f665d2dc1d26259cf4f37"><td class="mdescLeft">&#160;</td><td class="mdescRight">将 stderr 连接到外部管道（供下游进程读取）  <br /></td></tr>
 <tr class="memitem:a71e9006061494f2017d16304a6e0125d" id="r_a71e9006061494f2017d16304a6e0125d"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a71e9006061494f2017d16304a6e0125d">start</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;executable, const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;args={})</td></tr>
 <tr class="memdesc:a71e9006061494f2017d16304a6e0125d"><td class="mdescLeft">&#160;</td><td class="mdescRight">启动子进程  <br /></td></tr>
 <tr class="memitem:a08dd4dadc59859b2488faf41b4b486a1" id="r_a08dd4dadc59859b2488faf41b4b486a1"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a08dd4dadc59859b2488faf41b4b486a1">start_elevated</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;executable, const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;args={}, <a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1">elevation_tool</a> tool=<a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1ae271e2d9f011df547b9b98db5a3f287a">elevation_tool::auto_</a>)</td></tr>
@@ -214,10 +229,20 @@ void&#160;</td><td class="memItemRight"><b>close_stdin</b> ()</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:ab3c95a266b557f1e5c38270dc965d035" id="r_ab3c95a266b557f1e5c38270dc965d035"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#ab3c95a266b557f1e5c38270dc965d035">chain</a> (<a class="el" href="classprocess.html">process</a> &amp;first, <a class="el" href="classprocess.html">process</a> &amp;second)</td></tr>
+<tr class="memdesc:ab3c95a266b557f1e5c38270dc965d035"><td class="mdescLeft">&#160;</td><td class="mdescRight">管道连接两个进程（A 的 stdout -&gt; B 的 stdin）  <br /></td></tr>
+<tr class="memitem:a16467d0e17c798d0d9d7d957ccabda67" id="r_a16467d0e17c798d0d9d7d957ccabda67"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a16467d0e17c798d0d9d7d957ccabda67">chain</a> (<a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="classprocess.html">process</a> * &gt; &amp;processes)</td></tr>
+<tr class="memdesc:a16467d0e17c798d0d9d7d957ccabda67"><td class="mdescLeft">&#160;</td><td class="mdescRight">管道连接多个进程  <br /></td></tr>
 <tr class="memitem:a349506cd8b7cfb65c99fd22b6da1156f" id="r_a349506cd8b7cfb65c99fd22b6da1156f"><td class="memItemLeft">static <a class="el" href="structprocess_1_1shell__result.html">shell_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#a349506cd8b7cfb65c99fd22b6da1156f">execute_shell</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;command, int timeout_ms=-1)</td></tr>
 <tr class="memdesc:a349506cd8b7cfb65c99fd22b6da1156f"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行 shell 命令并获取输出  <br /></td></tr>
 <tr class="memitem:a4de847b0677456d1edf8fa7973f7f134" id="r_a4de847b0677456d1edf8fa7973f7f134"><td class="memItemLeft">static <a class="el" href="structprocess_1_1shell__result.html">shell_result</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4de847b0677456d1edf8fa7973f7f134">execute_elevated_shell</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;command, int timeout_ms=-1, <a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1">elevation_tool</a> tool=<a class="el" href="#a09e419ffd86bcf6a536ecd9ddfe895d1ae271e2d9f011df547b9b98db5a3f287a">elevation_tool::auto_</a>)</td></tr>
 <tr class="memdesc:a4de847b0677456d1edf8fa7973f7f134"><td class="mdescLeft">&#160;</td><td class="mdescRight">以管理员/root 权限执行 shell 命令  <br /></td></tr>
+<tr class="memitem:ad3d650cd8941bf4cb01f3a52f11a0971" id="r_ad3d650cd8941bf4cb01f3a52f11a0971"><td class="memItemLeft">static <a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad3d650cd8941bf4cb01f3a52f11a0971">spawn</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;executable, const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;args={})</td></tr>
+<tr class="memdesc:ad3d650cd8941bf4cb01f3a52f11a0971"><td class="mdescLeft">&#160;</td><td class="mdescRight">启动子进程并分离（fire-and-forget）  <br /></td></tr>
+<tr class="memitem:a4e31bb844e751dc921198d30bafc094e" id="r_a4e31bb844e751dc921198d30bafc094e"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#a4e31bb844e751dc921198d30bafc094e">system</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;executable, const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;args={}, int timeout_ms=-1)</td></tr>
+<tr class="memdesc:a4e31bb844e751dc921198d30bafc094e"><td class="mdescLeft">&#160;</td><td class="mdescRight">同步运行进程并返回退出码  <br /></td></tr>
+<tr class="memitem:a9f1412ff80084530fd87e8427738db6d" id="r_a9f1412ff80084530fd87e8427738db6d"><td class="memItemLeft">static <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9f1412ff80084530fd87e8427738db6d">capture</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;executable, const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;args={}, int timeout_ms=-1)</td></tr>
+<tr class="memdesc:a9f1412ff80084530fd87e8427738db6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行进程并捕获 stdout 输出  <br /></td></tr>
 <tr class="memitem:a5093f2de932909931907884f73d71156" id="r_a5093f2de932909931907884f73d71156"><td class="memItemLeft"><a id="a5093f2de932909931907884f73d71156" name="a5093f2de932909931907884f73d71156"></a>
 static <a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a>&#160;</td><td class="memItemRight"><b>current_id</b> () noexcept</td></tr>
 <tr class="memdesc:a5093f2de932909931907884f73d71156"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前进程 ID <br /></td></tr>
@@ -232,12 +257,14 @@ static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</
 <tr class="memdesc:a9e981fa039010fa4887dc963170aec6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询任意进程的运行状态  <br /></td></tr>
 <tr class="memitem:a04579cabe3f4c1d873e02654ec768f64" id="r_a04579cabe3f4c1d873e02654ec768f64"><td class="memItemLeft">static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</a>&#160;</td><td class="memItemRight"><a class="el" href="#a04579cabe3f4c1d873e02654ec768f64">get_privilege_level</a> (<a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a> process_id)</td></tr>
 <tr class="memdesc:a04579cabe3f4c1d873e02654ec768f64"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取指定进程的特权级别  <br /></td></tr>
-<tr class="memitem:a95e578a566573bbafc902c1a3e1bde62" id="r_a95e578a566573bbafc902c1a3e1bde62"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#a95e578a566573bbafc902c1a3e1bde62">check_permission</a> (<a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a> process_id, <a class="el" href="#acfd865e47b9c3a8b63da86bc85f11242">permission</a> perm)</td></tr>
-<tr class="memdesc:a95e578a566573bbafc902c1a3e1bde62"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查对指定进程的访问权限  <br /></td></tr>
+<tr class="memitem:a1669b0ec9900ce8162610780749411ee" id="r_a1669b0ec9900ce8162610780749411ee"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#a1669b0ec9900ce8162610780749411ee">check_permission</a> (<a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a> process_id, <a class="el" href="#acfd865e47b9c3a8b63da86bc85f11242">permission</a> <a class="el" href="#acfd865e47b9c3a8b63da86bc85f11242">permission</a>)</td></tr>
+<tr class="memdesc:a1669b0ec9900ce8162610780749411ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查对指定进程的访问权限  <br /></td></tr>
+<tr class="memitem:a578795035f009517ad8ee910f99d530d" id="r_a578795035f009517ad8ee910f99d530d"><td class="memItemLeft">static <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#a578795035f009517ad8ee910f99d530d">search_path</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;executable)</td></tr>
+<tr class="memdesc:a578795035f009517ad8ee910f99d530d"><td class="mdescLeft">&#160;</td><td class="mdescRight">在 PATH 环境变量中搜索可执行文件  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>进程管理类 </p>
-<p>支持 stdout/stderr 分离捕获、stdin 写入、工作目录和环境变量设置。</p>
+<p>支持 stdout/stderr 分离捕获、stdin 写入、工作目录和环境变量设置， 外部管道连接、文件重定向和进程链。</p>
 <div class="fragment"><div class="line"><a class="code hl_function" href="#afd5c4dd719317354311b87ef18c5ea8b">process</a> p;</div>
 <div class="line">p.<a class="code hl_function" href="#a44a52ee3fa64b6c7da293e27ee2e6071">set_capture_stdout</a>(<span class="keyword">true</span>)</div>
 <div class="line"> .<a class="code hl_function" href="#ab5d86f0c3462903994e14106252ce8b8">set_capture_stderr</a>(<span class="keyword">true</span>)</div>
@@ -249,11 +276,11 @@ static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</
 <div class="ttc" id="aclassprocess_html_a44a52ee3fa64b6c7da293e27ee2e6071"><div class="ttname"><a href="#a44a52ee3fa64b6c7da293e27ee2e6071">process::set_capture_stdout</a></div><div class="ttdeci">process &amp; set_capture_stdout(bool v=true)</div><div class="ttdoc">捕获标准输出</div></div>
 <div class="ttc" id="aclassprocess_html_a71e9006061494f2017d16304a6e0125d"><div class="ttname"><a href="#a71e9006061494f2017d16304a6e0125d">process::start</a></div><div class="ttdeci">void start(const string &amp;executable, const vector&lt; string &gt; &amp;args={})</div><div class="ttdoc">启动子进程</div></div>
 <div class="ttc" id="aclassprocess_html_a83e591137cd9379e480bbe217381e64a"><div class="ttname"><a href="#a83e591137cd9379e480bbe217381e64a">process::set_work_dir</a></div><div class="ttdeci">process &amp; set_work_dir(const string &amp;dir)</div><div class="ttdoc">设置子进程工作目录</div></div>
-<div class="ttc" id="aclassprocess_html_ab479b5aedbbf34d3e927b95bc718077e"><div class="ttname"><a href="#ab479b5aedbbf34d3e927b95bc718077e">process::stdout_output</a></div><div class="ttdeci">const string &amp; stdout_output() const noexcept</div><div class="ttdoc">获取捕获的标准输出</div><div class="ttdef"><b>定义</b> <a href="process_8hpp_source.html#l00298">process.hpp:298</a></div></div>
+<div class="ttc" id="aclassprocess_html_ab479b5aedbbf34d3e927b95bc718077e"><div class="ttname"><a href="#ab479b5aedbbf34d3e927b95bc718077e">process::stdout_output</a></div><div class="ttdeci">const string &amp; stdout_output() const noexcept</div><div class="ttdoc">获取捕获的标准输出</div><div class="ttdef"><b>定义</b> <a href="process_8hpp_source.html#l00381">process.hpp:381</a></div></div>
 <div class="ttc" id="aclassprocess_html_ab5d86f0c3462903994e14106252ce8b8"><div class="ttname"><a href="#ab5d86f0c3462903994e14106252ce8b8">process::set_capture_stderr</a></div><div class="ttdeci">process &amp; set_capture_stderr(bool v=true)</div><div class="ttdoc">捕获标准错误</div></div>
 <div class="ttc" id="aclassprocess_html_afd5c4dd719317354311b87ef18c5ea8b"><div class="ttname"><a href="#afd5c4dd719317354311b87ef18c5ea8b">process::process</a></div><div class="ttdeci">process()=default</div><div class="ttdoc">默认构造</div></div>
 </div><!-- fragment --> 
-<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00063">63</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00064">64</a> 行定义.</p>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
 <a id="a09e419ffd86bcf6a536ecd9ddfe895d1" name="a09e419ffd86bcf6a536ecd9ddfe895d1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a09e419ffd86bcf6a536ecd9ddfe895d1">&#9670;&#160;</a></span>elevation_tool</h2>
@@ -285,7 +312,7 @@ static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00138">138</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00149">149</a> 行定义.</p>
 
 </div>
 </div>
@@ -325,7 +352,7 @@ static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00116">116</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00127">127</a> 行定义.</p>
 
 </div>
 </div>
@@ -359,7 +386,7 @@ static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00129">129</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00140">140</a> 行定义.</p>
 
 </div>
 </div>
@@ -397,7 +424,41 @@ static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00104">104</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00115">115</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8a947a3c9361605ad811483b7e5be251" name="a8a947a3c9361605ad811483b7e5be251"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a947a3c9361605ad811483b7e5be251">&#9670;&#160;</a></span>std_stream</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a8a947a3c9361605ad811483b7e5be251">process::std_stream</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>标准流标识 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a8a947a3c9361605ad811483b7e5be251a3c6c257ed29622500badf6cc7741375c" name="a8a947a3c9361605ad811483b7e5be251a3c6c257ed29622500badf6cc7741375c"></a>stdin&#160;</td><td class="fielddoc"><p>标准输入 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8a947a3c9361605ad811483b7e5be251a64322f5f3ff7f9f717279e1b017a997e" name="a8a947a3c9361605ad811483b7e5be251a64322f5f3ff7f9f717279e1b017a997e"></a>stdout&#160;</td><td class="fielddoc"><p>标准输出 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8a947a3c9361605ad811483b7e5be251a41be535153c4b535bc9d0a610d3bd66b" name="a8a947a3c9361605ad811483b7e5be251a41be535153c4b535bc9d0a610d3bd66b"></a>stderr&#160;</td><td class="fielddoc"><p>标准错误 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="process_8hpp_source.html">process.hpp</a> 第 <a class="el" href="process_8hpp_source.html#l00080">80</a> 行定义.</p>
 
 </div>
 </div>
@@ -428,7 +489,7 @@ static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</
 <p>默认构造 </p>
 <p>不启动任何进程 </p>
 
-<p class="reference">被这些函数引用 <a class="el" href="#a791fb4987d270cce4ee03d4f355e193f">operator=()</a>, <a class="el" href="#acf7b6c831eb297ee42a2b980517edf0d">process()</a>, <a class="el" href="#ab5d86f0c3462903994e14106252ce8b8">set_capture_stderr()</a>, <a class="el" href="#a44a52ee3fa64b6c7da293e27ee2e6071">set_capture_stdout()</a>, <a class="el" href="#aaa97f4fb9c28902a0c740102a632add3">set_env()</a>, <a class="el" href="#a2f25c2fdd0fea8b01e9b9d025bd95ba8">set_stdin_data()</a>, <a class="el" href="#a83e591137cd9379e480bbe217381e64a">set_work_dir()</a> , 以及 <a class="el" href="#a554113f7890a643f4434695ced702924">~process()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#ab3c95a266b557f1e5c38270dc965d035">chain()</a>, <a class="el" href="#a791fb4987d270cce4ee03d4f355e193f">operator=()</a>, <a class="el" href="#acf7b6c831eb297ee42a2b980517edf0d">process()</a>, <a class="el" href="#ab5d86f0c3462903994e14106252ce8b8">set_capture_stderr()</a>, <a class="el" href="#a44a52ee3fa64b6c7da293e27ee2e6071">set_capture_stdout()</a>, <a class="el" href="#aaa97f4fb9c28902a0c740102a632add3">set_env()</a>, <a class="el" href="#a14bbefc0477f665d2dc1d26259cf4f37">set_external_stderr()</a>, <a class="el" href="#a3ee83c9f59fb7f7b5ee9117e5eb47a64">set_external_stdin()</a>, <a class="el" href="#a36afd3d624b1950ce79c876ea7df3527">set_external_stdout()</a>, <a class="el" href="#a956c24d2d24118f127162c52d9630fc5">set_stderr_file()</a>, <a class="el" href="#a2f25c2fdd0fea8b01e9b9d025bd95ba8">set_stdin_data()</a>, <a class="el" href="#a1feccfe84b73d2a9a0f6dcb6a46bffe3">set_stdout_file()</a>, <a class="el" href="#a83e591137cd9379e480bbe217381e64a">set_work_dir()</a> , 以及 <a class="el" href="#a554113f7890a643f4434695ced702924">~process()</a>.</p>
 
 </div>
 </div>
@@ -455,8 +516,134 @@ static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
-<a id="a95e578a566573bbafc902c1a3e1bde62" name="a95e578a566573bbafc902c1a3e1bde62"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95e578a566573bbafc902c1a3e1bde62">&#9670;&#160;</a></span>check_permission()</h2>
+<a id="a9f1412ff80084530fd87e8427738db6d" name="a9f1412ff80084530fd87e8427738db6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f1412ff80084530fd87e8427738db6d">&#9670;&#160;</a></span>capture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> process::capture </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>executable</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>args</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span><span class="paramdefsep"> = </span><span class="paramdefval">-1</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>执行进程并捕获 stdout 输出 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">executable</td><td>可执行文件路径 </td></tr>
+    <tr><td class="paramname">args</td><td>命令行参数 </td></tr>
+    <tr><td class="paramname">timeout_ms</td><td>超时毫秒，-1 无限等待 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>标准输出字符串 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structprocess__exception.html" title="进程操作异常">process_exception</a></td><td>超时或执行失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab3c95a266b557f1e5c38270dc965d035" name="ab3c95a266b557f1e5c38270dc965d035"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3c95a266b557f1e5c38270dc965d035">&#9670;&#160;</a></span>chain() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void process::chain </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classprocess.html">process</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>first</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classprocess.html">process</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>second</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>管道连接两个进程（A 的 stdout -&gt; B 的 stdin） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">first</td><td>上游进程（已配置但未启动） </td></tr>
+    <tr><td class="paramname">second</td><td>下游进程（已配置但未启动）</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>内部创建管道并将 first 的 stdout 连接到 second 的 stdin。 管道生命周期由下游进程管理。 </p>
+
+<p class="reference">引用了 <a class="el" href="#afd5c4dd719317354311b87ef18c5ea8b">process()</a>.</p>
+
+</div>
+</div>
+<a id="a16467d0e17c798d0d9d7d957ccabda67" name="a16467d0e17c798d0d9d7d957ccabda67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16467d0e17c798d0d9d7d957ccabda67">&#9670;&#160;</a></span>chain() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void process::chain </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="classprocess.html">process</a> * &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>processes</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>管道连接多个进程 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">processes</td><td>要连接的进程列表（已配置但未启动）</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>将进程列表中的进程按顺序用管道串联： processes[0] stdout -&gt; processes[1] stdin, processes[1] stdout -&gt; processes[2] stdin, ... </p>
+
+</div>
+</div>
+<a id="a1669b0ec9900ce8162610780749411ee" name="a1669b0ec9900ce8162610780749411ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1669b0ec9900ce8162610780749411ee">&#9670;&#160;</a></span>check_permission()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -472,7 +659,7 @@ static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#acfd865e47b9c3a8b63da86bc85f11242">permission</a></td>          <td class="paramname"><span class="paramname"><em>perm</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#acfd865e47b9c3a8b63da86bc85f11242">permission</a></td>          <td class="paramname"><span class="paramname"><em>permission</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -486,15 +673,15 @@ static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
     <tr><td class="paramname">process_id</td><td>目标进程 ID </td></tr>
-    <tr><td class="paramname">perm</td><td>要检查的权限 </td></tr>
+    <tr><td class="paramname">permission</td><td>要检查的权限 </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否拥有该权限 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="#a95e578a566573bbafc902c1a3e1bde62">check_permission()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a1669b0ec9900ce8162610780749411ee">check_permission()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="#a95e578a566573bbafc902c1a3e1bde62">check_permission()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#a1669b0ec9900ce8162610780749411ee">check_permission()</a>.</p>
 
 </div>
 </div>
@@ -548,7 +735,7 @@ static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</
 </dl>
 <dl class="section note"><dt>注解</dt><dd>不捕获输出 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="process_8hpp_source.html#l00139">auto_</a>.</p>
+<p class="reference">引用了 <a class="el" href="process_8hpp_source.html#l00150">auto_</a>.</p>
 
 </div>
 </div>
@@ -742,6 +929,44 @@ static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</
 
 </div>
 </div>
+<a id="a578795035f009517ad8ee910f99d530d" name="a578795035f009517ad8ee910f99d530d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a578795035f009517ad8ee910f99d530d">&#9670;&#160;</a></span>search_path()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> process::search_path </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>executable</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>在 PATH 环境变量中搜索可执行文件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">executable</td><td>可执行文件名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>可执行文件完整路径，未找到返回空字符串 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#a578795035f009517ad8ee910f99d530d">search_path()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a578795035f009517ad8ee910f99d530d">search_path()</a>.</p>
+
+</div>
+</div>
 <a id="ab5d86f0c3462903994e14106252ce8b8" name="ab5d86f0c3462903994e14106252ce8b8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab5d86f0c3462903994e14106252ce8b8">&#9670;&#160;</a></span>set_capture_stderr()</h2>
 
@@ -828,6 +1053,121 @@ static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</
 
 </div>
 </div>
+<a id="a14bbefc0477f665d2dc1d26259cf4f37" name="a14bbefc0477f665d2dc1d26259cf4f37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14bbefc0477f665d2dc1d26259cf4f37">&#9670;&#160;</a></span>set_external_stderr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classprocess.html">process</a> &amp; process::set_external_stderr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classpipe.html">pipe</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>external_pipe</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>将 stderr 连接到外部管道（供下游进程读取） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">external_pipe</td><td>外部管道对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>该管道生命周期由调用者管理 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd5c4dd719317354311b87ef18c5ea8b">process()</a>.</p>
+
+</div>
+</div>
+<a id="a3ee83c9f59fb7f7b5ee9117e5eb47a64" name="a3ee83c9f59fb7f7b5ee9117e5eb47a64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ee83c9f59fb7f7b5ee9117e5eb47a64">&#9670;&#160;</a></span>set_external_stdin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classprocess.html">process</a> &amp; process::set_external_stdin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classpipe.html">pipe</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>external_pipe</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置外部管道作为 stdin（用于进程链） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">external_pipe</td><td>上游进程的 stdout 连接的管道 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>该管道生命周期由调用者管理，process 不拥有所有权 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd5c4dd719317354311b87ef18c5ea8b">process()</a>.</p>
+
+</div>
+</div>
+<a id="a36afd3d624b1950ce79c876ea7df3527" name="a36afd3d624b1950ce79c876ea7df3527"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36afd3d624b1950ce79c876ea7df3527">&#9670;&#160;</a></span>set_external_stdout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classprocess.html">process</a> &amp; process::set_external_stdout </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classpipe.html">pipe</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>external_pipe</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>将 stdout 连接到外部管道（供下游进程读取） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">external_pipe</td><td>外部管道对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>该管道生命周期由调用者管理 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd5c4dd719317354311b87ef18c5ea8b">process()</a>.</p>
+
+</div>
+</div>
+<a id="a956c24d2d24118f127162c52d9630fc5" name="a956c24d2d24118f127162c52d9630fc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a956c24d2d24118f127162c52d9630fc5">&#9670;&#160;</a></span>set_stderr_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classprocess.html">process</a> &amp; process::set_stderr_file </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>file_path</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>将 stderr 重定向到文件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_path</td><td>文件路径 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd5c4dd719317354311b87ef18c5ea8b">process()</a>.</p>
+
+</div>
+</div>
 <a id="a2f25c2fdd0fea8b01e9b9d025bd95ba8" name="a2f25c2fdd0fea8b01e9b9d025bd95ba8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2f25c2fdd0fea8b01e9b9d025bd95ba8">&#9670;&#160;</a></span>set_stdin_data()</h2>
 
@@ -855,6 +1195,34 @@ static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</
 
 </div>
 </div>
+<a id="a1feccfe84b73d2a9a0f6dcb6a46bffe3" name="a1feccfe84b73d2a9a0f6dcb6a46bffe3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1feccfe84b73d2a9a0f6dcb6a46bffe3">&#9670;&#160;</a></span>set_stdout_file()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classprocess.html">process</a> &amp; process::set_stdout_file </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>file_path</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>将 stdout 重定向到文件 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_path</td><td>文件路径 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#afd5c4dd719317354311b87ef18c5ea8b">process()</a>.</p>
+
+</div>
+</div>
 <a id="a83e591137cd9379e480bbe217381e64a" name="a83e591137cd9379e480bbe217381e64a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a83e591137cd9379e480bbe217381e64a">&#9670;&#160;</a></span>set_work_dir()</h2>
 
@@ -879,6 +1247,46 @@ static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</
 </dl>
 
 <p class="reference">引用了 <a class="el" href="#afd5c4dd719317354311b87ef18c5ea8b">process()</a>.</p>
+
+</div>
+</div>
+<a id="ad3d650cd8941bf4cb01f3a52f11a0971" name="ad3d650cd8941bf4cb01f3a52f11a0971"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3d650cd8941bf4cb01f3a52f11a0971">&#9670;&#160;</a></span>spawn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#ab91bd774333ce8998d5100bb41be1da8">native_id_type</a> process::spawn </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>executable</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>args</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>启动子进程并分离（fire-and-forget） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">executable</td><td>可执行文件路径 </td></tr>
+    <tr><td class="paramname">args</td><td>命令行参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>子进程 ID</dd></dl>
+<p>启动后立即分离，不等待。进程在后台运行。 </p>
 
 </div>
 </div>
@@ -958,6 +1366,57 @@ static <a class="el" href="#a85cd03dae91e9e2a916de7b19044520d">privilege_level</
   </dd>
 </dl>
 <dl class="section note"><dt>注解</dt><dd>不捕获输出 </dd></dl>
+
+</div>
+</div>
+<a id="a4e31bb844e751dc921198d30bafc094e" name="a4e31bb844e751dc921198d30bafc094e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4e31bb844e751dc921198d30bafc094e">&#9670;&#160;</a></span>system()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int process::system </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>executable</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>args</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span><span class="paramdefsep"> = </span><span class="paramdefval">-1</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>同步运行进程并返回退出码 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">executable</td><td>可执行文件路径 </td></tr>
+    <tr><td class="paramname">args</td><td>命令行参数 </td></tr>
+    <tr><td class="paramname">timeout_ms</td><td>超时毫秒，-1 无限等待 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>退出码 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structprocess__exception.html" title="进程操作异常">process_exception</a></td><td>超时或执行失败 </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

@@ -100,7 +100,7 @@ $(function(){initNavTree('classpgsql__connect.html','','classpgsql__connect-memb
 <div class="dynheader">
 类 pgsql_connect 继承关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classpgsql__connect__inherit__graph.svg" width="120" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classpgsql__connect__inherit__graph.svg" width="180" height="278"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -117,8 +117,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:a3450d90f43777ec011692214e68ecd82" id="r_a3450d90f43777ec011692214e68ecd82"><td class="memItemLeft"><a id="a3450d90f43777ec011692214e68ecd82" name="a3450d90f43777ec011692214e68ecd82"></a>
 void&#160;</td><td class="memItemRight"><b>close</b> () override</td></tr>
 <tr class="memdesc:a3450d90f43777ec011692214e68ecd82"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭数据库连接 <br /></td></tr>
-<tr class="memitem:a4903abe371af79d3193ae88a3a2f56aa" id="r_a4903abe371af79d3193ae88a3a2f56aa"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a4903abe371af79d3193ae88a3a2f56aa">set_character_set</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;encoding) const override</td></tr>
-<tr class="memdesc:a4903abe371af79d3193ae88a3a2f56aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符集  <br /></td></tr>
+<tr class="memitem:a9374bc7902b9b34815ff4d21b5ce9f4f" id="r_a9374bc7902b9b34815ff4d21b5ce9f4f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a9374bc7902b9b34815ff4d21b5ce9f4f">set_character_set</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;encoding) override</td></tr>
+<tr class="memdesc:a9374bc7902b9b34815ff4d21b5ce9f4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符集  <br /></td></tr>
 <tr class="memitem:a52e24fd98bb9999f56da7067bd7d8ac1" id="r_a52e24fd98bb9999f56da7067bd7d8ac1"><td class="memItemLeft"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#a52e24fd98bb9999f56da7067bd7d8ac1">get_character_set</a> () const override</td></tr>
 <tr class="memdesc:a52e24fd98bb9999f56da7067bd7d8ac1"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前字符集  <br /></td></tr>
 <tr class="memitem:a634957fd53245d67bcf55678e10c6e23" id="r_a634957fd53245d67bcf55678e10c6e23"><td class="memItemLeft"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#a634957fd53245d67bcf55678e10c6e23">get_error</a> () const override</td></tr>
@@ -140,6 +140,12 @@ void&#160;</td><td class="memItemRight"><b>close</b> () override</td></tr>
 <tr class="memdesc:a23d22fba9ce82c798a1363f0f816f593 inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">刷新连接存活时间  <br /></td></tr>
 <tr class="memitem:a5fe328d4bdf863d226d7065daf2cc56b inherit pub_methods_structidb__connect" id="r_a5fe328d4bdf863d226d7065daf2cc56b"><td class="memItemLeft"><a class="el" href="structidb__connect.html#ab9be909e9ecc1db9cbcc28186de35c95">clock_type</a>&#160;</td><td class="memItemRight"><a class="el" href="structidb__connect.html#a5fe328d4bdf863d226d7065daf2cc56b">get_alive</a> () const noexcept</td></tr>
 <tr class="memdesc:a5fe328d4bdf863d226d7065daf2cc56b inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取连接空闲时间  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected 属性</h2></td></tr>
+<tr class="memitem:a302469e924ae30db8d91181b635d164b" id="r_a302469e924ae30db8d91181b635d164b"><td class="memItemLeft"><a id="a302469e924ae30db8d91181b635d164b" name="a302469e924ae30db8d91181b635d164b"></a>
+::PGconn *&#160;</td><td class="memItemRight"><b>link_</b> = nullptr</td></tr>
+<tr class="memdesc:a302469e924ae30db8d91181b635d164b"><td class="mdescLeft">&#160;</td><td class="mdescRight">PostgreSQL连接句柄 <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 额外继承的成员函数</h2></td></tr>
@@ -188,7 +194,7 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 <p>析构函数 </p>
 <p>自动关闭数据库连接。 </p>
 
-<p class="definition">在文件 <a class="el" href="pgsql__connect_8hpp_source.html">pgsql_connect.hpp</a> 第 <a class="el" href="pgsql__connect_8hpp_source.html#l00059">59</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="pgsql__connect_8hpp_source.html">pgsql_connect.hpp</a> 第 <a class="el" href="pgsql__connect_8hpp_source.html#l00062">62</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="structidb__connect.html#a689ce6c9a44cdc602e6006615e949e19">idb_connect::close()</a>.</p>
 
@@ -320,7 +326,7 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 
 <p>实现了 <a class="el" href="structidb__connect.html#a150e2a5aac988b6abb97f9444042d06e">idb_connect</a>.</p>
 
-<p class="definition">在文件 <a class="el" href="pgsql__connect_8hpp_source.html">pgsql_connect.hpp</a> 第 <a class="el" href="pgsql__connect_8hpp_source.html#l00111">111</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="pgsql__connect_8hpp_source.html">pgsql_connect.hpp</a> 第 <a class="el" href="pgsql__connect_8hpp_source.html#l00114">114</a> 行定义.</p>
 
 </div>
 </div>
@@ -352,9 +358,9 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 
 <p>实现了 <a class="el" href="structidb__connect.html#a128b6a7646a28e85e231beb150439c01">idb_connect</a>.</p>
 
-<p class="definition">在文件 <a class="el" href="pgsql__connect_8hpp_source.html">pgsql_connect.hpp</a> 第 <a class="el" href="pgsql__connect_8hpp_source.html#l00105">105</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="pgsql__connect_8hpp_source.html">pgsql_connect.hpp</a> 第 <a class="el" href="pgsql__connect_8hpp_source.html#l00108">108</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="basic__string__view_8hpp_source.html#l00440">basic_string_view&lt; CharT, Traits &gt;::view()</a>.</p>
+<p class="reference">引用了 <a class="el" href="basic__string__view_8hpp_source.html#l00443">basic_string_view&lt; CharT, Traits &gt;::view()</a>.</p>
 
 </div>
 </div>
@@ -386,7 +392,7 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 
 <p>实现了 <a class="el" href="structidb__connect.html#a7b5c48c5ecdb1cdd54463da84cbc92a0">idb_connect</a>.</p>
 
-<p class="definition">在文件 <a class="el" href="pgsql__connect_8hpp_source.html">pgsql_connect.hpp</a> 第 <a class="el" href="pgsql__connect_8hpp_source.html#l00144">144</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="pgsql__connect_8hpp_source.html">pgsql_connect.hpp</a> 第 <a class="el" href="pgsql__connect_8hpp_source.html#l00147">147</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="structidb__connect.html#a05b7b473cdd13c18f5b44c83e09c082d">idb_connect::connected()</a>.</p>
 
@@ -501,8 +507,8 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 
 </div>
 </div>
-<a id="a4903abe371af79d3193ae88a3a2f56aa" name="a4903abe371af79d3193ae88a3a2f56aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4903abe371af79d3193ae88a3a2f56aa">&#9670;&#160;</a></span>set_character_set()</h2>
+<a id="a9374bc7902b9b34815ff4d21b5ce9f4f" name="a9374bc7902b9b34815ff4d21b5ce9f4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9374bc7902b9b34815ff4d21b5ce9f4f">&#9670;&#160;</a></span>set_character_set()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -514,7 +520,7 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
           <td class="memname">bool pgsql_connect::set_character_set </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>encoding</em></span></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
   </td>
@@ -533,7 +539,7 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 </dl>
 <dl class="section return"><dt>返回</dt><dd>设置成功返回true </dd></dl>
 
-<p>实现了 <a class="el" href="structidb__connect.html#a9f0b407a683b19bee646271a19356aad">idb_connect</a>.</p>
+<p>实现了 <a class="el" href="structidb__connect.html#a7787680de395dc737bd6b14978488854">idb_connect</a>.</p>
 
 </div>
 </div>

@@ -3,6 +3,7 @@ var classpgsql__tb__result =
     [ "pgsql_tb_result", "classpgsql__tb__result.html#afb72b3a7054cc38336dd52b1af225347", null ],
     [ "~pgsql_tb_result", "classpgsql__tb__result.html#a9f77b730e0608d3450b0dfba2d29a8d9", null ],
     [ "column_count", "classpgsql__tb__result.html#ae9281dbebf4d098969b99abab86457b1", null ],
+    [ "column_metadata", "classpgsql__tb__result.html#a0caed572eefa21ab56187c8ef70746ad", null ],
     [ "column_names", "classpgsql__tb__result.html#a2ebbe17b3579bd7894548fcafe79ba2d", null ],
     [ "empty", "classpgsql__tb__result.html#a2cde35cf5a40593a7b4459c6baad1fd5", null ],
     [ "get", "classpgsql__tb__result.html#a92169a3cb117a565865ac61bb46d48f3", null ],

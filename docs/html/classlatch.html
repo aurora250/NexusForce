@@ -111,8 +111,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:a33b76e8739418ed6b0ffffc7811b7ccd" id="r_a33b76e8739418ed6b0ffffc7811b7ccd"><td class="memItemLeft"><a id="a33b76e8739418ed6b0ffffc7811b7ccd" name="a33b76e8739418ed6b0ffffc7811b7ccd"></a>
 <a class="el" href="classlatch.html">latch</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (const <a class="el" href="classlatch.html">latch</a> &amp;)=delete</td></tr>
 <tr class="memdesc:a33b76e8739418ed6b0ffffc7811b7ccd"><td class="mdescLeft">&#160;</td><td class="mdescRight">禁止拷贝赋值 <br /></td></tr>
-<tr class="memitem:a5d0363a4c163fe58fb84fd4e8ee45e15" id="r_a5d0363a4c163fe58fb84fd4e8ee45e15"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5d0363a4c163fe58fb84fd4e8ee45e15">count_down</a> (const <a class="el" href="group___futex.html#ga4ae42858521c6114207203888569da88">platform_wait_t</a> update=1)</td></tr>
-<tr class="memdesc:a5d0363a4c163fe58fb84fd4e8ee45e15"><td class="mdescLeft">&#160;</td><td class="mdescRight">减少计数器  <br /></td></tr>
+<tr class="memitem:a364c1b21592dadad292e5493ffa5ba24" id="r_a364c1b21592dadad292e5493ffa5ba24"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a364c1b21592dadad292e5493ffa5ba24">count_down</a> (const <a class="el" href="group___futex.html#ga4ae42858521c6114207203888569da88">platform_wait_t</a> update=1) noexcept</td></tr>
+<tr class="memdesc:a364c1b21592dadad292e5493ffa5ba24"><td class="mdescLeft">&#160;</td><td class="mdescRight">减少计数器  <br /></td></tr>
 <tr class="memitem:a4ca399a140ec6ad75d2711ec7843bdfc" id="r_a4ca399a140ec6ad75d2711ec7843bdfc"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a4ca399a140ec6ad75d2711ec7843bdfc">try_wait</a> () const noexcept</td></tr>
 <tr class="memdesc:a4ca399a140ec6ad75d2711ec7843bdfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试等待  <br /></td></tr>
 <tr class="memitem:afedb29909d54b1c8c6bf136c2f900da3" id="r_afedb29909d54b1c8c6bf136c2f900da3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afedb29909d54b1c8c6bf136c2f900da3">wait</a> () const noexcept</td></tr>
@@ -211,8 +211,8 @@ Public 成员函数</h2></td></tr>
 
 </div>
 </div>
-<a id="a5d0363a4c163fe58fb84fd4e8ee45e15" name="a5d0363a4c163fe58fb84fd4e8ee45e15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d0363a4c163fe58fb84fd4e8ee45e15">&#9670;&#160;</a></span>count_down()</h2>
+<a id="a364c1b21592dadad292e5493ffa5ba24" name="a364c1b21592dadad292e5493ffa5ba24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a364c1b21592dadad292e5493ffa5ba24">&#9670;&#160;</a></span>count_down()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -229,7 +229,7 @@ Public 成员函数</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -246,7 +246,7 @@ Public 成员函数</h2></td></tr>
 
 <p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00070">70</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00730">atomic_fetch_sub()</a>, <a class="el" href="atomic__wait_8hpp_source.html#l00448">atomic_notify_address()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00179">memory_order_release</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00746">atomic_fetch_sub()</a>, <a class="el" href="atomic__wait_8hpp_source.html#l00448">atomic_notify_address()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00179">memory_order_release</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="latch_8hpp_source.html#l00108">arrive_and_wait()</a>.</p>
 
@@ -313,7 +313,7 @@ Public 成员函数</h2></td></tr>
 
 <p class="definition">在文件 <a class="el" href="latch_8hpp_source.html">latch.hpp</a> 第 <a class="el" href="latch_8hpp_source.html#l00083">83</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00480">atomic_load()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
+<p class="reference">引用了 <a class="el" href="atomic__base_8hpp_source.html#l00496">atomic_load()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="latch_8hpp_source.html#l00094">wait()</a>.</p>
 

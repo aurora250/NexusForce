@@ -11,7 +11,6 @@ var structipackage =
     [ "operator*=", "structipackage.html#a1302c99f56d1e980353bbe9a1d3261e9", null ],
     [ "operator++", "structipackage.html#aa2cd49f6f5f220f96ad4c72da396962b", null ],
     [ "operator+=", "structipackage.html#ad5ce36d807db7fcbf1e911059a56a0ee", null ],
-    [ "operator-", "structipackage.html#aba0082f9fd02af0fbc17cb01c70d0bbd", null ],
     [ "operator--", "structipackage.html#ae9caaebee49246b2dc19c1e657d1478a", null ],
     [ "operator-=", "structipackage.html#a52b642942569147d303a46bfd7e42fc4", null ],
     [ "operator/=", "structipackage.html#a2bce454349f18fe7cbc65c51c58f8e2c", null ],

@@ -127,10 +127,10 @@
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="60" column="11"/>
         <references refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" compoundref="latch_8hpp" startline="53" endline="56">latch</references>
       </memberdef>
-      <memberdef kind="function" id="classlatch_1a5d0363a4c163fe58fb84fd4e8ee45e15" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classlatch_1a364c1b21592dadad292e5493ffa5ba24" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
         <definition>void latch::count_down</definition>
-        <argsstring>(const platform_wait_t update=1)</argsstring>
+        <argsstring>(const platform_wait_t update=1) noexcept</argsstring>
         <name>count_down</name>
         <qualifiedname>latch::count_down</qualifiedname>
         <param>
@@ -159,7 +159,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="70" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="70" bodyend="75"/>
-        <references refid="group___atomic_operations_1gac61d9fd541d5b9aef14a1067e3538924" compoundref="atomic__base_8hpp" startline="730" endline="738">atomic_fetch_sub</references>
+        <references refid="group___atomic_operations_1gac61d9fd541d5b9aef14a1067e3538924" compoundref="atomic__base_8hpp" startline="746" endline="754">atomic_fetch_sub</references>
         <references refid="group___atomic_operations_1ga5c5949e5e1c0b7d9c13b91322f47f79d" compoundref="atomic__wait_8hpp" startline="448" endline="451">atomic_notify_address</references>
         <references refid="group___memory_order_1ga1872f4bd7e5e4170b898e1dcab55bbec" compoundref="memory__order_8hpp" startline="179">memory_order_release</references>
         <referencedby refid="classlatch_1ad9b2bff5008d4d1f690cc852fd232d38" compoundref="latch_8hpp" startline="108" endline="111">arrive_and_wait</referencedby>
@@ -181,7 +181,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="83" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="83" bodyend="85"/>
-        <references refid="group___atomic_operations_1gac97fbbd35fc0bf2a6051feefa461a711" compoundref="atomic__base_8hpp" startline="480" endline="491">atomic_load</references>
+        <references refid="group___atomic_operations_1gac97fbbd35fc0bf2a6051feefa461a711" compoundref="atomic__base_8hpp" startline="496" endline="507">atomic_load</references>
         <references refid="group___memory_order_1ga52729ffe1460a0069a1736f2e4e61d2e" compoundref="memory__order_8hpp" startline="177">memory_order_acquire</references>
         <referencedby refid="classlatch_1afedb29909d54b1c8c6bf136c2f900da3" compoundref="latch_8hpp" startline="94" endline="97">wait</referencedby>
       </memberdef>
@@ -239,7 +239,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="108" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="108" bodyend="111"/>
-        <references refid="classlatch_1a5d0363a4c163fe58fb84fd4e8ee45e15" compoundref="latch_8hpp" startline="70" endline="75">count_down</references>
+        <references refid="classlatch_1a364c1b21592dadad292e5493ffa5ba24" compoundref="latch_8hpp" startline="70" endline="75">count_down</references>
         <references refid="classlatch_1afedb29909d54b1c8c6bf136c2f900da3" compoundref="latch_8hpp" startline="94" endline="97">wait</references>
       </memberdef>
     </sectiondef>
@@ -252,7 +252,7 @@
     <location file="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" line="36" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/latch.hpp" bodystart="36" bodyend="112"/>
     <listofallmembers>
       <member refid="classlatch_1ad9b2bff5008d4d1f690cc852fd232d38" prot="public" virt="non-virtual"><scope>latch</scope><name>arrive_and_wait</name></member>
-      <member refid="classlatch_1a5d0363a4c163fe58fb84fd4e8ee45e15" prot="public" virt="non-virtual"><scope>latch</scope><name>count_down</name></member>
+      <member refid="classlatch_1a364c1b21592dadad292e5493ffa5ba24" prot="public" virt="non-virtual"><scope>latch</scope><name>count_down</name></member>
       <member refid="classlatch_1a8284a362f6c4949e56be1eb61a083c52" prot="private" virt="non-virtual"><scope>latch</scope><name>counter_</name></member>
       <member refid="classlatch_1a50bee6b3588a817ac476fe217741cc67" prot="public" virt="non-virtual"><scope>latch</scope><name>latch</name></member>
       <member refid="classlatch_1a00355a36c48695412e0ae6e8634f534f" prot="public" virt="non-virtual"><scope>latch</scope><name>latch</name></member>

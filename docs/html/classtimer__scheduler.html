@@ -124,6 +124,9 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:a524ba8b6788fe4e0d4d28f554f50f5d8" id="r_a524ba8b6788fe4e0d4d28f554f50f5d8"><td class="memItemLeft"><a id="a524ba8b6788fe4e0d4d28f554f50f5d8" name="a524ba8b6788fe4e0d4d28f554f50f5d8"></a>
 &#160;</td><td class="memItemRight"><b>~timer_scheduler</b> ()</td></tr>
 <tr class="memdesc:a524ba8b6788fe4e0d4d28f554f50f5d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数，停止调度线程并等待其结束 <br /></td></tr>
+<tr class="memitem:afc0788cb4bf13471a2d573e0342613ed" id="r_afc0788cb4bf13471a2d573e0342613ed"><td class="memItemLeft"><a id="afc0788cb4bf13471a2d573e0342613ed" name="afc0788cb4bf13471a2d573e0342613ed"></a>
+void&#160;</td><td class="memItemRight"><b>stop</b> ()</td></tr>
+<tr class="memdesc:afc0788cb4bf13471a2d573e0342613ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">停止调度线程并等待其结束 <br /></td></tr>
 <tr class="memitem:ad7e2861340ab12370ceaec61a82c9129" id="r_ad7e2861340ab12370ceaec61a82c9129"><td class="memItemLeft"><a class="el" href="#a0ff7c3e92b9b906112140b804623e3ea">token</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad7e2861340ab12370ceaec61a82c9129">add_task</a> (<a class="el" href="#a25c8b70565c98ece1cf245a6665b20b9">time_point</a> expire, <a class="el" href="#ada7122813465be5f928c9c7209325731">handler_type</a> &amp;&amp;handler)</td></tr>
 <tr class="memdesc:ad7e2861340ab12370ceaec61a82c9129"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加定时任务  <br /></td></tr>
 <tr class="memitem:aa25522eaa375942415f6ab940174a49b" id="r_aa25522eaa375942415f6ab940174a49b"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aa25522eaa375942415f6ab940174a49b">cancel</a> (<a class="el" href="#a0ff7c3e92b9b906112140b804623e3ea">token</a> <a class="el" href="group___thread.html#gaab371a4a36c3866d2f8bdd3e2be27f11">id</a>)</td></tr>
@@ -189,9 +192,9 @@ template&lt;typename Clock&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>任务标识符，可用于取消任务</dd></dl>
 <p>如果新任务的到期时间早于当前最早的任务，会唤醒调度线程。 </p>
 
-<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00180">180</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00185">185</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00449">id()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l00835">make_shared()</a>, <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="promise_8hpp_source.html#l00127">promise&lt; Res &gt;::set_value()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00450">id()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l00849">make_shared()</a>, <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="promise_8hpp_source.html#l00127">promise&lt; Res &gt;::set_value()</a>.</p>
 
 </div>
 </div>
@@ -230,7 +233,7 @@ template&lt;typename Clock&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>是否成功取消</dd></dl>
 <p>如果取消的是当前最早的任务，会唤醒调度线程重新计算等待时间。 </p>
 
-<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00215">215</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00220">220</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00179">memory_order_release</a>.</p>
 
@@ -270,7 +273,7 @@ template&lt;typename Clock&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>任务是否未完成 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00282">282</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00287">287</a> 行定义.</p>
 
 </div>
 </div>
@@ -302,7 +305,7 @@ template&lt;typename Clock&gt; </div>
 <p>获取当前待处理的任务数量 </p>
 <dl class="section return"><dt>返回</dt><dd>任务数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00272">272</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="timer_8hpp_source.html">timer.hpp</a> 第 <a class="el" href="timer_8hpp_source.html#l00277">277</a> 行定义.</p>
 
 </div>
 </div>

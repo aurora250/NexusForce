@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['边界查找算法_0',['边界查找算法',['../group___bound_algorithms.html',1,'']]]
+  ['认证方式_0',['SMTP 认证方式',['../group___s_m_t_p.html#auth_methods',1,'']]]
 ];

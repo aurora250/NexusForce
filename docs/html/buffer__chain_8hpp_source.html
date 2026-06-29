@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: buffer_chain.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('buffer__chain_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">buffer_chain.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_CONTAINER_BUFFER_CHAIN_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_CONTAINER_BUFFER_CHAIN_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="string_8hpp.html">NeForce/core/string/string.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_LINUX</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#    include &lt;sys/uio.h&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_WINDOWS</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">struct </span>iovec {</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keywordtype">void</span>* iov_base;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keywordtype">size_t</span> iov_len;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>};</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span></div>
+<div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="classbuffer__chain.html">   22</a></span><span class="keyword">class </span>buffer_chain {</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keyword">struct </span>segment {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>{<span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga630d7b0d77515784d2391b3725ac6df0">size</a>{0};</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    };</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_class" href="classvector.html">vector&lt;segment&gt;</a> segments_;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">size_t</span> total_size_{0};</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    buffer_chain() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span></div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classbuffer__chain.html#af53b29d0568534ea3b2f365e1adc815b">   39</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classbuffer__chain.html#af53b29d0568534ea3b2f365e1adc815b">append</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* <a class="code hl_function" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>, <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga630d7b0d77515784d2391b3725ac6df0">size</a>) {</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        segments_.push_back({<a class="code hl_function" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>, <a class="code hl_function" href="group___type_erasure_functions.html#ga630d7b0d77515784d2391b3725ac6df0">size</a>});</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        total_size_ += <a class="code hl_function" href="group___type_erasure_functions.html#ga630d7b0d77515784d2391b3725ac6df0">size</a>;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    }</div>
+</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classbuffer__chain.html#a2a0ebba8be6e0a824944f81b2eec6230">   47</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classbuffer__chain.html#a2a0ebba8be6e0a824944f81b2eec6230">append</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> sv) { <a class="code hl_function" href="classbuffer__chain.html#a2a0ebba8be6e0a824944f81b2eec6230">append</a>(sv.<a class="code hl_function" href="classbasic__string__view.html#a333ab8066e73bf2d4bd068f686eeaa24">data</a>(), sv.<a class="code hl_function" href="classbasic__string__view.html#a0b5a6546739bc33ecbe750f98ac47b25">size</a>()); }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span></div>
+<div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classbuffer__chain.html#a829f879c328d6ff84b71e7343cc16ac4">   52</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classbuffer__chain.html#a829f879c328d6ff84b71e7343cc16ac4">append</a>(<span class="keyword">const</span> buffer_chain&amp; other) {</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        segments_.insert(segments_.end(), other.segments_.<a class="code hl_function" href="classvector.html#ab78572320afe8abac07e7762afc9d8d3">begin</a>(), other.segments_.<a class="code hl_function" href="classvector.html#aba0a5982f80665d2e8a9716fd48c9063">end</a>());</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        total_size_ += other.total_size_;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    }</div>
+</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span></div>
+<div class="foldopen" id="foldopen00060" data-start="{" data-end="}">
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="classbuffer__chain.html#ae89612333d057b3423d798495cb518a9">   60</a></span>    NEFORCE_NODISCARD <span class="keywordtype">string</span> <a class="code hl_function" href="classbuffer__chain.html#ae89612333d057b3423d798495cb518a9">flatten</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        <span class="keywordtype">string</span> result;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        result.<a class="code hl_function" href="classbasic__string.html#aa2527f9b1a17a4b866e3e59e384dc0d8">reserve</a>(total_size_);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; seg: segments_) {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            result.<a class="code hl_function" href="classbasic__string.html#a23c524fe4e21ba7bf374b0949786310c">append</a>(seg.data, seg.size);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span></div>
+<div class="foldopen" id="foldopen00072" data-start="{" data-end="}">
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classbuffer__chain.html#aab9a98bf930d5d22c55cd97d6b552630">   72</a></span>    NEFORCE_NODISCARD <a class="code hl_class" href="classvector.html">vector&lt;::iovec&gt;</a> <a class="code hl_function" href="classbuffer__chain.html#aab9a98bf930d5d22c55cd97d6b552630">to_iovec</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <a class="code hl_class" href="classvector.html">vector&lt;::iovec&gt;</a> iov;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        iov.<a class="code hl_function" href="classvector.html#a0066a7fca1a744cdb62d5fb96b51a88f">reserve</a>(segments_.size());</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; seg: segments_) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            ::iovec v{};</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            v.iov_base = <span class="keyword">const_cast&lt;</span><span class="keywordtype">char</span>*<span class="keyword">&gt;</span>(seg.data);</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            v.iov_len = seg.size;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            iov.<a class="code hl_function" href="classvector.html#ac8d8b05ea55e928d9a4ccde8bf9bedcf">push_back</a>(v);</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        }</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>        <span class="keywordflow">return</span> iov;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    }</div>
+</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> total_size() const noexcept { <span class="keywordflow">return</span> total_size_; }</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    NEFORCE_NODISCARD <span class="keywordtype">size_t</span> segment_count() const noexcept { <span class="keywordflow">return</span> segments_.size(); }</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    NEFORCE_NODISCARD <span class="keywordtype">bool</span> empty() const noexcept { <span class="keywordflow">return</span> total_size_ == 0; }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    <span class="keywordtype">void</span> clear() noexcept {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        segments_.clear();</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        total_size_ = 0;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    }</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordtype">void</span> reserve(<span class="keywordtype">size_t</span> <a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>) { segments_.reserve(<a class="code hl_function" href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a>); }</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>};</div>
+</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_CONTAINER_BUFFER_CHAIN_HPP__</span></div>
+<div class="ttc" id="aclassbasic__string__view_html_a0b5a6546739bc33ecbe750f98ac47b25"><div class="ttname"><a href="classbasic__string__view.html#a0b5a6546739bc33ecbe750f98ac47b25">basic_string_view::size</a></div><div class="ttdeci">constexpr size_type size() const noexcept</div><div class="ttdoc">获取字符串长度</div><div class="ttdef"><b>定义</b> <a href="basic__string__view_8hpp_source.html#l00305">basic_string_view.hpp:305</a></div></div>
+<div class="ttc" id="aclassbasic__string__view_html_a333ab8066e73bf2d4bd068f686eeaa24"><div class="ttname"><a href="classbasic__string__view.html#a333ab8066e73bf2d4bd068f686eeaa24">basic_string_view::data</a></div><div class="ttdeci">constexpr const_pointer data() const noexcept</div><div class="ttdoc">获取底层数据指针</div><div class="ttdef"><b>定义</b> <a href="basic__string__view_8hpp_source.html#l00334">basic_string_view.hpp:334</a></div></div>
+<div class="ttc" id="aclassbasic__string_html_a23c524fe4e21ba7bf374b0949786310c"><div class="ttname"><a href="classbasic__string.html#a23c524fe4e21ba7bf374b0949786310c">basic_string::append</a></div><div class="ttdeci">constexpr basic_string &amp; append(size_type n, value_type value)</div><div class="ttdoc">追加多个相同字符</div><div class="ttdef"><b>定义</b> <a href="basic__string_8hpp_source.html#l01572">basic_string.hpp:1572</a></div></div>
+<div class="ttc" id="aclassbasic__string_html_aa2527f9b1a17a4b866e3e59e384dc0d8"><div class="ttname"><a href="classbasic__string.html#aa2527f9b1a17a4b866e3e59e384dc0d8">basic_string::reserve</a></div><div class="ttdeci">constexpr void reserve(const size_type n)</div><div class="ttdoc">预留容量</div><div class="ttdef"><b>定义</b> <a href="basic__string_8hpp_source.html#l01274">basic_string.hpp:1274</a></div></div>
+<div class="ttc" id="aclassbuffer__chain_html_a2a0ebba8be6e0a824944f81b2eec6230"><div class="ttname"><a href="classbuffer__chain.html#a2a0ebba8be6e0a824944f81b2eec6230">buffer_chain::append</a></div><div class="ttdeci">void append(const string_view sv)</div><div class="ttdoc">追加 string_view</div><div class="ttdef"><b>定义</b> <a href="#l00047">buffer_chain.hpp:47</a></div></div>
+<div class="ttc" id="aclassbuffer__chain_html_a829f879c328d6ff84b71e7343cc16ac4"><div class="ttname"><a href="classbuffer__chain.html#a829f879c328d6ff84b71e7343cc16ac4">buffer_chain::append</a></div><div class="ttdeci">void append(const buffer_chain &amp;other)</div><div class="ttdoc">追加另一个 buffer_chain 的内容</div><div class="ttdef"><b>定义</b> <a href="#l00052">buffer_chain.hpp:52</a></div></div>
+<div class="ttc" id="aclassbuffer__chain_html_aab9a98bf930d5d22c55cd97d6b552630"><div class="ttname"><a href="classbuffer__chain.html#aab9a98bf930d5d22c55cd97d6b552630">buffer_chain::to_iovec</a></div><div class="ttdeci">vector&lt;::iovec &gt; to_iovec() const</div><div class="ttdoc">构建 writev iovec 数组</div><div class="ttdef"><b>定义</b> <a href="#l00072">buffer_chain.hpp:72</a></div></div>
+<div class="ttc" id="aclassbuffer__chain_html_ae89612333d057b3423d798495cb518a9"><div class="ttname"><a href="classbuffer__chain.html#ae89612333d057b3423d798495cb518a9">buffer_chain::flatten</a></div><div class="ttdeci">string flatten() const</div><div class="ttdoc">合并所有段为单一字符串</div><div class="ttdef"><b>定义</b> <a href="#l00060">buffer_chain.hpp:60</a></div></div>
+<div class="ttc" id="aclassbuffer__chain_html_af53b29d0568534ea3b2f365e1adc815b"><div class="ttname"><a href="classbuffer__chain.html#af53b29d0568534ea3b2f365e1adc815b">buffer_chain::append</a></div><div class="ttdeci">void append(const char *data, size_t size)</div><div class="ttdoc">追加数据视图</div><div class="ttdef"><b>定义</b> <a href="#l00039">buffer_chain.hpp:39</a></div></div>
+<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
+<div class="ttc" id="aclassvector_html_a0066a7fca1a744cdb62d5fb96b51a88f"><div class="ttname"><a href="classvector.html#a0066a7fca1a744cdb62d5fb96b51a88f">vector::reserve</a></div><div class="ttdeci">constexpr void reserve(const size_type n)</div><div class="ttdoc">预留容量</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00775">vector.hpp:775</a></div></div>
+<div class="ttc" id="aclassvector_html_ab78572320afe8abac07e7762afc9d8d3"><div class="ttname"><a href="classvector.html#ab78572320afe8abac07e7762afc9d8d3">vector::begin</a></div><div class="ttdeci">constexpr iterator begin() noexcept</div><div class="ttdoc">获取起始迭代器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00588">vector.hpp:588</a></div></div>
+<div class="ttc" id="aclassvector_html_aba0a5982f80665d2e8a9716fd48c9063"><div class="ttname"><a href="classvector.html#aba0a5982f80665d2e8a9716fd48c9063">vector::end</a></div><div class="ttdeci">constexpr iterator end() noexcept</div><div class="ttdoc">获取结束迭代器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00594">vector.hpp:594</a></div></div>
+<div class="ttc" id="aclassvector_html_ac8d8b05ea55e928d9a4ccde8bf9bedcf"><div class="ttname"><a href="classvector.html#ac8d8b05ea55e928d9a4ccde8bf9bedcf">vector::push_back</a></div><div class="ttdeci">constexpr void push_back(const T &amp;value)</div><div class="ttdoc">在末尾拷贝插入元素</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00887">vector.hpp:887</a></div></div>
+<div class="ttc" id="agroup___counting_algorithms_html_ga7f00e4c627612d89b2c6152a0c498c40"><div class="ttname"><a href="group___counting_algorithms.html#ga7f00e4c627612d89b2c6152a0c498c40">count</a></div><div class="ttdeci">constexpr iter_difference_t&lt; Iterator &gt; count(Iterator first, Iterator last, const T &amp;value)</div><div class="ttdoc">统计范围内等于指定值的元素数量</div><div class="ttdef"><b>定义</b> <a href="search_8hpp_source.html#l00391">search.hpp:391</a></div></div>
+<div class="ttc" id="agroup___string_view_html_ga204ca715c2febee035464fa53dfc50c4"><div class="ttname"><a href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></div><div class="ttdeci">basic_string_view&lt; char &gt; string_view</div><div class="ttdoc">字符字符串视图</div><div class="ttdef"><b>定义</b> <a href="string__view_8hpp_source.html#l00022">string_view.hpp:22</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_ga630d7b0d77515784d2391b3725ac6df0"><div class="ttname"><a href="group___type_erasure_functions.html#ga630d7b0d77515784d2391b3725ac6df0">size</a></div><div class="ttdeci">constexpr decltype(auto) size(const Container &amp;cont) noexcept(noexcept(cont.size()))</div><div class="ttdoc">获取容器的大小</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00292">type_erase.hpp:292</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_gaeed8bfb4510a906e04808100528dd9b8"><div class="ttname"><a href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a></div><div class="ttdeci">constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00395">type_erase.hpp:395</a></div></div>
+<div class="ttc" id="astring_8hpp_html"><div class="ttname"><a href="string_8hpp.html">string.hpp</a></div><div class="ttdoc">字符串类型别名和实用函数</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>container</b></li><li class="navelem"><b>buffer_chain.hpp</b></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -16,10 +16,12 @@ var searchData=
   ['binary_13',['binary',['../classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477a9d7183f16acce70658f686ae7f1a4d20',1,'registry_key']]],
   ['bitset_5fmatch_5fany_14',['bitset_match_any',['../group___futex.html#ggab7057283120da679629ce8fb1238219ba28fb4c528a4d49af012e73bc2807c4a8',1,'futex.hpp']]],
   ['block_15',['Block',['../classyaml__sequence.html#ad6b43327651f8eb2c4b1ce3d326dee39a018795c708a2a4628fc5c7b75a6d84ec',1,'yaml_sequence::Block'],['../classyaml__mapping.html#a44328ffa387eab3c55ecf4b79c1d390fa9375185124623a3f2d911157a3127e60',1,'yaml_mapping::Block']]],
-  ['bool_16',['Bool',['../classjson__value.html#a04fcd4c27b006cfc74a3204774a5805facacb22ac27555e5c947ae9357071a60a',1,'json_value']]],
-  ['boolean_17',['Boolean',['../classtoml__value.html#a4b6fe229629c77a296512ebfd5278150a36931a677a2099576584f9b02b32bbb5',1,'toml_value::Boolean'],['../classyaml__value.html#a408d20891c27dc523f9ac6fa971c7633a6be7945e897201a66071024da0900aa0',1,'yaml_value::Boolean']]],
-  ['broken_5fpipe_18',['broken_pipe',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a2f0338eed54503152be1d31c93c9c2f1',1,'errc.hpp']]],
-  ['broken_5fpromise_19',['broken_promise',['../group___async.html#gga197afef4e181c466a1c01ca7c7b4b1e6a2c6bc6062e72db1c0915032943cb6452',1,'future.hpp']]],
-  ['buffer_5foverflow_20',['buffer_overflow',['../group___memory_order.html#ggae82e0aa93c3ecd9dd220fd45ae4ab659a0d998bc644f3d7bb85b68137d2bd62c2',1,'memory_order.hpp']]],
-  ['bus_5ferror_21',['BUS_ERROR',['../classsystem__signal__manager.html#a442e5d505e7801160e93504232ce2616a57316c450c6d8fc7887052ee0ad78edb',1,'system_signal_manager']]]
+  ['block_16',['block',['../group___logging.html#gga35627212bfd2d281fb917509552af4cfa14511f2f5564650d129ca7cabc333278',1,'log_event.hpp']]],
+  ['bluetooth_17',['BLUETOOTH',['../classip__address.html#a1dd78d9245e92f33939bbe4f42b2180ba8de8a62c3191fb6cf61e0ac4b2b59045',1,'ip_address']]],
+  ['bool_18',['Bool',['../classjson__value.html#a04fcd4c27b006cfc74a3204774a5805facacb22ac27555e5c947ae9357071a60a',1,'json_value']]],
+  ['boolean_19',['Boolean',['../classtoml__value.html#a4b6fe229629c77a296512ebfd5278150a36931a677a2099576584f9b02b32bbb5',1,'toml_value::Boolean'],['../classyaml__value.html#a408d20891c27dc523f9ac6fa971c7633a6be7945e897201a66071024da0900aa0',1,'yaml_value::Boolean']]],
+  ['broken_5fpipe_20',['broken_pipe',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a2f0338eed54503152be1d31c93c9c2f1',1,'errc.hpp']]],
+  ['broken_5fpromise_21',['broken_promise',['../group___async.html#gga197afef4e181c466a1c01ca7c7b4b1e6a2c6bc6062e72db1c0915032943cb6452',1,'future.hpp']]],
+  ['buffer_5foverflow_22',['buffer_overflow',['../group___memory_order.html#ggae82e0aa93c3ecd9dd220fd45ae4ab659a0d998bc644f3d7bb85b68137d2bd62c2',1,'memory_order.hpp']]],
+  ['bus_5ferror_23',['BUS_ERROR',['../classsystem__signal__manager.html#a442e5d505e7801160e93504232ce2616a57316c450c6d8fc7887052ee0ad78edb',1,'system_signal_manager']]]
 ];

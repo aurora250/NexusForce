@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['共享内存_0',['共享内存',['../group___share_memory.html',1,'']]],
-  ['共享智能指针_1',['共享智能指针',['../group___shared_pointer.html',1,'']]]
+  ['信号槽_0',['信号槽',['../group___signals.html',1,'']]],
+  ['信号量_1',['信号量',['../group___semaphores.html',1,'']]]
 ];

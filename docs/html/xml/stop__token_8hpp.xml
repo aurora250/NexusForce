@@ -6,7 +6,7 @@
     <includes refid="semaphore_8hpp" local="yes">NeForce/core/async/semaphore.hpp</includes>
     <includes refid="thread_8hpp" local="yes">NeForce/core/async/thread.hpp</includes>
     <includes refid="none_8hpp" local="yes">NeForce/core/utility/none.hpp</includes>
-    <includedby refid="scoped__thread_8hpp" local="yes">scoped_thread.hpp</includedby>
+    <includedby refid="scope__thread_8hpp" local="yes">scope_thread.hpp</includedby>
     <incdepgraph>
       <node id="2">
         <label>NeForce/core/async/atomic.hpp</label>
@@ -19,21 +19,21 @@
         <link refid="atomic__base_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
         <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="20" relation="include">
         </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
       </node>
-      <node id="22">
+      <node id="23">
         <label>atomic_timed_wait.hpp</label>
         <link refid="atomic__timed__wait_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="23" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
       </node>
       <node id="4">
@@ -41,9 +41,9 @@
         <link refid="atomic__wait_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="5">
@@ -52,22 +52,22 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="18">
         <label>NeForce/core/async/memory_order.hpp</label>
         <link refid="memory__order_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="21">
+      <node id="22">
         <label>NeForce/core/async/semaphore.hpp</label>
         <link refid="semaphore_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="33" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -75,19 +75,17 @@
         <link refid="stop__token_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="35" relation="include">
+        <childnode refid="36" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
+        <childnode refid="51" relation="include">
         </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>NeForce/core/async/this_thread.hpp</label>
         <link refid="this__thread_8hpp"/>
         <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -97,19 +95,21 @@
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
       </node>
-      <node id="35">
+      <node id="36">
         <label>NeForce/core/async/thread.hpp</label>
         <link refid="thread_8hpp"/>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="36" relation="include">
+        <childnode refid="37" relation="include">
         </childnode>
-        <childnode refid="45" relation="include">
+        <childnode refid="46" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
       </node>
       <node id="8">
@@ -117,137 +117,143 @@
         <link refid="c_09_09config_8hpp"/>
         <childnode refid="9" relation="include">
         </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
       </node>
-      <node id="11">
+      <node id="10">
+        <label>NeForce/core/config/version.hpp</label>
+        <link refid="version_8hpp_source"/>
+      </node>
+      <node id="12">
         <label>NeForce/core/config/windef.hpp</label>
         <link refid="windef_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="19">
         <label>NeForce/core/exception/breakpoint.hpp</label>
         <link refid="breakpoint_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="27">
+      <node id="28">
         <label>NeForce/core/exception/exception.hpp</label>
         <link refid="exception_8hpp"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="36">
+      <node id="37">
         <label>NeForce/core/functional/apply.hpp</label>
         <link refid="apply_8hpp"/>
-        <childnode refid="37" relation="include">
+        <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="40" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="47">
         <label>NeForce/core/functional/functor.hpp</label>
         <link refid="functor_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="42">
+      <node id="43">
         <label>NeForce/core/functional/hash.hpp</label>
         <link refid="hash_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="37">
+      <node id="38">
         <label>NeForce/core/functional/invoke.hpp</label>
         <link refid="invoke_8hpp"/>
-        <childnode refid="38" relation="include">
+        <childnode refid="39" relation="include">
         </childnode>
       </node>
-      <node id="41">
+      <node id="42">
         <label>NeForce/core/interface/icommon.hpp</label>
         <link refid="icommon_8hpp"/>
-        <childnode refid="42" relation="include">
+        <childnode refid="43" relation="include">
         </childnode>
       </node>
-      <node id="32">
+      <node id="33">
         <label>NeForce/core/memory/bit.hpp</label>
         <link refid="bit_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>NeForce/core/memory/memory.hpp</label>
         <link refid="memory_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="45">
+      <node id="46">
         <label>NeForce/core/memory/unique_ptr.hpp</label>
         <link refid="unique__ptr_8hpp"/>
-        <childnode refid="46" relation="include">
-        </childnode>
-        <childnode refid="37" relation="include">
-        </childnode>
         <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
         </childnode>
         <childnode refid="48" relation="include">
         </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
       </node>
-      <node id="26">
+      <node id="27">
         <label>NeForce/core/numeric/math.hpp</label>
         <link refid="math_8hpp"/>
-        <childnode refid="27" relation="include">
-        </childnode>
         <childnode refid="28" relation="include">
-        </childnode>
-      </node>
-      <node id="29">
-        <label>NeForce/core/numeric/numeric_traits.hpp</label>
-        <link refid="numeric__traits_8hpp"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-      </node>
-      <node id="28">
-        <label>NeForce/core/numeric/numeric_types.hpp</label>
-        <link refid="numeric__types_8hpp"/>
-        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
       </node>
       <node id="30">
-        <label>NeForce/core/numeric/ratio.hpp</label>
-        <link refid="ratio_8hpp"/>
-        <childnode refid="31" relation="include">
+        <label>NeForce/core/numeric/numeric_traits.hpp</label>
+        <link refid="numeric__traits_8hpp"/>
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="31">
-        <label>NeForce/core/numeric/static_numeric.hpp</label>
-        <link refid="static__numeric_8hpp"/>
-        <childnode refid="32" relation="include">
-        </childnode>
-        <childnode refid="29" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-      </node>
-      <node id="23">
-        <label>NeForce/core/time/clocks.hpp</label>
-        <link refid="clocks_8hpp"/>
-        <childnode refid="24" relation="include">
-        </childnode>
-      </node>
-      <node id="25">
-        <label>NeForce/core/time/duration.hpp</label>
-        <link refid="duration_8hpp"/>
-        <childnode refid="26" relation="include">
+      <node id="29">
+        <label>NeForce/core/numeric/numeric_types.hpp</label>
+        <link refid="numeric__types_8hpp"/>
+        <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
       </node>
+      <node id="31">
+        <label>NeForce/core/numeric/ratio.hpp</label>
+        <link refid="ratio_8hpp"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>NeForce/core/numeric/static_numeric.hpp</label>
+        <link refid="static__numeric_8hpp"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
       <node id="24">
+        <label>NeForce/core/time/clocks.hpp</label>
+        <link refid="clocks_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>NeForce/core/time/duration.hpp</label>
+        <link refid="duration_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
         <label>NeForce/core/time/time_point.hpp</label>
         <link refid="time__point_8hpp"/>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
       </node>
       <node id="6">
@@ -262,98 +268,92 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="48">
         <label>NeForce/core/utility/compressed_pair.hpp</label>
         <link refid="compressed__pair_8hpp"/>
-        <childnode refid="41" relation="include">
+        <childnode refid="42" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="49">
         <label>NeForce/core/utility/deleter.hpp</label>
         <link refid="deleter_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="43">
+      <node id="44">
         <label>NeForce/core/utility/integer_sequence.hpp</label>
         <link refid="integer__sequence_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="50">
+      <node id="51">
         <label>NeForce/core/utility/none.hpp</label>
         <link refid="none_8hpp"/>
-        <childnode refid="41" relation="include">
+        <childnode refid="42" relation="include">
         </childnode>
       </node>
-      <node id="40">
+      <node id="41">
         <label>NeForce/core/utility/pair.hpp</label>
         <link refid="pair_8hpp"/>
-        <childnode refid="41" relation="include">
-        </childnode>
-        <childnode refid="43" relation="include">
-        </childnode>
-        <childnode refid="38" relation="include">
+        <childnode refid="42" relation="include">
         </childnode>
         <childnode refid="44" relation="include">
         </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
       </node>
-      <node id="38">
+      <node id="39">
         <label>NeForce/core/utility/reference_wrapper.hpp</label>
         <link refid="reference__wrapper_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="39">
+      <node id="40">
         <label>NeForce/core/utility/tuple.hpp</label>
         <link refid="tuple_8hpp"/>
-        <childnode refid="40" relation="include">
+        <childnode refid="41" relation="include">
         </childnode>
       </node>
-      <node id="33">
+      <node id="34">
         <label>bits/local_lim.h</label>
       </node>
       <node id="9">
         <label>cassert</label>
       </node>
-      <node id="15">
+      <node id="16">
         <label>ctime</label>
       </node>
-      <node id="19">
+      <node id="20">
         <label>intrin.h</label>
       </node>
-      <node id="20">
+      <node id="21">
         <label>intrin0.inl.h</label>
       </node>
-      <node id="12">
+      <node id="13">
         <label>processthreadsapi.h</label>
       </node>
-      <node id="49">
+      <node id="50">
         <label>pthread.h</label>
       </node>
-      <node id="14">
+      <node id="15">
         <label>sched.h</label>
       </node>
-      <node id="34">
+      <node id="35">
         <label>semaphore.h</label>
       </node>
-      <node id="13">
+      <node id="14">
         <label>synchapi.h</label>
       </node>
-      <node id="44">
+      <node id="45">
         <label>utility</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="3">
-        <label>NeForce.hpp</label>
-        <link refid="_ne_force_8hpp"/>
-      </node>
       <node id="2">
-        <label>scoped_thread.hpp</label>
-        <link refid="scoped__thread_8hpp"/>
-        <childnode refid="3" relation="include">
-        </childnode>
+        <label>scope_thread.hpp</label>
+        <link refid="scope__thread_8hpp"/>
       </node>
       <node id="1">
         <label>stop_token.hpp</label>
@@ -446,7 +446,7 @@
 <codeline lineno="127"><highlight class="normal"></highlight></codeline>
 <codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classlock" kindref="compound">lock</ref>()<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>old_value<sp/>=<sp/>value.load(<ref refid="group___memory_order_1ga4c8b2df710dbe4b801447898624fa3ca" kindref="member">memory_order_relaxed</ref>);</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(!<ref refid="group___mutex_1gad268b389b17e2f23260e8e10cef8b455" kindref="member">try_lock</ref>(old_value,<sp/><ref refid="group___memory_order_1ga4c8b2df710dbe4b801447898624fa3ca" kindref="member">memory_order_relaxed</ref>))<sp/>{</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(!try_lock(old_value,<sp/><ref refid="group___memory_order_1ga4c8b2df710dbe4b801447898624fa3ca" kindref="member">memory_order_relaxed</ref>))<sp/>{</highlight></codeline>
 <codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="136"><highlight class="normal"></highlight></codeline>
@@ -501,7 +501,7 @@
 <codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(old_value<sp/>&lt;<sp/>ssrc_counter_inc)<sp/>{</highlight></codeline>
 <codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(!<ref refid="group___mutex_1gad268b389b17e2f23260e8e10cef8b455" kindref="member">try_lock</ref>(old_value));</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(!try_lock(old_value));</highlight></codeline>
 <codeline lineno="205"><highlight class="normal"></highlight></codeline>
 <codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>callback_node-&gt;next<sp/>=<sp/>head;</highlight></codeline>
 <codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(head<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
@@ -544,7 +544,7 @@
 <codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="252"><highlight class="normal"></highlight></codeline>
-<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="group___mutex_1gad268b389b17e2f23260e8e10cef8b455" kindref="member">try_lock</ref>(value_type&amp;<sp/>current_value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>failure_order<sp/>=<sp/><ref refid="group___memory_order_1ga52729ffe1460a0069a1736f2e4e61d2e" kindref="member">memory_order_acquire</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>try_lock(value_type&amp;<sp/>current_value,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>failure_order<sp/>=<sp/><ref refid="group___memory_order_1ga52729ffe1460a0069a1736f2e4e61d2e" kindref="member">memory_order_acquire</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>do_try_lock(current_value,<sp/>0,<sp/><ref refid="group___memory_order_1ga52729ffe1460a0069a1736f2e4e61d2e" kindref="member">memory_order_acquire</ref>,<sp/>failure_order);</highlight></codeline>
 <codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="262"><highlight class="normal"></highlight></codeline>

@@ -1,0 +1,298 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classsni__manager" kind="class" language="C++" prot="public">
+    <compoundname>sni_manager</compoundname>
+    <includes refid="sni__manager_8hpp" local="no">sni_manager.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classsni__manager_1a72f389e340b18ea06afb854631eef9f8" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="classssl__context" kindref="compound">ssl_context</ref> &gt;</type>
+        <definition>unordered_map&lt;string, ssl_context&gt; sni_manager::hosts_</definition>
+        <argsstring></argsstring>
+        <name>hosts_</name>
+        <qualifiedname>sni_manager::hosts_</qualifiedname>
+        <briefdescription>
+<para>hostname → SSL 上下文映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" line="42" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsni__manager_1a11616424eef98d5f3a2775599c0c3c8e" prot="private" static="no" mutable="no">
+        <type><ref refid="classssl__context" kindref="compound">ssl_context</ref></type>
+        <definition>ssl_context sni_manager::default_context_</definition>
+        <argsstring></argsstring>
+        <name>default_context_</name>
+        <qualifiedname>sni_manager::default_context_</qualifiedname>
+        <briefdescription>
+<para>默认 SSL 上下文（SNI 未匹配时使用） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" line="44" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsni__manager_1a7164ee73902a3da3559d80d96ad51bb0" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool sni_manager::has_default_</definition>
+        <argsstring></argsstring>
+        <name>has_default_</name>
+        <qualifiedname>sni_manager::has_default_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否已设置默认上下文 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" line="46" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsni__manager_1a05f851f108e4b5f04bae35ce2aa9a27b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>sni_manager::sni_manager</definition>
+        <argsstring>()=default</argsstring>
+        <name>sni_manager</name>
+        <qualifiedname>sni_manager::sni_manager</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" line="49" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classsni__manager_1a9f25af832a92422d2130f56566ec0736" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void sni_manager::add_host</definition>
+        <argsstring>(const string &amp;hostname, ssl_context ctx)</argsstring>
+        <name>add_host</name>
+        <qualifiedname>sni_manager::add_host</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>hostname</declname>
+        </param>
+        <param>
+          <type><ref refid="classssl__context" kindref="compound">ssl_context</ref></type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+<para>添加域名及其SSL上下文 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hostname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL上下文 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" line="56" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsni__manager_1ac6df422173fcaae6920a15e56e6edeb1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void sni_manager::remove_host</definition>
+        <argsstring>(const string &amp;hostname)</argsstring>
+        <name>remove_host</name>
+        <qualifiedname>sni_manager::remove_host</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>hostname</declname>
+        </param>
+        <briefdescription>
+<para>移除域名 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>hostname</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>域名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" line="62" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsni__manager_1a62b2b204c1ec09b9874f2e691ca6e834" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void sni_manager::set_default_context</definition>
+        <argsstring>(ssl_context ctx)</argsstring>
+        <name>set_default_context</name>
+        <qualifiedname>sni_manager::set_default_context</qualifiedname>
+        <param>
+          <type><ref refid="classssl__context" kindref="compound">ssl_context</ref></type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+<para>设置默认SSL上下文（SNI未匹配时使用） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>默认SSL上下文 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" line="68" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsni__manager_1abe7d6b81bae2b545acb0f297c10fabf5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void *</type>
+        <definition>void * sni_manager::select_ssl_ctx</definition>
+        <argsstring>(const string &amp;server_name) const</argsstring>
+        <name>select_ssl_ctx</name>
+        <qualifiedname>sni_manager::select_ssl_ctx</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>server_name</declname>
+        </param>
+        <briefdescription>
+<para>根据SNI hostname选择SSL_CTX </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>server_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>客户端发送的SNI hostname </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配的SSL_CTX指针，未找到返回默认上下文或nullptr</para>
+</simplesect>
+匹配规则：<orderedlist>
+<listitem><para>精确匹配 hostname</para>
+</listitem><listitem><para>通配符匹配 *.domain.com</para>
+</listitem><listitem><para>返回默认上下文 </para>
+</listitem></orderedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" line="80" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classsni__manager_1a3297aba89b055614778ed8d99e4babeb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool sni_manager::has_host</definition>
+        <argsstring>(const string &amp;hostname) const</argsstring>
+        <name>has_host</name>
+        <qualifiedname>sni_manager::has_host</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>hostname</declname>
+        </param>
+        <briefdescription>
+<para>检查是否有指定域名的证书 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" line="85" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classsni__manager_1aa804d2255ec215cc4d0daf76eb98a055" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t sni_manager::host_count</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>host_count</name>
+        <qualifiedname>sni_manager::host_count</qualifiedname>
+        <briefdescription>
+<para>获取配置的域名数量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" line="90" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" bodystart="90" bodyend="90"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classsni__manager_1a55942c4128375efd0b5a0aa2a846fbc9" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>static int sni_manager::sni_callback</definition>
+        <argsstring>(void *ssl, int *alert, void *arg)</argsstring>
+        <name>sni_callback</name>
+        <qualifiedname>sni_manager::sni_callback</qualifiedname>
+        <param>
+          <type>void *</type>
+          <declname>ssl</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>alert</declname>
+        </param>
+        <param>
+          <type>void *</type>
+          <declname>arg</declname>
+        </param>
+        <briefdescription>
+<para>SNI回调函数（用于SSL_CTX_set_tlsext_servername_callback） </para>
+        </briefdescription>
+        <detaileddescription>
+<para>此静态函数可作为OpenSSL的SNI回调，自动查询sni_manager实例。 通过SSL_CTX_set_tlsext_servername_arg设置manager指针。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" line="98" column="16"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>SNI (Server Name Indication) 证书管理器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>支持为不同域名配置不同的SSL证书。 在TLS握手时根据客户端SNI hostname自动选择合适的SSL_CTX。</para>
+<para>使用示例： <programlisting><codeline><highlight class="normal">sni_manager<sp/>sni;</highlight></codeline>
+<codeline><highlight class="normal">sni.<ref refid="classsni__manager_1a9f25af832a92422d2130f56566ec0736" kindref="member">add_host</ref>(</highlight><highlight class="stringliteral">&quot;example.com&quot;</highlight><highlight class="normal">,<sp/>ssl_context(cert1,<sp/>key1));</highlight></codeline>
+<codeline><highlight class="normal">sni.<ref refid="classsni__manager_1a9f25af832a92422d2130f56566ec0736" kindref="member">add_host</ref>(</highlight><highlight class="stringliteral">&quot;api.example.com&quot;</highlight><highlight class="normal">,<sp/>ssl_context(cert2,<sp/>key2));</highlight></codeline>
+<codeline><highlight class="normal">sni.<ref refid="classsni__manager_1a62b2b204c1ec09b9874f2e691ca6e834" kindref="member">set_default_context</ref>(ssl_context(default_cert,<sp/>default_key));</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>在SSL握手回调中使用:</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">SSL_CTX*<sp/>ctx<sp/>=<sp/>sni.select_context(servername);</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" line="39" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/sni_manager.hpp" bodystart="39" bodyend="99"/>
+    <listofallmembers>
+      <member refid="classsni__manager_1a9f25af832a92422d2130f56566ec0736" prot="public" virt="non-virtual"><scope>sni_manager</scope><name>add_host</name></member>
+      <member refid="classsni__manager_1a11616424eef98d5f3a2775599c0c3c8e" prot="private" virt="non-virtual"><scope>sni_manager</scope><name>default_context_</name></member>
+      <member refid="classsni__manager_1a7164ee73902a3da3559d80d96ad51bb0" prot="private" virt="non-virtual"><scope>sni_manager</scope><name>has_default_</name></member>
+      <member refid="classsni__manager_1a3297aba89b055614778ed8d99e4babeb" prot="public" virt="non-virtual"><scope>sni_manager</scope><name>has_host</name></member>
+      <member refid="classsni__manager_1aa804d2255ec215cc4d0daf76eb98a055" prot="public" virt="non-virtual"><scope>sni_manager</scope><name>host_count</name></member>
+      <member refid="classsni__manager_1a72f389e340b18ea06afb854631eef9f8" prot="private" virt="non-virtual"><scope>sni_manager</scope><name>hosts_</name></member>
+      <member refid="classsni__manager_1ac6df422173fcaae6920a15e56e6edeb1" prot="public" virt="non-virtual"><scope>sni_manager</scope><name>remove_host</name></member>
+      <member refid="classsni__manager_1abe7d6b81bae2b545acb0f297c10fabf5" prot="public" virt="non-virtual"><scope>sni_manager</scope><name>select_ssl_ctx</name></member>
+      <member refid="classsni__manager_1a62b2b204c1ec09b9874f2e691ca6e834" prot="public" virt="non-virtual"><scope>sni_manager</scope><name>set_default_context</name></member>
+      <member refid="classsni__manager_1a55942c4128375efd0b5a0aa2a846fbc9" prot="public" virt="non-virtual"><scope>sni_manager</scope><name>sni_callback</name></member>
+      <member refid="classsni__manager_1a05f851f108e4b5f04bae35ce2aa9a27b" prot="public" virt="non-virtual"><scope>sni_manager</scope><name>sni_manager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

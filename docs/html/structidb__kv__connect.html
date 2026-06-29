@@ -152,6 +152,8 @@ virtual <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="
 <tr class="inherit_header pub_methods_structidb__connect"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structidb__connect')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="structidb__connect.html">idb_connect</a></td></tr>
 <tr class="memitem:aedacf58e2ea956b26f4862e49506c3c2 inherit pub_methods_structidb__connect" id="r_aedacf58e2ea956b26f4862e49506c3c2"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="structidb__connect.html#aedacf58e2ea956b26f4862e49506c3c2">update</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;sql) const =0</td></tr>
 <tr class="memdesc:aedacf58e2ea956b26f4862e49506c3c2 inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行非查询SQL语句  <br /></td></tr>
+<tr class="memitem:a795f60f7b0e4db4511ba51da8d54c7b3 inherit pub_methods_structidb__connect" id="r_a795f60f7b0e4db4511ba51da8d54c7b3"><td class="memItemLeft">virtual void *&#160;</td><td class="memItemRight"><a class="el" href="structidb__connect.html#a795f60f7b0e4db4511ba51da8d54c7b3">native_handle</a> () noexcept=0</td></tr>
+<tr class="memdesc:a795f60f7b0e4db4511ba51da8d54c7b3 inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取原生连接句柄  <br /></td></tr>
 <tr class="memitem:a23d22fba9ce82c798a1363f0f816f593 inherit pub_methods_structidb__connect" id="r_a23d22fba9ce82c798a1363f0f816f593"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="structidb__connect.html#a23d22fba9ce82c798a1363f0f816f593">refresh_alive</a> () noexcept</td></tr>
 <tr class="memdesc:a23d22fba9ce82c798a1363f0f816f593 inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">刷新连接存活时间  <br /></td></tr>
 <tr class="memitem:a5fe328d4bdf863d226d7065daf2cc56b inherit pub_methods_structidb__connect" id="r_a5fe328d4bdf863d226d7065daf2cc56b"><td class="memItemLeft"><a class="el" href="structidb__connect.html#ab9be909e9ecc1db9cbcc28186de35c95">clock_type</a>&#160;</td><td class="memItemRight"><a class="el" href="structidb__connect.html#a5fe328d4bdf863d226d7065daf2cc56b">get_alive</a> () const noexcept</td></tr>
@@ -165,9 +167,9 @@ virtual bool&#160;</td><td class="memItemRight"><b>reconnect</b> (const <a class
 <tr class="memitem:a689ce6c9a44cdc602e6006615e949e19 inherit pub_methods_structidb__connect" id="r_a689ce6c9a44cdc602e6006615e949e19"><td class="memItemLeft">
 virtual void&#160;</td><td class="memItemRight"><b>close</b> ()=0</td></tr>
 <tr class="memdesc:a689ce6c9a44cdc602e6006615e949e19 inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭连接 <br /></td></tr>
-<tr class="memitem:a9f0b407a683b19bee646271a19356aad inherit pub_methods_structidb__connect" id="r_a9f0b407a683b19bee646271a19356aad"><td class="memItemLeft">
-virtual bool&#160;</td><td class="memItemRight"><b>set_character_set</b> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;encoding) const =0</td></tr>
-<tr class="memdesc:a9f0b407a683b19bee646271a19356aad inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符集 <br /></td></tr>
+<tr class="memitem:a7787680de395dc737bd6b14978488854 inherit pub_methods_structidb__connect" id="r_a7787680de395dc737bd6b14978488854"><td class="memItemLeft">
+virtual bool&#160;</td><td class="memItemRight"><b>set_character_set</b> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;encoding)=0</td></tr>
+<tr class="memdesc:a7787680de395dc737bd6b14978488854 inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符集 <br /></td></tr>
 <tr class="memitem:a81f310b0ea3085407106a63fa1ba0767 inherit pub_methods_structidb__connect" id="r_a81f310b0ea3085407106a63fa1ba0767"><td class="memItemLeft">
 virtual <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><b>get_character_set</b> () const =0</td></tr>
 <tr class="memdesc:a81f310b0ea3085407106a63fa1ba0767 inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取字符集 <br /></td></tr>
@@ -177,6 +179,15 @@ virtual <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53
 <tr class="memitem:a150e2a5aac988b6abb97f9444042d06e inherit pub_methods_structidb__connect" id="r_a150e2a5aac988b6abb97f9444042d06e"><td class="memItemLeft">
 virtual <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&#160;</td><td class="memItemRight"><b>get_errno</b> () const =0</td></tr>
 <tr class="memdesc:a150e2a5aac988b6abb97f9444042d06e inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取错误码 <br /></td></tr>
+<tr class="memitem:a24b4c723358335c8a32164c021da1bc7 inherit pub_methods_structidb__connect" id="r_a24b4c723358335c8a32164c021da1bc7"><td class="memItemLeft">
+virtual bool&#160;</td><td class="memItemRight"><b>begin</b> ()=0</td></tr>
+<tr class="memdesc:a24b4c723358335c8a32164c021da1bc7 inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始事务 <br /></td></tr>
+<tr class="memitem:a15de30685e73d3b2855f132ae600a81a inherit pub_methods_structidb__connect" id="r_a15de30685e73d3b2855f132ae600a81a"><td class="memItemLeft">
+virtual bool&#160;</td><td class="memItemRight"><b>commit</b> ()=0</td></tr>
+<tr class="memdesc:a15de30685e73d3b2855f132ae600a81a inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">提交事务 <br /></td></tr>
+<tr class="memitem:ae9129bc37cfcb03085e3234e2be8583a inherit pub_methods_structidb__connect" id="r_ae9129bc37cfcb03085e3234e2be8583a"><td class="memItemLeft">
+virtual bool&#160;</td><td class="memItemRight"><b>rollback</b> ()=0</td></tr>
+<tr class="memdesc:ae9129bc37cfcb03085e3234e2be8583a inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">回滚事务 <br /></td></tr>
 <tr class="memitem:a05b7b473cdd13c18f5b44c83e09c082d inherit pub_methods_structidb__connect" id="r_a05b7b473cdd13c18f5b44c83e09c082d"><td class="memItemLeft">
 virtual bool&#160;</td><td class="memItemRight"><b>connected</b> () const =0</td></tr>
 <tr class="memdesc:a05b7b473cdd13c18f5b44c83e09c082d inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查连接状态 <br /></td></tr>
@@ -195,7 +206,7 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 <div class="textblock"><p>键值存储连接抽象基类 </p>
 <p>提供键值对操作的完整接口，支持字符串、哈希、列表、集合等数据结构。 </p>
 
-<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00286">286</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00326">326</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="a71f6c141ed4386fbabab0e8ea582a759" name="a71f6c141ed4386fbabab0e8ea582a759"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a71f6c141ed4386fbabab0e8ea582a759">&#9670;&#160;</a></span>query()</h2>

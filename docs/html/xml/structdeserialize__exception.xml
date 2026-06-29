@@ -1,0 +1,155 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structdeserialize__exception" kind="struct" language="C++" prot="public">
+    <compoundname>deserialize_exception</compoundname>
+    <basecompoundref refid="structvalue__exception" prot="public" virt="non-virtual">value_exception</basecompoundref>
+    <derivedcompoundref refid="structmissing__required__exception" prot="public" virt="non-virtual">missing_required_exception</derivedcompoundref>
+    <derivedcompoundref refid="structtype__mismatch__exception" prot="public" virt="non-virtual">type_mismatch_exception</derivedcompoundref>
+    <includes refid="serialize__exception_8hpp" local="no">serialize_exception.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structdeserialize__exception_1a381d739e55c8acdd9f9da39caea73c30" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string deserialize_exception::property_path</definition>
+        <argsstring></argsstring>
+        <name>property_path</name>
+        <qualifiedname>deserialize_exception::property_path</qualifiedname>
+        <briefdescription>
+<para>失败的属性路径 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/serialize/serialize_exception.hpp" line="33" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/serialize/serialize_exception.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structdeserialize__exception_1abb5204c688d2935c47864629cad8e471" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>deserialize_exception::deserialize_exception</definition>
+        <argsstring>(const char *info=&quot;Deserialization failed.&quot;, string path=&quot;&quot;, const int code=0) noexcept</argsstring>
+        <name>deserialize_exception</name>
+        <qualifiedname>deserialize_exception::deserialize_exception</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>info</declname>
+          <defval>&quot;Deserialization failed.&quot;</defval>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>path</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>code</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/serialize/serialize_exception.hpp" line="35" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/serialize/serialize_exception.hpp" bodystart="35" bodyend="38"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>反序列化异常 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>deserialize_exception</label>
+        <link refid="structdeserialize__exception"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>exception</label>
+        <link refid="structexception"/>
+      </node>
+      <node id="4">
+        <label>missing_required_exception</label>
+        <link refid="structmissing__required__exception"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>type_mismatch_exception</label>
+        <link refid="structtype__mismatch__exception"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>value_exception</label>
+        <link refid="structvalue__exception"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>basic_string&lt; char &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>deserialize_exception</label>
+        <link refid="structdeserialize__exception"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>property_path</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>exception</label>
+        <link refid="structexception"/>
+      </node>
+      <node id="5">
+        <label>icommon&lt; T &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="7">
+        <label>ihashable&lt; T &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="2">
+        <label>value_exception</label>
+        <link refid="structvalue__exception"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/serialize/serialize_exception.hpp" line="32" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/serialize/serialize_exception.hpp" bodystart="32" bodyend="39"/>
+    <listofallmembers>
+      <member refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" prot="public" virt="non-virtual"><scope>deserialize_exception</scope><name>code</name></member>
+      <member refid="structdeserialize__exception_1abb5204c688d2935c47864629cad8e471" prot="public" virt="non-virtual"><scope>deserialize_exception</scope><name>deserialize_exception</name></member>
+      <member refid="structexception_1a33710bd2e564614575128e2c3de94883" prot="public" virt="non-virtual"><scope>deserialize_exception</scope><name>exception</name></member>
+      <member refid="structexception_1ad53654133be61ac0d671b96eea49a2c3" prot="public" virt="non-virtual"><scope>deserialize_exception</scope><name>exception</name></member>
+      <member refid="structexception_1af7e2ec88aedbf1ac46326caa556ce434" prot="public" virt="non-virtual"><scope>deserialize_exception</scope><name>exception</name></member>
+      <member refid="structexception_1abae6850b5707d91a23d8b8f78b99e7c7" prot="public" virt="non-virtual"><scope>deserialize_exception</scope><name>exception</name></member>
+      <member refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" prot="public" virt="non-virtual"><scope>deserialize_exception</scope><name>operator=</name></member>
+      <member refid="structexception_1a709d705f97cbad7d531dfb5023107536" prot="public" virt="non-virtual"><scope>deserialize_exception</scope><name>operator=</name></member>
+      <member refid="structdeserialize__exception_1a381d739e55c8acdd9f9da39caea73c30" prot="public" virt="non-virtual"><scope>deserialize_exception</scope><name>property_path</name></member>
+      <member refid="structvalue__exception_1acf3bc40bf409ccdccdd34ed10cf4cb18" prot="public" virt="non-virtual"><scope>deserialize_exception</scope><name>static_type</name></member>
+      <member refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" prot="public" virt="non-virtual"><scope>deserialize_exception</scope><name>type</name></member>
+      <member refid="structvalue__exception_1a93d98834875dddd76676f984d49dbc8e" prot="public" virt="non-virtual"><scope>deserialize_exception</scope><name>value_exception</name></member>
+      <member refid="structvalue__exception_1a62e42e4366446f308bddac122dc685ca" prot="public" virt="non-virtual"><scope>deserialize_exception</scope><name>value_exception</name></member>
+      <member refid="structexception_1a5d2925886b0a3350d7b29d4a8bbdf87e" prot="public" virt="non-virtual"><scope>deserialize_exception</scope><name>what</name></member>
+      <member refid="structexception_1a80249b2b108c9b913dc7144839092a2b" prot="public" virt="virtual"><scope>deserialize_exception</scope><name>~exception</name></member>
+      <member refid="structvalue__exception_1a7ed7431697b28ae8f8a7bfdd919c4795" prot="public" virt="virtual"><scope>deserialize_exception</scope><name>~value_exception</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

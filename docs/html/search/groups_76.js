@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['静态字符数字操作_0',['静态字符数字操作',['../group___static_char_digit.html',1,'']]],
-  ['静态算术运算_1',['静态算术运算',['../group___static_arithmetic.html',1,'']]]
+  ['迭代器操作_0',['迭代器操作',['../group___iterator_operation.html',1,'']]],
+  ['迭代器标签_1',['迭代器标签',['../group___iterator_tags.html',1,'']]],
+  ['迭代器类型检查_2',['迭代器类型检查',['../group___iterator_category_checks.html',1,'']]],
+  ['迭代器萃取_3',['迭代器萃取',['../group___iterator_traits.html',1,'']]]
 ];

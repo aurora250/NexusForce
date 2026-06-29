@@ -1,0 +1,791 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="sparse__vector_8hpp" kind="file" language="C++">
+    <compoundname>sparse_vector.hpp</compoundname>
+    <includes refid="compare_8hpp" local="yes">NeForce/core/algorithm/compare.hpp</includes>
+    <includes refid="icollector_8hpp" local="yes">NeForce/core/interface/icollector.hpp</includes>
+    <includes refid="iiterator_8hpp" local="yes">NeForce/core/interface/iiterator.hpp</includes>
+    <includes refid="construct_8hpp" local="yes">NeForce/core/memory/construct.hpp</includes>
+    <includes refid="standard__allocator_8hpp" local="yes">NeForce/core/memory/standard_allocator.hpp</includes>
+    <includes refid="pair_8hpp" local="yes">NeForce/core/utility/pair.hpp</includes>
+    <includes refid="vector_8hpp" local="yes">NeForce/core/container/vector.hpp</includes>
+    <includedby refid="sparse__map_8hpp" local="yes">sparse_map.hpp</includedby>
+    <includedby refid="sparse__multimap_8hpp" local="yes">sparse_multimap.hpp</includedby>
+    <includedby refid="sparse__multiset_8hpp" local="yes">sparse_multiset.hpp</includedby>
+    <includedby refid="sparse__set_8hpp" local="yes">sparse_set.hpp</includedby>
+    <incdepgraph>
+      <node id="2">
+        <label>NeForce/core/algorithm/compare.hpp</label>
+        <link refid="compare_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>NeForce/core/algorithm/iterator.hpp</label>
+        <link refid="iterator_8hpp"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NeForce/core/algorithm/search.hpp</label>
+        <link refid="search_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>NeForce/core/algorithm/shift.hpp</label>
+        <link refid="shift_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>NeForce/core/config/c++config.hpp</label>
+        <link refid="c_09_09config_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>NeForce/core/config/version.hpp</label>
+        <link refid="version_8hpp_source"/>
+      </node>
+      <node id="31">
+        <label>NeForce/core/container/array.hpp</label>
+        <link refid="array_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>sparse_vector.hpp</label>
+        <link refid="sparse__vector_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>NeForce/core/container/vector.hpp</label>
+        <link refid="vector_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>NeForce/core/exception/breakpoint.hpp</label>
+        <link refid="breakpoint_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>NeForce/core/exception/exception.hpp</label>
+        <link refid="exception_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>NeForce/core/functional/functor.hpp</label>
+        <link refid="functor_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>NeForce/core/functional/hash.hpp</label>
+        <link refid="hash_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>NeForce/core/functional/invoke.hpp</label>
+        <link refid="invoke_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>NeForce/core/interface/icollector.hpp</label>
+        <link refid="icollector_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>NeForce/core/interface/icommon.hpp</label>
+        <link refid="icommon_8hpp"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>NeForce/core/interface/iiterator.hpp</label>
+        <link refid="iiterator_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>NeForce/core/iterator/iterator_traits.hpp</label>
+        <link refid="iterator__traits_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>NeForce/core/iterator/normal_iterator.hpp</label>
+        <link refid="normal__iterator_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>NeForce/core/iterator/reverse_iterator.hpp</label>
+        <link refid="reverse__iterator_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>NeForce/core/memory/construct.hpp</label>
+        <link refid="construct_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>NeForce/core/memory/memory.hpp</label>
+        <link refid="memory_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>NeForce/core/memory/memory_view.hpp</label>
+        <link refid="memory__view_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>NeForce/core/memory/standard_allocator.hpp</label>
+        <link refid="standard__allocator_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>NeForce/core/memory/uninitialized.hpp</label>
+        <link refid="uninitialized_8hpp"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>NeForce/core/numeric/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>NeForce/core/numeric/numeric_traits.hpp</label>
+        <link refid="numeric__traits_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>NeForce/core/numeric/numeric_types.hpp</label>
+        <link refid="numeric__types_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>NeForce/core/typeinfo/concepts.hpp</label>
+        <link refid="concepts_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>NeForce/core/typeinfo/type_traits.hpp</label>
+        <link refid="type__traits_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>NeForce/core/typeinfo/types.hpp</label>
+        <link refid="types_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>NeForce/core/utility/compressed_pair.hpp</label>
+        <link refid="compressed__pair_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>NeForce/core/utility/integer_sequence.hpp</label>
+        <link refid="integer__sequence_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>NeForce/core/utility/pair.hpp</label>
+        <link refid="pair_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>NeForce/core/utility/reference_wrapper.hpp</label>
+        <link refid="reference__wrapper_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>cassert</label>
+      </node>
+      <node id="3">
+        <label>initializer_list</label>
+      </node>
+      <node id="27">
+        <label>new</label>
+      </node>
+      <node id="22">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>sparse_map.hpp</label>
+        <link refid="sparse__map_8hpp"/>
+      </node>
+      <node id="3">
+        <label>sparse_multimap.hpp</label>
+        <link refid="sparse__multimap_8hpp"/>
+      </node>
+      <node id="4">
+        <label>sparse_multiset.hpp</label>
+        <link refid="sparse__multiset_8hpp"/>
+      </node>
+      <node id="5">
+        <label>sparse_set.hpp</label>
+        <link refid="sparse__set_8hpp"/>
+      </node>
+      <node id="1">
+        <label>sparse_vector.hpp</label>
+        <link refid="sparse__vector_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structsparse__vector__iterator" prot="public">sparse_vector_iterator</innerclass>
+    <innerclass refid="classsparse__vector" prot="public">sparse_vector</innerclass>
+    <briefdescription>
+<para>稀疏向量容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>此文件提供了稀疏向量容器的实现。 稀疏向量是一种基于有序平坦数组的关联容器底层实现， 通过二分查找提供对数时间复杂度的查找操作。 作为稀疏关联式容器（sparse_set、sparse_map等）的底层实现。 </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NEFORCE_CORE_CONTAINER_SPARSE_VECTOR_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_CORE_CONTAINER_SPARSE_VECTOR_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="compare_8hpp" kindref="compound">NeForce/core/algorithm/compare.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="icollector_8hpp" kindref="compound">NeForce/core/interface/icollector.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="iiterator_8hpp" kindref="compound">NeForce/core/interface/iiterator.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="construct_8hpp" kindref="compound">NeForce/core/memory/construct.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="standard__allocator_8hpp" kindref="compound">NeForce/core/memory/standard_allocator.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="pair_8hpp" kindref="compound">NeForce/core/utility/pair.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="vector_8hpp" kindref="compound">NeForce/core/container/vector.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>IsConst,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>SparseVector&gt;</highlight></codeline>
+<codeline lineno="58" refid="structsparse__vector__iterator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">sparse_vector_iterator<sp/>:<sp/><ref refid="structiiterator" kindref="compound">iiterator</ref>&lt;sparse_vector_iterator&lt;IsConst,<sp/>SparseVector&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="60" refid="structsparse__vector__iterator_1a798524c020e0cedaa5fdf9e46773a691" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsparse__vector__iterator_1a798524c020e0cedaa5fdf9e46773a691" kindref="member">container_type</ref><sp/>=<sp/>SparseVector;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="61" refid="structsparse__vector__iterator_1a9194530dfb54dae14cc9081eac56633e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsparse__vector__iterator_1a9194530dfb54dae14cc9081eac56633e" kindref="member">value_type</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>container_type::value_type;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="62" refid="structsparse__vector__iterator_1a9a917658ca991380e74a767f1caf8cf7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsparse__vector__iterator_1a9a917658ca991380e74a767f1caf8cf7" kindref="member">size_type</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>container_type::size_type;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="63" refid="structsparse__vector__iterator_1a7a4bffdaae951084af63a4fcd0ce1b35" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsparse__vector__iterator_1a7a4bffdaae951084af63a4fcd0ce1b35" kindref="member">difference_type</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>container_type::difference_type;<sp/></highlight></codeline>
+<codeline lineno="64" refid="structsparse__vector__iterator_1ab65ae3da0de6e22c34f1e4390859bd91" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsparse__vector__iterator_1ab65ae3da0de6e22c34f1e4390859bd91" kindref="member">iterator_category</ref><sp/>=<sp/><ref refid="structrandom__access__iterator__tag" kindref="compound">random_access_iterator_tag</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="65" refid="structsparse__vector__iterator_1a3f531a367bc6a4772312e5ee1c7686d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsparse__vector__iterator_1a3f531a367bc6a4772312e5ee1c7686d6" kindref="member">reference</ref><sp/>=<sp/><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t</ref>&lt;IsConst,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>container_type::const_reference,</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>container_type::reference&gt;;<sp/></highlight></codeline>
+<codeline lineno="67" refid="structsparse__vector__iterator_1aa456cca26c4a627a1189cc7db9bab83b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structsparse__vector__iterator_1aa456cca26c4a627a1189cc7db9bab83b" kindref="member">pointer</ref><sp/>=<sp/><ref refid="group___type_traits_utilities_1ga8e4e19e025d27abb3cd4cb306262f568" kindref="member">conditional_t</ref>&lt;IsConst,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>container_type::const_pointer,</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>container_type::pointer&gt;;<sp/></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structsparse__vector__iterator_1a798524c020e0cedaa5fdf9e46773a691" kindref="member">container_type</ref>*<sp/>container_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;<sp/></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structsparse__vector__iterator_1a9a917658ca991380e74a767f1caf8cf7" kindref="member">size_type</ref><sp/>index_<sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">sparse_vector;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>sparse_vector_iterator()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>~sparse_vector_iterator()<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>sparse_vector_iterator(const<sp/>sparse_vector_iterator&amp;)<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>sparse_vector_iterator&amp;<sp/>operator=(const<sp/>sparse_vector_iterator&amp;)<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>sparse_vector_iterator(sparse_vector_iterator&amp;&amp;)<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>sparse_vector_iterator&amp;<sp/>operator=(sparse_vector_iterator&amp;&amp;)<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91" refid="structsparse__vector__iterator_1a7f7a359e9aac8d34363ece9a9be7e8bc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>sparse_vector_iterator(<ref refid="structsparse__vector__iterator_1a9a917658ca991380e74a767f1caf8cf7" kindref="member">size_type</ref><sp/><ref refid="structsparse__vector__iterator_1ad84927ef5476f7cc0cb0139199422ca5" kindref="member">index</ref>,<sp/>const<sp/><ref refid="structsparse__vector__iterator_1a798524c020e0cedaa5fdf9e46773a691" kindref="member">container_type</ref>*<sp/><ref refid="structsparse__vector__iterator_1a2dfc399a36f3061afd5b4d27cb5cf48d" kindref="member">container</ref>)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>container_(<ref refid="structsparse__vector__iterator_1a2dfc399a36f3061afd5b4d27cb5cf48d" kindref="member">container</ref>),</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>index_(<ref refid="structsparse__vector__iterator_1ad84927ef5476f7cc0cb0139199422ca5" kindref="member">index</ref>)<sp/>{}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99" refid="structsparse__vector__iterator_1aba09313d2b65013c19e72b96a3e888a8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="structsparse__vector__iterator_1a3f531a367bc6a4772312e5ee1c7686d6" kindref="member">reference</ref><sp/><ref refid="structsparse__vector__iterator_1aba09313d2b65013c19e72b96a3e888a8" kindref="member">dereference</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_DEBUG_VERIFY(container_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Attempting<sp/>to<sp/>dereference<sp/>on<sp/>null<sp/>container&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_DEBUG_VERIFY(index_<sp/>&lt;<sp/>container_-&gt;<ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>(),<sp/></highlight><highlight class="stringliteral">&quot;Attempting<sp/>to<sp/>dereference<sp/>out<sp/>of<sp/>boundary&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const_cast&lt;</highlight><highlight class="normal"><ref refid="structsparse__vector__iterator_1a798524c020e0cedaa5fdf9e46773a691" kindref="member">container_type</ref>*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(container_)-&gt;data_[index_];</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108" refid="structsparse__vector__iterator_1ad97461c0db493baec3d620f67d20cf81" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structsparse__vector__iterator_1ad97461c0db493baec3d620f67d20cf81" kindref="member">increment</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_DEBUG_VERIFY(container_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Attempting<sp/>to<sp/>increment<sp/>null<sp/>container&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_DEBUG_VERIFY(index_<sp/>&lt;=<sp/>container_-&gt;<ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>(),<sp/></highlight><highlight class="stringliteral">&quot;Attempting<sp/>to<sp/>increment<sp/>out<sp/>of<sp/>boundary&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>++index_;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117" refid="structsparse__vector__iterator_1a861d346169d7b6e323ef76d1f51d3772" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_CONSTEXPR20<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structsparse__vector__iterator_1a861d346169d7b6e323ef76d1f51d3772" kindref="member">decrement</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_DEBUG_VERIFY(container_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Attempting<sp/>to<sp/>decrement<sp/>null<sp/>container&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_DEBUG_VERIFY(index_<sp/>&gt;<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;Attempting<sp/>to<sp/>decrement<sp/>before<sp/>begin&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>--index_;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127" refid="structsparse__vector__iterator_1a178098a20f72850f97923c5d9a74a42b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structsparse__vector__iterator_1a178098a20f72850f97923c5d9a74a42b" kindref="member">advance</ref>(<ref refid="structsparse__vector__iterator_1a7a4bffdaae951084af63a4fcd0ce1b35" kindref="member">difference_type</ref><sp/>n)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_DEBUG_VERIFY(container_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Attempting<sp/>to<sp/>advance<sp/>null<sp/>container&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>index_<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="structsparse__vector__iterator_1a9a917658ca991380e74a767f1caf8cf7" kindref="member">size_type</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="structsparse__vector__iterator_1a7a4bffdaae951084af63a4fcd0ce1b35" kindref="member">difference_type</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(index_)<sp/>+<sp/>n);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137" refid="structsparse__vector__iterator_1aef8a83b396a4ba9df30ef257132e4767" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="structsparse__vector__iterator_1a7a4bffdaae951084af63a4fcd0ce1b35" kindref="member">difference_type</ref><sp/><ref refid="structsparse__vector__iterator_1aef8a83b396a4ba9df30ef257132e4767" kindref="member">distance_to</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>sparse_vector_iterator&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_DEBUG_VERIFY(container_<sp/>==<sp/>rhs.container_,<sp/></highlight><highlight class="stringliteral">&quot;Attempting<sp/>to<sp/>distance<sp/>different<sp/>container&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="structsparse__vector__iterator_1a7a4bffdaae951084af63a4fcd0ce1b35" kindref="member">difference_type</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(rhs.index_)<sp/>-<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="structsparse__vector__iterator_1a7a4bffdaae951084af63a4fcd0ce1b35" kindref="member">difference_type</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(index_);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147" refid="structsparse__vector__iterator_1a9774c9af7d66bd4dae3a6e37a189500b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structsparse__vector__iterator_1a9774c9af7d66bd4dae3a6e37a189500b" kindref="member">equal_to</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>sparse_vector_iterator&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_DEBUG_VERIFY(container_<sp/>==<sp/>rhs.container_,<sp/></highlight><highlight class="stringliteral">&quot;Attempting<sp/>to<sp/>equal<sp/>to<sp/>a<sp/>different<sp/>container&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>index_<sp/>==<sp/>rhs.index_;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157" refid="structsparse__vector__iterator_1a63969cc161f88539b37d7f638f43729d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structsparse__vector__iterator_1a63969cc161f88539b37d7f638f43729d" kindref="member">less_than</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>sparse_vector_iterator&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_DEBUG_VERIFY(container_<sp/>==<sp/>rhs.container_,<sp/></highlight><highlight class="stringliteral">&quot;Attempting<sp/>to<sp/>less<sp/>than<sp/>a<sp/>different<sp/>container&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>index_<sp/>&lt;<sp/>rhs.index_;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166" refid="structsparse__vector__iterator_1a2dfc399a36f3061afd5b4d27cb5cf48d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structsparse__vector__iterator_1a798524c020e0cedaa5fdf9e46773a691" kindref="member">container_type</ref>*<sp/><ref refid="structsparse__vector__iterator_1a2dfc399a36f3061afd5b4d27cb5cf48d" kindref="member">container</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>container_;<sp/>}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172" refid="structsparse__vector__iterator_1ad84927ef5476f7cc0cb0139199422ca5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="structsparse__vector__iterator_1a9a917658ca991380e74a767f1caf8cf7" kindref="member">size_type</ref><sp/><ref refid="structsparse__vector__iterator_1ad84927ef5476f7cc0cb0139199422ca5" kindref="member">index</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>index_;<sp/>}</highlight></codeline>
+<codeline lineno="173"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Key,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Value,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>KeyOfValue,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Compare,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Alloc<sp/>=<sp/>allocator&lt;Value&gt;&gt;</highlight></codeline>
+<codeline lineno="191" refid="classsparse__vector" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classsparse__vector_1a6a2dffa801c283b2a992934fad4f0c52" kindref="member">sparse_vector</ref><sp/>:<sp/><ref refid="structicollector" kindref="compound">icollector</ref>&lt;sparse_vector&lt;Key,<sp/>Value,<sp/>KeyOfValue,<sp/>Compare,<sp/>Alloc&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___type_action_check_1ga57aaecec78d2faf341af215b18c7702f" kindref="member">is_allocator_v&lt;Alloc&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;Alloc<sp/>type<sp/>is<sp/>not<sp/>a<sp/>standard<sp/>allocator<sp/>type.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___type_traits_utilities_1gaa6c6bde5fd020a928e6d7b5fe8db7bb0" kindref="member">is_same_v&lt;Value, typename Alloc::value_type&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;allocator<sp/>type<sp/>mismatch.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___base_type_qualifier_check_1ga6e0edf4d9cccfbffc3b8744b2c7bcfe9" kindref="member">is_object_v&lt;Value&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;sparse_vector<sp/>only<sp/>contains<sp/>object<sp/>types.&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="197" refid="classsparse__vector_1aa23473ec3eb90c010d1dd2f1d051abb0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsparse__vector_1aa23473ec3eb90c010d1dd2f1d051abb0" kindref="member">key_type</ref><sp/>=<sp/>Key;<sp/></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199" refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" kindref="member">value_type</ref><sp/>=<sp/>Value;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="200" refid="classsparse__vector_1a213ec95a1682dbf737cf5594fa6c5de4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsparse__vector_1a213ec95a1682dbf737cf5594fa6c5de4" kindref="member">pointer</ref><sp/>=<sp/>Value*;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="201" refid="classsparse__vector_1a7c484689e4b001239bc65061c0f981f7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsparse__vector_1a7c484689e4b001239bc65061c0f981f7" kindref="member">reference</ref><sp/>=<sp/>Value&amp;;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="202" refid="classsparse__vector_1aa63b50dbd531c8e8a151293e011a7e01" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsparse__vector_1aa63b50dbd531c8e8a151293e011a7e01" kindref="member">const_pointer</ref><sp/>=<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Value*;<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="203" refid="classsparse__vector_1af7e8fcbd0679be9063fc72f7a9f0b32f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsparse__vector_1af7e8fcbd0679be9063fc72f7a9f0b32f" kindref="member">const_reference</ref><sp/>=<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Value&amp;;<sp/></highlight></codeline>
+<codeline lineno="204" refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>=<sp/><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="205" refid="classsparse__vector_1aa8e868be083c16deb2483c353d2ae703" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsparse__vector_1aa8e868be083c16deb2483c353d2ae703" kindref="member">difference_type</ref><sp/>=<sp/><ref refid="group___platform_dependent_types_1gad967839dbf3a606e0d4c9d556c0e5e7c" kindref="member">ptrdiff_t</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="206" refid="classsparse__vector_1aedc05e54a08d692be9dc962379f8c5b9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsparse__vector_1aedc05e54a08d692be9dc962379f8c5b9" kindref="member">compare_type</ref><sp/>=<sp/>Compare;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208" refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/>=<sp/>sparse_vector_iterator&lt;false,<sp/>sparse_vector&gt;;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="209" refid="classsparse__vector_1ade91cee6d1c5f419351e3b7b41b96fd8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsparse__vector_1ade91cee6d1c5f419351e3b7b41b96fd8" kindref="member">const_iterator</ref><sp/>=<sp/>sparse_vector_iterator&lt;true,<sp/>sparse_vector&gt;;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="210" refid="classsparse__vector_1a76785a7125742d461b29b7c0d8421514" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsparse__vector_1a76785a7125742d461b29b7c0d8421514" kindref="member">reverse_iterator</ref><sp/>=<sp/>_NEFORCE<sp/><ref refid="classsparse__vector_1a76785a7125742d461b29b7c0d8421514" kindref="member">reverse_iterator&lt;iterator&gt;</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="211" refid="classsparse__vector_1aafd9c245ab0f81488c5dae0268389098" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsparse__vector_1aafd9c245ab0f81488c5dae0268389098" kindref="member">const_reverse_iterator</ref><sp/>=<sp/>_NEFORCE<sp/><ref refid="classsparse__vector_1a76785a7125742d461b29b7c0d8421514" kindref="member">reverse_iterator&lt;const_iterator&gt;</ref>;<sp/></highlight></codeline>
+<codeline lineno="212" refid="classsparse__vector_1adf1302fcc9925879193d7279520ad174" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsparse__vector_1adf1302fcc9925879193d7279520ad174" kindref="member">allocator_type</ref><sp/>=<sp/>Alloc;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">container_type<sp/>=<sp/><ref refid="classvector" kindref="compound">vector&lt;Value, Alloc&gt;</ref>;<sp/></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/>container_type<sp/>data_;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/>Compare<sp/>key_compare_{};<sp/><sp/></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/>KeyOfValue<sp/>extracter_{};<sp/></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">&gt;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">sparse_vector_iterator;</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Key&amp;<sp/>key_of(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" kindref="member">value_type</ref>&amp;<sp/>value)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>extracter_(value);<sp/>}</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>lower_bound_index(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aa23473ec3eb90c010d1dd2f1d051abb0" kindref="member">key_type</ref>&amp;<sp/>key)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>lo<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>hi<sp/>=<sp/>data_.size();</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(lo<sp/>&lt;<sp/>hi)<sp/>{</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>mid<sp/>=<sp/>lo<sp/>+<sp/>(hi<sp/>-<sp/>lo)<sp/>/<sp/>2;</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(key_compare_(key_of(data_[mid]),<sp/>key))<sp/>{</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lo<sp/>=<sp/>mid<sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hi<sp/>=<sp/>mid;</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lo;</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>upper_bound_index(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aa23473ec3eb90c010d1dd2f1d051abb0" kindref="member">key_type</ref>&amp;<sp/>key)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>lo<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>hi<sp/>=<sp/>data_.size();</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(lo<sp/>&lt;<sp/>hi)<sp/>{</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>mid<sp/>=<sp/>lo<sp/>+<sp/>(hi<sp/>-<sp/>lo)<sp/>/<sp/>2;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(key_compare_(key,<sp/>key_of(data_[mid])))<sp/>{</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>hi<sp/>=<sp/>mid;</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lo<sp/>=<sp/>mid<sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lo;</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/>insert_at(<ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>pos,<sp/><ref refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" kindref="member">value_type</ref>&amp;&amp;<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data_.emplace(data_.begin()<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="classsparse__vector_1aa8e868be083c16deb2483c353d2ae703" kindref="member">difference_type</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(pos),<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(value));</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref>(pos,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/>insert_at(<ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>pos,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" kindref="member">value_type</ref>&amp;<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data_.emplace(data_.begin()<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="classsparse__vector_1aa8e868be083c16deb2483c353d2ae703" kindref="member">difference_type</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(pos),<sp/>value);</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref>(pos,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="295" refid="classsparse__vector_1a6a2dffa801c283b2a992934fad4f0c52" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a6a2dffa801c283b2a992934fad4f0c52" kindref="member">sparse_vector</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"></highlight></codeline>
+<codeline lineno="301" refid="classsparse__vector_1a163a662ad65303fab9891adbf2aeef6f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a163a662ad65303fab9891adbf2aeef6f" kindref="member">sparse_vector</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>Compare&amp;<sp/>comp)<sp/>:</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/>key_compare_(comp)<sp/>{}</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"></highlight></codeline>
+<codeline lineno="308" refid="classsparse__vector_1a02682d2572d36ba5b5d3e1f33047bb45" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a02682d2572d36ba5b5d3e1f33047bb45" kindref="member">sparse_vector</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a6a2dffa801c283b2a992934fad4f0c52" kindref="member">sparse_vector</ref>&amp;<sp/>other)<sp/>:</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(other.data_),</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/>key_compare_(other.key_compare_),</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/>extracter_(other.extracter_)<sp/>{}</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"></highlight></codeline>
+<codeline lineno="318" refid="classsparse__vector_1a873add9fc1e8f21fc9469b75c1d09c9a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a6a2dffa801c283b2a992934fad4f0c52" kindref="member">sparse_vector</ref>&amp;<sp/><ref refid="classsparse__vector_1a873add9fc1e8f21fc9469b75c1d09c9a" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a6a2dffa801c283b2a992934fad4f0c52" kindref="member">sparse_vector</ref>&amp;<sp/>other)<sp/>{</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gaf77625b543da90c4cf80a7bb167b3426" kindref="member">addressof</ref>(other)<sp/>==<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data_<sp/>=<sp/>other.data_;</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>key_compare_<sp/>=<sp/>other.key_compare_;</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>extracter_<sp/>=<sp/>other.extracter_;</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"></highlight></codeline>
+<codeline lineno="332" refid="classsparse__vector_1a1b5503cdd888d33d235e4cdb050f80dc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a1b5503cdd888d33d235e4cdb050f80dc" kindref="member">sparse_vector</ref>(<ref refid="classsparse__vector_1a6a2dffa801c283b2a992934fad4f0c52" kindref="member">sparse_vector</ref>&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(<ref refid="group___type_special_member_function_checks_1ga34e3584e54b63fd9e6a35fffd41080bd" kindref="member">is_nothrow_move_constructible_v&lt;container_type&gt;</ref><sp/>&amp;&amp;</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_special_member_function_checks_1ga34e3584e54b63fd9e6a35fffd41080bd" kindref="member">is_nothrow_move_constructible_v&lt;Compare&gt;</ref><sp/>&amp;&amp;</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_special_member_function_checks_1ga34e3584e54b63fd9e6a35fffd41080bd" kindref="member">is_nothrow_move_constructible_v&lt;KeyOfValue&gt;</ref>)<sp/>:</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/>data_(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(other.data_)),</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/>key_compare_(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(other.key_compare_)),</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/>extracter_(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(other.extracter_))<sp/>{}</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"></highlight></codeline>
+<codeline lineno="344" refid="classsparse__vector_1a80a1aa03dcef21ce642572a105fdc62f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a6a2dffa801c283b2a992934fad4f0c52" kindref="member">sparse_vector</ref>&amp;<sp/><ref refid="classsparse__vector_1a80a1aa03dcef21ce642572a105fdc62f" kindref="member">operator=</ref>(<ref refid="classsparse__vector_1a6a2dffa801c283b2a992934fad4f0c52" kindref="member">sparse_vector</ref>&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(<ref refid="group___type_special_member_function_checks_1gad26f59ba1b8a873f9d8374f72a4002c4" kindref="member">is_nothrow_move_assignable_v&lt;container_type&gt;</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gaf77625b543da90c4cf80a7bb167b3426" kindref="member">addressof</ref>(other)<sp/>==<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data_<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(other.data_);</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>key_compare_<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(other.key_compare_);</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>extracter_<sp/>=<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(other.extracter_);</highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"></highlight></codeline>
+<codeline lineno="357" refid="classsparse__vector_1a9cfe50bb1fda3697f8969a06791cf8b9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a9cfe50bb1fda3697f8969a06791cf8b9" kindref="member">~sparse_vector</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"></highlight></codeline>
+<codeline lineno="363" refid="classsparse__vector_1a291a67fc4a6979bc657aef2b4d677d9b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/><ref refid="classsparse__vector_1a291a67fc4a6979bc657aef2b4d677d9b" kindref="member">begin</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref>(0,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">);<sp/>}</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"></highlight></codeline>
+<codeline lineno="369" refid="classsparse__vector_1adb1722c13d380dfce43c6e4e852170d5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/><ref refid="classsparse__vector_1adb1722c13d380dfce43c6e4e852170d5" kindref="member">end</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref>(data_.size(),<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">);<sp/>}</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"></highlight></codeline>
+<codeline lineno="375" refid="classsparse__vector_1ab5374ff48655b3f109c8ffc261ce8499" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1ade91cee6d1c5f419351e3b7b41b96fd8" kindref="member">const_iterator</ref><sp/><ref refid="classsparse__vector_1ab5374ff48655b3f109c8ffc261ce8499" kindref="member">begin</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a436c2c5fd1f70348643eaefc98f682b0" kindref="member">cbegin</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="376"><highlight class="normal"></highlight></codeline>
+<codeline lineno="381" refid="classsparse__vector_1a539e8de82ac83fbd375aa0e9879fb81d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1ade91cee6d1c5f419351e3b7b41b96fd8" kindref="member">const_iterator</ref><sp/><ref refid="classsparse__vector_1a539e8de82ac83fbd375aa0e9879fb81d" kindref="member">end</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1af6dcae237bbd9a25a276d1ed8c2132af" kindref="member">cend</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="382"><highlight class="normal"></highlight></codeline>
+<codeline lineno="387" refid="classsparse__vector_1a436c2c5fd1f70348643eaefc98f682b0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1ade91cee6d1c5f419351e3b7b41b96fd8" kindref="member">const_iterator</ref><sp/><ref refid="classsparse__vector_1a436c2c5fd1f70348643eaefc98f682b0" kindref="member">cbegin</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1ade91cee6d1c5f419351e3b7b41b96fd8" kindref="member">const_iterator</ref>(0,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">);<sp/>}</highlight></codeline>
+<codeline lineno="388"><highlight class="normal"></highlight></codeline>
+<codeline lineno="393" refid="classsparse__vector_1af6dcae237bbd9a25a276d1ed8c2132af" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1ade91cee6d1c5f419351e3b7b41b96fd8" kindref="member">const_iterator</ref><sp/><ref refid="classsparse__vector_1af6dcae237bbd9a25a276d1ed8c2132af" kindref="member">cend</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1ade91cee6d1c5f419351e3b7b41b96fd8" kindref="member">const_iterator</ref>(data_.size(),<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">);<sp/>}</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"></highlight></codeline>
+<codeline lineno="399" refid="classsparse__vector_1a06f1fb8f2a63521acd0b70e988ec732e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1a76785a7125742d461b29b7c0d8421514" kindref="member">reverse_iterator</ref><sp/><ref refid="classsparse__vector_1a06f1fb8f2a63521acd0b70e988ec732e" kindref="member">rbegin</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a76785a7125742d461b29b7c0d8421514" kindref="member">reverse_iterator</ref>(<ref refid="classsparse__vector_1adb1722c13d380dfce43c6e4e852170d5" kindref="member">end</ref>());<sp/>}</highlight></codeline>
+<codeline lineno="400"><highlight class="normal"></highlight></codeline>
+<codeline lineno="405" refid="classsparse__vector_1aaafd8d949b49baf8b5708befd76f650a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1a76785a7125742d461b29b7c0d8421514" kindref="member">reverse_iterator</ref><sp/><ref refid="classsparse__vector_1aaafd8d949b49baf8b5708befd76f650a" kindref="member">rend</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a76785a7125742d461b29b7c0d8421514" kindref="member">reverse_iterator</ref>(<ref refid="classsparse__vector_1a291a67fc4a6979bc657aef2b4d677d9b" kindref="member">begin</ref>());<sp/>}</highlight></codeline>
+<codeline lineno="406"><highlight class="normal"></highlight></codeline>
+<codeline lineno="411" refid="classsparse__vector_1af0af2e606fd358ff8ebbf386cdec0371" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1aafd9c245ab0f81488c5dae0268389098" kindref="member">const_reverse_iterator</ref><sp/><ref refid="classsparse__vector_1af0af2e606fd358ff8ebbf386cdec0371" kindref="member">rbegin</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1ab243e2d397d1f85705f9212611aa5bc8" kindref="member">crbegin</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="412"><highlight class="normal"></highlight></codeline>
+<codeline lineno="417" refid="classsparse__vector_1a8204584918f3ad118bf8315a29091aa8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1aafd9c245ab0f81488c5dae0268389098" kindref="member">const_reverse_iterator</ref><sp/><ref refid="classsparse__vector_1a8204584918f3ad118bf8315a29091aa8" kindref="member">rend</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1ad7957a939f6f1b06b4700d5c96451445" kindref="member">crend</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="418"><highlight class="normal"></highlight></codeline>
+<codeline lineno="423" refid="classsparse__vector_1ab243e2d397d1f85705f9212611aa5bc8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1aafd9c245ab0f81488c5dae0268389098" kindref="member">const_reverse_iterator</ref><sp/><ref refid="classsparse__vector_1ab243e2d397d1f85705f9212611aa5bc8" kindref="member">crbegin</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aafd9c245ab0f81488c5dae0268389098" kindref="member">const_reverse_iterator</ref>(<ref refid="classsparse__vector_1af6dcae237bbd9a25a276d1ed8c2132af" kindref="member">cend</ref>());<sp/>}</highlight></codeline>
+<codeline lineno="424"><highlight class="normal"></highlight></codeline>
+<codeline lineno="429" refid="classsparse__vector_1ad7957a939f6f1b06b4700d5c96451445" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1aafd9c245ab0f81488c5dae0268389098" kindref="member">const_reverse_iterator</ref><sp/><ref refid="classsparse__vector_1ad7957a939f6f1b06b4700d5c96451445" kindref="member">crend</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aafd9c245ab0f81488c5dae0268389098" kindref="member">const_reverse_iterator</ref>(<ref refid="classsparse__vector_1a436c2c5fd1f70348643eaefc98f682b0" kindref="member">cbegin</ref>());<sp/>}</highlight></codeline>
+<codeline lineno="430"><highlight class="normal"></highlight></codeline>
+<codeline lineno="435" refid="classsparse__vector_1ae275c746403009256ba410f1c7fa6953" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/><ref refid="classsparse__vector_1ae275c746403009256ba410f1c7fa6953" kindref="member">size</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.size();<sp/>}</highlight></codeline>
+<codeline lineno="436"><highlight class="normal"></highlight></codeline>
+<codeline lineno="441" refid="classsparse__vector_1a2da97bb4b6abac99d9d9cf4651114456" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/><ref refid="classsparse__vector_1a2da97bb4b6abac99d9d9cf4651114456" kindref="member">max_size</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.max_size();<sp/>}</highlight></codeline>
+<codeline lineno="442"><highlight class="normal"></highlight></codeline>
+<codeline lineno="447" refid="classsparse__vector_1a6f175bfb694f69c3c8cbd709800a2c38" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a6f175bfb694f69c3c8cbd709800a2c38" kindref="member">empty</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.empty();<sp/>}</highlight></codeline>
+<codeline lineno="448"><highlight class="normal"></highlight></codeline>
+<codeline lineno="453" refid="classsparse__vector_1ad68e81cdd9c1b91b578c9792fb683957" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>Compare<sp/><ref refid="classsparse__vector_1ad68e81cdd9c1b91b578c9792fb683957" kindref="member">key_compare</ref>()<sp/>const<sp/>noexcept(<ref refid="group___type_special_member_function_checks_1ga1a08255d43824dc23e14e09d4f9a3d22" kindref="member">is_nothrow_copy_constructible_v</ref>&lt;Compare&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="454"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>key_compare_;</highlight></codeline>
+<codeline lineno="455"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="456"><highlight class="normal"></highlight></codeline>
+<codeline lineno="463"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
+<codeline lineno="464" refid="classsparse__vector_1a3378bc77a700c868603bae7d3f039abd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structpair" kindref="compound">pair&lt;iterator, bool&gt;</ref><sp/><ref refid="classsparse__vector_1a3378bc77a700c868603bae7d3f039abd" kindref="member">emplace_unique</ref>(Args&amp;&amp;...<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="465"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" kindref="member">value_type</ref><sp/>tmp(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
+<codeline lineno="466"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>pos<sp/>=<sp/>lower_bound_index(key_of(tmp));</highlight></codeline>
+<codeline lineno="467"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pos<sp/>&lt;<sp/>data_.size()<sp/>&amp;&amp;<sp/>!key_compare_(key_of(tmp),<sp/>key_of(data_[pos])))<sp/>{</highlight></codeline>
+<codeline lineno="468"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;iterator, bool&gt;</ref>(<ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref>(pos,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">),<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="469"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="470"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;iterator, bool&gt;</ref>(insert_at(pos,<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(tmp)),<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="471"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="472"><highlight class="normal"></highlight></codeline>
+<codeline lineno="478" refid="classsparse__vector_1a47eda6bdefbe901fdf89050cf848bda0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structpair" kindref="compound">pair&lt;iterator, bool&gt;</ref><sp/><ref refid="classsparse__vector_1a47eda6bdefbe901fdf89050cf848bda0" kindref="member">insert_unique</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" kindref="member">value_type</ref>&amp;<sp/>value)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a3378bc77a700c868603bae7d3f039abd" kindref="member">emplace_unique</ref>(value);<sp/>}</highlight></codeline>
+<codeline lineno="479"><highlight class="normal"></highlight></codeline>
+<codeline lineno="485" refid="classsparse__vector_1a397e8f783a1f6b05e512f278b811f0fb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structpair" kindref="compound">pair&lt;iterator, bool&gt;</ref><sp/><ref refid="classsparse__vector_1a397e8f783a1f6b05e512f278b811f0fb" kindref="member">insert_unique</ref>(<ref refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" kindref="member">value_type</ref>&amp;&amp;<sp/>value)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a3378bc77a700c868603bae7d3f039abd" kindref="member">emplace_unique</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(value));<sp/>}</highlight></codeline>
+<codeline lineno="486"><highlight class="normal"></highlight></codeline>
+<codeline lineno="494"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
+<codeline lineno="495" refid="classsparse__vector_1a7ccdf1203561275091e915de6e2c7baa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/><ref refid="classsparse__vector_1a7ccdf1203561275091e915de6e2c7baa" kindref="member">emplace_unique_hint</ref>(<ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/>position,<sp/>Args&amp;&amp;...<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="496"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" kindref="member">value_type</ref><sp/>tmp(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
+<codeline lineno="497"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aa23473ec3eb90c010d1dd2f1d051abb0" kindref="member">key_type</ref>&amp;<sp/>k<sp/>=<sp/>key_of(tmp);</highlight></codeline>
+<codeline lineno="498"><highlight class="normal"></highlight></codeline>
+<codeline lineno="499"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(position<sp/>!=<sp/><ref refid="classsparse__vector_1adb1722c13d380dfce43c6e4e852170d5" kindref="member">end</ref>()<sp/>&amp;&amp;<sp/>position<sp/>!=<sp/><ref refid="classsparse__vector_1a291a67fc4a6979bc657aef2b4d677d9b" kindref="member">begin</ref>())<sp/>{</highlight></codeline>
+<codeline lineno="500"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/>before<sp/>=<sp/>position;</highlight></codeline>
+<codeline lineno="501"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>--before;</highlight></codeline>
+<codeline lineno="502"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(key_compare_(key_of(*before),<sp/>k)<sp/>&amp;&amp;<sp/>key_compare_(k,<sp/>key_of(*position)))<sp/>{</highlight></codeline>
+<codeline lineno="503"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>insert_at(position.<ref refid="structsparse__vector__iterator_1ad84927ef5476f7cc0cb0139199422ca5" kindref="member">index</ref>(),<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(tmp));</highlight></codeline>
+<codeline lineno="504"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="505"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="506"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(position<sp/>==<sp/><ref refid="classsparse__vector_1a291a67fc4a6979bc657aef2b4d677d9b" kindref="member">begin</ref>()<sp/>&amp;&amp;<sp/>!data_.empty())<sp/>{</highlight></codeline>
+<codeline lineno="507"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(key_compare_(k,<sp/>key_of(data_.front())))<sp/>{</highlight></codeline>
+<codeline lineno="508"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>insert_at(0,<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(tmp));</highlight></codeline>
+<codeline lineno="509"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="510"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!key_compare_(key_of(data_.front()),<sp/>k))<sp/>{</highlight></codeline>
+<codeline lineno="511"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref>(0,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="512"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="513"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="514"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(position<sp/>==<sp/><ref refid="classsparse__vector_1adb1722c13d380dfce43c6e4e852170d5" kindref="member">end</ref>()<sp/>&amp;&amp;<sp/>!data_.empty())<sp/>{</highlight></codeline>
+<codeline lineno="515"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(key_compare_(key_of(data_.back()),<sp/>k))<sp/>{</highlight></codeline>
+<codeline lineno="516"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>insert_at(data_.size(),<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(tmp));</highlight></codeline>
+<codeline lineno="517"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="518"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!key_compare_(k,<sp/>key_of(data_.back())))<sp/>{</highlight></codeline>
+<codeline lineno="519"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref>(data_.size()<sp/>-<sp/>1,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="520"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="521"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="522"><highlight class="normal"></highlight></codeline>
+<codeline lineno="523"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a3378bc77a700c868603bae7d3f039abd" kindref="member">emplace_unique</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(tmp)).first;</highlight></codeline>
+<codeline lineno="524"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="525"><highlight class="normal"></highlight></codeline>
+<codeline lineno="532" refid="classsparse__vector_1a0e8d45a9da64885c6c515009976db10b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/><ref refid="classsparse__vector_1a0e8d45a9da64885c6c515009976db10b" kindref="member">insert_unique</ref>(<ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/>position,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" kindref="member">value_type</ref>&amp;<sp/>value)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a7ccdf1203561275091e915de6e2c7baa" kindref="member">emplace_unique_hint</ref>(position,<sp/>value);<sp/>}</highlight></codeline>
+<codeline lineno="533"><highlight class="normal"></highlight></codeline>
+<codeline lineno="540" refid="classsparse__vector_1a6fb08169ba6a32cab8c8bd72cb957ee3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/><ref refid="classsparse__vector_1a6fb08169ba6a32cab8c8bd72cb957ee3" kindref="member">insert_unique</ref>(<ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/>position,<sp/><ref refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" kindref="member">value_type</ref>&amp;&amp;<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="541"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a7ccdf1203561275091e915de6e2c7baa" kindref="member">emplace_unique_hint</ref>(position,<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(value));</highlight></codeline>
+<codeline lineno="542"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="543"><highlight class="normal"></highlight></codeline>
+<codeline lineno="550"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Iterator,<sp/>enable_if_t&lt;is_iter_v&lt;Iterator&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="551" refid="classsparse__vector_1a9ba10d3c50b2ceb756c1abcb5297d717" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a9ba10d3c50b2ceb756c1abcb5297d717" kindref="member">insert_unique</ref>(Iterator<sp/>first,<sp/>Iterator<sp/>last)<sp/>{</highlight></codeline>
+<codeline lineno="552"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(;<sp/>first<sp/>!=<sp/>last;<sp/>++first)<sp/>{</highlight></codeline>
+<codeline lineno="553"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a47eda6bdefbe901fdf89050cf848bda0" kindref="member">insert_unique</ref>(*first);</highlight></codeline>
+<codeline lineno="554"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="555"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="556"><highlight class="normal"></highlight></codeline>
+<codeline lineno="563"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
+<codeline lineno="564" refid="classsparse__vector_1a379c10df4c6a3ec0037a7dbeb2668c39" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/><ref refid="classsparse__vector_1a379c10df4c6a3ec0037a7dbeb2668c39" kindref="member">emplace_equal</ref>(Args&amp;&amp;...<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="565"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" kindref="member">value_type</ref><sp/>tmp(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
+<codeline lineno="566"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>pos<sp/>=<sp/>upper_bound_index(key_of(tmp));</highlight></codeline>
+<codeline lineno="567"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>insert_at(pos,<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(tmp));</highlight></codeline>
+<codeline lineno="568"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="569"><highlight class="normal"></highlight></codeline>
+<codeline lineno="575" refid="classsparse__vector_1ac736fe101dc2b100ec67b28b075aaba2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/><ref refid="classsparse__vector_1ac736fe101dc2b100ec67b28b075aaba2" kindref="member">insert_equal</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" kindref="member">value_type</ref>&amp;<sp/>value)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a379c10df4c6a3ec0037a7dbeb2668c39" kindref="member">emplace_equal</ref>(value);<sp/>}</highlight></codeline>
+<codeline lineno="576"><highlight class="normal"></highlight></codeline>
+<codeline lineno="582" refid="classsparse__vector_1a7de434e684fde0e1fe142d4e7fd2a552" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/><ref refid="classsparse__vector_1a7de434e684fde0e1fe142d4e7fd2a552" kindref="member">insert_equal</ref>(<ref refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" kindref="member">value_type</ref>&amp;&amp;<sp/>value)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a379c10df4c6a3ec0037a7dbeb2668c39" kindref="member">emplace_equal</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(value));<sp/>}</highlight></codeline>
+<codeline lineno="583"><highlight class="normal"></highlight></codeline>
+<codeline lineno="591"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args&gt;</highlight></codeline>
+<codeline lineno="592" refid="classsparse__vector_1aed237f2fecf68035a4760f5024ba86a5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/><ref refid="classsparse__vector_1aed237f2fecf68035a4760f5024ba86a5" kindref="member">emplace_equal_hint</ref>(<ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/>position,<sp/>Args&amp;&amp;...<sp/>args)<sp/>{</highlight></codeline>
+<codeline lineno="593"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" kindref="member">value_type</ref><sp/>tmp(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
+<codeline lineno="594"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aa23473ec3eb90c010d1dd2f1d051abb0" kindref="member">key_type</ref>&amp;<sp/>k<sp/>=<sp/>key_of(tmp);</highlight></codeline>
+<codeline lineno="595"><highlight class="normal"></highlight></codeline>
+<codeline lineno="596"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(position<sp/>!=<sp/><ref refid="classsparse__vector_1adb1722c13d380dfce43c6e4e852170d5" kindref="member">end</ref>()<sp/>&amp;&amp;<sp/>position<sp/>!=<sp/><ref refid="classsparse__vector_1a291a67fc4a6979bc657aef2b4d677d9b" kindref="member">begin</ref>())<sp/>{</highlight></codeline>
+<codeline lineno="597"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/>before<sp/>=<sp/>position;</highlight></codeline>
+<codeline lineno="598"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>--before;</highlight></codeline>
+<codeline lineno="599"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(key_compare_(key_of(*before),<sp/>k)<sp/>&amp;&amp;<sp/>key_compare_(k,<sp/>key_of(*position)))<sp/>{</highlight></codeline>
+<codeline lineno="600"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>insert_at(position.<ref refid="structsparse__vector__iterator_1ad84927ef5476f7cc0cb0139199422ca5" kindref="member">index</ref>(),<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(tmp));</highlight></codeline>
+<codeline lineno="601"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="602"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="603"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(position<sp/>==<sp/><ref refid="classsparse__vector_1a291a67fc4a6979bc657aef2b4d677d9b" kindref="member">begin</ref>()<sp/>&amp;&amp;<sp/>!data_.empty())<sp/>{</highlight></codeline>
+<codeline lineno="604"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(key_compare_(k,<sp/>key_of(data_.front())))<sp/>{</highlight></codeline>
+<codeline lineno="605"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>insert_at(0,<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(tmp));</highlight></codeline>
+<codeline lineno="606"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="607"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="608"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(position<sp/>==<sp/><ref refid="classsparse__vector_1adb1722c13d380dfce43c6e4e852170d5" kindref="member">end</ref>()<sp/>&amp;&amp;<sp/>!data_.empty())<sp/>{</highlight></codeline>
+<codeline lineno="609"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!key_compare_(k,<sp/>key_of(data_.back())))<sp/>{</highlight></codeline>
+<codeline lineno="610"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>insert_at(data_.size(),<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(tmp));</highlight></codeline>
+<codeline lineno="611"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="612"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="613"><highlight class="normal"></highlight></codeline>
+<codeline lineno="614"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a379c10df4c6a3ec0037a7dbeb2668c39" kindref="member">emplace_equal</ref>(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(tmp));</highlight></codeline>
+<codeline lineno="615"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="616"><highlight class="normal"></highlight></codeline>
+<codeline lineno="623" refid="classsparse__vector_1ae206ea1fcc53b8584a6e87e2bb4407d4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/><ref refid="classsparse__vector_1ae206ea1fcc53b8584a6e87e2bb4407d4" kindref="member">insert_equal</ref>(<ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/>position,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" kindref="member">value_type</ref>&amp;<sp/>value)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aed237f2fecf68035a4760f5024ba86a5" kindref="member">emplace_equal_hint</ref>(position,<sp/>value);<sp/>}</highlight></codeline>
+<codeline lineno="624"><highlight class="normal"></highlight></codeline>
+<codeline lineno="631" refid="classsparse__vector_1a65a48038b800654e56c54a9d4fc577bf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/><ref refid="classsparse__vector_1a65a48038b800654e56c54a9d4fc577bf" kindref="member">insert_equal</ref>(<ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/>position,<sp/><ref refid="classsparse__vector_1abb3817d741bbd3d22b8d9318f3c1e84b" kindref="member">value_type</ref>&amp;&amp;<sp/>value)<sp/>{</highlight></codeline>
+<codeline lineno="632"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aed237f2fecf68035a4760f5024ba86a5" kindref="member">emplace_equal_hint</ref>(position,<sp/>_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(value));</highlight></codeline>
+<codeline lineno="633"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="634"><highlight class="normal"></highlight></codeline>
+<codeline lineno="641"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Iterator,<sp/>enable_if_t&lt;is_iter_v&lt;Iterator&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="642" refid="classsparse__vector_1a831b5de99bf4446b7d7c230e0fd725e5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a831b5de99bf4446b7d7c230e0fd725e5" kindref="member">insert_equal</ref>(Iterator<sp/>first,<sp/>Iterator<sp/>last)<sp/>{</highlight></codeline>
+<codeline lineno="643"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(;<sp/>first<sp/>!=<sp/>last;<sp/>++first)<sp/>{</highlight></codeline>
+<codeline lineno="644"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1ac736fe101dc2b100ec67b28b075aaba2" kindref="member">insert_equal</ref>(*first);</highlight></codeline>
+<codeline lineno="645"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="646"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="647"><highlight class="normal"></highlight></codeline>
+<codeline lineno="653" refid="classsparse__vector_1a068f7f56ce2f3036333e387f1de0122b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/><ref refid="classsparse__vector_1a068f7f56ce2f3036333e387f1de0122b" kindref="member">erase</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aa23473ec3eb90c010d1dd2f1d051abb0" kindref="member">key_type</ref>&amp;<sp/>key)<sp/>{</highlight></codeline>
+<codeline lineno="654"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>lo<sp/>=<sp/>lower_bound_index(key);</highlight></codeline>
+<codeline lineno="655"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>hi<sp/>=<sp/>upper_bound_index(key);</highlight></codeline>
+<codeline lineno="656"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>n<sp/>=<sp/>hi<sp/>-<sp/>lo;</highlight></codeline>
+<codeline lineno="657"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(n<sp/>&gt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="658"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data_.erase(data_.begin()<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="classsparse__vector_1aa8e868be083c16deb2483c353d2ae703" kindref="member">difference_type</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(lo),</highlight></codeline>
+<codeline lineno="659"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data_.begin()<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="classsparse__vector_1aa8e868be083c16deb2483c353d2ae703" kindref="member">difference_type</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(hi));</highlight></codeline>
+<codeline lineno="660"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="661"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>n;</highlight></codeline>
+<codeline lineno="662"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="663"><highlight class="normal"></highlight></codeline>
+<codeline lineno="668" refid="classsparse__vector_1aee0d637ac67e9513bc75c49b6e8f6b09" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aee0d637ac67e9513bc75c49b6e8f6b09" kindref="member">erase</ref>(<ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/>position)<sp/>{</highlight></codeline>
+<codeline lineno="669"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_DEBUG_VERIFY(position.<ref refid="structsparse__vector__iterator_1a2dfc399a36f3061afd5b4d27cb5cf48d" kindref="member">container</ref>()<sp/>==<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Attempting<sp/>to<sp/>erase<sp/>from<sp/>different<sp/>container&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="670"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_DEBUG_VERIFY(position.<ref refid="structsparse__vector__iterator_1ad84927ef5476f7cc0cb0139199422ca5" kindref="member">index</ref>()<sp/>&lt;<sp/>data_.size(),<sp/></highlight><highlight class="stringliteral">&quot;Attempting<sp/>to<sp/>erase<sp/>out<sp/>of<sp/>boundary&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="671"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data_.erase(data_.begin()<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="classsparse__vector_1aa8e868be083c16deb2483c353d2ae703" kindref="member">difference_type</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(position.<ref refid="structsparse__vector__iterator_1ad84927ef5476f7cc0cb0139199422ca5" kindref="member">index</ref>()));</highlight></codeline>
+<codeline lineno="672"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="673"><highlight class="normal"></highlight></codeline>
+<codeline lineno="679" refid="classsparse__vector_1a735431e70ad5fa2ba1b99aaf3edc3048" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a735431e70ad5fa2ba1b99aaf3edc3048" kindref="member">erase</ref>(<ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/>first,<sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/>last)<sp/>{</highlight></codeline>
+<codeline lineno="680"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_DEBUG_VERIFY(first.<ref refid="structsparse__vector__iterator_1a2dfc399a36f3061afd5b4d27cb5cf48d" kindref="member">container</ref>()<sp/>==<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>&amp;&amp;<sp/>last.container()<sp/>==<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="681"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Attempting<sp/>to<sp/>erase<sp/>from<sp/>different<sp/>container&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="682"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(first<sp/>==<sp/><ref refid="classsparse__vector_1a291a67fc4a6979bc657aef2b4d677d9b" kindref="member">begin</ref>()<sp/>&amp;&amp;<sp/>last<sp/>==<sp/><ref refid="classsparse__vector_1adb1722c13d380dfce43c6e4e852170d5" kindref="member">end</ref>())<sp/>{</highlight></codeline>
+<codeline lineno="683"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1a4dc1238aef4f71ff92c31c8ef8a872fd" kindref="member">clear</ref>();</highlight></codeline>
+<codeline lineno="684"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="685"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data_.erase(data_.begin()<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="classsparse__vector_1aa8e868be083c16deb2483c353d2ae703" kindref="member">difference_type</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(first.<ref refid="structsparse__vector__iterator_1ad84927ef5476f7cc0cb0139199422ca5" kindref="member">index</ref>()),</highlight></codeline>
+<codeline lineno="686"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data_.begin()<sp/>+<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="classsparse__vector_1aa8e868be083c16deb2483c353d2ae703" kindref="member">difference_type</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(last.index()));</highlight></codeline>
+<codeline lineno="687"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="688"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="689"><highlight class="normal"></highlight></codeline>
+<codeline lineno="693" refid="classsparse__vector_1a4dc1238aef4f71ff92c31c8ef8a872fd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a4dc1238aef4f71ff92c31c8ef8a872fd" kindref="member">clear</ref>()<sp/>{<sp/>data_.clear();<sp/>}</highlight></codeline>
+<codeline lineno="694"><highlight class="normal"></highlight></codeline>
+<codeline lineno="700" refid="classsparse__vector_1a40c765c07e8359124589c3c8c47399b7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/><ref refid="classsparse__vector_1a40c765c07e8359124589c3c8c47399b7" kindref="member">find</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aa23473ec3eb90c010d1dd2f1d051abb0" kindref="member">key_type</ref>&amp;<sp/>key)<sp/>{</highlight></codeline>
+<codeline lineno="701"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>pos<sp/>=<sp/>lower_bound_index(key);</highlight></codeline>
+<codeline lineno="702"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pos<sp/>&lt;<sp/>data_.size()<sp/>&amp;&amp;<sp/>!key_compare_(key,<sp/>key_of(data_[pos])))<sp/>{</highlight></codeline>
+<codeline lineno="703"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref>(pos,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="704"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="705"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1adb1722c13d380dfce43c6e4e852170d5" kindref="member">end</ref>();</highlight></codeline>
+<codeline lineno="706"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="707"><highlight class="normal"></highlight></codeline>
+<codeline lineno="713" refid="classsparse__vector_1aeefaac4e9da63dd96e2feb036ac94417" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1ade91cee6d1c5f419351e3b7b41b96fd8" kindref="member">const_iterator</ref><sp/><ref refid="classsparse__vector_1aeefaac4e9da63dd96e2feb036ac94417" kindref="member">find</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aa23473ec3eb90c010d1dd2f1d051abb0" kindref="member">key_type</ref>&amp;<sp/>key)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="714"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>pos<sp/>=<sp/>lower_bound_index(key);</highlight></codeline>
+<codeline lineno="715"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pos<sp/>&lt;<sp/>data_.size()<sp/>&amp;&amp;<sp/>!key_compare_(key,<sp/>key_of(data_[pos])))<sp/>{</highlight></codeline>
+<codeline lineno="716"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1ade91cee6d1c5f419351e3b7b41b96fd8" kindref="member">const_iterator</ref>(pos,<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="717"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="718"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1af6dcae237bbd9a25a276d1ed8c2132af" kindref="member">cend</ref>();</highlight></codeline>
+<codeline lineno="719"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="720"><highlight class="normal"></highlight></codeline>
+<codeline lineno="726" refid="classsparse__vector_1a089662ec84c47ca44e8591165c494814" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/><ref refid="classsparse__vector_1a089662ec84c47ca44e8591165c494814" kindref="member">count</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aa23473ec3eb90c010d1dd2f1d051abb0" kindref="member">key_type</ref>&amp;<sp/>key)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="727"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>upper_bound_index(key)<sp/>-<sp/>lower_bound_index(key);</highlight></codeline>
+<codeline lineno="728"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="729"><highlight class="normal"></highlight></codeline>
+<codeline lineno="735" refid="classsparse__vector_1a73a5a4f9ca58c1e55b9f1bb961548c5d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/><ref refid="classsparse__vector_1a73a5a4f9ca58c1e55b9f1bb961548c5d" kindref="member">lower_bound</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aa23473ec3eb90c010d1dd2f1d051abb0" kindref="member">key_type</ref>&amp;<sp/>key)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref>(lower_bound_index(key),<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">);<sp/>}</highlight></codeline>
+<codeline lineno="736"><highlight class="normal"></highlight></codeline>
+<codeline lineno="742" refid="classsparse__vector_1a27ecd61c30835b73fe2276aa5f301d08" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1ade91cee6d1c5f419351e3b7b41b96fd8" kindref="member">const_iterator</ref><sp/><ref refid="classsparse__vector_1a27ecd61c30835b73fe2276aa5f301d08" kindref="member">lower_bound</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aa23473ec3eb90c010d1dd2f1d051abb0" kindref="member">key_type</ref>&amp;<sp/>key)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="743"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1ade91cee6d1c5f419351e3b7b41b96fd8" kindref="member">const_iterator</ref>(lower_bound_index(key),<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="744"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="745"><highlight class="normal"></highlight></codeline>
+<codeline lineno="751" refid="classsparse__vector_1a6fc86991dcd78203ac2e4fff7e11b675" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref><sp/><ref refid="classsparse__vector_1a6fc86991dcd78203ac2e4fff7e11b675" kindref="member">upper_bound</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aa23473ec3eb90c010d1dd2f1d051abb0" kindref="member">key_type</ref>&amp;<sp/>key)<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">iterator</ref>(upper_bound_index(key),<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">);<sp/>}</highlight></codeline>
+<codeline lineno="752"><highlight class="normal"></highlight></codeline>
+<codeline lineno="758" refid="classsparse__vector_1ae68ededb647f3395195629fc09205bd5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1ade91cee6d1c5f419351e3b7b41b96fd8" kindref="member">const_iterator</ref><sp/><ref refid="classsparse__vector_1ae68ededb647f3395195629fc09205bd5" kindref="member">upper_bound</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aa23473ec3eb90c010d1dd2f1d051abb0" kindref="member">key_type</ref>&amp;<sp/>key)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="759"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1ade91cee6d1c5f419351e3b7b41b96fd8" kindref="member">const_iterator</ref>(upper_bound_index(key),<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="760"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="761"><highlight class="normal"></highlight></codeline>
+<codeline lineno="767" refid="classsparse__vector_1ae8093d643e39767576cb3ea47aa2ffea" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="structpair" kindref="compound">pair&lt;iterator, iterator&gt;</ref><sp/><ref refid="classsparse__vector_1ae8093d643e39767576cb3ea47aa2ffea" kindref="member">equal_range</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aa23473ec3eb90c010d1dd2f1d051abb0" kindref="member">key_type</ref>&amp;<sp/>key)<sp/>{</highlight></codeline>
+<codeline lineno="768"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;iterator, iterator&gt;</ref>(<ref refid="classsparse__vector_1a73a5a4f9ca58c1e55b9f1bb961548c5d" kindref="member">lower_bound</ref>(key),<sp/><ref refid="classsparse__vector_1a6fc86991dcd78203ac2e4fff7e11b675" kindref="member">upper_bound</ref>(key));</highlight></codeline>
+<codeline lineno="769"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="770"><highlight class="normal"></highlight></codeline>
+<codeline lineno="776" refid="classsparse__vector_1a4b5929fedf41ee2fcf11acf1426abd25" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="structpair" kindref="compound">pair&lt;const_iterator, const_iterator&gt;</ref><sp/><ref refid="classsparse__vector_1a4b5929fedf41ee2fcf11acf1426abd25" kindref="member">equal_range</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1aa23473ec3eb90c010d1dd2f1d051abb0" kindref="member">key_type</ref>&amp;<sp/>key)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="777"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structpair" kindref="compound">pair&lt;const_iterator, const_iterator&gt;</ref>(<ref refid="classsparse__vector_1a73a5a4f9ca58c1e55b9f1bb961548c5d" kindref="member">lower_bound</ref>(key),<sp/><ref refid="classsparse__vector_1a6fc86991dcd78203ac2e4fff7e11b675" kindref="member">upper_bound</ref>(key));</highlight></codeline>
+<codeline lineno="778"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="779"><highlight class="normal"></highlight></codeline>
+<codeline lineno="784" refid="classsparse__vector_1a54929427b54d106dd5244e654bea7a6a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a54929427b54d106dd5244e654bea7a6a" kindref="member">reserve</ref>(<ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/>n)<sp/>{<sp/>data_.reserve(n);<sp/>}</highlight></codeline>
+<codeline lineno="785"><highlight class="normal"></highlight></codeline>
+<codeline lineno="790" refid="classsparse__vector_1a7f77efa128f871dbfcd3a3f9d6901f2d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">size_type</ref><sp/><ref refid="classsparse__vector_1a7f77efa128f871dbfcd3a3f9d6901f2d" kindref="member">capacity</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data_.capacity();<sp/>}</highlight></codeline>
+<codeline lineno="791"><highlight class="normal"></highlight></codeline>
+<codeline lineno="795" refid="classsparse__vector_1ac8d35cee61408f5eacfe76937fb874b5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1ac8d35cee61408f5eacfe76937fb874b5" kindref="member">shrink_to_fit</ref>()<sp/>{<sp/>data_.shrink_to_fit();<sp/>}</highlight></codeline>
+<codeline lineno="796"><highlight class="normal"></highlight></codeline>
+<codeline lineno="801" refid="classsparse__vector_1ac3528eb4cbe68ba718e21254bda9a446" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1ac3528eb4cbe68ba718e21254bda9a446" kindref="member">swap</ref>(<ref refid="classsparse__vector_1a6a2dffa801c283b2a992934fad4f0c52" kindref="member">sparse_vector</ref>&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(<ref refid="group___swap_utility_1gaf740a9b650d7a3063e9414c3c50ffdb5" kindref="member">is_nothrow_swappable_v&lt;container_type&gt;</ref><sp/>&amp;&amp;</highlight></codeline>
+<codeline lineno="802"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___swap_utility_1gaf740a9b650d7a3063e9414c3c50ffdb5" kindref="member">is_nothrow_swappable_v&lt;Compare&gt;</ref><sp/>&amp;&amp;<sp/><ref refid="group___swap_utility_1gaf740a9b650d7a3063e9414c3c50ffdb5" kindref="member">is_nothrow_swappable_v&lt;KeyOfValue&gt;</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="803"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data_.swap(other.data_);</highlight></codeline>
+<codeline lineno="804"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(key_compare_,<sp/>other.key_compare_);</highlight></codeline>
+<codeline lineno="805"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(extracter_,<sp/>other.extracter_);</highlight></codeline>
+<codeline lineno="806"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="807"><highlight class="normal"></highlight></codeline>
+<codeline lineno="813" refid="classsparse__vector_1a8a3803c4a6fc4cd62b7f177908bbffc2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a8a3803c4a6fc4cd62b7f177908bbffc2" kindref="member">equal_to</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a6a2dffa801c283b2a992934fad4f0c52" kindref="member">sparse_vector</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="814"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(</highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(_NEFORCE<sp/><ref refid="group___compare_algorithms_1ga9cf760161111d0bfae4928ad951ed9e6" kindref="member">equal</ref>(<ref refid="classsparse__vector_1a436c2c5fd1f70348643eaefc98f682b0" kindref="member">cbegin</ref>(),<sp/><ref refid="classsparse__vector_1af6dcae237bbd9a25a276d1ed8c2132af" kindref="member">cend</ref>(),<sp/>rhs.cbegin())))<sp/>{</highlight></codeline>
+<codeline lineno="815"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1ae275c746403009256ba410f1c7fa6953" kindref="member">size</ref>()<sp/>==<sp/>rhs.size()<sp/>&amp;&amp;<sp/>_NEFORCE<sp/><ref refid="group___compare_algorithms_1ga9cf760161111d0bfae4928ad951ed9e6" kindref="member">equal</ref>(<ref refid="classsparse__vector_1a436c2c5fd1f70348643eaefc98f682b0" kindref="member">cbegin</ref>(),<sp/><ref refid="classsparse__vector_1af6dcae237bbd9a25a276d1ed8c2132af" kindref="member">cend</ref>(),<sp/>rhs.cbegin());</highlight></codeline>
+<codeline lineno="816"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="817"><highlight class="normal"></highlight></codeline>
+<codeline lineno="823" refid="classsparse__vector_1abfc1568c4903c98fbb9b1b31e5b60c7c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1abfc1568c4903c98fbb9b1b31e5b60c7c" kindref="member">less_than</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsparse__vector_1a6a2dffa801c283b2a992934fad4f0c52" kindref="member">sparse_vector</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="824"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(</highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(_NEFORCE<sp/><ref refid="group___compare_algorithms_1ga852d6f970d2af419ffe467715fb10b01" kindref="member">lexicographical_compare</ref>(<ref refid="classsparse__vector_1a436c2c5fd1f70348643eaefc98f682b0" kindref="member">cbegin</ref>(),<sp/><ref refid="classsparse__vector_1af6dcae237bbd9a25a276d1ed8c2132af" kindref="member">cend</ref>(),<sp/>rhs.cbegin(),<sp/>rhs.cend())))<sp/>{</highlight></codeline>
+<codeline lineno="825"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>_NEFORCE<sp/><ref refid="group___compare_algorithms_1ga852d6f970d2af419ffe467715fb10b01" kindref="member">lexicographical_compare</ref>(<ref refid="classsparse__vector_1a436c2c5fd1f70348643eaefc98f682b0" kindref="member">cbegin</ref>(),<sp/><ref refid="classsparse__vector_1af6dcae237bbd9a25a276d1ed8c2132af" kindref="member">cend</ref>(),<sp/>rhs.cbegin(),<sp/>rhs.cend());</highlight></codeline>
+<codeline lineno="826"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="827"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="828"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>SparseVector</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="830"><highlight class="normal"></highlight></codeline>
+<codeline lineno="831"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="832"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_CONTAINER_SPARSE_VECTOR_HPP__</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_vector.hpp"/>
+  </compounddef>
+</doxygen>

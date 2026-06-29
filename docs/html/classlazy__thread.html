@@ -141,11 +141,10 @@ Public 成员函数</h2></td></tr>
 <li>需要将线程作为对象存储，但执行时机未定</li>
 <li>需要在不同作用域间传递线程任务</li>
 <li>需要在某些条件满足后才启动线程</li>
-<li>避免不必要的线程创建开销</li>
+<li>避免不必要的线程创建开销 </li>
 </ul>
-<dl class="section note"><dt>注解</dt><dd>lazy_thread在析构时会自动join而不是terminate。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00042">42</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00040">40</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a79f5dcfdf332aa22a250383562636bc9" name="a79f5dcfdf332aa22a250383562636bc9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a79f5dcfdf332aa22a250383562636bc9">&#9670;&#160;</a></span>lazy_thread() <span class="overload">[1/2]</span></h2>
@@ -193,7 +192,7 @@ template&lt;typename F, typename... Args&gt; </div>
 </dl>
 <p>创建延迟线程对象，存储可调用对象和参数，但不立即启动线程。 </p>
 
-<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00067">67</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00065">65</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="apply_8hpp_source.html#l00063">apply()</a>, <a class="el" href="type__traits_8hpp_source.html#l03028">forward()</a>, <a class="el" href="#ae8d01420c6d4f8815cecd42d78833ee2">lazy_thread()</a>, <a class="el" href="tuple_8hpp_source.html#l00750">make_tuple()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
@@ -288,7 +287,7 @@ template&lt;typename F, typename... Args&gt; </div>
 </dl>
 <p>使线程在后台独立运行，线程结束后自动释放资源。 </p>
 
-<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00129">129</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00127">127</a> 行定义.</p>
 
 </div>
 </div>
@@ -318,7 +317,7 @@ template&lt;typename F, typename... Args&gt; </div>
 <p>获取线程标识符 </p>
 <dl class="section return"><dt>返回</dt><dd>线程标识符 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00135">135</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00133">133</a> 行定义.</p>
 
 </div>
 </div>
@@ -354,7 +353,7 @@ template&lt;typename F, typename... Args&gt; </div>
 </dl>
 <p>阻塞当前线程，直到目标线程执行完毕。 </p>
 
-<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00121">121</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00119">119</a> 行定义.</p>
 
 </div>
 </div>
@@ -384,7 +383,7 @@ template&lt;typename F, typename... Args&gt; </div>
 <p>检查线程是否可被等待 </p>
 <dl class="section return"><dt>返回</dt><dd>线程已启动且尚未被等待或分离时返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00113">113</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00111">111</a> 行定义.</p>
 
 </div>
 </div>
@@ -482,7 +481,7 @@ template&lt;typename F, typename... Args&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00141">141</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lazy__thread_8hpp_source.html">lazy_thread.hpp</a> 第 <a class="el" href="lazy__thread_8hpp_source.html#l00139">139</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="#ae8d01420c6d4f8815cecd42d78833ee2">lazy_thread()</a> , 以及 <a class="el" href="group___swap_utility.html#ga6a39d376fb4396550fe3dadb383d17df">swap()</a>.</p>
 

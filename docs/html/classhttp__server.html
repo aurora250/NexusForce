@@ -98,6 +98,11 @@ $(function(){initNavTree('classhttp__server.html','','classhttp__server-members'
 
 <p><code>#include &lt;<a class="el" href="http__server_8hpp_source.html">http_server.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:session_5Fmanager" id="r_session_5Fmanager"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhttp__server_1_1session__manager.html">session_manager</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">会话管理器  <a href="structhttp__server_1_1session__manager.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public 类型</h2></td></tr>
 <tr class="memitem:a755df815f0f63dae3a202c876d4ad75b" id="r_a755df815f0f63dae3a202c876d4ad75b"><td class="memItemLeft"><a id="a755df815f0f63dae3a202c876d4ad75b" name="a755df815f0f63dae3a202c876d4ad75b"></a>
@@ -112,6 +117,12 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:aba4ee10f91e7ed646e3f49c5d7bf4a1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造HTTPS服务器  <br /></td></tr>
 <tr class="memitem:ad38cd02ebb3673ef7ce5b53546935b09" id="r_ad38cd02ebb3673ef7ce5b53546935b09"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ad38cd02ebb3673ef7ce5b53546935b09">load_certificate</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;cert_file, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;key_file)</td></tr>
 <tr class="memdesc:ad38cd02ebb3673ef7ce5b53546935b09"><td class="mdescLeft">&#160;</td><td class="mdescRight">加载SSL证书  <br /></td></tr>
+<tr class="memitem:a805f62b063a1bd5ed34d673c28304f0e" id="r_a805f62b063a1bd5ed34d673c28304f0e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a805f62b063a1bd5ed34d673c28304f0e">add_sni_host</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;hostname, <a class="el" href="classssl__context.html">ssl_context</a> ctx)</td></tr>
+<tr class="memdesc:a805f62b063a1bd5ed34d673c28304f0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加SNI多域名证书  <br /></td></tr>
+<tr class="memitem:a8eb76e0231a79eae2f3339bc52b27fe1" id="r_a8eb76e0231a79eae2f3339bc52b27fe1"><td class="memItemLeft"><a class="el" href="classsni__manager.html">sni_manager</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8eb76e0231a79eae2f3339bc52b27fe1">sni</a> () noexcept</td></tr>
+<tr class="memdesc:a8eb76e0231a79eae2f3339bc52b27fe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取SNI管理器  <br /></td></tr>
+<tr class="memitem:a7018dda9a7659df1a20edc0a050df359" id="r_a7018dda9a7659df1a20edc0a050df359"><td class="memItemLeft">const <a class="el" href="classsni__manager.html">sni_manager</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a7018dda9a7659df1a20edc0a050df359">sni</a> () const noexcept</td></tr>
+<tr class="memdesc:a7018dda9a7659df1a20edc0a050df359"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取SNI管理器常量引用  <br /></td></tr>
 <tr class="memitem:a8be106c4b1ae0ad44b6d1177237f3681" id="r_a8be106c4b1ae0ad44b6d1177237f3681"><td class="memItemLeft"><a class="el" href="classhttp__router.html">http_router</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8be106c4b1ae0ad44b6d1177237f3681">router</a> () noexcept</td></tr>
 <tr class="memdesc:a8be106c4b1ae0ad44b6d1177237f3681"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取路由器引用  <br /></td></tr>
 <tr class="memitem:ab0bdfb6ce456dadcc52483e7dc2a15c2" id="r_ab0bdfb6ce456dadcc52483e7dc2a15c2"><td class="memItemLeft">const <a class="el" href="classhttp__router.html">http_router</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab0bdfb6ce456dadcc52483e7dc2a15c2">router</a> () const noexcept</td></tr>
@@ -122,12 +133,18 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a4555bf3aa9e757021d7668978439dd01"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取WebSocket服务器常量引用  <br /></td></tr>
 <tr class="memitem:a8ae0b82bc4ef2d1ff3288b0689c82256" id="r_a8ae0b82bc4ef2d1ff3288b0689c82256"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8ae0b82bc4ef2d1ff3288b0689c82256">set_cookie_name</a> (<a class="el" href="structhttp__cookie__name.html">http_cookie_name</a> <a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>) noexcept</td></tr>
 <tr class="memdesc:a8ae0b82bc4ef2d1ff3288b0689c82256"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置会话Cookie名称  <br /></td></tr>
+<tr class="memitem:a5d56fef9bf624af16b404e1b55baaaea" id="r_a5d56fef9bf624af16b404e1b55baaaea"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5d56fef9bf624af16b404e1b55baaaea">set_session_store</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classsession__store.html">session_store</a> &gt; store) noexcept</td></tr>
+<tr class="memdesc:a5d56fef9bf624af16b404e1b55baaaea"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置自定义会话存储后端  <br /></td></tr>
+<tr class="memitem:a9b76e4fb7d4cfdd0e7fa64ef77067ae2" id="r_a9b76e4fb7d4cfdd0e7fa64ef77067ae2"><td class="memItemLeft">http::session_store *&#160;</td><td class="memItemRight"><a class="el" href="#a9b76e4fb7d4cfdd0e7fa64ef77067ae2">session_store</a> () noexcept</td></tr>
+<tr class="memdesc:a9b76e4fb7d4cfdd0e7fa64ef77067ae2"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取会话存储后端  <br /></td></tr>
 <tr class="memitem:a98ad1ce884f67e32cf822564062a0739" id="r_a98ad1ce884f67e32cf822564062a0739"><td class="memItemLeft">const <a class="el" href="structhttp__cookie__name.html">http_cookie_name</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a98ad1ce884f67e32cf822564062a0739">cookie_name</a> () const noexcept</td></tr>
 <tr class="memdesc:a98ad1ce884f67e32cf822564062a0739"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取会话Cookie名称  <br /></td></tr>
 <tr class="memitem:af27919173888fc86812614162e7973c0" id="r_af27919173888fc86812614162e7973c0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#af27919173888fc86812614162e7973c0">set_session_cleanup_interval</a> (<a class="el" href="group___duration.html#gafce1f041e55ef5a119744bb53b2aabd9">seconds</a> interval) noexcept</td></tr>
 <tr class="memdesc:af27919173888fc86812614162e7973c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置会话清理间隔  <br /></td></tr>
 <tr class="memitem:a5a233441cb3717e67bb65f80b4abdc86" id="r_a5a233441cb3717e67bb65f80b4abdc86"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5a233441cb3717e67bb65f80b4abdc86">set_max_sessions</a> (<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="group___compare_algorithms.html#ga01c48c11cc5d3222cb2e3adf0f843f3e">max</a>) noexcept</td></tr>
 <tr class="memdesc:a5a233441cb3717e67bb65f80b4abdc86"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置最大会话数  <br /></td></tr>
+<tr class="memitem:ab67a685cfba430d62d5eeddd68a040c0" id="r_ab67a685cfba430d62d5eeddd68a040c0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab67a685cfba430d62d5eeddd68a040c0">set_upgrade_handler</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> protocol, <a class="el" href="classfunction.html">function</a>&lt; bool(<a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;, <a class="el" href="classtcp__socket.html">tcp_socket</a> *)&gt; handler)</td></tr>
+<tr class="memdesc:ab67a685cfba430d62d5eeddd68a040c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册协议升级处理器  <br /></td></tr>
 <tr class="memitem:af11eee5a3759cd1bc598ae38fc3353b1" id="r_af11eee5a3759cd1bc598ae38fc3353b1"><td class="memItemLeft"><a class="el" href="structports.html">ports</a>&#160;</td><td class="memItemRight"><a class="el" href="#af11eee5a3759cd1bc598ae38fc3353b1">port</a> () const noexcept</td></tr>
 <tr class="memdesc:af11eee5a3759cd1bc598ae38fc3353b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取监听端口  <br /></td></tr>
 <tr class="memitem:ab5d0912bca865bd7ce0f15b5a1901b9e" id="r_ab5d0912bca865bd7ce0f15b5a1901b9e"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ab5d0912bca865bd7ce0f15b5a1901b9e">is_running</a> () const noexcept</td></tr>
@@ -155,6 +172,21 @@ Public 属性</h2></td></tr>
 <tr class="memitem:a6448c63c08a21979469e9e1ffc56012b" id="r_a6448c63c08a21979469e9e1ffc56012b"><td class="memItemLeft"><a id="a6448c63c08a21979469e9e1ffc56012b" name="a6448c63c08a21979469e9e1ffc56012b"></a>
 bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
 <tr class="memdesc:a6448c63c08a21979469e9e1ffc56012b"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否启用WebSocket <br /></td></tr>
+<tr class="memitem:a0934d8d1b244a08d0afae48a30fa5079" id="r_a0934d8d1b244a08d0afae48a30fa5079"><td class="memItemLeft"><a id="a0934d8d1b244a08d0afae48a30fa5079" name="a0934d8d1b244a08d0afae48a30fa5079"></a>
+bool&#160;</td><td class="memItemRight"><b>enable_connect</b> {true}</td></tr>
+<tr class="memdesc:a0934d8d1b244a08d0afae48a30fa5079"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否启用CONNECT隧道 <br /></td></tr>
+<tr class="memitem:a4c7a55e0e636062fc41a73052c8db5eb" id="r_a4c7a55e0e636062fc41a73052c8db5eb"><td class="memItemLeft"><a id="a4c7a55e0e636062fc41a73052c8db5eb" name="a4c7a55e0e636062fc41a73052c8db5eb"></a>
+<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><b>max_connections_per_ip</b> {0}</td></tr>
+<tr class="memdesc:a4c7a55e0e636062fc41a73052c8db5eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">每IP最大连接数（0=不限制） <br /></td></tr>
+<tr class="memitem:a86ca3163c5f7be5780cdb058658dd5ad" id="r_a86ca3163c5f7be5780cdb058658dd5ad"><td class="memItemLeft"><a id="a86ca3163c5f7be5780cdb058658dd5ad" name="a86ca3163c5f7be5780cdb058658dd5ad"></a>
+<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><b>max_header_count</b> {100}</td></tr>
+<tr class="memdesc:a86ca3163c5f7be5780cdb058658dd5ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">最大请求头数量 <br /></td></tr>
+<tr class="memitem:aa1aeb7838dd2859752984a79d582e509" id="r_aa1aeb7838dd2859752984a79d582e509"><td class="memItemLeft"><a id="aa1aeb7838dd2859752984a79d582e509" name="aa1aeb7838dd2859752984a79d582e509"></a>
+<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><b>max_h2c_upgrades</b> {32}</td></tr>
+<tr class="memdesc:aa1aeb7838dd2859752984a79d582e509"><td class="mdescLeft">&#160;</td><td class="mdescRight">最大h2c升级连接数 <br /></td></tr>
+<tr class="memitem:ac4e2c1a3d3c69eaa0238e1742c17c982" id="r_ac4e2c1a3d3c69eaa0238e1742c17c982"><td class="memItemLeft"><a id="ac4e2c1a3d3c69eaa0238e1742c17c982" name="ac4e2c1a3d3c69eaa0238e1742c17c982"></a>
+<a class="el" href="group___duration.html#ga0c9e480a0040ed5977448019fb74cd55">milliseconds</a>&#160;</td><td class="memItemRight"><b>body_read_timeout</b> {30000}</td></tr>
+<tr class="memdesc:ac4e2c1a3d3c69eaa0238e1742c17c982"><td class="mdescLeft">&#160;</td><td class="mdescRight">请求体读取超时（毫秒） <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>HTTP/HTTPS服务器类 </p>
@@ -182,21 +214,21 @@ bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 启动服务器</span></div>
 <div class="line"><a class="code hl_function" href="#a57e8f85d4c53505fcdc3d359a85c016f">server</a>.start();</div>
-<div class="ttc" id="aclasshttp__server_html_a57e8f85d4c53505fcdc3d359a85c016f"><div class="ttname"><a href="#a57e8f85d4c53505fcdc3d359a85c016f">http_server::server</a></div><div class="ttdeci">tcp_server_base * server() noexcept</div><div class="ttdoc">获取底层服务器指针</div><div class="ttdef"><b>定义</b> <a href="http__server_8hpp_source.html#l00248">http_server.hpp:248</a></div></div>
+<div class="ttc" id="aclasshttp__server_html_a57e8f85d4c53505fcdc3d359a85c016f"><div class="ttname"><a href="#a57e8f85d4c53505fcdc3d359a85c016f">http_server::server</a></div><div class="ttdeci">tcp_server_base * server() noexcept</div><div class="ttdoc">获取底层服务器指针</div><div class="ttdef"><b>定义</b> <a href="http__server_8hpp_source.html#l00322">http_server.hpp:322</a></div></div>
 <div class="ttc" id="aclasshttp__server_html_a7b7f5de4c7c6eadc0012134d33f96cc2"><div class="ttname"><a href="#a7b7f5de4c7c6eadc0012134d33f96cc2">http_server::http_server</a></div><div class="ttdeci">http_server(ports port, size_t worker_count=thread_pool::max_thread_threshhold())</div><div class="ttdoc">构造HTTP服务器</div></div>
-<div class="ttc" id="aclasswebsocket__server_html_ae34039860d8e90e6112af725a134005a"><div class="ttname"><a href="classwebsocket__server.html#ae34039860d8e90e6112af725a134005a">websocket_server::session_ptr</a></div><div class="ttdeci">shared_ptr&lt; websocket_session &gt; session_ptr</div><div class="ttdoc">会话智能指针类型</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00135">websocket.hpp:135</a></div></div>
+<div class="ttc" id="aclasswebsocket__server_html_ae34039860d8e90e6112af725a134005a"><div class="ttname"><a href="classwebsocket__server.html#ae34039860d8e90e6112af725a134005a">websocket_server::session_ptr</a></div><div class="ttdeci">shared_ptr&lt; websocket_session &gt; session_ptr</div><div class="ttdoc">会话智能指针类型</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00137">websocket.hpp:137</a></div></div>
 <div class="ttc" id="aclasswebsocket__session_html_a63462f1a714a2520dca8fd4c6e6a36f6"><div class="ttname"><a href="classwebsocket__session.html#a63462f1a714a2520dca8fd4c6e6a36f6">websocket_session::send</a></div><div class="ttdeci">bool send(const string &amp;data, websocket_opcode opcode=websocket_opcode::TEXT)</div><div class="ttdoc">发送文本/二进制消息</div></div>
-<div class="ttc" id="aclasswebsocket__session_html_aaebbcc5d2e0a943226e6d53d95066cca"><div class="ttname"><a href="classwebsocket__session.html#aaebbcc5d2e0a943226e6d53d95066cca">websocket_session::set_message_handler</a></div><div class="ttdeci">void set_message_handler(message_handler handler)</div><div class="ttdoc">设置消息处理器</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00322">websocket.hpp:322</a></div></div>
-<div class="ttc" id="agroup___h_t_t_p_html_ga215ee924d62c42786a46d2d18421391a"><div class="ttname"><a href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a></div><div class="ttdeci">http_server_response http_response</div><div class="ttdoc">HTTP响应类型别名</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00341">http_server_message.hpp:341</a></div></div>
-<div class="ttc" id="agroup___h_t_t_p_html_gad666b052985d05dd7564c4fd573c4549"><div class="ttname"><a href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a></div><div class="ttdeci">http_server_request http_request</div><div class="ttdoc">HTTP请求类型别名</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00335">http_server_message.hpp:335</a></div></div>
-<div class="ttc" id="agroup___web_socket_html_ga6f03b53401c24a4ee83541255774ef0f"><div class="ttname"><a href="group___web_socket.html#ga6f03b53401c24a4ee83541255774ef0f">websocket_opcode</a></div><div class="ttdeci">websocket_opcode</div><div class="ttdoc">WebSocket帧操作码</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00077">websocket.hpp:77</a></div></div>
+<div class="ttc" id="aclasswebsocket__session_html_aaebbcc5d2e0a943226e6d53d95066cca"><div class="ttname"><a href="classwebsocket__session.html#aaebbcc5d2e0a943226e6d53d95066cca">websocket_session::set_message_handler</a></div><div class="ttdeci">void set_message_handler(message_handler handler)</div><div class="ttdoc">设置消息处理器</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00357">websocket.hpp:357</a></div></div>
+<div class="ttc" id="agroup___h_t_t_p_html_ga215ee924d62c42786a46d2d18421391a"><div class="ttname"><a href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a></div><div class="ttdeci">http_server_response http_response</div><div class="ttdoc">HTTP响应类型别名</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00369">http_server_message.hpp:369</a></div></div>
+<div class="ttc" id="agroup___h_t_t_p_html_gad666b052985d05dd7564c4fd573c4549"><div class="ttname"><a href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a></div><div class="ttdeci">http_server_request http_request</div><div class="ttdoc">HTTP请求类型别名</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00363">http_server_message.hpp:363</a></div></div>
+<div class="ttc" id="agroup___web_socket_html_ga6f03b53401c24a4ee83541255774ef0f"><div class="ttname"><a href="group___web_socket.html#ga6f03b53401c24a4ee83541255774ef0f">websocket_opcode</a></div><div class="ttdeci">websocket_opcode</div><div class="ttdoc">WebSocket帧操作码</div><div class="ttdef"><b>定义</b> <a href="websocket_8hpp_source.html#l00079">websocket.hpp:79</a></div></div>
 <div class="ttc" id="astructhttp__content_html_a483cc76357457a343a5d4317804042af"><div class="ttname"><a href="structhttp__content.html#a483cc76357457a343a5d4317804042af">http_content::JSON_APP</a></div><div class="ttdeci">static const http_content &amp; JSON_APP()</div><div class="ttdoc">application/json</div></div>
 <div class="ttc" id="astructhttp__content_html_a93bc8d95236fa5c6cf1f80e798bd311e"><div class="ttname"><a href="structhttp__content.html#a93bc8d95236fa5c6cf1f80e798bd311e">http_content::HTML_TEXT</a></div><div class="ttdeci">static const http_content &amp; HTML_TEXT()</div><div class="ttdoc">text/html</div></div>
-<div class="ttc" id="astructhttp__server__response_html_a283b6cd33f07f80eb2024694dbff6c01"><div class="ttname"><a href="structhttp__server__response.html#a283b6cd33f07f80eb2024694dbff6c01">http_server_response::set_content_type</a></div><div class="ttdeci">void set_content_type(http_content value)</div><div class="ttdoc">设置Content-Type</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00313">http_server_message.hpp:313</a></div></div>
-<div class="ttc" id="astructhttp__server__response_html_a7eb8d64f75162d65e089ab24654ffb33"><div class="ttname"><a href="structhttp__server__response.html#a7eb8d64f75162d65e089ab24654ffb33">http_server_response::body</a></div><div class="ttdeci">string body</div><div class="ttdoc">响应正文</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00271">http_server_message.hpp:271</a></div></div>
+<div class="ttc" id="astructhttp__server__response_html_a283b6cd33f07f80eb2024694dbff6c01"><div class="ttname"><a href="structhttp__server__response.html#a283b6cd33f07f80eb2024694dbff6c01">http_server_response::set_content_type</a></div><div class="ttdeci">void set_content_type(http_content value)</div><div class="ttdoc">设置Content-Type</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00333">http_server_message.hpp:333</a></div></div>
+<div class="ttc" id="astructhttp__server__response_html_a7eb8d64f75162d65e089ab24654ffb33"><div class="ttname"><a href="structhttp__server__response.html#a7eb8d64f75162d65e089ab24654ffb33">http_server_response::body</a></div><div class="ttdeci">string body</div><div class="ttdoc">响应正文</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00290">http_server_message.hpp:290</a></div></div>
 <div class="ttc" id="astructports_html"><div class="ttname"><a href="structports.html">ports</a></div><div class="ttdoc">网络端口封装类</div><div class="ttdef"><b>定义</b> <a href="ports_8hpp_source.html#l00124">ports.hpp:124</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00068">68</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00071">71</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a7b7f5de4c7c6eadc0012134d33f96cc2" name="a7b7f5de4c7c6eadc0012134d33f96cc2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7b7f5de4c7c6eadc0012134d33f96cc2">&#9670;&#160;</a></span>http_server() <span class="overload">[1/2]</span></h2>
@@ -234,7 +266,7 @@ bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="http__server_8hpp_source.html#l00216">port()</a>.</p>
+<p class="reference">引用了 <a class="el" href="http__server_8hpp_source.html#l00290">port()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#aba4ee10f91e7ed646e3f49c5d7bf4a1f">http_server()</a>.</p>
 
@@ -274,11 +306,56 @@ bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="#a7b7f5de4c7c6eadc0012134d33f96cc2">http_server()</a> , 以及 <a class="el" href="http__server_8hpp_source.html#l00216">port()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#a7b7f5de4c7c6eadc0012134d33f96cc2">http_server()</a> , 以及 <a class="el" href="http__server_8hpp_source.html#l00290">port()</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a805f62b063a1bd5ed34d673c28304f0e" name="a805f62b063a1bd5ed34d673c28304f0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a805f62b063a1bd5ed34d673c28304f0e">&#9670;&#160;</a></span>add_sni_host()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void http_server::add_sni_host </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>hostname</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classssl__context.html">ssl_context</a></td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>添加SNI多域名证书 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hostname</td><td>域名（如 "example.com"） </td></tr>
+    <tr><td class="paramname">ctx</td><td>该域名的SSL上下文</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>允许同一端口为不同域名提供不同证书。 在TLS握手时根据客户端SNI自动选择对应证书。 </p>
+
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00197">197</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="http__server_8hpp_source.html#l00197">add_sni_host()</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="http__server_8hpp_source.html#l00197">add_sni_host()</a>.</p>
+
+</div>
+</div>
 <a id="a98ad1ce884f67e32cf822564062a0739" name="a98ad1ce884f67e32cf822564062a0739"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a98ad1ce884f67e32cf822564062a0739">&#9670;&#160;</a></span>cookie_name()</h2>
 
@@ -305,7 +382,7 @@ bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
 <p>获取会话Cookie名称 </p>
 <dl class="section return"><dt>返回</dt><dd>Cookie名称 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00198">198</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00260">260</a> 行定义.</p>
 
 </div>
 </div>
@@ -374,7 +451,7 @@ bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
 <p>检查服务器是否运行中 </p>
 <dl class="section return"><dt>返回</dt><dd>运行中返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00222">222</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00296">296</a> 行定义.</p>
 
 </div>
 </div>
@@ -439,7 +516,7 @@ bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
 <p>获取监听端口 </p>
 <dl class="section return"><dt>返回</dt><dd>端口号 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00216">216</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00290">290</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="ports_8hpp_source.html#l00164">ports::port</a>.</p>
 
@@ -473,7 +550,7 @@ bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
 <p>获取路由器常量引用 </p>
 <dl class="section return"><dt>返回</dt><dd>路由器常量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00174">174</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00221">221</a> 行定义.</p>
 
 </div>
 </div>
@@ -503,11 +580,7 @@ bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
 <p>获取路由器引用 </p>
 <dl class="section return"><dt>返回</dt><dd>路由器引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00168">168</a> 行定义.</p>
-
-<p class="reference">引用了 <a class="el" href="http__server_8hpp_source.html#l00168">router()</a>.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="http__server_8hpp_source.html#l00168">router()</a>.</p>
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00215">215</a> 行定义.</p>
 
 </div>
 </div>
@@ -537,7 +610,7 @@ bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
 <p>获取底层服务器常量指针 </p>
 <dl class="section return"><dt>返回</dt><dd>服务器常量指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00254">254</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00328">328</a> 行定义.</p>
 
 </div>
 </div>
@@ -567,7 +640,37 @@ bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
 <p>获取底层服务器指针 </p>
 <dl class="section return"><dt>返回</dt><dd>服务器指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00248">248</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00322">322</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9b76e4fb7d4cfdd0e7fa64ef77067ae2" name="a9b76e4fb7d4cfdd0e7fa64ef77067ae2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b76e4fb7d4cfdd0e7fa64ef77067ae2">&#9670;&#160;</a></span>session_store()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">http::session_store * http_server::session_store </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取会话存储后端 </p>
+<dl class="section return"><dt>返回</dt><dd>存储后端指针，未设置返回nullptr </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00254">254</a> 行定义.</p>
 
 </div>
 </div>
@@ -602,9 +705,9 @@ bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00192">192</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00239">239</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -639,7 +742,7 @@ bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00210">210</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00272">272</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="compare_8hpp_source.html#l00133">max()</a>.</p>
 
@@ -676,7 +779,148 @@ bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00204">204</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00266">266</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5d56fef9bf624af16b404e1b55baaaea" name="a5d56fef9bf624af16b404e1b55baaaea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d56fef9bf624af16b404e1b55baaaea">&#9670;&#160;</a></span>set_session_store()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void http_server::set_session_store </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classsession__store.html">session_store</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>store</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置自定义会话存储后端 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">store</td><td>会话存储实现</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>可传入 <a class="el" href="classredis__session__store.html" title="Redis后端会话存储">redis_session_store</a> 等实现以实现分布式会话。 不设置则使用默认内存存储（session_manager内置）。 </p>
+
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00248">248</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+
+</div>
+</div>
+<a id="ab67a685cfba430d62d5eeddd68a040c0" name="ab67a685cfba430d62d5eeddd68a040c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab67a685cfba430d62d5eeddd68a040c0">&#9670;&#160;</a></span>set_upgrade_handler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void http_server::set_upgrade_handler </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>protocol</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfunction.html">function</a>&lt; bool(<a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;, <a class="el" href="classtcp__socket.html">tcp_socket</a> *)&gt;</td>          <td class="paramname"><span class="paramname"><em>handler</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>注册协议升级处理器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">protocol</td><td>协议名（如 "websocket", "h2c"） </td></tr>
+    <tr><td class="paramname">handler</td><td>处理器函数，接收请求和socket，返回true表示已处理</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>服务器收到 Upgrade 请求时，按 Upgrade 头部值查找并调用对应处理器。 WebSocket 升级处理器已默认注册（当 enable_websocket 为 true 时）。 </p>
+
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00282">282</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+
+</div>
+</div>
+<a id="a7018dda9a7659df1a20edc0a050df359" name="a7018dda9a7659df1a20edc0a050df359"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7018dda9a7659df1a20edc0a050df359">&#9670;&#160;</a></span>sni() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classsni__manager.html">sni_manager</a> &amp; http_server::sni </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取SNI管理器常量引用 </p>
+<dl class="section return"><dt>返回</dt><dd>SNI管理器常量引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00209">209</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8eb76e0231a79eae2f3339bc52b27fe1" name="a8eb76e0231a79eae2f3339bc52b27fe1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8eb76e0231a79eae2f3339bc52b27fe1">&#9670;&#160;</a></span>sni() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classsni__manager.html">sni_manager</a> &amp; http_server::sni </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取SNI管理器 </p>
+<dl class="section return"><dt>返回</dt><dd>SNI管理器引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00203">203</a> 行定义.</p>
 
 </div>
 </div>
@@ -712,7 +956,7 @@ bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>启动成功返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00237">237</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00311">311</a> 行定义.</p>
 
 </div>
 </div>
@@ -742,7 +986,7 @@ bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
 <p>获取WebSocket服务器常量引用 </p>
 <dl class="section return"><dt>返回</dt><dd>WebSocket服务器常量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00186">186</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00233">233</a> 行定义.</p>
 
 </div>
 </div>
@@ -772,7 +1016,7 @@ bool&#160;</td><td class="memItemRight"><b>enable_websocket</b> {true}</td></tr>
 <p>获取WebSocket服务器引用 </p>
 <dl class="section return"><dt>返回</dt><dd>WebSocket服务器引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00180">180</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server_8hpp_source.html">http_server.hpp</a> 第 <a class="el" href="http__server_8hpp_source.html#l00227">227</a> 行定义.</p>
 
 </div>
 </div>

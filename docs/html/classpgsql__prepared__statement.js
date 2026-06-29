@@ -10,7 +10,7 @@ var classpgsql__prepared__statement =
     [ "bind_param", "classpgsql__prepared__statement.html#a158179900bee192490f766ab9fbae959", null ],
     [ "bind_param", "classpgsql__prepared__statement.html#a155adacd26169d3b26cd2fd89f7f8cdd", null ],
     [ "execute", "classpgsql__prepared__statement.html#a4dec6eebfb652d049b6af57f78c9537d", null ],
-    [ "execute_query", "classpgsql__prepared__statement.html#a49d169a0457f178f08e7aef6b14f7977", null ],
+    [ "execute_query", "classpgsql__prepared__statement.html#acc72fac3d313a758770409ff7e0a3fee", null ],
     [ "get_errno", "classpgsql__prepared__statement.html#a4f9deb46a2aa67cab9620729a4b85cf4", null ],
     [ "get_error", "classpgsql__prepared__statement.html#a2fe0f607ab726bce954ab0cf18e532b6", null ],
     [ "param_count", "classpgsql__prepared__statement.html#abac49e30b43317bd7293f1c9fb653627", null ]

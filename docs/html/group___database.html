@@ -120,6 +120,10 @@ $(function(){initNavTree('group___database.html','',''); });
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">数据库连接池类  <a href="classdatabase__pool.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:db_5Fconfig" id="r_db_5Fconfig"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structdb__config.html">db_config</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">数据库连接配置结构  <a href="structdb__config.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:scope_5Ftransaction_3C_20Connect_20_3E" id="r_scope_5Ftransaction_3C_20Connect_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classscope__transaction.html">scope_transaction&lt; Connect &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">RAII事务作用域守卫  <a href="classscope__transaction.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:sql_5Fconnect_5Fbase_3C_20Derived_20_3E" id="r_sql_5Fconnect_5Fbase_3C_20Derived_20_3E"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsql__connect__base.html">sql_connect_base&lt; Derived &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SQL连接CRTP基类  <a href="structsql__connect__base.html#details">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
 枚举</h2></td></tr>
@@ -129,6 +133,12 @@ $(function(){initNavTree('group___database.html','',''); });
 , <a class="el" href="#gga80fcb4d728eaac384a3edc19d9ad20c6a3efccad6e4b6b2044be88d6b86505a5b">db_type::POSTGRESQL</a>
  }</td></tr>
 <tr class="memdesc:ga80fcb4d728eaac384a3edc19d9ad20c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">数据库类型枚举  <a href="#ga80fcb4d728eaac384a3edc19d9ad20c6">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:gaa1e47283613e08a62f8d0d9c91934d54" id="r_gaa1e47283613e08a62f8d0d9c91934d54"><td class="memTemplParams" colspan="2">template&lt;typename Connect&gt; </td></tr>
+<tr class="memitem:gaa1e47283613e08a62f8d0d9c91934d54 template"><td class="memItemLeft"><a class="el" href="classscope__transaction.html">scope_transaction</a>&lt; Connect &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaa1e47283613e08a62f8d0d9c91934d54">make_transaction</a> (Connect &amp;conn)</td></tr>
+<tr class="memdesc:gaa1e47283613e08a62f8d0d9c91934d54"><td class="mdescLeft">&#160;</td><td class="mdescRight">事务守卫的便捷构造函数  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>数据库相关功能 </p>
@@ -167,6 +177,45 @@ $(function(){initNavTree('group___database.html','',''); });
 </table>
 
 <p class="definition">在文件 <a class="el" href="db__config_8hpp_source.html">db_config.hpp</a> 第 <a class="el" href="db__config_8hpp_source.html#l00069">69</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
+<a id="gaa1e47283613e08a62f8d0d9c91934d54" name="gaa1e47283613e08a62f8d0d9c91934d54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa1e47283613e08a62f8d0d9c91934d54">&#9670;&#160;</a></span>make_transaction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename Connect&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classscope__transaction.html">scope_transaction</a>&lt; Connect &gt; make_transaction </td>
+          <td>(</td>
+          <td class="paramtype">Connect &amp;</td>          <td class="paramname"><span class="paramname"><em>conn</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>事务守卫的便捷构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">conn</td><td>数据库连接引用 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd><a class="el" href="classscope__transaction.html" title="RAII事务作用域守卫">scope_transaction</a> 对象 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="scope__transaction_8hpp_source.html">scope_transaction.hpp</a> 第 <a class="el" href="scope__transaction_8hpp_source.html#l00147">147</a> 行定义.</p>
 
 </div>
 </div>

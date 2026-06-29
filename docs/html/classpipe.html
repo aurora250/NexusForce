@@ -93,7 +93,7 @@ $(function(){initNavTree('classpipe.html','','classpipe-members'); });
 </div><!--header-->
 <div class="contents">
 
-<p>阻塞式匿名管道类  
+<p>匿名管道类  
  <a href="#details">更多...</a></p>
 
 <p><code>#include &lt;<a class="el" href="pipe_8hpp_source.html">pipe.hpp</a>&gt;</code></p>
@@ -102,8 +102,8 @@ $(function(){initNavTree('classpipe.html','','classpipe-members'); });
 Public 成员函数</h2></td></tr>
 <tr class="memitem:ac5d9d07c3c3e62c20eea26bbb9ed3cd1" id="r_ac5d9d07c3c3e62c20eea26bbb9ed3cd1"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac5d9d07c3c3e62c20eea26bbb9ed3cd1">pipe</a> () noexcept=default</td></tr>
 <tr class="memdesc:ac5d9d07c3c3e62c20eea26bbb9ed3cd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
-<tr class="memitem:a3b8b6a7669b8d4d3ed101459ffac070f" id="r_a3b8b6a7669b8d4d3ed101459ffac070f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a3b8b6a7669b8d4d3ed101459ffac070f">pipe</a> (bool inheritable)</td></tr>
-<tr class="memdesc:a3b8b6a7669b8d4d3ed101459ffac070f"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建管道  <br /></td></tr>
+<tr class="memitem:abadef720785183f084589d9efccf4bdb" id="r_abadef720785183f084589d9efccf4bdb"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#abadef720785183f084589d9efccf4bdb">pipe</a> (bool inheritable, bool nonblocking=false)</td></tr>
+<tr class="memdesc:abadef720785183f084589d9efccf4bdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建管道并设置非阻塞模式  <br /></td></tr>
 <tr class="memitem:ab46b67e9dc7bf3134a6f6db0fedcc63a" id="r_ab46b67e9dc7bf3134a6f6db0fedcc63a"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab46b67e9dc7bf3134a6f6db0fedcc63a">~pipe</a> ()</td></tr>
 <tr class="memdesc:ab46b67e9dc7bf3134a6f6db0fedcc63a"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数  <br /></td></tr>
 <tr class="memitem:a59aa4a3973bc2d4501e02e773d3c59ed" id="r_a59aa4a3973bc2d4501e02e773d3c59ed"><td class="memItemLeft"><a id="a59aa4a3973bc2d4501e02e773d3c59ed" name="a59aa4a3973bc2d4501e02e773d3c59ed"></a>
@@ -116,6 +116,10 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a16c487e5806079fbfd62005d8bffe0e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">从管道读取数据  <br /></td></tr>
 <tr class="memitem:ad06e875806e4a3fb168719d68ee486ea" id="r_ad06e875806e4a3fb168719d68ee486ea"><td class="memItemLeft"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad06e875806e4a3fb168719d68ee486ea">read_available</a> ()</td></tr>
 <tr class="memdesc:ad06e875806e4a3fb168719d68ee486ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">从管道读取所有可用数据（非阻塞）  <br /></td></tr>
+<tr class="memitem:a151ca6d1d76618d3b8cf2add49eac2a2" id="r_a151ca6d1d76618d3b8cf2add49eac2a2"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a151ca6d1d76618d3b8cf2add49eac2a2">set_nonblocking</a> (bool v) noexcept</td></tr>
+<tr class="memdesc:a151ca6d1d76618d3b8cf2add49eac2a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置管道非阻塞模式  <br /></td></tr>
+<tr class="memitem:a876e2c5efd60a5276cea6e28d2316ab6" id="r_a876e2c5efd60a5276cea6e28d2316ab6"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a876e2c5efd60a5276cea6e28d2316ab6">is_nonblocking</a> () const noexcept</td></tr>
+<tr class="memdesc:a876e2c5efd60a5276cea6e28d2316ab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询管道是否处于非阻塞模式  <br /></td></tr>
 <tr class="memitem:a6834b8e2df04604f490e8eef1e63b148" id="r_a6834b8e2df04604f490e8eef1e63b148"><td class="memItemLeft">int&#160;</td><td class="memItemRight"><a class="el" href="#a6834b8e2df04604f490e8eef1e63b148">write</a> (const void *<a class="el" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="group___type_erasure_functions.html#ga630d7b0d77515784d2391b3725ac6df0">size</a>) noexcept</td></tr>
 <tr class="memdesc:a6834b8e2df04604f490e8eef1e63b148"><td class="mdescLeft">&#160;</td><td class="mdescRight">向管道写入数据  <br /></td></tr>
 <tr class="memitem:aab7159a1c68f474b1fb785724954ed96" id="r_aab7159a1c68f474b1fb785724954ed96"><td class="memItemLeft"><a id="aab7159a1c68f474b1fb785724954ed96" name="aab7159a1c68f474b1fb785724954ed96"></a>
@@ -148,10 +152,10 @@ native_handle_type&#160;</td><td class="memItemRight"><b>detach_write_handle</b>
 <tr class="memdesc:a8e117ee0b2cb2b6d56b20d0ef577ea0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">忽略 SIGPIPE 信号  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
-<div class="textblock"><p>阻塞式匿名管道类 </p>
-<p>支持管道的创建、读写和关闭。 </p>
+<div class="textblock"><p>匿名管道类 </p>
+<p>支持管道的创建、读写和关闭。 默认创建阻塞式管道，可通过参数或 <a class="el" href="#a151ca6d1d76618d3b8cf2add49eac2a2" title="设置管道非阻塞模式">set_nonblocking()</a> 切换非阻塞模式。 </p>
 
-<p class="definition">在文件 <a class="el" href="pipe_8hpp_source.html">pipe.hpp</a> 第 <a class="el" href="pipe_8hpp_source.html#l00050">50</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="pipe_8hpp_source.html">pipe.hpp</a> 第 <a class="el" href="pipe_8hpp_source.html#l00051">51</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="ac5d9d07c3c3e62c20eea26bbb9ed3cd1" name="ac5d9d07c3c3e62c20eea26bbb9ed3cd1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac5d9d07c3c3e62c20eea26bbb9ed3cd1">&#9670;&#160;</a></span>pipe() <span class="overload">[1/2]</span></h2>
@@ -179,12 +183,12 @@ native_handle_type&#160;</td><td class="memItemRight"><b>detach_write_handle</b>
 <p>默认构造函数 </p>
 <p>创建一个未初始化的管道对象。 </p>
 
-<p class="reference">被这些函数引用 <a class="el" href="#a700d9f262f874c54517b8903fdb131a6">operator=()</a>, <a class="el" href="#a3b8b6a7669b8d4d3ed101459ffac070f">pipe()</a>, <a class="el" href="#a59aa4a3973bc2d4501e02e773d3c59ed">pipe()</a> , 以及 <a class="el" href="#ab46b67e9dc7bf3134a6f6db0fedcc63a">~pipe()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#a700d9f262f874c54517b8903fdb131a6">operator=()</a>, <a class="el" href="#abadef720785183f084589d9efccf4bdb">pipe()</a>, <a class="el" href="#a59aa4a3973bc2d4501e02e773d3c59ed">pipe()</a> , 以及 <a class="el" href="#ab46b67e9dc7bf3134a6f6db0fedcc63a">~pipe()</a>.</p>
 
 </div>
 </div>
-<a id="a3b8b6a7669b8d4d3ed101459ffac070f" name="a3b8b6a7669b8d4d3ed101459ffac070f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b8b6a7669b8d4d3ed101459ffac070f">&#9670;&#160;</a></span>pipe() <span class="overload">[2/2]</span></h2>
+<a id="abadef720785183f084589d9efccf4bdb" name="abadef720785183f084589d9efccf4bdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abadef720785183f084589d9efccf4bdb">&#9670;&#160;</a></span>pipe() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -195,8 +199,12 @@ native_handle_type&#160;</td><td class="memItemRight"><b>detach_write_handle</b>
         <tr>
           <td class="memname">pipe::pipe </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>inheritable</em></span></td><td>)</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>inheritable</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>nonblocking</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -206,19 +214,21 @@ native_handle_type&#160;</td><td class="memItemRight"><b>detach_write_handle</b>
 </table>
 </div><div class="memdoc">
 
-<p>创建管道 </p>
+<p>创建管道并设置非阻塞模式 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
     <tr><td class="paramname">inheritable</td><td>子进程是否可继承（Windows） </td></tr>
+    <tr><td class="paramname">nonblocking</td><td>是否启用非阻塞模式 </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="exception"><dt>异常</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="structpipe__exception.html" title="管道操作异常">pipe_exception</a></td><td>创建失败时抛出 </td></tr>
+    <tr><td class="paramname"><a class="el" href="structpipe__exception.html" title="管道操作异常">pipe_exception</a></td><td>创建失败时抛出</td></tr>
   </table>
   </dd>
 </dl>
+<p>非阻塞模式下，read() 在无数据可用时返回 0 而非阻塞等待， <a class="el" href="#a6834b8e2df04604f490e8eef1e63b148" title="向管道写入数据">write()</a> 在缓冲区满时返回 0 而非阻塞等待。 </p>
 
 <p class="reference">引用了 <a class="el" href="#ac5d9d07c3c3e62c20eea26bbb9ed3cd1">pipe()</a>.</p>
 
@@ -276,6 +286,40 @@ native_handle_type&#160;</td><td class="memItemRight"><b>detach_write_handle</b>
 <p class="reference">引用了 <a class="el" href="#a8e117ee0b2cb2b6d56b20d0ef577ea0d">ignore_sigpipe()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#a8e117ee0b2cb2b6d56b20d0ef577ea0d">ignore_sigpipe()</a>.</p>
+
+</div>
+</div>
+<a id="a876e2c5efd60a5276cea6e28d2316ab6" name="a876e2c5efd60a5276cea6e28d2316ab6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a876e2c5efd60a5276cea6e28d2316ab6">&#9670;&#160;</a></span>is_nonblocking()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool pipe::is_nonblocking </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查询管道是否处于非阻塞模式 </p>
+<dl class="section return"><dt>返回</dt><dd>是否非阻塞 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="pipe_8hpp_source.html">pipe.hpp</a> 第 <a class="el" href="pipe_8hpp_source.html#l00140">140</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="pipe_8hpp_source.html#l00140">is_nonblocking()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="pipe_8hpp_source.html#l00140">is_nonblocking()</a>.</p>
 
 </div>
 </div>
@@ -386,6 +430,45 @@ native_handle_type&#160;</td><td class="memItemRight"><b>detach_write_handle</b>
 
 </div>
 </div>
+<a id="a151ca6d1d76618d3b8cf2add49eac2a2" name="a151ca6d1d76618d3b8cf2add49eac2a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a151ca6d1d76618d3b8cf2add49eac2a2">&#9670;&#160;</a></span>set_nonblocking()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool pipe::set_nonblocking </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置管道非阻塞模式 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>是否启用非阻塞模式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否设置成功</dd></dl>
+<p>设置后 <a class="el" href="#a16c487e5806079fbfd62005d8bffe0e5" title="从管道读取数据">read()</a> 在无数据可用时立即返回 0 而非阻塞， <a class="el" href="#a6834b8e2df04604f490e8eef1e63b148" title="向管道写入数据">write()</a> 在缓冲区满时立即返回 0 而非阻塞。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a151ca6d1d76618d3b8cf2add49eac2a2">set_nonblocking()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a151ca6d1d76618d3b8cf2add49eac2a2">set_nonblocking()</a>.</p>
+
+</div>
+</div>
 <a id="a6834b8e2df04604f490e8eef1e63b148" name="a6834b8e2df04604f490e8eef1e63b148"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6834b8e2df04604f490e8eef1e63b148">&#9670;&#160;</a></span>write()</h2>
 
@@ -423,9 +506,7 @@ native_handle_type&#160;</td><td class="memItemRight"><b>detach_write_handle</b>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>实际写入的字节数，-1表示错误 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>, <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a> , 以及 <a class="el" href="#a6834b8e2df04604f490e8eef1e63b148">write()</a>.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="#a6834b8e2df04604f490e8eef1e63b148">write()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a> , 以及 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
 
 </div>
 </div>

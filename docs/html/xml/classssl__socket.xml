@@ -272,6 +272,24 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="135" column="13"/>
       </memberdef>
+      <memberdef kind="function" id="classssl__socket_1a0b831adb2b2de3d7aa0741de765afde2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string ssl_socket::get_alpn_negotiated</definition>
+        <argsstring>() const</argsstring>
+        <name>get_alpn_negotiated</name>
+        <qualifiedname>ssl_socket::get_alpn_negotiated</qualifiedname>
+        <briefdescription>
+<para>获取ALPN协商的协议名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>协议名称字符串（如&quot;h2&quot;、&quot;http/1.1&quot;），未协商返回空字符串</para>
+</simplesect>
+TLS握手完成后通过ALPN协商确定的应用层协议。 需要在init_server_ssl()或init_client_ssl()之后调用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="144" column="13"/>
+      </memberdef>
       <memberdef kind="function" id="classssl__socket_1a23a2685c9657643210f24d9f52e9acd9" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___platform_dependent_types_1ga2f30f05ade8bbe5bda5e59d2698af9f5" kindref="member">ssize_t</ref></type>
         <definition>ssize_t ssl_socket::send</definition>
@@ -324,7 +342,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="146" column="13"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="155" column="13"/>
         <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
       </memberdef>
       <memberdef kind="function" id="classssl__socket_1a0607573c4459e1ea3cb7c95dceaf3f8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
@@ -379,7 +397,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="157" column="13"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="166" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classssl__socket_1ac93b5cdb322b13fce97428b4b366c228" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -396,7 +414,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="164" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="173" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classssl__socket_1adb1487480405a5778013113b583fed8c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -415,9 +433,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="170" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" bodystart="170" bodyend="170"/>
-        <references refid="classssl__socket_1adb1487480405a5778013113b583fed8c" compoundref="ssl__socket_8hpp" startline="170" endline="170">is_ssl</references>
-        <referencedby refid="classssl__socket_1adb1487480405a5778013113b583fed8c" compoundref="ssl__socket_8hpp" startline="170" endline="170">is_ssl</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="179" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" bodystart="179" bodyend="179"/>
+        <references refid="classssl__socket_1adb1487480405a5778013113b583fed8c" compoundref="ssl__socket_8hpp" startline="179" endline="179">is_ssl</references>
+        <referencedby refid="classssl__socket_1adb1487480405a5778013113b583fed8c" compoundref="ssl__socket_8hpp" startline="179" endline="179">is_ssl</referencedby>
       </memberdef>
       <memberdef kind="function" id="classssl__socket_1a83b1e2549b67189b505a0a1b3b117df4" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classssl__stream" kindref="compound">ssl_stream</ref> &amp;</type>
@@ -444,7 +462,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="177" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" bodystart="177" bodyend="182"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="186" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" bodystart="186" bodyend="191"/>
       </memberdef>
       <memberdef kind="function" id="classssl__socket_1adfc138e89dbf0d8244579797a39d2878" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>const <ref refid="classssl__stream" kindref="compound">ssl_stream</ref> &amp;</type>
@@ -471,7 +489,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="189" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" bodystart="189" bodyend="194"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="198" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" bodystart="198" bodyend="203"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -491,7 +509,7 @@
 <codeline><highlight class="normal">ctx.load_verify_locations(</highlight><highlight class="stringliteral">&quot;ca-bundle.crt&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"><ref refid="classssl__socket_1a1917d1f6f10b83ef3a396fe9fbc1d7d8" kindref="member">ssl_socket</ref><sp/>client;</highlight></codeline>
-<codeline><highlight class="normal">client.<ref refid="classtcp__socket_1a4d419854509a10778b43c8561f9794b3" kindref="member">open</ref>(AF_INET);</highlight></codeline>
+<codeline><highlight class="normal">client.<ref refid="classtcp__socket_1a34441a6c2a85f433b36b687aa7555193" kindref="member">open</ref>(AF_INET);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>server<sp/>=<sp/><ref refid="classip__address_1add2ce58669f6042593d6970743e7311a" kindref="member">ip_address::parse</ref>(</highlight><highlight class="stringliteral">&quot;example.com&quot;</highlight><highlight class="normal">,<sp/>ports::https);</highlight></codeline>
 <codeline><highlight class="normal">client.<ref refid="classtcp__socket_1a5edcc5a4efa0c0cdb1cf61f7fa07c66b" kindref="member">connect</ref>(*server,<sp/><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref>(3000));</highlight></codeline>
@@ -516,7 +534,7 @@
 <codeline><highlight class="normal">server_ctx.load_certificate(</highlight><highlight class="stringliteral">&quot;server.crt&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;server.key&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal">ssl_acceptor<sp/>acceptor;</highlight></codeline>
-<codeline><highlight class="normal">acceptor.<ref refid="classtcp__acceptor_1a01f29ebfd1e0f953d9f1f5ca7ec9896a" kindref="member">open</ref>(<ref refid="classip__address_1a845df218a59fa6cc3101db811e0d2ae6" kindref="member">ip_address::any</ref>(ports::https));</highlight></codeline>
+<codeline><highlight class="normal">acceptor.<ref refid="classtcp__acceptor_1a01f29ebfd1e0f953d9f1f5ca7ec9896a" kindref="member">open</ref>(<ref refid="classip__address_1a4336be517fcb42921bc9ed6a354c6302" kindref="member">ip_address::any</ref>(ports::https));</highlight></codeline>
 <codeline><highlight class="normal"></highlight></codeline>
 <codeline><highlight class="normal"></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>client_sock<sp/>=<sp/>acceptor.<ref refid="classssl__acceptor_1a839b43648acf22c7fc584dd90963cd04" kindref="member">accept_ssl</ref>();</highlight></codeline>
 <codeline><highlight class="normal">client_sock.set_ssl_context(server_ctx);</highlight></codeline>
@@ -572,16 +590,26 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="73" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" bodystart="73" bodyend="195"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" line="73" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_socket.hpp" bodystart="73" bodyend="204"/>
     <listofallmembers>
-      <member refid="classip__socket_1a415f4ab8b75623a4474eabaa211c1323" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>address_family</name></member>
+      <member refid="classip__socket_1ad0d10499d585a7074c06152831e3dd88" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>address_family</name></member>
       <member refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>bind</name></member>
       <member refid="classssl__socket_1ac93b5cdb322b13fce97428b4b366c228" prot="public" virt="virtual"><scope>ssl_socket</scope><name>close</name></member>
       <member refid="classtcp__socket_1a5edcc5a4efa0c0cdb1cf61f7fa07c66b" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>connect</name></member>
       <member refid="classip__socket_1a50186a110e9b4e5c67aac5a23e021ace" prot="public" virt="virtual" ambiguityscope="ip_socket::"><scope>ssl_socket</scope><name>connect</name></member>
-      <member refid="classip__socket_1a5bef8064a2f2e096f28993a0f6542c87" prot="protected" virt="non-virtual"><scope>ssl_socket</scope><name>family_</name></member>
+      <member refid="classsocket__base_1a815042c384cb1e40434411f9d1cfa80d" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>family</name></member>
+      <member refid="classip__socket_1aed1326839217c5f0793747181f6e1526" prot="protected" virt="non-virtual"><scope>ssl_socket</scope><name>family_</name></member>
       <member refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" prot="protected" virt="non-virtual"><scope>ssl_socket</scope><name>fd_</name></member>
+      <member refid="classssl__socket_1a0b831adb2b2de3d7aa0741de765afde2" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>get_alpn_negotiated</name></member>
+      <member refid="classsocket__base_1ac3103b62e4c1d6e4caef07281239ba96" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>get_keep_alive</name></member>
       <member refid="classsocket__base_1aef8dd076d9cadcea38fa14252718466c" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>get_option</name></member>
+      <member refid="classsocket__base_1a0bde21c6d19832760c24dfc205f27854" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>get_receive_buffer_size</name></member>
+      <member refid="classsocket__base_1a1626b586842a2342e12b59ab03e3c027" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>get_receive_timeout</name></member>
+      <member refid="classsocket__base_1ad6fc69fa955b9f3afc3d63c02d0addd3" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>get_reuse_address</name></member>
+      <member refid="classsocket__base_1ad1f28d1eea43b63bc7050510c480e0ae" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>get_reuse_port</name></member>
+      <member refid="classsocket__base_1af53a6dca22c01edc531761e6dd3ea491" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>get_send_buffer_size</name></member>
+      <member refid="classsocket__base_1acd796a65b1b2e380cecc38048065a458" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>get_send_timeout</name></member>
+      <member refid="classsocket__base_1ad83b27288c18c1f00fd2659c1482673f" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>get_tcp_nodelay</name></member>
       <member refid="classssl__socket_1a33d98abb79c38434ba74f2eb5834261e" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>init_client_ssl</name></member>
       <member refid="classssl__socket_1a2d62a9aa4ed97ff2e56f51cdacd833bf" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>init_server_ssl</name></member>
       <member refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>invalid_handle</name></member>
@@ -591,15 +619,17 @@
       <member refid="classip__socket_1aae6b6a8b9b8bea4d66dba690c8222980" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>ip_socket</name></member>
       <member refid="classip__socket_1a085fd937f8c8e4f6c0f0d27f91249bd9" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>is_ipv4</name></member>
       <member refid="classip__socket_1a2022ec8175200f4d69e925e3375f81b2" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>is_ipv6</name></member>
+      <member refid="classsocket__base_1ab5a66ef60a4b340dbcea96f0d5104435" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>is_nonblocking</name></member>
       <member refid="classsocket__base_1ae075f18d5fe704a278f8021d251905a0" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>is_open</name></member>
       <member refid="classssl__socket_1adb1487480405a5778013113b583fed8c" prot="public" virt="virtual"><scope>ssl_socket</scope><name>is_ssl</name></member>
       <member refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>listen</name></member>
       <member refid="classsocket__base_1a1d9ff8b37d502077065ad505098f1c10" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>local_endpoint</name></member>
       <member refid="classsocket__base_1ad99d1582b07a547df0c6e25d7d057262" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>native_handle</name></member>
       <member refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>native_handle_type</name></member>
-      <member refid="classtcp__socket_1a4d419854509a10778b43c8561f9794b3" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>open</name></member>
-      <member refid="classsocket__base_1ac45ca9c8151fc981e49861f5e85b0434" prot="public" virt="non-virtual" ambiguityscope="ip_socket::"><scope>ssl_socket</scope><name>open</name></member>
-      <member refid="classip__socket_1af46a0c10c0c23ab91a8445c16733ed61" prot="protected" virt="non-virtual"><scope>ssl_socket</scope><name>open_ip</name></member>
+      <member refid="classsocket__base_1a3b85c967d07f91b5e45349495e2a1481" prot="protected" virt="non-virtual"><scope>ssl_socket</scope><name>nonblocking_</name></member>
+      <member refid="classtcp__socket_1a34441a6c2a85f433b36b687aa7555193" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>open</name></member>
+      <member refid="classsocket__base_1a27acf9f7219de7e4462af8744e44137a" prot="public" virt="non-virtual" ambiguityscope="ip_socket::"><scope>ssl_socket</scope><name>open</name></member>
+      <member refid="classip__socket_1aeae60b86a62a625dc2154d764b014935" prot="protected" virt="non-virtual"><scope>ssl_socket</scope><name>open_ip</name></member>
       <member refid="classsocket__base_1ade45e5ade072d22d377f6582660a872e" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>operator bool</name></member>
       <member refid="classssl__socket_1a46678484e94613e22c99fe5e46e81f0e" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>operator=</name></member>
       <member refid="classtcp__socket_1ac38f95134157b6a88c1a416f402e0e4f" prot="public" virt="non-virtual" ambiguityscope="tcp_socket::"><scope>ssl_socket</scope><name>operator=</name></member>
@@ -608,6 +638,7 @@
       <member refid="classsocket__base_1af825fb2543e89b098bc9c1da47f09647" prot="public" virt="non-virtual" ambiguityscope="socket_base::"><scope>ssl_socket</scope><name>operator=</name></member>
       <member refid="classsocket__base_1ae6442c91cf368fa6c9781f3603a31e8c" prot="public" virt="non-virtual" ambiguityscope="socket_base::"><scope>ssl_socket</scope><name>operator=</name></member>
       <member refid="classssl__socket_1ae5cdd0fd39c6bbbc8ba69ee78e5b956c" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>peer_certificate_info</name></member>
+      <member refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bda" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>protocol</name></member>
       <member refid="classssl__socket_1a0607573c4459e1ea3cb7c95dceaf3f8a" prot="public" virt="virtual"><scope>ssl_socket</scope><name>receive</name></member>
       <member refid="classtcp__socket_1ade0c66a5525a70ed0ff8bf2f58e966b4" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>receive_all</name></member>
       <member refid="classsocket__base_1a940df24ee538694021cc7350ba790524" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>release</name></member>
@@ -642,7 +673,8 @@
       <member refid="classtcp__socket_1a72e6e572e36c55fb4b110a315e79fe13" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>tcp_socket</name></member>
       <member refid="classtcp__socket_1a1a9225c2f9677f82c852c2c709be3a9c" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>tcp_socket</name></member>
       <member refid="classtcp__socket_1aef337d72fe3a8446418aa979771e3bf3" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>tcp_socket</name></member>
-      <member refid="classsocket__base_1a0e1b1431d88934a2de83da39b3ece88c" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>try_open</name></member>
+      <member refid="classsocket__base_1a7333214e4562884b671ed9545313985a" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>try_open</name></member>
+      <member refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>type</name></member>
       <member refid="classip__socket_1a4a1d2bcfb15b0d319defef1c9da3c0d4" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>~ip_socket</name></member>
       <member refid="classsocket__base_1ad718ca0872f7a951b40b00da45151d10" prot="public" virt="virtual"><scope>ssl_socket</scope><name>~socket_base</name></member>
       <member refid="classssl__socket_1a76cf3d2ca514fa1fe702c82f5e534c79" prot="public" virt="non-virtual"><scope>ssl_socket</scope><name>~ssl_socket</name></member>

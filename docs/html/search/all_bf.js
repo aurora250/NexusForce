@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['部分排序_0',['部分排序',['../group___sort_algorithms.html#partial_sorting',1,'']]]
+  ['连接模式_0',['TLS 连接模式',['../group___s_m_t_p.html#tls_modes',1,'']]]
 ];

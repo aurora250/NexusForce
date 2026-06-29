@@ -119,6 +119,9 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:ad374366962f14690d3ae7b996e9171cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置Content-Type  <br /></td></tr>
 <tr class="memitem:a59f545a3dc6b21280771d31719c028a8" id="r_a59f545a3dc6b21280771d31719c028a8"><td class="memItemLeft"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#a59f545a3dc6b21280771d31719c028a8">to_string</a> () const</td></tr>
 <tr class="memdesc:a59f545a3dc6b21280771d31719c028a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">序列化为HTTP响应字符串  <br /></td></tr>
+<tr class="memitem:ad6af52a68fa88ac94255eb31b8d928d9" id="r_ad6af52a68fa88ac94255eb31b8d928d9"><td class="memItemLeft"><a id="ad6af52a68fa88ac94255eb31b8d928d9" name="ad6af52a68fa88ac94255eb31b8d928d9"></a>
+<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><b>build_header_string</b> () const</td></tr>
+<tr class="memdesc:ad6af52a68fa88ac94255eb31b8d928d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建响应头字符串 <br /></td></tr>
 <tr class="inherit_header pub_methods_structistringify"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_structistringify')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="structistringify.html">istringify&lt; http_server_response &gt;</a></td></tr>
 <tr class="memitem:a87a370c84d40b2bf37b8aa5cc5252b52 inherit pub_methods_structistringify" id="r_a87a370c84d40b2bf37b8aa5cc5252b52"><td class="memItemLeft">constexpr <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="structistringify.html#a87a370c84d40b2bf37b8aa5cc5252b52">to_string</a> () const</td></tr>
 <tr class="memdesc:a87a370c84d40b2bf37b8aa5cc5252b52 inherit pub_methods_structistringify"><td class="mdescLeft">&#160;</td><td class="mdescRight">转换为字符串  <br /></td></tr>
@@ -149,6 +152,12 @@ Public 属性</h2></td></tr>
 <tr class="memitem:a2750c433cd599f52e454ef6448988b28" id="r_a2750c433cd599f52e454ef6448988b28"><td class="memItemLeft"><a id="a2750c433cd599f52e454ef6448988b28" name="a2750c433cd599f52e454ef6448988b28"></a>
 <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><b>forward_path</b></td></tr>
 <tr class="memdesc:a2750c433cd599f52e454ef6448988b28"><td class="mdescLeft">&#160;</td><td class="mdescRight">转发路径 <br /></td></tr>
+<tr class="memitem:a52daad002076412ec3f1e74637cb6966" id="r_a52daad002076412ec3f1e74637cb6966"><td class="memItemLeft"><a id="a52daad002076412ec3f1e74637cb6966" name="a52daad002076412ec3f1e74637cb6966"></a>
+<a class="el" href="classunordered__map.html">unordered_map</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>, <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt;&#160;</td><td class="memItemRight"><b>trailers</b></td></tr>
+<tr class="memdesc:a52daad002076412ec3f1e74637cb6966"><td class="mdescLeft">&#160;</td><td class="mdescRight">Trailer头部 <br /></td></tr>
+<tr class="memitem:af9e41da6d0714a405c1f42b917f4d03c" id="r_af9e41da6d0714a405c1f42b917f4d03c"><td class="memItemLeft"><a id="af9e41da6d0714a405c1f42b917f4d03c" name="af9e41da6d0714a405c1f42b917f4d03c"></a>
+bool&#160;</td><td class="memItemRight"><b>chunked_encoding</b> {false}</td></tr>
+<tr class="memdesc:af9e41da6d0714a405c1f42b917f4d03c"><td class="mdescLeft">&#160;</td><td class="mdescRight">是否使用chunked传输编码 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>HTTP服务器响应结构 </p>
@@ -177,21 +186,21 @@ Public 属性</h2></td></tr>
 <div class="line"><span class="comment">// 序列化响应</span></div>
 <div class="line"><span class="keywordtype">string</span> response_str = response.<a class="code hl_function" href="#a59f545a3dc6b21280771d31719c028a8">to_string</a>();</div>
 <div class="ttc" id="aclassvector_html_ac8d8b05ea55e928d9a4ccde8bf9bedcf"><div class="ttname"><a href="classvector.html#ac8d8b05ea55e928d9a4ccde8bf9bedcf">vector::push_back</a></div><div class="ttdeci">constexpr void push_back(const T &amp;value)</div><div class="ttdoc">在末尾拷贝插入元素</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00887">vector.hpp:887</a></div></div>
-<div class="ttc" id="ahttp__constants_8hpp_html_a77669238bc4b0444c075edb87036cf57aa83896e2df473a400c23e956ffc554f6"><div class="ttname"><a href="http__constants_8hpp.html#a77669238bc4b0444c075edb87036cf57aa83896e2df473a400c23e956ffc554f6">http_status::S2_OK</a></div><div class="ttdeci">@ S2_OK</div><div class="ttdoc">200 OK 请求成功</div><div class="ttdef"><b>定义</b> <a href="http__constants_8hpp_source.html#l00214">http_constants.hpp:214</a></div></div>
+<div class="ttc" id="ahttp__constants_8hpp_html_a77669238bc4b0444c075edb87036cf57aa83896e2df473a400c23e956ffc554f6"><div class="ttname"><a href="http__constants_8hpp.html#a77669238bc4b0444c075edb87036cf57aa83896e2df473a400c23e956ffc554f6">http_status::S2_OK</a></div><div class="ttdeci">@ S2_OK</div><div class="ttdoc">200 OK 请求成功</div><div class="ttdef"><b>定义</b> <a href="http__constants_8hpp_source.html#l00248">http_constants.hpp:248</a></div></div>
 <div class="ttc" id="astructhttp__cookie_html"><div class="ttname"><a href="structhttp__cookie.html">http_cookie</a></div><div class="ttdoc">HTTP Cookie结构</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00062">http_session.hpp:62</a></div></div>
 <div class="ttc" id="astructhttp__cookie_html_a22d53fe0796d65f8bfc0ae84a138b160"><div class="ttname"><a href="structhttp__cookie.html#a22d53fe0796d65f8bfc0ae84a138b160">http_cookie::value</a></div><div class="ttdeci">string value</div><div class="ttdoc">Cookie值</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00064">http_session.hpp:64</a></div></div>
 <div class="ttc" id="astructhttp__cookie_html_a4fbd6a009dfbd85c9a4156fb01da7575"><div class="ttname"><a href="structhttp__cookie.html#a4fbd6a009dfbd85c9a4156fb01da7575">http_cookie::name</a></div><div class="ttdeci">http_cookie_name name</div><div class="ttdoc">Cookie名称</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00063">http_session.hpp:63</a></div></div>
 <div class="ttc" id="astructhttp__cookie_html_a5f622b6255d7aa131034d17a4e5db76b"><div class="ttname"><a href="structhttp__cookie.html#a5f622b6255d7aa131034d17a4e5db76b">http_cookie::http_only</a></div><div class="ttdeci">bool http_only</div><div class="ttdoc">HttpOnly（禁止JS）</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00069">http_session.hpp:69</a></div></div>
 <div class="ttc" id="astructhttp__cookie_html_afada35c5e27e76860f5d3aa566d0fa16"><div class="ttname"><a href="structhttp__cookie.html#afada35c5e27e76860f5d3aa566d0fa16">http_cookie::path</a></div><div class="ttdeci">string path</div><div class="ttdoc">Path</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00066">http_session.hpp:66</a></div></div>
-<div class="ttc" id="astructhttp__server__response_html_a06eae9bd3df2a40667daf419f1837a4d"><div class="ttname"><a href="#a06eae9bd3df2a40667daf419f1837a4d">http_server_response::status</a></div><div class="ttdeci">http_status status</div><div class="ttdoc">HTTP状态码</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00267">http_server_message.hpp:267</a></div></div>
-<div class="ttc" id="astructhttp__server__response_html_a283b6cd33f07f80eb2024694dbff6c01"><div class="ttname"><a href="#a283b6cd33f07f80eb2024694dbff6c01">http_server_response::set_content_type</a></div><div class="ttdeci">void set_content_type(http_content value)</div><div class="ttdoc">设置Content-Type</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00313">http_server_message.hpp:313</a></div></div>
+<div class="ttc" id="astructhttp__server__response_html_a06eae9bd3df2a40667daf419f1837a4d"><div class="ttname"><a href="#a06eae9bd3df2a40667daf419f1837a4d">http_server_response::status</a></div><div class="ttdeci">http_status status</div><div class="ttdoc">HTTP状态码</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00286">http_server_message.hpp:286</a></div></div>
+<div class="ttc" id="astructhttp__server__response_html_a283b6cd33f07f80eb2024694dbff6c01"><div class="ttname"><a href="#a283b6cd33f07f80eb2024694dbff6c01">http_server_response::set_content_type</a></div><div class="ttdeci">void set_content_type(http_content value)</div><div class="ttdoc">设置Content-Type</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00333">http_server_message.hpp:333</a></div></div>
 <div class="ttc" id="astructhttp__server__response_html_a59f545a3dc6b21280771d31719c028a8"><div class="ttname"><a href="#a59f545a3dc6b21280771d31719c028a8">http_server_response::to_string</a></div><div class="ttdeci">string to_string() const</div><div class="ttdoc">序列化为HTTP响应字符串</div></div>
-<div class="ttc" id="astructhttp__server__response_html_a728494edcee0aa3e4b555197a713ac31"><div class="ttname"><a href="#a728494edcee0aa3e4b555197a713ac31">http_server_response::status_message</a></div><div class="ttdeci">string status_message</div><div class="ttdoc">状态消息</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00268">http_server_message.hpp:268</a></div></div>
-<div class="ttc" id="astructhttp__server__response_html_a7eb8d64f75162d65e089ab24654ffb33"><div class="ttname"><a href="#a7eb8d64f75162d65e089ab24654ffb33">http_server_response::body</a></div><div class="ttdeci">string body</div><div class="ttdoc">响应正文</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00271">http_server_message.hpp:271</a></div></div>
-<div class="ttc" id="astructhttp__server__response_html_a9eabe9c2ee241127b75193bdeed530ae"><div class="ttname"><a href="#a9eabe9c2ee241127b75193bdeed530ae">http_server_response::cookies</a></div><div class="ttdeci">vector&lt; http_cookie &gt; cookies</div><div class="ttdoc">设置的Cookie</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00270">http_server_message.hpp:270</a></div></div>
-<div class="ttc" id="astructhttp__server__response_html_ae46a45f3c25128212550656c3d23355e"><div class="ttname"><a href="#ae46a45f3c25128212550656c3d23355e">http_server_response::http_server_response</a></div><div class="ttdeci">http_server_response()</div><div class="ttdoc">默认构造函数</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00280">http_server_message.hpp:280</a></div></div>
+<div class="ttc" id="astructhttp__server__response_html_a728494edcee0aa3e4b555197a713ac31"><div class="ttname"><a href="#a728494edcee0aa3e4b555197a713ac31">http_server_response::status_message</a></div><div class="ttdeci">string status_message</div><div class="ttdoc">状态消息</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00287">http_server_message.hpp:287</a></div></div>
+<div class="ttc" id="astructhttp__server__response_html_a7eb8d64f75162d65e089ab24654ffb33"><div class="ttname"><a href="#a7eb8d64f75162d65e089ab24654ffb33">http_server_response::body</a></div><div class="ttdeci">string body</div><div class="ttdoc">响应正文</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00290">http_server_message.hpp:290</a></div></div>
+<div class="ttc" id="astructhttp__server__response_html_a9eabe9c2ee241127b75193bdeed530ae"><div class="ttname"><a href="#a9eabe9c2ee241127b75193bdeed530ae">http_server_response::cookies</a></div><div class="ttdeci">vector&lt; http_cookie &gt; cookies</div><div class="ttdoc">设置的Cookie</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00289">http_server_message.hpp:289</a></div></div>
+<div class="ttc" id="astructhttp__server__response_html_ae46a45f3c25128212550656c3d23355e"><div class="ttname"><a href="#ae46a45f3c25128212550656c3d23355e">http_server_response::http_server_response</a></div><div class="ttdeci">http_server_response()</div><div class="ttdoc">默认构造函数</div><div class="ttdef"><b>定义</b> <a href="http__server__message_8hpp_source.html#l00301">http_server_message.hpp:301</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00265">265</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00284">284</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="ae46a45f3c25128212550656c3d23355e" name="ae46a45f3c25128212550656c3d23355e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae46a45f3c25128212550656c3d23355e">&#9670;&#160;</a></span>http_server_response()</h2>
@@ -219,9 +228,9 @@ Public 属性</h2></td></tr>
 <p>默认构造函数 </p>
 <p>设置默认Content-Type为text/plain，Connection为close。 </p>
 
-<p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00280">280</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00301">301</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00269">headers</a>, <a class="el" href="structhttp__content.html#a26125c66a9d843c6fd16b406c3ed2d0d">http_content::PLAIN_TEXT()</a> , 以及 <a class="el" href="http__constants_8hpp_source.html#l00552">http_content::to_string()</a>.</p>
+<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00288">headers</a>, <a class="el" href="structhttp__content.html#a26125c66a9d843c6fd16b406c3ed2d0d">http_content::PLAIN_TEXT()</a> , 以及 <a class="el" href="http__constants_8hpp_source.html#l00590">http_content::to_string()</a>.</p>
 
 </div>
 </div>
@@ -258,9 +267,9 @@ Public 属性</h2></td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>存在返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00307">307</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00327">327</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00269">headers</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00288">headers</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -296,9 +305,9 @@ Public 属性</h2></td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>头值，不存在返回空字符串 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00290">290</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00310">310</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00269">headers</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00288">headers</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -333,9 +342,9 @@ Public 属性</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00313">313</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00333">333</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00269">headers</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00288">headers</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -370,9 +379,9 @@ Public 属性</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00319">319</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00339">339</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00269">headers</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00288">headers</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
@@ -412,9 +421,9 @@ Public 属性</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00300">300</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__server__message_8hpp_source.html">http_server_message.hpp</a> 第 <a class="el" href="http__server__message_8hpp_source.html#l00320">320</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00269">headers</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="http__server__message_8hpp_source.html#l00288">headers</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>

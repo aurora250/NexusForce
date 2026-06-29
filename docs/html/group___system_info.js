@@ -21,6 +21,13 @@ var group___system_info =
         [ "total_physical", "structsysinfo_1_1memory__info.html#a04be20191bbc0dc8ab34a2b24b471c0c", null ],
         [ "total_virtual", "structsysinfo_1_1memory__info.html#afe2a7222ee4f088e014338f60e9a70e0", null ]
       ] ],
+      [ "disk_info", "structsysinfo_1_1disk__info.html", [
+        [ "usage_percent", "structsysinfo_1_1disk__info.html#a6fc75b3ae4046c7a635bd60e234fbffa", null ],
+        [ "free_bytes", "structsysinfo_1_1disk__info.html#a47d9aadf1bf2462a1517cb235ac6600a", null ],
+        [ "path", "structsysinfo_1_1disk__info.html#abc221442adf3f3f8445d8053a9c479d2", null ],
+        [ "total_bytes", "structsysinfo_1_1disk__info.html#a51d85e699513da91899e1d5a80ab0a12", null ],
+        [ "used_bytes", "structsysinfo_1_1disk__info.html#a2fafc06b3ec9f99e70985d6c0a36ce05", null ]
+      ] ],
       [ "CPU_info", "structsysinfo_1_1_c_p_u__info.html", [
         [ "hyperthreading", "structsysinfo_1_1_c_p_u__info.html#a14eec4a7e08ee652775f5127cab015af", null ],
         [ "brand", "structsysinfo_1_1_c_p_u__info.html#ac444585514c69df4fb285d73905c8b11", null ],
@@ -40,6 +47,19 @@ var group___system_info =
         [ "platform_id", "structsysinfo_1_1os__version__info.html#a340ac2d32b3d93b475587aab92695c5f", null ],
         [ "product_name", "structsysinfo_1_1os__version__info.html#a38e874b972252277bf6b51d499755f62", null ]
       ] ],
+      [ "network_interface", "structsysinfo_1_1network__interface.html", [
+        [ "address", "structsysinfo_1_1network__interface.html#a20136b55fc52f8ab6d6bd8aeac7edca1", null ],
+        [ "is_up", "structsysinfo_1_1network__interface.html#a3bc405ed38db6f9102bccec9a689f2bd", null ],
+        [ "mac", "structsysinfo_1_1network__interface.html#aa4350c4fce058e26db0b0dbc95dd7277", null ],
+        [ "name", "structsysinfo_1_1network__interface.html#a7dbdfd7b18468aefe2981ba6ee3484ee", null ],
+        [ "netmask", "structsysinfo_1_1network__interface.html#a0083c64f3f71c1d1308d6113e48a4a6b", null ]
+      ] ],
+      [ "numa_node_info", "structsysinfo_1_1numa__node__info.html", [
+        [ "core_count", "structsysinfo_1_1numa__node__info.html#ac94db0463939ad51937796759d751fd7", null ],
+        [ "core_list", "structsysinfo_1_1numa__node__info.html#ad0fb7ee185a45c33d65f3f5340f6e1ab", null ],
+        [ "core_mask", "structsysinfo_1_1numa__node__info.html#ade6ecad47efed59efccdfb8f9d54ecb9", null ],
+        [ "node_id", "structsysinfo_1_1numa__node__info.html#af0c493c1bb00aa7d9a6b284668f6cadd", null ]
+      ] ],
       [ "architecture", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63", [
         [ "UNKNOWN", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63a696b031073e74bf2cb98e5ef201d4aa3", null ],
         [ "X86", "classsysinfo.html#a5cb2bb37d607fada00bb5f2726727e63afd1a4608b5b463bc7a41d86a1662d3b7", null ],
@@ -54,6 +74,7 @@ var group___system_info =
       [ "get_architecture", "classsysinfo.html#a263fc148efdf13bbca1b9923aba436a9", null ],
       [ "get_CPU_info", "classsysinfo.html#a12cd20c6d4ac8029b5c12430d8508ed5", null ],
       [ "get_memory_info", "classsysinfo.html#a6f58a437df985dfc5817a76dbfe967e6", null ],
+      [ "get_numa_info", "classsysinfo.html#a49edb3a8460ced595fe82684f179fe8e", null ],
       [ "get_os_version_info", "classsysinfo.html#a38b1558f84e3d0dec584ba243ee27d6f", null ],
       [ "get_system_info", "classsysinfo.html#a683ee1cdfdb503e7e36a3348bfa81602", null ],
       [ "is_initialized", "classsysinfo.html#ae4bc26b756f0201340e586d61ec1321f", null ],

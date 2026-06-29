@@ -1,0 +1,250 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classroute__trie" kind="class" language="C++" prot="public">
+    <compoundname>route_trie</compoundname>
+    <includes refid="radix__router_8hpp" local="no">radix_router.hpp</includes>
+    <innerclass refid="structroute__trie_1_1node" prot="public">route_trie::node</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classroute__trie_1ab96af9cdd409af9e3601d177c6bb3bcb" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(<ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;, <ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;)&gt;</type>
+        <definition>using route_trie::handler_type = function&lt;void(http_request&amp;, http_response&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>handler_type</name>
+        <qualifiedname>route_trie::handler_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="31" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classroute__trie_1a83561bb2ee8bacf6bf8b386e13e8801b" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; node &gt;</type>
+        <definition>vector&lt;node&gt; route_trie::nodes_</definition>
+        <argsstring></argsstring>
+        <name>nodes_</name>
+        <qualifiedname>route_trie::nodes_</qualifiedname>
+        <initializer>{1}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="44" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="44" bodyend="44"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classroute__trie_1ac3151252d61e74b39423cc666169e6e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>route_trie::route_trie</definition>
+        <argsstring>()=default</argsstring>
+        <name>route_trie</name>
+        <qualifiedname>route_trie::route_trie</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="47" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classroute__trie_1a98ae9915c4ab0d7a79795c4cb31bf0f4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void route_trie::insert</definition>
+        <argsstring>(const string &amp;pattern, handler_type handler)</argsstring>
+        <name>insert</name>
+        <qualifiedname>route_trie::insert</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>pattern</declname>
+        </param>
+        <param>
+          <type>handler_type</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>插入路由规则 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pattern</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>路径模式（支持 :param 和 * 通配符） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>匹配时的处理器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="54" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="54" bodyend="108"/>
+        <references refid="classbasic__string_1a090f934c74b4a3a42d49992aa342dee1" compoundref="basic__string_8hpp" startline="1268" endline="1268">basic_string&lt; CharT, Traits, Alloc &gt;::empty</references>
+        <references refid="classbasic__string__view_1a585ab61fc0390d99bf03427a2a2c1a40" compoundref="basic__string__view_8hpp" startline="325" endline="325">basic_string_view&lt; CharT, Traits &gt;::empty</references>
+        <references refid="classbasic__string_1acc65a586f7246acd8494377aa499c39f" compoundref="basic__string_8hpp" startline="2377" endline="2380">basic_string&lt; CharT, Traits, Alloc &gt;::find</references>
+        <references refid="classbasic__string_1aa754b33c2730e616397fead9975a7cf0" compoundref="basic__string_8hpp" startline="1341" endline="1344">basic_string&lt; CharT, Traits, Alloc &gt;::front</references>
+        <references refid="classbasic__string_1ac50981ac7ad8f911d32fa3dd750609c2" compoundref="basic__string_8hpp" startline="1262" endline="1262">basic_string&lt; CharT, Traits, Alloc &gt;::length</references>
+        <references refid="classbasic__string__view_1a044c95f53ac7de39542779311b1b6950" compoundref="basic__string__view_8hpp" startline="319" endline="319">basic_string_view&lt; CharT, Traits &gt;::length</references>
+        <references refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classbasic__string_1addc40fa63f885bb692988057be4798a6" compoundref="basic__string_8hpp" startline="197">basic_string&lt; char &gt;::npos</references>
+        <references refid="classbasic__string_1a0da46f76c70abdd9b9aa03f6b62a76a6" compoundref="basic__string_8hpp" startline="1223" endline="1229">basic_string&lt; CharT, Traits, Alloc &gt;::size</references>
+        <references refid="classbasic__string__view_1a6368d37a683e75756898b0f27ff4af29" compoundref="basic__string__view_8hpp" startline="417" endline="421">basic_string_view&lt; CharT, Traits &gt;::substr</references>
+        <references refid="classbasic__string_1ad5aafd7e8c50ae4762af6e22069b90d7" compoundref="basic__string_8hpp" startline="2146" endline="2146">basic_string&lt; CharT, Traits, Alloc &gt;::view</references>
+      </memberdef>
+      <memberdef kind="function" id="classroute__trie_1aa6fbb5e731d9b908d4754bfe7d972dc0" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>handler_type</type>
+        <definition>handler_type route_trie::match</definition>
+        <argsstring>(const string &amp;path, bool case_sensitive, vector&lt; pair&lt; string, string &gt; &gt; &amp;params)</argsstring>
+        <name>match</name>
+        <qualifiedname>route_trie::match</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>case_sensitive</declname>
+        </param>
+        <param>
+          <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &gt; &amp;</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>匹配路径 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>请求路径 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>case_sensitive</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>是否大小写敏感 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出匹配到的参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>handler指针，未找到返回nullptr </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="117" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="117" bodyend="188"/>
+        <references refid="classbasic__string_1a23c524fe4e21ba7bf374b0949786310c" compoundref="basic__string_8hpp" startline="1572" endline="1610">basic_string&lt; CharT, Traits, Alloc &gt;::append</references>
+        <references refid="classbasic__string__view_1a585ab61fc0390d99bf03427a2a2c1a40" compoundref="basic__string__view_8hpp" startline="325" endline="325">basic_string_view&lt; CharT, Traits &gt;::empty</references>
+        <references refid="classpath_1a32bd98057a4536d95398b43e92fd534b" compoundref="path_8hpp" startline="247" endline="247">path::empty</references>
+        <references refid="classbasic__string__view_1a044c95f53ac7de39542779311b1b6950" compoundref="basic__string__view_8hpp" startline="319" endline="319">basic_string_view&lt; CharT, Traits &gt;::length</references>
+        <references refid="classbasic__string_1a39775206ece372bc267b7918ddc64a5c" compoundref="basic__string_8hpp" startline="2879" endline="2882">basic_string&lt; CharT, Traits, Alloc &gt;::lowercase</references>
+        <references refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
+        <references refid="classbasic__string_1addc40fa63f885bb692988057be4798a6" compoundref="basic__string_8hpp" startline="197">basic_string&lt; char &gt;::npos</references>
+        <references refid="classbasic__string_1aa2527f9b1a17a4b866e3e59e384dc0d8" compoundref="basic__string_8hpp" startline="1274" endline="1301">basic_string&lt; CharT, Traits, Alloc &gt;::reserve</references>
+        <references refid="classpath_1abed38501b754f13c2abe656e7caef45d" compoundref="path_8hpp" startline="235" endline="235">path::view</references>
+      </memberdef>
+      <memberdef kind="function" id="classroute__trie_1a0cadf5cc77913cfb32113f57a9af2e7a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool route_trie::contains_path</definition>
+        <argsstring>(const string &amp;path, bool case_sensitive) const</argsstring>
+        <name>contains_path</name>
+        <qualifiedname>route_trie::contains_path</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>case_sensitive</declname>
+        </param>
+        <briefdescription>
+<para>检查路径是否存在 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="193" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="193" bodyend="252"/>
+        <references refid="classbasic__string__view_1a585ab61fc0390d99bf03427a2a2c1a40" compoundref="basic__string__view_8hpp" startline="325" endline="325">basic_string_view&lt; CharT, Traits &gt;::empty</references>
+        <references refid="classpath_1a32bd98057a4536d95398b43e92fd534b" compoundref="path_8hpp" startline="247" endline="247">path::empty</references>
+        <references refid="classbasic__string_1a39775206ece372bc267b7918ddc64a5c" compoundref="basic__string_8hpp" startline="2879" endline="2882">basic_string&lt; CharT, Traits, Alloc &gt;::lowercase</references>
+        <references refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" compoundref="numeric__traits_8hpp" startline="153" endline="153">numeric_traits&lt; T, Dummy &gt;::max</references>
+        <references refid="classbasic__string_1addc40fa63f885bb692988057be4798a6" compoundref="basic__string_8hpp" startline="197">basic_string&lt; char &gt;::npos</references>
+        <references refid="classpath_1abed38501b754f13c2abe656e7caef45d" compoundref="path_8hpp" startline="235" endline="235">path::view</references>
+      </memberdef>
+      <memberdef kind="function" id="classroute__trie_1a1df0f0464d3fc720211a3a100060ccb9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void route_trie::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>route_trie::clear</qualifiedname>
+        <briefdescription>
+<para>清除所有路由规则 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="255" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="255" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="classroute__trie_1a45f41926a09ac74d59a298d4c0a8cdd3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t route_trie::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>route_trie::size</qualifiedname>
+        <briefdescription>
+<para>获取 trie 节点总数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="261" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="261" bodyend="261"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>段式Trie路由器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>每HTTP方法一个实例，存储非正则路由。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="29" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="29" bodyend="262"/>
+    <listofallmembers>
+      <member refid="classroute__trie_1a1df0f0464d3fc720211a3a100060ccb9" prot="public" virt="non-virtual"><scope>route_trie</scope><name>clear</name></member>
+      <member refid="classroute__trie_1a0cadf5cc77913cfb32113f57a9af2e7a" prot="public" virt="non-virtual"><scope>route_trie</scope><name>contains_path</name></member>
+      <member refid="classroute__trie_1ab96af9cdd409af9e3601d177c6bb3bcb" prot="public" virt="non-virtual"><scope>route_trie</scope><name>handler_type</name></member>
+      <member refid="classroute__trie_1a98ae9915c4ab0d7a79795c4cb31bf0f4" prot="public" virt="non-virtual"><scope>route_trie</scope><name>insert</name></member>
+      <member refid="classroute__trie_1aa6fbb5e731d9b908d4754bfe7d972dc0" prot="public" virt="non-virtual"><scope>route_trie</scope><name>match</name></member>
+      <member refid="classroute__trie_1a83561bb2ee8bacf6bf8b386e13e8801b" prot="private" virt="non-virtual"><scope>route_trie</scope><name>nodes_</name></member>
+      <member refid="classroute__trie_1ac3151252d61e74b39423cc666169e6e2" prot="public" virt="non-virtual"><scope>route_trie</scope><name>route_trie</name></member>
+      <member refid="classroute__trie_1a45f41926a09ac74d59a298d4c0a8cdd3" prot="public" virt="non-virtual"><scope>route_trie</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structtoken__bucket__limiter_1_1bucket__entry" kind="struct" language="C++" prot="private">
+    <compoundname>token_bucket_limiter::bucket_entry</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structtoken__bucket__limiter_1_1bucket__entry_1afbbcc5f15efdd074f8ff47a2ecb98eb1" prot="public" static="no" mutable="no">
+        <type><ref refid="structtoken__bucket" kindref="compound">token_bucket</ref></type>
+        <definition>token_bucket token_bucket_limiter::bucket_entry::bucket</definition>
+        <argsstring></argsstring>
+        <name>bucket</name>
+        <qualifiedname>token_bucket_limiter::bucket_entry::bucket</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="92" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structtoken__bucket__limiter_1_1bucket__entry_1aa114aa9503449f69345ba44cefc7cdec" prot="public" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>uint64_t token_bucket_limiter::bucket_entry::last_access_ms</definition>
+        <argsstring></argsstring>
+        <name>last_access_ms</name>
+        <qualifiedname>token_bucket_limiter::bucket_entry::last_access_ms</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="93" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>mutex</label>
+        <link refid="classmutex"/>
+      </node>
+      <node id="2">
+        <label>token_bucket</label>
+        <link refid="structtoken__bucket"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>mutex_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>token_bucket_limiter::bucket_entry</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>bucket</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="91" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="91" bodyend="94"/>
+    <listofallmembers>
+      <member refid="structtoken__bucket__limiter_1_1bucket__entry_1afbbcc5f15efdd074f8ff47a2ecb98eb1" prot="public" virt="non-virtual"><scope>token_bucket_limiter::bucket_entry</scope><name>bucket</name></member>
+      <member refid="structtoken__bucket__limiter_1_1bucket__entry_1aa114aa9503449f69345ba44cefc7cdec" prot="public" virt="non-virtual"><scope>token_bucket_limiter::bucket_entry</scope><name>last_access_ms</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

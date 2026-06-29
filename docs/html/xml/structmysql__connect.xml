@@ -2,10 +2,10 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
   <compounddef id="structmysql__connect" kind="class" language="C++" prot="public" final="yes">
     <compoundname>mysql_connect</compoundname>
-    <basecompoundref refid="structidb__tb__connect" prot="public" virt="non-virtual">idb_tb_connect</basecompoundref>
+    <basecompoundref refid="structsql__connect__base" prot="public" virt="non-virtual">sql_connect_base&lt; mysql_connect &gt;</basecompoundref>
     <includes refid="mysql__connect_8hpp" local="no">mysql_connect.hpp</includes>
-    <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="structmysql__connect_1a42d08327b676836ebdcb608eb1877245" prot="private" static="no" mutable="no">
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="structmysql__connect_1a42d08327b676836ebdcb608eb1877245" prot="protected" static="no" mutable="no">
         <type>::MYSQL *</type>
         <definition>::MYSQL* mysql_connect::link_</definition>
         <argsstring></argsstring>
@@ -20,6 +20,56 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="43" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="43" bodyend="-1"/>
+        <referencedby refid="structmysql__connect_1aac85cab9c2d68515f69bdb47c96122de" compoundref="mysql__connect_8hpp" startline="147" endline="147">connected</referencedby>
+        <referencedby refid="structmysql__connect_1a98b19778e12fb79ac9fcc4acf88faeef" compoundref="mysql__connect_8hpp" startline="153" endline="153">is_valid</referencedby>
+        <referencedby refid="structmysql__connect_1a3b9a1a023281b5f8bf0b717feaf5895d" compoundref="mysql__connect_8hpp" startline="56" endline="56">mysql_connect</referencedby>
+      </memberdef>
+      <memberdef kind="variable" id="structmysql__connect_1a37709292025487cd1bd5893d47546b88" prot="protected" static="no" mutable="no">
+        <type>friend</type>
+        <definition>friend mysql_connect::sql_connect_base&lt; mysql_connect &gt;</definition>
+        <argsstring></argsstring>
+        <name>sql_connect_base&lt; mysql_connect &gt;</name>
+        <qualifiedname>mysql_connect::sql_connect_base&lt; mysql_connect &gt;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="44" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="structmysql__connect_1acc5078ceea669c9a330f6278feab58f3" prot="private" static="no" mutable="yes">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string mysql_connect::last_error_</definition>
+        <argsstring></argsstring>
+        <name>last_error_</name>
+        <qualifiedname>mysql_connect::last_error_</qualifiedname>
+        <briefdescription>
+<para>最后错误信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="47" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structmysql__connect_1a16ac1b9bb4c4d9cd14d3b2be5b104ae2" prot="private" static="no" mutable="yes">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t mysql_connect::last_errno_</definition>
+        <argsstring></argsstring>
+        <name>last_errno_</name>
+        <qualifiedname>mysql_connect::last_errno_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>最后错误码 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="48" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="48" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -37,7 +87,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="51" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="51" bodyend="51"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="56" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="56" bodyend="56"/>
+        <references refid="structmysql__connect_1a42d08327b676836ebdcb608eb1877245" compoundref="mysql__connect_8hpp" startline="43">link_</references>
       </memberdef>
       <memberdef kind="function" id="structmysql__connect_1a6333c19361bdf32e80b25af448ec874d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -53,13 +104,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="58" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="58" bodyend="58"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="63" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="63" bodyend="63"/>
         <references refid="structidb__connect_1a689ce6c9a44cdc602e6006615e949e19">idb_connect::close</references>
       </memberdef>
-      <memberdef kind="function" id="structmysql__connect_1a75fef13b46de26b2281a8cd49193c7f0" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
+      <memberdef kind="function" id="structmysql__connect_1aa43f421dd5960c9fad8583db9645cd43" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
         <definition>bool mysql_connect::connect</definition>
-        <argsstring>(const db_config &amp;config) noexcept override</argsstring>
+        <argsstring>(const db_config &amp;config) override</argsstring>
         <name>connect</name>
         <qualifiedname>mysql_connect::connect</qualifiedname>
         <reimplements refid="structidb__connect_1a7ae3001e8ef72724b952fac4ea66cde7">connect</reimplements>
@@ -86,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="67" column="11"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="72" column="11"/>
       </memberdef>
       <memberdef kind="function" id="structmysql__connect_1a54af01671a2bb8c280dd00e4504adfc0" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -118,7 +169,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="76" column="11"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="81" column="11"/>
       </memberdef>
       <memberdef kind="function" id="structmysql__connect_1a3eb1bfcd465e808514ef8b035e1f3ef5" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>void</type>
@@ -134,15 +185,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="81" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="86" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="structmysql__connect_1a2e13b2d91f7de2c0dcfd683641249030" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+      <memberdef kind="function" id="structmysql__connect_1a533abdb0352cc94b584f92105d060263" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="virtual">
         <type>bool</type>
         <definition>bool mysql_connect::set_character_set</definition>
-        <argsstring>(const string &amp;encoding) const noexcept override</argsstring>
+        <argsstring>(const string &amp;encoding) noexcept override</argsstring>
         <name>set_character_set</name>
         <qualifiedname>mysql_connect::set_character_set</qualifiedname>
-        <reimplements refid="structidb__connect_1a9f0b407a683b19bee646271a19356aad">set_character_set</reimplements>
+        <reimplements refid="structidb__connect_1a7787680de395dc737bd6b14978488854">set_character_set</reimplements>
         <param>
           <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
           <declname>encoding</declname>
@@ -166,9 +217,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="88" column="11"/>
-        <references refid="structmysql__connect_1a2e13b2d91f7de2c0dcfd683641249030">set_character_set</references>
-        <referencedby refid="structmysql__connect_1a2e13b2d91f7de2c0dcfd683641249030">set_character_set</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="93" column="11"/>
+        <references refid="structmysql__connect_1a533abdb0352cc94b584f92105d060263">set_character_set</references>
+        <referencedby refid="structmysql__connect_1a533abdb0352cc94b584f92105d060263">set_character_set</referencedby>
       </memberdef>
       <memberdef kind="function" id="structmysql__connect_1a5414f08463b839f685da263b3fddc6ad" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -211,7 +262,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="96" column="11"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="101" column="11"/>
         <references refid="structmysql__connect_1a5414f08463b839f685da263b3fddc6ad">set_options</references>
         <referencedby refid="structmysql__connect_1a5414f08463b839f685da263b3fddc6ad">set_options</referencedby>
       </memberdef>
@@ -232,7 +283,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="102" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="107" column="18"/>
         <references refid="structmysql__connect_1a7ce7bcd2cf4c4d3b027354cb7ada315a">get_character_set</references>
         <referencedby refid="structmysql__connect_1a7ce7bcd2cf4c4d3b027354cb7ada315a">get_character_set</referencedby>
       </memberdef>
@@ -253,7 +304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="108" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="113" column="18"/>
         <references refid="structmysql__connect_1a5a63558e63f2ee49c7c4675f4b8eeaa2">get_error</references>
         <referencedby refid="structmysql__connect_1a5a63558e63f2ee49c7c4675f4b8eeaa2">get_error</referencedby>
       </memberdef>
@@ -274,14 +325,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="114" column="15"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="119" column="15"/>
         <references refid="structmysql__connect_1ab967ed3e669dd3cfd6c34f84c1681668">get_errno</references>
         <referencedby refid="structmysql__connect_1ab967ed3e669dd3cfd6c34f84c1681668">get_errno</referencedby>
       </memberdef>
-      <memberdef kind="function" id="structmysql__connect_1a5ed187123d0770a91a9245fe1d8c373e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+      <memberdef kind="function" id="structmysql__connect_1aa4c374ecb1f983650ea1de662fa79a85" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
         <definition>bool mysql_connect::update</definition>
-        <argsstring>(const string &amp;sql) const noexcept override</argsstring>
+        <argsstring>(const string &amp;sql) const override</argsstring>
         <name>update</name>
         <qualifiedname>mysql_connect::update</qualifiedname>
         <reimplements refid="structidb__connect_1aedacf58e2ea956b26f4862e49506c3c2">update</reimplements>
@@ -308,14 +359,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="121" column="11"/>
-        <references refid="structmysql__connect_1a5ed187123d0770a91a9245fe1d8c373e">update</references>
-        <referencedby refid="structmysql__connect_1a5ed187123d0770a91a9245fe1d8c373e">update</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="126" column="11"/>
+        <references refid="structmysql__connect_1aa4c374ecb1f983650ea1de662fa79a85">update</references>
+        <referencedby refid="structmysql__connect_1aa4c374ecb1f983650ea1de662fa79a85">update</referencedby>
       </memberdef>
-      <memberdef kind="function" id="structmysql__connect_1a8b8017116c488288e6d90e647415fad2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" noexcept="yes" virt="virtual">
+      <memberdef kind="function" id="structmysql__connect_1ac0d8348ae20bc698ef2f1ac9a7f39bbf" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__tb__result" kindref="compound">idb_tb_result</ref> &gt;</type>
         <definition>unique_ptr&lt; idb_tb_result &gt; mysql_connect::query</definition>
-        <argsstring>(const string &amp;sql) const noexcept override</argsstring>
+        <argsstring>(const string &amp;sql) const override</argsstring>
         <name>query</name>
         <qualifiedname>mysql_connect::query</qualifiedname>
         <reimplements refid="structidb__tb__connect_1abc6b0d8058de22758e6c33fa9212e31e">query</reimplements>
@@ -342,9 +393,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="128" column="17"/>
-        <references refid="structmysql__connect_1a8b8017116c488288e6d90e647415fad2">query</references>
-        <referencedby refid="structmysql__connect_1a8b8017116c488288e6d90e647415fad2">query</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="133" column="17"/>
+        <references refid="structmysql__connect_1ac0d8348ae20bc698ef2f1ac9a7f39bbf">query</references>
+        <referencedby refid="structmysql__connect_1ac0d8348ae20bc698ef2f1ac9a7f39bbf">query</referencedby>
       </memberdef>
       <memberdef kind="function" id="structmysql__connect_1ad58dd2c6634b1415926cfc51927b6b92" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__prepared__statement" kindref="compound">idb_prepared_statement</ref> &gt;</type>
@@ -385,7 +436,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="136" column="17"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="141" column="17"/>
         <references refid="structmysql__connect_1ad58dd2c6634b1415926cfc51927b6b92">prepare_statement</references>
         <referencedby refid="structmysql__connect_1ad58dd2c6634b1415926cfc51927b6b92">prepare_statement</referencedby>
       </memberdef>
@@ -406,9 +457,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="142" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="142" bodyend="142"/>
-        <references refid="structmysql__connect_1aac85cab9c2d68515f69bdb47c96122de" compoundref="mysql__connect_8hpp" startline="142" endline="142">connected</references>
-        <referencedby refid="structmysql__connect_1aac85cab9c2d68515f69bdb47c96122de" compoundref="mysql__connect_8hpp" startline="142" endline="142">connected</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="147" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="147" bodyend="147"/>
+        <references refid="structmysql__connect_1aac85cab9c2d68515f69bdb47c96122de" compoundref="mysql__connect_8hpp" startline="147" endline="147">connected</references>
+        <references refid="structmysql__connect_1a42d08327b676836ebdcb608eb1877245" compoundref="mysql__connect_8hpp" startline="43">link_</references>
+        <referencedby refid="structmysql__connect_1aac85cab9c2d68515f69bdb47c96122de" compoundref="mysql__connect_8hpp" startline="147" endline="147">connected</referencedby>
       </memberdef>
       <memberdef kind="function" id="structmysql__connect_1a98b19778e12fb79ac9fcc4acf88faeef" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="virtual">
         <type>bool</type>
@@ -427,7 +479,97 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="148" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="148" bodyend="148"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="153" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="153" bodyend="153"/>
+        <references refid="structmysql__connect_1a42d08327b676836ebdcb608eb1877245" compoundref="mysql__connect_8hpp" startline="43">link_</references>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1ae2661c370bb7df2bb233ea2d459e5a22" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t mysql_connect::batch_insert</definition>
+        <argsstring>(const string &amp;table, const vector&lt; string &gt; &amp;columns, const vector&lt; vector&lt; string &gt; &gt; &amp;rows) override</argsstring>
+        <name>batch_insert</name>
+        <qualifiedname>mysql_connect::batch_insert</qualifiedname>
+        <reimplements refid="structidb__tb__connect_1a5952b72ab28dd8daa58bbac98e2c0e78">batch_insert</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>columns</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &gt; &amp;</type>
+          <declname>rows</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="155" column="12"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="structmysql__connect_1a9da336a0e958b4f60bb81f8b53ff5a53" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string mysql_connect::begin_sql</definition>
+        <argsstring>()</argsstring>
+        <name>begin_sql</name>
+        <qualifiedname>mysql_connect::begin_sql</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="159" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="159" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1adac77e1c3ef6e4a25dfb7e5aaba94a7e" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string mysql_connect::commit_sql</definition>
+        <argsstring>()</argsstring>
+        <name>commit_sql</name>
+        <qualifiedname>mysql_connect::commit_sql</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="160" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="160" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1a6d48fdf1abd407edd3c90edf9012293c" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string mysql_connect::rollback_sql</definition>
+        <argsstring>()</argsstring>
+        <name>rollback_sql</name>
+        <qualifiedname>mysql_connect::rollback_sql</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="161" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="161" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="structmysql__connect_1a471b1069bd90d601146299aab3ca6140" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string mysql_connect::table_exists_query</definition>
+        <argsstring>(const string &amp;table) const</argsstring>
+        <name>table_exists_query</name>
+        <qualifiedname>mysql_connect::table_exists_query</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="162" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="162" bodyend="162"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -445,32 +587,38 @@
 </para>
     </detaileddescription>
     <inheritancegraph>
-      <node id="3">
+      <node id="4">
         <label>idb_connect</label>
         <link refid="structidb__connect"/>
       </node>
-      <node id="2">
+      <node id="3">
         <label>idb_tb_connect</label>
         <link refid="structidb__tb__connect"/>
-        <childnode refid="3" relation="public-inheritance">
+        <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
         <label>mysql_connect</label>
         <link refid="structmysql__connect"/>
         <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>sql_connect_base&lt; mysql_connect &gt;</label>
+        <link refid="structsql__connect__base"/>
+        <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="3">
+      <node id="4">
         <label>idb_connect</label>
         <link refid="structidb__connect"/>
       </node>
-      <node id="2">
+      <node id="3">
         <label>idb_tb_connect</label>
         <link refid="structidb__tb__connect"/>
-        <childnode refid="3" relation="public-inheritance">
+        <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -479,27 +627,46 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="2">
+        <label>sql_connect_base&lt; mysql_connect &gt;</label>
+        <link refid="structsql__connect__base"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="41" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="41" bodyend="149"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" line="41" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_connect.hpp" bodystart="41" bodyend="163"/>
     <listofallmembers>
+      <member refid="structmysql__connect_1ae2661c370bb7df2bb233ea2d459e5a22" prot="public" virt="virtual"><scope>mysql_connect</scope><name>batch_insert</name></member>
+      <member refid="structsql__connect__base_1abe05e889f889d8968b23a6a278c72d4e" prot="public" virt="virtual"><scope>mysql_connect</scope><name>begin</name></member>
+      <member refid="structmysql__connect_1a9da336a0e958b4f60bb81f8b53ff5a53" prot="private" virt="non-virtual"><scope>mysql_connect</scope><name>begin_sql</name></member>
       <member refid="structidb__connect_1ab9be909e9ecc1db9cbcc28186de35c95" prot="public" virt="non-virtual"><scope>mysql_connect</scope><name>clock_type</name></member>
       <member refid="structmysql__connect_1a3eb1bfcd465e808514ef8b035e1f3ef5" prot="public" virt="virtual"><scope>mysql_connect</scope><name>close</name></member>
-      <member refid="structmysql__connect_1a75fef13b46de26b2281a8cd49193c7f0" prot="public" virt="virtual"><scope>mysql_connect</scope><name>connect</name></member>
+      <member refid="structsql__connect__base_1a65d87c665335e8b48e04011823b2f101" prot="public" virt="virtual"><scope>mysql_connect</scope><name>commit</name></member>
+      <member refid="structmysql__connect_1adac77e1c3ef6e4a25dfb7e5aaba94a7e" prot="private" virt="non-virtual"><scope>mysql_connect</scope><name>commit_sql</name></member>
+      <member refid="structmysql__connect_1aa43f421dd5960c9fad8583db9645cd43" prot="public" virt="virtual"><scope>mysql_connect</scope><name>connect</name></member>
       <member refid="structmysql__connect_1aac85cab9c2d68515f69bdb47c96122de" prot="public" virt="virtual"><scope>mysql_connect</scope><name>connected</name></member>
       <member refid="structidb__connect_1a5fe328d4bdf863d226d7065daf2cc56b" prot="public" virt="non-virtual"><scope>mysql_connect</scope><name>get_alive</name></member>
       <member refid="structmysql__connect_1a7ce7bcd2cf4c4d3b027354cb7ada315a" prot="public" virt="virtual"><scope>mysql_connect</scope><name>get_character_set</name></member>
       <member refid="structmysql__connect_1ab967ed3e669dd3cfd6c34f84c1681668" prot="public" virt="virtual"><scope>mysql_connect</scope><name>get_errno</name></member>
       <member refid="structmysql__connect_1a5a63558e63f2ee49c7c4675f4b8eeaa2" prot="public" virt="virtual"><scope>mysql_connect</scope><name>get_error</name></member>
       <member refid="structmysql__connect_1a98b19778e12fb79ac9fcc4acf88faeef" prot="public" virt="virtual"><scope>mysql_connect</scope><name>is_valid</name></member>
-      <member refid="structmysql__connect_1a42d08327b676836ebdcb608eb1877245" prot="private" virt="non-virtual"><scope>mysql_connect</scope><name>link_</name></member>
+      <member refid="structmysql__connect_1a16ac1b9bb4c4d9cd14d3b2be5b104ae2" prot="private" virt="non-virtual"><scope>mysql_connect</scope><name>last_errno_</name></member>
+      <member refid="structmysql__connect_1acc5078ceea669c9a330f6278feab58f3" prot="private" virt="non-virtual"><scope>mysql_connect</scope><name>last_error_</name></member>
+      <member refid="structmysql__connect_1a42d08327b676836ebdcb608eb1877245" prot="protected" virt="non-virtual"><scope>mysql_connect</scope><name>link_</name></member>
       <member refid="structmysql__connect_1a3b9a1a023281b5f8bf0b717feaf5895d" prot="public" virt="non-virtual"><scope>mysql_connect</scope><name>mysql_connect</name></member>
+      <member refid="structsql__connect__base_1aa0b6741b0c883b61f956a4797b121eff" prot="public" virt="virtual"><scope>mysql_connect</scope><name>native_handle</name></member>
       <member refid="structmysql__connect_1ad58dd2c6634b1415926cfc51927b6b92" prot="public" virt="virtual"><scope>mysql_connect</scope><name>prepare_statement</name></member>
-      <member refid="structmysql__connect_1a8b8017116c488288e6d90e647415fad2" prot="public" virt="virtual"><scope>mysql_connect</scope><name>query</name></member>
+      <member refid="structmysql__connect_1ac0d8348ae20bc698ef2f1ac9a7f39bbf" prot="public" virt="virtual"><scope>mysql_connect</scope><name>query</name></member>
       <member refid="structmysql__connect_1a54af01671a2bb8c280dd00e4504adfc0" prot="public" virt="virtual"><scope>mysql_connect</scope><name>reconnect</name></member>
       <member refid="structidb__connect_1a23d22fba9ce82c798a1363f0f816f593" prot="public" virt="non-virtual"><scope>mysql_connect</scope><name>refresh_alive</name></member>
-      <member refid="structmysql__connect_1a2e13b2d91f7de2c0dcfd683641249030" prot="public" virt="virtual"><scope>mysql_connect</scope><name>set_character_set</name></member>
+      <member refid="structsql__connect__base_1a2b520a2c7634de76a406fa57394e648f" prot="public" virt="virtual"><scope>mysql_connect</scope><name>rollback</name></member>
+      <member refid="structmysql__connect_1a6d48fdf1abd407edd3c90edf9012293c" prot="private" virt="non-virtual"><scope>mysql_connect</scope><name>rollback_sql</name></member>
+      <member refid="structmysql__connect_1a533abdb0352cc94b584f92105d060263" prot="public" virt="virtual"><scope>mysql_connect</scope><name>set_character_set</name></member>
       <member refid="structmysql__connect_1a5414f08463b839f685da263b3fddc6ad" prot="public" virt="non-virtual"><scope>mysql_connect</scope><name>set_options</name></member>
-      <member refid="structmysql__connect_1a5ed187123d0770a91a9245fe1d8c373e" prot="public" virt="virtual"><scope>mysql_connect</scope><name>update</name></member>
+      <member refid="structmysql__connect_1a37709292025487cd1bd5893d47546b88" prot="protected" virt="non-virtual"><scope>mysql_connect</scope><name>sql_connect_base&lt; mysql_connect &gt;</name></member>
+      <member refid="structsql__connect__base_1ab8a59526d650a1116b873d447068ad57" prot="public" virt="virtual"><scope>mysql_connect</scope><name>table_exists</name></member>
+      <member refid="structmysql__connect_1a471b1069bd90d601146299aab3ca6140" prot="private" virt="non-virtual"><scope>mysql_connect</scope><name>table_exists_query</name></member>
+      <member refid="structmysql__connect_1aa4c374ecb1f983650ea1de662fa79a85" prot="public" virt="virtual"><scope>mysql_connect</scope><name>update</name></member>
       <member refid="structidb__connect_1a5d49022ee34e758b7ad6725549ba9e2e" prot="public" virt="virtual"><scope>mysql_connect</scope><name>~idb_connect</name></member>
       <member refid="structidb__tb__connect_1a4ba8618ecc342e6ddfc5c20d9f2297ad" prot="public" virt="non-virtual"><scope>mysql_connect</scope><name>~idb_tb_connect</name></member>
       <member refid="structmysql__connect_1a6333c19361bdf32e80b25af448ec874d" prot="public" virt="non-virtual"><scope>mysql_connect</scope><name>~mysql_connect</name></member>

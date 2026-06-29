@@ -138,6 +138,8 @@ static bool&#160;</td><td class="memItemRight"><b>is_little_endian_runtime</b> (
 <tr class="memdesc:a9d431545beb8ae553f1641172196b61c"><td class="mdescLeft">&#160;</td><td class="mdescRight">读取64位小端整数  <br /></td></tr>
 <tr class="memitem:aae7a7c93bd022deb63ca42cbaf75445e" id="r_aae7a7c93bd022deb63ca42cbaf75445e"><td class="memItemLeft">static constexpr <a class="el" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#aae7a7c93bd022deb63ca42cbaf75445e">read_be16</a> (const <a class="el" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a> *<a class="el" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>) noexcept</td></tr>
 <tr class="memdesc:aae7a7c93bd022deb63ca42cbaf75445e"><td class="mdescLeft">&#160;</td><td class="mdescRight">读取16位大端整数  <br /></td></tr>
+<tr class="memitem:ac40943647285d0e52320fdaf05cc1ec9" id="r_ac40943647285d0e52320fdaf05cc1ec9"><td class="memItemLeft">static constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ac40943647285d0e52320fdaf05cc1ec9">read_be24</a> (const <a class="el" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a> *<a class="el" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>) noexcept</td></tr>
+<tr class="memdesc:ac40943647285d0e52320fdaf05cc1ec9"><td class="mdescLeft">&#160;</td><td class="mdescRight">读取24位大端整数  <br /></td></tr>
 <tr class="memitem:ae8e72014d2c1785cfdb8b48d775527a1" id="r_ae8e72014d2c1785cfdb8b48d775527a1"><td class="memItemLeft">static constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae8e72014d2c1785cfdb8b48d775527a1">read_be32</a> (const <a class="el" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a> *<a class="el" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>) noexcept</td></tr>
 <tr class="memdesc:ae8e72014d2c1785cfdb8b48d775527a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">读取32位大端整数  <br /></td></tr>
 <tr class="memitem:ab5e3e3daf88ee5609c5477e30c3f0217" id="r_ab5e3e3daf88ee5609c5477e30c3f0217"><td class="memItemLeft">static constexpr <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab5e3e3daf88ee5609c5477e30c3f0217">read_be64</a> (const <a class="el" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a> *<a class="el" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>) noexcept</td></tr>
@@ -602,6 +604,48 @@ template&lt;typename T&gt; </div>
 
 <p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>.</p>
 
+<p class="reference">被这些函数引用 <a class="el" href="byte__cursor_8hpp_source.html#l00093">byte_cursor::try_read_be16()</a>.</p>
+
+</div>
+</div>
+<a id="ac40943647285d0e52320fdaf05cc1ec9" name="ac40943647285d0e52320fdaf05cc1ec9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac40943647285d0e52320fdaf05cc1ec9">&#9670;&#160;</a></span>read_be24()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> endian::read_be24 </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a> *</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>读取24位大端整数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>字节数组指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>读取的24位整数（扩展为uint32_t） </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00280">280</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="byte__cursor_8hpp_source.html#l00106">byte_cursor::try_read_be24()</a>.</p>
+
 </div>
 </div>
 <a id="ae8e72014d2c1785cfdb8b48d775527a1" name="ae8e72014d2c1785cfdb8b48d775527a1"></a>
@@ -636,9 +680,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>读取的32位整数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00280">280</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00290">290</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="byte__cursor_8hpp_source.html#l00119">byte_cursor::try_read_be32()</a>.</p>
 
 </div>
 </div>
@@ -674,9 +720,11 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>读取的64位整数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00290">290</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00300">300</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="byte__cursor_8hpp_source.html#l00132">byte_cursor::try_read_be64()</a>.</p>
 
 </div>
 </div>
@@ -716,6 +764,8 @@ template&lt;typename T&gt; </div>
 
 <p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>.</p>
 
+<p class="reference">被这些函数引用 <a class="el" href="byte__cursor_8hpp_source.html#l00145">byte_cursor::try_read_le16()</a>.</p>
+
 </div>
 </div>
 <a id="a509ea1fc5587ada5b356d0cf6dd86a13" name="a509ea1fc5587ada5b356d0cf6dd86a13"></a>
@@ -754,6 +804,8 @@ template&lt;typename T&gt; </div>
 
 <p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>.</p>
 
+<p class="reference">被这些函数引用 <a class="el" href="byte__cursor_8hpp_source.html#l00158">byte_cursor::try_read_le32()</a>.</p>
+
 </div>
 </div>
 <a id="a9d431545beb8ae553f1641172196b61c" name="a9d431545beb8ae553f1641172196b61c"></a>
@@ -791,6 +843,8 @@ template&lt;typename T&gt; </div>
 <p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00259">259</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00395">data()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="byte__cursor_8hpp_source.html#l00171">byte_cursor::try_read_le64()</a>.</p>
 
 </div>
 </div>
@@ -877,7 +931,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00334">334</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00344">344</a> 行定义.</p>
 
 </div>
 </div>
@@ -917,7 +971,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00344">344</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00354">354</a> 行定义.</p>
 
 </div>
 </div>
@@ -957,7 +1011,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00355">355</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00365">365</a> 行定义.</p>
 
 </div>
 </div>
@@ -997,7 +1051,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00302">302</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00312">312</a> 行定义.</p>
 
 </div>
 </div>
@@ -1037,7 +1091,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00312">312</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00322">322</a> 行定义.</p>
 
 </div>
 </div>
@@ -1077,7 +1131,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00323">323</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="endian_8hpp_source.html">endian.hpp</a> 第 <a class="el" href="endian_8hpp_source.html#l00333">333</a> 行定义.</p>
 
 </div>
 </div>

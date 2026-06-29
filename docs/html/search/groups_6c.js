@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['进程_0',['进程',['../group___process.html',1,'']]]
+  ['缓冲区格式化_0',['缓冲区格式化',['../group___buffer_format.html',1,'']]],
+  ['缓存_1',['缓存',['../group___cache.html',1,'']]]
 ];

@@ -2,10 +2,10 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
   <compounddef id="classpgsql__connect" kind="class" language="C++" prot="public" final="yes">
     <compoundname>pgsql_connect</compoundname>
-    <basecompoundref refid="structidb__tb__connect" prot="public" virt="non-virtual">idb_tb_connect</basecompoundref>
+    <basecompoundref refid="structsql__connect__base" prot="public" virt="non-virtual">sql_connect_base&lt; pgsql_connect &gt;</basecompoundref>
     <includes refid="pgsql__connect_8hpp" local="no">pgsql_connect.hpp</includes>
-    <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classpgsql__connect_1a302469e924ae30db8d91181b635d164b" prot="private" static="no" mutable="no">
+    <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classpgsql__connect_1a302469e924ae30db8d91181b635d164b" prot="protected" static="no" mutable="no">
         <type>::PGconn *</type>
         <definition>::PGconn* pgsql_connect::link_</definition>
         <argsstring></argsstring>
@@ -21,6 +21,22 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="44" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="44" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classpgsql__connect_1aaec2bb9a100d98f7ecdd0fcd2b0a75cf" prot="protected" static="no" mutable="no">
+        <type>friend</type>
+        <definition>friend pgsql_connect::sql_connect_base&lt; pgsql_connect &gt;</definition>
+        <argsstring></argsstring>
+        <name>sql_connect_base&lt; pgsql_connect &gt;</name>
+        <qualifiedname>pgsql_connect::sql_connect_base&lt; pgsql_connect &gt;</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="45" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classpgsql__connect_1a46fc0b1fe4104bfc85840c8b7665746b" prot="private" static="no" mutable="yes">
         <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
         <definition>string pgsql_connect::last_error_</definition>
@@ -34,7 +50,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="45" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="45" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="48" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="48" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classpgsql__connect_1a61a798ca149cd2581705d2152a4077a8" prot="private" static="no" mutable="yes">
         <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
@@ -50,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="46" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="46" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="49" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="49" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -67,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="52" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="55" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__connect_1afd2f6fe358954bb580cf600549a59645" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
@@ -83,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="59" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="59" bodyend="59"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="62" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="62" bodyend="62"/>
         <references refid="structidb__connect_1a689ce6c9a44cdc602e6006615e949e19">idb_connect::close</references>
       </memberdef>
       <memberdef kind="function" id="classpgsql__connect_1a34dbb9b0c024857c66c87e782a4be069" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -101,7 +117,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="61" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="64" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__connect_1aceb07e3b69ba8e9cb23ef36d83cd2f6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classpgsql__connect" kindref="compound">pgsql_connect</ref> &amp;</type>
@@ -118,7 +134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="62" column="19"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="65" column="19"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__connect_1a6e159619a209400aecb328533cb71254" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -150,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="72" column="11"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="75" column="11"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__connect_1a9215a5add6d0650189fce2d0d3b4b8a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -182,7 +198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="81" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="84" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__connect_1a3450d90f43777ec011692214e68ecd82" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -198,15 +214,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="86" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="89" column="10"/>
       </memberdef>
-      <memberdef kind="function" id="classpgsql__connect_1a4903abe371af79d3193ae88a3a2f56aa" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classpgsql__connect_1a9374bc7902b9b34815ff4d21b5ce9f4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
         <definition>bool pgsql_connect::set_character_set</definition>
-        <argsstring>(const string &amp;encoding) const override</argsstring>
+        <argsstring>(const string &amp;encoding) override</argsstring>
         <name>set_character_set</name>
         <qualifiedname>pgsql_connect::set_character_set</qualifiedname>
-        <reimplements refid="structidb__connect_1a9f0b407a683b19bee646271a19356aad">set_character_set</reimplements>
+        <reimplements refid="structidb__connect_1a7787680de395dc737bd6b14978488854">set_character_set</reimplements>
         <param>
           <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
           <declname>encoding</declname>
@@ -230,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="93" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="96" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__connect_1a52e24fd98bb9999f56da7067bd7d8ac1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
@@ -249,7 +265,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="99" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="102" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__connect_1a634957fd53245d67bcf55678e10c6e23" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
         <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
@@ -268,8 +284,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="105" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="105" bodyend="105"/>
-        <references refid="classbasic__string__view_1a0f326706d8c59c24d7012ae254368775" compoundref="basic__string__view_8hpp" startline="440" endline="442">basic_string_view&lt; CharT, Traits &gt;::view</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="108" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="108" bodyend="108"/>
+        <references refid="classbasic__string__view_1a0f326706d8c59c24d7012ae254368775" compoundref="basic__string__view_8hpp" startline="443" endline="445">basic_string_view&lt; CharT, Traits &gt;::view</references>
       </memberdef>
       <memberdef kind="function" id="classpgsql__connect_1a16279b4958b1085da6a7b5ec38ae5d92" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
         <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
@@ -288,7 +304,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="111" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="111" bodyend="111"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="114" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="114" bodyend="114"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__connect_1a035e9c7ee0abe108fe689c8a3a12abb0" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -320,7 +336,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="118" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="121" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__connect_1a31806222a34e6b49b6ad4116130da7d4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__tb__result" kindref="compound">idb_tb_result</ref> &gt;</type>
@@ -352,7 +368,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="125" column="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="128" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__connect_1a2b5a9bf1dac1e7b784ab3f07b90d8894" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="structidb__prepared__statement" kindref="compound">idb_prepared_statement</ref> &gt;</type>
@@ -384,7 +400,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="132" column="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="135" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__connect_1a48e680210a492ca888cfa16a478eb625" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -403,7 +419,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="138" column="11"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="141" column="11"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__connect_1a77185f49142507d39d9852ecbcf614dc" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
         <type>bool</type>
@@ -422,8 +438,116 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="144" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="144" bodyend="144"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="147" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="147" bodyend="147"/>
         <references refid="structidb__connect_1a05b7b473cdd13c18f5b44c83e09c082d">idb_connect::connected</references>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1a1c0ae6214bb69e09f3ee7432f8645637" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t pgsql_connect::batch_insert</definition>
+        <argsstring>(const string &amp;table, const vector&lt; string &gt; &amp;columns, const vector&lt; vector&lt; string &gt; &gt; &amp;rows) override</argsstring>
+        <name>batch_insert</name>
+        <qualifiedname>pgsql_connect::batch_insert</qualifiedname>
+        <reimplements refid="structidb__tb__connect_1a5952b72ab28dd8daa58bbac98e2c0e78">batch_insert</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>table</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &amp;</type>
+          <declname>columns</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &gt; &amp;</type>
+          <declname>rows</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="149" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1ab8eec6566ab9163f1c4d495f41250196" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool pgsql_connect::table_exists</definition>
+        <argsstring>(const string &amp;table) const override</argsstring>
+        <name>table_exists</name>
+        <qualifiedname>pgsql_connect::table_exists</qualifiedname>
+        <reimplements refid="structidb__tb__connect_1a4331083f4657bd45ae47cd7223f505e8">table_exists</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="153" column="11"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classpgsql__connect_1afa5c5259d20148de8e15af1858e418ee" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string pgsql_connect::begin_sql</definition>
+        <argsstring>()</argsstring>
+        <name>begin_sql</name>
+        <qualifiedname>pgsql_connect::begin_sql</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="156" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="156" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1a4d1097952a3e022deda8cb868f1743c5" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string pgsql_connect::commit_sql</definition>
+        <argsstring>()</argsstring>
+        <name>commit_sql</name>
+        <qualifiedname>pgsql_connect::commit_sql</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="157" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="157" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1af634720d4dc98cb14c3bae82617cc847" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string pgsql_connect::rollback_sql</definition>
+        <argsstring>()</argsstring>
+        <name>rollback_sql</name>
+        <qualifiedname>pgsql_connect::rollback_sql</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="158" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="158" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="classpgsql__connect_1aa4fadc5d3b2378b1e86179dd197fbaf6" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string pgsql_connect::table_exists_query</definition>
+        <argsstring>(const string &amp;table) const</argsstring>
+        <name>table_exists_query</name>
+        <qualifiedname>pgsql_connect::table_exists_query</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>table</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="159" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="159" bodyend="161"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -442,32 +566,38 @@
 </para>
     </detaileddescription>
     <inheritancegraph>
-      <node id="3">
+      <node id="4">
         <label>idb_connect</label>
         <link refid="structidb__connect"/>
       </node>
-      <node id="2">
+      <node id="3">
         <label>idb_tb_connect</label>
         <link refid="structidb__tb__connect"/>
-        <childnode refid="3" relation="public-inheritance">
+        <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
         <label>pgsql_connect</label>
         <link refid="classpgsql__connect"/>
         <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>sql_connect_base&lt; pgsql_connect &gt;</label>
+        <link refid="structsql__connect__base"/>
+        <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="3">
+      <node id="4">
         <label>idb_connect</label>
         <link refid="structidb__connect"/>
       </node>
-      <node id="2">
+      <node id="3">
         <label>idb_tb_connect</label>
         <link refid="structidb__tb__connect"/>
-        <childnode refid="3" relation="public-inheritance">
+        <childnode refid="4" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -476,11 +606,22 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="2">
+        <label>sql_connect_base&lt; pgsql_connect &gt;</label>
+        <link refid="structsql__connect__base"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="42" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="42" bodyend="145"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" line="42" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_connect.hpp" bodystart="42" bodyend="162"/>
     <listofallmembers>
+      <member refid="classpgsql__connect_1a1c0ae6214bb69e09f3ee7432f8645637" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>batch_insert</name></member>
+      <member refid="structsql__connect__base_1abe05e889f889d8968b23a6a278c72d4e" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>begin</name></member>
+      <member refid="classpgsql__connect_1afa5c5259d20148de8e15af1858e418ee" prot="private" virt="non-virtual"><scope>pgsql_connect</scope><name>begin_sql</name></member>
       <member refid="structidb__connect_1ab9be909e9ecc1db9cbcc28186de35c95" prot="public" virt="non-virtual"><scope>pgsql_connect</scope><name>clock_type</name></member>
       <member refid="classpgsql__connect_1a3450d90f43777ec011692214e68ecd82" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>close</name></member>
+      <member refid="structsql__connect__base_1a65d87c665335e8b48e04011823b2f101" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>commit</name></member>
+      <member refid="classpgsql__connect_1a4d1097952a3e022deda8cb868f1743c5" prot="private" virt="non-virtual"><scope>pgsql_connect</scope><name>commit_sql</name></member>
       <member refid="classpgsql__connect_1a6e159619a209400aecb328533cb71254" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>connect</name></member>
       <member refid="classpgsql__connect_1a48e680210a492ca888cfa16a478eb625" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>connected</name></member>
       <member refid="structidb__connect_1a5fe328d4bdf863d226d7065daf2cc56b" prot="public" virt="non-virtual"><scope>pgsql_connect</scope><name>get_alive</name></member>
@@ -490,7 +631,8 @@
       <member refid="classpgsql__connect_1a77185f49142507d39d9852ecbcf614dc" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>is_valid</name></member>
       <member refid="classpgsql__connect_1a61a798ca149cd2581705d2152a4077a8" prot="private" virt="non-virtual"><scope>pgsql_connect</scope><name>last_errno_</name></member>
       <member refid="classpgsql__connect_1a46fc0b1fe4104bfc85840c8b7665746b" prot="private" virt="non-virtual"><scope>pgsql_connect</scope><name>last_error_</name></member>
-      <member refid="classpgsql__connect_1a302469e924ae30db8d91181b635d164b" prot="private" virt="non-virtual"><scope>pgsql_connect</scope><name>link_</name></member>
+      <member refid="classpgsql__connect_1a302469e924ae30db8d91181b635d164b" prot="protected" virt="non-virtual"><scope>pgsql_connect</scope><name>link_</name></member>
+      <member refid="structsql__connect__base_1aa0b6741b0c883b61f956a4797b121eff" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>native_handle</name></member>
       <member refid="classpgsql__connect_1aceb07e3b69ba8e9cb23ef36d83cd2f6e" prot="public" virt="non-virtual"><scope>pgsql_connect</scope><name>operator=</name></member>
       <member refid="classpgsql__connect_1ac9870d95c3fd6dbc78a73bb6efea9d34" prot="public" virt="non-virtual"><scope>pgsql_connect</scope><name>pgsql_connect</name></member>
       <member refid="classpgsql__connect_1a34dbb9b0c024857c66c87e782a4be069" prot="public" virt="non-virtual"><scope>pgsql_connect</scope><name>pgsql_connect</name></member>
@@ -498,7 +640,12 @@
       <member refid="classpgsql__connect_1a31806222a34e6b49b6ad4116130da7d4" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>query</name></member>
       <member refid="classpgsql__connect_1a9215a5add6d0650189fce2d0d3b4b8a7" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>reconnect</name></member>
       <member refid="structidb__connect_1a23d22fba9ce82c798a1363f0f816f593" prot="public" virt="non-virtual"><scope>pgsql_connect</scope><name>refresh_alive</name></member>
-      <member refid="classpgsql__connect_1a4903abe371af79d3193ae88a3a2f56aa" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>set_character_set</name></member>
+      <member refid="structsql__connect__base_1a2b520a2c7634de76a406fa57394e648f" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>rollback</name></member>
+      <member refid="classpgsql__connect_1af634720d4dc98cb14c3bae82617cc847" prot="private" virt="non-virtual"><scope>pgsql_connect</scope><name>rollback_sql</name></member>
+      <member refid="classpgsql__connect_1a9374bc7902b9b34815ff4d21b5ce9f4f" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>set_character_set</name></member>
+      <member refid="classpgsql__connect_1aaec2bb9a100d98f7ecdd0fcd2b0a75cf" prot="protected" virt="non-virtual"><scope>pgsql_connect</scope><name>sql_connect_base&lt; pgsql_connect &gt;</name></member>
+      <member refid="classpgsql__connect_1ab8eec6566ab9163f1c4d495f41250196" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>table_exists</name></member>
+      <member refid="classpgsql__connect_1aa4fadc5d3b2378b1e86179dd197fbaf6" prot="private" virt="non-virtual"><scope>pgsql_connect</scope><name>table_exists_query</name></member>
       <member refid="classpgsql__connect_1a035e9c7ee0abe108fe689c8a3a12abb0" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>update</name></member>
       <member refid="structidb__connect_1a5d49022ee34e758b7ad6725549ba9e2e" prot="public" virt="virtual"><scope>pgsql_connect</scope><name>~idb_connect</name></member>
       <member refid="structidb__tb__connect_1a4ba8618ecc342e6ddfc5c20d9f2297ad" prot="public" virt="non-virtual"><scope>pgsql_connect</scope><name>~idb_tb_connect</name></member>

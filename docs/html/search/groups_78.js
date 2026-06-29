@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['颜色_0',['颜色',['../group___color.html',1,'']]]
+  ['配置格式操作_0',['配置格式操作',['../group___config_format.html',1,'']]]
 ];

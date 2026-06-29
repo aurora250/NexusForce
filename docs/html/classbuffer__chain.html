@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: buffer_chain类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classbuffer__chain.html','','classbuffer__chain-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">buffer_chain类 参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>链式缓冲区，用于零拷贝数据拼接  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="buffer__chain_8hpp_source.html">buffer_chain.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:af53b29d0568534ea3b2f365e1adc815b" id="r_af53b29d0568534ea3b2f365e1adc815b"><td class="memItemLeft"><a id="af53b29d0568534ea3b2f365e1adc815b" name="af53b29d0568534ea3b2f365e1adc815b"></a>
+void&#160;</td><td class="memItemRight"><b>append</b> (const char *<a class="el" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> <a class="el" href="group___type_erasure_functions.html#ga630d7b0d77515784d2391b3725ac6df0">size</a>)</td></tr>
+<tr class="memdesc:af53b29d0568534ea3b2f365e1adc815b"><td class="mdescLeft">&#160;</td><td class="mdescRight">追加数据视图 <br /></td></tr>
+<tr class="memitem:a2a0ebba8be6e0a824944f81b2eec6230" id="r_a2a0ebba8be6e0a824944f81b2eec6230"><td class="memItemLeft"><a id="a2a0ebba8be6e0a824944f81b2eec6230" name="a2a0ebba8be6e0a824944f81b2eec6230"></a>
+void&#160;</td><td class="memItemRight"><b>append</b> (const <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> sv)</td></tr>
+<tr class="memdesc:a2a0ebba8be6e0a824944f81b2eec6230"><td class="mdescLeft">&#160;</td><td class="mdescRight">追加 <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4" title="字符字符串视图">string_view</a> <br /></td></tr>
+<tr class="memitem:a829f879c328d6ff84b71e7343cc16ac4" id="r_a829f879c328d6ff84b71e7343cc16ac4"><td class="memItemLeft"><a id="a829f879c328d6ff84b71e7343cc16ac4" name="a829f879c328d6ff84b71e7343cc16ac4"></a>
+void&#160;</td><td class="memItemRight"><b>append</b> (const <a class="el" href="classbuffer__chain.html">buffer_chain</a> &amp;other)</td></tr>
+<tr class="memdesc:a829f879c328d6ff84b71e7343cc16ac4"><td class="mdescLeft">&#160;</td><td class="mdescRight">追加另一个 <a class="el" href="classbuffer__chain.html" title="链式缓冲区，用于零拷贝数据拼接">buffer_chain</a> 的内容 <br /></td></tr>
+<tr class="memitem:ae89612333d057b3423d798495cb518a9" id="r_ae89612333d057b3423d798495cb518a9"><td class="memItemLeft"><a id="ae89612333d057b3423d798495cb518a9" name="ae89612333d057b3423d798495cb518a9"></a>
+<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><b>flatten</b> () const</td></tr>
+<tr class="memdesc:ae89612333d057b3423d798495cb518a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">合并所有段为单一字符串 <br /></td></tr>
+<tr class="memitem:aab9a98bf930d5d22c55cd97d6b552630" id="r_aab9a98bf930d5d22c55cd97d6b552630"><td class="memItemLeft"><a id="aab9a98bf930d5d22c55cd97d6b552630" name="aab9a98bf930d5d22c55cd97d6b552630"></a>
+<a class="el" href="classvector.html">vector</a>&lt;::iovec &gt;&#160;</td><td class="memItemRight"><b>to_iovec</b> () const</td></tr>
+<tr class="memdesc:aab9a98bf930d5d22c55cd97d6b552630"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建 writev iovec 数组 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>链式缓冲区，用于零拷贝数据拼接 </p>
+<p>将多个内存块链接在一起，避免多次拷贝。 <a class="el" href="#ae89612333d057b3423d798495cb518a9" title="合并所有段为单一字符串">flatten()</a> 时才合并为单一缓冲区。 </p>
+
+<p class="definition">在文件 <a class="el" href="buffer__chain_8hpp_source.html">buffer_chain.hpp</a> 第 <a class="el" href="buffer__chain_8hpp_source.html#l00022">22</a> 行定义.</p>
+</div><hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="buffer__chain_8hpp_source.html">buffer_chain.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classbuffer__chain.html">buffer_chain</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

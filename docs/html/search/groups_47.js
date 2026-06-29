@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['旧式仿函数基类_0',['旧式仿函数基类',['../group___legacy_function_adapters.html',1,'']]]
+  ['控制台io_0',['控制台IO',['../group___console_i_o.html',1,'']]]
 ];

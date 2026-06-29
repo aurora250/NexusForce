@@ -12,6 +12,7 @@ var structsqlite__connect =
     [ "prepare_statement", "structsqlite__connect.html#ab348cbf76f7b9877656b627523fdb5e3", null ],
     [ "query", "structsqlite__connect.html#a17bae48b7f3266dd36b866828397c0d2", null ],
     [ "reconnect", "structsqlite__connect.html#a567e3e472c3d9886150ee4040c982c20", null ],
-    [ "set_character_set", "structsqlite__connect.html#a58dd0462e320b686b56efccafac5b767", null ],
-    [ "update", "structsqlite__connect.html#a1493548378279ac5916f09fd757d80b1", null ]
+    [ "set_character_set", "structsqlite__connect.html#af502ad1f11bb8dfcb53b2f1f379244d5", null ],
+    [ "update", "structsqlite__connect.html#a1493548378279ac5916f09fd757d80b1", null ],
+    [ "link_", "structsqlite__connect.html#acd145309c79e48c14d43b42788f2d459", null ]
 ];

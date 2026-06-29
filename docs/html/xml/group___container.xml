@@ -14,6 +14,10 @@
     <innerclass refid="classpriority__queue" prot="public">priority_queue</innerclass>
     <innerclass refid="classqueue" prot="public">queue</innerclass>
     <innerclass refid="classset" prot="public">set</innerclass>
+    <innerclass refid="classsparse__map" prot="public">sparse_map</innerclass>
+    <innerclass refid="classsparse__multimap" prot="public">sparse_multimap</innerclass>
+    <innerclass refid="classsparse__multiset" prot="public">sparse_multiset</innerclass>
+    <innerclass refid="classsparse__set" prot="public">sparse_set</innerclass>
     <innerclass refid="classstack" prot="public">stack</innerclass>
     <innerclass refid="classunordered__map" prot="public">unordered_map</innerclass>
     <innerclass refid="classunordered__multimap" prot="public">unordered_multimap</innerclass>
@@ -761,6 +765,552 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/container/set.hpp" line="467" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/set.hpp" declline="467" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gab9aeac3448f1521bac366e0413e77014" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;<ref refid="group___iterator_traits_1ga9cd98c1a9691055745b5fefddf920bfd" kindref="member">iter_map_key_t</ref>&lt;Iterator&gt;, <ref refid="group___iterator_traits_1gaf3cd69194a21e743c359d0d68f90ae32" kindref="member">iter_map_value_t</ref>&lt;Iterator&gt;&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_map</definition>
+        <argsstring>(Iterator, Iterator, Compare=Compare(), Alloc=Alloc()) -&gt; sparse_map&lt; iter_map_key_t&lt; Iterator &gt;, iter_map_value_t&lt; Iterator &gt;, Compare, Alloc &gt;</argsstring>
+        <name>sparse_map</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_map.hpp" line="571" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_map.hpp" declline="571" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga37d5f9d5c1ffa94c77e4a8304b4efc84" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structless" kindref="compound">less</ref>&lt;Key&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;Key, T&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_map</definition>
+        <argsstring>(std::initializer_list&lt; pair&lt; Key, T &gt; &gt;, Compare=Compare(), Alloc=Alloc()) -&gt; sparse_map&lt; Key, T, Compare, Alloc &gt;</argsstring>
+        <name>sparse_map</name>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt; &gt;</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_map.hpp" line="575" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_map.hpp" declline="575" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gab8264f9cc5be226b1925223d4f172d18" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_map</definition>
+        <argsstring>(Iterator, Iterator, Alloc) -&gt; sparse_map&lt; iter_map_key_t&lt; Iterator &gt;, iter_map_value_t&lt; Iterator &gt;, less&lt; iter_map_key_t&lt; Iterator &gt; &gt;, Alloc &gt;</argsstring>
+        <name>sparse_map</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_map.hpp" line="579" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_map.hpp" declline="579" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga23d123cc9e891c287e4d818f3f955d1e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_map</definition>
+        <argsstring>(std::initializer_list&lt; pair&lt; Key, T &gt; &gt;, Alloc) -&gt; sparse_map&lt; Key, T, less&lt; Key &gt;, Alloc &gt;</argsstring>
+        <name>sparse_map</name>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt; &gt;</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_map.hpp" line="583" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_map.hpp" declline="583" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gab09e631fb86255a5745ffde0546312f6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;<ref refid="group___iterator_traits_1ga9cd98c1a9691055745b5fefddf920bfd" kindref="member">iter_map_key_t</ref>&lt;Iterator&gt;, <ref refid="group___iterator_traits_1gaf3cd69194a21e743c359d0d68f90ae32" kindref="member">iter_map_value_t</ref>&lt;Iterator&gt;&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_multimap</definition>
+        <argsstring>(Iterator, Iterator, Compare=Compare(), Alloc=Alloc()) -&gt; sparse_multimap&lt; iter_map_key_t&lt; Iterator &gt;, iter_map_value_t&lt; Iterator &gt;, Compare, Alloc &gt;</argsstring>
+        <name>sparse_multimap</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="507" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" declline="507" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga5d5df6bfdc1ee25cfc5c3eb295f5314a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structless" kindref="compound">less</ref>&lt;Key&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="structpair" kindref="compound">pair</ref>&lt;Key, T&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_multimap</definition>
+        <argsstring>(std::initializer_list&lt; pair&lt; Key, T &gt; &gt;, Compare=Compare(), Alloc=Alloc()) -&gt; sparse_multimap&lt; Key, T, Compare, Alloc &gt;</argsstring>
+        <name>sparse_multimap</name>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt; &gt;</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="511" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" declline="511" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga25f2b169cc3b19ccaf859f9909ff65df" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_multimap</definition>
+        <argsstring>(Iterator, Iterator, Alloc) -&gt; sparse_multimap&lt; iter_map_key_t&lt; Iterator &gt;, iter_map_value_t&lt; Iterator &gt;, less&lt; iter_map_key_t&lt; Iterator &gt; &gt;, Alloc &gt;</argsstring>
+        <name>sparse_multimap</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="515" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" declline="515" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga733ace152047e1fb9c109ecfecfd860a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_multimap</definition>
+        <argsstring>(std::initializer_list&lt; pair&lt; Key, T &gt; &gt;, Alloc) -&gt; sparse_multimap&lt; Key, T, less&lt; Key &gt;, Alloc &gt;</argsstring>
+        <name>sparse_multimap</name>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; Key, T &gt; &gt;</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" line="519" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multimap.hpp" declline="519" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga7b8fd79f11bbaedfb2fd60d990a277cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structless" kindref="compound">less</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_multiset</definition>
+        <argsstring>(Iterator, Iterator, Compare=Compare(), Alloc=Alloc()) -&gt; sparse_multiset&lt; iter_value_t&lt; Iterator &gt;, Compare, Alloc &gt;</argsstring>
+        <name>sparse_multiset</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multiset.hpp" line="477" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multiset.hpp" declline="477" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga53d4f18ae30ebcddc2c95506228e50f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structless" kindref="compound">less</ref>&lt;Key&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;Key&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_multiset</definition>
+        <argsstring>(std::initializer_list&lt; Key &gt;, Compare=Compare(), Alloc=Alloc()) -&gt; sparse_multiset&lt; Key, Compare, Alloc &gt;</argsstring>
+        <name>sparse_multiset</name>
+        <param>
+          <type>std::initializer_list&lt; Key &gt;</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multiset.hpp" line="481" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multiset.hpp" declline="481" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga03db5e42fff0016455d85d4a78ff8e29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_multiset</definition>
+        <argsstring>(Iterator, Iterator, Alloc) -&gt; sparse_multiset&lt; iter_value_t&lt; Iterator &gt;, less&lt; iter_value_t&lt; Iterator &gt; &gt;, Alloc &gt;</argsstring>
+        <name>sparse_multiset</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multiset.hpp" line="485" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multiset.hpp" declline="485" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga4d5559ec13011d07f8244e8efe444398" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_multiset</definition>
+        <argsstring>(std::initializer_list&lt; Key &gt;, Alloc) -&gt; sparse_multiset&lt; Key, less&lt; Key &gt;, Alloc &gt;</argsstring>
+        <name>sparse_multiset</name>
+        <param>
+          <type>std::initializer_list&lt; Key &gt;</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multiset.hpp" line="489" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_multiset.hpp" declline="489" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga31c4c452443b88a81900830ed7bdfba8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structless" kindref="compound">less</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;<ref refid="group___iterator_traits_1gad620992f7bf5c8c7b5dfae7a3dd55781" kindref="member">iter_value_t</ref>&lt;Iterator&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_set</definition>
+        <argsstring>(Iterator, Iterator, Compare=Compare(), Alloc=Alloc()) -&gt; sparse_set&lt; iter_value_t&lt; Iterator &gt;, Compare, Alloc &gt;</argsstring>
+        <name>sparse_set</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="478" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" declline="478" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gaa354f2f3570b6c61b99a046b452814c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename Compare</type>
+            <defval><ref refid="structless" kindref="compound">less</ref>&lt;Key&gt;</defval>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+            <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;Key&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_set</definition>
+        <argsstring>(std::initializer_list&lt; Key &gt;, Compare=Compare(), Alloc=Alloc()) -&gt; sparse_set&lt; Key, Compare, Alloc &gt;</argsstring>
+        <name>sparse_set</name>
+        <param>
+          <type>std::initializer_list&lt; Key &gt;</type>
+        </param>
+        <param>
+          <type>Compare</type>
+          <defval>Compare()</defval>
+        </param>
+        <param>
+          <type>Alloc</type>
+          <defval>Alloc()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="482" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" declline="482" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1gab93d4019b260bd120064d095a663cdd0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_set</definition>
+        <argsstring>(Iterator, Iterator, Alloc) -&gt; sparse_set&lt; iter_value_t&lt; Iterator &gt;, less&lt; iter_value_t&lt; Iterator &gt; &gt;, Alloc &gt;</argsstring>
+        <name>sparse_set</name>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Iterator</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="485" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" declline="485" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="group___container_1ga17a396bc22038f734f983147147b0984" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Key</type>
+          </param>
+          <param>
+            <type>typename Alloc</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_set</definition>
+        <argsstring>(std::initializer_list&lt; Key &gt;, Alloc) -&gt; sparse_set&lt; Key, less&lt; Key &gt;, Alloc &gt;</argsstring>
+        <name>sparse_set</name>
+        <param>
+          <type>std::initializer_list&lt; Key &gt;</type>
+        </param>
+        <param>
+          <type>Alloc</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="488" column="1" declfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" declline="488" declcolumn="1"/>
       </memberdef>
       <memberdef kind="function" id="group___container_1ga3cd84b7b6da0d16c94c446ea651d2a2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>

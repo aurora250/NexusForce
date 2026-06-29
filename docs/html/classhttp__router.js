@@ -10,6 +10,7 @@ var classhttp__router =
     [ "get", "classhttp__router.html#a2f6816a6e60ac6a32747a7eee13fd21c", null ],
     [ "get_post", "classhttp__router.html#aa9300afd808ed56d627f0f6193183751", null ],
     [ "handle_request", "classhttp__router.html#a88c708f785f83f8cdb693de55c782d0f", null ],
+    [ "handle_request_async", "classhttp__router.html#a1a1d4fe21fbd2eef83f007540ab93a87", null ],
     [ "has_route", "classhttp__router.html#a5ac9af8a8cdfc192e7808143062e06b6", null ],
     [ "head", "classhttp__router.html#a6f83d5604379f641fba1916188e8037d", null ],
     [ "middleware_chain", "classhttp__router.html#af4a1efb46e263f19fc1bf85d26d7fa33", null ],

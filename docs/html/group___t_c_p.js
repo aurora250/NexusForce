@@ -5,7 +5,7 @@ var group___t_c_p =
       [ "accept", "classtcp__acceptor.html#a4981086af1b46cb09f58784469d16f13", null ],
       [ "accept_nonblock", "classtcp__acceptor.html#a677e1317fe230cd82993671b39e0fec9", null ],
       [ "open", "classtcp__acceptor.html#a01f29ebfd1e0f953d9f1f5ca7ec9896a", null ],
-      [ "open", "classtcp__acceptor.html#ac45ca9c8151fc981e49861f5e85b0434", null ]
+      [ "open", "classtcp__acceptor.html#a27acf9f7219de7e4462af8744e44137a", null ]
     ] ],
     [ "tcp_client_base", "classtcp__client__base.html", [
       [ "connect_callback_t", "classtcp__client__base.html#ad09db647aea484d8b3fa32368c41da67", null ],
@@ -113,7 +113,7 @@ var group___t_c_p =
       [ "~tcp_socket", "classtcp__socket.html#ae478390813792609937744c3ef8efce3", null ],
       [ "connect", "classtcp__socket.html#a5edcc5a4efa0c0cdb1cf61f7fa07c66b", null ],
       [ "is_ssl", "classtcp__socket.html#a57397ce241cbe72787a8b452321c715a", null ],
-      [ "open", "classtcp__socket.html#a4d419854509a10778b43c8561f9794b3", null ],
+      [ "open", "classtcp__socket.html#a34441a6c2a85f433b36b687aa7555193", null ],
       [ "receive", "classtcp__socket.html#ab36f07bf68660b6cf08f485a9865fd5b", null ],
       [ "receive_all", "classtcp__socket.html#ade0c66a5525a70ed0ff8bf2f58e966b4", null ],
       [ "send", "classtcp__socket.html#ad3d58c073c38c262bdb17719a1a18e18", null ],

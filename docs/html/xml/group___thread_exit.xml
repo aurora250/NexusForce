@@ -3,15 +3,17 @@
   <compounddef id="group___thread_exit" kind="group">
     <compoundname>ThreadExit</compoundname>
     <title>线程退出回调</title>
-    <innerclass refid="structat__thread__exit__elt" prot="public">at_thread_exit_elt</innerclass>
+    <innerclass refid="structthread__exit__listener" prot="public">thread_exit_listener</innerclass>
+    <innerclass refid="classthread__exit__notifier" prot="public">thread_exit_notifier</innerclass>
+    <innerclass refid="structthread__exit__elt" prot="public">thread_exit_elt</innerclass>
     <sectiondef kind="func">
-      <memberdef kind="function" id="group___thread_exit_1ga1f6a8348f8fc4c5ea205d46b3fc1163c" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+      <memberdef kind="function" id="group___thread_exit_1ga3f979cd07e3fd729bc96313ec9285e6b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>void</type>
         <definition>void thread_exit_register</definition>
-        <argsstring>(at_thread_exit_elt *elt, void(*callback)(void *)) noexcept</argsstring>
+        <argsstring>(thread_exit_elt *elt, void(*callback)(void *)) noexcept</argsstring>
         <name>thread_exit_register</name>
         <param>
-          <type><ref refid="structat__thread__exit__elt" kindref="compound">at_thread_exit_elt</ref> *</type>
+          <type><ref refid="structthread__exit__elt" kindref="compound">thread_exit_elt</ref> *</type>
           <declname>elt</declname>
         </param>
         <param>
@@ -43,7 +45,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/at_thread_exit.hpp" line="47" column="7" declfile="D:/Workspace/NexusForce/include/NeForce/core/async/at_thread_exit.hpp" declline="47" declcolumn="7"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_register.hpp" line="47" column="7" declfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_register.hpp" declline="47" declcolumn="7"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

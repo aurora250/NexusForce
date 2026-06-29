@@ -100,8 +100,6 @@ $(function(){initNavTree('classhttp__filter__chain.html','','classhttp__filter__
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:a6a66867b3fd432b04e8b21d78434d5c5" id="r_a6a66867b3fd432b04e8b21d78434d5c5"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6a66867b3fd432b04e8b21d78434d5c5">http_filter_chain</a> (const bool owns_filters)</td></tr>
-<tr class="memdesc:a6a66867b3fd432b04e8b21d78434d5c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
 <tr class="memitem:a35ce57384fe2ae4ae58f2cc69abc15c7" id="r_a35ce57384fe2ae4ae58f2cc69abc15c7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a35ce57384fe2ae4ae58f2cc69abc15c7">add_filter</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classhttp__filter.html">http_filter</a> &gt; filter)</td></tr>
 <tr class="memdesc:a35ce57384fe2ae4ae58f2cc69abc15c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加过滤器（转移所有权）  <br /></td></tr>
 <tr class="memitem:abcfb6acc83bb887465d156f8a56396be" id="r_abcfb6acc83bb887465d156f8a56396be"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#abcfb6acc83bb887465d156f8a56396be">add_filter_ref</a> (<a class="el" href="classhttp__filter.html">http_filter</a> *filter)</td></tr>
@@ -117,6 +115,10 @@ void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept</td></tr>
 <tr class="memdesc:ae9e6234f623b49cd4976c0c57a0e2e07"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行所有预过滤器  <br /></td></tr>
 <tr class="memitem:a8b714da2303a12b1b83f048b35af0f89" id="r_a8b714da2303a12b1b83f048b35af0f89"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8b714da2303a12b1b83f048b35af0f89">execute_post_filters</a> (<a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a> &amp;response)</td></tr>
 <tr class="memdesc:a8b714da2303a12b1b83f048b35af0f89"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行所有后过滤器  <br /></td></tr>
+<tr class="memitem:ae6f3c78f4eaac17c8c0f4b3029963a86" id="r_ae6f3c78f4eaac17c8c0f4b3029963a86"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae6f3c78f4eaac17c8c0f4b3029963a86">execute_pre_filters_async</a> (<a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a> &amp;response, http_context &amp;ctx, <a class="el" href="classfunction.html">function</a>&lt; void(bool)&gt; <a class="el" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>)</td></tr>
+<tr class="memdesc:ae6f3c78f4eaac17c8c0f4b3029963a86"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步执行所有预过滤器（回调链模式）  <br /></td></tr>
+<tr class="memitem:a5a04500fb579c84799510e9d759c5c80" id="r_a5a04500fb579c84799510e9d759c5c80"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a5a04500fb579c84799510e9d759c5c80">execute_post_filters_async</a> (<a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a> &amp;response, http_context &amp;ctx, <a class="el" href="classfunction.html">function</a>&lt; void()&gt; <a class="el" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>)</td></tr>
+<tr class="memdesc:a5a04500fb579c84799510e9d759c5c80"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步执行所有后过滤器（回调链模式）  <br /></td></tr>
 <tr class="memitem:ad5bc9253696b120f01d7ae8f4084a1bb" id="r_ad5bc9253696b120f01d7ae8f4084a1bb"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad5bc9253696b120f01d7ae8f4084a1bb">execute_filters</a> (<a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a> &amp;response)</td></tr>
 <tr class="memdesc:ad5bc9253696b120f01d7ae8f4084a1bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行所有核心过滤器  <br /></td></tr>
 </table>
@@ -124,44 +126,8 @@ void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept</td></tr>
 <div class="textblock"><p>HTTP过滤器链 </p>
 <p>管理多个过滤器的有序执行，支持预过滤、后过滤和核心过滤。 </p>
 
-<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00095">95</a> 行定义.</p>
-</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
-<a id="a6a66867b3fd432b04e8b21d78434d5c5" name="a6a66867b3fd432b04e8b21d78434d5c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a66867b3fd432b04e8b21d78434d5c5">&#9670;&#160;</a></span>http_filter_chain()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">http_filter_chain::http_filter_chain </td>
-          <td>(</td>
-          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>owns_filters</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>构造函数 </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">owns_filters</td><td>是否拥有过滤器所有权 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00107">107</a> 行定义.</p>
-
-</div>
-</div>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00094">94</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="a35ce57384fe2ae4ae58f2cc69abc15c7" name="a35ce57384fe2ae4ae58f2cc69abc15c7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a35ce57384fe2ae4ae58f2cc69abc15c7">&#9670;&#160;</a></span>add_filter()</h2>
 
@@ -184,10 +150,6 @@ void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept</td></tr>
   </table>
   </dd>
 </dl>
-
-<p class="reference">引用了 <a class="el" href="#a35ce57384fe2ae4ae58f2cc69abc15c7">add_filter()</a>.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="#a35ce57384fe2ae4ae58f2cc69abc15c7">add_filter()</a>.</p>
 
 </div>
 </div>
@@ -213,10 +175,6 @@ void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept</td></tr>
   </table>
   </dd>
 </dl>
-
-<p class="reference">引用了 <a class="el" href="#abcfb6acc83bb887465d156f8a56396be">add_filter_ref()</a>.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="#abcfb6acc83bb887465d156f8a56396be">add_filter_ref()</a>.</p>
 
 </div>
 </div>
@@ -246,7 +204,7 @@ void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept</td></tr>
 <p>检查过滤器链是否为空 </p>
 <dl class="section return"><dt>返回</dt><dd>为空返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00143">143</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00139">139</a> 行定义.</p>
 
 </div>
 </div>
@@ -310,6 +268,50 @@ void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept</td></tr>
 
 </div>
 </div>
+<a id="a5a04500fb579c84799510e9d759c5c80" name="a5a04500fb579c84799510e9d759c5c80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a04500fb579c84799510e9d759c5c80">&#9670;&#160;</a></span>execute_post_filters_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void http_filter_chain::execute_post_filters_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">http_context &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfunction.html">function</a>&lt; void()&gt;</td>          <td class="paramname"><span class="paramname"><em>next</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>异步执行所有后过滤器（回调链模式） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>HTTP请求 </td></tr>
+    <tr><td class="paramname">response</td><td>HTTP响应 </td></tr>
+    <tr><td class="paramname">ctx</td><td>请求上下文 </td></tr>
+    <tr><td class="paramname">next</td><td>所有过滤器完成后调用 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="iterator_8hpp_source.html#l00157">next()</a>.</p>
+
+</div>
+</div>
 <a id="ae9e6234f623b49cd4976c0c57a0e2e07" name="ae9e6234f623b49cd4976c0c57a0e2e07"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae9e6234f623b49cd4976c0c57a0e2e07">&#9670;&#160;</a></span>execute_pre_filters()</h2>
 
@@ -341,6 +343,50 @@ void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept</td></tr>
 
 </div>
 </div>
+<a id="ae6f3c78f4eaac17c8c0f4b3029963a86" name="ae6f3c78f4eaac17c8c0f4b3029963a86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6f3c78f4eaac17c8c0f4b3029963a86">&#9670;&#160;</a></span>execute_pre_filters_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void http_filter_chain::execute_pre_filters_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">http_context &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfunction.html">function</a>&lt; void(bool)&gt;</td>          <td class="paramname"><span class="paramname"><em>next</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>异步执行所有预过滤器（回调链模式） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>HTTP请求 </td></tr>
+    <tr><td class="paramname">response</td><td>HTTP响应 </td></tr>
+    <tr><td class="paramname">ctx</td><td>请求上下文 </td></tr>
+    <tr><td class="paramname">next</td><td>所有过滤器通过后调用 next(true)，任一中断调用 next(false) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="iterator_8hpp_source.html#l00157">next()</a>.</p>
+
+</div>
+</div>
 <a id="a19e4a74a2a6d2b7aa49cd3b1e3ecd405" name="a19e4a74a2a6d2b7aa49cd3b1e3ecd405"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a19e4a74a2a6d2b7aa49cd3b1e3ecd405">&#9670;&#160;</a></span>size()</h2>
 
@@ -367,11 +413,11 @@ void&#160;</td><td class="memItemRight"><b>clear</b> () noexcept</td></tr>
 <p>获取过滤器数量 </p>
 <dl class="section return"><dt>返回</dt><dd>过滤器数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00137">137</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__filter_8hpp_source.html">http_filter.hpp</a> 第 <a class="el" href="http__filter_8hpp_source.html#l00133">133</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="http__filter_8hpp_source.html#l00137">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="http__filter_8hpp_source.html#l00133">size()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="http__filter_8hpp_source.html#l00137">size()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="http__filter_8hpp_source.html#l00133">size()</a>.</p>
 
 </div>
 </div>

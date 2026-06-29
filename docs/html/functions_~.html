@@ -109,6 +109,7 @@ $(function(){initNavTree('functions_~.html','',''); });
 <li>~database_pool()&#160;:&#160;<a class="el" href="classdatabase__pool.html#af1c193fefa6d542e3e2e0b654734cc05">database_pool</a></li>
 <li>~deque()&#160;:&#160;<a class="el" href="classdeque.html#a1a5e9b314eb209e249bfd4f1da756a06">deque&lt; T, Alloc, BufSize &gt;</a></li>
 <li>~env_value()&#160;:&#160;<a class="el" href="classenv__value.html#aea8033fba4703a097fbcec974276dd45">env_value</a></li>
+<li>~event_loop()&#160;:&#160;<a class="el" href="classevent__loop.html#a4244dc0c57ed3f333f7cad9b56473fba">event_loop</a></li>
 <li>~exception()&#160;:&#160;<a class="el" href="structexception.html#a80249b2b108c9b913dc7144839092a2b">exception</a></li>
 <li>~exception_ptr()&#160;:&#160;<a class="el" href="classexception__ptr.html#a3a5bbaa59d8846ad1ba8f08d4d714faf">exception_ptr</a></li>
 <li>~file()&#160;:&#160;<a class="el" href="classfile.html#a7174566303bcda6dc7d47cc0997c8c42">file</a></li>
@@ -132,7 +133,6 @@ $(function(){initNavTree('functions_~.html','',''); });
 <li>~locale()&#160;:&#160;<a class="el" href="classlocale.html#a48ff55f3160b36c69ca6b1d4f1055008">locale</a></li>
 <li>~lock()&#160;:&#160;<a class="el" href="classlock.html#adb4ce8b5e242ebe322010ba23f6f8f9b">lock&lt; Mutex &gt;</a></li>
 <li>~lock_free_queue()&#160;:&#160;<a class="el" href="classlock__free__queue.html#ad694f5f11345581b7cdced27bf9b7c91">lock_free_queue&lt; T &gt;</a></li>
-<li>~logger()&#160;:&#160;<a class="el" href="classlogger.html#aadd537feeeb16186f6aeb4ca0267a8d7">logger</a></li>
 <li>~map()&#160;:&#160;<a class="el" href="classmap.html#aba23efa0f67c4e3cb15e02c130756001">map&lt; Key, T, Compare, Alloc &gt;</a></li>
 <li>~memory_view()&#160;:&#160;<a class="el" href="classmemory__view.html#a214385eef411de4a98264720c09aeead">memory_view&lt; Element, Extent &gt;</a></li>
 <li>~multimap()&#160;:&#160;<a class="el" href="classmultimap.html#aa6805aca3816cfa74b1583f67d0053f2">multimap&lt; Key, T, Compare, Alloc &gt;</a></li>
@@ -142,12 +142,12 @@ $(function(){initNavTree('functions_~.html','',''); });
 <li>~mysql_prepared_result()&#160;:&#160;<a class="el" href="classmysql__prepared__result.html#af5f8c1d061f3f3e0fa6252348a9fad4c">mysql_prepared_result</a></li>
 <li>~mysql_prepared_statement()&#160;:&#160;<a class="el" href="classmysql__prepared__statement.html#a397184c618d3dbd7ab7757bf36b751e0">mysql_prepared_statement</a></li>
 <li>~mysql_result()&#160;:&#160;<a class="el" href="structmysql__result.html#a835a01b9b0c05a7d39e8cc30d976dfaa">mysql_result</a></li>
+<li>~named_pipe()&#160;:&#160;<a class="el" href="classnamed__pipe.html#aace47bc778d897c531bc0b02aa25740c">named_pipe</a></li>
 <li>~optional()&#160;:&#160;<a class="el" href="classoptional.html#a6ce2a0a8d1e07cf4102d81c0a6c5cb35">optional&lt; T &gt;</a>, <a class="el" href="classoptional_3_01_t_01_6_01_4.html#ac7aacb4c8a5a8fa0b169177cf980879a">optional&lt; T &amp; &gt;</a></li>
 <li>~packaged_task()&#160;:&#160;<a class="el" href="classpackaged__task_3_01_res_07_args_8_8_8_08_4.html#a94bb0b76b969c5a71970777406a2b768">packaged_task&lt; Res(Args...)&gt;</a></li>
 <li>~pair()&#160;:&#160;<a class="el" href="structpair.html#af8e639481d411ddefca10501f23d31f3">pair&lt; T1, T2 &gt;</a></li>
 <li>~pgsql_connect()&#160;:&#160;<a class="el" href="classpgsql__connect.html#afd2f6fe358954bb580cf600549a59645">pgsql_connect</a></li>
 <li>~pgsql_factory()&#160;:&#160;<a class="el" href="classpgsql__factory.html#ad83d4ad388909913520867c96e487895">pgsql_factory</a></li>
-<li>~pgsql_prepared_result()&#160;:&#160;<a class="el" href="classpgsql__prepared__result.html#a2ff9c2154839e32138b6cf21ce9208d4">pgsql_prepared_result</a></li>
 <li>~pgsql_prepared_statement()&#160;:&#160;<a class="el" href="classpgsql__prepared__statement.html#a1b2bcc37f5cd12d875a87b457f44c2b3">pgsql_prepared_statement</a></li>
 <li>~pgsql_tb_result()&#160;:&#160;<a class="el" href="classpgsql__tb__result.html#a9f77b730e0608d3450b0dfba2d29a8d9">pgsql_tb_result</a></li>
 <li>~pipe()&#160;:&#160;<a class="el" href="classpipe.html#ab46b67e9dc7bf3134a6f6db0fedcc63a">pipe</a></li>
@@ -164,12 +164,13 @@ $(function(){initNavTree('functions_~.html','',''); });
 <li>~registry_key()&#160;:&#160;<a class="el" href="classregistry__key.html#a9e0f5149b4f122961b1a5d4208423151">registry_key</a></li>
 <li>~retire_list()&#160;:&#160;<a class="el" href="structretire__list.html#ab8166a60fc5f971df18cf6e68ffe060e">retire_list</a></li>
 <li>~reverse_iterator()&#160;:&#160;<a class="el" href="classreverse__iterator.html#a51145926512d52d66b203ba3fe33adc9">reverse_iterator&lt; Iter &gt;</a></li>
+<li>~scope_connection()&#160;:&#160;<a class="el" href="classscope__connection.html#a1d7e53c06ddd76812c9285e5c31c881e">scope_connection</a></li>
 <li>~scope_exit()&#160;:&#160;<a class="el" href="classscope__exit.html#ac5af4b4aaf9b226075e61d68bd320752">scope_exit&lt; Func &gt;</a></li>
 <li>~scope_fail()&#160;:&#160;<a class="el" href="classscope__fail.html#a58fbdf72f42b141800d07ff5f328880c">scope_fail&lt; Func &gt;</a></li>
-<li>~scope_success()&#160;:&#160;<a class="el" href="classscope__success.html#a310ca7b0aef05c30c2a102a6f81a63ec">scope_success&lt; Func &gt;</a></li>
+<li>~scope_success()&#160;:&#160;<a class="el" href="classscope__success.html#a9b491f1271cf501a287b89876d92490b">scope_success&lt; Func &gt;</a></li>
+<li>~scope_thread()&#160;:&#160;<a class="el" href="classscope__thread.html#a6bddf3eb6bf5b05afd5e495ada8345ab">scope_thread</a></li>
+<li>~scope_transaction()&#160;:&#160;<a class="el" href="classscope__transaction.html#a2f92320b1b87777148d87cbf3c3a44dd">scope_transaction&lt; Connect &gt;</a></li>
 <li>~scoped_click()&#160;:&#160;<a class="el" href="classscoped__click.html#ad91adc07b76bd12c1494ad5165faab9e">scoped_click</a></li>
-<li>~scoped_connection()&#160;:&#160;<a class="el" href="classscoped__connection.html#acdca0ae2668e4291c0b97f357e9fea54">scoped_connection</a></li>
-<li>~scoped_thread()&#160;:&#160;<a class="el" href="classscoped__thread.html#aba6039d5cf3715b9fc269be84846e0f3">scoped_thread</a></li>
 <li>~semaphore()&#160;:&#160;<a class="el" href="classsemaphore.html#a91211aa51e970af200a5c7009371c4c5">semaphore</a></li>
 <li>~set()&#160;:&#160;<a class="el" href="classset.html#a1f90281e19864996de54449611f82791">set&lt; Key, Compare, Alloc &gt;</a></li>
 <li>~share_memory()&#160;:&#160;<a class="el" href="classshare__memory.html#a931d2cea4d64625fc4bd3c12ed0196c2">share_memory</a></li>
@@ -179,9 +180,13 @@ $(function(){initNavTree('functions_~.html','',''); });
 <li>~signal_blocker()&#160;:&#160;<a class="el" href="classsignal__blocker.html#a22e1918528b57aadff8272e52ac4519b">signal_blocker&lt; Types &gt;</a></li>
 <li>~signal_guard()&#160;:&#160;<a class="el" href="classsignal__guard.html#aee7ddbf38b97c0e1b73e3babe81a9177">signal_guard</a></li>
 <li>~socket_base()&#160;:&#160;<a class="el" href="classsocket__base.html#ad718ca0872f7a951b40b00da45151d10">socket_base</a></li>
+<li>~sparse_map()&#160;:&#160;<a class="el" href="classsparse__map.html#a7430d15d630a000c01fa00286c1f704e">sparse_map&lt; Key, T, Compare, Alloc &gt;</a></li>
+<li>~sparse_multimap()&#160;:&#160;<a class="el" href="classsparse__multimap.html#ac6523cd1af6a1831c020155fcfd3d8e1">sparse_multimap&lt; Key, T, Compare, Alloc &gt;</a></li>
+<li>~sparse_multiset()&#160;:&#160;<a class="el" href="classsparse__multiset.html#aa79329e7e674a9b7507d97d1c3df87b3">sparse_multiset&lt; Key, Compare, Alloc &gt;</a></li>
+<li>~sparse_set()&#160;:&#160;<a class="el" href="classsparse__set.html#a5f1c04301415e84ea2c0fbb5f296c60e">sparse_set&lt; Key, Compare, Alloc &gt;</a></li>
+<li>~sparse_vector()&#160;:&#160;<a class="el" href="classsparse__vector.html#a9cfe50bb1fda3697f8969a06791cf8b9">sparse_vector&lt; Key, Value, KeyOfValue, Compare, Alloc &gt;</a></li>
 <li>~sql_builder()&#160;:&#160;<a class="el" href="classsql__builder.html#a3192c5cdeca6b7e4f1a0ef3582b75bb1">sql_builder</a></li>
 <li>~sqlite_connect()&#160;:&#160;<a class="el" href="structsqlite__connect.html#a5f2a35ca8e5fdf3aad5700dde761706c">sqlite_connect</a></li>
-<li>~sqlite_prepared_result()&#160;:&#160;<a class="el" href="structsqlite__prepared__result.html#a3373bfa2cf54feebd9687f743ace2098">sqlite_prepared_result</a></li>
 <li>~sqlite_prepared_statement()&#160;:&#160;<a class="el" href="classsqlite__prepared__statement.html#a63246bb638e867f1b85dcc4d04ec4972">sqlite_prepared_statement</a></li>
 <li>~sqlite_result()&#160;:&#160;<a class="el" href="structsqlite__result.html#ae5a1354b25ea70ae0676772b87f456f3">sqlite_result</a></li>
 <li>~ssl_socket()&#160;:&#160;<a class="el" href="classssl__socket.html#a76cf3d2ca514fa1fe702c82f5e534c79">ssl_socket</a></li>

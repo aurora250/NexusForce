@@ -4,7 +4,7 @@
     <compoundname>Thread</compoundname>
     <title>线程</title>
     <innerclass refid="classlazy__thread" prot="public">lazy_thread</innerclass>
-    <innerclass refid="classscoped__thread" prot="public">scoped_thread</innerclass>
+    <innerclass refid="classscope__thread" prot="public">scope_thread</innerclass>
     <innerclass refid="classthread" prot="public">thread</innerclass>
     <innerclass refid="classthread__tracker" prot="public">thread_tracker</innerclass>
     <sectiondef kind="func">
@@ -328,14 +328,14 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" line="195" column="6" declfile="D:/Workspace/NexusForce/include/NeForce/core/async/this_thread.hpp" declline="195" declcolumn="6"/>
-        <referencedby refid="structsignal_1acfa41147426f9bde3e4de17b5c766188" compoundref="signals_8hpp" startline="446" endline="450">signal&lt; Types &gt;::connect</referencedby>
-        <referencedby refid="structsignal_1a3dba4fb9c54309c5510e961e0c28dee7" compoundref="signals_8hpp" startline="464" endline="478">signal&lt; Types &gt;::connect</referencedby>
-        <referencedby refid="structsignal_1a41ddbcc2553c833fc43305379fa4ac08" compoundref="signals_8hpp" startline="661" endline="676">signal&lt; Types &gt;::connect_filtered</referencedby>
-        <referencedby refid="structsignal_1aa9277d30b26d90895c1b47f89be50e3c" compoundref="signals_8hpp" startline="604" endline="616">signal&lt; Types &gt;::connect_if</referencedby>
-        <referencedby refid="structsignal_1a8f761800f9a11daf0a1360a176920811" compoundref="signals_8hpp" startline="632" endline="647">signal&lt; Types &gt;::connect_if</referencedby>
-        <referencedby refid="structsignal_1a29c8b656f06088b8e6f1157fd7cf8ec4" compoundref="signals_8hpp" startline="564" endline="571">signal&lt; Types &gt;::connect_signal</referencedby>
-        <referencedby refid="structsignal_1a7d2063751e621de0758171caa2d53f10" compoundref="signals_8hpp" startline="581" endline="590">signal&lt; Types &gt;::connect_signal</referencedby>
-        <referencedby refid="structsignal_1a1785833d435f019073036ac417ba6aae" compoundref="signals_8hpp" startline="690" endline="699">signal&lt; Types &gt;::connect_transformed</referencedby>
+        <referencedby refid="structsignal_1acfa41147426f9bde3e4de17b5c766188" compoundref="signals_8hpp" startline="506" endline="510">signal&lt; Types &gt;::connect</referencedby>
+        <referencedby refid="structsignal_1a3dba4fb9c54309c5510e961e0c28dee7" compoundref="signals_8hpp" startline="524" endline="538">signal&lt; Types &gt;::connect</referencedby>
+        <referencedby refid="structsignal_1a41ddbcc2553c833fc43305379fa4ac08" compoundref="signals_8hpp" startline="721" endline="736">signal&lt; Types &gt;::connect_filtered</referencedby>
+        <referencedby refid="structsignal_1aa9277d30b26d90895c1b47f89be50e3c" compoundref="signals_8hpp" startline="664" endline="676">signal&lt; Types &gt;::connect_if</referencedby>
+        <referencedby refid="structsignal_1a8f761800f9a11daf0a1360a176920811" compoundref="signals_8hpp" startline="692" endline="707">signal&lt; Types &gt;::connect_if</referencedby>
+        <referencedby refid="structsignal_1a29c8b656f06088b8e6f1157fd7cf8ec4" compoundref="signals_8hpp" startline="624" endline="631">signal&lt; Types &gt;::connect_signal</referencedby>
+        <referencedby refid="structsignal_1a7d2063751e621de0758171caa2d53f10" compoundref="signals_8hpp" startline="641" endline="650">signal&lt; Types &gt;::connect_signal</referencedby>
+        <referencedby refid="structsignal_1a1785833d435f019073036ac417ba6aae" compoundref="signals_8hpp" startline="750" endline="759">signal&lt; Types &gt;::connect_transformed</referencedby>
         <referencedby refid="group___thread_pool_1gab0dfe2ffce57ef2437c2bc1060febc71">get_current_task_group</referencedby>
         <referencedby refid="group___thread_1gaa469c500cf87ffbcc99652c4db286bb2">set_priority</referencedby>
         <referencedby refid="classthread__pool_1ae3bf04c2adddd193bba36f6c338c9b9e">thread_pool::submit_after</referencedby>
@@ -357,9 +357,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="449" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="449" bodyend="455"/>
-        <referencedby refid="classtimer__scheduler_1ad7e2861340ab12370ceaec61a82c9129" compoundref="timer_8hpp" startline="180" endline="206">timer_scheduler&lt; Clock &gt;::add_task</referencedby>
-        <referencedby refid="classmeta__type_1a145e272433cc67ed14ba252c0d3f5ef7" compoundref="type_8hpp" startline="109" endline="112">meta_type::meta_type</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="450" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="450" bodyend="456"/>
+        <referencedby refid="classtimer__scheduler_1ad7e2861340ab12370ceaec61a82c9129" compoundref="timer_8hpp" startline="185" endline="211">timer_scheduler&lt; Clock &gt;::add_task</referencedby>
+        <referencedby refid="classmeta__type_1a740cae95f07f6c44b77f84f41b1d0ad7" compoundref="type_8hpp" startline="333" endline="336">meta_type::element_type_id</referencedby>
+        <referencedby refid="classmeta__type_1a27c49b77bb8c6f2b05abb0994fb48cb7" compoundref="type_8hpp" startline="346" endline="349">meta_type::key_type_id</referencedby>
+        <referencedby refid="classmeta__type_1ad70b756e8b4d382fda556246a5a56153" compoundref="type_8hpp" startline="359" endline="362">meta_type::mapped_type_id</referencedby>
+        <referencedby refid="classmeta__type_1a145e272433cc67ed14ba252c0d3f5ef7" compoundref="type_8hpp" startline="141" endline="144">meta_type::meta_type</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___thread_1ga3b4d8e35a1675a3e99ed89c2ffe7d4f2" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classthread_1a64c16d44c53f6b7aaac118ec379ed0a4" kindref="member">thread::native_handle_type</ref></type>
@@ -376,7 +379,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="461" column="35" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="461" bodyend="467"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="462" column="35" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="462" bodyend="468"/>
         <referencedby refid="structvirtual__thread__task_1_1promise__type_1a830e3c9947559cb322fb08eeeae7e12e" compoundref="virtual__thread_8hpp" startline="599" endline="617">virtual_thread_task&lt; T &gt;::promise_type::await_transform</referencedby>
         <referencedby refid="structvirtual__thread__task_1_1promise__type_1ad5192c1304919fac0705333de16221ab" compoundref="virtual__thread_8hpp" startline="579" endline="593">virtual_thread_task&lt; T &gt;::promise_type::await_transform</referencedby>
         <referencedby refid="structvirtual__thread__task_3_01void_01_4_1_1promise__type_1a4daffa557bc923e0a4185226b773e455" compoundref="virtual__thread_8hpp" startline="321" endline="339">virtual_thread_task&lt; void &gt;::promise_type::await_transform</referencedby>
@@ -428,35 +431,52 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="475" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="475" bodyend="477"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="476" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="476" bodyend="478"/>
         <references refid="classthread_1ac1c3666fcd10451cee601dec58c32c00">thread::name</references>
         <references refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+        <referencedby refid="classsql__builder_1a48a3e6b505533a26b10a389a77338535">sql_builder::add_column</referencedby>
         <referencedby refid="classini__document_1adf0d69636ff1a6c09b8191eda8164ddf" compoundref="ini__value_8hpp" startline="398" endline="404">ini_document::add_section</referencedby>
         <referencedby refid="classenv__document_1af9134380fc056f1a9605a35ec0ef8a9b" compoundref="env__value_8hpp" startline="261" endline="263">env_document::add_variable</referencedby>
         <referencedby refid="classyaml__builder_1a475d92a13ac52a9a0e98c71da71f1eae">yaml_builder::alias</referencedby>
+        <referencedby refid="classsql__builder_1a5f56cb827df8d1713728cb4e73c44a5a">sql_builder::alter_column_drop_default</referencedby>
+        <referencedby refid="classsql__builder_1a597d3159a2545cda1bc267e246c8b193">sql_builder::alter_column_drop_not_null</referencedby>
+        <referencedby refid="classsql__builder_1a68f4261743257f3b315d36c960a0c3af">sql_builder::alter_column_set_default</referencedby>
+        <referencedby refid="classsql__builder_1a0007333a29f7e01a37cee0f697b0dc74">sql_builder::alter_column_set_not_null</referencedby>
+        <referencedby refid="classsql__builder_1aea468f1b62a5b0411969f23205c3159d">sql_builder::alter_column_set_type</referencedby>
         <referencedby refid="classyaml__builder_1abf640029a79cd8b4c580f06aa78f38a4">yaml_builder::anchor</referencedby>
         <referencedby refid="classtoml__builder_1a974fb3c69991d8ed2763fb67cc360a98">toml_builder::begin_array_table</referencedby>
         <referencedby refid="classini__builder_1a44b845c6e271597ff3777dfb5ad79384">ini_builder::begin_section</referencedby>
         <referencedby refid="classtoml__builder_1a738d1624f77ed33ab8aa325ab10d2287">toml_builder::begin_table</referencedby>
-        <referencedby refid="structhttp__server__request_1a668e8d61b5d1c17ae054bae8ded69f5e" compoundref="http__server__message_8hpp" startline="114" endline="117">http_server_request::cookie</referencedby>
+        <referencedby refid="classsql__builder_1a0f4587c6015947c5059f02491905a2b8">sql_builder::column</referencedby>
+        <referencedby refid="classsql__builder_1aa15de13227bd3b35dbacd55119228e8e">sql_builder::column_auto_increment</referencedby>
+        <referencedby refid="classsql__builder_1a049ea4473d7ff1cd493a941bb96c2038">sql_builder::column_check</referencedby>
+        <referencedby refid="classsql__builder_1a549bbd7897523d6f2600895b60016aee">sql_builder::column_default</referencedby>
+        <referencedby refid="classsql__builder_1ad45c7e3600b25cd3f1015c20db3b86c5">sql_builder::column_not_null</referencedby>
+        <referencedby refid="classsql__builder_1af702cdc0bdee9bd778f21c9e4ceb071d">sql_builder::column_primary_key</referencedby>
+        <referencedby refid="classsql__builder_1a57d3794ed68f6e6ebfb00797ee35714c">sql_builder::column_unique</referencedby>
+        <referencedby refid="structhttp__server__request_1a668e8d61b5d1c17ae054bae8ded69f5e" compoundref="http__server__message_8hpp" startline="125" endline="128">http_server_request::cookie</referencedby>
         <referencedby refid="classcmdline_1a38140f2bc12f09b3f740c17a1ac72500">cmdline::count</referencedby>
         <referencedby refid="classregistry__key_1a15a5655f64b0a85e826b0845c12fea29">registry_key::create_sub_key</referencedby>
         <referencedby refid="classregistry__key_1abd55857cc4346c1f96cea42c5d76754d">registry_key::delete_sub_key</referencedby>
         <referencedby refid="classregistry__key_1a841b1623e976f4181fbc269f049230c4">registry_key::delete_value</referencedby>
+        <referencedby refid="classsql__builder_1a45b3c643d7665fbea5728f4d8d32ef6c">sql_builder::drop_column</referencedby>
         <referencedby refid="structenvironment_1a2cb6fddbbc74d714d891aa35991013c8">environment::exists</referencedby>
-        <referencedby refid="classregistry_1a3bc2f83a283c6aee3e86078aacb2eb2b" compoundref="reflect_2registry_8hpp" startline="86" endline="89">registry::find</referencedby>
+        <referencedby refid="classregistry_1a3bc2f83a283c6aee3e86078aacb2eb2b" compoundref="reflect_2registry_8hpp" startline="95" endline="98">registry::find</referencedby>
         <referencedby refid="classpath__tree_1a032cfc342b7df5183c8da412587717cc">path_tree::find_all</referencedby>
         <referencedby refid="classpath__tree_1_1node_1a600104959d70a0cf028562d1e2ac697d">path_tree::node::find_child</referencedby>
-        <referencedby refid="classregistry_1a805216ed6126937556df9e322cfb4a32" compoundref="reflect_2registry_8hpp" startline="76" endline="79">registry::find_unlocked</referencedby>
-        <referencedby refid="classtype__builder_1a379d14c7df5dc9c0e4d8d8b812829d9a" compoundref="reflect_8hpp" startline="122" endline="129">type_builder&lt; T &gt;::function</referencedby>
-        <referencedby refid="classtype__builder_1ab3f4880362e3f86773b612e9e84ee24e" compoundref="reflect_8hpp" startline="104" endline="111">type_builder&lt; T &gt;::function</referencedby>
+        <referencedby refid="classregistry_1a805216ed6126937556df9e322cfb4a32" compoundref="reflect_2registry_8hpp" startline="80" endline="88">registry::find_unlocked</referencedby>
+        <referencedby refid="group___format_1ga401d7fa93048e25a6f79fc746b2a09fe" compoundref="format_8hpp" startline="830" endline="874">format_named</referencedby>
+        <referencedby refid="classtype__builder_1a379d14c7df5dc9c0e4d8d8b812829d9a" compoundref="reflect_8hpp" startline="155" endline="162">type_builder&lt; T &gt;::function</referencedby>
+        <referencedby refid="classtype__builder_1ab3f4880362e3f86773b612e9e84ee24e" compoundref="reflect_8hpp" startline="137" endline="144">type_builder&lt; T &gt;::function</referencedby>
         <referencedby refid="structenvironment_1a9dcaf983add1110407167a43beb96207">environment::get</referencedby>
         <referencedby refid="classregistry__key_1aeaa082dc39ad655faf73e28b11164d3b">registry_key::get_binary_value</referencedby>
         <referencedby refid="classenv__document_1aea8294e39425b219d2e923dcd086ad4c" compoundref="env__value_8hpp" startline="386" endline="389">env_document::get_bool</referencedby>
+        <referencedby refid="classdaemon_1a5b30437289131ad6b80398887d5f9651">daemon::get_child_status</referencedby>
         <referencedby refid="classenv__document_1a5a93a80687fcca7150322494a92dcac6" compoundref="env__value_8hpp" startline="375" endline="378">env_document::get_double</referencedby>
         <referencedby refid="classregistry__key_1a5809d78ce40d269e285a08397b527756">registry_key::get_dword_value</referencedby>
         <referencedby refid="classenv__document_1a494ec06bec6d4cdff9664fe238a793df" compoundref="env__value_8hpp" startline="353" endline="356">env_document::get_int</referencedby>
         <referencedby refid="classenv__document_1a38f57614ba9aea07016d48eb2ca3f19f" compoundref="env__value_8hpp" startline="364" endline="367">env_document::get_int64</referencedby>
+        <referencedby refid="classlogger__registry_1afcbe976bbf2a3b04fd9864c1178d8623">logger_registry::get_logger</referencedby>
         <referencedby refid="classregistry__key_1a066662ef175ec33a66538be770a1bb99">registry_key::get_multi_string_value</referencedby>
         <referencedby refid="classplugin__manager_1a6803ab9ba11d94193b89574309e7eea6">plugin_manager::get_plugin</referencedby>
         <referencedby refid="classregistry__key_1ad8090858030a677d063828e51390bb3a">registry_key::get_qword_value</referencedby>
@@ -467,47 +487,53 @@
         <referencedby refid="classenv__document_1ad4000d981254540c54ef486e25ca0f3e" compoundref="env__value_8hpp" startline="295" endline="301">env_document::get_variable</referencedby>
         <referencedby refid="classenv__document_1afbdaabe33c312f771bd6217de5bc1b5d" compoundref="env__value_8hpp" startline="282" endline="288">env_document::get_variable</referencedby>
         <referencedby refid="classcmdline_1aa30667509d2573f743e124724e76e690">cmdline::has</referencedby>
-        <referencedby refid="structhttp__server__request_1adefd146db19771b0e9f18cb781559ecd" compoundref="http__server__message_8hpp" startline="131" endline="131">http_server_request::has_cookie</referencedby>
-        <referencedby refid="structhttp__server__request_1ac7f1e8d026c48bbd74168f7be8af5019" compoundref="http__server__message_8hpp" startline="155" endline="155">http_server_request::has_header</referencedby>
-        <referencedby refid="structhttp__server__response_1af717bcfe16092b631a29c6d4bcdc920c" compoundref="http__server__message_8hpp" startline="307" endline="307">http_server_response::has_header</referencedby>
-        <referencedby refid="structhttp__server__request_1a3aea809da9e896fbb35df65916c13627" compoundref="http__server__message_8hpp" startline="107" endline="107">http_server_request::has_parameter</referencedby>
+        <referencedby refid="structhttp__server__request_1adefd146db19771b0e9f18cb781559ecd" compoundref="http__server__message_8hpp" startline="142" endline="142">http_server_request::has_cookie</referencedby>
+        <referencedby refid="structhttp__server__request_1ac7f1e8d026c48bbd74168f7be8af5019" compoundref="http__server__message_8hpp" startline="166" endline="166">http_server_request::has_header</referencedby>
+        <referencedby refid="structhttp__server__response_1af717bcfe16092b631a29c6d4bcdc920c" compoundref="http__server__message_8hpp" startline="327" endline="327">http_server_response::has_header</referencedby>
+        <referencedby refid="structhttp__server__request_1a3aea809da9e896fbb35df65916c13627" compoundref="http__server__message_8hpp" startline="118" endline="118">http_server_request::has_parameter</referencedby>
         <referencedby refid="classini__document_1a483931ecbda7e430029d04f4d0e86401" compoundref="ini__value_8hpp" startline="443" endline="448">ini_document::has_section</referencedby>
         <referencedby refid="classregistry__key_1a077d9d92901497b062508e067fa27f5f">registry_key::has_sub_key</referencedby>
         <referencedby refid="classdynamic__library_1a2eaa7f7a6945b610173724323e51f351">dynamic_library::has_symbol</referencedby>
         <referencedby refid="classregistry__key_1a402366bac6e693e667a234b250e6e193">registry_key::has_value</referencedby>
         <referencedby refid="classenv__document_1a158686cd008f5c43de672913eb02488d" compoundref="env__value_8hpp" startline="308" endline="308">env_document::has_variable</referencedby>
-        <referencedby refid="structhttp__server__request_1aca4458c0c7b3c01cd1d4d0b0bd9ad297" compoundref="http__server__message_8hpp" startline="138" endline="141">http_server_request::header</referencedby>
-        <referencedby refid="structhttp__server__response_1a382d420c9b9c08cb9fcf35e847901937" compoundref="http__server__message_8hpp" startline="290" endline="293">http_server_response::header</referencedby>
+        <referencedby refid="structhttp__server__request_1aca4458c0c7b3c01cd1d4d0b0bd9ad297" compoundref="http__server__message_8hpp" startline="149" endline="152">http_server_request::header</referencedby>
+        <referencedby refid="structhttp__server__response_1a382d420c9b9c08cb9fcf35e847901937" compoundref="http__server__message_8hpp" startline="310" endline="313">http_server_response::header</referencedby>
         <referencedby refid="classini__section_1afe1303c17cd6ed09ccb5f166c15bae90" compoundref="ini__value_8hpp" startline="208" endline="209">ini_section::ini_section</referencedby>
+        <referencedby refid="classdynamic__library_1a10c5f60bc497a6966dee3ac4dd7dc821">dynamic_library::load_by_name</referencedby>
         <referencedby refid="classregistry__key_1ac086c8455a820a2ac609ac409e90f330">registry_key::open_sub_key</referencedby>
-        <referencedby refid="structhttp__server__request_1a23fa4d12a93edab11626cb659c788a7d" compoundref="http__server__message_8hpp" startline="90" endline="93">http_server_request::parameter</referencedby>
-        <referencedby refid="classtype__builder_1a7dfee419346f930acb6252545de97b55" compoundref="reflect_8hpp" startline="77" endline="93">type_builder&lt; T &gt;::property</referencedby>
-        <referencedby refid="group___reflection_1ga5a74d42372d4485518ebb6915c124a37" compoundref="reflect_8hpp" startline="198" endline="200">reflect</referencedby>
-        <referencedby refid="classregistry_1a80b07280b49b0e28ecc3f3a1b6c7cccc" compoundref="reflect_2registry_8hpp" startline="56" endline="67">registry::register_type</referencedby>
+        <referencedby refid="structhttp__server__request_1a23fa4d12a93edab11626cb659c788a7d" compoundref="http__server__message_8hpp" startline="101" endline="104">http_server_request::parameter</referencedby>
+        <referencedby refid="classtype__builder_1a6fb4c3b2077b269ab1d55e345db84785" compoundref="reflect_8hpp" startline="107" endline="114">type_builder&lt; T &gt;::property</referencedby>
+        <referencedby refid="classtype__builder_1ab05ddac0df7d2836a815f92f27191749" compoundref="reflect_8hpp" startline="79" endline="95">type_builder&lt; T &gt;::property</referencedby>
+        <referencedby refid="classtype__builder_1aa92a5d292b952f819e25983471206f07" compoundref="reflect_8hpp" startline="124" endline="126">type_builder&lt; T &gt;::readonly_property</referencedby>
+        <referencedby refid="group___reflection_1gac197fd7307a57ddbf46feb16ac7ebd32" compoundref="reflect_8hpp" startline="337" endline="339">reflect</referencedby>
+        <referencedby refid="classregistry_1a80b07280b49b0e28ecc3f3a1b6c7cccc" compoundref="reflect_2registry_8hpp" startline="58" endline="71">registry::register_type</referencedby>
+        <referencedby refid="classdaemon_1a9d9162166407ac2d23502a5775423a78">daemon::remove_child</referencedby>
         <referencedby refid="classpath__tree_1_1node_1a17193f36134699f1e9f07c0cc708a892">path_tree::node::remove_child</referencedby>
         <referencedby refid="classenv__document_1a3c1ef5060483e825066c5964ae019497" compoundref="env__value_8hpp" startline="314" endline="314">env_document::remove_variable</referencedby>
         <referencedby refid="structenvironment_1a6a5a4531f8ec5310d84c067fcfb6c388">environment::set</referencedby>
         <referencedby refid="classregistry__key_1a93a079782143e4d92a65ff8ad9fc7447">registry_key::set_binary_value</referencedby>
-        <referencedby refid="structhttp__server__request_1ab4124dd7efb3fa2c92fa000f2dc484a8" compoundref="http__server__message_8hpp" startline="124" endline="124">http_server_request::set_cookie</referencedby>
-        <referencedby refid="classhttp__server_1a8ae0b82bc4ef2d1ff3288b0689c82256" compoundref="http__server_8hpp" startline="192" endline="192">http_server::set_cookie_name</referencedby>
+        <referencedby refid="structhttp__server__request_1ab4124dd7efb3fa2c92fa000f2dc484a8" compoundref="http__server__message_8hpp" startline="135" endline="135">http_server_request::set_cookie</referencedby>
+        <referencedby refid="classhttp__server_1a8ae0b82bc4ef2d1ff3288b0689c82256" compoundref="http__server_8hpp" startline="239" endline="239">http_server::set_cookie_name</referencedby>
         <referencedby refid="classregistry__key_1a58f4dc2ea8895063d395d4a81b3dcdc3">registry_key::set_dword_value</referencedby>
         <referencedby refid="classregistry__key_1a47e06191eb7d9dcf26c4f66d26853543">registry_key::set_expand_string_value</referencedby>
-        <referencedby refid="structhttp__server__request_1afa656852407ef8175e4e7669dd867133" compoundref="http__server__message_8hpp" startline="148" endline="148">http_server_request::set_header</referencedby>
-        <referencedby refid="structhttp__server__response_1a65d53ed69d5a6533432d3bf81c2503e3" compoundref="http__server__message_8hpp" startline="300" endline="300">http_server_response::set_header</referencedby>
+        <referencedby refid="structhttp__server__request_1afa656852407ef8175e4e7669dd867133" compoundref="http__server__message_8hpp" startline="159" endline="159">http_server_request::set_header</referencedby>
+        <referencedby refid="structhttp__server__response_1a65d53ed69d5a6533432d3bf81c2503e3" compoundref="http__server__message_8hpp" startline="320" endline="320">http_server_response::set_header</referencedby>
         <referencedby refid="classregistry__key_1a0e87105d61256b44b3dd71c81504a609">registry_key::set_multi_string_value</referencedby>
         <referencedby refid="classini__section_1a4e0fd26ecdb47cf9d234c97765297193" compoundref="ini__value_8hpp" startline="249" endline="249">ini_section::set_name</referencedby>
-        <referencedby refid="group___thread_1ga2abb5ec8a5551d27cbbef28396e1bdc7" compoundref="thread_8hpp" startline="484" endline="484">set_name</referencedby>
-        <referencedby refid="structhttp__server__request_1a1fb643d94f981de49d14aee2c575a663" compoundref="http__server__message_8hpp" startline="100" endline="100">http_server_request::set_parameter</referencedby>
+        <referencedby refid="group___thread_1ga2abb5ec8a5551d27cbbef28396e1bdc7" compoundref="thread_8hpp" startline="485" endline="485">set_name</referencedby>
+        <referencedby refid="structhttp__server__request_1a1fb643d94f981de49d14aee2c575a663" compoundref="http__server__message_8hpp" startline="111" endline="111">http_server_request::set_parameter</referencedby>
         <referencedby refid="classregistry__key_1a26771910ea2657941052117177218028">registry_key::set_qword_value</referencedby>
         <referencedby refid="classregistry__key_1af3b9088988ee31316a9cb0c02b5af11d">registry_key::set_string_value</referencedby>
         <referencedby refid="classenv__document_1a81b7190ea0b57c461429b12ebe628dcb" compoundref="env__value_8hpp" startline="272" endline="275">env_document::set_variable</referencedby>
-        <referencedby refid="classtype__builder_1a489b86bfa65620b9180104c3739d1e49" compoundref="reflect_8hpp" startline="140" endline="145">type_builder&lt; T &gt;::static_function</referencedby>
+        <referencedby refid="classtype__builder_1a489b86bfa65620b9180104c3739d1e49" compoundref="reflect_8hpp" startline="173" endline="178">type_builder&lt; T &gt;::static_function</referencedby>
         <referencedby refid="classdynamic__library_1a268aac8ebd156328103b2bdf69a996c7">dynamic_library::symbol</referencedby>
-        <referencedby refid="classdynamic__library_1a53c3ada7feef0304cb470365ab40470f" compoundref="dynamic__library_8hpp" startline="93" endline="95">dynamic_library::to_symbol</referencedby>
-        <referencedby refid="classtype__builder_1ad1d7073738f942e7b83501dd776dfc47" compoundref="reflect_8hpp" startline="45" endline="46">type_builder&lt; T &gt;::type_builder</referencedby>
+        <referencedby refid="classdynamic__library_1a53c3ada7feef0304cb470365ab40470f" compoundref="dynamic__library_8hpp" startline="123" endline="125">dynamic_library::to_symbol</referencedby>
+        <referencedby refid="classtype__builder_1ad1d7073738f942e7b83501dd776dfc47" compoundref="reflect_8hpp" startline="46" endline="47">type_builder&lt; T &gt;::type_builder</referencedby>
         <referencedby refid="classplugin__manager_1a9beb1072652ecc2f9080f8a545a781ae">plugin_manager::unload_plugin</referencedby>
         <referencedby refid="structenvironment_1af1d2eff32051b0a9ecb3a3c0a08078eb">environment::unset</referencedby>
         <referencedby refid="classini__builder_1adba2bba2f7102d2581704291ed3390d0">ini_builder::value_section</referencedby>
+        <referencedby refid="classsql__builder_1a2ad1183768cafb3d48313d3fe5475dc1">sql_builder::with_</referencedby>
+        <referencedby refid="classsql__builder_1a7e67e5da85f4f13cd4fb6f2bbf3ca4e2">sql_builder::with_recursive</referencedby>
       </memberdef>
       <memberdef kind="function" id="group___thread_1ga2abb5ec8a5551d27cbbef28396e1bdc7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -537,8 +563,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="484" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="484" bodyend="484"/>
-        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="475" endline="477">name</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" line="485" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread.hpp" bodystart="485" bodyend="485"/>
+        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="476" endline="478">name</references>
         <references refid="classthread_1a11943219b9d0cef98e433e6663e8b000">thread::set_name</references>
       </memberdef>
       <memberdef kind="function" id="group___thread_1gab1dc640c1b7fdd51878e1f6d6f537070" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">

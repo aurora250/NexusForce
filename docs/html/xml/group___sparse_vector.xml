@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___sparse_vector" kind="group">
+    <compoundname>SparseVector</compoundname>
+    <title>稀疏向量</title>
+    <innerclass refid="structsparse__vector__iterator" prot="public">sparse_vector_iterator</innerclass>
+    <innerclass refid="classsparse__vector" prot="public">sparse_vector</innerclass>
+    <briefdescription>
+<para>基于有序平坦数组的关联容器底层实现 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>稀疏向量使用有序 vector 作为底层存储，通过二分查找提供 O(log n) 的查找操作。 插入和删除操作为 O(n)（需要移动元素），但迭代性能优异。</para>
+<sect1 id="group___sparse_vector_1sparse_vector_complexity">
+<title>复杂度保证</title><para><table rows="6" cols="3"><row>
+<entry thead="yes"><para>操作  </para>
+</entry><entry thead="yes"><para>时间复杂度  </para>
+</entry><entry thead="yes"><para>说明  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>查找  </para>
+</entry><entry thead="no"><para>O(log n)  </para>
+</entry><entry thead="no"><para>二分查找  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>插入  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>二分查找 + 元素移动  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>删除  </para>
+</entry><entry thead="no"><para>O(n)  </para>
+</entry><entry thead="no"><para>二分查找 + 元素移动  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>最小/最大  </para>
+</entry><entry thead="no"><para>O(1)  </para>
+</entry><entry thead="no"><para>有序数组首尾元素  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>迭代  </para>
+</entry><entry thead="no"><para>O(1)  </para>
+</entry><entry thead="no"><para>连续内存遍历  </para>
+</entry></row>
+</table>
+</para>
+<para><simplesect kind="note"><para>本实现提供了两个插入策略：<itemizedlist>
+<listitem><para>insert_unique：键必须唯一，重复键插入失败并返回已存在元素迭代器</para>
+</listitem><listitem><para>insert_equal：允许重复键，按插入顺序存储</para>
+</listitem></itemizedlist>
+</para>
+</simplesect>
+<simplesect kind="warning"><para>对稀疏向量的修改操作可能使所有迭代器失效（元素移动导致）。 比较函数对象（Compare）必须提供严格的弱序关系。 </para>
+</simplesect>
+</para>
+</sect1>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classhttp2__flow__control" kind="class" language="C++" prot="public">
+    <compoundname>http2_flow_control</compoundname>
+    <includes refid="http2__protocol_8hpp" local="no">http2_protocol.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhttp2__flow__control_1a0e428e630929b9439c3a036fcdcbbe1b" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_flow_control::initial_window_</definition>
+        <argsstring></argsstring>
+        <name>initial_window_</name>
+        <qualifiedname>http2_flow_control::initial_window_</qualifiedname>
+        <briefdescription>
+<para>新流的初始窗口大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="449" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="449" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhttp2__flow__control_1a64e42376021b9a826c6c9bd9f14bc00c" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_flow_control::connection_window_</definition>
+        <argsstring></argsstring>
+        <name>connection_window_</name>
+        <qualifiedname>http2_flow_control::connection_window_</qualifiedname>
+        <briefdescription>
+<para>连接级流控窗口 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="451" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="451" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhttp2__flow__control_1ad56a73259797f634e2abd21f05866f03" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref>, <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> &gt;</type>
+        <definition>unordered_map&lt;uint32_t, uint32_t&gt; http2_flow_control::stream_windows_</definition>
+        <argsstring></argsstring>
+        <name>stream_windows_</name>
+        <qualifiedname>http2_flow_control::stream_windows_</qualifiedname>
+        <briefdescription>
+<para>流 ID → 流级窗口映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="453" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="453" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhttp2__flow__control_1ad3728a221f16ab25b148ff21dd67c18e" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>http2_flow_control::http2_flow_control</definition>
+        <argsstring>(uint32_t initial_window=HTTP2_DEFAULT_INITIAL_WINDOW_SIZE)</argsstring>
+        <name>http2_flow_control</name>
+        <qualifiedname>http2_flow_control::http2_flow_control</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>initial_window</declname>
+          <defval><ref refid="group___h_t_t_p_1ga36075bec54b2e856f4a28cb3b1acdc55" kindref="member">HTTP2_DEFAULT_INITIAL_WINDOW_SIZE</ref></defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="437" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__flow__control_1a87053deefd077bbdcf416fb7378abb05" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http2_flow_control::set_initial_window</definition>
+        <argsstring>(uint32_t size)</argsstring>
+        <name>set_initial_window</name>
+        <qualifiedname>http2_flow_control::set_initial_window</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="439" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__flow__control_1af1c1a254ed2223c518d37449f87f6609" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool http2_flow_control::can_send</definition>
+        <argsstring>(uint32_t stream_id, uint32_t amount) const</argsstring>
+        <name>can_send</name>
+        <qualifiedname>http2_flow_control::can_send</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>amount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="441" column="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__flow__control_1abfb5feef215f85f0f2b6ad5bc8275260" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http2_flow_control::consume</definition>
+        <argsstring>(uint32_t stream_id, uint32_t amount)</argsstring>
+        <name>consume</name>
+        <qualifiedname>http2_flow_control::consume</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>amount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="442" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__flow__control_1a5a0a954669bd0278fa73957eaa1cdc99" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void http2_flow_control::add_window</definition>
+        <argsstring>(uint32_t stream_id, uint32_t amount)</argsstring>
+        <name>add_window</name>
+        <qualifiedname>http2_flow_control::add_window</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>amount</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="443" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__flow__control_1ac7f6a02851930bd8acc0478fedae4527" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_flow_control::window</definition>
+        <argsstring>(uint32_t stream_id) const</argsstring>
+        <name>window</name>
+        <qualifiedname>http2_flow_control::window</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>stream_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="444" column="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classhttp2__flow__control_1af3aa0255bf124c2628f02e27e3b51a81" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_flow_control::connection_window</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>connection_window</name>
+        <qualifiedname>http2_flow_control::connection_window</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="445" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="445" bodyend="445"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP/2 流量控制器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理连接级和流级的发送窗口。 WINDOW_UPDATE 帧增加窗口，DATA 发送消费窗口。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="435" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="435" bodyend="454"/>
+    <listofallmembers>
+      <member refid="classhttp2__flow__control_1a5a0a954669bd0278fa73957eaa1cdc99" prot="public" virt="non-virtual"><scope>http2_flow_control</scope><name>add_window</name></member>
+      <member refid="classhttp2__flow__control_1af1c1a254ed2223c518d37449f87f6609" prot="public" virt="non-virtual"><scope>http2_flow_control</scope><name>can_send</name></member>
+      <member refid="classhttp2__flow__control_1af3aa0255bf124c2628f02e27e3b51a81" prot="public" virt="non-virtual"><scope>http2_flow_control</scope><name>connection_window</name></member>
+      <member refid="classhttp2__flow__control_1a64e42376021b9a826c6c9bd9f14bc00c" prot="private" virt="non-virtual"><scope>http2_flow_control</scope><name>connection_window_</name></member>
+      <member refid="classhttp2__flow__control_1abfb5feef215f85f0f2b6ad5bc8275260" prot="public" virt="non-virtual"><scope>http2_flow_control</scope><name>consume</name></member>
+      <member refid="classhttp2__flow__control_1ad3728a221f16ab25b148ff21dd67c18e" prot="public" virt="non-virtual"><scope>http2_flow_control</scope><name>http2_flow_control</name></member>
+      <member refid="classhttp2__flow__control_1a0e428e630929b9439c3a036fcdcbbe1b" prot="private" virt="non-virtual"><scope>http2_flow_control</scope><name>initial_window_</name></member>
+      <member refid="classhttp2__flow__control_1a87053deefd077bbdcf416fb7378abb05" prot="public" virt="non-virtual"><scope>http2_flow_control</scope><name>set_initial_window</name></member>
+      <member refid="classhttp2__flow__control_1ad56a73259797f634e2abd21f05866f03" prot="private" virt="non-virtual"><scope>http2_flow_control</scope><name>stream_windows_</name></member>
+      <member refid="classhttp2__flow__control_1ac7f6a02851930bd8acc0478fedae4527" prot="public" virt="non-virtual"><scope>http2_flow_control</scope><name>window</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

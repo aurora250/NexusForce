@@ -4,44 +4,45 @@
     <compoundname>socket_base.hpp</compoundname>
     <includes refid="duration_8hpp" local="yes">NeForce/core/time/duration.hpp</includes>
     <includes refid="ip__address_8hpp" local="yes">NeForce/network/util/ip_address.hpp</includes>
+    <includes local="no">linux/if_ether.h</includes>
     <includedby refid="arp_8hpp" local="yes">arp.hpp</includedby>
     <includedby refid="icmp__socket_8hpp" local="yes">icmp_socket.hpp</includedby>
     <includedby refid="ip__socket_8hpp" local="yes">ip_socket.hpp</includedby>
     <incdepgraph>
-      <node id="40">
+      <node id="33">
         <label>NeForce/core/algorithm/compare.hpp</label>
         <link refid="compare_8hpp"/>
-        <childnode refid="41" relation="include">
+        <childnode refid="34" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="42" relation="include">
+        <childnode refid="35" relation="include">
         </childnode>
       </node>
-      <node id="23">
+      <node id="24">
         <label>NeForce/core/algorithm/iterator.hpp</label>
         <link refid="iterator_8hpp"/>
-        <childnode refid="24" relation="include">
-        </childnode>
         <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>NeForce/core/algorithm/search.hpp</label>
+        <link refid="search_8hpp"/>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
         </childnode>
       </node>
       <node id="20">
-        <label>NeForce/core/algorithm/search.hpp</label>
-        <link refid="search_8hpp"/>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-      </node>
-      <node id="19">
         <label>NeForce/core/algorithm/shift.hpp</label>
         <link refid="shift_8hpp"/>
-        <childnode refid="20" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
@@ -51,8 +52,38 @@
         <link refid="c_09_09config_8hpp"/>
         <childnode refid="9" relation="include">
         </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
       </node>
-      <node id="24">
+      <node id="10">
+        <label>NeForce/core/config/version.hpp</label>
+        <link refid="version_8hpp_source"/>
+      </node>
+      <node id="32">
+        <label>NeForce/core/container/array.hpp</label>
+        <link refid="array_8hpp"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>NeForce/core/container/vector.hpp</label>
+        <link refid="vector_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
         <label>NeForce/core/exception/breakpoint.hpp</label>
         <link refid="breakpoint_8hpp"/>
         <childnode refid="8" relation="include">
@@ -64,78 +95,90 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="21">
+      <node id="22">
         <label>NeForce/core/functional/functor.hpp</label>
         <link refid="functor_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="38">
+      <node id="37">
         <label>NeForce/core/functional/hash.hpp</label>
         <link refid="hash_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="27">
+      <node id="28">
         <label>NeForce/core/functional/invoke.hpp</label>
         <link refid="invoke_8hpp"/>
-        <childnode refid="28" relation="include">
+        <childnode refid="29" relation="include">
         </childnode>
       </node>
-      <node id="37">
-        <label>NeForce/core/interface/icommon.hpp</label>
-        <link refid="icommon_8hpp"/>
-        <childnode refid="38" relation="include">
+      <node id="40">
+        <label>NeForce/core/interface/icollector.hpp</label>
+        <link refid="icollector_8hpp"/>
+        <childnode refid="36" relation="include">
         </childnode>
       </node>
       <node id="36">
-        <label>NeForce/core/interface/iiterator.hpp</label>
-        <link refid="iiterator_8hpp"/>
+        <label>NeForce/core/interface/icommon.hpp</label>
+        <link refid="icommon_8hpp"/>
         <childnode refid="37" relation="include">
         </childnode>
       </node>
-      <node id="51">
-        <label>NeForce/core/interface/iobject.hpp</label>
-        <link refid="iobject_8hpp"/>
-        <childnode refid="16" relation="include">
+      <node id="41">
+        <label>NeForce/core/interface/iiterator.hpp</label>
+        <link refid="iiterator_8hpp"/>
+        <childnode refid="36" relation="include">
         </childnode>
       </node>
-      <node id="16">
-        <label>NeForce/core/interface/istringify.hpp</label>
-        <link refid="istringify_8hpp"/>
+      <node id="57">
+        <label>NeForce/core/interface/iobject.hpp</label>
+        <link refid="iobject_8hpp"/>
         <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="26">
+      <node id="17">
+        <label>NeForce/core/interface/istringify.hpp</label>
+        <link refid="istringify_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
         <label>NeForce/core/iterator/iterator_traits.hpp</label>
         <link refid="iterator__traits_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="22">
+      <node id="42">
+        <label>NeForce/core/iterator/normal_iterator.hpp</label>
+        <link refid="normal__iterator_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
         <label>NeForce/core/iterator/reverse_iterator.hpp</label>
         <link refid="reverse__iterator_8hpp"/>
-        <childnode refid="23" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
       </node>
-      <node id="29">
+      <node id="48">
         <label>NeForce/core/memory/allocator_traits.hpp</label>
         <link refid="allocator__traits_8hpp"/>
-        <childnode refid="30" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>NeForce/core/memory/bit.hpp</label>
         <link refid="bit_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="30">
+      <node id="47">
         <label>NeForce/core/memory/construct.hpp</label>
         <link refid="construct_8hpp"/>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
       </node>
       <node id="5">
@@ -145,21 +188,37 @@
         </childnode>
       </node>
       <node id="31">
-        <label>NeForce/core/memory/standard_allocator.hpp</label>
-        <link refid="standard__allocator_8hpp"/>
+        <label>NeForce/core/memory/memory_view.hpp</label>
+        <link refid="memory__view_8hpp"/>
         <childnode refid="32" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>NeForce/core/memory/standard_allocator.hpp</label>
+        <link refid="standard__allocator_8hpp"/>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="33">
+      <node id="46">
         <label>NeForce/core/memory/uninitialized.hpp</label>
         <link refid="uninitialized_8hpp"/>
-        <childnode refid="19" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
-        <childnode refid="30" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -167,89 +226,87 @@
         <link refid="math_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>NeForce/core/numeric/numeric_traits.hpp</label>
         <link refid="numeric__traits_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>NeForce/core/numeric/numeric_types.hpp</label>
         <link refid="numeric__types_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-      </node>
-      <node id="12">
-        <label>NeForce/core/numeric/ratio.hpp</label>
-        <link refid="ratio_8hpp"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
       <node id="13">
-        <label>NeForce/core/numeric/static_numeric.hpp</label>
-        <link refid="static__numeric_8hpp"/>
+        <label>NeForce/core/numeric/ratio.hpp</label>
+        <link refid="ratio_8hpp"/>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+      </node>
+      <node id="14">
+        <label>NeForce/core/numeric/static_numeric.hpp</label>
+        <link refid="static__numeric_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="19">
         <label>NeForce/core/string/basic_string.hpp</label>
         <link refid="basic__string_8hpp"/>
-        <childnode refid="19" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="31" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
-        <childnode refid="33" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
-        <childnode refid="34" relation="include">
-        </childnode>
-        <childnode refid="46" relation="include">
+        <childnode refid="43" relation="include">
         </childnode>
       </node>
-      <node id="35">
+      <node id="50">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
-        <childnode refid="36" relation="include">
+        <childnode refid="41" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="51" relation="include">
         </childnode>
-        <childnode refid="45" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
       </node>
-      <node id="39">
+      <node id="51">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
-        <childnode refid="40" relation="include">
+        <childnode refid="33" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="45">
+      <node id="52">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="18">
         <label>NeForce/core/string/string.hpp</label>
         <link refid="string_8hpp"/>
-        <childnode refid="18" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
-      <node id="34">
+      <node id="49">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="35" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -257,13 +314,13 @@
         <link refid="duration_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
       </node>
-      <node id="25">
+      <node id="26">
         <label>NeForce/core/typeinfo/concepts.hpp</label>
         <link refid="concepts_8hpp"/>
-        <childnode refid="26" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
       </node>
       <node id="6">
@@ -278,66 +335,68 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="43">
         <label>NeForce/core/utility/compressed_pair.hpp</label>
         <link refid="compressed__pair_8hpp"/>
-        <childnode refid="37" relation="include">
+        <childnode refid="36" relation="include">
         </childnode>
       </node>
-      <node id="43">
+      <node id="38">
         <label>NeForce/core/utility/integer_sequence.hpp</label>
         <link refid="integer__sequence_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="54">
         <label>NeForce/core/utility/none.hpp</label>
         <link refid="none_8hpp"/>
-        <childnode refid="37" relation="include">
+        <childnode refid="36" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="53">
         <label>NeForce/core/utility/optional.hpp</label>
         <link refid="optional_8hpp"/>
-        <childnode refid="41" relation="include">
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
-        <childnode refid="30" relation="include">
-        </childnode>
-        <childnode refid="48" relation="include">
-        </childnode>
-      </node>
-      <node id="42">
-        <label>NeForce/core/utility/pair.hpp</label>
-        <link refid="pair_8hpp"/>
-        <childnode refid="37" relation="include">
-        </childnode>
-        <childnode refid="43" relation="include">
-        </childnode>
         <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="44" relation="include">
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
         </childnode>
       </node>
-      <node id="28">
+      <node id="35">
+        <label>NeForce/core/utility/pair.hpp</label>
+        <link refid="pair_8hpp"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
         <label>NeForce/core/utility/reference_wrapper.hpp</label>
         <link refid="reference__wrapper_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="49">
+      <node id="55">
         <label>NeForce/core/utility/variant.hpp</label>
         <link refid="variant_8hpp"/>
-        <childnode refid="40" relation="include">
+        <childnode refid="33" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="54" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -345,198 +404,199 @@
         <link refid="socket__base_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-      </node>
-      <node id="15">
-        <label>NeForce/network/util/ip_address.hpp</label>
-        <link refid="ip__address_8hpp"/>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="60" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
-        </childnode>
-        <childnode refid="50" relation="include">
-        </childnode>
-        <childnode refid="52" relation="include">
+      </node>
+      <node id="16">
+        <label>NeForce/network/util/ip_address.hpp</label>
+        <link refid="ip__address_8hpp"/>
+        <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="53" relation="include">
         </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
       </node>
-      <node id="50">
+      <node id="56">
         <label>NeForce/network/util/ports.hpp</label>
         <link refid="ports_8hpp"/>
-        <childnode refid="51" relation="include">
+        <childnode refid="57" relation="include">
         </childnode>
       </node>
       <node id="9">
         <label>cassert</label>
       </node>
-      <node id="41">
+      <node id="34">
         <label>initializer_list</label>
       </node>
-      <node id="53">
+      <node id="60">
+        <label>linux/if_ether.h</label>
+      </node>
+      <node id="59">
         <label>netinet/in.h</label>
       </node>
-      <node id="32">
+      <node id="45">
         <label>new</label>
       </node>
-      <node id="44">
+      <node id="39">
         <label>utility</label>
       </node>
-      <node id="52">
+      <node id="58">
         <label>ws2tcpip.h</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="3">
-        <label>NeForce.hpp</label>
-        <link refid="_ne_force_8hpp"/>
-      </node>
-      <node id="20">
+      <node id="22">
         <label>dns_client.hpp</label>
         <link refid="dns__client_8hpp"/>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-      </node>
-      <node id="7">
-        <label>ftp_client.hpp</label>
-        <link refid="ftp__client_8hpp_source"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-      </node>
-      <node id="6">
-        <label>ftp_protocol.hpp</label>
-        <link refid="ftp__protocol_8hpp_source"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-      </node>
-      <node id="8">
-        <label>ftp_server.hpp</label>
-        <link refid="ftp__server_8hpp_source"/>
-        <childnode refid="3" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="16">
-        <label>http_client.hpp</label>
-        <link refid="http__client_8hpp"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-      </node>
-      <node id="14">
-        <label>http_server.hpp</label>
-        <link refid="http__server_8hpp"/>
-        <childnode refid="3" relation="include">
-        </childnode>
-      </node>
-      <node id="17">
-        <label>websocket.hpp</label>
-        <link refid="websocket_8hpp"/>
-        <childnode refid="14" relation="include">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>icmp_socket.hpp</label>
-        <link refid="icmp__socket_8hpp"/>
-        <childnode refid="3" relation="include">
-        </childnode>
+      <node id="6">
+        <label>ftp_client.hpp</label>
+        <link refid="ftp__client_8hpp_source"/>
       </node>
       <node id="5">
+        <label>ftp_protocol.hpp</label>
+        <link refid="ftp__protocol_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>ftp_server.hpp</label>
+        <link refid="ftp__server_8hpp_source"/>
+      </node>
+      <node id="10">
+        <label>chunked_reader.hpp</label>
+        <link refid="chunked__reader_8hpp"/>
+      </node>
+      <node id="11">
+        <label>http2_connection.hpp</label>
+        <link refid="http2__connection_8hpp"/>
+      </node>
+      <node id="17">
+        <label>http_client.hpp</label>
+        <link refid="http__client_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>http_server.hpp</label>
+        <link refid="http__server_8hpp"/>
+      </node>
+      <node id="18">
+        <label>reverse_proxy.hpp</label>
+        <link refid="reverse__proxy_8hpp"/>
+      </node>
+      <node id="19">
+        <label>websocket.hpp</label>
+        <link refid="websocket_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icmp_socket.hpp</label>
+        <link refid="icmp__socket_8hpp"/>
+      </node>
+      <node id="4">
         <label>ip_socket.hpp</label>
         <link refid="ip__socket_8hpp"/>
-        <childnode refid="6" relation="include">
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="9">
+      <node id="8">
         <label>smtp_socket.hpp</label>
         <link refid="smtp__socket_8hpp"/>
-        <childnode refid="3" relation="include">
-        </childnode>
       </node>
       <node id="1">
         <label>socket_base.hpp</label>
         <link refid="socket__base_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+      </node>
+      <node id="13">
+        <label>ssl_acceptor.hpp</label>
+        <link refid="ssl__acceptor_8hpp"/>
+        <childnode refid="14" relation="include">
         </childnode>
       </node>
       <node id="12">
-        <label>ssl_acceptor.hpp</label>
-        <link refid="ssl__acceptor_8hpp"/>
-        <childnode refid="3" relation="include">
+        <label>ssl_socket.hpp</label>
+        <link refid="ssl__socket_8hpp"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>tcp_acceptor.hpp</label>
+        <link refid="tcp__acceptor_8hpp"/>
+        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
       </node>
-      <node id="11">
-        <label>ssl_socket.hpp</label>
-        <link refid="ssl__socket_8hpp"/>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
+      <node id="16">
+        <label>tcp_client.hpp</label>
+        <link refid="tcp__client_8hpp"/>
         <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="18">
-        <label>tcp_acceptor.hpp</label>
-        <link refid="tcp__acceptor_8hpp"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-      </node>
-      <node id="15">
-        <label>tcp_client.hpp</label>
-        <link refid="tcp__client_8hpp"/>
-        <childnode refid="16" relation="include">
-        </childnode>
-      </node>
-      <node id="13">
+      <node id="14">
         <label>tcp_server.hpp</label>
         <link refid="tcp__server_8hpp"/>
-        <childnode refid="14" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="10">
+      <node id="9">
         <label>tcp_socket.hpp</label>
         <link refid="tcp__socket_8hpp"/>
-        <childnode refid="7" relation="include">
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-      </node>
-      <node id="19">
-        <label>udp_socket.hpp</label>
-        <link refid="udp__socket_8hpp"/>
-        <childnode refid="3" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>udp_socket.hpp</label>
+        <link refid="udp__socket_8hpp"/>
+        <childnode refid="22" relation="include">
         </childnode>
       </node>
       <node id="2">
         <label>arp.hpp</label>
         <link refid="arp_8hpp"/>
-        <childnode refid="3" relation="include">
-        </childnode>
       </node>
     </invincdepgraph>
     <innerclass refid="structsocket__exception" prot="public">socket_exception</innerclass>
@@ -554,117 +614,178 @@
 <codeline lineno="10"><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="duration_8hpp" kindref="compound">NeForce/core/time/duration.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="ip__address_8hpp" kindref="compound">NeForce/network/util/ip_address.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight></codeline>
-<codeline lineno="19"><highlight class="normal"></highlight></codeline>
-<codeline lineno="26" refid="structsocket__exception" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NEFORCE_API<sp/>socket_exception<sp/>final<sp/>:<sp/>network_exception<sp/>{</highlight></codeline>
-<codeline lineno="31" refid="structsocket__exception_1a33a91e5eb9896fd1543ec91aa05a514a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structsocket__exception_1a33a91e5eb9896fd1543ec91aa05a514a" kindref="member">last_error</ref>()<sp/>noexcept;</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"></highlight></codeline>
-<codeline lineno="38" refid="structsocket__exception_1ac120faa4a48b9c05bb4e0632ce707a38" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structsocket__exception_1ac120faa4a48b9c05bb4e0632ce707a38" kindref="member">is_would_block</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>error)<sp/>noexcept;</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"></highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>explicit<sp/>socket_exception(const<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>info<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Socket<sp/>Operation<sp/>Failed.&quot;</highlight><highlight class="normal">,<sp/>const<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" kindref="member">type</ref><sp/>=<sp/>static_type,</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" kindref="member">code</ref><sp/>=<sp/><ref refid="structsocket__exception_1a33a91e5eb9896fd1543ec91aa05a514a" kindref="member">last_error</ref>())<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>network_exception(info,<sp/><ref refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" kindref="member">type</ref>,<sp/><ref refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" kindref="member">code</ref>)<sp/>{}</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"></highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structsocket__exception" kindref="compound">socket_exception</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structexception" kindref="compound">exception</ref>&amp;<sp/>e)<sp/>:</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structnetwork__exception" kindref="compound">network_exception</ref>(e)<sp/>{}</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_LINUX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>include<sp/>&lt;linux/if_ether.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="structsocket__exception" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NEFORCE_API<sp/>socket_exception<sp/>final<sp/>:<sp/>network_exception<sp/>{</highlight></codeline>
+<codeline lineno="34" refid="structsocket__exception_1a33a91e5eb9896fd1543ec91aa05a514a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structsocket__exception_1a33a91e5eb9896fd1543ec91aa05a514a" kindref="member">last_error</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41" refid="structsocket__exception_1ac120faa4a48b9c05bb4e0632ce707a38" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structsocket__exception_1ac120faa4a48b9c05bb4e0632ce707a38" kindref="member">is_would_block</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>error)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>explicit<sp/>socket_exception(const<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>info<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Socket<sp/>Operation<sp/>Failed.&quot;</highlight><highlight class="normal">,<sp/>const<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" kindref="member">type</ref><sp/>=<sp/>static_type,</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" kindref="member">code</ref><sp/>=<sp/><ref refid="structsocket__exception_1a33a91e5eb9896fd1543ec91aa05a514a" kindref="member">last_error</ref>())<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>network_exception(info,<sp/><ref refid="structexception_1a726d6793aa2121f2a48f502d690f1a11" kindref="member">type</ref>,<sp/><ref refid="structexception_1ab8a744225b6ddc8976987ba16a0fd046" kindref="member">code</ref>)<sp/>{}</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>~socket_exception()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"></highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>static_type<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;socket_exception&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="50"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Exceptions</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"></highlight></codeline>
-<codeline lineno="59"><highlight class="normal"></highlight></codeline>
-<codeline lineno="100" refid="classsocket__base" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" kindref="member">socket_base</ref><sp/>{</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="102" refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref><sp/>=</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>::UINT_PTR;<sp/></highlight></codeline>
-<codeline lineno="105"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int;<sp/></highlight></codeline>
-<codeline lineno="107"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="108"><highlight class="normal"></highlight></codeline>
-<codeline lineno="112" refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref><sp/><ref refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" kindref="member">invalid_handle</ref><sp/>=</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" kindref="member">numeric_traits&lt;native_handle_type&gt;::max</ref>();<sp/></highlight></codeline>
-<codeline lineno="115"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-1;<sp/></highlight></codeline>
-<codeline lineno="117"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="118"><highlight class="normal"></highlight></codeline>
-<codeline lineno="119"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="120" refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref><sp/><ref refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" kindref="member">fd_</ref><sp/>=<sp/><ref refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" kindref="member">invalid_handle</ref>;<sp/></highlight></codeline>
-<codeline lineno="121"><highlight class="normal"></highlight></codeline>
-<codeline lineno="122"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="126" refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" kindref="member">socket_base</ref>();</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"></highlight></codeline>
-<codeline lineno="132" refid="classsocket__base_1a285abeec7b22821af15b2eea0844aaf3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a285abeec7b22821af15b2eea0844aaf3" kindref="member">socket_base</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref><sp/>fd)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" kindref="member">fd_</ref>(fd)<sp/>{}</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"></highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base" kindref="compound">socket_base</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsocket__base" kindref="compound">socket_base</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base" kindref="compound">socket_base</ref>&amp;<sp/><ref refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsocket__base" kindref="compound">socket_base</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"></highlight></codeline>
-<codeline lineno="142" refid="classsocket__base_1ac74cda861112114c8d171f323c4e8e99" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base_1ac74cda861112114c8d171f323c4e8e99" kindref="member">socket_base</ref>(<ref refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" kindref="member">socket_base</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" kindref="member">fd_</ref>(<ref refid="group___swap_utility_1gab81413ba62b31319104a958da78b9bb2" kindref="member">exchange</ref>(other.fd_,<sp/><ref refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" kindref="member">invalid_handle</ref>))<sp/>{}</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="structsocket__exception" kindref="compound">socket_exception</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structexception" kindref="compound">exception</ref>&amp;<sp/>e)<sp/>:</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structnetwork__exception" kindref="compound">network_exception</ref>(e)<sp/>{}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>~socket_exception()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>static_type<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;socket_exception&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Exceptions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80" refid="classsocket__base" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" kindref="member">socket_base</ref><sp/>{</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="82" refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref><sp/>=</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>::UINT_PTR;<sp/></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int;<sp/></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92" refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref><sp/><ref refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" kindref="member">invalid_handle</ref><sp/>=</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" kindref="member">numeric_traits&lt;native_handle_type&gt;::max</ref>();<sp/></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-1;<sp/></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99" refid="classsocket__base_1a815042c384cb1e40434411f9d1cfa80d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classsocket__base_1a815042c384cb1e40434411f9d1cfa80d" kindref="member">family</ref><sp/>=<sp/><ref refid="classip__address_1a1dd78d9245e92f33939bbe4f42b2180b" kindref="member">ip_address::family</ref>;<sp/></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104" refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59" kindref="member">type</ref><sp/>:<sp/><ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="105" refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59a2f05998d2a71cdc19b7109549bbe2646" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>STREAM<sp/>=<sp/>SOCK_STREAM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="106" refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59a6a8389c72b69aa95f82e3ba835c8e207" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DGRAM<sp/>=<sp/>SOCK_DGRAM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="107" refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59a633d6abff0a3fc22404347728d195059" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RAW<sp/>=<sp/>SOCK_RAW,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="108" refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59a006795aeeab570e4ca336932c33932f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RDM<sp/>=<sp/>SOCK_RDM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="109" refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59ab2b74031ec7ab401a06dc71d87906ed2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SEQPACKET<sp/>=<sp/>SOCK_SEQPACKET,<sp/></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_LINUX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111" refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59a009eaa7119fb4c83c5e487874d7e2218" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CLOEXEC<sp/>=<sp/>SOCK_CLOEXEC,<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="112" refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59aafc3203b70037086fb9aa7f2ced7a9f0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NONBLOCK<sp/>=<sp/>SOCK_NONBLOCK,<sp/></highlight></codeline>
+<codeline lineno="113" refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59abf522445105e2f387f205558aadad537" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DCCP<sp/>=<sp/>SOCK_DCCP,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bda" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bda" kindref="member">protocol</ref><sp/>:<sp/><ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref><sp/>{</highlight></codeline>
+<codeline lineno="123" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaae1f2d5134ed2543d38a0de9751cf75d9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AUTO<sp/>=<sp/>0,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="124" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaa7d6fe0dd606232f7155fdeae2ea620a9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ICMP<sp/>=<sp/>IPPROTO_ICMP,<sp/></highlight></codeline>
+<codeline lineno="125" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaab136ef5f6a01d816991fe3cf7a6ac763" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TCP<sp/>=<sp/>IPPROTO_TCP,<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="126" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaaf5ef036b4d8b630721e51fe23489fbc9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>UDP<sp/>=<sp/>IPPROTO_UDP,<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="127" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaa74096394e1dbe6f5b2ac4d54d4e88c97" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SCTP<sp/>=<sp/>IPPROTO_SCTP,<sp/></highlight></codeline>
+<codeline lineno="128" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaa633d6abff0a3fc22404347728d195059" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RAW<sp/>=<sp/>IPPROTO_RAW,<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="129" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaa3e30ce90c5b1d89ae09b7d4c73d8e172" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ESP<sp/>=<sp/>IPPROTO_ESP,<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="130" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaae99c19dec2b574bc5d4990504f6cf550" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AH<sp/>=<sp/>IPPROTO_AH,<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_LINUX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="132" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaabf522445105e2f387f205558aadad537" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DCCP<sp/>=<sp/>IPPROTO_DCCP,<sp/></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaaa12a3079e14ced46e69ba52b8a90b21a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IP<sp/>=<sp/>ETH_P_IP,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="135" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaae18712a7bcb07021704b7d53577c8501" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ARP<sp/>=<sp/>ETH_P_ARP,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="136" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaa3fbcd320695e3a01273994471d09cc36" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IPV6<sp/>=<sp/>ETH_P_IPV6,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="137" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaac4a8afa234be2060691c81928eb1b701" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LAT<sp/>=<sp/>ETH_P_LAT,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="138" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaac954164d21804a68c6bd9c9ed29ac5b3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ETHERCAT<sp/>=<sp/>ETH_P_ETHERCAT,<sp/></highlight></codeline>
+<codeline lineno="139" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaa9881f82f0dd89588831f9d1682bd5492" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VLAN<sp/>=<sp/>ETH_P_8021Q,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="140" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaa2bad208e9a1343317d536d15106834ef" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LLDP<sp/>=<sp/>ETH_P_LLDP,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="141" refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaa32ea4687a585ba359fefb81028f20adb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MPLS<sp/>=<sp/>ETH_P_MPLS_UC<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="144"><highlight class="normal"></highlight></codeline>
-<codeline lineno="150" refid="classsocket__base_1ae6442c91cf368fa6c9781f3603a31e8c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" kindref="member">socket_base</ref>&amp;<sp/><ref refid="classsocket__base_1ae6442c91cf368fa6c9781f3603a31e8c" kindref="member">operator=</ref>(<ref refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" kindref="member">socket_base</ref>&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="151"><highlight class="normal"></highlight></codeline>
-<codeline lineno="155" refid="classsocket__base_1ad718ca0872f7a951b40b00da45151d10" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1ad718ca0872f7a951b40b00da45151d10" kindref="member">~socket_base</ref>()<sp/>{<sp/><ref refid="classsocket__base_1a5ca6bcc243acaaa75ab86a1e3316a996" kindref="member">socket_base::close</ref>();<sp/>}</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"></highlight></codeline>
-<codeline lineno="161" refid="classsocket__base_1ad99d1582b07a547df0c6e25d7d057262" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref><sp/><ref refid="classsocket__base_1ad99d1582b07a547df0c6e25d7d057262" kindref="member">native_handle</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" kindref="member">fd_</ref>;<sp/>}</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"></highlight></codeline>
-<codeline lineno="167" refid="classsocket__base_1ae075f18d5fe704a278f8021d251905a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1ae075f18d5fe704a278f8021d251905a0" kindref="member">is_open</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" kindref="member">fd_</ref><sp/>!=<sp/><ref refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" kindref="member">invalid_handle</ref>;<sp/>}</highlight></codeline>
-<codeline lineno="168"><highlight class="normal"></highlight></codeline>
-<codeline lineno="173" refid="classsocket__base_1ade45e5ade072d22d377f6582660a872e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1ae075f18d5fe704a278f8021d251905a0" kindref="member">is_open</ref>();<sp/>}</highlight></codeline>
-<codeline lineno="174"><highlight class="normal"></highlight></codeline>
-<codeline lineno="183" refid="classsocket__base_1ac45ca9c8151fc981e49861f5e85b0434" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1ac45ca9c8151fc981e49861f5e85b0434" kindref="member">open</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>family,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>type,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>protocol);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="146" refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref><sp/><ref refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" kindref="member">fd_</ref><sp/>=<sp/><ref refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" kindref="member">invalid_handle</ref>;<sp/></highlight></codeline>
+<codeline lineno="147" refid="classsocket__base_1a3b85c967d07f91b5e45349495e2a1481" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a3b85c967d07f91b5e45349495e2a1481" kindref="member">nonblocking_</ref>{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="153" refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" kindref="member">socket_base</ref>();</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159" refid="classsocket__base_1a285abeec7b22821af15b2eea0844aaf3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a285abeec7b22821af15b2eea0844aaf3" kindref="member">socket_base</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref><sp/>fd)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" kindref="member">fd_</ref>(fd)<sp/>{}</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base" kindref="compound">socket_base</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsocket__base" kindref="compound">socket_base</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base" kindref="compound">socket_base</ref>&amp;<sp/><ref refid="structexception_1a1a1667b7354203e2aa5a89d211ca3a6b" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsocket__base" kindref="compound">socket_base</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169" refid="classsocket__base_1ac74cda861112114c8d171f323c4e8e99" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base_1ac74cda861112114c8d171f323c4e8e99" kindref="member">socket_base</ref>(<ref refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" kindref="member">socket_base</ref>&amp;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" kindref="member">fd_</ref>(<ref refid="group___swap_utility_1gab81413ba62b31319104a958da78b9bb2" kindref="member">exchange</ref>(other.fd_,<sp/><ref refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" kindref="member">invalid_handle</ref>)),</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base_1a3b85c967d07f91b5e45349495e2a1481" kindref="member">nonblocking_</ref>(<ref refid="group___swap_utility_1gab81413ba62b31319104a958da78b9bb2" kindref="member">exchange</ref>(other.nonblocking_,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">))<sp/>{}</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178" refid="classsocket__base_1ae6442c91cf368fa6c9781f3603a31e8c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" kindref="member">socket_base</ref>&amp;<sp/><ref refid="classsocket__base_1ae6442c91cf368fa6c9781f3603a31e8c" kindref="member">operator=</ref>(<ref refid="classsocket__base_1a94270ff7405e94a47c1d4681c7186027" kindref="member">socket_base</ref>&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183" refid="classsocket__base_1ad718ca0872f7a951b40b00da45151d10" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1ad718ca0872f7a951b40b00da45151d10" kindref="member">~socket_base</ref>()<sp/>{<sp/><ref refid="classsocket__base_1a5ca6bcc243acaaa75ab86a1e3316a996" kindref="member">socket_base::close</ref>();<sp/>}</highlight></codeline>
 <codeline lineno="184"><highlight class="normal"></highlight></codeline>
-<codeline lineno="189" refid="classsocket__base_1a5ca6bcc243acaaa75ab86a1e3316a996" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a5ca6bcc243acaaa75ab86a1e3316a996" kindref="member">close</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="189" refid="classsocket__base_1ad99d1582b07a547df0c6e25d7d057262" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref><sp/><ref refid="classsocket__base_1ad99d1582b07a547df0c6e25d7d057262" kindref="member">native_handle</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" kindref="member">fd_</ref>;<sp/>}</highlight></codeline>
 <codeline lineno="190"><highlight class="normal"></highlight></codeline>
-<codeline lineno="198" refid="classsocket__base_1a0e1b1431d88934a2de83da39b3ece88c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a0e1b1431d88934a2de83da39b3ece88c" kindref="member">try_open</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>family,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>type,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>protocol)<sp/>noexcept;</highlight></codeline>
-<codeline lineno="199"><highlight class="normal"></highlight></codeline>
-<codeline lineno="205" refid="classsocket__base_1a7189d507bfa09539dd7fd3abc4d85a34" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a7189d507bfa09539dd7fd3abc4d85a34" kindref="member">set_nonblocking</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable)<sp/>noexcept;</highlight></codeline>
-<codeline lineno="206"><highlight class="normal"></highlight></codeline>
-<codeline lineno="211" refid="classsocket__base_1a562c8bfb47f9ba974950ae5e50753a10" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a562c8bfb47f9ba974950ae5e50753a10" kindref="member">shutdown_send</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="195" refid="classsocket__base_1ae075f18d5fe704a278f8021d251905a0" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1ae075f18d5fe704a278f8021d251905a0" kindref="member">is_open</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" kindref="member">fd_</ref><sp/>!=<sp/><ref refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" kindref="member">invalid_handle</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201" refid="classsocket__base_1ade45e5ade072d22d377f6582660a872e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/>bool()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1ae075f18d5fe704a278f8021d251905a0" kindref="member">is_open</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight></codeline>
+<codeline lineno="211" refid="classsocket__base_1a27acf9f7219de7e4462af8744e44137a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a27acf9f7219de7e4462af8744e44137a" kindref="member">open</ref>(<ref refid="classsocket__base_1a815042c384cb1e40434411f9d1cfa80d" kindref="member">family</ref><sp/>f,<sp/><ref refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59" kindref="member">type</ref><sp/>t<sp/>=<sp/><ref refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59a2f05998d2a71cdc19b7109549bbe2646" kindref="member">type::STREAM</ref>,<sp/><ref refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bda" kindref="member">protocol</ref><sp/>p<sp/>=<sp/><ref refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bdaae1f2d5134ed2543d38a0de9751cf75d9" kindref="member">protocol::AUTO</ref>);</highlight></codeline>
 <codeline lineno="212"><highlight class="normal"></highlight></codeline>
-<codeline lineno="217" refid="classsocket__base_1a6562d2f9ca892b9f7e4d979e604ab02d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a6562d2f9ca892b9f7e4d979e604ab02d" kindref="member">shutdown_receive</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="217" refid="classsocket__base_1a5ca6bcc243acaaa75ab86a1e3316a996" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a5ca6bcc243acaaa75ab86a1e3316a996" kindref="member">close</ref>()<sp/>noexcept;</highlight></codeline>
 <codeline lineno="218"><highlight class="normal"></highlight></codeline>
-<codeline lineno="223" refid="classsocket__base_1a40ba63982c83f6427f41e5dddd5effd9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a40ba63982c83f6427f41e5dddd5effd9" kindref="member">shutdown_both</ref>()<sp/>noexcept;</highlight></codeline>
-<codeline lineno="224"><highlight class="normal"></highlight></codeline>
-<codeline lineno="233" refid="classsocket__base_1a243eecfa633156956f8eef37d642af6b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a243eecfa633156956f8eef37d642af6b" kindref="member">set_option</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>level,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>optname,<sp/>const<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>value,<sp/>::socklen_t<sp/>len)<sp/>noexcept;</highlight></codeline>
-<codeline lineno="234"><highlight class="normal"></highlight></codeline>
-<codeline lineno="243" refid="classsocket__base_1aef8dd076d9cadcea38fa14252718466c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1aef8dd076d9cadcea38fa14252718466c" kindref="member">get_option</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>level,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>optname,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>optval,<sp/>::socklen_t*<sp/>optlen)<sp/>const<sp/>noexcept;</highlight></codeline>
-<codeline lineno="244"><highlight class="normal"></highlight></codeline>
-<codeline lineno="250" refid="classsocket__base_1a259bcf1d2f08be76c9c725508dab5f64" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a259bcf1d2f08be76c9c725508dab5f64" kindref="member">set_reuse_address</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable<sp/>=<sp/>true)<sp/>noexcept;</highlight></codeline>
-<codeline lineno="251"><highlight class="normal"></highlight></codeline>
-<codeline lineno="257" refid="classsocket__base_1ac0a415eba84444ec1e432cd2b5dc600a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1ac0a415eba84444ec1e432cd2b5dc600a" kindref="member">set_reuse_port</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable<sp/>=<sp/>true)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="226" refid="classsocket__base_1a7333214e4562884b671ed9545313985a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a7333214e4562884b671ed9545313985a" kindref="member">try_open</ref>(<ref refid="classsocket__base_1a815042c384cb1e40434411f9d1cfa80d" kindref="member">family</ref><sp/>f,<sp/><ref refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59" kindref="member">type</ref><sp/>t<sp/>=<sp/><ref refid="classsocket__base_1aaad8e4cba25d9fbc201b4c7535050f59" kindref="member">type</ref>::STREAM,<sp/><ref refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bda" kindref="member">protocol</ref><sp/>p<sp/>=<sp/><ref refid="classsocket__base_1a222cf9dab4869480c9467b50767c2bda" kindref="member">protocol</ref>::AUTO)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight></codeline>
+<codeline lineno="232" refid="classsocket__base_1ab5a66ef60a4b340dbcea96f0d5104435" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1ab5a66ef60a4b340dbcea96f0d5104435" kindref="member">is_nonblocking</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="239" refid="classsocket__base_1a7189d507bfa09539dd7fd3abc4d85a34" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a7189d507bfa09539dd7fd3abc4d85a34" kindref="member">set_nonblocking</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"></highlight></codeline>
+<codeline lineno="245" refid="classsocket__base_1a562c8bfb47f9ba974950ae5e50753a10" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a562c8bfb47f9ba974950ae5e50753a10" kindref="member">shutdown_send</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight></codeline>
+<codeline lineno="251" refid="classsocket__base_1a6562d2f9ca892b9f7e4d979e604ab02d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a6562d2f9ca892b9f7e4d979e604ab02d" kindref="member">shutdown_receive</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight></codeline>
+<codeline lineno="257" refid="classsocket__base_1a40ba63982c83f6427f41e5dddd5effd9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a40ba63982c83f6427f41e5dddd5effd9" kindref="member">shutdown_both</ref>()<sp/>noexcept;</highlight></codeline>
 <codeline lineno="258"><highlight class="normal"></highlight></codeline>
-<codeline lineno="264" refid="classsocket__base_1a6059faa2b63d09c36188a5aee9b64b83" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a6059faa2b63d09c36188a5aee9b64b83" kindref="member">set_keep_alive</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable<sp/>=<sp/>true)<sp/>noexcept;</highlight></codeline>
-<codeline lineno="265"><highlight class="normal"></highlight></codeline>
-<codeline lineno="271" refid="classsocket__base_1a0c38ed84a8f68fe6a576258f5de32312" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a0c38ed84a8f68fe6a576258f5de32312" kindref="member">set_tcp_nodelay</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable<sp/>=<sp/>true)<sp/>noexcept;</highlight></codeline>
-<codeline lineno="272"><highlight class="normal"></highlight></codeline>
-<codeline lineno="278" refid="classsocket__base_1aefd6e08bf2d87b655bf01764ee573a48" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1aefd6e08bf2d87b655bf01764ee573a48" kindref="member">set_receive_buffer_size</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>)<sp/>noexcept;</highlight></codeline>
-<codeline lineno="279"><highlight class="normal"></highlight></codeline>
-<codeline lineno="285" refid="classsocket__base_1a7126487c99a283ff1eb6b3475893e280" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a7126487c99a283ff1eb6b3475893e280" kindref="member">set_send_buffer_size</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>)<sp/>noexcept;</highlight></codeline>
-<codeline lineno="286"><highlight class="normal"></highlight></codeline>
-<codeline lineno="292" refid="classsocket__base_1aedb9dd6b9db120034acabf6ba0da3408" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1aedb9dd6b9db120034acabf6ba0da3408" kindref="member">set_send_timeout</ref>(<ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref><sp/><ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>)<sp/>noexcept;</highlight></codeline>
-<codeline lineno="293"><highlight class="normal"></highlight></codeline>
-<codeline lineno="299" refid="classsocket__base_1ad854cadd121de51d693b0e9182f6dc15" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1ad854cadd121de51d693b0e9182f6dc15" kindref="member">set_receive_timeout</ref>(<ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref><sp/><ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>)<sp/>noexcept;</highlight></codeline>
-<codeline lineno="300"><highlight class="normal"></highlight></codeline>
-<codeline lineno="305" refid="classsocket__base_1a1d9ff8b37d502077065ad505098f1c10" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classoptional" kindref="compound">optional</ref>&lt;<ref refid="classip__address" kindref="compound">ip_address</ref>&gt;<sp/><ref refid="classsocket__base_1a1d9ff8b37d502077065ad505098f1c10" kindref="member">local_endpoint</ref>()<sp/>const;</highlight></codeline>
-<codeline lineno="306"><highlight class="normal"></highlight></codeline>
-<codeline lineno="311" refid="classsocket__base_1a3a861847a9b28069c28a4ae626f8a4b9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classoptional" kindref="compound">optional</ref>&lt;<ref refid="classip__address" kindref="compound">ip_address</ref>&gt;<sp/><ref refid="classsocket__base_1a3a861847a9b28069c28a4ae626f8a4b9" kindref="member">remote_endpoint</ref>()<sp/>const;</highlight></codeline>
-<codeline lineno="312"><highlight class="normal"></highlight></codeline>
-<codeline lineno="319" refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" kindref="member">bind</ref>(const<sp/><ref refid="classip__address" kindref="compound">ip_address</ref>&amp;<sp/>endpoint);</highlight></codeline>
-<codeline lineno="320"><highlight class="normal"></highlight></codeline>
-<codeline lineno="327" refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8" kindref="member">listen</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>backlog);</highlight></codeline>
-<codeline lineno="328"><highlight class="normal"></highlight></codeline>
-<codeline lineno="335" refid="classsocket__base_1a940df24ee538694021cc7350ba790524" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref><sp/><ref refid="classsocket__base_1a940df24ee538694021cc7350ba790524" kindref="member">release</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___swap_utility_1gab81413ba62b31319104a958da78b9bb2" kindref="member">exchange</ref>(<ref refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" kindref="member">fd_</ref>,<sp/><ref refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" kindref="member">invalid_handle</ref>);<sp/>}</highlight></codeline>
-<codeline lineno="336"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="337"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>SocketBase</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="339"><highlight class="normal"></highlight></codeline>
-<codeline lineno="340"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="341"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_NETWORK_SOCKET_BASE_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="267" refid="classsocket__base_1a243eecfa633156956f8eef37d642af6b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a243eecfa633156956f8eef37d642af6b" kindref="member">set_option</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>level,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>optname,<sp/>const<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>value,<sp/>::socklen_t<sp/>len)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight></codeline>
+<codeline lineno="277" refid="classsocket__base_1aef8dd076d9cadcea38fa14252718466c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1aef8dd076d9cadcea38fa14252718466c" kindref="member">get_option</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>level,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>optname,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>optval,<sp/>::socklen_t*<sp/>optlen)<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight></codeline>
+<codeline lineno="283" refid="classsocket__base_1ad6fc69fa955b9f3afc3d63c02d0addd3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1ad6fc69fa955b9f3afc3d63c02d0addd3" kindref="member">get_reuse_address</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"></highlight></codeline>
+<codeline lineno="290" refid="classsocket__base_1a259bcf1d2f08be76c9c725508dab5f64" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a259bcf1d2f08be76c9c725508dab5f64" kindref="member">set_reuse_address</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable<sp/>=<sp/>true)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"></highlight></codeline>
+<codeline lineno="296" refid="classsocket__base_1ad1f28d1eea43b63bc7050510c480e0ae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1ad1f28d1eea43b63bc7050510c480e0ae" kindref="member">get_reuse_port</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight></codeline>
+<codeline lineno="303" refid="classsocket__base_1ac0a415eba84444ec1e432cd2b5dc600a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1ac0a415eba84444ec1e432cd2b5dc600a" kindref="member">set_reuse_port</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable<sp/>=<sp/>true)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"></highlight></codeline>
+<codeline lineno="309" refid="classsocket__base_1ac3103b62e4c1d6e4caef07281239ba96" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1ac3103b62e4c1d6e4caef07281239ba96" kindref="member">get_keep_alive</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"></highlight></codeline>
+<codeline lineno="316" refid="classsocket__base_1a6059faa2b63d09c36188a5aee9b64b83" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a6059faa2b63d09c36188a5aee9b64b83" kindref="member">set_keep_alive</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable<sp/>=<sp/>true)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"></highlight></codeline>
+<codeline lineno="322" refid="classsocket__base_1ad83b27288c18c1f00fd2659c1482673f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1ad83b27288c18c1f00fd2659c1482673f" kindref="member">get_tcp_nodelay</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"></highlight></codeline>
+<codeline lineno="329" refid="classsocket__base_1a0c38ed84a8f68fe6a576258f5de32312" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a0c38ed84a8f68fe6a576258f5de32312" kindref="member">set_tcp_nodelay</ref>(</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable<sp/>=<sp/>true)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"></highlight></codeline>
+<codeline lineno="335" refid="classsocket__base_1a0bde21c6d19832760c24dfc205f27854" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a0bde21c6d19832760c24dfc205f27854" kindref="member">get_receive_buffer_size</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"></highlight></codeline>
+<codeline lineno="342" refid="classsocket__base_1aefd6e08bf2d87b655bf01764ee573a48" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1aefd6e08bf2d87b655bf01764ee573a48" kindref="member">set_receive_buffer_size</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"></highlight></codeline>
+<codeline lineno="348" refid="classsocket__base_1af53a6dca22c01edc531761e6dd3ea491" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1af53a6dca22c01edc531761e6dd3ea491" kindref="member">get_send_buffer_size</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight></codeline>
+<codeline lineno="355" refid="classsocket__base_1a7126487c99a283ff1eb6b3475893e280" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a7126487c99a283ff1eb6b3475893e280" kindref="member">set_send_buffer_size</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"></highlight></codeline>
+<codeline lineno="361" refid="classsocket__base_1acd796a65b1b2e380cecc38048065a458" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classoptional" kindref="compound">optional</ref>&lt;<ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref>&gt;<sp/><ref refid="classsocket__base_1acd796a65b1b2e380cecc38048065a458" kindref="member">get_send_timeout</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"></highlight></codeline>
+<codeline lineno="368" refid="classsocket__base_1aedb9dd6b9db120034acabf6ba0da3408" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1aedb9dd6b9db120034acabf6ba0da3408" kindref="member">set_send_timeout</ref>(<ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref><sp/><ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"></highlight></codeline>
+<codeline lineno="374" refid="classsocket__base_1a1626b586842a2342e12b59ab03e3c027" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classoptional" kindref="compound">optional</ref>&lt;<ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref>&gt;<sp/><ref refid="classsocket__base_1a1626b586842a2342e12b59ab03e3c027" kindref="member">get_receive_timeout</ref>()<sp/>const<sp/>noexcept;</highlight></codeline>
+<codeline lineno="375"><highlight class="normal"></highlight></codeline>
+<codeline lineno="381" refid="classsocket__base_1ad854cadd121de51d693b0e9182f6dc15" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1ad854cadd121de51d693b0e9182f6dc15" kindref="member">set_receive_timeout</ref>(<ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref><sp/><ref refid="group___condition_variables_1ggac48748e21401a044d85c1b3124a8e828a90272dda245ae1fb3cf197e91a8689dc" kindref="member">timeout</ref>)<sp/>noexcept;</highlight></codeline>
+<codeline lineno="382"><highlight class="normal"></highlight></codeline>
+<codeline lineno="387" refid="classsocket__base_1a1d9ff8b37d502077065ad505098f1c10" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classoptional" kindref="compound">optional</ref>&lt;<ref refid="classip__address" kindref="compound">ip_address</ref>&gt;<sp/><ref refid="classsocket__base_1a1d9ff8b37d502077065ad505098f1c10" kindref="member">local_endpoint</ref>()<sp/>const;</highlight></codeline>
+<codeline lineno="388"><highlight class="normal"></highlight></codeline>
+<codeline lineno="393" refid="classsocket__base_1a3a861847a9b28069c28a4ae626f8a4b9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classoptional" kindref="compound">optional</ref>&lt;<ref refid="classip__address" kindref="compound">ip_address</ref>&gt;<sp/><ref refid="classsocket__base_1a3a861847a9b28069c28a4ae626f8a4b9" kindref="member">remote_endpoint</ref>()<sp/>const;</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"></highlight></codeline>
+<codeline lineno="401" refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1a576e748fadfec602f083eb35c602c003" kindref="member">bind</ref>(const<sp/><ref refid="classip__address" kindref="compound">ip_address</ref>&amp;<sp/>endpoint);</highlight></codeline>
+<codeline lineno="402"><highlight class="normal"></highlight></codeline>
+<codeline lineno="409" refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsocket__base_1aa1f872262e5d3464c77ee96de7550df8" kindref="member">listen</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>backlog);</highlight></codeline>
+<codeline lineno="410"><highlight class="normal"></highlight></codeline>
+<codeline lineno="417" refid="classsocket__base_1a940df24ee538694021cc7350ba790524" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsocket__base_1a84bf18aff95bf7f3485de66d4f63bef6" kindref="member">native_handle_type</ref><sp/><ref refid="classsocket__base_1a940df24ee538694021cc7350ba790524" kindref="member">release</ref>()<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="group___swap_utility_1gab81413ba62b31319104a958da78b9bb2" kindref="member">exchange</ref>(<ref refid="classsocket__base_1aaab1a3ca15c17e54f29e2b85c0a05759" kindref="member">fd_</ref>,<sp/><ref refid="classsocket__base_1ae29d93f991d9d519bb6e9a1f9cb13c32" kindref="member">invalid_handle</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="418"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="419"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>SocketBase</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="421"><highlight class="normal"></highlight></codeline>
+<codeline lineno="422"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="423"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_NETWORK_SOCKET_BASE_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="D:/Workspace/NexusForce/include/NeForce/network/socket_base.hpp"/>
   </compounddef>

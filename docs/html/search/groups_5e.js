@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['索引元组_0',['索引元组',['../group___index_tuple.html',1,'']]]
+  ['相邻元素算法_0',['相邻元素算法',['../group___adjacent_algorithms.html',1,'']]]
 ];

@@ -9,6 +9,7 @@ var structhttp__session =
     [ "invalidate", "structhttp__session.html#a0fa33269e2df1c00132e0eab66667894", null ],
     [ "is_valid", "structhttp__session.html#a55ca4817d836a824d8f8edbb0dcb6e81", null ],
     [ "operator[]", "structhttp__session.html#a32680f47186ed9bfc6e7d67e9d9a9162", null ],
+    [ "regenerate_id", "structhttp__session.html#a94916c8dc2f1fd6b0476bd93abdcdab8", null ],
     [ "remove", "structhttp__session.html#a823d831034581b2e27e4b41f310a693d", null ],
     [ "set", "structhttp__session.html#a712fb2b229e3a29c1b6a9c93fcae6afd", null ],
     [ "to_string", "structhttp__session.html#aac1c5f92172bb50e843bd070f6e54a4c", null ],

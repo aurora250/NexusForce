@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['变体_0',['变体',['../group___variant.html',1,'']]]
+  ['单次调用_0',['单次调用',['../group___call_once.html',1,'']]]
 ];

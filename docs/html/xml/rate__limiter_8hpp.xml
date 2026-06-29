@@ -1,0 +1,931 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="rate__limiter_8hpp" kind="file" language="C++">
+    <compoundname>rate_limiter.hpp</compoundname>
+    <includes refid="atomic_8hpp" local="yes">NeForce/core/async/atomic.hpp</includes>
+    <includes refid="clocks_8hpp" local="yes">NeForce/core/time/clocks.hpp</includes>
+    <includes refid="http__filter_8hpp" local="yes">NeForce/network/http/http_filter.hpp</includes>
+    <incdepgraph>
+      <node id="60">
+        <label>NeForce/core/algorithm/compare.hpp</label>
+        <link refid="compare_8hpp"/>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="62" relation="include">
+        </childnode>
+      </node>
+      <node id="98">
+        <label>NeForce/core/algorithm/heap.hpp</label>
+        <link refid="heap_8hpp"/>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>NeForce/core/algorithm/iterator.hpp</label>
+        <link refid="iterator_8hpp"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="55" relation="include">
+        </childnode>
+      </node>
+      <node id="99">
+        <label>NeForce/core/algorithm/merge.hpp</label>
+        <link refid="merge_8hpp"/>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="100" relation="include">
+        </childnode>
+      </node>
+      <node id="101">
+        <label>NeForce/core/algorithm/partition.hpp</label>
+        <link refid="partition_8hpp"/>
+        <childnode refid="51" relation="include">
+        </childnode>
+      </node>
+      <node id="52">
+        <label>NeForce/core/algorithm/search.hpp</label>
+        <link refid="search_8hpp"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>NeForce/core/algorithm/shift.hpp</label>
+        <link refid="shift_8hpp"/>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="97">
+        <label>NeForce/core/algorithm/sort.hpp</label>
+        <link refid="sort_8hpp"/>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="98" relation="include">
+        </childnode>
+        <childnode refid="99" relation="include">
+        </childnode>
+        <childnode refid="101" relation="include">
+        </childnode>
+      </node>
+      <node id="79">
+        <label>NeForce/core/algorithm/type_erase.hpp</label>
+        <link refid="type__erase_8hpp"/>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>NeForce/core/async/atomic.hpp</label>
+        <link refid="atomic_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>NeForce/core/async/atomic_base.hpp</label>
+        <link refid="atomic__base_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NeForce/core/async/atomic_wait.hpp</label>
+        <link refid="atomic__wait_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>NeForce/core/async/futex.hpp</label>
+        <link refid="futex_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>NeForce/core/async/memory_order.hpp</label>
+        <link refid="memory__order_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>NeForce/core/async/mutex.hpp</label>
+        <link refid="mutex_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>NeForce/core/async/this_thread.hpp</label>
+        <link refid="this__thread_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>NeForce/core/config/c++config.hpp</label>
+        <link refid="c_09_09config_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>NeForce/core/config/version.hpp</label>
+        <link refid="version_8hpp_source"/>
+      </node>
+      <node id="12">
+        <label>NeForce/core/config/windef.hpp</label>
+        <link refid="windef_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="59">
+        <label>NeForce/core/container/array.hpp</label>
+        <link refid="array_8hpp"/>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+      </node>
+      <node id="91">
+        <label>NeForce/core/container/buffer_chain.hpp</label>
+        <link refid="buffer__chain_8hpp_source"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="92" relation="include">
+        </childnode>
+      </node>
+      <node id="96">
+        <label>NeForce/core/container/hashtable.hpp</label>
+        <link refid="hashtable_8hpp"/>
+        <childnode refid="97" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+      </node>
+      <node id="95">
+        <label>NeForce/core/container/unordered_map.hpp</label>
+        <link refid="unordered__map_8hpp"/>
+        <childnode refid="96" relation="include">
+        </childnode>
+      </node>
+      <node id="57">
+        <label>NeForce/core/container/vector.hpp</label>
+        <link refid="vector_8hpp"/>
+        <childnode refid="58" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>NeForce/core/exception/breakpoint.hpp</label>
+        <link refid="breakpoint_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>NeForce/core/exception/exception.hpp</label>
+        <link refid="exception_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>NeForce/core/functional/function.hpp</label>
+        <link refid="functional_2function_8hpp"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>NeForce/core/functional/functor.hpp</label>
+        <link refid="functor_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>NeForce/core/functional/hash.hpp</label>
+        <link refid="hash_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>NeForce/core/functional/invoke.hpp</label>
+        <link refid="invoke_8hpp"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="81">
+        <label>NeForce/core/interface/icharacter.hpp</label>
+        <link refid="icharacter_8hpp"/>
+        <childnode refid="82" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+      </node>
+      <node id="65">
+        <label>NeForce/core/interface/icollector.hpp</label>
+        <link refid="icollector_8hpp"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>NeForce/core/interface/icommon.hpp</label>
+        <link refid="icommon_8hpp"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="66">
+        <label>NeForce/core/interface/iiterator.hpp</label>
+        <link refid="iiterator_8hpp"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="83">
+        <label>NeForce/core/interface/inumeric.hpp</label>
+        <link refid="inumeric_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
+        <label>NeForce/core/interface/iobject.hpp</label>
+        <link refid="iobject_8hpp"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+      </node>
+      <node id="82">
+        <label>NeForce/core/interface/ipackage.hpp</label>
+        <link refid="ipackage_8hpp"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>NeForce/core/interface/istringify.hpp</label>
+        <link refid="istringify_8hpp"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+      </node>
+      <node id="56">
+        <label>NeForce/core/iterator/iterator_traits.hpp</label>
+        <link refid="iterator__traits_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="67">
+        <label>NeForce/core/iterator/normal_iterator.hpp</label>
+        <link refid="normal__iterator_8hpp"/>
+        <childnode refid="56" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>NeForce/core/iterator/reverse_iterator.hpp</label>
+        <link refid="reverse__iterator_8hpp"/>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="72">
+        <label>NeForce/core/memory/allocator_traits.hpp</label>
+        <link refid="allocator__traits_8hpp"/>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>NeForce/core/memory/bit.hpp</label>
+        <link refid="bit_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="71">
+        <label>NeForce/core/memory/construct.hpp</label>
+        <link refid="construct_8hpp"/>
+        <childnode refid="55" relation="include">
+        </childnode>
+      </node>
+      <node id="85">
+        <label>NeForce/core/memory/endian.hpp</label>
+        <link refid="endian_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>NeForce/core/memory/memory.hpp</label>
+        <link refid="memory_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>NeForce/core/memory/memory_view.hpp</label>
+        <link refid="memory__view_8hpp"/>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="67" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="68">
+        <label>NeForce/core/memory/standard_allocator.hpp</label>
+        <link refid="standard__allocator_8hpp"/>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="100">
+        <label>NeForce/core/memory/temporary_buffer.hpp</label>
+        <link refid="temporary__buffer_8hpp"/>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="68" relation="include">
+        </childnode>
+        <childnode refid="70" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="70">
+        <label>NeForce/core/memory/uninitialized.hpp</label>
+        <link refid="uninitialized_8hpp"/>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>NeForce/core/memory/unique_ptr.hpp</label>
+        <link refid="unique__ptr_8hpp"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>NeForce/core/numeric/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>NeForce/core/numeric/numeric_traits.hpp</label>
+        <link refid="numeric__traits_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>NeForce/core/numeric/numeric_types.hpp</label>
+        <link refid="numeric__types_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>NeForce/core/numeric/ratio.hpp</label>
+        <link refid="ratio_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>NeForce/core/numeric/static_numeric.hpp</label>
+        <link refid="static__numeric_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>NeForce/core/string/basic_string.hpp</label>
+        <link refid="basic__string_8hpp"/>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="72" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="74">
+        <label>NeForce/core/string/basic_string_view.hpp</label>
+        <link refid="basic__string__view_8hpp"/>
+        <childnode refid="66" relation="include">
+        </childnode>
+        <childnode refid="75" relation="include">
+        </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
+      </node>
+      <node id="75">
+        <label>NeForce/core/string/char_traits.hpp</label>
+        <link refid="char__traits_8hpp"/>
+        <childnode refid="60" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="76">
+        <label>NeForce/core/string/char_types.hpp</label>
+        <link refid="char__types_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="84">
+        <label>NeForce/core/string/codepoint.hpp</label>
+        <link refid="codepoint_8hpp"/>
+        <childnode refid="85" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>NeForce/core/string/format.hpp</label>
+        <link refid="format_8hpp"/>
+        <childnode refid="78" relation="include">
+        </childnode>
+        <childnode refid="86" relation="include">
+        </childnode>
+      </node>
+      <node id="49">
+        <label>NeForce/core/string/string.hpp</label>
+        <link refid="string_8hpp"/>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="73">
+        <label>NeForce/core/string/string_view.hpp</label>
+        <link refid="string__view_8hpp"/>
+        <childnode refid="74" relation="include">
+        </childnode>
+      </node>
+      <node id="87">
+        <label>NeForce/core/string/to_numerics.hpp</label>
+        <link refid="to__numerics_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="73" relation="include">
+        </childnode>
+      </node>
+      <node id="78">
+        <label>NeForce/core/string/to_string.hpp</label>
+        <link refid="to__string_8hpp"/>
+        <childnode refid="79" relation="include">
+        </childnode>
+        <childnode refid="65" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="80" relation="include">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>NeForce/core/string/utf.hpp</label>
+        <link refid="utf_8hpp"/>
+        <childnode refid="81" relation="include">
+        </childnode>
+        <childnode refid="84" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>NeForce/core/time/clocks.hpp</label>
+        <link refid="clocks_8hpp"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="102">
+        <label>NeForce/core/time/datetime.hpp</label>
+        <link refid="datetime_8hpp"/>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>NeForce/core/time/duration.hpp</label>
+        <link refid="duration_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>NeForce/core/time/time_point.hpp</label>
+        <link refid="time__point_8hpp"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>NeForce/core/typeinfo/concepts.hpp</label>
+        <link refid="concepts_8hpp"/>
+        <childnode refid="56" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>NeForce/core/typeinfo/type_traits.hpp</label>
+        <link refid="type__traits_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>NeForce/core/typeinfo/types.hpp</label>
+        <link refid="types_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="93">
+        <label>NeForce/core/utility/any.hpp</label>
+        <link refid="utility_2any_8hpp"/>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>NeForce/core/utility/byte_size.hpp</label>
+        <link refid="byte__size_8hpp"/>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+        <childnode refid="79" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>NeForce/core/utility/compressed_pair.hpp</label>
+        <link refid="compressed__pair_8hpp"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>NeForce/core/utility/deleter.hpp</label>
+        <link refid="deleter_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="63">
+        <label>NeForce/core/utility/integer_sequence.hpp</label>
+        <link refid="integer__sequence_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="89">
+        <label>NeForce/core/utility/none.hpp</label>
+        <link refid="none_8hpp"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="88">
+        <label>NeForce/core/utility/optional.hpp</label>
+        <link refid="optional_8hpp"/>
+        <childnode refid="61" relation="include">
+        </childnode>
+        <childnode refid="69" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="71" relation="include">
+        </childnode>
+        <childnode refid="89" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>NeForce/core/utility/packages.hpp</label>
+        <link refid="packages_8hpp"/>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="77" relation="include">
+        </childnode>
+        <childnode refid="87" relation="include">
+        </childnode>
+      </node>
+      <node id="62">
+        <label>NeForce/core/utility/pair.hpp</label>
+        <link refid="pair_8hpp"/>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="64" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>NeForce/core/utility/reference_wrapper.hpp</label>
+        <link refid="reference__wrapper_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="86">
+        <label>NeForce/core/utility/tuple.hpp</label>
+        <link refid="tuple_8hpp"/>
+        <childnode refid="62" relation="include">
+        </childnode>
+      </node>
+      <node id="103">
+        <label>NeForce/network/http/http_constants.hpp</label>
+        <link refid="http__constants_8hpp"/>
+        <childnode refid="48" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>NeForce/network/http/http_filter.hpp</label>
+        <link refid="http__filter_8hpp"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="88" relation="include">
+        </childnode>
+        <childnode refid="90" relation="include">
+        </childnode>
+      </node>
+      <node id="90">
+        <label>NeForce/network/http/http_server_message.hpp</label>
+        <link refid="http__server__message_8hpp"/>
+        <childnode refid="91" relation="include">
+        </childnode>
+        <childnode refid="93" relation="include">
+        </childnode>
+        <childnode refid="94" relation="include">
+        </childnode>
+      </node>
+      <node id="94">
+        <label>NeForce/network/http/http_session.hpp</label>
+        <link refid="http__session_8hpp"/>
+        <childnode refid="95" relation="include">
+        </childnode>
+        <childnode refid="102" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="103" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>rate_limiter.hpp</label>
+        <link refid="rate__limiter_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>cassert</label>
+      </node>
+      <node id="16">
+        <label>ctime</label>
+      </node>
+      <node id="61">
+        <label>initializer_list</label>
+      </node>
+      <node id="20">
+        <label>intrin.h</label>
+      </node>
+      <node id="21">
+        <label>intrin0.inl.h</label>
+      </node>
+      <node id="69">
+        <label>new</label>
+      </node>
+      <node id="13">
+        <label>processthreadsapi.h</label>
+      </node>
+      <node id="34">
+        <label>pthread.h</label>
+      </node>
+      <node id="15">
+        <label>sched.h</label>
+      </node>
+      <node id="14">
+        <label>synchapi.h</label>
+      </node>
+      <node id="92">
+        <label>sys/uio.h</label>
+      </node>
+      <node id="36">
+        <label>typeinfo</label>
+      </node>
+      <node id="64">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structtoken__bucket" prot="public">token_bucket</innerclass>
+    <innerclass refid="classtoken__bucket__limiter" prot="public">token_bucket_limiter</innerclass>
+    <innerclass refid="structtoken__bucket__limiter_1_1bucket__entry" prot="private">token_bucket_limiter::bucket_entry</innerclass>
+    <innerclass refid="classtoken__bucket__filter" prot="public">token_bucket_filter</innerclass>
+    <briefdescription>
+<para>令牌桶限流器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>基于令牌桶算法的HTTP请求限流过滤器。支持：<itemizedlist>
+<listitem><para>每IP / 每路由独立限流桶</para>
+</listitem><listitem><para>Lock-free atomic令牌计数器</para>
+</listitem><listitem><para>可配置填充速率和突发容量</para>
+</listitem><listitem><para>LRU淘汰过期桶 </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NEFORCE_NETWORK_HTTP_RATE_LIMITER_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_NETWORK_HTTP_RATE_LIMITER_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="atomic_8hpp" kindref="compound">NeForce/core/async/atomic.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="clocks_8hpp" kindref="compound">NeForce/core/time/clocks.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="http__filter_8hpp" kindref="compound">NeForce/network/http/http_filter.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
+<codeline lineno="19"><highlight class="normal">NEFORCE_BEGIN_HTTP__</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="structtoken__bucket" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NEFORCE_API<sp/>token_bucket<sp/>{</highlight></codeline>
+<codeline lineno="33" refid="structtoken__bucket_1a5b830b2d53ddf67a0295b4856f86a768" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structtoken__bucket_1a5b830b2d53ddf67a0295b4856f86a768" kindref="member">tokens</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="34" refid="structtoken__bucket_1aa8efe94a5cfc7d34a59b23bcb5ea9b3b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/><ref refid="structtoken__bucket_1aa8efe94a5cfc7d34a59b23bcb5ea9b3b" kindref="member">last_refill_ms</ref>;<sp/></highlight></codeline>
+<codeline lineno="35" refid="structtoken__bucket_1abfd1e3fd7123a78cc98a0ea1fe51af2a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structtoken__bucket_1abfd1e3fd7123a78cc98a0ea1fe51af2a" kindref="member">refill_rate</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="36" refid="structtoken__bucket_1a290e28a6b91d8987c1241052a9747047" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="structtoken__bucket_1a290e28a6b91d8987c1241052a9747047" kindref="member">capacity</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="37" refid="structtoken__bucket_1a7c0e305f1b5c193c92f3bf3469e0eb51" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="classmutex" kindref="compound">mutex</ref><sp/><ref refid="structtoken__bucket_1a7c0e305f1b5c193c92f3bf3469e0eb51" kindref="member">mutex_</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>token_bucket()<sp/>:</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structtoken__bucket_1a5b830b2d53ddf67a0295b4856f86a768" kindref="member">tokens</ref>(0),</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structtoken__bucket_1aa8efe94a5cfc7d34a59b23bcb5ea9b3b" kindref="member">last_refill_ms</ref>(0),</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structtoken__bucket_1abfd1e3fd7123a78cc98a0ea1fe51af2a" kindref="member">refill_rate</ref>(1.0),</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structtoken__bucket_1a290e28a6b91d8987c1241052a9747047" kindref="member">capacity</ref>(1.0)<sp/>{}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structtoken__bucket" kindref="compound">token_bucket</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>rate,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>burst)<sp/>:</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>tokens(burst),</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>last_refill_ms(static_cast&lt;<ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref>&gt;(<ref refid="structsteady__clock" kindref="compound">steady_clock</ref>::now().since_epoch().<ref refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" kindref="member">count</ref>()<sp/>/<sp/>1&apos;000&apos;000)),</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>refill_rate(rate),</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>capacity(burst)<sp/>{}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/>token_bucket(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>token_bucket&amp;<sp/>other)<sp/>:</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>tokens(other.tokens),</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>last_refill_ms(other.last_refill_ms),</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>refill_rate(other.refill_rate),</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>capacity(other.capacity)<sp/>{}</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>token_bucket&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>token_bucket&amp;<sp/>other)<sp/>{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">this</highlight><highlight class="normal"><sp/>!=<sp/>&amp;other)<sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tokens<sp/>=<sp/>other.<ref refid="structtoken__bucket_1a5b830b2d53ddf67a0295b4856f86a768" kindref="member">tokens</ref>;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>last_refill_ms<sp/>=<sp/>other.<ref refid="structtoken__bucket_1aa8efe94a5cfc7d34a59b23bcb5ea9b3b" kindref="member">last_refill_ms</ref>;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>refill_rate<sp/>=<sp/>other.<ref refid="structtoken__bucket_1abfd1e3fd7123a78cc98a0ea1fe51af2a" kindref="member">refill_rate</ref>;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>capacity<sp/>=<sp/>other.<ref refid="structtoken__bucket_1a290e28a6b91d8987c1241052a9747047" kindref="member">capacity</ref>;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74" refid="structtoken__bucket_1a95c74be9eec833240aa4da2e98317c48" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structtoken__bucket_1a95c74be9eec833240aa4da2e98317c48" kindref="member">try_consume</ref>(<ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/>now_ms);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80" refid="structtoken__bucket_1a90333d30bf537fd4dd58e146e0e1038b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structtoken__bucket_1a90333d30bf537fd4dd58e146e0e1038b" kindref="member">refill</ref>(<ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/>now_ms);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89" refid="classtoken__bucket__limiter" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/>token_bucket_limiter<sp/>{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">bucket_entry<sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structtoken__bucket" kindref="compound">token_bucket</ref><sp/>bucket;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/>last_access_ms;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>default_rate_{10.0};</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>default_burst_{20.0};</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/><ref refid="classmutex" kindref="compound">mutex</ref><sp/>mutex_;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classunordered__map" kindref="compound">unordered_map&lt;string, bucket_entry&gt;</ref><sp/>buckets_;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>max_buckets_{10000};</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>token_bucket_limiter()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113" refid="classtoken__bucket__limiter_1ae982b97279f5e24b25a24d04c4a0f4c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classtoken__bucket__limiter_1ae982b97279f5e24b25a24d04c4a0f4c4" kindref="member">allow</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal">&amp;<sp/>key,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>rate<sp/>=<sp/>0.0,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>burst<sp/>=<sp/>0.0);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116" refid="classtoken__bucket__limiter_1a7b714b813a8007caa0f7167db0db0458" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classtoken__bucket__limiter_1a7b714b813a8007caa0f7167db0db0458" kindref="member">set_default_rate</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>rate);</highlight></codeline>
+<codeline lineno="118" refid="classtoken__bucket__limiter_1a42cb43e614f727a1ca37231ff9bea756" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classtoken__bucket__limiter_1a42cb43e614f727a1ca37231ff9bea756" kindref="member">set_default_burst</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>burst);</highlight></codeline>
+<codeline lineno="120" refid="classtoken__bucket__limiter_1aead10954b1d26ff9d184b3326c830a23" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="classtoken__bucket__limiter_1aead10954b1d26ff9d184b3326c830a23" kindref="member">size</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126" refid="classtoken__bucket__limiter_1a6639162f9f7da7abee73f98eda7b5746" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classtoken__bucket__limiter_1a6639162f9f7da7abee73f98eda7b5746" kindref="member">cleanup_expired</ref>(<ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref><sp/>max_age<sp/>=<sp/><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref>{300});</highlight></codeline>
+<codeline lineno="127"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137" refid="classtoken__bucket__filter" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">NEFORCE_API<sp/>token_bucket_filter<sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classhttp__filter" kindref="compound">http_filter</ref><sp/>{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classtoken__bucket__limiter" kindref="compound">token_bucket_limiter</ref><sp/>limiter_;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="142" refid="classtoken__bucket__filter_1a23a471c10c6caf8b146493049b749f0e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classtoken__bucket__filter_1a23a471c10c6caf8b146493049b749f0e" kindref="member">default_rate</ref>{10.0};<sp/><sp/></highlight></codeline>
+<codeline lineno="143" refid="classtoken__bucket__filter_1ab4630cea0b1d9c28e456992f2a6e8474" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classtoken__bucket__filter_1ab4630cea0b1d9c28e456992f2a6e8474" kindref="member">default_burst</ref>{20.0};<sp/></highlight></codeline>
+<codeline lineno="144" refid="classtoken__bucket__filter_1aa3c17c11321f67aea7392c3bb7a3c21d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classtoken__bucket__filter_1aa3c17c11321f67aea7392c3bb7a3c21d" kindref="member">per_route</ref>{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="145" refid="classtoken__bucket__filter_1aa8e569f3fadf448f14e2af8a87e9403e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classtoken__bucket__filter_1aa8e569f3fadf448f14e2af8a87e9403e" kindref="member">enabled</ref>{</highlight><highlight class="keyword">true</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classtoken__bucket__filter" kindref="compound">token_bucket_filter</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classtoken__bucket__filter" kindref="compound">token_bucket_filter</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>rate,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>burst)<sp/>:</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/>default_rate(rate),</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>default_burst(burst)<sp/>{}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153" refid="classtoken__bucket__filter_1a83d7221ed39d066a0ded8e65dc8e028a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classtoken__bucket__filter_1a83d7221ed39d066a0ded8e65dc8e028a" kindref="member">pre_filter</ref>(<ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref>&amp;<sp/>request,<sp/><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref>&amp;<sp/>response)<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="154" refid="classtoken__bucket__filter_1aea80a6e4fe3a421587ed0d1c38648a04" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classtoken__bucket__filter_1aea80a6e4fe3a421587ed0d1c38648a04" kindref="member">do_filter</ref>(<ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref>&amp;<sp/>request,<sp/><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref>&amp;<sp/>response)</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{}</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>cleanup_expired(<ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref><sp/>max_age<sp/>=<sp/><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref>{300});</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158" refid="classtoken__bucket__filter_1a0fd47073ec4b709c25326d1e590e73a7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classtoken__bucket__filter_1a0fd47073ec4b709c25326d1e590e73a7" kindref="member">name</ref>()</highlight><highlight class="keyword"><sp/>const<sp/>override<sp/></highlight><highlight class="normal">{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;token_bucket_filter&quot;</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Distributed<sp/>rate<sp/>limiting<sp/>—<sp/>Redis/Lua-script<sp/>based<sp/>shared<sp/>counter<sp/>for<sp/>multi-instance<sp/>rate<sp/>limit<sp/>coordination</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Sliding<sp/>window<sp/>algorithm<sp/>—<sp/>more<sp/>precise<sp/>rate<sp/>limiting<sp/>using<sp/>sliding<sp/>log/window<sp/>instead<sp/>of<sp/>token<sp/>bucket</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Rate<sp/>limit<sp/>response<sp/>headers<sp/>—<sp/>X-RateLimit-Limit,<sp/>X-RateLimit-Remaining,<sp/>X-RateLimit-Reset<sp/>in<sp/>429<sp/>responses</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>HTTP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal">NEFORCE_END_HTTP__</highlight></codeline>
+<codeline lineno="168"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_NETWORK_HTTP_RATE_LIMITER_HPP__</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp"/>
+  </compounddef>
+</doxygen>

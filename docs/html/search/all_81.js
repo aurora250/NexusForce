@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['构造标签_0',['构造标签',['../group___construction_tags.html',1,'']]]
+  ['最优参数推导_0',['最优参数推导',['../group___bloom_filter.html#optimal_parameters',1,'']]]
 ];

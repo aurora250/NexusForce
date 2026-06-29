@@ -1,0 +1,545 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="buffer__chain_8hpp" kind="file" language="C++">
+    <compoundname>buffer_chain.hpp</compoundname>
+    <includes refid="string_8hpp" local="yes">NeForce/core/string/string.hpp</includes>
+    <includes local="no">sys/uio.h</includes>
+    <includedby refid="http__server__message_8hpp" local="yes">http_server_message.hpp</includedby>
+    <incdepgraph>
+      <node id="27">
+        <label>NeForce/core/algorithm/compare.hpp</label>
+        <link refid="compare_8hpp"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>NeForce/core/algorithm/iterator.hpp</label>
+        <link refid="iterator_8hpp"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>NeForce/core/algorithm/search.hpp</label>
+        <link refid="search_8hpp"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>NeForce/core/algorithm/shift.hpp</label>
+        <link refid="shift_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>NeForce/core/config/c++config.hpp</label>
+        <link refid="c_09_09config_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>NeForce/core/config/version.hpp</label>
+        <link refid="version_8hpp_source"/>
+      </node>
+      <node id="26">
+        <label>NeForce/core/container/array.hpp</label>
+        <link refid="array_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>buffer_chain.hpp</label>
+        <link refid="buffer__chain_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>NeForce/core/container/vector.hpp</label>
+        <link refid="vector_8hpp"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>NeForce/core/exception/breakpoint.hpp</label>
+        <link refid="breakpoint_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>NeForce/core/exception/exception.hpp</label>
+        <link refid="exception_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>NeForce/core/functional/functor.hpp</label>
+        <link refid="functor_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>NeForce/core/functional/hash.hpp</label>
+        <link refid="hash_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>NeForce/core/functional/invoke.hpp</label>
+        <link refid="invoke_8hpp"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>NeForce/core/interface/icollector.hpp</label>
+        <link refid="icollector_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>NeForce/core/interface/icommon.hpp</label>
+        <link refid="icommon_8hpp"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>NeForce/core/interface/iiterator.hpp</label>
+        <link refid="iiterator_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>NeForce/core/iterator/iterator_traits.hpp</label>
+        <link refid="iterator__traits_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>NeForce/core/iterator/normal_iterator.hpp</label>
+        <link refid="normal__iterator_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>NeForce/core/iterator/reverse_iterator.hpp</label>
+        <link refid="reverse__iterator_8hpp"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="42">
+        <label>NeForce/core/memory/allocator_traits.hpp</label>
+        <link refid="allocator__traits_8hpp"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>NeForce/core/memory/construct.hpp</label>
+        <link refid="construct_8hpp"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>NeForce/core/memory/memory.hpp</label>
+        <link refid="memory_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>NeForce/core/memory/memory_view.hpp</label>
+        <link refid="memory__view_8hpp"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>NeForce/core/memory/standard_allocator.hpp</label>
+        <link refid="standard__allocator_8hpp"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>NeForce/core/memory/uninitialized.hpp</label>
+        <link refid="uninitialized_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>NeForce/core/numeric/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>NeForce/core/numeric/numeric_traits.hpp</label>
+        <link refid="numeric__traits_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>NeForce/core/numeric/numeric_types.hpp</label>
+        <link refid="numeric__types_8hpp"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>NeForce/core/string/basic_string.hpp</label>
+        <link refid="basic__string_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>NeForce/core/string/basic_string_view.hpp</label>
+        <link refid="basic__string__view_8hpp"/>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>NeForce/core/string/char_traits.hpp</label>
+        <link refid="char__traits_8hpp"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>NeForce/core/string/char_types.hpp</label>
+        <link refid="char__types_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>NeForce/core/string/string.hpp</label>
+        <link refid="string_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
+        <label>NeForce/core/string/string_view.hpp</label>
+        <link refid="string__view_8hpp"/>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>NeForce/core/typeinfo/concepts.hpp</label>
+        <link refid="concepts_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>NeForce/core/typeinfo/type_traits.hpp</label>
+        <link refid="type__traits_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>NeForce/core/typeinfo/types.hpp</label>
+        <link refid="types_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>NeForce/core/utility/compressed_pair.hpp</label>
+        <link refid="compressed__pair_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>NeForce/core/utility/integer_sequence.hpp</label>
+        <link refid="integer__sequence_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>NeForce/core/utility/pair.hpp</label>
+        <link refid="pair_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>NeForce/core/utility/reference_wrapper.hpp</label>
+        <link refid="reference__wrapper_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>cassert</label>
+      </node>
+      <node id="28">
+        <label>initializer_list</label>
+      </node>
+      <node id="39">
+        <label>new</label>
+      </node>
+      <node id="47">
+        <label>sys/uio.h</label>
+      </node>
+      <node id="33">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>buffer_chain.hpp</label>
+        <link refid="buffer__chain_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>async_filter.hpp</label>
+        <link refid="async__filter_8hpp"/>
+      </node>
+      <node id="6">
+        <label>csrf_filter.hpp</label>
+        <link refid="csrf__filter_8hpp"/>
+      </node>
+      <node id="3">
+        <label>grpc.hpp</label>
+        <link refid="grpc_8hpp"/>
+      </node>
+      <node id="7">
+        <label>health_check.hpp</label>
+        <link refid="health__check_8hpp"/>
+      </node>
+      <node id="11">
+        <label>http2_connection.hpp</label>
+        <link refid="http2__connection_8hpp"/>
+      </node>
+      <node id="8">
+        <label>http_cache.hpp</label>
+        <link refid="http__cache_8hpp"/>
+      </node>
+      <node id="9">
+        <label>http_compress.hpp</label>
+        <link refid="http__compress_8hpp"/>
+      </node>
+      <node id="4">
+        <label>http_filter.hpp</label>
+        <link refid="http__filter_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>http_range.hpp</label>
+        <link refid="http__range_8hpp"/>
+      </node>
+      <node id="10">
+        <label>http_router.hpp</label>
+        <link refid="http__router_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>http_security.hpp</label>
+        <link refid="http__security_8hpp"/>
+      </node>
+      <node id="12">
+        <label>http_server.hpp</label>
+        <link refid="http__server_8hpp"/>
+      </node>
+      <node id="2">
+        <label>http_server_message.hpp</label>
+        <link refid="http__server__message_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>radix_router.hpp</label>
+        <link refid="radix__router_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>rate_limiter.hpp</label>
+        <link refid="rate__limiter_8hpp"/>
+      </node>
+      <node id="15">
+        <label>reverse_proxy.hpp</label>
+        <link refid="reverse__proxy_8hpp"/>
+      </node>
+      <node id="18">
+        <label>websocket.hpp</label>
+        <link refid="websocket_8hpp"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structiovec" prot="public">iovec</innerclass>
+    <innerclass refid="classbuffer__chain" prot="public">buffer_chain</innerclass>
+    <innerclass refid="structbuffer__chain_1_1segment" prot="public">buffer_chain::segment</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>NEFORCE_CORE_CONTAINER_BUFFER_CHAIN_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NEFORCE_CORE_CONTAINER_BUFFER_CHAIN_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="string_8hpp" kindref="compound">NeForce/core/string/string.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_LINUX</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/><sp/><sp/><sp/>include<sp/>&lt;sys/uio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_PLATFORM_WINDOWS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">iovec<sp/>{</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">*<sp/>iov_base;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>iov_len;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal">NEFORCE_BEGIN_NAMESPACE__</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="classbuffer__chain" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">buffer_chain<sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">segment<sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>{</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>{0};</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;segment&gt;</ref><sp/>segments_;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>total_size_{0};</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer_chain()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="classbuffer__chain_1af53b29d0568534ea3b2f365e1adc815b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classbuffer__chain_1af53b29d0568534ea3b2f365e1adc815b" kindref="member">append</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>segments_.push_back({<ref refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" kindref="member">data</ref>,<sp/><ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>});</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>total_size_<sp/>+=<sp/><ref refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" kindref="member">size</ref>;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47" refid="classbuffer__chain_1a2a0ebba8be6e0a824944f81b2eec6230" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classbuffer__chain_1a2a0ebba8be6e0a824944f81b2eec6230" kindref="member">append</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref><sp/>sv)<sp/>{<sp/><ref refid="classbuffer__chain_1a2a0ebba8be6e0a824944f81b2eec6230" kindref="member">append</ref>(sv.<ref refid="classbasic__string__view_1a333ab8066e73bf2d4bd068f686eeaa24" kindref="member">data</ref>(),<sp/>sv.<ref refid="classbasic__string__view_1a0b5a6546739bc33ecbe750f98ac47b25" kindref="member">size</ref>());<sp/>}</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52" refid="classbuffer__chain_1a829f879c328d6ff84b71e7343cc16ac4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classbuffer__chain_1a829f879c328d6ff84b71e7343cc16ac4" kindref="member">append</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>buffer_chain&amp;<sp/>other)<sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>segments_.insert(segments_.end(),<sp/>other.segments_.<ref refid="classvector_1ab78572320afe8abac07e7762afc9d8d3" kindref="member">begin</ref>(),<sp/>other.segments_.<ref refid="classvector_1aba0a5982f80665d2e8a9716fd48c9063" kindref="member">end</ref>());</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>total_size_<sp/>+=<sp/>other.total_size_;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60" refid="classbuffer__chain_1ae89612333d057b3423d798495cb518a9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="classbuffer__chain_1ae89612333d057b3423d798495cb518a9" kindref="member">flatten</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.<ref refid="classbasic__string_1aa2527f9b1a17a4b866e3e59e384dc0d8" kindref="member">reserve</ref>(total_size_);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>seg:<sp/>segments_)<sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result.<ref refid="classbasic__string_1a23c524fe4e21ba7bf374b0949786310c" kindref="member">append</ref>(seg.data,<sp/>seg.size);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72" refid="classbuffer__chain_1aab9a98bf930d5d22c55cd97d6b552630" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classvector" kindref="compound">vector&lt;::iovec&gt;</ref><sp/><ref refid="classbuffer__chain_1aab9a98bf930d5d22c55cd97d6b552630" kindref="member">to_iovec</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;::iovec&gt;</ref><sp/>iov;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>iov.<ref refid="classvector_1a0066a7fca1a744cdb62d5fb96b51a88f" kindref="member">reserve</ref>(segments_.size());</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>seg:<sp/>segments_)<sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>::iovec<sp/>v{};</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>v.iov_base<sp/>=<sp/></highlight><highlight class="keyword">const_cast&lt;</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(seg.data);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>v.iov_len<sp/>=<sp/>seg.size;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>iov.<ref refid="classvector_1ac8d8b05ea55e928d9a4ccde8bf9bedcf" kindref="member">push_back</ref>(v);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>iov;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>total_size()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>total_size_;<sp/>}</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>segment_count()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>segments_.size();<sp/>}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>empty()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>total_size_<sp/>==<sp/>0;<sp/>}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>clear()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>segments_.clear();</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>total_size_<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>reserve(</highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" kindref="member">count</ref>)<sp/>{<sp/>segments_.reserve(<ref refid="group___counting_algorithms_1ga7f00e4c627612d89b2c6152a0c498c40" kindref="member">count</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_CONTAINER_BUFFER_CHAIN_HPP__</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp"/>
+  </compounddef>
+</doxygen>

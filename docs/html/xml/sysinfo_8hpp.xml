@@ -4,44 +4,44 @@
     <compoundname>sysinfo.hpp</compoundname>
     <includes refid="atomic_8hpp" local="yes">NeForce/core/async/atomic.hpp</includes>
     <includes refid="string_8hpp" local="yes">NeForce/core/string/string.hpp</includes>
-    <includedby refid="_ne_force_8hpp" local="yes">NeForce.hpp</includedby>
+    <includedby refid="thread__pool_8hpp" local="yes">thread_pool.hpp</includedby>
     <incdepgraph>
-      <node id="47">
+      <node id="40">
         <label>NeForce/core/algorithm/compare.hpp</label>
         <link refid="compare_8hpp"/>
-        <childnode refid="48" relation="include">
+        <childnode refid="41" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="42" relation="include">
         </childnode>
       </node>
-      <node id="27">
+      <node id="28">
         <label>NeForce/core/algorithm/iterator.hpp</label>
         <link refid="iterator_8hpp"/>
-        <childnode refid="18" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
-        <childnode refid="28" relation="include">
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>NeForce/core/algorithm/search.hpp</label>
+        <link refid="search_8hpp"/>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
         </childnode>
       </node>
       <node id="24">
-        <label>NeForce/core/algorithm/search.hpp</label>
-        <link refid="search_8hpp"/>
-        <childnode refid="25" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-      </node>
-      <node id="23">
         <label>NeForce/core/algorithm/shift.hpp</label>
         <link refid="shift_8hpp"/>
-        <childnode refid="24" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
-        <childnode refid="30" relation="include">
+        <childnode refid="31" relation="include">
         </childnode>
-        <childnode refid="32" relation="include">
+        <childnode refid="33" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -55,13 +55,13 @@
         <link refid="atomic__base_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
         <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
       <node id="4">
@@ -69,9 +69,9 @@
         <link refid="atomic__wait_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="5">
@@ -80,18 +80,16 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="18">
         <label>NeForce/core/async/memory_order.hpp</label>
         <link refid="memory__order_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>NeForce/core/async/this_thread.hpp</label>
         <link refid="this__thread_8hpp"/>
         <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -101,183 +99,241 @@
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
       </node>
       <node id="8">
         <label>NeForce/core/config/c++config.hpp</label>
         <link refid="c_09_09config_8hpp"/>
         <childnode refid="9" relation="include">
         </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
       </node>
-      <node id="11">
+      <node id="10">
+        <label>NeForce/core/config/version.hpp</label>
+        <link refid="version_8hpp_source"/>
+      </node>
+      <node id="12">
         <label>NeForce/core/config/windef.hpp</label>
         <link refid="windef_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="39">
+        <label>NeForce/core/container/array.hpp</label>
+        <link refid="array_8hpp"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>NeForce/core/container/vector.hpp</label>
+        <link refid="vector_8hpp"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
         <label>NeForce/core/exception/breakpoint.hpp</label>
         <link refid="breakpoint_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="33">
+      <node id="34">
         <label>NeForce/core/exception/exception.hpp</label>
         <link refid="exception_8hpp"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="25">
+      <node id="26">
         <label>NeForce/core/functional/functor.hpp</label>
         <link refid="functor_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="45">
+      <node id="44">
         <label>NeForce/core/functional/hash.hpp</label>
         <link refid="hash_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="30">
+      <node id="31">
         <label>NeForce/core/functional/invoke.hpp</label>
         <link refid="invoke_8hpp"/>
-        <childnode refid="31" relation="include">
+        <childnode refid="32" relation="include">
         </childnode>
       </node>
-      <node id="44">
-        <label>NeForce/core/interface/icommon.hpp</label>
-        <link refid="icommon_8hpp"/>
-        <childnode refid="45" relation="include">
+      <node id="47">
+        <label>NeForce/core/interface/icollector.hpp</label>
+        <link refid="icollector_8hpp"/>
+        <childnode refid="43" relation="include">
         </childnode>
       </node>
       <node id="43">
-        <label>NeForce/core/interface/iiterator.hpp</label>
-        <link refid="iiterator_8hpp"/>
+        <label>NeForce/core/interface/icommon.hpp</label>
+        <link refid="icommon_8hpp"/>
         <childnode refid="44" relation="include">
         </childnode>
       </node>
-      <node id="29">
+      <node id="48">
+        <label>NeForce/core/interface/iiterator.hpp</label>
+        <link refid="iiterator_8hpp"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
         <label>NeForce/core/iterator/iterator_traits.hpp</label>
         <link refid="iterator__traits_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="26">
+      <node id="49">
+        <label>NeForce/core/iterator/normal_iterator.hpp</label>
+        <link refid="normal__iterator_8hpp"/>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
         <label>NeForce/core/iterator/reverse_iterator.hpp</label>
         <link refid="reverse__iterator_8hpp"/>
-        <childnode refid="27" relation="include">
-        </childnode>
-      </node>
-      <node id="36">
-        <label>NeForce/core/memory/allocator_traits.hpp</label>
-        <link refid="allocator__traits_8hpp"/>
-        <childnode refid="37" relation="include">
-        </childnode>
-        <childnode refid="35" relation="include">
-        </childnode>
-      </node>
-      <node id="37">
-        <label>NeForce/core/memory/construct.hpp</label>
-        <link refid="construct_8hpp"/>
         <childnode refid="28" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="55">
+        <label>NeForce/core/memory/allocator_traits.hpp</label>
+        <link refid="allocator__traits_8hpp"/>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>NeForce/core/memory/construct.hpp</label>
+        <link refid="construct_8hpp"/>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
         <label>NeForce/core/memory/memory.hpp</label>
         <link refid="memory_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="38">
-        <label>NeForce/core/memory/standard_allocator.hpp</label>
-        <link refid="standard__allocator_8hpp"/>
+        <label>NeForce/core/memory/memory_view.hpp</label>
+        <link refid="memory__view_8hpp"/>
         <childnode refid="39" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
-        <childnode refid="33" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
-      </node>
-      <node id="40">
-        <label>NeForce/core/memory/uninitialized.hpp</label>
-        <link refid="uninitialized_8hpp"/>
-        <childnode refid="23" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="37" relation="include">
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
         </childnode>
       </node>
-      <node id="32">
-        <label>NeForce/core/numeric/math.hpp</label>
-        <link refid="math_8hpp"/>
-        <childnode refid="33" relation="include">
+      <node id="51">
+        <label>NeForce/core/memory/standard_allocator.hpp</label>
+        <link refid="standard__allocator_8hpp"/>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
       </node>
-      <node id="35">
+      <node id="53">
+        <label>NeForce/core/memory/uninitialized.hpp</label>
+        <link refid="uninitialized_8hpp"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>NeForce/core/numeric/math.hpp</label>
+        <link refid="math_8hpp"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
         <label>NeForce/core/numeric/numeric_traits.hpp</label>
         <link refid="numeric__traits_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="34">
+      <node id="35">
         <label>NeForce/core/numeric/numeric_types.hpp</label>
         <link refid="numeric__types_8hpp"/>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="35" relation="include">
-        </childnode>
-      </node>
-      <node id="22">
-        <label>NeForce/core/string/basic_string.hpp</label>
-        <link refid="basic__string_8hpp"/>
-        <childnode refid="23" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="36" relation="include">
         </childnode>
-        <childnode refid="38" relation="include">
+      </node>
+      <node id="23">
+        <label>NeForce/core/string/basic_string.hpp</label>
+        <link refid="basic__string_8hpp"/>
+        <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
+        <childnode refid="37" relation="include">
         </childnode>
-        <childnode refid="41" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
-        <childnode refid="53" relation="include">
+        <childnode refid="56" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
         </childnode>
       </node>
-      <node id="42">
+      <node id="57">
         <label>NeForce/core/string/basic_string_view.hpp</label>
         <link refid="basic__string__view_8hpp"/>
-        <childnode refid="43" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
-        <childnode refid="46" relation="include">
+        <childnode refid="58" relation="include">
         </childnode>
-        <childnode refid="52" relation="include">
+        <childnode refid="59" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="58">
         <label>NeForce/core/string/char_traits.hpp</label>
         <link refid="char__traits_8hpp"/>
-        <childnode refid="47" relation="include">
+        <childnode refid="40" relation="include">
         </childnode>
-        <childnode refid="35" relation="include">
+        <childnode refid="36" relation="include">
         </childnode>
       </node>
-      <node id="52">
+      <node id="59">
         <label>NeForce/core/string/char_types.hpp</label>
         <link refid="char__types_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="21">
+      <node id="22">
         <label>NeForce/core/string/string.hpp</label>
         <link refid="string_8hpp"/>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
       </node>
-      <node id="41">
+      <node id="56">
         <label>NeForce/core/string/string_view.hpp</label>
         <link refid="string__view_8hpp"/>
-        <childnode refid="42" relation="include">
+        <childnode refid="57" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -285,13 +341,13 @@
         <link refid="sysinfo_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
       </node>
-      <node id="28">
+      <node id="29">
         <label>NeForce/core/typeinfo/concepts.hpp</label>
         <link refid="concepts_8hpp"/>
-        <childnode refid="29" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
       </node>
       <node id="6">
@@ -306,31 +362,31 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="53">
+      <node id="50">
         <label>NeForce/core/utility/compressed_pair.hpp</label>
         <link refid="compressed__pair_8hpp"/>
-        <childnode refid="44" relation="include">
+        <childnode refid="43" relation="include">
         </childnode>
       </node>
-      <node id="50">
+      <node id="45">
         <label>NeForce/core/utility/integer_sequence.hpp</label>
         <link refid="integer__sequence_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="49">
+      <node id="42">
         <label>NeForce/core/utility/pair.hpp</label>
         <link refid="pair_8hpp"/>
-        <childnode refid="44" relation="include">
+        <childnode refid="43" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
+        <childnode refid="45" relation="include">
         </childnode>
-        <childnode refid="31" relation="include">
+        <childnode refid="32" relation="include">
         </childnode>
-        <childnode refid="51" relation="include">
+        <childnode refid="46" relation="include">
         </childnode>
       </node>
-      <node id="31">
+      <node id="32">
         <label>NeForce/core/utility/reference_wrapper.hpp</label>
         <link refid="reference__wrapper_8hpp"/>
         <childnode refid="6" relation="include">
@@ -339,38 +395,44 @@
       <node id="9">
         <label>cassert</label>
       </node>
-      <node id="15">
+      <node id="16">
         <label>ctime</label>
       </node>
-      <node id="48">
+      <node id="41">
         <label>initializer_list</label>
       </node>
-      <node id="19">
+      <node id="20">
         <label>intrin.h</label>
       </node>
-      <node id="20">
+      <node id="21">
         <label>intrin0.inl.h</label>
       </node>
-      <node id="39">
+      <node id="52">
         <label>new</label>
       </node>
-      <node id="12">
+      <node id="13">
         <label>processthreadsapi.h</label>
       </node>
-      <node id="14">
+      <node id="15">
         <label>sched.h</label>
       </node>
-      <node id="13">
+      <node id="14">
         <label>synchapi.h</label>
       </node>
-      <node id="51">
+      <node id="46">
         <label>utility</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
       <node id="2">
-        <label>NeForce.hpp</label>
-        <link refid="_ne_force_8hpp"/>
+        <label>thread_pool.hpp</label>
+        <link refid="thread__pool_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
       </node>
       <node id="1">
         <label>sysinfo.hpp</label>
@@ -378,12 +440,63 @@
         <childnode refid="2" relation="include">
         </childnode>
       </node>
+      <node id="9">
+        <label>logger.hpp</label>
+        <link refid="logger_8hpp"/>
+      </node>
+      <node id="3">
+        <label>dns_client.hpp</label>
+        <link refid="dns__client_8hpp"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>ftp_client.hpp</label>
+        <link refid="ftp__client_8hpp_source"/>
+      </node>
+      <node id="7">
+        <label>http_client.hpp</label>
+        <link refid="http__client_8hpp"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>http_server.hpp</label>
+        <link refid="http__server_8hpp"/>
+      </node>
+      <node id="8">
+        <label>reverse_proxy.hpp</label>
+        <link refid="reverse__proxy_8hpp"/>
+      </node>
+      <node id="5">
+        <label>smtp_socket.hpp</label>
+        <link refid="smtp__socket_8hpp"/>
+      </node>
+      <node id="6">
+        <label>tcp_client.hpp</label>
+        <link refid="tcp__client_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>tcp_server.hpp</label>
+        <link refid="tcp__server_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
     </invincdepgraph>
     <innerclass refid="classsysinfo" prot="public">sysinfo</innerclass>
     <innerclass refid="structsysinfo_1_1system__info" prot="public">sysinfo::system_info</innerclass>
     <innerclass refid="structsysinfo_1_1memory__info" prot="public">sysinfo::memory_info</innerclass>
+    <innerclass refid="structsysinfo_1_1disk__info" prot="public">sysinfo::disk_info</innerclass>
     <innerclass refid="structsysinfo_1_1_c_p_u__info" prot="public">sysinfo::CPU_info</innerclass>
     <innerclass refid="structsysinfo_1_1os__version__info" prot="public">sysinfo::os_version_info</innerclass>
+    <innerclass refid="structsysinfo_1_1network__interface" prot="public">sysinfo::network_interface</innerclass>
+    <innerclass refid="structsysinfo_1_1numa__node__info" prot="public">sysinfo::numa_node_info</innerclass>
     <briefdescription>
 <para>系统信息查询工具 </para>
     </briefdescription>
@@ -431,88 +544,126 @@
 <codeline lineno="83" refid="structsysinfo_1_1memory__info_1a5b09a82d68c13254c114100775f79e7d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1memory__info_1a5b09a82d68c13254c114100775f79e7d" kindref="member">available_memory</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1memory__info_1a21a729921aebe562a2cf6ff03b02fe35" kindref="member">available_physical</ref><sp/>+<sp/><ref refid="structsysinfo_1_1memory__info_1a1092f6344f1cb17952196fce0f494ca2" kindref="member">available_virtual</ref>;<sp/>}</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="85"><highlight class="normal"></highlight></codeline>
-<codeline lineno="92" refid="structsysinfo_1_1_c_p_u__info" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structsysinfo_1_1_c_p_u__info" kindref="compound">CPU_info</ref><sp/>{</highlight></codeline>
-<codeline lineno="93" refid="structsysinfo_1_1_c_p_u__info_1ad92712b7ebb0f39a392fa9b79c6d591b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1ad92712b7ebb0f39a392fa9b79c6d591b" kindref="member">vendor</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="94" refid="structsysinfo_1_1_c_p_u__info_1ac444585514c69df4fb285d73905c8b11" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1ac444585514c69df4fb285d73905c8b11" kindref="member">brand</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="95" refid="structsysinfo_1_1_c_p_u__info_1aad2f7f4d8b6e92bf324e7dfbc6011705" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1aad2f7f4d8b6e92bf324e7dfbc6011705" kindref="member">max_MHz</ref>{0};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="96" refid="structsysinfo_1_1_c_p_u__info_1a1b737fae9977a80fdbcd3b5476d2c1ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1a1b737fae9977a80fdbcd3b5476d2c1ec" kindref="member">current_MHz</ref>{0};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="97" refid="structsysinfo_1_1_c_p_u__info_1a72950152b1295f64fbae6363e0a91215" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1a72950152b1295f64fbae6363e0a91215" kindref="member">cores</ref>{0};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="98" refid="structsysinfo_1_1_c_p_u__info_1af1ecda498492da2dd5ad938d5096a530" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1af1ecda498492da2dd5ad938d5096a530" kindref="member">logical_processors</ref>{0};<sp/></highlight></codeline>
-<codeline lineno="99" refid="structsysinfo_1_1_c_p_u__info_1a13f2d5ac60ff53dfb5415c8a4c55ee49" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1a13f2d5ac60ff53dfb5415c8a4c55ee49" kindref="member">features</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="100"><highlight class="normal"></highlight></codeline>
-<codeline lineno="105" refid="structsysinfo_1_1_c_p_u__info_1a14eec4a7e08ee652775f5127cab015af" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1a14eec4a7e08ee652775f5127cab015af" kindref="member">hyperthreading</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1af1ecda498492da2dd5ad938d5096a530" kindref="member">logical_processors</ref><sp/>&gt;<sp/><ref refid="structsysinfo_1_1_c_p_u__info_1a72950152b1295f64fbae6363e0a91215" kindref="member">cores</ref>;<sp/>}</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"></highlight></codeline>
-<codeline lineno="112" refid="structsysinfo_1_1os__version__info" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="structsysinfo_1_1os__version__info" kindref="compound">os_version_info</ref><sp/>{</highlight></codeline>
-<codeline lineno="113" refid="structsysinfo_1_1os__version__info_1a4bc0bcb61957f45421e727cabcf43de8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1os__version__info_1a4bc0bcb61957f45421e727cabcf43de8" kindref="member">major</ref>{0};<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="114" refid="structsysinfo_1_1os__version__info_1a8c7e7dd389d78e4994a8432e60306767" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1os__version__info_1a8c7e7dd389d78e4994a8432e60306767" kindref="member">minor</ref>{0};<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="115" refid="structsysinfo_1_1os__version__info_1a201fa2fa0bd48266b2fc5b51d2adffe6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1os__version__info_1a201fa2fa0bd48266b2fc5b51d2adffe6" kindref="member">build</ref>{0};<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="116" refid="structsysinfo_1_1os__version__info_1a340ac2d32b3d93b475587aab92695c5f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1os__version__info_1a340ac2d32b3d93b475587aab92695c5f" kindref="member">platform_id</ref>{0};<sp/></highlight></codeline>
-<codeline lineno="117" refid="structsysinfo_1_1os__version__info_1a89f969c3030593ee73ee26fa9a09b55c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1os__version__info_1a89f969c3030593ee73ee26fa9a09b55c" kindref="member">csd_version</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="118" refid="structsysinfo_1_1os__version__info_1a38e874b972252277bf6b51d499755f62" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1os__version__info_1a38e874b972252277bf6b51d499755f62" kindref="member">product_name</ref>;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="119"><highlight class="normal"></highlight></codeline>
-<codeline lineno="124" refid="structsysinfo_1_1os__version__info_1aa471b825701252b9e5f399187132c395" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1os__version__info_1aa471b825701252b9e5f399187132c395" kindref="member">version</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"></highlight></codeline>
-<codeline lineno="131" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63" kindref="member">architecture</ref><sp/>{</highlight></codeline>
-<codeline lineno="132" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63a696b031073e74bf2cb98e5ef201d4aa3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>UNKNOWN,<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="133" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63afd1a4608b5b463bc7a41d86a1662d3b7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>X86,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="134" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63af0851da0e02bf22830828822f578dc8f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>X64,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="135" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63a47f45e65244c17ec9fa8771a5c6d60e1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ARM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="136" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63ab9b55c80d095761ac7757ced0fedadc4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ARM64,<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="137" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63a9fe8c36311da48049559d1e1f119f8ad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RISCV32,<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="138" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63aafaf0bad004e6a71e15785a0e5089263" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RISCV64,<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="139" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63a444899381b9d044c3d148a9e99a3ec9f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LOONGARCH64,<sp/></highlight></codeline>
-<codeline lineno="140" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63a3a91efc2ac870d790cd3e6fc9b7c7f9a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LOONGARCH32<sp/><sp/></highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"></highlight></codeline>
-<codeline lineno="143"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>system_info<sp/>system_info_{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>memory_info<sp/>memory_info_{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>CPU_info<sp/>cpu_info_{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>os_version_info<sp/>os_version_info_{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>architecture<sp/>architecture_{architecture::UNKNOWN};<sp/></highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>atomic&lt;bool&gt;<sp/>initialized_{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="92" refid="structsysinfo_1_1disk__info" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="structsysinfo_1_1disk__info" kindref="compound">disk_info</ref><sp/>{</highlight></codeline>
+<codeline lineno="93" refid="structsysinfo_1_1disk__info_1abc221442adf3f3f8445d8053a9c479d2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1disk__info_1abc221442adf3f3f8445d8053a9c479d2" kindref="member">path</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="94" refid="structsysinfo_1_1disk__info_1a51d85e699513da91899e1d5a80ab0a12" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/><ref refid="structsysinfo_1_1disk__info_1a51d85e699513da91899e1d5a80ab0a12" kindref="member">total_bytes</ref>{0};<sp/></highlight></codeline>
+<codeline lineno="95" refid="structsysinfo_1_1disk__info_1a47d9aadf1bf2462a1517cb235ac6600a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/><ref refid="structsysinfo_1_1disk__info_1a47d9aadf1bf2462a1517cb235ac6600a" kindref="member">free_bytes</ref>{0};<sp/><sp/></highlight></codeline>
+<codeline lineno="96" refid="structsysinfo_1_1disk__info_1a2fafc06b3ec9f99e70985d6c0a36ce05" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/><ref refid="structsysinfo_1_1disk__info_1a2fafc06b3ec9f99e70985d6c0a36ce05" kindref="member">used_bytes</ref>{0};<sp/><sp/></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102" refid="structsysinfo_1_1disk__info_1a6fc75b3ae4046c7a635bd60e234fbffa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="group___core_types_1ga5e9a37eab818d71cd4a6a9344e776c7b" kindref="member">float64_t</ref><sp/><ref refid="structsysinfo_1_1disk__info_1a6fc75b3ae4046c7a635bd60e234fbffa" kindref="member">usage_percent</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="structsysinfo_1_1disk__info_1a51d85e699513da91899e1d5a80ab0a12" kindref="member">total_bytes</ref><sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0.0;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>100.0<sp/>*<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="group___core_types_1ga5e9a37eab818d71cd4a6a9344e776c7b" kindref="member">float64_t</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="structsysinfo_1_1disk__info_1a2fafc06b3ec9f99e70985d6c0a36ce05" kindref="member">used_bytes</ref>)<sp/>/<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal"><ref refid="group___core_types_1ga5e9a37eab818d71cd4a6a9344e776c7b" kindref="member">float64_t</ref></highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(<ref refid="structsysinfo_1_1disk__info_1a51d85e699513da91899e1d5a80ab0a12" kindref="member">total_bytes</ref>);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116" refid="structsysinfo_1_1_c_p_u__info" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structsysinfo_1_1_c_p_u__info" kindref="compound">CPU_info</ref><sp/>{</highlight></codeline>
+<codeline lineno="117" refid="structsysinfo_1_1_c_p_u__info_1ad92712b7ebb0f39a392fa9b79c6d591b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1ad92712b7ebb0f39a392fa9b79c6d591b" kindref="member">vendor</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="118" refid="structsysinfo_1_1_c_p_u__info_1ac444585514c69df4fb285d73905c8b11" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1ac444585514c69df4fb285d73905c8b11" kindref="member">brand</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="119" refid="structsysinfo_1_1_c_p_u__info_1aad2f7f4d8b6e92bf324e7dfbc6011705" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1aad2f7f4d8b6e92bf324e7dfbc6011705" kindref="member">max_MHz</ref>{0};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="120" refid="structsysinfo_1_1_c_p_u__info_1a1b737fae9977a80fdbcd3b5476d2c1ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1a1b737fae9977a80fdbcd3b5476d2c1ec" kindref="member">current_MHz</ref>{0};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="121" refid="structsysinfo_1_1_c_p_u__info_1a72950152b1295f64fbae6363e0a91215" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1a72950152b1295f64fbae6363e0a91215" kindref="member">cores</ref>{0};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="122" refid="structsysinfo_1_1_c_p_u__info_1af1ecda498492da2dd5ad938d5096a530" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1af1ecda498492da2dd5ad938d5096a530" kindref="member">logical_processors</ref>{0};<sp/></highlight></codeline>
+<codeline lineno="123" refid="structsysinfo_1_1_c_p_u__info_1a13f2d5ac60ff53dfb5415c8a4c55ee49" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1a13f2d5ac60ff53dfb5415c8a4c55ee49" kindref="member">features</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129" refid="structsysinfo_1_1_c_p_u__info_1a14eec4a7e08ee652775f5127cab015af" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1a14eec4a7e08ee652775f5127cab015af" kindref="member">hyperthreading</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1_c_p_u__info_1af1ecda498492da2dd5ad938d5096a530" kindref="member">logical_processors</ref><sp/>&gt;<sp/><ref refid="structsysinfo_1_1_c_p_u__info_1a72950152b1295f64fbae6363e0a91215" kindref="member">cores</ref>;<sp/>}</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136" refid="structsysinfo_1_1os__version__info" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">NEFORCE_API<sp/><ref refid="structsysinfo_1_1os__version__info" kindref="compound">os_version_info</ref><sp/>{</highlight></codeline>
+<codeline lineno="137" refid="structsysinfo_1_1os__version__info_1a4bc0bcb61957f45421e727cabcf43de8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1os__version__info_1a4bc0bcb61957f45421e727cabcf43de8" kindref="member">major</ref>{0};<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="138" refid="structsysinfo_1_1os__version__info_1a8c7e7dd389d78e4994a8432e60306767" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1os__version__info_1a8c7e7dd389d78e4994a8432e60306767" kindref="member">minor</ref>{0};<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="139" refid="structsysinfo_1_1os__version__info_1a201fa2fa0bd48266b2fc5b51d2adffe6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1os__version__info_1a201fa2fa0bd48266b2fc5b51d2adffe6" kindref="member">build</ref>{0};<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="140" refid="structsysinfo_1_1os__version__info_1a340ac2d32b3d93b475587aab92695c5f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1os__version__info_1a340ac2d32b3d93b475587aab92695c5f" kindref="member">platform_id</ref>{0};<sp/></highlight></codeline>
+<codeline lineno="141" refid="structsysinfo_1_1os__version__info_1a89f969c3030593ee73ee26fa9a09b55c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1os__version__info_1a89f969c3030593ee73ee26fa9a09b55c" kindref="member">csd_version</ref>;<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="142" refid="structsysinfo_1_1os__version__info_1a38e874b972252277bf6b51d499755f62" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1os__version__info_1a38e874b972252277bf6b51d499755f62" kindref="member">product_name</ref>;<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="148" refid="structsysinfo_1_1os__version__info_1aa471b825701252b9e5f399187132c395" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1os__version__info_1aa471b825701252b9e5f399187132c395" kindref="member">version</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
 <codeline lineno="150"><highlight class="normal"></highlight></codeline>
-<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/>sysinfo()<sp/>noexcept;</highlight></codeline>
-<codeline lineno="155"><highlight class="normal"></highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/>~sysinfo()<sp/>=<sp/>default;</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"></highlight></codeline>
-<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>init();</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"></highlight></codeline>
-<codeline lineno="168"><highlight class="normal">public:</highlight></codeline>
-<codeline lineno="173" refid="classsysinfo_1a106901f484685144e8622bbd971859e4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/>sysinfo&amp;<sp/><ref refid="classsysinfo_1a106901f484685144e8622bbd971859e4" kindref="member">instance</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>sysinfo<sp/><ref refid="classsysinfo_1a106901f484685144e8622bbd971859e4" kindref="member">instance</ref>;</highlight></codeline>
-<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsysinfo_1a106901f484685144e8622bbd971859e4" kindref="member">instance</ref>;</highlight></codeline>
-<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="177"><highlight class="normal"></highlight></codeline>
-<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsysinfo" kindref="compound">sysinfo</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsysinfo" kindref="compound">sysinfo</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsysinfo" kindref="compound">sysinfo</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsysinfo" kindref="compound">sysinfo</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsysinfo" kindref="compound">sysinfo</ref>(<ref refid="classsysinfo" kindref="compound">sysinfo</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsysinfo" kindref="compound">sysinfo</ref>&amp;<sp/>operator=(<ref refid="classsysinfo" kindref="compound">sysinfo</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="182"><highlight class="normal"></highlight></codeline>
-<codeline lineno="188" refid="classsysinfo_1aa59d27a7571c3ccfa6fff2c833f6efeb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsysinfo_1aa59d27a7571c3ccfa6fff2c833f6efeb" kindref="member">refresh</ref>();</highlight></codeline>
-<codeline lineno="189"><highlight class="normal"></highlight></codeline>
-<codeline lineno="194" refid="classsysinfo_1a683ee1cdfdb503e7e36a3348bfa81602" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1system__info" kindref="compound">system_info</ref>&amp;<sp/><ref refid="classsysinfo_1a683ee1cdfdb503e7e36a3348bfa81602" kindref="member">get_system_info</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>system_info_;<sp/>}</highlight></codeline>
-<codeline lineno="195"><highlight class="normal"></highlight></codeline>
-<codeline lineno="200" refid="classsysinfo_1a6f58a437df985dfc5817a76dbfe967e6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1memory__info" kindref="compound">memory_info</ref>&amp;<sp/><ref refid="classsysinfo_1a6f58a437df985dfc5817a76dbfe967e6" kindref="member">get_memory_info</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>memory_info_;<sp/>}</highlight></codeline>
+<codeline lineno="155" refid="structsysinfo_1_1network__interface" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structsysinfo_1_1network__interface" kindref="compound">network_interface</ref><sp/>{</highlight></codeline>
+<codeline lineno="156" refid="structsysinfo_1_1network__interface_1a7dbdfd7b18468aefe2981ba6ee3484ee" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1network__interface_1a7dbdfd7b18468aefe2981ba6ee3484ee" kindref="member">name</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="157" refid="structsysinfo_1_1network__interface_1a20136b55fc52f8ab6d6bd8aeac7edca1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1network__interface_1a20136b55fc52f8ab6d6bd8aeac7edca1" kindref="member">address</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="158" refid="structsysinfo_1_1network__interface_1a0083c64f3f71c1d1308d6113e48a4a6b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1network__interface_1a0083c64f3f71c1d1308d6113e48a4a6b" kindref="member">netmask</ref>;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="159" refid="structsysinfo_1_1network__interface_1aa4350c4fce058e26db0b0dbc95dd7277" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1network__interface_1aa4350c4fce058e26db0b0dbc95dd7277" kindref="member">mac</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="160" refid="structsysinfo_1_1network__interface_1a3bc405ed38db6f9102bccec9a689f2bd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1network__interface_1a3bc405ed38db6f9102bccec9a689f2bd" kindref="member">is_up</ref>{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">enum<sp/>class</highlight><highlight class="normal"><sp/><ref refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63" kindref="member">architecture</ref><sp/>{</highlight></codeline>
+<codeline lineno="168" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63a696b031073e74bf2cb98e5ef201d4aa3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>UNKNOWN,<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="169" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63afd1a4608b5b463bc7a41d86a1662d3b7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>X86,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="170" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63af0851da0e02bf22830828822f578dc8f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>X64,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="171" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63a47f45e65244c17ec9fa8771a5c6d60e1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ARM,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="172" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63ab9b55c80d095761ac7757ced0fedadc4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ARM64,<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="173" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63a9fe8c36311da48049559d1e1f119f8ad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RISCV32,<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="174" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63aafaf0bad004e6a71e15785a0e5089263" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RISCV64,<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="175" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63a444899381b9d044c3d148a9e99a3ec9f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LOONGARCH64,<sp/></highlight></codeline>
+<codeline lineno="176" refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63a3a91efc2ac870d790cd3e6fc9b7c7f9a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LOONGARCH32<sp/><sp/></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="186" refid="structsysinfo_1_1numa__node__info" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structsysinfo_1_1numa__node__info" kindref="compound">numa_node_info</ref><sp/>{</highlight></codeline>
+<codeline lineno="187" refid="structsysinfo_1_1numa__node__info_1af0c493c1bb00aa7d9a6b284668f6cadd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1numa__node__info_1af0c493c1bb00aa7d9a6b284668f6cadd" kindref="member">node_id</ref>{0};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="188" refid="structsysinfo_1_1numa__node__info_1ac94db0463939ad51937796759d751fd7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="structsysinfo_1_1numa__node__info_1ac94db0463939ad51937796759d751fd7" kindref="member">core_count</ref>{0};<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="189" refid="structsysinfo_1_1numa__node__info_1ade6ecad47efed59efccdfb8f9d54ecb9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/><ref refid="structsysinfo_1_1numa__node__info_1ade6ecad47efed59efccdfb8f9d54ecb9" kindref="member">core_mask</ref>{0};<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="190" refid="structsysinfo_1_1numa__node__info_1ad0fb7ee185a45c33d65f3f5340f6e1ab" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classvector" kindref="compound">vector&lt;uint32_t&gt;</ref><sp/><ref refid="structsysinfo_1_1numa__node__info_1ad0fb7ee185a45c33d65f3f5340f6e1ab" kindref="member">core_list</ref>;<sp/></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structsysinfo_1_1system__info" kindref="compound">system_info</ref><sp/>system_info_{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/>memory_info<sp/>memory_info_{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/>CPU_info<sp/>cpu_info_{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/>os_version_info<sp/>os_version_info_{};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/>architecture<sp/>architecture_{architecture::UNKNOWN};<sp/></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/>vector&lt;numa_node_info&gt;<sp/>numa_nodes_;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/>atomic&lt;bool&gt;<sp/>initialized_{</highlight><highlight class="keyword">false</highlight><highlight class="normal">};<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
 <codeline lineno="201"><highlight class="normal"></highlight></codeline>
-<codeline lineno="206" refid="classsysinfo_1a12cd20c6d4ac8029b5c12430d8508ed5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1_c_p_u__info" kindref="compound">CPU_info</ref>&amp;<sp/><ref refid="classsysinfo_1a12cd20c6d4ac8029b5c12430d8508ed5" kindref="member">get_CPU_info</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>cpu_info_;<sp/>}</highlight></codeline>
-<codeline lineno="207"><highlight class="normal"></highlight></codeline>
-<codeline lineno="212" refid="classsysinfo_1a38b1558f84e3d0dec584ba243ee27d6f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1os__version__info" kindref="compound">os_version_info</ref>&amp;<sp/><ref refid="classsysinfo_1a38b1558f84e3d0dec584ba243ee27d6f" kindref="member">get_os_version_info</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>os_version_info_;<sp/>}</highlight></codeline>
-<codeline lineno="213"><highlight class="normal"></highlight></codeline>
-<codeline lineno="218" refid="classsysinfo_1a263fc148efdf13bbca1b9923aba436a9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63" kindref="member">architecture</ref><sp/><ref refid="classsysinfo_1a263fc148efdf13bbca1b9923aba436a9" kindref="member">get_architecture</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>architecture_;<sp/>}</highlight></codeline>
-<codeline lineno="219"><highlight class="normal"></highlight></codeline>
-<codeline lineno="224" refid="classsysinfo_1ae4bc26b756f0201340e586d61ec1321f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsysinfo_1ae4bc26b756f0201340e586d61ec1321f" kindref="member">is_initialized</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>initialized_.load(<ref refid="group___memory_order_1ga52729ffe1460a0069a1736f2e4e61d2e" kindref="member">memory_order_acquire</ref>);<sp/>}</highlight></codeline>
-<codeline lineno="225"><highlight class="normal"></highlight></codeline>
-<codeline lineno="230" refid="classsysinfo_1a96c3ce9d36b77c0ac689072e4d8290d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga5e9a37eab818d71cd4a6a9344e776c7b" kindref="member">float64_t</ref><sp/><ref refid="classsysinfo_1a96c3ce9d36b77c0ac689072e4d8290d6" kindref="member">cpu_usage</ref>();</highlight></codeline>
-<codeline lineno="231"><highlight class="normal"></highlight></codeline>
-<codeline lineno="236" refid="classsysinfo_1aaa3de3f24697ecebf3cea3f89c92d807" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="classsysinfo_1aaa3de3f24697ecebf3cea3f89c92d807" kindref="member">process_count</ref>();</highlight></codeline>
-<codeline lineno="237"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="238"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>SystemInfo</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/>sysinfo()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/>~sysinfo()<sp/>=<sp/>default;</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>init();</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal">public:</highlight></codeline>
+<codeline lineno="224" refid="classsysinfo_1a106901f484685144e8622bbd971859e4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>static<sp/>sysinfo&amp;<sp/><ref refid="classsysinfo_1a106901f484685144e8622bbd971859e4" kindref="member">instance</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>sysinfo<sp/><ref refid="classsysinfo_1a106901f484685144e8622bbd971859e4" kindref="member">instance</ref>;</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classsysinfo_1a106901f484685144e8622bbd971859e4" kindref="member">instance</ref>;</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsysinfo" kindref="compound">sysinfo</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsysinfo" kindref="compound">sysinfo</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsysinfo" kindref="compound">sysinfo</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classsysinfo" kindref="compound">sysinfo</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsysinfo" kindref="compound">sysinfo</ref>(<ref refid="classsysinfo" kindref="compound">sysinfo</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classsysinfo" kindref="compound">sysinfo</ref>&amp;<sp/>operator=(<ref refid="classsysinfo" kindref="compound">sysinfo</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="239" refid="classsysinfo_1aa59d27a7571c3ccfa6fff2c833f6efeb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classsysinfo_1aa59d27a7571c3ccfa6fff2c833f6efeb" kindref="member">refresh</ref>();</highlight></codeline>
 <codeline lineno="240"><highlight class="normal"></highlight></codeline>
-<codeline lineno="241"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="242"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_SYSTEM_SYSINFO_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="245" refid="classsysinfo_1a683ee1cdfdb503e7e36a3348bfa81602" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1system__info" kindref="compound">system_info</ref>&amp;<sp/><ref refid="classsysinfo_1a683ee1cdfdb503e7e36a3348bfa81602" kindref="member">get_system_info</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>system_info_;<sp/>}</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"></highlight></codeline>
+<codeline lineno="251" refid="classsysinfo_1a6f58a437df985dfc5817a76dbfe967e6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1memory__info" kindref="compound">memory_info</ref>&amp;<sp/><ref refid="classsysinfo_1a6f58a437df985dfc5817a76dbfe967e6" kindref="member">get_memory_info</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>memory_info_;<sp/>}</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight></codeline>
+<codeline lineno="257" refid="classsysinfo_1a12cd20c6d4ac8029b5c12430d8508ed5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1_c_p_u__info" kindref="compound">CPU_info</ref>&amp;<sp/><ref refid="classsysinfo_1a12cd20c6d4ac8029b5c12430d8508ed5" kindref="member">get_CPU_info</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>cpu_info_;<sp/>}</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"></highlight></codeline>
+<codeline lineno="263" refid="classsysinfo_1a38b1558f84e3d0dec584ba243ee27d6f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1os__version__info" kindref="compound">os_version_info</ref>&amp;<sp/><ref refid="classsysinfo_1a38b1558f84e3d0dec584ba243ee27d6f" kindref="member">get_os_version_info</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>os_version_info_;<sp/>}</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight></codeline>
+<codeline lineno="269" refid="classsysinfo_1a263fc148efdf13bbca1b9923aba436a9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/><ref refid="classsysinfo_1a5cb2bb37d607fada00bb5f2726727e63" kindref="member">architecture</ref><sp/><ref refid="classsysinfo_1a263fc148efdf13bbca1b9923aba436a9" kindref="member">get_architecture</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>architecture_;<sp/>}</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"></highlight></codeline>
+<codeline lineno="278" refid="classsysinfo_1a49edb3a8460ced595fe82684f179fe8e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;numa_node_info&gt;</ref>&amp;<sp/><ref refid="classsysinfo_1a49edb3a8460ced595fe82684f179fe8e" kindref="member">get_numa_info</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>numa_nodes_;<sp/>}</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight></codeline>
+<codeline lineno="284" refid="classsysinfo_1ae4bc26b756f0201340e586d61ec1321f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classsysinfo_1ae4bc26b756f0201340e586d61ec1321f" kindref="member">is_initialized</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>initialized_.load(<ref refid="group___memory_order_1ga52729ffe1460a0069a1736f2e4e61d2e" kindref="member">memory_order_acquire</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"></highlight></codeline>
+<codeline lineno="290" refid="classsysinfo_1a96c3ce9d36b77c0ac689072e4d8290d6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga5e9a37eab818d71cd4a6a9344e776c7b" kindref="member">float64_t</ref><sp/><ref refid="classsysinfo_1a96c3ce9d36b77c0ac689072e4d8290d6" kindref="member">cpu_usage</ref>();</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"></highlight></codeline>
+<codeline lineno="296" refid="classsysinfo_1aaa3de3f24697ecebf3cea3f89c92d807" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref><sp/><ref refid="classsysinfo_1aaa3de3f24697ecebf3cea3f89c92d807" kindref="member">process_count</ref>();</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight></codeline>
+<codeline lineno="303" refid="classsysinfo_1a493aae4ae80cbe076b32cb50cb9417cd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structsysinfo_1_1disk__info" kindref="compound">disk_info</ref><sp/><ref refid="classsysinfo_1a493aae4ae80cbe076b32cb50cb9417cd" kindref="member">get_disk_info</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="classpath" kindref="compound">path</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"></highlight></codeline>
+<codeline lineno="309" refid="classsysinfo_1ab8749f020b676eeae4b862740022724f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classvector" kindref="compound">vector&lt;network_interface&gt;</ref><sp/><ref refid="classsysinfo_1ab8749f020b676eeae4b862740022724f" kindref="member">network_interfaces</ref>();</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"></highlight></codeline>
+<codeline lineno="315" refid="classsysinfo_1ad9a91b830ff1eda7f522114e6c9abf61" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref><sp/><ref refid="classsysinfo_1ad9a91b830ff1eda7f522114e6c9abf61" kindref="member">uptime_seconds</ref>();</highlight></codeline>
+<codeline lineno="316"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>SystemInfo</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="319"><highlight class="normal"></highlight></codeline>
+<codeline lineno="320"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_SYSTEM_SYSINFO_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="D:/Workspace/NexusForce/include/NeForce/core/system/sysinfo.hpp"/>
   </compounddef>

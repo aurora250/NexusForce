@@ -37,6 +37,8 @@ var c_09_09config_8hpp =
     [ "NEFORCE_PLATFORM_WINDOWS", "group___platform_detection.html#gafbe22ba3c6a132654e1193b1c02bfb3f", null ],
     [ "NEFORCE_PLATFORM_WINDOWS32", "group___platform_detection.html#ga64749912ecf2bafd8ebb7e23432e2ed8", null ],
     [ "NEFORCE_PLATFORM_WINDOWS64", "group___platform_detection.html#gab99bb2a8e1dff9c8064f39a99da90d46", null ],
+    [ "NEFORCE_SIMD_AVX2", "group___simd_detection.html#ga2b313af10581f30921ca358e1906d813", null ],
+    [ "NEFORCE_SIMD_SSE2", "group___simd_detection.html#ga9a3fcc3223f4c779a66b1dd8bb961238", null ],
     [ "NEFORCE_STANDARD_11", "group___cxx_standard_detection.html#ga255d3eff2058ff3b9f998ab7546e1cb3", null ],
     [ "NEFORCE_STANDARD_14", "group___cxx_standard_detection.html#gaddbf00d28e1b3dcb0a4e3937565280fe", null ],
     [ "NEFORCE_STANDARD_17", "group___cxx_standard_detection.html#gacfb11e8f0b3c4bdd52b4f6b3fcca5caf", null ],

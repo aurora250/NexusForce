@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structhttp2__headers__frame" kind="struct" language="C++" prot="public">
+    <compoundname>http2_headers_frame</compoundname>
+    <includes refid="http2__protocol_8hpp" local="no">http2_protocol.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structhttp2__headers__frame_1a548117682f537c6f2dec6c757523c816" prot="public" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t http2_headers_frame::stream_id</definition>
+        <argsstring></argsstring>
+        <name>stream_id</name>
+        <qualifiedname>http2_headers_frame::stream_id</qualifiedname>
+        <briefdescription>
+<para>流 ID </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="177" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="177" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp2__headers__frame_1a397c141cc5afef886f2143dc6d29d599" prot="public" static="no" mutable="no">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>byte_vector http2_headers_frame::header_block</definition>
+        <argsstring></argsstring>
+        <name>header_block</name>
+        <qualifiedname>http2_headers_frame::header_block</qualifiedname>
+        <briefdescription>
+<para>HPACK 编码的头部块 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="178" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="178" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp2__headers__frame_1ac6f78c424ec38a73d9ff04545cad5fc3" prot="public" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <definition>uint8_t http2_headers_frame::pad_length</definition>
+        <argsstring></argsstring>
+        <name>pad_length</name>
+        <qualifiedname>http2_headers_frame::pad_length</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>填充长度 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="179" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="179" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp2__headers__frame_1a0399c0ef1d36341e1e9da2d1379cba06" prot="public" static="no" mutable="no">
+        <type><ref refid="structhttp2__priority" kindref="compound">http2_priority</ref></type>
+        <definition>http2_priority http2_headers_frame::priority</definition>
+        <argsstring></argsstring>
+        <name>priority</name>
+        <qualifiedname>http2_headers_frame::priority</qualifiedname>
+        <initializer>{}</initializer>
+        <briefdescription>
+<para>优先级信息 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="180" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="180" bodyend="180"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp2__headers__frame_1aae4d050e492b813e53d0343eaac38f02" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool http2_headers_frame::end_stream</definition>
+        <argsstring></argsstring>
+        <name>end_stream</name>
+        <qualifiedname>http2_headers_frame::end_stream</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否结束流 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="181" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="181" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp2__headers__frame_1aa206b4a99de3e703c6ed4c8dcf9031e3" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool http2_headers_frame::end_headers</definition>
+        <argsstring></argsstring>
+        <name>end_headers</name>
+        <qualifiedname>http2_headers_frame::end_headers</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否结束头部块 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="182" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="182" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp2__headers__frame_1a5cafe774c6fdb7af5e0a0d9301b28c3c" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool http2_headers_frame::has_priority</definition>
+        <argsstring></argsstring>
+        <name>has_priority</name>
+        <qualifiedname>http2_headers_frame::has_priority</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否携带优先级 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="183" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="183" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HEADERS 帧（RFC 7540 §6.2） </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>http2_headers_frame</label>
+        <link refid="structhttp2__headers__frame"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>header_block</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>priority</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>http2_priority</label>
+        <link refid="structhttp2__priority"/>
+      </node>
+      <node id="3">
+        <label>icollector&lt; T &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="2">
+        <label>vector&lt; byte_t &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="176" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="176" bodyend="184"/>
+    <listofallmembers>
+      <member refid="structhttp2__headers__frame_1aa206b4a99de3e703c6ed4c8dcf9031e3" prot="public" virt="non-virtual"><scope>http2_headers_frame</scope><name>end_headers</name></member>
+      <member refid="structhttp2__headers__frame_1aae4d050e492b813e53d0343eaac38f02" prot="public" virt="non-virtual"><scope>http2_headers_frame</scope><name>end_stream</name></member>
+      <member refid="structhttp2__headers__frame_1a5cafe774c6fdb7af5e0a0d9301b28c3c" prot="public" virt="non-virtual"><scope>http2_headers_frame</scope><name>has_priority</name></member>
+      <member refid="structhttp2__headers__frame_1a397c141cc5afef886f2143dc6d29d599" prot="public" virt="non-virtual"><scope>http2_headers_frame</scope><name>header_block</name></member>
+      <member refid="structhttp2__headers__frame_1ac6f78c424ec38a73d9ff04545cad5fc3" prot="public" virt="non-virtual"><scope>http2_headers_frame</scope><name>pad_length</name></member>
+      <member refid="structhttp2__headers__frame_1a0399c0ef1d36341e1e9da2d1379cba06" prot="public" virt="non-virtual"><scope>http2_headers_frame</scope><name>priority</name></member>
+      <member refid="structhttp2__headers__frame_1a548117682f537c6f2dec6c757523c816" prot="public" virt="non-virtual"><scope>http2_headers_frame</scope><name>stream_id</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -3,7 +3,9 @@ var group___shared_pointer =
     [ "enable_shared_from_this&lt; T &gt;", "structenable__shared__from__this.html", [
       [ "enable_shared_from_this", "structenable__shared__from__this.html#af6f855457646398a518c284275f5e929", null ],
       [ "shared_from_this", "structenable__shared__from__this.html#ad048382df1fdf3e976e6e443d6bb61c6", null ],
-      [ "shared_from_this", "structenable__shared__from__this.html#aae5792ea877c713e199f549c155eece7", null ]
+      [ "shared_from_this", "structenable__shared__from__this.html#aae5792ea877c713e199f549c155eece7", null ],
+      [ "weak_from_this", "group___weak_pointer.html#gaf5f0f4ef4fee4243568b7a3987ac92de", null ],
+      [ "weak_from_this", "group___weak_pointer.html#ga78f9e2de1f42821593e5dd8183ae748a", null ]
     ] ],
     [ "shared_ptr&lt; T &gt;", "classshared__ptr.html", [
       [ "element_type", "classshared__ptr.html#a9719b09c9168249b3ff078146ea554d0", null ],
@@ -40,6 +42,7 @@ var group___shared_pointer =
     [ "weak_ptr&lt; T &gt;", "classweak__ptr.html", [
       [ "element_type", "classweak__ptr.html#ae778e30aa38a100c5750aecd6f5d8d8b", null ],
       [ "weak_ptr", "classweak__ptr.html#a20a6853423bef0657ba9e7912d1118bf", null ],
+      [ "weak_ptr", "classweak__ptr.html#a3b07b6b6711dfdcf5819b0f397937ede", null ],
       [ "weak_ptr", "classweak__ptr.html#ad954d39a77ff4b8b32cd91cd4f4affa8", null ],
       [ "weak_ptr", "classweak__ptr.html#a08ea1426cad769cf04d9942258659f17", null ],
       [ "weak_ptr", "classweak__ptr.html#a2141f9583dd0cafda2f02eeb58e0bd35", null ],

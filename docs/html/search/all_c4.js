@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['险象指针_0',['险象指针',['../group___hazard_pointer.html',1,'']]]
+  ['邮件格式说明_0',['邮件格式说明',['../group___s_m_t_p.html#email_format',1,'']]]
 ];

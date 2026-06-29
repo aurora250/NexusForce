@@ -110,10 +110,10 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:adc02b595ecffdcaeee2cbb7ce22f3dcc"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
 <tr class="memitem:a70e659a56502b1a01865c17ebd46b37a" id="r_a70e659a56502b1a01865c17ebd46b37a"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a70e659a56502b1a01865c17ebd46b37a">unique_lock</a> (<a class="el" href="#a7b0e20ed2032e613a03c2883d3df7b0c">mutex_type</a> &amp;m)</td></tr>
 <tr class="memdesc:a70e659a56502b1a01865c17ebd46b37a"><td class="mdescLeft">&#160;</td><td class="mdescRight">从互斥锁构造  <br /></td></tr>
-<tr class="memitem:a9ad41a54cefe430bb2a9ace2a91a3805" id="r_a9ad41a54cefe430bb2a9ace2a91a3805"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a9ad41a54cefe430bb2a9ace2a91a3805">unique_lock</a> (<a class="el" href="#a7b0e20ed2032e613a03c2883d3df7b0c">mutex_type</a> &amp;m, <a class="el" href="structdefer__lock__tag.html">defer_lock_tag</a> tag) noexcept</td></tr>
-<tr class="memdesc:a9ad41a54cefe430bb2a9ace2a91a3805"><td class="mdescLeft">&#160;</td><td class="mdescRight">延迟锁定构造函数  <br /></td></tr>
-<tr class="memitem:a5a0a4f1190431a3365e2f4bf8cda50cb" id="r_a5a0a4f1190431a3365e2f4bf8cda50cb"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5a0a4f1190431a3365e2f4bf8cda50cb">unique_lock</a> (<a class="el" href="#a7b0e20ed2032e613a03c2883d3df7b0c">mutex_type</a> &amp;m, <a class="el" href="structtry__lock__tag.html">try_lock_tag</a> tag) noexcept</td></tr>
-<tr class="memdesc:a5a0a4f1190431a3365e2f4bf8cda50cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试锁定构造函数  <br /></td></tr>
+<tr class="memitem:a6eaa6e33ee4b31e904f7c7004b5e89ce" id="r_a6eaa6e33ee4b31e904f7c7004b5e89ce"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6eaa6e33ee4b31e904f7c7004b5e89ce">unique_lock</a> (<a class="el" href="#a7b0e20ed2032e613a03c2883d3df7b0c">mutex_type</a> &amp;m, <a class="el" href="structlock__defer__tag.html">lock_defer_tag</a> tag) noexcept</td></tr>
+<tr class="memdesc:a6eaa6e33ee4b31e904f7c7004b5e89ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">延迟锁定构造函数  <br /></td></tr>
+<tr class="memitem:a2bf38d04326dda75bcfa273111ed62ca" id="r_a2bf38d04326dda75bcfa273111ed62ca"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a2bf38d04326dda75bcfa273111ed62ca">unique_lock</a> (<a class="el" href="#a7b0e20ed2032e613a03c2883d3df7b0c">mutex_type</a> &amp;m, <a class="el" href="structlock__quiet__tag.html">lock_quiet_tag</a> tag) noexcept</td></tr>
+<tr class="memdesc:a2bf38d04326dda75bcfa273111ed62ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试锁定构造函数  <br /></td></tr>
 <tr class="memitem:af9ba8cd379db40771df210a3987eb59d" id="r_af9ba8cd379db40771df210a3987eb59d"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#af9ba8cd379db40771df210a3987eb59d">unique_lock</a> (<a class="el" href="classunique__lock.html">unique_lock</a> &amp;&amp;other) noexcept</td></tr>
 <tr class="memdesc:af9ba8cd379db40771df210a3987eb59d"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
 <tr class="memitem:af4e3bf904517122a7dea67c6cfc7d113" id="r_af4e3bf904517122a7dea67c6cfc7d113"><td class="memItemLeft"><a class="el" href="classunique__lock.html">unique_lock</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#af4e3bf904517122a7dea67c6cfc7d113">operator=</a> (<a class="el" href="classunique__lock.html">unique_lock</a> &amp;&amp;other) noexcept</td></tr>
@@ -146,7 +146,7 @@ class unique_lock&lt; Mutex &gt;</div><p>独占锁管理器模板 </p>
 </dl>
 <p>独占锁，支持延迟锁定、尝试锁定、转移所有权等特性。 </p>
 
-<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00256">256</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00263">263</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="adc02b595ecffdcaeee2cbb7ce22f3dcc" name="adc02b595ecffdcaeee2cbb7ce22f3dcc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adc02b595ecffdcaeee2cbb7ce22f3dcc">&#9670;&#160;</a></span>unique_lock() <span class="overload">[1/5]</span></h2>
@@ -176,7 +176,7 @@ template&lt;typename Mutex&gt; </div>
 <p>默认构造函数 </p>
 <p>创建不管理任何互斥锁的唯一锁。 </p>
 
-<p class="reference">被这些函数引用 <a class="el" href="mutex_8hpp_source.html#l00328">operator=()</a> , 以及 <a class="el" href="mutex_8hpp_source.html#l00314">unique_lock()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="mutex_8hpp_source.html#l00337">operator=()</a> , 以及 <a class="el" href="mutex_8hpp_source.html#l00323">unique_lock()</a>.</p>
 
 </div>
 </div>
@@ -214,12 +214,12 @@ template&lt;typename Mutex&gt; </div>
 </dl>
 <p>构造时立即锁定互斥锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00278">278</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00287">287</a> 行定义.</p>
 
 </div>
 </div>
-<a id="a9ad41a54cefe430bb2a9ace2a91a3805" name="a9ad41a54cefe430bb2a9ace2a91a3805"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ad41a54cefe430bb2a9ace2a91a3805">&#9670;&#160;</a></span>unique_lock() <span class="overload">[3/5]</span></h2>
+<a id="a6eaa6e33ee4b31e904f7c7004b5e89ce" name="a6eaa6e33ee4b31e904f7c7004b5e89ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6eaa6e33ee4b31e904f7c7004b5e89ce">&#9670;&#160;</a></span>unique_lock() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -237,7 +237,7 @@ template&lt;typename Mutex&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structdefer__lock__tag.html">defer_lock_tag</a></td>          <td class="paramname"><span class="paramname"><em>tag</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="structlock__defer__tag.html">lock_defer_tag</a></td>          <td class="paramname"><span class="paramname"><em>tag</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -257,12 +257,12 @@ template&lt;typename Mutex&gt; </div>
 </dl>
 <p>构造时不锁定互斥锁，稍后可以调用lock()锁定。 </p>
 
-<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00291">291</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00300">300</a> 行定义.</p>
 
 </div>
 </div>
-<a id="a5a0a4f1190431a3365e2f4bf8cda50cb" name="a5a0a4f1190431a3365e2f4bf8cda50cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a0a4f1190431a3365e2f4bf8cda50cb">&#9670;&#160;</a></span>unique_lock() <span class="overload">[4/5]</span></h2>
+<a id="a2bf38d04326dda75bcfa273111ed62ca" name="a2bf38d04326dda75bcfa273111ed62ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bf38d04326dda75bcfa273111ed62ca">&#9670;&#160;</a></span>unique_lock() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -280,7 +280,7 @@ template&lt;typename Mutex&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structtry__lock__tag.html">try_lock_tag</a></td>          <td class="paramname"><span class="paramname"><em>tag</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="structlock__quiet__tag.html">lock_quiet_tag</a></td>          <td class="paramname"><span class="paramname"><em>tag</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -300,7 +300,7 @@ template&lt;typename Mutex&gt; </div>
 </dl>
 <p>构造时尝试锁定互斥锁，如果失败则不会阻塞。 </p>
 
-<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00301">301</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00310">310</a> 行定义.</p>
 
 </div>
 </div>
@@ -338,7 +338,7 @@ template&lt;typename Mutex&gt; </div>
 </dl>
 <p>转移互斥锁的所有权和锁定状态。 </p>
 
-<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00314">314</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00323">323</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="#adc02b595ecffdcaeee2cbb7ce22f3dcc">unique_lock()</a>.</p>
 
@@ -372,7 +372,7 @@ template&lt;typename Mutex&gt; </div>
 <p>析构函数 </p>
 <p>如果拥有锁的所有权，则解锁互斥锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00347">347</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00356">356</a> 行定义.</p>
 
 </div>
 </div>
@@ -405,7 +405,7 @@ template&lt;typename Mutex&gt; </div>
 <p>锁定互斥锁 </p>
 <p>如果已拥有锁或未管理互斥锁，则不执行任何操作。 </p>
 
-<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00376">376</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00385">385</a> 行定义.</p>
 
 </div>
 </div>
@@ -437,7 +437,7 @@ template&lt;typename Mutex&gt; </div>
 <p>获取管理的互斥锁指针 </p>
 <dl class="section return"><dt>返回</dt><dd>指向管理的互斥锁的指针，如果没有管理则返回nullptr </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00369">369</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00378">378</a> 行定义.</p>
 
 </div>
 </div>
@@ -469,7 +469,7 @@ template&lt;typename Mutex&gt; </div>
 <p>转换为布尔值 </p>
 <dl class="section return"><dt>返回</dt><dd>是否拥有锁的所有权 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00357">357</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00366">366</a> 行定义.</p>
 
 </div>
 </div>
@@ -508,7 +508,7 @@ template&lt;typename Mutex&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用</dd></dl>
 <p>释放当前锁，然后转移所有权。 </p>
 
-<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00328">328</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00337">337</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03084">addressof()</a> , 以及 <a class="el" href="#adc02b595ecffdcaeee2cbb7ce22f3dcc">unique_lock()</a>.</p>
 
@@ -542,7 +542,7 @@ template&lt;typename Mutex&gt; </div>
 <p>检查是否拥有锁 </p>
 <dl class="section return"><dt>返回</dt><dd>是否拥有锁的所有权 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00363">363</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00372">372</a> 行定义.</p>
 
 </div>
 </div>
@@ -575,7 +575,7 @@ template&lt;typename Mutex&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>之前管理的互斥锁指针</dd></dl>
 <p>放弃对互斥锁的管理权，返回互斥锁指针但不解锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00426">426</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00435">435</a> 行定义.</p>
 
 </div>
 </div>
@@ -608,7 +608,7 @@ template&lt;typename Mutex&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>如果成功获得锁则返回true，否则返回false</dd></dl>
 <p>非阻塞地尝试锁定互斥锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00409">409</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00418">418</a> 行定义.</p>
 
 </div>
 </div>
@@ -640,7 +640,9 @@ template&lt;typename Mutex&gt; </div>
 <p>解锁互斥锁 </p>
 <p>如果未拥有锁或未管理互斥锁，则不执行任何操作。 </p>
 
-<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00392">392</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mutex_8hpp_source.html">mutex.hpp</a> 第 <a class="el" href="mutex_8hpp_source.html#l00401">401</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="ttl__cache_8hpp_source.html#l00110">ttl_cache&lt; Key, Value &gt;::enable_cleanup()</a>.</p>
 
 </div>
 </div>

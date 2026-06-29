@@ -140,6 +140,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a82e33ad7a2ed79e8a62282aac299ba14"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取密码套件名称  <br /></td></tr>
 <tr class="memitem:a782a9c43d8fe89be96f61c9115c8cc46" id="r_a782a9c43d8fe89be96f61c9115c8cc46"><td class="memItemLeft"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#a782a9c43d8fe89be96f61c9115c8cc46">get_version</a> () const</td></tr>
 <tr class="memdesc:a782a9c43d8fe89be96f61c9115c8cc46"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取TLS协议版本  <br /></td></tr>
+<tr class="memitem:a391de2122472380eae5596d1d8406d9b" id="r_a391de2122472380eae5596d1d8406d9b"><td class="memItemLeft"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#a391de2122472380eae5596d1d8406d9b">get_alpn_negotiated</a> () const</td></tr>
+<tr class="memdesc:a391de2122472380eae5596d1d8406d9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取ALPN协商的协议名称  <br /></td></tr>
 <tr class="memitem:ad9087a1bcdb3b6e5a415ed7085760db9" id="r_ad9087a1bcdb3b6e5a415ed7085760db9"><td class="memItemLeft">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ad9087a1bcdb3b6e5a415ed7085760db9">last_error</a> () const</td></tr>
 <tr class="memdesc:ad9087a1bcdb3b6e5a415ed7085760db9"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最后错误信息  <br /></td></tr>
 <tr class="memitem:a6c0f427b5a0876483cf8f0ed197c6329" id="r_a6c0f427b5a0876483cf8f0ed197c6329"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6c0f427b5a0876483cf8f0ed197c6329">is_valid</a> () const noexcept</td></tr>
@@ -232,7 +234,7 @@ Public 成员函数</h2></td></tr>
 
 <p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00083">83</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="#ad2cdaf860512de64970b322f71be7e6e">reset()</a>.</p>
+<p class="reference">引用了 <a class="el" href="sqlite__result_8hpp_source.html#l00037">reset</a>.</p>
 
 </div>
 </div>
@@ -315,6 +317,39 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 <p>作为客户端发起TLS连接，执行SSL/TLS握手。 需要在set_fd()和set_sni_hostname()（可选）之后调用。 </p>
+
+</div>
+</div>
+<a id="a391de2122472380eae5596d1d8406d9b" name="a391de2122472380eae5596d1d8406d9b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a391de2122472380eae5596d1d8406d9b">&#9670;&#160;</a></span>get_alpn_negotiated()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> ssl_stream::get_alpn_negotiated </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取ALPN协商的协议名称 </p>
+<dl class="section return"><dt>返回</dt><dd>协议名称字符串（如"h2"、"http/1.1"），未协商返回空字符串</dd></dl>
+<p>返回TLS握手期间通过ALPN（Application-Layer Protocol Negotiation） 协商确定的应用层协议。需要在TLS握手（accept/connect）完成后调用。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a391de2122472380eae5596d1d8406d9b">get_alpn_negotiated()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a391de2122472380eae5596d1d8406d9b">get_alpn_negotiated()</a>.</p>
 
 </div>
 </div>
@@ -442,9 +477,9 @@ Public 成员函数</h2></td></tr>
 <p>检查SSL对象是否有效 </p>
 <dl class="section return"><dt>返回</dt><dd>有效返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00240">240</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00249">249</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="ssl__stream_8hpp_source.html#l00246">operator bool()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="ssl__stream_8hpp_source.html#l00255">operator bool()</a>.</p>
 
 </div>
 </div>
@@ -474,11 +509,11 @@ Public 成员函数</h2></td></tr>
 <p>获取最后错误信息 </p>
 <dl class="section return"><dt>返回</dt><dd>错误描述字符串 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00234">234</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00243">243</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="ssl__stream_8hpp_source.html#l00234">last_error()</a>.</p>
+<p class="reference">引用了 <a class="el" href="ssl__stream_8hpp_source.html#l00243">last_error()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="ssl__stream_8hpp_source.html#l00234">last_error()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="ssl__stream_8hpp_source.html#l00243">last_error()</a>.</p>
 
 </div>
 </div>
@@ -508,7 +543,7 @@ Public 成员函数</h2></td></tr>
 <p>获取原生SSL对象指针 </p>
 <dl class="section return"><dt>返回</dt><dd>SSL指针 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00252">252</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00261">261</a> 行定义.</p>
 
 </div>
 </div>
@@ -538,9 +573,9 @@ Public 成员函数</h2></td></tr>
 <p>布尔转换运算符 </p>
 <dl class="section return"><dt>返回</dt><dd>有效返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00246">246</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00255">255</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="ssl__stream_8hpp_source.html#l00240">is_valid()</a>.</p>
+<p class="reference">引用了 <a class="el" href="ssl__stream_8hpp_source.html#l00249">is_valid()</a>.</p>
 
 </div>
 </div>
@@ -677,7 +712,7 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>SSL指针</dd></dl>
 <p>释放SSL对象的所有权，调用方负责释放。 </p>
 
-<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00260">260</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="ssl__stream_8hpp_source.html">ssl_stream.hpp</a> 第 <a class="el" href="ssl__stream_8hpp_source.html#l00269">269</a> 行定义.</p>
 
 </div>
 </div>
@@ -710,8 +745,6 @@ Public 成员函数</h2></td></tr>
   </dd>
 </dl>
 <p>创建新的SSL对象并关联到指定的上下文。 如果已有SSL对象，会先关闭并释放。 </p>
-
-<p class="reference">被这些函数引用 <a class="el" href="ssl__stream_8hpp_source.html#l00083">ssl_stream()</a>.</p>
 
 </div>
 </div>

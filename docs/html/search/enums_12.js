@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['websocket_5fopcode_0',['websocket_opcode',['../group___web_socket.html#ga6f03b53401c24a4ee83541255774ef0f',1,'websocket.hpp']]],
-  ['websocket_5fstatus_1',['websocket_status',['../group___web_socket.html#gab56e001ece32405515a29e0bf0d10c0f',1,'websocket.hpp']]]
+  ['value_5ftype_0',['value_type',['../classregistry__key.html#a257871e0b2a75bc616d2b83d6ff96477',1,'registry_key']]],
+  ['visit_5fresult_1',['visit_result',['../classpath__tree.html#a72bff3b00bc168622626ff7be33e7258',1,'path_tree']]]
 ];

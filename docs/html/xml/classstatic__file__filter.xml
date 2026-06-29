@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="223" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="223" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="239" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="239" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classstatic__file__filter_1a26f122e7eb0f0e743e5387e2f456716b" prot="private" static="no" mutable="no">
         <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="structhttp__content" kindref="compound">http_content</ref> &gt;</type>
@@ -33,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="224" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="224" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="240" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="240" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classstatic__file__filter_1a4e222b6c18d76d39805dff249bdc972a" prot="private" static="no" mutable="no">
         <type>bool</type>
@@ -49,7 +49,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="225" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="225" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="241" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="241" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classstatic__file__filter_1a83f22d64a95f85e77062465f8a93158b" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool static_file_filter::enable_range_</definition>
+        <argsstring></argsstring>
+        <name>enable_range_</name>
+        <qualifiedname>static_file_filter::enable_range_</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>是否启用Range请求支持 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="242" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="242" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classstatic__file__filter_1a3a5c13ee2f08829fa46b2fd971d4eb8c" prot="private" static="no" mutable="no">
         <type><ref refid="classbyte__size" kindref="compound">byte_size</ref></type>
@@ -65,7 +81,53 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="226" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="226" bodyend="226"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="243" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="243" bodyend="243"/>
+      </memberdef>
+      <memberdef kind="variable" id="classstatic__file__filter_1a092a1db9e3126a253f6c7ed6c2f214ac" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string static_file_filter::spa_fallback_path_</definition>
+        <argsstring></argsstring>
+        <name>spa_fallback_path_</name>
+        <qualifiedname>static_file_filter::spa_fallback_path_</qualifiedname>
+        <briefdescription>
+<para>SPA回退文件路径（如&quot;index.html&quot;），空字符串禁用 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="244" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="244" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classstatic__file__filter_1a05335ae7142282aed2b1f668f21fb6ec" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool static_file_filter::spa_fallback_enabled_</definition>
+        <argsstring></argsstring>
+        <name>spa_fallback_enabled_</name>
+        <qualifiedname>static_file_filter::spa_fallback_enabled_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否启用SPA回退 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="245" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="245" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classstatic__file__filter_1a3194b3e272d7dcbb0c2833336a764c8c" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
+        <definition>vector&lt;string&gt; static_file_filter::spa_exclude_paths_</definition>
+        <argsstring></argsstring>
+        <name>spa_exclude_paths_</name>
+        <qualifiedname>static_file_filter::spa_exclude_paths_</qualifiedname>
+        <briefdescription>
+<para>SPA回退排除路径前缀（如&quot;/api&quot;） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="246" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="246" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -96,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="233" column="14"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="253" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classstatic__file__filter_1adfb5d26040e9cfb2d1fe732507ce5640" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -140,7 +202,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="235" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="255" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classstatic__file__filter_1a9f62ddd77fcde51982ebbbbf5812b450" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
         <type>void</type>
@@ -182,7 +244,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="236" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="236" bodyend="236"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="256" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="256" bodyend="256"/>
       </memberdef>
       <memberdef kind="function" id="classstatic__file__filter_1a3cf45a25c729258230f05ff403612484" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
         <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
@@ -201,7 +263,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="237" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="237" bodyend="237"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="257" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="257" bodyend="257"/>
       </memberdef>
       <memberdef kind="function" id="classstatic__file__filter_1a7e3de1a2efca30b0ee67facee4173498" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="structhttp__content" kindref="compound">http_content</ref> &gt;</type>
@@ -232,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="253" column="15"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="273" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classstatic__file__filter_1a1aadafd1151df5285f440f606b336fe8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -273,7 +335,155 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="260" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="280" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classstatic__file__filter_1a1bfdf72a163e90f14b3c49758048407c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void static_file_filter::set_spa_fallback</definition>
+        <argsstring>(string index_file)</argsstring>
+        <name>set_spa_fallback</name>
+        <qualifiedname>static_file_filter::set_spa_fallback</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>index_file</declname>
+        </param>
+        <briefdescription>
+<para>启用SPA回退模式 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回退文件路径（如&quot;index.html&quot;）</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+当请求的路径不是已知静态文件时，返回指定的回退文件。 用于 Vue Router / React Router 的 history 模式。 传入空字符串可禁用SPA回退。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="290" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classstatic__file__filter_1a729b261c7b21371088b33adb116691b0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+        <definition>const string &amp; static_file_filter::spa_fallback</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>spa_fallback</name>
+        <qualifiedname>static_file_filter::spa_fallback</qualifiedname>
+        <briefdescription>
+<para>查询SPA回退文件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>回退文件路径，空字符串表示未启用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="296" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="296" bodyend="296"/>
+      </memberdef>
+      <memberdef kind="function" id="classstatic__file__filter_1a4f8a6a3c58355713fe0eb9a64b0f3dee" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool static_file_filter::is_spa_fallback_enabled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_spa_fallback_enabled</name>
+        <qualifiedname>static_file_filter::is_spa_fallback_enabled</qualifiedname>
+        <briefdescription>
+<para>查询SPA回退是否启用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>已启用返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="302" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="302" bodyend="302"/>
+      </memberdef>
+      <memberdef kind="function" id="classstatic__file__filter_1aaece76c3b8f120444f1c797fdd760dd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void static_file_filter::add_spa_exclude_path</definition>
+        <argsstring>(string path_prefix)</argsstring>
+        <name>add_spa_exclude_path</name>
+        <qualifiedname>static_file_filter::add_spa_exclude_path</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>path_prefix</declname>
+        </param>
+        <briefdescription>
+<para>添加SPA回退排除路径 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path_prefix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>路径前缀（如&quot;/api&quot;）</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+以该前缀开头的请求不会被SPA回退处理，将传递给路由器。 用于保护API路由不被SPA回退拦截。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="311" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classstatic__file__filter_1ae86f7ef8caa45b54d2ed9f9ed73956ba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void static_file_filter::set_enable_range</definition>
+        <argsstring>(const bool enable)</argsstring>
+        <name>set_enable_range</name>
+        <qualifiedname>static_file_filter::set_enable_range</qualifiedname>
+        <param>
+          <type>const bool</type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="313" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="313" bodyend="313"/>
+      </memberdef>
+      <memberdef kind="function" id="classstatic__file__filter_1abe4caed388c70342ea5164a1f2215406" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void static_file_filter::set_enable_cache</definition>
+        <argsstring>(const bool enable)</argsstring>
+        <name>set_enable_cache</name>
+        <qualifiedname>static_file_filter::set_enable_cache</qualifiedname>
+        <param>
+          <type>const bool</type>
+          <declname>enable</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="314" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="314" bodyend="314"/>
+      </memberdef>
+      <memberdef kind="function" id="classstatic__file__filter_1a3106db1c1921fcca9c7d68209a4924af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void static_file_filter::set_max_file_size</definition>
+        <argsstring>(byte_size size)</argsstring>
+        <name>set_max_file_size</name>
+        <qualifiedname>static_file_filter::set_max_file_size</qualifiedname>
+        <param>
+          <type><ref refid="classbyte__size" kindref="compound">byte_size</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="315" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="315" bodyend="315"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -306,7 +516,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="246" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="266" column="18"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -339,19 +549,30 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="221" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="221" bodyend="261"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" line="237" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_filter.hpp" bodystart="237" bodyend="319"/>
     <listofallmembers>
       <member refid="classstatic__file__filter_1a1aadafd1151df5285f440f606b336fe8" prot="public" virt="non-virtual"><scope>static_file_filter</scope><name>add_mime_type</name></member>
+      <member refid="classstatic__file__filter_1aaece76c3b8f120444f1c797fdd760dd2" prot="public" virt="non-virtual"><scope>static_file_filter</scope><name>add_spa_exclude_path</name></member>
       <member refid="classstatic__file__filter_1a9f62ddd77fcde51982ebbbbf5812b450" prot="public" virt="virtual"><scope>static_file_filter</scope><name>do_filter</name></member>
       <member refid="classstatic__file__filter_1a4e222b6c18d76d39805dff249bdc972a" prot="private" virt="non-virtual"><scope>static_file_filter</scope><name>enable_cache_</name></member>
+      <member refid="classstatic__file__filter_1a83f22d64a95f85e77062465f8a93158b" prot="private" virt="non-virtual"><scope>static_file_filter</scope><name>enable_range_</name></member>
       <member refid="classstatic__file__filter_1a7e3de1a2efca30b0ee67facee4173498" prot="public" virt="non-virtual"><scope>static_file_filter</scope><name>get_mime_type</name></member>
       <member refid="classstatic__file__filter_1a25f23c6bf1c1b69493067890ebb8ad18" prot="public" virt="non-virtual"><scope>static_file_filter</scope><name>is_safe_path</name></member>
+      <member refid="classstatic__file__filter_1a4f8a6a3c58355713fe0eb9a64b0f3dee" prot="public" virt="non-virtual"><scope>static_file_filter</scope><name>is_spa_fallback_enabled</name></member>
       <member refid="classstatic__file__filter_1a3a5c13ee2f08829fa46b2fd971d4eb8c" prot="private" virt="non-virtual"><scope>static_file_filter</scope><name>max_file_size_</name></member>
       <member refid="classstatic__file__filter_1a26f122e7eb0f0e743e5387e2f456716b" prot="private" virt="non-virtual"><scope>static_file_filter</scope><name>mime_types_</name></member>
       <member refid="classstatic__file__filter_1a3cf45a25c729258230f05ff403612484" prot="public" virt="virtual"><scope>static_file_filter</scope><name>name</name></member>
       <member refid="classhttp__filter_1acaaaf04f0a1520c29312b76336615aec" prot="public" virt="virtual"><scope>static_file_filter</scope><name>post_filter</name></member>
       <member refid="classstatic__file__filter_1adfb5d26040e9cfb2d1fe732507ce5640" prot="public" virt="virtual"><scope>static_file_filter</scope><name>pre_filter</name></member>
       <member refid="classstatic__file__filter_1a55b6bae359e7e51f273e5a2581cea1e8" prot="private" virt="non-virtual"><scope>static_file_filter</scope><name>root_path_</name></member>
+      <member refid="classstatic__file__filter_1abe4caed388c70342ea5164a1f2215406" prot="public" virt="non-virtual"><scope>static_file_filter</scope><name>set_enable_cache</name></member>
+      <member refid="classstatic__file__filter_1ae86f7ef8caa45b54d2ed9f9ed73956ba" prot="public" virt="non-virtual"><scope>static_file_filter</scope><name>set_enable_range</name></member>
+      <member refid="classstatic__file__filter_1a3106db1c1921fcca9c7d68209a4924af" prot="public" virt="non-virtual"><scope>static_file_filter</scope><name>set_max_file_size</name></member>
+      <member refid="classstatic__file__filter_1a1bfdf72a163e90f14b3c49758048407c" prot="public" virt="non-virtual"><scope>static_file_filter</scope><name>set_spa_fallback</name></member>
+      <member refid="classstatic__file__filter_1a3194b3e272d7dcbb0c2833336a764c8c" prot="private" virt="non-virtual"><scope>static_file_filter</scope><name>spa_exclude_paths_</name></member>
+      <member refid="classstatic__file__filter_1a729b261c7b21371088b33adb116691b0" prot="public" virt="non-virtual"><scope>static_file_filter</scope><name>spa_fallback</name></member>
+      <member refid="classstatic__file__filter_1a05335ae7142282aed2b1f668f21fb6ec" prot="private" virt="non-virtual"><scope>static_file_filter</scope><name>spa_fallback_enabled_</name></member>
+      <member refid="classstatic__file__filter_1a092a1db9e3126a253f6c7ed6c2f214ac" prot="private" virt="non-virtual"><scope>static_file_filter</scope><name>spa_fallback_path_</name></member>
       <member refid="classstatic__file__filter_1a622555d342343d4da45216f6e3b43ea4" prot="public" virt="non-virtual"><scope>static_file_filter</scope><name>static_file_filter</name></member>
       <member refid="classhttp__filter_1a2959973ac0c34b0323c1e3fdc03449ed" prot="public" virt="virtual"><scope>static_file_filter</scope><name>~http_filter</name></member>
     </listofallmembers>

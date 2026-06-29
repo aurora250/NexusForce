@@ -1,0 +1,261 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classtoken__bucket__limiter" kind="class" language="C++" prot="public">
+    <compoundname>token_bucket_limiter</compoundname>
+    <includes refid="rate__limiter_8hpp" local="no">rate_limiter.hpp</includes>
+    <innerclass refid="structtoken__bucket__limiter_1_1bucket__entry" prot="private">token_bucket_limiter::bucket_entry</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classtoken__bucket__limiter_1a7ca244ea36c802c4171b580137cc91e5" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double token_bucket_limiter::default_rate_</definition>
+        <argsstring></argsstring>
+        <name>default_rate_</name>
+        <qualifiedname>token_bucket_limiter::default_rate_</qualifiedname>
+        <initializer>{10.0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="96" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="96" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtoken__bucket__limiter_1a391b6aa08eeae150ecda6e61d91af8d3" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double token_bucket_limiter::default_burst_</definition>
+        <argsstring></argsstring>
+        <name>default_burst_</name>
+        <qualifiedname>token_bucket_limiter::default_burst_</qualifiedname>
+        <initializer>{20.0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="97" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="97" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtoken__bucket__limiter_1ac0b064dd8475dbb172992ebadcc38e83" prot="private" static="no" mutable="yes">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex token_bucket_limiter::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>token_bucket_limiter::mutex_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="99" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtoken__bucket__limiter_1a60aae699f3b68573ded3198d1d0b43e3" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, bucket_entry &gt;</type>
+        <definition>unordered_map&lt;string, bucket_entry&gt; token_bucket_limiter::buckets_</definition>
+        <argsstring></argsstring>
+        <name>buckets_</name>
+        <qualifiedname>token_bucket_limiter::buckets_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="100" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classtoken__bucket__limiter_1a9fda3410f6c6319a2c30256a666eda3b" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t token_bucket_limiter::max_buckets_</definition>
+        <argsstring></argsstring>
+        <name>max_buckets_</name>
+        <qualifiedname>token_bucket_limiter::max_buckets_</qualifiedname>
+        <initializer>{10000}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="101" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="101" bodyend="101"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classtoken__bucket__limiter_1a8ab373af5bb754f074e59167d53dda02" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>token_bucket_limiter::token_bucket_limiter</definition>
+        <argsstring>()=default</argsstring>
+        <name>token_bucket_limiter</name>
+        <qualifiedname>token_bucket_limiter::token_bucket_limiter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="104" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classtoken__bucket__limiter_1ae982b97279f5e24b25a24d04c4a0f4c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool token_bucket_limiter::allow</definition>
+        <argsstring>(const string &amp;key, double rate=0.0, double burst=0.0)</argsstring>
+        <name>allow</name>
+        <qualifiedname>token_bucket_limiter::allow</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>rate</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>burst</declname>
+          <defval>0.0</defval>
+        </param>
+        <briefdescription>
+<para>检查并消耗令牌 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>客户端标识（如IP或IP+路由） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>每秒补充令牌数（&lt;=0 使用默认） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>burst</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>桶容量（&lt;=0 使用默认） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>允许通过返回true，被限制返回false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="113" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classtoken__bucket__limiter_1a7b714b813a8007caa0f7167db0db0458" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void token_bucket_limiter::set_default_rate</definition>
+        <argsstring>(double rate)</argsstring>
+        <name>set_default_rate</name>
+        <qualifiedname>token_bucket_limiter::set_default_rate</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>rate</declname>
+        </param>
+        <briefdescription>
+<para>设置默认的令牌补充速率 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="116" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classtoken__bucket__limiter_1a42cb43e614f727a1ca37231ff9bea756" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void token_bucket_limiter::set_default_burst</definition>
+        <argsstring>(double burst)</argsstring>
+        <name>set_default_burst</name>
+        <qualifiedname>token_bucket_limiter::set_default_burst</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>burst</declname>
+        </param>
+        <briefdescription>
+<para>设置默认的桶容量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="118" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classtoken__bucket__limiter_1aead10954b1d26ff9d184b3326c830a23" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t token_bucket_limiter::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <qualifiedname>token_bucket_limiter::size</qualifiedname>
+        <briefdescription>
+<para>获取桶数量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="120" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classtoken__bucket__limiter_1a6639162f9f7da7abee73f98eda7b5746" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void token_bucket_limiter::cleanup_expired</definition>
+        <argsstring>(seconds max_age=seconds{300})</argsstring>
+        <name>cleanup_expired</name>
+        <qualifiedname>token_bucket_limiter::cleanup_expired</qualifiedname>
+        <param>
+          <type><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref></type>
+          <declname>max_age</declname>
+          <defval><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref>{300}</defval>
+        </param>
+        <briefdescription>
+<para>清理过期的桶 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>max_age</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>超过此时间未使用的桶将被移除 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="126" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>令牌桶限流管理器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理多个客户端/路由的令牌桶，支持LRU淘汰和批量清理。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" line="89" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/rate_limiter.hpp" bodystart="89" bodyend="127"/>
+    <listofallmembers>
+      <member refid="classtoken__bucket__limiter_1ae982b97279f5e24b25a24d04c4a0f4c4" prot="public" virt="non-virtual"><scope>token_bucket_limiter</scope><name>allow</name></member>
+      <member refid="classtoken__bucket__limiter_1a60aae699f3b68573ded3198d1d0b43e3" prot="private" virt="non-virtual"><scope>token_bucket_limiter</scope><name>buckets_</name></member>
+      <member refid="classtoken__bucket__limiter_1a6639162f9f7da7abee73f98eda7b5746" prot="public" virt="non-virtual"><scope>token_bucket_limiter</scope><name>cleanup_expired</name></member>
+      <member refid="classtoken__bucket__limiter_1a391b6aa08eeae150ecda6e61d91af8d3" prot="private" virt="non-virtual"><scope>token_bucket_limiter</scope><name>default_burst_</name></member>
+      <member refid="classtoken__bucket__limiter_1a7ca244ea36c802c4171b580137cc91e5" prot="private" virt="non-virtual"><scope>token_bucket_limiter</scope><name>default_rate_</name></member>
+      <member refid="classtoken__bucket__limiter_1a9fda3410f6c6319a2c30256a666eda3b" prot="private" virt="non-virtual"><scope>token_bucket_limiter</scope><name>max_buckets_</name></member>
+      <member refid="classtoken__bucket__limiter_1ac0b064dd8475dbb172992ebadcc38e83" prot="private" virt="non-virtual"><scope>token_bucket_limiter</scope><name>mutex_</name></member>
+      <member refid="classtoken__bucket__limiter_1a42cb43e614f727a1ca37231ff9bea756" prot="public" virt="non-virtual"><scope>token_bucket_limiter</scope><name>set_default_burst</name></member>
+      <member refid="classtoken__bucket__limiter_1a7b714b813a8007caa0f7167db0db0458" prot="public" virt="non-virtual"><scope>token_bucket_limiter</scope><name>set_default_rate</name></member>
+      <member refid="classtoken__bucket__limiter_1aead10954b1d26ff9d184b3326c830a23" prot="public" virt="non-virtual"><scope>token_bucket_limiter</scope><name>size</name></member>
+      <member refid="classtoken__bucket__limiter_1a8ab373af5bb754f074e59167d53dda02" prot="public" virt="non-virtual"><scope>token_bucket_limiter</scope><name>token_bucket_limiter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

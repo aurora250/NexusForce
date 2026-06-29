@@ -13,37 +13,15 @@ var group___postgre_s_q_l =
       [ "prepare_statement", "classpgsql__connect.html#a2b5a9bf1dac1e7b784ab3f07b90d8894", null ],
       [ "query", "classpgsql__connect.html#a31806222a34e6b49b6ad4116130da7d4", null ],
       [ "reconnect", "classpgsql__connect.html#a9215a5add6d0650189fce2d0d3b4b8a7", null ],
-      [ "set_character_set", "classpgsql__connect.html#a4903abe371af79d3193ae88a3a2f56aa", null ],
-      [ "update", "classpgsql__connect.html#a035e9c7ee0abe108fe689c8a3a12abb0", null ]
+      [ "set_character_set", "classpgsql__connect.html#a9374bc7902b9b34815ff4d21b5ce9f4f", null ],
+      [ "update", "classpgsql__connect.html#a035e9c7ee0abe108fe689c8a3a12abb0", null ],
+      [ "link_", "classpgsql__connect.html#a302469e924ae30db8d91181b635d164b", null ]
     ] ],
     [ "pgsql_factory", "classpgsql__factory.html", [
       [ "pgsql_factory", "classpgsql__factory.html#a620346410a9812c2f21c9a458855ce2c", null ],
       [ "~pgsql_factory", "classpgsql__factory.html#ad83d4ad388909913520867c96e487895", null ],
       [ "create_connect", "classpgsql__factory.html#a8a417fedad8edefaff17a8bae6b5dec7", null ],
       [ "create_result", "classpgsql__factory.html#a3877489ce53af0ccebb8f3ac23597fff", null ]
-    ] ],
-    [ "pgsql_prepared_result", "classpgsql__prepared__result.html", [
-      [ "pgsql_prepared_result", "classpgsql__prepared__result.html#a871676fa2df76c4a4b9dd21944e8b4b4", null ],
-      [ "~pgsql_prepared_result", "classpgsql__prepared__result.html#a2ff9c2154839e32138b6cf21ce9208d4", null ],
-      [ "column_count", "classpgsql__prepared__result.html#a4922c7c79857819e4666026cb1987e1b", null ],
-      [ "column_names", "classpgsql__prepared__result.html#aae5b0d8b2a2509537a532de6edeb476c", null ],
-      [ "empty", "classpgsql__prepared__result.html#a6b8059fd3c37822b9153bbe571a3195b", null ],
-      [ "get", "classpgsql__prepared__result.html#aee8ccd8c77349d8ca610982aee70a0fe", null ],
-      [ "get_bit", "classpgsql__prepared__result.html#aefab052500c5de70e38eb41a2ffc93e6", null ],
-      [ "get_blob", "classpgsql__prepared__result.html#a895cbe49b56a2942027a79d4516ce4a2", null ],
-      [ "get_bool", "classpgsql__prepared__result.html#aed6292a8be549d3136ac5bda32943c63", null ],
-      [ "get_date", "classpgsql__prepared__result.html#a6acb3942ee667dd38272d11e165959b8", null ],
-      [ "get_datetime", "classpgsql__prepared__result.html#a8cd954ae7297c3966a236178a3829a7d", null ],
-      [ "get_decimal", "classpgsql__prepared__result.html#aa301d4ba1f6cf5a2c2146cdd6b0332b7", null ],
-      [ "get_float32", "classpgsql__prepared__result.html#abe7e63e874cfa67a4d8ff83935c54e79", null ],
-      [ "get_float64", "classpgsql__prepared__result.html#af3f2a5ff119dee4bfd6dce010a65056f", null ],
-      [ "get_int16", "classpgsql__prepared__result.html#a198fd2ed71f54a22cf91978dc08b36e5", null ],
-      [ "get_int32", "classpgsql__prepared__result.html#a378676eb186b655d83be28ea2a3a0fad", null ],
-      [ "get_int64", "classpgsql__prepared__result.html#a426e0d19bc10302d7dee7badbb5d86d7", null ],
-      [ "get_time", "classpgsql__prepared__result.html#afbc4670fec8a031f71c8982744a85bcb", null ],
-      [ "get_timestamp", "classpgsql__prepared__result.html#ad3bcedd58f22163049ac6b8326378200", null ],
-      [ "next", "classpgsql__prepared__result.html#a9130b0199128dcf1b3676d8fdf44a8c7", null ],
-      [ "row_count", "classpgsql__prepared__result.html#aef5161a8a2f4ef264117347dd1936c11", null ]
     ] ],
     [ "pgsql_prepared_statement", "classpgsql__prepared__statement.html", [
       [ "pgsql_prepared_statement", "classpgsql__prepared__statement.html#a65bd79bcda5170d5087f444776b0e852", null ],
@@ -56,7 +34,7 @@ var group___postgre_s_q_l =
       [ "bind_param", "classpgsql__prepared__statement.html#a158179900bee192490f766ab9fbae959", null ],
       [ "bind_param", "classpgsql__prepared__statement.html#a155adacd26169d3b26cd2fd89f7f8cdd", null ],
       [ "execute", "classpgsql__prepared__statement.html#a4dec6eebfb652d049b6af57f78c9537d", null ],
-      [ "execute_query", "classpgsql__prepared__statement.html#a49d169a0457f178f08e7aef6b14f7977", null ],
+      [ "execute_query", "classpgsql__prepared__statement.html#acc72fac3d313a758770409ff7e0a3fee", null ],
       [ "get_errno", "classpgsql__prepared__statement.html#a4f9deb46a2aa67cab9620729a4b85cf4", null ],
       [ "get_error", "classpgsql__prepared__statement.html#a2fe0f607ab726bce954ab0cf18e532b6", null ],
       [ "param_count", "classpgsql__prepared__statement.html#abac49e30b43317bd7293f1c9fb653627", null ]
@@ -65,6 +43,7 @@ var group___postgre_s_q_l =
       [ "pgsql_tb_result", "classpgsql__tb__result.html#afb72b3a7054cc38336dd52b1af225347", null ],
       [ "~pgsql_tb_result", "classpgsql__tb__result.html#a9f77b730e0608d3450b0dfba2d29a8d9", null ],
       [ "column_count", "classpgsql__tb__result.html#ae9281dbebf4d098969b99abab86457b1", null ],
+      [ "column_metadata", "classpgsql__tb__result.html#a0caed572eefa21ab56187c8ef70746ad", null ],
       [ "column_names", "classpgsql__tb__result.html#a2ebbe17b3579bd7894548fcafe79ba2d", null ],
       [ "empty", "classpgsql__tb__result.html#a2cde35cf5a40593a7b4459c6baad1fd5", null ],
       [ "get", "classpgsql__tb__result.html#a92169a3cb117a565865ac61bb46d48f3", null ],

@@ -8,6 +8,7 @@ var searchData=
   ['json_5fnumber_5',['json_number',['../classjson__number.html',1,'']]],
   ['json_5fobject_6',['json_object',['../classjson__object.html',1,'']]],
   ['json_5fparser_7',['json_parser',['../classjson__parser.html',1,'']]],
-  ['json_5fstring_8',['json_string',['../classjson__string.html',1,'']]],
-  ['json_5fvalue_9',['json_value',['../classjson__value.html',1,'']]]
+  ['json_5fserializer_8',['json_serializer',['../classjson__serializer.html',1,'']]],
+  ['json_5fstring_9',['json_string',['../classjson__string.html',1,'']]],
+  ['json_5fvalue_10',['json_value',['../classjson__value.html',1,'']]]
 ];

@@ -8,6 +8,50 @@
     <innerclass refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4" prot="public">owner_less&lt; shared_ptr&lt; T &gt; &gt;</innerclass>
     <innerclass refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4" prot="public">owner_less&lt; weak_ptr&lt; T &gt; &gt;</innerclass>
     <innerclass refid="structowner__less_3_01void_01_4" prot="public">owner_less&lt; void &gt;</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___weak_pointer_1ga78f9e2de1f42821593e5dd8183ae748a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classweak__ptr" kindref="compound">weak_ptr</ref>&lt; T &gt;</type>
+        <definition>weak_ptr&lt; T &gt; enable_shared_from_this&lt; T &gt;::weak_from_this</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>weak_from_this</name>
+        <qualifiedname>enable_shared_from_this::weak_from_this</qualifiedname>
+        <briefdescription>
+<para>获取指向 this 的弱指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向 this 的 <ref refid="classweak__ptr" kindref="compound">weak_ptr</ref> </para>
+</simplesect>
+<simplesect kind="note"><para>如果对象没有被 <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref> 管理，返回空的 <ref refid="classweak__ptr" kindref="compound">weak_ptr</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="814" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="348" bodyend="354"/>
+        <references refid="group___base_type_qualifier_check_1ga096bf5b121d9f427c8027f2949e8198e" compoundref="type__traits_8hpp" startline="2253">is_base_of_v</references>
+      </memberdef>
+      <memberdef kind="function" id="group___weak_pointer_1gaf5f0f4ef4fee4243568b7a3987ac92de" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classweak__ptr" kindref="compound">weak_ptr</ref>&lt; const T &gt;</type>
+        <definition>weak_ptr&lt; const T &gt; enable_shared_from_this&lt; T &gt;::weak_from_this</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>weak_from_this</name>
+        <qualifiedname>enable_shared_from_this::weak_from_this</qualifiedname>
+        <briefdescription>
+<para>获取指向 this 的常量弱指针 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向 this 常量版本的 <ref refid="classweak__ptr" kindref="compound">weak_ptr</ref> </para>
+</simplesect>
+<simplesect kind="note"><para>如果对象没有被 <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref> 管理，返回空的 <ref refid="classweak__ptr" kindref="compound">weak_ptr</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/shared_ptr.hpp" line="821" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp" bodystart="357" bodyend="363"/>
+        <references refid="group___base_type_qualifier_check_1ga096bf5b121d9f427c8027f2949e8198e" compoundref="type__traits_8hpp" startline="2253">is_base_of_v</references>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
 <para>弱智能指针相关类和辅助工具 </para>
     </briefdescription>

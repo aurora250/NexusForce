@@ -117,8 +117,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:a834b77723f344390fc9b76fa59acd22a" id="r_a834b77723f344390fc9b76fa59acd22a"><td class="memItemLeft"><a id="a834b77723f344390fc9b76fa59acd22a" name="a834b77723f344390fc9b76fa59acd22a"></a>
 void&#160;</td><td class="memItemRight"><b>close</b> () noexcept override</td></tr>
 <tr class="memdesc:a834b77723f344390fc9b76fa59acd22a"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭Redis连接 <br /></td></tr>
-<tr class="memitem:aa66bf3a032d2b0be45f87bacd5e78e47" id="r_aa66bf3a032d2b0be45f87bacd5e78e47"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aa66bf3a032d2b0be45f87bacd5e78e47">NEFORCE_DEPRECATED_FOR</a> (&quot;Redis not support setting <a class="el" href="structcharacter.html">character</a> sets&quot;) bool <a class="el" href="structidb__connect.html#a9f0b407a683b19bee646271a19356aad">set_character_set</a>(const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;) const noexcept override</td></tr>
-<tr class="memdesc:aa66bf3a032d2b0be45f87bacd5e78e47"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符集（Redis不支持）  <br /></td></tr>
+<tr class="memitem:a656f599f38de233f3bf959bb9aa86793" id="r_a656f599f38de233f3bf959bb9aa86793"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a656f599f38de233f3bf959bb9aa86793">NEFORCE_DEPRECATED_FOR</a> (&quot;Redis not support setting <a class="el" href="structcharacter.html">character</a> sets&quot;) bool <a class="el" href="structidb__connect.html#a7787680de395dc737bd6b14978488854">set_character_set</a>(const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;) noexcept override</td></tr>
+<tr class="memdesc:a656f599f38de233f3bf959bb9aa86793"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符集（Redis不支持）  <br /></td></tr>
 <tr class="memitem:aa9c3e1b7af3100595a9b9e3988b6c4d1" id="r_aa9c3e1b7af3100595a9b9e3988b6c4d1"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aa9c3e1b7af3100595a9b9e3988b6c4d1">NEFORCE_DEPRECATED_FOR</a> (&quot;Redis not support setting <a class="el" href="structcharacter.html">character</a> sets&quot;) <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="el" href="structidb__connect.html#a81f310b0ea3085407106a63fa1ba0767">get_character_set</a>() const noexcept override</td></tr>
 <tr class="memdesc:aa9c3e1b7af3100595a9b9e3988b6c4d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取字符集（Redis不支持）  <br /></td></tr>
 <tr class="memitem:af5c327e104b050e226fa3de67f1e3bea" id="r_af5c327e104b050e226fa3de67f1e3bea"><td class="memItemLeft"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#af5c327e104b050e226fa3de67f1e3bea">get_error</a> () const override</td></tr>
@@ -133,6 +133,17 @@ void&#160;</td><td class="memItemRight"><b>close</b> () noexcept override</td></
 <tr class="memdesc:abf1840d0ce8ba66dcf167c41cfc162f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查连接是否已建立  <br /></td></tr>
 <tr class="memitem:a1e01a0f142f0ebad62d1d0ff4518067d" id="r_a1e01a0f142f0ebad62d1d0ff4518067d"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a1e01a0f142f0ebad62d1d0ff4518067d">is_valid</a> () const override</td></tr>
 <tr class="memdesc:a1e01a0f142f0ebad62d1d0ff4518067d"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查连接是否有效  <br /></td></tr>
+<tr class="memitem:af515f0c1fe8931d5d2a3ce488d9d3931" id="r_af515f0c1fe8931d5d2a3ce488d9d3931"><td class="memItemLeft"><a id="af515f0c1fe8931d5d2a3ce488d9d3931" name="af515f0c1fe8931d5d2a3ce488d9d3931"></a>
+bool&#160;</td><td class="memItemRight"><b>begin</b> () override</td></tr>
+<tr class="memdesc:af515f0c1fe8931d5d2a3ce488d9d3931"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始事务 <br /></td></tr>
+<tr class="memitem:a02163af1b1eae18dcce09046543f3542" id="r_a02163af1b1eae18dcce09046543f3542"><td class="memItemLeft"><a id="a02163af1b1eae18dcce09046543f3542" name="a02163af1b1eae18dcce09046543f3542"></a>
+bool&#160;</td><td class="memItemRight"><b>commit</b> () override</td></tr>
+<tr class="memdesc:a02163af1b1eae18dcce09046543f3542"><td class="mdescLeft">&#160;</td><td class="mdescRight">提交事务 <br /></td></tr>
+<tr class="memitem:ac4ab7df7504bcf9e0e3e0a598b4502be" id="r_ac4ab7df7504bcf9e0e3e0a598b4502be"><td class="memItemLeft"><a id="ac4ab7df7504bcf9e0e3e0a598b4502be" name="ac4ab7df7504bcf9e0e3e0a598b4502be"></a>
+bool&#160;</td><td class="memItemRight"><b>rollback</b> () override</td></tr>
+<tr class="memdesc:ac4ab7df7504bcf9e0e3e0a598b4502be"><td class="mdescLeft">&#160;</td><td class="mdescRight">回滚事务 <br /></td></tr>
+<tr class="memitem:ae99b5dd3ad7c6bafae3cee8af963a991" id="r_ae99b5dd3ad7c6bafae3cee8af963a991"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#ae99b5dd3ad7c6bafae3cee8af963a991">native_handle</a> () noexcept override</td></tr>
+<tr class="memdesc:ae99b5dd3ad7c6bafae3cee8af963a991"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取原生连接句柄  <br /></td></tr>
 <tr class="memitem:aedf150ded704e86abc2dcf73e69d5913" id="r_aedf150ded704e86abc2dcf73e69d5913"><td class="memItemLeft"><a id="aedf150ded704e86abc2dcf73e69d5913" name="aedf150ded704e86abc2dcf73e69d5913"></a>
 bool&#160;</td><td class="memItemRight"><b>set</b> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;key, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;value) override</td></tr>
 <tr class="memdesc:aedf150ded704e86abc2dcf73e69d5913"><td class="mdescLeft">&#160;</td><td class="mdescRight">SET命令 <br /></td></tr>
@@ -180,9 +191,9 @@ bool&#160;</td><td class="memItemRight"><b>sadd</b> (const <a class="el" href="g
 <tr class="memdesc:a23d22fba9ce82c798a1363f0f816f593 inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">刷新连接存活时间  <br /></td></tr>
 <tr class="memitem:a5fe328d4bdf863d226d7065daf2cc56b inherit pub_methods_structidb__connect" id="r_a5fe328d4bdf863d226d7065daf2cc56b"><td class="memItemLeft"><a class="el" href="structidb__connect.html#ab9be909e9ecc1db9cbcc28186de35c95">clock_type</a>&#160;</td><td class="memItemRight"><a class="el" href="structidb__connect.html#a5fe328d4bdf863d226d7065daf2cc56b">get_alive</a> () const noexcept</td></tr>
 <tr class="memdesc:a5fe328d4bdf863d226d7065daf2cc56b inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取连接空闲时间  <br /></td></tr>
-<tr class="memitem:a9f0b407a683b19bee646271a19356aad inherit pub_methods_structidb__connect" id="r_a9f0b407a683b19bee646271a19356aad"><td class="memItemLeft">
-virtual bool&#160;</td><td class="memItemRight"><b>set_character_set</b> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;encoding) const =0</td></tr>
-<tr class="memdesc:a9f0b407a683b19bee646271a19356aad inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符集 <br /></td></tr>
+<tr class="memitem:a7787680de395dc737bd6b14978488854 inherit pub_methods_structidb__connect" id="r_a7787680de395dc737bd6b14978488854"><td class="memItemLeft">
+virtual bool&#160;</td><td class="memItemRight"><b>set_character_set</b> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;encoding)=0</td></tr>
+<tr class="memdesc:a7787680de395dc737bd6b14978488854 inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符集 <br /></td></tr>
 <tr class="memitem:a81f310b0ea3085407106a63fa1ba0767 inherit pub_methods_structidb__connect" id="r_a81f310b0ea3085407106a63fa1ba0767"><td class="memItemLeft">
 virtual <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><b>get_character_set</b> () const =0</td></tr>
 <tr class="memdesc:a81f310b0ea3085407106a63fa1ba0767 inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取字符集 <br /></td></tr>
@@ -235,7 +246,7 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 <p>析构函数 </p>
 <p>关闭Redis连接。 </p>
 
-<p class="definition">在文件 <a class="el" href="redis__connect_8hpp_source.html">redis_connect.hpp</a> 第 <a class="el" href="redis__connect_8hpp_source.html#l00063">63</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="redis__connect_8hpp_source.html">redis_connect.hpp</a> 第 <a class="el" href="redis__connect_8hpp_source.html#l00064">64</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="structidb__connect.html#a689ce6c9a44cdc602e6006615e949e19">idb_connect::close()</a>.</p>
 
@@ -307,7 +318,7 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 
 <p>实现了 <a class="el" href="structidb__connect.html#a05b7b473cdd13c18f5b44c83e09c082d">idb_connect</a>.</p>
 
-<p class="definition">在文件 <a class="el" href="redis__connect_8hpp_source.html">redis_connect.hpp</a> 第 <a class="el" href="redis__connect_8hpp_source.html#l00130">130</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="redis__connect_8hpp_source.html">redis_connect.hpp</a> 第 <a class="el" href="redis__connect_8hpp_source.html#l00131">131</a> 行定义.</p>
 
 </div>
 </div>
@@ -339,7 +350,7 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 
 <p>实现了 <a class="el" href="structidb__connect.html#a150e2a5aac988b6abb97f9444042d06e">idb_connect</a>.</p>
 
-<p class="definition">在文件 <a class="el" href="redis__connect_8hpp_source.html">redis_connect.hpp</a> 第 <a class="el" href="redis__connect_8hpp_source.html#l00110">110</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="redis__connect_8hpp_source.html">redis_connect.hpp</a> 第 <a class="el" href="redis__connect_8hpp_source.html#l00111">111</a> 行定义.</p>
 
 </div>
 </div>
@@ -403,8 +414,40 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 
 </div>
 </div>
-<a id="aa66bf3a032d2b0be45f87bacd5e78e47" name="aa66bf3a032d2b0be45f87bacd5e78e47"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa66bf3a032d2b0be45f87bacd5e78e47">&#9670;&#160;</a></span>NEFORCE_DEPRECATED_FOR() <span class="overload">[1/2]</span></h2>
+<a id="ae99b5dd3ad7c6bafae3cee8af963a991" name="ae99b5dd3ad7c6bafae3cee8af963a991"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae99b5dd3ad7c6bafae3cee8af963a991">&#9670;&#160;</a></span>native_handle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * redis_connect::native_handle </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取原生连接句柄 </p>
+<dl class="section return"><dt>返回</dt><dd>原生句柄指针 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__connect.html#a795f60f7b0e4db4511ba51da8d54c7b3">idb_connect</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="redis__connect_8hpp_source.html">redis_connect.hpp</a> 第 <a class="el" href="redis__connect_8hpp_source.html#l00143">143</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a656f599f38de233f3bf959bb9aa86793" name="a656f599f38de233f3bf959bb9aa86793"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a656f599f38de233f3bf959bb9aa86793">&#9670;&#160;</a></span>NEFORCE_DEPRECATED_FOR() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -427,13 +470,13 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 </div><div class="memdoc">
 
 <p>设置字符集（Redis不支持） </p>
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">弃用</a></b></dt><dd>Redis不支持设置字符集 </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000005">弃用</a></b></dt><dd>Redis不支持设置字符集 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="redis__connect_8hpp_source.html">redis_connect.hpp</a> 第 <a class="el" href="redis__connect_8hpp_source.html#l00090">90</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="redis__connect_8hpp_source.html">redis_connect.hpp</a> 第 <a class="el" href="redis__connect_8hpp_source.html#l00091">91</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="redis__connect_8hpp_source.html#l00090">NEFORCE_DEPRECATED_FOR()</a> , 以及 <a class="el" href="structidb__connect.html#a9f0b407a683b19bee646271a19356aad">idb_connect::set_character_set()</a>.</p>
+<p class="reference">引用了 <a class="el" href="redis__connect_8hpp_source.html#l00091">NEFORCE_DEPRECATED_FOR()</a> , 以及 <a class="el" href="structidb__connect.html#a7787680de395dc737bd6b14978488854">idb_connect::set_character_set()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="redis__connect_8hpp_source.html#l00090">NEFORCE_DEPRECATED_FOR()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="redis__connect_8hpp_source.html#l00091">NEFORCE_DEPRECATED_FOR()</a>.</p>
 
 </div>
 </div>
@@ -461,9 +504,9 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 </div><div class="memdoc">
 
 <p>获取字符集（Redis不支持） </p>
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000002">弃用</a></b></dt><dd>Redis不支持字符集概念 </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000006">弃用</a></b></dt><dd>Redis不支持字符集概念 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="redis__connect_8hpp_source.html">redis_connect.hpp</a> 第 <a class="el" href="redis__connect_8hpp_source.html#l00097">97</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="redis__connect_8hpp_source.html">redis_connect.hpp</a> 第 <a class="el" href="redis__connect_8hpp_source.html#l00098">98</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="structidb__connect.html#a81f310b0ea3085407106a63fa1ba0767">idb_connect::get_character_set()</a>.</p>
 

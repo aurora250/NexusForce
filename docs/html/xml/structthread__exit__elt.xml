@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structthread__exit__elt" kind="struct" language="C++" prot="public">
+    <compoundname>thread_exit_elt</compoundname>
+    <includes refid="thread__exit__register_8hpp" local="no">thread_exit_register.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structthread__exit__elt_1a52b8e6518b6def949705fb5068e6cb88" prot="public" static="no" mutable="no">
+        <type><ref refid="structthread__exit__elt" kindref="compound">thread_exit_elt</ref> *</type>
+        <definition>thread_exit_elt* thread_exit_elt::next</definition>
+        <argsstring></argsstring>
+        <name>next</name>
+        <qualifiedname>thread_exit_elt::next</qualifiedname>
+        <briefdescription>
+<para>指向下一个回调元素的指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_register.hpp" line="35" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_register.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structthread__exit__elt_1afe4808b2c7a061e8f33392bd4f20e7f7" prot="public" static="no" mutable="no">
+        <type>void(*</type>
+        <definition>void(* thread_exit_elt::cb) (void *)</definition>
+        <argsstring>)(void *)</argsstring>
+        <name>cb</name>
+        <qualifiedname>thread_exit_elt::cb</qualifiedname>
+        <briefdescription>
+<para>回调函数指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_register.hpp" line="36" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_register.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>线程退出回调元素 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>表示一个线程退出回调，包含链表指针和回调函数。 使用链表结构存储所有注册的回调，按照注册的逆序执行。 </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>thread_exit_elt</label>
+        <link refid="structthread__exit__elt"/>
+        <childnode refid="1" relation="usage">
+          <edgelabel>next</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_register.hpp" line="34" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/thread_exit_register.hpp" bodystart="34" bodyend="37"/>
+    <listofallmembers>
+      <member refid="structthread__exit__elt_1afe4808b2c7a061e8f33392bd4f20e7f7" prot="public" virt="non-virtual"><scope>thread_exit_elt</scope><name>cb</name></member>
+      <member refid="structthread__exit__elt_1a52b8e6518b6def949705fb5068e6cb88" prot="public" virt="non-virtual"><scope>thread_exit_elt</scope><name>next</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

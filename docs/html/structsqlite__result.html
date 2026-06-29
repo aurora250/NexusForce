@@ -109,6 +109,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a3a567d253319df439bbac39a6e0f81a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
 <tr class="memitem:a16c38a0dfa700c81e7bafd8efedf4d8e" id="r_a16c38a0dfa700c81e7bafd8efedf4d8e"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a16c38a0dfa700c81e7bafd8efedf4d8e">sqlite_result</a> (::sqlite3_stmt *statement)</td></tr>
 <tr class="memdesc:a16c38a0dfa700c81e7bafd8efedf4d8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memitem:a576cfb5d65941e7524bc251bdd53e63f" id="r_a576cfb5d65941e7524bc251bdd53e63f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a576cfb5d65941e7524bc251bdd53e63f">sqlite_result</a> (::sqlite3_stmt *statement, <a class="el" href="group___s_q_lite3.html#gaec2418c4d34710f16a33f7e4aba24ad1">sqlite_cleanup_action</a> cleanup)</td></tr>
+<tr class="memdesc:a576cfb5d65941e7524bc251bdd53e63f"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数（带清理方式）  <br /></td></tr>
 <tr class="memitem:ae5a1354b25ea70ae0676772b87f456f3" id="r_ae5a1354b25ea70ae0676772b87f456f3"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae5a1354b25ea70ae0676772b87f456f3">~sqlite_result</a> () override</td></tr>
 <tr class="memdesc:ae5a1354b25ea70ae0676772b87f456f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数  <br /></td></tr>
 <tr class="memitem:ab7e252ccc1f949d071917e2af80c9f9f" id="r_ab7e252ccc1f949d071917e2af80c9f9f"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ab7e252ccc1f949d071917e2af80c9f9f">NEFORCE_DEPRECATED_FOR</a> (&quot;use COUNT(*) instead of using this function&quot;) <a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> <a class="el" href="structidb__tb__result.html#aabb704cab81e3fdae2849fcdd6d73c75">row_count</a>() const noexcept override</td></tr>
@@ -119,6 +121,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:ae425d30867c970469b2af93997283b10"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查结果集是否为空  <br /></td></tr>
 <tr class="memitem:ac8f1cac31c66822f59e5eae48f8efe8d" id="r_ac8f1cac31c66822f59e5eae48f8efe8d"><td class="memItemLeft">const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ac8f1cac31c66822f59e5eae48f8efe8d">column_names</a> () const noexcept override</td></tr>
 <tr class="memdesc:ac8f1cac31c66822f59e5eae48f8efe8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取列名列表  <br /></td></tr>
+<tr class="memitem:afdbf6f51d538f7f39ccece30b9df65fc" id="r_afdbf6f51d538f7f39ccece30b9df65fc"><td class="memItemLeft"><a class="el" href="structcolumn__meta.html">column_meta</a>&#160;</td><td class="memItemRight"><a class="el" href="#afdbf6f51d538f7f39ccece30b9df65fc">column_metadata</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> n) const override</td></tr>
+<tr class="memdesc:afdbf6f51d538f7f39ccece30b9df65fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取列元数据  <br /></td></tr>
 <tr class="memitem:acc7234272d3339f59f879a497a123e35" id="r_acc7234272d3339f59f879a497a123e35"><td class="memItemLeft">const <a class="el" href="classvector.html">vector</a>&lt; int &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#acc7234272d3339f59f879a497a123e35">column_types</a> () const noexcept</td></tr>
 <tr class="memdesc:acc7234272d3339f59f879a497a123e35"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取列类型列表  <br /></td></tr>
 <tr class="memitem:ad0b010e2dcc614aba87c3cdcfde6a4ef" id="r_ad0b010e2dcc614aba87c3cdcfde6a4ef"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ad0b010e2dcc614aba87c3cdcfde6a4ef">next</a> () noexcept override</td></tr>
@@ -173,14 +177,14 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 <li>逐行遍历结果集</li>
 <li>支持多种数据类型转换</li>
 <li>NULL值处理</li>
-<li>自动语句资源管理</li>
+<li>自动语句资源管理（finalize或reset）</li>
 </ul>
-<dl class="section note"><dt>注解</dt><dd>不允许复用。 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>普通查询使用finalize模式（默认），预处理语句查询使用reset模式以允许语句复用。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00044">44</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00056">56</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a3a567d253319df439bbac39a6e0f81a1" name="a3a567d253319df439bbac39a6e0f81a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a567d253319df439bbac39a6e0f81a1">&#9670;&#160;</a></span>sqlite_result() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a567d253319df439bbac39a6e0f81a1">&#9670;&#160;</a></span>sqlite_result() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -200,7 +204,7 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 </div>
 </div>
 <a id="a16c38a0dfa700c81e7bafd8efedf4d8e" name="a16c38a0dfa700c81e7bafd8efedf4d8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16c38a0dfa700c81e7bafd8efedf4d8e">&#9670;&#160;</a></span>sqlite_result() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a16c38a0dfa700c81e7bafd8efedf4d8e">&#9670;&#160;</a></span>sqlite_result() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -229,7 +233,38 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
   </table>
   </dd>
 </dl>
-<p>获取结果集的列数、列名和列类型信息。 </p>
+<p>获取结果集的列数、列名和列类型信息。 默认使用finalize清理方式。 </p>
+
+</div>
+</div>
+<a id="a576cfb5d65941e7524bc251bdd53e63f" name="a576cfb5d65941e7524bc251bdd53e63f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a576cfb5d65941e7524bc251bdd53e63f">&#9670;&#160;</a></span>sqlite_result() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">sqlite_result::sqlite_result </td>
+          <td>(</td>
+          <td class="paramtype">::sqlite3_stmt *</td>          <td class="paramname"><span class="paramname"><em>statement</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___s_q_lite3.html#gaec2418c4d34710f16a33f7e4aba24ad1">sqlite_cleanup_action</a></td>          <td class="paramname"><span class="paramname"><em>cleanup</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>构造函数（带清理方式） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">statement</td><td>SQLite预处理语句句柄 </td></tr>
+    <tr><td class="paramname">cleanup</td><td>清理方式（finalize或reset）</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>预处理语句查询应使用reset方式，以允许语句复用。 </p>
 
 </div>
 </div>
@@ -257,7 +292,7 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 </div><div class="memdoc">
 
 <p>析构函数 </p>
-<p>释放sqlite3_stmt资源。 </p>
+<p>根据cleanup_标志调用sqlite3_finalize或sqlite3_reset。 </p>
 
 </div>
 </div>
@@ -290,7 +325,43 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 
 <p>实现了 <a class="el" href="structidb__tb__result.html#a15bba511bedb7883a9770516e60d0502">idb_tb_result</a>.</p>
 
-<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00090">90</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00113">113</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afdbf6f51d538f7f39ccece30b9df65fc" name="afdbf6f51d538f7f39ccece30b9df65fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afdbf6f51d538f7f39ccece30b9df65fc">&#9670;&#160;</a></span>column_metadata()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcolumn__meta.html">column_meta</a> sqlite_result::column_metadata </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取列元数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>列索引（从0开始） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>列元数据 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#a847e127d534e34bc199d6168372288f0">idb_tb_result</a>.</p>
 
 </div>
 </div>
@@ -322,7 +393,7 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 
 <p>实现了 <a class="el" href="structidb__tb__result.html#acf9e2cdb951dfadb26394addafd314bd">idb_tb_result</a>.</p>
 
-<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00102">102</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00125">125</a> 行定义.</p>
 
 </div>
 </div>
@@ -352,7 +423,7 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 <p>获取列类型列表 </p>
 <dl class="section return"><dt>返回</dt><dd>SQLite类型代码列表 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00108">108</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00133">133</a> 行定义.</p>
 
 </div>
 </div>
@@ -384,7 +455,7 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 
 <p>实现了 <a class="el" href="structidb__result.html#aa1c85e3b42031de74a7fb1f7a95e2754">idb_result</a>.</p>
 
-<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00096">96</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00119">119</a> 行定义.</p>
 
 </div>
 </div>
@@ -582,11 +653,11 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 
 <p>实现了 <a class="el" href="structidb__tb__result.html#ac54604a476b6a85e5ff0892304adf0a3">idb_tb_result</a>.</p>
 
-<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00191">191</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00216">216</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00935">datetime::date()</a>, <a class="el" href="sqlite__result_8hpp_source.html#l00191">get_date()</a> , 以及 <a class="el" href="structidb__tb__result.html#a0148e0ef2825f69afcbf37f1306b96cb">idb_tb_result::get_datetime()</a>.</p>
+<p class="reference">引用了 <a class="el" href="datetime_8hpp_source.html#l00935">datetime::date()</a>, <a class="el" href="sqlite__result_8hpp_source.html#l00216">get_date()</a> , 以及 <a class="el" href="structidb__tb__result.html#a0148e0ef2825f69afcbf37f1306b96cb">idb_tb_result::get_datetime()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="sqlite__result_8hpp_source.html#l00191">get_date()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="sqlite__result_8hpp_source.html#l00216">get_date()</a>.</p>
 
 </div>
 </div>
@@ -901,7 +972,7 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 
 <p>实现了 <a class="el" href="structidb__tb__result.html#a0501bb1dba04138e9347c6685a8070d2">idb_tb_result</a>.</p>
 
-<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00198">198</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00223">223</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="structidb__tb__result.html#a0148e0ef2825f69afcbf37f1306b96cb">idb_tb_result::get_datetime()</a> , 以及 <a class="el" href="datetime_8hpp_source.html#l00941">datetime::time()</a>.</p>
 
@@ -969,9 +1040,9 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 
 <p>获取结果集行数 </p>
 <dl class="section return"><dt>返回</dt><dd>始终返回0 </dd></dl>
-<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000003">弃用</a></b></dt><dd>SQLite无法高效获取行数，建议使用COUNT(*) </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000007">弃用</a></b></dt><dd>SQLite无法高效获取行数，建议使用COUNT(*) </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00081">81</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00104">104</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="structidb__tb__result.html#aabb704cab81e3fdae2849fcdd6d73c75">idb_tb_result::row_count()</a>.</p>
 

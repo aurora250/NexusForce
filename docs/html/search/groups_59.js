@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['符号操作_0',['符号操作',['../group___sign_manipulation.html',1,'']]]
+  ['正则表达式_0',['正则表达式',['../group___regex.html',1,'']]]
 ];

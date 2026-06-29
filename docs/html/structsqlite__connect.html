@@ -100,7 +100,7 @@ $(function(){initNavTree('structsqlite__connect.html','','structsqlite__connect-
 <div class="dynheader">
 类 sqlite_connect 继承关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structsqlite__connect__inherit__graph.svg" width="120" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structsqlite__connect__inherit__graph.svg" width="180" height="278"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -116,8 +116,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memitem:a60bba60200444b0b647d26e342144509" id="r_a60bba60200444b0b647d26e342144509"><td class="memItemLeft"><a id="a60bba60200444b0b647d26e342144509" name="a60bba60200444b0b647d26e342144509"></a>
 void&#160;</td><td class="memItemRight"><b>close</b> () noexcept override</td></tr>
 <tr class="memdesc:a60bba60200444b0b647d26e342144509"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭数据库连接 <br /></td></tr>
-<tr class="memitem:a58dd0462e320b686b56efccafac5b767" id="r_a58dd0462e320b686b56efccafac5b767"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a58dd0462e320b686b56efccafac5b767">set_character_set</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;encoding) const override</td></tr>
-<tr class="memdesc:a58dd0462e320b686b56efccafac5b767"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符集  <br /></td></tr>
+<tr class="memitem:af502ad1f11bb8dfcb53b2f1f379244d5" id="r_af502ad1f11bb8dfcb53b2f1f379244d5"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#af502ad1f11bb8dfcb53b2f1f379244d5">set_character_set</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;encoding) override</td></tr>
+<tr class="memdesc:af502ad1f11bb8dfcb53b2f1f379244d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符集  <br /></td></tr>
 <tr class="memitem:a525f4b9ac7de9d1222c98f357c12ab7f" id="r_a525f4b9ac7de9d1222c98f357c12ab7f"><td class="memItemLeft"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#a525f4b9ac7de9d1222c98f357c12ab7f">get_character_set</a> () const override</td></tr>
 <tr class="memdesc:a525f4b9ac7de9d1222c98f357c12ab7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前字符集  <br /></td></tr>
 <tr class="memitem:a8731bf8800a15151e22de0c9ff7aecaf" id="r_a8731bf8800a15151e22de0c9ff7aecaf"><td class="memItemLeft"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#a8731bf8800a15151e22de0c9ff7aecaf">get_error</a> () const override</td></tr>
@@ -140,6 +140,12 @@ void&#160;</td><td class="memItemRight"><b>close</b> () noexcept override</td></
 <tr class="memitem:a5fe328d4bdf863d226d7065daf2cc56b inherit pub_methods_structidb__connect" id="r_a5fe328d4bdf863d226d7065daf2cc56b"><td class="memItemLeft"><a class="el" href="structidb__connect.html#ab9be909e9ecc1db9cbcc28186de35c95">clock_type</a>&#160;</td><td class="memItemRight"><a class="el" href="structidb__connect.html#a5fe328d4bdf863d226d7065daf2cc56b">get_alive</a> () const noexcept</td></tr>
 <tr class="memdesc:a5fe328d4bdf863d226d7065daf2cc56b inherit pub_methods_structidb__connect"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取连接空闲时间  <br /></td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pro-attribs" class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected 属性</h2></td></tr>
+<tr class="memitem:acd145309c79e48c14d43b42788f2d459" id="r_acd145309c79e48c14d43b42788f2d459"><td class="memItemLeft"><a id="acd145309c79e48c14d43b42788f2d459" name="acd145309c79e48c14d43b42788f2d459"></a>
+::sqlite3 *&#160;</td><td class="memItemRight"><b>link_</b> = nullptr</td></tr>
+<tr class="memdesc:acd145309c79e48c14d43b42788f2d459"><td class="mdescLeft">&#160;</td><td class="mdescRight">SQLite数据库连接句柄 <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 额外继承的成员函数</h2></td></tr>
 <tr class="inherit_header pub_types_structidb__connect"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_structidb__connect')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 类型 继承自 <a class="el" href="structidb__connect.html">idb_connect</a></td></tr>
@@ -160,7 +166,7 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 </ul>
 <dl class="section note"><dt>注解</dt><dd>SQLite连接是文件级别的，database字段指定数据库文件路径。 支持内存数据库（":memory:"）。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sqlite__connect_8hpp_source.html">sqlite_connect.hpp</a> 第 <a class="el" href="sqlite__connect_8hpp_source.html#l00045">45</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sqlite__connect_8hpp_source.html">sqlite_connect.hpp</a> 第 <a class="el" href="sqlite__connect_8hpp_source.html#l00051">51</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a7f13228bcda4e91b809481828881462a" name="a7f13228bcda4e91b809481828881462a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7f13228bcda4e91b809481828881462a">&#9670;&#160;</a></span>sqlite_connect()</h2>
@@ -188,7 +194,9 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 <p>默认构造函数 </p>
 <p>创建内存数据库连接（临时数据库）。 </p>
 
-<p class="definition">在文件 <a class="el" href="sqlite__connect_8hpp_source.html">sqlite_connect.hpp</a> 第 <a class="el" href="sqlite__connect_8hpp_source.html#l00056">56</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sqlite__connect_8hpp_source.html">sqlite_connect.hpp</a> 第 <a class="el" href="sqlite__connect_8hpp_source.html#l00083">83</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="sqlite__connect_8hpp_source.html#l00070">link_</a>.</p>
 
 </div>
 </div>
@@ -218,7 +226,7 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 <p>析构函数 </p>
 <p>自动关闭数据库连接。 </p>
 
-<p class="definition">在文件 <a class="el" href="sqlite__connect_8hpp_source.html">sqlite_connect.hpp</a> 第 <a class="el" href="sqlite__connect_8hpp_source.html#l00063">63</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sqlite__connect_8hpp_source.html">sqlite_connect.hpp</a> 第 <a class="el" href="sqlite__connect_8hpp_source.html#l00090">90</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="structidb__connect.html#a689ce6c9a44cdc602e6006615e949e19">idb_connect::close()</a>.</p>
 
@@ -290,7 +298,9 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 
 <p>实现了 <a class="el" href="structidb__connect.html#a05b7b473cdd13c18f5b44c83e09c082d">idb_connect</a>.</p>
 
-<p class="definition">在文件 <a class="el" href="sqlite__connect_8hpp_source.html">sqlite_connect.hpp</a> 第 <a class="el" href="sqlite__connect_8hpp_source.html#l00139">139</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sqlite__connect_8hpp_source.html">sqlite_connect.hpp</a> 第 <a class="el" href="sqlite__connect_8hpp_source.html#l00204">204</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="sqlite__connect_8hpp_source.html#l00070">link_</a>.</p>
 
 </div>
 </div>
@@ -356,11 +366,11 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 
 <p>实现了 <a class="el" href="structidb__connect.html#a150e2a5aac988b6abb97f9444042d06e">idb_connect</a>.</p>
 
-<p class="definition">在文件 <a class="el" href="sqlite__connect_8hpp_source.html">sqlite_connect.hpp</a> 第 <a class="el" href="sqlite__connect_8hpp_source.html#l00112">112</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sqlite__connect_8hpp_source.html">sqlite_connect.hpp</a> 第 <a class="el" href="sqlite__connect_8hpp_source.html#l00177">177</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="sqlite__connect_8hpp_source.html#l00112">get_errno()</a>.</p>
+<p class="reference">引用了 <a class="el" href="sqlite__connect_8hpp_source.html#l00177">get_errno()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="sqlite__connect_8hpp_source.html#l00112">get_errno()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="sqlite__connect_8hpp_source.html#l00177">get_errno()</a>.</p>
 
 </div>
 </div>
@@ -537,8 +547,8 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 
 </div>
 </div>
-<a id="a58dd0462e320b686b56efccafac5b767" name="a58dd0462e320b686b56efccafac5b767"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a58dd0462e320b686b56efccafac5b767">&#9670;&#160;</a></span>set_character_set()</h2>
+<a id="af502ad1f11bb8dfcb53b2f1f379244d5" name="af502ad1f11bb8dfcb53b2f1f379244d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af502ad1f11bb8dfcb53b2f1f379244d5">&#9670;&#160;</a></span>set_character_set()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -550,7 +560,7 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
           <td class="memname">bool sqlite_connect::set_character_set </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>encoding</em></span></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
   </td>
@@ -569,11 +579,11 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 </dl>
 <dl class="section return"><dt>返回</dt><dd>设置成功返回true </dd></dl>
 
-<p>实现了 <a class="el" href="structidb__connect.html#a9f0b407a683b19bee646271a19356aad">idb_connect</a>.</p>
+<p>实现了 <a class="el" href="structidb__connect.html#a7787680de395dc737bd6b14978488854">idb_connect</a>.</p>
 
-<p class="reference">引用了 <a class="el" href="#a58dd0462e320b686b56efccafac5b767">set_character_set()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#af502ad1f11bb8dfcb53b2f1f379244d5">set_character_set()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="#a58dd0462e320b686b56efccafac5b767">set_character_set()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="#af502ad1f11bb8dfcb53b2f1f379244d5">set_character_set()</a>.</p>
 
 </div>
 </div>

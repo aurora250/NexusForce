@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['管道_0',['管道',['../group___pipe.html',1,'']]]
+  ['稀疏向量_0',['稀疏向量',['../group___sparse_vector.html',1,'']]]
 ];

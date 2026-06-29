@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['百分号编码规则_0',['百分号编码规则',['../structurl.html#percent_encoding',1,'']]]
+  ['版本细节_0',['版本细节',['../group___u_u_i_d.html#version_details',1,'']]]
 ];

@@ -5,6 +5,8 @@
     <title>数据库</title>
     <innerclass refid="classdatabase__pool" prot="public">database_pool</innerclass>
     <innerclass refid="structdb__config" prot="public">db_config</innerclass>
+    <innerclass refid="classscope__transaction" prot="public">scope_transaction</innerclass>
+    <innerclass refid="structsql__connect__base" prot="public">sql_connect_base</innerclass>
     <innergroup refid="group___database_interface">数据库接口</innergroup>
     <innergroup refid="group___my_s_q_l">MySQL</innergroup>
     <innergroup refid="group___postgre_s_q_l">PostgreSQL</innergroup>
@@ -56,6 +58,43 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/db/db_config.hpp" line="69" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/db_config.hpp" bodystart="69" bodyend="82"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___database_1gaa1e47283613e08a62f8d0d9c91934d54" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Connect</type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classscope__transaction" kindref="compound">scope_transaction</ref>&lt; Connect &gt;</type>
+        <definition>scope_transaction&lt; Connect &gt; make_transaction</definition>
+        <argsstring>(Connect &amp;conn)</argsstring>
+        <name>make_transaction</name>
+        <param>
+          <type>Connect &amp;</type>
+          <declname>conn</declname>
+        </param>
+        <briefdescription>
+<para>事务守卫的便捷构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>conn</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数据库连接引用 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="classscope__transaction" kindref="compound">scope_transaction</ref> 对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" line="147" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/scope_transaction.hpp" bodystart="147" bodyend="149"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

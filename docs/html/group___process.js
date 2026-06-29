@@ -42,6 +42,11 @@ var group___process =
         [ "exited", "classprocess.html#a372470dfa6edcf9a6b8c9dff60738dc1ab854d4deac1316c8d36e519393f3f2ae", null ],
         [ "unknown", "classprocess.html#a372470dfa6edcf9a6b8c9dff60738dc1aad921d60486366258809553a3db49a4a", null ]
       ] ],
+      [ "std_stream", "classprocess.html#a8a947a3c9361605ad811483b7e5be251", [
+        [ "stdin", "classprocess.html#a8a947a3c9361605ad811483b7e5be251a3c6c257ed29622500badf6cc7741375c", null ],
+        [ "stdout", "classprocess.html#a8a947a3c9361605ad811483b7e5be251a64322f5f3ff7f9f717279e1b017a997e", null ],
+        [ "stderr", "classprocess.html#a8a947a3c9361605ad811483b7e5be251a41be535153c4b535bc9d0a610d3bd66b", null ]
+      ] ],
       [ "process", "classprocess.html#afd5c4dd719317354311b87ef18c5ea8b", null ],
       [ "~process", "classprocess.html#a554113f7890a643f4434695ced702924", null ],
       [ "process", "classprocess.html#acf7b6c831eb297ee42a2b980517edf0d", null ],
@@ -57,7 +62,12 @@ var group___process =
       [ "set_capture_stderr", "classprocess.html#ab5d86f0c3462903994e14106252ce8b8", null ],
       [ "set_capture_stdout", "classprocess.html#a44a52ee3fa64b6c7da293e27ee2e6071", null ],
       [ "set_env", "classprocess.html#aaa97f4fb9c28902a0c740102a632add3", null ],
+      [ "set_external_stderr", "classprocess.html#a14bbefc0477f665d2dc1d26259cf4f37", null ],
+      [ "set_external_stdin", "classprocess.html#a3ee83c9f59fb7f7b5ee9117e5eb47a64", null ],
+      [ "set_external_stdout", "classprocess.html#a36afd3d624b1950ce79c876ea7df3527", null ],
+      [ "set_stderr_file", "classprocess.html#a956c24d2d24118f127162c52d9630fc5", null ],
       [ "set_stdin_data", "classprocess.html#a2f25c2fdd0fea8b01e9b9d025bd95ba8", null ],
+      [ "set_stdout_file", "classprocess.html#a1feccfe84b73d2a9a0f6dcb6a46bffe3", null ],
       [ "set_work_dir", "classprocess.html#a83e591137cd9379e480bbe217381e64a", null ],
       [ "start", "classprocess.html#a71e9006061494f2017d16304a6e0125d", null ],
       [ "start_elevated", "classprocess.html#a08dd4dadc59859b2488faf41b4b486a1", null ],

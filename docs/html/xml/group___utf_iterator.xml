@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="group___utf_iterator" kind="group">
+    <compoundname>UtfIterator</compoundname>
+    <title>UTF-8码点迭代器</title>
+    <innerclass refid="classutf8__iterator" prot="public">utf8_iterator</innerclass>
+    <innerclass refid="classutf8__range" prot="public">utf8_range</innerclass>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___utf_iterator_1ga799e6a55dd599abbbb987c78b0cfdfcb" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classutf8__range" kindref="compound">utf8_range</ref></type>
+        <definition>utf8_range utf8_view</definition>
+        <argsstring>(const string_view sv) noexcept</argsstring>
+        <name>utf8_view</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <briefdescription>
+<para>创建UTF-8码点遍历范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>UTF-8码点范围对象</para>
+</simplesect>
+用法示例： <programlisting><codeline><highlight class="normal">for<sp/>(codepoint<sp/>cp<sp/>:<sp/>utf8_view(&quot;Hello<sp/>世界&quot;))<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>if<sp/>(cp.is_ascii())<sp/>{<sp/>...<sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/utf_iterator.hpp" line="176" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/utf_iterator.hpp" bodystart="176" bodyend="176"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>UTF-8字符串的码点级遍历支持 </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

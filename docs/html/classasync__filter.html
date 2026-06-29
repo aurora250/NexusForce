@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: async_filter类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classasync__filter.html','','classasync__filter-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">async_filter类 参考<div class="ingroups"><a class="el" href="group___h_t_t_p.html">HTTP</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>异步过滤器基类（回调模式）  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="async__filter_8hpp_source.html">async_filter.hpp</a>&gt;</code></p>
+<div class="dynheader">
+类 async_filter 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classasync__filter__inherit__graph.svg" width="99" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a05657152079a28f3776bb3f0028bf348" id="r_a05657152079a28f3776bb3f0028bf348"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a05657152079a28f3776bb3f0028bf348">next_callback</a> = <a class="el" href="classfunction.html">function</a>&lt;void(bool should_continue)&gt;</td></tr>
+<tr class="memdesc:a05657152079a28f3776bb3f0028bf348"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步继续回调  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a930a6987d62ee544189522d30f9c1537" id="r_a930a6987d62ee544189522d30f9c1537"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#a930a6987d62ee544189522d30f9c1537">pre_filter_async</a> (<a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a> &amp;response, http_context &amp;ctx, <a class="el" href="#a05657152079a28f3776bb3f0028bf348">next_callback</a> <a class="el" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>)</td></tr>
+<tr class="memdesc:a930a6987d62ee544189522d30f9c1537"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步预过滤  <br /></td></tr>
+<tr class="memitem:ae8709a34d9ae5687d03c46a5d80f8ede" id="r_ae8709a34d9ae5687d03c46a5d80f8ede"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="#ae8709a34d9ae5687d03c46a5d80f8ede">post_filter_async</a> (<a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a> &amp;response, http_context &amp;ctx, <a class="el" href="#a05657152079a28f3776bb3f0028bf348">next_callback</a> <a class="el" href="group___iterator_operation.html#ga81a6fcf5c05367caa72c5e1e26ffa38f">next</a>)</td></tr>
+<tr class="memdesc:ae8709a34d9ae5687d03c46a5d80f8ede"><td class="mdescLeft">&#160;</td><td class="mdescRight">异步后过滤  <br /></td></tr>
+<tr class="inherit_header pub_methods_classhttp__filter"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classhttp__filter')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="classhttp__filter.html">http_filter</a></td></tr>
+<tr class="memitem:a00ee11e4e2b0c596d6f99cbafec3ddad inherit pub_methods_classhttp__filter" id="r_a00ee11e4e2b0c596d6f99cbafec3ddad"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="classhttp__filter.html#a00ee11e4e2b0c596d6f99cbafec3ddad">do_filter</a> (<a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a> &amp;response)=0</td></tr>
+<tr class="memdesc:a00ee11e4e2b0c596d6f99cbafec3ddad inherit pub_methods_classhttp__filter"><td class="mdescLeft">&#160;</td><td class="mdescRight">核心过滤方法  <br /></td></tr>
+<tr class="memitem:a9563cab58ce1b4217008e55b37b022f2 inherit pub_methods_classhttp__filter" id="r_a9563cab58ce1b4217008e55b37b022f2"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="classhttp__filter.html#a9563cab58ce1b4217008e55b37b022f2">pre_filter</a> (<a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a> &amp;response)</td></tr>
+<tr class="memdesc:a9563cab58ce1b4217008e55b37b022f2 inherit pub_methods_classhttp__filter"><td class="mdescLeft">&#160;</td><td class="mdescRight">预处理方法  <br /></td></tr>
+<tr class="memitem:acaaaf04f0a1520c29312b76336615aec inherit pub_methods_classhttp__filter" id="r_acaaaf04f0a1520c29312b76336615aec"><td class="memItemLeft">virtual void&#160;</td><td class="memItemRight"><a class="el" href="classhttp__filter.html#acaaaf04f0a1520c29312b76336615aec">post_filter</a> (<a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;request, <a class="el" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a> &amp;response)</td></tr>
+<tr class="memdesc:acaaaf04f0a1520c29312b76336615aec inherit pub_methods_classhttp__filter"><td class="mdescLeft">&#160;</td><td class="mdescRight">后处理方法  <br /></td></tr>
+<tr class="memitem:a72030f612655463f1f4ef9340c03f1ec inherit pub_methods_classhttp__filter" id="r_a72030f612655463f1f4ef9340c03f1ec"><td class="memItemLeft">virtual <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="classhttp__filter.html#a72030f612655463f1f4ef9340c03f1ec">name</a> () const</td></tr>
+<tr class="memdesc:a72030f612655463f1f4ef9340c03f1ec inherit pub_methods_classhttp__filter"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取过滤器名称  <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>异步过滤器基类（回调模式） </p>
+<p>扩展 http_filter，为需要异步 I/O 的中间件提供回调式异步接口。。</p>
+<p>使用流程：</p><ol type="1">
+<li>框架调用 pre_filter_async(request, response, context, next)</li>
+<li>过滤器执行异步操作</li>
+<li>完成时调用 next(true) 继续，或 next(false) 中断</li>
+</ol>
+<p>无异步过滤器时，http_router 走零开销同步路径。 </p>
+
+<p class="definition">在文件 <a class="el" href="async__filter_8hpp_source.html">async_filter.hpp</a> 第 <a class="el" href="async__filter_8hpp_source.html#l00031">31</a> 行定义.</p>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">成员类型定义说明</h2>
+<a id="a05657152079a28f3776bb3f0028bf348" name="a05657152079a28f3776bb3f0028bf348"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05657152079a28f3776bb3f0028bf348">&#9670;&#160;</a></span>next_callback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a05657152079a28f3776bb3f0028bf348">async_filter::next_callback</a> = <a class="el" href="classfunction.html">function</a>&lt;void(bool should_continue)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>异步继续回调 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">should_continue</td><td>true=继续到下一过滤器，false=中断并返回当前响应 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="async__filter_8hpp_source.html">async_filter.hpp</a> 第 <a class="el" href="async__filter_8hpp_source.html#l00037">37</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="ae8709a34d9ae5687d03c46a5d80f8ede" name="ae8709a34d9ae5687d03c46a5d80f8ede"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8709a34d9ae5687d03c46a5d80f8ede">&#9670;&#160;</a></span>post_filter_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void async_filter::post_filter_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">http_context &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a05657152079a28f3776bb3f0028bf348">next_callback</a></td>          <td class="paramname"><span class="paramname"><em>next</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>异步后过滤 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>HTTP请求 </td></tr>
+    <tr><td class="paramname">response</td><td>HTTP响应 </td></tr>
+    <tr><td class="paramname">ctx</td><td>请求上下文 </td></tr>
+    <tr><td class="paramname">next</td><td>完成时调用</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>默认实现直接调用 post_filter 并 next(true)。 </p>
+
+<p class="definition">在文件 <a class="el" href="async__filter_8hpp_source.html">async_filter.hpp</a> 第 <a class="el" href="async__filter_8hpp_source.html#l00066">66</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="iterator_8hpp_source.html#l00157">next()</a> , 以及 <a class="el" href="http__filter_8hpp_source.html#l00079">http_filter::post_filter()</a>.</p>
+
+</div>
+</div>
+<a id="a930a6987d62ee544189522d30f9c1537" name="a930a6987d62ee544189522d30f9c1537"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a930a6987d62ee544189522d30f9c1537">&#9670;&#160;</a></span>pre_filter_async()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void async_filter::pre_filter_async </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#gad666b052985d05dd7564c4fd573c4549">http_request</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>request</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___h_t_t_p.html#ga215ee924d62c42786a46d2d18421391a">http_response</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>response</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">http_context &amp;</td>          <td class="paramname"><span class="paramname"><em>ctx</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#a05657152079a28f3776bb3f0028bf348">next_callback</a></td>          <td class="paramname"><span class="paramname"><em>next</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>异步预过滤 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">request</td><td>HTTP请求 </td></tr>
+    <tr><td class="paramname">response</td><td>HTTP响应（可预设以中断处理） </td></tr>
+    <tr><td class="paramname">ctx</td><td>请求上下文（跨中间件数据传递） </td></tr>
+    <tr><td class="paramname">next</td><td>完成时调用 next(true) 继续或 next(false) 中断</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>默认实现直接调用 next(true)，等效于同步 pre_filter 返回 true。 </p>
+
+<p class="definition">在文件 <a class="el" href="async__filter_8hpp_source.html">async_filter.hpp</a> 第 <a class="el" href="async__filter_8hpp_source.html#l00048">48</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="iterator_8hpp_source.html#l00157">next()</a> , 以及 <a class="el" href="http__filter_8hpp_source.html#l00070">http_filter::pre_filter()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="async__filter_8hpp_source.html">async_filter.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classasync__filter.html">async_filter</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

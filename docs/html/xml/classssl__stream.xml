@@ -150,7 +150,7 @@ uintptr_t</definition>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="83" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="83" bodyend="83"/>
-        <references refid="classssl__stream_1ad2cdaf860512de64970b322f71be7e6e">reset</references>
+        <references refid="group___s_q_lite3_1ggaec2418c4d34710f16a33f7e4aba24ad1a86266ee937d97f812a8e57d22b62ee29" compoundref="sqlite__result_8hpp" startline="37">reset</references>
       </memberdef>
       <memberdef kind="function" id="classssl__stream_1a864a018f3ca93cfa3e42504f3588ade9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -225,7 +225,6 @@ uintptr_t</definition>
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="96" column="10"/>
-        <referencedby refid="classssl__stream_1a08bc78c38c699630bdfd08492fabadfd" compoundref="ssl__stream_8hpp" startline="83" endline="83">ssl_stream</referencedby>
       </memberdef>
       <memberdef kind="function" id="classssl__stream_1a9f63a0a0a510ba7bc733bce6b29fc0b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -671,6 +670,26 @@ uintptr_t</definition>
         <references refid="classssl__stream_1a782a9c43d8fe89be96f61c9115c8cc46">get_version</references>
         <referencedby refid="classssl__stream_1a782a9c43d8fe89be96f61c9115c8cc46">get_version</referencedby>
       </memberdef>
+      <memberdef kind="function" id="classssl__stream_1a391de2122472380eae5596d1d8406d9b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string ssl_stream::get_alpn_negotiated</definition>
+        <argsstring>() const</argsstring>
+        <name>get_alpn_negotiated</name>
+        <qualifiedname>ssl_stream::get_alpn_negotiated</qualifiedname>
+        <briefdescription>
+<para>获取ALPN协商的协议名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>协议名称字符串（如&quot;h2&quot;、&quot;http/1.1&quot;），未协商返回空字符串</para>
+</simplesect>
+返回TLS握手期间通过ALPN（Application-Layer Protocol Negotiation） 协商确定的应用层协议。需要在TLS握手（accept/connect）完成后调用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="237" column="13"/>
+        <references refid="classssl__stream_1a391de2122472380eae5596d1d8406d9b">get_alpn_negotiated</references>
+        <referencedby refid="classssl__stream_1a391de2122472380eae5596d1d8406d9b">get_alpn_negotiated</referencedby>
+      </memberdef>
       <memberdef kind="function" id="classssl__stream_1ad9087a1bcdb3b6e5a415ed7085760db9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
         <definition>const string &amp; ssl_stream::last_error</definition>
@@ -687,9 +706,9 @@ uintptr_t</definition>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="234" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="234" bodyend="234"/>
-        <references refid="classssl__stream_1ad9087a1bcdb3b6e5a415ed7085760db9" compoundref="ssl__stream_8hpp" startline="234" endline="234">last_error</references>
-        <referencedby refid="classssl__stream_1ad9087a1bcdb3b6e5a415ed7085760db9" compoundref="ssl__stream_8hpp" startline="234" endline="234">last_error</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="243" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="243" bodyend="243"/>
+        <references refid="classssl__stream_1ad9087a1bcdb3b6e5a415ed7085760db9" compoundref="ssl__stream_8hpp" startline="243" endline="243">last_error</references>
+        <referencedby refid="classssl__stream_1ad9087a1bcdb3b6e5a415ed7085760db9" compoundref="ssl__stream_8hpp" startline="243" endline="243">last_error</referencedby>
       </memberdef>
       <memberdef kind="function" id="classssl__stream_1a6c0f427b5a0876483cf8f0ed197c6329" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -707,8 +726,8 @@ uintptr_t</definition>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="240" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="240" bodyend="240"/>
-        <referencedby refid="classssl__stream_1a497091962274d5219c13b422e0254b50" compoundref="ssl__stream_8hpp" startline="246" endline="246">operator bool</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="249" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="249" bodyend="249"/>
+        <referencedby refid="classssl__stream_1a497091962274d5219c13b422e0254b50" compoundref="ssl__stream_8hpp" startline="255" endline="255">operator bool</referencedby>
       </memberdef>
       <memberdef kind="function" id="classssl__stream_1a497091962274d5219c13b422e0254b50" prot="public" static="no" const="yes" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -726,8 +745,8 @@ uintptr_t</definition>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="246" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="246" bodyend="246"/>
-        <references refid="classssl__stream_1a6c0f427b5a0876483cf8f0ed197c6329" compoundref="ssl__stream_8hpp" startline="240" endline="240">is_valid</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="255" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="255" bodyend="255"/>
+        <references refid="classssl__stream_1a6c0f427b5a0876483cf8f0ed197c6329" compoundref="ssl__stream_8hpp" startline="249" endline="249">is_valid</references>
       </memberdef>
       <memberdef kind="function" id="classssl__stream_1af84a4956442d157da2ea05e8b821562e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>::SSL *</type>
@@ -745,7 +764,7 @@ uintptr_t</definition>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="252" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="252" bodyend="252"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="261" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="261" bodyend="261"/>
       </memberdef>
       <memberdef kind="function" id="classssl__stream_1a399a00a02614e792a35f69bf11f241fd" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>::SSL *</type>
@@ -763,7 +782,7 @@ uintptr_t</definition>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="260" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="260" bodyend="260"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="269" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="269" bodyend="269"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -781,11 +800,12 @@ uintptr_t</definition>
 </listitem></itemizedlist>
 </para>
     </detaileddescription>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="35" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="35" bodyend="261"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" line="35" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/ssl/ssl_stream.hpp" bodystart="35" bodyend="270"/>
     <listofallmembers>
       <member refid="classssl__stream_1a8d50c0caaf302839aba7a8989a3fa875" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>accept</name></member>
       <member refid="classssl__stream_1a8e82ce0526198cc603022c76b73ad1e1" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>close</name></member>
       <member refid="classssl__stream_1a33c58ee785d4e58e80eaf07e73e27217" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>connect</name></member>
+      <member refid="classssl__stream_1a391de2122472380eae5596d1d8406d9b" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>get_alpn_negotiated</name></member>
       <member refid="classssl__stream_1a82e33ad7a2ed79e8a62282aac299ba14" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>get_cipher_name</name></member>
       <member refid="classssl__stream_1ab8f71a5a604d3472e79c381eccf2622c" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>get_peer_certificate</name></member>
       <member refid="classssl__stream_1a782a9c43d8fe89be96f61c9115c8cc46" prot="public" virt="non-virtual"><scope>ssl_stream</scope><name>get_version</name></member>

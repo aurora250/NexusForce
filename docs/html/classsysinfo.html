@@ -104,10 +104,16 @@ $(function(){initNavTree('classsysinfo.html','','classsysinfo-members'); });
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">系统底层信息  <a href="structsysinfo_1_1system__info.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:memory_5Finfo" id="r_memory_5Finfo"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsysinfo_1_1memory__info.html">memory_info</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">内存信息  <a href="structsysinfo_1_1memory__info.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:disk_5Finfo" id="r_disk_5Finfo"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsysinfo_1_1disk__info.html">disk_info</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">磁盘空间信息  <a href="structsysinfo_1_1disk__info.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:CPU_5Finfo" id="r_CPU_5Finfo"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsysinfo_1_1_c_p_u__info.html">CPU_info</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CPU信息  <a href="structsysinfo_1_1_c_p_u__info.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:os_5Fversion_5Finfo" id="r_os_5Fversion_5Finfo"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsysinfo_1_1os__version__info.html">os_version_info</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">操作系统版本信息  <a href="structsysinfo_1_1os__version__info.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:network_5Finterface" id="r_network_5Finterface"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsysinfo_1_1network__interface.html">network_interface</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">网络接口信息  <a href="structsysinfo_1_1network__interface.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:numa_5Fnode_5Finfo" id="r_numa_5Fnode_5Finfo"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsysinfo_1_1numa__node__info.html">numa_node_info</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">NUMA 节点信息  <a href="structsysinfo_1_1numa__node__info.html#details">更多...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public 类型</h2></td></tr>
@@ -141,6 +147,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a38b1558f84e3d0dec584ba243ee27d6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取操作系统版本信息  <br /></td></tr>
 <tr class="memitem:a263fc148efdf13bbca1b9923aba436a9" id="r_a263fc148efdf13bbca1b9923aba436a9"><td class="memItemLeft"><a class="el" href="#a5cb2bb37d607fada00bb5f2726727e63">architecture</a>&#160;</td><td class="memItemRight"><a class="el" href="#a263fc148efdf13bbca1b9923aba436a9">get_architecture</a> () const noexcept</td></tr>
 <tr class="memdesc:a263fc148efdf13bbca1b9923aba436a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取系统架构  <br /></td></tr>
+<tr class="memitem:a49edb3a8460ced595fe82684f179fe8e" id="r_a49edb3a8460ced595fe82684f179fe8e"><td class="memItemLeft">const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="structsysinfo_1_1numa__node__info.html">numa_node_info</a> &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a49edb3a8460ced595fe82684f179fe8e">get_numa_info</a> () const noexcept</td></tr>
+<tr class="memdesc:a49edb3a8460ced595fe82684f179fe8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取 NUMA 节点拓扑信息  <br /></td></tr>
 <tr class="memitem:ae4bc26b756f0201340e586d61ec1321f" id="r_ae4bc26b756f0201340e586d61ec1321f"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ae4bc26b756f0201340e586d61ec1321f">is_initialized</a> () const noexcept</td></tr>
 <tr class="memdesc:ae4bc26b756f0201340e586d61ec1321f"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否已初始化  <br /></td></tr>
 </table><table class="memberdecls">
@@ -152,6 +160,12 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a96c3ce9d36b77c0ac689072e4d8290d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前CPU使用率  <br /></td></tr>
 <tr class="memitem:aaa3de3f24697ecebf3cea3f89c92d807" id="r_aaa3de3f24697ecebf3cea3f89c92d807"><td class="memItemLeft">static <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#aaa3de3f24697ecebf3cea3f89c92d807">process_count</a> ()</td></tr>
 <tr class="memdesc:aaa3de3f24697ecebf3cea3f89c92d807"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前运行的进程数量  <br /></td></tr>
+<tr class="memitem:a493aae4ae80cbe076b32cb50cb9417cd" id="r_a493aae4ae80cbe076b32cb50cb9417cd"><td class="memItemLeft">static <a class="el" href="structsysinfo_1_1disk__info.html">disk_info</a>&#160;</td><td class="memItemRight"><a class="el" href="#a493aae4ae80cbe076b32cb50cb9417cd">get_disk_info</a> (const char *<a class="el" href="classpath.html">path</a>=nullptr)</td></tr>
+<tr class="memdesc:a493aae4ae80cbe076b32cb50cb9417cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取指定路径的磁盘空间信息  <br /></td></tr>
+<tr class="memitem:ab8749f020b676eeae4b862740022724f" id="r_ab8749f020b676eeae4b862740022724f"><td class="memItemLeft">static <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="structsysinfo_1_1network__interface.html">network_interface</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ab8749f020b676eeae4b862740022724f">network_interfaces</a> ()</td></tr>
+<tr class="memdesc:ab8749f020b676eeae4b862740022724f"><td class="mdescLeft">&#160;</td><td class="mdescRight">枚举所有网络接口  <br /></td></tr>
+<tr class="memitem:ad9a91b830ff1eda7f522114e6c9abf61" id="r_ad9a91b830ff1eda7f522114e6c9abf61"><td class="memItemLeft">static <a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad9a91b830ff1eda7f522114e6c9abf61">uptime_seconds</a> ()</td></tr>
+<tr class="memdesc:ad9a91b830ff1eda7f522114e6c9abf61"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取系统运行时间  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>系统信息单例类 </p>
@@ -208,7 +222,7 @@ Public 成员函数</h2></td></tr>
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00131">131</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00167">167</a> 行定义.</p>
 
 </div>
 </div>
@@ -267,7 +281,7 @@ Public 成员函数</h2></td></tr>
 <p>获取系统架构 </p>
 <dl class="section return"><dt>返回</dt><dd>架构枚举值 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00218">218</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00269">269</a> 行定义.</p>
 
 </div>
 </div>
@@ -297,7 +311,41 @@ Public 成员函数</h2></td></tr>
 <p>获取CPU信息 </p>
 <dl class="section return"><dt>返回</dt><dd>CPU信息结构引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00206">206</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00257">257</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a493aae4ae80cbe076b32cb50cb9417cd" name="a493aae4ae80cbe076b32cb50cb9417cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a493aae4ae80cbe076b32cb50cb9417cd">&#9670;&#160;</a></span>get_disk_info()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structsysinfo_1_1disk__info.html">disk_info</a> sysinfo::get_disk_info </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>path</em></span><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取指定路径的磁盘空间信息 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>文件系统路径，若为 nullptr 则自动获取当前工作目录所在磁盘或根目录 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>磁盘信息 </dd></dl>
 
 </div>
 </div>
@@ -327,7 +375,38 @@ Public 成员函数</h2></td></tr>
 <p>获取内存信息 </p>
 <dl class="section return"><dt>返回</dt><dd>内存信息结构引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00200">200</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00251">251</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a49edb3a8460ced595fe82684f179fe8e" name="a49edb3a8460ced595fe82684f179fe8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49edb3a8460ced595fe82684f179fe8e">&#9670;&#160;</a></span>get_numa_info()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="structsysinfo_1_1numa__node__info.html">numa_node_info</a> &gt; &amp; sysinfo::get_numa_info </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取 NUMA 节点拓扑信息 </p>
+<dl class="section return"><dt>返回</dt><dd>NUMA 节点信息列表</dd></dl>
+<p>在支持 NUMA 的系统中返回所有 NUMA 节点的拓扑信息。 不支持 NUMA 的系统返回空列表。 </p>
+
+<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00278">278</a> 行定义.</p>
 
 </div>
 </div>
@@ -357,7 +436,7 @@ Public 成员函数</h2></td></tr>
 <p>获取操作系统版本信息 </p>
 <dl class="section return"><dt>返回</dt><dd>操作系统版本信息结构引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00212">212</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00263">263</a> 行定义.</p>
 
 </div>
 </div>
@@ -387,7 +466,7 @@ Public 成员函数</h2></td></tr>
 <p>获取系统底层信息 </p>
 <dl class="section return"><dt>返回</dt><dd>系统信息结构引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00194">194</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00245">245</a> 行定义.</p>
 
 </div>
 </div>
@@ -417,11 +496,11 @@ Public 成员函数</h2></td></tr>
 <p>获取单例实例 </p>
 <dl class="section return"><dt>返回</dt><dd>系统信息实例引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00173">173</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00224">224</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="sysinfo_8hpp_source.html#l00173">instance()</a>.</p>
+<p class="reference">引用了 <a class="el" href="sysinfo_8hpp_source.html#l00224">instance()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="sysinfo_8hpp_source.html#l00173">instance()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="sysinfo_8hpp_source.html#l00224">instance()</a>.</p>
 
 </div>
 </div>
@@ -451,9 +530,37 @@ Public 成员函数</h2></td></tr>
 <p>检查是否已初始化 </p>
 <dl class="section return"><dt>返回</dt><dd>是否已成功初始化 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00224">224</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="sysinfo_8hpp_source.html">sysinfo.hpp</a> 第 <a class="el" href="sysinfo_8hpp_source.html#l00284">284</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
+
+</div>
+</div>
+<a id="ab8749f020b676eeae4b862740022724f" name="ab8749f020b676eeae4b862740022724f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8749f020b676eeae4b862740022724f">&#9670;&#160;</a></span>network_interfaces()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="structsysinfo_1_1network__interface.html">network_interface</a> &gt; sysinfo::network_interfaces </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>枚举所有网络接口 </p>
+<dl class="section return"><dt>返回</dt><dd>网络接口信息列表 </dd></dl>
 
 </div>
 </div>
@@ -502,6 +609,34 @@ Public 成员函数</h2></td></tr>
 
 <p>刷新系统信息 </p>
 <p>重新收集所有系统信息，更新缓存的数据。 </p>
+
+</div>
+</div>
+<a id="ad9a91b830ff1eda7f522114e6c9abf61" name="ad9a91b830ff1eda7f522114e6c9abf61"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad9a91b830ff1eda7f522114e6c9abf61">&#9670;&#160;</a></span>uptime_seconds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> sysinfo::uptime_seconds </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取系统运行时间 </p>
+<dl class="section return"><dt>返回</dt><dd>系统启动以来的秒数 </dd></dl>
 
 </div>
 </div>

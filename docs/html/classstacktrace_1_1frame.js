@@ -6,5 +6,7 @@ var classstacktrace_1_1frame =
     [ "name", "classstacktrace_1_1frame.html#a5f738740a9f5021a4275554ce43760ba", null ],
     [ "operator!=", "classstacktrace_1_1frame.html#a342161fc45a15fde8c7327c5fca3816a", null ],
     [ "operator==", "classstacktrace_1_1frame.html#a283204cdf8393472eb6da46966df7d5e", null ],
+    [ "source_file", "classstacktrace_1_1frame.html#a3f656d913ec514edbe8969b7a3df7e8c", null ],
+    [ "source_line", "classstacktrace_1_1frame.html#aff9f15c29668c5079087c4851aa6d6a5", null ],
     [ "to_string", "classstacktrace_1_1frame.html#a788a346c2924b11f801009e29c951f97", null ]
 ];

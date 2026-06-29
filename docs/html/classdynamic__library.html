@@ -98,10 +98,28 @@ $(function(){initNavTree('classdynamic__library.html','','classdynamic__library-
 
 <p><code>#include &lt;<a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:abc379ef4c782709b6329f3f41fb2a1f4" id="r_abc379ef4c782709b6329f3f41fb2a1f4"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#abc379ef4c782709b6329f3f41fb2a1f4">load_mode</a> : int { <br />
+&#160;&#160;<a class="el" href="#abc379ef4c782709b6329f3f41fb2a1f4a172b03053216c6158fe380805998ad6c">default_</a> = 0
+, <a class="el" href="#abc379ef4c782709b6329f3f41fb2a1f4a0ffe34b4e04c2b282c5a388b1ad8aa7a">lazy</a> = 1 &lt;&lt; 0
+, <a class="el" href="#abc379ef4c782709b6329f3f41fb2a1f4a97bc592b27a9ada2d9a4bb418ed0ebed">now</a> = 1 &lt;&lt; 1
+, <a class="el" href="#abc379ef4c782709b6329f3f41fb2a1f4a9c70933aff6b2a6d08c687a6cbb6b765">global</a> = 1 &lt;&lt; 2
+, <br />
+&#160;&#160;<a class="el" href="#abc379ef4c782709b6329f3f41fb2a1f4af5ddaf0ca7929578b408c909429f68f2">local</a> = 1 &lt;&lt; 3
+, <a class="el" href="#abc379ef4c782709b6329f3f41fb2a1f4ad8fd587ca0ea9894c84dc614e0e2aa0e">deep_bind</a> = 1 &lt;&lt; 4
+<br />
+ }</td></tr>
+<tr class="memdesc:abc379ef4c782709b6329f3f41fb2a1f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">动态库加载模式  <a href="#abc379ef4c782709b6329f3f41fb2a1f4">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
+<tr class="memitem:ac1d9397f2ebc02c31dffbded406c9880" id="r_ac1d9397f2ebc02c31dffbded406c9880"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac1d9397f2ebc02c31dffbded406c9880">dynamic_library</a> () noexcept=default</td></tr>
+<tr class="memdesc:ac1d9397f2ebc02c31dffbded406c9880"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
 <tr class="memitem:a31bb6aaaff7d126a8a1db3b73498d3f8" id="r_a31bb6aaaff7d126a8a1db3b73498d3f8"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a31bb6aaaff7d126a8a1db3b73498d3f8">dynamic_library</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> pth)</td></tr>
 <tr class="memdesc:a31bb6aaaff7d126a8a1db3b73498d3f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数，打开指定的动态库  <br /></td></tr>
+<tr class="memitem:a8cce22a852fe2d2a9dfa24cab8de97d7" id="r_a8cce22a852fe2d2a9dfa24cab8de97d7"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a8cce22a852fe2d2a9dfa24cab8de97d7">dynamic_library</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> pth, <a class="el" href="#abc379ef4c782709b6329f3f41fb2a1f4">load_mode</a> mode)</td></tr>
+<tr class="memdesc:a8cce22a852fe2d2a9dfa24cab8de97d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">以指定的模式打开动态库  <br /></td></tr>
 <tr class="memitem:ad02ef87854cbd93532937eacf09e4a35" id="r_ad02ef87854cbd93532937eacf09e4a35"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad02ef87854cbd93532937eacf09e4a35">dynamic_library</a> (<a class="el" href="classdynamic__library.html">dynamic_library</a> &amp;&amp;other) noexcept</td></tr>
 <tr class="memdesc:ad02ef87854cbd93532937eacf09e4a35"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
 <tr class="memitem:a8547e38412ac7c6ea7995e3d98ec6f40" id="r_a8547e38412ac7c6ea7995e3d98ec6f40"><td class="memItemLeft"><a class="el" href="classdynamic__library.html">dynamic_library</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a8547e38412ac7c6ea7995e3d98ec6f40">operator=</a> (<a class="el" href="classdynamic__library.html">dynamic_library</a> &amp;&amp;other) noexcept</td></tr>
@@ -122,15 +140,101 @@ void&#160;</td><td class="memItemRight"><b>unload</b> ()</td></tr>
 <tr class="memdesc:af280ac54a3962212e038f97f37baab0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取原生句柄  <br /></td></tr>
 <tr class="memitem:aff392743b89e8c2d66b3f21360bd377c" id="r_aff392743b89e8c2d66b3f21360bd377c"><td class="memItemLeft">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#aff392743b89e8c2d66b3f21360bd377c">path</a> () const noexcept</td></tr>
 <tr class="memdesc:aff392743b89e8c2d66b3f21360bd377c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取库文件路径  <br /></td></tr>
+<tr class="memitem:a9f2d57d27f0623b6c1014f20e1ff6dd8" id="r_a9f2d57d27f0623b6c1014f20e1ff6dd8"><td class="memItemLeft"><a class="el" href="#abc379ef4c782709b6329f3f41fb2a1f4">load_mode</a>&#160;</td><td class="memItemRight"><a class="el" href="#a9f2d57d27f0623b6c1014f20e1ff6dd8">get_load_mode</a> () const noexcept</td></tr>
+<tr class="memdesc:a9f2d57d27f0623b6c1014f20e1ff6dd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前加载模式  <br /></td></tr>
+<tr class="memitem:aeb39e15e9198ec9fd2cc5f85471eb3ac" id="r_aeb39e15e9198ec9fd2cc5f85471eb3ac"><td class="memItemLeft"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aeb39e15e9198ec9fd2cc5f85471eb3ac">list_symbols</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;name_filter=&quot;&quot;) const</td></tr>
+<tr class="memdesc:aeb39e15e9198ec9fd2cc5f85471eb3ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">列出动态库中的符号  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:a1d740a9b86108084f2b507f1813570cd" id="r_a1d740a9b86108084f2b507f1813570cd"><td class="memItemLeft">static <a class="el" href="classdynamic__library.html">dynamic_library</a>&#160;</td><td class="memItemRight"><a class="el" href="#a1d740a9b86108084f2b507f1813570cd">load_self</a> ()</td></tr>
+<tr class="memdesc:a1d740a9b86108084f2b507f1813570cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">加载自身（当前进程可执行文件）  <br /></td></tr>
+<tr class="memitem:a10c5f60bc497a6966dee3ac4dd7dc821" id="r_a10c5f60bc497a6966dee3ac4dd7dc821"><td class="memItemLeft">static <a class="el" href="classdynamic__library.html">dynamic_library</a>&#160;</td><td class="memItemRight"><a class="el" href="#a10c5f60bc497a6966dee3ac4dd7dc821">load_by_name</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;<a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>, <a class="el" href="#abc379ef4c782709b6329f3f41fb2a1f4">load_mode</a> mode=<a class="el" href="#abc379ef4c782709b6329f3f41fb2a1f4a172b03053216c6158fe380805998ad6c">load_mode::default_</a>)</td></tr>
+<tr class="memdesc:a10c5f60bc497a6966dee3ac4dd7dc821"><td class="mdescLeft">&#160;</td><td class="mdescRight">按名称加载动态库  <br /></td></tr>
+<tr class="memitem:aa3d13b1ef1b63e7b2bce197ec6a49743" id="r_aa3d13b1ef1b63e7b2bce197ec6a49743"><td class="memItemLeft">static <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa3d13b1ef1b63e7b2bce197ec6a49743">program_location</a> ()</td></tr>
+<tr class="memdesc:aa3d13b1ef1b63e7b2bce197ec6a49743"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前程序的可执行文件路径  <br /></td></tr>
+<tr class="memitem:aa3c2f78217e471cd2314befd86f0ca4f" id="r_aa3c2f78217e471cd2314befd86f0ca4f"><td class="memItemLeft">static <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa3c2f78217e471cd2314befd86f0ca4f">symbol_location</a> (void *symbol_ptr)</td></tr>
+<tr class="memdesc:aa3c2f78217e471cd2314befd86f0ca4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取指定符号所在的动态库路径  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>动态链接库加载器 </p>
 <p>支持动态库的加载、卸载和符号解析操作。 </p>
 
 <p class="definition">在文件 <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a> 第 <a class="el" href="dynamic__library_8hpp_source.html#l00050">50</a> 行定义.</p>
-</div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
+<a id="abc379ef4c782709b6329f3f41fb2a1f4" name="abc379ef4c782709b6329f3f41fb2a1f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc379ef4c782709b6329f3f41fb2a1f4">&#9670;&#160;</a></span>load_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#abc379ef4c782709b6329f3f41fb2a1f4">dynamic_library::load_mode</a> : int</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>动态库加载模式 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="abc379ef4c782709b6329f3f41fb2a1f4a172b03053216c6158fe380805998ad6c" name="abc379ef4c782709b6329f3f41fb2a1f4a172b03053216c6158fe380805998ad6c"></a>default_&#160;</td><td class="fielddoc"><p>默认模式（惰性解析，本地符号可见性） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="abc379ef4c782709b6329f3f41fb2a1f4a0ffe34b4e04c2b282c5a388b1ad8aa7a" name="abc379ef4c782709b6329f3f41fb2a1f4a0ffe34b4e04c2b282c5a388b1ad8aa7a"></a>lazy&#160;</td><td class="fielddoc"><p>惰性符号解析 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="abc379ef4c782709b6329f3f41fb2a1f4a97bc592b27a9ada2d9a4bb418ed0ebed" name="abc379ef4c782709b6329f3f41fb2a1f4a97bc592b27a9ada2d9a4bb418ed0ebed"></a>now&#160;</td><td class="fielddoc"><p>立即符号解析 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="abc379ef4c782709b6329f3f41fb2a1f4a9c70933aff6b2a6d08c687a6cbb6b765" name="abc379ef4c782709b6329f3f41fb2a1f4a9c70933aff6b2a6d08c687a6cbb6b765"></a>global&#160;</td><td class="fielddoc"><p>全局符号可见性 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="abc379ef4c782709b6329f3f41fb2a1f4af5ddaf0ca7929578b408c909429f68f2" name="abc379ef4c782709b6329f3f41fb2a1f4af5ddaf0ca7929578b408c909429f68f2"></a>local&#160;</td><td class="fielddoc"><p>本地符号可见性 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="abc379ef4c782709b6329f3f41fb2a1f4ad8fd587ca0ea9894c84dc614e0e2aa0e" name="abc379ef4c782709b6329f3f41fb2a1f4ad8fd587ca0ea9894c84dc614e0e2aa0e"></a>deep_bind&#160;</td><td class="fielddoc"><p>深层绑定 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a> 第 <a class="el" href="dynamic__library_8hpp_source.html#l00056">56</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
+<a id="ac1d9397f2ebc02c31dffbded406c9880" name="ac1d9397f2ebc02c31dffbded406c9880"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1d9397f2ebc02c31dffbded406c9880">&#9670;&#160;</a></span>dynamic_library() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">dynamic_library::dynamic_library </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel default">default</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>默认构造函数 </p>
+<p>创建一个未初始化的动态库对象。 </p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#ad02ef87854cbd93532937eacf09e4a35">dynamic_library()</a>, <a class="el" href="#a31bb6aaaff7d126a8a1db3b73498d3f8">dynamic_library()</a>, <a class="el" href="#a8cce22a852fe2d2a9dfa24cab8de97d7">dynamic_library()</a>, <a class="el" href="#a10c5f60bc497a6966dee3ac4dd7dc821">load_by_name()</a>, <a class="el" href="#a1d740a9b86108084f2b507f1813570cd">load_self()</a> , 以及 <a class="el" href="#a8547e38412ac7c6ea7995e3d98ec6f40">operator=()</a>.</p>
+
+</div>
+</div>
 <a id="a31bb6aaaff7d126a8a1db3b73498d3f8" name="a31bb6aaaff7d126a8a1db3b73498d3f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31bb6aaaff7d126a8a1db3b73498d3f8">&#9670;&#160;</a></span>dynamic_library() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a31bb6aaaff7d126a8a1db3b73498d3f8">&#9670;&#160;</a></span>dynamic_library() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,14 +270,50 @@ void&#160;</td><td class="memItemRight"><b>unload</b> ()</td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="#a31bb6aaaff7d126a8a1db3b73498d3f8">dynamic_library()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#ac1d9397f2ebc02c31dffbded406c9880">dynamic_library()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="#ad02ef87854cbd93532937eacf09e4a35">dynamic_library()</a>, <a class="el" href="#a31bb6aaaff7d126a8a1db3b73498d3f8">dynamic_library()</a> , 以及 <a class="el" href="#a8547e38412ac7c6ea7995e3d98ec6f40">operator=()</a>.</p>
+</div>
+</div>
+<a id="a8cce22a852fe2d2a9dfa24cab8de97d7" name="a8cce22a852fe2d2a9dfa24cab8de97d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cce22a852fe2d2a9dfa24cab8de97d7">&#9670;&#160;</a></span>dynamic_library() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">dynamic_library::dynamic_library </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>pth</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#abc379ef4c782709b6329f3f41fb2a1f4">load_mode</a></td>          <td class="paramname"><span class="paramname"><em>mode</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>以指定的模式打开动态库 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pth</td><td>动态库路径 </td></tr>
+    <tr><td class="paramname">mode</td><td>加载模式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structdynamic__library__exception.html" title="动态库操作异常">dynamic_library_exception</a></td><td>加载失败时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="#ac1d9397f2ebc02c31dffbded406c9880">dynamic_library()</a>.</p>
 
 </div>
 </div>
 <a id="ad02ef87854cbd93532937eacf09e4a35" name="ad02ef87854cbd93532937eacf09e4a35"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad02ef87854cbd93532937eacf09e4a35">&#9670;&#160;</a></span>dynamic_library() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ad02ef87854cbd93532937eacf09e4a35">&#9670;&#160;</a></span>dynamic_library() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -203,11 +343,41 @@ void&#160;</td><td class="memItemRight"><b>unload</b> ()</td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="#a31bb6aaaff7d126a8a1db3b73498d3f8">dynamic_library()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#ac1d9397f2ebc02c31dffbded406c9880">dynamic_library()</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a9f2d57d27f0623b6c1014f20e1ff6dd8" name="a9f2d57d27f0623b6c1014f20e1ff6dd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f2d57d27f0623b6c1014f20e1ff6dd8">&#9670;&#160;</a></span>get_load_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#abc379ef4c782709b6329f3f41fb2a1f4">load_mode</a> dynamic_library::get_load_mode </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前加载模式 </p>
+<dl class="section return"><dt>返回</dt><dd>加载模式枚举值 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a> 第 <a class="el" href="dynamic__library_8hpp_source.html#l00169">169</a> 行定义.</p>
+
+</div>
+</div>
 <a id="a2eaa7f7a6945b610173724323e51f351" name="a2eaa7f7a6945b610173724323e51f351"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2eaa7f7a6945b610173724323e51f351">&#9670;&#160;</a></span>has_symbol()</h2>
 
@@ -240,7 +410,7 @@ void&#160;</td><td class="memItemRight"><b>unload</b> ()</td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>符号是否存在 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -270,7 +440,120 @@ void&#160;</td><td class="memItemRight"><b>unload</b> ()</td></tr>
 <p>检查动态库是否已加载 </p>
 <dl class="section return"><dt>返回</dt><dd>是否已加载 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a> 第 <a class="el" href="dynamic__library_8hpp_source.html#l00116">116</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a> 第 <a class="el" href="dynamic__library_8hpp_source.html#l00146">146</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aeb39e15e9198ec9fd2cc5f85471eb3ac" name="aeb39e15e9198ec9fd2cc5f85471eb3ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb39e15e9198ec9fd2cc5f85471eb3ac">&#9670;&#160;</a></span>list_symbols()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &gt; dynamic_library::list_symbols </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>name_filter</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>列出动态库中的符号 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name_filter</td><td>名称过滤（留空返回全部） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>符号名称列表 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>Windows 不支持，返回空列表 </dd></dl>
+
+</div>
+</div>
+<a id="a10c5f60bc497a6966dee3ac4dd7dc821" name="a10c5f60bc497a6966dee3ac4dd7dc821"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10c5f60bc497a6966dee3ac4dd7dc821">&#9670;&#160;</a></span>load_by_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classdynamic__library.html">dynamic_library</a> dynamic_library::load_by_name </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#abc379ef4c782709b6329f3f41fb2a1f4">load_mode</a></td>          <td class="paramname"><span class="paramname"><em>mode</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="#abc379ef4c782709b6329f3f41fb2a1f4a172b03053216c6158fe380805998ad6c">load_mode::default_</a></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>按名称加载动态库 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>库名称（不含前缀和后缀） </td></tr>
+    <tr><td class="paramname">mode</td><td>加载模式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>动态库对象 </dd></dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structdynamic__library__exception.html" title="动态库操作异常">dynamic_library_exception</a></td><td>加载失败时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="reference">引用了 <a class="el" href="dynamic__library_8hpp_source.html#l00057">default_</a>, <a class="el" href="#ac1d9397f2ebc02c31dffbded406c9880">dynamic_library()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
+
+</div>
+</div>
+<a id="a1d740a9b86108084f2b507f1813570cd" name="a1d740a9b86108084f2b507f1813570cd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d740a9b86108084f2b507f1813570cd">&#9670;&#160;</a></span>load_self()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classdynamic__library.html">dynamic_library</a> dynamic_library::load_self </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>加载自身（当前进程可执行文件） </p>
+<dl class="section return"><dt>返回</dt><dd>表示当前进程的动态库对象 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>返回的对象析构时不会卸载自身 </dd></dl>
+
+<p class="reference">引用了 <a class="el" href="#ac1d9397f2ebc02c31dffbded406c9880">dynamic_library()</a>.</p>
 
 </div>
 </div>
@@ -300,7 +583,7 @@ void&#160;</td><td class="memItemRight"><b>unload</b> ()</td></tr>
 <p>获取原生句柄 </p>
 <dl class="section return"><dt>返回</dt><dd>平台相关的动态库句柄 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a> 第 <a class="el" href="dynamic__library_8hpp_source.html#l00127">127</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a> 第 <a class="el" href="dynamic__library_8hpp_source.html#l00157">157</a> 行定义.</p>
 
 </div>
 </div>
@@ -336,7 +619,7 @@ void&#160;</td><td class="memItemRight"><b>unload</b> ()</td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>自身引用 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="#a31bb6aaaff7d126a8a1db3b73498d3f8">dynamic_library()</a>.</p>
+<p class="reference">引用了 <a class="el" href="#ac1d9397f2ebc02c31dffbded406c9880">dynamic_library()</a>.</p>
 
 </div>
 </div>
@@ -366,7 +649,35 @@ void&#160;</td><td class="memItemRight"><b>unload</b> ()</td></tr>
 <p>获取库文件路径 </p>
 <dl class="section return"><dt>返回</dt><dd>路径字符串 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a> 第 <a class="el" href="dynamic__library_8hpp_source.html#l00133">133</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a> 第 <a class="el" href="dynamic__library_8hpp_source.html#l00163">163</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aa3d13b1ef1b63e7b2bce197ec6a49743" name="aa3d13b1ef1b63e7b2bce197ec6a49743"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3d13b1ef1b63e7b2bce197ec6a49743">&#9670;&#160;</a></span>program_location()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> dynamic_library::program_location </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前程序的可执行文件路径 </p>
+<dl class="section return"><dt>返回</dt><dd>可执行文件完整路径 </dd></dl>
 
 </div>
 </div>
@@ -408,9 +719,43 @@ void&#160;</td><td class="memItemRight"><b>unload</b> ()</td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="dynamic__library_8hpp_source.html#l00093">to_symbol()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="dynamic__library_8hpp_source.html#l00123">to_symbol()</a>.</p>
+
+</div>
+</div>
+<a id="aa3c2f78217e471cd2314befd86f0ca4f" name="aa3c2f78217e471cd2314befd86f0ca4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3c2f78217e471cd2314befd86f0ca4f">&#9670;&#160;</a></span>symbol_location()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> dynamic_library::symbol_location </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>symbol_ptr</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取指定符号所在的动态库路径 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">symbol_ptr</td><td>符号地址 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>动态库文件路径，失败返回空字符串 </dd></dl>
 
 </div>
 </div>
@@ -460,9 +805,11 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a> 第 <a class="el" href="dynamic__library_8hpp_source.html#l00093">93</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="dynamic__library_8hpp_source.html">dynamic_library.hpp</a> 第 <a class="el" href="dynamic__library_8hpp_source.html#l00123">123</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a> , 以及 <a class="el" href="#a268aac8ebd156328103b2bdf69a996c7">symbol()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>, <a class="el" href="#a268aac8ebd156328103b2bdf69a996c7">symbol()</a> , 以及 <a class="el" href="dynamic__library_8hpp_source.html#l00123">to_symbol()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dynamic__library_8hpp_source.html#l00123">to_symbol()</a>.</p>
 
 </div>
 </div>

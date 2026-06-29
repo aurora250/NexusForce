@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['网络协议与互联网标准_0',['🌐 网络协议与互联网标准',['../md__m_a_i_n_p_a_g_e.html#autotoc_md9',1,'']]],
-  ['网络库_20network_1',['🌐 网络库 (Network)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md22',1,'']]]
+  ['编码规则_0',['UTF-8 编码规则',['../group___code_point.html#utf8_encoding',1,'']]]
 ];

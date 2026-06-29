@@ -1,0 +1,661 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classevent__loop" kind="class" language="C++" prot="public">
+    <compoundname>event_loop</compoundname>
+    <includes refid="event__loop_8hpp" local="no">event_loop.hpp</includes>
+    <innerclass refid="structevent__loop_1_1timer__entry" prot="private">event_loop::timer_entry</innerclass>
+    <innerclass refid="structevent__loop_1_1fd__info" prot="private">event_loop::fd_info</innerclass>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classevent__loop_1aa203b2df0a8b94167f19a2bfb584042c" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(int fd, <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref> events)&gt;</type>
+        <definition>using event_loop::fd_callback = function&lt;void(int fd, uint32_t events)&gt;</definition>
+        <argsstring></argsstring>
+        <name>fd_callback</name>
+        <qualifiedname>event_loop::fd_callback</qualifiedname>
+        <briefdescription>
+<para>fd 事件回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="50" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classevent__loop_1ab867ebbe6a76855e438f6a132d07d860" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void()&gt;</type>
+        <definition>using event_loop::timer_callback = function&lt;void()&gt;</definition>
+        <argsstring></argsstring>
+        <name>timer_callback</name>
+        <qualifiedname>event_loop::timer_callback</qualifiedname>
+        <briefdescription>
+<para>定时器到期回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="52" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" bodystart="52" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classevent__loop_1a7a5768ba7cab02f0cb4fed1341b90650" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool event_loop::running_</definition>
+        <argsstring></argsstring>
+        <name>running_</name>
+        <qualifiedname>event_loop::running_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>事件循环是否正在运行 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="68" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classevent__loop_1aa5526fdc16fcc0425e897795c3333c89" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t event_loop::next_timer_id_</definition>
+        <argsstring></argsstring>
+        <name>next_timer_id_</name>
+        <qualifiedname>event_loop::next_timer_id_</qualifiedname>
+        <initializer>= 1</initializer>
+        <briefdescription>
+<para>定时器 ID 计数器（单调递增） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="70" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classevent__loop_1aaba0331bd19cb45ac349188c1869e2c3" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; int, fd_info &gt;</type>
+        <definition>unordered_map&lt;int, fd_info&gt; event_loop::fd_map_</definition>
+        <argsstring></argsstring>
+        <name>fd_map_</name>
+        <qualifiedname>event_loop::fd_map_</qualifiedname>
+        <briefdescription>
+<para>fd → 注册信息的映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="73" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classevent__loop_1acda3296de30369296959199927a6fb99" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; timer_entry &gt;</type>
+        <definition>vector&lt;timer_entry&gt; event_loop::timer_heap_</definition>
+        <argsstring></argsstring>
+        <name>timer_heap_</name>
+        <qualifiedname>event_loop::timer_heap_</qualifiedname>
+        <briefdescription>
+<para>定时器最小堆（最早到期者位于堆顶） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="75" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classevent__loop_1a2f7c4577372291c307c1c6289a51ca6a" prot="private" static="no" mutable="yes">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex event_loop::timer_mutex_</definition>
+        <argsstring></argsstring>
+        <name>timer_mutex_</name>
+        <qualifiedname>event_loop::timer_mutex_</qualifiedname>
+        <briefdescription>
+<para>保护 timer_heap_ 的互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="77" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classevent__loop_1a0783dcff5d8437fa8b54e8c9d0cc1edf" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* event_loop::iocp_handle_</definition>
+        <argsstring></argsstring>
+        <name>iocp_handle_</name>
+        <qualifiedname>event_loop::iocp_handle_</qualifiedname>
+        <briefdescription>
+<para>IOCP 完成端口句柄 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="85" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classevent__loop_1ad7d44fd0e504c850dd71e3223950a317" prot="private" static="no" mutable="no">
+        <type>void *</type>
+        <definition>void* event_loop::wake_event_</definition>
+        <argsstring></argsstring>
+        <name>wake_event_</name>
+        <qualifiedname>event_loop::wake_event_</qualifiedname>
+        <briefdescription>
+<para>用于唤醒监控线程的手动重置事件 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="87" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classevent__loop_1a7cf09556abc90cd798ca813a04c87a40" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; int, void * &gt;</type>
+        <definition>unordered_map&lt;int, void*&gt; event_loop::fd_events_</definition>
+        <argsstring></argsstring>
+        <name>fd_events_</name>
+        <qualifiedname>event_loop::fd_events_</qualifiedname>
+        <briefdescription>
+<para>fd → WSA 事件句柄的映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="89" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classevent__loop_1ad7f7922d7fad6f4869b27577a2ef0ced" prot="private" static="no" mutable="no">
+        <type><ref refid="classthread" kindref="compound">thread</ref></type>
+        <definition>thread event_loop::monitor_thread_</definition>
+        <argsstring></argsstring>
+        <name>monitor_thread_</name>
+        <qualifiedname>event_loop::monitor_thread_</qualifiedname>
+        <briefdescription>
+<para>后台 WSAWaitForMultipleEvents 监控线程 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="91" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classevent__loop_1a764418b9fac687f9996285aa45ca65a4" prot="private" static="no" mutable="no">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex event_loop::fd_mutex_</definition>
+        <argsstring></argsstring>
+        <name>fd_mutex_</name>
+        <qualifiedname>event_loop::fd_mutex_</qualifiedname>
+        <briefdescription>
+<para>保护 fd_events_ 的互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="93" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classevent__loop_1a30b78d4048d9ed0932c516d8b4a1c63e" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool event_loop::monitor_running_</definition>
+        <argsstring></argsstring>
+        <name>monitor_running_</name>
+        <qualifiedname>event_loop::monitor_running_</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>监控线程是否正在运行 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="95" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classevent__loop_1ae0415a463e36e0b11c05f9244f049475" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void event_loop::process_timers</definition>
+        <argsstring>()</argsstring>
+        <name>process_timers</name>
+        <qualifiedname>event_loop::process_timers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="79" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classevent__loop_1a5f2694762336595caa7ae706c6747643" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+        <definition>uint64_t event_loop::next_timer_deadline</definition>
+        <argsstring>() const</argsstring>
+        <name>next_timer_deadline</name>
+        <qualifiedname>event_loop::next_timer_deadline</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="80" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classevent__loop_1a2731b391fc9882e7266712f8d06cbf1d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void event_loop::wake</definition>
+        <argsstring>()</argsstring>
+        <name>wake</name>
+        <qualifiedname>event_loop::wake</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="81" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classevent__loop_1a1e2b21ca254043057327675be70ca9cd" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void event_loop::monitor_loop</definition>
+        <argsstring>()</argsstring>
+        <name>monitor_loop</name>
+        <qualifiedname>event_loop::monitor_loop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="97" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classevent__loop_1a96ee43711eab937be786d1fb7c638a30" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>event_loop::event_loop</definition>
+        <argsstring>()</argsstring>
+        <name>event_loop</name>
+        <qualifiedname>event_loop::event_loop</qualifiedname>
+        <briefdescription>
+<para>构造事件循环并初始化操作系统后端 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="109" column="5"/>
+        <referencedby refid="classevent__loop_1a4244dc0c57ed3f333f7cad9b56473fba">~event_loop</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classevent__loop_1a4244dc0c57ed3f333f7cad9b56473fba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>event_loop::~event_loop</definition>
+        <argsstring>()</argsstring>
+        <name>~event_loop</name>
+        <qualifiedname>event_loop::~event_loop</qualifiedname>
+        <briefdescription>
+<para>停止事件循环并释放操作系统资源 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="114" column="5"/>
+        <references refid="classevent__loop_1a96ee43711eab937be786d1fb7c638a30">event_loop</references>
+      </memberdef>
+      <memberdef kind="function" id="classevent__loop_1a6ef77744c24a1f06e5c656b54985547f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>event_loop::event_loop</definition>
+        <argsstring>(const event_loop &amp;)=delete</argsstring>
+        <name>event_loop</name>
+        <qualifiedname>event_loop::event_loop</qualifiedname>
+        <param>
+          <type>const <ref refid="classevent__loop" kindref="compound">event_loop</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="116" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classevent__loop_1a915a90f17093286d6e04670c0d8989e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classevent__loop" kindref="compound">event_loop</ref> &amp;</type>
+        <definition>event_loop &amp; event_loop::operator=</definition>
+        <argsstring>(const event_loop &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>event_loop::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classevent__loop" kindref="compound">event_loop</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="117" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classevent__loop_1a256dcf8569f3f5f82d103da7bdc1730e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void event_loop::add_fd</definition>
+        <argsstring>(int fd, uint32_t events, fd_callback cb)</argsstring>
+        <name>add_fd</name>
+        <qualifiedname>event_loop::add_fd</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>fd</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>events</declname>
+        </param>
+        <param>
+          <type><ref refid="classevent__loop_1aa203b2df0a8b94167f19a2bfb584042c" kindref="member">fd_callback</ref></type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+<para>注册文件描述符进行监控 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要监控的文件描述符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>events</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>epoll_in / epoll_out 的事件掩码 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>fd 上有事件发生时的回调 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>fd 必须在 <ref refid="classevent__loop_1ab836576bdb1cb76c6921408936df0995" kindref="member">remove_fd()</ref> 调用前保持有效 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="126" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classevent__loop_1ab0021884de0dd147b943f6c23766ad15" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void event_loop::mod_fd</definition>
+        <argsstring>(int fd, uint32_t events)</argsstring>
+        <name>mod_fd</name>
+        <qualifiedname>event_loop::mod_fd</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>fd</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>events</declname>
+        </param>
+        <briefdescription>
+<para>修改已注册 fd 的事件掩码 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已注册的文件描述符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>events</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>新的事件掩码（覆盖旧值） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="133" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classevent__loop_1ab836576bdb1cb76c6921408936df0995" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void event_loop::remove_fd</definition>
+        <argsstring>(int fd)</argsstring>
+        <name>remove_fd</name>
+        <qualifiedname>event_loop::remove_fd</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>fd</declname>
+        </param>
+        <briefdescription>
+<para>取消文件描述符的监控 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fd</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>已注册的文件描述符 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="139" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classevent__loop_1a3d13c63db02528b28a91a87a2e254c53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t event_loop::schedule_timer</definition>
+        <argsstring>(uint64_t delay_ms, timer_callback cb)</argsstring>
+        <name>schedule_timer</name>
+        <qualifiedname>event_loop::schedule_timer</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>delay_ms</declname>
+        </param>
+        <param>
+          <type><ref refid="classevent__loop_1ab867ebbe6a76855e438f6a132d07d860" kindref="member">timer_callback</ref></type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+<para>调度一次性定时器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>delay_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>以当前时间为基准的延迟毫秒数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cb</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>定时器到期时的回调 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>定时器 ID，可用于 <ref refid="classevent__loop_1af3dc236d90cfdfe9d714979f2f887977" kindref="member">cancel_timer()</ref> </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="147" column="12"/>
+      </memberdef>
+      <memberdef kind="function" id="classevent__loop_1af3dc236d90cfdfe9d714979f2f887977" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool event_loop::cancel_timer</definition>
+        <argsstring>(size_t timer_id)</argsstring>
+        <name>cancel_timer</name>
+        <qualifiedname>event_loop::cancel_timer</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>timer_id</declname>
+        </param>
+        <briefdescription>
+<para>取消待执行的定时器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timer_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classevent__loop_1a3d13c63db02528b28a91a87a2e254c53" kindref="member">schedule_timer()</ref> 返回的定时器 ID </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>找到并取消返回 true，已触发返回 false </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="154" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classevent__loop_1a33711da5633702105dc8f5433609b608" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void event_loop::run</definition>
+        <argsstring>()</argsstring>
+        <name>run</name>
+        <qualifiedname>event_loop::run</qualifiedname>
+        <briefdescription>
+<para>运行事件循环（阻塞直到 <ref refid="classevent__loop_1ae9481e13792e4f19958935d985680d5f" kindref="member">stop()</ref> 被调用） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>此方法会无限期阻塞调用线程 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="160" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classevent__loop_1ae5e01e9b90de2ffa20ba02882ee1596c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void event_loop::run_once</definition>
+        <argsstring>(int timeout_ms=0)</argsstring>
+        <name>run_once</name>
+        <qualifiedname>event_loop::run_once</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>timeout_ms</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>执行事件循环的单次迭代 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timeout_ms</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>等待事件的最大阻塞时间（-1 表示无超时） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="166" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classevent__loop_1ae9481e13792e4f19958935d985680d5f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void event_loop::stop</definition>
+        <argsstring>()</argsstring>
+        <name>stop</name>
+        <qualifiedname>event_loop::stop</qualifiedname>
+        <briefdescription>
+<para>停止事件循环 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>线程安全，可从任意线程调用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="172" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classevent__loop_1aea238dba6c0c4a31822c1796cbff8952" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool event_loop::is_running</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_running</name>
+        <qualifiedname>event_loop::is_running</qualifiedname>
+        <briefdescription>
+<para>检查事件循环当前是否正在运行 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="175" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" bodystart="175" bodyend="175"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>单线程 I/O 事件循环 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>监控已注册的文件描述符的可读/可写事件，并在事件发生时调度回调。 定时器以最小堆管理，到期时自动触发。</para>
+<para><simplesect kind="note"><para>所有回调在事件循环线程中执行，长耗时回调会阻塞 I/O 分发。 </para>
+</simplesect>
+<simplesect kind="warning"><para>不支持从其他线程注册 fd；通过 wake() + 外部队列实现跨线程操作。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" line="47" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/event_loop.hpp" bodystart="47" bodyend="176"/>
+    <listofallmembers>
+      <member refid="classevent__loop_1a256dcf8569f3f5f82d103da7bdc1730e" prot="public" virt="non-virtual"><scope>event_loop</scope><name>add_fd</name></member>
+      <member refid="classevent__loop_1af3dc236d90cfdfe9d714979f2f887977" prot="public" virt="non-virtual"><scope>event_loop</scope><name>cancel_timer</name></member>
+      <member refid="classevent__loop_1a96ee43711eab937be786d1fb7c638a30" prot="public" virt="non-virtual"><scope>event_loop</scope><name>event_loop</name></member>
+      <member refid="classevent__loop_1a6ef77744c24a1f06e5c656b54985547f" prot="public" virt="non-virtual"><scope>event_loop</scope><name>event_loop</name></member>
+      <member refid="classevent__loop_1aa203b2df0a8b94167f19a2bfb584042c" prot="public" virt="non-virtual"><scope>event_loop</scope><name>fd_callback</name></member>
+      <member refid="classevent__loop_1a7cf09556abc90cd798ca813a04c87a40" prot="private" virt="non-virtual"><scope>event_loop</scope><name>fd_events_</name></member>
+      <member refid="classevent__loop_1aaba0331bd19cb45ac349188c1869e2c3" prot="private" virt="non-virtual"><scope>event_loop</scope><name>fd_map_</name></member>
+      <member refid="classevent__loop_1a764418b9fac687f9996285aa45ca65a4" prot="private" virt="non-virtual"><scope>event_loop</scope><name>fd_mutex_</name></member>
+      <member refid="classevent__loop_1a0783dcff5d8437fa8b54e8c9d0cc1edf" prot="private" virt="non-virtual"><scope>event_loop</scope><name>iocp_handle_</name></member>
+      <member refid="classevent__loop_1aea238dba6c0c4a31822c1796cbff8952" prot="public" virt="non-virtual"><scope>event_loop</scope><name>is_running</name></member>
+      <member refid="classevent__loop_1ab0021884de0dd147b943f6c23766ad15" prot="public" virt="non-virtual"><scope>event_loop</scope><name>mod_fd</name></member>
+      <member refid="classevent__loop_1a1e2b21ca254043057327675be70ca9cd" prot="private" virt="non-virtual"><scope>event_loop</scope><name>monitor_loop</name></member>
+      <member refid="classevent__loop_1a30b78d4048d9ed0932c516d8b4a1c63e" prot="private" virt="non-virtual"><scope>event_loop</scope><name>monitor_running_</name></member>
+      <member refid="classevent__loop_1ad7f7922d7fad6f4869b27577a2ef0ced" prot="private" virt="non-virtual"><scope>event_loop</scope><name>monitor_thread_</name></member>
+      <member refid="classevent__loop_1a5f2694762336595caa7ae706c6747643" prot="private" virt="non-virtual"><scope>event_loop</scope><name>next_timer_deadline</name></member>
+      <member refid="classevent__loop_1aa5526fdc16fcc0425e897795c3333c89" prot="private" virt="non-virtual"><scope>event_loop</scope><name>next_timer_id_</name></member>
+      <member refid="classevent__loop_1a915a90f17093286d6e04670c0d8989e1" prot="public" virt="non-virtual"><scope>event_loop</scope><name>operator=</name></member>
+      <member refid="classevent__loop_1ae0415a463e36e0b11c05f9244f049475" prot="private" virt="non-virtual"><scope>event_loop</scope><name>process_timers</name></member>
+      <member refid="classevent__loop_1ab836576bdb1cb76c6921408936df0995" prot="public" virt="non-virtual"><scope>event_loop</scope><name>remove_fd</name></member>
+      <member refid="classevent__loop_1a33711da5633702105dc8f5433609b608" prot="public" virt="non-virtual"><scope>event_loop</scope><name>run</name></member>
+      <member refid="classevent__loop_1ae5e01e9b90de2ffa20ba02882ee1596c" prot="public" virt="non-virtual"><scope>event_loop</scope><name>run_once</name></member>
+      <member refid="classevent__loop_1a7a5768ba7cab02f0cb4fed1341b90650" prot="private" virt="non-virtual"><scope>event_loop</scope><name>running_</name></member>
+      <member refid="classevent__loop_1a3d13c63db02528b28a91a87a2e254c53" prot="public" virt="non-virtual"><scope>event_loop</scope><name>schedule_timer</name></member>
+      <member refid="classevent__loop_1ae9481e13792e4f19958935d985680d5f" prot="public" virt="non-virtual"><scope>event_loop</scope><name>stop</name></member>
+      <member refid="classevent__loop_1ab867ebbe6a76855e438f6a132d07d860" prot="public" virt="non-virtual"><scope>event_loop</scope><name>timer_callback</name></member>
+      <member refid="classevent__loop_1acda3296de30369296959199927a6fb99" prot="private" virt="non-virtual"><scope>event_loop</scope><name>timer_heap_</name></member>
+      <member refid="classevent__loop_1a2f7c4577372291c307c1c6289a51ca6a" prot="private" virt="non-virtual"><scope>event_loop</scope><name>timer_mutex_</name></member>
+      <member refid="classevent__loop_1a2731b391fc9882e7266712f8d06cbf1d" prot="private" virt="non-virtual"><scope>event_loop</scope><name>wake</name></member>
+      <member refid="classevent__loop_1ad7d44fd0e504c850dd71e3223950a317" prot="private" virt="non-virtual"><scope>event_loop</scope><name>wake_event_</name></member>
+      <member refid="classevent__loop_1a4244dc0c57ed3f333f7cad9b56473fba" prot="public" virt="non-virtual"><scope>event_loop</scope><name>~event_loop</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -5,10 +5,10 @@
     <title>SQL</title>
     <innerclass refid="classsql__builder" prot="public">sql_builder</innerclass>
     <sectiondef kind="enum">
-      <memberdef kind="enum" id="group___s_q_l_1gadbaccc2cc51836f54eab02a0ec397945" prot="public" static="no" strong="yes">
-        <type></type>
+      <memberdef kind="enum" id="group___s_q_l_1ga0278b0a5cdba1278a152c9e26ee0ca89" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
         <name>sql_operate</name>
-        <enumvalue id="group___s_q_l_1ggadbaccc2cc51836f54eab02a0ec397945a63225f19fccb18e7c709f1fa11bc738e" prot="public">
+        <enumvalue id="group___s_q_l_1gga0278b0a5cdba1278a152c9e26ee0ca89a63225f19fccb18e7c709f1fa11bc738e" prot="public">
           <name>SELECT</name>
           <briefdescription>
 <para>SELECT查询 </para>
@@ -16,7 +16,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___s_q_l_1ggadbaccc2cc51836f54eab02a0ec397945a61ee777e7f71dc466c3b2c685d8d313b" prot="public">
+        <enumvalue id="group___s_q_l_1gga0278b0a5cdba1278a152c9e26ee0ca89a61ee777e7f71dc466c3b2c685d8d313b" prot="public">
           <name>INSERT</name>
           <briefdescription>
 <para>INSERT插入 </para>
@@ -24,7 +24,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___s_q_l_1ggadbaccc2cc51836f54eab02a0ec397945a15a8022d0ed9cd9c2a2e756822703eb4" prot="public">
+        <enumvalue id="group___s_q_l_1gga0278b0a5cdba1278a152c9e26ee0ca89a15a8022d0ed9cd9c2a2e756822703eb4" prot="public">
           <name>UPDATE</name>
           <briefdescription>
 <para>UPDATE更新 </para>
@@ -32,10 +32,74 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___s_q_l_1ggadbaccc2cc51836f54eab02a0ec397945a32f68a60cef40faedbc6af20298c1a1e" prot="public">
+        <enumvalue id="group___s_q_l_1gga0278b0a5cdba1278a152c9e26ee0ca89a32f68a60cef40faedbc6af20298c1a1e" prot="public">
           <name>DELETE</name>
           <briefdescription>
 <para>DELETE删除 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga0278b0a5cdba1278a152c9e26ee0ca89a9be122a94f599cc4262ad4a613abbb74" prot="public">
+          <name>DROP_TABLE</name>
+          <briefdescription>
+<para>DROP TABLE删除表 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga0278b0a5cdba1278a152c9e26ee0ca89aa262b4a928241dd92c1757d259f4a15d" prot="public">
+          <name>CREATE_TABLE</name>
+          <briefdescription>
+<para>CREATE TABLE建表 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga0278b0a5cdba1278a152c9e26ee0ca89a558384c2c0b6c0b6ae0cc816be03685d" prot="public">
+          <name>CREATE_VIEW</name>
+          <briefdescription>
+<para>CREATE VIEW创建视图 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga0278b0a5cdba1278a152c9e26ee0ca89aac403d102594d904560d836cb6568613" prot="public">
+          <name>DROP_VIEW</name>
+          <briefdescription>
+<para>DROP VIEW删除视图 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga0278b0a5cdba1278a152c9e26ee0ca89adbb8fe69ef4e064475d836f5ceaf23ba" prot="public">
+          <name>ALTER_TABLE</name>
+          <briefdescription>
+<para>ALTER TABLE修改表 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga0278b0a5cdba1278a152c9e26ee0ca89af832bfae3e1bbb1e150ab1c33a9206ea" prot="public">
+          <name>CREATE_INDEX</name>
+          <briefdescription>
+<para>CREATE INDEX创建索引 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga0278b0a5cdba1278a152c9e26ee0ca89a6a8a4ad5c06b4e464d6b2aef4af7afce" prot="public">
+          <name>DROP_INDEX</name>
+          <briefdescription>
+<para>DROP INDEX删除索引 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga0278b0a5cdba1278a152c9e26ee0ca89a0a83d15fde12983f199bdeb76667660f" prot="public">
+          <name>TRUNCATE</name>
+          <briefdescription>
+<para>TRUNCATE TABLE截断表 </para>
           </briefdescription>
           <detaileddescription>
           </detaileddescription>
@@ -47,12 +111,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="56" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="56" bodyend="61"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="101" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="101" bodyend="114"/>
       </memberdef>
-      <memberdef kind="enum" id="group___s_q_l_1gaf35aeadb60139f2c65a19c4e8d61ec72" prot="public" static="no" strong="yes">
-        <type></type>
+      <memberdef kind="enum" id="group___s_q_l_1ga771009d77fb95e67071827bbfe4ebb56" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
         <name>sql_join</name>
-        <enumvalue id="group___s_q_l_1ggaf35aeadb60139f2c65a19c4e8d61ec72ac4540d3222d43c398e55b47cb3846a40" prot="public">
+        <enumvalue id="group___s_q_l_1gga771009d77fb95e67071827bbfe4ebb56ac4540d3222d43c398e55b47cb3846a40" prot="public">
           <name>INNER</name>
           <briefdescription>
 <para>INNER JOIN </para>
@@ -60,7 +124,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___s_q_l_1ggaf35aeadb60139f2c65a19c4e8d61ec72a684d325a7303f52e64011467ff5c5758" prot="public">
+        <enumvalue id="group___s_q_l_1gga771009d77fb95e67071827bbfe4ebb56a684d325a7303f52e64011467ff5c5758" prot="public">
           <name>LEFT</name>
           <briefdescription>
 <para>LEFT JOIN </para>
@@ -68,7 +132,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___s_q_l_1ggaf35aeadb60139f2c65a19c4e8d61ec72a21507b40c80068eda19865706fdc2403" prot="public">
+        <enumvalue id="group___s_q_l_1gga771009d77fb95e67071827bbfe4ebb56a21507b40c80068eda19865706fdc2403" prot="public">
           <name>RIGHT</name>
           <briefdescription>
 <para>RIGHT JOIN </para>
@@ -76,7 +140,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___s_q_l_1ggaf35aeadb60139f2c65a19c4e8d61ec72aba7de5bc6888294e5884b024a4c894f1" prot="public">
+        <enumvalue id="group___s_q_l_1gga771009d77fb95e67071827bbfe4ebb56aba7de5bc6888294e5884b024a4c894f1" prot="public">
           <name>FULL</name>
           <briefdescription>
 <para>FULL JOIN </para>
@@ -91,12 +155,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="67" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="67" bodyend="72"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="120" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="120" bodyend="125"/>
       </memberdef>
-      <memberdef kind="enum" id="group___s_q_l_1ga9ae417fadc6859de056601afc47ffb4a" prot="public" static="no" strong="yes">
-        <type></type>
+      <memberdef kind="enum" id="group___s_q_l_1ga43e016aaf7c7cdd0957e2688579fbe28" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
         <name>sql_order</name>
-        <enumvalue id="group___s_q_l_1gga9ae417fadc6859de056601afc47ffb4aac6e421eaad140c1bc1a39980502df80c" prot="public">
+        <enumvalue id="group___s_q_l_1gga43e016aaf7c7cdd0957e2688579fbe28ac6e421eaad140c1bc1a39980502df80c" prot="public">
           <name>ASC</name>
           <briefdescription>
 <para>升序 </para>
@@ -104,7 +168,7 @@
           <detaileddescription>
           </detaileddescription>
         </enumvalue>
-        <enumvalue id="group___s_q_l_1gga9ae417fadc6859de056601afc47ffb4aa65a6d757dbb571ccc3af9706e9a5f607" prot="public">
+        <enumvalue id="group___s_q_l_1gga43e016aaf7c7cdd0957e2688579fbe28a65a6d757dbb571ccc3af9706e9a5f607" prot="public">
           <name>DESC</name>
           <briefdescription>
 <para>降序 </para>
@@ -119,19 +183,162 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="78" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="78" bodyend="81"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="131" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="131" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___s_q_l_1ga5a1ff7dca56c7ae4b12aef04ede5017a" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <name>sql_dialect</name>
+        <enumvalue id="group___s_q_l_1gga5a1ff7dca56c7ae4b12aef04ede5017aac942dc2a9f958acddc67e11472d3ca0b" prot="public">
+          <name>GENERIC</name>
+          <briefdescription>
+<para>ANSI SQL </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga5a1ff7dca56c7ae4b12aef04ede5017aa14498b83dd1667a0c78f4fdaf5afbf4b" prot="public">
+          <name>MYSQL</name>
+          <briefdescription>
+<para>MySQL / MariaDB </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga5a1ff7dca56c7ae4b12aef04ede5017aa3efccad6e4b6b2044be88d6b86505a5b" prot="public">
+          <name>POSTGRESQL</name>
+          <briefdescription>
+<para>PostgreSQL </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga5a1ff7dca56c7ae4b12aef04ede5017aa624f0d1fb84ced47f6b4d05e8ab82c7b" prot="public">
+          <name>SQLITE</name>
+          <briefdescription>
+<para>SQLite </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga5a1ff7dca56c7ae4b12aef04ede5017aa1d37e2cfa8532be01d3f89c76ccfe4a9" prot="public">
+          <name>MSSQL</name>
+          <briefdescription>
+<para>Microsoft SQL Server </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga5a1ff7dca56c7ae4b12aef04ede5017aac3e3f219b6b8cad735598568fe19ca71" prot="public">
+          <name>ORACLE</name>
+          <briefdescription>
+<para>Oracle Database </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>数据库方言 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>不同的数据库在语法和功能上存在差异，选择对应方言可生成最佳兼容的 SQL。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="142" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="142" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___s_q_l_1ga440896de66a6cdf91b2131e1136a53eb" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <name>sql_set_op</name>
+        <enumvalue id="group___s_q_l_1gga440896de66a6cdf91b2131e1136a53ebaea931da33de8ba05c3635a51c2b25d75" prot="public">
+          <name>UNION</name>
+          <briefdescription>
+<para>UNION </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga440896de66a6cdf91b2131e1136a53ebad26655ba2f0d4c9948014d37b9e3a0e7" prot="public">
+          <name>UNION_ALL</name>
+          <briefdescription>
+<para>UNION ALL </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga440896de66a6cdf91b2131e1136a53eba24bdbe2bcaf533b7b3f0bd58bfa7f291" prot="public">
+          <name>INTERSECT</name>
+          <briefdescription>
+<para>INTERSECT </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga440896de66a6cdf91b2131e1136a53eba10a18cf6670e41b64f27694357caa528" prot="public">
+          <name>INTERSECT_ALL</name>
+          <briefdescription>
+<para>INTERSECT ALL </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga440896de66a6cdf91b2131e1136a53ebab551ec5ea8c2d00004c85f7da65582a5" prot="public">
+          <name>EXCEPT_</name>
+          <briefdescription>
+<para>EXCEPT </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___s_q_l_1gga440896de66a6cdf91b2131e1136a53ebac74342226063113d37ee5f751877ab3c" prot="public">
+          <name>EXCEPT_ALL</name>
+          <briefdescription>
+<para>EXCEPT ALL </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>集合操作类型枚举 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" line="155" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/sql_builder.hpp" bodystart="155" bodyend="162"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
 <para>SQL语句的流式构建器实现 </para>
     </briefdescription>
     <detaileddescription>
-<para>支持SELECT、INSERT、UPDATE、DELETE操作， 通过链式调用构建复杂的SQL语句，避免手动拼接SQL字符串的安全风险。</para>
+<para>通过链式调用构建复杂的SQL语句，避免手动拼接SQL字符串的安全风险。</para>
+<para><bold>支持的语句类型：</bold><itemizedlist>
+<listitem><para>DML: SELECT, INSERT, UPDATE, DELETE</para>
+</listitem><listitem><para>DDL: CREATE TABLE, ALTER TABLE, DROP TABLE, TRUNCATE TABLE</para>
+</listitem><listitem><para>视图: CREATE VIEW, DROP VIEW</para>
+</listitem><listitem><para>索引: CREATE INDEX, DROP INDEX</para>
+</listitem><listitem><para>集合操作: UNION / UNION ALL / INTERSECT / INTERSECT ALL / EXCEPT / EXCEPT ALL</para>
+</listitem><listitem><para>CTE: WITH / WITH RECURSIVE</para>
+</listitem><listitem><para>窗口函数: ROW_NUMBER, RANK, DENSE_RANK, NTILE, LEAD, LAG, FIRST_VALUE, LAST_VALUE</para>
+</listitem><listitem><para>表达式工具: CASE, CAST</para>
+</listitem><listitem><para>聚合: COUNT, SUM, AVG, MAX, MIN</para>
+</listitem></itemizedlist>
+</para>
 <sect1 id="group___s_m_t_p_1standards">
-<title>遵循的国际标准</title><para>本构建器生成的语法严格遵循以下国际标准：<itemizedlist>
-<listitem><para><bold>ISO/IEC 9075:1992</bold> (SQL-92) 核心语法标准 <ulink url="https://www.iso.org/standard/16663.html">https://www.iso.org/standard/16663.html</ulink></para>
-</listitem><listitem><para><bold>ISO/IEC 9075-2:1999</bold> (SQL:1999/Foundation) 派生表与子查询增强特性 <ulink url="https://www.iso.org/standard/26196.html">https://www.iso.org/standard/26196.html</ulink></para>
+<title>遵循的国际标准</title><para>本构建器生成的语法遵循以下国际标准：<itemizedlist>
+<listitem><para><bold>ISO/IEC 9075:1992</bold> (SQL-92) Entry 级及 Intermediate 级核心语法 <ulink url="https://www.iso.org/standard/16663.html">https://www.iso.org/standard/16663.html</ulink></para>
+</listitem><listitem><para><bold>ISO/IEC 9075-2:1999</bold> (SQL:1999/Foundation) CTE、派生表与子查询增强 <ulink url="https://www.iso.org/standard/26196.html">https://www.iso.org/standard/26196.html</ulink></para>
+</listitem><listitem><para><bold>ISO/IEC 9075-2:2003</bold> (SQL:2003/Foundation) 窗口函数 (ROW_NUMBER / RANK / 等)</para>
+</listitem><listitem><para><bold>ISO/IEC 9075-2:2008</bold> (SQL:2008/Foundation) TRUNCATE TABLE, FETCH FIRST 分页</para>
 </listitem><listitem><para><bold>ISO/IEC 9075-4:2023</bold> (SQL/PSM) 预编译占位符相关约定 <ulink url="https://www.iso.org/standard/76584.html">https://www.iso.org/standard/76584.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para>同时覆盖以下事实标准（跨数据库厂商通用，非 ANSI 标准正文）：<itemizedlist>
+<listitem><para>CREATE INDEX / DROP INDEX</para>
+</listitem><listitem><para>CREATE [OR REPLACE] VIEW</para>
+</listitem><listitem><para>IF [NOT] EXISTS 修饰子句</para>
+</listitem><listitem><para>AUTO_INCREMENT 自增列 (MySQL/SQLite)</para>
+</listitem><listitem><para>LIMIT / OFFSET 分页 (MySQL/PostgreSQL/SQLite)</para>
 </listitem></itemizedlist>
 </para>
 </sect1>
@@ -146,11 +353,71 @@
 </listitem></itemizedlist>
 </para>
 <para><simplesect kind="note"><para><itemizedlist>
-<listitem><para><computeroutput>LIMIT</computeroutput> 和 <computeroutput>OFFSET</computeroutput> 子句属于事实标准，被除Oracle外的多数数据库支持。</para>
-</listitem><listitem><para>对于Oracle数据库，若需支持分页，建议利用子查询或 12c 之后的 <computeroutput>FETCH FIRST</computeroutput> 语法 （本构建器输出标准 LIMIT/OFFSET，使用时请注意数据库方言差异）。 </para>
+<listitem><para><computeroutput>LIMIT</computeroutput>/<computeroutput>OFFSET</computeroutput> 是事实标准，被除 Oracle 外的多数数据库支持。 对 Oracle 12c+，建议使用 fetch_first() 生成 <computeroutput>FETCH FIRST n ROWS ONLY</computeroutput>。</para>
+</listitem><listitem><para>构建器生成的 SQL 骨架使用 <computeroutput>?</computeroutput> 占位符；实际参数绑定与转义由驱动程序处理。</para>
 </listitem></itemizedlist>
 </para>
 </simplesect>
+</para>
+</sect1>
+<sect1 id="group___s_q_l_1exclusions">
+<title>有意不纳入的特性及原因</title><para>以下 SQL 特性在标准中有定义但本构建器 **不提供 API 支持**。 用户可通过传入原始 SQL 字符串（如 where()、having() 等）自由使用这些特性。</para>
+<para><table rows="11" cols="3"><row>
+<entry thead="yes"><para>特性  </para>
+</entry><entry thead="yes"><para>标准出处  </para>
+</entry><entry thead="yes"><para>不纳入原因  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>GRANT / REVOKE  </para>
+</entry><entry thead="no"><para>SQL-92 Entry  </para>
+</entry><entry thead="no"><para>DCL（数据控制语言），属于运维授权范畴，与 DML/DDL 性质不同  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>CREATE SCHEMA / DOMAIN / ASSERTION  </para>
+</entry><entry thead="no"><para>SQL-92 Intermediate  </para>
+</entry><entry thead="no"><para>生产代码中极少使用；多数数据库实现不完整或语义差异大  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>TRIGGER / 存储过程 / 函数  </para>
+</entry><entry thead="no"><para>SQL:1999 / SQL/PSM  </para>
+</entry><entry thead="no"><para>过程式代码（含控制流），超出声明式 SQL 构建器的设计范围  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>SAVEPOINT / RELEASE SAVEPOINT  </para>
+</entry><entry thead="no"><para>SQL:1999  </para>
+</entry><entry thead="no"><para>事务控制原语，粒度与连接层绑定；使用频率低  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>MERGE (UPSERT)  </para>
+</entry><entry thead="no"><para>SQL:2003  </para>
+</entry><entry thead="no"><para>各数据库方言差异极大（MySQL ON DUPLICATE KEY / PostgreSQL ON CONFLICT / SQLite INSERT OR REPLACE），统一 API 会掩盖方言行为差异  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>CREATE SEQUENCE / ALTER SEQUENCE  </para>
+</entry><entry thead="no"><para>SQL:2003  </para>
+</entry><entry thead="no"><para>多数项目通过 ORM 或迁移脚本管理序列，不适合运行时 SQL 构建器  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>MATCH / OVERLAPS / UNIQUE 谓词  </para>
+</entry><entry thead="no"><para>SQL-92 Full  </para>
+</entry><entry thead="no"><para>边缘用例；多数数据库未实现或语义不完整，生产代码中几乎不会使用  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>LATERAL JOIN  </para>
+</entry><entry thead="no"><para>SQL:1999  </para>
+</entry><entry thead="no"><para>使用率极低；可通过子查询或 CROSS JOIN 改写  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>IDENTITY 列 (GENERATED AS IDENTITY)  </para>
+</entry><entry thead="no"><para>SQL:2003  </para>
+</entry><entry thead="no"><para>与 AUTO_INCREMENT 功能重叠；各数据库语法差异大 (GENERATED ALWAYS AS IDENTITY / GENERATED BY DEFAULT AS IDENTITY / IDENTITY(1,1))  </para>
+</entry></row>
+<row>
+<entry thead="no"><para>TEMPORARY TABLE (会话临时表)  </para>
+</entry><entry thead="no"><para>SQL-92 Full  </para>
+</entry><entry thead="no"><para>本构建器已支持 CREATE TEMP TABLE (事实标准语法)  </para>
+</entry></row>
+</table>
 </para>
 </sect1>
     </detaileddescription>

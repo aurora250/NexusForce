@@ -1,0 +1,434 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structlock__free__queue_1_1implicit__producer" kind="struct" language="C++" prot="private">
+    <compoundname>lock_free_queue::implicit_producer</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structlock__free__queue_1_1implicit__producer_1a1a16e8505c0efc8411e4ae2af1cde572" prot="public" static="no" mutable="no">
+        <type>implicit_producer *</type>
+        <definition>implicit_producer* lock_free_queue&lt; T &gt;::implicit_producer::next_</definition>
+        <argsstring></argsstring>
+        <name>next_</name>
+        <qualifiedname>lock_free_queue::implicit_producer::next_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="222" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="222" bodyend="222"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlock__free__queue_1_1implicit__producer_1a26837706d519097dc03115668ddb2b9f" prot="public" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
+        <definition>atomic&lt;bool&gt; lock_free_queue&lt; T &gt;::implicit_producer::inactive_</definition>
+        <argsstring></argsstring>
+        <name>inactive_</name>
+        <qualifiedname>lock_free_queue::implicit_producer::inactive_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="223" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="223" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlock__free__queue_1_1implicit__producer_1a58ac02a84422d122af9cc5380a3d6767" prot="public" static="no" mutable="no">
+        <type><ref refid="structthread__exit__listener" kindref="compound">thread_exit_listener</ref></type>
+        <definition>thread_exit_listener lock_free_queue&lt; T &gt;::implicit_producer::thread_exit_listener_</definition>
+        <argsstring></argsstring>
+        <name>thread_exit_listener_</name>
+        <qualifiedname>lock_free_queue::implicit_producer::thread_exit_listener_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="224" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="224" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlock__free__queue_1_1implicit__producer_1ac25ccdece69c31ac78b9cc5d6e7b7922" prot="public" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; lock_free_queue&lt; T &gt;::implicit_producer::tail_index_</definition>
+        <argsstring></argsstring>
+        <name>tail_index_</name>
+        <qualifiedname>lock_free_queue::implicit_producer::tail_index_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="226" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="226" bodyend="226"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlock__free__queue_1_1implicit__producer_1aecb3f2fa9024b309b643a1e0ab862a4e" prot="public" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; lock_free_queue&lt; T &gt;::implicit_producer::head_index_</definition>
+        <argsstring></argsstring>
+        <name>head_index_</name>
+        <qualifiedname>lock_free_queue::implicit_producer::head_index_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="227" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="227" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlock__free__queue_1_1implicit__producer_1a33fe777038e8135666d4c4e059a77bbb" prot="public" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; lock_free_queue&lt; T &gt;::implicit_producer::dequeue_optimistic_count_</definition>
+        <argsstring></argsstring>
+        <name>dequeue_optimistic_count_</name>
+        <qualifiedname>lock_free_queue::implicit_producer::dequeue_optimistic_count_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="228" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="228" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlock__free__queue_1_1implicit__producer_1a2272475f936491fd7b5bbb7c5d0e3ce1" prot="public" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
+        <definition>atomic&lt;size_t&gt; lock_free_queue&lt; T &gt;::implicit_producer::dequeue_overcommit_</definition>
+        <argsstring></argsstring>
+        <name>dequeue_overcommit_</name>
+        <qualifiedname>lock_free_queue::implicit_producer::dequeue_overcommit_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="229" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="229" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlock__free__queue_1_1implicit__producer_1aa64954e5175c686769ee1f655d31954c" prot="public" static="no" mutable="no">
+        <type>block *</type>
+        <definition>block* lock_free_queue&lt; T &gt;::implicit_producer::tail_block_</definition>
+        <argsstring></argsstring>
+        <name>tail_block_</name>
+        <qualifiedname>lock_free_queue::implicit_producer::tail_block_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="230" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="230" bodyend="230"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlock__free__queue_1_1implicit__producer_1a9058b77b7befc561764431102fac73e7" prot="public" static="no" mutable="no">
+        <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; block_index_header * &gt;</type>
+        <definition>atomic&lt;block_index_header*&gt; lock_free_queue&lt; T &gt;::implicit_producer::block_index_</definition>
+        <argsstring></argsstring>
+        <name>block_index_</name>
+        <qualifiedname>lock_free_queue::implicit_producer::block_index_</qualifiedname>
+        <initializer>{nullptr}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="231" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="231" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlock__free__queue_1_1implicit__producer_1ad14f67bbb9eb08ac1c4f5da4c9aba85f" prot="public" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t lock_free_queue&lt; T &gt;::implicit_producer::next_block_index_capacity_</definition>
+        <argsstring></argsstring>
+        <name>next_block_index_capacity_</name>
+        <qualifiedname>lock_free_queue::implicit_producer::next_block_index_capacity_</qualifiedname>
+        <initializer>{<ref refid="classlock__free__queue_1ac3215f04e7a6aa7a83ab197a0a2b176b" kindref="member">IMPLICIT_INITIAL_INDEX_SIZE</ref>}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="232" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="232" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlock__free__queue_1_1implicit__producer_1adbb6ad52894d97290bd1129f324696fc" prot="public" static="no" mutable="no">
+        <type><ref refid="classlock__free__queue" kindref="compound">lock_free_queue</ref> *</type>
+        <definition>lock_free_queue* lock_free_queue&lt; T &gt;::implicit_producer::parent_</definition>
+        <argsstring></argsstring>
+        <name>parent_</name>
+        <qualifiedname>lock_free_queue::implicit_producer::parent_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="234" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="234" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structlock__free__queue_1_1implicit__producer_1a91d5e717f8e24dce84d86d146546c5cc" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>lock_free_queue&lt; T &gt;::implicit_producer::implicit_producer</definition>
+        <argsstring>(lock_free_queue *parent)</argsstring>
+        <name>implicit_producer</name>
+        <qualifiedname>lock_free_queue::implicit_producer::implicit_producer</qualifiedname>
+        <param>
+          <type><ref refid="classlock__free__queue" kindref="compound">lock_free_queue</ref> *</type>
+          <declname>parent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="236" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="236" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="structlock__free__queue_1_1implicit__producer_1a92d44ab1e492fc0b7cef09985774e914" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>lock_free_queue&lt; T &gt;::implicit_producer::~implicit_producer</definition>
+        <argsstring>()</argsstring>
+        <name>~implicit_producer</name>
+        <qualifiedname>lock_free_queue::implicit_producer::~implicit_producer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="241" column="9" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="241" bodyend="280"/>
+      </memberdef>
+      <memberdef kind="function" id="structlock__free__queue_1_1implicit__producer_1a944c7b120ce692a51f3f4d3bf8def075" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>lock_free_queue&lt; T &gt;::implicit_producer::implicit_producer</definition>
+        <argsstring>(const implicit_producer &amp;)=delete</argsstring>
+        <name>implicit_producer</name>
+        <qualifiedname>lock_free_queue::implicit_producer::implicit_producer</qualifiedname>
+        <param>
+          <type>const implicit_producer &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="282" column="9"/>
+      </memberdef>
+      <memberdef kind="function" id="structlock__free__queue_1_1implicit__producer_1a8036575c985d3bcad0c678a6fc5d94c2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>implicit_producer &amp;</type>
+        <definition>implicit_producer &amp; lock_free_queue&lt; T &gt;::implicit_producer::operator=</definition>
+        <argsstring>(const implicit_producer &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>lock_free_queue::implicit_producer::operator=</qualifiedname>
+        <param>
+          <type>const implicit_producer &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="283" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="structlock__free__queue_1_1implicit__producer_1ac8530bba6ec2d68e7a977240645b4bbc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void lock_free_queue&lt; T &gt;::implicit_producer::enqueue</definition>
+        <argsstring>(T &amp;&amp;element)</argsstring>
+        <name>enqueue</name>
+        <qualifiedname>lock_free_queue::implicit_producer::enqueue</qualifiedname>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="285" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="285" bodyend="318"/>
+      </memberdef>
+      <memberdef kind="function" id="structlock__free__queue_1_1implicit__producer_1a06b0a844fc1e8e7baa5f90357f95a2fb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool lock_free_queue&lt; T &gt;::implicit_producer::dequeue</definition>
+        <argsstring>(T &amp;element)</argsstring>
+        <name>dequeue</name>
+        <qualifiedname>lock_free_queue::implicit_producer::dequeue</qualifiedname>
+        <param>
+          <type>T &amp;</type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="320" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="320" bodyend="356"/>
+      </memberdef>
+      <memberdef kind="function" id="structlock__free__queue_1_1implicit__producer_1a16459c9a961b85d5891c51d97ca59f00" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t lock_free_queue&lt; T &gt;::implicit_producer::size_approx</definition>
+        <argsstring>() const</argsstring>
+        <name>size_approx</name>
+        <qualifiedname>lock_free_queue::implicit_producer::size_approx</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="358" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="358" bodyend="362"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="structlock__free__queue_1_1implicit__producer_1a670004b3cfbdc64fe1ecb97ff1b91389" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool lock_free_queue&lt; T &gt;::implicit_producer::new_block_index</definition>
+        <argsstring>()</argsstring>
+        <name>new_block_index</name>
+        <qualifiedname>lock_free_queue::implicit_producer::new_block_index</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="365" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="365" bodyend="408"/>
+      </memberdef>
+      <memberdef kind="function" id="structlock__free__queue_1_1implicit__producer_1abcdf6cfa09bef5ab57f09edce3307469" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool lock_free_queue&lt; T &gt;::implicit_producer::insert_block_index_entry</definition>
+        <argsstring>(block_index_entry *&amp;idx_entry, size_t block_start_index)</argsstring>
+        <name>insert_block_index_entry</name>
+        <qualifiedname>lock_free_queue::implicit_producer::insert_block_index_entry</qualifiedname>
+        <param>
+          <type>block_index_entry *&amp;</type>
+          <declname>idx_entry</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>block_start_index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="410" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="410" bodyend="436"/>
+      </memberdef>
+      <memberdef kind="function" id="structlock__free__queue_1_1implicit__producer_1a7564f8f690e52d8838a3223d2e4e37c9" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>block_index_entry *</type>
+        <definition>block_index_entry * lock_free_queue&lt; T &gt;::implicit_producer::get_block_index_entry_for_index</definition>
+        <argsstring>(size_t index) const</argsstring>
+        <name>get_block_index_entry_for_index</name>
+        <qualifiedname>lock_free_queue::implicit_producer::get_block_index_entry_for_index</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="438" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="438" bodyend="449"/>
+      </memberdef>
+      <memberdef kind="function" id="structlock__free__queue_1_1implicit__producer_1ac185e4be1d9515b434613b13b2e0100b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void lock_free_queue&lt; T &gt;::implicit_producer::rewind_block_index_tail</definition>
+        <argsstring>()</argsstring>
+        <name>rewind_block_index_tail</name>
+        <qualifiedname>lock_free_queue::implicit_producer::rewind_block_index_tail</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="451" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="451" bodyend="455"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="5">
+        <label>atomic&lt; block_index_header * &gt;</label>
+        <link refid="structatomic"/>
+      </node>
+      <node id="2">
+        <label>atomic&lt; bool &gt;</label>
+        <link refid="structatomic_3_01bool_01_4"/>
+      </node>
+      <node id="4">
+        <label>atomic&lt; size_t &gt;</label>
+        <link refid="structatomic"/>
+      </node>
+      <node id="6">
+        <label>lock_free_queue&lt; T &gt;</label>
+        <link refid="classlock__free__queue"/>
+      </node>
+      <node id="1">
+        <label>lock_free_queue&lt; T &gt;::implicit_producer</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>inactive_</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>thread_exit_listener_</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>dequeue_optimistic_count_</edgelabel>
+          <edgelabel>dequeue_overcommit_</edgelabel>
+          <edgelabel>head_index_</edgelabel>
+          <edgelabel>tail_index_</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>block_index_</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>parent_</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>thread_exit_listener</label>
+        <link refid="structthread__exit__listener"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>next_</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" line="221" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/lock_free_queue.hpp" bodystart="221" bodyend="456"/>
+    <listofallmembers>
+      <member refid="structlock__free__queue_1_1implicit__producer_1a9058b77b7befc561764431102fac73e7" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>block_index_</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1a06b0a844fc1e8e7baa5f90357f95a2fb" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>dequeue</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1a33fe777038e8135666d4c4e059a77bbb" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>dequeue_optimistic_count_</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1a2272475f936491fd7b5bbb7c5d0e3ce1" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>dequeue_overcommit_</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1ac8530bba6ec2d68e7a977240645b4bbc" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>enqueue</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1a7564f8f690e52d8838a3223d2e4e37c9" prot="private" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>get_block_index_entry_for_index</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1aecb3f2fa9024b309b643a1e0ab862a4e" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>head_index_</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1a91d5e717f8e24dce84d86d146546c5cc" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>implicit_producer</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1a944c7b120ce692a51f3f4d3bf8def075" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>implicit_producer</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1a26837706d519097dc03115668ddb2b9f" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>inactive_</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1abcdf6cfa09bef5ab57f09edce3307469" prot="private" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>insert_block_index_entry</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1a670004b3cfbdc64fe1ecb97ff1b91389" prot="private" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>new_block_index</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1a1a16e8505c0efc8411e4ae2af1cde572" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>next_</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1ad14f67bbb9eb08ac1c4f5da4c9aba85f" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>next_block_index_capacity_</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1a8036575c985d3bcad0c678a6fc5d94c2" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>operator=</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1adbb6ad52894d97290bd1129f324696fc" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>parent_</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1ac185e4be1d9515b434613b13b2e0100b" prot="private" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>rewind_block_index_tail</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1a16459c9a961b85d5891c51d97ca59f00" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>size_approx</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1aa64954e5175c686769ee1f655d31954c" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>tail_block_</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1ac25ccdece69c31ac78b9cc5d6e7b7922" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>tail_index_</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1a58ac02a84422d122af9cc5380a3d6767" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>thread_exit_listener_</name></member>
+      <member refid="structlock__free__queue_1_1implicit__producer_1a92d44ab1e492fc0b7cef09985774e914" prot="public" virt="non-virtual"><scope>lock_free_queue::implicit_producer</scope><name>~implicit_producer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

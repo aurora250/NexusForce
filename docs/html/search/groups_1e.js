@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['元组_0',['元组',['../group___tuple.html',1,'']]]
+  ['作用域守卫_0',['作用域守卫',['../group___scope_guard.html',1,'']]]
 ];

@@ -8,7 +8,6 @@ var structiarithmetic =
     [ "operator++", "structiarithmetic.html#a594db00cb37d24786774fa42e909ed33", null ],
     [ "operator++", "structiarithmetic.html#ad5c8de2178ee0e5d187eeeb4e92f4bbb", null ],
     [ "operator+=", "structiarithmetic.html#afa8eaf9c3214ac79148e1e00644e687a", null ],
-    [ "operator-", "structiarithmetic.html#adf56adb012800c7b1371b8a9f965749a", null ],
     [ "operator-", "structiarithmetic.html#a3358c08dad1d8d0b98aa3be390c13692", null ],
     [ "operator--", "structiarithmetic.html#aa3e132fffe0724bfd69a04447dca0cd4", null ],
     [ "operator--", "structiarithmetic.html#af5330f646f75d053582f9fd678210dd4", null ],

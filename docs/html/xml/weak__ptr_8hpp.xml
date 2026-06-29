@@ -4,9 +4,11 @@
     <compoundname>weak_ptr.hpp</compoundname>
     <includes refid="shared__ptr_8hpp" local="yes">NeForce/core/memory/shared_ptr.hpp</includes>
     <includedby refid="future_8hpp" local="yes">future.hpp</includedby>
+    <includedby refid="http2__connection_8hpp" local="yes">http2_connection.hpp</includedby>
     <includedby refid="path__tree_8hpp" local="yes">path_tree.hpp</includedby>
     <includedby refid="signals_8hpp" local="yes">signals.hpp</includedby>
     <includedby refid="thread__pool_8hpp" local="yes">thread_pool.hpp</includedby>
+    <includedby refid="websocket_8hpp" local="yes">websocket.hpp</includedby>
     <incdepgraph>
       <node id="4">
         <label>NeForce/core/algorithm/compare.hpp</label>
@@ -15,17 +17,17 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
         <childnode refid="18" relation="include">
         </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
       </node>
-      <node id="13">
+      <node id="14">
         <label>NeForce/core/algorithm/iterator.hpp</label>
         <link refid="iterator_8hpp"/>
-        <childnode refid="14" relation="include">
-        </childnode>
         <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="6">
@@ -33,57 +35,55 @@
         <link refid="search_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-      </node>
-      <node id="24">
-        <label>NeForce/core/async/atomic.hpp</label>
-        <link refid="atomic_8hpp"/>
-        <childnode refid="25" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
       </node>
       <node id="25">
-        <label>NeForce/core/async/atomic_base.hpp</label>
-        <link refid="atomic__base_8hpp"/>
+        <label>NeForce/core/async/atomic.hpp</label>
+        <link refid="atomic_8hpp"/>
         <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="34" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="35" relation="include">
-        </childnode>
-        <childnode refid="36" relation="include">
         </childnode>
       </node>
       <node id="26">
-        <label>NeForce/core/async/atomic_wait.hpp</label>
-        <link refid="atomic__wait_8hpp"/>
+        <label>NeForce/core/async/atomic_base.hpp</label>
+        <link refid="atomic__base_8hpp"/>
         <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="28" relation="include">
+        <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
         </childnode>
       </node>
       <node id="27">
+        <label>NeForce/core/async/atomic_wait.hpp</label>
+        <link refid="atomic__wait_8hpp"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
         <label>NeForce/core/async/futex.hpp</label>
         <link refid="futex_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="34">
+      <node id="35">
         <label>NeForce/core/async/memory_order.hpp</label>
         <link refid="memory__order_8hpp"/>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="28">
+      <node id="29">
         <label>NeForce/core/async/this_thread.hpp</label>
         <link refid="this__thread_8hpp"/>
         <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
@@ -93,29 +93,37 @@
         </childnode>
         <childnode refid="33" relation="include">
         </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
       </node>
       <node id="10">
         <label>NeForce/core/config/c++config.hpp</label>
         <link refid="c_09_09config_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
       </node>
-      <node id="29">
+      <node id="12">
+        <label>NeForce/core/config/version.hpp</label>
+        <link refid="version_8hpp_source"/>
+      </node>
+      <node id="30">
         <label>NeForce/core/config/windef.hpp</label>
         <link refid="windef_8hpp"/>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>NeForce/core/exception/breakpoint.hpp</label>
         <link refid="breakpoint_8hpp"/>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="37">
+      <node id="38">
         <label>NeForce/core/exception/exception.hpp</label>
         <link refid="exception_8hpp"/>
-        <childnode refid="17" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
       <node id="7">
@@ -124,51 +132,51 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="20">
+      <node id="21">
         <label>NeForce/core/functional/hash.hpp</label>
         <link refid="hash_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="42">
+      <node id="43">
         <label>NeForce/core/functional/invoke.hpp</label>
         <link refid="invoke_8hpp"/>
-        <childnode refid="22" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
       </node>
-      <node id="19">
+      <node id="20">
         <label>NeForce/core/interface/icommon.hpp</label>
         <link refid="icommon_8hpp"/>
-        <childnode refid="20" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>NeForce/core/iterator/iterator_traits.hpp</label>
         <link refid="iterator__traits_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>NeForce/core/iterator/reverse_iterator.hpp</label>
         <link refid="reverse__iterator_8hpp"/>
-        <childnode refid="13" relation="include">
-        </childnode>
-      </node>
-      <node id="38">
-        <label>NeForce/core/memory/allocator_traits.hpp</label>
-        <link refid="allocator__traits_8hpp"/>
-        <childnode refid="39" relation="include">
-        </childnode>
-        <childnode refid="40" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
       </node>
       <node id="39">
-        <label>NeForce/core/memory/construct.hpp</label>
-        <link refid="construct_8hpp"/>
-        <childnode refid="15" relation="include">
+        <label>NeForce/core/memory/allocator_traits.hpp</label>
+        <link refid="allocator__traits_8hpp"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="40">
+        <label>NeForce/core/memory/construct.hpp</label>
+        <link refid="construct_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
         <label>NeForce/core/memory/memory.hpp</label>
         <link refid="memory_8hpp"/>
         <childnode refid="8" relation="include">
@@ -181,25 +189,25 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-        <childnode refid="37" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="41" relation="include">
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
         </childnode>
       </node>
-      <node id="41">
+      <node id="42">
         <label>NeForce/core/memory/unique_ptr.hpp</label>
         <link refid="unique__ptr_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="42" relation="include">
-        </childnode>
         <childnode refid="43" relation="include">
         </childnode>
         <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -208,16 +216,16 @@
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="40">
+      <node id="41">
         <label>NeForce/core/numeric/numeric_traits.hpp</label>
         <link refid="numeric__traits_8hpp"/>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>NeForce/core/typeinfo/concepts.hpp</label>
         <link refid="concepts_8hpp"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="8">
@@ -232,37 +240,37 @@
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="43">
+      <node id="44">
         <label>NeForce/core/utility/compressed_pair.hpp</label>
         <link refid="compressed__pair_8hpp"/>
-        <childnode refid="19" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="44">
+      <node id="45">
         <label>NeForce/core/utility/deleter.hpp</label>
         <link refid="deleter_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="21">
+      <node id="22">
         <label>NeForce/core/utility/integer_sequence.hpp</label>
         <link refid="integer__sequence_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="19">
         <label>NeForce/core/utility/pair.hpp</label>
         <link refid="pair_8hpp"/>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
       </node>
-      <node id="22">
+      <node id="23">
         <label>NeForce/core/utility/reference_wrapper.hpp</label>
         <link refid="reference__wrapper_8hpp"/>
         <childnode refid="8" relation="include">
@@ -271,44 +279,38 @@
       <node id="11">
         <label>cassert</label>
       </node>
-      <node id="33">
+      <node id="34">
         <label>ctime</label>
       </node>
       <node id="5">
         <label>initializer_list</label>
       </node>
-      <node id="35">
+      <node id="36">
         <label>intrin.h</label>
       </node>
-      <node id="36">
+      <node id="37">
         <label>intrin0.inl.h</label>
       </node>
       <node id="3">
         <label>new</label>
       </node>
-      <node id="30">
+      <node id="31">
         <label>processthreadsapi.h</label>
       </node>
-      <node id="32">
+      <node id="33">
         <label>sched.h</label>
       </node>
-      <node id="31">
+      <node id="32">
         <label>synchapi.h</label>
       </node>
-      <node id="23">
+      <node id="24">
         <label>utility</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="5">
-        <label>NeForce.hpp</label>
-        <link refid="_ne_force_8hpp"/>
-      </node>
       <node id="11">
         <label>async.hpp</label>
         <link refid="async_8hpp"/>
-        <childnode refid="5" relation="include">
-        </childnode>
       </node>
       <node id="2">
         <label>future.hpp</label>
@@ -334,20 +336,18 @@
         <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="19">
         <label>signals.hpp</label>
         <link refid="signals_8hpp"/>
-        <childnode refid="5" relation="include">
-        </childnode>
       </node>
       <node id="13">
         <label>thread_pool.hpp</label>
         <link refid="thread__pool_8hpp"/>
-        <childnode refid="5" relation="include">
-        </childnode>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="12">
@@ -356,68 +356,82 @@
         <childnode refid="13" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="18">
         <label>path_tree.hpp</label>
         <link refid="path__tree_8hpp"/>
-        <childnode refid="5" relation="include">
-        </childnode>
       </node>
       <node id="1">
         <label>weak_ptr.hpp</label>
         <link refid="weak__ptr_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
         <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>logger.hpp</label>
+        <link refid="logger_8hpp"/>
       </node>
       <node id="3">
         <label>dns_client.hpp</label>
         <link refid="dns__client_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
+        <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="4">
         <label>ftp_client.hpp</label>
         <link refid="ftp__client_8hpp_source"/>
-        <childnode refid="5" relation="include">
-        </childnode>
       </node>
-      <node id="8">
-        <label>http_client.hpp</label>
-        <link refid="http__client_8hpp"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-      </node>
-      <node id="15">
-        <label>http_server.hpp</label>
-        <link refid="http__server_8hpp"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-      </node>
-      <node id="6">
-        <label>smtp_socket.hpp</label>
-        <link refid="smtp__socket_8hpp"/>
-        <childnode refid="5" relation="include">
-        </childnode>
+      <node id="17">
+        <label>http2_connection.hpp</label>
+        <link refid="http2__connection_8hpp"/>
       </node>
       <node id="7">
-        <label>tcp_client.hpp</label>
-        <link refid="tcp__client_8hpp"/>
+        <label>http_client.hpp</label>
+        <link refid="http__client_8hpp"/>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="14">
+      <node id="16">
+        <label>http_server.hpp</label>
+        <link refid="http__server_8hpp"/>
+      </node>
+      <node id="8">
+        <label>reverse_proxy.hpp</label>
+        <link refid="reverse__proxy_8hpp"/>
+      </node>
+      <node id="20">
+        <label>websocket.hpp</label>
+        <link refid="websocket_8hpp"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>smtp_socket.hpp</label>
+        <link refid="smtp__socket_8hpp"/>
+      </node>
+      <node id="6">
+        <label>tcp_client.hpp</label>
+        <link refid="tcp__client_8hpp"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
         <label>tcp_server.hpp</label>
         <link refid="tcp__server_8hpp"/>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -463,298 +477,327 @@
 <codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">shared_ptr;</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight></codeline>
 <codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">inner::smart_pointer_atomic;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">enable_shared_from_this;</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"></highlight></codeline>
-<codeline lineno="61"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="65" refid="classweak__ptr_1a20a6853423bef0657ba9e7912d1118bf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classweak__ptr_1a20a6853423bef0657ba9e7912d1118bf" kindref="member">weak_ptr</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>noexcept<sp/>{}</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"></highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/>enable_if_t&lt;is_convertible_v&lt;U*,<sp/>T*&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
-<codeline lineno="75" refid="classweak__ptr_1ad954d39a77ff4b8b32cd91cd4f4affa8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classweak__ptr_1ad954d39a77ff4b8b32cd91cd4f4affa8" kindref="member">weak_ptr</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>shared_ptr&lt;U&gt;&amp;<sp/>shared)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>ptr_(shared.get()),</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>owner_(</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">inner::__smart_ptr_counter*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(shared.owner_))<sp/>{</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_)<sp/>{</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">inner::smart_pointer_atomic;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="68" refid="classweak__ptr_1a20a6853423bef0657ba9e7912d1118bf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classweak__ptr_1a20a6853423bef0657ba9e7912d1118bf" kindref="member">weak_ptr</ref>(<ref refid="group___core_types_1gafb2c9350d32e78a0e4c960b9859ccb40" kindref="member">nullptr_t</ref><sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>noexcept<sp/>{}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75" refid="classweak__ptr_1a3b07b6b6711dfdcf5819b0f397937ede" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classweak__ptr_1a3b07b6b6711dfdcf5819b0f397937ede" kindref="member">weak_ptr</ref>(T*<sp/>ptr,<sp/>inner::__smart_ptr_counter*<sp/>owner)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>ptr_(ptr),</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>owner_(owner)<sp/>{</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;incref_weak();</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="82"><highlight class="normal"></highlight></codeline>
-<codeline lineno="87" refid="classweak__ptr_1a08ea1426cad769cf04d9942258659f17" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classweak__ptr_1a08ea1426cad769cf04d9942258659f17" kindref="member">weak_ptr</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>weak_ptr&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>ptr_(other.ptr_),</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>owner_(other.owner_)<sp/>{</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;incref_weak();</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"></highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/>enable_if_t&lt;is_convertible_v&lt;U*,<sp/>T*&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
-<codeline lineno="101" refid="classweak__ptr_1a2141f9583dd0cafda2f02eeb58e0bd35" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classweak__ptr_1a2141f9583dd0cafda2f02eeb58e0bd35" kindref="member">weak_ptr</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>weak_ptr&lt;U&gt;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>ptr_(other.ptr_),</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>owner_(other.owner_)<sp/>{</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;incref_weak();</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"></highlight></codeline>
-<codeline lineno="113" refid="classweak__ptr_1a0aee942402261161daa557fa305b019c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classweak__ptr_1a0aee942402261161daa557fa305b019c" kindref="member">weak_ptr</ref>(weak_ptr&amp;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>ptr_(other.ptr_),</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>owner_(other.owner_)<sp/>{</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.ptr_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.owner_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"></highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/>enable_if_t&lt;is_convertible_v&lt;U*,<sp/>T*&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
-<codeline lineno="126" refid="classweak__ptr_1a5de6a8424f3667f22ba47bc92131f6be" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classweak__ptr_1a5de6a8424f3667f22ba47bc92131f6be" kindref="member">weak_ptr</ref>(weak_ptr&lt;U&gt;&amp;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>ptr_(other.ptr_),</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>owner_(other.owner_)<sp/>{</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.ptr_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.owner_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"></highlight></codeline>
-<codeline lineno="137" refid="classweak__ptr_1a33e02aa3da3b60d4ebf8e6404c3e77b2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classweak__ptr_1a33e02aa3da3b60d4ebf8e6404c3e77b2" kindref="member">~weak_ptr</ref>()<sp/>{<sp/><ref refid="classweak__ptr_1a7725f99ddca1116fa1a50e295d56da99" kindref="member">reset</ref>();<sp/>}</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"></highlight></codeline>
-<codeline lineno="144" refid="classweak__ptr_1a06b6595a7fa7840264a2f96a042962d5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>weak_ptr&amp;<sp/><ref refid="classweak__ptr_1a06b6595a7fa7840264a2f96a042962d5" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>weak_ptr&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gaf77625b543da90c4cf80a7bb167b3426" kindref="member">addressof</ref>(other)<sp/>==<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;decref_weak();</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr_<sp/>=<sp/>other.ptr_;</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_<sp/>=<sp/>other.owner_;</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;incref_weak();</highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"></highlight></codeline>
-<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/>enable_if_t&lt;is_convertible_v&lt;U*,<sp/>T*&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
-<codeline lineno="166" refid="classweak__ptr_1a18ba70c94d44ff6744e7cc542a2f8c19" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>weak_ptr&amp;<sp/><ref refid="classweak__ptr_1a18ba70c94d44ff6744e7cc542a2f8c19" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>weak_ptr&lt;U&gt;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_)<sp/>{</highlight></codeline>
-<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;decref_weak();</highlight></codeline>
-<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr_<sp/>=<sp/>other.ptr_;</highlight></codeline>
-<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_<sp/>=<sp/>other.owner_;</highlight></codeline>
-<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_)<sp/>{</highlight></codeline>
-<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;incref_weak();</highlight></codeline>
-<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="177"><highlight class="normal"></highlight></codeline>
-<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/>enable_if_t&lt;is_convertible_v&lt;U*,<sp/>T*&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
-<codeline lineno="185" refid="classweak__ptr_1a3a35940bf00ab3c3e9dc56225031f466" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>weak_ptr&amp;<sp/><ref refid="classweak__ptr_1a3a35940bf00ab3c3e9dc56225031f466" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>shared_ptr&lt;U&gt;&amp;<sp/>shared)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_)<sp/>{</highlight></codeline>
-<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;decref_weak();</highlight></codeline>
-<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr_<sp/>=<sp/>shared.get();</highlight></codeline>
-<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">inner::__smart_ptr_counter*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(shared.owner_);</highlight></codeline>
-<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_)<sp/>{</highlight></codeline>
-<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;incref_weak();</highlight></codeline>
-<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="196"><highlight class="normal"></highlight></codeline>
-<codeline lineno="202" refid="classweak__ptr_1a66b64743332e92f4bc225376a599cfab" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>weak_ptr&amp;<sp/><ref refid="classweak__ptr_1a66b64743332e92f4bc225376a599cfab" kindref="member">operator=</ref>(weak_ptr&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gaf77625b543da90c4cf80a7bb167b3426" kindref="member">addressof</ref>(other)<sp/>==<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;decref_weak();</highlight></codeline>
-<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr_<sp/>=<sp/>other.ptr_;</highlight></codeline>
-<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_<sp/>=<sp/>other.owner_;</highlight></codeline>
-<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.ptr_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.owner_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="215"><highlight class="normal"></highlight></codeline>
-<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/>enable_if_t&lt;is_convertible_v&lt;U*,<sp/>T*&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
-<codeline lineno="223" refid="classweak__ptr_1ad1910edbda514bff04d30ea3854009e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>weak_ptr&amp;<sp/><ref refid="classweak__ptr_1ad1910edbda514bff04d30ea3854009e8" kindref="member">operator=</ref>(weak_ptr&lt;U&gt;&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_)<sp/>{</highlight></codeline>
-<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;decref_weak();</highlight></codeline>
-<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr_<sp/>=<sp/>other.ptr_;</highlight></codeline>
-<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_<sp/>=<sp/>other.owner_;</highlight></codeline>
-<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.ptr_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.owner_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="233"><highlight class="normal"></highlight></codeline>
-<codeline lineno="239" refid="classweak__ptr_1a7725f99ddca1116fa1a50e295d56da99" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1a7725f99ddca1116fa1a50e295d56da99" kindref="member">reset</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/>enable_if_t&lt;is_convertible_v&lt;U*,<sp/>T*&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="91" refid="classweak__ptr_1ad954d39a77ff4b8b32cd91cd4f4affa8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classweak__ptr_1ad954d39a77ff4b8b32cd91cd4f4affa8" kindref="member">weak_ptr</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>shared_ptr&lt;U&gt;&amp;<sp/>shared)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>ptr_(shared.get()),</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>owner_(</highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">inner::__smart_ptr_counter*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(shared.owner_))<sp/>{</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_)<sp/>{</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;incref_weak();</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103" refid="classweak__ptr_1a08ea1426cad769cf04d9942258659f17" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classweak__ptr_1a08ea1426cad769cf04d9942258659f17" kindref="member">weak_ptr</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>weak_ptr&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>ptr_(other.ptr_),</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>owner_(other.owner_)<sp/>{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;incref_weak();</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/>enable_if_t&lt;is_convertible_v&lt;U*,<sp/>T*&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="117" refid="classweak__ptr_1a2141f9583dd0cafda2f02eeb58e0bd35" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classweak__ptr_1a2141f9583dd0cafda2f02eeb58e0bd35" kindref="member">weak_ptr</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>weak_ptr&lt;U&gt;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>ptr_(other.ptr_),</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>owner_(other.owner_)<sp/>{</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;incref_weak();</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129" refid="classweak__ptr_1a0aee942402261161daa557fa305b019c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classweak__ptr_1a0aee942402261161daa557fa305b019c" kindref="member">weak_ptr</ref>(weak_ptr&amp;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>ptr_(other.ptr_),</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/>owner_(other.owner_)<sp/>{</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.ptr_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.owner_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/>enable_if_t&lt;is_convertible_v&lt;U*,<sp/>T*&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="142" refid="classweak__ptr_1a5de6a8424f3667f22ba47bc92131f6be" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classweak__ptr_1a5de6a8424f3667f22ba47bc92131f6be" kindref="member">weak_ptr</ref>(weak_ptr&lt;U&gt;&amp;&amp;<sp/>other)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>ptr_(other.ptr_),</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>owner_(other.owner_)<sp/>{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.ptr_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.owner_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153" refid="classweak__ptr_1a33e02aa3da3b60d4ebf8e6404c3e77b2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classweak__ptr_1a33e02aa3da3b60d4ebf8e6404c3e77b2" kindref="member">~weak_ptr</ref>()<sp/>{<sp/><ref refid="classweak__ptr_1a7725f99ddca1116fa1a50e295d56da99" kindref="member">reset</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160" refid="classweak__ptr_1a06b6595a7fa7840264a2f96a042962d5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>weak_ptr&amp;<sp/><ref refid="classweak__ptr_1a06b6595a7fa7840264a2f96a042962d5" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>weak_ptr&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gaf77625b543da90c4cf80a7bb167b3426" kindref="member">addressof</ref>(other)<sp/>==<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;decref_weak();</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr_<sp/>=<sp/>other.ptr_;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_<sp/>=<sp/>other.owner_;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;incref_weak();</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/>enable_if_t&lt;is_convertible_v&lt;U*,<sp/>T*&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="182" refid="classweak__ptr_1a18ba70c94d44ff6744e7cc542a2f8c19" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>weak_ptr&amp;<sp/><ref refid="classweak__ptr_1a18ba70c94d44ff6744e7cc542a2f8c19" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>weak_ptr&lt;U&gt;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_)<sp/>{</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;decref_weak();</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr_<sp/>=<sp/>other.ptr_;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_<sp/>=<sp/>other.owner_;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_)<sp/>{</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;incref_weak();</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/>enable_if_t&lt;is_convertible_v&lt;U*,<sp/>T*&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="201" refid="classweak__ptr_1a3a35940bf00ab3c3e9dc56225031f466" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>weak_ptr&amp;<sp/><ref refid="classweak__ptr_1a3a35940bf00ab3c3e9dc56225031f466" kindref="member">operator=</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>shared_ptr&lt;U&gt;&amp;<sp/>shared)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_)<sp/>{</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;decref_weak();</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr_<sp/>=<sp/>shared.get();</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_<sp/>=<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">inner::__smart_ptr_counter*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(shared.owner_);</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_)<sp/>{</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;incref_weak();</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218" refid="classweak__ptr_1a66b64743332e92f4bc225376a599cfab" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>weak_ptr&amp;<sp/><ref refid="classweak__ptr_1a66b64743332e92f4bc225376a599cfab" kindref="member">operator=</ref>(weak_ptr&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gaf77625b543da90c4cf80a7bb167b3426" kindref="member">addressof</ref>(other)<sp/>==<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;decref_weak();</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr_<sp/>=<sp/>other.ptr_;</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_<sp/>=<sp/>other.owner_;</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.ptr_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.owner_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U,<sp/>enable_if_t&lt;is_convertible_v&lt;U*,<sp/>T*&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="239" refid="classweak__ptr_1ad1910edbda514bff04d30ea3854009e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>weak_ptr&amp;<sp/><ref refid="classweak__ptr_1ad1910edbda514bff04d30ea3854009e8" kindref="member">operator=</ref>(weak_ptr&lt;U&gt;&amp;&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_)<sp/>{</highlight></codeline>
 <codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;decref_weak();</highlight></codeline>
-<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="246"><highlight class="normal"></highlight></codeline>
-<codeline lineno="251" refid="classweak__ptr_1ab6ce65d0fac958b888c5d52c029efbc2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1ab6ce65d0fac958b888c5d52c029efbc2" kindref="member">swap</ref>(weak_ptr&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gaf77625b543da90c4cf80a7bb167b3426" kindref="member">addressof</ref>(other)<sp/>==<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(ptr_,<sp/>other.ptr_);</highlight></codeline>
-<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(owner_,<sp/>other.owner_);</highlight></codeline>
-<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="258"><highlight class="normal"></highlight></codeline>
-<codeline lineno="263" refid="classweak__ptr_1a3eb1a3ce63ac6deca89e25db20ee6643" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1a3eb1a3ce63ac6deca89e25db20ee6643" kindref="member">use_count</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>?<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">long</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(owner_-&gt;use_count())<sp/>:<sp/>0;</highlight></codeline>
-<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="266"><highlight class="normal"></highlight></codeline>
-<codeline lineno="271" refid="classweak__ptr_1a430cb63353080ed26b62015adb96e669" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1a430cb63353080ed26b62015adb96e669" kindref="member">expired</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1a3eb1a3ce63ac6deca89e25db20ee6643" kindref="member">use_count</ref>()<sp/>==<sp/>0;<sp/>}</highlight></codeline>
-<codeline lineno="272"><highlight class="normal"></highlight></codeline>
-<codeline lineno="279" refid="classweak__ptr_1aa8708d1965a5606f913443522d41a6d9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>shared_ptr&lt;T&gt;<sp/><ref refid="classweak__ptr_1aa8708d1965a5606f913443522d41a6d9" kindref="member">lock</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>&amp;&amp;<sp/>owner_-&gt;try_incref_strong())<sp/>{</highlight></codeline>
-<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>shared_ptr&lt;T&gt;(ptr_,<sp/>owner_);</highlight></codeline>
-<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>shared_ptr&lt;T&gt;();</highlight></codeline>
-<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="285"><highlight class="normal"></highlight></codeline>
-<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
-<codeline lineno="293" refid="classweak__ptr_1abb99f2a98d408d48139bf87a5a936568" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1abb99f2a98d408d48139bf87a5a936568" kindref="member">owner_equal</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>weak_ptr&lt;U&gt;&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>owner_<sp/>==<sp/>rhs.owner_;</highlight></codeline>
-<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="296"><highlight class="normal"></highlight></codeline>
-<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
-<codeline lineno="304" refid="classweak__ptr_1abc4244677b6082a5ab8a33cdd9518864" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1abc4244677b6082a5ab8a33cdd9518864" kindref="member">owner_equal</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>shared_ptr&lt;U&gt;&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>owner_<sp/>==<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">inner::__smart_ptr_counter*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(rhs.owner_);</highlight></codeline>
-<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="307"><highlight class="normal"></highlight></codeline>
-<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
-<codeline lineno="315" refid="classweak__ptr_1a3351d9ac0cabcca299924d89b2681c81" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1a3351d9ac0cabcca299924d89b2681c81" kindref="member">owner_before</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>weak_ptr&lt;U&gt;&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>owner_<sp/>&lt;<sp/>rhs.owner_;</highlight></codeline>
-<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="318"><highlight class="normal"></highlight></codeline>
-<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
-<codeline lineno="326" refid="classweak__ptr_1a4d6ab0f9309ca450a190754f5b0951af" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1a4d6ab0f9309ca450a190754f5b0951af" kindref="member">owner_before</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>shared_ptr&lt;U&gt;&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>owner_<sp/>&lt;<sp/>reinterpret_cast&lt;inner::__smart_ptr_counter*&gt;(rhs.owner_);</highlight></codeline>
-<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="329"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="330"><highlight class="normal"></highlight></codeline>
-<codeline lineno="331"><highlight class="normal"></highlight></codeline>
-<codeline lineno="337"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="338" refid="structowner__less" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structowner__less" kindref="compound">owner_less</ref>;</highlight></codeline>
-<codeline lineno="339"><highlight class="normal"></highlight></codeline>
-<codeline lineno="346"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="347" refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structowner__less" kindref="compound">owner_less</ref>&lt;<ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt;T&gt;&gt;<sp/>{</highlight></codeline>
-<codeline lineno="348" refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4_1abc36a7d8f9d113ac3c881963380f2247" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4_1abc36a7d8f9d113ac3c881963380f2247" kindref="member">is_transparent</ref><sp/>=<sp/>void;<sp/></highlight></codeline>
-<codeline lineno="349"><highlight class="normal"></highlight></codeline>
-<codeline lineno="353" refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4_1ac1e4c1754ce94c83c31fd6b30566cc5d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4_1ac1e4c1754ce94c83c31fd6b30566cc5d" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;T&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="354"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
-<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="356"><highlight class="normal"></highlight></codeline>
-<codeline lineno="360" refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4_1a49e31c6d02b0a24aab5f2d87e1bdcf4c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4_1a49e31c6d02b0a24aab5f2d87e1bdcf4c" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
-<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="363"><highlight class="normal"></highlight></codeline>
-<codeline lineno="367" refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4_1a60418cf26397abf09f78e8abe08fbc6a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4_1a60418cf26397abf09f78e8abe08fbc6a" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;T&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
-<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="370"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="371"><highlight class="normal"></highlight></codeline>
-<codeline lineno="376"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="377" refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structowner__less" kindref="compound">owner_less</ref>&lt;<ref refid="classweak__ptr" kindref="compound">weak_ptr</ref>&lt;T&gt;&gt;<sp/>{</highlight></codeline>
-<codeline lineno="378" refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4_1acb55b07ecf8be10a9fb8413e9e7864ba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4_1acb55b07ecf8be10a9fb8413e9e7864ba" kindref="member">is_transparent</ref><sp/>=<sp/>void;<sp/></highlight></codeline>
-<codeline lineno="379"><highlight class="normal"></highlight></codeline>
-<codeline lineno="383" refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4_1a31bee6d90492c73e07a115c87b5d87cd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4_1a31bee6d90492c73e07a115c87b5d87cd" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="384"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
-<codeline lineno="385"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="386"><highlight class="normal"></highlight></codeline>
-<codeline lineno="390" refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4_1a1901a227ffd48431d2e1ed7c882b9d01" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4_1a1901a227ffd48431d2e1ed7c882b9d01" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;T&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="391"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
-<codeline lineno="392"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="393"><highlight class="normal"></highlight></codeline>
-<codeline lineno="397" refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4_1ac8cd31ac55b018e03af5041c91b9b015" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4_1ac8cd31ac55b018e03af5041c91b9b015" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="398"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
-<codeline lineno="399"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="400"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="401"><highlight class="normal"></highlight></codeline>
-<codeline lineno="407"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;&gt;</highlight></codeline>
-<codeline lineno="408" refid="structowner__less_3_01void_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structowner__less" kindref="compound">owner_less</ref>&lt;void&gt;<sp/>{</highlight></codeline>
-<codeline lineno="409" refid="structowner__less_3_01void_01_4_1a9df8aed8e7dd2a644c8d645874a19ccb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structowner__less_3_01void_01_4_1a9df8aed8e7dd2a644c8d645874a19ccb" kindref="member">is_transparent</ref><sp/>=<sp/>void;<sp/></highlight></codeline>
-<codeline lineno="410"><highlight class="normal"></highlight></codeline>
-<codeline lineno="414"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
-<codeline lineno="415" refid="structowner__less_3_01void_01_4_1a4f4f90b842c8ca7343aa5991169cd39d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01void_01_4_1a4f4f90b842c8ca7343aa5991169cd39d" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;U&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="416"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
-<codeline lineno="417"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="418"><highlight class="normal"></highlight></codeline>
-<codeline lineno="422"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
-<codeline lineno="423" refid="structowner__less_3_01void_01_4_1a0a47bf6d34f46957f3631ac8dafb1add" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01void_01_4_1a0a47bf6d34f46957f3631ac8dafb1add" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;U&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="424"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
-<codeline lineno="425"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="426"><highlight class="normal"></highlight></codeline>
-<codeline lineno="430"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
-<codeline lineno="431" refid="structowner__less_3_01void_01_4_1a8dc2aba419c341877e0028776d5f25e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01void_01_4_1a8dc2aba419c341877e0028776d5f25e8" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;U&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr_<sp/>=<sp/>other.ptr_;</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_<sp/>=<sp/>other.owner_;</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.ptr_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>other.owner_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">this</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"></highlight></codeline>
+<codeline lineno="255" refid="classweak__ptr_1a7725f99ddca1116fa1a50e295d56da99" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1a7725f99ddca1116fa1a50e295d56da99" kindref="member">reset</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_-&gt;decref_weak();</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>owner_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ptr_<sp/>=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight></codeline>
+<codeline lineno="267" refid="classweak__ptr_1ab6ce65d0fac958b888c5d52c029efbc2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1ab6ce65d0fac958b888c5d52c029efbc2" kindref="member">swap</ref>(weak_ptr&amp;<sp/>other)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_NEFORCE<sp/><ref refid="group___args_forward_functions_1gaf77625b543da90c4cf80a7bb167b3426" kindref="member">addressof</ref>(other)<sp/>==<sp/></highlight><highlight class="keyword">this</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(ptr_,<sp/>other.ptr_);</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_NEFORCE<sp/><ref refid="group___swap_utility_1ga6a39d376fb4396550fe3dadb383d17df" kindref="member">swap</ref>(owner_,<sp/>other.owner_);</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"></highlight></codeline>
+<codeline lineno="279" refid="classweak__ptr_1a3eb1a3ce63ac6deca89e25db20ee6643" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1a3eb1a3ce63ac6deca89e25db20ee6643" kindref="member">use_count</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>?<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">long</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(owner_-&gt;use_count())<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"></highlight></codeline>
+<codeline lineno="287" refid="classweak__ptr_1a430cb63353080ed26b62015adb96e669" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1a430cb63353080ed26b62015adb96e669" kindref="member">expired</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1a3eb1a3ce63ac6deca89e25db20ee6643" kindref="member">use_count</ref>()<sp/>==<sp/>0;<sp/>}</highlight></codeline>
+<codeline lineno="288"><highlight class="normal"></highlight></codeline>
+<codeline lineno="295" refid="classweak__ptr_1aa8708d1965a5606f913443522d41a6d9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/>shared_ptr&lt;T&gt;<sp/><ref refid="classweak__ptr_1aa8708d1965a5606f913443522d41a6d9" kindref="member">lock</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>!=<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>&amp;&amp;<sp/>owner_-&gt;try_incref_strong())<sp/>{</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>shared_ptr&lt;T&gt;(ptr_,<sp/>owner_);</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>shared_ptr&lt;T&gt;();</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"></highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
+<codeline lineno="309" refid="classweak__ptr_1abb99f2a98d408d48139bf87a5a936568" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1abb99f2a98d408d48139bf87a5a936568" kindref="member">owner_equal</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>weak_ptr&lt;U&gt;&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>owner_<sp/>==<sp/>rhs.owner_;</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"></highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
+<codeline lineno="320" refid="classweak__ptr_1abc4244677b6082a5ab8a33cdd9518864" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1abc4244677b6082a5ab8a33cdd9518864" kindref="member">owner_equal</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>shared_ptr&lt;U&gt;&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>owner_<sp/>==<sp/></highlight><highlight class="keyword">reinterpret_cast&lt;</highlight><highlight class="normal">inner::__smart_ptr_counter*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(rhs.owner_);</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"></highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
+<codeline lineno="331" refid="classweak__ptr_1a3351d9ac0cabcca299924d89b2681c81" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1a3351d9ac0cabcca299924d89b2681c81" kindref="member">owner_before</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>weak_ptr&lt;U&gt;&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>owner_<sp/>&lt;<sp/>rhs.owner_;</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"></highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
+<codeline lineno="342" refid="classweak__ptr_1a4d6ab0f9309ca450a190754f5b0951af" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr_1a4d6ab0f9309ca450a190754f5b0951af" kindref="member">owner_before</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>shared_ptr&lt;U&gt;&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>owner_<sp/>&lt;<sp/>reinterpret_cast&lt;inner::__smart_ptr_counter*&gt;(rhs.owner_);</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="345"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="346"><highlight class="normal"></highlight></codeline>
+<codeline lineno="347"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="348" refid="group___weak_pointer_1ga78f9e2de1f42821593e5dd8183ae748a" refkind="member"><highlight class="normal">weak_ptr&lt;T&gt;<sp/><ref refid="group___weak_pointer_1ga78f9e2de1f42821593e5dd8183ae748a" kindref="member">enable_shared_from_this&lt;T&gt;::weak_from_this</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___base_type_qualifier_check_1ga096bf5b121d9f427c8027f2949e8198e" kindref="member">is_base_of_v&lt;enable_shared_from_this, T&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;weak_from_this<sp/>requires<sp/>derived<sp/>class&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>weak_ptr&lt;T&gt;();</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>weak_ptr&lt;T&gt;(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="normal">T*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(</highlight><highlight class="keyword">this</highlight><highlight class="normal">),<sp/>owner_);</highlight></codeline>
+<codeline lineno="354"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="355"><highlight class="normal"></highlight></codeline>
+<codeline lineno="356"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="357" refid="group___weak_pointer_1gaf5f0f4ef4fee4243568b7a3987ac92de" refkind="member"><highlight class="normal">weak_ptr&lt;const<sp/>T&gt;<sp/><ref refid="group___weak_pointer_1ga78f9e2de1f42821593e5dd8183ae748a" kindref="member">enable_shared_from_this&lt;T&gt;::weak_from_this</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(<ref refid="group___base_type_qualifier_check_1ga096bf5b121d9f427c8027f2949e8198e" kindref="member">is_base_of_v&lt;enable_shared_from_this, T&gt;</ref>,<sp/></highlight><highlight class="stringliteral">&quot;weak_from_this<sp/>requires<sp/>derived<sp/>class&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(owner_<sp/>==<sp/></highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>weak_ptr&lt;const<sp/>T&gt;();</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>weak_ptr&lt;const<sp/>T&gt;(</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keyword">const<sp/></highlight><highlight class="normal">T*</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(</highlight><highlight class="keyword">this</highlight><highlight class="normal">),<sp/>owner_);</highlight></codeline>
+<codeline lineno="363"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"></highlight></codeline>
+<codeline lineno="365"><highlight class="normal"></highlight></codeline>
+<codeline lineno="371"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="372" refid="structowner__less" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structowner__less" kindref="compound">owner_less</ref>;</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"></highlight></codeline>
+<codeline lineno="380"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="381" refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structowner__less" kindref="compound">owner_less</ref>&lt;<ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt;T&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="382" refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4_1abc36a7d8f9d113ac3c881963380f2247" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4_1abc36a7d8f9d113ac3c881963380f2247" kindref="member">is_transparent</ref><sp/>=<sp/>void;<sp/></highlight></codeline>
+<codeline lineno="383"><highlight class="normal"></highlight></codeline>
+<codeline lineno="387" refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4_1ac1e4c1754ce94c83c31fd6b30566cc5d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4_1ac1e4c1754ce94c83c31fd6b30566cc5d" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;T&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="388"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
+<codeline lineno="389"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="390"><highlight class="normal"></highlight></codeline>
+<codeline lineno="394" refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4_1a49e31c6d02b0a24aab5f2d87e1bdcf4c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4_1a49e31c6d02b0a24aab5f2d87e1bdcf4c" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="395"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
+<codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="397"><highlight class="normal"></highlight></codeline>
+<codeline lineno="401" refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4_1a60418cf26397abf09f78e8abe08fbc6a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01shared__ptr_3_01_t_01_4_01_4_1a60418cf26397abf09f78e8abe08fbc6a" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;T&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="402"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
+<codeline lineno="403"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="404"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="405"><highlight class="normal"></highlight></codeline>
+<codeline lineno="410"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="411" refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structowner__less" kindref="compound">owner_less</ref>&lt;<ref refid="classweak__ptr" kindref="compound">weak_ptr</ref>&lt;T&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="412" refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4_1acb55b07ecf8be10a9fb8413e9e7864ba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4_1acb55b07ecf8be10a9fb8413e9e7864ba" kindref="member">is_transparent</ref><sp/>=<sp/>void;<sp/></highlight></codeline>
+<codeline lineno="413"><highlight class="normal"></highlight></codeline>
+<codeline lineno="417" refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4_1a31bee6d90492c73e07a115c87b5d87cd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4_1a31bee6d90492c73e07a115c87b5d87cd" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="418"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
+<codeline lineno="419"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="420"><highlight class="normal"></highlight></codeline>
+<codeline lineno="424" refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4_1a1901a227ffd48431d2e1ed7c882b9d01" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4_1a1901a227ffd48431d2e1ed7c882b9d01" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;T&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="425"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
+<codeline lineno="426"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="427"><highlight class="normal"></highlight></codeline>
+<codeline lineno="431" refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4_1ac8cd31ac55b018e03af5041c91b9b015" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01weak__ptr_3_01_t_01_4_01_4_1ac8cd31ac55b018e03af5041c91b9b015" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
 <codeline lineno="432"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
 <codeline lineno="433"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="434"><highlight class="normal"></highlight></codeline>
-<codeline lineno="438"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
-<codeline lineno="439" refid="structowner__less_3_01void_01_4_1a3584296a9c730372141e5db7e3eadb0f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01void_01_4_1a3584296a9c730372141e5db7e3eadb0f" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;U&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="440"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
-<codeline lineno="441"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="442"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="443"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>WeakPointer</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="445"><highlight class="normal"></highlight></codeline>
-<codeline lineno="451"><highlight class="normal"></highlight></codeline>
-<codeline lineno="458"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="459" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">atomic&lt;<ref refid="classweak__ptr" kindref="compound">weak_ptr</ref>&lt;T&gt;&gt;<sp/>{</highlight></codeline>
-<codeline lineno="460"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="461"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">value_type<sp/>=<sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>;</highlight></codeline>
-<codeline lineno="462"><highlight class="normal"></highlight></codeline>
-<codeline lineno="463"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_always_lock_free<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="464"><highlight class="normal"></highlight></codeline>
-<codeline lineno="465"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="466"><highlight class="normal"><sp/><sp/><sp/><sp/>inner::smart_pointer_atomic&lt;value_type&gt;<sp/>atomic_;</highlight></codeline>
-<codeline lineno="467"><highlight class="normal"></highlight></codeline>
-<codeline lineno="468"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="473" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a66caafd27fd7c27c5f825c8427597668" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a66caafd27fd7c27c5f825c8427597668" kindref="member">is_lock_free</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
-<codeline lineno="474"><highlight class="normal"></highlight></codeline>
-<codeline lineno="475"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structatomic" kindref="compound">atomic</ref>()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
-<codeline lineno="476"><highlight class="normal"></highlight></codeline>
-<codeline lineno="481" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a8418d6f39ab56c0ecb47f955dbf49baa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>atomic(value_type<sp/>value)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="482"><highlight class="normal"><sp/><sp/><sp/><sp/>atomic_(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(value))<sp/>{}</highlight></codeline>
-<codeline lineno="483"><highlight class="normal"></highlight></codeline>
-<codeline lineno="484"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structatomic" kindref="compound">atomic</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structatomic" kindref="compound">atomic</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="485"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structatomic" kindref="compound">atomic</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="486"><highlight class="normal"></highlight></codeline>
-<codeline lineno="492" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1adbe257302df56da163cea95ccb7e67dd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>value_type<sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1adbe257302df56da163cea95ccb7e67dd" kindref="member">load</ref>(<ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo<sp/>=<sp/><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>atomic_.load(mo);<sp/>}</highlight></codeline>
-<codeline lineno="493"><highlight class="normal"></highlight></codeline>
-<codeline lineno="497" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a4e588d1334e81ff00a762a3099aa5db4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/><ref refid="structatomic_1a5789c7bdfec0dc3df322440a2dbcd6f4" kindref="member">value_type</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>atomic_.load(<ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="434"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="435"><highlight class="normal"></highlight></codeline>
+<codeline lineno="441"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;&gt;</highlight></codeline>
+<codeline lineno="442" refid="structowner__less_3_01void_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structowner__less" kindref="compound">owner_less</ref>&lt;void&gt;<sp/>{</highlight></codeline>
+<codeline lineno="443" refid="structowner__less_3_01void_01_4_1a9df8aed8e7dd2a644c8d645874a19ccb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structowner__less_3_01void_01_4_1a9df8aed8e7dd2a644c8d645874a19ccb" kindref="member">is_transparent</ref><sp/>=<sp/>void;<sp/></highlight></codeline>
+<codeline lineno="444"><highlight class="normal"></highlight></codeline>
+<codeline lineno="448"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
+<codeline lineno="449" refid="structowner__less_3_01void_01_4_1a4f4f90b842c8ca7343aa5991169cd39d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01void_01_4_1a4f4f90b842c8ca7343aa5991169cd39d" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;U&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="450"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
+<codeline lineno="451"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="452"><highlight class="normal"></highlight></codeline>
+<codeline lineno="456"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
+<codeline lineno="457" refid="structowner__less_3_01void_01_4_1a0a47bf6d34f46957f3631ac8dafb1add" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01void_01_4_1a0a47bf6d34f46957f3631ac8dafb1add" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;U&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="458"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
+<codeline lineno="459"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="460"><highlight class="normal"></highlight></codeline>
+<codeline lineno="464"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
+<codeline lineno="465" refid="structowner__less_3_01void_01_4_1a8dc2aba419c341877e0028776d5f25e8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01void_01_4_1a8dc2aba419c341877e0028776d5f25e8" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classshared__ptr" kindref="compound">shared_ptr&lt;U&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="466"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
+<codeline lineno="467"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="468"><highlight class="normal"></highlight></codeline>
+<codeline lineno="472"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>U&gt;</highlight></codeline>
+<codeline lineno="473" refid="structowner__less_3_01void_01_4_1a3584296a9c730372141e5db7e3eadb0f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structowner__less_3_01void_01_4_1a3584296a9c730372141e5db7e3eadb0f" kindref="member">operator()</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>&amp;<sp/>lhs,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;U&gt;</ref>&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="474"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lhs.owner_before(rhs);</highlight></codeline>
+<codeline lineno="475"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="476"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="477"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>WeakPointer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="479"><highlight class="normal"></highlight></codeline>
+<codeline lineno="485"><highlight class="normal"></highlight></codeline>
+<codeline lineno="492"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="493" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">atomic&lt;<ref refid="classweak__ptr" kindref="compound">weak_ptr</ref>&lt;T&gt;&gt;<sp/>{</highlight></codeline>
+<codeline lineno="494"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="495"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">value_type<sp/>=<sp/><ref refid="classweak__ptr" kindref="compound">weak_ptr&lt;T&gt;</ref>;</highlight></codeline>
+<codeline lineno="496"><highlight class="normal"></highlight></codeline>
+<codeline lineno="497"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_always_lock_free<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="498"><highlight class="normal"></highlight></codeline>
-<codeline lineno="504" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a97a5a243370ca7412b063a9b461fc015" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a97a5a243370ca7412b063a9b461fc015" kindref="member">store</ref>(value_type<sp/>desired,<sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo<sp/>=<sp/><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>atomic_.swap(desired,<sp/>mo);<sp/>}</highlight></codeline>
-<codeline lineno="505"><highlight class="normal"></highlight></codeline>
-<codeline lineno="509" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1aa90dd118d771d663d05ece8cfeef4941" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1aa90dd118d771d663d05ece8cfeef4941" kindref="member">operator=</ref>(value_type<sp/>desired)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>atomic_.swap(desired,<sp/><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="499"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="500"><highlight class="normal"><sp/><sp/><sp/><sp/>inner::smart_pointer_atomic&lt;value_type&gt;<sp/>atomic_;</highlight></codeline>
+<codeline lineno="501"><highlight class="normal"></highlight></codeline>
+<codeline lineno="502"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="507" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a66caafd27fd7c27c5f825c8427597668" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>NEFORCE_NODISCARD<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a66caafd27fd7c27c5f825c8427597668" kindref="member">is_lock_free</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="508"><highlight class="normal"></highlight></codeline>
+<codeline lineno="509"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structatomic" kindref="compound">atomic</ref>()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
 <codeline lineno="510"><highlight class="normal"></highlight></codeline>
-<codeline lineno="517" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a7a5ee316f303544615f232915fc8f0d8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>value_type<sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a7a5ee316f303544615f232915fc8f0d8" kindref="member">exchange</ref>(value_type<sp/>desired,<sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo<sp/>=<sp/><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="518"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>atomic_.swap(desired,<sp/>mo);</highlight></codeline>
-<codeline lineno="519"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>desired;</highlight></codeline>
-<codeline lineno="520"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="521"><highlight class="normal"></highlight></codeline>
-<codeline lineno="525" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a3872bf662a76660abbbbd99970100baf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a3872bf662a76660abbbbd99970100baf" kindref="member">compare_exchange_strong</ref>(value_type&amp;<sp/>expected,<sp/>value_type<sp/>desired,<sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo,<sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo2)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="526"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>atomic_.compare_exchange_strong(expected,<sp/>desired,<sp/>mo,<sp/>mo2);</highlight></codeline>
-<codeline lineno="527"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="528"><highlight class="normal"></highlight></codeline>
-<codeline lineno="532" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1aacadb2fa1d554474257755ab8c057360" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1aacadb2fa1d554474257755ab8c057360" kindref="member">compare_exchange_strong</ref>(value_type&amp;<sp/>expected,<sp/>value_type<sp/>desired,</highlight></codeline>
-<codeline lineno="533"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo<sp/>=<sp/><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="534"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structatomic_1a1464cb79d660c630d2fe3a44a7b8adba" kindref="member">compare_exchange_strong</ref>(expected,<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(desired),<sp/>mo,<sp/><ref refid="group___memory_order_1gafda3e5c6834532546b1eaef81affc2b2" kindref="member">cmpexch_failure_order</ref>(mo));</highlight></codeline>
-<codeline lineno="535"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="536"><highlight class="normal"></highlight></codeline>
-<codeline lineno="540" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1ad4869b2612cf0d38f5735d05d7cf3844" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1ad4869b2612cf0d38f5735d05d7cf3844" kindref="member">compare_exchange_weak</ref>(value_type&amp;<sp/>expected,<sp/>value_type<sp/>desired,<sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo,<sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo2)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="541"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structatomic_1a1464cb79d660c630d2fe3a44a7b8adba" kindref="member">compare_exchange_strong</ref>(expected,<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(desired),<sp/>mo,<sp/>mo2);</highlight></codeline>
-<codeline lineno="542"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="543"><highlight class="normal"></highlight></codeline>
-<codeline lineno="547" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a28ef35af31202c69a499f7c15f418f38" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a28ef35af31202c69a499f7c15f418f38" kindref="member">compare_exchange_weak</ref>(value_type&amp;<sp/>expected,<sp/>value_type<sp/>desired,</highlight></codeline>
-<codeline lineno="548"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo<sp/>=<sp/><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="549"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structatomic_1a1464cb79d660c630d2fe3a44a7b8adba" kindref="member">compare_exchange_strong</ref>(expected,<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(desired),<sp/>mo);</highlight></codeline>
-<codeline lineno="550"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="551"><highlight class="normal"></highlight></codeline>
-<codeline lineno="555" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a0cb23fed0831e23e16dc5c0f590dc3cb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a0cb23fed0831e23e16dc5c0f590dc3cb" kindref="member">wait</ref>(value_type<sp/>mold,<sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo<sp/>=<sp/><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>atomic_.wait(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(mold),<sp/>mo);<sp/>}</highlight></codeline>
-<codeline lineno="556"><highlight class="normal"></highlight></codeline>
-<codeline lineno="560" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1aa6de700b731d2eaf49b846b7f235f683" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1aa6de700b731d2eaf49b846b7f235f683" kindref="member">notify_one</ref>()<sp/>noexcept<sp/>{<sp/>atomic_.notify_one();<sp/>}</highlight></codeline>
-<codeline lineno="561"><highlight class="normal"></highlight></codeline>
-<codeline lineno="565" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1ada9f8ff7d744388a0664ca3c921c5eb2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1ada9f8ff7d744388a0664ca3c921c5eb2" kindref="member">notify_all</ref>()<sp/>noexcept<sp/>{<sp/>atomic_.notify_all();<sp/>}</highlight></codeline>
-<codeline lineno="566"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="567"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>AtomicOperations</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="569"><highlight class="normal"></highlight></codeline>
-<codeline lineno="570"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="571"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_MEMORY_WEAK_PTR_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="515" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a8418d6f39ab56c0ecb47f955dbf49baa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>atomic(value_type<sp/>value)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="516"><highlight class="normal"><sp/><sp/><sp/><sp/>atomic_(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(value))<sp/>{}</highlight></codeline>
+<codeline lineno="517"><highlight class="normal"></highlight></codeline>
+<codeline lineno="518"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structatomic" kindref="compound">atomic</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structatomic" kindref="compound">atomic</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="519"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structatomic" kindref="compound">atomic</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="520"><highlight class="normal"></highlight></codeline>
+<codeline lineno="526" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1adbe257302df56da163cea95ccb7e67dd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>value_type<sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1adbe257302df56da163cea95ccb7e67dd" kindref="member">load</ref>(<ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo<sp/>=<sp/><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>atomic_.load(mo);<sp/>}</highlight></codeline>
+<codeline lineno="527"><highlight class="normal"></highlight></codeline>
+<codeline lineno="531" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a4e588d1334e81ff00a762a3099aa5db4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">operator</highlight><highlight class="normal"><sp/><ref refid="structatomic_1a5789c7bdfec0dc3df322440a2dbcd6f4" kindref="member">value_type</ref>()<sp/>const<sp/>noexcept<sp/>{<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>atomic_.load(<ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="532"><highlight class="normal"></highlight></codeline>
+<codeline lineno="538" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a97a5a243370ca7412b063a9b461fc015" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a97a5a243370ca7412b063a9b461fc015" kindref="member">store</ref>(value_type<sp/>desired,<sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo<sp/>=<sp/><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>atomic_.swap(desired,<sp/>mo);<sp/>}</highlight></codeline>
+<codeline lineno="539"><highlight class="normal"></highlight></codeline>
+<codeline lineno="543" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1aa90dd118d771d663d05ece8cfeef4941" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1aa90dd118d771d663d05ece8cfeef4941" kindref="member">operator=</ref>(value_type<sp/>desired)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>atomic_.swap(desired,<sp/><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref>);<sp/>}</highlight></codeline>
+<codeline lineno="544"><highlight class="normal"></highlight></codeline>
+<codeline lineno="551" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a7a5ee316f303544615f232915fc8f0d8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>value_type<sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a7a5ee316f303544615f232915fc8f0d8" kindref="member">exchange</ref>(value_type<sp/>desired,<sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo<sp/>=<sp/><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="552"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>atomic_.swap(desired,<sp/>mo);</highlight></codeline>
+<codeline lineno="553"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>desired;</highlight></codeline>
+<codeline lineno="554"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="555"><highlight class="normal"></highlight></codeline>
+<codeline lineno="559" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a3872bf662a76660abbbbd99970100baf" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a3872bf662a76660abbbbd99970100baf" kindref="member">compare_exchange_strong</ref>(value_type&amp;<sp/>expected,<sp/>value_type<sp/>desired,<sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo,<sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo2)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="560"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>atomic_.compare_exchange_strong(expected,<sp/>desired,<sp/>mo,<sp/>mo2);</highlight></codeline>
+<codeline lineno="561"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="562"><highlight class="normal"></highlight></codeline>
+<codeline lineno="566" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1aacadb2fa1d554474257755ab8c057360" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1aacadb2fa1d554474257755ab8c057360" kindref="member">compare_exchange_strong</ref>(value_type&amp;<sp/>expected,<sp/>value_type<sp/>desired,</highlight></codeline>
+<codeline lineno="567"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo<sp/>=<sp/><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="568"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structatomic_1a1464cb79d660c630d2fe3a44a7b8adba" kindref="member">compare_exchange_strong</ref>(expected,<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(desired),<sp/>mo,<sp/><ref refid="group___memory_order_1gafda3e5c6834532546b1eaef81affc2b2" kindref="member">cmpexch_failure_order</ref>(mo));</highlight></codeline>
+<codeline lineno="569"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="570"><highlight class="normal"></highlight></codeline>
+<codeline lineno="574" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1ad4869b2612cf0d38f5735d05d7cf3844" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1ad4869b2612cf0d38f5735d05d7cf3844" kindref="member">compare_exchange_weak</ref>(value_type&amp;<sp/>expected,<sp/>value_type<sp/>desired,<sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo,<sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo2)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="575"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structatomic_1a1464cb79d660c630d2fe3a44a7b8adba" kindref="member">compare_exchange_strong</ref>(expected,<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(desired),<sp/>mo,<sp/>mo2);</highlight></codeline>
+<codeline lineno="576"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="577"><highlight class="normal"></highlight></codeline>
+<codeline lineno="581" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a28ef35af31202c69a499f7c15f418f38" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a28ef35af31202c69a499f7c15f418f38" kindref="member">compare_exchange_weak</ref>(value_type&amp;<sp/>expected,<sp/>value_type<sp/>desired,</highlight></codeline>
+<codeline lineno="582"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo<sp/>=<sp/><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref>)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="583"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structatomic_1a1464cb79d660c630d2fe3a44a7b8adba" kindref="member">compare_exchange_strong</ref>(expected,<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(desired),<sp/>mo);</highlight></codeline>
+<codeline lineno="584"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="585"><highlight class="normal"></highlight></codeline>
+<codeline lineno="589" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a0cb23fed0831e23e16dc5c0f590dc3cb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1a0cb23fed0831e23e16dc5c0f590dc3cb" kindref="member">wait</ref>(value_type<sp/>mold,<sp/><ref refid="group___memory_order_1gad658351bedece1752acbd72886a7e0e4" kindref="member">memory_order</ref><sp/>mo<sp/>=<sp/><ref refid="group___memory_order_1ga4be2d174b1a12bf2c3477a854d96f570" kindref="member">memory_order_seq_cst</ref>)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>{<sp/>atomic_.wait(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(mold),<sp/>mo);<sp/>}</highlight></codeline>
+<codeline lineno="590"><highlight class="normal"></highlight></codeline>
+<codeline lineno="594" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1aa6de700b731d2eaf49b846b7f235f683" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1aa6de700b731d2eaf49b846b7f235f683" kindref="member">notify_one</ref>()<sp/>noexcept<sp/>{<sp/>atomic_.notify_one();<sp/>}</highlight></codeline>
+<codeline lineno="595"><highlight class="normal"></highlight></codeline>
+<codeline lineno="599" refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1ada9f8ff7d744388a0664ca3c921c5eb2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="structatomic_3_01weak__ptr_3_01_t_01_4_01_4_1ada9f8ff7d744388a0664ca3c921c5eb2" kindref="member">notify_all</ref>()<sp/>noexcept<sp/>{<sp/>atomic_.notify_all();<sp/>}</highlight></codeline>
+<codeline lineno="600"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="601"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>AtomicOperations</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="603"><highlight class="normal"></highlight></codeline>
+<codeline lineno="604"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="605"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_MEMORY_WEAK_PTR_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/weak_ptr.hpp"/>
   </compounddef>

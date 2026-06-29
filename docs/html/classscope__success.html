@@ -108,8 +108,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a9b5d859993568166f19388c3fafc5100"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数（异常安全）  <br /></td></tr>
 <tr class="memitem:ad8e5cfea5c3d816a051aa600a994c6a9" id="r_ad8e5cfea5c3d816a051aa600a994c6a9"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad8e5cfea5c3d816a051aa600a994c6a9">scope_success</a> (<a class="el" href="classscope__success.html">scope_success</a> &amp;&amp;rhs) noexcept(<a class="el" href="group___type_special_member_function_checks.html#gad26f59ba1b8a873f9d8374f72a4002c4">is_nothrow_move_assignable_v</a>&lt; Func &gt;)</td></tr>
 <tr class="memdesc:ad8e5cfea5c3d816a051aa600a994c6a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
-<tr class="memitem:a310ca7b0aef05c30c2a102a6f81a63ec" id="r_a310ca7b0aef05c30c2a102a6f81a63ec"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a310ca7b0aef05c30c2a102a6f81a63ec">~scope_success</a> () noexcept(<a class="el" href="group___invoke_function.html#gafdceccc521c88df3849b9e1acf2b153e">is_nothrow_invocable_v</a>&lt; Func &gt;)</td></tr>
-<tr class="memdesc:a310ca7b0aef05c30c2a102a6f81a63ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数  <br /></td></tr>
+<tr class="memitem:a9b491f1271cf501a287b89876d92490b" id="r_a9b491f1271cf501a287b89876d92490b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a9b491f1271cf501a287b89876d92490b">~scope_success</a> () noexcept</td></tr>
+<tr class="memdesc:a9b491f1271cf501a287b89876d92490b"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数  <br /></td></tr>
 <tr class="memitem:a30eaf95fca08b7ed80c927ee16b3a866" id="r_a30eaf95fca08b7ed80c927ee16b3a866"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a30eaf95fca08b7ed80c927ee16b3a866">release</a> () noexcept</td></tr>
 <tr class="memdesc:a30eaf95fca08b7ed80c927ee16b3a866"><td class="mdescLeft">&#160;</td><td class="mdescRight">释放守卫  <br /></td></tr>
 </table>
@@ -125,7 +125,7 @@ class scope_success&lt; Func &gt;</div><p>作用域成功守卫 </p>
 <p>仅在作用域正常退出时执行指定的函数。 用于实现提交操作、日志记录等正常流程的清理。</p>
 <dl class="section note"><dt>注解</dt><dd>函数对象的执行不能抛出异常。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00214">214</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00224">224</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a7346c747f5329506a9c40dc4859af9f2" name="a7346c747f5329506a9c40dc4859af9f2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7346c747f5329506a9c40dc4859af9f2">&#9670;&#160;</a></span>scope_success() <span class="overload">[1/3]</span></h2>
@@ -168,11 +168,11 @@ template&lt;typename F, <a class="el" href="group___type_traits_utilities.html#g
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00227">227</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00237">237</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03028">forward()</a> , 以及 <a class="el" href="group___exception_handling.html#ga85d57a425c36f9ca490ce7e62793bef1">uncaught_exceptions()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="scope_8hpp_source.html#l00251">scope_success()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="scope_8hpp_source.html#l00261">scope_success()</a>.</p>
 
 </div>
 </div>
@@ -217,7 +217,7 @@ template&lt;typename F, <a class="el" href="group___type_traits_utilities.html#g
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00241">241</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00251">251</a> 行定义.</p>
 
 </div>
 </div>
@@ -254,14 +254,14 @@ template&lt;typename Func&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00251">251</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00261">261</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02923">is_nothrow_move_assignable_v</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="scope_8hpp_source.html#l00227">scope_success()</a>.</p>
+<p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l02923">is_nothrow_move_assignable_v</a>, <a class="el" href="shift_8hpp_source.html#l00312">move()</a> , 以及 <a class="el" href="scope_8hpp_source.html#l00237">scope_success()</a>.</p>
 
 </div>
 </div>
-<a id="a310ca7b0aef05c30c2a102a6f81a63ec" name="a310ca7b0aef05c30c2a102a6f81a63ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a310ca7b0aef05c30c2a102a6f81a63ec">&#9670;&#160;</a></span>~scope_success()</h2>
+<a id="a9b491f1271cf501a287b89876d92490b" name="a9b491f1271cf501a287b89876d92490b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b491f1271cf501a287b89876d92490b">&#9670;&#160;</a></span>~scope_success()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -288,9 +288,9 @@ template&lt;typename Func&gt; </div>
 <p>析构函数 </p>
 <p>如果当前未捕获异常数量不大于构造时记录的值，说明正常退出， 执行函数对象。 </p>
 
-<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00264">264</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00274">274</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="invoke_8hpp_source.html#l00485">is_nothrow_invocable_v</a> , 以及 <a class="el" href="group___exception_handling.html#ga85d57a425c36f9ca490ce7e62793bef1">uncaught_exceptions()</a>.</p>
+<p class="reference">引用了 <a class="el" href="group___exception_handling.html#ga85d57a425c36f9ca490ce7e62793bef1">uncaught_exceptions()</a>.</p>
 
 </div>
 </div>
@@ -323,7 +323,7 @@ template&lt;typename Func&gt; </div>
 <p>释放守卫 </p>
 <p>使守卫不再执行清理操作，通过将异常计数设置为极小值来实现。 </p>
 
-<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00275">275</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="scope_8hpp_source.html">scope.hpp</a> 第 <a class="el" href="scope_8hpp_source.html#l00290">290</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="numeric__traits_8hpp_source.html#l00153">numeric_traits&lt; T, Dummy &gt;::max()</a>.</p>
 

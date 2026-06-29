@@ -100,7 +100,7 @@ $(function(){initNavTree('structidb__connect.html','','structidb__connect-member
 <div class="dynheader">
 类 idb_connect 继承关系图:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structidb__connect__inherit__graph.svg" width="506" height="187"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="structidb__connect__inherit__graph.svg" width="663" height="288"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -113,6 +113,8 @@ using&#160;</td><td class="memItemRight"><b>clock_type</b> = <a class="el" href=
 Public 成员函数</h2></td></tr>
 <tr class="memitem:aedacf58e2ea956b26f4862e49506c3c2" id="r_aedacf58e2ea956b26f4862e49506c3c2"><td class="memItemLeft">virtual bool&#160;</td><td class="memItemRight"><a class="el" href="#aedacf58e2ea956b26f4862e49506c3c2">update</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;sql) const =0</td></tr>
 <tr class="memdesc:aedacf58e2ea956b26f4862e49506c3c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行非查询SQL语句  <br /></td></tr>
+<tr class="memitem:a795f60f7b0e4db4511ba51da8d54c7b3" id="r_a795f60f7b0e4db4511ba51da8d54c7b3"><td class="memItemLeft">virtual void *&#160;</td><td class="memItemRight"><a class="el" href="#a795f60f7b0e4db4511ba51da8d54c7b3">native_handle</a> () noexcept=0</td></tr>
+<tr class="memdesc:a795f60f7b0e4db4511ba51da8d54c7b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取原生连接句柄  <br /></td></tr>
 <tr class="memitem:a23d22fba9ce82c798a1363f0f816f593" id="r_a23d22fba9ce82c798a1363f0f816f593"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a23d22fba9ce82c798a1363f0f816f593">refresh_alive</a> () noexcept</td></tr>
 <tr class="memdesc:a23d22fba9ce82c798a1363f0f816f593"><td class="mdescLeft">&#160;</td><td class="mdescRight">刷新连接存活时间  <br /></td></tr>
 <tr class="memitem:a5fe328d4bdf863d226d7065daf2cc56b" id="r_a5fe328d4bdf863d226d7065daf2cc56b"><td class="memItemLeft"><a class="el" href="#ab9be909e9ecc1db9cbcc28186de35c95">clock_type</a>&#160;</td><td class="memItemRight"><a class="el" href="#a5fe328d4bdf863d226d7065daf2cc56b">get_alive</a> () const noexcept</td></tr>
@@ -128,9 +130,9 @@ virtual bool&#160;</td><td class="memItemRight"><b>reconnect</b> (const <a class
 virtual void&#160;</td><td class="memItemRight"><b>close</b> ()=0</td></tr>
 <tr class="memdesc:a689ce6c9a44cdc602e6006615e949e19"><td class="mdescLeft">&#160;</td><td class="mdescRight">关闭连接 <br /></td></tr>
 <tr id="pub-methods-1" class="groupHeader"><td colspan="2"><div class="groupHeader">字符集设置</div></td></tr>
-<tr class="memitem:a9f0b407a683b19bee646271a19356aad" id="r_a9f0b407a683b19bee646271a19356aad"><td class="memItemLeft"><a id="a9f0b407a683b19bee646271a19356aad" name="a9f0b407a683b19bee646271a19356aad"></a>
-virtual bool&#160;</td><td class="memItemRight"><b>set_character_set</b> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;encoding) const =0</td></tr>
-<tr class="memdesc:a9f0b407a683b19bee646271a19356aad"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符集 <br /></td></tr>
+<tr class="memitem:a7787680de395dc737bd6b14978488854" id="r_a7787680de395dc737bd6b14978488854"><td class="memItemLeft"><a id="a7787680de395dc737bd6b14978488854" name="a7787680de395dc737bd6b14978488854"></a>
+virtual bool&#160;</td><td class="memItemRight"><b>set_character_set</b> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;encoding)=0</td></tr>
+<tr class="memdesc:a7787680de395dc737bd6b14978488854"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置字符集 <br /></td></tr>
 <tr class="memitem:a81f310b0ea3085407106a63fa1ba0767" id="r_a81f310b0ea3085407106a63fa1ba0767"><td class="memItemLeft"><a id="a81f310b0ea3085407106a63fa1ba0767" name="a81f310b0ea3085407106a63fa1ba0767"></a>
 virtual <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><b>get_character_set</b> () const =0</td></tr>
 <tr class="memdesc:a81f310b0ea3085407106a63fa1ba0767"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取字符集 <br /></td></tr>
@@ -141,7 +143,17 @@ virtual <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53
 <tr class="memitem:a150e2a5aac988b6abb97f9444042d06e" id="r_a150e2a5aac988b6abb97f9444042d06e"><td class="memItemLeft"><a id="a150e2a5aac988b6abb97f9444042d06e" name="a150e2a5aac988b6abb97f9444042d06e"></a>
 virtual <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&#160;</td><td class="memItemRight"><b>get_errno</b> () const =0</td></tr>
 <tr class="memdesc:a150e2a5aac988b6abb97f9444042d06e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取错误码 <br /></td></tr>
-<tr id="pub-methods-3" class="groupHeader"><td colspan="2"><div class="groupHeader">连接状态检测</div></td></tr>
+<tr id="pub-methods-3" class="groupHeader"><td colspan="2"><div class="groupHeader">事务管理</div></td></tr>
+<tr class="memitem:a24b4c723358335c8a32164c021da1bc7" id="r_a24b4c723358335c8a32164c021da1bc7"><td class="memItemLeft"><a id="a24b4c723358335c8a32164c021da1bc7" name="a24b4c723358335c8a32164c021da1bc7"></a>
+virtual bool&#160;</td><td class="memItemRight"><b>begin</b> ()=0</td></tr>
+<tr class="memdesc:a24b4c723358335c8a32164c021da1bc7"><td class="mdescLeft">&#160;</td><td class="mdescRight">开始事务 <br /></td></tr>
+<tr class="memitem:a15de30685e73d3b2855f132ae600a81a" id="r_a15de30685e73d3b2855f132ae600a81a"><td class="memItemLeft"><a id="a15de30685e73d3b2855f132ae600a81a" name="a15de30685e73d3b2855f132ae600a81a"></a>
+virtual bool&#160;</td><td class="memItemRight"><b>commit</b> ()=0</td></tr>
+<tr class="memdesc:a15de30685e73d3b2855f132ae600a81a"><td class="mdescLeft">&#160;</td><td class="mdescRight">提交事务 <br /></td></tr>
+<tr class="memitem:ae9129bc37cfcb03085e3234e2be8583a" id="r_ae9129bc37cfcb03085e3234e2be8583a"><td class="memItemLeft"><a id="ae9129bc37cfcb03085e3234e2be8583a" name="ae9129bc37cfcb03085e3234e2be8583a"></a>
+virtual bool&#160;</td><td class="memItemRight"><b>rollback</b> ()=0</td></tr>
+<tr class="memdesc:ae9129bc37cfcb03085e3234e2be8583a"><td class="mdescLeft">&#160;</td><td class="mdescRight">回滚事务 <br /></td></tr>
+<tr id="pub-methods-4" class="groupHeader"><td colspan="2"><div class="groupHeader">连接状态检测</div></td></tr>
 <tr class="memitem:a05b7b473cdd13c18f5b44c83e09c082d" id="r_a05b7b473cdd13c18f5b44c83e09c082d"><td class="memItemLeft"><a id="a05b7b473cdd13c18f5b44c83e09c082d" name="a05b7b473cdd13c18f5b44c83e09c082d"></a>
 virtual bool&#160;</td><td class="memItemRight"><b>connected</b> () const =0</td></tr>
 <tr class="memdesc:a05b7b473cdd13c18f5b44c83e09c082d"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查连接状态 <br /></td></tr>
@@ -153,7 +165,7 @@ virtual bool&#160;</td><td class="memItemRight"><b>is_valid</b> () const =0</td>
 <div class="textblock"><p>数据库连接抽象基类 </p>
 <p>提供连接管理、错误处理、存活检测等基础功能。 </p>
 
-<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00190">190</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00200">200</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="a5fe328d4bdf863d226d7065daf2cc56b" name="a5fe328d4bdf863d226d7065daf2cc56b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5fe328d4bdf863d226d7065daf2cc56b">&#9670;&#160;</a></span>get_alive()</h2>
@@ -181,9 +193,39 @@ virtual bool&#160;</td><td class="memItemRight"><b>is_valid</b> () const =0</td>
 <p>获取连接空闲时间 </p>
 <dl class="section return"><dt>返回</dt><dd>自上次刷新以来的毫秒数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00251">251</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00276">276</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a> , 以及 <a class="el" href="duration_8hpp_source.html#l00144">time_cast()</a>.</p>
+
+</div>
+</div>
+<a id="a795f60f7b0e4db4511ba51da8d54c7b3" name="a795f60f7b0e4db4511ba51da8d54c7b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a795f60f7b0e4db4511ba51da8d54c7b3">&#9670;&#160;</a></span>native_handle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void * idb_connect::native_handle </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel pure-virtual">pure virtual</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取原生连接句柄 </p>
+<dl class="section return"><dt>返回</dt><dd>原生句柄指针 </dd></dl>
+
+<p>在 <a class="el" href="structredis__connect.html#ae99b5dd3ad7c6bafae3cee8af963a991">redis_connect</a>, <a class="el" href="structsql__connect__base.html#aa0b6741b0c883b61f956a4797b121eff">sql_connect_base&lt; Derived &gt;</a>, <a class="el" href="structsql__connect__base.html#aa0b6741b0c883b61f956a4797b121eff">sql_connect_base&lt; mysql_connect &gt;</a>, <a class="el" href="structsql__connect__base.html#aa0b6741b0c883b61f956a4797b121eff">sql_connect_base&lt; pgsql_connect &gt;</a> , 以及 <a class="el" href="structsql__connect__base.html#aa0b6741b0c883b61f956a4797b121eff">sql_connect_base&lt; sqlite_connect &gt;</a> 内被实现.</p>
 
 </div>
 </div>
@@ -213,9 +255,11 @@ virtual bool&#160;</td><td class="memItemRight"><b>is_valid</b> () const =0</td>
 <p>刷新连接存活时间 </p>
 <p>标记当前连接为活动状态，用于连接池空闲检测。 </p>
 
-<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00245">245</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="db__interface_8hpp_source.html">db_interface.hpp</a> 第 <a class="el" href="db__interface_8hpp_source.html#l00270">270</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a> , 以及 <a class="el" href="duration_8hpp_source.html#l00144">time_cast()</a>.</p>
+<p class="reference">引用了 <a class="el" href="structsteady__clock.html#a1f01ac9bf1927c8b15b205f69a90c29d">steady_clock::now()</a>, <a class="el" href="db__interface_8hpp_source.html#l00270">refresh_alive()</a> , 以及 <a class="el" href="duration_8hpp_source.html#l00144">time_cast()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="db__interface_8hpp_source.html#l00270">refresh_alive()</a>.</p>
 
 </div>
 </div>
@@ -251,7 +295,7 @@ virtual bool&#160;</td><td class="memItemRight"><b>is_valid</b> () const =0</td>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>执行成功返回true </dd></dl>
 
-<p>在 <a class="el" href="structmysql__connect.html#a5ed187123d0770a91a9245fe1d8c373e">mysql_connect</a>, <a class="el" href="classpgsql__connect.html#a035e9c7ee0abe108fe689c8a3a12abb0">pgsql_connect</a>, <a class="el" href="structredis__connect.html#ae1eeac414607310e4c1ce4ba0c01affb">redis_connect</a> , 以及 <a class="el" href="structsqlite__connect.html#a1493548378279ac5916f09fd757d80b1">sqlite_connect</a> 内被实现.</p>
+<p>在 <a class="el" href="structmysql__connect.html#aa4c374ecb1f983650ea1de662fa79a85">mysql_connect</a>, <a class="el" href="classpgsql__connect.html#a035e9c7ee0abe108fe689c8a3a12abb0">pgsql_connect</a>, <a class="el" href="structredis__connect.html#ae1eeac414607310e4c1ce4ba0c01affb">redis_connect</a> , 以及 <a class="el" href="structsqlite__connect.html#a1493548378279ac5916f09fd757d80b1">sqlite_connect</a> 内被实现.</p>
 
 </div>
 </div>

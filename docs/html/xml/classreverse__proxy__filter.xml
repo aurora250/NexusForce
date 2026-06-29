@@ -1,0 +1,635 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classreverse__proxy__filter" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>reverse_proxy_filter</compoundname>
+    <basecompoundref refid="classhttp__filter" prot="public" virt="non-virtual">http_filter</basecompoundref>
+    <includes refid="reverse__proxy_8hpp" local="no">reverse_proxy.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classreverse__proxy__filter_1a6cbdca6ef5f56e0c58bb4aee243ebfcd" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(<ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &amp;)&gt;</type>
+        <definition>using reverse_proxy_filter::header_rewrite_cb = function&lt;void(unordered_map&lt;string, string&gt;&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>header_rewrite_cb</name>
+        <qualifiedname>reverse_proxy_filter::header_rewrite_cb</qualifiedname>
+        <briefdescription>
+<para>请求头重写回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="55" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classreverse__proxy__filter_1a2cfdcaab576227ae3c60c687a9866cd2" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; <ref refid="structproxy__backend" kindref="compound">proxy_backend</ref>(const <ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;)&gt;</type>
+        <definition>using reverse_proxy_filter::backend_selector_cb = function&lt;proxy_backend(const http_request&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>backend_selector_cb</name>
+        <qualifiedname>reverse_proxy_filter::backend_selector_cb</qualifiedname>
+        <briefdescription>
+<para>后端选择回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="57" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classreverse__proxy__filter_1a218b8ca3ed1ba696bc16add0dec3977d" prot="public" static="no" mutable="no">
+        <type><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref></type>
+        <definition>milliseconds reverse_proxy_filter::connect_timeout</definition>
+        <argsstring></argsstring>
+        <name>connect_timeout</name>
+        <qualifiedname>reverse_proxy_filter::connect_timeout</qualifiedname>
+        <initializer>{5000}</initializer>
+        <briefdescription>
+<para>连接超时（毫秒） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="60" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="60" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="variable" id="classreverse__proxy__filter_1a76740267c0b122c89d3f3f6d93d46d34" prot="public" static="no" mutable="no">
+        <type><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref></type>
+        <definition>milliseconds reverse_proxy_filter::send_timeout</definition>
+        <argsstring></argsstring>
+        <name>send_timeout</name>
+        <qualifiedname>reverse_proxy_filter::send_timeout</qualifiedname>
+        <initializer>{5000}</initializer>
+        <briefdescription>
+<para>发送超时（毫秒） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="62" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="62" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="variable" id="classreverse__proxy__filter_1abe4b0be21fa63c68d06553cef2839f8b" prot="public" static="no" mutable="no">
+        <type><ref refid="group___duration_1ga0c9e480a0040ed5977448019fb74cd55" kindref="member">milliseconds</ref></type>
+        <definition>milliseconds reverse_proxy_filter::receive_timeout</definition>
+        <argsstring></argsstring>
+        <name>receive_timeout</name>
+        <qualifiedname>reverse_proxy_filter::receive_timeout</qualifiedname>
+        <initializer>{30000}</initializer>
+        <briefdescription>
+<para>接收超时（毫秒） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="64" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="64" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="variable" id="classreverse__proxy__filter_1a7f45572ed93521c40e042f536dad63ec" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool reverse_proxy_filter::follow_redirects</definition>
+        <argsstring></argsstring>
+        <name>follow_redirects</name>
+        <qualifiedname>reverse_proxy_filter::follow_redirects</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>是否跟随重定向 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="66" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="variable" id="classreverse__proxy__filter_1aae00c0b773447b6f3d3b78d0fe90e3e9" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool reverse_proxy_filter::passthrough_host_header</definition>
+        <argsstring></argsstring>
+        <name>passthrough_host_header</name>
+        <qualifiedname>reverse_proxy_filter::passthrough_host_header</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>是否保持原始 Host 头（不过滤） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="68" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="68" bodyend="68"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classreverse__proxy__filter_1a3b8c3a6910f999f73fc4cd9f7200642a" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structproxy__backend" kindref="compound">proxy_backend</ref> &gt;</type>
+        <definition>vector&lt;proxy_backend&gt; reverse_proxy_filter::backends_</definition>
+        <argsstring></argsstring>
+        <name>backends_</name>
+        <qualifiedname>reverse_proxy_filter::backends_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="124" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classreverse__proxy__filter_1aaac5ade6e287150766193c4635b1538b" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string reverse_proxy_filter::path_prefix_</definition>
+        <argsstring></argsstring>
+        <name>path_prefix_</name>
+        <qualifiedname>reverse_proxy_filter::path_prefix_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="125" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classreverse__proxy__filter_1a80e008d0f2d0b13780cabca69548988d" prot="private" static="no" mutable="no">
+        <type><ref refid="classreverse__proxy__filter_1a2cfdcaab576227ae3c60c687a9866cd2" kindref="member">backend_selector_cb</ref></type>
+        <definition>backend_selector_cb reverse_proxy_filter::selector_</definition>
+        <argsstring></argsstring>
+        <name>selector_</name>
+        <qualifiedname>reverse_proxy_filter::selector_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="126" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classreverse__proxy__filter_1a4712050192dcdbd0021afbc43fd5ea16" prot="private" static="no" mutable="no">
+        <type><ref refid="classreverse__proxy__filter_1a6cbdca6ef5f56e0c58bb4aee243ebfcd" kindref="member">header_rewrite_cb</ref></type>
+        <definition>header_rewrite_cb reverse_proxy_filter::header_rewrite_</definition>
+        <argsstring></argsstring>
+        <name>header_rewrite_</name>
+        <qualifiedname>reverse_proxy_filter::header_rewrite_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="127" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classreverse__proxy__filter_1a5db25a91db62804e775afa17c152680c" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
+        <definition>vector&lt;string&gt; reverse_proxy_filter::skip_resp_headers_</definition>
+        <argsstring></argsstring>
+        <name>skip_resp_headers_</name>
+        <qualifiedname>reverse_proxy_filter::skip_resp_headers_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="128" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classreverse__proxy__filter_1ab87a65abfcb9879db7823f0f85a33f9c" prot="private" static="no" mutable="yes">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex reverse_proxy_filter::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>reverse_proxy_filter::mutex_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="129" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classreverse__proxy__filter_1a98ac339ac3baccda71c3e0dea39bec29" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t reverse_proxy_filter::rr_counter_</definition>
+        <argsstring></argsstring>
+        <name>rr_counter_</name>
+        <qualifiedname>reverse_proxy_filter::rr_counter_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>轮询计数器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="130" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="130" bodyend="130"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classreverse__proxy__filter_1a296d81fa7e52b84c4018056e3229e3b9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>reverse_proxy_filter::reverse_proxy_filter</definition>
+        <argsstring>()=default</argsstring>
+        <name>reverse_proxy_filter</name>
+        <qualifiedname>reverse_proxy_filter::reverse_proxy_filter</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="70" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classreverse__proxy__filter_1a8e76329c54c8fbe3728faa8a1718ed5e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>reverse_proxy_filter::reverse_proxy_filter</definition>
+        <argsstring>(string host, ports port, string scheme=&quot;http&quot;)</argsstring>
+        <name>reverse_proxy_filter</name>
+        <qualifiedname>reverse_proxy_filter::reverse_proxy_filter</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>host</declname>
+        </param>
+        <param>
+          <type><ref refid="structports" kindref="compound">ports</ref></type>
+          <declname>port</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>scheme</declname>
+          <defval>&quot;http&quot;</defval>
+        </param>
+        <briefdescription>
+<para>构造函数（单后端） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="75" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="75" bodyend="77"/>
+        <references refid="classreverse__proxy__filter_1aec693ad2c4d4e671f2b362a0a6dcb5bc" compoundref="reverse__proxy_8hpp" startline="82" endline="85">add_backend</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classreverse__proxy__filter_1aec693ad2c4d4e671f2b362a0a6dcb5bc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void reverse_proxy_filter::add_backend</definition>
+        <argsstring>(proxy_backend backend)</argsstring>
+        <name>add_backend</name>
+        <qualifiedname>reverse_proxy_filter::add_backend</qualifiedname>
+        <param>
+          <type><ref refid="structproxy__backend" kindref="compound">proxy_backend</ref></type>
+          <declname>backend</declname>
+        </param>
+        <briefdescription>
+<para>添加后端服务器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="82" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="82" bodyend="85"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <referencedby refid="classreverse__proxy__filter_1a8e76329c54c8fbe3728faa8a1718ed5e" compoundref="reverse__proxy_8hpp" startline="75" endline="77">reverse_proxy_filter</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classreverse__proxy__filter_1aa3b054e55ed07633adc5a052c73cda1e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void reverse_proxy_filter::set_path_prefix</definition>
+        <argsstring>(string prefix)</argsstring>
+        <name>set_path_prefix</name>
+        <qualifiedname>reverse_proxy_filter::set_path_prefix</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>prefix</declname>
+        </param>
+        <briefdescription>
+<para>设置路径前缀匹配（仅代理匹配路径） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="90" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="90" bodyend="93"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classreverse__proxy__filter_1ae5e309339d48f2cc1237e02216be1197" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void reverse_proxy_filter::set_backend_selector</definition>
+        <argsstring>(backend_selector_cb selector)</argsstring>
+        <name>set_backend_selector</name>
+        <qualifiedname>reverse_proxy_filter::set_backend_selector</qualifiedname>
+        <param>
+          <type><ref refid="classreverse__proxy__filter_1a2cfdcaab576227ae3c60c687a9866cd2" kindref="member">backend_selector_cb</ref></type>
+          <declname>selector</declname>
+        </param>
+        <briefdescription>
+<para>设置自定义后端选择器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="98" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="98" bodyend="101"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classreverse__proxy__filter_1aa3cc691c7b242f0131d4839e7e6cf994" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void reverse_proxy_filter::set_header_rewrite</definition>
+        <argsstring>(header_rewrite_cb cb)</argsstring>
+        <name>set_header_rewrite</name>
+        <qualifiedname>reverse_proxy_filter::set_header_rewrite</qualifiedname>
+        <param>
+          <type><ref refid="classreverse__proxy__filter_1a6cbdca6ef5f56e0c58bb4aee243ebfcd" kindref="member">header_rewrite_cb</ref></type>
+          <declname>cb</declname>
+        </param>
+        <briefdescription>
+<para>设置请求头重写回调 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="106" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="106" bodyend="109"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classreverse__proxy__filter_1a58d132f60122e4fb8d6b9715f8c5b645" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void reverse_proxy_filter::add_skip_response_header</definition>
+        <argsstring>(string header)</argsstring>
+        <name>add_skip_response_header</name>
+        <qualifiedname>reverse_proxy_filter::add_skip_response_header</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>header</declname>
+        </param>
+        <briefdescription>
+<para>添加不透传的响应头 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="114" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="114" bodyend="117"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classreverse__proxy__filter_1a795fd8c32c7f23af0818e830ca61ccf8" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>bool</type>
+        <definition>bool reverse_proxy_filter::pre_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>pre_filter</name>
+        <qualifiedname>reverse_proxy_filter::pre_filter</qualifiedname>
+        <reimplements refid="classhttp__filter_1a9563cab58ce1b4217008e55b37b022f2">pre_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>预处理方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>返回false表示中断后续处理</para>
+</simplesect>
+在请求处理前调用，可以检查请求、修改请求或提前返回响应。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="119" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classreverse__proxy__filter_1a00f4e1b1cf25b22590e0d88c42163fe1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void reverse_proxy_filter::do_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>do_filter</name>
+        <qualifiedname>reverse_proxy_filter::do_filter</qualifiedname>
+        <reimplements refid="classhttp__filter_1a00ee11e4e2b0c596d6f99cbafec3ddad">do_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>核心过滤方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+执行实际的过滤逻辑。通常由具体处理器实现， 中间件过滤器可能不实现此方法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="120" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="120" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="classreverse__proxy__filter_1aae4da3f616abe66b7bd7bab108bdcf8e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string reverse_proxy_filter::name</definition>
+        <argsstring>() const override</argsstring>
+        <name>name</name>
+        <qualifiedname>reverse_proxy_filter::name</qualifiedname>
+        <reimplements refid="classhttp__filter_1a72030f612655463f1f4ef9340c03f1ec">name</reimplements>
+        <briefdescription>
+<para>获取过滤器名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>过滤器名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="121" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="121" bodyend="121"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classreverse__proxy__filter_1a48cf3b9ddfd3d108f87cd84a255eb5a4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structproxy__backend" kindref="compound">proxy_backend</ref></type>
+        <definition>proxy_backend reverse_proxy_filter::select_backend</definition>
+        <argsstring>(const http_request &amp;request)</argsstring>
+        <name>select_backend</name>
+        <qualifiedname>reverse_proxy_filter::select_backend</qualifiedname>
+        <param>
+          <type>const <ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="132" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classreverse__proxy__filter_1afcb73a7d3a97293285ca049a83f86789" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool reverse_proxy_filter::should_proxy</definition>
+        <argsstring>(const string &amp;path) const</argsstring>
+        <name>should_proxy</name>
+        <qualifiedname>reverse_proxy_filter::should_proxy</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>path</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="133" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classreverse__proxy__filter_1add1cbb6585e1b8022c9f8d790b1ab8ae" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structhttp__client__response" kindref="compound">http_client_response</ref></type>
+        <definition>http_client_response reverse_proxy_filter::forward</definition>
+        <argsstring>(const proxy_backend &amp;backend, const http_request &amp;request)</argsstring>
+        <name>forward</name>
+        <qualifiedname>reverse_proxy_filter::forward</qualifiedname>
+        <param>
+          <type>const <ref refid="structproxy__backend" kindref="compound">proxy_backend</ref> &amp;</type>
+          <declname>backend</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="134" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="classreverse__proxy__filter_1aecf1abb29fc44ca7a2ae57e91ad1558e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void reverse_proxy_filter::copy_response</definition>
+        <argsstring>(const http_client_response &amp;from, http_response &amp;to)</argsstring>
+        <name>copy_response</name>
+        <qualifiedname>reverse_proxy_filter::copy_response</qualifiedname>
+        <param>
+          <type>const <ref refid="structhttp__client__response" kindref="compound">http_client_response</ref> &amp;</type>
+          <declname>from</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;</type>
+          <declname>to</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="135" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP反向代理过滤器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>将匹配的请求转发到后端服务器，并将响应返回给客户端。 支持请求头重写、响应头过滤、超时控制。</para>
+<para>使用示例： <programlisting><codeline><highlight class="normal">reverse_proxy_filter<sp/>proxy;</highlight></codeline>
+<codeline><highlight class="normal">proxy.<ref refid="classreverse__proxy__filter_1aec693ad2c4d4e671f2b362a0a6dcb5bc" kindref="member">add_backend</ref>({</highlight><highlight class="stringliteral">&quot;api-backend&quot;</highlight><highlight class="normal">,<sp/>ports(8080)});</highlight></codeline>
+<codeline><highlight class="normal">proxy.<ref refid="classreverse__proxy__filter_1aa3b054e55ed07633adc5a052c73cda1e" kindref="member">set_path_prefix</ref>(</highlight><highlight class="stringliteral">&quot;/api&quot;</highlight><highlight class="normal">);<sp/><sp/></highlight><highlight class="comment">//<sp/>仅代理<sp/>/api/<sp/>*<sp/>路径</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">router.use(<ref refid="group___unique_pointer_1ga20caa9b68a94ba614667d6ec6585c044" kindref="member">make_unique&lt;reverse_proxy_filter&gt;</ref>(<ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(proxy)));</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>http_filter</label>
+        <link refid="classhttp__filter"/>
+      </node>
+      <node id="1">
+        <label>reverse_proxy_filter</label>
+        <link refid="classreverse__proxy__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="3">
+        <label>duration&lt; int64_t, milli &gt;</label>
+        <link refid="structduration"/>
+      </node>
+      <node id="2">
+        <label>http_filter</label>
+        <link refid="classhttp__filter"/>
+      </node>
+      <node id="1">
+        <label>reverse_proxy_filter</label>
+        <link refid="classreverse__proxy__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>connect_timeout</edgelabel>
+          <edgelabel>receive_timeout</edgelabel>
+          <edgelabel>send_timeout</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" line="52" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/reverse_proxy.hpp" bodystart="52" bodyend="139"/>
+    <listofallmembers>
+      <member refid="classreverse__proxy__filter_1aec693ad2c4d4e671f2b362a0a6dcb5bc" prot="public" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>add_backend</name></member>
+      <member refid="classreverse__proxy__filter_1a58d132f60122e4fb8d6b9715f8c5b645" prot="public" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>add_skip_response_header</name></member>
+      <member refid="classreverse__proxy__filter_1a2cfdcaab576227ae3c60c687a9866cd2" prot="public" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>backend_selector_cb</name></member>
+      <member refid="classreverse__proxy__filter_1a3b8c3a6910f999f73fc4cd9f7200642a" prot="private" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>backends_</name></member>
+      <member refid="classreverse__proxy__filter_1a218b8ca3ed1ba696bc16add0dec3977d" prot="public" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>connect_timeout</name></member>
+      <member refid="classreverse__proxy__filter_1aecf1abb29fc44ca7a2ae57e91ad1558e" prot="private" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>copy_response</name></member>
+      <member refid="classreverse__proxy__filter_1a00f4e1b1cf25b22590e0d88c42163fe1" prot="public" virt="virtual"><scope>reverse_proxy_filter</scope><name>do_filter</name></member>
+      <member refid="classreverse__proxy__filter_1a7f45572ed93521c40e042f536dad63ec" prot="public" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>follow_redirects</name></member>
+      <member refid="classreverse__proxy__filter_1add1cbb6585e1b8022c9f8d790b1ab8ae" prot="private" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>forward</name></member>
+      <member refid="classreverse__proxy__filter_1a4712050192dcdbd0021afbc43fd5ea16" prot="private" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>header_rewrite_</name></member>
+      <member refid="classreverse__proxy__filter_1a6cbdca6ef5f56e0c58bb4aee243ebfcd" prot="public" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>header_rewrite_cb</name></member>
+      <member refid="classreverse__proxy__filter_1ab87a65abfcb9879db7823f0f85a33f9c" prot="private" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>mutex_</name></member>
+      <member refid="classreverse__proxy__filter_1aae4da3f616abe66b7bd7bab108bdcf8e" prot="public" virt="virtual"><scope>reverse_proxy_filter</scope><name>name</name></member>
+      <member refid="classreverse__proxy__filter_1aae00c0b773447b6f3d3b78d0fe90e3e9" prot="public" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>passthrough_host_header</name></member>
+      <member refid="classreverse__proxy__filter_1aaac5ade6e287150766193c4635b1538b" prot="private" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>path_prefix_</name></member>
+      <member refid="classhttp__filter_1acaaaf04f0a1520c29312b76336615aec" prot="public" virt="virtual"><scope>reverse_proxy_filter</scope><name>post_filter</name></member>
+      <member refid="classreverse__proxy__filter_1a795fd8c32c7f23af0818e830ca61ccf8" prot="public" virt="virtual"><scope>reverse_proxy_filter</scope><name>pre_filter</name></member>
+      <member refid="classreverse__proxy__filter_1abe4b0be21fa63c68d06553cef2839f8b" prot="public" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>receive_timeout</name></member>
+      <member refid="classreverse__proxy__filter_1a296d81fa7e52b84c4018056e3229e3b9" prot="public" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>reverse_proxy_filter</name></member>
+      <member refid="classreverse__proxy__filter_1a8e76329c54c8fbe3728faa8a1718ed5e" prot="public" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>reverse_proxy_filter</name></member>
+      <member refid="classreverse__proxy__filter_1a98ac339ac3baccda71c3e0dea39bec29" prot="private" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>rr_counter_</name></member>
+      <member refid="classreverse__proxy__filter_1a48cf3b9ddfd3d108f87cd84a255eb5a4" prot="private" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>select_backend</name></member>
+      <member refid="classreverse__proxy__filter_1a80e008d0f2d0b13780cabca69548988d" prot="private" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>selector_</name></member>
+      <member refid="classreverse__proxy__filter_1a76740267c0b122c89d3f3f6d93d46d34" prot="public" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>send_timeout</name></member>
+      <member refid="classreverse__proxy__filter_1ae5e309339d48f2cc1237e02216be1197" prot="public" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>set_backend_selector</name></member>
+      <member refid="classreverse__proxy__filter_1aa3cc691c7b242f0131d4839e7e6cf994" prot="public" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>set_header_rewrite</name></member>
+      <member refid="classreverse__proxy__filter_1aa3b054e55ed07633adc5a052c73cda1e" prot="public" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>set_path_prefix</name></member>
+      <member refid="classreverse__proxy__filter_1afcb73a7d3a97293285ca049a83f86789" prot="private" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>should_proxy</name></member>
+      <member refid="classreverse__proxy__filter_1a5db25a91db62804e775afa17c152680c" prot="private" virt="non-virtual"><scope>reverse_proxy_filter</scope><name>skip_resp_headers_</name></member>
+      <member refid="classhttp__filter_1a2959973ac0c34b0323c1e3fdc03449ed" prot="public" virt="virtual"><scope>reverse_proxy_filter</scope><name>~http_filter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

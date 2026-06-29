@@ -5,6 +5,7 @@ var classssl__socket =
     [ "ssl_socket", "classssl__socket.html#ac28d7742ab7ed2ac7386598c872b7615", null ],
     [ "~ssl_socket", "classssl__socket.html#a76cf3d2ca514fa1fe702c82f5e534c79", null ],
     [ "close", "classssl__socket.html#ac93b5cdb322b13fce97428b4b366c228", null ],
+    [ "get_alpn_negotiated", "classssl__socket.html#a0b831adb2b2de3d7aa0741de765afde2", null ],
     [ "init_client_ssl", "classssl__socket.html#a33d98abb79c38434ba74f2eb5834261e", null ],
     [ "init_server_ssl", "classssl__socket.html#a2d62a9aa4ed97ff2e56f51cdacd833bf", null ],
     [ "is_ssl", "classssl__socket.html#adb1487480405a5778013113b583fed8c", null ],

@@ -3,20 +3,23 @@
   <compounddef id="group___mutex" kind="group">
     <compoundname>Mutex</compoundname>
     <title>互斥锁</title>
+    <innerclass refid="classmutex__base" prot="public">mutex_base</innerclass>
     <innerclass refid="classmutex" prot="public">mutex</innerclass>
     <innerclass refid="classrecursive__mutex" prot="public">recursive_mutex</innerclass>
     <innerclass refid="classlock" prot="public">lock</innerclass>
-    <innerclass refid="structdefer__lock__tag" prot="public">defer_lock_tag</innerclass>
-    <innerclass refid="structtry__lock__tag" prot="public">try_lock_tag</innerclass>
+    <innerclass refid="structlock__defer__tag" prot="public">lock_defer_tag</innerclass>
+    <innerclass refid="structlock__quiet__tag" prot="public">lock_quiet_tag</innerclass>
     <innerclass refid="classunique__lock" prot="public">unique_lock</innerclass>
+    <innerclass refid="classnamed__mutex" prot="public">named_mutex</innerclass>
+    <innerclass refid="classshared__mutex__base" prot="public">shared_mutex_base</innerclass>
     <innerclass refid="classshared__mutex" prot="public">shared_mutex</innerclass>
     <innerclass refid="classshared__lock" prot="public">shared_lock</innerclass>
     <sectiondef kind="var">
-      <memberdef kind="variable" id="group___mutex_1ga0a567f2acedc6f0f1a1c12a18172747f" prot="public" static="no" constexpr="yes" mutable="no">
-        <type><ref refid="structdefer__lock__tag" kindref="compound">defer_lock_tag</ref></type>
-        <definition>defer_lock_tag defer_lock</definition>
+      <memberdef kind="variable" id="group___mutex_1ga54c094aed39e16aa8bf98fa19773aacb" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="structlock__defer__tag" kindref="compound">lock_defer_tag</ref></type>
+        <definition>lock_defer_tag lock_defer</definition>
         <argsstring></argsstring>
-        <name>defer_lock</name>
+        <name>lock_defer</name>
         <initializer>{}</initializer>
         <briefdescription>
 <para>延迟锁定标签实例 </para>
@@ -25,13 +28,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="232" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="232" bodyend="232"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="237" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="237" bodyend="237"/>
       </memberdef>
-      <memberdef kind="variable" id="group___mutex_1gad268b389b17e2f23260e8e10cef8b455" prot="public" static="no" constexpr="yes" mutable="no">
-        <type><ref refid="structtry__lock__tag" kindref="compound">try_lock_tag</ref></type>
-        <definition>try_lock_tag try_lock</definition>
+      <memberdef kind="variable" id="group___mutex_1gaba8f17a5bb1a7563d832996c01af66ea" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="structlock__quiet__tag" kindref="compound">lock_quiet_tag</ref></type>
+        <definition>lock_quiet_tag lock_quiet</definition>
         <argsstring></argsstring>
-        <name>try_lock</name>
+        <name>lock_quiet</name>
         <initializer>{}</initializer>
         <briefdescription>
 <para>尝试锁定标签实例 </para>
@@ -40,7 +43,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="246" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="246" bodyend="246"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" line="253" column="33" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/mutex.hpp" bodystart="253" bodyend="253"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

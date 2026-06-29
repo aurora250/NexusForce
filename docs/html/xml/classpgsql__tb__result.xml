@@ -27,7 +27,7 @@
         <argsstring></argsstring>
         <name>current_row_</name>
         <qualifiedname>pgsql_tb_result::current_row_</qualifiedname>
-        <initializer>= 0</initializer>
+        <initializer>{static_cast&lt;<ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref>&gt;(-1)}</initializer>
         <briefdescription>
 <para>当前行索引 </para>
         </briefdescription>
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="44" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" bodystart="44" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="44" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" bodystart="44" bodyend="44"/>
       </memberdef>
       <memberdef kind="variable" id="classpgsql__tb__result_1a02f9128d410cbde2324e0096b7e1a2f7" prot="private" static="no" mutable="no">
         <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -332,6 +332,38 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="108" column="19"/>
       </memberdef>
+      <memberdef kind="function" id="classpgsql__tb__result_1a0caed572eefa21ab56187c8ef70746ad" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="structcolumn__meta" kindref="compound">column_meta</ref></type>
+        <definition>column_meta pgsql_tb_result::column_metadata</definition>
+        <argsstring>(size_type index) const override</argsstring>
+        <name>column_metadata</name>
+        <qualifiedname>pgsql_tb_result::column_metadata</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a847e127d534e34bc199d6168372288f0">column_metadata</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取列元数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引（从0开始） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>列元数据 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="110" column="18"/>
+      </memberdef>
       <memberdef kind="function" id="classpgsql__tb__result_1a92169a3cb117a565865ac61bb46d48f3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
         <definition>string_view pgsql_tb_result::get</definition>
@@ -362,7 +394,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="115" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="117" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__tb__result_1af77b73019cd2f0886c7fc3a0c4c1034c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -403,7 +435,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="123" column="11"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="125" column="11"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__tb__result_1a52066fbde94d0020d15f1de8676c34a9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___core_types_1ga8b23aa936eec66c1c69ecd7b399ddf19" kindref="member">int16_t</ref></type>
@@ -444,7 +476,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="131" column="14"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="133" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__tb__result_1a51a646ae03521fb67ef14e137a332d54" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref></type>
@@ -485,7 +517,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="139" column="14"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="141" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__tb__result_1a04d82f574f57bc6af8bd3de90cf18216" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
@@ -526,7 +558,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="147" column="14"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="149" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__tb__result_1a3873d4ed751b8b4561524d5dd1c5d99f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___core_types_1ga3068631062aaf7da4cc0371da9e7a377" kindref="member">float32_t</ref></type>
@@ -567,7 +599,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="155" column="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="157" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__tb__result_1adbc1db6de84e8d5d9ea1ce990678e5ae" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___core_types_1ga5e9a37eab818d71cd4a6a9344e776c7b" kindref="member">float64_t</ref></type>
@@ -608,7 +640,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="163" column="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="165" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__tb__result_1a865743cb15e02f9e21c673240ddae82e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
@@ -649,7 +681,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="171" column="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="173" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__tb__result_1a44a7b6d29a26d9b75a7a94bcde48ee8c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classvector" kindref="compound">vector</ref>&lt; char &gt;</type>
@@ -685,7 +717,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="182" column="13"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="184" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__tb__result_1a93205352392a2b9ac202c29b07465a48" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
@@ -726,7 +758,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="190" column="15"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="192" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__tb__result_1ad964f95c6b52ac3b357434c29c83ef3f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classdate" kindref="compound">date</ref></type>
@@ -767,7 +799,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="198" column="11"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="200" column="11"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__tb__result_1ad76213bc6bb08d73618ed70c94ba6583" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classtime" kindref="compound">time</ref></type>
@@ -808,7 +840,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="206" column="11"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="208" column="11"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__tb__result_1ae4ab0903cf9d9edea0ddf4bed41df742" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classdatetime" kindref="compound">datetime</ref></type>
@@ -849,7 +881,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="214" column="15"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="216" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classpgsql__tb__result_1aa31b833fa8c079c573170baa8663bc09" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classtimestamp" kindref="compound">timestamp</ref></type>
@@ -890,7 +922,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="222" column="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="224" column="16"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -943,10 +975,11 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="41" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" bodystart="41" bodyend="223"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" line="41" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/pgsql/pgsql_result.hpp" bodystart="41" bodyend="225"/>
     <listofallmembers>
       <member refid="classpgsql__tb__result_1ae9281dbebf4d098969b99abab86457b1" prot="public" virt="virtual"><scope>pgsql_tb_result</scope><name>column_count</name></member>
       <member refid="classpgsql__tb__result_1a4195020d431fbf9e335162521808ee9b" prot="private" virt="non-virtual"><scope>pgsql_tb_result</scope><name>column_count_</name></member>
+      <member refid="classpgsql__tb__result_1a0caed572eefa21ab56187c8ef70746ad" prot="public" virt="virtual"><scope>pgsql_tb_result</scope><name>column_metadata</name></member>
       <member refid="classpgsql__tb__result_1a2ebbe17b3579bd7894548fcafe79ba2d" prot="public" virt="virtual"><scope>pgsql_tb_result</scope><name>column_names</name></member>
       <member refid="classpgsql__tb__result_1a2fb7988179f32cb73b6dbf0b5c8d6545" prot="private" virt="non-virtual"><scope>pgsql_tb_result</scope><name>column_names_</name></member>
       <member refid="classpgsql__tb__result_1af736ff24d2d11a52f4540843a0cc5170" prot="private" virt="non-virtual"><scope>pgsql_tb_result</scope><name>current_row_</name></member>

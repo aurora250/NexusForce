@@ -92,23 +92,57 @@ $(function(){initNavTree('binary__serializer_8hpp_source.html','',''); });
   <div class="headertitle"><div class="title">binary_serializer.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_SERIALIZE_BINARY_SERIALIZER_HPP__</span></div>
+<a href="binary__serializer_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_CORE_SERIALIZE_BINARY_SERIALIZER_HPP__</span></div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_CORE_SERIALIZE_BINARY_SERIALIZER_HPP__</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;<a class="code" href="endian_8hpp.html">NeForce/core/memory/endian.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span>NEFORCE_BEGIN_NAMESPACE__</div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="comment">// TODO: Implement binary_serializer structure</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>NEFORCE_END_NAMESPACE__</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_SERIALIZE_BINARY_SERIALIZER_HPP__</span></div>
-<div class="ttc" id="aendian_8hpp_html"><div class="ttname"><a href="endian_8hpp.html">endian.hpp</a></div><div class="ttdoc">端序转换工具</div></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#include &quot;<a class="code" href="vector_8hpp.html">NeForce/core/container/vector.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#include &quot;<a class="code" href="serializer__base_8hpp.html">NeForce/core/serialize/serializer_base.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>NEFORCE_BEGIN_SERIALIZE__</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span></div>
+<div class="foldopen" id="foldopen00038" data-start="{" data-end="};">
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="classbinary__serializer.html">   38</a></span><span class="keyword">class </span>NEFORCE_API <a class="code hl_class" href="classbinary__serializer.html">binary_serializer</a> {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classbinary__serializer.html#af193d1cbeda444de78792c99760c043b">   40</a></span>    <span class="keyword">using </span><a class="code hl_typedef" href="classbinary__serializer.html#af193d1cbeda444de78792c99760c043b">buffer</a> = <a class="code hl_class" href="classvector.html">vector&lt;byte_t&gt;</a>; </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span></div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="classbinary__serializer.html#a8a58f8475e2adfe449abb0dc84c5bb08">   45</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> <a class="code hl_variable" href="classbinary__serializer.html#a8a58f8475e2adfe449abb0dc84c5bb08">MAGIC</a> = 0x4E454246;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classbinary__serializer.html#a074959b9f5635c4ce3ec4301f51abb50">   50</a></span>    <span class="keyword">static</span> <span class="keyword">constexpr</span> <a class="code hl_typedef" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> <a class="code hl_variable" href="classbinary__serializer.html#a074959b9f5635c4ce3ec4301f51abb50">VERSION</a> = 1;</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno"><a class="line" href="classbinary__serializer.html#afb09daba5d0ee9251605227136c34519">   58</a></span>    <span class="keyword">static</span> <a class="code hl_typedef" href="classbinary__serializer.html#af193d1cbeda444de78792c99760c043b">buffer</a> <a class="code hl_function" href="classbinary__serializer.html#afb09daba5d0ee9251605227136c34519">serialize</a>(<span class="keyword">const</span> reflect::meta_any&amp; obj, <span class="keyword">const</span> <a class="code hl_struct" href="structserialize__context.html">serialize_context</a>&amp; ctx = {});</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="classbinary__serializer.html#abfb1ff96b144e2073fae4876bd629a24">   66</a></span>    <span class="keyword">static</span> reflect::meta_any <a class="code hl_function" href="classbinary__serializer.html#abfb1ff96b144e2073fae4876bd629a24">deserialize</a>(<span class="keyword">const</span> <a class="code hl_typedef" href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a>* <a class="code hl_function" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>, <span class="keywordtype">size_t</span> <a class="code hl_function" href="group___type_erasure_functions.html#ga630d7b0d77515784d2391b3725ac6df0">size</a>);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>};</div>
+</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> <span class="comment">// Serializer</span></div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>NEFORCE_END_SERIALIZE__</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_CORE_SERIALIZE_BINARY_SERIALIZER_HPP__</span></div>
+<div class="ttc" id="aclassbinary__serializer_html"><div class="ttname"><a href="classbinary__serializer.html">binary_serializer</a></div><div class="ttdoc">二进制序列化器</div><div class="ttdef"><b>定义</b> <a href="#l00038">binary_serializer.hpp:38</a></div></div>
+<div class="ttc" id="aclassbinary__serializer_html_a074959b9f5635c4ce3ec4301f51abb50"><div class="ttname"><a href="classbinary__serializer.html#a074959b9f5635c4ce3ec4301f51abb50">binary_serializer::VERSION</a></div><div class="ttdeci">static constexpr uint16_t VERSION</div><div class="ttdoc">当前格式版本</div><div class="ttdef"><b>定义</b> <a href="#l00050">binary_serializer.hpp:50</a></div></div>
+<div class="ttc" id="aclassbinary__serializer_html_a8a58f8475e2adfe449abb0dc84c5bb08"><div class="ttname"><a href="classbinary__serializer.html#a8a58f8475e2adfe449abb0dc84c5bb08">binary_serializer::MAGIC</a></div><div class="ttdeci">static constexpr uint32_t MAGIC</div><div class="ttdoc">二进制格式魔数 &quot;NEBF&quot;</div><div class="ttdef"><b>定义</b> <a href="#l00045">binary_serializer.hpp:45</a></div></div>
+<div class="ttc" id="aclassbinary__serializer_html_abfb1ff96b144e2073fae4876bd629a24"><div class="ttname"><a href="classbinary__serializer.html#abfb1ff96b144e2073fae4876bd629a24">binary_serializer::deserialize</a></div><div class="ttdeci">static reflect::meta_any deserialize(const byte_t *data, size_t size)</div><div class="ttdoc">从二进制数据反序列化对象</div></div>
+<div class="ttc" id="aclassbinary__serializer_html_af193d1cbeda444de78792c99760c043b"><div class="ttname"><a href="classbinary__serializer.html#af193d1cbeda444de78792c99760c043b">binary_serializer::buffer</a></div><div class="ttdeci">vector&lt; byte_t &gt; buffer</div><div class="ttdoc">二进制缓冲区类型</div><div class="ttdef"><b>定义</b> <a href="#l00040">binary_serializer.hpp:40</a></div></div>
+<div class="ttc" id="aclassbinary__serializer_html_afb09daba5d0ee9251605227136c34519"><div class="ttname"><a href="classbinary__serializer.html#afb09daba5d0ee9251605227136c34519">binary_serializer::serialize</a></div><div class="ttdeci">static buffer serialize(const reflect::meta_any &amp;obj, const serialize_context &amp;ctx={})</div><div class="ttdoc">将反射对象序列化为二进制</div></div>
+<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga18a5de45c0adec9c9e545674cc14755f"><div class="ttname"><a href="group___core_types.html#ga18a5de45c0adec9c9e545674cc14755f">byte_t</a></div><div class="ttdeci">unsigned char byte_t</div><div class="ttdoc">字节类型，定义为无符号字符</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00037">types.hpp:37</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga398ec93d6bf48539b258a3dd78e32c82"><div class="ttname"><a href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></div><div class="ttdeci">unsigned int uint32_t</div><div class="ttdoc">32位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00110">types.hpp:110</a></div></div>
+<div class="ttc" id="agroup___core_types_html_ga64be82add362de7c99ce6671d7f4f0a6"><div class="ttname"><a href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a></div><div class="ttdeci">unsigned short uint16_t</div><div class="ttdoc">16位无符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00104">types.hpp:104</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_ga630d7b0d77515784d2391b3725ac6df0"><div class="ttname"><a href="group___type_erasure_functions.html#ga630d7b0d77515784d2391b3725ac6df0">size</a></div><div class="ttdeci">constexpr decltype(auto) size(const Container &amp;cont) noexcept(noexcept(cont.size()))</div><div class="ttdoc">获取容器的大小</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00292">type_erase.hpp:292</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_gaeed8bfb4510a906e04808100528dd9b8"><div class="ttname"><a href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a></div><div class="ttdeci">constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00395">type_erase.hpp:395</a></div></div>
+<div class="ttc" id="aserializer__base_8hpp_html"><div class="ttname"><a href="serializer__base_8hpp.html">serializer_base.hpp</a></div><div class="ttdoc">序列化器公共基础设施</div></div>
+<div class="ttc" id="astructserialize__context_html"><div class="ttname"><a href="structserialize__context.html">serialize_context</a></div><div class="ttdoc">序列化上下文</div><div class="ttdef"><b>定义</b> <a href="serializer__base_8hpp_source.html#l00027">serializer_base.hpp:27</a></div></div>
+<div class="ttc" id="avector_8hpp_html"><div class="ttname"><a href="vector_8hpp.html">vector.hpp</a></div><div class="ttdoc">动态大小数组容器</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>serialize</b></li><li class="navelem"><b>binary_serializer.hpp</b></li>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>core</b></li><li class="navelem"><b>serialize</b></li><li class="navelem"><a href="binary__serializer_8hpp.html">binary_serializer.hpp</a></li>
     <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
   </ul>
 </div>

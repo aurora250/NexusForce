@@ -185,6 +185,12 @@ char32_t&#160;</td><td class="memItemRight"><b>to_lower</b> (char32_t cp) const 
 <tr class="memdesc:a0887d4b1b8c5861662e450a1dd13975c"><td class="mdescLeft">&#160;</td><td class="mdescRight">将UTF-32字符串转换为当前区域设置的多字节字符串  <br /></td></tr>
 <tr class="memitem:a04944c65a1ca3968dca6914392abf774" id="r_a04944c65a1ca3968dca6914392abf774"><td class="memItemLeft"><a class="el" href="group___string.html#gae9d2688d8ad654e665cf2b8032125af9">u32string</a>&#160;</td><td class="memItemRight"><a class="el" href="#a04944c65a1ca3968dca6914392abf774">to_ucs4</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;mb) const</td></tr>
 <tr class="memdesc:a04944c65a1ca3968dca6914392abf774"><td class="mdescLeft">&#160;</td><td class="mdescRight">将当前区域设置的多字节字符串转换为UTF-32  <br /></td></tr>
+<tr class="memitem:aa65373f48a08a074218ae185bae3b0e4" id="r_aa65373f48a08a074218ae185bae3b0e4"><td class="memItemLeft"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa65373f48a08a074218ae185bae3b0e4">format_number</a> (<a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> value, int precision=0) const</td></tr>
+<tr class="memdesc:aa65373f48a08a074218ae185bae3b0e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用区域设置格式化数字  <br /></td></tr>
+<tr class="memitem:a807c67f3fd8e94fc67fa21c2db68b890" id="r_a807c67f3fd8e94fc67fa21c2db68b890"><td class="memItemLeft"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#a807c67f3fd8e94fc67fa21c2db68b890">format_date</a> (<a class="el" href="group___platform_dependent_types.html#ga39d546efc0e36ab5e76470c42e646552">intptr_t</a> <a class="el" href="classtimestamp.html">timestamp</a>) const</td></tr>
+<tr class="memdesc:a807c67f3fd8e94fc67fa21c2db68b890"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用区域设置格式化日期  <br /></td></tr>
+<tr class="memitem:ad2df932920f1aedd5946efff0538fe43" id="r_ad2df932920f1aedd5946efff0538fe43"><td class="memItemLeft"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ad2df932920f1aedd5946efff0538fe43">format_datetime</a> () const</td></tr>
+<tr class="memdesc:ad2df932920f1aedd5946efff0538fe43"><td class="mdescLeft">&#160;</td><td class="mdescRight">使用区域设置格式化当前日期时间  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 静态 Public 成员函数</h2></td></tr>
@@ -541,6 +547,109 @@ char32_t&#160;</td><td class="memItemRight"><b>to_lower</b> (char32_t cp) const 
 <dl class="section return"><dt>返回</dt><dd>编码名称（如"UTF-8"） </dd></dl>
 
 <p class="definition">在文件 <a class="el" href="locale_8hpp_source.html">locale.hpp</a> 第 <a class="el" href="locale_8hpp_source.html#l00211">211</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a807c67f3fd8e94fc67fa21c2db68b890" name="a807c67f3fd8e94fc67fa21c2db68b890"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a807c67f3fd8e94fc67fa21c2db68b890">&#9670;&#160;</a></span>format_date()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> locale::format_date </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga39d546efc0e36ab5e76470c42e646552">intptr_t</a></td>          <td class="paramname"><span class="paramname"><em>timestamp</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>使用区域设置格式化日期 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timestamp</td><td>Unix 时间戳（秒） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>格式化后的日期字符串</dd></dl>
+<p>根据区域设置的日期格式信息格式化日期。 </p>
+
+</div>
+</div>
+<a id="ad2df932920f1aedd5946efff0538fe43" name="ad2df932920f1aedd5946efff0538fe43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2df932920f1aedd5946efff0538fe43">&#9670;&#160;</a></span>format_datetime()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> locale::format_datetime </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>使用区域设置格式化当前日期时间 </p>
+<dl class="section return"><dt>返回</dt><dd>格式化后的日期时间字符串 </dd></dl>
+
+</div>
+</div>
+<a id="aa65373f48a08a074218ae185bae3b0e4" name="aa65373f48a08a074218ae185bae3b0e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa65373f48a08a074218ae185bae3b0e4">&#9670;&#160;</a></span>format_number()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> locale::format_number </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></td>          <td class="paramname"><span class="paramname"><em>value</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>precision</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>&#160;) const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>使用区域设置格式化数字 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>数值 </td></tr>
+    <tr><td class="paramname">precision</td><td>小数位数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>格式化后的数字字符串</dd></dl>
+<p>根据区域设置的数字格式信息（千位分隔符、小数点等）格式化数字。 </p>
 
 </div>
 </div>

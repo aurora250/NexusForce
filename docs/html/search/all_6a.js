@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['弃用列表_0',['弃用列表',['../deprecated.html',1,'']]]
+  ['延迟调用包装_0',['延迟调用包装',['../group___call_wrapper.html',1,'']]]
 ];

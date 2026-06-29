@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['控制台io_0',['控制台IO',['../group___console_i_o.html',1,'']]]
+  ['延迟调用包装_0',['延迟调用包装',['../group___call_wrapper.html',1,'']]]
 ];

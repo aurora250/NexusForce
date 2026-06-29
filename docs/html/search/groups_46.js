@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['日志系统_0',['日志系统',['../group___logging.html',1,'']]],
-  ['日期时间_1',['日期时间',['../group___date_time.html',1,'']]]
+  ['排列算法_0',['排列算法',['../group___permutation_algorithms.html',1,'']]],
+  ['排序算法_1',['排序算法',['../group___sort_algorithms.html',1,'']]]
 ];

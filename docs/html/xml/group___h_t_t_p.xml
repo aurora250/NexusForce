@@ -3,23 +3,480 @@
   <compounddef id="group___h_t_t_p" kind="group">
     <compoundname>HTTP</compoundname>
     <title>HTTP</title>
+    <innerclass refid="classasync__filter" prot="public">async_filter</innerclass>
+    <innerclass refid="classchunked__body__reader" prot="public">chunked_body_reader</innerclass>
+    <innerclass refid="classcsrf__filter" prot="public">csrf_filter</innerclass>
+    <innerclass refid="classhealth__check__filter" prot="public">health_check_filter</innerclass>
+    <innerclass refid="classhttp2__connection" prot="public">http2_connection</innerclass>
+    <innerclass refid="structhttp2__frame__header" prot="public">http2_frame_header</innerclass>
+    <innerclass refid="structhttp2__settings__entry" prot="public">http2_settings_entry</innerclass>
+    <innerclass refid="structhttp2__priority" prot="public">http2_priority</innerclass>
+    <innerclass refid="structhttp2__data__frame" prot="public">http2_data_frame</innerclass>
+    <innerclass refid="structhttp2__headers__frame" prot="public">http2_headers_frame</innerclass>
+    <innerclass refid="structhttp2__rst__stream__frame" prot="public">http2_rst_stream_frame</innerclass>
+    <innerclass refid="structhttp2__settings__frame" prot="public">http2_settings_frame</innerclass>
+    <innerclass refid="structhttp2__ping__frame" prot="public">http2_ping_frame</innerclass>
+    <innerclass refid="structhttp2__goaway__frame" prot="public">http2_goaway_frame</innerclass>
+    <innerclass refid="structhttp2__window__update__frame" prot="public">http2_window_update_frame</innerclass>
+    <innerclass refid="structhttp2__push__promise__frame" prot="public">http2_push_promise_frame</innerclass>
+    <innerclass refid="structhttp2__continuation__frame" prot="public">http2_continuation_frame</innerclass>
+    <innerclass refid="structhpack__header__field" prot="public">hpack_header_field</innerclass>
+    <innerclass refid="classhpack__encoder" prot="public">hpack_encoder</innerclass>
+    <innerclass refid="classhpack__decoder" prot="public">hpack_decoder</innerclass>
+    <innerclass refid="classhttp2__framer" prot="public">http2_framer</innerclass>
+    <innerclass refid="classhttp2__stream" prot="public">http2_stream</innerclass>
+    <innerclass refid="classhttp2__flow__control" prot="public">http2_flow_control</innerclass>
+    <innerclass refid="classhttp2__settings" prot="public">http2_settings</innerclass>
+    <innerclass refid="structcached__response" prot="public">cached_response</innerclass>
+    <innerclass refid="classresponse__cache" prot="public">response_cache</innerclass>
+    <innerclass refid="classcache__filter" prot="public">cache_filter</innerclass>
     <innerclass refid="classhttp__client" prot="public">http_client</innerclass>
     <innerclass refid="structhttp__client__response" prot="public">http_client_response</innerclass>
     <innerclass refid="structhttp__client__request" prot="public">http_client_request</innerclass>
+    <innerclass refid="classcompress__filter" prot="public">compress_filter</innerclass>
     <innerclass refid="classhttp__filter" prot="public">http_filter</innerclass>
     <innerclass refid="classhttp__filter__chain" prot="public">http_filter_chain</innerclass>
     <innerclass refid="classcors__filter" prot="public">cors_filter</innerclass>
     <innerclass refid="classlogging__filter" prot="public">logging_filter</innerclass>
     <innerclass refid="classstatic__file__filter" prot="public">static_file_filter</innerclass>
-    <innerclass refid="classrate__limit__filter" prot="public">rate_limit_filter</innerclass>
     <innerclass refid="classauthentication__filter" prot="public">authentication_filter</innerclass>
+    <innerclass refid="structbyte__range" prot="public">byte_range</innerclass>
     <innerclass refid="classhttp__router" prot="public">http_router</innerclass>
+    <innerclass refid="classsecurity__headers__filter" prot="public">security_headers_filter</innerclass>
     <innerclass refid="classhttp__server" prot="public">http_server</innerclass>
     <innerclass refid="structhttp__server__request" prot="public">http_server_request</innerclass>
     <innerclass refid="structhttp__server__response" prot="public">http_server_response</innerclass>
     <innerclass refid="structhttp__cookie" prot="public">http_cookie</innerclass>
     <innerclass refid="structhttp__session" prot="public">http_session</innerclass>
+    <innerclass refid="structlb__backend" prot="public">lb_backend</innerclass>
+    <innerclass refid="classload__balancer" prot="public">load_balancer</innerclass>
+    <innerclass refid="structmultipart__field" prot="public">multipart_field</innerclass>
+    <innerclass refid="classmultipart__parser" prot="public">multipart_parser</innerclass>
+    <innerclass refid="classroute__trie" prot="public">route_trie</innerclass>
+    <innerclass refid="structtoken__bucket" prot="public">token_bucket</innerclass>
+    <innerclass refid="classtoken__bucket__limiter" prot="public">token_bucket_limiter</innerclass>
+    <innerclass refid="classtoken__bucket__filter" prot="public">token_bucket_filter</innerclass>
+    <innerclass refid="structproxy__backend" prot="public">proxy_backend</innerclass>
+    <innerclass refid="classreverse__proxy__filter" prot="public">reverse_proxy_filter</innerclass>
+    <innerclass refid="classsession__store" prot="public">session_store</innerclass>
+    <innerclass refid="classmemory__session__store" prot="public">memory_session_store</innerclass>
+    <innerclass refid="classredis__session__store" prot="public">redis_session_store</innerclass>
+    <innerclass refid="structwebsocket__deflate__config" prot="public">websocket_deflate_config</innerclass>
+    <innerclass refid="classwebsocket__deflate" prot="public">websocket_deflate</innerclass>
     <innergroup refid="group___web_socket">WebSocket</innergroup>
+    <sectiondef kind="enum">
+      <memberdef kind="enum" id="group___h_t_t_p_1gae47f8f19d4cb93a49846573a1eb4e5c5" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <name>http2_frame_type</name>
+        <enumvalue id="group___h_t_t_p_1ggae47f8f19d4cb93a49846573a1eb4e5c5ae44f9e348e41cb272efa87387728571b" prot="public">
+          <name>DATA</name>
+          <initializer>= 0x0</initializer>
+          <briefdescription>
+<para>请求/响应体数据 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggae47f8f19d4cb93a49846573a1eb4e5c5a1242249ca7c09fa7634e292cf2819f85" prot="public">
+          <name>HEADERS</name>
+          <initializer>= 0x1</initializer>
+          <briefdescription>
+<para>头部块 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggae47f8f19d4cb93a49846573a1eb4e5c5acaf55db72c49969e2ed270adbcd0a8f5" prot="public">
+          <name>PRIORITY</name>
+          <initializer>= 0x2</initializer>
+          <briefdescription>
+<para>流优先级 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggae47f8f19d4cb93a49846573a1eb4e5c5ab1f3602a647feee25f03b754f03316c0" prot="public">
+          <name>RST_STREAM</name>
+          <initializer>= 0x3</initializer>
+          <briefdescription>
+<para>流终止 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggae47f8f19d4cb93a49846573a1eb4e5c5aed6f7aca7887a927b9ed3d62aa347a86" prot="public">
+          <name>SETTINGS</name>
+          <initializer>= 0x4</initializer>
+          <briefdescription>
+<para>连接配置参数 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggae47f8f19d4cb93a49846573a1eb4e5c5aa2302bddf66a619a09f67beb7c446504" prot="public">
+          <name>PUSH_PROMISE</name>
+          <initializer>= 0x5</initializer>
+          <briefdescription>
+<para>服务端推送承诺 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggae47f8f19d4cb93a49846573a1eb4e5c5ae07ff41a486c27c095a15898dcca34d1" prot="public">
+          <name>PING</name>
+          <initializer>= 0x6</initializer>
+          <briefdescription>
+<para>连接活性检测 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggae47f8f19d4cb93a49846573a1eb4e5c5a21c426cbdb92c2439053c570eb511c30" prot="public">
+          <name>GOAWAY</name>
+          <initializer>= 0x7</initializer>
+          <briefdescription>
+<para>优雅关闭连接 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggae47f8f19d4cb93a49846573a1eb4e5c5a8930ff86ec057f61f21407e49bf82e6d" prot="public">
+          <name>WINDOW_UPDATE</name>
+          <initializer>= 0x8</initializer>
+          <briefdescription>
+<para>流控窗口更新 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggae47f8f19d4cb93a49846573a1eb4e5c5aa912ad8cd8aeb3f2762b4359d4c36583" prot="public">
+          <name>CONTINUATION</name>
+          <initializer>= 0x9</initializer>
+          <briefdescription>
+<para>头部块续帧 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>HTTP/2 帧类型（RFC 7540 §6） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="43" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="43" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___h_t_t_p_1ga2a07e32634a5bf7bee768485ae87041d" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <name>http2_error</name>
+        <enumvalue id="group___h_t_t_p_1gga2a07e32634a5bf7bee768485ae87041dad306b6fdee05fe87455110ddf6501e6c" prot="public">
+          <name>NO_ERROR</name>
+          <initializer>= 0x0</initializer>
+          <briefdescription>
+<para>无错误 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga2a07e32634a5bf7bee768485ae87041da23f149f0f9ae9ed9e0119e7209178a5d" prot="public">
+          <name>PROTOCOL_ERROR</name>
+          <initializer>= 0x1</initializer>
+          <briefdescription>
+<para>协议错误 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga2a07e32634a5bf7bee768485ae87041dae8c0c70879b5895c615677261d64a1ee" prot="public">
+          <name>INTERNAL_ERROR</name>
+          <initializer>= 0x2</initializer>
+          <briefdescription>
+<para>内部错误 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga2a07e32634a5bf7bee768485ae87041da20973c7b1b8e3fe85f3926d10271a8d4" prot="public">
+          <name>FLOW_CONTROL_ERROR</name>
+          <initializer>= 0x3</initializer>
+          <briefdescription>
+<para>流控违规 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga2a07e32634a5bf7bee768485ae87041da653e43604415577e4a01fef2e382c9d1" prot="public">
+          <name>SETTINGS_TIMEOUT</name>
+          <initializer>= 0x4</initializer>
+          <briefdescription>
+<para>SETTINGS 确认超时 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga2a07e32634a5bf7bee768485ae87041da795fcd4a9695a63ff230ad23d4122917" prot="public">
+          <name>STREAM_CLOSED</name>
+          <initializer>= 0x5</initializer>
+          <briefdescription>
+<para>流已关闭 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga2a07e32634a5bf7bee768485ae87041da3d53bd153221a9a3bc76c346f457b3c3" prot="public">
+          <name>FRAME_SIZE_ERROR</name>
+          <initializer>= 0x6</initializer>
+          <briefdescription>
+<para>帧大小错误 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga2a07e32634a5bf7bee768485ae87041da3e2449dc6a7f4aee6278f70865604374" prot="public">
+          <name>REFUSED_STREAM</name>
+          <initializer>= 0x7</initializer>
+          <briefdescription>
+<para>流被拒绝 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga2a07e32634a5bf7bee768485ae87041da2027c027133e22c8929e2874dc44dd36" prot="public">
+          <name>CANCEL</name>
+          <initializer>= 0x8</initializer>
+          <briefdescription>
+<para>流取消 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga2a07e32634a5bf7bee768485ae87041da4d8716f0326b9aaf347c6f217e62e8bc" prot="public">
+          <name>COMPRESSION_ERROR</name>
+          <initializer>= 0x9</initializer>
+          <briefdescription>
+<para>压缩错误 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga2a07e32634a5bf7bee768485ae87041da9bccf65b7a01f8d62c945340236971ae" prot="public">
+          <name>CONNECT_ERROR</name>
+          <initializer>= 0xA</initializer>
+          <briefdescription>
+<para>CONNECT 错误 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga2a07e32634a5bf7bee768485ae87041da3b119c9fe92621433d72165a79e94409" prot="public">
+          <name>ENHANCE_YOUR_CALM</name>
+          <initializer>= 0xB</initializer>
+          <briefdescription>
+<para>速率过高 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga2a07e32634a5bf7bee768485ae87041dae5102d0ed2cad3aac7cb2d47d14d3b2e" prot="public">
+          <name>INADEQUATE_SECURITY</name>
+          <initializer>= 0xC</initializer>
+          <briefdescription>
+<para>安全不足 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga2a07e32634a5bf7bee768485ae87041dac54d292457fb2007bab47625c8aa42fa" prot="public">
+          <name>HTTP_1_1_REQUIRED</name>
+          <initializer>= 0xD</initializer>
+          <briefdescription>
+<para>需要 HTTP/1.1 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>HTTP/2 错误码（RFC 7540 §7） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="63" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="63" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___h_t_t_p_1gab4a24402dc0954ebe0037ce468ec79ff" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
+        <name>http2_settings_id</name>
+        <enumvalue id="group___h_t_t_p_1ggab4a24402dc0954ebe0037ce468ec79ffab21db98ae5570cf2d2eea1ae84dadc0c" prot="public">
+          <name>HEADER_TABLE_SIZE</name>
+          <initializer>= 0x1</initializer>
+          <briefdescription>
+<para>HPACK 动态表最大大小 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggab4a24402dc0954ebe0037ce468ec79ffa230ce83dbccb31567e5e780d698c7d1d" prot="public">
+          <name>ENABLE_PUSH</name>
+          <initializer>= 0x2</initializer>
+          <briefdescription>
+<para>是否启用服务端推送 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggab4a24402dc0954ebe0037ce468ec79ffaf6fa2500b99d7b98c0bb4479135f7967" prot="public">
+          <name>MAX_CONCURRENT_STREAMS</name>
+          <initializer>= 0x3</initializer>
+          <briefdescription>
+<para>最大并发流数 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggab4a24402dc0954ebe0037ce468ec79ffaddacca0555b4339b6e9dd1818d95e338" prot="public">
+          <name>INITIAL_WINDOW_SIZE</name>
+          <initializer>= 0x4</initializer>
+          <briefdescription>
+<para>流级初始窗口大小 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggab4a24402dc0954ebe0037ce468ec79ffae787c90dc72d889f3497d9f97ab0236e" prot="public">
+          <name>MAX_FRAME_SIZE</name>
+          <initializer>= 0x5</initializer>
+          <briefdescription>
+<para>最大帧负载大小 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggab4a24402dc0954ebe0037ce468ec79ffa3b178b97bc72243896a77eed1af09f19" prot="public">
+          <name>MAX_HEADER_LIST_SIZE</name>
+          <initializer>= 0x6</initializer>
+          <briefdescription>
+<para>最大头部列表大小 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>HTTP/2 SETTINGS 参数标识符（RFC 7540 §6.5.2） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="83" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="83" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___h_t_t_p_1ga930c6dee09c2618fd01b61468fcadfe8" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>http2_stream_state</name>
+        <enumvalue id="group___h_t_t_p_1gga930c6dee09c2618fd01b61468fcadfe8aa5daf7f2ebbba4975d61dab1c40188c7" prot="public">
+          <name>IDLE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga930c6dee09c2618fd01b61468fcadfe8aacf29cfcde56b8473856efefb417906b" prot="public">
+          <name>RESERVED_LOCAL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga930c6dee09c2618fd01b61468fcadfe8a39285c4ecd7c518faeacc22a4c83e04b" prot="public">
+          <name>RESERVED_REMOTE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga930c6dee09c2618fd01b61468fcadfe8aa38bd5138bf35514df41a1795ebbf5c3" prot="public">
+          <name>OPEN</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga930c6dee09c2618fd01b61468fcadfe8ac6b7663a66479cc1fea577692b511aba" prot="public">
+          <name>HALF_CLOSED_LOCAL</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga930c6dee09c2618fd01b61468fcadfe8ac2d1178181de552352fa50c33d283b69" prot="public">
+          <name>HALF_CLOSED_REMOTE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1gga930c6dee09c2618fd01b61468fcadfe8a110ccf2f5d2ff4eda1fd1a494293467d" prot="public">
+          <name>CLOSED</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>HTTP/2 流状态（RFC 7540 §5.1） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="374" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="374" bodyend="382"/>
+      </memberdef>
+      <memberdef kind="enum" id="group___h_t_t_p_1gadf2370a616d3d1bf1ef4152acc72e793" prot="public" static="no" strong="yes">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <name>lb_strategy</name>
+        <enumvalue id="group___h_t_t_p_1ggadf2370a616d3d1bf1ef4152acc72e793a1ebd8dbf8c34e255f5cbf28f35860b71" prot="public">
+          <name>ROUND_ROBIN</name>
+          <briefdescription>
+<para>轮询 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggadf2370a616d3d1bf1ef4152acc72e793a9b5adc9c167d99cbc016b883cf6a8600" prot="public">
+          <name>LEAST_CONNECTIONS</name>
+          <briefdescription>
+<para>最少连接 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggadf2370a616d3d1bf1ef4152acc72e793ae9d8ebf89324671ee286fa7bf1a2c16c" prot="public">
+          <name>WEIGHTED</name>
+          <briefdescription>
+<para>加权轮询 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="group___h_t_t_p_1ggadf2370a616d3d1bf1ef4152acc72e793a170e02e86972c2be8559884cc3c12254" prot="public">
+          <name>RANDOM</name>
+          <briefdescription>
+<para>随机 </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>负载均衡策略 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" line="28" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/load_balancer.hpp" bodystart="28" bodyend="33"/>
+      </memberdef>
+    </sectiondef>
     <sectiondef kind="typedef">
       <memberdef kind="typedef" id="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" prot="public" static="no">
         <type><ref refid="structhttp__server__request" kindref="compound">http_server_request</ref></type>
@@ -33,7 +490,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server_message.hpp" line="335" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server_message.hpp" bodystart="335" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server_message.hpp" line="363" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server_message.hpp" bodystart="363" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" prot="public" static="no">
         <type><ref refid="structhttp__server__response" kindref="compound">http_server_response</ref></type>
@@ -47,7 +504,362 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server_message.hpp" line="341" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server_message.hpp" bodystart="341" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server_message.hpp" line="369" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server_message.hpp" bodystart="369" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___h_t_t_p_1gae18d02c0ffb6000a55a324c3de979412" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t HTTP2_MAX_FRAME_SIZE</definition>
+        <argsstring></argsstring>
+        <name>HTTP2_MAX_FRAME_SIZE</name>
+        <initializer>= 16384</initializer>
+        <briefdescription>
+<para>HTTP/2 最大帧负载大小（RFC 7540 §4.1） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="24" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___h_t_t_p_1ga90b9bc1783610f8f540cc0591269ca93" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t HTTP2_DEFAULT_HEADER_TABLE_SIZE</definition>
+        <argsstring></argsstring>
+        <name>HTTP2_DEFAULT_HEADER_TABLE_SIZE</name>
+        <initializer>= 4096</initializer>
+        <briefdescription>
+<para>HPACK 默认动态表大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="26" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___h_t_t_p_1gabff5af8f166f2b56da8a9dd7e16895fa" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t HTTP2_DEFAULT_MAX_CONCURRENT_STREAMS</definition>
+        <argsstring></argsstring>
+        <name>HTTP2_DEFAULT_MAX_CONCURRENT_STREAMS</name>
+        <initializer>= 100</initializer>
+        <briefdescription>
+<para>默认最大并发流数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="28" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___h_t_t_p_1ga36075bec54b2e856f4a28cb3b1acdc55" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t HTTP2_DEFAULT_INITIAL_WINDOW_SIZE</definition>
+        <argsstring></argsstring>
+        <name>HTTP2_DEFAULT_INITIAL_WINDOW_SIZE</name>
+        <initializer>= 65535</initializer>
+        <briefdescription>
+<para>默认初始流控窗口 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="30" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___h_t_t_p_1ga148dfedbffa5af26513c66d2cc05d0dc" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t HTTP2_DEFAULT_MAX_HEADER_LIST_SIZE</definition>
+        <argsstring></argsstring>
+        <name>HTTP2_DEFAULT_MAX_HEADER_LIST_SIZE</name>
+        <initializer>= 0xFFFFFFFF</initializer>
+        <briefdescription>
+<para>默认最大头部列表大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="32" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___h_t_t_p_1ga425894af14dedb71c71fa32da934e4fe" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t HPACK_STATIC_TABLE_SIZE</definition>
+        <argsstring></argsstring>
+        <name>HPACK_STATIC_TABLE_SIZE</name>
+        <initializer>= 61</initializer>
+        <briefdescription>
+<para>HPACK 静态表条目数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="34" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___h_t_t_p_1ga5f6b923e6506ff2fdcbd85061e73ef13" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>string_view HTTP2_CLIENT_PREFACE</definition>
+        <argsstring></argsstring>
+        <name>HTTP2_CLIENT_PREFACE</name>
+        <initializer>= &quot;PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n&quot;</initializer>
+        <briefdescription>
+<para>HTTP/2 客户端连接前言（RFC 7540 §3.5） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="36" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___h_t_t_p_1ga42b1e94a888cde93cd78ca07bf8c41e0" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <definition>uint8_t HTTP2_FLAG_END_STREAM</definition>
+        <argsstring></argsstring>
+        <name>HTTP2_FLAG_END_STREAM</name>
+        <initializer>= 0x1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="140" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___h_t_t_p_1gac91c264288ed7960652198620811accb" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <definition>uint8_t HTTP2_FLAG_END_HEADERS</definition>
+        <argsstring></argsstring>
+        <name>HTTP2_FLAG_END_HEADERS</name>
+        <initializer>= 0x4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="141" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="141" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___h_t_t_p_1ga4c6e5299c87d6eddb571892eacb217e2" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <definition>uint8_t HTTP2_FLAG_PADDED</definition>
+        <argsstring></argsstring>
+        <name>HTTP2_FLAG_PADDED</name>
+        <initializer>= 0x8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="142" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___h_t_t_p_1ga036f7a10fb68c47dbf348ea43f2556d0" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <definition>uint8_t HTTP2_FLAG_PRIORITY</definition>
+        <argsstring></argsstring>
+        <name>HTTP2_FLAG_PRIORITY</name>
+        <initializer>= 0x20</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="143" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="group___h_t_t_p_1ga36b1847a4d67129ff6144cdd82fd2815" prot="public" static="no" constexpr="yes" mutable="no">
+        <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
+        <definition>uint8_t HTTP2_FLAG_ACK</definition>
+        <argsstring></argsstring>
+        <name>HTTP2_FLAG_ACK</name>
+        <initializer>= 0x1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="144" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="144" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="group___h_t_t_p_1ga9ebd78f0c84b945b4fa60bac84ecd7cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structbyte__range" kindref="compound">byte_range</ref> &gt;</type>
+        <definition>vector&lt; byte_range &gt; parse_ranges</definition>
+        <argsstring>(string_view range_header, uint64_t file_size, size_t max_ranges=100)</argsstring>
+        <name>parse_ranges</name>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>range_header</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>file_size</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>max_ranges</declname>
+          <defval>100</defval>
+        </param>
+        <briefdescription>
+<para>解析HTTP Range头部值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>range_header</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Range头部值（不含&quot;bytes=&quot;前缀） </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>file_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件总大小 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max_ranges</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>最大允许的范围数量，超出时拒绝整个请求 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>解析出的字节范围列表，无效返回空vector </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_range.hpp" line="34" column="9" declfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_range.hpp" declline="34" declcolumn="9"/>
+      </memberdef>
+      <memberdef kind="function" id="group___h_t_t_p_1gad7320a18ab8dd536baf686ec8fa4a35f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string build_content_range</definition>
+        <argsstring>(const byte_range &amp;range, uint64_t total_size)</argsstring>
+        <name>build_content_range</name>
+        <param>
+          <type>const <ref refid="structbyte__range" kindref="compound">byte_range</ref> &amp;</type>
+          <declname>range</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>total_size</declname>
+        </param>
+        <briefdescription>
+<para>构建Content-Range头部值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字节范围 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>total_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>总大小 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Content-Range值，如 &quot;bytes 0-1023/4096&quot; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_range.hpp" line="42" column="9" declfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_range.hpp" declline="42" declcolumn="9"/>
+      </memberdef>
+      <memberdef kind="function" id="group___h_t_t_p_1ga93fb91244bc2462487420ee278a74951" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string build_multipart_ranges</definition>
+        <argsstring>(const vector&lt; byte_range &gt; &amp;ranges, string_view content_type, string_view boundary, function&lt; string(const byte_range &amp;)&gt; get_range_body, uint64_t total_size=0)</argsstring>
+        <name>build_multipart_ranges</name>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structbyte__range" kindref="compound">byte_range</ref> &gt; &amp;</type>
+          <declname>ranges</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>content_type</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>boundary</declname>
+        </param>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>(const <ref refid="structbyte__range" kindref="compound">byte_range</ref> &amp;)&gt;</type>
+          <declname>get_range_body</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
+          <declname>total_size</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>构建multipart/byteranges响应体 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ranges</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>多个字节范围 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>content_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>文件的MIME类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>boundary</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>MIME分隔边界字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>get_range_body</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>获取指定范围内容的回调函数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>total_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>multipart响应体字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_range.hpp" line="53" column="9" declfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_range.hpp" declline="53" declcolumn="9"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -62,6 +874,17 @@
 </listitem><listitem><para>**IETF RFC 9112**：HTTP/1.1（消息语法与路由） <ulink url="https://www.rfc-editor.org/rfc/rfc9112.html">https://www.rfc-editor.org/rfc/rfc9112.html</ulink></para>
 </listitem></itemizedlist>
 </para>
+<para><bold>HTTP/2 核心协议：</bold><itemizedlist>
+<listitem><para>**IETF RFC 7540**：HTTP/2（帧层、流、连接管理） <ulink url="https://www.rfc-editor.org/rfc/rfc7540.html">https://www.rfc-editor.org/rfc/rfc7540.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 7541**：HPACK（HTTP/2 头部压缩算法） <ulink url="https://www.rfc-editor.org/rfc/rfc7541.html">https://www.rfc-editor.org/rfc/rfc7541.html</ulink></para>
+</listitem></itemizedlist>
+</para>
+<para><bold>HTTP 扩展能力：</bold><itemizedlist>
+<listitem><para>**IETF RFC 9110 §8**：内容编码协商（Accept-Encoding / Content-Encoding）</para>
+</listitem><listitem><para>**IETF RFC 9110 §14**：字节范围请求（Range / Content-Range / 206 Partial Content）</para>
+</listitem><listitem><para>**IETF RFC 9110 §9.3.6**：CONNECT 方法（TCP 隧道代理）</para>
+</listitem></itemizedlist>
+</para>
 <para><bold>HTTP 状态码与头字段注册：</bold><itemizedlist>
 <listitem><para>**IANA HTTP Status Code Registry**：HTTP 状态码注册表 <ulink url="https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml">https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml</ulink></para>
 </listitem><listitem><para>**IANA Message Headers Registry**：HTTP 头字段注册表 <ulink url="https://www.iana.org/assignments/message-headers/message-headers.xhtml">https://www.iana.org/assignments/message-headers/message-headers.xhtml</ulink></para>
@@ -70,6 +893,13 @@
 <para><bold>HTTP 认证与安全：</bold><itemizedlist>
 <listitem><para>**IETF RFC 9110 §11**：HTTP 认证框架</para>
 </listitem><listitem><para>**IETF RFC 6797**：HTTP Strict Transport Security (HSTS) <ulink url="https://www.rfc-editor.org/rfc/rfc6797.html">https://www.rfc-editor.org/rfc/rfc6797.html</ulink></para>
+</listitem><listitem><para>**CSRF 防护**：Double-Submit Cookie 模式（防御跨站请求伪造攻击）</para>
+</listitem><listitem><para>**Session Fixation 防护**：会话标识符再生（regenerate_id）</para>
+</listitem></itemizedlist>
+</para>
+<para><bold>TLS / SNI 安全传输：</bold><itemizedlist>
+<listitem><para>**IETF RFC 6066 §3**：Server Name Indication（TLS 扩展） <ulink url="https://www.rfc-editor.org/rfc/rfc6066.html">https://www.rfc-editor.org/rfc/rfc6066.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 8446 §4.4.2**：TLS 1.3 中的 SNI 支持 <ulink url="https://www.rfc-editor.org/rfc/rfc8446.html">https://www.rfc-editor.org/rfc/rfc8446.html</ulink></para>
 </listitem></itemizedlist>
 </para>
 <para><bold>Cookie 与会话管理：</bold><itemizedlist>
@@ -83,6 +913,7 @@
 </para>
 <para><bold>WebSocket 协议：</bold><itemizedlist>
 <listitem><para>**IETF RFC 6455**：The WebSocket Protocol <ulink url="https://www.rfc-editor.org/rfc/rfc6455.html">https://www.rfc-editor.org/rfc/rfc6455.html</ulink></para>
+</listitem><listitem><para>**IETF RFC 7692**：WebSocket Per-Message Deflate 扩展（permessage-deflate） <ulink url="https://www.rfc-editor.org/rfc/rfc7692.html">https://www.rfc-editor.org/rfc/rfc7692.html</ulink></para>
 </listitem></itemizedlist>
 </para>
 <para><bold>MIME 类型规范：</bold><itemizedlist>
@@ -362,41 +1193,21 @@
 </para>
 </sect1>
 <sect1 id="group___h_t_t_p_1implementation_details">
-<title>实现细节</title><para><table rows="8" cols="2"><row>
+<title>实现细节</title><para><table rows="3" cols="2"><row>
 <entry thead="yes"><para>特性  </para>
 </entry><entry thead="yes"><para>规范参数  </para>
 </entry></row>
 <row>
 <entry thead="no"><para>HTTP 版本  </para>
-</entry><entry thead="no"><para>HTTP/1.1（RFC 9112）  </para>
+</entry><entry thead="no"><para>HTTP/1.1（RFC 9112）与 HTTP/2（RFC 7540）  </para>
 </entry></row>
 <row>
-<entry thead="no"><para>头部字段大小写  </para>
-</entry><entry thead="no"><para>不区分大小写，存储为原始大小写  </para>
-</entry></row>
-<row>
-<entry thead="no"><para>Cookie 解析  </para>
-</entry><entry thead="no"><para>支持 Set-Cookie 和 Cookie 头  </para>
-</entry></row>
-<row>
-<entry thead="no"><para>会话标识符  </para>
-</entry><entry thead="no"><para>支持 JESSIONID, SESSIONID, PHPSESSID 等常见名称  </para>
-</entry></row>
-<row>
-<entry thead="no"><para>路由匹配  </para>
-</entry><entry thead="no"><para>支持静态路径、路径参数（:id）、通配符（*）、正则表达式  </para>
-</entry></row>
-<row>
-<entry thead="no"><para>中间件执行顺序  </para>
-</entry><entry thead="no"><para>预过滤 → 核心过滤 → 路由处理 → 后过滤  </para>
-</entry></row>
-<row>
-<entry thead="no"><para>WebSocket 心跳  </para>
-</entry><entry thead="no"><para>周期性发送 Ping 帧，等待 Pong 响应  </para>
+<entry thead="no"><para>HTTP/2 帧层  </para>
+</entry><entry thead="no"><para>9 种帧类型：DATA / HEADERS / SETTINGS / PING / GOAWAY / RST_STREAM / WINDOW_UPDATE / PRIORITY /  </para>
 </entry></row>
 </table>
-</para>
-<para><simplesect kind="note"><para>本模块的 HTTP 解析器严格遵循 RFC 9112 语法规则，支持分块传输编码（chunked） 和 Content-Length 两种方式确定消息体长度。WebSocket 实现完整支持 RFC 6455 定义的控制帧（Ping/Pong/Close）和分片消息。</para>
+PUSH_PROMISE | | HPACK 头部压缩 | 静态表 61 项 + 动态表 + Huffman 编码（RFC 7541） | | 头部字段大小写 | 不区分大小写，存储为原始大小写 | | 分块传输编码 | 流式增量 chunked 解析，支持 Trailing Headers | | 内容协商 | Accept-Encoding 解析，gzip/deflate 响应压缩 | | 字节范围请求 | 单范围 206 与多范围 multipart/byteranges 206 | | CONNECT 隧道 | 双工 TCP 隧道中继，用于 HTTPS 代理 | | 路由匹配 | 基于 Segment Radix Tree 的 O(k) 前缀匹配 | | 静态路径、路径参数（:id）、通配符（*）、正则表达式回退 | | 中间件执行顺序 | 预过滤 → 核心过滤 → 路由处理 → 后过滤 | | 会话存储 | 可插拔 session_store（内存 / Redis 后端） | | Cookie 解析 | 支持 Set-Cookie 和 Cookie 头 | | 会话标识符 | 支持 JESSIONID, SESSIONID, PHPSESSID 等常见名称 | | CSRF 防护 | Double-Submit Cookie 模式，仅验证状态变更方法 | | SNI 多证书 | 基于 TLS SNI 扩展的 hostname → SSL_CTX 映射，支持通配符 | | Event Loop | Linux epoll 边缘触发，min-heap 定时器，单线程异步 I/O | | WebSocket 运行模式 | 线程模式（3线程/会话）和事件驱动模式（零线程）双模 | | WebSocket 心跳 | 周期性发送 Ping 帧，等待 Pong 响应 | | WebSocket 压缩 | permessage-deflate（RFC 7692），支持窗口比特位协商与上下文接管 | | WebSocket 升级 | 通用 Upgrade 分发器，支持自定义协议处理器 |</para>
+<para><simplesect kind="note"><para>本模块的 HTTP 解析器严格遵循 RFC 9112 语法规则，支持分块传输编码（chunked） 和 Content-Length 两种方式确定消息体长度。WebSocket 实现完整支持 RFC 6455 定义的控制帧（Ping/Pong/Close）和分片消息，并支持 RFC 7692 定义的 permessage-deflate 压缩扩展。HTTP/2 协议层提供纯 C++14 同步帧编解码， 传输层由 <ref refid="classevent__loop" kindref="compound">event_loop</ref> 驱动。</para>
 </simplesect>
 <simplesect kind="warning"><para>生产环境中应始终通过 HTTPS 使用 Secure 属性的 Cookie， 并在敏感路由上启用 CSRF 防护。WebSocket 连接应考虑使用 WSS（WebSocket Secure）。</para>
 </simplesect>
@@ -404,9 +1215,17 @@
 </simplesect>
 <simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc9112.html">https://www.rfc-editor.org/rfc/rfc9112.html</ulink> </para>
 </simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc7540.html">https://www.rfc-editor.org/rfc/rfc7540.html</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc7541.html">https://www.rfc-editor.org/rfc/rfc7541.html</ulink> </para>
+</simplesect>
 <simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc6265.html">https://www.rfc-editor.org/rfc/rfc6265.html</ulink> </para>
 </simplesect>
 <simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc6455.html">https://www.rfc-editor.org/rfc/rfc6455.html</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc7692.html">https://www.rfc-editor.org/rfc/rfc7692.html</ulink> </para>
+</simplesect>
+<simplesect kind="see"><para><ulink url="https://www.rfc-editor.org/rfc/rfc6066.html">https://www.rfc-editor.org/rfc/rfc6066.html</ulink> </para>
 </simplesect>
 <simplesect kind="see"><para><ulink url="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</ulink></para>
 </simplesect>

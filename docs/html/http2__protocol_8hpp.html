@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: http2_protocol.hpp 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('http2__protocol_8hpp.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">http2_protocol.hpp 文件参考</div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>HTTP/2 协议帧、HPACK 编解码器与流控制  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="unordered__map_8hpp_source.html">NeForce/core/container/unordered_map.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="functional_2function_8hpp_source.html">NeForce/core/functional/function.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="string_8hpp_source.html">NeForce/core/string/string.hpp</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+http2_protocol.hpp 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="http2__protocol_8hpp__incl.svg" width="2102" height="1488"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div>
+<p><a href="http2__protocol_8hpp_source.html">浏览该文件的源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:http2_5Fframe_5Fheader" id="r_http2_5Fframe_5Fheader"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhttp2__frame__header.html">http2_frame_header</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP/2 帧头（RFC 7540 §4.1），9 字节 packed 布局  <a href="structhttp2__frame__header.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:http2_5Fsettings_5Fentry" id="r_http2_5Fsettings_5Fentry"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhttp2__settings__entry.html">http2_settings_entry</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTINGS 帧中的单个参数条目  <a href="structhttp2__settings__entry.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:http2_5Fpriority" id="r_http2_5Fpriority"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhttp2__priority.html">http2_priority</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">流优先级信息（RFC 7540 §5.3）  <a href="structhttp2__priority.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:http2_5Fdata_5Fframe" id="r_http2_5Fdata_5Fframe"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhttp2__data__frame.html">http2_data_frame</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">DATA 帧（RFC 7540 §6.1）  <a href="structhttp2__data__frame.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:http2_5Fheaders_5Fframe" id="r_http2_5Fheaders_5Fframe"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhttp2__headers__frame.html">http2_headers_frame</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">HEADERS 帧（RFC 7540 §6.2）  <a href="structhttp2__headers__frame.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:http2_5Frst_5Fstream_5Fframe" id="r_http2_5Frst_5Fstream_5Fframe"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhttp2__rst__stream__frame.html">http2_rst_stream_frame</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">RST_STREAM 帧（RFC 7540 §6.4）  <a href="structhttp2__rst__stream__frame.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:http2_5Fsettings_5Fframe" id="r_http2_5Fsettings_5Fframe"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhttp2__settings__frame.html">http2_settings_frame</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SETTINGS 帧（RFC 7540 §6.5）  <a href="structhttp2__settings__frame.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:http2_5Fping_5Fframe" id="r_http2_5Fping_5Fframe"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhttp2__ping__frame.html">http2_ping_frame</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">PING 帧（RFC 7540 §6.7）  <a href="structhttp2__ping__frame.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:http2_5Fgoaway_5Fframe" id="r_http2_5Fgoaway_5Fframe"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhttp2__goaway__frame.html">http2_goaway_frame</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">GOAWAY 帧（RFC 7540 §6.8）  <a href="structhttp2__goaway__frame.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:http2_5Fwindow_5Fupdate_5Fframe" id="r_http2_5Fwindow_5Fupdate_5Fframe"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhttp2__window__update__frame.html">http2_window_update_frame</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">WINDOW_UPDATE 帧（RFC 7540 §6.9）  <a href="structhttp2__window__update__frame.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:http2_5Fpush_5Fpromise_5Fframe" id="r_http2_5Fpush_5Fpromise_5Fframe"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhttp2__push__promise__frame.html">http2_push_promise_frame</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">PUSH_PROMISE 帧（RFC 7540 §6.6）  <a href="structhttp2__push__promise__frame.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:http2_5Fcontinuation_5Fframe" id="r_http2_5Fcontinuation_5Fframe"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhttp2__continuation__frame.html">http2_continuation_frame</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">CONTINUATION 帧（RFC 7540 §6.10）  <a href="structhttp2__continuation__frame.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:hpack_5Fheader_5Ffield" id="r_hpack_5Fheader_5Ffield"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structhpack__header__field.html">hpack_header_field</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">HPACK 头部字段（名值对）  <a href="structhpack__header__field.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:hpack_5Fencoder" id="r_hpack_5Fencoder"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhpack__encoder.html">hpack_encoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">HPACK 头部编码器（RFC 7541）  <a href="classhpack__encoder.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:hpack_5Fdecoder" id="r_hpack_5Fdecoder"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhpack__decoder.html">hpack_decoder</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">HPACK 头部解码器（RFC 7541）  <a href="classhpack__decoder.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:http2_5Fframer" id="r_http2_5Fframer"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhttp2__framer.html">http2_framer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP/2 帧编解码器  <a href="classhttp2__framer.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:http2_5Fstream" id="r_http2_5Fstream"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhttp2__stream.html">http2_stream</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP/2 流状态机  <a href="classhttp2__stream.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:http2_5Fflow_5Fcontrol" id="r_http2_5Fflow_5Fcontrol"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhttp2__flow__control.html">http2_flow_control</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP/2 流量控制器  <a href="classhttp2__flow__control.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:http2_5Fsettings" id="r_http2_5Fsettings"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classhttp2__settings.html">http2_settings</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP/2 连接设置管理器  <a href="classhttp2__settings.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+枚举</h2></td></tr>
+<tr class="memitem:gae47f8f19d4cb93a49846573a1eb4e5c5" id="r_gae47f8f19d4cb93a49846573a1eb4e5c5"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group___h_t_t_p.html#gae47f8f19d4cb93a49846573a1eb4e5c5">http2_frame_type</a> : uint8_t { <br />
+&#160;&#160;<a class="el" href="group___h_t_t_p.html#ggae47f8f19d4cb93a49846573a1eb4e5c5ae44f9e348e41cb272efa87387728571b">http2_frame_type::DATA</a> = 0x0
+, <a class="el" href="group___h_t_t_p.html#ggae47f8f19d4cb93a49846573a1eb4e5c5a1242249ca7c09fa7634e292cf2819f85">http2_frame_type::HEADERS</a> = 0x1
+, <a class="el" href="group___h_t_t_p.html#ggae47f8f19d4cb93a49846573a1eb4e5c5acaf55db72c49969e2ed270adbcd0a8f5">http2_frame_type::PRIORITY</a> = 0x2
+, <a class="el" href="group___h_t_t_p.html#ggae47f8f19d4cb93a49846573a1eb4e5c5ab1f3602a647feee25f03b754f03316c0">http2_frame_type::RST_STREAM</a> = 0x3
+, <br />
+&#160;&#160;<a class="el" href="group___h_t_t_p.html#ggae47f8f19d4cb93a49846573a1eb4e5c5aed6f7aca7887a927b9ed3d62aa347a86">http2_frame_type::SETTINGS</a> = 0x4
+, <a class="el" href="group___h_t_t_p.html#ggae47f8f19d4cb93a49846573a1eb4e5c5aa2302bddf66a619a09f67beb7c446504">http2_frame_type::PUSH_PROMISE</a> = 0x5
+, <a class="el" href="group___h_t_t_p.html#ggae47f8f19d4cb93a49846573a1eb4e5c5ae07ff41a486c27c095a15898dcca34d1">http2_frame_type::PING</a> = 0x6
+, <a class="el" href="group___h_t_t_p.html#ggae47f8f19d4cb93a49846573a1eb4e5c5a21c426cbdb92c2439053c570eb511c30">http2_frame_type::GOAWAY</a> = 0x7
+, <br />
+&#160;&#160;<a class="el" href="group___h_t_t_p.html#ggae47f8f19d4cb93a49846573a1eb4e5c5a8930ff86ec057f61f21407e49bf82e6d">http2_frame_type::WINDOW_UPDATE</a> = 0x8
+, <a class="el" href="group___h_t_t_p.html#ggae47f8f19d4cb93a49846573a1eb4e5c5aa912ad8cd8aeb3f2762b4359d4c36583">http2_frame_type::CONTINUATION</a> = 0x9
+<br />
+ }</td></tr>
+<tr class="memdesc:gae47f8f19d4cb93a49846573a1eb4e5c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP/2 帧类型（RFC 7540 §6）  <a href="group___h_t_t_p.html#gae47f8f19d4cb93a49846573a1eb4e5c5">更多...</a><br /></td></tr>
+<tr class="memitem:ga2a07e32634a5bf7bee768485ae87041d" id="r_ga2a07e32634a5bf7bee768485ae87041d"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group___h_t_t_p.html#ga2a07e32634a5bf7bee768485ae87041d">http2_error</a> : uint32_t { <br />
+&#160;&#160;<a class="el" href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041dad306b6fdee05fe87455110ddf6501e6c">http2_error::NO_ERROR</a> = 0x0
+, <a class="el" href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041da23f149f0f9ae9ed9e0119e7209178a5d">http2_error::PROTOCOL_ERROR</a> = 0x1
+, <a class="el" href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041dae8c0c70879b5895c615677261d64a1ee">http2_error::INTERNAL_ERROR</a> = 0x2
+, <a class="el" href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041da20973c7b1b8e3fe85f3926d10271a8d4">http2_error::FLOW_CONTROL_ERROR</a> = 0x3
+, <br />
+&#160;&#160;<a class="el" href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041da653e43604415577e4a01fef2e382c9d1">http2_error::SETTINGS_TIMEOUT</a> = 0x4
+, <a class="el" href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041da795fcd4a9695a63ff230ad23d4122917">http2_error::STREAM_CLOSED</a> = 0x5
+, <a class="el" href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041da3d53bd153221a9a3bc76c346f457b3c3">http2_error::FRAME_SIZE_ERROR</a> = 0x6
+, <a class="el" href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041da3e2449dc6a7f4aee6278f70865604374">http2_error::REFUSED_STREAM</a> = 0x7
+, <br />
+&#160;&#160;<a class="el" href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041da2027c027133e22c8929e2874dc44dd36">http2_error::CANCEL</a> = 0x8
+, <a class="el" href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041da4d8716f0326b9aaf347c6f217e62e8bc">http2_error::COMPRESSION_ERROR</a> = 0x9
+, <a class="el" href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041da9bccf65b7a01f8d62c945340236971ae">http2_error::CONNECT_ERROR</a> = 0xA
+, <a class="el" href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041da3b119c9fe92621433d72165a79e94409">http2_error::ENHANCE_YOUR_CALM</a> = 0xB
+, <br />
+&#160;&#160;<a class="el" href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041dae5102d0ed2cad3aac7cb2d47d14d3b2e">http2_error::INADEQUATE_SECURITY</a> = 0xC
+, <a class="el" href="group___h_t_t_p.html#gga2a07e32634a5bf7bee768485ae87041dac54d292457fb2007bab47625c8aa42fa">http2_error::HTTP_1_1_REQUIRED</a> = 0xD
+<br />
+ }</td></tr>
+<tr class="memdesc:ga2a07e32634a5bf7bee768485ae87041d"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP/2 错误码（RFC 7540 §7）  <a href="group___h_t_t_p.html#ga2a07e32634a5bf7bee768485ae87041d">更多...</a><br /></td></tr>
+<tr class="memitem:gab4a24402dc0954ebe0037ce468ec79ff" id="r_gab4a24402dc0954ebe0037ce468ec79ff"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="group___h_t_t_p.html#gab4a24402dc0954ebe0037ce468ec79ff">http2_settings_id</a> : uint16_t { <br />
+&#160;&#160;<a class="el" href="group___h_t_t_p.html#ggab4a24402dc0954ebe0037ce468ec79ffab21db98ae5570cf2d2eea1ae84dadc0c">http2_settings_id::HEADER_TABLE_SIZE</a> = 0x1
+, <a class="el" href="group___h_t_t_p.html#ggab4a24402dc0954ebe0037ce468ec79ffa230ce83dbccb31567e5e780d698c7d1d">http2_settings_id::ENABLE_PUSH</a> = 0x2
+, <a class="el" href="group___h_t_t_p.html#ggab4a24402dc0954ebe0037ce468ec79ffaf6fa2500b99d7b98c0bb4479135f7967">http2_settings_id::MAX_CONCURRENT_STREAMS</a> = 0x3
+, <a class="el" href="group___h_t_t_p.html#ggab4a24402dc0954ebe0037ce468ec79ffaddacca0555b4339b6e9dd1818d95e338">http2_settings_id::INITIAL_WINDOW_SIZE</a> = 0x4
+, <br />
+&#160;&#160;<a class="el" href="group___h_t_t_p.html#ggab4a24402dc0954ebe0037ce468ec79ffae787c90dc72d889f3497d9f97ab0236e">http2_settings_id::MAX_FRAME_SIZE</a> = 0x5
+, <a class="el" href="group___h_t_t_p.html#ggab4a24402dc0954ebe0037ce468ec79ffa3b178b97bc72243896a77eed1af09f19">http2_settings_id::MAX_HEADER_LIST_SIZE</a> = 0x6
+<br />
+ }</td></tr>
+<tr class="memdesc:gab4a24402dc0954ebe0037ce468ec79ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP/2 SETTINGS 参数标识符（RFC 7540 §6.5.2）  <a href="group___h_t_t_p.html#gab4a24402dc0954ebe0037ce468ec79ff">更多...</a><br /></td></tr>
+<tr class="memitem:ga930c6dee09c2618fd01b61468fcadfe8" id="r_ga930c6dee09c2618fd01b61468fcadfe8"><td class="memItemLeft"><a id="ga930c6dee09c2618fd01b61468fcadfe8" name="ga930c6dee09c2618fd01b61468fcadfe8"></a>enum class &#160;</td><td class="memItemRight"><a class="el" href="group___h_t_t_p.html#ga930c6dee09c2618fd01b61468fcadfe8">http2_stream_state</a> </td></tr>
+<tr class="memdesc:ga930c6dee09c2618fd01b61468fcadfe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP/2 流状态（RFC 7540 §5.1） <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:gae18d02c0ffb6000a55a324c3de979412" id="r_gae18d02c0ffb6000a55a324c3de979412"><td class="memItemLeft">
+constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&#160;</td><td class="memItemRight"><b>HTTP2_MAX_FRAME_SIZE</b> = 16384</td></tr>
+<tr class="memdesc:gae18d02c0ffb6000a55a324c3de979412"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP/2 最大帧负载大小（RFC 7540 §4.1） <br /></td></tr>
+<tr class="memitem:ga90b9bc1783610f8f540cc0591269ca93" id="r_ga90b9bc1783610f8f540cc0591269ca93"><td class="memItemLeft">
+constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&#160;</td><td class="memItemRight"><b>HTTP2_DEFAULT_HEADER_TABLE_SIZE</b> = 4096</td></tr>
+<tr class="memdesc:ga90b9bc1783610f8f540cc0591269ca93"><td class="mdescLeft">&#160;</td><td class="mdescRight">HPACK 默认动态表大小 <br /></td></tr>
+<tr class="memitem:gabff5af8f166f2b56da8a9dd7e16895fa" id="r_gabff5af8f166f2b56da8a9dd7e16895fa"><td class="memItemLeft">
+constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&#160;</td><td class="memItemRight"><b>HTTP2_DEFAULT_MAX_CONCURRENT_STREAMS</b> = 100</td></tr>
+<tr class="memdesc:gabff5af8f166f2b56da8a9dd7e16895fa"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认最大并发流数 <br /></td></tr>
+<tr class="memitem:ga36075bec54b2e856f4a28cb3b1acdc55" id="r_ga36075bec54b2e856f4a28cb3b1acdc55"><td class="memItemLeft">
+constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&#160;</td><td class="memItemRight"><b>HTTP2_DEFAULT_INITIAL_WINDOW_SIZE</b> = 65535</td></tr>
+<tr class="memdesc:ga36075bec54b2e856f4a28cb3b1acdc55"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认初始流控窗口 <br /></td></tr>
+<tr class="memitem:ga148dfedbffa5af26513c66d2cc05d0dc" id="r_ga148dfedbffa5af26513c66d2cc05d0dc"><td class="memItemLeft">
+constexpr <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a>&#160;</td><td class="memItemRight"><b>HTTP2_DEFAULT_MAX_HEADER_LIST_SIZE</b> = 0xFFFFFFFF</td></tr>
+<tr class="memdesc:ga148dfedbffa5af26513c66d2cc05d0dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认最大头部列表大小 <br /></td></tr>
+<tr class="memitem:ga425894af14dedb71c71fa32da934e4fe" id="r_ga425894af14dedb71c71fa32da934e4fe"><td class="memItemLeft">
+constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><b>HPACK_STATIC_TABLE_SIZE</b> = 61</td></tr>
+<tr class="memdesc:ga425894af14dedb71c71fa32da934e4fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">HPACK 静态表条目数 <br /></td></tr>
+<tr class="memitem:ga5f6b923e6506ff2fdcbd85061e73ef13" id="r_ga5f6b923e6506ff2fdcbd85061e73ef13"><td class="memItemLeft">
+constexpr <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><b>HTTP2_CLIENT_PREFACE</b> = &quot;PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n&quot;</td></tr>
+<tr class="memdesc:ga5f6b923e6506ff2fdcbd85061e73ef13"><td class="mdescLeft">&#160;</td><td class="mdescRight">HTTP/2 客户端连接前言（RFC 7540 §3.5） <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>HTTP/2 协议帧、HPACK 编解码器与流控制 </p>
+<p>实现 RFC 7540（HTTP/2）帧格式、RFC 7541（HPACK）头部压缩、 流状态机和连接/流级流量控制。 </p>
+
+<p class="definition">在文件 <a class="el" href="http2__protocol_8hpp_source.html">http2_protocol.hpp</a> 中定义.</p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>network</b></li><li class="navelem"><b>http</b></li><li class="navelem"><a href="http2__protocol_8hpp.html">http2_protocol.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

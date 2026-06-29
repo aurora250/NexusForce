@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['解析器架构_0',['解析器架构',['../classyaml__parser.html#parser_architecture',1,'']]]
+  ['表单编码规则_0',['表单编码规则',['../structurl.html#form_encoding',1,'']]]
 ];

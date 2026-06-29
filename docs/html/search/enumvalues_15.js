@@ -10,11 +10,14 @@ var searchData=
   ['wake_5fbitset_5fprivate_7',['wake_bitset_private',['../group___futex.html#ggab7057283120da679629ce8fb1238219ba4744eac77e3eaa5a8c7d4d9cd30f2c49',1,'futex.hpp']]],
   ['wake_5fop_8',['wake_op',['../group___futex.html#ggab7057283120da679629ce8fb1238219ba0f74829cda07f2751c17564ecfb39a41',1,'futex.hpp']]],
   ['wake_5fprivate_9',['wake_private',['../group___futex.html#ggab7057283120da679629ce8fb1238219baafd70d970ca714dc5ad2ebab8f059c95',1,'futex.hpp']]],
-  ['warn_10',['WARN',['../group___logging.html#ggac91d55174d383848b976a34de843748ea32bd8a1db2275458673903bdb84cb277',1,'log_event.hpp']]],
-  ['write_11',['WRITE',['../group___file.html#gga9df1cddbb19e649f9e9603e4f8ed4cfead4b9e47f65b6e79b010582f15785867e',1,'file_constants.hpp']]],
-  ['write_12',['write',['../classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aefb2a684e4afb7d55e6147fbe5a332ee',1,'process']]],
-  ['write_5fthrough_13',['WRITE_THROUGH',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1',1,'file_constants.hpp']]],
-  ['wrong_5fprotocol_5ftype_14',['wrong_protocol_type',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a81cac28a38438710de9856af4a8bcd0b',1,'errc.hpp']]],
-  ['ws_15',['WS',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8abda72ed8541710980b8ec46af261a740',1,'ports']]],
-  ['wss_16',['WSS',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8af285b1726d9a5c79c618622a8e2d5bce',1,'ports']]]
+  ['warn_10',['WARN',['../group___logging.html#gga837946c96acd6e9638773176147baba1a32bd8a1db2275458673903bdb84cb277',1,'log_event.hpp']]],
+  ['warning_11',['warning',['../classcmdline.html#a4c84557e04980e1051cc0589118e3126a7b83d3f08fa392b79e3f553b585971cd',1,'cmdline']]],
+  ['weighted_12',['WEIGHTED',['../group___h_t_t_p.html#ggadf2370a616d3d1bf1ef4152acc72e793ae9d8ebf89324671ee286fa7bf1a2c16c',1,'load_balancer.hpp']]],
+  ['window_5fupdate_13',['WINDOW_UPDATE',['../group___h_t_t_p.html#ggae47f8f19d4cb93a49846573a1eb4e5c5a8930ff86ec057f61f21407e49bf82e6d',1,'http2_protocol.hpp']]],
+  ['write_14',['WRITE',['../group___file.html#gga9df1cddbb19e649f9e9603e4f8ed4cfead4b9e47f65b6e79b010582f15785867e',1,'file_constants.hpp']]],
+  ['write_15',['write',['../classprocess.html#acfd865e47b9c3a8b63da86bc85f11242aefb2a684e4afb7d55e6147fbe5a332ee',1,'process']]],
+  ['write_5fthrough_16',['WRITE_THROUGH',['../group___file.html#ggadd0b8478c8ee0d6b05880ca087016c9ea5ede152f40f45823747e8c6e90422bc1',1,'file_constants.hpp']]],
+  ['wrong_5fprotocol_5ftype_17',['wrong_protocol_type',['../group___error_code.html#ggaf82e70cdc0af1c3132fe6f20443944e6a81cac28a38438710de9856af4a8bcd0b',1,'errc.hpp']]],
+  ['ws_18',['WS',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8abda72ed8541710980b8ec46af261a740',1,'ports']]],
+  ['wss_19',['WSS',['../structports.html#ac669b0e3aadb23af41c8fb0d20d8b9d8af285b1726d9a5c79c618622a8e2d5bce',1,'ports']]]
 ];

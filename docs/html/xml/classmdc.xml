@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classmdc" kind="class" language="C++" prot="public">
+    <compoundname>mdc</compoundname>
+    <includes refid="log__event_8hpp" local="no">log_event.hpp</includes>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classmdc_1abfe7c57124a815ccad4fbe623da8a08c" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt; &amp;</type>
+        <definition>static unordered_map&lt; string, string &gt; &amp; mdc::storage</definition>
+        <argsstring>()</argsstring>
+        <name>storage</name>
+        <qualifiedname>mdc::storage</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="141" column="26"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classmdc_1a9dfce7773a4d87b761af589936b3e026" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void mdc::put</definition>
+        <argsstring>(const string &amp;key, string value)</argsstring>
+        <name>put</name>
+        <qualifiedname>mdc::put</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>设置键值对 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键名 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="149" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmdc_1a4e37c7aea89a8b9b190cdf7c77dfe95d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>static string mdc::get</definition>
+        <argsstring>(const string &amp;key)</argsstring>
+        <name>get</name>
+        <qualifiedname>mdc::get</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取键对应的值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>值，若不存在返回空字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="156" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classmdc_1a67b4f43cafa141f1428052668a45bc42" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void mdc::remove</definition>
+        <argsstring>(const string &amp;key)</argsstring>
+        <name>remove</name>
+        <qualifiedname>mdc::remove</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>移除指定的键 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键名 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="162" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmdc_1aa48bc38be02966292ab61a948f92a207" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void mdc::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>mdc::clear</qualifiedname>
+        <briefdescription>
+<para>清除当前线程的所有 MDC 数据 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="165" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmdc_1a130bbbb4b252f9d81e5ae391730e480f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool mdc::empty</definition>
+        <argsstring>()</argsstring>
+        <name>empty</name>
+        <qualifiedname>mdc::empty</qualifiedname>
+        <briefdescription>
+<para>检查当前线程的 MDC 是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>为空返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="171" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classmdc_1a9f81689cffe66fc7fe1c2207104326c2" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &gt;</type>
+        <definition>static unordered_map&lt; string, string &gt; mdc::snapshot</definition>
+        <argsstring>()</argsstring>
+        <name>snapshot</name>
+        <qualifiedname>mdc::snapshot</qualifiedname>
+        <briefdescription>
+<para>获取当前线程 MDC 的快照 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>MDC 键值对副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="177" column="26"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Mapped Diagnostic Context，线程局部上下文 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>每个线程独立的键值对存储，用于附加请求追踪信息（如 request_id、user）。 日志事件构造时自动将 MDC 内容合并到 event.context 中。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" line="139" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_event.hpp" bodystart="139" bodyend="178"/>
+    <listofallmembers>
+      <member refid="classmdc_1aa48bc38be02966292ab61a948f92a207" prot="public" virt="non-virtual"><scope>mdc</scope><name>clear</name></member>
+      <member refid="classmdc_1a130bbbb4b252f9d81e5ae391730e480f" prot="public" virt="non-virtual"><scope>mdc</scope><name>empty</name></member>
+      <member refid="classmdc_1a4e37c7aea89a8b9b190cdf7c77dfe95d" prot="public" virt="non-virtual"><scope>mdc</scope><name>get</name></member>
+      <member refid="classmdc_1a9dfce7773a4d87b761af589936b3e026" prot="public" virt="non-virtual"><scope>mdc</scope><name>put</name></member>
+      <member refid="classmdc_1a67b4f43cafa141f1428052668a45bc42" prot="public" virt="non-virtual"><scope>mdc</scope><name>remove</name></member>
+      <member refid="classmdc_1a9f81689cffe66fc7fe1c2207104326c2" prot="public" virt="non-virtual"><scope>mdc</scope><name>snapshot</name></member>
+      <member refid="classmdc_1abfe7c57124a815ccad4fbe623da8a08c" prot="private" virt="non-virtual"><scope>mdc</scope><name>storage</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

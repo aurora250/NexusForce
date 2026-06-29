@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['架构检测_0',['架构检测',['../group___architecture_detection.html',1,'']]]
+  ['无锁队列_0',['无锁队列',['../group___lock_free_queue.html',1,'']]]
 ];

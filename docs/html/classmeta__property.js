@@ -1,11 +1,28 @@
 var classmeta__property =
 [
-    [ "getter", "classmeta__property.html#a188ec17bb7abccdbcdfea60b3431eecf", null ],
+    [ "getter", "classmeta__property.html#a16e92c1c9077e0c28d17034f0d3330ea", null ],
     [ "setter", "classmeta__property.html#a802468374497eca3108f10abef0486b2", null ],
-    [ "meta_property", "classmeta__property.html#a484ebd413342d16a826e1ec81fdb93af", null ],
-    [ "get", "classmeta__property.html#a1f6577ecfc12e9f882b05d97ee4c6f93", null ],
+    [ "meta_property", "classmeta__property.html#a3d128dc2b3ff0a17e71db7be88b23dfa", null ],
+    [ "attributes", "classmeta__property.html#a9fa27d3cf2a629aff64a6b83acbd8e6f", null ],
+    [ "get", "classmeta__property.html#aad4205f94d1aa52f28e60f5e441349fc", null ],
+    [ "has_notify_signal", "classmeta__property.html#a09bf3decd29a3f52873890a7d170f693", null ],
+    [ "is_auto_increment", "classmeta__property.html#ae67ac96ad8f147cc10913da0233e0f93", null ],
+    [ "is_foreign_key", "classmeta__property.html#a40a2ee05a1d86dbd723d68d2522cf9b6", null ],
+    [ "is_index", "classmeta__property.html#a6228168c917c1a2f28ef9bab8ae1b24e", null ],
+    [ "is_optional", "classmeta__property.html#a13b413c06eddee398956f79d679d7ce6", null ],
+    [ "is_primary_key", "classmeta__property.html#a9f82529ae7168542ebbfa0d42bf8ddee", null ],
+    [ "is_readonly", "classmeta__property.html#ad3be44678b8e9793d64fb35bc1ee6a35", null ],
+    [ "is_required", "classmeta__property.html#ab5b219d06f66852d44c0ee87c25d49d9", null ],
+    [ "is_transient", "classmeta__property.html#ae626fae5790df2b5167957443f77a042", null ],
+    [ "is_unique", "classmeta__property.html#acdbd3f0c1d891a1f3363c34dcb5ca2f1", null ],
+    [ "is_versioned", "classmeta__property.html#ad8d2192158ebf2db0068cde307a874f0", null ],
     [ "name", "classmeta__property.html#a6ec5c8c2a3812adb83ee2a2b66a619ae", null ],
+    [ "notify_signal", "classmeta__property.html#a80f387296ab4034a5e1ae4f66ba31749", null ],
     [ "set", "classmeta__property.html#a0d7f05d04207d8d1546c9fd932e075bc", null ],
     [ "set", "classmeta__property.html#a9dd9c836263dc55a047f8549fd6a903e", null ],
-    [ "type_id", "classmeta__property.html#afae54af8916f19aeaab86ad402a56c4e", null ]
+    [ "set_attributes", "classmeta__property.html#a5a4a848f6896daa548916266e1f03096", null ],
+    [ "set_notify_signal", "classmeta__property.html#a5fb877d79011b2fea27b99114bdbb8a6", null ],
+    [ "set_version", "classmeta__property.html#a4a447da60cf603197cb24f31c54043ef", null ],
+    [ "type_id", "classmeta__property.html#afae54af8916f19aeaab86ad402a56c4e", null ],
+    [ "version", "classmeta__property.html#a215ddd06828e3063b41bddbf0570346f", null ]
 ];

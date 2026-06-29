@@ -100,22 +100,34 @@ $(function(){initNavTree('classlock__free__queue.html','','classlock__free__queu
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
-<tr class="memitem:aacf6a1a5d605c1409c7cdcf13f41ec50" id="r_aacf6a1a5d605c1409c7cdcf13f41ec50"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aacf6a1a5d605c1409c7cdcf13f41ec50">lock_free_queue</a> ()</td></tr>
-<tr class="memdesc:aacf6a1a5d605c1409c7cdcf13f41ec50"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
+<tr class="memitem:ae5b987f438df7419acd38e92fec94062" id="r_ae5b987f438df7419acd38e92fec94062"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae5b987f438df7419acd38e92fec94062">lock_free_queue</a> (<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> capacity=32 *<a class="el" href="#abb21493f55780f789e6fdfa5876c2b7b">BLOCK_SIZE</a>)</td></tr>
+<tr class="memdesc:ae5b987f438df7419acd38e92fec94062"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
 <tr class="memitem:ad694f5f11345581b7cdced27bf9b7c91" id="r_ad694f5f11345581b7cdced27bf9b7c91"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ad694f5f11345581b7cdced27bf9b7c91">~lock_free_queue</a> ()</td></tr>
 <tr class="memdesc:ad694f5f11345581b7cdced27bf9b7c91"><td class="mdescLeft">&#160;</td><td class="mdescRight">析构函数  <br /></td></tr>
 <tr class="memitem:a36f8cf27a02025a0e0bfbd3d24c6fbd0" id="r_a36f8cf27a02025a0e0bfbd3d24c6fbd0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a36f8cf27a02025a0e0bfbd3d24c6fbd0">push</a> (T new_value)</td></tr>
 <tr class="memdesc:a36f8cf27a02025a0e0bfbd3d24c6fbd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">入队操作  <br /></td></tr>
-<tr class="memitem:af4d602957128b5cd5e8f0edb30c48c09" id="r_af4d602957128b5cd5e8f0edb30c48c09"><td class="memItemLeft"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#af4d602957128b5cd5e8f0edb30c48c09">pop</a> ()</td></tr>
-<tr class="memdesc:af4d602957128b5cd5e8f0edb30c48c09"><td class="mdescLeft">&#160;</td><td class="mdescRight">出队操作  <br /></td></tr>
 <tr class="memitem:a24c20d863075bbbcedc192df5625d1e3" id="r_a24c20d863075bbbcedc192df5625d1e3"><td class="memItemLeft"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a24c20d863075bbbcedc192df5625d1e3">try_pop</a> ()</td></tr>
-<tr class="memdesc:a24c20d863075bbbcedc192df5625d1e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试出队操作  <br /></td></tr>
-<tr class="memitem:a0407046c06b078c73f0972f7e2afb548" id="r_a0407046c06b078c73f0972f7e2afb548"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a0407046c06b078c73f0972f7e2afb548">empty</a> () const noexcept</td></tr>
-<tr class="memdesc:a0407046c06b078c73f0972f7e2afb548"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查队列是否为空  <br /></td></tr>
-<tr class="memitem:aea52e2c7aa4d45917f8160f3d21eb54c" id="r_aea52e2c7aa4d45917f8160f3d21eb54c"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#aea52e2c7aa4d45917f8160f3d21eb54c">size</a> () const noexcept</td></tr>
-<tr class="memdesc:aea52e2c7aa4d45917f8160f3d21eb54c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取队列中元素的近似数量  <br /></td></tr>
+<tr class="memdesc:a24c20d863075bbbcedc192df5625d1e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">非阻塞出队操作  <br /></td></tr>
+<tr class="memitem:af4d602957128b5cd5e8f0edb30c48c09" id="r_af4d602957128b5cd5e8f0edb30c48c09"><td class="memItemLeft"><a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#af4d602957128b5cd5e8f0edb30c48c09">pop</a> ()</td></tr>
+<tr class="memdesc:af4d602957128b5cd5e8f0edb30c48c09"><td class="mdescLeft">&#160;</td><td class="mdescRight">阻塞出队操作  <br /></td></tr>
+<tr class="memitem:aaec84e98289bda32bf10f17d0d48fd59" id="r_aaec84e98289bda32bf10f17d0d48fd59"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#aaec84e98289bda32bf10f17d0d48fd59">empty</a> () const</td></tr>
+<tr class="memdesc:aaec84e98289bda32bf10f17d0d48fd59"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查队列是否为空  <br /></td></tr>
+<tr class="memitem:a67570e8ef548edc7a672e521a0ed8adf" id="r_a67570e8ef548edc7a672e521a0ed8adf"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a67570e8ef548edc7a672e521a0ed8adf">size</a> () const</td></tr>
+<tr class="memdesc:a67570e8ef548edc7a672e521a0ed8adf"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取队列中元素的近似数量  <br /></td></tr>
 <tr class="memitem:aea072bf54bf6f6418b30f57209a844bc" id="r_aea072bf54bf6f6418b30f57209a844bc"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aea072bf54bf6f6418b30f57209a844bc">clear</a> ()</td></tr>
 <tr class="memdesc:aea072bf54bf6f6418b30f57209a844bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">清空队列  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+静态 Public 属性</h2></td></tr>
+<tr class="memitem:abb21493f55780f789e6fdfa5876c2b7b" id="r_abb21493f55780f789e6fdfa5876c2b7b"><td class="memItemLeft"><a id="abb21493f55780f789e6fdfa5876c2b7b" name="abb21493f55780f789e6fdfa5876c2b7b"></a>
+static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><b>BLOCK_SIZE</b> = 32</td></tr>
+<tr class="memdesc:abb21493f55780f789e6fdfa5876c2b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">每个 block 存储的元素数量 <br /></td></tr>
+<tr class="memitem:a2eff262eff3b1cef13fa007ca956cb3a" id="r_a2eff262eff3b1cef13fa007ca956cb3a"><td class="memItemLeft"><a id="a2eff262eff3b1cef13fa007ca956cb3a" name="a2eff262eff3b1cef13fa007ca956cb3a"></a>
+static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><b>INITIAL_IMPLICIT_PRODUCER_HASH_SIZE</b> = 32</td></tr>
+<tr class="memdesc:a2eff262eff3b1cef13fa007ca956cb3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">隐式生产者哈希表初始大小 <br /></td></tr>
+<tr class="memitem:ac3215f04e7a6aa7a83ab197a0a2b176b" id="r_ac3215f04e7a6aa7a83ab197a0a2b176b"><td class="memItemLeft"><a id="ac3215f04e7a6aa7a83ab197a0a2b176b" name="ac3215f04e7a6aa7a83ab197a0a2b176b"></a>
+static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><b>IMPLICIT_INITIAL_INDEX_SIZE</b> = 32</td></tr>
+<tr class="memdesc:ac3215f04e7a6aa7a83ab197a0a2b176b"><td class="mdescLeft">&#160;</td><td class="mdescRight">block 索引初始容量 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
@@ -126,13 +138,12 @@ class lock_free_queue&lt; T &gt;</div><p>无锁队列类模板 </p>
   </table>
   </dd>
 </dl>
-<p>基于原子操作和引用计数实现的多生产者多消费者无锁队列。 使用Michael-Scott算法实现，支持并发push和pop操作。</p>
-<dl class="section note"><dt>注解</dt><dd>采用ABA问题预防机制 </dd></dl>
+<p>基于 per-producer SPSC 子队列架构实现的无锁队列。 每个生产者线程拥有独立的 block-based SPSC 内队列，block 通过无锁 free_list 回收利用。 支持多生产者多消费者并发 push/try_pop 操作。 </p>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00039">39</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00073">73</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
-<a id="aacf6a1a5d605c1409c7cdcf13f41ec50" name="aacf6a1a5d605c1409c7cdcf13f41ec50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aacf6a1a5d605c1409c7cdcf13f41ec50">&#9670;&#160;</a></span>lock_free_queue()</h2>
+<a id="ae5b987f438df7419acd38e92fec94062" name="ae5b987f438df7419acd38e92fec94062"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5b987f438df7419acd38e92fec94062">&#9670;&#160;</a></span>lock_free_queue()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -145,21 +156,29 @@ template&lt;typename T&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="classlock__free__queue.html">lock_free_queue</a>&lt; T &gt;::lock_free_queue </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>capacity</em></span><span class="paramdefsep"> = </span><span class="paramdefval">32&#160;*&#160;<a class="el" href="#abb21493f55780f789e6fdfa5876c2b7b">BLOCK_SIZE</a></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>默认构造函数 </p>
-<p>初始化队列，创建哨兵节点作为初始的头尾节点。 </p>
+<p>构造函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">capacity</td><td>预分配的元素容量</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>预分配指定容量的 block 池，减少运行时堆分配。 容量按 BLOCK_SIZE 向上取整。 </p>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00195">195</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00718">718</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="lock__free__queue_8hpp_source.html#l00076">BLOCK_SIZE</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00173">memory_order_relaxed</a>.</p>
 
 </div>
 </div>
@@ -189,11 +208,12 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 
 <p>析构函数 </p>
-<p>清空队列并删除哨兵节点。 </p>
+<p>销毁所有生产者、哈希表、回收池中的 block 和初始 block 池。</p>
+<dl class="section warning"><dt>警告</dt><dd>析构时不能有并发操作 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00208">208</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00731">731</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="lock__free__queue_8hpp_source.html#l00261">pop()</a>.</p>
+<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00173">memory_order_relaxed</a>, <a class="el" href="iterator_8hpp_source.html#l00157">next()</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00141">prev()</a>.</p>
 
 </div>
 </div>
@@ -224,18 +244,16 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 
 <p>清空队列 </p>
-<p>循环调用pop()直到队列为空，删除所有元素。</p>
-<dl class="section warning"><dt>警告</dt><dd>此方法不是线程安全的！ 调用clear()时，应确保没有其他线程同时进行push或pop操作。 如果有并发的push操作，clear可能永远无法完成。</dd></dl>
-<dl class="section note"><dt>注解</dt><dd>建议在单线程环境或确保独占访问时调用此方法。 </dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>此方法不是线程安全的，调用者需保证无并发操作 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00355">355</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00866">866</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="lock__free__queue_8hpp_source.html#l00261">pop()</a>.</p>
+<p class="reference">引用了 <a class="el" href="lock__free__queue_8hpp_source.html#l00789">try_pop()</a>.</p>
 
 </div>
 </div>
-<a id="a0407046c06b078c73f0972f7e2afb548" name="a0407046c06b078c73f0972f7e2afb548"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0407046c06b078c73f0972f7e2afb548">&#9670;&#160;</a></span>empty()</h2>
+<a id="aaec84e98289bda32bf10f17d0d48fd59" name="aaec84e98289bda32bf10f17d0d48fd59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaec84e98289bda32bf10f17d0d48fd59">&#9670;&#160;</a></span>empty()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -254,16 +272,16 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>检查队列是否为空 </p>
-<dl class="section return"><dt>返回</dt><dd>如果队列为空返回true，否则返回false</dd></dl>
-<dl class="section note"><dt>注解</dt><dd>由于无锁队列的并发特性，此方法返回的结果可能瞬间失效。 仅用于监控和统计，不应用于同步控制。 </dd></dl>
+<dl class="section return"><dt>返回</dt><dd>队列为空返回 true </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>由于并发特性，返回值可能瞬间失效 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00324">324</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00840">840</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
 
@@ -294,15 +312,12 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>出队操作 </p>
-<dl class="section return"><dt>返回</dt><dd>出队元素的unique_ptr，如果队列为空则返回空指针</dd></dl>
-<p>从队列头部弹出元素，支持多线程并发出队。 使用CAS操作保证线程安全。 </p>
+<p>阻塞出队操作 </p>
+<dl class="section return"><dt>返回</dt><dd>出队元素的 <a class="el" href="classunique__ptr.html" title="独占智能指针">unique_ptr</a> </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00261">261</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00825">825</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00151">atomic&lt; T &gt;::exchange()</a>, <a class="el" href="atomic_8hpp_source.html#l00134">atomic&lt; T &gt;::load()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a>, <a class="el" href="memory__order_8hpp_source.html#l00173">memory_order_relaxed</a> , 以及 <a class="el" href="iterator_8hpp_source.html#l00157">next()</a>.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="lock__free__queue_8hpp_source.html#l00355">clear()</a> , 以及 <a class="el" href="lock__free__queue_8hpp_source.html#l00208">~lock_free_queue()</a>.</p>
+<p class="reference">引用了 <a class="el" href="lock__free__queue_8hpp_source.html#l00789">try_pop()</a>.</p>
 
 </div>
 </div>
@@ -334,20 +349,21 @@ template&lt;typename T&gt; </div>
 <p>入队操作 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">new_value</td><td>要入队的新值</td></tr>
+    <tr><td class="paramname">new_value</td><td>要入队的元素</td></tr>
   </table>
   </dd>
 </dl>
-<p>将新值压入队列尾部，支持多线程并发入队。 使用CAS操作保证线程安全。 </p>
+<p>为当前线程自动创建隐式生产者。</p>
+<dl class="section note"><dt>注解</dt><dd>如果内存分配失败，入队操作会静默失败 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00223">223</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00775">775</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00211">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00320">unique_ptr&lt; T, Deleter &gt;::get()</a>, <a class="el" href="atomic_8hpp_source.html#l00134">atomic&lt; T &gt;::load()</a>, <a class="el" href="memory__order_8hpp_source.html#l00173">memory_order_relaxed</a> , 以及 <a class="el" href="unique__ptr_8hpp_source.html#l00351">unique_ptr&lt; T, Deleter &gt;::release()</a>.</p>
+<p class="reference">引用了 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
 </div>
 </div>
-<a id="aea52e2c7aa4d45917f8160f3d21eb54c" name="aea52e2c7aa4d45917f8160f3d21eb54c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea52e2c7aa4d45917f8160f3d21eb54c">&#9670;&#160;</a></span>size()</h2>
+<a id="a67570e8ef548edc7a672e521a0ed8adf" name="a67570e8ef548edc7a672e521a0ed8adf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67570e8ef548edc7a672e521a0ed8adf">&#9670;&#160;</a></span>size()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -366,18 +382,18 @@ template&lt;typename T&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>获取队列中元素的近似数量 </p>
-<dl class="section return"><dt>返回</dt><dd>队列中元素的近似数量</dd></dl>
-<dl class="section note"><dt>注解</dt><dd>由于无锁队列的并发特性，返回值可能不精确。 此方法通过维护入队和出队计数器来计算队列大小。 仅用于监控和统计，不应用于同步控制。 </dd></dl>
+<dl class="section return"><dt>返回</dt><dd>元素数量的近似值 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>由于并发特性，返回值可能瞬间失效 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00338">338</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00854">854</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00173">memory_order_relaxed</a>.</p>
+<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
 
 </div>
 </div>
@@ -406,14 +422,15 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>尝试出队操作 </p>
-<dl class="section return"><dt>返回</dt><dd>出队元素的unique_ptr，如果队列为空或竞争失败则返回空指针</dd></dl>
-<p>尝试从队列头部弹出元素，最多重试3次。 如果队列为空或多次CAS失败，则返回空指针。</p>
-<dl class="section note"><dt>注解</dt><dd>此方法不会自旋等待，适合在高竞争环境下使用 </dd></dl>
+<p>非阻塞出队操作 </p>
+<dl class="section return"><dt>返回</dt><dd>出队元素的 unique_ptr，队列为空则返回空指针</dd></dl>
+<p>使用启发式扫描生产者链表，选择元素最多的生产者优先出队。 最多扫描 3 个非空生产者。 </p>
 
-<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00290">290</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="lock__free__queue_8hpp_source.html">lock_free_queue.hpp</a> 第 <a class="el" href="lock__free__queue_8hpp_source.html#l00789">789</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="atomic_8hpp_source.html#l00151">atomic&lt; T &gt;::exchange()</a>, <a class="el" href="atomic_8hpp_source.html#l00134">atomic&lt; T &gt;::load()</a>, <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a>, <a class="el" href="memory__order_8hpp_source.html#l00173">memory_order_relaxed</a>, <a class="el" href="iterator_8hpp_source.html#l00157">next()</a> , 以及 <a class="el" href="generator_8hpp_source.html#l00897">retry()</a>.</p>
+<p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="lock__free__queue_8hpp_source.html#l00866">clear()</a> , 以及 <a class="el" href="lock__free__queue_8hpp_source.html#l00825">pop()</a>.</p>
 
 </div>
 </div>

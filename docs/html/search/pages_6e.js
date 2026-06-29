@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['缓存机制_0',['DNS 缓存机制',['../group___d_n_s.html#dns_caching',1,'']]]
+  ['红黑树性质_0',['红黑树性质',['../group___r_b_tree.html#rb_tree_properties',1,'']]]
 ];

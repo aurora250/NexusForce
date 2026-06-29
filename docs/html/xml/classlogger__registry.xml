@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classlogger__registry" kind="class" language="C++" prot="public">
+    <compoundname>logger_registry</compoundname>
+    <includes refid="logger_8hpp" local="no">logger.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classlogger__registry_1ad96c2bc6c42a92d6f96410d3b38fc589" prot="private" static="no" mutable="no">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classlogger" kindref="compound">logger</ref> &gt;</type>
+        <definition>shared_ptr&lt;logger&gt; logger_registry::root_</definition>
+        <argsstring></argsstring>
+        <name>root_</name>
+        <qualifiedname>logger_registry::root_</qualifiedname>
+        <briefdescription>
+<para>根 Logger </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="301" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="301" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlogger__registry_1af93f150155835fce0ad07c3afd1a44a1" prot="private" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classlogger" kindref="compound">logger</ref> &gt; &gt;</type>
+        <definition>unordered_map&lt;string, shared_ptr&lt;logger&gt; &gt; logger_registry::loggers_</definition>
+        <argsstring></argsstring>
+        <name>loggers_</name>
+        <qualifiedname>logger_registry::loggers_</qualifiedname>
+        <briefdescription>
+<para>名称到 Logger 的映射 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="302" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="302" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classlogger__registry_1a54e13d4f8c3c7a41a538f10ee3656986" prot="private" static="no" mutable="no">
+        <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
+        <definition>mutex logger_registry::mutex_</definition>
+        <argsstring></argsstring>
+        <name>mutex_</name>
+        <qualifiedname>logger_registry::mutex_</qualifiedname>
+        <briefdescription>
+<para>注册中心互斥锁 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="303" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="303" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classlogger__registry_1a264443da7d48611a5e23f44f03d4f853" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>logger_registry::logger_registry</definition>
+        <argsstring>()</argsstring>
+        <name>logger_registry</name>
+        <qualifiedname>logger_registry::logger_registry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="305" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classlogger__registry_1a1e6a15a6d6b60b408dd931a001e8afcb" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classlogger" kindref="compound">logger</ref> &gt;</type>
+        <definition>shared_ptr&lt; logger &gt; logger_registry::create_logger</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>create_logger</name>
+        <qualifiedname>logger_registry::create_logger</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="306" column="16"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classlogger__registry_1a3f1407cb8a87680527a90984dd0e875d" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classlogger__registry" kindref="compound">logger_registry</ref> &amp;</type>
+        <definition>static logger_registry &amp; logger_registry::instance</definition>
+        <argsstring>()</argsstring>
+        <name>instance</name>
+        <qualifiedname>logger_registry::instance</qualifiedname>
+        <briefdescription>
+<para>获取全局唯一实例 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="310" column="28"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classlogger__registry_1a2c1dda9d6f34a5527dcc6b719942d7fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>logger_registry::logger_registry</definition>
+        <argsstring>(const logger_registry &amp;)=delete</argsstring>
+        <name>logger_registry</name>
+        <qualifiedname>logger_registry::logger_registry</qualifiedname>
+        <param>
+          <type>const <ref refid="classlogger__registry" kindref="compound">logger_registry</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="312" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classlogger__registry_1aa41d8fb41870773f4b76dffa34a3d8ea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classlogger__registry" kindref="compound">logger_registry</ref> &amp;</type>
+        <definition>logger_registry &amp; logger_registry::operator=</definition>
+        <argsstring>(const logger_registry &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>logger_registry::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classlogger__registry" kindref="compound">logger_registry</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="313" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classlogger__registry_1a9f855ef53758d394545ad2028475daa6" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classlogger" kindref="compound">logger</ref> &gt;</type>
+        <definition>shared_ptr&lt; logger &gt; logger_registry::root_logger</definition>
+        <argsstring>()</argsstring>
+        <name>root_logger</name>
+        <qualifiedname>logger_registry::root_logger</qualifiedname>
+        <briefdescription>
+<para>获取根 Logger（名称为空字符串） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>根 Logger </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="319" column="17"/>
+        <referencedby refid="classlogger__registry_1a3a81684e88683a1f47d7c9f109c00720" compoundref="logger_8hpp" startline="332" endline="332">default_logger</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classlogger__registry_1afcbe976bbf2a3b04fd9864c1178d8623" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classlogger" kindref="compound">logger</ref> &gt;</type>
+        <definition>shared_ptr&lt; logger &gt; logger_registry::get_logger</definition>
+        <argsstring>(const string &amp;name)</argsstring>
+        <name>get_logger</name>
+        <qualifiedname>logger_registry::get_logger</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+<para>获取或创建指定名称的 Logger </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>层级名称，如 &quot;app.network.tcp&quot; </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应的 Logger 实例 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="326" column="16"/>
+        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="476" endline="478">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classlogger__registry_1a3a81684e88683a1f47d7c9f109c00720" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classshared__ptr" kindref="compound">shared_ptr</ref>&lt; <ref refid="classlogger" kindref="compound">logger</ref> &gt;</type>
+        <definition>shared_ptr&lt; logger &gt; logger_registry::default_logger</definition>
+        <argsstring>()</argsstring>
+        <name>default_logger</name>
+        <qualifiedname>logger_registry::default_logger</qualifiedname>
+        <briefdescription>
+<para>获取默认 Logger（即根 Logger） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>根 Logger </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="332" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="332" bodyend="332"/>
+        <references refid="classlogger__registry_1a9f855ef53758d394545ad2028475daa6">root_logger</references>
+      </memberdef>
+      <memberdef kind="function" id="classlogger__registry_1a208649871e8872d7ba9676e38c076bc5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void logger_registry::flush_all</definition>
+        <argsstring>()</argsstring>
+        <name>flush_all</name>
+        <qualifiedname>logger_registry::flush_all</qualifiedname>
+        <briefdescription>
+<para>刷新所有已注册的 Logger </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="335" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>全局 Logger 注册中心 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>管理所有 Logger 的创建与查找。自动构建 &apos;.&apos; 分隔的层级关系。 使用双重检查锁定保证线程安全。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" line="299" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/logger.hpp" bodystart="299" bodyend="336"/>
+    <listofallmembers>
+      <member refid="classlogger__registry_1a1e6a15a6d6b60b408dd931a001e8afcb" prot="private" virt="non-virtual"><scope>logger_registry</scope><name>create_logger</name></member>
+      <member refid="classlogger__registry_1a3a81684e88683a1f47d7c9f109c00720" prot="public" virt="non-virtual"><scope>logger_registry</scope><name>default_logger</name></member>
+      <member refid="classlogger__registry_1a208649871e8872d7ba9676e38c076bc5" prot="public" virt="non-virtual"><scope>logger_registry</scope><name>flush_all</name></member>
+      <member refid="classlogger__registry_1afcbe976bbf2a3b04fd9864c1178d8623" prot="public" virt="non-virtual"><scope>logger_registry</scope><name>get_logger</name></member>
+      <member refid="classlogger__registry_1a3f1407cb8a87680527a90984dd0e875d" prot="public" virt="non-virtual"><scope>logger_registry</scope><name>instance</name></member>
+      <member refid="classlogger__registry_1a264443da7d48611a5e23f44f03d4f853" prot="private" virt="non-virtual"><scope>logger_registry</scope><name>logger_registry</name></member>
+      <member refid="classlogger__registry_1a2c1dda9d6f34a5527dcc6b719942d7fd" prot="public" virt="non-virtual"><scope>logger_registry</scope><name>logger_registry</name></member>
+      <member refid="classlogger__registry_1af93f150155835fce0ad07c3afd1a44a1" prot="private" virt="non-virtual"><scope>logger_registry</scope><name>loggers_</name></member>
+      <member refid="classlogger__registry_1a54e13d4f8c3c7a41a538f10ee3656986" prot="private" virt="non-virtual"><scope>logger_registry</scope><name>mutex_</name></member>
+      <member refid="classlogger__registry_1aa41d8fb41870773f4b76dffa34a3d8ea" prot="public" virt="non-virtual"><scope>logger_registry</scope><name>operator=</name></member>
+      <member refid="classlogger__registry_1ad96c2bc6c42a92d6f96410d3b38fc589" prot="private" virt="non-virtual"><scope>logger_registry</scope><name>root_</name></member>
+      <member refid="classlogger__registry_1a9f855ef53758d394545ad2028475daa6" prot="public" virt="non-virtual"><scope>logger_registry</scope><name>root_logger</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,381 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: event_loop类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classevent__loop.html','','classevent__loop-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">event_loop类 参考<div class="ingroups"><a class="el" href="group___async_components.html">异步组件</a> &raquo; <a class="el" href="group___event_loop.html">事件循环</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>单线程 I/O 事件循环  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="event__loop_8hpp_source.html">event_loop.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:aa203b2df0a8b94167f19a2bfb584042c" id="r_aa203b2df0a8b94167f19a2bfb584042c"><td class="memItemLeft"><a id="aa203b2df0a8b94167f19a2bfb584042c" name="aa203b2df0a8b94167f19a2bfb584042c"></a>
+using&#160;</td><td class="memItemRight"><b>fd_callback</b> = <a class="el" href="classfunction.html">function</a>&lt;void(int fd, <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> events)&gt;</td></tr>
+<tr class="memdesc:aa203b2df0a8b94167f19a2bfb584042c"><td class="mdescLeft">&#160;</td><td class="mdescRight">fd 事件回调 <br /></td></tr>
+<tr class="memitem:ab867ebbe6a76855e438f6a132d07d860" id="r_ab867ebbe6a76855e438f6a132d07d860"><td class="memItemLeft"><a id="ab867ebbe6a76855e438f6a132d07d860" name="ab867ebbe6a76855e438f6a132d07d860"></a>
+using&#160;</td><td class="memItemRight"><b>timer_callback</b> = <a class="el" href="classfunction.html">function</a>&lt;void()&gt;</td></tr>
+<tr class="memdesc:ab867ebbe6a76855e438f6a132d07d860"><td class="mdescLeft">&#160;</td><td class="mdescRight">定时器到期回调 <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a96ee43711eab937be786d1fb7c638a30" id="r_a96ee43711eab937be786d1fb7c638a30"><td class="memItemLeft"><a id="a96ee43711eab937be786d1fb7c638a30" name="a96ee43711eab937be786d1fb7c638a30"></a>
+&#160;</td><td class="memItemRight"><b>event_loop</b> ()</td></tr>
+<tr class="memdesc:a96ee43711eab937be786d1fb7c638a30"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造事件循环并初始化操作系统后端 <br /></td></tr>
+<tr class="memitem:a4244dc0c57ed3f333f7cad9b56473fba" id="r_a4244dc0c57ed3f333f7cad9b56473fba"><td class="memItemLeft"><a id="a4244dc0c57ed3f333f7cad9b56473fba" name="a4244dc0c57ed3f333f7cad9b56473fba"></a>
+&#160;</td><td class="memItemRight"><b>~event_loop</b> ()</td></tr>
+<tr class="memdesc:a4244dc0c57ed3f333f7cad9b56473fba"><td class="mdescLeft">&#160;</td><td class="mdescRight">停止事件循环并释放操作系统资源 <br /></td></tr>
+<tr class="memitem:a256dcf8569f3f5f82d103da7bdc1730e" id="r_a256dcf8569f3f5f82d103da7bdc1730e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a256dcf8569f3f5f82d103da7bdc1730e">add_fd</a> (int fd, <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> events, <a class="el" href="#aa203b2df0a8b94167f19a2bfb584042c">fd_callback</a> cb)</td></tr>
+<tr class="memdesc:a256dcf8569f3f5f82d103da7bdc1730e"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册文件描述符进行监控  <br /></td></tr>
+<tr class="memitem:ab0021884de0dd147b943f6c23766ad15" id="r_ab0021884de0dd147b943f6c23766ad15"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab0021884de0dd147b943f6c23766ad15">mod_fd</a> (int fd, <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> events)</td></tr>
+<tr class="memdesc:ab0021884de0dd147b943f6c23766ad15"><td class="mdescLeft">&#160;</td><td class="mdescRight">修改已注册 fd 的事件掩码  <br /></td></tr>
+<tr class="memitem:ab836576bdb1cb76c6921408936df0995" id="r_ab836576bdb1cb76c6921408936df0995"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ab836576bdb1cb76c6921408936df0995">remove_fd</a> (int fd)</td></tr>
+<tr class="memdesc:ab836576bdb1cb76c6921408936df0995"><td class="mdescLeft">&#160;</td><td class="mdescRight">取消文件描述符的监控  <br /></td></tr>
+<tr class="memitem:a3d13c63db02528b28a91a87a2e254c53" id="r_a3d13c63db02528b28a91a87a2e254c53"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3d13c63db02528b28a91a87a2e254c53">schedule_timer</a> (<a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a> delay_ms, <a class="el" href="#ab867ebbe6a76855e438f6a132d07d860">timer_callback</a> cb)</td></tr>
+<tr class="memdesc:a3d13c63db02528b28a91a87a2e254c53"><td class="mdescLeft">&#160;</td><td class="mdescRight">调度一次性定时器  <br /></td></tr>
+<tr class="memitem:af3dc236d90cfdfe9d714979f2f887977" id="r_af3dc236d90cfdfe9d714979f2f887977"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#af3dc236d90cfdfe9d714979f2f887977">cancel_timer</a> (<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> timer_id)</td></tr>
+<tr class="memdesc:af3dc236d90cfdfe9d714979f2f887977"><td class="mdescLeft">&#160;</td><td class="mdescRight">取消待执行的定时器  <br /></td></tr>
+<tr class="memitem:a33711da5633702105dc8f5433609b608" id="r_a33711da5633702105dc8f5433609b608"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a33711da5633702105dc8f5433609b608">run</a> ()</td></tr>
+<tr class="memdesc:a33711da5633702105dc8f5433609b608"><td class="mdescLeft">&#160;</td><td class="mdescRight">运行事件循环（阻塞直到 <a class="el" href="#ae9481e13792e4f19958935d985680d5f" title="停止事件循环">stop()</a> 被调用）  <br /></td></tr>
+<tr class="memitem:ae5e01e9b90de2ffa20ba02882ee1596c" id="r_ae5e01e9b90de2ffa20ba02882ee1596c"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae5e01e9b90de2ffa20ba02882ee1596c">run_once</a> (int timeout_ms=0)</td></tr>
+<tr class="memdesc:ae5e01e9b90de2ffa20ba02882ee1596c"><td class="mdescLeft">&#160;</td><td class="mdescRight">执行事件循环的单次迭代  <br /></td></tr>
+<tr class="memitem:ae9481e13792e4f19958935d985680d5f" id="r_ae9481e13792e4f19958935d985680d5f"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ae9481e13792e4f19958935d985680d5f">stop</a> ()</td></tr>
+<tr class="memdesc:ae9481e13792e4f19958935d985680d5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">停止事件循环  <br /></td></tr>
+<tr class="memitem:aea238dba6c0c4a31822c1796cbff8952" id="r_aea238dba6c0c4a31822c1796cbff8952"><td class="memItemLeft"><a id="aea238dba6c0c4a31822c1796cbff8952" name="aea238dba6c0c4a31822c1796cbff8952"></a>
+bool&#160;</td><td class="memItemRight"><b>is_running</b> () const noexcept</td></tr>
+<tr class="memdesc:aea238dba6c0c4a31822c1796cbff8952"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查事件循环当前是否正在运行 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>单线程 I/O 事件循环 </p>
+<p>监控已注册的文件描述符的可读/可写事件，并在事件发生时调度回调。 定时器以最小堆管理，到期时自动触发。</p>
+<dl class="section note"><dt>注解</dt><dd>所有回调在事件循环线程中执行，长耗时回调会阻塞 I/O 分发。 </dd></dl>
+<dl class="section warning"><dt>警告</dt><dd>不支持从其他线程注册 fd；通过 wake() + 外部队列实现跨线程操作。 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="event__loop_8hpp_source.html">event_loop.hpp</a> 第 <a class="el" href="event__loop_8hpp_source.html#l00047">47</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a256dcf8569f3f5f82d103da7bdc1730e" name="a256dcf8569f3f5f82d103da7bdc1730e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a256dcf8569f3f5f82d103da7bdc1730e">&#9670;&#160;</a></span>add_fd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void event_loop::add_fd </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></td>          <td class="paramname"><span class="paramname"><em>events</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#aa203b2df0a8b94167f19a2bfb584042c">fd_callback</a></td>          <td class="paramname"><span class="paramname"><em>cb</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>注册文件描述符进行监控 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>要监控的文件描述符 </td></tr>
+    <tr><td class="paramname">events</td><td>epoll_in / epoll_out 的事件掩码 </td></tr>
+    <tr><td class="paramname">cb</td><td>fd 上有事件发生时的回调 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>fd 必须在 <a class="el" href="#ab836576bdb1cb76c6921408936df0995" title="取消文件描述符的监控">remove_fd()</a> 调用前保持有效 </dd></dl>
+
+</div>
+</div>
+<a id="af3dc236d90cfdfe9d714979f2f887977" name="af3dc236d90cfdfe9d714979f2f887977"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3dc236d90cfdfe9d714979f2f887977">&#9670;&#160;</a></span>cancel_timer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool event_loop::cancel_timer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>timer_id</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>取消待执行的定时器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timer_id</td><td><a class="el" href="#a3d13c63db02528b28a91a87a2e254c53" title="调度一次性定时器">schedule_timer()</a> 返回的定时器 ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>找到并取消返回 true，已触发返回 false </dd></dl>
+
+</div>
+</div>
+<a id="ab0021884de0dd147b943f6c23766ad15" name="ab0021884de0dd147b943f6c23766ad15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0021884de0dd147b943f6c23766ad15">&#9670;&#160;</a></span>mod_fd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void event_loop::mod_fd </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a></td>          <td class="paramname"><span class="paramname"><em>events</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>修改已注册 fd 的事件掩码 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>已注册的文件描述符 </td></tr>
+    <tr><td class="paramname">events</td><td>新的事件掩码（覆盖旧值） </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab836576bdb1cb76c6921408936df0995" name="ab836576bdb1cb76c6921408936df0995"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab836576bdb1cb76c6921408936df0995">&#9670;&#160;</a></span>remove_fd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void event_loop::remove_fd </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>fd</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>取消文件描述符的监控 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">fd</td><td>已注册的文件描述符 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a33711da5633702105dc8f5433609b608" name="a33711da5633702105dc8f5433609b608"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33711da5633702105dc8f5433609b608">&#9670;&#160;</a></span>run()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void event_loop::run </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>运行事件循环（阻塞直到 <a class="el" href="#ae9481e13792e4f19958935d985680d5f" title="停止事件循环">stop()</a> 被调用） </p>
+<dl class="section note"><dt>注解</dt><dd>此方法会无限期阻塞调用线程 </dd></dl>
+
+</div>
+</div>
+<a id="ae5e01e9b90de2ffa20ba02882ee1596c" name="ae5e01e9b90de2ffa20ba02882ee1596c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5e01e9b90de2ffa20ba02882ee1596c">&#9670;&#160;</a></span>run_once()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void event_loop::run_once </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>timeout_ms</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>执行事件循环的单次迭代 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">timeout_ms</td><td>等待事件的最大阻塞时间（-1 表示无超时） </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3d13c63db02528b28a91a87a2e254c53" name="a3d13c63db02528b28a91a87a2e254c53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d13c63db02528b28a91a87a2e254c53">&#9670;&#160;</a></span>schedule_timer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> event_loop::schedule_timer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga785d1fff9ad28a98e121ba9f90b3a3ca">uint64_t</a></td>          <td class="paramname"><span class="paramname"><em>delay_ms</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#ab867ebbe6a76855e438f6a132d07d860">timer_callback</a></td>          <td class="paramname"><span class="paramname"><em>cb</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>调度一次性定时器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delay_ms</td><td>以当前时间为基准的延迟毫秒数 </td></tr>
+    <tr><td class="paramname">cb</td><td>定时器到期时的回调 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>定时器 ID，可用于 <a class="el" href="#af3dc236d90cfdfe9d714979f2f887977" title="取消待执行的定时器">cancel_timer()</a> </dd></dl>
+
+</div>
+</div>
+<a id="ae9481e13792e4f19958935d985680d5f" name="ae9481e13792e4f19958935d985680d5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9481e13792e4f19958935d985680d5f">&#9670;&#160;</a></span>stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void event_loop::stop </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>停止事件循环 </p>
+<dl class="section note"><dt>注解</dt><dd>线程安全，可从任意线程调用 </dd></dl>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="event__loop_8hpp_source.html">event_loop.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classevent__loop.html">event_loop</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structroute__trie_1_1node" kind="struct" language="C++" prot="public">
+    <compoundname>route_trie::node</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structroute__trie_1_1node_1ae0e84f12f85308e8d18adf156ba1063b" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string route_trie::node::segment</definition>
+        <argsstring></argsstring>
+        <name>segment</name>
+        <qualifiedname>route_trie::node::segment</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="34" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structroute__trie_1_1node_1a6be243b50dd185766218fc73f6a8642f" prot="public" static="no" mutable="no">
+        <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref> &gt;</type>
+        <definition>unordered_map&lt;string, size_t&gt; route_trie::node::children</definition>
+        <argsstring></argsstring>
+        <name>children</name>
+        <qualifiedname>route_trie::node::children</qualifiedname>
+        <briefdescription>
+<para>静态段 → 子节点索引 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="35" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structroute__trie_1_1node_1a4958bd5c5256bc72083310955b6abfcd" prot="public" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t route_trie::node::param_index</definition>
+        <argsstring></argsstring>
+        <name>param_index</name>
+        <qualifiedname>route_trie::node::param_index</qualifiedname>
+        <initializer>= <ref refid="classnumeric__traits" kindref="compound">numeric_traits</ref>&lt;<ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>&gt;<ref refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" kindref="member">::max</ref>()</initializer>
+        <briefdescription>
+<para>:param 子节点索引 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="36" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structroute__trie_1_1node_1a7568a3d322c1a8cbca03de9608e157b5" prot="public" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t route_trie::node::wildcard_index</definition>
+        <argsstring></argsstring>
+        <name>wildcard_index</name>
+        <qualifiedname>route_trie::node::wildcard_index</qualifiedname>
+        <initializer>= <ref refid="classnumeric__traits" kindref="compound">numeric_traits</ref>&lt;<ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref>&gt;<ref refid="group___compare_algorithms_1ga01c48c11cc5d3222cb2e3adf0f843f3e" kindref="member">::max</ref>()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>通配符子节点索引 </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="37" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structroute__trie_1_1node_1a6d091827c5531d56fce1b08fd5fe71e6" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string route_trie::node::param_name</definition>
+        <argsstring></argsstring>
+        <name>param_name</name>
+        <qualifiedname>route_trie::node::param_name</qualifiedname>
+        <briefdescription>
+<para>参数名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="38" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structroute__trie_1_1node_1ae5ccc3c535277b552ea8aa091dace261" prot="public" static="no" mutable="no">
+        <type>handler_type</type>
+        <definition>handler_type route_trie::node::handler</definition>
+        <argsstring></argsstring>
+        <name>handler</name>
+        <qualifiedname>route_trie::node::handler</qualifiedname>
+        <briefdescription>
+<para>路由处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="39" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structroute__trie_1_1node_1aab5114806a9b15d734cc332df3490e12" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool route_trie::node::has_handler</definition>
+        <argsstring></argsstring>
+        <name>has_handler</name>
+        <qualifiedname>route_trie::node::has_handler</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否有处理器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="40" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>basic_string&lt; char &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>function&lt; void(http_request &amp;, http_response &amp;)&gt;</label>
+        <link refid="classfunction"/>
+      </node>
+      <node id="3">
+        <label>icommon&lt; T &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="5">
+        <label>ihashable&lt; T &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="1">
+        <label>route_trie::node</label>
+        <childnode refid="2" relation="usage">
+          <edgelabel>param_name</edgelabel>
+          <edgelabel>segment</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>children</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>handler</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>unordered_map&lt; basic_string&lt; char &gt;, size_t &gt;</label>
+        <link refid="classunordered__map"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" line="33" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/radix_router.hpp" bodystart="33" bodyend="41"/>
+    <listofallmembers>
+      <member refid="structroute__trie_1_1node_1a6be243b50dd185766218fc73f6a8642f" prot="public" virt="non-virtual"><scope>route_trie::node</scope><name>children</name></member>
+      <member refid="structroute__trie_1_1node_1ae5ccc3c535277b552ea8aa091dace261" prot="public" virt="non-virtual"><scope>route_trie::node</scope><name>handler</name></member>
+      <member refid="structroute__trie_1_1node_1aab5114806a9b15d734cc332df3490e12" prot="public" virt="non-virtual"><scope>route_trie::node</scope><name>has_handler</name></member>
+      <member refid="structroute__trie_1_1node_1a4958bd5c5256bc72083310955b6abfcd" prot="public" virt="non-virtual"><scope>route_trie::node</scope><name>param_index</name></member>
+      <member refid="structroute__trie_1_1node_1a6d091827c5531d56fce1b08fd5fe71e6" prot="public" virt="non-virtual"><scope>route_trie::node</scope><name>param_name</name></member>
+      <member refid="structroute__trie_1_1node_1ae0e84f12f85308e8d18adf156ba1063b" prot="public" virt="non-virtual"><scope>route_trie::node</scope><name>segment</name></member>
+      <member refid="structroute__trie_1_1node_1a7568a3d322c1a8cbca03de9608e157b5" prot="public" virt="non-virtual"><scope>route_trie::node</scope><name>wildcard_index</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

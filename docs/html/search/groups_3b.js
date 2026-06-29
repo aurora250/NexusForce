@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['引用包装_0',['引用包装',['../group___reference_wrapper.html',1,'']]]
+  ['对齐操作_0',['对齐操作',['../group___alignment.html',1,'']]],
+  ['对齐缓冲区_1',['对齐缓冲区',['../group___aligned_buffer.html',1,'']]]
 ];

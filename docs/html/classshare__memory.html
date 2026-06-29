@@ -153,6 +153,15 @@ void&#160;</td><td class="memItemRight"><b>unmap</b> () noexcept</td></tr>
 <tr class="memdesc:af97255adba5c58f718a02088bded10c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否已映射  <br /></td></tr>
 <tr class="memitem:a6cfd0764176b9e974c0bcf0faad9ac61" id="r_a6cfd0764176b9e974c0bcf0faad9ac61"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a6cfd0764176b9e974c0bcf0faad9ac61">flush</a> (bool <a class="el" href="group___async.html#ga4bbf8cf030239a4806813af4dcafec6f">async</a>=false)</td></tr>
 <tr class="memdesc:a6cfd0764176b9e974c0bcf0faad9ac61"><td class="mdescLeft">&#160;</td><td class="mdescRight">刷新共享内存到磁盘  <br /></td></tr>
+<tr class="memitem:afd217720226c30ccdb2be654897bdccf" id="r_afd217720226c30ccdb2be654897bdccf"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#afd217720226c30ccdb2be654897bdccf">grow</a> (<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> new_size)</td></tr>
+<tr class="memdesc:afd217720226c30ccdb2be654897bdccf"><td class="mdescLeft">&#160;</td><td class="mdescRight">扩增共享内存大小  <br /></td></tr>
+<tr class="memitem:a6b3dc0a3128e02f9e5461b010e354f9e" id="r_a6b3dc0a3128e02f9e5461b010e354f9e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6b3dc0a3128e02f9e5461b010e354f9e">lock</a> ()</td></tr>
+<tr class="memdesc:a6b3dc0a3128e02f9e5461b010e354f9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取进程间互斥锁  <br /></td></tr>
+<tr class="memitem:a1ed403897d52bc158896c121af895870" id="r_a1ed403897d52bc158896c121af895870"><td class="memItemLeft"><a id="a1ed403897d52bc158896c121af895870" name="a1ed403897d52bc158896c121af895870"></a>
+void&#160;</td><td class="memItemRight"><b>unlock</b> ()</td></tr>
+<tr class="memdesc:a1ed403897d52bc158896c121af895870"><td class="mdescLeft">&#160;</td><td class="mdescRight">释放进程间互斥锁 <br /></td></tr>
+<tr class="memitem:a48ccf04b137a92e72495e9ee80c8c720" id="r_a48ccf04b137a92e72495e9ee80c8c720"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a48ccf04b137a92e72495e9ee80c8c720">try_lock</a> ()</td></tr>
+<tr class="memdesc:a48ccf04b137a92e72495e9ee80c8c720"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试获取进程间互斥锁  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 静态 Public 成员函数</h2></td></tr>
@@ -288,7 +297,7 @@ void&#160;</td><td class="memItemRight"><b>unmap</b> () noexcept</td></tr>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="share__memory_8hpp_source.html#l00181">name()</a>, <a class="el" href="#aa398f85ea0678ed0adb5013a6e5d8b32">share_memory()</a> , 以及 <a class="el" href="share__memory_8hpp_source.html#l00169">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="share__memory_8hpp_source.html#l00186">name()</a>, <a class="el" href="#aa398f85ea0678ed0adb5013a6e5d8b32">share_memory()</a> , 以及 <a class="el" href="share__memory_8hpp_source.html#l00174">size()</a>.</p>
 
 </div>
 </div>
@@ -327,7 +336,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>类型转换后的地址 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00161">161</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00166">166</a> 行定义.</p>
 
 </div>
 </div>
@@ -357,11 +366,11 @@ template&lt;typename T&gt; </div>
 <p>获取映射地址 </p>
 <dl class="section return"><dt>返回</dt><dd>映射地址，未映射则返回nullptr </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00153">153</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00158">158</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="share__memory_8hpp_source.html#l00153">data()</a>.</p>
+<p class="reference">引用了 <a class="el" href="share__memory_8hpp_source.html#l00158">data()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="share__memory_8hpp_source.html#l00153">data()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="share__memory_8hpp_source.html#l00158">data()</a>.</p>
 
 </div>
 </div>
@@ -397,7 +406,7 @@ template&lt;typename T&gt; </div>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否存在 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="share__memory_8hpp_source.html#l00181">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="share__memory_8hpp_source.html#l00186">name()</a>.</p>
 
 </div>
 </div>
@@ -429,6 +438,38 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
+<a id="afd217720226c30ccdb2be654897bdccf" name="afd217720226c30ccdb2be654897bdccf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd217720226c30ccdb2be654897bdccf">&#9670;&#160;</a></span>grow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void share_memory::grow </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>new_size</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>扩增共享内存大小 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">new_size</td><td>新的大小（字节），必须大于当前大小 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structshare__memory__exception.html" title="共享内存操作异常">share_memory_exception</a></td><td>扩增失败时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>警告</dt><dd>调用前必须先 <a class="el" href="#a7f93dd42e93a791947c3ef82d44b7c6f" title="映射共享内存到进程地址空间">map()</a> </dd></dl>
+
+</div>
+</div>
 <a id="af97255adba5c58f718a02088bded10c0" name="af97255adba5c58f718a02088bded10c0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af97255adba5c58f718a02088bded10c0">&#9670;&#160;</a></span>is_mapped()</h2>
 
@@ -455,7 +496,7 @@ template&lt;typename T&gt; </div>
 <p>检查是否已映射 </p>
 <dl class="section return"><dt>返回</dt><dd>是否已映射 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00193">193</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00198">198</a> 行定义.</p>
 
 </div>
 </div>
@@ -485,7 +526,28 @@ template&lt;typename T&gt; </div>
 <p>检查是否已打开 </p>
 <dl class="section return"><dt>返回</dt><dd>是否已打开 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00187">187</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00192">192</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a6b3dc0a3128e02f9e5461b010e354f9e" name="a6b3dc0a3128e02f9e5461b010e354f9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b3dc0a3128e02f9e5461b010e354f9e">&#9670;&#160;</a></span>lock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void share_memory::lock </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取进程间互斥锁 </p>
+<dl class="section warning"><dt>警告</dt><dd>调用前必须先 <a class="el" href="#a7f93dd42e93a791947c3ef82d44b7c6f" title="映射共享内存到进程地址空间">map()</a></dd></dl>
+<p>阻塞直到锁可用，支持跨进程同步。 </p>
 
 </div>
 </div>
@@ -556,7 +618,7 @@ template&lt;typename T&gt; </div>
 <p>获取映射大小 </p>
 <dl class="section return"><dt>返回</dt><dd>映射大小（字节） </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00175">175</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00180">180</a> 行定义.</p>
 
 </div>
 </div>
@@ -586,7 +648,7 @@ template&lt;typename T&gt; </div>
 <p>获取共享内存名称 </p>
 <dl class="section return"><dt>返回</dt><dd>共享内存名称 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00181">181</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00186">186</a> 行定义.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#a3869ceaa39ed6bd4e7f5149a6874fced">exists()</a>, <a class="el" href="#aae33eefe6b65765458dd5945a9acd0c9">open()</a>, <a class="el" href="#a48a47c0aebb11a0497306ebc362f8975">remove()</a> , 以及 <a class="el" href="#aa8628e04be4a1e2c4511ce09e7f14b31">share_memory()</a>.</p>
 
@@ -638,7 +700,7 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 
-<p class="reference">引用了 <a class="el" href="share__memory_8hpp_source.html#l00181">name()</a>, <a class="el" href="#aae33eefe6b65765458dd5945a9acd0c9">open()</a> , 以及 <a class="el" href="share__memory_8hpp_source.html#l00169">size()</a>.</p>
+<p class="reference">引用了 <a class="el" href="share__memory_8hpp_source.html#l00186">name()</a>, <a class="el" href="#aae33eefe6b65765458dd5945a9acd0c9">open()</a> , 以及 <a class="el" href="share__memory_8hpp_source.html#l00174">size()</a>.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#aae33eefe6b65765458dd5945a9acd0c9">open()</a>.</p>
 
@@ -677,7 +739,7 @@ template&lt;typename T&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>是否成功删除 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>即使关闭句柄，如果还有其他进程持有句柄，对象仍会存在 可以尝试打开以检查是否真的被移除 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="share__memory_8hpp_source.html#l00181">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="share__memory_8hpp_source.html#l00186">name()</a>.</p>
 
 </div>
 </div>
@@ -707,9 +769,29 @@ template&lt;typename T&gt; </div>
 <p>获取共享内存大小 </p>
 <dl class="section return"><dt>返回</dt><dd>共享内存大小（字节） </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00169">169</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="share__memory_8hpp_source.html">share_memory.hpp</a> 第 <a class="el" href="share__memory_8hpp_source.html#l00174">174</a> 行定义.</p>
 
 <p class="reference">被这些函数引用 <a class="el" href="#aae33eefe6b65765458dd5945a9acd0c9">open()</a> , 以及 <a class="el" href="#aa8628e04be4a1e2c4511ce09e7f14b31">share_memory()</a>.</p>
+
+</div>
+</div>
+<a id="a48ccf04b137a92e72495e9ee80c8c720" name="a48ccf04b137a92e72495e9ee80c8c720"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48ccf04b137a92e72495e9ee80c8c720">&#9670;&#160;</a></span>try_lock()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool share_memory::try_lock </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>尝试获取进程间互斥锁 </p>
+<dl class="section return"><dt>返回</dt><dd>是否成功获取锁 </dd></dl>
 
 </div>
 </div>

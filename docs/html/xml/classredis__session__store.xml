@@ -1,0 +1,208 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classredis__session__store" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>redis_session_store</compoundname>
+    <basecompoundref refid="classsession__store" prot="public" virt="non-virtual">session_store</basecompoundref>
+    <includes refid="session__store__redis_8hpp" local="no">session_store_redis.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classredis__session__store_1a29cf449aabe7b8e7c4c65f00cbee4840" prot="private" static="no" mutable="no">
+        <type><ref refid="structredis__connect" kindref="compound">redis_connect</ref> *</type>
+        <definition>redis_connect* redis_session_store::conn_</definition>
+        <argsstring></argsstring>
+        <name>conn_</name>
+        <qualifiedname>redis_session_store::conn_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" line="41" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classredis__session__store_1a8791f1e178ec717c275ef08f7ebf3f31" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string redis_session_store::prefix_</definition>
+        <argsstring></argsstring>
+        <name>prefix_</name>
+        <qualifiedname>redis_session_store::prefix_</qualifiedname>
+        <initializer>{&quot;session:&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" line="42" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" bodystart="42" bodyend="42"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classredis__session__store_1a426f3c282508c409a923f04dc2d70372" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>redis_session_store::redis_session_store</definition>
+        <argsstring>(redis_connect &amp;conn)</argsstring>
+        <name>redis_session_store</name>
+        <qualifiedname>redis_session_store::redis_session_store</qualifiedname>
+        <param>
+          <type><ref refid="structredis__connect" kindref="compound">redis_connect</ref> &amp;</type>
+          <declname>conn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" line="30" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" bodystart="30" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classredis__session__store_1ae1c84b5d56dd9e5c68626bb36e56976a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="classoptional" kindref="compound">optional</ref>&lt; <ref refid="structhttp__session" kindref="compound">http_session</ref> &gt;</type>
+        <definition>optional&lt; http_session &gt; redis_session_store::load</definition>
+        <argsstring>(const string &amp;id) override</argsstring>
+        <name>load</name>
+        <qualifiedname>redis_session_store::load</qualifiedname>
+        <reimplements refid="classsession__store_1a8efe650201df84d5286fb18a2b1bf8cf">load</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" line="33" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classredis__session__store_1a18456afc03a78fb0cbe230bbd8e5ec00" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void redis_session_store::save</definition>
+        <argsstring>(const http_session &amp;session) override</argsstring>
+        <name>save</name>
+        <qualifiedname>redis_session_store::save</qualifiedname>
+        <reimplements refid="classsession__store_1adbbcf404859a6798657a1877d106f075">save</reimplements>
+        <param>
+          <type>const <ref refid="structhttp__session" kindref="compound">http_session</ref> &amp;</type>
+          <declname>session</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" line="34" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classredis__session__store_1ad3ac461a1ba3e8578d769a51772a5eb8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void redis_session_store::remove</definition>
+        <argsstring>(const string &amp;id) override</argsstring>
+        <name>remove</name>
+        <qualifiedname>redis_session_store::remove</qualifiedname>
+        <reimplements refid="classsession__store_1abb2d03b726f01c327626e27b41235528">remove</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" line="35" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" bodystart="35" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classredis__session__store_1a6149c16ba9b40ff449f483cad4de1392" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool redis_session_store::exists</definition>
+        <argsstring>(const string &amp;id) const override</argsstring>
+        <name>exists</name>
+        <qualifiedname>redis_session_store::exists</qualifiedname>
+        <reimplements refid="classsession__store_1a67e77a256d9336b0dbd64113b37d56dd">exists</reimplements>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" line="36" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" bodystart="36" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classredis__session__store_1a34b378dc055c38aeeaa5e449febd0215" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void redis_session_store::cleanup</definition>
+        <argsstring>() override</argsstring>
+        <name>cleanup</name>
+        <qualifiedname>redis_session_store::cleanup</qualifiedname>
+        <reimplements refid="classsession__store_1ac5d5e3c652fb553dfaaa058d349cf1b9">cleanup</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" line="37" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" bodystart="37" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classredis__session__store_1ae66688a98e6e2242d1fc8084c23c3cd5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t redis_session_store::count</definition>
+        <argsstring>() const override</argsstring>
+        <name>count</name>
+        <qualifiedname>redis_session_store::count</qualifiedname>
+        <reimplements refid="classsession__store_1ae13497eafe6d7aadb55438e829b552bf">count</reimplements>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" line="38" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" bodystart="38" bodyend="38"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Redis后端会话存储 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>每个session以 &quot;session:&lt;id&gt;&quot; 为键存储在Redis中， 使用 SETEX 设置 TTL = session.max_age 秒。 序列化格式为简单的 key=value&amp;key=value 字符串。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>redis_session_store</label>
+        <link refid="classredis__session__store"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>session_store</label>
+        <link refid="classsession__store"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>redis_session_store</label>
+        <link refid="classredis__session__store"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>session_store</label>
+        <link refid="classsession__store"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" line="28" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/session_store_redis.hpp" bodystart="28" bodyend="47"/>
+    <listofallmembers>
+      <member refid="classredis__session__store_1a34b378dc055c38aeeaa5e449febd0215" prot="public" virt="virtual"><scope>redis_session_store</scope><name>cleanup</name></member>
+      <member refid="classredis__session__store_1a29cf449aabe7b8e7c4c65f00cbee4840" prot="private" virt="non-virtual"><scope>redis_session_store</scope><name>conn_</name></member>
+      <member refid="classredis__session__store_1ae66688a98e6e2242d1fc8084c23c3cd5" prot="public" virt="virtual"><scope>redis_session_store</scope><name>count</name></member>
+      <member refid="classredis__session__store_1a6149c16ba9b40ff449f483cad4de1392" prot="public" virt="virtual"><scope>redis_session_store</scope><name>exists</name></member>
+      <member refid="classredis__session__store_1ae1c84b5d56dd9e5c68626bb36e56976a" prot="public" virt="virtual"><scope>redis_session_store</scope><name>load</name></member>
+      <member refid="classredis__session__store_1a8791f1e178ec717c275ef08f7ebf3f31" prot="private" virt="non-virtual"><scope>redis_session_store</scope><name>prefix_</name></member>
+      <member refid="classredis__session__store_1a426f3c282508c409a923f04dc2d70372" prot="public" virt="non-virtual"><scope>redis_session_store</scope><name>redis_session_store</name></member>
+      <member refid="classredis__session__store_1ad3ac461a1ba3e8578d769a51772a5eb8" prot="public" virt="virtual"><scope>redis_session_store</scope><name>remove</name></member>
+      <member refid="classredis__session__store_1a18456afc03a78fb0cbe230bbd8e5ec00" prot="public" virt="virtual"><scope>redis_session_store</scope><name>save</name></member>
+      <member refid="classsession__store_1a2e9ace0691b61db3b197134cedf82327" prot="public" virt="virtual"><scope>redis_session_store</scope><name>~session_store</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

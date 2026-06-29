@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['邮件格式说明_0',['邮件格式说明',['../group___s_m_t_p.html#email_format',1,'']]]
+  ['遵循的国际标准_0',['遵循的国际标准',['../group___s_m_t_p.html#standards',1,'']]]
 ];

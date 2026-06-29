@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['📐_20数据结构与算法_0',['📐 数据结构与算法',['../md__m_a_i_n_p_a_g_e.html#autotoc_md13',1,'']]],
-  ['📐_20算法库_20algorithm_1',['📐 算法库 (Algorithm)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md35',1,'']]]
+  ['颜色分量定义_0',['颜色分量定义',['../group___color.html#color_components',1,'']]],
+  ['颜色_1',['颜色',['../group___color.html',1,'']]]
 ];

@@ -8,9 +8,11 @@ var classsystem__event =
     [ "~system_event", "classsystem__event.html#aa16f20c9949030b16ca0b787f63572f4", null ],
     [ "system_event", "classsystem__event.html#aa56bde5789679822d91883a97f323128", null ],
     [ "event_type", "classsystem__event.html#af3914964c19a58d549eec0587b8fac1f", null ],
+    [ "is_set", "classsystem__event.html#ac50035a38a0721148f8f77b41bdae3d3", null ],
     [ "native_handle", "classsystem__event.html#a09f6cc9daf074ce180c14b5a6cd1661e", null ],
     [ "operator=", "classsystem__event.html#a998f73cdf1659d029a1abcace0c0c3aa", null ],
     [ "reset", "classsystem__event.html#a7c349b939fea1a128c803d1035ee76f8", null ],
     [ "set", "classsystem__event.html#a8e6d8bfe1aecd567b1916e8d1b68815c", null ],
+    [ "try_wait", "classsystem__event.html#a40a68df7df1f662aa755b017c80aabc2", null ],
     [ "wait", "classsystem__event.html#a88a8392cfe11e8ca599f429e60e4eea7", null ]
 ];

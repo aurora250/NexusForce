@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['删除器_0',['删除器',['../group___deleter.html',1,'']]],
-  ['删除算法_1',['删除算法',['../group___remove_algorithms.html',1,'']]]
+  ['共享内存_0',['共享内存',['../group___share_memory.html',1,'']]],
+  ['共享智能指针_1',['共享智能指针',['../group___shared_pointer.html',1,'']]]
 ];

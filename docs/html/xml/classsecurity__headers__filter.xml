@@ -1,0 +1,485 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classsecurity__headers__filter" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>security_headers_filter</compoundname>
+    <basecompoundref refid="classhttp__filter" prot="public" virt="non-virtual">http_filter</basecompoundref>
+    <includes refid="http__security_8hpp" local="no">http_security.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classsecurity__headers__filter_1abf4beb443403dc676802222fd66c93b2" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool security_headers_filter::enable_hsts</definition>
+        <argsstring></argsstring>
+        <name>enable_hsts</name>
+        <qualifiedname>security_headers_filter::enable_hsts</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>HSTS: 强制浏览器使用HTTPS </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="33" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsecurity__headers__filter_1a166600b20db82a69789b29f4049d5365" prot="public" static="no" mutable="no">
+        <type><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref></type>
+        <definition>seconds security_headers_filter::hsts_max_age</definition>
+        <argsstring></argsstring>
+        <name>hsts_max_age</name>
+        <qualifiedname>security_headers_filter::hsts_max_age</qualifiedname>
+        <initializer>{31536000}</initializer>
+        <briefdescription>
+<para>默认1年 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="34" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsecurity__headers__filter_1ab9336b32e315c45f66fdde82f9fd2d0d" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool security_headers_filter::hsts_include_subdomains</definition>
+        <argsstring></argsstring>
+        <name>hsts_include_subdomains</name>
+        <qualifiedname>security_headers_filter::hsts_include_subdomains</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>是否包含子域名 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="35" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsecurity__headers__filter_1a6ff3f19c1add68ee71559ad1626881a7" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool security_headers_filter::hsts_preload</definition>
+        <argsstring></argsstring>
+        <name>hsts_preload</name>
+        <qualifiedname>security_headers_filter::hsts_preload</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>是否加入HSTS preload列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="36" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsecurity__headers__filter_1ac0b12dd7dc386996051ddf4b3ed37356" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool security_headers_filter::enable_frame_options</definition>
+        <argsstring></argsstring>
+        <name>enable_frame_options</name>
+        <qualifiedname>security_headers_filter::enable_frame_options</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>X-Frame-Options: 防止Clickjacking </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="39" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsecurity__headers__filter_1aa01b63a97cd2e50c08b7ebaa5805d8e6" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string security_headers_filter::frame_option_value</definition>
+        <argsstring></argsstring>
+        <name>frame_option_value</name>
+        <qualifiedname>security_headers_filter::frame_option_value</qualifiedname>
+        <initializer>{&quot;DENY&quot;}</initializer>
+        <briefdescription>
+<para>DENY | SAMEORIGIN | ALLOW-FROM uri </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="40" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsecurity__headers__filter_1ab02231858a7df07ab8376408d3bf905e" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool security_headers_filter::enable_content_type_options</definition>
+        <argsstring></argsstring>
+        <name>enable_content_type_options</name>
+        <qualifiedname>security_headers_filter::enable_content_type_options</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>X-Content-Type-Options: 防止MIME类型嗅探 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="43" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsecurity__headers__filter_1af6238c8b3f5b4d88e3fbff9d4c195eda" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool security_headers_filter::enable_csp</definition>
+        <argsstring></argsstring>
+        <name>enable_csp</name>
+        <qualifiedname>security_headers_filter::enable_csp</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Content-Security-Policy: 内容安全策略 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="46" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsecurity__headers__filter_1a654f38678d818bc937798ef10ed14836" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string security_headers_filter::csp_value</definition>
+        <argsstring></argsstring>
+        <name>csp_value</name>
+        <qualifiedname>security_headers_filter::csp_value</qualifiedname>
+        <initializer>{&quot;default-src &apos;self&apos;&quot;}</initializer>
+        <briefdescription>
+<para>可配置的CSP策略字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="47" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsecurity__headers__filter_1ae6185c2824a4965b36fc3f647ef29179" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool security_headers_filter::enable_xss_protection</definition>
+        <argsstring></argsstring>
+        <name>enable_xss_protection</name>
+        <qualifiedname>security_headers_filter::enable_xss_protection</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>X-XSS-Protection: 浏览器XSS过滤器 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="50" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsecurity__headers__filter_1ad4ac9176608e61a60853dc8eae6c2b05" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string security_headers_filter::xss_protection_value</definition>
+        <argsstring></argsstring>
+        <name>xss_protection_value</name>
+        <qualifiedname>security_headers_filter::xss_protection_value</qualifiedname>
+        <initializer>{&quot;1; mode=block&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="51" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsecurity__headers__filter_1aebd126e1042e143bdcf622844ebcdd3b" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool security_headers_filter::enable_referrer_policy</definition>
+        <argsstring></argsstring>
+        <name>enable_referrer_policy</name>
+        <qualifiedname>security_headers_filter::enable_referrer_policy</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Referrer-Policy: 控制Referer头的发送 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="54" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsecurity__headers__filter_1a439b5d3286129cc8ae7fd2dd6ae19dcc" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string security_headers_filter::referrer_policy_value</definition>
+        <argsstring></argsstring>
+        <name>referrer_policy_value</name>
+        <qualifiedname>security_headers_filter::referrer_policy_value</qualifiedname>
+        <initializer>{&quot;strict-origin-when-cross-origin&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="55" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="55" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsecurity__headers__filter_1a2277f41d1bea130bf075b208d77b9b66" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool security_headers_filter::enable_permissions_policy</definition>
+        <argsstring></argsstring>
+        <name>enable_permissions_policy</name>
+        <qualifiedname>security_headers_filter::enable_permissions_policy</qualifiedname>
+        <initializer>= true</initializer>
+        <briefdescription>
+<para>Permissions-Policy: 控制浏览器特性权限 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="58" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsecurity__headers__filter_1a6cd9edaedc92bb01bf9cbf65e4e3ee6f" prot="public" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string security_headers_filter::permissions_policy_value</definition>
+        <argsstring></argsstring>
+        <name>permissions_policy_value</name>
+        <qualifiedname>security_headers_filter::permissions_policy_value</qualifiedname>
+        <initializer>{&quot;geolocation=(), microphone=(), camera=()&quot;}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="59" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="59" bodyend="59"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsecurity__headers__filter_1ac6039a2777b3fa61bb287dc445764c1e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>bool</type>
+        <definition>bool security_headers_filter::pre_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>pre_filter</name>
+        <qualifiedname>security_headers_filter::pre_filter</qualifiedname>
+        <reimplements refid="classhttp__filter_1a9563cab58ce1b4217008e55b37b022f2">pre_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>预处理方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>返回false表示中断后续处理</para>
+</simplesect>
+在请求处理前调用，可以检查请求、修改请求或提前返回响应。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="61" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="61" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classsecurity__headers__filter_1aee2bc03eca12f5d3dc5315b162227d22" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void security_headers_filter::post_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>post_filter</name>
+        <qualifiedname>security_headers_filter::post_filter</qualifiedname>
+        <reimplements refid="classhttp__filter_1acaaaf04f0a1520c29312b76336615aec">post_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>后处理方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在响应发送前调用，可以修改响应头或正文。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="62" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsecurity__headers__filter_1a993162543c354dde03ba14aeee9491da" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void security_headers_filter::do_filter</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response) override</argsstring>
+        <name>do_filter</name>
+        <qualifiedname>security_headers_filter::do_filter</qualifiedname>
+        <reimplements refid="classhttp__filter_1a00ee11e4e2b0c596d6f99cbafec3ddad">do_filter</reimplements>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <briefdescription>
+<para>核心过滤方法 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>request</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP请求 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP响应</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+执行实际的过滤逻辑。通常由具体处理器实现， 中间件过滤器可能不实现此方法。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="63" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="63" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classsecurity__headers__filter_1a863dd7aa83d43fab0c396e5df6f5c8c1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string security_headers_filter::name</definition>
+        <argsstring>() const override</argsstring>
+        <name>name</name>
+        <qualifiedname>security_headers_filter::name</qualifiedname>
+        <reimplements refid="classhttp__filter_1a72030f612655463f1f4ef9340c03f1ec">name</reimplements>
+        <briefdescription>
+<para>获取过滤器名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>过滤器名称 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="64" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="64" bodyend="64"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HTTP安全头过滤器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>自动在所有响应中注入安全相关的HTTP头。 默认启用所有安全头并提供合理默认值，每个header可单独禁用。 在post_filter阶段执行，不阻断请求流程。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>http_filter</label>
+        <link refid="classhttp__filter"/>
+      </node>
+      <node id="1">
+        <label>security_headers_filter</label>
+        <link refid="classsecurity__headers__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="4">
+        <label>basic_string&lt; char &gt;</label>
+        <link refid="classbasic__string"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>duration&lt; int64_t &gt;</label>
+        <link refid="structduration"/>
+      </node>
+      <node id="2">
+        <label>http_filter</label>
+        <link refid="classhttp__filter"/>
+      </node>
+      <node id="5">
+        <label>icommon&lt; T &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="7">
+        <label>ihashable&lt; T &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="1">
+        <label>security_headers_filter</label>
+        <link refid="classsecurity__headers__filter"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>hsts_max_age</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>csp_value</edgelabel>
+          <edgelabel>frame_option_value</edgelabel>
+          <edgelabel>permissions_policy_value</edgelabel>
+          <edgelabel>referrer_policy_value</edgelabel>
+          <edgelabel>xss_protection_value</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" line="30" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_security.hpp" bodystart="30" bodyend="65"/>
+    <listofallmembers>
+      <member refid="classsecurity__headers__filter_1a654f38678d818bc937798ef10ed14836" prot="public" virt="non-virtual"><scope>security_headers_filter</scope><name>csp_value</name></member>
+      <member refid="classsecurity__headers__filter_1a993162543c354dde03ba14aeee9491da" prot="public" virt="virtual"><scope>security_headers_filter</scope><name>do_filter</name></member>
+      <member refid="classsecurity__headers__filter_1ab02231858a7df07ab8376408d3bf905e" prot="public" virt="non-virtual"><scope>security_headers_filter</scope><name>enable_content_type_options</name></member>
+      <member refid="classsecurity__headers__filter_1af6238c8b3f5b4d88e3fbff9d4c195eda" prot="public" virt="non-virtual"><scope>security_headers_filter</scope><name>enable_csp</name></member>
+      <member refid="classsecurity__headers__filter_1ac0b12dd7dc386996051ddf4b3ed37356" prot="public" virt="non-virtual"><scope>security_headers_filter</scope><name>enable_frame_options</name></member>
+      <member refid="classsecurity__headers__filter_1abf4beb443403dc676802222fd66c93b2" prot="public" virt="non-virtual"><scope>security_headers_filter</scope><name>enable_hsts</name></member>
+      <member refid="classsecurity__headers__filter_1a2277f41d1bea130bf075b208d77b9b66" prot="public" virt="non-virtual"><scope>security_headers_filter</scope><name>enable_permissions_policy</name></member>
+      <member refid="classsecurity__headers__filter_1aebd126e1042e143bdcf622844ebcdd3b" prot="public" virt="non-virtual"><scope>security_headers_filter</scope><name>enable_referrer_policy</name></member>
+      <member refid="classsecurity__headers__filter_1ae6185c2824a4965b36fc3f647ef29179" prot="public" virt="non-virtual"><scope>security_headers_filter</scope><name>enable_xss_protection</name></member>
+      <member refid="classsecurity__headers__filter_1aa01b63a97cd2e50c08b7ebaa5805d8e6" prot="public" virt="non-virtual"><scope>security_headers_filter</scope><name>frame_option_value</name></member>
+      <member refid="classsecurity__headers__filter_1ab9336b32e315c45f66fdde82f9fd2d0d" prot="public" virt="non-virtual"><scope>security_headers_filter</scope><name>hsts_include_subdomains</name></member>
+      <member refid="classsecurity__headers__filter_1a166600b20db82a69789b29f4049d5365" prot="public" virt="non-virtual"><scope>security_headers_filter</scope><name>hsts_max_age</name></member>
+      <member refid="classsecurity__headers__filter_1a6ff3f19c1add68ee71559ad1626881a7" prot="public" virt="non-virtual"><scope>security_headers_filter</scope><name>hsts_preload</name></member>
+      <member refid="classsecurity__headers__filter_1a863dd7aa83d43fab0c396e5df6f5c8c1" prot="public" virt="virtual"><scope>security_headers_filter</scope><name>name</name></member>
+      <member refid="classsecurity__headers__filter_1a6cd9edaedc92bb01bf9cbf65e4e3ee6f" prot="public" virt="non-virtual"><scope>security_headers_filter</scope><name>permissions_policy_value</name></member>
+      <member refid="classsecurity__headers__filter_1aee2bc03eca12f5d3dc5315b162227d22" prot="public" virt="virtual"><scope>security_headers_filter</scope><name>post_filter</name></member>
+      <member refid="classsecurity__headers__filter_1ac6039a2777b3fa61bb287dc445764c1e" prot="public" virt="virtual"><scope>security_headers_filter</scope><name>pre_filter</name></member>
+      <member refid="classsecurity__headers__filter_1a439b5d3286129cc8ae7fd2dd6ae19dcc" prot="public" virt="non-virtual"><scope>security_headers_filter</scope><name>referrer_policy_value</name></member>
+      <member refid="classsecurity__headers__filter_1ad4ac9176608e61a60853dc8eae6c2b05" prot="public" virt="non-virtual"><scope>security_headers_filter</scope><name>xss_protection_value</name></member>
+      <member refid="classhttp__filter_1a2959973ac0c34b0323c1e3fdc03449ed" prot="public" virt="virtual"><scope>security_headers_filter</scope><name>~http_filter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

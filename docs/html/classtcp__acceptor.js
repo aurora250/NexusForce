@@ -4,5 +4,5 @@ var classtcp__acceptor =
     [ "accept", "classtcp__acceptor.html#a4981086af1b46cb09f58784469d16f13", null ],
     [ "accept_nonblock", "classtcp__acceptor.html#a677e1317fe230cd82993671b39e0fec9", null ],
     [ "open", "classtcp__acceptor.html#a01f29ebfd1e0f953d9f1f5ca7ec9896a", null ],
-    [ "open", "classtcp__acceptor.html#ac45ca9c8151fc981e49861f5e85b0434", null ]
+    [ "open", "classtcp__acceptor.html#a27acf9f7219de7e4462af8744e44137a", null ]
 ];

@@ -1,0 +1,222 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classjson__serializer" kind="class" language="C++" prot="public">
+    <compoundname>json_serializer</compoundname>
+    <includes refid="json__serializer_8hpp" local="no">json_serializer.hpp</includes>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classjson__serializer_1a86ff02838fbfa60e20eda9bdf37f8677" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classunique__ptr" kindref="compound">unique_ptr</ref>&lt; <ref refid="classjson__value" kindref="compound">json_value</ref> &gt;</type>
+        <definition>static unique_ptr&lt; json_value &gt; json_serializer::serialize</definition>
+        <argsstring>(const reflect::meta_any &amp;obj, const serialize_context &amp;ctx={})</argsstring>
+        <name>serialize</name>
+        <qualifiedname>json_serializer::serialize</qualifiedname>
+        <param>
+          <type>const reflect::meta_any &amp;</type>
+          <declname>obj</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structserialize__context" kindref="compound">serialize_context</ref> &amp;</type>
+          <declname>ctx</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>将反射对象序列化为 JSON 值树 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要序列化的对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列化上下文 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>JSON 值树的根节点 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/serialize/json_serializer.hpp" line="38" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__serializer_1abed1f9fdd66321e23dd9d2b5e14d78bd" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>static string json_serializer::to_string</definition>
+        <argsstring>(const reflect::meta_any &amp;obj, const serialize_context &amp;ctx={})</argsstring>
+        <name>to_string</name>
+        <qualifiedname>json_serializer::to_string</qualifiedname>
+        <param>
+          <type>const reflect::meta_any &amp;</type>
+          <declname>obj</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structserialize__context" kindref="compound">serialize_context</ref> &amp;</type>
+          <declname>ctx</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>将反射对象序列化为 JSON 字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>obj</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要序列化的对象 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列化上下文 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>JSON 字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/serialize/json_serializer.hpp" line="46" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__serializer_1a5fef1a39f4d312620dc589a38a1bc7ed" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>reflect::meta_any</type>
+        <definition>static reflect::meta_any json_serializer::deserialize</definition>
+        <argsstring>(const json_value &amp;value, const reflect::meta_type &amp;type, const serialize_context &amp;ctx={})</argsstring>
+        <name>deserialize</name>
+        <qualifiedname>json_serializer::deserialize</qualifiedname>
+        <param>
+          <type>const <ref refid="classjson__value" kindref="compound">json_value</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>const reflect::meta_type &amp;</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structserialize__context" kindref="compound">serialize_context</ref> &amp;</type>
+          <declname>ctx</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>从 JSON 值树反序列化对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>JSON 值树 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型元数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列化上下文 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>重建的对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/serialize/json_serializer.hpp" line="55" column="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classjson__serializer_1afb0d5f015852a62d12c08ccb78c0f4a3" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>reflect::meta_any</type>
+        <definition>static reflect::meta_any json_serializer::from_string</definition>
+        <argsstring>(const string &amp;json_str, const reflect::meta_type &amp;type, const serialize_context &amp;ctx={})</argsstring>
+        <name>from_string</name>
+        <qualifiedname>json_serializer::from_string</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>json_str</declname>
+        </param>
+        <param>
+          <type>const reflect::meta_type &amp;</type>
+          <declname>type</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structserialize__context" kindref="compound">serialize_context</ref> &amp;</type>
+          <declname>ctx</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>从 JSON 字符串反序列化对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>json_str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>JSON 字符串 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>目标类型元数据 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ctx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>序列化上下文 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>重建的对象 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/serialize/json_serializer.hpp" line="65" column="30"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>JSON 序列化器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>将反射注册的对象转换为 JSON 表示，或从 JSON 重建对象。 自动遍历 <ref refid="classmeta__type" kindref="compound">meta_type</ref> 的属性列表，跳过暂态属性。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/serialize/json_serializer.hpp" line="30" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/serialize/json_serializer.hpp" bodystart="30" bodyend="67"/>
+    <listofallmembers>
+      <member refid="classjson__serializer_1a5fef1a39f4d312620dc589a38a1bc7ed" prot="public" virt="non-virtual"><scope>json_serializer</scope><name>deserialize</name></member>
+      <member refid="classjson__serializer_1afb0d5f015852a62d12c08ccb78c0f4a3" prot="public" virt="non-virtual"><scope>json_serializer</scope><name>from_string</name></member>
+      <member refid="classjson__serializer_1a86ff02838fbfa60e20eda9bdf37f8677" prot="public" virt="non-virtual"><scope>json_serializer</scope><name>serialize</name></member>
+      <member refid="classjson__serializer_1abed1f9fdd66321e23dd9d2b5e14d78bd" prot="public" virt="non-virtual"><scope>json_serializer</scope><name>to_string</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

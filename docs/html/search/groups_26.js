@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['区域设置_0',['区域设置',['../group___locale.html',1,'']]]
+  ['函数包装器_0',['函数包装器',['../group___function_wrapper.html',1,'']]]
 ];

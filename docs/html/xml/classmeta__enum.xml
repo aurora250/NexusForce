@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classmeta__enum" kind="class" language="C++" prot="public">
+    <compoundname>meta_enum</compoundname>
+    <includes refid="enum_8hpp" local="no">enum.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classmeta__enum_1ab65a4392502b328a1d15ab5cd30ebbb5" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>string_view meta_enum::name_</definition>
+        <argsstring></argsstring>
+        <name>name_</name>
+        <qualifiedname>meta_enum::name_</qualifiedname>
+        <briefdescription>
+<para>枚举类型名称 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" line="40" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmeta__enum_1a8d73087114522db51937e013032842f7" prot="private" static="no" mutable="no">
+        <type><ref refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" kindref="member">type_id</ref></type>
+        <definition>type_id meta_enum::underlying_type_id_</definition>
+        <argsstring></argsstring>
+        <name>underlying_type_id_</name>
+        <qualifiedname>meta_enum::underlying_type_id_</qualifiedname>
+        <briefdescription>
+<para>底层整数类型 ID </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" line="41" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmeta__enum_1acc76e502b36273917bfb23c1f8824aac" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structenum__entry" kindref="compound">enum_entry</ref> &gt;</type>
+        <definition>vector&lt;enum_entry&gt; meta_enum::entries_</definition>
+        <argsstring></argsstring>
+        <name>entries_</name>
+        <qualifiedname>meta_enum::entries_</qualifiedname>
+        <briefdescription>
+<para>枚举条目列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" line="42" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmeta__enum_1ae8f6c792a057d21f268e8664dce1dcfe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>meta_enum::meta_enum</definition>
+        <argsstring>(string_view name, type_id underlying_id)</argsstring>
+        <name>meta_enum</name>
+        <qualifiedname>meta_enum::meta_enum</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type><ref refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" kindref="member">type_id</ref></type>
+          <declname>underlying_id</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>枚举类型名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>underlying_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>底层类型 ID </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" line="50" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" bodystart="50" bodyend="52"/>
+        <references refid="classmeta__enum_1adae955d4355c9362254504ef5c6e3fb4" compoundref="enum_8hpp" startline="64" endline="64">name</references>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__enum_1a5d017beb719d33e8fb1520eb5874256d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void meta_enum::add_entry</definition>
+        <argsstring>(string_view entry_name, const int64_t entry_value)</argsstring>
+        <name>add_entry</name>
+        <qualifiedname>meta_enum::add_entry</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>entry_name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>entry_value</declname>
+        </param>
+        <briefdescription>
+<para>添加枚举条目 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>entry_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>条目名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>entry_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>条目数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" line="59" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" bodystart="59" bodyend="59"/>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__enum_1adae955d4355c9362254504ef5c6e3fb4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>string_view meta_enum::name</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>name</name>
+        <qualifiedname>meta_enum::name</qualifiedname>
+        <briefdescription>
+<para>获取枚举类型名称 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" line="64" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" bodystart="64" bodyend="64"/>
+        <referencedby refid="classmeta__enum_1ae8f6c792a057d21f268e8664dce1dcfe" compoundref="enum_8hpp" startline="50" endline="52">meta_enum</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__enum_1a03554b99cf4fa31e4b172c3595b164b3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___reflection_1ga541516a057bbd67d55d02ece107883d9" kindref="member">type_id</ref></type>
+        <definition>type_id meta_enum::underlying_type_id</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>underlying_type_id</name>
+        <qualifiedname>meta_enum::underlying_type_id</qualifiedname>
+        <briefdescription>
+<para>获取底层类型 ID </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" line="69" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__enum_1a32795151c9d2c41d9d4a008f131ecfde" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structenum__entry" kindref="compound">enum_entry</ref> &gt; &amp;</type>
+        <definition>const vector&lt; enum_entry &gt; &amp; meta_enum::entries</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>entries</name>
+        <qualifiedname>meta_enum::entries</qualifiedname>
+        <briefdescription>
+<para>获取所有枚举条目 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" line="74" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__enum_1a275150dcb24264f2dcfbef4b8a81bd56" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool meta_enum::value_of</definition>
+        <argsstring>(string_view entry_name, int64_t &amp;out_value) const noexcept</argsstring>
+        <name>value_of</name>
+        <qualifiedname>meta_enum::value_of</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>entry_name</declname>
+        </param>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref> &amp;</type>
+          <declname>out_value</declname>
+        </param>
+        <briefdescription>
+<para>通过名称查找枚举值 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>entry_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>条目名称 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>out_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>输出参数，接收查找到的数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>找到返回 true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" line="82" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" bodystart="82" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__enum_1ae05c82a58b5a8592c641ba5084118b4f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>string_view meta_enum::name_of</definition>
+        <argsstring>(const int64_t entry_value) const noexcept</argsstring>
+        <name>name_of</name>
+        <qualifiedname>meta_enum::name_of</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>entry_value</declname>
+        </param>
+        <briefdescription>
+<para>通过数值查找枚举名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>entry_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>条目数值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>找到返回名称视图，否则返回空视图 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" line="97" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" bodystart="97" bodyend="104"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>枚举反射元数据类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>描述一个枚举类型的元信息，支持名称与值的双向查找。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" line="38" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/enum.hpp" bodystart="38" bodyend="105"/>
+    <listofallmembers>
+      <member refid="classmeta__enum_1a5d017beb719d33e8fb1520eb5874256d" prot="public" virt="non-virtual"><scope>meta_enum</scope><name>add_entry</name></member>
+      <member refid="classmeta__enum_1a32795151c9d2c41d9d4a008f131ecfde" prot="public" virt="non-virtual"><scope>meta_enum</scope><name>entries</name></member>
+      <member refid="classmeta__enum_1acc76e502b36273917bfb23c1f8824aac" prot="private" virt="non-virtual"><scope>meta_enum</scope><name>entries_</name></member>
+      <member refid="classmeta__enum_1ae8f6c792a057d21f268e8664dce1dcfe" prot="public" virt="non-virtual"><scope>meta_enum</scope><name>meta_enum</name></member>
+      <member refid="classmeta__enum_1adae955d4355c9362254504ef5c6e3fb4" prot="public" virt="non-virtual"><scope>meta_enum</scope><name>name</name></member>
+      <member refid="classmeta__enum_1ab65a4392502b328a1d15ab5cd30ebbb5" prot="private" virt="non-virtual"><scope>meta_enum</scope><name>name_</name></member>
+      <member refid="classmeta__enum_1ae05c82a58b5a8592c641ba5084118b4f" prot="public" virt="non-virtual"><scope>meta_enum</scope><name>name_of</name></member>
+      <member refid="classmeta__enum_1a03554b99cf4fa31e4b172c3595b164b3" prot="public" virt="non-virtual"><scope>meta_enum</scope><name>underlying_type_id</name></member>
+      <member refid="classmeta__enum_1a8d73087114522db51937e013032842f7" prot="private" virt="non-virtual"><scope>meta_enum</scope><name>underlying_type_id_</name></member>
+      <member refid="classmeta__enum_1a275150dcb24264f2dcfbef4b8a81bd56" prot="public" virt="non-virtual"><scope>meta_enum</scope><name>value_of</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

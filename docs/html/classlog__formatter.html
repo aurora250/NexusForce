@@ -101,25 +101,28 @@ $(function(){initNavTree('classlog__formatter.html','','classlog__formatter-memb
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
 <tr class="memitem:ae4dce333c41dd9e679550198ccd394ce" id="r_ae4dce333c41dd9e679550198ccd394ce"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ae4dce333c41dd9e679550198ccd394ce">log_formatter</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> pattern)</td></tr>
-<tr class="memdesc:ae4dce333c41dd9e679550198ccd394ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">构造函数  <br /></td></tr>
+<tr class="memdesc:ae4dce333c41dd9e679550198ccd394ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">从模式字符串构造格式化器  <br /></td></tr>
 <tr class="memitem:ab7f5f5daadf75bae5f382f317b37e8ba" id="r_ab7f5f5daadf75bae5f382f317b37e8ba"><td class="memItemLeft"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&#160;</td><td class="memItemRight"><a class="el" href="#ab7f5f5daadf75bae5f382f317b37e8ba">format</a> (const <a class="el" href="structlog__event.html">log_event</a> &amp;event)</td></tr>
 <tr class="memdesc:ab7f5f5daadf75bae5f382f317b37e8ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">格式化日志事件  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>日志格式化器 </p>
-<p>根据指定的模式字符串格式化日志事件。 支持以下占位符：</p><ul>
+<p>支持以下占位符：</p><ul>
 <li>{time} : 时间戳</li>
 <li>{level} : 日志级别</li>
-<li>{file} : 源文件名</li>
+<li>{file} : 源文件名（仅文件名，不含路径）</li>
+<li>{filepath} : 源文件完整路径</li>
 <li>{line} : 行号</li>
 <li>{func} : 函数名</li>
+<li>{name} : Logger 名称</li>
 <li>{thread} : 线程ID</li>
 <li>{message} : 日志消息</li>
 <li>{context.key} : 上下文中的指定键</li>
+<li>{color:start} / {color:end} : ANSI 颜色标记</li>
 </ul>
 <p>示例模式："[{time}] [{level}] {file}:{line} - {message}" </p>
 
-<p class="definition">在文件 <a class="el" href="log__formatter_8hpp_source.html">log_formatter.hpp</a> 第 <a class="el" href="log__formatter_8hpp_source.html#l00039">39</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="log__formatter_8hpp_source.html">log_formatter.hpp</a> 第 <a class="el" href="log__formatter_8hpp_source.html#l00040">40</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="ae4dce333c41dd9e679550198ccd394ce" name="ae4dce333c41dd9e679550198ccd394ce"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae4dce333c41dd9e679550198ccd394ce">&#9670;&#160;</a></span>log_formatter()</h2>
@@ -144,10 +147,10 @@ Public 成员函数</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>构造函数 </p>
+<p>从模式字符串构造格式化器 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pattern</td><td>格式模式字符串 </td></tr>
+    <tr><td class="paramname">pattern</td><td>格式模式，如 "[{time}] [{level}] {message}" </td></tr>
   </table>
   </dd>
 </dl>

@@ -3,7 +3,7 @@
   <compounddef id="structidb__tb__result" kind="struct" language="C++" prot="public" abstract="yes">
     <compoundname>idb_tb_result</compoundname>
     <basecompoundref refid="structidb__result" prot="public" virt="non-virtual">idb_result</basecompoundref>
-    <derivedcompoundref refid="structidb__prepared__result" prot="public" virt="non-virtual">idb_prepared_result</derivedcompoundref>
+    <derivedcompoundref refid="classmysql__prepared__result" prot="public" virt="non-virtual">mysql_prepared_result</derivedcompoundref>
     <derivedcompoundref refid="structmysql__result" prot="public" virt="non-virtual">mysql_result</derivedcompoundref>
     <derivedcompoundref refid="classpgsql__tb__result" prot="public" virt="non-virtual">pgsql_tb_result</derivedcompoundref>
     <derivedcompoundref refid="structsqlite__result" prot="public" virt="non-virtual">sqlite_result</derivedcompoundref>
@@ -21,7 +21,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="70" column="5"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="83" column="5"/>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1aabb704cab81e3fdae2849fcdd6d73c75" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -31,7 +31,6 @@
         <qualifiedname>idb_tb_result::row_count</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1a29a03fe991af4512b997b1f664af3106">row_count</reimplementedby>
         <reimplementedby refid="structmysql__result_1a53c76fb18a6fe6c68839cd798f3204b2">row_count</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1aef5161a8a2f4ef264117347dd1936c11">row_count</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1a907d957d0b190d3c24fc72d1a67fb52d">row_count</reimplementedby>
         <briefdescription>
 <para>获取结果集行数 </para>
@@ -43,9 +42,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="76" column="24"/>
-        <referencedby refid="structsqlite__prepared__result_1a68c8db5198ec7939d93e9650418fbe3b" compoundref="sqlite__prepared__result_8hpp" startline="83" endline="86">sqlite_prepared_result::NEFORCE_DEPRECATED_FOR</referencedby>
-        <referencedby refid="structsqlite__result_1ab7e252ccc1f949d071917e2af80c9f9f" compoundref="sqlite__result_8hpp" startline="81" endline="84">sqlite_result::NEFORCE_DEPRECATED_FOR</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="89" column="24"/>
+        <referencedby refid="structsqlite__result_1ab7e252ccc1f949d071917e2af80c9f9f" compoundref="sqlite__result_8hpp" startline="104" endline="107">sqlite_result::NEFORCE_DEPRECATED_FOR</referencedby>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1a15bba511bedb7883a9770516e60d0502" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -55,9 +53,7 @@
         <qualifiedname>idb_tb_result::column_count</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1a182d60423c6e882efd96f04462e6f876">column_count</reimplementedby>
         <reimplementedby refid="structmysql__result_1a953523145b115705d5ff39b0b1ee21fc">column_count</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1a4922c7c79857819e4666026cb1987e1b">column_count</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1ae9281dbebf4d098969b99abab86457b1">column_count</reimplementedby>
-        <reimplementedby refid="structsqlite__prepared__result_1a75b3e87886afedfd21d462e56ee58227">column_count</reimplementedby>
         <reimplementedby refid="structsqlite__result_1a631368f97e5e1c12b9a2651d4de91328">column_count</reimplementedby>
         <briefdescription>
 <para>获取结果集列数 </para>
@@ -69,7 +65,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="82" column="24"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="95" column="24"/>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1acf9e2cdb951dfadb26394addafd314bd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref> &gt; &amp;</type>
@@ -79,9 +75,7 @@
         <qualifiedname>idb_tb_result::column_names</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1af5ab89b9a5871298c7c34e6419b7804f">column_names</reimplementedby>
         <reimplementedby refid="structmysql__result_1a3cbbe56acc57564f9713482bc8d76343">column_names</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1aae5b0d8b2a2509537a532de6edeb476c">column_names</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1a2ebbe17b3579bd7894548fcafe79ba2d">column_names</reimplementedby>
-        <reimplementedby refid="structsqlite__prepared__result_1a3c8f81ee948ef0d2d237c3f7c62182c4">column_names</reimplementedby>
         <reimplementedby refid="structsqlite__result_1ac8f1cac31c66822f59e5eae48f8efe8d">column_names</reimplementedby>
         <briefdescription>
 <para>获取所有列名 </para>
@@ -93,7 +87,42 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="88" column="27"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="101" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="structidb__tb__result_1a847e127d534e34bc199d6168372288f0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="structcolumn__meta" kindref="compound">column_meta</ref></type>
+        <definition>virtual column_meta idb_tb_result::column_metadata</definition>
+        <argsstring>(size_type n) const =0</argsstring>
+        <name>column_metadata</name>
+        <qualifiedname>idb_tb_result::column_metadata</qualifiedname>
+        <reimplementedby refid="classmysql__prepared__result_1a38e52eb556ca7a00780a278c7d398f7c">column_metadata</reimplementedby>
+        <reimplementedby refid="structmysql__result_1a65c6d88ad4b557baf0d8bb1357432d78">column_metadata</reimplementedby>
+        <reimplementedby refid="classpgsql__tb__result_1a0caed572eefa21ab56187c8ef70746ad">column_metadata</reimplementedby>
+        <reimplementedby refid="structsqlite__result_1afdbf6f51d538f7f39ccece30b9df65fc">column_metadata</reimplementedby>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取列元数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引（从0开始） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>列元数据 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="108" column="26"/>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1ae1bc5e789f06b1d381f8922dc0c5e9af" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
@@ -103,9 +132,7 @@
         <qualifiedname>idb_tb_result::get</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1aa023f6cfe4fd5fdfbfaf3efd3bda6784">get</reimplementedby>
         <reimplementedby refid="structmysql__result_1a84e6170251cc6483850ce60761673146">get</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1aee8ccd8c77349d8ca610982aee70a0fe">get</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1a92169a3cb117a565865ac61bb46d48f3">get</reimplementedby>
-        <reimplementedby refid="structsqlite__prepared__result_1ab8a8a94f1729c00d5849009a76aaf4b0">get</reimplementedby>
         <reimplementedby refid="structsqlite__result_1af0d487b23a9de080515a9267e7d50780">get</reimplementedby>
         <param>
           <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -118,7 +145,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="90" column="26"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="110" column="26"/>
+        <referencedby refid="group___s_q_l_mapper_1gabbea4ff42670147e8abc032de12c081b" compoundref="sql__mapper_8hpp" startline="100" endline="119">read_column_by_type</referencedby>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1ad35689b23d23b40ed9fe12c425527c58" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>bool</type>
@@ -128,9 +156,7 @@
         <qualifiedname>idb_tb_result::get_bool</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1a4bc63eb415bf58421d05f2720115ac64">get_bool</reimplementedby>
         <reimplementedby refid="structmysql__result_1abd14680f1aa42e1f0a13bdb6c38b4a55">get_bool</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1aed6292a8be549d3136ac5bda32943c63">get_bool</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1af77b73019cd2f0886c7fc3a0c4c1034c">get_bool</reimplementedby>
-        <reimplementedby refid="structsqlite__prepared__result_1a8b9f863495f40ca73731fc9e47cca2a3">get_bool</reimplementedby>
         <reimplementedby refid="structsqlite__result_1a480b5ebc21241efc1b25b4469764d7df">get_bool</reimplementedby>
         <param>
           <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -143,7 +169,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="92" column="19"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="112" column="19"/>
+        <referencedby refid="group___s_q_l_mapper_1gabbea4ff42670147e8abc032de12c081b" compoundref="sql__mapper_8hpp" startline="100" endline="119">read_column_by_type</referencedby>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1aed5fa0a878a1868a38db6b29308d5299" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="group___core_types_1ga8b23aa936eec66c1c69ecd7b399ddf19" kindref="member">int16_t</ref></type>
@@ -153,9 +180,7 @@
         <qualifiedname>idb_tb_result::get_int16</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1ab26e614a968f609a06c9bc41e89a2f18">get_int16</reimplementedby>
         <reimplementedby refid="structmysql__result_1ac3f2a3661981251753a5abcb16d4ac61">get_int16</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1a198fd2ed71f54a22cf91978dc08b36e5">get_int16</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1a52066fbde94d0020d15f1de8676c34a9">get_int16</reimplementedby>
-        <reimplementedby refid="structsqlite__prepared__result_1a24cad997401212b260ba44eba3ea9376">get_int16</reimplementedby>
         <reimplementedby refid="structsqlite__result_1abe402ee26b0d16fa0d9f2429bae6b287">get_int16</reimplementedby>
         <param>
           <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -168,7 +193,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="93" column="22"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="113" column="22"/>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1a30c2b4161d1197de423889027ae5272d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref></type>
@@ -178,9 +203,7 @@
         <qualifiedname>idb_tb_result::get_int32</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1a3848ac18e2cbe04642952cab8825f9ea">get_int32</reimplementedby>
         <reimplementedby refid="structmysql__result_1a3f052c1793c19d6d628f1221256cf62a">get_int32</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1a378676eb186b655d83be28ea2a3a0fad">get_int32</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1a51a646ae03521fb67ef14e137a332d54">get_int32</reimplementedby>
-        <reimplementedby refid="structsqlite__prepared__result_1af95197313278d2929c2e0ad996e5627c">get_int32</reimplementedby>
         <reimplementedby refid="structsqlite__result_1af2a9c70c63c79df7e9cd9ad8159d9f4e">get_int32</reimplementedby>
         <param>
           <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -193,7 +216,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="94" column="22"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="114" column="22"/>
+        <referencedby refid="group___s_q_l_mapper_1gabbea4ff42670147e8abc032de12c081b" compoundref="sql__mapper_8hpp" startline="100" endline="119">read_column_by_type</referencedby>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1a313b404f40b06095313fdad5a71c36d9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
@@ -203,9 +227,7 @@
         <qualifiedname>idb_tb_result::get_int64</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1ac519febb410508f4e1f5ced810f5409a">get_int64</reimplementedby>
         <reimplementedby refid="structmysql__result_1a24862d2771932343826004175d154b69">get_int64</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1a426e0d19bc10302d7dee7badbb5d86d7">get_int64</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1a04d82f574f57bc6af8bd3de90cf18216">get_int64</reimplementedby>
-        <reimplementedby refid="structsqlite__prepared__result_1a5c6baa97211bf82c1c296c2a0428c098">get_int64</reimplementedby>
         <reimplementedby refid="structsqlite__result_1a58f3118be8e465a7f66ac26f49bdb216">get_int64</reimplementedby>
         <param>
           <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -218,7 +240,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="95" column="22"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="115" column="22"/>
+        <referencedby refid="group___s_q_l_mapper_1gabbea4ff42670147e8abc032de12c081b" compoundref="sql__mapper_8hpp" startline="100" endline="119">read_column_by_type</referencedby>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1a5ef4af6943ee76fadf05fc2989d56ebd" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="group___core_types_1ga3068631062aaf7da4cc0371da9e7a377" kindref="member">float32_t</ref></type>
@@ -228,9 +251,7 @@
         <qualifiedname>idb_tb_result::get_float32</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1a85cb60e4ed9a62292d81e0cc9d7ad4d8">get_float32</reimplementedby>
         <reimplementedby refid="structmysql__result_1a84a206a1f0dd8a8a29bd3ecc7e9d2ca2">get_float32</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1abe7e63e874cfa67a4d8ff83935c54e79">get_float32</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1a3873d4ed751b8b4561524d5dd1c5d99f">get_float32</reimplementedby>
-        <reimplementedby refid="structsqlite__prepared__result_1ad4d0e593ed382b60567ab45fabfc9e71">get_float32</reimplementedby>
         <reimplementedby refid="structsqlite__result_1add81f26c09c54412eb11d0287d2a9f1a">get_float32</reimplementedby>
         <param>
           <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -243,7 +264,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="96" column="24"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="116" column="24"/>
+        <referencedby refid="group___s_q_l_mapper_1gabbea4ff42670147e8abc032de12c081b" compoundref="sql__mapper_8hpp" startline="100" endline="119">read_column_by_type</referencedby>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1a1c4d6dcd48871d296845f934c8218cf9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="group___core_types_1ga5e9a37eab818d71cd4a6a9344e776c7b" kindref="member">float64_t</ref></type>
@@ -253,9 +275,7 @@
         <qualifiedname>idb_tb_result::get_float64</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1ad981685f8b046f2cd6b7c2e164579e56">get_float64</reimplementedby>
         <reimplementedby refid="structmysql__result_1ab39ff9691d241cf4364ca9d528e3c13e">get_float64</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1af3f2a5ff119dee4bfd6dce010a65056f">get_float64</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1adbc1db6de84e8d5d9ea1ce990678e5ae">get_float64</reimplementedby>
-        <reimplementedby refid="structsqlite__prepared__result_1a26af70c1a77e3b227765237d9f9510cb">get_float64</reimplementedby>
         <reimplementedby refid="structsqlite__result_1aedf17834797e12af07b898bfe520189a">get_float64</reimplementedby>
         <param>
           <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -268,7 +288,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="97" column="24"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="117" column="24"/>
+        <referencedby refid="group___s_q_l_mapper_1gabbea4ff42670147e8abc032de12c081b" compoundref="sql__mapper_8hpp" startline="100" endline="119">read_column_by_type</referencedby>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1a3c7275cb280846f4d59fa4b78411493d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
@@ -278,9 +299,7 @@
         <qualifiedname>idb_tb_result::get_decimal</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1a7bdee07b38f71d03dd9ba0823abfd529">get_decimal</reimplementedby>
         <reimplementedby refid="structmysql__result_1ad3b218ddfaca6605ec4519905f64ff4d">get_decimal</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1aa301d4ba1f6cf5a2c2146cdd6b0332b7">get_decimal</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1a865743cb15e02f9e21c673240ddae82e">get_decimal</reimplementedby>
-        <reimplementedby refid="structsqlite__prepared__result_1a25e0484d79e84ce01e5921207ccc7572">get_decimal</reimplementedby>
         <reimplementedby refid="structsqlite__result_1a4750e239ad176ebd5b01509cd8f48aa5">get_decimal</reimplementedby>
         <param>
           <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -293,7 +312,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="98" column="24"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="118" column="24"/>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1ac3feb428fffed8adfa41c28b64bae4ea" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classvector" kindref="compound">vector</ref>&lt; char &gt;</type>
@@ -303,9 +322,7 @@
         <qualifiedname>idb_tb_result::get_blob</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1a265bbd167861a269fac297c4be65e34a">get_blob</reimplementedby>
         <reimplementedby refid="structmysql__result_1acbab59644b09ea78fc1b760a4c3e1ea2">get_blob</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1a895cbe49b56a2942027a79d4516ce4a2">get_blob</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1a44a7b6d29a26d9b75a7a94bcde48ee8c">get_blob</reimplementedby>
-        <reimplementedby refid="structsqlite__prepared__result_1a519d53bef4e502f7e035991ef81fb715">get_blob</reimplementedby>
         <reimplementedby refid="structsqlite__result_1af9280b26ed0ef39043661d5b1e0a32eb">get_blob</reimplementedby>
         <param>
           <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -318,7 +335,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="99" column="21"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="119" column="21"/>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1ab2a5e423b358828cada7a8be14651196" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
@@ -328,9 +345,7 @@
         <qualifiedname>idb_tb_result::get_bit</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1a0d56813b1d0c3585c97eae190b6bac5a">get_bit</reimplementedby>
         <reimplementedby refid="structmysql__result_1ad67277c09227109138e669582501f236">get_bit</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1aefab052500c5de70e38eb41a2ffc93e6">get_bit</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1a93205352392a2b9ac202c29b07465a48">get_bit</reimplementedby>
-        <reimplementedby refid="structsqlite__prepared__result_1a0f34a8f3666c0b3e05e0463cbf54858f">get_bit</reimplementedby>
         <reimplementedby refid="structsqlite__result_1a74d3d49be21fd95084ea22c68fa9077b">get_bit</reimplementedby>
         <param>
           <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -343,7 +358,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="100" column="23"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="120" column="23"/>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1ac54604a476b6a85e5ff0892304adf0a3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classdate" kindref="compound">date</ref></type>
@@ -353,9 +368,7 @@
         <qualifiedname>idb_tb_result::get_date</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1a9f86ac0ff6369e14a0a8f216021817db">get_date</reimplementedby>
         <reimplementedby refid="structmysql__result_1a119744fc301ec35081ecd797929dff7c">get_date</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1a6acb3942ee667dd38272d11e165959b8">get_date</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1ad964f95c6b52ac3b357434c29c83ef3f">get_date</reimplementedby>
-        <reimplementedby refid="structsqlite__prepared__result_1a4703bed2f09423a22c9d8166611ad6b1">get_date</reimplementedby>
         <reimplementedby refid="structsqlite__result_1a314061f1d5ac2f4971b35b3cf9024f5b">get_date</reimplementedby>
         <param>
           <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -368,7 +381,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="101" column="19"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="121" column="19"/>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1a0501bb1dba04138e9347c6685a8070d2" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classtime" kindref="compound">time</ref></type>
@@ -378,9 +391,7 @@
         <qualifiedname>idb_tb_result::get_time</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1afc80b92fafc73960146ad46b41917fdf">get_time</reimplementedby>
         <reimplementedby refid="structmysql__result_1a2d9ccf950fea32b04faac9b3412ef06a">get_time</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1afbc4670fec8a031f71c8982744a85bcb">get_time</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1ad76213bc6bb08d73618ed70c94ba6583">get_time</reimplementedby>
-        <reimplementedby refid="structsqlite__prepared__result_1aafe6aee7b6c153e582ca901d081c715c">get_time</reimplementedby>
         <reimplementedby refid="structsqlite__result_1afa1a21851a7f7ae4f975ce65520ada1e">get_time</reimplementedby>
         <param>
           <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -393,7 +404,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="102" column="19"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="122" column="19"/>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1a0148e0ef2825f69afcbf37f1306b96cb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classdatetime" kindref="compound">datetime</ref></type>
@@ -403,9 +414,7 @@
         <qualifiedname>idb_tb_result::get_datetime</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1af8d394c970e814e7d036765e1c594fc5">get_datetime</reimplementedby>
         <reimplementedby refid="structmysql__result_1a517ae2f7ae51e25dfb510aacd66a8291">get_datetime</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1a8cd954ae7297c3966a236178a3829a7d">get_datetime</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1ae4ab0903cf9d9edea0ddf4bed41df742">get_datetime</reimplementedby>
-        <reimplementedby refid="structsqlite__prepared__result_1ac0ea4421d5d15a45f505d83e64a511e3">get_datetime</reimplementedby>
         <reimplementedby refid="structsqlite__result_1ae58c933968048bdbc5cac0f08232a914">get_datetime</reimplementedby>
         <param>
           <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -418,11 +427,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="103" column="23"/>
-        <referencedby refid="structsqlite__prepared__result_1a4703bed2f09423a22c9d8166611ad6b1" compoundref="sqlite__prepared__result_8hpp" startline="193" endline="193">sqlite_prepared_result::get_date</referencedby>
-        <referencedby refid="structsqlite__result_1a314061f1d5ac2f4971b35b3cf9024f5b" compoundref="sqlite__result_8hpp" startline="191" endline="191">sqlite_result::get_date</referencedby>
-        <referencedby refid="structsqlite__prepared__result_1aafe6aee7b6c153e582ca901d081c715c" compoundref="sqlite__prepared__result_8hpp" startline="200" endline="200">sqlite_prepared_result::get_time</referencedby>
-        <referencedby refid="structsqlite__result_1afa1a21851a7f7ae4f975ce65520ada1e" compoundref="sqlite__result_8hpp" startline="198" endline="198">sqlite_result::get_time</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="123" column="23"/>
+        <referencedby refid="structsqlite__result_1a314061f1d5ac2f4971b35b3cf9024f5b" compoundref="sqlite__result_8hpp" startline="216" endline="216">sqlite_result::get_date</referencedby>
+        <referencedby refid="structsqlite__result_1afa1a21851a7f7ae4f975ce65520ada1e" compoundref="sqlite__result_8hpp" startline="223" endline="223">sqlite_result::get_time</referencedby>
       </memberdef>
       <memberdef kind="function" id="structidb__tb__result_1a25e41967e2cd971cb73a691092342f7e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type><ref refid="classtimestamp" kindref="compound">timestamp</ref></type>
@@ -432,9 +439,7 @@
         <qualifiedname>idb_tb_result::get_timestamp</qualifiedname>
         <reimplementedby refid="classmysql__prepared__result_1a46e1dc71cdf89b36d613071df3024098">get_timestamp</reimplementedby>
         <reimplementedby refid="structmysql__result_1a81527cd57cdc9089a891241cb65a017d">get_timestamp</reimplementedby>
-        <reimplementedby refid="classpgsql__prepared__result_1ad3bcedd58f22163049ac6b8326378200">get_timestamp</reimplementedby>
         <reimplementedby refid="classpgsql__tb__result_1aa31b833fa8c079c573170baa8663bc09">get_timestamp</reimplementedby>
-        <reimplementedby refid="structsqlite__prepared__result_1afba4957c160438c6531837871fbab0ad">get_timestamp</reimplementedby>
         <reimplementedby refid="structsqlite__result_1a1593d658060a4cff8898745ea7af3107">get_timestamp</reimplementedby>
         <param>
           <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
@@ -447,7 +452,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="104" column="24"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="124" column="24"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -457,12 +462,6 @@
 <para>提供表格数据的访问接口，支持按列名或索引获取值。 </para>
     </detaileddescription>
     <inheritancegraph>
-      <node id="3">
-        <label>idb_prepared_result</label>
-        <link refid="structidb__prepared__result"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
       <node id="2">
         <label>idb_result</label>
         <link refid="structidb__result"/>
@@ -473,37 +472,25 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="4">
+      <node id="3">
         <label>mysql_prepared_result</label>
         <link refid="classmysql__prepared__result"/>
-        <childnode refid="3" relation="public-inheritance">
+        <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
-      <node id="7">
+      <node id="4">
         <label>mysql_result</label>
         <link refid="structmysql__result"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="5">
-        <label>pgsql_prepared_result</label>
-        <link refid="classpgsql__prepared__result"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="8">
         <label>pgsql_tb_result</label>
         <link refid="classpgsql__tb__result"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="6">
-        <label>sqlite_prepared_result</label>
-        <link refid="structsqlite__prepared__result"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="9">
         <label>sqlite_result</label>
         <link refid="structsqlite__result"/>
         <childnode refid="1" relation="public-inheritance">
@@ -522,9 +509,10 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="69" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="69" bodyend="105"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" line="82" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/db_interface.hpp" bodystart="82" bodyend="125"/>
     <listofallmembers>
       <member refid="structidb__tb__result_1a15bba511bedb7883a9770516e60d0502" prot="public" virt="pure-virtual"><scope>idb_tb_result</scope><name>column_count</name></member>
+      <member refid="structidb__tb__result_1a847e127d534e34bc199d6168372288f0" prot="public" virt="pure-virtual"><scope>idb_tb_result</scope><name>column_metadata</name></member>
       <member refid="structidb__tb__result_1acf9e2cdb951dfadb26394addafd314bd" prot="public" virt="pure-virtual"><scope>idb_tb_result</scope><name>column_names</name></member>
       <member refid="structidb__result_1a679893315e15ca3a6009b495527a89d5" prot="public" virt="non-virtual"><scope>idb_tb_result</scope><name>difference_type</name></member>
       <member refid="structidb__result_1aa1c85e3b42031de74a7fb1f7a95e2754" prot="public" virt="pure-virtual"><scope>idb_tb_result</scope><name>empty</name></member>

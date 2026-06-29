@@ -1,0 +1,580 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: sql_mapper.hpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('sql__mapper_8hpp_source.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">sql_mapper.hpp</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="sql__mapper_8hpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef NEFORCE_DATABASE_SQL_MAPPER_HPP__</span></div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define NEFORCE_DATABASE_SQL_MAPPER_HPP__</span></div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="reflect_8hpp.html">NeForce/core/reflect/reflect.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;<a class="code" href="string_8hpp.html">NeForce/core/string/string.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;<a class="code" href="db__interface_8hpp.html">NeForce/db/db_interface.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;<a class="code" href="sql__builder_8hpp.html">NeForce/db/sql_builder.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>NEFORCE_BEGIN_NAMESPACE__</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span></div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="group___s_q_l_mapper.html#ga4ae4b359eeab58486b15997f87541791">   43</a></span><span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code hl_function" href="group___s_q_l_mapper.html#ga4ae4b359eeab58486b15997f87541791">cpp_type_to_sql_type</a>(<span class="keyword">const</span> reflect::type_id tid) {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">using </span>reflect::type_id_for;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;short&gt;</a>()) {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;SMALLINT&quot;</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;unsigned short&gt;</a>()) {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;SMALLINT&quot;</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    }</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;int&gt;</a>()) {</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;INTEGER&quot;</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;unsigned int&gt;</a>()) {</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;INTEGER&quot;</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    }</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#ifdef NEFORCE_PLATFORM_WINDOWS</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;long&gt;</a>()) {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;INTEGER&quot;</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    }</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;unsigned long&gt;</a>()) {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;INTEGER&quot;</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    }</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="preprocessor">#else</span></div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;long&gt;</a>()) {</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;BIGINT&quot;</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    }</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;unsigned long&gt;</a>()) {</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;BIGINT&quot;</span>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;long long&gt;</a>()) {</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;BIGINT&quot;</span>;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    }</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;unsigned long long&gt;</a>()) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;BIGINT&quot;</span>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    }</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;double&gt;</a>()) {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;DOUBLE PRECISION&quot;</span>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    }</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;float&gt;</a>()) {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;REAL&quot;</span>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    }</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;bool&gt;</a>()) {</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;BOOLEAN&quot;</span>;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;string&gt;</a>()) {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;TEXT&quot;</span>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    }</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;TEXT&quot;</span>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>}</div>
+</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span></div>
+<div class="foldopen" id="foldopen00100" data-start="{" data-end="}">
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="group___s_q_l_mapper.html#gabbea4ff42670147e8abc032de12c081b">  100</a></span><span class="keyword">inline</span> reflect::meta_any <a class="code hl_function" href="group___s_q_l_mapper.html#gabbea4ff42670147e8abc032de12c081b">read_column_by_type</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structidb__tb__result.html">idb_tb_result</a>&amp; row, <span class="keyword">const</span> <span class="keywordtype">size_t</span> col, <span class="keyword">const</span> reflect::type_id tid) {</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <span class="keyword">using </span>reflect::type_id_for;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;int&gt;</a>()) {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        <span class="keywordflow">return</span> reflect::meta_any(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(row.<a class="code hl_function" href="structidb__tb__result.html#a30c2b4161d1197de423889027ae5272d">get_int32</a>(col)));</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;int64_t&gt;</a>()) {</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordflow">return</span> reflect::meta_any(row.<a class="code hl_function" href="structidb__tb__result.html#a313b404f40b06095313fdad5a71c36d9">get_int64</a>(col));</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;short&gt;</a>()) {</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <span class="keywordflow">return</span> reflect::meta_any(<span class="keyword">static_cast&lt;</span><span class="keywordtype">short</span><span class="keyword">&gt;</span>(row.<a class="code hl_function" href="structidb__tb__result.html#a30c2b4161d1197de423889027ae5272d">get_int32</a>(col)));</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;double&gt;</a>()) {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <span class="keywordflow">return</span> reflect::meta_any(row.<a class="code hl_function" href="structidb__tb__result.html#a1c4d6dcd48871d296845f934c8218cf9">get_float64</a>(col));</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;float&gt;</a>()) {</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        <span class="keywordflow">return</span> reflect::meta_any(row.<a class="code hl_function" href="structidb__tb__result.html#a5ef4af6943ee76fadf05fc2989d56ebd">get_float32</a>(col));</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;bool&gt;</a>()) {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>        <span class="keywordflow">return</span> reflect::meta_any(row.<a class="code hl_function" href="structidb__tb__result.html#ad35689b23d23b40ed9fe12c425527c58">get_bool</a>(col));</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;string&gt;</a>()) {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>        <span class="keywordflow">return</span> reflect::meta_any(<span class="keywordtype">string</span>(row.<a class="code hl_function" href="structidb__tb__result.html#ae1bc5e789f06b1d381f8922dc0c5e9af">get</a>(col)));</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        <span class="keywordflow">return</span> reflect::meta_any(<span class="keywordtype">string</span>(row.<a class="code hl_function" href="structidb__tb__result.html#ae1bc5e789f06b1d381f8922dc0c5e9af">get</a>(col)));</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    }</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>}</div>
+</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span></div>
+<div class="foldopen" id="foldopen00126" data-start="{" data-end="}">
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="group___s_q_l_mapper.html#gac77e9362560fc03f864f72ffcb4a452c">  126</a></span><span class="keyword">inline</span> <span class="keywordtype">string</span> <a class="code hl_function" href="group___s_q_l_mapper.html#gac77e9362560fc03f864f72ffcb4a452c">meta_any_to_sql_literal</a>(<span class="keyword">const</span> reflect::meta_any&amp; val) {</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keywordflow">if</span> (!val.has_value()) {</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;NULL&quot;</span>;</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    }</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    <span class="keyword">const</span> <span class="keyword">auto</span> tid = val.type_id();</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    <span class="keyword">using </span>reflect::type_id_for;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;int&gt;</a>()) {</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        <span class="keywordflow">return</span> <a class="code hl_struct" href="structinteger32.html">integer32</a>(val.get&lt;<span class="keywordtype">int</span>&gt;()).to_string();</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;int64_t&gt;</a>()) {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keywordflow">return</span> <a class="code hl_struct" href="structinteger64.html">integer64</a>(val.get&lt;<a class="code hl_typedef" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a>&gt;()).to_string();</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;short&gt;</a>()) {</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keywordflow">return</span> <a class="code hl_struct" href="structinteger32.html">integer32</a>(val.get&lt;<span class="keywordtype">short</span>&gt;()).to_string();</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;double&gt;</a>()) {</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <span class="keywordflow">return</span> <a class="code hl_struct" href="structfloat64.html">float64</a>(val.get&lt;<span class="keywordtype">double</span>&gt;()).to_string();</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;float&gt;</a>()) {</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        <span class="keywordflow">return</span> <a class="code hl_struct" href="structfloat64.html">float64</a>(val.get&lt;<span class="keywordtype">float</span>&gt;()).to_string();</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;bool&gt;</a>()) {</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="keywordflow">return</span> val.get&lt;<span class="keywordtype">bool</span>&gt;() ? <span class="stringliteral">&quot;1&quot;</span> : <span class="stringliteral">&quot;0&quot;</span>;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tid == <a class="code hl_function" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for&lt;string&gt;</a>()) {</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="comment">// simple quoting — caller should use parameterized queries when possible</span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; s = val.get&lt;<span class="keywordtype">string</span>&gt;();</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        <span class="keywordtype">string</span> escaped;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        escaped.reserve(s.size() + 2);</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        escaped += <span class="charliteral">&#39;\&#39;&#39;</span>;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> ch: s) {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            <span class="keywordflow">if</span> (ch == <span class="charliteral">&#39;\&#39;&#39;</span>) {</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                escaped += <span class="stringliteral">&quot;&#39;&#39;&quot;</span>;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>                escaped += ch;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            }</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        }</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        escaped += <span class="charliteral">&#39;\&#39;&#39;</span>;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        <span class="keywordflow">return</span> escaped;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    }</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;NULL&quot;</span>;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>}</div>
+</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span></div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="foldopen" id="foldopen00173" data-start="{" data-end="};">
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno"><a class="line" href="classsql__mapper.html">  173</a></span><span class="keyword">class </span><a class="code hl_class" href="classsql__mapper.html">sql_mapper</a> {</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <span class="keyword">static</span> <span class="keyword">const</span> reflect::meta_type* get_meta() {</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <span class="keyword">auto</span>* meta = reflect::registry::instance().find(reflect::type_id_for&lt;T&gt;());</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        <span class="keywordflow">if</span> (meta == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>            NEFORCE_THROW_EXCEPTION(<a class="code hl_struct" href="structvalue__exception.html">value_exception</a>(</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>                    _NEFORCE <a class="code hl_function" href="group___format.html#gac0f4499364ec899fcdfaae1f7acbda76">format</a>(<span class="stringliteral">&quot;sql_mapper: type &#39;{}&#39; not registered in reflect registry&quot;</span>, reflect::type_name_v&lt;T&gt;)</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                            .<a class="code hl_function" href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a>()));</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        }</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <span class="keywordflow">return</span> meta;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    }</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <span class="keyword">static</span> <span class="keywordtype">string</span> resolve_table_name() {</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        <span class="keyword">const</span> <span class="keyword">auto</span>* meta = get_meta();</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        <span class="keyword">const</span> <span class="keyword">auto</span> tn = meta-&gt;table_name();</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        <span class="keywordflow">if</span> (!tn.empty()) {</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>            <span class="keywordflow">return</span> tn;</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        }</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        <span class="keywordflow">return</span> meta-&gt;name();</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    }</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span></div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <span class="keyword">static</span> <a class="code hl_class" href="classvector.html">vector&lt;const reflect::meta_property*&gt;</a> collect_persistent_props(<span class="keywordtype">bool</span> include_pk = <span class="keyword">true</span>) {</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>        <span class="keyword">const</span> <span class="keyword">auto</span>* meta = get_meta();</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        <a class="code hl_class" href="classvector.html">vector&lt;const reflect::meta_property*&gt;</a> result;</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry: meta-&gt;all_properties()) {</div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>            <span class="keyword">const</span> <span class="keyword">auto</span>* prop = entry.second;</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>            <span class="keywordflow">if</span> (prop-&gt;is_transient()) {</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>            }</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>            <span class="keywordflow">if</span> (!include_pk &amp;&amp; prop-&gt;is_auto_increment()) {</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>            }</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>            result.<a class="code hl_function" href="classvector.html#ac8d8b05ea55e928d9a4ccde8bf9bedcf">push_back</a>(prop);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        }</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    }</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span></div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    <span class="keyword">static</span> <span class="keyword">const</span> reflect::meta_property* find_pk_prop() {</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>        <span class="keyword">const</span> <span class="keyword">auto</span>* meta = get_meta();</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry: meta-&gt;all_properties()) {</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>            <span class="keywordflow">if</span> (entry.second-&gt;is_primary_key()) {</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>                <span class="keywordflow">return</span> entry.second;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>            }</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        }</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    }</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno"><a class="line" href="classsql__mapper.html#af00bd3a6273c644b7618102f209616c9">  231</a></span>    <span class="keyword">static</span> <span class="keywordtype">string</span> <a class="code hl_function" href="classsql__mapper.html#af00bd3a6273c644b7618102f209616c9">table_name</a>() { <span class="keywordflow">return</span> resolve_table_name(); }</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span></div>
+<div class="foldopen" id="foldopen00238" data-start="{" data-end="}">
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno"><a class="line" href="classsql__mapper.html#a3c094067ab02934bed258fac30293580">  238</a></span>    <span class="keyword">static</span> <span class="keywordtype">string</span> <a class="code hl_function" href="classsql__mapper.html#a3c094067ab02934bed258fac30293580">create_table_sql</a>(<a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> table_override = <span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>        <span class="keyword">const</span> <span class="keyword">auto</span>* meta = get_meta();</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>        <span class="keyword">const</span> <span class="keywordtype">string</span> tbl = table_override.empty() ? resolve_table_name() : <a class="code hl_typedef" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>(table_override);</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        <a class="code hl_class" href="classsql__builder.html">sql_builder</a> b;</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        b.<a class="code hl_function" href="classsql__builder.html#af6dd0c194149fd45482345d08aa17a6f">create_table_if_not_exists</a>(tbl);</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry: meta-&gt;all_properties()) {</div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>            <span class="keyword">const</span> <span class="keyword">auto</span>* prop = entry.second;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>            <span class="keywordflow">if</span> (prop-&gt;is_transient()) {</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>            }</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>            <span class="keyword">const</span> <span class="keywordtype">string</span> sql_type = <a class="code hl_function" href="group___s_q_l_mapper.html#ga4ae4b359eeab58486b15997f87541791">cpp_type_to_sql_type</a>(prop-&gt;type_id());</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>            <span class="keywordflow">if</span> (prop-&gt;is_primary_key() &amp;&amp; prop-&gt;is_auto_increment()) {</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>                b.<a class="code hl_function" href="classsql__builder.html#aa15de13227bd3b35dbacd55119228e8e">column_auto_increment</a>(prop-&gt;name(), sql_type);</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (prop-&gt;is_primary_key()) {</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>                b.<a class="code hl_function" href="classsql__builder.html#af702cdc0bdee9bd778f21c9e4ceb071d">column_primary_key</a>(prop-&gt;name(), sql_type);</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (prop-&gt;is_unique()) {</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>                b.<a class="code hl_function" href="classsql__builder.html#a57d3794ed68f6e6ebfb00797ee35714c">column_unique</a>(prop-&gt;name(), sql_type);</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (prop-&gt;is_required()) {</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>                b.<a class="code hl_function" href="classsql__builder.html#ad45c7e3600b25cd3f1015c20db3b86c5">column_not_null</a>(prop-&gt;name(), sql_type);</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>                b.<a class="code hl_function" href="classsql__builder.html#a0f4587c6015947c5059f02491905a2b8">column</a>(prop-&gt;name(), sql_type);</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>            }</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        }</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span> </div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        <span class="keywordflow">return</span> b.<a class="code hl_function" href="classsql__builder.html#a98cf6bbb040d922f83474308c0180066">build</a>();</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    }</div>
+</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span></div>
+<div class="foldopen" id="foldopen00274" data-start="{" data-end="}">
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno"><a class="line" href="classsql__mapper.html#a7bed5abefedfac88b823d8eae03edb1f">  274</a></span>    <span class="keyword">static</span> <span class="keywordtype">string</span> <a class="code hl_function" href="classsql__mapper.html#a7bed5abefedfac88b823d8eae03edb1f">drop_table_sql</a>(<a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> table_override = <span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        <span class="keyword">const</span> <span class="keywordtype">string</span> tbl = table_override.<a class="code hl_function" href="classbasic__string.html#a090f934c74b4a3a42d49992aa342dee1">empty</a>() ? resolve_table_name() : <a class="code hl_typedef" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>(table_override);</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        <a class="code hl_class" href="classsql__builder.html">sql_builder</a> b;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        b.<a class="code hl_function" href="classsql__builder.html#a580c3c871721a176ba58e29cb8e7637f">drop_table_if_exists</a>(tbl);</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        <span class="keywordflow">return</span> b.<a class="code hl_function" href="classsql__builder.html#a98cf6bbb040d922f83474308c0180066">build</a>();</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    }</div>
+</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span></div>
+<div class="foldopen" id="foldopen00286" data-start="{" data-end="}">
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno"><a class="line" href="classsql__mapper.html#a4b0f7b886ef159b6764c608e032765cf">  286</a></span>    <span class="keyword">static</span> <span class="keywordtype">string</span> <a class="code hl_function" href="classsql__mapper.html#a4b0f7b886ef159b6764c608e032765cf">select_sql</a>(<a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> table_override = <span class="stringliteral">&quot;&quot;</span>) {</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        <span class="keyword">const</span> <span class="keywordtype">string</span> tbl = table_override.<a class="code hl_function" href="classbasic__string.html#a090f934c74b4a3a42d49992aa342dee1">empty</a>() ? resolve_table_name() : <a class="code hl_typedef" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>(table_override);</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <a class="code hl_class" href="classsql__builder.html">sql_builder</a> b;</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        <span class="keyword">const</span> <span class="keyword">auto</span>* meta = get_meta();</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry: meta-&gt;all_properties()) {</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>            <span class="keywordflow">if</span> (entry.second-&gt;is_transient()) {</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>            }</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>            b.<a class="code hl_function" href="classsql__builder.html#a9cc08500a5a461c52306582c98e57f40">select</a>(entry.second-&gt;name());</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>        }</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>        b.<a class="code hl_function" href="classsql__builder.html#a38e875449e1a80698c9ccac7e22b7c4b">from</a>(tbl);</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        <span class="keywordflow">return</span> b.<a class="code hl_function" href="classsql__builder.html#a98cf6bbb040d922f83474308c0180066">build</a>();</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    }</div>
+</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span></div>
+<div class="foldopen" id="foldopen00308" data-start="{" data-end="}">
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno"><a class="line" href="classsql__mapper.html#a1df5d178bec8d39ffe2f5f303172a513">  308</a></span>    <span class="keyword">static</span> <span class="keywordtype">string</span> <a class="code hl_function" href="classsql__mapper.html#a1df5d178bec8d39ffe2f5f303172a513">insert_sql</a>(<a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> table_override = <span class="stringliteral">&quot;&quot;</span>, <span class="keyword">const</span> <a class="code hl_enumeration" href="group___s_q_l.html#ga5a1ff7dca56c7ae4b12aef04ede5017a">sql_dialect</a> dialect = <a class="code hl_enumvalue" href="group___s_q_l.html#gga5a1ff7dca56c7ae4b12aef04ede5017aac942dc2a9f958acddc67e11472d3ca0b">sql_dialect::GENERIC</a>) {</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        <span class="keyword">const</span> <span class="keywordtype">string</span> tbl = table_override.<a class="code hl_function" href="classbasic__string.html#a090f934c74b4a3a42d49992aa342dee1">empty</a>() ? resolve_table_name() : <a class="code hl_typedef" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>(table_override);</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        <span class="keyword">const</span> <span class="keyword">auto</span> props = collect_persistent_props(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>        <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> columns;</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>        columns.<a class="code hl_function" href="classvector.html#a0066a7fca1a744cdb62d5fb96b51a88f">reserve</a>(props.size());</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>* p: props) {</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>            columns.<a class="code hl_function" href="classvector.html#ac8d8b05ea55e928d9a4ccde8bf9bedcf">push_back</a>(p-&gt;name());</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>        }</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span> </div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>        <a class="code hl_class" href="classsql__builder.html">sql_builder</a> b;</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        b.<a class="code hl_function" href="classsql__builder.html#afd0e8a3a1541bdd9526c25494f0decb4">set_dialect</a>(dialect);</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        b.<a class="code hl_function" href="classsql__builder.html#a4d5b0a798c9a9469de8bec6667cf2dec">insert_into</a>(tbl, columns);</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>        <span class="keywordflow">return</span> b.<a class="code hl_function" href="classsql__builder.html#a98cf6bbb040d922f83474308c0180066">build</a>();</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    }</div>
+</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span></div>
+<div class="foldopen" id="foldopen00331" data-start="{" data-end="}">
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno"><a class="line" href="classsql__mapper.html#a54bd8e073727f8b5b4736a61bc5118a0">  331</a></span>    <span class="keyword">static</span> <span class="keywordtype">string</span> <a class="code hl_function" href="classsql__mapper.html#a54bd8e073727f8b5b4736a61bc5118a0">delete_sql</a>(<a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> table_override = <span class="stringliteral">&quot;&quot;</span>, <span class="keyword">const</span> <a class="code hl_enumeration" href="group___s_q_l.html#ga5a1ff7dca56c7ae4b12aef04ede5017a">sql_dialect</a> dialect = <a class="code hl_enumvalue" href="group___s_q_l.html#gga5a1ff7dca56c7ae4b12aef04ede5017aac942dc2a9f958acddc67e11472d3ca0b">sql_dialect::GENERIC</a>) {</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>        <span class="keyword">const</span> <span class="keywordtype">string</span> tbl = table_override.<a class="code hl_function" href="classbasic__string.html#a090f934c74b4a3a42d49992aa342dee1">empty</a>() ? resolve_table_name() : <a class="code hl_typedef" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>(table_override);</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>        <span class="keyword">const</span> <span class="keyword">auto</span>* pk = find_pk_prop();</div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        <span class="keywordflow">if</span> (pk == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>            NEFORCE_THROW_EXCEPTION(<a class="code hl_struct" href="structvalue__exception.html">value_exception</a>(<span class="stringliteral">&quot;sql_mapper: no primary key defined for DELETE&quot;</span>));</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>        }</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span> </div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>        <a class="code hl_class" href="classsql__builder.html">sql_builder</a> b;</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>        b.<a class="code hl_function" href="classsql__builder.html#afd0e8a3a1541bdd9526c25494f0decb4">set_dialect</a>(dialect);</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>        b.<a class="code hl_function" href="classsql__builder.html#a08bbb254ad562aafc801482729301f6b">delete_from</a>(tbl);</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        b.<a class="code hl_function" href="classsql__builder.html#a9e4d6f43ecda4cf778acb4c02fd44a14">where_eq</a>(pk-&gt;name(), b.<a class="code hl_function" href="classsql__builder.html#a92481aa2f5176bf255c810184cb4c41f">placeholder</a>(1));</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>        <span class="keywordflow">return</span> b.<a class="code hl_function" href="classsql__builder.html#a98cf6bbb040d922f83474308c0180066">build</a>();</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>    }</div>
+</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span></div>
+<div class="foldopen" id="foldopen00352" data-start="{" data-end="}">
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno"><a class="line" href="classsql__mapper.html#a7ddb0c05f68f14f1bba9ea1c955cf8f3">  352</a></span>    <span class="keyword">static</span> <span class="keywordtype">string</span> <a class="code hl_function" href="classsql__mapper.html#a7ddb0c05f68f14f1bba9ea1c955cf8f3">update_sql</a>(<a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> table_override = <span class="stringliteral">&quot;&quot;</span>, <span class="keyword">const</span> <a class="code hl_enumeration" href="group___s_q_l.html#ga5a1ff7dca56c7ae4b12aef04ede5017a">sql_dialect</a> dialect = <a class="code hl_enumvalue" href="group___s_q_l.html#gga5a1ff7dca56c7ae4b12aef04ede5017aac942dc2a9f958acddc67e11472d3ca0b">sql_dialect::GENERIC</a>) {</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        <span class="keyword">const</span> <span class="keywordtype">string</span> tbl = table_override.<a class="code hl_function" href="classbasic__string.html#a090f934c74b4a3a42d49992aa342dee1">empty</a>() ? resolve_table_name() : <a class="code hl_typedef" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>(table_override);</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>        <span class="keyword">const</span> <span class="keyword">auto</span>* pk = find_pk_prop();</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        <span class="keywordflow">if</span> (pk == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>            NEFORCE_THROW_EXCEPTION(<a class="code hl_struct" href="structvalue__exception.html">value_exception</a>(<span class="stringliteral">&quot;sql_mapper: no primary key defined for UPDATE&quot;</span>));</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        }</div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span> </div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>        <span class="keyword">const</span> <span class="keyword">auto</span> props = collect_persistent_props(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span> </div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        <a class="code hl_class" href="classsql__builder.html">sql_builder</a> b;</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        b.<a class="code hl_function" href="classsql__builder.html#afd0e8a3a1541bdd9526c25494f0decb4">set_dialect</a>(dialect);</div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>        b.<a class="code hl_function" href="classsql__builder.html#a631067e549433698c14cc6dfe306732f">update</a>(tbl);</div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span> </div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>* p: props) {</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>            <span class="keywordflow">if</span> (p-&gt;is_primary_key() || p-&gt;is_auto_increment()) {</div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>            }</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>            b.<a class="code hl_function" href="classsql__builder.html#a0d20239592cba11f808e66babb4c7469">set_param</a>(p-&gt;name());</div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>        }</div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span> </div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>        b.<a class="code hl_function" href="classsql__builder.html#a9e4d6f43ecda4cf778acb4c02fd44a14">where_eq</a>(pk-&gt;name(), b.<a class="code hl_function" href="classsql__builder.html#a5abf514d2d32ec1da169389d998e104f">next_placeholder</a>());</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>        <span class="keywordflow">return</span> b.<a class="code hl_function" href="classsql__builder.html#a98cf6bbb040d922f83474308c0180066">build</a>();</div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>    }</div>
+</div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span></div>
+<div class="foldopen" id="foldopen00382" data-start="{" data-end="}">
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno"><a class="line" href="classsql__mapper.html#ac84bf889a916f5450348f7de49f9b991">  382</a></span>    <span class="keyword">static</span> <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> <a class="code hl_function" href="classsql__mapper.html#ac84bf889a916f5450348f7de49f9b991">get_values</a>(<span class="keyword">const</span> T&amp; entity, <span class="keywordtype">bool</span> include_pk = <span class="keyword">true</span>) {</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>        <span class="keyword">const</span> <span class="keyword">auto</span> props = collect_persistent_props(include_pk);</div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>        <a class="code hl_class" href="classvector.html">vector&lt;string&gt;</a> values;</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>        values.<a class="code hl_function" href="classvector.html#a0066a7fca1a744cdb62d5fb96b51a88f">reserve</a>(props.size());</div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>* prop: props) {</div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>            reflect::meta_any val = prop-&gt;get(&amp;entity);</div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>            values.push_back(<a class="code hl_function" href="group___s_q_l_mapper.html#gac77e9362560fc03f864f72ffcb4a452c">meta_any_to_sql_literal</a>(val));</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span>        }</div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>        <span class="keywordflow">return</span> values;</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>    }</div>
+</div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span></div>
+<div class="foldopen" id="foldopen00398" data-start="{" data-end="}">
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno"><a class="line" href="classsql__mapper.html#a811bb1d9e11c1ecb66bb9029a425c806">  398</a></span>    <span class="keyword">static</span> reflect::meta_any <a class="code hl_function" href="classsql__mapper.html#a811bb1d9e11c1ecb66bb9029a425c806">get_pk_value</a>(<span class="keyword">const</span> T&amp; entity) {</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        <span class="keyword">const</span> <span class="keyword">auto</span>* pk = find_pk_prop();</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span>        <span class="keywordflow">if</span> (pk == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>            <span class="keywordflow">return</span> reflect::meta_any{};</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span>        }</div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>        <span class="keywordflow">return</span> pk-&gt;get(&amp;entity);</div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>    }</div>
+</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span></div>
+<div class="foldopen" id="foldopen00412" data-start="{" data-end="}">
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno"><a class="line" href="classsql__mapper.html#a993ece6095ef078a8276c0ecd40d9e4a">  412</a></span>    <span class="keyword">static</span> T <a class="code hl_function" href="classsql__mapper.html#a993ece6095ef078a8276c0ecd40d9e4a">from_row</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structidb__tb__result.html">idb_tb_result</a>&amp; row, <span class="keyword">const</span> <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, size_t&gt;</a>&amp; col_map = {}) {</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>        <span class="keyword">const</span> <span class="keyword">auto</span>* meta = get_meta();</div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>        <span class="keyword">auto</span> obj_any = meta-&gt;create();</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>        <span class="keywordflow">if</span> (!obj_any.has_value()) {</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>            NEFORCE_THROW_EXCEPTION(<a class="code hl_struct" href="structvalue__exception.html">value_exception</a>(<span class="stringliteral">&quot;sql_mapper: failed to create entity instance&quot;</span>));</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>        }</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>        <span class="keywordtype">void</span>* raw = obj_any.raw();</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span> </div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>        unordered_map&lt;string, size_t&gt; effective_map;</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>        <span class="keywordflow">if</span> (col_map.empty()) {</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>            <span class="keyword">const</span> <span class="keyword">auto</span>&amp; names = row.<a class="code hl_function" href="structidb__tb__result.html#acf9e2cdb951dfadb26394addafd314bd">column_names</a>();</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>            <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; names.size(); ++i) {</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>                effective_map[names[i]] = i;</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>            }</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>            effective_map = col_map;</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>        }</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span> </div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry: meta-&gt;all_properties()) {</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>            <span class="keyword">const</span> <span class="keyword">auto</span>* prop = entry.second;</div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>            <span class="keywordflow">if</span> (prop-&gt;is_transient() || prop-&gt;is_readonly()) {</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>            }</div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span> </div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>            <span class="keyword">auto</span> it = effective_map.<a class="code hl_function" href="classunordered__map.html#a206850d56bbbd516b39dbbfa756a6733">find</a>(prop-&gt;name());</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>            <span class="keywordflow">if</span> (it == effective_map.<a class="code hl_function" href="classunordered__map.html#a5b4f1415215c71e23005a7cf611f6bcd">end</a>()) {</div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>            }</div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span> </div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>            reflect::meta_any val = <a class="code hl_function" href="group___s_q_l_mapper.html#gabbea4ff42670147e8abc032de12c081b">read_column_by_type</a>(row, it-&gt;second, prop-&gt;type_id());</div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>            prop-&gt;set(raw, val);</div>
+<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>        }</div>
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span> </div>
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span>        <span class="keywordflow">return</span> *<span class="keyword">static_cast&lt;</span>T*<span class="keyword">&gt;</span>(raw);</div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>    }</div>
+</div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span></div>
+<div class="foldopen" id="foldopen00453" data-start="{" data-end="}">
+<div class="line"><a id="l00453" name="l00453"></a><span class="lineno"><a class="line" href="classsql__mapper.html#a5d3afb9573d7babbec9a14247dc3e18c">  453</a></span>    <span class="keyword">static</span> <a class="code hl_class" href="classvector.html">vector&lt;T&gt;</a> <a class="code hl_function" href="classsql__mapper.html#a5d3afb9573d7babbec9a14247dc3e18c">from_result</a>(<a class="code hl_class" href="classunique__ptr.html">unique_ptr&lt;idb_tb_result&gt;</a> result) {</div>
+<div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>        <a class="code hl_class" href="classvector.html">vector&lt;T&gt;</a> entities;</div>
+<div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>        <span class="keywordflow">if</span> (result == <span class="keyword">nullptr</span> || result-&gt;empty()) {</div>
+<div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>            <span class="keywordflow">return</span> entities;</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>        }</div>
+<div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span> </div>
+<div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>        <a class="code hl_class" href="classunordered__map.html">unordered_map&lt;string, size_t&gt;</a> col_map;</div>
+<div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span>        <span class="keyword">const</span> <span class="keyword">auto</span>&amp; names = result-&gt;column_names();</div>
+<div class="line"><a id="l00461" name="l00461"></a><span class="lineno">  461</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; names.size(); ++i) {</div>
+<div class="line"><a id="l00462" name="l00462"></a><span class="lineno">  462</span>            col_map[names[i]] = i;</div>
+<div class="line"><a id="l00463" name="l00463"></a><span class="lineno">  463</span>        }</div>
+<div class="line"><a id="l00464" name="l00464"></a><span class="lineno">  464</span> </div>
+<div class="line"><a id="l00465" name="l00465"></a><span class="lineno">  465</span>        <span class="keywordflow">while</span> (result-&gt;next()) {</div>
+<div class="line"><a id="l00466" name="l00466"></a><span class="lineno">  466</span>            entities.<a class="code hl_function" href="classvector.html#ac8d8b05ea55e928d9a4ccde8bf9bedcf">push_back</a>(<a class="code hl_function" href="classsql__mapper.html#a993ece6095ef078a8276c0ecd40d9e4a">from_row</a>(*result, col_map));</div>
+<div class="line"><a id="l00467" name="l00467"></a><span class="lineno">  467</span>        }</div>
+<div class="line"><a id="l00468" name="l00468"></a><span class="lineno">  468</span>        <span class="keywordflow">return</span> entities;</div>
+<div class="line"><a id="l00469" name="l00469"></a><span class="lineno">  469</span>    }</div>
+</div>
+<div class="line"><a id="l00470" name="l00470"></a><span class="lineno">  470</span></div>
+<div class="foldopen" id="foldopen00477" data-start="{" data-end="}">
+<div class="line"><a id="l00477" name="l00477"></a><span class="lineno"><a class="line" href="classsql__mapper.html#a2b921e7ff63ad91c0ba8cef5a6c2a988">  477</a></span>    <span class="keyword">static</span> <span class="keywordtype">string</span> <a class="code hl_function" href="classsql__mapper.html#a2b921e7ff63ad91c0ba8cef5a6c2a988">select_by_pk_sql</a>(<a class="code hl_typedef" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> table_override = <span class="stringliteral">&quot;&quot;</span>, <span class="keyword">const</span> <a class="code hl_enumeration" href="group___s_q_l.html#ga5a1ff7dca56c7ae4b12aef04ede5017a">sql_dialect</a> dialect = <a class="code hl_enumvalue" href="group___s_q_l.html#gga5a1ff7dca56c7ae4b12aef04ede5017aac942dc2a9f958acddc67e11472d3ca0b">sql_dialect::GENERIC</a>) {</div>
+<div class="line"><a id="l00478" name="l00478"></a><span class="lineno">  478</span>        <span class="keyword">const</span> <span class="keywordtype">string</span> tbl = table_override.<a class="code hl_function" href="classbasic__string.html#a090f934c74b4a3a42d49992aa342dee1">empty</a>() ? resolve_table_name() : <a class="code hl_typedef" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>(table_override);</div>
+<div class="line"><a id="l00479" name="l00479"></a><span class="lineno">  479</span>        <span class="keyword">const</span> <span class="keyword">auto</span>* pk = find_pk_prop();</div>
+<div class="line"><a id="l00480" name="l00480"></a><span class="lineno">  480</span>        <span class="keywordflow">if</span> (pk == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00481" name="l00481"></a><span class="lineno">  481</span>            NEFORCE_THROW_EXCEPTION(<a class="code hl_struct" href="structvalue__exception.html">value_exception</a>(<span class="stringliteral">&quot;sql_mapper: no primary key defined for SELECT BY PK&quot;</span>));</div>
+<div class="line"><a id="l00482" name="l00482"></a><span class="lineno">  482</span>        }</div>
+<div class="line"><a id="l00483" name="l00483"></a><span class="lineno">  483</span> </div>
+<div class="line"><a id="l00484" name="l00484"></a><span class="lineno">  484</span>        <span class="keyword">const</span> <span class="keyword">auto</span>* meta = get_meta();</div>
+<div class="line"><a id="l00485" name="l00485"></a><span class="lineno">  485</span>        <a class="code hl_class" href="classsql__builder.html">sql_builder</a> b;</div>
+<div class="line"><a id="l00486" name="l00486"></a><span class="lineno">  486</span>        b.<a class="code hl_function" href="classsql__builder.html#afd0e8a3a1541bdd9526c25494f0decb4">set_dialect</a>(dialect);</div>
+<div class="line"><a id="l00487" name="l00487"></a><span class="lineno">  487</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; entry: meta-&gt;all_properties()) {</div>
+<div class="line"><a id="l00488" name="l00488"></a><span class="lineno">  488</span>            <span class="keywordflow">if</span> (entry.second-&gt;is_transient()) {</div>
+<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span>                <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span>            }</div>
+<div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>            b.<a class="code hl_function" href="classsql__builder.html#a9cc08500a5a461c52306582c98e57f40">select</a>(entry.second-&gt;name());</div>
+<div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>        }</div>
+<div class="line"><a id="l00493" name="l00493"></a><span class="lineno">  493</span>        b.<a class="code hl_function" href="classsql__builder.html#a38e875449e1a80698c9ccac7e22b7c4b">from</a>(tbl);</div>
+<div class="line"><a id="l00494" name="l00494"></a><span class="lineno">  494</span>        b.<a class="code hl_function" href="classsql__builder.html#a9e4d6f43ecda4cf778acb4c02fd44a14">where_eq</a>(pk-&gt;name(), b.<a class="code hl_function" href="classsql__builder.html#a92481aa2f5176bf255c810184cb4c41f">placeholder</a>(1));</div>
+<div class="line"><a id="l00495" name="l00495"></a><span class="lineno">  495</span>        <span class="keywordflow">return</span> b.<a class="code hl_function" href="classsql__builder.html#a98cf6bbb040d922f83474308c0180066">build</a>();</div>
+<div class="line"><a id="l00496" name="l00496"></a><span class="lineno">  496</span>    }</div>
+</div>
+<div class="line"><a id="l00497" name="l00497"></a><span class="lineno">  497</span>};</div>
+</div>
+<div class="line"><a id="l00498" name="l00498"></a><span class="lineno">  498</span> <span class="comment">// SQLMapper</span></div>
+<div class="line"><a id="l00500" name="l00500"></a><span class="lineno">  500</span> </div>
+<div class="line"><a id="l00501" name="l00501"></a><span class="lineno">  501</span>NEFORCE_END_NAMESPACE__</div>
+<div class="line"><a id="l00502" name="l00502"></a><span class="lineno">  502</span><span class="preprocessor">#endif </span><span class="comment">// NEFORCE_DATABASE_SQL_MAPPER_HPP__</span></div>
+<div class="ttc" id="aclassbasic__string_html_a090f934c74b4a3a42d49992aa342dee1"><div class="ttname"><a href="classbasic__string.html#a090f934c74b4a3a42d49992aa342dee1">basic_string::empty</a></div><div class="ttdeci">constexpr bool empty() const noexcept</div><div class="ttdoc">检查是否为空</div><div class="ttdef"><b>定义</b> <a href="basic__string_8hpp_source.html#l01268">basic_string.hpp:1268</a></div></div>
+<div class="ttc" id="aclasssql__builder_html"><div class="ttname"><a href="classsql__builder.html">sql_builder</a></div><div class="ttdoc">SQL语句构建器</div><div class="ttdef"><b>定义</b> <a href="sql__builder_8hpp_source.html#l00176">sql_builder.hpp:176</a></div></div>
+<div class="ttc" id="aclasssql__builder_html_a08bbb254ad562aafc801482729301f6b"><div class="ttname"><a href="classsql__builder.html#a08bbb254ad562aafc801482729301f6b">sql_builder::delete_from</a></div><div class="ttdeci">sql_builder &amp; delete_from(string table)</div><div class="ttdoc">设置DELETE FROM表名</div></div>
+<div class="ttc" id="aclasssql__builder_html_a0d20239592cba11f808e66babb4c7469"><div class="ttname"><a href="classsql__builder.html#a0d20239592cba11f808e66babb4c7469">sql_builder::set_param</a></div><div class="ttdeci">sql_builder &amp; set_param(string field)</div><div class="ttdoc">添加 SET 赋值</div><div class="ttdef"><b>定义</b> <a href="sql__builder_8hpp_source.html#l01436">sql_builder.hpp:1436</a></div></div>
+<div class="ttc" id="aclasssql__builder_html_a0f4587c6015947c5059f02491905a2b8"><div class="ttname"><a href="classsql__builder.html#a0f4587c6015947c5059f02491905a2b8">sql_builder::column</a></div><div class="ttdeci">sql_builder &amp; column(string name, string type)</div><div class="ttdoc">添加基础列定义</div></div>
+<div class="ttc" id="aclasssql__builder_html_a38e875449e1a80698c9ccac7e22b7c4b"><div class="ttname"><a href="classsql__builder.html#a38e875449e1a80698c9ccac7e22b7c4b">sql_builder::from</a></div><div class="ttdeci">sql_builder &amp; from(string table) noexcept</div><div class="ttdoc">设置主表</div></div>
+<div class="ttc" id="aclasssql__builder_html_a4d5b0a798c9a9469de8bec6667cf2dec"><div class="ttname"><a href="classsql__builder.html#a4d5b0a798c9a9469de8bec6667cf2dec">sql_builder::insert_into</a></div><div class="ttdeci">sql_builder &amp; insert_into(string table, vector&lt; string &gt; fields)</div><div class="ttdoc">设置INSERT INTO表名和字段</div></div>
+<div class="ttc" id="aclasssql__builder_html_a57d3794ed68f6e6ebfb00797ee35714c"><div class="ttname"><a href="classsql__builder.html#a57d3794ed68f6e6ebfb00797ee35714c">sql_builder::column_unique</a></div><div class="ttdeci">sql_builder &amp; column_unique(string name, string type)</div><div class="ttdoc">添加带UNIQUE约束的列定义</div></div>
+<div class="ttc" id="aclasssql__builder_html_a580c3c871721a176ba58e29cb8e7637f"><div class="ttname"><a href="classsql__builder.html#a580c3c871721a176ba58e29cb8e7637f">sql_builder::drop_table_if_exists</a></div><div class="ttdeci">sql_builder &amp; drop_table_if_exists(string table)</div><div class="ttdoc">删除表（IF EXISTS）</div></div>
+<div class="ttc" id="aclasssql__builder_html_a5abf514d2d32ec1da169389d998e104f"><div class="ttname"><a href="classsql__builder.html#a5abf514d2d32ec1da169389d998e104f">sql_builder::next_placeholder</a></div><div class="ttdeci">string next_placeholder()</div><div class="ttdoc">获取下一个参数占位符</div><div class="ttdef"><b>定义</b> <a href="sql__builder_8hpp_source.html#l01427">sql_builder.hpp:1427</a></div></div>
+<div class="ttc" id="aclasssql__builder_html_a631067e549433698c14cc6dfe306732f"><div class="ttname"><a href="classsql__builder.html#a631067e549433698c14cc6dfe306732f">sql_builder::update</a></div><div class="ttdeci">sql_builder &amp; update(string table)</div><div class="ttdoc">设置UPDATE表名</div></div>
+<div class="ttc" id="aclasssql__builder_html_a92481aa2f5176bf255c810184cb4c41f"><div class="ttname"><a href="classsql__builder.html#a92481aa2f5176bf255c810184cb4c41f">sql_builder::placeholder</a></div><div class="ttdeci">string placeholder(const size_t index) const</div><div class="ttdoc">生成方言感知的参数占位符</div><div class="ttdef"><b>定义</b> <a href="sql__builder_8hpp_source.html#l01417">sql_builder.hpp:1417</a></div></div>
+<div class="ttc" id="aclasssql__builder_html_a98cf6bbb040d922f83474308c0180066"><div class="ttname"><a href="classsql__builder.html#a98cf6bbb040d922f83474308c0180066">sql_builder::build</a></div><div class="ttdeci">string build() const</div><div class="ttdoc">构建最终的SQL语句</div></div>
+<div class="ttc" id="aclasssql__builder_html_a9cc08500a5a461c52306582c98e57f40"><div class="ttname"><a href="classsql__builder.html#a9cc08500a5a461c52306582c98e57f40">sql_builder::select</a></div><div class="ttdeci">sql_builder &amp; select(vector&lt; string &gt; fields)</div><div class="ttdoc">列表设置SELECT字段</div></div>
+<div class="ttc" id="aclasssql__builder_html_a9e4d6f43ecda4cf778acb4c02fd44a14"><div class="ttname"><a href="classsql__builder.html#a9e4d6f43ecda4cf778acb4c02fd44a14">sql_builder::where_eq</a></div><div class="ttdeci">sql_builder &amp; where_eq(string field, string value)</div><div class="ttdoc">添加相等条件</div></div>
+<div class="ttc" id="aclasssql__builder_html_aa15de13227bd3b35dbacd55119228e8e"><div class="ttname"><a href="classsql__builder.html#aa15de13227bd3b35dbacd55119228e8e">sql_builder::column_auto_increment</a></div><div class="ttdeci">sql_builder &amp; column_auto_increment(string name, string type)</div><div class="ttdoc">添加自增主键列定义（事实标准：AUTO_INCREMENT）</div></div>
+<div class="ttc" id="aclasssql__builder_html_ad45c7e3600b25cd3f1015c20db3b86c5"><div class="ttname"><a href="classsql__builder.html#ad45c7e3600b25cd3f1015c20db3b86c5">sql_builder::column_not_null</a></div><div class="ttdeci">sql_builder &amp; column_not_null(string name, string type)</div><div class="ttdoc">添加带NOT NULL约束的列定义</div></div>
+<div class="ttc" id="aclasssql__builder_html_af6dd0c194149fd45482345d08aa17a6f"><div class="ttname"><a href="classsql__builder.html#af6dd0c194149fd45482345d08aa17a6f">sql_builder::create_table_if_not_exists</a></div><div class="ttdeci">sql_builder &amp; create_table_if_not_exists(string table)</div><div class="ttdoc">创建表（IF NOT EXISTS）</div></div>
+<div class="ttc" id="aclasssql__builder_html_af702cdc0bdee9bd778f21c9e4ceb071d"><div class="ttname"><a href="classsql__builder.html#af702cdc0bdee9bd778f21c9e4ceb071d">sql_builder::column_primary_key</a></div><div class="ttdeci">sql_builder &amp; column_primary_key(string name, string type)</div><div class="ttdoc">添加PRIMARY KEY列定义</div></div>
+<div class="ttc" id="aclasssql__builder_html_afd0e8a3a1541bdd9526c25494f0decb4"><div class="ttname"><a href="classsql__builder.html#afd0e8a3a1541bdd9526c25494f0decb4">sql_builder::set_dialect</a></div><div class="ttdeci">sql_builder &amp; set_dialect(const sql_dialect dialect) noexcept</div><div class="ttdoc">设置数据库方言</div><div class="ttdef"><b>定义</b> <a href="sql__builder_8hpp_source.html#l01390">sql_builder.hpp:1390</a></div></div>
+<div class="ttc" id="aclasssql__mapper_html"><div class="ttname"><a href="classsql__mapper.html">sql_mapper</a></div><div class="ttdoc">ORM 对象-关系映射器</div><div class="ttdef"><b>定义</b> <a href="#l00173">sql_mapper.hpp:173</a></div></div>
+<div class="ttc" id="aclasssql__mapper_html_a1df5d178bec8d39ffe2f5f303172a513"><div class="ttname"><a href="classsql__mapper.html#a1df5d178bec8d39ffe2f5f303172a513">sql_mapper::insert_sql</a></div><div class="ttdeci">static string insert_sql(string_view table_override=&quot;&quot;, const sql_dialect dialect=sql_dialect::GENERIC)</div><div class="ttdoc">生成 INSERT SQL（占位符由方言自动决定）</div><div class="ttdef"><b>定义</b> <a href="#l00308">sql_mapper.hpp:308</a></div></div>
+<div class="ttc" id="aclasssql__mapper_html_a2b921e7ff63ad91c0ba8cef5a6c2a988"><div class="ttname"><a href="classsql__mapper.html#a2b921e7ff63ad91c0ba8cef5a6c2a988">sql_mapper::select_by_pk_sql</a></div><div class="ttdeci">static string select_by_pk_sql(string_view table_override=&quot;&quot;, const sql_dialect dialect=sql_dialect::GENERIC)</div><div class="ttdoc">生成按主键查询的 SELECT SQL</div><div class="ttdef"><b>定义</b> <a href="#l00477">sql_mapper.hpp:477</a></div></div>
+<div class="ttc" id="aclasssql__mapper_html_a3c094067ab02934bed258fac30293580"><div class="ttname"><a href="classsql__mapper.html#a3c094067ab02934bed258fac30293580">sql_mapper::create_table_sql</a></div><div class="ttdeci">static string create_table_sql(string_view table_override=&quot;&quot;)</div><div class="ttdoc">生成 CREATE TABLE SQL</div><div class="ttdef"><b>定义</b> <a href="#l00238">sql_mapper.hpp:238</a></div></div>
+<div class="ttc" id="aclasssql__mapper_html_a4b0f7b886ef159b6764c608e032765cf"><div class="ttname"><a href="classsql__mapper.html#a4b0f7b886ef159b6764c608e032765cf">sql_mapper::select_sql</a></div><div class="ttdeci">static string select_sql(string_view table_override=&quot;&quot;)</div><div class="ttdoc">生成 SELECT 查询 SQL</div><div class="ttdef"><b>定义</b> <a href="#l00286">sql_mapper.hpp:286</a></div></div>
+<div class="ttc" id="aclasssql__mapper_html_a54bd8e073727f8b5b4736a61bc5118a0"><div class="ttname"><a href="classsql__mapper.html#a54bd8e073727f8b5b4736a61bc5118a0">sql_mapper::delete_sql</a></div><div class="ttdeci">static string delete_sql(string_view table_override=&quot;&quot;, const sql_dialect dialect=sql_dialect::GENERIC)</div><div class="ttdoc">生成 DELETE SQL（按主键删除）</div><div class="ttdef"><b>定义</b> <a href="#l00331">sql_mapper.hpp:331</a></div></div>
+<div class="ttc" id="aclasssql__mapper_html_a5d3afb9573d7babbec9a14247dc3e18c"><div class="ttname"><a href="classsql__mapper.html#a5d3afb9573d7babbec9a14247dc3e18c">sql_mapper::from_result</a></div><div class="ttdeci">static vector&lt; T &gt; from_result(unique_ptr&lt; idb_tb_result &gt; result)</div><div class="ttdoc">从查询结果集构建实体对象列表</div><div class="ttdef"><b>定义</b> <a href="#l00453">sql_mapper.hpp:453</a></div></div>
+<div class="ttc" id="aclasssql__mapper_html_a7bed5abefedfac88b823d8eae03edb1f"><div class="ttname"><a href="classsql__mapper.html#a7bed5abefedfac88b823d8eae03edb1f">sql_mapper::drop_table_sql</a></div><div class="ttdeci">static string drop_table_sql(string_view table_override=&quot;&quot;)</div><div class="ttdoc">生成 DROP TABLE SQL</div><div class="ttdef"><b>定义</b> <a href="#l00274">sql_mapper.hpp:274</a></div></div>
+<div class="ttc" id="aclasssql__mapper_html_a7ddb0c05f68f14f1bba9ea1c955cf8f3"><div class="ttname"><a href="classsql__mapper.html#a7ddb0c05f68f14f1bba9ea1c955cf8f3">sql_mapper::update_sql</a></div><div class="ttdeci">static string update_sql(string_view table_override=&quot;&quot;, const sql_dialect dialect=sql_dialect::GENERIC)</div><div class="ttdoc">生成 UPDATE SQL（按主键更新所有非主键字段）</div><div class="ttdef"><b>定义</b> <a href="#l00352">sql_mapper.hpp:352</a></div></div>
+<div class="ttc" id="aclasssql__mapper_html_a811bb1d9e11c1ecb66bb9029a425c806"><div class="ttname"><a href="classsql__mapper.html#a811bb1d9e11c1ecb66bb9029a425c806">sql_mapper::get_pk_value</a></div><div class="ttdeci">static reflect::meta_any get_pk_value(const T &amp;entity)</div><div class="ttdoc">获取主键值</div><div class="ttdef"><b>定义</b> <a href="#l00398">sql_mapper.hpp:398</a></div></div>
+<div class="ttc" id="aclasssql__mapper_html_a993ece6095ef078a8276c0ecd40d9e4a"><div class="ttname"><a href="classsql__mapper.html#a993ece6095ef078a8276c0ecd40d9e4a">sql_mapper::from_row</a></div><div class="ttdeci">static T from_row(const idb_tb_result &amp;row, const unordered_map&lt; string, size_t &gt; &amp;col_map={})</div><div class="ttdoc">从结果行构建实体对象</div><div class="ttdef"><b>定义</b> <a href="#l00412">sql_mapper.hpp:412</a></div></div>
+<div class="ttc" id="aclasssql__mapper_html_ac84bf889a916f5450348f7de49f9b991"><div class="ttname"><a href="classsql__mapper.html#ac84bf889a916f5450348f7de49f9b991">sql_mapper::get_values</a></div><div class="ttdeci">static vector&lt; string &gt; get_values(const T &amp;entity, bool include_pk=true)</div><div class="ttdoc">从实体提取所有持久化字段的值（以 SQL 字面量表示）</div><div class="ttdef"><b>定义</b> <a href="#l00382">sql_mapper.hpp:382</a></div></div>
+<div class="ttc" id="aclasssql__mapper_html_af00bd3a6273c644b7618102f209616c9"><div class="ttname"><a href="classsql__mapper.html#af00bd3a6273c644b7618102f209616c9">sql_mapper::table_name</a></div><div class="ttdeci">static string table_name()</div><div class="ttdoc">获取映射的表名</div><div class="ttdef"><b>定义</b> <a href="#l00231">sql_mapper.hpp:231</a></div></div>
+<div class="ttc" id="aclassunique__ptr_html"><div class="ttname"><a href="classunique__ptr.html">unique_ptr</a></div><div class="ttdoc">独占智能指针</div><div class="ttdef"><b>定义</b> <a href="unique__ptr_8hpp_source.html#l00206">unique_ptr.hpp:206</a></div></div>
+<div class="ttc" id="aclassunordered__map_html"><div class="ttname"><a href="classunordered__map.html">unordered_map</a></div><div class="ttdoc">无序映射容器</div><div class="ttdef"><b>定义</b> <a href="unordered__map_8hpp_source.html#l00038">unordered_map.hpp:38</a></div></div>
+<div class="ttc" id="aclassunordered__map_html_a206850d56bbbd516b39dbbfa756a6733"><div class="ttname"><a href="classunordered__map.html#a206850d56bbbd516b39dbbfa756a6733">unordered_map::find</a></div><div class="ttdeci">iterator find(const key_type &amp;key)</div><div class="ttdoc">查找具有指定键的元素</div><div class="ttdef"><b>定义</b> <a href="unordered__map_8hpp_source.html#l00430">unordered_map.hpp:430</a></div></div>
+<div class="ttc" id="aclassunordered__map_html_a5b4f1415215c71e23005a7cf611f6bcd"><div class="ttname"><a href="classunordered__map.html#a5b4f1415215c71e23005a7cf611f6bcd">unordered_map::end</a></div><div class="ttdeci">iterator end() noexcept</div><div class="ttdoc">获取结束迭代器</div><div class="ttdef"><b>定义</b> <a href="unordered__map_8hpp_source.html#l00231">unordered_map.hpp:231</a></div></div>
+<div class="ttc" id="aclassvector_html"><div class="ttname"><a href="classvector.html">vector</a></div><div class="ttdoc">动态大小数组容器</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00167">vector.hpp:167</a></div></div>
+<div class="ttc" id="aclassvector_html_a0066a7fca1a744cdb62d5fb96b51a88f"><div class="ttname"><a href="classvector.html#a0066a7fca1a744cdb62d5fb96b51a88f">vector::reserve</a></div><div class="ttdeci">constexpr void reserve(const size_type n)</div><div class="ttdoc">预留容量</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00775">vector.hpp:775</a></div></div>
+<div class="ttc" id="aclassvector_html_ac8d8b05ea55e928d9a4ccde8bf9bedcf"><div class="ttname"><a href="classvector.html#ac8d8b05ea55e928d9a4ccde8bf9bedcf">vector::push_back</a></div><div class="ttdeci">constexpr void push_back(const T &amp;value)</div><div class="ttdoc">在末尾拷贝插入元素</div><div class="ttdef"><b>定义</b> <a href="vector_8hpp_source.html#l00887">vector.hpp:887</a></div></div>
+<div class="ttc" id="adb__interface_8hpp_html"><div class="ttname"><a href="db__interface_8hpp.html">db_interface.hpp</a></div><div class="ttdoc">数据库抽象接口层</div></div>
+<div class="ttc" id="agroup___core_types_html_ga40b54003b1e3c93da5e74c8b7b71b807"><div class="ttname"><a href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></div><div class="ttdeci">long long int64_t</div><div class="ttdoc">64位有符号整数类型</div><div class="ttdef"><b>定义</b> <a href="types_8hpp_source.html#l00087">types.hpp:87</a></div></div>
+<div class="ttc" id="agroup___format_html_gac0f4499364ec899fcdfaae1f7acbda76"><div class="ttname"><a href="group___format.html#gac0f4499364ec899fcdfaae1f7acbda76">format</a></div><div class="ttdeci">constexpr string format(const string_view fmt, Args &amp;&amp;... args)</div><div class="ttdoc">格式化字符串</div><div class="ttdef"><b>定义</b> <a href="format_8hpp_source.html#l00792">format.hpp:792</a></div></div>
+<div class="ttc" id="agroup___reflection_html_ga580ac475bed401f28eca8e86b4de57c2"><div class="ttname"><a href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2">type_id_for</a></div><div class="ttdeci">constexpr type_id type_id_for() noexcept</div><div class="ttdoc">计算类型 T 的运行时期类型标识</div><div class="ttdef"><b>定义</b> <a href="reflect_2any_8hpp_source.html#l00060">reflect/any.hpp:60</a></div></div>
+<div class="ttc" id="agroup___s_q_l_html_ga5a1ff7dca56c7ae4b12aef04ede5017a"><div class="ttname"><a href="group___s_q_l.html#ga5a1ff7dca56c7ae4b12aef04ede5017a">sql_dialect</a></div><div class="ttdeci">sql_dialect</div><div class="ttdoc">数据库方言</div><div class="ttdef"><b>定义</b> <a href="sql__builder_8hpp_source.html#l00142">sql_builder.hpp:142</a></div></div>
+<div class="ttc" id="agroup___s_q_l_html_gga5a1ff7dca56c7ae4b12aef04ede5017aac942dc2a9f958acddc67e11472d3ca0b"><div class="ttname"><a href="group___s_q_l.html#gga5a1ff7dca56c7ae4b12aef04ede5017aac942dc2a9f958acddc67e11472d3ca0b">sql_dialect::GENERIC</a></div><div class="ttdeci">@ GENERIC</div><div class="ttdoc">ANSI SQL</div><div class="ttdef"><b>定义</b> <a href="sql__builder_8hpp_source.html#l00143">sql_builder.hpp:143</a></div></div>
+<div class="ttc" id="agroup___s_q_l_mapper_html_ga4ae4b359eeab58486b15997f87541791"><div class="ttname"><a href="group___s_q_l_mapper.html#ga4ae4b359eeab58486b15997f87541791">cpp_type_to_sql_type</a></div><div class="ttdeci">string cpp_type_to_sql_type(const reflect::type_id tid)</div><div class="ttdoc">将 C++ 类型 ID 映射为 SQL 类型名称</div><div class="ttdef"><b>定义</b> <a href="#l00043">sql_mapper.hpp:43</a></div></div>
+<div class="ttc" id="agroup___s_q_l_mapper_html_gabbea4ff42670147e8abc032de12c081b"><div class="ttname"><a href="group___s_q_l_mapper.html#gabbea4ff42670147e8abc032de12c081b">read_column_by_type</a></div><div class="ttdeci">reflect::meta_any read_column_by_type(const idb_tb_result &amp;row, const size_t col, const reflect::type_id tid)</div><div class="ttdoc">从结果行中按类型ID读取值到 meta_any</div><div class="ttdef"><b>定义</b> <a href="#l00100">sql_mapper.hpp:100</a></div></div>
+<div class="ttc" id="agroup___s_q_l_mapper_html_gac77e9362560fc03f864f72ffcb4a452c"><div class="ttname"><a href="group___s_q_l_mapper.html#gac77e9362560fc03f864f72ffcb4a452c">meta_any_to_sql_literal</a></div><div class="ttdeci">string meta_any_to_sql_literal(const reflect::meta_any &amp;val)</div><div class="ttdoc">将 meta_any 值转换为 SQL 字面量字符串</div><div class="ttdef"><b>定义</b> <a href="#l00126">sql_mapper.hpp:126</a></div></div>
+<div class="ttc" id="agroup___string_html_ga716ec02de55e9c908e34b54a01708895"><div class="ttname"><a href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></div><div class="ttdeci">basic_string&lt; char &gt; string</div><div class="ttdoc">字符字符串</div><div class="ttdef"><b>定义</b> <a href="string_8hpp_source.html#l00022">string.hpp:22</a></div></div>
+<div class="ttc" id="agroup___string_view_html_ga204ca715c2febee035464fa53dfc50c4"><div class="ttname"><a href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></div><div class="ttdeci">basic_string_view&lt; char &gt; string_view</div><div class="ttdoc">字符字符串视图</div><div class="ttdef"><b>定义</b> <a href="string__view_8hpp_source.html#l00022">string_view.hpp:22</a></div></div>
+<div class="ttc" id="agroup___type_erasure_functions_html_gaeed8bfb4510a906e04808100528dd9b8"><div class="ttname"><a href="group___type_erasure_functions.html#gaeed8bfb4510a906e04808100528dd9b8">data</a></div><div class="ttdeci">constexpr decltype(auto) data(Container &amp;cont) noexcept(noexcept(cont.data()))</div><div class="ttdoc">获取容器的底层数据指针</div><div class="ttdef"><b>定义</b> <a href="type__erase_8hpp_source.html#l00395">type_erase.hpp:395</a></div></div>
+<div class="ttc" id="areflect_8hpp_html"><div class="ttname"><a href="reflect_8hpp.html">reflect.hpp</a></div><div class="ttdoc">反射系统主入口</div></div>
+<div class="ttc" id="asql__builder_8hpp_html"><div class="ttname"><a href="sql__builder_8hpp.html">sql_builder.hpp</a></div><div class="ttdoc">SQL语句构建器</div></div>
+<div class="ttc" id="astring_8hpp_html"><div class="ttname"><a href="string_8hpp.html">string.hpp</a></div><div class="ttdoc">字符串类型别名和实用函数</div></div>
+<div class="ttc" id="astructfloat64_html"><div class="ttname"><a href="structfloat64.html">float64</a></div><div class="ttdoc">64位浮点数包装类</div><div class="ttdef"><b>定义</b> <a href="packages_8hpp_source.html#l00311">packages.hpp:311</a></div></div>
+<div class="ttc" id="astructidb__tb__result_html"><div class="ttname"><a href="structidb__tb__result.html">idb_tb_result</a></div><div class="ttdoc">关系型数据库结果集抽象基类</div><div class="ttdef"><b>定义</b> <a href="db__interface_8hpp_source.html#l00082">db_interface.hpp:82</a></div></div>
+<div class="ttc" id="astructidb__tb__result_html_a1c4d6dcd48871d296845f934c8218cf9"><div class="ttname"><a href="structidb__tb__result.html#a1c4d6dcd48871d296845f934c8218cf9">idb_tb_result::get_float64</a></div><div class="ttdeci">virtual float64_t get_float64(size_type n) const =0</div><div class="ttdoc">64位浮点数</div></div>
+<div class="ttc" id="astructidb__tb__result_html_a30c2b4161d1197de423889027ae5272d"><div class="ttname"><a href="structidb__tb__result.html#a30c2b4161d1197de423889027ae5272d">idb_tb_result::get_int32</a></div><div class="ttdeci">virtual int32_t get_int32(size_type n) const =0</div><div class="ttdoc">32位整数</div></div>
+<div class="ttc" id="astructidb__tb__result_html_a313b404f40b06095313fdad5a71c36d9"><div class="ttname"><a href="structidb__tb__result.html#a313b404f40b06095313fdad5a71c36d9">idb_tb_result::get_int64</a></div><div class="ttdeci">virtual int64_t get_int64(size_type n) const =0</div><div class="ttdoc">64位整数</div></div>
+<div class="ttc" id="astructidb__tb__result_html_a5ef4af6943ee76fadf05fc2989d56ebd"><div class="ttname"><a href="structidb__tb__result.html#a5ef4af6943ee76fadf05fc2989d56ebd">idb_tb_result::get_float32</a></div><div class="ttdeci">virtual float32_t get_float32(size_type n) const =0</div><div class="ttdoc">32位浮点数</div></div>
+<div class="ttc" id="astructidb__tb__result_html_acf9e2cdb951dfadb26394addafd314bd"><div class="ttname"><a href="structidb__tb__result.html#acf9e2cdb951dfadb26394addafd314bd">idb_tb_result::column_names</a></div><div class="ttdeci">virtual const vector&lt; string_view &gt; &amp; column_names() const =0</div><div class="ttdoc">获取所有列名</div></div>
+<div class="ttc" id="astructidb__tb__result_html_ad35689b23d23b40ed9fe12c425527c58"><div class="ttname"><a href="structidb__tb__result.html#ad35689b23d23b40ed9fe12c425527c58">idb_tb_result::get_bool</a></div><div class="ttdeci">virtual bool get_bool(size_type n) const =0</div><div class="ttdoc">布尔值</div></div>
+<div class="ttc" id="astructidb__tb__result_html_ae1bc5e789f06b1d381f8922dc0c5e9af"><div class="ttname"><a href="structidb__tb__result.html#ae1bc5e789f06b1d381f8922dc0c5e9af">idb_tb_result::get</a></div><div class="ttdeci">virtual string_view get(size_type n) const =0</div><div class="ttdoc">字符串</div></div>
+<div class="ttc" id="astructinteger32_html"><div class="ttname"><a href="structinteger32.html">integer32</a></div><div class="ttdoc">32位整数包装类</div><div class="ttdef"><b>定义</b> <a href="packages_8hpp_source.html#l00179">packages.hpp:179</a></div></div>
+<div class="ttc" id="astructinteger64_html"><div class="ttname"><a href="structinteger64.html">integer64</a></div><div class="ttdoc">64位整数包装类</div><div class="ttdef"><b>定义</b> <a href="packages_8hpp_source.html#l00187">packages.hpp:187</a></div></div>
+<div class="ttc" id="astructvalue__exception_html"><div class="ttname"><a href="structvalue__exception.html">value_exception</a></div><div class="ttdoc">变量处理异常</div><div class="ttdef"><b>定义</b> <a href="exception_8hpp_source.html#l00222">exception.hpp:222</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>include</b></li><li class="navelem"><b>NeForce</b></li><li class="navelem"><b>db</b></li><li class="navelem"><a href="sql__mapper_8hpp.html">sql_mapper.hpp</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

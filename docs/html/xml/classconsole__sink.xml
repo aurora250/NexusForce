@@ -25,15 +25,15 @@
 <parametername>event</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>日志事件</para>
+<para>日志事件 </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-使用设置的格式化器或默认格式将日志输出到控制台。 </para>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="78" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="99" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classconsole__sink_1a6e2aa384313eaaae970176e5b843688f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -49,14 +49,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="83" column="10"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="102" column="10"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
 <para>控制台输出目标 </para>
     </briefdescription>
     <detaileddescription>
-<para>将日志输出到标准控制台，支持颜色显示。 如果没有设置格式化器，使用默认格式。 </para>
+<para>将日志输出到标准控制台，按日志级别着色显示。 </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="1">
@@ -77,11 +77,66 @@
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="11">
+        <label>iarithmetic&lt; timestamp &gt;</label>
+        <link refid="structiarithmetic"/>
+      </node>
+      <node id="12">
+        <label>ibinary&lt; timestamp &gt;</label>
+        <link refid="structibinary"/>
+      </node>
+      <node id="8">
+        <label>icommon&lt; timestamp &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>icomparable&lt; timestamp &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="10">
+        <label>ihashable&lt; timestamp &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="5">
+        <label>iobject&lt; timestamp &gt;</label>
+        <link refid="structiobject"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>ipackage&lt; timestamp, int64_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>istringify&lt; timestamp &gt;</label>
+        <link refid="structistringify"/>
+      </node>
       <node id="2">
         <label>log_sink</label>
         <link refid="classlog__sink"/>
         <childnode refid="3" relation="usage">
           <edgelabel>formatter_</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>last_flush_</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>timestamp</label>
+        <link refid="classtimestamp"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
@@ -89,12 +144,16 @@
         <link refid="classunique__ptr"/>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="70" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" bodystart="70" bodyend="84"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="93" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" bodystart="93" bodyend="103"/>
     <listofallmembers>
       <member refid="classconsole__sink_1a6e2aa384313eaaae970176e5b843688f" prot="public" virt="virtual"><scope>console_sink</scope><name>flush</name></member>
+      <member refid="classlog__sink_1a89802d501ccca179cd38b5216a31d3c5" prot="protected" virt="non-virtual"><scope>console_sink</scope><name>flush_interval_ms_</name></member>
       <member refid="classlog__sink_1a4ef9a9a7bd511f678816d4654ed1f9b0" prot="protected" virt="non-virtual"><scope>console_sink</scope><name>formatter_</name></member>
+      <member refid="classlog__sink_1adbe06c9eb43eba4c8e946c5f635c13de" prot="protected" virt="non-virtual"><scope>console_sink</scope><name>last_flush_</name></member>
       <member refid="classconsole__sink_1aabfb3e9398b18135386b9deabbc62488" prot="public" virt="virtual"><scope>console_sink</scope><name>log</name></member>
+      <member refid="classlog__sink_1a7fab32f86c81ae3da1b9c1b8c0935f61" prot="public" virt="non-virtual"><scope>console_sink</scope><name>set_flush_interval</name></member>
       <member refid="classlog__sink_1a354978735401f7f31d9a4c9bcc97f398" prot="public" virt="non-virtual"><scope>console_sink</scope><name>set_formatter</name></member>
+      <member refid="classlog__sink_1afbe5a916c40d83cc131cf80f53d2dbf9" prot="public" virt="non-virtual"><scope>console_sink</scope><name>should_auto_flush</name></member>
       <member refid="classlog__sink_1a6d5597d2bc719df8f956f9d0a33ae584" prot="public" virt="virtual"><scope>console_sink</scope><name>~log_sink</name></member>
     </listofallmembers>
   </compounddef>

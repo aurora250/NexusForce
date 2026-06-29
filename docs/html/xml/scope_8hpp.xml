@@ -6,13 +6,18 @@
     <includes refid="invoke_8hpp" local="yes">NeForce/core/functional/invoke.hpp</includes>
     <includes refid="numeric__traits_8hpp" local="yes">NeForce/core/numeric/numeric_traits.hpp</includes>
     <includes refid="compressed__pair_8hpp" local="yes">NeForce/core/utility/compressed_pair.hpp</includes>
-    <includedby refid="_ne_force_8hpp" local="yes">NeForce.hpp</includedby>
     <incdepgraph>
       <node id="6">
         <label>NeForce/core/config/c++config.hpp</label>
         <link refid="c_09_09config_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>NeForce/core/config/version.hpp</label>
+        <link refid="version_8hpp_source"/>
       </node>
       <node id="2">
         <label>NeForce/core/exception/exception.hpp</label>
@@ -20,22 +25,22 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="13">
+      <node id="14">
         <label>NeForce/core/functional/hash.hpp</label>
         <link refid="hash_8hpp"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="8">
+      <node id="9">
         <label>NeForce/core/functional/invoke.hpp</label>
         <link refid="invoke_8hpp"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>NeForce/core/interface/icommon.hpp</label>
         <link refid="icommon_8hpp"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -44,7 +49,7 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>NeForce/core/numeric/numeric_traits.hpp</label>
         <link refid="numeric__traits_8hpp"/>
         <childnode refid="5" relation="include">
@@ -62,13 +67,13 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>NeForce/core/utility/compressed_pair.hpp</label>
         <link refid="compressed__pair_8hpp"/>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
       </node>
-      <node id="9">
+      <node id="10">
         <label>NeForce/core/utility/reference_wrapper.hpp</label>
         <link refid="reference__wrapper_8hpp"/>
         <childnode refid="4" relation="include">
@@ -79,29 +84,17 @@
         <link refid="scope_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
       <node id="7">
         <label>cassert</label>
       </node>
     </incdepgraph>
-    <invincdepgraph>
-      <node id="2">
-        <label>NeForce.hpp</label>
-        <link refid="_ne_force_8hpp"/>
-      </node>
-      <node id="1">
-        <label>scope.hpp</label>
-        <link refid="scope_8hpp"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-      </node>
-    </invincdepgraph>
     <innerclass refid="classscope__exit" prot="public">scope_exit</innerclass>
     <innerclass refid="classscope__fail" prot="public">scope_fail</innerclass>
     <innerclass refid="classscope__success" prot="public">scope_success</innerclass>
@@ -173,114 +166,129 @@
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__exit" kindref="compound">scope_exit</ref>&amp;<sp/>operator=(<ref refid="classscope__exit" kindref="compound">scope_exit</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"></highlight></codeline>
 <codeline lineno="102" refid="classscope__exit_1ac5af4b4aaf9b226075e61d68bd320752" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__exit_1ac5af4b4aaf9b226075e61d68bd320752" kindref="member">~scope_exit</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(func_pair_.value)<sp/>{</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>func_pair_.get_base()();</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"></highlight></codeline>
-<codeline lineno="113" refid="classscope__exit_1a6ee2b8da9acd91d23cf4377e89e2cad1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classscope__exit_1a6ee2b8da9acd91d23cf4377e89e2cad1" kindref="member">release</ref>()<sp/>noexcept<sp/>{<sp/>func_pair_.value<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
-<codeline lineno="114"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"></highlight></codeline>
-<codeline lineno="116"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="117"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func&gt;</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><ref refid="classscope__exit" kindref="compound">scope_exit</ref>(Func)<sp/>-&gt;<sp/><ref refid="classscope__exit" kindref="compound">scope_exit&lt;Func&gt;</ref>;</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(func_pair_.value)<sp/>{</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>func_pair_.get_base()();</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>NOLINTNEXTLINE(bugprone-empty-catch)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(...)<sp/>{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>ignore</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118" refid="classscope__exit_1a6ee2b8da9acd91d23cf4377e89e2cad1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classscope__exit_1a6ee2b8da9acd91d23cf4377e89e2cad1" kindref="member">release</ref>()<sp/>noexcept<sp/>{<sp/>func_pair_.value<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;<sp/>}</highlight></codeline>
+<codeline lineno="119"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="120"><highlight class="normal"></highlight></codeline>
-<codeline lineno="121"><highlight class="normal"></highlight></codeline>
-<codeline lineno="130"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func&gt;</highlight></codeline>
-<codeline lineno="131" refid="classscope__fail" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" kindref="member">scope_fail</ref><sp/>{</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structcompressed__pair" kindref="compound">compressed_pair&lt;Func, int&gt;</ref><sp/>func_pair_;<sp/></highlight></codeline>
-<codeline lineno="134"><highlight class="normal"></highlight></codeline>
-<codeline lineno="135"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>F,<sp/>enable_if_t&lt;!is_same_v&lt;remove_cvref_t&lt;F&gt;,<sp/>scope_fail&gt;<sp/>&amp;&amp;<sp/>is_constructible_v&lt;Func,<sp/>F&gt;<sp/>&amp;&amp;</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>!is_nothrow_constructible_v&lt;Func,<sp/>F&gt;,</highlight></codeline>
-<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
-<codeline lineno="146" refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" kindref="member">scope_fail</ref>(F&amp;&amp;<sp/>func)<sp/></highlight><highlight class="keyword">try</highlight><highlight class="normal"><sp/>:</highlight></codeline>
-<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>func_pair_(<ref refid="structexact__arg__construct__tag" kindref="compound">exact_arg_construct_tag</ref>{},<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward</ref>&lt;F&gt;(func),<sp/><ref refid="group___exception_handling_1ga85d57a425c36f9ca490ce7e62793bef1" kindref="member">uncaught_exceptions</ref>())<sp/>{</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(...)<sp/>{</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>func();</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="151"><highlight class="normal"></highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>F,<sp/>enable_if_t&lt;!is_same_v&lt;remove_cvref_t&lt;F&gt;,<sp/>scope_fail&gt;<sp/>&amp;&amp;<sp/>is_constructible_v&lt;Func,<sp/>F&gt;<sp/>&amp;&amp;</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>is_nothrow_constructible_v&lt;Func,<sp/>F&gt;,</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
-<codeline lineno="160" refid="classscope__fail_1a4363a9e9f163a962fbcfdeb9b8387b8e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classscope__fail_1a4363a9e9f163a962fbcfdeb9b8387b8e" kindref="member">scope_fail</ref>(F&amp;&amp;<sp/>func)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/>func_pair_(<ref refid="structexact__arg__construct__tag" kindref="compound">exact_arg_construct_tag</ref>{},<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;F&gt;</ref>(func),<sp/><ref refid="group___exception_handling_1ga85d57a425c36f9ca490ce7e62793bef1" kindref="member">uncaught_exceptions</ref>())<sp/>{}</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"></highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" kindref="member">scope_fail</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" kindref="member">scope_fail</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" kindref="member">scope_fail</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" kindref="member">scope_fail</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"></highlight></codeline>
-<codeline lineno="170" refid="classscope__fail_1a1778abb10d01a4053a4c28f60facd9d7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__fail_1a1778abb10d01a4053a4c28f60facd9d7" kindref="member">scope_fail</ref>(<ref refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" kindref="member">scope_fail</ref>&amp;&amp;<sp/>rhs)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/>func_pair_(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(rhs.func_pair_))<sp/>{</highlight></codeline>
-<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rhs.release();</highlight></codeline>
-<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="174"><highlight class="normal"></highlight></codeline>
-<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__fail" kindref="compound">scope_fail</ref>&amp;<sp/>operator=(<ref refid="classscope__fail" kindref="compound">scope_fail</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="176"><highlight class="normal"></highlight></codeline>
-<codeline lineno="183" refid="classscope__fail_1a58fbdf72f42b141800d07ff5f328880c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__fail_1a58fbdf72f42b141800d07ff5f328880c" kindref="member">~scope_fail</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
-<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___exception_handling_1ga85d57a425c36f9ca490ce7e62793bef1" kindref="member">uncaught_exceptions</ref>()<sp/>&gt;<sp/>func_pair_.value)<sp/>{</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>func_pair_.get_base()();</highlight></codeline>
-<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="188"><highlight class="normal"></highlight></codeline>
-<codeline lineno="194" refid="classscope__fail_1ae3fff4410ea73092440aa346395df5ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classscope__fail_1ae3fff4410ea73092440aa346395df5ec" kindref="member">release</ref>()<sp/>noexcept<sp/>{<sp/>func_pair_.value<sp/>=<sp/><ref refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" kindref="member">numeric_traits&lt;int&gt;::max</ref>();<sp/>}</highlight></codeline>
-<codeline lineno="195"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="196"><highlight class="normal"></highlight></codeline>
-<codeline lineno="197"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="198"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func&gt;</highlight></codeline>
-<codeline lineno="199"><highlight class="normal"><ref refid="classscope__fail" kindref="compound">scope_fail</ref>(Func)<sp/>-&gt;<sp/><ref refid="classscope__fail" kindref="compound">scope_fail&lt;Func&gt;</ref>;</highlight></codeline>
-<codeline lineno="200"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="201"><highlight class="normal"></highlight></codeline>
-<codeline lineno="202"><highlight class="normal"></highlight></codeline>
-<codeline lineno="213"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func&gt;</highlight></codeline>
-<codeline lineno="214" refid="classscope__success" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" kindref="member">scope_success</ref><sp/>{</highlight></codeline>
-<codeline lineno="215"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structcompressed__pair" kindref="compound">compressed_pair&lt;Func, int&gt;</ref><sp/>func_pair_;<sp/></highlight></codeline>
-<codeline lineno="217"><highlight class="normal"></highlight></codeline>
-<codeline lineno="218"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>F,<sp/>enable_if_t&lt;!is_same_v&lt;remove_cvref_t&lt;F&gt;,<sp/>scope_success&gt;<sp/>&amp;&amp;<sp/>is_constructible_v&lt;Func,<sp/>F&gt;<sp/>&amp;&amp;</highlight></codeline>
-<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>!is_nothrow_constructible_v&lt;Func,<sp/>F&gt;,</highlight></codeline>
-<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
-<codeline lineno="227" refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" kindref="member">scope_success</ref>(F&amp;&amp;<sp/>func)<sp/></highlight><highlight class="keyword">try</highlight><highlight class="normal"><sp/>:</highlight></codeline>
-<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/>func_pair_(<ref refid="structexact__arg__construct__tag" kindref="compound">exact_arg_construct_tag</ref>{},<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward</ref>&lt;F&gt;(func),<sp/><ref refid="group___exception_handling_1ga85d57a425c36f9ca490ce7e62793bef1" kindref="member">uncaught_exceptions</ref>())<sp/>{</highlight></codeline>
-<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(...)<sp/>{</highlight></codeline>
-<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>func();</highlight></codeline>
-<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="232"><highlight class="normal"></highlight></codeline>
-<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>F,<sp/>enable_if_t&lt;!is_same_v&lt;remove_cvref_t&lt;F&gt;,<sp/>scope_success&gt;<sp/>&amp;&amp;<sp/>is_constructible_v&lt;Func,<sp/>F&gt;<sp/>&amp;&amp;</highlight></codeline>
-<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>is_nothrow_constructible_v&lt;Func,<sp/>F&gt;,</highlight></codeline>
-<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
-<codeline lineno="241" refid="classscope__success_1a9b5d859993568166f19388c3fafc5100" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classscope__success_1a9b5d859993568166f19388c3fafc5100" kindref="member">scope_success</ref>(F&amp;&amp;<sp/>func)<sp/>noexcept<sp/>:</highlight></codeline>
-<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/>func_pair_(<ref refid="structexact__arg__construct__tag" kindref="compound">exact_arg_construct_tag</ref>{},<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;F&gt;</ref>(func),<sp/><ref refid="group___exception_handling_1ga85d57a425c36f9ca490ce7e62793bef1" kindref="member">uncaught_exceptions</ref>())<sp/>{}</highlight></codeline>
-<codeline lineno="243"><highlight class="normal"></highlight></codeline>
-<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" kindref="member">scope_success</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" kindref="member">scope_success</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" kindref="member">scope_success</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" kindref="member">scope_success</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="246"><highlight class="normal"></highlight></codeline>
-<codeline lineno="251" refid="classscope__success_1ad8e5cfea5c3d816a051aa600a994c6a9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__success_1ad8e5cfea5c3d816a051aa600a994c6a9" kindref="member">scope_success</ref>(<ref refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" kindref="member">scope_success</ref>&amp;&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(<ref refid="group___type_special_member_function_checks_1gad26f59ba1b8a873f9d8374f72a4002c4" kindref="member">is_nothrow_move_assignable_v&lt;Func&gt;</ref>)<sp/>:</highlight></codeline>
-<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/>func_pair_(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(rhs.func_pair_))<sp/>{</highlight></codeline>
-<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rhs.release();</highlight></codeline>
-<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="255"><highlight class="normal"></highlight></codeline>
-<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__success" kindref="compound">scope_success</ref>&amp;<sp/>operator=(<ref refid="classscope__success" kindref="compound">scope_success</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="257"><highlight class="normal"></highlight></codeline>
-<codeline lineno="264" refid="classscope__success_1a310ca7b0aef05c30c2a102a6f81a63ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__success_1a310ca7b0aef05c30c2a102a6f81a63ec" kindref="member">~scope_success</ref>()<sp/>noexcept(<ref refid="group___invoke_function_1gafdceccc521c88df3849b9e1acf2b153e" kindref="member">is_nothrow_invocable_v</ref>&lt;Func&gt;)<sp/>{</highlight></codeline>
-<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___exception_handling_1ga85d57a425c36f9ca490ce7e62793bef1" kindref="member">uncaught_exceptions</ref>()<sp/>&lt;=<sp/>func_pair_.value)<sp/>{</highlight></codeline>
-<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>func_pair_.get_base()();</highlight></codeline>
-<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="269"><highlight class="normal"></highlight></codeline>
-<codeline lineno="275" refid="classscope__success_1a30eaf95fca08b7ed80c927ee16b3a866" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classscope__success_1a30eaf95fca08b7ed80c927ee16b3a866" kindref="member">release</ref>()<sp/>noexcept<sp/>{<sp/>func_pair_.value<sp/>=<sp/>-<ref refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" kindref="member">numeric_traits&lt;int&gt;::max</ref>();<sp/>}</highlight></codeline>
-<codeline lineno="276"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="277"><highlight class="normal"></highlight></codeline>
-<codeline lineno="278"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="279"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func&gt;</highlight></codeline>
-<codeline lineno="280"><highlight class="normal"><ref refid="classscope__success" kindref="compound">scope_success</ref>(Func)<sp/>-&gt;<sp/><ref refid="classscope__success" kindref="compound">scope_success&lt;Func&gt;</ref>;</highlight></codeline>
-<codeline lineno="281"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="282"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>ScopeGuard</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func&gt;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><ref refid="classscope__exit" kindref="compound">scope_exit</ref>(Func)<sp/>-&gt;<sp/><ref refid="classscope__exit" kindref="compound">scope_exit&lt;Func&gt;</ref>;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func&gt;</highlight></codeline>
+<codeline lineno="136" refid="classscope__fail" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" kindref="member">scope_fail</ref><sp/>{</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structcompressed__pair" kindref="compound">compressed_pair&lt;Func, int&gt;</ref><sp/>func_pair_;<sp/></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>F,<sp/>enable_if_t&lt;!is_same_v&lt;remove_cvref_t&lt;F&gt;,<sp/>scope_fail&gt;<sp/>&amp;&amp;<sp/>is_constructible_v&lt;Func,<sp/>F&gt;<sp/>&amp;&amp;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>!is_nothrow_constructible_v&lt;Func,<sp/>F&gt;,</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="151" refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" kindref="member">scope_fail</ref>(F&amp;&amp;<sp/>func)<sp/></highlight><highlight class="keyword">try</highlight><highlight class="normal"><sp/>:</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>func_pair_(<ref refid="structexact__arg__construct__tag" kindref="compound">exact_arg_construct_tag</ref>{},<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward</ref>&lt;F&gt;(func),<sp/><ref refid="group___exception_handling_1ga85d57a425c36f9ca490ce7e62793bef1" kindref="member">uncaught_exceptions</ref>())<sp/>{</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(...)<sp/>{</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>func();</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>F,<sp/>enable_if_t&lt;!is_same_v&lt;remove_cvref_t&lt;F&gt;,<sp/>scope_fail&gt;<sp/>&amp;&amp;<sp/>is_constructible_v&lt;Func,<sp/>F&gt;<sp/>&amp;&amp;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>is_nothrow_constructible_v&lt;Func,<sp/>F&gt;,</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="165" refid="classscope__fail_1a4363a9e9f163a962fbcfdeb9b8387b8e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classscope__fail_1a4363a9e9f163a962fbcfdeb9b8387b8e" kindref="member">scope_fail</ref>(F&amp;&amp;<sp/>func)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/>func_pair_(<ref refid="structexact__arg__construct__tag" kindref="compound">exact_arg_construct_tag</ref>{},<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;F&gt;</ref>(func),<sp/><ref refid="group___exception_handling_1ga85d57a425c36f9ca490ce7e62793bef1" kindref="member">uncaught_exceptions</ref>())<sp/>{}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" kindref="member">scope_fail</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" kindref="member">scope_fail</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" kindref="member">scope_fail</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" kindref="member">scope_fail</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175" refid="classscope__fail_1a1778abb10d01a4053a4c28f60facd9d7" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__fail_1a1778abb10d01a4053a4c28f60facd9d7" kindref="member">scope_fail</ref>(<ref refid="classscope__fail_1af20eb2db69364e0f00abaff40d95eeec" kindref="member">scope_fail</ref>&amp;&amp;<sp/>rhs)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>func_pair_(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(rhs.func_pair_))<sp/>{</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rhs.release();</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__fail" kindref="compound">scope_fail</ref>&amp;<sp/>operator=(<ref refid="classscope__fail" kindref="compound">scope_fail</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="188" refid="classscope__fail_1a58fbdf72f42b141800d07ff5f328880c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__fail_1a58fbdf72f42b141800d07ff5f328880c" kindref="member">~scope_fail</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___exception_handling_1ga85d57a425c36f9ca490ce7e62793bef1" kindref="member">uncaught_exceptions</ref>()<sp/>&gt;<sp/>func_pair_.value)<sp/>{</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>func_pair_.get_base()();</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>NOLINTNEXTLINE(bugprone-empty-catch)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(...)<sp/>{</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>ignore</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="204" refid="classscope__fail_1ae3fff4410ea73092440aa346395df5ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classscope__fail_1ae3fff4410ea73092440aa346395df5ec" kindref="member">release</ref>()<sp/>noexcept<sp/>{<sp/>func_pair_.value<sp/>=<sp/><ref refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" kindref="member">numeric_traits&lt;int&gt;::max</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="205"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func&gt;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><ref refid="classscope__fail" kindref="compound">scope_fail</ref>(Func)<sp/>-&gt;<sp/><ref refid="classscope__fail" kindref="compound">scope_fail&lt;Func&gt;</ref>;</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func&gt;</highlight></codeline>
+<codeline lineno="224" refid="classscope__success" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" kindref="member">scope_success</ref><sp/>{</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structcompressed__pair" kindref="compound">compressed_pair&lt;Func, int&gt;</ref><sp/>func_pair_;<sp/></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>F,<sp/>enable_if_t&lt;!is_same_v&lt;remove_cvref_t&lt;F&gt;,<sp/>scope_success&gt;<sp/>&amp;&amp;<sp/>is_constructible_v&lt;Func,<sp/>F&gt;<sp/>&amp;&amp;</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>!is_nothrow_constructible_v&lt;Func,<sp/>F&gt;,</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="237" refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" kindref="member">scope_success</ref>(F&amp;&amp;<sp/>func)<sp/></highlight><highlight class="keyword">try</highlight><highlight class="normal"><sp/>:</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/>func_pair_(<ref refid="structexact__arg__construct__tag" kindref="compound">exact_arg_construct_tag</ref>{},<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward</ref>&lt;F&gt;(func),<sp/><ref refid="group___exception_handling_1ga85d57a425c36f9ca490ce7e62793bef1" kindref="member">uncaught_exceptions</ref>())<sp/>{</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(...)<sp/>{</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>func();</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>F,<sp/>enable_if_t&lt;!is_same_v&lt;remove_cvref_t&lt;F&gt;,<sp/>scope_success&gt;<sp/>&amp;&amp;<sp/>is_constructible_v&lt;Func,<sp/>F&gt;<sp/>&amp;&amp;</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>is_nothrow_constructible_v&lt;Func,<sp/>F&gt;,</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>
+<codeline lineno="251" refid="classscope__success_1a9b5d859993568166f19388c3fafc5100" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classscope__success_1a9b5d859993568166f19388c3fafc5100" kindref="member">scope_success</ref>(F&amp;&amp;<sp/>func)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/>func_pair_(<ref refid="structexact__arg__construct__tag" kindref="compound">exact_arg_construct_tag</ref>{},<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;F&gt;</ref>(func),<sp/><ref refid="group___exception_handling_1ga85d57a425c36f9ca490ce7e62793bef1" kindref="member">uncaught_exceptions</ref>())<sp/>{}</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" kindref="member">scope_success</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" kindref="member">scope_success</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" kindref="member">scope_success</ref>&amp;<sp/>operator=(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" kindref="member">scope_success</ref>&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"></highlight></codeline>
+<codeline lineno="261" refid="classscope__success_1ad8e5cfea5c3d816a051aa600a994c6a9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__success_1ad8e5cfea5c3d816a051aa600a994c6a9" kindref="member">scope_success</ref>(<ref refid="classscope__success_1a7346c747f5329506a9c40dc4859af9f2" kindref="member">scope_success</ref>&amp;&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">(<ref refid="group___type_special_member_function_checks_1gad26f59ba1b8a873f9d8374f72a4002c4" kindref="member">is_nothrow_move_assignable_v&lt;Func&gt;</ref>)<sp/>:</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/>func_pair_(_NEFORCE<sp/><ref refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" kindref="member">move</ref>(rhs.func_pair_))<sp/>{</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>rhs.release();</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"></highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__success" kindref="compound">scope_success</ref>&amp;<sp/>operator=(<ref refid="classscope__success" kindref="compound">scope_success</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"></highlight></codeline>
+<codeline lineno="274" refid="classscope__success_1a9b491f1271cf501a287b89876d92490b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classscope__success_1a9b491f1271cf501a287b89876d92490b" kindref="member">~scope_success</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="group___exception_handling_1ga85d57a425c36f9ca490ce7e62793bef1" kindref="member">uncaught_exceptions</ref>()<sp/>&lt;=<sp/>func_pair_.value)<sp/>{</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>func_pair_.get_base()();</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>NOLINTNEXTLINE(bugprone-empty-catch)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(...)<sp/>{</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>ignore</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="284"><highlight class="normal"></highlight></codeline>
-<codeline lineno="285"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
-<codeline lineno="286"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_UTILITY_SCOPE_HPP__</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="290" refid="classscope__success_1a30eaf95fca08b7ed80c927ee16b3a866" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classscope__success_1a30eaf95fca08b7ed80c927ee16b3a866" kindref="member">release</ref>()<sp/>noexcept<sp/>{<sp/>func_pair_.value<sp/>=<sp/>-<ref refid="classnumeric__traits_1a43c99621a2fec69a3fb258505fcf7ce9" kindref="member">numeric_traits&lt;int&gt;::max</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="291"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"></highlight></codeline>
+<codeline lineno="293"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>NEFORCE_STANDARD_17</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="294"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Func&gt;</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><ref refid="classscope__success" kindref="compound">scope_success</ref>(Func)<sp/>-&gt;<sp/><ref refid="classscope__success" kindref="compound">scope_success&lt;Func&gt;</ref>;</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>ScopeGuard</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="299"><highlight class="normal"></highlight></codeline>
+<codeline lineno="300"><highlight class="normal">NEFORCE_END_NAMESPACE__</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>NEFORCE_CORE_UTILITY_SCOPE_HPP__</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="D:/Workspace/NexusForce/include/NeForce/core/utility/scope.hpp"/>
   </compounddef>

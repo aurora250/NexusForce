@@ -1,0 +1,326 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classsyslog__sink" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>syslog_sink</compoundname>
+    <basecompoundref refid="classlog__sink" prot="public" virt="non-virtual">log_sink</basecompoundref>
+    <includes refid="log__sink_8hpp" local="no">log_sink.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classsyslog__sink_1a5c28d56b3223dff7eeb8baa7acc4a7ac" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string syslog_sink::ident_</definition>
+        <argsstring></argsstring>
+        <name>ident_</name>
+        <qualifiedname>syslog_sink::ident_</qualifiedname>
+        <briefdescription>
+<para>syslog ident 字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="143" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsyslog__sink_1aefa973a5bd193a2897c798401a998633" prot="private" static="no" mutable="no">
+        <type><ref refid="group___logging_1ga6936a6d4f4329a9a11b45ea194650b43" kindref="member">syslog_facility</ref></type>
+        <definition>syslog_facility syslog_sink::facility_</definition>
+        <argsstring></argsstring>
+        <name>facility_</name>
+        <qualifiedname>syslog_sink::facility_</qualifiedname>
+        <briefdescription>
+<para>syslog 设施类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="144" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classsyslog__sink_1a0dc8c2b73be2fdd55243b96e84ee5874" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool syslog_sink::opened_</definition>
+        <argsstring></argsstring>
+        <name>opened_</name>
+        <qualifiedname>syslog_sink::opened_</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+<para>是否已调用 openlog() </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="145" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" bodystart="145" bodyend="145"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classsyslog__sink_1a9f7333ac4aa7b24d62f211e78e07e68d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void syslog_sink::ensure_open</definition>
+        <argsstring>()</argsstring>
+        <name>ensure_open</name>
+        <qualifiedname>syslog_sink::ensure_open</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="147" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsyslog__sink_1a8ce020d3d29bcbd34c279b2f655bd745" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>syslog_sink::syslog_sink</definition>
+        <argsstring>(string ident=&quot;&quot;, syslog_facility facility=syslog_facility::LOG_USER)</argsstring>
+        <name>syslog_sink</name>
+        <qualifiedname>syslog_sink::syslog_sink</qualifiedname>
+        <param>
+          <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+          <declname>ident</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type><ref refid="group___logging_1ga6936a6d4f4329a9a11b45ea194650b43" kindref="member">syslog_facility</ref></type>
+          <declname>facility</declname>
+          <defval><ref refid="group___logging_1gga6936a6d4f4329a9a11b45ea194650b43a36489c5bd64137a0a97d8e0bbd19d351" kindref="member">syslog_facility::LOG_USER</ref></defval>
+        </param>
+        <briefdescription>
+<para>构造 syslog 输出目标 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ident</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日志标识字符串，对应 syslog 的 ident 参数 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>facility</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>syslog 设施，默认为 LOG_USER </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="155" column="14"/>
+        <references refid="group___logging_1gga6936a6d4f4329a9a11b45ea194650b43a36489c5bd64137a0a97d8e0bbd19d351" compoundref="log__sink_8hpp" startline="131">LOG_USER</references>
+        <references refid="classsyslog__sink_1a8ce020d3d29bcbd34c279b2f655bd745">syslog_sink</references>
+        <referencedby refid="classsyslog__sink_1a8ce020d3d29bcbd34c279b2f655bd745">syslog_sink</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsyslog__sink_1ad5c9fcdc97b05d4f00ad2577cb95ac9c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>syslog_sink::~syslog_sink</definition>
+        <argsstring>() override</argsstring>
+        <name>~syslog_sink</name>
+        <qualifiedname>syslog_sink::~syslog_sink</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="157" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classsyslog__sink_1aa45a748ca0dc2dedb88262989e98bf47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>syslog_sink::syslog_sink</definition>
+        <argsstring>(const syslog_sink &amp;)=delete</argsstring>
+        <name>syslog_sink</name>
+        <qualifiedname>syslog_sink::syslog_sink</qualifiedname>
+        <param>
+          <type>const <ref refid="classsyslog__sink" kindref="compound">syslog_sink</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="159" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classsyslog__sink_1ac68fc00e056f74d4b06feceb840ed364" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classsyslog__sink" kindref="compound">syslog_sink</ref> &amp;</type>
+        <definition>syslog_sink &amp; syslog_sink::operator=</definition>
+        <argsstring>(const syslog_sink &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>syslog_sink::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classsyslog__sink" kindref="compound">syslog_sink</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="160" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classsyslog__sink_1a9e8a533f90b698d80b78d2aee0960909" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void syslog_sink::log</definition>
+        <argsstring>(const log_event &amp;event) override</argsstring>
+        <name>log</name>
+        <qualifiedname>syslog_sink::log</qualifiedname>
+        <reimplements refid="classlog__sink_1a23426545dd75dd433f3d5b7b0407faaf">log</reimplements>
+        <param>
+          <type>const <ref refid="structlog__event" kindref="compound">log_event</ref> &amp;</type>
+          <declname>event</declname>
+        </param>
+        <briefdescription>
+<para>将日志事件写入 syslog </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>event</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>日志事件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="166" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classsyslog__sink_1ad29345f21bd6a464cc1a8906bde28ed1" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void syslog_sink::flush</definition>
+        <argsstring>() override</argsstring>
+        <name>flush</name>
+        <qualifiedname>syslog_sink::flush</qualifiedname>
+        <reimplements refid="classlog__sink_1adb79b71ac6d34d43d31a708d9c46f599">flush</reimplements>
+        <briefdescription>
+<para>syslog 每次调用立即写入，无需显式刷新 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="169" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>系统日志输出目标 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>将日志写入 Linux syslog。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>log_sink</label>
+        <link refid="classlog__sink"/>
+      </node>
+      <node id="1">
+        <label>syslog_sink</label>
+        <link refid="classsyslog__sink"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="11">
+        <label>iarithmetic&lt; timestamp &gt;</label>
+        <link refid="structiarithmetic"/>
+      </node>
+      <node id="12">
+        <label>ibinary&lt; timestamp &gt;</label>
+        <link refid="structibinary"/>
+      </node>
+      <node id="8">
+        <label>icommon&lt; timestamp &gt;</label>
+        <link refid="structicommon"/>
+        <childnode refid="9" relation="public-inheritance">
+        </childnode>
+        <childnode refid="10" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>icomparable&lt; timestamp &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="10">
+        <label>ihashable&lt; timestamp &gt;</label>
+        <link refid="structihashable"/>
+      </node>
+      <node id="5">
+        <label>iobject&lt; timestamp &gt;</label>
+        <link refid="structiobject"/>
+        <childnode refid="6" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>ipackage&lt; timestamp, int64_t &gt;</label>
+        <link refid="structipackage"/>
+        <childnode refid="8" relation="public-inheritance">
+        </childnode>
+        <childnode refid="11" relation="public-inheritance">
+        </childnode>
+        <childnode refid="12" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>istringify&lt; timestamp &gt;</label>
+        <link refid="structistringify"/>
+      </node>
+      <node id="2">
+        <label>log_sink</label>
+        <link refid="classlog__sink"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>formatter_</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>last_flush_</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>syslog_sink</label>
+        <link refid="classsyslog__sink"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>timestamp</label>
+        <link refid="classtimestamp"/>
+        <childnode refid="5" relation="public-inheritance">
+        </childnode>
+        <childnode refid="7" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>unique_ptr&lt; log_formatter &gt;</label>
+        <link refid="classunique__ptr"/>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" line="141" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/logging/log_sink.hpp" bodystart="141" bodyend="170"/>
+    <listofallmembers>
+      <member refid="classsyslog__sink_1a9f7333ac4aa7b24d62f211e78e07e68d" prot="private" virt="non-virtual"><scope>syslog_sink</scope><name>ensure_open</name></member>
+      <member refid="classsyslog__sink_1aefa973a5bd193a2897c798401a998633" prot="private" virt="non-virtual"><scope>syslog_sink</scope><name>facility_</name></member>
+      <member refid="classsyslog__sink_1ad29345f21bd6a464cc1a8906bde28ed1" prot="public" virt="virtual"><scope>syslog_sink</scope><name>flush</name></member>
+      <member refid="classlog__sink_1a89802d501ccca179cd38b5216a31d3c5" prot="protected" virt="non-virtual"><scope>syslog_sink</scope><name>flush_interval_ms_</name></member>
+      <member refid="classlog__sink_1a4ef9a9a7bd511f678816d4654ed1f9b0" prot="protected" virt="non-virtual"><scope>syslog_sink</scope><name>formatter_</name></member>
+      <member refid="classsyslog__sink_1a5c28d56b3223dff7eeb8baa7acc4a7ac" prot="private" virt="non-virtual"><scope>syslog_sink</scope><name>ident_</name></member>
+      <member refid="classlog__sink_1adbe06c9eb43eba4c8e946c5f635c13de" prot="protected" virt="non-virtual"><scope>syslog_sink</scope><name>last_flush_</name></member>
+      <member refid="classsyslog__sink_1a9e8a533f90b698d80b78d2aee0960909" prot="public" virt="virtual"><scope>syslog_sink</scope><name>log</name></member>
+      <member refid="classsyslog__sink_1a0dc8c2b73be2fdd55243b96e84ee5874" prot="private" virt="non-virtual"><scope>syslog_sink</scope><name>opened_</name></member>
+      <member refid="classsyslog__sink_1ac68fc00e056f74d4b06feceb840ed364" prot="public" virt="non-virtual"><scope>syslog_sink</scope><name>operator=</name></member>
+      <member refid="classlog__sink_1a7fab32f86c81ae3da1b9c1b8c0935f61" prot="public" virt="non-virtual"><scope>syslog_sink</scope><name>set_flush_interval</name></member>
+      <member refid="classlog__sink_1a354978735401f7f31d9a4c9bcc97f398" prot="public" virt="non-virtual"><scope>syslog_sink</scope><name>set_formatter</name></member>
+      <member refid="classlog__sink_1afbe5a916c40d83cc131cf80f53d2dbf9" prot="public" virt="non-virtual"><scope>syslog_sink</scope><name>should_auto_flush</name></member>
+      <member refid="classsyslog__sink_1a8ce020d3d29bcbd34c279b2f655bd745" prot="public" virt="non-virtual"><scope>syslog_sink</scope><name>syslog_sink</name></member>
+      <member refid="classsyslog__sink_1aa45a748ca0dc2dedb88262989e98bf47" prot="public" virt="non-virtual"><scope>syslog_sink</scope><name>syslog_sink</name></member>
+      <member refid="classlog__sink_1a6d5597d2bc719df8f956f9d0a33ae584" prot="public" virt="virtual"><scope>syslog_sink</scope><name>~log_sink</name></member>
+      <member refid="classsyslog__sink_1ad5c9fcdc97b05d4f00ad2577cb95ac9c" prot="public" virt="non-virtual"><scope>syslog_sink</scope><name>~syslog_sink</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

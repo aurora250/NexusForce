@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="structgrpc__message" kind="struct" language="C++" prot="public">
+    <compoundname>grpc_message</compoundname>
+    <includes refid="grpc_8hpp" local="no">grpc.hpp</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structgrpc__message_1a5ed6be08eff5bbf91b5261adb778cb11" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool grpc_message::compressed</definition>
+        <argsstring></argsstring>
+        <name>compressed</name>
+        <qualifiedname>grpc_message::compressed</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="89" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" bodystart="89" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="variable" id="structgrpc__message_1a9c6ba332737322fed783db42e4f2b9bf" prot="public" static="no" mutable="no">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>byte_vector grpc_message::payload</definition>
+        <argsstring></argsstring>
+        <name>payload</name>
+        <qualifiedname>grpc_message::payload</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="90" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structgrpc__message_1a35d7cf837f5b00d263c08e167b3d3b47" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>grpc_message::grpc_message</definition>
+        <argsstring>()=default</argsstring>
+        <name>grpc_message</name>
+        <qualifiedname>grpc_message::grpc_message</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="92" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structgrpc__message_1a6c81b99e3921e089a44c4f56dfdee366" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>grpc_message::grpc_message</definition>
+        <argsstring>(byte_vector data, bool comp=false)</argsstring>
+        <name>grpc_message</name>
+        <qualifiedname>grpc_message::grpc_message</qualifiedname>
+        <param>
+          <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>comp</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="93" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" bodystart="93" bodyend="95"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>gRPC 消息帧 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>gRPC消息格式（RFC标准）： [1 byte: compressed-flag (0=uncompressed, 1=compressed)] [4 bytes: message-length (big-endian)] [message-length bytes: payload] </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>grpc_message</label>
+        <link refid="structgrpc__message"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>payload</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icollector&lt; T &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="2">
+        <label>vector&lt; byte_t &gt;</label>
+        <link refid="classvector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="88" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" bodystart="88" bodyend="96"/>
+    <listofallmembers>
+      <member refid="structgrpc__message_1a5ed6be08eff5bbf91b5261adb778cb11" prot="public" virt="non-virtual"><scope>grpc_message</scope><name>compressed</name></member>
+      <member refid="structgrpc__message_1a35d7cf837f5b00d263c08e167b3d3b47" prot="public" virt="non-virtual"><scope>grpc_message</scope><name>grpc_message</name></member>
+      <member refid="structgrpc__message_1a6c81b99e3921e089a44c4f56dfdee366" prot="public" virt="non-virtual"><scope>grpc_message</scope><name>grpc_message</name></member>
+      <member refid="structgrpc__message_1a9c6ba332737322fed783db42e4f2b9bf" prot="public" virt="non-virtual"><scope>grpc_message</scope><name>payload</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

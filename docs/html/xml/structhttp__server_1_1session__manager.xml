@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
-  <compounddef id="structhttp__server_1_1session__manager" kind="struct" language="C++" prot="private">
+  <compounddef id="structhttp__server_1_1session__manager" kind="struct" language="C++" prot="public">
     <compoundname>http_server::session_manager</compoundname>
+    <includes refid="http__server_8hpp" local="no">http_server.hpp</includes>
     <sectiondef kind="public-attrib">
       <memberdef kind="variable" id="structhttp__server_1_1session__manager_1a990ac6d19ca7d7fa5b5aed63e0261e8c" prot="public" static="no" mutable="no">
         <type><ref refid="classunordered__map" kindref="compound">unordered_map</ref>&lt; <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>, <ref refid="structhttp__session" kindref="compound">http_session</ref> &gt;</type>
@@ -16,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="80" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="80" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="82" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structhttp__server_1_1session__manager_1af89775ec4991ee5acd1a254d5338af84" prot="public" static="no" mutable="yes">
         <type><ref refid="classmutex" kindref="compound">mutex</ref></type>
@@ -31,7 +32,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="81" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="81" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="83" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structhttp__server_1_1session__manager_1a14628809a464eeb6aad8fce5448685bc" prot="public" static="no" mutable="no">
+        <type><ref refid="classcondition__variable" kindref="compound">condition_variable</ref></type>
+        <definition>condition_variable http_server::session_manager::cv_</definition>
+        <argsstring></argsstring>
+        <name>cv_</name>
+        <qualifiedname>http_server::session_manager::cv_</qualifiedname>
+        <briefdescription>
+<para>条件变量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="84" column="28" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="84" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structhttp__server_1_1session__manager_1a9abd70872aeeeb68f5f3856b3cbb34db" prot="public" static="no" mutable="no">
         <type><ref refid="structatomic" kindref="compound">atomic</ref>&lt; bool &gt;</type>
@@ -46,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="82" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="82" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="85" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="85" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structhttp__server_1_1session__manager_1af2b536c6c15e0c5198829cc80a562267" prot="public" static="no" mutable="no">
         <type><ref refid="classthread" kindref="compound">thread</ref></type>
@@ -61,22 +77,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="83" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="83" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structhttp__server_1_1session__manager_1a14f3b0eb4fcfe5e0343929287e9ee6da" prot="public" static="no" mutable="no">
-        <type><ref refid="classrandom__mt" kindref="compound">random_mt</ref></type>
-        <definition>random_mt http_server::session_manager::rand_</definition>
-        <argsstring></argsstring>
-        <name>rand_</name>
-        <qualifiedname>http_server::session_manager::rand_</qualifiedname>
-        <briefdescription>
-<para>随机数生成器 </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="84" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="84" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="86" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="structhttp__server_1_1session__manager_1a1da7fffba3a013457c12faefc5eb2558" prot="public" static="no" mutable="no">
         <type><ref refid="group___duration_1gafce1f041e55ef5a119744bb53b2aabd9" kindref="member">seconds</ref></type>
@@ -92,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="85" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="85" bodyend="85"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="87" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="87" bodyend="87"/>
       </memberdef>
       <memberdef kind="variable" id="structhttp__server_1_1session__manager_1a61ee6889ef9bd8903147eba174481a3f" prot="public" static="no" mutable="no">
         <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
@@ -108,24 +109,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="86" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="86" bodyend="86"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="88" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="88" bodyend="88"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="structhttp__server_1_1session__manager_1ae2f811ed84e3eebae744989827422a64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
-        <definition>string http_server::session_manager::generate_session_id</definition>
-        <argsstring>()</argsstring>
-        <name>generate_session_id</name>
-        <qualifiedname>http_server::session_manager::generate_session_id</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="88" column="16"/>
-      </memberdef>
       <memberdef kind="function" id="structhttp__server_1_1session__manager_1aa54df641f33fbcacf01b9ccda122c97a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>http_server::session_manager::session_manager</definition>
@@ -353,9 +340,13 @@
 <para>管理所有HTTP会话，包括创建、查找、删除和过期清理。 </para>
     </detaileddescription>
     <collaborationgraph>
-      <node id="4">
+      <node id="5">
         <label>atomic&lt; bool &gt;</label>
         <link refid="structatomic_3_01bool_01_4"/>
+      </node>
+      <node id="4">
+        <label>condition_variable</label>
+        <link refid="classcondition__variable"/>
       </node>
       <node id="7">
         <label>duration&lt; int64_t &gt;</label>
@@ -363,6 +354,7 @@
       </node>
       <node id="1">
         <label>http_server::session_manager</label>
+        <link refid="structhttp__server_1_1session__manager"/>
         <childnode refid="2" relation="usage">
           <edgelabel>sessions_</edgelabel>
         </childnode>
@@ -370,13 +362,13 @@
           <edgelabel>mutex_</edgelabel>
         </childnode>
         <childnode refid="4" relation="usage">
-          <edgelabel>cleanup_running_</edgelabel>
+          <edgelabel>cv_</edgelabel>
         </childnode>
         <childnode refid="5" relation="usage">
-          <edgelabel>cleanup_thread_</edgelabel>
+          <edgelabel>cleanup_running_</edgelabel>
         </childnode>
         <childnode refid="6" relation="usage">
-          <edgelabel>rand_</edgelabel>
+          <edgelabel>cleanup_thread_</edgelabel>
         </childnode>
         <childnode refid="7" relation="usage">
           <edgelabel>cleanup_interval_</edgelabel>
@@ -387,10 +379,6 @@
         <link refid="classmutex"/>
       </node>
       <node id="6">
-        <label>random_mt</label>
-        <link refid="classrandom__mt"/>
-      </node>
-      <node id="5">
         <label>thread</label>
         <link refid="classthread"/>
       </node>
@@ -399,19 +387,18 @@
         <link refid="classunordered__map"/>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="79" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="79" bodyend="107"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" line="81" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http_server.hpp" bodystart="81" bodyend="107"/>
     <listofallmembers>
       <member refid="structhttp__server_1_1session__manager_1ac25af56248a17f05f7f0c356425a179f" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>cleanup_expired_sessions</name></member>
       <member refid="structhttp__server_1_1session__manager_1a1da7fffba3a013457c12faefc5eb2558" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>cleanup_interval_</name></member>
       <member refid="structhttp__server_1_1session__manager_1a9abd70872aeeeb68f5f3856b3cbb34db" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>cleanup_running_</name></member>
       <member refid="structhttp__server_1_1session__manager_1af2b536c6c15e0c5198829cc80a562267" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>cleanup_thread_</name></member>
-      <member refid="structhttp__server_1_1session__manager_1ae2f811ed84e3eebae744989827422a64" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>generate_session_id</name></member>
+      <member refid="structhttp__server_1_1session__manager_1a14628809a464eeb6aad8fce5448685bc" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>cv_</name></member>
       <member refid="structhttp__server_1_1session__manager_1a8a6541b8953a5005b2925b4a0cebd75b" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>get_session</name></member>
       <member refid="structhttp__server_1_1session__manager_1a61ee6889ef9bd8903147eba174481a3f" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>max_sessions_</name></member>
       <member refid="structhttp__server_1_1session__manager_1af89775ec4991ee5acd1a254d5338af84" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>mutex_</name></member>
       <member refid="structhttp__server_1_1session__manager_1a8b979e91edb98ee748454d7ff3a05c7e" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>operator=</name></member>
       <member refid="structhttp__server_1_1session__manager_1a8fa9256d5dfb09267c469b8d313a226d" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>operator=</name></member>
-      <member refid="structhttp__server_1_1session__manager_1a14f3b0eb4fcfe5e0343929287e9ee6da" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>rand_</name></member>
       <member refid="structhttp__server_1_1session__manager_1ad6385057bf8d9d156c09bb0c8e178a45" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>remove_session</name></member>
       <member refid="structhttp__server_1_1session__manager_1a188f7447c28ee38bb96401bb64bf2d8c" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>session_count</name></member>
       <member refid="structhttp__server_1_1session__manager_1a19721a3b5a1c79475876c1f864b567f1" prot="public" virt="non-virtual"><scope>http_server::session_manager</scope><name>session_exists</name></member>

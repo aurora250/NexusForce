@@ -119,6 +119,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a953523145b115705d5ff39b0b1ee21fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取结果集列数  <br /></td></tr>
 <tr class="memitem:a3cbbe56acc57564f9713482bc8d76343" id="r_a3cbbe56acc57564f9713482bc8d76343"><td class="memItemLeft">const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a3cbbe56acc57564f9713482bc8d76343">column_names</a> () const noexcept override</td></tr>
 <tr class="memdesc:a3cbbe56acc57564f9713482bc8d76343"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取列名列表  <br /></td></tr>
+<tr class="memitem:a65c6d88ad4b557baf0d8bb1357432d78" id="r_a65c6d88ad4b557baf0d8bb1357432d78"><td class="memItemLeft"><a class="el" href="structcolumn__meta.html">column_meta</a>&#160;</td><td class="memItemRight"><a class="el" href="#a65c6d88ad4b557baf0d8bb1357432d78">column_metadata</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> n) const override</td></tr>
+<tr class="memdesc:a65c6d88ad4b557baf0d8bb1357432d78"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取列元数据  <br /></td></tr>
 <tr class="memitem:ab5f348c9d043274232dfc1df665e5b3a" id="r_ab5f348c9d043274232dfc1df665e5b3a"><td class="memItemLeft">const <a class="el" href="classvector.html">vector</a>&lt;::enum_field_types &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ab5f348c9d043274232dfc1df665e5b3a">column_types</a> () const noexcept</td></tr>
 <tr class="memdesc:ab5f348c9d043274232dfc1df665e5b3a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取列类型列表  <br /></td></tr>
 <tr class="memitem:abc58469e45b214cffc1cc51977c4bd3b" id="r_abc58469e45b214cffc1cc51977c4bd3b"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#abc58469e45b214cffc1cc51977c4bd3b">next</a> () noexcept override</td></tr>
@@ -289,6 +291,42 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 
 </div>
 </div>
+<a id="a65c6d88ad4b557baf0d8bb1357432d78" name="a65c6d88ad4b557baf0d8bb1357432d78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65c6d88ad4b557baf0d8bb1357432d78">&#9670;&#160;</a></span>column_metadata()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcolumn__meta.html">column_meta</a> mysql_result::column_metadata </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取列元数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>列索引（从0开始） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>列元数据 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#a847e127d534e34bc199d6168372288f0">idb_tb_result</a>.</p>
+
+</div>
+</div>
 <a id="a3cbbe56acc57564f9713482bc8d76343" name="a3cbbe56acc57564f9713482bc8d76343"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3cbbe56acc57564f9713482bc8d76343">&#9670;&#160;</a></span>column_names()</h2>
 
@@ -347,7 +385,7 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 <p>获取列类型列表 </p>
 <dl class="section return"><dt>返回</dt><dd>MySQL字段类型列表 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="mysql__result_8hpp_source.html">mysql_result.hpp</a> 第 <a class="el" href="mysql__result_8hpp_source.html#l00101">101</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="mysql__result_8hpp_source.html">mysql_result.hpp</a> 第 <a class="el" href="mysql__result_8hpp_source.html#l00103">103</a> 行定义.</p>
 
 </div>
 </div>

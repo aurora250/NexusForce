@@ -12,6 +12,7 @@ var classpgsql__connect =
     [ "prepare_statement", "classpgsql__connect.html#a2b5a9bf1dac1e7b784ab3f07b90d8894", null ],
     [ "query", "classpgsql__connect.html#a31806222a34e6b49b6ad4116130da7d4", null ],
     [ "reconnect", "classpgsql__connect.html#a9215a5add6d0650189fce2d0d3b4b8a7", null ],
-    [ "set_character_set", "classpgsql__connect.html#a4903abe371af79d3193ae88a3a2f56aa", null ],
-    [ "update", "classpgsql__connect.html#a035e9c7ee0abe108fe689c8a3a12abb0", null ]
+    [ "set_character_set", "classpgsql__connect.html#a9374bc7902b9b34815ff4d21b5ce9f4f", null ],
+    [ "update", "classpgsql__connect.html#a035e9c7ee0abe108fe689c8a3a12abb0", null ],
+    [ "link_", "classpgsql__connect.html#a302469e924ae30db8d91181b635d164b", null ]
 ];

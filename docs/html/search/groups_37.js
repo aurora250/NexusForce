@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['平台检测_0',['平台检测',['../group___platform_detection.html',1,'']]],
-  ['平台相关类型_1',['平台相关类型',['../group___platform_dependent_types.html',1,'']]]
+  ['堆栈跟踪_0',['堆栈跟踪',['../group___stacktrace.html',1,'']]],
+  ['堆算法_1',['堆算法',['../group___heap_algorithms.html',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['管道_0',['管道',['../group___pipe.html',1,'']]]
+  ['泛型repository_0',['泛型Repository',['../group___repository.html',1,'']]]
 ];

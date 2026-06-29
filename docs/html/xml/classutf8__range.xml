@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classutf8__range" kind="class" language="C++" prot="public">
+    <compoundname>utf8_range</compoundname>
+    <includes refid="utf__iterator_8hpp" local="no">utf_iterator.hpp</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classutf8__range_1ae60c1cd65aecefd03563a3b69b36d3ed" prot="private" static="no" mutable="no">
+        <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *</type>
+        <definition>const byte_t* utf8_range::data_</definition>
+        <argsstring></argsstring>
+        <name>data_</name>
+        <qualifiedname>utf8_range::data_</qualifiedname>
+        <briefdescription>
+<para>UTF-8字节数据指针 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/utf_iterator.hpp" line="135" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/utf_iterator.hpp" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classutf8__range_1a67c5536c0ee164470ba20fc27bac0049" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t utf8_range::size_</definition>
+        <argsstring></argsstring>
+        <name>size_</name>
+        <qualifiedname>utf8_range::size_</qualifiedname>
+        <briefdescription>
+<para>字节数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/utf_iterator.hpp" line="136" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/utf_iterator.hpp" bodystart="136" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classutf8__range_1a50800f8933c2ebee4818869575e7eba3" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>utf8_range::utf8_range</definition>
+        <argsstring>(const string_view sv) noexcept</argsstring>
+        <name>utf8_range</name>
+        <qualifiedname>utf8_range::utf8_range</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <briefdescription>
+<para>构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>sv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字符串视图 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/utf_iterator.hpp" line="143" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/utf_iterator.hpp" bodystart="143" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="classutf8__range_1a63651f2054eb37a1566acf726686931c" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>utf8_range::utf8_range</definition>
+        <argsstring>(const byte_t *data, const size_t size) noexcept</argsstring>
+        <name>utf8_range</name>
+        <qualifiedname>utf8_range::utf8_range</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/utf_iterator.hpp" line="147" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/utf_iterator.hpp" bodystart="147" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="classutf8__range_1affb37a6b0ff5749969a880ac42cc905d" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classutf8__iterator" kindref="compound">utf8_iterator</ref></type>
+        <definition>utf8_iterator utf8_range::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>utf8_range::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向第一个码点的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/utf_iterator.hpp" line="155" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/utf_iterator.hpp" bodystart="155" bodyend="155"/>
+      </memberdef>
+      <memberdef kind="function" id="classutf8__range_1aa7c61754656ffaf7a4fd2e1b3d80dd05" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classutf8__iterator" kindref="compound">utf8_iterator</ref></type>
+        <definition>utf8_iterator utf8_range::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>utf8_range::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>结束标记迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/utf_iterator.hpp" line="161" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/utf_iterator.hpp" bodystart="161" bodyend="161"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>UTF-8码点遍历范围 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>支持范围for循环。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/string/utf_iterator.hpp" line="134" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/utf_iterator.hpp" bodystart="134" bodyend="162"/>
+    <listofallmembers>
+      <member refid="classutf8__range_1affb37a6b0ff5749969a880ac42cc905d" prot="public" virt="non-virtual"><scope>utf8_range</scope><name>begin</name></member>
+      <member refid="classutf8__range_1ae60c1cd65aecefd03563a3b69b36d3ed" prot="private" virt="non-virtual"><scope>utf8_range</scope><name>data_</name></member>
+      <member refid="classutf8__range_1aa7c61754656ffaf7a4fd2e1b3d80dd05" prot="public" virt="non-virtual"><scope>utf8_range</scope><name>end</name></member>
+      <member refid="classutf8__range_1a67c5536c0ee164470ba20fc27bac0049" prot="private" virt="non-virtual"><scope>utf8_range</scope><name>size_</name></member>
+      <member refid="classutf8__range_1a50800f8933c2ebee4818869575e7eba3" prot="public" virt="non-virtual"><scope>utf8_range</scope><name>utf8_range</name></member>
+      <member refid="classutf8__range_1a63651f2054eb37a1566acf726686931c" prot="public" virt="non-virtual"><scope>utf8_range</scope><name>utf8_range</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -3,6 +3,7 @@ var classmysql__prepared__result =
     [ "mysql_prepared_result", "classmysql__prepared__result.html#add60d5cda91822a54a6ca081dc0fa67d", null ],
     [ "~mysql_prepared_result", "classmysql__prepared__result.html#af5f8c1d061f3f3e0fa6252348a9fad4c", null ],
     [ "column_count", "classmysql__prepared__result.html#a182d60423c6e882efd96f04462e6f876", null ],
+    [ "column_metadata", "classmysql__prepared__result.html#a38e52eb556ca7a00780a278c7d398f7c", null ],
     [ "column_names", "classmysql__prepared__result.html#af5ab89b9a5871298c7c34e6419b7804f", null ],
     [ "column_types", "classmysql__prepared__result.html#a7d8ac91ac1c850273cabbdcec84dc3be", null ],
     [ "empty", "classmysql__prepared__result.html#a6f04a410ca9448586e50c15420a5aad7", null ],

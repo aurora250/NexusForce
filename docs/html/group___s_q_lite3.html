@@ -107,16 +107,54 @@ SQLite3 的协作图:</div>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SQLite数据库连接类  <a href="structsqlite__connect.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:sqlite_5Ffactory" id="r_sqlite_5Ffactory"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsqlite__factory.html">sqlite_factory</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SQLite连接工厂类  <a href="classsqlite__factory.html#details">更多...</a><br /></td></tr>
-<tr class="memitem:sqlite_5Fprepared_5Fresult" id="r_sqlite_5Fprepared_5Fresult"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsqlite__prepared__result.html">sqlite_prepared_result</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SQLite预处理语句结果集类  <a href="structsqlite__prepared__result.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:sqlite_5Fprepared_5Fstatement" id="r_sqlite_5Fprepared_5Fstatement"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classsqlite__prepared__statement.html">sqlite_prepared_statement</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SQLite预处理语句类  <a href="classsqlite__prepared__statement.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:sqlite_5Fresult" id="r_sqlite_5Fresult"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structsqlite__result.html">sqlite_result</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">SQLite查询结果集类  <a href="structsqlite__result.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+枚举</h2></td></tr>
+<tr class="memitem:gaec2418c4d34710f16a33f7e4aba24ad1" id="r_gaec2418c4d34710f16a33f7e4aba24ad1"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#gaec2418c4d34710f16a33f7e4aba24ad1">sqlite_cleanup_action</a> : uint8_t { <a class="el" href="#ggaec2418c4d34710f16a33f7e4aba24ad1a12071b81bb60f781f9eb9672c5553bf0">sqlite_cleanup_action::finalize</a>
+, <a class="el" href="#ggaec2418c4d34710f16a33f7e4aba24ad1a86266ee937d97f812a8e57d22b62ee29">sqlite_cleanup_action::reset</a>
+ }</td></tr>
+<tr class="memdesc:gaec2418c4d34710f16a33f7e4aba24ad1"><td class="mdescLeft">&#160;</td><td class="mdescRight">SQLite语句清理方式  <a href="#gaec2418c4d34710f16a33f7e4aba24ad1">更多...</a><br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>SQLite3数据库相关功能 </p>
-</div></div><!-- contents -->
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">枚举类型说明</h2>
+<a id="gaec2418c4d34710f16a33f7e4aba24ad1" name="gaec2418c4d34710f16a33f7e4aba24ad1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaec2418c4d34710f16a33f7e4aba24ad1">&#9670;&#160;</a></span>sqlite_cleanup_action</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#gaec2418c4d34710f16a33f7e4aba24ad1">sqlite_cleanup_action</a> : <a class="el" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>SQLite语句清理方式 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="ggaec2418c4d34710f16a33f7e4aba24ad1a12071b81bb60f781f9eb9672c5553bf0" name="ggaec2418c4d34710f16a33f7e4aba24ad1a12071b81bb60f781f9eb9672c5553bf0"></a>finalize&#160;</td><td class="fielddoc"><p>调用sqlite3_finalize释放语句（用于普通查询） </p>
+</td></tr>
+<tr><td class="fieldname"><a id="ggaec2418c4d34710f16a33f7e4aba24ad1a86266ee937d97f812a8e57d22b62ee29" name="ggaec2418c4d34710f16a33f7e4aba24ad1a86266ee937d97f812a8e57d22b62ee29"></a>reset&#160;</td><td class="fielddoc"><p>调用sqlite3_reset重置语句（用于预处理语句复用） </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="sqlite__result_8hpp_source.html">sqlite_result.hpp</a> 第 <a class="el" href="sqlite__result_8hpp_source.html#l00035">35</a> 行定义.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
 <div id="page-nav-resize-handle"></div>

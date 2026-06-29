@@ -119,13 +119,140 @@ Public 成员函数</h2></td></tr>
 静态 Public 成员函数</h2></td></tr>
 <tr class="memitem:ae3786801b98d932e133778a36eee1d72" id="r_ae3786801b98d932e133778a36eee1d72"><td class="memItemLeft">static <a class="el" href="classregistry.html">registry</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#ae3786801b98d932e133778a36eee1d72">instance</a> ()</td></tr>
 <tr class="memdesc:ae3786801b98d932e133778a36eee1d72"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取单例实例  <br /></td></tr>
+<tr class="memitem:aca0c7b035cf07e11b82567a5d42e242d" id="r_aca0c7b035cf07e11b82567a5d42e242d"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#aca0c7b035cf07e11b82567a5d42e242d">dynamic_connect</a> (void *sender_obj, <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> sender_type, <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> signal_name, <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a> signal_offset, void *receiver_obj, <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> receiver_type, <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> slot_name)</td></tr>
+<tr class="memdesc:aca0c7b035cf07e11b82567a5d42e242d"><td class="mdescLeft">&#160;</td><td class="mdescRight">查找信号并连接到槽函数  <br /></td></tr>
+<tr class="memitem:a849508186d6632b68e3c0ae299ecd39a" id="r_a849508186d6632b68e3c0ae299ecd39a"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#a849508186d6632b68e3c0ae299ecd39a">connect_signal_to_slot</a> (<a class="el" href="classsignal__base.html">signal_base</a> *sig, const <a class="el" href="classmeta__function.html">meta_function</a> *slot, void *receiver)</td></tr>
+<tr class="memdesc:a849508186d6632b68e3c0ae299ecd39a"><td class="mdescLeft">&#160;</td><td class="mdescRight">将信号连接至反射槽函数  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>反射类型注册表 </p>
 <p>全局唯一的类型注册表，存储所有已注册的反射类型元数据。 提供类型查找、遍历和基类解析功能。 </p>
 
-<p class="definition">在文件 <a class="el" href="reflect_2registry_8hpp_source.html">reflect/registry.hpp</a> 第 <a class="el" href="reflect_2registry_8hpp_source.html#l00030">30</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reflect_2registry_8hpp_source.html">reflect/registry.hpp</a> 第 <a class="el" href="reflect_2registry_8hpp_source.html#l00033">33</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a849508186d6632b68e3c0ae299ecd39a" name="a849508186d6632b68e3c0ae299ecd39a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a849508186d6632b68e3c0ae299ecd39a">&#9670;&#160;</a></span>connect_signal_to_slot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool registry::connect_signal_to_slot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classsignal__base.html">signal_base</a> *</td>          <td class="paramname"><span class="paramname"><em>sig</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classmeta__function.html">meta_function</a> *</td>          <td class="paramname"><span class="paramname"><em>slot</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>receiver</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>将信号连接至反射槽函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sig</td><td>信号基类指针 </td></tr>
+    <tr><td class="paramname">slot</td><td>槽函数元数据 </td></tr>
+    <tr><td class="paramname">receiver</td><td>接收者对象指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>总是返回 true（连接通过 <a class="el" href="structsignal.html#ae82c7101e0d85081fc6da463a4686140" title="连接成员函数（默认优先级0）">signal::connect</a> 维持）</dd></dl>
+<p>通过 emit_dynamic 在信号触发时将参数转发至槽函数。 </p>
+
+<p class="reference">被这些函数引用 <a class="el" href="reflect_2registry_8hpp_source.html#l00155">dynamic_connect()</a>.</p>
+
+</div>
+</div>
+<a id="aca0c7b035cf07e11b82567a5d42e242d" name="aca0c7b035cf07e11b82567a5d42e242d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca0c7b035cf07e11b82567a5d42e242d">&#9670;&#160;</a></span>dynamic_connect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool registry::dynamic_connect </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>sender_obj</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>sender_type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>signal_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td>          <td class="paramname"><span class="paramname"><em>signal_offset</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>receiver_obj</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>receiver_type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>slot_name</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查找信号并连接到槽函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sender_obj</td><td>发送者对象指针 </td></tr>
+    <tr><td class="paramname">sender_type</td><td>发送者类型名称 </td></tr>
+    <tr><td class="paramname">signal_name</td><td>信号名称 </td></tr>
+    <tr><td class="paramname">signal_offset</td><td>信号成员在类中的字节偏移 </td></tr>
+    <tr><td class="paramname">receiver_obj</td><td>接收者对象指针 </td></tr>
+    <tr><td class="paramname">receiver_type</td><td>接收者类型名称 </td></tr>
+    <tr><td class="paramname">slot_name</td><td>槽函数名称 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>连接成功返回 true</dd></dl>
+<p>通过类型和名称在注册表中查找对应的信号和槽， 利用信号基类 <a class="el" href="classsignal__base.html" title="信号类型擦除基类">signal_base</a> 和 <a class="el" href="classmeta__function.html" title="函数反射元数据类">meta_function</a> 实现运行时动态连接。</p>
+<dl class="section note"><dt>注解</dt><dd>signal_offset 可通过 type_builder::signal_with_offset() 设置 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="reflect_2registry_8hpp_source.html">reflect/registry.hpp</a> 第 <a class="el" href="reflect_2registry_8hpp_source.html#l00155">155</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="#a849508186d6632b68e3c0ae299ecd39a">connect_signal_to_slot()</a> , 以及 <a class="el" href="#ae3786801b98d932e133778a36eee1d72">instance()</a>.</p>
+
+</div>
+</div>
 <a id="a3bc2f83a283c6aee3e86078aacb2eb2b" name="a3bc2f83a283c6aee3e86078aacb2eb2b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3bc2f83a283c6aee3e86078aacb2eb2b">&#9670;&#160;</a></span>find() <span class="overload">[1/2]</span></h2>
 
@@ -158,9 +285,9 @@ Public 成员函数</h2></td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>类型元数据指针，不存在返回nullptr </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="reflect_2registry_8hpp_source.html">reflect/registry.hpp</a> 第 <a class="el" href="reflect_2registry_8hpp_source.html#l00086">86</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reflect_2registry_8hpp_source.html">reflect/registry.hpp</a> 第 <a class="el" href="reflect_2registry_8hpp_source.html#l00095">95</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="reflect_2registry_8hpp_source.html#l00076">find_unlocked()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="reflect_2registry_8hpp_source.html#l00080">find_unlocked()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -196,7 +323,7 @@ Public 成员函数</h2></td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>类型元数据指针，不存在返回nullptr </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="reflect_2registry_8hpp_source.html">reflect/registry.hpp</a> 第 <a class="el" href="reflect_2registry_8hpp_source.html#l00096">96</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reflect_2registry_8hpp_source.html">reflect/registry.hpp</a> 第 <a class="el" href="reflect_2registry_8hpp_source.html#l00105">105</a> 行定义.</p>
 
 </div>
 </div>
@@ -233,11 +360,11 @@ Public 成员函数</h2></td></tr>
 <dl class="section return"><dt>返回</dt><dd>类型元数据指针，不存在返回nullptr</dd></dl>
 <dl class="section note"><dt>注解</dt><dd>调用前需已持有互斥锁 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="reflect_2registry_8hpp_source.html">reflect/registry.hpp</a> 第 <a class="el" href="reflect_2registry_8hpp_source.html#l00076">76</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reflect_2registry_8hpp_source.html">reflect/registry.hpp</a> 第 <a class="el" href="reflect_2registry_8hpp_source.html#l00080">80</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="reflect_2registry_8hpp_source.html#l00086">find()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="reflect_2registry_8hpp_source.html#l00095">find()</a>.</p>
 
 </div>
 </div>
@@ -281,7 +408,7 @@ template&lt;typename Func&gt; </div>
 </dl>
 <p>对每个注册的类型调用回调函数。 </p>
 
-<p class="definition">在文件 <a class="el" href="reflect_2registry_8hpp_source.html">reflect/registry.hpp</a> 第 <a class="el" href="reflect_2registry_8hpp_source.html#l00110">110</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reflect_2registry_8hpp_source.html">reflect/registry.hpp</a> 第 <a class="el" href="reflect_2registry_8hpp_source.html#l00119">119</a> 行定义.</p>
 
 </div>
 </div>
@@ -303,7 +430,7 @@ template&lt;typename Func&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -311,9 +438,7 @@ template&lt;typename Func&gt; </div>
 <p>获取单例实例 </p>
 <dl class="section return"><dt>返回</dt><dd>注册表实例引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="reflect_2registry_8hpp_source.html">reflect/registry.hpp</a> 第 <a class="el" href="reflect_2registry_8hpp_source.html#l00042">42</a> 行定义.</p>
-
-<p class="reference">被这些函数引用 <a class="el" href="reflect_8hpp_source.html#l00054">type_builder&lt; T &gt;::base()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="reflect_8hpp_source.html#l00055">type_builder&lt; T &gt;::base()</a> , 以及 <a class="el" href="reflect_2registry_8hpp_source.html#l00155">dynamic_connect()</a>.</p>
 
 </div>
 </div>
@@ -356,11 +481,11 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>类型元数据引用</dd></dl>
-<p>如果类型已注册，返回现有元数据；否则创建新的元数据。 </p>
+<p>如果类型已注册，返回现有元数据；否则创建新的元数据。 使用 <a class="el" href="group___reflection.html#ga580ac475bed401f28eca8e86b4de57c2" title="计算类型 T 的运行时期类型标识">type_id_for&lt;T&gt;()</a> 作为主键以与 <a class="el" href="classmeta__any.html" title="类型擦除容器">meta_any</a> 的类型 ID 保持一致。 </p>
 
-<p class="definition">在文件 <a class="el" href="reflect_2registry_8hpp_source.html">reflect/registry.hpp</a> 第 <a class="el" href="reflect_2registry_8hpp_source.html#l00056">56</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reflect_2registry_8hpp_source.html">reflect/registry.hpp</a> 第 <a class="el" href="reflect_2registry_8hpp_source.html#l00058">58</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a> , 以及 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="unique__ptr_8hpp_source.html#l00973">make_unique()</a>, <a class="el" href="thread_8hpp_source.html#l00476">name()</a> , 以及 <a class="el" href="reflect_2any_8hpp_source.html#l00060">type_id_for()</a>.</p>
 
 </div>
 </div>
@@ -390,7 +515,7 @@ template&lt;typename T&gt; </div>
 <p>解析所有类型的基类关系 </p>
 <p>遍历所有类型，解析其待解析的基类名称。 应在所有类型注册完成后调用。 </p>
 
-<p class="definition">在文件 <a class="el" href="reflect_2registry_8hpp_source.html">reflect/registry.hpp</a> 第 <a class="el" href="reflect_2registry_8hpp_source.html#l00123">123</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reflect_2registry_8hpp_source.html">reflect/registry.hpp</a> 第 <a class="el" href="reflect_2registry_8hpp_source.html#l00132">132</a> 行定义.</p>
 
 </div>
 </div>

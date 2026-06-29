@@ -117,17 +117,14 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a0a53b77c9e6e290d1151b232f29b2c17"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取剩余容量  <br /></td></tr>
 <tr class="memitem:a3abaec7e3996eed545704cc39027f144" id="r_a3abaec7e3996eed545704cc39027f144"><td class="memItemLeft"><a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3abaec7e3996eed545704cc39027f144">size</a> () const noexcept</td></tr>
 <tr class="memdesc:a3abaec7e3996eed545704cc39027f144"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取队列当前大小  <br /></td></tr>
+<tr class="memitem:a6b1dbe093547c214d22a2abac73ef4f7" id="r_a6b1dbe093547c214d22a2abac73ef4f7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6b1dbe093547c214d22a2abac73ef4f7">set_steal_strategy</a> (const <a class="el" href="#aae2f178f553c35b160ea3f5c6a8f1f16">steal_strategy</a> strategy, const <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> batch_size=4)</td></tr>
+<tr class="memdesc:a6b1dbe093547c214d22a2abac73ef4f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置窃取策略  <br /></td></tr>
 <tr class="memitem:a70e2ab3d3d65f423ffe571788f3ca816" id="r_a70e2ab3d3d65f423ffe571788f3ca816"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a70e2ab3d3d65f423ffe571788f3ca816">push_back</a> (<a class="el" href="classfunction.html">function</a>&lt; void()&gt; <a class="el" href="classtask.html">task</a>)</td></tr>
 <tr class="memdesc:a70e2ab3d3d65f423ffe571788f3ca816"><td class="mdescLeft">&#160;</td><td class="mdescRight">推送任务到队列尾部  <br /></td></tr>
 <tr class="memitem:a4a7dfd98b0eceb8f752a61a2573c8881" id="r_a4a7dfd98b0eceb8f752a61a2573c8881"><td class="memItemLeft"><a class="el" href="classoptional.html">optional</a>&lt; <a class="el" href="classfunction.html">function</a>&lt; void()&gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a4a7dfd98b0eceb8f752a61a2573c8881">try_pop</a> ()</td></tr>
 <tr class="memdesc:a4a7dfd98b0eceb8f752a61a2573c8881"><td class="mdescLeft">&#160;</td><td class="mdescRight">从队列头部弹出任务  <br /></td></tr>
 <tr class="memitem:aa2f9e7f7671a4d2d80459a83a58133a7" id="r_aa2f9e7f7671a4d2d80459a83a58133a7"><td class="memItemLeft"><a class="el" href="classoptional.html">optional</a>&lt; <a class="el" href="classfunction.html">function</a>&lt; void()&gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aa2f9e7f7671a4d2d80459a83a58133a7">be_stolen_by</a> (<a class="el" href="classlocal__queue.html">local_queue</a> &amp;dst_queue)</td></tr>
 <tr class="memdesc:aa2f9e7f7671a4d2d80459a83a58133a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">被其他队列窃取任务  <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
-静态 Public 成员函数</h2></td></tr>
-<tr class="memitem:a6f390954266976e45cf79b751fb4ca64" id="r_a6f390954266976e45cf79b751fb4ca64"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a6f390954266976e45cf79b751fb4ca64">set_steal_strategy</a> (const <a class="el" href="#aae2f178f553c35b160ea3f5c6a8f1f16">steal_strategy</a> strategy, const <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> batch_size=4)</td></tr>
-<tr class="memdesc:a6f390954266976e45cf79b751fb4ca64"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置窃取策略  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 静态 Public 属性</h2></td></tr>
@@ -139,7 +136,7 @@ static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d3
 <div class="textblock"><p>线程本地任务队列 </p>
 <p>每个工作线程的本地任务队列，支持无锁的任务推送、弹出和任务窃取。 采用环形缓冲区实现，支持多种窃取策略。 </p>
 
-<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00081">81</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00084">84</a> 行定义.</p>
 </div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
 <a id="aae2f178f553c35b160ea3f5c6a8f1f16" name="aae2f178f553c35b160ea3f5c6a8f1f16"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aae2f178f553c35b160ea3f5c6a8f1f16">&#9670;&#160;</a></span>steal_strategy</h2>
@@ -173,7 +170,7 @@ static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d3
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00087">87</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00090">90</a> 行定义.</p>
 
 </div>
 </div>
@@ -230,9 +227,9 @@ static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d3
 <p>获取队列容量 </p>
 <dl class="section return"><dt>返回</dt><dd>队列最大容量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00129">129</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00132">132</a> 行定义.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="thread__pool_8hpp_source.html#l00141">remain_size()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="thread__pool_8hpp_source.html#l00144">remain_size()</a>.</p>
 
 </div>
 </div>
@@ -262,7 +259,7 @@ static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d3
 <p>检查队列是否为空 </p>
 <dl class="section return"><dt>返回</dt><dd>队列为空返回true </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00135">135</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00138">138</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__erase_8hpp_source.html#l00292">size()</a>.</p>
 
@@ -299,7 +296,7 @@ static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d3
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00175">175</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00178">178</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00173">memory_order_relaxed</a>, <a class="el" href="memory__order_8hpp_source.html#l00179">memory_order_release</a> , 以及 <a class="el" href="shift_8hpp_source.html#l00312">move()</a>.</p>
 
@@ -331,14 +328,14 @@ static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d3
 <p>获取剩余容量 </p>
 <dl class="section return"><dt>返回</dt><dd>队列剩余可用空间 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00141">141</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00144">144</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="thread__pool_8hpp_source.html#l00129">capacity()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread__pool_8hpp_source.html#l00132">capacity()</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
 
 </div>
 </div>
-<a id="a6f390954266976e45cf79b751fb4ca64" name="a6f390954266976e45cf79b751fb4ca64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f390954266976e45cf79b751fb4ca64">&#9670;&#160;</a></span>set_steal_strategy()</h2>
+<a id="a6b1dbe093547c214d22a2abac73ef4f7" name="a6b1dbe093547c214d22a2abac73ef4f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b1dbe093547c214d22a2abac73ef4f7">&#9670;&#160;</a></span>set_steal_strategy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -359,7 +356,7 @@ static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d3
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -373,7 +370,7 @@ static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d3
   </dd>
 </dl>
 
-<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00166">166</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00169">169</a> 行定义.</p>
 
 </div>
 </div>
@@ -403,7 +400,7 @@ static constexpr <a class="el" href="group___platform_dependent_types.html#ga2d3
 <p>获取队列当前大小 </p>
 <dl class="section return"><dt>返回</dt><dd>队列中的任务数量 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00154">154</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="thread__pool_8hpp_source.html">thread_pool.hpp</a> 第 <a class="el" href="thread__pool_8hpp_source.html#l00157">157</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>.</p>
 

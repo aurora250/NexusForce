@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
   <compounddef id="classmysql__prepared__result" kind="class" language="C++" prot="public" final="yes">
     <compoundname>mysql_prepared_result</compoundname>
-    <basecompoundref refid="structidb__prepared__result" prot="public" virt="non-virtual">idb_prepared_result</basecompoundref>
+    <basecompoundref refid="structidb__tb__result" prot="public" virt="non-virtual">idb_tb_result</basecompoundref>
     <includes refid="mysql__prepared__result_8hpp" local="no">mysql_prepared_result.hpp</includes>
     <sectiondef kind="private-attrib">
       <memberdef kind="variable" id="classmysql__prepared__result_1aea56d7ab3c0efbf963e6bd2a2b2c92f9" prot="private" static="no" mutable="no">
@@ -400,6 +400,38 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="109" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" bodystart="109" bodyend="109"/>
       </memberdef>
+      <memberdef kind="function" id="classmysql__prepared__result_1a38e52eb556ca7a00780a278c7d398f7c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
+        <type><ref refid="structcolumn__meta" kindref="compound">column_meta</ref></type>
+        <definition>column_meta mysql_prepared_result::column_metadata</definition>
+        <argsstring>(size_type n) const override</argsstring>
+        <name>column_metadata</name>
+        <qualifiedname>mysql_prepared_result::column_metadata</qualifiedname>
+        <reimplements refid="structidb__tb__result_1a847e127d534e34bc199d6168372288f0">column_metadata</reimplements>
+        <param>
+          <type><ref refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>获取列元数据 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>列索引（从0开始） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>列元数据 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="111" column="18"/>
+      </memberdef>
       <memberdef kind="function" id="classmysql__prepared__result_1a7d8ac91ac1c850273cabbdcec84dc3be" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt;::enum_field_types &gt; &amp;</type>
         <definition>const vector&lt;::enum_field_types &gt; &amp; mysql_prepared_result::column_types</definition>
@@ -416,7 +448,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="115" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" bodystart="115" bodyend="115"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="117" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" bodystart="117" bodyend="117"/>
       </memberdef>
       <memberdef kind="function" id="classmysql__prepared__result_1aa023f6cfe4fd5fdfbfaf3efd3bda6784" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
@@ -457,7 +489,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="123" column="18"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="125" column="18"/>
       </memberdef>
       <memberdef kind="function" id="classmysql__prepared__result_1a4bc63eb415bf58421d05f2720115ac64" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type>bool</type>
@@ -498,7 +530,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="131" column="11"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="133" column="11"/>
       </memberdef>
       <memberdef kind="function" id="classmysql__prepared__result_1ab26e614a968f609a06c9bc41e89a2f18" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___core_types_1ga8b23aa936eec66c1c69ecd7b399ddf19" kindref="member">int16_t</ref></type>
@@ -539,7 +571,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="139" column="14"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="141" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classmysql__prepared__result_1a3848ac18e2cbe04642952cab8825f9ea" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref></type>
@@ -580,7 +612,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="147" column="14"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="149" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classmysql__prepared__result_1ac519febb410508f4e1f5ced810f5409a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
@@ -621,7 +653,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="155" column="14"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="157" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classmysql__prepared__result_1a85cb60e4ed9a62292d81e0cc9d7ad4d8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___core_types_1ga3068631062aaf7da4cc0371da9e7a377" kindref="member">float32_t</ref></type>
@@ -662,7 +694,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="163" column="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="165" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classmysql__prepared__result_1ad981685f8b046f2cd6b7c2e164579e56" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___core_types_1ga5e9a37eab818d71cd4a6a9344e776c7b" kindref="member">float64_t</ref></type>
@@ -703,7 +735,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="171" column="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="173" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classmysql__prepared__result_1a7bdee07b38f71d03dd9ba0823abfd529" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___core_types_1ga3e85271b70b4968c07a1ed54e119182a" kindref="member">decimal_t</ref></type>
@@ -744,7 +776,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="179" column="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="181" column="16"/>
       </memberdef>
       <memberdef kind="function" id="classmysql__prepared__result_1a265bbd167861a269fac297c4be65e34a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classvector" kindref="compound">vector</ref>&lt; char &gt;</type>
@@ -785,7 +817,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="187" column="13"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="189" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classmysql__prepared__result_1a0d56813b1d0c3585c97eae190b6bac5a" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
@@ -826,7 +858,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="195" column="15"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="197" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classmysql__prepared__result_1a9f86ac0ff6369e14a0a8f216021817db" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classdate" kindref="compound">date</ref></type>
@@ -867,7 +899,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="203" column="11"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="205" column="11"/>
       </memberdef>
       <memberdef kind="function" id="classmysql__prepared__result_1afc80b92fafc73960146ad46b41917fdf" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classtime" kindref="compound">time</ref></type>
@@ -908,7 +940,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="211" column="11"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="213" column="11"/>
       </memberdef>
       <memberdef kind="function" id="classmysql__prepared__result_1af8d394c970e814e7d036765e1c594fc5" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classdatetime" kindref="compound">datetime</ref></type>
@@ -949,7 +981,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="219" column="15"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="221" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classmysql__prepared__result_1a46e1dc71cdf89b36d613071df3024098" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="virtual">
         <type><ref refid="classtimestamp" kindref="compound">timestamp</ref></type>
@@ -990,7 +1022,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="227" column="16"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="229" column="16"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1007,20 +1039,14 @@
 </para>
     </detaileddescription>
     <inheritancegraph>
-      <node id="2">
-        <label>idb_prepared_result</label>
-        <link refid="structidb__prepared__result"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
+      <node id="3">
         <label>idb_result</label>
         <link refid="structidb__result"/>
       </node>
-      <node id="3">
+      <node id="2">
         <label>idb_tb_result</label>
         <link refid="structidb__tb__result"/>
-        <childnode refid="4" relation="public-inheritance">
+        <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -1031,20 +1057,14 @@
       </node>
     </inheritancegraph>
     <collaborationgraph>
-      <node id="2">
-        <label>idb_prepared_result</label>
-        <link refid="structidb__prepared__result"/>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="4">
+      <node id="3">
         <label>idb_result</label>
         <link refid="structidb__result"/>
       </node>
-      <node id="3">
+      <node id="2">
         <label>idb_tb_result</label>
         <link refid="structidb__tb__result"/>
-        <childnode refid="4" relation="public-inheritance">
+        <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
@@ -1054,12 +1074,13 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="40" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" bodystart="40" bodyend="228"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" line="40" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/db/mysql/mysql_prepared_result.hpp" bodystart="40" bodyend="230"/>
     <listofallmembers>
       <member refid="classmysql__prepared__result_1ac0424a58f1b1fd81a3dd61f0898f2701" prot="private" virt="non-virtual"><scope>mysql_prepared_result</scope><name>bind_results_</name></member>
       <member refid="classmysql__prepared__result_1a6d7e330af83c0d7166fef28038ea4616" prot="private" virt="non-virtual"><scope>mysql_prepared_result</scope><name>buffers_</name></member>
       <member refid="classmysql__prepared__result_1a182d60423c6e882efd96f04462e6f876" prot="public" virt="virtual"><scope>mysql_prepared_result</scope><name>column_count</name></member>
       <member refid="classmysql__prepared__result_1a766a60e7a4bf7a539499db3bef42bd00" prot="private" virt="non-virtual"><scope>mysql_prepared_result</scope><name>column_count_</name></member>
+      <member refid="classmysql__prepared__result_1a38e52eb556ca7a00780a278c7d398f7c" prot="public" virt="virtual"><scope>mysql_prepared_result</scope><name>column_metadata</name></member>
       <member refid="classmysql__prepared__result_1af5ab89b9a5871298c7c34e6419b7804f" prot="public" virt="virtual"><scope>mysql_prepared_result</scope><name>column_names</name></member>
       <member refid="classmysql__prepared__result_1a39878ad0613b6f0367599355f76240ce" prot="private" virt="non-virtual"><scope>mysql_prepared_result</scope><name>column_names_</name></member>
       <member refid="classmysql__prepared__result_1a7d8ac91ac1c850273cabbdcec84dc3be" prot="public" virt="non-virtual"><scope>mysql_prepared_result</scope><name>column_types</name></member>
@@ -1094,7 +1115,6 @@
       <member refid="classmysql__prepared__result_1ad504fa6428c8a40e00df4eec10c3ff41" prot="private" virt="non-virtual"><scope>mysql_prepared_result</scope><name>row_count_</name></member>
       <member refid="structidb__result_1ac58a6a1ad6756117bc3eb71bb52df082" prot="public" virt="non-virtual"><scope>mysql_prepared_result</scope><name>size_type</name></member>
       <member refid="classmysql__prepared__result_1aea56d7ab3c0efbf963e6bd2a2b2c92f9" prot="private" virt="non-virtual"><scope>mysql_prepared_result</scope><name>stmt_</name></member>
-      <member refid="structidb__prepared__result_1aeb3651a0f85121a210b224c0554be6cb" prot="public" virt="non-virtual"><scope>mysql_prepared_result</scope><name>~idb_prepared_result</name></member>
       <member refid="structidb__result_1a0e439857c8563bcbaf6389388ce2fec1" prot="public" virt="virtual"><scope>mysql_prepared_result</scope><name>~idb_result</name></member>
       <member refid="structidb__tb__result_1a7640d4b01e32ccdbfc12b807ef985343" prot="public" virt="non-virtual"><scope>mysql_prepared_result</scope><name>~idb_tb_result</name></member>
       <member refid="classmysql__prepared__result_1af5f8c1d061f3f3e0fa6252348a9fad4c" prot="public" virt="non-virtual"><scope>mysql_prepared_result</scope><name>~mysql_prepared_result</name></member>

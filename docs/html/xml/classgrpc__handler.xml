@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classgrpc__handler" kind="class" language="C++" prot="public">
+    <compoundname>grpc_handler</compoundname>
+    <includes refid="grpc_8hpp" local="no">grpc.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classgrpc__handler_1a0acfe0a55894572cf92cc70fad0cd0b8" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; <ref refid="structgrpc__message" kindref="compound">grpc_message</ref>(const <ref refid="structgrpc__message" kindref="compound">grpc_message</ref> &amp;)&gt;</type>
+        <definition>using grpc_handler::unary_handler = function&lt;grpc_message(const grpc_message&amp;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>unary_handler</name>
+        <qualifiedname>grpc_handler::unary_handler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="158" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classgrpc__handler_1a177bd2ee327e57f782ff98f74e410675" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(const <ref refid="structgrpc__message" kindref="compound">grpc_message</ref> &amp;, <ref refid="classfunction" kindref="compound">function</ref>&lt; void(<ref refid="structgrpc__message" kindref="compound">grpc_message</ref>)&gt;)&gt;</type>
+        <definition>using grpc_handler::stream_handler = function&lt;void(const grpc_message&amp;, function&lt;void(grpc_message)&gt;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>stream_handler</name>
+        <qualifiedname>grpc_handler::stream_handler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="159" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" bodystart="159" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classgrpc__handler_1ab39382cff589518067c039e3b20b5052" prot="private" static="no" mutable="no">
+        <type><ref refid="classgrpc__framer" kindref="compound">grpc_framer</ref></type>
+        <definition>grpc_framer grpc_handler::framer_</definition>
+        <argsstring></argsstring>
+        <name>framer_</name>
+        <qualifiedname>grpc_handler::framer_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="182" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" bodystart="182" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classgrpc__handler_1abccbf6b14ffe6fb478a1e477f3ba2dab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>grpc_handler::grpc_handler</definition>
+        <argsstring>()=default</argsstring>
+        <name>grpc_handler</name>
+        <qualifiedname>grpc_handler::grpc_handler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="161" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classgrpc__handler_1ad2523e63373440072e25f178fad1b03b" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual grpc_handler::~grpc_handler</definition>
+        <argsstring>()=default</argsstring>
+        <name>~grpc_handler</name>
+        <qualifiedname>grpc_handler::~grpc_handler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="162" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classgrpc__handler_1af489eb9d91a0c262871e2ea52736a545" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void grpc_handler::process_unary</definition>
+        <argsstring>(http_request &amp;request, http_response &amp;response, unary_handler handler)</argsstring>
+        <name>process_unary</name>
+        <qualifiedname>grpc_handler::process_unary</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref> &amp;</type>
+          <declname>request</declname>
+        </param>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <param>
+          <type>unary_handler</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>处理一元(unary) gRPC调用 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>解码请求帧 -&gt; 调用 handler -&gt; 编码响应帧 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="169" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classgrpc__handler_1aa35eac7d7c343d77e68bec05490d6f27" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void grpc_handler::send_error</definition>
+        <argsstring>(http_response &amp;response, grpc_status status, const string &amp;message)</argsstring>
+        <name>send_error</name>
+        <qualifiedname>grpc_handler::send_error</qualifiedname>
+        <param>
+          <type><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref> &amp;</type>
+          <declname>response</declname>
+        </param>
+        <param>
+          <type><ref refid="group__g_r_p_c_1ga78dd0ac29767da3b985d742d1e927a56" kindref="member">grpc_status</ref></type>
+          <declname>status</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>message</declname>
+        </param>
+        <briefdescription>
+<para>发送gRPC错误响应 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="174" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classgrpc__handler_1ad6921c90ff0dbbb0672f3564d9713b41" prot="public" static="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="http__constants_8hpp_1a77669238bc4b0444c075edb87036cf57" kindref="member">http_status</ref></type>
+        <definition>static http_status grpc_handler::grpc_to_http_status</definition>
+        <argsstring>(grpc_status status) noexcept</argsstring>
+        <name>grpc_to_http_status</name>
+        <qualifiedname>grpc_handler::grpc_to_http_status</qualifiedname>
+        <param>
+          <type><ref refid="group__g_r_p_c_1ga78dd0ac29767da3b985d742d1e927a56" kindref="member">grpc_status</ref></type>
+          <declname>status</declname>
+        </param>
+        <briefdescription>
+<para>将gRPC状态映射到HTTP状态码 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="179" column="24"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>gRPC服务处理器基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>基于HTTP请求/响应模型实现gRPC unary调用。 将gRPC帧解码为请求消息，执行处理逻辑，编码响应消息。</para>
+<para>使用示例： <programlisting><codeline><highlight class="keyword">class<sp/></highlight><highlight class="normal">MyService<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/>grpc_handler<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>grpc_message<sp/><ref refid="group___thread_1ga3b4d8e35a1675a3e99ed89c2ffe7d4f2" kindref="member">handle</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>grpc_message&amp;<sp/>request)</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">string</highlight><highlight class="normal"><sp/>response<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;Hello<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref>(request.payload);</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>grpc_message(<ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref>(response.<ref refid="classbasic__string_1af532fee5956b6c74fda95efb055b44f6" kindref="member">begin</ref>(),<sp/>response.<ref refid="classbasic__string_1a830ae6f613f08d9eed857a59aefed250" kindref="member">end</ref>()));</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">};</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">//<sp/>在HTTP路由中使用</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">router.post(</highlight><highlight class="stringliteral">&quot;/my.package.MyService/MyMethod&quot;</highlight><highlight class="normal">,<sp/>[&amp;](<ref refid="group___h_t_t_p_1gad666b052985d05dd7564c4fd573c4549" kindref="member">http_request</ref>&amp;<sp/>req,<sp/><ref refid="group___h_t_t_p_1ga215ee924d62c42786a46d2d18421391a" kindref="member">http_response</ref>&amp;<sp/>res)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>MyService<sp/>svc;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>svc.process_unary(req,<sp/>res);</highlight></codeline>
+<codeline><highlight class="normal">});</highlight></codeline>
+</programlisting> </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" line="156" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/grpc.hpp" bodystart="156" bodyend="183"/>
+    <listofallmembers>
+      <member refid="classgrpc__handler_1ab39382cff589518067c039e3b20b5052" prot="private" virt="non-virtual"><scope>grpc_handler</scope><name>framer_</name></member>
+      <member refid="classgrpc__handler_1abccbf6b14ffe6fb478a1e477f3ba2dab" prot="public" virt="non-virtual"><scope>grpc_handler</scope><name>grpc_handler</name></member>
+      <member refid="classgrpc__handler_1ad6921c90ff0dbbb0672f3564d9713b41" prot="public" virt="non-virtual"><scope>grpc_handler</scope><name>grpc_to_http_status</name></member>
+      <member refid="classgrpc__handler_1af489eb9d91a0c262871e2ea52736a545" prot="public" virt="non-virtual"><scope>grpc_handler</scope><name>process_unary</name></member>
+      <member refid="classgrpc__handler_1aa35eac7d7c343d77e68bec05490d6f27" prot="public" virt="non-virtual"><scope>grpc_handler</scope><name>send_error</name></member>
+      <member refid="classgrpc__handler_1a177bd2ee327e57f782ff98f74e410675" prot="public" virt="non-virtual"><scope>grpc_handler</scope><name>stream_handler</name></member>
+      <member refid="classgrpc__handler_1a0acfe0a55894572cf92cc70fad0cd0b8" prot="public" virt="non-virtual"><scope>grpc_handler</scope><name>unary_handler</name></member>
+      <member refid="classgrpc__handler_1ad2523e63373440072e25f178fad1b03b" prot="public" virt="virtual"><scope>grpc_handler</scope><name>~grpc_handler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

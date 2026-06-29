@@ -3,13 +3,18 @@
   <compounddef id="click_8hpp" kind="file" language="C++">
     <compoundname>click.hpp</compoundname>
     <includes refid="clocks_8hpp" local="yes">NeForce/core/time/clocks.hpp</includes>
-    <includedby refid="_ne_force_8hpp" local="yes">NeForce.hpp</includedby>
     <incdepgraph>
       <node id="10">
         <label>NeForce/core/config/c++config.hpp</label>
         <link refid="c_09_09config_8hpp"/>
         <childnode refid="11" relation="include">
         </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>NeForce/core/config/version.hpp</label>
+        <link refid="version_8hpp_source"/>
       </node>
       <node id="6">
         <label>NeForce/core/exception/exception.hpp</label>
@@ -17,7 +22,7 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>NeForce/core/memory/bit.hpp</label>
         <link refid="bit_8hpp"/>
         <childnode refid="9" relation="include">
@@ -34,35 +39,35 @@
         <link refid="math_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
       </node>
-      <node id="13">
+      <node id="14">
         <label>NeForce/core/numeric/numeric_traits.hpp</label>
         <link refid="numeric__traits_8hpp"/>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>NeForce/core/numeric/numeric_types.hpp</label>
         <link refid="numeric__types_8hpp"/>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-      </node>
-      <node id="14">
-        <label>NeForce/core/numeric/ratio.hpp</label>
-        <link refid="ratio_8hpp"/>
-        <childnode refid="15" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
       </node>
       <node id="15">
-        <label>NeForce/core/numeric/static_numeric.hpp</label>
-        <link refid="static__numeric_8hpp"/>
+        <label>NeForce/core/numeric/ratio.hpp</label>
+        <link refid="ratio_8hpp"/>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+      </node>
+      <node id="16">
+        <label>NeForce/core/numeric/static_numeric.hpp</label>
+        <link refid="static__numeric_8hpp"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
@@ -84,7 +89,7 @@
         <link refid="duration_8hpp"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -109,18 +114,6 @@
         <label>cassert</label>
       </node>
     </incdepgraph>
-    <invincdepgraph>
-      <node id="2">
-        <label>NeForce.hpp</label>
-        <link refid="_ne_force_8hpp"/>
-      </node>
-      <node id="1">
-        <label>click.hpp</label>
-        <link refid="click_8hpp"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-      </node>
-    </invincdepgraph>
     <innerclass refid="structclick" prot="public">click</innerclass>
     <innerclass refid="classscoped__click" prot="public">scoped_click</innerclass>
     <briefdescription>

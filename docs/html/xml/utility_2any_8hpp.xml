@@ -6,13 +6,19 @@
     <includes local="no">typeinfo</includes>
     <includes refid="breakpoint_8hpp" local="yes">NeForce/core/exception/breakpoint.hpp</includes>
     <includes refid="exception_8hpp" local="yes">NeForce/core/exception/exception.hpp</includes>
-    <includedby refid="_ne_force_8hpp" local="yes">NeForce.hpp</includedby>
+    <includedby refid="http__server__message_8hpp" local="yes">http_server_message.hpp</includedby>
     <incdepgraph>
       <node id="5">
         <label>NeForce/core/config/c++config.hpp</label>
         <link refid="c_09_09config_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>NeForce/core/config/version.hpp</label>
+        <link refid="version_8hpp_source"/>
       </node>
       <node id="4">
         <label>NeForce/core/exception/breakpoint.hpp</label>
@@ -20,25 +26,25 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="7">
+      <node id="8">
         <label>NeForce/core/exception/exception.hpp</label>
         <link refid="exception_8hpp"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-      </node>
-      <node id="8">
-        <label>NeForce/core/memory/memory.hpp</label>
-        <link refid="memory_8hpp"/>
         <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="9">
-        <label>NeForce/core/typeinfo/type_traits.hpp</label>
-        <link refid="type__traits_8hpp"/>
+        <label>NeForce/core/memory/memory.hpp</label>
+        <link refid="memory_8hpp"/>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="10">
+        <label>NeForce/core/typeinfo/type_traits.hpp</label>
+        <link refid="type__traits_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
         <label>NeForce/core/typeinfo/types.hpp</label>
         <link refid="types_8hpp"/>
         <childnode refid="5" relation="include">
@@ -53,7 +59,7 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
       <node id="6">
@@ -67,14 +73,114 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="2">
-        <label>NeForce.hpp</label>
-        <link refid="_ne_force_8hpp"/>
-      </node>
       <node id="1">
         <label>any.hpp</label>
         <link refid="utility_2any_8hpp"/>
         <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>async_filter.hpp</label>
+        <link refid="async__filter_8hpp"/>
+      </node>
+      <node id="6">
+        <label>csrf_filter.hpp</label>
+        <link refid="csrf__filter_8hpp"/>
+      </node>
+      <node id="3">
+        <label>grpc.hpp</label>
+        <link refid="grpc_8hpp"/>
+      </node>
+      <node id="7">
+        <label>health_check.hpp</label>
+        <link refid="health__check_8hpp"/>
+      </node>
+      <node id="11">
+        <label>http2_connection.hpp</label>
+        <link refid="http2__connection_8hpp"/>
+      </node>
+      <node id="8">
+        <label>http_cache.hpp</label>
+        <link refid="http__cache_8hpp"/>
+      </node>
+      <node id="9">
+        <label>http_compress.hpp</label>
+        <link refid="http__compress_8hpp"/>
+      </node>
+      <node id="4">
+        <label>http_filter.hpp</label>
+        <link refid="http__filter_8hpp"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>http_range.hpp</label>
+        <link refid="http__range_8hpp"/>
+      </node>
+      <node id="10">
+        <label>http_router.hpp</label>
+        <link refid="http__router_8hpp"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>http_security.hpp</label>
+        <link refid="http__security_8hpp"/>
+      </node>
+      <node id="12">
+        <label>http_server.hpp</label>
+        <link refid="http__server_8hpp"/>
+      </node>
+      <node id="2">
+        <label>http_server_message.hpp</label>
+        <link refid="http__server__message_8hpp"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>radix_router.hpp</label>
+        <link refid="radix__router_8hpp"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>rate_limiter.hpp</label>
+        <link refid="rate__limiter_8hpp"/>
+      </node>
+      <node id="15">
+        <label>reverse_proxy.hpp</label>
+        <link refid="reverse__proxy_8hpp"/>
+      </node>
+      <node id="18">
+        <label>websocket.hpp</label>
+        <link refid="websocket_8hpp"/>
+        <childnode refid="12" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
@@ -260,7 +366,7 @@
 <codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Manager::create(storage_,<sp/>ilist,<sp/>_NEFORCE<sp/><ref refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" kindref="member">forward&lt;Args&gt;</ref>(args)...);</highlight></codeline>
 <codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="327"><highlight class="normal"></highlight></codeline>
-<codeline lineno="331" refid="classany_1a2984bd733b273daa0a9ad72df9af4b21" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classany_1a2984bd733b273daa0a9ad72df9af4b21" kindref="member">~any</ref>()<sp/>{<sp/><ref refid="classany_1a6c4a11253f803d135685e115cf7054d8" kindref="member">reset</ref>();<sp/>}</highlight></codeline>
+<codeline lineno="331" refid="classany_1a2984bd733b273daa0a9ad72df9af4b21" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classany_1a2984bd733b273daa0a9ad72df9af4b21" kindref="member">~any</ref>()<sp/>{<sp/><ref refid="group___s_q_lite3_1ggaec2418c4d34710f16a33f7e4aba24ad1a86266ee937d97f812a8e57d22b62ee29" kindref="member">reset</ref>();<sp/>}</highlight></codeline>
 <codeline lineno="332"><highlight class="normal"></highlight></codeline>
 <codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal">...<sp/>Args,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>DT<sp/>=<sp/><ref refid="group___type_attribute_operations_1ga80b97e91b05a2ed8b6185bba229f39a8" kindref="member">decay_t&lt;T&gt;</ref>,</highlight></codeline>
 <codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t&lt;conjunction_v&lt;is_copy_constructible&lt;DT&gt;</ref>,<sp/><ref refid="structis__constructible" kindref="compound">is_constructible</ref>&lt;DT,<sp/>Args&amp;&amp;...&gt;&gt;,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;<sp/>=<sp/>0&gt;</highlight></codeline>

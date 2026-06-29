@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['进程_0',['进程',['../group___process.html',1,'']]]
+  ['记录类型_0',['DNS 记录类型',['../group___d_n_s.html#dns_record_types',1,'']]]
 ];

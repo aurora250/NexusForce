@@ -102,6 +102,20 @@ $(function(){initNavTree('classcmdline.html','','classcmdline-members'); });
 类</h2></td></tr>
 <tr class="memitem:option" id="r_option"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcmdline_1_1option.html">option</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">选项定义结构  <a href="structcmdline_1_1option.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:option_5Fdependency" id="r_option_5Fdependency"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcmdline_1_1option__dependency.html">option_dependency</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">选项依赖关系  <a href="structcmdline_1_1option__dependency.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:option_5Fconflict" id="r_option_5Fconflict"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structcmdline_1_1option__conflict.html">option_conflict</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">选项冲突关系  <a href="structcmdline_1_1option__conflict.html#details">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a4c84557e04980e1051cc0589118e3126" id="r_a4c84557e04980e1051cc0589118e3126"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a4c84557e04980e1051cc0589118e3126">conflict_behavior</a> { <a class="el" href="#a4c84557e04980e1051cc0589118e3126acb5e100e5a9a3e7f6d1fd97512215282">error</a>
+, <a class="el" href="#a4c84557e04980e1051cc0589118e3126a7b83d3f08fa392b79e3f553b585971cd">warning</a>
+, <a class="el" href="#a4c84557e04980e1051cc0589118e3126a567bc1d268f135496de3d5b946b691f3">ignore</a>
+ }</td></tr>
+<tr class="memdesc:a4c84557e04980e1051cc0589118e3126"><td class="mdescLeft">&#160;</td><td class="mdescRight">约束冲突处理行为  <a href="#a4c84557e04980e1051cc0589118e3126">更多...</a><br /></td></tr>
+<tr class="memitem:a47a872b81e65d32187b826b295e49545" id="r_a47a872b81e65d32187b826b295e49545"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#a47a872b81e65d32187b826b295e49545">validator</a> = <a class="el" href="classfunction.html">function</a>&lt;<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>(const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&amp; <a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&amp; value)&gt;</td></tr>
+<tr class="memdesc:a47a872b81e65d32187b826b295e49545"><td class="mdescLeft">&#160;</td><td class="mdescRight">选项值验证器类型  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public 成员函数</h2></td></tr>
@@ -125,6 +139,20 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a7d6b5721d7de0865e50ef2de4c48dcde"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取程序名称  <br /></td></tr>
 <tr class="memitem:a720bda60aa8408775671e89ab7947df2" id="r_a720bda60aa8408775671e89ab7947df2"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a720bda60aa8408775671e89ab7947df2">print_help</a> () const</td></tr>
 <tr class="memdesc:a720bda60aa8408775671e89ab7947df2"><td class="mdescLeft">&#160;</td><td class="mdescRight">打印帮助信息  <br /></td></tr>
+<tr class="memitem:a9766b369be7c5d08a5a73f2678ce28bd" id="r_a9766b369be7c5d08a5a73f2678ce28bd"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9766b369be7c5d08a5a73f2678ce28bd">add_dependency</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;present, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;required)</td></tr>
+<tr class="memdesc:a9766b369be7c5d08a5a73f2678ce28bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加选项依赖关系  <br /></td></tr>
+<tr class="memitem:a6ff67432daef7c2e88b8858f3de66d29" id="r_a6ff67432daef7c2e88b8858f3de66d29"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6ff67432daef7c2e88b8858f3de66d29">add_conflict</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;option_a, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;option_b)</td></tr>
+<tr class="memdesc:a6ff67432daef7c2e88b8858f3de66d29"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加选项冲突关系  <br /></td></tr>
+<tr class="memitem:a93320acf31ef68d4d38a34a0f0aff990" id="r_a93320acf31ef68d4d38a34a0f0aff990"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a93320acf31ef68d4d38a34a0f0aff990">set_conflict_behavior</a> (<a class="el" href="#a4c84557e04980e1051cc0589118e3126">conflict_behavior</a> behavior) noexcept</td></tr>
+<tr class="memdesc:a93320acf31ef68d4d38a34a0f0aff990"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置冲突处理行为  <br /></td></tr>
+<tr class="memitem:ac94ba23cffbaa9061a6c1f131ce39097" id="r_ac94ba23cffbaa9061a6c1f131ce39097"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac94ba23cffbaa9061a6c1f131ce39097">load_config</a> (const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;config_path, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;section=&quot;&quot;)</td></tr>
+<tr class="memdesc:ac94ba23cffbaa9061a6c1f131ce39097"><td class="mdescLeft">&#160;</td><td class="mdescRight">从配置文件加载选项值  <br /></td></tr>
+<tr class="memitem:a2ad98a5db3ed8b92f4fd2dc5584292d6" id="r_a2ad98a5db3ed8b92f4fd2dc5584292d6"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a2ad98a5db3ed8b92f4fd2dc5584292d6">add_validator</a> (<a class="el" href="#a47a872b81e65d32187b826b295e49545">validator</a> v)</td></tr>
+<tr class="memdesc:a2ad98a5db3ed8b92f4fd2dc5584292d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加选项验证器  <br /></td></tr>
+<tr class="memitem:a95b7023eb10ee336e56bc2ecfbda964e" id="r_a95b7023eb10ee336e56bc2ecfbda964e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a95b7023eb10ee336e56bc2ecfbda964e">add_range_validator</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> long_name, <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> min_val, <a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> max_val)</td></tr>
+<tr class="memdesc:a95b7023eb10ee336e56bc2ecfbda964e"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加选项值范围验证器（数值范围）  <br /></td></tr>
+<tr class="memitem:ad28740e1d11b3cb4666430e4fdc3e197" id="r_ad28740e1d11b3cb4666430e4fdc3e197"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ad28740e1d11b3cb4666430e4fdc3e197">add_regex_validator</a> (<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> long_name, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;pattern)</td></tr>
+<tr class="memdesc:ad28740e1d11b3cb4666430e4fdc3e197"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加选项值正则验证器  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 静态 Public 成员函数</h2></td></tr>
@@ -142,8 +170,130 @@ Public 成员函数</h2></td></tr>
 <li>自动生成帮助信息 </li>
 </ul>
 
-<p class="definition">在文件 <a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a> 第 <a class="el" href="cmdline_8hpp_source.html#l00160">160</a> 行定义.</p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<p class="definition">在文件 <a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a> 第 <a class="el" href="cmdline_8hpp_source.html#l00161">161</a> 行定义.</p>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">成员类型定义说明</h2>
+<a id="a47a872b81e65d32187b826b295e49545" name="a47a872b81e65d32187b826b295e49545"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47a872b81e65d32187b826b295e49545">&#9670;&#160;</a></span>validator</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="#a47a872b81e65d32187b826b295e49545">cmdline::validator</a> = <a class="el" href="classfunction.html">function</a>&lt;<a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>(const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&amp; <a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>, const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a>&amp; value)&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>选项值验证器类型 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>选项名称 </td></tr>
+    <tr><td class="paramname">value</td><td>选项值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>验证通过返回空字符串，失败返回错误信息 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a> 第 <a class="el" href="cmdline_8hpp_source.html#l00231">231</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">成员枚举类型说明</h2>
+<a id="a4c84557e04980e1051cc0589118e3126" name="a4c84557e04980e1051cc0589118e3126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c84557e04980e1051cc0589118e3126">&#9670;&#160;</a></span>conflict_behavior</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a4c84557e04980e1051cc0589118e3126">cmdline::conflict_behavior</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>约束冲突处理行为 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a4c84557e04980e1051cc0589118e3126acb5e100e5a9a3e7f6d1fd97512215282" name="a4c84557e04980e1051cc0589118e3126acb5e100e5a9a3e7f6d1fd97512215282"></a>error&#160;</td><td class="fielddoc"><p>冲突时抛出异常 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a4c84557e04980e1051cc0589118e3126a7b83d3f08fa392b79e3f553b585971cd" name="a4c84557e04980e1051cc0589118e3126a7b83d3f08fa392b79e3f553b585971cd"></a>warning&#160;</td><td class="fielddoc"><p>冲突时打印警告 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a4c84557e04980e1051cc0589118e3126a567bc1d268f135496de3d5b946b691f3" name="a4c84557e04980e1051cc0589118e3126a567bc1d268f135496de3d5b946b691f3"></a>ignore&#160;</td><td class="fielddoc"><p>冲突时忽略 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a> 第 <a class="el" href="cmdline_8hpp_source.html#l00197">197</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a6ff67432daef7c2e88b8858f3de66d29" name="a6ff67432daef7c2e88b8858f3de66d29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ff67432daef7c2e88b8858f3de66d29">&#9670;&#160;</a></span>add_conflict()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cmdline::add_conflict </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>option_a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>option_b</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加选项冲突关系 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">option_a</td><td>选项A </td></tr>
+    <tr><td class="paramname">option_b</td><td>选项B </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9766b369be7c5d08a5a73f2678ce28bd" name="a9766b369be7c5d08a5a73f2678ce28bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9766b369be7c5d08a5a73f2678ce28bd">&#9670;&#160;</a></span>add_dependency()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cmdline::add_dependency </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>present</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>required</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加选项依赖关系 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">present</td><td>当此选项出现时 </td></tr>
+    <tr><td class="paramname">required</td><td>此选项也必须出现 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a7c3bc45569cf890f4c0c754e52a9235a" name="a7c3bc45569cf890f4c0c754e52a9235a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7c3bc45569cf890f4c0c754e52a9235a">&#9670;&#160;</a></span>add_option()</h2>
 
@@ -204,6 +354,110 @@ Public 成员函数</h2></td></tr>
 
 </div>
 </div>
+<a id="a95b7023eb10ee336e56bc2ecfbda964e" name="a95b7023eb10ee336e56bc2ecfbda964e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a95b7023eb10ee336e56bc2ecfbda964e">&#9670;&#160;</a></span>add_range_validator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cmdline::add_range_validator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>long_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></td>          <td class="paramname"><span class="paramname"><em>min_val</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a></td>          <td class="paramname"><span class="paramname"><em>max_val</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加选项值范围验证器（数值范围） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">long_name</td><td>选项名称 </td></tr>
+    <tr><td class="paramname">min_val</td><td>最小值（包含） </td></tr>
+    <tr><td class="paramname">max_val</td><td>最大值（包含） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structcmdline__exception.html" title="命令行解析异常">cmdline_exception</a></td><td>选项不存在时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ad28740e1d11b3cb4666430e4fdc3e197" name="ad28740e1d11b3cb4666430e4fdc3e197"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad28740e1d11b3cb4666430e4fdc3e197">&#9670;&#160;</a></span>add_regex_validator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cmdline::add_regex_validator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a></td>          <td class="paramname"><span class="paramname"><em>long_name</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>pattern</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加选项值正则验证器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">long_name</td><td>选项名称 </td></tr>
+    <tr><td class="paramname">pattern</td><td>正则表达式模式 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structcmdline__exception.html" title="命令行解析异常">cmdline_exception</a></td><td>选项不存在时抛出 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2ad98a5db3ed8b92f4fd2dc5584292d6" name="a2ad98a5db3ed8b92f4fd2dc5584292d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ad98a5db3ed8b92f4fd2dc5584292d6">&#9670;&#160;</a></span>add_validator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cmdline::add_validator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a47a872b81e65d32187b826b295e49545">validator</a></td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加选项验证器 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">v</td><td>验证器函数</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>可以多次调用以添加多个验证器，所有验证器都会被依次调用。 验证在 <a class="el" href="#a27f16ada740af51e1638aa0d058be9fe" title="解析main函数参数">parse()</a> 完成后、validate_constraints() 之前执行。 </p>
+
+</div>
+</div>
 <a id="a38140f2bc12f09b3f740c17a1ac72500" name="a38140f2bc12f09b3f740c17a1ac72500"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a38140f2bc12f09b3f740c17a1ac72500">&#9670;&#160;</a></span>count()</h2>
 
@@ -236,7 +490,7 @@ Public 成员函数</h2></td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>选项出现次数 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
 
 </div>
 </div>
@@ -351,7 +605,51 @@ Public 成员函数</h2></td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>是否在命令行中指定了该选项 </dd></dl>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
+
+</div>
+</div>
+<a id="ac94ba23cffbaa9061a6c1f131ce39097" name="ac94ba23cffbaa9061a6c1f131ce39097"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac94ba23cffbaa9061a6c1f131ce39097">&#9670;&#160;</a></span>load_config()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cmdline::load_config </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>config_path</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="group___string.html#ga716ec02de55e9c908e34b54a01708895">string</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>section</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>从配置文件加载选项值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">config_path</td><td>配置文件路径 </td></tr>
+    <tr><td class="paramname">section</td><td>配置节名或嵌套键名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>异常</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="structcmdline__exception.html" title="命令行解析异常">cmdline_exception</a></td><td>文件不存在或解析失败时抛出</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>支持的文件格式：</p><ul>
+<li>.ini：INI 格式，通过 section 参数指定节</li>
+<li>.json：JSON 格式，通过 section 参数指定顶层键导航到嵌套对象</li>
+<li>.toml：TOML 格式，通过 section 参数指定顶层键导航到嵌套表</li>
+<li>.yaml / .yml：YAML 格式，通过 section 参数指定顶层键导航到嵌套映射</li>
+<li>.env：环境变量格式（section 参数忽略）</li>
+</ul>
+<p>配置文件中的值仅填充命令行未指定的选项，命令行参数优先级更高。 </p>
 
 </div>
 </div>
@@ -473,7 +771,7 @@ Public 成员函数</h2></td></tr>
 <p>获取位置参数 </p>
 <dl class="section return"><dt>返回</dt><dd>位置参数向量引用 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a> 第 <a class="el" href="cmdline_8hpp_source.html#l00293">293</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a> 第 <a class="el" href="cmdline_8hpp_source.html#l00355">355</a> 行定义.</p>
 
 </div>
 </div>
@@ -523,7 +821,42 @@ Public 成员函数</h2></td></tr>
 <p>获取程序名称 </p>
 <dl class="section return"><dt>返回</dt><dd>程序名称 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a> 第 <a class="el" href="cmdline_8hpp_source.html#l00299">299</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a> 第 <a class="el" href="cmdline_8hpp_source.html#l00361">361</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a93320acf31ef68d4d38a34a0f0aff990" name="a93320acf31ef68d4d38a34a0f0aff990"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93320acf31ef68d4d38a34a0f0aff990">&#9670;&#160;</a></span>set_conflict_behavior()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cmdline::set_conflict_behavior </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#a4c84557e04980e1051cc0589118e3126">conflict_behavior</a></td>          <td class="paramname"><span class="paramname"><em>behavior</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置冲突处理行为 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">behavior</td><td>冲突时的处理方式 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="cmdline_8hpp_source.html">cmdline.hpp</a> 第 <a class="el" href="cmdline_8hpp_source.html#l00395">395</a> 行定义.</p>
 
 </div>
 </div>

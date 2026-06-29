@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['桶大小策略_0',['桶大小策略',['../group___hash_table.html#bucket_size_strategy',1,'']]]
+  ['树的合并规则_0',['树的合并规则',['../group___leonardo_heap.html#tree_merging',1,'']]]
 ];

@@ -113,19 +113,29 @@ void&#160;</td><td class="memItemRight"><b>flush</b> () override</td></tr>
 <tr class="inherit_header pub_methods_classlog__sink"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classlog__sink')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public 成员函数 继承自 <a class="el" href="classlog__sink.html">log_sink</a></td></tr>
 <tr class="memitem:a354978735401f7f31d9a4c9bcc97f398 inherit pub_methods_classlog__sink" id="r_a354978735401f7f31d9a4c9bcc97f398"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="classlog__sink.html#a354978735401f7f31d9a4c9bcc97f398">set_formatter</a> (<a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classlog__formatter.html">log_formatter</a> &gt; <a class="el" href="structformatter.html">formatter</a>)</td></tr>
 <tr class="memdesc:a354978735401f7f31d9a4c9bcc97f398 inherit pub_methods_classlog__sink"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置格式化器  <br /></td></tr>
+<tr class="memitem:a7fab32f86c81ae3da1b9c1b8c0935f61 inherit pub_methods_classlog__sink" id="r_a7fab32f86c81ae3da1b9c1b8c0935f61"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="classlog__sink.html#a7fab32f86c81ae3da1b9c1b8c0935f61">set_flush_interval</a> (<a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a> interval_ms)</td></tr>
+<tr class="memdesc:a7fab32f86c81ae3da1b9c1b8c0935f61 inherit pub_methods_classlog__sink"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置自动刷新间隔  <br /></td></tr>
+<tr class="memitem:afbe5a916c40d83cc131cf80f53d2dbf9 inherit pub_methods_classlog__sink" id="r_afbe5a916c40d83cc131cf80f53d2dbf9"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="classlog__sink.html#afbe5a916c40d83cc131cf80f53d2dbf9">should_auto_flush</a> () const</td></tr>
+<tr class="memdesc:afbe5a916c40d83cc131cf80f53d2dbf9 inherit pub_methods_classlog__sink"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否需要自动刷新  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-inherited" class="groupheader"><a id="inherited" name="inherited"></a>
 额外继承的成员函数</h2></td></tr>
 <tr class="inherit_header pro_attribs_classlog__sink"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pro_attribs_classlog__sink')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Protected 属性 继承自 <a class="el" href="classlog__sink.html">log_sink</a></td></tr>
 <tr class="memitem:a4ef9a9a7bd511f678816d4654ed1f9b0 inherit pro_attribs_classlog__sink" id="r_a4ef9a9a7bd511f678816d4654ed1f9b0"><td class="memItemLeft">
 <a class="el" href="classunique__ptr.html">unique_ptr</a>&lt; <a class="el" href="classlog__formatter.html">log_formatter</a> &gt;&#160;</td><td class="memItemRight"><b>formatter_</b></td></tr>
-<tr class="memdesc:a4ef9a9a7bd511f678816d4654ed1f9b0 inherit pro_attribs_classlog__sink"><td class="mdescLeft">&#160;</td><td class="mdescRight">日志格式化器 <br /></td></tr>
+<tr class="memdesc:a4ef9a9a7bd511f678816d4654ed1f9b0 inherit pro_attribs_classlog__sink"><td class="mdescLeft">&#160;</td><td class="mdescRight">格式化器 <br /></td></tr>
+<tr class="memitem:a89802d501ccca179cd38b5216a31d3c5 inherit pro_attribs_classlog__sink" id="r_a89802d501ccca179cd38b5216a31d3c5"><td class="memItemLeft">
+<a class="el" href="group___core_types.html#ga40b54003b1e3c93da5e74c8b7b71b807">int64_t</a>&#160;</td><td class="memItemRight"><b>flush_interval_ms_</b> {0}</td></tr>
+<tr class="memdesc:a89802d501ccca179cd38b5216a31d3c5 inherit pro_attribs_classlog__sink"><td class="mdescLeft">&#160;</td><td class="mdescRight">自动刷新间隔毫秒数（0=禁用） <br /></td></tr>
+<tr class="memitem:adbe06c9eb43eba4c8e946c5f635c13de inherit pro_attribs_classlog__sink" id="r_adbe06c9eb43eba4c8e946c5f635c13de"><td class="memItemLeft">
+<a class="el" href="classtimestamp.html">timestamp</a>&#160;</td><td class="memItemRight"><b>last_flush_</b> {<a class="el" href="classtimestamp.html#a0ee50a1d67c49633c43c769bba87a0bb">timestamp::now</a>()}</td></tr>
+<tr class="memdesc:adbe06c9eb43eba4c8e946c5f635c13de inherit pro_attribs_classlog__sink"><td class="mdescLeft">&#160;</td><td class="mdescRight">上次刷新的时间戳 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>控制台输出目标 </p>
-<p>将日志输出到标准控制台，支持颜色显示。 如果没有设置格式化器，使用默认格式。 </p>
+<p>将日志输出到标准控制台，按日志级别着色显示。 </p>
 
-<p class="definition">在文件 <a class="el" href="log__sink_8hpp_source.html">log_sink.hpp</a> 第 <a class="el" href="log__sink_8hpp_source.html#l00070">70</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="log__sink_8hpp_source.html">log_sink.hpp</a> 第 <a class="el" href="log__sink_8hpp_source.html#l00093">93</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="aabfb3e9398b18135386b9deabbc62488" name="aabfb3e9398b18135386b9deabbc62488"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aabfb3e9398b18135386b9deabbc62488">&#9670;&#160;</a></span>log()</h2>
@@ -153,11 +163,10 @@ void&#160;</td><td class="memItemRight"><b>flush</b> () override</td></tr>
 <p>输出日志到控制台 </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">event</td><td>日志事件</td></tr>
+    <tr><td class="paramname">event</td><td>日志事件 </td></tr>
   </table>
   </dd>
 </dl>
-<p>使用设置的格式化器或默认格式将日志输出到控制台。 </p>
 
 <p>实现了 <a class="el" href="classlog__sink.html#a23426545dd75dd433f3d5b7b0407faaf">log_sink</a>.</p>
 

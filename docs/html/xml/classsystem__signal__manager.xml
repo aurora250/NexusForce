@@ -1065,8 +1065,8 @@
         <location file="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="200" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="200" bodyend="203"/>
         <references refid="classsystem__signal__manager_1ad3e12c1c30e2e92d4f858859e68affa5" compoundref="signal_8hpp" startline="200" endline="203">instance</references>
         <referencedby refid="classsystem__signal__manager_1ad3e12c1c30e2e92d4f858859e68affa5" compoundref="signal_8hpp" startline="200" endline="203">instance</referencedby>
-        <referencedby refid="classsignal__guard_1a12a16d4492336495a2142f67eac4ba4c" compoundref="signal_8hpp" startline="314" endline="314">signal_guard::signal_guard</referencedby>
-        <referencedby refid="classsignal__guard_1aee7ddbf38b97c0e1b73e3babe81a9177" compoundref="signal_8hpp" startline="321" endline="321">signal_guard::~signal_guard</referencedby>
+        <referencedby refid="classsignal__guard_1a12a16d4492336495a2142f67eac4ba4c" compoundref="signal_8hpp" startline="328" endline="328">signal_guard::signal_guard</referencedby>
+        <referencedby refid="classsignal__guard_1aee7ddbf38b97c0e1b73e3babe81a9177" compoundref="signal_8hpp" startline="335" endline="335">signal_guard::~signal_guard</referencedby>
       </memberdef>
       <memberdef kind="function" id="classsystem__signal__manager_1abd07e7eba4bcbb2af87138dce5dc0ace" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -1101,6 +1101,68 @@
         <references refid="classsystem__signal__manager_1abd07e7eba4bcbb2af87138dce5dc0ace" compoundref="signal_8hpp" startline="291" endline="298">is_platform_signal</references>
         <referencedby refid="classsystem__signal__manager_1abd07e7eba4bcbb2af87138dce5dc0ace" compoundref="signal_8hpp" startline="291" endline="298">is_platform_signal</referencedby>
       </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1ad3705e0a730dc38c0e966c9655eb9738" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" kindref="member">event</ref></type>
+        <definition>static event system_signal_manager::from_native</definition>
+        <argsstring>(int native_signal) noexcept</argsstring>
+        <name>from_native</name>
+        <qualifiedname>system_signal_manager::from_native</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>native_signal</declname>
+        </param>
+        <briefdescription>
+<para>将平台原生信号转换为统一事件 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>native_signal</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>平台原生信号值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>对应的统一事件，无法映射时返回原值强转 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="305" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classsystem__signal__manager_1aadc87f472a920e2ca6409aaf8a79009e" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>static int system_signal_manager::to_native</definition>
+        <argsstring>(event e) noexcept</argsstring>
+        <name>to_native</name>
+        <qualifiedname>system_signal_manager::to_native</qualifiedname>
+        <param>
+          <type><ref refid="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" kindref="member">event</ref></type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+<para>将统一事件转换为平台原生信号 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>e</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>统一事件 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>平台原生信号值，模拟事件返回 -1 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="312" column="17"/>
+      </memberdef>
     </sectiondef>
     <briefdescription>
 <para>信号管理器 </para>
@@ -1115,7 +1177,7 @@
 </listitem></itemizedlist>
 </para>
     </detaileddescription>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="49" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="49" bodyend="299"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" line="49" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/signal.hpp" bodystart="49" bodyend="313"/>
     <listofallmembers>
       <member refid="classsystem__signal__manager_1a0fad889afdc1e8da3429176b690ce410" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>add_guard_ref</name></member>
       <member refid="classsystem__signal__manager_1a3af6e2356781fec0f0a9384eeccf0dd7" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>block_signals</name></member>
@@ -1124,6 +1186,7 @@
       <member refid="classsystem__signal__manager_1a442e5d505e7801160e93504232ce2616" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>event</name></member>
       <member refid="classsystem__signal__manager_1a1b0f51c39e1ce9da499929c133f52ea3" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>force_exit_</name></member>
       <member refid="classsystem__signal__manager_1ab89e69739b69cd3f58e2fda0ad58e77a" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>force_exit_timeout_</name></member>
+      <member refid="classsystem__signal__manager_1ad3705e0a730dc38c0e966c9655eb9738" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>from_native</name></member>
       <member refid="classsystem__signal__manager_1abc5e94965eaec0c0fe7d7265b84bdf46" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>guard_count_</name></member>
       <member refid="classsystem__signal__manager_1ad8a750de67e35f577f0acfd975f9228e" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>handlers_</name></member>
       <member refid="classsystem__signal__manager_1a6a571e6eb761c013bd25c372e51f1d65" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>initialize</name></member>
@@ -1155,6 +1218,7 @@
       <member refid="classsystem__signal__manager_1a938410941bc03336f784c3ef6f5c4c4f" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>system_signal_manager</name></member>
       <member refid="classsystem__signal__manager_1a16481aaee67adf0f178bcecc3fc169ef" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>timeout_monitor_thread</name></member>
       <member refid="classsystem__signal__manager_1a57ec735feb3f63fbc3c35344ab866654" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>timeout_thread_</name></member>
+      <member refid="classsystem__signal__manager_1aadc87f472a920e2ca6409aaf8a79009e" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>to_native</name></member>
       <member refid="classsystem__signal__manager_1af790c9c8b1b7b19fe01ba81e9e18eac6" prot="private" virt="non-virtual"><scope>system_signal_manager</scope><name>trigger_force_exit</name></member>
       <member refid="classsystem__signal__manager_1abd9ec9c46beb3eec8ed1eac1090a4e11" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>unblock_signals</name></member>
       <member refid="classsystem__signal__manager_1ae50c359f88af410b04e3d5886917bfc5" prot="public" virt="non-virtual"><scope>system_signal_manager</scope><name>wait_for_signal</name></member>

@@ -1,0 +1,254 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classbuffer__chain" kind="class" language="C++" prot="public">
+    <compoundname>buffer_chain</compoundname>
+    <includes refid="buffer__chain_8hpp" local="no">buffer_chain.hpp</includes>
+    <innerclass refid="structbuffer__chain_1_1segment" prot="public">buffer_chain::segment</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classbuffer__chain_1a1df55e1a58ec860eebe6dcea71f531a8" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; segment &gt;</type>
+        <definition>vector&lt;segment&gt; buffer_chain::segments_</definition>
+        <argsstring></argsstring>
+        <name>segments_</name>
+        <qualifiedname>buffer_chain::segments_</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" line="30" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classbuffer__chain_1af276d11d2f0404b6464dc14335bf162b" prot="private" static="no" mutable="no">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t buffer_chain::total_size_</definition>
+        <argsstring></argsstring>
+        <name>total_size_</name>
+        <qualifiedname>buffer_chain::total_size_</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" line="31" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" bodystart="31" bodyend="31"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classbuffer__chain_1a2e5fc3f3689d75f426d51a37e05ebfe5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>buffer_chain::buffer_chain</definition>
+        <argsstring>()=default</argsstring>
+        <name>buffer_chain</name>
+        <qualifiedname>buffer_chain::buffer_chain</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" line="34" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classbuffer__chain_1af53b29d0568534ea3b2f365e1adc815b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void buffer_chain::append</definition>
+        <argsstring>(const char *data, size_t size)</argsstring>
+        <name>append</name>
+        <qualifiedname>buffer_chain::append</qualifiedname>
+        <param>
+          <type>const char *</type>
+          <declname>data</declname>
+        </param>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+<para>追加数据视图 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" line="39" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" bodystart="39" bodyend="42"/>
+        <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <references refid="group___type_erasure_functions_1ga630d7b0d77515784d2391b3725ac6df0" compoundref="type__erase_8hpp" startline="292" endline="294">size</references>
+      </memberdef>
+      <memberdef kind="function" id="classbuffer__chain_1a2a0ebba8be6e0a824944f81b2eec6230" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void buffer_chain::append</definition>
+        <argsstring>(const string_view sv)</argsstring>
+        <name>append</name>
+        <qualifiedname>buffer_chain::append</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>sv</declname>
+        </param>
+        <briefdescription>
+<para>追加 <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" line="47" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" bodystart="47" bodyend="47"/>
+        <references refid="classbuffer__chain_1a2a0ebba8be6e0a824944f81b2eec6230" compoundref="buffer__chain_8hpp" startline="47" endline="47">append</references>
+        <references refid="classbasic__string__view_1a333ab8066e73bf2d4bd068f686eeaa24" compoundref="basic__string__view_8hpp" startline="334" endline="334">basic_string_view&lt; CharT, Traits &gt;::data</references>
+        <references refid="classbasic__string__view_1a0b5a6546739bc33ecbe750f98ac47b25" compoundref="basic__string__view_8hpp" startline="305" endline="305">basic_string_view&lt; CharT, Traits &gt;::size</references>
+        <referencedby refid="classbuffer__chain_1a2a0ebba8be6e0a824944f81b2eec6230" compoundref="buffer__chain_8hpp" startline="47" endline="47">append</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classbuffer__chain_1a829f879c328d6ff84b71e7343cc16ac4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void buffer_chain::append</definition>
+        <argsstring>(const buffer_chain &amp;other)</argsstring>
+        <name>append</name>
+        <qualifiedname>buffer_chain::append</qualifiedname>
+        <param>
+          <type>const <ref refid="classbuffer__chain" kindref="compound">buffer_chain</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>追加另一个 <ref refid="classbuffer__chain" kindref="compound">buffer_chain</ref> 的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" line="52" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" bodystart="52" bodyend="55"/>
+        <references refid="classvector_1ab78572320afe8abac07e7762afc9d8d3" compoundref="vector_8hpp" startline="588" endline="588">vector&lt; T, Alloc &gt;::begin</references>
+        <references refid="classvector_1aba0a5982f80665d2e8a9716fd48c9063" compoundref="vector_8hpp" startline="594" endline="594">vector&lt; T, Alloc &gt;::end</references>
+      </memberdef>
+      <memberdef kind="function" id="classbuffer__chain_1ae89612333d057b3423d798495cb518a9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string buffer_chain::flatten</definition>
+        <argsstring>() const</argsstring>
+        <name>flatten</name>
+        <qualifiedname>buffer_chain::flatten</qualifiedname>
+        <briefdescription>
+<para>合并所有段为单一字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" line="60" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" bodystart="60" bodyend="67"/>
+        <references refid="classbasic__string_1a23c524fe4e21ba7bf374b0949786310c" compoundref="basic__string_8hpp" startline="1572" endline="1610">basic_string&lt; CharT, Traits, Alloc &gt;::append</references>
+        <references refid="classbasic__string_1aa2527f9b1a17a4b866e3e59e384dc0d8" compoundref="basic__string_8hpp" startline="1274" endline="1301">basic_string&lt; CharT, Traits, Alloc &gt;::reserve</references>
+      </memberdef>
+      <memberdef kind="function" id="classbuffer__chain_1aab9a98bf930d5d22c55cd97d6b552630" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt;::iovec &gt;</type>
+        <definition>vector&lt;::iovec &gt; buffer_chain::to_iovec</definition>
+        <argsstring>() const</argsstring>
+        <name>to_iovec</name>
+        <qualifiedname>buffer_chain::to_iovec</qualifiedname>
+        <briefdescription>
+<para>构建 writev iovec 数组 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" line="72" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" bodystart="72" bodyend="82"/>
+        <references refid="classvector_1ac8d8b05ea55e928d9a4ccde8bf9bedcf" compoundref="vector_8hpp" startline="887" endline="887">vector&lt; T, Alloc &gt;::push_back</references>
+        <references refid="classvector_1a0066a7fca1a744cdb62d5fb96b51a88f" compoundref="vector_8hpp" startline="775" endline="798">vector&lt; T, Alloc &gt;::reserve</references>
+      </memberdef>
+      <memberdef kind="function" id="classbuffer__chain_1a691e856987043bac849650b9e934e374" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t buffer_chain::total_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>total_size</name>
+        <qualifiedname>buffer_chain::total_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" line="84" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" bodystart="84" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classbuffer__chain_1aa802cea5b91c12c7fa0ddf67754a3f0f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t buffer_chain::segment_count</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>segment_count</name>
+        <qualifiedname>buffer_chain::segment_count</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" line="85" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" bodystart="85" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classbuffer__chain_1a9fee6e38c6d2adc8c006a33dc4330cd7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool buffer_chain::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>buffer_chain::empty</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" line="86" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" bodystart="86" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classbuffer__chain_1a15712bd90d3db53a86a4db574cc8ed4d" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void buffer_chain::clear</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>clear</name>
+        <qualifiedname>buffer_chain::clear</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" line="88" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" bodystart="88" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classbuffer__chain_1a8d006a2f527699a5389425caca43fed9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void buffer_chain::reserve</definition>
+        <argsstring>(size_t count)</argsstring>
+        <name>reserve</name>
+        <qualifiedname>buffer_chain::reserve</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+          <declname>count</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" line="93" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" bodystart="93" bodyend="93"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>链式缓冲区，用于零拷贝数据拼接 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>将多个内存块链接在一起，避免多次拷贝。 <ref refid="classbuffer__chain_1ae89612333d057b3423d798495cb518a9" kindref="member">flatten()</ref> 时才合并为单一缓冲区。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" line="22" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/buffer_chain.hpp" bodystart="22" bodyend="94"/>
+    <listofallmembers>
+      <member refid="classbuffer__chain_1af53b29d0568534ea3b2f365e1adc815b" prot="public" virt="non-virtual"><scope>buffer_chain</scope><name>append</name></member>
+      <member refid="classbuffer__chain_1a2a0ebba8be6e0a824944f81b2eec6230" prot="public" virt="non-virtual"><scope>buffer_chain</scope><name>append</name></member>
+      <member refid="classbuffer__chain_1a829f879c328d6ff84b71e7343cc16ac4" prot="public" virt="non-virtual"><scope>buffer_chain</scope><name>append</name></member>
+      <member refid="classbuffer__chain_1a2e5fc3f3689d75f426d51a37e05ebfe5" prot="public" virt="non-virtual"><scope>buffer_chain</scope><name>buffer_chain</name></member>
+      <member refid="classbuffer__chain_1a15712bd90d3db53a86a4db574cc8ed4d" prot="public" virt="non-virtual"><scope>buffer_chain</scope><name>clear</name></member>
+      <member refid="classbuffer__chain_1a9fee6e38c6d2adc8c006a33dc4330cd7" prot="public" virt="non-virtual"><scope>buffer_chain</scope><name>empty</name></member>
+      <member refid="classbuffer__chain_1ae89612333d057b3423d798495cb518a9" prot="public" virt="non-virtual"><scope>buffer_chain</scope><name>flatten</name></member>
+      <member refid="classbuffer__chain_1a8d006a2f527699a5389425caca43fed9" prot="public" virt="non-virtual"><scope>buffer_chain</scope><name>reserve</name></member>
+      <member refid="classbuffer__chain_1aa802cea5b91c12c7fa0ddf67754a3f0f" prot="public" virt="non-virtual"><scope>buffer_chain</scope><name>segment_count</name></member>
+      <member refid="classbuffer__chain_1a1df55e1a58ec860eebe6dcea71f531a8" prot="private" virt="non-virtual"><scope>buffer_chain</scope><name>segments_</name></member>
+      <member refid="classbuffer__chain_1aab9a98bf930d5d22c55cd97d6b552630" prot="public" virt="non-virtual"><scope>buffer_chain</scope><name>to_iovec</name></member>
+      <member refid="classbuffer__chain_1a691e856987043bac849650b9e934e374" prot="public" virt="non-virtual"><scope>buffer_chain</scope><name>total_size</name></member>
+      <member refid="classbuffer__chain_1af276d11d2f0404b6464dc14335bf162b" prot="private" virt="non-virtual"><scope>buffer_chain</scope><name>total_size_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

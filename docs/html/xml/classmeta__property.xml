@@ -4,9 +4,9 @@
     <compoundname>meta_property</compoundname>
     <includes refid="property_8hpp" local="no">property.hpp</includes>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classmeta__property_1a188ec17bb7abccdbcdfea60b3431eecf" prot="public" static="no">
-        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; <ref refid="classmeta__any" kindref="compound">meta_any</ref>(void *)&gt;</type>
-        <definition>using meta_property::getter = function&lt;meta_any(void*)&gt;</definition>
+      <memberdef kind="typedef" id="classmeta__property_1a16e92c1c9077e0c28d17034f0d3330ea" prot="public" static="no">
+        <type><ref refid="classfunction" kindref="compound">function</ref>&lt; <ref refid="classmeta__any" kindref="compound">meta_any</ref>(const void *)&gt;</type>
+        <definition>using meta_property::getter = function&lt;meta_any(const void*)&gt;</definition>
         <argsstring></argsstring>
         <name>getter</name>
         <qualifiedname>meta_property::getter</qualifiedname>
@@ -17,7 +17,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="30" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="30" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="64" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classmeta__property_1a802468374497eca3108f10abef0486b2" prot="public" static="no">
         <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(void *, const <ref refid="classmeta__any" kindref="compound">meta_any</ref> &amp;)&gt;</type>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="31" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="31" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="65" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="65" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="34" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="34" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="68" column="17" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="68" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classmeta__property_1acf4bfd73ecc649197407369a021d048c" prot="private" static="no" mutable="no">
         <type>reflect::type_id</type>
@@ -64,10 +64,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="35" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="35" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="69" column="22" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="69" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classmeta__property_1ac3abcc5cde903867bad09a4f16d6ed0f" prot="private" static="no" mutable="no">
-        <type><ref refid="classmeta__property_1a188ec17bb7abccdbcdfea60b3431eecf" kindref="member">getter</ref></type>
+        <type><ref refid="classmeta__property_1a16e92c1c9077e0c28d17034f0d3330ea" kindref="member">getter</ref></type>
         <definition>getter meta_property::getter_</definition>
         <argsstring></argsstring>
         <name>getter_</name>
@@ -79,7 +79,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="36" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="36" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="70" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classmeta__property_1a019d56cdfb9eba87bd9897dfafb582ab" prot="private" static="no" mutable="no">
         <type><ref refid="classmeta__property_1a802468374497eca3108f10abef0486b2" kindref="member">setter</ref></type>
@@ -94,14 +94,61 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="37" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="37" bodyend="-1"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="71" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmeta__property_1af4ef05939c3364854ee1de8e2b9a2f98" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
+        <definition>uint16_t meta_property::attrs_</definition>
+        <argsstring></argsstring>
+        <name>attrs_</name>
+        <qualifiedname>meta_property::attrs_</qualifiedname>
+        <initializer>= <ref refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a8134bae8bb64b7bab4a27a4b504f8081" kindref="member">PROP_NONE</ref></initializer>
+        <briefdescription>
+<para>属性注解 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="72" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmeta__property_1aac3cb8a76e62b8002835b1440bc7c8bb" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t meta_property::version_</definition>
+        <argsstring></argsstring>
+        <name>version_</name>
+        <qualifiedname>meta_property::version_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>版本号 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="73" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmeta__property_1a8de791c87a0d55a0e83455a1b12de1ec" prot="private" static="no" mutable="no">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string meta_property::notify_signal_name_</definition>
+        <argsstring></argsstring>
+        <name>notify_signal_name_</name>
+        <qualifiedname>meta_property::notify_signal_name_</qualifiedname>
+        <briefdescription>
+<para>变更通知信号名称（空表示无通知） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="74" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="74" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classmeta__property_1a484ebd413342d16a826e1ec81fdb93af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classmeta__property_1a3d128dc2b3ff0a17e71db7be88b23dfa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
         <definition>meta_property::meta_property</definition>
-        <argsstring>(string_view name, reflect::type_id type_id, getter getter, setter setter)</argsstring>
+        <argsstring>(string_view name, reflect::type_id type_id, getter getter, setter setter, const uint16_t attrs=PROP_NONE)</argsstring>
         <name>meta_property</name>
         <qualifiedname>meta_property::meta_property</qualifiedname>
         <param>
@@ -113,12 +160,17 @@
           <declname>type_id</declname>
         </param>
         <param>
-          <type><ref refid="classmeta__property_1a188ec17bb7abccdbcdfea60b3431eecf" kindref="member">getter</ref></type>
+          <type><ref refid="classmeta__property_1a16e92c1c9077e0c28d17034f0d3330ea" kindref="member">getter</ref></type>
           <declname>getter</declname>
         </param>
         <param>
           <type><ref refid="classmeta__property_1a802468374497eca3108f10abef0486b2" kindref="member">setter</ref></type>
           <declname>setter</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
+          <declname>attrs</declname>
+          <defval><ref refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a8134bae8bb64b7bab4a27a4b504f8081" kindref="member">PROP_NONE</ref></defval>
         </param>
         <briefdescription>
 <para>构造函数 </para>
@@ -156,15 +208,24 @@
 <para>写入器 </para>
 </parameterdescription>
 </parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attrs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>属性注解 </para>
+</parameterdescription>
+</parameteritem>
 </parameterlist>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="47" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="47" bodyend="51"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="85" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="85" bodyend="91"/>
         <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
-        <references refid="classmeta__property_1a6ec5c8c2a3812adb83ee2a2b66a619ae" compoundref="property_8hpp" startline="57" endline="57">name</references>
-        <references refid="classmeta__property_1afae54af8916f19aeaab86ad402a56c4e" compoundref="property_8hpp" startline="63" endline="63">type_id</references>
+        <references refid="classmeta__property_1a6ec5c8c2a3812adb83ee2a2b66a619ae" compoundref="property_8hpp" startline="97" endline="97">name</references>
+        <references refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a8134bae8bb64b7bab4a27a4b504f8081" compoundref="property_8hpp" startline="32">PROP_NONE</references>
+        <references refid="classmeta__property_1afae54af8916f19aeaab86ad402a56c4e" compoundref="property_8hpp" startline="103" endline="103">type_id</references>
       </memberdef>
       <memberdef kind="function" id="classmeta__property_1a6ec5c8c2a3812adb83ee2a2b66a619ae" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
@@ -182,8 +243,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="57" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="57" bodyend="57"/>
-        <referencedby refid="classmeta__property_1a484ebd413342d16a826e1ec81fdb93af" compoundref="property_8hpp" startline="47" endline="51">meta_property</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="97" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="97" bodyend="97"/>
+        <referencedby refid="classmeta__property_1a3d128dc2b3ff0a17e71db7be88b23dfa" compoundref="property_8hpp" startline="85" endline="91">meta_property</referencedby>
       </memberdef>
       <memberdef kind="function" id="classmeta__property_1afae54af8916f19aeaab86ad402a56c4e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>reflect::type_id</type>
@@ -201,17 +262,338 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="63" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="63" bodyend="63"/>
-        <referencedby refid="classmeta__property_1a484ebd413342d16a826e1ec81fdb93af" compoundref="property_8hpp" startline="47" endline="51">meta_property</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="103" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="103" bodyend="103"/>
+        <referencedby refid="classmeta__property_1a3d128dc2b3ff0a17e71db7be88b23dfa" compoundref="property_8hpp" startline="85" endline="91">meta_property</referencedby>
       </memberdef>
-      <memberdef kind="function" id="classmeta__property_1a1f6577ecfc12e9f882b05d97ee4c6f93" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classmeta__property_1a9fa27d3cf2a629aff64a6b83acbd8e6f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
+        <definition>uint16_t meta_property::attributes</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>attributes</name>
+        <qualifiedname>meta_property::attributes</qualifiedname>
+        <briefdescription>
+<para>获取属性注解 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>注解标志组合 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="109" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="109" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1a5a4a848f6896daa548916266e1f03096" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void meta_property::set_attributes</definition>
+        <argsstring>(const uint16_t attrs) noexcept</argsstring>
+        <name>set_attributes</name>
+        <qualifiedname>meta_property::set_attributes</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
+          <declname>attrs</declname>
+        </param>
+        <briefdescription>
+<para>设置属性注解 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>attrs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>注解标志组合 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="115" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="115" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1ae626fae5790df2b5167957443f77a042" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool meta_property::is_transient</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_transient</name>
+        <qualifiedname>meta_property::is_transient</qualifiedname>
+        <briefdescription>
+<para>是否为暂态属性（不参与序列化） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="120" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="120" bodyend="120"/>
+        <references refid="group___reflection_1ga23bb003b656f3abb7643fae2220e735c" compoundref="property_8hpp" startline="52" endline="54">prop_has_attr</references>
+        <references refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a35e0df006b97af65212cf752c9625e6e" compoundref="property_8hpp" startline="33">PROP_TRANSIENT</references>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1ab5b219d06f66852d44c0ee87c25d49d9" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool meta_property::is_required</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_required</name>
+        <qualifiedname>meta_property::is_required</qualifiedname>
+        <briefdescription>
+<para>是否为必填属性（反序列化时必须存在） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="125" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="125" bodyend="125"/>
+        <references refid="group___reflection_1ga23bb003b656f3abb7643fae2220e735c" compoundref="property_8hpp" startline="52" endline="54">prop_has_attr</references>
+        <references refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a8ced6b2c2bdd10488b4ee95d770c89f7" compoundref="property_8hpp" startline="34">PROP_REQUIRED</references>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1ad3be44678b8e9793d64fb35bc1ee6a35" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool meta_property::is_readonly</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_readonly</name>
+        <qualifiedname>meta_property::is_readonly</qualifiedname>
+        <briefdescription>
+<para>是否为只读属性 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="130" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="130" bodyend="130"/>
+        <references refid="group___reflection_1ga23bb003b656f3abb7643fae2220e735c" compoundref="property_8hpp" startline="52" endline="54">prop_has_attr</references>
+        <references refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5ae03d365f13ab2ba8b3e3735235a39829" compoundref="property_8hpp" startline="35">PROP_READ_ONLY</references>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1a13b413c06eddee398956f79d679d7ce6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool meta_property::is_optional</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_optional</name>
+        <qualifiedname>meta_property::is_optional</qualifiedname>
+        <briefdescription>
+<para>是否为可选属性 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="135" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="135" bodyend="135"/>
+        <references refid="group___reflection_1ga23bb003b656f3abb7643fae2220e735c" compoundref="property_8hpp" startline="52" endline="54">prop_has_attr</references>
+        <references refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a4525e363c96b8820161e8edb28335da7" compoundref="property_8hpp" startline="36">PROP_OPTIONAL</references>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1ad8d2192158ebf2db0068cde307a874f0" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool meta_property::is_versioned</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_versioned</name>
+        <qualifiedname>meta_property::is_versioned</qualifiedname>
+        <briefdescription>
+<para>是否启用版本追踪 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="140" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="140" bodyend="140"/>
+        <references refid="group___reflection_1ga23bb003b656f3abb7643fae2220e735c" compoundref="property_8hpp" startline="52" endline="54">prop_has_attr</references>
+        <references refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a17510c8324cde4078432427869936c92" compoundref="property_8hpp" startline="37">PROP_VERSIONED</references>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1a9f82529ae7168542ebbfa0d42bf8ddee" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool meta_property::is_primary_key</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_primary_key</name>
+        <qualifiedname>meta_property::is_primary_key</qualifiedname>
+        <briefdescription>
+<para>是否为主键列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="145" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="145" bodyend="145"/>
+        <references refid="group___reflection_1ga23bb003b656f3abb7643fae2220e735c" compoundref="property_8hpp" startline="52" endline="54">prop_has_attr</references>
+        <references refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a425a6f7b9bbb9f23b39e5ff80c43ee22" compoundref="property_8hpp" startline="39">PROP_PRIMARY_KEY</references>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1ae67ac96ad8f147cc10913da0233e0f93" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool meta_property::is_auto_increment</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_auto_increment</name>
+        <qualifiedname>meta_property::is_auto_increment</qualifiedname>
+        <briefdescription>
+<para>是否为自增列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="150" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="150" bodyend="150"/>
+        <references refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a99b60c66761cf68cc2bf6b3a23ed8a55" compoundref="property_8hpp" startline="40">PROP_AUTO_INC</references>
+        <references refid="group___reflection_1ga23bb003b656f3abb7643fae2220e735c" compoundref="property_8hpp" startline="52" endline="54">prop_has_attr</references>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1acdbd3f0c1d891a1f3363c34dcb5ca2f1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool meta_property::is_unique</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_unique</name>
+        <qualifiedname>meta_property::is_unique</qualifiedname>
+        <briefdescription>
+<para>是否有唯一约束 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="155" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="155" bodyend="155"/>
+        <references refid="group___reflection_1ga23bb003b656f3abb7643fae2220e735c" compoundref="property_8hpp" startline="52" endline="54">prop_has_attr</references>
+        <references refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a4b3d7192079a01db1431c11f0614ce4a" compoundref="property_8hpp" startline="41">PROP_UNIQUE</references>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1a6228168c917c1a2f28ef9bab8ae1b24e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool meta_property::is_index</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_index</name>
+        <qualifiedname>meta_property::is_index</qualifiedname>
+        <briefdescription>
+<para>是否有索引 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="160" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="160" bodyend="160"/>
+        <references refid="group___reflection_1ga23bb003b656f3abb7643fae2220e735c" compoundref="property_8hpp" startline="52" endline="54">prop_has_attr</references>
+        <references refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a49799facf119e51b38ec7b586411691a" compoundref="property_8hpp" startline="42">PROP_INDEX</references>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1a40a2ee05a1d86dbd723d68d2522cf9b6" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool meta_property::is_foreign_key</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>is_foreign_key</name>
+        <qualifiedname>meta_property::is_foreign_key</qualifiedname>
+        <briefdescription>
+<para>是否为外键列 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="165" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="165" bodyend="165"/>
+        <references refid="group___reflection_1gga8a2d3fd1d9146e1f0a43e4591ec79fa5a9beac021644986b0446a8bd13cc4e110" compoundref="property_8hpp" startline="43">PROP_FOREIGN_KEY</references>
+        <references refid="group___reflection_1ga23bb003b656f3abb7643fae2220e735c" compoundref="property_8hpp" startline="52" endline="54">prop_has_attr</references>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1a5fb877d79011b2fea27b99114bdbb8a6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void meta_property::set_notify_signal</definition>
+        <argsstring>(string_view signal_name)</argsstring>
+        <name>set_notify_signal</name>
+        <qualifiedname>meta_property::set_notify_signal</qualifiedname>
+        <param>
+          <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>signal_name</declname>
+        </param>
+        <briefdescription>
+<para>设置变更通知信号名称 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>signal_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>信号名称 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="171" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="171" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1a80f387296ab4034a5e1ae4f66ba31749" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+        <definition>string_view meta_property::notify_signal</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>notify_signal</name>
+        <qualifiedname>meta_property::notify_signal</qualifiedname>
+        <briefdescription>
+<para>获取变更通知信号名称 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="176" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="176" bodyend="176"/>
+        <references refid="classbasic__string__view_1a0f326706d8c59c24d7012ae254368775" compoundref="basic__string__view_8hpp" startline="443" endline="445">basic_string_view&lt; CharT, Traits &gt;::view</references>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1a09bf3decd29a3f52873890a7d170f693" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool meta_property::has_notify_signal</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>has_notify_signal</name>
+        <qualifiedname>meta_property::has_notify_signal</qualifiedname>
+        <briefdescription>
+<para>是否有变更通知信号 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="181" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="181" bodyend="181"/>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1a215ddd06828e3063b41bddbf0570346f" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t meta_property::version</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>version</name>
+        <qualifiedname>meta_property::version</qualifiedname>
+        <briefdescription>
+<para>获取版本号 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="186" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="186" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1a4a447da60cf603197cb24f31c54043ef" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void meta_property::set_version</definition>
+        <argsstring>(const uint32_t ver) noexcept</argsstring>
+        <name>set_version</name>
+        <qualifiedname>meta_property::set_version</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>ver</declname>
+        </param>
+        <briefdescription>
+<para>设置版本号 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>版本号 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="192" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="192" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="classmeta__property_1aad4205f94d1aa52f28e60f5e441349fc" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classmeta__any" kindref="compound">meta_any</ref></type>
         <definition>meta_any meta_property::get</definition>
-        <argsstring>(void *obj) const</argsstring>
+        <argsstring>(const void *obj) const</argsstring>
         <name>get</name>
         <qualifiedname>meta_property::get</qualifiedname>
         <param>
-          <type>void *</type>
+          <type>const void *</type>
           <declname>obj</declname>
         </param>
         <briefdescription>
@@ -233,8 +615,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="70" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="70" bodyend="75"/>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="199" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="199" bodyend="204"/>
       </memberdef>
       <memberdef kind="function" id="classmeta__property_1a0d7f05d04207d8d1546c9fd932e075bc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>bool</type>
@@ -277,9 +658,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="83" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="83" bodyend="93"/>
-        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
-        <referencedby refid="classmeta__property_1a9dd9c836263dc55a047f8549fd6a903e" compoundref="property_8hpp" startline="103" endline="105">set</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="212" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="212" bodyend="222"/>
+        <referencedby refid="classmeta__property_1a9dd9c836263dc55a047f8549fd6a903e" compoundref="property_8hpp" startline="232" endline="234">set</referencedby>
       </memberdef>
       <memberdef kind="function" id="classmeta__property_1a9dd9c836263dc55a047f8549fd6a903e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -340,9 +720,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="103" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="103" bodyend="105"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="232" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="232" bodyend="234"/>
         <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
-        <references refid="classmeta__property_1a0d7f05d04207d8d1546c9fd932e075bc" compoundref="property_8hpp" startline="83" endline="93">set</references>
+        <references refid="classmeta__property_1a0d7f05d04207d8d1546c9fd932e075bc" compoundref="property_8hpp" startline="212" endline="222">set</references>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -351,20 +731,40 @@
     <detaileddescription>
 <para>描述一个成员变量的元信息，支持通过反射读写属性值。 </para>
     </detaileddescription>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="28" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="28" bodyend="106"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" line="62" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/reflect/property.hpp" bodystart="62" bodyend="235"/>
     <listofallmembers>
-      <member refid="classmeta__property_1a1f6577ecfc12e9f882b05d97ee4c6f93" prot="public" virt="non-virtual"><scope>meta_property</scope><name>get</name></member>
-      <member refid="classmeta__property_1a188ec17bb7abccdbcdfea60b3431eecf" prot="public" virt="non-virtual"><scope>meta_property</scope><name>getter</name></member>
+      <member refid="classmeta__property_1a9fa27d3cf2a629aff64a6b83acbd8e6f" prot="public" virt="non-virtual"><scope>meta_property</scope><name>attributes</name></member>
+      <member refid="classmeta__property_1af4ef05939c3364854ee1de8e2b9a2f98" prot="private" virt="non-virtual"><scope>meta_property</scope><name>attrs_</name></member>
+      <member refid="classmeta__property_1aad4205f94d1aa52f28e60f5e441349fc" prot="public" virt="non-virtual"><scope>meta_property</scope><name>get</name></member>
+      <member refid="classmeta__property_1a16e92c1c9077e0c28d17034f0d3330ea" prot="public" virt="non-virtual"><scope>meta_property</scope><name>getter</name></member>
       <member refid="classmeta__property_1ac3abcc5cde903867bad09a4f16d6ed0f" prot="private" virt="non-virtual"><scope>meta_property</scope><name>getter_</name></member>
-      <member refid="classmeta__property_1a484ebd413342d16a826e1ec81fdb93af" prot="public" virt="non-virtual"><scope>meta_property</scope><name>meta_property</name></member>
+      <member refid="classmeta__property_1a09bf3decd29a3f52873890a7d170f693" prot="public" virt="non-virtual"><scope>meta_property</scope><name>has_notify_signal</name></member>
+      <member refid="classmeta__property_1ae67ac96ad8f147cc10913da0233e0f93" prot="public" virt="non-virtual"><scope>meta_property</scope><name>is_auto_increment</name></member>
+      <member refid="classmeta__property_1a40a2ee05a1d86dbd723d68d2522cf9b6" prot="public" virt="non-virtual"><scope>meta_property</scope><name>is_foreign_key</name></member>
+      <member refid="classmeta__property_1a6228168c917c1a2f28ef9bab8ae1b24e" prot="public" virt="non-virtual"><scope>meta_property</scope><name>is_index</name></member>
+      <member refid="classmeta__property_1a13b413c06eddee398956f79d679d7ce6" prot="public" virt="non-virtual"><scope>meta_property</scope><name>is_optional</name></member>
+      <member refid="classmeta__property_1a9f82529ae7168542ebbfa0d42bf8ddee" prot="public" virt="non-virtual"><scope>meta_property</scope><name>is_primary_key</name></member>
+      <member refid="classmeta__property_1ad3be44678b8e9793d64fb35bc1ee6a35" prot="public" virt="non-virtual"><scope>meta_property</scope><name>is_readonly</name></member>
+      <member refid="classmeta__property_1ab5b219d06f66852d44c0ee87c25d49d9" prot="public" virt="non-virtual"><scope>meta_property</scope><name>is_required</name></member>
+      <member refid="classmeta__property_1ae626fae5790df2b5167957443f77a042" prot="public" virt="non-virtual"><scope>meta_property</scope><name>is_transient</name></member>
+      <member refid="classmeta__property_1acdbd3f0c1d891a1f3363c34dcb5ca2f1" prot="public" virt="non-virtual"><scope>meta_property</scope><name>is_unique</name></member>
+      <member refid="classmeta__property_1ad8d2192158ebf2db0068cde307a874f0" prot="public" virt="non-virtual"><scope>meta_property</scope><name>is_versioned</name></member>
+      <member refid="classmeta__property_1a3d128dc2b3ff0a17e71db7be88b23dfa" prot="public" virt="non-virtual"><scope>meta_property</scope><name>meta_property</name></member>
       <member refid="classmeta__property_1a6ec5c8c2a3812adb83ee2a2b66a619ae" prot="public" virt="non-virtual"><scope>meta_property</scope><name>name</name></member>
       <member refid="classmeta__property_1a4438642d39aeb3dffcd0d741bb7adcc3" prot="private" virt="non-virtual"><scope>meta_property</scope><name>name_</name></member>
+      <member refid="classmeta__property_1a80f387296ab4034a5e1ae4f66ba31749" prot="public" virt="non-virtual"><scope>meta_property</scope><name>notify_signal</name></member>
+      <member refid="classmeta__property_1a8de791c87a0d55a0e83455a1b12de1ec" prot="private" virt="non-virtual"><scope>meta_property</scope><name>notify_signal_name_</name></member>
       <member refid="classmeta__property_1a0d7f05d04207d8d1546c9fd932e075bc" prot="public" virt="non-virtual"><scope>meta_property</scope><name>set</name></member>
       <member refid="classmeta__property_1a9dd9c836263dc55a047f8549fd6a903e" prot="public" virt="non-virtual"><scope>meta_property</scope><name>set</name></member>
+      <member refid="classmeta__property_1a5a4a848f6896daa548916266e1f03096" prot="public" virt="non-virtual"><scope>meta_property</scope><name>set_attributes</name></member>
+      <member refid="classmeta__property_1a5fb877d79011b2fea27b99114bdbb8a6" prot="public" virt="non-virtual"><scope>meta_property</scope><name>set_notify_signal</name></member>
+      <member refid="classmeta__property_1a4a447da60cf603197cb24f31c54043ef" prot="public" virt="non-virtual"><scope>meta_property</scope><name>set_version</name></member>
       <member refid="classmeta__property_1a802468374497eca3108f10abef0486b2" prot="public" virt="non-virtual"><scope>meta_property</scope><name>setter</name></member>
       <member refid="classmeta__property_1a019d56cdfb9eba87bd9897dfafb582ab" prot="private" virt="non-virtual"><scope>meta_property</scope><name>setter_</name></member>
       <member refid="classmeta__property_1afae54af8916f19aeaab86ad402a56c4e" prot="public" virt="non-virtual"><scope>meta_property</scope><name>type_id</name></member>
       <member refid="classmeta__property_1acf4bfd73ecc649197407369a021d048c" prot="private" virt="non-virtual"><scope>meta_property</scope><name>type_id_</name></member>
+      <member refid="classmeta__property_1a215ddd06828e3063b41bddbf0570346f" prot="public" virt="non-virtual"><scope>meta_property</scope><name>version</name></member>
+      <member refid="classmeta__property_1aac3cb8a76e62b8002835b1440bc7c8bb" prot="private" virt="non-virtual"><scope>meta_property</scope><name>version_</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

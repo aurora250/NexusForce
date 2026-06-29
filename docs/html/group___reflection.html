@@ -102,6 +102,10 @@ $(function(){initNavTree('group___reflection.html','',''); });
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">类型名称获取器  <a href="structtype__name.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:meta_5Fany" id="r_meta_5Fany"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmeta__any.html">meta_any</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">类型擦除容器  <a href="classmeta__any.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:enum_5Fentry" id="r_enum_5Fentry"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structenum__entry.html">enum_entry</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">枚举条目  <a href="structenum__entry.html#details">更多...</a><br /></td></tr>
+<tr class="memitem:meta_5Fenum" id="r_meta_5Fenum"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmeta__enum.html">meta_enum</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">枚举反射元数据类  <a href="classmeta__enum.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:meta_5Ffunction" id="r_meta_5Ffunction"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmeta__function.html">meta_function</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">函数反射元数据类  <a href="classmeta__function.html#details">更多...</a><br /></td></tr>
 <tr class="memitem:meta_5Fproperty" id="r_meta_5Fproperty"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classmeta__property.html">meta_property</a></td></tr>
@@ -115,14 +119,28 @@ $(function(){initNavTree('group___reflection.html','',''); });
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 宏定义</h2></td></tr>
-<tr class="memitem:ga6508bad6337bffd24165f1d8038e2eb8" id="r_ga6508bad6337bffd24165f1d8038e2eb8"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ga6508bad6337bffd24165f1d8038e2eb8">NEFORCE_REFLECT_REGISTER_N</a>(Class,  Name)</td></tr>
-<tr class="memdesc:ga6508bad6337bffd24165f1d8038e2eb8"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册类型（无基类）  <br /></td></tr>
-<tr class="memitem:gad623e383ce36c4add72a0ff8cc80c972" id="r_gad623e383ce36c4add72a0ff8cc80c972"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#gad623e383ce36c4add72a0ff8cc80c972">NEFORCE_REFLECT_REGISTER_N_DERIVED</a>(Class,  Base,  Name)</td></tr>
-<tr class="memdesc:gad623e383ce36c4add72a0ff8cc80c972"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册类型（带基类）  <br /></td></tr>
 <tr class="memitem:ga8cd8052ba270c6ae08c9486e3191ac60" id="r_ga8cd8052ba270c6ae08c9486e3191ac60"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ga8cd8052ba270c6ae08c9486e3191ac60">NEFORCE_REFLECT_REGISTER</a>(Class)</td></tr>
 <tr class="memdesc:ga8cd8052ba270c6ae08c9486e3191ac60"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册类型（无基类）  <br /></td></tr>
 <tr class="memitem:gafc434cedd29fcb0b3450b3f9a7d3286d" id="r_gafc434cedd29fcb0b3450b3f9a7d3286d"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#gafc434cedd29fcb0b3450b3f9a7d3286d">NEFORCE_REFLECT_REGISTER_DERIVED</a>(Class,  Base)</td></tr>
 <tr class="memdesc:gafc434cedd29fcb0b3450b3f9a7d3286d"><td class="mdescLeft">&#160;</td><td class="mdescRight">注册类型（带基类）  <br /></td></tr>
+<tr class="memitem:ga7733136728615a337adca516a0a7ed8c" id="r_ga7733136728615a337adca516a0a7ed8c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ga7733136728615a337adca516a0a7ed8c">NEFORCE_REFLECT_RESOLVE_BASES</a>()</td></tr>
+<tr class="memdesc:ga7733136728615a337adca516a0a7ed8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">统一解析所有待解析的基类引用  <br /></td></tr>
+<tr class="memitem:ga8e300ceae3db692c23e28487a0d79756" id="r_ga8e300ceae3db692c23e28487a0d79756"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ga8e300ceae3db692c23e28487a0d79756">NEFORCE_REFLECT_OBJ</a>(Class)</td></tr>
+<tr class="memdesc:ga8e300ceae3db692c23e28487a0d79756"><td class="mdescLeft">&#160;</td><td class="mdescRight">标记类需要反射注册  <br /></td></tr>
+<tr class="memitem:ga9f2f247e3f218411a3a72ba60ba83367" id="r_ga9f2f247e3f218411a3a72ba60ba83367"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ga9f2f247e3f218411a3a72ba60ba83367">NEFORCE_REFLECT_PROP</a>(type,  <a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>)</td></tr>
+<tr class="memdesc:ga9f2f247e3f218411a3a72ba60ba83367"><td class="mdescLeft">&#160;</td><td class="mdescRight">标记成员属性  <br /></td></tr>
+<tr class="memitem:gab4945e6e33ddcbaae53515e967721cd5" id="r_gab4945e6e33ddcbaae53515e967721cd5"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#gab4945e6e33ddcbaae53515e967721cd5">NEFORCE_REFLECT_PROP_ATTR</a>(type,  <a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>,  attrs)</td></tr>
+<tr class="memdesc:gab4945e6e33ddcbaae53515e967721cd5"><td class="mdescLeft">&#160;</td><td class="mdescRight">标记带注解的成员属性  <br /></td></tr>
+<tr class="memitem:ga70162fcbdc111236a5b5c3656407b80c" id="r_ga70162fcbdc111236a5b5c3656407b80c"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ga70162fcbdc111236a5b5c3656407b80c">NEFORCE_REFLECT_FUNC</a>(ret,  <a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>, ...)</td></tr>
+<tr class="memdesc:ga70162fcbdc111236a5b5c3656407b80c"><td class="mdescLeft">&#160;</td><td class="mdescRight">标记成员函数  <br /></td></tr>
+<tr class="memitem:ga77c72595fbb38db93a3f8723f95b78b3" id="r_ga77c72595fbb38db93a3f8723f95b78b3"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ga77c72595fbb38db93a3f8723f95b78b3">NEFORCE_REFLECT_SIGNAL</a>(sig_type,  <a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>, ...)</td></tr>
+<tr class="memdesc:ga77c72595fbb38db93a3f8723f95b78b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">标记信号成员  <br /></td></tr>
+<tr class="memitem:ga1762d432f7ea30c46083a2f992dccf05" id="r_ga1762d432f7ea30c46083a2f992dccf05"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ga1762d432f7ea30c46083a2f992dccf05">NEFORCE_REFLECT_ENUM</a>(Enum,  Underlying)</td></tr>
+<tr class="memdesc:ga1762d432f7ea30c46083a2f992dccf05"><td class="mdescLeft">&#160;</td><td class="mdescRight">标记枚举类型需要反射注册  <br /></td></tr>
+<tr class="memitem:ga7df1cbdc6536deab37a43b7fec1276d0" id="r_ga7df1cbdc6536deab37a43b7fec1276d0"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ga7df1cbdc6536deab37a43b7fec1276d0">NEFORCE_REFLECT_ENUM_VAL</a>(Enum,  Name)</td></tr>
+<tr class="memdesc:ga7df1cbdc6536deab37a43b7fec1276d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">标记枚举值条目  <br /></td></tr>
+<tr class="memitem:gad4e18676202d8b050b4292bc56899b67" id="r_gad4e18676202d8b050b4292bc56899b67"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#gad4e18676202d8b050b4292bc56899b67">NEFORCE_DB_TABLE</a>(TableName)</td></tr>
+<tr class="memdesc:gad4e18676202d8b050b4292bc56899b67"><td class="mdescLeft">&#160;</td><td class="mdescRight">指定数据库表名  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 类型定义</h2></td></tr>
@@ -130,22 +148,285 @@ $(function(){initNavTree('group___reflection.html','',''); });
 using&#160;</td><td class="memItemRight"><b>type_id</b> = <a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a></td></tr>
 <tr class="memdesc:ga541516a057bbd67d55d02ece107883d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">类型标识符 <br /></td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+枚举</h2></td></tr>
+<tr class="memitem:ga8a2d3fd1d9146e1f0a43e4591ec79fa5" id="r_ga8a2d3fd1d9146e1f0a43e4591ec79fa5"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#ga8a2d3fd1d9146e1f0a43e4591ec79fa5">property_attr</a> : uint16_t { <br />
+&#160;&#160;<a class="el" href="#gga8a2d3fd1d9146e1f0a43e4591ec79fa5a8134bae8bb64b7bab4a27a4b504f8081">PROP_NONE</a> = 0
+, <a class="el" href="#gga8a2d3fd1d9146e1f0a43e4591ec79fa5a35e0df006b97af65212cf752c9625e6e">PROP_TRANSIENT</a> = 1 &lt;&lt; 0
+, <a class="el" href="#gga8a2d3fd1d9146e1f0a43e4591ec79fa5a8ced6b2c2bdd10488b4ee95d770c89f7">PROP_REQUIRED</a> = 1 &lt;&lt; 1
+, <a class="el" href="#gga8a2d3fd1d9146e1f0a43e4591ec79fa5ae03d365f13ab2ba8b3e3735235a39829">PROP_READ_ONLY</a> = 1 &lt;&lt; 2
+, <br />
+&#160;&#160;<a class="el" href="#gga8a2d3fd1d9146e1f0a43e4591ec79fa5a4525e363c96b8820161e8edb28335da7">PROP_OPTIONAL</a> = 1 &lt;&lt; 3
+, <a class="el" href="#gga8a2d3fd1d9146e1f0a43e4591ec79fa5a17510c8324cde4078432427869936c92">PROP_VERSIONED</a> = 1 &lt;&lt; 4
+, <a class="el" href="#gga8a2d3fd1d9146e1f0a43e4591ec79fa5a425a6f7b9bbb9f23b39e5ff80c43ee22">PROP_PRIMARY_KEY</a> = 1 &lt;&lt; 5
+, <a class="el" href="#gga8a2d3fd1d9146e1f0a43e4591ec79fa5a99b60c66761cf68cc2bf6b3a23ed8a55">PROP_AUTO_INC</a> = 1 &lt;&lt; 6
+, <br />
+&#160;&#160;<a class="el" href="#gga8a2d3fd1d9146e1f0a43e4591ec79fa5a4b3d7192079a01db1431c11f0614ce4a">PROP_UNIQUE</a> = 1 &lt;&lt; 7
+, <a class="el" href="#gga8a2d3fd1d9146e1f0a43e4591ec79fa5a49799facf119e51b38ec7b586411691a">PROP_INDEX</a> = 1 &lt;&lt; 8
+, <a class="el" href="#gga8a2d3fd1d9146e1f0a43e4591ec79fa5a9beac021644986b0446a8bd13cc4e110">PROP_FOREIGN_KEY</a> = 1 &lt;&lt; 9
+<br />
+ }</td></tr>
+<tr class="memdesc:ga8a2d3fd1d9146e1f0a43e4591ec79fa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">属性注解标志  <a href="#ga8a2d3fd1d9146e1f0a43e4591ec79fa5">更多...</a><br /></td></tr>
+<tr class="memitem:ga8ba8c42c850f322ef2ef910e15c928e9" id="r_ga8ba8c42c850f322ef2ef910e15c928e9"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ga8ba8c42c850f322ef2ef910e15c928e9">container_kind</a> : uint8_t { <a class="el" href="#gga8ba8c42c850f322ef2ef910e15c928e9a334c4a4c42fdb79d7ebc3e73b517e6f8">container_kind::none</a>
+, <a class="el" href="#gga8ba8c42c850f322ef2ef910e15c928e9a6ec7489017b25b5fff20d353b6d2162e">container_kind::sequential</a>
+, <a class="el" href="#gga8ba8c42c850f322ef2ef910e15c928e9a1feb49ad88ac6efc508a6a925b5a02a6">container_kind::associative</a>
+ }</td></tr>
+<tr class="memdesc:ga8ba8c42c850f322ef2ef910e15c928e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">容器类型标识  <a href="#ga8ba8c42c850f322ef2ef910e15c928e9">更多...</a><br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 函数</h2></td></tr>
-<tr class="memitem:ga5a74d42372d4485518ebb6915c124a37" id="r_ga5a74d42372d4485518ebb6915c124a37"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:ga5a74d42372d4485518ebb6915c124a37 template"><td class="memItemLeft"><a class="el" href="classtype__builder.html">type_builder</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga5a74d42372d4485518ebb6915c124a37">reflect</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>)</td></tr>
-<tr class="memdesc:ga5a74d42372d4485518ebb6915c124a37"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建类型反射构建器  <br /></td></tr>
+<tr class="memitem:ga580ac475bed401f28eca8e86b4de57c2" id="r_ga580ac475bed401f28eca8e86b4de57c2"><td class="memTemplParams" colspan="2"><a id="ga580ac475bed401f28eca8e86b4de57c2" name="ga580ac475bed401f28eca8e86b4de57c2"></a>
+template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga580ac475bed401f28eca8e86b4de57c2 template"><td class="memItemLeft">constexpr <a class="el" href="#ga541516a057bbd67d55d02ece107883d9">type_id</a>&#160;</td><td class="memItemRight"><b>type_id_for</b> () noexcept</td></tr>
+<tr class="memdesc:ga580ac475bed401f28eca8e86b4de57c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算类型 T 的运行时期类型标识 <br /></td></tr>
+<tr class="memitem:ga88532337ecb7282cd7543cbc2556e1de" id="r_ga88532337ecb7282cd7543cbc2556e1de"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ga88532337ecb7282cd7543cbc2556e1de">swap</a> (<a class="el" href="classmeta__any.html">meta_any</a> &amp;lhs, <a class="el" href="classmeta__any.html">meta_any</a> &amp;rhs) noexcept</td></tr>
+<tr class="memdesc:ga88532337ecb7282cd7543cbc2556e1de"><td class="mdescLeft">&#160;</td><td class="mdescRight">交换两个 <a class="el" href="classmeta__any.html" title="类型擦除容器">meta_any</a>  <br /></td></tr>
+<tr class="memitem:ga23bb003b656f3abb7643fae2220e735c" id="r_ga23bb003b656f3abb7643fae2220e735c"><td class="memItemLeft">constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#ga23bb003b656f3abb7643fae2220e735c">prop_has_attr</a> (const <a class="el" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a> attrs, const <a class="el" href="#ga8a2d3fd1d9146e1f0a43e4591ec79fa5">property_attr</a> flag) noexcept</td></tr>
+<tr class="memdesc:ga23bb003b656f3abb7643fae2220e735c"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查属性注解是否包含指定标志  <br /></td></tr>
+<tr class="memitem:gac197fd7307a57ddbf46feb16ac7ebd32" id="r_gac197fd7307a57ddbf46feb16ac7ebd32"><td class="memTemplParams" colspan="2">template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#gaca38abc104326427a46bccfd27cbfe28">is_class_v</a>&lt; T &gt;, int &gt; = 0&gt; </td></tr>
+<tr class="memitem:gac197fd7307a57ddbf46feb16ac7ebd32 template"><td class="memItemLeft"><a class="el" href="classtype__builder.html">type_builder</a>&lt; T &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gac197fd7307a57ddbf46feb16ac7ebd32">reflect</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> <a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a>)</td></tr>
+<tr class="memdesc:gac197fd7307a57ddbf46feb16ac7ebd32"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建类型反射构建器  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 变量</h2></td></tr>
 <tr class="memitem:ga71a3267b0111c48af4e304d2a756abd1" id="r_ga71a3267b0111c48af4e304d2a756abd1"><td class="memTemplParams" colspan="2"><a id="ga71a3267b0111c48af4e304d2a756abd1" name="ga71a3267b0111c48af4e304d2a756abd1"></a>
 template&lt;typename T&gt; </td></tr>
 <tr class="memitem:ga71a3267b0111c48af4e304d2a756abd1 template"><td class="memItemLeft">constexpr <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><b>type_name_v</b> = <a class="el" href="structtype__name.html">type_name</a>&lt;T&gt;::value</td></tr>
-<tr class="memdesc:ga71a3267b0111c48af4e304d2a756abd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">type_name的便捷访问变量模板 <br /></td></tr>
+<tr class="memdesc:ga71a3267b0111c48af4e304d2a756abd1"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structtype__name.html" title="类型名称获取器">type_name</a> 的便捷访问变量模板 <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>运行时类型反射系统 </p>
 </div><a name="doc-define-members" id="doc-define-members"></a><h2 id="header-doc-define-members" class="groupheader">宏定义说明</h2>
+<a id="gad4e18676202d8b050b4292bc56899b67" name="gad4e18676202d8b050b4292bc56899b67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad4e18676202d8b050b4292bc56899b67">&#9670;&#160;</a></span>NEFORCE_DB_TABLE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEFORCE_DB_TABLE</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>TableName</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>指定数据库表名 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">TableName</td><td>数据库表名字符串字面量</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>当目标表名与类名不一致时，在类体内放置此宏指定表名映射。 扫描器会生成 table_name() 调用将表名写入 meta_type。 </p>
+
+<p class="definition">在文件 <a class="el" href="reflect__macros_8hpp_source.html">reflect_macros.hpp</a> 第 <a class="el" href="reflect__macros_8hpp_source.html#l00095">95</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga1762d432f7ea30c46083a2f992dccf05" name="ga1762d432f7ea30c46083a2f992dccf05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1762d432f7ea30c46083a2f992dccf05">&#9670;&#160;</a></span>NEFORCE_REFLECT_ENUM</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEFORCE_REFLECT_ENUM</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>Enum</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>Underlying</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>标记枚举类型需要反射注册 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Enum</td><td>枚举类型名 </td></tr>
+    <tr><td class="paramname">Underlying</td><td>底层整数类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>此标记宏用于让扫描器识别枚举类型并生成反射注册代码。 功能版本在 <a class="el" href="reflect_8hpp.html" title="反射系统主入口">reflect.hpp</a> 中定义。 </p>
+
+<p class="definition">在文件 <a class="el" href="reflect__macros_8hpp_source.html">reflect_macros.hpp</a> 第 <a class="el" href="reflect__macros_8hpp_source.html#l00077">77</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga7df1cbdc6536deab37a43b7fec1276d0" name="ga7df1cbdc6536deab37a43b7fec1276d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7df1cbdc6536deab37a43b7fec1276d0">&#9670;&#160;</a></span>NEFORCE_REFLECT_ENUM_VAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEFORCE_REFLECT_ENUM_VAL</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>Enum</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>Name</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>标记枚举值条目 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Enum</td><td>枚举类型名 </td></tr>
+    <tr><td class="paramname">Name</td><td>枚举值名称 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="reflect__macros_8hpp_source.html">reflect_macros.hpp</a> 第 <a class="el" href="reflect__macros_8hpp_source.html#l00085">85</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga70162fcbdc111236a5b5c3656407b80c" name="ga70162fcbdc111236a5b5c3656407b80c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga70162fcbdc111236a5b5c3656407b80c">&#9670;&#160;</a></span>NEFORCE_REFLECT_FUNC</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEFORCE_REFLECT_FUNC</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>ret</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em><a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em></em></span>...&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>标记成员函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ret</td><td>返回值类型 </td></tr>
+    <tr><td class="paramname">name</td><td>函数名称 </td></tr>
+    <tr><td class="paramname">...</td><td>参数类型列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="reflect__macros_8hpp_source.html">reflect_macros.hpp</a> 第 <a class="el" href="reflect__macros_8hpp_source.html#l00054">54</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga8e300ceae3db692c23e28487a0d79756" name="ga8e300ceae3db692c23e28487a0d79756"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8e300ceae3db692c23e28487a0d79756">&#9670;&#160;</a></span>NEFORCE_REFLECT_OBJ</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEFORCE_REFLECT_OBJ</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>Class</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>标记类需要反射注册 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Class</td><td>类名</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>在类体内放置此宏，扫描器将为该类生成完整的 <a class="el" href="classmeta__type.html" title="类型反射元数据类">meta_type</a> 注册代码。 </p>
+
+<p class="definition">在文件 <a class="el" href="reflect__macros_8hpp_source.html">reflect_macros.hpp</a> 第 <a class="el" href="reflect__macros_8hpp_source.html#l00025">25</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga9f2f247e3f218411a3a72ba60ba83367" name="ga9f2f247e3f218411a3a72ba60ba83367"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9f2f247e3f218411a3a72ba60ba83367">&#9670;&#160;</a></span>NEFORCE_REFLECT_PROP</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEFORCE_REFLECT_PROP</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em><a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a></em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>标记成员属性 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>属性类型 </td></tr>
+    <tr><td class="paramname">name</td><td>属性名称</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>在类体内放置此宏标记需要反射的成员变量。 扫描器会检查类定义中对应的成员声明。 </p>
+
+<p class="definition">在文件 <a class="el" href="reflect__macros_8hpp_source.html">reflect_macros.hpp</a> 第 <a class="el" href="reflect__macros_8hpp_source.html#l00036">36</a> 行定义.</p>
+
+</div>
+</div>
+<a id="gab4945e6e33ddcbaae53515e967721cd5" name="gab4945e6e33ddcbaae53515e967721cd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab4945e6e33ddcbaae53515e967721cd5">&#9670;&#160;</a></span>NEFORCE_REFLECT_PROP_ATTR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEFORCE_REFLECT_PROP_ATTR</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em><a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>attrs</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>标记带注解的成员属性 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>属性类型 </td></tr>
+    <tr><td class="paramname">name</td><td>属性名称 </td></tr>
+    <tr><td class="paramname">attrs</td><td>属性注解（PROP_TRANSIENT | PROP_OPTIONAL 等） </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="reflect__macros_8hpp_source.html">reflect_macros.hpp</a> 第 <a class="el" href="reflect__macros_8hpp_source.html#l00045">45</a> 行定义.</p>
+
+</div>
+</div>
 <a id="ga8cd8052ba270c6ae08c9486e3191ac60" name="ga8cd8052ba270c6ae08c9486e3191ac60"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga8cd8052ba270c6ae08c9486e3191ac60">&#9670;&#160;</a></span>NEFORCE_REFLECT_REGISTER</h2>
 
@@ -160,19 +441,17 @@ template&lt;typename T&gt; </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>值:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#ga6508bad6337bffd24165f1d8038e2eb8">NEFORCE_REFLECT_REGISTER_N</a>(Class, #Class)</div>
-<div class="ttc" id="agroup___reflection_html_ga6508bad6337bffd24165f1d8038e2eb8"><div class="ttname"><a href="#ga6508bad6337bffd24165f1d8038e2eb8">NEFORCE_REFLECT_REGISTER_N</a></div><div class="ttdeci">#define NEFORCE_REFLECT_REGISTER_N(Class, Name)</div><div class="ttdoc">注册类型（无基类）</div><div class="ttdef"><b>定义</b> <a href="reflect_8hpp_source.html#l00210">reflect.hpp:210</a></div></div>
+<b>值:</b><div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keyword">auto</span> _neforce_reflect_##Class = _NEFORCE reflect::reflect&lt;Class&gt;(#Class)</div>
 </div><!-- fragment -->
 <p>注册类型（无基类） </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
-    <tr><td class="paramname">Class</td><td>类名</td></tr>
+    <tr><td class="paramname">Class</td><td>类名 </td></tr>
   </table>
   </dd>
 </dl>
-<p>注册一个没有基类的类型。 </p>
 
-<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00233">233</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00346">346</a> 行定义.</p>
 
 </div>
 </div>
@@ -194,108 +473,212 @@ template&lt;typename T&gt; </td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>值:</b><div class="fragment"><div class="line"><a class="code hl_define" href="#gad623e383ce36c4add72a0ff8cc80c972">NEFORCE_REFLECT_REGISTER_N_DERIVED</a>(Class, Base, #Class)</div>
-<div class="ttc" id="agroup___reflection_html_gad623e383ce36c4add72a0ff8cc80c972"><div class="ttname"><a href="#gad623e383ce36c4add72a0ff8cc80c972">NEFORCE_REFLECT_REGISTER_N_DERIVED</a></div><div class="ttdeci">#define NEFORCE_REFLECT_REGISTER_N_DERIVED(Class, Base, Name)</div><div class="ttdoc">注册类型（带基类）</div><div class="ttdef"><b>定义</b> <a href="reflect_8hpp_source.html#l00221">reflect.hpp:221</a></div></div>
-</div><!-- fragment -->
-<p>注册类型（带基类） </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Class</td><td>类名 </td></tr>
-    <tr><td class="paramname">Base</td><td>基类名</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>注册一个有基类的类型，自动解析继承关系。 </p>
-
-<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00242">242</a> 行定义.</p>
-
-</div>
-</div>
-<a id="ga6508bad6337bffd24165f1d8038e2eb8" name="ga6508bad6337bffd24165f1d8038e2eb8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6508bad6337bffd24165f1d8038e2eb8">&#9670;&#160;</a></span>NEFORCE_REFLECT_REGISTER_N</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define NEFORCE_REFLECT_REGISTER_N</td>
-          <td>(</td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>Class</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>Name</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>值:</b><div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keyword">auto</span> _neforce_reflect_##Class = _NEFORCE reflect::reflect&lt;Class&gt;(Name)</div>
-</div><!-- fragment -->
-<p>注册类型（无基类） </p>
-<dl class="params"><dt>参数</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Class</td><td>类名 </td></tr>
-    <tr><td class="paramname">Name</td><td>注册名</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>注册一个没有基类的类型。 </p>
-
-<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00210">210</a> 行定义.</p>
-
-</div>
-</div>
-<a id="gad623e383ce36c4add72a0ff8cc80c972" name="gad623e383ce36c4add72a0ff8cc80c972"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad623e383ce36c4add72a0ff8cc80c972">&#9670;&#160;</a></span>NEFORCE_REFLECT_REGISTER_N_DERIVED</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define NEFORCE_REFLECT_REGISTER_N_DERIVED</td>
-          <td>(</td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>Class</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>Base</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>Name</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<b>值:</b><div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keyword">auto</span> _neforce_reflect_##Class = []() {                              \</div>
-<div class="line">    _NEFORCE reflect::registry::instance().resolve_all_bases();            \</div>
-<div class="line">    <span class="keywordflow">return</span> _NEFORCE reflect::reflect&lt;Class&gt;(#Class).template base&lt;Base&gt;(); \</div>
-<div class="line">}()</div>
+<b>值:</b><div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keyword">auto</span> _neforce_reflect_##Class = _NEFORCE reflect::reflect&lt;Class&gt;(#Class).template base&lt;Base&gt;()</div>
 </div><!-- fragment -->
 <p>注册类型（带基类） </p>
 <dl class="params"><dt>参数</dt><dd>
   <table class="params">
     <tr><td class="paramname">Class</td><td>类名 </td></tr>
     <tr><td class="paramname">Base</td><td>基类名 </td></tr>
-    <tr><td class="paramname">Name</td><td>注册名</td></tr>
   </table>
   </dd>
 </dl>
-<p>注册一个有基类的类型，自动解析继承关系。 </p>
 
-<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00221">221</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00353">353</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga7733136728615a337adca516a0a7ed8c" name="ga7733136728615a337adca516a0a7ed8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7733136728615a337adca516a0a7ed8c">&#9670;&#160;</a></span>NEFORCE_REFLECT_RESOLVE_BASES</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEFORCE_REFLECT_RESOLVE_BASES</td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>值:</b><div class="fragment"><div class="line">_NEFORCE reflect::registry::instance().resolve_all_bases()</div>
+</div><!-- fragment -->
+<p>统一解析所有待解析的基类引用 </p>
+<p>应在 main() 函数开始处调用，或在所有静态注册完成后调用。 </p>
+
+<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00361">361</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga77c72595fbb38db93a3f8723f95b78b3" name="ga77c72595fbb38db93a3f8723f95b78b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga77c72595fbb38db93a3f8723f95b78b3">&#9670;&#160;</a></span>NEFORCE_REFLECT_SIGNAL</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NEFORCE_REFLECT_SIGNAL</td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>sig_type</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em><a class="el" href="group___thread.html#ga19c672503697d8f9c7dfb3306b9583b1">name</a></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em></em></span>...&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>标记信号成员 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sig_type</td><td>信号类型（如 neforce::signal&lt;int&gt;） </td></tr>
+    <tr><td class="paramname">name</td><td>信号成员名称 </td></tr>
+    <tr><td class="paramname">...</td><td>信号参数类型列表（可选）</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>在类体内放置此宏标记信号成员变量。 扫描器会识别并生成信号注册代码。 </p>
+
+<p class="definition">在文件 <a class="el" href="reflect__macros_8hpp_source.html">reflect_macros.hpp</a> 第 <a class="el" href="reflect__macros_8hpp_source.html#l00066">66</a> 行定义.</p>
+
+</div>
+</div>
+<a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">枚举类型说明</h2>
+<a id="ga8ba8c42c850f322ef2ef910e15c928e9" name="ga8ba8c42c850f322ef2ef910e15c928e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8ba8c42c850f322ef2ef910e15c928e9">&#9670;&#160;</a></span>container_kind</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#ga8ba8c42c850f322ef2ef910e15c928e9">container_kind</a> : <a class="el" href="group___core_types.html#ga0ba18cab9bd5513695cbe748e9bb4879">uint8_t</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>容器类型标识 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="gga8ba8c42c850f322ef2ef910e15c928e9a334c4a4c42fdb79d7ebc3e73b517e6f8" name="gga8ba8c42c850f322ef2ef910e15c928e9a334c4a4c42fdb79d7ebc3e73b517e6f8"></a>none&#160;</td><td class="fielddoc"><p>非容器类型 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga8ba8c42c850f322ef2ef910e15c928e9a6ec7489017b25b5fff20d353b6d2162e" name="gga8ba8c42c850f322ef2ef910e15c928e9a6ec7489017b25b5fff20d353b6d2162e"></a>sequential&#160;</td><td class="fielddoc"><p>顺序容器 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga8ba8c42c850f322ef2ef910e15c928e9a1feb49ad88ac6efc508a6a925b5a02a6" name="gga8ba8c42c850f322ef2ef910e15c928e9a1feb49ad88ac6efc508a6a925b5a02a6"></a>associative&#160;</td><td class="fielddoc"><p>关联容器 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="type_8hpp_source.html">type.hpp</a> 第 <a class="el" href="type_8hpp_source.html#l00033">33</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ga8a2d3fd1d9146e1f0a43e4591ec79fa5" name="ga8a2d3fd1d9146e1f0a43e4591ec79fa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8a2d3fd1d9146e1f0a43e4591ec79fa5">&#9670;&#160;</a></span>property_attr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="#ga8a2d3fd1d9146e1f0a43e4591ec79fa5">property_attr</a> : <a class="el" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>属性注解标志 </p>
+<p>用于控制属性在序列化/反序列化中的行为。 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a8134bae8bb64b7bab4a27a4b504f8081" name="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a8134bae8bb64b7bab4a27a4b504f8081"></a>PROP_NONE&#160;</td><td class="fielddoc"><p>无注解 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a35e0df006b97af65212cf752c9625e6e" name="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a35e0df006b97af65212cf752c9625e6e"></a>PROP_TRANSIENT&#160;</td><td class="fielddoc"><p>序列化时跳过此属性 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a8ced6b2c2bdd10488b4ee95d770c89f7" name="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a8ced6b2c2bdd10488b4ee95d770c89f7"></a>PROP_REQUIRED&#160;</td><td class="fielddoc"><p>反序列化时必须存在 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga8a2d3fd1d9146e1f0a43e4591ec79fa5ae03d365f13ab2ba8b3e3735235a39829" name="gga8a2d3fd1d9146e1f0a43e4591ec79fa5ae03d365f13ab2ba8b3e3735235a39829"></a>PROP_READ_ONLY&#160;</td><td class="fielddoc"><p>仅 getter，无 setter </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a4525e363c96b8820161e8edb28335da7" name="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a4525e363c96b8820161e8edb28335da7"></a>PROP_OPTIONAL&#160;</td><td class="fielddoc"><p>反序列化时可缺失 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a17510c8324cde4078432427869936c92" name="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a17510c8324cde4078432427869936c92"></a>PROP_VERSIONED&#160;</td><td class="fielddoc"><p>启用版本追踪 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a425a6f7b9bbb9f23b39e5ff80c43ee22" name="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a425a6f7b9bbb9f23b39e5ff80c43ee22"></a>PROP_PRIMARY_KEY&#160;</td><td class="fielddoc"><p>数据库主键列 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a99b60c66761cf68cc2bf6b3a23ed8a55" name="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a99b60c66761cf68cc2bf6b3a23ed8a55"></a>PROP_AUTO_INC&#160;</td><td class="fielddoc"><p>数据库自增列 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a4b3d7192079a01db1431c11f0614ce4a" name="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a4b3d7192079a01db1431c11f0614ce4a"></a>PROP_UNIQUE&#160;</td><td class="fielddoc"><p>数据库唯一约束 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a49799facf119e51b38ec7b586411691a" name="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a49799facf119e51b38ec7b586411691a"></a>PROP_INDEX&#160;</td><td class="fielddoc"><p>数据库普通索引 </p>
+</td></tr>
+<tr><td class="fieldname"><a id="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a9beac021644986b0446a8bd13cc4e110" name="gga8a2d3fd1d9146e1f0a43e4591ec79fa5a9beac021644986b0446a8bd13cc4e110"></a>PROP_FOREIGN_KEY&#160;</td><td class="fielddoc"><p>数据库外键列 </p>
+</td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="property_8hpp_source.html">property.hpp</a> 第 <a class="el" href="property_8hpp_source.html#l00031">31</a> 行定义.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">函数说明</h2>
-<a id="ga5a74d42372d4485518ebb6915c124a37" name="ga5a74d42372d4485518ebb6915c124a37"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga5a74d42372d4485518ebb6915c124a37">&#9670;&#160;</a></span>reflect()</h2>
+<a id="ga23bb003b656f3abb7643fae2220e735c" name="ga23bb003b656f3abb7643fae2220e735c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga23bb003b656f3abb7643fae2220e735c">&#9670;&#160;</a></span>prop_has_attr()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool prop_has_attr </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="group___core_types.html#ga64be82add362de7c99ce6671d7f4f0a6">uint16_t</a></td>          <td class="paramname"><span class="paramname"><em>attrs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="#ga8a2d3fd1d9146e1f0a43e4591ec79fa5">property_attr</a></td>          <td class="paramname"><span class="paramname"><em>flag</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查属性注解是否包含指定标志 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">attrs</td><td>属性注解组合 </td></tr>
+    <tr><td class="paramname">flag</td><td>要检查的标志 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>包含返回 true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="property_8hpp_source.html">property.hpp</a> 第 <a class="el" href="property_8hpp_source.html#l00052">52</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="property_8hpp_source.html#l00150">meta_property::is_auto_increment()</a>, <a class="el" href="property_8hpp_source.html#l00165">meta_property::is_foreign_key()</a>, <a class="el" href="property_8hpp_source.html#l00160">meta_property::is_index()</a>, <a class="el" href="property_8hpp_source.html#l00135">meta_property::is_optional()</a>, <a class="el" href="property_8hpp_source.html#l00145">meta_property::is_primary_key()</a>, <a class="el" href="property_8hpp_source.html#l00130">meta_property::is_readonly()</a>, <a class="el" href="property_8hpp_source.html#l00125">meta_property::is_required()</a>, <a class="el" href="property_8hpp_source.html#l00120">meta_property::is_transient()</a>, <a class="el" href="property_8hpp_source.html#l00155">meta_property::is_unique()</a> , 以及 <a class="el" href="property_8hpp_source.html#l00140">meta_property::is_versioned()</a>.</p>
+
+</div>
+</div>
+<a id="gac197fd7307a57ddbf46feb16ac7ebd32" name="gac197fd7307a57ddbf46feb16ac7ebd32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac197fd7307a57ddbf46feb16ac7ebd32">&#9670;&#160;</a></span>reflect()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;typename T, <a class="el" href="group___type_traits_utilities.html#gafd80b775b0bd95747206fc628ad065f0">enable_if_t</a>&lt; <a class="el" href="group___base_type_qualifier_check.html#gaca38abc104326427a46bccfd27cbfe28">is_class_v</a>&lt; T &gt;, int &gt; = 0&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classtype__builder.html">type_builder</a>&lt; T &gt; reflect </td>
@@ -320,10 +703,51 @@ template&lt;typename T&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>类型构建器 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>枚举类型请直接使用 <a class="el" href="classregistry.html#ae3786801b98d932e133778a36eee1d72" title="获取单例实例">registry::instance()</a>.register_type&lt;EnumType&gt;(name) 并通过返回的 <a class="el" href="classmeta__type.html" title="类型反射元数据类">meta_type</a>&amp; 设置 enum_info </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00198">198</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="reflect_8hpp_source.html">reflect.hpp</a> 第 <a class="el" href="reflect_8hpp_source.html#l00337">337</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00475">name()</a>.</p>
+<p class="reference">引用了 <a class="el" href="thread_8hpp_source.html#l00476">name()</a>.</p>
+
+</div>
+</div>
+<a id="ga88532337ecb7282cd7543cbc2556e1de" name="ga88532337ecb7282cd7543cbc2556e1de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga88532337ecb7282cd7543cbc2556e1de">&#9670;&#160;</a></span>swap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmeta__any.html">meta_any</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classmeta__any.html">meta_any</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>交换两个 <a class="el" href="classmeta__any.html" title="类型擦除容器">meta_any</a> </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lhs</td><td>左操作数 </td></tr>
+    <tr><td class="paramname">rhs</td><td>右操作数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="reflect_2any_8hpp_source.html">reflect/any.hpp</a> 第 <a class="el" href="reflect_2any_8hpp_source.html#l00531">531</a> 行定义.</p>
 
 </div>
 </div>

@@ -399,7 +399,7 @@ RTM指令集</h1>
 
 <p>内存顺序修饰符枚举 </p>
 <p>用于扩展memory_order的功能，支持硬件锁消除（HLE）等高级特性。</p>
-<dl class="section warning"><dt>警告</dt><dd>根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE 功能，并在运行时做好fallback 处理。</dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">弃用</a></b></dt><dd>根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE 功能，并在运行时做好fallback 处理。</dd></dl>
 <dl class="section see"><dt>参见</dt><dd><a href="https://www.intel.com/content/www/us/en/docs/cpp-compiler/developer-guide-reference/2021-8/intel-transactional-synchronization-extensions.html">https://www.intel.com/content/www/us/en/docs/cpp-compiler/developer-guide-reference/2021-8/intel-transactional-synchronization-extensions.html</a> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="ggaf6c9980cf35b938ee765508ef4dc6d42a509d28f8e83d10baaf4bcd31a54783c6" name="ggaf6c9980cf35b938ee765508ef4dc6d42a509d28f8e83d10baaf4bcd31a54783c6"></a>memory_order_none&#160;</td><td class="fielddoc"><p>无修饰符 </p>
@@ -445,7 +445,7 @@ RTM指令集</h1>
 </div><div class="memdoc">
 
 <p>RTM事务状态标志位定义 </p>
-<dl class="section warning"><dt>警告</dt><dd>根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE 功能，并在运行时做好fallback 处理。</dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000004">弃用</a></b></dt><dd>根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE 功能，并在运行时做好fallback 处理。 </dd></dl>
 <dl class="section see"><dt>参见</dt><dd><a href="https://www.intel.com/content/www/us/en/docs/cpp-compiler/developer-guide-reference/2021-8/intel-transactional-synchronization-extensions.html">https://www.intel.com/content/www/us/en/docs/cpp-compiler/developer-guide-reference/2021-8/intel-transactional-synchronization-extensions.html</a> </dd></dl>
 <table class="fieldtable">
 <tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="ggae82e0aa93c3ecd9dd220fd45ae4ab659a72008fe62c2b45840fcefcdc46155de7" name="ggae82e0aa93c3ecd9dd220fd45ae4ab659a72008fe62c2b45840fcefcdc46155de7"></a>xabort_explicit&#160;</td><td class="fielddoc"><p>由XABORT指令显式中止 </p>
@@ -462,7 +462,7 @@ RTM指令集</h1>
 </td></tr>
 </table>
 
-<p class="definition">在文件 <a class="el" href="memory__order_8hpp_source.html">memory_order.hpp</a> 第 <a class="el" href="memory__order_8hpp_source.html#l00248">248</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="memory__order_8hpp_source.html">memory_order.hpp</a> 第 <a class="el" href="memory__order_8hpp_source.html#l00249">249</a> 行定义.</p>
 
 </div>
 </div>
@@ -499,11 +499,11 @@ RTM指令集</h1>
 <li>保留原始内存顺序中的所有修饰符 </li>
 </ul>
 
-<p class="definition">在文件 <a class="el" href="memory__order_8hpp_source.html">memory_order.hpp</a> 第 <a class="el" href="memory__order_8hpp_source.html#l00272">272</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="memory__order_8hpp_source.html">memory_order.hpp</a> 第 <a class="el" href="memory__order_8hpp_source.html#l00273">273</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00181">memory_order_acq_rel</a>, <a class="el" href="memory__order_8hpp_source.html#l00177">memory_order_acquire</a>, <a class="el" href="memory__order_8hpp_source.html#l00203">memory_order_mask</a>, <a class="el" href="memory__order_8hpp_source.html#l00204">memory_order_modifier_mask</a>, <a class="el" href="memory__order_8hpp_source.html#l00173">memory_order_relaxed</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00179">memory_order_release</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic_8hpp_source.html#l00235">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic_8hpp_source.html#l00242">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l01285">atomic&lt; shared_ptr&lt; T &gt; &gt;::compare_exchange_strong()</a>, <a class="el" href="weak__ptr_8hpp_source.html#l00532">atomic&lt; weak_ptr&lt; T &gt; &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01775">atomic_base&lt; char &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01783">atomic_base&lt; char &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02268">atomic_base&lt; T * &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02276">atomic_base&lt; T * &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02516">atomic_float_base&lt; Float &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02523">atomic_float_base&lt; Float &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03160">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02752">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02900">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic_8hpp_source.html#l00192">atomic&lt; T &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic_8hpp_source.html#l00199">atomic&lt; T &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01732">atomic_base&lt; char &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01740">atomic_base&lt; char &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02221">atomic_base&lt; T * &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02229">atomic_base&lt; T * &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02501">atomic_float_base&lt; Float &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02508">atomic_float_base&lt; Float &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03149">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02741">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_weak()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02889">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_weak()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic_8hpp_source.html#l00235">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic_8hpp_source.html#l00242">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="shared__ptr_8hpp_source.html#l01299">atomic&lt; shared_ptr&lt; T &gt; &gt;::compare_exchange_strong()</a>, <a class="el" href="weak__ptr_8hpp_source.html#l00566">atomic&lt; weak_ptr&lt; T &gt; &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01793">atomic_base&lt; char &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01801">atomic_base&lt; char &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02286">atomic_base&lt; T * &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02294">atomic_base&lt; T * &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02534">atomic_float_base&lt; Float &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02541">atomic_float_base&lt; Float &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03178">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02770">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02918">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic_8hpp_source.html#l00192">atomic&lt; T &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic_8hpp_source.html#l00199">atomic&lt; T &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01750">atomic_base&lt; char &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01758">atomic_base&lt; char &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02239">atomic_base&lt; T * &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02247">atomic_base&lt; T * &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02519">atomic_float_base&lt; Float &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02526">atomic_float_base&lt; Float &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l03167">atomic_ref_base&lt; Float, false, true &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02759">atomic_ref_base&lt; T, false, false &gt;::compare_exchange_weak()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02907">atomic_ref_base&lt; T, true, false &gt;::compare_exchange_weak()</a>.</p>
 
 </div>
 </div>
@@ -540,11 +540,11 @@ RTM指令集</h1>
 <dl class="section return"><dt>返回</dt><dd>是否有效 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>失败内存顺序不能是release或acq_rel </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="memory__order_8hpp_source.html">memory_order.hpp</a> 第 <a class="el" href="memory__order_8hpp_source.html#l00296">296</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="memory__order_8hpp_source.html">memory_order.hpp</a> 第 <a class="el" href="memory__order_8hpp_source.html#l00297">297</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="memory__order_8hpp_source.html#l00181">memory_order_acq_rel</a>, <a class="el" href="memory__order_8hpp_source.html#l00203">memory_order_mask</a> , 以及 <a class="el" href="memory__order_8hpp_source.html#l00179">memory_order_release</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l00671">atomic_cmpexch_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01046">atomic_cmpexch_strong_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00530">atomic_cmpexch_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00925">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic_8hpp_source.html#l00211">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic_8hpp_source.html#l00221">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02242">atomic_base&lt; T * &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02253">atomic_base&lt; T * &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic_8hpp_source.html#l00170">atomic&lt; T &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic_8hpp_source.html#l00179">atomic&lt; T &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02196">atomic_base&lt; T * &gt;::compare_exchange_weak()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02206">atomic_base&lt; T * &gt;::compare_exchange_weak()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="atomic__base_8hpp_source.html#l00687">atomic_cmpexch_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l01062">atomic_cmpexch_strong_any()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00546">atomic_cmpexch_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l00941">atomic_cmpexch_weak_any()</a>, <a class="el" href="atomic_8hpp_source.html#l00211">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic_8hpp_source.html#l00221">atomic&lt; T &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02260">atomic_base&lt; T * &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02271">atomic_base&lt; T * &gt;::compare_exchange_strong()</a>, <a class="el" href="atomic_8hpp_source.html#l00170">atomic&lt; T &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic_8hpp_source.html#l00179">atomic&lt; T &gt;::compare_exchange_weak()</a>, <a class="el" href="atomic__base_8hpp_source.html#l02214">atomic_base&lt; T * &gt;::compare_exchange_weak()</a> , 以及 <a class="el" href="atomic__base_8hpp_source.html#l02224">atomic_base&lt; T * &gt;::compare_exchange_weak()</a>.</p>
 
 </div>
 </div>
@@ -583,10 +583,11 @@ RTM指令集</h1>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>提取后的内存顺序</dd></dl>
+<dl class="section return"><dt>返回</dt><dd>提取后的内存顺序 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>用于从组合值中提取特定的内存顺序或修饰符 </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000003">弃用</a></b></dt><dd>根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE 功能，并在运行时做好fallback 处理。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="memory__order_8hpp_source.html">memory_order.hpp</a> 第 <a class="el" href="memory__order_8hpp_source.html#l00232">232</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="memory__order_8hpp_source.html">memory_order.hpp</a> 第 <a class="el" href="memory__order_8hpp_source.html#l00236">236</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00358">mod()</a>.</p>
 
@@ -627,10 +628,11 @@ RTM指令集</h1>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>返回</dt><dd>组合后的内存顺序</dd></dl>
+<dl class="section return"><dt>返回</dt><dd>组合后的内存顺序 </dd></dl>
 <dl class="section note"><dt>注解</dt><dd>用于将内存顺序与修饰符组合使用 </dd></dl>
+<dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000002">弃用</a></b></dt><dd>根据 Intel 的安全公告与软件开发者手册更新，Intel® TSX 指令集扩展（包括 HLE 和RTM）已在后续处理器中被弃用或默认禁用。使用此特性前，必须通过 CPUID 检查处理器是否支持 HLE 功能，并在运行时做好fallback 处理。 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="memory__order_8hpp_source.html">memory_order.hpp</a> 第 <a class="el" href="memory__order_8hpp_source.html#l00220">220</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="memory__order_8hpp_source.html">memory_order.hpp</a> 第 <a class="el" href="memory__order_8hpp_source.html#l00222">222</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="math_8hpp_source.html#l00358">mod()</a>.</p>
 

@@ -121,6 +121,8 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:ae9281dbebf4d098969b99abab86457b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取结果集列数  <br /></td></tr>
 <tr class="memitem:a2ebbe17b3579bd7894548fcafe79ba2d" id="r_a2ebbe17b3579bd7894548fcafe79ba2d"><td class="memItemLeft">const <a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> &gt; &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2ebbe17b3579bd7894548fcafe79ba2d">column_names</a> () const override</td></tr>
 <tr class="memdesc:a2ebbe17b3579bd7894548fcafe79ba2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取列名列表  <br /></td></tr>
+<tr class="memitem:a0caed572eefa21ab56187c8ef70746ad" id="r_a0caed572eefa21ab56187c8ef70746ad"><td class="memItemLeft"><a class="el" href="structcolumn__meta.html">column_meta</a>&#160;</td><td class="memItemRight"><a class="el" href="#a0caed572eefa21ab56187c8ef70746ad">column_metadata</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
+<tr class="memdesc:a0caed572eefa21ab56187c8ef70746ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取列元数据  <br /></td></tr>
 <tr class="memitem:a92169a3cb117a565865ac61bb46d48f3" id="r_a92169a3cb117a565865ac61bb46d48f3"><td class="memItemLeft"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#a92169a3cb117a565865ac61bb46d48f3">get</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
 <tr class="memdesc:a92169a3cb117a565865ac61bb46d48f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取字符串值  <br /></td></tr>
 <tr class="memitem:af77b73019cd2f0886c7fc3a0c4c1034c" id="r_af77b73019cd2f0886c7fc3a0c4c1034c"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#af77b73019cd2f0886c7fc3a0c4c1034c">get_bool</a> (<a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a> index) const override</td></tr>
@@ -274,6 +276,42 @@ using&#160;</td><td class="memItemRight"><b>difference_type</b> = <a class="el" 
 <p>实现了 <a class="el" href="structidb__tb__result.html#a15bba511bedb7883a9770516e60d0502">idb_tb_result</a>.</p>
 
 <p class="definition">在文件 <a class="el" href="pgsql__result_8hpp_source.html">pgsql_result.hpp</a> 第 <a class="el" href="pgsql__result_8hpp_source.html#l00100">100</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0caed572eefa21ab56187c8ef70746ad" name="a0caed572eefa21ab56187c8ef70746ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0caed572eefa21ab56187c8ef70746ad">&#9670;&#160;</a></span>column_metadata()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structcolumn__meta.html">column_meta</a> pgsql_tb_result::column_metadata </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structidb__result.html#ac58a6a1ad6756117bc3eb71bb52df082">size_type</a></td>          <td class="paramname"><span class="paramname"><em>n</em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取列元数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">n</td><td>列索引（从0开始） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>列元数据 </dd></dl>
+
+<p>实现了 <a class="el" href="structidb__tb__result.html#a847e127d534e34bc199d6168372288f0">idb_tb_result</a>.</p>
 
 </div>
 </div>

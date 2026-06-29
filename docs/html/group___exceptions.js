@@ -33,6 +33,12 @@ var group___exceptions =
     [ "toml_exception", "structtoml__exception.html", null ],
     [ "yaml_exception", "structyaml__exception.html", null ],
     [ "allocate_exception", "structallocate__exception.html", null ],
+    [ "serialize_exception", "structserialize__exception.html", null ],
+    [ "deserialize_exception", "structdeserialize__exception.html", [
+      [ "property_path", "structdeserialize__exception.html#a381d739e55c8acdd9f9da39caea73c30", null ]
+    ] ],
+    [ "missing_required_exception", "structmissing__required__exception.html", null ],
+    [ "type_mismatch_exception", "structtype__mismatch__exception.html", null ],
     [ "regex_exception", "structregex__exception.html", null ],
     [ "cmdline_exception", "structcmdline__exception.html", null ],
     [ "console_exception", "structconsole__exception.html", null ],

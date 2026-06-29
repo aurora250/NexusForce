@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['编译器检测_0',['编译器检测',['../group___compiler_detection.html',1,'']]]
+  ['管道_0',['管道',['../group___pipe.html',1,'']]]
 ];

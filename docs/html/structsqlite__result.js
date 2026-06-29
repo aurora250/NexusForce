@@ -2,8 +2,10 @@ var structsqlite__result =
 [
     [ "sqlite_result", "structsqlite__result.html#a3a567d253319df439bbac39a6e0f81a1", null ],
     [ "sqlite_result", "structsqlite__result.html#a16c38a0dfa700c81e7bafd8efedf4d8e", null ],
+    [ "sqlite_result", "structsqlite__result.html#a576cfb5d65941e7524bc251bdd53e63f", null ],
     [ "~sqlite_result", "structsqlite__result.html#ae5a1354b25ea70ae0676772b87f456f3", null ],
     [ "column_count", "structsqlite__result.html#a631368f97e5e1c12b9a2651d4de91328", null ],
+    [ "column_metadata", "structsqlite__result.html#afdbf6f51d538f7f39ccece30b9df65fc", null ],
     [ "column_names", "structsqlite__result.html#ac8f1cac31c66822f59e5eae48f8efe8d", null ],
     [ "column_types", "structsqlite__result.html#acc7234272d3339f59f879a497a123e35", null ],
     [ "empty", "structsqlite__result.html#ae425d30867c970469b2af93997283b10", null ],

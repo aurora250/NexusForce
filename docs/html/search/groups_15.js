@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['互斥锁_0',['互斥锁',['../group___mutex.html',1,'']]]
+  ['xor_0',['XOR',['../group___x_o_r.html',1,'']]]
 ];

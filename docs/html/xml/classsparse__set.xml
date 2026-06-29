@@ -1,0 +1,2044 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classsparse__set" kind="class" language="C++" prot="public">
+    <compoundname>sparse_set</compoundname>
+    <basecompoundref refid="structicollector" prot="public" virt="non-virtual">icollector&lt; sparse_set&lt; Key, less&lt; Key &gt;, allocator&lt; Key &gt; &gt; &gt;</basecompoundref>
+    <includes refid="sparse__set_8hpp" local="no">sparse_set.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename Key</type>
+      </param>
+      <param>
+        <type>typename Compare</type>
+        <defval><ref refid="structless" kindref="compound">less</ref>&lt;Key&gt;</defval>
+      </param>
+      <param>
+        <type>typename Alloc</type>
+        <defval><ref refid="group___memory_allocator_1ga3dfc367f99e4622b5a17628bb6777e54" kindref="member">allocator</ref>&lt;Key&gt;</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classsparse__set_1aae0c684f1d419045a6649157114d3db3" prot="public" static="no">
+        <type>Key</type>
+        <definition>using sparse_set&lt; Key, Compare, Alloc &gt;::key_type = Key</definition>
+        <argsstring></argsstring>
+        <name>key_type</name>
+        <qualifiedname>sparse_set::key_type</qualifiedname>
+        <briefdescription>
+<para>键类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="44" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classsparse__set_1a8beaf63b8c5c5a126703a43b450155df" prot="public" static="no">
+        <type>Key</type>
+        <definition>using sparse_set&lt; Key, Compare, Alloc &gt;::value_type = Key</definition>
+        <argsstring></argsstring>
+        <name>value_type</name>
+        <qualifiedname>sparse_set::value_type</qualifiedname>
+        <briefdescription>
+<para>值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="45" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classsparse__set_1af5243c902e1282793dadb7f6b1c2bbad" prot="public" static="no">
+        <type>Compare</type>
+        <definition>using sparse_set&lt; Key, Compare, Alloc &gt;::key_compare = Compare</definition>
+        <argsstring></argsstring>
+        <name>key_compare</name>
+        <qualifiedname>sparse_set::key_compare</qualifiedname>
+        <briefdescription>
+<para>键比较函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="46" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classsparse__set_1a626618fb2ff0ea2f9b3522cdefd538e9" prot="public" static="no">
+        <type>Compare</type>
+        <definition>using sparse_set&lt; Key, Compare, Alloc &gt;::value_compare = Compare</definition>
+        <argsstring></argsstring>
+        <name>value_compare</name>
+        <qualifiedname>sparse_set::value_compare</qualifiedname>
+        <briefdescription>
+<para>值比较函数类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="47" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classsparse__set_1adad526ad1cc4c4a4aca6276ec8479857" prot="public" static="no">
+        <type>typename <ref refid="classsparse__vector_1abf85f5857db9b28a9e9fa69d7be89653" kindref="member">base_type::size_type</ref></type>
+        <definition>using sparse_set&lt; Key, Compare, Alloc &gt;::size_type = typename base_type::size_type</definition>
+        <argsstring></argsstring>
+        <name>size_type</name>
+        <qualifiedname>sparse_set::size_type</qualifiedname>
+        <briefdescription>
+<para>大小类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="53" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classsparse__set_1a1da4703368e5ff3371745c368f433c4b" prot="public" static="no">
+        <type>typename <ref refid="classsparse__vector_1aa8e868be083c16deb2483c353d2ae703" kindref="member">base_type::difference_type</ref></type>
+        <definition>using sparse_set&lt; Key, Compare, Alloc &gt;::difference_type = typename base_type::difference_type</definition>
+        <argsstring></argsstring>
+        <name>difference_type</name>
+        <qualifiedname>sparse_set::difference_type</qualifiedname>
+        <briefdescription>
+<para>差值类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="54" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classsparse__set_1a69c9974ce9ea2467e2dbbcd8ae682898" prot="public" static="no">
+        <type>typename <ref refid="classsparse__vector_1a213ec95a1682dbf737cf5594fa6c5de4" kindref="member">base_type::pointer</ref></type>
+        <definition>using sparse_set&lt; Key, Compare, Alloc &gt;::pointer = typename base_type::pointer</definition>
+        <argsstring></argsstring>
+        <name>pointer</name>
+        <qualifiedname>sparse_set::pointer</qualifiedname>
+        <briefdescription>
+<para>指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="55" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classsparse__set_1aeb3314f42dfc4a052e52a9733d809b23" prot="public" static="no">
+        <type>typename <ref refid="classsparse__vector_1aa63b50dbd531c8e8a151293e011a7e01" kindref="member">base_type::const_pointer</ref></type>
+        <definition>using sparse_set&lt; Key, Compare, Alloc &gt;::const_pointer = typename base_type::const_pointer</definition>
+        <argsstring></argsstring>
+        <name>const_pointer</name>
+        <qualifiedname>sparse_set::const_pointer</qualifiedname>
+        <briefdescription>
+<para>常量指针类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="56" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classsparse__set_1a3bdd30724a2b9fc6df82b5b9c78ec99a" prot="public" static="no">
+        <type>typename <ref refid="classsparse__vector_1a7c484689e4b001239bc65061c0f981f7" kindref="member">base_type::reference</ref></type>
+        <definition>using sparse_set&lt; Key, Compare, Alloc &gt;::reference = typename base_type::reference</definition>
+        <argsstring></argsstring>
+        <name>reference</name>
+        <qualifiedname>sparse_set::reference</qualifiedname>
+        <briefdescription>
+<para>引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="57" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classsparse__set_1aa2803d4b6d89b2fe8d68b4a23e979260" prot="public" static="no">
+        <type>typename <ref refid="classsparse__vector_1af7e8fcbd0679be9063fc72f7a9f0b32f" kindref="member">base_type::const_reference</ref></type>
+        <definition>using sparse_set&lt; Key, Compare, Alloc &gt;::const_reference = typename base_type::const_reference</definition>
+        <argsstring></argsstring>
+        <name>const_reference</name>
+        <qualifiedname>sparse_set::const_reference</qualifiedname>
+        <briefdescription>
+<para>常量引用类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="58" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" prot="public" static="no">
+        <type>typename <ref refid="classsparse__vector_1a1835900c7729abbaaec3ee231fbd1d53" kindref="member">base_type::iterator</ref></type>
+        <definition>using sparse_set&lt; Key, Compare, Alloc &gt;::iterator = typename base_type::iterator</definition>
+        <argsstring></argsstring>
+        <name>iterator</name>
+        <qualifiedname>sparse_set::iterator</qualifiedname>
+        <briefdescription>
+<para>迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="59" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classsparse__set_1a36ee9da22d761398c2a617bee62edba9" prot="public" static="no">
+        <type>typename <ref refid="classsparse__vector_1ade91cee6d1c5f419351e3b7b41b96fd8" kindref="member">base_type::const_iterator</ref></type>
+        <definition>using sparse_set&lt; Key, Compare, Alloc &gt;::const_iterator = typename base_type::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_iterator</name>
+        <qualifiedname>sparse_set::const_iterator</qualifiedname>
+        <briefdescription>
+<para>常量迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="60" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classsparse__set_1aa14b6ac9b0a663dfc6d770a94070c983" prot="public" static="no">
+        <type>typename <ref refid="classsparse__vector_1a76785a7125742d461b29b7c0d8421514" kindref="member">base_type::reverse_iterator</ref></type>
+        <definition>using sparse_set&lt; Key, Compare, Alloc &gt;::reverse_iterator = typename base_type::reverse_iterator</definition>
+        <argsstring></argsstring>
+        <name>reverse_iterator</name>
+        <qualifiedname>sparse_set::reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="61" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classsparse__set_1a74244c4bce653fc1454399c090c1119d" prot="public" static="no">
+        <type>typename <ref refid="classsparse__vector_1aafd9c245ab0f81488c5dae0268389098" kindref="member">base_type::const_reverse_iterator</ref></type>
+        <definition>using sparse_set&lt; Key, Compare, Alloc &gt;::const_reverse_iterator = typename base_type::const_reverse_iterator</definition>
+        <argsstring></argsstring>
+        <name>const_reverse_iterator</name>
+        <qualifiedname>sparse_set::const_reverse_iterator</qualifiedname>
+        <briefdescription>
+<para>常量反向迭代器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="62" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classsparse__set_1ae3a5d94ca3140ba4de91ad0a2aff9b7f" prot="public" static="no">
+        <type>typename <ref refid="classsparse__vector_1adf1302fcc9925879193d7279520ad174" kindref="member">base_type::allocator_type</ref></type>
+        <definition>using sparse_set&lt; Key, Compare, Alloc &gt;::allocator_type = typename base_type::allocator_type</definition>
+        <argsstring></argsstring>
+        <name>allocator_type</name>
+        <qualifiedname>sparse_set::allocator_type</qualifiedname>
+        <briefdescription>
+<para>分配器类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="63" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classsparse__set_1a067ff75fc073615114ee2e403f73f50a" prot="private" static="no">
+        <type><ref refid="classsparse__vector" kindref="compound">sparse_vector</ref>&lt; Key, Key, <ref refid="structidentity" kindref="compound">identity</ref>&lt; Key &gt;, Compare, Alloc &gt;</type>
+        <definition>using sparse_set&lt; Key, Compare, Alloc &gt;::base_type = sparse_vector&lt;Key, Key, identity&lt;Key&gt;, Compare, Alloc&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>sparse_set::base_type</qualifiedname>
+        <briefdescription>
+<para>底层稀疏向量类型 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="50" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classsparse__set_1aac1f8f199b427bb84dcb5443a2456936" prot="private" static="no" mutable="no">
+        <type>base_type</type>
+        <definition>base_type sparse_set&lt; Key, Compare, Alloc &gt;::data_</definition>
+        <argsstring></argsstring>
+        <name>data_</name>
+        <qualifiedname>sparse_set::data_</qualifiedname>
+        <briefdescription>
+<para>底层稀疏向量实例 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="66" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsparse__set_1ac3c9332e8a4c2827128e9e4b9d387a14" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</definition>
+        <argsstring>()</argsstring>
+        <name>sparse_set</name>
+        <qualifiedname>sparse_set::sparse_set</qualifiedname>
+        <briefdescription>
+<para>默认构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para>构造一个空sparse_set，使用默认的比较函数。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="74" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="74" bodyend="75"/>
+        <referencedby refid="classsparse__set_1a734783e276353151d258a2d499583fcb" compoundref="sparse__set_8hpp" startline="461" endline="463">sparse_set&lt; Key, Compare, Alloc &gt;::equal_to</referencedby>
+        <referencedby refid="classsparse__set_1ac75061c771096cb3ec1eefd38843f182" compoundref="sparse__set_8hpp" startline="470" endline="472">sparse_set&lt; Key, Compare, Alloc &gt;::less_than</referencedby>
+        <referencedby refid="classsparse__set_1a79a98f470affcf62c8701550258a7acf" compoundref="sparse__set_8hpp" startline="96" endline="99">sparse_set&lt; Key, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classsparse__set_1a1b08af04e3873815051283d9d0072c21" compoundref="sparse__set_8hpp" startline="113" endline="117">sparse_set&lt; Key, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classsparse__set_1a4a49e2e3c398ab201b240ef8a7a433fb" compoundref="sparse__set_8hpp" startline="164" endline="168">sparse_set&lt; Key, Compare, Alloc &gt;::operator=</referencedby>
+        <referencedby refid="classsparse__set_1a5fe30f50f50e2f40893158c1d79542c8" compoundref="sparse__set_8hpp" startline="88" endline="89">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</referencedby>
+        <referencedby refid="classsparse__set_1a404f9d2083a9eec813b3571889641cdb" compoundref="sparse__set_8hpp" startline="105" endline="106">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</referencedby>
+        <referencedby refid="classsparse__set_1af198a2aac63f1823f507061a0e278c5f" compoundref="sparse__set_8hpp" startline="148" endline="149">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</referencedby>
+        <referencedby refid="classsparse__set_1a40819c4b1ff12b0dd63ee4caeb611c72" compoundref="sparse__set_8hpp" startline="156" endline="157">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</referencedby>
+        <referencedby refid="classsparse__set_1aca722bcc78d241e2928a319b2dd71cd6" compoundref="sparse__set_8hpp" startline="454" endline="454">sparse_set&lt; Key, Compare, Alloc &gt;::swap</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a68899e61065f43d57eabf2649d315ad8" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</definition>
+        <argsstring>(const key_compare &amp;comp)</argsstring>
+        <name>sparse_set</name>
+        <qualifiedname>sparse_set::sparse_set</qualifiedname>
+        <param>
+          <type>const <ref refid="classsparse__set_1af5243c902e1282793dadb7f6b1c2bbad" kindref="member">key_compare</ref> &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="81" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="81" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a5fe30f50f50e2f40893158c1d79542c8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</definition>
+        <argsstring>(const sparse_set &amp;other)</argsstring>
+        <name>sparse_set</name>
+        <qualifiedname>sparse_set::sparse_set</qualifiedname>
+        <param>
+          <type>const <ref refid="classsparse__set" kindref="compound">sparse_set</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源sparse_set </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="88" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="88" bodyend="89"/>
+        <references refid="classsparse__set_1ac3c9332e8a4c2827128e9e4b9d387a14" compoundref="sparse__set_8hpp" startline="74" endline="75">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</references>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a79a98f470affcf62c8701550258a7acf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set" kindref="compound">sparse_set</ref> &amp;</type>
+        <definition>sparse_set &amp; sparse_set&lt; Key, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(const sparse_set &amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>sparse_set::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classsparse__set" kindref="compound">sparse_set</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>拷贝赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源sparse_set </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="96" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="96" bodyend="99"/>
+        <references refid="classsparse__set_1ac3c9332e8a4c2827128e9e4b9d387a14" compoundref="sparse__set_8hpp" startline="74" endline="75">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</references>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a404f9d2083a9eec813b3571889641cdb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_move_constructible_v&lt; base_type &gt;" virt="non-virtual">
+        <type></type>
+        <definition>sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</definition>
+        <argsstring>(sparse_set &amp;&amp;other)</argsstring>
+        <name>sparse_set</name>
+        <qualifiedname>sparse_set::sparse_set</qualifiedname>
+        <param>
+          <type><ref refid="classsparse__set" kindref="compound">sparse_set</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源sparse_set </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="105" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="105" bodyend="106"/>
+        <references refid="group___type_special_member_function_checks_1ga34e3584e54b63fd9e6a35fffd41080bd" compoundref="type__traits_8hpp" startline="2862">is_nothrow_move_constructible_v</references>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+        <references refid="classsparse__set_1ac3c9332e8a4c2827128e9e4b9d387a14" compoundref="sparse__set_8hpp" startline="74" endline="75">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</references>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a1b08af04e3873815051283d9d0072c21" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="is_nothrow_swappable_v&lt; base_type &gt;" virt="non-virtual">
+        <type><ref refid="classsparse__set" kindref="compound">sparse_set</ref> &amp;</type>
+        <definition>sparse_set &amp; sparse_set&lt; Key, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(sparse_set &amp;&amp;other)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>sparse_set::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classsparse__set" kindref="compound">sparse_set</ref> &amp;&amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>移动赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>源sparse_set </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="113" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="113" bodyend="117"/>
+        <references refid="group___swap_utility_1gaf740a9b650d7a3063e9414c3c50ffdb5" compoundref="type__traits_8hpp" startline="3967">is_nothrow_swappable_v</references>
+        <references refid="classsparse__set_1ac3c9332e8a4c2827128e9e4b9d387a14" compoundref="sparse__set_8hpp" startline="74" endline="75">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</references>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a7879936af7637a2d03d96034396a4941" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>sparse_set</name>
+        <qualifiedname>sparse_set::sparse_set</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="126" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="126" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1acc5f67d3dac2c892c75ed84e24757d97" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</definition>
+        <argsstring>(Iterator first, Iterator last, const key_compare &amp;comp)</argsstring>
+        <name>sparse_set</name>
+        <qualifiedname>sparse_set::sparse_set</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classsparse__set_1af5243c902e1282793dadb7f6b1c2bbad" kindref="member">key_compare</ref> &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>范围构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="139" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="139" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1af198a2aac63f1823f507061a0e278c5f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>sparse_set</name>
+        <qualifiedname>sparse_set::sparse_set</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classsparse__set_1a8beaf63b8c5c5a126703a43b450155df" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="148" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="148" bodyend="149"/>
+        <references refid="classsparse__set_1a40916bf6f9f11dd8460f1bae4acf373b" compoundref="sparse__set_8hpp" startline="179" endline="179">sparse_set&lt; Key, Compare, Alloc &gt;::begin</references>
+        <references refid="classsparse__set_1ae2ac5d49c162120e498b0795e3af48fb" compoundref="sparse__set_8hpp" startline="185" endline="185">sparse_set&lt; Key, Compare, Alloc &gt;::end</references>
+        <references refid="classsparse__set_1ac3c9332e8a4c2827128e9e4b9d387a14" compoundref="sparse__set_8hpp" startline="74" endline="75">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</references>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a40819c4b1ff12b0dd63ee4caeb611c72" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist, const key_compare &amp;comp)</argsstring>
+        <name>sparse_set</name>
+        <qualifiedname>sparse_set::sparse_set</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classsparse__set_1a8beaf63b8c5c5a126703a43b450155df" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classsparse__set_1af5243c902e1282793dadb7f6b1c2bbad" kindref="member">key_compare</ref> &amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表构造函数，指定比较函数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>comp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>比较函数对象 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="156" column="5" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="156" bodyend="157"/>
+        <references refid="classsparse__set_1a40916bf6f9f11dd8460f1bae4acf373b" compoundref="sparse__set_8hpp" startline="179" endline="179">sparse_set&lt; Key, Compare, Alloc &gt;::begin</references>
+        <references refid="classsparse__set_1ae2ac5d49c162120e498b0795e3af48fb" compoundref="sparse__set_8hpp" startline="185" endline="185">sparse_set&lt; Key, Compare, Alloc &gt;::end</references>
+        <references refid="classsparse__set_1ac3c9332e8a4c2827128e9e4b9d387a14" compoundref="sparse__set_8hpp" startline="74" endline="75">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</references>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a4a49e2e3c398ab201b240ef8a7a433fb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set" kindref="compound">sparse_set</ref> &amp;</type>
+        <definition>sparse_set &amp; sparse_set&lt; Key, Compare, Alloc &gt;::operator=</definition>
+        <argsstring>(std::initializer_list&lt; value_type &gt; ilist)</argsstring>
+        <name>operator=</name>
+        <qualifiedname>sparse_set::operator=</qualifiedname>
+        <param>
+          <type>std::initializer_list&lt; <ref refid="classsparse__set_1a8beaf63b8c5c5a126703a43b450155df" kindref="member">value_type</ref> &gt;</type>
+          <declname>ilist</declname>
+        </param>
+        <briefdescription>
+<para>初始化列表赋值运算符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>ilist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>初始化列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>自身引用 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="164" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="164" bodyend="168"/>
+        <references refid="classsparse__set_1a74f2648efc34877d4bd564c914b9b0e1" compoundref="sparse__set_8hpp" startline="366" endline="366">sparse_set&lt; Key, Compare, Alloc &gt;::clear</references>
+        <references refid="classsparse__set_1accd12916b99c6b59f9bb1d59ce165cd6" compoundref="sparse__set_8hpp" startline="293" endline="293">sparse_set&lt; Key, Compare, Alloc &gt;::insert</references>
+        <references refid="classsparse__set_1ac3c9332e8a4c2827128e9e4b9d387a14" compoundref="sparse__set_8hpp" startline="74" endline="75">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</references>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a5f1c04301415e84ea2c0fbb5f296c60e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>sparse_set&lt; Key, Compare, Alloc &gt;::~sparse_set</definition>
+        <argsstring>()=default</argsstring>
+        <name>~sparse_set</name>
+        <qualifiedname>sparse_set::~sparse_set</qualifiedname>
+        <briefdescription>
+<para>析构函数 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="173" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a40916bf6f9f11dd8460f1bae4acf373b" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref></type>
+        <definition>iterator sparse_set&lt; Key, Compare, Alloc &gt;::begin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>sparse_set::begin</qualifiedname>
+        <briefdescription>
+<para>获取起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="179" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="179" bodyend="179"/>
+        <referencedby refid="classsparse__set_1af198a2aac63f1823f507061a0e278c5f" compoundref="sparse__set_8hpp" startline="148" endline="149">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</referencedby>
+        <referencedby refid="classsparse__set_1a40819c4b1ff12b0dd63ee4caeb611c72" compoundref="sparse__set_8hpp" startline="156" endline="157">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1ae2ac5d49c162120e498b0795e3af48fb" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref></type>
+        <definition>iterator sparse_set&lt; Key, Compare, Alloc &gt;::end</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>sparse_set::end</qualifiedname>
+        <briefdescription>
+<para>获取结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="185" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="185" bodyend="185"/>
+        <referencedby refid="classsparse__set_1af198a2aac63f1823f507061a0e278c5f" compoundref="sparse__set_8hpp" startline="148" endline="149">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</referencedby>
+        <referencedby refid="classsparse__set_1a40819c4b1ff12b0dd63ee4caeb611c72" compoundref="sparse__set_8hpp" startline="156" endline="157">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a3fc9fbb4d15482594c94ac963f774b14" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a36ee9da22d761398c2a617bee62edba9" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator sparse_set&lt; Key, Compare, Alloc &gt;::begin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>begin</name>
+        <qualifiedname>sparse_set::begin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="191" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="191" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1ab9370661cf439e658c40727d40d3f164" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a36ee9da22d761398c2a617bee62edba9" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator sparse_set&lt; Key, Compare, Alloc &gt;::end</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>end</name>
+        <qualifiedname>sparse_set::end</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="197" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="197" bodyend="197"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a3a5dc5cc87a6dc20c0e172a0356c56e1" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a36ee9da22d761398c2a617bee62edba9" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator sparse_set&lt; Key, Compare, Alloc &gt;::cbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cbegin</name>
+        <qualifiedname>sparse_set::cbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="203" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="203" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a5f069100d83222a18177a20dc238c1a8" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a36ee9da22d761398c2a617bee62edba9" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator sparse_set&lt; Key, Compare, Alloc &gt;::cend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>cend</name>
+        <qualifiedname>sparse_set::cend</qualifiedname>
+        <briefdescription>
+<para>获取常量结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最后一个元素之后位置的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="209" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="209" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a62ef1dcb3ebf9acefa852ee9c4451dc7" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1aa14b6ac9b0a663dfc6d770a94070c983" kindref="member">reverse_iterator</ref></type>
+        <definition>reverse_iterator sparse_set&lt; Key, Compare, Alloc &gt;::rbegin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>sparse_set::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="215" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="215" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a2288358e18f325e032f25155e700cad3" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1aa14b6ac9b0a663dfc6d770a94070c983" kindref="member">reverse_iterator</ref></type>
+        <definition>reverse_iterator sparse_set&lt; Key, Compare, Alloc &gt;::rend</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>sparse_set::rend</qualifiedname>
+        <briefdescription>
+<para>获取反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="221" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="221" bodyend="221"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1ac694c73fbc0a1726e903d523da0fa623" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a74244c4bce653fc1454399c090c1119d" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator sparse_set&lt; Key, Compare, Alloc &gt;::rbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rbegin</name>
+        <qualifiedname>sparse_set::rbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="227" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="227" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a74c5ccc1b5757ff8ab9cf0951b7c26e3" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a74244c4bce653fc1454399c090c1119d" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator sparse_set&lt; Key, Compare, Alloc &gt;::rend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>rend</name>
+        <qualifiedname>sparse_set::rend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="233" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="233" bodyend="233"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a115a2ebe9d89b58f623c9e6193c465ea" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a74244c4bce653fc1454399c090c1119d" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator sparse_set&lt; Key, Compare, Alloc &gt;::crbegin</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crbegin</name>
+        <qualifiedname>sparse_set::crbegin</qualifiedname>
+        <briefdescription>
+<para>获取常量反向起始迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最大元素的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="239" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="239" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1aa6ca6a2bbc9ca0f34a5c005c1388f3ef" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a74244c4bce653fc1454399c090c1119d" kindref="member">const_reverse_iterator</ref></type>
+        <definition>const_reverse_iterator sparse_set&lt; Key, Compare, Alloc &gt;::crend</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>crend</name>
+        <qualifiedname>sparse_set::crend</qualifiedname>
+        <briefdescription>
+<para>获取常量反向结束迭代器 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>指向最小元素之前位置的常量反向迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="245" column="29" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="245" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a8b4d4b3f79a690ca11bc209538a6712c" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1adad526ad1cc4c4a4aca6276ec8479857" kindref="member">size_type</ref></type>
+        <definition>size_type sparse_set&lt; Key, Compare, Alloc &gt;::size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>size</name>
+        <qualifiedname>sparse_set::size</qualifiedname>
+        <briefdescription>
+<para>获取元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>sparse_set中的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="251" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="251" bodyend="251"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1acfe3672f9169ca6c3065bdd32b920ee7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1adad526ad1cc4c4a4aca6276ec8479857" kindref="member">size_type</ref></type>
+        <definition>size_type sparse_set&lt; Key, Compare, Alloc &gt;::max_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_size</name>
+        <qualifiedname>sparse_set::max_size</qualifiedname>
+        <briefdescription>
+<para>获取最大可能大小 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>最大元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="257" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="257" bodyend="257"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1aa4c41b456f53a2366e1bb50a1c073716" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool sparse_set&lt; Key, Compare, Alloc &gt;::empty</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>empty</name>
+        <qualifiedname>sparse_set::empty</qualifiedname>
+        <briefdescription>
+<para>检查是否为空 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>是否为空 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="263" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="263" bodyend="263"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a8dd773142e03a1db07470652df360675" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1af5243c902e1282793dadb7f6b1c2bbad" kindref="member">key_compare</ref></type>
+        <definition>key_compare sparse_set&lt; Key, Compare, Alloc &gt;::key_comp</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>key_comp</name>
+        <qualifiedname>sparse_set::key_comp</qualifiedname>
+        <briefdescription>
+<para>获取键比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>键比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="269" column="18" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="269" bodyend="269"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a76417e1390010c8f11a45a9137aafe18" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a626618fb2ff0ea2f9b3522cdefd538e9" kindref="member">value_compare</ref></type>
+        <definition>value_compare sparse_set&lt; Key, Compare, Alloc &gt;::value_comp</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>value_comp</name>
+        <qualifiedname>sparse_set::value_comp</qualifiedname>
+        <briefdescription>
+<para>获取值比较函数对象 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>值比较函数对象的副本 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="275" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="275" bodyend="275"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a5d83911ceb0d012b6282001ed4193d93" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; sparse_set&lt; Key, Compare, Alloc &gt;::emplace</definition>
+        <argsstring>(Args &amp;&amp;... args)</argsstring>
+        <name>emplace</name>
+        <qualifiedname>sparse_set::emplace</qualifiedname>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在sparse_set中就地构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="284" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="284" bodyend="286"/>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1accd12916b99c6b59f9bb1d59ce165cd6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; sparse_set&lt; Key, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(const value_type &amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>sparse_set::insert</qualifiedname>
+        <param>
+          <type>const <ref refid="classsparse__set_1a8beaf63b8c5c5a126703a43b450155df" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>拷贝插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="293" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="293" bodyend="293"/>
+        <referencedby refid="classsparse__set_1a4a49e2e3c398ab201b240ef8a7a433fb" compoundref="sparse__set_8hpp" startline="164" endline="168">sparse_set&lt; Key, Compare, Alloc &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a25c42ace266e68a2073f33fd1bbd71da" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref>, bool &gt;</type>
+        <definition>pair&lt; iterator, bool &gt; sparse_set&lt; Key, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(value_type &amp;&amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>sparse_set::insert</qualifiedname>
+        <param>
+          <type><ref refid="classsparse__set_1a8beaf63b8c5c5a126703a43b450155df" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>插入结果（迭代器和是否成功） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="300" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="300" bodyend="300"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1aa7aa810270433477b7ade68e131ba0aa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref></type>
+        <definition>iterator sparse_set&lt; Key, Compare, Alloc &gt;::emplace_hint</definition>
+        <argsstring>(iterator position, Args &amp;&amp;... args)</argsstring>
+        <name>emplace_hint</name>
+        <qualifiedname>sparse_set::emplace_hint</qualifiedname>
+        <param>
+          <type><ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近就地构造元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>构造参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="310" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="310" bodyend="312"/>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1ac08a4f23e8eb6b7f0b3b63623b534890" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref></type>
+        <definition>iterator sparse_set&lt; Key, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(iterator position, const value_type &amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>sparse_set::insert</qualifiedname>
+        <param>
+          <type><ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classsparse__set_1a8beaf63b8c5c5a126703a43b450155df" kindref="member">value_type</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近拷贝插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="320" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="320" bodyend="320"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a71e3d72ec452a6cfc8b8ef8701beeed3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref></type>
+        <definition>iterator sparse_set&lt; Key, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(iterator position, value_type &amp;&amp;value)</argsstring>
+        <name>insert</name>
+        <qualifiedname>sparse_set::insert</qualifiedname>
+        <param>
+          <type><ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type><ref refid="classsparse__set_1a8beaf63b8c5c5a126703a43b450155df" kindref="member">value_type</ref> &amp;&amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+<para>在提示位置附近移动插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>插入位置提示 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要插入的值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向插入元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="328" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="328" bodyend="330"/>
+        <references refid="group___shift_algorithms_1ga5cf63a30ac8a14718fe8e9a65e1267ac" compoundref="shift_8hpp" startline="312" endline="321">move</references>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1ae863cdb365e87b2141fa404e353f9850" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Iterator</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void sparse_set&lt; Key, Compare, Alloc &gt;::insert</definition>
+        <argsstring>(Iterator first, Iterator last)</argsstring>
+        <name>insert</name>
+        <qualifiedname>sparse_set::insert</qualifiedname>
+        <param>
+          <type>Iterator</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>Iterator</type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>范围插入元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Iterator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>迭代器类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="339" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="339" bodyend="341"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1aad696843a3f3d9c3a6d4f0b6324096a8" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(data_.erase(position))" virt="non-virtual">
+        <type>void</type>
+        <definition>void sparse_set&lt; Key, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(iterator position)</argsstring>
+        <name>erase</name>
+        <qualifiedname>sparse_set::erase</qualifiedname>
+        <param>
+          <type><ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref></type>
+          <declname>position</declname>
+        </param>
+        <briefdescription>
+<para>删除指定位置的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的位置 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="347" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="347" bodyend="347"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1abe146f23d41ad2b6bb54ad0262f580fb" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(data_.erase(key))" virt="non-virtual">
+        <type><ref refid="classsparse__set_1adad526ad1cc4c4a4aca6276ec8479857" kindref="member">size_type</ref></type>
+        <definition>size_type sparse_set&lt; Key, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>erase</name>
+        <qualifiedname>sparse_set::erase</qualifiedname>
+        <param>
+          <type>const <ref refid="classsparse__set_1aae0c684f1d419045a6649157114d3db3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>删除所有具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要删除的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>删除的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="354" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="354" bodyend="354"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1ac02ce0503d7dce886533ba09f53ac5c9" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(data_.erase(first, last))" virt="non-virtual">
+        <type>void</type>
+        <definition>void sparse_set&lt; Key, Compare, Alloc &gt;::erase</definition>
+        <argsstring>(iterator first, iterator last)</argsstring>
+        <name>erase</name>
+        <qualifiedname>sparse_set::erase</qualifiedname>
+        <param>
+          <type><ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref></type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type><ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref></type>
+          <declname>last</declname>
+        </param>
+        <briefdescription>
+<para>删除指定范围内的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>起始迭代器 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>结束迭代器 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="361" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="361" bodyend="361"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a74f2648efc34877d4bd564c914b9b0e1" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(data_.clear())" virt="non-virtual">
+        <type>void</type>
+        <definition>void sparse_set&lt; Key, Compare, Alloc &gt;::clear</definition>
+        <argsstring>()</argsstring>
+        <name>clear</name>
+        <qualifiedname>sparse_set::clear</qualifiedname>
+        <briefdescription>
+<para>清空sparse_set </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="366" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="366" bodyend="366"/>
+        <references refid="classsparse__set_1a74f2648efc34877d4bd564c914b9b0e1" compoundref="sparse__set_8hpp" startline="366" endline="366">sparse_set&lt; Key, Compare, Alloc &gt;::clear</references>
+        <referencedby refid="classsparse__set_1a74f2648efc34877d4bd564c914b9b0e1" compoundref="sparse__set_8hpp" startline="366" endline="366">sparse_set&lt; Key, Compare, Alloc &gt;::clear</referencedby>
+        <referencedby refid="classsparse__set_1a4a49e2e3c398ab201b240ef8a7a433fb" compoundref="sparse__set_8hpp" startline="164" endline="168">sparse_set&lt; Key, Compare, Alloc &gt;::operator=</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a3a9eda2d0719f77697ece12660316618" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref></type>
+        <definition>iterator sparse_set&lt; Key, Compare, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>find</name>
+        <qualifiedname>sparse_set::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classsparse__set_1aae0c684f1d419045a6649157114d3db3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的迭代器，未找到则返回end() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="373" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="373" bodyend="373"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1abca80ca73dbb318c3d5c0b168d77a4c4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a36ee9da22d761398c2a617bee62edba9" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator sparse_set&lt; Key, Compare, Alloc &gt;::find</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>find</name>
+        <qualifiedname>sparse_set::find</qualifiedname>
+        <param>
+          <type>const <ref refid="classsparse__set_1aae0c684f1d419045a6649157114d3db3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>查找具有指定键的常量元素 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要查找的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个匹配元素的常量迭代器，未找到则返回cend() </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="380" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="380" bodyend="380"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1ad11077149b9acc849579b8e2d220722b" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1adad526ad1cc4c4a4aca6276ec8479857" kindref="member">size_type</ref></type>
+        <definition>size_type sparse_set&lt; Key, Compare, Alloc &gt;::count</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>count</name>
+        <qualifiedname>sparse_set::count</qualifiedname>
+        <param>
+          <type>const <ref refid="classsparse__set_1aae0c684f1d419045a6649157114d3db3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>统计具有指定键的元素数量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要统计的键 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>匹配的元素数量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="387" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="387" bodyend="387"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1adf2fb3385266f72c6bad6a63fa8f38c7" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref></type>
+        <definition>iterator sparse_set&lt; Key, Compare, Alloc &gt;::lower_bound</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>lower_bound</name>
+        <qualifiedname>sparse_set::lower_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classsparse__set_1aae0c684f1d419045a6649157114d3db3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个不小于指定键的元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不小于key的元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="394" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="394" bodyend="394"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a5cc5f4e22d648ec88e1cf58aaedb7a27" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a36ee9da22d761398c2a617bee62edba9" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator sparse_set&lt; Key, Compare, Alloc &gt;::lower_bound</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>lower_bound</name>
+        <qualifiedname>sparse_set::lower_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classsparse__set_1aae0c684f1d419045a6649157114d3db3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个不小于指定键的常量元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个不小于key的元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="401" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="401" bodyend="401"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a4f3ebf8e572ef984e548baf716864778" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref></type>
+        <definition>iterator sparse_set&lt; Key, Compare, Alloc &gt;::upper_bound</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>upper_bound</name>
+        <qualifiedname>sparse_set::upper_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classsparse__set_1aae0c684f1d419045a6649157114d3db3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个大于指定键的元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个大于key的元素的迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="408" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="408" bodyend="408"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a45a08beab1abcc2109f98c6e23105090" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1a36ee9da22d761398c2a617bee62edba9" kindref="member">const_iterator</ref></type>
+        <definition>const_iterator sparse_set&lt; Key, Compare, Alloc &gt;::upper_bound</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>upper_bound</name>
+        <qualifiedname>sparse_set::upper_bound</qualifiedname>
+        <param>
+          <type>const <ref refid="classsparse__set_1aae0c684f1d419045a6649157114d3db3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取第一个大于指定键的常量元素位置 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>指向第一个大于key的元素的常量迭代器 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="415" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="415" bodyend="415"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1ac6a6781c3ac7e65ee51edfc5926eaa7f" prot="public" static="no" nodiscard="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref>, <ref refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" kindref="member">iterator</ref> &gt;</type>
+        <definition>pair&lt; iterator, iterator &gt; sparse_set&lt; Key, Compare, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key)</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>sparse_set::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classsparse__set_1aae0c684f1d419045a6649157114d3db3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含lower_bound和upper_bound的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="422" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="422" bodyend="422"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a4048fc73f3661111bcdfee0e6c3cf0db" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structpair" kindref="compound">pair</ref>&lt; <ref refid="classsparse__set_1a36ee9da22d761398c2a617bee62edba9" kindref="member">const_iterator</ref>, <ref refid="classsparse__set_1a36ee9da22d761398c2a617bee62edba9" kindref="member">const_iterator</ref> &gt;</type>
+        <definition>pair&lt; const_iterator, const_iterator &gt; sparse_set&lt; Key, Compare, Alloc &gt;::equal_range</definition>
+        <argsstring>(const key_type &amp;key) const</argsstring>
+        <name>equal_range</name>
+        <qualifiedname>sparse_set::equal_range</qualifiedname>
+        <param>
+          <type>const <ref refid="classsparse__set_1aae0c684f1d419045a6649157114d3db3" kindref="member">key_type</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+<para>获取等于指定键的常量元素范围 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键值 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>包含lower_bound和upper_bound的pair </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="429" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="429" bodyend="431"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a24d1ad8fdd944d72171f61bd85b27c64" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void sparse_set&lt; Key, Compare, Alloc &gt;::reserve</definition>
+        <argsstring>(size_type n)</argsstring>
+        <name>reserve</name>
+        <qualifiedname>sparse_set::reserve</qualifiedname>
+        <param>
+          <type><ref refid="classsparse__set_1adad526ad1cc4c4a4aca6276ec8479857" kindref="member">size_type</ref></type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>预留容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>预留的元素数量 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="437" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="437" bodyend="437"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a05a37465e95523caeda8eb4d173a0a07" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classsparse__set_1adad526ad1cc4c4a4aca6276ec8479857" kindref="member">size_type</ref></type>
+        <definition>size_type sparse_set&lt; Key, Compare, Alloc &gt;::capacity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>capacity</name>
+        <qualifiedname>sparse_set::capacity</qualifiedname>
+        <briefdescription>
+<para>获取当前容量 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>当前分配的容量 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="443" column="16" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="443" bodyend="443"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a119aa053f78b6e4d86330111fae84dba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void sparse_set&lt; Key, Compare, Alloc &gt;::shrink_to_fit</definition>
+        <argsstring>()</argsstring>
+        <name>shrink_to_fit</name>
+        <qualifiedname>sparse_set::shrink_to_fit</qualifiedname>
+        <briefdescription>
+<para>收缩容量以适应实际大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="448" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="448" bodyend="448"/>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1aca722bcc78d241e2928a319b2dd71cd6" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(data_.swap(other.data_))" virt="non-virtual">
+        <type>void</type>
+        <definition>void sparse_set&lt; Key, Compare, Alloc &gt;::swap</definition>
+        <argsstring>(sparse_set &amp;other)</argsstring>
+        <name>swap</name>
+        <qualifiedname>sparse_set::swap</qualifiedname>
+        <param>
+          <type><ref refid="classsparse__set" kindref="compound">sparse_set</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>交换两个sparse_set的内容 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要交换的另一个sparse_set </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="454" column="10" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="454" bodyend="454"/>
+        <references refid="classsparse__set_1ac3c9332e8a4c2827128e9e4b9d387a14" compoundref="sparse__set_8hpp" startline="74" endline="75">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</references>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1a734783e276353151d258a2d499583fcb" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(data_==rhs.data_)" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool sparse_set&lt; Key, Compare, Alloc &gt;::equal_to</definition>
+        <argsstring>(const sparse_set &amp;rhs) const</argsstring>
+        <name>equal_to</name>
+        <qualifiedname>sparse_set::equal_to</qualifiedname>
+        <param>
+          <type>const <ref refid="classsparse__set" kindref="compound">sparse_set</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>相等比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧sparse_set </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>如果两个sparse_set大小相等且对应元素相等返回true </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="461" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="461" bodyend="463"/>
+        <references refid="classsparse__set_1ac3c9332e8a4c2827128e9e4b9d387a14" compoundref="sparse__set_8hpp" startline="74" endline="75">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</references>
+      </memberdef>
+      <memberdef kind="function" id="classsparse__set_1ac75061c771096cb3ec1eefd38843f182" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(data_&lt; rhs.data_)" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool sparse_set&lt; Key, Compare, Alloc &gt;::less_than</definition>
+        <argsstring>(const sparse_set &amp;rhs) const</argsstring>
+        <name>less_than</name>
+        <qualifiedname>sparse_set::less_than</qualifiedname>
+        <param>
+          <type>const <ref refid="classsparse__set" kindref="compound">sparse_set</ref> &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>小于比较操作符 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>rhs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>右侧sparse_set </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>按字典序比较结果 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="470" column="11" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="470" bodyend="472"/>
+        <references refid="classsparse__set_1ac3c9332e8a4c2827128e9e4b9d387a14" compoundref="sparse__set_8hpp" startline="74" endline="75">sparse_set&lt; Key, Compare, Alloc &gt;::sparse_set</references>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>稀疏集合容器 </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Key</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键类型 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Compare</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>键比较函数类型，默认为less&lt;Key&gt; </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Alloc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>分配器类型</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+sparse_set是一种关联容器，存储唯一的键值，每个键在容器中唯一。 元素按照键的顺序自动排序，排序标准由Compare函数对象指定。 底层使用有序平坦数组实现，查找O(log n)，迭代缓存友好。</para>
+<para><simplesect kind="note"><para>适用于查找频繁、修改较少且需要有序遍历的场景。 </para>
+</simplesect>
+<simplesect kind="warning"><para>插入和删除操作为O(n)，可能使所有迭代器失效。 </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>icollector&lt; T &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="1">
+        <label>sparse_set&lt; Key, Compare, Alloc &gt;</label>
+        <link refid="classsparse__set"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>icollector&lt; T &gt;</label>
+        <link refid="structicollector"/>
+        <childnode refid="3" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>icomparable&lt; T &gt;</label>
+        <link refid="structicomparable"/>
+      </node>
+      <node id="1">
+        <label>sparse_set&lt; Key, Compare, Alloc &gt;</label>
+        <link refid="classsparse__set"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" line="38" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/container/sparse_set.hpp" bodystart="38" bodyend="473"/>
+    <listofallmembers>
+      <member refid="classsparse__set_1ae3a5d94ca3140ba4de91ad0a2aff9b7f" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>allocator_type</name></member>
+      <member refid="classsparse__set_1a067ff75fc073615114ee2e403f73f50a" prot="private" virt="non-virtual"><scope>sparse_set</scope><name>base_type</name></member>
+      <member refid="classsparse__set_1a40916bf6f9f11dd8460f1bae4acf373b" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>begin</name></member>
+      <member refid="classsparse__set_1a3fc9fbb4d15482594c94ac963f774b14" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>begin</name></member>
+      <member refid="classsparse__set_1a05a37465e95523caeda8eb4d173a0a07" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>capacity</name></member>
+      <member refid="classsparse__set_1a3a5dc5cc87a6dc20c0e172a0356c56e1" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>cbegin</name></member>
+      <member refid="classsparse__set_1a5f069100d83222a18177a20dc238c1a8" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>cend</name></member>
+      <member refid="classsparse__set_1a74f2648efc34877d4bd564c914b9b0e1" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>clear</name></member>
+      <member refid="classsparse__set_1a36ee9da22d761398c2a617bee62edba9" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>const_iterator</name></member>
+      <member refid="classsparse__set_1aeb3314f42dfc4a052e52a9733d809b23" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>const_pointer</name></member>
+      <member refid="classsparse__set_1aa2803d4b6d89b2fe8d68b4a23e979260" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>const_reference</name></member>
+      <member refid="classsparse__set_1a74244c4bce653fc1454399c090c1119d" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>const_reverse_iterator</name></member>
+      <member refid="classsparse__set_1ad11077149b9acc849579b8e2d220722b" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>count</name></member>
+      <member refid="classsparse__set_1a115a2ebe9d89b58f623c9e6193c465ea" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>crbegin</name></member>
+      <member refid="classsparse__set_1aa6ca6a2bbc9ca0f34a5c005c1388f3ef" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>crend</name></member>
+      <member refid="classsparse__set_1aac1f8f199b427bb84dcb5443a2456936" prot="private" virt="non-virtual"><scope>sparse_set</scope><name>data_</name></member>
+      <member refid="classsparse__set_1a1da4703368e5ff3371745c368f433c4b" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>difference_type</name></member>
+      <member refid="classsparse__set_1a5d83911ceb0d012b6282001ed4193d93" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>emplace</name></member>
+      <member refid="classsparse__set_1aa7aa810270433477b7ade68e131ba0aa" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>emplace_hint</name></member>
+      <member refid="classsparse__set_1aa4c41b456f53a2366e1bb50a1c073716" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>empty</name></member>
+      <member refid="classsparse__set_1ae2ac5d49c162120e498b0795e3af48fb" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>end</name></member>
+      <member refid="classsparse__set_1ab9370661cf439e658c40727d40d3f164" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>end</name></member>
+      <member refid="classsparse__set_1ac6a6781c3ac7e65ee51edfc5926eaa7f" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>equal_range</name></member>
+      <member refid="classsparse__set_1a4048fc73f3661111bcdfee0e6c3cf0db" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>equal_range</name></member>
+      <member refid="classsparse__set_1a734783e276353151d258a2d499583fcb" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>equal_to</name></member>
+      <member refid="classsparse__set_1aad696843a3f3d9c3a6d4f0b6324096a8" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>erase</name></member>
+      <member refid="classsparse__set_1abe146f23d41ad2b6bb54ad0262f580fb" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>erase</name></member>
+      <member refid="classsparse__set_1ac02ce0503d7dce886533ba09f53ac5c9" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>erase</name></member>
+      <member refid="classsparse__set_1a3a9eda2d0719f77697ece12660316618" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>find</name></member>
+      <member refid="classsparse__set_1abca80ca73dbb318c3d5c0b168d77a4c4" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>find</name></member>
+      <member refid="classsparse__set_1accd12916b99c6b59f9bb1d59ce165cd6" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>insert</name></member>
+      <member refid="classsparse__set_1a25c42ace266e68a2073f33fd1bbd71da" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>insert</name></member>
+      <member refid="classsparse__set_1ac08a4f23e8eb6b7f0b3b63623b534890" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>insert</name></member>
+      <member refid="classsparse__set_1a71e3d72ec452a6cfc8b8ef8701beeed3" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>insert</name></member>
+      <member refid="classsparse__set_1ae863cdb365e87b2141fa404e353f9850" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>insert</name></member>
+      <member refid="classsparse__set_1a7817e08e8a503998599f616b94d74bc0" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>iterator</name></member>
+      <member refid="classsparse__set_1a8dd773142e03a1db07470652df360675" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>key_comp</name></member>
+      <member refid="classsparse__set_1af5243c902e1282793dadb7f6b1c2bbad" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>key_compare</name></member>
+      <member refid="classsparse__set_1aae0c684f1d419045a6649157114d3db3" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>key_type</name></member>
+      <member refid="classsparse__set_1ac75061c771096cb3ec1eefd38843f182" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>less_than</name></member>
+      <member refid="classsparse__set_1adf2fb3385266f72c6bad6a63fa8f38c7" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>lower_bound</name></member>
+      <member refid="classsparse__set_1a5cc5f4e22d648ec88e1cf58aaedb7a27" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>lower_bound</name></member>
+      <member refid="classsparse__set_1acfe3672f9169ca6c3065bdd32b920ee7" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>max_size</name></member>
+      <member refid="structicomparable_1a5666568813e0b179355cae28bb101cb5" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>operator!=</name></member>
+      <member refid="structicomparable_1ad55728ed77b4804c1cfc944085e1ff01" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>operator&lt;</name></member>
+      <member refid="structicomparable_1a024a6a008fa61eb0e486150f52d36310" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>operator&lt;=</name></member>
+      <member refid="classsparse__set_1a79a98f470affcf62c8701550258a7acf" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>operator=</name></member>
+      <member refid="classsparse__set_1a1b08af04e3873815051283d9d0072c21" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>operator=</name></member>
+      <member refid="classsparse__set_1a4a49e2e3c398ab201b240ef8a7a433fb" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>operator=</name></member>
+      <member refid="structicomparable_1a19b050f922dcb00e282f1fd440e2df77" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>operator==</name></member>
+      <member refid="structicomparable_1a5d2fcdbcf595020adcaccc310d90fc16" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>operator&gt;</name></member>
+      <member refid="structicomparable_1a108835b6418a11d9f26fb6849e820f0f" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>operator&gt;=</name></member>
+      <member refid="classsparse__set_1a69c9974ce9ea2467e2dbbcd8ae682898" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>pointer</name></member>
+      <member refid="classsparse__set_1a62ef1dcb3ebf9acefa852ee9c4451dc7" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>rbegin</name></member>
+      <member refid="classsparse__set_1ac694c73fbc0a1726e903d523da0fa623" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>rbegin</name></member>
+      <member refid="classsparse__set_1a3bdd30724a2b9fc6df82b5b9c78ec99a" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>reference</name></member>
+      <member refid="classsparse__set_1a2288358e18f325e032f25155e700cad3" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>rend</name></member>
+      <member refid="classsparse__set_1a74c5ccc1b5757ff8ab9cf0951b7c26e3" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>rend</name></member>
+      <member refid="classsparse__set_1a24d1ad8fdd944d72171f61bd85b27c64" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>reserve</name></member>
+      <member refid="classsparse__set_1aa14b6ac9b0a663dfc6d770a94070c983" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>reverse_iterator</name></member>
+      <member refid="classsparse__set_1a119aa053f78b6e4d86330111fae84dba" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>shrink_to_fit</name></member>
+      <member refid="classsparse__set_1a8b4d4b3f79a690ca11bc209538a6712c" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>size</name></member>
+      <member refid="classsparse__set_1adad526ad1cc4c4a4aca6276ec8479857" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>size_type</name></member>
+      <member refid="classsparse__set_1ac3c9332e8a4c2827128e9e4b9d387a14" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>sparse_set</name></member>
+      <member refid="classsparse__set_1a68899e61065f43d57eabf2649d315ad8" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>sparse_set</name></member>
+      <member refid="classsparse__set_1a5fe30f50f50e2f40893158c1d79542c8" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>sparse_set</name></member>
+      <member refid="classsparse__set_1a404f9d2083a9eec813b3571889641cdb" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>sparse_set</name></member>
+      <member refid="classsparse__set_1a7879936af7637a2d03d96034396a4941" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>sparse_set</name></member>
+      <member refid="classsparse__set_1acc5f67d3dac2c892c75ed84e24757d97" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>sparse_set</name></member>
+      <member refid="classsparse__set_1af198a2aac63f1823f507061a0e278c5f" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>sparse_set</name></member>
+      <member refid="classsparse__set_1a40819c4b1ff12b0dd63ee4caeb611c72" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>sparse_set</name></member>
+      <member refid="classsparse__set_1aca722bcc78d241e2928a319b2dd71cd6" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>swap</name></member>
+      <member refid="classsparse__set_1a4f3ebf8e572ef984e548baf716864778" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>upper_bound</name></member>
+      <member refid="classsparse__set_1a45a08beab1abcc2109f98c6e23105090" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>upper_bound</name></member>
+      <member refid="classsparse__set_1a76417e1390010c8f11a45a9137aafe18" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>value_comp</name></member>
+      <member refid="classsparse__set_1a626618fb2ff0ea2f9b3522cdefd538e9" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>value_compare</name></member>
+      <member refid="classsparse__set_1a8beaf63b8c5c5a126703a43b450155df" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>value_type</name></member>
+      <member refid="classsparse__set_1a5f1c04301415e84ea2c0fbb5f296c60e" prot="public" virt="non-virtual"><scope>sparse_set</scope><name>~sparse_set</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

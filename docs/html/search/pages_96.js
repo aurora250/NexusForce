@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🗄️_20数据库_20db_0',['🗄️ 数据库 (DB)',['../md__m_a_i_n_p_a_g_e.html#autotoc_md23',1,'']]]
+  ['🖥️_20支持环境_0',['🖥️ 支持环境',['../md__m_a_i_n_p_a_g_e.html#autotoc_md4',1,'']]]
 ];

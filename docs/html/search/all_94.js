@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['独占智能指针_0',['独占智能指针',['../group___unique_pointer.html',1,'']]]
+  ['混合排序算法详解_0',['混合排序算法详解',['../group___sort_algorithms.html#hybrid_algorithms',1,'']]]
 ];

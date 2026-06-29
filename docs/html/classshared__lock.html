@@ -110,10 +110,10 @@ Public 成员函数</h2></td></tr>
 <tr class="memdesc:a54df05d7997d6de8dcabfa916773934b"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认构造函数  <br /></td></tr>
 <tr class="memitem:afc9a15f2802f37810eb955782c5bc56d" id="r_afc9a15f2802f37810eb955782c5bc56d"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#afc9a15f2802f37810eb955782c5bc56d">shared_lock</a> (<a class="el" href="#a0dcaaf18ba7b622310b1977eeb7f940d">mutex_type</a> &amp;m)</td></tr>
 <tr class="memdesc:afc9a15f2802f37810eb955782c5bc56d"><td class="mdescLeft">&#160;</td><td class="mdescRight">从共享互斥锁构造  <br /></td></tr>
-<tr class="memitem:a5457fcedef9bfee60164ca07f4fb4de1" id="r_a5457fcedef9bfee60164ca07f4fb4de1"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a5457fcedef9bfee60164ca07f4fb4de1">shared_lock</a> (<a class="el" href="#a0dcaaf18ba7b622310b1977eeb7f940d">mutex_type</a> &amp;m, <a class="el" href="structdefer__lock__tag.html">defer_lock_tag</a> tag) noexcept</td></tr>
-<tr class="memdesc:a5457fcedef9bfee60164ca07f4fb4de1"><td class="mdescLeft">&#160;</td><td class="mdescRight">延迟锁定构造函数  <br /></td></tr>
-<tr class="memitem:afe149c809800ac2ab99c6140a8c46490" id="r_afe149c809800ac2ab99c6140a8c46490"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#afe149c809800ac2ab99c6140a8c46490">shared_lock</a> (<a class="el" href="#a0dcaaf18ba7b622310b1977eeb7f940d">mutex_type</a> &amp;m, <a class="el" href="structtry__lock__tag.html">try_lock_tag</a> tag) noexcept</td></tr>
-<tr class="memdesc:afe149c809800ac2ab99c6140a8c46490"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试锁定构造函数  <br /></td></tr>
+<tr class="memitem:a85c018c57b21e8a1e5aa04768251ee44" id="r_a85c018c57b21e8a1e5aa04768251ee44"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a85c018c57b21e8a1e5aa04768251ee44">shared_lock</a> (<a class="el" href="#a0dcaaf18ba7b622310b1977eeb7f940d">mutex_type</a> &amp;m, <a class="el" href="structlock__defer__tag.html">lock_defer_tag</a> tag) noexcept</td></tr>
+<tr class="memdesc:a85c018c57b21e8a1e5aa04768251ee44"><td class="mdescLeft">&#160;</td><td class="mdescRight">延迟锁定构造函数  <br /></td></tr>
+<tr class="memitem:a13c79613b047f709e175de029a767df2" id="r_a13c79613b047f709e175de029a767df2"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a13c79613b047f709e175de029a767df2">shared_lock</a> (<a class="el" href="#a0dcaaf18ba7b622310b1977eeb7f940d">mutex_type</a> &amp;m, <a class="el" href="structlock__quiet__tag.html">lock_quiet_tag</a> tag) noexcept</td></tr>
+<tr class="memdesc:a13c79613b047f709e175de029a767df2"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试锁定构造函数  <br /></td></tr>
 <tr class="memitem:a1177948b8f2cd8cad8fe9e18b543747b" id="r_a1177948b8f2cd8cad8fe9e18b543747b"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a1177948b8f2cd8cad8fe9e18b543747b">shared_lock</a> (<a class="el" href="classshared__lock.html">shared_lock</a> &amp;&amp;other) noexcept</td></tr>
 <tr class="memdesc:a1177948b8f2cd8cad8fe9e18b543747b"><td class="mdescLeft">&#160;</td><td class="mdescRight">移动构造函数  <br /></td></tr>
 <tr class="memitem:a4c66a9c5c30d81a6e1b170dde4028a82" id="r_a4c66a9c5c30d81a6e1b170dde4028a82"><td class="memItemLeft"><a class="el" href="classshared__lock.html">shared_lock</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4c66a9c5c30d81a6e1b170dde4028a82">operator=</a> (<a class="el" href="classshared__lock.html">shared_lock</a> &amp;&amp;other) noexcept</td></tr>
@@ -146,7 +146,7 @@ class shared_lock&lt; SharedMutex &gt;</div><p>共享锁类模板 </p>
 </dl>
 <p>RAII共享锁管理器，专门用于管理共享互斥锁的读锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00132">132</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00135">135</a> 行定义.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">构造及析构函数说明</h2>
 <a id="a54df05d7997d6de8dcabfa916773934b" name="a54df05d7997d6de8dcabfa916773934b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a54df05d7997d6de8dcabfa916773934b">&#9670;&#160;</a></span>shared_lock() <span class="overload">[1/5]</span></h2>
@@ -176,7 +176,7 @@ template&lt;typename SharedMutex&gt; </div>
 <p>默认构造函数 </p>
 <p>创建不管理任何共享互斥锁的共享锁。 </p>
 
-<p class="reference">被这些函数引用 <a class="el" href="shared__mutex_8hpp_source.html#l00204">operator=()</a> , 以及 <a class="el" href="shared__mutex_8hpp_source.html#l00190">shared_lock()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="shared__mutex_8hpp_source.html#l00210">operator=()</a> , 以及 <a class="el" href="shared__mutex_8hpp_source.html#l00196">shared_lock()</a>.</p>
 
 </div>
 </div>
@@ -214,12 +214,12 @@ template&lt;typename SharedMutex&gt; </div>
 </dl>
 <p>构造时立即获取共享互斥锁的读锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00154">154</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00160">160</a> 行定义.</p>
 
 </div>
 </div>
-<a id="a5457fcedef9bfee60164ca07f4fb4de1" name="a5457fcedef9bfee60164ca07f4fb4de1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5457fcedef9bfee60164ca07f4fb4de1">&#9670;&#160;</a></span>shared_lock() <span class="overload">[3/5]</span></h2>
+<a id="a85c018c57b21e8a1e5aa04768251ee44" name="a85c018c57b21e8a1e5aa04768251ee44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85c018c57b21e8a1e5aa04768251ee44">&#9670;&#160;</a></span>shared_lock() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -237,7 +237,7 @@ template&lt;typename SharedMutex&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structdefer__lock__tag.html">defer_lock_tag</a></td>          <td class="paramname"><span class="paramname"><em>tag</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="structlock__defer__tag.html">lock_defer_tag</a></td>          <td class="paramname"><span class="paramname"><em>tag</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -257,12 +257,12 @@ template&lt;typename SharedMutex&gt; </div>
 </dl>
 <p>构造时不锁定共享互斥锁，稍后可以手动获取读锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00167">167</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00173">173</a> 行定义.</p>
 
 </div>
 </div>
-<a id="afe149c809800ac2ab99c6140a8c46490" name="afe149c809800ac2ab99c6140a8c46490"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe149c809800ac2ab99c6140a8c46490">&#9670;&#160;</a></span>shared_lock() <span class="overload">[4/5]</span></h2>
+<a id="a13c79613b047f709e175de029a767df2" name="a13c79613b047f709e175de029a767df2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13c79613b047f709e175de029a767df2">&#9670;&#160;</a></span>shared_lock() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -280,7 +280,7 @@ template&lt;typename SharedMutex&gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structtry__lock__tag.html">try_lock_tag</a></td>          <td class="paramname"><span class="paramname"><em>tag</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="structlock__quiet__tag.html">lock_quiet_tag</a></td>          <td class="paramname"><span class="paramname"><em>tag</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -300,7 +300,7 @@ template&lt;typename SharedMutex&gt; </div>
 </dl>
 <p>构造时尝试获取共享互斥锁的读锁，如果失败不会阻塞。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00177">177</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00183">183</a> 行定义.</p>
 
 </div>
 </div>
@@ -338,7 +338,7 @@ template&lt;typename SharedMutex&gt; </div>
 </dl>
 <p>转移共享互斥锁的所有权和锁定状态。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00190">190</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00196">196</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="#a54df05d7997d6de8dcabfa916773934b">shared_lock()</a>.</p>
 
@@ -372,7 +372,7 @@ template&lt;typename SharedMutex&gt; </div>
 <p>析构函数 </p>
 <p>如果拥有共享锁的所有权，则释放读锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00223">223</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00229">229</a> 行定义.</p>
 
 </div>
 </div>
@@ -405,7 +405,7 @@ template&lt;typename SharedMutex&gt; </div>
 <p>获取读锁 </p>
 <p>如果已拥有锁或未管理共享互斥锁，则不执行任何操作。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00252">252</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00258">258</a> 行定义.</p>
 
 </div>
 </div>
@@ -437,7 +437,7 @@ template&lt;typename SharedMutex&gt; </div>
 <p>获取管理的共享互斥锁指针 </p>
 <dl class="section return"><dt>返回</dt><dd>指向管理的共享互斥锁的指针，如果没有管理则返回nullptr </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00245">245</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00251">251</a> 行定义.</p>
 
 </div>
 </div>
@@ -469,7 +469,7 @@ template&lt;typename SharedMutex&gt; </div>
 <p>转换为布尔值 </p>
 <dl class="section return"><dt>返回</dt><dd>是否拥有共享锁的所有权 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00233">233</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00239">239</a> 行定义.</p>
 
 </div>
 </div>
@@ -508,7 +508,7 @@ template&lt;typename SharedMutex&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>当前对象的引用</dd></dl>
 <p>释放当前锁，然后转移所有权。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00204">204</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00210">210</a> 行定义.</p>
 
 <p class="reference">引用了 <a class="el" href="type__traits_8hpp_source.html#l03084">addressof()</a> , 以及 <a class="el" href="#a54df05d7997d6de8dcabfa916773934b">shared_lock()</a>.</p>
 
@@ -542,7 +542,7 @@ template&lt;typename SharedMutex&gt; </div>
 <p>检查是否拥有共享锁 </p>
 <dl class="section return"><dt>返回</dt><dd>是否拥有共享锁的所有权 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00239">239</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00245">245</a> 行定义.</p>
 
 </div>
 </div>
@@ -575,7 +575,7 @@ template&lt;typename SharedMutex&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>之前管理的共享互斥锁指针</dd></dl>
 <p>放弃对共享互斥锁的管理权，返回互斥锁指针但不释放锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00302">302</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00308">308</a> 行定义.</p>
 
 </div>
 </div>
@@ -608,7 +608,7 @@ template&lt;typename SharedMutex&gt; </div>
 <dl class="section return"><dt>返回</dt><dd>如果成功获得读锁则返回true，否则返回false</dd></dl>
 <p>非阻塞地尝试获取共享互斥锁的读锁。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00285">285</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00291">291</a> 行定义.</p>
 
 </div>
 </div>
@@ -640,7 +640,7 @@ template&lt;typename SharedMutex&gt; </div>
 <p>释放读锁 </p>
 <p>如果未拥有锁或未管理共享互斥锁，则不执行任何操作。 </p>
 
-<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00268">268</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="shared__mutex_8hpp_source.html">shared_mutex.hpp</a> 第 <a class="el" href="shared__mutex_8hpp_source.html#l00274">274</a> 行定义.</p>
 
 </div>
 </div>

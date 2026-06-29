@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>NexusForce: multipart_parser类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">NexusForce<span id="projectnumber">&#160;1.0.0</span>
+   </div>
+   <div id="projectbrief">A Modern C++ Library with extended functionality, web components, and utility libraries</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.16.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','搜索',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('classmultipart__parser.html','','classmultipart__parser-members'); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">载入中...</div>
+<div class="SRStatus" id="Searching">搜索中...</div>
+<div class="SRStatus" id="NoMatches">未找到</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">multipart_parser类 参考<div class="ingroups"><a class="el" href="group___h_t_t_p.html">HTTP</a></div></div></div>
+</div><!--header-->
+<div class="contents">
+
+<p>multipart/form-data 解析器  
+ <a href="#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="multipart__parser_8hpp_source.html">multipart_parser.hpp</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a40b95fe460890d8f65a510307b4bca18" id="r_a40b95fe460890d8f65a510307b4bca18"><td class="memItemLeft"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="structmultipart__field.html">multipart_field</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a40b95fe460890d8f65a510307b4bca18">parse</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> body, <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> boundary)</td></tr>
+<tr class="memdesc:a40b95fe460890d8f65a510307b4bca18"><td class="mdescLeft">&#160;</td><td class="mdescRight">解析multipart请求体  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:a14c8789fade60c51801f45a6745a7da6" id="r_a14c8789fade60c51801f45a6745a7da6"><td class="memItemLeft">static <a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a>&#160;</td><td class="memItemRight"><a class="el" href="#a14c8789fade60c51801f45a6745a7da6">extract_boundary</a> (<a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> content_type)</td></tr>
+<tr class="memdesc:a14c8789fade60c51801f45a6745a7da6"><td class="mdescLeft">&#160;</td><td class="mdescRight">从Content-Type头提取boundary  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public 属性</h2></td></tr>
+<tr class="memitem:a4161a4656733f2431ae34db24f5b1f60" id="r_a4161a4656733f2431ae34db24f5b1f60"><td class="memItemLeft"><a id="a4161a4656733f2431ae34db24f5b1f60" name="a4161a4656733f2431ae34db24f5b1f60"></a>
+<a class="el" href="classbyte__size.html">byte_size</a>&#160;</td><td class="memItemRight"><b>max_field_size</b> {10_MB}</td></tr>
+<tr class="memdesc:a4161a4656733f2431ae34db24f5b1f60"><td class="mdescLeft">&#160;</td><td class="mdescRight">最大单字段大小 <br /></td></tr>
+<tr class="memitem:aae4fbe9496d6d35e71962a94aadac627" id="r_aae4fbe9496d6d35e71962a94aadac627"><td class="memItemLeft"><a id="aae4fbe9496d6d35e71962a94aadac627" name="aae4fbe9496d6d35e71962a94aadac627"></a>
+<a class="el" href="group___platform_dependent_types.html#ga2d35ca4f92b748b22e8674ea36a6c875">size_t</a>&#160;</td><td class="memItemRight"><b>max_fields</b> {256}</td></tr>
+<tr class="memdesc:aae4fbe9496d6d35e71962a94aadac627"><td class="mdescLeft">&#160;</td><td class="mdescRight">最大字段数 <br /></td></tr>
+<tr class="memitem:a354bec4d05800b6d84bb3dd09bbeddd2" id="r_a354bec4d05800b6d84bb3dd09bbeddd2"><td class="memItemLeft"><a id="a354bec4d05800b6d84bb3dd09bbeddd2" name="a354bec4d05800b6d84bb3dd09bbeddd2"></a>
+<a class="el" href="classbyte__size.html">byte_size</a>&#160;</td><td class="memItemRight"><b>max_total_size</b> {100_MB}</td></tr>
+<tr class="memdesc:a354bec4d05800b6d84bb3dd09bbeddd2"><td class="mdescLeft">&#160;</td><td class="mdescRight">最大总请求体大小 <br /></td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
+<div class="textblock"><p>multipart/form-data 解析器 </p>
+<p>解析 HTTP multipart/form-data 请求体。 支持文件上传字段和普通表单字段。 </p>
+
+<p class="definition">在文件 <a class="el" href="multipart__parser_8hpp_source.html">multipart_parser.hpp</a> 第 <a class="el" href="multipart__parser_8hpp_source.html#l00041">41</a> 行定义.</p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
+<a id="a14c8789fade60c51801f45a6745a7da6" name="a14c8789fade60c51801f45a6745a7da6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14c8789fade60c51801f45a6745a7da6">&#9670;&#160;</a></span>extract_boundary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a> multipart_parser::extract_boundary </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>content_type</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>从Content-Type头提取boundary </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">content_type</td><td>Content-Type头值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>boundary值，不存在返回空string_view </dd></dl>
+
+</div>
+</div>
+<a id="a40b95fe460890d8f65a510307b4bca18" name="a40b95fe460890d8f65a510307b4bca18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40b95fe460890d8f65a510307b4bca18">&#9670;&#160;</a></span>parse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classvector.html">vector</a>&lt; <a class="el" href="structmultipart__field.html">multipart_field</a> &gt; multipart_parser::parse </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>body</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group___string_view.html#ga204ca715c2febee035464fa53dfc50c4">string_view</a></td>          <td class="paramname"><span class="paramname"><em>boundary</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>解析multipart请求体 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">body</td><td>原始请求体 </td></tr>
+    <tr><td class="paramname">boundary</td><td>Content-Type中的boundary值（不含"--"前缀） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>解析出的字段列表，解析失败返回空vector </dd></dl>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li><a class="el" href="multipart__parser_8hpp_source.html">multipart_parser.hpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="classmultipart__parser.html">multipart_parser</a></li>
+    <li class="footer">制作者 <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.16.0 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['环境变量_0',['环境变量',['../group___environment_variables.html',1,'']]]
+  ['灰度转换_0',['灰度转换',['../group___color.html#grayscale_conversion',1,'']]]
 ];

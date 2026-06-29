@@ -507,6 +507,7 @@ true</initializer>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="240" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="240" bodyend="242"/>
         <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <referencedby refid="classbyte__cursor_1aa2c2c562b8c8366440fbfe2192639c08" compoundref="byte__cursor_8hpp" startline="145" endline="152">byte_cursor::try_read_le16</referencedby>
       </memberdef>
       <memberdef kind="function" id="structendian_1a509ea1fc5587ada5b356d0cf6dd86a13" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
@@ -539,6 +540,7 @@ true</initializer>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="249" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="249" bodyend="252"/>
         <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <referencedby refid="classbyte__cursor_1a954d8ceac1309e56ac61e43d14e513f4" compoundref="byte__cursor_8hpp" startline="158" endline="165">byte_cursor::try_read_le32</referencedby>
       </memberdef>
       <memberdef kind="function" id="structendian_1a9d431545beb8ae553f1641172196b61c" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
@@ -571,6 +573,7 @@ true</initializer>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="259" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="259" bodyend="264"/>
         <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <referencedby refid="classbyte__cursor_1a0ca6d80a71735e653f38f601c924cbff" compoundref="byte__cursor_8hpp" startline="171" endline="178">byte_cursor::try_read_le64</referencedby>
       </memberdef>
       <memberdef kind="function" id="structendian_1aae7a7c93bd022deb63ca42cbaf75445e" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="group___core_types_1ga64be82add362de7c99ce6671d7f4f0a6" kindref="member">uint16_t</ref></type>
@@ -603,6 +606,40 @@ true</initializer>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="271" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="271" bodyend="273"/>
         <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <referencedby refid="classbyte__cursor_1a5e41f2e4cd85e81219c2cabe5db43d2c" compoundref="byte__cursor_8hpp" startline="93" endline="100">byte_cursor::try_read_be16</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="structendian_1ac40943647285d0e52320fdaf05cc1ec9" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>static constexpr uint32_t endian::read_be24</definition>
+        <argsstring>(const byte_t *data) noexcept</argsstring>
+        <name>read_be24</name>
+        <qualifiedname>endian::read_be24</qualifiedname>
+        <param>
+          <type>const <ref refid="group___core_types_1ga18a5de45c0adec9c9e545674cc14755f" kindref="member">byte_t</ref> *</type>
+          <declname>data</declname>
+        </param>
+        <briefdescription>
+<para>读取24位大端整数 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>data</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>字节数组指针 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>读取的24位整数（扩展为uint32_t） </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="280" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="280" bodyend="283"/>
+        <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <referencedby refid="classbyte__cursor_1a662b05a5baf7645543370a253ed64372" compoundref="byte__cursor_8hpp" startline="106" endline="113">byte_cursor::try_read_be24</referencedby>
       </memberdef>
       <memberdef kind="function" id="structendian_1ae8e72014d2c1785cfdb8b48d775527a1" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
@@ -633,8 +670,9 @@ true</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="280" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="280" bodyend="283"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="290" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="290" bodyend="293"/>
         <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <referencedby refid="classbyte__cursor_1aa46656604299cee2bebb4d5df2f9a22a" compoundref="byte__cursor_8hpp" startline="119" endline="126">byte_cursor::try_read_be32</referencedby>
       </memberdef>
       <memberdef kind="function" id="structendian_1ab5e3e3daf88ee5609c5477e30c3f0217" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="group___core_types_1ga785d1fff9ad28a98e121ba9f90b3a3ca" kindref="member">uint64_t</ref></type>
@@ -665,8 +703,9 @@ true</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="290" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="290" bodyend="295"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="300" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="300" bodyend="305"/>
         <references refid="group___type_erasure_functions_1gaeed8bfb4510a906e04808100528dd9b8" compoundref="type__erase_8hpp" startline="395" endline="397">data</references>
+        <referencedby refid="classbyte__cursor_1a2d93489403fbafa8c5ada6e5333bdc72" compoundref="byte__cursor_8hpp" startline="132" endline="139">byte_cursor::try_read_be64</referencedby>
       </memberdef>
       <memberdef kind="function" id="structendian_1a8cd8a6dd2b1546e3a6b6ef117e72d808" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -707,7 +746,7 @@ true</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="302" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="302" bodyend="305"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="312" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="312" bodyend="315"/>
       </memberdef>
       <memberdef kind="function" id="structendian_1ab896e3584dae6a3e8a3ed1e9343648f4" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -748,7 +787,7 @@ true</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="312" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="312" bodyend="316"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="322" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="322" bodyend="326"/>
       </memberdef>
       <memberdef kind="function" id="structendian_1a0987acbc90f4de472025f7803f925c5a" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -789,7 +828,7 @@ true</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="323" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="323" bodyend="327"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="333" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="333" bodyend="337"/>
       </memberdef>
       <memberdef kind="function" id="structendian_1ad0f119268c8d390accf43013dda0a20a" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -830,7 +869,7 @@ true</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="334" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="334" bodyend="337"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="344" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="344" bodyend="347"/>
       </memberdef>
       <memberdef kind="function" id="structendian_1ac5c7f86f56183068dfc68dbf91c41a34" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -871,7 +910,7 @@ true</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="344" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="344" bodyend="348"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="354" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="354" bodyend="358"/>
       </memberdef>
       <memberdef kind="function" id="structendian_1a771802ac42fef2bf6fda0924a7bce2c6" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -912,7 +951,7 @@ true</initializer>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="355" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="355" bodyend="359"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="365" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="365" bodyend="369"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
@@ -1107,7 +1146,7 @@ true</initializer>
     <detaileddescription>
 <para>提供编译时和运行时的端序检测，以及各种端序转换函数。 支持整型类型的字节序转换和原始字节数组的读写操作。 </para>
     </detaileddescription>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="33" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="33" bodyend="360"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" line="33" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/memory/endian.hpp" bodystart="33" bodyend="370"/>
     <listofallmembers>
       <member refid="structendian_1a5e265d741e65a6f39ee0708b8613b350" prot="public" virt="non-virtual"><scope>endian</scope><name>be_to_host</name></member>
       <member refid="structendian_1a1506846e44e452398168cd3393b5b02a" prot="public" virt="non-virtual"><scope>endian</scope><name>byteswap16</name></member>
@@ -1130,6 +1169,7 @@ true</initializer>
       <member refid="structendian_1a362668aafc20310c49b6f4d192970cda" prot="public" virt="non-virtual"><scope>endian</scope><name>le_to_host</name></member>
       <member refid="structendian_1a977e07707b1e8a198fca38f7226b0281" prot="public" virt="non-virtual"><scope>endian</scope><name>network_to_host</name></member>
       <member refid="structendian_1aae7a7c93bd022deb63ca42cbaf75445e" prot="public" virt="non-virtual"><scope>endian</scope><name>read_be16</name></member>
+      <member refid="structendian_1ac40943647285d0e52320fdaf05cc1ec9" prot="public" virt="non-virtual"><scope>endian</scope><name>read_be24</name></member>
       <member refid="structendian_1ae8e72014d2c1785cfdb8b48d775527a1" prot="public" virt="non-virtual"><scope>endian</scope><name>read_be32</name></member>
       <member refid="structendian_1ab5e3e3daf88ee5609c5477e30c3f0217" prot="public" virt="non-virtual"><scope>endian</scope><name>read_be64</name></member>
       <member refid="structendian_1acb5eebcd1e4655d7ab89ef0cf622c224" prot="public" virt="non-virtual"><scope>endian</scope><name>read_le16</name></member>

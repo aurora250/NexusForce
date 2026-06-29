@@ -2,7 +2,7 @@ var group___u_d_p =
 [
     [ "udp_socket", "classudp__socket.html", [
       [ "udp_socket", "classudp__socket.html#a328c2c1a4f87834a2f7648274d9eb77c", null ],
-      [ "open", "classudp__socket.html#ac897a23f580e28d04846182d9bf8a54d", null ],
+      [ "open", "classudp__socket.html#a7ca045fda3399c34667f31de840e7683", null ],
       [ "receive", "classudp__socket.html#a4410530e9e9c734eff53bc64617eeefb", null ],
       [ "receive_from", "classudp__socket.html#a37b55826566b881ef590f3e80c24bcb5", null ],
       [ "send", "classudp__socket.html#ab322f003a3a5ffaa2bf3e07fcbf8e79c", null ],

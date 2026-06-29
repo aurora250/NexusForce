@@ -825,6 +825,99 @@
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="288" column="16"/>
       </memberdef>
+      <memberdef kind="function" id="classlocale_1aa65373f48a08a074218ae185bae3b0e4" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string locale::format_number</definition>
+        <argsstring>(int64_t value, int precision=0) const</argsstring>
+        <name>format_number</name>
+        <qualifiedname>locale::format_number</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga40b54003b1e3c93da5e74c8b7b71b807" kindref="member">int64_t</ref></type>
+          <declname>value</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>precision</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+<para>使用区域设置格式化数字 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>数值 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>precision</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>小数位数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>格式化后的数字字符串</para>
+</simplesect>
+根据区域设置的数字格式信息（千位分隔符、小数点等）格式化数字。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="304" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classlocale_1a807c67f3fd8e94fc67fa21c2db68b890" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string locale::format_date</definition>
+        <argsstring>(intptr_t timestamp) const</argsstring>
+        <name>format_date</name>
+        <qualifiedname>locale::format_date</qualifiedname>
+        <param>
+          <type><ref refid="group___platform_dependent_types_1ga39d546efc0e36ab5e76470c42e646552" kindref="member">intptr_t</ref></type>
+          <declname>timestamp</declname>
+        </param>
+        <briefdescription>
+<para>使用区域设置格式化日期 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>timestamp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Unix 时间戳（秒） </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>格式化后的日期字符串</para>
+</simplesect>
+根据区域设置的日期格式信息格式化日期。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="313" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classlocale_1ad2df932920f1aedd5946efff0538fe43" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string locale::format_datetime</definition>
+        <argsstring>() const</argsstring>
+        <name>format_datetime</name>
+        <qualifiedname>locale::format_datetime</qualifiedname>
+        <briefdescription>
+<para>使用区域设置格式化当前日期时间 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>格式化后的日期时间字符串 </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="319" column="13"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
       <memberdef kind="function" id="classlocale_1a14a360657a6da80f58c2119696265ad4" prot="public" static="yes" nodiscard="yes" const="no" explicit="no" inline="no" virt="non-virtual">
@@ -933,7 +1026,7 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="64" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" bodystart="64" bodyend="295"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" line="64" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/system/locale.hpp" bodystart="64" bodyend="320"/>
     <listofallmembers>
       <member refid="classlocale_1a6b1ee30cb9644d91fead7d98872d6262" prot="public" virt="non-virtual"><scope>locale</scope><name>available_locales</name></member>
       <member refid="classlocale_1a14a360657a6da80f58c2119696265ad4" prot="public" virt="non-virtual"><scope>locale</scope><name>classic</name></member>
@@ -942,6 +1035,9 @@
       <member refid="classlocale_1a263e901537897065296ca94716b2ee09" prot="public" virt="non-virtual"><scope>locale</scope><name>compare</name></member>
       <member refid="classlocale_1a626c4771d5f1aee78085d22687c3f996" prot="public" virt="non-virtual"><scope>locale</scope><name>encoding</name></member>
       <member refid="classlocale_1a86adc266bc88627d7e04da00908b4dd9" prot="private" virt="non-virtual"><scope>locale</scope><name>encoding_</name></member>
+      <member refid="classlocale_1a807c67f3fd8e94fc67fa21c2db68b890" prot="public" virt="non-virtual"><scope>locale</scope><name>format_date</name></member>
+      <member refid="classlocale_1ad2df932920f1aedd5946efff0538fe43" prot="public" virt="non-virtual"><scope>locale</scope><name>format_datetime</name></member>
+      <member refid="classlocale_1aa65373f48a08a074218ae185bae3b0e4" prot="public" virt="non-virtual"><scope>locale</scope><name>format_number</name></member>
       <member refid="classlocale_1acae7d95c24e8e3badc077766a1d1f04e" prot="public" virt="non-virtual"><scope>locale</scope><name>from_name</name></member>
       <member refid="classlocale_1a94ded3166a2e2c75526d920f8d5495ac" prot="public" virt="non-virtual"><scope>locale</scope><name>is_alnum</name></member>
       <member refid="classlocale_1a51b00b8a3b1c9451c1640c86075420fa" prot="public" virt="non-virtual"><scope>locale</scope><name>is_alpha</name></member>

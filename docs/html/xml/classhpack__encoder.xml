@@ -1,0 +1,244 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classhpack__encoder" kind="class" language="C++" prot="public">
+    <compoundname>hpack_encoder</compoundname>
+    <includes refid="http2__protocol_8hpp" local="no">http2_protocol.hpp</includes>
+    <innerclass refid="structhpack__encoder_1_1table__entry" prot="private">hpack_encoder::table_entry</innerclass>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhpack__encoder_1aa21439af802a2a5df7faf0b6471a3e63" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t hpack_encoder::max_table_size_</definition>
+        <argsstring></argsstring>
+        <name>max_table_size_</name>
+        <qualifiedname>hpack_encoder::max_table_size_</qualifiedname>
+        <briefdescription>
+<para>动态表最大大小（由 SETTINGS 帧协商） </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="273" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="273" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhpack__encoder_1ac5c13ca3e8f03706baf6add4f71fb620" prot="private" static="no" mutable="no">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t hpack_encoder::current_table_size_</definition>
+        <argsstring></argsstring>
+        <name>current_table_size_</name>
+        <qualifiedname>hpack_encoder::current_table_size_</qualifiedname>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>当前动态表占用大小 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="275" column="14" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="275" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classhpack__encoder_1a3e2ef4cca6bb31b172d705a721058834" prot="private" static="no" mutable="no">
+        <type><ref refid="classvector" kindref="compound">vector</ref>&lt; table_entry &gt;</type>
+        <definition>vector&lt;table_entry&gt; hpack_encoder::dynamic_table_</definition>
+        <argsstring></argsstring>
+        <name>dynamic_table_</name>
+        <qualifiedname>hpack_encoder::dynamic_table_</qualifiedname>
+        <briefdescription>
+<para>动态表条目列表 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="277" column="12" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="277" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classhpack__encoder_1a1070b598651789d84cfc24ee5b47923f" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void hpack_encoder::add_to_dynamic_table</definition>
+        <argsstring>(const string &amp;name, const string &amp;value)</argsstring>
+        <name>add_to_dynamic_table</name>
+        <qualifiedname>hpack_encoder::add_to_dynamic_table</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="279" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhpack__encoder_1a4c18811875e97825b48d8fd438055224" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void hpack_encoder::evict_for_size</definition>
+        <argsstring>(uint32_t needed)</argsstring>
+        <name>evict_for_size</name>
+        <qualifiedname>hpack_encoder::evict_for_size</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>needed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="280" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhpack__encoder_1a1800bd509ba3cf27d224b83b65abba11" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref></type>
+        <definition>int32_t hpack_encoder::find_in_tables</definition>
+        <argsstring>(const string &amp;name, const string &amp;value) const</argsstring>
+        <name>find_in_tables</name>
+        <qualifiedname>hpack_encoder::find_in_tables</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="281" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhpack__encoder_1af40d76902734353cc00e78e36340962b" prot="private" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga9f99c01571d1afadb9d8d2e48ec532bb" kindref="member">int32_t</ref></type>
+        <definition>int32_t hpack_encoder::find_name_in_tables</definition>
+        <argsstring>(const string &amp;name) const</argsstring>
+        <name>find_name_in_tables</name>
+        <qualifiedname>hpack_encoder::find_name_in_tables</qualifiedname>
+        <param>
+          <type>const <ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref> &amp;</type>
+          <declname>name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="282" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhpack__encoder_1a2b8becaf8edec5aafeb39b3d997e67ea" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>hpack_encoder::hpack_encoder</definition>
+        <argsstring>(uint32_t max_table_size=HTTP2_DEFAULT_HEADER_TABLE_SIZE)</argsstring>
+        <name>hpack_encoder</name>
+        <qualifiedname>hpack_encoder::hpack_encoder</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>max_table_size</declname>
+          <defval><ref refid="group___h_t_t_p_1ga90b9bc1783610f8f540cc0591269ca93" kindref="member">HTTP2_DEFAULT_HEADER_TABLE_SIZE</ref></defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="285" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classhpack__encoder_1a98644ab502bc7e7151fa8ca85af99de6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___container_1ga27ed40b9d49a4cd13b057577e4eb1c95" kindref="member">byte_vector</ref></type>
+        <definition>byte_vector hpack_encoder::encode</definition>
+        <argsstring>(const vector&lt; hpack_header_field &gt; &amp;headers)</argsstring>
+        <name>encode</name>
+        <qualifiedname>hpack_encoder::encode</qualifiedname>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; <ref refid="structhpack__header__field" kindref="compound">hpack_header_field</ref> &gt; &amp;</type>
+          <declname>headers</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="287" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classhpack__encoder_1ab2f8f1bea1547e596c05b611efe0e0c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void hpack_encoder::set_max_table_size</definition>
+        <argsstring>(uint32_t size)</argsstring>
+        <name>set_max_table_size</name>
+        <qualifiedname>hpack_encoder::set_max_table_size</qualifiedname>
+        <param>
+          <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="289" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classhpack__encoder_1a152b81bb945162f7cf43bfaa836da0ce" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___core_types_1ga398ec93d6bf48539b258a3dd78e32c82" kindref="member">uint32_t</ref></type>
+        <definition>uint32_t hpack_encoder::max_table_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>max_table_size</name>
+        <qualifiedname>hpack_encoder::max_table_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="290" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="290" bodyend="290"/>
+      </memberdef>
+      <memberdef kind="function" id="classhpack__encoder_1a9e53d752a7e4d2c747bd21156d76c2f7" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>size_t hpack_encoder::table_size</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>table_size</name>
+        <qualifiedname>hpack_encoder::table_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="291" column="13" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="291" bodyend="291"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>HPACK 头部编码器（RFC 7541） </para>
+    </briefdescription>
+    <detaileddescription>
+<para>将 HTTP/2 头部字段列表编码为 HPACK 格式的字节块， 支持静态表和动态表的索引优化。 </para>
+    </detaileddescription>
+    <location file="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" line="263" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/network/http/http2_protocol.hpp" bodystart="263" bodyend="292"/>
+    <listofallmembers>
+      <member refid="classhpack__encoder_1a1070b598651789d84cfc24ee5b47923f" prot="private" virt="non-virtual"><scope>hpack_encoder</scope><name>add_to_dynamic_table</name></member>
+      <member refid="classhpack__encoder_1ac5c13ca3e8f03706baf6add4f71fb620" prot="private" virt="non-virtual"><scope>hpack_encoder</scope><name>current_table_size_</name></member>
+      <member refid="classhpack__encoder_1a3e2ef4cca6bb31b172d705a721058834" prot="private" virt="non-virtual"><scope>hpack_encoder</scope><name>dynamic_table_</name></member>
+      <member refid="classhpack__encoder_1a98644ab502bc7e7151fa8ca85af99de6" prot="public" virt="non-virtual"><scope>hpack_encoder</scope><name>encode</name></member>
+      <member refid="classhpack__encoder_1a4c18811875e97825b48d8fd438055224" prot="private" virt="non-virtual"><scope>hpack_encoder</scope><name>evict_for_size</name></member>
+      <member refid="classhpack__encoder_1a1800bd509ba3cf27d224b83b65abba11" prot="private" virt="non-virtual"><scope>hpack_encoder</scope><name>find_in_tables</name></member>
+      <member refid="classhpack__encoder_1af40d76902734353cc00e78e36340962b" prot="private" virt="non-virtual"><scope>hpack_encoder</scope><name>find_name_in_tables</name></member>
+      <member refid="classhpack__encoder_1a2b8becaf8edec5aafeb39b3d997e67ea" prot="public" virt="non-virtual"><scope>hpack_encoder</scope><name>hpack_encoder</name></member>
+      <member refid="classhpack__encoder_1a152b81bb945162f7cf43bfaa836da0ce" prot="public" virt="non-virtual"><scope>hpack_encoder</scope><name>max_table_size</name></member>
+      <member refid="classhpack__encoder_1aa21439af802a2a5df7faf0b6471a3e63" prot="private" virt="non-virtual"><scope>hpack_encoder</scope><name>max_table_size_</name></member>
+      <member refid="classhpack__encoder_1ab2f8f1bea1547e596c05b611efe0e0c8" prot="public" virt="non-virtual"><scope>hpack_encoder</scope><name>set_max_table_size</name></member>
+      <member refid="classhpack__encoder_1a9e53d752a7e4d2c747bd21156d76c2f7" prot="public" virt="non-virtual"><scope>hpack_encoder</scope><name>table_size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

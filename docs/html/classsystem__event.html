@@ -123,6 +123,10 @@ void&#160;</td><td class="memItemRight"><b>reset</b> () noexcept</td></tr>
 <tr class="memdesc:a7c349b939fea1a128c803d1035ee76f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">重置事件为无信号状态 <br /></td></tr>
 <tr class="memitem:a88a8392cfe11e8ca599f429e60e4eea7" id="r_a88a8392cfe11e8ca599f429e60e4eea7"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a88a8392cfe11e8ca599f429e60e4eea7">wait</a> (<a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> timeout_ms=<a class="el" href="classnumeric__traits.html">numeric_traits</a>&lt; <a class="el" href="group___core_types.html#ga398ec93d6bf48539b258a3dd78e32c82">uint32_t</a> &gt;<a class="el" href="group___compare_algorithms.html#ga01c48c11cc5d3222cb2e3adf0f843f3e">::max</a>()) noexcept</td></tr>
 <tr class="memdesc:a88a8392cfe11e8ca599f429e60e4eea7"><td class="mdescLeft">&#160;</td><td class="mdescRight">等待事件变为有信号状态  <br /></td></tr>
+<tr class="memitem:a40a68df7df1f662aa755b017c80aabc2" id="r_a40a68df7df1f662aa755b017c80aabc2"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a40a68df7df1f662aa755b017c80aabc2">try_wait</a> () noexcept</td></tr>
+<tr class="memdesc:a40a68df7df1f662aa755b017c80aabc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">尝试获取事件（非阻塞）  <br /></td></tr>
+<tr class="memitem:ac50035a38a0721148f8f77b41bdae3d3" id="r_ac50035a38a0721148f8f77b41bdae3d3"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#ac50035a38a0721148f8f77b41bdae3d3">is_set</a> () const noexcept</td></tr>
+<tr class="memdesc:ac50035a38a0721148f8f77b41bdae3d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询事件是否处于有信号状态  <br /></td></tr>
 <tr class="memitem:af3914964c19a58d549eec0587b8fac1f" id="r_af3914964c19a58d549eec0587b8fac1f"><td class="memItemLeft"><a class="el" href="#a836fe1a751b10858f44697fdd940aa9f">type</a>&#160;</td><td class="memItemRight"><a class="el" href="#af3914964c19a58d549eec0587b8fac1f">event_type</a> () const noexcept</td></tr>
 <tr class="memdesc:af3914964c19a58d549eec0587b8fac1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取事件类型  <br /></td></tr>
 <tr class="memitem:a09f6cc9daf074ce180c14b5a6cd1661e" id="r_a09f6cc9daf074ce180c14b5a6cd1661e"><td class="memItemLeft">void *&#160;</td><td class="memItemRight"><a class="el" href="#a09f6cc9daf074ce180c14b5a6cd1661e">native_handle</a> () const noexcept</td></tr>
@@ -281,11 +285,41 @@ void&#160;</td><td class="memItemRight"><b>reset</b> () noexcept</td></tr>
 <p>获取事件类型 </p>
 <dl class="section return"><dt>返回</dt><dd>事件类型 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="system__event_8hpp_source.html">system_event.hpp</a> 第 <a class="el" href="system__event_8hpp_source.html#l00127">127</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="system__event_8hpp_source.html">system_event.hpp</a> 第 <a class="el" href="system__event_8hpp_source.html#l00141">141</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="system__event_8hpp_source.html#l00127">event_type()</a>.</p>
+</div>
+</div>
+<a id="ac50035a38a0721148f8f77b41bdae3d3" name="ac50035a38a0721148f8f77b41bdae3d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac50035a38a0721148f8f77b41bdae3d3">&#9670;&#160;</a></span>is_set()</h2>
 
-<p class="reference">被这些函数引用 <a class="el" href="system__event_8hpp_source.html#l00127">event_type()</a>.</p>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool system_event::is_set </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查询事件是否处于有信号状态 </p>
+<dl class="section return"><dt>返回</dt><dd>是否已设置 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="system__event_8hpp_source.html">system_event.hpp</a> 第 <a class="el" href="system__event_8hpp_source.html#l00135">135</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="system__event_8hpp_source.html#l00135">is_set()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="system__event_8hpp_source.html#l00135">is_set()</a>.</p>
 
 </div>
 </div>
@@ -315,7 +349,7 @@ void&#160;</td><td class="memItemRight"><b>reset</b> () noexcept</td></tr>
 <p>获取原生事件句柄 </p>
 <dl class="section return"><dt>返回</dt><dd>原生句柄 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="system__event_8hpp_source.html">system_event.hpp</a> 第 <a class="el" href="system__event_8hpp_source.html#l00134">134</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="system__event_8hpp_source.html">system_event.hpp</a> 第 <a class="el" href="system__event_8hpp_source.html#l00148">148</a> 行定义.</p>
 
 </div>
 </div>
@@ -380,6 +414,39 @@ void&#160;</td><td class="memItemRight"><b>reset</b> () noexcept</td></tr>
 
 <p>设置事件为有信号状态 </p>
 <p>唤醒等待该事件的线程。 </p>
+
+</div>
+</div>
+<a id="a40a68df7df1f662aa755b017c80aabc2" name="a40a68df7df1f662aa755b017c80aabc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40a68df7df1f662aa755b017c80aabc2">&#9670;&#160;</a></span>try_wait()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool system_event::try_wait </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>尝试获取事件（非阻塞） </p>
+<dl class="section return"><dt>返回</dt><dd>事件是否已处于有信号状态</dd></dl>
+<p>对于自动重置事件，成功时自动重置为无信号状态。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a40a68df7df1f662aa755b017c80aabc2">try_wait()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a40a68df7df1f662aa755b017c80aabc2">try_wait()</a>.</p>
 
 </div>
 </div>

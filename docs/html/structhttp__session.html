@@ -120,6 +120,8 @@ void&#160;</td><td class="memItemRight"><b>clear</b> ()</td></tr>
 <tr class="memdesc:a01eeec958c1ad23200ef2c2d17bc58db"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否包含键  <br /></td></tr>
 <tr class="memitem:a0fa33269e2df1c00132e0eab66667894" id="r_a0fa33269e2df1c00132e0eab66667894"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a0fa33269e2df1c00132e0eab66667894">invalidate</a> () noexcept</td></tr>
 <tr class="memdesc:a0fa33269e2df1c00132e0eab66667894"><td class="mdescLeft">&#160;</td><td class="mdescRight">无效化会话  <br /></td></tr>
+<tr class="memitem:a94916c8dc2f1fd6b0476bd93abdcdab8" id="r_a94916c8dc2f1fd6b0476bd93abdcdab8"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a94916c8dc2f1fd6b0476bd93abdcdab8">regenerate_id</a> ()</td></tr>
+<tr class="memdesc:a94916c8dc2f1fd6b0476bd93abdcdab8"><td class="mdescLeft">&#160;</td><td class="mdescRight">重新生成会话ID  <br /></td></tr>
 <tr class="memitem:a826a20cbda8c9498a806a4d5366adde0" id="r_a826a20cbda8c9498a806a4d5366adde0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a826a20cbda8c9498a806a4d5366adde0">touch</a> () noexcept</td></tr>
 <tr class="memdesc:a826a20cbda8c9498a806a4d5366adde0"><td class="mdescLeft">&#160;</td><td class="mdescRight">更新最后访问时间  <br /></td></tr>
 <tr class="memitem:a55ca4817d836a824d8f8edbb0dcb6e81" id="r_a55ca4817d836a824d8f8edbb0dcb6e81"><td class="memItemLeft">bool&#160;</td><td class="memItemRight"><a class="el" href="#a55ca4817d836a824d8f8edbb0dcb6e81">is_valid</a> () const noexcept</td></tr>
@@ -163,6 +165,7 @@ bool&#160;</td><td class="memItemRight"><b>invalidated</b> = false</td></tr>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">详细描述</h2>
 <div class="textblock"><p>HTTP会话结构 </p>
 <p>表示一个服务器端HTTP会话，用于存储用户会话数据。 每个会话有唯一的ID，可以存储键值对数据。</p>
+<dl class="section note"><dt>注解</dt><dd>此类不是线程安全的。session_manager::get_session() 返回的裸指针仅在调用者持有 session_manager 锁时有效。 不要在锁外缓存或跨线程共享该指针。</dd></dl>
 <p>使用示例： </p><div class="fragment"><div class="line"><span class="comment">// 创建新会话</span></div>
 <div class="line"><a class="code hl_struct" href="structhttp__session.html">http_session</a> session;</div>
 <div class="line">session.<a class="code hl_variable" href="#a5f5bf966c9610b51662de2516f29cb78">id</a> = generate_session_id();</div>
@@ -187,17 +190,17 @@ bool&#160;</td><td class="memItemRight"><b>invalidated</b> = false</td></tr>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 会话无效化（登出）</span></div>
 <div class="line">session.<a class="code hl_function" href="#a0fa33269e2df1c00132e0eab66667894">invalidate</a>();</div>
-<div class="ttc" id="astructhttp__session_html"><div class="ttname"><a href="structhttp__session.html">http_session</a></div><div class="ttdoc">HTTP会话结构</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00161">http_session.hpp:161</a></div></div>
+<div class="ttc" id="astructhttp__session_html"><div class="ttname"><a href="structhttp__session.html">http_session</a></div><div class="ttdoc">HTTP会话结构</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00165">http_session.hpp:165</a></div></div>
 <div class="ttc" id="astructhttp__session_html_a01eeec958c1ad23200ef2c2d17bc58db"><div class="ttname"><a href="#a01eeec958c1ad23200ef2c2d17bc58db">http_session::contains</a></div><div class="ttdeci">bool contains(const string &amp;key) const noexcept</div><div class="ttdoc">检查是否包含键</div></div>
 <div class="ttc" id="astructhttp__session_html_a0fa33269e2df1c00132e0eab66667894"><div class="ttname"><a href="#a0fa33269e2df1c00132e0eab66667894">http_session::invalidate</a></div><div class="ttdeci">void invalidate() noexcept</div><div class="ttdoc">无效化会话</div></div>
 <div class="ttc" id="astructhttp__session_html_a150a0c959a63d47a0417364f01200ed1"><div class="ttname"><a href="#a150a0c959a63d47a0417364f01200ed1">http_session::get</a></div><div class="ttdeci">string_view get(const string &amp;key) const</div><div class="ttdoc">获取值</div></div>
-<div class="ttc" id="astructhttp__session_html_a5f5bf966c9610b51662de2516f29cb78"><div class="ttname"><a href="#a5f5bf966c9610b51662de2516f29cb78">http_session::id</a></div><div class="ttdeci">string id</div><div class="ttdoc">会话唯一标识符</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00162">http_session.hpp:162</a></div></div>
+<div class="ttc" id="astructhttp__session_html_a5f5bf966c9610b51662de2516f29cb78"><div class="ttname"><a href="#a5f5bf966c9610b51662de2516f29cb78">http_session::id</a></div><div class="ttdeci">string id</div><div class="ttdoc">会话唯一标识符</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00166">http_session.hpp:166</a></div></div>
 <div class="ttc" id="astructhttp__session_html_a658aa63ba6e6d14ad986a2c37c998b87"><div class="ttname"><a href="#a658aa63ba6e6d14ad986a2c37c998b87">http_session::expired</a></div><div class="ttdeci">bool expired(seconds max_inactive=0_s) const noexcept</div><div class="ttdoc">检查会话是否已过期</div></div>
 <div class="ttc" id="astructhttp__session_html_a712fb2b229e3a29c1b6a9c93fcae6afd"><div class="ttname"><a href="#a712fb2b229e3a29c1b6a9c93fcae6afd">http_session::set</a></div><div class="ttdeci">void set(const string &amp;key, string value)</div><div class="ttdoc">设置值</div></div>
 <div class="ttc" id="astructhttp__session_html_a826a20cbda8c9498a806a4d5366adde0"><div class="ttname"><a href="#a826a20cbda8c9498a806a4d5366adde0">http_session::touch</a></div><div class="ttdeci">void touch() noexcept</div><div class="ttdoc">更新最后访问时间</div></div>
-<div class="ttc" id="astructhttp__session_html_a95cf70f6465ab22a9d5e2b2a5326f0cd"><div class="ttname"><a href="#a95cf70f6465ab22a9d5e2b2a5326f0cd">http_session::max_age</a></div><div class="ttdeci">seconds max_age</div><div class="ttdoc">最大空闲时间，默认30分钟</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00166">http_session.hpp:166</a></div></div>
+<div class="ttc" id="astructhttp__session_html_a95cf70f6465ab22a9d5e2b2a5326f0cd"><div class="ttname"><a href="#a95cf70f6465ab22a9d5e2b2a5326f0cd">http_session::max_age</a></div><div class="ttdeci">seconds max_age</div><div class="ttdoc">最大空闲时间，默认30分钟</div><div class="ttdef"><b>定义</b> <a href="http__session_8hpp_source.html#l00170">http_session.hpp:170</a></div></div>
 </div><!-- fragment --> 
-<p class="definition">在文件 <a class="el" href="http__session_8hpp_source.html">http_session.hpp</a> 第 <a class="el" href="http__session_8hpp_source.html#l00161">161</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__session_8hpp_source.html">http_session.hpp</a> 第 <a class="el" href="http__session_8hpp_source.html#l00165">165</a> 行定义.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">成员函数说明</h2>
 <a id="af3c94ed25f9b22a77036c2c95252079f" name="af3c94ed25f9b22a77036c2c95252079f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af3c94ed25f9b22a77036c2c95252079f">&#9670;&#160;</a></span>age()</h2>
@@ -225,11 +228,11 @@ bool&#160;</td><td class="memItemRight"><b>invalidated</b> = false</td></tr>
 <p>获取会话年龄 </p>
 <dl class="section return"><dt>返回</dt><dd>从创建到现在的秒数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__session_8hpp_source.html">http_session.hpp</a> 第 <a class="el" href="http__session_8hpp_source.html#l00250">250</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__session_8hpp_source.html">http_session.hpp</a> 第 <a class="el" href="http__session_8hpp_source.html#l00261">261</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="http__session_8hpp_source.html#l00250">age()</a>, <a class="el" href="http__session_8hpp_source.html#l00165">create_time</a> , 以及 <a class="el" href="classdatetime.html#a953b869810853ad2bf3962b7be31f7ee">datetime::now()</a>.</p>
+<p class="reference">引用了 <a class="el" href="http__session_8hpp_source.html#l00261">age()</a>, <a class="el" href="http__session_8hpp_source.html#l00169">create_time</a> , 以及 <a class="el" href="classdatetime.html#a953b869810853ad2bf3962b7be31f7ee">datetime::now()</a>.</p>
 
-<p class="reference">被这些函数引用 <a class="el" href="http__session_8hpp_source.html#l00250">age()</a>.</p>
+<p class="reference">被这些函数引用 <a class="el" href="http__session_8hpp_source.html#l00261">age()</a>.</p>
 
 </div>
 </div>
@@ -365,9 +368,9 @@ bool&#160;</td><td class="memItemRight"><b>invalidated</b> = false</td></tr>
 <p>获取空闲时间 </p>
 <dl class="section return"><dt>返回</dt><dd>从最后访问到现在的秒数 </dd></dl>
 
-<p class="definition">在文件 <a class="el" href="http__session_8hpp_source.html">http_session.hpp</a> 第 <a class="el" href="http__session_8hpp_source.html#l00256">256</a> 行定义.</p>
+<p class="definition">在文件 <a class="el" href="http__session_8hpp_source.html">http_session.hpp</a> 第 <a class="el" href="http__session_8hpp_source.html#l00267">267</a> 行定义.</p>
 
-<p class="reference">引用了 <a class="el" href="http__session_8hpp_source.html#l00164">last_access</a> , 以及 <a class="el" href="classdatetime.html#a953b869810853ad2bf3962b7be31f7ee">datetime::now()</a>.</p>
+<p class="reference">引用了 <a class="el" href="http__session_8hpp_source.html#l00168">last_access</a> , 以及 <a class="el" href="classdatetime.html#a953b869810853ad2bf3962b7be31f7ee">datetime::now()</a>.</p>
 
 </div>
 </div>
@@ -467,6 +470,30 @@ bool&#160;</td><td class="memItemRight"><b>invalidated</b> = false</td></tr>
 </dl>
 <dl class="section return"><dt>返回</dt><dd>值的引用</dd></dl>
 <p>如果键不存在，会自动创建空字符串条目。 访问时会自动更新last_access。 </p>
+
+</div>
+</div>
+<a id="a94916c8dc2f1fd6b0476bd93abdcdab8" name="a94916c8dc2f1fd6b0476bd93abdcdab8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94916c8dc2f1fd6b0476bd93abdcdab8">&#9670;&#160;</a></span>regenerate_id()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void http_session::regenerate_id </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>重新生成会话ID </p>
+<p>生成新的随机ID，保留所有会话数据。 </p>
+
+<p class="reference">引用了 <a class="el" href="#a94916c8dc2f1fd6b0476bd93abdcdab8">regenerate_id()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="#a94916c8dc2f1fd6b0476bd93abdcdab8">regenerate_id()</a>.</p>
 
 </div>
 </div>

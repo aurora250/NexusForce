@@ -1,0 +1,193 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.16.0" xml:lang="zh">
+  <compounddef id="classsignal__base" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>signal_base</compoundname>
+    <derivedcompoundref refid="structsignal" prot="public" virt="non-virtual">signal&lt; Types &gt;</derivedcompoundref>
+    <includes refid="signals_8hpp" local="no">signals.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classsignal__base_1a2c602cd02050d2c2537bc85e43e5f4ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual signal_base::~signal_base</definition>
+        <argsstring>()=default</argsstring>
+        <name>~signal_base</name>
+        <qualifiedname>signal_base::~signal_base</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="36" column="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__base_1a4abe4fca4e60f5c4797acafb81f862aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void signal_base::disconnect_all</definition>
+        <argsstring>()=0</argsstring>
+        <name>disconnect_all</name>
+        <qualifiedname>signal_base::disconnect_all</qualifiedname>
+        <reimplementedby refid="structsignal_1ae3217170355c3d43113f7f2def934498">disconnect_all</reimplementedby>
+        <briefdescription>
+<para>断开所有连接 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="41" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__base_1a6df61cb349aad7ab7f9b2bdd143635db" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void signal_base::block</definition>
+        <argsstring>()=0</argsstring>
+        <name>block</name>
+        <qualifiedname>signal_base::block</qualifiedname>
+        <reimplementedby refid="structsignal_1ab5b8f70321febb0591eefa1886c358f3">block</reimplementedby>
+        <briefdescription>
+<para>阻塞信号触发 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="46" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__base_1ac1390e208e9d028076c18a123a08915e" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void signal_base::unblock</definition>
+        <argsstring>()=0</argsstring>
+        <name>unblock</name>
+        <qualifiedname>signal_base::unblock</qualifiedname>
+        <reimplementedby refid="structsignal_1af989e5a12cffd2256fa5930fe1284e6d">unblock</reimplementedby>
+        <briefdescription>
+<para>解除阻塞 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="51" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__base_1a1ab0c7fce00e396f4b9057d4f8774605" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>bool</type>
+        <definition>virtual bool signal_base::is_blocked</definition>
+        <argsstring>() const =0</argsstring>
+        <name>is_blocked</name>
+        <qualifiedname>signal_base::is_blocked</qualifiedname>
+        <reimplementedby refid="structsignal_1ac737b7d0cefcb75ae32cd73b4b803bca">is_blocked</reimplementedby>
+        <briefdescription>
+<para>是否处于阻塞状态 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="56" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__base_1a9f9b21ff270c0a8125425c931ebd325e" prot="public" static="no" nodiscard="yes" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+        <definition>virtual size_t signal_base::slot_count</definition>
+        <argsstring>() const =0</argsstring>
+        <name>slot_count</name>
+        <qualifiedname>signal_base::slot_count</qualifiedname>
+        <reimplementedby refid="structsignal_1a7ec78011b2800f95681511c9d36a3eb6">slot_count</reimplementedby>
+        <briefdescription>
+<para>获取已连接槽数量 </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="61" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__base_1a6c2c20fa0fffb6c2af61ebcbc0ff51e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void signal_base::emit_dynamic</definition>
+        <argsstring>(const vector&lt; reflect::meta_any &gt; &amp;args)=0</argsstring>
+        <name>emit_dynamic</name>
+        <qualifiedname>signal_base::emit_dynamic</qualifiedname>
+        <reimplementedby refid="structsignal_1a3c50879c54ffd0306d6e964aa6b2b667">emit_dynamic</reimplementedby>
+        <param>
+          <type>const <ref refid="classvector" kindref="compound">vector</ref>&lt; reflect::meta_any &gt; &amp;</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>通过 <ref refid="classmeta__any" kindref="compound">meta_any</ref> 参数列表触发信号（类型擦除版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数列表</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+由子类实现，将 <ref refid="classmeta__any" kindref="compound">meta_any</ref> 解包后转为强类型 emit 调用。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="69" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classsignal__base_1afdfaa1575a97d13a3ca68965e2d7442a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void signal_base::connect_dynamic</definition>
+        <argsstring>(function&lt; void(const vector&lt; reflect::meta_any &gt; &amp;)&gt; callback)=0</argsstring>
+        <name>connect_dynamic</name>
+        <qualifiedname>signal_base::connect_dynamic</qualifiedname>
+        <reimplementedby refid="structsignal_1a3535f92357a2d2637950d4dfe4603e6d">connect_dynamic</reimplementedby>
+        <param>
+          <type><ref refid="classfunction" kindref="compound">function</ref>&lt; void(const <ref refid="classvector" kindref="compound">vector</ref>&lt; reflect::meta_any &gt; &amp;)&gt;</type>
+          <declname>callback</declname>
+        </param>
+        <briefdescription>
+<para>动态连接槽回调（类型擦除版本） </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>callback</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>回调函数，接收 <ref refid="classmeta__any" kindref="compound">meta_any</ref> 参数列表</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+由子类实现，将类型擦除的回调适配为强类型连接。 </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="77" column="18"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>信号类型擦除基类 </para>
+    </briefdescription>
+    <detaileddescription>
+<para>所有 <ref refid="structsignal" kindref="compound">signal&lt;Types...&gt;</ref> 的公共非模板基类，提供类型擦除操作。 反射系统通过此基类操作异质信号实例。 </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>signal&lt; Types &gt;</label>
+        <link refid="structsignal"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>signal_base</label>
+        <link refid="classsignal__base"/>
+      </node>
+    </inheritancegraph>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" line="34" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/async/signals.hpp" bodystart="34" bodyend="78"/>
+    <listofallmembers>
+      <member refid="classsignal__base_1a6df61cb349aad7ab7f9b2bdd143635db" prot="public" virt="pure-virtual"><scope>signal_base</scope><name>block</name></member>
+      <member refid="classsignal__base_1afdfaa1575a97d13a3ca68965e2d7442a" prot="public" virt="pure-virtual"><scope>signal_base</scope><name>connect_dynamic</name></member>
+      <member refid="classsignal__base_1a4abe4fca4e60f5c4797acafb81f862aa" prot="public" virt="pure-virtual"><scope>signal_base</scope><name>disconnect_all</name></member>
+      <member refid="classsignal__base_1a6c2c20fa0fffb6c2af61ebcbc0ff51e5" prot="public" virt="pure-virtual"><scope>signal_base</scope><name>emit_dynamic</name></member>
+      <member refid="classsignal__base_1a1ab0c7fce00e396f4b9057d4f8774605" prot="public" virt="pure-virtual"><scope>signal_base</scope><name>is_blocked</name></member>
+      <member refid="classsignal__base_1a9f9b21ff270c0a8125425c931ebd325e" prot="public" virt="pure-virtual"><scope>signal_base</scope><name>slot_count</name></member>
+      <member refid="classsignal__base_1ac1390e208e9d028076c18a123a08915e" prot="public" virt="pure-virtual"><scope>signal_base</scope><name>unblock</name></member>
+      <member refid="classsignal__base_1a2c602cd02050d2c2537bc85e43e5f4ad" prot="public" virt="virtual"><scope>signal_base</scope><name>~signal_base</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

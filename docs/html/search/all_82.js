@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['架构检测_0',['架构检测',['../group___architecture_detection.html',1,'']]]
+  ['有意不纳入的特性及原因_0',['有意不纳入的特性及原因',['../group___s_q_l.html#exclusions',1,'']]]
 ];

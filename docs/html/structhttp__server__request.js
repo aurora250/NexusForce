@@ -19,6 +19,7 @@ var structhttp__server__request =
     [ "to_string", "structhttp__server__request.html#a646a70bf967751a7e2be1d6c3f3b0ae6", null ],
     [ "user_agent", "structhttp__server__request.html#a3119ea2e8df821d2d4a76dc7697f226f", null ],
     [ "body", "structhttp__server__request.html#a0c6087426f3b78cf13dde6e879060035", null ],
+    [ "context", "structhttp__server__request.html#af1d651a10038cfa464db8dcca1fa056a", null ],
     [ "cookies", "structhttp__server__request.html#af68f3dc55bae270ed8926cb49728f367", null ],
     [ "form_data", "structhttp__server__request.html#acbd3cd0d6210bf8407c90cc914583c95", null ],
     [ "headers", "structhttp__server__request.html#a4c96548479749086efc85c3af339747a", null ],
@@ -27,5 +28,6 @@ var structhttp__server__request =
     [ "path", "structhttp__server__request.html#a72ce12eeb5314a182a880e8993585b9c", null ],
     [ "query", "structhttp__server__request.html#aa465ff9a5ef07ae60f0bd9337ac40e1d", null ],
     [ "session", "structhttp__server__request.html#a85aba71f17c96739e2661bb1d3fdac30", null ],
+    [ "trailers", "structhttp__server__request.html#a11d62aee530189a3684dd4f736443e6d", null ],
     [ "version", "structhttp__server__request.html#ae2c3f23b354fed92026d6c87c5a2afaa", null ]
 ];

@@ -11,7 +11,7 @@ var classsqlite__prepared__statement =
     [ "bind_param", "classsqlite__prepared__statement.html#aac7ec2fc68f0e4cb1a5c9f9a27209357", null ],
     [ "bind_param", "classsqlite__prepared__statement.html#a235ed7a1068557e610d0625de3340b1e", null ],
     [ "execute", "classsqlite__prepared__statement.html#a86f109f44cc9542c828ad21fd733553d", null ],
-    [ "execute_query", "classsqlite__prepared__statement.html#ae1a12499c85927d7748f87614500ad6f", null ],
+    [ "execute_query", "classsqlite__prepared__statement.html#acabce993ea232003e00a44c7ee24918b", null ],
     [ "get_errno", "classsqlite__prepared__statement.html#ae2c107c48cb853457d6a1dc2a194d16e", null ],
     [ "get_error", "classsqlite__prepared__statement.html#ae162e7dce66d25ceb408e3b979c35697", null ],
     [ "operator=", "classsqlite__prepared__statement.html#a745c4d183b4a98928ec01ab96050d8c4", null ],

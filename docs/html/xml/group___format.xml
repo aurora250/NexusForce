@@ -68,7 +68,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/format.hpp" line="25" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/format.hpp" bodystart="25" bodyend="31"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/format.hpp" line="26" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/format.hpp" bodystart="26" bodyend="32"/>
       </memberdef>
       <memberdef kind="enum" id="group___format_1gacf69152a3f3bf73a87406d0730a11a3c" prot="public" static="no" strong="yes">
         <type><ref refid="group___core_types_1ga0ba18cab9bd5513695cbe748e9bb4879" kindref="member">uint8_t</ref></type>
@@ -152,7 +152,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/format.hpp" line="37" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/format.hpp" bodystart="37" bodyend="47"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/format.hpp" line="38" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/format.hpp" bodystart="38" bodyend="48"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="func">
@@ -217,25 +217,34 @@
 <parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
 </parameternamelist>
 <parameterdescription>
-<para>如果格式错误 </para>
+<para>如果格式错误</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
+支持以下格式：<itemizedlist>
+<listitem><para><computeroutput>{}</computeroutput>：顺序参数</para>
+</listitem><listitem><para><computeroutput>{0}</computeroutput> <computeroutput>{1}</computeroutput>：位置参数</para>
+</listitem><listitem><para><computeroutput>{:d}</computeroutput> <computeroutput>{:x}</computeroutput>：带格式选项的顺序参数</para>
+</listitem><listitem><para><computeroutput>{0:d}</computeroutput> <computeroutput>{1:x}</computeroutput>：带格式选项的位置参数</para>
+</listitem><listitem><para><computeroutput>{{</computeroutput> <computeroutput>}}</computeroutput>：转义花括号 </para>
+</listitem></itemizedlist>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/format.hpp" line="695" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/format.hpp" bodystart="695" bodyend="701"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/format.hpp" line="792" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/format.hpp" bodystart="792" bodyend="800"/>
         <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
-        <references refid="classbasic__string_1aa2527f9b1a17a4b866e3e59e384dc0d8" compoundref="basic__string_8hpp" startline="1262" endline="1289">basic_string&lt; CharT, Traits, Alloc &gt;::reserve</references>
-        <references refid="classbasic__string__view_1a0b5a6546739bc33ecbe750f98ac47b25" compoundref="basic__string__view_8hpp" startline="303" endline="303">basic_string_view&lt; CharT, Traits &gt;::size</references>
-        <referencedby refid="classzlib__compressor_1ac44ab4c9df8b28f420bea9f37eb1144e" compoundref="zlib__compress_8hpp" startline="187" endline="192">zlib_compressor::compress</referencedby>
-        <referencedby refid="classzlib__compressor_1a6d162764f9a9add4e3383fd0e3c52ddf" compoundref="zlib__compress_8hpp" startline="208" endline="215">zlib_compressor::compress</referencedby>
-        <referencedby refid="classzlib__compressor_1af998a7dcb0438ecb7e24aea2f5efb858" compoundref="zlib__compress_8hpp" startline="166" endline="175">zlib_compressor::compress</referencedby>
-        <referencedby refid="classzlib__compressor_1ab4377cd3e35565b66ec7e70e5c78e57d" compoundref="zlib__compress_8hpp" startline="249" endline="252">zlib_compressor::decompress</referencedby>
-        <referencedby refid="classzlib__compressor_1a27c509c99056483ab1a3201a0fdeb251" compoundref="zlib__compress_8hpp" startline="228" endline="239">zlib_compressor::decompress</referencedby>
+        <references refid="group___tuple_1gaece80f6c9ed507a749be80d138b7a5e6" compoundref="tuple_8hpp" startline="774" endline="777">forward_as_tuple</references>
+        <references refid="classbasic__string_1aa2527f9b1a17a4b866e3e59e384dc0d8" compoundref="basic__string_8hpp" startline="1274" endline="1301">basic_string&lt; CharT, Traits, Alloc &gt;::reserve</references>
+        <references refid="classbasic__string__view_1a0b5a6546739bc33ecbe750f98ac47b25" compoundref="basic__string__view_8hpp" startline="305" endline="305">basic_string_view&lt; CharT, Traits &gt;::size</references>
+        <referencedby refid="classzlib__compressor_1ac44ab4c9df8b28f420bea9f37eb1144e" compoundref="zlib__compress_8hpp" startline="186" endline="191">zlib_compressor::compress</referencedby>
+        <referencedby refid="classzlib__compressor_1a6d162764f9a9add4e3383fd0e3c52ddf" compoundref="zlib__compress_8hpp" startline="207" endline="214">zlib_compressor::compress</referencedby>
+        <referencedby refid="classzlib__compressor_1af998a7dcb0438ecb7e24aea2f5efb858" compoundref="zlib__compress_8hpp" startline="165" endline="174">zlib_compressor::compress</referencedby>
+        <referencedby refid="classzlib__compressor_1ab4377cd3e35565b66ec7e70e5c78e57d" compoundref="zlib__compress_8hpp" startline="248" endline="251">zlib_compressor::decompress</referencedby>
+        <referencedby refid="classzlib__compressor_1a27c509c99056483ab1a3201a0fdeb251" compoundref="zlib__compress_8hpp" startline="227" endline="238">zlib_compressor::decompress</referencedby>
         <referencedby refid="classsys__console_1aa14290c6038b0282c03fdff943e34262" compoundref="console_8hpp" startline="340" endline="343">sys_console::eprintf</referencedby>
         <referencedby refid="classsys__console_1a448637aa4765ef14e268a21d91f9803b" compoundref="console_8hpp" startline="369" endline="373">sys_console::eprintfln</referencedby>
+        <referencedby refid="group___format_1ga41c686a01b3d4a7f5c79d2b9c60266bd" compoundref="format_8hpp" startline="815" endline="817">format</referencedby>
         <referencedby refid="classsys__console_1af284a03104105d1db6b62dc9ebddbe1f" compoundref="console_8hpp" startline="257" endline="262">sys_console::printcf</referencedby>
         <referencedby refid="classsys__console_1a4d1162e568c0d075c8ab9ca77b3099d2" compoundref="console_8hpp" startline="315" endline="320">sys_console::printcfln</referencedby>
         <referencedby refid="classsys__console_1a196fe641205aeb89fd4ac4827bc1c02c" compoundref="console_8hpp" startline="230" endline="233">sys_console::printf</referencedby>
@@ -249,6 +258,139 @@
         <referencedby refid="classcolor_1adbf1016a5a113b83bb55b20f2b6d9b8d" compoundref="color_8hpp" startline="620" endline="622">color::to_string</referencedby>
         <referencedby refid="classdate_1abe7e639f6f7115c8a920f12bfa65d70e" compoundref="datetime_8hpp" startline="416" endline="418">date::to_string</referencedby>
         <referencedby refid="classtime_1a11983d7f4b2179b472d48598a6c14f02" compoundref="datetime_8hpp" startline="691" endline="693">time::to_string</referencedby>
+      </memberdef>
+      <memberdef kind="function" id="group___format_1ga41c686a01b3d4a7f5c79d2b9c60266bd" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
+            <declname>N</declname>
+            <defname>N</defname>
+          </param>
+          <param>
+            <type>typename...</type>
+            <declname>Args</declname>
+            <defname>Args</defname>
+          </param>
+          <param>
+            <type><ref refid="group___type_traits_utilities_1gafd80b775b0bd95747206fc628ad065f0" kindref="member">enable_if_t</ref>&lt;(sizeof...(Args) &gt; 0), int &gt;</type>
+            <defval>0</defval>
+          </param>
+        </templateparamlist>
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string format</definition>
+        <argsstring>(const char(&amp;fmt)[N], Args &amp;&amp;... args)</argsstring>
+        <name>format</name>
+        <param>
+          <type>const char(&amp;)</type>
+          <declname>fmt</declname>
+          <array>[N]</array>
+        </param>
+        <param>
+          <type>Args &amp;&amp;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>格式化字符串 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>N</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式字符串长度 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>参数类型 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式字符串字面量 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>args</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>要格式化的参数 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>格式化后的字符串 </para>
+</simplesect>
+<parameterlist kind="exception"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structvalue__exception" kindref="compound">value_exception</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>如果格式错误</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+在编译期验证格式字符串中花括号的平衡性。 用法：format(&quot;Hello, {}!&quot;, name) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/format.hpp" line="815" column="19" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/format.hpp" bodystart="815" bodyend="817"/>
+        <references refid="group___format_1gac0f4499364ec899fcdfaae1f7acbda76" compoundref="format_8hpp" startline="792" endline="800">format</references>
+        <references refid="group___args_forward_functions_1gadbaa877478c57b027d5be364ca1585be" compoundref="type__traits_8hpp" startline="3028" endline="3030">forward</references>
+      </memberdef>
+      <memberdef kind="function" id="group___format_1ga401d7fa93048e25a6f79fc746b2a09fe" prot="public" static="no" nodiscard="yes" constexpr="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="group___string_1ga716ec02de55e9c908e34b54a01708895" kindref="member">string</ref></type>
+        <definition>string format_named</definition>
+        <argsstring>(const string_view fmt, const std::initializer_list&lt; pair&lt; const char *, string_view &gt; &gt; params)</argsstring>
+        <name>format_named</name>
+        <param>
+          <type>const <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref></type>
+          <declname>fmt</declname>
+        </param>
+        <param>
+          <type>const std::initializer_list&lt; <ref refid="structpair" kindref="compound">pair</ref>&lt; const char *, <ref refid="group___string_view_1ga204ca715c2febee035464fa53dfc50c4" kindref="member">string_view</ref> &gt; &gt;</type>
+          <declname>params</declname>
+        </param>
+        <briefdescription>
+<para>命名参数格式化 </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fmt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>格式字符串，使用 {name} 标记命名占位符 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>params</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>命名参数列表 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>格式化后的字符串</para>
+</simplesect>
+将格式字符串中的 {name} 替换为 params 中的对应值。 不支持格式选项，仅做纯文本替换。 用法：format_named(&quot;{greeting}, {name}!&quot;, {{&quot;greeting&quot;, &quot;Hello&quot;}, {&quot;name&quot;, &quot;World&quot;}}) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/format.hpp" line="830" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/format.hpp" bodystart="830" bodyend="874"/>
+        <references refid="group___thread_1ga19c672503697d8f9c7dfb3306b9583b1" compoundref="thread_8hpp" startline="476" endline="478">name</references>
+        <references refid="classbasic__string_1aa2527f9b1a17a4b866e3e59e384dc0d8" compoundref="basic__string_8hpp" startline="1274" endline="1301">basic_string&lt; CharT, Traits, Alloc &gt;::reserve</references>
+        <references refid="classbasic__string__view_1a0b5a6546739bc33ecbe750f98ac47b25" compoundref="basic__string__view_8hpp" startline="305" endline="305">basic_string_view&lt; CharT, Traits &gt;::size</references>
+        <references refid="classbasic__string__view_1a0f326706d8c59c24d7012ae254368775" compoundref="basic__string__view_8hpp" startline="443" endline="445">basic_string_view&lt; CharT, Traits &gt;::view</references>
       </memberdef>
     </sectiondef>
     <briefdescription>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['未初始化内存操作_0',['未初始化内存操作',['../group___uninitialized_memory_operations.html',1,'']]]
+  ['旧式仿函数基类_0',['旧式仿函数基类',['../group___legacy_function_adapters.html',1,'']]]
 ];

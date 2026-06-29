@@ -1,6 +1,7 @@
 var structidb__tb__result =
 [
     [ "column_count", "structidb__tb__result.html#a15bba511bedb7883a9770516e60d0502", null ],
+    [ "column_metadata", "structidb__tb__result.html#a847e127d534e34bc199d6168372288f0", null ],
     [ "column_names", "structidb__tb__result.html#acf9e2cdb951dfadb26394addafd314bd", null ],
     [ "get", "structidb__tb__result.html#ae1bc5e789f06b1d381f8922dc0c5e9af", null ],
     [ "get_bit", "structidb__tb__result.html#ab2a5e423b358828cada7a8be14651196", null ],

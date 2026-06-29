@@ -210,6 +210,7 @@
         <inbodydescription>
         </inbodydescription>
         <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="190" column="27" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="190" bodyend="-1"/>
+        <referencedby refid="classbasic__string_1abd23b54384b5f87856572cafb27af10f" compoundref="basic__string_8hpp" startline="2749" endline="2782">basic_string&lt; char &gt;::split</referencedby>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -363,11 +364,13 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-注意：字符串长度通过Traits::length计算，要求字符串以空字符结尾。 </para>
+注意：字符串长度通过Traits::length计算，要求字符串以空字符结尾。 <simplesect kind="note"><para>若源字符串内部包含空字符（\0），构造时会在此处截断。 如需保留内部 NUL 字符，请使用带长度参数的构造函数。 </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="218" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="218" bodyend="220"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="220" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="220" bodyend="222"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a91b8ef9c781642644ee5659b4d1ed795" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>constexpr</type>
@@ -408,7 +411,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="229" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="229" bodyend="231"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="231" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="231" bodyend="233"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1ab59f37849746f070f005c5f9b1aa3b8b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -467,7 +470,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="242" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="242" bodyend="244"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="244" column="15" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="244" bodyend="246"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1af12a287922d7144e7ccba66405792d17" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type>constexpr</type>
@@ -482,7 +485,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="249" column="15"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="251" column="15"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1ae28c265091314f7b28be41c955d487ae" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1accbf6cce11b75ca51da1f28825b67e30" kindref="member">const_iterator</ref></type>
@@ -500,9 +503,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="255" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="255" bodyend="255"/>
-        <referencedby refid="classbasic__string__view_1a880f9c6640c662b61ba4b35e78b40636" compoundref="basic__string__view_8hpp" startline="267" endline="267">basic_string_view&lt; typename Traits::char_type, Traits &gt;::cbegin</referencedby>
-        <referencedby refid="classbasic__string__view_1ab589b544494d93aab59c34774112d860" compoundref="basic__string__view_8hpp" startline="285" endline="285">basic_string_view&lt; typename Traits::char_type, Traits &gt;::rend</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="257" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="257" bodyend="257"/>
+        <referencedby refid="classbasic__string__view_1a880f9c6640c662b61ba4b35e78b40636" compoundref="basic__string__view_8hpp" startline="269" endline="269">basic_string_view&lt; typename Traits::char_type, Traits &gt;::cbegin</referencedby>
+        <referencedby refid="classbasic__string__view_1ab589b544494d93aab59c34774112d860" compoundref="basic__string__view_8hpp" startline="287" endline="287">basic_string_view&lt; typename Traits::char_type, Traits &gt;::rend</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a58f6dfbb0b03bfdcd647f1c6125b04f6" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1accbf6cce11b75ca51da1f28825b67e30" kindref="member">const_iterator</ref></type>
@@ -520,9 +523,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="261" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="261" bodyend="261"/>
-        <referencedby refid="classbasic__string__view_1a57e745f10970d965592d7f9d2b03b5b8" compoundref="basic__string__view_8hpp" startline="273" endline="273">basic_string_view&lt; typename Traits::char_type, Traits &gt;::cend</referencedby>
-        <referencedby refid="classbasic__string__view_1aad5cf2f21f041a5cb80bed4503441aff" compoundref="basic__string__view_8hpp" startline="279" endline="279">basic_string_view&lt; typename Traits::char_type, Traits &gt;::rbegin</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="263" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="263" bodyend="263"/>
+        <referencedby refid="classbasic__string__view_1a57e745f10970d965592d7f9d2b03b5b8" compoundref="basic__string__view_8hpp" startline="275" endline="275">basic_string_view&lt; typename Traits::char_type, Traits &gt;::cend</referencedby>
+        <referencedby refid="classbasic__string__view_1aad5cf2f21f041a5cb80bed4503441aff" compoundref="basic__string__view_8hpp" startline="281" endline="281">basic_string_view&lt; typename Traits::char_type, Traits &gt;::rbegin</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a880f9c6640c662b61ba4b35e78b40636" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1accbf6cce11b75ca51da1f28825b67e30" kindref="member">const_iterator</ref></type>
@@ -540,8 +543,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="267" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="267" bodyend="267"/>
-        <referencedby refid="classbasic__string__view_1af95443d5cb7e50073df36a0b03c4de16" compoundref="basic__string__view_8hpp" startline="934" endline="950">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_left_if</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="269" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="269" bodyend="269"/>
+        <referencedby refid="classbasic__string__view_1af95443d5cb7e50073df36a0b03c4de16" compoundref="basic__string__view_8hpp" startline="937" endline="953">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_left_if</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a57e745f10970d965592d7f9d2b03b5b8" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1accbf6cce11b75ca51da1f28825b67e30" kindref="member">const_iterator</ref></type>
@@ -559,8 +562,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="273" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="273" bodyend="273"/>
-        <referencedby refid="classbasic__string__view_1af95443d5cb7e50073df36a0b03c4de16" compoundref="basic__string__view_8hpp" startline="934" endline="950">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_left_if</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="275" column="31" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="275" bodyend="275"/>
+        <referencedby refid="classbasic__string__view_1af95443d5cb7e50073df36a0b03c4de16" compoundref="basic__string__view_8hpp" startline="937" endline="953">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_left_if</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1aad5cf2f21f041a5cb80bed4503441aff" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a217c63203206fd744741d35a774dd91a" kindref="member">const_reverse_iterator</ref></type>
@@ -578,8 +581,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="279" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="279" bodyend="279"/>
-        <referencedby refid="classbasic__string__view_1a66ad9438f22afba713d74dc3d4ef7b65" compoundref="basic__string__view_8hpp" startline="291" endline="291">basic_string_view&lt; typename Traits::char_type, Traits &gt;::crbegin</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="281" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="281" bodyend="281"/>
+        <referencedby refid="classbasic__string__view_1a66ad9438f22afba713d74dc3d4ef7b65" compoundref="basic__string__view_8hpp" startline="293" endline="293">basic_string_view&lt; typename Traits::char_type, Traits &gt;::crbegin</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1ab589b544494d93aab59c34774112d860" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a217c63203206fd744741d35a774dd91a" kindref="member">const_reverse_iterator</ref></type>
@@ -597,8 +600,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="285" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="285" bodyend="285"/>
-        <referencedby refid="classbasic__string__view_1a718a8fed6b4d8929c3740c30e1fb6d4d" compoundref="basic__string__view_8hpp" startline="297" endline="297">basic_string_view&lt; typename Traits::char_type, Traits &gt;::crend</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="287" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="287" bodyend="287"/>
+        <referencedby refid="classbasic__string__view_1a718a8fed6b4d8929c3740c30e1fb6d4d" compoundref="basic__string__view_8hpp" startline="299" endline="299">basic_string_view&lt; typename Traits::char_type, Traits &gt;::crend</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a66ad9438f22afba713d74dc3d4ef7b65" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a217c63203206fd744741d35a774dd91a" kindref="member">const_reverse_iterator</ref></type>
@@ -616,8 +619,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="291" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="291" bodyend="291"/>
-        <referencedby refid="classbasic__string__view_1a48fd7289c5c8a495abca8b52842095b4" compoundref="basic__string__view_8hpp" startline="959" endline="975">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_right_if</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="293" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="293" bodyend="293"/>
+        <referencedby refid="classbasic__string__view_1a48fd7289c5c8a495abca8b52842095b4" compoundref="basic__string__view_8hpp" startline="962" endline="978">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_right_if</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a718a8fed6b4d8929c3740c30e1fb6d4d" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a217c63203206fd744741d35a774dd91a" kindref="member">const_reverse_iterator</ref></type>
@@ -635,8 +638,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="297" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="297" bodyend="297"/>
-        <referencedby refid="classbasic__string__view_1a48fd7289c5c8a495abca8b52842095b4" compoundref="basic__string__view_8hpp" startline="959" endline="975">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_right_if</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="299" column="39" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="299" bodyend="299"/>
+        <referencedby refid="classbasic__string__view_1a48fd7289c5c8a495abca8b52842095b4" compoundref="basic__string__view_8hpp" startline="962" endline="978">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_right_if</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a0b5a6546739bc33ecbe750f98ac47b25" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -654,8 +657,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="303" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="303" bodyend="303"/>
-        <referencedby refid="group___format_1gac0f4499364ec899fcdfaae1f7acbda76" compoundref="format_8hpp" startline="695" endline="701">format</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="305" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="305" bodyend="305"/>
+        <referencedby refid="classbuffer__chain_1a2a0ebba8be6e0a824944f81b2eec6230" compoundref="buffer__chain_8hpp" startline="47" endline="47">buffer_chain::append</referencedby>
+        <referencedby refid="group___format_1gac0f4499364ec899fcdfaae1f7acbda76" compoundref="format_8hpp" startline="792" endline="800">format</referencedby>
+        <referencedby refid="group___format_1ga401d7fa93048e25a6f79fc746b2a09fe" compoundref="format_8hpp" startline="830" endline="874">format_named</referencedby>
         <referencedby refid="classdate_1a0059d1432089c242292a5a4a83e2ddb2" compoundref="datetime_8hpp" startline="426" endline="434">date::parse</referencedby>
         <referencedby refid="classdatetime_1a326beda2146aa58a4f52ede35e8c4658" compoundref="datetime_8hpp" startline="1426" endline="1433">datetime::parse</referencedby>
         <referencedby refid="classtime_1aa622dc1c0c09f0075e92aa01858bfc79" compoundref="datetime_8hpp" startline="701" endline="709">time::parse</referencedby>
@@ -699,7 +704,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="309" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="309" bodyend="311"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="311" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="311" bodyend="313"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a044c95f53ac7de39542779311b1b6950" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -717,11 +722,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="317" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="317" bodyend="317"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="319" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="319" bodyend="319"/>
         <referencedby refid="classbitset_1aa16ab94f8ba20c24f9af61f32b887cac" compoundref="bitset_8hpp" startline="162" endline="178">bitset&lt; N &gt;::bitset</referencedby>
         <referencedby refid="group___string_1ga85609114749f92f18d62752eb58752ff" compoundref="string_8hpp" startline="108" endline="165">escape</referencedby>
+        <referencedby refid="classroute__trie_1a98ae9915c4ab0d7a79795c4cb31bf0f4" compoundref="radix__router_8hpp" startline="54" endline="108">route_trie::insert</referencedby>
+        <referencedby refid="classbasic__string_1aed733e79f9e68029a9637e5fd64f47bb" compoundref="basic__string_8hpp" startline="2792" endline="2814">basic_string&lt; char &gt;::join</referencedby>
+        <referencedby refid="classbasic__string_1a3f19464bb1f9c5cb1a5ef1de73bbea2e" compoundref="basic__string_8hpp" startline="2824" endline="2846">basic_string&lt; char &gt;::join</referencedby>
+        <referencedby refid="classroute__trie_1aa6fbb5e731d9b908d4754bfe7d972dc0" compoundref="radix__router_8hpp" startline="117" endline="188">route_trie::match</referencedby>
         <referencedby refid="classcolor_1a46f946d83a298d6d4ff0da4172d8bba1" compoundref="color_8hpp" startline="630" endline="651">color::parse</referencedby>
-        <referencedby refid="classbasic__string__view_1a2df83c604c383ed42dda922fb1019b58" compoundref="basic__string__view_8hpp" startline="1030" endline="1032">basic_string_view&lt; typename Traits::char_type, Traits &gt;::to_hash</referencedby>
+        <referencedby refid="classbasic__string__view_1a2df83c604c383ed42dda922fb1019b58" compoundref="basic__string__view_8hpp" startline="1033" endline="1035">basic_string_view&lt; typename Traits::char_type, Traits &gt;::to_hash</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a585ab61fc0390d99bf03427a2a2c1a40" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -739,11 +748,15 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="323" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="323" bodyend="323"/>
-        <referencedby refid="classbasic__string__view_1a91e2069b7441018100b542e853808fc3" compoundref="basic__string__view_8hpp" startline="346" endline="349">basic_string_view&lt; typename Traits::char_type, Traits &gt;::back</referencedby>
-        <referencedby refid="classbasic__string__view_1a3faad028ac0f32059cea4fbf7ea9dc04" compoundref="basic__string__view_8hpp" startline="863" endline="865">basic_string_view&lt; typename Traits::char_type, Traits &gt;::ends_with</referencedby>
-        <referencedby refid="classbasic__string__view_1a1037285f6fd1a3fe0ee8dbce943c66c4" compoundref="basic__string__view_8hpp" startline="337" endline="340">basic_string_view&lt; typename Traits::char_type, Traits &gt;::front</referencedby>
-        <referencedby refid="classbasic__string__view_1ada6d2c578a9a4d4c407b13d8432badbb" compoundref="basic__string__view_8hpp" startline="835" endline="837">basic_string_view&lt; typename Traits::char_type, Traits &gt;::starts_with</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="325" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="325" bodyend="325"/>
+        <referencedby refid="classbasic__string__view_1a91e2069b7441018100b542e853808fc3" compoundref="basic__string__view_8hpp" startline="349" endline="352">basic_string_view&lt; typename Traits::char_type, Traits &gt;::back</referencedby>
+        <referencedby refid="classroute__trie_1a0cadf5cc77913cfb32113f57a9af2e7a" compoundref="radix__router_8hpp" startline="193" endline="252">route_trie::contains_path</referencedby>
+        <referencedby refid="classbasic__string__view_1a3faad028ac0f32059cea4fbf7ea9dc04" compoundref="basic__string__view_8hpp" startline="866" endline="868">basic_string_view&lt; typename Traits::char_type, Traits &gt;::ends_with</referencedby>
+        <referencedby refid="classbasic__string__view_1a1037285f6fd1a3fe0ee8dbce943c66c4" compoundref="basic__string__view_8hpp" startline="340" endline="343">basic_string_view&lt; typename Traits::char_type, Traits &gt;::front</referencedby>
+        <referencedby refid="classroute__trie_1a98ae9915c4ab0d7a79795c4cb31bf0f4" compoundref="radix__router_8hpp" startline="54" endline="108">route_trie::insert</referencedby>
+        <referencedby refid="classroute__trie_1aa6fbb5e731d9b908d4754bfe7d972dc0" compoundref="radix__router_8hpp" startline="117" endline="188">route_trie::match</referencedby>
+        <referencedby refid="classbasic__string_1abd23b54384b5f87856572cafb27af10f" compoundref="basic__string_8hpp" startline="2749" endline="2782">basic_string&lt; char &gt;::split</referencedby>
+        <referencedby refid="classbasic__string__view_1ada6d2c578a9a4d4c407b13d8432badbb" compoundref="basic__string__view_8hpp" startline="838" endline="840">basic_string_view&lt; typename Traits::char_type, Traits &gt;::starts_with</referencedby>
         <referencedby refid="structu16character_1a6f1346022a0f0692075e5ba07f878ed4" compoundref="utf_8hpp" startline="602" endline="617">u16character::to_string</referencedby>
         <referencedby refid="structu32character_1a90021c5934089f9ff2da4b16191825c5" compoundref="utf_8hpp" startline="762" endline="771">u32character::to_string</referencedby>
         <referencedby refid="structu8character_1aa1be4ca269e05cbdb2d04fe2529aa607" compoundref="utf_8hpp" startline="445" endline="460">u8character::to_string</referencedby>
@@ -765,8 +778,8 @@
         <referencedby refid="structu16character_1a09e227d8a51f07ca34bde2a39fd307f0" compoundref="utf_8hpp" startline="624" endline="640">u16character::to_wstring</referencedby>
         <referencedby refid="structu32character_1a0baa80908064cbb8122797a15d6ce1f3" compoundref="utf_8hpp" startline="778" endline="788">u32character::to_wstring</referencedby>
         <referencedby refid="structu8character_1a397e9e09faeee61f9b53777cc92b3909" compoundref="utf_8hpp" startline="467" endline="482">u8character::to_wstring</referencedby>
-        <referencedby refid="classbasic__string__view_1af95443d5cb7e50073df36a0b03c4de16" compoundref="basic__string__view_8hpp" startline="934" endline="950">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_left_if</referencedby>
-        <referencedby refid="classbasic__string__view_1a48fd7289c5c8a495abca8b52842095b4" compoundref="basic__string__view_8hpp" startline="959" endline="975">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_right_if</referencedby>
+        <referencedby refid="classbasic__string__view_1af95443d5cb7e50073df36a0b03c4de16" compoundref="basic__string__view_8hpp" startline="937" endline="953">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_left_if</referencedby>
+        <referencedby refid="classbasic__string__view_1a48fd7289c5c8a495abca8b52842095b4" compoundref="basic__string__view_8hpp" startline="962" endline="978">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_right_if</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a333ab8066e73bf2d4bd068f686eeaa24" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1afa5c4db79bddef0e8a0867a4b5459fcd" kindref="member">const_pointer</ref></type>
@@ -780,17 +793,20 @@
         <detaileddescription>
 <para><simplesect kind="return"><para>指向字符串数据的指针</para>
 </simplesect>
-注意：返回的指针不保证以空字符结尾，不应作为C风格字符串使用。 </para>
+<simplesect kind="note"><para>返回的指针不保证以空字符结尾，不应直接作为C风格字符串使用。 如需作为 C 风格字符串使用，请确保视图来源是以空字符结尾的字符串。 </para>
+</simplesect>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="331" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="331" bodyend="331"/>
-        <referencedby refid="classbasic__string__view_1a3a803f2a638210dfe431a039a3ec3785" compoundref="basic__string__view_8hpp" startline="811" endline="819">basic_string_view&lt; typename Traits::char_type, Traits &gt;::count</referencedby>
-        <referencedby refid="classbasic__string__view_1afb5048cef8921ae52ff082378c3a1591" compoundref="basic__string__view_8hpp" startline="826" endline="828">basic_string_view&lt; typename Traits::char_type, Traits &gt;::starts_with</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="334" column="30" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="334" bodyend="334"/>
+        <referencedby refid="classbuffer__chain_1a2a0ebba8be6e0a824944f81b2eec6230" compoundref="buffer__chain_8hpp" startline="47" endline="47">buffer_chain::append</referencedby>
+        <referencedby refid="classbasic__string__view_1a3a803f2a638210dfe431a039a3ec3785" compoundref="basic__string__view_8hpp" startline="814" endline="822">basic_string_view&lt; typename Traits::char_type, Traits &gt;::count</referencedby>
+        <referencedby refid="classbasic__string__view_1afb5048cef8921ae52ff082378c3a1591" compoundref="basic__string__view_8hpp" startline="829" endline="831">basic_string_view&lt; typename Traits::char_type, Traits &gt;::starts_with</referencedby>
         <referencedby refid="group___string_converts_1ga2e4ce025d09685beadde1f58d4b35d3b" compoundref="to__numerics_8hpp" startline="545" endline="555">to_decimal</referencedby>
         <referencedby refid="group___string_converts_1gaa1f68db77c97cbc3d24338ff12fcff6d" compoundref="to__numerics_8hpp" startline="507" endline="517">to_float32</referencedby>
         <referencedby refid="group___string_converts_1ga40976a040eb582de9dbf0f62f3142e5b" compoundref="to__numerics_8hpp" startline="526" endline="536">to_float64</referencedby>
-        <referencedby refid="classbasic__string__view_1a2df83c604c383ed42dda922fb1019b58" compoundref="basic__string__view_8hpp" startline="1030" endline="1032">basic_string_view&lt; typename Traits::char_type, Traits &gt;::to_hash</referencedby>
+        <referencedby refid="classbasic__string__view_1a2df83c604c383ed42dda922fb1019b58" compoundref="basic__string__view_8hpp" startline="1033" endline="1035">basic_string_view&lt; typename Traits::char_type, Traits &gt;::to_hash</referencedby>
         <referencedby refid="group___string_converts_1gafde0106c7b3946708cbc9a6ecfb70607" compoundref="int128_8hpp" startline="813" endline="823">to_int128</referencedby>
         <referencedby refid="group___string_converts_1ga7a8e36ad94481517ba622c58f8b889c2" compoundref="to__numerics_8hpp" startline="605" endline="615">to_int32</referencedby>
         <referencedby refid="group___string_converts_1gae3c7ad350b2eb68272c0c675ee08e407" compoundref="to__numerics_8hpp" startline="565" endline="575">to_int64</referencedby>
@@ -830,8 +846,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="337" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="337" bodyend="340"/>
-        <referencedby refid="classbasic__string__view_1ada6d2c578a9a4d4c407b13d8432badbb" compoundref="basic__string__view_8hpp" startline="835" endline="837">basic_string_view&lt; typename Traits::char_type, Traits &gt;::starts_with</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="340" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="340" bodyend="343"/>
+        <referencedby refid="classbasic__string__view_1ada6d2c578a9a4d4c407b13d8432badbb" compoundref="basic__string__view_8hpp" startline="838" endline="840">basic_string_view&lt; typename Traits::char_type, Traits &gt;::starts_with</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a91e2069b7441018100b542e853808fc3" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a6bc52ea5a1b1211c6493a543a63befe9" kindref="member">const_reference</ref></type>
@@ -849,8 +865,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="346" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="346" bodyend="349"/>
-        <referencedby refid="classbasic__string__view_1a3faad028ac0f32059cea4fbf7ea9dc04" compoundref="basic__string__view_8hpp" startline="863" endline="865">basic_string_view&lt; typename Traits::char_type, Traits &gt;::ends_with</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="349" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="349" bodyend="352"/>
+        <referencedby refid="classbasic__string__view_1a3faad028ac0f32059cea4fbf7ea9dc04" compoundref="basic__string__view_8hpp" startline="866" endline="868">basic_string_view&lt; typename Traits::char_type, Traits &gt;::ends_with</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a8e885225cae9579d0f26f223510b428b" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a6bc52ea5a1b1211c6493a543a63befe9" kindref="member">const_reference</ref></type>
@@ -881,7 +897,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="356" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="356" bodyend="359"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="359" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="359" bodyend="362"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1aa7d492b2ac5f6675d56f6311eefa798b" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a6bc52ea5a1b1211c6493a543a63befe9" kindref="member">const_reference</ref></type>
@@ -912,7 +928,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="366" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="366" bodyend="369"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="369" column="32" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="369" bodyend="372"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1adc713d81f06283342592f8db5b7c3a48" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -941,7 +957,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="377" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="377" bodyend="381"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="380" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="380" bodyend="384"/>
         <referencedby refid="classdatetime_1a4daa3f18e3590a82927f7c8c921b5fbf" compoundref="datetime_8hpp" startline="1324" endline="1353">datetime::parse_RFC1123</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1aa8805a701dc392be40aef9c74d28d2e4" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
@@ -971,7 +987,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="389" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="389" bodyend="392"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="392" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="392" bodyend="395"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a73cdc08e7d13f73339112f363c48be78" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -1027,7 +1043,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="401" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="401" bodyend="406"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="404" column="25" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="404" bodyend="409"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a6368d37a683e75756898b0f27ff4af29" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view" kindref="compound">basic_string_view</ref></type>
@@ -1072,12 +1088,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="414" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="414" bodyend="418"/>
-        <referencedby refid="classbasic__string__view_1a1aa2ea587c8a9a9bf51f4ec7e5692016" compoundref="basic__string__view_8hpp" startline="460" endline="463">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
-        <referencedby refid="classbasic__string__view_1ab65d510440f406c05d5edffc489c29b6" compoundref="basic__string__view_8hpp" startline="474" endline="477">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
-        <referencedby refid="classbasic__string__view_1a1aa003c02f737d2f76648bb45263eb90" compoundref="basic__string__view_8hpp" startline="495" endline="497">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
-        <referencedby refid="classbasic__string__view_1a33e0ccc1c99763685baaa572e6a6927a" compoundref="basic__string__view_8hpp" startline="507" endline="510">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
-        <referencedby refid="classbasic__string__view_1af6dcc2f18ea8057b1cde5be2937e1f9b" compoundref="basic__string__view_8hpp" startline="425" endline="425">basic_string_view&lt; typename Traits::char_type, Traits &gt;::head</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="417" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="417" bodyend="421"/>
+        <referencedby refid="classbasic__string__view_1a1aa2ea587c8a9a9bf51f4ec7e5692016" compoundref="basic__string__view_8hpp" startline="463" endline="466">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
+        <referencedby refid="classbasic__string__view_1ab65d510440f406c05d5edffc489c29b6" compoundref="basic__string__view_8hpp" startline="477" endline="480">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
+        <referencedby refid="classbasic__string__view_1a1aa003c02f737d2f76648bb45263eb90" compoundref="basic__string__view_8hpp" startline="498" endline="500">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
+        <referencedby refid="classbasic__string__view_1a33e0ccc1c99763685baaa572e6a6927a" compoundref="basic__string__view_8hpp" startline="510" endline="513">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
+        <referencedby refid="classbasic__string__view_1af6dcc2f18ea8057b1cde5be2937e1f9b" compoundref="basic__string__view_8hpp" startline="428" endline="428">basic_string_view&lt; typename Traits::char_type, Traits &gt;::head</referencedby>
+        <referencedby refid="classroute__trie_1a98ae9915c4ab0d7a79795c4cb31bf0f4" compoundref="radix__router_8hpp" startline="54" endline="108">route_trie::insert</referencedby>
         <referencedby refid="classcolor_1a46f946d83a298d6d4ff0da4172d8bba1" compoundref="color_8hpp" startline="630" endline="651">color::parse</referencedby>
         <referencedby refid="classdate_1a0059d1432089c242292a5a4a83e2ddb2" compoundref="datetime_8hpp" startline="426" endline="434">date::parse</referencedby>
         <referencedby refid="classdatetime_1a326beda2146aa58a4f52ede35e8c4658" compoundref="datetime_8hpp" startline="1426" endline="1433">datetime::parse</referencedby>
@@ -1085,8 +1102,8 @@
         <referencedby refid="classdatetime_1aaef451a9f49ad5c2d34cfd24996a2cfd" compoundref="datetime_8hpp" startline="1384" endline="1395">datetime::parse_ISO8601</referencedby>
         <referencedby refid="classdatetime_1a4daa3f18e3590a82927f7c8c921b5fbf" compoundref="datetime_8hpp" startline="1324" endline="1353">datetime::parse_RFC1123</referencedby>
         <referencedby refid="classdatetime_1ae9f455af8bdb838b497501bfbec4e9d8" compoundref="datetime_8hpp" startline="1233" endline="1274">datetime::parse_RFC3339</referencedby>
-        <referencedby refid="classbasic__string__view_1a47f60c7b03a541d986e0b1b5c6940b27" compoundref="basic__string__view_8hpp" startline="432" endline="432">basic_string_view&lt; typename Traits::char_type, Traits &gt;::tail</referencedby>
-        <referencedby refid="classbasic__string__view_1a0f326706d8c59c24d7012ae254368775" compoundref="basic__string__view_8hpp" startline="440" endline="442">basic_string_view&lt; typename Traits::char_type, Traits &gt;::view</referencedby>
+        <referencedby refid="classbasic__string__view_1a47f60c7b03a541d986e0b1b5c6940b27" compoundref="basic__string__view_8hpp" startline="435" endline="435">basic_string_view&lt; typename Traits::char_type, Traits &gt;::tail</referencedby>
+        <referencedby refid="classbasic__string__view_1a0f326706d8c59c24d7012ae254368775" compoundref="basic__string__view_8hpp" startline="443" endline="445">basic_string_view&lt; typename Traits::char_type, Traits &gt;::view</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1af6dcc2f18ea8057b1cde5be2937e1f9b" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view" kindref="compound">basic_string_view</ref></type>
@@ -1118,7 +1135,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="425" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="425" bodyend="425"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="428" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="428" bodyend="428"/>
         <referencedby refid="classdatetime_1a4daa3f18e3590a82927f7c8c921b5fbf" compoundref="datetime_8hpp" startline="1324" endline="1353">datetime::parse_RFC1123</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a47f60c7b03a541d986e0b1b5c6940b27" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
@@ -1151,7 +1168,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="432" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="432" bodyend="432"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="435" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="435" bodyend="435"/>
         <referencedby refid="classcolor_1a46f946d83a298d6d4ff0da4172d8bba1" compoundref="color_8hpp" startline="630" endline="651">color::parse</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a0f326706d8c59c24d7012ae254368775" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
@@ -1196,12 +1213,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="440" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="440" bodyend="442"/>
-        <referencedby refid="classpgsql__connect_1a634957fd53245d67bcf55678e10c6e23" compoundref="pgsql__connect_8hpp" startline="105" endline="105">pgsql_connect::get_error</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="443" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="443" bodyend="445"/>
+        <referencedby refid="group___format_1ga401d7fa93048e25a6f79fc746b2a09fe" compoundref="format_8hpp" startline="830" endline="874">format_named</referencedby>
+        <referencedby refid="classpgsql__connect_1a634957fd53245d67bcf55678e10c6e23" compoundref="pgsql__connect_8hpp" startline="108" endline="108">pgsql_connect::get_error</referencedby>
         <referencedby refid="classpgsql__prepared__statement_1a2fe0f607ab726bce954ab0cf18e532b6" compoundref="pgsql__prepared__statement_8hpp" startline="166" endline="166">pgsql_prepared_statement::get_error</referencedby>
-        <referencedby refid="classsqlite__prepared__statement_1ae162e7dce66d25ceb408e3b979c35697" compoundref="sqlite__prepared__statement_8hpp" startline="182" endline="182">sqlite_prepared_statement::get_error</referencedby>
+        <referencedby refid="classsqlite__prepared__statement_1ae162e7dce66d25ceb408e3b979c35697" compoundref="sqlite__prepared__statement_8hpp" startline="186" endline="186">sqlite_prepared_statement::get_error</referencedby>
+        <referencedby refid="classmeta__property_1a80f387296ab4034a5e1ae4f66ba31749" compoundref="property_8hpp" startline="176" endline="176">meta_property::notify_signal</referencedby>
         <referencedby refid="classpath_1_1split__iterator_1a3a90764bba463c50fd585ca63fe5d08c" compoundref="path_8hpp" startline="131" endline="131">path::split_iterator::operator*</referencedby>
-        <referencedby refid="classsql__builder_1a8720790563b32b23b3c85caba84398e0" compoundref="sql__builder_8hpp" startline="619" endline="619">sql_builder::table</referencedby>
+        <referencedby refid="classregex__token__iterator_1abea9f6c470f849836a828a7e2421188f" compoundref="regex_8hpp" startline="498" endline="498">regex_token_iterator::operator*</referencedby>
+        <referencedby refid="classsql__builder_1a8720790563b32b23b3c85caba84398e0" compoundref="sql__builder_8hpp" startline="1375" endline="1375">sql_builder::table</referencedby>
+        <referencedby refid="classmeta__type_1a50371b1353bc5990dd5a4b2ce185812a" compoundref="type_8hpp" startline="160" endline="160">meta_type::table_name</referencedby>
         <referencedby refid="classpath_1abed38501b754f13c2abe656e7caef45d" compoundref="path_8hpp" startline="235" endline="235">path::view</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a76a15b3812a300bfa5598d89a7cf8e95" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
@@ -1233,17 +1254,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="449" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="449" bodyend="451"/>
-        <referencedby refid="classbasic__string_1ab4a14a779dd49861695479e60776d927" compoundref="basic__string_8hpp" startline="2176" endline="2179">basic_string&lt; char &gt;::compare</referencedby>
-        <referencedby refid="classbasic__string_1ab70c98f7c1d0a388d8dd1b3982f9903b" compoundref="basic__string_8hpp" startline="2190" endline="2193">basic_string&lt; char &gt;::compare</referencedby>
-        <referencedby refid="classbasic__string_1a6247535fa107ae5f1f3fd19673a105b3" compoundref="basic__string_8hpp" startline="2220" endline="2222">basic_string&lt; char &gt;::compare</referencedby>
-        <referencedby refid="classbasic__string_1a69af52afaaaf8b0c289334b5efb6771f" compoundref="basic__string_8hpp" startline="2232" endline="2235">basic_string&lt; char &gt;::compare</referencedby>
-        <referencedby refid="classbasic__string__view_1a1aa2ea587c8a9a9bf51f4ec7e5692016" compoundref="basic__string__view_8hpp" startline="460" endline="463">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
-        <referencedby refid="classbasic__string__view_1ab65d510440f406c05d5edffc489c29b6" compoundref="basic__string__view_8hpp" startline="474" endline="477">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
-        <referencedby refid="classbasic__string__view_1a1aa003c02f737d2f76648bb45263eb90" compoundref="basic__string__view_8hpp" startline="495" endline="497">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
-        <referencedby refid="classbasic__string__view_1a33e0ccc1c99763685baaa572e6a6927a" compoundref="basic__string__view_8hpp" startline="507" endline="510">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
-        <referencedby refid="classbasic__string__view_1a80ac431247ec0d064472854e63069405" compoundref="basic__string__view_8hpp" startline="484" endline="486">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
-        <referencedby refid="classbasic__string__view_1a02b577c380085416bc38bef260d78abd" compoundref="basic__string__view_8hpp" startline="1022" endline="1024">basic_string_view&lt; typename Traits::char_type, Traits &gt;::less_than</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="452" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="452" bodyend="454"/>
+        <referencedby refid="classbasic__string_1ab4a14a779dd49861695479e60776d927" compoundref="basic__string_8hpp" startline="2190" endline="2193">basic_string&lt; char &gt;::compare</referencedby>
+        <referencedby refid="classbasic__string_1ab70c98f7c1d0a388d8dd1b3982f9903b" compoundref="basic__string_8hpp" startline="2204" endline="2207">basic_string&lt; char &gt;::compare</referencedby>
+        <referencedby refid="classbasic__string_1a6247535fa107ae5f1f3fd19673a105b3" compoundref="basic__string_8hpp" startline="2234" endline="2236">basic_string&lt; char &gt;::compare</referencedby>
+        <referencedby refid="classbasic__string_1a69af52afaaaf8b0c289334b5efb6771f" compoundref="basic__string_8hpp" startline="2246" endline="2249">basic_string&lt; char &gt;::compare</referencedby>
+        <referencedby refid="classbasic__string__view_1a1aa2ea587c8a9a9bf51f4ec7e5692016" compoundref="basic__string__view_8hpp" startline="463" endline="466">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
+        <referencedby refid="classbasic__string__view_1ab65d510440f406c05d5edffc489c29b6" compoundref="basic__string__view_8hpp" startline="477" endline="480">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
+        <referencedby refid="classbasic__string__view_1a1aa003c02f737d2f76648bb45263eb90" compoundref="basic__string__view_8hpp" startline="498" endline="500">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
+        <referencedby refid="classbasic__string__view_1a33e0ccc1c99763685baaa572e6a6927a" compoundref="basic__string__view_8hpp" startline="510" endline="513">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
+        <referencedby refid="classbasic__string__view_1a80ac431247ec0d064472854e63069405" compoundref="basic__string__view_8hpp" startline="487" endline="489">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare</referencedby>
+        <referencedby refid="classbasic__string__view_1a02b577c380085416bc38bef260d78abd" compoundref="basic__string__view_8hpp" startline="1025" endline="1027">basic_string_view&lt; typename Traits::char_type, Traits &gt;::less_than</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a1aa2ea587c8a9a9bf51f4ec7e5692016" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>int</type>
@@ -1298,7 +1319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="460" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="460" bodyend="463"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="463" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="463" bodyend="466"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1ab65d510440f406c05d5edffc489c29b6" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>int</type>
@@ -1377,7 +1398,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="474" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="474" bodyend="477"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="477" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="477" bodyend="480"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a80ac431247ec0d064472854e63069405" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>int</type>
@@ -1408,7 +1429,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="484" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="484" bodyend="486"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="487" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="487" bodyend="489"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a1aa003c02f737d2f76648bb45263eb90" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>int</type>
@@ -1463,7 +1484,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="495" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="495" bodyend="497"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="498" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="498" bodyend="500"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a33e0ccc1c99763685baaa572e6a6927a" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>int</type>
@@ -1530,7 +1551,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="507" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="507" bodyend="510"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="510" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="510" bodyend="513"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1af984fb5ee3e702ef1bd20d3a24c5b646" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>int</type>
@@ -1561,8 +1582,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="517" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="517" bodyend="533"/>
-        <referencedby refid="classbasic__string__view_1a094872f20fd26a6f176e3f6a9f047b14" compoundref="basic__string__view_8hpp" startline="540" endline="542">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare_ignore_case</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="520" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="520" bodyend="536"/>
+        <referencedby refid="classbasic__string__view_1a094872f20fd26a6f176e3f6a9f047b14" compoundref="basic__string__view_8hpp" startline="543" endline="545">basic_string_view&lt; typename Traits::char_type, Traits &gt;::compare_ignore_case</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a094872f20fd26a6f176e3f6a9f047b14" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>int</type>
@@ -1593,7 +1614,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="540" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="540" bodyend="542"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="543" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="543" bodyend="545"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1aa49933521e0830c062a7432d7e5cba46" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -1637,10 +1658,10 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="550" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="550" bodyend="552"/>
-        <referencedby refid="classbasic__string__view_1a3bcc151571284ecbb43a2922f1f03a00" compoundref="basic__string__view_8hpp" startline="881" endline="883">basic_string_view&lt; typename Traits::char_type, Traits &gt;::contains</referencedby>
-        <referencedby refid="classbasic__string__view_1acea3e38b6191e2117fa92fc43f3ecf53" compoundref="basic__string__view_8hpp" startline="899" endline="901">basic_string_view&lt; typename Traits::char_type, Traits &gt;::contains</referencedby>
-        <referencedby refid="classbasic__string__view_1ad65c9b9c79e9b91e089a87ec75191417" compoundref="basic__string__view_8hpp" startline="890" endline="892">basic_string_view&lt; typename Traits::char_type, Traits &gt;::contains</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="553" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="553" bodyend="555"/>
+        <referencedby refid="classbasic__string__view_1a3bcc151571284ecbb43a2922f1f03a00" compoundref="basic__string__view_8hpp" startline="884" endline="886">basic_string_view&lt; typename Traits::char_type, Traits &gt;::contains</referencedby>
+        <referencedby refid="classbasic__string__view_1acea3e38b6191e2117fa92fc43f3ecf53" compoundref="basic__string__view_8hpp" startline="902" endline="904">basic_string_view&lt; typename Traits::char_type, Traits &gt;::contains</referencedby>
+        <referencedby refid="classbasic__string__view_1ad65c9b9c79e9b91e089a87ec75191417" compoundref="basic__string__view_8hpp" startline="893" endline="895">basic_string_view&lt; typename Traits::char_type, Traits &gt;::contains</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a7a6d9db3ff8e9cbd0945fd2a851cc1df" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -1684,7 +1705,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="560" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="560" bodyend="562"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="563" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="563" bodyend="565"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a98abd72533b63cb85c8f644e7a8b5cbe" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -1739,7 +1760,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="571" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="571" bodyend="574"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="574" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="574" bodyend="577"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a71f1a0f0797d58cdd0bf8e9741e0d218" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -1783,7 +1804,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="582" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="582" bodyend="584"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="585" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="585" bodyend="587"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1ad2e8ed18e3b16cd3c1a48efcf1c6cf47" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -1827,7 +1848,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="592" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="592" bodyend="595"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="595" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="595" bodyend="598"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1afd4459d6a07cb972c7a25b846d92258a" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -1871,7 +1892,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="603" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="603" bodyend="605"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="606" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="606" bodyend="608"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a5303dc71cb6f530844c8c07cc8afb77a" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -1926,7 +1947,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="614" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="614" bodyend="617"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="617" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="617" bodyend="620"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a07552d76a7ee3f6305d5f5df2f3cdef2" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -1970,7 +1991,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="625" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="625" bodyend="627"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="628" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="628" bodyend="630"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1ae9dc157f5948ddee2719a6293e3ee28a" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2014,7 +2035,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="635" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="635" bodyend="638"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="638" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="638" bodyend="641"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1aa68526ea2ab78f6670bc27aa52df16b5" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2058,7 +2079,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="646" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="646" bodyend="648"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="649" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="649" bodyend="651"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a5b3ee2dfdbe2c82f80807edf38385367" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2113,7 +2134,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="657" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="657" bodyend="660"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="660" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="660" bodyend="663"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1af0164cacc9b106b5be5e11bbe9c05d64" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2157,7 +2178,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="668" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="668" bodyend="671"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="671" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="671" bodyend="674"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1af06f3b7c1d596ab2da8002ee8c01b2cb" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2201,7 +2222,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="679" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="679" bodyend="682"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="682" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="682" bodyend="685"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1aca6f0dfe7e155812995557944df96bb0" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2245,7 +2266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="690" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="690" bodyend="692"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="693" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="693" bodyend="695"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a0b536d28ad5b7e90ef2cfa1d0657970e" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2300,7 +2321,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="701" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="701" bodyend="704"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="704" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="704" bodyend="707"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a125fe9dc23fea3dd08de2c20aaf76d77" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2344,7 +2365,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="712" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="712" bodyend="715"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="715" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="715" bodyend="718"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1acd93cbb9e512b379d20162cf029eba04" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2388,7 +2409,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="723" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="723" bodyend="726"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="726" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="726" bodyend="729"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a3a91f3fbdb2935def60eb3cbad66191b" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2432,7 +2453,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="734" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="734" bodyend="736"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="737" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="737" bodyend="739"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a33a450b0bbaf68f792301eff39e8bdeb" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2487,7 +2508,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="745" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="745" bodyend="748"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="748" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="748" bodyend="751"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1abe7ee04ed4d6e98226055b6cb253cba2" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2531,7 +2552,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="756" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="756" bodyend="759"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="759" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="759" bodyend="762"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a3761120ae1f80bc10f20a84a58cc24df" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2575,7 +2596,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="767" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="767" bodyend="770"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="770" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="770" bodyend="773"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a487bd95fff9d80399e928ed1ae249164" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2619,7 +2640,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="778" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="778" bodyend="780"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="781" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="781" bodyend="783"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1aba4f257c3a7f110eea91842e2566e49f" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2674,7 +2695,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="789" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="789" bodyend="792"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="792" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="792" bodyend="795"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a128b06f05a8224917c329af993dadc10" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2718,7 +2739,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="800" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="800" bodyend="803"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="803" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="803" bodyend="806"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a3a803f2a638210dfe431a039a3ec3785" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view_1a25643e714d26a4cdafffb1d383327482" kindref="member">size_type</ref></type>
@@ -2762,7 +2783,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="811" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="811" bodyend="819"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="814" column="26" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="814" bodyend="822"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1afb5048cef8921ae52ff082378c3a1591" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -2793,8 +2814,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="826" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="826" bodyend="828"/>
-        <referencedby refid="classbasic__string__view_1a2f5b33d2d4c48e37de3d8a6a04fe5657" compoundref="basic__string__view_8hpp" startline="844" endline="846">basic_string_view&lt; typename Traits::char_type, Traits &gt;::starts_with</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="829" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="829" bodyend="831"/>
+        <referencedby refid="classbasic__string__view_1a2f5b33d2d4c48e37de3d8a6a04fe5657" compoundref="basic__string__view_8hpp" startline="847" endline="849">basic_string_view&lt; typename Traits::char_type, Traits &gt;::starts_with</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1ada6d2c578a9a4d4c407b13d8432badbb" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -2825,7 +2846,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="835" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="835" bodyend="837"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="838" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="838" bodyend="840"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a2f5b33d2d4c48e37de3d8a6a04fe5657" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -2856,7 +2877,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="844" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="844" bodyend="846"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="847" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="847" bodyend="849"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1ad3c41e8c7575a5e47bfa8b9bb8dd2791" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -2887,8 +2908,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="853" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="853" bodyend="856"/>
-        <referencedby refid="classbasic__string__view_1a46da3e06f4cd6aa5d63e1c5388fa7ef6" compoundref="basic__string__view_8hpp" startline="872" endline="874">basic_string_view&lt; typename Traits::char_type, Traits &gt;::ends_with</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="856" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="856" bodyend="859"/>
+        <referencedby refid="classbasic__string__view_1a46da3e06f4cd6aa5d63e1c5388fa7ef6" compoundref="basic__string__view_8hpp" startline="875" endline="877">basic_string_view&lt; typename Traits::char_type, Traits &gt;::ends_with</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a3faad028ac0f32059cea4fbf7ea9dc04" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -2919,7 +2940,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="863" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="863" bodyend="865"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="866" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="866" bodyend="868"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a46da3e06f4cd6aa5d63e1c5388fa7ef6" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -2950,7 +2971,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="872" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="872" bodyend="874"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="875" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="875" bodyend="877"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a3bcc151571284ecbb43a2922f1f03a00" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -2981,7 +3002,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="881" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="881" bodyend="883"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="884" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="884" bodyend="886"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1ad65c9b9c79e9b91e089a87ec75191417" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -3012,7 +3033,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="890" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="890" bodyend="892"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="893" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="893" bodyend="895"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1acea3e38b6191e2117fa92fc43f3ecf53" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -3043,7 +3064,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="899" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="899" bodyend="901"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="902" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="902" bodyend="904"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a13e8118cc7ba4a01893c7e73c02763a4" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view" kindref="compound">basic_string_view</ref></type>
@@ -3061,8 +3082,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="907" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="907" bodyend="909"/>
-        <referencedby refid="classbasic__string__view_1a62eb3204ad66ed7f8f5171d363819b7c" compoundref="basic__string__view_8hpp" startline="923" endline="925">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="910" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="910" bodyend="912"/>
+        <referencedby refid="classbasic__string__view_1a62eb3204ad66ed7f8f5171d363819b7c" compoundref="basic__string__view_8hpp" startline="926" endline="928">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a0c03cc33b929b5c301fcfa63494cad80" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view" kindref="compound">basic_string_view</ref></type>
@@ -3080,8 +3101,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="915" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="915" bodyend="917"/>
-        <referencedby refid="classbasic__string__view_1a62eb3204ad66ed7f8f5171d363819b7c" compoundref="basic__string__view_8hpp" startline="923" endline="925">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="918" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="918" bodyend="920"/>
+        <referencedby refid="classbasic__string__view_1a62eb3204ad66ed7f8f5171d363819b7c" compoundref="basic__string__view_8hpp" startline="926" endline="928">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a62eb3204ad66ed7f8f5171d363819b7c" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classbasic__string__view" kindref="compound">basic_string_view</ref></type>
@@ -3099,7 +3120,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="923" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="923" bodyend="925"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="926" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="926" bodyend="928"/>
         <referencedby refid="structboolean_1ab4f0cdffb3c8131444b2cfee89bd1a5d" compoundref="packages_8hpp" startline="74" endline="90">boolean::parse</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1af95443d5cb7e50073df36a0b03c4de16" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(pred(*cbegin()))" virt="non-virtual">
@@ -3145,9 +3166,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="934" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="934" bodyend="950"/>
-        <referencedby refid="classbasic__string__view_1a8a6b6c53adc24a590e5615ad2923e2fc" compoundref="basic__string__view_8hpp" startline="984" endline="987">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_if</referencedby>
-        <referencedby refid="classbasic__string__view_1a13e8118cc7ba4a01893c7e73c02763a4" compoundref="basic__string__view_8hpp" startline="907" endline="909">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_left</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="937" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="937" bodyend="953"/>
+        <referencedby refid="classbasic__string__view_1a8a6b6c53adc24a590e5615ad2923e2fc" compoundref="basic__string__view_8hpp" startline="987" endline="990">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_if</referencedby>
+        <referencedby refid="classbasic__string__view_1a13e8118cc7ba4a01893c7e73c02763a4" compoundref="basic__string__view_8hpp" startline="910" endline="912">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_left</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a48fd7289c5c8a495abca8b52842095b4" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(pred(*crbegin()))" virt="non-virtual">
         <templateparamlist>
@@ -3192,9 +3213,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="959" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="959" bodyend="975"/>
-        <referencedby refid="classbasic__string__view_1a8a6b6c53adc24a590e5615ad2923e2fc" compoundref="basic__string__view_8hpp" startline="984" endline="987">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_if</referencedby>
-        <referencedby refid="classbasic__string__view_1a0c03cc33b929b5c301fcfa63494cad80" compoundref="basic__string__view_8hpp" startline="915" endline="917">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_right</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="962" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="962" bodyend="978"/>
+        <referencedby refid="classbasic__string__view_1a8a6b6c53adc24a590e5615ad2923e2fc" compoundref="basic__string__view_8hpp" startline="987" endline="990">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_if</referencedby>
+        <referencedby refid="classbasic__string__view_1a0c03cc33b929b5c301fcfa63494cad80" compoundref="basic__string__view_8hpp" startline="918" endline="920">basic_string_view&lt; typename Traits::char_type, Traits &gt;::trim_right</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a8a6b6c53adc24a590e5615ad2923e2fc" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" noexceptexpression="noexcept(this-&gt;trim_right_if(pred)) &amp;&amp;noexcept(this-&gt;trim_left_if(pred))" virt="non-virtual">
         <templateparamlist>
@@ -3239,7 +3260,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="984" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="984" bodyend="987"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="987" column="34" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="987" bodyend="990"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1ab34f2b57e351f2426fee2116c23e66f1" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -3270,8 +3291,8 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="994" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="994" bodyend="996"/>
-        <referencedby refid="classbasic__string__view_1a3404cf2dcb7e11a616810e46cdd49bed" compoundref="basic__string__view_8hpp" startline="1003" endline="1005">basic_string_view&lt; typename Traits::char_type, Traits &gt;::equal_to</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="997" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="997" bodyend="999"/>
+        <referencedby refid="classbasic__string__view_1a3404cf2dcb7e11a616810e46cdd49bed" compoundref="basic__string__view_8hpp" startline="1006" endline="1008">basic_string_view&lt; typename Traits::char_type, Traits &gt;::equal_to</referencedby>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a3404cf2dcb7e11a616810e46cdd49bed" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -3302,7 +3323,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="1003" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="1003" bodyend="1005"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="1006" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="1006" bodyend="1008"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1ae210d27764b62c8f93c3cf65c6b9471d" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>void</type>
@@ -3331,7 +3352,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="1011" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="1011" bodyend="1015"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="1014" column="20" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="1014" bodyend="1018"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a02b577c380085416bc38bef260d78abd" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>bool</type>
@@ -3362,7 +3383,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="1022" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="1022" bodyend="1024"/>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="1025" column="21" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="1025" bodyend="1027"/>
       </memberdef>
       <memberdef kind="function" id="classbasic__string__view_1a2df83c604c383ed42dda922fb1019b58" prot="public" static="no" nodiscard="yes" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="group___platform_dependent_types_1ga2d35ca4f92b748b22e8674ea36a6c875" kindref="member">size_t</ref></type>
@@ -3380,8 +3401,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="1030" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="1030" bodyend="1032"/>
-        <referencedby refid="classmeta__type_1ab33b57c45251f58df2d749b9da09604b" compoundref="type_8hpp" startline="178" endline="178">meta_type::is_derived_from</referencedby>
+        <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="1033" column="23" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="1033" bodyend="1035"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -3455,7 +3475,7 @@ string_view是一个非拥有的字符串视图，提供对字符序列的只读
         <link refid="structihashable"/>
       </node>
     </collaborationgraph>
-    <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="169" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="169" bodyend="1033"/>
+    <location file="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" line="169" column="1" bodyfile="D:/Workspace/NexusForce/include/NeForce/core/string/basic_string_view.hpp" bodystart="169" bodyend="1036"/>
     <listofallmembers>
       <member refid="classbasic__string__view_1aa7d492b2ac5f6675d56f6311eefa798b" prot="public" virt="non-virtual"><scope>basic_string_view</scope><name>at</name></member>
       <member refid="classbasic__string__view_1a91e2069b7441018100b542e853808fc3" prot="public" virt="non-virtual"><scope>basic_string_view</scope><name>back</name></member>

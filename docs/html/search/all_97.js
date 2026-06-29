@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['相邻元素算法_0',['相邻元素算法',['../group___adjacent_algorithms.html',1,'']]]
+  ['特性_0',['🚀 特性',['../md__m_a_i_n_p_a_g_e.html#autotoc_md17',1,'']]],
+  ['特殊值处理_1',['特殊值处理',['../group___math_functions.html#special_values',1,'']]]
 ];
