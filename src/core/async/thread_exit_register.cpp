@@ -1,10 +1,10 @@
-#include <NeForce/core/async/at_thread_exit.hpp>
+#include <NeForce/core/async/thread_exit_register.hpp>
 #include <NeForce/core/exception/terminate.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
     struct thread_exit_registry {
-        at_thread_exit_elt* thread_exit_list = nullptr;
+        thread_exit_elt* thread_exit_list = nullptr;
 
         thread_exit_registry() noexcept = default;
         thread_exit_registry(const thread_exit_registry&) = delete;
@@ -14,9 +14,9 @@ namespace {
 
         ~thread_exit_registry() {
             try {
-                at_thread_exit_elt* current = thread_exit_list;
+                thread_exit_elt* current = thread_exit_list;
                 while (current != nullptr) {
-                    at_thread_exit_elt* next = current->next;
+                    thread_exit_elt* next = current->next;
                     current->cb(current);
                     current = next;
                 }
@@ -33,7 +33,7 @@ namespace {
 } // namespace
 
 
-void thread_exit_register(at_thread_exit_elt* elt, void (*callback)(void*)) noexcept {
+void thread_exit_register(thread_exit_elt* elt, void (*callback)(void*)) noexcept {
     elt->next = thread_registry().thread_exit_list;
     elt->cb = callback;
     thread_registry().thread_exit_list = elt;

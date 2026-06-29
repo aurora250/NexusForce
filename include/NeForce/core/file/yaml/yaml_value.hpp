@@ -47,7 +47,7 @@ struct yaml_exception final : value_exception {
 
 /**
  * @defgroup YamlConfig YAML配置
- * @brief YAML（YAML Ain't Markup Language）1.2 配置格式支持
+ * @brief YAML配置格式支持
  *
  * 本模块提供 YAML 1.2.2 规范的完整实现，包含解析（yaml_parser）、
  * 构建（yaml_builder）和值类型（yaml_value 层次结构）。

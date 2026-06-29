@@ -5,9 +5,7 @@
  * @file byte_cursor.hpp
  * @brief 带边界检查的字节游标，用于协议解析
  *
- * 封装缓冲区及读取位置，提供安全的读取操作，
- * 消除手动进行字节级协议解析时常见的越界/溢出错误。
- * 被 HPACK 解码器、HTTP/2 帧解析器、WebSocket 帧解析器等模块使用。
+ * 封装缓冲区及读取位置，提供安全的读取操作。
  */
 
 #include "NeForce/core/memory/endian.hpp"
@@ -17,7 +15,8 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
 /**
- * @addtogroup HTTP HTTP
+ * @defgroup ByteCursor 字节游标
+ * @brief 消除手动进行字节级协议解析时常见的越界/溢出错误，被用于帧解析器等模块。
  * @{
  */
 
@@ -26,8 +25,6 @@ NEFORCE_BEGIN_HTTP__
  * @brief 带边界检查的字节游标，用于协议解析
  *
  * 封装缓冲区及读取位置，提供安全的逐字节/多位读取操作，
- * 消除手动协议解析中常见的越界和溢出错误。
- * 供 HPACK 解码器、HTTP/2 帧解析器、WebSocket 帧解析器等使用。
  */
 class byte_cursor {
 private:
@@ -284,7 +281,7 @@ public:
     }
 };
 
-/** @} */ // HTTP
+/** @} */ // ByteCursor
 
 NEFORCE_END_HTTP__
 NEFORCE_END_NAMESPACE__

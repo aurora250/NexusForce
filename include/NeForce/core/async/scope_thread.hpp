@@ -73,7 +73,7 @@ public:
     /**
      * @brief 默认构造函数
      *
-     * 创建一个不表示任何线程的scoped_thread对象。
+     * 创建一个不表示任何线程的scope_thread对象。
      */
     scope_thread() noexcept = default;
 
@@ -96,13 +96,13 @@ public:
 
     /**
      * @brief 移动构造函数
-     * @param other 要移动的scoped_thread
+     * @param other 要移动的scope_thread
      */
     scope_thread(scope_thread&& other) noexcept = default;
 
     /**
      * @brief 移动赋值运算符
-     * @param other 要移动的scoped_thread
+     * @param other 要移动的scope_thread
      * @return 当前对象的引用
      */
     scope_thread& operator=(scope_thread&& other) noexcept {
@@ -123,8 +123,8 @@ public:
     }
 
     /**
-     * @brief 交换两个scoped_thread对象
-     * @param other 要交换的scoped_thread
+     * @brief 交换两个scope_thread对象
+     * @param other 要交换的scope_thread
      */
     void swap(scope_thread& other) noexcept {
         _NEFORCE swap(stop_source_, other.stop_source_);

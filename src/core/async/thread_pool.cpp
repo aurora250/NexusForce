@@ -3,6 +3,16 @@
 #include <NeForce/core/utility/packages.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 
+namespace {
+    atomic<uint32_t> g_pool_thread_id{0};
+}
+
+uint32_t thread_pool::thread_pool_id_generator::get_new_id() noexcept {
+    return g_pool_thread_id.fetch_add(1, memory_order_relaxed);
+}
+
+void thread_pool::thread_pool_id_generator::reset_id() noexcept { g_pool_thread_id.store(0, memory_order_relaxed); }
+
 worker_context*& get_worker_context() noexcept {
     thread_local worker_context* t_worker_ctx{nullptr};
     return t_worker_ctx;
@@ -245,13 +255,11 @@ void thread_pool::thread_function(const id_type thread_id) {
                 task = move(**ptr);
                 global_task_count_.fetch_sub(1, memory_order_relaxed);
             } else if (global_task_count_.load(memory_order_acquire) > 0) {
-                // The counter indicates tasks are pending but try_pop
-                // returned empty.  This occurs with the lock-free queue
-                // when a producer has stored data in the tail node but
-                // not yet advanced the tail pointer (transient empty
-                // window).  Brief spin-and-retry before falling through
-                // to the idle path so that we do not escalate to deep
-                // sleep while tasks are actually available.
+                // The counter indicates tasks are pending but try_pop returned empty.
+                // This occurs with the lock-free queue when a producer has stored data in the tail node but
+                // not yet advanced the tail pointer (transient empty window).
+                // Brief spin-and-retry before falling through to the idle path
+                // so that we do not escalate to deep sleep while tasks are actually available.
                 for (int r = 0; r < 16 && !task; ++r) {
                     this_thread::relax();
                     ptr = global_queue_->try_pop();
@@ -287,16 +295,14 @@ void thread_pool::thread_function(const id_type thread_id) {
         } else {
             ++self.consecutive_idle_count;
 
-            // If the submission counter indicates pending tasks, do
-            // not escalate the idle level — the lock-free queue may be
-            // in a transient empty window (data stored before tail
-            // advanced).  Yield and retry so that we do not drift into
-            // deep sleep while work is available.
+            // If the submission counter indicates pending tasks,
+            // do not escalate the idle level — the lock-free queue may be
+            // in a transient empty window (data stored before tail advanced).
+            // Yield and retry so that we do not drift into deep sleep while work is available.
             //
             // Only applies while the pool is running; when !is_running
-            // we must fall through to the CV-wait path where the exit
-            // check lives, otherwise workers would spin forever during
-            // shutdown.
+            // we must fall through to the CV-wait path where the exit check lives,
+            // otherwise workers would spin forever during shutdown.
             if (is_running_.load(memory_order_relaxed) && global_task_count_.load(memory_order_acquire) > 0) {
                 this_thread::yield();
                 continue;
@@ -325,8 +331,8 @@ void thread_pool::thread_function(const id_type thread_id) {
                         worker_contexts_ptr_[thread_id].store(nullptr, memory_order_release);
                     }
                     worker_contexts_.erase(thread_id);
+                    threads_map_.erase(thread_id);
                 }
-                threads_map_.erase(thread_id);
                 if (threads_map_.empty()) {
                     exit_cond_.notify_all();
                 }
@@ -347,8 +353,8 @@ void thread_pool::thread_function(const id_type thread_id) {
                             worker_contexts_ptr_[thread_id].store(nullptr, memory_order_release);
                         }
                         worker_contexts_.erase(thread_id);
+                        threads_map_.erase(thread_id);
                     }
-                    threads_map_.erase(thread_id);
                     if (threads_map_.empty()) {
                         exit_cond_.notify_all();
                     }
@@ -547,9 +553,12 @@ bool thread_pool::start(const size_t init_thread_size) {
             }
         }
 
-        threads_map_.emplace(thread_id, move(ptr));
-        threads_map_[thread_id]->start();
-        threads_map_[thread_id]->detach();
+        {
+            lock<mutex> ctx_lock(worker_contexts_mtx_);
+            auto result = threads_map_.emplace(thread_id, move(ptr));
+            result.first->second->start();
+            result.first->second->detach();
+        }
     }
 
     this_thread::sleep_for_ms(5);

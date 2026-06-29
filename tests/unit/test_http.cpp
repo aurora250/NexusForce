@@ -24,7 +24,7 @@
 #include <NeForce/network/http/chunked_reader.hpp>
 #include <NeForce/network/http/async_filter.hpp>
 #include <NeForce/network/http/http2_protocol.hpp>
-#include <NeForce/network/http/byte_cursor.hpp>
+#include <NeForce/core/memory/byte_cursor.hpp>
 #include <NeForce/network/http/async_filter.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;

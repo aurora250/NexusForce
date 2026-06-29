@@ -1,5 +1,5 @@
 #include <NeForce/core/utility/packages.hpp>
-#include <NeForce/network/http/byte_cursor.hpp>
+#include <NeForce/core/memory/byte_cursor.hpp>
 #include <NeForce/network/http/http2_connection.hpp>
 #include <algorithm>
 NEFORCE_BEGIN_NAMESPACE__

@@ -86,7 +86,7 @@ NEFORCE_BEGIN_INNER__
 template <size_t Size>
 struct atomic_load_verifier {
     template <typename T>
-    static void verify(const volatile T*, remove_volatile_t<T>&) noexcept {}
+    static void verify(const volatile T* /*unused*/, remove_volatile_t<T>& /*unused*/) noexcept {}
 };
 
 #ifdef NEFORCE_COMPILER_MSVC

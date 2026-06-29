@@ -143,7 +143,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **停止令牌** - 可取消的异步操作 `stop_token`/`stop_source`/`stop_callback`
 - **同步原语** - 互斥锁 `mutex`、读写锁 `shared_mutex`、信号量 `semaphore`/`atomic_semaphore`、线程屏障 `barrier`与闩锁 `latch`
 - **原子操作** - 原子类型 `atomic`、原子FUTEX `atomic_futex`、全局原子操作函数体系
-- **多策略线程** - 通用线程 `thread`、携带停止令牌的作用域线程 `scoped_thread`、手动开启的惰性线程 `lazy_thread`
+- **多策略线程** - 通用线程 `thread`、携带停止令牌的作用域线程 `scope_thread`、手动开启的惰性线程 `lazy_thread`
 - **基本异步模型** - `async` 及其配套的 `future`/`promise`/`packaged_task` 结构
 - **危险指针** - 无锁数据结构的内存管理 `hazard_ptr`/`hazard_pointer_domain`
 

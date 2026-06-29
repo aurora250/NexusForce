@@ -71,7 +71,7 @@ public:
      * 用于标识线程，支持哈希和比较操作。
      */
     struct id : ihashable<id> {
-    private:
+    public:
         /**
          * @brief 系统线程标识符类型
          */
@@ -82,7 +82,8 @@ public:
                 ::pthread_t;
 #endif
 
-        native_id_type id_{}; ///< 系统线程标识符
+    private:
+        native_id_type id_{0}; ///< 系统线程标识符
 
         friend class thread;
 
@@ -90,20 +91,20 @@ public:
         /**
          * @brief 默认构造函数
          */
-        id() noexcept = default;
+        constexpr id() noexcept = default;
 
         /**
          * @brief 从原生ID构造
          * @param id 原生线程ID
          */
-        explicit id(const native_id_type id) noexcept :
+        explicit constexpr id(const native_id_type id) noexcept :
         id_(id) {}
 
         /**
          * @brief 获取原生线程ID
          * @return 原生线程ID
          */
-        NEFORCE_NODISCARD native_id_type native_handle() const noexcept { return id_; }
+        NEFORCE_NODISCARD constexpr native_id_type native_handle() const noexcept { return id_; }
 
         /**
          * @brief 计算哈希值

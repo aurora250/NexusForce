@@ -1,5 +1,5 @@
 #include <NeForce/core/numeric/random.hpp>
-#include <NeForce/network/http/byte_cursor.hpp>
+#include <NeForce/core/memory/byte_cursor.hpp>
 #include <NeForce/network/http/websocket.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__

@@ -34,6 +34,11 @@
 - 添加缓冲区链 `buffer_chain`
 - 添加异步事件循环 `event_loop`
 - 添加 `http_client_request` 的 `scheme` 字段，支持基于 scheme 的 SSL 自动检测
+- 添加稀疏容器 `sparse_vector`，基于排序扁平数组的关联容器基类，支持二分查找 O(log n) 定位与 O(1) 缓存友好迭代
+- 添加 `sparse_set`，基于 `sparse_vector` 的唯一键集合容器
+- 添加 `sparse_map`，基于 `sparse_vector` 的唯一键映射容器，支持 `operator[]` / `at()` 访问
+- 添加 `sparse_multiset`，基于 `sparse_vector` 的可重复键集合容器
+- 添加 `sparse_multimap`，基于 `sparse_vector` 的可重复键映射容器
 
 ### 🔧 Improvements
 - `char_traits_find` 窄字符子串搜索采用 Boyer-Moore-Horspool 算法，平均 O(n) 复杂度
@@ -92,6 +97,7 @@
 - 修复 `binary_serializer::deserialize()` 中 `be_to_host(read_beXX())` 双重字节序转换导致整数损坏
 - 修复 `dynamic_library::load_by_name()` 在 Linux 上对含版本后缀的名称（如 `libpthread.so.0`）错误追加 `.so` 后缀的问题
 - 修复 `share_memory::map()` 在只读访问模式下因 `__atomic_compare_exchange_n` 在 x86 上失败时仍执行写入（`lock cmpxchg`）导致 SIGSEGV 的问题
+- 修复 `thread_pool` 在 cached 模式下因 `thread_pool_id_generator` 的 inline 函数中 `static atomic` 在 DLL/EXE 边界产生双实例，导致线程 ID 冲突引发 `lazy_thread::start()` 空函数崩溃的问题
 
 ## [1.0.0-beta] - 2026-05-18
 

@@ -7,6 +7,10 @@
 #include <NeForce/core/container/unordered_multimap.hpp>
 #include <NeForce/core/container/unordered_multiset.hpp>
 #include <NeForce/core/container/unordered_set.hpp>
+#include <NeForce/core/container/sparse_map.hpp>
+#include <NeForce/core/container/sparse_multimap.hpp>
+#include <NeForce/core/container/sparse_multiset.hpp>
+#include <NeForce/core/container/sparse_set.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
@@ -3234,4 +3238,1764 @@ TEST_F(UnorderedMultisetTest, LargeInsertWithDuplicates) {
     EXPECT_EQ(ums.size(), count);
     EXPECT_EQ(ums.count(0), 50);
     EXPECT_EQ(ums.count(5), 50);
+}
+
+class SparseMapTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+TEST_F(SparseMapTest, DefaultConstructor) {
+    sparse_map<int, string> m;
+    EXPECT_TRUE(m.empty());
+    EXPECT_EQ(m.size(), 0);
+}
+
+TEST_F(SparseMapTest, ConstructorWithCompare) {
+    sparse_map<int, string, greater<int>> m;
+    EXPECT_TRUE(m.empty());
+    m.insert({3, "three"});
+    m.insert({1, "one"});
+    m.insert({2, "two"});
+    auto it = m.begin();
+    EXPECT_EQ(it->first, 3);
+    ++it;
+    EXPECT_EQ(it->first, 2);
+    ++it;
+    EXPECT_EQ(it->first, 1);
+}
+
+TEST_F(SparseMapTest, InitializerListConstructor) {
+    sparse_map<int, string> m = {{1, "one"}, {2, "two"}, {3, "three"}};
+    EXPECT_EQ(m.size(), 3);
+    EXPECT_EQ(m[1], "one");
+    EXPECT_EQ(m[2], "two");
+    EXPECT_EQ(m[3], "three");
+}
+
+TEST_F(SparseMapTest, InitializerListConstructorWithCompare) {
+    sparse_map<int, string, greater<int>> m = {{1, "one"}, {2, "two"}};
+    EXPECT_EQ(m.size(), 2);
+}
+
+TEST_F(SparseMapTest, InitializerListAssignment) {
+    sparse_map<int, string> m;
+    m = {{1, "one"}, {2, "two"}, {3, "three"}};
+    EXPECT_EQ(m.size(), 3);
+    EXPECT_EQ(m[1], "one");
+}
+
+TEST_F(SparseMapTest, RangeConstructor) {
+    vector<pair<int, string>> vec = {{1, "one"}, {2, "two"}, {3, "three"}};
+    sparse_map<int, string> m(vec.begin(), vec.end());
+    EXPECT_EQ(m.size(), 3);
+    EXPECT_EQ(m[1], "one");
+}
+
+TEST_F(SparseMapTest, RangeConstructorWithCompare) {
+    vector<pair<int, string>> vec = {{1, "one"}, {2, "two"}};
+    sparse_map<int, string, greater<int>> m(vec.begin(), vec.end(), greater<int>());
+    EXPECT_EQ(m.size(), 2);
+}
+
+TEST_F(SparseMapTest, CopyConstructor) {
+    sparse_map<int, string> m1 = {{1, "one"}, {2, "two"}, {3, "three"}};
+    sparse_map<int, string> m2(m1);
+    EXPECT_EQ(m2.size(), 3);
+    EXPECT_EQ(m2[1], "one");
+    EXPECT_EQ(m2[2], "two");
+    EXPECT_EQ(m2[3], "three");
+}
+
+TEST_F(SparseMapTest, CopyAssignment) {
+    sparse_map<int, string> m1 = {{1, "one"}, {2, "two"}};
+    sparse_map<int, string> m2 = {{3, "three"}, {4, "four"}, {5, "five"}};
+    m2 = m1;
+    EXPECT_EQ(m2.size(), 2);
+    EXPECT_EQ(m2[1], "one");
+}
+
+TEST_F(SparseMapTest, CopyAssignmentSelf) {
+    sparse_map<int, string> m = {{1, "one"}, {2, "two"}};
+    m = m;
+    EXPECT_EQ(m.size(), 2);
+}
+
+TEST_F(SparseMapTest, MoveConstructor) {
+    sparse_map<int, string> m1 = {{1, "one"}, {2, "two"}, {3, "three"}};
+    sparse_map<int, string> m2(move(m1));
+    EXPECT_EQ(m2.size(), 3);
+    EXPECT_EQ(m2[1], "one");
+}
+
+TEST_F(SparseMapTest, MoveAssignment) {
+    sparse_map<int, string> m1 = {{1, "one"}, {2, "two"}};
+    sparse_map<int, string> m2 = {{3, "three"}};
+    m2 = move(m1);
+    EXPECT_EQ(m2.size(), 2);
+    EXPECT_EQ(m2[1], "one");
+}
+
+TEST_F(SparseMapTest, MoveAssignmentSelf) {
+    sparse_map<int, string> m = {{1, "one"}};
+    m = move(m);
+    EXPECT_EQ(m.size(), 1);
+}
+
+TEST_F(SparseMapTest, BeginEnd) {
+    sparse_map<int, string> m = {{1, "one"}, {2, "two"}, {3, "three"}};
+    auto it = m.begin();
+    EXPECT_EQ(it->first, 1);
+    EXPECT_EQ(it->second, "one");
+    ++it;
+    EXPECT_EQ(it->first, 2);
+    ++it;
+    EXPECT_EQ(it->first, 3);
+    ++it;
+    EXPECT_EQ(it, m.end());
+}
+
+TEST_F(SparseMapTest, ConstBeginEnd) {
+    const sparse_map<int, string> m = {{1, "one"}, {2, "two"}};
+    auto it = m.begin();
+    EXPECT_EQ(it->first, 1);
+}
+
+TEST_F(SparseMapTest, CbeginCend) {
+    sparse_map<int, string> m = {{1, "one"}, {2, "two"}};
+    auto it = m.cbegin();
+    EXPECT_EQ(it->first, 1);
+}
+
+TEST_F(SparseMapTest, ReverseBeginEnd) {
+    sparse_map<int, string> m = {{1, "one"}, {2, "two"}, {3, "three"}};
+    auto rit = m.rbegin();
+    EXPECT_EQ(rit->first, 3);
+    ++rit;
+    EXPECT_EQ(rit->first, 2);
+    ++rit;
+    EXPECT_EQ(rit->first, 1);
+    ++rit;
+    EXPECT_EQ(rit, m.rend());
+}
+
+TEST_F(SparseMapTest, ConstReverseBeginEnd) {
+    const sparse_map<int, string> m = {{1, "one"}, {2, "two"}};
+    auto rit = m.rbegin();
+    EXPECT_EQ(rit->first, 2);
+}
+
+TEST_F(SparseMapTest, CrbeginCrend) {
+    sparse_map<int, string> m = {{1, "one"}, {2, "two"}};
+    auto rit = m.crbegin();
+    EXPECT_EQ(rit->first, 2);
+}
+
+TEST_F(SparseMapTest, Size) {
+    sparse_map<int, int> m;
+    EXPECT_EQ(m.size(), 0);
+    m.insert({1, 10});
+    EXPECT_EQ(m.size(), 1);
+    m.insert({2, 20});
+    EXPECT_EQ(m.size(), 2);
+}
+
+TEST_F(SparseMapTest, MaxSize) {
+    sparse_map<int, int> m;
+    EXPECT_GT(m.max_size(), 0);
+}
+
+TEST_F(SparseMapTest, Empty) {
+    sparse_map<int, int> m;
+    EXPECT_TRUE(m.empty());
+    m.insert({1, 10});
+    EXPECT_FALSE(m.empty());
+    m.erase(1);
+    EXPECT_TRUE(m.empty());
+}
+
+TEST_F(SparseMapTest, KeyComp) {
+    sparse_map<int, string> m;
+    auto comp = m.key_comp();
+    EXPECT_TRUE(comp(1, 2));
+    EXPECT_FALSE(comp(2, 1));
+    EXPECT_FALSE(comp(1, 1));
+}
+
+TEST_F(SparseMapTest, ValueComp) {
+    sparse_map<int, string> m;
+    auto comp = m.value_comp();
+    pair<const int, string> p1(1, "a");
+    pair<const int, string> p2(2, "b");
+    EXPECT_TRUE(comp(p1, p2));
+}
+
+TEST_F(SparseMapTest, InsertValue) {
+    sparse_map<int, string> m;
+    auto result = m.insert({1, "one"});
+    EXPECT_TRUE(result.second);
+    EXPECT_EQ(result.first->first, 1);
+    EXPECT_EQ(result.first->second, "one");
+}
+
+TEST_F(SparseMapTest, InsertDuplicateKey) {
+    sparse_map<int, string> m;
+    m.insert({1, "one"});
+    auto result = m.insert({1, "uno"});
+    EXPECT_FALSE(result.second);
+    EXPECT_EQ(m[1], "one");
+}
+
+TEST_F(SparseMapTest, InsertRvalue) {
+    sparse_map<int, string> m;
+    pair<int, string> p(1, "one");
+    m.insert(move(p));
+    EXPECT_EQ(m[1], "one");
+}
+
+TEST_F(SparseMapTest, InsertWithHint) {
+    sparse_map<int, string> m = {{1, "one"}, {3, "three"}};
+    auto it = m.insert(m.begin(), {2, "two"});
+    EXPECT_EQ(it->first, 2);
+    EXPECT_EQ(m.size(), 3);
+}
+
+TEST_F(SparseMapTest, InsertWithHintRvalue) {
+    sparse_map<int, string> m = {{1, "one"}, {3, "three"}};
+    pair<int, string> p(2, "two");
+    auto it = m.insert(m.begin(), move(p));
+    EXPECT_EQ(it->first, 2);
+}
+
+TEST_F(SparseMapTest, InsertRange) {
+    sparse_map<int, string> m;
+    vector<pair<int, string>> vec = {{1, "one"}, {2, "two"}, {3, "three"}};
+    m.insert(vec.begin(), vec.end());
+    EXPECT_EQ(m.size(), 3);
+}
+
+TEST_F(SparseMapTest, Emplace) {
+    sparse_map<int, string> m;
+    auto result = m.emplace(1, "one");
+    EXPECT_TRUE(result.second);
+    EXPECT_EQ(m[1], "one");
+}
+
+TEST_F(SparseMapTest, EmplaceDuplicate) {
+    sparse_map<int, string> m;
+    m.emplace(1, "one");
+    auto result = m.emplace(1, "uno");
+    EXPECT_FALSE(result.second);
+    EXPECT_EQ(m[1], "one");
+}
+
+TEST_F(SparseMapTest, EmplaceHint) {
+    sparse_map<int, string> m = {{1, "one"}, {3, "three"}};
+    auto it = m.emplace_hint(m.begin(), 2, "two");
+    EXPECT_EQ(it->first, 2);
+    EXPECT_EQ(m.size(), 3);
+}
+
+TEST_F(SparseMapTest, EraseByIterator) {
+    sparse_map<int, string> m = {{1, "one"}, {2, "two"}, {3, "three"}};
+    auto it = m.find(2);
+    m.erase(it);
+    EXPECT_EQ(m.size(), 2);
+    EXPECT_EQ(m.find(2), m.end());
+}
+
+TEST_F(SparseMapTest, EraseByKey) {
+    sparse_map<int, string> m = {{1, "one"}, {2, "two"}};
+    size_t count = m.erase(1);
+    EXPECT_EQ(count, 1);
+    EXPECT_EQ(m.size(), 1);
+}
+
+TEST_F(SparseMapTest, EraseByNonExistentKey) {
+    sparse_map<int, string> m = {{1, "one"}};
+    size_t count = m.erase(99);
+    EXPECT_EQ(count, 0);
+    EXPECT_EQ(m.size(), 1);
+}
+
+TEST_F(SparseMapTest, EraseRange) {
+    sparse_map<int, string> m = {{1, "one"}, {2, "two"}, {3, "three"}, {4, "four"}};
+    auto first = m.find(2);
+    auto last = m.find(4);
+    m.erase(first, last);
+    EXPECT_EQ(m.size(), 2);
+    EXPECT_NE(m.find(1), m.end());
+    EXPECT_NE(m.find(4), m.end());
+}
+
+TEST_F(SparseMapTest, Clear) {
+    sparse_map<int, int> m = {{1, 10}, {2, 20}, {3, 30}};
+    m.clear();
+    EXPECT_TRUE(m.empty());
+    EXPECT_EQ(m.size(), 0);
+}
+
+TEST_F(SparseMapTest, Find) {
+    sparse_map<int, string> m = {{1, "one"}, {2, "two"}, {3, "three"}};
+    auto it = m.find(2);
+    EXPECT_NE(it, m.end());
+    EXPECT_EQ(it->second, "two");
+}
+
+TEST_F(SparseMapTest, FindNonExistent) {
+    sparse_map<int, string> m = {{1, "one"}};
+    auto it = m.find(99);
+    EXPECT_EQ(it, m.end());
+}
+
+TEST_F(SparseMapTest, ConstFind) {
+    const sparse_map<int, string> m = {{1, "one"}, {2, "two"}};
+    auto it = m.find(1);
+    EXPECT_NE(it, m.end());
+}
+
+TEST_F(SparseMapTest, Count) {
+    sparse_map<int, string> m = {{1, "one"}, {2, "two"}};
+    EXPECT_EQ(m.count(1), 1);
+    EXPECT_EQ(m.count(99), 0);
+}
+
+TEST_F(SparseMapTest, LowerBound) {
+    sparse_map<int, string> m = {{1, "one"}, {3, "three"}, {5, "five"}};
+    auto it = m.lower_bound(3);
+    EXPECT_EQ(it->first, 3);
+    it = m.lower_bound(4);
+    EXPECT_EQ(it->first, 5);
+    it = m.lower_bound(6);
+    EXPECT_EQ(it, m.end());
+}
+
+TEST_F(SparseMapTest, ConstLowerBound) {
+    const sparse_map<int, string> m = {{1, "one"}, {3, "three"}};
+    auto it = m.lower_bound(2);
+    EXPECT_EQ(it->first, 3);
+}
+
+TEST_F(SparseMapTest, UpperBound) {
+    sparse_map<int, string> m = {{1, "one"}, {3, "three"}, {5, "five"}};
+    auto it = m.upper_bound(3);
+    EXPECT_EQ(it->first, 5);
+    it = m.upper_bound(5);
+    EXPECT_EQ(it, m.end());
+}
+
+TEST_F(SparseMapTest, ConstUpperBound) {
+    const sparse_map<int, string> m = {{1, "one"}, {3, "three"}};
+    auto it = m.upper_bound(1);
+    EXPECT_EQ(it->first, 3);
+}
+
+TEST_F(SparseMapTest, EqualRange) {
+    sparse_map<int, string> m = {{1, "one"}, {3, "three"}, {5, "five"}};
+    auto range = m.equal_range(3);
+    EXPECT_EQ(range.first->first, 3);
+    EXPECT_EQ(range.second->first, 5);
+}
+
+TEST_F(SparseMapTest, ConstEqualRange) {
+    const sparse_map<int, string> m = {{1, "one"}, {3, "three"}};
+    auto range = m.equal_range(1);
+    EXPECT_EQ(range.first->first, 1);
+}
+
+TEST_F(SparseMapTest, SubscriptOperator) {
+    sparse_map<int, string> m;
+    m[1] = "one";
+    EXPECT_EQ(m[1], "one");
+    m[1] = "uno";
+    EXPECT_EQ(m[1], "uno");
+}
+
+TEST_F(SparseMapTest, SubscriptOperatorInsertDefault) {
+    sparse_map<int, int> m;
+    EXPECT_EQ(m[1], 0);
+    m[1] = 42;
+    EXPECT_EQ(m[1], 42);
+}
+
+TEST_F(SparseMapTest, SubscriptOperatorRvalueKey) {
+    sparse_map<int, string> m;
+    m[1] = "one";
+    EXPECT_EQ(m[1], "one");
+}
+
+TEST_F(SparseMapTest, At) {
+    sparse_map<int, string> m = {{1, "one"}, {2, "two"}};
+    EXPECT_EQ(m.at(1), "one");
+    m.at(1) = "uno";
+    EXPECT_EQ(m.at(1), "uno");
+}
+
+TEST_F(SparseMapTest, ConstAt) {
+    const sparse_map<int, string> m = {{1, "one"}};
+    EXPECT_EQ(m.at(1), "one");
+}
+
+TEST_F(SparseMapTest, AtNonExistent) {
+    sparse_map<int, string> m;
+    EXPECT_THROW(ignore = m.at(1), value_exception);
+}
+
+TEST_F(SparseMapTest, Swap) {
+    sparse_map<int, string> m1 = {{1, "one"}, {2, "two"}};
+    sparse_map<int, string> m2 = {{3, "three"}, {4, "four"}, {5, "five"}};
+    m1.swap(m2);
+    EXPECT_EQ(m1.size(), 3);
+    EXPECT_EQ(m2.size(), 2);
+    EXPECT_EQ(m2[1], "one");
+}
+
+TEST_F(SparseMapTest, EqualTo) {
+    sparse_map<int, string> m1 = {{1, "one"}, {2, "two"}};
+    sparse_map<int, string> m2 = {{1, "one"}, {2, "two"}};
+    sparse_map<int, string> m3 = {{1, "one"}, {2, "deux"}};
+    EXPECT_TRUE(m1.equal_to(m2));
+    EXPECT_FALSE(m1.equal_to(m3));
+}
+
+TEST_F(SparseMapTest, LessThan) {
+    sparse_map<int, string> m1 = {{1, "one"}, {2, "two"}};
+    sparse_map<int, string> m2 = {{1, "one"}, {3, "three"}};
+    EXPECT_TRUE(m1.less_than(m2));
+    EXPECT_FALSE(m2.less_than(m1));
+}
+
+TEST_F(SparseMapTest, EqualityOperator) {
+    sparse_map<int, string> m1 = {{1, "one"}, {2, "two"}};
+    sparse_map<int, string> m2 = {{1, "one"}, {2, "two"}};
+    sparse_map<int, string> m3 = {{1, "one"}};
+    EXPECT_TRUE(m1 == m2);
+    EXPECT_FALSE(m1 == m3);
+}
+
+TEST_F(SparseMapTest, InequalityOperator) {
+    sparse_map<int, string> m1 = {{1, "one"}};
+    sparse_map<int, string> m2 = {{2, "two"}};
+    EXPECT_TRUE(m1 != m2);
+}
+
+TEST_F(SparseMapTest, LessThanOperator) {
+    sparse_map<int, string> m1 = {{1, "one"}};
+    sparse_map<int, string> m2 = {{2, "two"}};
+    EXPECT_TRUE(m1 < m2);
+}
+
+TEST_F(SparseMapTest, GreaterThanOperator) {
+    sparse_map<int, string> m1 = {{2, "two"}};
+    sparse_map<int, string> m2 = {{1, "one"}};
+    EXPECT_TRUE(m1 > m2);
+}
+
+TEST_F(SparseMapTest, StringKey) {
+    sparse_map<string, int> m;
+    m["hello"] = 1;
+    m["world"] = 2;
+    EXPECT_EQ(m["hello"], 1);
+    EXPECT_EQ(m["world"], 2);
+    EXPECT_EQ(m.size(), 2);
+}
+
+TEST_F(SparseMapTest, LargeInsert) {
+    sparse_map<int, int> m;
+    const int count = 1000;
+    for (int i = 0; i < count; ++i) {
+        m.insert({i, i * 10});
+    }
+    EXPECT_EQ(m.size(), count);
+    for (int i = 0; i < count; ++i) {
+        EXPECT_EQ(m[i], i * 10);
+    }
+}
+
+TEST_F(SparseMapTest, OrderPreservation) {
+    sparse_map<int, string> m;
+    m.insert({5, "five"});
+    m.insert({1, "one"});
+    m.insert({3, "three"});
+    m.insert({2, "two"});
+    m.insert({4, "four"});
+    int expected = 1;
+    for (const auto& p: m) {
+        EXPECT_EQ(p.first, expected);
+        ++expected;
+    }
+}
+
+TEST_F(SparseMapTest, RangeBasedForLoop) {
+    sparse_map<int, string> m = {{1, "one"}, {2, "two"}, {3, "three"}};
+    int sum = 0;
+    for (const auto& p: m) {
+        sum += p.first;
+    }
+    EXPECT_EQ(sum, 6);
+}
+
+TEST_F(SparseMapTest, Reserve) {
+    sparse_map<int, string> m;
+    m.reserve(100);
+    EXPECT_GE(m.capacity(), 100);
+}
+
+TEST_F(SparseMapTest, ShrinkToFit) {
+    sparse_map<int, string> m;
+    m.reserve(100);
+    m.insert({1, "one"});
+    m.insert({2, "two"});
+    m.shrink_to_fit();
+    EXPECT_LE(m.capacity(), 100);
+}
+
+class SparseSetTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+TEST_F(SparseSetTest, DefaultConstructor) {
+    sparse_set<int> s;
+    EXPECT_TRUE(s.empty());
+    EXPECT_EQ(s.size(), 0);
+}
+
+TEST_F(SparseSetTest, ConstructorWithCompare) {
+    sparse_set<int, greater<int>> s;
+    EXPECT_TRUE(s.empty());
+    s.insert(3);
+    s.insert(1);
+    s.insert(2);
+    auto it = s.begin();
+    EXPECT_EQ(*it, 3);
+    ++it;
+    EXPECT_EQ(*it, 2);
+    ++it;
+    EXPECT_EQ(*it, 1);
+}
+
+TEST_F(SparseSetTest, InitializerListConstructor) {
+    sparse_set<int> s = {1, 2, 3, 4, 5};
+    EXPECT_EQ(s.size(), 5);
+    EXPECT_NE(s.find(1), s.end());
+    EXPECT_NE(s.find(5), s.end());
+}
+
+TEST_F(SparseSetTest, InitializerListConstructorWithCompare) {
+    sparse_set<int, greater<int>> s = {1, 2, 3};
+    EXPECT_EQ(s.size(), 3);
+    auto it = s.begin();
+    EXPECT_EQ(*it, 3);
+}
+
+TEST_F(SparseSetTest, InitializerListAssignment) {
+    sparse_set<int> s;
+    s = {10, 20, 30};
+    EXPECT_EQ(s.size(), 3);
+    EXPECT_NE(s.find(10), s.end());
+}
+
+TEST_F(SparseSetTest, RangeConstructor) {
+    vector<int> vec = {5, 2, 8, 1, 9};
+    sparse_set<int> s(vec.begin(), vec.end());
+    EXPECT_EQ(s.size(), 5);
+    vector<int> expected = {1, 2, 5, 8, 9};
+    auto it = expected.begin();
+    for (auto val: s) {
+        EXPECT_EQ(val, *it);
+        ++it;
+    }
+}
+
+TEST_F(SparseSetTest, RangeConstructorWithCompare) {
+    vector<int> vec = {1, 2, 3};
+    sparse_set<int, greater<int>> s(vec.begin(), vec.end(), greater<int>());
+    EXPECT_EQ(s.size(), 3);
+}
+
+TEST_F(SparseSetTest, CopyConstructor) {
+    sparse_set<int> s1 = {1, 2, 3};
+    sparse_set<int> s2(s1);
+    EXPECT_EQ(s2.size(), 3);
+    EXPECT_NE(s2.find(1), s2.end());
+}
+
+TEST_F(SparseSetTest, CopyAssignment) {
+    sparse_set<int> s1 = {1, 2, 3};
+    sparse_set<int> s2 = {4, 5};
+    s2 = s1;
+    EXPECT_EQ(s2.size(), 3);
+    EXPECT_NE(s2.find(1), s2.end());
+}
+
+TEST_F(SparseSetTest, MoveConstructor) {
+    sparse_set<int> s1 = {1, 2, 3};
+    sparse_set<int> s2(move(s1));
+    EXPECT_EQ(s2.size(), 3);
+    EXPECT_NE(s2.find(2), s2.end());
+}
+
+TEST_F(SparseSetTest, MoveAssignment) {
+    sparse_set<int> s1 = {1, 2, 3};
+    sparse_set<int> s2 = {4, 5};
+    s2 = move(s1);
+    EXPECT_EQ(s2.size(), 3);
+}
+
+TEST_F(SparseSetTest, BeginEnd) {
+    sparse_set<int> s = {3, 1, 2};
+    auto it = s.begin();
+    EXPECT_EQ(*it, 1);
+    ++it;
+    EXPECT_EQ(*it, 2);
+    ++it;
+    EXPECT_EQ(*it, 3);
+    ++it;
+    EXPECT_EQ(it, s.end());
+}
+
+TEST_F(SparseSetTest, CbeginCend) {
+    sparse_set<int> s = {3, 1, 2};
+    auto it = s.cbegin();
+    EXPECT_EQ(*it, 1);
+}
+
+TEST_F(SparseSetTest, ReverseBeginEnd) {
+    sparse_set<int> s = {1, 2, 3};
+    auto rit = s.rbegin();
+    EXPECT_EQ(*rit, 3);
+    ++rit;
+    EXPECT_EQ(*rit, 2);
+    ++rit;
+    EXPECT_EQ(*rit, 1);
+    ++rit;
+    EXPECT_EQ(rit, s.rend());
+}
+
+TEST_F(SparseSetTest, CrbeginCrend) {
+    sparse_set<int> s = {1, 2, 3};
+    auto rit = s.crbegin();
+    EXPECT_EQ(*rit, 3);
+}
+
+TEST_F(SparseSetTest, Size) {
+    sparse_set<int> s;
+    EXPECT_EQ(s.size(), 0);
+    s.insert(1);
+    EXPECT_EQ(s.size(), 1);
+    s.insert(2);
+    EXPECT_EQ(s.size(), 2);
+}
+
+TEST_F(SparseSetTest, MaxSize) {
+    sparse_set<int> s;
+    EXPECT_GT(s.max_size(), 0);
+}
+
+TEST_F(SparseSetTest, Empty) {
+    sparse_set<int> s;
+    EXPECT_TRUE(s.empty());
+    s.insert(1);
+    EXPECT_FALSE(s.empty());
+    s.erase(1);
+    EXPECT_TRUE(s.empty());
+}
+
+TEST_F(SparseSetTest, KeyComp) {
+    sparse_set<int> s;
+    auto comp = s.key_comp();
+    EXPECT_TRUE(comp(1, 2));
+    EXPECT_FALSE(comp(2, 1));
+}
+
+TEST_F(SparseSetTest, ValueComp) {
+    sparse_set<int> s;
+    auto comp = s.value_comp();
+    EXPECT_TRUE(comp(1, 2));
+}
+
+TEST_F(SparseSetTest, InsertValue) {
+    sparse_set<int> s;
+    auto result = s.insert(42);
+    EXPECT_TRUE(result.second);
+    EXPECT_EQ(*result.first, 42);
+}
+
+TEST_F(SparseSetTest, InsertDuplicate) {
+    sparse_set<int> s;
+    s.insert(42);
+    auto result = s.insert(42);
+    EXPECT_FALSE(result.second);
+    EXPECT_EQ(s.size(), 1);
+}
+
+TEST_F(SparseSetTest, InsertRvalue) {
+    sparse_set<string> s;
+    string str = "hello";
+    s.insert(move(str));
+    EXPECT_EQ(s.size(), 1);
+}
+
+TEST_F(SparseSetTest, InsertWithHint) {
+    sparse_set<int> s = {1, 3, 5};
+    auto it = s.insert(s.begin(), 2);
+    EXPECT_EQ(*it, 2);
+    EXPECT_EQ(s.size(), 4);
+}
+
+TEST_F(SparseSetTest, InsertWithHintRvalue) {
+    sparse_set<int> s = {1, 3};
+    auto it = s.insert(s.begin(), 2);
+    EXPECT_EQ(*it, 2);
+}
+
+TEST_F(SparseSetTest, InsertRange) {
+    sparse_set<int> s;
+    vector<int> vec = {5, 2, 8, 1, 9};
+    s.insert(vec.begin(), vec.end());
+    EXPECT_EQ(s.size(), 5);
+}
+
+TEST_F(SparseSetTest, Emplace) {
+    sparse_set<int> s;
+    auto result = s.emplace(42);
+    EXPECT_TRUE(result.second);
+    EXPECT_EQ(*result.first, 42);
+}
+
+TEST_F(SparseSetTest, EmplaceDuplicate) {
+    sparse_set<int> s;
+    s.emplace(42);
+    auto result = s.emplace(42);
+    EXPECT_FALSE(result.second);
+}
+
+TEST_F(SparseSetTest, EmplaceHint) {
+    sparse_set<int> s = {1, 3, 5};
+    auto it = s.emplace_hint(s.begin(), 2);
+    EXPECT_EQ(*it, 2);
+}
+
+TEST_F(SparseSetTest, EraseByIterator) {
+    sparse_set<int> s = {1, 2, 3};
+    auto it = s.find(2);
+    s.erase(it);
+    EXPECT_EQ(s.size(), 2);
+    EXPECT_EQ(s.find(2), s.end());
+}
+
+TEST_F(SparseSetTest, EraseByKey) {
+    sparse_set<int> s = {1, 2, 3};
+    size_t count = s.erase(2);
+    EXPECT_EQ(count, 1);
+    EXPECT_EQ(s.size(), 2);
+}
+
+TEST_F(SparseSetTest, EraseByNonExistentKey) {
+    sparse_set<int> s = {1, 2};
+    size_t count = s.erase(99);
+    EXPECT_EQ(count, 0);
+}
+
+TEST_F(SparseSetTest, EraseRange) {
+    sparse_set<int> s = {1, 2, 3, 4, 5};
+    auto first = s.find(2);
+    auto last = s.find(4);
+    s.erase(first, last);
+    EXPECT_EQ(s.size(), 3);
+    EXPECT_NE(s.find(1), s.end());
+    EXPECT_NE(s.find(4), s.end());
+    EXPECT_NE(s.find(5), s.end());
+}
+
+TEST_F(SparseSetTest, Clear) {
+    sparse_set<int> s = {1, 2, 3};
+    s.clear();
+    EXPECT_TRUE(s.empty());
+    EXPECT_EQ(s.size(), 0);
+}
+
+TEST_F(SparseSetTest, Find) {
+    sparse_set<int> s = {1, 2, 3};
+    auto it = s.find(2);
+    EXPECT_NE(it, s.end());
+    EXPECT_EQ(*it, 2);
+}
+
+TEST_F(SparseSetTest, FindNonExistent) {
+    sparse_set<int> s = {1, 2};
+    auto it = s.find(99);
+    EXPECT_EQ(it, s.end());
+}
+
+TEST_F(SparseSetTest, ConstFind) {
+    const sparse_set<int> s = {1, 2, 3};
+    auto it = s.find(1);
+    EXPECT_NE(it, s.end());
+}
+
+TEST_F(SparseSetTest, Count) {
+    sparse_set<int> s = {1, 2, 3};
+    EXPECT_EQ(s.count(2), 1);
+    EXPECT_EQ(s.count(99), 0);
+}
+
+TEST_F(SparseSetTest, LowerBound) {
+    sparse_set<int> s = {1, 3, 5, 7};
+    auto it = s.lower_bound(3);
+    EXPECT_EQ(*it, 3);
+    it = s.lower_bound(4);
+    EXPECT_EQ(*it, 5);
+    it = s.lower_bound(8);
+    EXPECT_EQ(it, s.end());
+}
+
+TEST_F(SparseSetTest, ConstLowerBound) {
+    const sparse_set<int> s = {1, 3, 5};
+    auto it = s.lower_bound(2);
+    EXPECT_EQ(*it, 3);
+}
+
+TEST_F(SparseSetTest, UpperBound) {
+    sparse_set<int> s = {1, 3, 5, 7};
+    auto it = s.upper_bound(3);
+    EXPECT_EQ(*it, 5);
+    it = s.upper_bound(7);
+    EXPECT_EQ(it, s.end());
+}
+
+TEST_F(SparseSetTest, ConstUpperBound) {
+    const sparse_set<int> s = {1, 3, 5};
+    auto it = s.upper_bound(1);
+    EXPECT_EQ(*it, 3);
+}
+
+TEST_F(SparseSetTest, EqualRange) {
+    sparse_set<int> s = {1, 3, 5, 7};
+    auto range = s.equal_range(3);
+    EXPECT_EQ(*range.first, 3);
+    EXPECT_EQ(*range.second, 5);
+}
+
+TEST_F(SparseSetTest, ConstEqualRange) {
+    const sparse_set<int> s = {1, 3, 5};
+    auto range = s.equal_range(1);
+    EXPECT_EQ(*range.first, 1);
+}
+
+TEST_F(SparseSetTest, Swap) {
+    sparse_set<int> s1 = {1, 2, 3};
+    sparse_set<int> s2 = {4, 5, 6, 7};
+    s1.swap(s2);
+    EXPECT_EQ(s1.size(), 4);
+    EXPECT_EQ(s2.size(), 3);
+}
+
+TEST_F(SparseSetTest, EqualTo) {
+    sparse_set<int> s1 = {1, 2, 3};
+    sparse_set<int> s2 = {1, 2, 3};
+    sparse_set<int> s3 = {1, 2, 4};
+    EXPECT_TRUE(s1.equal_to(s2));
+    EXPECT_FALSE(s1.equal_to(s3));
+}
+
+TEST_F(SparseSetTest, LessThan) {
+    sparse_set<int> s1 = {1, 2, 3};
+    sparse_set<int> s2 = {1, 2, 4};
+    EXPECT_TRUE(s1.less_than(s2));
+}
+
+TEST_F(SparseSetTest, EqualityOperator) {
+    sparse_set<int> s1 = {1, 2, 3};
+    sparse_set<int> s2 = {1, 2, 3};
+    sparse_set<int> s3 = {1, 2};
+    EXPECT_TRUE(s1 == s2);
+    EXPECT_FALSE(s1 == s3);
+}
+
+TEST_F(SparseSetTest, InequalityOperator) {
+    sparse_set<int> s1 = {1, 2};
+    sparse_set<int> s2 = {3, 4};
+    EXPECT_TRUE(s1 != s2);
+}
+
+TEST_F(SparseSetTest, LessThanOperator) {
+    sparse_set<int> s1 = {1, 2};
+    sparse_set<int> s2 = {1, 3};
+    EXPECT_TRUE(s1 < s2);
+}
+
+TEST_F(SparseSetTest, GreaterThanOperator) {
+    sparse_set<int> s1 = {1, 3};
+    sparse_set<int> s2 = {1, 2};
+    EXPECT_TRUE(s1 > s2);
+}
+
+TEST_F(SparseSetTest, StringKey) {
+    sparse_set<string> s;
+    s.insert("banana");
+    s.insert("apple");
+    s.insert("cherry");
+    auto it = s.begin();
+    EXPECT_EQ(*it, "apple");
+    ++it;
+    EXPECT_EQ(*it, "banana");
+    ++it;
+    EXPECT_EQ(*it, "cherry");
+}
+
+TEST_F(SparseSetTest, LargeInsert) {
+    sparse_set<int> s;
+    const int count = 1000;
+    for (int i = 0; i < count; ++i) {
+        s.insert(i * 2);
+    }
+    EXPECT_EQ(s.size(), count);
+    EXPECT_EQ(*s.begin(), 0);
+    EXPECT_EQ(*s.rbegin(), (count - 1) * 2);
+}
+
+TEST_F(SparseSetTest, DuplicateValuesIgnored) {
+    sparse_set<int> s;
+    s.insert(1);
+    s.insert(1);
+    s.insert(1);
+    EXPECT_EQ(s.size(), 1);
+}
+
+TEST_F(SparseSetTest, RangeBasedForLoop) {
+    sparse_set<int> s = {1, 2, 3, 4, 5};
+    int sum = 0;
+    for (auto val: s) {
+        sum += val;
+    }
+    EXPECT_EQ(sum, 15);
+}
+
+TEST_F(SparseSetTest, Reserve) {
+    sparse_set<int> s;
+    s.reserve(100);
+    EXPECT_GE(s.capacity(), 100);
+}
+
+class SparseMultimapTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+TEST_F(SparseMultimapTest, DefaultConstructor) {
+    sparse_multimap<int, string> mm;
+    EXPECT_TRUE(mm.empty());
+    EXPECT_EQ(mm.size(), 0);
+}
+
+TEST_F(SparseMultimapTest, ConstructorWithCompare) {
+    sparse_multimap<int, string, greater<int>> mm;
+    EXPECT_TRUE(mm.empty());
+    mm.insert({3, "three"});
+    mm.insert({1, "one"});
+    mm.insert({2, "two"});
+    auto it = mm.begin();
+    EXPECT_EQ(it->first, 3);
+}
+
+TEST_F(SparseMultimapTest, InitializerListConstructor) {
+    sparse_multimap<int, string> mm = {{1, "one"}, {2, "two"}, {2, "deux"}, {3, "three"}};
+    EXPECT_EQ(mm.size(), 4);
+}
+
+TEST_F(SparseMultimapTest, InitializerListAssignment) {
+    sparse_multimap<int, string> mm;
+    mm = {{1, "one"}, {2, "two"}, {2, "second"}};
+    EXPECT_EQ(mm.size(), 3);
+}
+
+TEST_F(SparseMultimapTest, RangeConstructor) {
+    vector<pair<int, string>> vec = {{1, "one"}, {2, "two"}, {2, "deux"}};
+    sparse_multimap<int, string> mm(vec.begin(), vec.end());
+    EXPECT_EQ(mm.size(), 3);
+}
+
+TEST_F(SparseMultimapTest, RangeConstructorWithCompare) {
+    vector<pair<int, string>> vec = {{1, "one"}, {2, "two"}};
+    sparse_multimap<int, string, greater<int>> mm(vec.begin(), vec.end(), greater<int>());
+    EXPECT_EQ(mm.size(), 2);
+}
+
+TEST_F(SparseMultimapTest, CopyConstructor) {
+    sparse_multimap<int, string> mm1 = {{1, "one"}, {2, "two"}, {2, "deux"}};
+    sparse_multimap<int, string> mm2(mm1);
+    EXPECT_EQ(mm2.size(), 3);
+}
+
+TEST_F(SparseMultimapTest, CopyAssignment) {
+    sparse_multimap<int, string> mm1 = {{1, "one"}, {2, "two"}};
+    sparse_multimap<int, string> mm2 = {{3, "three"}};
+    mm2 = mm1;
+    EXPECT_EQ(mm2.size(), 2);
+}
+
+TEST_F(SparseMultimapTest, MoveConstructor) {
+    sparse_multimap<int, string> mm1 = {{1, "one"}, {2, "two"}};
+    sparse_multimap<int, string> mm2(move(mm1));
+    EXPECT_EQ(mm2.size(), 2);
+}
+
+TEST_F(SparseMultimapTest, MoveAssignment) {
+    sparse_multimap<int, string> mm1 = {{1, "one"}};
+    sparse_multimap<int, string> mm2 = {{2, "two"}};
+    mm2 = move(mm1);
+    EXPECT_EQ(mm2.size(), 1);
+}
+
+TEST_F(SparseMultimapTest, BeginEnd) {
+    sparse_multimap<int, string> mm = {{1, "one"}, {2, "two"}, {3, "three"}};
+    auto it = mm.begin();
+    EXPECT_EQ(it->first, 1);
+    ++it;
+    EXPECT_EQ(it->first, 2);
+    ++it;
+    EXPECT_EQ(it->first, 3);
+    ++it;
+    EXPECT_EQ(it, mm.end());
+}
+
+TEST_F(SparseMultimapTest, CbeginCend) {
+    sparse_multimap<int, string> mm = {{1, "one"}, {2, "two"}};
+    auto it = mm.cbegin();
+    EXPECT_EQ(it->first, 1);
+}
+
+TEST_F(SparseMultimapTest, ReverseBeginEnd) {
+    sparse_multimap<int, string> mm = {{1, "one"}, {2, "two"}, {3, "three"}};
+    auto rit = mm.rbegin();
+    EXPECT_EQ(rit->first, 3);
+    ++rit;
+    EXPECT_EQ(rit->first, 2);
+}
+
+TEST_F(SparseMultimapTest, Size) {
+    sparse_multimap<int, string> mm;
+    EXPECT_EQ(mm.size(), 0);
+    mm.insert({1, "one"});
+    EXPECT_EQ(mm.size(), 1);
+}
+
+TEST_F(SparseMultimapTest, MaxSize) {
+    sparse_multimap<int, int> mm;
+    EXPECT_GT(mm.max_size(), 0);
+}
+
+TEST_F(SparseMultimapTest, Empty) {
+    sparse_multimap<int, string> mm;
+    EXPECT_TRUE(mm.empty());
+    mm.insert({1, "one"});
+    EXPECT_FALSE(mm.empty());
+}
+
+TEST_F(SparseMultimapTest, KeyComp) {
+    sparse_multimap<int, string> mm;
+    auto comp = mm.key_comp();
+    EXPECT_TRUE(comp(1, 2));
+}
+
+TEST_F(SparseMultimapTest, ValueComp) {
+    sparse_multimap<int, string> mm;
+    auto comp = mm.value_comp();
+    pair<const int, string> p1(1, "a");
+    pair<const int, string> p2(2, "b");
+    EXPECT_TRUE(comp(p1, p2));
+}
+
+TEST_F(SparseMultimapTest, InsertValue) {
+    sparse_multimap<int, string> mm;
+    auto it = mm.insert({1, "one"});
+    EXPECT_EQ(it->first, 1);
+    EXPECT_EQ(it->second, "one");
+}
+
+TEST_F(SparseMultimapTest, InsertDuplicateKeys) {
+    sparse_multimap<int, string> mm;
+    mm.insert({1, "one"});
+    mm.insert({1, "uno"});
+    mm.insert({1, "eins"});
+    EXPECT_EQ(mm.size(), 3);
+    EXPECT_EQ(mm.count(1), 3);
+}
+
+TEST_F(SparseMultimapTest, InsertRvalue) {
+    sparse_multimap<int, string> mm;
+    pair<int, string> p(1, "one");
+    mm.insert(move(p));
+    EXPECT_EQ(mm.size(), 1);
+}
+
+TEST_F(SparseMultimapTest, InsertWithHint) {
+    sparse_multimap<int, string> mm = {{1, "one"}, {3, "three"}};
+    auto it = mm.insert(mm.begin(), {2, "two"});
+    EXPECT_EQ(it->first, 2);
+}
+
+TEST_F(SparseMultimapTest, InsertRange) {
+    sparse_multimap<int, string> mm;
+    vector<pair<int, string>> vec = {{1, "one"}, {2, "two"}, {2, "deux"}};
+    mm.insert(vec.begin(), vec.end());
+    EXPECT_EQ(mm.size(), 3);
+}
+
+TEST_F(SparseMultimapTest, Emplace) {
+    sparse_multimap<int, string> mm;
+    auto it = mm.emplace(1, "one");
+    EXPECT_EQ(it->first, 1);
+    EXPECT_EQ(it->second, "one");
+}
+
+TEST_F(SparseMultimapTest, EmplaceDuplicate) {
+    sparse_multimap<int, string> mm;
+    mm.emplace(1, "one");
+    auto it = mm.emplace(1, "uno");
+    EXPECT_EQ(mm.size(), 2);
+    EXPECT_EQ(it->second, "uno");
+}
+
+TEST_F(SparseMultimapTest, EmplaceHint) {
+    sparse_multimap<int, string> mm = {{1, "one"}, {3, "three"}};
+    auto it = mm.emplace_hint(mm.begin(), 2, "two");
+    EXPECT_EQ(it->first, 2);
+    EXPECT_EQ(mm.size(), 3);
+}
+
+TEST_F(SparseMultimapTest, EraseByIterator) {
+    sparse_multimap<int, string> mm = {{1, "one"}, {2, "two"}, {3, "three"}};
+    auto it = mm.find(2);
+    mm.erase(it);
+    EXPECT_EQ(mm.size(), 2);
+}
+
+TEST_F(SparseMultimapTest, EraseByKey) {
+    sparse_multimap<int, string> mm = {{1, "one"}, {1, "uno"}, {2, "two"}};
+    size_t count = mm.erase(1);
+    EXPECT_EQ(count, 2);
+    EXPECT_EQ(mm.size(), 1);
+}
+
+TEST_F(SparseMultimapTest, EraseByNonExistentKey) {
+    sparse_multimap<int, string> mm = {{1, "one"}};
+    size_t count = mm.erase(99);
+    EXPECT_EQ(count, 0);
+}
+
+TEST_F(SparseMultimapTest, EraseRange) {
+    sparse_multimap<int, string> mm = {{1, "one"}, {2, "two"}, {2, "deux"}, {3, "three"}};
+    auto range = mm.equal_range(2);
+    mm.erase(range.first, range.second);
+    EXPECT_EQ(mm.size(), 2);
+    EXPECT_EQ(mm.count(2), 0);
+}
+
+TEST_F(SparseMultimapTest, Clear) {
+    sparse_multimap<int, int> mm = {{1, 10}, {2, 20}, {2, 30}};
+    mm.clear();
+    EXPECT_TRUE(mm.empty());
+}
+
+TEST_F(SparseMultimapTest, Find) {
+    sparse_multimap<int, string> mm = {{1, "one"}, {2, "two"}, {2, "deux"}};
+    auto it = mm.find(2);
+    EXPECT_NE(it, mm.end());
+    EXPECT_EQ(it->first, 2);
+}
+
+TEST_F(SparseMultimapTest, FindNonExistent) {
+    sparse_multimap<int, string> mm = {{1, "one"}};
+    auto it = mm.find(99);
+    EXPECT_EQ(it, mm.end());
+}
+
+TEST_F(SparseMultimapTest, ConstFind) {
+    const sparse_multimap<int, string> mm = {{1, "one"}, {2, "two"}};
+    auto it = mm.find(1);
+    EXPECT_NE(it, mm.end());
+}
+
+TEST_F(SparseMultimapTest, Count) {
+    sparse_multimap<int, string> mm = {{1, "one"}, {1, "uno"}, {2, "two"}};
+    EXPECT_EQ(mm.count(1), 2);
+    EXPECT_EQ(mm.count(2), 1);
+    EXPECT_EQ(mm.count(99), 0);
+}
+
+TEST_F(SparseMultimapTest, LowerBound) {
+    sparse_multimap<int, string> mm = {{1, "one"}, {2, "two"}, {2, "deux"}, {3, "three"}};
+    auto it = mm.lower_bound(2);
+    EXPECT_EQ(it->first, 2);
+    it = mm.lower_bound(0);
+    EXPECT_EQ(it->first, 1);
+}
+
+TEST_F(SparseMultimapTest, UpperBound) {
+    sparse_multimap<int, string> mm = {{1, "one"}, {2, "two"}, {2, "deux"}, {3, "three"}};
+    auto it = mm.upper_bound(2);
+    EXPECT_EQ(it->first, 3);
+}
+
+TEST_F(SparseMultimapTest, EqualRange) {
+    sparse_multimap<int, string> mm = {{1, "one"}, {2, "two"}, {2, "deux"}, {3, "three"}};
+    auto range = mm.equal_range(2);
+    int count = 0;
+    for (auto it = range.first; it != range.second; ++it) {
+        EXPECT_EQ(it->first, 2);
+        ++count;
+    }
+    EXPECT_EQ(count, 2);
+}
+
+TEST_F(SparseMultimapTest, ConstEqualRange) {
+    const sparse_multimap<int, string> mm = {{1, "one"}, {1, "uno"}, {2, "two"}};
+    auto range = mm.equal_range(1);
+    int count = 0;
+    for (auto it = range.first; it != range.second; ++it) {
+        ++count;
+    }
+    EXPECT_EQ(count, 2);
+}
+
+TEST_F(SparseMultimapTest, Swap) {
+    sparse_multimap<int, string> mm1 = {{1, "one"}, {2, "two"}};
+    sparse_multimap<int, string> mm2 = {{3, "three"}, {4, "four"}};
+    mm1.swap(mm2);
+    EXPECT_EQ(mm1.size(), 2);
+    EXPECT_EQ(mm2.size(), 2);
+}
+
+TEST_F(SparseMultimapTest, EqualTo) {
+    sparse_multimap<int, string> mm1 = {{1, "one"}, {2, "two"}, {2, "deux"}};
+    sparse_multimap<int, string> mm2 = {{1, "one"}, {2, "two"}, {2, "deux"}};
+    sparse_multimap<int, string> mm3 = {{1, "one"}, {2, "two"}};
+    EXPECT_TRUE(mm1.equal_to(mm2));
+    EXPECT_FALSE(mm1.equal_to(mm3));
+}
+
+TEST_F(SparseMultimapTest, LessThan) {
+    sparse_multimap<int, string> mm1 = {{1, "one"}, {2, "two"}};
+    sparse_multimap<int, string> mm2 = {{1, "one"}, {3, "three"}};
+    EXPECT_TRUE(mm1.less_than(mm2));
+}
+
+TEST_F(SparseMultimapTest, EqualityOperator) {
+    sparse_multimap<int, string> mm1 = {{1, "one"}, {2, "two"}};
+    sparse_multimap<int, string> mm2 = {{1, "one"}, {2, "two"}};
+    EXPECT_TRUE(mm1 == mm2);
+}
+
+TEST_F(SparseMultimapTest, LessThanOperator) {
+    sparse_multimap<int, string> mm1 = {{1, "one"}};
+    sparse_multimap<int, string> mm2 = {{2, "two"}};
+    EXPECT_TRUE(mm1 < mm2);
+}
+
+TEST_F(SparseMultimapTest, DuplicateKeyOrderPreserved) {
+    sparse_multimap<int, string> mm;
+    mm.insert({1, "first"});
+    mm.insert({1, "second"});
+    mm.insert({1, "third"});
+    auto range = mm.equal_range(1);
+    auto it = range.first;
+    EXPECT_EQ(it->second, "first");
+    ++it;
+    EXPECT_EQ(it->second, "second");
+    ++it;
+    EXPECT_EQ(it->second, "third");
+}
+
+TEST_F(SparseMultimapTest, StringKey) {
+    sparse_multimap<string, int> mm;
+    mm.insert({"apple", 1});
+    mm.insert({"apple", 2});
+    mm.insert({"banana", 3});
+    EXPECT_EQ(mm.size(), 3);
+    EXPECT_EQ(mm.count("apple"), 2);
+    EXPECT_EQ(mm.count("banana"), 1);
+}
+
+TEST_F(SparseMultimapTest, LargeInsertWithDuplicates) {
+    sparse_multimap<int, int> mm;
+    const int count = 500;
+    for (int i = 0; i < count; ++i) {
+        mm.insert({i % 10, i});
+    }
+    EXPECT_EQ(mm.size(), count);
+    EXPECT_EQ(mm.count(0), 50);
+    EXPECT_EQ(mm.count(5), 50);
+}
+
+TEST_F(SparseMultimapTest, RangeBasedForLoop) {
+    sparse_multimap<int, string> mm = {{1, "one"}, {2, "two"}, {2, "deux"}};
+    int keySum = 0;
+    for (const auto& p: mm) {
+        keySum += p.first;
+    }
+    EXPECT_EQ(keySum, 5);
+}
+
+TEST_F(SparseMultimapTest, Reserve) {
+    sparse_multimap<int, string> mm;
+    mm.reserve(100);
+    EXPECT_GE(mm.capacity(), 100);
+}
+
+class SparseMultisetTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+TEST_F(SparseMultisetTest, DefaultConstructor) {
+    sparse_multiset<int> ms;
+    EXPECT_TRUE(ms.empty());
+    EXPECT_EQ(ms.size(), 0);
+}
+
+TEST_F(SparseMultisetTest, ConstructorWithCompare) {
+    sparse_multiset<int, greater<int>> ms;
+    EXPECT_TRUE(ms.empty());
+    ms.insert(3);
+    ms.insert(1);
+    ms.insert(2);
+    auto it = ms.begin();
+    EXPECT_EQ(*it, 3);
+    ++it;
+    EXPECT_EQ(*it, 2);
+    ++it;
+    EXPECT_EQ(*it, 1);
+}
+
+TEST_F(SparseMultisetTest, InitializerListConstructor) {
+    sparse_multiset<int> ms = {1, 2, 2, 3, 3, 3};
+    EXPECT_EQ(ms.size(), 6);
+}
+
+TEST_F(SparseMultisetTest, InitializerListConstructorWithCompare) {
+    sparse_multiset<int, greater<int>> ms = {1, 2, 2, 3};
+    EXPECT_EQ(ms.size(), 4);
+    auto it = ms.begin();
+    EXPECT_EQ(*it, 3);
+}
+
+TEST_F(SparseMultisetTest, InitializerListAssignment) {
+    sparse_multiset<int> ms;
+    ms = {10, 20, 20, 30};
+    EXPECT_EQ(ms.size(), 4);
+}
+
+TEST_F(SparseMultisetTest, RangeConstructor) {
+    vector<int> vec = {5, 2, 8, 2, 1, 9};
+    sparse_multiset<int> ms(vec.begin(), vec.end());
+    EXPECT_EQ(ms.size(), 6);
+    auto it = ms.begin();
+    EXPECT_EQ(*it, 1);
+    ++it;
+    EXPECT_EQ(*it, 2);
+    ++it;
+    EXPECT_EQ(*it, 2);
+}
+
+TEST_F(SparseMultisetTest, RangeConstructorWithCompare) {
+    vector<int> vec = {1, 2, 2, 3};
+    sparse_multiset<int, greater<int>> ms(vec.begin(), vec.end(), greater<int>());
+    EXPECT_EQ(ms.size(), 4);
+}
+
+TEST_F(SparseMultisetTest, CopyConstructor) {
+    sparse_multiset<int> ms1 = {1, 2, 2, 3};
+    sparse_multiset<int> ms2(ms1);
+    EXPECT_EQ(ms2.size(), 4);
+    EXPECT_EQ(ms2.count(2), 2);
+}
+
+TEST_F(SparseMultisetTest, CopyAssignment) {
+    sparse_multiset<int> ms1 = {1, 2, 2};
+    sparse_multiset<int> ms2 = {4, 5};
+    ms2 = ms1;
+    EXPECT_EQ(ms2.size(), 3);
+    EXPECT_EQ(ms2.count(2), 2);
+}
+
+TEST_F(SparseMultisetTest, MoveConstructor) {
+    sparse_multiset<int> ms1 = {1, 2, 2, 3};
+    sparse_multiset<int> ms2(move(ms1));
+    EXPECT_EQ(ms2.size(), 4);
+}
+
+TEST_F(SparseMultisetTest, MoveAssignment) {
+    sparse_multiset<int> ms1 = {1, 2, 2};
+    sparse_multiset<int> ms2 = {4, 5};
+    ms2 = move(ms1);
+    EXPECT_EQ(ms2.size(), 3);
+}
+
+TEST_F(SparseMultisetTest, BeginEnd) {
+    sparse_multiset<int> ms = {3, 1, 2, 2};
+    auto it = ms.begin();
+    EXPECT_EQ(*it, 1);
+    ++it;
+    EXPECT_EQ(*it, 2);
+    ++it;
+    EXPECT_EQ(*it, 2);
+    ++it;
+    EXPECT_EQ(*it, 3);
+    ++it;
+    EXPECT_EQ(it, ms.end());
+}
+
+TEST_F(SparseMultisetTest, CbeginCend) {
+    sparse_multiset<int> ms = {3, 1, 2};
+    auto it = ms.cbegin();
+    EXPECT_EQ(*it, 1);
+}
+
+TEST_F(SparseMultisetTest, ReverseBeginEnd) {
+    sparse_multiset<int> ms = {1, 2, 2, 3};
+    auto rit = ms.rbegin();
+    EXPECT_EQ(*rit, 3);
+    ++rit;
+    EXPECT_EQ(*rit, 2);
+    ++rit;
+    EXPECT_EQ(*rit, 2);
+    ++rit;
+    EXPECT_EQ(*rit, 1);
+    ++rit;
+    EXPECT_EQ(rit, ms.rend());
+}
+
+TEST_F(SparseMultisetTest, CrbeginCrend) {
+    sparse_multiset<int> ms = {1, 2, 3};
+    auto rit = ms.crbegin();
+    EXPECT_EQ(*rit, 3);
+}
+
+TEST_F(SparseMultisetTest, Size) {
+    sparse_multiset<int> ms;
+    EXPECT_EQ(ms.size(), 0);
+    ms.insert(1);
+    EXPECT_EQ(ms.size(), 1);
+    ms.insert(1);
+    EXPECT_EQ(ms.size(), 2);
+}
+
+TEST_F(SparseMultisetTest, MaxSize) {
+    sparse_multiset<int> ms;
+    EXPECT_GT(ms.max_size(), 0);
+}
+
+TEST_F(SparseMultisetTest, Empty) {
+    sparse_multiset<int> ms;
+    EXPECT_TRUE(ms.empty());
+    ms.insert(1);
+    EXPECT_FALSE(ms.empty());
+    ms.erase(1);
+    EXPECT_TRUE(ms.empty());
+}
+
+TEST_F(SparseMultisetTest, KeyComp) {
+    sparse_multiset<int> ms;
+    auto comp = ms.key_comp();
+    EXPECT_TRUE(comp(1, 2));
+    EXPECT_FALSE(comp(2, 1));
+}
+
+TEST_F(SparseMultisetTest, ValueComp) {
+    sparse_multiset<int> ms;
+    auto comp = ms.value_comp();
+    EXPECT_TRUE(comp(1, 2));
+}
+
+TEST_F(SparseMultisetTest, InsertValue) {
+    sparse_multiset<int> ms;
+    auto it = ms.insert(42);
+    EXPECT_EQ(*it, 42);
+    EXPECT_EQ(ms.size(), 1);
+}
+
+TEST_F(SparseMultisetTest, InsertDuplicate) {
+    sparse_multiset<int> ms;
+    ms.insert(42);
+    ms.insert(42);
+    ms.insert(42);
+    EXPECT_EQ(ms.size(), 3);
+    EXPECT_EQ(ms.count(42), 3);
+}
+
+TEST_F(SparseMultisetTest, InsertRvalue) {
+    sparse_multiset<string> ms;
+    string str = "hello";
+    ms.insert(move(str));
+    EXPECT_EQ(ms.size(), 1);
+}
+
+TEST_F(SparseMultisetTest, InsertWithHint) {
+    sparse_multiset<int> ms = {1, 2, 3};
+    auto it = ms.insert(ms.begin(), 2);
+    EXPECT_EQ(*it, 2);
+    EXPECT_EQ(ms.size(), 4);
+}
+
+TEST_F(SparseMultisetTest, InsertWithHintRvalue) {
+    sparse_multiset<int> ms = {1, 3};
+    auto it = ms.insert(ms.begin(), 2);
+    EXPECT_EQ(*it, 2);
+}
+
+TEST_F(SparseMultisetTest, InsertRange) {
+    sparse_multiset<int> ms;
+    vector<int> vec = {5, 2, 8, 2, 1, 9};
+    ms.insert(vec.begin(), vec.end());
+    EXPECT_EQ(ms.size(), 6);
+    EXPECT_EQ(ms.count(2), 2);
+}
+
+TEST_F(SparseMultisetTest, Emplace) {
+    sparse_multiset<int> ms;
+    auto it = ms.emplace(42);
+    EXPECT_EQ(*it, 42);
+}
+
+TEST_F(SparseMultisetTest, EmplaceDuplicate) {
+    sparse_multiset<int> ms;
+    ms.emplace(42);
+    ms.emplace(42);
+    EXPECT_EQ(ms.size(), 2);
+}
+
+TEST_F(SparseMultisetTest, EmplaceHint) {
+    sparse_multiset<int> ms = {1, 3};
+    auto it = ms.emplace_hint(ms.begin(), 2);
+    EXPECT_EQ(*it, 2);
+}
+
+TEST_F(SparseMultisetTest, EraseByIterator) {
+    sparse_multiset<int> ms = {1, 2, 2, 3};
+    auto it = ms.find(2);
+    ms.erase(it);
+    EXPECT_EQ(ms.size(), 3);
+    EXPECT_EQ(ms.count(2), 1);
+}
+
+TEST_F(SparseMultisetTest, EraseByKey) {
+    sparse_multiset<int> ms = {1, 2, 2, 3, 3, 3};
+    size_t count = ms.erase(2);
+    EXPECT_EQ(count, 2);
+    EXPECT_EQ(ms.size(), 4);
+    EXPECT_EQ(ms.count(2), 0);
+}
+
+TEST_F(SparseMultisetTest, EraseByNonExistentKey) {
+    sparse_multiset<int> ms = {1, 2};
+    size_t count = ms.erase(99);
+    EXPECT_EQ(count, 0);
+}
+
+TEST_F(SparseMultisetTest, EraseRange) {
+    sparse_multiset<int> ms = {1, 2, 2, 2, 3, 3, 4};
+    auto range = ms.equal_range(2);
+    ms.erase(range.first, range.second);
+    EXPECT_EQ(ms.size(), 4);
+    EXPECT_EQ(ms.count(2), 0);
+}
+
+TEST_F(SparseMultisetTest, Clear) {
+    sparse_multiset<int> ms = {1, 2, 2, 3};
+    ms.clear();
+    EXPECT_TRUE(ms.empty());
+    EXPECT_EQ(ms.size(), 0);
+}
+
+TEST_F(SparseMultisetTest, Find) {
+    sparse_multiset<int> ms = {1, 2, 2, 3};
+    auto it = ms.find(2);
+    EXPECT_NE(it, ms.end());
+    EXPECT_EQ(*it, 2);
+}
+
+TEST_F(SparseMultisetTest, FindNonExistent) {
+    sparse_multiset<int> ms = {1, 2};
+    auto it = ms.find(99);
+    EXPECT_EQ(it, ms.end());
+}
+
+TEST_F(SparseMultisetTest, ConstFind) {
+    const sparse_multiset<int> ms = {1, 2, 2};
+    auto it = ms.find(2);
+    EXPECT_NE(it, ms.end());
+}
+
+TEST_F(SparseMultisetTest, Count) {
+    sparse_multiset<int> ms = {1, 2, 2, 3, 3, 3};
+    EXPECT_EQ(ms.count(1), 1);
+    EXPECT_EQ(ms.count(2), 2);
+    EXPECT_EQ(ms.count(3), 3);
+    EXPECT_EQ(ms.count(99), 0);
+}
+
+TEST_F(SparseMultisetTest, LowerBound) {
+    sparse_multiset<int> ms = {1, 2, 2, 3};
+    auto it = ms.lower_bound(2);
+    EXPECT_EQ(*it, 2);
+    it = ms.lower_bound(0);
+    EXPECT_EQ(*it, 1);
+    it = ms.lower_bound(4);
+    EXPECT_EQ(it, ms.end());
+}
+
+TEST_F(SparseMultisetTest, ConstLowerBound) {
+    const sparse_multiset<int> ms = {1, 2, 3};
+    auto it = ms.lower_bound(2);
+    EXPECT_EQ(*it, 2);
+}
+
+TEST_F(SparseMultisetTest, UpperBound) {
+    sparse_multiset<int> ms = {1, 2, 2, 3};
+    auto it = ms.upper_bound(2);
+    EXPECT_EQ(*it, 3);
+    it = ms.upper_bound(3);
+    EXPECT_EQ(it, ms.end());
+}
+
+TEST_F(SparseMultisetTest, ConstUpperBound) {
+    const sparse_multiset<int> ms = {1, 2, 3};
+    auto it = ms.upper_bound(2);
+    EXPECT_EQ(*it, 3);
+}
+
+TEST_F(SparseMultisetTest, EqualRange) {
+    sparse_multiset<int> ms = {1, 2, 2, 2, 3};
+    auto range = ms.equal_range(2);
+    int count = 0;
+    for (auto it = range.first; it != range.second; ++it) {
+        EXPECT_EQ(*it, 2);
+        ++count;
+    }
+    EXPECT_EQ(count, 3);
+}
+
+TEST_F(SparseMultisetTest, ConstEqualRange) {
+    const sparse_multiset<int> ms = {1, 2, 2, 3};
+    auto range = ms.equal_range(2);
+    int count = 0;
+    for (auto it = range.first; it != range.second; ++it) {
+        ++count;
+    }
+    EXPECT_EQ(count, 2);
+}
+
+TEST_F(SparseMultisetTest, EqualRangeNonExistent) {
+    sparse_multiset<int> ms = {1, 3, 5};
+    auto range = ms.equal_range(2);
+    EXPECT_EQ(range.first, range.second);
+}
+
+TEST_F(SparseMultisetTest, Swap) {
+    sparse_multiset<int> ms1 = {1, 2, 2};
+    sparse_multiset<int> ms2 = {3, 4, 5, 6};
+    ms1.swap(ms2);
+    EXPECT_EQ(ms1.size(), 4);
+    EXPECT_EQ(ms2.size(), 3);
+}
+
+TEST_F(SparseMultisetTest, EqualTo) {
+    sparse_multiset<int> ms1 = {1, 2, 2, 3};
+    sparse_multiset<int> ms2 = {1, 2, 2, 3};
+    sparse_multiset<int> ms3 = {1, 2, 3};
+    EXPECT_TRUE(ms1.equal_to(ms2));
+    EXPECT_FALSE(ms1.equal_to(ms3));
+}
+
+TEST_F(SparseMultisetTest, LessThan) {
+    sparse_multiset<int> ms1 = {1, 2, 3};
+    sparse_multiset<int> ms2 = {1, 2, 4};
+    EXPECT_TRUE(ms1.less_than(ms2));
+}
+
+TEST_F(SparseMultisetTest, EqualityOperator) {
+    sparse_multiset<int> ms1 = {1, 2, 2};
+    sparse_multiset<int> ms2 = {1, 2, 2};
+    sparse_multiset<int> ms3 = {1, 2};
+    EXPECT_TRUE(ms1 == ms2);
+    EXPECT_FALSE(ms1 == ms3);
+}
+
+TEST_F(SparseMultisetTest, InequalityOperator) {
+    sparse_multiset<int> ms1 = {1, 2};
+    sparse_multiset<int> ms2 = {3, 4};
+    EXPECT_TRUE(ms1 != ms2);
+}
+
+TEST_F(SparseMultisetTest, LessThanOperator) {
+    sparse_multiset<int> ms1 = {1, 2};
+    sparse_multiset<int> ms2 = {1, 3};
+    EXPECT_TRUE(ms1 < ms2);
+}
+
+TEST_F(SparseMultisetTest, GreaterThanOperator) {
+    sparse_multiset<int> ms1 = {1, 3};
+    sparse_multiset<int> ms2 = {1, 2};
+    EXPECT_TRUE(ms1 > ms2);
+}
+
+TEST_F(SparseMultisetTest, StringKey) {
+    sparse_multiset<string> ms;
+    ms.insert("banana");
+    ms.insert("apple");
+    ms.insert("banana");
+    ms.insert("cherry");
+    EXPECT_EQ(ms.size(), 4);
+    EXPECT_EQ(ms.count("banana"), 2);
+    auto it = ms.begin();
+    EXPECT_EQ(*it, "apple");
+}
+
+TEST_F(SparseMultisetTest, LargeInsertWithDuplicates) {
+    sparse_multiset<int> ms;
+    const int count = 500;
+    for (int i = 0; i < count; ++i) {
+        ms.insert(i % 10);
+    }
+    EXPECT_EQ(ms.size(), count);
+    EXPECT_EQ(ms.count(0), 50);
+    EXPECT_EQ(ms.count(5), 50);
+}
+
+TEST_F(SparseMultisetTest, DuplicateOrderPreservation) {
+    sparse_multiset<int> ms;
+    ms.insert(2);
+    ms.insert(1);
+    ms.insert(2);
+    ms.insert(1);
+    ms.insert(2);
+    auto range = ms.equal_range(2);
+    int count = 0;
+    for (auto it = range.first; it != range.second; ++it) {
+        EXPECT_EQ(*it, 2);
+        ++count;
+    }
+    EXPECT_EQ(count, 3);
+}
+
+TEST_F(SparseMultisetTest, RangeBasedForLoop) {
+    sparse_multiset<int> ms = {1, 2, 2, 3, 3, 3};
+    int sum = 0;
+    for (auto val: ms) {
+        sum += val;
+    }
+    EXPECT_EQ(sum, 14);
+}
+
+TEST_F(SparseMultisetTest, Reserve) {
+    sparse_multiset<int> ms;
+    ms.reserve(100);
+    EXPECT_GE(ms.capacity(), 100);
 }

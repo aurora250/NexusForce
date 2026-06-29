@@ -53,7 +53,7 @@ static void BM_ThreadPool_NoopLatency(benchmark::State& state) {
     thread_pool pool;
     pool.start(thread_count);
 
-    for (auto _ : state) {
+    for (auto _: state) {
         auto result = pool.submit_task([] {});
         result.future.get();
         state.SetItemsProcessed(1);
@@ -70,7 +70,7 @@ static void BM_ThreadPool_Throughput_Noop(benchmark::State& state) {
     thread_pool pool;
     pool.start(thread_count);
 
-    for (auto _ : state) {
+    for (auto _: state) {
         vector<future<void>> futures;
         futures.reserve(task_count);
 
@@ -79,7 +79,7 @@ static void BM_ThreadPool_Throughput_Noop(benchmark::State& state) {
             futures.push_back(move(result.future));
         }
 
-        for (auto& f : futures) {
+        for (auto& f: futures) {
             f.get();
         }
 
@@ -103,7 +103,7 @@ static void BM_ThreadPool_Throughput_Compute(benchmark::State& state) {
     thread_pool pool;
     pool.start(thread_count);
 
-    for (auto _ : state) {
+    for (auto _: state) {
         vector<future<void>> futures;
         futures.reserve(task_count);
 
@@ -112,7 +112,7 @@ static void BM_ThreadPool_Throughput_Compute(benchmark::State& state) {
             futures.push_back(move(result.future));
         }
 
-        for (auto& f : futures) {
+        for (auto& f: futures) {
             f.get();
         }
 
@@ -142,7 +142,7 @@ static void BM_ThreadPool_StealStrategy(benchmark::State& state) {
     pool.set_steal_mode(strategy);
     pool.start(thread_count);
 
-    for (auto _ : state) {
+    for (auto _: state) {
         vector<future<void>> futures;
         futures.reserve(task_count);
 
@@ -154,7 +154,7 @@ static void BM_ThreadPool_StealStrategy(benchmark::State& state) {
             futures.push_back(move(result.future));
         }
 
-        for (auto& f : futures) {
+        for (auto& f: futures) {
             f.get();
         }
 
@@ -170,6 +170,8 @@ BENCHMARK(BM_ThreadPool_StealStrategy)
         ->ArgNames({"threads", "strategy"})
         ->Unit(benchmark::kMillisecond);
 
+#endif
+
 // ============================================================
 // 3. Pool mode comparison
 // ============================================================
@@ -182,7 +184,7 @@ static void BM_ThreadPool_Mode_Fixed(benchmark::State& state) {
     pool.set_mode(thread_pool::pool_mode::fixed);
     pool.start(thread_count);
 
-    for (auto _ : state) {
+    for (auto _: state) {
         vector<future<void>> futures;
         futures.reserve(task_count);
 
@@ -191,7 +193,7 @@ static void BM_ThreadPool_Mode_Fixed(benchmark::State& state) {
             futures.push_back(move(result.future));
         }
 
-        for (auto& f : futures) {
+        for (auto& f: futures) {
             f.get();
         }
 
@@ -200,13 +202,35 @@ static void BM_ThreadPool_Mode_Fixed(benchmark::State& state) {
 
     pool.stop();
 }
-BENCHMARK(BM_ThreadPool_Mode_Fixed)
-        ->Arg(4)
-        ->Arg(8)
-        ->Arg(16)
-        ->Unit(benchmark::kMillisecond);
+BENCHMARK(BM_ThreadPool_Mode_Fixed)->Arg(4)->Arg(8)->Arg(16)->Unit(benchmark::kMillisecond);
 
-// TODO: cached mode benchmark disabled — pool hangs on start in cached mode
+static void BM_ThreadPool_Mode_Cached(benchmark::State& state) {
+    const size_t thread_count = state.range(0);
+    const int64_t task_count = 10000;
+
+    thread_pool pool;
+    pool.set_mode(thread_pool::pool_mode::cached);
+    pool.start(thread_count);
+
+    for (auto _: state) {
+        vector<future<void>> futures;
+        futures.reserve(task_count);
+
+        for (int64_t i = 0; i < task_count; ++i) {
+            auto result = pool.submit_task([] { burn(100); });
+            futures.push_back(move(result.future));
+        }
+
+        for (auto& f: futures) {
+            f.get();
+        }
+
+        state.SetItemsProcessed(task_count);
+    }
+
+    pool.stop();
+}
+BENCHMARK(BM_ThreadPool_Mode_Cached)->Arg(4)->Arg(8)->Arg(16)->Unit(benchmark::kMillisecond);
 
 // ============================================================
 // 4. submit_after latency accuracy
@@ -217,15 +241,13 @@ static void BM_ThreadPool_SubmitAfter_Accuracy(benchmark::State& state) {
     thread_pool pool;
     pool.start(4);
 
-    for (auto _ : state) {
+    for (auto _: state) {
         atomic<int64_t> actual_us{0};
 
         auto t0 = steady_clock::now();
         auto result = pool.submit_after(delay_ms, [&actual_us, t0] {
             auto t1 = steady_clock::now();
-            actual_us.store(
-                    time_cast<microseconds>(t1 - t0).count(),
-                    memory_order_relaxed);
+            actual_us.store(time_cast<microseconds>(t1 - t0).count(), memory_order_relaxed);
         });
         result.future.get();
 
@@ -258,7 +280,7 @@ static void BM_ThreadPool_PriorityOrdering(benchmark::State& state) {
     thread_pool pool;
     pool.start(4);
 
-    for (auto _ : state) {
+    for (auto _: state) {
         atomic<int64_t> counter{0};
         atomic<bool> low_beat_high{false};
         vector<future<void>> futures;
@@ -283,7 +305,7 @@ static void BM_ThreadPool_PriorityOrdering(benchmark::State& state) {
             }
         }
 
-        for (auto& f : futures) {
+        for (auto& f: futures) {
             f.get();
         }
 
@@ -294,13 +316,7 @@ static void BM_ThreadPool_PriorityOrdering(benchmark::State& state) {
 
     pool.stop();
 }
-BENCHMARK(BM_ThreadPool_PriorityOrdering)
-        ->Arg(200)
-        ->Arg(500)
-        ->Arg(1000)
-        ->Unit(benchmark::kMillisecond);
-
-#endif
+BENCHMARK(BM_ThreadPool_PriorityOrdering)->Arg(200)->Arg(500)->Arg(1000)->Unit(benchmark::kMillisecond);
 
 // ============================================================
 // 6. Multi-producer contention

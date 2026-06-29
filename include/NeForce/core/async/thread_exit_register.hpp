@@ -1,8 +1,8 @@
-#ifndef NEFORCE_CORE_ASYNC_AT_THREAD_EXIT_HPP__
-#define NEFORCE_CORE_ASYNC_AT_THREAD_EXIT_HPP__
+#ifndef NEFORCE_CORE_ASYNC_THREAD_EXIT_REGISTER_HPP__
+#define NEFORCE_CORE_ASYNC_THREAD_EXIT_REGISTER_HPP__
 
 /**
- * @file at_thread_exit.hpp
+ * @file thread_exit_register.hpp
  * @brief 线程退出回调支持
  *
  * 此文件提供了线程退出时的回调注册和执行机制，
@@ -25,15 +25,15 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
- * @struct at_thread_exit_elt
+ * @struct thread_exit_elt
  * @brief 线程退出回调元素
  *
  * 表示一个线程退出回调，包含链表指针和回调函数。
  * 使用链表结构存储所有注册的回调，按照注册的逆序执行。
  */
-struct at_thread_exit_elt {
-    at_thread_exit_elt* next; ///< 指向下一个回调元素的指针
-    void (*cb)(void*);        ///< 回调函数指针
+struct thread_exit_elt {
+    thread_exit_elt* next; ///< 指向下一个回调元素的指针
+    void (*cb)(void*);     ///< 回调函数指针
 };
 
 /**
@@ -44,11 +44,11 @@ struct at_thread_exit_elt {
  * 将一个回调函数注册到当前线程的退出回调列表中。
  * 回调函数将在当前线程退出时被调用，参数为elt指针本身。
  */
-void NEFORCE_API thread_exit_register(at_thread_exit_elt* elt, void (*callback)(void*)) noexcept;
+void NEFORCE_API thread_exit_register(thread_exit_elt* elt, void (*callback)(void*)) noexcept;
 
 /** @} */ // ThreadExit
 
 /** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__
-#endif // NEFORCE_CORE_ASYNC_AT_THREAD_EXIT_HPP__
+#endif // NEFORCE_CORE_ASYNC_THREAD_EXIT_REGISTER_HPP__

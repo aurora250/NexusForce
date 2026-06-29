@@ -21,6 +21,12 @@ NEFORCE_BEGIN_NAMESPACE__
  * @{
  */
 
+/**
+ * @defgroup EventLoop 事件循环
+ * @brief 事件循环的跨平台封装
+ * @{
+ */
+
 /// @brief 监控可读事件
 NEFORCE_INLINE17 constexpr uint32_t epoll_in = 0x001;
 /// @brief 监控可写事件
@@ -168,6 +174,8 @@ public:
     /// @brief 检查事件循环当前是否正在运行
     bool is_running() const noexcept { return running_; }
 };
+
+/** @} */ // EventLoop
 
 /** @} */ // AsyncComponents
 

@@ -20,6 +20,7 @@
  */
 
 #include <cassert>
+#include "NeForce/core/config/version.hpp"
 
 /**
  * @defgroup PlatformDetection 平台检测

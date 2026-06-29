@@ -28,6 +28,7 @@
 - [特性](#-特性)
 - [编译指南](#-编译指南)
 - [快速开始](#-快速开始)
+- [常见问题](#-常见问题)
 - [文档](#-文档)
 - [协议](#️-协议)
 - [更新日志](#-更新日志)
@@ -164,7 +165,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **停止令牌** - 可取消的异步操作 `stop_token`/`stop_source`/`stop_callback`
 - **同步原语** - 互斥锁 `mutex`、读写锁 `shared_mutex`、信号量 `semaphore`/`atomic_semaphore`、线程屏障 `barrier`与闩锁 `latch`
 - **原子操作** - 原子类型 `atomic`、原子FUTEX `atomic_futex`、全局原子操作函数体系
-- **多策略线程** - 通用线程 `thread`、携带停止令牌的作用域线程 `scoped_thread`、手动开启的惰性线程 `lazy_thread`
+- **多策略线程** - 通用线程 `thread`、携带停止令牌的作用域线程 `scope_thread`、手动开启的惰性线程 `lazy_thread`
 - **基本异步模型** - `async` 及其配套的 `future`/`promise`/`packaged_task` 结构
 - **危险指针** - 无锁数据结构的内存管理 `hazard_ptr`/`hazard_pointer_domain`
 
@@ -410,6 +411,13 @@ python ./scripts/install_nexusforce.py --release
 在开始之前，请确保已完成编译指南中的安装步骤。
 
 具体参见 [使用 NexusForce 快速构建常见功能！](QUICK_START.md)
+
+---
+
+## ❓ 常见问题
+
+关于 NexusForce 的定位、与其他框架（Boost / Qt / POCO / folly）的差异对比、设计理念、功能选型建议等，
+请参见 [Q&A](Q&A.md)。
 
 ---
 

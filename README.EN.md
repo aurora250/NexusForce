@@ -28,6 +28,7 @@
 - [Features](#-features)
 - [Build Guide](#-build-guide)
 - [Quick Start](#-quick-start)
+- [FAQ](#-faq)
 - [Documentation](#-documentation)
 - [License](#️-license)
 - [Changelog](#-changelog)
@@ -163,7 +164,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **Stop Token** - Cancellable asynchronous operations `stop_token` / `stop_source` / `stop_callback`
 - **Synchronization Primitives** - Mutex `mutex`, shared mutex `shared_mutex`, semaphore `semaphore` / `atomic_semaphore`, thread barrier `barrier` and latch `latch`
 - **Atomic Operations** - Atomic types `atomic`, atomic FUTEX `atomic_futex`, global atomic operation function system
-- **Multi-strategy Threads** - General thread `thread`, scoped thread with stop token `scoped_thread`, manually started lazy thread `lazy_thread`
+- **Multi-strategy Threads** - General thread `thread`, scoped thread with stop token `scope_thread`, manually started lazy thread `lazy_thread`
 - **Basic Async Model** - `async` and its supporting `future` / `promise` / `packaged_task` structures
 - **Hazard Pointer** - Memory management for lock-free data structures `hazard_ptr` / `hazard_pointer_domain`
 
@@ -403,6 +404,13 @@ Quick start example overview:
 | File Watcher        | Hot reload, Real-time sync              | Cross-platform, Event-driven      |
 
 For details, see [Quickly Build Common Features with NexusForce!](QUICK_START.md)
+
+---
+
+## ❓ FAQ
+
+For project positioning, comparisons with other frameworks (Boost / Qt / POCO / folly), design philosophy, feature selection guidance, etc.,
+please see [Q&A](Q&A.md).
 
 ---
 

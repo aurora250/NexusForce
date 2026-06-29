@@ -380,12 +380,8 @@ private:
     };
 
     struct thread_pool_id_generator {
-        static atomic<uint32_t>& get_id() noexcept {
-            static atomic<uint32_t> pool_thread_id{0};
-            return pool_thread_id;
-        }
-        static uint32_t get_new_id() noexcept { return get_id().fetch_add(1, memory_order_relaxed); }
-        static void reset_id() noexcept { get_id().store(0, memory_order_relaxed); }
+        static NEFORCE_API uint32_t get_new_id() noexcept;
+        static NEFORCE_API void reset_id() noexcept;
     };
 
     unordered_map<id_type, unique_ptr<lazy_thread>> threads_map_; ///< 线程映射
@@ -748,9 +744,9 @@ submit_result<invoke_result_t<Func, Args...>> thread_pool::submit_task(const pri
                     }
                 }
 
-                threads_map_.emplace(thread_id, _NEFORCE move(ptr));
-                threads_map_[thread_id]->start();
-                threads_map_[thread_id]->detach();
+                auto result = threads_map_.emplace(thread_id, _NEFORCE move(ptr));
+                result.first->second->start();
+                result.first->second->detach();
             }
         }
     }

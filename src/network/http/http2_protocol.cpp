@@ -1,4 +1,4 @@
-#include <NeForce/network/http/byte_cursor.hpp>
+#include <NeForce/core/memory/byte_cursor.hpp>
 #include <NeForce/network/http/http2_protocol.hpp>
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__

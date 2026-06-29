@@ -67,7 +67,7 @@ public:
      *
      * @note 如果计数器变为负值，行为未定义
      */
-    NEFORCE_ALWAYS_INLINE void count_down(const platform_wait_t update = 1) {
+    NEFORCE_ALWAYS_INLINE void count_down(const platform_wait_t update = 1) noexcept {
         auto const old_value = _NEFORCE atomic_fetch_sub(&counter_, update, memory_order_release);
         if (old_value == update) {
             _NEFORCE atomic_notify_address(&counter_, true);

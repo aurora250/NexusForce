@@ -8,7 +8,7 @@
  * 此文件提供了future的实现作为异步结果的消费者。
  */
 
-#include "NeForce/core/async/at_thread_exit.hpp"
+#include "NeForce/core/async/thread_exit_register.hpp"
 #include "NeForce/core/async/atomic_futex.hpp"
 #include "NeForce/core/async/call_once.hpp"
 #include "NeForce/core/exception/exception_ptr.hpp"
@@ -602,7 +602,7 @@ struct __future_base {
          *
          * 用于在线程退出时标记future就绪。
          */
-        struct make_ready final : at_thread_exit_elt {
+        struct make_ready final : thread_exit_elt {
             weak_ptr<state_base> shared_state; ///< 共享状态弱引用
 
             /**

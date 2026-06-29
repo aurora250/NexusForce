@@ -250,7 +250,7 @@ public:
  */
 template <typename T>
 struct atomic<T*> : atomic_base<T*> {
-    atomic() = default;
+    atomic() noexcept = default;
     ~atomic() noexcept = default;
     atomic(const atomic&) = delete;
     atomic& operator=(const atomic&) = delete;
