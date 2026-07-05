@@ -640,8 +640,8 @@ private:
                     return nullptr;
                 }
 
-                producer->thread_exit_listener_.callback_ = &lock_free_queue::implicit_producer_thread_exited_callback;
-                producer->thread_exit_listener_.user_data_ = producer;
+                producer->thread_exit_listener_.callback = &lock_free_queue::implicit_producer_thread_exited_callback;
+                producer->thread_exit_listener_.user_data = producer;
                 thread_exit_notifier::subscribe(&producer->thread_exit_listener_);
 
                 auto index = hashed_id;
@@ -688,7 +688,7 @@ private:
                     break;
                 }
 #else
-                if (hash->entries_[index].key_.compare_exchange_strong(probed_key, inner::invalid_thread_id,
+                if (hash->entries_[index].key_.compare_exchange_strong(probed_key, inner::invalid_thread_id_zero,
                                                                        memory_order_seq_cst, memory_order_relaxed)) {
                     break;
                 }

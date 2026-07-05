@@ -183,19 +183,26 @@ NEFORCE_BEGIN_HTTP__
  * | 特性              | 规范参数                                  |
  * |-------------------|-------------------------------------------|
  * | HTTP 版本         | HTTP/1.1（RFC 9112）与 HTTP/2（RFC 7540） |
- * | HTTP/2 帧层       | 9 种帧类型：DATA / HEADERS / SETTINGS / PING / GOAWAY / RST_STREAM / WINDOW_UPDATE / PRIORITY /
- * PUSH_PROMISE | | HPACK 头部压缩    | 静态表 61 项 + 动态表 + Huffman 编码（RFC 7541） | | 头部字段大小写    |
- * 不区分大小写，存储为原始大小写            | | 分块传输编码      | 流式增量 chunked 解析，支持 Trailing Headers | |
- * 内容协商          | Accept-Encoding 解析，gzip/deflate 响应压缩 | | 字节范围请求      | 单范围 206 与多范围
- * multipart/byteranges 206 | | CONNECT 隧道      | 双工 TCP 隧道中继，用于 HTTPS 代理       | | 路由匹配          |
- * 基于 Segment Radix Tree 的 O(k) 前缀匹配   | | 静态路径、路径参数（:id）、通配符（*）、正则表达式回退 | |
- * 中间件执行顺序    | 预过滤 → 核心过滤 → 路由处理 → 后过滤     | | 会话存储          | 可插拔 session_store（内存 /
- * Redis 后端） | | Cookie 解析       | 支持 Set-Cookie 和 Cookie 头              | | 会话标识符        | 支持
- * JESSIONID, SESSIONID, PHPSESSID 等常见名称 | | CSRF 防护         | Double-Submit Cookie 模式，仅验证状态变更方法 | |
- * SNI 多证书        | 基于 TLS SNI 扩展的 hostname → SSL_CTX 映射，支持通配符 | | Event Loop        | Linux epoll
- * 边缘触发，min-heap 定时器，单线程异步 I/O | | WebSocket 运行模式 | 线程模式（3线程/会话）和事件驱动模式（零线程）双模
- * | | WebSocket 心跳    | 周期性发送 Ping 帧，等待 Pong 响应        | | WebSocket 压缩    | permessage-deflate（RFC
- * 7692），支持窗口比特位协商与上下文接管 | | WebSocket 升级    | 通用 Upgrade 分发器，支持自定义协议处理器 |
+ * | HTTP/2 帧层       | 9 种帧类型：DATA / HEADERS / SETTINGS / PING / GOAWAY / RST_STREAM / WINDOW_UPDATE / PRIORITY / PUSH_PROMISE |
+ * | HPACK 头部压缩    | 静态表 61 项 + 动态表 + Huffman 编码（RFC 7541） |
+ * | 头部字段大小写    | 不区分大小写，存储为原始大小写            |
+ * | 分块传输编码      | 流式增量 chunked 解析，支持 Trailing Headers |
+ * | 内容协商          | Accept-Encoding 解析，gzip/deflate 响应压缩 |
+ * | 字节范围请求      | 单范围 206 与多范围 multipart/byteranges 206 |
+ * | CONNECT 隧道      | 双工 TCP 隧道中继，用于 HTTPS 代理       |
+ * | 路由匹配          | 基于 Segment Radix Tree 的 O(k) 前缀匹配   |
+ * | 静态路径、路径参数（:id）、通配符（*）、正则表达式回退 |
+ * | 中间件执行顺序    | 预过滤 → 核心过滤 → 路由处理 → 后过滤     |
+ * | 会话存储          | 可插拔 session_store（内存 / Redis 后端） |
+ * | Cookie 解析       | 支持 Set-Cookie 和 Cookie 头              |
+ * | 会话标识符        | 支持 JESSIONID, SESSIONID, PHPSESSID 等常见名称 |
+ * | CSRF 防护         | Double-Submit Cookie 模式，仅验证状态变更方法 |
+ * | SNI 多证书        | 基于 TLS SNI 扩展的 hostname → SSL_CTX 映射，支持通配符 |
+ * | Event Loop        | Linux epoll 边缘触发，min-heap 定时器，单线程异步 I/O |
+ * | WebSocket 运行模式 | 线程模式（3线程/会话）和事件驱动模式（零线程）双模 |
+ * | WebSocket 心跳    | 周期性发送 Ping 帧，等待 Pong 响应        |
+ * | WebSocket 压缩    | permessage-deflate（RFC 7692），支持窗口比特位协商与上下文接管 |
+ * | WebSocket 升级    | 通用 Upgrade 分发器，支持自定义协议处理器 |
  *
  * @note 本模块的 HTTP 解析器严格遵循 RFC 9112 语法规则，支持分块传输编码（chunked）
  *       和 Content-Length 两种方式确定消息体长度。WebSocket 实现完整支持 RFC 6455

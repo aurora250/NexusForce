@@ -25,6 +25,12 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 
 /**
+ * @typedef thread_exit_callback_t
+ * @brief 线程退出回调类型
+ */
+using thread_exit_callback_t = void (*)(void*);
+
+/**
  * @struct thread_exit_elt
  * @brief 线程退出回调元素
  *
@@ -32,8 +38,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * 使用链表结构存储所有注册的回调，按照注册的逆序执行。
  */
 struct thread_exit_elt {
-    thread_exit_elt* next; ///< 指向下一个回调元素的指针
-    void (*cb)(void*);     ///< 回调函数指针
+    thread_exit_elt* next;           ///< 指向下一个回调元素的指针
+    thread_exit_callback_t callback; ///< 回调函数指针
 };
 
 /**
@@ -44,7 +50,7 @@ struct thread_exit_elt {
  * 将一个回调函数注册到当前线程的退出回调列表中。
  * 回调函数将在当前线程退出时被调用，参数为elt指针本身。
  */
-void NEFORCE_API thread_exit_register(thread_exit_elt* elt, void (*callback)(void*)) noexcept;
+void NEFORCE_API thread_exit_register(thread_exit_elt* elt, thread_exit_callback_t callback) noexcept;
 
 /** @} */ // ThreadExit
 

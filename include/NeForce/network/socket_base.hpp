@@ -131,14 +131,13 @@ public:
 #ifdef NEFORCE_PLATFORM_LINUX
         DCCP = IPPROTO_DCCP, ///< 数据报拥塞控制协议
 
-        IP = ETH_P_IP,             ///< IPv4 以太网帧类型
-        ARP = ETH_P_ARP,           ///< 地址解析协议帧类型
-        IPV6 = ETH_P_IPV6,         ///< IPv6 以太网帧类型
-        LAT = ETH_P_LAT,           ///< 局域传输协议
-        ETHERCAT = ETH_P_ETHERCAT, ///< EtherCAT 工业以太网协议
-        VLAN = ETH_P_8021Q,        ///< IEEE 802.1Q VLAN 标签帧
-        LLDP = ETH_P_LLDP,         ///< 链路层发现协议
-        MPLS = ETH_P_MPLS_UC       ///< 多协议标签交换单播
+        IP = ETH_P_IP,       ///< IPv4 以太网帧类型
+        ARP = ETH_P_ARP,     ///< 地址解析协议帧类型
+        IPV6 = ETH_P_IPV6,   ///< IPv6 以太网帧类型
+        LAT = ETH_P_LAT,     ///< 局域传输协议
+        VLAN = ETH_P_8021Q,  ///< IEEE 802.1Q VLAN 标签帧
+        LLDP = ETH_P_LLDP,   ///< 链路层发现协议
+        MPLS = ETH_P_MPLS_UC ///< 多协议标签交换单播
 #endif
     };
 

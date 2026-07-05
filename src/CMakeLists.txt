@@ -14,6 +14,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/semaphore.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/this_thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_exit_notifier.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_exit_register.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/aes256.cpp

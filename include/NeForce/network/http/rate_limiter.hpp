@@ -30,17 +30,14 @@ NEFORCE_BEGIN_HTTP__
  * 使用原子操作实现无锁的令牌消耗和补充。
  */
 struct NEFORCE_API token_bucket {
-    double tokens;           ///< 当前令牌数
-    uint64_t last_refill_ms; ///< 上次补充时间（毫秒时间戳）
-    double refill_rate;      ///< 每秒补充令牌数
-    double capacity;         ///< 桶容量
-    mutable mutex mutex_;    ///< 保护内部状态
+    double tokens{0.};          ///< 当前令牌数
+    uint64_t last_refill_ms{0}; ///< 上次补充时间（毫秒时间戳）
+    double refill_rate{1.};     ///< 每秒补充令牌数
+    double capacity{1.};        ///< 桶容量
+    mutable mutex mutex_;       ///< 保护内部状态
 
-    token_bucket() :
-    tokens(0),
-    last_refill_ms(0),
-    refill_rate(1.0),
-    capacity(1.0) {}
+    token_bucket() = default;
+    ~token_bucket() = default;
 
     token_bucket(double rate, double burst) :
     tokens(burst),
@@ -98,7 +95,8 @@ private:
 
     mutable mutex mutex_;
     unordered_map<string, bucket_entry> buckets_;
-    static constexpr size_t max_buckets_{10000};
+
+    static constexpr size_t MAX_BUCKETS_COUNT{10000};
 
 public:
     token_bucket_limiter() = default;

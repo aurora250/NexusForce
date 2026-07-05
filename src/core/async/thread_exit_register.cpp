@@ -17,7 +17,7 @@ namespace {
                 thread_exit_elt* current = thread_exit_list;
                 while (current != nullptr) {
                     thread_exit_elt* next = current->next;
-                    current->cb(current);
+                    current->callback(current);
                     current = next;
                 }
             } catch (...) {
@@ -35,7 +35,7 @@ namespace {
 
 void thread_exit_register(thread_exit_elt* elt, void (*callback)(void*)) noexcept {
     elt->next = thread_registry().thread_exit_list;
-    elt->cb = callback;
+    elt->callback = callback;
     thread_registry().thread_exit_list = elt;
 }
 

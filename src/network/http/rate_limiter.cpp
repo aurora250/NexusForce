@@ -54,7 +54,7 @@ bool token_bucket_limiter::allow(const string& key, double rate, double burst) {
             return it->second.bucket.try_consume(now);
         }
 
-        if (buckets_.size() >= max_buckets_) {
+        if (buckets_.size() >= MAX_BUCKETS_COUNT) {
             auto lru = buckets_.begin();
             for (auto bucket = buckets_.begin(); bucket != buckets_.end(); ++bucket) {
                 if (bucket->second.last_access_ms < lru->second.last_access_ms) {
