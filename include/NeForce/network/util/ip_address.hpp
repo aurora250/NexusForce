@@ -8,6 +8,7 @@
  * 此文件提供了IP地址的封装类，支持IPv4和IPv6地址。
  */
 
+#include "NeForce/core/async/async_result.hpp"
 #include "NeForce/core/interface/istringify.hpp"
 #include "NeForce/core/utility/optional.hpp"
 #include "NeForce/core/utility/variant.hpp"
@@ -210,6 +211,35 @@ public:
 };
 
 /** @} */ // NetworkUtil
+
+NEFORCE_BEGIN_INNER__
+
+template <>
+struct future_handler<error_code, size_t, ip_address> {
+    shared_ptr<promise<pair<size_t, ip_address>>> promise_;
+
+    void operator()(error_code ec, size_t n, ip_address addr) {
+        if (ec) {
+            promise_->set_exception(_NEFORCE make_exception_ptr(system_exception(ec)));
+        } else {
+            promise_->set_value(make_pair(n, move(addr)));
+        }
+    }
+};
+
+NEFORCE_END_INNER__
+
+template <>
+struct async_result<use_future_t, void(error_code, size_t, ip_address)> {
+    using handler_type = inner::future_handler<error_code, size_t, ip_address>;
+    using return_type = future<pair<size_t, ip_address>>;
+    handler_type handler_;
+    explicit async_result(use_future_t /*unused*/) {
+        handler_.promise_ = make_shared<promise<pair<size_t, ip_address>>>();
+    }
+    handler_type get_handler() { return handler_; }
+    return_type get() { return handler_.promise_->get_future(); }
+};
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_NETWORK_UTIL_IP_ADDRESS_HPP__

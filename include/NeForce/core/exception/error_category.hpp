@@ -27,6 +27,9 @@ public:
     NEFORCE_NODISCARD bool less_than(const error_category& rhs) const noexcept {
         return less<const error_category*>()(this, &rhs);
     }
+
+    static const error_category& generic() noexcept;
+    static const error_category& system() noexcept;
 };
 
 
@@ -44,6 +47,8 @@ NEFORCE_API const error_category& generic_category() noexcept;
 inline error_code make_error_code(errc e) noexcept;
 inline error_condition make_error_condition(errc e) noexcept;
 
+inline const error_category& error_category::generic() noexcept { return generic_category(); }
+
 
 class NEFORCE_API system_error_category final : public error_category {
 public:
@@ -55,6 +60,8 @@ public:
 };
 
 NEFORCE_API const error_category& system_category() noexcept;
+
+inline const error_category& error_category::system() noexcept { return system_category(); }
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_EXCEPTION_ERROR_CATEGORY_HPP__

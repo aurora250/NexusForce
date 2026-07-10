@@ -446,16 +446,17 @@ class HttpServerIntegrationTest : public ::testing::Test {
 protected:
     void SetUp() override {}
     void TearDown() override {}
+    io_context ctx_;
 };
 
 TEST_F(HttpServerIntegrationTest, ServerPortConfiguration) {
-    http_server server(ports{18080});
+    http_server server(ports{18080}, ctx_);
     EXPECT_EQ(server.port(), ports{18080});
     EXPECT_FALSE(server.is_running());
 }
 
 TEST_F(HttpServerIntegrationTest, ServerRouterAccess) {
-    http_server server(ports{18081});
+    http_server server(ports{18081}, ctx_);
     server.router().get("/test", [](http_request&, http_response& res) {
         res.status = http_status::S2_OK;
         res.status_message = "OK";
@@ -470,13 +471,13 @@ TEST_F(HttpServerIntegrationTest, ServerRouterAccess) {
 }
 
 TEST_F(HttpServerIntegrationTest, ServerCookieNameConfiguration) {
-    http_server server(ports{18082});
+    http_server server(ports{18082}, ctx_);
     server.set_cookie_name(http_cookie_name::PHPSESSID());
     EXPECT_EQ(server.cookie_name().cookie_name(), "PHPSESSID");
 }
 
 TEST_F(HttpServerIntegrationTest, SessionManagerSettings) {
-    http_server server(ports{18083});
+    http_server server(ports{18083}, ctx_);
     server.set_session_cleanup_interval(seconds{600});
     server.set_max_sessions(5000);
 
@@ -945,10 +946,11 @@ class HttpUpgradeIntegrationTest : public ::testing::Test {
 protected:
     void SetUp() override {}
     void TearDown() override {}
+    io_context ctx_;
 };
 
 TEST_F(HttpUpgradeIntegrationTest, RegisterCustomUpgradeHandler) {
-    http_server server(ports{19001});
+    http_server server(ports{19001}, ctx_);
     bool custom_called = false;
 
     server.set_upgrade_handler("custom-proto", [&](http_request&, unique_ptr<tcp_socket>) -> bool {
@@ -961,7 +963,7 @@ TEST_F(HttpUpgradeIntegrationTest, RegisterCustomUpgradeHandler) {
 }
 
 TEST_F(HttpUpgradeIntegrationTest, WebSocketServerAccessible) {
-    http_server server(ports{19002});
+    http_server server(ports{19002}, ctx_);
     auto& ws = server.websocket();
     EXPECT_EQ(ws.session_count(), 0u);
 
@@ -1311,10 +1313,11 @@ class ReverseProxyIntegrationTest : public ::testing::Test {
 protected:
     void SetUp() override {}
     void TearDown() override {}
+    io_context ctx_;
 };
 
 TEST_F(ReverseProxyIntegrationTest, PathPrefixMatching) {
-    reverse_proxy_filter proxy;
+    reverse_proxy_filter proxy(ctx_);
     proxy.set_path_prefix("/api/");
     proxy.add_backend({"backend1", ports(8080)});
 
@@ -1328,7 +1331,7 @@ TEST_F(ReverseProxyIntegrationTest, PathPrefixMatching) {
 }
 
 TEST_F(ReverseProxyIntegrationTest, NonMatchingPathBypasses) {
-    reverse_proxy_filter proxy;
+    reverse_proxy_filter proxy(ctx_);
     proxy.set_path_prefix("/api/");
 
     http_request req;
@@ -1341,7 +1344,7 @@ TEST_F(ReverseProxyIntegrationTest, NonMatchingPathBypasses) {
 }
 
 TEST_F(ReverseProxyIntegrationTest, HeaderRewriteCallback) {
-    reverse_proxy_filter proxy;
+    reverse_proxy_filter proxy(ctx_);
     proxy.set_path_prefix("/api/");
     proxy.add_backend({"backend", ports(8080)});
     proxy.set_header_rewrite([](unordered_map<string, string>& headers) { headers["X-Forwarded-Proto"] = "https"; });
@@ -1681,11 +1684,18 @@ TEST_F(ChunkedReaderIntegrationTest, ConfigurableLimits) {
 
 class H2TlsIntegrationTest : public ::testing::Test {
 protected:
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const char* cert_path = "D:/OpenSSL/server.crt";
+    const char* key_path = "D:/OpenSSL/server.key";
+#else
     const char* cert_path = "/tmp/h2test.crt";
     const char* key_path = "/tmp/h2test.key";
+#endif
 
     void SetUp() override {}
     void TearDown() override {}
+
+    io_context ctx_;
 };
 
 TEST_F(H2TlsIntegrationTest, H2AlpnNegotiationServerClient) {
@@ -1694,14 +1704,14 @@ TEST_F(H2TlsIntegrationTest, H2AlpnNegotiationServerClient) {
         GTEST_SKIP() << "Test certificate not found at " << cert_path;
     }
 
-    http_server server(ports(8443), move(server_ctx), 1);
+    http_server server(ports(8443), ctx_, move(server_ctx), 1);
     server.start();
     this_thread::sleep_for(milliseconds(200));
 
     ssl_context client_ctx(ssl_method::TLS_CLIENT);
     client_ctx.set_alpn_protos({"h2"});
 
-    ssl_client client(move(client_ctx));
+    ssl_client client(ctx_, move(client_ctx));
     client.set_verify_peer(false);
     if (!client.connect(ip_address::loopback().to_string(), ports(8443))) {
         server.stop();
@@ -1723,14 +1733,14 @@ TEST_F(H2TlsIntegrationTest, Http11AlpnFallback) {
         GTEST_SKIP() << "Test certificate not found at " << cert_path;
     }
 
-    http_server server(ports(8444), move(server_ctx), 1);
+    http_server server(ports(8444), ctx_, move(server_ctx), 1);
     server.start();
     this_thread::sleep_for(milliseconds(200));
 
     ssl_context client_ctx(ssl_method::TLS_CLIENT);
     client_ctx.set_alpn_protos({"http/1.1"});
 
-    ssl_client client(move(client_ctx));
+    ssl_client client(ctx_, move(client_ctx));
     client.set_verify_peer(false);
     if (!client.connect(ip_address::loopback().to_string(), ports(8444))) {
         server.stop();

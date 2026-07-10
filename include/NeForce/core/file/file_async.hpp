@@ -5,18 +5,15 @@
  * @file file_async.hpp
  * @brief 异步文件I/O操作类
  *
- * 此文件提供了异步文件读写操作的支持。
+ * 提供通过 io_context 驱动的异步文件读写操作。
+ * Windows 使用 IOCP，Linux 使用 io_uring（内核 5.1+）。
  */
 
-#include "NeForce/core/async/mutex.hpp"
-#include "NeForce/core/container/unordered_map.hpp"
-#include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/async/cancellation_slot.hpp"
+#include "NeForce/core/async/io_context.hpp"
 #include "NeForce/core/exception/error_code.hpp"
 #include "NeForce/core/file/file_constants.hpp"
 #include "NeForce/core/string/string.hpp"
-#ifdef NEFORCE_PLATFORM_LINUX
-#    include <aio.h>
-#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -29,13 +26,9 @@ NEFORCE_BEGIN_NAMESPACE__
  * @class file_async
  * @brief 文件异步I/O管理类
  *
- * 提供对文件句柄的异步读写操作：
- * - 非阻塞异步读写
- * - 支持超时等待
- * - 支持取消操作
- * - 线程安全的操作提交
+ * 提供对文件句柄的异步读写操作，由 io_context 事件循环驱动。
+ * handler 在 io_context::run() 线程中执行。
  *
- * @note 对同一文件的并发操作顺序由操作系统决定。
  * @note 不持有文件句柄所有权，句柄生命周期由调用方保证。
  */
 class NEFORCE_API file_async {
@@ -43,81 +36,35 @@ public:
 #ifdef NEFORCE_PLATFORM_WINDOWS
     using size_type = ::DWORD;          ///< 大小类型
     using difference_type = ::LONGLONG; ///< 偏移量类型
-    using aiocb_type = ::OVERLAPPED;    ///< 异步I/O控制块类型
 #else
     using size_type = size_t;        ///< 大小类型
     using difference_type = ::off_t; ///< 偏移量类型
-    using aiocb_type = ::aiocb;      ///< 异步I/O控制块类型
 #endif
 
     using native_handle_type = _NEFORCE native_handle_type; ///< 原生文件句柄类型
 
 private:
-    /**
-     * @struct async_context
-     * @brief 异步操作上下文
-     */
-    struct async_context {
-        string data;              ///< 写操作的数据副本
-        string* buffer = nullptr; ///< 读操作的目标缓冲区
-        aiocb_type* cb = nullptr; ///< 异步I/O控制块
-        bool is_write = false;    ///< 是否为写操作
+    native_handle_type handle_;
+    io_context* ctx_{nullptr};
+    function<void(error_code, size_type)> pending_handler_;
 
-        /**
-         * @brief 写操作上下文构造函数
-         * @param d 要写入的数据
-         */
-        explicit async_context(string d);
+    void ensure_iocp(io_context& ctx);
 
-        /**
-         * @brief 读操作上下文构造函数
-         * @param buf 目标缓冲区
-         */
-        explicit async_context(string* buf);
+    void do_async_read(io_context& ctx, string& buffer, size_type size, difference_type offset, cancellation_slot* slot,
+                       function<void(error_code, size_type)> handler);
 
-        /**
-         * @brief 析构函数
-         */
-        ~async_context();
-    };
-
-public:
-    /**
-     * @struct async_result
-     * @brief 异步操作结果句柄
-     *
-     * 表示一个异步操作的状态，用于等待操作完成和获取结果。
-     */
-    struct async_result {
-        bool completed = false;                ///< 操作是否已完成
-        size_t bytes_transferred = 0;          ///< 实际传输的字节数
-        error_code error;                      ///< 错误码
-        aiocb_type* cb = nullptr;              ///< 异步I/O控制块指针
-        async_context* user_context = nullptr; ///< 用户上下文指针
-    };
-
-private:
-    native_handle_type handle_;                                   ///< 文件句柄
-    mutable mutex mutex_;                                         ///< 保护操作列表的互斥锁
-    mutable vector<aiocb_type*> operations_;                      ///< 进行中的异步操作列表
-    mutable unordered_map<aiocb_type*, async_context*> contexts_; ///< 操作上下文映射
-
-    bool complete_result(async_result& result, size_type bytes) noexcept;
-    bool check_completion(async_result& result) noexcept;
+    void do_async_write(io_context& ctx, string data, size_type size, difference_type offset, cancellation_slot* slot,
+                        function<void(error_code, size_type)> handler);
 
 public:
     /**
      * @brief 构造函数
      * @param handle 已打开的文件句柄
-     *
-     * 关联指定的文件句柄。
      */
     explicit file_async(native_handle_type handle);
 
     /**
      * @brief 析构函数
-     *
-     * 取消所有进行中的异步操作并释放资源。
      */
     ~file_async();
 
@@ -138,48 +85,86 @@ public:
     file_async& operator=(file_async&& other) noexcept;
 
     /**
-     * @brief 提交异步读取操作
-     * @param buffer 输出缓冲区（会预先分配空间）
+     * @brief 异步读取数据
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 输出缓冲区
      * @param size 要读取的字节数
-     * @param offset 文件偏移量，-1表示使用当前文件位置
-     * @return 异步操作结果句柄
-     *
-     * 从文件读取数据到指定缓冲区。如果size为0，立即返回已完成的结果。
-     * 如果offset为-1，使用当前文件指针位置；否则从指定偏移量读取。
+     * @param handler 完成回调 void(error_code, size_type bytes_read)
      */
-    async_result read(string& buffer, size_type size, difference_type offset = -1) const;
+    void async_read(io_context& ctx, string& buffer, size_type size, function<void(error_code, size_type)> handler) {
+        do_async_read(ctx, buffer, size, -1, nullptr, move(handler));
+    }
 
     /**
-     * @brief 提交异步写入操作
+     * @brief 指定偏移量异步读取数据
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 输出缓冲区
+     * @param size 要读取的字节数
+     * @param offset 文件偏移量，-1 使用当前位置
+     * @param handler 完成回调 void(error_code, size_type bytes_read)
+     */
+    void async_read(io_context& ctx, string& buffer, size_type size, difference_type offset,
+                    function<void(error_code, size_type)> handler) {
+        do_async_read(ctx, buffer, size, offset, nullptr, move(handler));
+    }
+
+    /**
+     * @brief 带取消槽异步读取数据
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 输出缓冲区
+     * @param size 要读取的字节数
+     * @param slot 取消槽
+     * @param handler 完成回调 void(error_code, size_type bytes_read)
+     */
+    void async_read(io_context& ctx, string& buffer, size_type size, cancellation_slot& slot,
+                    function<void(error_code, size_type)> handler) {
+        do_async_read(ctx, buffer, size, -1, &slot, move(handler));
+    }
+
+    /**
+     * @brief 异步写入数据
+     * @param ctx 异步 I/O 执行上下文
      * @param data 要写入的数据
-     * @param size 要写入的字节数，最大值表示写入全部数据
-     * @param offset 文件偏移量，-1表示使用当前文件位置
-     * @return 异步操作结果句柄
+     * @param size 要写入的字节数
+     * @param handler 完成回调 void(error_code, size_type bytes_written)
      *
-     * 将数据写入文件。数据会被复制到内部存储，调用者可以立即释放。
-     * 如果size为最大值，写入整个字符串；否则写入指定长度。
+     * 数据被内部拷贝，调用者可以立即释放。
      */
-    async_result write(string data, size_type size, difference_type offset = -1);
+    void async_write(io_context& ctx, string data, size_type size, function<void(error_code, size_type)> handler) {
+        do_async_write(ctx, move(data), size, -1, nullptr, move(handler));
+    }
 
     /**
-     * @brief 等待异步操作完成
-     * @param result 异步操作结果句柄
-     * @param timeout_ms 超时时间（毫秒），最大值表示无限等待
-     * @return 操作完成返回true，超时或失败返回false
-     *
-     * 阻塞当前线程直到异步操作完成或超时。
-     * 如果操作已完成，立即返回。
+     * @brief 指定偏移量异步写入数据
+     * @param ctx 异步 I/O 执行上下文
+     * @param data 要写入的数据
+     * @param size 要写入的字节数
+     * @param offset 文件偏移量，-1 使用当前位置
+     * @param handler 完成回调 void(error_code, size_type bytes_written)
      */
-    bool wait(async_result& result, uint32_t timeout_ms = numeric_traits<uint32_t>::max());
+    void async_write(io_context& ctx, string data, size_type size, difference_type offset,
+                     function<void(error_code, size_type)> handler) {
+        do_async_write(ctx, move(data), size, offset, nullptr, move(handler));
+    }
 
     /**
-     * @brief 取消异步操作
-     * @param result 异步操作结果句柄
-     *
-     * 尝试取消进行中的异步操作。取消成功后，操作状态会被标记为已完成，
-     * error_code会被设置为取消错误码。
+     * @brief 带取消槽异步写入数据
+     * @param ctx 异步 I/O 执行上下文
+     * @param data 要写入的数据
+     * @param size 要写入的字节数
+     * @param slot 取消槽
+     * @param handler 完成回调 void(error_code, size_type bytes_written)
      */
-    void cancel(async_result& result) noexcept;
+    void async_write(io_context& ctx, string data, size_type size, cancellation_slot& slot,
+                     function<void(error_code, size_type)> handler) {
+        do_async_write(ctx, move(data), size, -1, &slot, move(handler));
+    }
+
+    /**
+     * @brief 获取原生文件句柄
+     * @return 原生文件句柄
+     */
+    NEFORCE_NODISCARD native_handle_type native_handle() const noexcept { return handle_; }
 };
 
 /** @} */ // File

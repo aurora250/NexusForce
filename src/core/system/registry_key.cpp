@@ -1,4 +1,4 @@
-#include <NeForce/core/system/registry.hpp>
+#include <NeForce/core/system/registry_key.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <winerror.h>
 #    include <synchapi.h>

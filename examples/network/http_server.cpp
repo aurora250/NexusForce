@@ -25,7 +25,8 @@ using namespace neforce;
 using namespace neforce::http;
 
 int main() {
-    http_server server(ports(8080u));
+    io_context context;
+    http_server server(ports(8080u), context);
 
     auto& router = server.router();
 

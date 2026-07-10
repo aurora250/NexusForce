@@ -28,16 +28,15 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 正则操作异常
  */
 struct regex_exception final : value_exception {
-    explicit regex_exception(const char* info = "Regex Operation Failed", const char* type = static_type,
-                             const int code = 0) noexcept :
-    value_exception(info, type, code) {}
+    explicit regex_exception(const char* info = "Regex Operation Failed") noexcept :
+    value_exception(info) {}
 
     explicit regex_exception(const exception& e) :
     value_exception(e) {}
 
     ~regex_exception() override = default;
 
-    static constexpr auto static_type = "regex_exception";
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "regex_exception"; }
 };
 
 /** @} */ // Exceptions
@@ -191,14 +190,6 @@ private:
         void operator()(::pcre2_code* code) const noexcept {
             if (code != nullptr) {
                 ::pcre2_code_free(code);
-            }
-        }
-    };
-
-    struct pcre2_match_data_deleter {
-        void operator()(::pcre2_match_data* data) const noexcept {
-            if (data != nullptr) {
-                ::pcre2_match_data_free(data);
             }
         }
     };

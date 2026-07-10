@@ -41,14 +41,14 @@ void ssl_stream::handle_ssl_error(const int ret, const char* operation) {
             char buf[256];
             ::ERR_error_string_n(ssl_err, static_cast<char*>(buf), sizeof(buf));
             last_error_ = string(operation) + " syscall error: " + static_cast<char*>(buf);
-            NEFORCE_THROW_EXCEPTION(ssl_exception(static_cast<int>(ssl_err)));
+            NEFORCE_THROW_EXCEPTION(ssl_exception(buf, static_cast<int>(ssl_err)));
         }
         case SSL_ERROR_SSL: {
             const unsigned long ssl_err = ::ERR_get_error();
             char buf[256];
             ::ERR_error_string_n(ssl_err, static_cast<char*>(buf), sizeof(buf));
             last_error_ = string(operation) + " SSL protocol error: " + static_cast<char*>(buf);
-            NEFORCE_THROW_EXCEPTION(ssl_exception(static_cast<int>(ssl_err)));
+            NEFORCE_THROW_EXCEPTION(ssl_exception(buf, static_cast<int>(ssl_err)));
         }
         default: {
             last_error_ = string(operation) + " unknown error";
@@ -98,7 +98,7 @@ void ssl_stream::accept() {
         if (err == SSL_ERROR_WANT_READ || err == SSL_ERROR_WANT_WRITE) {
             continue;
         }
-        if (err == SSL_ERROR_SYSCALL && ::ERR_get_error() == 0) {
+        if (err == SSL_ERROR_SYSCALL && ::ERR_peek_error() == 0) {
             last_error_ = "SSL_accept system call error";
             NEFORCE_THROW_EXCEPTION(ssl_exception("SSL accept failed: connection error"));
         }
@@ -121,7 +121,7 @@ bool ssl_stream::connect() {
         if (err == SSL_ERROR_WANT_READ || err == SSL_ERROR_WANT_WRITE) {
             continue;
         }
-        if (err == SSL_ERROR_SYSCALL && ::ERR_get_error() == 0) {
+        if (err == SSL_ERROR_SYSCALL && ::ERR_peek_error() == 0) {
             last_error_ = "SSL_connect system call error";
             NEFORCE_THROW_EXCEPTION(ssl_exception("SSL connect failed: connection error"));
         }
@@ -381,6 +381,250 @@ string ssl_stream::get_alpn_negotiated() const {
         return "";
     }
     return {reinterpret_cast<const char*>(data), len};
+}
+
+namespace {
+    struct ssl_handshake_op : enable_shared_from_this<ssl_handshake_op> {
+        io_context* ctx;
+        ssl_stream* stream;
+        function<void(error_code)> handler;
+        cancellation_slot* cancel_slot{nullptr};
+        void* ssl_ptr;
+        int fd_{-1};
+
+        void start() {
+            if (cancel_slot != nullptr && cancel_slot->is_cancelled()) {
+                handler(make_operation_aborted());
+                return;
+            }
+            ssl_ptr = stream->native_handle();
+            fd_ = ::SSL_get_fd(static_cast<::SSL*>(ssl_ptr));
+            do_handshake();
+        }
+
+        void do_handshake() {
+            const int ret = ::SSL_do_handshake(static_cast<::SSL*>(ssl_ptr));
+            if (ret == 1) {
+                handler(error_code{});
+                return;
+            }
+
+            const int err = ::SSL_get_error(static_cast<::SSL*>(ssl_ptr), ret);
+            if (err == SSL_ERROR_WANT_READ) {
+                auto self = shared_from_this();
+                if (cancel_slot != nullptr) {
+                    cancel_slot->assign([self]() mutable {
+                        self->ctx->remove_fd(self->fd_);
+                        self->handler(make_operation_aborted());
+                    });
+                }
+                ctx->add_fd(fd_, epoll_in,
+                            [self](int /*fd*/, uint32_t /*events*/, error_code ec) { self->on_fd_ready(ec); });
+            } else if (err == SSL_ERROR_WANT_WRITE) {
+                auto self = shared_from_this();
+                if (cancel_slot != nullptr) {
+                    cancel_slot->assign([self]() mutable {
+                        self->ctx->remove_fd(self->fd_);
+                        self->handler(make_operation_aborted());
+                    });
+                }
+                ctx->add_fd(fd_, epoll_out,
+                            [self](int /*fd*/, uint32_t /*events*/, error_code ec) { self->on_fd_ready(ec); });
+            } else {
+                char err_buf[256] = {};
+                ::ERR_error_string_n(static_cast<unsigned long>(err), err_buf, sizeof(err_buf));
+                handler(error_code(err, error_category::system()));
+            }
+        }
+
+        void on_fd_ready(error_code ec) {
+            if (ec) {
+                handler(ec);
+                return;
+            }
+            do_handshake();
+        }
+    };
+} // namespace
+
+void ssl_stream::async_handshake(io_context& ctx, function<void(error_code)> handler) {
+    auto op = make_shared<ssl_handshake_op>();
+    op->ctx = &ctx;
+    op->stream = this;
+    op->handler = move(handler);
+    op->start();
+}
+
+void ssl_stream::async_handshake(io_context& ctx, cancellation_slot& slot, function<void(error_code)> handler) {
+    auto op = make_shared<ssl_handshake_op>();
+    op->ctx = &ctx;
+    op->stream = this;
+    op->handler = move(handler);
+    op->cancel_slot = &slot;
+    op->start();
+}
+
+namespace {
+    struct ssl_read_op : enable_shared_from_this<ssl_read_op> {
+        io_context* ctx;
+        ::SSL* ssl;
+        int fd{-1};
+        memory_view<char> buffer;
+        function<void(error_code, size_t)> handler;
+        cancellation_slot* cancel_slot{nullptr};
+
+        void start() {
+            if (cancel_slot != nullptr && cancel_slot->is_cancelled()) {
+                handler(make_operation_aborted(), 0);
+                return;
+            }
+            fd = ::SSL_get_fd(ssl);
+            do_read();
+        }
+
+        void do_read() {
+            const int ret = ::SSL_read(ssl, buffer.data(), static_cast<int>(buffer.size()));
+            if (ret > 0) {
+                handler(error_code{}, static_cast<size_t>(ret));
+                return;
+            }
+            const int err = ::SSL_get_error(ssl, ret);
+            if (err == SSL_ERROR_WANT_READ) {
+                auto self = shared_from_this();
+                if (cancel_slot != nullptr) {
+                    cancel_slot->assign([self]() mutable {
+                        self->ctx->remove_fd(self->fd);
+                        self->handler(make_operation_aborted(), 0);
+                    });
+                }
+                ctx->add_fd(fd, epoll_in,
+                            [self](int /*fd*/, uint32_t /*events*/, error_code ec) { self->on_ready(ec); });
+            } else if (err == SSL_ERROR_WANT_WRITE) {
+                auto self = shared_from_this();
+                if (cancel_slot != nullptr) {
+                    cancel_slot->assign([self]() mutable {
+                        self->ctx->remove_fd(self->fd);
+                        self->handler(make_operation_aborted(), 0);
+                    });
+                }
+                ctx->add_fd(fd, epoll_out,
+                            [self](int /*fd*/, uint32_t /*events*/, error_code ec) { self->on_ready(ec); });
+            } else if (err == SSL_ERROR_ZERO_RETURN) {
+                handler(error_code{make_error_code(errc::connection_reset)}, 0);
+            } else {
+                handler(error_code(err, error_category::system()), 0);
+            }
+        }
+
+        void on_ready(error_code ec) {
+            if (ec) {
+                handler(ec, 0);
+                return;
+            }
+            do_read();
+        }
+    };
+} // namespace
+
+void ssl_stream::async_read(io_context& ctx, memory_view<char> buffer, function<void(error_code, size_t)> handler) {
+    auto op = make_shared<ssl_read_op>();
+    op->ctx = &ctx;
+    op->ssl = ssl_.get();
+    op->buffer = buffer;
+    op->handler = move(handler);
+    op->start();
+}
+
+void ssl_stream::async_read(io_context& ctx, memory_view<char> buffer, cancellation_slot& slot,
+                            function<void(error_code, size_t)> handler) {
+    auto op = make_shared<ssl_read_op>();
+    op->ctx = &ctx;
+    op->ssl = ssl_.get();
+    op->buffer = buffer;
+    op->handler = move(handler);
+    op->cancel_slot = &slot;
+    op->start();
+}
+
+namespace {
+    struct ssl_write_op : enable_shared_from_this<ssl_write_op> {
+        io_context* ctx;
+        ::SSL* ssl;
+        int fd{-1};
+        memory_view<const char> buffer;
+        function<void(error_code, size_t)> handler;
+        cancellation_slot* cancel_slot{nullptr};
+
+        void start() {
+            if (cancel_slot != nullptr && cancel_slot->is_cancelled()) {
+                handler(make_operation_aborted(), 0);
+                return;
+            }
+            fd = ::SSL_get_fd(ssl);
+            do_write();
+        }
+
+        void do_write() {
+            const int ret = ::SSL_write(ssl, buffer.data(), static_cast<int>(buffer.size()));
+            if (ret > 0) {
+                handler(error_code{}, static_cast<size_t>(ret));
+                return;
+            }
+            const int err = ::SSL_get_error(ssl, ret);
+            if (err == SSL_ERROR_WANT_WRITE) {
+                auto self = shared_from_this();
+                if (cancel_slot != nullptr) {
+                    cancel_slot->assign([self]() mutable {
+                        self->ctx->remove_fd(self->fd);
+                        self->handler(make_operation_aborted(), 0);
+                    });
+                }
+                ctx->add_fd(fd, epoll_out,
+                            [self](int /*fd*/, uint32_t /*events*/, error_code ec) { self->on_ready(ec); });
+            } else if (err == SSL_ERROR_WANT_READ) {
+                auto self = shared_from_this();
+                if (cancel_slot != nullptr) {
+                    cancel_slot->assign([self]() mutable {
+                        self->ctx->remove_fd(self->fd);
+                        self->handler(make_operation_aborted(), 0);
+                    });
+                }
+                ctx->add_fd(fd, epoll_in,
+                            [self](int /*fd*/, uint32_t /*events*/, error_code ec) { self->on_ready(ec); });
+            } else {
+                handler(error_code(err, error_category::system()), 0);
+            }
+        }
+
+        void on_ready(error_code ec) {
+            if (ec) {
+                handler(ec, 0);
+                return;
+            }
+            do_write();
+        }
+    };
+} // namespace
+
+void ssl_stream::async_write(io_context& ctx, memory_view<const char> buffer,
+                             function<void(error_code, size_t)> handler) {
+    auto op = make_shared<ssl_write_op>();
+    op->ctx = &ctx;
+    op->ssl = ssl_.get();
+    op->buffer = buffer;
+    op->handler = move(handler);
+    op->start();
+}
+
+void ssl_stream::async_write(io_context& ctx, memory_view<const char> buffer, cancellation_slot& slot,
+                             function<void(error_code, size_t)> handler) {
+    auto op = make_shared<ssl_write_op>();
+    op->ctx = &ctx;
+    op->ssl = ssl_.get();
+    op->buffer = buffer;
+    op->handler = move(handler);
+    op->cancel_slot = &slot;
+    op->start();
 }
 
 NEFORCE_END_NAMESPACE__

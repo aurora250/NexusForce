@@ -839,6 +839,35 @@ thread_pool::periodic_token thread_pool::submit_every(int64_t interval_ms, const
 
 /** @} */ // ThreadPool
 
+/**
+ * @addtogroup Executor 执行器
+ * @{
+ */
+
+/**
+ * @struct thread_pool_executor
+ * @brief thread_pool 的轻量执行器适配器
+ *
+ * 将 thread_pool 的 submit_task() 适配为 executor 接口。
+ */
+struct thread_pool_executor {
+    thread_pool* pool;
+
+    /**
+     * @brief 提交 handler 到线程池
+     * @param handler 要执行的 handler
+     */
+    void execute(function<void()> handler) { pool->submit_task(move(handler)); }
+
+    /**
+     * @brief 检查当前线程是否为线程池 worker
+     * @return 在 worker 线程中返回 true
+     */
+    NEFORCE_NODISCARD bool running_in_this_thread() const noexcept { return get_worker_context() != nullptr; }
+};
+
+/** @} */ // Executor
+
 /** @} */ // AsyncComponents
 
 NEFORCE_END_NAMESPACE__

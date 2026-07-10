@@ -1,6 +1,9 @@
 #include <NeForce/network/ssl/ssl_context.hpp>
 #include <NeForce/core/system/pipe.hpp>
 #include <openssl/err.h>
+#ifdef NEFORCE_PLATFORM_WINDOWS
+#    include <wincrypt.h>
+#endif
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
@@ -106,6 +109,55 @@ namespace {
         NEFORCE_NODISCARD ::EVP_PKEY* get() const noexcept { return key; }
         explicit operator bool() const noexcept { return key != nullptr; }
     };
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    int import_certs_from_win_store(::X509_STORE* store, const wchar_t* store_name) {
+        int count = 0;
+
+        for (const DWORD location: {CERT_SYSTEM_STORE_CURRENT_USER, CERT_SYSTEM_STORE_LOCAL_MACHINE}) {
+            const ::HCERTSTORE hStore =
+                    ::CertOpenStore(CERT_STORE_PROV_SYSTEM, X509_ASN_ENCODING, 0,
+                                    CERT_STORE_OPEN_EXISTING_FLAG | location | CERT_STORE_READONLY_FLAG, store_name);
+            if (hStore == nullptr) {
+                continue;
+            }
+
+            ::PCCERT_CONTEXT pCertCtx = nullptr;
+            while ((pCertCtx = ::CertEnumCertificatesInStore(hStore, pCertCtx)) != nullptr) {
+                const unsigned char* cert_data = pCertCtx->pbCertEncoded;
+                ::X509* x509 = ::d2i_X509(nullptr, &cert_data, static_cast<long>(pCertCtx->cbCertEncoded));
+                if (x509 != nullptr) {
+                    if (::X509_STORE_add_cert(store, x509) == 1) {
+                        ++count;
+                    }
+                    ::X509_free(x509);
+                }
+            }
+
+            ::CertCloseStore(hStore, 0);
+        }
+        return count;
+    }
+
+    void load_windows_root_certs(::SSL_CTX* ctx) {
+        if (ctx == nullptr) {
+            return;
+        }
+
+        ::X509_STORE* store = ::SSL_CTX_get_cert_store(ctx);
+        if (store == nullptr) {
+            return;
+        }
+
+        const int total = import_certs_from_win_store(store, L"ROOT") + import_certs_from_win_store(store, L"CA");
+        if (total > 0) {
+            ::X509_VERIFY_PARAM* param = ::X509_STORE_get0_param(store);
+            if (param != nullptr) {
+                ::X509_VERIFY_PARAM_set_flags(param, X509_V_FLAG_PARTIAL_CHAIN);
+            }
+        }
+    }
+#endif
 } // namespace
 
 
@@ -152,6 +204,10 @@ method_(method) {
                 }
             }
         }
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        load_windows_root_certs(ctx_.get());
+#endif
 
         ::SSL_CTX_set_verify(ctx_.get(), SSL_VERIFY_PEER, nullptr);
     }

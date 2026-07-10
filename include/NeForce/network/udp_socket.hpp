@@ -9,6 +9,10 @@
  * 支持无连接的数据报发送和接收，以及已连接UDP socket的操作。
  */
 
+#include "NeForce/core/async/cancellation_slot.hpp"
+#include "NeForce/core/async/use_awaitable.hpp"
+#include "NeForce/core/async/io_context.hpp"
+#include "NeForce/core/functional/function.hpp"
 #include "NeForce/core/memory/memory_view.hpp"
 #include "NeForce/network/ip_socket.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -104,6 +108,155 @@ public:
      * 只能接收来自该端点的数据。
      */
     ssize_t receive(memory_view<char> buffer, int flags = 0);
+
+    /**
+     * @brief 异步接收数据报
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 接收缓冲区
+     * @param handler 完成回调 void(error_code, size_t bytes, ip_address sender)
+     *
+     * 异步等待接收UDP数据报，返回发送方地址。
+     * handler 在 io_context::run() 线程中执行。
+     */
+    void async_receive_from(io_context& ctx, memory_view<char> buffer,
+                            function<void(error_code, size_t, ip_address)> handler);
+
+    /**
+     * @brief 异步接收数据报（带取消槽）
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 接收缓冲区
+     * @param slot 取消槽
+     * @param handler 完成回调 void(error_code, size_t bytes, ip_address sender)
+     */
+    void async_receive_from(io_context& ctx, memory_view<char> buffer, cancellation_slot& slot,
+                            function<void(error_code, size_t, ip_address)> handler);
+
+    /**
+     * @brief 异步发送数据报
+     * @param ctx 异步 I/O 执行上下文
+     * @param data 要发送的数据
+     * @param endpoint 目标端点地址
+     * @param handler 完成回调 void(error_code, size_t bytes_sent)
+     *
+     * 异步向指定端点发送UDP数据报。
+     * handler 在 io_context::run() 线程中执行。
+     */
+    void async_send_to(io_context& ctx, memory_view<const char> data, const ip_address& endpoint,
+                       function<void(error_code, size_t)> handler);
+
+    /**
+     * @brief 异步发送数据报（带取消槽）
+     * @param ctx 异步 I/O 执行上下文
+     * @param data 要发送的数据
+     * @param endpoint 目标端点地址
+     * @param slot 取消槽
+     * @param handler 完成回调 void(error_code, size_t bytes_sent)
+     */
+    void async_send_to(io_context& ctx, memory_view<const char> data, const ip_address& endpoint,
+                       cancellation_slot& slot, function<void(error_code, size_t)> handler);
+
+    /**
+     * @brief 异步接收数据报—任意可调用对象
+     * @tparam Token 可调用对象类型，需满足 void(error_code, size_t, ip_address) 签名
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 接收缓冲区
+     * @param token 完成令牌
+     */
+    template <typename Token,
+              enable_if_t<!is_same_v<decay_t<Token>, function<void(error_code, size_t, ip_address)>>, int> = 0>
+    void async_receive_from(io_context& ctx, memory_view<char> buffer, Token&& token) {
+        async_receive_from(ctx, buffer, function<void(error_code, size_t, ip_address)>(forward<Token>(token)));
+    }
+
+    /**
+     * @brief 异步接收数据报—use_future
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 接收缓冲区
+     * @return future<pair<size_t, ip_address>> 接收字节数和发送方地址
+     */
+    auto async_receive_from(io_context& ctx, memory_view<char> buffer, use_future_t /*unused*/) {
+        async_result<use_future_t, void(error_code, size_t, ip_address)> result(use_future);
+        async_receive_from(ctx, buffer, function<void(error_code, size_t, ip_address)>(result.get_handler()));
+        return result.get();
+    }
+
+    /**
+     * @brief 异步接收数据报—detached（即发即忘）
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 接收缓冲区
+     */
+    void async_receive_from(io_context& ctx, memory_view<char> buffer, detached_t /*unused*/) {
+        async_receive_from(ctx, buffer,
+                           function<void(error_code, size_t, ip_address)>([](error_code, size_t, ip_address) {}));
+    }
+
+#ifdef NEFORCE_STANDARD_20
+    /**
+     * @brief 异步接收数据报—use_awaitable
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 接收缓冲区
+     * @return awaitable<pair<size_t, ip_address>> 可协程等待的结果
+     */
+    auto async_receive_from(io_context& ctx, memory_view<char> buffer, use_awaitable_t /*unused*/) {
+        async_result<use_awaitable_t, void(error_code, size_t, ip_address)> result(use_awaitable);
+        async_receive_from(ctx, buffer, function<void(error_code, size_t, ip_address)>(result.get_handler()));
+        return result.get();
+    }
+#endif
+
+    /**
+     * @brief 异步发送数据报—任意可调用对象
+     * @tparam Token 可调用对象类型，需满足 void(error_code, size_t) 签名
+     * @param ctx 异步 I/O 执行上下文
+     * @param data 要发送的数据
+     * @param endpoint 目标端点地址
+     * @param token 完成令牌
+     */
+    template <typename Token, enable_if_t<!is_same_v<decay_t<Token>, function<void(error_code, size_t)>>, int> = 0>
+    void async_send_to(io_context& ctx, memory_view<const char> data, const ip_address& endpoint, Token&& token) {
+        async_send_to(ctx, data, endpoint, function<void(error_code, size_t)>(forward<Token>(token)));
+    }
+
+    /**
+     * @brief 异步发送数据报—use_future
+     * @param ctx 异步 I/O 执行上下文
+     * @param data 要发送的数据
+     * @param endpoint 目标端点地址
+     * @return future<size_t> 发送字节数
+     */
+    auto async_send_to(io_context& ctx, memory_view<const char> data, const ip_address& endpoint,
+                       use_future_t /*unused*/) {
+        async_result<use_future_t, void(error_code, size_t)> result(use_future);
+        async_send_to(ctx, data, endpoint, function<void(error_code, size_t)>(result.get_handler()));
+        return result.get();
+    }
+
+    /**
+     * @brief 异步发送数据报—detached（即发即忘）
+     * @param ctx 异步 I/O 执行上下文
+     * @param data 要发送的数据
+     * @param endpoint 目标端点地址
+     */
+    void async_send_to(io_context& ctx, memory_view<const char> data, const ip_address& endpoint,
+                       detached_t /*unused*/) {
+        async_send_to(ctx, data, endpoint, function<void(error_code, size_t)>([](error_code, size_t) {}));
+    }
+
+#ifdef NEFORCE_STANDARD_20
+    /**
+     * @brief 异步发送数据报—use_awaitable
+     * @param ctx 异步 I/O 执行上下文
+     * @param data 要发送的数据
+     * @param endpoint 目标端点地址
+     * @return awaitable<size_t> 可协程等待的结果
+     */
+    auto async_send_to(io_context& ctx, memory_view<const char> data, const ip_address& endpoint,
+                       use_awaitable_t /*unused*/) {
+        async_result<use_awaitable_t, void(error_code, size_t)> result(use_awaitable);
+        async_send_to(ctx, data, endpoint, function<void(error_code, size_t)>(result.get_handler()));
+        return result.get();
+    }
+#endif
 };
 
 /** @} */ // UDP

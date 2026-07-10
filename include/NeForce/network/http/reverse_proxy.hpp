@@ -67,12 +67,19 @@ public:
     /// @brief 是否保持原始 Host 头（不过滤）
     bool passthrough_host_header{false};
 
-    reverse_proxy_filter() = default;
+    /**
+     * @brief 构造函数
+     * @param ctx 异步 I/O 执行上下文
+     */
+    explicit reverse_proxy_filter(io_context& ctx) :
+    ctx_(&ctx) {}
 
     /**
      * @brief 构造函数（单后端）
+     * @param ctx 异步 I/O 执行上下文
      */
-    reverse_proxy_filter(string host, ports port, string scheme = "http") {
+    reverse_proxy_filter(io_context& ctx, string host, ports port, string scheme = "http") :
+    ctx_(&ctx) {
         add_backend({move(host), port, move(scheme)});
     }
 
@@ -121,6 +128,7 @@ public:
     NEFORCE_NODISCARD string name() const override { return "reverse_proxy_filter"; }
 
 private:
+    io_context* ctx_{nullptr};
     vector<proxy_backend> backends_;
     string path_prefix_;
     backend_selector_cb selector_;

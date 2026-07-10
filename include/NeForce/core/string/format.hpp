@@ -10,6 +10,7 @@
  */
 
 #include "NeForce/core/string/to_string.hpp"
+#include "NeForce/core/system/locale.hpp"
 #include "NeForce/core/utility/tuple.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -64,6 +65,7 @@ struct format_options {
     bool zero_pad = false;                      ///< 是否零填充
     bool show_sign = false;                     ///< 是否强制显示符号 '+'
     bool space_sign = false;                    ///< 是否空格占位符号 ' '
+    const locale* loc = nullptr;                ///< locale 指针，非空时进行 locale 感知格式化
 };
 
 /// @cond
@@ -398,6 +400,11 @@ struct formatter<T, enable_if_t<is_floating_point_v<T>>> {
      * @return 格式化后的字符串
      */
     NEFORCE_CONSTEXPR20 string operator()(const T& value, const format_options& options) const {
+        if (options.loc != nullptr && (options.type == format_type::DEFAULT || options.type == format_type::FIXED ||
+                                       options.type == format_type::GENERAL)) {
+            const int prec = (options.precision >= 0) ? options.precision : 2;
+            return options.loc->format_number(static_cast<double>(value), prec);
+        }
         const int prec = (options.precision >= 0) ? options.precision : 6;
         string raw;
 
@@ -445,6 +452,9 @@ struct formatter<T, enable_if_t<is_standard_integral_v<T> && is_signed_v<T>>> {
      * @return 格式化后的字符串
      */
     NEFORCE_CONSTEXPR20 string operator()(const T value, const format_options& options) const {
+        if (options.loc != nullptr && options.type == format_type::DEFAULT) {
+            return options.loc->format_number(static_cast<int64_t>(value));
+        }
         return inner::integer_formatter_impl<T, true>{}(value, options);
     }
 };
@@ -462,6 +472,9 @@ struct formatter<T, enable_if_t<is_standard_integral_v<T> && is_unsigned_v<T>>> 
      * @return 格式化后的字符串
      */
     NEFORCE_CONSTEXPR20 string operator()(const T value, const format_options& options) const {
+        if (options.loc != nullptr && options.type == format_type::DEFAULT) {
+            return options.loc->format_number(static_cast<int64_t>(value));
+        }
         // NOLINTNEXTLINE(readability-implicit-bool-conversion)
         return inner::integer_formatter_impl<T, false>{}(value, options);
     }
@@ -870,6 +883,27 @@ format_named(const string_view fmt, const std::initializer_list<pair<const char*
             result += fmt[i++];
         }
     }
+    return result;
+}
+
+/**
+ * @brief locale 感知的格式化
+ * @tparam Args 参数类型
+ * @param loc locale 对象
+ * @param fmt 格式字符串
+ * @param args 要格式化的参数
+ * @return 格式化后的字符串
+ *
+ * 格式选项中的 loc 指针将被设置为 &loc，所有 formatter 特化
+ * 均可通过 opts.loc 访问 locale 以进行本地化格式化。
+ */
+template <typename... Args, enable_if_t<(sizeof...(Args) > 0), int> = 0>
+NEFORCE_NODISCARD string format(const locale& loc, const string_view fmt, Args&&... args) {
+    string result;
+    result.reserve(fmt.size() * 2);
+    format_options opts;
+    opts.loc = &loc;
+    format_impl(result, fmt, opts, _NEFORCE forward<Args>(args)...);
     return result;
 }
 

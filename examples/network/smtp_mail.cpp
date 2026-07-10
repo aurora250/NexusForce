@@ -22,7 +22,7 @@ int main() {
     println("=== SMTP Client Example ===\n");
 
     // 读取QQ邮箱授权码
-    path auth_path = path::current_executable_path() / "../../../tests/resource/authcode";
+    path auth_path = path::current_executable_path() / "../../../../tests/resource/authcode";
     file auth_file(auth_path.lexically_normal());
     println(auth_file.file_path());
     string auth_code = auth_file.read();
@@ -37,15 +37,17 @@ int main() {
 
     try {
         smtp_socket smtp;
+        io_context ctx;
+        dns_client resolver{dns_client::config{}, ctx, true};
 
         // 连接到SMTP服务器（使用STARTTLS）
         printfln("Connecting to {}:{}...", smtp_host, static_cast<uint16_t>(smtp_port));
-        smtp.connect(smtp_host, smtp_port, "nexusforce.local", smtp_socket::tls_mode::starttls);
+        smtp.connect(smtp_host, smtp_port, "nexusforce.local", smtp_socket::tls_mode::starttls, &resolver);
 
         // STARTTLS 加密
         println("Upgrading to TLS...");
-        ssl_context ctx(ssl_method::TLS_CLIENT);
-        smtp.starttls(ctx, smtp_host);
+        ssl_context ssl(ssl_method::TLS_CLIENT);
+        smtp.starttls(ssl, smtp_host);
 
         // 认证
         println("Authenticating...");
@@ -72,8 +74,14 @@ int main() {
         println("Email sent successfully!");
 
         smtp.disconnect();
+    } catch (const ssl_exception& e) {
+        eprintfln("SSL error: {} ({})", e.what(), e.code());
+        return 1;
+    } catch (const smtp_exception& e) {
+        eprintfln("SMTP error: {} ({})", e.what(), e.code().value());
+        return 1;
     } catch (const exception& e) {
-        printfln("SMTP error: {}", e.what());
+        eprintfln("error: {}", e.what());
         return 1;
     }
 

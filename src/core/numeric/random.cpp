@@ -1,3 +1,4 @@
+#include <NeForce/core/exception/system_exception.hpp>
 #include <NeForce/core/numeric/random.hpp>
 #include <NeForce/core/time/datetime.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS

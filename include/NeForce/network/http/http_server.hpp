@@ -20,7 +20,7 @@
  */
 
 #include "NeForce/core/async/condition_variable.hpp"
-#include "NeForce/core/async/event_loop.hpp"
+#include "NeForce/core/async/io_context.hpp"
 #include "NeForce/network/http/http_router.hpp"
 #include "NeForce/network/http/session_store.hpp"
 #include "NeForce/network/http/websocket.hpp"
@@ -107,14 +107,14 @@ public:
     };
 
 private:
-    unique_ptr<tcp_server_base> server_;       ///< TCP/SSL服务器
-    vector<shared_ptr<event_loop>> h2c_loops_; ///< h2c升级连接的事件循环
-    vector<thread> h2c_threads_;               ///< h2c升级连接的线程
-    mutable mutex h2c_mutex_;                  ///< 保护h2c列表
-    http_router router_;                       ///< HTTP路由器
-    websocket_server ws_server_;               ///< WebSocket服务器
-    session_manager session_manager_;          ///< 会话管理器
-    sni_manager sni_;                          ///< SNI证书管理器
+    io_context* ctx_{nullptr};           ///< 异步 I/O 执行上下文
+    unique_ptr<tcp_server_base> server_; ///< TCP/SSL服务器
+    vector<thread> h2c_threads_;         ///< h2c升级连接的线程
+    mutable mutex h2c_mutex_;            ///< 保护h2c列表
+    http_router router_;                 ///< HTTP路由器
+    websocket_server ws_server_;         ///< WebSocket服务器
+    session_manager session_manager_;    ///< 会话管理器
+    sni_manager sni_;                    ///< SNI证书管理器
 
     http_cookie_name cookie_name_{http_cookie_name::JSESSIONID()}; ///< 会话Cookie名称
     unique_ptr<http::session_store> session_store_;                ///< 可插拔会话存储后端
@@ -151,24 +151,26 @@ private:
 
     void handle_client(unique_ptr<tcp_socket> client_socket);
     bool try_upgrade(unique_ptr<tcp_socket>& client_socket, http_request& request);
-    static void handle_connect(const unique_ptr<tcp_socket>& client_socket, http_request& request);
+    void handle_connect(const unique_ptr<tcp_socket>& client_socket, http_request& request);
     void handle_request_with_forward(tcp_socket& client_socket, http_request& request, http_session* sess);
 
 public:
     /**
      * @brief 构造HTTP服务器
      * @param port 监听端口
-     * @param worker_count 工作线程数（默认最大）
+     * @param ioc 异步 I/O 执行上下文
+     * @param worker_count 工作线程数（0=CPU线程数）
      */
-    explicit http_server(ports port, size_t worker_count = thread_pool::max_thread_threshhold());
+    explicit http_server(ports port, io_context& ioc, size_t worker_count = 0);
 
     /**
      * @brief 构造HTTPS服务器
      * @param port 监听端口
+     * @param ioc 异步 I/O 执行上下文
      * @param ctx SSL上下文（必须已加载证书）
-     * @param worker_count 工作线程数（默认最大）
+     * @param worker_count 工作线程数（0=CPU线程数）
      */
-    http_server(ports port, ssl_context ctx, size_t worker_count = thread_pool::max_thread_threshhold());
+    http_server(ports port, io_context& ioc, ssl_context ctx, size_t worker_count = 0);
 
     ~http_server();
 

@@ -8,15 +8,15 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 struct expected_exception final : exception {
-    explicit expected_exception(const char* info = "Expected Operation Failed.", const char* type = static_type,
-                                const int code = 0) noexcept :
-    exception(info, type, code) {}
+    explicit expected_exception(const char* info = "Expected Operation Failed.") noexcept :
+    exception(info) {}
 
     explicit expected_exception(const exception& e) :
     exception(e) {}
 
     ~expected_exception() override = default;
-    static constexpr auto static_type = "expected_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "expected_exception"; }
 };
 
 

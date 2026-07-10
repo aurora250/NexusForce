@@ -92,6 +92,15 @@ void regex::compile(const string& pattern, const uint32_t options) {
 
 match_result regex::do_match(const ::PCRE2_SPTR subject, const size_t length, const size_t start_offset,
                              const uint32_t options, const string& subject_str) const {
+
+    struct pcre2_match_data_deleter {
+        void operator()(::pcre2_match_data* data) const noexcept {
+            if (data != nullptr) {
+                ::pcre2_match_data_free(data);
+            }
+        }
+    };
+
     if (!code_) {
         NEFORCE_THROW_EXCEPTION(regex_exception("Uninitialized regex object"));
     }

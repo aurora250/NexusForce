@@ -8,6 +8,7 @@
  * 此文件提供了Socket基础类。
  */
 
+#include "NeForce/core/exception/system_exception.hpp"
 #include "NeForce/core/time/duration.hpp"
 #include "NeForce/network/util/ip_address.hpp"
 #ifdef NEFORCE_PLATFORM_LINUX
@@ -40,16 +41,16 @@ struct NEFORCE_API socket_exception final : network_exception {
      */
     static bool is_would_block(int error) noexcept;
 
-    explicit socket_exception(const char* info = "Socket Operation Failed.", const char* type = static_type,
-                              const int code = last_error()) noexcept :
-    network_exception(info, type, code) {}
+    explicit socket_exception(const char* info = "Socket Operation Failed.",
+                              const error_code code = error_code(last_error(), system_category())) noexcept :
+    network_exception(info, code) {}
 
     explicit socket_exception(const exception& e) :
     network_exception(e) {}
 
     ~socket_exception() override = default;
 
-    static constexpr auto static_type = "socket_exception";
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "socket_exception"; }
 };
 
 /** @} */ // Exceptions
@@ -81,7 +82,7 @@ class NEFORCE_API socket_base {
 public:
     using native_handle_type =
 #ifdef NEFORCE_PLATFORM_WINDOWS
-            ::UINT_PTR; ///< 平台原生句柄类型
+            uintptr_t; ///< 平台原生句柄类型
 #else
             int; ///< 平台原生句柄类型
 #endif

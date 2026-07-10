@@ -111,6 +111,7 @@ public:
 
 private:
     client_type client_;                               ///< TCP/SSL客户端
+    io_context* ctx_{nullptr};                         ///< 异步 I/O 执行上下文
     config config_;                                    ///< 客户端配置
     unordered_map<string, http_cookie> cookie_jar_;    ///< Cookie存储
     unordered_map<string, string> persistent_headers_; ///< 持久化请求头
@@ -133,24 +134,26 @@ private:
     bool ensure_connected(const string& host, ports port, bool use_ssl = false);
 
 public:
-    /**
-     * @brief 默认构造函数
-     */
-    http_client() :
-    http_client(config()) {}
+    explicit http_client(io_context& ioc) :
+    http_client(ioc, config()) {}
 
     /**
      * @brief 构造函数
-     * @param config 客户端配置
+     * @param ioc 异步 I/O 执行上下文
+     * @param cfg 客户端配置
      */
-    explicit http_client(config config);
+    explicit http_client(io_context& ioc, config cfg);
+
+    explicit http_client(io_context& ioc, ssl_context ctx) :
+    http_client(ioc, move(ctx), config()) {}
 
     /**
      * @brief 构造函数（带SSL上下文）
+     * @param ioc 异步 I/O 执行上下文
      * @param ctx SSL上下文
-     * @param config 客户端配置
+     * @param cfg 客户端配置
      */
-    explicit http_client(ssl_context ctx, config config);
+    explicit http_client(io_context& ioc, ssl_context ctx, config cfg);
 
     ~http_client() = default;
 

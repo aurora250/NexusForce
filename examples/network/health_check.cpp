@@ -33,7 +33,7 @@ namespace {
 } // namespace
 
 /**
- * @brief 检查磁盘空间（Linux）
+ * @brief 检查磁盘空间
  */
 bool check_disk_space() {
     const auto disk = sysinfo::get_disk_info();
@@ -42,7 +42,9 @@ bool check_disk_space() {
 }
 
 int main() {
-    http_server server(ports(8080u));
+    io_context context;
+
+    http_server server(ports(8080u), context);
     auto& router = server.router();
 
     // =========================================================================
@@ -62,7 +64,7 @@ int main() {
     auto logging = make_unique<logging_filter>();
     logging->log_headers = true;
     logging->log_body = true;
-    logging->max_body_log_size = byte_size(512); // 只记录前 512 字节
+    logging->max_body_log_size = 512_B; // 只记录前 512 字节
     router.use(move(logging));
 
     // 4. 健康检查 — 最后注册，匹配 /healthz 直接响应
@@ -95,7 +97,7 @@ int main() {
   <li>POST /api/simulate/error — Simulate backend failure</li>
   <li>POST /api/simulate/recover — Recover backend</li>
 </ul>)";
-        res.set_content_type(http_content::HTML_TEXT());
+        res.set_content_type(http_content::HTML_TEXT().with_charset("utf-8"));
     });
 
     router.get("/api/data", [](http_request& req, http_response& res) {

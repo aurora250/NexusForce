@@ -25,15 +25,16 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 进程操作异常
  */
 struct process_exception final : system_exception {
-    explicit process_exception(const char* info = "Process Operation Failed.", const char* type = static_type,
-                               const int code = 0) noexcept :
-    system_exception(info, type, code) {}
+    explicit process_exception(const char* info = "Process Operation Failed.",
+                               const error_code code = last_error()) noexcept :
+    system_exception(info, code) {}
 
     explicit process_exception(const exception& e) :
     system_exception(e) {}
 
     ~process_exception() override = default;
-    static constexpr auto static_type = "process_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "process_exception"; }
 };
 
 /** @} */ // Exceptions

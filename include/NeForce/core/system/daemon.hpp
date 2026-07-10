@@ -28,15 +28,16 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 守护进程操作异常
  */
 struct daemon_exception final : system_exception {
-    explicit daemon_exception(const char* info = "Daemon Operation Failed.", const char* type = static_type,
-                              const int code = 0) noexcept :
-    system_exception(info, type, code) {}
+    explicit daemon_exception(const char* info = "Daemon Operation Failed.",
+                              const error_code code = last_error()) noexcept :
+    system_exception(info, code) {}
 
     explicit daemon_exception(const exception& e) :
     system_exception(e) {}
 
     ~daemon_exception() override = default;
-    static constexpr auto static_type = "daemon_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "daemon_exception"; }
 };
 
 /**

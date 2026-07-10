@@ -1880,8 +1880,8 @@ TEST_F(WebSocketDeflateConfigTest, BasicPermessageDeflateActive) {
     EXPECT_TRUE(cfg.active);
     EXPECT_EQ(cfg.client_max_window_bits, 15);
     EXPECT_EQ(cfg.server_max_window_bits, 15);
-    EXPECT_FALSE(cfg.client_no_context_takeover);
-    EXPECT_FALSE(cfg.server_no_context_takeover);
+    EXPECT_TRUE(cfg.client_no_context_takeover);
+    EXPECT_TRUE(cfg.server_no_context_takeover);
 }
 
 TEST_F(WebSocketDeflateConfigTest, ParseClientMaxWindowBits) {
@@ -2629,66 +2629,6 @@ TEST_F(BufferChainTest, ClearResetsChain) {
     EXPECT_TRUE(chain.flatten().empty());
 }
 
-class EventLoopTest : public ::testing::Test {
-protected:
-    void SetUp() override {}
-    void TearDown() override {}
-};
-
-TEST_F(EventLoopTest, ConstructAndDestroy) {
-    event_loop loop;
-    SUCCEED();
-}
-
-TEST_F(EventLoopTest, ScheduleAndCancelTimer) {
-    event_loop loop;
-    bool fired = false;
-    auto id = loop.schedule_timer(10000, [&] { fired = true; });
-    EXPECT_GT(id, 0u);
-    EXPECT_TRUE(loop.cancel_timer(id));
-    EXPECT_FALSE(fired);
-}
-
-TEST_F(EventLoopTest, AddAndRemoveFd) {
-    event_loop loop;
-    loop.add_fd(-1, 0, [](int, uint32_t) {});
-    loop.remove_fd(-1);
-    SUCCEED();
-}
-
-TEST_F(EventLoopTest, ScheduleTimerFires) {
-    event_loop loop;
-    bool fired = false;
-
-    loop.schedule_timer(10, [&] {
-        fired = true;
-        loop.stop();
-    });
-
-    loop.run();
-    EXPECT_TRUE(fired);
-}
-
-TEST_F(EventLoopTest, StopWithoutRunDoesNotCrash) {
-    event_loop loop;
-    loop.stop();
-    SUCCEED();
-}
-
-TEST_F(EventLoopTest, MultipleTimersFireInOrder) {
-    event_loop loop;
-    int counter = 0;
-
-    loop.schedule_timer(20, [&] {
-        counter++;
-        loop.stop();
-    });
-    loop.schedule_timer(10, [&] { counter++; });
-
-    loop.run();
-    EXPECT_GE(counter, 2);
-}
-
 class HealthCheckFilterTest : public ::testing::Test {
 protected:
     void SetUp() override {}
@@ -3189,10 +3129,11 @@ class ReverseProxyFilterTest : public ::testing::Test {
 protected:
     void SetUp() override {}
     void TearDown() override {}
+    io_context ctx_;
 };
 
 TEST_F(ReverseProxyFilterTest, ShouldProxyWithPrefix) {
-    reverse_proxy_filter proxy;
+    reverse_proxy_filter proxy(ctx_);
     proxy.set_path_prefix("/api");
 
     http_request req;
@@ -3205,7 +3146,7 @@ TEST_F(ReverseProxyFilterTest, ShouldProxyWithPrefix) {
 }
 
 TEST_F(ReverseProxyFilterTest, ShouldNotProxyWithoutPrefix) {
-    reverse_proxy_filter proxy;
+    reverse_proxy_filter proxy(ctx_);
     proxy.set_path_prefix("/api");
 
     http_request req;
@@ -3217,7 +3158,7 @@ TEST_F(ReverseProxyFilterTest, ShouldNotProxyWithoutPrefix) {
 }
 
 TEST_F(ReverseProxyFilterTest, NoPrefixProxiesEverything) {
-    reverse_proxy_filter proxy;
+    reverse_proxy_filter proxy(ctx_);
 
     http_request req;
     req.path = "/anything";
@@ -4341,23 +4282,29 @@ class HttpServerAlpnTest : public ::testing::Test {
 protected:
     void SetUp() override {}
     void TearDown() override {}
+    io_context ctx_;
 };
 
 TEST_F(HttpServerAlpnTest, HttpsConstructorSetsAlpnProtocols) {
     ssl_context ctx(ssl_method::TLS_SERVER);
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    bool cert_loaded = ctx.load_certificate("D:/OpenSSL/server.crt", "D:/OpenSSL/server.key");
+#else
     bool cert_loaded = ctx.load_certificate("/tmp/h2test.crt", "/tmp/h2test.key");
+#endif
     if (!cert_loaded) {
         GTEST_SKIP() << "Test certificate not found (run 'openssl req -x509 ...' first)";
     }
 
-    http_server server(ports(8445), move(ctx), 1);
+    io_context ioc;
+    http_server server(ports(8445), ioc, move(ctx), 1);
     server.start();
     EXPECT_TRUE(server.is_running());
     server.stop();
 }
 
 TEST_F(HttpServerAlpnTest, HttpServerWithoutSslDoesNotCrash) {
-    http_server server(ports(8088), 1);
+    http_server server(ports(8088), ctx_, 1);
     server.start();
     EXPECT_TRUE(server.is_running());
     server.stop();

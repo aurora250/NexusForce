@@ -1054,7 +1054,7 @@ public:
      * @brief 获取哈希函数对象
      * @return 哈希函数对象的副本
      */
-    NEFORCE_NODISCARD hasher hash_func() const noexcept(is_nothrow_copy_constructible_v<hasher>) { return hasher_; }
+    NEFORCE_NODISCARD hasher hash_function() const noexcept(is_nothrow_copy_constructible_v<hasher>) { return hasher_; }
 
     /**
      * @brief 获取键相等比较函数对象

@@ -525,6 +525,7 @@ string sysinfo::os_version_info::version() const {
     return to_string(major) + "." + to_string(minor) + "." + to_string(build);
 }
 
+// NOLINTNEXTLINE(bugprone-exception-escape)
 sysinfo::sysinfo() noexcept {
     try {
         lock<mutex> lock(sysinfo_mutex());

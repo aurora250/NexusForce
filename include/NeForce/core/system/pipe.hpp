@@ -8,7 +8,7 @@
  * 提供管道创建、读写和管理功能。
  */
 
-#include "NeForce/core/string/string.hpp"
+#include "NeForce/core/exception/system_exception.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -22,15 +22,16 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 管道操作异常
  */
 struct pipe_exception final : system_exception {
-    explicit pipe_exception(const char* info = "Pipe Operation Failed.", const char* type = static_type,
-                            const int code = 0) noexcept :
-    system_exception(info, type, code) {}
+    explicit pipe_exception(const char* info = "Pipe Operation Failed.", const error_code code = last_error()) noexcept
+    :
+    system_exception(info, code) {}
 
     explicit pipe_exception(const exception& e) :
     system_exception(e) {}
 
     ~pipe_exception() override = default;
-    static constexpr auto static_type = "pipe_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "pipe_exception"; }
 };
 
 /** @} */ // Exceptions

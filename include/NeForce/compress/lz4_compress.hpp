@@ -29,15 +29,15 @@ NEFORCE_BEGIN_NAMESPACE__
  * lz4操作异常。
  */
 struct lz4_exception final : thirdparty_exception {
-    explicit lz4_exception(const char* info = "LZ4 Operation Failed.", const char* type = static_type,
-                           const int code = 0) noexcept :
-    thirdparty_exception(info, type, code) {}
+    explicit lz4_exception(const char* info = "LZ4 Operation Failed.") noexcept :
+    thirdparty_exception(info) {}
 
     explicit lz4_exception(const exception& e) :
     thirdparty_exception(e) {}
 
     ~lz4_exception() override = default;
-    static constexpr auto static_type = "lz4_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "lz4_exception"; }
 };
 
 /** @} */ // Exceptions

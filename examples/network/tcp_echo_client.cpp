@@ -14,7 +14,9 @@
 using namespace neforce;
 
 int main() {
-    tcp_client client;
+    io_context context;
+
+    tcp_client client(context);
 
     // 配置超时时间
     client.set_connect_timeout(milliseconds(5000));

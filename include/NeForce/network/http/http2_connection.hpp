@@ -7,11 +7,11 @@
  *
  * 管理单个 HTTP/2 连接的生命周期，包括帧 I/O、HPACK 编解码、
  * 流状态管理、流量控制以及与 http_router 的集成。
- * 使用 event_loop 驱动异步 I/O。
+ * 使用 io_context 驱动异步 I/O。
  */
 
 #include "NeForce/core/async/atomic.hpp"
-#include "NeForce/core/async/event_loop.hpp"
+#include "NeForce/core/async/io_context.hpp"
 #include "NeForce/core/memory/weak_ptr.hpp"
 #include "NeForce/network/http/http2_protocol.hpp"
 #include "NeForce/network/http/http_router.hpp"
@@ -40,7 +40,7 @@ NEFORCE_BEGIN_HTTP__
  * - Flow Control
  * - 与 http_router 集成
  *
- * 使用 event_loop 驱动异步 I/O。
+ * 使用 io_context 驱动异步 I/O。
  * 继承 enable_shared_from_this 以支持异步回调生命周期安全。
  */
 class http2_connection : public enable_shared_from_this<http2_connection> {
@@ -51,7 +51,7 @@ public:
 
 private:
     unique_ptr<tcp_socket> socket_;
-    shared_ptr<event_loop> loop_;
+    io_context* ctx_{nullptr};
 
     http2_framer framer_;
     http2_settings local_settings_;
@@ -92,8 +92,8 @@ private:
     void route_stream(uint32_t stream_id, const vector<hpack_header_field>& headers, const byte_t* data,
                       size_t data_len, bool end_stream);
 
-    void on_readable(int fd, uint32_t events);
-    void on_writable(int fd, uint32_t events);
+    void on_readable(int fd, uint32_t events, error_code ec);
+    void on_writable(int fd, uint32_t events, error_code ec);
 
     void handle_frame(http2_frame_type type, uint8_t flags, uint32_t stream_id, const byte_t* payload, size_t len);
 
@@ -114,7 +114,7 @@ private:
     void close_connection(http2_error error = http2_error::NO_ERROR);
 
 public:
-    http2_connection(unique_ptr<tcp_socket> socket, shared_ptr<event_loop> loop);
+    http2_connection(unique_ptr<tcp_socket> socket, io_context& ctx);
     ~http2_connection();
 
     http2_connection(const http2_connection&) = delete;

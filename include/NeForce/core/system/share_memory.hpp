@@ -9,7 +9,7 @@
  * 支持共享内存创建、打开、映射、同步等操作。
  */
 
-#include "NeForce/core/string/string.hpp"
+#include "NeForce/core/exception/system_exception.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -22,15 +22,16 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 共享内存操作异常
  */
 struct share_memory_exception final : system_exception {
-    explicit share_memory_exception(const char* info = "Shared Memory Operation Failed.",
-                                    const char* type = static_type, const int code = 0) noexcept :
-    system_exception(info, type, code) {}
+    explicit share_memory_exception(const char* info = "Share Memory Operation Failed.",
+                                    const error_code code = last_error()) noexcept :
+    system_exception(info, code) {}
 
     explicit share_memory_exception(const exception& e) :
     system_exception(e) {}
 
     ~share_memory_exception() override = default;
-    static constexpr auto static_type = "shared_memory_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "share_memory_exception"; }
 };
 
 /** @} */ // Exceptions

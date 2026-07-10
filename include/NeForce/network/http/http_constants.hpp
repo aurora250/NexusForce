@@ -13,6 +13,7 @@
  * - 协议分隔符
  */
 
+#include "NeForce/core/exception/system_exception.hpp"
 #include "NeForce/core/interface/istringify.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -208,7 +209,7 @@ NEFORCE_BEGIN_HTTP__
  *       和 Content-Length 两种方式确定消息体长度。WebSocket 实现完整支持 RFC 6455
  *       定义的控制帧（Ping/Pong/Close）和分片消息，并支持 RFC 7692 定义的
  *       permessage-deflate 压缩扩展。HTTP/2 协议层提供纯 C++14 同步帧编解码，
- *       传输层由 event_loop 驱动。
+ *       传输层由 io_context 驱动。
  *
  * @warning 生产环境中应始终通过 HTTPS 使用 Secure 属性的 Cookie，
  *          并在敏感路由上启用 CSRF 防护。WebSocket 连接应考虑使用 WSS（WebSocket Secure）。
@@ -595,6 +596,15 @@ public:
      * @return 内容类型字符串
      */
     NEFORCE_NODISCARD string to_string() const { return content_; }
+
+    /**
+     * @brief 创建带 charset 的新 http_content
+     * @param charset 字符编码名称（如 "utf-8"）
+     * @return 附加了 "; charset=xxx" 后缀的新 http_content
+     */
+    NEFORCE_NODISCARD http_content with_charset(string charset) const {
+        return http_content(content_ + "; charset=" + move(charset));
+    }
 };
 
 

@@ -1,4 +1,5 @@
 #include <NeForce/core/async/shared_mutex.hpp>
+#include <NeForce/core/exception/system_exception.hpp>
 #include <NeForce/core/system/environment.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <processenv.h>

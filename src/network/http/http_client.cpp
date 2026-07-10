@@ -1,4 +1,4 @@
-#include <NeForce/core/async/async.hpp>
+#include <NeForce/core/async/future.hpp>
 #include <NeForce/core/file/file.hpp>
 #include <NeForce/core/utility/hexadecimal.hpp>
 #include <NeForce/network/http/http_client.hpp>
@@ -412,6 +412,13 @@ http_client_response http_client::do_request(http_client_request request, int re
     response.effective_url = req_url.to_string();
     response.redirect_count = redirect_count;
 
+    // If the server sent Connection: close, proactively disconnect so the
+    // next request reconnects. Otherwise is_connected() returns true (socket
+    // fd still open in CLOSE_WAIT) and subsequent send/receive fail with 500.
+    if (string(response.header("Connection")).lowercase().contains("close")) {
+        client_.disconnect();
+    }
+
     update_cookies(response.cookies, req_url);
 
     if (config_.follow_redirects && response.is_redirect() &&
@@ -538,8 +545,10 @@ void http_client::set_cookie(const http_cookie& c, const string& domain, const s
     cookie_jar_[key] = c;
 }
 
-http_client::http_client(config config) :
-config_(move(config)) {
+http_client::http_client(io_context& ioc, config cfg) :
+client_(ioc),
+ctx_(&ioc),
+config_(move(cfg)) {
     persistent_headers_["User-Agent"] = config_.user_agent;
     persistent_headers_["Accept"] = "*/*";
 
@@ -548,9 +557,10 @@ config_(move(config)) {
     client_.set_recv_timeout(config_.receive_timeout);
 }
 
-http_client::http_client(ssl_context ctx, config config) :
-client_(move(ctx)),
-config_(move(config)) {
+http_client::http_client(io_context& ioc, ssl_context ctx, config cfg) :
+client_(ioc, move(ctx)),
+ctx_(&ioc),
+config_(move(cfg)) {
     persistent_headers_["User-Agent"] = config_.user_agent;
     persistent_headers_["Accept"] = "*/*";
 
@@ -756,7 +766,17 @@ bool http_client::download_file(const string& url, path output, const bool is_bi
 http_client_response http_client::request(http_client_request req) { return do_request(move(req), 0); }
 
 future<http_client_response> http_client::request_async(http_client_request req) {
-    return async(launch::async, [this, req = move(req)]() mutable { return request(move(req)); });
+    auto prom = make_shared<promise<http_client_response>>();
+    auto result = prom->get_future();
+    ctx_->post([this, req = move(req), prom = move(prom)]() mutable {
+        try {
+            auto resp = request(move(req));
+            prom->set_value(move(resp));
+        } catch (...) {
+            prom->set_exception(current_exception());
+        }
+    });
+    return result;
 }
 
 void http_client::close() { client_.disconnect(); }

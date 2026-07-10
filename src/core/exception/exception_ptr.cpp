@@ -1,6 +1,7 @@
 #include <NeForce/core/exception/exception.hpp>
 #include <NeForce/core/exception/exception_ptr.hpp>
 #include <NeForce/core/exception/terminate.hpp>
+#include <NeForce/core/exception/system_exception.hpp>
 #include <exception>
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -23,12 +24,12 @@ exception_ptr current_exception() noexcept {
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(memory_exception)
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(device_exception)
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(file_exception)
+    __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(network_exception)
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(system_exception)
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(math_exception)
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(value_exception)
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(database_exception)
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(thirdparty_exception)
-    __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(network_exception)
     __NEFORCE_EXPAND_MAKE_EXCEPTION_PTR(exception)
     catch (const std::exception& e) {
         return make_exception_ptr(value_exception(e.what()));

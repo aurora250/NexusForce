@@ -27,15 +27,15 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief YAML格式操作失败
  */
 struct yaml_exception final : value_exception {
-    explicit yaml_exception(const char* info = "YAML Operation Failed.", const char* type = static_type,
-                            const int code = 0) noexcept :
-    value_exception(info, type, code) {}
+    explicit yaml_exception(const char* info = "YAML Operation Failed.") noexcept :
+    value_exception(info) {}
 
     explicit yaml_exception(const exception& e) :
     value_exception(e) {}
 
     ~yaml_exception() override = default;
-    static constexpr auto static_type = "yaml_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "yaml_exception"; }
 };
 
 /** @} */ // Exceptions

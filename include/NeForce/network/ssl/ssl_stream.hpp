@@ -9,6 +9,10 @@
  * 进行SSL/TLS加密通信。支持服务器端和客户端模式。
  */
 
+#include "NeForce/core/async/async_stream.hpp"
+#include "NeForce/core/async/cancellation_slot.hpp"
+#include "NeForce/core/async/io_context.hpp"
+#include "NeForce/core/async/use_awaitable.hpp"
 #include "NeForce/network/ssl/ssl_context.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -32,7 +36,7 @@ NEFORCE_BEGIN_NAMESPACE__
  * - 密码套件和协议版本查询
  * - 非阻塞I/O支持
  */
-class NEFORCE_API ssl_stream {
+class NEFORCE_API ssl_stream final : public async_stream {
 public:
     /**
      * @brief 原生文件描述符类型
@@ -82,7 +86,14 @@ public:
      */
     explicit ssl_stream(const ssl_context& ctx) { reset(ctx); }
 
+    /**
+     * @brief 移动构造函数
+     */
     ssl_stream(ssl_stream&& other) noexcept = default;
+
+    /**
+     * @brief 移动赋值运算符
+     */
     ssl_stream& operator=(ssl_stream&& other) noexcept = default;
 
     /**
@@ -267,6 +278,110 @@ public:
      * 释放SSL对象的所有权，调用方负责释放。
      */
     NEFORCE_NODISCARD ::SSL* release() noexcept { return ssl_.release(); }
+
+    /**
+     * @brief 异步TLS握手
+     * @param ctx 异步 I/O 执行上下文
+     * @param handler 完成回调 void(error_code)
+     *
+     * 执行非阻塞TLS握手，由 io_context 驱动 WANT_READ/WANT_WRITE 重试。
+     * handler 在 io_context::run() 线程中执行。
+     */
+    void async_handshake(io_context& ctx, function<void(error_code)> handler);
+
+    /**
+     * @brief 异步TLS握手（带取消槽）
+     * @param ctx 异步 I/O 执行上下文
+     * @param slot 取消槽
+     * @param handler 完成回调 void(error_code)
+     */
+    void async_handshake(io_context& ctx, cancellation_slot& slot, function<void(error_code)> handler);
+
+    /**
+     * @brief 异步SSL读取
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 接收缓冲区
+     * @param handler 完成回调 void(error_code, size_t bytes_transferred)
+     *
+     * 从SSL流异步读取解密数据。
+     * handler 在 io_context::run() 线程中执行。
+     */
+    void async_read(io_context& ctx, memory_view<char> buffer, function<void(error_code, size_t)> handler) override;
+
+    /**
+     * @brief 异步SSL读取（带取消槽）
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 接收缓冲区
+     * @param slot 取消槽
+     * @param handler 完成回调 void(error_code, size_t bytes_transferred)
+     */
+    void async_read(io_context& ctx, memory_view<char> buffer, cancellation_slot& slot,
+                    function<void(error_code, size_t)> handler) override;
+
+    /**
+     * @brief 异步SSL写入
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 发送缓冲区
+     * @param handler 完成回调 void(error_code, size_t bytes_transferred)
+     *
+     * 向SSL流异步写入加密数据。
+     * handler 在 io_context::run() 线程中执行。
+     */
+    void async_write(io_context& ctx, memory_view<const char> buffer,
+                     function<void(error_code, size_t)> handler) override;
+
+    /**
+     * @brief 异步SSL写入（带取消槽）
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 发送缓冲区
+     * @param slot 取消槽
+     * @param handler 完成回调 void(error_code, size_t bytes_transferred)
+     */
+    void async_write(io_context& ctx, memory_view<const char> buffer, cancellation_slot& slot,
+                     function<void(error_code, size_t)> handler) override;
+
+    /**
+     * @brief 异步TLS握手—任意可调用对象
+     * @tparam Token 可调用对象类型，需满足 void(error_code) 签名
+     * @param ctx 异步 I/O 执行上下文
+     * @param token 完成令牌
+     */
+    template <typename Token, enable_if_t<!is_same_v<decay_t<Token>, function<void(error_code)>>, int> = 0>
+    void async_handshake(io_context& ctx, Token&& token) {
+        async_handshake(ctx, function<void(error_code)>(forward<Token>(token)));
+    }
+
+    /**
+     * @brief 异步TLS握手—use_future
+     * @param ctx 异步 I/O 执行上下文
+     * @return future<void> 异步操作结果
+     */
+    auto async_handshake(io_context& ctx, use_future_t /*unused*/) {
+        async_result<use_future_t, void(error_code)> result(use_future);
+        async_handshake(ctx, function<void(error_code)>(result.get_handler()));
+        return result.get();
+    }
+
+    /**
+     * @brief 异步TLS握手—detached（即发即忘）
+     * @param ctx 异步 I/O 执行上下文
+     */
+    void async_handshake(io_context& ctx, detached_t /*unused*/) {
+        async_handshake(ctx, function<void(error_code)>([](error_code) {}));
+    }
+
+#ifdef NEFORCE_STANDARD_20
+    /**
+     * @brief 异步TLS握手—use_awaitable
+     * @param ctx 异步 I/O 执行上下文
+     * @return awaitable<void> 可协程等待的结果
+     */
+    auto async_handshake(io_context& ctx, use_awaitable_t /*unused*/) {
+        async_result<use_awaitable_t, void(error_code)> result(use_awaitable);
+        async_handshake(ctx, function<void(error_code)>(result.get_handler()));
+        return result.get();
+    }
+#endif
 };
 
 /** @} */ // SSL/TLS

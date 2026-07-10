@@ -28,16 +28,16 @@ NEFORCE_BEGIN_NAMESPACE__
  * SMTP协议操作失败时抛出的异常。
  */
 struct NEFORCE_API smtp_exception final : network_exception {
-    explicit smtp_exception(const char* info = "SMTP Operation Failed.", const char* type = static_type,
-                            const int code = 0) noexcept :
-    network_exception(info, type, code) {}
+    explicit smtp_exception(const char* info = "SMTP Operation Failed.", const error_code code = last_error()) noexcept
+    :
+    network_exception(info, code) {}
 
     explicit smtp_exception(const exception& e) :
     network_exception(e) {}
 
     ~smtp_exception() override = default;
 
-    static constexpr auto static_type = "smtp_exception";
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "smtp_exception"; }
 };
 
 /** @} */ // Exceptions
@@ -293,7 +293,8 @@ private:
     tls_mode tls_mode_ = tls_mode::none; ///< TLS模式
     bool tls_active_ = false;            ///< TLS是否已激活
 
-    ssl_stream ssl_; ///< SSL流对象
+    ssl_stream ssl_;           ///< SSL流对象
+    io_context* ctx_{nullptr}; ///< 异步 I/O 执行上下文
 
     ssize_t raw_send(const char* data, size_t len);
     ssize_t raw_recv(char* buf, size_t len);

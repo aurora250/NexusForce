@@ -155,9 +155,12 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 ## 🚀 特性
 
 ### 🔄 并发与异步 (Async)
-- **`event_loop`** - Linux epoll 边缘触发事件循环，min-heap 定时器，fd 注册/回调驱动
-- **`thread_pool`** - 基于任务窃取的多策略线程池
-- **`timer_scheduler`/`basic_timer`** - 基于红黑树的定时任务调度
+- **`io_context`** - 跨平台异步 I/O 执行上下文，统一事件循环、定时器与取消模型
+- **`cancellation_slot`** - 异步操作取消槽，支持 `async_connect` / `async_read` / `async_write` 可中断异步 I/O
+- **`thread_pool`** - 基于任务窃取与 NUMA 的高性能多策略线程池
+- **`timer_scheduler`/`basic_timer`** - 基于红黑树的定时任务调度，支持任务取消标志
+- **`async_stream`** - 异步流抽象接口，统一读写协议
+- **`async_read()` / `async_write()`** - 自由函数组合器，基于 `shared_from_this` 自动处理部分读写重试
 - **`generator`/`task`** - 协程原语和任务生成器
 - **`virtual_thread`** - C#风格的轻量级协程
 - **`connection`/`signal`/`signal_base`** - 观察者模式的信号槽，`signal_base` 提供类型擦除基类支持反射驱动的动态连接
@@ -224,9 +227,8 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 ### 📝 日志系统 (Logging)
 - **`log_sink`** - 可扩展的日志输出目标
 - **`file_sink`** - 日志文件管理与轮转
-- **多级别日志** - 支持不同日志级别
 - **`log_formatter`** - 自定义日志格式
-- **`logger`** - 灵活可配置的日志器
+- **`logger`** - 线程池驱动的异步日志，支持 `block`/`discard`/`overrun_oldest` 三种溢出策略，有界环形队列、自动 drain 调度
 
 ### 🔤 字符串处理 (String)
 - **PCRE2 正则表达式** - 支持 JIT 的高效正则匹配 `regex`/`match_result`/`regex_iterator`/`regex_token_iterator`，支持拷贝

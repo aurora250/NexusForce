@@ -1,6 +1,10 @@
 #include <NeForce/core/file/file_async.hpp>
 #ifdef NEFORCE_PLATFORM_LINUX
 #    include <cerrno>
+#    include <fcntl.h>
+#    include <linux/io_uring.h>
+#    include <sys/mman.h>
+#    include <sys/syscall.h>
 #    include <unistd.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
@@ -12,418 +16,316 @@ namespace {
 #else
             -1;
 #endif
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    struct op_state {
+        ::OVERLAPPED ov{};
+        string write_data;
+    };
+
+#else
+    struct uring {
+        int ring_fd = -1;
+        ::io_uring_sqe* sqes = nullptr;
+        ::io_uring_cqe* cqes = nullptr;
+        unsigned* sq_head = nullptr;
+        unsigned* sq_tail = nullptr;
+        unsigned* cq_head = nullptr;
+        unsigned* cq_tail = nullptr;
+        unsigned* sq_mask = nullptr;
+        unsigned* cq_mask = nullptr;
+        unsigned* sq_entries = nullptr;
+        unsigned* cq_entries = nullptr;
+        unsigned* flags = nullptr;
+        unsigned* sq_dropped = nullptr;
+        char* sq_ring = nullptr;
+        char* cq_ring = nullptr;
+        char* sqes_ptr = nullptr;
+        unsigned sq_ring_sz = 0;
+        unsigned cq_ring_sz = 0;
+
+        ~uring() {
+            if (sqes_ptr) {
+                ::munmap(sqes_ptr, sq_ring_sz);
+            }
+            if (cqes) {
+                ::munmap(cqes, cq_ring_sz);
+            }
+            if (ring_fd >= 0) {
+                ::close(ring_fd);
+            }
+        }
+
+        bool init(unsigned entries) {
+            ::io_uring_params p{};
+            ring_fd = static_cast<int>(::syscall(__NR_io_uring_setup, entries, &p));
+            if (ring_fd < 0) {
+                return false;
+            }
+
+            sq_ring_sz = p.sq_off.array + p.sq_entries * sizeof(unsigned);
+            cq_ring_sz = p.cq_off.cqes + p.cq_entries * sizeof(::io_uring_cqe);
+
+            sq_ring = static_cast<char*>(::mmap(nullptr, sq_ring_sz, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_POPULATE,
+                                                ring_fd, IORING_OFF_SQ_RING));
+            cq_ring = static_cast<char*>(::mmap(nullptr, cq_ring_sz, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_POPULATE,
+                                                ring_fd, IORING_OFF_CQ_RING));
+            sqes_ptr = static_cast<char*>(::mmap(nullptr, p.sq_entries * sizeof(::io_uring_sqe), PROT_READ | PROT_WRITE,
+                                                 MAP_SHARED | MAP_POPULATE, ring_fd, IORING_OFF_SQES));
+
+            if (sq_ring == MAP_FAILED || cq_ring == MAP_FAILED || sqes_ptr == MAP_FAILED) {
+                return false;
+            }
+
+            sq_head = reinterpret_cast<unsigned*>(sq_ring + p.sq_off.head);
+            sq_tail = reinterpret_cast<unsigned*>(sq_ring + p.sq_off.tail);
+            sq_mask = reinterpret_cast<unsigned*>(sq_ring + p.sq_off.ring_mask);
+            sq_entries = reinterpret_cast<unsigned*>(sq_ring + p.sq_off.ring_entries);
+            flags = reinterpret_cast<unsigned*>(sq_ring + p.sq_off.flags);
+            sq_dropped = reinterpret_cast<unsigned*>(sq_ring + p.sq_off.dropped);
+            sqes = reinterpret_cast<::io_uring_sqe*>(sqes_ptr);
+
+            cq_head = reinterpret_cast<unsigned*>(cq_ring + p.cq_off.head);
+            cq_tail = reinterpret_cast<unsigned*>(cq_ring + p.cq_off.tail);
+            cq_mask = reinterpret_cast<unsigned*>(cq_ring + p.cq_off.ring_mask);
+            cq_entries = reinterpret_cast<unsigned*>(cq_ring + p.cq_off.ring_entries);
+            cqes = reinterpret_cast<::io_uring_cqe*>(cq_ring + p.cq_off.cqes);
+
+            return true;
+        }
+
+        ::io_uring_sqe* get_sqe() {
+            unsigned tail = *sq_tail;
+            unsigned head = *sq_head;
+            if (tail - head >= *sq_entries) {
+                return nullptr;
+            }
+            return &sqes[tail & (*sq_mask)];
+        }
+
+        void submit() {
+            unsigned tail = *sq_tail;
+            __atomic_store_n(sq_tail, tail + 1, __ATOMIC_RELEASE);
+            ::syscall(__NR_io_uring_enter, ring_fd, 1, 0, IORING_ENTER_GETEVENTS, nullptr);
+        }
+
+        int peek_cqe(::io_uring_cqe* out) {
+            unsigned head = *cq_head;
+            if (head == *cq_tail) {
+                return -1;
+            }
+            *out = cqes[head & (*cq_mask)];
+            __atomic_store_n(cq_head, head + 1, __ATOMIC_RELEASE);
+            return 0;
+        }
+    };
+
+    unique_ptr<uring> g_uring;
+#endif
 } // namespace
 
-
-file_async::async_context::async_context(string d) :
-data(move(d)),
-cb(new aiocb_type{}),
-is_write(true) {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    cb->hEvent = ::CreateEventA(nullptr, TRUE, FALSE, nullptr);
-#endif
-}
-
-file_async::async_context::async_context(string* buf) :
-buffer(buf),
-cb(new aiocb_type{}) {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    cb->hEvent = ::CreateEventA(nullptr, TRUE, FALSE, nullptr);
-#endif
-}
-
-file_async::async_context::~async_context() {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    if (cb != nullptr) {
-        if (cb->hEvent != nullptr) {
-            ::CloseHandle(cb->hEvent);
-        }
-        delete cb;
-        cb = nullptr;
-    }
-#else
-    delete cb;
-    cb = nullptr;
-#endif
-}
-
-bool file_async::complete_result(async_result& result, const size_type bytes) noexcept {
-    result.completed = true;
-    result.bytes_transferred = bytes;
-    result.error.clear();
-
-    lock<mutex> lk(mutex_);
-    const auto it = find(operations_.begin(), operations_.end(), result.cb);
-    if (it != operations_.end()) {
-        operations_.erase(it);
-    }
-
-    const auto ci = contexts_.find(result.cb);
-    if (ci != contexts_.end()) {
-        delete ci->second;
-        contexts_.erase(ci);
-    }
-
-    result.cb = nullptr;
-    result.user_context = nullptr;
-    return true;
-}
-
-bool file_async::check_completion(async_result& result) noexcept {
-#ifdef NEFORCE_PLATFORM_LINUX
-    const ssize_t ret = ::aio_return(result.cb);
-    if (ret >= 0) {
-        return complete_result(result, static_cast<size_type>(ret));
-    }
-    result.error = static_cast<errc>(::aio_error(result.cb));
-    return false;
-#else
-    return false;
-#endif
-}
 
 file_async::file_async(native_handle_type handle) :
 handle_(handle) {}
 
 file_async::~file_async() {
-    lock<mutex> lk(mutex_);
-    for (auto* cb: operations_) {
-        if (cb == nullptr) {
-            continue;
-        }
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        ::CancelIoEx(handle_, cb);
-#else
-        ::aio_cancel(handle_, cb);
-#endif
+    if (ctx_ != nullptr) {
+        ctx_->unregister_file_completion(reinterpret_cast<::ULONG_PTR>(this));
     }
-    for (auto& context: contexts_) {
-        delete context.second;
-    }
-    contexts_.clear();
-    operations_.clear();
 }
 
 file_async::file_async(file_async&& other) noexcept :
 handle_(other.handle_),
-operations_(move(other.operations_)),
-contexts_(move(other.contexts_)) {
+ctx_(other.ctx_) {
     other.handle_ = invalid_handle;
+    other.ctx_ = nullptr;
 }
 
 file_async& file_async::operator=(file_async&& other) noexcept {
-    if (addressof(other) == this) {
-        return *this;
+    if (this != &other) {
+        handle_ = other.handle_;
+        ctx_ = other.ctx_;
+        other.handle_ = invalid_handle;
+        other.ctx_ = nullptr;
     }
-    handle_ = other.handle_;
-    operations_ = move(other.operations_);
-    contexts_ = move(other.contexts_);
-    other.handle_ = invalid_handle;
     return *this;
 }
 
-file_async::async_result file_async::read(string& buffer, const size_type size, const difference_type offset) const {
-    async_result result;
-
-    if (size == 0) {
-        buffer.clear();
-        result.completed = true;
-        return result;
-    }
-
-    difference_type resolved_offset = offset;
-    if (offset < 0) {
+void file_async::ensure_iocp(io_context& ctx) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
-        ::LARGE_INTEGER current{};
-        if (::SetFilePointerEx(handle_, {}, &current, FILE_CURRENT) == FALSE) {
-            result.error = last_error();
-            return result;
+    if (ctx_ == &ctx) {
+        return;
+    }
+    if (ctx_ != nullptr) {
+        ctx_->unregister_file_completion(reinterpret_cast<::ULONG_PTR>(this));
+    }
+    ctx_ = &ctx;
+
+    const auto key = reinterpret_cast<::ULONG_PTR>(this);
+    const ::HANDLE iocp = ctx_->iocp_handle_;
+    ::CreateIoCompletionPort(handle_, iocp, key, 0);
+
+    ctx_->register_file_completion(key, [this](error_code ec, size_t bytes, void* /*overlapped*/) {
+        if (pending_handler_) {
+            const auto h = move(pending_handler_);
+            pending_handler_ = nullptr;
+            h(ec, static_cast<size_type>(bytes));
         }
-        resolved_offset = current.QuadPart;
+    });
 #else
-        const difference_type pos = ::lseek(handle_, 0, SEEK_CUR);
-        if (pos == static_cast<difference_type>(-1)) {
-            result.error = last_error();
-            return result;
+    if (ctx_ == &ctx) {
+        return;
+    }
+    ctx_ = &ctx;
+
+    if (!g_uring) {
+        g_uring = make_unique<uring>();
+        g_uring->init(256);
+    }
+
+    int uring_fd = g_uring->ring_fd;
+    ctx_->add_fd(uring_fd, epoll_in, [](int /*fd*/, uint32_t /*events*/, error_code /*ec*/) {
+        if (!g_uring) {
+            return;
         }
-        resolved_offset = pos;
+        ::io_uring_cqe cqe;
+        while (g_uring->peek_cqe(&cqe) == 0) {
+            auto* handler_ptr = reinterpret_cast<function<void(error_code, size_type)>*>(cqe.user_data);
+            auto h = move(*handler_ptr);
+            delete handler_ptr;
+            h(error_code(cqe.res < 0 ? -cqe.res : 0, error_category::system()),
+              static_cast<size_type>(cqe.res > 0 ? cqe.res : 0));
+        }
+    });
 #endif
-    }
+}
 
-    if (buffer.capacity() < size) {
-        try {
-            buffer.reserve(size);
-        } catch (...) {
-            result.error = errc::not_enough_memory;
-            return result;
-        }
-    }
-    if (buffer.size() < size) {
-        buffer.resize(size);
-    }
-
-    auto* ctx = new async_context(&buffer);
+void file_async::do_async_read(io_context& ctx, string& buffer, size_type size, difference_type offset,
+                               cancellation_slot* /*slot*/, function<void(error_code, size_type)> handler) {
+    ensure_iocp(ctx);
+    buffer.resize(size);
 
 #ifdef NEFORCE_PLATFORM_WINDOWS
-    if (ctx->cb->hEvent == nullptr) {
-        delete ctx;
-        result.error = last_error();
-        return result;
-    }
+    const auto op = make_shared<op_state>();
 
     {
-        const auto off64 = static_cast<uint64_t>(resolved_offset);
-        ctx->cb->Offset = static_cast<::DWORD>(off64 & 0xFFFFFFFF);
-        ctx->cb->OffsetHigh = static_cast<::DWORD>(off64 >> 32);
-    }
-
-    size_type bytes_read = 0;
-    if (::ReadFile(handle_, buffer.data(), size, &bytes_read, ctx->cb) == TRUE) {
-        result.completed = true;
-        result.bytes_transferred = bytes_read;
-        delete ctx;
-    } else {
-        const ::DWORD err = ::GetLastError();
-        if (err == ERROR_IO_PENDING) {
-            result.completed = false;
-            result.cb = ctx->cb;
-            result.user_context = ctx;
-
-            lock<mutex> lk(mutex_);
-            operations_.push_back(ctx->cb);
-            contexts_[ctx->cb] = ctx;
-        } else {
-            result.error = static_cast<errc>(err);
-            delete ctx;
+        difference_type actual_offset = offset;
+        if (offset < 0) {
+            ::LARGE_INTEGER current{};
+            ::LARGE_INTEGER zero{};
+            ::SetFilePointerEx(handle_, zero, &current, FILE_CURRENT);
+            actual_offset = current.QuadPart;
         }
+        ::LARGE_INTEGER li;
+        li.QuadPart = actual_offset;
+        op->ov.Offset = li.LowPart;
+        op->ov.OffsetHigh = li.HighPart;
     }
 
-#else
-    ctx->cb->aio_fildes = handle_;
-    ctx->cb->aio_buf = const_cast<volatile void*>(static_cast<const volatile void*>(buffer.data()));
-    ctx->cb->aio_nbytes = size;
-    ctx->cb->aio_offset = resolved_offset;
-    ctx->cb->aio_sigevent.sigev_notify = SIGEV_NONE;
+    pending_handler_ = [handler = move(handler), &buffer](error_code ec, size_type bytes) mutable {
+        buffer.resize(bytes);
+        handler(ec, bytes);
+    };
 
-    if (::aio_read(ctx->cb) == 0) {
-        result.completed = false;
-        result.cb = ctx->cb;
-        result.user_context = ctx;
-
-        lock<mutex> lk(mutex_);
-        operations_.push_back(ctx->cb);
-        contexts_[ctx->cb] = ctx;
-    } else {
-        result.error = last_error();
-        delete ctx;
-    }
-#endif
-
-    return result;
-}
-
-file_async::async_result file_async::write(string data, const size_type size, const difference_type offset) {
-    async_result result;
-
-    difference_type resolved_offset = offset;
-    if (offset < 0) {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        ::LARGE_INTEGER current{};
-        if (::SetFilePointerEx(handle_, {}, &current, FILE_CURRENT) == FALSE) {
-            result.error = last_error();
-            return result;
-        }
-        resolved_offset = current.QuadPart;
-#else
-        const difference_type pos = ::lseek(handle_, 0, SEEK_CUR);
-        if (pos == static_cast<difference_type>(-1)) {
-            result.error = last_error();
-            return result;
-        }
-        resolved_offset = pos;
-#endif
-    }
-
-    const size_type real_size = (size == numeric_traits<size_type>::max())
-                                        ? static_cast<size_type>(data.size())
-                                        : min(size, static_cast<size_type>(data.size()));
-
-    auto* ctx = new async_context(move(data));
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    if (ctx->cb->hEvent == nullptr) {
-        delete ctx;
-        result.error = last_error();
-        return result;
-    }
-
-    {
-        const auto off64 = static_cast<uint64_t>(resolved_offset);
-        ctx->cb->Offset = static_cast<::DWORD>(off64 & 0xFFFFFFFF);
-        ctx->cb->OffsetHigh = static_cast<::DWORD>(off64 >> 32);
-    }
-
-    size_type bytes_written = 0;
-    if (::WriteFile(handle_, ctx->data.data(), real_size, &bytes_written, ctx->cb) == TRUE) {
-        result.completed = true;
-        result.bytes_transferred = bytes_written;
-        delete ctx;
-    } else {
-        const ::DWORD err = ::GetLastError();
-        if (err == ERROR_IO_PENDING) {
-            result.completed = false;
-            result.cb = ctx->cb;
-            result.user_context = ctx;
-
-            lock<mutex> lk(mutex_);
-            operations_.push_back(ctx->cb);
-            contexts_[ctx->cb] = ctx;
-        } else {
-            result.error = static_cast<errc>(err);
-            delete ctx;
-        }
-    }
-
-#else
-    ctx->cb->aio_fildes = handle_;
-    ctx->cb->aio_buf = const_cast<char*>(ctx->data.data());
-    ctx->cb->aio_nbytes = real_size;
-    ctx->cb->aio_offset = resolved_offset;
-    ctx->cb->aio_sigevent.sigev_notify = SIGEV_NONE;
-
-    if (::aio_write(ctx->cb) == 0) {
-        result.completed = false;
-        result.cb = ctx->cb;
-        result.user_context = ctx;
-
-        lock<mutex> lk(mutex_);
-        operations_.push_back(ctx->cb);
-        contexts_[ctx->cb] = ctx;
-    } else {
-        result.error = last_error();
-        delete ctx;
-    }
-#endif
-
-    return result;
-}
-
-bool file_async::wait(async_result& result, const uint32_t timeout_ms) {
-    if (result.completed) {
-        return true;
-    }
-    if (result.cb == nullptr) {
-        result.error = errc::invalid_argument;
-        return false;
-    }
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    size_type bytes_transferred = 0;
-
-    if (timeout_ms == numeric_traits<uint32_t>::max()) {
-        if (::GetOverlappedResult(handle_, result.cb, &bytes_transferred, TRUE) == TRUE) {
-            return complete_result(result, bytes_transferred);
-        }
-    } else {
-        const ::HANDLE ev = result.cb->hEvent;
-        if (ev != nullptr) {
-            const ::DWORD wr = ::WaitForSingleObject(ev, timeout_ms);
-            if (wr == WAIT_OBJECT_0) {
-                if (::GetOverlappedResult(handle_, result.cb, &bytes_transferred, FALSE) == TRUE) {
-                    return complete_result(result, bytes_transferred);
-                }
-            } else if (wr == WAIT_TIMEOUT) {
-                result.error = errc::timed_out;
-                return false;
-            } else {
-                result.error = last_error();
-                return false;
-            }
-        }
-    }
-    result.error = last_error();
-    return false;
-
-#else
-    const ::aiocb* list[1] = {result.cb};
-
-    if (timeout_ms == 0xFFFFFFFFU) {
-        if (::aio_suspend(list, 1, nullptr) == 0) {
-            return check_completion(result);
-        }
-    } else {
-        ::timespec ts{};
-        ts.tv_sec = timeout_ms / 1000;
-        ts.tv_nsec = static_cast<long>(timeout_ms % 1000) * 1000000L;
-
-        if (::aio_suspend(list, 1, &ts) == 0) {
-            return check_completion(result);
-        } else {
-            result.error = last_error();
-            return false;
-        }
-    }
-    result.error = last_error();
-    return false;
-#endif
-}
-
-void file_async::cancel(async_result& result) noexcept {
-    if (result.completed) {
+    const ::BOOL ok = ::ReadFile(handle_, buffer.data(), size, nullptr, &op->ov);
+    if ((ok == FALSE) && ::GetLastError() == ERROR_IO_PENDING) {
         return;
     }
 
-    lock<mutex> lk(mutex_);
-    if (result.cb == nullptr) {
+    const auto h = move(pending_handler_);
+    pending_handler_ = nullptr;
+    if (ok == FALSE) {
+        h(error_code(static_cast<int>(::GetLastError()), error_category::system()), 0);
+    } else {
+        ::DWORD bytes = 0;
+        ::GetOverlappedResult(handle_, &op->ov, &bytes, FALSE);
+        h(error_code{}, static_cast<size_type>(bytes));
+    }
+#else
+    auto* cb = new function<void(error_code, size_type)>(
+            [handler = move(handler), &buffer](error_code ec, size_type n) mutable {
+                buffer.resize(static_cast<size_t>(n));
+                handler(ec, n);
+            });
+
+    auto* sqe = g_uring->get_sqe();
+    sqe->opcode = IORING_OP_READ;
+    sqe->fd = handle_;
+    sqe->off = offset >= 0 ? static_cast<unsigned long long>(offset) : static_cast<unsigned long long>(-1);
+    sqe->addr = reinterpret_cast<unsigned long long>(buffer.data());
+    sqe->len = size;
+    sqe->user_data = reinterpret_cast<unsigned long long>(cb);
+    sqe->flags = 0;
+
+    g_uring->submit();
+#endif
+}
+
+void file_async::do_async_write(io_context& ctx, string data, size_type size, difference_type offset,
+                                cancellation_slot* /*slot*/, function<void(error_code, size_type)> handler) {
+    ensure_iocp(ctx);
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    auto op = make_shared<op_state>();
+    op->write_data = move(data);
+
+    if (size == numeric_traits<size_type>::max()) {
+        size = static_cast<size_type>(op->write_data.size());
+    }
+
+    {
+        difference_type actual_offset = offset;
+        if (offset < 0) {
+            ::LARGE_INTEGER current{};
+            constexpr ::LARGE_INTEGER zero{};
+            ::SetFilePointerEx(handle_, zero, &current, FILE_CURRENT);
+            actual_offset = current.QuadPart;
+        }
+        ::LARGE_INTEGER li;
+        li.QuadPart = actual_offset;
+        op->ov.Offset = li.LowPart;
+        op->ov.OffsetHigh = li.HighPart;
+    }
+
+    pending_handler_ = [this, handler = move(handler), op](error_code ec, size_type /*bytes*/) mutable {
+        ::DWORD written = 0;
+        ::GetOverlappedResult(handle_, &op->ov, &written, FALSE);
+        handler(ec, written);
+    };
+
+    const ::BOOL ok = ::WriteFile(handle_, op->write_data.data(), size, nullptr, &op->ov);
+    if ((ok == FALSE) && ::GetLastError() == ERROR_IO_PENDING) {
         return;
     }
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    if (::CancelIoEx(handle_, result.cb) == FALSE) {
-        size_type bytes = 0;
-        if (::GetOverlappedResult(handle_, result.cb, &bytes, FALSE) == TRUE) {
-            result.bytes_transferred = bytes;
-        } else {
-            result.error = last_error();
-        }
+    const auto h = move(pending_handler_);
+    pending_handler_ = nullptr;
+    if (ok == FALSE) {
+        h(error_code(static_cast<int>(::GetLastError()), error_category::system()), 0);
     } else {
-        result.error = errc::operation_canceled;
+        ::DWORD written = 0;
+        ::GetOverlappedResult(handle_, &op->ov, &written, FALSE);
+        h(error_code{}, written);
     }
-    result.completed = true;
-
 #else
-    const int cr = ::aio_cancel(handle_, result.cb);
-    if (cr == AIO_CANCELED) {
-        result.error = errc::operation_canceled;
-    } else {
-        const ::aiocb* list[1] = {result.cb};
-        ::aio_suspend(list, 1, nullptr);
-        const ssize_t ret = ::aio_return(result.cb);
-        result.bytes_transferred = (ret > 0) ? static_cast<size_t>(ret) : 0;
-        result.error = (ret >= 0) ? errc::success : last_error();
+    if (size == numeric_traits<size_type>::max()) {
+        size = data.size();
     }
-    result.completed = true;
 
+    auto write_data = make_shared<string>(move(data));
+    auto* cb = new function<void(error_code, size_type)>(
+            [handler = move(handler), write_data](error_code ec, size_type n) mutable { handler(ec, n); });
+
+    auto* sqe = g_uring->get_sqe();
+    sqe->opcode = IORING_OP_WRITE;
+    sqe->fd = handle_;
+    sqe->off = offset >= 0 ? static_cast<unsigned long long>(offset) : static_cast<unsigned long long>(-1);
+    sqe->addr = reinterpret_cast<unsigned long long>(write_data->data());
+    sqe->len = size;
+    sqe->user_data = reinterpret_cast<unsigned long long>(cb);
+    sqe->flags = 0;
+
+    g_uring->submit();
 #endif
-
-    const auto it = find(operations_.begin(), operations_.end(), result.cb);
-    if (it != operations_.end()) {
-        operations_.erase(it);
-    }
-
-    const auto ci = contexts_.find(result.cb);
-    if (ci != contexts_.end()) {
-        delete ci->second;
-        contexts_.erase(ci);
-    }
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    else {
-        delete result.cb;
-    }
-#endif
-
-    result.cb = nullptr;
-    result.user_context = nullptr;
 }
 
 NEFORCE_END_NAMESPACE__

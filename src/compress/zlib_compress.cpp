@@ -26,7 +26,7 @@ namespace {
                     msg = "Unknown error";
                     break;
             }
-            NEFORCE_THROW_EXCEPTION(zlib_exception(msg, zlib_exception::static_type, ret_code));
+            NEFORCE_THROW_EXCEPTION(zlib_exception(msg, ret_code));
         }
     }
 } // namespace
@@ -196,6 +196,16 @@ void zlib_compressor::stream_compressor::reset(compress_level level, compress_st
     bytes_output_ = 0;
 }
 
+void zlib_compressor::stream_compressor::soft_reset() {
+    if (!initialized_) {
+        return;
+    }
+    const int result = ::deflateReset(stream_.get());
+    check_zlib_error(result);
+    bytes_input_ = 0;
+    bytes_output_ = 0;
+}
+
 byte_vector zlib_compressor::stream_compressor::compress(const cbyte_view& data, const bool finish) {
     if (!initialized_) {
         NEFORCE_THROW_EXCEPTION(zlib_exception("Compressor not initialized"));
@@ -291,6 +301,16 @@ void zlib_compressor::stream_decompressor::reset(const compress_format format) {
     const int result = ::inflateInit2(stream_.get(), window_bits);
     check_zlib_error(result);
     initialized_ = true;
+    bytes_input_ = 0;
+    bytes_output_ = 0;
+}
+
+void zlib_compressor::stream_decompressor::soft_reset() {
+    if (!initialized_) {
+        return;
+    }
+    const int result = ::inflateReset(stream_.get());
+    check_zlib_error(result);
     bytes_input_ = 0;
     bytes_output_ = 0;
 }

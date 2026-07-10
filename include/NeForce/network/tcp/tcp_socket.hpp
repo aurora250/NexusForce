@@ -8,7 +8,12 @@
  * 此文件提供了TCP Socket的实现。
  */
 
+#include "NeForce/core/async/async_stream.hpp"
+#include "NeForce/core/async/cancellation_slot.hpp"
+#include "NeForce/core/async/io_context.hpp"
+#include "NeForce/core/async/use_awaitable.hpp"
 #include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/functional/function.hpp"
 #include "NeForce/network/ip_socket.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -61,14 +66,21 @@ NEFORCE_BEGIN_NAMESPACE__
  * // 与客户端通信...
  * @endcode
  */
-class NEFORCE_API tcp_socket : public ip_socket {
+class NEFORCE_API tcp_socket : public ip_socket, public async_stream {
 public:
     /**
      * @brief 默认构造函数
      */
     tcp_socket() = default;
 
+    /**
+     * @brief 移动构造函数
+     */
     tcp_socket(tcp_socket&&) = default;
+
+    /**
+     * @brief 移动赋值运算符
+     */
     tcp_socket& operator=(tcp_socket&&) = default;
 
     /**
@@ -170,6 +182,209 @@ public:
      * @return 始终返回false（基类实现）
      */
     NEFORCE_NODISCARD virtual bool is_ssl() const noexcept { return false; }
+
+    /**
+     * @brief 异步连接到远程端点
+     * @param ctx 异步 I/O 执行上下文
+     * @param endpoint 远程端点地址
+     * @param handler 完成回调 void(error_code)
+     *
+     * 发起异步TCP连接。socket 会被设为非阻塞模式。
+     * handler 在 io_context::run() 线程中执行。
+     */
+    void async_connect(io_context& ctx, const ip_address& endpoint, function<void(error_code)> handler);
+
+    /**
+     * @brief 异步连接（带取消槽）
+     * @param ctx 异步 I/O 执行上下文
+     * @param endpoint 远程端点地址
+     * @param slot 取消槽
+     * @param handler 完成回调 void(error_code)
+     */
+    void async_connect(io_context& ctx, const ip_address& endpoint, cancellation_slot& slot,
+                       function<void(error_code)> handler);
+
+    /**
+     * @brief 异步读取数据
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 接收缓冲区
+     * @param handler 完成回调 void(error_code, size_t bytes_transferred)
+     */
+    void async_read(io_context& ctx, memory_view<char> buffer, function<void(error_code, size_t)> handler) override;
+
+    /**
+     * @brief 异步读取（带取消槽）
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 接收缓冲区
+     * @param slot 取消槽
+     * @param handler 完成回调 void(error_code, size_t bytes_transferred)
+     */
+    void async_read(io_context& ctx, memory_view<char> buffer, cancellation_slot& slot,
+                    function<void(error_code, size_t)> handler) override;
+
+    /**
+     * @brief 异步写入数据
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 发送缓冲区
+     * @param handler 完成回调 void(error_code, size_t bytes_transferred)
+     */
+    void async_write(io_context& ctx, memory_view<const char> buffer,
+                     function<void(error_code, size_t)> handler) override;
+
+    /**
+     * @brief 异步写入（带取消槽）
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 发送缓冲区
+     * @param slot 取消槽
+     * @param handler 完成回调 void(error_code, size_t bytes_transferred)
+     */
+    void async_write(io_context& ctx, memory_view<const char> buffer, cancellation_slot& slot,
+                     function<void(error_code, size_t)> handler) override;
+
+    /**
+     * @brief 异步接收（转发到 async_read）
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 接收缓冲区
+     * @param handler 完成回调 void(error_code, size_t bytes_transferred)
+     */
+    void async_receive(io_context& ctx, memory_view<char> buffer, function<void(error_code, size_t)> handler) {
+        async_read(ctx, buffer, move(handler));
+    }
+
+    /**
+     * @brief 异步接收（带取消槽，转发到 async_read）
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 接收缓冲区
+     * @param slot 取消槽
+     * @param handler 完成回调 void(error_code, size_t bytes_transferred)
+     */
+    void async_receive(io_context& ctx, memory_view<char> buffer, cancellation_slot& slot,
+                       function<void(error_code, size_t)> handler) {
+        async_read(ctx, buffer, slot, move(handler));
+    }
+
+    /**
+     * @brief 异步发送（转发到 async_write）
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 发送缓冲区
+     * @param handler 完成回调 void(error_code, size_t bytes_transferred)
+     */
+    void async_send(io_context& ctx, memory_view<const char> buffer, function<void(error_code, size_t)> handler) {
+        async_write(ctx, buffer, move(handler));
+    }
+
+    /**
+     * @brief 异步发送（带取消槽，转发到 async_write）
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 发送缓冲区
+     * @param slot 取消槽
+     * @param handler 完成回调 void(error_code, size_t bytes_transferred)
+     */
+    void async_send(io_context& ctx, memory_view<const char> buffer, cancellation_slot& slot,
+                    function<void(error_code, size_t)> handler) {
+        async_write(ctx, buffer, slot, move(handler));
+    }
+
+    /**
+     * @brief 异步接收—模板令牌版本（转发到 async_read）
+     * @tparam Token 完成令牌类型
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 接收缓冲区
+     * @param token 完成令牌
+     */
+    template <typename Token, enable_if_t<!is_same_v<decay_t<Token>, function<void(error_code, size_t)>>, int> = 0>
+    decltype(auto) async_receive(io_context& ctx, memory_view<char> buffer, Token&& token) {
+        return async_stream::async_read(ctx, buffer, forward<Token>(token));
+    }
+
+    /**
+     * @brief 异步发送—模板令牌版本（转发到 async_write）
+     * @tparam Token 完成令牌类型
+     * @param ctx 异步 I/O 执行上下文
+     * @param buffer 发送缓冲区
+     * @param token 完成令牌
+     */
+    template <typename Token, enable_if_t<!is_same_v<decay_t<Token>, function<void(error_code, size_t)>>, int> = 0>
+    decltype(auto) async_send(io_context& ctx, memory_view<const char> buffer, Token&& token) {
+        return async_stream::async_write(ctx, buffer, forward<Token>(token));
+    }
+
+    /**
+     * @brief 异步连接—任意可调用对象版本
+     * @tparam Token 可调用对象类型，需满足 void(error_code) 签名
+     * @param ctx 异步 I/O 执行上下文
+     * @param endpoint 远程端点地址
+     * @param token 完成令牌
+     *
+     * handler 可以是任意满足 void(error_code) 的可调用对象。
+     */
+    template <typename Token, enable_if_t<!is_same_v<decay_t<Token>, function<void(error_code)>>, int> = 0>
+    void async_connect(io_context& ctx, const ip_address& endpoint, Token&& token) {
+        async_connect(ctx, endpoint, function<void(error_code)>(forward<Token>(token)));
+    }
+
+    /**
+     * @brief 异步连接—use_future
+     * @param ctx 异步 I/O 执行上下文
+     * @param endpoint 远程端点地址
+     * @return future<void> 异步操作结果
+     */
+    auto async_connect(io_context& ctx, const ip_address& endpoint, use_future_t /*unused*/) {
+        async_result<use_future_t, void(error_code)> result(use_future);
+        async_connect(ctx, endpoint, function<void(error_code)>(result.get_handler()));
+        return result.get();
+    }
+
+    /**
+     * @brief 异步连接—detached（即发即忘）
+     * @param ctx 异步 I/O 执行上下文
+     * @param endpoint 远程端点地址
+     */
+    void async_connect(io_context& ctx, const ip_address& endpoint, detached_t /*unused*/) {
+        async_connect(ctx, endpoint, function<void(error_code)>([](error_code) {}));
+    }
+
+#ifdef NEFORCE_STANDARD_20
+    /**
+     * @brief 异步连接—use_awaitable
+     * @param ctx 异步 I/O 执行上下文
+     * @param endpoint 远程端点地址
+     * @return awaitable<void> 可协程等待的结果
+     */
+    auto async_connect(io_context& ctx, const ip_address& endpoint, use_awaitable_t /*unused*/) {
+        async_result<use_awaitable_t, void(error_code)> result(use_awaitable);
+        async_connect(ctx, endpoint, function<void(error_code)>(result.get_handler()));
+        return result.get();
+    }
+#endif
+};
+
+
+NEFORCE_BEGIN_INNER__
+
+template <>
+struct future_handler<error_code, tcp_socket> {
+    shared_ptr<promise<tcp_socket>> promise_;
+
+    void operator()(error_code ec, tcp_socket sock) {
+        if (ec) {
+            promise_->set_exception(_NEFORCE make_exception_ptr(system_exception(ec)));
+        } else {
+            promise_->set_value(move(sock));
+        }
+    }
+};
+
+NEFORCE_END_INNER__
+
+template <>
+struct async_result<use_future_t, void(error_code, tcp_socket)> {
+    using handler_type = inner::future_handler<error_code, tcp_socket>;
+    using return_type = future<tcp_socket>;
+    handler_type handler_;
+    explicit async_result(use_future_t /*unused*/) { handler_.promise_ = make_shared<promise<tcp_socket>>(); }
+    handler_type get_handler() { return handler_; }
+    return_type get() { return handler_.promise_->get_future(); }
 };
 
 /** @} */ // TCP

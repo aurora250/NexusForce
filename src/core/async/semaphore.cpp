@@ -1,5 +1,5 @@
-#include <algorithm>
 #include <NeForce/core/async/semaphore.hpp>
+#include <NeForce/core/exception/system_exception.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
 #    include <NeForce/core/algorithm/compare.hpp>
 #    include <windef.h>
@@ -107,7 +107,7 @@ bool semaphore::try_acquire() noexcept {
 }
 
 void semaphore::release(long update) {
-    if (update > 0) {
+    if (update <= 0) {
         NEFORCE_THROW_EXCEPTION(system_exception("update failed"));
     }
 #ifdef NEFORCE_PLATFORM_WINDOWS

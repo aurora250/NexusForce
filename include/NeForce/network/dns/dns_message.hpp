@@ -18,6 +18,7 @@
  */
 
 #include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/exception/system_exception.hpp"
 #include "NeForce/core/string/string.hpp"
 #include "NeForce/core/time/duration.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -237,11 +238,11 @@ public:
         NO_RECORD       ///< 无记录
     };
 
-    explicit dns_exception(const string& what) :
-    network_exception(what.data()) {}
+    explicit dns_exception(const string& info) :
+    network_exception(info.data()) {}
 
-    dns_exception(const string& what, const code code) :
-    network_exception(what.data(), static_type, static_cast<int>(code)) {}
+    dns_exception(const string& info, const code code) :
+    network_exception(info.data(), error_code{static_cast<int>(code), generic_category()}) {}
 
     /**
      * @brief 创建超时异常
@@ -266,7 +267,7 @@ public:
      */
     static dns_exception parse_error(const string& detail) { return {"Parse error: " + detail, code::PARSE_ERROR}; }
 
-    static constexpr auto static_type = "dns_exception";
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "dns_exception"; }
 };
 
 /** @} */ // Exceptions

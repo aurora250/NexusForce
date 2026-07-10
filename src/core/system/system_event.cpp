@@ -1,7 +1,10 @@
 #include <NeForce/core/system/system_event.hpp>
-#include <NeForce/core/exception/error_category.hpp>
+#include <NeForce/core/exception/system_exception.hpp>
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#    include <Windows.h>
+#    include <NeForce/core/config/windef.hpp>
+#    include <windef.h>
+#    include <WinBase.h>
+#    include <handleapi.h>
 #else
 #    include <ctime>
 #endif

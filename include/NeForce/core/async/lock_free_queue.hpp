@@ -596,6 +596,7 @@ private:
 
         auto new_count = 1 + implicit_producer_hash_count_.fetch_add(1, memory_order_relaxed);
         while (true) {
+            // NOLINTNEXTLINE(clang-analyzer-core.NullDereference)
             if (new_count >= (main_hash->capacity_ >> 1) &&
                 !implicit_producer_hash_resize_in_progress_.test_and_set(memory_order_acquire)) {
                 main_hash = implicit_producer_hash_.load(memory_order_acquire);

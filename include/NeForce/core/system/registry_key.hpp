@@ -1,8 +1,8 @@
-#ifndef NEFORCE_CORE_SYSTEM_REGISTRY_HPP__
-#define NEFORCE_CORE_SYSTEM_REGISTRY_HPP__
+#ifndef NEFORCE_CORE_SYSTEM_REGISTRY_KEY_HPP__
+#define NEFORCE_CORE_SYSTEM_REGISTRY_KEY_HPP__
 
 /**
- * @file registry.hpp
+ * @file registry_key.hpp
  * @brief 系统注册表操作
  *
  * 此文件提供了Windows系统注册表操作，
@@ -11,7 +11,7 @@
 
 #include "NeForce/core/config/windef.hpp"
 #ifdef NEFORCE_PLATFORM_WINDOWS
-#    include "NeForce/core/string/string.hpp"
+#    include "NeForce/core/exception/system_exception.hpp"
 #    include <windef.h>
 #    include <winreg.h>
 NEFORCE_BEGIN_NAMESPACE__
@@ -27,21 +27,16 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 系统注册表操作异常
  */
 struct registry_key_exception final : system_exception {
-    /**
-     * @brief 构造函数
-     * @param info 异常信息
-     * @param type 异常类型名称
-     * @param code 错误码
-     */
-    explicit registry_key_exception(const char* info = "Registry Key Operation Failed.", const char* type = static_type,
-                                    const int code = 0) noexcept :
-    system_exception(info, type, code) {}
+    explicit registry_key_exception(const char* info = "Registry Key Operation Failed.",
+                                    const error_code code = last_error()) noexcept :
+    system_exception(info, code) {}
 
     explicit registry_key_exception(const exception& e) :
     system_exception(e) {}
 
     ~registry_key_exception() override = default;
-    static constexpr auto static_type = "registry_key_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "registry_key_exception"; }
 };
 
 /** @} */ // Exceptions
@@ -421,4 +416,4 @@ public:
 
 NEFORCE_END_NAMESPACE__
 #endif
-#endif // NEFORCE_CORE_SYSTEM_REGISTRY_HPP__
+#endif // NEFORCE_CORE_SYSTEM_REGISTRY_KEY_HPP__

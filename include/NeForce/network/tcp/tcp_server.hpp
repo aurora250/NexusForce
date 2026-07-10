@@ -9,9 +9,9 @@
  * 使用线程池处理客户端连接，支持非阻塞接受和自定义处理器。
  */
 
+#include "NeForce/core/async/io_context.hpp"
 #include "NeForce/core/async/shared_mutex.hpp"
-#include "NeForce/core/async/thread_pool.hpp"
-#include "NeForce/core/system/pipe.hpp"
+#include "NeForce/core/system/sysinfo.hpp"
 #include "NeForce/network/ssl/ssl_acceptor.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
@@ -33,18 +33,14 @@ public:
     using exception_handler_t = function<void(const exception&)>;    ///< 异常处理器类型
 
 protected:
-    unique_ptr<tcp_acceptor> acceptor_; ///< TCP接受器
-    ports port_;                        ///< 监听端口
-    atomic<bool> running_{false};       ///< 运行标志
-    vector<thread> worker_threads_;     ///< 工作线程列表
-    thread_pool client_pool_;           ///< 客户端处理线程池
-    size_t worker_count_;               ///< 工作线程数
+    unique_ptr<tcp_acceptor> acceptor_;     ///< TCP接受器
+    io_context& ctx_;                       ///< 异步 I/O 执行上下文
+    unique_ptr<io_context::work> ctx_work_; ///< io_context 工作守卫
+    ports port_;                            ///< 监听端口
+    atomic<bool> running_{false};           ///< 运行标志
+    vector<thread> worker_threads_;         ///< 工作线程列表（含 accept 线程）
+    size_t worker_count_;                   ///< 工作线程数
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    ::WSAEVENT wake_event_{WSA_INVALID_EVENT};
-#else
-    pipe wake_pipe_;
-#endif
     mutable shared_mutex handler_mutex_;
 
     client_handler_t client_handler_;       ///< 客户端处理器
@@ -52,12 +48,11 @@ protected:
     mutex acceptor_mutex_;                  ///< TCP接受器互斥锁
 
     /**
-     * @brief 向 wake_pipe_ 写端写入一个字节，唤醒 accept_loop
-     */
-    void notify_stop() noexcept;
-
-    /**
      * @brief 接受连接的主循环
+     *
+     * 使用 io_context::add_fd + run_one() 驱动事件等待，
+     * 替代 raw poll/WSAEventSelect。专用线程确保 SSL 握手等阻塞操作
+     * 不影响 io_context 池线程。
      */
     void accept_loop();
 
@@ -96,10 +91,11 @@ public:
     /**
      * @brief 构造函数
      * @param port 监听端口
+     * @param ctx 异步 I/O 执行上下文
      * @param worker_count 工作线程数（默认最大）
      * @throws value_exception worker_count为0时抛出
      */
-    explicit tcp_server_base(ports port, size_t worker_count = thread_pool::max_thread_threshhold());
+    explicit tcp_server_base(ports port, io_context& ctx, size_t worker_count = 0);
 
     /**
      * @brief 析构函数
@@ -228,9 +224,10 @@ public:
     /**
      * @brief 构造函数
      * @param port 监听端口
+     * @param ctx 异步 I/O 执行上下文
      * @param worker_count 工作线程数
      */
-    explicit ssl_server(ports port, size_t worker_count = thread_pool::max_thread_threshhold());
+    explicit ssl_server(ports port, io_context& ctx, size_t worker_count = 0);
 
     /**
      * @brief 加载证书和私钥

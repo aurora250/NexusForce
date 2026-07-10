@@ -20,7 +20,6 @@
  *   wscat -c ws://localhost:8080/chat
  */
 
-#include <NeForce/core/async/event_loop.hpp>
 #include <NeForce/core/system/console.hpp>
 #include <NeForce/network/http/http_server.hpp>
 #include <NeForce/network/http/websocket_deflate.hpp>
@@ -29,7 +28,8 @@ using namespace neforce;
 using namespace neforce::http;
 
 int main() {
-    http_server server(ports(8080u));
+    io_context ctx;
+    http_server server(ports(8080u), ctx);
 
     // =========================================================================
     // 首页（含压缩状态显示）
@@ -125,13 +125,11 @@ document.getElementById('input').addEventListener('keypress', (e) => {
         session->send(welcome);
     });
 
-    // 使用 event_loop 驱动 WebSocket I/O（替代多线程模式）
-    event_loop ws_loop;
-    server.websocket().set_event_loop(&ws_loop);
+    server.websocket().set_io_context(ctx);
 
     // 启动服务器
     if (server.start()) {
-        thread ws_loop_thread([&ws_loop] { ws_loop.run(); });
+        thread ws_loop_thread([&ctx] { ctx.run(); });
         printfln("WebSocket Server started on http://localhost:{}", static_cast<uint16_t>(server.port()));
         println("Open your browser and navigate to the address above.");
         printfln("Or use wscat: wscat -c ws://localhost:{}/chat", static_cast<uint16_t>(server.port()));

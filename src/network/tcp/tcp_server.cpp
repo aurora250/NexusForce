@@ -1,44 +1,5 @@
 #include <NeForce/network/tcp/tcp_server.hpp>
-#ifdef NEFORCE_PLATFORM_LINUX
-#    include <poll.h>
-#    include <cerrno>
-#endif
 NEFORCE_BEGIN_NAMESPACE__
-
-#ifdef NEFORCE_PLATFORM_WINDOWS
-namespace {
-    // NOLINTNEXTLINE(cppcoreguidelines-special-member-functions,hicpp-special-member-functions)
-    struct wsa_event_guard {
-        ::WSAEVENT event;
-
-        explicit wsa_event_guard(::WSAEVENT e) :
-        event(e) {}
-
-        ~wsa_event_guard() {
-            if (event != WSA_INVALID_EVENT) {
-                ::WSACloseEvent(event);
-            }
-        }
-
-        wsa_event_guard(const wsa_event_guard&) = delete;
-        wsa_event_guard& operator=(const wsa_event_guard&) = delete;
-    };
-} // namespace
-#endif
-
-
-void tcp_server_base::notify_stop() noexcept {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    if (wake_event_ != WSA_INVALID_EVENT) {
-        ::WSASetEvent(wake_event_);
-    }
-#else
-    if (wake_pipe_.is_valid()) {
-        constexpr char byte = 1;
-        (void) wake_pipe_.write(&byte, 1);
-    }
-#endif
-}
 
 void tcp_server_base::accept_loop() {
     if (!acceptor_->set_nonblocking(true)) {
@@ -52,38 +13,35 @@ void tcp_server_base::accept_loop() {
         return;
     }
 
-    const auto acceptor_fd = acceptor_->native_handle();
+    const auto acceptor_fd = static_cast<int>(acceptor_->native_handle());
+    auto fired = make_shared<atomic<bool>>(false);
+    bool fd_registered = false;
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
+    auto register_fd = [&] {
+        if (fd_registered) {
+            ctx_.remove_fd(acceptor_fd);
+            fd_registered = false;
+        }
+        fired->store(false, memory_order_release);
+        ctx_.add_fd(acceptor_fd, epoll_in,
+                    [fired](int, uint32_t, error_code) { fired->store(true, memory_order_release); });
+        fd_registered = true;
+    };
 
-    wsa_event_guard accept_guard(::WSACreateEvent());
-    if (accept_guard.event == WSA_INVALID_EVENT) {
-        running_ = false;
-        return;
-    }
-    if (::WSAEventSelect(acceptor_fd, accept_guard.event, FD_ACCEPT) == SOCKET_ERROR) {
-        running_ = false;
-        return;
-    }
-
-    ::HANDLE events[2] = {accept_guard.event, wake_event_};
+    // Initial registration
+    register_fd();
 
     while (running_) {
-        ::DWORD ret = ::WaitForMultipleObjects(2, events, FALSE, numeric_traits<::DWORD>::max());
+        // Wait for accept event via io_context (or timeout after 200ms)
+        ctx_.run_one(200);
 
-        if (ret == WAIT_OBJECT_0 + 1) {
+        if (!running_) {
             break;
         }
-        if (ret == WAIT_FAILED) {
-            // error
-            break;
-        }
-        if (ret != WAIT_OBJECT_0) {
-            continue;
-        }
 
-        ::WSAResetEvent(accept_guard.event);
+        bool had_accept = fired->exchange(false, memory_order_acq_rel);
 
+        // Accept all pending connections
         while (running_) {
             try {
                 auto client_opt = accept_one();
@@ -101,9 +59,10 @@ void tcp_server_base::accept_loop() {
                     continue;
                 }
 
-                client_pool_.submit_task([handler = move(handler), sock = move(*client_opt), this]() mutable {
+                auto holder = make_shared<unique_ptr<tcp_socket>>(move(*client_opt));
+                ctx_.post([this, handler = move(handler), holder = move(holder)]() mutable {
                     try {
-                        handler(move(sock));
+                        handler(move(*holder));
                     } catch (const exception& e) {
                         if (!running_) {
                             return;
@@ -125,84 +84,28 @@ void tcp_server_base::accept_loop() {
                 break;
             }
         }
-    }
 
-#else
-    const auto wake_read_fd = wake_pipe_.native_read_handle();
-
-    ::pollfd pfds[2];
-    pfds[0].fd = acceptor_fd;
-    pfds[0].events = POLLIN;
-    pfds[1].fd = wake_read_fd;
-    pfds[1].events = POLLIN;
-
-    while (running_) {
-        pfds[0].revents = 0;
-        pfds[1].revents = 0;
-
-        const int ret = ::poll(pfds, 2, -1);
-
-        if (ret < 0) {
-            if (errno == EINTR) {
-                continue;
-            }
-            break;
+        // Edge-triggered epoll requires re-registration after each event batch.
+        // Re-register to catch connections that arrived during accept processing.
+        if (running_ && !had_accept) {
+            // Also flush any io_context handlers that were posted
+            ctx_.poll();
         }
-        if ((pfds[1].revents & POLLIN) != 0) {
-            break;
-        }
-
-        if ((pfds[0].revents & POLLIN) == 0) {
-            continue;
-        }
-
-        while (running_) {
-            try {
-                auto client_opt = accept_one();
-                if (!client_opt) {
-                    break;
-                }
-
-                client_handler_t handler;
-                {
-                    shared_lock<shared_mutex> lock(handler_mutex_);
-                    handler = client_handler_;
-                }
-
-                client_pool_.submit_task([this, handler = move(handler), sock = move(*client_opt)]() mutable {
-                    try {
-                        if (handler) {
-                            handler(move(sock));
-                        }
-                    } catch (const exception& e) {
-                        if (!running_) {
-                            return;
-                        }
-                        shared_lock<shared_mutex> lock(handler_mutex_);
-                        if (exception_handler_) {
-                            exception_handler_(e);
-                        }
-                    }
-                });
-            } catch (const exception& e) {
-                if (!running_) {
-                    break;
-                }
-                shared_lock<shared_mutex> lock(handler_mutex_);
-                if (exception_handler_) {
-                    exception_handler_(e);
-                }
-                break;
-            }
+        if (running_) {
+            register_fd();
         }
     }
-#endif
+
+    if (fd_registered) {
+        ctx_.remove_fd(acceptor_fd);
+    }
 }
 
-tcp_server_base::tcp_server_base(const ports port, const size_t worker_count) :
+tcp_server_base::tcp_server_base(const ports port, io_context& ctx, const size_t worker_count) :
+ctx_(ctx),
 port_(port),
-worker_count_(worker_count) {
-    if (worker_count == 0) {
+worker_count_(worker_count == 0 ? sysinfo::instance().get_CPU_info().logical_processors : worker_count) {
+    if (worker_count_ == 0) {
         NEFORCE_THROW_EXCEPTION(value_exception("Worker count must be greater than 0"));
     }
 }
@@ -240,27 +143,6 @@ bool tcp_server_base::start(const int backlog) noexcept {
         }
     }
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    if (wake_event_ == WSA_INVALID_EVENT) {
-        wake_event_ = ::WSACreateEvent();
-        if (wake_event_ == WSA_INVALID_EVENT) {
-            return false;
-        }
-    } else {
-        ::WSAResetEvent(wake_event_);
-    }
-#else
-    try {
-        wake_pipe_ = pipe(false);
-    } catch (...) {
-        return false;
-    }
-#endif
-
-    if (!client_pool_.running()) {
-        client_pool_.start(worker_count_);
-    }
-
     try {
         const auto endpoint = ip_address::any(port_);
         create_acceptor(endpoint, backlog);
@@ -272,17 +154,22 @@ bool tcp_server_base::start(const int backlog) noexcept {
         }
 
         running_ = true;
-        worker_threads_.emplace_back(&tcp_server_base::accept_loop, this);
+        worker_threads_.emplace_back([this] {
+            try {
+                accept_loop();
+                // NOLINTNEXTLINE(bugprone-empty-catch)
+            } catch (...) {
+                // ignore
+            }
+        });
+
+        ctx_work_ = make_unique<io_context::work>(ctx_);
+        ctx_.run_pool(worker_count_);
         return true;
     } catch (...) {
         running_ = false;
+        ctx_work_.reset();
         acceptor_.reset();
-#ifdef NEFORCE_PLATFORM_WINDOWS
-        ::WSACloseEvent(wake_event_);
-        wake_event_ = WSA_INVALID_EVENT;
-#else
-        wake_pipe_.close();
-#endif
         return false;
     }
 }
@@ -293,7 +180,8 @@ void tcp_server_base::stop() {
         return;
     }
 
-    notify_stop();
+    ctx_work_.reset();
+    ctx_.stop();
 
     for (auto& t: worker_threads_) {
         if (t.joinable()) {
@@ -302,6 +190,8 @@ void tcp_server_base::stop() {
     }
     worker_threads_.clear();
 
+    ctx_.restart();
+
     {
         lock<mutex> lock(acceptor_mutex_);
         if (acceptor_) {
@@ -309,16 +199,6 @@ void tcp_server_base::stop() {
             acceptor_.reset();
         }
     }
-
-    client_pool_.stop();
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    if (wake_event_ != WSA_INVALID_EVENT) {
-        ::WSACloseEvent(wake_event_);
-        wake_event_ = WSA_INVALID_EVENT;
-    }
-#else
-    wake_pipe_.close();
-#endif
 }
 
 void tcp_server::create_acceptor(const ip_address& endpoint, int backlog) {
@@ -343,8 +223,8 @@ optional<unique_ptr<tcp_socket>> tcp_server::accept_one() {
     return make_unique<tcp_socket>(move(*client));
 }
 
-ssl_server::ssl_server(const ports port, const size_t worker_count) :
-tcp_server_base(port, worker_count),
+ssl_server::ssl_server(const ports port, io_context& ctx, const size_t worker_count) :
+tcp_server_base(port, ctx, worker_count),
 ssl_ctx_(ssl_method::TLS_SERVER) {}
 
 bool ssl_server::load_certificate(const string& cert_file, const string& key_file) {

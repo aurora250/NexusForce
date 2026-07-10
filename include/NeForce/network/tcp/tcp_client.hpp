@@ -105,18 +105,20 @@ protected:
 
 public:
     /**
-     * @brief 默认构造函数
+     * @brief 构造函数
+     * @param ctx 异步 I/O 执行上下文
      */
-    tcp_client_base() :
-    dns_(make_unique<dns_client>()) {}
+    explicit tcp_client_base(io_context& ctx) :
+    dns_(make_unique<dns_client>(dns_client::config{}, ctx)) {}
 
     /**
      * @brief 构造函数（带DNS客户端）
      * @param cfg DNS配置
+     * @param ctx 异步 I/O 执行上下文
      * @param use_tcp DNS是否使用TCP
      */
-    explicit tcp_client_base(dns_client::config cfg, bool use_tcp = false) :
-    dns_(make_unique<dns_client>(_NEFORCE move(cfg), use_tcp)) {}
+    explicit tcp_client_base(dns_client::config cfg, io_context& ctx, bool use_tcp = false) :
+    dns_(make_unique<dns_client>(_NEFORCE move(cfg), ctx, use_tcp)) {}
 
     /**
      * @brief 析构函数
@@ -445,15 +447,18 @@ protected:
 
 public:
     /**
-     * @brief 默认构造函数
+     * @brief 构造函数
+     * @param ioc 异步 I/O 执行上下文
      */
-    ssl_client() = default;
+    explicit ssl_client(io_context& ioc) :
+    tcp_client_base(ioc) {}
 
     /**
      * @brief 构造函数（带SSL上下文）
+     * @param ioc 异步 I/O 执行上下文
      * @param ctx SSL上下文
      */
-    explicit ssl_client(ssl_context ctx);
+    explicit ssl_client(io_context& ioc, ssl_context ctx);
 
     /**
      * @brief 设置SSL上下文

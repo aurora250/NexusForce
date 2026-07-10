@@ -1538,5 +1538,28 @@ public:
 
 /** @} */ // DateTime
 
+/**
+ * @addtogroup Format 字符串格式化
+ * @{
+ */
+
+/**
+ * @brief datetime 格式化器特化
+ *
+ * 当 opts.loc 非空时，使用 locale 感知的日期时间格式化；
+ * 否则退化为 ISO 8601 格式。
+ */
+template <>
+struct formatter<datetime> {
+    string operator()(const datetime& value, const format_options& options) const {
+        if (options.loc != nullptr) {
+            return options.loc->format_datetime(value, locale::date_style::medium, locale::time_style::medium);
+        }
+        return value.to_ISO8601();
+    }
+};
+
+/** @} */ // Format
+
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_TIME_DATETIME_HPP__

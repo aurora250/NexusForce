@@ -332,9 +332,9 @@ void thread_pool::thread_function(const id_type thread_id) {
                     }
                     worker_contexts_.erase(thread_id);
                     threads_map_.erase(thread_id);
-                }
-                if (threads_map_.empty()) {
-                    exit_cond_.notify_all();
+                    if (threads_map_.empty()) {
+                        exit_cond_.notify_all();
+                    }
                 }
                 lk.unlock_quiet();
                 get_worker_context() = nullptr;
@@ -354,9 +354,9 @@ void thread_pool::thread_function(const id_type thread_id) {
                         }
                         worker_contexts_.erase(thread_id);
                         threads_map_.erase(thread_id);
-                    }
-                    if (threads_map_.empty()) {
-                        exit_cond_.notify_all();
+                        if (threads_map_.empty()) {
+                            exit_cond_.notify_all();
+                        }
                     }
                     lk.unlock_quiet();
                     get_worker_context() = nullptr;
@@ -520,9 +520,7 @@ bool thread_pool::start(const size_t init_thread_size) {
             numa_nodes_ = &numa_info;
         }
     }
-    if (!global_queue_) {
-        global_queue_ = make_unique<lock_free_queue<shared_ptr<task_type>>>();
-    }
+    global_queue_ = make_unique<lock_free_queue<shared_ptr<task_type>>>();
 
     {
         lock<mutex> ctx_lock(worker_contexts_mtx_);
@@ -579,10 +577,10 @@ thread_pool::pool_statistics thread_pool::stop() {
     {
         unique_lock<mutex> lk(work_available_mtx_);
         work_available_.notify_all();
-    }
-    {
-        unique_lock<mutex> lk(work_available_mtx_);
-        exit_cond_.wait(lk, [&] { return threads_map_.empty(); });
+        exit_cond_.wait(lk, [&] {
+            lock<mutex> ctx_lock(worker_contexts_mtx_);
+            return threads_map_.empty();
+        });
     }
 
     if (global_queue_) {

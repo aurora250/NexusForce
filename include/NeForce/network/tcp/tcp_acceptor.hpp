@@ -113,6 +113,67 @@ public:
      * 需要先设置socket为非阻塞模式。
      */
     NEFORCE_NODISCARD optional<tcp_socket> accept_nonblock();
+
+    /**
+     * @brief 异步接受客户端连接
+     * @param ctx 异步 I/O 执行上下文
+     * @param handler 完成回调 void(error_code, tcp_socket)
+     *
+     * 异步等待新连接。新连接到达时 handler 在 io_context::run() 线程中执行。
+     * acceptor 必须是已打开且处于监听状态。
+     */
+    void async_accept(io_context& ctx, function<void(error_code, tcp_socket)> handler);
+
+    /**
+     * @brief 异步接受连接（带取消槽）
+     * @param ctx 异步 I/O 执行上下文
+     * @param slot 取消槽
+     * @param handler 完成回调 void(error_code, tcp_socket)
+     */
+    void async_accept(io_context& ctx, cancellation_slot& slot, function<void(error_code, tcp_socket)> handler);
+
+    /**
+     * @brief 异步接受—任意可调用对象
+     * @tparam Token 可调用对象类型，需满足 void(error_code, tcp_socket) 签名
+     * @param ctx 异步 I/O 执行上下文
+     * @param token 完成令牌
+     */
+    template <typename Token, enable_if_t<!is_same_v<decay_t<Token>, function<void(error_code, tcp_socket)>>, int> = 0>
+    void async_accept(io_context& ctx, Token&& token) {
+        async_accept(ctx, function<void(error_code, tcp_socket)>(forward<Token>(token)));
+    }
+
+    /**
+     * @brief 异步接受—use_future
+     * @param ctx 异步 I/O 执行上下文
+     * @return future<tcp_socket> 已连接的 socket
+     */
+    decltype(auto) async_accept(io_context& ctx, use_future_t /*unused*/) {
+        async_result<use_future_t, void(error_code, tcp_socket)> result(use_future);
+        async_accept(ctx, function<void(error_code, tcp_socket)>(result.get_handler()));
+        return result.get();
+    }
+
+    /**
+     * @brief 异步接受—detached（即发即忘）
+     * @param ctx 异步 I/O 执行上下文
+     */
+    void async_accept(io_context& ctx, detached_t /*unused*/) {
+        async_accept(ctx, function<void(error_code, tcp_socket)>([](error_code, tcp_socket) {}));
+    }
+
+#ifdef NEFORCE_STANDARD_20
+    /**
+     * @brief 异步接受—use_awaitable
+     * @param ctx 异步 I/O 执行上下文
+     * @return awaitable<tcp_socket> 可协程等待的结果
+     */
+    decltype(auto) async_accept(io_context& ctx, use_awaitable_t /*unused*/) {
+        async_result<use_awaitable_t, void(error_code, tcp_socket)> result(use_awaitable);
+        async_accept(ctx, function<void(error_code, tcp_socket)>(result.get_handler()));
+        return result.get();
+    }
+#endif
 };
 
 /** @} */ // TCP

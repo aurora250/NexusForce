@@ -29,7 +29,8 @@ void test_http_client() {
         config.follow_redirects = true;
         config.max_redirects = 5;
         config.verify_ssl = true;
-        http_client client(config);
+        io_context ctx;
+        http_client client(ctx, config);
 
         const path pem = res_root() / "cacert.pem";
         client.get_client().load_ca_file(pem.str());
@@ -81,7 +82,8 @@ void test_download() {
     config.max_redirects = 5;
     config.max_response_size = byte_size{numeric_traits<size_t>::max()};
     config.verify_ssl = true;
-    http_client client(config);
+    io_context ctx;
+    http_client client(ctx, config);
 
     const path pem = res_root() / "cacert.pem";
     client.get_client().load_ca_file(pem.str());
@@ -139,7 +141,7 @@ void test_traceroute() {
 
     } catch (const socket_exception& e) {
         println("套接字错误:", e.what());
-        if (e.code() == 1) {
+        if (e.code().value() == 1) {
             println("需要管理员/root权限才能创建原始ICMP套接字");
         }
     } catch (const exception& e) {

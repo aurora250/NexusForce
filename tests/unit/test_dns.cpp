@@ -922,28 +922,32 @@ TEST(DnsClientConfig, DefaultConfiguration) {
 }
 
 TEST(DnsClient, ConstructWithValidConfig) {
+    io_context ctx;
     dns_client::config cfg;
     cfg.server = "1.1.1.1";
     cfg.timeout = milliseconds(3000);
-    EXPECT_NO_THROW({ dns_client client(cfg); });
+    EXPECT_NO_THROW({ dns_client client(cfg, ctx); });
 }
 
 TEST(DnsClient, ConstructWithEmptyServerThrows) {
+    io_context ctx;
     dns_client::config cfg;
     cfg.server = "";
-    EXPECT_THROW({ dns_client client(cfg); }, dns_exception);
+    EXPECT_THROW({ dns_client client(cfg, ctx); }, dns_exception);
 }
 
 TEST(DnsClient, ConstructWithZeroTimeoutThrows) {
+    io_context ctx;
     dns_client::config cfg;
     cfg.timeout = milliseconds(0);
-    EXPECT_THROW({ dns_client client(cfg); }, dns_exception);
+    EXPECT_THROW({ dns_client client(cfg, ctx); }, dns_exception);
 }
 
 TEST(DnsClient, ConstructWithNegativeTimeoutThrows) {
+    io_context ctx;
     dns_client::config cfg;
     cfg.timeout = milliseconds(-1);
-    EXPECT_THROW({ dns_client client(cfg); }, dns_exception);
+    EXPECT_THROW({ dns_client client(cfg, ctx); }, dns_exception);
 }
 
 TEST(DnsClient, DefaultConstructorDoesNotThrow) {
@@ -951,9 +955,10 @@ TEST(DnsClient, DefaultConstructorDoesNotThrow) {
 }
 
 TEST(DnsClient, ConstructWithTCPFlag) {
+    io_context ctx;
     dns_client::config cfg;
-    EXPECT_NO_THROW({ dns_client client(cfg, true); });
-    EXPECT_NO_THROW({ dns_client client(cfg, false); });
+    EXPECT_NO_THROW({ dns_client client(cfg, ctx, true); });
+    EXPECT_NO_THROW({ dns_client client(cfg, ctx, false); });
 }
 
 TEST(DnsClient, SetConfig) {

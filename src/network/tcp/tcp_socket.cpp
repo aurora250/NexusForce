@@ -118,9 +118,8 @@ bool tcp_socket::connect(const ip_address& endpoint, const milliseconds timeout,
         if (was_blocking) {
             ignore = set_nonblocking(false);
         }
-        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to get socket options or socket error occurred",
-                                                 socket_exception::static_type,
-                                                 optval ? optval : socket_exception::last_error()));
+        const auto code = error_code{optval != 0 ? optval : socket_exception::last_error(), system_category()};
+        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to get socket options or socket error occurred", code));
     }
 
     if (was_blocking) {
@@ -187,10 +186,18 @@ ssize_t tcp_socket::receive(memory_view<char> buffer, const int flags) {
 
     const ssize_t result = ::recv(fd_, buffer.data(), static_cast<int>(buffer.size()), flags);
     if (result < 0) {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+        const int err = ::WSAGetLastError();
+        if (err == WSAEWOULDBLOCK) {
+            return 0;
+        }
+        NEFORCE_THROW_EXCEPTION(socket_exception("Failed to receive data", error_code(err, system_category())));
+#else
         if (errno == EAGAIN || errno == EWOULDBLOCK) {
             return 0;
         }
         NEFORCE_THROW_EXCEPTION(socket_exception("Failed to receive data"));
+#endif
     }
     return result;
 }
@@ -233,6 +240,350 @@ vector<char> tcp_socket::receive_all(const size_t expected_size) {
 
     buffer.resize(total_received);
     return buffer;
+}
+
+namespace {
+    template <typename Handler>
+    struct connect_op : enable_shared_from_this<connect_op<Handler>> {
+        io_context* ctx;
+        tcp_socket* sock;
+        ip_address endpoint;
+        Handler handler;
+        bool was_blocking{true};
+        cancellation_slot* cancel_slot{nullptr};
+        atomic<bool> fired_{false};
+
+        void start() {
+            if (cancel_slot != nullptr && cancel_slot->is_cancelled()) {
+                handler(make_operation_aborted());
+                return;
+            }
+
+#ifdef NEFORCE_PLATFORM_WINDOWS
+            unsigned long mode = 1;
+            ::ioctlsocket(sock->native_handle(), FIONBIO, &mode);
+#else
+            const int flags = ::fcntl(static_cast<int>(sock->native_handle()), F_GETFL, 0);
+            if (flags >= 0 && (flags & O_NONBLOCK) == 0) {
+                was_blocking = true;
+                ::fcntl(static_cast<int>(sock->native_handle()), F_SETFL, flags | O_NONBLOCK);
+            }
+#endif
+            const int result = ::connect(sock->native_handle(), endpoint.data(), static_cast<int>(endpoint.size()));
+            if (result == 0) {
+                restore_blocking();
+                handler(error_code{});
+                return;
+            }
+
+            const int err = socket_exception::last_error();
+#ifdef NEFORCE_PLATFORM_WINDOWS
+            if (err != WSAEWOULDBLOCK && err != WSAEALREADY && err != WSAEINPROGRESS) {
+#else
+            if (err != EINPROGRESS && err != EALREADY) {
+#endif
+                restore_blocking();
+                handler(error_code(err, error_category::system()));
+                return;
+            }
+
+            auto self = this->shared_from_this();
+            if (cancel_slot != nullptr) {
+                cancel_slot->assign([self]() mutable {
+                    self->ctx->remove_fd(self->sock->native_handle());
+                    bool expected = false;
+                    if (self->fired_.compare_exchange_strong(expected, true)) {
+                        self->restore_blocking();
+                        self->handler(make_operation_aborted());
+                    }
+                });
+            }
+            ctx->add_fd(sock->native_handle(), epoll_out, [self](int, uint32_t, error_code ec) {
+                bool expected = false;
+                if (self->fired_.compare_exchange_strong(expected, true)) {
+                    self->on_ready(ec);
+                }
+            });
+
+            int optval = 0;
+            ::socklen_t optlen = sizeof(optval);
+            if (sock->get_option(SOL_SOCKET, SO_ERROR, &optval, &optlen)) {
+                bool still_in_progress = false;
+#ifdef NEFORCE_PLATFORM_WINDOWS
+                still_in_progress = (optval == WSAEWOULDBLOCK || optval == WSAEINPROGRESS);
+#else
+                still_in_progress = (optval == EINPROGRESS);
+#endif
+                if (!still_in_progress) {
+                    bool expected = false;
+                    if (fired_.compare_exchange_strong(expected, true)) {
+                        ctx->remove_fd(sock->native_handle());
+                        restore_blocking();
+                        handler(error_code(optval, error_category::system()));
+                    }
+                }
+            }
+        }
+
+        void on_ready(error_code ec) {
+            if (ec) {
+                restore_blocking();
+                handler(ec);
+                return;
+            }
+
+            int optval = 0;
+            ::socklen_t optlen = sizeof(optval);
+            if (sock->get_option(SOL_SOCKET, SO_ERROR, &optval, &optlen) && optval == 0) {
+                restore_blocking();
+                handler(error_code{});
+            } else {
+                restore_blocking();
+                handler(error_code(optval != 0 ? optval : socket_exception::last_error(), error_category::system()));
+            }
+        }
+
+        void restore_blocking() {
+            if (was_blocking) {
+                sock->set_nonblocking(false);
+            }
+        }
+    };
+} // namespace
+
+void tcp_socket::async_connect(io_context& ctx, const ip_address& endpoint, function<void(error_code)> handler) {
+    auto op = make_shared<connect_op<function<void(error_code)>>>();
+    op->ctx = &ctx;
+    op->sock = this;
+    op->endpoint = endpoint;
+    op->handler = move(handler);
+    op->start();
+}
+
+void tcp_socket::async_connect(io_context& ctx, const ip_address& endpoint, cancellation_slot& slot,
+                               function<void(error_code)> handler) {
+    auto op = make_shared<connect_op<function<void(error_code)>>>();
+    op->ctx = &ctx;
+    op->sock = this;
+    op->endpoint = endpoint;
+    op->handler = move(handler);
+    op->cancel_slot = &slot;
+    op->start();
+}
+
+namespace {
+    template <typename Handler>
+    struct read_op : enable_shared_from_this<read_op<Handler>> {
+        io_context* ctx;
+        tcp_socket* sock;
+        memory_view<char> buffer;
+        Handler handler;
+        cancellation_slot* cancel_slot{nullptr};
+        atomic<bool> fired_{false};
+
+        void start() {
+            if (cancel_slot != nullptr && cancel_slot->is_cancelled()) {
+                handler(make_operation_aborted(), 0);
+                return;
+            }
+
+            const auto fd = sock->native_handle();
+            const ssize_t result = ::recv(fd, buffer.data(), static_cast<int>(buffer.size()), 0);
+            if (result > 0) {
+                handler(error_code{}, static_cast<size_t>(result));
+                return;
+            }
+            if (result == 0) {
+                handler(error_code{make_error_code(errc::connection_reset)}, 0);
+                return;
+            }
+#ifdef NEFORCE_PLATFORM_WINDOWS
+            const int err = ::WSAGetLastError();
+            if (err != WSAEWOULDBLOCK) {
+#else
+            const int err = errno;
+            if (err != EAGAIN && err != EWOULDBLOCK) {
+#endif
+                handler(error_code(err, error_category::system()), 0);
+                return;
+            }
+
+            auto self = this->shared_from_this();
+            if (cancel_slot != nullptr) {
+                cancel_slot->assign([self]() mutable {
+                    self->ctx->remove_fd(self->sock->native_handle());
+                    bool expected = false;
+                    if (self->fired_.compare_exchange_strong(expected, true)) {
+                        self->handler(make_operation_aborted(), 0);
+                    }
+                });
+            }
+            ctx->add_fd(fd, epoll_in, [self](int, uint32_t, error_code ec) {
+                bool expected = false;
+                if (self->fired_.compare_exchange_strong(expected, true)) {
+                    self->on_ready(ec);
+                }
+            });
+
+            ::fd_set rfds;
+            FD_ZERO(&rfds);
+            FD_SET(fd, &rfds);
+            ::timeval tv{};
+            if (::select(static_cast<int>(fd) + 1, &rfds, nullptr, nullptr, &tv) > 0) {
+                bool expected = false;
+                if (fired_.compare_exchange_strong(expected, true)) {
+                    ctx->remove_fd(static_cast<int>(fd));
+                    on_ready(error_code{});
+                }
+            }
+        }
+
+        void on_ready(error_code ec) {
+            if (ec) {
+                handler(ec, 0);
+                return;
+            }
+            const ssize_t result = ::recv(sock->native_handle(), buffer.data(), static_cast<int>(buffer.size()), 0);
+            if (result > 0) {
+                handler(error_code{}, static_cast<size_t>(result));
+            } else if (result == 0) {
+                handler(error_code{make_error_code(errc::connection_reset)}, 0);
+            } else {
+                handler(error_code{static_cast<int>(socket_exception::last_error()), error_category::system()}, 0);
+            }
+        }
+    };
+} // namespace
+
+void tcp_socket::async_read(io_context& ctx, memory_view<char> buffer, function<void(error_code, size_t)> handler) {
+    auto op = make_shared<read_op<function<void(error_code, size_t)>>>();
+    op->ctx = &ctx;
+    op->sock = this;
+    op->buffer = buffer;
+    op->handler = move(handler);
+    op->start();
+}
+
+void tcp_socket::async_read(io_context& ctx, memory_view<char> buffer, cancellation_slot& slot,
+                            function<void(error_code, size_t)> handler) {
+    auto op = make_shared<read_op<function<void(error_code, size_t)>>>();
+    op->ctx = &ctx;
+    op->sock = this;
+    op->buffer = buffer;
+    op->handler = move(handler);
+    op->cancel_slot = &slot;
+    op->start();
+}
+
+namespace {
+    template <typename Handler>
+    struct write_op : enable_shared_from_this<write_op<Handler>> {
+        io_context* ctx;
+        tcp_socket* sock;
+        memory_view<const char> buffer;
+        Handler handler;
+        cancellation_slot* cancel_slot{nullptr};
+        atomic<bool> fired_{false};
+
+        void start() {
+            if (cancel_slot != nullptr && cancel_slot->is_cancelled()) {
+                handler(make_operation_aborted(), 0);
+                return;
+            }
+
+            const auto fd = sock->native_handle();
+#ifdef NEFORCE_PLATFORM_LINUX
+            constexpr int send_flags = MSG_NOSIGNAL;
+#else
+            constexpr int send_flags = 0;
+#endif
+            const ssize_t result = ::send(fd, buffer.data(), static_cast<int>(buffer.size()), send_flags);
+            if (result > 0) {
+                handler(error_code{}, static_cast<size_t>(result));
+                return;
+            }
+#ifdef NEFORCE_PLATFORM_WINDOWS
+            const int err = ::WSAGetLastError();
+            if (err != WSAEWOULDBLOCK) {
+#else
+            const int err = errno;
+            if (err != EAGAIN && err != EWOULDBLOCK) {
+#endif
+                handler(error_code(err, error_category::system()), 0);
+                return;
+            }
+
+            auto self = this->shared_from_this();
+            if (cancel_slot != nullptr) {
+                cancel_slot->assign([self]() mutable {
+                    self->ctx->remove_fd(self->sock->native_handle());
+                    bool expected = false;
+                    if (self->fired_.compare_exchange_strong(expected, true)) {
+                        self->handler(make_operation_aborted(), 0);
+                    }
+                });
+            }
+            ctx->add_fd(fd, epoll_out, [self](int, uint32_t, error_code ec) {
+                bool expected = false;
+                if (self->fired_.compare_exchange_strong(expected, true)) {
+                    self->on_ready(ec);
+                }
+            });
+
+            ::fd_set wfds;
+            FD_ZERO(&wfds);
+            FD_SET(fd, &wfds);
+            ::timeval tv{};
+            if (::select(static_cast<int>(fd) + 1, nullptr, &wfds, nullptr, &tv) > 0) {
+                bool expected = false;
+                if (fired_.compare_exchange_strong(expected, true)) {
+                    ctx->remove_fd(static_cast<int>(fd));
+                    on_ready(error_code{});
+                }
+            }
+        }
+
+        void on_ready(error_code ec) {
+            if (ec) {
+                handler(ec, 0);
+                return;
+            }
+#ifdef NEFORCE_PLATFORM_LINUX
+            constexpr int send_flags = MSG_NOSIGNAL;
+#else
+            constexpr int send_flags = 0;
+#endif
+            const ssize_t result =
+                    ::send(sock->native_handle(), buffer.data(), static_cast<int>(buffer.size()), send_flags);
+            if (result > 0) {
+                handler(error_code{}, static_cast<size_t>(result));
+            } else {
+                handler(error_code{static_cast<int>(socket_exception::last_error()), error_category::system()}, 0);
+            }
+        }
+    };
+} // namespace
+
+
+void tcp_socket::async_write(io_context& ctx, memory_view<const char> buffer,
+                             function<void(error_code, size_t)> handler) {
+    auto op = make_shared<write_op<function<void(error_code, size_t)>>>();
+    op->ctx = &ctx;
+    op->sock = this;
+    op->buffer = buffer;
+    op->handler = move(handler);
+    op->start();
+}
+
+void tcp_socket::async_write(io_context& ctx, memory_view<const char> buffer, cancellation_slot& slot,
+                             function<void(error_code, size_t)> handler) {
+    auto op = make_shared<write_op<function<void(error_code, size_t)>>>();
+    op->ctx = &ctx;
+    op->sock = this;
+    op->buffer = buffer;
+    op->handler = move(handler);
+    op->cancel_slot = &slot;
+    op->start();
 }
 
 NEFORCE_END_NAMESPACE__

@@ -21,8 +21,8 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 序列化异常
  */
 struct serialize_exception final : value_exception {
-    explicit serialize_exception(const char* info = "Serialization failed.", const int code = 0) noexcept :
-    value_exception(info, "serialize_exception", code) {}
+    explicit serialize_exception(const char* info = "Serialization failed.") noexcept :
+    value_exception(info) {}
 };
 
 /**
@@ -32,9 +32,8 @@ struct serialize_exception final : value_exception {
 struct deserialize_exception : value_exception {
     string property_path; ///< 失败的属性路径
 
-    explicit deserialize_exception(const char* info = "Deserialization failed.", string path = "",
-                                   const int code = 0) noexcept :
-    value_exception(info, "deserialize_exception", code),
+    explicit deserialize_exception(const char* info = "Deserialization failed.", string path = "") noexcept :
+    value_exception(info),
     property_path(move(path)) {}
 };
 
@@ -43,8 +42,8 @@ struct deserialize_exception : value_exception {
  * @brief 反序列化时缺少必填属性异常
  */
 struct missing_required_exception final : deserialize_exception {
-    explicit missing_required_exception(const char* property_name, const int code = 0) :
-    deserialize_exception("Missing required property.", property_name, code) {}
+    explicit missing_required_exception(const char* property_name) :
+    deserialize_exception("Missing required property.", property_name) {}
 };
 
 /**
@@ -52,8 +51,8 @@ struct missing_required_exception final : deserialize_exception {
  * @brief 序列化类型不匹配异常
  */
 struct type_mismatch_exception final : deserialize_exception {
-    explicit type_mismatch_exception(const char* expected_type, const char* actual_type, const int code = 0) :
-    deserialize_exception("Type mismatch.", expected_type, code) {}
+    explicit type_mismatch_exception(const char* expected_type) :
+    deserialize_exception("Type mismatch.", expected_type) {}
 };
 
 /** @} */ // Exceptions

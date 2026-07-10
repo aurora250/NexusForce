@@ -28,9 +28,9 @@ namespace {
 } // namespace
 
 
-http2_connection::http2_connection(unique_ptr<tcp_socket> socket, shared_ptr<event_loop> loop) :
+http2_connection::http2_connection(unique_ptr<tcp_socket> socket, io_context& ctx) :
 socket_(move(socket)),
-loop_(move(loop)),
+ctx_(&ctx),
 encoder_(local_settings_.header_table_size()),
 decoder_(remote_settings_.header_table_size()),
 flow_control_(local_settings_.initial_window_size()) {
@@ -49,12 +49,12 @@ http2_connection::~http2_connection() {
 void http2_connection::start() {
     const int fd = static_cast<int>(socket_->native_handle());
     auto weak_self = weak_from_this();
-    loop_->add_fd(fd, epoll_in, [weak_self](int, uint32_t) {
+    ctx_->add_fd(fd, epoll_in, [weak_self](int, uint32_t, error_code) {
         auto self = weak_self.lock();
         if (!self || self->closed_) {
             return;
         }
-        self->on_readable(0, 0);
+        self->on_readable(0, 0, error_code{});
     });
 
     http2_settings_frame sf;
@@ -66,7 +66,7 @@ void http2_connection::start() {
     flush_writes();
 }
 
-void http2_connection::on_readable(int /*fd*/, uint32_t /*events*/) {
+void http2_connection::on_readable(int /*fd*/, uint32_t /*events*/, error_code /*ec*/) {
     lock<recursive_mutex> lk(stream_mutex_);
     if (closed_) {
         return;
@@ -120,7 +120,7 @@ void http2_connection::on_readable(int /*fd*/, uint32_t /*events*/) {
     flush_writes();
 }
 
-void http2_connection::on_writable(int /*fd*/, uint32_t /*events*/) { flush_writes(); }
+void http2_connection::on_writable(int /*fd*/, uint32_t /*events*/, error_code /*ec*/) { flush_writes(); }
 
 void http2_connection::handle_frame(http2_frame_type type, uint8_t flags, uint32_t stream_id, const byte_t* payload,
                                     size_t len) {
@@ -568,8 +568,12 @@ void http2_connection::flush_writes() {
 }
 
 void http2_connection::stop() {
+    if (closed_) {
+        return;
+    }
     closed_ = true;
-    loop_->stop();
+    const int fd = static_cast<int>(socket_->native_handle());
+    ctx_->remove_fd(fd);
 }
 
 void http2_connection::close_connection(http2_error error) {
@@ -581,7 +585,7 @@ void http2_connection::close_connection(http2_error error) {
     flush_writes();
 
     const int fd = static_cast<int>(socket_->native_handle());
-    loop_->remove_fd(fd);
+    ctx_->remove_fd(fd);
 
     if (close_handler_) {
         close_handler_(static_cast<uint32_t>(error));

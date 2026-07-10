@@ -1,828 +1,906 @@
 #include <NeForce/core/system/locale.hpp>
-#include <NeForce/core/algorithm/sort.hpp>
-#include <ctime>
-#ifdef NEFORCE_PLATFORM_WINDOWS
-#    include <NeForce/core/utility/packages.hpp>
-#    include <NeForce/core/config/windef.hpp>
-#    include <stringapiset.h>
-#endif
-#ifdef NEFORCE_PLATFORM_LINUX
-#    include <NeForce/core/system/environment.hpp>
-#    include <NeForce/core/utility/packages.hpp>
-#    include <cstdlib>
-#    include <glob.h>
-#    include <langinfo.h>
-#    include <cwctype>
-#    include <cwchar>
-#    include <iconv.h>
-#endif
+#include <NeForce/core/time/datetime.hpp>
+#include <unicode/uloc.h>
+#include <unicode/uchar.h>
+#include <unicode/ucol.h>
+#include <unicode/ucnv.h>
+#include <unicode/unum.h>
+#include <unicode/udat.h>
+#include <unicode/ulocdata.h>
+#include <unicode/ucal.h>
+#include <unicode/ustring.h>
+#include <unicode/uenum.h>
+#include <unicode/putil.h>
 NEFORCE_BEGIN_NAMESPACE__
 
 namespace {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    struct enum_ctx {
-        vector<string> list;
-    };
-
-    ::BOOL CALLBACK enum_proc(::LPWSTR lname, ::DWORD /*unused*/, ::LPARAM param) {
-        auto* ctx = reinterpret_cast<enum_ctx*>(param);
-        if (lname != nullptr) {
-            wstring wn(lname);
-            replace(wn.begin(), wn.end(), L'-', L'_');
-            ctx->list.push_back(wcharacter::to_string(wn.view()));
+    void* open_converter(const char* locale_id) {
+        ::UErrorCode status = ::U_ZERO_ERROR;
+        ::UConverter* cnv = ::ucnv_open(locale_id, &status);
+        if (::U_FAILURE(status) != 0) {
+            status = ::U_ZERO_ERROR;
+            cnv = ::ucnv_open("UTF-8", &status);
         }
-        return TRUE;
+        return cnv;
     }
 
-    /* POSIX name "en_US.UTF-8" -> BCP-47 "en-US" */
-    string posix_to_win(const string& name) {
-        if (name.empty() || name == "C" || name == "POSIX") {
+    ::UDate datetime_to_udate(const datetime& dt) {
+        const datetime utc_dt = dt.has_timezone() ? dt.to_UTC() : dt;
+        const timestamp ts(utc_dt);
+        return static_cast<UDate>(ts.value()) * 1000.0;
+    }
+
+    ::UDateFormatStyle to_udate_style(const locale::date_style ds) {
+        switch (ds) {
+            case locale::date_style::full:
+                return ::UDAT_FULL;
+            case locale::date_style::long_fmt:
+                return ::UDAT_LONG;
+            case locale::date_style::medium:
+                return ::UDAT_MEDIUM;
+            case locale::date_style::short_fmt:
+                return ::UDAT_SHORT;
+            case locale::date_style::none:
+                return ::UDAT_NONE;
+            case locale::date_style::relative:
+                return ::UDAT_FULL;
+        }
+        return ::UDAT_MEDIUM;
+    }
+
+    ::UDateFormatStyle to_utime_style(const locale::time_style ts) {
+        switch (ts) {
+            case locale::time_style::full:
+                return ::UDAT_FULL;
+            case locale::time_style::long_fmt:
+                return ::UDAT_LONG;
+            case locale::time_style::medium:
+                return ::UDAT_MEDIUM;
+            case locale::time_style::short_fmt:
+                return ::UDAT_SHORT;
+            case locale::time_style::none:
+                return ::UDAT_NONE;
+            case locale::time_style::relative:
+                return ::UDAT_FULL;
+        }
+        return ::UDAT_MEDIUM;
+    }
+
+    ::UColAttributeValue to_ucol_strength(const locale::collate_strength s) {
+        switch (s) {
+            case locale::collate_strength::primary:
+                return ::UCOL_PRIMARY;
+            case locale::collate_strength::secondary:
+                return ::UCOL_SECONDARY;
+            case locale::collate_strength::tertiary:
+                return ::UCOL_TERTIARY;
+            case locale::collate_strength::quaternary:
+                return ::UCOL_QUATERNARY;
+            case locale::collate_strength::identical:
+                return ::UCOL_IDENTICAL;
+        }
+        return ::UCOL_TERTIARY;
+    }
+
+    string icu_to_string(const char* s) { return s != nullptr ? string(s) : string{}; }
+
+    string icu_to_string(const ::UChar* s, const int32_t len) {
+        if (s == nullptr) {
             return {};
         }
-        string base = name;
-        const auto dot = base.find('.');
-        if (dot != string::npos) {
-            base.erase(dot);
-        }
-        replace(base.begin(), base.end(), '_', '-');
-        return base;
-    }
-
-    wstring query_info(const ::LCTYPE type, const string_view win_name) {
-        wstring wn_storage;
-        const wchar_t* lname = nullptr;
-        if (!win_name.empty()) {
-            wn_storage = character::to_wstring(win_name);
-            lname = wn_storage.data();
-        }
-
-        const int sz = ::GetLocaleInfoEx(lname, type, nullptr, 0);
-        if (sz <= 0) {
+        const int32_t actual_len = (len > 0) ? len : ::u_strlen(s);
+        if (actual_len <= 0) {
             return {};
         }
-        wstring buf(static_cast<size_t>(sz), L'\0');
-        ::GetLocaleInfoEx(lname, type, buf.data(), sz);
-        if (!buf.empty() && buf.back() == L'\0') {
-            buf.pop_back();
+        string result(static_cast<size_t>(actual_len * 3), '\0');
+        ::UErrorCode status = ::U_ZERO_ERROR;
+        int32_t out_len = 0;
+        ::u_strToUTF8(result.data(), static_cast<int32_t>(result.size()), &out_len, s, actual_len, &status);
+        if ((::U_FAILURE(status) != 0) && status != ::U_BUFFER_OVERFLOW_ERROR) {
+            return {};
         }
-        return buf;
+        result.resize(static_cast<size_t>(out_len));
+        return result;
     }
 
-    string query_info_utf8(const LCTYPE type, const string_view win_name) {
-        const auto info = query_info(type, win_name);
-        return wcharacter::to_string(info.view());
-    }
-
-    ::UINT ansi_codepage(const string_view win_name) {
-        const auto s = query_info(LOCALE_IDEFAULTANSICODEPAGE, win_name);
-        if (s.empty()) {
-            return CP_ACP;
+    vector<string> enum_to_vector(::UEnumeration* en) {
+        vector<string> result;
+        if (en == nullptr) {
+            return result;
         }
-        const auto ws = wcharacter::to_string(s.view());
-        return uinteger32::parse(ws.view()).value();
-    }
-
-    ::WORD char_type1(const char32_t cp) {
-        wchar_t buf[3]{};
-        int len = 0;
-        if (cp < 0x10000) {
-            buf[0] = static_cast<wchar_t>(cp);
-            len = 1;
-        } else {
-            const char32_t c = cp - 0x10000;
-            buf[0] = static_cast<wchar_t>(0xD800 | (c >> 10));
-            buf[1] = static_cast<wchar_t>(0xDC00 | (c & 0x3FF));
-            len = 2;
+        ::UErrorCode status = ::U_ZERO_ERROR;
+        const int32_t count = ::uenum_count(en, &status);
+        if ((::U_SUCCESS(status) != 0) && count > 0) {
+            result.reserve(static_cast<size_t>(count));
         }
-        ::WORD out[2]{};
-        ::GetStringTypeW(CT_CTYPE1, buf, len, out);
-        return out[0];
+        const char* item = nullptr;
+        int32_t item_len = 0;
+        while ((item = ::uenum_next(en, &item_len, &status)) != nullptr && (::U_SUCCESS(status) != 0)) {
+            result.emplace_back(item, static_cast<size_t>(item_len));
+        }
+        ::uenum_close(en);
+        return result;
     }
 
-    char32_t lcmap_case(const string& win_name, const char32_t cp, const ::DWORD flags) {
-        wchar_t buf[3]{};
-        int len = 0;
-        if (cp < 0x10000) {
-            buf[0] = static_cast<wchar_t>(cp);
-            len = 1;
-        } else {
-            const char32_t c = cp - 0x10000;
-            buf[0] = static_cast<wchar_t>(0xD800 | (c >> 10));
-            buf[1] = static_cast<wchar_t>(0xDC00 | (c & 0x3FF));
-            len = 2;
+    void* open_number_formatter(const char* locale_id) {
+        ::UErrorCode status = ::U_ZERO_ERROR;
+        ::UNumberFormat* fmt = ::unum_open(::UNUM_DEFAULT, nullptr, 0, locale_id, nullptr, &status);
+        if (::U_FAILURE(status) != 0) {
+            return nullptr;
+        }
+        return static_cast<void*>(fmt);
+    }
+
+    void* open_currency_formatter(const char* locale_id, const char* iso_code) {
+        ::UErrorCode status = ::U_ZERO_ERROR;
+        ::UNumberFormat* fmt = ::unum_open(::UNUM_CURRENCY, nullptr, 0, locale_id, nullptr, &status);
+        if (::U_FAILURE(status) != 0) {
+            return nullptr;
+        }
+        ::UChar iso_uchar[4] = {};
+        ::u_charsToUChars(iso_code, iso_uchar, 3);
+        ::unum_setTextAttribute(fmt, ::UNUM_CURRENCY_CODE, iso_uchar, 3, &status);
+        return static_cast<void*>(fmt);
+    }
+
+    void* open_date_pattern_formatter(const char* locale_id, const char* pattern) {
+        ::UErrorCode status = U_ZERO_ERROR;
+        const auto pattern_len = static_cast<int32_t>(string_length(pattern));
+        vector<::UChar> upattern(static_cast<size_t>(pattern_len) + 1);
+        int32_t actual_len = 0;
+        ::UErrorCode cnv_status = U_ZERO_ERROR;
+        ::u_strFromUTF8(upattern.data(), static_cast<int32_t>(upattern.size()), &actual_len, pattern, pattern_len,
+                        &cnv_status);
+        if (::U_FAILURE(cnv_status) != 0) {
+            return nullptr;
         }
 
-        wchar_t out[3]{};
-
-        wstring wn_storage;
-        const wchar_t* lname = nullptr;
-        if (!win_name.empty()) {
-            wn_storage = character::to_wstring(win_name.view());
-            lname = wn_storage.data();
+        ::UDateFormat* fmt =
+                ::udat_open(::UDAT_IGNORE, ::UDAT_IGNORE, locale_id, nullptr, 0, upattern.data(), actual_len, &status);
+        if (::U_FAILURE(status) != 0) {
+            return nullptr;
         }
+        return static_cast<void*>(fmt);
+    }
+} // anonymous namespace
 
-        ::LCMapStringEx(lname, flags, buf, len, out, 3, nullptr, nullptr, 0);
-        if (out[0] >= 0xD800 && out[0] <= 0xDBFF) {
-            return 0x10000U + static_cast<char32_t>(((out[0] - 0xD800) << 10) | (out[1] - 0xDC00));
-        }
-        return static_cast<char32_t>(out[0]);
+
+void locale::load(const string& name) {
+    cleanup();
+
+    const char* input_name = name.data();
+    if (name.empty() || name == "C" || name == "POSIX") {
+        input_name = "en-US-POSIX";
     }
 
-    constexpr ::LCTYPE kDay[7] = {LOCALE_SDAYNAME7, LOCALE_SDAYNAME1, LOCALE_SDAYNAME2, LOCALE_SDAYNAME3,
-                                  LOCALE_SDAYNAME4, LOCALE_SDAYNAME5, LOCALE_SDAYNAME6};
-    constexpr ::LCTYPE kAbbrDay[7] = {LOCALE_SABBREVDAYNAME7, LOCALE_SABBREVDAYNAME1, LOCALE_SABBREVDAYNAME2,
-                                      LOCALE_SABBREVDAYNAME3, LOCALE_SABBREVDAYNAME4, LOCALE_SABBREVDAYNAME5,
-                                      LOCALE_SABBREVDAYNAME6};
-
-    constexpr ::LCTYPE kMon[12] = {LOCALE_SMONTHNAME1, LOCALE_SMONTHNAME2,  LOCALE_SMONTHNAME3,  LOCALE_SMONTHNAME4,
-                                   LOCALE_SMONTHNAME5, LOCALE_SMONTHNAME6,  LOCALE_SMONTHNAME7,  LOCALE_SMONTHNAME8,
-                                   LOCALE_SMONTHNAME9, LOCALE_SMONTHNAME10, LOCALE_SMONTHNAME11, LOCALE_SMONTHNAME12};
-    constexpr ::LCTYPE kAbbrMon[12] = {LOCALE_SABBREVMONTHNAME1,  LOCALE_SABBREVMONTHNAME2,  LOCALE_SABBREVMONTHNAME3,
-                                       LOCALE_SABBREVMONTHNAME4,  LOCALE_SABBREVMONTHNAME5,  LOCALE_SABBREVMONTHNAME6,
-                                       LOCALE_SABBREVMONTHNAME7,  LOCALE_SABBREVMONTHNAME8,  LOCALE_SABBREVMONTHNAME9,
-                                       LOCALE_SABBREVMONTHNAME10, LOCALE_SABBREVMONTHNAME11, LOCALE_SABBREVMONTHNAME12};
-
-#else
-
-    string nl_str(const ::nl_item item, const ::locale_t loc) {
-        const char* p = ::nl_langinfo_l(item, loc);
-        return p != nullptr ? string(p) : string{};
+    ::UErrorCode status = ::U_ZERO_ERROR;
+    char canonical[ULOC_FULLNAME_CAPACITY] = {};
+    ::uloc_canonicalize(input_name, canonical, sizeof(canonical), &status);
+    if (::U_FAILURE(status) != 0) {
+        throw locale_exception(string("locale: invalid locale name '"_s + name + "'").data());
     }
 
-    void free_locale(bool& owns, ::locale_t& loc) noexcept {
-        if (owns && loc != LC_GLOBAL_LOCALE) {
-            ::freelocale(loc);
-            loc = LC_GLOBAL_LOCALE;
-            owns = false;
-        }
+    icu_name_ = canonical;
+
+    status = ::U_ZERO_ERROR;
+    char bcp47[ULOC_FULLNAME_CAPACITY] = {};
+    ::uloc_toLanguageTag(canonical, bcp47, sizeof(bcp47), 0, &status);
+    name_ = (::U_SUCCESS(status) != 0 && bcp47[0] != '\0') ? bcp47 : canonical;
+
+    char buf[ULOC_FULLNAME_CAPACITY] = {};
+
+    status = ::U_ZERO_ERROR;
+    ::uloc_getLanguage(canonical, buf, sizeof(buf), &status);
+    language_code_ = (::U_SUCCESS(status) != 0) ? buf : "";
+    if (language_code_.empty()) {
+        throw locale_exception(string("locale: invalid locale name '"_s + name + "'").data());
     }
 
-#endif
-} // namespace
+    status = ::U_ZERO_ERROR;
+    ::uloc_getScript(canonical, buf, sizeof(buf), &status);
+    script_code_ = (::U_SUCCESS(status) != 0) ? buf : "";
 
+    status = ::U_ZERO_ERROR;
+    ::uloc_getCountry(canonical, buf, sizeof(buf), &status);
+    country_code_ = (::U_SUCCESS(status) != 0) ? buf : "";
 
-void locale::load_locale(const string& name) {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    win_name_ = posix_to_win(name);
-    name_ = name.empty() ? "C" : name;
+    status = ::U_ZERO_ERROR;
+    ::uloc_getVariant(canonical, buf, sizeof(buf), &status);
+    variant_code_ = (::U_SUCCESS(status) != 0) ? buf : "";
 
-    wstring wname_storage;
-    const wchar_t* lname = nullptr;
-    if (!win_name_.empty()) {
-        wname_storage = character::to_wstring(win_name_.view());
-        lname = wname_storage.data();
-    }
-    if (!win_name_.empty() && ::IsValidLocaleName(lname) == FALSE) {
-        throw locale_exception(("locale: cannot open '" + name_ + "'").data());
-    }
-
-    const auto cp = query_info(LOCALE_IDEFAULTANSICODEPAGE, win_name_.view());
-    if (cp == L"65001") {
-        encoding_ = "UTF-8";
-    } else {
-        encoding_ = "CP" + wcharacter::to_string(cp.view());
+    status = ::U_ZERO_ERROR;
+    ::UCollator* col = ::ucol_open(canonical, &status);
+    if (::U_SUCCESS(status) != 0) {
+        collator_ = static_cast<void*>(col);
     }
 
-#else
-    free_locale(owns_, loc_);
-
-    const char* lname = (name.empty() || name == "C" || name == "POSIX") ? "C" : name.data();
-
-    const ::locale_t loc = ::newlocale(LC_ALL_MASK, lname, nullptr);
-    if (loc == nullptr) {
-        throw locale_exception(string("locale: cannot open '"_s + lname + "'").data());
-    }
-
-    loc_ = loc;
-    owns_ = true;
-    name_ = name.empty() ? "C" : name;
-    const char* cs = ::nl_langinfo_l(CODESET, loc_);
-    encoding_ = cs != nullptr ? cs : "UTF-8";
-#endif
+    converter_ = open_converter(canonical);
+    num_fmt_ = open_number_formatter(canonical);
 }
 
-locale::locale() { load_locale("C"); }
-
-locale::locale(const string& name) { load_locale(name); }
-
-locale::~locale() {
-#ifdef NEFORCE_PLATFORM_LINUX
-    free_locale(owns_, loc_);
-#endif
+void locale::cleanup() noexcept {
+    if (collator_ != nullptr) {
+        ::ucol_close(static_cast<::UCollator*>(collator_));
+        collator_ = nullptr;
+    }
+    if (converter_ != nullptr) {
+        ::ucnv_close(static_cast<::UConverter*>(converter_));
+        converter_ = nullptr;
+    }
+    if (num_fmt_ != nullptr) {
+        ::unum_close(static_cast<::UNumberFormat*>(num_fmt_));
+        num_fmt_ = nullptr;
+    }
+    if (curr_fmt_ != nullptr) {
+        ::unum_close(static_cast<::UNumberFormat*>(curr_fmt_));
+        curr_fmt_ = nullptr;
+    }
+    if (date_fmt_ != nullptr) {
+        ::udat_close(static_cast<::UDateFormat*>(date_fmt_));
+        date_fmt_ = nullptr;
+    }
 }
 
-locale::locale(const locale& other) { load_locale(other.name_); }
+locale::locale() { load("en-US-POSIX"); }
+
+locale::locale(const string& name) { load(name); }
+
+locale::~locale() { cleanup(); }
+
+locale::locale(const locale& other) { load(other.name_); }
 
 locale& locale::operator=(const locale& other) {
     if (addressof(other) == this) {
         return *this;
     }
-    load_locale(other.name_);
+    load(other.name_);
     return *this;
 }
 
 locale::locale(locale&& other) noexcept :
 name_(move(other.name_)),
-encoding_(move(other.encoding_))
-#ifdef NEFORCE_PLATFORM_WINDOWS
-,
-win_name_(move(other.win_name_))
-#else
-,
-loc_(other.loc_),
-owns_(other.owns_)
-#endif
-{
-#ifdef NEFORCE_PLATFORM_LINUX
-    other.loc_ = LC_GLOBAL_LOCALE;
-    other.owns_ = false;
-#endif
+icu_name_(move(other.icu_name_)),
+collator_(other.collator_),
+converter_(other.converter_),
+num_fmt_(other.num_fmt_),
+curr_fmt_(other.curr_fmt_),
+date_fmt_(other.date_fmt_),
+language_code_(move(other.language_code_)),
+script_code_(move(other.script_code_)),
+country_code_(move(other.country_code_)),
+variant_code_(move(other.variant_code_)) {
+    other.collator_ = nullptr;
+    other.converter_ = nullptr;
+    other.num_fmt_ = nullptr;
+    other.curr_fmt_ = nullptr;
+    other.date_fmt_ = nullptr;
 }
 
 locale& locale::operator=(locale&& other) noexcept {
     if (addressof(other) == this) {
         return *this;
     }
-
-#ifdef NEFORCE_PLATFORM_LINUX
-    free_locale(owns_, loc_);
-#endif
-
+    cleanup();
     name_ = move(other.name_);
-    encoding_ = move(other.encoding_);
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    win_name_ = move(other.win_name_);
-#else
-    loc_ = other.loc_;
-    owns_ = other.owns_;
-    other.loc_ = LC_GLOBAL_LOCALE;
-    other.owns_ = false;
-#endif
+    icu_name_ = move(other.icu_name_);
+    collator_ = other.collator_;
+    converter_ = other.converter_;
+    num_fmt_ = other.num_fmt_;
+    curr_fmt_ = other.curr_fmt_;
+    date_fmt_ = other.date_fmt_;
+    language_code_ = move(other.language_code_);
+    script_code_ = move(other.script_code_);
+    country_code_ = move(other.country_code_);
+    variant_code_ = move(other.variant_code_);
+    other.collator_ = nullptr;
+    other.converter_ = nullptr;
+    other.num_fmt_ = nullptr;
+    other.curr_fmt_ = nullptr;
+    other.date_fmt_ = nullptr;
     return *this;
 }
 
-locale locale::classic() { return locale("C"); }
+locale locale::classic() { return locale("en-US-POSIX"); }
+
+locale locale::system() { return locale(icu_to_string(::uloc_getDefault())); }
+
 locale locale::from_name(const string& name) { return locale(name); }
 
-locale locale::system() {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    wchar_t buf[LOCALE_NAME_MAX_LENGTH]{};
-    ::GetUserDefaultLocaleName(buf, LOCALE_NAME_MAX_LENGTH);
-    wstring wn(buf);
-    replace(wn.begin(), wn.end(), L'-', L'_');
-    return locale(wcharacter::to_string(wn.view()));
-#else
-    string env = environment::get("LC_ALL");
-    if (env.empty()) {
-        env = environment::get("LC_CTYPE");
+string locale::display_name(const locale& display_locale) const {
+    ::UErrorCode status = ::U_ZERO_ERROR;
+    ::UChar ubuf[256] = {};
+    const int32_t result_len = ::uloc_getDisplayName(name_.data(), display_locale.name_.data(), ubuf, 256, &status);
+    if (::U_SUCCESS(status) != 0) {
+        return icu_to_string(ubuf, result_len);
     }
-    if (env.empty()) {
-        env = environment::get("LANG");
+    return name_;
+}
+
+string locale::native_language_name() const { return display_name(*this); }
+
+string locale::native_country_name() const {
+    if (country_code_.empty()) {
+        return {};
     }
-    return locale(!env.empty() ? env : "C");
-#endif
+    return display_name(*this);
+}
+
+locale::text_direction locale::direction() const {
+    return (::uloc_isRightToLeft(name_.data()) != 0) ? text_direction::RTL : text_direction::LTR;
+}
+
+locale::measurement_system locale::measurement() const {
+    ::UErrorCode status = ::U_ZERO_ERROR;
+    const ::UMeasurementSystem ms = ::ulocdata_getMeasurementSystem(name_.data(), &status);
+    if (::U_FAILURE(status) != 0) {
+        return measurement_system::SI;
+    }
+    switch (ms) {
+        case ::UMS_SI:
+            return measurement_system::SI;
+        case ::UMS_US:
+            return measurement_system::US;
+        case ::UMS_UK:
+            return measurement_system::UK;
+        default:
+            return measurement_system::SI;
+    }
+}
+
+int32_t locale::first_day_of_week() const {
+    ::UErrorCode status = ::U_ZERO_ERROR;
+    ::UCalendar* cal = ::ucal_open(nullptr, 0, name_.data(), ::UCAL_DEFAULT, &status);
+    if (::U_FAILURE(status) != 0) {
+        return 1;
+    }
+    const int32_t fdow = ::ucal_getAttribute(cal, ::UCAL_FIRST_DAY_OF_WEEK);
+    ::ucal_close(cal);
+    return fdow;
+}
+
+vector<string> locale::ui_languages() const {
+    vector<string> result;
+    if (name_.empty()) {
+        return result;
+    }
+
+    result.push_back(name_);
+
+    char parent[ULOC_FULLNAME_CAPACITY] = {};
+    string current = icu_name_;
+    while (true) {
+        ::UErrorCode status = ::U_ZERO_ERROR;
+        constexpr int32_t parent_len = sizeof(parent);
+        ::uloc_getParent(current.data(), parent, parent_len, &status);
+        if ((::U_FAILURE(status) != 0) || parent[0] == '\0' || string_compare(parent, "root") == 0) {
+            break;
+        }
+        char bcp47[ULOC_FULLNAME_CAPACITY] = {};
+        status = ::U_ZERO_ERROR;
+        ::uloc_toLanguageTag(parent, bcp47, sizeof(bcp47), 0, &status);
+        string parent_bcp47 = (::U_SUCCESS(status) != 0 && bcp47[0] != '\0') ? bcp47 : parent;
+        if (find(result.begin(), result.end(), parent_bcp47) == result.end()) {
+            result.push_back(move(parent_bcp47));
+        }
+        current = parent;
+    }
+
+    return result;
+}
+
+bool locale::is_alpha(const char32_t cp) const noexcept { return ::u_isalpha(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_digit(const char32_t cp) const noexcept { return ::u_isdigit(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_alnum(const char32_t cp) const noexcept { return ::u_isalnum(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_space(const char32_t cp) const noexcept { return ::u_isspace(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_upper(const char32_t cp) const noexcept { return ::u_isupper(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_lower(const char32_t cp) const noexcept { return ::u_islower(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_punct(const char32_t cp) const noexcept { return ::u_ispunct(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_print(const char32_t cp) const noexcept { return ::u_isprint(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_titlecase(const char32_t cp) const noexcept { return ::u_istitle(static_cast<::UChar32>(cp)) != 0; }
+
+bool locale::is_white_space(const char32_t cp) const noexcept {
+    return ::u_isUWhiteSpace(static_cast<::UChar32>(cp)) != 0;
+}
+char32_t locale::to_upper(const char32_t cp) const noexcept {
+    return static_cast<char32_t>(::u_toupper(static_cast<::UChar32>(cp)));
+}
+char32_t locale::to_lower(const char32_t cp) const noexcept {
+    return static_cast<char32_t>(::u_tolower(static_cast<::UChar32>(cp)));
+}
+char32_t locale::to_titlecase(const char32_t cp) const noexcept {
+    return static_cast<char32_t>(::u_totitle(static_cast<::UChar32>(cp)));
+}
+
+int locale::compare(const string& a, const string& b, const collate_strength strength) const {
+    const auto* col = static_cast<::UCollator*>(collator_);
+    if (col == nullptr) {
+        const int cmp = string_compare(a.data(), b.data());
+        return (cmp < 0) ? -1 : (cmp > 0) ? 1 : 0;
+    }
+
+    ::UErrorCode status = ::U_ZERO_ERROR;
+    ::UCollator* cloned = ::ucol_clone(col, &status);
+    if ((::U_FAILURE(status) != 0) || cloned == nullptr) {
+        const int cmp = string_compare(a.data(), b.data());
+        return (cmp < 0) ? -1 : (cmp > 0) ? 1 : 0;
+    }
+
+    ::ucol_setAttribute(cloned, ::UCOL_STRENGTH, to_ucol_strength(strength), &status);
+
+    status = ::U_ZERO_ERROR;
+    const ::UCollationResult result = ::ucol_strcollUTF8(cloned, a.data(), static_cast<int32_t>(a.size()), b.data(),
+                                                         static_cast<int32_t>(b.size()), &status);
+    ::ucol_close(cloned);
+
+    if (::U_FAILURE(status) != 0) {
+        const int cmp = string_compare(a.data(), b.data());
+        return (cmp < 0) ? -1 : (cmp > 0) ? 1 : 0;
+    }
+
+    switch (result) {
+        case ::UCOL_LESS:
+            return -1;
+        case ::UCOL_EQUAL:
+            return 0;
+        case ::UCOL_GREATER:
+            return 1;
+    }
+    return 0;
+}
+
+string locale::collation_key(const string& s) const {
+    const auto* col = static_cast<::UCollator*>(collator_);
+    if (col == nullptr) {
+        return s;
+    }
+
+    vector<::UChar> ustr(s.size() + 1);
+    ::UErrorCode cnv_status = ::U_ZERO_ERROR;
+    int32_t ustr_len = 0;
+    ::u_strFromUTF8(ustr.data(), static_cast<int32_t>(ustr.size()), &ustr_len, s.data(), static_cast<int32_t>(s.size()),
+                    &cnv_status);
+    if (::U_FAILURE(cnv_status) != 0) {
+        return {};
+    }
+
+    int32_t key_len = ::ucol_getSortKey(col, ustr.data(), ustr_len, nullptr, 0);
+    if (key_len <= 0) {
+        return {};
+    }
+
+    string key(static_cast<size_t>(key_len), '\0');
+    key_len = ::ucol_getSortKey(col, ustr.data(), ustr_len, reinterpret_cast<uint8_t*>(key.data()), key_len);
+    if (key_len <= 0) {
+        return {};
+    }
+    key.resize(static_cast<size_t>(key_len));
+    return key;
+}
+
+string locale::to_multibyte(const u32string& ucs4) const {
+    auto* cnv = static_cast<::UConverter*>(converter_);
+    if (cnv == nullptr) {
+        string result;
+        for (const char32_t cp: ucs4) {
+            if (cp < 0x80) {
+                result += static_cast<char>(cp);
+            } else if (cp < 0x800) {
+                result += static_cast<char>(0xC0 | (cp >> 6));
+                result += static_cast<char>(0x80 | (cp & 0x3F));
+            } else if (cp < 0x10000) {
+                result += static_cast<char>(0xE0 | (cp >> 12));
+                result += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
+                result += static_cast<char>(0x80 | (cp & 0x3F));
+            } else {
+                result += static_cast<char>(0xF0 | (cp >> 18));
+                result += static_cast<char>(0x80 | ((cp >> 12) & 0x3F));
+                result += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
+                result += static_cast<char>(0x80 | (cp & 0x3F));
+            }
+        }
+        return result;
+    }
+
+    vector<::UChar> utf16(ucs4.size() * 2 + 1);
+    int32_t u16_len = 0;
+    ::UErrorCode status = ::U_ZERO_ERROR;
+    ::u_strFromUTF32(utf16.data(), static_cast<int32_t>(utf16.size()), &u16_len,
+                     reinterpret_cast<const ::UChar32*>(ucs4.data()), static_cast<int32_t>(ucs4.size()), &status);
+    if ((::U_FAILURE(status) != 0) && status != ::U_BUFFER_OVERFLOW_ERROR) {
+        return {};
+    }
+
+    string result(u16_len * 4 + 4, '\0');
+    status = ::U_ZERO_ERROR;
+    const int32_t out_len =
+            ::ucnv_fromUChars(cnv, result.data(), static_cast<int32_t>(result.size()), utf16.data(), u16_len, &status);
+    if (U_FAILURE(status) != 0 && status != ::U_BUFFER_OVERFLOW_ERROR) {
+        throw locale_exception("to_multibyte: conversion failed");
+    }
+    result.resize(static_cast<size_t>(out_len));
+    return result;
+}
+
+u32string locale::to_ucs4(const string& mb) const {
+    auto* cnv = static_cast<::UConverter*>(converter_);
+    if (cnv == nullptr) {
+        u32string result;
+        size_t i = 0;
+        while (i < mb.size()) {
+            char32_t cp = 0;
+            const auto c = static_cast<byte_t>(mb[i]);
+            if (c < 0x80) {
+                cp = c;
+                i += 1;
+            } else if (c < 0xE0) {
+                cp = static_cast<char32_t>(c & 0x1F) << 6;
+                if (i + 1 < mb.size()) {
+                    cp |= static_cast<unsigned char>(mb[i + 1]) & 0x3F;
+                }
+                i += 2;
+            } else if (c < 0xF0) {
+                cp = static_cast<char32_t>(c & 0x0F) << 12;
+                if (i + 1 < mb.size()) {
+                    cp |= (static_cast<unsigned char>(mb[i + 1]) & 0x3F) << 6;
+                }
+                if (i + 2 < mb.size()) {
+                    cp |= static_cast<unsigned char>(mb[i + 2]) & 0x3F;
+                }
+                i += 3;
+            } else {
+                cp = static_cast<char32_t>(c & 0x07) << 18;
+                if (i + 1 < mb.size()) {
+                    cp |= (static_cast<unsigned char>(mb[i + 1]) & 0x3F) << 12;
+                }
+                if (i + 2 < mb.size()) {
+                    cp |= (static_cast<unsigned char>(mb[i + 2]) & 0x3F) << 6;
+                }
+                if (i + 3 < mb.size()) {
+                    cp |= static_cast<unsigned char>(mb[i + 3]) & 0x3F;
+                }
+                i += 4;
+            }
+            result += cp;
+        }
+        return result;
+    }
+
+    vector<::UChar> utf16(mb.size() * 2 + 1);
+    ::UErrorCode status = ::U_ZERO_ERROR;
+    const int32_t u16_len = ::ucnv_toUChars(cnv, utf16.data(), static_cast<int32_t>(utf16.size()), mb.data(),
+                                            static_cast<int32_t>(mb.size()), &status);
+    if ((::U_FAILURE(status) != 0) && status != ::U_BUFFER_OVERFLOW_ERROR) {
+        throw locale_exception("to_ucs4: conversion failed");
+    }
+
+    u32string result(u16_len + 1, U'\0');
+    status = U_ZERO_ERROR;
+    int32_t u32_len = 0;
+    ::u_strToUTF32(reinterpret_cast<::UChar32*>(result.data()), static_cast<int32_t>(result.size()), &u32_len,
+                   utf16.data(), u16_len, &status);
+    if ((::U_FAILURE(status) != 0) && status != ::U_BUFFER_OVERFLOW_ERROR) {
+        throw locale_exception("to_ucs4: conversion failed");
+    }
+    result.resize(static_cast<size_t>(u32_len));
+    return result;
+}
+
+string locale::format_number(const int64_t value) const {
+    const auto* fmt = static_cast<::UNumberFormat*>(num_fmt_);
+    if (fmt == nullptr) {
+        return to_string(value);
+    }
+
+    ::UErrorCode status = ::U_ZERO_ERROR;
+    const int32_t needed = ::unum_formatInt64(fmt, value, nullptr, 0, nullptr, &status);
+    if (status == ::U_BUFFER_OVERFLOW_ERROR && needed > 0) {
+        string result(static_cast<size_t>(needed) + 1, '\0');
+        status = ::U_ZERO_ERROR;
+        vector<::UChar> ubuf(static_cast<size_t>(needed) + 1);
+        unum_formatInt64(fmt, value, ubuf.data(), static_cast<int32_t>(ubuf.size()), nullptr, &status);
+        if (::U_SUCCESS(status) != 0) {
+            return icu_to_string(ubuf.data(), needed);
+        }
+    }
+    return to_string(value);
+}
+
+string locale::format_number(const double value, const int32_t fraction_digits) const {
+    auto* fmt = static_cast<::UNumberFormat*>(num_fmt_);
+    if (fmt == nullptr) {
+        return to_string(value);
+    }
+
+    ::UErrorCode status = ::U_ZERO_ERROR;
+
+    if (fraction_digits >= 0) {
+        ::unum_setAttribute(fmt, ::UNUM_MIN_FRACTION_DIGITS, fraction_digits);
+        ::unum_setAttribute(fmt, ::UNUM_MAX_FRACTION_DIGITS, fraction_digits);
+    } else {
+        ::unum_setAttribute(fmt, ::UNUM_MIN_FRACTION_DIGITS, 0);
+        ::unum_setAttribute(fmt, ::UNUM_MAX_FRACTION_DIGITS, 6);
+    }
+
+    const int32_t needed = ::unum_formatDouble(fmt, value, nullptr, 0, nullptr, &status);
+    if (status == ::U_BUFFER_OVERFLOW_ERROR && needed > 0) {
+        vector<::UChar> ubuf(static_cast<size_t>(needed) + 1);
+        status = ::U_ZERO_ERROR;
+        ::unum_formatDouble(fmt, value, ubuf.data(), static_cast<int32_t>(ubuf.size()), nullptr, &status);
+        if (::U_SUCCESS(status) != 0) {
+            return icu_to_string(ubuf.data(), needed);
+        }
+    }
+    return to_string(value);
+}
+
+string locale::format_currency(const double value, const string& iso_4217_code) const {
+    UErrorCode status = U_ZERO_ERROR;
+
+    void* c_fmt = open_currency_formatter(icu_name_.data(), iso_4217_code.data());
+    auto* fmt = static_cast<::UNumberFormat*>(c_fmt);
+    if (fmt == nullptr) {
+        return to_string(value) + " " + iso_4217_code;
+    }
+
+    const int32_t needed = ::unum_formatDouble(fmt, value, nullptr, 0, nullptr, &status);
+    string result;
+    if (status == ::U_BUFFER_OVERFLOW_ERROR && needed > 0) {
+        vector<::UChar> ubuf(static_cast<size_t>(needed) + 1);
+        status = ::U_ZERO_ERROR;
+        ::unum_formatDouble(fmt, value, ubuf.data(), static_cast<int32_t>(ubuf.size()), nullptr, &status);
+        if (::U_SUCCESS(status) != 0) {
+            result = icu_to_string(ubuf.data(), needed);
+        }
+    }
+
+    ::unum_close(fmt);
+    return result;
+}
+
+string locale::format_datetime(const datetime& dt, const date_style ds, const time_style ts) const {
+    const ::UDate udate = datetime_to_udate(dt);
+    ::UErrorCode status = ::U_ZERO_ERROR;
+    ::UDateFormat* fmt =
+            udat_open(to_udate_style(ds), to_utime_style(ts), name_.data(), nullptr, 0, nullptr, 0, &status);
+    if (::U_FAILURE(status) != 0) {
+        return dt.to_string();
+    }
+
+    const int32_t needed = ::udat_format(fmt, udate, nullptr, 0, nullptr, &status);
+    string result;
+    if (status == ::U_BUFFER_OVERFLOW_ERROR && needed > 0) {
+        vector<::UChar> ubuf(static_cast<size_t>(needed) + 1);
+        status = U_ZERO_ERROR;
+        ::udat_format(fmt, udate, ubuf.data(), static_cast<int32_t>(ubuf.size()), nullptr, &status);
+        if (::U_SUCCESS(status) != 0) {
+            result = icu_to_string(ubuf.data(), needed);
+        }
+    }
+
+    ::udat_close(fmt);
+    return result.empty() ? dt.to_string() : result;
+}
+
+string locale::format_datetime(const datetime& dt, const string& pattern) const {
+    const ::UDate udate = datetime_to_udate(dt);
+    void* pat_fmt = open_date_pattern_formatter(name_.data(), pattern.data());
+    auto* fmt = static_cast<::UDateFormat*>(pat_fmt);
+    if (fmt == nullptr) {
+        return dt.to_string();
+    }
+
+    ::UErrorCode status = ::U_ZERO_ERROR;
+    const int32_t needed = ::udat_format(fmt, udate, nullptr, 0, nullptr, &status);
+    string result;
+    if (status == ::U_BUFFER_OVERFLOW_ERROR && needed > 0) {
+        vector<::UChar> ubuf(static_cast<size_t>(needed) + 1);
+        status = ::U_ZERO_ERROR;
+        ::udat_format(fmt, udate, ubuf.data(), static_cast<int32_t>(ubuf.size()), nullptr, &status);
+        if (::U_SUCCESS(status) != 0) {
+            result = icu_to_string(ubuf.data(), needed);
+        }
+    }
+
+    ::udat_close(fmt);
+    return result.empty() ? dt.to_string() : result;
+}
+
+string locale::format_datetime() const {
+    const datetime now = datetime::now();
+    return format_datetime(now, date_style::medium, time_style::medium);
 }
 
 locale::numeric_info locale::numeric() const {
-    numeric_info info{};
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    info.decimal_point = query_info_utf8(LOCALE_SDECIMAL, win_name_.view());
-    info.thousands_sep = query_info_utf8(LOCALE_STHOUSAND, win_name_.view());
-    {
-        auto grp = query_info_utf8(LOCALE_SGROUPING, win_name_.view());
-        string g;
-        for (const char c: grp) {
-            if (c >= '1' && c <= '9') {
-                g += static_cast<char>(c - '0');
-            } else if (c == '0') {
-                g += '\0';
-                break;
-            }
-        }
-        info.grouping = g;
+    numeric_info info;
+    ::UErrorCode status = ::U_ZERO_ERROR;
+
+    const auto* fmt = static_cast<::UNumberFormat*>(num_fmt_);
+
+    if (fmt == nullptr) {
+        info.decimal_point = ".";
+        info.thousands_sep = ",";
+        info.grouping = "";
+        info.percent_sign = "%";
+        info.minus_sign = "-";
+        info.plus_sign = "+";
+        info.exponential = "E";
+        info.nan_symbol = "NaN";
+        info.infinity_symbol = "∞";
+        return info;
     }
-#else
-    info.decimal_point = nl_str(RADIXCHAR, loc_);
-    info.thousands_sep = nl_str(THOUSEP, loc_);
-    info.grouping = nl_str(GROUPING, loc_);
-#endif
+
+    ::UChar ubuf[16] = {};
+    ::unum_getSymbol(fmt, ::UNUM_DECIMAL_SEPARATOR_SYMBOL, ubuf, 16, &status);
+    info.decimal_point = icu_to_string(ubuf, -1);
+
+    status = ::U_ZERO_ERROR;
+    ::unum_getSymbol(fmt, ::UNUM_GROUPING_SEPARATOR_SYMBOL, ubuf, 16, &status);
+    info.thousands_sep = icu_to_string(ubuf, -1);
+
+    status = ::U_ZERO_ERROR;
+    ::unum_getSymbol(fmt, ::UNUM_PERCENT_SYMBOL, ubuf, 16, &status);
+    info.percent_sign = icu_to_string(ubuf, -1);
+
+    status = ::U_ZERO_ERROR;
+    ::unum_getSymbol(fmt, ::UNUM_MINUS_SIGN_SYMBOL, ubuf, 16, &status);
+    info.minus_sign = icu_to_string(ubuf, -1);
+
+    status = ::U_ZERO_ERROR;
+    ::unum_getSymbol(fmt, ::UNUM_PLUS_SIGN_SYMBOL, ubuf, 16, &status);
+    info.plus_sign = icu_to_string(ubuf, -1);
+
+    info.grouping = "";
+
     return info;
 }
 
 locale::monetary_info locale::monetary() const {
     monetary_info info{};
+    ::UErrorCode status = ::U_ZERO_ERROR;
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    info.currency_symbol = query_info_utf8(LOCALE_SCURRENCY, win_name_.view());
-    info.int_curr_symbol = query_info_utf8(LOCALE_SINTLSYMBOL, win_name_.view());
-    info.mon_decimal_point = query_info_utf8(LOCALE_SMONDECIMALSEP, win_name_.view());
-    info.mon_thousands_sep = query_info_utf8(LOCALE_SMONTHOUSANDSEP, win_name_.view());
-
-    info.positive_sign = query_info_utf8(LOCALE_SPOSITIVESIGN, win_name_.view());
-    if (info.positive_sign.empty()) {
-        info.positive_sign = "+";
+    auto* fmt = static_cast<::UNumberFormat*>(open_currency_formatter(icu_name_.data(), "USD"));
+    if (fmt == nullptr) {
+        return info;
     }
 
-    info.negative_sign = query_info_utf8(LOCALE_SNEGATIVESIGN, win_name_.view());
-    if (info.negative_sign.empty()) {
-        info.negative_sign = "-";
-    }
+    ::UChar ubuf[16] = {};
 
-    {
-        const auto s = query_info_utf8(LOCALE_ICURRDIGITS, win_name_.view());
-        info.frac_digits = s.empty() ? 2 : integer32::parse(s.view()).value();
-    }
-    {
-        const auto s = query_info_utf8(LOCALE_IINTLCURRDIGITS, win_name_.view());
-        info.int_frac_digits = s.empty() ? 2 : integer32::parse(s.view()).value();
-    }
-    info.p_cs_precedes = (query_info_utf8(LOCALE_IPOSSYMPRECEDES, win_name_.view()) == "1");
-    info.n_cs_precedes = (query_info_utf8(LOCALE_INEGSYMPRECEDES, win_name_.view()) == "1");
+    ::unum_getSymbol(fmt, ::UNUM_CURRENCY_SYMBOL, ubuf, 16, &status);
+    info.currency_symbol = icu_to_string(ubuf, -1);
 
-#else
-    info.currency_symbol = nl_str(CRNCYSTR, loc_);
-    info.int_curr_symbol = nl_str(INT_CURR_SYMBOL, loc_);
-    if (!info.currency_symbol.empty()) {
-        const char ind = info.currency_symbol[0];
-        info.p_cs_precedes = (ind == '-');
-        info.n_cs_precedes = info.p_cs_precedes;
-        info.currency_symbol.erase(0, 1);
-    }
-    info.mon_decimal_point = nl_str(MON_DECIMAL_POINT, loc_);
-    info.mon_thousands_sep = nl_str(MON_THOUSANDS_SEP, loc_);
-    info.mon_grouping = nl_str(MON_GROUPING, loc_);
-    info.positive_sign = nl_str(POSITIVE_SIGN, loc_);
-    info.negative_sign = nl_str(NEGATIVE_SIGN, loc_);
-    {
-        string s = nl_str(FRAC_DIGITS, loc_);
-        info.frac_digits = s.empty() ? 2 : static_cast<int>(static_cast<byte_t>(s[0]));
-    }
-    {
-        string s = nl_str(INT_FRAC_DIGITS, loc_);
-        info.int_frac_digits = s.empty() ? 2 : static_cast<int>(static_cast<byte_t>(s[0]));
-    }
+    status = ::U_ZERO_ERROR;
+    ::unum_getSymbol(fmt, ::UNUM_INTL_CURRENCY_SYMBOL, ubuf, 16, &status);
+    info.int_curr_symbol = icu_to_string(ubuf, -1);
 
-#endif
+    status = ::U_ZERO_ERROR;
+    ::unum_getSymbol(fmt, ::UNUM_MONETARY_SEPARATOR_SYMBOL, ubuf, 16, &status);
+    info.mon_decimal_point = icu_to_string(ubuf, -1);
 
+    status = ::U_ZERO_ERROR;
+    ::unum_getSymbol(fmt, ::UNUM_MONETARY_GROUPING_SEPARATOR_SYMBOL, ubuf, 16, &status);
+    info.mon_thousands_sep = icu_to_string(ubuf, -1);
+
+    info.frac_digits = ::unum_getAttribute(fmt, ::UNUM_MIN_FRACTION_DIGITS);
+
+    ::unum_close(fmt);
     return info;
 }
 
 locale::time_info locale::time() const {
-    time_info info{};
+    time_info info;
+    ::UErrorCode status = ::U_ZERO_ERROR;
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    info.date_fmt = query_info_utf8(LOCALE_SSHORTDATE, win_name_.view());
-    info.time_fmt = query_info_utf8(LOCALE_STIMEFORMAT, win_name_.view());
-    info.datetime_fmt = info.date_fmt + " " + info.time_fmt;
-    info.am_str = query_info_utf8(LOCALE_S1159, win_name_.view());
-    info.pm_str = query_info_utf8(LOCALE_S2359, win_name_.view());
-
-    for (int i = 0; i < 7; ++i) {
-        info.day_names.push_back(query_info_utf8(kDay[i], win_name_.view()));
-        info.abbr_day_names.push_back(query_info_utf8(kAbbrDay[i], win_name_.view()));
-    }
-    for (int i = 0; i < 12; ++i) {
-        info.month_names.push_back(query_info_utf8(kMon[i], win_name_.view()));
-        info.abbr_month_names.push_back(query_info_utf8(kAbbrMon[i], win_name_.view()));
-    }
-#else
-    info.date_fmt = nl_str(D_FMT, loc_);
-    info.time_fmt = nl_str(T_FMT, loc_);
-    info.datetime_fmt = nl_str(D_T_FMT, loc_);
-    info.am_str = nl_str(AM_STR, loc_);
-    info.pm_str = nl_str(PM_STR, loc_);
-
-    static constexpr ::nl_item kDay[7] = {DAY_1, DAY_2, DAY_3, DAY_4, DAY_5, DAY_6, DAY_7};
-    static constexpr ::nl_item kAbbrDay[7] = {ABDAY_1, ABDAY_2, ABDAY_3, ABDAY_4, ABDAY_5, ABDAY_6, ABDAY_7};
-    for (int i = 0; i < 7; ++i) {
-        info.day_names.push_back(nl_str(kDay[i], loc_));
-        info.abbr_day_names.push_back(nl_str(kAbbrDay[i], loc_));
+    ::UDateFormat* dfmt = ::udat_open(::UDAT_MEDIUM, ::UDAT_NONE, name_.data(), nullptr, 0, nullptr, 0, &status);
+    if (::U_SUCCESS(status) != 0) {
+        ::UChar ubuf[128] = {};
+        const int32_t len = ::udat_toPattern(dfmt, 0, ubuf, 128, &status);
+        if ((::U_SUCCESS(status) != 0) && len > 0) {
+            info.date_fmt = icu_to_string(ubuf, len);
+        }
+        ::udat_close(dfmt);
     }
 
-    static constexpr ::nl_item kMon[12] = {MON_1, MON_2, MON_3, MON_4,  MON_5,  MON_6,
-                                           MON_7, MON_8, MON_9, MON_10, MON_11, MON_12};
-    static constexpr ::nl_item kAbbrMon[12] = {ABMON_1, ABMON_2, ABMON_3, ABMON_4,  ABMON_5,  ABMON_6,
-                                               ABMON_7, ABMON_8, ABMON_9, ABMON_10, ABMON_11, ABMON_12};
-    for (int i = 0; i < 12; ++i) {
-        info.month_names.push_back(nl_str(kMon[i], loc_));
-        info.abbr_month_names.push_back(nl_str(kAbbrMon[i], loc_));
+    status = ::U_ZERO_ERROR;
+    ::UDateFormat* tfmt = ::udat_open(::UDAT_NONE, ::UDAT_MEDIUM, name_.data(), nullptr, 0, nullptr, 0, &status);
+    if (::U_SUCCESS(status) != 0) {
+        UChar ubuf[128] = {};
+        const int32_t len = ::udat_toPattern(tfmt, 0, ubuf, 128, &status);
+        if ((::U_SUCCESS(status) != 0) && len > 0) {
+            info.time_fmt = icu_to_string(ubuf, len);
+        }
+        ::udat_close(tfmt);
     }
-#endif
+
+    status = ::U_ZERO_ERROR;
+    ::UDateFormat* dtfmt = ::udat_open(::UDAT_MEDIUM, ::UDAT_MEDIUM, name_.data(), nullptr, 0, nullptr, 0, &status);
+    if (::U_SUCCESS(status) != 0) {
+        ::UChar ubuf[128] = {};
+        const int32_t len = ::udat_toPattern(dtfmt, 0, ubuf, 128, &status);
+        if ((::U_SUCCESS(status) != 0) && len > 0) {
+            info.datetime_fmt = icu_to_string(ubuf, len);
+        }
+        ::udat_close(dtfmt);
+    }
+
+    status = ::U_ZERO_ERROR;
+    ::UDateFormat* sym_fmt = ::udat_open(::UDAT_FULL, ::UDAT_NONE, name_.data(), nullptr, 0, nullptr, 0, &status);
+    if (::U_SUCCESS(status) != 0) {
+        ::UChar ubuf[64] = {};
+        for (int i = 0; i < 7; ++i) {
+            status = ::U_ZERO_ERROR;
+            const int32_t len = ::udat_getSymbols(sym_fmt, ::UDAT_STANDALONE_WEEKDAYS, i, ubuf, 64, &status);
+            if ((::U_SUCCESS(status) != 0) && len > 0) {
+                info.day_names.push_back(icu_to_string(ubuf, len));
+            }
+        }
+        for (int i = 0; i < 7; ++i) {
+            status = ::U_ZERO_ERROR;
+            const int32_t len = ::udat_getSymbols(sym_fmt, ::UDAT_STANDALONE_SHORT_WEEKDAYS, i, ubuf, 64, &status);
+            if ((::U_SUCCESS(status) != 0) && len > 0) {
+                info.abbr_day_names.push_back(icu_to_string(ubuf, len));
+            }
+        }
+        for (int i = 0; i < 12; ++i) {
+            status = ::U_ZERO_ERROR;
+            const int32_t len = ::udat_getSymbols(sym_fmt, ::UDAT_STANDALONE_MONTHS, i, ubuf, 64, &status);
+            if ((::U_SUCCESS(status) != 0) && len > 0) {
+                info.month_names.push_back(icu_to_string(ubuf, len));
+            }
+        }
+        for (int i = 0; i < 12; ++i) {
+            status = ::U_ZERO_ERROR;
+            const int32_t len = ::udat_getSymbols(sym_fmt, ::UDAT_STANDALONE_SHORT_MONTHS, i, ubuf, 64, &status);
+            if ((::U_SUCCESS(status) != 0) && len > 0) {
+                info.abbr_month_names.push_back(icu_to_string(ubuf, len));
+            }
+        }
+
+        status = ::U_ZERO_ERROR;
+        int32_t len = ::udat_getSymbols(sym_fmt, ::UDAT_AM_PMS, 0, ubuf, 64, &status);
+        if ((::U_SUCCESS(status) != 0) && len > 0) {
+            info.am_str = icu_to_string(ubuf, len);
+        }
+        status = ::U_ZERO_ERROR;
+        len = udat_getSymbols(sym_fmt, ::UDAT_AM_PMS, 1, ubuf, 64, &status);
+        if ((::U_SUCCESS(status) != 0) && len > 0) {
+            info.pm_str = icu_to_string(ubuf, len);
+        }
+
+        ::udat_close(sym_fmt);
+    }
+
     return info;
 }
 
-#ifdef NEFORCE_PLATFORM_WINDOWS
-
-bool locale::is_alpha(const char32_t cp) const noexcept { return (char_type1(cp) & C1_ALPHA) != 0; }
-bool locale::is_digit(const char32_t cp) const noexcept { return (char_type1(cp) & C1_DIGIT) != 0; }
-bool locale::is_alnum(const char32_t cp) const noexcept { return (char_type1(cp) & (C1_ALPHA | C1_DIGIT)) != 0; }
-bool locale::is_space(const char32_t cp) const noexcept { return (char_type1(cp) & C1_SPACE) != 0; }
-bool locale::is_upper(const char32_t cp) const noexcept { return (char_type1(cp) & C1_UPPER) != 0; }
-bool locale::is_lower(const char32_t cp) const noexcept { return (char_type1(cp) & C1_LOWER) != 0; }
-bool locale::is_punct(const char32_t cp) const noexcept { return (char_type1(cp) & C1_PUNCT) != 0; }
-bool locale::is_print(const char32_t cp) const noexcept {
-    const ::WORD t = char_type1(cp);
-    return (t & (C1_ALPHA | C1_DIGIT | C1_PUNCT | C1_BLANK | C1_SPACE)) != 0;
-}
-
-char32_t locale::to_upper(const char32_t cp) const noexcept { return lcmap_case(win_name_, cp, LCMAP_UPPERCASE); }
-
-char32_t locale::to_lower(const char32_t cp) const noexcept { return lcmap_case(win_name_, cp, LCMAP_LOWERCASE); }
-
-#else
-
-bool locale::is_alpha(char32_t cp) const noexcept { return ::iswalpha_l(static_cast<wint_t>(cp), loc_) != 0; }
-bool locale::is_digit(char32_t cp) const noexcept { return ::iswdigit_l(static_cast<wint_t>(cp), loc_) != 0; }
-bool locale::is_alnum(char32_t cp) const noexcept { return ::iswalnum_l(static_cast<wint_t>(cp), loc_) != 0; }
-bool locale::is_space(char32_t cp) const noexcept { return ::iswspace_l(static_cast<wint_t>(cp), loc_) != 0; }
-bool locale::is_upper(char32_t cp) const noexcept { return ::iswupper_l(static_cast<wint_t>(cp), loc_) != 0; }
-bool locale::is_lower(char32_t cp) const noexcept { return ::iswlower_l(static_cast<wint_t>(cp), loc_) != 0; }
-bool locale::is_punct(char32_t cp) const noexcept { return ::iswpunct_l(static_cast<wint_t>(cp), loc_) != 0; }
-bool locale::is_print(char32_t cp) const noexcept { return ::iswprint_l(static_cast<wint_t>(cp), loc_) != 0; }
-
-char32_t locale::to_upper(char32_t cp) const noexcept {
-    return static_cast<char32_t>(::towupper_l(static_cast<wint_t>(cp), loc_));
-}
-char32_t locale::to_lower(char32_t cp) const noexcept {
-    return static_cast<char32_t>(::towlower_l(static_cast<wint_t>(cp), loc_));
-}
-
-#endif
-
-int locale::compare(const string& a, const string& b, const collate_strength strength) const {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    ::DWORD flags = 0;
-    switch (strength) {
-        case collate_strength::primary: {
-            flags = NORM_IGNORECASE | NORM_IGNORENONSPACE | NORM_IGNORESYMBOLS;
-            break;
-        }
-        case collate_strength::secondary: {
-            flags = NORM_IGNORECASE;
-            break;
-        }
-        case collate_strength::tertiary:
-        case collate_strength::identical:
-        default: {
-            flags = 0;
-            break;
-        }
-    }
-
-    wstring wa = character::to_wstring(a.view());
-    wstring wb = character::to_wstring(b.view());
-
-    wstring wn_storage;
-    const wchar_t* lname = nullptr;
-    if (!win_name_.empty()) {
-        wn_storage = character::to_wstring(win_name_.view());
-        lname = wn_storage.data();
-    }
-
-    const int r = ::CompareStringEx(lname, flags, wa.data(), static_cast<int>(wa.size()), wb.data(),
-                                    static_cast<int>(wb.size()), nullptr, nullptr, 0);
-    if (r == 0) {
-        throw locale_exception("CompareStringEx failed");
-    }
-
-    const int linguistic_result = r - 2;
-    if (strength == collate_strength::identical && linguistic_result == 0) {
-        if (wa < wb) {
-            return -1;
-        }
-        if (wa > wb) {
-            return 1;
-        }
-        return 0;
-    }
-    return linguistic_result;
-
-#else
-    auto to_wide = [this](const string& s) -> wstring {
-        wstring out(s.size() + 1, L'\0');
-        const ::locale_t saved = ::uselocale(loc_);
-        const size_t n = ::mbstowcs(out.data(), s.data(), out.size());
-        ::uselocale(saved);
-        if (n == static_cast<size_t>(-1)) {
-            return {};
-        }
-        out.resize(n);
-        return out;
-    };
-
-    auto wa = to_wide(a);
-    auto wb = to_wide(b);
-
-    switch (strength) {
-        case collate_strength::primary: {
-#    ifdef __GLIBC__
-            {
-                int r = ::wcscasecmp_l(wa.data(), wb.data(), loc_);
-                return (r < 0) ? -1 : (r > 0) ? 1 : 0;
-            }
-#    else
-            {
-                wstring wa_lower, wb_lower;
-                wa_lower.reserve(wa.size());
-                wb_lower.reserve(wb.size());
-                for (wchar_t c: wa) {
-                    wa_lower += static_cast<wchar_t>(::towlower_l(c, loc_));
-                }
-                for (wchar_t c: wb) {
-                    wb_lower += static_cast<wchar_t>(::towlower_l(c, loc_));
-                }
-                return ::wcscoll_l(wa_lower.c_str(), wb_lower.c_str(), loc_);
-            }
-#    endif
-        }
-        case collate_strength::secondary: {
-#    ifdef __GLIBC__
-            {
-                int r = ::wcscasecmp_l(wa.data(), wb.data(), loc_);
-                return (r < 0) ? -1 : (r > 0) ? 1 : 0;
-            }
-#    else
-            {
-                wstring wa_lower, wb_lower;
-                wa_lower.reserve(wa.size());
-                wb_lower.reserve(wb.size());
-                for (wchar_t c: wa) {
-                    wa_lower += static_cast<wchar_t>(::towlower_l(c, loc_));
-                }
-                for (wchar_t c: wb) {
-                    wb_lower += static_cast<wchar_t>(::towlower_l(c, loc_));
-                }
-                return ::wcscoll_l(wa_lower.c_str(), wb_lower.c_str(), loc_);
-            }
-#    endif
-        }
-        case collate_strength::tertiary: {
-            return ::wcscoll_l(wa.data(), wb.data(), loc_);
-        }
-        case collate_strength::identical: {
-            int rc = ::wcscoll_l(wa.data(), wb.data(), loc_);
-            if (rc != 0) {
-                return (rc < 0) ? -1 : 1;
-            }
-            rc = string_compare(wa.data(), wb.data());
-            return (rc < 0) ? -1 : (rc > 0) ? 1 : 0;
-        }
-    }
-
-    return 0;
-#endif
-}
-
-string locale::collation_key(const string& s) const {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    wstring wn_storage;
-    const wchar_t* lname = nullptr;
-    if (!win_name_.empty()) {
-        wn_storage = character::to_wstring(win_name_.view());
-        lname = wn_storage.data();
-    }
-
-    wstring ws = character::to_wstring(s.view());
-    int sz = ::LCMapStringEx(lname, LCMAP_SORTKEY, ws.data(), static_cast<int>(ws.size()), nullptr, 0, nullptr, nullptr,
-                             0);
-    if (sz <= 0) {
-        if (ws.empty()) {
-            return string(1, '\0');
-        }
-        return {};
-    }
-    string key(static_cast<size_t>(sz), '\0');
-    ::LCMapStringEx(lname, LCMAP_SORTKEY, ws.data(), static_cast<int>(ws.size()), reinterpret_cast<LPWSTR>(key.data()),
-                    sz, nullptr, nullptr, 0);
-    return key;
-#else
-    auto to_wide = [this](const string& mb) -> wstring {
-        wstring out(mb.size() + 1, L'\0');
-        const ::locale_t saved = ::uselocale(loc_);
-        const size_t n = ::mbstowcs(out.data(), mb.data(), out.size());
-        ::uselocale(saved);
-        if (n == static_cast<size_t>(-1)) {
-            return {};
-        }
-        out.resize(n + 1);
-        out[n] = L'\0';
-        return out;
-    };
-
-    auto ws = to_wide(s);
-    const size_t sz = ::wcsxfrm_l(nullptr, ws.data(), 0, loc_);
-    wstring key(sz + 1, L'\0');
-    ::wcsxfrm_l(key.data(), ws.data(), sz + 1, loc_);
-    return {reinterpret_cast<const char*>(key.data()), sz * sizeof(wchar_t)};
-#endif
-}
-
-string locale::to_multibyte(const u32string& ucs4) const {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    // UCS-4 -> UTF-16 -> ANSI
-    wstring wide;
-    wide.reserve(ucs4.size());
-    for (const char32_t cp: ucs4) {
-        if (cp < 0x10000) {
-            wide += static_cast<wchar_t>(cp);
-        } else {
-            const char32_t c = cp - 0x10000;
-            wide += static_cast<wchar_t>(0xD800 | (c >> 10));
-            wide += static_cast<wchar_t>(0xDC00 | (c & 0x3FF));
-        }
-    }
-    const ::UINT cp = ansi_codepage(win_name_.view());
-    const int sz =
-            ::WideCharToMultiByte(cp, 0, wide.data(), static_cast<int>(wide.size()), nullptr, 0, nullptr, nullptr);
-    if (sz <= 0) {
-        return {};
-    }
-    string out(static_cast<size_t>(sz), '\0');
-    ::WideCharToMultiByte(cp, 0, wide.data(), static_cast<int>(wide.size()), out.data(), sz, nullptr, nullptr);
-    return out;
-
-#else
-    const ::iconv_t cd = ::iconv_open(encoding_.data(), "UTF-32LE");
-    if (cd == reinterpret_cast<::iconv_t>(-1)) {
-        throw locale_exception("to_multibyte: iconv_open failed");
-    }
-
-    const auto* in = reinterpret_cast<const char*>(ucs4.data());
-    size_t in_left = ucs4.size() * sizeof(char32_t);
-    string result(in_left * 4 + 4, '\0');
-    char* out = result.data();
-    size_t out_left = result.size();
-
-    if (::iconv(cd, const_cast<char**>(&in), &in_left, &out, &out_left) == static_cast<size_t>(-1)) {
-        ::iconv_close(cd);
-        throw locale_exception("to_multibyte: iconv failed");
-    }
-    ::iconv_close(cd);
-    result.resize(result.size() - out_left);
-    return result;
-#endif
-}
-
-u32string locale::to_ucs4(const string& mb) const {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    const ::UINT cp = ansi_codepage(win_name_.view());
-    const int wsz = ::MultiByteToWideChar(cp, 0, mb.data(), static_cast<int>(mb.size()), nullptr, 0);
-    if (wsz <= 0) {
-        return {};
-    }
-    wstring wide(static_cast<size_t>(wsz), L'\0');
-    ::MultiByteToWideChar(cp, 0, mb.data(), static_cast<int>(mb.size()), wide.data(), wsz);
-    u32string out;
-    out.reserve(wide.size());
-    for (size_t i = 0; i < wide.size();) {
-        const wchar_t wc = wide[i];
-        if (wc >= 0xD800 && wc <= 0xDBFF && i + 1 < wide.size()) {
-            const auto hi = static_cast<char32_t>(wc - 0xD800);
-            const auto lo = static_cast<char32_t>(wide[++i] - 0xDC00);
-            out += static_cast<char32_t>(0x10000U + (hi << 10) + lo);
-        } else {
-            out += static_cast<char32_t>(wc);
-        }
-        ++i;
-    }
-    return out;
-
-#else
-
-    const ::iconv_t cd = ::iconv_open("UTF-32LE", encoding_.data());
-    if (cd == reinterpret_cast<::iconv_t>(-1)) {
-        throw locale_exception("to_ucs4: iconv_open failed");
-    }
-
-    const char* in = mb.data();
-    size_t in_left = mb.size();
-    u32string result(mb.size() + 1, U'\0');
-    auto* out = reinterpret_cast<char*>(result.data());
-    size_t out_left = result.size() * sizeof(char32_t);
-
-    if (::iconv(cd, const_cast<char**>(&in), &in_left, &out, &out_left) == static_cast<size_t>(-1)) {
-        ::iconv_close(cd);
-        throw locale_exception("to_ucs4: iconv failed");
-    }
-    ::iconv_close(cd);
-    const size_t chars = (result.size() * sizeof(char32_t) - out_left) / sizeof(char32_t);
-    result.resize(chars);
-    return result;
-#endif
-}
-
 vector<string> locale::available_locales() {
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    enum_ctx ctx;
-    ::EnumSystemLocalesEx(enum_proc, LOCALE_ALL, reinterpret_cast<::LPARAM>(&ctx), nullptr);
+    ::UErrorCode status = ::U_ZERO_ERROR;
+    ::UEnumeration* en = ::uloc_openAvailableByType(::ULOC_AVAILABLE_DEFAULT, &status);
+    return enum_to_vector(en);
+}
 
-    for (string_view b: {"C", "POSIX"}) {
-        if (find(ctx.list.begin(), ctx.list.end(), b) == ctx.list.end()) {
-            ctx.list.push_back(b);
-        }
-    }
-
-    sort(ctx.list.begin(), ctx.list.end());
-    return ctx.list;
-
-#else
-
+vector<string> locale::available_countries(const string& /*language*/) {
     vector<string> result;
-
-    auto collect = [&result](const char* pattern) {
-        ::glob_t g{};
-        // NOLINTNEXTLINE(concurrency-mt-unsafe)
-        if (::glob(pattern, GLOB_NOSORT, nullptr, &g) == 0) {
-            for (size_t i = 0; i < g.gl_pathc; ++i) {
-                const char* sl = string_find_last(g.gl_pathv[i], '/');
-                if (!sl) {
-                    continue;
-                }
-                string n(sl + 1);
-                if (find(result.begin(), result.end(), n) == result.end()) {
-                    result.push_back(move(n));
-                }
-            }
-            ::globfree(&g);
-        }
-    };
-
-    collect("/usr/share/locale/*");
-    collect("/usr/lib/locale/*");
-
-    for (const char* b: {"C", "POSIX"}) {
-        if (find(result.begin(), result.end(), b) == result.end()) {
-            result.emplace_back(b);
+    const char* const* countries = ::uloc_getISOCountries();
+    if (countries != nullptr) {
+        for (int32_t i = 0; countries[i] != nullptr; ++i) {
+            result.emplace_back(countries[i]);
         }
     }
-
-    sort(result.begin(), result.end());
-    return result;
-#endif
-}
-
-string locale::format_number(int64_t value, const int precision) const {
-    const auto ni = numeric();
-    string result;
-
-    if (value < 0) {
-        result = "-";
-        value = -value;
-    }
-
-    string int_part = to_string(value);
-    if (!ni.thousands_sep.empty() && !ni.grouping.empty()) {
-        string grouped;
-        int count = 0;
-        for (auto it = int_part.rbegin(); it != int_part.rend(); ++it) {
-            if (count > 0 && count % 3 == 0) {
-                grouped = ni.thousands_sep + grouped;
-            }
-            grouped = *it + grouped;
-            ++count;
-        }
-        int_part = grouped;
-    }
-    result += int_part;
-
-    if (precision > 0) {
-        result += ni.decimal_point;
-        const string zeros(static_cast<size_t>(precision), '0');
-        result += move(zeros);
-    }
-
     return result;
 }
 
-string locale::format_date(intptr_t timestamp) const {
-    const auto ti = time();
-    ::tm tm_buf{};
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    ::localtime_s(&tm_buf, &timestamp);
-#else
-    ::localtime_r(&timestamp, &tm_buf);
-#endif
+bool locale::is_valid_locale(const string& name) {
+    ::UErrorCode status = ::U_ZERO_ERROR;
+    char canonical[ULOC_FULLNAME_CAPACITY] = {};
+    ::uloc_canonicalize(name.data(), canonical, sizeof(canonical), &status);
+    if ((::U_FAILURE(status) != 0) || canonical[0] == '\0') {
+        return false;
+    }
 
-    char buf[256];
-    const string fmt = ti.date_fmt.empty() ? "%x" : ti.date_fmt;
-    ::strftime(buf, sizeof(buf), fmt.data(), &tm_buf);
-    return {buf};
-}
-
-string locale::format_datetime() const {
-    const auto ti = time();
-    const time_t now = ::time(nullptr);
-    ::tm tm_buf{};
-#ifdef NEFORCE_PLATFORM_WINDOWS
-    ::localtime_s(&tm_buf, &now);
-#else
-    ::localtime_r(&now, &tm_buf);
-#endif
-
-    char buf[256];
-    const string fmt = ti.datetime_fmt.empty() ? "%c" : ti.datetime_fmt;
-    ::strftime(buf, sizeof(buf), fmt.data(), &tm_buf);
-    return {buf};
+    char lang[ULOC_LANG_CAPACITY] = {};
+    status = ::U_ZERO_ERROR;
+    ::uloc_getLanguage(canonical, lang, sizeof(lang), &status);
+    return (::U_SUCCESS(status) != 0) && lang[0] != '\0';
 }
 
 NEFORCE_END_NAMESPACE__

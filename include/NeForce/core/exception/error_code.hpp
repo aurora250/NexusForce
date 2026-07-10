@@ -5,13 +5,11 @@ NEFORCE_BEGIN_NAMESPACE__
 
 class error_code : public icommon<error_code> {
 private:
-    int value_;
-    const error_category* category_;
+    int value_{0};
+    const error_category* category_{&system_category()};
 
 public:
-    error_code() noexcept :
-    value_(0),
-    category_(&system_category()) {}
+    error_code() noexcept = default;
 
     error_code(int val, const error_category& cat) noexcept :
     value_(val),

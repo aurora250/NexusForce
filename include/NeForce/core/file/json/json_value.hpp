@@ -26,15 +26,15 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief JSON格式操作失败
  */
 struct json_exception final : value_exception {
-    explicit json_exception(const char* info = "JSON Operation Failed.", const char* type = static_type,
-                            const int code = 0) noexcept :
-    value_exception(info, type, code) {}
+    explicit json_exception(const char* info = "JSON Operation Failed.") noexcept :
+    value_exception(info) {}
 
     explicit json_exception(const exception& e) :
     value_exception(e) {}
 
     ~json_exception() override = default;
-    static constexpr auto static_type = "json_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "json_exception"; }
 };
 
 /** @} */ // Exceptions

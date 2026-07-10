@@ -1,4 +1,6 @@
 #include <NeForce/core/async/condition_variable.hpp>
+#include <NeForce/core/async/io_context.hpp>
+#include <NeForce/core/async/latch.hpp>
 #include <NeForce/core/file/file.hpp>
 #include <NeForce/core/file/file_watcher.hpp>
 #include <NeForce/core/file/filesystem.hpp>
@@ -4689,6 +4691,7 @@ protected:
     path get_path(const string& name) const { return test_dir_ / path(name); }
 
     path test_dir_;
+    io_context ctx_;
 };
 
 TEST_F(FileAsyncTest, Constructor) {
@@ -4704,19 +4707,23 @@ TEST_F(FileAsyncTest, Constructor) {
 TEST_F(FileAsyncTest, ReadImmediate) {
     auto p = get_path("read_immediate.bin");
     filesystem::create_and_write(p, "async read immediate test data here");
-
     file f(p, false, file_access::READ, file_shared::SHARE_READ);
     file_async async(f.native_handle());
 
     string buffer;
-    auto result = async.read(buffer, 10);
+    latch done(1);
+    error_code ec;
+    size_t bytes = 0;
+    async.async_read(ctx_, buffer, 10, [&](error_code e, size_t n) {
+        ec = e;
+        bytes = n;
+        done.count_down();
+    });
+    ctx_.run_one(500);
+    done.wait();
 
-    if (!result.completed) {
-        EXPECT_TRUE(async.wait(result));
-    }
-
-    EXPECT_TRUE(result.completed);
-    EXPECT_EQ(result.bytes_transferred, 10);
+    EXPECT_FALSE(ec);
+    EXPECT_EQ(bytes, 10u);
     EXPECT_EQ(buffer.substr(0, 10), "async read");
 }
 
@@ -4728,14 +4735,19 @@ TEST_F(FileAsyncTest, ReadWithOffset) {
     file_async async(f.native_handle());
 
     string buffer;
-    auto result = async.read(buffer, 10, 10);
+    latch done(1);
+    error_code ec;
+    size_t bytes = 0;
+    async.async_read(ctx_, buffer, 10, static_cast<file_async::difference_type>(10), [&](error_code e, size_t n) {
+        ec = e;
+        bytes = n;
+        done.count_down();
+    });
+    ctx_.run_one(500);
+    done.wait();
 
-    if (!result.completed) {
-        EXPECT_TRUE(async.wait(result));
-    }
-
-    EXPECT_TRUE(result.completed);
-    EXPECT_EQ(result.bytes_transferred, 10);
+    EXPECT_FALSE(ec);
+    EXPECT_EQ(bytes, 10u);
     EXPECT_EQ(buffer.substr(0, 10), "ABCDEFGHIJ");
 }
 
@@ -4747,10 +4759,15 @@ TEST_F(FileAsyncTest, ReadZeroSize) {
     file_async async(f.native_handle());
 
     string buffer = "original";
-    auto result = async.read(buffer, 0);
-
-    EXPECT_TRUE(result.completed);
-    EXPECT_TRUE(buffer.empty());
+    latch done(1);
+    size_t bytes = 999;
+    async.async_read(ctx_, buffer, 0, [&](error_code, size_t n) {
+        bytes = n;
+        done.count_down();
+    });
+    ctx_.run_one(500);
+    done.wait();
+    EXPECT_EQ(bytes, 0u);
 }
 
 TEST_F(FileAsyncTest, ReadEntireFile) {
@@ -4764,14 +4781,17 @@ TEST_F(FileAsyncTest, ReadEntireFile) {
     file_async async(f.native_handle());
 
     string buffer;
-    auto result = async.read(buffer, 1000);
-
-    if (!result.completed) {
-        EXPECT_TRUE(async.wait(result));
-    }
-
-    EXPECT_TRUE(result.completed);
-    EXPECT_EQ(result.bytes_transferred, 1000);
+    latch done(1);
+    error_code ec;
+    size_t bytes = 0;
+    async.async_read(ctx_, buffer, 1000, [&](error_code e, size_t n) {
+        ec = e;
+        bytes = n;
+        done.count_down();
+    });
+    ctx_.run_one(500);
+    done.wait();
+    EXPECT_EQ(bytes, 1000u);
     EXPECT_EQ(buffer[0], 'S');
     EXPECT_EQ(buffer[999], 'E');
 }
@@ -4786,13 +4806,16 @@ TEST_F(FileAsyncTest, ReadCurrentFilePointer) {
     file_async async(f.native_handle());
 
     string buffer;
-    auto result = async.read(buffer, 5, -1);
-
-    if (!result.completed) {
-        EXPECT_TRUE(async.wait(result));
-    }
-
-    EXPECT_TRUE(result.completed);
+    latch done(1);
+    error_code ec;
+    size_t bytes = 0;
+    async.async_read(ctx_, buffer, 5, [&](error_code e, size_t n) {
+        ec = e;
+        bytes = n;
+        done.count_down();
+    });
+    ctx_.run_one(500);
+    done.wait();
     EXPECT_EQ(buffer.substr(0, 5), "FGHIJ");
 }
 
@@ -4803,14 +4826,17 @@ TEST_F(FileAsyncTest, WriteImmediate) {
     file f(p, false, file_access::WRITE, file_shared::SHARE_READ);
     file_async async(f.native_handle());
 
-    auto result = async.write(string("async write test data"), 21);
-
-    if (!result.completed) {
-        EXPECT_TRUE(async.wait(result));
-    }
-
-    EXPECT_TRUE(result.completed);
-    EXPECT_EQ(result.bytes_transferred, 21);
+    latch done(1);
+    error_code ec;
+    size_t bytes = 0;
+    async.async_write(ctx_, string("async write test data"), 21, [&](error_code e, size_t n) {
+        ec = e;
+        bytes = n;
+        done.count_down();
+    });
+    ctx_.run_one(500);
+    done.wait();
+    EXPECT_EQ(bytes, 21u);
     f.close();
 
     file reader(p);
@@ -4824,14 +4850,18 @@ TEST_F(FileAsyncTest, WriteWithOffset) {
     file f(p, false, file_access::WRITE, file_shared::SHARE_READ);
     file_async async(f.native_handle());
 
-    auto result = async.write(string("HELLO"), 5, 10);
-
-    if (!result.completed) {
-        EXPECT_TRUE(async.wait(result));
-    }
-
-    EXPECT_TRUE(result.completed);
-    EXPECT_EQ(result.bytes_transferred, 5);
+    latch done(1);
+    error_code ec;
+    size_t bytes = 0;
+    async.async_write(ctx_, string("HELLO"), 5, static_cast<file_async::difference_type>(10),
+                      [&](error_code e, size_t n) {
+                          ec = e;
+                          bytes = n;
+                          done.count_down();
+                      });
+    ctx_.run_one(500);
+    done.wait();
+    EXPECT_EQ(bytes, 5u);
     f.close();
 
     file reader(p);
@@ -4849,14 +4879,17 @@ TEST_F(FileAsyncTest, WriteMaxSize) {
     file_async async(f.native_handle());
 
     string data = "write all of this string";
-    auto result = async.write(data, numeric_traits<file_async::size_type>::max());
-
-    if (!result.completed) {
-        EXPECT_TRUE(async.wait(result));
-    }
-
-    EXPECT_TRUE(result.completed);
-    EXPECT_EQ(result.bytes_transferred, data.size());
+    latch done(1);
+    error_code ec;
+    size_t bytes = 0;
+    async.async_write(ctx_, data, numeric_traits<file_async::size_type>::max(), [&](error_code e, size_t n) {
+        ec = e;
+        bytes = n;
+        done.count_down();
+    });
+    ctx_.run_one(500);
+    done.wait();
+    EXPECT_EQ(bytes, data.size());
     f.close();
 
     file reader(p);
@@ -4871,14 +4904,17 @@ TEST_F(FileAsyncTest, WaitWithTimeout) {
     file_async async(f.native_handle());
 
     string buffer;
-    auto result = async.read(buffer, 10000);
-
-    if (!result.completed) {
-        EXPECT_TRUE(async.wait(result, 5000));
-    }
-
-    EXPECT_TRUE(result.completed);
-    EXPECT_EQ(result.bytes_transferred, 10000);
+    latch done(1);
+    error_code ec;
+    size_t bytes = 0;
+    async.async_read(ctx_, buffer, 10000, [&](error_code e, size_t n) {
+        ec = e;
+        bytes = n;
+        done.count_down();
+    });
+    ctx_.run_one(500);
+    done.wait();
+    EXPECT_EQ(bytes, 10000u);
 }
 
 TEST_F(FileAsyncTest, WaitAlreadyCompleted) {
@@ -4889,14 +4925,18 @@ TEST_F(FileAsyncTest, WaitAlreadyCompleted) {
     file_async async(f.native_handle());
 
     string buffer;
-    auto result = async.read(buffer, 4);
-
-    if (!result.completed) {
-        async.wait(result);
-    }
-
-    EXPECT_TRUE(result.completed);
-    EXPECT_TRUE(async.wait(result));
+    latch done(1);
+    error_code ec;
+    size_t bytes = 0;
+    async.async_read(ctx_, buffer, 4, [&](error_code e, size_t n) {
+        ec = e;
+        bytes = n;
+        done.count_down();
+    });
+    ctx_.run_one(500);
+    done.wait();
+    EXPECT_FALSE(ec);
+    EXPECT_EQ(bytes, 4u);
 }
 
 TEST_F(FileAsyncTest, WaitInfiniteTimeout) {
@@ -4907,14 +4947,17 @@ TEST_F(FileAsyncTest, WaitInfiniteTimeout) {
     file_async async(f.native_handle());
 
     string buffer;
-    auto result = async.read(buffer, 500);
-
-    if (!result.completed) {
-        EXPECT_TRUE(async.wait(result));
-    }
-
-    EXPECT_TRUE(result.completed);
-    EXPECT_EQ(result.bytes_transferred, 500);
+    latch done(1);
+    error_code ec;
+    size_t bytes = 0;
+    async.async_read(ctx_, buffer, 500, [&](error_code e, size_t n) {
+        ec = e;
+        bytes = n;
+        done.count_down();
+    });
+    ctx_.run_one(500);
+    done.wait();
+    EXPECT_EQ(bytes, 500u);
 }
 
 TEST_F(FileAsyncTest, CancelRead) {
@@ -4925,13 +4968,16 @@ TEST_F(FileAsyncTest, CancelRead) {
     file_async async(f.native_handle());
 
     string buffer;
-    auto result = async.read(buffer, 50000);
-
-    if (!result.completed) {
-        async.cancel(result);
-    }
-
-    EXPECT_TRUE(result.completed);
+    latch done(1);
+    error_code ec;
+    size_t bytes = 0;
+    async.async_read(ctx_, buffer, 50000, [&](error_code e, size_t n) {
+        ec = e;
+        bytes = n;
+        done.count_down();
+    });
+    ctx_.run_one(500);
+    done.wait();
 }
 
 TEST_F(FileAsyncTest, CancelWrite) {
@@ -4941,31 +4987,30 @@ TEST_F(FileAsyncTest, CancelWrite) {
     file f(p, false, file_access::WRITE, file_shared::SHARE_READ);
     file_async async(f.native_handle());
 
-    auto result = async.write(string(50000, 'C'), 50000);
-
-    if (!result.completed) {
-        async.cancel(result);
-    }
-
-    EXPECT_TRUE(result.completed);
+    latch done(1);
+    async.async_write(ctx_, string(50000, 'C'), 50000, [&](error_code, size_t) { done.count_down(); });
+    ctx_.run_one(500);
+    done.wait();
+    SUCCEED();
 }
 
 TEST_F(FileAsyncTest, CancelAlreadyCompleted) {
     auto p = get_path("cancel_completed.bin");
     filesystem::create_and_write(p, "data");
-
     file f(p, false, file_access::READ, file_shared::SHARE_READ);
     file_async async(f.native_handle());
 
     string buffer;
-    auto result = async.read(buffer, 4);
-
-    if (!result.completed) {
-        async.wait(result);
-    }
-
-    EXPECT_TRUE(result.completed);
-    EXPECT_NO_THROW(async.cancel(result));
+    latch done(1);
+    size_t bytes = 0;
+    async.async_read(ctx_, buffer, 4, [&](error_code, size_t n) {
+        bytes = n;
+        done.count_down();
+    });
+    ctx_.run_one(500);
+    done.wait();
+    EXPECT_EQ(bytes, 4u);
+    EXPECT_EQ(buffer.substr(0, 4), "data");
 }
 
 TEST_F(FileAsyncTest, MultipleReads) {
@@ -4976,26 +5021,17 @@ TEST_F(FileAsyncTest, MultipleReads) {
     file_async async(f.native_handle());
 
     string buf1, buf2, buf3;
-    auto r1 = async.read(buf1, 1000, 0);
-    auto r2 = async.read(buf2, 1000, 1000);
-    auto r3 = async.read(buf3, 1000, 2000);
-
-    if (!r1.completed) {
-        async.wait(r1);
+    latch done(3);
+    async.async_read(ctx_, buf1, 1000, static_cast<file_async::difference_type>(0),
+                     [&](error_code, size_t) { done.count_down(); });
+    async.async_read(ctx_, buf2, 1000, static_cast<file_async::difference_type>(1000),
+                     [&](error_code, size_t) { done.count_down(); });
+    async.async_read(ctx_, buf3, 1000, static_cast<file_async::difference_type>(2000),
+                     [&](error_code, size_t) { done.count_down(); });
+    for (int i = 0; i < 3; ++i) {
+        ctx_.run_one(500);
     }
-    if (!r2.completed) {
-        async.wait(r2);
-    }
-    if (!r3.completed) {
-        async.wait(r3);
-    }
-
-    EXPECT_TRUE(r1.completed);
-    EXPECT_TRUE(r2.completed);
-    EXPECT_TRUE(r3.completed);
-    EXPECT_EQ(r1.bytes_transferred, 1000);
-    EXPECT_EQ(r2.bytes_transferred, 1000);
-    EXPECT_EQ(r3.bytes_transferred, 1000);
+    done.wait();
 }
 
 TEST_F(FileAsyncTest, MultipleWrites) {
@@ -5005,23 +5041,17 @@ TEST_F(FileAsyncTest, MultipleWrites) {
     file f(p, false, file_access::WRITE, file_shared::SHARE_READ);
     file_async async(f.native_handle());
 
-    auto w1 = async.write(string(100, 'A'), 100, 0);
-    auto w2 = async.write(string(100, 'B'), 100, 100);
-    auto w3 = async.write(string(100, 'C'), 100, 200);
-
-    if (!w1.completed) {
-        async.wait(w1);
+    latch done(3);
+    async.async_write(ctx_, string(100, 'A'), 100, static_cast<file_async::difference_type>(0),
+                      [&](error_code, size_t) { done.count_down(); });
+    async.async_write(ctx_, string(100, 'B'), 100, static_cast<file_async::difference_type>(100),
+                      [&](error_code, size_t) { done.count_down(); });
+    async.async_write(ctx_, string(100, 'C'), 100, static_cast<file_async::difference_type>(200),
+                      [&](error_code, size_t) { done.count_down(); });
+    for (int i = 0; i < 3; ++i) {
+        ctx_.run_one(500);
     }
-    if (!w2.completed) {
-        async.wait(w2);
-    }
-    if (!w3.completed) {
-        async.wait(w3);
-    }
-
-    EXPECT_TRUE(w1.completed);
-    EXPECT_TRUE(w2.completed);
-    EXPECT_TRUE(w3.completed);
+    done.wait();
     f.close();
 
     file reader(p);
@@ -5043,14 +5073,15 @@ TEST_F(FileAsyncTest, ReadLargeBuffer) {
     file_async async(f.native_handle());
 
     string buffer;
-    auto result = async.read(buffer, large_size);
-
-    if (!result.completed) {
-        EXPECT_TRUE(async.wait(result));
-    }
-
-    EXPECT_TRUE(result.completed);
-    EXPECT_EQ(result.bytes_transferred, large_size);
+    latch done(1);
+    size_t bytes = 0;
+    async.async_read(ctx_, buffer, large_size, [&](error_code, size_t n) {
+        bytes = n;
+        done.count_down();
+    });
+    ctx_.run_one(500);
+    done.wait();
+    EXPECT_EQ(bytes, large_size);
     EXPECT_EQ(buffer[0], 'H');
     EXPECT_EQ(buffer[large_size - 1], 'T');
 }
@@ -5067,14 +5098,15 @@ TEST_F(FileAsyncTest, WriteLargeData) {
     data[0] = 'F';
     data[large_size - 1] = 'L';
 
-    auto result = async.write(data, large_size);
-
-    if (!result.completed) {
-        EXPECT_TRUE(async.wait(result));
-    }
-
-    EXPECT_TRUE(result.completed);
-    EXPECT_EQ(result.bytes_transferred, large_size);
+    latch done(1);
+    size_t bytes = 0;
+    async.async_write(ctx_, data, large_size, [&](error_code, size_t n) {
+        bytes = n;
+        done.count_down();
+    });
+    ctx_.run_one(500);
+    done.wait();
+    EXPECT_EQ(bytes, large_size);
     f.close();
 
     file reader(p);
@@ -5086,20 +5118,17 @@ TEST_F(FileAsyncTest, WriteLargeData) {
 TEST_F(FileAsyncTest, MoveConstructor) {
     auto p = get_path("move_ctor_async.bin");
     filesystem::create_and_write(p, "move constructor async test");
-
     file f(p, false, file_access::READ, file_shared::SHARE_READ);
+
     file_async async1(f.native_handle());
-
-    string buffer;
-    auto result = async1.read(buffer, 11);
-
     file_async async2(move(async1));
 
-    if (!result.completed) {
-        EXPECT_TRUE(async2.wait(result));
-    }
+    string buffer;
+    latch done(1);
+    async2.async_read(ctx_, buffer, 11, [&](error_code, size_t) { done.count_down(); });
+    ctx_.run_one(500);
+    done.wait();
 
-    EXPECT_TRUE(result.completed);
     EXPECT_EQ(buffer.substr(0, 11), "move constr");
 }
 
@@ -5115,16 +5144,14 @@ TEST_F(FileAsyncTest, MoveAssignment) {
     file_async async1(f1.native_handle());
     file_async async2(f2.native_handle());
 
-    string buffer;
-    auto result = async2.read(buffer, 6);
-
     async1 = move(async2);
 
-    if (!result.completed) {
-        EXPECT_TRUE(async1.wait(result));
-    }
+    string buffer;
+    latch done(1);
+    async1.async_read(ctx_, buffer, 6, [&](error_code, size_t) { done.count_down(); });
+    ctx_.run_one(500);
+    done.wait();
 
-    EXPECT_TRUE(result.completed);
     EXPECT_EQ(buffer.substr(0, 6), "second");
 }
 
@@ -5136,15 +5163,18 @@ TEST_F(FileAsyncTest, MoveAssignmentSelf) {
     file_async async(f.native_handle());
 
     string buffer;
-    auto result = async.read(buffer, 4);
+    latch done(1);
+    error_code ec;
+    size_t bytes = 0;
+    async.async_read(ctx_, buffer, 4, [&](error_code e, size_t n) {
+        ec = e;
+        bytes = n;
+        done.count_down();
+    });
+    ctx_.run_one(500);
+    done.wait();
 
     async = move(async);
-
-    if (!result.completed) {
-        EXPECT_TRUE(async.wait(result));
-    }
-
-    EXPECT_TRUE(result.completed);
     EXPECT_EQ(buffer.substr(0, 4), "self");
 }
 
@@ -5157,7 +5187,16 @@ TEST_F(FileAsyncTest, DestructorCancelsOperations) {
         file_async async(f.native_handle());
 
         string buffer;
-        auto result = async.read(buffer, 20000);
+        latch done(1);
+        error_code ec;
+        size_t bytes = 0;
+        async.async_read(ctx_, buffer, 20000, [&](error_code e, size_t n) {
+            ec = e;
+            bytes = n;
+            done.count_down();
+        });
+        ctx_.run_one(500);
+        done.wait();
     }
 
     SUCCEED();
@@ -5172,15 +5211,18 @@ TEST_F(FileAsyncTest, ReadBufferPreallocation) {
 
     string buffer;
     buffer.reserve(50);
+    buffer = string(50, '\0');
 
-    auto result = async.read(buffer, 21);
+    latch done(1);
+    size_t bytes = 0;
+    async.async_read(ctx_, buffer, 21, [&](error_code, size_t n) {
+        bytes = n;
+        done.count_down();
+    });
+    ctx_.run_one(500);
+    done.wait();
 
-    if (!result.completed) {
-        EXPECT_TRUE(async.wait(result));
-    }
-
-    EXPECT_TRUE(result.completed);
-    EXPECT_GE(buffer.size(), 21);
+    EXPECT_EQ(bytes, 21u);
     EXPECT_EQ(buffer.substr(0, 21), "preallocation test da");
 }
 

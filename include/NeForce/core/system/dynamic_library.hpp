@@ -8,7 +8,7 @@
  * 此文件提供了动态链接库加载和符号解析功能。
  */
 
-#include "NeForce/core/string/string.hpp"
+#include "NeForce/core/exception/system_exception.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
@@ -23,14 +23,15 @@ NEFORCE_BEGIN_NAMESPACE__
  */
 struct dynamic_library_exception final : system_exception {
     explicit dynamic_library_exception(const char* info = "Dynamic Library Operation Failed.",
-                                       const char* type = static_type, const int code = 0) noexcept :
-    system_exception(info, type, code) {}
+                                       const error_code code = last_error()) noexcept :
+    system_exception(info, code) {}
 
     explicit dynamic_library_exception(const exception& e) :
     system_exception(e) {}
 
     ~dynamic_library_exception() override = default;
-    static constexpr auto static_type = "dynamic_library_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "dynamic_library_exception"; }
 };
 
 /** @} */ // Exceptions

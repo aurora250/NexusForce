@@ -92,9 +92,9 @@ bool websocket_server::handle_upgrade(const http_request& request, unique_ptr<tc
         return false;
     }
 
-    auto session = make_shared<websocket_session>(move(sock), this);
-    if (loop_ != nullptr) {
-        session->set_event_loop(loop_);
+    const auto session = make_shared<websocket_session>(move(sock), this);
+    if (ctx_ != nullptr) {
+        session->set_io_context(*ctx_);
     }
 
 #ifdef NEFORCE_SUPPORT_ZLIB
@@ -139,7 +139,7 @@ void websocket_server::stop() {
         lock<mutex> lk(sessions_mutex_);
         sessions_copy.swap(sessions_);
     }
-    for (auto& session: sessions_copy) {
+    for (const auto& session: sessions_copy) {
         session->stop();
     }
 }
@@ -168,7 +168,7 @@ bool websocket_session::queue_frame(byte_vector frame, const bool is_control) {
             write_queue_.push(move(frame));
         }
     }
-    if (event_driven_ && loop_ != nullptr) {
+    if (event_driven_ && ctx_ != nullptr) {
         flush_event_writes();
     } else {
         write_cv_.notify_one();
@@ -504,13 +504,13 @@ void websocket_session::do_stop(websocket_status status, const string& reason, b
 
     running_ = false;
 
-    if (event_driven_ && loop_ != nullptr) {
+    if (event_driven_ && ctx_ != nullptr) {
         if (heartbeat_timer_id_ != 0) {
-            loop_->cancel_timer(heartbeat_timer_id_);
+            ctx_->cancel_timer(heartbeat_timer_id_);
             heartbeat_timer_id_ = 0;
         }
         const int fd = static_cast<int>(socket_->native_handle());
-        loop_->remove_fd(fd);
+        ctx_->remove_fd(fd);
     } else {
         write_cv_.notify_all();
     }
@@ -572,7 +572,7 @@ void websocket_session::start() {
     }
     last_pong_ms_ = now_ms();
 
-    if (event_driven_ && loop_ != nullptr) {
+    if (event_driven_ && ctx_ != nullptr) {
         start_event_driven();
     } else {
         socket_->set_nonblocking(false);
@@ -647,20 +647,20 @@ void websocket_session::start_event_driven() {
 
     auto self = shared_from_this();
 
-    loop_->add_fd(fd, epoll_in, [self](int f, uint32_t ev) {
+    ctx_->add_fd(fd, epoll_in, [self](int f, uint32_t ev, error_code) {
         if (ev & epoll_in) {
-            self->on_readable(f, ev);
+            self->on_readable(f, ev, error_code{});
         }
         if (ev & epoll_out) {
-            self->on_writable(f, ev);
+            self->on_writable(f, ev, error_code{});
         }
     });
 
-    heartbeat_timer_id_ = loop_->schedule_timer(static_cast<uint64_t>(heartbeat_interval_sec.count() * 1000),
-                                                [self]() { self->on_heartbeat_timer(); });
+    heartbeat_timer_id_ = ctx_->schedule_timer(static_cast<uint64_t>(heartbeat_interval_sec.count() * 1000),
+                                               [self]() { self->on_heartbeat_timer(); });
 }
 
-void websocket_session::on_readable(int /*fd*/, uint32_t /*events*/) {
+void websocket_session::on_readable(int /*fd*/, uint32_t /*events*/, error_code /*ec*/) {
     if (!running_) {
         return;
     }
@@ -687,8 +687,8 @@ void websocket_session::try_parse_frames() {
         if (!b0_opt || !b1_opt) {
             return;
         }
-        uint8_t b0 = *b0_opt;
-        uint8_t b1 = *b1_opt;
+        const uint8_t b0 = *b0_opt;
+        const uint8_t b1 = *b1_opt;
 
         websocket_frame_header hdr;
         hdr.opcode = b0 & 0x0F;
@@ -768,7 +768,7 @@ void websocket_session::try_parse_frames() {
     }
 }
 
-void websocket_session::on_writable(int /*fd*/, uint32_t /*events*/) { flush_event_writes(); }
+void websocket_session::on_writable(int /*fd*/, uint32_t /*events*/, error_code /*ec*/) { flush_event_writes(); }
 
 void websocket_session::flush_event_writes() {
     lock<mutex> lk(write_mutex_);
@@ -795,7 +795,7 @@ void websocket_session::flush_event_writes() {
 
     if (ctrl_queue_.empty() && write_queue_.empty() && running_) {
         const int fd = static_cast<int>(socket_->native_handle());
-        loop_->mod_fd(fd, epoll_in);
+        ctx_->mod_fd(fd, epoll_in);
     }
 }
 
@@ -818,8 +818,8 @@ void websocket_session::on_heartbeat_timer() {
     }
 
     auto self = shared_from_this();
-    heartbeat_timer_id_ = loop_->schedule_timer(static_cast<uint64_t>(heartbeat_interval_sec.count() * 1000),
-                                                [self]() { self->on_heartbeat_timer(); });
+    heartbeat_timer_id_ = ctx_->schedule_timer(static_cast<uint64_t>(heartbeat_interval_sec.count() * 1000),
+                                               [self]() { self->on_heartbeat_timer(); });
 }
 
 NEFORCE_END_HTTP__

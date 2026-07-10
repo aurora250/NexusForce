@@ -15,31 +15,6 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Exceptions 异常类集
- * @brief 异常类集
- * @{
- */
-
-/**
- * @struct allocate_exception
- * @brief 内存分配异常
- */
-struct allocate_exception final : memory_exception {
-    explicit allocate_exception(const char* info = "Memory Allocation Failed.", const char* type = static_type) noexcept
-    :
-    memory_exception(info, type) {}
-
-    explicit allocate_exception(const exception& e) :
-    memory_exception(e) {}
-
-    ~allocate_exception() override = default;
-    static constexpr auto static_type = "allocate_exception";
-};
-
-
-/** @} */ // Exceptions
-
-/**
  * @defgroup MemoryAllocator 内存分配器
  * @brief 内存分配器的实现
  * @{

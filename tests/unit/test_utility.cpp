@@ -3,6 +3,7 @@
 #include <NeForce/core/utility/any.hpp>
 #include <NeForce/core/utility/byte_size.hpp>
 #include <NeForce/core/utility/color.hpp>
+#include <NeForce/core/utility/expected.hpp>
 #include <NeForce/core/utility/hexadecimal.hpp>
 #include <NeForce/core/utility/optional.hpp>
 #include <NeForce/core/utility/scope.hpp>

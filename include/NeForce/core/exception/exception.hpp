@@ -18,18 +18,19 @@ NEFORCE_BEGIN_NAMESPACE__
  * @{
  */
 
-#define __NEFORCE_ERROR_CONSTRUCTOR(THIS, BASE, INFO)                                                     \
-    explicit THIS(const char* info = INFO, const char* type = static_type, const int code = 0) noexcept : \
-    BASE(info, type, code) {}                                                                             \
-                                                                                                          \
-    explicit THIS(const exception& e) :                                                                   \
+#define __NEFORCE_ERROR_CONSTRUCTOR(THIS, BASE, INFO) \
+    explicit THIS(const char* info = INFO) noexcept : \
+    BASE(info) {}                                     \
+                                                      \
+    explicit THIS(const exception& e) :               \
     BASE(e) {}
 
-#define __NEFORCE_ERROR_DERIVED_DESTRUCTOR(CLASS) virtual ~CLASS() = default;
+#define __NEFORCE_ERROR_DERIVED_DESTRUCTOR(CLASS) ~CLASS() override = default;
 
 #define __NEFORCE_ERROR_FINAL_DESTRUCTOR(CLASS) ~CLASS() override = default;
 
-#define __NEFORCE_ERROR_TYPE(CLASS) static constexpr auto static_type = #CLASS;
+#define __NEFORCE_ERROR_TYPE(CLASS) \
+    NEFORCE_NODISCARD const char* type() const noexcept override { return #CLASS; }
 
 /**
  * @def NEFORCE_ERROR_BUILD_DERIVED_CLASS
@@ -76,37 +77,24 @@ NEFORCE_BEGIN_NAMESPACE__
 struct exception {
 private:
     static constexpr size_t INFO_SIZE = 256; // 异常信息长度
-    static constexpr size_t TYPE_SIZE = 48;  // 类型名称长度
 
     char info_[INFO_SIZE]; // 异常信息
-    char type_[TYPE_SIZE]; // 异常类型
-    int code_{0};
 
 public:
     /**
      * @brief 构造函数
      * @param info 异常信息
-     * @param type 异常类型
-     * @param code 异常码
      */
-    explicit exception(const char* info = static_type, const char* type = static_type, const int code = 0) :
-    code_(code) {
+    explicit exception(const char* info = "") {
         string_copy(info_, info, INFO_SIZE - 1);
-        string_copy(type_, type, TYPE_SIZE - 1);
         // NOLINTNEXTLINE(clang-analyzer-core.NullDereference)
         info_[INFO_SIZE - 1] = '\0';
-        // NOLINTNEXTLINE(clang-analyzer-core.NullDereference)
-        type_[TYPE_SIZE - 1] = '\0';
     }
 
     /**
      * @brief 复制构造函数
      */
-    exception(const exception& other) noexcept {
-        memory_copy(info_, other.info_, INFO_SIZE);
-        memory_copy(type_, other.type_, TYPE_SIZE);
-        code_ = other.code_;
-    }
+    exception(const exception& other) noexcept { memory_copy(info_, other.info_, INFO_SIZE); }
 
     /**
      * @brief 复制赋值运算符
@@ -117,8 +105,6 @@ public:
         }
 
         memory_copy(info_, other.info_, INFO_SIZE);
-        memory_copy(type_, other.type_, TYPE_SIZE);
-        code_ = other.code_;
 
         return *this;
     }
@@ -126,13 +112,9 @@ public:
     /**
      * @brief 移动构造函数
      */
-    exception(exception&& other) noexcept :
-    code_(other.code_) {
+    exception(exception&& other) noexcept {
         memory_copy(info_, other.info_, INFO_SIZE);
-        memory_copy(type_, other.type_, TYPE_SIZE);
         other.info_[0] = '\0';
-        other.type_[0] = '\0';
-        other.code_ = 0;
     }
 
     /**
@@ -144,12 +126,8 @@ public:
         }
 
         memory_copy(info_, other.info_, INFO_SIZE);
-        memory_copy(type_, other.type_, TYPE_SIZE);
-        code_ = other.code_;
 
         other.info_[0] = '\0';
-        other.type_[0] = '\0';
-        other.code_ = 0;
 
         return *this;
     }
@@ -174,21 +152,13 @@ public:
      * @brief 获取错误信息
      * @return 错误信息字符串
      */
-    NEFORCE_NODISCARD const char* what() const noexcept { return info_; }
+    NEFORCE_NODISCARD virtual const char* what() const noexcept { return info_; }
 
     /**
      * @brief 获取异常类型
      * @return 异常类型字符串
      */
-    NEFORCE_NODISCARD const char* type() const noexcept { return type_; }
-
-    /**
-     * @brief 获取异常码
-     * @return 异常类型码
-     */
-    NEFORCE_NODISCARD int code() const noexcept { return code_; }
-
-    static constexpr auto static_type = "exception"; ///< 静态类型字符串
+    NEFORCE_NODISCARD virtual const char* type() const noexcept { return "exception"; }
 };
 
 /**
@@ -198,10 +168,10 @@ public:
 NEFORCE_ERROR_BUILD_DERIVED_CLASS(memory_exception, exception, "Memory Operation Failed.")
 
 /**
- * @struct system_exception
- * @brief 系统访问异常
+ * @struct allocate_exception
+ * @brief 内存分配异常
  */
-NEFORCE_ERROR_BUILD_DERIVED_CLASS(system_exception, exception, "System Access Failed.")
+NEFORCE_ERROR_BUILD_DERIVED_CLASS(allocate_exception, memory_exception, "Memory Allocation Failed.")
 
 /**
  * @struct iterator_exception
@@ -222,18 +192,6 @@ NEFORCE_ERROR_BUILD_DERIVED_CLASS(typecast_exception, memory_exception, "Type Ca
 NEFORCE_ERROR_BUILD_DERIVED_CLASS(value_exception, exception, "Variable Operation Invalid.")
 
 /**
- * @struct device_exception
- * @brief 设备行为异常
- */
-NEFORCE_ERROR_BUILD_DERIVED_CLASS(device_exception, system_exception, "Device Operation Failed.")
-
-/**
- * @struct file_exception
- * @brief 文件处理异常
- */
-NEFORCE_ERROR_BUILD_FINAL_CLASS(file_exception, system_exception, "File Operation Failed.")
-
-/**
  * @struct math_exception
  * @brief 数学计算异常
  */
@@ -250,12 +208,6 @@ NEFORCE_ERROR_BUILD_DERIVED_CLASS(thirdparty_exception, exception, "ThirdParty O
  * @brief 数据库行为异常
  */
 NEFORCE_ERROR_BUILD_DERIVED_CLASS(database_exception, thirdparty_exception, "Database Operation Failed.")
-
-/**
- * @struct network_exception
- * @brief 网络操作或行为异常
- */
-NEFORCE_ERROR_BUILD_DERIVED_CLASS(network_exception, exception, "Network Operation or Action Failed.")
 
 /** @} */ // Exceptions
 

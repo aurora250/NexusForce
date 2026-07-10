@@ -24,16 +24,16 @@ NEFORCE_BEGIN_NAMESPACE__
  * @struct cmdline_exception
  * @brief 命令行解析异常
  */
-struct cmdline_exception final : system_exception {
-    explicit cmdline_exception(const char* info = "CmdLine Operation Failed.", const char* type = static_type,
-                               const int code = 0) noexcept :
-    system_exception(info, type, code) {}
+struct cmdline_exception final : value_exception {
+    explicit cmdline_exception(const char* info = "CmdLine Operation Failed.") noexcept :
+    value_exception(info) {}
 
     explicit cmdline_exception(const exception& e) :
-    system_exception(e) {}
+    value_exception(e) {}
 
     ~cmdline_exception() override = default;
-    static constexpr auto static_type = "cmdline_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "cmdline_exception"; }
 };
 
 /** @} */ // Exceptions

@@ -3,7 +3,8 @@
 ## [1.0.0-rc] - 2026-06-19
 
 ### 🚀 New Features
-- 添加 UTF-8 码点迭代器 `utf8_iterator` / `utf8_range` / `utf8_view`，支持 range-for 字符级遍历
+
+- 添加 UTF-8 码点迭代器 `utf8_iterator` / `utf8_range` / `utf8_view`
 - format 引擎支持位置参数 `{0}` `{1}` 和顺序格式选项 `{:d}` `{:x}`
 - 添加命名参数格式化函数 `format_named()`
 - regex 支持拷贝构造和拷贝赋值
@@ -11,13 +12,10 @@
 - 实现反射驱动的 JSON 序列化器 `json_serializer`（序列化/反序列化/递归嵌套/容器遍历）
 - 实现反射驱动的二进制序列化器 `binary_serializer`（大端格式、类型表、属性注解控制）
 - 添加 GoogleBenchmark 配置
-- `sql_builder` 达到 ANSI SQL-92 Entry/Intermediate 级完整覆盖
-- `sql_builder` 添加方言感知占位符支持（Generic/MySQL/SQLite/MSSQL → `?`，PostgreSQL → `$N`，Oracle → `:N`），新增 `set_dialect()` / `placeholder()` / `next_placeholder()` / `set_param()` / `param_count()` API
-- `sql_builder` 添加方言感知建表（AUTO_INCREMENT / SERIAL / IDENTITY / GENERATED AS IDENTITY）和方言感知分页（LIMIT/OFFSET / FETCH FIRST）
+- `sql_builder` 达到 ANSI SQL-92 Entry/Intermediate 级完整覆盖，添加方言感知占位符、建表、分页操作
 - 添加 `sql_mapper<T>` 反射驱动 ORM SQL 生成器，自动生成 DDL（CREATE/DROP TABLE）和 DML（INSERT/UPDATE/DELETE/SELECT）语句，支持方言感知占位符
-- 添加 `repository<T, Connect>` 泛型 CRUD 仓库模板，封装 `sql_mapper` 提供高层数据访问接口（find_all / find_by_pk / find_where / find_page / insert / update / remove / count）
+- 添加 `repository<T, Connect>` 泛型 CRUD 仓库模板，封装 `sql_mapper` 提供高层数据访问接口
 - `property_attr` 添加 DB 注解标志：`PROP_PRIMARY_KEY` / `PROP_AUTO_INC` / `PROP_UNIQUE` / `PROP_INDEX` / `PROP_FOREIGN_KEY`
-- 添加 ORM 示例 `orm_example`，展示 `sql_mapper` SQL 生成与 `repository` CRUD 操作
 - 添加 HTTP/2 (h2) TLS+ALPN 协商支持，`ssl_stream::get_alpn_negotiated()` 接口
 - 添加 HTTP/2 连接管理 `http2_connection`（h2c 升级 + h2 ALPN 双模式）
 - 添加 HTTP/2 协议帧处理 `http2_protocol`
@@ -39,8 +37,21 @@
 - 添加 `sparse_map`，基于 `sparse_vector` 的唯一键映射容器，支持 `operator[]` / `at()` 访问
 - 添加 `sparse_multiset`，基于 `sparse_vector` 的可重复键集合容器
 - 添加 `sparse_multimap`，基于 `sparse_vector` 的可重复键映射容器
+- 添加 `tcp_socket::async_connect()` / `async_read()` / `async_write()`，通过 `io_context` 驱动的异步 TCP 操作，支持取消槽
+- 添加 `udp_socket::async_receive_from()` / `async_send_to()`，支持异步 UDP 数据报收发与发送方地址回调
+- 添加 `file_async::async_read()` / `async_write()`，通过 `io_context` 驱动的异步文件 I/O，支持指定偏移量与取消槽
+- 添加 `async_read()` / `async_write()` 自由函数组合器，基于 `shared_from_this` 自动处理部分读写重试
+- 添加 `thread_pool_executor`，将 `thread_pool::submit_task()` 适配为标准 executor 接口
 
 ### 🔧 Improvements
+
+- `tcp_socket` 继承 `async_stream` 抽象接口，统一异步读写协议
+- `tcp_client` / `tcp_server` / `tcp_acceptor` 适配 `io_context` + `cancellation_slot` 异步模式
+- `http_client` / `http_server` / `http2_connection` / `websocket` / `reverse_proxy` 适配 `io_context` 事件驱动模型
+- 异常构造使用 `error_code` 替代原始 `int` 错误码，统一错误信息传递
+- `timer` 添加任务取消标志检查，取消后的任务节点跳过执行
+- 移除独立 `event_loop`，事件循环功能并入 `io_context`
+- 异常体系移除 `static_type`，改用 `type()` 虚函数
 - `char_traits_find` 窄字符子串搜索采用 Boyer-Moore-Horspool 算法，平均 O(n) 复杂度
 - `standard_allocator` 添加 `max_size()` 成员函数
 - `regex_iterator` 改为惰性求值 forward_iterator，避免全量缓存 O(n) 内存占用
@@ -72,6 +83,7 @@
 - 添加 `meta_any::emplace<T>()` 原地构造，支持不可拷贝/不可移动类型
 
 ### 🐛 Bug Fixes
+
 - 修复 `__string_bitmap` 对 `char16_t`/`char32_t` 宽字符截断高位导致 false positive
 - 修复 `utf8_iterator::operator++` 无效 UTF-8 字节跳过数量错误（以 `decode_utf8` 实际消耗代替 `utf8_length()`）
 - 修复 `utf8_iterator::operator==` 空 range 比较失败导致 range-for 死循环
@@ -97,11 +109,26 @@
 - 修复 `binary_serializer::deserialize()` 中 `be_to_host(read_beXX())` 双重字节序转换导致整数损坏
 - 修复 `dynamic_library::load_by_name()` 在 Linux 上对含版本后缀的名称（如 `libpthread.so.0`）错误追加 `.so` 后缀的问题
 - 修复 `share_memory::map()` 在只读访问模式下因 `__atomic_compare_exchange_n` 在 x86 上失败时仍执行写入（`lock cmpxchg`）导致 SIGSEGV 的问题
+- 修复 `semaphore` 条件判断反转：`update > 0` 改为 `update <= 0`，修正 release 后未正确唤醒等待线程的问题
 - 修复 `thread_pool` 在 cached 模式下因 `thread_pool_id_generator` 的 inline 函数中 `static atomic` 在 DLL/EXE 边界产生双实例，导致线程 ID 冲突引发 `lazy_thread::start()` 空函数崩溃的问题
+- 修复 `thread_pool` worker 退出路径中 `threads_map_.empty()` 检查和 `exit_cond_.notify_all()` 未在 `worker_contexts_mtx_` 保护下执行，导致 `stop()` 可能丢失 `exit_cond_` 通知而永久阻塞
+- 修复 `io_context` Windows WSA 事件映射中将 `FD_CLOSE` 错误纳入 `epoll_in`，导致 UDP ICMP 错误触发虚假可读通知
+- 修复 `io_context::~io_context()` 在 `run_one()` 惰性启动 monitor 线程后未 join，导致 `~thread()` 对 joinable 线程调用 `terminate`
+- 修复 `ssl_stream::connect()` / `accept()` 中 `ERR_get_error` 双重消费错误队列，导致 `handle_ssl_error` 获取不到真实错误
+- 修复 `ssl_context` 在 Windows 上无法加载系统 CA 证书，导致 TLS 客户端证书验证失败（错误码 167772294 / `0xA000086`）
+
+### 🔧 Improvements
+
+- `dns_client` 深度重构为 per-operation 异步状态对象架构，`pending_entry` 基于 `weak_ptr` 管理生命周期
+- `dns_client` 添加 completion-token 异步 API：`async_query()` 六重载（回调/取消槽/模板令牌/`use_future`/`detached`/`use_awaitable`）
+- `dns_client` 添加 `cancellation_slot` 支持，可取消飞行中的 DNS 查询
+- 添加 `async_result<use_future_t, void(error_code, dns_query_result)>` 和 `future_handler<error_code, dns_query_result>` 特化
+- `drain_events()` 使用 CAS 替代无条件 store 调度 drain 任务，消除高并发下的低效重提交洪
 
 ## [1.0.0-beta] - 2026-05-18
 
 ### 🚀 New Features
+
 - 项目从 MSTL 重命名为 NexusForce
 - 添加 GTest 全量单元测试于集成测试
 - 导出 cmake 配置函数
@@ -139,6 +166,7 @@
 - 添加 cacert 证书测试
 
 ### 🔧 Improvements
+
 - 完善配置项并通过 CodeQL / clang-format / clang-tidy / valgrind 进行自动化分析
 - 完善 README 特性项
 - 使用外部配置 cmake 选项
@@ -165,10 +193,12 @@
 - 去除 device 操作
 
 ### 📚 Documentation
+
 - 除 db 与 network 外的大部分 API 文档
 - 优化 README 结构
 
 ### 🐛 Bug Fixes
+
 - 修复 make_shared 内存泄漏问题
 - 修复线程池 cached 模式下的临界区操作异常问题
 - 修复 datetime 对UTC时间处理的异常问题
@@ -187,6 +217,7 @@
 ## [0.4.0] - 2025-12-26
 
 ### 🚀 New Features
+
 - 添加 zlib 压缩操作
 - 添加固定大小的位操作类 bitset
 - 添加 xor / base64 / md5 / sha1 / sha256 / aes256 加密算法
@@ -221,6 +252,7 @@
 - 添加测试资源文件
 
 ### 🔧 Improvements
+
 - 通过 vcpkg 内存泄露分析
 - 大幅优化项目结构，执行职责分离设计
 - 大幅优化 database 结构设计
@@ -232,14 +264,17 @@
 - 健全类型萃取结构 type_traits
 
 ### 📚 Documentation
+
 - 添加英文 README
 
 ### 🐛 Bug Fixes
+
 - 修复 deque 的内存泄漏问题
 
 ## [0.3.0] - 2025-08-28
 
 ### 🚀 New Features
+
 - 全面支持 Linux
 - 添加 db interface 并新增支持 MySQL / SQLite3 / Redis 的数据库连接池
 - 添加存储任意类型的类型擦除类 any
@@ -261,6 +296,7 @@
 - 添加 DNS 客户端
 
 ### 🔧 Improvements
+
 - 优化 function 实现结构
 - 优化仿函数的实现结构
 - 优化各容器的将亡值操作
@@ -273,11 +309,13 @@
 - 优化项目结构
 
 ### 📚 Documentation
+
 - 添加 README 编译指南
 
 ## [0.2.0] - 2025-03-08
 
 ### 🚀 New Features
+
 - 添加 char_traits / basic_string_view / basic_stringstream
 - 类型擦除的函数包装类 function 初步实现
 - detailof 容器信息打印函数
@@ -299,6 +337,7 @@
 - 添加 variant
 
 ### 🔧 Improvements
+
 - 将 string 改为支持任意字符类型的 basic_string
 - 健全条件编译宏与编译器attributes
 - 健全基本类型别名，适配32位系统
@@ -315,11 +354,13 @@
 - 删除仿函数配接器
 
 ### 📚 Documentation
+
 - 添加 README 模块介绍
 
 ## [0.1.0] - 2024-12-17
 
 ### 🚀 New Features
+
 - array / vector / list / deque / rbtree / hashtable 容器及其配接器 queue / stack 初步实现
 - pair / tuple / depositary 工具初步实现
 - 堆分配的 string 初步实现

@@ -1,3 +1,5 @@
+#include <NeForce/core/async/async_result.hpp>
+#include <NeForce/core/async/async_stream.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/network/tcp/tcp_acceptor.hpp>
 #include <NeForce/network/tcp/tcp_client.hpp>
@@ -224,6 +226,8 @@ protected:
     void SetUp() override {}
     void TearDown() override {}
 
+    io_context ctx_;
+
     void run_echo_server(tcp_acceptor& acceptor) {
         auto client = acceptor.accept();
         char buf[4096];
@@ -248,7 +252,8 @@ TEST_F(TcpClientIntegration, ConnectDisconnectLifecycle) {
 
     thread server_thread([&]() { run_echo_server(acceptor); });
 
-    tcp_client client;
+    io_context ctx;
+    tcp_client client(ctx);
     EXPECT_FALSE(client.is_connected());
 
     bool connected = client.connect("127.0.0.1", bound->port());
@@ -275,7 +280,7 @@ TEST_F(TcpClientIntegration, SendReceiveRoundtrip) {
 
     thread server_thread([&]() { run_echo_server(acceptor); });
 
-    tcp_client client;
+    tcp_client client(ctx_);
     ASSERT_TRUE(client.connect("127.0.0.1", bound->port()));
 
     const char* msg = "tcp_client roundtrip";
@@ -293,7 +298,7 @@ TEST_F(TcpClientIntegration, SendReceiveRoundtrip) {
 }
 
 TEST_F(TcpClientIntegration, TimeoutSettings) {
-    tcp_client client;
+    tcp_client client(ctx_);
 
     EXPECT_EQ(client.connect_timeout(), milliseconds(5000));
     EXPECT_EQ(client.send_timeout(), milliseconds(5000));
@@ -313,14 +318,14 @@ TEST_F(TcpClientIntegration, TimeoutSettings) {
 }
 
 TEST_F(TcpClientIntegration, AutoReconnectDisabled) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_FALSE(client.is_auto_reconnect());
     EXPECT_FALSE(client.is_reconnecting());
     EXPECT_EQ(client.reconnect_attempts(), 3);
 }
 
 TEST_F(TcpClientIntegration, ExceptionHandler) {
-    tcp_client client;
+    tcp_client client(ctx_);
     atomic<bool> called{false};
 
     client.set_exception_handler([&](const exception&) { called.store(true); });
@@ -336,13 +341,13 @@ TEST_F(TcpClientIntegration, ExceptionHandler) {
 }
 
 TEST_F(TcpClientIntegration, ConnectInvalidHostThrows) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_FALSE(client.connect("", ports(25)));
     EXPECT_FALSE(client.connect("invalid..host", ports(80)));
 }
 
 TEST_F(TcpClientIntegration, SocketAccessThrowsWhenNotConnected) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_THROW(ignore = client.socket(), value_exception);
 }
 
@@ -350,6 +355,7 @@ class TcpServerIntegration : public ::testing::Test {
 protected:
     void SetUp() override {}
     void TearDown() override {}
+    io_context ctx_;
 };
 
 TEST_F(TcpServerIntegration, StartStopLifecycle) {
@@ -357,7 +363,7 @@ TEST_F(TcpServerIntegration, StartStopLifecycle) {
         GTEST_SKIP() << "No network connectivity";
     }
 
-    tcp_server server(ports(0u), 2);
+    tcp_server server(ports(0), ctx_, 2);
     EXPECT_FALSE(server.is_running());
 
     server.set_client_handler([](unique_ptr<tcp_socket> sock) {
@@ -391,7 +397,7 @@ TEST_F(TcpServerIntegration, ClientHandlerCalled) {
     }
 
     atomic<int> handled{0};
-    tcp_server server(test_port, 2);
+    tcp_server server(test_port, ctx_, 2);
 
     server.set_client_handler([&](unique_ptr<tcp_socket> sock) {
         handled.fetch_add(1);
@@ -406,7 +412,7 @@ TEST_F(TcpServerIntegration, ClientHandlerCalled) {
     ASSERT_TRUE(server.start());
     this_thread::sleep_for(milliseconds(50));
 
-    tcp_client client;
+    tcp_client client(ctx_);
     ASSERT_TRUE(client.connect("127.0.0.1", test_port));
 
     const char* msg = "server_test";
@@ -442,7 +448,7 @@ TEST_F(TcpServerIntegration, MultipleClients) {
     }
 
     atomic<int> handled{0};
-    tcp_server server(test_port, 4);
+    tcp_server server(test_port, ctx_, 4);
 
     server.set_client_handler([&](unique_ptr<tcp_socket> sock) {
         handled.fetch_add(1);
@@ -463,7 +469,7 @@ TEST_F(TcpServerIntegration, MultipleClients) {
 
     for (int i = 0; i < num_clients; ++i) {
         threads.emplace_back([&, i]() {
-            tcp_client client;
+            tcp_client client(ctx_);
             if (client.connect("127.0.0.1", test_port)) {
                 string msg = "client_" + to_string(i);
                 client.send(msg.data(), msg.size());
@@ -489,7 +495,7 @@ TEST_F(TcpServerIntegration, MultipleClients) {
 }
 
 TEST_F(TcpServerIntegration, StartWithoutHandlerFails) {
-    tcp_server server(ports(0u), 2);
+    tcp_server server(ports(0), ctx_, 2);
     bool started = server.start();
     EXPECT_FALSE(started);
 }
@@ -515,4 +521,333 @@ TEST_F(TcpSocketStandalone, OpenAndClose) {
     EXPECT_TRUE(sock.is_open());
     sock.close();
     EXPECT_FALSE(sock.is_open());
+}
+
+class AsyncSocketIntegration : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+    io_context ctx_;
+};
+
+TEST_F(AsyncSocketIntegration, ConnectWriteReadUseFuture) {
+    if (!network_available()) {
+        GTEST_SKIP() << "No network connectivity";
+    }
+
+    auto test_port = ports(0u);
+    {
+        tcp_acceptor tmp;
+        tmp.open(ip_address::loopback());
+        auto bound = tmp.local_endpoint();
+        if (bound.has_value()) {
+            test_port = bound->port();
+        }
+        tmp.close();
+    }
+
+    tcp_server server(test_port, ctx_, 2);
+    server.set_client_handler([](unique_ptr<tcp_socket> sock) {
+        char buf[256];
+        ssize_t n = sock->receive({buf, sizeof(buf)});
+        if (n > 0) {
+            sock->send_all({buf, static_cast<size_t>(n)});
+        }
+        sock->close();
+    });
+    ASSERT_TRUE(server.start());
+
+    tcp_socket sock;
+    sock.open();
+
+    auto endpoint = ip_address::parse("127.0.0.1", test_port);
+    ASSERT_TRUE(endpoint.has_value());
+
+    {
+        auto fut = sock.async_connect(ctx_, *endpoint, use_future);
+        EXPECT_NO_THROW(fut.get());
+    }
+    EXPECT_TRUE(sock.is_open());
+
+    const string msg = "hello_async_test";
+    {
+        auto fut = sock.async_send(ctx_, {msg.data(), msg.size()}, use_future);
+        EXPECT_NO_THROW({
+            size_t written = fut.get();
+            EXPECT_EQ(written, msg.size());
+        });
+    }
+
+    char buf[256] = {};
+    {
+        auto fut = sock.async_receive(ctx_, {buf, sizeof(buf)}, use_future);
+        EXPECT_NO_THROW({
+            size_t read_n = fut.get();
+            EXPECT_EQ(read_n, msg.size());
+            EXPECT_EQ(string_view(buf, read_n), msg.view());
+        });
+    }
+
+    sock.close();
+    server.stop();
+}
+
+TEST_F(AsyncSocketIntegration, ConnectWriteReadLambda) {
+    if (!network_available()) {
+        GTEST_SKIP() << "No network connectivity";
+    }
+
+    auto test_port = ports(0u);
+    {
+        tcp_acceptor tmp;
+        tmp.open(ip_address::loopback());
+        auto bound = tmp.local_endpoint();
+        if (bound.has_value()) {
+            test_port = bound->port();
+        }
+        tmp.close();
+    }
+
+    tcp_server server(test_port, ctx_, 2);
+    server.set_client_handler([](unique_ptr<tcp_socket> sock) {
+        char buf[256];
+        ssize_t n = sock->receive({buf, sizeof(buf)});
+        if (n > 0) {
+            sock->send_all({buf, static_cast<size_t>(n)});
+        }
+        sock->close();
+    });
+    ASSERT_TRUE(server.start());
+
+    tcp_socket sock;
+    sock.open();
+
+    auto endpoint = ip_address::parse("127.0.0.1", test_port);
+    ASSERT_TRUE(endpoint.has_value());
+
+    bool connect_done = false;
+    error_code connect_ec;
+    sock.async_connect(ctx_, *endpoint, [&](error_code ec) {
+        connect_ec = ec;
+        connect_done = true;
+    });
+    while (!connect_done) {
+        ctx_.poll_one();
+    }
+    EXPECT_FALSE(connect_ec) << connect_ec.message().data();
+
+    bool write_done = false;
+    error_code write_ec;
+    size_t written = 0;
+    const string msg = "lambda_test_msg";
+    sock.async_send(ctx_, {msg.data(), msg.size()}, [&](error_code ec, size_t n) {
+        write_ec = ec;
+        written = n;
+        write_done = true;
+    });
+    while (!write_done) {
+        ctx_.poll_one();
+    }
+    EXPECT_FALSE(write_ec);
+    EXPECT_EQ(written, msg.size());
+
+    bool read_done = false;
+    char buf[256] = {};
+    error_code read_ec;
+    size_t read_n = 0;
+    sock.async_receive(ctx_, {buf, sizeof(buf)}, [&](error_code ec, size_t n) {
+        read_ec = ec;
+        read_n = n;
+        read_done = true;
+    });
+    while (!read_done) {
+        ctx_.poll_one();
+    }
+    EXPECT_FALSE(read_ec);
+    EXPECT_EQ(read_n, msg.size());
+    EXPECT_EQ(string_view(buf, read_n), msg.view());
+
+    sock.close();
+    server.stop();
+}
+
+TEST_F(AsyncSocketIntegration, CancelAsyncConnect) {
+    if (!network_available()) {
+        GTEST_SKIP() << "No network connectivity";
+    }
+
+    tcp_socket sock;
+    sock.open();
+
+    auto endpoint = ip_address::parse("192.0.2.1", ports(12345u));
+    ASSERT_TRUE(endpoint.has_value());
+
+    stop_source stop_src;
+    cancellation_slot slot(stop_src.get_token());
+
+    bool handler_called = false;
+
+    sock.async_connect(ctx_, *endpoint, slot, [&](error_code) { handler_called = true; });
+
+    ignore = stop_src.request_stop();
+
+    auto deadline = steady_clock::now() + seconds(3);
+    while (!handler_called && steady_clock::now() < deadline) {
+        ctx_.poll_one();
+    }
+
+    EXPECT_TRUE(handler_called);
+
+    sock.close();
+}
+
+TEST_F(AsyncSocketIntegration, CancelAsyncRead) {
+    if (!network_available()) {
+        GTEST_SKIP() << "No network connectivity";
+    }
+
+    auto test_port = ports(0u);
+    {
+        tcp_acceptor tmp;
+        tmp.open(ip_address::loopback());
+        auto bound = tmp.local_endpoint();
+        if (bound.has_value()) {
+            test_port = bound->port();
+        }
+        tmp.close();
+    }
+
+    tcp_server server(test_port, ctx_, 2);
+    server.set_client_handler([](unique_ptr<tcp_socket> sock) {
+        this_thread::sleep_for(milliseconds(1000));
+        sock->close();
+    });
+    ASSERT_TRUE(server.start());
+
+    tcp_socket sock;
+    sock.open();
+
+    auto endpoint = ip_address::parse("127.0.0.1", test_port);
+    ASSERT_TRUE(endpoint.has_value());
+
+    ASSERT_TRUE(sock.connect(*endpoint, milliseconds(3000)));
+
+    stop_source stop_src;
+    cancellation_slot slot(stop_src.get_token());
+
+    bool handler_called = false;
+
+    char buf[256];
+    sock.async_receive(ctx_, {buf, sizeof(buf)}, slot, [&](error_code, size_t) { handler_called = true; });
+
+    ignore = stop_src.request_stop();
+
+    auto deadline = steady_clock::now() + seconds(3);
+    while (!handler_called && steady_clock::now() < deadline) {
+        ctx_.poll_one();
+    }
+
+    EXPECT_TRUE(handler_called);
+
+    sock.close();
+    server.stop();
+}
+
+TEST_F(AsyncSocketIntegration, AsyncStreamPolymorphicDispatch) {
+    if (!network_available()) {
+        GTEST_SKIP() << "No network connectivity";
+    }
+
+    auto test_port = ports(0u);
+    {
+        tcp_acceptor tmp;
+        tmp.open(ip_address::loopback());
+        auto bound = tmp.local_endpoint();
+        if (bound.has_value()) {
+            test_port = bound->port();
+        }
+        tmp.close();
+    }
+
+    tcp_server server(test_port, ctx_, 2);
+    server.set_client_handler([](unique_ptr<tcp_socket> sock) {
+        char buf[256];
+        ssize_t n = sock->receive({buf, sizeof(buf)});
+        if (n > 0) {
+            sock->send_all({buf, static_cast<size_t>(n)});
+        }
+    });
+    ASSERT_TRUE(server.start());
+
+    tcp_socket sock;
+    sock.open();
+    auto endpoint = ip_address::parse("127.0.0.1", test_port);
+    ASSERT_TRUE(endpoint.has_value());
+    ASSERT_TRUE(sock.connect(*endpoint, milliseconds(3000)));
+
+    async_stream& stream = sock;
+    const char msg[] = "polymorphic_test";
+    char buf[256] = {};
+
+    auto fut = stream.async_write(ctx_, {msg, sizeof(msg)}, use_future);
+    ctx_.run_one(500);
+    size_t written = fut.get();
+    EXPECT_EQ(written, sizeof(msg));
+
+    auto fut2 = stream.async_read(ctx_, {buf, sizeof(buf)}, use_future);
+    ctx_.run_one(500);
+    size_t n = fut2.get();
+    EXPECT_EQ(n, sizeof(msg));
+
+    sock.close();
+    server.stop();
+}
+
+TEST_F(AsyncSocketIntegration, ForwardingAliasSendReceive) {
+    if (!network_available()) {
+        GTEST_SKIP() << "No network connectivity";
+    }
+
+    auto test_port = ports(0u);
+    {
+        tcp_acceptor tmp;
+        tmp.open(ip_address::loopback());
+        auto bound = tmp.local_endpoint();
+        if (bound.has_value()) {
+            test_port = bound->port();
+        }
+        tmp.close();
+    }
+
+    tcp_server server(test_port, ctx_, 2);
+    server.set_client_handler([](unique_ptr<tcp_socket> sock) {
+        char buf[256];
+        ssize_t n = sock->receive({buf, sizeof(buf)});
+        if (n > 0) {
+            sock->send_all({buf, static_cast<size_t>(n)});
+        }
+    });
+    ASSERT_TRUE(server.start());
+
+    tcp_socket sock;
+    sock.open();
+    auto endpoint = ip_address::parse("127.0.0.1", test_port);
+    ASSERT_TRUE(endpoint.has_value());
+    ASSERT_TRUE(sock.connect(*endpoint, milliseconds(3000)));
+
+    const char msg[] = "alias_forwards_correctly";
+    char buf[256] = {};
+
+    auto fut = sock.async_send(ctx_, {msg, sizeof(msg)}, use_future);
+    ctx_.run_one(500);
+    size_t written = fut.get();
+    EXPECT_EQ(written, sizeof(msg));
+
+    auto fut2 = sock.async_receive(ctx_, {buf, sizeof(buf)}, use_future);
+    ctx_.run_one(500);
+    size_t n = fut2.get();
+    EXPECT_EQ(n, sizeof(msg));
+
+    sock.close();
+    server.stop();
 }

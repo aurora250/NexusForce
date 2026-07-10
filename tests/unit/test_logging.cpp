@@ -254,6 +254,7 @@ protected:
         log->clear_context();
         log->set_filter({});
         log->disable_async();
+        log->clear_sinks();
     }
 
     shared_ptr<mock_sink> mock_;
@@ -453,59 +454,53 @@ TEST(MDCTest, Snapshot) {
     mdc::clear();
 }
 
-TEST(ConditionalLogTest, LogIf) {
-    auto log = root();
-    log->set_level(log_level::INFO);
-    log->disable_async();
-    auto sink = make_shared<mock_sink>();
-    log->add_sink(sink);
+class ConditionalLogTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        auto log = root();
+        log->set_level(log_level::INFO);
+        log->disable_async();
+        sink_ = make_shared<mock_sink>();
+        log->add_sink(sink_);
+    }
 
+    void TearDown() override {
+        auto log = root();
+        log->clear_sinks();
+    }
+
+    shared_ptr<mock_sink> sink_;
+};
+
+TEST_F(ConditionalLogTest, LogIf) {
     NEFORCE_LOG_INFO_IF(true, "should appear");
     this_thread::sleep_for(50_ms);
-    EXPECT_GE(sink->events.size(), 1u);
-    EXPECT_EQ(sink->events[0].message, "should appear");
+    EXPECT_GE(sink_->events.size(), 1u);
+    EXPECT_EQ(sink_->events[0].message, "should appear");
 }
 
-TEST(ConditionalLogTest, LogIfFalse) {
-    auto log = root();
-    log->set_level(log_level::INFO);
-    log->disable_async();
-    auto sink = make_shared<mock_sink>();
-    log->add_sink(sink);
-
+TEST_F(ConditionalLogTest, LogIfFalse) {
     NEFORCE_LOG_INFO_IF(false, "skipped");
     this_thread::sleep_for(50_ms);
-    for (auto& ev: sink->events) {
+    for (auto& ev: sink_->events) {
         EXPECT_NE(ev.message, "skipped");
     }
 }
 
-TEST(ConditionalLogTest, LogEveryN) {
-    auto log = root();
-    log->set_level(log_level::INFO);
-    log->disable_async();
-    auto sink = make_shared<mock_sink>();
-    log->add_sink(sink);
-
+TEST_F(ConditionalLogTest, LogEveryN) {
     for (int i = 0; i < 5; ++i) {
         NEFORCE_LOG_INFO_EVERY_N(2, "every_2");
     }
     this_thread::sleep_for(50_ms);
-    EXPECT_EQ(sink->events.size(), 3u);
+    EXPECT_EQ(sink_->events.size(), 3u);
 }
 
-TEST(ConditionalLogTest, LogFirstN) {
-    auto log = root();
-    log->set_level(log_level::INFO);
-    log->disable_async();
-    auto sink = make_shared<mock_sink>();
-    log->add_sink(sink);
-
+TEST_F(ConditionalLogTest, LogFirstN) {
     for (int i = 0; i < 10; ++i) {
         NEFORCE_LOG_INFO_FIRST_N(3, "first_3");
     }
     this_thread::sleep_for(50_ms);
-    EXPECT_EQ(sink->events.size(), 3u);
+    EXPECT_EQ(sink_->events.size(), 3u);
 }
 
 #ifdef NEFORCE_PLATFORM_LINUX
@@ -536,10 +531,31 @@ TEST(SyslogSinkTest, Formatting) {
 
 #endif
 
-TEST(OverflowPolicyTest, DiscardPolicy) {
+class OverflowPolicyTest : public ::testing::Test {
+protected:
+    void SetUp() override {
+        auto log = root();
+        log->disable_async();
+        log->set_level(log_level::TRACE);
+        log->clear_context();
+        log->set_filter({});
+        log->set_auto_flush(0);
+        log->clear_sinks();
+    }
+
+    void TearDown() override {
+        auto log = root();
+        log->disable_async();
+        log->set_level(log_level::TRACE);
+        log->clear_context();
+        log->set_filter({});
+        log->set_auto_flush(0);
+        log->clear_sinks();
+    }
+};
+
+TEST_F(OverflowPolicyTest, DiscardPolicy) {
     auto log = root();
-    log->set_level(log_level::INFO);
-    log->set_filter({});
     log->enable_async(nullptr, 4, overflow_policy::discard);
 
     auto sink = make_shared<mock_sink>();
@@ -553,10 +569,8 @@ TEST(OverflowPolicyTest, DiscardPolicy) {
     log->disable_async();
 }
 
-TEST(OverflowPolicyTest, OverrunOldestPolicy) {
+TEST_F(OverflowPolicyTest, OverrunOldestPolicy) {
     auto log = root();
-    log->set_level(log_level::INFO);
-    log->set_filter({});
     log->enable_async(nullptr, 4, overflow_policy::overrun_oldest);
 
     auto sink = make_shared<mock_sink>();
@@ -585,6 +599,6 @@ TEST(CompileTimeFilterTest, ActiveLevelDefined) {
 
 TEST(CompileTimeFilterTest, DebugMacroCompiles) {
     NEFORCE_LOG_DEBUG("debug compile test");
-    NEFORCE_LOGF_DEBUG("debug format %d", 42);
+    NEFORCE_LOGF_DEBUG("debug format {}", 42);
     SUCCEED();
 }

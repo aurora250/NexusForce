@@ -720,84 +720,85 @@ class TcpClientTest : public ::testing::Test {
 protected:
     void SetUp() override {}
     void TearDown() override {}
+    io_context ctx_;
 };
 
 TEST_F(TcpClientTest, DefaultConstructor) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_FALSE(client.is_connected());
     EXPECT_EQ(client.connected_host(), "");
 }
 
 TEST_F(TcpClientTest, SetConnectTimeoutPositive) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_NO_THROW(client.set_connect_timeout(milliseconds(3000)));
     EXPECT_EQ(client.connect_timeout(), milliseconds(3000));
 }
 
 TEST_F(TcpClientTest, SetConnectTimeoutZeroThrows) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_THROW(client.set_connect_timeout(milliseconds(0)), value_exception);
 }
 
 TEST_F(TcpClientTest, SetConnectTimeoutNegativeThrows) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_THROW(client.set_connect_timeout(milliseconds(-1)), value_exception);
 }
 
 TEST_F(TcpClientTest, SetSendTimeoutZeroThrows) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_THROW(client.set_send_timeout(milliseconds(0)), value_exception);
 }
 
 TEST_F(TcpClientTest, SetRecvTimeoutZeroThrows) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_THROW(client.set_recv_timeout(milliseconds(0)), value_exception);
 }
 
 TEST_F(TcpClientTest, SetAutoReconnectZeroAttemptsThrows) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_THROW(client.set_auto_reconnect(true, 0), value_exception);
 }
 
 TEST_F(TcpClientTest, SetReconnectDelayNegativeThrows) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_THROW(client.set_reconnect_delay(milliseconds(-1)), value_exception);
 }
 
 TEST_F(TcpClientTest, DefaultAutoReconnectDisabled) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_FALSE(client.is_auto_reconnect());
     EXPECT_FALSE(client.is_reconnecting());
 }
 
 TEST_F(TcpClientTest, SocketAccessorWithoutConnectThrows) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_THROW(ignore = client.socket(), value_exception);
 }
 
 TEST_F(TcpClientTest, ConstSocketAccessorWithoutConnectThrows) {
-    const tcp_client client;
+    const tcp_client client(ctx_);
     EXPECT_THROW(ignore = client.socket(), value_exception);
 }
 
 TEST_F(TcpClientTest, ConnectEmptyHostReturnsFalse) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_FALSE(client.connect("", ports(80)));
 }
 
 TEST_F(TcpClientTest, ConnectZeroPortReturnsFalse) {
-    tcp_client client;
+    tcp_client client(ctx_);
     ports zero(0u);
     EXPECT_FALSE(client.connect("localhost", zero));
 }
 
 TEST_F(TcpClientTest, DisconnectWithoutConnectIsSafe) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_NO_THROW(client.disconnect());
 }
 
 TEST_F(TcpClientTest, SetPreferIpv6) {
-    tcp_client client;
+    tcp_client client(ctx_);
     client.set_prefer_ipv6(true);
     EXPECT_TRUE(client.prefer_ipv6());
     client.set_prefer_ipv6(false);
@@ -805,37 +806,37 @@ TEST_F(TcpClientTest, SetPreferIpv6) {
 }
 
 TEST_F(TcpClientTest, SendNullDataReturnsMinusOne) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_EQ(client.send(nullptr, 16), -1);
 }
 
 TEST_F(TcpClientTest, SendZeroLengthReturnsZero) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_EQ(client.send(nullptr, 0), 0);
 }
 
 TEST_F(TcpClientTest, ReceiveNullDataReturnsMinusOne) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_EQ(client.receive(nullptr, 16), -1);
 }
 
 TEST_F(TcpClientTest, ReceiveZeroLengthReturnsZero) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_EQ(client.receive(nullptr, 0), 0);
 }
 
 TEST_F(TcpClientTest, SendAllNullDataReturnsFalse) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_FALSE(client.send_all(nullptr, 16));
 }
 
 TEST_F(TcpClientTest, SendAllZeroLengthReturnsTrue) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_TRUE(client.send_all(nullptr, 0));
 }
 
 TEST_F(TcpClientTest, ExceptionHandlerIsCalled) {
-    tcp_client client;
+    tcp_client client(ctx_);
     bool called = false;
     client.set_exception_handler([&called](const neforce::exception&) { called = true; });
     client.connect("", ports(80));
@@ -843,7 +844,7 @@ TEST_F(TcpClientTest, ExceptionHandlerIsCalled) {
 }
 
 TEST_F(TcpClientTest, ConnectInvalidHostReturnsFalse) {
-    tcp_client client;
+    tcp_client client(ctx_);
     EXPECT_FALSE(client.connect("invalid-host-that-does-not-exist.test", ports(80)));
     EXPECT_FALSE(client.is_connected());
 }
@@ -852,99 +853,100 @@ class SslClientTest : public ::testing::Test {
 protected:
     void SetUp() override {}
     void TearDown() override {}
+    io_context ctx_;
 };
 
 TEST_F(SslClientTest, DefaultConstructor) {
-    ssl_client client;
+    ssl_client client(ctx_);
     EXPECT_FALSE(client.is_connected());
     EXPECT_FALSE(client.is_ssl_initialized());
 }
 
 TEST_F(SslClientTest, HasSslContextInitiallyFalse) {
-    ssl_client client;
+    ssl_client client(ctx_);
     EXPECT_FALSE(client.has_ssl_context());
 }
 
 TEST_F(SslClientTest, ConstructorWithSslContext) {
-    ssl_context ctx(ssl_method::TLS_CLIENT);
-    ssl_client client(move(ctx));
+    ssl_context ssl_ctx(ssl_method::TLS_CLIENT);
+    ssl_client client(ctx_, move(ssl_ctx));
     EXPECT_TRUE(client.has_ssl_context());
 }
 
 TEST_F(SslClientTest, LoadCaFileCreatesContext) {
-    ssl_client client;
+    ssl_client client(ctx_);
     client.load_ca_file("/nonexistent/ca.pem");
     EXPECT_TRUE(client.has_ssl_context());
 }
 
 TEST_F(SslClientTest, SetSslContextValid) {
-    ssl_client client;
+    ssl_client client(ctx_);
     ssl_context ctx(ssl_method::TLS_CLIENT);
     EXPECT_NO_THROW(client.set_ssl_context(move(ctx)));
     EXPECT_TRUE(client.has_ssl_context());
 }
 
 TEST_F(SslClientTest, SetSslContextInvalidThrows) {
-    ssl_client client;
+    ssl_client client(ctx_);
     ssl_context ctx(ssl_method::TLS_CLIENT);
     ssl_context moved_from = move(ctx);
     EXPECT_THROW(client.set_ssl_context(move(ctx)), ssl_exception);
 }
 
 TEST_F(SslClientTest, SetVerifyPeerDefaultTrue) {
-    ssl_client client;
+    ssl_client client(ctx_);
     EXPECT_TRUE(client.get_verify_peer());
 }
 
 TEST_F(SslClientTest, SetVerifyPeerFalse) {
-    ssl_client client;
+    ssl_client client(ctx_);
     EXPECT_NO_THROW(client.set_verify_peer(false));
     EXPECT_FALSE(client.get_verify_peer());
 }
 
 TEST_F(SslClientTest, PeerCertificateInfoNotConnectedReturnsEmpty) {
-    ssl_client client;
+    ssl_client client(ctx_);
     auto info = client.peer_certificate_info();
     EXPECT_EQ(info, "");
 }
 
 TEST_F(SslClientTest, CipherNameNotConnectedReturnsEmpty) {
-    ssl_client client;
+    ssl_client client(ctx_);
     auto name = client.cipher_name();
     EXPECT_EQ(name, "");
 }
 
 TEST_F(SslClientTest, ProtocolVersionNotConnectedReturnsEmpty) {
-    ssl_client client;
+    ssl_client client(ctx_);
     auto version = client.protocol_version();
     EXPECT_EQ(version, "");
 }
 
 TEST_F(SslClientTest, PeerCertificateInfoReturnsStringNotStringView) {
-    ssl_client client;
+    ssl_client client(ctx_);
     auto info = client.peer_certificate_info();
     EXPECT_TRUE((is_same_v<decltype(info), string>) );
 }
 
 TEST_F(SslClientTest, CipherNameReturnsStringNotStringView) {
-    ssl_client client;
+    ssl_client client(ctx_);
     auto name = client.cipher_name();
     EXPECT_TRUE((is_same_v<decltype(name), string>) );
 }
 
 TEST_F(SslClientTest, ProtocolVersionReturnsStringNotStringView) {
-    ssl_client client;
+    ssl_client client(ctx_);
     auto version = client.protocol_version();
     EXPECT_TRUE((is_same_v<decltype(version), string>) );
 }
 
 TEST_F(SslClientTest, SslSocketRefNotConnectedThrows) {
-    ssl_client client;
+    ssl_client client(ctx_);
     EXPECT_THROW(ignore = client.ssl_socket_ref(), value_exception);
 }
 
 TEST_F(SslClientTest, LoadCaPathCreatesContext) {
-    ssl_client client;
+    ssl_client client(ctx_);
     client.load_ca_path("/nonexistent/ca_dir");
     EXPECT_TRUE(client.has_ssl_context());
 }

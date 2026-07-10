@@ -28,13 +28,24 @@
 using namespace neforce;
 using namespace neforce::http;
 
+namespace {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const char* SERVER_CERT = "D:/OpenSSL/server.crt";
+    const char* SERVER_KEY = "D:/OpenSSL/server.key";
+#else
+    const char* SERVER_CERT = "/tmp/neforce_test_server.crt";
+    const char* SERVER_KEY = "/tmp/neforce_test_server.key";
+#endif
+} // namespace
+
+
 int main() {
     // =========================================================================
     // 加载 SSL 证书
     // =========================================================================
     ssl_context ctx(ssl_method::TLS_SERVER);
 
-    if (!ctx.load_certificate("./server.crt", "./server.key")) {
+    if (!ctx.load_certificate(SERVER_CERT, SERVER_KEY)) {
         println("Failed to load certificate (server.crt / server.key). Generate with:");
         println("  openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt \\");
         println("    -days 365 -nodes -subj '/CN=localhost'");
@@ -49,7 +60,8 @@ int main() {
     //       支持 HTTP/2 over TLS（h2）自动协商。
     //       不需要额外配置即可同时服务 HTTP/1.1 和 HTTP/2 客户端。
     // =========================================================================
-    http_server server(ports(8443u), move(ctx), 2);
+    io_context ioc;
+    http_server server(ports(8443u), ioc, move(ctx), 2);
 
     auto& router = server.router();
 

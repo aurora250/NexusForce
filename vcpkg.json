@@ -23,6 +23,7 @@
       "name": "pcre2",
       "features": ["jit"]
     },
+    "icu",
     "gtest",
     "benchmark"
   ],
@@ -70,6 +71,10 @@
     "benchmark": {
       "description": "Google Benchmark support",
       "dependencies": ["benchmark"]
+    },
+    "icu": {
+      "description": "ICU4C locale and Unicode support",
+      "dependencies": ["icu"]
     }
   },
   "default-features": [
@@ -77,6 +82,7 @@
     "zlib", "lz4",
     "openssl",
     "pcre2",
+    "icu",
     "gtest", "benchmark"
   ]
 }

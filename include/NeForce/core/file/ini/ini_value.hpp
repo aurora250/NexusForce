@@ -24,15 +24,15 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief INI格式操作失败
  */
 struct ini_exception final : value_exception {
-    explicit ini_exception(const char* info = "INI Operation Failed.", const char* type = static_type,
-                           const int code = 0) noexcept :
-    value_exception(info, type, code) {}
+    explicit ini_exception(const char* info = "INI Operation Failed.") noexcept :
+    value_exception(info) {}
 
     explicit ini_exception(const exception& e) :
     value_exception(e) {}
 
     ~ini_exception() override = default;
-    static constexpr auto static_type = "ini_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "ini_exception"; }
 };
 
 /** @} */ // Exceptions

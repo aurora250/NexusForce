@@ -126,8 +126,11 @@ private:
                 nodes_.erase(it);
                 node_map_.erase(current_node.id);
 
+                auto flag_it = cancel_flags_.find(current_node.id);
+                const bool cancelled = (flag_it != cancel_flags_.end() && flag_it->second->load(memory_order_acquire));
+
                 lock.unlock_quiet();
-                if (!stopped_.load()) {
+                if (!stopped_.load() && !cancelled) {
                     current_node.handler();
                 }
                 lock.lock_quiet();
@@ -260,7 +263,7 @@ public:
      */
     void cancel_all() {
         unique_lock<mutex> lock(mutex_);
-        for (auto& cancel_flag: cancel_flags_) {
+        for (const auto& cancel_flag: cancel_flags_) {
             cancel_flag.second->store(true, memory_order_release);
         }
         nodes_.clear();

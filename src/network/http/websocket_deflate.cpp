@@ -14,6 +14,8 @@ websocket_deflate_config websocket_deflate_config::negotiate(const string_view r
         return cfg;
     }
     cfg.active = true;
+    cfg.client_no_context_takeover = true;
+    cfg.server_no_context_takeover = true;
     size_t semi = lower.find(',', pos);
     if (semi == string::npos) {
         semi = request_extensions.size();
@@ -21,10 +23,10 @@ websocket_deflate_config websocket_deflate_config::negotiate(const string_view r
     const string_view params_section = request_extensions.view(pos, semi - pos);
     {
         const string params_lower = string(params_section).lowercase();
-        size_t p = params_lower.find("client_max_window_bits");
+        const size_t p = params_lower.find("client_max_window_bits");
         if (p != string::npos) {
             size_t eq_pos = params_section.find('=', p);
-            size_t semi_pos = params_section.find(';', p);
+            const size_t semi_pos = params_section.find(';', p);
             if (eq_pos != string::npos && (semi_pos == string::npos || eq_pos < semi_pos)) {
                 ++eq_pos;
                 while (eq_pos < params_section.size() &&
@@ -36,7 +38,7 @@ websocket_deflate_config websocket_deflate_config::negotiate(const string_view r
                                                                   : params_section.view(eq_pos, val_end - eq_pos);
                 if (!val.empty()) {
                     try {
-                        int bits = static_cast<int>(uinteger64::parse(val).value());
+                        const int bits = static_cast<int>(uinteger64::parse(val).value());
                         if (bits >= 8 && bits <= 15) {
                             cfg.client_max_window_bits = bits;
                         }
@@ -50,10 +52,10 @@ websocket_deflate_config websocket_deflate_config::negotiate(const string_view r
     }
     {
         const string params_lower = string(params_section).lowercase();
-        size_t p = params_lower.find("server_max_window_bits");
+        const size_t p = params_lower.find("server_max_window_bits");
         if (p != string::npos) {
             size_t eq_pos = params_section.find('=', p);
-            size_t semi_pos = params_section.find(';', p);
+            const size_t semi_pos = params_section.find(';', p);
             if (eq_pos != string::npos && (semi_pos == string::npos || eq_pos < semi_pos)) {
                 ++eq_pos;
                 while (eq_pos < params_section.size() &&
@@ -65,7 +67,7 @@ websocket_deflate_config websocket_deflate_config::negotiate(const string_view r
                                                                   : params_section.view(eq_pos, val_end - eq_pos);
                 if (!val.empty()) {
                     try {
-                        int bits = static_cast<int>(uinteger64::parse(val).value());
+                        const int bits = static_cast<int>(uinteger64::parse(val).value());
                         if (bits >= 8 && bits <= 15) {
                             cfg.server_max_window_bits = bits;
                         }
@@ -168,7 +170,7 @@ string websocket_deflate::process(const string_view data, bool is_final) {
 
     try {
         if (compress_mode_) {
-            auto cdata = cbyte_view(reinterpret_cast<const byte_t*>(data.data()), data.size());
+            const auto cdata = cbyte_view(reinterpret_cast<const byte_t*>(data.data()), data.size());
             byte_vector result = compressor_->compress(cdata, is_final);
             if (is_final) {
                 size_t rlen = result.size();

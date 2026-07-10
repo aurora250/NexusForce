@@ -1,3 +1,4 @@
+#include <NeForce/core/exception/system_exception.hpp>
 #include <NeForce/core/utility/hexadecimal.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <NeForce/network/util/url.hpp>

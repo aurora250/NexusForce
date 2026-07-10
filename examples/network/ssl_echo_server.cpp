@@ -18,12 +18,23 @@
 
 using namespace neforce;
 
+namespace {
+#ifdef NEFORCE_PLATFORM_WINDOWS
+    const char* SERVER_CERT = "D:/OpenSSL/server.crt";
+    const char* SERVER_KEY = "D:/OpenSSL/server.key";
+#else
+    const char* SERVER_CERT = "/tmp/neforce_test_server.crt";
+    const char* SERVER_KEY = "/tmp/neforce_test_server.key";
+#endif
+} // namespace
+
+
 int main() {
     // 创建SSL上下文（服务器模式）
     ssl_context ctx(ssl_method::TLS_SERVER);
 
     // 加载服务器证书和私钥
-    if (!ctx.load_certificate("/home/huenqi/server.crt", "/home/huenqi/server.key")) {
+    if (!ctx.load_certificate(SERVER_CERT, SERVER_KEY)) {
         println("Failed to load certificate. Generate with:");
         println("  openssl req -x509 -newkey rsa:2048 -keyout server.key -out server.crt -days 365 -nodes -subj "
                 "'/CN=localhost'");

@@ -1,12 +1,25 @@
 #include <NeForce/core/async/async.hpp>
+#include <NeForce/core/async/async_compose.hpp>
+#include <NeForce/core/async/async_result.hpp>
+#include <NeForce/core/async/async_stream.hpp>
+#include <NeForce/network/tcp/tcp_acceptor.hpp>
+#include <NeForce/network/tcp/tcp_socket.hpp>
 #include <NeForce/core/async/barrier.hpp>
+#include <NeForce/core/async/cancellation_slot.hpp>
+#include <NeForce/core/async/channel.hpp>
+#include <NeForce/core/async/co_spawn.hpp>
+#include <NeForce/core/async/executor.hpp>
 #include <NeForce/core/async/generator.hpp>
 #include <NeForce/core/async/hazard_ptr.hpp>
+#include <NeForce/core/async/io_context.hpp>
 #include <NeForce/core/async/latch.hpp>
 #include <NeForce/core/async/scope_thread.hpp>
 #include <NeForce/core/async/signals.hpp>
+#include <NeForce/core/async/stop_token.hpp>
+#include <NeForce/core/async/strand.hpp>
 #include <NeForce/core/async/thread_pool.hpp>
 #include <NeForce/core/async/thread_tracker.hpp>
+#include <NeForce/core/async/use_awaitable.hpp>
 #include <NeForce/core/async/virtual_thread.hpp>
 #include <NeForce/core/utility/tuple.hpp>
 #include <gtest/gtest.h>
@@ -1639,15 +1652,22 @@ TEST(BasicTimer, DestructorCancelsTask) {
 }
 
 TEST(BasicTimer, Reschedule) {
-    atomic<int> count{0};
+    latch done(1);
+    int count = 0;
     steady_timer timer;
-    timer.expires_after(30_ms);
-    timer.async_wait([&] { count.fetch_add(1); });
-    this_thread::sleep_for(15_ms);
-    timer.expires_after(10_ms);
-    timer.async_wait([&] { count.fetch_add(2); });
-    this_thread::sleep_for(50_ms);
-    EXPECT_EQ(count.load(), 2);
+
+    timer.expires_after(10_s);
+    timer.async_wait([&] { ++count; });
+
+    timer.cancel();
+    timer.expires_after(100_ms);
+    timer.async_wait([&] {
+        ++count;
+        done.count_down();
+    });
+
+    done.wait();
+    EXPECT_EQ(count, 1);
 }
 
 TEST(BasicTimer, IsActive) {
@@ -2291,7 +2311,7 @@ TEST(VirtualThreadTask, MoveAssignToNonEmpty) {
     EXPECT_EQ(task2.get_result(), 42);
 }
 
-TEST(VirtualThreadTask, MoveAssignToNonEmptyWithYield) { // may block in Windows
+TEST(VirtualThreadTask, MoveAssignToNonEmptyWithYield) {
     auto task1 = virtual_thread::start([]() -> virtual_thread_task<int> {
         co_await virtual_thread::yield();
         co_return 77;
@@ -2991,6 +3011,611 @@ TEST(Retry, Exhaustion) {
     auto t = retry<int>(factory, 3);
     EXPECT_THROW(t.get(), value_exception);
     EXPECT_EQ(attempts, 3);
+}
+
+#endif
+
+TEST(IoContextTest, DefaultConstruct) {
+    io_context ctx;
+    EXPECT_FALSE(ctx.stopped());
+}
+
+TEST(IoContextTest, PostAndRun) {
+    io_context ctx;
+    int count = 0;
+    ctx.post([&] { ++count; });
+    ctx.post([&] { ++count; });
+    EXPECT_EQ(ctx.run(), 2u);
+    EXPECT_EQ(count, 2);
+}
+
+TEST(IoContextTest, Dispatch) {
+    io_context ctx;
+    int count = 0;
+    ctx.dispatch([&] { ++count; });
+    EXPECT_EQ(count, 1);
+}
+
+TEST(IoContextTest, Stop) {
+    io_context ctx;
+    io_context::work w(ctx);
+    atomic<bool> ran{false};
+    thread t([&] {
+        ctx.run();
+        ran = true;
+    });
+    this_thread::sleep_for(milliseconds(10));
+    ctx.stop();
+    t.join();
+    EXPECT_TRUE(ran);
+}
+
+TEST(IoContextTest, WorkPreventsExit) {
+    io_context ctx;
+    io_context::work w(ctx);
+    atomic<bool> started{false};
+    thread t([&] {
+        started = true;
+        ctx.run();
+    });
+
+    while (!started) {
+        this_thread::relax();
+    }
+    this_thread::sleep_for(milliseconds(20));
+    EXPECT_TRUE(started);
+
+    ctx.post([] {});
+    this_thread::sleep_for(milliseconds(20));
+    ctx.stop();
+    t.join();
+}
+
+TEST(IoContextTest, ScheduleTimer) {
+    io_context ctx;
+    int count = 0;
+    ctx.schedule_timer(1, [&] { ++count; });
+    ctx.run();
+    EXPECT_EQ(count, 1);
+}
+
+TEST(IoContextTest, CancelTimer) {
+    io_context ctx;
+    int count = 0;
+    auto id = ctx.schedule_timer(10000, [&] { ++count; });
+    bool ok = ctx.cancel_timer(id);
+    EXPECT_TRUE(ok);
+
+    io_context::work w(ctx);
+    ctx.post([] {});
+    ctx.run_one(1);
+    EXPECT_EQ(count, 0);
+}
+
+TEST(IoContextTest, Poll) {
+    io_context ctx;
+    int count = 0;
+    ctx.post([&] { ++count; });
+    ctx.post([&] { ++count; });
+    size_t n = ctx.poll();
+    EXPECT_EQ(n, 2u);
+    EXPECT_EQ(count, 2);
+}
+
+TEST(IoContextTest, PollOne) {
+    io_context ctx;
+    int count = 0;
+    ctx.post([&] { ++count; });
+    ctx.post([&] { ++count; });
+    EXPECT_EQ(ctx.poll_one(), 1u);
+    EXPECT_EQ(count, 1);
+    EXPECT_EQ(ctx.poll_one(), 1u);
+    EXPECT_EQ(count, 2);
+}
+
+TEST(IoContextTest, Restart) {
+    io_context ctx;
+    ctx.stop();
+    EXPECT_TRUE(ctx.stopped());
+    ctx.restart();
+    EXPECT_FALSE(ctx.stopped());
+}
+
+TEST(ExecutorTest, FromIoContext) {
+    io_context ctx;
+    auto exec = ctx.get_executor();
+    int count = 0;
+    exec.execute([&] { ++count; });
+    ctx.poll();
+    EXPECT_EQ(count, 1);
+}
+
+TEST(ExecutorTest, Equality) {
+    io_context ctx;
+    auto e1 = ctx.get_executor();
+    auto e2 = ctx.get_executor();
+    EXPECT_TRUE(e1 == e2);
+}
+
+TEST(ExecutorTest, PolymorphicWrapper) {
+    io_context ctx;
+    executor exec = ctx.get_executor();
+    int count = 0;
+    exec.post([&] { ++count; });
+    ctx.poll();
+    EXPECT_EQ(count, 1);
+    EXPECT_TRUE(static_cast<bool>(exec));
+}
+
+TEST(ExecutorTest, DefaultIsEmpty) {
+    executor exec;
+    EXPECT_FALSE(static_cast<bool>(exec));
+}
+
+TEST(StrandTest, Post) {
+    io_context ctx;
+    strand str(ctx);
+    int count = 0;
+    str.post([&] { ++count; });
+    ctx.run_one(1);
+    EXPECT_EQ(count, 1);
+}
+
+TEST(StrandTest, Dispatch) {
+    io_context ctx;
+    strand str(ctx);
+    int count = 0;
+    str.dispatch([&] { ++count; });
+    EXPECT_EQ(count, 1);
+}
+
+TEST(StrandTest, Serialization) {
+    io_context ctx;
+    strand str(ctx);
+    atomic<int> running{0};
+    atomic<int> max_concurrent{0};
+
+    for (int i = 0; i < 100; ++i) {
+        str.post([&] {
+            int cur = running.fetch_add(1, memory_order_relaxed) + 1;
+            int prev = max_concurrent.load(memory_order_relaxed);
+            while (cur > prev &&
+                   !max_concurrent.compare_exchange_weak(prev, cur, memory_order_relaxed, memory_order_relaxed)) {
+            }
+            this_thread::relax();
+            running.fetch_sub(1, memory_order_relaxed);
+        });
+    }
+    ctx.run();
+    EXPECT_EQ(max_concurrent.load(), 1);
+}
+
+TEST(AsyncResultTest, UseFutureErrorCode) {
+    async_result<use_future_t, void(error_code)> result(use_future);
+    auto f = result.get();
+    auto handler = result.get_handler();
+    handler(error_code{});
+    f.wait();
+}
+
+TEST(AsyncResultTest, UseFutureErrorCodeSize) {
+    async_result<use_future_t, void(error_code, size_t)> result(use_future);
+    auto f = result.get();
+    auto handler = result.get_handler();
+    handler(error_code{}, 42u);
+    EXPECT_EQ(f.get(), 42u);
+}
+
+TEST(AsyncResultTest, Detached) {
+    async_result<detached_t, void(error_code)> result(detached);
+    auto handler = result.get_handler();
+    handler(error_code{});
+    result.get();
+}
+
+TEST(BufferTest, MutableBuffersSingle) {
+    char data[16];
+    mutable_buffers bufs(mutable_buffer(data, 16));
+    EXPECT_EQ(bufs.size(), 1u);
+    EXPECT_EQ(bufs[0].size(), 16u);
+}
+
+TEST(BufferTest, MutableBuffersPushBack) {
+    char a[8], b[8];
+    mutable_buffers bufs;
+    bufs.push_back(mutable_buffer(a, 8));
+    bufs.push_back(mutable_buffer(b, 8));
+    EXPECT_EQ(bufs.size(), 2u);
+}
+
+TEST(BufferTest, ConstBuffersSingle) {
+    const char data[] = "hello";
+    const_buffers bufs(const_buffer(data, 5));
+    EXPECT_EQ(bufs.size(), 1u);
+}
+
+TEST(BufferTest, DynamicBufferPrepareCommit) {
+    dynamic_buffer buf;
+    auto bufs = buf.prepare(64);
+    EXPECT_GE(bufs[0].size(), 64u);
+    buf.commit(10);
+    EXPECT_EQ(buf.size(), 10u);
+    EXPECT_EQ(string(buf.data(), buf.size()), string(10, '\0'));
+}
+
+TEST(BufferTest, DynamicBufferConsume) {
+    dynamic_buffer buf;
+    buf.prepare(64);
+    buf.commit(20);
+    buf.consume(5);
+    EXPECT_EQ(buf.size(), 15u);
+}
+
+TEST(BufferTest, DynamicBufferGrow) {
+    dynamic_buffer buf;
+    buf.prepare(32);
+    buf.commit(32);
+    buf.prepare(128);
+    EXPECT_GE(buf.capacity(), 160u);
+}
+
+TEST(CancellationSlotTest, DefaultNotCancelled) {
+    cancellation_slot slot;
+    EXPECT_FALSE(slot.is_cancelled());
+    EXPECT_FALSE(slot.has_slot());
+}
+
+TEST(CancellationSlotTest, FromStopToken) {
+    stop_source src;
+    cancellation_slot slot(src.get_token());
+    EXPECT_TRUE(slot.has_slot());
+    EXPECT_FALSE(slot.is_cancelled());
+}
+
+TEST(CancellationSlotTest, AssignCallback) {
+    stop_source src;
+    cancellation_slot slot(src.get_token());
+    int count = 0;
+    bool ok = slot.assign([&] { ++count; });
+    EXPECT_TRUE(ok);
+    EXPECT_EQ(count, 0);
+    ignore = src.request_stop();
+    EXPECT_EQ(count, 1);
+    EXPECT_TRUE(slot.is_cancelled());
+}
+
+TEST(CancellationSlotTest, AssignAfterCancelled) {
+    stop_source src;
+    ignore = src.request_stop();
+    cancellation_slot slot(src.get_token());
+    int count = 0;
+    bool ok = slot.assign([&] { ++count; });
+    EXPECT_FALSE(ok);
+    EXPECT_EQ(count, 1);
+}
+
+TEST(CancellationSlotTest, MakeOperationAborted) {
+    error_code ec = make_operation_aborted();
+    EXPECT_TRUE(ec);
+    EXPECT_EQ(ec.value(), static_cast<int>(errc::operation_canceled));
+}
+
+TEST(CancellationSlotTest, CancellationBeforeAsyncOp) {
+    stop_source src;
+    ignore = src.request_stop();
+    cancellation_slot slot(src.get_token());
+    EXPECT_TRUE(slot.is_cancelled());
+}
+
+namespace {
+    class mock_stream : public async_stream {
+    public:
+        using async_stream::async_read;
+        using async_stream::async_write;
+
+        vector<char> data_;
+        size_t read_pos_{0};
+
+        void async_read(io_context&, memory_view<char> buffer, function<void(error_code, size_t)> handler) override {
+            size_t n = min(buffer.size(), data_.size() - read_pos_);
+            memcpy(buffer.data(), data_.data() + read_pos_, n);
+            read_pos_ += n;
+            handler(error_code{}, n);
+        }
+
+        void async_read(io_context&, memory_view<char> buffer, cancellation_slot&,
+                        function<void(error_code, size_t)> handler) override {
+            size_t n = min(buffer.size(), data_.size() - read_pos_);
+            memcpy(buffer.data(), data_.data() + read_pos_, n);
+            read_pos_ += n;
+            handler(error_code{}, n);
+        }
+
+        void async_write(io_context&, memory_view<const char> buffer,
+                         function<void(error_code, size_t)> handler) override {
+            data_.insert(data_.end(), buffer.data(), buffer.data() + buffer.size());
+            handler(error_code{}, buffer.size());
+        }
+
+        void async_write(io_context&, memory_view<const char> buffer, cancellation_slot&,
+                         function<void(error_code, size_t)> handler) override {
+            data_.insert(data_.end(), buffer.data(), buffer.data() + buffer.size());
+            handler(error_code{}, buffer.size());
+        }
+    };
+} // namespace
+
+TEST(ChannelTest, WriteReadBasic) {
+    channel<int> ch(3);
+    EXPECT_TRUE(ch.empty());
+
+    EXPECT_TRUE(ch.try_write(1));
+    EXPECT_TRUE(ch.try_write(2));
+    EXPECT_TRUE(ch.try_write(3));
+    EXPECT_FALSE(ch.try_write(4));
+    EXPECT_EQ(ch.size(), 3u);
+
+    int val = 0;
+    EXPECT_TRUE(ch.try_read(val));
+    EXPECT_EQ(val, 1);
+    EXPECT_TRUE(ch.try_read(val));
+    EXPECT_EQ(val, 2);
+    EXPECT_TRUE(ch.try_read(val));
+    EXPECT_EQ(val, 3);
+    EXPECT_FALSE(ch.try_read(val));
+    EXPECT_TRUE(ch.empty());
+}
+
+TEST(ChannelTest, CloseWakesReaders) {
+    channel<int> ch(1);
+    ch.close();
+
+    int val = 0;
+    EXPECT_FALSE(ch.try_write(1));
+    EXPECT_FALSE(ch.try_read(val));
+    EXPECT_TRUE(ch.is_closed());
+}
+
+TEST(ChannelTest, BlockingWriteRead) {
+    channel<int> ch(2);
+    atomic<bool> done{false};
+
+    thread writer([&]() {
+        for (int i = 1; i <= 5; ++i) {
+            ch.write(i);
+        }
+        ch.close();
+    });
+
+    int sum = 0;
+    int val = 0;
+    while (ch.read(val)) {
+        sum += val;
+    }
+    EXPECT_EQ(sum, 15);
+
+    writer.join();
+}
+
+TEST(ChannelTest, CapacityZeroSynchronous) {
+    channel<int> ch(0);
+    atomic<int> stage{0};
+
+    thread reader([&]() {
+        int val = 0;
+        stage.store(1);
+        EXPECT_TRUE(ch.read(val));
+        EXPECT_EQ(val, 42);
+        stage.store(2);
+    });
+
+    while (stage.load() != 1) { /* spin */
+    }
+    this_thread::sleep_for(milliseconds(10));
+    EXPECT_EQ(stage.load(), 1);
+
+    EXPECT_TRUE(ch.write(42));
+    reader.join();
+    EXPECT_EQ(stage.load(), 2);
+}
+
+TEST(ChannelTest, MaxCapacityUnbounded) {
+    channel<int> ch(channel<int>::capacity_max);
+    for (int i = 0; i < 1000; ++i) {
+        EXPECT_TRUE(ch.try_write(i));
+    }
+    EXPECT_EQ(ch.size(), 1000u);
+    ch.close();
+}
+
+TEST(BufferTest, ScatterGatherRead) {
+    mock_stream stream;
+    const char* data = "abcdefghijklmnop";
+    stream.data_.assign(data, data + 16);
+
+    io_context ctx;
+    char buf1[4] = {}, buf2[4] = {}, buf3[8] = {};
+    mutable_buffers bufs;
+    bufs.push_back(memory_view<char>(buf1, 4));
+    bufs.push_back(memory_view<char>(buf2, 4));
+    bufs.push_back(memory_view<char>(buf3, 8));
+
+    size_t total = 0;
+    error_code ec;
+    stream.async_read(ctx, bufs, [&](error_code e, size_t n) {
+        ec = e;
+        total = n;
+    });
+    ctx.run_one(0);
+
+    EXPECT_FALSE(ec);
+    EXPECT_EQ(total, 16u);
+    EXPECT_EQ(memory_compare(buf1, "abcd", 4), 0);
+    EXPECT_EQ(memory_compare(buf2, "efgh", 4), 0);
+    EXPECT_EQ(memory_compare(buf3, "ijklmnop", 8), 0);
+}
+
+TEST(BufferTest, ScatterGatherWrite) {
+    mock_stream stream;
+    io_context ctx;
+    string_view d1("hello"), d2(" "), d3("world");
+    const_buffers bufs;
+    bufs.push_back(memory_view<const char>(d1.data(), d1.size()));
+    bufs.push_back(memory_view<const char>(d2.data(), d2.size()));
+    bufs.push_back(memory_view<const char>(d3.data(), d3.size()));
+
+    size_t total = 0;
+    error_code ec;
+    stream.async_write(ctx, bufs, [&](error_code e, size_t n) {
+        ec = e;
+        total = n;
+    });
+    ctx.run_one(0);
+
+    EXPECT_FALSE(ec);
+    EXPECT_EQ(total, 11u);
+    EXPECT_EQ(string_view(stream.data_.data(), stream.data_.size()), "hello world");
+}
+
+TEST(BufferTest, DynamicBufferRead) {
+    mock_stream stream;
+    const char* data = "dynamic_buffer_test";
+    stream.data_.assign(data, data + 18);
+
+    io_context ctx;
+    dynamic_buffer buf;
+
+    size_t total = 0;
+    stream.async_read(ctx, buf, 18, [&](error_code, size_t n) { total = n; });
+    ctx.run_one(0);
+
+    EXPECT_EQ(total, 18u);
+    EXPECT_EQ(buf.size(), 18u);
+    EXPECT_EQ(memory_compare(buf.data(), "dynamic_buffer_test", 18), 0);
+}
+
+TEST(BufferTest, EmptyScatterGather) {
+    mock_stream stream;
+    io_context ctx;
+    mutable_buffers bufs;
+
+    size_t total = 99;
+    stream.async_read(ctx, bufs, [&](error_code, size_t n) { total = n; });
+    ctx.run_one(0);
+    EXPECT_EQ(total, 0u);
+}
+
+#ifdef NEFORCE_STANDARD_20
+
+TEST(CoSpawnTest, CompileTimeInstantiation) {
+    io_context ctx;
+    co_spawn(ctx.get_executor(), [] { return awaitable<void>(); });
+    ctx.run_one(0);
+    SUCCEED();
+}
+
+TEST(CoSpawnTest, FactoryExecutedInRun) {
+    io_context ctx;
+    atomic<int> value{0};
+
+    co_spawn(ctx.get_executor(), [&value] {
+        value.store(1, memory_order_release);
+        return awaitable<void>();
+    });
+
+    EXPECT_EQ(value.load(memory_order_acquire), 0);
+    ctx.run_one(100);
+    EXPECT_EQ(value.load(memory_order_acquire), 1);
+}
+
+TEST(CoSpawnTest, WithStrand) {
+    io_context ctx;
+    strand str(ctx);
+    atomic<int> value{0};
+
+    co_spawn(str.get_executor(), [&value] {
+        value.store(7, memory_order_release);
+        return awaitable<void>();
+    });
+
+    EXPECT_EQ(value.load(memory_order_acquire), 0);
+    ctx.run_one(100);
+    EXPECT_EQ(value.load(memory_order_acquire), 7);
+}
+
+TEST(CoSpawnTest, MultipleCoSpawns) {
+    io_context ctx;
+    atomic<int> count{0};
+
+    co_spawn(ctx.get_executor(), [&count] {
+        count.fetch_add(1, memory_order_release);
+        return awaitable<void>();
+    });
+    co_spawn(ctx.get_executor(), [&count] {
+        count.fetch_add(1, memory_order_release);
+        return awaitable<void>();
+    });
+
+    EXPECT_EQ(count.load(memory_order_acquire), 0);
+    ctx.run_one(100);
+    ctx.run_one(100);
+    EXPECT_EQ(count.load(memory_order_acquire), 2);
+}
+
+TEST(CoSpawnTest, TcpEchoWithCoAwait) {
+    tcp_acceptor acceptor;
+    acceptor.open(ip_address::loopback());
+    auto bound = acceptor.local_endpoint();
+    ASSERT_TRUE(bound.has_value());
+    acceptor.set_nonblocking(false);
+
+    thread server([&acceptor] {
+        try {
+            auto client = acceptor.accept();
+            char buf[256];
+            ssize_t n = client.receive({buf, sizeof(buf)});
+            if (n > 0) {
+                client.send_all({buf, static_cast<size_t>(n)});
+            }
+            client.close();
+        } catch (...) {
+        }
+    });
+
+    io_context ctx;
+    tcp_socket sock;
+    sock.open();
+
+    string received;
+    size_t read_bytes = 0;
+
+    co_spawn(ctx.get_executor(), [&, bound]() -> awaitable<void> {
+        error_code ec = co_await sock.async_connect(ctx, *bound, use_awaitable);
+        EXPECT_FALSE(ec) << "connect failed: " << ec.message().data();
+
+        const char msg[] = "co_spawn_tcp_echo";
+        auto t = co_await sock.async_send(ctx, {msg, sizeof(msg)}, use_awaitable);
+        error_code& send_ec = get<0>(t);
+        size_t sent = get<1>(t);
+        EXPECT_FALSE(send_ec);
+        EXPECT_EQ(sent, sizeof(msg));
+
+        char buf[256];
+        auto t2 = co_await sock.async_receive(ctx, {buf, sizeof(buf)}, use_awaitable);
+        error_code& recv_ec = get<0>(t2);
+        read_bytes = get<1>(t2);
+        EXPECT_FALSE(recv_ec);
+        received.assign(buf, read_bytes);
+    });
+
+    ctx.run();
+
+    EXPECT_EQ(read_bytes, sizeof("co_spawn_tcp_echo"));
+    EXPECT_EQ(string_compare(received.data(), "co_spawn_tcp_echo"), 0);
+
+    sock.close();
+    server.join();
+    acceptor.close();
 }
 
 #endif

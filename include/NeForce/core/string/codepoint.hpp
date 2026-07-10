@@ -186,11 +186,7 @@ public:
      *
      * 用于表示无效或无法表示的Unicode字符。
      */
-    static constexpr codepoint replacement() noexcept {
-        codepoint cp;
-        cp.value_ = REPLACEMENT_VALUE;
-        return cp;
-    }
+    static constexpr codepoint replacement() noexcept { return codepoint{REPLACEMENT_VALUE}; }
 
     /**
      * @brief 构造空字符U+0000

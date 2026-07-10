@@ -29,15 +29,19 @@ NEFORCE_BEGIN_NAMESPACE__
  * zlib操作异常。
  */
 struct zlib_exception final : thirdparty_exception {
-    explicit zlib_exception(const char* info = "Zlib Operation Failed.", const char* type = static_type,
-                            const int code = 0) noexcept :
-    thirdparty_exception(info, type, code) {}
+    explicit zlib_exception(const char* info = "Zlib Operation Failed.", int code = 0) noexcept :
+    thirdparty_exception(info),
+    code_(code) {}
 
     explicit zlib_exception(const exception& e) :
     thirdparty_exception(e) {}
 
     ~zlib_exception() override = default;
-    static constexpr auto static_type = "zlib_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "zlib_exception"; }
+
+private:
+    int code_{0};
 };
 
 /** @} */ // Exceptions
@@ -335,6 +339,14 @@ public:
                    compress_format format = compress_format::zlib);
 
         /**
+         * @brief 软重置压缩器
+         * @throws zlib_exception 当重置失败时抛出
+         *
+         * 保留已建立的 LZ77 字典以便后续消息复用上下文。
+         */
+        void soft_reset();
+
+        /**
          * @brief 获取输入字节数
          * @return 已处理的输入字节数
          */
@@ -421,6 +433,14 @@ public:
          * @throws zlib_exception 当重置失败时抛出
          */
         void reset(compress_format format = compress_format::zlib);
+
+        /**
+         * @brief 软重置解压缩器
+         * @throws zlib_exception 当重置失败时抛出
+         *
+         * 保留已建立的 LZ77 字典以便后续消息复用上下文。
+         */
+        void soft_reset();
 
         /**
          * @brief 获取输入字节数

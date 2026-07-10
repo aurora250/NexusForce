@@ -24,15 +24,15 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief ENV格式操作失败
  */
 struct env_exception final : value_exception {
-    explicit env_exception(const char* info = "ENV Operation Failed.", const char* type = static_type,
-                           const int code = 0) noexcept :
-    value_exception(info, type, code) {}
+    explicit env_exception(const char* info = "ENV Operation Failed.") noexcept :
+    value_exception(info) {}
 
     explicit env_exception(const exception& e) :
     value_exception(e) {}
 
     ~env_exception() override = default;
-    static constexpr auto static_type = "env_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "env_exception"; }
 };
 
 /** @} */ // Exceptions

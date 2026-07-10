@@ -79,7 +79,7 @@ int main() {
     {
         auto conn1 = pool.get_connect();    // 返回 idb_connect*
         auto conn2 = pool.get_tb_connect(); // 返回 idb_tb_connect*
-        printfln("同时持有 2 个连接");
+        println("同时持有 2 个连接");
         print_stats("持有2个连接时");
     }
 
@@ -88,9 +88,9 @@ int main() {
     {
         auto conn = pool.get_tb_connect_for(milliseconds{1000});
         if (conn != nullptr) {
-            printfln("1秒内获取到连接");
+            println("1秒内获取到连接");
         } else {
-            printfln("1秒内未获取到连接");
+            println("1秒内未获取到连接");
         }
     }
 

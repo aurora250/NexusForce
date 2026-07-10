@@ -10,7 +10,7 @@
 
 #include "NeForce/core/async/atomic.hpp"
 #include "NeForce/core/async/condition_variable.hpp"
-#include "NeForce/core/async/event_loop.hpp"
+#include "NeForce/core/async/io_context.hpp"
 #include "NeForce/core/async/thread.hpp"
 #include "NeForce/core/container/queue.hpp"
 #include "NeForce/core/container/unordered_map.hpp"
@@ -141,7 +141,7 @@ private:
     unordered_map<string, session_handler> route_handlers_; ///< 路由处理器映射
     vector<session_ptr> sessions_;                          ///< 所有活动会话
     mutable mutex sessions_mutex_;                          ///< 会话列表互斥锁
-    event_loop* loop_ = nullptr;                            ///< 事件循环指针
+    io_context* ctx_{nullptr};                              ///< 异步 I/O 执行上下文
 
 public:
     websocket_server() = default;
@@ -152,6 +152,15 @@ public:
 
     websocket_server(websocket_server&&) noexcept = delete;
     websocket_server& operator=(websocket_server&&) noexcept = delete;
+
+    /**
+     * @brief 设置异步 I/O 执行上下文
+     * @param ctx io_context 引用
+     *
+     * 设置后，新创建的 WebSocket 会话将使用 io_context 驱动 I/O
+     * 替代默认的线程模式。
+     */
+    void set_io_context(io_context& ctx) noexcept { ctx_ = &ctx; }
 
     /**
      * @brief 注册WebSocket路由
@@ -181,15 +190,6 @@ public:
      * @param opcode 操作码（默认TEXT）
      */
     void broadcast(const string& data, websocket_opcode opcode = websocket_opcode::TEXT);
-
-    /**
-     * @brief 设置事件循环
-     * @param loop 事件循环指针
-     *
-     * 设置后，新创建的 WebSocket 会话将使用 event_loop 驱动 I/O。
-     * 设为 nullptr 则回退到线程模式。
-     */
-    void set_event_loop(event_loop* loop) noexcept { loop_ = loop; }
 
     /**
      * @brief 获取活动会话数量
@@ -243,8 +243,8 @@ private:
     thread write_thread_;     ///< 写线程（线程模式）
     thread heartbeat_thread_; ///< 心跳线程（线程模式）
 
-    event_loop* loop_ = nullptr;    ///< 事件循环指针
-    bool event_driven_ = false;     ///< 是否使用事件驱动模式
+    io_context* ctx_{nullptr};      ///< 异步 I/O 执行上下文
+    bool event_driven_ = false;     ///< 是否使用 io_context 事件驱动模式
     size_t heartbeat_timer_id_ = 0; ///< 心跳定时器ID
     byte_vector read_buffer_;       ///< 非阻塞读取缓冲区
     bool write_registered_ = false; ///< 是否已注册EPOLLOUT
@@ -287,8 +287,8 @@ private:
 
     void start_event_driven();
 
-    void on_readable(int fd, uint32_t events);
-    void on_writable(int fd, uint32_t events);
+    void on_readable(int fd, uint32_t events, error_code ec);
+    void on_writable(int fd, uint32_t events, error_code ec);
     void on_heartbeat_timer();
 
     void flush_event_writes();
@@ -390,15 +390,15 @@ public:
     bool has_deflate_config() const noexcept { return deflate_config_.active; }
 
     /**
-     * @brief 设置事件循环（启用事件驱动模式）
-     * @param loop 事件循环指针
+     * @brief 设置 io_context（启用事件驱动模式）
+     * @param ctx io_context 引用
      *
      * 必须在 start() 之前调用。设置后会话将以事件驱动模式运行，
-     * 使用 event_loop 回调替代 3 个专用线程。
+     * 使用 io_context::add_fd / schedule_timer 替代 3 个专用线程。
      */
-    void set_event_loop(event_loop* loop) noexcept {
-        loop_ = loop;
-        event_driven_ = (loop != nullptr);
+    void set_io_context(io_context& ctx) noexcept {
+        ctx_ = &ctx;
+        event_driven_ = true;
     }
 
     /**

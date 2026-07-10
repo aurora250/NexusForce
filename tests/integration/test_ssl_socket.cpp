@@ -1,3 +1,4 @@
+#include <NeForce/core/async/async_stream.hpp>
 #include <NeForce/core/async/latch.hpp>
 #include <NeForce/core/file/filesystem.hpp>
 #include <NeForce/core/system/console.hpp>
@@ -87,6 +88,7 @@ protected:
     }
 
     void TearDown() override { cleanup_certs(); }
+    io_context ctx_;
 
     void run_ssl_echo_server(tcp_acceptor& acceptor, const ssl_context& ctx, latch* ready = nullptr) {
         try {
@@ -281,6 +283,7 @@ protected:
     }
 
     void TearDown() override { cleanup_certs(); }
+    io_context ctx_;
 };
 
 TEST_F(SslAcceptorIntegration, AcceptSslCompletesHandshake) {
@@ -404,6 +407,7 @@ protected:
     }
 
     void TearDown() override { cleanup_certs(); }
+    io_context ctx_;
 };
 
 TEST_F(SslClientIntegration, ConnectWithSslContext) {
@@ -436,7 +440,7 @@ TEST_F(SslClientIntegration, ConnectWithSslContext) {
         server_done.count_down();
     });
 
-    ssl_client client;
+    ssl_client client(ctx_);
     client.set_ssl_context(ssl_context(ssl_method::TLS_CLIENT));
     client.set_verify_peer(false);
 
@@ -479,7 +483,7 @@ TEST_F(SslClientIntegration, PeerVerificationDisabled) {
         }
     });
 
-    ssl_client client;
+    ssl_client client(ctx_);
     EXPECT_TRUE(client.get_verify_peer());
 
     client.set_ssl_context(ssl_context(ssl_method::TLS_CLIENT));
@@ -499,7 +503,7 @@ TEST_F(SslClientIntegration, PeerVerificationDisabled) {
 }
 
 TEST_F(SslClientIntegration, SniHostnameSetting) {
-    ssl_client client;
+    ssl_client client(ctx_);
     EXPECT_TRUE(client.sni_hostname().empty());
 
     client.set_sni_hostname("example.com");
@@ -530,7 +534,7 @@ TEST_F(SslClientIntegration, CertificateInfoAfterConnect) {
         server_done.count_down();
     });
 
-    ssl_client client;
+    ssl_client client(ctx_);
     client.set_ssl_context(ssl_context(ssl_method::TLS_CLIENT));
     client.set_verify_peer(false);
 
@@ -555,7 +559,7 @@ TEST_F(SslClientIntegration, CertificateInfoAfterConnect) {
 }
 
 TEST_F(SslClientIntegration, HasSslContextCheck) {
-    ssl_client client;
+    ssl_client client(ctx_);
     EXPECT_FALSE(client.has_ssl_context());
     EXPECT_FALSE(client.is_ssl_initialized());
 
@@ -572,10 +576,11 @@ protected:
     }
 
     void TearDown() override { cleanup_certs(); }
+    io_context ctx_;
 };
 
 TEST_F(SslServerIntegration, StartWithCertificate) {
-    ssl_server server(ports(0u), 2);
+    ssl_server server(ports(0), ctx_, 2);
     ASSERT_TRUE(server.load_certificate(SERVER_CERT, SERVER_KEY));
 
     server.set_client_handler([](unique_ptr<tcp_socket> sock) {
@@ -587,12 +592,14 @@ TEST_F(SslServerIntegration, StartWithCertificate) {
     EXPECT_TRUE(started);
     EXPECT_TRUE(server.is_running());
 
-    ssl_client client;
+    ssl_client client(ctx_);
     client.set_ssl_context(ssl_context(ssl_method::TLS_CLIENT));
     client.set_verify_peer(false);
 
     ASSERT_TRUE(client.connect("127.0.0.1", server.port()));
     EXPECT_TRUE(client.is_connected());
+
+    this_thread::sleep_for(milliseconds(100));
 
     char buf[128];
     ssize_t received = client.receive(buf, sizeof(buf));
@@ -603,7 +610,7 @@ TEST_F(SslServerIntegration, StartWithCertificate) {
 }
 
 TEST_F(SslServerIntegration, StartWithoutCertFails) {
-    ssl_server server(ports(0u), 2);
+    ssl_server server(ports(0), ctx_, 2);
     server.set_client_handler([](unique_ptr<tcp_socket> sock) { sock->close(); });
 
     bool started = server.start();
@@ -612,7 +619,7 @@ TEST_F(SslServerIntegration, StartWithoutCertFails) {
 }
 
 TEST_F(SslServerIntegration, StopAndRestart) {
-    ssl_server server(ports(0u), 2);
+    ssl_server server(ports(0), ctx_, 2);
     ASSERT_TRUE(server.load_certificate(SERVER_CERT, SERVER_KEY));
 
     server.set_client_handler([](unique_ptr<tcp_socket> sock) {
@@ -634,11 +641,14 @@ TEST_F(SslServerIntegration, StopAndRestart) {
     EXPECT_TRUE(started);
     EXPECT_TRUE(server.is_running());
 
-    ssl_client client;
+    ssl_client client(ctx_);
     client.set_ssl_context(ssl_context(ssl_method::TLS_CLIENT));
     client.set_verify_peer(false);
 
     ASSERT_TRUE(client.connect("127.0.0.1", server.port()));
+
+    this_thread::sleep_for(milliseconds(100));
+
     char buf[128];
     ssize_t received = client.receive(buf, sizeof(buf));
     EXPECT_EQ(received, 7);
@@ -649,7 +659,7 @@ TEST_F(SslServerIntegration, StopAndRestart) {
 }
 
 TEST_F(SslServerIntegration, SetSslContextOverride) {
-    ssl_server server(ports(0u), 2);
+    ssl_server server(ports(0), ctx_, 2);
 
     ssl_context ctx(ssl_method::TLS_SERVER);
     ASSERT_TRUE(ctx.load_certificate(SERVER_CERT, SERVER_KEY));
@@ -661,5 +671,42 @@ TEST_F(SslServerIntegration, SetSslContextOverride) {
 
     bool started = server.start();
     EXPECT_TRUE(started);
+    server.stop();
+}
+
+TEST_F(SslServerIntegration, CancelAsyncReadWrite) {
+    ssl_server server(ports(0), ctx_, 2);
+    ASSERT_TRUE(server.load_certificate(SERVER_CERT, SERVER_KEY));
+
+    server.set_client_handler([](unique_ptr<tcp_socket> sock) {
+        this_thread::sleep_for(milliseconds(2000));
+        sock->close();
+    });
+    ASSERT_TRUE(server.start());
+
+    ssl_client client(ctx_);
+    client.set_ssl_context(ssl_context(ssl_method::TLS_CLIENT));
+    client.set_verify_peer(false);
+    ASSERT_TRUE(client.connect("127.0.0.1", server.port()));
+
+    stop_source stop_src;
+    cancellation_slot slot(stop_src.get_token());
+
+    bool handler_called = false;
+
+    auto& ssl_sock = dynamic_cast<ssl_socket&>(client.socket());
+    char buf[256];
+    ssl_sock.ssl().async_read(ctx_, {buf, sizeof(buf)}, slot, [&](error_code, size_t) { handler_called = true; });
+
+    ignore = stop_src.request_stop();
+
+    auto deadline = steady_clock::now() + seconds(3);
+    while (!handler_called && steady_clock::now() < deadline) {
+        ctx_.poll_one();
+    }
+
+    EXPECT_TRUE(handler_called);
+
+    client.disconnect();
     server.stop();
 }

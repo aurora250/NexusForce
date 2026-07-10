@@ -441,7 +441,8 @@ bool ssl_client::post_connect() {
     }
 }
 
-ssl_client::ssl_client(ssl_context ctx) :
+ssl_client::ssl_client(io_context& ioc, ssl_context ctx) :
+tcp_client_base(ioc),
 ssl_ctx_(move(ctx)) {
     if (ssl_ctx_) {
         ssl_ctx_->set_options(SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3 | SSL_OP_NO_TLSv1 | SSL_OP_NO_TLSv1_1);

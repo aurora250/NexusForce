@@ -31,7 +31,7 @@ http_client_response reverse_proxy_filter::forward(const proxy_backend& backend,
     cfg.receive_timeout = receive_timeout;
     cfg.follow_redirects = follow_redirects;
 
-    http_client client(cfg);
+    http_client client(*ctx_, cfg);
 
     http_client_request creq;
     creq.method = request.method;

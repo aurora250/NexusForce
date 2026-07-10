@@ -28,9 +28,7 @@ name_(move(name)) {}
 logger::~logger() {
     try {
         disable_async();
-
-        lock<mutex> lock(sinks_mutex_);
-        sinks_.clear();
+        clear_sinks();
         // NOLINTNEXTLINE(bugprone-empty-catch)
     } catch (...) {
         // ignore
@@ -73,6 +71,11 @@ void logger::set_level(const log_level level) {
 void logger::add_sink(shared_ptr<log_sink> sink) {
     lock<mutex> lock(sinks_mutex_);
     sinks_.push_back(move(sink));
+}
+
+void logger::clear_sinks() {
+    lock<mutex> lock(sinks_mutex_);
+    sinks_.clear();
 }
 
 void logger::set_filter(function<bool(const log_event&)> filter) {
@@ -154,9 +157,17 @@ void logger::disable_async() {
     drain_scheduled_.store(false, memory_order_release);
     async_.store(false, memory_order_release);
 
-    // Release worker threads and its TLS resources
+    while (drain_scheduled_.load(memory_order_acquire)) {
+        this_thread::yield();
+    }
+
     if (thread_pool_ && thread_pool_->running()) {
         thread_pool_->stop();
+    }
+
+    if (flush_requested_.exchange(false, memory_order_acq_rel)) {
+        lock<mutex> fl(flush_mutex_);
+        flush_cv_.notify_all();
     }
 }
 
@@ -195,12 +206,23 @@ void logger::submit_drain() {
     bool expected = false;
     if (drain_scheduled_.compare_exchange_strong(expected, true, memory_order_acq_rel)) {
         thread_pool_->submit_task([this] { drain_events(); });
+        return;
+    }
+    // CAS failed — a drain is already scheduled or running.
+    // If a flush is pending, submit an extra drain to avoid deadlock
+    // in case the existing drain finished without seeing flush_requested_.
+    if (flush_requested_.load(memory_order_acquire)) {
+        thread_pool_->submit_task([this] { drain_events(); });
     }
 }
 
 void logger::drain_events() {
     if (!async_.load(memory_order_acquire)) {
         drain_scheduled_.store(false, memory_order_release);
+        if (flush_requested_.exchange(false, memory_order_acq_rel)) {
+            lock<mutex> fl(flush_mutex_);
+            flush_cv_.notify_all();
+        }
         return;
     }
 
@@ -252,10 +274,15 @@ void logger::drain_events() {
         flush_cv_.notify_all();
     }
 
-    bool expected = false;
     {
         lock<mutex> lock(queue_mutex_);
-        if (async_queue_.empty() || !drain_scheduled_.compare_exchange_strong(expected, true, memory_order_acq_rel)) {
+        if (!async_queue_.empty()) {
+            bool expected = false;
+            if (!drain_scheduled_.compare_exchange_strong(expected, true, memory_order_acq_rel)) {
+                return;
+            }
+        } else {
+            drain_scheduled_.store(false, memory_order_release);
             return;
         }
     }
@@ -333,20 +360,40 @@ void logger::log(const log_level level, string msg, const source_loc loc) {
 
 void logger::flush() {
     if (async_.load(memory_order_acquire)) {
-        flush_requested_.store(true, memory_order_release);
-        submit_drain();
-
-        unique_lock<mutex> lock(flush_mutex_);
-        flush_cv_.wait(lock, [this] { return !flush_requested_.load(memory_order_acquire); });
-    } else {
-        lock<mutex> lock(sinks_mutex_);
-        for (const auto& sink: sinks_) {
-            try {
-                sink->flush();
-                // NOLINTNEXTLINE(bugprone-empty-catch)
-            } catch (...) {
-                // ignore
+        int flush_iter = 0;
+        for (;;) {
+            vector<log_event> remaining;
+            {
+                lock<mutex> lock(queue_mutex_);
+                while (!async_queue_.empty()) {
+                    remaining.push_back(async_queue_.pop());
+                }
+                if (remaining.empty()) {
+                    break;
+                }
             }
+            ++flush_iter;
+            lock<mutex> slk(sinks_mutex_);
+            for (auto& ev: remaining) {
+                try {
+                    for (auto& sink: sinks_) {
+                        sink->log(ev);
+                    }
+                    // NOLINTNEXTLINE(bugprone-empty-catch)
+                } catch (...) {
+                    // ignore
+                }
+            }
+        }
+    }
+
+    lock<mutex> slk(sinks_mutex_);
+    for (const auto& sink: sinks_) {
+        try {
+            sink->flush();
+            // NOLINTNEXTLINE(bugprone-empty-catch)
+        } catch (...) {
+            // ignore
         }
     }
 }

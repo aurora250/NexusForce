@@ -303,7 +303,9 @@ public:
      * @brief 获取哈希函数对象
      * @return 哈希函数对象的副本
      */
-    NEFORCE_NODISCARD hasher hash_funct() const noexcept(noexcept(ht_.hash_func())) { return ht_.hash_func(); }
+    NEFORCE_NODISCARD hasher hash_function() const noexcept(noexcept(ht_.hash_function())) {
+        return ht_.hash_function();
+    }
 
     /**
      * @brief 获取键相等比较函数对象

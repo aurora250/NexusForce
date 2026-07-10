@@ -17,7 +17,9 @@ using namespace neforce;
 
 int main() {
     // 创建TCP服务器，监听端口8080，使用4个工作线程
-    tcp_server server(ports(8080u), 4);
+    io_context context;
+
+    tcp_server server(ports(8080u), context, 4);
 
     // 设置客户端处理器：接收数据并原样返回
     server.set_client_handler([](unique_ptr<tcp_socket> client) {

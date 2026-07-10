@@ -24,15 +24,15 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 数据库数据类型转换异常
  */
 struct database_typecast_exception final : database_exception {
-    explicit database_typecast_exception(const char* info = "Database Type Mismatch.", const char* type = static_type,
-                                         const int code = 0) noexcept :
-    database_exception(info, type, code) {}
+    explicit database_typecast_exception(const char* info = "Database Type Mismatch.") noexcept :
+    database_exception(info) {}
 
     explicit database_typecast_exception(const exception& e) :
     database_exception(e) {}
 
     ~database_typecast_exception() override = default;
-    static constexpr auto static_type = "database_typecast_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "database_typecast_exception"; }
 };
 
 /**
@@ -40,15 +40,15 @@ struct database_typecast_exception final : database_exception {
  * @brief 数据库处理语句操作异常
  */
 struct database_stmt_exception final : database_exception {
-    explicit database_stmt_exception(const char* info = "Database Statement Operations Error.",
-                                     const char* type = static_type, const int code = 0) noexcept :
-    database_exception(info, type, code) {}
+    explicit database_stmt_exception(const char* info = "Database Statement Operations Error.") noexcept :
+    database_exception(info) {}
 
     explicit database_stmt_exception(const exception& e) :
     database_exception(e) {}
 
     ~database_stmt_exception() override = default;
-    static constexpr auto static_type = "database_prepared_stmt_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "database_prepared_stmt_exception"; }
 };
 
 /** @} */ // Exceptions

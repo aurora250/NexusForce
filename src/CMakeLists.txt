@@ -5,9 +5,11 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/compress/lz4_compress.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/compress/zlib_compress.cpp
 
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/async_compose.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/async_stream.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/condition_variable.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/event_loop.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/futex.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/async/io_context.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/lazy_thread.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/mutex.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/named_mutex.cpp
@@ -72,7 +74,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/daemon.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/pipe.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/process.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/registry.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/system/registry_key.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/share_memory.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/signal.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/system/stacktrace.cpp
@@ -225,7 +227,7 @@ nexusforce_compiler_options(NexusForce)
 # 链接系统库
 if(WIN32)
     target_link_libraries(NexusForce PUBLIC
-            bcrypt cfgmgr32 DbgHelp iphlpapi Psapi pdh
+            bcrypt cfgmgr32 Crypt32 DbgHelp iphlpapi Psapi pdh
             SetupAPI Shell32 synchronization Wbemuuid ws2_32 wsock32
     )
 elseif(UNIX AND NOT APPLE)
@@ -345,6 +347,15 @@ target_compile_definitions(NexusForce PUBLIC
         PCRE2_CODE_UNIT_WIDTH=8
 )
 message(STATUS "PCRE2 with JIT linked successfully")
+
+find_package(ICU REQUIRED COMPONENTS uc i18n)
+if(TARGET ICU::uc AND TARGET ICU::i18n)
+    target_link_libraries(NexusForce PUBLIC ICU::uc ICU::i18n)
+    target_compile_definitions(NexusForce PUBLIC NEFORCE_SUPPORT_ICU)
+    message(STATUS "ICU linked successfully")
+else()
+    message(FATAL_ERROR "ICU CMake targets (ICU::uc, ICU::i18n) not found")
+endif()
 
 message(STATUS "")
 

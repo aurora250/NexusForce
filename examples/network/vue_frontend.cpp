@@ -461,7 +461,8 @@ int main(int argc, char* argv[]) {
     println();
 
     // ---- 创建服务器 ----
-    http_server server{ports(port)};
+    io_context context;
+    http_server server{ports(port), context};
 
     auto& router = server.router();
 
@@ -574,7 +575,7 @@ int main(int argc, char* argv[]) {
         printfln("    curl http://localhost:{}/api/users", port);
         printfln("    curl -X POST http://localhost:{}/api/login -d 'username=demo'", port);
         println();
-        println("    Open http://localhost:{}/ in browser (after npm run build)", port);
+        printfln("    Open http://localhost:{}/ in browser (after npm run build)", port);
         println();
 
         while (true) {

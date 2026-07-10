@@ -1,3 +1,4 @@
+#include <NeForce/core/exception/system_exception.hpp>
 #include <NeForce/core/file/filesystem.hpp>
 #include <NeForce/logging/file_sink.hpp>
 NEFORCE_BEGIN_NAMESPACE__

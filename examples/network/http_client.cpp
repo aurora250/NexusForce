@@ -19,7 +19,8 @@ using namespace neforce;
 using namespace neforce::http;
 
 int main() {
-    http_client client;
+    io_context context;
+    http_client client(context);
 
     // 配置DNS服务器（中国大陆需使用国内DNS）
     client.get_client().set_dns_server(

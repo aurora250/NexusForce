@@ -7,6 +7,7 @@
  */
 
 #include "NeForce/core/async/mutex.hpp"
+#include "NeForce/core/exception/system_exception.hpp"
 #include "NeForce/core/time/duration.hpp"
 #include "NeForce/core/utility/color.hpp"
 NEFORCE_BEGIN_NAMESPACE__
@@ -22,15 +23,16 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief 控制台行为异常
  */
 struct console_exception final : device_exception {
-    explicit console_exception(const char* info = "Pipe Operation Failed.", const char* type = static_type,
-                               const int code = 0) noexcept :
-    device_exception(info, type, code) {}
+    explicit console_exception(const char* info = "Pipe Operation Failed.",
+                               const error_code code = last_error()) noexcept :
+    device_exception(info, code) {}
 
     explicit console_exception(const exception& e) :
     device_exception(e) {}
 
     ~console_exception() override = default;
-    static constexpr auto static_type = "console_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "console_exception"; }
 };
 
 /** @} */ // Exceptions

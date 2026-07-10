@@ -27,15 +27,15 @@ NEFORCE_BEGIN_NAMESPACE__
  * @brief optional访问异常
  */
 struct optional_exception final : memory_exception {
-    explicit optional_exception(const char* info = "Access the Null Value of Optional.", const char* type = static_type,
-                                const int code = 0) noexcept :
-    memory_exception(info, type, code) {}
+    explicit optional_exception(const char* info = "Access the Null Value of Optional.") noexcept :
+    memory_exception(info) {}
 
     explicit optional_exception(const exception& e) :
     memory_exception(e) {}
 
     ~optional_exception() override = default;
-    static constexpr auto static_type = "optional_exception";
+
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "optional_exception"; }
 };
 
 /** @} */ // Exceptions

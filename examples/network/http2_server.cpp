@@ -37,7 +37,8 @@ int main() {
 
     // ---- 1. h2c (cleartext) ----
     println("\n[1/2] Starting h2c server on port 8080...");
-    http_server h2c_server(ports(8080u), 2);
+    io_context context;
+    http_server h2c_server(ports(8080u), context, 2);
     auto& r1 = h2c_server.router();
 
     // 诊断路由：纯 HTTP/1.1，不经过 h2c 升级
@@ -123,7 +124,7 @@ int main() {
     if (ctx.load_certificate("server.crt", "server.key")) {
         println("[h2] Certificate loaded. ALPN auto-registered: h2, http/1.1");
 
-        h2_server.emplace(ports(8443u), move(ctx), 2);
+        h2_server.emplace(ports(8443u), context, move(ctx), 2);
         auto& r2 = h2_server->router();
 
         r2.use(make_unique<logging_filter>());

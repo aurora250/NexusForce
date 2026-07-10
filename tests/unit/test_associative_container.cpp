@@ -1891,7 +1891,7 @@ TEST_F(UnorderedMapTest, BucketSize) {
 
 TEST_F(UnorderedMapTest, HashFunc) {
     unordered_map<int, string> um;
-    auto hf = um.hash_func();
+    auto hf = um.hash_function();
     EXPECT_EQ(hf(42), hash<int>()(42));
 }
 
@@ -2278,7 +2278,7 @@ TEST_F(UnorderedSetTest, BucketSize) {
 
 TEST_F(UnorderedSetTest, HashFunct) {
     unordered_set<int> us;
-    auto hf = us.hash_funct();
+    auto hf = us.hash_function();
     EXPECT_EQ(hf(42), hash<int>()(42));
 }
 
@@ -2652,7 +2652,7 @@ TEST_F(UnorderedMultimapTest, BucketSize) {
 
 TEST_F(UnorderedMultimapTest, HashFunc) {
     unordered_multimap<int, string> umm;
-    auto hf = umm.hash_func();
+    auto hf = umm.hash_function();
     EXPECT_EQ(hf(42), hash<int>()(42));
 }
 
@@ -3025,7 +3025,7 @@ TEST_F(UnorderedMultisetTest, BucketSize) {
 
 TEST_F(UnorderedMultisetTest, HashFunc) {
     unordered_multiset<int> ums;
-    auto hf = ums.hash_func();
+    auto hf = ums.hash_function();
     EXPECT_EQ(hf(42), hash<int>()(42));
 }
 

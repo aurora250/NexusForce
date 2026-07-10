@@ -103,11 +103,6 @@ TEST_F(SocketExceptionTest, ConstructWithDefaultArgs) {
     EXPECT_NE(string(ex.what()), "");
 }
 
-TEST_F(SocketExceptionTest, ConstructWithCustomInfo) {
-    socket_exception ex("custom error", "custom_type", 42);
-    EXPECT_NE(string(ex.what()), "");
-}
-
 class SocketBaseTest : public ::testing::Test {
 protected:
     void SetUp() override {}

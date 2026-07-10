@@ -12,6 +12,7 @@
 #include "NeForce/core/async/mutex.hpp"
 #include "NeForce/core/async/thread.hpp"
 #include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/exception/system_exception.hpp"
 #include "NeForce/core/file/file_constants.hpp"
 #include "NeForce/core/file/path.hpp"
 #include "NeForce/core/functional/function.hpp"

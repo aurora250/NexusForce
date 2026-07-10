@@ -22,8 +22,13 @@ using namespace neforce::http;
 
 // ---- 后端服务器 ----
 
+namespace {
+    io_context ctx;
+}
+
+
 unique_ptr<http_server> start_backend(const string& name, uint16_t port) {
-    auto server = make_unique<http_server>(ports(port));
+    auto server = make_unique<http_server>(ports(port), ctx);
 
     server->router().get("/api/info", [name, port](http_request& req, http_response& res) {
         json_builder jb;
@@ -50,7 +55,7 @@ unique_ptr<http_server> start_backend(const string& name, uint16_t port) {
 class proxy_pool {
 public:
     void add_backend(const string& host, uint16_t port) {
-        backends_.push_back({host, port, make_unique<http_client>()});
+        backends_.push_back({host, port, make_unique<http_client>(ctx)});
     }
 
     http_client_response proxy(const string& path) {
@@ -94,7 +99,7 @@ int main() {
     println("Connection pool: 2 persistent HTTP clients");
 
     // 代理服务器
-    http_server proxy_server(ports(8080u));
+    http_server proxy_server(ports(8080u), ctx);
     auto& router = proxy_server.router();
 
     router.get("/api/info", [&pool](http_request& req, http_response& res) {

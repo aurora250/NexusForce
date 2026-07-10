@@ -28,17 +28,16 @@ NEFORCE_BEGIN_NAMESPACE__
  * @struct thread_exception
  * @brief 线程操作异常
  */
-struct thread_exception final : system_exception {
-    explicit thread_exception(const char* info = "Thread Operation Failed.", const char* type = static_type,
-                              const int code = 0) noexcept :
-    system_exception(info, type, code) {}
+struct thread_exception final : exception {
+    explicit thread_exception(const char* info = "Thread Operation Failed.") noexcept :
+    exception(info) {}
 
     explicit thread_exception(const exception& e) :
-    system_exception(e) {}
+    exception(e) {}
 
     ~thread_exception() override = default;
 
-    static constexpr auto static_type = "thread_exception";
+    NEFORCE_NODISCARD const char* type() const noexcept override { return "thread_exception"; }
 };
 
 /** @} */ // Exceptions

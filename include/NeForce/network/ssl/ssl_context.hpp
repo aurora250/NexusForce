@@ -9,7 +9,7 @@
  * 基于OpenSSL库实现，支持TLS服务器和客户端模式。
  */
 
-#include "NeForce/core/container/vector.hpp"
+#include "NeForce/core/string/string.hpp"
 #include "NeForce/core/memory/shared_ptr.hpp"
 #include "NeForce/network/ssl/ssl_exception.hpp"
 #include <openssl/ssl.h>

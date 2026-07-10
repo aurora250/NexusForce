@@ -12,9 +12,6 @@
 #    include <poll.h>
 #    include <sys/uio.h>
 #    include <cerrno>
-#elif defined(NEFORCE_PLATFORM_WINDOWS)
-#    include <winsock2.h>
-#    include <windows.h>
 #endif
 NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
@@ -480,15 +477,14 @@ void http_server::handle_client(unique_ptr<tcp_socket> client_socket) {
         if (ssl_sock != nullptr) {
             string alpn = ssl_sock->get_alpn_negotiated();
             if (alpn == "h2") {
-                auto loop = make_shared<event_loop>();
-                auto conn = make_shared<http2_connection>(move(client_socket), loop);
+                auto conn = make_shared<http2_connection>(move(client_socket), *ctx_);
                 conn->set_router(&router_);
                 conn->start();
-                thread t([loop]() { loop->run(); });
                 {
                     lock<mutex> lk(h2c_mutex_);
-                    h2c_loops_.push_back(loop);
-                    h2c_threads_.push_back(move(t));
+                    h2c_threads_.push_back(thread([conn = move(conn)]() {
+                        // Keep connection alive; I/O runs on io_context pool threads
+                    }));
                 }
                 return;
             }
@@ -613,7 +609,7 @@ void http_server::handle_connect(const unique_ptr<tcp_socket>& client_socket, ht
         return;
     }
 
-    tcp_client tunnel;
+    tcp_client tunnel(*ctx_);
     tunnel.set_connect_timeout(milliseconds(10000));
     if (!tunnel.connect(host, ports{port_num})) {
         send_error_response(client_socket.get(), http_status::S5_BAD_GATEWAY, "Failed to connect to tunnel target");
@@ -722,8 +718,9 @@ void http_server::handle_request_with_forward(tcp_socket& client_socket, http_re
     }
 }
 
-http_server::http_server(ports port, size_t worker_count) :
-server_(make_unique<tcp_server>(port, worker_count)) {
+http_server::http_server(ports port, io_context& ioc, size_t worker_count) :
+ctx_(&ioc),
+server_(make_unique<tcp_server>(port, ioc, worker_count)) {
     server_->set_client_handler([this](unique_ptr<tcp_socket> sock) { this->handle_client(move(sock)); });
 
     set_upgrade_handler("h2c", [this](http_request& request, tcp_socket* sock) -> bool {
@@ -734,7 +731,7 @@ server_(make_unique<tcp_server>(port, worker_count)) {
 
         {
             lock<mutex> lk(h2c_mutex_);
-            if (h2c_loops_.size() >= max_h2c_upgrades) {
+            if (h2c_threads_.size() >= max_h2c_upgrades) {
                 return false;
             }
         }
@@ -747,16 +744,9 @@ server_(make_unique<tcp_server>(port, worker_count)) {
         upgrade_resp.set_header("Upgrade", "h2c");
         send_response(sock, upgrade_resp);
 
-        auto loop = make_shared<event_loop>();
-        auto conn = make_shared<http2_connection>(unique_ptr<tcp_socket>(sock), loop);
+        auto conn = make_shared<http2_connection>(unique_ptr<tcp_socket>(sock), *ctx_);
         conn->set_router(&router_);
         conn->start();
-        thread t([loop, conn]() { loop->run(); });
-        {
-            lock<mutex> lk(h2c_mutex_);
-            h2c_loops_.push_back(loop);
-            h2c_threads_.push_back(move(t));
-        }
 
         // RFC 7540 §3.2: after h2c upgraded，raw HTTP/1.1 request will be regarded as the HEADERS frame of stream 1
         http_response h2_resp = router_.handle_request(request);
@@ -767,12 +757,19 @@ server_(make_unique<tcp_server>(port, worker_count)) {
         }
         conn->send_response(1, resp_headers, h2_resp.body, true);
 
+        // Keep connection alive to prevent premature destruction of I/O callbacks on io_context pool threads
+        {
+            lock<mutex> lk(h2c_mutex_);
+            h2c_threads_.push_back(thread([conn = move(conn)]() {}));
+        }
+
         return true;
     });
 }
 
-http_server::http_server(ports port, ssl_context ctx, size_t worker_count) :
-server_(make_unique<ssl_server>(port, worker_count)) {
+http_server::http_server(ports port, io_context& ioc, ssl_context ctx, size_t worker_count) :
+ctx_(&ioc),
+server_(make_unique<ssl_server>(port, ioc, worker_count)) {
     auto* ssl_srv = dynamic_cast<ssl_server*>(server_.get());
     if (ssl_srv != nullptr) {
         ctx.set_alpn_protos({"h2", "http/1.1"});
@@ -783,12 +780,6 @@ server_(make_unique<ssl_server>(port, worker_count)) {
 
 http_server::~http_server() {
     server_->stop();
-    {
-        lock<mutex> lk(h2c_mutex_);
-        for (auto& loop: h2c_loops_) {
-            loop->stop();
-        }
-    }
     for (auto& t: h2c_threads_) {
         if (t.joinable()) {
             t.join();
