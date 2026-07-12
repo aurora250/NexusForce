@@ -82,7 +82,8 @@ jobs:
             curl \
             zip \
             tar \
-            gzip
+            gzip \
+            liburing-dev
 
       - name: Setup GCC (if selected)
         if: matrix.compiler == 'gcc'
