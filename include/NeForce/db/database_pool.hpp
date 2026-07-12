@@ -262,6 +262,7 @@ shared_ptr<T> database_pool::acquire_impl() {
     const connection_entry entry = idle_queue_.front();
     idle_queue_.pop();
     lk.unlock_quiet();
+    cv_.notify_one();
 
     idb_connect* raw = entry.conn;
 
@@ -317,6 +318,7 @@ shared_ptr<T> database_pool::acquire_impl(const duration<Rep, Period>& timeout) 
     const connection_entry entry = idle_queue_.front();
     idle_queue_.pop();
     lk.unlock_quiet();
+    cv_.notify_one();
 
     idb_connect* raw = entry.conn;
 

@@ -3,7 +3,7 @@ if(NOT NEXUSFORCE_FORMAT)
 endif()
 
 find_program(CLANG_FORMAT_EXECUTABLE
-        NAMES clang-format clang-format-19 clang-format-18 clang-format-17 clang-format-16
+        NAMES clang-format-19
         DOC "clang-format executable"
 )
 

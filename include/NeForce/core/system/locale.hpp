@@ -341,20 +341,20 @@ public:
      */
     NEFORCE_NODISCARD vector<string> ui_languages() const;
 
-    NEFORCE_NODISCARD bool is_alpha(char32_t cp) const noexcept;       ///< 是否为字母
-    NEFORCE_NODISCARD bool is_digit(char32_t cp) const noexcept;       ///< 是否为数字
-    NEFORCE_NODISCARD bool is_alnum(char32_t cp) const noexcept;       ///< 是否为字母或数字
-    NEFORCE_NODISCARD bool is_space(char32_t cp) const noexcept;       ///< 是否为空白字符（POSIX/C）
-    NEFORCE_NODISCARD bool is_upper(char32_t cp) const noexcept;       ///< 是否为大写字母
-    NEFORCE_NODISCARD bool is_lower(char32_t cp) const noexcept;       ///< 是否为小写字母
-    NEFORCE_NODISCARD bool is_punct(char32_t cp) const noexcept;       ///< 是否为标点符号
-    NEFORCE_NODISCARD bool is_print(char32_t cp) const noexcept;       ///< 是否为可打印字符
-    NEFORCE_NODISCARD bool is_titlecase(char32_t cp) const noexcept;   ///< 是否为首字母大写
-    NEFORCE_NODISCARD bool is_white_space(char32_t cp) const noexcept; ///< 是否为 Unicode 空白字符
+    NEFORCE_NODISCARD static bool is_alpha(char32_t cp) noexcept;       ///< 是否为字母
+    NEFORCE_NODISCARD static bool is_digit(char32_t cp) noexcept;       ///< 是否为数字
+    NEFORCE_NODISCARD static bool is_alnum(char32_t cp) noexcept;       ///< 是否为字母或数字
+    NEFORCE_NODISCARD static bool is_space(char32_t cp) noexcept;       ///< 是否为空白字符（POSIX/C）
+    NEFORCE_NODISCARD static bool is_upper(char32_t cp) noexcept;       ///< 是否为大写字母
+    NEFORCE_NODISCARD static bool is_lower(char32_t cp) noexcept;       ///< 是否为小写字母
+    NEFORCE_NODISCARD static bool is_punct(char32_t cp) noexcept;       ///< 是否为标点符号
+    NEFORCE_NODISCARD static bool is_print(char32_t cp) noexcept;       ///< 是否为可打印字符
+    NEFORCE_NODISCARD static bool is_titlecase(char32_t cp) noexcept;   ///< 是否为首字母大写
+    NEFORCE_NODISCARD static bool is_white_space(char32_t cp) noexcept; ///< 是否为 Unicode 空白字符
 
-    NEFORCE_NODISCARD char32_t to_upper(char32_t cp) const noexcept;     ///< 转换为大写
-    NEFORCE_NODISCARD char32_t to_lower(char32_t cp) const noexcept;     ///< 转换为小写
-    NEFORCE_NODISCARD char32_t to_titlecase(char32_t cp) const noexcept; ///< 转换为首字母大写
+    NEFORCE_NODISCARD static char32_t to_upper(char32_t cp) noexcept;     ///< 转换为大写
+    NEFORCE_NODISCARD static char32_t to_lower(char32_t cp) noexcept;     ///< 转换为小写
+    NEFORCE_NODISCARD static char32_t to_titlecase(char32_t cp) noexcept; ///< 转换为首字母大写
 
     /**
      * @brief 比较两个字符串

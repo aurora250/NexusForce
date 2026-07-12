@@ -23,9 +23,6 @@ NEFORCE_BEGIN_NAMESPACE__
  * @{
  */
 
-template <typename T>
-struct atomic;
-
 /**
  * @struct atomic
  * @brief 通用原子类型模板

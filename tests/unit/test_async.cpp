@@ -3509,7 +3509,7 @@ TEST(BufferTest, EmptyScatterGather) {
 
 TEST(CoSpawnTest, CompileTimeInstantiation) {
     io_context ctx;
-    co_spawn(ctx.get_executor(), [] { return awaitable<void>(); });
+    co_spawn(ctx.get_executor(), []() -> awaitable<void> { co_return; });
     ctx.run_one(0);
     SUCCEED();
 }
@@ -3518,9 +3518,9 @@ TEST(CoSpawnTest, FactoryExecutedInRun) {
     io_context ctx;
     atomic<int> value{0};
 
-    co_spawn(ctx.get_executor(), [&value] {
+    co_spawn(ctx.get_executor(), [&value]() -> awaitable<void> {
         value.store(1, memory_order_release);
-        return awaitable<void>();
+        co_return;
     });
 
     EXPECT_EQ(value.load(memory_order_acquire), 0);
@@ -3533,9 +3533,9 @@ TEST(CoSpawnTest, WithStrand) {
     strand str(ctx);
     atomic<int> value{0};
 
-    co_spawn(str.get_executor(), [&value] {
+    co_spawn(str.get_executor(), [&value]() -> awaitable<void> {
         value.store(7, memory_order_release);
-        return awaitable<void>();
+        co_return;
     });
 
     EXPECT_EQ(value.load(memory_order_acquire), 0);
@@ -3547,13 +3547,13 @@ TEST(CoSpawnTest, MultipleCoSpawns) {
     io_context ctx;
     atomic<int> count{0};
 
-    co_spawn(ctx.get_executor(), [&count] {
+    co_spawn(ctx.get_executor(), [&count]() -> awaitable<void> {
         count.fetch_add(1, memory_order_release);
-        return awaitable<void>();
+        co_return;
     });
-    co_spawn(ctx.get_executor(), [&count] {
+    co_spawn(ctx.get_executor(), [&count]() -> awaitable<void> {
         count.fetch_add(1, memory_order_release);
-        return awaitable<void>();
+        co_return;
     });
 
     EXPECT_EQ(count.load(memory_order_acquire), 0);

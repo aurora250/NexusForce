@@ -291,6 +291,7 @@ string environment::app_data_directory() {
     }
     return home_directory() + "\\AppData\\Local";
 #else
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
     const char* xdg = ::getenv("XDG_DATA_HOME");
     if (xdg != nullptr && xdg[0] != '\0') {
         return xdg;
@@ -316,6 +317,7 @@ string environment::config_directory() {
     }
     return home_directory() + "\\AppData\\Roaming";
 #else
+    // NOLINTNEXTLINE(concurrency-mt-unsafe)
     const char* xdg = ::getenv("XDG_CONFIG_HOME");
     if (xdg != nullptr && xdg[0] != '\0') {
         return xdg;

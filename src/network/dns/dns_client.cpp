@@ -509,8 +509,8 @@ void dns_client::dns_query_op::start() {
     client->ensure_io_started();
 
     auto self = shared_from_this();
-    timer_id_ = client->ctx_->schedule_timer(static_cast<uint64_t>(client->config_.timeout.count()),
-                                             [self]() { self->on_timeout(); });
+    const auto timeout_ms = static_cast<uint64_t>(client->config_.timeout.count());
+    timer_id_ = client->ctx_->schedule_timer(timeout_ms, [self]() { self->on_timeout(); });
 
     if (cancel_slot != nullptr) {
         auto op_weak = weak_from_this();
@@ -584,6 +584,7 @@ void dns_client::start_io() {
     }
 
     shared_socket_.bind(ip_address::any());
+    shared_socket_.set_nonblocking(true);
 
     io_running_ = true;
     if (ctx_ == nullptr) {
@@ -901,7 +902,7 @@ void dns_client::async_query(const string_view domain, const dns_record::raw typ
 }
 
 auto dns_client::async_query(const string_view domain, const dns_record::raw type, const dns_class qclass,
-                             use_future_t) {
+                             use_future_t /*unused*/) {
     async_result<use_future_t, void(error_code, dns_query_result)> result(use_future);
     async_query(domain, type, qclass, result.get_handler());
     auto fut = result.get();
@@ -916,7 +917,7 @@ void dns_client::async_query(const string_view domain, const dns_record::raw typ
 
 #ifdef NEFORCE_STANDARD_20
 auto dns_client::async_query(const string_view domain, const dns_record::raw type, const dns_class qclass,
-                             use_awaitable_t) {
+                             use_awaitable_t /*unused*/) {
     async_result<use_awaitable_t, void(error_code, dns_query_result)> result(use_awaitable);
     async_query(domain, type, qclass, result.get_handler());
     return result.get();
@@ -932,15 +933,14 @@ dns_query_result dns_client::query(const string_view domain, const dns_record::r
     auto fut = async_query(domain, type, qclass, use_future);
 
     const auto deadline = steady_clock::now() + config_.timeout;
-    int poll_iter = 0;
     while (fut.wait_for(milliseconds(0)) != future_status::ready) {
-        if (steady_clock::now() >= deadline) {
+        const auto now = steady_clock::now();
+        if (now >= deadline) {
             NEFORCE_THROW_EXCEPTION(dns_exception::network_error("DNS query timed out"));
         }
-        const auto remaining = time_cast<milliseconds>(deadline - steady_clock::now());
-        const int poll_ms = min(static_cast<int>(remaining.count()), 100);
+        const auto remaining = time_cast<milliseconds>(deadline - now);
+        const int poll_ms = max(0, min(static_cast<int>(remaining.count()), 100));
         ctx_->run_one(poll_ms);
-        ++poll_iter;
     }
 
     return fut.get();

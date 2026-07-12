@@ -648,10 +648,10 @@ void websocket_session::start_event_driven() {
     auto self = shared_from_this();
 
     ctx_->add_fd(fd, epoll_in, [self](int f, uint32_t ev, error_code) {
-        if (ev & epoll_in) {
+        if ((ev & epoll_in) != 0U) {
             self->on_readable(f, ev, error_code{});
         }
-        if (ev & epoll_out) {
+        if ((ev & epoll_out) != 0U) {
             self->on_writable(f, ev, error_code{});
         }
     });

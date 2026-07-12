@@ -3,7 +3,7 @@ if(NOT NEXUSFORCE_CLANG_TIDY)
 endif()
 
 find_program(CLANG_TIDY_EXECUTABLE
-        NAMES clang-tidy clang-tidy-19 clang-tidy-18 clang-tidy-17
+        NAMES clang-tidy-19
         DOC "clang-tidy executable"
 )
 
@@ -26,39 +26,30 @@ list(FILTER TIDY_SOURCES EXCLUDE REGEX ".*/(build|vcpkg_installed)/.*")
 list(LENGTH TIDY_SOURCES NUM_TIDY_SOURCES)
 message(STATUS "Found ${NUM_TIDY_SOURCES} source files for clang-tidy")
 
-set(TIDY_REPORT_FILE "${CMAKE_BINARY_DIR}/clang_tidy_report.txt")
+set(TIDY_STAMP_DIR "${CMAKE_BINARY_DIR}/tidy_stamps")
+file(MAKE_DIRECTORY "${TIDY_STAMP_DIR}")
 
-set(TIDY_COMMANDS "")
+set(TIDY_STAMPS "")
 foreach(SOURCE_FILE ${TIDY_SOURCES})
-    list(APPEND TIDY_COMMANDS
+    string(REGEX REPLACE "[^a-zA-Z0-9_]" "_" STAMP_NAME "${SOURCE_FILE}")
+    set(STAMP_FILE "${TIDY_STAMP_DIR}/${STAMP_NAME}.stamp")
+    list(APPEND TIDY_STAMPS "${STAMP_FILE}")
+
+    add_custom_command(
+            OUTPUT "${STAMP_FILE}"
             COMMAND ${CLANG_TIDY_EXECUTABLE}
             "--config-file=${CMAKE_CURRENT_SOURCE_DIR}/.clang-tidy"
             "--extra-arg=-w"
             "-p" "${CMAKE_BINARY_DIR}"
             "${SOURCE_FILE}"
+            COMMAND ${CMAKE_COMMAND} -E touch "${STAMP_FILE}"
+            COMMENT "clang-tidy: ${SOURCE_FILE}"
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+            VERBATIM
     )
 endforeach()
 
 add_custom_target(tidy-check
-        ${TIDY_COMMANDS}
+        DEPENDS ${TIDY_STAMPS}
         COMMENT "Running clang-tidy on ${NUM_TIDY_SOURCES} files..."
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        VERBATIM
-)
-
-add_custom_target(tidy-check-report
-        COMMAND ${CMAKE_COMMAND}
-        -DCLANG_TIDY_EXECUTABLE=${CLANG_TIDY_EXECUTABLE}
-        -DCONFIG_FILE=${CMAKE_CURRENT_SOURCE_DIR}/.clang-tidy
-        -DBUILD_DIR=${CMAKE_BINARY_DIR}
-        -DREPORT_FILE=${TIDY_REPORT_FILE}
-        "-DSOURCE_FILES=${TIDY_SOURCES}"
-        -P "${CMAKE_CURRENT_SOURCE_DIR}/cmake/NexusForceRunTidy.cmake"
-        COMMENT "Running clang-tidy and saving report to ${TIDY_REPORT_FILE}..."
-        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        VERBATIM
-)
-
-set_directory_properties(PROPERTIES
-        ADDITIONAL_CLEAN_FILES "${TIDY_REPORT_FILE}"
 )

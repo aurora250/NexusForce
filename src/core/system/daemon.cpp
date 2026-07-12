@@ -21,6 +21,7 @@ NEFORCE_BEGIN_NAMESPACE__
 #ifdef NEFORCE_PLATFORM_LINUX
 namespace {
     bool sd_notify_impl(const string& state) {
+        // NOLINTNEXTLINE(concurrency-mt-unsafe)
         const char* socket_path = ::getenv("NOTIFY_SOCKET");
         if (socket_path == nullptr || socket_path[0] == '\0') {
             return false;
@@ -31,7 +32,7 @@ namespace {
             return false;
         }
 
-        struct ::sockaddr_un addr{};
+        ::sockaddr_un addr{};
         addr.sun_family = AF_UNIX;
         string_copy(addr.sun_path, socket_path, sizeof(addr.sun_path) - 1);
 

@@ -129,18 +129,32 @@ public:
     struct promise_type;
 
 private:
-    bool ready_{false};
-    exception_ptr exception_{nullptr};
-    coroutine_handle<> continuation_{nullptr};
+    struct state {
+        bool ready_{false};
+        exception_ptr exception_{nullptr};
+        coroutine_handle<> continuation_{nullptr};
+    };
+    shared_ptr<state> state_;
+
+    explicit awaitable(shared_ptr<state> s) :
+    state_(move(s)) {}
 
 public:
+    /**
+     * @brief 默认构造函数
+     *
+     * 构造一个独立的、未就绪的 awaitable。
+     */
+    awaitable() :
+    state_(make_shared<state>()) {}
+
     /**
      * @brief 标记完成
      */
     void set_value() {
-        ready_ = true;
-        if (continuation_) {
-            continuation_.resume();
+        state_->ready_ = true;
+        if (state_->continuation_) {
+            state_->continuation_.resume();
         }
     }
 
@@ -148,41 +162,53 @@ public:
      * @brief 设置异常
      */
     void set_exception(exception_ptr e) {
-        exception_ = move(e);
-        ready_ = true;
-        if (continuation_) {
-            continuation_.resume();
+        state_->exception_ = move(e);
+        state_->ready_ = true;
+        if (state_->continuation_) {
+            state_->continuation_.resume();
         }
     }
 
-    NEFORCE_NODISCARD bool await_ready() const noexcept { return ready_; }
-    void await_suspend(coroutine_handle<> h) noexcept { continuation_ = h; }
+    NEFORCE_NODISCARD bool await_ready() const noexcept { return state_->ready_; }
+    void await_suspend(coroutine_handle<> h) noexcept { state_->continuation_ = h; }
 
     void await_resume() {
-        if (exception_) {
-            rethrow_exception(exception_);
+        if (state_->exception_) {
+            rethrow_exception(state_->exception_);
         }
     }
 };
 
 struct awaitable<void>::promise_type {
-    awaitable<void> return_object_;
+    shared_ptr<awaitable<void>::state> state_;
 
-    awaitable<void> get_return_object() { return return_object_; }
+    promise_type() :
+    state_(make_shared<awaitable<void>::state>()) {}
+
+    awaitable<void> get_return_object() { return awaitable<void>(state_); }
     suspend_never initial_suspend() noexcept { return {}; }
 
     auto final_suspend() noexcept {
         struct awaiter {
-            awaitable<void>* owner;
+            shared_ptr<awaitable<void>::state> state;
             NEFORCE_NODISCARD bool await_ready() const noexcept { return false; }
-            void await_suspend(coroutine_handle<> /*unused*/) noexcept { owner->set_value(); }
+            void await_suspend(coroutine_handle<> h) noexcept {
+                state->ready_ = true;
+                if (state->continuation_) {
+                    state->continuation_.resume();
+                }
+                h.destroy();
+            }
             void await_resume() noexcept {}
         };
-        return awaiter{&return_object_};
+        return awaiter{state_};
     }
 
     void return_void() noexcept {}
-    void unhandled_exception() { return_object_.set_exception(current_exception()); }
+    void unhandled_exception() {
+        state_->exception_ = current_exception();
+        state_->ready_ = true;
+    }
 };
 
 /** @} */ // CompletionTokens

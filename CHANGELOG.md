@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [1.0.0-rc] - 2026-06-19
+## [1.0.0-rc] - 2026-07-12
 
 ### 🚀 New Features
 
@@ -112,6 +112,7 @@
 - 修复 `semaphore` 条件判断反转：`update > 0` 改为 `update <= 0`，修正 release 后未正确唤醒等待线程的问题
 - 修复 `thread_pool` 在 cached 模式下因 `thread_pool_id_generator` 的 inline 函数中 `static atomic` 在 DLL/EXE 边界产生双实例，导致线程 ID 冲突引发 `lazy_thread::start()` 空函数崩溃的问题
 - 修复 `thread_pool` worker 退出路径中 `threads_map_.empty()` 检查和 `exit_cond_.notify_all()` 未在 `worker_contexts_mtx_` 保护下执行，导致 `stop()` 可能丢失 `exit_cond_` 通知而永久阻塞
+- 修复 `database_pool::stop()` 中 `cv_.notify_all()` 未持锁调用，在 replenish 线程的 `pred()` 检查与 `wait()` 之间产生竞态窗口，可能导致通知丢失而使 `replenish_thread_.join()` 永久阻塞
 - 修复 `io_context` Windows WSA 事件映射中将 `FD_CLOSE` 错误纳入 `epoll_in`，导致 UDP ICMP 错误触发虚假可读通知
 - 修复 `io_context::~io_context()` 在 `run_one()` 惰性启动 monitor 线程后未 join，导致 `~thread()` 对 joinable 线程调用 `terminate`
 - 修复 `ssl_stream::connect()` / `accept()` 中 `ERR_get_error` 双重消费错误队列，导致 `handle_ssl_error` 获取不到真实错误

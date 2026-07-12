@@ -93,9 +93,10 @@ private:
     mutable shared_mutex cache_mutex_;                                              ///< 缓存互斥锁
     seconds cache_ttl_{300};                                                        ///< 缓存TTL
     bool use_tcp_ = false;                                                          ///< 是否强制使用TCP
-    bool recursion_desired_ = true;                                                 ///< 是否期望递归查询（RD）
-    uint16_t edns_udp_payload_{edns::DEFAULT_UDP_PAYLOAD};                          ///< EDNS0 UDP载荷大小
-    bool dnssec_ok_ = false;                                                        ///< 是否请求DNSSEC（DO）
+
+    bool recursion_desired_ = true;                        ///< 是否期望递归查询（RD）
+    uint16_t edns_udp_payload_{edns::DEFAULT_UDP_PAYLOAD}; ///< EDNS0 UDP载荷大小
+    bool dnssec_ok_ = false;                               ///< 是否请求DNSSEC（DO）
 
     udp_socket shared_socket_;                               ///< 共享UDP socket
     unordered_map<uint16_t, pending_entry> pending_queries_; ///< 待处理查询（ID索引）

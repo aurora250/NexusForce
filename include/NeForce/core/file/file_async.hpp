@@ -43,9 +43,16 @@ public:
 
     using native_handle_type = _NEFORCE native_handle_type; ///< 原生文件句柄类型
 
+#ifdef NEFORCE_PLATFORM_LINUX
+    struct uring;
+#endif
+
 private:
     native_handle_type handle_;
     io_context* ctx_{nullptr};
+#ifdef NEFORCE_PLATFORM_LINUX
+    unique_ptr<uring> uring_;
+#endif
     function<void(error_code, size_type)> pending_handler_;
 
     void ensure_iocp(io_context& ctx);

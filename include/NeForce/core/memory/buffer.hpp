@@ -272,7 +272,7 @@ public:
             return;
         }
         const size_t remaining = write_pos_ - n;
-        memmove(data_.data(), data_.data() + n, remaining);
+        memory_move(data_.data(), data_.data() + n, remaining);
         write_pos_ = remaining;
     }
 

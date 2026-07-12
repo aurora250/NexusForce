@@ -131,7 +131,10 @@ void database_pool::stop() {
         return;
     }
 
-    cv_.notify_all();
+    {
+        unique_lock<mutex> lk(queue_mtx_);
+        cv_.notify_all();
+    }
 
     if (replenish_thread_.joinable()) {
         replenish_thread_.join();
@@ -167,6 +170,13 @@ void database_pool::return_connect(idb_connect* conn) {
         delete conn;
         total_count_.fetch_sub(1, memory_order_relaxed);
         cv_.notify_one();
+        return;
+    }
+
+    if (!running_.load(memory_order_acquire)) {
+        // NOLINTNEXTLINE(cppcoreguidelines-owning-memory)
+        delete conn;
+        total_count_.fetch_sub(1, memory_order_relaxed);
         return;
     }
 

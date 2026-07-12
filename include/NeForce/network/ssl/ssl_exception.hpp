@@ -1,6 +1,6 @@
 #ifndef NEFORCE_NETWORK_SSL_SSL_EXCEPTION_HPP__
 #define NEFORCE_NETWORK_SSL_SSL_EXCEPTION_HPP__
-#include "NeForce/core/exception/exception.hpp"
+#include "NeForce/core/string/string.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

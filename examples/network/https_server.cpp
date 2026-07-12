@@ -33,8 +33,8 @@ namespace {
     const char* SERVER_CERT = "D:/OpenSSL/server.crt";
     const char* SERVER_KEY = "D:/OpenSSL/server.key";
 #else
-    const char* SERVER_CERT = "/tmp/neforce_test_server.crt";
-    const char* SERVER_KEY = "/tmp/neforce_test_server.key";
+    const char* SERVER_CERT = "/home/huenqi/server.crt";
+    const char* SERVER_KEY = "/home/huenqi/server.key";
 #endif
 } // namespace
 

@@ -228,10 +228,10 @@ io_context::~io_context() {
 #endif
 }
 
-void io_context::add_fd(native_handle_type fd, uint32_t events, fd_callback cb) {
+void io_context::add_fd(native_handle_type fd, uint32_t events, fd_callback cb, bool edge_triggered) {
 #ifdef NEFORCE_PLATFORM_LINUX
     ::epoll_event ev{};
-    ev.events = events | epoll_et;
+    ev.events = events | (edge_triggered ? epoll_et : 0U);
     ev.data.fd = fd;
     ::epoll_ctl(epoll_fd_, EPOLL_CTL_ADD, fd, &ev);
 
@@ -261,7 +261,7 @@ void io_context::add_fd(native_handle_type fd, uint32_t events, fd_callback cb) 
 #endif
 }
 
-void io_context::mod_fd(native_handle_type fd, uint32_t events) {
+void io_context::mod_fd(native_handle_type fd, uint32_t events, bool edge_triggered) {
 #ifdef NEFORCE_PLATFORM_LINUX
     auto it = fd_map_.find(fd);
     if (it == fd_map_.end()) {
@@ -270,7 +270,7 @@ void io_context::mod_fd(native_handle_type fd, uint32_t events) {
     it->second.events = events;
 
     ::epoll_event ev{};
-    ev.events = events | epoll_et;
+    ev.events = events | (edge_triggered ? epoll_et : 0U);
     ev.data.fd = fd;
     ::epoll_ctl(epoll_fd_, EPOLL_CTL_MOD, fd, &ev);
 #else
@@ -410,9 +410,10 @@ size_t io_context::run_one(int timeout_ms) {
         unique_lock<mutex> lk(timer_mutex_);
         if (!timer_heap_.empty()) {
             const uint64_t n_ms = now_ms();
-            if (timer_heap_.front().deadline_ms <= n_ms) {
+            const uint64_t front_deadline = timer_heap_.front().deadline_ms;
+            if (front_deadline <= n_ms) {
                 pop_heap(timer_heap_.begin(), timer_heap_.end(), greater<timer_entry>());
-                auto entry = move(timer_heap_.back());
+                const auto entry = move(timer_heap_.back());
                 timer_heap_.pop_back();
                 lk.unlock_quiet();
                 if (entry.callback) {
@@ -544,10 +545,14 @@ void io_context::stop() {
 
 io_context::executor io_context::get_executor() noexcept { return executor(*this); }
 
+#ifdef NEFORCE_PLATFORM_WINDOWS
+
 void io_context::register_file_completion(const uintptr_t key, file_completion_cb cb) {
     file_completions_[key] = move(cb);
 }
 
 void io_context::unregister_file_completion(const uintptr_t key) { file_completions_.erase(key); }
+
+#endif
 
 NEFORCE_END_NAMESPACE__

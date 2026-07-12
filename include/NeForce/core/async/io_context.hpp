@@ -185,15 +185,17 @@ public:
      * @param fd 要监控的文件描述符
      * @param events epoll_in / epoll_out 掩码
      * @param cb 事件就绪时的回调
+     * @param edge_triggered 是否使用边缘触发模式，默认 true
      */
-    void add_fd(native_handle_type fd, uint32_t events, fd_callback cb);
+    void add_fd(native_handle_type fd, uint32_t events, fd_callback cb, bool edge_triggered = true);
 
     /**
      * @brief 修改已注册 fd 的事件掩码
      * @param fd 已注册的文件描述符
      * @param events 新的事件掩码
+     * @param edge_triggered 是否使用边缘触发模式，默认 true
      */
-    void mod_fd(native_handle_type fd, uint32_t events);
+    void mod_fd(native_handle_type fd, uint32_t events, bool edge_triggered = true);
 
     /**
      * @brief 取消 fd 的事件监控

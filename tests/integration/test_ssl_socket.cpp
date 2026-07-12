@@ -40,8 +40,8 @@ namespace {
     const char* SERVER_CERT = "D:/OpenSSL/neforce_test_server.crt";
     const char* SERVER_KEY = "D:/OpenSSL/neforce_test_server.key";
 #else
-    const char* SERVER_CERT = "/tmp/neforce_test_server.crt";
-    const char* SERVER_KEY = "/tmp/neforce_test_server.key";
+    const char* SERVER_CERT = "/home/huenqi/server.crt";
+    const char* SERVER_KEY = "/home/huenqi/server.key";
 #endif
 
     bool generate_self_signed_cert() {

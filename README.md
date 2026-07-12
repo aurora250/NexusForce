@@ -357,6 +357,11 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 编译前确保您已经正确安装并配置了 CMake、vcpkg、clang-format、clang-tidy
 
 > 💡 您可以在项目根目录的 `config.json` (编译项配置) 与 `vcpkg.json` (包管理配置) 中更改配置项以进行个性化编译
+>
+> **本项目在 linux 系统中额外依赖 liburing-dev，构建前确保您已经安装**
+>
+> 实测 linux 系统中，vcpkg 构建 libmysql 需要 libtirpc-dev 库，libpg 需要 bison、flex、autoconf 库，且这些库不会由系统包管理器默认安装。
+> 如果您需要对应依赖，您可以通过系统包管理器提前安装以免 cmake 构建失败
 
 #### 🪟 Windows
 

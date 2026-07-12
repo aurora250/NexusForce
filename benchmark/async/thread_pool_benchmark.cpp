@@ -9,7 +9,7 @@ using namespace neforce;
 namespace {
     int _terminate_handler_reg = []() {
         neforce::set_terminate([]() {
-            eprintfln("[TERMINATE] thread_id={}", ::GetCurrentThreadId());
+            eprintfln("[TERMINATE] thread_id={}", this_thread::id().native_handle());
             eprintfln("[TERMINATE] call stack:{}", stacktrace::current().to_string());
             const auto exp = current_exception();
             try {
@@ -345,7 +345,7 @@ static void BM_ThreadPool_MultiProducer(benchmark::State& state) {
                     } catch (const exception& e) {
                         auto st = result.task_info->status.load();
                         eprintfln("[PRODUCER] p={} i={} tid={} EXCEPTION: {} {}  task_info_status={} error={}", p, i,
-                                  ::GetCurrentThreadId(), e.type(), e.what(), static_cast<int>(st),
+                                  this_thread::id().native_handle(), e.type(), e.what(), static_cast<int>(st),
                                   result.task_info->error);
                         eprintfln("[PRODUCER] pool stats: total_threads={} idle={} queue={} submitted={} completed={}",
                                   pool.statistics().total_threads, pool.statistics().idle_threads,
@@ -354,7 +354,7 @@ static void BM_ThreadPool_MultiProducer(benchmark::State& state) {
                         throw;
                     } catch (...) {
                         eprintfln("[PRODUCER] p={} i={} tid={} UNKNOWN EXCEPTION after get", p, i,
-                                  ::GetCurrentThreadId());
+                                  this_thread::id().native_handle());
                         throw;
                     }
                     total_submitted.fetch_add(1, memory_order_relaxed);

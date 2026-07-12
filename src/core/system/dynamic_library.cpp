@@ -185,7 +185,8 @@ vector<string> dynamic_library::list_symbols(const string& name_filter) const {
 
 #ifdef NEFORCE_PLATFORM_LINUX
     ::link_map* lm = nullptr;
-    if (::dlinfo(handle_, RTLD_DI_LINKMAP, &lm) != 0 || lm == nullptr) {
+    // NOLINTNEXTLINE(bugprone-multi-level-implicit-pointer-conversion)
+    if (::dlinfo(handle_, RTLD_DI_LINKMAP, static_cast<void*>(&lm)) != 0 || lm == nullptr) {
         return symbols;
     }
 
@@ -229,17 +230,13 @@ vector<string> dynamic_library::list_symbols(const string& name_filter) const {
             if (bidx < symoffset) {
                 continue;
             }
-            if (bidx > max_idx) {
-                max_idx = bidx;
-            }
+            max_idx = max(bidx, max_idx);
             uint32_t ci = bidx - symoffset;
             while ((chains[ci] & 1) == 0) {
                 ++ci;
             }
             const uint32_t last_in_chain = symoffset + ci;
-            if (last_in_chain > max_idx) {
-                max_idx = last_in_chain;
-            }
+            max_idx = max(last_in_chain, max_idx);
         }
         nchain = static_cast<size_t>(max_idx) + 1;
     }

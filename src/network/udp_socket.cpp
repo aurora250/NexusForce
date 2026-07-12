@@ -186,7 +186,7 @@ namespace {
             ::fd_set rfds;
             FD_ZERO(&rfds);
             FD_SET(fd, &rfds);
-            constexpr ::timeval tv{};
+            ::timeval tv{};
             if (::select(static_cast<int>(fd) + 1, &rfds, nullptr, nullptr, &tv) > 0) {
                 bool expected = false;
                 if (fired_.compare_exchange_strong(expected, true)) {
@@ -268,7 +268,7 @@ void udp_socket::async_send_to(io_context& ctx, memory_view<const char> data, co
     ::fd_set wfds;
     FD_ZERO(&wfds);
     FD_SET(fd, &wfds);
-    constexpr ::timeval tv{};
+    ::timeval tv{};
     if (::select(static_cast<int>(fd) + 1, nullptr, &wfds, nullptr, &tv) > 0) {
         bool expected = false;
         if (fired->compare_exchange_strong(expected, true)) {
@@ -337,7 +337,7 @@ void udp_socket::async_send_to(io_context& ctx, memory_view<const char> data, co
     ::fd_set wfds;
     FD_ZERO(&wfds);
     FD_SET(fd, &wfds);
-    constexpr ::timeval tv{};
+    ::timeval tv{};
     if (::select(static_cast<int>(fd) + 1, nullptr, &wfds, nullptr, &tv) > 0) {
         bool expected = false;
         if (fired->compare_exchange_strong(expected, true)) {

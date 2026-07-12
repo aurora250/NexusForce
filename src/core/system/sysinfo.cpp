@@ -686,6 +686,8 @@ void sysinfo::init() {
 
 #endif
 
+    numa_nodes_.clear();
+
 #ifdef NEFORCE_PLATFORM_WINDOWS
     {
         ::DWORD buf_size = 0;

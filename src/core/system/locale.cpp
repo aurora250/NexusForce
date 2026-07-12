@@ -128,6 +128,7 @@ namespace {
         if (::U_FAILURE(status) != 0) {
             return nullptr;
         }
+        // NOLINTNEXTLINE(bugprone-multi-level-implicit-pointer-conversion)
         return static_cast<void*>(fmt);
     }
 
@@ -140,6 +141,7 @@ namespace {
         ::UChar iso_uchar[4] = {};
         ::u_charsToUChars(iso_code, iso_uchar, 3);
         ::unum_setTextAttribute(fmt, ::UNUM_CURRENCY_CODE, iso_uchar, 3, &status);
+        // NOLINTNEXTLINE(bugprone-multi-level-implicit-pointer-conversion)
         return static_cast<void*>(fmt);
     }
 
@@ -160,16 +162,17 @@ namespace {
         if (::U_FAILURE(status) != 0) {
             return nullptr;
         }
+        // NOLINTNEXTLINE(bugprone-multi-level-implicit-pointer-conversion)
         return static_cast<void*>(fmt);
     }
 } // anonymous namespace
 
 
-void locale::load(const string& name) {
+void locale::load(const string& bcp47) {
     cleanup();
 
-    const char* input_name = name.data();
-    if (name.empty() || name == "C" || name == "POSIX") {
+    const char* input_name = bcp47.data();
+    if (bcp47.empty() || bcp47 == "C" || bcp47 == "POSIX") {
         input_name = "en-US-POSIX";
     }
 
@@ -177,15 +180,15 @@ void locale::load(const string& name) {
     char canonical[ULOC_FULLNAME_CAPACITY] = {};
     ::uloc_canonicalize(input_name, canonical, sizeof(canonical), &status);
     if (::U_FAILURE(status) != 0) {
-        throw locale_exception(string("locale: invalid locale name '"_s + name + "'").data());
+        throw locale_exception(string("locale: invalid locale name '"_s + bcp47 + "'").data());
     }
 
     icu_name_ = canonical;
 
     status = ::U_ZERO_ERROR;
-    char bcp47[ULOC_FULLNAME_CAPACITY] = {};
-    ::uloc_toLanguageTag(canonical, bcp47, sizeof(bcp47), 0, &status);
-    name_ = (::U_SUCCESS(status) != 0 && bcp47[0] != '\0') ? bcp47 : canonical;
+    char _bcp47[ULOC_FULLNAME_CAPACITY] = {};
+    ::uloc_toLanguageTag(canonical, _bcp47, sizeof(_bcp47), 0, &status);
+    name_ = (::U_SUCCESS(status) != 0 && _bcp47[0] != '\0') ? _bcp47 : canonical;
 
     char buf[ULOC_FULLNAME_CAPACITY] = {};
 
@@ -193,7 +196,7 @@ void locale::load(const string& name) {
     ::uloc_getLanguage(canonical, buf, sizeof(buf), &status);
     language_code_ = (::U_SUCCESS(status) != 0) ? buf : "";
     if (language_code_.empty()) {
-        throw locale_exception(string("locale: invalid locale name '"_s + name + "'").data());
+        throw locale_exception(string("locale: invalid locale name '"_s + _bcp47 + "'").data());
     }
 
     status = ::U_ZERO_ERROR;
@@ -388,26 +391,24 @@ vector<string> locale::ui_languages() const {
     return result;
 }
 
-bool locale::is_alpha(const char32_t cp) const noexcept { return ::u_isalpha(static_cast<::UChar32>(cp)) != 0; }
-bool locale::is_digit(const char32_t cp) const noexcept { return ::u_isdigit(static_cast<::UChar32>(cp)) != 0; }
-bool locale::is_alnum(const char32_t cp) const noexcept { return ::u_isalnum(static_cast<::UChar32>(cp)) != 0; }
-bool locale::is_space(const char32_t cp) const noexcept { return ::u_isspace(static_cast<::UChar32>(cp)) != 0; }
-bool locale::is_upper(const char32_t cp) const noexcept { return ::u_isupper(static_cast<::UChar32>(cp)) != 0; }
-bool locale::is_lower(const char32_t cp) const noexcept { return ::u_islower(static_cast<::UChar32>(cp)) != 0; }
-bool locale::is_punct(const char32_t cp) const noexcept { return ::u_ispunct(static_cast<::UChar32>(cp)) != 0; }
-bool locale::is_print(const char32_t cp) const noexcept { return ::u_isprint(static_cast<::UChar32>(cp)) != 0; }
-bool locale::is_titlecase(const char32_t cp) const noexcept { return ::u_istitle(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_alpha(const char32_t cp) noexcept { return ::u_isalpha(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_digit(const char32_t cp) noexcept { return ::u_isdigit(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_alnum(const char32_t cp) noexcept { return ::u_isalnum(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_space(const char32_t cp) noexcept { return ::u_isspace(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_upper(const char32_t cp) noexcept { return ::u_isupper(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_lower(const char32_t cp) noexcept { return ::u_islower(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_punct(const char32_t cp) noexcept { return ::u_ispunct(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_print(const char32_t cp) noexcept { return ::u_isprint(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_titlecase(const char32_t cp) noexcept { return ::u_istitle(static_cast<::UChar32>(cp)) != 0; }
+bool locale::is_white_space(const char32_t cp) noexcept { return ::u_isUWhiteSpace(static_cast<::UChar32>(cp)) != 0; }
 
-bool locale::is_white_space(const char32_t cp) const noexcept {
-    return ::u_isUWhiteSpace(static_cast<::UChar32>(cp)) != 0;
-}
-char32_t locale::to_upper(const char32_t cp) const noexcept {
+char32_t locale::to_upper(const char32_t cp) noexcept {
     return static_cast<char32_t>(::u_toupper(static_cast<::UChar32>(cp)));
 }
-char32_t locale::to_lower(const char32_t cp) const noexcept {
+char32_t locale::to_lower(const char32_t cp) noexcept {
     return static_cast<char32_t>(::u_tolower(static_cast<::UChar32>(cp)));
 }
-char32_t locale::to_titlecase(const char32_t cp) const noexcept {
+char32_t locale::to_titlecase(const char32_t cp) noexcept {
     return static_cast<char32_t>(::u_totitle(static_cast<::UChar32>(cp)));
 }
 
@@ -419,7 +420,11 @@ int locale::compare(const string& a, const string& b, const collate_strength str
     }
 
     ::UErrorCode status = ::U_ZERO_ERROR;
+#if U_ICU_VERSION_MAJOR_NUM >= 71
     ::UCollator* cloned = ::ucol_clone(col, &status);
+#else
+    ::UCollator* cloned = ::ucol_safeClone(col, nullptr, nullptr, &status);
+#endif
     if ((::U_FAILURE(status) != 0) || cloned == nullptr) {
         const int cmp = string_compare(a.data(), b.data());
         return (cmp < 0) ? -1 : (cmp > 0) ? 1 : 0;

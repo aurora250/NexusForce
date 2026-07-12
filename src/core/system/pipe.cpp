@@ -332,6 +332,7 @@ pipe::native_handle_type pipe::detach_write_handle() noexcept {
 #endif
 }
 
+// NOLINTNEXTLINE(hicpp-use-equals-default,modernize-use-equals-default)
 named_pipe::named_pipe()
 #ifdef NEFORCE_PLATFORM_WINDOWS
 :

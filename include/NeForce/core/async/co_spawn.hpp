@@ -9,8 +9,8 @@
  * 依赖于 C++20 协程支持。
  */
 
+#include "NeForce/core/async/coroutine.hpp"
 #ifdef NEFORCE_STANDARD_20
-#    include "NeForce/core/async/coroutine.hpp"
 #    include "NeForce/core/exception/exception_ptr.hpp"
 NEFORCE_BEGIN_NAMESPACE__
 

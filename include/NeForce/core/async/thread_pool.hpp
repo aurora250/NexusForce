@@ -288,8 +288,8 @@ struct task_info {
  */
 template <typename T>
 struct submit_result {
-    future<T> future;                ///< 任务的future
-    shared_ptr<task_info> task_info; ///< 任务信息
+    _NEFORCE future<T> future;                ///< 任务的future
+    shared_ptr<_NEFORCE task_info> task_info; ///< 任务信息
 
     /**
      * @brief 检查提交是否有效

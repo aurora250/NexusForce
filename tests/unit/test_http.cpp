@@ -4290,7 +4290,7 @@ TEST_F(HttpServerAlpnTest, HttpsConstructorSetsAlpnProtocols) {
 #ifdef NEFORCE_PLATFORM_WINDOWS
     bool cert_loaded = ctx.load_certificate("D:/OpenSSL/server.crt", "D:/OpenSSL/server.key");
 #else
-    bool cert_loaded = ctx.load_certificate("/tmp/h2test.crt", "/tmp/h2test.key");
+    bool cert_loaded = ctx.load_certificate("/home/huenqi/server.crt", "/home/huenqi/server.key");
 #endif
     if (!cert_loaded) {
         GTEST_SKIP() << "Test certificate not found (run 'openssl req -x509 ...' first)";
