@@ -70,8 +70,12 @@ file_async::~file_async() {
 
 file_async::file_async(file_async&& other) noexcept :
 handle_(other.handle_),
-ctx_(other.ctx_),
-uring_(move(other.uring_)) {
+ctx_(other.ctx_)
+#ifdef NEFORCE_PLATFORM_LINUX
+,
+uring_(move(other.uring_))
+#endif
+{
     other.handle_ = invalid_handle;
     other.ctx_ = nullptr;
 }
@@ -80,7 +84,9 @@ file_async& file_async::operator=(file_async&& other) noexcept {
     if (this != &other) {
         handle_ = other.handle_;
         ctx_ = other.ctx_;
+#ifdef NEFORCE_PLATFORM_LINUX
         uring_ = move(other.uring_);
+#endif
         other.handle_ = invalid_handle;
         other.ctx_ = nullptr;
     }

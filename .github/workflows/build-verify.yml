@@ -8,6 +8,7 @@ on:
       - 'include/**'
       - 'tests/**'
       - 'examples/**'
+      - 'tools/**'
       - 'benchmark/**'
       - 'cmake/**'
       - 'CMakeLists.txt'
@@ -16,6 +17,18 @@ on:
       - '.github/workflows/build-verify.yml'
   pull_request:
     branches: [ dev ]
+    paths:
+      - 'src/**'
+      - 'include/**'
+      - 'tests/**'
+      - 'examples/**'
+      - 'tools/**'
+      - 'benchmark/**'
+      - 'cmake/**'
+      - 'CMakeLists.txt'
+      - 'vcpkg.json'
+      - 'config.json'
+      - '.github/workflows/build-verify.yml'
   workflow_dispatch:
 
 jobs:
