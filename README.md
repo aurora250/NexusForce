@@ -155,12 +155,13 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 ## 🚀 特性
 
 ### 🔄 并发与异步 (Async)
-- **`io_context`** - 跨平台异步 I/O 执行上下文，统一事件循环、定时器与取消模型
-- **`cancellation_slot`** - 异步操作取消槽，支持 `async_connect` / `async_read` / `async_write` 可中断异步 I/O
-- **`thread_pool`** - 基于任务窃取与 NUMA 的高性能多策略线程池
+- **`thread_pool`** - 基于 NUMA 感知任务窃取与多策略定制的高性能线程池，性能测试详见 [线程池性能测试记录](benchmark/async/PERFORMANCE.md)
+- **`io_context`** - 异步 I/O 执行上下文，统一事件循环、定时器与取消模型
+- **`cancellation_slot`** - 支持 `async_connect` / `async_read` / `async_write` 可中断异步 I/O
 - **`timer_scheduler`/`basic_timer`** - 基于红黑树的定时任务调度，支持任务取消标志
 - **`async_stream`** - 异步流抽象接口，统一读写协议
 - **`async_read()` / `async_write()`** - 自由函数组合器，基于 `shared_from_this` 自动处理部分读写重试
+- **`thread_pool_executor`** - 将 `thread_pool::submit_task()` 适配为标准 executor 接口
 - **`generator`/`task`** - 协程原语和任务生成器
 - **`virtual_thread`** - C#风格的轻量级协程
 - **`connection`/`signal`/`signal_base`** - 观察者模式的信号槽，`signal_base` 提供类型擦除基类支持反射驱动的动态连接
@@ -179,6 +180,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **`bloom_filter`** - 概率性数据结构
 - **`lru_cache`/`ttl_cache`** - 基于最近最少使用/过期时间的缓存策略
 - **`buffer_chain`** - 零拷贝链式缓冲区，支持 writev 聚合输出
+- **`sparse_vector`/`sparse_set`/`sparse_map`/`sparse_multiset`/`sparse_multimap`** - 基于排序扁平数组的关联容器，O(log n) 二分查找，O(1) 缓存友好迭代
 - **`bitmap`/`bitset`** - 高效位操作容器
 
 ### 🔐 加密与安全 (Encrypt)
@@ -189,23 +191,29 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ### 📁 文件系统 (File)
 - **路径/文件操作** - 路径/文件系统操作 `path`/`path_tree`/`file`/`file_async`/`file_diff`/`file_locker`/`file_mapper`
+- **`file_async`** - 基于 `io_context` 的异步文件 I/O，支持指定偏移量与取消槽
 - **`file_watcher`** - 实时文件系统变更监控
 - **配置文件解析** - JSON/TOML/YAML/INI/ENV 值系统、格式解析与流式构建
 - **`temp_file`** - 安全的临时文件管理
 
 ### 🌐 网络库 (Network)
 - **HTTP/1.1 服务器** - 完整协议实现：`http_server` / `http_router` / `http_filter` 中间件链
-- **HTTP/2 支持** - 帧层与 HPACK 头部压缩（RFC 7540/7541），9 种帧类型，流状态机，流量控制
+- **HTTP/2 支持** - 帧层与 HPACK 头部压缩（RFC 7540/7541），9 种帧类型，流状态机，流量控制，TLS+ALPN 协商
 - **Radix Tree 路由** - 基于压缩前缀树的 O(k) 路由匹配，支持静态路径、:param 参数、* 通配符、正则回退
 - **HTTP 高级特性** - Range 请求（206 单/多范围）、gzip/deflate 响应压缩、Chunked 分块传输、CONNECT 隧道
+- **`multipart_parser` / `chunked_reader`** - 多部分表单解析与分块传输读取
 - **会话管理** - 可插拔 session_store（内存/Redis），CSRF Double-Submit Cookie 防护，Session Fixation 防护
+- **安全中间件** - `csrf_filter` CSRF 防护、`http_security` 安全响应头、`http_cache` HTTP 缓存策略
 - **WebSocket** - RFC 6455/7692 全双工通信 `websocket_session` / `websocket_server`，事件驱动零线程模式
 - **WebSocket 压缩** - permessage-deflate（RFC 7692），窗口比特位协商与上下文接管控制
-- **HTTP 客户端** - `http_client` 请求/响应处理
-- **TCP/UDP 套接字** - 高性能网络通信 `tcp_socket` / `udp_socket`
-- **SSL/TLS** - 加密网络传输 `ssl_context` / `ssl_stream`，SNI 多证书管理 `sni_manager`
-- **Event Loop** - Linux epoll 边缘触发，min-heap 定时器，异步 I/O 回调驱动
-- **`dns_client`** - 域名解析
+- **HTTP 客户端** - `http_client` scheme 感知模式（https 自动 SSL），请求/响应处理
+- **TCP/UDP 套接字** - 高性能网络通信 `tcp_socket` / `udp_socket`，支持 `async_connect()` / `async_read()` / `async_write()` 异步操作
+- **SSL/TLS** - 加密网络传输 `ssl_context` / `ssl_stream`，SNI 多证书管理 `sni_manager`，ALPN 协议协商
+- **`dns_client`** - 域名解析，per-operation 异步状态对象架构，completion-token 异步 API（回调/取消槽/future/awaitable）
+- **`io_context`** - 统一事件循环（Linux epoll 边缘触发 + min-heap 定时器），异步 I/O 回调驱动，取消模型
+- **`async_filter`** - 异步 pre/post 过滤链框架
+- **`byte_cursor`** - 无拷贝字节级协议解析游标，带边界检查与位级缓冲
+- **`load_balancer`** - 连接池 + 轮询负载均衡
 - **FTP** - FTP 服务器与客户端
 - **ICMP/SMTP** - ICMP 和 SMTP 协议操作
 - **`arp`/`mac_address`/`ip_address`/`ports`/`url`** - 网络编程工具
@@ -360,7 +368,7 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 >
 > **本项目在 linux 系统中额外依赖 liburing-dev，构建前确保您已经安装**
 >
-> 实测 linux 系统中，vcpkg 构建 libmysql 需要 libtirpc-dev 库，libpg 需要 bison、flex、autoconf 库，且这些库不会由系统包管理器默认安装。
+> 实测 linux 系统中，vcpkg 构建 libmysql 需要 libtirpc-dev 库，libpq 需要 bison、flex、autoconf 库，且这些库不会由系统包管理器默认安装。
 > 如果您需要对应依赖，您可以通过系统包管理器提前安装以免 cmake 构建失败
 
 #### 🪟 Windows

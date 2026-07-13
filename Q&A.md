@@ -147,7 +147,7 @@ NexusForce 选择自研 HTTP 协议栈的原因：
 
 3. **零依赖原则**：引入 Beast 会引入 Boost 整个依赖链（编译时间、二进制体积）。
 
-4. **Event Loop 深度定制**：基于 Linux epoll 边缘触发 + min-heap 定时器，可根据自身需求做针对性优化。
+4. **`io_context` 深度定制**：基于 Linux epoll 边缘触发 + min-heap 定时器，可根据自身需求做针对性优化。
 
 5. **统一的内存管理**：使用 NexusForce 自己的 `shared_ptr`、`buffer_chain`（零拷贝链式缓冲区）、`byte_cursor`（无拷贝帧解析），与框架内存管理策略完全一致。
 
@@ -201,7 +201,7 @@ NexusForce 提供多层次的并发支持：
 
 1. **线程池**（`thread_pool`）：基于任务窃取（work stealing）的多策略线程池，适合 CPU 密集型并行任务。
 
-2. **事件循环**（`event_loop`）：Linux epoll 边缘触发 + min-heap 定时器，适合 IO 密集型场景（HTTP 服务器、WebSocket）。
+2. **事件循环**（`io_context`）：Linux epoll 边缘触发 + min-heap 定时器，适合 IO 密集型场景（HTTP 服务器、WebSocket）。
 
 3. **协程**（coroutine `generator` / `task`）：C++20 协程原语。
 
@@ -211,7 +211,7 @@ NexusForce 提供多层次的并发支持：
 
 选择建议：
 - CPU 密集型 → `thread_pool`
-- IO 密集型（网络服务） → `event_loop`
+- IO 密集型（网络服务） → `io_context`
 - 大量并发任务 → `virtual_thread` 或协程
 - 简单并发 → `thread` / `async` / `future`
 
@@ -318,7 +318,7 @@ V1.0.0-rc 起，**核心 ABI 已固定**。这意味着在后续的 1.x 版本�
 - `core/container`、`core/memory`、`core/utility`、`core/string` 等核心模块可独立使用
 - `core/reflect` 需依赖核心模块
 - `db` 模块需依赖 `core/reflect` 和 `core/string`
-- `network` 模块需依赖 `core/async`（event_loop）和 `core/string`
+- `network` 模块需依赖 `core/async`（`io_context`）和 `core/string`
 - 编译时可通过 CMake 选项裁剪不必要的数据库后端
 
 ---
@@ -583,9 +583,9 @@ get(key):
 
 ---
 
-### Q: `event_loop` 的 epoll 边缘触发和 min-heap 定时器是如何配合的？
+### Q: `io_context` 的 epoll 边缘触发和 min-heap 定时器是如何配合的？
 
-`event_loop` 是 Reactor 模式的核心，混合了 I/O 多路复用和定时调度：
+`io_context` 是 Reactor 模式的核心，统一了事件循环、定时器与取消模型：
 
 **I/O 多路复用**：
 ```

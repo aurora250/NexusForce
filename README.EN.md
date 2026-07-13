@@ -66,7 +66,7 @@ NexusForce strictly adheres to modern C++ engineering best practices, ensuring c
 
 | Metric                            | Status                | Description                                                                                                                 |
 |-----------------------------------|-----------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| 📊 **Codebase Size**              | 120k+ Lines           | Core library source and header files                                                                                        |
+| 📊 **Codebase Size**              | 160k+ Lines           | Core library source and headers 90k+ lines, test code 60k+ lines                                                            |
 | 🔒 **CodeQL Security Analysis**   | **0 Vulnerabilities** | Full `security-and-quality` suite, zero security alerts                                                                     |
 | 🔍 **Clang-Tidy Static Analysis** | **Zero Warnings**     | Full ruleset (`bugprone` / `cppcoreguidelines` / `hicpp` / `modernize` / `performance` / `readability`), warnings as errors |
 | 🎨 **Clang-Format Code Style**    | **Strictly Enforced** | 120 columns, 4 spaces, K&R variant braces, mandatory brace insertion, etc.                                                  |
@@ -84,7 +84,7 @@ The core components of NexusForce strictly adhere to relevant international stan
 
 | Component                    | Standards Followed                                                                                                                                                                                                                                                                                                                                                                                         | Description                                                                                                                                                    |
 |------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **HTTP & WebSocket**         | [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) / [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) (HTTP/1.1), [RFC 6265](https://www.rfc-editor.org/rfc/rfc6265.html) (Cookie), [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455.html) (WebSocket), [W3C Fetch CORS](https://fetch.spec.whatwg.org/#http-cors-protocol)                                                                   | HTTP semantics and routing, Cookie management, CORS cross-origin policy, WebSocket upgrade and frame protocol                                                  |
+| **HTTP & WebSocket**         | [RFC 9110](https://www.rfc-editor.org/rfc/rfc9110.html) / [RFC 9112](https://www.rfc-editor.org/rfc/rfc9112.html) (HTTP/1.1), [RFC 7540](https://www.rfc-editor.org/rfc/rfc7540.html) / [RFC 7541](https://www.rfc-editor.org/rfc/rfc7541.html) (HTTP/2, HPACK), [RFC 6265](https://www.rfc-editor.org/rfc/rfc6265.html) (Cookie), [RFC 6455](https://www.rfc-editor.org/rfc/rfc6455.html) / [RFC 7692](https://www.rfc-editor.org/rfc/rfc7692.html) (WebSocket, permessage-deflate), [RFC 6066](https://www.rfc-editor.org/rfc/rfc6066.html) (SNI), [W3C Fetch CORS](https://fetch.spec.whatwg.org/#http-cors-protocol) | HTTP/1.1 semantics and routing, HTTP/2 frame layer and HPACK header compression, Range requests, response compression, CONNECT tunneling, Cookie and CSRF, CORS cross-origin policy, WebSocket upgrade/frame protocol/permessage-deflate compression, SNI multi-certificate |
 | **DNS Client**               | [RFC 1034](https://www.rfc-editor.org/rfc/rfc1034.html), [RFC 1035](https://www.rfc-editor.org/rfc/rfc1035.html), [RFC 2181](https://www.rfc-editor.org/rfc/rfc2181.html), [RFC 6891](https://www.rfc-editor.org/rfc/rfc6891.html), [RFC 3596](https://www.rfc-editor.org/rfc/rfc3596.html), [RFC 2782](https://www.rfc-editor.org/rfc/rfc2782.html)                                                       | DNS protocol client, A/AAAA/MX/SRV/PTR record queries, UDP/TCP transport auto-switching and TTL cache management                                               |
 | **ICMP Protocol**            | [RFC 792](https://www.rfc-editor.org/rfc/rfc792.html) (STD 5), [RFC 1122](https://www.rfc-editor.org/rfc/rfc1122.html), [RFC 4884](https://www.rfc-editor.org/rfc/rfc4884.html), [IANA ICMP Parameters Registry](https://www.iana.org/assignments/icmp-parameters/icmp-parameters.xhtml)                                                                                                                   | Ping (Echo Request/Reply) and Traceroute (Time Exceeded) network diagnostics, including RFC 1071 checksum algorithm                                            |
 | **SMTP Protocol**            | [RFC 5321](https://www.rfc-editor.org/rfc/rfc5321.html) (STD 10), [RFC 5322](https://www.rfc-editor.org/rfc/rfc5322.html), [RFC 3207](https://www.rfc-editor.org/rfc/rfc3207.html) (STARTTLS), [RFC 8314](https://www.rfc-editor.org/rfc/rfc8314.html) (Implicit TLS), [RFC 4954](https://www.rfc-editor.org/rfc/rfc4954.html) (AUTH), [RFC 2045–2047](https://www.rfc-editor.org/rfc/rfc2045.html) (MIME) | Email transport and message format, supporting PLAIN/LOGIN authentication, STARTTLS/Implicit TLS encryption, and MIME multipart messages                       |
@@ -156,7 +156,12 @@ The core components of NexusForce strictly adhere to relevant international stan
 
 ### 🔄 Concurrency & Async
 - **`thread_pool`** - Multi-strategy thread pool based on work stealing
+- **`io_context`** - Async I/O execution context, unified event loop, timer and cancellation model
+- **`cancellation_slot`** - Supports `async_connect` / `async_read` / `async_write` interruptible async I/O
 - **`timer_scheduler` / `basic_timer`** - Timer task scheduling based on red-black tree
+- **`async_stream`** - Async stream abstraction interface, unified read/write protocol
+- **`async_read()` / `async_write()`** - Free function combinators, automatic partial read/write retry via `shared_from_this`
+- **`thread_pool_executor`** - Adapts `thread_pool::submit_task()` to standard executor interface
 - **`generator` / `task`** - Coroutine primitives and task generator
 - **`virtual_thread`** - C#-style lightweight coroutines
 - **`connection` / `signal` / `signal_base`** - Observer pattern signal-slot, `signal_base` provides type-erased base for reflection-driven dynamic connections
@@ -174,6 +179,8 @@ The core components of NexusForce strictly adhere to relevant international stan
 - **`hashtable`** - Open addressing hash table
 - **`bloom_filter`** - Probabilistic data structure
 - **`lru_cache` / `ttl_cache`** - Cache policies based on Least Recently Used / Time-To-Live
+- **`buffer_chain`** - Zero-copy chained buffer, supports writev aggregated output
+- **`sparse_vector` / `sparse_set` / `sparse_map` / `sparse_multiset` / `sparse_multimap`** - Sorted flat-array based associative containers, O(log n) binary search, O(1) cache-friendly iteration
 - **`bitmap` / `bitset`** - Efficient bit manipulation containers
 
 ### 🔐 Encryption & Security
@@ -184,16 +191,29 @@ The core components of NexusForce strictly adhere to relevant international stan
 
 ### 📁 File System
 - **Path/File Operations** - Path and file system operations `path` / `path_tree` / `file` / `file_async` / `file_diff` / `file_locker` / `file_mapper`
+- **`file_async`** - `io_context`-driven async file I/O, with offset specification and cancellation slot support
 - **`file_watcher`** - Real-time file system change monitoring
 - **Config File Parsing** - JSON/TOML/YAML/INI/ENV value system, format parsing and streaming builder
 - **`temp_file`** - Secure temporary file management
 
 ### 🌐 Networking
-- **WebSocket** - Full-duplex communication protocol `websocket_session` / `websocket_server`
-- **TCP/UDP Socket** - High-performance network communication `tcp_socket` / `udp_socket`
-- **SSL/TLS** - Encrypted network transport `ssl_context` / `ssl_stream`
-- **HTTP Client/Server** - HTTP protocol implementation, including router, filters `http_filter` / `http_router` / `http_server` / `http_client`
-- **`dns_client`** - Domain name resolution
+- **HTTP/1.1 Server** - Complete protocol: `http_server` / `http_router` / `http_filter` middleware chain
+- **HTTP/2 Support** - Frame layer & HPACK header compression (RFC 7540/7541), 9 frame types, stream state machine, flow control, TLS+ALPN negotiation
+- **Radix Tree Routing** - O(k) route matching via compressed prefix tree, static paths, :param params, * wildcards, regex fallback
+- **HTTP Advanced Features** - Range requests (206 single/multi-range), gzip/deflate response compression, Chunked transfer, CONNECT tunneling
+- **`multipart_parser` / `chunked_reader`** - Multipart form parsing and chunked transfer reading
+- **Session Management** - Pluggable session_store (memory/Redis), CSRF Double-Submit Cookie protection, Session Fixation protection
+- **Security Middleware** - `csrf_filter` CSRF protection, `http_security` security headers, `http_cache` HTTP caching policies
+- **WebSocket** - RFC 6455/7692 full-duplex `websocket_session` / `websocket_server`, event-driven zero-thread mode
+- **WebSocket Compression** - permessage-deflate (RFC 7692), window bit negotiation and context takeover control
+- **HTTP Client** - `http_client` scheme-aware mode (auto SSL for https), request/response handling
+- **TCP/UDP Socket** - High-performance `tcp_socket` / `udp_socket`, with `async_connect()` / `async_read()` / `async_write()` async operations
+- **SSL/TLS** - Encrypted transport `ssl_context` / `ssl_stream`, SNI multi-certificate management `sni_manager`, ALPN protocol negotiation
+- **`dns_client`** - Domain name resolution, per-operation async state object architecture, completion-token async API (callback/cancellation slot/future/awaitable)
+- **`io_context`** - Unified event loop (Linux epoll edge-triggered + min-heap timer), async I/O callback-driven, cancellation model
+- **`async_filter`** - Async pre/post filter chain framework
+- **`byte_cursor`** - Zero-copy byte-level protocol parsing cursor, with bounds checking and bit-level buffering
+- **`load_balancer`** - Connection pool + round-robin load balancing
 - **FTP** - FTP server and client
 - **ICMP/SMTP** - ICMP and SMTP protocol operations
 - **`arp` / `mac_address` / `ip_address` / `ports` / `url`** - Network programming utilities
@@ -215,16 +235,16 @@ The core components of NexusForce strictly adhere to relevant international stan
 ### 📝 Logging
 - **`log_sink`** - Extensible log output targets
 - **`file_sink`** - Log file management and rotation
-- **Multi-Level Logging** - Support for different log levels
 - **`log_formatter`** - Customizable log format
-- **`logger`** - Flexible and configurable logger
+- **`logger`** - Thread-pool-driven async logger, supports `block`/`discard`/`overrun_oldest` overflow strategies, bounded ring buffer, auto drain scheduling
 
 ### 🔤 String Processing
-- **PCRE2 Regular Expressions** - Efficient regular expression matching with JIT support `regex` / `match_result` / `regex_iterator` / `regex_token_iterator`
-- **Unicode Support** - UTF conversion system, codepoint operation class `codepoint`
-- **`formatter` / `format`** - Type-safe formatted output
+- **PCRE2 Regular Expressions** - Efficient regex matching with JIT support `regex`/`match_result`/`regex_iterator`/`regex_token_iterator`, supports copy
+- **Unicode Support** - UTF conversion system, codepoint operation class `codepoint`, UTF-8 codepoint iterator `utf8_iterator` / `utf8_view`
+- **`formatter`/`format`** - Type-safe formatted output, supports positional params `{0}` `{1}` and named params `format_named()`
 - **`string_view`** - Extensive use of string views for optimized operations
 - **Numeric Conversion** - Extensible string-to-number and number-to-string conversion system
+- **Boyer-Moore-Horspool** - Narrow character substring search acceleration
 
 ### ⚙️ System Interface
 - **`process`** - Process creation and control
