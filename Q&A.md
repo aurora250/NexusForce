@@ -24,8 +24,8 @@ NexusForce 是一个**功能健全、风格统一、跨平台兼容**的现代 C
 | 维度        | NexusForce                         | Boost                              |
 |-----------|------------------------------------|------------------------------------|
 | 对 std 的态度 | **自研替代** —— 自行实现容器/智能指针/线程/原子等，再扩展 | **扩展/补充** —— 在 std 之上构建，补充标准库没有的功能 |
-| 组件关系      | 组件间深度集成（反射→ORM、反射→序列化、反射→信号槽）      | 各组件相对独立，无跨库集成约定                    |
-| 设计目标      | 统一风格、教学可读、生产可用                     | 极致的泛型编程与编译期能力                      |
+| 组件关系      | 组件间深度集成                            | 各组件相对独立，无跨库集成约定                    |
+| 设计目标      | 统一风格、生产可用、教学可读                     | 极致的泛型编程与编译期能力                      |
 | 代码体积      | 核心约 9 万行                           | 数千万行（仅头文件）                         |
 | 学习门槛      | 中等（接近标准库的使用方式）                     | 高（大量模板元编程技巧）                       |
 | 编译速度      | 较快（单个翻译单元）                         | 慢（深度模板实例化）                         |
@@ -64,15 +64,13 @@ Qt 的 MOC 需要完整的 Qt 构建体系。NexusForce 的反射直接驱动 OR
 
 POCO（POrtable COmponents）是另一套 C++ 工具库，在定位上比 Boost 更接近 NexusForce：
 
-| 维度       | NexusForce                                    | POCO                          |
-|----------|-----------------------------------------------|-------------------------------|
-| 标准库态度    | 自研替代标准库组件                                     | 在 std 之上构建                    |
-| 容器/内存/线程 | **全部自研**                                      | 使用标准库                         |
-| HTTP 能力  | HTTP/1.1 + HTTP/2 + WebSocket + Radix Tree 路由 | HTTP/1.1（有路由但无 Radix Tree）    |
-| ORM      | 反射驱动 auto-DDL/DML + repository                | 有 Data 模块（不如 NexusForce 深度集成） |
-| 反射系统     | 完整（宏标记 + 代码生成 + 运行时注册表）                       | 无                             |
-| 工程质量     | 0 漏洞 / 0 静态分析警告 / 0 内存泄漏                      | 良好                            |
-| 更新活跃度    | 活跃（2026 年持续更新）                                | 较慢                            |
+| 维度       | NexusForce                                    | POCO                       |
+|----------|-----------------------------------------------|----------------------------|
+| 标准库态度    | 自研替代标准库组件                                     | 在 std 之上构建                 |
+| 容器/内存/线程 | **全部自研**                                      | 使用标准库                      |
+| HTTP 能力  | HTTP/1.1 + HTTP/2 + WebSocket + Radix Tree 路由 | HTTP/1.1（有路由但无 Radix Tree） |
+| ORM      | 反射驱动 auto-DDL/DML + repository                | 有 Data 模块                  |
+| 反射系统     | 完整（宏标记 + 代码生成 + 运行时注册表）                       | 无                          |
 
 ---
 
@@ -217,119 +215,13 @@ NexusForce 提供多层次的并发支持：
 
 ---
 
-### Q: NexusForce 的代码质量和安全性如何？
-
-NexusForce 追求 C++ 项目的工程质量极致：
-
-| 检查类型                | 工具                                      | 结果                |
-|---------------------|-----------------------------------------|-------------------|
-| 安全漏洞                | CodeQL `security-and-quality` 全规则集      | **0 漏洞**          |
-| 静态分析                | Clang-Tidy 全量规则集                        | **零警告**           |
-| 动态内存检查              | Valgrind 全量测试                           | **0 泄漏，0 越界访问**   |
-| 代码风格                | Clang-Format 19.0（120 列、4 空格、K&R 变体大括号） | **强制统一**          |
-| C++ Core Guidelines | Clang-Tidy `cppcoreguidelines` 规则       | **已检查通过**         |
-| 测试规模                | GTest 单元测试 + 集成测试                       | **6 万+ 行测试代码**    |
-
-约 60 项 Clang-Tidy 显式豁免，均针对底层系统编程的固有需求（如 `reinterpret_cast` 在内存映射读写中的合理使用），遵循"默认严格，按需放开"原则。
-
----
-
-## 实际使用
-
-### Q: 如何开始使用 NexusForce？
-
-最小化步骤：
-
-```bash
-# 1. 克隆
-git clone --depth 1 https://github.com/aurora250/NexusForce.git
-cd NexusForce
-
-# 2. 构建
-mkdir build && cd build
-cmake ..     # Linux
-# 或
-cmake .. -G "Visual Studio 17 2022" -A x64  # Windows
-
-cmake --build . --config Release
-
-# 3. 安装
-cmake --install . --config Release
-```
-
-在你的 CMake 项目中：
-
-```cmake
-find_package(NexusForce REQUIRED)
-target_link_libraries(your_target PRIVATE NeForce::NexusForce)
-```
-
-详见 [QUICK_START.md](QUICK_START.md) 和 [examples](examples) 目录。
-
----
-
-### Q: 兼容哪些编译器和平台？
-
-| 平台                | 编译器                       | 状态      |
-|-------------------|---------------------------|---------|
-| Windows 10+ (x64) | MSVC (Visual Studio 2022) | ✅ 完全支持  |
-| Windows 10+ (x64) | LLVM-Clang / ClangCL      | ✅ 完全支持  |
-| Linux (x64)       | GCC                       | ✅ 完全支持  |
-| Linux (x64)       | LLVM-Clang                | ✅ 完全支持  |
-| MinGW             | -                         | ❌ 不兼容   |
-| ARM / ARM64       | -                         | ❌ 当前不支持 |
-
-C++ 标准：兼容 C++14 / 17 / 20。
-
----
-
-### Q: NexusForce 的 ABI 稳定性承诺是什么？
-
-V1.0.0-rc 起，**核心 ABI 已固定**。这意味着在后续的 1.x 版本中：
-
-- 公有 API（类布局、函数签名）保持二进制兼容
-- 补丁版本（1.0.x）不会引入 ABI 变更
-- 大版本（2.0.0）之前不会移除已标记为公有 API 的符号
-
----
-
-### Q: 项目依赖哪些第三方库？
-
-| 依赖       | 用途             | 是否必选    |
-|----------|----------------|---------|
-| GTest    | 单元测试（仅测试编译）    | 构建测试时必选 |
-| PCRE2    | 正则表达式          | **必选**  |
-| OpenSSL  | SSL/TLS 加密     | **必选**  |
-| libpq    | PostgreSQL 客户端 | 可选      |
-| libmysql | MySQL 客户端      | 可选      |
-| sqlite3  | SQLite 嵌入式数据库  | 可选      |
-| hiredis  | Redis 客户端      | 可选      |
-| lz4      | LZ4 高速压缩       | 可选      |
-| zlib     | Zlib 通用压缩      | 可选      |
-
-仅 3 个必选依赖（GTest 仅测试时需要），可选依赖通过 CMake 选项控制（如 `-DNEXUSFORCE_SUPPORT_SQLITE3=ON`）。
-
----
-
-### Q: 可以只使用部分组件吗？
-
-可以。NexusForce 的模块之间具有清晰的依赖边界：
-
-- `core/container`、`core/memory`、`core/utility`、`core/string` 等核心模块可独立使用
-- `core/reflect` 需依赖核心模块
-- `db` 模块需依赖 `core/reflect` 和 `core/string`
-- `network` 模块需依赖 `core/async`（`io_context`）和 `core/string`
-- 编译时可通过 CMake 选项裁剪不必要的数据库后端
-
----
-
 ## 技术深度 FAQ
 
 ### Q: `hazard_ptr`（危险指针）是如何工作的？
 
 Hazard Pointer 是一种无锁编程中的安全内存回收（SMR）机制。核心思想：
 
-1. **每个线程持有一个"危险指针"**（`hazard_pointer_record`），当线程要访问某个共享对象时，先将其地址写入自己的 hazard_ptr（memory_order_release），再读取对象。此时即便其他线程删除了该对象，回收器发现 hazard_ptr 仍指向它，就会延迟释放。
+**每个线程持有一个"危险指针"**（`hazard_pointer_record`），当线程要访问某个共享对象时，先将其地址写入自己的 hazard_ptr（memory_order_release），再读取对象。此时即便其他线程删除了该对象，回收器发现 hazard_ptr 仍指向它，就会延迟释放。
 
 ```
 读取线程:                           回收线程:
@@ -341,17 +233,17 @@ hazard_ptr.store(null, release)        delete ptr
                                        加入待回收列表（稍后重试）
 ```
 
-2. **`hazard_pointer_domain`** 管理全局的 hazard pointer 记录链表，`hazard_pointer_obj_base` 是所有可通过 hazard pointer 安全回收的对象的基类。
+**`hazard_pointer_domain`** 管理全局的 hazard pointer 记录链表，`hazard_pointer_obj_base` 是所有可通过 hazard pointer 安全回收的对象的基类。
 
-3. 这解决了两个核心问题：
-   - **ABA 问题**：CAS 操作前对象被释放又被重新分配，指针值相同但内容已变。hazard pointer 保证被保护的指针在保护期间不会被释放。
-   - **use-after-free**：线程读取节点时，节点被另一线程删除。hazard pointer 延迟释放直到没有线程持有该指针。
+这解决了两个核心问题：
+- **ABA 问题**：CAS 操作前对象被释放又被重新分配，指针值相同但内容已变。hazard pointer 保证被保护的指针在保护期间不会被释放。
+- **use-after-free**：线程读取节点时，节点被另一线程删除。hazard pointer 延迟释放直到没有线程持有该指针。
 
 ---
 
 ### Q: FUTEX 是什么？NexusForce 如何做跨平台 FUTEX 封装？
 
-**FUTEX**（Fast Userspace muTEX）是 Linux 内核提供的轻量级同步机制。核心洞察：大多数锁竞争不会发生，无需每次都陷入内核。
+**FUTEX**（Fast Userspace muTEX）是 Linux 内核提供的轻量级同步机制。这基于一个核心洞察：大多数锁竞争不会发生，无需每次都陷入内核。
 
 **工作流程**：
 ```
@@ -458,22 +350,6 @@ Radix Tree 路由适合 API 网关和微服务场景（大量精确路由 + 少�
 
 ---
 
-### Q: `byte_cursor` 解决了协议解析中的什么问题？
-
-`byte_cursor` 是一个**带边界检查的字节级游标**，专为协议解析设计。被 HPACK 解码器、HTTP/2 帧解析器、WebSocket 帧解析器共用。
-
-**设计要点**：
-
-1. **边界安全**：每次读取操作（`try_read_byte`、`try_read_uint16`、`try_read_bytes`）返回 `optional<T>`，数据不足时返回 `none`。消除了手动指针运算中最常见的越界读取 bug。
-
-2. **位级缓冲**：内部维护 `bit_buf_`（64 位）和 `bits_in_buf_`（缓存位数），支持跨字节边界的位读取——这在 HPACK Huffman 解码和 HTTP/2 帧解析中至关重要。例如读取 5 位 Huffman 前缀码时，不必手动管理字节边界。
-
-3. **零拷贝**：游标不拥有数据，仅持有 `const byte_t*` + `size_t` + `pos_`。可以从 `cbyte_view` 直接构造，适合在已有缓冲区上叠加解析。
-
-4. **一次性协议解析器**：当解析失败时，游标状态不变，可以丢弃后重试或被其他解析路径复用。
-
----
-
 ### Q: `buffer_chain` 的零拷贝原理是什么？
 
 `buffer_chain` 是一个**链式缓冲区**，将多个内存块链接在一起而不执行实际拷贝：
@@ -496,25 +372,6 @@ total_size_: 4369
 - **`to_iovec()`** —— 构建 POSIX `struct iovec` 数组，直接传给 `writev()` 系统调用，由内核完成分散-聚集 IO（scatter-gather I/O），**全程零拷贝**
 
 这在 HTTP 响应组装中极为关键：响应行 + 多个头部 + 空行 + 正文来自不同内存位置，buffer_chain 避免将它们合并拷贝的 O(n) 开销。
-
----
-
-### Q: Leonardo 堆和平滑排序（Smoothsort）有什么特别之处？
-
-Leonardo 堆是 Edsger W. Dijkstra 于 1981 年设计的数据结构，专门用于**平滑排序**（Smoothsort）。
-
-**Leonardo 数**（Dijkstra 为排序专门设计的数列）：
-```
-L(0)=1, L(1)=1, L(n)=L(n-1)+L(n-2)+1
-序列: 1, 1, 3, 5, 9, 15, 25, 41, 67, ...
-闭式: L(n) = 2×F(n+1) - 1（F 为 Fibonacci 数）
-```
-
-**堆结构**：每棵 Leonardo 树的大小的根节点左子树大小为 L(n-1)，右子树大小为 L(n-2)，自然形成"近似 AVL 树"的平衡结构。
-
-**核心优势 — 自适应 O(n) 最优情况**：当输入接近有序时，平滑排序的复杂度趋近于 O(n)。这与其他排序算法不同：快速排序在近乎有序时退化到 O(n²)（非随机 pivot），堆排序始终 O(n log n) 不降级。平滑排序是极少数在近乎有序输入上能做到 O(n) 的比较排序。
-
-NexusForce 实现的 `intro_sort`（内省排序）在递归深度过大时，从快速排序切换到堆排序。而 `smooth_sort` 直接使用 Leonardo 堆提供天然的"自适应"行为。
 
 ---
 
@@ -641,30 +498,6 @@ task_shared_state<T>:
 
 ---
 
-### Q: `memory_view` 对比 `std::span` 有什么差异？
-
-`memory_view<T, Extent>` 是 NexusForce 的非拥有内存视图，与 C++20 `std::span` 类似但有一些差异：
-
-```
-memory_view<T>               — 动态范围（extent = dynamic_extent）
-memory_view<T, N>            — 静态范围（N 在编译期确定）
-```
-
-**内部设计**：
-- `extent_storage<Extent>` —— 静态范围版本在编译期确定大小，不存储 size 成员（零开销）；动态范围版本存储 `size_t extent_value_`
-- 使用 `compressed_pair` 存储指针和 extent_storage，减少 padding
-
-**与 `std::span` 的差异**：
-
-| 维度        | `memory_view`                                        | `std::span`   |
-|-----------|------------------------------------------------------|---------------|
-| 元素类型      | `T`（支持 `void`/`const void` 原始字节视图 `cbyte_view`）      | `T`（不支持 void） |
-| extent 实现 | 特化 `extent_storage<dynamic_extent>`                  | 类似特化          |
-| 迭代器       | NexusForce 自研 `normal_iterator` + `reverse_iterator` | 标准迭代器         |
-| 集成        | 与 `byte_cursor` / `buffer_chain` / 反射系统互操作           | 标准库生态         |
-
----
-
 ### Q: Sparse 容器（`sparse_set`/`sparse_map`）的权衡是什么？
 
 NexusForce 的 sparse 系列容器基于**有序 vector + 二分查找**：
@@ -690,85 +523,6 @@ sparse_vector<T>:
 Sparse 容器在"构建一次、查询多次、频繁迭代"的场景（配置表、查找表、索引）中是最佳选择。两个插入策略：
 - `insert_unique` —— 键必须唯一，重复键返回已有元素迭代器
 - `insert_equal` —— 允许重复键（等价于 `sparse_multiset`/`sparse_multimap`）
-
----
-
-### Q: `int128_t`/`uint128_t` 的运算如何实现？
-
-由于没有硬件原生支持 128 位运算，`int128_t`/`uint128_t` 用软件模拟：
-
-```
-struct uint128_t {
-    uint64_t lo;  // 低 64 位
-    uint64_t hi;  // 高 64 位
-};
-```
-
-**加法**（带进位传播）：
-```
-lo = a.lo + b.lo         → 可能溢出，产生 carry
-hi = a.hi + b.hi + carry → 进位传播到高 64 位
-```
-
-**乘法**（分治）：
-```
-将 128 位拆为两个 64 位 × 64 位 → 128 位的乘积，再累加
-```
-
-**除法**：使用长除法（shift-and-subtract）模拟，是 128 位运算中最昂贵的操作。
-
-实现 `iarithmetic<T>`、`ibinary<T>`、`iobject<T>` 等 CRTP 接口，支持完整的运算符重载（+/-/\*/\/\%/<<\>>/&\|^/\~）和与内置整数类型的隐式构造。
-
----
-
-### Q: `scope_exit` 的构造函数为什么有两个重载？
-
-`scope_exit<Func>` 的构造函数通过 SFINAE 分派到两个版本：
-
-1. **异常不安全版本**（`is_nothrow_constructible_v<Func, F> == false`）：使用 function-try-block，若 Func 构造抛异常，立即执行 `func()` 进行清理。
-
-2. **异常安全版本**（`is_nothrow_constructible_v<Func, F> == true`）：标记 `noexcept`，无 try-catch 开销。
-
-两个版本均使用 `exact_arg_construct_tag` 和 `_NEFORCE forward<F>(func)`，确保完美转发且不触发隐式转换。激活标志 `bool{true}` 与 Func 一起存储在 `compressed_pair` 中。
-
-三个守卫的语义：
-
-| 守卫              | 触发条件         | 典型用途                   |
-|-----------------|--------------|------------------------|
-| `scope_exit`    | 作用域退出（正常+异常） | 资源释放（fd close、内存 free） |
-| `scope_fail`    | 仅异常退出        | 事务回滚、状态恢复              |
-| `scope_success` | 仅正常退出        | 提交操作、日志记录              |
-
----
-
-### Q: `buffer_chain` 和 `byte_cursor` 在 HTTP 响应路径中如何协作？
-
-以 HTTP/1.1 响应发送为例，两者在"读"和"写"两端各司其职：
-
-**写入端 — 响应组装**（`buffer_chain`）：
-```cpp
-buffer_chain response;
-response.append("HTTP/1.1 200 OK\r\n");      // 状态行
-response.append("Content-Type: text/html\r\n"); // 头
-response.append("\r\n");                        // 空行
-response.append(body.data(), body.size());      // 正文（body 可能在另一个缓冲区）
-// response 仅持有指针，尚未拷贝任何数据
-
-// POSIX 零拷贝输出：
-struct iovec* iov = response.to_iovec();
-writev(fd, iov, iov_count);  // 内核直接 scatter-gather
-```
-
-**读取端 — 协议解析**（`byte_cursor`）：
-```cpp
-byte_cursor cursor(received_data, len);
-auto b1 = cursor.try_read_byte();       // 安全读取一个字节
-auto u16 = cursor.try_read_uint16();    // 安全读取 2 字节（大端）
-auto payload = cursor.try_read_bytes(n); // 安全读取 n 字节
-if (!payload) { /* 数据不足，等待更多数据 */ }
-```
-
-在 WebSocket 帧解析中，`byte_cursor` 的位级缓冲可直接读取 4 位 opcode、1 位 mask、7 位 payload length 等非字节对齐字段。
 
 ---
 

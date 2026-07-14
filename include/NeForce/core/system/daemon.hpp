@@ -18,8 +18,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Daemon 守护进程
- * @brief 守护进程框架
+ * @addtogroup Exceptions 异常类集
  * @{
  */
 
@@ -39,6 +38,14 @@ struct daemon_exception final : system_exception {
 
     NEFORCE_NODISCARD const char* type() const noexcept override { return "daemon_exception"; }
 };
+
+/** @} */ // Exceptions
+
+/**
+ * @defgroup Daemon 守护进程
+ * @brief 守护进程框架
+ * @{
+ */
 
 /**
  * @class daemon

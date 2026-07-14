@@ -4,12 +4,10 @@
 [![CMake](https://img.shields.io/badge/CMake-3.19+-064C8B?style=flat-square&logo=cmake&logoColor=white)](https://cmake.org)
 [![C++](https://img.shields.io/badge/C++-14/17/20-00599C?style=flat-square&logo=cplusplus&logoColor=white)](https://isocpp.org)
 [![CodeQL](https://github.com/aurora250/NexusForce/workflows/CodeQL%20Analysis/badge.svg)](https://github.com/aurora250/NexusForce/actions/workflows/codeql.yml)
-[![Quality Gate](https://img.shields.io/badge/Quality%20Gate-Passed-success?style=flat-square&logo=sonarqube&logoColor=white)]()
 [![Clang Format](https://img.shields.io/badge/Clang--Format-19.0-blue?style=flat-square&logo=llvm&logoColor=white)](https://clang.llvm.org/docs/ClangFormat.html)
 [![Clang Tidy](https://img.shields.io/badge/Clang--Tidy-Passed-brightgreen?style=flat-square&logo=llvm&logoColor=white)](https://clang.llvm.org/extra/clang-tidy/)
 [![C++ Core Guidelines](https://img.shields.io/badge/C%2B%2B%20Core%20Guidelines-Checked-00599C?style=flat-square&logo=cplusplus&logoColor=white)](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)
-[![Valgrind](https://img.shields.io/badge/Valgrind-Tested-2E8B57?style=flat-square&logo=valgrind&logoColor=white)](https://valgrind.org)
-[![Memory Leak](https://img.shields.io/badge/Memory%20Leak-None-00C853?style=flat-square)](valgrind)
+[![Valgrind](https://img.shields.io/badge/Valgrind-Passed-2E8B57?style=flat-square&logo=valgrind&logoColor=white)](https://valgrind.org)
 [![License](https://img.shields.io/badge/License-MIT-F9A825?style=flat-square)](https://opensource.org/licenses/MIT)
 [![Docs](https://img.shields.io/badge/Docs-Website-1565C0?style=flat-square&logo=readthedocs&logoColor=white)](https://nexusforce.org.cn)
 [![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-4CAF50?style=flat-square&logo=git&logoColor=white)](https://github.com/aurora250/NexusForce/pulls)
@@ -104,13 +102,14 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 
 ### 🔐 密码学与安全算法
 
-| 组件              | 遵循标准                                                                                                                                         | 说明                                                                                                                                                     |
-|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **AES-256 加密**  | [NIST FIPS 197](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf), [ISO/IEC 18033-3](https://www.iso.org/standard/54531.html)   | 高级加密标准，支持 ECB/CBC/GCM 模式（[NIST SP 800-38A](https://csrc.nist.gov/pubs/sp/800/38/a/final) / [SP 800-38D](https://csrc.nist.gov/pubs/sp/800/38/d/final)） |
-| **SHA-256 哈希**  | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf), [RFC 6234](https://www.rfc-editor.org/rfc/rfc6234)            | 安全哈希算法（SHA-2 家族），256 位输出                                                                                                                               |
-| **SHA-1 哈希**    | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) (历史兼容)                                                         | ⚠️ 已标注安全警告（[SHAttered](https://shattered.io/) 碰撞攻击）                                                                                                    |
-| **MD5 哈希**      | [RFC 1321](https://www.rfc-editor.org/rfc/rfc1321) (历史兼容)                                                                                    | ⚠️ 已标注安全警告，仅用于非安全校验场景                                                                                                                                  |
-| **Base64 编码**   | [RFC 4648 §4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4), [RFC 4648 §5](https://www.rfc-editor.org/rfc/rfc4648.html#section-5)   | 标准与 URL 安全 Base64 编解码，严格填充规则与非法字符检测                                                                                                                    |
+| 组件                         | 遵循标准                                                                                                                                       | 说明                                                                                                                                                     |
+|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **AES-256 加密**             | [NIST FIPS 197](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.197-upd1.pdf), [ISO/IEC 18033-3](https://www.iso.org/standard/54531.html) | 高级加密标准，支持 ECB/CBC/GCM 模式（[NIST SP 800-38A](https://csrc.nist.gov/pubs/sp/800/38/a/final) / [SP 800-38D](https://csrc.nist.gov/pubs/sp/800/38/d/final)） |
+| **ChaCha20-Poly1305 AEAD** | [IETF RFC 8439](https://www.rfc-editor.org/rfc/rfc8439.html)                                                                               | ChaCha20 流密码 + Poly1305 认证器，AEAD 认证加密，支持关联数据（AAD）                                                                                                      |
+| **SHA-256 哈希**             | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf), [RFC 6234](https://www.rfc-editor.org/rfc/rfc6234)          | 安全哈希算法（SHA-2 家族），256 位输出                                                                                                                               |
+| **SHA-1 哈希**               | [NIST FIPS 180-4](https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf) (历史兼容)                                                       | ⚠️ 已标注安全警告（[SHAttered](https://shattered.io/) 碰撞攻击）                                                                                                    |
+| **MD5 哈希**                 | [RFC 1321](https://www.rfc-editor.org/rfc/rfc1321) (历史兼容)                                                                                  | ⚠️ 已标注安全警告，仅用于非安全校验场景                                                                                                                                  |
+| **Base64 编码**              | [RFC 4648 §4](https://www.rfc-editor.org/rfc/rfc4648.html#section-4), [RFC 4648 §5](https://www.rfc-editor.org/rfc/rfc4648.html#section-5) | 标准与 URL 安全 Base64 编解码，严格填充规则与非法字符检测                                                                                                                    |
 
 ### 🔤 字符编码与国际化
 
@@ -174,17 +173,19 @@ NexusForce 的核心组件实现严格遵循相关国际标准与行业规范，
 - **危险指针** - 无锁数据结构的内存管理 `hazard_ptr`/`hazard_pointer_domain`
 
 ### 📦 容器 (Container)
-- **标准容器** - `array`/`vector`/`list`/`deque`/`map`/`set`/`unordered_map`/`unordered_set` 等
+- **标准容器** - `array`/`vector`/`list`/`deque`/`map`/`set`/`unordered_map`/`unordered_set`/`sparse_map`/`sparse_set`/`flat_unordered_map`/`flat_unordered_set` 等
 - **`rb_tree`** - 自平衡二叉搜索树实现
-- **`hashtable`** - 开放寻址哈希表
+- **`hashtable`** - 链地址法哈希表
+- **`flat_hashtable`** - SwissTable 开放寻址平坦哈希表，H2 预过滤 + SIMD 批量探测
 - **`bloom_filter`** - 概率性数据结构
 - **`lru_cache`/`ttl_cache`** - 基于最近最少使用/过期时间的缓存策略
 - **`buffer_chain`** - 零拷贝链式缓冲区，支持 writev 聚合输出
-- **`sparse_vector`/`sparse_set`/`sparse_map`/`sparse_multiset`/`sparse_multimap`** - 基于排序扁平数组的关联容器，O(log n) 二分查找，O(1) 缓存友好迭代
+- **`sparse_vector`** - 基于排序扁平数组的关联容器，O(log n) 二分查找，O(1) 缓存友好迭代
 - **`bitmap`/`bitset`** - 高效位操作容器
 
 ### 🔐 加密与安全 (Encrypt)
 - **`AES256`** - 高级加密标准实现
+- **`ChaCha20Poly1305`** - ChaCha20-Poly1305 AEAD 认证加密，支持 AAD
 - **`SHA1`/`SHA256`** - 安全哈希算法
 - **`MD5`** - 消息摘要算法
 - **`base64`** - 二进制数据编码

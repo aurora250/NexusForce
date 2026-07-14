@@ -9,7 +9,6 @@
  */
 
 #include "NeForce/core/config/c++config.hpp"
-
 NEFORCE_BEGIN_NAMESPACE__
 
 /**

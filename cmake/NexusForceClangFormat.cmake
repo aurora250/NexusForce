@@ -2,10 +2,17 @@ if(NOT NEXUSFORCE_FORMAT)
     return()
 endif()
 
-find_program(CLANG_FORMAT_EXECUTABLE
-        NAMES clang-format-19
-        DOC "clang-format executable"
-)
+if (WIN32)
+    find_program(CLANG_FORMAT_EXECUTABLE
+            NAMES clang-format
+            DOC "clang-format executable"
+    )
+elseif(UNIX AND NOT APPLE)
+    find_program(CLANG_FORMAT_EXECUTABLE
+            NAMES clang-format-19
+            DOC "clang-format executable"
+    )
+endif()
 
 if(NOT CLANG_FORMAT_EXECUTABLE)
     message(WARNING "clang-format not found. Code formatting targets will not be available.")

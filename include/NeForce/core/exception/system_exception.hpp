@@ -5,6 +5,11 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
+ * @addtogroup Exceptions 异常类集
+ * @{
+ */
+
+/**
  * @struct system_exception
  * @brief 系统访问异常
  */
@@ -90,6 +95,7 @@ struct network_exception : system_exception {
     NEFORCE_NODISCARD const char* type() const noexcept override { return "network_exception"; }
 };
 
+/** @} */ // Exceptions
 
 NEFORCE_END_NAMESPACE__
 #endif // NEFORCE_CORE_EXCEPTION_SYSTEM_EXCEPTION_HPP__

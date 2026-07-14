@@ -13,7 +13,7 @@ NEFORCE_BEGIN_NAMESPACE__
 NEFORCE_BEGIN_HTTP__
 
 /**
- * @defgroup gRPC gRPC支持
+ * @defgroup gRPC gRPC
  * @brief gRPC协议支持（基于HTTP/2）
  *
  * gRPC over HTTP/2 协议栈：

@@ -30,7 +30,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup Repository 泛型Repository
+ * @defgroup Repository Repository
  * @brief 开箱即用的 CRUD 操作
  * @{
  */

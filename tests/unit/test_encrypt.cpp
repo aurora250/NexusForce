@@ -1,5 +1,6 @@
 #include <NeForce/core/encrypt/aes256.hpp>
 #include <NeForce/core/encrypt/base64.hpp>
+#include <NeForce/core/encrypt/chacha20_poly1305.hpp>
 #include <NeForce/core/encrypt/md5.hpp>
 #include <NeForce/core/encrypt/sha256.hpp>
 #include <NeForce/core/container/vector.hpp>
@@ -1714,4 +1715,328 @@ TEST_F(AES256Test, MultipleEncryptDecryptOperationsConsistent) {
     EXPECT_EQ(encrypted1, encrypted2);
     EXPECT_EQ(decrypted1, original);
     EXPECT_EQ(decrypted2, original);
+}
+
+class ChaCha20Poly1305Test : public ::testing::Test {
+protected:
+    byte_vector key_32;
+    byte_vector nonce_12;
+
+    void SetUp() override {
+        key_32.resize(32);
+        for (size_t i = 0; i < 32; ++i) {
+            key_32[i] = static_cast<byte_t>(i);
+        }
+
+        nonce_12.resize(12);
+        for (size_t i = 0; i < 12; ++i) {
+            nonce_12[i] = static_cast<byte_t>(i + 0x20);
+        }
+    }
+};
+
+TEST_F(ChaCha20Poly1305Test, EncryptRfc8439TestVector) {
+    const byte_t key_bytes[] = {0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a,
+                                0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94, 0x95,
+                                0x96, 0x97, 0x98, 0x99, 0x9a, 0x9b, 0x9c, 0x9d, 0x9e, 0x9f};
+    const byte_t nonce_bytes[] = {0x07, 0x00, 0x00, 0x00, 0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47};
+    const char* plaintext_str =
+            "Ladies and Gentlemen of the class of '99: If I could offer you only one tip for the future, sunscreen "
+            "would be it.";
+    const byte_t aad[] = {0x50, 0x51, 0x52, 0x53, 0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7};
+    const byte_t expected_ct[] = {
+            0xd3, 0x1a, 0x8d, 0x34, 0x64, 0x8e, 0x60, 0xdb, 0x7b, 0x86, 0xaf, 0xbc, 0x53, 0xef, 0x7e, 0xc2, 0xa4,
+            0xad, 0xed, 0x51, 0x29, 0x6e, 0x08, 0xfe, 0xa9, 0xe2, 0xb5, 0xa7, 0x36, 0xee, 0x62, 0xd6, 0x3d, 0xbe,
+            0xa4, 0x5e, 0x8c, 0xa9, 0x67, 0x12, 0x82, 0xfa, 0xfb, 0x69, 0xda, 0x92, 0x72, 0x8b, 0x1a, 0x71, 0xde,
+            0x0a, 0x9e, 0x06, 0x0b, 0x29, 0x05, 0xd6, 0xa5, 0xb6, 0x7e, 0xcd, 0x3b, 0x36, 0x92, 0xdd, 0xbd, 0x7f,
+            0x2d, 0x77, 0x8b, 0x8c, 0x98, 0x03, 0xae, 0xe3, 0x28, 0x09, 0x1b, 0x58, 0xfa, 0xb3, 0x24, 0xe4, 0xfa,
+            0xd6, 0x75, 0x94, 0x55, 0x85, 0x80, 0x8b, 0x48, 0x31, 0xd7, 0xbc, 0x3f, 0xf4, 0xde, 0xf0, 0x8e, 0x4b,
+            0x7a, 0x9d, 0xe5, 0x76, 0xd2, 0x65, 0x86, 0xce, 0xc6, 0x4b, 0x61, 0x16};
+    const byte_t expected_tag[] = {0x1a, 0xe1, 0x0b, 0x59, 0x4f, 0x09, 0xe2, 0x6a,
+                                   0x7e, 0x90, 0x2e, 0xcb, 0xd0, 0x60, 0x06, 0x91};
+    const size_t pt_len = char_traits<char>::length(plaintext_str);
+
+    byte_t tag[16];
+    auto encrypted = chacha20_poly1305::encrypt(cbyte_view{reinterpret_cast<const byte_t*>(plaintext_str), pt_len},
+                                                cbyte_view{key_bytes, 32}, cbyte_view{nonce_bytes, 12},
+                                                cbyte_view{aad, 12}, tag);
+
+    ASSERT_EQ(encrypted.size(), pt_len);
+    for (size_t i = 0; i < pt_len; ++i) {
+        EXPECT_EQ(static_cast<unsigned>(encrypted[i]), static_cast<unsigned>(expected_ct[i])) << "at index " << i;
+    }
+    for (size_t i = 0; i < 16; ++i) {
+        EXPECT_EQ(static_cast<unsigned>(tag[i]), static_cast<unsigned>(expected_tag[i])) << "at tag index " << i;
+    }
+}
+
+TEST_F(ChaCha20Poly1305Test, DecryptRfc8439TestVector) {
+    const byte_t key_bytes[] = {0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a,
+                                0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94, 0x95,
+                                0x96, 0x97, 0x98, 0x99, 0x9a, 0x9b, 0x9c, 0x9d, 0x9e, 0x9f};
+    const byte_t nonce_bytes[] = {0x07, 0x00, 0x00, 0x00, 0x40, 0x41, 0x42, 0x43, 0x44, 0x45, 0x46, 0x47};
+    const char* expected_plaintext =
+            "Ladies and Gentlemen of the class of '99: If I could offer you only one tip for the future, sunscreen "
+            "would be it.";
+    const byte_t aad[] = {0x50, 0x51, 0x52, 0x53, 0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7};
+    const byte_t ciphertext[] = {
+            0xd3, 0x1a, 0x8d, 0x34, 0x64, 0x8e, 0x60, 0xdb, 0x7b, 0x86, 0xaf, 0xbc, 0x53, 0xef, 0x7e, 0xc2, 0xa4,
+            0xad, 0xed, 0x51, 0x29, 0x6e, 0x08, 0xfe, 0xa9, 0xe2, 0xb5, 0xa7, 0x36, 0xee, 0x62, 0xd6, 0x3d, 0xbe,
+            0xa4, 0x5e, 0x8c, 0xa9, 0x67, 0x12, 0x82, 0xfa, 0xfb, 0x69, 0xda, 0x92, 0x72, 0x8b, 0x1a, 0x71, 0xde,
+            0x0a, 0x9e, 0x06, 0x0b, 0x29, 0x05, 0xd6, 0xa5, 0xb6, 0x7e, 0xcd, 0x3b, 0x36, 0x92, 0xdd, 0xbd, 0x7f,
+            0x2d, 0x77, 0x8b, 0x8c, 0x98, 0x03, 0xae, 0xe3, 0x28, 0x09, 0x1b, 0x58, 0xfa, 0xb3, 0x24, 0xe4, 0xfa,
+            0xd6, 0x75, 0x94, 0x55, 0x85, 0x80, 0x8b, 0x48, 0x31, 0xd7, 0xbc, 0x3f, 0xf4, 0xde, 0xf0, 0x8e, 0x4b,
+            0x7a, 0x9d, 0xe5, 0x76, 0xd2, 0x65, 0x86, 0xce, 0xc6, 0x4b, 0x61, 0x16};
+    const byte_t tag[] = {0x1a, 0xe1, 0x0b, 0x59, 0x4f, 0x09, 0xe2, 0x6a,
+                          0x7e, 0x90, 0x2e, 0xcb, 0xd0, 0x60, 0x06, 0x91};
+    const size_t ct_len = sizeof(ciphertext);
+    const size_t pt_len = char_traits<char>::length(expected_plaintext);
+
+    auto decrypted = chacha20_poly1305::decrypt(cbyte_view{ciphertext, ct_len}, cbyte_view{key_bytes, 32},
+                                                cbyte_view{nonce_bytes, 12}, cbyte_view{aad, 12}, cbyte_view{tag, 16});
+
+    ASSERT_EQ(decrypted.size(), pt_len);
+    for (size_t i = 0; i < pt_len; ++i) {
+        EXPECT_EQ(static_cast<unsigned>(decrypted[i]),
+                  static_cast<unsigned>(static_cast<byte_t>(expected_plaintext[i])))
+                << "at index " << i;
+    }
+}
+
+TEST_F(ChaCha20Poly1305Test, EncryptDecryptRoundtrip) {
+    const char* plaintext_str = "Hello, ChaCha20-Poly1305!";
+    const size_t pt_len = char_traits<char>::length(plaintext_str);
+    cbyte_view data{reinterpret_cast<const byte_t*>(plaintext_str), pt_len};
+
+    byte_t tag[16];
+    auto ciphertext = chacha20_poly1305::encrypt(data, key_32.view(), nonce_12.view(), {}, tag);
+
+    auto decrypted =
+            chacha20_poly1305::decrypt(ciphertext.view(), key_32.view(), nonce_12.view(), {}, cbyte_view{tag, 16});
+
+    ASSERT_EQ(decrypted.size(), pt_len);
+    for (size_t i = 0; i < pt_len; ++i) {
+        EXPECT_EQ(decrypted[i], static_cast<byte_t>(plaintext_str[i]));
+    }
+}
+
+TEST_F(ChaCha20Poly1305Test, EncryptDecryptRoundtripWithAad) {
+    const char* plaintext_str = "Data protected with associated data";
+    const size_t pt_len = char_traits<char>::length(plaintext_str);
+    const byte_t aad[] = {0xfe, 0xed, 0xfa, 0xce, 0xde, 0xad, 0xbe, 0xef};
+    cbyte_view data{reinterpret_cast<const byte_t*>(plaintext_str), pt_len};
+
+    byte_t tag[16];
+    auto ciphertext = chacha20_poly1305::encrypt(data, key_32.view(), nonce_12.view(), cbyte_view{aad, 8}, tag);
+
+    auto decrypted = chacha20_poly1305::decrypt(ciphertext.view(), key_32.view(), nonce_12.view(), cbyte_view{aad, 8},
+                                                cbyte_view{tag, 16});
+
+    ASSERT_EQ(decrypted.size(), pt_len);
+    for (size_t i = 0; i < pt_len; ++i) {
+        EXPECT_EQ(decrypted[i], static_cast<byte_t>(plaintext_str[i]));
+    }
+}
+
+TEST_F(ChaCha20Poly1305Test, EncryptEmptyPlaintext) {
+    byte_t tag[16];
+    auto ciphertext = chacha20_poly1305::encrypt({}, key_32.view(), nonce_12.view(), {}, tag);
+
+    EXPECT_TRUE(ciphertext.empty());
+
+    auto decrypted =
+            chacha20_poly1305::decrypt(ciphertext.view(), key_32.view(), nonce_12.view(), {}, cbyte_view{tag, 16});
+    EXPECT_TRUE(decrypted.empty());
+}
+
+TEST_F(ChaCha20Poly1305Test, EncryptEmptyAad) {
+    const byte_t plaintext[] = {0x01, 0x02, 0x03, 0x04, 0x05};
+
+    byte_t tag[16];
+    auto ciphertext = chacha20_poly1305::encrypt(cbyte_view{plaintext, 5}, key_32.view(), nonce_12.view(), {}, tag);
+
+    ASSERT_EQ(ciphertext.size(), 5);
+
+    auto decrypted =
+            chacha20_poly1305::decrypt(ciphertext.view(), key_32.view(), nonce_12.view(), {}, cbyte_view{tag, 16});
+
+    ASSERT_EQ(decrypted.size(), 5);
+    for (size_t i = 0; i < 5; ++i) {
+        EXPECT_EQ(decrypted[i], plaintext[i]);
+    }
+}
+
+TEST_F(ChaCha20Poly1305Test, EncryptEmptyBoth) {
+    byte_t tag[16];
+    auto ciphertext = chacha20_poly1305::encrypt({}, key_32.view(), nonce_12.view(), {}, tag);
+
+    EXPECT_TRUE(ciphertext.empty());
+
+    auto decrypted =
+            chacha20_poly1305::decrypt(ciphertext.view(), key_32.view(), nonce_12.view(), {}, cbyte_view{tag, 16});
+    EXPECT_TRUE(decrypted.empty());
+}
+
+TEST_F(ChaCha20Poly1305Test, DecryptTamperedCiphertextThrows) {
+    const byte_t plaintext[] = {0x01, 0x02, 0x03, 0x04, 0x05};
+
+    byte_t tag[16];
+    auto ciphertext = chacha20_poly1305::encrypt(cbyte_view{plaintext, 5}, key_32.view(), nonce_12.view(), {}, tag);
+
+    byte_vector tampered(ciphertext.begin(), ciphertext.end());
+    tampered[0] ^= 0x01;
+
+    EXPECT_THROW(
+            { chacha20_poly1305::decrypt(tampered.view(), key_32.view(), nonce_12.view(), {}, cbyte_view{tag, 16}); },
+            value_exception);
+}
+
+TEST_F(ChaCha20Poly1305Test, DecryptTamperedTagThrows) {
+    const byte_t plaintext[] = {0x01, 0x02, 0x03, 0x04, 0x05};
+
+    byte_t tag[16];
+    auto ciphertext = chacha20_poly1305::encrypt(cbyte_view{plaintext, 5}, key_32.view(), nonce_12.view(), {}, tag);
+
+    byte_t wrong_tag[16];
+    for (size_t i = 0; i < 16; ++i) {
+        wrong_tag[i] = tag[i];
+    }
+    wrong_tag[15] ^= 0x01;
+
+    EXPECT_THROW(
+            {
+                chacha20_poly1305::decrypt(ciphertext.view(), key_32.view(), nonce_12.view(), {},
+                                           cbyte_view{wrong_tag, 16});
+            },
+            value_exception);
+}
+
+TEST_F(ChaCha20Poly1305Test, DecryptTamperedAadThrows) {
+    const byte_t plaintext[] = {0x01, 0x02, 0x03, 0x04, 0x05};
+    const byte_t aad[] = {0xaa, 0xbb, 0xcc, 0xdd};
+
+    byte_t tag[16];
+    auto ciphertext = chacha20_poly1305::encrypt(cbyte_view{plaintext, 5}, key_32.view(), nonce_12.view(),
+                                                 cbyte_view{aad, 4}, tag);
+
+    const byte_t wrong_aad[] = {0xaa, 0xbb, 0xcc, 0xde};
+
+    EXPECT_THROW(
+            {
+                chacha20_poly1305::decrypt(ciphertext.view(), key_32.view(), nonce_12.view(), cbyte_view{wrong_aad, 4},
+                                           cbyte_view{tag, 16});
+            },
+            value_exception);
+}
+
+TEST_F(ChaCha20Poly1305Test, EncryptLargeData) {
+    byte_vector plaintext(1024);
+    for (size_t i = 0; i < 1024; ++i) {
+        plaintext[i] = static_cast<byte_t>(i & 0xFF);
+    }
+
+    byte_t tag[16];
+    auto ciphertext = chacha20_poly1305::encrypt(plaintext.view(), key_32.view(), nonce_12.view(), {}, tag);
+
+    ASSERT_EQ(ciphertext.size(), 1024);
+
+    auto decrypted =
+            chacha20_poly1305::decrypt(ciphertext.view(), key_32.view(), nonce_12.view(), {}, cbyte_view{tag, 16});
+
+    ASSERT_EQ(decrypted.size(), 1024);
+    for (size_t i = 0; i < 1024; ++i) {
+        EXPECT_EQ(decrypted[i], plaintext[i]) << "at index " << i;
+    }
+}
+
+TEST_F(ChaCha20Poly1305Test, EncryptDeterministic) {
+    const byte_t plaintext[] = {0x01, 0x02, 0x03, 0x04, 0x05};
+
+    byte_t tag1[16], tag2[16];
+    auto ct1 = chacha20_poly1305::encrypt(cbyte_view{plaintext, 5}, key_32.view(), nonce_12.view(), {}, tag1);
+    auto ct2 = chacha20_poly1305::encrypt(cbyte_view{plaintext, 5}, key_32.view(), nonce_12.view(), {}, tag2);
+
+    ASSERT_EQ(ct1.size(), ct2.size());
+    for (size_t i = 0; i < ct1.size(); ++i) {
+        EXPECT_EQ(ct1[i], ct2[i]);
+    }
+    for (size_t i = 0; i < 16; ++i) {
+        EXPECT_EQ(tag1[i], tag2[i]);
+    }
+}
+
+TEST_F(ChaCha20Poly1305Test, EncryptInvalidKeySizeThrows) {
+    const byte_t plaintext[] = {0x01, 0x02, 0x03};
+    const byte_t bad_key[] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a,
+                              0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15,
+                              0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e};
+    byte_t tag[16];
+
+    EXPECT_THROW(
+            {
+                chacha20_poly1305::encrypt(cbyte_view{plaintext, 3}, cbyte_view{bad_key, 31}, nonce_12.view(), {}, tag);
+            },
+            value_exception);
+}
+
+TEST_F(ChaCha20Poly1305Test, EncryptInvalidNonceSizeThrows) {
+    const byte_t plaintext[] = {0x01, 0x02, 0x03};
+    const byte_t bad_nonce[] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07};
+    byte_t tag[16];
+
+    EXPECT_THROW(
+            { chacha20_poly1305::encrypt(cbyte_view{plaintext, 3}, key_32.view(), cbyte_view{bad_nonce, 8}, {}, tag); },
+            value_exception);
+}
+
+TEST_F(ChaCha20Poly1305Test, DecryptInvalidTagSizeThrows) {
+    const byte_t plaintext[] = {0x01, 0x02, 0x03};
+
+    byte_t tag[16];
+    auto ciphertext = chacha20_poly1305::encrypt(cbyte_view{plaintext, 3}, key_32.view(), nonce_12.view(), {}, tag);
+
+    EXPECT_THROW(
+            { chacha20_poly1305::decrypt(ciphertext.view(), key_32.view(), nonce_12.view(), {}, cbyte_view{tag, 12}); },
+            value_exception);
+}
+
+TEST_F(ChaCha20Poly1305Test, DecryptShortCiphertextValidTag) {
+    const byte_t plaintext[] = {0x42};
+
+    byte_t tag[16];
+    auto ciphertext = chacha20_poly1305::encrypt(cbyte_view{plaintext, 1}, key_32.view(), nonce_12.view(), {}, tag);
+
+    ASSERT_EQ(ciphertext.size(), 1);
+
+    auto decrypted =
+            chacha20_poly1305::decrypt(ciphertext.view(), key_32.view(), nonce_12.view(), {}, cbyte_view{tag, 16});
+
+    ASSERT_EQ(decrypted.size(), 1);
+    EXPECT_EQ(decrypted[0], plaintext[0]);
+}
+
+TEST_F(ChaCha20Poly1305Test, EncryptNullTagThrows) {
+    const byte_t plaintext[] = {0x01, 0x02, 0x03};
+
+    EXPECT_THROW(
+            { chacha20_poly1305::encrypt(cbyte_view{plaintext, 3}, key_32.view(), nonce_12.view(), {}, nullptr); },
+            value_exception);
+}
+
+TEST_F(ChaCha20Poly1305Test, DecryptWrongAadLength) {
+    const byte_t plaintext[] = {0x01, 0x02, 0x03, 0x04};
+    const byte_t aad[] = {0xaa, 0xbb, 0xcc, 0xdd};
+
+    byte_t tag[16];
+    auto ciphertext = chacha20_poly1305::encrypt(cbyte_view{plaintext, 4}, key_32.view(), nonce_12.view(),
+                                                 cbyte_view{aad, 4}, tag);
+
+    const byte_t different_aad[] = {0xaa, 0xbb};
+
+    EXPECT_THROW(
+            {
+                chacha20_poly1305::decrypt(ciphertext.view(), key_32.view(), nonce_12.view(),
+                                           cbyte_view{different_aad, 2}, cbyte_view{tag, 16});
+            },
+            value_exception);
 }

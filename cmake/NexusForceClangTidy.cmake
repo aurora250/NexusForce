@@ -2,10 +2,17 @@ if(NOT NEXUSFORCE_CLANG_TIDY)
     return()
 endif()
 
-find_program(CLANG_TIDY_EXECUTABLE
-        NAMES clang-tidy-19
-        DOC "clang-tidy executable"
-)
+if (WIN32)
+    find_program(CLANG_TIDY_EXECUTABLE
+            NAMES clang-tidy
+            DOC "clang-tidy executable"
+    )
+elseif(UNIX AND NOT APPLE)
+    find_program(CLANG_TIDY_EXECUTABLE
+            NAMES clang-tidy-19
+            DOC "clang-tidy executable"
+    )
+endif()
 
 if(NOT CLANG_TIDY_EXECUTABLE)
     message(WARNING "clang-tidy not found. Static analysis disabled.")

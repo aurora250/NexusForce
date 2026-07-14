@@ -11,6 +11,10 @@
 #include <NeForce/core/container/sparse_multimap.hpp>
 #include <NeForce/core/container/sparse_multiset.hpp>
 #include <NeForce/core/container/sparse_set.hpp>
+#include <NeForce/core/container/flat_unordered_map.hpp>
+#include <NeForce/core/container/flat_unordered_set.hpp>
+#include <NeForce/core/container/flat_unordered_multimap.hpp>
+#include <NeForce/core/container/flat_unordered_multiset.hpp>
 #include <NeForce/core/utility/packages.hpp>
 #include <gtest/gtest.h>
 using namespace neforce;
@@ -4998,4 +5002,823 @@ TEST_F(SparseMultisetTest, Reserve) {
     sparse_multiset<int> ms;
     ms.reserve(100);
     EXPECT_GE(ms.capacity(), 100);
+}
+
+class FlatUnorderedMapTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+TEST_F(FlatUnorderedMapTest, DefaultConstructor) {
+    flat_unordered_map<int, string> m;
+    EXPECT_TRUE(m.empty());
+    EXPECT_EQ(m.size(), 0);
+    EXPECT_EQ(m.capacity(), 0);
+}
+
+TEST_F(FlatUnorderedMapTest, ConstructorWithCapacity) {
+    flat_unordered_map<int, string> m(50);
+    EXPECT_GE(m.capacity(), 16);
+}
+
+TEST_F(FlatUnorderedMapTest, ConstructorWithCapacityAndHash) {
+    hash<int> hf;
+    flat_unordered_map<int, string> m(30, hf);
+    EXPECT_GE(m.capacity(), 16);
+}
+
+TEST_F(FlatUnorderedMapTest, ConstructorWithCapacityHashAndEqual) {
+    hash<int> hf;
+    equal_to<int> eql;
+    flat_unordered_map<int, string> m(20, hf, eql);
+    EXPECT_GE(m.capacity(), 16);
+}
+
+TEST_F(FlatUnorderedMapTest, InitializerListConstructor) {
+    flat_unordered_map<int, string> m = {{1, "one"}, {2, "two"}, {3, "three"}};
+    EXPECT_EQ(m.size(), 3);
+    EXPECT_EQ(m[1], "one");
+    EXPECT_EQ(m[2], "two");
+    EXPECT_EQ(m[3], "three");
+}
+
+TEST_F(FlatUnorderedMapTest, RangeConstructor) {
+    vector<pair<int, string>> vec = {{1, "one"}, {2, "two"}, {3, "three"}};
+    flat_unordered_map<int, string> m(vec.begin(), vec.end());
+    EXPECT_EQ(m.size(), 3);
+}
+
+TEST_F(FlatUnorderedMapTest, RangeConstructorWithCapacity) {
+    vector<pair<int, string>> vec = {{1, "one"}, {2, "two"}};
+    flat_unordered_map<int, string> m(vec.begin(), vec.end(), 50);
+    EXPECT_EQ(m.size(), 2);
+}
+
+TEST_F(FlatUnorderedMapTest, RangeConstructorWithCapacityAndHash) {
+    vector<pair<int, string>> vec = {{1, "one"}};
+    hash<int> hf;
+    flat_unordered_map<int, string> m(vec.begin(), vec.end(), 30, hf);
+    EXPECT_EQ(m.size(), 1);
+}
+
+TEST_F(FlatUnorderedMapTest, CopyConstructor) {
+    flat_unordered_map<int, string> m1 = {{1, "one"}, {2, "two"}};
+    flat_unordered_map<int, string> m2(m1);
+    EXPECT_EQ(m2.size(), 2);
+    EXPECT_EQ(m2[1], "one");
+}
+
+TEST_F(FlatUnorderedMapTest, CopyAssignment) {
+    flat_unordered_map<int, string> m1 = {{1, "one"}, {2, "two"}};
+    flat_unordered_map<int, string> m2;
+    m2 = m1;
+    EXPECT_EQ(m2.size(), 2);
+}
+
+TEST_F(FlatUnorderedMapTest, MoveConstructor) {
+    flat_unordered_map<int, string> m1 = {{1, "one"}, {2, "two"}};
+    flat_unordered_map<int, string> m2(move(m1));
+    EXPECT_EQ(m2.size(), 2);
+}
+
+TEST_F(FlatUnorderedMapTest, MoveAssignment) {
+    flat_unordered_map<int, string> m1 = {{1, "one"}};
+    flat_unordered_map<int, string> m2;
+    m2 = move(m1);
+    EXPECT_EQ(m2.size(), 1);
+}
+
+TEST_F(FlatUnorderedMapTest, BeginEnd) {
+    flat_unordered_map<int, string> m = {{1, "one"}, {2, "two"}, {3, "three"}};
+    int count = 0;
+    for (auto it = m.begin(); it != m.end(); ++it) {
+        ++count;
+    }
+    EXPECT_EQ(count, 3);
+}
+
+TEST_F(FlatUnorderedMapTest, ConstBeginEnd) {
+    const flat_unordered_map<int, string> m = {{1, "one"}, {2, "two"}};
+    int count = 0;
+    for (auto it = m.begin(); it != m.end(); ++it) {
+        ++count;
+    }
+    EXPECT_EQ(count, 2);
+}
+
+TEST_F(FlatUnorderedMapTest, CbeginCend) {
+    flat_unordered_map<int, string> m = {{1, "one"}};
+    int count = 0;
+    for (auto it = m.cbegin(); it != m.cend(); ++it) {
+        ++count;
+    }
+    EXPECT_EQ(count, 1);
+}
+
+TEST_F(FlatUnorderedMapTest, Size) {
+    flat_unordered_map<int, string> m;
+    EXPECT_EQ(m.size(), 0);
+    m.insert({1, "one"});
+    EXPECT_EQ(m.size(), 1);
+}
+
+TEST_F(FlatUnorderedMapTest, Empty) {
+    flat_unordered_map<int, string> m;
+    EXPECT_TRUE(m.empty());
+    m.insert({1, "one"});
+    EXPECT_FALSE(m.empty());
+}
+
+TEST_F(FlatUnorderedMapTest, InsertCopy) {
+    flat_unordered_map<int, string> m;
+    pair<int, string> val = {1, "one"};
+    auto result = m.insert(val);
+    EXPECT_TRUE(result.second);
+    EXPECT_EQ(result.first->first, 1);
+}
+
+TEST_F(FlatUnorderedMapTest, InsertMove) {
+    flat_unordered_map<int, string> m;
+    auto result = m.insert({1, "one"});
+    EXPECT_TRUE(result.second);
+    EXPECT_EQ(m.size(), 1);
+}
+
+TEST_F(FlatUnorderedMapTest, InsertDuplicateKey) {
+    flat_unordered_map<int, string> m = {{1, "one"}};
+    auto result = m.insert({1, "again"});
+    EXPECT_FALSE(result.second);
+    EXPECT_EQ(m.size(), 1);
+    EXPECT_EQ(m[1], "one");
+}
+
+TEST_F(FlatUnorderedMapTest, Emplace) {
+    flat_unordered_map<int, string> m;
+    auto result = m.emplace(1, "one");
+    EXPECT_TRUE(result.second);
+    EXPECT_EQ(result.first->first, 1);
+    EXPECT_EQ(result.first->second, "one");
+}
+
+TEST_F(FlatUnorderedMapTest, EmplaceDuplicateKey) {
+    flat_unordered_map<int, string> m = {{1, "one"}};
+    auto result = m.emplace(1, "again");
+    EXPECT_FALSE(result.second);
+    EXPECT_EQ(m.size(), 1);
+}
+
+TEST_F(FlatUnorderedMapTest, EraseByKey) {
+    flat_unordered_map<int, string> m = {{1, "one"}, {2, "two"}};
+    auto erased = m.erase(1);
+    EXPECT_EQ(erased, 1);
+    EXPECT_EQ(m.size(), 1);
+    EXPECT_EQ(m.find(1), m.end());
+}
+
+TEST_F(FlatUnorderedMapTest, EraseByIterator) {
+    flat_unordered_map<int, string> m = {{1, "one"}, {2, "two"}};
+    auto it = m.find(1);
+    auto next = m.erase(it);
+    EXPECT_EQ(m.size(), 1);
+    EXPECT_EQ(m.find(1), m.end());
+}
+
+TEST_F(FlatUnorderedMapTest, EraseRange) {
+    flat_unordered_map<int, string> m = {{1, "one"}, {2, "two"}, {3, "three"}};
+    auto it = m.erase(m.begin(), m.end());
+    EXPECT_EQ(m.size(), 0);
+}
+
+TEST_F(FlatUnorderedMapTest, Clear) {
+    flat_unordered_map<int, string> m = {{1, "one"}, {2, "two"}};
+    m.clear();
+    EXPECT_TRUE(m.empty());
+    EXPECT_EQ(m.size(), 0);
+}
+
+TEST_F(FlatUnorderedMapTest, Find) {
+    flat_unordered_map<int, string> m = {{1, "one"}, {2, "two"}};
+    auto it = m.find(1);
+    EXPECT_NE(it, m.end());
+    EXPECT_EQ(it->second, "one");
+    auto it2 = m.find(99);
+    EXPECT_EQ(it2, m.end());
+}
+
+TEST_F(FlatUnorderedMapTest, ConstFind) {
+    const flat_unordered_map<int, string> m = {{1, "one"}, {2, "two"}};
+    auto it = m.find(1);
+    EXPECT_NE(it, m.end());
+}
+
+TEST_F(FlatUnorderedMapTest, Count) {
+    flat_unordered_map<int, string> m = {{1, "one"}, {2, "two"}};
+    EXPECT_EQ(m.count(1), 1);
+    EXPECT_EQ(m.count(99), 0);
+}
+
+TEST_F(FlatUnorderedMapTest, Contains) {
+    flat_unordered_map<int, string> m = {{1, "one"}};
+    EXPECT_TRUE(m.contains(1));
+    EXPECT_FALSE(m.contains(99));
+}
+
+TEST_F(FlatUnorderedMapTest, EqualRange) {
+    flat_unordered_map<int, string> m = {{1, "one"}, {2, "two"}};
+    auto range = m.equal_range(1);
+    EXPECT_NE(range.first, m.end());
+    int count = 0;
+    for (auto it = range.first; it != range.second; ++it) {
+        ++count;
+    }
+    EXPECT_EQ(count, 1);
+}
+
+TEST_F(FlatUnorderedMapTest, SubscriptOperator) {
+    flat_unordered_map<int, string> m;
+    m[1] = "one";
+    EXPECT_EQ(m[1], "one");
+    m[1] = "updated";
+    EXPECT_EQ(m[1], "updated");
+}
+
+TEST_F(FlatUnorderedMapTest, SubscriptOperatorDefaultInsert) {
+    flat_unordered_map<int, string> m;
+    auto& val = m[42];
+    EXPECT_EQ(val, "");
+    EXPECT_EQ(m.size(), 1);
+}
+
+TEST_F(FlatUnorderedMapTest, At) {
+    flat_unordered_map<int, string> m = {{1, "one"}};
+    EXPECT_EQ(m.at(1), "one");
+    m.at(1) = "updated";
+    EXPECT_EQ(m.at(1), "updated");
+}
+
+TEST_F(FlatUnorderedMapTest, AtConst) {
+    const flat_unordered_map<int, string> m = {{1, "one"}};
+    EXPECT_EQ(m.at(1), "one");
+}
+
+TEST_F(FlatUnorderedMapTest, AtThrowsOnMissingKey) {
+    flat_unordered_map<int, string> m;
+    EXPECT_THROW(ignore = m.at(99), iterator_exception);
+}
+
+TEST_F(FlatUnorderedMapTest, AtConstThrowsOnMissingKey) {
+    const flat_unordered_map<int, string> m;
+    EXPECT_THROW(ignore = m.at(99), iterator_exception);
+}
+
+TEST_F(FlatUnorderedMapTest, Swap) {
+    flat_unordered_map<int, string> m1 = {{1, "one"}};
+    flat_unordered_map<int, string> m2 = {{2, "two"}, {3, "three"}};
+    m1.swap(m2);
+    EXPECT_EQ(m1.size(), 2);
+    EXPECT_EQ(m2.size(), 1);
+    EXPECT_EQ(m2[1], "one");
+}
+
+TEST_F(FlatUnorderedMapTest, LoadFactor) {
+    flat_unordered_map<int, string> m = {{1, "one"}, {2, "two"}};
+    EXPECT_GE(m.max_load_factor(), 0.0F);
+    EXPECT_GE(m.load_factor(), 0.0F);
+}
+
+TEST_F(FlatUnorderedMapTest, SetMaxLoadFactor) {
+    flat_unordered_map<int, string> m;
+    m.max_load_factor(0.5F);
+    EXPECT_FLOAT_EQ(m.max_load_factor(), 0.5F);
+}
+
+TEST_F(FlatUnorderedMapTest, Reserve) {
+    flat_unordered_map<int, string> m;
+    m.reserve(100);
+    EXPECT_GE(m.capacity(), 100);
+}
+
+TEST_F(FlatUnorderedMapTest, Rehash) {
+    flat_unordered_map<int, string> m = {{1, "one"}};
+    size_t old_cap = m.capacity();
+    m.rehash(500);
+    EXPECT_GE(m.capacity(), old_cap);
+}
+
+TEST_F(FlatUnorderedMapTest, LargeInsert) {
+    flat_unordered_map<int, int> m;
+    for (int i = 0; i < 1000; ++i) {
+        m.insert({i, i * 10});
+    }
+    EXPECT_EQ(m.size(), 1000);
+    EXPECT_EQ(m[500], 5000);
+}
+
+TEST_F(FlatUnorderedMapTest, InsertAfterErase) {
+    flat_unordered_map<int, string> m = {{1, "one"}, {2, "two"}, {3, "three"}};
+    m.erase(1);
+    m.erase(2);
+    auto result = m.insert({4, "four"});
+    EXPECT_TRUE(result.second);
+    EXPECT_EQ(m.size(), 2);
+}
+
+TEST_F(FlatUnorderedMapTest, RangeBasedForLoop) {
+    flat_unordered_map<int, int> m = {{1, 10}, {2, 20}, {3, 30}};
+    int sum = 0;
+    for (const auto& kv: m) {
+        sum += kv.second;
+    }
+    EXPECT_EQ(sum, 60);
+}
+
+TEST_F(FlatUnorderedMapTest, StringKey) {
+    flat_unordered_map<string, int> m;
+    m.insert({"hello", 1});
+    m.insert({"world", 2});
+    EXPECT_EQ(m["hello"], 1);
+    EXPECT_EQ(m["world"], 2);
+}
+
+class FlatUnorderedSetTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+TEST_F(FlatUnorderedSetTest, DefaultConstructor) {
+    flat_unordered_set<int> s;
+    EXPECT_TRUE(s.empty());
+    EXPECT_EQ(s.size(), 0);
+}
+
+TEST_F(FlatUnorderedSetTest, ConstructorWithCapacity) {
+    flat_unordered_set<int> s(50);
+    EXPECT_GE(s.capacity(), 16);
+}
+
+TEST_F(FlatUnorderedSetTest, ConstructorWithCapacityAndHash) {
+    hash<int> hf;
+    flat_unordered_set<int> s(30, hf);
+    EXPECT_GE(s.capacity(), 16);
+}
+
+TEST_F(FlatUnorderedSetTest, ConstructorWithCapacityHashAndEqual) {
+    hash<int> hf;
+    equal_to<int> eql;
+    flat_unordered_set<int> s(20, hf, eql);
+    EXPECT_GE(s.capacity(), 16);
+}
+
+TEST_F(FlatUnorderedSetTest, InitializerListConstructor) {
+    flat_unordered_set<int> s = {1, 2, 3};
+    EXPECT_EQ(s.size(), 3);
+    EXPECT_NE(s.find(1), s.end());
+    EXPECT_NE(s.find(2), s.end());
+    EXPECT_NE(s.find(3), s.end());
+}
+
+TEST_F(FlatUnorderedSetTest, RangeConstructor) {
+    vector<int> vec = {1, 2, 3, 4, 5};
+    flat_unordered_set<int> s(vec.begin(), vec.end());
+    EXPECT_EQ(s.size(), 5);
+}
+
+TEST_F(FlatUnorderedSetTest, CopyConstructor) {
+    flat_unordered_set<int> s1 = {1, 2, 3};
+    flat_unordered_set<int> s2(s1);
+    EXPECT_EQ(s2.size(), 3);
+}
+
+TEST_F(FlatUnorderedSetTest, CopyAssignment) {
+    flat_unordered_set<int> s1 = {1, 2};
+    flat_unordered_set<int> s2;
+    s2 = s1;
+    EXPECT_EQ(s2.size(), 2);
+}
+
+TEST_F(FlatUnorderedSetTest, MoveConstructor) {
+    flat_unordered_set<int> s1 = {1, 2, 3};
+    flat_unordered_set<int> s2(move(s1));
+    EXPECT_EQ(s2.size(), 3);
+}
+
+TEST_F(FlatUnorderedSetTest, MoveAssignment) {
+    flat_unordered_set<int> s1 = {1, 2};
+    flat_unordered_set<int> s2;
+    s2 = move(s1);
+    EXPECT_EQ(s2.size(), 2);
+}
+
+TEST_F(FlatUnorderedSetTest, BeginEnd) {
+    flat_unordered_set<int> s = {1, 2, 3};
+    int count = 0;
+    for (auto it = s.begin(); it != s.end(); ++it) {
+        ++count;
+    }
+    EXPECT_EQ(count, 3);
+}
+
+TEST_F(FlatUnorderedSetTest, Empty) {
+    flat_unordered_set<int> s;
+    EXPECT_TRUE(s.empty());
+    s.insert(1);
+    EXPECT_FALSE(s.empty());
+}
+
+TEST_F(FlatUnorderedSetTest, InsertCopy) {
+    flat_unordered_set<int> s;
+    const int val = 42;
+    auto result = s.insert(val);
+    EXPECT_TRUE(result.second);
+    EXPECT_EQ(s.size(), 1);
+}
+
+TEST_F(FlatUnorderedSetTest, InsertMove) {
+    flat_unordered_set<int> s;
+    auto result = s.insert(42);
+    EXPECT_TRUE(result.second);
+}
+
+TEST_F(FlatUnorderedSetTest, InsertDuplicate) {
+    flat_unordered_set<int> s = {1, 2, 3};
+    auto result = s.insert(1);
+    EXPECT_FALSE(result.second);
+    EXPECT_EQ(s.size(), 3);
+}
+
+TEST_F(FlatUnorderedSetTest, Emplace) {
+    flat_unordered_set<int> s;
+    auto result = s.emplace(42);
+    EXPECT_TRUE(result.second);
+    EXPECT_EQ(*result.first, 42);
+}
+
+TEST_F(FlatUnorderedSetTest, EraseByKey) {
+    flat_unordered_set<int> s = {1, 2, 3};
+    auto erased = s.erase(2);
+    EXPECT_EQ(erased, 1);
+    EXPECT_EQ(s.find(2), s.end());
+}
+
+TEST_F(FlatUnorderedSetTest, EraseByIterator) {
+    flat_unordered_set<int> s = {1, 2, 3};
+    auto it = s.find(2);
+    s.erase(it);
+    EXPECT_EQ(s.size(), 2);
+}
+
+TEST_F(FlatUnorderedSetTest, Clear) {
+    flat_unordered_set<int> s = {1, 2, 3};
+    s.clear();
+    EXPECT_TRUE(s.empty());
+}
+
+TEST_F(FlatUnorderedSetTest, Find) {
+    flat_unordered_set<int> s = {10, 20, 30};
+    EXPECT_NE(s.find(20), s.end());
+    EXPECT_EQ(s.find(99), s.end());
+}
+
+TEST_F(FlatUnorderedSetTest, Count) {
+    flat_unordered_set<int> s = {1, 2, 3};
+    EXPECT_EQ(s.count(2), 1);
+    EXPECT_EQ(s.count(99), 0);
+}
+
+TEST_F(FlatUnorderedSetTest, Contains) {
+    flat_unordered_set<int> s = {1, 2, 3};
+    EXPECT_TRUE(s.contains(2));
+    EXPECT_FALSE(s.contains(99));
+}
+
+TEST_F(FlatUnorderedSetTest, EqualRange) {
+    flat_unordered_set<int> s = {1, 2, 3};
+    auto range = s.equal_range(2);
+    EXPECT_NE(range.first, s.end());
+}
+
+TEST_F(FlatUnorderedSetTest, Swap) {
+    flat_unordered_set<int> s1 = {1, 2};
+    flat_unordered_set<int> s2 = {3, 4, 5};
+    s1.swap(s2);
+    EXPECT_EQ(s1.size(), 3);
+    EXPECT_EQ(s2.size(), 2);
+}
+
+TEST_F(FlatUnorderedSetTest, LargeInsert) {
+    flat_unordered_set<int> s;
+    for (int i = 0; i < 1000; ++i) {
+        s.insert(i);
+    }
+    EXPECT_EQ(s.size(), 1000);
+    EXPECT_NE(s.find(500), s.end());
+}
+
+TEST_F(FlatUnorderedSetTest, InsertAfterErase) {
+    flat_unordered_set<int> s = {1, 2, 3, 4, 5};
+    s.erase(1);
+    s.erase(2);
+    s.erase(3);
+    auto result = s.insert(10);
+    EXPECT_TRUE(result.second);
+    EXPECT_EQ(s.size(), 3);
+}
+
+TEST_F(FlatUnorderedSetTest, RangeBasedForLoop) {
+    flat_unordered_set<int> s = {10, 20, 30};
+    int sum = 0;
+    for (int val: s) {
+        sum += val;
+    }
+    EXPECT_EQ(sum, 60);
+}
+
+TEST_F(FlatUnorderedSetTest, StringKey) {
+    flat_unordered_set<string> s;
+    s.insert("hello");
+    s.insert("world");
+    EXPECT_EQ(s.size(), 2);
+    EXPECT_NE(s.find("hello"), s.end());
+}
+
+class FlatUnorderedMultimapTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+TEST_F(FlatUnorderedMultimapTest, DefaultConstructor) {
+    flat_unordered_multimap<int, string> m;
+    EXPECT_TRUE(m.empty());
+    EXPECT_EQ(m.size(), 0);
+}
+
+TEST_F(FlatUnorderedMultimapTest, InitializerListConstructor) {
+    flat_unordered_multimap<int, string> m = {{1, "one"}, {1, "uno"}, {2, "two"}};
+    EXPECT_EQ(m.size(), 3);
+    EXPECT_EQ(m.count(1), 2);
+}
+
+TEST_F(FlatUnorderedMultimapTest, RangeConstructor) {
+    vector<pair<int, string>> vec = {{1, "one"}, {2, "two"}, {2, "deux"}};
+    flat_unordered_multimap<int, string> m(vec.begin(), vec.end());
+    EXPECT_EQ(m.size(), 3);
+}
+
+TEST_F(FlatUnorderedMultimapTest, CopyConstructor) {
+    flat_unordered_multimap<int, string> m1 = {{1, "a"}, {1, "b"}};
+    flat_unordered_multimap<int, string> m2(m1);
+    EXPECT_EQ(m2.size(), 2);
+    EXPECT_EQ(m2.count(1), 2);
+}
+
+TEST_F(FlatUnorderedMultimapTest, MoveConstructor) {
+    flat_unordered_multimap<int, string> m1 = {{1, "a"}, {2, "b"}};
+    flat_unordered_multimap<int, string> m2(move(m1));
+    EXPECT_EQ(m2.size(), 2);
+}
+
+TEST_F(FlatUnorderedMultimapTest, MoveAssignment) {
+    flat_unordered_multimap<int, string> m1 = {{1, "a"}};
+    flat_unordered_multimap<int, string> m2;
+    m2 = move(m1);
+    EXPECT_EQ(m2.size(), 1);
+}
+
+TEST_F(FlatUnorderedMultimapTest, InsertDuplicateKeys) {
+    flat_unordered_multimap<int, string> m;
+    auto it1 = m.insert({1, "one"});
+    auto it2 = m.insert({1, "uno"});
+    EXPECT_EQ(m.size(), 2);
+    EXPECT_EQ(m.count(1), 2);
+}
+
+TEST_F(FlatUnorderedMultimapTest, Emplace) {
+    flat_unordered_multimap<int, string> m;
+    auto it = m.emplace(1, "one");
+    EXPECT_EQ(it->first, 1);
+    EXPECT_EQ(it->second, "one");
+}
+
+TEST_F(FlatUnorderedMultimapTest, EraseByKey) {
+    flat_unordered_multimap<int, string> m = {{1, "a"}, {1, "b"}, {2, "c"}};
+    auto erased = m.erase(1);
+    EXPECT_EQ(erased, 2);
+    EXPECT_EQ(m.size(), 1);
+    EXPECT_EQ(m.count(1), 0);
+}
+
+TEST_F(FlatUnorderedMultimapTest, EraseByIterator) {
+    flat_unordered_multimap<int, string> m = {{1, "a"}, {1, "b"}};
+    auto it = m.find(1);
+    m.erase(it);
+    EXPECT_EQ(m.size(), 1);
+}
+
+TEST_F(FlatUnorderedMultimapTest, Clear) {
+    flat_unordered_multimap<int, string> m = {{1, "a"}, {1, "b"}, {2, "c"}};
+    m.clear();
+    EXPECT_TRUE(m.empty());
+}
+
+TEST_F(FlatUnorderedMultimapTest, Find) {
+    flat_unordered_multimap<int, string> m = {{1, "one"}, {2, "two"}};
+    auto it = m.find(1);
+    EXPECT_NE(it, m.end());
+    EXPECT_EQ(it->second, "one");
+}
+
+TEST_F(FlatUnorderedMultimapTest, Count) {
+    flat_unordered_multimap<int, string> m = {{1, "a"}, {1, "b"}, {1, "c"}, {2, "d"}};
+    EXPECT_EQ(m.count(1), 3);
+    EXPECT_EQ(m.count(2), 1);
+    EXPECT_EQ(m.count(99), 0);
+}
+
+TEST_F(FlatUnorderedMultimapTest, Contains) {
+    flat_unordered_multimap<int, string> m = {{1, "a"}, {2, "b"}};
+    EXPECT_TRUE(m.contains(1));
+    EXPECT_FALSE(m.contains(99));
+}
+
+TEST_F(FlatUnorderedMultimapTest, EqualRange) {
+    flat_unordered_multimap<int, string> m = {{1, "a"}, {1, "b"}, {2, "c"}};
+    auto range = m.equal_range(1);
+    int count = 0;
+    for (auto it = range.first; it != range.second; ++it) {
+        EXPECT_EQ(it->first, 1);
+        ++count;
+    }
+    EXPECT_EQ(count, 2);
+}
+
+TEST_F(FlatUnorderedMultimapTest, Swap) {
+    flat_unordered_multimap<int, string> m1 = {{1, "a"}};
+    flat_unordered_multimap<int, string> m2 = {{2, "b"}, {3, "c"}};
+    m1.swap(m2);
+    EXPECT_EQ(m1.size(), 2);
+    EXPECT_EQ(m2.size(), 1);
+}
+
+TEST_F(FlatUnorderedMultimapTest, LargeInsert) {
+    flat_unordered_multimap<int, int> m;
+    for (int i = 0; i < 500; ++i) {
+        m.insert({i, i * 10});
+        m.insert({i, i * 10 + 1});
+    }
+    EXPECT_EQ(m.size(), 1000);
+    EXPECT_EQ(m.count(100), 2);
+}
+
+TEST_F(FlatUnorderedMultimapTest, RangeBasedForLoop) {
+    flat_unordered_multimap<int, int> m = {{1, 10}, {1, 100}, {2, 20}};
+    int sum = 0;
+    for (const auto& kv: m) {
+        sum += kv.second;
+    }
+    EXPECT_EQ(sum, 130);
+}
+
+class FlatUnorderedMultisetTest : public ::testing::Test {
+protected:
+    void SetUp() override {}
+    void TearDown() override {}
+};
+
+TEST_F(FlatUnorderedMultisetTest, DefaultConstructor) {
+    flat_unordered_multiset<int> s;
+    EXPECT_TRUE(s.empty());
+    EXPECT_EQ(s.size(), 0);
+}
+
+TEST_F(FlatUnorderedMultisetTest, InitializerListConstructor) {
+    flat_unordered_multiset<int> s = {1, 1, 2, 2, 3};
+    EXPECT_EQ(s.size(), 5);
+    EXPECT_EQ(s.count(1), 2);
+    EXPECT_EQ(s.count(2), 2);
+    EXPECT_EQ(s.count(3), 1);
+}
+
+TEST_F(FlatUnorderedMultisetTest, RangeConstructor) {
+    vector<int> vec = {1, 1, 2, 3, 3, 3};
+    flat_unordered_multiset<int> s(vec.begin(), vec.end());
+    EXPECT_EQ(s.size(), 6);
+}
+
+TEST_F(FlatUnorderedMultisetTest, CopyConstructor) {
+    flat_unordered_multiset<int> s1 = {1, 1, 2};
+    flat_unordered_multiset<int> s2(s1);
+    EXPECT_EQ(s2.size(), 3);
+    EXPECT_EQ(s2.count(1), 2);
+}
+
+TEST_F(FlatUnorderedMultisetTest, MoveConstructor) {
+    flat_unordered_multiset<int> s1 = {1, 2, 2};
+    flat_unordered_multiset<int> s2(move(s1));
+    EXPECT_EQ(s2.size(), 3);
+}
+
+TEST_F(FlatUnorderedMultisetTest, MoveAssignment) {
+    flat_unordered_multiset<int> s1 = {1, 1, 2};
+    flat_unordered_multiset<int> s2;
+    s2 = move(s1);
+    EXPECT_EQ(s2.size(), 3);
+}
+
+TEST_F(FlatUnorderedMultisetTest, InsertDuplicate) {
+    flat_unordered_multiset<int> s;
+    s.insert(1);
+    s.insert(1);
+    s.insert(1);
+    EXPECT_EQ(s.size(), 3);
+    EXPECT_EQ(s.count(1), 3);
+}
+
+TEST_F(FlatUnorderedMultisetTest, Emplace) {
+    flat_unordered_multiset<int> s;
+    auto it = s.emplace(42);
+    EXPECT_EQ(*it, 42);
+    EXPECT_EQ(s.size(), 1);
+}
+
+TEST_F(FlatUnorderedMultisetTest, EraseByKey) {
+    flat_unordered_multiset<int> s = {1, 1, 2, 2, 2};
+    auto erased = s.erase(2);
+    EXPECT_EQ(erased, 3);
+    EXPECT_EQ(s.count(2), 0);
+    EXPECT_EQ(s.size(), 2);
+}
+
+TEST_F(FlatUnorderedMultisetTest, EraseByIterator) {
+    flat_unordered_multiset<int> s = {1, 1, 2};
+    auto it = s.find(1);
+    s.erase(it);
+    EXPECT_EQ(s.size(), 2);
+}
+
+TEST_F(FlatUnorderedMultisetTest, Clear) {
+    flat_unordered_multiset<int> s = {1, 1, 2, 3};
+    s.clear();
+    EXPECT_TRUE(s.empty());
+}
+
+TEST_F(FlatUnorderedMultisetTest, Find) {
+    flat_unordered_multiset<int> s = {10, 10, 20};
+    auto it = s.find(10);
+    EXPECT_NE(it, s.end());
+    EXPECT_EQ(*it, 10);
+}
+
+TEST_F(FlatUnorderedMultisetTest, Count) {
+    flat_unordered_multiset<int> s = {1, 1, 1, 2, 2, 3};
+    EXPECT_EQ(s.count(1), 3);
+    EXPECT_EQ(s.count(2), 2);
+    EXPECT_EQ(s.count(3), 1);
+    EXPECT_EQ(s.count(99), 0);
+}
+
+TEST_F(FlatUnorderedMultisetTest, Contains) {
+    flat_unordered_multiset<int> s = {1, 1, 2};
+    EXPECT_TRUE(s.contains(1));
+    EXPECT_FALSE(s.contains(99));
+}
+
+TEST_F(FlatUnorderedMultisetTest, EqualRange) {
+    flat_unordered_multiset<int> s = {1, 1, 2, 2, 3};
+    auto range = s.equal_range(2);
+    int count = 0;
+    for (auto it = range.first; it != range.second; ++it) {
+        EXPECT_EQ(*it, 2);
+        ++count;
+    }
+    EXPECT_EQ(count, 2);
+}
+
+TEST_F(FlatUnorderedMultisetTest, Swap) {
+    flat_unordered_multiset<int> s1 = {1, 1};
+    flat_unordered_multiset<int> s2 = {2, 3, 4};
+    s1.swap(s2);
+    EXPECT_EQ(s1.size(), 3);
+    EXPECT_EQ(s2.size(), 2);
+}
+
+TEST_F(FlatUnorderedMultisetTest, LargeInsert) {
+    flat_unordered_multiset<int> s;
+    for (int i = 0; i < 500; ++i) {
+        s.insert(i);
+        s.insert(i);
+    }
+    EXPECT_EQ(s.size(), 1000);
+    EXPECT_EQ(s.count(100), 2);
+}
+
+TEST_F(FlatUnorderedMultisetTest, RangeBasedForLoop) {
+    flat_unordered_multiset<int> s = {1, 1, 2, 2, 2};
+    int sum = 0;
+    for (int val: s) {
+        sum += val;
+    }
+    EXPECT_EQ(sum, 8);
 }

@@ -20,6 +20,7 @@ set(CPP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_exit_register.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/async/thread_pool.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/aes256.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/chacha20_poly1305.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/base64.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/md5.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/core/encrypt/sha1.cpp

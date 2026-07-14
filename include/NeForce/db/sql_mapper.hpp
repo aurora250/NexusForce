@@ -30,7 +30,7 @@
 NEFORCE_BEGIN_NAMESPACE__
 
 /**
- * @defgroup SQLMapper ORM对象-关系映射
+ * @defgroup SQLMapper ORM
  * @brief 从反射元数据自动生成SQL并完成实体映射
  * @{
  */

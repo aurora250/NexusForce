@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [1.0.0-rc] - 2026-07-12
+## [1.0.0-rc] - 2026-07-15
 
 ### 🚀 New Features
 
@@ -16,6 +16,7 @@
 - 添加 `sql_mapper<T>` 反射驱动 ORM SQL 生成器，自动生成 DDL（CREATE/DROP TABLE）和 DML（INSERT/UPDATE/DELETE/SELECT）语句，支持方言感知占位符
 - 添加 `repository<T, Connect>` 泛型 CRUD 仓库模板，封装 `sql_mapper` 提供高层数据访问接口
 - `property_attr` 添加 DB 注解标志：`PROP_PRIMARY_KEY` / `PROP_AUTO_INC` / `PROP_UNIQUE` / `PROP_INDEX` / `PROP_FOREIGN_KEY`
+- 添加 ORM 示例 `orm_example`，展示 `sql_mapper` SQL 生成与 `repository` CRUD 操作
 - 添加 HTTP/2 (h2) TLS+ALPN 协商支持，`ssl_stream::get_alpn_negotiated()` 接口
 - 添加 HTTP/2 连接管理 `http2_connection`（h2c 升级 + h2 ALPN 双模式）
 - 添加 HTTP/2 协议帧处理 `http2_protocol`
@@ -42,6 +43,10 @@
 - 添加 `file_async::async_read()` / `async_write()`，通过 `io_context` 驱动的异步文件 I/O，支持指定偏移量与取消槽
 - 添加 `async_read()` / `async_write()` 自由函数组合器，基于 `shared_from_this` 自动处理部分读写重试
 - 添加 `thread_pool_executor`，将 `thread_pool::submit_task()` 适配为标准 executor 接口
+- 添加 `simd_util` 通用 SIMD 工具模块，封装 SSE2/AVX2/NEON 指令集差异，提供 `fill_byte` / `load_unaligned` / `match_bytes` / `to_bitmask` 统一接口，非 SIMD 环境自动回退标量实现
+- 添加 `flat_hashtable` 开放寻址平坦哈希表，采用 SwissTable 风格元数据控制块 + H2 预过滤 + SIMD 批量探测，延迟分配策略
+- 添加 `flat_unordered_map` / `flat_unordered_set` / `flat_unordered_multimap` / `flat_unordered_multiset` 平坦无序关联容器
+- 添加 ChaCha20-Poly1305 AEAD 认证加密算法（RFC 8439），支持关联数据（AAD）认证和常量时间标签验证
 
 ### 🔧 Improvements
 

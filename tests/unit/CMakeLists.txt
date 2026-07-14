@@ -30,6 +30,7 @@ add_executable(NexusForceUnitTests
         test_numeric.cpp
         test_ranges.cpp
         test_reflect.cpp
+        test_simd.cpp
         test_sequence_container.cpp
         test_serialize.cpp
         test_simple_config.cpp
